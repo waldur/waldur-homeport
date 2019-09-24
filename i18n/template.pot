@@ -8,21 +8,6 @@ msgstr ""
 msgid "(VAT is not included)"
 msgstr ""
 
-#: src/openstack/openstack-tenant/openstack-template.js
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js
-msgid "1 day"
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-template.js
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js
-msgid "30 days"
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-template.js
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js
-msgid "365 days"
-msgstr ""
-
 #: src/error/invalid-object-page.html
 #: src/error/invalid-route-page.html
 msgid "404"
@@ -78,7 +63,6 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Access"
 msgstr ""
@@ -368,7 +352,6 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
@@ -435,10 +418,6 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: src/openstack/openstack-tenant/openstack-template.js
-msgid "All categories"
-msgstr ""
-
 #: src/appstore/providers/appstore-providers-service.js
 msgid "All provider quotas have reached limit."
 msgstr ""
@@ -456,8 +435,6 @@ msgid "Allocation has been updated."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
-#: src/slurm/slurm-allocation-checkout-summary.html
-#: src/slurm/slurm-allocation-config.js
 msgid "Allocation name"
 msgstr ""
 
@@ -576,10 +553,6 @@ msgstr ""
 msgid "Archived"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
-msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
-msgstr ""
-
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr ""
@@ -614,18 +587,6 @@ msgstr ""
 
 #: src/marketplace/offerings/ArticleCodeField.tsx
 msgid "Article code"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/assign-package-dialog.html
-msgid "Assign"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/AssignPackageAction.ts
-msgid "Assign VPC package"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/assign-package-dialog.html
-msgid "Assign package"
 msgstr ""
 
 #: src/issues/create/issue-registration.html
@@ -952,7 +913,6 @@ msgid "CPU"
 msgstr ""
 
 #: src/providers/details/provider-project-link-quotas.html
-#: src/slurm/slurm-allocation-config.js
 msgid "CPU limit"
 msgstr ""
 
@@ -1006,8 +966,6 @@ msgstr ""
 #: src/navigation/workspace/select-workspace-dialog.html
 #: src/offering/appstore-offering.html
 #: src/offering/offering-policy.html
-#: src/openstack/openstack-tenant/actions/assign-package-dialog.html
-#: src/openstack/openstack-tenant/actions/change-package-dialog.html
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
@@ -1054,7 +1012,6 @@ msgstr ""
 #: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/openstack/openstack-tenant/openstack-template.js
 #: src/project/ProjectResourcesList.tsx
 msgid "Category"
 msgstr ""
@@ -1070,11 +1027,6 @@ msgstr ""
 
 #: src/issues/types/constants.ts
 msgid "Change Request"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/ChangePackageAction.ts
-#: src/openstack/openstack-tenant/actions/change-package-dialog.html
-msgid "Change VPC package"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
@@ -1121,10 +1073,6 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/offering/appstore-offering-summary.html
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
-#: src/slurm/slurm-allocation-checkout-summary.html
 msgid "Checkout summary"
 msgstr ""
 
@@ -1556,21 +1504,16 @@ msgstr ""
 msgid "Current API token"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/change-package-dialog.html
-#: src/openstack/openstack-tenant/openstack-tenant-prices.html
-msgid "Current VPC package"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/change-package-dialog.html
-msgid "Current VPC usage"
-msgstr ""
-
 #: src/customer/CustomerList.tsx
 msgid "Current cost"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-current-flavor.tsx
 msgid "Current flavor"
+msgstr ""
+
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+msgid "Current limit"
 msgstr ""
 
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
@@ -1731,12 +1674,9 @@ msgstr ""
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/openstack-volume-config.js
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
@@ -1745,7 +1685,6 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/rijkscloud/VolumeCreateConfig.js
-#: src/slurm/slurm-allocation-config.js
 #: src/slurm/slurm-allocation-list.js
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -2058,10 +1997,6 @@ msgstr ""
 msgid "Estimated cost for the current month:"
 msgstr ""
 
-#: src/slurm/slurm-allocation-checkout-summary.html
-msgid "Estimated maximum price"
-msgstr ""
-
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr ""
@@ -2294,7 +2229,6 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
 msgstr ""
@@ -2315,9 +2249,6 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
@@ -2329,7 +2260,6 @@ msgstr ""
 
 #: src/analytics/FlavorsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
 msgstr ""
@@ -2433,10 +2363,6 @@ msgstr ""
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "GPU"
-msgstr ""
-
-#: src/slurm/slurm-allocation-config.js
-msgid "GPU limit"
 msgstr ""
 
 #: src/slurm/actions.js
@@ -2583,10 +2509,6 @@ msgstr ""
 msgid "Hostname or IP address of master node"
 msgstr ""
 
-#: src/providers/details/provider-price-list.js
-msgid "Hourly rate"
-msgstr ""
-
 #: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
 #: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 msgid "Hours. Once notebook instance is not active for this time it is terminated"
@@ -2680,9 +2602,6 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Image"
 msgstr ""
 
@@ -2696,7 +2615,6 @@ msgstr ""
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Image name"
 msgstr ""
 
@@ -2793,13 +2711,11 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Initial admin password"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Initial admin username"
 msgstr ""
 
@@ -2892,14 +2808,12 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-network/module.js
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Internal network allocation pool"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-network/module.js
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
@@ -3030,11 +2944,7 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/offering/appstore-offering-summary.html
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
-#: src/slurm/slurm-allocation-checkout-summary.html
 msgid "Invoiced to"
 msgstr ""
 
@@ -3107,10 +3017,6 @@ msgstr ""
 msgid "Item has been removed from shopping cart."
 msgstr ""
 
-#: src/providers/details/provider-price-list.js
-msgid "Item type"
-msgstr ""
-
 #: src/jira/JiraForm.tsx
 msgid "JIRA host (e.g. https://jira.example.com/)"
 msgstr ""
@@ -3180,7 +3086,6 @@ msgstr ""
 #: src/issues/list/IssuesShortListComponent.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/providers/details/provider-price-list.js
 msgid "Key"
 msgstr ""
 
@@ -3222,12 +3127,10 @@ msgid "Latvian"
 msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Leave blank if you want admin username to be auto-generated."
 msgstr ""
 
@@ -3426,27 +3329,12 @@ msgstr ""
 msgid "Max # of snapshots"
 msgstr ""
 
-#: src/openstack/openstack-tenant/openstack-template.js
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-msgid "Max RAM"
-msgstr ""
-
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 msgid "Max number of backups"
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 msgid "Max number of snapshots"
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-template.js
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-msgid "Max storage"
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-template.js
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-msgid "Max vCPU"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -3527,12 +3415,10 @@ msgid "Metric"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Min RAM"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Min storage"
 msgstr ""
 
@@ -3664,7 +3550,6 @@ msgstr ""
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
@@ -3758,16 +3643,11 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-network/breadcrumbs.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/change-package-dialog.html
-msgid "New VPC package"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
@@ -3891,12 +3771,6 @@ msgstr ""
 msgid "No invoices found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
-msgid "No items yet."
-msgstr ""
-
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 msgid "No members found matching filter."
@@ -3924,14 +3798,6 @@ msgstr ""
 
 #: src/vmware/vmware-virtual-machine-ports.js
 msgid "No ports yet."
-msgstr ""
-
-#: src/providers/details/provider-price-list.js
-msgid "No price list items found matching filter."
-msgstr ""
-
-#: src/providers/details/provider-price-list.js
-msgid "No price list items yet."
 msgstr ""
 
 #: src/resource/list/resource-private-clouds-list.js
@@ -4073,16 +3939,8 @@ msgstr ""
 msgid "Not running accounting"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.js
-msgid "Note that this virtual machine is charged as part of <strong>{serviceName}</strong> package."
-msgstr ""
-
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 msgid "Note that this virtual machine will not be charged separately for {organization}."
-msgstr ""
-
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.js
-msgid "Note that this volume is charged as part of <strong>{serviceName}</strong> package."
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -4233,10 +4091,6 @@ msgstr ""
 msgid "Ok, what's next?"
 msgstr ""
 
-#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-msgid "Old limit"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "One-time"
 msgstr ""
@@ -4355,10 +4209,6 @@ msgstr ""
 
 #: src/openstack/events.ts
 msgid "OpenStack package {tenant_name} has been deleted."
-msgstr ""
-
-#: src/openstack/openstack-summary-service.js
-msgid "OpenStack tenant is not linked with package template."
 msgstr ""
 
 #: src/openstack/openstack-volume/marketplace.ts
@@ -4566,25 +4416,8 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
-#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-msgid "Package"
-msgstr ""
-
 #: src/quotas/constants.js
 msgid "Package amount"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/assign-package-dialog.js
-msgid "Package could not be assigned."
-msgstr ""
-
-#: src/openstack/openstack-tenant/package-templates-service.js
-msgid "Package is not available because current VPC resource usage exceeds package quota limits."
-msgstr ""
-
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
-msgid "Package limits"
 msgstr ""
 
 #: src/error/routes.js
@@ -4837,7 +4670,7 @@ msgid "Please create a new one:"
 msgstr ""
 
 #: src/marketplace/details/plan/ComponentEditRow.tsx
-msgid "Please enter estimated maximum usage in the rows below:"
+msgid "Please enter desired values in the rows below:"
 msgstr ""
 
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
@@ -5008,19 +4841,7 @@ msgstr ""
 msgid "Price estimate details"
 msgstr ""
 
-#: src/openstack/openstack-tenant/openstack-tenant-prices.html
-msgid "Price for 1 GB of RAM per day"
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-tenant-prices.html
-msgid "Price for 1 GB of storage per day"
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-tenant-prices.html
-msgid "Price for 1 vCPU per day"
-msgstr ""
-
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price for consumption"
 msgstr ""
 
@@ -5028,45 +4849,22 @@ msgstr ""
 msgid "Price is estimated."
 msgstr ""
 
-#: src/slurm/slurm-allocation-checkout-summary.html
-#: src/slurm/slurm-prices.html
-msgid "Price of CPU hour"
-msgstr ""
-
-#: src/slurm/slurm-allocation-checkout-summary.html
-#: src/slurm/slurm-prices.html
-msgid "Price of GPU hour"
-msgstr ""
-
-#: src/slurm/slurm-allocation-checkout-summary.html
-#: src/slurm/slurm-prices.html
-msgid "Price of RAM GB"
-msgstr ""
-
-#: src/slurm/slurm-allocation-checkout-summary.html
-#: src/slurm/slurm-prices.html
-msgid "Price package name"
-msgstr ""
-
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Price per 30 days"
 msgstr ""
 
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price per 365 days"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Price per day"
 msgstr ""
 
@@ -5074,23 +4872,20 @@ msgstr ""
 msgid "Price per half month"
 msgstr ""
 
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price per half-month"
 msgstr ""
 
 #: src/marketplace/common/BillingPeriod.tsx
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price per hour"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 #: src/offering/appstore-offering-summary.js
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Price per month"
 msgstr ""
 
@@ -5103,12 +4898,8 @@ msgstr ""
 msgid "Price per unit"
 msgstr ""
 
-#: src/marketplace/details/plan/utils.ts
+#: src/marketplace/common/utils.ts
 msgid "Price per year"
-msgstr ""
-
-#: src/providers/details/dialog.html
-msgid "Prices"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
@@ -5178,12 +4969,8 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/offering/appstore-offering-summary.html
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/resource/list/resource-global-list.js
-#: src/slurm/slurm-allocation-checkout-summary.html
 msgid "Project"
 msgstr ""
 
@@ -5228,10 +5015,6 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Project is not selected."
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-msgid "Project limits"
 msgstr ""
 
 #: src/configs/base-config.js
@@ -5370,10 +5153,6 @@ msgstr ""
 msgid "Provider name"
 msgstr ""
 
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js
-msgid "Provider package is not defined."
-msgstr ""
-
 #: src/appstore/providers/appstore-providers-service.js
 msgid "Provider quota has reached threshold."
 msgstr ""
@@ -5506,18 +5285,11 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "RAM"
-msgstr ""
-
-#: src/slurm/slurm-allocation-config.js
-msgid "RAM limit"
 msgstr ""
 
 #: src/providers/details/provider-project-link-quotas.html
@@ -5791,10 +5563,6 @@ msgstr ""
 msgid "Request an approval"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/RequestCustomFlavorAction.ts
-msgid "Request custom flavour"
-msgstr ""
-
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 msgid "Request custom flavour for OpenStack Tenant"
 msgstr ""
@@ -5955,7 +5723,6 @@ msgid "Resource configuration"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 msgid "Resource configuration is invalid. Please fix errors in form."
 msgstr ""
 
@@ -6041,7 +5808,6 @@ msgstr ""
 msgid "Resource termination request has been submitted."
 msgstr ""
 
-#: src/providers/details/provider-price-list.js
 #: src/resource/list/resource-global-list-filtered.html
 msgid "Resource type"
 msgstr ""
@@ -6235,7 +6001,6 @@ msgstr ""
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "SSH public key"
 msgstr ""
 
@@ -6310,7 +6075,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
-#: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/openstack/openstack-security-groups/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
 msgid "Security groups"
@@ -6355,10 +6119,6 @@ msgstr ""
 
 #: src/user/keys/appstore-field-select-ssh-key.html
 msgid "Select SSH public key..."
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
-msgid "Select Virtual Private Cloud package"
 msgstr ""
 
 #: src/cost-planning/cost-plan-items.html
@@ -6469,7 +6229,6 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
-#: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "Select security groups..."
 msgstr ""
 
@@ -6610,10 +6369,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Service provider has been registered."
-msgstr ""
-
-#: src/openstack/openstack-summary-service.js
-msgid "Service provider is not linked with OpenStack tenant."
 msgstr ""
 
 #: src/providers/support/FlowMapFilter.tsx
@@ -6787,7 +6542,6 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/openstack/openstack-volume/openstack-volume-config.js
 #: src/resource-import/import-volumes-list.js
 #: src/resource/list/resource-volumes-list.js
 #: src/rijkscloud/VolumeSummary.tsx
@@ -6811,7 +6565,6 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Skip connection to external network"
 msgstr ""
 
@@ -6972,10 +6725,7 @@ msgstr ""
 #: src/dashboard/categories.ts
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/quotas/constants.js
@@ -7011,7 +6761,6 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
-#: src/openstack/openstack-tenant/actions/change-package-dialog.html
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/resource/actions/dialog/action-dialog.html
@@ -7059,6 +6808,7 @@ msgstr ""
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Summary"
@@ -7129,7 +6879,6 @@ msgid "System volume couldn't be detached."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "System volume size"
 msgstr ""
 
@@ -7209,10 +6958,6 @@ msgstr ""
 msgid "Tenant description"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/assign-package-dialog.js
-msgid "Tenant has been assigned to the package."
-msgstr ""
-
 #: src/openstack/openstack-tenant/actions/EditAction.ts
 msgid "Tenant has been updated."
 msgstr ""
@@ -7220,16 +6965,9 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/marketplace.ts
-#: src/openstack/openstack-tenant/actions/change-package-dialog.html
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "Tenant name"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/change-package-service.js
-msgid "Tenant package has been changed."
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
@@ -7401,10 +7139,6 @@ msgstr ""
 msgid "There are no sections for comparison yet."
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/change-package-dialog.html
-msgid "There are no suitable VPC packages for this tenant."
-msgstr ""
-
 #: src/appstore/providers/appstore-providers-empty-message.js
 msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
@@ -7419,10 +7153,6 @@ msgstr ""
 
 #: src/issues/workspace/issues-activity-stream.html
 msgid "There is no activity yet."
-msgstr ""
-
-#: src/slurm/slurm-prices.html
-msgid "There's no pricing package for the batch processing provider."
 msgstr ""
 
 #: src/form/appstore-field-string.html
@@ -7450,11 +7180,9 @@ msgstr ""
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/appstore-offering.js
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 #: src/project/ProjectNameField.tsx
 #: src/rijkscloud/VolumeCreateConfig.js
 #: src/slurm/AllocationForm.tsx
-#: src/slurm/slurm-allocation-config.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "This name will be visible in accounting data."
 msgstr ""
@@ -7544,6 +7272,7 @@ msgstr ""
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Total"
 msgstr ""
@@ -7566,7 +7295,6 @@ msgid "Total price"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
 msgid "Total storage"
 msgstr ""
 
@@ -7648,10 +7376,6 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 msgid "Unable to cancel order item."
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/change-package-service.js
-msgid "Unable to change tenant package."
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.js
@@ -8228,7 +7952,6 @@ msgstr ""
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
 msgstr ""
@@ -8433,8 +8156,6 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
 msgstr ""
@@ -8472,16 +8193,6 @@ msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
 msgid "VPC instance count"
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-template.js
-#: src/openstack/openstack-tenant/openstack-tenant-checkout-summary.html
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
-msgid "VPC package"
-msgstr ""
-
-#: src/openstack/openstack-tenant/openstack-prices.html
-msgid "VPC packages for this provider are not found."
 msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
@@ -8632,8 +8343,6 @@ msgid "Volume has been updated."
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
-#: src/openstack/openstack-volume/openstack-volume-config.js
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/rijkscloud/VolumeCreateConfig.js
@@ -8867,7 +8576,6 @@ msgid "You have not added any SSH keys to your"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr ""
 
@@ -8988,7 +8696,6 @@ msgid "from"
 msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-tenant/openstack-tenant-config.js
 msgid "generate automatically"
 msgstr ""
 
@@ -9073,9 +8780,6 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "vCPU"
 msgstr ""
@@ -9103,10 +8807,6 @@ msgstr ""
 
 #: src/resource/utils.tsx
 msgid "{number} days"
-msgstr ""
-
-#: src/openstack/openstack-tenant/package-templates-service.js
-msgid "{quota} usage exceeds quota limit by {amount}."
 msgstr ""
 
 #: src/analytics/ResourceAnalysisItem.tsx

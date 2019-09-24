@@ -85,7 +85,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       });
 
       scope.$watchCollection('controller.tableOptions.tableActions', actions => {
-        if (!table) {
+        if (!table || !actions) {
           return;
         }
         actions.map(function(action, index) {

@@ -42,6 +42,18 @@ const ServiceSettingsAttributes = (): Attribute[] => [
   },
 ];
 
+const limitSerializer = limits => limits && ({
+  cores: limits.cores,
+  ram: limits.ram && limits.ram * 1024,
+  storage: limits.storage && limits.storage * 1024,
+});
+
+const limitParser = limits => limits && ({
+  cores: limits.cores,
+  ram: limits.ram && limits.ram / 1024,
+  storage: limits.storage && limits.storage / 1024,
+});
+
 registerOfferingType({
   type: 'Packages.Template',
   get label() {
@@ -50,6 +62,8 @@ registerOfferingType({
   component: OpenStackPackageForm,
   detailsComponent: OpenStackPackageDetails,
   serializer,
+  limitSerializer,
+  limitParser,
   providerType: 'OpenStack',
   attributes: ServiceSettingsAttributes,
 });

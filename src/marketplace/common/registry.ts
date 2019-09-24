@@ -5,14 +5,18 @@ import { Offering, Attribute, OrderItemDetailsProps, OfferingConfigurationFormPr
 
 const REGISTRY: {[key: string]: Omit<OfferingConfiguration, 'type'>} = {};
 
+export type Limits = Record<string, number>;
+
+export type LimitParser = (limits: Limits) => Limits;
+
 interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
   component: React.ComponentType<OfferingConfigurationFormProps>;
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
   checkoutSummaryComponent?: any;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
-  limitSerializer?: (limit: Record<string, number>) => Record<string, number>;
-  limitParser?: (limit: Record<string, number>) => Record<string, number>;
+  limitSerializer?: LimitParser;
+  limitParser?: LimitParser;
   label: string;
   showOptions?: boolean;
   showComponents?: boolean;

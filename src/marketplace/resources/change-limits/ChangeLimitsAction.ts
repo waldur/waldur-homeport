@@ -1,4 +1,3 @@
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { marketplaceIsVisible } from '@waldur/marketplace/utils';
 import { validateState } from '@waldur/resource/actions/base';
@@ -13,7 +12,7 @@ export default function createAction(ctx): ResourceAction {
     title: translate('Change limits'),
     useResolve: true,
     dialogSize: 'lg',
-    isVisible: marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null && ngInjector.get('features').isVisible('marketplace.change_limits'),
+    isVisible: marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
     validators: [validateState('OK')],
   };
 }

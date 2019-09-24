@@ -131,7 +131,7 @@ export const formatOfferingRequest = (request: OfferingFormData, components: Off
 
   if (request.plans) {
     // Pick either built-in or custom fixed components.
-    const fixedComponents = (components || request.components).filter(
+    const fixedComponents = (components.length > 0 ? components : request.components).filter(
       c => getBillingTypeValue(c.billing_type) === 'fixed').map(c => c.type);
     result.plans = request.plans.map(plan => formatPlan(plan, fixedComponents));
   }

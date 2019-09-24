@@ -1,16 +1,20 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
+import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
+import { Plan } from '@waldur/marketplace/types';
+import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
-import { FetchedData } from './utils';
+import { StateProps } from './connector';
 
-export const ChangeLimitsComponent = (props: FetchedData) => (
+export const ChangeLimitsComponent = (props: StateProps & {plan: Plan}) => (
   <div>
-    {props.resource.plan_name ? (
+    {props.plan ? (
       <p>
         <strong>{translate('Current plan')}</strong>:{' '}
-        {props.resource.plan_name}
+        {props.plan.name}
       </p>
     ) : (
       <p>{translate('Resource does not have any plan.')}</p>
@@ -20,16 +24,22 @@ export const ChangeLimitsComponent = (props: FetchedData) => (
         <tr>
           <th>{translate('Name')}</th>
           <th>{translate('Usage')}</th>
-          <th>{translate('Old limit')}</th>
+          <th>{translate('Current limit')}</th>
           <th>{translate('New limit')}</th>
+          {props.periods.map((period, index) => (
+            <th className="col-sm-1" key={index}>
+              {period}
+              <PriceTooltip/>
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        {props.offering.components.map((component, index) => (
+        {props.components.map((component, index) => (
           <tr key={index}>
             <td>{component.name}</td>
-            <td>{props.resource.current_usages[component.type]}</td>
-            <td>{props.resource.limits[component.type]}</td>
+            <td>{component.usage}</td>
+            <td>{component.limit}</td>
             <td>
             <div className="input-group">
               <Field
@@ -37,14 +47,32 @@ export const ChangeLimitsComponent = (props: FetchedData) => (
                 component="input"
                 className="form-control"
                 type="number"
+                min={0}
+                parse={parseIntField}
+                format={formatIntField}
               />
               <span className="input-group-addon">
                 {component.measured_unit}
               </span>
             </div>
             </td>
+            {component.prices.map((price, innerIndex) => (
+              <td key={innerIndex}>
+                {defaultCurrency(price)}
+              </td>
+            ))}
           </tr>
         ))}
+        <tr>
+          <td colSpan={4}>
+            {translate('Total')}
+          </td>
+          {props.totalPeriods.map((price, index) => (
+            <td key={index}>
+              {defaultCurrency(price)}
+            </td>
+          ))}
+        </tr>
       </tbody>
     </table>
   </div>
