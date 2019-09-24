@@ -36,6 +36,8 @@ export interface OfferingComponent extends BaseComponent {
   billing_type: BillingType;
   limit_period?: 'month' | 'total';
   limit_amount: number;
+  max_value?: number;
+  min_value?: number;
 }
 
 export interface Plan {

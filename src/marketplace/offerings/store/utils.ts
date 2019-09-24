@@ -110,6 +110,7 @@ export const formatOfferingRequest = (request: OfferingFormData, components: Off
     type: request.type ? request.type.value : undefined,
     service_attributes: request.service_settings,
     schedules: request.schedules,
+    limits: request.limits,
     shared: true,
   };
   if (request.attributes) {

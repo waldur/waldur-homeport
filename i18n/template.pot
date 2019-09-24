@@ -3329,6 +3329,10 @@ msgstr ""
 msgid "Max # of snapshots"
 msgstr ""
 
+#: src/marketplace/offerings/create/OfferingLimitsTable.tsx
+msgid "Max amount"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 msgid "Max number of backups"
 msgstr ""
@@ -3353,6 +3357,10 @@ msgstr ""
 
 #: src/vmware/VMwareForm.tsx
 msgid "Maximum RAM for each VM"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentMaxValueField.tsx
+msgid "Maximum allowed value"
 msgstr ""
 
 #: src/vmware/VMwareForm.tsx
@@ -3418,6 +3426,10 @@ msgstr ""
 msgid "Min RAM"
 msgstr ""
 
+#: src/marketplace/offerings/create/OfferingLimitsTable.tsx
+msgid "Min amount"
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Min storage"
 msgstr ""
@@ -3433,6 +3445,10 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Minimal value"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentMinValueField.tsx
+msgid "Minimum allowed value"
 msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.html
@@ -3529,6 +3545,7 @@ msgstr ""
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/OfferingBookingTab.tsx
@@ -4031,6 +4048,10 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/project/ProjectResourcesList.tsx
 msgid "Offering"
+msgstr ""
+
+#: src/marketplace/offerings/create/OfferingLimitsTable.tsx
+msgid "Offering components"
 msgstr ""
 
 #: src/marketplace/details/OverviewTab.tsx
