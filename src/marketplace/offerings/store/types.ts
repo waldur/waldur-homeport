@@ -28,6 +28,8 @@ export interface ScheduleFormData {
   end_time: string;
 }
 
+type OfferingLimits = Record<string, {min: number; max: number}>;
+
 export interface OfferingFormData {
   name: string;
   native_name?: string;
@@ -46,6 +48,7 @@ export interface OfferingFormData {
   thumbnail?: File;
   scope?: string;
   document?: OfferingDocument;
+  limits?: OfferingLimits;
 }
 
 export interface OfferingUpdateFormData extends OfferingFormData {
@@ -82,6 +85,7 @@ export interface OfferingRequest {
   scope?: string;
   service_attributes?: any;
   shared: boolean;
+  limits?: OfferingLimits;
 }
 
 export interface OfferingDocument {

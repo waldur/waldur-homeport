@@ -1,5 +1,5 @@
 import { getOfferingTypes } from '@waldur/marketplace/common/registry';
-import { Offering, Category, OfferingOptions } from '@waldur/marketplace/types';
+import { Offering, Category, OfferingOptions, OfferingComponent } from '@waldur/marketplace/types';
 
 import { getAccountingTypeOptions } from '../create/ComponentAccountingTypeField';
 import { getLimitPeriods } from '../create/ComponentLimitPeriodField';
@@ -54,6 +54,15 @@ const parseComponents = components => {
   }));
 };
 
+const parseLimits = (components: OfferingComponent[]) =>
+  components.reduce((result, component) => ({
+    ...result,
+    [component.type]: {
+      min: component.min_value,
+      max: component.max_value,
+    },
+  }), {});
+
 export const getInitialValues = state => {
   const offering: Offering = getOffering(state).offering;
   if (!offering) {
@@ -84,5 +93,6 @@ export const getInitialValues = state => {
     options,
     plans: offering.plans,
     components: offering.components ? parseComponents(offering.components) : [],
+    limits: offering.components ? parseLimits(offering.components) : {},
   };
 };
