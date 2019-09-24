@@ -3355,6 +3355,10 @@ msgstr ""
 msgid "Maximum RAM for each VM"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentMaxValueField.tsx
+msgid "Maximum allowed value"
+msgstr ""
+
 #: src/vmware/VMwareForm.tsx
 msgid "Maximum capacity for each disk"
 msgstr ""
@@ -3433,6 +3437,10 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Minimal value"
+msgstr ""
+
+#: src/marketplace/offerings/create/ComponentMinValueField.tsx
+msgid "Minimum allowed value"
 msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.html
