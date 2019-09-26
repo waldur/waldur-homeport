@@ -14,6 +14,7 @@ import { translate } from '@waldur/i18n';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
+import { getDefaults } from '@waldur/marketplace/offerings/store/limits';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { OpenStackAllocationPool } from './OpenStackAllocationPool';
@@ -25,12 +26,13 @@ export const DEFAULT_SUBNET_CIDR = '192.168.X.0/24';
 export class OpenStackPackageForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
     const { project, plan } = this.props;
+    const defaults = getDefaults(this.props.offering);
     const initialData = {
       attributes: {
         subnet_cidr: '42',
         ...this.props.initialAttributes,
       },
-      limits: this.props.initialLimits,
+      limits: this.props.initialLimits || defaults,
       project,
       plan,
     };

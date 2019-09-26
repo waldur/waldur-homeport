@@ -1,12 +1,7 @@
-import { Offering, BillingType } from '@waldur/marketplace/types';
+import { Offering, OfferingComponent } from '@waldur/marketplace/types';
 
-export interface Component {
+export interface Component extends OfferingComponent {
   price: number;
-  disable_quotas: boolean;
-  type: string;
-  billing_type: BillingType;
-  label: string;
-  units: string;
   amount: number;
   prices: number[];
   subTotal: number;

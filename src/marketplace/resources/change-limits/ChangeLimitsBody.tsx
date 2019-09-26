@@ -42,6 +42,7 @@ export const DialogBody = connector((props: DialogBodyProps) => (
           components={props.components}
           orderCanBeApproved={props.orderCanBeApproved}
           totalPeriods={props.totalPeriods}
+          offeringLimits={props.data.offeringLimits}
         />
       }
     </ModalDialog>

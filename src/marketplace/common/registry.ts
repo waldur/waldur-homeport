@@ -36,27 +36,27 @@ export function registerOfferingType(config: OfferingConfiguration) {
   REGISTRY[type] = rest;
 }
 
-export function getFormComponent(offeringType) {
+export function getFormComponent(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].component;
 }
 
-export function getDetailsComponent(offeringType) {
+export function getDetailsComponent(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].detailsComponent;
 }
 
-export function getFormSerializer(offeringType) {
+export function getFormSerializer(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].serializer || (x => x);
 }
 
-export function getFormLimitSerializer(offeringType) {
+export function getFormLimitSerializer(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].limitSerializer || (x => x);
 }
 
-export function getFormLimitParser(offeringType) {
+export function getFormLimitParser(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].limitParser || (x => x);
 }
 
-export function getCheckoutSummaryComponent(offeringType) {
+export function getCheckoutSummaryComponent(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].checkoutSummaryComponent;
 }
 
@@ -68,27 +68,27 @@ export function getOfferingTypes(): Option[] {
   }));
 }
 
-export function showOfferingOptions(offeringType) {
+export function showOfferingOptions(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showOptions;
 }
 
-export function isOfferingTypeSchedulable(offeringType) {
+export function isOfferingTypeSchedulable(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].schedulable;
 }
 
-export function showComponentsList(offeringType) {
+export function showComponentsList(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showComponents;
 }
 
-export function getProviderType(offeringType) {
+export function getProviderType(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].providerType;
 }
 
-export function getLabel(offeringType) {
+export function getLabel(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].label;
 }
 
-export function getAttributes(offeringType) {
+export function getAttributes(offeringType: string) {
   const func = REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].attributes;
   return func ? func() : [];
 }
