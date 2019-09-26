@@ -4690,7 +4690,7 @@ msgstr ""
 msgid "Please create a new one:"
 msgstr ""
 
-#: src/marketplace/details/plan/ComponentEditRow.tsx
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Please enter desired values in the rows below:"
 msgstr ""
 

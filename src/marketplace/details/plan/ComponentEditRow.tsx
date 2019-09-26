@@ -1,38 +1,37 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
 import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
-import { ComponentRow } from '@waldur/marketplace/details/plan/ComponentRow';
+import { getOfferingComponentValidator } from '@waldur/marketplace/offerings/store/limits';
 
+import { ComponentRow } from './ComponentRow';
 import { Component } from './types';
 
-export const ComponentEditRow = (props: {periods: string[], components: Component[]}) => (
-  <>
-    <tr className="text-center">
-      <td colSpan={3 + props.periods.length}>
-        {translate('Please enter desired values in the rows below:')}
-      </td>
-    </tr>
-    {props.components.map((component, index) => {
-      const field = (
-        <Field
-          name={`limits.${component.type}`}
-          component="input"
-          className="form-control"
-          type="number"
-          min={0}
-          parse={parseIntField}
-          format={formatIntField}
-        />
-      );
-      return <ComponentRow
-        key={index}
-        component={component}
-        className="form-control-static"
-        field={field}
-      />;
-      })
-    }
-  </>
+interface Props {
+  component: Component;
+}
+
+const RowWrapper = props => (
+  <ComponentRow
+    offeringComponent={props.offeringComponent}
+    className={props.meta.error ? 'form-group has-error' : 'form-group'}>
+    <input
+      className="form-control"
+      type="number"
+      min={props.offeringComponent.min_value}
+      max={props.offeringComponent.max_value}
+      {...props.input}
+    />
+  </ComponentRow>
+);
+
+export const ComponentEditRow: React.SFC<Props> = props => (
+  <Field
+    name={`limits.${props.component.type}`}
+    parse={parseIntField}
+    format={formatIntField}
+    validate={getOfferingComponentValidator(props.component)}
+    component={RowWrapper}
+    offeringComponent={props.component}
+  />
 );
