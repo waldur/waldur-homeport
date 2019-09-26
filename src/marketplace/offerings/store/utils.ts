@@ -2,6 +2,7 @@ import { omit } from '@waldur/core/utils';
 import { Customer } from '@waldur/customer/types';
 import { OptionField, Category, Attribute, OfferingComponent } from '@waldur/marketplace/types';
 
+import { serializeLimitValues } from './limits';
 import { OfferingRequest, OfferingFormData, PlanRequest, PlanFormData, OptionFormData } from './types';
 
 export const planWithoutComponent = (plan: PlanFormData, component: string) => ({
@@ -110,7 +111,6 @@ export const formatOfferingRequest = (request: OfferingFormData, components: Off
     type: request.type ? request.type.value : undefined,
     service_attributes: request.service_settings,
     schedules: request.schedules,
-    limits: request.limits,
     shared: true,
   };
   if (request.attributes) {
@@ -141,6 +141,9 @@ export const formatOfferingRequest = (request: OfferingFormData, components: Off
   }
   if (request.scope) {
     result.scope = request.scope;
+  }
+  if (request.limits && request.type) {
+    result.limits = serializeLimitValues(request.type.value, request.limits);
   }
   return result;
 };

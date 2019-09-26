@@ -27,11 +27,11 @@ export const LimitlessComponentsTable = ({components}: {components: Component[]}
         <tr key={index}>
           <td>
             <p>
-              {component.label}
+              {component.name}
             </p>
           </td>
           <td>
-            <p>{component.units}</p>
+            <p>{component.measured_unit}</p>
           </td>
           <td>
             <p>{defaultCurrency(component.price)}</p>

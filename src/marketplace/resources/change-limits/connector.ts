@@ -16,7 +16,7 @@ export const formSelector = formValueSelector(FORM_ID);
 
 export type OwnProps = QueryChildProps<FetchedData>;
 
-interface ComponentRow {
+export interface ComponentRowType {
   type: string;
   name: string;
   measured_unit: string;
@@ -27,7 +27,7 @@ interface ComponentRow {
 
 export interface StateProps {
   periods: string[];
-  components: ComponentRow[];
+  components: ComponentRowType[];
   totalPeriods: number[];
   orderCanBeApproved: boolean;
 }

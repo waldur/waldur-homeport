@@ -2,9 +2,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { ComponentEditRow } from '@waldur/marketplace/details/plan/ComponentEditRow';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
+import { ComponentEditRow } from './ComponentEditRow';
 import { ComponentRow } from './ComponentRow';
 import { LimitlessComponentsTable } from './LimitlessComponentsTable';
 import { Component, PlanDetailsTableProps } from './types';
@@ -33,25 +33,29 @@ const HeaderRow = (props: {periods: string[]}) => (
 const FixedRows = (props: {components: Component[]}) => (
   <>
     {props.components.map((component, index) => (
-      <ComponentRow key={index} component={component} field={component.amount}/>
+      <ComponentRow key={index} offeringComponent={component} children={component.amount}/>
     ))}
   </>
 );
 
-const UsageRows = (props: {periods: string[], components: Component[], viewMode: boolean}) => {
-  if (props.viewMode) {
-    return (
-      <>
-        {props.components.map((component, index) => (
-          <ComponentRow key={index} component={component} field={component.amount} />
-        ))}
-      </>
-    );
-  }
-  return (
-    <ComponentEditRow periods={props.periods} components={props.components}/>
-  );
-};
+const UsageRows = (props: {periods: string[], components: Component[], viewMode: boolean}) => (
+  props.viewMode ?
+  <FixedRows components={props.components}/> : (
+  <>
+    <tr className="text-center">
+      <td colSpan={3 + props.periods.length}>
+        {translate('Please enter desired values in the rows below:')}
+      </td>
+    </tr>
+    {props.components.map((component, index) => (
+      <ComponentEditRow
+        key={index}
+        component={component}
+      />
+    ))}
+  </>
+  )
+);
 
 export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTableProps) => {
   if (props.components.length === 0) {
