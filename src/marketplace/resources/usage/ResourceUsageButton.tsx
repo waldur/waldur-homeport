@@ -1,11 +1,17 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 
+import { Resource } from '@waldur/marketplace/resources/types';
+
 import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
 import { ResourceShowUsageButton } from './ResourceShowUsageButton';
 
-export const ResourceUsageButton = ({ row }) => {
-  const disabled = !row.is_usage_based || !row.plan || !['OK', 'Updating'].includes(row.state);
+interface Props {
+  row: Pick<Resource, 'state' | 'plan' | 'is_usage_based' | 'uuid' | 'offering_uuid' | 'name'>;
+}
+
+export const ResourceUsageButton = ({ row }: Props) => {
+  const disabled = !row.is_usage_based || !row.plan || !['OK', 'Updating', 'Terminating'].includes(row.state);
   const body = (
     <div className={classNames('btn-group', {disabled})}>
       <ResourceShowUsageButton resource={row.uuid}/>
