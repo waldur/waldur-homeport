@@ -23,7 +23,7 @@ export interface Resource extends ResourceReference {
   offering_uuid: string;
   offering_name: string;
   offering_type: string;
-  state: string;
+  state: ResourceState;
   scope?: string;
   created?: string;
   category_title?: string;
