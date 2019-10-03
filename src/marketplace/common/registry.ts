@@ -20,6 +20,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   label: string;
   showOptions?: boolean;
   showComponents?: boolean;
+  showOfferingLimits?: boolean;
   providerType?: string;
   attributes?(): Attribute[];
   disableOfferingCreation?: boolean;
@@ -70,6 +71,10 @@ export function getOfferingTypes(): Option[] {
 
 export function showOfferingOptions(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showOptions;
+}
+
+export function showOfferingLimits(offeringType: string) {
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showOfferingLimits;
 }
 
 export function isOfferingTypeSchedulable(offeringType: string) {

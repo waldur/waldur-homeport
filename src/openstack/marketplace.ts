@@ -66,4 +66,5 @@ registerOfferingType({
   limitParser,
   providerType: 'OpenStack',
   attributes: ServiceSettingsAttributes,
+  showOfferingLimits: true,
 });

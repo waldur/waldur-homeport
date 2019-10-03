@@ -10,6 +10,7 @@ import { OfferingLimitsTable } from './OfferingLimitsTable';
 
 interface AccountingStepProps {
   showComponents: boolean;
+  showLimits: boolean;
   type?: string;
   removeOfferingComponent(component: string): void;
   removeOfferingQuotas(component: string): void;
@@ -18,7 +19,7 @@ interface AccountingStepProps {
 
 export const AccountingStep = (props: AccountingStepProps) => props.type ? (
   <>
-    {props.builtinComponents.length > 0 && (
+    {props.showLimits && props.builtinComponents.length > 0 && (
       <OfferingLimitsTable components={props.builtinComponents}/>
     )}
     {props.showComponents && (
