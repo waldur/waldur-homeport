@@ -11,7 +11,7 @@ import { AccountingStep } from './AccountingStep';
 const mapStateToProps = state => {
   const type = getType(state);
   const showComponents = type && showComponentsList(type);
-  const builtinComponents = getOfferingComponents(state, type);
+  const builtinComponents = type && getOfferingComponents(state, type);
   return {showComponents, type, builtinComponents};
 };
 
