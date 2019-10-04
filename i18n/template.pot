@@ -131,7 +131,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -747,7 +747,7 @@ msgstr ""
 msgid "Back to shopping"
 msgstr ""
 
-#: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Backend ID"
 msgstr ""
@@ -3525,7 +3525,7 @@ msgstr ""
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
-#: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -4554,7 +4554,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
@@ -6068,7 +6068,8 @@ msgstr ""
 #: src/appstore/dialog/appstore-category-selector.html
 #: src/appstore/providers/appstore-providers.js
 #: src/form-react/AppstoreListDialog.tsx
-#: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/marketplace/resources/import/OfferingsList.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Select"
 msgstr ""
@@ -6147,7 +6148,7 @@ msgstr ""
 msgid "Select organization..."
 msgstr ""
 
-#: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 msgid "Select plan"
 msgstr ""
 
@@ -6258,7 +6259,8 @@ msgid "Select {fieldLabel}"
 msgstr ""
 
 #: src/appstore/providers/appstore-providers.js
-#: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/marketplace/resources/import/OfferingsList.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 msgid "Selected"
 msgstr ""
 
