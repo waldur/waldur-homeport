@@ -747,7 +747,6 @@ msgid "Back to shopping"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/import/import-snapshots-list.js
-#: src/resource-import/import-virtual-clouds-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Backend ID"
 msgstr ""
@@ -879,7 +878,6 @@ msgid "Bookings"
 msgstr ""
 
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource-import/import-volumes-list.js
 msgid "Bootable"
 msgstr ""
 
@@ -906,7 +904,6 @@ msgid "CIDR"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/resource-import/import-virtual-machines-list.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "CPU"
@@ -970,7 +967,6 @@ msgstr ""
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
 #: src/providers/ProviderCreateForm.tsx
-#: src/resource-import/resource-import-dialog.html
 #: src/resource/actions/dialog/action-dialog.html
 #: src/team/add-project-member.html
 #: src/team/add-team-member.html
@@ -1680,7 +1676,6 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
-#: src/resource-import/import-virtual-clouds-list.js
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -2249,7 +2244,6 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
@@ -2622,39 +2616,13 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
-#: src/resource-import/resource-import-dialog.html
-#: src/resource-import/utils.js
-msgid "Import"
-msgstr ""
-
-#: src/resource-import/utils.js
-msgid "Import is not possible as there are no personal provider accounts registered."
-msgstr ""
-
-#: src/resource-import/register-import-vpc-table-action.js
-msgid "Import private cloud"
-msgstr ""
-
 #: src/marketplace/resources/import/ResourceImportButton.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
-#: src/resource-import/resource-import-dialog.html
 msgid "Import resource"
-msgstr ""
-
-#: src/resource-import/utils.js
-msgid "Import resources from the registered provider accounts."
 msgstr ""
 
 #: src/openstack/openstack-snapshot/import/register-import-table-action.js
 msgid "Import snapshot"
-msgstr ""
-
-#: src/resource-import/register-import-instance-table-action.js
-msgid "Import virtual machine"
-msgstr ""
-
-#: src/resource-import/register-import-volume-table-action.js
-msgid "Import volume"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -3581,9 +3549,6 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/providers/details/provider-details.html
 #: src/providers/provider-list.js
-#: src/resource-import/import-virtual-clouds-list.js
-#: src/resource-import/import-virtual-machines-list.js
-#: src/resource-import/import-volumes-list.js
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -3823,10 +3788,6 @@ msgstr ""
 msgid "No private clouds found matching filter."
 msgstr ""
 
-#: src/resource-import/import-virtual-clouds-list.js
-msgid "No private clouds to import."
-msgstr ""
-
 #: src/team/customer-users-list.js
 msgid "No projects are assigned to this role."
 msgstr ""
@@ -3916,17 +3877,9 @@ msgstr ""
 msgid "No virtual machines found matching filter."
 msgstr ""
 
-#: src/resource-import/import-virtual-machines-list.js
-msgid "No virtual machines to import."
-msgstr ""
-
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource/list/resource-volumes-list.js
 msgid "No volumes found matching filter."
-msgstr ""
-
-#: src/resource-import/import-volumes-list.js
-msgid "No volumes to import."
 msgstr ""
 
 #: src/customer/create/customer-create-prompt.html
@@ -5285,7 +5238,6 @@ msgstr ""
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
 #: src/providers/provider-list.js
-#: src/resource-import/utils.js
 #: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
 msgstr ""
@@ -5308,7 +5260,6 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
@@ -5871,14 +5822,6 @@ msgstr ""
 msgid "Resources by projects"
 msgstr ""
 
-#: src/resource-import/resource-import-dialog.js
-msgid "Resources could not be imported"
-msgstr ""
-
-#: src/resource-import/resource-import-dialog.js
-msgid "Resources import has been initiated"
-msgstr ""
-
 #: src/issues/workspace/issue-navigation-service.js
 #: src/resource/support/routes.js
 msgid "Resources usage"
@@ -5962,7 +5905,6 @@ msgstr ""
 
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
-#: src/resource-import/import-virtual-machines-list.js
 msgid "Runtime state"
 msgstr ""
 
@@ -6569,7 +6511,6 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource-import/import-volumes-list.js
 #: src/resource/list/resource-volumes-list.js
 #: src/rijkscloud/VolumeSummary.tsx
 #: src/vmware/VMwareDiskSummary.tsx
@@ -6727,14 +6668,6 @@ msgstr ""
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Status"
-msgstr ""
-
-#: src/resource-import/resource-import-dialog.js
-msgid "Step 1. Select provider"
-msgstr ""
-
-#: src/resource-import/resource-import-dialog.html
-msgid "Step 2. Select resources"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/StopAction.ts
