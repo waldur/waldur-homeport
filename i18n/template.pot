@@ -131,6 +131,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -746,7 +747,7 @@ msgstr ""
 msgid "Back to shopping"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Backend ID"
 msgstr ""
@@ -2616,13 +2617,13 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
+msgid "Import"
+msgstr ""
+
 #: src/marketplace/resources/import/ResourceImportButton.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "Import resource"
-msgstr ""
-
-#: src/openstack/openstack-snapshot/import/register-import-table-action.js
-msgid "Import snapshot"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -3524,6 +3525,7 @@ msgstr ""
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -3540,7 +3542,6 @@ msgstr ""
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-subnet/openstack-subnets-list.js
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
@@ -3850,10 +3851,6 @@ msgstr ""
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-volume/openstack-volume-snapshots.js
 msgid "No snapshots found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
-msgid "No snapshots to import."
 msgstr ""
 
 #: src/openstack/openstack-backup/backup-snapshots-list.js
@@ -4557,6 +4554,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
@@ -5899,10 +5897,6 @@ msgstr ""
 msgid "Running accounting"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
-msgid "Runtime State"
-msgstr ""
-
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Runtime state"
@@ -6074,6 +6068,7 @@ msgstr ""
 #: src/appstore/dialog/appstore-category-selector.html
 #: src/appstore/providers/appstore-providers.js
 #: src/form-react/AppstoreListDialog.tsx
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Select"
 msgstr ""
@@ -6263,6 +6258,7 @@ msgid "Select {fieldLabel}"
 msgstr ""
 
 #: src/appstore/providers/appstore-providers.js
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "Selected"
 msgstr ""
 
@@ -6504,7 +6500,6 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
@@ -6668,6 +6663,14 @@ msgstr ""
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Status"
+msgstr ""
+
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
+msgid "Step 1. Select offering"
+msgstr ""
+
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
+msgid "Step 2. Select resources"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/StopAction.ts
