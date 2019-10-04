@@ -130,3 +130,6 @@ export const terminateResource = (resource_uuid: string) =>
 
 export const changeLimits = (resource_uuid: string, limits: Record<string, number>) =>
   post(`/marketplace-resources/${resource_uuid}/update_limits/`, {limits}).then(response => response.data);
+
+export const getImportableResources = (offering_uuid: string) =>
+  getAll(`/marketplace-offerings/${offering_uuid}/importable_resources`);

@@ -16,7 +16,7 @@ interface ResourceNameProps {
   };
 }
 
-const ResourceIcon = (props: ResourceNameProps) => (
+export const ResourceIcon = (props: ResourceNameProps) => (
   <Tooltip
     id={`resourceIcon-${props.resource.uuid}`}
     label={formatResourceType(props.resource)}>

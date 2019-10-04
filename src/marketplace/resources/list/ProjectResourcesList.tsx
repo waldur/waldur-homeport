@@ -9,10 +9,10 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
+import { ResourceImportButton } from '../import/ResourceImportButton';
 import { Resource } from '../types';
 import { CategoryColumnField } from './CategoryColumnField';
 import { CreateResourceButton } from './CreateResourceButton';
-import { ImportResourceButton } from './ImportResourceButton';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
@@ -57,7 +57,7 @@ export const TableComponent = props => {
 
   const tableActions = (
     <>
-      <ImportResourceButton category_uuid={props.category_uuid}/>
+      <ResourceImportButton category_uuid={props.category_uuid} project_uuid={props.project.uuid}/>
       <CreateResourceButton category_uuid={props.category_uuid}/>
     </>
   );

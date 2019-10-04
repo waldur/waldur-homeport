@@ -2635,6 +2635,8 @@ msgstr ""
 msgid "Import private cloud"
 msgstr ""
 
+#: src/marketplace/resources/import/ResourceImportButton.tsx
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/resource-import/resource-import-dialog.html
 msgid "Import resource"
 msgstr ""
@@ -6208,6 +6210,10 @@ msgstr ""
 msgid "Select organization..."
 msgstr ""
 
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
+msgid "Select plan"
+msgstr ""
+
 #: src/issues/create/issue-registration.html
 msgid "Select priority"
 msgstr ""
@@ -7562,6 +7568,7 @@ msgstr ""
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "Unable to load data."
 msgstr ""
 
