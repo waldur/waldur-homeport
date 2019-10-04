@@ -1,5 +1,6 @@
 import { omit } from '@waldur/core/utils';
 import { Customer } from '@waldur/customer/types';
+import { showOfferingLimits } from '@waldur/marketplace/common/registry';
 import { OptionField, Category, Attribute, OfferingComponent } from '@waldur/marketplace/types';
 
 import { serializeLimitValues } from './limits';
@@ -143,7 +144,10 @@ export const formatOfferingRequest = (request: OfferingFormData, components: Off
     result.scope = request.scope;
   }
   if (request.limits && request.type) {
-    result.limits = serializeLimitValues(request.type.value, request.limits);
+    const showLimits = showOfferingLimits(request.type.value);
+    if (showLimits) {
+      result.limits = serializeLimitValues(request.type.value, request.limits);
+    }
   }
   return result;
 };
