@@ -2617,7 +2617,7 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
-#: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/marketplace/resources/import/ImportButton.tsx
 msgid "Import"
 msgstr ""
 

@@ -30,7 +30,7 @@ export const PureOfferingConfigurator = (props: PureOfferingConfiguratorProps & 
 const storeConnector = connect<
   { project: Project },
   {},
-  { offering: Offering },
+  { offering: Offering, limits: string[] },
   OuterState
 >(state => ({ project: getProject(state) }));
 
@@ -55,4 +55,4 @@ const enhance = compose(
   formConnector
 );
 
-export const OfferingConfigurator = enhance(PureOfferingConfigurator) as React.ComponentClass<any>;
+export const OfferingConfigurator = enhance(PureOfferingConfigurator);

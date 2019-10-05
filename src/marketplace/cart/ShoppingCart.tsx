@@ -77,4 +77,4 @@ const enhancer = compose(
   reduxForm<TermsOfServiceFormData, ShoppingCartProps>({form: ToSForm}),
 );
 
-export const ShoppingCart = enhancer(PureShoppingCart) as React.ComponentClass<{}>;
+export const ShoppingCart = enhancer(PureShoppingCart);

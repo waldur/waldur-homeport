@@ -57,7 +57,9 @@ export const TableComponent = props => {
 
   const tableActions = (
     <>
-      <ResourceImportButton category_uuid={props.category_uuid} project_uuid={props.project.uuid}/>
+      <ResourceImportButton
+        category_uuid={props.category_uuid}
+        project_uuid={props.project && props.project.uuid}/>
       <CreateResourceButton category_uuid={props.category_uuid}/>
     </>
   );

@@ -12,16 +12,7 @@ const SelectResourceButton = ({ value, onChange }) => (
   </a>
 );
 
-const toggleElement = (element, list) =>
-  list.includes(element) ? [
-    ...list.slice(0, list.indexOf(element)),
-    ...list.slice(list.indexOf(element) + 1),
-  ] : [
-    ...list,
-    element,
-  ];
-
-const ResourceRow = ({ resource, value, onChange, offering, plans, setPlans }) => (
+const ResourceRow = ({ resource, value, toggleResource, offering, plans, assignPlan }) => (
   <tr>
     <td>
       <p className="form-control-static">
@@ -36,7 +27,7 @@ const ResourceRow = ({ resource, value, onChange, offering, plans, setPlans }) =
     <td>
       <SelectResourceButton
         value={value.includes(resource)}
-        onChange={() => onChange(toggleElement(resource, value))}
+        onChange={() => toggleResource(resource)}
       />
     </td>
     <td>
@@ -46,13 +37,13 @@ const ResourceRow = ({ resource, value, onChange, offering, plans, setPlans }) =
         valueKey="uuid"
         options={offering.plans}
         value={plans[resource.backend_id]}
-        onChange={plan => setPlans({...plans, [resource.backend_id]: plan})}
+        onChange={plan => assignPlan(resource, plan)}
       />
     </td>
   </tr>
 );
 
-export const ResourcesList = ({ resources, offering, value, onChange, plans, setPlans }) => (
+export const ResourcesList = ({ resources, offering, value, toggleResource, plans, assignPlan }) => (
   <table className="table">
     <thead>
       <tr>
@@ -69,9 +60,9 @@ export const ResourcesList = ({ resources, offering, value, onChange, plans, set
           resource={resource}
           offering={offering}
           value={value}
-          onChange={onChange}
+          toggleResource={toggleResource}
           plans={plans}
-          setPlans={setPlans}
+          assignPlan={assignPlan}
         />
       ))}
     </tbody>

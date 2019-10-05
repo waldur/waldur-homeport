@@ -4,17 +4,17 @@ import * as Row from 'react-bootstrap/lib/Row';
 import MediaQuery from 'react-responsive';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { OfferingsListType } from '@waldur/marketplace/types';
 
 import { MobileOfferingCard } from './MobileOfferingCard';
 import { OfferingCard } from './OfferingCard';
 
-interface OfferingGridProps extends OfferingsListType, TranslateProps {
+interface OfferingGridProps extends OfferingsListType {
   width?: number;
 }
 
-export const OfferingGrid = withTranslation((props: OfferingGridProps) => {
+export const OfferingGrid: React.SFC<OfferingGridProps> = props => {
   if (props.loading) {
     return <LoadingSpinner/>;
   }
@@ -22,7 +22,7 @@ export const OfferingGrid = withTranslation((props: OfferingGridProps) => {
   if (!props.loaded) {
     return (
       <h3 className="text-center">
-        {props.translate('Unable to load marketplace offerings.')}
+        {translate('Unable to load marketplace offerings.')}
       </h3>
     );
   }
@@ -30,7 +30,7 @@ export const OfferingGrid = withTranslation((props: OfferingGridProps) => {
   if (props.loaded && !props.items.length) {
     return (
       <h3 className="text-center">
-        {props.translate('There are no offerings in marketplace yet.')}
+        {translate('There are no offerings in marketplace yet.')}
       </h3>
     );
   }
@@ -57,7 +57,7 @@ export const OfferingGrid = withTranslation((props: OfferingGridProps) => {
       </MediaQuery>
     </>
   );
-});
+};
 
 OfferingGrid.defaultProps = {
   width: 3,
