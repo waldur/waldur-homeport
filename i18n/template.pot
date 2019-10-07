@@ -423,6 +423,10 @@ msgstr ""
 msgid "All provider quotas have reached limit."
 msgstr ""
 
+#: src/marketplace/resources/import/useImportDialog.tsx
+msgid "All resources have been imported."
+msgstr ""
+
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 msgid "All spaces, hyphens and dots will be replaced with underscores."
 msgstr ""
@@ -5818,6 +5822,10 @@ msgstr ""
 
 #: src/analytics/resource-analysis-new.html
 msgid "Resources by projects"
+msgstr ""
+
+#: src/marketplace/resources/import/useImportDialog.tsx
+msgid "Resources import has failed."
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js

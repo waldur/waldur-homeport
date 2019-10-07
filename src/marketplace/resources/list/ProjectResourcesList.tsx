@@ -58,7 +58,7 @@ export const TableComponent = props => {
 
   const tableActions = (
     <>
-      {isVisible('import') && (
+      {props.importVisible && (
         <ResourceImportButton
           category_uuid={props.category_uuid}
           project_uuid={props.project && props.project.uuid}
@@ -93,10 +93,12 @@ const TableOptions = {
 
 const mapStateToProps = state => ({
   project: getProject(state),
+  importVisible: isVisible(state, 'import'),
 });
 
 interface StateProps {
   project: Project;
+  importVisible: boolean;
 }
 
 interface OwnProps {

@@ -3,12 +3,12 @@ import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 
-export const ImportButton = ({ disabled, loading, onClick }) => (
+export const ImportButton = ({ disabled, submitting, onClick }) => (
   <button
-    className={classNames('btn btn-primary', {disabled: disabled || loading })}
+    className={classNames('btn btn-primary', {disabled: disabled || submitting })}
     type="button"
     onClick={onClick}>
-    {loading && (
+    {submitting && (
       <>
         <i className="fa fa-spinner fa-spin"/>
         {' '}

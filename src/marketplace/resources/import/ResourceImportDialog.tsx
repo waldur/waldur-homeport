@@ -27,7 +27,7 @@ export const ResourceImportDialog: React.SFC<ImportDialogProps> = props => {
     offeringsProps,
     resourceProps,
     handleSubmit,
-    submitProps,
+    submitting,
   } = useImportDialog(props);
 
   return (
@@ -37,7 +37,7 @@ export const ResourceImportDialog: React.SFC<ImportDialogProps> = props => {
         <>
           <ImportButton
             disabled={resources.length === 0}
-            loading={submitProps.loading}
+            submitting={submitting}
             onClick={handleSubmit}
           />
           <CloseDialogButton/>
