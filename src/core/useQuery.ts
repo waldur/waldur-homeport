@@ -61,4 +61,4 @@ export function useQuery<PayloadType = any, VariablesType = string | Record<stri
     };
   }, [method, variables]);
   return {state, call};
-};
+}

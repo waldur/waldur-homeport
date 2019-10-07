@@ -9,7 +9,6 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 import { createEntity } from '@waldur/table-react/actions';
 
-import { Resource } from '../types';
 import { ImportDialogProps } from './types';
 
 const getOfferingsForImport = resolve => getAllOfferings({params: {...resolve, importable: true}});
