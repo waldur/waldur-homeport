@@ -90,8 +90,8 @@ export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDe
       {usageWithoutLimits.length > 0 && (
         <>
           <p>{hasExtraRows ?
-            translate('Additionally vendor can charge for usage of the following components') :
-            translate('Vendor can charge for usage of the following components')
+            translate('Additionally service provider can charge for usage of the following components') :
+            translate('Service provider can charge for usage of the following components')
           }</p>
           <LimitlessComponentsTable components={usageWithoutLimits}/>
         </>

@@ -376,8 +376,8 @@ msgid "Additional information"
 msgstr "Üldteave"
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-msgid "Additionally vendor can charge for usage of the following components"
-msgstr "Lisaks võib müüja võtta tasu järgmiste komponentide kasutamise eest"
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "Lisaks võib teenusepakkuja võtta tasu järgmiste komponentide kasutamise eest"
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
@@ -8634,16 +8634,16 @@ msgstr "Väärtus ei tphi olla negatiivne"
 #: src/marketplace/details/OrderSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-msgid "Vendor"
-msgstr "Müüja"
+msgid "Service provider"
+msgstr "Teenusepakkuja"
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-msgid "Vendor can charge for usage of the following components"
-msgstr "Müüja võib kosida tasu järgmiste komponentide kasutamise eest"
+msgid "Service provider can charge for usage of the following components"
+msgstr "Teenusepakkuja võib kosida tasu järgmiste komponentide kasutamise eest"
 
 #: src/marketplace/details/OverviewTab.tsx
-msgid "Vendor details"
-msgstr "Müüja üksikasjad"
+msgid "Service provider details"
+msgstr "Teenusepakkuja üksikasjad"
 
 #: src/navigation/app-footer.html
 msgid "Version"
