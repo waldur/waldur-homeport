@@ -5,7 +5,7 @@ import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { getAllOfferings, getImportableResources, importResource } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showSuccess } from '@waldur/store/coreSaga';
+import { showSuccess, showError } from '@waldur/store/coreSaga';
 import { createEntity } from '@waldur/table-react/actions';
 
 import { ImportDialogProps } from './types';
@@ -45,7 +45,8 @@ export const useImportDialog = (props: ImportDialogProps) => {
       dispatch(showSuccess(translate('All resources have been imported.')));
     } catch {
       setSubmitting(false);
-      dispatch(showSuccess(translate('Resources import has failed.')));
+      dispatch(showError(translate('Resources import has failed.')));
+      return;
     }
     dispatch(closeModalDialog());
   };

@@ -47,6 +47,7 @@ export const ResourceImportDialog: React.SFC<ImportDialogProps> = props => {
         offeringsProps.loading ? <LoadingSpinner/> :
         offeringsProps.erred ? <h3>{translate('Unable to load data.')}</h3> :
         offeringsProps.loaded &&
+        (offeringsProps.data.length === 0 ? (translate('There are no offerings available.')) :
         <Row>
           <Col lg={12}>
             <Panel
@@ -68,6 +69,7 @@ export const ResourceImportDialog: React.SFC<ImportDialogProps> = props => {
                   resourceProps.loading ? <LoadingSpinner/> :
                   resourceProps.erred ? <h3>{translate('Unable to load data.')}</h3> :
                   resourceProps.loaded &&
+                  (resourceProps.data.length === 0 ? (translate('There are no resources available.')) :
                   <ResourcesList
                     resources={resourceProps.data}
                     offering={offering}
@@ -76,12 +78,12 @@ export const ResourceImportDialog: React.SFC<ImportDialogProps> = props => {
                     plans={plans}
                     assignPlan={assignPlan}
                   />
-                }
+                )}
               </Panel>
             </Col>
           )}
         </Row>
-      }
+      )}
     </ModalDialog>
   );
 };

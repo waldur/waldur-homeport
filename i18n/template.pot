@@ -6077,7 +6077,7 @@ msgstr ""
 #: src/appstore/providers/appstore-providers.js
 #: src/form-react/AppstoreListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
-#: src/marketplace/resources/import/ResourcesList.tsx
+#: src/marketplace/resources/import/ResourceRow.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Select"
 msgstr ""
@@ -6156,7 +6156,7 @@ msgstr ""
 msgid "Select organization..."
 msgstr ""
 
-#: src/marketplace/resources/import/ResourcesList.tsx
+#: src/marketplace/resources/import/ResourceRow.tsx
 msgid "Select plan"
 msgstr ""
 
@@ -6268,7 +6268,7 @@ msgstr ""
 
 #: src/appstore/providers/appstore-providers.js
 #: src/marketplace/resources/import/OfferingsList.tsx
-#: src/marketplace/resources/import/ResourcesList.tsx
+#: src/marketplace/resources/import/ResourceRow.tsx
 msgid "Selected"
 msgstr ""
 
@@ -7068,6 +7068,10 @@ msgstr ""
 msgid "There are no items yet."
 msgstr ""
 
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
+msgid "There are no offerings available."
+msgstr ""
+
 #: src/marketplace/common/OfferingGrid.tsx
 msgid "There are no offerings in marketplace yet."
 msgstr ""
@@ -7098,6 +7102,10 @@ msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
 msgid "There are no requests yet."
+msgstr ""
+
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
+msgid "There are no resources available."
 msgstr ""
 
 #: src/analytics/resource-analysis-new.html
