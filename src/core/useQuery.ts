@@ -1,6 +1,23 @@
 import * as React from 'react';
 
-export const useQuery = (method: any, variables?: Record<string, any>) => {
+interface QueryState<PayloadType = any> {
+  loading: boolean;
+  loaded: boolean;
+  erred: boolean;
+  error: any;
+  data: PayloadType;
+}
+
+interface QueryInterface<PayloadType = any> {
+  state: QueryState<PayloadType>;
+  call(): void;
+}
+
+type LoaderInterface<VariablesType, PayloadType> = (vars?: VariablesType) => Promise<PayloadType>;
+
+export function useQuery<PayloadType = any, VariablesType = string | Record<string, any>>(
+  method: LoaderInterface<VariablesType, PayloadType>, variables?: VariablesType
+  ): QueryInterface<PayloadType> {
   const [state, setState] = React.useState({
     loading: false,
     loaded: false,
