@@ -35,7 +35,7 @@ describe('OpenstackInstanceCheckoutSummary', () => {
 
   it('should render right message if resource configuration is valid', () => {
     const wrapper = renderWrapper(dataWithFlavor);
-    expect(wrapper.find('p#invalid-info').text()).not.toContain('Resource configuration is invalid. Please fix errors in form.');
+    expect(wrapper.find('p#invalid-info')).toHaveLength(0);
   });
 
   it('should render Table and QuotaUsageBarChart if flavor has been selected', () => {
