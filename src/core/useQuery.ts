@@ -16,7 +16,7 @@ interface QueryInterface<PayloadType = any> {
 type LoaderInterface<VariablesType, PayloadType> = (vars?: VariablesType) => Promise<PayloadType>;
 
 export function useQuery<PayloadType = any, VariablesType = string | Record<string, any>>(
-  method: LoaderInterface<VariablesType, PayloadType>, variables?: VariablesType
+  method?: LoaderInterface<VariablesType, PayloadType>, variables?: VariablesType
   ): QueryInterface<PayloadType> {
   const [state, setState] = React.useState({
     loading: false,

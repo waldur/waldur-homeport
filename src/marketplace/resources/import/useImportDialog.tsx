@@ -4,18 +4,13 @@ import { useDispatch } from 'react-redux';
 import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { getAllOfferings, getImportableResources, importResource } from '@waldur/marketplace/common/api';
-import { Offering, Plan } from '@waldur/marketplace/types';
+import { Offering, Plan, ImportableResource } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 import { createEntity } from '@waldur/table-react/actions';
 
 import { Resource } from '../types';
 import { ImportDialogProps } from './types';
-
-interface ImportableResource {
-  backend_id: string;
-  name: string;
-}
 
 const getOfferingsForImport = resolve => getAllOfferings({params: {...resolve, importable: true}});
 
@@ -40,7 +35,7 @@ export const useImportDialog = (props: ImportDialogProps) => {
   const toggleResource = (resource: ImportableResource) => setResources(toggleElement(resource, resources));
 
   const {state: offeringsProps, call: loadOfferings} = useQuery<Offering[]>(getOfferingsForImport, props.resolve);
-  const {state: resourceProps, call: loadResources} = useQuery<Resource[]>(offering && getImportableResources, offering && offering.uuid);
+  const {state: resourceProps, call: loadResources} = useQuery<ImportableResource[]>(offering && getImportableResources, offering && offering.uuid);
 
   const dispatch = useDispatch();
 
