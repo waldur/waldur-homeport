@@ -3,6 +3,7 @@ import * as React from 'react';
 interface QueryState<Data> {
   loading: boolean;
   loaded: boolean;
+  erred: boolean;
   error?: any;
   data?: Data;
 }
@@ -22,6 +23,7 @@ export class Query<Variables = object, Data = object> extends
   state = {
     loading: true,
     loaded: false,
+    erred: false,
     error: null,
     data: null,
   };
@@ -61,10 +63,12 @@ export class Query<Variables = object, Data = object> extends
         loading: false,
         loaded: true,
         erred: false,
+        error: undefined,
       });
     } catch (error) {
       this.safeSetState({
         loading: false,
+        erred: true,
         error,
       });
     }

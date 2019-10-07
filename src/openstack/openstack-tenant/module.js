@@ -11,14 +11,8 @@ export default module => {
   ResourceSummary.register('OpenStack.Tenant', OpenStackTenantSummary);
   module.config(tabsConfig);
   module.run(costPlanningConfig);
-  module.run(registerImportEndpoint);
   module.service('openstackTenantsService', openstackTenantsService);
   module.component('appstoreFieldSelectOpenstackTenant', appstoreFieldSelectOpenstackTenant);
   filtersModule(module);
   actionsModule(module);
 };
-
-// @ngInject
-function registerImportEndpoint(ImportResourcesEndpointRegistry, ENV) {
-  ImportResourcesEndpointRegistry.registerEndpoint(ENV.resourcesTypes.private_clouds, 'OpenStack', 'openstack-tenants');
-}

@@ -131,6 +131,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -420,6 +421,10 @@ msgstr ""
 
 #: src/appstore/providers/appstore-providers-service.js
 msgid "All provider quotas have reached limit."
+msgstr ""
+
+#: src/marketplace/resources/import/useImportDialog.tsx
+msgid "All resources have been imported."
 msgstr ""
 
 #: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
@@ -746,8 +751,7 @@ msgstr ""
 msgid "Back to shopping"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
-#: src/resource-import/import-virtual-clouds-list.js
+#: src/marketplace/resources/import/ResourcesList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Backend ID"
 msgstr ""
@@ -879,7 +883,6 @@ msgid "Bookings"
 msgstr ""
 
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource-import/import-volumes-list.js
 msgid "Bootable"
 msgstr ""
 
@@ -906,7 +909,6 @@ msgid "CIDR"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/resource-import/import-virtual-machines-list.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "CPU"
@@ -970,7 +972,6 @@ msgstr ""
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
 #: src/providers/ProviderCreateForm.tsx
-#: src/resource-import/resource-import-dialog.html
 #: src/resource/actions/dialog/action-dialog.html
 #: src/team/add-project-member.html
 #: src/team/add-team-member.html
@@ -1680,7 +1681,6 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
-#: src/resource-import/import-virtual-clouds-list.js
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -2249,7 +2249,6 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
@@ -2622,37 +2621,13 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
-#: src/resource-import/resource-import-dialog.html
-#: src/resource-import/utils.js
+#: src/marketplace/resources/import/ImportButton.tsx
 msgid "Import"
 msgstr ""
 
-#: src/resource-import/utils.js
-msgid "Import is not possible as there are no personal provider accounts registered."
-msgstr ""
-
-#: src/resource-import/register-import-vpc-table-action.js
-msgid "Import private cloud"
-msgstr ""
-
-#: src/resource-import/resource-import-dialog.html
+#: src/marketplace/resources/import/ResourceImportButton.tsx
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "Import resource"
-msgstr ""
-
-#: src/resource-import/utils.js
-msgid "Import resources from the registered provider accounts."
-msgstr ""
-
-#: src/openstack/openstack-snapshot/import/register-import-table-action.js
-msgid "Import snapshot"
-msgstr ""
-
-#: src/resource-import/register-import-instance-table-action.js
-msgid "Import virtual machine"
-msgstr ""
-
-#: src/resource-import/register-import-volume-table-action.js
-msgid "Import volume"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -3554,6 +3529,7 @@ msgstr ""
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -3570,7 +3546,6 @@ msgstr ""
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-subnet/openstack-subnets-list.js
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
@@ -3579,9 +3554,6 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/providers/details/provider-details.html
 #: src/providers/provider-list.js
-#: src/resource-import/import-virtual-clouds-list.js
-#: src/resource-import/import-virtual-machines-list.js
-#: src/resource-import/import-volumes-list.js
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -3821,10 +3793,6 @@ msgstr ""
 msgid "No private clouds found matching filter."
 msgstr ""
 
-#: src/resource-import/import-virtual-clouds-list.js
-msgid "No private clouds to import."
-msgstr ""
-
 #: src/team/customer-users-list.js
 msgid "No projects are assigned to this role."
 msgstr ""
@@ -3889,10 +3857,6 @@ msgstr ""
 msgid "No snapshots found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
-msgid "No snapshots to import."
-msgstr ""
-
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 msgid "No snapshots yet."
@@ -3914,17 +3878,9 @@ msgstr ""
 msgid "No virtual machines found matching filter."
 msgstr ""
 
-#: src/resource-import/import-virtual-machines-list.js
-msgid "No virtual machines to import."
-msgstr ""
-
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource/list/resource-volumes-list.js
 msgid "No volumes found matching filter."
-msgstr ""
-
-#: src/resource-import/import-volumes-list.js
-msgid "No volumes to import."
 msgstr ""
 
 #: src/customer/create/customer-create-prompt.html
@@ -4602,6 +4558,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
@@ -5283,7 +5240,6 @@ msgstr ""
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
 #: src/providers/provider-list.js
-#: src/resource-import/utils.js
 #: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
 msgstr ""
@@ -5306,7 +5262,6 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
@@ -5869,12 +5824,8 @@ msgstr ""
 msgid "Resources by projects"
 msgstr ""
 
-#: src/resource-import/resource-import-dialog.js
-msgid "Resources could not be imported"
-msgstr ""
-
-#: src/resource-import/resource-import-dialog.js
-msgid "Resources import has been initiated"
+#: src/marketplace/resources/import/useImportDialog.tsx
+msgid "Resources import has failed."
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
@@ -5954,13 +5905,8 @@ msgstr ""
 msgid "Running accounting"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
-msgid "Runtime State"
-msgstr ""
-
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
-#: src/resource-import/import-virtual-machines-list.js
 msgid "Runtime state"
 msgstr ""
 
@@ -6130,6 +6076,8 @@ msgstr ""
 #: src/appstore/dialog/appstore-category-selector.html
 #: src/appstore/providers/appstore-providers.js
 #: src/form-react/AppstoreListDialog.tsx
+#: src/marketplace/resources/import/OfferingsList.tsx
+#: src/marketplace/resources/import/ResourceRow.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Select"
 msgstr ""
@@ -6206,6 +6154,10 @@ msgstr ""
 #: src/issues/create/issue-registration.html
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 msgid "Select organization..."
+msgstr ""
+
+#: src/marketplace/resources/import/ResourceRow.tsx
+msgid "Select plan"
 msgstr ""
 
 #: src/issues/create/issue-registration.html
@@ -6315,6 +6267,8 @@ msgid "Select {fieldLabel}"
 msgstr ""
 
 #: src/appstore/providers/appstore-providers.js
+#: src/marketplace/resources/import/OfferingsList.tsx
+#: src/marketplace/resources/import/ResourceRow.tsx
 msgid "Selected"
 msgstr ""
 
@@ -6556,14 +6510,12 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource-import/import-volumes-list.js
 #: src/resource/list/resource-volumes-list.js
 #: src/rijkscloud/VolumeSummary.tsx
 #: src/vmware/VMwareDiskSummary.tsx
@@ -6723,11 +6675,11 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: src/resource-import/resource-import-dialog.js
-msgid "Step 1. Select provider"
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
+msgid "Step 1. Select offering"
 msgstr ""
 
-#: src/resource-import/resource-import-dialog.html
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "Step 2. Select resources"
 msgstr ""
 
@@ -7116,6 +7068,10 @@ msgstr ""
 msgid "There are no items yet."
 msgstr ""
 
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
+msgid "There are no offerings available."
+msgstr ""
+
 #: src/marketplace/common/OfferingGrid.tsx
 msgid "There are no offerings in marketplace yet."
 msgstr ""
@@ -7146,6 +7102,10 @@ msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
 msgid "There are no requests yet."
+msgstr ""
+
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
+msgid "There are no resources available."
 msgstr ""
 
 #: src/analytics/resource-analysis-new.html
@@ -7562,6 +7522,7 @@ msgstr ""
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "Unable to load data."
 msgstr ""
 

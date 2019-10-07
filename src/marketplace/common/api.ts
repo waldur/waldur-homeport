@@ -3,9 +3,10 @@ import { ENV } from '@waldur/core/services';
 import { Customer } from '@waldur/customer/types';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import { Order, OrderItemResponse, OrderItemDetailsType } from '@waldur/marketplace/orders/types';
-import { Category, Offering, ServiceProvider, CategoryComponentUsage, PluginMetadata } from '@waldur/marketplace/types';
+import { Category, Offering, ServiceProvider, CategoryComponentUsage, PluginMetadata, ImportableResource } from '@waldur/marketplace/types';
 
 import { OfferingDocument } from '../offerings/store/types';
+import { Resource } from '../resources/types';
 import { ResourcePlanPeriod } from '../resources/usage/types';
 
 // tslint:disable: variable-name
@@ -130,3 +131,9 @@ export const terminateResource = (resource_uuid: string) =>
 
 export const changeLimits = (resource_uuid: string, limits: Record<string, number>) =>
   post(`/marketplace-resources/${resource_uuid}/update_limits/`, {limits}).then(response => response.data);
+
+export const getImportableResources = (offering_uuid: string) =>
+  getAll<ImportableResource>(`/marketplace-offerings/${offering_uuid}/importable_resources/`);
+
+export const importResource = ({offering_uuid, ...payload}): Promise<Resource> =>
+  post<Resource>(`/marketplace-offerings/${offering_uuid}/import_resource/`, payload).then(response => response.data);

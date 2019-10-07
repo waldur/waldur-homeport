@@ -5,14 +5,15 @@ import { compose } from 'redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CategoryColumn } from '@waldur/marketplace/types';
+import { isVisible } from '@waldur/store/config';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
+import { ResourceImportButton } from '../import/ResourceImportButton';
 import { Resource } from '../types';
 import { CategoryColumnField } from './CategoryColumnField';
 import { CreateResourceButton } from './CreateResourceButton';
-import { ImportResourceButton } from './ImportResourceButton';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
@@ -57,7 +58,12 @@ export const TableComponent = props => {
 
   const tableActions = (
     <>
-      <ImportResourceButton category_uuid={props.category_uuid}/>
+      {props.importVisible && (
+        <ResourceImportButton
+          category_uuid={props.category_uuid}
+          project_uuid={props.project && props.project.uuid}
+        />
+      )}
       <CreateResourceButton category_uuid={props.category_uuid}/>
     </>
   );
@@ -87,10 +93,12 @@ const TableOptions = {
 
 const mapStateToProps = state => ({
   project: getProject(state),
+  importVisible: isVisible(state, 'import'),
 });
 
 interface StateProps {
   project: Project;
+  importVisible: boolean;
 }
 
 interface OwnProps {

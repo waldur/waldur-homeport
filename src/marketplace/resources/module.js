@@ -11,6 +11,7 @@ import marketplaceResourceChangeLimitsDialog from './change-limits/ChangeLimitsD
 import marketplacePlanUsagesList from './plan-usage/PlanUsageContainer';
 import marketplacePlanUsageDialog from './plan-usage/PlanUsageDialog';
 import marketplaceResourceTerminateDialog from './terminate/TerminateContainer';
+import marketplaceResourceImportDialog from './import/ResourceImportDialog';
 
 export default module => {
   module.component('marketplaceCustomerResourcesList', marketplaceCustomerResourcesList);
@@ -26,4 +27,5 @@ export default module => {
   module.component('marketplacePlanUsagesList', marketplacePlanUsagesList);
   module.component('marketplacePlanUsageDialog', marketplacePlanUsageDialog);
   module.component('marketplaceResourceTerminateDialog', marketplaceResourceTerminateDialog);
+  module.component('marketplaceResourceImportDialog', marketplaceResourceImportDialog);
 };
