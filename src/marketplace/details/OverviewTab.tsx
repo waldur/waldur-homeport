@@ -30,7 +30,7 @@ export const OverviewTab = (props: OverviewTabProps) => (
       {props.offering.vendor_details && (
         <>
           <div className="display-flex justify-content-between align-items-baseline m-b-sm">
-            <h4>{translate('Vendor details')}</h4>
+            <h4>{translate('Service provider details')}</h4>
             <DemoButton/>
           </div>
           <div dangerouslySetInnerHTML={{__html: $sanitize(props.offering.vendor_details)}}/>

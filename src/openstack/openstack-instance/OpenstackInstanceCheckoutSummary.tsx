@@ -207,7 +207,7 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
             </tr>
             <tr>
             <td>
-              <strong>{props.translate('Vendor')}</strong>
+              <strong>{props.translate('Service provider')}</strong>
             </td>
             <td>
               <ProviderLink customer_uuid={props.offering.customer_uuid}>

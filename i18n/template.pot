@@ -366,7 +366,7 @@ msgid "Additional information"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-msgid "Additionally vendor can charge for usage of the following components"
+msgid "Additionally service provider can charge for usage of the following components"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -6327,10 +6327,15 @@ msgstr ""
 msgid "Service name"
 msgstr ""
 
+#: src/billing/billing-record-details.html
+#: src/billing/invoice-details.html
 #: src/marketplace/details/LeafletMap.tsx
+#: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Service provider"
 msgstr ""
 
@@ -6338,8 +6343,16 @@ msgstr ""
 msgid "Service provider API secret code has been generated."
 msgstr ""
 
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
+msgid "Service provider can charge for usage of the following components"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
 msgid "Service provider can report up to the requested amount over the whole active state of resource."
+msgstr ""
+
+#: src/marketplace/details/OverviewTab.tsx
+msgid "Service provider details"
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
@@ -8209,22 +8222,6 @@ msgstr ""
 
 #: src/marketplace/common/utils.ts
 msgid "Value should not be negative."
-msgstr ""
-
-#: src/billing/billing-record-details.html
-#: src/billing/invoice-details.html
-#: src/marketplace/details/OrderSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-msgid "Vendor"
-msgstr ""
-
-#: src/marketplace/details/plan/PlanDetailsTable.tsx
-msgid "Vendor can charge for usage of the following components"
-msgstr ""
-
-#: src/marketplace/details/OverviewTab.tsx
-msgid "Vendor details"
 msgstr ""
 
 #: src/navigation/app-footer.html
