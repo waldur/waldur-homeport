@@ -21,6 +21,14 @@ export const useImportDialog = (props: ImportDialogProps) => {
   const [plans, setPlans] = React.useState({});
   const [submitting, setSubmitting] = React.useState(false);
 
+  const submitEnabled = React.useMemo(() => resources.length > 0 && resources.every(
+    resource => plans[resource.backend_id] !== undefined
+  ), [resources, plans]);
+
+  const selectOffering = value => {
+    setOffering(value);
+    setResources([]);
+  };
   const assignPlan = (resource, plan) => setPlans({...plans, [resource.backend_id]: plan});
   const toggleResource = resource => setResources(toggleElement(resource, resources));
 
@@ -56,13 +64,14 @@ export const useImportDialog = (props: ImportDialogProps) => {
 
   return {
     offering,
-    setOffering,
+    selectOffering,
     offeringsProps,
     resources,
     resourceProps,
     toggleResource,
     plans,
     assignPlan,
+    submitEnabled,
     handleSubmit,
     submitting,
   };

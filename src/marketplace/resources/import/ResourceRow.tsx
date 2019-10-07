@@ -80,6 +80,7 @@ export const ResourceRow = ({ resource, value, toggleResource, offering, plans, 
             options={offering.plans}
             value={plans[resource.backend_id]}
             onChange={plan => assignPlan(resource, plan)}
+            clearable={false}
           />
         </td>
       </tr>

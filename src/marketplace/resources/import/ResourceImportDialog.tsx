@@ -19,13 +19,14 @@ export const ResourceImportDialog: React.SFC<ImportDialogProps> = props => {
 
   const {
     offering,
-    setOffering,
+    selectOffering,
     resources,
     toggleResource,
     plans,
     assignPlan,
     offeringsProps,
     resourceProps,
+    submitEnabled,
     handleSubmit,
     submitting,
   } = useImportDialog(props);
@@ -36,7 +37,7 @@ export const ResourceImportDialog: React.SFC<ImportDialogProps> = props => {
       footer={
         <>
           <ImportButton
-            disabled={resources.length === 0}
+            disabled={!submitEnabled}
             submitting={submitting}
             onClick={handleSubmit}
           />
@@ -56,7 +57,7 @@ export const ResourceImportDialog: React.SFC<ImportDialogProps> = props => {
               <OfferingsList
                 choices={offeringsProps.data}
                 value={offering}
-                onChange={setOffering}
+                onChange={selectOffering}
               />
             </Panel>
           </Col>
