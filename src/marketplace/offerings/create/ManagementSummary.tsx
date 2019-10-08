@@ -10,16 +10,22 @@ import { Section } from '@waldur/marketplace/types';
 import { getSerializer } from '@waldur/providers/registry';
 
 import { FORM_ID } from '../store/constants';
+import { hasError } from './utils';
 
 const PureManagementSummary = props => {
-  if (!props.formData) {
-    return null;
+  if (props.typeInvalid || props.optionsInvalid || props.schedulesInvalid || props.settingsInvalid) {
+    return (
+      <>
+        <h3>{translate('Management')}</h3>
+        {props.typeInvalid && <p>{translate('Type is invalid.')}</p>}
+        {props.optionsInvalid && <p>{translate('Options are invalid.')}</p>}
+        {props.schedulesInvalid && <p>{translate('Schedules are invalid.')}</p>}
+        {props.settingsInvalid && <p>{translate('Service settings are invalid.')}</p>}
+      </>
+    );
   }
 
   const type = props.formData.type;
-  if (!type) {
-    return null;
-  }
 
   const section: Section = {
     title: translate('Management'),
@@ -43,6 +49,10 @@ const PureManagementSummary = props => {
 
 const connector = connect(state => ({
   formData: getFormValues(FORM_ID)(state),
+  typeInvalid: hasError('type')(state),
+  optionsInvalid: hasError('options')(state),
+  settingsInvalid: hasError('service_settings')(state),
+  schedulesInvalid: hasError('schedules')(state),
 }));
 
 export const ManagementSummary = connector(PureManagementSummary);
