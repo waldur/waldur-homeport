@@ -85,7 +85,7 @@ const getQuotas = ({formData, usages, limits, limitsType, project, components}) 
 const getFlavor = props =>
   props.formData.flavor ? props.formData.flavor : {};
 
-const isValid = (formData, components) => !!getDailyPrice(formData, components);
+const isValid = formData => !!formData.flavor;
 
 interface OpenstackInstanceCheckoutSummaryProps extends TranslateProps {
   formData: {
@@ -108,7 +108,7 @@ interface OpenstackInstanceCheckoutSummaryProps extends TranslateProps {
 export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceCheckoutSummaryProps) => {
   return (
     <>
-      {!isValid(props.formData, props.components) && (
+      {!isValid(props.formData) && (
         <p id="invalid-info">
           {props.formData.flavor && props.translate('Resource configuration is invalid. Please fix errors in form.')}
           {!props.formData.flavor && props.translate('Please select flavor to see price estimate.')}
@@ -122,7 +122,7 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
         }}/>
       )}
       <OfferingLogo src={props.offering.thumbnail} size="small"/>
-      {isValid(props.formData, props.components) && (
+      {isValid(props.formData) && (
         <Table bordered={true}>
           <tbody>
             {props.formData.name && (
@@ -207,7 +207,7 @@ export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceChe
             </tr>
             <tr>
             <td>
-              <strong>{props.translate('Vendor')}</strong>
+              <strong>{props.translate('Service provider')}</strong>
             </td>
             <td>
               <ProviderLink customer_uuid={props.offering.customer_uuid}>

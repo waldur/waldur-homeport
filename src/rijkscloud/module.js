@@ -12,15 +12,7 @@ export default module => {
   module.config(instanceCreateConfig);
   module.config(volumeCreateConfig);
   module.config(actionConfig);
-  module.run(registerImportEndpoint);
-  module.run(registerImportEndpoint);
 };
-
-// @ngInject
-function registerImportEndpoint(ImportResourcesEndpointRegistry, ENV) {
-  ImportResourcesEndpointRegistry.registerEndpoint(ENV.resourcesTypes.vms, 'Rijkscloud', 'rijkscloud-instances');
-  ImportResourcesEndpointRegistry.registerEndpoint(ENV.resourcesTypes.volumes, 'Rijkscloud', 'rijkscloud-volumes');
-}
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {

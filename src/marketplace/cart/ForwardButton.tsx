@@ -78,4 +78,4 @@ const enhance = compose(
   withTranslation,
 );
 
-export const ForwardButton = enhance(ForwardButtonComponent) as React.ComponentClass<{}>;
+export const ForwardButton = enhance(ForwardButtonComponent);

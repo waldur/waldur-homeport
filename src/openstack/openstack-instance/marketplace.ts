@@ -66,7 +66,7 @@ const serializer = ({
   internal_ips_set: serializeInternalIps(networks),
   floating_ips: serializeFloatingIPs(networks),
   system_volume_size,
-  data_volume_size,
+  data_volume_size: data_volume_size ? data_volume_size : undefined,
   availability_zone,
 });
 

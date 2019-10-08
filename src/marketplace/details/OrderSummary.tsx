@@ -27,7 +27,7 @@ export const SummaryTable = (props: OrderSummaryProps) => (
         <td>{props.offering.name}</td>
       </tr>
       <tr>
-        <td><strong>{translate('Vendor')}</strong></td>
+        <td><strong>{translate('Service provider')}</strong></td>
         <td>
           <ProviderLink customer_uuid={props.offering.customer_uuid}>
             {props.offering.customer_name}

@@ -2,7 +2,6 @@ import openstackSnapshotsService from './openstack-snapshots-service';
 import openstackSnapshotsList from './openstack-snapshots-list';
 import openstackSnapshotsNestedList from './openstack-snapshots-nested-list';
 import restoredVolumesList from './openstack-snapshot-restored-volumes-list';
-import importModule from './import/module';
 import { OpenStackSnapshotSummary } from './OpenStackSnapshotSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { latinName } from '@waldur/resource/actions/constants';
@@ -16,7 +15,6 @@ export default module => {
   module.component('restoredVolumesList', restoredVolumesList);
   module.config(actionConfig);
   module.config(stateConfig);
-  importModule(module);
 };
 
 // @ngInject

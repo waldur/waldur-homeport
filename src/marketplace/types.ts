@@ -235,3 +235,8 @@ export interface PluginMetadata {
   available_limits: string[];
   components: PluginComponent[];
 }
+
+export interface ImportableResource {
+  backend_id: string;
+  name: string;
+}
