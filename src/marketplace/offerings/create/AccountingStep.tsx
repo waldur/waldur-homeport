@@ -17,7 +17,7 @@ interface AccountingStepProps {
   builtinComponents: OfferingComponent[];
 }
 
-export const AccountingStep = (props: AccountingStepProps) => props .type ? (
+export const AccountingStep = (props: AccountingStepProps) => props.type ? (
   <>
     {props.showLimits && props.builtinComponents.length > 0 && (
       <OfferingLimitsTable components={props.builtinComponents}/>
