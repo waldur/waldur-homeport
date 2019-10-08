@@ -38,8 +38,8 @@ const connector = connect(state => {
   const category = getCategory(state);
   if (!category) {
     return {
-      categoryInvalid,
-      attributesInvalid,
+      categoryInvalid: true,
+      attributesInvalid: true,
     };
   }
 
