@@ -609,6 +609,10 @@ msgstr ""
 msgid "Associated virtual machine was deleted!"
 msgstr ""
 
+#: src/marketplace/offerings/create/OfferingCreateContainer.tsx
+msgid "At least one plan must be entered"
+msgstr ""
+
 #: src/openstack/openstack-volume/actions/AttachAction.ts
 msgid "Attach"
 msgstr ""
@@ -626,6 +630,10 @@ msgstr ""
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 #: src/issues/create/issue-create-dialog.html
 msgid "Attachments"
+msgstr ""
+
+#: src/marketplace/offerings/create/DescriptionSummary.tsx
+msgid "Attributes are invalid."
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
@@ -1017,6 +1025,10 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
+#: src/marketplace/offerings/create/DescriptionSummary.tsx
+msgid "Category is invalid."
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 #: src/providers/details/provider-details.html
 msgid "Certifications"
@@ -1188,6 +1200,10 @@ msgstr ""
 #: src/cost-planning/cost-plan-items.html
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Components"
+msgstr ""
+
+#: src/marketplace/offerings/create/AccountingSummary.tsx
+msgid "Components are invalid."
 msgstr ""
 
 #: src/dashboard/categories.ts
@@ -3161,6 +3177,10 @@ msgstr ""
 msgid "Limits"
 msgstr ""
 
+#: src/marketplace/offerings/create/AccountingSummary.tsx
+msgid "Limits are invalid."
+msgstr ""
+
 #: src/issues/issue-detail.html
 msgid "Link"
 msgstr ""
@@ -3572,6 +3592,10 @@ msgstr ""
 
 #: src/project/ProjectNameField.tsx
 msgid "Name is duplicated. Choose other name."
+msgstr ""
+
+#: src/marketplace/offerings/create/OverviewSummary.tsx
+msgid "Name is not valid."
 msgstr ""
 
 #: src/project/ProjectNameField.tsx
@@ -4029,7 +4053,6 @@ msgstr ""
 msgid "Offering has been updated."
 msgstr ""
 
-#: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/create/ReviewStep.tsx
 msgid "Offering is not configured yet."
 msgstr ""
@@ -4194,6 +4217,10 @@ msgstr ""
 
 #: src/issues/list/IssueRow.tsx
 msgid "Opened by"
+msgstr ""
+
+#: src/marketplace/offerings/create/ManagementSummary.tsx
+msgid "Options are invalid."
 msgstr ""
 
 #: src/auth/auth-login.html
@@ -4617,6 +4644,10 @@ msgstr ""
 #: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "Planned quota usage: {usage}"
+msgstr ""
+
+#: src/marketplace/offerings/create/AccountingSummary.tsx
+msgid "Plans are invalid."
 msgstr ""
 
 #: src/ansible/application-list.js
@@ -6002,6 +6033,10 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
+#: src/marketplace/offerings/create/ManagementSummary.tsx
+msgid "Schedules are invalid."
+msgstr ""
+
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Screenshots"
 msgstr ""
@@ -6361,6 +6396,10 @@ msgstr ""
 
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Service provider type"
+msgstr ""
+
+#: src/marketplace/offerings/create/ManagementSummary.tsx
+msgid "Service settings are invalid."
 msgstr ""
 
 #: src/resource/state/utils.ts
@@ -7325,6 +7364,10 @@ msgstr ""
 #: src/providers/provider-list.js
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
+msgstr ""
+
+#: src/marketplace/offerings/create/ManagementSummary.tsx
+msgid "Type is invalid."
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx

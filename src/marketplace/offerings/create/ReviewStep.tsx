@@ -1,7 +1,6 @@
 import * as React from 'react';
-
 import { connect } from 'react-redux';
-import { isInvalid } from 'redux-form';
+import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
@@ -11,9 +10,8 @@ import { DescriptionSummary } from './DescriptionSummary';
 import { ManagementSummary } from './ManagementSummary';
 import { OverviewSummary } from './OverviewSummary';
 
-const PureReviewStep = props => props.invalid ? (
-  <p className="text-center">{translate('Offering is not configured yet.')}</p>
-) : (
+const PureReviewStep = props => !props.hasData ?
+  <p className="text-center">{translate('Offering is not configured yet.')}</p> : (
   <>
     <OverviewSummary/>
     <ManagementSummary/>
@@ -23,7 +21,7 @@ const PureReviewStep = props => props.invalid ? (
 );
 
 const connector = connect(state => ({
-  invalid: isInvalid(FORM_ID)(state),
+  hasData: Boolean(getFormValues(FORM_ID)(state)),
 }));
 
 export const ReviewStep = connector(PureReviewStep);

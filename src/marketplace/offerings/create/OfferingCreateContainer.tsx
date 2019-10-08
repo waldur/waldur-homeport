@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import { $state } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { loadDataStart, setStep } from '../store/actions';
@@ -44,12 +45,21 @@ export const mergeProps = (stateProps, dispatchProps, ownProps) => ({
 
 const connector = connect(mapStateToProps, mapDispatchToProps, mergeProps);
 
+const validate = values => {
+  const errors: any = {};
+  if (!values.plans || !values.plans.length) {
+    errors.plans = {_error: translate('At least one plan must be entered')};
+  }
+  return errors;
+};
+
 const enhance = compose(
   connector,
   reduxForm({
     form: FORM_ID,
     enableReinitialize: true,
     destroyOnUnmount: false,
+    validate,
   }),
 );
 

@@ -28,7 +28,12 @@ export const Wizard = withTranslation((props: WizardProps) => (
       onClick={props.setStep}
       disabled={props.submitting}
     />
-    {React.createElement(props.tabs[props.step])}
+    {/* Render all tabs so that all validators would be processed */}
+    {props.steps.map(step =>
+      <div key={step} className={step === props.step ? undefined : 'hidden'}>
+        {React.createElement(props.tabs[step])}
+      </div>
+    )}
     <div className="form-group">
       <Col smOffset={2} sm={8}>
         <div className="display-flex justify-content-between m-t-md">
