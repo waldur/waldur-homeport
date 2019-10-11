@@ -47,7 +47,6 @@ export const Wizard = withTranslation((props: WizardProps) => (
           />
           {!props.isLastStep && (
             <ActionButton
-              disabled={props.invalid}
               title={props.translate('Next')}
               action={props.goNext}
               icon="fa fa-arrow-right"
