@@ -56,6 +56,7 @@ function* handleCategoryChange(action) {
       }
     }
   }
+  yield put(change(constants.FORM_ID, 'category', category));
   yield put(change(constants.FORM_ID, 'attributes', attributes));
 }
 

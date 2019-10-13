@@ -35,7 +35,7 @@ const parseAttributes = (category: Category, attributes) => {
       if (meta.type === 'choice') {
         attr = meta.options.find(opt => opt.key === attr);
       } else if (meta.type === 'list' && Array.isArray(attr)) {
-        attr = attr.map(choice => meta.options.find(opt => opt.key === choice));
+        attr = attr.map(choice => meta.options.find(opt => opt.key === choice)).filter(x => x !== undefined);
       }
     }
     return {

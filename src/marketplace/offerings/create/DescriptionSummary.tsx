@@ -8,27 +8,39 @@ import { AttributesTable } from '@waldur/marketplace/details/attributes/Attribut
 import { FORM_ID } from '../store/constants';
 import { getCategory } from '../store/selectors';
 import { formatAttributes } from '../store/utils';
+import { hasError } from './utils';
 
-const PureDescriptionSummary = props => props.category ? (
+const PureDescriptionSummary = props => (
   <>
     <h3>{translate('Description')}</h3>
-    <p>
-      <strong>{translate('Category')}</strong>: {props.category.title}
-    </p>
-    {props.attributes && (
-      <AttributesTable
-        attributes={props.attributes}
-        sections={props.sections}
-      />
-    )}
+    {props.categoryInvalid ? <p>{translate('Category is invalid.')}</p> :
+     props.attributesInvalid ? <p>{translate('Attributes are invalid.')}</p> : (
+       <>
+        <p>
+          <strong>{translate('Category')}</strong>: {props.category.title}
+        </p>
+        {props.attributes && (
+          <AttributesTable
+            attributes={props.attributes}
+            sections={props.sections}
+          />
+        )}
+       </>
+     )}
   </>
-) : null;
+);
 
 const connector = connect(state => {
+  const categoryInvalid = hasError('category')(state);
+  const attributesInvalid = hasError('attributes')(state);
+
   const formData: any = getFormValues(FORM_ID)(state);
   const category = getCategory(state);
   if (!category) {
-    return {};
+    return {
+      categoryInvalid: true,
+      attributesInvalid: true,
+    };
   }
 
   const attributes = formatAttributes(category, formData.attributes || {});
@@ -39,6 +51,8 @@ const connector = connect(state => {
     sections,
     attributes,
     category,
+    categoryInvalid,
+    attributesInvalid,
   };
 });
 
