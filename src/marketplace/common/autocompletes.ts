@@ -9,6 +9,7 @@ import {
 export const organizationAutocomplete = (query: string) => {
   const params = {
     name: query,
+    has_resources: true,
     field: ['name', 'uuid'],
     o: 'name',
   };
