@@ -2,7 +2,7 @@ import { ENV } from '@waldur/core/services';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-export const required = value => value ? undefined :
+export const required = value => value || value === 0 ? undefined :
   translate('This field is required.');
 
 export const latinName = (value: string) => {

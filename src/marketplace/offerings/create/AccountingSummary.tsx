@@ -9,7 +9,7 @@ import { FORM_ID } from '../store/constants';
 import { getType, getComponents } from '../store/selectors';
 import { hasError } from './utils';
 
-const PureAccountingSummary = props => (
+const PureAccountingSummary = props => (props.formData && props.formData.plans) ? (
   <>
     <h3>{translate('Accounting')}</h3>
     {props.plansInvalid ? <p>{translate('Plans are invalid.')}</p> :
@@ -41,7 +41,9 @@ const PureAccountingSummary = props => (
                         {(plan.quotas && component.billing_type === 'fixed') ? plan.quotas[component.type] : 'N/A'}
                       </td>
                       <td>
-                        {(plan.prices && plan.prices[component.type]) || 'N/A'}
+                        {(plan.prices && plan.prices[component.type] || plan.prices[component.type] === 0)
+                              ? plan.prices[component.type]
+                              : 'N/A'}
                       </td>
                       <td>
                         {component.measured_unit}
@@ -56,7 +58,7 @@ const PureAccountingSummary = props => (
        </>
      )}
   </>
-);
+) : null;
 
 const connector = connect(state => {
   const formData: any = getFormValues(FORM_ID)(state);
@@ -65,7 +67,8 @@ const connector = connect(state => {
   return {
     formData,
     components,
-    plansInvalid: hasError('plans')(state),
+    // Temporary workaround for unclean error reporting for plans
+    plansInvalid: false, // hasError('plans')(state),
     componentsInvalid: hasError('components')(state),
     limitsInvalid: hasError('limits')(state),
   };
