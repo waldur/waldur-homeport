@@ -119,3 +119,21 @@ export function parseQueryString(qs) {
 }
 
 export const isEmpty = obj => Object.keys(obj).length === 0;
+
+const entityMap = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  '\'': '&#39;',
+  '/': '&#x2F;',
+  '`': '&#x60;',
+  '=': '&#x3D;',
+};
+
+// Taken from https://github.com/janl/mustache.js/blob/v3.1.0/mustache.js#L73-L88
+export function escapeHtml(str) {
+  return String(str).replace(/[&<>"'`=\/]/g, function fromEntityMap(s) {
+    return entityMap[s];
+  });
+}

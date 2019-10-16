@@ -1,3 +1,4 @@
+import { escapeHtml } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Attachment } from '@waldur/issues/attachments/types';
 import { getFileName } from '@waldur/issues/attachments/utils';
@@ -56,7 +57,7 @@ export const renderLink = (href: string, name: string = href, download: boolean 
 // and JIRA Text Formatting Notation: https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all
 
 export const formatJiraMarkup = (text: string = '', attachments: Attachment[] = []): string => (
-  text
+  escapeHtml(text)
 
     // Bold
     .replace(/\*(\S.*)\*/g, '<b>$1</b>')
