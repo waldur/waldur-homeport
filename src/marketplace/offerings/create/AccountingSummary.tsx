@@ -41,7 +41,9 @@ const PureAccountingSummary = props => (
                         {(plan.quotas && component.billing_type === 'fixed') ? plan.quotas[component.type] : 'N/A'}
                       </td>
                       <td>
-                        {(plan.prices && plan.prices[component.type]) || 'N/A'}
+                        {(plan.prices && plan.prices[component.type] || plan.prices[component.type] === 0)
+                              ? plan.prices[component.type]
+                              : 'N/A'}
                       </td>
                       <td>
                         {component.measured_unit}
