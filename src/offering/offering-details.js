@@ -97,6 +97,16 @@ const offeringDetails = {
       this.BreadcrumbsService.activeItem = this.offering.name;
     }
 
+    afterInstanceRemove() {
+      this.offeringsService.clearAllCacheForCurrentEndpoint();
+      if (this.offering.marketplace_category_uuid) {
+        this.$state.go('marketplace-project-resources', {
+          category_uuid: this.offering.marketplace_category_uuid,
+          uuid: this.offering.project_uuid,
+        });
+      }
+    }
+
     handleActionException(response) {
       if (response.status === 409) {
         let message = response.data.detail || response.data.status;
