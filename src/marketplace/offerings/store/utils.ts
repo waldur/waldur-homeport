@@ -1,4 +1,4 @@
-import { omit } from '@waldur/core/utils';
+import { omit, pick } from '@waldur/core/utils';
 import { Customer } from '@waldur/customer/types';
 import { showOfferingLimits } from '@waldur/marketplace/common/registry';
 import { OptionField, Category, Attribute, OfferingComponent } from '@waldur/marketplace/types';
@@ -111,7 +111,6 @@ export const formatOfferingRequest = (request: OfferingFormData, components: Off
     customer: customer ? customer.url : undefined,
     type: request.type ? request.type.value : undefined,
     service_attributes: request.service_settings,
-    schedules: request.schedules,
     shared: true,
   };
   if (request.attributes) {
@@ -123,12 +122,10 @@ export const formatOfferingRequest = (request: OfferingFormData, components: Off
   }
 
   if (request.schedules) {
-    const { schedules } = request;
     result.attributes = {
       ...result.attributes,
-      schedules,
+      schedules: request.schedules.map(pick(['start', 'end', 'title'])),
     };
-    delete result.schedules;
   }
 
   if (request.plans) {
