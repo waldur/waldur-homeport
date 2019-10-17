@@ -6,13 +6,9 @@ import { required } from '@waldur/core/validators';
 
 import { getBillingPeriods } from './constants';
 
-interface PlanBillingPeriodFieldProps {
-  plan: string;
-}
-
-export const PlanBillingPeriodField = (props: PlanBillingPeriodFieldProps) => (
+export const PlanBillingPeriodField = () => (
   <Field
-    name={`${props.plan}.unit`}
+    name="unit"
     validate={required}
     component={fieldProps => (
       <Select

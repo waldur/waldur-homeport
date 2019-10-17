@@ -9,10 +9,6 @@ import { ComponentLimitPeriodField, LimitPeriodOption } from './ComponentLimitPe
 import { ComponentMaxValueField } from './ComponentMaxValueField';
 import { ComponentMinValueField } from './ComponentMinValueField';
 
-interface OwnProps {
-  component: string;
-}
-
 interface Values {
   billingType: {
     value: BillingType
@@ -21,27 +17,24 @@ interface Values {
   disableQuotas: boolean;
 }
 
-const enhance = formValues(props => ({
-  billingType: `${props.component}.billing_type`,
-  limitPeriod: `${props.component}.limit_period`,
-  disableQuotas: `${props.component}.disable_quotas`,
+const enhance = formValues(() => ({
+  billingType: 'billing_type',
+  limitPeriod: 'limit_period',
+  disableQuotas: 'disable_quotas',
 }));
 
-export const ComponentLimit = enhance((props: Values & OwnProps) => (
+export const ComponentLimit = enhance((props: Values) => (
   props.billingType && props.billingType.value === 'usage' ? (
     <>
-      <ComponentLimitPeriodField
-        component={props.component}
-        limitPeriod={props.limitPeriod}
-      />
-      <ComponentLimitAmountField component={props.component}/>
-      <ComponentDisableQuotaField component={props.component}/>
+      <ComponentLimitPeriodField limitPeriod={props.limitPeriod}/>
+      <ComponentLimitAmountField/>
+      <ComponentDisableQuotaField/>
       {!props.disableQuotas && (
         <>
-          <ComponentMinValueField component={props.component}/>
-          <ComponentMaxValueField component={props.component}/>
+          <ComponentMinValueField/>
+          <ComponentMaxValueField/>
         </>
       )}
     </>
   ) : null
-)) as React.ComponentType<OwnProps>;
+)) as React.ComponentType<{}>;

@@ -57,8 +57,6 @@ const enhance = compose(
   connector,
   reduxForm({
     form: FORM_ID,
-    enableReinitialize: true,
-    destroyOnUnmount: false,
     validate,
   }),
 );
