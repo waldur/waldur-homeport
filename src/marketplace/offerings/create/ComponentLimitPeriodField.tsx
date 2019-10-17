@@ -27,14 +27,13 @@ export function getLimitPeriods(): LimitPeriodOption[] {
 }
 
 interface Props {
-  component: string;
   limitPeriod: LimitPeriodOption;
 }
 
 export const ComponentLimitPeriodField = (props: Props) => (
   <FormGroup label={translate('Limit period')}>
     <Field
-      name={`${props.component}.limit_period`}
+      name="limit_period"
       component={fieldProps => (
         <Select
           value={fieldProps.input.value}

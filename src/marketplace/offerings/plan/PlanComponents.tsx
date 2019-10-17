@@ -10,7 +10,6 @@ interface PlanComponentsProps extends TranslateProps {
   archived: boolean;
   components: OfferingComponent[];
   limits: string[];
-  plan: string;
 }
 
 const numberValidators = [required, validateNonNegative];
@@ -45,7 +44,7 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
                 component="input"
                 min={0}
                 className="form-control"
-                name={`${props.plan}.quotas.${component.type}`}
+                name={`quotas.${component.type}`}
                 type="number"
                 validate={props.archived ? undefined : numberValidators}
                 inputMode="numeric"
@@ -61,7 +60,7 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
               component="input"
               min={0}
               className="form-control"
-              name={`${props.plan}.prices.${component.type}`}
+              name={`prices.${component.type}`}
               type="number"
               validate={props.archived ? undefined : numberValidators}
               inputMode="numeric"

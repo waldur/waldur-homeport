@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Panel from 'react-bootstrap/lib/Panel';
-import { WrappedFieldArrayProps } from 'redux-form';
+import { WrappedFieldArrayProps, FormSection } from 'redux-form';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
@@ -34,10 +34,11 @@ export const ComponentsList = withTranslation((props: ComponentsListProps) => (
             <h4>{props.translate('Component #{index}', {index: index + 1})}</h4>
           </Panel.Heading>
           <Panel.Body>
-            <ComponentForm
-              component={component}
-              removeOfferingQuotas={() => props.removeOfferingQuotas(props.fields.get(index).type)}
-            />
+            <FormSection name={component}>
+              <ComponentForm
+                removeOfferingQuotas={() => props.removeOfferingQuotas(props.fields.get(index).type)}
+              />
+            </FormSection>
           </Panel.Body>
         </Panel>
       ))}

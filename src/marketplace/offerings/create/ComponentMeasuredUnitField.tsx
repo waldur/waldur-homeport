@@ -4,16 +4,12 @@ import { Field } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-interface Props {
-  component: string;
-}
-
-export const ComponentMeasuredUnitField = (props: Props) => (
+export const ComponentMeasuredUnitField: React.FC<{}> = () => (
   <FormGroup label={translate('Measured unit')}>
     <Field
       component="input"
       className="form-control"
-      name={`${props.component}.measured_unit`}
+      name="measured_unit"
       type="text"
     />
   </FormGroup>
