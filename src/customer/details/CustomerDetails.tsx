@@ -16,7 +16,7 @@ interface  CustomerDetailsProps extends TranslateProps {
   nativeNameVisible: boolean;
 }
 
-export const PureCustomerDetails: React.SFC<CustomerDetailsProps> = ({
+export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
   translate, customer, organizationSubnetsVisible, nativeNameVisible, organizationDomainVisible,
 }) => (
   <Panel>

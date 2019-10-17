@@ -24,7 +24,7 @@ interface IssueTableProps extends TableProps, OwnProps {
   filterColumns(cols: Column[]): Column[];
 }
 
-export const TableComponent: React.SFC<IssueTableProps> = props => {
+export const TableComponent: React.FC<IssueTableProps> = props => {
   const { filterColumns, supportOrStaff, hiddenColumns, ...rest } = props;
   const columns = filterColumns([
     {

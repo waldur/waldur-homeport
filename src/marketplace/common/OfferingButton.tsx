@@ -14,7 +14,7 @@ interface OfferingButtonProps {
   disabled?: boolean;
 }
 
-export const OfferingButton: React.SFC<OfferingButtonProps> = (props: OfferingButtonProps) => {
+export const OfferingButton: React.FC<OfferingButtonProps> = (props: OfferingButtonProps) => {
   if (props.flavor === 'primary') {
     return (
       <button

@@ -12,7 +12,7 @@ interface NavbarIndicatorProps {
   params?: Record<string, string>;
 }
 
-export const NavbarIndicator: React.SFC<NavbarIndicatorProps> = (props: NavbarIndicatorProps) => (
+export const NavbarIndicator: React.FC<NavbarIndicatorProps> = (props: NavbarIndicatorProps) => (
   <li className="navbar-indicator">
     <Link state={props.state} params={props.params}>
       <i className={props.iconClass}/>

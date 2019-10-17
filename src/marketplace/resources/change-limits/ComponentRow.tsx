@@ -30,7 +30,7 @@ const CellWrapper = props => (
   </td>
 );
 
-export const ComponentRow: React.SFC<Props> = ({component, limits}) => (
+export const ComponentRow: React.FC<Props> = ({component, limits}) => (
   <tr>
     <td>
       <p className="form-control-static">

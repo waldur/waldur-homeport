@@ -6,7 +6,7 @@ import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/re
 import { Schedule } from '@waldur/resource/types';
 import { formatRetentionTime, formatSchedule } from '@waldur/resource/utils';
 
-export const PureScheduleSummary: React.SFC<ResourceSummaryProps<Schedule>> = props => {
+export const PureScheduleSummary: React.FC<ResourceSummaryProps<Schedule>> = props => {
   const { translate, resource } = props;
   return (
     <>

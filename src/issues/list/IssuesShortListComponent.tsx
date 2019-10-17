@@ -10,7 +10,7 @@ import { Issue } from './types';
 
 type Props = QueryChildProps<Issue[]>;
 
-export const IssuesShortListComponent: React.SFC<Props> = ({ loading, data, loadData }) => (
+export const IssuesShortListComponent: React.FC<Props> = ({ loading, data, loadData }) => (
   <div className="ibox float-e-margins">
     <div className="ibox-title">
       <span className="pull-right">

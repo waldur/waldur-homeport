@@ -12,7 +12,7 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { loadData } from './utils';
 
-export const AzureVirtualMachineForm: React.SFC<OfferingConfigurationFormProps> = props => (
+export const AzureVirtualMachineForm: React.FC<OfferingConfigurationFormProps> = props => (
   <Query variables={props.offering.scope_uuid} loader={loadData}>
     {({ loading, error, data }) => {
       if (loading) {

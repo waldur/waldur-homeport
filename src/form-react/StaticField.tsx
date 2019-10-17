@@ -7,7 +7,7 @@ interface StaticFieldProps {
   controlClass?: string;
 }
 
-export const StaticField: React.SFC<StaticFieldProps> = props => {
+export const StaticField: React.FC<StaticFieldProps> = props => {
   return (
     <div className="form-group">
       <label className={`${props.labelClass} control-label`}>

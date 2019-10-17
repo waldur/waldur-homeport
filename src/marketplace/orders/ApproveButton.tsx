@@ -10,7 +10,7 @@ interface ApproveButtonProps {
   className?: string;
 }
 
-export const ApproveButton: React.SFC<ApproveButtonProps> = ({onClick, submitting, tooltip, className}: ApproveButtonProps) =>
+export const ApproveButton: React.FC<ApproveButtonProps> = ({onClick, submitting, tooltip, className}: ApproveButtonProps) =>
   wrapTooltip(tooltip, (
     <button
       type="button"

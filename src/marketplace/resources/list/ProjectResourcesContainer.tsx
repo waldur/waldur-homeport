@@ -28,7 +28,7 @@ function updateBreadcrumbs(category: Category) {
   });
 }
 
-export const ProjectResourcesContainer: React.SFC<{}> = () => (
+export const ProjectResourcesContainer: React.FC<{}> = () => (
   <Query loader={loadData} variables={$state.params.category_uuid}>
     {({ loading, data, error }) => {
       if (loading) {

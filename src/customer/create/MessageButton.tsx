@@ -7,7 +7,7 @@ interface MessageButtonProps {
   iconClass: string;
 }
 
-export const MessageButton: React.SFC<MessageButtonProps> = ({ title, children, iconClass }) => (
+export const MessageButton: React.FC<MessageButtonProps> = ({ title, children, iconClass }) => (
   <div className="message-button">
     <i className={iconClass}/>
     {title && (<div className="message-button__title">{title}</div>)}

@@ -8,7 +8,7 @@ interface TermsOfServiceProps {
   agreementDate: string;
 }
 
-export const TermsOfService: React.SFC<TermsOfServiceProps> = (props: TermsOfServiceProps) => {
+export const TermsOfService: React.FC<TermsOfServiceProps> = (props: TermsOfServiceProps) => {
   return (
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-9">

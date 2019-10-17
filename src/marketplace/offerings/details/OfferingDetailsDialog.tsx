@@ -26,7 +26,7 @@ async function loadData(offering_uuid: string) {
   };
 }
 
-const OfferingDetailsDialog: React.SFC<OfferingDetailsDialogProps> = props => (
+const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => (
   <ModalDialog title={translate('Offering details')} footer={<CloseDialogButton/>}>
     <Query loader={loadData} variables={props.resolve.offeringUuid}>
       {({ loading, data, error }) => {

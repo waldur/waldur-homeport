@@ -15,7 +15,7 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 const loadData = (settings_uuid: string) =>
   getLocations(settings_uuid).then(locations => ({ locations }));
 
-export const AzureSQLServerForm: React.SFC<OfferingConfigurationFormProps> = props => (
+export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = props => (
   <Query variables={props.offering.scope_uuid} loader={loadData}>
   {({ loading, error, data }) => {
       if (loading) {

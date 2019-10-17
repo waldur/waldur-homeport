@@ -13,7 +13,7 @@ interface OfferingSummaryProps {
   summary?: string;
 }
 
-const OfferingSummary: React.SFC<OfferingSummaryProps> = props => (
+const OfferingSummary: React.FC<OfferingSummaryProps> = props => (
   <div className="wrapper wrapper-content">
     <div className="ibox-content">
       <Row>

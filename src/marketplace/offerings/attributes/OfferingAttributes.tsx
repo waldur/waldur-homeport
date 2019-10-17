@@ -14,7 +14,7 @@ interface OfferingAttributesProps {
   controlCols?: number;
 }
 
-export const OfferingAttributes: React.SFC<OfferingAttributesProps> = props => (
+export const OfferingAttributes: React.FC<OfferingAttributesProps> = props => (
   <>
     {props.sections.map((section, sectionIndex) => (
       <div key={sectionIndex}>

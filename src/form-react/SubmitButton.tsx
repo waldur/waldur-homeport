@@ -7,7 +7,7 @@ interface SubmitButtonProps {
   className?: string;
 }
 
-export const SubmitButton: React.SFC<SubmitButtonProps> = (props: SubmitButtonProps) => (
+export const SubmitButton: React.FC<SubmitButtonProps> = (props: SubmitButtonProps) => (
   <button
     type="submit"
     className={props.className}

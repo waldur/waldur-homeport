@@ -25,7 +25,7 @@ const RowWrapper = props => (
   </ComponentRow>
 );
 
-export const ComponentEditRow: React.SFC<Props> = props => (
+export const ComponentEditRow: React.FC<Props> = props => (
   <Field
     name={`limits.${props.component.type}`}
     parse={parseIntField}

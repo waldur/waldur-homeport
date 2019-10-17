@@ -86,6 +86,6 @@ const getMessage = (orderItem: OrderItemDetailsType): string => {
   }
 };
 
-export const OrderItemSummary: React.SFC<OrderItemSummaryProps> = props => (
+export const OrderItemSummary: React.FC<OrderItemSummaryProps> = props => (
   <span>{getMessage(props.orderItem)}</span>
 );

@@ -11,7 +11,7 @@ interface FormContainerProps {
   layout?: 'horizontal' | 'vertical';
 }
 
-export const FormContainer: React.SFC<FormContainerProps> = props => (
+export const FormContainer: React.FC<FormContainerProps> = props => (
   <div>
     {React.Children.map(props.children, (input: any) => (input && input.props.name ?
       <Field

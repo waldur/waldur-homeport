@@ -33,7 +33,7 @@ async function loadData(resourceId: string) {
   };
 }
 
-const PlanDetailsDialog: React.SFC<PlanDetailsDialogProps> = props => (
+const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = props => (
   <ModalDialog title={translate('Plan details')} footer={<CloseDialogButton/>}>
     <Query loader={loadData} variables={props.resolve.resourceId}>
       {({ loading, data, error }) => {
