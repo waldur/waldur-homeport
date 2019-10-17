@@ -10,7 +10,7 @@ interface Props {
   className?: string;
 }
 
-export const OfferingAutocomplete: React.SFC<Props> = props => (
+export const OfferingAutocomplete: React.FC<Props> = props => (
   <div className={`form-group ${props.className}`}>
     <label className="control-label">
       {translate('Offering')}

@@ -88,7 +88,7 @@ const OrderDetailsComponent = props => {
   );
 };
 
-export const OrderDetails: React.SFC<OrderDetailsProps> = props => (
+export const OrderDetails: React.FC<OrderDetailsProps> = props => (
   <Query variables={props.stateChangeStatus} loader={loadOrder}>
     {({ loading, loaded, error, data, loadData }) => {
       // Don't render loading indicator if order item is refreshing

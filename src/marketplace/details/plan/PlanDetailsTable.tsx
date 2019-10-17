@@ -57,7 +57,7 @@ const UsageRows = (props: {periods: string[], components: Component[], viewMode:
   )
 );
 
-export const PureDetailsTable: React.SFC<PlanDetailsTableProps> = (props: PlanDetailsTableProps) => {
+export const PureDetailsTable: React.FC<PlanDetailsTableProps> = (props: PlanDetailsTableProps) => {
   if (props.components.length === 0) {
     return null;
   }

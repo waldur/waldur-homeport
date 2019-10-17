@@ -21,7 +21,7 @@ export class RadioButtonChoice {
   }
 }
 
-export const RadioButtonField: React.SFC<RadioButtonFieldProps> = props => {
+export const RadioButtonField: React.FC<RadioButtonFieldProps> = props => {
   const { input, choices, WrapperElement, wrapperClassName, ItemElement, defaultItemClassName, isHiddenInput, ...rest } = props;
   return (
     <WrapperElement className={wrapperClassName}>

@@ -6,14 +6,14 @@ import './OfferingTabs.scss';
 
 export interface OfferingTab {
   title: React.ReactNode;
-  component: React.SFC<{}>;
+  component: React.FC<{}>;
 }
 
 interface OfferingTabsComponentProps {
   tabs: OfferingTab[];
 }
 
-export const OfferingTabsComponent: React.SFC<OfferingTabsComponentProps> = props => {
+export const OfferingTabsComponent: React.FC<OfferingTabsComponentProps> = props => {
   if (props.tabs.length === 0) {
     return null;
   }

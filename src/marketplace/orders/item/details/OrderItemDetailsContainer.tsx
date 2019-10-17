@@ -86,7 +86,7 @@ async function loadOrderItem(order_item_uuid) {
   };
 }
 
-const OrderItemDetailsContainer: React.SFC<{}> = () => (
+const OrderItemDetailsContainer: React.FC<{}> = () => (
   <Query loader={loadOrderItem} variables={$state.params.order_item_uuid}>
     {({ loading, loaded, data, error, loadData }) => {
       // Don't render loading indicator if order item is refreshing

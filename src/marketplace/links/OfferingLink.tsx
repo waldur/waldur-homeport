@@ -16,7 +16,7 @@ interface OwnProps {
 
 type MergedProps = StateProps & OwnProps;
 
-const PureOfferingLink: React.SFC<MergedProps> = props => (
+const PureOfferingLink: React.FC<MergedProps> = props => (
   <Link
     state={props.state}
     params={{offering_uuid: props.offering_uuid}}

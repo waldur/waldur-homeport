@@ -23,7 +23,7 @@ async function loadData(offering_uuid: string) {
   return { offering, tabs, limits };
 }
 
-const OfferingDetailsPage: React.SFC<{}> = () => (
+const OfferingDetailsPage: React.FC<{}> = () => (
   <Query loader={loadData} variables={$state.params.offering_uuid}>
     {({ loading, data, error }) => {
       if (loading) {

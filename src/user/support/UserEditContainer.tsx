@@ -25,7 +25,7 @@ interface UserUpdateComponentProps {
   user: UserDetails;
 }
 
-const UserUpdateComponent: React.SFC<UserUpdateComponentProps> = props => {
+const UserUpdateComponent: React.FC<UserUpdateComponentProps> = props => {
   return (
     <div className="row">
       <div className="col-sm-2 col-xs-12 user-edit">

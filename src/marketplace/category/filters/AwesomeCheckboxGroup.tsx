@@ -15,7 +15,7 @@ interface AwesomeCheckBoxGroupProps {
   groupType?: string;
 }
 
-export const AwesomeCheckBoxGroup: React.SFC<AwesomeCheckBoxGroupProps> = (props: AwesomeCheckBoxGroupProps) => (
+export const AwesomeCheckBoxGroup: React.FC<AwesomeCheckBoxGroupProps> = (props: AwesomeCheckBoxGroupProps) => (
   <span>
     {props.options.map((option, index) => (
       <div key={index} className="m-l-sm">

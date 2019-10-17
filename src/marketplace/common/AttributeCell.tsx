@@ -10,7 +10,7 @@ interface AttributeCellProps {
   attr: Attribute;
 }
 
-export const AttributeCell: React.SFC<AttributeCellProps> = ({ attr, value }) => {
+export const AttributeCell: React.FC<AttributeCellProps> = ({ attr, value }) => {
   switch (attr.type) {
     case 'list': {
       const titles = [];

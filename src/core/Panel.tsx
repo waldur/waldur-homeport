@@ -7,7 +7,7 @@ interface PanelProps {
   actions?: React.ReactNode;
 }
 
-const Panel: React.SFC<PanelProps> = ({ title, children, className, actions }) => (
+const Panel: React.FC<PanelProps> = ({ title, children, className, actions }) => (
   <div className={classNames('ibox', className)}>
     {title && (
       <div className="ibox-title">

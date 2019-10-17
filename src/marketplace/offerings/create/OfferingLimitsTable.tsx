@@ -10,7 +10,7 @@ interface Props {
   components: OfferingComponent[];
 }
 
-export const OfferingLimitsTable: React.SFC<Props> = props => (
+export const OfferingLimitsTable: React.FC<Props> = props => (
   <div className="form-group">
     <Col smOffset={2} sm={8} className="m-b-sm">
       <p className="form-control-static">

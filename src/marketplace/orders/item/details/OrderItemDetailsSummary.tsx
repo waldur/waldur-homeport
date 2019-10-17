@@ -10,7 +10,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
-const PureOrderItemDetailsSummary: React.SFC<OrderSummaryProps> = (props: OrderSummaryProps) => (
+const PureOrderItemDetailsSummary: React.FC<OrderSummaryProps> = (props: OrderSummaryProps) => (
   <>
     <OfferingLogo src={props.offering.thumbnail} size="small"/>
     <SummaryTable {...props}/>

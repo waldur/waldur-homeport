@@ -17,7 +17,7 @@ import NgComponent from './ngcomponent';
  *   ```
  */
 export function react2angular<Props>(
-  Class: React.ComponentClass<Props> | React.SFC<Props>,
+  Class: React.ComponentClass<Props> | React.FC<Props>,
   bindingNames: Array<(keyof Props)> | null = null,
   injectNames: string[] = []
 ): IComponentOptions {

@@ -16,7 +16,7 @@ interface PureUserDashboardProps extends TranslateProps {
   renderCustomerCreatePrompt: boolean;
 }
 
-const PureUserDashboard: React.SFC<PureUserDashboardProps> = props => (
+const PureUserDashboard: React.FC<PureUserDashboardProps> = props => (
   <div className="wrapper wrapper-content">
     {props.renderCustomerCreatePrompt &&
       <div className="row">

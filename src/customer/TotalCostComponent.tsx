@@ -45,7 +45,7 @@ const loadData = async (filter: CustomerFilterData) => {
   }
 };
 
-const TotalCostComponent: React.SFC<CustomerListComponentProps> = props => (
+const TotalCostComponent: React.FC<CustomerListComponentProps> = props => (
   <Query variables={props.customerListFilter} loader={loadData}>
     {({ loading, error, data }) => {
       if (loading) {

@@ -12,7 +12,7 @@ interface OfferingHeaderProps {
   offering: Offering;
 }
 
-export const OfferingHeader: React.SFC<OfferingHeaderProps> = props => (
+export const OfferingHeader: React.FC<OfferingHeaderProps> = props => (
   <dl className="dl-horizontal resource-details-table col-sm-12">
     <Field
       label={translate('Name')}
