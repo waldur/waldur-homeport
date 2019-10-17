@@ -83,39 +83,28 @@ const offeringDetails = {
         {
           label: gettext('Resources'),
         },
-        {
-          label: gettext('Requests'),
-          state: 'project.resources.offerings',
-          params: {
-            uuid: this.offering.project_uuid
-          }
-        }
       ];
-      if (isOracleOffering(this.offering)) {
-        this.BreadcrumbsService.items[this.BreadcrumbsService.items.length - 1] = {
-          label: gettext('Oracle'),
-          state: 'project.resources.oracle',
-          params: {
-            uuid: this.offering.project_uuid
-          }
-        };
-      } else if (this.offering.marketplace_category_name) {
-        this.BreadcrumbsService.items[this.BreadcrumbsService.items.length - 1] = {
+      if (this.offering.marketplace_category_name) {
+        this.BreadcrumbsService.items.push({
           label: this.offering.marketplace_category_name,
           state: 'marketplace-project-resources',
           params: {
             category_uuid: this.offering.marketplace_category_uuid,
             uuid: this.offering.project_uuid,
           },
-        };
+        });
       }
       this.BreadcrumbsService.activeItem = this.offering.name;
     }
 
     afterInstanceRemove() {
       this.offeringsService.clearAllCacheForCurrentEndpoint();
-      const state = isOracleOffering(this.offering) ? 'project.resources.oracle' : 'project.resources.offerings';
-      this.$state.go(state, {uuid: this.offering.project_uuid});
+      if (this.offering.marketplace_category_uuid) {
+        this.$state.go('marketplace-project-resources', {
+          category_uuid: this.offering.marketplace_category_uuid,
+          uuid: this.offering.project_uuid,
+        });
+      }
     }
 
     handleActionException(response) {
