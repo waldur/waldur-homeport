@@ -64,6 +64,7 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
               type="number"
               validate={props.archived ? undefined : numberValidators}
               inputMode="numeric"
+              step="0.0000001"
             />
           </td>
           <td>
