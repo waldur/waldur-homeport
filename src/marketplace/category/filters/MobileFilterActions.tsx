@@ -14,7 +14,7 @@ interface MobileFilterActionsProps extends TranslateProps {
   filterValues?: any;
 }
 
-export const PureMobileFilterActions: React.SFC<MobileFilterActionsProps> = props => (
+export const PureMobileFilterActions: React.FC<MobileFilterActionsProps> = props => (
   <button
     type="button"
     className="btn btn-primary btn-info"

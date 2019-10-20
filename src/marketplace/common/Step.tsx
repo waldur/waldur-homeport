@@ -9,7 +9,7 @@ interface StepProps {
   disabled?: boolean;
 }
 
-export const Step: React.SFC<StepProps> = (props: StepProps) => (
+export const Step: React.FC<StepProps> = (props: StepProps) => (
   <a
     className={classNames('step', {active: props.active, disabled: props.disabled})}
     onClick={() => props.onClick()}>

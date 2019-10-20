@@ -19,7 +19,7 @@ interface AwesomeCheckboxProps {
   disabled?: boolean;
 }
 
-export const AwesomeCheckbox: React.SFC<AwesomeCheckboxProps> = (props: AwesomeCheckboxProps) => (
+export const AwesomeCheckbox: React.FC<AwesomeCheckboxProps> = (props: AwesomeCheckboxProps) => (
   <div className={
     classNames('checkbox', 'awesome-checkbox', `checkbox-${props.bsStyle}`,
       {'m-r-sm': props.marginRight}

@@ -21,7 +21,7 @@ interface ChoicesTableProps extends PureChoicesTableProps {
   filterOptions?: FilterOptions;
 }
 
-export const PureChoicesTable: React.SFC<PureChoicesTableProps> = (props: ChoicesTableProps) => (
+export const PureChoicesTable: React.FC<PureChoicesTableProps> = (props: ChoicesTableProps) => (
   <div className="table-responsive choices-table">
     <Table bsClass="table">
       <thead>

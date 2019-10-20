@@ -41,7 +41,7 @@ const renderLogo = props => {
 
 const hasChosenImage = ({ formData }) => formData && formData.image;
 
-export const CustomerEditDetails: React.SFC<CustomerEditDetailsProps> = (props: CustomerEditDetailsProps) => {
+export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = (props: CustomerEditDetailsProps) => {
   const { canEdit } = props;
   return (
     <div className="panel panel-default">

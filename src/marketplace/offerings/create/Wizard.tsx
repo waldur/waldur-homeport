@@ -16,7 +16,7 @@ interface WizardProps extends TranslateProps {
   submitting: boolean;
   invalid: boolean;
   isLastStep: boolean;
-  tabs: {[key: string]: React.ComponentType};
+  tabs: {[key: string]: React.ComponentType<any>};
   submitLabel?: string;
 }
 
@@ -31,7 +31,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
     {/* Render all tabs so that all validators would be processed */}
     {props.steps.map(step =>
       <div key={step} className={step === props.step ? undefined : 'hidden'}>
-        {React.createElement(props.tabs[step])}
+        {React.createElement(props.tabs[step], {isVisible: step === props.step})}
       </div>
     )}
     <div className="form-group">

@@ -15,7 +15,7 @@ interface ChangeLimitsDialogProps {
   submitting: boolean;
 }
 
-export const ChangeLimitsDialog: React.SFC<ChangeLimitsDialogProps> = props => (
+export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = props => (
   <Query
     variables={{resource_uuid: props.resolve.resource.marketplace_resource_uuid}}
     loader={loadData}>

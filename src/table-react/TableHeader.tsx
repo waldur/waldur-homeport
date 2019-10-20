@@ -36,7 +36,7 @@ function renderSortingIcon(column: Column, sorting: Sorting) {
   }
 }
 
-export const TableHeader: React.SFC<TableHeaderProps> = ({
+export const TableHeader: React.FC<TableHeaderProps> = ({
   columns, onSortClick, currentSorting, expandableRow,
 }) => (
   <thead>

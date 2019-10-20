@@ -15,7 +15,7 @@ interface ChangePlanDialogProps {
   submitting: boolean;
 }
 
-export const ChangePlanDialog: React.SFC<ChangePlanDialogProps> = props => (
+export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = props => (
   <Query
     variables={{resource_uuid: props.resolve.resource.marketplace_resource_uuid}}
     loader={loadData}

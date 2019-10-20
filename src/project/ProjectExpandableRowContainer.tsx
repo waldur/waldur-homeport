@@ -55,7 +55,7 @@ async function loadData(props): Promise<ExpandableRow[]> {
   return combineRows([...quotaRows, ...counterRows]);
 }
 
-export const ProjectExpandableRowContainer: React.SFC<{row: Project}> = props => (
+export const ProjectExpandableRowContainer: React.FC<{row: Project}> = props => (
   <Query loader={loadData} variables={props.row}>
     {({ loading, error, data }) => {
       if (loading) {

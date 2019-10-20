@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-export const ProviderAutocomplete: React.SFC<Props> = props => (
+export const ProviderAutocomplete: React.FC<Props> = props => (
   <div className={`form-group ${props.className}`}>
     <label className="control-label">
       {translate('Service provider')}

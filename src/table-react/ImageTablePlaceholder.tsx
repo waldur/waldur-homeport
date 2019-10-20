@@ -10,7 +10,7 @@ export interface ImageTablePlaceholderProps {
   action?: React.ReactNode;
 }
 
-export const ImageTablePlaceholder: React.SFC<ImageTablePlaceholderProps> = props => (
+export const ImageTablePlaceholder: React.FC<ImageTablePlaceholderProps> = props => (
   <Row className="ImageTablePlaceholder">
     <Col sm={6} smOffset={3}>
       <Row>

@@ -11,7 +11,7 @@ interface RatingStarsProps {
   size?: 'default' | 'medium';
 }
 
-export const RatingStars: React.SFC<RatingStarsProps> = (props: RatingStarsProps) => (
+export const RatingStars: React.FC<RatingStarsProps> = (props: RatingStarsProps) => (
   <div className={classNames('rating-stars', {
     'rating-stars-default': props.size === 'default',
     'rating-stars-medium': props.size === 'medium',

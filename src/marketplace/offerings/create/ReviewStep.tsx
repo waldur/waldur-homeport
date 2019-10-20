@@ -14,7 +14,7 @@ const PureReviewStep = props => !props.hasData ?
   <p className="text-center">{translate('Offering is not configured yet.')}</p> : (
   <>
     <OverviewSummary/>
-    <ManagementSummary/>
+    <ManagementSummary isVisible={props.isVisible}/>
     <DescriptionSummary/>
     <AccountingSummary/>
   </>

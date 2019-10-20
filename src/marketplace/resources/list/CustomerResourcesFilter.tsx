@@ -15,7 +15,7 @@ interface CustomerResourcesFilterProps {
   customer: Customer;
 }
 
-const PureCustomerResourcesFilter: React.SFC<CustomerResourcesFilterProps> = props => (
+const PureCustomerResourcesFilter: React.FC<CustomerResourcesFilterProps> = props => (
   <Row>
     <ProjectFilter customer_uuid={props.customer.uuid}/>
     <CategoryFilter/>

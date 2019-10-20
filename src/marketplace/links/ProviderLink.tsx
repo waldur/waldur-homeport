@@ -11,7 +11,7 @@ interface ProviderLinkProps {
   className?: string;
 }
 
-const PureProviderLink: React.SFC<ProviderLinkProps> = props => (
+const PureProviderLink: React.FC<ProviderLinkProps> = props => (
   <Link
     state={props.workspace === 'organization' ? 'marketplace-provider-details-customer' : 'marketplace-provider-details'}
     params={{customer_uuid: props.customer_uuid}}

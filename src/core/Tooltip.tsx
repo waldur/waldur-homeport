@@ -9,7 +9,7 @@ interface TooltipProps {
   onClick?(): void;
 }
 
-export const Tooltip: React.SFC<TooltipProps> = ({ label, children, id, className, onClick }) => (
+export const Tooltip: React.FC<TooltipProps> = ({ label, children, id, className, onClick }) => (
   <OverlayTrigger placement="top" overlay={<BootstrapTooltip id={id}>{label}</BootstrapTooltip>}>
     <span className={className} onClick={onClick}>
       {children}

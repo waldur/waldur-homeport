@@ -9,7 +9,7 @@ export interface FieldProps {
   valueClass?: string;
 }
 
-export const Field: React.SFC<FieldProps> = (props: FieldProps) =>
+export const Field: React.FC<FieldProps> = (props: FieldProps) =>
   (props.value || props.children) ? (
     <div className="m-b-xs">
       <dt>

@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { categoryAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
-export const CategoryFilter: React.SFC<{}> = () => (
+export const CategoryFilter: React.FC<{}> = () => (
   <div className="form-group col-sm-3">
     <label className="control-label">
       {translate('Category')}

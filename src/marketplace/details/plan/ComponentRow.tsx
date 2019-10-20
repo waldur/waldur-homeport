@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-export const ComponentRow: React.SFC<Props> = props => (
+export const ComponentRow: React.FC<Props> = props => (
   <tr>
     <td>
       <p className="form-control-static">
