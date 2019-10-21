@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { Link } from '@waldur/core/Link';
+
 import { ResourceDetailsLink } from '../ResourceDetailsLink';
 import { Resource } from '../types';
 
@@ -16,6 +18,15 @@ export const ResourceNameField = ({row}: ResourceNameFieldProps) => {
       </ResourceDetailsLink>
     );
   } else {
-    return label;
+    return (
+      <Link
+        state="marketplace-public-resource-details"
+        params={{
+          uuid: row.customer_uuid,
+          resource_uuid: row.uuid,
+        }}
+        label={label}
+      />
+    );
   }
 };

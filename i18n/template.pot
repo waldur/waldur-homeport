@@ -1437,6 +1437,7 @@ msgstr ""
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
@@ -4343,6 +4344,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 msgid "Organization workspace"
 msgstr ""
 
@@ -5176,6 +5178,7 @@ msgstr ""
 msgid "Public orders"
 msgstr ""
 
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Public resources"
@@ -6000,6 +6003,10 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
+#: src/marketplace/resources/ResourceDetailsPage.tsx
+msgid "Schedules"
+msgstr ""
+
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Schedules are invalid."
 msgstr ""
@@ -6650,6 +6657,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -7342,6 +7350,7 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "UUID"
 msgstr ""

@@ -22,6 +22,7 @@ export type OrderItemType =
   ;
 
 export interface OrderItemResponse {
+  name?: string;
   uuid: string;
   type: OrderItemType;
   offering: string;
@@ -48,6 +49,7 @@ export interface OrderItemResponse {
   plan_description?: string;
   plan_unit?: BillingPeriod;
   project: string;
+  customer_uuid?: string;
   category_title?: string;
   category_uuid?: string;
   created: string;
