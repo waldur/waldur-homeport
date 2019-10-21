@@ -16,7 +16,7 @@ interface OfferingDetailsProps {
 export const OfferingDetails: React.FC<OfferingDetailsProps> = props => (
   <div className="wrapper wrapper-content">
     {props.offering.shared && (
-      <div className="pull-right m-r-md">
+      <div className="pull-right m-r-md" style={{position: 'relative', zIndex: 100}}>
         <OfferingActions row={props.offering}/>
       </div>
     )}
