@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { formatDateTime, formatFromNow } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource } from '@waldur/resource/types';
 
+import { CreatedField } from './CreatedField';
 import { Field } from './Field';
 import { ResourceSummaryProps } from './types';
 
@@ -17,16 +17,6 @@ const formatErrorField = (props: ResourceSummaryProps) => {
   }
   return props.resource.error_message;
 };
-
-const formatCreatedField = (props: ResourceSummaryProps) => (
-  props.resource.created ? (
-    <span>
-      {formatFromNow(props.resource.created)}
-      {', '}
-      {formatDateTime(props.resource.created)}
-    </span>
-  ) : null
-);
 
 export function PureResourceSummaryBase<T extends Resource = any>(props: ResourceSummaryProps<T>) {
   const { translate, resource } = props;
@@ -52,7 +42,7 @@ export function PureResourceSummaryBase<T extends Resource = any>(props: Resourc
       />
       <Field
         label={translate('Created')}
-        value={formatCreatedField(props)}
+        value={<CreatedField resource={props.resource}/>}
       />
       <Field
         label={translate('UUID')}
