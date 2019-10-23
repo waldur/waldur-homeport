@@ -18,8 +18,6 @@ export const formatUserStatus = user => {
 export const formatRegistrationMethod = user => {
   if (!user.registration_method) {
     return translate('Default');
-  } else if (user.registration_method === 'openid') {
-    return translate('Estonian ID');
   } else if (user.registration_method === 'saml2') {
     return 'SAML2';
   } else {

@@ -92,10 +92,6 @@ export const authLogin = {
       return this.ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_LABEL;
     }
 
-    showEstonianId() {
-      return this.methods.ESTONIAN_ID;
-    }
-
     showValimo() {
       // Currently Valimo doesn't provide registration, only authentication is available
       return this.methods.VALIMO && this.mode !== 'register';
