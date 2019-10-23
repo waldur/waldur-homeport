@@ -29,7 +29,7 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
 
         <Field
           label={translate('Name')}
-          value={customer.name}
+          value={customer.display_name}
         />
 
         <Field
