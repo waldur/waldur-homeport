@@ -11,10 +11,6 @@ eventsRegistry.registerGroup({
       title: gettext('User {user_link} authenticated successfully with username and password.'),
     },
     {
-      key: 'auth_logged_in_with_openid',
-      title: gettext('User {user_link} authenticated successfully with OpenID.'),
-    },
-    {
       key: 'auth_logged_in_with_google',
       title: gettext('User {user_link} authenticated successfully with Google.'),
     },

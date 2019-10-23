@@ -3,7 +3,6 @@ import {
   staffUser,
   supportAndStaffUser,
   supportUser,
-  userWithEstonianId,
   userWithFacebookId
 } from '@waldur/user/support/fixtures';
 import {
@@ -21,7 +20,6 @@ describe('Utils functions', () => {
   });
 
   it('should return appropriate registration method', () => {
-    expect(formatRegistrationMethod(userWithEstonianId)).toEqual('Estonian ID');
     expect(formatRegistrationMethod(ordinaryUser)).toEqual('Default');
     expect(formatRegistrationMethod(userWithFacebookId)).toEqual('Facebook');
   });

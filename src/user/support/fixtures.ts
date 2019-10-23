@@ -19,10 +19,6 @@ export const ordinaryUser = {
   civil_number: '14124h12kj4h',
 };
 
-export const userWithEstonianId = {
-  registration_method: 'openid',
-};
-
 export const userWithFacebookId = {
   registration_method: 'facebook',
 };
