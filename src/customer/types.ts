@@ -11,6 +11,7 @@ export interface Customer {
   uuid?: string;
   email: string;
   name: string;
+  display_name?: string;
   abbreviation?: string;
   access_subnets?: string;
   accounting_start_date?: string;
