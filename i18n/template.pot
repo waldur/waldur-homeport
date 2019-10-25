@@ -153,10 +153,6 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
-#: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "Activate a virtual environment with following command:"
-msgstr ""
-
 #: src/resource/state/constants.js
 msgid "Activating"
 msgstr ""
@@ -229,10 +225,6 @@ msgstr ""
 #: src/user/keys/KeyCreateButton.tsx
 #: src/user/keys/KeyCreateForm.tsx
 msgid "Add key"
-msgstr ""
-
-#: src/ansible/python-management/form/InstalledLibrariesForm.tsx
-msgid "Add library"
 msgstr ""
 
 #: src/team/project-users-list.js
@@ -317,16 +309,8 @@ msgstr ""
 msgid "Add to comparison"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "Add user"
-msgstr ""
-
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "Add user input field"
-msgstr ""
-
-#: src/ansible/python-management/form/AddVirtualEnvironmentButton.tsx
-msgid "Add virtual environment"
 msgstr ""
 
 #: src/dashboard/categories.ts
@@ -361,10 +345,6 @@ msgstr ""
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Additional information"
-msgstr ""
-
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr ""
@@ -379,10 +359,6 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 msgid "Admin password"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "Admin rights"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerDetails.tsx
@@ -425,10 +401,6 @@ msgstr ""
 
 #: src/marketplace/resources/import/useImportDialog.tsx
 msgid "All resources have been imported."
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "All spaces, hyphens and dots will be replaced with underscores."
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
@@ -489,10 +461,6 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Any default system user (ubuntu, debian...). The user should be able to run commands as root"
-msgstr ""
-
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "Application creation has been scheduled."
 msgstr ""
@@ -511,11 +479,9 @@ msgstr ""
 
 #: src/analytics/resource-chart-service.js
 #: src/ansible/constants.js
-#: src/ansible/jupyter-hub-management/routes.js
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
 #: src/ansible/playbook-jobs/routes.js
 #: src/ansible/playbook-jobs/sidebar.js
-#: src/ansible/python-management/routes.js
 #: src/appstore/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
@@ -527,10 +493,6 @@ msgstr ""
 
 #: src/resource/list/resource-global-list-filtered.html
 msgid "Apply filters"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Apply or rerun JupyterHub configuration"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
@@ -601,14 +563,6 @@ msgstr ""
 msgid "Assigned to"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-msgid "Associated python management"
-msgstr ""
-
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Associated virtual machine was deleted!"
-msgstr ""
-
 #: src/marketplace/offerings/create/OfferingCreateContainer.tsx
 msgid "At least one plan must be entered"
 msgstr ""
@@ -664,11 +618,6 @@ msgstr ""
 msgid "Authentication events"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Authentication method"
-msgstr ""
-
 #: src/auth/valimo/auth-valimo-dialog.js
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
@@ -697,10 +646,6 @@ msgstr ""
 msgid "Availability zone"
 msgstr ""
 
-#: src/ansible/python-management/form/VirtualEnvironment.tsx
-msgid "Available as Jupyter kernel?"
-msgstr ""
-
 #: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "Available quota usage: {usage}"
@@ -712,10 +657,6 @@ msgstr ""
 
 #: src/azure/provider/AzureForm.tsx
 msgid "Azure Active Directory Application Secret"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Azure Active Directory ID"
 msgstr ""
 
 #: src/azure/sql/marketplace.ts
@@ -939,10 +880,6 @@ msgstr ""
 msgid "Calculating costs"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Callback URL"
-msgstr ""
-
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
@@ -953,9 +890,7 @@ msgstr ""
 msgid "Can't unlink system provider."
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: src/appstore/appstore-store.html
 #: src/appstore/dialog/appstore-selector-dialog.html
 #: src/auth/valimo/auth-valimo-dialog.html
@@ -1096,13 +1031,8 @@ msgstr ""
 msgid "Civil number"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 #: src/azure/provider/AzureForm.tsx
 msgid "Client ID"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Client Secret"
 msgstr ""
 
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
@@ -1226,14 +1156,6 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "Connect to a VM via SSH"
-msgstr ""
-
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Connect to a virtual machine: :22"
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Connected subnets"
 msgstr ""
@@ -1304,9 +1226,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
 #: src/appstore/appstore-store.html
 #: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
@@ -1326,16 +1246,8 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-msgid "Create JupyterHub management"
-msgstr ""
-
 #: src/vmware/actions.ts
 msgid "Create Network adapter"
-msgstr ""
-
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Create Python management"
 msgstr ""
 
 #: src/azure/sql/CreateDatabaseAction.ts
@@ -1428,7 +1340,6 @@ msgid "Create subnet"
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
-#: src/ansible/python-management/details/PythonManagementActionsHistory.tsx
 #: src/billing/billing-utils.js
 #: src/customer/CustomerList.tsx
 #: src/issues/issue-detail.html
@@ -1624,16 +1535,8 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Delete JupyterHub & all its users with all their data"
-msgstr ""
-
 #: src/resource/monitoring/ZabbixHostDeleteButton.tsx
 msgid "Delete Zabbix host"
-msgstr ""
-
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Delete python management & virtual environments"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
@@ -1758,10 +1661,6 @@ msgstr ""
 msgid "DigitalOcean provider"
 msgstr ""
 
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Directory will be created in home directory of the specified system user:/home//"
-msgstr ""
-
 #: src/freeipa/freeipa-account-edit.html
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
@@ -1884,10 +1783,6 @@ msgstr ""
 msgid "EU VAT ID"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-msgid "Each JupyterHub user is mapped to a corresponding system user. Appropriate system user will be created on a first login."
-msgstr ""
-
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
@@ -1910,10 +1805,6 @@ msgstr ""
 
 #: src/team/add-team-member.js
 msgid "Edit team member"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-msgid "Either manually define credentials or enable OAuth authentication."
 msgstr ""
 
 #: src/auth/auth-login.html
@@ -1953,15 +1844,10 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Ensure that the following public key is present in /home//.ssh/authorized_keys file."
-msgstr ""
-
 #: src/resource/actions/dialog/action-field-datetime.html
 msgid "Enter date"
 msgstr ""
 
-#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/store/reducer.ts
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
@@ -2006,10 +1892,6 @@ msgstr ""
 
 #: src/configs/base-config.js
 msgid "Estonian"
-msgstr ""
-
-#: src/user/support/utils.ts
-msgid "Estonian ID"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.html
@@ -2091,13 +1973,8 @@ msgstr ""
 msgid "Excel"
 msgstr ""
 
-#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/marketplace/orders/store/reducer.ts
 msgid "Executing"
-msgstr ""
-
-#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
-msgid "Execution Scheduled"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
@@ -2219,14 +2096,6 @@ msgstr ""
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Financial overview"
-msgstr ""
-
-#: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "Find installed virtual environments & libraries"
-msgstr ""
-
-#: src/ansible/python-management/form/FindMissingLibrariesButton.tsx
-msgid "Find missing installed libraries"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
@@ -2403,14 +2272,6 @@ msgstr ""
 msgid "Get a virtual private cloud from a service store"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "GitLab host URL"
-msgstr ""
-
-#: src/ansible/python-management/details/PythonManagementActionHistoryRow.tsx
-msgid "Global request"
-msgstr ""
-
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
@@ -2511,18 +2372,9 @@ msgstr ""
 msgid "Hostname or IP address of master node"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Hours. Once notebook instance is not active for this time it is terminated"
-msgstr ""
-
 #: src/help/constants.js
 #: src/user/keys/help.js
 msgid "How to generate SSH key"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "How to obtain Client ID and Client secret from Azure"
 msgstr ""
 
 #: src/providers/ProviderHelpLink.tsx
@@ -2579,26 +2431,6 @@ msgstr ""
 msgid "IPv4 address"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "If no additional whitelisted users are specified, only admins will have access to JupyterHub."
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "If nobody is whitelisted, any OAuth user can log in to JupyterHub."
-msgstr ""
-
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "If not, append it there on a new line. If file is not present, create a new file with the key."
-msgstr ""
-
-#: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "If you need to manually install a library, please follow these steps:"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "If you use on-premise GitLab please specify the URl"
-msgstr ""
-
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
@@ -2612,8 +2444,6 @@ msgid "Image here"
 msgstr ""
 
 #: src/analytics/ImagesList.tsx
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
-#: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -2643,11 +2473,6 @@ msgstr ""
 
 #: src/azure/provider/AzureForm.tsx
 msgid "In the format of GUID"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementForm.tsx
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Inactive notebook instance time to live"
 msgstr ""
 
 #: src/user/support/UserActivateButton.tsx
@@ -2705,11 +2530,6 @@ msgstr ""
 msgid "Initial username"
 msgstr ""
 
-#: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "Install your library with pip"
-msgstr ""
-
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 #: src/openstack/openstack-volume/actions/AttachAction.ts
@@ -2751,10 +2571,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 msgid "Instance should be shutoff and OK or erred. Please contact support."
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
-msgid "Instance state"
 msgstr ""
 
 #: src/quotas/constants.js
@@ -3012,38 +2828,6 @@ msgstr ""
 msgid "Job title"
 msgstr ""
 
-#: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "Jupyter kernels (Python virtual environments)"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/routes.js
-msgid "JupyterHub Management details"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/effects.ts
-msgid "JupyterHub configuration update could not be scheduled."
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/effects.ts
-msgid "JupyterHub configuration update have been scheduled."
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/effects.ts
-msgid "JupyterHub environment could not be created."
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/effects.ts
-msgid "JupyterHub environment has been created."
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "JupyterHub management details"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "JupyterHub runtime logs location"
-msgstr ""
-
 #: src/resource/utils.tsx
 msgid "Keep forever"
 msgstr ""
@@ -3119,26 +2903,6 @@ msgstr ""
 msgid "Let’s get started"
 msgstr ""
 
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Libraries to install"
-msgstr ""
-
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Libraries to remove"
-msgstr ""
-
-#: src/ansible/python-management/form/InstalledLibraryRowForm.tsx
-msgid "Library has not yet been saved"
-msgstr ""
-
-#: src/ansible/python-management/form/InstalledLibraryRowForm.tsx
-msgid "Library name"
-msgstr ""
-
-#: src/ansible/python-management/form/InstalledLibraryRowForm.tsx
-msgid "Library version"
-msgstr ""
-
 #: src/user/support/TokenLifetimeField.tsx
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
@@ -3196,10 +2960,6 @@ msgstr ""
 
 #: src/table/responsive-table.js
 msgid "Loading..."
-msgstr ""
-
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Located in home directory of the specified system user."
 msgstr ""
 
 #: src/azure/AzureResourceSummary.tsx
@@ -3509,9 +3269,7 @@ msgid "N/A"
 msgstr ""
 
 #: src/ansible/application-list.js
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
-#: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PriceEstimateDialog.tsx
@@ -3664,10 +3422,6 @@ msgstr ""
 #: src/digitalocean/droplet-resize.html
 #: src/openstack/openstack-volume/volume-extend.html
 msgid "New size"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/validation.ts
-msgid "New user needs password"
 msgstr ""
 
 #: src/form/appstore-form-wizard.html
@@ -3976,11 +3730,6 @@ msgstr ""
 msgid "Number of running instances"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "OAuth2 type"
-msgstr ""
-
-#: src/ansible/python-management/state-builder/StateIndicatorBuilder.ts
 #: src/customer/popover/customer-popover.html
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/project/project-dialog.html
@@ -4079,10 +3828,6 @@ msgstr ""
 msgid "One-time on plan switch"
 msgstr ""
 
-#: src/ansible/python-management/validation.ts
-msgid "Only alphanumeric characters, dashes or underscores"
-msgstr ""
-
 #: src/providers/provider-list.js
 msgid "Only customer owner or staff can create provider."
 msgstr ""
@@ -4097,10 +3842,6 @@ msgstr ""
 
 #: src/providers/provider-list.js
 msgid "Only customer owner or staff can unlink provider."
-msgstr ""
-
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Only distributions with APT package manager are supported (Debian, Ubuntu...)"
 msgstr ""
 
 #: src/invitations/actions/send.js
@@ -4425,7 +4166,6 @@ msgstr ""
 msgid "Parent request"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: src/auth/auth-login.html
 #: src/azure/sql/AzureSQLServerSummary.tsx
 #: src/jira/JiraForm.tsx
@@ -4633,14 +4373,6 @@ msgstr ""
 msgid "Please accept Terms of Services to proceed."
 msgstr ""
 
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Please add following public key to authorized_keys file on the selected instance."
-msgstr ""
-
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Please assign 'SSH' security group to the virtual machine (to allow SSH connections)."
-msgstr ""
-
 #: src/issues/request-service-button.js
 msgid "Please clarify why do you need it"
 msgstr ""
@@ -4707,16 +4439,8 @@ msgstr ""
 msgid "Please search for your organization"
 msgstr ""
 
-#: src/ansible/python-management/form/InstalledLibraryRowForm.tsx
-msgid "Please select a library"
-msgstr ""
-
 #: src/freeipa/freeipa-account-create.html
 msgid "Please select a username that you will use for login into the Linux systems."
-msgstr ""
-
-#: src/ansible/python-management/form/InstalledLibraryRowForm.tsx
-msgid "Please select a version"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -5209,30 +4933,6 @@ msgstr ""
 msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Python Management"
-msgstr ""
-
-#: src/ansible/python-management/routes.js
-msgid "Python Management details"
-msgstr ""
-
-#: src/ansible/python-management/effects.ts
-msgid "Python environment could not be created."
-msgstr ""
-
-#: src/ansible/python-management/effects.ts
-msgid "Python environment has been created."
-msgstr ""
-
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Python management details"
-msgstr ""
-
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Python version"
-msgstr ""
-
 #: src/billing/billing-record-details.html
 #: src/billing/invoice-details.html
 #: src/cost-planning/cost-plan-flavors.html
@@ -5262,9 +4962,7 @@ msgstr ""
 msgid "Quotas updated."
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
@@ -5465,10 +5163,6 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "Remove JupyterHub user"
-msgstr ""
-
 #: src/ansible/application-list.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 msgid "Remove application"
@@ -5486,16 +5180,8 @@ msgstr ""
 msgid "Remove organization"
 msgstr ""
 
-#: src/ansible/python-management/form/InstalledLibraryRowForm.tsx
-msgid "Remove package"
-msgstr ""
-
 #: src/user/support/UserEditForm.tsx
 msgid "Remove profile"
-msgstr ""
-
-#: src/ansible/python-management/form/RemoveVirtualEnvironmentButton.tsx
-msgid "Remove virtual environment"
 msgstr ""
 
 #: src/project/project-providers-service.js
@@ -5589,10 +5275,6 @@ msgstr ""
 msgid "Request for a termination"
 msgstr ""
 
-#: src/ansible/python-management/effects.ts
-msgid "Request for search for installed libraries in the virtual environments could not be created."
-msgstr ""
-
 #: src/customer/details/customer-manage.js
 #: src/user/support/actions.ts
 msgid "Request removal"
@@ -5610,7 +5292,6 @@ msgstr ""
 msgid "Request to {action} has been accepted."
 msgstr ""
 
-#: src/ansible/python-management/details/PythonManagementActionsHistory.tsx
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
@@ -5898,10 +5579,6 @@ msgstr ""
 msgid "Role management events"
 msgstr ""
 
-#: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "Run 'Find missing installed libraries' command to synchronize cloud broker state"
-msgstr ""
-
 #: src/customer/AccountingRunningField.tsx
 msgid "Running accounting"
 msgstr ""
@@ -5986,10 +5663,6 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Save virtual environments"
-msgstr ""
-
 #: src/controllers/base-controller-class-es6.js
 #: src/controllers/base-controller-class.js
 msgid "Saving of {vm_name} was successful."
@@ -6029,10 +5702,6 @@ msgstr ""
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Search for apps and services..."
-msgstr ""
-
-#: src/ansible/python-management/effects.ts
-msgid "Search for installed libraries in the virtual environment has been scheduled."
 msgstr ""
 
 #: src/aws/AmazonForm.tsx
@@ -6394,10 +6063,6 @@ msgstr ""
 msgid "Service type"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/validation.ts
-msgid "Session time to live should be creater than 1 hour"
-msgstr ""
-
 #: src/freeipa/freeipa-quota.html
 msgid "Set limit"
 msgstr ""
@@ -6434,14 +6099,6 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartItemUpdate.tsx
 #: src/marketplace/routes.js
 msgid "Shopping cart item update"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Should be given to OAuth service provider. Example: https://VM_EXTERNAL_IP/hub/oauth_callback"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Should be obtained from OAuth service provider"
 msgstr ""
 
 #: src/table-react/TablePageSize.tsx
@@ -6638,11 +6295,7 @@ msgid "Starting"
 msgstr ""
 
 #: src/ansible/application-list.js
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
-#: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: src/ansible/python-management/details/PythonManagementActionsHistory.tsx
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
@@ -6717,9 +6370,7 @@ msgstr ""
 msgid "Stopping"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/customer/api.ts
 #: src/dashboard/categories.ts
 #: src/digitalocean/digitalocean-droplet-config.js
@@ -6868,11 +6519,6 @@ msgstr ""
 msgid "System provider"
 msgstr ""
 
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "System user"
-msgstr ""
-
 #: src/openstack/openstack-volume/actions/utils.ts
 msgid "System volume couldn't be detached."
 msgstr ""
@@ -6947,7 +6593,6 @@ msgstr ""
 msgid "Tenant"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
 #: src/azure/provider/AzureForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Tenant ID"
@@ -7345,7 +6990,6 @@ msgstr ""
 msgid "Type to search"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
 #: src/invitations/invitations-list.js
 msgid "URL"
 msgstr ""
@@ -7515,11 +7159,6 @@ msgstr ""
 msgid "Unable to initialize shopping cart."
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsContainer.tsx
-msgid "Unable to load JupyterHub management details."
-msgstr ""
-
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Unable to load Zabbix host details."
 msgstr ""
@@ -7625,11 +7264,6 @@ msgstr ""
 
 #: src/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
-msgstr ""
-
-#: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
-#: src/ansible/python-management/details/PythonManagementDetailsContainer.tsx
-msgid "Unable to load python management details."
 msgstr ""
 
 #: src/marketplace/compare/ComparisonSections.tsx
@@ -7877,10 +7511,6 @@ msgstr ""
 msgid "Updating security groups"
 msgstr ""
 
-#: src/ansible/python-management/form/VirtualEnvironment.tsx
-msgid "Upload Requirements.txt"
-msgstr ""
-
 #: src/customer/details/CustomerEditDetailsForm.tsx
 msgid "Upload new"
 msgstr ""
@@ -7987,10 +7617,6 @@ msgstr ""
 msgid "User has been updated"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "User has not yet been saved."
-msgstr ""
-
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "User input field #{index}"
 msgstr ""
@@ -8033,10 +7659,6 @@ msgstr ""
 
 #: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with Google."
-msgstr ""
-
-#: src/auth/events.ts
-msgid "User {user_link} authenticated successfully with OpenID."
 msgstr ""
 
 #: src/auth/events.ts
@@ -8095,7 +7717,6 @@ msgstr ""
 msgid "User {user_link} logged out  successfully with SAML2."
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
 #: src/auth/auth-login.html
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
@@ -8117,10 +7738,6 @@ msgstr ""
 
 #: src/freeipa/freeipa-account-create.html
 msgid "Username prefix"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "Username should be provided"
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.html
@@ -8239,76 +7856,6 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/ansible/python-management/details/PythonManagementActionsHistory.tsx
-msgid "Virtual environment"
-msgstr ""
-
-#: src/ansible/python-management/form/VirtualEnvironment.tsx
-msgid "Virtual environment has not yet been saved."
-msgstr ""
-
-#: src/ansible/python-management/form/VirtualEnvironment.tsx
-msgid "Virtual environment name"
-msgstr ""
-
-#: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "Virtual environments"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/effects.ts
-#: src/ansible/python-management/effects.ts
-msgid "Virtual environments deletion has been scheduled."
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/effects.ts
-#: src/ansible/python-management/effects.ts
-msgid "Virtual environments deletion request could not be created."
-msgstr ""
-
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Virtual environments directory"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
-msgid "Virtual environments directory name"
-msgstr ""
-
-#: src/ansible/python-management/effects.ts
-msgid "Virtual environments requests could not be created."
-msgstr ""
-
-#: src/ansible/python-management/details/PythonManagementDetailsSummary.tsx
-msgid "Virtual environments root directory"
-msgstr ""
-
-#: src/ansible/python-management/effects.ts
-msgid "Virtual environments search has been scheduled."
-msgstr ""
-
-#: src/ansible/python-management/effects.ts
-msgid "Virtual environments search request could not be created."
-msgstr ""
-
-#: src/ansible/python-management/effects.ts
-msgid "Virtual environments updates have been scheduled."
-msgstr ""
-
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Virtual machine"
-msgstr ""
-
-#: src/ansible/python-management/create/PythonManagementCreateForm.tsx
-msgid "Virtual machine contains a public key of the cloud broker"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Virtual machine has no floating ips assigned!"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/details/JupyterHubManagementDetailsForm.tsx
-msgid "Virtual machine should have Web security group assigned"
-msgstr ""
-
 #: src/analytics/resource-chart-service.js
 #: src/appstore/routes.js
 #: src/configs/base-config.js
@@ -8355,10 +7902,6 @@ msgstr ""
 msgid "Volumes count"
 msgstr ""
 
-#: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
-msgid "Was the correct cloud broker public key UUID specified in the properties?"
-msgstr ""
-
 #: src/customer/create/customer-create-config.js
 msgid "Website URL"
 msgstr ""
@@ -8371,14 +7914,6 @@ msgstr ""
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/project/ProjectDashboard.tsx
 msgid "Welcome, {user}!"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Where to get the required values from?"
-msgstr ""
-
-#: src/ansible/jupyter-hub-management/form/JupyterOAuthForm.tsx
-msgid "Whitelist admins"
 msgstr ""
 
 #: src/customer/details/customer-manage.js
@@ -8601,10 +8136,6 @@ msgstr ""
 msgid "Your FreeIPA profile has been disabled."
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/form/JupyterHubUserRows.tsx
-msgid "Your Microsoft Account full username. It should not contain @domain.com part."
-msgstr ""
-
 #: src/invitations/invitation-confirm-dialog.html
 msgid "Your current email is:"
 msgstr ""
@@ -8733,10 +8264,6 @@ msgstr ""
 msgid "projects"
 msgstr ""
 
-#: src/ansible/python-management/types/ManagementRequest.ts
-msgid "request"
-msgstr ""
-
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "requests"
 msgstr ""
@@ -8762,8 +8289,6 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: src/ansible/jupyter-hub-management/create/JupyterHubManagementCreateContainer.tsx
-#: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
@@ -8777,10 +8302,6 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "vCores"
-msgstr ""
-
-#: src/ansible/python-management/form/VirtualEnvironmentsForm.tsx
-msgid "virtualenv and virtualenvwrapper utilities are used to manage Python virtual environments."
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
