@@ -19,6 +19,26 @@ describe('Customer creation dialog', () => {
       method: 'POST',
       response: 'fixture:customers/alice.json',
     })
+    .route({
+      url: 'http://localhost:8080/api/marketplace-orders/?**',
+      method: 'GET',
+      response: [],
+    })
+    .route({
+      url: 'http://localhost:8080/api/daily-quotas/?**',
+      method: 'GET',
+      response: {nc_user_count: []},
+    })
+    .route({
+      url: 'http://localhost:8080/api/marketplace-category-component-usages/',
+      method: 'GET',
+      response: [],
+    })
+    .route({
+      url: 'http://localhost:8080/api/marketplace-resources/?**',
+      method: 'GET',
+      response: [],
+    })
     .login()
     .openCustomerCreateDialog();
   });
@@ -71,6 +91,6 @@ describe('Customer creation dialog', () => {
       .get('.select-workspace-toggle.btn-primary')
 
       // Workspace selector should indicate new organization name
-      .get('#select-workspace-title').contains('Alice Lebowski');
+      .get('h2').contains('Welcome, Alice Lebowski!');
   });
 });

@@ -2,7 +2,7 @@ Cypress.Commands.add('openSelectDialog', (selectId, option) => {
   cy
     .get(`a#${selectId}`).click()
     .get('td').contains(option).click()
-    .get('.btn-primary').contains('Select').click();
+    .get('.modal-footer .btn-primary').contains('Select').click();
 });
 
 Cypress.Commands.add('visitInstanceCreateForm', () => {
