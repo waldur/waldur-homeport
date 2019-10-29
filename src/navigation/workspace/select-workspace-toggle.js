@@ -55,7 +55,7 @@ class SelectWorkspaceToggleController {
   }
 
   getOrganizationDisplayName(organization) {
-    return this.isMobile() && organization.abbreviation ? organization.abbreviation : organization.name;
+    return this.isMobile() && organization.abbreviation ? organization.abbreviation : organization.display_name;
   }
 
   isMobile() {

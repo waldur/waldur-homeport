@@ -270,6 +270,17 @@ export default function routes($stateProvider) {
       }
     })
 
+    .state('marketplace-public-resource-details', {
+      url: 'marketplace-public-resource-details/:resource_uuid/',
+      template: '<marketplace-resource-details></marketplace-resource-details>',
+      parent: 'organization',
+      data: {
+        pageTitle: gettext('Public resources'),
+        feature: 'marketplace',
+        sidebarState: 'marketplace-services',
+      }
+    })
+
     .state('marketplace-support-resources', {
       url: 'marketplace-support-resources/',
       template: '<marketplace-support-resources-list></marketplace-support-resources-list>',

@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const ResourceUsageButton = ({ row }: Props) => {
-  const disabled = !row.is_usage_based || !row.plan || !['OK', 'Updating', 'Terminating'].includes(row.state);
+  const disabled = !row.is_usage_based || !row.plan || !['OK', 'Updating', 'Terminating', 'Terminated'].includes(row.state);
   const body = (
     <div className={classNames('btn-group', {disabled})}>
       <ResourceShowUsageButton resource={row.uuid}/>

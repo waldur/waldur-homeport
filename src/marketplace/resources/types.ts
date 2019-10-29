@@ -15,11 +15,11 @@ export type ResourceState =
   ;
 
 export interface Resource extends ResourceReference {
-  name: string;
+  name?: string;
   uuid: string;
   plan?: string;
   attributes: AttributesType;
-  backend_metadata: AttributesType;
+  backend_metadata?: AttributesType;
   offering_uuid: string;
   offering_name: string;
   offering_type: string;
@@ -28,5 +28,6 @@ export interface Resource extends ResourceReference {
   created?: string;
   category_title?: string;
   project_name?: string;
+  customer_uuid?: string;
   is_usage_based?: boolean;
 }

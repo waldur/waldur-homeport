@@ -1,5 +1,5 @@
 /*
- * For security reasons, third-party authentication backends, such as SAML2 or OpenID,
+ * For security reasons, third-party authentication backends, such as SAML2,
  * expect that when user is logged out, he is redirected to the logout URL so that
  * user session would be cleaned both in Waldur and authentication backend.
  *

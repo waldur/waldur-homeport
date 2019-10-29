@@ -21,6 +21,7 @@ export function formatPhone(value) {
 export const normalizeCustomerDetails = details => {
   // tslint:disable variable-name
   const name = details.name || details.company;
+  const display_name = details.display_name;
   const address = details.address || details.contact_details;
   const country = details.country_name || details.country;
   const postal = details.postal;
@@ -31,6 +32,7 @@ export const normalizeCustomerDetails = details => {
   const bank_account = details.bank_account || details.account;
   const customer: Customer = {
     name,
+    display_name,
     address,
     country,
     postal,
