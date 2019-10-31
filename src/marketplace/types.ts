@@ -37,6 +37,7 @@ export interface OfferingComponent extends BaseComponent {
   limit_period?: 'month' | 'total';
   limit_amount?: number;
   disable_quotas?: boolean;
+  use_limit_for_billing?: boolean;
   max_value?: number;
   min_value?: number;
 }
