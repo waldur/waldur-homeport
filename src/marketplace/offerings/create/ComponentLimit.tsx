@@ -8,6 +8,7 @@ import { ComponentLimitAmountField } from './ComponentLimitAmountField';
 import { ComponentLimitPeriodField, LimitPeriodOption } from './ComponentLimitPeriodField';
 import { ComponentMaxValueField } from './ComponentMaxValueField';
 import { ComponentMinValueField } from './ComponentMinValueField';
+import { ComponentUseLimitForBillingField } from './ComponentUseLimitForBillingField';
 
 interface Values {
   billingType: {
@@ -35,6 +36,7 @@ export const ComponentLimit = enhance((props: Values) => (
           <ComponentMaxValueField/>
         </>
       )}
+      <ComponentUseLimitForBillingField/>
     </>
   ) : null
 )) as React.ComponentType<{}>;
