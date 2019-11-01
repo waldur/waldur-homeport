@@ -4,11 +4,11 @@ import { InjectedFormProps, Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormContainer, NumberField, TextField, SelectField } from '@waldur/form-react';
+import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { UsageReportContext } from './types';
-import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 
 export interface ResourceUsageFormProps extends InjectedFormProps {
   components: OfferingComponent[];
