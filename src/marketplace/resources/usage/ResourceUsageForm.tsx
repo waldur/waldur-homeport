@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { UsageReportContext } from './types';
+import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 
 export interface ResourceUsageFormProps extends InjectedFormProps {
   components: OfferingComponent[];
@@ -51,6 +52,14 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
         name={`components.${component.type}.description`}
         key={`${index}.description`}
         placeholder={translate('Comment')}
+        hideLabel={true}
+      />
+    );
+    components.push(
+      <AwesomeCheckboxField
+        name={`components.${component.type}.recurring`}
+        key={`${index}.recurring`}
+        label={translate('Reported value is reused every month until changed.')}
         hideLabel={true}
       />
     );
