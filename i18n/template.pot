@@ -1003,6 +1003,10 @@ msgstr ""
 msgid "Changing password"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentUseLimitForBillingField.tsx
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr ""
+
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 #: src/azure/sql/azure-sql-databases-list.js
 msgid "Charset"
@@ -5211,6 +5215,10 @@ msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
 msgid "Reported by me"
+msgstr ""
+
+#: src/marketplace/resources/usage/ResourceUsageForm.tsx
+msgid "Reported value is reused every month until changed."
 msgstr ""
 
 #: src/issues/issue-detail.html

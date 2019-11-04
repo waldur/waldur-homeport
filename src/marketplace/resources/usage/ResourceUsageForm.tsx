@@ -4,6 +4,7 @@ import { InjectedFormProps, Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormContainer, NumberField, TextField, SelectField } from '@waldur/form-react';
+import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
@@ -51,6 +52,14 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
         name={`components.${component.type}.description`}
         key={`${index}.description`}
         placeholder={translate('Comment')}
+        hideLabel={true}
+      />
+    );
+    components.push(
+      <AwesomeCheckboxField
+        name={`components.${component.type}.recurring`}
+        key={`${index}.recurring`}
+        label={translate('Reported value is reused every month until changed.')}
         hideLabel={true}
       />
     );
