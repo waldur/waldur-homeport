@@ -87,6 +87,7 @@ const TableOptions = {
   mapPropsToFilter: props => props.project ? ({
     project_uuid: props.project.uuid,
     category_uuid: props.category_uuid,
+    state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
   }) : {},
   queryField: 'name',
 };
