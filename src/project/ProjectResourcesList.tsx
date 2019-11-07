@@ -57,6 +57,7 @@ const TableOptions = {
   fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter: props => props.project ? ({
     project_uuid: props.project.uuid,
+    state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
   }) : {},
 };
 

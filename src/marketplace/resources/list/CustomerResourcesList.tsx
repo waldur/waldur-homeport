@@ -90,7 +90,9 @@ export const TableComponent = props => {
 };
 
 const mapPropsToFilter = (props: StateProps) => {
-  const filter: Record<string, string> = {};
+  const filter: Record<string, string | string[]> = {
+    state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+  };
   if (props.customer) {
     filter.customer_uuid = props.customer.uuid;
   }
