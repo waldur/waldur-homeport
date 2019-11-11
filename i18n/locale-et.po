@@ -5436,17 +5436,15 @@ msgstr "Avalik võti"
 #: src/marketplace/offerings/utils.ts src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Public offerings"
-msgstr "Pakkumised"
+msgstr "Avalikud pakkumised"
 
 #: src/marketplace/routes.js src/marketplace/sidebar.js
 msgid "Public orders"
-msgstr "Avalik pakkumine"
+msgstr "Avalikud tellimused"
 
 #: src/marketplace/routes.js src/marketplace/sidebar.js
-#, fuzzy
-#| msgid "resources"
 msgid "Public resources"
-msgstr "ressursid"
+msgstr "Avalikud ressursid"
 
 #: src/resource/state/constants.js
 msgid "Pulling"
