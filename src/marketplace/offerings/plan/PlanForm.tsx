@@ -58,8 +58,8 @@ export const PlanForm = enhance((props: PlanFormProps) => (
     <FormGroup label={props.translate('Description')}>
       <PlanDescriptionField/>
     </FormGroup>
-    <ArticleCodeField name="article_code"/>
-    <ProductCodeField name="product_code"/>
+    <ArticleCodeField/>
+    <ProductCodeField/>
     {props.components && props.components.length > 0 && (
       <PlanComponents
         components={props.components.filter(component => component.type)}

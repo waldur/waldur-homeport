@@ -1081,6 +1081,14 @@ msgstr ""
 msgid "Cluster"
 msgstr ""
 
+#: src/marketplace/offerings/utils.ts
+msgid "Code is too short."
+msgstr ""
+
+#: src/marketplace/offerings/utils.ts
+msgid "Code should consist of latin symbols or numbers."
+msgstr ""
+
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Collation"
 msgstr ""

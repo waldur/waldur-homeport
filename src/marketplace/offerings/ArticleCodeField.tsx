@@ -1,21 +1,17 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
-import { latinName } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 
-import { FormGroup } from './FormGroup';
+import { FormGroupWithError } from './FormGroupWithError';
+import { articleCodeValidator } from './utils';
 
-export const ArticleCodeField = props => (
-  <FormGroup
+export const ArticleCodeField = () => (
+  <Field
+    name="article_code"
+    validate={articleCodeValidator}
     label={translate('Article code')}
-    description={translate('Technical code used by accounting software.')}>
-    <Field
-      component="input"
-      className="form-control"
-      name={props.name}
-      type="text"
-      validate={latinName}
-    />
-  </FormGroup>
+    description={translate('Technical code used by accounting software.')}
+    component={FormGroupWithError}
+  />
 );
