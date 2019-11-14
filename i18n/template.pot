@@ -1856,6 +1856,10 @@ msgstr ""
 msgid "English"
 msgstr ""
 
+#: src/openstack/utils.ts
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
 #: src/resource/actions/dialog/action-field-datetime.html
 msgid "Enter date"
 msgstr ""
