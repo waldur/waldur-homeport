@@ -1856,12 +1856,13 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: src/openstack/utils.ts
-msgid "Enter a valid IPv4 address."
-msgstr ""
-
 #: src/resource/actions/dialog/action-field-datetime.html
 msgid "Enter date"
+msgstr ""
+
+#: src/openstack/openstack-subnet/openstack-subnet.html
+#: src/openstack/utils.ts
+msgid "Enter private IPv4 CIDR."
 msgstr ""
 
 #: src/marketplace/orders/store/reducer.ts

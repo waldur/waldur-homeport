@@ -40,7 +40,7 @@ export const aggregateQuotasFromSPL = (components, quotas) => {
   return components;
 };
 
-const PRIVATE_CIDR_PATTERN = new RegExp(
+export const PRIVATE_CIDR_PATTERN = new RegExp(
   // Class A
   '(^(10)(\.([2]([0-5][0-5]|[01234][6-9])|[1][0-9][0-9]|[1-9][0-9]|[0-9])){2}\.0/24$)' +
   // Class B
@@ -54,6 +54,6 @@ export const validatePrivateSubnetCIDR = value => {
     return;
   }
   if (!value.match(PRIVATE_CIDR_PATTERN)) {
-    return translate('Enter a valid IPv4 address.');
+    return translate('Enter private IPv4 CIDR.');
   }
 };
