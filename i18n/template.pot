@@ -1860,6 +1860,11 @@ msgstr ""
 msgid "Enter date"
 msgstr ""
 
+#: src/openstack/openstack-subnet/openstack-subnet.html
+#: src/openstack/utils.ts
+msgid "Enter private IPv4 CIDR."
+msgstr ""
+
 #: src/marketplace/orders/store/reducer.ts
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"

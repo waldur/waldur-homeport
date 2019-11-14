@@ -1,14 +1,16 @@
 import template from './openstack-subnet.html';
+import { PRIVATE_CIDR_PATTERN } from '../utils';
 
 const openstackSubnet = {
   template: template,
   bindings: {
     field: '<',
-    model: '<'
+    model: '<',
+    form: '<',
   },
   controller: class {
     $onInit() {
-      [this.prefix, this.suffix] = this.field.mask.split('X');
+      this.pattern = PRIVATE_CIDR_PATTERN;
     }
   }
 };

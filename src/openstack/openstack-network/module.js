@@ -39,14 +39,11 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
           cidr: {
             component: 'openstackSubnet',
             label: gettext('Internal network mask (CIDR)'),
-            default_value: 42,
-            mask: '192.168.X.0/24',
-            serializer: (value, field) => field.mask.replace('X', value)
+            default_value: '192.168.42.0/24',
           },
           allocation_pool: {
             component: 'openstackAllocationPool',
             label: gettext('Internal network allocation pool'),
-            range: '192.168.X.10 — 192.168.X.200',
             parentField: 'cidr'
           },
           gateway_ip: {
