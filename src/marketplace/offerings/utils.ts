@@ -14,3 +14,17 @@ export function setStateBreadcrumbs(): void {
     },
   ];
 }
+
+const ARTICLE_CODE_PATTERN = new RegExp('^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$');
+
+export const articleCodeValidator = (value: string) => {
+  if (!value) {
+    return undefined;
+  }
+  if (value.length < 2) {
+    return translate('Code is too short.');
+  }
+  if (!value.match(ARTICLE_CODE_PATTERN)) {
+    return translate('Code should consist of latin symbols or numbers.');
+  }
+};

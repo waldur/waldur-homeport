@@ -18,8 +18,8 @@ export const ComponentForm = (props: Props) => (
     <DisplayNameField name="name"/>
     <ComponentMeasuredUnitField/>
     <ComponentAccountingTypeField removeOfferingQuotas={props.removeOfferingQuotas}/>
-    <ArticleCodeField name="article_code"/>
-    <ProductCodeField name="product_code"/>
+    <ArticleCodeField/>
+    <ProductCodeField/>
     <ComponentLimit/>
   </>
 );

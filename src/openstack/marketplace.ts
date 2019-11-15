@@ -2,12 +2,7 @@ import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 import { OpenStackPackageDetails } from '@waldur/openstack/OpenStackPackageDetails';
-import { OpenStackPackageForm, DEFAULT_SUBNET_CIDR } from '@waldur/openstack/OpenStackPackageForm';
-
-const serializer = props => ({
-  ...props,
-  subnet_cidr: DEFAULT_SUBNET_CIDR.replace('X', props.subnet_cidr),
-});
+import { OpenStackPackageForm } from '@waldur/openstack/OpenStackPackageForm';
 
 const ServiceSettingsAttributes = (): Attribute[] => [
   {
@@ -61,7 +56,6 @@ registerOfferingType({
   },
   component: OpenStackPackageForm,
   detailsComponent: OpenStackPackageDetails,
-  serializer,
   limitSerializer,
   limitParser,
   providerType: 'OpenStack',

@@ -1,16 +1,10 @@
-<div class="col-sm-8 input-group">
-  <span class="input-group-addon">
-    {{ ::$ctrl.prefix }}
-  </span>
-  <input
-    type="number"
-    id="{{ ::$ctrl.field.name }}"
-    name="{{ ::$ctrl.field.name }}"
-    min="1"
-    max="255"
-    ng-model="$ctrl.model[$ctrl.field.name]"
-    class="form-control"/>
-  <span class="input-group-addon">
-    {{ ::$ctrl.suffix }}
-  </span>
-</div>
+<input
+  id="{{ ::$ctrl.field.name }}"
+  name="{{ ::$ctrl.field.name }}"
+  ng-model="$ctrl.model[$ctrl.field.name]"
+  ng-pattern="$ctrl.pattern"
+  class="form-control"
+/>
+<p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.pattern" translate>
+  Enter private IPv4 CIDR.
+</p>

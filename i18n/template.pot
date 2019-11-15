@@ -1081,6 +1081,14 @@ msgstr ""
 msgid "Cluster"
 msgstr ""
 
+#: src/marketplace/offerings/utils.ts
+msgid "Code is too short."
+msgstr ""
+
+#: src/marketplace/offerings/utils.ts
+msgid "Code should consist of latin symbols or numbers."
+msgstr ""
+
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Collation"
 msgstr ""
@@ -1850,6 +1858,11 @@ msgstr ""
 
 #: src/resource/actions/dialog/action-field-datetime.html
 msgid "Enter date"
+msgstr ""
+
+#: src/openstack/openstack-subnet/openstack-subnet.html
+#: src/openstack/utils.ts
+msgid "Enter private IPv4 CIDR."
 msgstr ""
 
 #: src/marketplace/orders/store/reducer.ts

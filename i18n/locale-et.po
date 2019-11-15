@@ -5436,17 +5436,15 @@ msgstr "Avalik võti"
 #: src/marketplace/offerings/utils.ts src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Public offerings"
-msgstr "Pakkumised"
+msgstr "Avalikud pakkumised"
 
 #: src/marketplace/routes.js src/marketplace/sidebar.js
 msgid "Public orders"
-msgstr "Avalik pakkumine"
+msgstr "Avalikud tellimused"
 
 #: src/marketplace/routes.js src/marketplace/sidebar.js
-#, fuzzy
-#| msgid "resources"
 msgid "Public resources"
-msgstr "ressursid"
+msgstr "Avalikud ressursid"
 
 #: src/resource/state/constants.js
 msgid "Pulling"
@@ -6717,7 +6715,7 @@ msgstr "Jagatud"
 #: src/issues/workspace/issue-navigation-service.js
 #: src/resource/support/routes.js
 msgid "Shared providers"
-msgstr "Jagatud pakkuja"
+msgstr "Jagatud teenusepakkujad"
 
 #: src/marketplace/cart/ShoppingCart.tsx
 msgid "Shopping cart is empty. You should add items to cart first."
@@ -6806,7 +6804,7 @@ msgstr "Kasutaja üksikasjad"
 #: src/customer/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
-msgstr "Näita koos jooksva raamatupidamisega"
+msgstr "Näita ainult jooksva arveldusega"
 
 #: src/table/responsive-table.js
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"

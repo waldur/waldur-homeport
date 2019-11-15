@@ -19,9 +19,7 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { OpenStackAllocationPool } from './OpenStackAllocationPool';
 import { OpenStackSubnetField } from './OpenStackSubnetField';
-import { extractSubnet } from './utils';
-
-export const DEFAULT_SUBNET_CIDR = '192.168.X.0/24';
+import { validatePrivateSubnetCIDR } from './utils';
 
 export class OpenStackPackageForm extends React.Component<OfferingConfigurationFormProps> {
   componentDidMount() {
@@ -29,7 +27,7 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
     const defaults = getDefaults(this.props.offering);
     const initialData = {
       attributes: {
-        subnet_cidr: '42',
+        subnet_cidr: '192.168.42.0/24',
         ...this.props.initialAttributes,
       },
       limits: this.props.initialLimits || defaults,
@@ -86,13 +84,11 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
           <OpenStackSubnetField
             label={translate('Internal network mask (CIDR)')}
             name="attributes.subnet_cidr"
-            mask={DEFAULT_SUBNET_CIDR}
-            format={v => isNaN(v) ? extractSubnet(v) : v}
+            validate={validatePrivateSubnetCIDR}
           />
           <OpenStackAllocationPool
             label={translate('Internal network allocation pool')}
             name="attributes.subnet_allocation_pool"
-            range="192.168.X.10 — 192.168.X.200"
           />
           {ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES && (
             <AwesomeCheckboxField
