@@ -746,6 +746,7 @@ msgstr ""
 msgid "Bank name"
 msgstr ""
 
+#: src/rancher/RancherProviderForm.tsx
 #: src/rancher/marketplace.ts
 msgid "Base image name"
 msgstr ""
@@ -5040,6 +5041,7 @@ msgstr ""
 msgid "RAM usage"
 msgstr ""
 
+#: src/rancher/RancherProviderForm.tsx
 #: src/rancher/marketplace.ts
 msgid "Rancher access key"
 msgstr ""
@@ -5048,10 +5050,12 @@ msgstr ""
 msgid "Rancher cluster"
 msgstr ""
 
+#: src/rancher/RancherProviderForm.tsx
 #: src/rancher/marketplace.ts
 msgid "Rancher secret key"
 msgstr ""
 
+#: src/rancher/RancherProviderForm.tsx
 #: src/rancher/marketplace.ts
 msgid "Rancher server URL"
 msgstr ""
