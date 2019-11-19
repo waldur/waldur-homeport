@@ -81,6 +81,8 @@ export const formatAttributes = (category: Category, attributes) => {
     } else if (meta.type === 'choice') {
       if (value === '') {
         value = undefined;
+      } else {
+        value = value.key;
       }
     }
     return {
