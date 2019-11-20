@@ -18,7 +18,7 @@ const RowWrapper = props => (
     <input
       className="form-control"
       type="number"
-      min={props.offeringComponent.min_value}
+      min={props.offeringComponent.min_value || 0}
       max={props.offeringComponent.max_value}
       {...props.input}
     />
