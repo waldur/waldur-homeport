@@ -14,7 +14,7 @@ export const NodePanel = props => (
   <Panel>
     <Panel.Heading>
       <NodeRemoveButton onClick={() => props.onRemove(props.index)}/>
-      <h4>{translate('Node #{index}', {index: props.index + 1})}</h4>
+      <h4>{translate('Kubernetes node #{index}', {index: props.index + 1})}</h4>
     </Panel.Heading>
     <Panel.Body>
       <FormSection name={props.node}>

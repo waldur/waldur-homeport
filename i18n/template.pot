@@ -2908,6 +2908,10 @@ msgstr ""
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
+#: src/rancher/NodePanel.tsx
+msgid "Kubernetes node #{index}"
+msgstr ""
+
 #: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Label that is visible to users in Marketplace."
 msgstr ""
@@ -3692,10 +3696,6 @@ msgstr ""
 
 #: src/invitations/invitation-confirm-dialog.html
 msgid "No, continue using current email"
-msgstr ""
-
-#: src/rancher/NodePanel.tsx
-msgid "Node #{index}"
 msgstr ""
 
 #: src/rancher/NodeAddButton.tsx
