@@ -7306,15 +7306,15 @@ msgstr "Peatan"
 #: src/navigation/app-footer.html src/offering/appstore-offering.html
 #: src/user/support/TermsOfService.tsx
 msgid "Terms of Service"
-msgstr "Kasutustingimused"
+msgstr "Teenustingimused"
 
 #: src/providers/details/provider-details.html
 msgid "Terms of Services"
-msgstr "Kasutustingimused"
+msgstr "Teenustingimused"
 
 #: src/routes/about.js
 msgid "Terms of service"
-msgstr "Kasutustingimused"
+msgstr "Teenustingimused"
 
 #: src/user/keys/KeyCreateForm.tsx
 msgid "The key has been created."
