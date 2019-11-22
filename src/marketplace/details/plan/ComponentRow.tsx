@@ -21,7 +21,7 @@ export const ComponentRow: React.FC<Props> = props => (
     </td>
     <td>
       <p className="form-control-static">
-        {props.offeringComponent.measured_unit}
+        {props.offeringComponent.measured_unit || 'N/A'}
       </p>
     </td>
     {props.offeringComponent.prices.map((price, innerIndex) => (

@@ -65,7 +65,6 @@ export const configAttrField = attribute => {
             options={attribute.options}
             valueKey="key"
             labelKey="title"
-            simpleValue={true}
           />
         ),
         normalize: v => v ? v : '',

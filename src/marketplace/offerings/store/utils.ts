@@ -78,9 +78,11 @@ export const formatAttributes = (category: Category, attributes) => {
       } else {
         value = value.map(item => item.key);
       }
-    } else if (meta.type === 'choice') {
+    } else if (meta.type === 'choice' && typeof value !== 'undefined') {
       if (value === '') {
         value = undefined;
+      } else {
+        value = value.key;
       }
     }
     return {

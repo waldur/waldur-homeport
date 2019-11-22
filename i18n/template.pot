@@ -746,6 +746,11 @@ msgstr ""
 msgid "Bank name"
 msgstr ""
 
+#: src/rancher/RancherProviderForm.tsx
+#: src/rancher/marketplace.ts
+msgid "Base image name"
+msgstr ""
+
 #: src/resource/support/ChartContainer.tsx
 msgid "Batch RAM"
 msgstr ""
@@ -854,6 +859,7 @@ msgid "CIDR"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
+#: src/rancher/NodeCPUGroup.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "CPU"
@@ -1081,6 +1087,14 @@ msgstr ""
 msgid "Cluster"
 msgstr ""
 
+#: src/rancher/RancherClusterForm.tsx
+msgid "Cluster description"
+msgstr ""
+
+#: src/rancher/RancherClusterForm.tsx
+msgid "Cluster name"
+msgstr ""
+
 #: src/marketplace/offerings/utils.ts
 msgid "Code is too short."
 msgstr ""
@@ -1189,6 +1203,10 @@ msgstr ""
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Contact phone"
+msgstr ""
+
+#: src/rancher/NodeRoleField.tsx
+msgid "Control plane"
 msgstr ""
 
 #: src/offering/OracleSnapshots.tsx
@@ -2245,6 +2263,8 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/volume-extend.html
+#: src/rancher/NodeMemoryGroup.tsx
+#: src/rancher/NodeStorageGroup.tsx
 msgid "GB"
 msgstr ""
 
@@ -2888,6 +2908,10 @@ msgstr ""
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
+#: src/rancher/NodePanel.tsx
+msgid "Kubernetes node #{index}"
+msgstr ""
+
 #: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Label that is visible to users in Marketplace."
 msgstr ""
@@ -3159,6 +3183,10 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
+#: src/rancher/NodeMemoryGroup.tsx
+msgid "Memory"
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Memory per vCore"
 msgstr ""
@@ -3363,6 +3391,10 @@ msgstr ""
 
 #: src/core/validators.ts
 msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr ""
+
+#: src/rancher/utils.ts
+msgid "Name must consist of lower case alphanumeric characters."
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/AttachAction.ts
@@ -3664,6 +3696,10 @@ msgstr ""
 
 #: src/invitations/invitation-confirm-dialog.html
 msgid "No, continue using current email"
+msgstr ""
+
+#: src/rancher/NodeAddButton.tsx
+msgid "Node plan"
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
@@ -5005,6 +5041,25 @@ msgstr ""
 msgid "RAM usage"
 msgstr ""
 
+#: src/rancher/RancherProviderForm.tsx
+#: src/rancher/marketplace.ts
+msgid "Rancher access key"
+msgstr ""
+
+#: src/rancher/marketplace.ts
+msgid "Rancher cluster"
+msgstr ""
+
+#: src/rancher/RancherProviderForm.tsx
+#: src/rancher/marketplace.ts
+msgid "Rancher secret key"
+msgstr ""
+
+#: src/rancher/RancherProviderForm.tsx
+#: src/rancher/marketplace.ts
+msgid "Rancher server URL"
+msgstr ""
+
 #: src/marketplace/details/OrderSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -5173,6 +5228,7 @@ msgstr ""
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
 #: src/providers/provider-list.js
+#: src/rancher/NodeRemoveButton.tsx
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 #: src/user/hooks/HookRemoveButton.tsx
@@ -5581,6 +5637,7 @@ msgstr ""
 
 #: src/invitations/actions/invitation-dialog.html
 #: src/invitations/invitations-list.js
+#: src/rancher/NodeRoleGroup.tsx
 #: src/team/add-project-member.html
 #: src/team/add-team-member.html
 #: src/user/list/ProjectPermissions.tsx
@@ -6400,6 +6457,7 @@ msgstr ""
 #: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/quotas/constants.js
+#: src/rancher/NodeStorageGroup.tsx
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
 msgstr ""
@@ -6852,6 +6910,7 @@ msgstr ""
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/project/ProjectNameField.tsx
+#: src/rancher/RancherClusterForm.tsx
 #: src/rijkscloud/VolumeCreateConfig.js
 #: src/slurm/AllocationForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -7945,6 +8004,10 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
+#: src/rancher/NodeRoleField.tsx
+msgid "Worker"
+msgstr ""
+
 #: src/customer/create/customer-create-prompt.html
 msgid "Would you like to register your organization?"
 msgstr ""
@@ -8213,6 +8276,10 @@ msgstr ""
 msgid "commented:"
 msgstr ""
 
+#: src/rancher/NodeCPUGroup.tsx
+msgid "cores"
+msgstr ""
+
 #: src/resource/state/utils.ts
 msgid "current state on backend: {resourceState}."
 msgstr ""
@@ -8223,6 +8290,10 @@ msgstr ""
 
 #: src/resource/state/utils.ts
 msgid "error message: {errorMessage}"
+msgstr ""
+
+#: src/rancher/NodeRoleField.tsx
+msgid "etcd"
 msgstr ""
 
 #: src/events/BaseEventsList.tsx
