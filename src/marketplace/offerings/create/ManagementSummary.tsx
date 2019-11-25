@@ -13,7 +13,7 @@ import { FORM_ID } from '../store/constants';
 import { hasError } from './utils';
 
 const PureManagementSummary = props => {
-  if (props.typeInvalid || props.optionsInvalid || props.schedulesInvalid || props.settingsInvalid) {
+  if (props.tabHasError) {
     return (
       <>
         <h3>{translate('Management')}</h3>
@@ -21,6 +21,7 @@ const PureManagementSummary = props => {
         {props.optionsInvalid && <p>{translate('Options are invalid.')}</p>}
         {props.schedulesInvalid && <p>{translate('Schedules are invalid.')}</p>}
         {props.settingsInvalid && <p>{translate('Service settings are invalid.')}</p>}
+        {props.pluginOptionsInvalid && <p>{translate('Plugin options are invalid.')}</p>}
       </>
     );
   }
@@ -29,7 +30,7 @@ const PureManagementSummary = props => {
 
   const section: Section = {
     title: translate('Management'),
-    attributes: getAttributes(type.value),
+    attributes: type ? getAttributes(type.value) : [],
   };
 
   const providerType = getProviderType(type.value);
@@ -48,12 +49,23 @@ const PureManagementSummary = props => {
   );
 };
 
-const connector = connect(state => ({
-  formData: getFormValues(FORM_ID)(state),
-  typeInvalid: hasError('type')(state),
-  optionsInvalid: hasError('options')(state),
-  settingsInvalid: hasError('service_settings')(state),
-  schedulesInvalid: hasError('schedules')(state),
-}));
+const connector = connect(state => {
+  const formData = getFormValues(FORM_ID)(state);
+  const typeInvalid = hasError('type')(state);
+  const optionsInvalid = hasError('options')(state);
+  const settingsInvalid = hasError('service_settings')(state);
+  const schedulesInvalid = hasError('schedules')(state);
+  const pluginOptionsInvalid = hasError('pluginOptions')(state);
+  const tabHasError = typeInvalid || optionsInvalid || schedulesInvalid || settingsInvalid || pluginOptionsInvalid;
+  return {
+    formData,
+    typeInvalid,
+    optionsInvalid,
+    settingsInvalid,
+    schedulesInvalid,
+    pluginOptionsInvalid,
+    tabHasError,
+  };
+});
 
 export const ManagementSummary = connector(PureManagementSummary);
