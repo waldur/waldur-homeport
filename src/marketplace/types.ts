@@ -108,6 +108,7 @@ export interface Offering {
   attributes: AttributesType;
   components: OfferingComponent[];
   options?: OfferingOptions;
+  plugin_options?: Record<string, any>;
   plans?: Plan[];
   type: string;
   state: string;

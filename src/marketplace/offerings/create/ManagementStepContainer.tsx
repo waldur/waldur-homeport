@@ -2,7 +2,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
-import { getOfferingTypes, showOfferingOptions, getProviderType, isOfferingTypeSchedulable } from '@waldur/marketplace/common/registry';
+import {
+  getOfferingTypes,
+  showOfferingOptions,
+  getProviderType,
+  isOfferingTypeSchedulable,
+  getPluginOptionsForm
+} from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
 import { findProvider } from '@waldur/providers/registry';
 
@@ -20,6 +26,7 @@ const mapStateToProps = state => {
   if (type) {
     props.showOptions = showOfferingOptions(type);
     props.schedulable = isOfferingTypeSchedulable(type);
+    props.pluginOptionsForm = getPluginOptionsForm(type);
     const providerType = getProviderType(type);
     if (providerType) {
       const providerConfig = findProvider(providerType);

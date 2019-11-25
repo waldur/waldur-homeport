@@ -83,6 +83,7 @@ export const getInitialValues = state => {
     attributes,
     schedules,
     options,
+    plugin_options: offering.plugin_options,
     plans: offering.plans,
     components: offering.components ? parseComponents(offering.components) : [],
     limits: offering.components ? parseOfferingLimits(offering) : {},

@@ -12,6 +12,7 @@ export type LimitParser = (limits: Limits) => Limits;
 interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
   component: React.ComponentType<OfferingConfigurationFormProps>;
+  pluginOptionsForm?: React.ComponentType<any>;
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
   checkoutSummaryComponent?: any;
   serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
@@ -79,6 +80,10 @@ export function showOfferingLimits(offeringType: string) {
 
 export function isOfferingTypeSchedulable(offeringType: string) {
   return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].schedulable;
+}
+
+export function getPluginOptionsForm(offeringType: string) {
+  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].pluginOptionsForm;
 }
 
 export function showComponentsList(offeringType: string) {
