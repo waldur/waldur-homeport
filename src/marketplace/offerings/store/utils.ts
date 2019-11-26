@@ -130,6 +130,8 @@ export const formatOfferingRequest = (request: OfferingFormData, components: Off
     };
   }
 
+  result.plugin_options = request.plugin_options;
+
   if (request.plans) {
     // Pick either built-in or custom fixed components.
     const fixedComponents = (components.length > 0 ? components : request.components).filter(

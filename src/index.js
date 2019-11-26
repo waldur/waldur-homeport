@@ -55,6 +55,7 @@ import rijkscloudModule from './rijkscloud/module';
 import marketplaceModule from './marketplace/module';
 import vmwareModule from './vmware/module';
 import rancherModule from './rancher/module';
+import marketplaceScriptModule from './marketplace-script/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -128,6 +129,7 @@ rijkscloudModule(appModule);
 marketplaceModule(appModule);
 vmwareModule(appModule);
 rancherModule(appModule);
+marketplaceScriptModule(appModule);
 appModule.config(analyticsRoutes);
 
 if (process.env.NODE_ENV !== 'production') {

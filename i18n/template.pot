@@ -217,6 +217,10 @@ msgstr ""
 msgid "Add data volume"
 msgstr ""
 
+#: src/marketplace-script/EnvironmentVariableAddButton.tsx
+msgid "Add environment variable"
+msgstr ""
+
 #: src/cost-planning/cost-plan-items.html
 #: src/marketplace/compare/ComparisonItemPlaceholder.tsx
 msgid "Add item"
@@ -1687,6 +1691,10 @@ msgstr ""
 msgid "Device"
 msgstr ""
 
+#: src/marketplace-script/marketplace.ts
+msgid "Devops-friendly offering"
+msgstr ""
+
 #: src/digitalocean/help.js
 msgid "DigitalOcean provider"
 msgstr ""
@@ -1881,6 +1889,10 @@ msgstr ""
 #: src/openstack/openstack-subnet/openstack-subnet.html
 #: src/openstack/utils.ts
 msgid "Enter private IPv4 CIDR."
+msgstr ""
+
+#: src/marketplace-script/EnvironmentVariablesList.tsx
+msgid "Environment variables"
 msgstr ""
 
 #: src/marketplace/orders/store/reducer.ts
@@ -3327,6 +3339,7 @@ msgstr ""
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/jira/project/jira-project-config.js
 #: src/jira/project/jira-projects-list.js
+#: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
@@ -4548,6 +4561,10 @@ msgstr ""
 msgid "Please wait while provider is being configured."
 msgstr ""
 
+#: src/marketplace/offerings/create/ManagementSummary.tsx
+msgid "Plugin options are invalid."
+msgstr ""
+
 #: src/customer/details/customer-policies.html
 #: src/project/project-dialog.html
 msgid "Policies"
@@ -5764,6 +5781,26 @@ msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Screenshots"
+msgstr ""
+
+#: src/marketplace-script/ScriptsForm.tsx
+msgid "Script for creation of a resource"
+msgstr ""
+
+#: src/marketplace-script/ScriptsForm.tsx
+msgid "Script for regular update of resource and its accounting"
+msgstr ""
+
+#: src/marketplace-script/ScriptsForm.tsx
+msgid "Script for termination of a resource"
+msgstr ""
+
+#: src/marketplace-script/ScriptsForm.tsx
+msgid "Script for updating a resource on plan change"
+msgstr ""
+
+#: src/marketplace-script/ScriptsForm.tsx
+msgid "Script language"
 msgstr ""
 
 #: src/issues/create/issue-registration.html
@@ -7911,6 +7948,7 @@ msgstr ""
 msgid "Valid states for operation: {validStates}."
 msgstr ""
 
+#: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Value"
@@ -7930,6 +7968,10 @@ msgstr ""
 
 #: src/marketplace/common/utils.ts
 msgid "Value should not be negative."
+msgstr ""
+
+#: src/marketplace-script/EnvironmentVariablePanel.tsx
+msgid "Variable #{index}"
 msgstr ""
 
 #: src/navigation/app-footer.html
