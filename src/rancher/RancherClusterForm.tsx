@@ -18,7 +18,7 @@ import { rancherClusterName } from './utils';
 
 const fetchResource = serviceSettings => loadSubnets(serviceSettings)
   .then(subnets => subnets.map(subnet => ({
-    label: `${subnet.network_name} / ${subnet.name}`,
+    label: `${subnet.network_name} / ${subnet.name} (${subnet.cidr})`,
     value: subnet.url,
   })));
 

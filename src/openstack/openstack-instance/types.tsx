@@ -24,7 +24,7 @@ export interface Subnet {
   enable_dhcp: boolean;
   dns_nameservers: Array<{[key: string]: string}>;
   network: string;
-  network_name: string;
+  network_name?: string;
 }
 
 export interface FloatingIp {
