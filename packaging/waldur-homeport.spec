@@ -6,7 +6,7 @@
 
 Name: waldur-homeport
 Summary: Waldur HomePort
-Version: 4.1.8
+Version: 4.1.9
 Release: 1.el7
 License: MIT
 Source0: %{name}-%{version}.tar.gz
@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
+* Tue Nov 26 2019 Jenkins <jenkins@opennodecloud.com> - 4.1.9-1.el7
+- New upstream release
+
 * Fri Nov 22 2019 Jenkins <jenkins@opennodecloud.com> - 4.1.8-1.el7
 - New upstream release
 
