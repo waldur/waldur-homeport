@@ -6541,6 +6541,10 @@ msgstr ""
 msgid "Submit with"
 msgstr ""
 
+#: src/rancher/NodeSubnetGroup.tsx
+msgid "Subnet"
+msgstr ""
+
 #: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
 msgid "Subnet CIDR"
 msgstr ""

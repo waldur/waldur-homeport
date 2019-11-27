@@ -9,6 +9,7 @@ import { NodeMemoryGroup } from './NodeMemoryGroup';
 import { NodeRemoveButton } from './NodeRemoveButton';
 import { NodeRoleGroup } from './NodeRoleGroup';
 import { NodeStorageGroup } from './NodeStorageGroup';
+import { NodeSubnetGroup } from './NodeSubnetGroup';
 
 export const NodePanel = props => (
   <Panel>
@@ -18,6 +19,7 @@ export const NodePanel = props => (
     </Panel.Heading>
     <Panel.Body>
       <FormSection name={props.node}>
+        <NodeSubnetGroup subnetChoices={props.subnetChoices}/>
         <NodeMemoryGroup/>
         <NodeStorageGroup/>
         <NodeCPUGroup/>
