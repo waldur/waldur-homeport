@@ -12,6 +12,7 @@ export const NodeList = props => (
         index={index}
         key={index}
         onRemove={props.fields.remove}
+        subnetChoices={props.subnetChoices}
       />
     ))}
     <NodeAddButton onClick={() => props.fields.push(DEFAULT_NODE_CONFIGURATION)}/>
