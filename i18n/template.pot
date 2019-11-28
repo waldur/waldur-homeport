@@ -1646,6 +1646,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/module.js
 #: src/openstack/openstack-tenant/actions/DestroyAction.ts
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
+#: src/rancher/actions/DestroyAction.ts
 msgid "Destroy"
 msgstr ""
 
@@ -2988,6 +2989,10 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
+#: src/rancher/actions/LinkAction.ts
+msgid "Link OpenStack Instance"
+msgstr ""
+
 #: src/project/project-providers-service.js
 #: src/providers/details/provider-projects.js
 msgid "Link created"
@@ -3503,6 +3508,10 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+#: src/rancher/rancher-cluster-nodes.js
+msgid "No Kubernetes nodes found matching filter."
+msgstr ""
+
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "No access info"
 msgstr ""
@@ -3713,6 +3722,10 @@ msgstr ""
 
 #: src/rancher/NodeAddButton.tsx
 msgid "Node plan"
+msgstr ""
+
+#: src/rancher/module.js
+msgid "Nodes"
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
@@ -3983,6 +3996,7 @@ msgid "OpenStack events"
 msgstr ""
 
 #: src/openstack/openstack-instance/marketplace.ts
+#: src/rancher/actions/LinkAction.ts
 msgid "OpenStack instance"
 msgstr ""
 
@@ -6805,6 +6819,10 @@ msgstr ""
 
 #: src/marketplace/details/ProjectField.tsx
 msgid "The project will be changed for all items in cart."
+msgstr ""
+
+#: src/rancher/rancher-cluster-nodes.js
+msgid "There are no Kubernetes nodes yet."
 msgstr ""
 
 #: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html

@@ -1,6 +1,6 @@
 import { getAll, getFirst } from '@waldur/core/api';
 import { $http } from '@waldur/core/services';
-import { Flavor, FloatingIp, Subnet, Image, SshKey } from '@waldur/openstack/openstack-instance/types';
+import { Flavor, FloatingIp, Subnet, Image, SshKey, OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 
 import { AvailabilityZone } from './types';
@@ -42,3 +42,6 @@ export const loadProjectQuotas = (settings_uuid: string, project_uuid: string) =
 
 export const loadServiceSettings = (scope: string) =>
   $http.get(scope).then(response => response.data);
+
+export const loadInstances = () =>
+  getAll<OpenStackInstance>('/openstacktenant-instances/');
