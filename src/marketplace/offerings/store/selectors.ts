@@ -18,14 +18,13 @@ export const getOfferingComponents = (state, type) => getOffering(state).plugins
 export const getOfferingLimits = (state, type) => getOffering(state).plugins[type].available_limits;
 
 export const getComponents = (state, type): OfferingComponent[] => {
-  let components = getOfferingComponents(state, type);
-  if (components.length === 0) {
-    components = getForm(state, 'components');
-    if (components) {
-      components = formatComponents(components);
-    }
-  }
-  return components || [];
+  const builtinComponents = getOfferingComponents(state, type);
+  const builtinTypes: string[] = builtinComponents.map(c => c.type);
+  const formComponents: OfferingComponent[] = formatComponents(getForm(state, 'components'));
+  return [
+    ...builtinComponents,
+    ...formComponents.filter(c => !builtinTypes.includes(c.type)),
+  ];
 };
 
 const getForm = formValueSelector(FORM_ID);

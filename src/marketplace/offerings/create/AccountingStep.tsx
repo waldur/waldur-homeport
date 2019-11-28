@@ -26,10 +26,8 @@ export const AccountingStep = (props: AccountingStepProps) => props.type ? (
       <FieldArray
         name="components"
         component={ComponentsList}
-        props={{
-          removeOfferingComponent: props.removeOfferingComponent,
-          removeOfferingQuotas: props.removeOfferingQuotas,
-        }}
+        removeOfferingComponent={props.removeOfferingComponent}
+        removeOfferingQuotas={props.removeOfferingQuotas}
       />
     )}
     {props.showComponents && <hr/>}

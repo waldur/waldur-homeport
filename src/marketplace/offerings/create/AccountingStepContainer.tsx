@@ -5,14 +5,14 @@ import { withTranslation } from '@waldur/i18n';
 import { showComponentsList, showOfferingLimits } from '@waldur/marketplace/common/registry';
 
 import { removeOfferingComponent, removeOfferingQuotas } from '../store/actions';
-import { getType, getOfferingComponents } from '../store/selectors';
+import { getType, getComponents } from '../store/selectors';
 import { AccountingStep } from './AccountingStep';
 
 const mapStateToProps = state => {
   const type = getType(state);
   const showComponents = type && showComponentsList(type);
   const showLimits = type && showOfferingLimits(type);
-  const builtinComponents = type && getOfferingComponents(state, type);
+  const builtinComponents = type && getComponents(state, type);
   return {showComponents, type, builtinComponents, showLimits};
 };
 

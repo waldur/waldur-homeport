@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { validateNonNegative } from '@waldur/marketplace/common/utils';
+import { validateNonNegative, parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 interface PlanComponentsProps extends TranslateProps {
@@ -12,7 +11,7 @@ interface PlanComponentsProps extends TranslateProps {
   limits: string[];
 }
 
-const numberValidators = [required, validateNonNegative];
+const numberValidators = validateNonNegative;
 
 export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
   <table className="table table-borderless">
@@ -48,6 +47,8 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
                 type="number"
                 validate={props.archived ? undefined : numberValidators}
                 inputMode="numeric"
+                parse={parseIntField}
+                format={formatIntField}
               />
             ) : (
               <div className="form-control-static">
@@ -65,6 +66,8 @@ export const PlanComponents = withTranslation((props: PlanComponentsProps) => (
               validate={props.archived ? undefined : numberValidators}
               inputMode="numeric"
               step="0.0000001"
+              parse={parseIntField}
+              format={formatIntField}
             />
           </td>
           <td>
