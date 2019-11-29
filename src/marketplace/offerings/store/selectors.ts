@@ -20,7 +20,7 @@ export const getOfferingLimits = (state, type) => getOffering(state).plugins[typ
 export const getComponents = (state, type): OfferingComponent[] => {
   const builtinComponents = getOfferingComponents(state, type);
   const builtinTypes: string[] = builtinComponents.map(c => c.type);
-  const formComponents: OfferingComponent[] = formatComponents(getForm(state, 'components'));
+  const formComponents: OfferingComponent[] = formatComponents(getForm(state, 'components') || []);
   return [
     ...builtinComponents,
     ...formComponents.filter(c => !builtinTypes.includes(c.type)),
