@@ -18,11 +18,6 @@ export default function createAction(): ResourceAction {
         display_name: choice.name,
       }));
     },
-    serializer: form => {
-      return {
-        instance: form.instance.url,
-      };
-    },
     fields: [
       {
         name: 'instance',
