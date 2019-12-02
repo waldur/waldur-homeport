@@ -17,6 +17,7 @@ function RancherClusterNodesListController(baseResourceListController, rancherNo
       this.controllerScope = controllerScope;
       this._super();
       this.service = rancherNodesService;
+      this.resourcePollingDisabled = true;
     },
     getTableOptions: function() {
       let options = this._super();

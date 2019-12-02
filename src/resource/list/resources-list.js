@@ -347,6 +347,9 @@ export default function baseResourceListController(
       if (!ENV.resourcePollingEnabled) {
         return;
       }
+      if (this.resourcePollingDisabled) {
+        return;
+      }
       let vm = this;
 
       let newResources = this.list.filter(vm.resourceIsUpdating);
