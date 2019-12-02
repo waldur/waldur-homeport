@@ -10,9 +10,14 @@ const rancherClusterNodes = {
 export default rancherClusterNodes;
 
 // @ngInject
-function RancherClusterNodesListController(baseResourceListController) {
+function RancherClusterNodesListController(baseResourceListController, rancherNodesService) {
   let controllerScope = this;
   let ResourceController = baseResourceListController.extend({
+    init: function() {
+      this.controllerScope = controllerScope;
+      this._super();
+      this.service = rancherNodesService;
+    },
     getTableOptions: function() {
       let options = this._super();
       options.noDataText = gettext('There are no Kubernetes nodes yet.');
