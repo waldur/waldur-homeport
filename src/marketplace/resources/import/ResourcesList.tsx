@@ -8,6 +8,9 @@ export const ResourcesList = ({ resources, offering, value, toggleResource, plan
   <table className="table">
     <thead>
       <tr>
+        {resources.some(r => r.extra && r.extra.length > 0) && (
+          <th>{/* Column for expand button */}</th>
+        )}
         <th>{translate('Name')}</th>
         <th>{translate('Backend ID')}</th>
         <th>{translate('Actions')}</th>

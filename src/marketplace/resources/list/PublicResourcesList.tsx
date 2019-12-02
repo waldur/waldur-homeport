@@ -87,7 +87,11 @@ export const TableComponent = props => {
 };
 
 const mapPropsToFilter = (props: StateProps) => {
-  const filter: Record<string, string> = {};
+  const filter: Record<string, string | boolean> = {};
+
+  // Public resources should only contain resources from billable offerings.
+  filter.billable = true;
+
   if (props.customer) {
     filter.provider_uuid = props.customer.uuid;
   }

@@ -5835,13 +5835,11 @@ msgstr "Päringu kirjeldus"
 
 #: src/issues/routes.js
 msgid "Request detail"
-msgstr "Pärringu üksikasjad"
+msgstr "Päringu üksikasjad"
 
 #: src/offering/offering-details.html
-#, fuzzy
-#| msgid "Request detail"
 msgid "Request details"
-msgstr "Pärringu üksikasjad"
+msgstr "Päringu üksikasjad"
 
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessAction.ts
 msgid "Request direct access"
