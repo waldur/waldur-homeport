@@ -6,11 +6,11 @@ import { translate } from '@waldur/i18n';
 export const OpenStackPluginOptionsForm = ({ container, locale }) => {
   const STORAGE_MODE_OPTIONS = React.useMemo(() => [
     {
-      label: translate('Fixed'),
+      label: translate('Fixed — use common storage quota'),
       value: 'fixed',
     },
     {
-      label: translate('Dynamic'),
+      label: translate('Dynamic — use separate volume types for tracking pricing'),
       value: 'dynamic',
     },
   ], locale);

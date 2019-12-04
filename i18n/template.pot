@@ -1806,7 +1806,7 @@ msgid "Due date"
 msgstr ""
 
 #: src/openstack/OpenStackPluginOptionsForm.tsx
-msgid "Dynamic"
+msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
@@ -2165,12 +2165,12 @@ msgstr ""
 msgid "First"
 msgstr ""
 
-#: src/openstack/OpenStackPluginOptionsForm.tsx
-msgid "Fixed"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Fixed price"
+msgstr ""
+
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Fixed — use common storage quota"
 msgstr ""
 
 #: src/cost-planning/cost-plan-flavors.html
