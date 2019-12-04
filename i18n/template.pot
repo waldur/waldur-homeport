@@ -1805,6 +1805,10 @@ msgstr ""
 msgid "Due date"
 msgstr ""
 
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Dynamic"
+msgstr ""
+
 #: src/customer/popover/customer-users-details-list.js
 #: src/invitations/actions/invitation-dialog.html
 #: src/team/customer-users-list.js
@@ -2159,6 +2163,10 @@ msgstr ""
 
 #: src/table/responsive-table.js
 msgid "First"
+msgstr ""
+
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Fixed"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
@@ -6515,6 +6523,10 @@ msgstr ""
 
 #: src/providers/details/provider-project-link-quotas.html
 msgid "Storage limit GB"
+msgstr ""
+
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Storage mode"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
