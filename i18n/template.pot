@@ -1805,6 +1805,10 @@ msgstr ""
 msgid "Due date"
 msgstr ""
 
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Dynamic — use separate volume types for tracking pricing"
+msgstr ""
+
 #: src/customer/popover/customer-users-details-list.js
 #: src/invitations/actions/invitation-dialog.html
 #: src/team/customer-users-list.js
@@ -2163,6 +2167,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Fixed price"
+msgstr ""
+
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Fixed — use common storage quota"
 msgstr ""
 
 #: src/cost-planning/cost-plan-flavors.html
@@ -6515,6 +6523,10 @@ msgstr ""
 
 #: src/providers/details/provider-project-link-quotas.html
 msgid "Storage limit GB"
+msgstr ""
+
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Storage mode"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx

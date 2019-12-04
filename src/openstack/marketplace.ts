@@ -1,8 +1,10 @@
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
-import { OpenStackPackageDetails } from '@waldur/openstack/OpenStackPackageDetails';
-import { OpenStackPackageForm } from '@waldur/openstack/OpenStackPackageForm';
+
+import { OpenStackPackageDetails } from './OpenStackPackageDetails';
+import { OpenStackPackageForm } from './OpenStackPackageForm';
+import { OpenStackPluginOptionsForm } from './OpenStackPluginOptionsForm';
 
 const ServiceSettingsAttributes = (): Attribute[] => [
   {
@@ -56,6 +58,7 @@ registerOfferingType({
   },
   component: OpenStackPackageForm,
   detailsComponent: OpenStackPackageDetails,
+  pluginOptionsForm: OpenStackPluginOptionsForm,
   limitSerializer,
   limitParser,
   providerType: 'OpenStack',
