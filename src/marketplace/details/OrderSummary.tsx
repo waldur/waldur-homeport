@@ -50,6 +50,7 @@ export const SummaryTable = (props: OrderSummaryProps) => (
           <td>{props.project.name}</td>
         </tr>
       )}
+      {props.extraComponent ? React.createElement(props.extraComponent, props) : null}
       {props.formData && props.formData.plan && (
         <tr>
           <td className="text-lg">

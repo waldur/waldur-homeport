@@ -3803,6 +3803,10 @@ msgstr ""
 msgid "Number of CPU cores should be multiple of cores per socket."
 msgstr ""
 
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Number of control plane nodes"
+msgstr ""
+
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Number of cores in a VM"
 msgstr ""
@@ -3812,9 +3816,17 @@ msgstr ""
 msgid "Number of created instances"
 msgstr ""
 
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Number of etcd nodes"
+msgstr ""
+
 #: src/analytics/FlavorsList.tsx
 #: src/analytics/ImagesList.tsx
 msgid "Number of running instances"
+msgstr ""
+
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Number of worker nodes"
 msgstr ""
 
 #: src/customer/popover/customer-popover.html
@@ -7078,12 +7090,24 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Total CPU"
+msgstr ""
+
 #: src/customer/dashboard/api.ts
 msgid "Total cost"
 msgstr ""
 
 #: src/customer/TotalCostField.tsx
 msgid "Total cost:"
+msgstr ""
+
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Total memory"
+msgstr ""
+
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Total number of nodes"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.html
@@ -7096,6 +7120,7 @@ msgid "Total price"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/rancher/RancherClusterCheckoutSummary.tsx
 msgid "Total storage"
 msgstr ""
 
