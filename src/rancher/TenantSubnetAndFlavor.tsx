@@ -37,7 +37,7 @@ export const TenantSubnetAndFlavor: React.FC<{tenant: string}> = props => {
   }
 
   const {state: resourceProps, call: loadResource} = useQuery(fetchFlavorsAndSubnets, props.tenant);
-  React.useEffect(loadResource, []);
+  React.useEffect(loadResource, [props.tenant]);
 
   const dispatch = useDispatch();
   const updateNodesCount = React.useCallback(nodes => {
