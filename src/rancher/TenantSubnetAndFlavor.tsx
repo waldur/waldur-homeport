@@ -31,7 +31,7 @@ const fetchFlavorsAndSubnets = async tenant => {
   };
 };
 
-export const TenantSubnetAndFlavor = props => {
+export const TenantSubnetAndFlavor: React.FC<{tenant: string}> = props => {
   if (!props.tenant) {
     return null;
   }
@@ -49,7 +49,7 @@ export const TenantSubnetAndFlavor = props => {
   }
 
   if (resourceProps.erred) {
-    return translate('Unable to load subnets and flavors for the tenant.');
+    return <div>{translate('Unable to load subnets and flavors for the tenant.')}</div>;
   }
 
   if (resourceProps.loaded) {
