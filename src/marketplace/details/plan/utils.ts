@@ -53,7 +53,7 @@ export const combinePrices = (plan: Plan, limits: Limits, offering: Offering): P
 };
 
 const getPlan = (state, props) => {
-  if (props.viewMode) {
+  if (props.viewMode && props.orderItem) {
     if (props.orderItem.plan_uuid) {
       return props.offering.plans.find(plan => plan.uuid === props.orderItem.plan_uuid);
     } else {
@@ -66,7 +66,7 @@ const getPlan = (state, props) => {
 
 const getLimits = (state, props) => {
   const limitParser = getFormLimitParser(props.offering.type);
-  if (props.viewMode) {
+  if (props.viewMode && props.orderItem) {
     return limitParser(props.orderItem.limits);
   } else {
     return offeringSelector(state, 'limits');
