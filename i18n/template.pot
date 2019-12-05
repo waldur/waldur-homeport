@@ -863,7 +863,6 @@ msgid "CIDR"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/rancher/NodeCPUGroup.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "CPU"
@@ -2177,6 +2176,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/rancher/NodeFlavorGroup.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
@@ -2284,7 +2284,6 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/volume-extend.html
-#: src/rancher/NodeMemoryGroup.tsx
 #: src/rancher/NodeStorageGroup.tsx
 msgid "GB"
 msgstr ""
@@ -3208,10 +3207,6 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
-#: src/rancher/NodeMemoryGroup.tsx
-msgid "Memory"
-msgstr ""
-
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Memory per vCore"
 msgstr ""
@@ -3732,6 +3727,7 @@ msgstr ""
 msgid "Node plan"
 msgstr ""
 
+#: src/rancher/TenantSubnetAndFlavor.tsx
 #: src/rancher/module.js
 msgid "Nodes"
 msgstr ""
@@ -6579,7 +6575,7 @@ msgstr ""
 msgid "Submit with"
 msgstr ""
 
-#: src/rancher/NodeSubnetGroup.tsx
+#: src/rancher/SubnetGroup.tsx
 msgid "Subnet"
 msgstr ""
 
@@ -6748,6 +6744,7 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/rancher/RancherClusterForm.tsx
 msgid "Tenant"
 msgstr ""
 
@@ -7453,6 +7450,10 @@ msgstr ""
 
 #: src/analytics/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
+msgstr ""
+
+#: src/rancher/TenantSubnetAndFlavor.tsx
+msgid "Unable to load subnets and flavors for the tenant."
 msgstr ""
 
 #: src/user/user-popover.html
@@ -8375,10 +8376,6 @@ msgstr ""
 
 #: src/issues/comments/IssueCommentItem.tsx
 msgid "commented:"
-msgstr ""
-
-#: src/rancher/NodeCPUGroup.tsx
-msgid "cores"
 msgstr ""
 
 #: src/resource/state/utils.ts

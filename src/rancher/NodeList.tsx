@@ -23,7 +23,7 @@ export const NodeList = props => {
           index={index}
           key={index}
           onRemove={onRemove}
-          subnetChoices={props.subnetChoices}
+          flavors={props.flavors}
         />
       ))}
       <NodeAddButton onClick={onAdd}/>

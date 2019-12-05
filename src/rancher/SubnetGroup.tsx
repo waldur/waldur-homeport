@@ -2,10 +2,11 @@ import * as React from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-const SelectSubnetField = props => (
+const SubnetField = props => (
   <Select
     value={props.input.value}
     onChange={props.input.onChange}
@@ -14,15 +15,18 @@ const SelectSubnetField = props => (
   />
 );
 
-export const NodeSubnetGroup = props => (
+export const SubnetGroup = props => (
   <FormGroup
     label={translate('Subnet')}
-    required={true}>
+    required={true}
+    labelClassName="control-label col-sm-3"
+    valueClassName="col-sm-9"
+  >
     <Field
-      name="subnet"
-      component={SelectSubnetField}
-      options={props.subnetChoices}
-      required={true}
+      name="attributes.subnet"
+      validate={required}
+      options={props.options}
+      component={SubnetField}
     />
   </FormGroup>
 );
