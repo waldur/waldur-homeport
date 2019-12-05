@@ -12,17 +12,26 @@ import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTa
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
-import { loadSubnets } from '@waldur/openstack/api';
+import { loadSubnets, loadFlavors } from '@waldur/openstack/api';
 
 import { DEFAULT_CLUSTER_CONFIGURATION } from './constants';
 import { NodeList } from './NodeList';
 import { rancherClusterName } from './utils';
 
-const fetchResource = serviceSettings => loadSubnets(serviceSettings)
-  .then(subnets => subnets.map(subnet => ({
-    label: `${subnet.network_name} / ${subnet.name} (${subnet.cidr})`,
-    value: subnet.url,
-  })));
+const fetchResource = async serviceSettings => {
+  const subnets = await loadSubnets(serviceSettings);
+  const flavors = await loadFlavors(serviceSettings);
+  return {
+    subnets: subnets.map(subnet => ({
+      label: `${subnet.network_name} / ${subnet.name} (${subnet.cidr})`,
+      value: subnet.url,
+    })),
+    flavors: flavors.map(flavor => ({
+      label: flavor.display_name,
+      value: flavor.url,
+    })),
+  };
+};
 
 export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = props => {
   React.useEffect(() => {
@@ -80,7 +89,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
         <SelectField
           label={translate('Subnet')}
           name="attributes.subnet"
-          options={resourceProps.data}
+          options={resourceProps.data.subnets}
           required={true}
           simpleValue={true}
         />
@@ -88,6 +97,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
           name="attributes.nodes"
           component={NodeList}
           onChange={updateNodesCount}
+          flavors={resourceProps.data.flavors}
         />
       </FormContainer>
     </form>

@@ -46,6 +46,7 @@ export interface Flavor extends ServiceComponent {
   url: string;
   name: string;
   disabled: boolean;
+  display_name?: string;
 }
 
 export interface Image extends ServiceComponent {

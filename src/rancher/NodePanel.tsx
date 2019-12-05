@@ -4,8 +4,7 @@ import { FormSection } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
-import { NodeCPUGroup } from './NodeCPUGroup';
-import { NodeMemoryGroup } from './NodeMemoryGroup';
+import { NodeFlavorGroup } from './NodeFlavorGroup';
 import { NodeRemoveButton } from './NodeRemoveButton';
 import { NodeRoleGroup } from './NodeRoleGroup';
 import { NodeStorageGroup } from './NodeStorageGroup';
@@ -18,9 +17,8 @@ export const NodePanel = props => (
     </Panel.Heading>
     <Panel.Body>
       <FormSection name={props.node}>
-        <NodeMemoryGroup/>
+        <NodeFlavorGroup options={props.flavors}/>
         <NodeStorageGroup/>
-        <NodeCPUGroup/>
         <NodeRoleGroup/>
       </FormSection>
     </Panel.Body>

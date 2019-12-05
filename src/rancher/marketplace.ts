@@ -30,10 +30,9 @@ const ServiceSettingsAttributes = (): Attribute[] => [
 
 const serializer = ({ subnet, nodes, ...clusterRest }) => ({
   ...clusterRest,
-  nodes: nodes.map(({ storage, memory, ...nodeRest }) => ({
+  nodes: nodes.map(({ flavor, ...nodeRest }) => ({
     ...nodeRest,
-    storage: storage * 1024,
-    memory: memory * 1024,
+    flavor: flavor ? flavor.url : undefined,
     subnet,
   })),
 });

@@ -9,7 +9,7 @@ const countNodesByRole = (role, props) =>
 
 const getTotal = (field, props) =>
   props.formData.attributes.nodes
-    .map(node => node[field])
+    .map(node => node.flavor ? node.flavor[field] : undefined)
     .filter(value => value)
     .reduce((total, value) => total + value, 0);
 
@@ -33,15 +33,15 @@ const RancherExtraComponent = props => props.formData && props.formData.attribut
     </tr>
     <tr>
       <td><strong>{translate('Total CPU')}</strong></td>
-      <td>{getTotal('cpu', props)}</td>
+      <td>{getTotal('cores', props)}</td>
     </tr>
     <tr>
       <td><strong>{translate('Total storage')}</strong></td>
-      <td>{getTotal('storage', props)}</td>
+      <td>{getTotal('disk', props)}</td>
     </tr>
     <tr>
       <td><strong>{translate('Total memory')}</strong></td>
-      <td>{getTotal('memory', props)}</td>
+      <td>{getTotal('ram', props)}</td>
     </tr>
   </>
 ) : null;

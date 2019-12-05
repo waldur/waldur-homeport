@@ -863,7 +863,6 @@ msgid "CIDR"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/rancher/NodeCPUGroup.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "CPU"
@@ -2177,6 +2176,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/rancher/NodeFlavorGroup.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
@@ -2284,7 +2284,6 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/volume-extend.html
-#: src/rancher/NodeMemoryGroup.tsx
 #: src/rancher/NodeStorageGroup.tsx
 msgid "GB"
 msgstr ""
@@ -3206,10 +3205,6 @@ msgstr ""
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 msgid "Member"
-msgstr ""
-
-#: src/rancher/NodeMemoryGroup.tsx
-msgid "Memory"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
@@ -8375,10 +8370,6 @@ msgstr ""
 
 #: src/issues/comments/IssueCommentItem.tsx
 msgid "commented:"
-msgstr ""
-
-#: src/rancher/NodeCPUGroup.tsx
-msgid "cores"
 msgstr ""
 
 #: src/resource/state/utils.ts
