@@ -5,7 +5,7 @@ import { FieldArray, change } from 'redux-form';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { useQuery } from '@waldur/core/useQuery';
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, TextField } from '@waldur/form-react';
+import { FormContainer, StringField, TextField, SelectField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
@@ -77,10 +77,16 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
           label={translate('Cluster description')}
           name="attributes.description"
         />
+        <SelectField
+          label={translate('Subnet')}
+          name="attributes.subnet"
+          options={resourceProps.data}
+          required={true}
+          simpleValue={true}
+        />
         <FieldArray
           name="attributes.nodes"
           component={NodeList}
-          subnetChoices={resourceProps.data}
           onChange={updateNodesCount}
         />
       </FormContainer>

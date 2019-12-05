@@ -6579,7 +6579,7 @@ msgstr ""
 msgid "Submit with"
 msgstr ""
 
-#: src/rancher/NodeSubnetGroup.tsx
+#: src/rancher/RancherClusterForm.tsx
 msgid "Subnet"
 msgstr ""
 

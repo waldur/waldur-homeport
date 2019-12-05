@@ -28,12 +28,13 @@ const ServiceSettingsAttributes = (): Attribute[] => [
   },
 ];
 
-const serializer = ({ nodes, ...clusterRest }) => ({
+const serializer = ({ subnet, nodes, ...clusterRest }) => ({
   ...clusterRest,
   nodes: nodes.map(({ storage, memory, ...nodeRest }) => ({
     ...nodeRest,
     storage: storage * 1024,
     memory: memory * 1024,
+    subnet,
   })),
 });
 
