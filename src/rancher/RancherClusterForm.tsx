@@ -14,7 +14,6 @@ import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
-import { DEFAULT_CLUSTER_CONFIGURATION } from './constants';
 import { TenantSubnetAndFlavor } from './TenantSubnetAndFlavor';
 import { rancherClusterName } from './utils';
 
@@ -33,7 +32,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
     const initialData = {
       project,
       plan,
-      attributes: DEFAULT_CLUSTER_CONFIGURATION,
+      attributes: {nodes: []},
       limits: {
         node: 0,
       },

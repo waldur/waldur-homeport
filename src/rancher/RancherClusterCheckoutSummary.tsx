@@ -8,7 +8,9 @@ import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 
 const countNodesByRole = (role, nodes) =>
-  nodes.map(node => node.roles.includes(role)).length;
+  nodes
+    .filter(node => (node.roles || []).includes(role))
+    .length;
 
 const getTotal = (field, nodes) =>
   nodes
