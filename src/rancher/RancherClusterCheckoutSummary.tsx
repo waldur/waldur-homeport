@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 
@@ -37,11 +38,11 @@ const RancherExtraComponent = props => props.formData && props.formData.attribut
     </tr>
     <tr>
       <td><strong>{translate('Total storage')}</strong></td>
-      <td>{getTotal('disk', props)}</td>
+      <td>{formatFilesize(getTotal('disk', props))}</td>
     </tr>
     <tr>
       <td><strong>{translate('Total memory')}</strong></td>
-      <td>{getTotal('ram', props)}</td>
+      <td>{formatFilesize(getTotal('ram', props))}</td>
     </tr>
   </>
 ) : null;

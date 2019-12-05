@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
-import { FieldArray, change } from 'redux-form';
+import { useSelector } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 
+import { getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { useQuery } from '@waldur/core/useQuery';
 import { required } from '@waldur/core/validators';
@@ -12,26 +13,19 @@ import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTa
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
-import { loadSubnets, loadFlavors } from '@waldur/openstack/api';
 
 import { DEFAULT_CLUSTER_CONFIGURATION } from './constants';
-import { NodeList } from './NodeList';
+import { TenantSubnetAndFlavor } from './TenantSubnetAndFlavor';
 import { rancherClusterName } from './utils';
 
-const fetchResource = async serviceSettings => {
-  const subnets = await loadSubnets(serviceSettings);
-  const flavors = await loadFlavors(serviceSettings);
-  return {
-    subnets: subnets.map(subnet => ({
-      label: `${subnet.network_name} / ${subnet.name} (${subnet.cidr})`,
-      value: subnet.url,
-    })),
-    flavors: flavors.map(flavor => ({
-      label: flavor.display_name,
-      value: flavor.url,
-    })),
-  };
-};
+const fetchTenants = projectId => getAll('/openstack-tenants/', {
+  params: {
+    project_uuid: projectId,
+    field: ['name', 'url'],
+  },
+});
+
+const getTenant = state => formValueSelector(FORM_ID)(state, 'attributes.tenant');
 
 export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = props => {
   React.useEffect(() => {
@@ -41,7 +35,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
       plan,
       attributes: DEFAULT_CLUSTER_CONFIGURATION,
       limits: {
-        node: 1,
+        node: 0,
       },
     };
     if (!plan && props.offering.plans.length === 1) {
@@ -50,15 +44,12 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
     props.initialize(initialData);
   }, []);
 
-  const {state: resourceProps, call: loadResource} = useQuery(fetchResource, props.offering.scope_uuid);
-  React.useEffect(loadResource, []);
+  const {state: tenantProps, call: loadTenants} = useQuery(fetchTenants, props.project.uuid);
+  React.useEffect(loadTenants, []);
 
-  const dispatch = useDispatch();
-  const updateNodesCount = React.useCallback(nodes => {
-    dispatch(change(FORM_ID, 'limits.node', nodes));
-  }, []);
+  const tenant = useSelector(getTenant);
 
-  if (!resourceProps.loaded) {
+  if (!tenantProps.loaded) {
     return <LoadingSpinner/>;
   }
 
@@ -87,18 +78,15 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
           name="attributes.description"
         />
         <SelectField
-          label={translate('Subnet')}
-          name="attributes.subnet"
-          options={resourceProps.data.subnets}
+          label={translate('Tenant')}
+          name="attributes.tenant"
+          options={tenantProps.data}
           required={true}
+          labelKey="name"
+          valueKey="url"
           simpleValue={true}
         />
-        <FieldArray
-          name="attributes.nodes"
-          component={NodeList}
-          onChange={updateNodesCount}
-          flavors={resourceProps.data.flavors}
-        />
+        <TenantSubnetAndFlavor tenant={tenant}/>
       </FormContainer>
     </form>
   );
