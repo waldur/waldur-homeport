@@ -1687,7 +1687,6 @@ msgid "Details"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/actions/AttachAction.ts
 msgid "Device"
 msgstr ""
 
@@ -3416,10 +3415,6 @@ msgstr ""
 
 #: src/rancher/utils.ts
 msgid "Name must consist of lower case alphanumeric characters."
-msgstr ""
-
-#: src/openstack/openstack-volume/actions/AttachAction.ts
-msgid "Name of volume as instance device e.g. /dev/vdb."
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
