@@ -31,13 +31,6 @@ export default function createAction(): ResourceAction {
         type: 'select',
         required: true,
       },
-      {
-        name: 'device',
-        label: translate('Device'),
-        type: 'string',
-        help_text: translate('Name of volume as instance device e.g. /dev/vdb.'),
-        required: false,
-      },
     ],
   };
 }
