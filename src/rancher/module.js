@@ -25,7 +25,7 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
       ...DEFAULT_RESOURCE_TABS.order,
     ],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
-      snapshots: {
+      nodes: {
         heading: gettext('Nodes'),
         component: 'rancherClusterNodes'
       },

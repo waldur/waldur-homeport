@@ -863,7 +863,6 @@ msgid "CIDR"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/rancher/NodeCPUGroup.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "CPU"
@@ -1688,7 +1687,6 @@ msgid "Details"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/actions/AttachAction.ts
 msgid "Device"
 msgstr ""
 
@@ -1803,6 +1801,10 @@ msgstr ""
 #: src/billing/invoices-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "Due date"
+msgstr ""
+
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
@@ -2165,10 +2167,15 @@ msgstr ""
 msgid "Fixed price"
 msgstr ""
 
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Fixed — use common storage quota"
+msgstr ""
+
 #: src/cost-planning/cost-plan-flavors.html
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/rancher/NodeFlavorGroup.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
@@ -2276,7 +2283,6 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/volume-extend.html
-#: src/rancher/NodeMemoryGroup.tsx
 #: src/rancher/NodeStorageGroup.tsx
 msgid "GB"
 msgstr ""
@@ -3200,10 +3206,6 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
-#: src/rancher/NodeMemoryGroup.tsx
-msgid "Memory"
-msgstr ""
-
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Memory per vCore"
 msgstr ""
@@ -3413,10 +3415,6 @@ msgstr ""
 
 #: src/rancher/utils.ts
 msgid "Name must consist of lower case alphanumeric characters."
-msgstr ""
-
-#: src/openstack/openstack-volume/actions/AttachAction.ts
-msgid "Name of volume as instance device e.g. /dev/vdb."
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -3724,6 +3722,7 @@ msgstr ""
 msgid "Node plan"
 msgstr ""
 
+#: src/rancher/TenantSubnetAndFlavor.tsx
 #: src/rancher/module.js
 msgid "Nodes"
 msgstr ""
@@ -3795,6 +3794,10 @@ msgstr ""
 msgid "Number of CPU cores should be multiple of cores per socket."
 msgstr ""
 
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Number of control plane nodes"
+msgstr ""
+
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Number of cores in a VM"
 msgstr ""
@@ -3804,9 +3807,17 @@ msgstr ""
 msgid "Number of created instances"
 msgstr ""
 
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Number of etcd nodes"
+msgstr ""
+
 #: src/analytics/FlavorsList.tsx
 #: src/analytics/ImagesList.tsx
 msgid "Number of running instances"
+msgstr ""
+
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Number of worker nodes"
 msgstr ""
 
 #: src/customer/popover/customer-popover.html
@@ -6517,6 +6528,10 @@ msgstr ""
 msgid "Storage limit GB"
 msgstr ""
 
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Storage mode"
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Storage size"
 msgstr ""
@@ -6555,7 +6570,7 @@ msgstr ""
 msgid "Submit with"
 msgstr ""
 
-#: src/rancher/NodeSubnetGroup.tsx
+#: src/rancher/SubnetGroup.tsx
 msgid "Subnet"
 msgstr ""
 
@@ -6724,6 +6739,7 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/rancher/RancherClusterForm.tsx
 msgid "Tenant"
 msgstr ""
 
@@ -7066,12 +7082,24 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Total CPU"
+msgstr ""
+
 #: src/customer/dashboard/api.ts
 msgid "Total cost"
 msgstr ""
 
 #: src/customer/TotalCostField.tsx
 msgid "Total cost:"
+msgstr ""
+
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Total memory"
+msgstr ""
+
+#: src/rancher/RancherClusterCheckoutSummary.tsx
+msgid "Total number of nodes"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.html
@@ -7084,6 +7112,7 @@ msgid "Total price"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/rancher/RancherClusterCheckoutSummary.tsx
 msgid "Total storage"
 msgstr ""
 
@@ -7416,6 +7445,10 @@ msgstr ""
 
 #: src/analytics/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
+msgstr ""
+
+#: src/rancher/TenantSubnetAndFlavor.tsx
+msgid "Unable to load subnets and flavors for the tenant."
 msgstr ""
 
 #: src/user/user-popover.html
@@ -8338,10 +8371,6 @@ msgstr ""
 
 #: src/issues/comments/IssueCommentItem.tsx
 msgid "commented:"
-msgstr ""
-
-#: src/rancher/NodeCPUGroup.tsx
-msgid "cores"
 msgstr ""
 
 #: src/resource/state/utils.ts

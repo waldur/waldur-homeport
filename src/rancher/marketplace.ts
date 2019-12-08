@@ -1,7 +1,9 @@
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
-import { RancherClusterForm } from '@waldur/rancher/RancherClusterForm';
+
+import { RancherClusterCheckoutSummary } from './RancherClusterCheckoutSummary';
+import { RancherClusterForm } from './RancherClusterForm';
 
 const ServiceSettingsAttributes = (): Attribute[] => [
   {
@@ -26,12 +28,12 @@ const ServiceSettingsAttributes = (): Attribute[] => [
   },
 ];
 
-const serializer = ({ nodes, ...clusterRest }) => ({
+const serializer = ({ subnet, nodes, ...clusterRest }) => ({
   ...clusterRest,
-  nodes: nodes.map(({ storage, memory, ...nodeRest }) => ({
+  nodes: nodes.map(({ flavor, ...nodeRest }) => ({
     ...nodeRest,
-    storage: storage * 1024,
-    memory: memory * 1024,
+    flavor: flavor ? flavor.url : undefined,
+    subnet,
   })),
 });
 
@@ -41,6 +43,7 @@ registerOfferingType({
     return translate('Rancher cluster');
   },
   component: RancherClusterForm,
+  checkoutSummaryComponent: RancherClusterCheckoutSummary,
   providerType: 'Rancher',
   attributes: ServiceSettingsAttributes,
   serializer,

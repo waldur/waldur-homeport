@@ -22,4 +22,5 @@ export interface OrderSummaryProps {
   formData: OfferingFormData;
   formValid: boolean;
   updateMode?: boolean;
+  extraComponent?: React.ComponentType<any>;
 }

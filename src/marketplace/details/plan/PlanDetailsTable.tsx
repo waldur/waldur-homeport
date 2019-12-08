@@ -42,11 +42,6 @@ const UsageRows = (props: {periods: string[], components: Component[], viewMode:
   props.viewMode ?
   <FixedRows components={props.components}/> : (
   <>
-    <tr className="text-center">
-      <td colSpan={3 + props.periods.length}>
-        {translate('Please enter desired values in the rows below:')}
-      </td>
-    </tr>
     {props.components.map((component, index) => (
       <ComponentEditRow
         key={index}
@@ -71,6 +66,7 @@ export const PureDetailsTable: React.FC<PlanDetailsTableProps> = (props: PlanDet
   const usageWithLimits = usageRows.filter(component => component.disable_quotas === false);
   const usageWithoutLimits = usageRows.filter(component => component.disable_quotas === true);
   const hasExtraRows = fixedRows.length > 0 || usageWithLimits.length > 0;
+  const limitedRows = [...fixedWithLimits, ...usageWithLimits];
 
   return (
     <div className={props.formGroupClassName}>
@@ -82,8 +78,14 @@ export const PureDetailsTable: React.FC<PlanDetailsTableProps> = (props: PlanDet
           </thead>
           <tbody>
             {fixedWithoutLimits.length > 0 && <FixedRows components={fixedWithoutLimits}/>}
-            {usageWithLimits.length > 0 && <UsageRows components={usageWithLimits} periods={props.periods} viewMode={props.viewMode}/>}
-            {fixedWithLimits.length > 0 && <UsageRows components={fixedWithLimits} periods={props.periods} viewMode={props.viewMode}/>}
+            {!props.viewMode && limitedRows.length > 0 && fixedWithoutLimits.length > 0 && (
+              <tr className="text-center">
+                <td colSpan={3 + props.periods.length}>
+                  {translate('Please enter desired values in the rows below:')}
+                </td>
+              </tr>
+            )}
+            {limitedRows.length > 0 && <UsageRows components={limitedRows} periods={props.periods} viewMode={props.viewMode}/>}
           </tbody>
         </table>
       )}
