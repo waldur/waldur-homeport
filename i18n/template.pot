@@ -644,8 +644,8 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
+#: src/openstack/openstack-instance/AvailabilityZoneGroup.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Availability zone"
@@ -1510,6 +1510,10 @@ msgstr ""
 msgid "Data volume size:"
 msgstr ""
 
+#: src/openstack/openstack-instance/DataVolumeTypeGroup.tsx
+msgid "Data volume type"
+msgstr ""
+
 #: src/azure/sql/azure-sql-server-tabs.js
 msgid "Databases"
 msgstr ""
@@ -2163,7 +2167,7 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
 msgstr ""
@@ -2186,8 +2190,8 @@ msgstr ""
 
 #: src/cost-planning/cost-plan-flavors.html
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
+#: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/rancher/NodeFlavorGroup.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
@@ -2198,7 +2202,7 @@ msgid "Flavor exclude regex"
 msgstr ""
 
 #: src/analytics/FlavorsList.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
 msgstr ""
@@ -2504,8 +2508,8 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Image"
 msgstr ""
 
@@ -2516,7 +2520,7 @@ msgstr ""
 #: src/analytics/ImagesList.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Image name"
 msgstr ""
 
@@ -3241,7 +3245,7 @@ msgstr ""
 msgid "Metric"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Min RAM"
 msgstr ""
 
@@ -3249,7 +3253,7 @@ msgstr ""
 msgid "Min amount"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Min storage"
 msgstr ""
 
@@ -3387,7 +3391,7 @@ msgstr ""
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
@@ -5783,7 +5787,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 msgid "SSH public key"
 msgstr ""
 
@@ -6532,7 +6536,7 @@ msgstr ""
 #: src/customer/api.ts
 #: src/dashboard/categories.ts
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/project/project-workspace.js
 #: src/project/routes.js
@@ -6689,11 +6693,12 @@ msgstr ""
 msgid "System volume couldn't be detached."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/SystemVolumeSizeGroup.tsx
 #: src/rancher/SystemVolumeSizeGroup.tsx
 msgid "System volume size"
 msgstr ""
 
+#: src/openstack/openstack-instance/SystemVolumeTypeGroup.tsx
 #: src/rancher/SystemVolumeTypeGroup.tsx
 msgid "System volume type"
 msgstr ""
@@ -8092,6 +8097,8 @@ msgstr ""
 msgid "Volume size"
 msgstr ""
 
+#: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/rancher/VolumeTypeGroup.tsx
 msgid "Volume type"
 msgstr ""
@@ -8300,7 +8307,7 @@ msgstr ""
 msgid "You have no volumes yet."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 msgid "You have not added any SSH keys to your"
 msgstr ""
 
@@ -8467,7 +8474,7 @@ msgstr ""
 msgid "plans"
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-instance/PublicKeyGroup.tsx
 msgid "profile."
 msgstr ""
 
