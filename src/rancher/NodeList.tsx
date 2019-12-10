@@ -1,12 +1,18 @@
 import * as React from 'react';
 
+import { ENV } from '@waldur/core/services';
+
 import { DEFAULT_NODE_CONFIGURATION } from './constants';
 import { NodeAddButton } from './NodeAddButton';
 import { NodePanel } from './NodePanel';
 
 export const NodeList = props => {
   const onAdd = () => {
-    props.fields.push(DEFAULT_NODE_CONFIGURATION);
+    props.fields.push({
+      ...DEFAULT_NODE_CONFIGURATION,
+      system_volume_size: ENV.plugins.WALDUR_RANCHER.SYSTEM_VOLUME_MIN_SIZE || 1,
+      system_volume_type: props.volumeTypes.length > 0 ? props.volumeTypes[0].value : undefined,
+    });
     props.onChange(props.fields.length + 1);
   };
 
@@ -24,6 +30,8 @@ export const NodeList = props => {
           key={index}
           onRemove={onRemove}
           flavors={props.flavors}
+          volumeTypes={props.volumeTypes}
+          mountPoints={props.mountPoints}
         />
       ))}
       <NodeAddButton onClick={onAdd}/>

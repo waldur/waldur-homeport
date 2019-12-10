@@ -28,13 +28,22 @@ const ServiceSettingsAttributes = (): Attribute[] => [
   },
 ];
 
+const serializeDataVolume = ({ size, ...volumeRest }) => ({
+  ...volumeRest,
+  size: size * 1024,
+});
+
+const serializeNode = subnet => ({ system_volume_size, flavor, ...nodeRest }) => ({
+  ...nodeRest,
+  system_volume_size: system_volume_size * 1024,
+  flavor: flavor ? flavor.url : undefined,
+  subnet,
+  data_volumes: (nodeRest.data_volumes || []).map(serializeDataVolume),
+});
+
 const serializer = ({ subnet, nodes, ...clusterRest }) => ({
   ...clusterRest,
-  nodes: nodes.map(({ flavor, ...nodeRest }) => ({
-    ...nodeRest,
-    flavor: flavor ? flavor.url : undefined,
-    subnet,
-  })),
+  nodes: nodes.map(serializeNode(subnet)),
 });
 
 registerOfferingType({
