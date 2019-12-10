@@ -4,6 +4,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import Panel from '@waldur/core/Panel';
+import {Tooltip} from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 
@@ -18,23 +19,21 @@ const SelectOfferingButton = ({ value, onChange }) => (
   </a>
 );
 
-const OfferingItem = ({ offering, value, onChange }) => (
+const OfferingItem = ({ offering, value, onChange, id }) => (
   <Panel className="provider-box cursor-pointer">
     <div className="m-md">
-      <a className="h5 ellipsis">
-        {offering.name}
-      </a>
+      <Tooltip label={offering.name} id={id}>
+        <a className="h5 ellipsis">{offering.name}</a>
+      </Tooltip>
     </div>
     <div className="text-center m-b m-t">
       <OfferingLogo src={offering.thumbnail} size="small"/>
     </div>
-    <div className="p-xs">
-      <div className="block-container-sm block-container-md pull-right">
-        <SelectOfferingButton
-          value={value === offering}
-          onChange={() => onChange(value)}
-        />
-      </div>
+    <div className="text-center">
+      <SelectOfferingButton
+        value={value === offering}
+        onChange={() => onChange(value)}
+      />
     </div>
   </Panel>
 );
@@ -47,6 +46,7 @@ export const OfferingsList = ({ choices, value, onChange }) => (
         md={3} xs={6} sm={4}
         onClick={() => onChange(offering)}>
           <OfferingItem
+            id={index}
             value={value}
             onChange={onChange}
             offering={offering}
