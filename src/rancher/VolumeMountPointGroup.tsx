@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, change, formValueSelector } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -54,7 +55,7 @@ const useMinimalSize = (nodeIndex, volumeIndex) => {
 export const VolumeMountPointGroup = props => {
   const setValidVolumeSize = useMinimalSize(props.nodeIndex, props.volumeIndex);
   const validateMountPoint = React.useMemo(() =>
-    createMountPointValidator(props.nodeIndex),
+    [required, createMountPointValidator(props.nodeIndex)],
     [props.nodeIndex]
   );
 

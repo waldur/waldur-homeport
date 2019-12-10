@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -26,7 +27,7 @@ const createVolumeSizeValidator = (nodeIndex, volumeIndex) => (value, allValues)
 
 export const VolumeSizeGroup = props => {
   const validateVolumeSize = React.useMemo(() =>
-    createVolumeSizeValidator(props.nodeIndex, props.volumeIndex),
+    [required, createVolumeSizeValidator(props.nodeIndex, props.volumeIndex)],
     [props.nodeIndex, props.volumeIndex]
   );
 
