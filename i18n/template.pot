@@ -214,6 +214,7 @@ msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
+#: src/rancher/DataVolumeAddButton.tsx
 msgid "Add data volume"
 msgstr ""
 
@@ -1496,6 +1497,14 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+#: src/rancher/DataVolumePanel.tsx
+msgid "Data volume #{index}"
+msgstr ""
+
+#: src/rancher/DataVolumePanel.tsx
+msgid "Data volume should have at least {size} GB."
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Data volume size:"
@@ -1822,6 +1831,10 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 msgid "EU VAT ID"
+msgstr ""
+
+#: src/rancher/DataVolumePanel.tsx
+msgid "Each mount point should be used once at most."
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -2283,6 +2296,7 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/volume-extend.html
+#: src/rancher/DataVolumePanel.tsx
 #: src/rancher/NodeStorageGroup.tsx
 msgid "GB"
 msgstr ""
@@ -3298,6 +3312,10 @@ msgstr ""
 
 #: src/issues/request-service-button.js
 msgid "Motivation"
+msgstr ""
+
+#: src/rancher/DataVolumePanel.tsx
+msgid "Mount point"
 msgstr ""
 
 #: src/configs/base-config.js
@@ -6519,7 +6537,6 @@ msgstr ""
 #: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/quotas/constants.js
-#: src/rancher/NodeStorageGroup.tsx
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
 msgstr ""
@@ -6673,7 +6690,12 @@ msgid "System volume couldn't be detached."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/rancher/NodeStorageGroup.tsx
 msgid "System volume size"
+msgstr ""
+
+#: src/rancher/NodeStorageGroup.tsx
+msgid "System volume type"
 msgstr ""
 
 #: src/billing/invoice-details.html
@@ -8065,8 +8087,13 @@ msgstr ""
 
 #: src/analytics/registry.ts
 #: src/dashboard/categories.ts
+#: src/rancher/DataVolumePanel.tsx
 #: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
+msgstr ""
+
+#: src/rancher/DataVolumePanel.tsx
+msgid "Volume type"
 msgstr ""
 
 #: src/configs/base-config.js

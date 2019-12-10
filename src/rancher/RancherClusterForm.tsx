@@ -17,14 +17,16 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { TenantSubnetAndFlavor } from './TenantSubnetAndFlavor';
 import { rancherClusterName } from './utils';
 
-const fetchTenants = projectId => getAll('/openstack-tenants/', {
+const fetchTenants = projectId => getAll('/service-settings/', {
   params: {
     project_uuid: projectId,
+    type: 'OpenStackTenant',
     field: ['name', 'url'],
+    o: 'name',
   },
 });
 
-const getTenant = state => formValueSelector(FORM_ID)(state, 'attributes.tenant');
+const getTenant = state => formValueSelector(FORM_ID)(state, 'attributes.tenant_settings');
 
 export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = props => {
   React.useEffect(() => {
@@ -78,7 +80,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
         />
         <SelectField
           label={translate('Tenant')}
-          name="attributes.tenant"
+          name="attributes.tenant_settings"
           options={tenantProps.data}
           required={true}
           labelKey="name"
