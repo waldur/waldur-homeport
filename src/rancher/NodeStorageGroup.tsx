@@ -37,6 +37,7 @@ export const NodeStorageGroup = props => (
       <FieldArray
         name="data_volumes"
         component={DataVolumesList}
+        nodeIndex={props.nodeIndex}
         mountPoints={props.mountPoints}
         volumeTypes={props.volumeTypes}
       />

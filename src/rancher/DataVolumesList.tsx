@@ -10,8 +10,9 @@ export const DataVolumesList = props => (
       {props.fields.map((volume, index) => (
         <DataVolumePanel
           key={index}
-          index={index}
-          volume={volume}
+          nodeIndex={props.nodeIndex}
+          volumeIndex={index}
+          volumePath={volume}
           onRemove={props.fields.remove}
           volumeTypes={props.volumeTypes}
           mountPoints={props.mountPoints}

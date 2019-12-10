@@ -15,8 +15,9 @@ import { IntegerUnitField } from './IntegerUnitField';
 import { SimpleSelectField } from './SimpleSelectField';
 
 interface OwnProps {
-  index: number;
-  volume: string;
+  volumeIndex: number;
+  volumePath: string;
+  nodeIndex: number;
   onRemove(index: number): void;
   volumeTypes: Option[];
   mountPoints: Option[];
@@ -25,24 +26,39 @@ interface OwnProps {
 const getMinSize = mountPoint =>
   ENV.plugins.WALDUR_RANCHER.MOUNT_POINT_MIN_SIZE[mountPoint];
 
-const validateMountPoint = (value, allValues) => {
+const createMountPointValidator = nodeIndex => (value, allValues) => {
   if (!value) {
     return;
   }
+  const nodes = allValues.attributes.nodes;
+  if (nodeIndex >= nodes.length) {
+    return;
+  }
   let count = 0;
-  for (const node of allValues.attributes.nodes || []) {
-    for (const volume of node.data_volumes || []) {
-      if (volume.mount_point === value) {
-        count++;
-      }
-      if (count > 1) {
-        return translate('Each mount point should be used once at most.');
-      }
-      const minSize = getMinSize(volume.mount_point);
-      if (volume.size < minSize) {
-        return translate('Data volume should have at least {size} GB.', {size: minSize});
-      }
+  const volumes = nodes[nodeIndex].data_volumes || [];
+  for (const volume of volumes) {
+    if (volume.mount_point === value) {
+      count++;
     }
+    if (count > 1) {
+      return translate('Each mount point should be used once at most.');
+    }
+  }
+};
+
+const createVolumeSizeValidator = (nodeIndex, volumeIndex) => (value, allValues) => {
+  const nodes = allValues.attributes.nodes;
+  if (nodeIndex >= nodes.length) {
+    return;
+  }
+  const volumes = nodes[nodeIndex].data_volumes || [];
+  if (volumeIndex >= volumes.length) {
+    return;
+  }
+  const volume = volumes[volumeIndex];
+  const minSize = getMinSize(volume.mount_point);
+  if (value < minSize) {
+    return translate('Data volume should have at least {size} GB.', {size: minSize});
   }
 };
 
@@ -69,16 +85,24 @@ const useMinimalSize = (node, volume) => {
 };
 
 export const DataVolumePanel = (props: OwnProps) => {
-  const setValidVolumeSize = useMinimalSize(props.index, props.volume);
+  const setValidVolumeSize = useMinimalSize(props.volumeIndex, props.volumePath);
+  const validateMountPoint = React.useMemo(() =>
+    createMountPointValidator(props.nodeIndex),
+    [props.volumeIndex]
+  );
+  const validateVolumeSize = React.useMemo(() =>
+    createVolumeSizeValidator(props.nodeIndex, props.volumeIndex),
+  [props.nodeIndex, props.volumeIndex]
+);
 
   return (
     <Panel>
       <Panel.Heading>
-        <RemoveButton onClick={() => props.onRemove(props.index)}/>
-        <h4>{translate('Data volume #{index}', {index: props.index + 1})}</h4>
+        <RemoveButton onClick={() => props.onRemove(props.volumeIndex)}/>
+        <h4>{translate('Data volume #{index}', {index: props.volumeIndex + 1})}</h4>
       </Panel.Heading>
       <Panel.Body>
-        <FormSection name={props.volume}>
+        <FormSection name={props.volumePath}>
           <FormGroup
             label={translate('Mount point')}
             required={true}>
@@ -99,6 +123,7 @@ export const DataVolumePanel = (props: OwnProps) => {
               component={IntegerUnitField}
               parse={parseIntField}
               format={formatIntField}
+              validate={validateVolumeSize}
             />
           </FormGroup>
           {props.volumeTypes.length > 0 && (

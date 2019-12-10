@@ -20,6 +20,7 @@ export const NodePanel = props => (
         <NodeRoleGroup/>
         <NodeFlavorGroup options={props.flavors}/>
         <NodeStorageGroup
+          nodeIndex={props.index}
           volumeTypes={props.volumeTypes}
           mountPoints={props.mountPoints}
         />
