@@ -1,18 +1,14 @@
 import * as React from 'react';
 import * as Panel from 'react-bootstrap/lib/Panel';
-import { useDispatch, useSelector } from 'react-redux';
 import { Option } from 'react-select';
-import { Field, FormSection, change, formValueSelector } from 'redux-form';
+import { FormSection } from 'redux-form';
 
-import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { RemoveButton } from '@waldur/marketplace/offerings/RemoveButton';
 
-import { IntegerUnitField } from './IntegerUnitField';
-import { SimpleSelectField } from './SimpleSelectField';
+import { VolumeMountPointGroup } from './VolumeMountPointGroup';
+import { VolumeSizeGroup } from './VolumeSizeGroup';
+import { VolumeTypeGroup } from './VolumeTypeGroup';
 
 interface OwnProps {
   volumeIndex: number;
@@ -23,122 +19,25 @@ interface OwnProps {
   mountPoints: Option[];
 }
 
-const getMinSize = mountPoint =>
-  ENV.plugins.WALDUR_RANCHER.MOUNT_POINT_MIN_SIZE[mountPoint];
-
-const createMountPointValidator = nodeIndex => (value, allValues) => {
-  if (!value) {
-    return;
-  }
-  const nodes = allValues.attributes.nodes;
-  if (nodeIndex >= nodes.length) {
-    return;
-  }
-  let count = 0;
-  const volumes = nodes[nodeIndex].data_volumes || [];
-  for (const volume of volumes) {
-    if (volume.mount_point === value) {
-      count++;
-    }
-    if (count > 1) {
-      return translate('Each mount point should be used once at most.');
-    }
-  }
-};
-
-const createVolumeSizeValidator = (nodeIndex, volumeIndex) => (value, allValues) => {
-  const nodes = allValues.attributes.nodes;
-  if (nodeIndex >= nodes.length) {
-    return;
-  }
-  const volumes = nodes[nodeIndex].data_volumes || [];
-  if (volumeIndex >= volumes.length) {
-    return;
-  }
-  const volume = volumes[volumeIndex];
-  const minSize = getMinSize(volume.mount_point);
-  if (value < minSize) {
-    return translate('Data volume should have at least {size} GB.', {size: minSize});
-  }
-};
-
-const useMinimalSize = (node, volume) => {
-  const prefix = `attributes.nodes[${node}].${volume}`;
-  const mountPointField = `${prefix}.mount_point`;
-  const sizeField = `${prefix}.size`;
-
-  const dispatch = useDispatch();
-  const getSelector = field => state => formValueSelector(FORM_ID)(state, field);
-
-  const mountPoint = useSelector(getSelector(mountPointField));
-  const volumeSize = useSelector(getSelector(sizeField));
-
-  return () => {
-    const minSize = getMinSize(mountPoint);
-    if (!minSize) {
-      return;
-    }
-    if (!volumeSize || volumeSize < minSize) {
-      dispatch(change(FORM_ID, sizeField, minSize));
-    }
-  };
-};
-
-export const DataVolumePanel = (props: OwnProps) => {
-  const setValidVolumeSize = useMinimalSize(props.volumeIndex, props.volumePath);
-  const validateMountPoint = React.useMemo(() =>
-    createMountPointValidator(props.nodeIndex),
-    [props.volumeIndex]
-  );
-  const validateVolumeSize = React.useMemo(() =>
-    createVolumeSizeValidator(props.nodeIndex, props.volumeIndex),
-  [props.nodeIndex, props.volumeIndex]
+export const DataVolumePanel = (props: OwnProps) => (
+  <Panel>
+    <Panel.Heading>
+      <RemoveButton onClick={() => props.onRemove(props.volumeIndex)}/>
+      <h4>{translate('Data volume #{index}', {index: props.volumeIndex + 1})}</h4>
+    </Panel.Heading>
+    <Panel.Body>
+      <FormSection name={props.volumePath}>
+        <VolumeMountPointGroup
+          nodeIndex={props.nodeIndex}
+          volumeIndex={props.volumeIndex}
+          mountPoints={props.mountPoints}
+        />
+        <VolumeSizeGroup
+          nodeIndex={props.nodeIndex}
+          volumeIndex={props.volumeIndex}
+        />
+        <VolumeTypeGroup volumeTypes={props.volumeTypes}/>
+      </FormSection>
+    </Panel.Body>
+  </Panel>
 );
-
-  return (
-    <Panel>
-      <Panel.Heading>
-        <RemoveButton onClick={() => props.onRemove(props.volumeIndex)}/>
-        <h4>{translate('Data volume #{index}', {index: props.volumeIndex + 1})}</h4>
-      </Panel.Heading>
-      <Panel.Body>
-        <FormSection name={props.volumePath}>
-          <FormGroup
-            label={translate('Mount point')}
-            required={true}>
-            <Field
-              name="mount_point"
-              options={props.mountPoints}
-              component={SimpleSelectField}
-              validate={validateMountPoint}
-              onChange={setValidVolumeSize}
-            />
-          </FormGroup>
-          <FormGroup
-            label={translate('Volume size')}
-            required={true}>
-            <Field
-              name="size"
-              units={translate('GB')}
-              component={IntegerUnitField}
-              parse={parseIntField}
-              format={formatIntField}
-              validate={validateVolumeSize}
-            />
-          </FormGroup>
-          {props.volumeTypes.length > 0 && (
-            <FormGroup
-              label={translate('Volume type')}
-              required={true}>
-              <Field
-                name="volume_type"
-                options={props.volumeTypes}
-                component={SimpleSelectField}
-              />
-            </FormGroup>
-          )}
-        </FormSection>
-      </Panel.Body>
-    </Panel>
-  );
-};
