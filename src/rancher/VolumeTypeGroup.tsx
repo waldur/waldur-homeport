@@ -5,16 +5,17 @@ import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-import { NodeRoleField } from './NodeRoleField';
+import { SimpleSelectField } from './SimpleSelectField';
 
-export const NodeRoleGroup = () => (
+export const VolumeTypeGroup = props => props.volumeTypes.length > 0 ? (
   <FormGroup
-    label={translate('Role')}
+    label={translate('Volume type')}
     required={true}>
     <Field
-      name="roles"
-      component={NodeRoleField}
+      name="volume_type"
+      options={props.volumeTypes}
+      component={SimpleSelectField}
       validate={required}
     />
   </FormGroup>
-);
+) : null;

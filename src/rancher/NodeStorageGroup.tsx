@@ -1,19 +1,22 @@
 import * as React from 'react';
-import { Field } from 'redux-form';
+import { FieldArray } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { DataVolumesList } from './DataVolumesList';
+import { SystemVolumeSizeGroup } from './SystemVolumeSizeGroup';
+import { SystemVolumeTypeGroup } from './SystemVolumeTypeGroup';
 
-import { IntegerUnitField } from './IntegerUnitField';
-
-export const NodeStorageGroup = () => (
-  <FormGroup
-    label={translate('Storage')}
-    required={true}>
-    <Field
-      name="storage"
-      units={translate('GB')}
-      component={IntegerUnitField}
-    />
-  </FormGroup>
+export const NodeStorageGroup = props => (
+  <>
+    <SystemVolumeSizeGroup/>
+    <SystemVolumeTypeGroup volumeTypes={props.volumeTypes}/>
+    {props.mountPoints.length > 0 && (
+      <FieldArray
+        name="data_volumes"
+        component={DataVolumesList}
+        nodeIndex={props.nodeIndex}
+        mountPoints={props.mountPoints}
+        volumeTypes={props.volumeTypes}
+      />
+    )}
+  </>
 );

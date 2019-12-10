@@ -52,6 +52,8 @@ const serializer = ({
   networks,
   system_volume_size,
   data_volume_size,
+  system_volume_type,
+  data_volume_type,
   ssh_public_key,
   security_groups,
   availability_zone,
@@ -67,6 +69,8 @@ const serializer = ({
   floating_ips: serializeFloatingIPs(networks),
   system_volume_size,
   data_volume_size: data_volume_size ? data_volume_size : undefined,
+  system_volume_type,
+  data_volume_type,
   availability_zone,
 });
 

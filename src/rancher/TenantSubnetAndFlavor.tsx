@@ -2,22 +2,25 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { change, FieldArray } from 'redux-form';
 
-import { getFirst } from '@waldur/core/api';
+import { getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { ENV } from '@waldur/core/services';
 import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { loadSubnets, loadFlavors } from '@waldur/openstack/api';
+import { Subnet, Flavor } from '@waldur/openstack/openstack-instance/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
 import { NodeList } from './NodeList';
 import { SubnetGroup } from './SubnetGroup';
 
-const fetchFlavorsAndSubnets = async tenant => {
-  const settings = await getFirst('/service-settings/', {scope: tenant});
-  const subnets = await loadSubnets(settings.uuid);
-  const flavors = await loadFlavors(settings.uuid);
+const fetchFlavorsAndSubnets = async settings => {
+  const params = {settings};
+  const subnets = await getAll<Subnet>('/openstacktenant-subnets/', {params});
+  const flavors = await getAll<Flavor>('/openstacktenant-flavors/', {params});
+  const volumeTypes = await getAll<{name: string, url: string}>('/openstacktenant-volume-types/', {params});
+  const mountPoints = ENV.plugins.WALDUR_RANCHER.MOUNT_POINT_CHOICES;
   return {
     subnets: subnets.map(subnet => ({
       label: `${subnet.network_name} / ${subnet.name} (${subnet.cidr})`,
@@ -27,6 +30,14 @@ const fetchFlavorsAndSubnets = async tenant => {
       ...flavor,
       label: `${flavor.name} (${formatFlavor(flavor)})`,
       value: flavor.url,
+    })),
+    volumeTypes: volumeTypes.map(volumeType => ({
+      label: volumeType.name,
+      value: volumeType.url,
+    })),
+    mountPoints: mountPoints.map(choice => ({
+      label: choice,
+      value: choice,
     })),
   };
 };
@@ -65,6 +76,8 @@ export const TenantSubnetAndFlavor: React.FC<{tenant: string}> = props => {
             component={NodeList}
             onChange={updateNodesCount}
             flavors={resourceProps.data.flavors}
+            volumeTypes={resourceProps.data.volumeTypes}
+            mountPoints={resourceProps.data.mountPoints}
           />
         </FormGroup>
       </>

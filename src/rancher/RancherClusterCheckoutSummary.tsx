@@ -12,11 +12,21 @@ const countNodesByRole = (role, nodes) =>
     .filter(node => (node.roles || []).includes(role))
     .length;
 
-const getTotal = (field, nodes) =>
-  nodes
-    .map(node => node.flavor ? node.flavor[field] : undefined)
-    .filter(value => value)
-    .reduce((total, value) => total + value, 0);
+const sum = values =>
+  values.reduce((total, value) => total + value, 0);
+
+const getTotalVolumesSize = volumes =>
+  sum(volumes.map(volume => volume.size));
+
+const getTotalStorage = nodes =>
+  sum(nodes.map(node => node.system_volume_size + getTotalVolumesSize(node.data_volumes || [])));
+
+const getFlavorField = (field, nodes) =>
+  nodes.map(node => node.flavor ? node.flavor[field] : 0);
+
+const getTotalCores = nodes => sum(getFlavorField('cores', nodes));
+
+const getTotalRam = nodes => sum(getFlavorField('ram', nodes));
 
 const getStats = state => {
   const formData: any = getFormValues(FORM_ID)(state);
@@ -28,9 +38,9 @@ const getStats = state => {
   const etcdCount = countNodesByRole('etcd', nodes);
   const workerCount = countNodesByRole('worker', nodes);
   const controlCount = countNodesByRole('controlplane', nodes);
-  const totalCores = getTotal('cores', nodes);
-  const totalStorage = formatFilesize(getTotal('disk', nodes));
-  const totalRam = formatFilesize(getTotal('ram', nodes));
+  const totalCores = getTotalCores(nodes);
+  const totalStorage = formatFilesize(getTotalStorage(nodes) * 1024);
+  const totalRam = formatFilesize(getTotalRam(nodes));
   return {
     nodeCount,
     etcdCount,

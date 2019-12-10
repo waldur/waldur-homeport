@@ -17,9 +17,13 @@ export const NodePanel = props => (
     </Panel.Heading>
     <Panel.Body>
       <FormSection name={props.node}>
-        <NodeFlavorGroup options={props.flavors}/>
-        <NodeStorageGroup/>
         <NodeRoleGroup/>
+        <NodeFlavorGroup options={props.flavors}/>
+        <NodeStorageGroup
+          nodeIndex={props.index}
+          volumeTypes={props.volumeTypes}
+          mountPoints={props.mountPoints}
+        />
       </FormSection>
     </Panel.Body>
   </Panel>
