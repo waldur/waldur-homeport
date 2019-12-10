@@ -41,7 +41,13 @@ export const loadProjectQuotas = (settings_uuid: string, project_uuid: string) =
   getFirst('/openstacktenant-service-project-link/', {
     settings_uuid,
     project_uuid,
-  }).then(data => data.quotas);
+  }).then(data => {
+    if (data) {
+      return data.quotas;
+    } else {
+      throw new Error('Service project link is not found');
+    }
+  });
 
 export const loadServiceSettings = (scope: string) =>
   $http.get(scope).then(response => response.data);

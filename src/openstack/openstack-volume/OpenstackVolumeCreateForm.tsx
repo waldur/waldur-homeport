@@ -37,6 +37,10 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
     return <h3>{translate('Unable to load offering details.')}</h3>;
   }
 
+  if (!state.loaded) {
+    return null;
+  }
+
   return (
     <form className="form-horizontal">
       <FormContainer
