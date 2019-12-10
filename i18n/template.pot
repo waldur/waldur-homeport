@@ -8092,6 +8092,7 @@ msgstr ""
 msgid "Volume size"
 msgstr ""
 
+#: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/rancher/VolumeTypeGroup.tsx
 msgid "Volume type"
 msgstr ""
