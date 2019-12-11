@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { ENV } from '@waldur/core/services';
-import { getDefaultVolumeTypeUrl } from '@waldur/openstack/openstack-instance/utils';
 
 import { DEFAULT_NODE_CONFIGURATION } from './constants';
 import { NodeAddButton } from './NodeAddButton';
@@ -12,7 +11,7 @@ export const NodeList = props => {
     props.fields.push({
       ...DEFAULT_NODE_CONFIGURATION,
       system_volume_size: ENV.plugins.WALDUR_RANCHER.SYSTEM_VOLUME_MIN_SIZE || 1,
-      system_volume_type: getDefaultVolumeTypeUrl(props.volumeTypes),
+      system_volume_type: props.defaultVolumeType,
     });
     props.onChange(props.fields.length + 1);
   };
@@ -33,6 +32,7 @@ export const NodeList = props => {
           flavors={props.flavors}
           volumeTypes={props.volumeTypes}
           mountPoints={props.mountPoints}
+          defaultVolumeType={props.defaultVolumeType}
         />
       ))}
       <NodeAddButton onClick={onAdd}/>

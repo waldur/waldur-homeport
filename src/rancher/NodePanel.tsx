@@ -23,6 +23,7 @@ export const NodePanel = props => (
           nodeIndex={props.index}
           volumeTypes={props.volumeTypes}
           mountPoints={props.mountPoints}
+          defaultVolumeType={props.defaultVolumeType}
         />
       </FormSection>
     </Panel.Body>

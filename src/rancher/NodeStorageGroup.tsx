@@ -16,6 +16,7 @@ export const NodeStorageGroup = props => (
         nodeIndex={props.nodeIndex}
         mountPoints={props.mountPoints}
         volumeTypes={props.volumeTypes}
+        defaultVolumeType={props.defaultVolumeType}
       />
     )}
   </>
