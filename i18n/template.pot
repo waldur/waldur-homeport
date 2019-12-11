@@ -3902,6 +3902,10 @@ msgstr ""
 msgid "Offering logo"
 msgstr ""
 
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Offering needs to be saved before pricing for dynamic components could be set."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering state has been updated."
 msgstr ""
