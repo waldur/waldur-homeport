@@ -1,4 +1,8 @@
+import { Option } from 'react-select';
+
 import { formatFlavor } from '@waldur/resource/utils';
+
+import { VolumeType } from '../types';
 
 export const validateAndSort = (formData, choices, validator, comparator) =>
   choices.map(choice => ({
@@ -22,3 +26,10 @@ export const getMinSystemVolumeSize = formData => {
   const flavorMinValue = formData.flavor ? formData.flavor.disk : 0;
   return Math.max(imageMinValue, flavorMinValue);
 };
+
+export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): Option[] =>
+  volumeTypes.map(volumeType => ({
+    label: volumeType.description ?
+      `${volumeType.name} (${volumeType.description})` : volumeType.name,
+    value: volumeType.url,
+  }));
