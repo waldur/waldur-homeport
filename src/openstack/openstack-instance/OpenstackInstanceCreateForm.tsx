@@ -90,7 +90,8 @@ export class OpenstackInstanceCreateFormComponent extends
         sshKeys,
         availabilityZones,
         volumeTypes: volumeTypes.map(volumeType => ({
-          label: volumeType.name,
+          label: volumeType.description ?
+            `${volumeType.name} (${volumeType.description})` : volumeType.name,
           value: volumeType.url,
         })),
       });
