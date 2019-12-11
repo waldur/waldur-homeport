@@ -11,6 +11,7 @@ import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { loadVolumeAvailabilityZones, loadVolumeTypes } from '../api';
+import { formatVolumeTypeChoices } from '../openstack-instance/utils';
 
 const validateSize = (value: number) => value < 1024 || value > 1024 * 4096 ?
   translate('Size should be between 1 and 4096 GB.') : undefined;
@@ -18,7 +19,7 @@ const validateSize = (value: number) => value < 1024 || value > 1024 * 4096 ?
 const loadData = async settings => {
   const zones = await loadVolumeAvailabilityZones(settings);
   const volumeTypes = await loadVolumeTypes(settings);
-  return {zones, volumeTypes};
+  return {zones, volumeTypes: formatVolumeTypeChoices(volumeTypes)};
 };
 
 export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps> = props => {
@@ -82,8 +83,6 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
             label={translate('Volume type')}
             name="attributes.type"
             options={state.data.volumeTypes}
-            labelKey="name"
-            valueKey="url"
             simpleValue={true}
             required={true}
           />
