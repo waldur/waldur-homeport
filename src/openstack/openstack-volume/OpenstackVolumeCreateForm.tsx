@@ -32,16 +32,16 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
   React.useEffect(call, []);
 
   React.useEffect(() => {
-    if (state.loaded) {
+    if (!state.loaded) {
       return;
     }
     props.initialize({
-        attributes: {
-          size: 1024,
-          type: state.data.defaultVolumeType,
-          ...props.initialAttributes,
-        },
-      });
+      attributes: {
+        size: 1024,
+        type: state.data.defaultVolumeType,
+        ...props.initialAttributes,
+      },
+    });
   }, [state.loaded]);
 
   if (state.loading) {
