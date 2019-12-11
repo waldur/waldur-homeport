@@ -132,6 +132,11 @@ export class OpenstackInstanceCreateFormComponent extends
           data_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
         };
         this.props.initialize({attributes, project: this.props.project});
+      } else {
+        this.props.initialize({attributes: {
+          system_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
+          data_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
+        }, project: this.props.project});
       }
     } catch (error) {
       this.setState({loading: false, loaded: false});
