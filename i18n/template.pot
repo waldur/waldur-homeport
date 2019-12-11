@@ -3744,7 +3744,7 @@ msgstr ""
 msgid "Node plan"
 msgstr ""
 
-#: src/rancher/TenantSubnetAndFlavor.tsx
+#: src/rancher/TenantGroup.tsx
 #: src/rancher/module.js
 msgid "Nodes"
 msgstr ""
@@ -6766,7 +6766,7 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/rancher/RancherClusterForm.tsx
+#: src/rancher/TenantSelector.tsx
 msgid "Tenant"
 msgstr ""
 
@@ -7474,8 +7474,12 @@ msgstr ""
 msgid "Unable to load service providers."
 msgstr ""
 
-#: src/rancher/TenantSubnetAndFlavor.tsx
-msgid "Unable to load subnets and flavors for the tenant."
+#: src/rancher/TenantGroup.tsx
+msgid "Unable to load tenant data."
+msgstr ""
+
+#: src/rancher/TenantSelector.tsx
+msgid "Unable to load tenant."
 msgstr ""
 
 #: src/user/user-popover.html

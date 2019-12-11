@@ -2,11 +2,8 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
-import { getAll } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { useQuery } from '@waldur/core/useQuery';
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, TextField, SelectField } from '@waldur/form-react';
+import { FormContainer, StringField, TextField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
@@ -14,17 +11,9 @@ import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
-import { TenantSubnetAndFlavor } from './TenantSubnetAndFlavor';
+import { TenantGroup } from './TenantGroup';
+import { TenantSelector } from './TenantSelector';
 import { rancherClusterName } from './utils';
-
-const fetchTenants = projectId => getAll('/service-settings/', {
-  params: {
-    project_uuid: projectId,
-    type: 'OpenStackTenant',
-    field: ['name', 'url'],
-    o: 'name',
-  },
-});
 
 const getTenant = state => formValueSelector(FORM_ID)(state, 'attributes.tenant_settings');
 
@@ -45,14 +34,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
     props.initialize(initialData);
   }, []);
 
-  const {state: tenantProps, call: loadTenants} = useQuery(fetchTenants, props.project.uuid);
-  React.useEffect(loadTenants, []);
-
   const tenant = useSelector(getTenant);
-
-  if (!tenantProps.loaded) {
-    return <LoadingSpinner/>;
-  }
 
   return (
     <form className="form-horizontal">
@@ -78,16 +60,8 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
           label={translate('Cluster description')}
           name="attributes.description"
         />
-        <SelectField
-          label={translate('Tenant')}
-          name="attributes.tenant_settings"
-          options={tenantProps.data}
-          required={true}
-          labelKey="name"
-          valueKey="url"
-          simpleValue={true}
-        />
-        <TenantSubnetAndFlavor tenant={tenant}/>
+        <TenantSelector project={props.project}/>
+        {tenant && <TenantGroup tenant={tenant}/>}
       </FormContainer>
     </form>
   );

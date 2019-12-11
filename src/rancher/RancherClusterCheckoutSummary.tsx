@@ -31,7 +31,7 @@ const getTotalRam = nodes => sum(getFlavorField('ram', nodes));
 const getStats = state => {
   const formData: any = getFormValues(FORM_ID)(state);
   if (!formData || !formData.attributes) {
-    return;
+    return {};
   }
   const nodes = formData.attributes.nodes;
   const nodeCount = nodes.length;
