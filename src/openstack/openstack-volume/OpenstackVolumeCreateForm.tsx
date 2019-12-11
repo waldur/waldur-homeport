@@ -11,6 +11,7 @@ import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { loadVolumeAvailabilityZones, loadVolumeTypes } from '../api';
+import { formatVolumeTypeChoices, getDefaultVolumeTypeUrl } from '../openstack-instance/utils';
 
 const validateSize = (value: number) => value < 1024 || value > 1024 * 4096 ?
   translate('Size should be between 1 and 4096 GB.') : undefined;
@@ -18,16 +19,30 @@ const validateSize = (value: number) => value < 1024 || value > 1024 * 4096 ?
 const loadData = async settings => {
   const zones = await loadVolumeAvailabilityZones(settings);
   const volumeTypes = await loadVolumeTypes(settings);
-  return {zones, volumeTypes};
+  return {
+    zones,
+    volumeTypes: formatVolumeTypeChoices(volumeTypes),
+    defaultVolumeType: getDefaultVolumeTypeUrl(volumeTypes),
+  };
 };
 
 export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps> = props => {
   const {call, state} = useQuery(loadData, props.offering.scope_uuid);
 
+  React.useEffect(call, []);
+
   React.useEffect(() => {
-    props.initialize({ attributes: {size: 1024, ...props.initialAttributes} });
-    call();
-  }, []);
+    if (!state.loaded) {
+      return;
+    }
+    props.initialize({
+      attributes: {
+        size: 1024,
+        type: state.data.defaultVolumeType,
+        ...props.initialAttributes,
+      },
+    });
+  }, [state.loaded]);
 
   if (state.loading) {
     return <LoadingSpinner/>;
@@ -82,8 +97,6 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
             label={translate('Volume type')}
             name="attributes.type"
             options={state.data.volumeTypes}
-            labelKey="name"
-            valueKey="url"
             simpleValue={true}
             required={true}
           />

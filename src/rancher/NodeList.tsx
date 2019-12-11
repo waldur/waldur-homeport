@@ -11,7 +11,7 @@ export const NodeList = props => {
     props.fields.push({
       ...DEFAULT_NODE_CONFIGURATION,
       system_volume_size: ENV.plugins.WALDUR_RANCHER.SYSTEM_VOLUME_MIN_SIZE || 1,
-      system_volume_type: props.volumeTypes.length > 0 ? props.volumeTypes[0].value : undefined,
+      system_volume_type: props.defaultVolumeType,
     });
     props.onChange(props.fields.length + 1);
   };
@@ -32,6 +32,7 @@ export const NodeList = props => {
           flavors={props.flavors}
           volumeTypes={props.volumeTypes}
           mountPoints={props.mountPoints}
+          defaultVolumeType={props.defaultVolumeType}
         />
       ))}
       <NodeAddButton onClick={onAdd}/>

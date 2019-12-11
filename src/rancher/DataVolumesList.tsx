@@ -18,7 +18,10 @@ export const DataVolumesList = props => (
           mountPoints={props.mountPoints}
         />
       ))}
-      <DataVolumeAddButton onClick={() => props.fields.push({})}/>
+      <DataVolumeAddButton onClick={() => props.fields.push({
+        size: 1,
+        volume_type: props.defaultVolumeType,
+      })}/>
     </Col>
   </div>
 );

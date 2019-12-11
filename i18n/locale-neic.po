@@ -3,6 +3,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: neic\n"
 
 #: src/billing/billing-record-details.html
 msgid "(VAT is not included)"
@@ -2071,7 +2078,7 @@ msgstr ""
 
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Explore {deployment} Marketplace"
-msgstr ""
+msgstr "Explore Nordic Infrastructure Services"
 
 #: src/table-react/TableExportButton.tsx
 #: src/table/responsive-table.js
@@ -3126,7 +3133,7 @@ msgstr ""
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Marketplace"
-msgstr ""
+msgstr "Nordic Services"
 
 #: src/marketplace/routes.js
 msgid "Marketplace checkout"
@@ -3138,7 +3145,7 @@ msgstr ""
 
 #: src/marketplace/routes.js
 msgid "Marketplace offerings"
-msgstr ""
+msgstr "Nordic Service offerings"
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Marketplace service provider"
@@ -3744,7 +3751,7 @@ msgstr ""
 msgid "Node plan"
 msgstr ""
 
-#: src/rancher/TenantGroup.tsx
+#: src/rancher/TenantSubnetAndFlavor.tsx
 #: src/rancher/module.js
 msgid "Nodes"
 msgstr ""
@@ -3900,10 +3907,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Offering logo"
-msgstr ""
-
-#: src/openstack/OpenStackPluginOptionsForm.tsx
-msgid "Offering needs to be saved before pricing for dynamic components could be set."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -6770,7 +6773,7 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/rancher/TenantSelector.tsx
+#: src/rancher/RancherClusterForm.tsx
 msgid "Tenant"
 msgstr ""
 
@@ -7478,12 +7481,8 @@ msgstr ""
 msgid "Unable to load service providers."
 msgstr ""
 
-#: src/rancher/TenantGroup.tsx
-msgid "Unable to load tenant data."
-msgstr ""
-
-#: src/rancher/TenantSelector.tsx
-msgid "Unable to load tenant."
+#: src/rancher/TenantSubnetAndFlavor.tsx
+msgid "Unable to load subnets and flavors for the tenant."
 msgstr ""
 
 #: src/user/user-popover.html

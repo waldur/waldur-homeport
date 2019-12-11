@@ -14,4 +14,6 @@ export interface AvailabilityZone {
 export interface VolumeType {
   url: string;
   name: string;
+  description: string;
+  is_default: boolean;
 }

@@ -23,6 +23,7 @@ export const OpenStackPluginOptionsForm = ({ container, locale }) => {
         options={STORAGE_MODE_OPTIONS}
         simpleValue={true}
         required={true}
+        description={translate('Offering needs to be saved before pricing for dynamic components could be set.')}
       />
     </FormContainer>
   );
