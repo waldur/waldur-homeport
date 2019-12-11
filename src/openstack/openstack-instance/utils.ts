@@ -33,3 +33,10 @@ export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): Option[] =>
       `${volumeType.name} (${volumeType.description})` : volumeType.name,
     value: volumeType.url,
   }));
+
+export const getDefaultVolumeTypeUrl = volumeTypes => {
+  const defaultVolumeType = volumeTypes.find(volumeType => volumeType.is_default);
+  if (defaultVolumeType) {
+    return defaultVolumeType.url;
+  }
+};

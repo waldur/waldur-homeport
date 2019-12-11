@@ -17,7 +17,7 @@ import { flavorValidator, flavorComparator, internalIpFormatter } from '@waldur/
 import { OpenstackInstanceNetworks, getDefaultFloatingIps } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
 import { Subnet, FloatingIp, ServiceComponent, Flavor, SshKey } from '@waldur/openstack/openstack-instance/types';
-import { validateAndSort, calculateSystemVolumeSize, formatVolumeTypeChoices } from '@waldur/openstack/openstack-instance/utils';
+import { validateAndSort, calculateSystemVolumeSize, formatVolumeTypeChoices, getDefaultVolumeTypeUrl } from '@waldur/openstack/openstack-instance/utils';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 import { User } from '@waldur/workspace/types';
 
@@ -128,8 +128,15 @@ export class OpenstackInstanceCreateFormComponent extends
           security_groups,
           availability_zone,
           networks,
+          system_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
+          data_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
         };
         this.props.initialize({attributes, project: this.props.project});
+      } else {
+        this.props.initialize({attributes: {
+          system_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
+          data_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
+        }, project: this.props.project});
       }
     } catch (error) {
       this.setState({loading: false, loaded: false});

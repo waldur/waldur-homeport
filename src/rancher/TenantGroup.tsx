@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Subnet, Flavor } from '@waldur/openstack/openstack-instance/types';
-import { formatVolumeTypeChoices } from '@waldur/openstack/openstack-instance/utils';
+import { formatVolumeTypeChoices, getDefaultVolumeTypeUrl } from '@waldur/openstack/openstack-instance/utils';
 import { VolumeType } from '@waldur/openstack/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
@@ -34,6 +34,7 @@ const loadData = async settings => {
       value: flavor.url,
     })),
     volumeTypes: formatVolumeTypeChoices(volumeTypes),
+    defaultVolumeType: getDefaultVolumeTypeUrl(volumeTypes),
     mountPoints: mountPoints.map(choice => ({
       label: choice,
       value: choice,
@@ -73,6 +74,7 @@ export const TenantGroup = props => {
             flavors={resourceProps.data.flavors}
             volumeTypes={resourceProps.data.volumeTypes}
             mountPoints={resourceProps.data.mountPoints}
+            defaultVolumeType={resourceProps.data.defaultVolumeType}
           />
         </FormGroup>
       </>
