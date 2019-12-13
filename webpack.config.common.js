@@ -25,7 +25,7 @@ module.exports = {
       sass: path.resolve('./src/sass/'),
     }
   },
-  devtool: utils.isProd ? '' : 'source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {

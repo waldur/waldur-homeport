@@ -120,7 +120,7 @@ module.exports = {
       name: '[name]_[hash]_lib',
     }),
   ],
-  devtool: utils.isProd ? '' : 'source-map',
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
