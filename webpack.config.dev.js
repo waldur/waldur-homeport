@@ -18,7 +18,7 @@ module.exports = merge(baseConfig, {
     }),
     new AddAssetHtmlPlugin({
       filepath: path.resolve(utils.vendorBundle),
-      includeSourcemap: !utils.isProd,
+      includeSourcemap: true,
       outputPath: 'scripts/',
       publicPath: 'scripts/',
       hash: true,

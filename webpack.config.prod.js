@@ -10,7 +10,7 @@ const baseConfig = require('./webpack.config.common.js');
 const utils = require('./webpack.utils');
 
 module.exports = merge(baseConfig, {
-  devtool: '',
+  devtool: 'source-map',
   mode: 'production',
   optimization: {
     minimizer: [
@@ -31,7 +31,7 @@ module.exports = merge(baseConfig, {
     }),
     new AddAssetHtmlPlugin({
       filepath: path.resolve(utils.vendorBundle),
-      includeSourcemap: !utils.isProd,
+      includeSourcemap: true,
       outputPath: 'scripts/',
       publicPath: 'scripts/',
       hash: true,
