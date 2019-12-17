@@ -33,11 +33,12 @@ const getDailyPrice = (formData, components) => {
    * Therefore we should convert storage from GB to MB for price estimatation.
    */
 
-  if (components && formData.size) {
-    return formData.size * components.storage / 1024.0;
-  } else {
+  if (!components || !formData.size) {
     return 0;
   }
+  const size = formData.size / 1024.0;
+  const component = formData.type ? `gigabytes_${formData.type.name}` : 'storage';
+  return size * (components[component] || 0);
 };
 
 const getMonthlyPrice = (formData, components) => getDailyPrice(formData, components) * 30;

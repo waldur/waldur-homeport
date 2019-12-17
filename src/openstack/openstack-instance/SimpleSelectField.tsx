@@ -9,7 +9,6 @@ export const SimpleSelectField = props => (
       value={props.input.value}
       onChange={props.input.onChange}
       options={props.options}
-      simpleValue={true}
     />
     {props.meta.touched && <FieldError error={props.meta.error} />}
   </>

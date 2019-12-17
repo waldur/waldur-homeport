@@ -69,8 +69,8 @@ const serializer = ({
   floating_ips: serializeFloatingIPs(networks),
   system_volume_size,
   data_volume_size: data_volume_size ? data_volume_size : undefined,
-  system_volume_type,
-  data_volume_type,
+  system_volume_type: system_volume_type && system_volume_type.value,
+  data_volume_type: data_volume_type && data_volume_type.value,
   availability_zone,
 });
 

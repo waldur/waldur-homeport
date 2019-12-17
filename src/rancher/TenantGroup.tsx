@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Subnet, Flavor } from '@waldur/openstack/openstack-instance/types';
-import { formatVolumeTypeChoices, getDefaultVolumeTypeUrl } from '@waldur/openstack/openstack-instance/utils';
+import { formatVolumeTypeChoices, getDefaultVolumeType } from '@waldur/openstack/openstack-instance/utils';
 import { VolumeType } from '@waldur/openstack/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
@@ -23,6 +23,8 @@ const loadData = async settings => {
   const flavors = await getAll<Flavor>('/openstacktenant-flavors/', {params});
   const volumeTypes = await getAll<VolumeType>('/openstacktenant-volume-types/', {params});
   const mountPoints = ENV.plugins.WALDUR_RANCHER.MOUNT_POINT_CHOICES;
+  const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
+  const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
   return {
     subnets: subnets.map(subnet => ({
       label: `${subnet.network_name} / ${subnet.name} (${subnet.cidr})`,
@@ -33,8 +35,8 @@ const loadData = async settings => {
       label: `${flavor.name} (${formatFlavor(flavor)})`,
       value: flavor.url,
     })),
-    volumeTypes: formatVolumeTypeChoices(volumeTypes),
-    defaultVolumeType: getDefaultVolumeTypeUrl(volumeTypes),
+    volumeTypes: volumeTypeChoices,
+    defaultVolumeType: defaultVolumeType && defaultVolumeType.url,
     mountPoints: mountPoints.map(choice => ({
       label: choice,
       value: choice,
