@@ -26,6 +26,9 @@ export interface ScheduleFormData {
   start_time: string;
   end_date: string;
   end_time: string;
+  type: string;
+  title: string;
+  id: string;
 }
 
 export type OfferingLimits = Record<string, {min: number; max: number}>;

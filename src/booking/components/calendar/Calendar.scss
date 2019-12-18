@@ -1,3 +1,57 @@
 .fc-button {
   padding: 0 .6em;
 }
+
+.fc-header-toolbar .btn {
+  font-size: 12px;
+}
+
+.btn-delete:hover {
+  background-color: #ed5565; // #d9534f
+  color: white;
+}
+
+.checkbox-toggle {
+  min-width: 48px;
+  height: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+  label {
+    cursor: pointer;
+    text-indent: -9999px;
+    max-width: 100%;
+    min-width: 48px;
+    height: 100%;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+  }
+  label:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 45%;
+    height: 90%;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+    transform: translateX(5%) translateY(-50%);
+  }
+  input:checked + label {
+    background: #1ab394;
+    &:after {
+      transform: translateX(115%) translateY(-50%);
+    }
+  }
+  label:active:after {
+    transform: translateX(50%) translateY(-50%);
+  }
+}

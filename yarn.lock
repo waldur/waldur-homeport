@@ -806,6 +806,11 @@
   resolved "https://registry.yarnpkg.com/@esri/arcgis-to-geojson-utils/-/arcgis-to-geojson-utils-1.1.1.tgz#0f0b42e725586147f2131f2236649fd7511811f0"
   integrity sha512-utfhzjeS3kU57PmEUHrysRKnGf5/YJpXE0p55bg4N9yF5d26z9V+xzpFXBEeo9OMeUx3COI2p6XCF65ikmtOOA==
 
+"@fullcalendar/bootstrap@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/bootstrap/-/bootstrap-4.3.0.tgz#c989968f92c4ec26a0ff7dfc35b186aa38978ba1"
+  integrity sha512-Ue0Bm2m765jY2LKRsD7ZyoeYNJeeyXxyzSeMdYY4AHFZTevTlcxv1T7ZYPRDBhseewLwiFHP8e0Okfdiji+BCg==
+
 "@fullcalendar/core@^4.2.0", "@fullcalendar/core@~4.2.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@fullcalendar/core/-/core-4.2.0.tgz#16716d6617137e54fceeb03c72f5124c92b86e58"
@@ -820,6 +825,21 @@
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@fullcalendar/interaction/-/interaction-4.2.0.tgz#312e83f575aed67c33aec69884664d436aaedef2"
   integrity sha512-wwAyocUp1HEY7c7xCymR9EGdh7AWZrwNiBQlIpP3ne0eJT0U4ZjlnoOoels3VPsTJ9a6pdO1/XoGjEvL1T5y4g==
+
+"@fullcalendar/list@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/list/-/list-4.3.0.tgz#b2523e54db0fd4cd44f7e93d72353d649c529dd7"
+  integrity sha512-Al+XaKynC4RsJpXyWOWJgrVQXFOSC+fg8DI4HGAt/mrrwazZ1L0pTQwCLeU8auZp53VFazCiNxV+jkAbuDdbDQ==
+
+"@fullcalendar/moment-timezone@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/moment-timezone/-/moment-timezone-4.3.0.tgz#452b6721beb8a392a01d6201381ead1f7949d962"
+  integrity sha512-ko7WEcWtayi4GCUuRv99ml5MxfbZ28l0hWdtL95ErEaHqBrZYn3Y1F0P2jzFklAFKvyywxD0cq61wbGYpI20gg==
+
+"@fullcalendar/moment@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/moment/-/moment-4.3.0.tgz#7db57cc9a1d11055974c42388fab16bfa523d74c"
+  integrity sha512-Ek+wJL+PcLpBddrOoIFLGnqsp1LG5Jm6lWeqA37sKvTwx/02IgZsHzx+lrhzR6l1JTFmtAfuANQeYdYYjVor1Q==
 
 "@fullcalendar/react@^4.2.0":
   version "4.2.0"

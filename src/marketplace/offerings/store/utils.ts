@@ -126,7 +126,7 @@ export const formatOfferingRequest = (request: OfferingFormData, components: Off
   if (request.schedules) {
     result.attributes = {
       ...result.attributes,
-      schedules: request.schedules.map(pick(['start', 'end', 'title'])),
+      schedules: request.schedules.map(pick(['start', 'end', 'title', 'type', 'id'])),
     };
   }
 
