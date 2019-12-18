@@ -59,8 +59,7 @@ export const ResourceRow = ({ resource, value, toggleResource, offering, plans, 
         )}
         <td>
           <p className="form-control-static">
-            <ResourceIcon resource={payload}
-            />
+            {resource.resource_type && <ResourceIcon resource={payload}/>}
           </p>
         </td>
         <td>
