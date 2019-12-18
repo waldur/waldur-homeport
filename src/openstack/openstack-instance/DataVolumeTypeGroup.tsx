@@ -8,9 +8,8 @@ import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 import { SimpleSelectField } from './SimpleSelectField';
 
 export const DataVolumeTypeGroup = props => props.volumeTypes.length > 0 ? (
-  <CreateResourceFormGroup
-    label={translate('Data volume type')}
-    required={true}>
+  <CreateResourceFormGroup>
+    <label>{translate('Data volume type')}</label>
     <Field
       name="attributes.data_volume_type"
       options={props.volumeTypes}

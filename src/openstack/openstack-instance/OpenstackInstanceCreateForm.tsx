@@ -43,6 +43,7 @@ interface OpenstackInstanceCreateFormState {
   sshKeys: SshKey[];
   availabilityZones: AvailabilityZone[];
   volumeTypes: Option[];
+  isDataVolumeActive: boolean;
 }
 
 interface OpenstackInstanceCreateFormComponentProps {
@@ -65,6 +66,7 @@ export class OpenstackInstanceCreateFormComponent extends
     sshKeys: [],
     availabilityZones: [],
     volumeTypes: [],
+    isDataVolumeActive: false,
   };
 
   async loadData() {
@@ -168,6 +170,8 @@ export class OpenstackInstanceCreateFormComponent extends
     }
   }
 
+  setDataVolumeActive = value => this.setState({isDataVolumeActive: value});
+
   shouldComponentUpdate(prevProps) {
     if (prevProps.valid !== this.props.valid || prevProps.invalid !== this.props.invalid) {
       return false;
@@ -207,8 +211,15 @@ export class OpenstackInstanceCreateFormComponent extends
           <AvailabilityZoneGroup availabilityZones={this.state.availabilityZones} />
           <SystemVolumeSizeGroup/>
           <SystemVolumeTypeGroup volumeTypes={this.state.volumeTypes}/>
-          <DataVolumeSizeGroup/>
-          <DataVolumeTypeGroup volumeTypes={this.state.volumeTypes}/>
+          <DataVolumeSizeGroup
+            isActive={this.state.isDataVolumeActive}
+            setActive={this.setDataVolumeActive}
+          />
+          {this.state.isDataVolumeActive && (
+            <DataVolumeTypeGroup
+              volumeTypes={this.state.volumeTypes}
+            />
+          )}
           <PublicKeyGroup sshKeys={this.state.sshKeys}/>
           <CreateResourceFormGroup label={translate('Security groups')}>
             <Field

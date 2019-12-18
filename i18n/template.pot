@@ -400,6 +400,10 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
+msgid "All day"
+msgstr ""
+
 #: src/appstore/providers/appstore-providers-service.js
 msgid "All provider quotas have reached limit."
 msgstr ""
@@ -904,6 +908,7 @@ msgstr ""
 #: src/appstore/appstore-store.html
 #: src/appstore/dialog/appstore-selector-dialog.html
 #: src/auth/valimo/auth-valimo-dialog.html
+#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/cost-planning/cost-plan-dialog.html
 #: src/digitalocean/droplet-resize.html
 #: src/form-react/AppstoreListDialog.tsx
@@ -1304,6 +1309,10 @@ msgstr ""
 msgid "Create an allocation for computations in batch resources."
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
+msgid "Create an availability"
+msgstr ""
+
 #: src/ansible/application-list.js
 msgid "Create application"
 msgstr ""
@@ -1571,6 +1580,7 @@ msgstr ""
 msgid "Default value"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/cost-planning/cost-plan-items.html
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1738,10 +1748,6 @@ msgstr ""
 msgid "Disks"
 msgstr ""
 
-#: src/booking/components/modal/CalendarEventModal.tsx
-msgid "Dismiss"
-msgstr ""
-
 #: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Display name"
 msgstr ""
@@ -1857,6 +1863,10 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
+msgid "Edit booking event"
+msgstr ""
+
 #: src/team/add-project-member.js
 msgid "Edit project member"
 msgstr ""
@@ -1891,6 +1901,10 @@ msgstr ""
 
 #: src/user/hooks/hook-details.html
 msgid "Enabled"
+msgstr ""
+
+#: src/booking/components/modal/CalendarEventModal.tsx
+msgid "End"
 msgstr ""
 
 #: src/billing/billing-record-details.html
@@ -3308,6 +3322,10 @@ msgstr ""
 
 #: src/quotas/constants.js
 msgid "Monthly cost"
+msgstr ""
+
+#: src/booking/components/calendar/defaultConfig.ts
+msgid "More"
 msgstr ""
 
 #: src/billing/events/invoice-events-dialog.html
@@ -5800,6 +5818,7 @@ msgstr ""
 msgid "Sankey diagram"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/cost-planning/cost-plan-dialog.html
 #: src/project/project-providers.html
 #: src/providers/ProviderUpdateForm.tsx
@@ -6443,6 +6462,7 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
+#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/openstack/openstack-instance/actions/StartAction.ts
 msgid "Start"
 msgstr ""
@@ -6574,7 +6594,6 @@ msgstr ""
 msgid "Storages"
 msgstr ""
 
-#: src/booking/components/modal/CalendarEventModal.tsx
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
@@ -7100,6 +7119,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementStep.tsx
 msgid "To update settings, please contact support or use admin interface."
+msgstr ""
+
+#: src/booking/components/modal/DateAndTimeSelect.tsx
+msgid "Today"
 msgstr ""
 
 #: src/analytics/resource-pie-chart.html
