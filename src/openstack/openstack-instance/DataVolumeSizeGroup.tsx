@@ -9,7 +9,7 @@ export const DataVolumeSizeGroup = props => (
   <CreateResourceFormGroup>
     <Field
       name="attributes.data_volume_size"
-      component={OpenstackInstanceDataVolume}
+      component={OpenstackInstanceDataVolume as any}
       min={1}
       max={1 * 4096}
       units="GB"
