@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
-interface OpenstackInstanceDataVolumeProps extends TranslateProps {
+interface OpenstackInstanceDataVolumeProps {
   input: {
     value: string;
     onChange(e: React.ChangeEvent<HTMLInputElement>): void;
@@ -16,7 +16,7 @@ interface OpenstackInstanceDataVolumeProps extends TranslateProps {
   setActive(value: boolean): void;
 }
 
-export class OpenstackInstanceDataVolumeComponent extends React.Component<OpenstackInstanceDataVolumeProps> {
+export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstanceDataVolumeProps> {
   toggleField = () => {
     this.props.setActive(!this.props.isActive);
   }
@@ -39,7 +39,7 @@ export class OpenstackInstanceDataVolumeComponent extends React.Component<Openst
                 <button type="button" className="btn btn-default" onClick={this.toggleField}>
                   <i className="fa fa-plus"/>
                   {' '}
-                  {props.translate('Add data volume')}
+                  {translate('Add data volume')}
                 </button>
               </td>
             </tr>
@@ -47,7 +47,7 @@ export class OpenstackInstanceDataVolumeComponent extends React.Component<Openst
           {this.props.isActive &&
             <tr>
               <td className="no-padding">
-                <label>{props.translate('Data volume size:')}</label>
+                <label>{translate('Data volume size:')}</label>
               </td>
             </tr>
           }
@@ -71,7 +71,7 @@ export class OpenstackInstanceDataVolumeComponent extends React.Component<Openst
               <td className="no-padding">
                 <Tooltip
                   id="data-volume-disable"
-                  label={props.translate('Disable data volume')}>
+                  label={translate('Disable data volume')}>
                     <button type="button" className="btn btn-default" onClick={this.toggleField}>
                       <i className="fa fa-trash-o"/>
                     </button>
@@ -84,5 +84,3 @@ export class OpenstackInstanceDataVolumeComponent extends React.Component<Openst
     );
   }
 }
-
-export const OpenstackInstanceDataVolume = withTranslation(OpenstackInstanceDataVolumeComponent);
