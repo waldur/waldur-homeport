@@ -5,20 +5,16 @@ import { OpenstackInstanceDataVolume } from '@waldur/openstack/openstack-instanc
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-export const DataVolumeSizeGroup = () => (
+export const DataVolumeSizeGroup = props => (
   <CreateResourceFormGroup>
     <Field
       name="attributes.data_volume_size"
-      component={fieldProps =>
-        <OpenstackInstanceDataVolume
-          field={{
-            input: fieldProps.input,
-            min: 1,
-            max: 1 * 4096,
-          }}
-          units="GB"
-        />
-      }
+      component={OpenstackInstanceDataVolume}
+      min={1}
+      max={1 * 4096}
+      units="GB"
+      isActive={props.isActive}
+      setActive={props.setActive}
       format={v => v ? v / 1024 : ''}
       normalize={v => Number(v) * 1024}
     />

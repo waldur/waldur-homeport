@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
-interface IntegerFormField {
+interface OpenstackInstanceDataVolumeProps extends TranslateProps {
   input: {
     value: string;
     onChange(e: React.ChangeEvent<HTMLInputElement>): void;
@@ -11,35 +11,29 @@ interface IntegerFormField {
   step?: number;
   min?: number;
   max?: number;
-}
-
-interface OpenstackInstanceDataVolumeProps extends TranslateProps {
-  field: IntegerFormField;
   units?: string;
+  isActive: boolean;
+  setActive(value: boolean): void;
 }
 
 export class OpenstackInstanceDataVolumeComponent extends React.Component<OpenstackInstanceDataVolumeProps> {
-  state = {
-    active: false,
-  };
-
   toggleField = () => {
-    this.setState({active: !this.state.active});
+    this.props.setActive(!this.props.isActive);
   }
 
   componentDidMount() {
-    if (this.props.field.min) {
+    if (this.props.min) {
       this.toggleField();
     }
   }
 
   render() {
     const props = this.props;
-    const {input, ...rest} = this.props.field;
+    const {input, ...rest} = this.props;
     return (
       <table className="table table-borderless m-b-xs">
         <tbody>
-          {!this.state.active &&
+          {!this.props.isActive &&
             <tr>
               <td className="no-padding">
                 <button type="button" className="btn btn-default" onClick={this.toggleField}>
@@ -50,19 +44,19 @@ export class OpenstackInstanceDataVolumeComponent extends React.Component<Openst
               </td>
             </tr>
           }
-          {this.state.active &&
+          {this.props.isActive &&
             <tr>
               <td className="no-padding">
                 <label>{props.translate('Data volume size:')}</label>
               </td>
             </tr>
           }
-          {this.state.active &&
+          {this.props.isActive &&
             <tr>
               <td className="no-padding" style={{width: 220}}>
                 <div className="input-group" style={{maxWidth: 200}}>
                   <input
-                    {...props.field.input}
+                    {...props.input}
                     type="number"
                     className="form-control"
                     {...rest}
