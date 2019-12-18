@@ -8,6 +8,7 @@ import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
 
 import { EditableCalendar } from '@waldur/booking/components/calendar/EditableCalendar';
 import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
+import {createCalendarBookingEvent, deleteCalendarBookingEvent} from '@waldur/booking/utils';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { withModal } from '@waldur/modal/withModal';
 
@@ -23,7 +24,7 @@ type OfferingSchedulerProps =
   };
 
 export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
-  <div className="form-group OfferingScheduler">
+  <div className="form-group ">
     <Col smOffset={2} sm={8}>
       <Panel>
         <Panel.Heading>
@@ -32,46 +33,34 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
         <Panel.Body>
           <EditableCalendar
             events={props.schedules}
-            onSelectDate={event => {
-              const field = createBooking(event);
-              props.fields.push(field);
-            }}
+            onSelectDate={event => props.fields.push(createCalendarBookingEvent({ ...event, type: 'availability' }) )}
             onSelectEvent={prevEvent => {
-              props.setModalProps({ event: prevEvent.event });
+              props.setModalProps({
+                event: prevEvent.event,
+                destroy: () => deleteCalendarBookingEvent(props.fields, prevEvent.event),
+              });
               props.openModal(event => {
-                removeEventFromFields(props.fields, prevEvent.event);
-                const field = createBooking(event);
+                const field = createCalendarBookingEvent({ ...prevEvent.event.extendedProps, event });
+                deleteCalendarBookingEvent(props.fields, prevEvent.event);
                 props.fields.push(field);
               });
             }}
             eventResize={slot => {
-              removeEventFromFields(props.fields, slot.prevEvent);
-              const field = createBooking(slot.event);
+              const field = createCalendarBookingEvent(slot.event);
+              deleteCalendarBookingEvent(props.fields, slot.prevEvent);
               props.fields.push(field);
             }}
             eventDrop={slot => {
-              removeEventFromFields(props.fields, slot.oldEvent);
-              const field = createBooking(slot.event);
+              const field = createCalendarBookingEvent(slot.event);
+              deleteCalendarBookingEvent(props.fields, slot.oldEvent);
               props.fields.push(field);
-            }}/>
+            }}
+          />
         </Panel.Body>
       </Panel>
     </Col>
   </div>
 );
-
-const createBooking = (slot: EventInput) => ({
-  ...slot,
-  type: 'availability',
-});
-
-const removeEventFromFields = (fields, event) => {
-  fields.getAll().forEach((field, index) => {
-    if (field.id === event.id) {
-      fields.remove(index);
-    }
-  });
-};
 
 const mapStateToProps = state => ({
   schedules: formValueSelector('marketplaceOfferingCreate')(state, 'schedules'),
