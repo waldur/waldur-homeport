@@ -29,7 +29,6 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
 
   render() {
     const props = this.props;
-    const {input, ...rest} = this.props;
     return (
       <table className="table table-borderless m-b-xs">
         <tbody>
@@ -59,7 +58,9 @@ export class OpenstackInstanceDataVolume extends React.Component<OpenstackInstan
                     {...props.input}
                     type="number"
                     className="form-control"
-                    {...rest}
+                    min={props.min}
+                    max={props.max}
+                    step={props.step}
                   />
                   {props.units && (
                     <span className="input-group-addon">
