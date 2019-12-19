@@ -17,7 +17,7 @@ import { flavorValidator, flavorComparator, internalIpFormatter } from '@waldur/
 import { OpenstackInstanceNetworks, getDefaultFloatingIps } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
 import { Subnet, FloatingIp, ServiceComponent, Flavor, SshKey } from '@waldur/openstack/openstack-instance/types';
-import { validateAndSort, calculateSystemVolumeSize, formatVolumeTypeChoices, getDefaultVolumeTypeUrl } from '@waldur/openstack/openstack-instance/utils';
+import { validateAndSort, calculateSystemVolumeSize, formatVolumeTypeChoices, getDefaultVolumeType } from '@waldur/openstack/openstack-instance/utils';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 import { User } from '@waldur/workspace/types';
 
@@ -43,6 +43,7 @@ interface OpenstackInstanceCreateFormState {
   sshKeys: SshKey[];
   availabilityZones: AvailabilityZone[];
   volumeTypes: Option[];
+  isDataVolumeActive: boolean;
 }
 
 interface OpenstackInstanceCreateFormComponentProps {
@@ -65,6 +66,7 @@ export class OpenstackInstanceCreateFormComponent extends
     sshKeys: [],
     availabilityZones: [],
     volumeTypes: [],
+    isDataVolumeActive: false,
   };
 
   async loadData() {
@@ -91,6 +93,7 @@ export class OpenstackInstanceCreateFormComponent extends
         availabilityZones,
         volumeTypes: formatVolumeTypeChoices(volumeTypes),
       });
+      const defaultVolumeType = getDefaultVolumeType(formatVolumeTypeChoices(volumeTypes));
       const initial = this.props.initialAttributes;
       if (initial) {
         const flavor = flavors.find(s => s.url === initial.flavor);
@@ -128,14 +131,14 @@ export class OpenstackInstanceCreateFormComponent extends
           security_groups,
           availability_zone,
           networks,
-          system_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
-          data_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
+          system_volume_type: defaultVolumeType,
+          data_volume_type: defaultVolumeType,
         };
         this.props.initialize({attributes, project: this.props.project});
       } else {
         this.props.initialize({attributes: {
-          system_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
-          data_volume_type: getDefaultVolumeTypeUrl(volumeTypes),
+          system_volume_type: defaultVolumeType,
+          data_volume_type: defaultVolumeType,
         }, project: this.props.project});
       }
     } catch (error) {
@@ -166,6 +169,8 @@ export class OpenstackInstanceCreateFormComponent extends
       this.props.change('attributes.flavor', null);
     }
   }
+
+  setDataVolumeActive = value => this.setState({isDataVolumeActive: value});
 
   shouldComponentUpdate(prevProps) {
     if (prevProps.valid !== this.props.valid || prevProps.invalid !== this.props.invalid) {
@@ -206,8 +211,15 @@ export class OpenstackInstanceCreateFormComponent extends
           <AvailabilityZoneGroup availabilityZones={this.state.availabilityZones} />
           <SystemVolumeSizeGroup/>
           <SystemVolumeTypeGroup volumeTypes={this.state.volumeTypes}/>
-          <DataVolumeSizeGroup/>
-          <DataVolumeTypeGroup volumeTypes={this.state.volumeTypes}/>
+          <DataVolumeSizeGroup
+            isActive={this.state.isDataVolumeActive}
+            setActive={this.setDataVolumeActive}
+          />
+          {this.state.isDataVolumeActive && (
+            <DataVolumeTypeGroup
+              volumeTypes={this.state.volumeTypes}
+            />
+          )}
           <PublicKeyGroup sshKeys={this.state.sshKeys}/>
           <CreateResourceFormGroup label={translate('Security groups')}>
             <Field

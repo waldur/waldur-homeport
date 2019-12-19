@@ -22,9 +22,9 @@ export const useImportDialog = (props: ImportDialogProps) => {
   const [plans, setPlans] = React.useState<Record<string, Plan>>({});
   const [submitting, setSubmitting] = React.useState(false);
 
-  const submitEnabled = React.useMemo(() => resources.length > 0 && resources.every(
+  const submitEnabled = React.useMemo(() => resources.length > 0 && (!offering.billable || resources.every(
     resource => plans[resource.backend_id] !== undefined
-  ), [resources, plans]);
+  )), [resources, plans]);
 
   const selectOffering = (value: Offering) => {
     setOffering(value);

@@ -36,7 +36,7 @@ const ExtraDataRow = ({ resource }) => (
           <li key={index}>
             <strong>{row.name}</strong>
             {': '}
-            {row.value}
+            {row.value ? row.value : '—'}
           </li>
         ))}
       </ul>
@@ -59,12 +59,13 @@ export const ResourceRow = ({ resource, value, toggleResource, offering, plans, 
         )}
         <td>
           <p className="form-control-static">
-            <ResourceIcon resource={payload}
-            />
+            {resource.type ? <ResourceIcon resource={payload}/> : resource.name}
           </p>
         </td>
         <td>
-          {resource.backend_id}
+          <p className="form-control-static">
+            {resource.backend_id}
+          </p>
         </td>
         <td>
           <SelectResourceButton
@@ -72,6 +73,7 @@ export const ResourceRow = ({ resource, value, toggleResource, offering, plans, 
             onChange={() => toggleResource(resource)}
           />
         </td>
+        {offering.billable &&
         <td>
           <Select
             placeholder={translate('Select plan')}
@@ -82,7 +84,7 @@ export const ResourceRow = ({ resource, value, toggleResource, offering, plans, 
             onChange={plan => assignPlan(resource, plan)}
             clearable={false}
           />
-        </td>
+        </td>}
       </tr>
       {expanded && <ExtraDataRow resource={resource}/>}
     </>

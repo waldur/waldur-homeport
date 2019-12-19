@@ -1,18 +1,21 @@
+import {EventInput} from '@fullcalendar/core';
 import * as React from 'react';
-import { FieldArray, WrappedFieldArrayProps } from 'redux-form';
+import {FieldArray, WrappedFieldArrayProps} from 'redux-form';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
-import { eventsMapper, createCalendarBookingEvent } from '@waldur/booking/utils';
+import {CalendarEventModal} from '@waldur/booking/components/modal/CalendarEventModal';
+import { eventsMapper, createCalendarBookingEvent, availabilityCellRender, deleteCalendarBookingEvent } from '@waldur/booking/utils';
 import { Event } from '@waldur/events/types';
+import {withModal} from '@waldur/modal/withModal';
 
-import { FormField } from './types';
-
-interface CalendarFieldProps extends FormField {
-  name: string;
+type CalendarComponentProps = WrappedFieldArrayProps<any> & {
   excludedEvents?: Event[];
-}
+  setModalProps: (event) => void;
+  openModal: (cb) => void;
+  schedules: EventInput[];
+};
 
-export class CalendarComponent extends React.Component<WrappedFieldArrayProps<any> & CalendarFieldProps> {
+export class CalendarComponent extends React.Component<CalendarComponentProps> {
 
   state = {
     view: {
@@ -20,37 +23,54 @@ export class CalendarComponent extends React.Component<WrappedFieldArrayProps<an
     },
   };
 
+  deleteBooking = e => deleteCalendarBookingEvent(this.props.fields, e);
+
+  handleBooking = event => {
+    this.props.setModalProps({ event, destroy: () => this.deleteBooking(event) });
+    this.props.openModal(onSuccess => {
+      this.props.fields.push(createCalendarBookingEvent({ ...event.extendedProps, ...onSuccess }));
+      this.deleteBooking(event);
+    });
+  }
+
+  getValidRange = events => ({
+    start: Math.min(...events.map(event => Date.parse(event.start))),
+    end: Math.max(...events.map(event => Date.parse(event.end))),
+  })
+
   render() {
-    const { props } = this;
-    let events = props.fields.getAll();
+    const { excludedEvents, fields } = this.props;
+    let events = fields.getAll();
     if (!events) {
       return null;
     }
-    events = eventsMapper([...props.excludedEvents, ...events]);
+    events = eventsMapper([...excludedEvents, ...events]);
     return (
       <Calendar
         editable={true}
         defaultView={this.state.view.type}
         selectable={true}
-        eventResizableFromStart={true}
+        eventResizableFromStart={false}
         events={events}
+        eventLimit={false}
+        dayRender={({date, el}) => availabilityCellRender(events, ({date, el}))}
+        validRange={this.getValidRange(events)}
         viewSkeletonRender={({view}) => {
           if (view.type !== this.state.view.type) {
             this.setState({ view });
           }
         }}
-        select={event => {
-          const field = createCalendarBookingEvent(event);
-          props.fields.push(field);
-        }}/>
+        select={event => fields.push(createCalendarBookingEvent({...event, type: 'ScheduleBooking'}))}
+        eventClick={e => this.handleBooking(e.event)}
+      />
     );
   }
 }
 
-export const CalendarField = (props: CalendarFieldProps) => (
+export const CalendarField = props => (
   <FieldArray
     name={props.name}
-    component={CalendarComponent}
+    component={withModal(CalendarEventModal)(CalendarComponent)}
     {...props}
   />
 );

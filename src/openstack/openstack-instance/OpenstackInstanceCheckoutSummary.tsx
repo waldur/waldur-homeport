@@ -29,6 +29,16 @@ import { Customer, Project } from '@waldur/workspace/types';
 const getTotalStorage = formData =>
   formData.system_volume_size + (formData.data_volume_size || 0);
 
+const getStoragePrice = (formData, components) => {
+  const systemVolumeComponent = formData.system_volume_type ? `gigabytes_${formData.system_volume_type.name}` : 'storage';
+  const systemVolumePrice = formData.system_volume_size / 1024.0 * (components[systemVolumeComponent] || 0);
+
+  const dataVolumeComponent = formData.data_volume_type ? `gigabytes_${formData.data_volume_type.name}` : 'storage';
+  const dataVolumePrice = formData.data_volume_size / 1024.0 * (components[dataVolumeComponent] || 0);
+
+  return systemVolumePrice + dataVolumePrice;
+};
+
 const getDailyPrice = (formData, components) => {
   /**
    * In Marketplace OpenStack plugin storage prices are stored per GB.
@@ -38,8 +48,9 @@ const getDailyPrice = (formData, components) => {
   if (components && formData.flavor) {
     const cpu = formData.flavor.cores * components.cores;
     const ram = formData.flavor.ram * components.ram / 1024.0;
-    const disk = getTotalStorage(formData) * components.storage / 1024.0;
-    return cpu + ram + disk;
+    const storagePrice = getStoragePrice(formData, components);
+
+    return cpu + ram + storagePrice;
   } else {
     return 0;
   }
