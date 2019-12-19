@@ -60,6 +60,12 @@ export const PureOfferingHeader = (props: OfferingHeaderProps) => (
       </Field>
     )}
 
+    {props.offering.error_message && (
+      <Field label={props.translate('Error message')}>
+        {props.offering.error_message}
+      </Field>
+    )}
+
     {props.showIssueLink && (
       <Field label={props.translate('Issue link')}>
         <a href={props.offering.issue_link} target="_blank">

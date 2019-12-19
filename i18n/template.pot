@@ -1936,6 +1936,7 @@ msgstr ""
 
 #: src/events/EventDetailsTable.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/offering/OfferingHeader.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Error message"
 msgstr ""
