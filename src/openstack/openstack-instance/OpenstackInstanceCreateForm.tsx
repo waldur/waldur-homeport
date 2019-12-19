@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getLatinNameValidators } from '@waldur/core/validators';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { TextField, StringField } from '@waldur/form-react';
 import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
 import { translate, TranslateProps } from '@waldur/i18n';
@@ -80,7 +81,15 @@ export class OpenstackInstanceCreateFormComponent extends
       const subnets = await api.loadSubnets(scopeUuid);
       const floatingIps = await api.loadFloatingIps(scopeUuid);
       const availabilityZones = await api.loadInstanceAvailabilityZones(scopeUuid);
-      const volumeTypes = await api.loadVolumeTypes(scopeUuid);
+
+      let volumeTypeChoices = [];
+      let defaultVolumeType;
+
+      if (isFeatureVisible('openstack.volume-types')) {
+        const volumeTypes = await api.loadVolumeTypes(scopeUuid);
+        volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
+        defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
+      }
       this.setState({
         loading: false,
         loaded: true,
@@ -91,9 +100,8 @@ export class OpenstackInstanceCreateFormComponent extends
         flavors,
         sshKeys,
         availabilityZones,
-        volumeTypes: formatVolumeTypeChoices(volumeTypes),
+        volumeTypes: volumeTypeChoices,
       });
-      const defaultVolumeType = getDefaultVolumeType(formatVolumeTypeChoices(volumeTypes));
       const initial = this.props.initialAttributes;
       if (initial) {
         const flavor = flavors.find(s => s.url === initial.flavor);
