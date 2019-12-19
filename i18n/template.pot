@@ -5717,6 +5717,10 @@ msgstr ""
 msgid "Retry"
 msgstr ""
 
+#: src/openstack/openstack-volume/actions/RetypeAction.ts
+msgid "Retype"
+msgstr ""
+
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 msgid "Review"
 msgstr ""
@@ -8130,6 +8134,7 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+#: src/openstack/openstack-volume/actions/RetypeAction.ts
 #: src/rancher/VolumeTypeGroup.tsx
 msgid "Volume type"
 msgstr ""
