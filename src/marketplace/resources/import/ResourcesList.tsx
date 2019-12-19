@@ -14,7 +14,7 @@ export const ResourcesList = ({ resources, offering, value, toggleResource, plan
         <th>{translate('Name')}</th>
         <th>{translate('Backend ID')}</th>
         <th>{translate('Actions')}</th>
-        <th className="col-sm-2">{translate('Plan')}</th>
+          {offering.billable && <th className="col-sm-2">{translate('Plan')}</th>}
       </tr>
     </thead>
     <tbody>
