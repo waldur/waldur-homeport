@@ -1,4 +1,5 @@
 import { getAll } from '@waldur/core/api';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { VolumeType } from '@waldur/openstack/types';
 import { validateState, validateRuntimeState } from '@waldur/resource/actions/base';
@@ -11,6 +12,7 @@ export default function createAction(): ResourceAction<Volume> {
     type: 'form',
     method: 'POST',
     title: translate('Retype'),
+    isVisible: isFeatureVisible('openstack.volume-types'),
     validators: [
       validateRuntimeState('available'),
       validateState('OK'),

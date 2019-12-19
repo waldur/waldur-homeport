@@ -4,6 +4,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
 import { useQuery } from '@waldur/core/useQuery';
 import { getLatinNameValidators, required } from '@waldur/core/validators';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { NumberField, TextField, StringField, FormContainer, SelectField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { parseIntField } from '@waldur/marketplace/common/utils';
@@ -18,12 +19,20 @@ const validateSize = (value: number) => value < 1024 || value > 1024 * 4096 ?
 
 const loadData = async settings => {
   const zones = await loadVolumeAvailabilityZones(settings);
-  const volumeTypes = await loadVolumeTypes(settings);
-  return {
-    zones,
-    volumeTypes: formatVolumeTypeChoices(volumeTypes),
-    defaultVolumeType: getDefaultVolumeType(formatVolumeTypeChoices(volumeTypes)),
-  };
+  if (isFeatureVisible('openstack.volume-types')) {
+    const volumeTypes = await loadVolumeTypes(settings);
+    return {
+      zones,
+      volumeTypes: formatVolumeTypeChoices(volumeTypes),
+      defaultVolumeType: getDefaultVolumeType(formatVolumeTypeChoices(volumeTypes)),
+    };
+  } else {
+    return {
+      zones,
+      volumeTypes: [],
+      defaultVolumeType: undefined,
+    };
+  }
 };
 
 export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps> = props => {
