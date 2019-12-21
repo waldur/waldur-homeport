@@ -38,10 +38,6 @@ export const TableComponent = props => {
       orderField: 'name',
     },
     {
-      title: translate('Resource UUID'),
-      render: ({ row }) => <span>{row.uuid}</span>,
-    },
-    {
       title: translate('Offering type'),
       render: ({ row }) => <span>{row.offering_name}</span>,
     },

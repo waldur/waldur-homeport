@@ -5532,7 +5532,6 @@ msgid "Resource"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
-#: src/marketplace/resources/list/PublicResourcesList.tsx
 msgid "Resource UUID"
 msgstr ""
 
