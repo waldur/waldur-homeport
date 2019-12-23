@@ -4,6 +4,8 @@ import { Option } from 'react-select';
 import { Field } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { $http } from '@waldur/core/services';
+import { getUUID } from '@waldur/core/utils';
 import { getLatinNameValidators } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { TextField, StringField } from '@waldur/form-react';
@@ -25,6 +27,7 @@ import { User } from '@waldur/workspace/types';
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 import { AvailabilityZone } from '../types';
 import { AvailabilityZoneGroup } from './AvailabilityZoneGroup';
+import { CreateSecurityGroupButton } from './CreateSecurityGroupButton';
 import { DataVolumeSizeGroup } from './DataVolumeSizeGroup';
 import { DataVolumeTypeGroup } from './DataVolumeTypeGroup';
 import { FlavorGroup } from './FlavorGroup';
@@ -45,6 +48,7 @@ interface OpenstackInstanceCreateFormState {
   availabilityZones: AvailabilityZone[];
   volumeTypes: Option[];
   isDataVolumeActive: boolean;
+  tenantUUID?: string;
 }
 
 interface OpenstackInstanceCreateFormComponentProps {
@@ -68,6 +72,7 @@ export class OpenstackInstanceCreateFormComponent extends
     availabilityZones: [],
     volumeTypes: [],
     isDataVolumeActive: false,
+    tenantUUID: undefined,
   };
 
   async loadData() {
@@ -81,6 +86,8 @@ export class OpenstackInstanceCreateFormComponent extends
       const subnets = await api.loadSubnets(scopeUuid);
       const floatingIps = await api.loadFloatingIps(scopeUuid);
       const availabilityZones = await api.loadInstanceAvailabilityZones(scopeUuid);
+      const settings = (await $http.get(this.props.offering.scope)).data;
+      const tenantUUID = settings.scope ? getUUID(settings.scope) : undefined;
 
       let volumeTypeChoices = [];
       let defaultVolumeType;
@@ -101,6 +108,7 @@ export class OpenstackInstanceCreateFormComponent extends
         sshKeys,
         availabilityZones,
         volumeTypes: volumeTypeChoices,
+        tenantUUID,
       });
       const initial = this.props.initialAttributes;
       if (initial) {
@@ -240,6 +248,7 @@ export class OpenstackInstanceCreateFormComponent extends
               }
             />
           </CreateResourceFormGroup>
+          <CreateSecurityGroupButton tenantUUID={this.state.tenantUUID}/>
           <CreateResourceFormGroup label={translate('Networks')}>
             <Field
               name="attributes.networks"
