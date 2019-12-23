@@ -8,6 +8,8 @@ import actions from './actions';
 import { OpenStackInstanceSummary } from './OpenStackInstanceSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 import './marketplace';
+import registerExtensionPoint from './header-extension';
+import openStackInstanceTenantButton from './OpenStackInstanceTenantButton';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Instance', OpenStackInstanceSummary);
@@ -17,9 +19,11 @@ export default module => {
   module.component('openstackInstanceDataVolume', openstackInstanceDataVolume);
   module.component('openstackInstanceNetworks', openstackInstanceNetworks);
   module.component('openstackInstanceFloatingIps', openstackInstanceFloatingIps);
+  module.component('openstackInstanceTenantButton', openStackInstanceTenantButton);
   module.config(actionConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
+  module.run(registerExtensionPoint);
 };
 
 // @ngInject

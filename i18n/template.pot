@@ -3125,8 +3125,16 @@ msgstr ""
 msgid "Manage at"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
+msgid "Manage networks"
+msgstr ""
+
 #: src/customer/routes.js
 msgid "Manage organization"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
+msgid "Manage security groups"
 msgstr ""
 
 #: src/user/list/UserDashboard.tsx
