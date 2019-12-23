@@ -1,5 +1,6 @@
 import template from './resource-header.html';
 import { blockingExecutor } from '@waldur/core/services';
+import { getCategoryLink } from '@waldur/marketplace/utils';
 
 const resourceHeader = {
   template: template,
@@ -69,6 +70,7 @@ const resourceHeader = {
         blockingExecutor(this.reInitResource.bind(this)),
         this.ENV.resourcesTimerInterval * 1000
       );
+      this.activeItem = getCategoryLink(this.model.marketplace_category_uuid);
     }
 
     getModel() {

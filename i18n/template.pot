@@ -298,6 +298,10 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
+#: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
+msgid "Add security group"
+msgstr ""
+
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Add snapshots"
 msgstr ""
@@ -1181,6 +1185,10 @@ msgstr ""
 #: src/customer/details/customer-manage.js
 #: src/table/base-list-controller.js
 msgid "Confirm deletion?"
+msgstr ""
+
+#: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
+msgid "Confirmation"
 msgstr ""
 
 #: src/auth/auth-login.js
@@ -3125,8 +3133,16 @@ msgstr ""
 msgid "Manage at"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
+msgid "Manage networks"
+msgstr ""
+
 #: src/customer/routes.js
 msgid "Manage organization"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
+msgid "Manage security groups"
 msgstr ""
 
 #: src/user/list/UserDashboard.tsx
@@ -3541,6 +3557,7 @@ msgstr ""
 msgid "Next trigger at"
 msgstr ""
 
+#: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/resource/summary/ScheduleSummary.tsx
@@ -6685,6 +6702,10 @@ msgstr ""
 msgid "Support user"
 msgstr ""
 
+#: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
+msgid "Sure? Form data would be lost"
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Switch plan for an existing resource"
 msgstr ""
@@ -8187,6 +8208,7 @@ msgstr ""
 msgid "Write review"
 msgstr ""
 
+#: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/project/ProjectRemoveDialog.tsx
