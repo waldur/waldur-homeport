@@ -17,7 +17,7 @@ export const CreateSecurityGroupButton = props => {
 
   const gotoTenant = React.useCallback(async () => {
     try {
-      await waitForConfirmation(dispatch, translate('Confirmation'), translate('All data would be lost'));
+      await waitForConfirmation(dispatch, translate('Confirmation'), translate('Sure? Form data would be lost'));
     } catch {
       return;
     }

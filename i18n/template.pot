@@ -404,10 +404,6 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
-msgid "All data would be lost"
-msgstr ""
-
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
 msgstr ""
@@ -6696,6 +6692,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Support user"
+msgstr ""
+
+#: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
+msgid "Sure? Form data would be lost"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
