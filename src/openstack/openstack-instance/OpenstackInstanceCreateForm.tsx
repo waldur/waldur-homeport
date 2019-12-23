@@ -27,6 +27,7 @@ import { User } from '@waldur/workspace/types';
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 import { AvailabilityZone } from '../types';
 import { AvailabilityZoneGroup } from './AvailabilityZoneGroup';
+import { CreateSecurityGroupButton } from './CreateSecurityGroupButton';
 import { DataVolumeSizeGroup } from './DataVolumeSizeGroup';
 import { DataVolumeTypeGroup } from './DataVolumeTypeGroup';
 import { FlavorGroup } from './FlavorGroup';
@@ -34,7 +35,6 @@ import { ImageGroup } from './ImageGroup';
 import { PublicKeyGroup } from './PublicKeyGroup';
 import { SystemVolumeSizeGroup } from './SystemVolumeSizeGroup';
 import { SystemVolumeTypeGroup } from './SystemVolumeTypeGroup';
-import { Link } from '@waldur/core/Link';
 
 interface OpenstackInstanceCreateFormState {
   loading: boolean;
@@ -248,20 +248,7 @@ export class OpenstackInstanceCreateFormComponent extends
               }
             />
           </CreateResourceFormGroup>
-          {this.state.tenantUUID && (
-            <CreateResourceFormGroup>
-              <Link
-                state="resources.details"
-                params={{
-                  resource_type: 'OpenStack.Tenant',
-                  uuid: this.state.tenantUUID,
-                  tab: 'security_groups',
-                }}
-                label={<><i className="fa fa-plus"/>{' '}{translate('Add security group')}</>}
-                className="btn btn-default"
-              />
-            </CreateResourceFormGroup>
-          )}
+          <CreateSecurityGroupButton tenantUUID={this.state.tenantUUID}/>
           <CreateResourceFormGroup label={translate('Networks')}>
             <Field
               name="attributes.networks"
