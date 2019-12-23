@@ -39,7 +39,8 @@
           ng-show="item.expanded"
           ng-if="::item.children">
           <li ui-sref-active="active"
-            ng-repeat="child in item.children">
+            ng-repeat="child in item.children"
+            ng-class="$ctrl.getItemCss(child)">
             <a ui-sref="{{ child.link }}">
               <i class="fa {{ ::child.icon }}"></i>
               <span class="nav-label">{{ child.label | translate }}</span>
