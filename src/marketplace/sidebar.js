@@ -1,4 +1,5 @@
 import { getCategories } from '@waldur/marketplace/common/api';
+import { getCategoryLink } from './utils';
 
 // @ngInject
 export default function registerSidebarExtension(SidebarExtensionService, currentStateService, features) {
@@ -119,7 +120,7 @@ export default function registerSidebarExtension(SidebarExtensionService, curren
         const children = categories.map(category => ({
           label: category.title,
           icon: 'fa-cloud',
-          link: `marketplace-project-resources({uuid: $ctrl.context.project.uuid, category_uuid: '${category.uuid}'})`,
+          link: getCategoryLink(category.uuid),
           countFieldKey: `marketplace_category_${category.uuid}`,
         }));
         return [

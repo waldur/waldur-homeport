@@ -39,6 +39,10 @@ class SidebarController {
     }
     let data = this.$state.$current.data;
     this.items.map(item => {
+      if (this.expandedItem) {
+        item.expanded = this.expandedItem === item.link;
+        return;
+      }
       if (data && data.sidebarState) {
         item.expanded = item.link === data.sidebarState;
         return;
@@ -74,10 +78,15 @@ class SidebarController {
     return {
       'active-with-child': this.hasActiveChild(item),
       'nav-item--expanded': item.expanded,
+      'active': this.activeItem && item.link === this.activeItem,
     };
   }
 
   hasActiveChild(item) {
+    if (item.children && this.activeItem) {
+      return !!item.children.find(i => i.link === this.activeItem);
+    }
+
     const activeChild = this.getActiveChildFromState(item);
     return !!activeChild;
   }
@@ -95,7 +104,9 @@ const sidebar = {
   template: template,
   bindings: {
     items: '<',
-    context: '<'
+    context: '<',
+    expandedItem: '<',
+    activeItem: '<',
   },
   controller: SidebarController,
 };
