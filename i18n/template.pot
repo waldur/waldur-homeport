@@ -298,6 +298,10 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+msgid "Add security group"
+msgstr ""
+
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Add snapshots"
 msgstr ""
