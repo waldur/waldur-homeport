@@ -1,10 +1,14 @@
+import * as ResourceSummary from '@waldur/resource/summary/registry';
+
 import actions from './actions';
 import './marketplace';
 import './provider';
 import rancherNodesService from './rancher-nodes-service';
 import rancherClusterNodes from './rancher-cluster-nodes';
+import { RancherClusterSummary } from './RancherClusterSummary';
 
 export default module => {
+  ResourceSummary.register('Rancher.Cluster', RancherClusterSummary);
   module.service('rancherNodesService', rancherNodesService);
   module.component('rancherClusterNodes', rancherClusterNodes);
   module.config(actionsConfig);
