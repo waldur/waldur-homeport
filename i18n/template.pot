@@ -63,6 +63,7 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/RancherClusterSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Access"
 msgstr ""
