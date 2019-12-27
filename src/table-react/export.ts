@@ -3,6 +3,7 @@ import Papa from 'papaparse';
 import { put, call, select } from 'redux-saga/effects';
 
 import { ENV } from '@waldur/core/services';
+import { copyToClipboard } from '@waldur/core/utils';
 import { loadPdfMake } from '@waldur/shims/pdfmake';
 import { fetchAll } from '@waldur/table-react/api';
 
@@ -101,26 +102,4 @@ function saveAsCsv(table, data) {
 function exportToClipboard(_, data) {
   const text = Papa.unparse(data);
   copyToClipboard(text);
-}
-
-function copyToClipboard(text) {
-  const hiddenDiv = document.createElement('div');
-  const style = hiddenDiv.style;
-  style.height = '1px';
-  style.width = '1px';
-  style.overflow = 'hidden';
-  style.position = 'fixed';
-  style.top = '0px';
-  style.left = '0px';
-
-  const textarea = document.createElement('textarea');
-  textarea.readOnly = true;
-  textarea.value = text;
-
-  hiddenDiv.appendChild(textarea);
-  document.body.appendChild(hiddenDiv);
-
-  textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(hiddenDiv);
 }

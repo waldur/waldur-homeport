@@ -1231,6 +1231,7 @@ msgstr ""
 msgid "Copy of"
 msgstr ""
 
+#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
 #: src/table-react/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
@@ -1677,7 +1678,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/module.js
 #: src/openstack/openstack-tenant/actions/DestroyAction.ts
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
-#: src/rancher/actions/DestroyAction.ts
+#: src/rancher/node-actions/DestroyAction.ts
 msgid "Destroy"
 msgstr ""
 
@@ -2366,6 +2367,10 @@ msgstr ""
 msgid "General information"
 msgstr ""
 
+#: src/rancher/cluster-actions/KubeconfigFileAction.ts
+msgid "Generate Kubeconfig file"
+msgstr ""
+
 #: src/appstore/providers/appstore-providers-empty-message.html
 msgid "Get a virtual private cloud from a service store"
 msgstr ""
@@ -2969,6 +2974,10 @@ msgstr ""
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
+#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+msgid "Kubeconfig file"
+msgstr ""
+
 #: src/rancher/NodePanel.tsx
 msgid "Kubernetes node #{index}"
 msgstr ""
@@ -3037,7 +3046,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: src/rancher/actions/LinkAction.ts
+#: src/rancher/node-actions/LinkAction.ts
 msgid "Link OpenStack Instance"
 msgstr ""
 
@@ -4070,7 +4079,7 @@ msgid "OpenStack events"
 msgstr ""
 
 #: src/openstack/openstack-instance/marketplace.ts
-#: src/rancher/actions/LinkAction.ts
+#: src/rancher/node-actions/LinkAction.ts
 msgid "OpenStack instance"
 msgstr ""
 
@@ -5089,6 +5098,10 @@ msgstr ""
 
 #: src/appstore/appstore-store.js
 msgid "Purchase of {vm_name} was successful."
+msgstr ""
+
+#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+msgid "Put this into ~/.kube/config:"
 msgstr ""
 
 #: src/billing/billing-record-details.html
@@ -6913,6 +6926,10 @@ msgstr ""
 msgid "The project will be changed for all items in cart."
 msgstr ""
 
+#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+msgid "Then download (if needed) and run kubectl"
+msgstr ""
+
 #: src/rancher/rancher-cluster-nodes.js
 msgid "There are no Kubernetes nodes yet."
 msgstr ""
@@ -7434,6 +7451,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
 msgid "Unable to load data."
 msgstr ""
 
