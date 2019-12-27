@@ -2159,6 +2159,10 @@ msgstr ""
 msgid "File download has been started."
 msgstr ""
 
+#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+msgid "File has been copied"
+msgstr ""
+
 #: src/core/DownloadLink/effects.tsx
 msgid "File has been downloaded."
 msgstr ""
