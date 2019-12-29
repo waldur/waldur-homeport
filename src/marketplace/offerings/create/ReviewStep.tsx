@@ -20,8 +20,10 @@ const PureReviewStep = props => !props.hasData ?
   </>
 );
 
-const connector = connect(state => ({
-  hasData: Boolean(getFormValues(FORM_ID)(state)),
-}));
+const connector = connect(state => {
+  const formData = getFormValues(FORM_ID)(state) as any;
+  const hasData = formData && !!formData.type;
+  return {hasData};
+});
 
 export const ReviewStep = connector(PureReviewStep);
