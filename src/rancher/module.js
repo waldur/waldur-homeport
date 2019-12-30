@@ -7,13 +7,17 @@ import './provider';
 import rancherNodesService from './rancher-nodes-service';
 import rancherClusterNodes from './rancher-cluster-nodes';
 import RancherClusterKubeconfigDialog from './cluster-actions/RancherClusterKubeconfigDialog';
+import rancherKeyValueDialog from './RancherKeyValueDialog';
 import { RancherClusterSummary } from './RancherClusterSummary';
+import { RancherNodeSummary } from './RancherNodeSummary';
 
 export default module => {
   ResourceSummary.register('Rancher.Cluster', RancherClusterSummary);
+  ResourceSummary.register('Rancher.Node', RancherNodeSummary);
   module.service('rancherNodesService', rancherNodesService);
   module.component('rancherClusterNodes', rancherClusterNodes);
   module.component('rancherClusterKubeconfigDialog', RancherClusterKubeconfigDialog);
+  module.component('rancherKeyValueDialog', rancherKeyValueDialog);
   module.config(actionsConfig);
   module.config(tabsConfig);
 };
@@ -38,5 +42,9 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
         component: 'rancherClusterNodes'
       },
     })
+  });
+  ResourceTabsConfigurationProvider.register('Rancher.Node', {
+    order: [],
+    options: {},
   });
 }
