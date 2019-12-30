@@ -23,7 +23,7 @@ function OpenstackVolumesList(
       this.controllerScope = controllerScope;
       this._super();
       this.service = openstackVolumesService;
-      this.addRowFields(['size', 'device', 'bootable']);
+      this.addRowFields(['size', 'device', 'bootable', 'type_name']);
 
       $scope.$on('actionApplied', function(event, name) {
         if (name === 'volume') {
@@ -50,6 +50,10 @@ function OpenstackVolumesList(
         {
           title: gettext('Bootable'),
           render: row => ncUtils.booleanField(row.bootable),
+        },
+        {
+          title: gettext('Type'),
+          render: row => row.type_name || 'N/A',
         },
         {
           title: gettext('Attached to'),

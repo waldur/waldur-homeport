@@ -7244,6 +7244,7 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
+#: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/payments/payment-list.js
 #: src/providers/details/provider-details.html
 #: src/providers/provider-list.js
