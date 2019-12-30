@@ -20,23 +20,28 @@ const PureRancherNodeSummary = (props: ResourceSummaryProps) => {
       />
       <Field
         label={translate('CPU')}
-        value={`${props.resource.cpu_allocated} / ${props.resource.cpu_total} cores`}
+        value={props.resource.cpu_allocated &&
+          `${props.resource.cpu_allocated} / ${props.resource.cpu_total} cores`}
       />
       <Field
         label={translate('RAM')}
-        value={`${props.resource.ram_allocated} / ${props.resource.ram_total} GiB`}
+        value={props.resource.ram_total &&
+          `${props.resource.ram_allocated} / ${props.resource.ram_total} GiB`}
       />
       <Field
         label={translate('Pods')}
-        value={`${props.resource.pods_allocated} / ${props.resource.pods_total}`}
+        value={props.resource.pods_total &&
+          `${props.resource.pods_allocated} / ${props.resource.pods_total}`}
       />
       <Field
         label={translate('Labels')}
-        value={props.resource.labels && <KeyValueButton items={props.resource.labels}/>}
+        value={Object.keys(props.resource.labels).length > 0 &&
+          <KeyValueButton items={props.resource.labels}/>}
       />
       <Field
         label={translate('Annotations')}
-        value={props.resource.annotations && <KeyValueButton items={props.resource.annotations}/>}
+        value={Object.keys(props.resource.annotations).length > 0 &&
+          <KeyValueButton items={props.resource.annotations}/>}
       />
     </>
   );
