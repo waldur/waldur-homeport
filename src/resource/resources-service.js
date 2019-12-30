@@ -20,8 +20,11 @@ export default function resourcesService(baseServiceClass, ENV, $http, servicesS
       if (resource_type === 'JIRA.Issue') {
         return $q.when(`${ENV.apiEndpoint}api/jira-issues/`);
       }
-      if (resource_type === 'Support.Offering') {
+      else if (resource_type === 'Support.Offering') {
         return $q.when(`${ENV.apiEndpoint}api/support-offerings/`);
+      }
+      else if (resource_type === 'Rancher.Node') {
+        return $q.when(`${ENV.apiEndpoint}api/rancher-nodes/`);
       }
       let parts = resource_type.split('.');
       let service_type = parts[0];

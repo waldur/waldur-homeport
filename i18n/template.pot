@@ -469,6 +469,14 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
+#: src/rancher/RancherNodeSummary.tsx
+msgid "Annotations"
+msgstr ""
+
+#: src/rancher/RancherKeyValueDialog.tsx
+msgid "Annotations & labels"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/utils.ts
 #: src/user/support/UserFilter.tsx
@@ -873,6 +881,7 @@ msgid "CIDR"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
+#: src/rancher/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "CPU"
@@ -1781,6 +1790,10 @@ msgstr ""
 
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 msgid "Do you really want to delete comment?"
+msgstr ""
+
+#: src/rancher/RancherNodeSummary.tsx
+msgid "Docker version"
 msgstr ""
 
 #: src/navigation/header/docs-link.html
@@ -2954,6 +2967,7 @@ msgstr ""
 #: src/issues/list/IssuesShortListComponent.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
+#: src/rancher/KeyValueTable.tsx
 msgid "Key"
 msgstr ""
 
@@ -2986,8 +3000,16 @@ msgstr ""
 msgid "Kubernetes node #{index}"
 msgstr ""
 
+#: src/rancher/RancherNodeSummary.tsx
+msgid "Kubernetes version"
+msgstr ""
+
 #: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Label that is visible to users in Marketplace."
+msgstr ""
+
+#: src/rancher/RancherNodeSummary.tsx
+msgid "Labels"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.js
@@ -4666,6 +4688,10 @@ msgstr ""
 msgid "Plugin options are invalid."
 msgstr ""
 
+#: src/rancher/RancherNodeSummary.tsx
+msgid "Pods"
+msgstr ""
+
 #: src/customer/details/customer-policies.html
 #: src/project/project-dialog.html
 msgid "Policies"
@@ -5140,6 +5166,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/rancher/RancherNodeSummary.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
@@ -6350,6 +6377,7 @@ msgid "Show console log"
 msgstr ""
 
 #: src/billing/price-estimate-button.html
+#: src/rancher/KeyValueButton.tsx
 msgid "Show details"
 msgstr ""
 
@@ -8113,6 +8141,7 @@ msgstr ""
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/rancher/KeyValueTable.tsx
 msgid "Value"
 msgstr ""
 
