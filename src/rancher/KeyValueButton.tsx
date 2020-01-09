@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as Button from 'react-bootstrap/lib/Button';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -14,10 +13,10 @@ export const KeyValueButton = props => {
   }, []);
 
   return (
-    <Button onClick={showDetails} bsSize="sm" bsStyle="link">
+    <a onClick={showDetails}>
       {translate('Show details')}
       {' '}
       <i className="fa fa-external-link"/>
-    </Button>
+    </a>
   );
 };
