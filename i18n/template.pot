@@ -1401,6 +1401,10 @@ msgstr ""
 msgid "Create subnet"
 msgstr ""
 
+#: src/project/ProjectTablePlaceholder.tsx
+msgid "Create your first project"
+msgstr ""
+
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/billing/billing-utils.js
 #: src/customer/CustomerList.tsx
@@ -4875,6 +4879,10 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/resource/list/resource-global-list.js
 msgid "Project"
+msgstr ""
+
+#: src/project/ProjectTablePlaceholder.tsx
+msgid "Project aggregates and isolates teams and resources."
 msgstr ""
 
 #: src/project/effects.ts
@@ -8472,6 +8480,10 @@ msgstr ""
 
 #: src/invitations/utils.js
 msgid "Your invitation was accepted."
+msgstr ""
+
+#: src/project/ProjectTablePlaceholder.tsx
+msgid "Your organization does not have any projects yet."
 msgstr ""
 
 #: src/auth/auth-login.html
