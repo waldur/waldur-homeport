@@ -14,6 +14,7 @@ import { ProjectCreateButton } from './ProjectCreateButton';
 import { ProjectDeleteButton } from './ProjectDeleteButton';
 import { ProjectDetailsButton } from './ProjectDetailsButton';
 import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
+import { ProjectTablePlaceholder } from './ProjectTablePlaceholder';
 
 const ProjectLink = ({ row }) => (
   <Link
@@ -68,6 +69,7 @@ export const TableComponent = props => {
       verboseName={translate('projects')}
       hasQuery={true}
       showPageSizeSelector={true}
+      placeholderComponent={<ProjectTablePlaceholder/>}
       actions={<ProjectCreateButton/>}
       expandableRow={ProjectExpandableRowContainer}
       enableExport={true}
