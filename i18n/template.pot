@@ -477,6 +477,10 @@ msgstr ""
 msgid "Annotations & labels"
 msgstr ""
 
+#: src/marketplace-checklist/ProjectChecklist.tsx
+msgid "Answer"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/utils.ts
 #: src/user/support/UserFilter.tsx
@@ -1153,6 +1157,11 @@ msgstr ""
 
 #: src/offering/actions/CompleteAction.ts
 msgid "Complete"
+msgstr ""
+
+#: src/marketplace-checklist/routes.js
+#: src/marketplace-checklist/sidebar-extension.js
+msgid "Compliance"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -2396,6 +2405,7 @@ msgstr ""
 msgid "Get a virtual private cloud from a service store"
 msgstr ""
 
+#: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
@@ -5151,6 +5161,10 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
+#: src/marketplace-checklist/ProjectChecklist.tsx
+msgid "Question"
+msgstr ""
+
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
 #: src/providers/provider-list.js
@@ -6670,6 +6684,7 @@ msgid "Storages"
 msgstr ""
 
 #: src/digitalocean/droplet-resize.html
+#: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -7010,6 +7025,10 @@ msgstr ""
 
 #: src/dashboard/CategoryResources.tsx
 msgid "There are no charts yet."
+msgstr ""
+
+#: src/marketplace-checklist/ProjectChecklist.tsx
+msgid "There are no checklist yet."
 msgstr ""
 
 #: src/issues/comments/IssueCommentsList.spec.tsx
@@ -7479,6 +7498,10 @@ msgstr ""
 
 #: src/dashboard/CategoryResourcesList.tsx
 msgid "Unable to load charts."
+msgstr ""
+
+#: src/marketplace-checklist/ProjectChecklist.tsx
+msgid "Unable to load checklist questions."
 msgstr ""
 
 #: src/issues/comments/IssueCommentsList.spec.tsx
