@@ -40,7 +40,6 @@ const SubmitButton = ({ submitting, submit }) => (
   <Button
     onClick={() => submit()}
     bsStyle="primary"
-    bsSize="small"
     disabled={submitting}>
     {submitting && <><i className="fa fa-spinner fa-spin"/>{' '}</>}
     {translate('Submit')}

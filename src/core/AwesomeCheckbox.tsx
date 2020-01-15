@@ -12,7 +12,7 @@ type BootstrapStyle =
 interface AwesomeCheckboxProps {
   bsStyle?: BootstrapStyle;
   marginRight?: boolean;
-  label?: React.ReactNode;
+  label: React.ReactNode;
   id: string;
   value: boolean;
   onChange(value: boolean): void;
@@ -32,11 +32,9 @@ export const AwesomeCheckbox: React.FC<AwesomeCheckboxProps> = (props: AwesomeCh
       onChange={event => props.onChange(event.target.checked)}
       disabled={props.disabled}
     />
-    {props.label && (
-      <label htmlFor={props.id}>
-        {props.label}
-      </label>
-    )}
+    <label htmlFor={props.id}>
+      {props.label}
+    </label>
   </div>
 );
 
