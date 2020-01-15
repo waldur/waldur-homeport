@@ -3611,6 +3611,7 @@ msgstr ""
 msgid "Next trigger at"
 msgstr ""
 
+#: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -3854,6 +3855,10 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Not known"
+msgstr ""
+
+#: src/marketplace-checklist/ProjectChecklist.tsx
+msgid "Not provided"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
@@ -8300,6 +8305,7 @@ msgstr ""
 msgid "Write review"
 msgstr ""
 
+#: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
