@@ -1,7 +1,8 @@
 import * as React from 'react';
-
 import * as ToggleButton from 'react-bootstrap/lib/ToggleButton';
 import * as ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
+
+import { translate } from '@waldur/i18n';
 
 export const AnswerGroup = ({ answers, question, setAnswers }) => (
   <ToggleButtonGroup
