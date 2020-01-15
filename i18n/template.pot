@@ -481,6 +481,10 @@ msgstr ""
 msgid "Answer"
 msgstr ""
 
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Answers have been submitted"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/utils.ts
 #: src/user/support/UserFilter.tsx
@@ -7688,6 +7692,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
 msgid "Unable to show console log. Error message: {message}"
+msgstr ""
+
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to submit answers."
 msgstr ""
 
 #: src/issues/comments/effects.ts
