@@ -477,7 +477,7 @@ msgstr ""
 msgid "Annotations & labels"
 msgstr ""
 
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/AnswersTable.tsx
 msgid "Answer"
 msgstr ""
 
@@ -2409,7 +2409,7 @@ msgstr ""
 msgid "Get a virtual private cloud from a service store"
 msgstr ""
 
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
@@ -3611,7 +3611,7 @@ msgstr ""
 msgid "Next trigger at"
 msgstr ""
 
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/AnswerGroup.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -3857,7 +3857,7 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/AnswerGroup.tsx
 msgid "Not provided"
 msgstr ""
 
@@ -5170,7 +5170,7 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/AnswersTable.tsx
 msgid "Question"
 msgstr ""
 
@@ -8305,7 +8305,7 @@ msgstr ""
 msgid "Write review"
 msgstr ""
 
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/AnswerGroup.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
