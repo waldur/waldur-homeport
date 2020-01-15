@@ -8,7 +8,9 @@ import { parseOfferingLimits } from '../store/limits';
 import { getOffering, getCategories } from '../store/selectors';
 
 const parseOptions = (options: OfferingOptions) =>
-  (options && options.order) ? options.order.map((name: string) => {
+  (options && options.order) ? options.order
+    .filter(name => options.order[name] !== undefined)
+    .map((name: string) => {
     const option = options.options[name];
     return {
       ...option,

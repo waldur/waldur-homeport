@@ -4,7 +4,11 @@ import createSagaMiddleware from 'redux-saga';
 import sagas from './effects';
 import rootReducer from './reducers';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    trace: true,
+    traceLimit: 25,
+  }) || compose;
 const sagaMiddleware = createSagaMiddleware();
 
 let middlewares = [sagaMiddleware];
