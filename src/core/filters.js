@@ -1,5 +1,5 @@
 import { formatFilesize, formatSnakeCase, minutesToHours, titleCase, dateTime } from './utils';
-import { formatDate } from './dateUtils';
+import { formatDate, formatRelative } from './dateUtils';
 
 function replace() {
   return function(input, search, replacement) {
@@ -41,4 +41,5 @@ export default module => {
   module.filter('shortDate', shortDate);
   module.filter('dateTime', () => dateTime);
   module.filter('minutesToHours', () => minutesToHours);
+  module.filter('formatRelative', () => formatRelative);
 };

@@ -66,7 +66,6 @@ const appModule = angular.module('waldur', [
   'duScroll',
   'ui.gravatar',
   'ui.select',
-  'angularMoment',
   'ngAnimate',
   'pascalprecht.translate',
   'flash',

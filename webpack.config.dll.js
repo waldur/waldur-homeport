@@ -59,7 +59,6 @@ module.exports = {
       'angular-flash-alert',
       'angulartics',
       'angulartics-google-analytics',
-      'angular-moment',
       'angular-resource',
       'angular-scroll',
       'angular-ui-router',

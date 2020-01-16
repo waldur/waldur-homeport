@@ -26,7 +26,6 @@ import 'angular-flash-alert';
 import 'angular-flash-alert/dist/angular-flash.css';
 import 'angulartics';
 import 'angulartics-google-analytics';
-import 'angular-moment';
 import 'angular-resource';
 import 'angular-scroll';
 import 'angular-ui-router';
