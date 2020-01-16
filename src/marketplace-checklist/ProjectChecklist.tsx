@@ -29,11 +29,11 @@ const ProjectChecklist = () => {
 
   const state = useChecklist(project);
 
-  if (state.loading) {
+  if (state.checklistLoading) {
     return <LoadingSpinner/>;
-  } else if (state.erred) {
-    return <>{translate('Unable to load checklist questions.')}</>;
-  } else if (state.data) {
+  } else if (state.checklistErred) {
+    return <>{translate('Unable to load checklists.')}</>;
+  } else if (state.checklistOptions) {
     if (!state.checklist) {
       return <>{translate('There are no checklist yet.')}</>;
     }
@@ -44,19 +44,28 @@ const ProjectChecklist = () => {
           valueKey="uuid"
           value={state.checklist}
           onChange={state.setChecklist}
-          options={state.data.questions}
+          options={state.checklistOptions}
+          clearable={false}
         />
-        <AnswersTable
-          checklist={state.checklist}
-          answers={state.answers}
-          setAnswers={state.setAnswers}
-        />
-        <p>
-          <SubmitButton
-            submit={state.submit}
-            submitting={state.submitting}
-          />
-        </p>
+        {state.questionsLoading ? (
+          <LoadingSpinner/>
+        ) : state.questionsErred ? (
+          <>{translate('Unable to load questions and answers.')}</>
+        ) : (
+          <>
+            <AnswersTable
+              questions={state.questionsList}
+              answers={state.answers}
+              setAnswers={state.setAnswers}
+            />
+            <p>
+              <SubmitButton
+                submit={state.submit}
+                submitting={state.submitting}
+              />
+            </p>
+          </>
+        )}
       </>
     );
   } else {

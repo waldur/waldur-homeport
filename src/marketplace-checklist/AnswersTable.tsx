@@ -17,7 +17,7 @@ const CategoryLink = ({ question }) =>
     </p>
   ) : null;
 
-export const AnswersTable = ({ checklist, answers, setAnswers }) => (
+export const AnswersTable = ({ questions, answers, setAnswers }) => (
   <Table
     responsive={true}
     bordered={true}
@@ -36,7 +36,7 @@ export const AnswersTable = ({ checklist, answers, setAnswers }) => (
       </tr>
     </thead>
     <tbody>
-      {checklist.questions.map((question, index) => (
+      {questions.map((question, index) => (
         <tr key={question.uuid}>
           <td>
             {index + 1}

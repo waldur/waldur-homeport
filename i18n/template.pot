@@ -7510,7 +7510,8 @@ msgid "Unable to load charts."
 msgstr ""
 
 #: src/marketplace-checklist/ProjectChecklist.tsx
-msgid "Unable to load checklist questions."
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to load checklists."
 msgstr ""
 
 #: src/issues/comments/IssueCommentsList.spec.tsx
@@ -7603,6 +7604,11 @@ msgstr ""
 
 #: src/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
+msgstr ""
+
+#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to load questions and answers."
 msgstr ""
 
 #: src/marketplace/compare/ComparisonSections.tsx
