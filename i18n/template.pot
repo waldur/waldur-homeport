@@ -477,6 +477,14 @@ msgstr ""
 msgid "Annotations & labels"
 msgstr ""
 
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "Answer"
+msgstr ""
+
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Answers have been submitted"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/utils.ts
 #: src/user/support/UserFilter.tsx
@@ -1153,6 +1161,11 @@ msgstr ""
 
 #: src/offering/actions/CompleteAction.ts
 msgid "Complete"
+msgstr ""
+
+#: src/marketplace-checklist/routes.js
+#: src/marketplace-checklist/sidebar-extension.js
+msgid "Compliance"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -2396,6 +2409,7 @@ msgstr ""
 msgid "Get a virtual private cloud from a service store"
 msgstr ""
 
+#: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
@@ -3597,6 +3611,7 @@ msgstr ""
 msgid "Next trigger at"
 msgstr ""
 
+#: src/marketplace-checklist/AnswerGroup.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -3840,6 +3855,10 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Not known"
+msgstr ""
+
+#: src/marketplace-checklist/AnswerGroup.tsx
+msgid "Not provided"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
@@ -5149,6 +5168,10 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts
 msgid "Quantity"
+msgstr ""
+
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "Question"
 msgstr ""
 
 #: src/error/routes.js
@@ -6670,6 +6693,7 @@ msgid "Storages"
 msgstr ""
 
 #: src/digitalocean/droplet-resize.html
+#: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -7010,6 +7034,10 @@ msgstr ""
 
 #: src/dashboard/CategoryResources.tsx
 msgid "There are no charts yet."
+msgstr ""
+
+#: src/marketplace-checklist/ProjectChecklist.tsx
+msgid "There are no checklist yet."
 msgstr ""
 
 #: src/issues/comments/IssueCommentsList.spec.tsx
@@ -7481,6 +7509,11 @@ msgstr ""
 msgid "Unable to load charts."
 msgstr ""
 
+#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to load checklists."
+msgstr ""
+
 #: src/issues/comments/IssueCommentsList.spec.tsx
 #: src/issues/comments/IssueCommentsList.tsx
 msgid "Unable to load comments."
@@ -7571,6 +7604,11 @@ msgstr ""
 
 #: src/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
+msgstr ""
+
+#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to load questions and answers."
 msgstr ""
 
 #: src/marketplace/compare/ComparisonSections.tsx
@@ -7665,6 +7703,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
 msgid "Unable to show console log. Error message: {message}"
+msgstr ""
+
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to submit answers."
 msgstr ""
 
 #: src/issues/comments/effects.ts
@@ -8269,6 +8311,7 @@ msgstr ""
 msgid "Write review"
 msgstr ""
 
+#: src/marketplace-checklist/AnswerGroup.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
