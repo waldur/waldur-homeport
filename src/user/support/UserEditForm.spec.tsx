@@ -31,7 +31,6 @@ describe('UserEditForm', () => {
     });
     expect(wrapper.find({label: 'Full name'}).length).toBe(1);
     expect(wrapper.find({label: 'Native name'}).length).toBe(1);
-    expect(wrapper.find({label: 'Email'}).length).toBe(1);
     expect(wrapper.find({label: 'Registration method'}).length).toBe(1);
     expect(wrapper.find({label: 'User status'}).length).toBe(1);
     expect(wrapper.find({label: 'Organization name'}).length).toBe(1);
@@ -58,7 +57,6 @@ describe('UserEditForm', () => {
     });
     expect(wrapper.find({label: 'Full name'}).length).toBe(1);
     expect(wrapper.find({label: 'Native name'}).length).toBe(0);
-    expect(wrapper.find({label: 'Email'}).length).toBe(1);
     expect(wrapper.find({label: 'Registration method'}).length).toBe(1);
     expect(wrapper.find({label: 'User status'}).length).toBe(0);
     expect(wrapper.find({label: 'Organization name'}).length).toBe(1);
@@ -85,7 +83,6 @@ describe('UserEditForm', () => {
     });
     expect(wrapper.find({label: 'Full name'}).length).toBe(1);
     expect(wrapper.find({label: 'Native name'}).length).toBe(1);
-    expect(wrapper.find({label: 'Email'}).length).toBe(1);
     expect(wrapper.find({label: 'Registration method'}).length).toBe(0);
     expect(wrapper.find({label: 'User status'}).length).toBe(1);
     expect(wrapper.find({label: 'Organization name'}).length).toBe(0);

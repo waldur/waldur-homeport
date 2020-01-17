@@ -1,5 +1,5 @@
 import userEvents from './list/UserEvents';
-import userManage from './user-manage';
+import userManage from './UserManage';
 import userSidebar from './user-sidebar';
 import userDetails from './user-details';
 import userEdit from './support/UserEditContainer';

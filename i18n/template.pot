@@ -951,6 +951,7 @@ msgstr ""
 #: src/team/add-team-member.html
 #: src/user/hooks/hook-details.html
 #: src/user/keys/KeyCreateForm.tsx
+#: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
 msgstr ""
 
@@ -1008,6 +1009,10 @@ msgstr ""
 msgid "Change Request"
 msgstr ""
 
+#: src/user/support/EmailField.tsx
+msgid "Change email"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
 msgid "Change flavor"
 msgstr ""
@@ -1030,6 +1035,10 @@ msgstr ""
 
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 msgid "Change resource plan"
+msgstr ""
+
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Change user email"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -1507,6 +1516,10 @@ msgstr ""
 msgid "Current cost"
 msgstr ""
 
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Current email"
+msgstr ""
+
 #: src/openstack/openstack-instance/openstack-instance-current-flavor.tsx
 msgid "Current flavor"
 msgstr ""
@@ -1917,14 +1930,22 @@ msgstr ""
 
 #: src/auth/auth-login.html
 #: src/invitations/invitations-list.js
-#: src/user/support/UserEditForm.tsx
+#: src/user/support/EmailField.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Email"
 msgstr ""
 
+#: src/user/support/UserEmailChangeCallback.tsx
+msgid "Email has been updated."
+msgstr ""
+
 #: src/invitations/invitation-confirm-dialog.html
 msgid "Email update"
+msgstr ""
+
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Email verification has been sent. Please check your inbox."
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -3579,6 +3600,10 @@ msgstr ""
 #: src/openstack/openstack-tenant/tabs.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
+msgstr ""
+
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "New email"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
@@ -5578,6 +5603,10 @@ msgstr ""
 msgid "Requested by"
 msgstr ""
 
+#: src/user/support/EmailField.tsx
+msgid "Requested email"
+msgstr ""
+
 #: src/customer/api.ts
 msgid "Requests"
 msgstr ""
@@ -6702,6 +6731,7 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/resource/actions/dialog/action-dialog.html
+#: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
 msgstr ""
 
@@ -7363,6 +7393,11 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 msgid "Unable to cancel order item."
+msgstr ""
+
+#: src/user/support/UserEmailChangeCallback.tsx
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Unable to change email."
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.js
@@ -8213,6 +8248,10 @@ msgstr ""
 
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 msgid "Variable #{index}"
+msgstr ""
+
+#: src/user/support/UserEmailChangeCallback.tsx
+msgid "Verifying email change"
 msgstr ""
 
 #: src/navigation/app-footer.html
