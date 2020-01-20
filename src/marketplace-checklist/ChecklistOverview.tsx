@@ -6,6 +6,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { CustomerMap } from './CustomerMap';
 import { StatsTable } from './StatsTable';
 import { useChecklistOverview } from './useChecklist';
 
@@ -35,7 +36,8 @@ const ChecklistOverview = () => {
         ) : state.statsErred ? (
           <>{translate('Unable to load compiance overview.')}</>
         ) : (
-          <Panel>
+          <Panel className="m-t-md">
+            <CustomerMap customers={state.statsList}/>
             <StatsTable stats={state.statsList}/>
           </Panel>
         )}
