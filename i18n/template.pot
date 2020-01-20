@@ -1177,6 +1177,10 @@ msgstr ""
 msgid "Compliance"
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
+msgid "Compliance overview"
+msgstr ""
+
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/cost-planning/cost-plan-flavors.html
 msgid "Component"
@@ -2245,6 +2249,10 @@ msgstr ""
 msgid "Financial overview"
 msgstr ""
 
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "Find solution"
+msgstr ""
+
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -2430,7 +2438,6 @@ msgstr ""
 msgid "Get a virtual private cloud from a service store"
 msgstr ""
 
-#: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
@@ -3461,6 +3468,7 @@ msgstr ""
 
 #: src/cost-planning/cost-plan-flavors.html
 #: src/cost-planning/cost-plan-optimizer.html
+#: src/marketplace-checklist/AnswerGroup.tsx
 msgid "N/A"
 msgstr ""
 
@@ -3882,10 +3890,6 @@ msgstr ""
 msgid "Not known"
 msgstr ""
 
-#: src/marketplace-checklist/AnswerGroup.tsx
-msgid "Not provided"
-msgstr ""
-
 #: src/customer/AccountingRunningField.tsx
 msgid "Not running accounting"
 msgstr ""
@@ -4241,6 +4245,7 @@ msgstr ""
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace-checklist/StatsTable.tsx
 #: src/resource/list/resource-global-list.js
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -5975,6 +5980,10 @@ msgstr ""
 msgid "Schedules are invalid."
 msgstr ""
 
+#: src/marketplace-checklist/StatsTable.tsx
+msgid "Score"
+msgstr ""
+
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Screenshots"
 msgstr ""
@@ -7066,6 +7075,7 @@ msgstr ""
 msgid "There are no charts yet."
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 msgid "There are no checklist yet."
 msgstr ""
@@ -7544,6 +7554,7 @@ msgstr ""
 msgid "Unable to load charts."
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load checklists."
@@ -7552,6 +7563,14 @@ msgstr ""
 #: src/issues/comments/IssueCommentsList.spec.tsx
 #: src/issues/comments/IssueCommentsList.tsx
 msgid "Unable to load comments."
+msgstr ""
+
+#: src/marketplace-checklist/ChecklistOverview.tsx
+msgid "Unable to load compiance overview."
+msgstr ""
+
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to load compliance overview."
 msgstr ""
 
 #: src/customer/TotalCostComponent.tsx

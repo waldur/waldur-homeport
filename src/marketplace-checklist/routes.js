@@ -11,5 +11,15 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Compliance'),
         feature: FEATURE,
       }
+    })
+
+    .state('marketplace-checklist-overview', {
+      url: 'marketplace-checklist-overview/',
+      template: '<marketplace-checklist-overview></marketplace-checklist-overview>',
+      parent: 'support',
+      data: {
+        pageTitle: gettext('Compliance'),
+        feature: FEATURE,
+      }
     });
 }

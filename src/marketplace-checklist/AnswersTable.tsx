@@ -12,7 +12,7 @@ const CategoryLink = ({ question }) =>
       <Link
         state="marketplace-category"
         params={{category_uuid: question.category_uuid}}
-        label={translate('Go to marketplace')}
+        label={translate('Find solution')}
       />
     </p>
   ) : null;
@@ -43,7 +43,7 @@ export const AnswersTable = ({ questions, answers, setAnswers }) => (
           </td>
           <td>
             {question.description}
-            <CategoryLink question={question}/>
+            {!answers[question.uuid] && <CategoryLink question={question}/>}
           </td>
           <td className="text-center">
             <AnswerGroup
