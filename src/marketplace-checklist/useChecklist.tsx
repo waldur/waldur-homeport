@@ -11,18 +11,11 @@ interface Answer {
   value: boolean;
 }
 
-export const useChecklist = project => {
+const useChecklistSelector = () => {
   const [checklistOptions, setChecklistOptions] = useState([]);
   const [checklistLoading, setChecklistLoading] = useState(true);
   const [checklistErred, setChecklistErred] = useState(false);
-
-  const [questionsList, setQuestionsList] = useState([]);
-  const [questionsLoading, setQuestionsLoading] = useState(true);
-  const [questionsErred, setQuestionsErred] = useState(true);
-
   const [checklist, setChecklist] = useState();
-  const [answers, setAnswers] = useState();
-  const [submitting, setSubmitting] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -46,6 +39,27 @@ export const useChecklist = project => {
     }
     load();
   }, []);
+
+  return {
+    checklistLoading,
+    checklistErred,
+    checklistOptions,
+    checklist,
+    setChecklist,
+  };
+};
+
+export const useProjectChecklist = project => {
+  const {checklist, ...checklistLoader} = useChecklistSelector();
+
+  const [questionsList, setQuestionsList] = useState([]);
+  const [questionsLoading, setQuestionsLoading] = useState(true);
+  const [questionsErred, setQuestionsErred] = useState(true);
+
+  const [answers, setAnswers] = useState();
+  const [submitting, setSubmitting] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function load() {
@@ -93,17 +107,53 @@ export const useChecklist = project => {
   }, [answers]);
 
   return {
-    checklistLoading,
-    checklistErred,
-    checklistOptions,
+    ...checklistLoader,
+    checklist,
     questionsLoading,
     questionsErred,
     questionsList,
-    checklist,
-    setChecklist,
     answers,
     setAnswers,
     submit,
     submitting,
+  };
+};
+
+export const useChecklistOverview = () => {
+  const {checklist, ...checklistLoader} = useChecklistSelector();
+
+  const [statsList, setStatsList] = useState([]);
+  const [statsLoading, setStatsLoading] = useState(true);
+  const [statsErred, setStatsErred] = useState(true);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function load() {
+      setStatsLoading(true);
+      setStatsErred(false);
+      try {
+        const stats = await getAll(`/marketplace-checklists/${checklist.uuid}/stats/`);
+        setStatsList(stats);
+        setStatsLoading(false);
+      } catch (error) {
+        setStatsLoading(false);
+        setStatsErred(true);
+        const errorMessage = `${translate('Unable to load compliance overview.')} ${format(error)}`;
+        dispatch(showError(errorMessage));
+        return;
+      }
+    }
+    if (checklist) {
+      load();
+    }
+  }, [checklist]);
+
+  return {
+    ...checklistLoader,
+    checklist,
+    statsList,
+    statsLoading,
+    statsErred,
   };
 };

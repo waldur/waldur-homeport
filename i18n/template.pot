@@ -1177,6 +1177,10 @@ msgstr ""
 msgid "Compliance"
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
+msgid "Compliance overview"
+msgstr ""
+
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/cost-planning/cost-plan-flavors.html
 msgid "Component"
@@ -3059,6 +3063,10 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
+#: src/marketplace-checklist/StatsTable.tsx
+msgid "Latitude"
+msgstr ""
+
 #: src/configs/base-config.js
 msgid "Latvian"
 msgstr ""
@@ -3185,6 +3193,10 @@ msgstr ""
 
 #: src/auth/callbacks/auth-logout-failed.html
 msgid "Logout failed"
+msgstr ""
+
+#: src/marketplace-checklist/StatsTable.tsx
+msgid "Longitude"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
@@ -4241,6 +4253,7 @@ msgstr ""
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace-checklist/StatsTable.tsx
 #: src/resource/list/resource-global-list.js
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -5975,6 +5988,10 @@ msgstr ""
 msgid "Schedules are invalid."
 msgstr ""
 
+#: src/marketplace-checklist/StatsTable.tsx
+msgid "Score"
+msgstr ""
+
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Screenshots"
 msgstr ""
@@ -7066,6 +7083,7 @@ msgstr ""
 msgid "There are no charts yet."
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 msgid "There are no checklist yet."
 msgstr ""
@@ -7544,6 +7562,7 @@ msgstr ""
 msgid "Unable to load charts."
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load checklists."
@@ -7552,6 +7571,14 @@ msgstr ""
 #: src/issues/comments/IssueCommentsList.spec.tsx
 #: src/issues/comments/IssueCommentsList.tsx
 msgid "Unable to load comments."
+msgstr ""
+
+#: src/marketplace-checklist/ChecklistOverview.tsx
+msgid "Unable to load compiance overview."
+msgstr ""
+
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to load compliance overview."
 msgstr ""
 
 #: src/customer/TotalCostComponent.tsx

@@ -75,6 +75,12 @@ const REPORT_ITEMS = [
     feature: 'support.organizations'
   },
   {
+    label: gettext('Compliance overview'),
+    icon: 'fa-list-ol',
+    link: 'marketplace-checklist-overview',
+    feature: 'marketplace.checklist'
+  },
+  {
     label: gettext('Usage overview'),
     icon: 'fa-map',
     link: 'support.usage',

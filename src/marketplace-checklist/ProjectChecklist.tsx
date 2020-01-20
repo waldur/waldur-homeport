@@ -9,7 +9,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { AnswersTable } from './AnswersTable';
-import { useChecklist } from './useChecklist';
+import { useProjectChecklist } from './useChecklist';
 
 const SubmitButton = ({ submitting, submit }) => (
   <Button
@@ -27,7 +27,7 @@ const ProjectChecklist = () => {
     return null;
   }
 
-  const state = useChecklist(project);
+  const state = useProjectChecklist(project);
 
   if (state.checklistLoading) {
     return <LoadingSpinner/>;
