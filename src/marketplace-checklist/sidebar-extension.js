@@ -9,7 +9,7 @@ export default function registerSidebarExtension(SidebarExtensionService) {
         icon: ICON_CLASS,
         link: 'marketplace-checklist-project({uuid: $ctrl.context.project.uuid})',
         feature: FEATURE,
-        index: 1000,
+        index: 220,
       }
     ];
   });

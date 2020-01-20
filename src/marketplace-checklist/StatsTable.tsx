@@ -15,8 +15,6 @@ export const StatsTable = props => (
         <th className="col-sm-1">#</th>
         <th>{translate('Organization')}</th>
         <th>{translate('Score')}</th>
-        <th>{translate('Latitude')}</th>
-        <th>{translate('Longitude')}</th>
       </tr>
     </thead>
     <tbody>
@@ -30,12 +28,6 @@ export const StatsTable = props => (
           </td>
           <td>
             {customer.score}
-          </td>
-          <td>
-            {customer.latitude}
-          </td>
-          <td>
-            {customer.longitude}
           </td>
         </tr>
       ))}

@@ -27,12 +27,6 @@ const REPORT_ITEMS = [
     feature: 'support.users'
   },
   {
-    label: gettext('Resources'),
-    icon: 'fa-files-o',
-    link: 'support.resources',
-    feature: 'resources.legacy'
-  },
-  {
     label: gettext('Orders'),
     icon: 'fa-files-o',
     link: 'marketplace-support-order-items',
@@ -43,6 +37,12 @@ const REPORT_ITEMS = [
     icon: 'fa-files-o',
     link: 'marketplace-support-resources',
     feature: 'marketplace'
+  },
+  {
+    label: gettext('Compliance overview'),
+    icon: 'fa-list-ol',
+    link: 'marketplace-checklist-overview',
+    feature: 'marketplace.checklist'
   },
   {
     label: gettext('Plan capacity'),
@@ -73,12 +73,6 @@ const REPORT_ITEMS = [
     icon: 'fa-university',
     link: 'support.organizations',
     feature: 'support.organizations'
-  },
-  {
-    label: gettext('Compliance overview'),
-    icon: 'fa-list-ol',
-    link: 'marketplace-checklist-overview',
-    feature: 'marketplace.checklist'
   },
   {
     label: gettext('Usage overview'),

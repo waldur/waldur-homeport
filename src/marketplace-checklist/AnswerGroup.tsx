@@ -21,7 +21,7 @@ export const AnswerGroup = ({ answers, question, setAnswers }) => (
       {translate('No')}
     </ToggleButton>
     <ToggleButton value="null">
-      {translate('Not provided')}
+      {translate('N/A')}
     </ToggleButton>
   </ToggleButtonGroup>
 );

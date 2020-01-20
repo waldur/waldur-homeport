@@ -2249,6 +2249,10 @@ msgstr ""
 msgid "Financial overview"
 msgstr ""
 
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "Find solution"
+msgstr ""
+
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -2434,7 +2438,6 @@ msgstr ""
 msgid "Get a virtual private cloud from a service store"
 msgstr ""
 
-#: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
@@ -3063,10 +3066,6 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
-#: src/marketplace-checklist/StatsTable.tsx
-msgid "Latitude"
-msgstr ""
-
 #: src/configs/base-config.js
 msgid "Latvian"
 msgstr ""
@@ -3193,10 +3192,6 @@ msgstr ""
 
 #: src/auth/callbacks/auth-logout-failed.html
 msgid "Logout failed"
-msgstr ""
-
-#: src/marketplace-checklist/StatsTable.tsx
-msgid "Longitude"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
@@ -3473,6 +3468,7 @@ msgstr ""
 
 #: src/cost-planning/cost-plan-flavors.html
 #: src/cost-planning/cost-plan-optimizer.html
+#: src/marketplace-checklist/AnswerGroup.tsx
 msgid "N/A"
 msgstr ""
 
@@ -3892,10 +3888,6 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Not known"
-msgstr ""
-
-#: src/marketplace-checklist/AnswerGroup.tsx
-msgid "Not provided"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
