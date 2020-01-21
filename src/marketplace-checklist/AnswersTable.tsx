@@ -6,16 +6,25 @@ import { translate } from '@waldur/i18n';
 
 import { AnswerGroup } from './AnswerGroup';
 
-const CategoryLink = ({ question }) =>
-  question.category_uuid ? (
-    <p>
-      <Link
-        state="marketplace-category"
-        params={{category_uuid: question.category_uuid}}
-        label={translate('Find solution')}
-      />
-    </p>
-  ) : null;
+const QuestionGroup = ({ question, answers }) => (
+  <>
+    {question.description}
+    {!answers[question.uuid] && question.solution && (
+      <p>
+        {question.solution}
+      </p>
+    )}
+    {!answers[question.uuid] && question.category_uuid && (
+      <p>
+        <Link
+          state="marketplace-category"
+          params={{category_uuid: question.category_uuid}}
+          label={translate('Find solution')}
+        />
+      </p>
+    )}
+  </>
+);
 
 export const AnswersTable = ({ questions, answers, setAnswers }) => (
   <Table
@@ -42,8 +51,10 @@ export const AnswersTable = ({ questions, answers, setAnswers }) => (
             {index + 1}
           </td>
           <td>
-            {question.description}
-            {!answers[question.uuid] && <CategoryLink question={question}/>}
+            <QuestionGroup
+              question={question}
+              answers={answers}
+            />
           </td>
           <td className="text-center">
             <AnswerGroup
