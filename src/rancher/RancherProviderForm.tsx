@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, SecretField } from '@waldur/form-react';
+import { FormContainer, StringField, SecretField, TextField } from '@waldur/form-react';
 
 export const RancherProviderForm = ({ translate, container }) => (
   <FormContainer {...container}>
@@ -28,6 +28,10 @@ export const RancherProviderForm = ({ translate, container }) => (
       label={translate('Base image name')}
       required={true}
       validate={required}
+    />
+    <TextField
+      name="cloud_init_template"
+      label={translate('Cloud init template')}
     />
   </FormContainer>
 );
