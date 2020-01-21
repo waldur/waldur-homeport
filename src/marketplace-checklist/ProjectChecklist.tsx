@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 
+import { AnswersSummary } from './AnswersSummary';
 import { AnswersTable } from './AnswersTable';
 import { useProjectChecklist } from './useChecklist';
 
@@ -53,6 +54,7 @@ const ProjectChecklist = () => {
           <>{translate('Unable to load questions and answers.')}</>
         ) : (
           <>
+            <AnswersSummary answers={state.answers}/>
             <AnswersTable
               questions={state.questionsList}
               answers={state.answers}

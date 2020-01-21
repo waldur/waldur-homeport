@@ -5,7 +5,6 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
 import { AnswerGroup } from './AnswerGroup';
-import { AnswersTableFooter as TableFooter } from './AnswersTableFooter';
 
 const QuestionGroup = ({ question, answers }) => (
   <>
@@ -78,9 +77,6 @@ export const AnswersTable = ({ questions, answers, setAnswers }) => (
       questions={questions}
       answers={answers}
       setAnswers={setAnswers}
-    />
-    <TableFooter
-      answers={answers}
     />
   </Table>
 );

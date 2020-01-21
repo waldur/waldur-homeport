@@ -3589,7 +3589,7 @@ msgstr ""
 msgid "Native name"
 msgstr ""
 
-#: src/marketplace-checklist/AnswersTableFooter.tsx
+#: src/marketplace-checklist/AnswersSummary.tsx
 msgid "Negative"
 msgstr ""
 
@@ -4768,7 +4768,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: src/marketplace-checklist/AnswersTableFooter.tsx
+#: src/marketplace-checklist/AnswersSummary.tsx
 msgid "Positive"
 msgstr ""
 
@@ -7852,7 +7852,7 @@ msgstr ""
 msgid "Units"
 msgstr ""
 
-#: src/marketplace-checklist/AnswersTableFooter.tsx
+#: src/marketplace-checklist/AnswersSummary.tsx
 msgid "Unknown"
 msgstr ""
 

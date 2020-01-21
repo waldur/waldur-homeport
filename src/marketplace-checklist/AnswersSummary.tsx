@@ -37,12 +37,6 @@ const getChartData = answers => ({
   ],
 });
 
-export const AnswersTableFooter = ({ answers }) => (
-  <tfoot>
-    <tr>
-      <td colSpan={3}>
-        <EChart options={getChartData(answers)} height="300px" />
-      </td>
-    </tr>
-  </tfoot>
+export const AnswersSummary = ({ answers }) => (
+  <EChart options={getChartData(answers)} height="300px" />
 );
