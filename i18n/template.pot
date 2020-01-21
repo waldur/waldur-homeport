@@ -19,6 +19,10 @@ msgstr ""
 msgid "< Back"
 msgstr ""
 
+#: src/marketplace-checklist/AnswerGroup.tsx
+msgid "?"
+msgstr ""
+
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "A one-time fee applied on activation."
 msgstr ""
@@ -3473,7 +3477,6 @@ msgstr ""
 
 #: src/cost-planning/cost-plan-flavors.html
 #: src/cost-planning/cost-plan-optimizer.html
-#: src/marketplace-checklist/AnswerGroup.tsx
 msgid "N/A"
 msgstr ""
 
@@ -3589,6 +3592,10 @@ msgstr ""
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Native name"
+msgstr ""
+
+#: src/marketplace-checklist/AnswersSummary.tsx
+msgid "Negative"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -4764,6 +4771,10 @@ msgstr ""
 #: src/openstack/openstack-security-groups/security-group-rules-list.html
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Port range"
+msgstr ""
+
+#: src/marketplace-checklist/AnswersSummary.tsx
+msgid "Positive"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -7844,6 +7855,10 @@ msgstr ""
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 msgid "Units"
+msgstr ""
+
+#: src/marketplace-checklist/AnswersSummary.tsx
+msgid "Unknown"
 msgstr ""
 
 #: src/analytics/ResourceAnalysisItem.tsx
