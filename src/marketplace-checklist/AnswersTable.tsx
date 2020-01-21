@@ -5,6 +5,7 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
 import { AnswerGroup } from './AnswerGroup';
+import { AnswersTableFooter as TableFooter } from './AnswersTableFooter';
 
 const QuestionGroup = ({ question, answers }) => (
   <>
@@ -26,6 +27,45 @@ const QuestionGroup = ({ question, answers }) => (
   </>
 );
 
+const TableHeader = () => (
+  <thead>
+    <tr>
+      <th className="col-sm-1">
+        #
+      </th>
+      <th>{translate('Question')}</th>
+      <th className="col-sm-3 text-center">
+        {translate('Answer')}
+      </th>
+    </tr>
+  </thead>
+);
+
+const TableBody = ({ questions, answers, setAnswers }) => (
+  <tbody>
+    {questions.map((question, index) => (
+      <tr key={question.uuid}>
+        <td>
+          {index + 1}
+        </td>
+        <td>
+          <QuestionGroup
+            question={question}
+            answers={answers}
+          />
+        </td>
+        <td className="text-center">
+          <AnswerGroup
+            question={question}
+            answers={answers}
+            setAnswers={setAnswers}
+          />
+        </td>
+      </tr>
+    ))}
+  </tbody>
+);
+
 export const AnswersTable = ({ questions, answers, setAnswers }) => (
   <Table
     responsive={true}
@@ -33,38 +73,14 @@ export const AnswersTable = ({ questions, answers, setAnswers }) => (
     striped={true}
     className="m-t-md"
   >
-    <thead>
-      <tr>
-        <th className="col-sm-1">
-          #
-        </th>
-        <th>{translate('Question')}</th>
-        <th className="col-sm-3 text-center">
-          {translate('Answer')}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {questions.map((question, index) => (
-        <tr key={question.uuid}>
-          <td>
-            {index + 1}
-          </td>
-          <td>
-            <QuestionGroup
-              question={question}
-              answers={answers}
-            />
-          </td>
-          <td className="text-center">
-            <AnswerGroup
-              question={question}
-              answers={answers}
-              setAnswers={setAnswers}
-            />
-          </td>
-        </tr>
-      ))}
-    </tbody>
+    <TableHeader/>
+    <TableBody
+      questions={questions}
+      answers={answers}
+      setAnswers={setAnswers}
+    />
+    <TableFooter
+      answers={answers}
+    />
   </Table>
 );
