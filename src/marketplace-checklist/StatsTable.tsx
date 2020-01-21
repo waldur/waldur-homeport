@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
 
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 
 export const StatsTable = props => (
@@ -27,7 +28,10 @@ export const StatsTable = props => (
             {customer.name}
           </td>
           <td>
-            {customer.score}
+            <StateIndicator
+              label={`${customer.score} %`}
+              variant={customer.score < 25 ? 'danger' : customer.score < 75 ? 'warning' : 'primary'}
+            />
           </td>
         </tr>
       ))}
