@@ -33,7 +33,7 @@
           <span translate>More info</span>
         </a>
         <span class="vertical-date">
-          <span am-time-ago="::event.date"></span>
+          {{ ::event.date | formatRelative }} ago
           <br/>
           <small>{{ ::event.date | dateTime }}</small>
         </span>

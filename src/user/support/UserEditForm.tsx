@@ -3,12 +3,12 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { dateTime } from '@waldur/core/utils';
 import { FieldError, FormContainer, SecretField, SelectField, StringField, SubmitButton } from '@waldur/form-react';
-import { EmailField } from '@waldur/form-react/EmailField';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { StaticField } from '@waldur/user/support/StaticField';
 import { formatRegistrationMethod, formatUserStatus } from '@waldur/user/support/utils';
 import { UserDetails } from '@waldur/workspace/types';
 
+import { EmailField } from './EmailField';
 import { TermsOfService } from './TermsOfService';
 import { tokenOptions, tokenLifetimeTooltip, TokenLifetimeWarning } from './TokenLifetimeField';
 
@@ -72,18 +72,7 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           value={props.user.native_name}
         />
       }
-      {props.protected ? (
-        <StaticField
-          label={translate('Email')}
-          value={props.user.email}
-        />
-      ) : (
-        <EmailField
-          label={translate('Email')}
-          name="email"
-          required={props.isRequired('email')}
-        />
-      )}
+      <EmailField user={props.user} protected={props.protected}/>
       {props.fieldIsVisible('registration_method') &&
         <StaticField
           label={translate('Registration method')}

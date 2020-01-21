@@ -12,6 +12,7 @@ export interface UserDetails extends User {
   civil_number: string;
   phone_number: string;
   email: string;
+  requested_email?: string;
   registration_method: string;
   preferred_language: string;
   competence: string;

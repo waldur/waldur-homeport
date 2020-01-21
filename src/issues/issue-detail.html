@@ -80,7 +80,7 @@
         <div class="m-b-xs">
           <dt><span translate>Created</span>:</dt>
           <dd>
-            <span am-time-ago="::$ctrl.issue.created"></span>,
+            {{ ::$ctrl.issue.created | formatRelative }} ago,
             {{ ::$ctrl.issue.created | dateTime }}
           </dd>
         </div>

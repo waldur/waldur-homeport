@@ -19,6 +19,10 @@ msgstr ""
 msgid "< Back"
 msgstr ""
 
+#: src/marketplace-checklist/AnswerGroup.tsx
+msgid "?"
+msgstr ""
+
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "A one-time fee applied on activation."
 msgstr ""
@@ -475,6 +479,14 @@ msgstr ""
 
 #: src/rancher/RancherKeyValueDialog.tsx
 msgid "Annotations & labels"
+msgstr ""
+
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "Answer"
+msgstr ""
+
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Answers have been submitted"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -943,6 +955,7 @@ msgstr ""
 #: src/team/add-team-member.html
 #: src/user/hooks/hook-details.html
 #: src/user/keys/KeyCreateForm.tsx
+#: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
 msgstr ""
 
@@ -1000,6 +1013,10 @@ msgstr ""
 msgid "Change Request"
 msgstr ""
 
+#: src/user/support/EmailField.tsx
+msgid "Change email"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
 msgid "Change flavor"
 msgstr ""
@@ -1022,6 +1039,10 @@ msgstr ""
 
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 msgid "Change resource plan"
+msgstr ""
+
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Change user email"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -1101,6 +1122,11 @@ msgstr ""
 msgid "Cloud block storage size"
 msgstr ""
 
+#: src/rancher/RancherProviderForm.tsx
+#: src/rancher/marketplace.ts
+msgid "Cloud init template"
+msgstr ""
+
 #: src/resource/support/ChartContainer.tsx
 msgid "Cloud vCPU"
 msgstr ""
@@ -1153,6 +1179,15 @@ msgstr ""
 
 #: src/offering/actions/CompleteAction.ts
 msgid "Complete"
+msgstr ""
+
+#: src/marketplace-checklist/routes.js
+#: src/marketplace-checklist/sidebar-extension.js
+msgid "Compliance"
+msgstr ""
+
+#: src/issues/workspace/issue-navigation-service.js
+msgid "Compliance overview"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -1492,6 +1527,10 @@ msgstr ""
 
 #: src/customer/CustomerList.tsx
 msgid "Current cost"
+msgstr ""
+
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Current email"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-current-flavor.tsx
@@ -1904,14 +1943,22 @@ msgstr ""
 
 #: src/auth/auth-login.html
 #: src/invitations/invitations-list.js
-#: src/user/support/UserEditForm.tsx
+#: src/user/support/EmailField.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Email"
 msgstr ""
 
+#: src/user/support/UserEmailChangeCallback.tsx
+msgid "Email has been updated."
+msgstr ""
+
 #: src/invitations/invitation-confirm-dialog.html
 msgid "Email update"
+msgstr ""
+
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Email verification has been sent. Please check your inbox."
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -2209,6 +2256,10 @@ msgstr ""
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Financial overview"
+msgstr ""
+
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "Find solution"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
@@ -3543,6 +3594,10 @@ msgstr ""
 msgid "Native name"
 msgstr ""
 
+#: src/marketplace-checklist/AnswersSummary.tsx
+msgid "Negative"
+msgstr ""
+
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/vmware/VMwarePortSummary.tsx
 #: src/vmware/vmware-virtual-machine-ports.js
@@ -3565,6 +3620,10 @@ msgstr ""
 #: src/openstack/openstack-tenant/tabs.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
+msgstr ""
+
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "New email"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
@@ -3597,6 +3656,7 @@ msgstr ""
 msgid "Next trigger at"
 msgstr ""
 
+#: src/marketplace-checklist/AnswerGroup.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -4197,6 +4257,7 @@ msgstr ""
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace-checklist/StatsTable.tsx
 #: src/resource/list/resource-global-list.js
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -4712,6 +4773,10 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
+#: src/marketplace-checklist/AnswersSummary.tsx
+msgid "Positive"
+msgstr ""
+
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 msgid "Postal code"
@@ -5151,6 +5216,10 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "Question"
+msgstr ""
+
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
 #: src/providers/provider-list.js
@@ -5555,6 +5624,10 @@ msgstr ""
 msgid "Requested by"
 msgstr ""
 
+#: src/user/support/EmailField.tsx
+msgid "Requested email"
+msgstr ""
+
 #: src/customer/api.ts
 msgid "Requests"
 msgstr ""
@@ -5921,6 +5994,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Schedules are invalid."
+msgstr ""
+
+#: src/marketplace-checklist/StatsTable.tsx
+msgid "Score"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
@@ -6670,6 +6747,7 @@ msgid "Storages"
 msgstr ""
 
 #: src/digitalocean/droplet-resize.html
+#: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -6678,6 +6756,7 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/resource/actions/dialog/action-dialog.html
+#: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
 msgstr ""
 
@@ -7012,6 +7091,11 @@ msgstr ""
 msgid "There are no charts yet."
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace-checklist/ProjectChecklist.tsx
+msgid "There are no checklist yet."
+msgstr ""
+
 #: src/issues/comments/IssueCommentsList.spec.tsx
 #: src/issues/comments/IssueCommentsList.tsx
 msgid "There are no comments yet."
@@ -7337,6 +7421,11 @@ msgstr ""
 msgid "Unable to cancel order item."
 msgstr ""
 
+#: src/user/support/UserEmailChangeCallback.tsx
+#: src/user/support/UserEmailChangeDialog.tsx
+msgid "Unable to change email."
+msgstr ""
+
 #: src/freeipa/freeipa-account-create.js
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
@@ -7481,9 +7570,23 @@ msgstr ""
 msgid "Unable to load charts."
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to load checklists."
+msgstr ""
+
 #: src/issues/comments/IssueCommentsList.spec.tsx
 #: src/issues/comments/IssueCommentsList.tsx
 msgid "Unable to load comments."
+msgstr ""
+
+#: src/marketplace-checklist/ChecklistOverview.tsx
+msgid "Unable to load compiance overview."
+msgstr ""
+
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to load compliance overview."
 msgstr ""
 
 #: src/customer/TotalCostComponent.tsx
@@ -7571,6 +7674,11 @@ msgstr ""
 
 #: src/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
+msgstr ""
+
+#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to load questions and answers."
 msgstr ""
 
 #: src/marketplace/compare/ComparisonSections.tsx
@@ -7667,6 +7775,10 @@ msgstr ""
 msgid "Unable to show console log. Error message: {message}"
 msgstr ""
 
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "Unable to submit answers."
+msgstr ""
+
 #: src/issues/comments/effects.ts
 msgid "Unable to submit empty comment."
 msgstr ""
@@ -7743,6 +7855,10 @@ msgstr ""
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 msgid "Units"
+msgstr ""
+
+#: src/marketplace-checklist/AnswersSummary.tsx
+msgid "Unknown"
 msgstr ""
 
 #: src/analytics/ResourceAnalysisItem.tsx
@@ -8173,6 +8289,10 @@ msgstr ""
 msgid "Variable #{index}"
 msgstr ""
 
+#: src/user/support/UserEmailChangeCallback.tsx
+msgid "Verifying email change"
+msgstr ""
+
 #: src/navigation/app-footer.html
 msgid "Version"
 msgstr ""
@@ -8269,6 +8389,7 @@ msgstr ""
 msgid "Write review"
 msgstr ""
 
+#: src/marketplace-checklist/AnswerGroup.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx

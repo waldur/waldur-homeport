@@ -95,6 +95,14 @@ export default function($stateProvider) {
     .state('users.manage', angular.copy(tabs.manage))
     .state('users.freeipa', angular.copy(tabs.freeipa))
 
+    .state('user-email-change', {
+      url: '/user_email_change/:token/',
+      template: '<user-email-change-callback></user-email-change-callback>',
+      data: {
+        bodyClass: 'old',
+      }
+    })
+
     .state('keys', {
       url: '/keys/',
       abstract: true,

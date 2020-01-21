@@ -56,6 +56,7 @@ import marketplaceModule from './marketplace/module';
 import vmwareModule from './vmware/module';
 import rancherModule from './rancher/module';
 import marketplaceScriptModule from './marketplace-script/module';
+import marketplaceChecklistModule from './marketplace-checklist/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -65,7 +66,6 @@ const appModule = angular.module('waldur', [
   'duScroll',
   'ui.gravatar',
   'ui.select',
-  'angularMoment',
   'ngAnimate',
   'pascalprecht.translate',
   'flash',
@@ -130,6 +130,7 @@ marketplaceModule(appModule);
 vmwareModule(appModule);
 rancherModule(appModule);
 marketplaceScriptModule(appModule);
+marketplaceChecklistModule(appModule);
 appModule.config(analyticsRoutes);
 
 if (process.env.NODE_ENV !== 'production') {
