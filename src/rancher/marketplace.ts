@@ -26,6 +26,11 @@ const ServiceSettingsAttributes = (): Attribute[] => [
     title: translate('Base image name'),
     type: 'string',
   },
+  {
+    key: 'cloud_init_template',
+    title: translate('Cloud init template'),
+    type: 'string',
+  },
 ];
 
 const serializeDataVolume = ({ size, ...volumeRest }) => ({

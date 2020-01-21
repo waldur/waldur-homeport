@@ -8,6 +8,7 @@ const serializer = pick([
   'username',
   'password',
   'base_image_name',
+  'cloud_init_template',
 ]);
 
 ProvidersRegistry.register({

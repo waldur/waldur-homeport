@@ -1118,6 +1118,11 @@ msgstr ""
 msgid "Cloud block storage size"
 msgstr ""
 
+#: src/rancher/RancherProviderForm.tsx
+#: src/rancher/marketplace.ts
+msgid "Cloud init template"
+msgstr ""
+
 #: src/resource/support/ChartContainer.tsx
 msgid "Cloud vCPU"
 msgstr ""
