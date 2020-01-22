@@ -8780,6 +8780,10 @@ msgstr ""
 msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
 
+#: src/marketplace-checklist/useChecklist.tsx
+msgid "{name} ({questions_count} questions)"
+msgstr ""
+
 #: src/resource/utils.tsx
 msgid "{number} days"
 msgstr ""

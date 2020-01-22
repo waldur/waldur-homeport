@@ -6,6 +6,13 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 
+interface Checklist {
+  name: string;
+  description: string;
+  uuid: string;
+  questions_count: number;
+}
+
 interface Answer {
   question_uuid: string;
   value: boolean;
@@ -24,7 +31,10 @@ const useChecklistSelector = () => {
       setChecklistLoading(true);
       setChecklistErred(false);
       try {
-        const checklists = await getAll('/marketplace-checklists/');
+        const checklists = (await getAll<Checklist>('/marketplace-checklists/')).map(item => ({
+          ...item,
+          name: translate('{name} ({questions_count} questions)', item),
+        }));
         setChecklistOptions(checklists);
         setChecklistLoading(false);
         // Select first checklist when fetching is completed
