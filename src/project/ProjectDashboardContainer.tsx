@@ -19,6 +19,7 @@ const mapStateToProps = (state: OuterState) => ({
   project: getProject(state),
   canAddUser: canAddUser(state),
   marketplaceEnabled: isVisible(state, 'marketplace'),
+  marketplaceChecklistEnabled: isVisible(state, 'marketplace.checklist'),
 });
 
 const ProjectDashboardContainer = connect(mapStateToProps)(ProjectDashboard);

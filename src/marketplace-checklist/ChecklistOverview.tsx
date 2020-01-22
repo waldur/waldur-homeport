@@ -30,6 +30,7 @@ const ChecklistOverview = () => {
           onChange={state.setChecklist}
           options={state.checklistOptions}
           clearable={false}
+          wrapperStyle={{zIndex: 2000}} /* Because leaflet z-index is 1000 */
         />
         {state.statsLoading ? (
           <LoadingSpinner/>

@@ -4,6 +4,13 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { GeolocationPoint } from '@waldur/marketplace/types';
 import loadLeafleat from '@waldur/shims/load-leaflet';
 
+// tslint:disable-next-line: no-var-requires
+const iconGreen = require('@waldur/images/marker-icon-green.png');
+// tslint:disable-next-line: no-var-requires
+const iconRed = require('@waldur/images/marker-icon-red.png');
+// tslint:disable-next-line: no-var-requires
+const iconYellow = require('@waldur/images/marker-icon-yellow.png');
+
 interface Customer extends GeolocationPoint {
   name: string;
   score: number;
@@ -24,6 +31,16 @@ export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => {
     async function loadAll() {
       try {
         const { leaflet } = await loadLeafleat();
+        const createIcon = iconUrl => new leaflet.Icon({
+          iconUrl,
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+        });
+        const greenIcon = createIcon(iconGreen);
+        const redIcon = createIcon(iconRed);
+        const yellowIcon = createIcon(iconYellow);
+
         leafletRef.current = leaflet;
         setLoading(false);
 
@@ -40,8 +57,10 @@ export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => {
             return;
           }
           leafletRef.current
-            .marker([customer.latitude, customer.longitude])
-            .bindPopup(`${customer.name}: ${customer.score}`)
+            .marker([customer.latitude, customer.longitude], {
+              icon: customer.score < 25 ? redIcon : customer.score < 75 ? yellowIcon : greenIcon,
+            })
+            .bindPopup(`${customer.name}: ${customer.score} %`)
             .addTo(layerRef.current);
         });
       } catch {
