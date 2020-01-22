@@ -7,6 +7,7 @@ export const PieChart = ({ positive, negative, unknown }) => {
   const options = React.useMemo(() => ({
     legend: {
       orient: 'vertical',
+      left: 0,
       data: [
         translate('Positive'),
         translate('Negative'),
