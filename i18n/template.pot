@@ -1186,6 +1186,10 @@ msgstr ""
 msgid "Compliance"
 msgstr ""
 
+#: src/project/ProjectDashboard.tsx
+msgid "Compliance checklists"
+msgstr ""
+
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Compliance overview"
 msgstr ""
@@ -3594,7 +3598,7 @@ msgstr ""
 msgid "Native name"
 msgstr ""
 
-#: src/marketplace-checklist/AnswersSummary.tsx
+#: src/marketplace-checklist/PieChart.tsx
 msgid "Negative"
 msgstr ""
 
@@ -4773,7 +4777,7 @@ msgstr ""
 msgid "Port range"
 msgstr ""
 
-#: src/marketplace-checklist/AnswersSummary.tsx
+#: src/marketplace-checklist/PieChart.tsx
 msgid "Positive"
 msgstr ""
 
@@ -7571,6 +7575,7 @@ msgid "Unable to load charts."
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace-checklist/ComplianceChecklists.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load checklists."
@@ -7857,7 +7862,7 @@ msgstr ""
 msgid "Units"
 msgstr ""
 
-#: src/marketplace-checklist/AnswersSummary.tsx
+#: src/marketplace-checklist/PieChart.tsx
 msgid "Unknown"
 msgstr ""
 

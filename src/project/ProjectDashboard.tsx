@@ -7,6 +7,7 @@ import { loadCategories } from '@waldur/dashboard/api';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { translate } from '@waldur/i18n';
+import { ComplianceChecklists } from '@waldur/marketplace-checklist/ComplianceChecklists';
 import { User, Project } from '@waldur/workspace/types';
 
 import { ProjectActions } from './ProjectActions';
@@ -18,6 +19,7 @@ interface ProjectDashboardProps {
   project: Project;
   canAddUser: boolean;
   marketplaceEnabled: boolean;
+  marketplaceChecklistEnabled: boolean;
 }
 
 export const ProjectDashboard = (props: ProjectDashboardProps) => props.project ? (
@@ -35,6 +37,11 @@ export const ProjectDashboard = (props: ProjectDashboardProps) => props.project 
           <ProjectActions {...props}/>
         </Col>
       </Row>
+      {props.marketplaceChecklistEnabled && (
+        <Panel title={translate('Compliance checklists')}>
+          <ComplianceChecklists/>
+        </Panel>
+      )}
       {props.marketplaceEnabled && (
         <Panel title={translate('Resources')}>
           <ProjectResourcesList/>
