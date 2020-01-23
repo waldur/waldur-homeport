@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Button from 'react-bootstrap/lib/Button';
 import { FieldArray, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -19,6 +20,7 @@ export interface ManagementStepProps extends TranslateProps {
   offeringTypes: Option[];
   editable: boolean;
   typeLabel?: string;
+  openServiceSettingsDetails(): void;
 }
 
 const ContainerProps = {
@@ -58,9 +60,9 @@ export const ManagementStep = (props: ManagementStepProps) => (
     ) : (!props.showOptions && props.typeLabel) ? (
       <div className="form-group">
         <div className="col-sm-8 col-sm-offset-2">
-          <p className="form-control-static">
-            {translate('To update settings, please contact support or use admin interface.')}
-          </p>
+          <Button onClick={props.openServiceSettingsDetails}>
+            {translate('Update service settings')}
+          </Button>
         </div>
       </div>
     ) : null}

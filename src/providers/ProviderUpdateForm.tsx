@@ -2,6 +2,7 @@ import * as React from 'react';
 import { reduxForm } from 'redux-form';
 
 import { FormContainer, FieldError, SubmitButton} from '@waldur/form-react';
+import { TranslateProps } from '@waldur/i18n';
 
 import { ProviderFormBody } from './ProviderFormBody';
 import { ProviderNameField } from './ProviderNameField';
@@ -32,4 +33,8 @@ export const PureProviderUpdateForm = props => {
   );
 };
 
-export const ProviderUpdateForm = reduxForm({form: 'providerUpdate'})(PureProviderUpdateForm);
+interface OwnProps<FormData = {}> extends TranslateProps {
+  updateProvider(data: FormData): void;
+}
+
+export const ProviderUpdateForm = reduxForm<{}, OwnProps>({form: 'providerUpdate'})(PureProviderUpdateForm);

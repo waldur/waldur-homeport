@@ -6,6 +6,7 @@ import marketplaceOfferingDetailsPage from './details/OfferingContainer';
 import marketplaceOfferingDetailsButton from './details/OfferingDetailsButton';
 import marketplaceOfferingDetailsDialog from './details/OfferingDetailsDialog';
 import marketplacePauseOfferingDialog from './actions/PauseOfferingDialog';
+import serviceSettingsDetailsDialog from './create/ServiceSettingsDetailsDialog';
 
 export default module => {
   module.component('marketplaceVendorOfferings', marketplaceVendorOfferings);
@@ -16,4 +17,5 @@ export default module => {
   module.component('marketplaceOfferingDetailsButton', marketplaceOfferingDetailsButton);
   module.component('marketplaceOfferingDetailsDialog', marketplaceOfferingDetailsDialog);
   module.component('marketplacePauseOfferingDialog', marketplacePauseOfferingDialog);
+  module.component('serviceSettingsDetailsDialog', serviceSettingsDetailsDialog);
 };
