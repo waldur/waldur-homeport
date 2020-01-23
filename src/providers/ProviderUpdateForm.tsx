@@ -5,6 +5,7 @@ import { FormContainer, FieldError, SubmitButton} from '@waldur/form-react';
 
 import { ProviderFormBody } from './ProviderFormBody';
 import { ProviderNameField } from './ProviderNameField';
+import { TranslateProps } from '@waldur/i18n';
 
 export const PureProviderUpdateForm = props => {
   const container = {
@@ -32,4 +33,8 @@ export const PureProviderUpdateForm = props => {
   );
 };
 
-export const ProviderUpdateForm = reduxForm({form: 'providerUpdate'})(PureProviderUpdateForm);
+interface OwnProps<FormData = {}> extends TranslateProps {
+  updateProvider(data: FormData): void;
+}
+
+export const ProviderUpdateForm = reduxForm<{}, OwnProps>({form: 'providerUpdate'})(PureProviderUpdateForm);
