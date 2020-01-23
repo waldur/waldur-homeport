@@ -5100,6 +5100,7 @@ msgstr ""
 msgid "Provider certification required by this project."
 msgstr ""
 
+#: src/marketplace/offerings/create/ServiceSettingsDetailsDialog.tsx
 #: src/marketplace/routes.js
 #: src/providers/details/dialog.html
 msgid "Provider details"
@@ -7288,10 +7289,6 @@ msgstr ""
 msgid "To start please select a workspace"
 msgstr ""
 
-#: src/marketplace/offerings/create/ManagementStep.tsx
-msgid "To update settings, please contact support or use admin interface."
-msgstr ""
-
 #: src/booking/components/modal/DateAndTimeSelect.tsx
 msgid "Today"
 msgstr ""
@@ -7677,6 +7674,10 @@ msgstr ""
 msgid "Unable to load project types or certifications."
 msgstr ""
 
+#: src/marketplace/offerings/create/ServiceSettingsDetailsDialog.tsx
+msgid "Unable to load provider details."
+msgstr ""
+
 #: src/providers/ProviderUpdateComponent.tsx
 msgid "Unable to load provider."
 msgstr ""
@@ -7916,6 +7917,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 msgid "Update security groups"
+msgstr ""
+
+#: src/marketplace/offerings/create/ManagementStep.tsx
+msgid "Update service settings"
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
