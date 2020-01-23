@@ -45,6 +45,12 @@ const REPORT_ITEMS = [
     feature: 'marketplace.checklist'
   },
   {
+    label: gettext('Training and education'),
+    icon: 'fa-list-ol',
+    feature: 'marketplace.checklist',
+    action: () => alert('This feature is not implemented yet'),
+  },
+  {
     label: gettext('Plan capacity'),
     icon: 'fa-puzzle-piece',
     link: 'marketplace-support-plan-usages',

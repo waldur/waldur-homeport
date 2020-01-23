@@ -10,6 +10,7 @@ import {
   getPluginOptionsForm
 } from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
+import { openModalDialog } from '@waldur/modal/actions';
 import { findProvider } from '@waldur/providers/registry';
 
 import { getOffering, getType, getTypeLabel } from '../store/selectors';
@@ -36,6 +37,11 @@ const mapStateToProps = state => {
   return props;
 };
 
-const connector = compose(withTranslation, connect(mapStateToProps));
+const mapDispatchToProps = dispatch => ({
+  openServiceSettingsDetails: () => dispatch(openModalDialog(
+    'serviceSettingsDetailsDialog', {size: 'lg'})),
+});
+
+const connector = compose(withTranslation, connect(mapStateToProps, mapDispatchToProps));
 
 export const ManagementStepContainer = connector(ManagementStep);
