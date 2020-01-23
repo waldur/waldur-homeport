@@ -7349,6 +7349,11 @@ msgstr ""
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
+#: src/marketplace-checklist/sidebar-extension.js
+msgid "Training and education"
+msgstr ""
+
 #: src/user/user-popover.html
 msgid "Try again"
 msgstr ""

@@ -10,6 +10,13 @@ export default function registerSidebarExtension(SidebarExtensionService) {
         link: 'marketplace-checklist-project({uuid: $ctrl.context.project.uuid})',
         feature: FEATURE,
         index: 220,
+      },
+      {
+        label: gettext('Training and education'),
+        icon: ICON_CLASS,
+        feature: FEATURE,
+        index: 221,
+        action: () => alert('This feature is not implemented yet'),
       }
     ];
   });
