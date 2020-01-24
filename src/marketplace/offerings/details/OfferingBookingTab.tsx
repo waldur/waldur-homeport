@@ -4,12 +4,14 @@ import * as React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { BookingsFilter } from '@waldur/booking/BookingsFilter';
+import { BookingsList } from '@waldur/booking/BookingsList';
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
+import { eventRender } from '@waldur/booking/components/utils';
+import * as actions from '@waldur/booking/store/actions';
 import { eventsMapper } from '@waldur/booking/utils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import * as actions from '@waldur/marketplace/offerings/store/actions';
-import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
 
@@ -56,11 +58,16 @@ export class PureOfferingBookingTab extends React.Component<PureOfferingBookingT
     const bookedEvents = items.reduce((acc, item) => {
       const { schedules } = item.attributes;
       schedules.forEach(event => {
-        if (this.isActiveItem(item)) {
-          event.color = 'green';
-        } else {
-          event.color = null;
-        }
+        event.state = item.state;
+        event.className = classNames({
+          'progress': item.state === 'Creating',
+          'event-terminated': item.state === 'Terminated',
+          'event-isFocused': item.uuid === this.state.activeBookingId,
+        });
+        event.color = classNames({
+          '#f8ac59': item.state === 'Terminated',
+          '#18a689': item.uuid === this.state.activeBookingId,
+        });
       });
       acc.push(...schedules);
       return acc;
@@ -83,59 +90,27 @@ export class PureOfferingBookingTab extends React.Component<PureOfferingBookingT
     }
     return (
       <Row>
-        <Col sm={6}>
-          <Calendar events={this.getCalendarEvents()}
+        <Col md={6}>
+          <Calendar
+            height="auto"
+            eventLimit={false}
+            events={this.getCalendarEvents()}
+            eventRender={info => eventRender({...info, withTooltip: true})}
           />
         </Col>
-        <Col sm={6}>
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <th>
-                  {translate('Project')}
-                </th>
-                <th>
-                  {translate('Name')}
-                </th>
-                <th>
-                  {translate('Status')}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookingOrderItems.map(booking => (
-                <tr onClick={() => this.setActive(booking)}
-                    className={classNames('cursor-pointer', {active: this.isActiveItem(booking)})}
-                    key={booking.uuid}>
-                  <td>
-                    {booking.project_name}
-                  </td>
-                  <td>
-                  <OrderItemDetailsLink
-                    order_item_uuid={booking.uuid}
-                    project_uuid={booking.project_uuid}>
-                      {booking.attributes.name || booking.offering_name}
-                  </OrderItemDetailsLink>
-                  </td>
-                  <td>
-                    {booking.state}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <Col md={6}>
+          <BookingsFilter />
+          <BookingsList offeringUuid={this.props.offering.uuid}/>
         </Col>
       </Row>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  bookingOrderItems: state.marketplace.offering.bookings,
-});
+const mapStateToProps = state => ({ bookingOrderItems: state.bookings });
 
 const mapDispatchToProps = dispatch => ({
-  offeringBookingFetch: payload => dispatch(actions.offeringBookingFetch(payload)),
+  offeringBookingFetch: payload => dispatch(actions.fetchBookingItems(payload)),
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);

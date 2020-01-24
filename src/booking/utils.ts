@@ -55,6 +55,7 @@ export const timelineLabels = (interval: number) => {
     startClock.add(i === 0 ? 0 : interval, 'minutes');
     timeLabels.push({
       label: startClock.format('HH:mm'),
+      value: startClock.format('HH:mm'),
       hour: startClock.hour(),
       minute: startClock.minute(),
     });

@@ -37,10 +37,13 @@ export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): voi
             </Panel.Heading>
             <Panel.Body collapsible={true}>
               <OrderItemDetailsField label={translate('Description')}>
-                <OrderItemSummary orderItem={props.orderItem}/>
+                <OrderItemSummary
+                  orderItem={props.orderItem}
+                  offering={props.offering}
+                />
               </OrderItemDetailsField>
               <OrderItemDetailsField label={translate('Type')}>
-                <OrderItemTypeIndicator orderItemType={props.orderItem.type}/>
+                <OrderItemTypeIndicator orderItem={props.orderItem}/>
               </OrderItemDetailsField>
               <OrderItemDetailsField label={translate('State')}>
                 {titleCase(props.orderItem.state)}

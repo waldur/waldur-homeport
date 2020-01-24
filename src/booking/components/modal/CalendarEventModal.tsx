@@ -57,7 +57,7 @@ export class CalendarEventModal extends React.Component<CalendarEventModalProps,
 
     return (
       <Modal show={isOpen} onHide={closeModal}>
-        <Modal.Header style={{backgroundColor: '#f3f3f4', color: '#1ab394'}}>
+        <Modal.Header style={{backgroundColor: '#1ab394', color: '#f3f3f4'}}>
           <h2 className="col-sm-offset-2 col-sm-9">
             {event.extendedProps.type === 'availability'
               ? translate('Create an availability')

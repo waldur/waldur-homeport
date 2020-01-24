@@ -4,6 +4,7 @@ import { translate } from '@waldur/i18n';
 import { Section, Offering } from '@waldur/marketplace/types';
 
 import { AttributesTable } from './attributes/AttributesTable';
+import { OfferingTab } from './OfferingTabsComponent';
 import { OverviewTab } from './OverviewTab';
 import { ScreenshotsTab } from './ScreenshotsTab';
 
@@ -12,7 +13,7 @@ interface OfferingTabsProps {
   offering: Offering;
 }
 
-export const getTabs = (props: OfferingTabsProps) => {
+export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
   const attributes = props.offering.attributes;
   const filterSection = (section: Section) => section.attributes.some(
     attr => props.offering.attributes.hasOwnProperty(attr.key));
@@ -26,6 +27,11 @@ export const getTabs = (props: OfferingTabsProps) => {
       visible: !!props.offering.full_description,
       title: translate('Description'),
       component: () => <OverviewTab offering={props.offering}/>,
+    },
+    {
+      visible: !!props.offering.terms_of_service,
+      title: translate('Terms of service'),
+      component: () => <p>{props.offering.terms_of_service}</p>,
     },
     {
       visible: basicSections.length > 0,

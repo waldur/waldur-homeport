@@ -61,6 +61,11 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+#: src/booking/BookingActions.tsx
+msgid "Accept"
+msgstr ""
+
+#: src/booking/BookingStateFilter.tsx
 #: src/invitations/invitations-list.js
 msgid "Accepted"
 msgstr ""
@@ -127,6 +132,7 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/booking/BookingsList.tsx
 #: src/cost-planning/cost-plan-items.html
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/events/BaseEventsList.tsx
@@ -866,6 +872,15 @@ msgstr ""
 msgid "Booking"
 msgstr ""
 
+#: src/booking/store/effects.ts
+msgid "Booking has been accepted."
+msgstr ""
+
+#: src/booking/store/effects.ts
+msgid "Booking has been rejected."
+msgstr ""
+
+#: src/booking/BookingsList.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 msgid "Bookings"
 msgstr ""
@@ -1446,6 +1461,7 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/billing/billing-utils.js
+#: src/booking/BookingsList.tsx
 #: src/customer/CustomerList.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
@@ -3489,6 +3505,7 @@ msgstr ""
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PriceEstimateDialog.tsx
+#: src/booking/BookingsList.tsx
 #: src/cost-planning/cost-plan-dialog.html
 #: src/cost-planning/cost-plans-list.js
 #: src/customer/create/customer-create-config.js
@@ -3504,7 +3521,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
@@ -4928,6 +4944,7 @@ msgid "Product configuration"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
+#: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
@@ -4940,7 +4957,6 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
@@ -5402,10 +5418,12 @@ msgstr ""
 msgid "Regular user"
 msgstr ""
 
+#: src/booking/BookingActions.tsx
 #: src/marketplace/orders/RejectButton.tsx
 msgid "Reject"
 msgstr ""
 
+#: src/booking/BookingStateFilter.tsx
 #: src/invitations/invitations-list.js
 msgid "Rejected"
 msgstr ""
@@ -5993,6 +6011,7 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
+#: src/booking/BookingsList.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
 msgid "Schedules"
 msgstr ""
@@ -6245,6 +6264,7 @@ msgstr ""
 msgid "Select state"
 msgstr ""
 
+#: src/booking/BookingStateFilter.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
@@ -6642,6 +6662,8 @@ msgstr ""
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
+#: src/booking/BookingStateFilter.tsx
+#: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -6690,7 +6712,6 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -6842,10 +6863,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Sure? Form data would be lost"
-msgstr ""
-
-#: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
-msgid "Switch plan for an existing resource"
 msgstr ""
 
 #: src/freeipa/freeipa-account-edit.html
@@ -7026,6 +7043,7 @@ msgstr ""
 msgid "Terms of Services"
 msgstr ""
 
+#: src/marketplace/details/OfferingTabs.tsx
 #: src/routes/about.js
 msgid "Terms of service"
 msgstr ""
@@ -7395,6 +7413,10 @@ msgstr ""
 msgid "UUID"
 msgstr ""
 
+#: src/booking/store/effects.ts
+msgid "Unable to accept booking."
+msgstr ""
+
 #: src/auth/auth-activation.js
 msgid "Unable to activate account."
 msgstr ""
@@ -7499,7 +7521,7 @@ msgstr ""
 msgid "Unable to fetch data."
 msgstr ""
 
-#: src/marketplace/offerings/store/effects.ts
+#: src/booking/store/effects.ts
 msgid "Unable to fetch offering bookings."
 msgstr ""
 
@@ -7742,6 +7764,10 @@ msgstr ""
 msgid "Unable to register service provider."
 msgstr ""
 
+#: src/booking/store/effects.ts
+msgid "Unable to reject booking."
+msgstr ""
+
 #: src/invitations/invitation-reject.js
 msgid "Unable to reject invitation."
 msgstr ""
@@ -7842,6 +7868,10 @@ msgstr ""
 msgid "Unable to validate invitation token."
 msgstr ""
 
+#: src/booking/BookingStateFilter.tsx
+msgid "Unconfirmed"
+msgstr ""
+
 #: src/auth/valimo/auth-valimo-dialog.js
 msgid "Unexpected exception happened during login process."
 msgstr ""
@@ -7900,12 +7930,20 @@ msgstr ""
 msgid "Update floating IPs"
 msgstr ""
 
+#: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
+msgid "Update limits for an existing resource"
+msgstr ""
+
 #: src/user/hooks/hook-details.html
 msgid "Update notification"
 msgstr ""
 
 #: src/marketplace/routes.js
 msgid "Update offering"
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
+msgid "Update plan for an existing resource"
 msgstr ""
 
 #: src/project/project-policies.html
@@ -8895,6 +8933,10 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
 msgid "{user} has approved it on {date} at {time}."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested changing of limits from \"{old_limits}\" to \"{new_limits}\"."
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
