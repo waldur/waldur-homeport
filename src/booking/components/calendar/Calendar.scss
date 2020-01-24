@@ -11,6 +11,33 @@
   color: white;
 }
 
+.fc-event {
+  border-radius: 100px;
+  font-size: 12px;
+  line-height: 20px;
+  .fc-content {
+    padding-left: 5px;
+  }
+}
+
+.event-terminated {
+  background-color: #f8ac59;
+  display: none;
+}
+
+.event-isFocused {
+  background-color: #1a252f;
+}
+
+.fc-popover {
+  background-color: white;
+  color: white;
+  box-shadow: 1px 1px 10px rgba(0,0,0,.2);
+  .fc-header {
+    background-color: #1AB394;
+  }
+}
+
 .checkbox-toggle {
   min-width: 48px;
   height: 24px;

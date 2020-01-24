@@ -19,3 +19,6 @@ export const formatRelative: DateFormatter = date =>
 
 export const formatMediumDateTime: DateFormatter = date =>
   moment(date).format('MMM D, Y h:mm:ss A');
+
+export const formatShortDateTime: DateFormatter = date =>
+  moment.utc(date).format('MMM D, HH:mm');
