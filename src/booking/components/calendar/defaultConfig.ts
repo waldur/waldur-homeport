@@ -2,6 +2,8 @@
 
 import {translate} from '@waldur/i18n';
 
+import { eventRender } from '../utils';
+
 export const defaultConfig = {
   defaultView: 'dayGridMonth',
   themeSystem: 'bootstrap',
@@ -13,6 +15,7 @@ export const defaultConfig = {
   eventResizableFromStart: false,
   eventLimit: true,
   eventColor: '#1ab394',
+  eventRender,
   eventLimitText: translate('More'),
   header: {
     left: 'prev,next today',

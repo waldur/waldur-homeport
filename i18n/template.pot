@@ -61,6 +61,13 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+#: src/booking/BookingActions.tsx
+#: src/booking/BookingsList.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
+msgid "Accept"
+msgstr ""
+
+#: src/booking/BookingStateFilter.tsx
 #: src/invitations/invitations-list.js
 msgid "Accepted"
 msgstr ""
@@ -127,12 +134,14 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/booking/BookingsList.tsx
 #: src/cost-planning/cost-plan-items.html
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/events/BaseEventsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -866,6 +875,15 @@ msgstr ""
 msgid "Booking"
 msgstr ""
 
+#: src/booking/store/effects.ts
+msgid "Booking has been accepted."
+msgstr ""
+
+#: src/booking/store/effects.ts
+msgid "Booking has been rejected."
+msgstr ""
+
+#: src/booking/BookingsList.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 msgid "Bookings"
 msgstr ""
@@ -1446,6 +1464,7 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/billing/billing-utils.js
+#: src/booking/BookingsList.tsx
 #: src/customer/CustomerList.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
@@ -1472,6 +1491,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/invitations/invitations-list.js
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -3489,6 +3509,7 @@ msgstr ""
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PriceEstimateDialog.tsx
+#: src/booking/BookingsList.tsx
 #: src/cost-planning/cost-plan-dialog.html
 #: src/cost-planning/cost-plans-list.js
 #: src/customer/create/customer-create-config.js
@@ -4928,6 +4949,7 @@ msgid "Product configuration"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
+#: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
@@ -5402,10 +5424,14 @@ msgstr ""
 msgid "Regular user"
 msgstr ""
 
+#: src/booking/BookingActions.tsx
+#: src/booking/BookingsList.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/orders/RejectButton.tsx
 msgid "Reject"
 msgstr ""
 
+#: src/booking/BookingStateFilter.tsx
 #: src/invitations/invitations-list.js
 msgid "Rejected"
 msgstr ""
@@ -6245,6 +6271,7 @@ msgstr ""
 msgid "Select state"
 msgstr ""
 
+#: src/booking/BookingStateFilter.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
@@ -6642,6 +6669,8 @@ msgstr ""
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
+#: src/booking/BookingStateFilter.tsx
+#: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -7395,6 +7424,10 @@ msgstr ""
 msgid "UUID"
 msgstr ""
 
+#: src/booking/store/effects.ts
+msgid "Unable to accept booking."
+msgstr ""
+
 #: src/auth/auth-activation.js
 msgid "Unable to activate account."
 msgstr ""
@@ -7499,7 +7532,7 @@ msgstr ""
 msgid "Unable to fetch data."
 msgstr ""
 
-#: src/marketplace/offerings/store/effects.ts
+#: src/booking/store/effects.ts
 msgid "Unable to fetch offering bookings."
 msgstr ""
 
@@ -7742,6 +7775,10 @@ msgstr ""
 msgid "Unable to register service provider."
 msgstr ""
 
+#: src/booking/store/effects.ts
+msgid "Unable to reject booking."
+msgstr ""
+
 #: src/invitations/invitation-reject.js
 msgid "Unable to reject invitation."
 msgstr ""
@@ -7840,6 +7877,10 @@ msgstr ""
 
 #: src/auth/auth-login.js
 msgid "Unable to validate invitation token."
+msgstr ""
+
+#: src/booking/BookingStateFilter.tsx
+msgid "Unconfirmed"
 msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.js
@@ -8364,6 +8405,11 @@ msgstr ""
 
 #: src/quotas/constants.js
 msgid "Volumes count"
+msgstr ""
+
+#: src/booking/BookingsList.tsx
+#: src/marketplace/offerings/details/OfferingBookingTab.tsx
+msgid "Waiting for confirmation"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js

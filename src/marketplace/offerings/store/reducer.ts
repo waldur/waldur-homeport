@@ -1,7 +1,6 @@
 import * as constants from './constants';
 
 const INITIAL_STATE = {
-  bookings: {},
   step: 'Overview',
   loading: true,
   loaded: false,
@@ -51,15 +50,6 @@ export const offeringReducer = (state = INITIAL_STATE, action) => {
         loading: true,
         loaded: false,
         erred: false,
-      };
-    case constants.BOOKINGS_SET:
-      const { offeringId, items } = payload;
-      return {
-        ...state,
-        bookings: {
-          ...state.bookings,
-          [offeringId]: items,
-        },
       };
     default:
       return state;
