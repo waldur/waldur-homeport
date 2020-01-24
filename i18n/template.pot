@@ -62,8 +62,6 @@ msgid "About"
 msgstr ""
 
 #: src/booking/BookingActions.tsx
-#: src/booking/BookingsList.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 msgid "Accept"
 msgstr ""
 
@@ -141,7 +139,6 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -1491,7 +1488,6 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/invitations/invitations-list.js
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -3525,7 +3521,6 @@ msgstr ""
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
@@ -4962,7 +4957,6 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
@@ -5425,8 +5419,6 @@ msgid "Regular user"
 msgstr ""
 
 #: src/booking/BookingActions.tsx
-#: src/booking/BookingsList.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/marketplace/orders/RejectButton.tsx
 msgid "Reject"
 msgstr ""
@@ -6019,6 +6011,7 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
+#: src/booking/BookingsList.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
 msgid "Schedules"
 msgstr ""
@@ -6719,7 +6712,6 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -6871,10 +6863,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Sure? Form data would be lost"
-msgstr ""
-
-#: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
-msgid "Switch plan for an existing resource"
 msgstr ""
 
 #: src/freeipa/freeipa-account-edit.html
@@ -7941,12 +7929,20 @@ msgstr ""
 msgid "Update floating IPs"
 msgstr ""
 
+#: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
+msgid "Update limits for an existing resource"
+msgstr ""
+
 #: src/user/hooks/hook-details.html
 msgid "Update notification"
 msgstr ""
 
 #: src/marketplace/routes.js
 msgid "Update offering"
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
+msgid "Update plan for an existing resource"
 msgstr ""
 
 #: src/project/project-policies.html
@@ -8405,11 +8401,6 @@ msgstr ""
 
 #: src/quotas/constants.js
 msgid "Volumes count"
-msgstr ""
-
-#: src/booking/BookingsList.tsx
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
-msgid "Waiting for confirmation"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -8941,6 +8932,10 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
 msgid "{user} has approved it on {date} at {time}."
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemSummary.tsx
+msgid "{user} has requested changing of limits from \"{old_limits}\" to \"{new_limits}\"."
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
