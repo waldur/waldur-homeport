@@ -7043,6 +7043,7 @@ msgstr ""
 msgid "Terms of Services"
 msgstr ""
 
+#: src/marketplace/details/OfferingTabs.tsx
 #: src/routes/about.js
 msgid "Terms of service"
 msgstr ""

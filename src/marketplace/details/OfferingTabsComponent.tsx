@@ -7,6 +7,7 @@ import './OfferingTabs.scss';
 export interface OfferingTab {
   title: React.ReactNode;
   component: React.FC<{}>;
+  visible: boolean;
 }
 
 interface OfferingTabsComponentProps {
