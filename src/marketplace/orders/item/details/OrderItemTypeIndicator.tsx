@@ -2,19 +2,36 @@ import * as React from 'react';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
-import { OrderItemType } from '@waldur/marketplace/orders/types';
+import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 
-export const OrderItemTypeIndicator = ({ orderItemType }: {orderItemType: OrderItemType}) => (
-  <StateIndicator
-    label={
-      orderItemType === 'Create' ? translate('Provision new resource').toLocaleUpperCase() :
-      orderItemType === 'Update' ? translate('Switch plan for an existing resource').toLocaleUpperCase() :
-      orderItemType === 'Terminate' ? translate('Terminate an existing resource').toLocaleUpperCase() : 'N/A'
+export const OrderItemTypeIndicator = ({ orderItem }: {orderItem: OrderItemDetailsType}) => {
+  const label = React.useMemo(() => {
+    switch (orderItem.type) {
+      case 'Create':
+        return translate('Provision new resource').toLocaleUpperCase();
+      case 'Update':
+        if (orderItem.attributes.old_limits) {
+          return translate('Update limits for an existing resource').toLocaleUpperCase();
+        } else {
+          return translate('Update plan for an existing resource').toLocaleUpperCase();
+        }
+      case 'Terminate':
+        return translate('Terminate an existing resource').toLocaleUpperCase();
+      default:
+        return 'N/A';
     }
-    variant={
-      orderItemType === 'Create' ? 'primary' :
-      orderItemType === 'Update' ? 'success' :
-      orderItemType === 'Terminate' ? 'warning' : 'plain'
-    }
-  />
-);
+  }, [orderItem]);
+
+  const variant = React.useMemo(() =>
+    orderItem.type === 'Create' ? 'primary' :
+    orderItem.type === 'Update' ? 'success' :
+    orderItem.type === 'Terminate' ? 'warning' : 'plain',
+  [orderItem]);
+
+  return (
+    <StateIndicator
+      label={label}
+      variant={variant}
+    />
+  );
+};

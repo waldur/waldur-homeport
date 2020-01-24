@@ -4,15 +4,18 @@ import * as React from 'react';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
+import { Offering } from '@waldur/marketplace/types';
 
 interface OrderItemSummaryProps {
   orderItem: OrderItemDetailsType;
+  offering: Offering;
 }
 
 interface Context {
   orderItem: OrderItemDetailsType;
   user: string;
   approved: string;
+  offering: Offering;
 }
 
 const getCreateSummary = (ctx: Context): string => {
@@ -29,12 +32,30 @@ const getCreateSummary = (ctx: Context): string => {
   }
 };
 
+const formatLimits = (limits, componentMap) =>
+  Object.keys(limits).sort().map(key =>
+    `${key.toLocaleUpperCase()}: ${limits[key] / componentMap[key].factor} ${componentMap[key].measured_unit}`
+  ).join(', ');
+
+const getComponentMap = components =>
+  components.reduce((r, c) => ({...r, [c.type]: c || 1}), {});
+
 const getUpdateSummary = (ctx: Context) => {
-  const msg = translate('{user} has requested changing of plan from "{old_plan}" to "{new_plan}".', {
-    user: ctx.user,
-    old_plan: ctx.orderItem.old_plan_name || 'Default',
-    new_plan: ctx.orderItem.new_plan_name,
-  });
+  let msg;
+  const componentMap = getComponentMap(ctx.offering.components);
+  if (ctx.orderItem.attributes.old_limits) {
+    msg = translate('{user} has requested changing of limits from "{old_limits}" to "{new_limits}".', {
+      user: ctx.user,
+      old_limits: formatLimits(ctx.orderItem.attributes.old_limits, componentMap),
+      new_limits: formatLimits(ctx.orderItem.limits, componentMap),
+    });
+  } else {
+    msg = translate('{user} has requested changing of plan from "{old_plan}" to "{new_plan}".', {
+      user: ctx.user,
+      old_plan: ctx.orderItem.old_plan_name || 'Default',
+      new_plan: ctx.orderItem.new_plan_name,
+    });
+  }
   if (ctx.approved) {
     return msg + ' ' + ctx.approved;
   } else {
@@ -59,7 +80,7 @@ const getTerminateSummary = (ctx: Context) => {
   }
 };
 
-const getContext = (orderItem: OrderItemDetailsType): Context => {
+const getContext = (orderItem: OrderItemDetailsType, offering: Offering): Context => {
   let user = orderItem.created_by_full_name;
   if (orderItem.created_by_civil_number) {
     user += ` (ID: ${orderItem.created_by_civil_number})`;
@@ -72,11 +93,11 @@ const getContext = (orderItem: OrderItemDetailsType): Context => {
       time: moment(orderItem.order_approved_at).format('HH:mm'),
     });
   }
-  return {user, approved, orderItem};
+  return {user, approved, orderItem, offering};
 };
 
-const getMessage = (orderItem: OrderItemDetailsType): string => {
-  const ctx = getContext(orderItem);
+const getMessage = (orderItem: OrderItemDetailsType, offering: Offering): string => {
+  const ctx = getContext(orderItem, offering);
   if (orderItem.type === 'Create') {
     return getCreateSummary(ctx);
   } else if (orderItem.type === 'Update') {
@@ -86,6 +107,10 @@ const getMessage = (orderItem: OrderItemDetailsType): string => {
   }
 };
 
-export const OrderItemSummary: React.FC<OrderItemSummaryProps> = props => (
-  <span>{getMessage(props.orderItem)}</span>
-);
+export const OrderItemSummary: React.FC<OrderItemSummaryProps> = props => {
+  const message = React.useMemo(
+    () => getMessage(props.orderItem, props.offering),
+    [props.orderItem, props.offering]
+  );
+  return <>{message}</>;
+};
