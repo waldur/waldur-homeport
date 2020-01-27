@@ -5,8 +5,8 @@ import { Field } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 // import { $http } from '@waldur/core/services';
+import { required } from '@waldur/core/validators';
 // import { getUUID } from '@waldur/core/utils';
-import { getLatinNameValidators } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { TextField, StringField } from '@waldur/form-react';
 import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
@@ -20,7 +20,13 @@ import { flavorValidator, flavorComparator, internalIpFormatter } from '@waldur/
 import { OpenstackInstanceNetworks, getDefaultFloatingIps } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
 import { Subnet, FloatingIp, ServiceComponent, Flavor, SshKey } from '@waldur/openstack/openstack-instance/types';
-import { validateAndSort, calculateSystemVolumeSize, formatVolumeTypeChoices, getDefaultVolumeType } from '@waldur/openstack/openstack-instance/utils';
+import {
+  validateAndSort,
+  calculateSystemVolumeSize,
+  formatVolumeTypeChoices,
+  getDefaultVolumeType,
+  validateOpenstackInstanceName
+} from '@waldur/openstack/openstack-instance/utils';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 import { User } from '@waldur/workspace/types';
 
@@ -57,6 +63,8 @@ interface OpenstackInstanceCreateFormComponentProps {
   flavor: Flavor;
   systemVolumeSize: number;
 }
+
+const nameValidators = [required, validateOpenstackInstanceName];
 
 export class OpenstackInstanceCreateFormComponent extends
   React.Component<OfferingConfigurationFormProps & OpenstackInstanceCreateFormComponentProps & TranslateProps, OpenstackInstanceCreateFormState> {
@@ -219,7 +227,7 @@ export class OpenstackInstanceCreateFormComponent extends
             <Field
               name="attributes.name"
               component={renderValidationWrapper(StringField)}
-              validate={getLatinNameValidators()}
+              validate={nameValidators}
             />
           </CreateResourceFormGroup>
           <ImageGroup images={this.state.images} validateFlavor={this.validateFlavor}/>
