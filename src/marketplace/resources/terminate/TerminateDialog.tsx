@@ -12,6 +12,9 @@ export interface OwnProps {
       name: string;
       marketplace_resource_uuid: string;
     };
+    action: {
+      dialogSubtitle?: string;
+    };
   };
 }
 
@@ -44,6 +47,9 @@ export const PureTerminateDialog = (props: TerminateDialogProps) => (
       {translate('Are you sure you would like to terminate resource {resourceName}?', {
         resourceName: props.resolve.resource.name,
       })}
+      {props.resolve.action.dialogSubtitle && (
+        <div dangerouslySetInnerHTML={{__html: props.resolve.action.dialogSubtitle}}/>
+      )}
     </ModalDialog>
   </form>
 );
