@@ -4,6 +4,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: src/openstack/openstack-instance/utils.ts
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr ""
+
 #: src/billing/billing-record-details.html
 msgid "(VAT is not included)"
 msgstr ""
@@ -1748,7 +1752,6 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.js
-#: src/openstack/openstack-tenant/actions/DestroyAction.ts
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
 #: src/rancher/node-actions/DestroyAction.ts
 msgid "Destroy"
@@ -1995,6 +1998,10 @@ msgstr ""
 
 #: src/user/hooks/hook-details.html
 msgid "Enabled"
+msgstr ""
+
+#: src/openstack/openstack-instance/utils.ts
+msgid "Encountered an empty component"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
@@ -3559,6 +3566,14 @@ msgstr ""
 #: src/vmware/vmware-virtual-machine-disks.js
 #: src/vmware/vmware-virtual-machine-ports.js
 msgid "Name"
+msgstr ""
+
+#: src/openstack/openstack-instance/utils.ts
+msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
+msgstr ""
+
+#: src/openstack/openstack-instance/utils.ts
+msgid "Name \"{label}\" must not start or end with a hyphen"
 msgstr ""
 
 #: src/project/ProjectNameField.tsx
@@ -6908,6 +6923,10 @@ msgstr ""
 
 #: src/billing/invoice-details.html
 msgid "TAX"
+msgstr ""
+
+#: src/openstack/openstack-instance/utils.ts
+msgid "TLD \"{tld}\" must not be all numeric"
 msgstr ""
 
 #: src/billing/billing-record-details.html
