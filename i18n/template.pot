@@ -1752,7 +1752,6 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.js
-#: src/openstack/openstack-tenant/actions/DestroyAction.ts
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
 #: src/rancher/node-actions/DestroyAction.ts
 msgid "Destroy"
