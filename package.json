@@ -1,6 +1,6 @@
 {
   "name": "waldur-homeport",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://github.com/opennode/waldur-homeport",
   "license": "MIT",
