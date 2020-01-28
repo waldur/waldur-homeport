@@ -46,7 +46,7 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
         type: component.type,
         name: component.name,
         measured_unit: component.measured_unit,
-        usage: usages[component.type],
+        usage: usages[component.type] || 0,
         limit: currentLimits[component.type],
         prices,
         subTotal,
