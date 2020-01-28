@@ -32,16 +32,14 @@ const createMountPointValidator = nodeIndex => (value, allValues) => {
 
 const useMinimalSize = (nodeIndex, volumeIndex) => {
   const prefix = `attributes.nodes[${nodeIndex}].data_volumes[${volumeIndex}]`;
-  const mountPointField = `${prefix}.mount_point`;
   const sizeField = `${prefix}.size`;
 
   const dispatch = useDispatch();
   const getSelector = field => state => formValueSelector(FORM_ID)(state, field);
 
-  const mountPoint = useSelector(getSelector(mountPointField));
   const volumeSize = useSelector(getSelector(sizeField));
 
-  return () => {
+  return mountPoint => {
     const minSize = getMinSize(mountPoint);
     if (!minSize) {
       return;
