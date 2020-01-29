@@ -1,16 +1,12 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-import instanceCreateConfig from './InstanceCreateConfig';
 import { InstanceSummary } from './InstanceSummary';
-import volumeCreateConfig from './VolumeCreateConfig';
 import { VolumeSummary } from './VolumeSummary';
 import './ProviderConfig';
 
 export default module => {
   ResourceSummary.register('Rijkscloud.Instance', InstanceSummary);
   ResourceSummary.register('Rijkscloud.Volume', VolumeSummary);
-  module.config(instanceCreateConfig);
-  module.config(volumeCreateConfig);
   module.config(actionConfig);
 };
 

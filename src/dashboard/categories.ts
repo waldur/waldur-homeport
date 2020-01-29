@@ -1,6 +1,5 @@
-import { ngInjector, $state } from '@waldur/core/services';
+import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { WorkspaceType } from '@waldur/workspace/types';
 
 import { Quota, Action } from './types';
 
@@ -10,17 +9,7 @@ export interface DashboardCategory {
   actions: Action[];
 }
 
-const createHandler = (workspace: WorkspaceType, state: string) => () => {
-  if (workspace === 'project') {
-    $state.go(state);
-  } else {
-    ngInjector.get('AppStoreUtilsService').openDialog({
-      selectProject: true,
-    });
-  }
-};
-
-const getCompute = (workspace: WorkspaceType) => ({
+const getCompute = () => ({
   title: translate('Compute'),
   quotas: [
     {
@@ -32,19 +21,10 @@ const getCompute = (workspace: WorkspaceType) => ({
       title: translate('Private clouds'),
     },
   ],
-  actions: [
-    {
-      title: translate('Add virtual machine'),
-      onClick: createHandler(workspace, 'appstore.vms'),
-    },
-    {
-      title: translate('Add virtual private cloud'),
-      onClick: createHandler(workspace, 'appstore.private_clouds'),
-    },
-  ],
+  actions: [],
 });
 
-const getStorage = (workspace: WorkspaceType) => ({
+const getStorage = () => ({
   title: translate('Storage'),
   quotas: [
     {
@@ -70,15 +50,10 @@ const getStorage = (workspace: WorkspaceType) => ({
       type: 'filesize',
     },
   ],
-  actions: [
-    {
-      title: translate('Add volume'),
-      onClick: createHandler(workspace, 'appstore.storages'),
-    },
-  ],
+  actions: [],
 });
 
-const getBatch = (workspace: WorkspaceType) => ({
+const getBatch = () => ({
   title: translate('Batch processing'),
   quotas: [
     {
@@ -97,28 +72,19 @@ const getBatch = (workspace: WorkspaceType) => ({
       type: 'filesize',
     },
   ],
-  actions: [
-    {
-      title: translate('Add SLURM allocation'),
-      onClick: createHandler(workspace, 'appstore.slurm'),
-    },
-    {
-      title: translate('Add MOAB allocation'),
-      onClick: createHandler(workspace, 'appstore.slurm'),
-    },
-  ],
+  actions: [],
 });
 
-export const getDashboardCategories = (workspace: WorkspaceType): DashboardCategory[] => {
-  const categories = [getCompute(workspace)];
+export const getDashboardCategories = (): DashboardCategory[] => {
+  const categories = [getCompute()];
   const features = ngInjector.get('features');
 
   if (features.isVisible('storage')) {
-    categories.push(getStorage(workspace));
+    categories.push(getStorage());
   }
 
   if (features.isVisible('slurm')) {
-    categories.push(getBatch(workspace));
+    categories.push(getBatch());
   }
 
   return categories;

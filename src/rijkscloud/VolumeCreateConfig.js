@@ -30,8 +30,3 @@ const RijkscloudVolumeConfig = {
   },
   summaryComponent: 'rijkscloudVolumeCheckoutSummary',
 };
-
-// @ngInject
-export default function fieldsConfig(AppstoreFieldConfigurationProvider) {
-  AppstoreFieldConfigurationProvider.register('Rijkscloud.Volume', RijkscloudVolumeConfig);
-}

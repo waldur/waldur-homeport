@@ -13,7 +13,7 @@ import { ExpandableRow, ResourceExpandableRow } from '@waldur/resource/ResourceE
 import { Quota, Project } from '@waldur/workspace/types';
 
 const parseQuotas = (quotaItems: Quota[]): ExpandableRow[] => {
-  const categories = getDashboardCategories('project');
+  const categories = getDashboardCategories();
   const quotas = categories.reduce((acc, category) => [...acc, ...category.quotas], []);
   const usages = quotaItems.reduce((map, quota) => ({
     ...map,

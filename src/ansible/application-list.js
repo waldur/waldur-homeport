@@ -16,7 +16,6 @@ function ApplicationListController(
   ENV,
   currentStateService,
   ApplicationService,
-  AppStoreUtilsService,
   AnsibleJobsService) {
   let controllerScope = this;
   let Controller = baseControllerListClass.extend({
@@ -128,17 +127,7 @@ function ApplicationListController(
       ];
     },
     getTableActions: function() {
-      return [
-        {
-          title: gettext('Create application'),
-          iconClass: 'fa fa-plus',
-          callback: () => {
-            AppStoreUtilsService.openDialog({
-              currentCategory: APPSTORE_CATEGORY
-            });
-          },
-        }
-      ];
+      return [];
     },
     getFilter: function() {
       return {

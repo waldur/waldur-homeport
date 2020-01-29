@@ -17,7 +17,6 @@ export function CustomerWorkspaceController(
   customersService,
   $state,
   tabCounterService,
-  AppStoreUtilsService,
   WorkspaceService,
   BillingUtils,
   BreadcrumbsService,
@@ -69,15 +68,6 @@ export function CustomerWorkspaceController(
         feature: 'projects',
         countFieldKey: 'projects',
         index: 300,
-      },
-      {
-        icon: 'fa-shopping-cart',
-        label: gettext('Service store'),
-        feature: 'appstore',
-        action: function() {
-          return AppStoreUtilsService.openDialog({selectProject: true});
-        },
-        index: 400,
       },
       {
         label: gettext('Analytics'),

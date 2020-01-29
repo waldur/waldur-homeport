@@ -4,11 +4,6 @@
       <div ng-if="$ctrl.loading">
         <loading-spinner></loading-spinner>
       </div>
-      <appstore-providers
-        ng-if="!$ctrl.selectedService && !$ctrl.loading"
-        services="$ctrl.services"
-        on-select="$ctrl.setService(service)">
-      </appstore-providers>
       <div class="ibox" ng-if="$ctrl.selectedService">
         <div class="ibox-title"><h3>{{ $ctrl.playbook.name }}</h3></div>
         <div class="ibox-content">

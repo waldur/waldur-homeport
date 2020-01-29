@@ -79,8 +79,3 @@ function flavorFormatter($filter, value) {
   const props = `${value.cores} vCPU, ${ram} RAM`;
   return `${value.name} (${props})`;
 }
-
-// @ngInject
-export default function fieldsConfig(AppstoreFieldConfigurationProvider) {
-  AppstoreFieldConfigurationProvider.register('Rijkscloud.Instance', InstanceCreateConfig);
-}
