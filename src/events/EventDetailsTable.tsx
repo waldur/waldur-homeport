@@ -55,12 +55,6 @@ export const EventDetailsTable = ({ translate, event, isStaffOrSupport }: EventD
       <EventField
         label={translate('Provider')}
         value={event.context.service_name}
-        state="organization.providers"
-        params={{
-          uuid: event.context.customer_uuid,
-          providerUuid: event.context.service_uuid,
-          providerType: event.context.service_type,
-        }}
       />
       <EventField
         label={translate('Resource')}

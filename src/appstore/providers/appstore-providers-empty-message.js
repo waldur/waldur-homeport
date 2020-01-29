@@ -34,13 +34,6 @@ const appstoreProvidersEmptyMessage = {
     showServiceStoreDialog() {
       return this.AppStoreUtilsService.openDialog();
     }
-
-    get canCreateProvider() {
-      if (this.ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES && !this.usersService.currentUser.is_staff) {
-        return false;
-      }
-      return true;
-    }
   }
 };
 
