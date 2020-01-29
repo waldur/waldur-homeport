@@ -6,7 +6,6 @@ import { reducer as bookings } from '@waldur/booking/store/reducer';
 import { reducer as downloadLink } from '@waldur/core/DownloadLink/reducers';
 import { reducer as issues } from '@waldur/issues/reducers';
 import { reducer as marketplace } from '@waldur/marketplace/store/reducers';
-import { reducer as provider } from '@waldur/providers/reducers';
 import { reducer as serviceUsage } from '@waldur/providers/support/reducers';
 import { reducer as resource } from '@waldur/resource/reducers';
 import { reducer as tables } from '@waldur/table-react/store';
@@ -23,7 +22,6 @@ export default combineReducers({
   issues,
   workspace,
   locale,
-  provider,
   downloadLink,
   resource,
   serviceUsage,

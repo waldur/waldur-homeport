@@ -299,11 +299,6 @@ msgstr ""
 msgid "Add project member"
 msgstr ""
 
-#: src/providers/ProviderCreateForm.tsx
-#: src/providers/provider-list.js
-msgid "Add provider"
-msgstr ""
-
 #: src/dashboard/marketplace.ts
 #: src/marketplace/resources/list/CreateResourceButton.tsx
 msgid "Add resource"
@@ -570,10 +565,6 @@ msgstr ""
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType}?"
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
 #: src/project/ProjectRemoveDialog.tsx
@@ -945,10 +936,6 @@ msgstr ""
 msgid "Caller"
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "Can't unlink system provider."
-msgstr ""
-
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
 #: src/appstore/appstore-store.html
 #: src/appstore/dialog/appstore-selector-dialog.html
@@ -968,7 +955,6 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
-#: src/providers/ProviderCreateForm.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/team/add-project-member.html
 #: src/team/add-team-member.html
@@ -1430,10 +1416,6 @@ msgstr ""
 msgid "Create project"
 msgstr ""
 
-#: src/providers/routes.js
-msgid "Create provider"
-msgstr ""
-
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
@@ -1781,7 +1763,6 @@ msgstr ""
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/project-details-button.html
 #: src/providers/details/dialog.html
-#: src/providers/provider-list.js
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -2470,10 +2451,6 @@ msgstr ""
 msgid "Generate Kubeconfig file"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers-empty-message.html
-msgid "Get a virtual private cloud from a service store"
-msgstr ""
-
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
@@ -2577,10 +2554,6 @@ msgstr ""
 #: src/help/constants.js
 #: src/user/keys/help.js
 msgid "How to generate SSH key"
-msgstr ""
-
-#: src/providers/ProviderHelpLink.tsx
-msgid "How to obtain credentials"
 msgstr ""
 
 #: src/aws/help.js
@@ -3555,7 +3528,6 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/providers/details/provider-details.html
-#: src/providers/provider-list.js
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -3821,14 +3793,6 @@ msgstr ""
 msgid "No projects are assigned to this role."
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "No providers found matching filter."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "No providers yet."
-msgstr ""
-
 #: src/providers/details/provider-project-link-quota.html
 msgid "No quota set"
 msgstr ""
@@ -4021,10 +3985,6 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers-empty-message.html
-msgid "OR"
-msgstr ""
-
 #: src/error/routes.js
 msgid "Object is not found."
 msgstr ""
@@ -4115,20 +4075,8 @@ msgstr ""
 msgid "One-time on plan switch"
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "Only customer owner or staff can create provider."
-msgstr ""
-
 #: src/invitations/actions/create.js
 msgid "Only customer owner or staff can invite users."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Only customer owner or staff can remove provider."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Only customer owner or staff can unlink provider."
 msgstr ""
 
 #: src/invitations/actions/send.js
@@ -4143,10 +4091,6 @@ msgstr ""
 msgid "Only staff and organization users are allowed to open console."
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "Only staff can create provider."
-msgstr ""
-
 #: src/resource/resource-provision-policy.js
 msgid "Only staff can create virtual private cloud."
 msgstr ""
@@ -4157,14 +4101,6 @@ msgstr ""
 
 #: src/customer/details/customer-manage.html
 msgid "Only staff can remove organization."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Only staff can remove provider."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Only staff can unlink provider."
 msgstr ""
 
 #: src/offering/actions/utils.ts
@@ -4780,10 +4716,6 @@ msgstr ""
 msgid "Please wait until provisioning is completed."
 msgstr ""
 
-#: src/providers/ProviderUpdateComponent.tsx
-msgid "Please wait while provider is being configured."
-msgstr ""
-
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Plugin options are invalid."
 msgstr ""
@@ -5142,15 +5074,7 @@ msgid "Provider does not comply with project policies"
 msgstr ""
 
 #: src/providers/effects.tsx
-msgid "Provider has been created."
-msgstr ""
-
-#: src/providers/effects.tsx
 msgid "Provider has been updated."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Provider has resources. Please remove them first."
 msgstr ""
 
 #: src/appstore/providers/appstore-providers-service.js
@@ -5173,10 +5097,8 @@ msgstr ""
 msgid "Provider type"
 msgstr ""
 
-#: src/customer/workspace/customer-workspace.js
 #: src/help/constants.js
 #: src/project/project-dialog.html
-#: src/providers/routes.js
 msgid "Providers"
 msgstr ""
 
@@ -5258,7 +5180,6 @@ msgstr ""
 
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
-#: src/providers/provider-list.js
 #: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
 msgstr ""
@@ -5407,10 +5328,6 @@ msgstr ""
 msgid "Register with trusted identity"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers-empty-message.html
-msgid "Register your own cloud account"
-msgstr ""
-
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Registered at:"
 msgstr ""
@@ -5491,7 +5408,6 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
-#: src/providers/provider-list.js
 #: src/rancher/NodeRemoveButton.tsx
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
@@ -5838,7 +5754,6 @@ msgstr ""
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/project-workspace.js
-#: src/providers/provider-list.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ChartContainer.tsx
 #: src/resource/support/TreemapChartFilter.tsx
@@ -6451,10 +6366,6 @@ msgstr ""
 msgid "Set to true to activate privilege escalation"
 msgstr ""
 
-#: src/providers/details/dialog.html
-msgid "Settings"
-msgstr ""
-
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Shared"
 msgstr ""
@@ -6709,7 +6620,6 @@ msgstr ""
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
-#: src/providers/provider-list.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
 #: src/resource/list/resources-list.js
@@ -6901,10 +6811,6 @@ msgstr ""
 
 #: src/configs/base-config.js
 msgid "System administrator"
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "System provider"
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/utils.ts
@@ -7410,7 +7316,6 @@ msgstr ""
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/payments/payment-list.js
 #: src/providers/details/provider-details.html
-#: src/providers/provider-list.js
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
 msgstr ""
@@ -7496,10 +7401,6 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
-msgstr ""
-
-#: src/providers/effects.tsx
-msgid "Unable to create provider, please check your credentials and try again."
 msgstr ""
 
 #: src/user/support/effects.ts
@@ -7724,10 +7625,6 @@ msgstr ""
 msgid "Unable to load provider details."
 msgstr ""
 
-#: src/providers/ProviderUpdateComponent.tsx
-msgid "Unable to load provider."
-msgstr ""
-
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load questions and answers."
@@ -7924,10 +7821,6 @@ msgstr ""
 #: src/analytics/ResourceAnalysisItem.tsx
 #: src/freeipa/freeipa-quota.html
 msgid "Unlimited"
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Unlink"
 msgstr ""
 
 #: src/paypal/paypal-invoices-list.js
@@ -8504,10 +8397,6 @@ msgstr ""
 msgid "You cannot manage other organization owner."
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "You cannot remove shared provider."
-msgstr ""
-
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.js
 #: src/issues/create/issue-registration.js
@@ -8532,10 +8421,6 @@ msgstr ""
 
 #: src/project/project-providers.html
 msgid "You don't have enough permission to edit providers for current project."
-msgstr ""
-
-#: src/providers/ProviderUpdateComponent.tsx
-msgid "You don't have enough permissions to edit settings for <strong>{name}</strong> provider."
 msgstr ""
 
 #: src/project/ProjectCreateButton.tsx
