@@ -198,14 +198,6 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: src/dashboard/categories.ts
-msgid "Add MOAB allocation"
-msgstr ""
-
-#: src/dashboard/categories.ts
-msgid "Add SLURM allocation"
-msgstr ""
-
 #: src/user/routes.js
 msgid "Add SSH key"
 msgstr ""
@@ -288,7 +280,6 @@ msgstr ""
 msgid "Add private cloud"
 msgstr ""
 
-#: src/appstore/dialog/appstore-project-selector.html
 #: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -332,17 +323,8 @@ msgstr ""
 msgid "Add user input field"
 msgstr ""
 
-#: src/dashboard/categories.ts
 #: src/resource/list/resource-vms-list.js
 msgid "Add virtual machine"
-msgstr ""
-
-#: src/dashboard/categories.ts
-msgid "Add virtual private cloud"
-msgstr ""
-
-#: src/dashboard/categories.ts
-msgid "Add volume"
 msgstr ""
 
 #: src/resource/list/resource-volumes-list.js
@@ -416,10 +398,6 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
-msgstr ""
-
-#: src/appstore/providers/appstore-providers-service.js
-msgid "All provider quotas have reached limit."
 msgstr ""
 
 #: src/marketplace/resources/import/useImportDialog.tsx
@@ -521,7 +499,6 @@ msgstr ""
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
 #: src/ansible/playbook-jobs/routes.js
 #: src/ansible/playbook-jobs/sidebar.js
-#: src/appstore/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
 msgstr ""
@@ -937,8 +914,6 @@ msgid "Caller"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
-#: src/appstore/appstore-store.html
-#: src/appstore/dialog/appstore-selector-dialog.html
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/cost-planning/cost-plan-dialog.html
@@ -1329,7 +1304,6 @@ msgid "Country"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
-#: src/appstore/appstore-store.html
 #: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/freeipa/freeipa-account-create.html
@@ -1343,7 +1317,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
-#: src/resource/list/resources-list.js
 #: src/user/hooks/hook-details.html
 msgid "Create"
 msgstr ""
@@ -1354,10 +1327,6 @@ msgstr ""
 
 #: src/azure/sql/CreateDatabaseAction.ts
 msgid "Create SQL database in PostgreSQL server"
-msgstr ""
-
-#: src/resource/actions/create-vm-button.html
-msgid "Create VM"
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostCreateDialog.tsx
@@ -1374,10 +1343,6 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Create an availability"
-msgstr ""
-
-#: src/ansible/application-list.js
-msgid "Create application"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
@@ -1751,7 +1716,6 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers.html
 #: src/cost-planning/cost-plans-list.js
 #: src/events/EventDetailsButton.tsx
 #: src/issues/create/issue-registration.html
@@ -2734,10 +2698,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/StopAction.ts
 msgid "Instance is already stopped."
-msgstr ""
-
-#: src/appstore/appstore-store.js
-msgid "Instance is not configured."
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
@@ -4692,10 +4652,6 @@ msgstr ""
 msgid "Please select your language"
 msgstr ""
 
-#: src/appstore/appstore-store.js
-msgid "Please specify {fields}."
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/RestartAction.ts
 msgid "Please start instance first."
 msgstr ""
@@ -4829,10 +4785,6 @@ msgstr ""
 msgid "Price per month"
 msgstr ""
 
-#: src/appstore/dialog/appstore-category-selector.js
-msgid "Price per month (VAT not included)"
-msgstr ""
-
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 msgid "Price per unit"
@@ -4868,7 +4820,6 @@ msgid "Privacy policy"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/appstore/routes.js
 #: src/configs/base-config.js
 #: src/customer/api.ts
 #: src/dashboard/categories.ts
@@ -5002,7 +4953,6 @@ msgid "Project type"
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
-#: src/appstore/appstore-store.js
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
@@ -5023,7 +4973,6 @@ msgstr ""
 msgid "Project {project_name} has been deleted."
 msgstr ""
 
-#: src/appstore/dialog/appstore-project-selector.html
 #: src/customer/routes.js
 #: src/customer/workspace/customer-workspace.js
 #: src/navigation/workspace/select-workspace-dialog.html
@@ -5041,7 +4990,6 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
-#: src/appstore/appstore-store.html
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/events/EventDetailsTable.tsx
 #: src/jira/project/jira-projects-list.js
@@ -5077,20 +5025,12 @@ msgstr ""
 msgid "Provider has been updated."
 msgstr ""
 
-#: src/appstore/providers/appstore-providers-service.js
-msgid "Provider is in erred state."
-msgstr ""
-
 #: src/marketplace/details/OverviewTab.tsx
 msgid "Provider location"
 msgstr ""
 
 #: src/providers/ProviderNameField.tsx
 msgid "Provider name"
-msgstr ""
-
-#: src/appstore/providers/appstore-providers-service.js
-msgid "Provider quota has reached threshold."
 msgstr ""
 
 #: src/providers/ProviderTypeField.tsx
@@ -5144,7 +5084,6 @@ msgstr ""
 msgid "Pulling quotas"
 msgstr ""
 
-#: src/appstore/appstore-store.html
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "Purchase"
 msgstr ""
@@ -5155,10 +5094,6 @@ msgstr ""
 
 #: src/configs/base-config.js
 msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
-msgstr ""
-
-#: src/appstore/appstore-store.js
-msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
 #: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
@@ -5985,10 +5920,6 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: src/appstore/dialog/appstore-category-selector.html
-msgid "Search by name"
-msgstr ""
-
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Search for apps and services..."
@@ -6041,8 +5972,6 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: src/appstore/dialog/appstore-category-selector.html
-#: src/appstore/providers/appstore-providers.js
 #: src/form-react/AppstoreListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
@@ -6132,18 +6061,10 @@ msgstr ""
 msgid "Select priority"
 msgstr ""
 
-#: src/appstore/dialog/appstore-project-selector.html
-msgid "Select project"
-msgstr ""
-
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/marketplace/resources/list/ProjectFilter.tsx
 msgid "Select project..."
-msgstr ""
-
-#: src/appstore/providers/appstore-providers.js
-msgid "Select provider"
 msgstr ""
 
 #: src/providers/ProviderTypeField.tsx
@@ -6235,7 +6156,6 @@ msgstr ""
 msgid "Select {fieldLabel}"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers.js
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 msgid "Selected"
@@ -6251,10 +6171,6 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Server"
-msgstr ""
-
-#: src/appstore/appstore-store.js
-msgid "Server error occurred."
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
@@ -6274,10 +6190,6 @@ msgstr ""
 #: src/jira/sidebar.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Service desk"
-msgstr ""
-
-#: src/jira/routes.js
-msgid "Service desk project"
 msgstr ""
 
 #: src/jira/project/jira-project-checkout-summary.html
@@ -6338,14 +6250,6 @@ msgstr ""
 
 #: src/resource/state/utils.ts
 msgid "Service settings of this resource are in state erred."
-msgstr ""
-
-#: src/appstore/appstore-store.js
-#: src/appstore/dialog/appstore-selector-dialog.html
-#: src/appstore/routes.js
-#: src/customer/workspace/customer-workspace.js
-#: src/project/project-workspace.js
-msgid "Service store"
 msgstr ""
 
 #: src/issues/create/issue-registration.html
@@ -6692,7 +6596,6 @@ msgstr ""
 msgid "Storage type"
 msgstr ""
 
-#: src/appstore/routes.js
 #: src/configs/base-config.js
 msgid "Storages"
 msgstr ""
@@ -7107,10 +7010,6 @@ msgstr ""
 
 #: src/marketplace/compare/ComparisonSections.tsx
 msgid "There are no sections for comparison yet."
-msgstr ""
-
-#: src/appstore/providers/appstore-providers-empty-message.js
-msgid "There are no {categoryLabel} providers available for the current project."
 msgstr ""
 
 #: src/table-react/utils.tsx
@@ -8263,7 +8162,6 @@ msgid "Version"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/appstore/routes.js
 #: src/configs/base-config.js
 #: src/dashboard/categories.ts
 #: src/project/project-workspace.js

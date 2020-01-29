@@ -8,7 +8,6 @@ export default function ProjectWorkspaceController(
   eventsService,
   projectsService,
   $state,
-  AppStoreUtilsService,
   BreadcrumbsService,
   titleService,
   SidebarExtensionService) {
@@ -60,17 +59,6 @@ export default function ProjectWorkspaceController(
         label: gettext('Dashboard'),
         link: 'project.details({uuid: $ctrl.context.project.uuid})',
         index: 100,
-      },
-      {
-        key: 'appstore',
-        icon: 'fa-shopping-cart',
-        label: gettext('Service store'),
-        feature: 'appstore',
-        action: function() {
-          return AppStoreUtilsService.openDialog();
-        },
-        state: 'appstore',
-        index: 200,
       },
       {
         label: gettext('Resources'),

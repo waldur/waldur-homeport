@@ -41,7 +41,7 @@ export async function loadCategories(workspace: WorkspaceType, scope: Scope): Pr
     const marketplaceCategories = await loadMarketplaceCategories(workspace, scope);
     result.push(...marketplaceCategories);
   } else {
-    const categories = getDashboardCategories(workspace);
+    const categories = getDashboardCategories();
     const quotas = categories.reduce((acc, category) => [...acc, ...category.quotas], []);
     const charts = await getDailyQuotaCharts(quotas, scope);
     for (const category of categories) {

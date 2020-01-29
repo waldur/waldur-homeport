@@ -7,8 +7,6 @@ const ENV = {
 
   pageSizes: [5, 10, 20, 50],
   pageSize: 10,
-  dashboardEventsCacheTime: 60, // seconds
-  showImport: false,
   defaultErrorMessage: gettext('Reason unknown, please contact support.'),
 
   // build version
@@ -17,43 +15,6 @@ const ENV = {
   currency: '€',
   // Either 'accounting' or 'billing'
   accountingMode: 'accounting',
-
-  defaultCategories: [
-    {
-      label: gettext('Virtual machines'),
-      icon: 'fa-desktop',
-      feature: 'vms',
-      key: 'vms',
-      state: 'appstore.vms',
-      description: gettext('Provision virtual machines (VMs) in available Providers.')
-    },
-    {
-      label: gettext('Private clouds'),
-      icon: 'fa-cloud',
-      feature: 'private_clouds',
-      key: 'private_clouds',
-      state: 'appstore.private_clouds',
-      description: gettext('Purchase bulk resource as Virtual Private Clouds (VPC).'),
-    },
-    {
-      label: gettext('Block storage'),
-      icon: 'fa-hdd-o',
-      feature: 'storage',
-      key: 'storages',
-      state: 'appstore.storages',
-      description: gettext('Provision persistent storage volumes in available Providers.')
-    },
-    {
-      label: gettext('Batch processing'),
-      icon: 'fa-tasks',
-      key: 'slurm',
-      feature: 'slurm',
-      state: 'appstore.slurm',
-      description: gettext('Create an allocation for computations in batch resources.')
-    },
-  ],
-
-  defaultGroup: gettext('Infrastructure'),
 
   resourcesTypes: {
     vms: 'vms',

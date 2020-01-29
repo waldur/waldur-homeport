@@ -1,29 +1,6 @@
-import {APPSTORE_CATEGORY} from '../constants';
-
 // @ngInject
 export default function ansibleRoutes($stateProvider) {
   $stateProvider
-    .state('appstore.ansible', {
-      url: 'applications/:category/',
-      template: '<ansible-job-create></ansible-job-create>',
-      data: {
-        category: APPSTORE_CATEGORY,
-        pageTitle: gettext('Applications'),
-        sidebarState: 'project.resources',
-        feature: 'ansible'
-      },
-      resolve: {
-        // @ngInject
-        application: function (AnsiblePlaybooksService, $stateParams, $state) {
-          return AnsiblePlaybooksService.get($stateParams.category).catch(response => {
-            if (response.status === 404) {
-              $state.go('errorPage.notFound');
-            }
-          });
-        }
-      }
-    })
-
     .state('project.resources.ansible', {
       url: 'applications/',
       template: '<ui-view></ui-view>',

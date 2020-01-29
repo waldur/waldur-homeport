@@ -12,7 +12,6 @@ const ansibleJobCreate = {
       ncUtilsFlash,
       AnsibleJobsService,
       AnsiblePlaybooksService,
-      AppstoreProvidersService,
       keysService,
       usersService,
       currentStateService) {
@@ -23,7 +22,6 @@ const ansibleJobCreate = {
       this.ncUtilsFlash = ncUtilsFlash;
       this.AnsibleJobsService = AnsibleJobsService;
       this.AnsiblePlaybooksService = AnsiblePlaybooksService;
-      this.AppstoreProvidersService = AppstoreProvidersService;
       this.keysService = keysService;
       this.usersService = usersService;
       this.currentStateService = currentStateService;
@@ -55,13 +53,6 @@ const ansibleJobCreate = {
     loadServices() {
       return this.currentStateService.getProject().then(project => {
         this.project = project;
-        return this.AppstoreProvidersService.loadServices(project).then(project => {
-          this.services = project.services
-            .filter(service => service.type === 'OpenStackTenant')
-            .sort(function(a, b) {
-              return a.enabled < b.enabled;
-            });
-        });
       });
     }
 
