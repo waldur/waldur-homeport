@@ -827,10 +827,6 @@ msgstr ""
 msgid "Block snapshot count"
 msgstr ""
 
-#: src/configs/base-config.js
-msgid "Block storage"
-msgstr ""
-
 #: src/analytics/registry.ts
 msgid "Block storage size"
 msgstr ""
@@ -1335,10 +1331,6 @@ msgstr ""
 
 #: src/auth/auth-login.html
 msgid "Create an account"
-msgstr ""
-
-#: src/configs/base-config.js
-msgid "Create an allocation for computations in batch resources."
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
@@ -2645,10 +2637,6 @@ msgstr ""
 
 #: src/issues/types/constants.ts
 msgid "Informational - client’s request to get or provide additional information related to a service."
-msgstr ""
-
-#: src/configs/base-config.js
-msgid "Infrastructure"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
@@ -5046,14 +5034,6 @@ msgstr ""
 msgid "Provision new resource"
 msgstr ""
 
-#: src/configs/base-config.js
-msgid "Provision persistent storage volumes in available Providers."
-msgstr ""
-
-#: src/configs/base-config.js
-msgid "Provision virtual machines (VMs) in available Providers."
-msgstr ""
-
 #: src/user/keys/KeyCreateForm.tsx
 msgid "Public key"
 msgstr ""
@@ -5090,10 +5070,6 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Purchase and usage is invoiced."
-msgstr ""
-
-#: src/configs/base-config.js
-msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
 msgstr ""
 
 #: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
