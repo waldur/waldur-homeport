@@ -7,16 +7,5 @@ export default function jiraRoutes($stateProvider) {
       data: {
         pageTitle: gettext('Service desk projects')
       }
-    })
-
-    .state('appstore.jira-project', {
-      url: 'jira-project/',
-      template: '<appstore-store></appstore-store>',
-      data: {
-        category: 'jiraProject',
-        pageTitle: gettext('Service desk project'),
-        sidebarState: 'project.resources',
-        feature: 'jira',
-      }
     });
 }

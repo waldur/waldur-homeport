@@ -17,7 +17,6 @@ export function CustomerWorkspaceController(
   customersService,
   $state,
   tabCounterService,
-  AppStoreUtilsService,
   WorkspaceService,
   BillingUtils,
   BreadcrumbsService,
@@ -63,29 +62,12 @@ export function CustomerWorkspaceController(
         index: 100,
       },
       {
-        label: gettext('Providers'),
-        icon: 'fa-database',
-        link: 'organization.providers({uuid: $ctrl.context.customer.uuid})',
-        feature: 'providers',
-        countFieldKey: 'services',
-        index: 200,
-      },
-      {
         label: gettext('Projects'),
         icon: 'fa-bookmark',
         link: 'organization.projects({uuid: $ctrl.context.customer.uuid})',
         feature: 'projects',
         countFieldKey: 'projects',
         index: 300,
-      },
-      {
-        icon: 'fa-shopping-cart',
-        label: gettext('Service store'),
-        feature: 'appstore',
-        action: function() {
-          return AppStoreUtilsService.openDialog({selectProject: true});
-        },
-        index: 400,
       },
       {
         label: gettext('Analytics'),

@@ -9,7 +9,7 @@ import { getOffering, getCategories } from '../store/selectors';
 
 const parseOptions = (options: OfferingOptions) =>
   (options && options.order) ? options.order
-    .filter(name => options.order[name] !== undefined)
+    .filter(name => options.options[name] !== undefined)
     .map((name: string) => {
     const option = options.options[name];
     return {

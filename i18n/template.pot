@@ -198,14 +198,6 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: src/dashboard/categories.ts
-msgid "Add MOAB allocation"
-msgstr ""
-
-#: src/dashboard/categories.ts
-msgid "Add SLURM allocation"
-msgstr ""
-
 #: src/user/routes.js
 msgid "Add SSH key"
 msgstr ""
@@ -288,7 +280,6 @@ msgstr ""
 msgid "Add private cloud"
 msgstr ""
 
-#: src/appstore/dialog/appstore-project-selector.html
 #: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -297,11 +288,6 @@ msgstr ""
 
 #: src/team/add-project-member.js
 msgid "Add project member"
-msgstr ""
-
-#: src/providers/ProviderCreateForm.tsx
-#: src/providers/provider-list.js
-msgid "Add provider"
 msgstr ""
 
 #: src/dashboard/marketplace.ts
@@ -337,17 +323,8 @@ msgstr ""
 msgid "Add user input field"
 msgstr ""
 
-#: src/dashboard/categories.ts
 #: src/resource/list/resource-vms-list.js
 msgid "Add virtual machine"
-msgstr ""
-
-#: src/dashboard/categories.ts
-msgid "Add virtual private cloud"
-msgstr ""
-
-#: src/dashboard/categories.ts
-msgid "Add volume"
 msgstr ""
 
 #: src/resource/list/resource-volumes-list.js
@@ -421,10 +398,6 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
-msgstr ""
-
-#: src/appstore/providers/appstore-providers-service.js
-msgid "All provider quotas have reached limit."
 msgstr ""
 
 #: src/marketplace/resources/import/useImportDialog.tsx
@@ -526,7 +499,6 @@ msgstr ""
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
 #: src/ansible/playbook-jobs/routes.js
 #: src/ansible/playbook-jobs/sidebar.js
-#: src/appstore/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
 msgstr ""
@@ -570,10 +542,6 @@ msgstr ""
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType}?"
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Are you sure you want to unlink provider and all related resources?"
 msgstr ""
 
 #: src/project/ProjectRemoveDialog.tsx
@@ -859,10 +827,6 @@ msgstr ""
 msgid "Block snapshot count"
 msgstr ""
 
-#: src/configs/base-config.js
-msgid "Block storage"
-msgstr ""
-
 #: src/analytics/registry.ts
 msgid "Block storage size"
 msgstr ""
@@ -945,13 +909,7 @@ msgstr ""
 msgid "Caller"
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "Can't unlink system provider."
-msgstr ""
-
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
-#: src/appstore/appstore-store.html
-#: src/appstore/dialog/appstore-selector-dialog.html
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/cost-planning/cost-plan-dialog.html
@@ -968,7 +926,6 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
-#: src/providers/ProviderCreateForm.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/team/add-project-member.html
 #: src/team/add-team-member.html
@@ -1343,7 +1300,6 @@ msgid "Country"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
-#: src/appstore/appstore-store.html
 #: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/freeipa/freeipa-account-create.html
@@ -1357,7 +1313,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
-#: src/resource/list/resources-list.js
 #: src/user/hooks/hook-details.html
 msgid "Create"
 msgstr ""
@@ -1370,10 +1325,6 @@ msgstr ""
 msgid "Create SQL database in PostgreSQL server"
 msgstr ""
 
-#: src/resource/actions/create-vm-button.html
-msgid "Create VM"
-msgstr ""
-
 #: src/resource/monitoring/ZabbixHostCreateDialog.tsx
 msgid "Create Zabbix host"
 msgstr ""
@@ -1382,16 +1333,8 @@ msgstr ""
 msgid "Create an account"
 msgstr ""
 
-#: src/configs/base-config.js
-msgid "Create an allocation for computations in batch resources."
-msgstr ""
-
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Create an availability"
-msgstr ""
-
-#: src/ansible/application-list.js
-msgid "Create application"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
@@ -1428,10 +1371,6 @@ msgstr ""
 
 #: src/customer/routes.js
 msgid "Create project"
-msgstr ""
-
-#: src/providers/routes.js
-msgid "Create provider"
 msgstr ""
 
 #: src/issues/create/issue-create-dialog.js
@@ -1769,7 +1708,6 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers.html
 #: src/cost-planning/cost-plans-list.js
 #: src/events/EventDetailsButton.tsx
 #: src/issues/create/issue-registration.html
@@ -1781,7 +1719,6 @@ msgstr ""
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/project-details-button.html
 #: src/providers/details/dialog.html
-#: src/providers/provider-list.js
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -2470,10 +2407,6 @@ msgstr ""
 msgid "Generate Kubeconfig file"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers-empty-message.html
-msgid "Get a virtual private cloud from a service store"
-msgstr ""
-
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
@@ -2577,10 +2510,6 @@ msgstr ""
 #: src/help/constants.js
 #: src/user/keys/help.js
 msgid "How to generate SSH key"
-msgstr ""
-
-#: src/providers/ProviderHelpLink.tsx
-msgid "How to obtain credentials"
 msgstr ""
 
 #: src/aws/help.js
@@ -2710,10 +2639,6 @@ msgstr ""
 msgid "Informational - client’s request to get or provide additional information related to a service."
 msgstr ""
 
-#: src/configs/base-config.js
-msgid "Infrastructure"
-msgstr ""
-
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin password"
@@ -2761,10 +2686,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/StopAction.ts
 msgid "Instance is already stopped."
-msgstr ""
-
-#: src/appstore/appstore-store.js
-msgid "Instance is not configured."
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
@@ -3555,7 +3476,6 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/providers/details/provider-details.html
-#: src/providers/provider-list.js
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -3821,14 +3741,6 @@ msgstr ""
 msgid "No projects are assigned to this role."
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "No providers found matching filter."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "No providers yet."
-msgstr ""
-
 #: src/providers/details/provider-project-link-quota.html
 msgid "No quota set"
 msgstr ""
@@ -4021,10 +3933,6 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers-empty-message.html
-msgid "OR"
-msgstr ""
-
 #: src/error/routes.js
 msgid "Object is not found."
 msgstr ""
@@ -4115,20 +4023,8 @@ msgstr ""
 msgid "One-time on plan switch"
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "Only customer owner or staff can create provider."
-msgstr ""
-
 #: src/invitations/actions/create.js
 msgid "Only customer owner or staff can invite users."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Only customer owner or staff can remove provider."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Only customer owner or staff can unlink provider."
 msgstr ""
 
 #: src/invitations/actions/send.js
@@ -4143,10 +4039,6 @@ msgstr ""
 msgid "Only staff and organization users are allowed to open console."
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "Only staff can create provider."
-msgstr ""
-
 #: src/resource/resource-provision-policy.js
 msgid "Only staff can create virtual private cloud."
 msgstr ""
@@ -4157,14 +4049,6 @@ msgstr ""
 
 #: src/customer/details/customer-manage.html
 msgid "Only staff can remove organization."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Only staff can remove provider."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Only staff can unlink provider."
 msgstr ""
 
 #: src/offering/actions/utils.ts
@@ -4756,10 +4640,6 @@ msgstr ""
 msgid "Please select your language"
 msgstr ""
 
-#: src/appstore/appstore-store.js
-msgid "Please specify {fields}."
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/RestartAction.ts
 msgid "Please start instance first."
 msgstr ""
@@ -4778,10 +4658,6 @@ msgstr ""
 
 #: src/ansible/application-list.js
 msgid "Please wait until provisioning is completed."
-msgstr ""
-
-#: src/providers/ProviderUpdateComponent.tsx
-msgid "Please wait while provider is being configured."
 msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -4897,10 +4773,6 @@ msgstr ""
 msgid "Price per month"
 msgstr ""
 
-#: src/appstore/dialog/appstore-category-selector.js
-msgid "Price per month (VAT not included)"
-msgstr ""
-
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 msgid "Price per unit"
@@ -4936,7 +4808,6 @@ msgid "Privacy policy"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/appstore/routes.js
 #: src/configs/base-config.js
 #: src/customer/api.ts
 #: src/dashboard/categories.ts
@@ -5070,7 +4941,6 @@ msgid "Project type"
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
-#: src/appstore/appstore-store.js
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
@@ -5091,7 +4961,6 @@ msgstr ""
 msgid "Project {project_name} has been deleted."
 msgstr ""
 
-#: src/appstore/dialog/appstore-project-selector.html
 #: src/customer/routes.js
 #: src/customer/workspace/customer-workspace.js
 #: src/navigation/workspace/select-workspace-dialog.html
@@ -5109,7 +4978,6 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
-#: src/appstore/appstore-store.html
 #: src/cost-planning/cost-plan-optimizer.html
 #: src/events/EventDetailsTable.tsx
 #: src/jira/project/jira-projects-list.js
@@ -5142,19 +5010,7 @@ msgid "Provider does not comply with project policies"
 msgstr ""
 
 #: src/providers/effects.tsx
-msgid "Provider has been created."
-msgstr ""
-
-#: src/providers/effects.tsx
 msgid "Provider has been updated."
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Provider has resources. Please remove them first."
-msgstr ""
-
-#: src/appstore/providers/appstore-providers-service.js
-msgid "Provider is in erred state."
 msgstr ""
 
 #: src/marketplace/details/OverviewTab.tsx
@@ -5165,31 +5021,17 @@ msgstr ""
 msgid "Provider name"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers-service.js
-msgid "Provider quota has reached threshold."
-msgstr ""
-
 #: src/providers/ProviderTypeField.tsx
 msgid "Provider type"
 msgstr ""
 
-#: src/customer/workspace/customer-workspace.js
 #: src/help/constants.js
 #: src/project/project-dialog.html
-#: src/providers/routes.js
 msgid "Providers"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Provision new resource"
-msgstr ""
-
-#: src/configs/base-config.js
-msgid "Provision persistent storage volumes in available Providers."
-msgstr ""
-
-#: src/configs/base-config.js
-msgid "Provision virtual machines (VMs) in available Providers."
 msgstr ""
 
 #: src/user/keys/KeyCreateForm.tsx
@@ -5222,21 +5064,12 @@ msgstr ""
 msgid "Pulling quotas"
 msgstr ""
 
-#: src/appstore/appstore-store.html
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "Purchase"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 msgid "Purchase and usage is invoiced."
-msgstr ""
-
-#: src/configs/base-config.js
-msgid "Purchase bulk resource as Virtual Private Clouds (VPC)."
-msgstr ""
-
-#: src/appstore/appstore-store.js
-msgid "Purchase of {vm_name} was successful."
 msgstr ""
 
 #: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
@@ -5258,7 +5091,6 @@ msgstr ""
 
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
-#: src/providers/provider-list.js
 #: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
 msgstr ""
@@ -5407,10 +5239,6 @@ msgstr ""
 msgid "Register with trusted identity"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers-empty-message.html
-msgid "Register your own cloud account"
-msgstr ""
-
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Registered at:"
 msgstr ""
@@ -5491,7 +5319,6 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
-#: src/providers/provider-list.js
 #: src/rancher/NodeRemoveButton.tsx
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
@@ -5838,7 +5665,6 @@ msgstr ""
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/project-workspace.js
-#: src/providers/provider-list.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ChartContainer.tsx
 #: src/resource/support/TreemapChartFilter.tsx
@@ -6070,10 +5896,6 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: src/appstore/dialog/appstore-category-selector.html
-msgid "Search by name"
-msgstr ""
-
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Search for apps and services..."
@@ -6126,8 +5948,6 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: src/appstore/dialog/appstore-category-selector.html
-#: src/appstore/providers/appstore-providers.js
 #: src/form-react/AppstoreListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
@@ -6217,18 +6037,10 @@ msgstr ""
 msgid "Select priority"
 msgstr ""
 
-#: src/appstore/dialog/appstore-project-selector.html
-msgid "Select project"
-msgstr ""
-
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/marketplace/resources/list/ProjectFilter.tsx
 msgid "Select project..."
-msgstr ""
-
-#: src/appstore/providers/appstore-providers.js
-msgid "Select provider"
 msgstr ""
 
 #: src/providers/ProviderTypeField.tsx
@@ -6320,7 +6132,6 @@ msgstr ""
 msgid "Select {fieldLabel}"
 msgstr ""
 
-#: src/appstore/providers/appstore-providers.js
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 msgid "Selected"
@@ -6336,10 +6147,6 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Server"
-msgstr ""
-
-#: src/appstore/appstore-store.js
-msgid "Server error occurred."
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
@@ -6359,10 +6166,6 @@ msgstr ""
 #: src/jira/sidebar.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Service desk"
-msgstr ""
-
-#: src/jira/routes.js
-msgid "Service desk project"
 msgstr ""
 
 #: src/jira/project/jira-project-checkout-summary.html
@@ -6425,14 +6228,6 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: src/appstore/appstore-store.js
-#: src/appstore/dialog/appstore-selector-dialog.html
-#: src/appstore/routes.js
-#: src/customer/workspace/customer-workspace.js
-#: src/project/project-workspace.js
-msgid "Service store"
-msgstr ""
-
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
@@ -6449,10 +6244,6 @@ msgstr ""
 
 #: src/slurm/SlurmForm.tsx
 msgid "Set to true to activate privilege escalation"
-msgstr ""
-
-#: src/providers/details/dialog.html
-msgid "Settings"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -6709,7 +6500,6 @@ msgstr ""
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
-#: src/providers/provider-list.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
 #: src/resource/list/resources-list.js
@@ -6782,7 +6572,6 @@ msgstr ""
 msgid "Storage type"
 msgstr ""
 
-#: src/appstore/routes.js
 #: src/configs/base-config.js
 msgid "Storages"
 msgstr ""
@@ -6901,10 +6690,6 @@ msgstr ""
 
 #: src/configs/base-config.js
 msgid "System administrator"
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "System provider"
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/utils.ts
@@ -7203,10 +6988,6 @@ msgstr ""
 msgid "There are no sections for comparison yet."
 msgstr ""
 
-#: src/appstore/providers/appstore-providers-empty-message.js
-msgid "There are no {categoryLabel} providers available for the current project."
-msgstr ""
-
 #: src/table-react/utils.tsx
 msgid "There are no {verboseName} found matching the filter."
 msgstr ""
@@ -7410,7 +7191,6 @@ msgstr ""
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/payments/payment-list.js
 #: src/providers/details/provider-details.html
-#: src/providers/provider-list.js
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
 msgstr ""
@@ -7496,10 +7276,6 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
-msgstr ""
-
-#: src/providers/effects.tsx
-msgid "Unable to create provider, please check your credentials and try again."
 msgstr ""
 
 #: src/user/support/effects.ts
@@ -7724,10 +7500,6 @@ msgstr ""
 msgid "Unable to load provider details."
 msgstr ""
 
-#: src/providers/ProviderUpdateComponent.tsx
-msgid "Unable to load provider."
-msgstr ""
-
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load questions and answers."
@@ -7924,10 +7696,6 @@ msgstr ""
 #: src/analytics/ResourceAnalysisItem.tsx
 #: src/freeipa/freeipa-quota.html
 msgid "Unlimited"
-msgstr ""
-
-#: src/providers/provider-list.js
-msgid "Unlink"
 msgstr ""
 
 #: src/paypal/paypal-invoices-list.js
@@ -8370,7 +8138,6 @@ msgid "Version"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/appstore/routes.js
 #: src/configs/base-config.js
 #: src/dashboard/categories.ts
 #: src/project/project-workspace.js
@@ -8504,10 +8271,6 @@ msgstr ""
 msgid "You cannot manage other organization owner."
 msgstr ""
 
-#: src/providers/provider-list.js
-msgid "You cannot remove shared provider."
-msgstr ""
-
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.js
 #: src/issues/create/issue-registration.js
@@ -8532,10 +8295,6 @@ msgstr ""
 
 #: src/project/project-providers.html
 msgid "You don't have enough permission to edit providers for current project."
-msgstr ""
-
-#: src/providers/ProviderUpdateComponent.tsx
-msgid "You don't have enough permissions to edit settings for <strong>{name}</strong> provider."
 msgstr ""
 
 #: src/project/ProjectCreateButton.tsx

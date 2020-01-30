@@ -8,16 +8,5 @@ export default function slurmRoutes($stateProvider) {
         pageTitle: gettext('Batch processing'),
         feature: 'slurm'
       }
-    })
-
-    .state('appstore.slurm', {
-      url: 'batch/',
-      template: '<appstore-store></appstore-store>',
-      data: {
-        category: 'slurm',
-        pageTitle: gettext('Batch processing'),
-        sidebarState: 'project.resources',
-        feature: 'slurm',
-      }
     });
 }

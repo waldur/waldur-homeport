@@ -12,11 +12,6 @@
         <provider-details provider="$ctrl.provider"></provider-details>
       </div>
     </uib-tab>
-    <uib-tab index="1" ng-if="$ctrl.editable && $ctrl.settingsVisible">
-      <uib-tab-heading translate>Settings</uib-tab-heading>
-      <div class="panel-body" ng-if="active==1">
-        <provider-settings provider="$ctrl.provider"></provider-settings>
-      </div>
     </uib-tab>
     <uib-tab index="2" ng-if="$ctrl.editable">
       <uib-tab-heading translate>Quotas</uib-tab-heading>

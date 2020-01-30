@@ -49,11 +49,6 @@ const JiraProjectConfig = {
   onSuccess: onSuccess,
 };
 
-// @ngInject
-export default function fieldsConfig(AppstoreFieldConfigurationProvider) {
-  AppstoreFieldConfigurationProvider.register('JIRA.Project', JiraProjectConfig);
-}
-
 function onSuccess($injector) {
   const JiraProjectService = $injector.get('JiraProjectService');
   JiraProjectService.clearAllCacheForCurrentEndpoint();

@@ -105,49 +105,13 @@ export default function baseResourceListController(
     },
     getTableActions: function() {
       let actions = [];
-      if (this.category !== undefined) {
-        actions.push(this.getCreateAction());
-      }
       if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('openMap') === -1) {
         actions.push(this.getMapAction());
       }
       return actions;
     },
-    getCreateAction: function() {
-      const { disabled, errorMessage } = ResourceProvisionPolicy.checkResource(
-        this.currentUser, this.currentCustomer, this.currentProject, this.getCategoryKey()
-      );
-      return {
-        title: this.getCreateTitle(),
-        iconClass: 'fa fa-plus',
-        callback: function() {
-          this.gotoAppstore();
-        }.bind(this),
-        disabled: disabled,
-        titleAttr: errorMessage
-      };
-    },
-    getCreateTitle: function() {
-      return gettext('Create');
-    },
-    gotoAppstore: function() {
-      $state.go(this.getCategoryState(), {
-        uuid: this.currentProject.uuid
-      });
-    },
     getCategoryKey: function() {
       return this.categories[this.category];
-    },
-    getCategoryState: function() {
-      if (this.category === ENV.VirtualMachines) {
-        return 'appstore.vms';
-      } else if (this.category === ENV.PrivateClouds) {
-        return 'appstore.private_clouds';
-      } else if (this.category === ENV.Storages) {
-        return 'appstore.storages';
-      } else if (this.category === ENV.Volumes) {
-        return 'appstore.storages';
-      }
     },
     getMapAction: function() {
       return {

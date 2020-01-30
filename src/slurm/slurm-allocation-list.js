@@ -78,14 +78,8 @@ function SlurmAllocationListController(
       const percent = Math.min(1, limit > 0 ? usage / limit : 0);
       return `<span uib-tooltip="${tooltip}"><quota-pie value="${percent}"></quota-pie></span>`;
     },
-    getTableActions: function() {
-      return [this.getCreateAction()];
-    },
     getCategoryKey: function() {
       return 'slurm';
-    },
-    getCategoryState: function() {
-      return 'appstore.slurm';
     },
     getFilter: function() {
       return {

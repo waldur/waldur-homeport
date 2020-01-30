@@ -53,14 +53,8 @@ function JiraProjectsListController(
       }
       return `<span uib-tooltip="${row.template_description}">${row.template_name}</span>`;
     },
-    getTableActions: function() {
-      return [this.getCreateAction()];
-    },
     getCategoryKey: function() {
       return 'jiraProject';
-    },
-    getCategoryState: function() {
-      return 'appstore.jira-project';
     },
     getFilter: function() {
       return {
