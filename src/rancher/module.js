@@ -1,5 +1,6 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
+import breadcrumbsConfig from './breadcrumbs';
 import clusterActions from './cluster-actions';
 import nodeActions from './node-actions';
 import './marketplace';
@@ -20,6 +21,7 @@ export default module => {
   module.component('rancherKeyValueDialog', rancherKeyValueDialog);
   module.config(actionsConfig);
   module.config(tabsConfig);
+  module.run(breadcrumbsConfig);
 };
 
 

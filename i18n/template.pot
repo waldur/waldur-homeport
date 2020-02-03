@@ -3833,6 +3833,7 @@ msgid "Node plan"
 msgstr ""
 
 #: src/rancher/TenantGroup.tsx
+#: src/rancher/breadcrumbs.js
 #: src/rancher/module.js
 msgid "Nodes"
 msgstr ""
