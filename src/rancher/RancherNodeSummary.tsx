@@ -1,9 +1,19 @@
 import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
+import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
 
 import { KeyValueButton } from './KeyValueButton';
+
+const formatInstance = resource =>
+  resource.instance ? (
+    <ResourceLink
+      type="OpenStackTenant.Instance"
+      uuid={resource.instance_uuid}
+      label={resource.instance_name}
+    />
+  ) : <span>&ndash;</span>;
 
 const PureRancherNodeSummary = (props: ResourceSummaryProps) => {
   const { translate } = props;
@@ -42,6 +52,10 @@ const PureRancherNodeSummary = (props: ResourceSummaryProps) => {
         label={translate('Annotations')}
         value={Object.keys(props.resource.annotations).length > 0 &&
           <KeyValueButton items={props.resource.annotations}/>}
+      />
+      <Field
+        label={translate('OpenStack Instance')}
+        value={formatInstance(props.resource)}
       />
     </>
   );

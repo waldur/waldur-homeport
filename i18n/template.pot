@@ -2660,6 +2660,7 @@ msgstr ""
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 #: src/openstack/openstack-volume/actions/AttachAction.ts
+#: src/rancher/rancher-cluster-nodes.js
 msgid "Instance"
 msgstr ""
 
@@ -3823,6 +3824,10 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
+#: src/rancher/rancher-cluster-nodes.js
+msgid "Node"
+msgstr ""
+
 #: src/rancher/NodeAddButton.tsx
 msgid "Node plan"
 msgstr ""
@@ -3842,6 +3847,7 @@ msgid "Not a valid value"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/rancher/rancher-cluster-nodes.js
 msgid "Not assigned"
 msgstr ""
 
@@ -4081,6 +4087,10 @@ msgstr ""
 
 #: src/analytics/ImagesList.tsx
 msgid "OpenStack Images"
+msgstr ""
+
+#: src/rancher/RancherNodeSummary.tsx
+msgid "OpenStack Instance"
 msgstr ""
 
 #: src/openstack/events.ts
@@ -6500,6 +6510,7 @@ msgstr ""
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
+#: src/rancher/rancher-cluster-nodes.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
 #: src/resource/list/resources-list.js
