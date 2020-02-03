@@ -40,7 +40,7 @@ export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): Option[] =>
 export const getDefaultVolumeType = volumeTypes =>
   volumeTypes.find(volumeType => volumeType.is_default);
 
-const DNS_LABEL_REGEX = new RegExp('^([a-z0-9-]{1,63})$');
+const DNS_LABEL_REGEX = new RegExp('^([a-zA-Z0-9-]{1,63})$');
 
 const NUMBER_REGEX = new RegExp('^[0-9]+$');
 
