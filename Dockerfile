@@ -12,6 +12,8 @@ RUN apk add --no-cache --virtual python make g++ \
     && yarn install --frozen-lockfile
 
 COPY . /app
+ARG VERSION=latest
+RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/configs/base-config.js
 RUN yarn build
 
 # production environment
