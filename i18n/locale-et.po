@@ -8560,7 +8560,7 @@ msgstr "VMware töövahendid"
 #: src/vmware/marketplace.ts
 #, fuzzy
 #| msgid "Virtual machines"
-msgid "VMware Virtual Machine"
+msgid "vSphere Virtual Machine"
 msgstr "Virtuaalmasinad"
 
 #: src/resource/support/ChartContainer.tsx
