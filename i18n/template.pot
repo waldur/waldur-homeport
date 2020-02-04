@@ -8081,10 +8081,6 @@ msgstr ""
 msgid "VMware Tools"
 msgstr ""
 
-#: src/vmware/marketplace.ts
-msgid "VMware Virtual Machine"
-msgstr ""
-
 #: src/resource/support/ChartContainer.tsx
 msgid "VPC RAM"
 msgstr ""
@@ -8608,6 +8604,10 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "vCores"
+msgstr ""
+
+#: src/vmware/marketplace.ts
+msgid "vSphere Virtual Machine"
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx

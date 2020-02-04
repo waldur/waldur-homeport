@@ -13,7 +13,7 @@ const OFFERING_FORM_DATA = {
   },
   type: {
     value: 'VMware.VirtualMachine',
-    label: 'VMware Virtual machine',
+    label: 'vSphere Virtual machine',
   },
   attributes: {},
   options: [],

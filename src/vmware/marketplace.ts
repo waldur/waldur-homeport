@@ -35,7 +35,7 @@ const limitParser = limits => limits && ({
 registerOfferingType({
   type: 'VMware.VirtualMachine',
   get label() {
-    return translate('VMware Virtual Machine');
+    return translate('vSphere Virtual Machine');
   },
   component: VMwareVirtualMachineForm,
   providerType: 'VMware',
