@@ -11,8 +11,8 @@ export const SubnetGroup = props => (
   <FormGroup
     label={translate('Subnet')}
     required={true}
-    labelClassName="control-label col-sm-3"
-    valueClassName="col-sm-9"
+    labelClassName={props.labelClassName}
+    valueClassName={props.valueClassName}
   >
     <Field
       name="attributes.subnet"
@@ -22,3 +22,8 @@ export const SubnetGroup = props => (
     />
   </FormGroup>
 );
+
+SubnetGroup.defaultProps = {
+  labelClassName: 'control-label col-sm-3',
+  valueClassName: 'col-sm-9',
+};

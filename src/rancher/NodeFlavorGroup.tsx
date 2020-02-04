@@ -17,7 +17,9 @@ const SelectFlavorField = props => (
 export const NodeFlavorGroup = props => (
   <FormGroup
     label={translate('Flavor')}
-    required={true}>
+    required={true}
+    labelClassName={props.labelClassName}
+    valueClassName={props.valueClassName}>
     <Field
       name="flavor"
       component={SelectFlavorField}
