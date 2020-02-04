@@ -6,6 +6,7 @@ export function createNodeAction(ctx: ActionContext): ResourceAction {
   return {
     name: 'create_node',
     title: translate('Create node'),
+    iconClass: 'fa fa-plus',
     type: 'callback',
     tab: 'nodes',
     execute: () => {
