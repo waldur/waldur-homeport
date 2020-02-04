@@ -1357,6 +1357,11 @@ msgstr ""
 msgid "Create network for OpenStack tenant"
 msgstr ""
 
+#: src/rancher/cluster-actions/CreateNodeAction.ts
+#: src/rancher/cluster-actions/CreateNodeDialog.tsx
+msgid "Create node"
+msgstr ""
+
 #: src/user/hooks/hook-details.html
 msgid "Create notification"
 msgstr ""
@@ -3826,6 +3831,10 @@ msgstr ""
 
 #: src/rancher/rancher-cluster-nodes.js
 msgid "Node"
+msgstr ""
+
+#: src/rancher/cluster-actions/CreateNodeDialog.tsx
+msgid "Node has been created."
 msgstr ""
 
 #: src/rancher/NodeAddButton.tsx
@@ -7286,6 +7295,10 @@ msgstr ""
 msgid "Unable to create link."
 msgstr ""
 
+#: src/rancher/cluster-actions/CreateNodeDialog.tsx
+msgid "Unable to create node."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
 msgstr ""
@@ -7431,6 +7444,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/rancher/cluster-actions/CreateNodeDialog.tsx
 #: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
 msgid "Unable to load data."
 msgstr ""

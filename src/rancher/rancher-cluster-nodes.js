@@ -12,15 +12,24 @@ const rancherClusterNodes = {
 export default rancherClusterNodes;
 
 // @ngInject
-function RancherClusterNodesListController(baseResourceListController, rancherNodesService, ncUtils) {
+function RancherClusterNodesListController(
+  baseResourceListController,
+  rancherNodesService,
+  actionUtilsService,
+  ncUtils) {
   let controllerScope = this;
   let ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
-      this._super();
-      this.service = rancherNodesService;
-      this.addRowFields(['instance_uuid', 'instance_name']);
-      this.resourcePollingDisabled = true;
+      let fn = this._super.bind(this);
+      this.loading = true;
+      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'nodes').then(result => {
+        this.listActions = result;
+        fn();
+        this.service = rancherNodesService;
+        this.addRowFields(['instance_uuid', 'instance_name']);
+        this.resourcePollingDisabled = true;
+      });
     },
     getTableOptions: function() {
       let options = this._super();
@@ -51,6 +60,9 @@ function RancherClusterNodesListController(baseResourceListController, rancherNo
         }
       ];
       return options;
+    },
+    getTableActions: function() {
+      return this.listActions;
     },
     getFilter: function() {
       return {

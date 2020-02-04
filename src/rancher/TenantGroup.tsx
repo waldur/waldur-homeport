@@ -2,39 +2,30 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { change, FieldArray } from 'redux-form';
 
-import { getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
 import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { Subnet, Flavor } from '@waldur/openstack/openstack-instance/types';
 import { formatVolumeTypeChoices, getDefaultVolumeType } from '@waldur/openstack/openstack-instance/utils';
-import { VolumeType } from '@waldur/openstack/types';
-import { formatFlavor } from '@waldur/resource/utils';
 
+import { getFlavors, getSubnets, getVolumeTypes } from './api';
 import { NodeList } from './NodeList';
 import { SubnetGroup } from './SubnetGroup';
+import { formatFlavorOption, formatSubnetOption } from './utils';
 
 const loadData = async settings => {
   const params = {settings};
-  const subnets = await getAll<Subnet>('/openstacktenant-subnets/', {params});
-  const flavors = await getAll<Flavor>('/openstacktenant-flavors/', {params});
-  const volumeTypes = await getAll<VolumeType>('/openstacktenant-volume-types/', {params});
+  const flavors = await getFlavors(params);
+  const subnets = await getSubnets(params);
+  const volumeTypes = await getVolumeTypes(params);
   const mountPoints = ENV.plugins.WALDUR_RANCHER.MOUNT_POINT_CHOICES;
   const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
   const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
   return {
-    subnets: subnets.map(subnet => ({
-      label: `${subnet.network_name} / ${subnet.name} (${subnet.cidr})`,
-      value: subnet.url,
-    })),
-    flavors: flavors.map(flavor => ({
-      ...flavor,
-      label: `${flavor.name} (${formatFlavor(flavor)})`,
-      value: flavor.url,
-    })),
+    subnets: subnets.map(formatSubnetOption),
+    flavors: flavors.map(formatFlavorOption),
     volumeTypes: volumeTypeChoices,
     defaultVolumeType: defaultVolumeType && defaultVolumeType.url,
     mountPoints: mountPoints.map(choice => ({
