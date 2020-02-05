@@ -9,10 +9,19 @@ interface EditableCalendarProps {
   eventDrop: (event) => void;
   onSelectEvent: (event) => void;
   eventResize: (event) => void;
+  weekends?: boolean;
+  workingHours?: {
+    minTime: string;
+    maxTime: string;
+  };
 }
 
 export const EditableCalendar = (props: EditableCalendarProps) => (
   <Calendar
+    // minTime={props.workingHours.minTime}
+    // maxTime={props.workingHours.maxTime}
+    {...props.workingHours}
+    weekends={props.weekends}
     editable={true}
     selectable={true}
     eventResizableFromStart={true}
