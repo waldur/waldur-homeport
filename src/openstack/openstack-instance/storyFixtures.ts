@@ -208,11 +208,6 @@ export const summaryData = {
     volumes: 50,
     volumes_size: -1,
   },
-  limitsType: {
-    cores: 'QUOTA_PACKAGE_TYPE',
-    storage: 'QUOTA_PACKAGE_TYPE',
-    ram: 'QUOTA_PACKAGE_TYPE',
-  },
   usages: {
     cores: 2,
     storage: 10240,

@@ -1,4 +1,4 @@
-import { getAll, getFirst } from '@waldur/core/api';
+import { getAll } from '@waldur/core/api';
 import { $http } from '@waldur/core/services';
 import { Flavor, FloatingIp, Subnet, Image, SshKey, OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
@@ -36,18 +36,6 @@ export const loadFloatingIps = (settings_uuid: string) =>
 
 export const loadSshKeys = (user_uuid: string) =>
   getAll<SshKey>('/keys/', {params: {user_uuid}});
-
-export const loadProjectQuotas = (settings_uuid: string, project_uuid: string) =>
-  getFirst('/openstacktenant-service-project-link/', {
-    settings_uuid,
-    project_uuid,
-  }).then(data => {
-    if (data) {
-      return data.quotas;
-    } else {
-      throw new Error('Service project link is not found');
-    }
-  });
 
 export const loadServiceSettings = (scope: string) =>
   $http.get(scope).then(response => response.data);

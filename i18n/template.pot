@@ -4329,10 +4329,6 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
-#: src/quotas/constants.js
-msgid "Package amount"
-msgstr ""
-
 #: src/error/routes.js
 msgid "Page is not found."
 msgstr ""
@@ -4950,10 +4946,6 @@ msgstr ""
 msgid "Project roles"
 msgstr ""
 
-#: src/quotas/constants.js
-msgid "Project service"
-msgstr ""
-
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
@@ -5113,6 +5105,11 @@ msgstr ""
 #: src/project/ProjectCreateButton.tsx
 #: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
+msgstr ""
+
+#: src/quotas/QuotaUsageBarChart.tsx
+#: src/quotas/quota-usage-bar-chart.js
+msgid "Quota usage exceeds available limit."
 msgstr ""
 
 #: src/providers/details/provider-project-link-quota.html
@@ -7368,11 +7365,6 @@ msgstr ""
 msgid "Unable to generate service provider API secret code."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-msgid "Unable to get checkout summary data."
-msgstr ""
-
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Unable to get form's data."
 msgstr ""
@@ -8709,11 +8701,6 @@ msgstr ""
 
 #: src/resource/events.ts
 msgid "{resource_name} has been deleted."
-msgstr ""
-
-#: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
-msgid "{type} quota usage exceeds available limit."
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx

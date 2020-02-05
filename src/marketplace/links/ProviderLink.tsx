@@ -9,6 +9,7 @@ interface ProviderLinkProps {
   workspace: WorkspaceType;
   customer_uuid: string;
   className?: string;
+  children?: React.ReactNode;
 }
 
 const PureProviderLink: React.FC<ProviderLinkProps> = props => (
