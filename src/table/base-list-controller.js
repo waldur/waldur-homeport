@@ -1,12 +1,12 @@
 import { loadDatatables } from '@waldur/shims/load-datatables';
 
 // @ngInject
-export default function baseControllerListClass(baseControllerClass, ENV, $rootScope, currentStateService, ncUtils) {
+export default function baseControllerListClass(ENV, $rootScope, currentStateService, ncUtils, ncUtilsFlash) {
   /**
    * Use controllerScope.__proto__ = new Controller() in needed controller
    * use this.controllerScope for changes in event handler
    */
-  let ControllerListClass = baseControllerClass.extend({
+  let ControllerListClass = Class.extend({
     list: [],
     service: null, // required in init
     searchInput: '',
@@ -199,6 +199,12 @@ export default function baseControllerListClass(baseControllerClass, ENV, $rootS
       }
       return index;
     },
+    handleActionException: function(response) {
+      if (response.status === 409) {
+        let message = response.data.detail || response.data.status;
+        ncUtilsFlash.error(message);
+      }
+    }
   });
 
   return ControllerListClass;

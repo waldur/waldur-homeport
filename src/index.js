@@ -36,7 +36,6 @@ import modalModule from './modal/module';
 import bootstrap from './core/bootstrap';
 import errorModule from './error/module';
 import configModule from './configs/module';
-import controllersModule from './controllers/module';
 import servicesModule from './services/module';
 import freeipaModule from './freeipa/module';
 import rootModule from './module';

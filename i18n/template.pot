@@ -5859,11 +5859,6 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/controllers/base-controller-class-es6.js
-#: src/controllers/base-controller-class.js
-msgid "Saving of {vm_name} was successful."
-msgstr ""
-
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
