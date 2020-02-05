@@ -7,7 +7,6 @@ import { getSummary } from '@waldur/quotas/QuotaUsageBarChart';
 import { getExisting } from '@waldur/quotas/QuotaUsageBarChart';
 import { getPlanned } from '@waldur/quotas/QuotaUsageBarChart';
 import { getAvailable } from '@waldur/quotas/QuotaUsageBarChart';
-import { getExceeds } from '@waldur/quotas/QuotaUsageBarChart';
 
 import { ProgressTooltipMessage, QuotaUsageBarChartDescription } from './QuotaUsageBarChart';
 
@@ -51,13 +50,6 @@ describe('getAvailable', () => {
   });
 });
 
-describe('getExceeds', () => {
-  it('should return right message', () => {
-    const expected = 'Package amount quota usage exceeds available limit.';
-    expect(getExceeds(quotas[0])).toEqual(expected);
-  });
-});
-
 describe('ProgressTooltipMessage', () => {
   const renderWrapper = props =>
     shallow(
@@ -66,7 +58,7 @@ describe('ProgressTooltipMessage', () => {
 
   it('should render danger message if quota\'s usage exceeds limit', () => {
     const wrapper = renderWrapper({quota: quotas[1]});
-    const expectedMessage = 'Package amount quota usage exceeds available limit.';
+    const expectedMessage = 'Quota usage exceeds available limit.';
     expect(wrapper.find('.text-danger').text()).toContain(expectedMessage);
   });
 
