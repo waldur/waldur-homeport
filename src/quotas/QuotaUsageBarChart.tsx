@@ -4,7 +4,7 @@ import * as ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { Quota } from '@waldur/openstack/types';
-import { formatQuotaType, formatQuotaName, formatQuotaValue } from '@waldur/quotas/utils';
+import { formatQuotaName, formatQuotaValue } from '@waldur/quotas/utils';
 
 interface QuotaUsageBarChartProps {
   quotas: Quota[];
@@ -36,11 +36,6 @@ export const getAvailable = quota => {
   });
 };
 
-export const getExceeds = quota =>
-  translate('{type} quota usage exceeds available limit.', {
-    type: formatQuotaType(quota.limitType),
-  });
-
 export const ProgressTooltipMessage = ({quota}) => (
   <div>
     <p className="m-t-sm">{getPlanned(quota)}</p>
@@ -49,7 +44,7 @@ export const ProgressTooltipMessage = ({quota}) => (
     {
       exceeds(quota) && (
         <p className="text-danger">
-          {getExceeds(quota)}
+          {translate('Quota usage exceeds available limit.')}
         </p>
       )
     }
@@ -63,7 +58,7 @@ export const QuotaUsageBarChartDescription = ({quota}) => (
       {exceeds(quota) && (
         <Tooltip
           id={quota.name}
-          label={getExceeds(quota)}
+          label={translate('Quota usage exceeds available limit.')}
         >
           {' '}
           <i className="fa fa-exclamation-triangle" />

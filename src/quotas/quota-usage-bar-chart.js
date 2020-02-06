@@ -42,10 +42,8 @@ const quotaUsageBarChart = {
       });
     }
 
-    getExceeds(quota) {
-      return this.coreUtils.templateFormatter(gettext('{type} quota usage exceeds available limit.'), {
-        type: this.$filter('quotaType')(quota.limitType)
-      });
+    getExceeds() {
+      return this.coreUtils.templateFormatter(gettext('Quota usage exceeds available limit.'));
     }
   }
 };

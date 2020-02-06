@@ -26,13 +26,3 @@ export const QUOTA_FILTERS = {
   backup_storage: 'filesize',
   cost: 'defaultCurrency',
 };
-
-export const QUOTA_PACKAGE_TYPE = 'QUOTA_PACKAGE_TYPE';
-
-export const QUOTA_SPL_TYPE = 'QUOTA_SPL_TYPE';
-
-export const QUOTA_TYPES = {
-  [QUOTA_PACKAGE_TYPE]: translate('Package amount'),
-  [QUOTA_SPL_TYPE]: translate('Project service'),
-};
-

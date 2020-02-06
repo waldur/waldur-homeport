@@ -1,14 +1,13 @@
 import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { getFormValues, isValid as isFormValid } from 'redux-form';
+import { useSelector } from 'react-redux';
+import { getFormValues, isValid } from 'redux-form';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import Panel from '@waldur/core/Panel';
 import { defaultCurrency, $sanitize } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
@@ -17,14 +16,25 @@ import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
 import { formatOrderItemForCreate } from '@waldur/marketplace/details/utils';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
-import * as api from '@waldur/openstack/api';
-import { Flavor, ServiceComponent, LimitsType } from '@waldur/openstack/openstack-instance/types';
 import { Quota } from '@waldur/openstack/types';
-import { parseQuotas, parseQuotasUsage, aggregateQuotasFromSPL } from '@waldur/openstack/utils';
+import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
-import { Customer, Project } from '@waldur/workspace/types';
+
+import { Flavor } from './types';
+
+interface FormData {
+  name?: string;
+  service?: {name: string};
+  image?: {name: string};
+  flavor?: Flavor;
+  attributes?: Record<string, any>;
+}
+
+interface OwnProps {
+  offering: Offering;
+}
 
 const getTotalStorage = formData =>
   formData.system_volume_size + (formData.data_volume_size || 0);
@@ -58,29 +68,51 @@ const getDailyPrice = (formData, components) => {
 
 const getMonthlyPrice = (formData, components) => getDailyPrice(formData, components) * 30;
 
-const getQuotas = ({formData, usages, limits, limitsType, project, components}) => {
+function extendVolumeTypeQuotas(formData, usages, limits) {
+  const quotas = [];
+  if (isFeatureVisible('openstack.volume-types')) {
+    const required = {};
+    if (formData.data_volume_type) {
+      const key = `gigabytes_${formData.data_volume_type.name}`;
+      required[key] = (required[key] || 0) + formData.data_volume_size / 1024.0;
+    }
+    if (formData.system_volume_type) {
+      const key = `gigabytes_${formData.system_volume_type.name}`;
+      required[key] = (required[key] || 0) + formData.system_volume_size / 1024.0;
+    }
+    Object.keys(limits).filter(key => key.startsWith('gigabytes_')).map(key => {
+      quotas.push({
+        name: key,
+        usage: usages[key] || 0,
+        limit: limits[key],
+        required: required[key] || 0,
+      });
+    });
+  }
+  return quotas;
+}
+
+const getQuotas = ({formData, usages, limits, project, components}) => {
   const quotas: Quota[] = [
     {
       name: 'vcpu',
       usage: usages.cores,
       limit: limits.cores,
-      limitType: limitsType.cores,
       required: formData.flavor ? formData.flavor.cores : 0,
     },
     {
       name: 'ram',
       usage: usages.ram,
       limit: limits.ram,
-      limitType: limitsType.ram,
       required: formData.flavor ? formData.flavor.ram : 0,
     },
     {
       name: 'storage',
       usage: usages.disk,
       limit: limits.disk,
-      limitType: limitsType.disk,
       required: getTotalStorage(formData) || 0,
     },
+    ...extendVolumeTypeQuotas(formData, usages, limits),
   ];
   if (project && project.billing_price_estimate) {
     quotas.push({
@@ -93,279 +125,187 @@ const getQuotas = ({formData, usages, limits, limitsType, project, components}) 
   return quotas;
 };
 
-const getFlavor = props =>
-  props.formData.flavor ? props.formData.flavor : {};
+const formDataSelector = state => (getFormValues('marketplaceOffering')(state) || {}) as FormData;
 
-const isValid = formData => !!formData.flavor;
+const formHasFlavorSelector = state => Boolean(formDataSelector(state).flavor);
 
-interface OpenstackInstanceCheckoutSummaryProps extends TranslateProps {
-  formData: {
-    name?: string;
-    service?: {name: string};
-    image?: {name: string};
-    flavor?: Flavor;
-  };
-  formValid?: boolean;
-  components: ServiceComponent;
-  usages: ServiceComponent;
-  limits: ServiceComponent;
-  limitsType: LimitsType;
-  customer: Customer;
-  project: Project;
-  offering: Offering;
-  total?: number;
-}
+const formIsValidSelector = state => isValid('marketplaceOffering')(state);
 
-export const PureOpenstackInstanceCheckoutSummary = (props: OpenstackInstanceCheckoutSummaryProps) => {
+const formAttributesSelector = state => {
+  const formData = formDataSelector(state);
+  return formData && formData.attributes ? formData.attributes : {};
+};
+
+const flavorSelector = state => {
+  const formAttrs = formAttributesSelector(state);
+  return formAttrs.flavor ? formAttrs.flavor : {};
+};
+
+export const OpenstackInstanceCheckoutSummary: React.FC<OwnProps> = ({ offering }) => {
+  const customer = useSelector(getCustomer);
+  const project = useSelector(getProject);
+  const formIsValid = useSelector(formIsValidSelector);
+  const formHasFlavor = useSelector(formHasFlavorSelector);
+  const formData = useSelector(formAttributesSelector);
+  const flavor = useSelector(flavorSelector);
+  const total = useSelector(state => pricesSelector(state, {offering})).total;
+  const components = React.useMemo(() => offering.plans.length > 0 ? offering.plans[0].prices : {}, [offering]);
+  const usages = React.useMemo(() => parseQuotasUsage(offering.quotas || []), [offering]);
+  const limits = React.useMemo(() => parseQuotas(offering.quotas || []), [offering]);
+  const dailyPrice = React.useMemo(() => getDailyPrice(formData, components), [formData, components]);
+
+  const quotas = React.useMemo(
+    () => getQuotas({ formData, usages, limits, project, components}),
+    [formData, usages, limits, project, components]
+  );
+
+  const orderItem = React.useMemo(() => formatOrderItemForCreate({
+    formData: {attributes: formData},
+    offering,
+    customer,
+    project,
+    total,
+    formValid: formIsValid,
+  }), [
+    formData,
+    offering,
+    customer,
+    project,
+    total,
+    formIsValid,
+  ]);
+
   return (
     <>
-      {!isValid(props.formData) && (
+      {!formIsValid && (
         <p id="invalid-info">
-          {props.formData.flavor && props.translate('Resource configuration is invalid. Please fix errors in form.')}
-          {!props.formData.flavor && props.translate('Please select flavor to see price estimate.')}
+          {formHasFlavor && translate('Resource configuration is invalid. Please fix errors in form.')}
+          {!formHasFlavor && translate('Please select flavor to see price estimate.')}
         </p>
       )}
-      {(!props.offering.shared && !props.offering.billable) && (
+      {(!offering.shared && !offering.billable) && (
         <p dangerouslySetInnerHTML={{
-          __html: props.translate('Note that this virtual machine will not be charged separately for {organization}.', {
-            organization: $sanitize(props.customer.name),
+          __html: translate('Note that this virtual machine will not be charged separately for {organization}.', {
+            organization: $sanitize(customer.name),
           }),
         }}/>
       )}
-      <OfferingLogo src={props.offering.thumbnail} size="small"/>
-      {isValid(props.formData) && (
+      <OfferingLogo src={offering.thumbnail} size="small"/>
+      {formIsValid && (
         <Table bordered={true}>
           <tbody>
-            {props.formData.name && (
+            {formData.name && (
               <tr>
                 <td>
-                  <strong>{props.translate('VM name')}</strong>
+                  <strong>{translate('VM name')}</strong>
                 </td>
-                <td>{props.formData.name}</td>
+                <td>{formData.name}</td>
               </tr>
             )}
             <tr>
               <td>
-                <strong>{props.translate('Image')}</strong>
+                <strong>{translate('Image')}</strong>
               </td>
-              <td>{props.formData.image && props.formData.image.name}</td>
+              <td>{formData.image && formData.image.name}</td>
             </tr>
             <tr>
               <td>
-                <strong>{props.translate('Flavor')}</strong>
+                <strong>{translate('Flavor')}</strong>
               </td>
-              <td>{getFlavor(props).name}</td>
+              <td>{flavor.name}</td>
             </tr>
             <tr>
               <td>
-                <strong>{props.translate('vCPU')}</strong>
+                <strong>{translate('vCPU')}</strong>
               </td>
-              <td>{`${getFlavor(props).cores} cores`}</td>
+              <td>{`${flavor.cores} cores`}</td>
             </tr>
             <tr>
               <td>
-                <strong>{props.translate('RAM')}</strong>
+                <strong>{translate('RAM')}</strong>
               </td>
               <td>
-                {formatFilesize(getFlavor(props).ram)}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>{props.translate('Total storage')}</strong>
-              </td>
-              <td>
-                {formatFilesize(getTotalStorage(props.formData))}
+                {formatFilesize(flavor.ram)}
               </td>
             </tr>
             <tr>
               <td>
-                <strong>{props.translate('Price per day')}</strong>
+                <strong>{translate('Total storage')}</strong>
+              </td>
+              <td>
+                {formatFilesize(getTotalStorage(formData))}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{translate('Price per day')}</strong>
                 {' '}
                 <PriceTooltip/>
               </td>
               <td>
-                {defaultCurrency(getDailyPrice(props.formData, props.components))}
+                {defaultCurrency(dailyPrice)}
               </td>
             </tr>
             <tr>
               <td>
-                <strong>{props.translate('Price per 30 days')}</strong>
+                <strong>{translate('Price per 30 days')}</strong>
                 {' '}
                 <PriceTooltip/>
               </td>
               <td>
-                {defaultCurrency(getMonthlyPrice(props.formData, props.components))}
+                {defaultCurrency(30 * dailyPrice)}
               </td>
             </tr>
             <tr>
               <td>
-                <strong>{props.translate('Invoiced to')}</strong>
+                <strong>{translate('Invoiced to')}</strong>
               </td>
-              <td>{props.customer.name}</td>
+              <td>{customer.name}</td>
             </tr>
             <tr>
               <td>
-                <strong>{props.translate('Project')}</strong>
+                <strong>{translate('Project')}</strong>
               </td>
-              <td>{props.project ? props.project.name : <span>&mdash;</span>}</td>
+              <td>{project ? project.name : <span>&mdash;</span>}</td>
             </tr>
             <tr>
               <td>
-                <strong>{props.translate('Offering')}</strong>
+                <strong>{translate('Offering')}</strong>
               </td>
-              <td>{props.offering.name}</td>
+              <td>{offering.name}</td>
             </tr>
             <tr>
             <td>
-              <strong>{props.translate('Service provider')}</strong>
+              <strong>{translate('Service provider')}</strong>
             </td>
             <td>
-              <ProviderLink customer_uuid={props.offering.customer_uuid}>
-                {props.offering.customer_name}
+              <ProviderLink customer_uuid={offering.customer_uuid}>
+                {offering.customer_name}
               </ProviderLink>
             </td>
           </tr>
-          {props.offering.rating && (
+          {offering.rating && (
             <tr>
-              <td><strong>{props.translate('Rating')}</strong></td>
-              <td><RatingStars rating={props.offering.rating} size="medium"/></td>
+              <td><strong>{translate('Rating')}</strong></td>
+              <td><RatingStars rating={offering.rating} size="medium"/></td>
             </tr>
           )}
           </tbody>
         </Table>
       )}
-      {props.components && (
-        <Panel title={props.translate('Limits')}>
-          <QuotaUsageBarChart quotas={getQuotas({
-            formData: props.formData,
-            usages: props.usages,
-            limits: props.limits,
-            limitsType: props.limitsType,
-            project: props.project,
-            components: props.components,
-          })}/>
+      {components && (
+        <Panel title={translate('Limits')}>
+          <QuotaUsageBarChart quotas={quotas}/>
         </Panel>
       )}
+      <div className="display-flex justify-content-between">
+        <ShoppingCartButtonContainer
+          item={orderItem}
+          flavor="primary"
+          disabled={!formIsValid}
+        />
+        <OfferingCompareButtonContainer offering={offering} flavor="secondary"/>
+      </div>
     </>
   );
 };
-
-interface OpenstackInstanceCheckoutSummaryComponentState {
-  loading: boolean;
-  loaded: boolean;
-  components: ServiceComponent;
-  usages: ServiceComponent;
-  limits: ServiceComponent;
-  limitsType: LimitsType;
-}
-
-interface OpenstackInstanceCheckoutSummaryComponentProps extends TranslateProps {
-  formData: {
-    name?: string;
-    service?: {name: string};
-    image?: {name: string};
-    flavor?: Flavor;
-  };
-  formValid: boolean;
-  customer: Customer;
-  project: Project;
-  offering: Offering;
-  total: number;
-}
-
-class OpenstackInstanceCheckoutSummaryComponent extends React.Component<OpenstackInstanceCheckoutSummaryComponentProps, OpenstackInstanceCheckoutSummaryComponentState> {
-  state = {
-    loading: false,
-    loaded: false,
-    components: null,
-    usages: null,
-    limits: null,
-    limitsType: null,
-  };
-
-  async loadData() {
-    try {
-      this.setState({loading: true});
-      let projectQuotas = [];
-      if (this.props.project) {
-        projectQuotas = await api.loadProjectQuotas(this.props.offering.scope_uuid, this.props.project.uuid);
-      }
-      const components = this.props.offering.plans.length > 0 ? this.props.offering.plans[0].prices : {};
-      const usages = parseQuotasUsage(this.props.offering.quotas || []);
-      const limits = parseQuotas(this.props.offering.quotas || []);
-      const aggregatedData = aggregateQuotasFromSPL({components, usages, limits}, projectQuotas);
-      this.setState({
-        loading: false,
-        loaded: true,
-        components: aggregatedData.components,
-        limits: aggregatedData.limits,
-        usages: aggregatedData.usages,
-        limitsType: aggregatedData.limitsType,
-      });
-    } catch (error) {
-      this.setState({loading: false, loaded: false});
-    }
-  }
-
-  componentDidMount() {
-    this.loadData();
-  }
-
-  render() {
-    const props = this.props;
-    if (this.state.loading) {
-      return <LoadingSpinner/>;
-    }
-
-    if (!this.state.loading && !this.state.loaded) {
-      return (
-        <h3 className="header-bottom-border text-center">
-          {props.translate('Unable to get checkout summary data.')}
-        </h3>
-      );
-    }
-
-    if (this.state.loaded) {
-      const { offering, customer, project, total, formData, formValid } = props;
-      return (
-        <>
-          <PureOpenstackInstanceCheckoutSummary {...this.props} {...this.state}/>
-          <div className="display-flex justify-content-between">
-            <ShoppingCartButtonContainer
-              item={formatOrderItemForCreate({
-                formData: {attributes: formData},
-                offering,
-                customer,
-                project,
-                total,
-                formValid,
-              })}
-              flavor="primary"
-              disabled={!props.formValid}
-            />
-            <OfferingCompareButtonContainer offering={props.offering} flavor="secondary"/>
-        </div>
-      </>
-      );
-    }
-  }
-}
-
-const mapStateToProps = (state, ownProps) => {
-  const formData: any = getFormValues('marketplaceOffering')(state);
-  return {
-    formData: formData && formData.attributes || {attributes: {}},
-    formValid: isFormValid('marketplaceOffering')(state),
-    customer: getCustomer(state),
-    project: getProject(state),
-    total: pricesSelector(state, ownProps).total,
-  };
-};
-
-const enhance = compose(
-  connect(mapStateToProps),
-  withTranslation,
-);
-
-export const OpenstackInstanceCheckoutSummary = enhance(OpenstackInstanceCheckoutSummaryComponent);

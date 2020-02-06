@@ -1357,6 +1357,11 @@ msgstr ""
 msgid "Create network for OpenStack tenant"
 msgstr ""
 
+#: src/rancher/cluster-actions/CreateNodeAction.ts
+#: src/rancher/cluster-actions/CreateNodeDialog.tsx
+msgid "Create node"
+msgstr ""
+
 #: src/user/hooks/hook-details.html
 msgid "Create notification"
 msgstr ""
@@ -2660,6 +2665,7 @@ msgstr ""
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 #: src/openstack/openstack-volume/actions/AttachAction.ts
+#: src/rancher/rancher-cluster-nodes.js
 msgid "Instance"
 msgstr ""
 
@@ -3823,11 +3829,20 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
+#: src/rancher/rancher-cluster-nodes.js
+msgid "Node"
+msgstr ""
+
+#: src/rancher/cluster-actions/CreateNodeDialog.tsx
+msgid "Node has been created."
+msgstr ""
+
 #: src/rancher/NodeAddButton.tsx
 msgid "Node plan"
 msgstr ""
 
 #: src/rancher/TenantGroup.tsx
+#: src/rancher/breadcrumbs.js
 #: src/rancher/module.js
 msgid "Nodes"
 msgstr ""
@@ -3842,6 +3857,7 @@ msgid "Not a valid value"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/rancher/rancher-cluster-nodes.js
 msgid "Not assigned"
 msgstr ""
 
@@ -4083,6 +4099,10 @@ msgstr ""
 msgid "OpenStack Images"
 msgstr ""
 
+#: src/rancher/RancherNodeSummary.tsx
+msgid "OpenStack Instance"
+msgstr ""
+
 #: src/openstack/events.ts
 msgid "OpenStack events"
 msgstr ""
@@ -4307,10 +4327,6 @@ msgstr ""
 
 #: src/table-react/TableExportButton.tsx
 msgid "PDF"
-msgstr ""
-
-#: src/quotas/constants.js
-msgid "Package amount"
 msgstr ""
 
 #: src/error/routes.js
@@ -4930,10 +4946,6 @@ msgstr ""
 msgid "Project roles"
 msgstr ""
 
-#: src/quotas/constants.js
-msgid "Project service"
-msgstr ""
-
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
@@ -5093,6 +5105,11 @@ msgstr ""
 #: src/project/ProjectCreateButton.tsx
 #: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
+msgstr ""
+
+#: src/quotas/QuotaUsageBarChart.tsx
+#: src/quotas/quota-usage-bar-chart.js
+msgid "Quota usage exceeds available limit."
 msgstr ""
 
 #: src/providers/details/provider-project-link-quota.html
@@ -5839,11 +5856,6 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/controllers/base-controller-class-es6.js
-#: src/controllers/base-controller-class.js
-msgid "Saving of {vm_name} was successful."
-msgstr ""
-
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
@@ -6500,6 +6512,7 @@ msgstr ""
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
+#: src/rancher/rancher-cluster-nodes.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
 #: src/resource/list/resources-list.js
@@ -7274,6 +7287,10 @@ msgstr ""
 msgid "Unable to create link."
 msgstr ""
 
+#: src/rancher/cluster-actions/CreateNodeDialog.tsx
+msgid "Unable to create node."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
 msgstr ""
@@ -7348,11 +7365,6 @@ msgstr ""
 msgid "Unable to generate service provider API secret code."
 msgstr ""
 
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-msgid "Unable to get checkout summary data."
-msgstr ""
-
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Unable to get form's data."
 msgstr ""
@@ -7419,6 +7431,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/rancher/cluster-actions/CreateNodeDialog.tsx
 #: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
 msgid "Unable to load data."
 msgstr ""
@@ -8069,10 +8082,6 @@ msgstr ""
 msgid "VMware Tools"
 msgstr ""
 
-#: src/vmware/marketplace.ts
-msgid "VMware Virtual Machine"
-msgstr ""
-
 #: src/resource/support/ChartContainer.tsx
 msgid "VPC RAM"
 msgstr ""
@@ -8598,6 +8607,10 @@ msgstr ""
 msgid "vCores"
 msgstr ""
 
+#: src/vmware/marketplace.ts
+msgid "vSphere Virtual Machine"
+msgstr ""
+
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
 msgstr ""
@@ -8688,11 +8701,6 @@ msgstr ""
 
 #: src/resource/events.ts
 msgid "{resource_name} has been deleted."
-msgstr ""
-
-#: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
-msgid "{type} quota usage exceeds available limit."
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx

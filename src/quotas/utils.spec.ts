@@ -1,4 +1,4 @@
-import { formatQuotaName, formatQuotaType, formatQuotaValue } from './utils';
+import { formatQuotaName, formatQuotaValue } from './utils';
 
 describe('formatQuotaName', () => {
   it('should return matching quota name from QUOTA_NAMES constant.', () => {
@@ -9,18 +9,6 @@ describe('formatQuotaName', () => {
   it('should return properly formatted quota name if absent in QUOTA_NAMES constant.', () => {
     const expected = 'Security groups';
     expect(formatQuotaName('security_groups')).toEqual(expected);
-  });
-});
-
-describe('formatQuotaType', () => {
-  it('should return matching quota type from QUOTA_TYPES constant.', () => {
-    const expected = 'Package amount';
-    expect(formatQuotaType('QUOTA_PACKAGE_TYPE')).toEqual(expected);
-  });
-
-  it('should return properly formatted quota type if absent in QUOTA_TYPES constant.', () => {
-    const expected = 'Quota instance type';
-    expect(formatQuotaType('quota instance type')).toEqual(expected);
   });
 });
 

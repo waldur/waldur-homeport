@@ -8005,7 +8005,7 @@ msgid "VMware Tools"
 msgstr ""
 
 #: src/vmware/marketplace.ts
-msgid "VMware Virtual Machine"
+msgid "vSphere Virtual Machine"
 msgstr ""
 
 #: src/resource/support/ChartContainer.tsx
