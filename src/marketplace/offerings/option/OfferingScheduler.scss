@@ -23,3 +23,16 @@
     margin-top: 0px;
   }
 }
+
+.component-separator {
+  margin: 50px 0;
+  position: relative;
+  & span {
+    background-color: white;
+    padding: 0 16px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
