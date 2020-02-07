@@ -31,7 +31,6 @@ export default function baseControllerListClass(ENV, $rootScope, currentStateSer
       this.userFilter = this.getUserFilter();
       this.selectFilter = this.getSelectFilter();
       this.orderField = '';
-      this._super();
       this.hideNoDataText = true;
       this.initialized = false;
       loadDatatables().then(() => {
