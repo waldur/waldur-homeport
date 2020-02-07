@@ -113,7 +113,6 @@ tableModule(appModule);
 i18nModule(appModule);
 modalModule(appModule);
 configModule(appModule);
-controllersModule(appModule);
 servicesModule(appModule);
 freeipaModule(appModule);
 ansibleModule(appModule);
