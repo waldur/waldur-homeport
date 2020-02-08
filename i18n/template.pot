@@ -1922,7 +1922,7 @@ msgstr ""
 msgid "Email update"
 msgstr ""
 
-#: src/user/support/UserEmailChangeDialog.tsx
+#: src/user/support/useEmailChange.ts
 msgid "Email verification has been sent. Please check your inbox."
 msgstr ""
 
@@ -3581,6 +3581,10 @@ msgstr ""
 #: src/openstack/openstack-tenant/tabs.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
+msgstr ""
+
+#: src/user/support/EmailChangeForm.tsx
+msgid "New e-mail address"
 msgstr ""
 
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -5506,6 +5510,10 @@ msgstr ""
 msgid "Requested by"
 msgstr ""
 
+#: src/user/support/EmailChangeForm.tsx
+msgid "Requested e-mail"
+msgstr ""
+
 #: src/user/support/EmailField.tsx
 msgid "Requested email"
 msgstr ""
@@ -7262,7 +7270,7 @@ msgid "Unable to cancel order item."
 msgstr ""
 
 #: src/user/support/UserEmailChangeCallback.tsx
-#: src/user/support/UserEmailChangeDialog.tsx
+#: src/user/support/useEmailChange.ts
 msgid "Unable to change email."
 msgstr ""
 
@@ -8136,6 +8144,10 @@ msgstr ""
 
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 msgid "Variable #{index}"
+msgstr ""
+
+#: src/user/support/EmailChangeForm.tsx
+msgid "Verify e-mail"
 msgstr ""
 
 #: src/user/support/UserEmailChangeCallback.tsx
