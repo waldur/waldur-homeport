@@ -19,6 +19,7 @@ import { UserDetails } from '@waldur/workspace/types';
 
 import '../user-edit.scss';
 import * as actions from './actions';
+import { EmailChangeForm } from './EmailChangeForm';
 
 interface UserUpdateComponentProps {
   showDeleteButton: boolean;
@@ -26,6 +27,9 @@ interface UserUpdateComponentProps {
 }
 
 const UserUpdateComponent: React.FC<UserUpdateComponentProps> = props => {
+  if (!props.user.email) {
+    return <EmailChangeForm user={props.user}/>;
+  }
   return (
     <div className="row">
       <div className="col-sm-2 col-xs-12 user-edit">

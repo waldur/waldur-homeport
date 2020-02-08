@@ -9,8 +9,8 @@ export default function usersService(baseServiceClass, $q, ENV, $rootScope) {
 
     setCurrentUser: function(user) {
       // TODO: Migrate to Redux and make code DRY
-      $rootScope.$broadcast('CURRENT_USER_UPDATED', {user});
       this.currentUser = user;
+      return $rootScope.$broadcast('CURRENT_USER_UPDATED', {user});
     },
 
     resetCurrentUser: function() {
