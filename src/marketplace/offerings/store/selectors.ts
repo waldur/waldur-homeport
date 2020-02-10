@@ -27,7 +27,7 @@ export const getComponents = (state, type): OfferingComponent[] => {
   ];
 };
 
-const getForm = formValueSelector(FORM_ID);
+export const getForm = formValueSelector(FORM_ID);
 
 export const getTypeLabel = (state: any): string => {
   const option = getForm(state, 'type');
