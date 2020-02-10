@@ -66,7 +66,7 @@ function ActionDialogController(
       });
     },
     submitActive: function() {
-      return $scope.ActionForm.$dirty || $scope.action.method === 'DELETE';
+      return $scope.ActionForm.$dirty || $scope.action.method === 'DELETE' || !$scope.action.fields;
     },
     submitForm: function () {
       if ($scope.ActionForm.$invalid) {
