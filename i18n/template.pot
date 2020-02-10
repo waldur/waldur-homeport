@@ -1800,6 +1800,10 @@ msgstr ""
 msgid "Do you really want to delete comment?"
 msgstr ""
 
+#: src/rancher/node-actions/UnlinkAction.ts
+msgid "Do you want to unlink instance {name}?"
+msgstr ""
+
 #: src/rancher/RancherNodeSummary.tsx
 msgid "Docker version"
 msgstr ""
@@ -7717,6 +7721,10 @@ msgstr ""
 #: src/analytics/ResourceAnalysisItem.tsx
 #: src/freeipa/freeipa-quota.html
 msgid "Unlimited"
+msgstr ""
+
+#: src/rancher/node-actions/UnlinkAction.ts
+msgid "Unlink instance"
 msgstr ""
 
 #: src/paypal/paypal-invoices-list.js
