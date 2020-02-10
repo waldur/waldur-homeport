@@ -17,7 +17,7 @@ export const AceField = props => {
     async function load() {
       try {
         EditorRef.current = await import(/* webpackChunkName: "react-ace" */ 'react-ace');
-        configureAce(window.ace);
+        configureAce((window as unknown as {ace: any}).ace);
         setLoaded(true);
       } catch {
         setLoaded(false);
