@@ -16,16 +16,28 @@ export interface TimeSelectProps {
   name: string;
   value: DateInput;
   className?: string | string[];
+  icon?: boolean;
   interval?: number;
   isDisabled?: boolean;
   label?: string | ReactElement;
 }
 
-export interface PureDateProps extends TimeSelectProps {
-  withTime?: TimeSelectProps;
+export interface PureDateProps {
+  onChange: (value) => void;
+  name: string;
+  value: DateInput;
+  className?: string | string[];
+  isDisabled?: boolean;
+  label?: string | ReactElement;
+  withTime?: {
+    className?: string | string[];
+    interval?: number;
+    isDisabled?: boolean;
+    label?: string | ReactElement;
+  };
 }
 
-export interface UpdateProp {
+export interface UpdateProps {
   meta: {
     form: string;
     field: string;

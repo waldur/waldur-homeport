@@ -4,6 +4,7 @@ import * as React from 'react';
 import * as DatePicker from 'react-16-bootstrap-date-picker';
 
 import {TimeSelectField} from '@waldur/booking/components/TimeSelectField';
+
 import { PureDateProps } from '../store/types';
 
 const handleChange = (newDate, newTime): any => moment(`${newDate} ${newTime}`, 'DD-MM-YYYY', true).toDate();
@@ -23,18 +24,17 @@ export const PureDateField = (props: PureDateProps) => (
       todayButtonLabel={'Today'}
       dateFormat="DD-MM-YYYY"
       value={moment(props.value).format()}
-      onChange={(_, formattedValue) => props.onChange(
-        handleChange(formattedValue, moment(props.value).format('HH:mm'))
+      onChange={ (_, formattedValue) => props.onChange(
+        handleChange( formattedValue, moment(props.value).format('HH:mm') )
       )}
     />
     {
-      props.withTime && <TimeSelectField
-        {...props.withTime}
+      props.withTime && <TimeSelectField {...props.withTime}
         name={props.name}
         label={<i className="fa fa-clock-o" />}
         value={moment(props.value).format('HH:mm')}
-        onChange={newTime => props.onChange(
-          handleChange(moment(props.value).format(), newTime)
+        onChange={ newTime => props.onChange(
+          handleChange( moment(props.value).format(), newTime )
         )}
       />
     }

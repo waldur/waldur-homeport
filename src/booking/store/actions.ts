@@ -1,5 +1,7 @@
-import * as constants from '../constants';
 import {EventInput} from '@fullcalendar/core/structs/event';
+
+import * as constants from '../constants';
+import { UpdateProps } from './types';
 
 export const fetchBookingItems = payload => ({
   type: constants.BOOKINGS_FETCH,
