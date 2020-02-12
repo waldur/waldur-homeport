@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
 import { reducer as analytics } from '@waldur/analytics/reducers';
-import { reducer as bookings } from '@waldur/booking/store/reducer';
+import { reducer as calendar } from '@waldur/booking/store/reducer';
 import { reducer as downloadLink } from '@waldur/core/DownloadLink/reducers';
 import { reducer as issues } from '@waldur/issues/reducers';
 import { reducer as marketplace } from '@waldur/marketplace/store/reducers';
@@ -26,5 +26,5 @@ export default combineReducers({
   resource,
   serviceUsage,
   marketplace,
-  bookings,
+  calendar,
 });
