@@ -36,7 +36,6 @@ export const PureDateField = (props: PureDateProps) => (
         onChange={ newTime => props.onChange(
           handleChange( moment(props.value).format(), newTime )
         )}
-      />
-    }
+      />}
   </>
 );
