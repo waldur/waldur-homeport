@@ -82,3 +82,24 @@
     transform: translateX(50%) translateY(-50%);
   }
 }
+
+.fc-head {
+  background-color: white;
+  & .table-bordered>thead>tr>th {
+    border: 0;
+    padding: 8px;
+    background-color: white;
+  }
+}
+.fc-day-header {
+  border: 0;
+  padding: 8px
+}
+
+.fc-disabled-day {
+  background-color: rgba(0,0,0,.01);
+}
+
+.date-input-group {
+  display: table;
+}
