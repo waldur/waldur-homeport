@@ -7,7 +7,7 @@ import {TimeSelectField} from '@waldur/booking/components/TimeSelectField';
 
 import { PureDateProps } from '../store/types';
 
-const handleChange = (newDate, newTime): any => moment(`${newDate} ${newTime}`, 'DD-MM-YYYY', true).toDate();
+const handleChange = (newDate, newTime): Date => moment(`${newDate} ${newTime}`, 'DD-MM-YYYY HH:mm', true).toDate();
 
 export const PureDateField = (props: PureDateProps) => (
   <>
@@ -28,14 +28,16 @@ export const PureDateField = (props: PureDateProps) => (
         handleChange( formattedValue, moment(props.value).format('HH:mm') )
       )}
     />
-    {
-      props.withTime && <TimeSelectField {...props.withTime}
+    {props.withTime &&
+      <TimeSelectField
+        {...props.withTime}
         name={props.name}
         label={<i className="fa fa-clock-o" />}
         value={moment(props.value).format('HH:mm')}
         onChange={ newTime => props.onChange(
-          handleChange( moment(props.value).format(), newTime )
+          handleChange( moment(props.value).format('DD-MM-YYYY'), newTime )
         )}
-      />}
+      />
+    }
   </>
 );
