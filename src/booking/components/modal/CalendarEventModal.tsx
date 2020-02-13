@@ -90,7 +90,7 @@ export class CalendarEventModal extends React.Component<CalendarEventModalProps,
                   id="AllDay"
                   type="checkbox"
                   checked={allDay}
-                  onChange={() => this.handleChange('allDay', !allDay) }
+                  onChange={() => this.handleChange('allDay', !allDay)}
                   />
                 <label style={{marginTop: 5, marginLeft: 30}} htmlFor="AllDay">Allday weekends</label>
               </div>
