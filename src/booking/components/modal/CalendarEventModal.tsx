@@ -1,11 +1,12 @@
 import {EventInput} from '@fullcalendar/core';
-import * as moment from 'moment';
+import {DateInput} from '@fullcalendar/core/datelib/env';
 import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
 import * as Modal from 'react-bootstrap/lib/Modal';
 
-import {DateAndTimeSelectField} from '@waldur/booking/components/modal/DateAndTimeSelect';
+import {PureDateField} from '@waldur/booking/components/PureDateField';
 import {translate} from '@waldur/i18n';
+import {FormGroup} from '@waldur/marketplace/offerings/FormGroup';
 
 interface CalendarEventModalProps {
   title: string;
@@ -29,8 +30,8 @@ export class CalendarEventModal extends React.Component<CalendarEventModalProps,
     const { event } = props.modalProps;
     this.state = {
       title: event && event.title || '',
-      start: event && event.start,
-      end: event && event.end,
+      start: event && event.start as DateInput,
+      end: event && event.end as DateInput,
       allDay: event && event.allDay,
     };
   }
@@ -46,82 +47,73 @@ export class CalendarEventModal extends React.Component<CalendarEventModalProps,
   }
 
   handleChange(name, value) {
-    this.setState(prevState => ({ ...prevState, [name]: value }));
+    this.setState(prevState => ({ ...prevState, [name]: value}));
   }
 
   render() {
-    const {
-      props: { closeModal, isOpen, modalProps: {event} },
-      state: { title, start, end, allDay },
-    } = this;
-
+    const { closeModal, isOpen, modalProps: {event} } = this.props;
+    const { start, end, allDay, title } = this.state;
     return (
       <Modal show={isOpen} onHide={closeModal}>
         <Modal.Header style={{backgroundColor: '#1ab394', color: '#f3f3f4'}}>
           <h2 className="col-sm-offset-2 col-sm-9">
-            {event.extendedProps.type === 'availability'
-              ? translate('Create an availability')
-              : translate('Edit booking event')}
+            {event.extendedProps.type === 'availability' ? translate('Edit availability') : translate('Edit booking')}
           </h2>
         </Modal.Header>
         <Modal.Body>
           <form className="form-horizontal">
-
-            <div className="form-group">
-              <label className="control-label col-sm-2">{translate('Title')}</label>
-              <div className="col-sm-9">
+            <FormGroup label={translate('Start')} labelClassName="control-label col-sm-2">
+              <PureDateField
+                name="start"
+                value={start}
+                onChange={newValue => this.handleChange('start', newValue)}
+                withTime={{isDisabled: allDay}}/>
+            </FormGroup>
+            <FormGroup label={translate('End')} labelClassName="control-label col-sm-2">
+              <PureDateField
+                name="end"
+                value={end}
+                onChange={newValue => this.handleChange('end', newValue)}
+                withTime={{ isDisabled: allDay}}/>
+            </FormGroup>
+            <FormGroup label={translate('Title')} labelClassName="control-label col-sm-2" valueClassName="col-sm-9">
+              <input
+                name="title"
+                type="text"
+                className="form-control"
+                value={title}
+                onChange={({target}) => this.handleChange(target.name, target.value)}/>
+            </FormGroup>
+            <FormGroup label="All Day" labelClassName="control-label col-sm-2" valueClassName="col-sm-offset-1">
+              <div className="checkbox-toggle">
                 <input
-                  name="title"
-                  type="text"
-                  className="form-control"
-                  value={title}
-                  onChange={e => this.handleChange(e.target.name, e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label className="control-label col-sm-2">{translate('All day')}</label>
-              <div className="col-sm-9" style={{paddingTop: 7}}>
-                <div className="checkbox-toggle">
-                  <input
-                    id="AllDay"
-                    type="checkbox"
-                    checked={allDay}
-                    onChange={() => this.setState(
-                      prevState => ({ allDay: !prevState.allDay })
-                    )}
+                  id="AllDay"
+                  type="checkbox"
+                  checked={allDay}
+                  onChange={() => this.handleChange('allDay', !allDay) }
                   />
-                  <label htmlFor="AllDay">Allday toggle</label>
-                </div>
+                <label style={{marginTop: 5, marginLeft: 30}} htmlFor="AllDay">Allday weekends</label>
               </div>
-            </div>
-
-            <DateAndTimeSelectField
-              name="start"
-              minuteStep={30}
-              label={translate('Start')}
-              isDisabled={allDay}
-              currentTime={moment.utc(start, 'DD/MM/YYYY HH:mm', true)}
-              onChange={newDateValue => this.handleChange('start', newDateValue)}
-            />
-
-            <DateAndTimeSelectField
-              name="end"
-              label={translate('End')}
-              minuteStep={30}
-              isDisabled={allDay}
-              currentTime={moment.utc(end, 'DD/MM/YYYY HH:mm', true)}
-              onChange={newDateValue => this.handleChange('end', newDateValue)}
-            />
-
+            </FormGroup>
             <div className="row" style={{marginTop: 30}}>
-              <Button className="col-sm-offset-2 col-sm-2 btn-delete" style={{borderColor: 'transparent'}} onClick={() => this.handleDelete()}>
-                {translate('Delete')}</Button>
-              <Button className="col-sm-offset-1 col-sm-2" style={{borderColor: 'transparent'}} onClick={closeModal}>
-                {translate('Cancel')}</Button>
-              <Button className="col-sm-offset-1 col-sm-2" bsStyle="primary" onClick={() => this.handleSubmit()}>
-                {translate('Save')}</Button>
+              <Button
+                className="col-sm-offset-2 col-sm-2 btn-delete"
+                style={{borderColor: 'transparent'}}
+                onClick={() => this.handleDelete()}>
+                {translate('Delete')}
+              </Button>
+              <Button
+                className="col-sm-offset-1 col-sm-2"
+                style={{borderColor: 'transparent'}}
+                onClick={closeModal}>
+                {translate('Cancel')}
+              </Button>
+              <Button
+                className="col-sm-offset-1 col-sm-2"
+                bsStyle="primary"
+                onClick={() => this.handleSubmit()}>
+                {translate('Save')}
+              </Button>
             </div>
           </form>
         </Modal.Body>
