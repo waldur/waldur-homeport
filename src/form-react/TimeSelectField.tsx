@@ -15,6 +15,7 @@ function getMomentDayRange(interval = 5) {
     timeArray.push(start.clone());
     start.add(interval, 'minutes');
   }
+  timeArray.push(end);
   return timeArray;
 }
 
