@@ -6,9 +6,22 @@ export interface State {
   loading: boolean;
   errors: any[];
   events: EventInput[];
-  schedules: object[];
-  bookings: object[];
-  config: object;
+  schedules: EventInput[];
+  bookings: EventInput[];
+  config: ConfigProps;
+}
+
+export interface ConfigProps {
+  weekends: boolean;
+  businessHours?: {
+    startTime?: string
+    endTime?: string;
+    daysOfWeek?: number[];
+  };
+  slotDuration?: string;
+  minTime?: string;
+  maxTime?: string;
+  hiddenDays?: number[];
 }
 
 export interface TimeSelectProps {
@@ -34,14 +47,16 @@ export interface PureDateProps {
     interval?: number;
     isDisabled?: boolean;
     label?: string | ReactElement;
-  };
+  } | boolean;
 }
 
 export interface UpdateProps {
-  meta: {
+  meta?: {
     form: string;
     field: string;
   };
   event: EventInput;
-  oldEvent: EventInput;
+  oldId?: EventInput['id'];
+  oldEvent?: EventInput;
+  prevEvent?: EventInput;
 }

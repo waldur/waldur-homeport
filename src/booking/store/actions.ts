@@ -1,5 +1,3 @@
-import {EventInput} from '@fullcalendar/core/structs/event';
-
 import * as constants from '../constants';
 import { UpdateProps } from './types';
 
@@ -37,22 +35,20 @@ export const rejectBookingItem = payload => ({
   },
 });
 
-export const addBooking = (payload: {event: EventInput, meta?: {form: string, field: string}}) => ({
+export const addBooking = payload => ({
   type: constants.ADD_BOOKING,
-  meta: {
-    form: payload.meta.form,
-    field: payload.meta.field,
-  },
   payload: {
-    id: payload.event.id,
-    start: payload.event.start,
-    end: payload.event.end,
-    type: payload.event.type,
-    title: payload.event.title,
+    id: payload.id,
+    start: payload.start,
+    end: payload.end,
+    type: payload.type,
+    title: payload.title,
+    allDay: payload.allDay,
+    extendedProps: payload.extendedProps,
   },
 });
 
-export const removeBooking = (bookingId: EventInput['id']) => ({
+export const removeBooking = (bookingId: number | string) => ({
   type: constants.REMOVE_BOOKING,
   payload: {
     bookingId,
@@ -62,17 +58,22 @@ export const removeBooking = (bookingId: EventInput['id']) => ({
 export const updateBooking = (payload: UpdateProps) => ({
   type: constants.UPDATE_BOOKING,
   payload: {
-    meta: {
-      form: payload.meta.form,
-      field: payload.meta.field,
-    },
-    oldId: payload.oldEvent.id,
+    oldId: payload.event.id,
     event: {
       id: payload.event.id,
       start: payload.event.start,
+      allDay: payload.event.allDay,
       end: payload.event.end,
       type: payload.event.type,
       title: payload.event.title,
+      extendedProps: payload.event.extendedProps,
     },
+  },
+});
+
+export const setSettings = payload => ({
+  type: constants.UPDATE_CONFIG,
+  payload: {
+    config: payload,
   },
 });

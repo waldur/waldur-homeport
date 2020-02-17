@@ -5,9 +5,14 @@ const INITIAL_STATE: State = {
   bookings: [],
   schedules: [],
   config: {
-    weekend: true,
-    minTIme: '00:00',
+    weekends: true,
+    minTime: '00:00',
     maxTime: '24:00',
+    businessHours: {
+      startTime: '00:00',
+      endTime: '23:59',
+      daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
+    },
   },
   loading: false,
   events: [],
@@ -35,11 +40,10 @@ export const reducer = (state = INITIAL_STATE, action) => {
       };
 
     case constants.ADD_BOOKING:
-      const { field } = action.meta;
       return {
         ...state,
-        [field]: [
-          ...state[field],
+        events: [
+          ...state.events,
           payload,
         ],
       };
@@ -63,6 +67,15 @@ export const reducer = (state = INITIAL_STATE, action) => {
         events: [
           ...removedList,
         ],
+      };
+
+    case constants.UPDATE_CONFIG:
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          ...payload.config,
+        },
       };
 
     default:
