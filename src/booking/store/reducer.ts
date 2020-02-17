@@ -14,9 +14,6 @@ const INITIAL_STATE: State = {
       daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
     },
   },
-  loading: false,
-  events: [],
-  errors: [],
 };
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -42,18 +39,18 @@ export const reducer = (state = INITIAL_STATE, action) => {
     case constants.ADD_BOOKING:
       return {
         ...state,
-        events: [
-          ...state.events,
+        bookings: [
+          ...state.bookings,
           payload,
         ],
       };
 
     case constants.UPDATE_BOOKING:
       const { event, oldId } = payload;
-      const updatedList = state.events.filter(item => item.id !== oldId);
+      const updatedList = state.bookings.filter(item => item.id !== oldId);
       return {
         ...state,
-        events: [
+        bookings: [
           ...updatedList,
           event,
         ],
@@ -61,10 +58,10 @@ export const reducer = (state = INITIAL_STATE, action) => {
 
     case constants.REMOVE_BOOKING:
       const { bookingId } = payload;
-      const removedList = state.events.filter(item => item.id !== bookingId);
+      const removedList = state.bookings.filter(item => item.id !== bookingId);
       return {
         ...state,
-        events: [
+        bookings: [
           ...removedList,
         ],
       };

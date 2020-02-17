@@ -3,16 +3,13 @@ import {EventInput} from '@fullcalendar/core/structs/event';
 import {ReactElement} from 'react';
 
 export interface State {
-  loading: boolean;
-  errors: any[];
-  events: EventInput[];
   schedules: EventInput[];
   bookings: EventInput[];
   config: ConfigProps;
 }
 
 export interface ConfigProps {
-  weekends: boolean;
+  weekends?: boolean;
   businessHours?: {
     startTime?: string
     endTime?: string;

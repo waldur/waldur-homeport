@@ -30,6 +30,12 @@ export const eventsMapper = events => events.map(event => {
   return event;
 });
 
+export function formatAvailabilityEvent(event) {
+  event.rendering = 'background';
+  event.groupId = 'availableForBooking';
+  event.backgroundColor = 'green';
+}
+
 interface DayRender {
   date: Date;
   el: HTMLElement;

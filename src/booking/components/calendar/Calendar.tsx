@@ -20,6 +20,7 @@ import { defaultConfig } from './defaultConfig';
 
 export const Calendar = (props: OptionsInput) => (
   <FullCalendar
+    showNonCurrentDates={true}
     plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin, bootstrapPlugin, momentTimezonePlugin, momentPlugin, listPlugin ]}
     {...defaultConfig}
     {...props} />
