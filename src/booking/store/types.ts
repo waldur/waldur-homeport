@@ -11,9 +11,9 @@ export interface State {
 export interface ConfigProps {
   weekends?: boolean;
   businessHours?: {
-    startTime?: string
-    endTime?: string;
-    daysOfWeek?: number[];
+    startTime: string
+    endTime: string;
+    daysOfWeek: number[];
   };
   slotDuration?: string;
   minTime?: string;

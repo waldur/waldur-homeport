@@ -1,6 +1,7 @@
 import * as moment from 'moment';
 import * as React from 'react';
 import {useDispatch} from 'react-redux';
+import Select from 'react-select';
 
 import {TimeSelectField} from '@waldur/booking/components/TimeSelectField';
 import {setSettings} from '@waldur/booking/store/actions';
@@ -8,13 +9,21 @@ import {Tooltip} from '@waldur/core/Tooltip';
 import {translate} from '@waldur/i18n';
 import {FormGroup} from '@waldur/marketplace/offerings/FormGroup';
 
-const days: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const daysArray = [1, 2, 3, 4, 5, 6, 0]; // 1= mon, 2= thu..
+const timeSlotHours = [0.5, 1, 2, 3, 4, 5, 6, 7, 8, 24 ];
+
+const getDayLabel = (d: number): string => moment.weekdays(d);
+const timeSlotOptions = timeSlotHours.map(time => ({
+  value: time,
+  label: moment.duration(time, 'hour').humanize(),
+}));
 
 export const CalendarSettings: React.FC = () => {
   const [weekends, setWeekends] = React.useState<boolean>(true);
   const [minTime, setMinTime] = React.useState<string>(moment().startOf('day').format('HH:mm'));
   const [maxTime, setMaxTime] = React.useState<string>(moment().endOf('day').format('HH:mm'));
-  const [daysOfWeek, setDaysOfWeek] = React.useState<number[]>([0, 1, 2, 3, 4, 5, 6]);
+  const [daysOfWeek, setDaysOfWeek] = React.useState<number[]>(daysArray);
+  const [slotDuration, setSlotDuration] = React.useState<number>(0.5);
   const dispatch = useDispatch();
 
   const handle = e => {
@@ -32,6 +41,7 @@ export const CalendarSettings: React.FC = () => {
         weekends,
         minTime,
         maxTime,
+        slotDuration: moment(slotDuration, 'hours').format('HH:mm'),
         businessHours: {
           startTime: minTime,
           endTime: maxTime,
@@ -40,14 +50,14 @@ export const CalendarSettings: React.FC = () => {
       };
       dispatch(setSettings(config));
     },
-    [weekends, minTime, maxTime, daysOfWeek]
+    [weekends, minTime, maxTime, daysOfWeek, slotDuration]
   );
 
   return (
     <>
       <FormGroup
         label={translate('Business hours')}
-        labelClassName="control-label col-sm-3"
+        labelClassName="control-label col-sm-4"
         description={translate('Daily available booking time range')}>
         <TimeSelectField label="from" name="minTime" value={minTime} onChange={setMinTime}/>
         <TimeSelectField label="till" name="maxTime" value={maxTime} onChange={setMaxTime}/>
@@ -55,10 +65,9 @@ export const CalendarSettings: React.FC = () => {
 
       <FormGroup
         label={translate('Include weekends')}
-        labelClassName="control-label col-sm-3"
-        valueClassName="col-sm-9"
+        labelClassName="control-label col-sm-4"
         description={translate('Allow bookings to be scheduled at weekends')}>
-        <div className="checkbox-toggle col-centered">
+        <div className="checkbox-toggle">
           <input type="checkbox" id="weekendsToggle" checked={weekends} onChange={() => setWeekends(!weekends)}/>
           <label style={{margin: '5px 0 0 30px'}} htmlFor="weekendsToggle">Toggle weekends</label>
         </div>
@@ -66,31 +75,37 @@ export const CalendarSettings: React.FC = () => {
 
       <FormGroup
         label={translate('Select available weekdays')}
-        labelClassName="control-label col-sm-3"
-        valueClassName="col-sm-9 weekDays-selector"
+        labelClassName="control-label col-sm-4"
         description={translate('Allow bookings to be scheduled at weekends')}>
-        {
-          days.map((day, index) => (
-            <Tooltip label={day} id={`weekday-${day}`}>
+        <div className="weekDays-selector" style={{margin: '5px 20px', display: 'flex', justifyContent: 'space-between'}}>
+          {daysArray.map(day => (
+            <Tooltip label={getDayLabel(day)} id={`weekday-${day}`}>
               <input
                 type="checkbox"
-                value={index}
                 id={`weekday-${day}`}
-                checked={daysOfWeek.includes(index)}
-                onChange={handle}
-                className="weekday"/>
-              <label htmlFor={`weekday-${day}`}>{day[0].toUpperCase()}</label>
+                className="weekday"
+                value={day}
+                checked={daysOfWeek.includes(day)}
+                onChange={handle}/>
+              <label htmlFor={`weekday-${day}`}>{getDayLabel(day)[0]}</label>
             </Tooltip>
-          ))
-        }
+          ))}
+        </div>
       </FormGroup>
 
       <FormGroup
         label={translate('Time slot')}
-        labelClassName="control-label col-sm-3"
-        valueClassName="col-sm-9"
+        labelClassName="control-label col-sm-4"
         description={translate('Booking time slot duration')}>
-        <TimeSelectField interval={60} label="from" name="minTime" value={minTime} onChange={setMinTime}/>
+        <Select
+          name="timeSlotSelect"
+          simpleValue={true}
+          searchable={false}
+          clearable={false}
+          options={timeSlotOptions}
+          value={slotDuration}
+          onChange={e => setSlotDuration(e)}
+        />
       </FormGroup>
     </>
   );
