@@ -6,19 +6,26 @@ import {getOptions} from '@waldur/form-react/TimeSelectField';
 
 import { TimeSelectProps } from '../store/types';
 
-export const  TimeSelectField = (props: TimeSelectProps) => (
+export const TimeSelectField = (props: TimeSelectProps) => (
   <>
     {
-      (props.label || props.icon) &&
-      <label htmlFor={`react-select-${props.name}--value`} className={classNames(
-        'control-label', 'col-sm-1', {disabled: props.isDisabled}
-        )}>
-        {props.label || <i className="fa fa-clock-o" />}
+      (props.label || props.icon) && <label
+        htmlFor={`react-select-${props.name}--value`}
+        className={classNames(
+          'control-label',
+          props.icon ? 'col-xs-1' : 'col-xs-2',
+          { disabled: props.isDisabled }
+          )}>
+        {props.label || props.icon && <i className="fa fa-clock-o" />}
       </label>
     }
     <Select
       instanceId={props.name}
-      className={classNames( props.className, props.label ? 'col-sm-5' : 'col-sm-6', { disabled: props.isDisabled } )}
+      className={classNames(
+        props.className,
+        props.label ? 'col-xs-4' : 'col-xs-5',
+        { disabled: props.isDisabled }
+        )}
       name={props.name}
       simpleValue={true}
       searchable={false}
