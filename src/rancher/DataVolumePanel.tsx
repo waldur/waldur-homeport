@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Panel from 'react-bootstrap/lib/Panel';
 import { Option } from 'react-select';
-import { FormSection } from 'redux-form';
+import { FormSection, FormName } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { RemoveButton } from '@waldur/marketplace/offerings/RemoveButton';
@@ -27,11 +27,16 @@ export const DataVolumePanel = (props: OwnProps) => (
     </Panel.Heading>
     <Panel.Body>
       <FormSection name={props.volumePath}>
-        <VolumeMountPointGroup
-          nodeIndex={props.nodeIndex}
-          volumeIndex={props.volumeIndex}
-          mountPoints={props.mountPoints}
-        />
+        <FormName>
+          {({ form }) => (
+            <VolumeMountPointGroup
+              form={form}
+              nodeIndex={props.nodeIndex}
+              volumeIndex={props.volumeIndex}
+              mountPoints={props.mountPoints}
+            />
+          )}
+        </FormName>
         <VolumeSizeGroup
           nodeIndex={props.nodeIndex}
           volumeIndex={props.volumeIndex}

@@ -6,7 +6,7 @@ import { DataVolumePanel } from './DataVolumePanel';
 
 export const DataVolumesList = props => (
   <div className="form-group">
-    <Col smOffset={4} sm={8}>
+    <Col smOffset={props.smOffset} sm={props.sm}>
       {props.fields.map((volume, index) => (
         <DataVolumePanel
           key={index}
@@ -25,3 +25,8 @@ export const DataVolumesList = props => (
     </Col>
   </div>
 );
+
+DataVolumesList.defaultProps = {
+  smOffset: 4,
+  sm: 8,
+};

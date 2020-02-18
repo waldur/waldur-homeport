@@ -8,13 +8,10 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { getMinSize } from './getMinSize';
 import { IntegerUnitField } from './IntegerUnitField';
+import { getDataVolumes } from './utils';
 
 const createVolumeSizeValidator = (nodeIndex, volumeIndex) => (value, allValues) => {
-  const nodes = allValues.attributes.nodes;
-  if (nodeIndex >= nodes.length) {
-    return;
-  }
-  const volumes = nodes[nodeIndex].data_volumes || [];
+  const volumes = getDataVolumes(nodeIndex, allValues);
   if (volumeIndex >= volumes.length) {
     return;
   }

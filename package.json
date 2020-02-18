@@ -1,6 +1,6 @@
 {
   "name": "waldur-homeport",
-  "version": "4.4.8",
+  "version": "4.4.9",
   "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://github.com/opennode/waldur-homeport",
   "license": "MIT",
@@ -92,6 +92,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.4",
     "react-16-bootstrap-date-picker": "^5.1.2",
+    "react-ace": "^8.0.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.8.4",
     "react-dropzone": "4.1.3",
