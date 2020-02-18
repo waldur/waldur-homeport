@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import * as React from 'react';
 import {useDispatch} from 'react-redux';
-import Select from 'react-select';
+import Select, { Options } from 'react-select';
 
 import {TimeSelectField} from '@waldur/booking/components/TimeSelectField';
 import {setSettings} from '@waldur/booking/store/actions';
@@ -9,7 +9,7 @@ import {Tooltip} from '@waldur/core/Tooltip';
 import {translate} from '@waldur/i18n';
 import {FormGroup} from '@waldur/marketplace/offerings/FormGroup';
 
-const daysArray = [1, 2, 3, 4, 5, 6, 0]; // 1= mon, 2= thu..
+const daysArray = [1, 2, 3, 4, 5, 6, 0];
 const timeSlotHours = [0.5, 1, 2, 3, 4, 5, 6, 7, 8, 24 ];
 
 const getDayLabel = (d: number): string => moment.weekdays(d);
@@ -23,7 +23,7 @@ export const CalendarSettings: React.FC = () => {
   const [minTime, setMinTime] = React.useState<string>(moment().startOf('day').format('HH:mm'));
   const [maxTime, setMaxTime] = React.useState<string>(moment().endOf('day').format('HH:mm'));
   const [daysOfWeek, setDaysOfWeek] = React.useState<number[]>(daysArray);
-  const [slotDuration, setSlotDuration] = React.useState<number>(0.5);
+  const [slotDuration, setSlotDuration] = React.useState<any>(0.5);
   const dispatch = useDispatch();
 
   const handle = e => {
@@ -104,7 +104,7 @@ export const CalendarSettings: React.FC = () => {
           clearable={false}
           options={timeSlotOptions}
           value={slotDuration}
-          onChange={e => setSlotDuration(e)}
+          onChange={(newValue: Options) => setSlotDuration(newValue)}
         />
       </FormGroup>
     </>
