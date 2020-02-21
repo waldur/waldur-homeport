@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { post, getFirst } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -8,17 +8,15 @@ import { $state, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
-import { getUser } from '@waldur/workspace/selectors';
 
 const UserEmailChangeCallback = () => {
   const dispatch = useDispatch();
-  const user = useSelector(getUser);
   const [submitted, setSubmitted] = React.useState(false);
 
   React.useEffect(() => {
     async function load() {
       try {
-        await post(`/users/${user.uuid}/confirm_email/`, {code: $state.params.token});
+        await post('/users/confirm_email/', {code: $state.params.token});
         dispatch(showSuccess(translate('Email has been updated.')));
         const currentUser = await getFirst('/users/', {current: true});
         setSubmitted(true);
@@ -29,10 +27,10 @@ const UserEmailChangeCallback = () => {
       }
       dispatch(stateGo('profile.manage'));
     }
-    if (user && !submitted) {
+    if (!submitted) {
       load();
     }
-  }, [user]);
+  }, []);
 
   return (
     <div className="middle-box text-center">
