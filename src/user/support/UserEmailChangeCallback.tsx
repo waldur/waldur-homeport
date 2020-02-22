@@ -9,27 +9,45 @@ import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 
+function delay(ms) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
 const UserEmailChangeCallback = () => {
   const dispatch = useDispatch();
-  const [submitted, setSubmitted] = React.useState(false);
 
   React.useEffect(() => {
     async function load() {
       try {
         await post('/users/confirm_email/', {code: $state.params.token});
         dispatch(showSuccess(translate('Email has been updated.')));
-        const currentUser = await getFirst('/users/', {current: true});
-        setSubmitted(true);
-        await ngInjector.get('usersService').setCurrentUser(currentUser);
       } catch (error) {
-        const errorMessage = `${translate('Unable to change email.')} ${format(error)}`;
+        const errorMessage = `${translate('Unable to confirm email.')} ${format(error)}`;
         dispatch(showError(errorMessage));
+      }
+
+      if (!ngInjector.get('$auth').isAuthenticated()) {
+        dispatch(stateGo('login'));
+        return;
+      }
+
+      let currentUser;
+      try {
+        currentUser = await getFirst('/users/', {current: true});
+      } catch (error) {
+        const errorMessage = `${translate('Unable to fetch current user.')} ${format(error)}`;
+        dispatch(showError(errorMessage));
+      }
+
+      if (currentUser) {
+        ngInjector.get('usersService').setCurrentUser(currentUser);
+        await delay(1000);
       }
       dispatch(stateGo('profile.manage'));
     }
-    if (!submitted) {
-      load();
-    }
+    load();
   }, []);
 
   return (
