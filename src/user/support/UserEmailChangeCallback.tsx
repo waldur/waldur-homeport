@@ -23,12 +23,27 @@ const UserEmailChangeCallback = () => {
       try {
         await post('/users/confirm_email/', {code: $state.params.token});
         dispatch(showSuccess(translate('Email has been updated.')));
-        const currentUser = await getFirst('/users/', {current: true});
+      } catch (error) {
+        const errorMessage = `${translate('Unable to confirm email.')} ${format(error)}`;
+        dispatch(showError(errorMessage));
+      }
+
+      if (!ngInjector.get('$auth').isAuthenticated()) {
+        dispatch(stateGo('login'));
+        return;
+      }
+
+      let currentUser;
+      try {
+        currentUser = await getFirst('/users/', {current: true});
+      } catch (error) {
+        const errorMessage = `${translate('Unable to fetch current user.')} ${format(error)}`;
+        dispatch(showError(errorMessage));
+      }
+
+      if (currentUser) {
         ngInjector.get('usersService').setCurrentUser(currentUser);
         await delay(1000);
-      } catch (error) {
-        const errorMessage = `${translate('Unable to change email.')} ${format(error)}`;
-        dispatch(showError(errorMessage));
       }
       dispatch(stateGo('profile.manage'));
     }
