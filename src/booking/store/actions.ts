@@ -1,5 +1,4 @@
 import * as constants from '../constants';
-import { UpdateProps } from './types';
 
 export const fetchBookingItems = payload => ({
   type: constants.BOOKINGS_FETCH,
@@ -39,11 +38,11 @@ export const addBooking = payload => ({
   type: constants.ADD_BOOKING,
   payload: {
     id: payload.id,
+    type: payload.type,
     start: payload.start,
     end: payload.end,
-    type: payload.type,
-    title: payload.title,
     allDay: payload.allDay,
+    title: payload.title,
     extendedProps: payload.extendedProps,
   },
 });
@@ -55,16 +54,16 @@ export const removeBooking = (bookingId: number | string) => ({
   },
 });
 
-export const updateBooking = (payload: UpdateProps) => ({
+export const updateBooking = payload => ({
   type: constants.UPDATE_BOOKING,
   payload: {
-    oldId: payload.event.id,
+    oldId: payload.oldId,
     event: {
       id: payload.event.id,
-      start: payload.event.start,
-      allDay: payload.event.allDay,
-      end: payload.event.end,
       type: payload.event.type,
+      start: payload.event.start,
+      end: payload.event.end,
+      allDay: payload.event.allDay,
       title: payload.event.title,
       extendedProps: payload.event.extendedProps,
     },
@@ -72,8 +71,15 @@ export const updateBooking = (payload: UpdateProps) => ({
 });
 
 export const setSettings = payload => ({
-  type: constants.UPDATE_CONFIG,
+  type: constants.SET_CONFIG,
   payload: {
     config: payload,
+  },
+});
+
+export const setBookings = bookings => ({
+  type: constants.SET_BOOKINGS,
+  payload: {
+    bookings,
   },
 });

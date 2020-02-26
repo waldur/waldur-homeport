@@ -47,13 +47,3 @@ export interface PureDateProps {
   } | boolean;
 }
 
-export interface UpdateProps {
-  meta?: {
-    form: string;
-    field: string;
-  };
-  event: EventInput;
-  oldId?: EventInput['id'];
-  oldEvent?: EventInput;
-  prevEvent?: EventInput;
-}

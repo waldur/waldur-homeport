@@ -10,7 +10,7 @@ const INITIAL_STATE: State = {
     maxTime: '24:00',
     businessHours: {
       startTime: '00:00',
-      endTime: '23:59',
+      endTime: '24:00',
       daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
     },
   },
@@ -39,18 +39,18 @@ export const reducer = (state = INITIAL_STATE, action) => {
     case constants.ADD_BOOKING:
       return {
         ...state,
-        bookings: [
-          ...state.bookings,
+        schedules: [
+          ...state.schedules,
           payload,
         ],
       };
 
     case constants.UPDATE_BOOKING:
       const { event, oldId } = payload;
-      const updatedList = state.bookings.filter(item => item.id !== oldId);
+      const updatedList = state.schedules.filter(item => item.id !== oldId);
       return {
         ...state,
-        bookings: [
+        schedules: [
           ...updatedList,
           event,
         ],
@@ -58,21 +58,27 @@ export const reducer = (state = INITIAL_STATE, action) => {
 
     case constants.REMOVE_BOOKING:
       const { bookingId } = payload;
-      const removedList = state.bookings.filter(item => item.id !== bookingId);
+      const removedList = state.schedules.filter(item => item.id !== bookingId);
       return {
         ...state,
-        bookings: [
+        schedules: [
           ...removedList,
         ],
       };
 
-    case constants.UPDATE_CONFIG:
+    case constants.SET_CONFIG:
       return {
         ...state,
         config: {
           ...state.config,
           ...payload.config,
         },
+      };
+    case constants.SET_BOOKINGS:
+      const {bookings} = payload;
+      return {
+        ...state,
+        bookings,
       };
 
     default:
