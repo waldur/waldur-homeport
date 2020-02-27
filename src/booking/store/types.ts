@@ -46,4 +46,3 @@ export interface PureDateProps {
     label?: string | ReactElement;
   } | boolean;
 }
-
