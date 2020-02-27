@@ -46,3 +46,14 @@ export interface PureDateProps {
     label?: string | ReactElement;
   } | boolean;
 }
+
+export interface EditableCalendarProps {
+  onSelectDate: (event) => void;
+  calendar: State;
+  formEvents?: EventInput[];
+  onEventClick: (event) => void;
+  eventDrop?: (event) => void;
+  eventResize?: (event) => void;
+  calendarType: 'create' | 'edit' | 'read';
+  updateCallback: ({event, oldId, formID}) => void;
+}

@@ -1,5 +1,5 @@
 import { EventInput } from '@fullcalendar/core';
-import * as moment from 'moment';
+import {EventApi} from '@fullcalendar/core/api/EventApi';
 
 import { randomId } from '@waldur/core/fixtures';
 
@@ -30,12 +30,6 @@ export const eventsMapper = events => events.map(event => {
   return event;
 });
 
-export function formatAvailabilityEvent(event) {
-  event.rendering = 'background';
-  event.groupId = 'availableForBooking';
-  event.backgroundColor = 'green';
-}
-
 interface DayRender {
   date: Date;
   el: HTMLElement;
@@ -53,18 +47,24 @@ export const availabilityCellRender = (events: EventInput[], dayRender: DayRende
   });
 };
 
-export const timelineLabels = (interval: number) => {
-  const periodsInADay = moment.duration(1, 'day').as('minutes');
-  const startClock = moment().startOf('day');
-  const timeLabels = [];
-  for (let i = 0; i <= periodsInADay; i += interval) {
-    startClock.add(i === 0 ? 0 : interval, 'minutes');
-    timeLabels.push({
-      label: startClock.format('HH:mm'),
-      value: startClock.format('HH:mm'),
-      hour: startClock.hour(),
-      minute: startClock.minute(),
-    });
+interface EventHandlers {
+  event: EventInput | EventApi;
+  oldEvent?: EventInput | EventApi;
+  prevEvent?: EventInput | EventApi;
+}
+
+export const calendarEventPayloadCreator = ({event, oldEvent, prevEvent}: EventHandlers, eventList?) => {
+  const {start, end, id, extendedProps, title, allDay} = event;
+  const payload = {
+    event: {id, start, end, allDay, title, extendedProps},
+    oldId: event.id,
+    formID: null,
+  };
+  if (oldEvent || prevEvent) {
+    payload.oldId = (oldEvent || prevEvent).id;
   }
-  return timeLabels;
+  if ( eventList ) {
+    payload.formID = eventList.findIndex(item => item.id === payload.oldId);
+  }
+  return payload;
 };
