@@ -7,7 +7,7 @@ import {randomId} from '@waldur/core/fixtures';
 import { EditableCalendarProps } from '../../store/types';
 import { Calendar } from './Calendar';
 
-export const EditableCalendar = (props: EditableCalendarProps) => {
+export const PureCalendar = (props: EditableCalendarProps) => {
 
   const readOnlyEvents = {
     events: props.calendar.bookings,
