@@ -24,7 +24,7 @@ export const formatFilesize = (input, fromUnit = 'MB', toUnit = 'B') => {
     endUnit = -1;
   }
 
-  while ( endUnit === -1 ? input >= 1024 : endUnit > startUnit) {
+  while (endUnit === -1 ? input >= 1024 : endUnit > startUnit) {
     input /= 1024;
     startUnit++;
   }
@@ -35,8 +35,10 @@ export const formatFilesize = (input, fromUnit = 'MB', toUnit = 'B') => {
 const SNAKE_CASE_REGEXP = /[A-Z]/g;
 
 export const formatSnakeCase = input =>
-  input.replace(SNAKE_CASE_REGEXP, (letter, pos) =>
-    (pos ? '-' : '') + letter.toLowerCase());
+  input.replace(
+    SNAKE_CASE_REGEXP,
+    (letter, pos) => (pos ? '-' : '') + letter.toLowerCase(),
+  );
 
 export const flatten = lists => Array.prototype.concat.apply([], lists);
 
@@ -51,7 +53,9 @@ export const listToDict = (key, value) => list => {
 export const dictToList = dict => {
   const list = [];
   for (const key in dict) {
-    if (!dict.hasOwnProperty(key)) { continue; }
+    if (!dict.hasOwnProperty(key)) {
+      continue;
+    }
     list.push(dict[key]);
   }
   return list;
@@ -97,7 +101,9 @@ export const omit = (object, prop) => {
 };
 
 export const toKeyValue = obj =>
-  Object.keys(obj).map(key => `${key}=${encodeURIComponent(obj[key])}`).join('&');
+  Object.keys(obj)
+    .map(key => `${key}=${encodeURIComponent(obj[key])}`)
+    .join('&');
 
 export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');
 

@@ -7,7 +7,7 @@ export default function authCallbackRoutes($stateProvider) {
       data: {
         anonymous: true,
         bodyClass: 'old',
-      }
+      },
     })
 
     .state('home.login_failed', {
@@ -16,7 +16,7 @@ export default function authCallbackRoutes($stateProvider) {
       data: {
         bodyClass: 'old',
         erred: true,
-      }
+      },
     })
 
     .state('home.logout_completed', {
@@ -24,7 +24,7 @@ export default function authCallbackRoutes($stateProvider) {
       template: '<auth-logout-completed></auth-logout-completed>',
       data: {
         bodyClass: 'old',
-      }
+      },
     })
 
     .state('home.logout_failed', {
@@ -33,6 +33,6 @@ export default function authCallbackRoutes($stateProvider) {
       data: {
         bodyClass: 'old',
         erred: true,
-      }
+      },
     });
 }

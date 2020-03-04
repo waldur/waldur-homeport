@@ -1,6 +1,10 @@
 import { cacheInvalidationFactory } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { validateState, createNameField, createDescriptionField } from '@waldur/resource/actions/base';
+import {
+  validateState,
+  createNameField,
+  createDescriptionField,
+} from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
 export default function createAction(): ResourceAction {
@@ -13,10 +17,7 @@ export default function createAction(): ResourceAction {
     type: 'form',
     method: 'POST',
     validators: [validateState('OK')],
-    fields: [
-      createNameField(),
-      createDescriptionField(),
-    ],
+    fields: [createNameField(), createDescriptionField()],
     onSuccess: cacheInvalidationFactory('azureSQLDatabasesService'),
   };
 }

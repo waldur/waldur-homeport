@@ -7,7 +7,9 @@
         <div class="row">
           <div class="col-sm-6">
             <h5><span translate>From</span>:</h5>
-            <billing-customer-details customer="$ctrl.invoice.issuer_details"></billing-customer-details>
+            <billing-customer-details
+              customer="$ctrl.invoice.issuer_details"
+            ></billing-customer-details>
           </div>
 
           <div class="col-sm-6 text-right">
@@ -16,9 +18,14 @@
               <h4 class="text-navy">{{ ::$ctrl.invoice.number}}</h4>
             </span>
             <span><span translate>To</span>:</span>
-            <billing-customer-details customer="$ctrl.invoice.customer_details"></billing-customer-details>
+            <billing-customer-details
+              customer="$ctrl.invoice.customer_details"
+            ></billing-customer-details>
             <div>
-              <span><strong><span translate>Invoice date</span>:</strong> {{ ::$ctrl.invoice.invoice_date || '&mdash;'}}</span><br>
+              <span
+                ><strong><span translate>Invoice date</span>:</strong> {{
+                ::$ctrl.invoice.invoice_date || '&mdash;'}}</span
+              ><br />
               <span>
                 <strong><span translate>Due date</span>:</strong>
                 {{ ::$ctrl.invoice.due_date || '&mdash;'}}
@@ -38,7 +45,9 @@
                 <th translate>Total price</th>
               </tr>
             </thead>
-            <tbody ng-repeat="project in $ctrl.projects | orderBy:'name' track by $index">
+            <tbody
+              ng-repeat="project in $ctrl.projects | orderBy:'name' track by $index"
+            >
               <tr class="project" ng-if="::project.name">
                 <td colspan="4">
                   <h3>{{ ::project.name }}</h3>
@@ -50,12 +59,14 @@
                     <strong>{{ $ctrl.getItemName(item) }}</strong>
                   </div>
                   <small>
-                    <span translate>Start time</span>: {{ ::item.start || '&mdash;' | dateTime }}.
-                    <span translate>End time</span>: {{ ::item.end || '&mdash;' | dateTime }}.
+                    <span translate>Start time</span>: {{ ::item.start ||
+                    '&mdash;' | dateTime }}. <span translate>End time</span>: {{
+                    ::item.end || '&mdash;' | dateTime }}.
                   </small>
                   <div ng-if="item.details.service_provider_name">
                     <small>
-                      <span translate>Service provider</span>: {{ ::item.details.service_provider_name }}
+                      <span translate>Service provider</span>: {{
+                      ::item.details.service_provider_name }}
                     </small>
                   </div>
                   <!-- <invoice-events-toggle item="item"></invoice-events-toggle> -->
@@ -80,7 +91,9 @@
               <td>{{ ::$ctrl.invoice.price | defaultCurrency}}</td>
             </tr>
             <tr ng-if="$ctrl.invoice.issuer_details.vat_code">
-              <td><strong><span translate>TAX</span>: </strong></td>
+              <td>
+                <strong><span translate>TAX</span>: </strong>
+              </td>
               <td>{{ ::$ctrl.invoice.tax | defaultCurrency}}</td>
             </tr>
             <tr>

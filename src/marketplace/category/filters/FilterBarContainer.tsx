@@ -5,6 +5,7 @@ import { withTranslation } from '@waldur/i18n';
 
 import { setFilterQuery } from '../store/actions';
 import { getFilterName } from '../store/selectors';
+
 import { FilterBar } from './FilterBar';
 
 const mapStateToProps = state => ({

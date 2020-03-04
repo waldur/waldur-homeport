@@ -14,112 +14,64 @@
   "charts": [
     {
       "name": "Costs",
-      "labels": [
-        "August, 2017",
-        "September, 2017",
-        "October, 2017"
-      ],
+      "labels": ["August, 2017", "September, 2017", "October, 2017"],
       "datasets": [
         {
           "label": "hpc_ilja",
-          "data": [
-            363,
-            396,
-            396
-          ],
+          "data": [363, 396, 396],
           "backgroundColor": "#eee8d5"
         },
         {
           "label": "hpc_victor",
-          "data": [
-            396,
-            0,
-            363
-          ],
+          "data": [396, 0, 363],
           "backgroundColor": "#1c84c6"
         }
       ]
     },
     {
       "name": "CPU usage",
-      "labels": [
-        "August, 2017",
-        "September, 2017",
-        "October, 2017"
-      ],
+      "labels": ["August, 2017", "September, 2017", "October, 2017"],
       "datasets": [
         {
           "label": "hpc_ilja",
-          "data": [
-            3.33,
-            1.67,
-            0.1
-          ],
+          "data": [3.33, 1.67, 0.1],
           "backgroundColor": "#eee8d5"
         },
         {
           "label": "hpc_victor",
-          "data": [
-            1.67,
-            0,
-            3.33
-          ],
+          "data": [1.67, 0, 3.33],
           "backgroundColor": "#1c84c6"
         }
       ]
     },
     {
       "name": "GPU usage",
-      "labels": [
-        "August, 2017",
-        "September, 2017",
-        "October, 2017"
-      ],
+      "labels": ["August, 2017", "September, 2017", "October, 2017"],
       "datasets": [
         {
           "label": "hpc_ilja",
-          "data": [
-            3.33,
-            1.67,
-            0
-          ],
+          "data": [3.33, 1.67, 0],
           "backgroundColor": "#eee8d5"
         },
         {
           "label": "hpc_victor",
-          "data": [
-            1.67,
-            0,
-            3.33
-          ],
+          "data": [1.67, 0, 3.33],
           "backgroundColor": "#1c84c6"
         }
       ]
     },
     {
       "name": "RAM usage",
-      "labels": [
-        "August, 2017",
-        "September, 2017",
-        "October, 2017"
-      ],
+      "labels": ["August, 2017", "September, 2017", "October, 2017"],
       "datasets": [
         {
           "label": "hpc_ilja",
-          "data": [
-            8,
-            10,
-            12.21
-          ],
+          "data": [8, 10, 12.21],
           "backgroundColor": "#eee8d5"
         },
         {
           "label": "hpc_victor",
-          "data": [
-            10,
-            0,
-            8
-          ],
+          "data": [10, 0, 8],
           "backgroundColor": "#1c84c6"
         }
       ]

@@ -18,7 +18,8 @@ describe('dateUtils', () => {
   });
 
   it('formats medium date and time given a date-only string', () => {
-    expect(dateUtils.formatMediumDateTime('2014-12-21')).toEqual('Dec 21, 2014 12:00:00 AM');
+    expect(dateUtils.formatMediumDateTime('2014-12-21')).toEqual(
+      'Dec 21, 2014 12:00:00 AM',
+    );
   });
-
 });

@@ -7,13 +7,13 @@ export default function issuesService(baseServiceClass) {
     },
     setDefaultFilter: function() {
       // New issues come first
-      this.defaultFilter = {o: '-created'};
+      this.defaultFilter = { o: '-created' };
     },
     createIssue: function(instance) {
       let issue = this.$create();
       angular.extend(issue, instance);
       return issue.$save();
-    }
+    },
   });
   return new ServiceClass();
 }

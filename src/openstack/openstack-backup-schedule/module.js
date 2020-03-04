@@ -6,10 +6,22 @@ import openstackBackupScheduleWarning from './BackupScheduleWarning';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
-  ResourceSummary.register('OpenStackTenant.BackupSchedule', OpenStackBackupScheduleSummary);
-  module.service('openstackBackupSchedulesService', openstackBackupSchedulesService);
-  module.component('openstackBackupSchedulesList', openstackBackupSchedulesList);
-  module.component('openstackBackupScheduleWarning', openstackBackupScheduleWarning);
+  ResourceSummary.register(
+    'OpenStackTenant.BackupSchedule',
+    OpenStackBackupScheduleSummary,
+  );
+  module.service(
+    'openstackBackupSchedulesService',
+    openstackBackupSchedulesService,
+  );
+  module.component(
+    'openstackBackupSchedulesList',
+    openstackBackupSchedulesList,
+  );
+  module.component(
+    'openstackBackupScheduleWarning',
+    openstackBackupScheduleWarning,
+  );
   module.config(actionConfig);
   module.config(tabsConfig);
   module.config(stateConfig);
@@ -19,12 +31,7 @@ export default module => {
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
-    order: [
-      'update',
-      'activate',
-      'deactivate',
-      'destroy'
-    ],
+    order: ['update', 'activate', 'deactivate', 'destroy'],
     options: {
       update: {
         title: gettext('Edit'),
@@ -41,31 +48,32 @@ function actionConfig(ActionConfigurationProvider) {
           },
         },
       },
-    }
+    },
   });
 }
 
 // @ngInject
 function stateConfig(ResourceStateConfigurationProvider) {
-  ResourceStateConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
-    error_states: [
-      'error'
-    ]
-  });
+  ResourceStateConfigurationProvider.register(
+    'OpenStackTenant.BackupSchedule',
+    {
+      error_states: ['error'],
+    },
+  );
 }
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
+function tabsConfig(
+  ResourceTabsConfigurationProvider,
+  DEFAULT_SUBRESOURCE_TABS,
+) {
   ResourceTabsConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
-    order: [
-      'backups',
-      ...DEFAULT_SUBRESOURCE_TABS.order,
-    ],
+    order: ['backups', ...DEFAULT_SUBRESOURCE_TABS.order],
     options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
       backups: {
         heading: gettext('Backups'),
-        component: 'openstackBackupsList'
+        component: 'openstackBackupsList',
       },
-    })
+    }),
   });
 }

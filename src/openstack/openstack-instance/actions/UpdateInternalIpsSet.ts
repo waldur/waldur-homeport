@@ -14,11 +14,12 @@ function createSubnetField(ctx) {
     resource_default_value: true,
     serializer: items => items.map(item => ({ subnet: item.value })),
     formatter: (_, item) => internalIpFormatter(item),
-    modelParser: (_, items) => items.map(item => ({
-      url: item.subnet,
-      name: item.subnet_name,
-      cidr: item.subnet_cidr,
-    })),
+    modelParser: (_, items) =>
+      items.map(item => ({
+        url: item.subnet,
+        name: item.subnet_name,
+        cidr: item.subnet_cidr,
+      })),
     value_field: 'url',
     url: `${ENV.apiEndpoint}api/openstacktenant-subnets/?settings_uuid=${ctx.resource.service_settings_uuid}`,
   };

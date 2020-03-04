@@ -61,16 +61,24 @@ const serializeNode = (cluster, formData) => ({
 export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   form: 'RancherNodeCreate',
 })(props => {
-  const {call, state} = useQuery(loadData, props.resolve.cluster.tenant_settings);
+  const { call, state } = useQuery(
+    loadData,
+    props.resolve.cluster.tenant_settings,
+  );
   React.useEffect(call, []);
 
   const dispatch = useDispatch();
 
   const createNode = React.useCallback(async (formData: FormData) => {
     try {
-      await post('/rancher-nodes/', serializeNode(props.resolve.cluster, formData));
+      await post(
+        '/rancher-nodes/',
+        serializeNode(props.resolve.cluster, formData),
+      );
     } catch (error) {
-      const errorMessage = `${translate('Unable to create node.')} ${format(error)}`;
+      const errorMessage = `${translate('Unable to create node.')} ${format(
+        error,
+      )}`;
       dispatch(showError(errorMessage));
       return;
     }
@@ -84,7 +92,7 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
         title={translate('Create node')}
         footer={
           <>
-            <CloseDialogButton/>
+            <CloseDialogButton />
             <SubmitButton
               disabled={state.loading || props.invalid || props.submitting}
               submitting={props.submitting}
@@ -93,12 +101,15 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
           </>
         }
       >
-        {(state.loading || !state.loaded) ? <LoadingSpinner/> :
-        state.error ? <p>{translate('Unable to load data.')}</p> : (
+        {state.loading || !state.loaded ? (
+          <LoadingSpinner />
+        ) : state.error ? (
+          <p>{translate('Unable to load data.')}</p>
+        ) : (
           <>
-            <NodeRoleGroup {...defaultProps}/>
-            <NodeFlavorGroup options={state.data.flavors} {...defaultProps}/>
-            <SubnetGroup options={state.data.subnets} {...defaultProps}/>
+            <NodeRoleGroup {...defaultProps} />
+            <NodeFlavorGroup options={state.data.flavors} {...defaultProps} />
+            <SubnetGroup options={state.data.subnets} {...defaultProps} />
             <NodeStorageGroup
               volumeTypes={state.data.volumeTypes}
               mountPoints={state.data.mountPoints}

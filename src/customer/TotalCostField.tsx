@@ -11,8 +11,6 @@ interface TotalCostFieldProps {
 export const TotalCostField = (props: TotalCostFieldProps) => (
   <div className="text-right">
     {translate('Total cost:')}
-    <PriceTooltip />
-    {' '}
-    {defaultCurrency(props.total)}
+    <PriceTooltip /> {defaultCurrency(props.total)}
   </div>
 );

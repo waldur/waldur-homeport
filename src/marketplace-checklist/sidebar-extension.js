@@ -1,4 +1,4 @@
-import {FEATURE, ICON_CLASS} from './constants';
+import { FEATURE, ICON_CLASS } from './constants';
 
 // @ngInject
 export default function registerSidebarExtension(SidebarExtensionService) {
@@ -7,7 +7,8 @@ export default function registerSidebarExtension(SidebarExtensionService) {
       {
         label: gettext('Compliance'),
         icon: ICON_CLASS,
-        link: 'marketplace-checklist-project({uuid: $ctrl.context.project.uuid})',
+        link:
+          'marketplace-checklist-project({uuid: $ctrl.context.project.uuid})',
         feature: FEATURE,
         index: 220,
       },
@@ -17,7 +18,7 @@ export default function registerSidebarExtension(SidebarExtensionService) {
         feature: FEATURE,
         index: 221,
         action: () => alert('This feature is not implemented yet'),
-      }
+      },
     ];
   });
 }

@@ -9,8 +9,8 @@ function SlurmAllocationListController(
   baseResourceListController,
   $filter,
   coreUtils,
-  SlurmAllocationService
-  ) {
+  SlurmAllocationService,
+) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -18,9 +18,12 @@ function SlurmAllocationListController(
       this._super();
       this.service = SlurmAllocationService;
       this.addRowFields([
-        'cpu_limit', 'cpu_usage',
-        'gpu_limit', 'gpu_usage',
-        'ram_limit', 'ram_usage',
+        'cpu_limit',
+        'cpu_usage',
+        'gpu_limit',
+        'gpu_usage',
+        'ram_limit',
+        'ram_usage',
         'service_settings',
       ]);
     },
@@ -34,7 +37,7 @@ function SlurmAllocationListController(
           title: gettext('Name'),
           className: 'all',
           orderField: 'name',
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           title: gettext('Provider'),
@@ -42,7 +45,7 @@ function SlurmAllocationListController(
         },
         {
           title: gettext('Description'),
-          render: row => row.description || 'N/A'
+          render: row => row.description || 'N/A',
         },
         {
           title: gettext('Created'),
@@ -50,20 +53,23 @@ function SlurmAllocationListController(
         },
         {
           title: gettext('CPU'),
-          render: row => this.formatQuota('minutesToHours', row.cpu_limit, row.cpu_usage),
+          render: row =>
+            this.formatQuota('minutesToHours', row.cpu_limit, row.cpu_usage),
         },
         {
           title: gettext('GPU'),
-          render: row => this.formatQuota('minutesToHours', row.gpu_limit, row.gpu_usage),
+          render: row =>
+            this.formatQuota('minutesToHours', row.gpu_limit, row.gpu_usage),
         },
         {
           title: gettext('RAM'),
-          render: row => this.formatQuota('filesize', row.ram_limit, row.ram_usage),
+          render: row =>
+            this.formatQuota('filesize', row.ram_limit, row.ram_usage),
         },
         {
           title: gettext('State'),
           className: 'min-tablet-l',
-          render: row => this.renderResourceState(row)
+          render: row => this.renderResourceState(row),
         },
       ];
       return options;
@@ -83,7 +89,7 @@ function SlurmAllocationListController(
     },
     getFilter: function() {
       return {
-        project_uuid: this.currentProject.uuid
+        project_uuid: this.currentProject.uuid,
       };
     },
   });

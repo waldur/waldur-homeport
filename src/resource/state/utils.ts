@@ -10,7 +10,8 @@ export function getResourceState(resource: Resource): StateIndicatorProps {
   const runtimeShutdownStates = ['SHUTOFF', 'STOPPED', 'SUSPENDED'];
   const runtimeErrorStates = ['ERROR', 'ERRED'];
   const state = resource.state && resource.state.toLowerCase();
-  const runtimeState = resource.runtime_state && resource.runtime_state.toUpperCase();
+  const runtimeState =
+    resource.runtime_state && resource.runtime_state.toUpperCase();
   let messageSuffix = null;
   const context: StateIndicatorProps = {
     variant: 'primary',
@@ -28,13 +29,20 @@ export function getResourceState(resource: Resource): StateIndicatorProps {
       context.variant = 'plain';
     }
     context.label = runtimeState || resource.state;
-    if (resource.service_settings_state && resource.service_settings_state.toLowerCase() === 'erred') {
+    if (
+      resource.service_settings_state &&
+      resource.service_settings_state.toLowerCase() === 'erred'
+    ) {
       const errorMessage = resource.service_settings_error_message;
       context.variant = 'warning';
-      context.tooltip = translate('Service settings of this resource are in state erred.');
+      context.tooltip = translate(
+        'Service settings of this resource are in state erred.',
+      );
       if (errorMessage) {
-        messageSuffix = translate('error message: {errorMessage}', { errorMessage });
-        context.tooltip += (', ' + messageSuffix);
+        messageSuffix = translate('error message: {errorMessage}', {
+          errorMessage,
+        });
+        context.tooltip += ', ' + messageSuffix;
       }
     } else {
       context.variant = context.variant || 'primary';
@@ -47,21 +55,29 @@ export function getResourceState(resource: Resource): StateIndicatorProps {
     context.tooltip = translate('Failed to operate with backend.');
     const errorMessage = resource.error_message;
     if (errorMessage) {
-      messageSuffix = translate('error message: {errorMessage}', { errorMessage });
-      context.tooltip += (', ' + messageSuffix);
+      messageSuffix = translate('error message: {errorMessage}', {
+        errorMessage,
+      });
+      context.tooltip += ', ' + messageSuffix;
     }
   } else {
     showRuntimeState = true;
     context.variant = 'primary';
     context.active = true;
     if (resource.action) {
-      context.label = getStateMessages(translate)[resource.action.toLowerCase()] || resource.action;
-      context.tooltip = translate(resource.action_details.message) || `${resource.action} ${resourceType}`;
+      context.label =
+        getStateMessages(translate)[resource.action.toLowerCase()] ||
+        resource.action;
+      context.tooltip =
+        translate(resource.action_details.message) ||
+        `${resource.action} ${resourceType}`;
     } else {
       context.label = resource.state;
       if (runtimeErrorStates.indexOf(resource.state) !== -1) {
-        context.tooltip = translate('{resourceType} has state {resourceState}',
-        { resourceType, resourceState: resource.state });
+        context.tooltip = translate(
+          '{resourceType} has state {resourceState}',
+          { resourceType, resourceState: resource.state },
+        );
       } else {
         context.tooltip = `${resource.state} ${resourceType}`;
       }
@@ -69,9 +85,10 @@ export function getResourceState(resource: Resource): StateIndicatorProps {
   }
 
   if (showRuntimeState && runtimeState) {
-    messageSuffix = translate('current state on backend: {resourceState}.',
-    { resourceState: runtimeState });
-    context.tooltip += (', ' + messageSuffix);
+    messageSuffix = translate('current state on backend: {resourceState}.', {
+      resourceState: runtimeState,
+    });
+    context.tooltip += ', ' + messageSuffix;
   }
 
   return context;

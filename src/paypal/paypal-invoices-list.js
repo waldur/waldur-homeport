@@ -1,7 +1,7 @@
 const paypalInvoicesList = {
   controller: PayPalInvoicesListController,
   controllerAs: 'ListController',
-  templateUrl: 'views/partials/filtered-list.html'
+  templateUrl: 'views/partials/filtered-list.html',
 };
 
 export default paypalInvoicesList;
@@ -14,7 +14,8 @@ function PayPalInvoicesListController(
   paypalInvoicesService,
   customersService,
   ncUtils,
-  $filter) {
+  $filter,
+) {
   let controllerScope = this;
   let InvoicesController = baseControllerListClass.extend({
     init: function() {
@@ -24,7 +25,7 @@ function PayPalInvoicesListController(
       let fn = this._super.bind(this);
       return currentStateService.getCustomer().then(currentCustomer => {
         this.currentCustomer = currentCustomer;
-        customersService.isOwnerOrStaff().then((isOwnerOrStaff) => {
+        customersService.isOwnerOrStaff().then(isOwnerOrStaff => {
           this.isOwnerOrStaff = isOwnerOrStaff;
           this.tableOptions = this.getTableOptions();
           return fn();
@@ -42,9 +43,9 @@ function PayPalInvoicesListController(
             title: gettext('Invoice number'),
             className: 'all',
             render: function(row) {
-              const href = $state.href('billingDetails', {uuid: row.uuid});
+              const href = $state.href('billingDetails', { uuid: row.uuid });
               return ncUtils.renderLink(href, row.number || 'N/A');
-            }
+            },
           },
           {
             title: gettext('State'),
@@ -52,33 +53,33 @@ function PayPalInvoicesListController(
             render: row => {
               const index = vm.findIndexById(row);
               return `<paypal-invoice-state model="controller.list[${index}]">`;
-            }
+            },
           },
           {
             title: gettext('Price'),
             className: 'all',
-            render: row => $filter('defaultCurrency')(row.price)
+            render: row => $filter('defaultCurrency')(row.price),
           },
           {
             title: gettext('Tax'),
             className: 'min-tablet-l',
-            render: row => $filter('defaultCurrency')(row.tax)
+            render: row => $filter('defaultCurrency')(row.tax),
           },
           {
             title: gettext('Total'),
             className: 'min-tablet-l',
-            render: row => $filter('defaultCurrency')(row.total)
+            render: row => $filter('defaultCurrency')(row.total),
           },
           {
             title: gettext('Invoice date'),
             className: 'all',
-            render: row => row.start_date || '&mdash;'
+            render: row => row.start_date || '&mdash;',
           },
           {
             title: gettext('Due date'),
             className: 'min-tablet-l',
-            render: row => row.end_date || '&mdash;'
-          }
+            render: row => row.end_date || '&mdash;',
+          },
         ],
         rowActions: this.getRowActions.bind(this),
       };
@@ -103,28 +104,28 @@ function PayPalInvoicesListController(
           },
           {
             title: gettext('Paid'),
-            value: 'PAID'
+            value: 'PAID',
           },
           {
             title: gettext('Unpaid'),
-            value: 'UNPAID'
+            value: 'UNPAID',
           },
           {
             title: gettext('Payment pending'),
-            value: 'PAYMENT_PENDING'
+            value: 'PAYMENT_PENDING',
           },
           {
             title: gettext('Cancelled'),
-            value: 'CANCELLED'
+            value: 'CANCELLED',
           },
-        ]
+        ],
       };
     },
     getFilter: function() {
       return {
         customer: this.currentCustomer.url,
       };
-    }
+    },
   });
 
   controllerScope.__proto__ = new InvoicesController();

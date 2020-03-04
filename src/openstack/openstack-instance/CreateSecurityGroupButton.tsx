@@ -17,7 +17,11 @@ export const CreateSecurityGroupButton = props => {
 
   const gotoTenant = React.useCallback(async () => {
     try {
-      await waitForConfirmation(dispatch, translate('Confirmation'), translate('Sure? Form data would be lost'));
+      await waitForConfirmation(
+        dispatch,
+        translate('Confirmation'),
+        translate('Sure? Form data would be lost'),
+      );
     } catch {
       return;
     }
@@ -31,9 +35,7 @@ export const CreateSecurityGroupButton = props => {
   return (
     <CreateResourceFormGroup>
       <Button onClick={gotoTenant}>
-      <i className="fa fa-plus"/>
-      {' '}
-      {translate('Add security group')}
+        <i className="fa fa-plus" /> {translate('Add security group')}
       </Button>
     </CreateResourceFormGroup>
   );

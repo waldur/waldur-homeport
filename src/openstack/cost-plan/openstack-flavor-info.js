@@ -4,7 +4,7 @@ const openstackFlavorInfo = {
   template,
   bindings: {
     flavor: '<',
-  }
+  },
 };
 
 export default openstackFlavorInfo;

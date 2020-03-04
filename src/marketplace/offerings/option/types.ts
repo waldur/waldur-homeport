@@ -10,5 +10,4 @@ export type FieldType =
   | 'select_openstack_instance'
   | 'select_multiple_openstack_instances'
   | 'date'
-  | 'time'
-;
+  | 'time';

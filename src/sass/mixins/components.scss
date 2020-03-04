@@ -1,48 +1,44 @@
 @mixin clearfix {
-    &:before,
-    &:after {
-        display: table;
-        content: ' ';
-    } // &:before, &:after
-    &:after {
-        clear: both;
-    }
+  &:before,
+  &:after {
+    display: table;
+    content: ' ';
+  } // &:before, &:after
+  &:after {
+    clear: both;
+  }
 }
 
 @mixin ellipsis {
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @mixin icon {
-    font-size: inherit;
-    line-height: 1;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translate(0, 0);
+  font-size: inherit;
+  line-height: 1;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
 }
 
 @mixin icon-fa {
-    @include icon;
-    font-family: FontAwesome;
+  @include icon;
+  font-family: FontAwesome;
 }
 
 @mixin outline {
-    color: white;
-    text-shadow:
-       1px 1px 0 black,
-     -1px -1px 0 black,
-      1px -1px 0 black,
-      -1px 1px 0 black,
-       1px 1px 0 black;
+  color: white;
+  text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black,
+    -1px 1px 0 black, 1px 1px 0 black;
 }
 
 @mixin no-select {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

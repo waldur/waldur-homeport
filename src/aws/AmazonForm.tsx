@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StringField, FormContainer} from '@waldur/form-react';
+import { StringField, FormContainer } from '@waldur/form-react';
 
 export const AmazonForm = ({ translate, container }) => (
   <FormContainer {...container}>

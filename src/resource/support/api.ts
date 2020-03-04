@@ -35,7 +35,7 @@ export function parseProjects(projects, quotaNames) {
 
   const quotaTrees = {};
   for (const quotaName of quotaNames) {
-    const tree = quotaTrees[quotaName] = [];
+    const tree = (quotaTrees[quotaName] = []);
 
     for (const customer of Object.keys(customers)) {
       const customerProjects = customers[customer];
@@ -71,5 +71,5 @@ export const loadData = (accounting_is_running: boolean) => {
     'quotas',
     'billing_price_estimate',
   ];
-  return getAll('/projects/', {params: {field, accounting_is_running}});
+  return getAll('/projects/', { params: { field, accounting_is_running } });
 };

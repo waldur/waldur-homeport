@@ -1,5 +1,8 @@
 <div class="error arrow-up" ng-if="$ctrl.errors[$ctrl.field.name]">
   <ul class="error-list">
-    <li ng-repeat="error in $ctrl.errors[$ctrl.field.name]" ng-bind="error"></li>
+    <li
+      ng-repeat="error in $ctrl.errors[$ctrl.field.name]"
+      ng-bind="error"
+    ></li>
   </ul>
 </div>

@@ -8,7 +8,7 @@ export default function costPresetsService(baseServiceClass) {
         preset.disk = preset.storage;
         return preset;
       });
-    }
+    },
   });
   return new ServiceClass();
 }

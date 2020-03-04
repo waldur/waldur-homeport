@@ -74,7 +74,7 @@ const exportRow = (row: UsageReport) => [
   row.description,
 ];
 
-const exportFields = () => ([
+const exportFields = () => [
   translate('Client organization'),
   translate('Client project'),
   translate('Offering type'),
@@ -83,14 +83,14 @@ const exportFields = () => ([
   translate('Date of reporting'),
   translate('Value'),
   translate('Comment'),
-]);
+];
 
 const mapPropsToFilter = props => {
   const filter: UsageReportRequest = {};
   if (props.usageFilter) {
     if (props.usageFilter.accounting_period) {
-      const {year, month} = props.usageFilter.accounting_period.value;
-      const dt = moment({year, month: month - 1});
+      const { year, month } = props.usageFilter.accounting_period.value;
+      const dt = moment({ year, month: month - 1 });
       filter.date_after = dt.startOf('month').format('YYYY-MM-DD');
       filter.date_before = dt.endOf('month').format('YYYY-MM-DD');
     }
@@ -119,9 +119,6 @@ const mapStateToProps = state => ({
   usageFilter: getFormValues(FORM_ID)(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const SupportUsageList = enhance(TableComponent);

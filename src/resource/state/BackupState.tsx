@@ -5,7 +5,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 export type BackupStateType = 'Unsupported' | 'Unset' | 'Warning' | 'OK';
 
-const LABEL_CLASSES: {[key in BackupStateType]: StateVariant} = {
+const LABEL_CLASSES: { [key in BackupStateType]: StateVariant } = {
   Unsupported: 'plain',
   Unset: 'danger',
   Warning: 'warning',

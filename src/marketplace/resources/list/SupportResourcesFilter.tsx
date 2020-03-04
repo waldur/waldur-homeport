@@ -10,13 +10,15 @@ import { ResourceStateFilter } from './ResourceStateFilter';
 
 const PureSupportResourcesFilter = () => (
   <Row>
-    <OfferingAutocomplete/>
-    <OrganizationAutocomplete/>
-    <CategoryFilter/>
-    <ResourceStateFilter/>
+    <OfferingAutocomplete />
+    <OrganizationAutocomplete />
+    <CategoryFilter />
+    <ResourceStateFilter />
   </Row>
 );
 
-const enhance = reduxForm({form: 'SupportResourcesFilter'});
+const enhance = reduxForm({ form: 'SupportResourcesFilter' });
 
-export const SupportResourcesFilter = enhance(PureSupportResourcesFilter) as React.ComponentType<{}>;
+export const SupportResourcesFilter = enhance(
+  PureSupportResourcesFilter,
+) as React.ComponentType<{}>;

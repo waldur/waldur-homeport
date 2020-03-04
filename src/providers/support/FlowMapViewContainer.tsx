@@ -32,9 +32,7 @@ class FlowMapViewComponent extends React.Component<FlowMapViewComponentProps> {
     this.props.fetchServiceUsageStart();
   }
   render() {
-    return (
-      <FlowMapView {...this.props} />
-    );
+    return <FlowMapView {...this.props} />;
   }
 }
 

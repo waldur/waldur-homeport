@@ -10,5 +10,5 @@ const getIcon = item => {
 
 // @ngInject
 export default function resourceUtils() {
-  return {formatResourceType, getIcon, getListState};
+  return { formatResourceType, getIcon, getListState };
 }

@@ -8,6 +8,7 @@ import { OuterState } from '@waldur/workspace/types';
 
 import { updateOfferingState } from '../store/actions';
 import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
+
 import { ActionsDropdown } from './ActionsDropdown';
 
 const mapStateToProps = (state: OuterState) => ({
@@ -16,7 +17,10 @@ const mapStateToProps = (state: OuterState) => ({
 
 const mapDispatchToProps = {
   updateOfferingState,
-  pauseOffering: offering => openModalDialog('marketplacePauseOfferingDialog', { resolve: { offering } }),
+  pauseOffering: offering =>
+    openModalDialog('marketplacePauseOfferingDialog', {
+      resolve: { offering },
+    }),
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
@@ -26,7 +30,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
       handler: () => {
         dispatchProps.updateOfferingState(ownProps.row, 'activate');
       },
-      visible: [DRAFT, PAUSED].includes(ownProps.row.state) && stateProps.user.is_staff,
+      visible:
+        [DRAFT, PAUSED].includes(ownProps.row.state) &&
+        stateProps.user.is_staff,
     },
     {
       label: translate('Pause'),
@@ -42,10 +48,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     },
     {
       label: translate('Edit'),
-      handler: () => $state.go('marketplace-offering-update', {
-        offering_uuid: ownProps.row.uuid,
-      }),
-      visible: ownProps.row.state !== ARCHIVED && (ownProps.row.state === DRAFT || stateProps.user.is_staff),
+      handler: () =>
+        $state.go('marketplace-offering-update', {
+          offering_uuid: ownProps.row.uuid,
+        }),
+      visible:
+        ownProps.row.state !== ARCHIVED &&
+        (ownProps.row.state === DRAFT || stateProps.user.is_staff),
     },
   ].filter(row => row.visible),
 });

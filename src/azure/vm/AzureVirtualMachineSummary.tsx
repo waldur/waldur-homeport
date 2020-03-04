@@ -9,27 +9,20 @@ import { formatSummary } from '@waldur/resource/utils';
 
 import { PureAzureResourceSummary } from '../AzureResourceSummary';
 
-const PureAzureVirtualMachineSummary = (props: ResourceSummaryProps<AzureVirtualMachine>) => {
+const PureAzureVirtualMachineSummary = (
+  props: ResourceSummaryProps<AzureVirtualMachine>,
+) => {
   const { translate, resource } = props;
   return (
     <>
-      <PureAzureResourceSummary {...props}/>
-      <Field
-        label={translate('Summary')}
-        value={formatSummary(resource)}
-      />
-      <Field
-        label={translate('Admin username')}
-        value={resource.username}
-      />
+      <PureAzureResourceSummary {...props} />
+      <Field label={translate('Summary')} value={formatSummary(resource)} />
+      <Field label={translate('Admin username')} value={resource.username} />
       <Field
         label={translate('Admin password')}
-        value={<UserPassword password={resource.password}/>}
+        value={<UserPassword password={resource.password} />}
       />
-      <Field
-        label={translate('Size')}
-        value={resource.size_name}
-      />
+      <Field label={translate('Size')} value={resource.size_name} />
       <Field
         label={translate('Internal IP')}
         value={formatIpList(props.resource.internal_ips)}
@@ -42,4 +35,6 @@ const PureAzureVirtualMachineSummary = (props: ResourceSummaryProps<AzureVirtual
   );
 };
 
-export const AzureVirtualMachineSummary = withTranslation(PureAzureVirtualMachineSummary);
+export const AzureVirtualMachineSummary = withTranslation(
+  PureAzureVirtualMachineSummary,
+);

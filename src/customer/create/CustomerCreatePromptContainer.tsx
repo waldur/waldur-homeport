@@ -23,12 +23,14 @@ const mapDispatchToProps = dispatch => ({
       });
     }
 
-    dispatch(openModalDialog('customer-create-dialog', {
-      resolve: {
-        role: data[constants.FIELD_NAMES.role],
-      },
-      size: 'lg',
-    }));
+    dispatch(
+      openModalDialog('customer-create-dialog', {
+        resolve: {
+          role: data[constants.FIELD_NAMES.role],
+        },
+        size: 'lg',
+      }),
+    );
   },
 });
 
@@ -45,4 +47,6 @@ const enhance = compose(
 
 export const CustomerCreatePromptContainer = enhance(CustomerCreatePrompt);
 
-export default connectAngularComponent(CustomerCreatePromptContainer, ['resolve']);
+export default connectAngularComponent(CustomerCreatePromptContainer, [
+  'resolve',
+]);

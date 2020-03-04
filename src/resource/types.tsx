@@ -6,8 +6,7 @@ export type ResourceState =
   | 'Update Scheduled'
   | 'Updating'
   | 'Deletion Scheduled'
-  | 'Deleting'
-  ;
+  | 'Deleting';
 
 export interface BaseResource {
   name: string;
@@ -31,7 +30,7 @@ export interface Resource extends BaseResource {
   error_message?: string;
   action?: string;
   action_details?: {
-    message: string
+    message: string;
   };
 }
 

@@ -11,7 +11,7 @@ const eventGroups = {
     $onInit() {
       this.types = this.eventsService.getAvailableEventGroups();
     }
-  }
+  },
 };
 
 export default eventGroups;

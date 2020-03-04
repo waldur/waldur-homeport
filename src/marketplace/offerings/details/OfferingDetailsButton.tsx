@@ -7,7 +7,10 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import ActionButton from '@waldur/table-react/ActionButton';
 
 const openOfferingDetailsDialog = (offeringUuid: string) =>
-  openModalDialog('marketplaceOfferingDetailsDialog', {resolve: {offeringUuid}, size: 'lg'});
+  openModalDialog('marketplaceOfferingDetailsDialog', {
+    resolve: { offeringUuid },
+    size: 'lg',
+  });
 
 interface OfferingDetailsButton {
   offering: string;
@@ -26,6 +29,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   openDialog: () => dispatch(openOfferingDetailsDialog(ownProps.offering)),
 });
 
-const OfferingDetailsButton = connect(null, mapDispatchToProps)(PureOfferingDetailsButton);
+const OfferingDetailsButton = connect(
+  null,
+  mapDispatchToProps,
+)(PureOfferingDetailsButton);
 
 export default connectAngularComponent(OfferingDetailsButton, ['offering']);

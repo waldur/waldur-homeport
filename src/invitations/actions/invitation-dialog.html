@@ -19,14 +19,21 @@
           type="email"
           ng-model="DialogCtrl.email"
           required
-          ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails">
-        <p class="text-danger" ng-repeat="error in DialogCtrl.errors.email" ng-bind="error"></p>
+          ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails"
+        />
+        <p
+          class="text-danger"
+          ng-repeat="error in DialogCtrl.errors.email"
+          ng-bind="error"
+        ></p>
       </div>
 
       <div class="form-group">
         <label class="control-label" for="inviteCivilNumber">
           {{ DialogCtrl.civilNumberLabel }}
-          <span class="text-danger" ng-if="DialogCtrl.civilNumberRequired">*</span>
+          <span class="text-danger" ng-if="DialogCtrl.civilNumberRequired"
+            >*</span
+          >
         </label>
         <input
           class="form-control"
@@ -34,17 +41,27 @@
           name="civil_number"
           ng-model="DialogCtrl.civil_number"
           ng-required="{{ DialogCtrl.civilNumberRequired }}"
-          ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails">
-        <p ng-if="DialogCtrl.civilCodeHelpText" class="help-block m-b-n-xs text-muted">
+          ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails"
+        />
+        <p
+          ng-if="DialogCtrl.civilCodeHelpText"
+          class="help-block m-b-n-xs text-muted"
+        >
           {{ DialogCtrl.civilCodeHelpText }}
         </p>
-        <p class="text-danger" ng-repeat="error in DialogCtrl.errors.civil_number" ng-bind="error"></p>
+        <p
+          class="text-danger"
+          ng-repeat="error in DialogCtrl.errors.civil_number"
+          ng-bind="error"
+        ></p>
       </div>
 
       <div class="form-group" ng-if="DialogCtrl.showTaxNumber">
         <label class="control-label" for="inviteTaxNumber">
           {{ DialogCtrl.taxNumberLabel }}
-          <span class="text-danger" ng-if="DialogCtrl.taxNumberRequired">*</span>
+          <span class="text-danger" ng-if="DialogCtrl.taxNumberRequired"
+            >*</span
+          >
         </label>
         <input
           class="form-control"
@@ -52,8 +69,13 @@
           name="tax_number"
           ng-model="DialogCtrl.tax_number"
           ng-required="{{ DialogCtrl.taxNumberRequired }}"
-          ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails">
-        <p class="text-danger" ng-repeat="error in DialogCtrl.errors.tax_number" ng-bind="error"></p>
+          ng-disabled="DialogCtrl.submitting || DialogCtrl.fetchingUserDetails"
+        />
+        <p
+          class="text-danger"
+          ng-repeat="error in DialogCtrl.errors.tax_number"
+          ng-bind="error"
+        ></p>
       </div>
 
       <div class="form-group" ng-if="DialogCtrl.requireUserDetails">
@@ -61,7 +83,8 @@
           type="button"
           class="btn btn-primary"
           ng-disabled="DialogCtrl.fetchingUserDetails"
-          ng-click="DialogCtrl.fetchUserDetails()">
+          ng-click="DialogCtrl.fetchUserDetails()"
+        >
           <span translate>Show user details</span>
         </button>
       </div>
@@ -98,16 +121,23 @@
             class="btn btn-default"
             ng-repeat="role in DialogCtrl.roles"
             ng-class="{active: DialogCtrl.role == role}"
-            ng-click="DialogCtrl.role = role">
+            ng-click="DialogCtrl.role = role"
+          >
             <i class="fa" ng-class="role.icon"></i> {{ role.title | translate }}
           </button>
         </div>
-        <p class="text-danger" ng-repeat="error in DialogCtrl.errors.customer" ng-bind="error"></p>
+        <p
+          class="text-danger"
+          ng-repeat="error in DialogCtrl.errors.customer"
+          ng-bind="error"
+        ></p>
       </div>
 
-      <div class="form-group"
+      <div
+        class="form-group"
         ng-hide="DialogCtrl.roleDisabled"
-        ng-if="DialogCtrl.role.field == 'project_role'">
+        ng-if="DialogCtrl.role.field == 'project_role'"
+      >
         <label class="control-label" for="inviteProject">
           <span translate>Project</span>
           <span class="text-danger">*</span>
@@ -118,18 +148,23 @@
           ng-model="DialogCtrl.project"
           class="form-control"
           required
-          ng-disabled="DialogCtrl.submitting">
+          ng-disabled="DialogCtrl.submitting"
+        >
           <option value=""><span translate>Select project</span></option>
         </select>
-        <p class="text-danger" ng-repeat="error in DialogCtrl.errors.project" ng-bind="error"></p>
+        <p
+          class="text-danger"
+          ng-repeat="error in DialogCtrl.errors.project"
+          ng-bind="error"
+        ></p>
       </div>
 
-      <div class="form-group"
-        ng-if="DialogCtrl.errors.non_field_errors">
-        <p class="text-danger"
+      <div class="form-group" ng-if="DialogCtrl.errors.non_field_errors">
+        <p
+          class="text-danger"
           ng-repeat="error in DialogCtrl.errors.non_field_errors"
-          ng-bind="error">
-        </p>
+          ng-bind="error"
+        ></p>
       </div>
     </div>
   </div>
@@ -138,11 +173,15 @@
       class="btn btn-primary"
       type="submit"
       ng-disabled="DialogCtrl.DialogForm.$invalid"
-      submit-button="DialogCtrl.submitForm()">
+      submit-button="DialogCtrl.submitForm()"
+    >
       <span translate>Invite user</span>
     </button>
-    <button class="btn btn-default" type="button"
-      ng-click="DialogCtrl.dismiss()">
+    <button
+      class="btn btn-default"
+      type="button"
+      ng-click="DialogCtrl.dismiss()"
+    >
       <span translate>Cancel</span>
     </button>
   </div>

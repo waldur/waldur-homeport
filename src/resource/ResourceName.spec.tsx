@@ -9,7 +9,9 @@ import '@waldur/openstack/provider';
 import { ResourceName } from './ResourceName';
 
 jest.mock('@waldur/core/services', () => ({
-  $state: {href: (_, params) => `/resource/${params.resource_type}/${params.uuid}/`},
+  $state: {
+    href: (_, params) => `/resource/${params.resource_type}/${params.uuid}/`,
+  },
 }));
 
 const resource = {
@@ -24,14 +26,13 @@ const renderLink = (extraProps?) => {
   const store = mockStore();
   const component = (
     <Provider store={store}>
-      <ResourceName resource={{...resource, ...extraProps}}/>
+      <ResourceName resource={{ ...resource, ...extraProps }} />
     </Provider>
   );
   return mount(component);
 };
 
 describe('ResourceName', () => {
-
   it('renders a name', () => {
     const wrapper = renderLink();
     const label = wrapper.text().trim();
@@ -57,7 +58,7 @@ describe('ResourceName', () => {
   });
 
   it('renders a warning', () => {
-    const wrapper = renderLink({is_link_valid: false});
+    const wrapper = renderLink({ is_link_valid: false });
     const icon = wrapper.find('i').prop('className');
     expect(icon).toContain('fa-exclamation-triangle');
   });

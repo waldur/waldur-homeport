@@ -11,8 +11,9 @@ interface Props {
 }
 
 export const AccountingPeriodField = (props: Props) => (
-  <Field name="accounting_period"
-    component={prop =>
+  <Field
+    name="accounting_period"
+    component={prop => (
       <Select
         className="accounting-period-selector"
         placeholder={translate('Select accounting period')}
@@ -24,6 +25,6 @@ export const AccountingPeriodField = (props: Props) => (
         options={props.options}
         clearable={false}
       />
-    }
+    )}
   />
 );

@@ -11,8 +11,9 @@ interface ResourceStateProps {
 }
 
 // TODO: remove extra check after resources list is migrated to ReactJS
-export const ResourceState = (props: ResourceStateProps) => props.resource ? (
-  <StateIndicator {...getResourceState(props.resource)}/>
-) : null;
+export const ResourceState = (props: ResourceStateProps) =>
+  props.resource ? (
+    <StateIndicator {...getResourceState(props.resource)} />
+  ) : null;
 
 export default connectAngularComponent(ResourceState, ['resource']);

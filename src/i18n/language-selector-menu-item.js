@@ -15,7 +15,7 @@ const languageSelectorMenuItem = {
       this.currentLanguage = language;
       this.utils.setCurrentLanguage(language);
     }
-  }
+  },
 };
 
 export default languageSelectorMenuItem;

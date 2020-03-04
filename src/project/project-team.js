@@ -1,7 +1,7 @@
 import template from './project-team.html';
 
 const projectTeam = {
-  template: template
+  template: template,
 };
 
 export default projectTeam;

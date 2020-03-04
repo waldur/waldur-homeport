@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
-import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
+import {
+  parseIntField,
+  formatIntField,
+} from '@waldur/marketplace/common/utils';
 import { getOfferingComponentValidator } from '@waldur/marketplace/offerings/store/limits';
 
 import { ComponentRow } from './ComponentRow';
@@ -14,7 +17,8 @@ interface Props {
 const RowWrapper = props => (
   <ComponentRow
     offeringComponent={props.offeringComponent}
-    className={props.meta.error ? 'form-group has-error' : 'form-group'}>
+    className={props.meta.error ? 'form-group has-error' : 'form-group'}
+  >
     <input
       className="form-control"
       type="number"

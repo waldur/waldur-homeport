@@ -8,19 +8,27 @@ eventsRegistry.registerGroup({
   events: [
     {
       key: 'auth_logged_in_with_username',
-      title: gettext('User {user_link} authenticated successfully with username and password.'),
+      title: gettext(
+        'User {user_link} authenticated successfully with username and password.',
+      ),
     },
     {
       key: 'auth_logged_in_with_google',
-      title: gettext('User {user_link} authenticated successfully with Google.'),
+      title: gettext(
+        'User {user_link} authenticated successfully with Google.',
+      ),
     },
     {
       key: 'auth_logged_in_with_facebook',
-      title: gettext('User {user_link} authenticated successfully with Facebook.'),
+      title: gettext(
+        'User {user_link} authenticated successfully with Facebook.',
+      ),
     },
     {
       key: 'auth_logged_in_with_smart_id_ee',
-      title: gettext('User {user_link} authenticated successfully with Smart ID EE.'),
+      title: gettext(
+        'User {user_link} authenticated successfully with Smart ID EE.',
+      ),
     },
     {
       key: 'auth_logged_in_with_saml2',

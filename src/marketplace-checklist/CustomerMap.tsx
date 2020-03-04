@@ -31,12 +31,13 @@ export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => {
     async function loadAll() {
       try {
         const { leaflet } = await loadLeafleat();
-        const createIcon = iconUrl => new leaflet.Icon({
-          iconUrl,
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-        });
+        const createIcon = iconUrl =>
+          new leaflet.Icon({
+            iconUrl,
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+          });
         const greenIcon = createIcon(iconGreen);
         const redIcon = createIcon(iconRed);
         const yellowIcon = createIcon(iconYellow);
@@ -47,18 +48,28 @@ export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => {
         mapRef.current = leafletRef.current.map(nodeRef.current);
         mapRef.current.fitWorld();
 
-        leafletRef.current.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(mapRef.current);
+        leafletRef.current
+          .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution:
+              '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          })
+          .addTo(mapRef.current);
 
-        layerRef.current = leafletRef.current.layerGroup().addTo(mapRef.current);
+        layerRef.current = leafletRef.current
+          .layerGroup()
+          .addTo(mapRef.current);
         customers.forEach(customer => {
           if (!customer.longitude || !customer.latitude) {
             return;
           }
           leafletRef.current
             .marker([customer.latitude, customer.longitude], {
-              icon: customer.score < 25 ? redIcon : customer.score < 75 ? yellowIcon : greenIcon,
+              icon:
+                customer.score < 25
+                  ? redIcon
+                  : customer.score < 75
+                  ? yellowIcon
+                  : greenIcon,
             })
             .bindPopup(`${customer.name}: ${customer.score} %`)
             .addTo(layerRef.current);
@@ -73,10 +84,7 @@ export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => {
   return (
     <>
       {loading && <LoadingSpinner />}
-      <div
-        ref={nodeRef}
-        style={{width: '100%', height: 300}}
-      />
+      <div ref={nodeRef} style={{ width: '100%', height: 300 }} />
     </>
   );
 };

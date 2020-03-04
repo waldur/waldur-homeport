@@ -11,9 +11,7 @@ interface Props {
 
 export const ProviderAutocomplete: React.FC<Props> = props => (
   <div className={`form-group ${props.className}`}>
-    <label className="control-label">
-      {translate('Service provider')}
-    </label>
+    <label className="control-label">{translate('Service provider')}</label>
     <Field
       name="provider"
       component={fieldProps => (

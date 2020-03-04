@@ -17,40 +17,40 @@ const INITIAL_STATE = {
 export function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_REQUEST:
-    return {
-      loading: true,
-      loaded: false,
-      erred: false,
-    };
+      return {
+        loading: true,
+        loaded: false,
+        erred: false,
+      };
 
     case FETCH_SUCCESS:
-    return {
-      loading: false,
-      loaded: true,
-      erred: false,
-      host: action.payload.host,
-    };
+      return {
+        loading: false,
+        loaded: true,
+        erred: false,
+        host: action.payload.host,
+      };
 
     case FETCH_FAILURE:
-    return {
-      loading: false,
-      loaded: false,
-      erred: true,
-    };
+      return {
+        loading: false,
+        loaded: false,
+        erred: true,
+      };
 
     case DELETE_REQUEST:
-    return {
-      ...state,
-      deleting: true,
-    };
+      return {
+        ...state,
+        deleting: true,
+      };
 
     case DELETE_FAILURE:
-    return {
-      ...state,
-      deleting: false,
-    };
+      return {
+        ...state,
+        deleting: false,
+      };
 
     default:
-    return state;
+      return state;
   }
 }

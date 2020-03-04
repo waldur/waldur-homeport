@@ -16,7 +16,6 @@ import { ImportDialogProps } from './types';
 import { useImportDialog } from './useImportDialog';
 
 export const ResourceImportDialog: React.FC<ImportDialogProps> = props => {
-
   const {
     offering,
     selectOffering,
@@ -41,49 +40,62 @@ export const ResourceImportDialog: React.FC<ImportDialogProps> = props => {
             submitting={submitting}
             onClick={handleSubmit}
           />
-          <CloseDialogButton/>
+          <CloseDialogButton />
         </>
-      }>
-      {
-        offeringsProps.loading ? <LoadingSpinner/> :
-        offeringsProps.erred ? <h3>{translate('Unable to load data.')}</h3> :
+      }
+    >
+      {offeringsProps.loading ? (
+        <LoadingSpinner />
+      ) : offeringsProps.erred ? (
+        <h3>{translate('Unable to load data.')}</h3>
+      ) : (
         offeringsProps.loaded &&
-        (offeringsProps.data.length === 0 ? (translate('There are no offerings available.')) :
-        <Row>
-          <Col lg={12}>
-            <Panel
-              className="float-e-margins"
-              title={translate('Step 1. Select offering')}>
-              <OfferingsList
-                choices={offeringsProps.data}
-                value={offering}
-                onChange={selectOffering}
-              />
-            </Panel>
-          </Col>
-          {offering && (
+        (offeringsProps.data.length === 0 ? (
+          translate('There are no offerings available.')
+        ) : (
+          <Row>
             <Col lg={12}>
               <Panel
                 className="float-e-margins"
-                title={translate('Step 2. Select resources')}>
-                {
-                  resourceProps.loading ? <LoadingSpinner/> :
-                  resourceProps.erred ? <h3>{translate('Unable to load data.')}</h3> :
-                  resourceProps.loaded &&
-                  (resourceProps.data.length === 0 ? (translate('There are no resources available.')) :
-                  <ResourcesList
-                    resources={resourceProps.data}
-                    offering={offering}
-                    value={resources}
-                    toggleResource={toggleResource}
-                    plans={plans}
-                    assignPlan={assignPlan}
-                  />
-                )}
+                title={translate('Step 1. Select offering')}
+              >
+                <OfferingsList
+                  choices={offeringsProps.data}
+                  value={offering}
+                  onChange={selectOffering}
+                />
               </Panel>
             </Col>
-          )}
-        </Row>
+            {offering && (
+              <Col lg={12}>
+                <Panel
+                  className="float-e-margins"
+                  title={translate('Step 2. Select resources')}
+                >
+                  {resourceProps.loading ? (
+                    <LoadingSpinner />
+                  ) : resourceProps.erred ? (
+                    <h3>{translate('Unable to load data.')}</h3>
+                  ) : (
+                    resourceProps.loaded &&
+                    (resourceProps.data.length === 0 ? (
+                      translate('There are no resources available.')
+                    ) : (
+                      <ResourcesList
+                        resources={resourceProps.data}
+                        offering={offering}
+                        value={resources}
+                        toggleResource={toggleResource}
+                        plans={plans}
+                        assignPlan={assignPlan}
+                      />
+                    ))
+                  )}
+                </Panel>
+              </Col>
+            )}
+          </Row>
+        ))
       )}
     </ModalDialog>
   );

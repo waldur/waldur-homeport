@@ -19,8 +19,9 @@ type MergedProps = StateProps & OwnProps;
 const PureCategoryLink: React.FC<MergedProps> = props => (
   <Link
     state={props.state}
-    params={{category_uuid: props.category_uuid}}
-    className={props.className}>
+    params={{ category_uuid: props.category_uuid }}
+    className={props.className}
+  >
     {props.children}
   </Link>
 );

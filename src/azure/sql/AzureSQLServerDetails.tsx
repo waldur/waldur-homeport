@@ -13,7 +13,7 @@ export const AzureSQLServerDetails = (props: OrderItemDetailsProps) => {
         {attributes.username}
       </OrderItemDetailsField>
       <OrderItemDetailsField label={translate('Admin password')}>
-        <SecretValueField className="max-w-300" value={attributes.password}/>
+        <SecretValueField className="max-w-300" value={attributes.password} />
       </OrderItemDetailsField>
     </>
   );

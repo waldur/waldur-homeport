@@ -23,5 +23,5 @@ export interface OrderItemRequest {
   offering: Offering;
   plan?: Plan;
   attributes?: AttributesType;
-  limits?: {[key: string]: number};
+  limits?: { [key: string]: number };
 }

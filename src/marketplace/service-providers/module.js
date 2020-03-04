@@ -4,6 +4,12 @@ import marketplaceServiceProviderSecretCodeGenerateConfirm from './ServiceProvid
 
 export default module => {
   module.component('marketplaceProviderDetails', marketplaceProviderDetails);
-  module.component('marketplaceServiceProviderManagement', marketplaceServiceProviderManagement);
-  module.component('marketplaceServiceProviderSecretCodeGenerateConfirm', marketplaceServiceProviderSecretCodeGenerateConfirm);
+  module.component(
+    'marketplaceServiceProviderManagement',
+    marketplaceServiceProviderManagement,
+  );
+  module.component(
+    'marketplaceServiceProviderSecretCodeGenerateConfirm',
+    marketplaceServiceProviderSecretCodeGenerateConfirm,
+  );
 };

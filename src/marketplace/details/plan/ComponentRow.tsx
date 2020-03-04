@@ -12,13 +12,9 @@ interface Props {
 export const ComponentRow: React.FC<Props> = props => (
   <tr>
     <td>
-      <p className="form-control-static">
-        {props.offeringComponent.name}
-      </p>
+      <p className="form-control-static">{props.offeringComponent.name}</p>
     </td>
-    <td className={props.className}>
-      {props.children}
-    </td>
+    <td className={props.className}>{props.children}</td>
     <td>
       <p className="form-control-static">
         {props.offeringComponent.measured_unit || 'N/A'}

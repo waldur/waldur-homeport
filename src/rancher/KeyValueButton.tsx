@@ -8,15 +8,13 @@ export const KeyValueButton = props => {
   const dispatch = useDispatch();
 
   const showDetails = React.useCallback(() => {
-    const resolve = {items: props.items};
-    dispatch(openModalDialog('rancherKeyValueDialog', {resolve}));
+    const resolve = { items: props.items };
+    dispatch(openModalDialog('rancherKeyValueDialog', { resolve }));
   }, []);
 
   return (
     <a onClick={showDetails}>
-      {translate('Show details')}
-      {' '}
-      <i className="fa fa-external-link"/>
+      {translate('Show details')} <i className="fa fa-external-link" />
     </a>
   );
 };

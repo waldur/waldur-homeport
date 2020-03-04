@@ -7,7 +7,8 @@ const openstackInstanceDataVolume = {
       this.toggleField();
     }
     toggleField() {
-      this.model[this.field.name] = this.model[this.field.name] === undefined ? this.field.min : undefined;
+      this.model[this.field.name] =
+        this.model[this.field.name] === undefined ? this.field.min : undefined;
       this.active = this.model[this.field.name] !== undefined;
     }
   },

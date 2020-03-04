@@ -1,13 +1,19 @@
 <div class="form-control-static">
-  <span ng-if="::$ctrl.renderWarning"
+  <span
+    ng-if="::$ctrl.renderWarning"
     class="text-danger"
-    bind-html-compile="$ctrl.warningMessage"></span>
-  <span ng-if="::$ctrl.renderEmpty"
-    bind-html-compile="$ctrl.emptyMessage"></span>
-  <a ng-if="::$ctrl.hasChoices"
+    bind-html-compile="$ctrl.warningMessage"
+  ></span>
+  <span
+    ng-if="::$ctrl.renderEmpty"
+    bind-html-compile="$ctrl.emptyMessage"
+  ></span>
+  <a
+    ng-if="::$ctrl.hasChoices"
     ng-click="$ctrl.openDialog()"
     ng-keydown="$event.keyCode === 13 && $ctrl.openDialog()"
-    tabindex="0">
+    tabindex="0"
+  >
     {{ $ctrl.getLabel() }}
     <i class="fa fa-caret-down"></i>
   </a>

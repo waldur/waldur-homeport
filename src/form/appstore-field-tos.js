@@ -9,7 +9,9 @@ const appstoreFieldTos = {
   },
   controller: class appstoreFieldTosController {
     invalid() {
-      return this.form[this.field.name].$dirty && this.form[this.field.name].$invalid;
+      return (
+        this.form[this.field.name].$dirty && this.form[this.field.name].$invalid
+      );
     }
 
     showRequiredError() {

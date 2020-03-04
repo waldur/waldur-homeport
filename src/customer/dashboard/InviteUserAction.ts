@@ -12,14 +12,16 @@ export const getInviteAction = (props: CustomerActionsProps) => {
   return {
     title: translate('Invite team member'),
     onClick() {
-      $uibModal.open({
-        component: 'invitationDialog',
-        resolve: {
-          context: () => props,
-        },
-      }).result.then(() => {
-        $state.go('organization.team');
-      });
+      $uibModal
+        .open({
+          component: 'invitationDialog',
+          resolve: {
+            context: () => props,
+          },
+        })
+        .result.then(() => {
+          $state.go('organization.team');
+        });
     },
   };
 };

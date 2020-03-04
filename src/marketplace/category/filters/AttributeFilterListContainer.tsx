@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import { MARKETPLACE_FILTER_FORM } from '../store/constants';
 import * as selectors from '../store/selectors';
+
 import { AttributeFilterList } from './AttributeFilterList';
 
 const connector = connect(state => ({

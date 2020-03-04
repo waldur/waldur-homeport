@@ -16,14 +16,15 @@ interface IssueCommentDeleteDialogProps extends TranslateProps {
   };
 }
 
-export const PureIssueCommentDeleteDialog = (props: IssueCommentDeleteDialogProps) => {
+export const PureIssueCommentDeleteDialog = (
+  props: IssueCommentDeleteDialogProps,
+) => {
   const { onSubmit, translate } = props;
   return (
-    <ActionDialog
-      submitLabel={translate('Delete')}
-      onSubmit={onSubmit}
-    >
-      <h3 className="text-center">{translate('Do you really want to delete comment?')}</h3>
+    <ActionDialog submitLabel={translate('Delete')} onSubmit={onSubmit}>
+      <h3 className="text-center">
+        {translate('Do you really want to delete comment?')}
+      </h3>
     </ActionDialog>
   );
 };
@@ -36,10 +37,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-const enhance = compose(
-  connect(null, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = compose(connect(null, mapDispatchToProps), withTranslation);
 
 export const IssueCommentDeleteDialog = enhance(PureIssueCommentDeleteDialog);
 

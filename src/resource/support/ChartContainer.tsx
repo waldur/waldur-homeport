@@ -83,9 +83,10 @@ const getQuotas = (): QuotaList => [
 ];
 
 const calculateTotal = data =>
-  parseInt(data.reduce((t, entry) =>
-    t + (isNaN(entry.value) ? 0 : entry.value),
-  0), 10);
+  parseInt(
+    data.reduce((t, entry) => t + (isNaN(entry.value) ? 0 : entry.value), 0),
+    10,
+  );
 
 interface StateProps {
   accounting_is_running: boolean;
@@ -103,10 +104,7 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
   }
 
   return (
-    <Query
-      loader={loadData}
-      variables={props.accounting_is_running}
-    >
+    <Query loader={loadData} variables={props.accounting_is_running}>
       {({ loading, error, data }) => {
         const chartData = data ? parseProjects(data, keys) : {};
         let total = 0;
@@ -115,13 +113,10 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
         }
         return (
           <>
-            <TreemapChartFilter
-              quotas={quotas}
-              loading={loading}
-            />
-            {loading && <LoadingSpinner/>}
+            <TreemapChartFilter quotas={quotas} loading={loading} />
+            {loading && <LoadingSpinner />}
             {error && <span>{translate('Unable to load locations.')}</span>}
-            {data && !loading && !error &&
+            {data && !loading && !error && (
               <TreemapChart
                 title={props.translate('Resource usage')}
                 width="100%"
@@ -130,7 +125,7 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
                 tooltipValueFormatter={tooltipValueFormatter}
                 total={total}
               />
-            }
+            )}
           </>
         );
       }}
@@ -143,9 +138,6 @@ const mapStateToProps = state => ({
   quota: treemapFilterSelector(state, 'quota'),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps), withTranslation);
 
 export default connectAngularComponent(enhance(TreemapContainer));

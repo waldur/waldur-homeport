@@ -1,73 +1,62 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es6': true
-  },
-  'plugins': [
-    'react'
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
   ],
-  'extends': [
-    'eslint:recommended',
-    'plugin:react/recommended'
-  ],
-  'parser': 'babel-eslint',
-  'parserOptions': {
-    'sourceType': 'module'
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
+    project: './tsconfig.json',
+    tsconfigRootDir: './',
   },
-  'rules': {
-    'indent': [
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/resolver': {
+      alias: {
+        map: [['@waldur', './src']],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+      },
+    },
+    'import/internal-regex': '^@waldur/',
+  },
+  rules: {
+    'react/prop-types': 'off',
+    'react/display-name': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_' }],
+    'import/order': [
       'error',
-      2
-    ],
-    'quotes': [
-      'error',
-      'single',
       {
-        'allowTemplateLiterals': true
-      }
-    ],
-    'semi': [
-      'error',
-      'always'
-    ],
-    'eol-last': [
-      'error',
-      'always'
-    ],
-    'no-multiple-empty-lines': [
-      'error',
-      {
-        'max': 2,
-        'maxEOF': 1
-      }
-    ],
-    'no-trailing-spaces': [
-      'error'
-    ],
-    'no-console': [
-      'warn'
-    ],
-    'no-var': [
-      'error'
-    ],
-    'eqeqeq': [
-      'error',
-      'always',
-      {
-        null: 'ignore'
-      }
-    ],
-    'quote-props': [
-      'error',
-      'as-needed',
-      {
-        keywords: false,
-        unnecessary: true,
-        numbers: false
-      }
+        'newlines-between': 'always',
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+      },
     ],
   },
-  'globals': {
+  globals: {
     gettext: true,
     angular: true,
     d3: true,
@@ -85,5 +74,5 @@ module.exports = {
     require: true,
     cy: true,
     Cypress: true,
-  }
+  },
 };

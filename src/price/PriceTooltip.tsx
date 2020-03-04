@@ -42,7 +42,7 @@ class PurePriceTooltip extends React.PureComponent<Props> {
 
     return (
       <Tooltip label={message} id="price-tooltip">
-        <i className="fa fa-exclamation-circle m-l-xs hidden-print"/>
+        <i className="fa fa-exclamation-circle m-l-xs hidden-print" />
       </Tooltip>
     );
   }

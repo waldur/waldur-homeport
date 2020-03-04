@@ -8,12 +8,7 @@ interface CheckboxFieldProps extends FormField {
 }
 
 export const CheckboxField = (props: CheckboxFieldProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
-  return (
-    <input
-      {...props.input}
-      type="checkbox"
-      {...rest}
-    />
-  );
+  return <input {...props.input} type="checkbox" {...rest} />;
 };

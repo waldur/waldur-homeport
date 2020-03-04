@@ -1,6 +1,6 @@
 import { translate } from '@waldur/i18n';
 
-export const getBillingPeriods = () => ([
+export const getBillingPeriods = () => [
   {
     label: translate('Per month'),
     value: 'month',
@@ -17,4 +17,4 @@ export const getBillingPeriods = () => ([
     label: translate('Per hour'),
     value: 'hour',
   },
-]);
+];

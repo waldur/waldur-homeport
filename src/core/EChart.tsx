@@ -29,14 +29,18 @@ export class EChart extends React.Component<ChartProps> {
   }
 
   componentWillUnmount() {
-    if (!this.chart) { return; }
+    if (!this.chart) {
+      return;
+    }
     this.chart.dispose();
     this.container = null;
   }
 
   componentDidUpdate(prevProps) {
     const { options } = this.props;
-    if (options === prevProps.options) { return; }
+    if (options === prevProps.options) {
+      return;
+    }
     if (this.chart) {
       this.renderChart();
     } else if (!this.chart && !this.state.loading) {
@@ -52,7 +56,9 @@ export class EChart extends React.Component<ChartProps> {
       this.setState({
         loading: false,
       });
-      if (!this.container) { return; }
+      if (!this.container) {
+        return;
+      }
       const echarts = module.default;
       const chart = echarts.getInstanceByDom(this.container);
       if (!chart) {
@@ -70,15 +76,12 @@ export class EChart extends React.Component<ChartProps> {
     const { loading } = this.state;
     const style = { width, height };
     return (
-      <div
-        className="content-center-center"
-        style={style}
-      >
+      <div className="content-center-center" style={style}>
         {loading && <LoadingSpinner />}
         <div
           className={classNames({ hidden: loading })}
           style={style}
-          ref={container => this.container = container}
+          ref={container => (this.container = container)}
         />
       </div>
     );

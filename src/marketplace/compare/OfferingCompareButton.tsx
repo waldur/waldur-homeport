@@ -16,8 +16,12 @@ export const OfferingCompareButton = (props: OfferingCompareButtonProps) => (
   <OfferingButton
     icon="fa fa-balance-scale"
     isActive={props.isCompared}
-    title={props.isCompared ? translate('Remove from comparison') : translate('Add to comparison')}
-    onClick={() => props.isCompared ? props.removeItem() : props.addItem()}
+    title={
+      props.isCompared
+        ? translate('Remove from comparison')
+        : translate('Add to comparison')
+    }
+    onClick={() => (props.isCompared ? props.removeItem() : props.addItem())}
     flavor={props.flavor}
   />
 );

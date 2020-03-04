@@ -8,9 +8,16 @@ import { $state } from '@waldur/core/services';
 import { OfferingGrid } from '../common/OfferingGrid';
 import * as actions from '../landing/store/actions';
 import { Offering } from '../types';
+
 import { loadOfferingsStart, loadDataStart } from './store/actions';
 import { MARKETPLACE_FILTER_FORM } from './store/constants';
-import { getOfferings, isOfferingsLoading, isOfferingsLoaded, getFilterAttributes, getFilterName } from './store/selectors';
+import {
+  getOfferings,
+  isOfferingsLoading,
+  isOfferingsLoaded,
+  getFilterAttributes,
+  getFilterName,
+} from './store/selectors';
 
 const mapStateToProps = state => ({
   items: getOfferings(state),
@@ -52,7 +59,10 @@ class OfferingGridWrapper extends React.Component<OfferingGridWrapperProps> {
 
   componentDidUpdate(prevProps: OfferingGridWrapperProps) {
     if (this.props.filterCategory !== prevProps.filterCategory) {
-      if (this.props.filterAttributes && Object.keys(this.props.filterAttributes).length > 0) {
+      if (
+        this.props.filterAttributes &&
+        Object.keys(this.props.filterAttributes).length > 0
+      ) {
         this.props.resetForm();
       }
     } else if (this.props.filterAttributes !== prevProps.filterAttributes) {

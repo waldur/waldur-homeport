@@ -1,6 +1,10 @@
 <div class="modal-header">
-  <h2 class="modal-title" ng-if="!$ctrl.invitationChecked()" translate>Invitation check</h2>
-  <h2 class="modal-title" ng-if="$ctrl.invitationChecked()" translate>Email update</h2>
+  <h2 class="modal-title" ng-if="!$ctrl.invitationChecked()" translate>
+    Invitation check
+  </h2>
+  <h2 class="modal-title" ng-if="$ctrl.invitationChecked()" translate>
+    Email update
+  </h2>
 </div>
 <div class="modal-body">
   <div ng-if="!$ctrl.invitationChecked()">
@@ -8,7 +12,9 @@
       <loading-spinner></loading-spinner>
     </p>
     <p class="text-center">
-      <span translate>Please give us a moment to validate your invitation.</span>
+      <span translate
+        >Please give us a moment to validate your invitation.</span
+      >
     </p>
   </div>
   <div ng-if="$ctrl.invitationChecked()">
@@ -21,25 +27,24 @@
       <strong>{{ $ctrl.invitation.email }}</strong>
     </p>
     <p>
-      <span translate>Would you like to update your current email with the one from the invitation?</span>
+      <span translate
+        >Would you like to update your current email with the one from the
+        invitation?</span
+      >
     </p>
   </div>
 </div>
 <div class="modal-footer">
   <div ng-if="$ctrl.invitationChecked()">
-    <button
-      class="btn btn-primary"
-      ng-click="$ctrl.closeAcceptingNewEmail()">
+    <button class="btn btn-primary" ng-click="$ctrl.closeAcceptingNewEmail()">
       <span translate>Yes, use invitation email</span>
     </button>
-    <button class="btn btn-default"
-      ng-click="$ctrl.closeDecliningNewEmail()">
+    <button class="btn btn-default" ng-click="$ctrl.closeDecliningNewEmail()">
       <span translate>No, continue using current email</span>
     </button>
   </div>
   <div ng-if="!$ctrl.invitationChecked()">
-    <button class="btn btn-default"
-      ng-click="$ctrl.dismiss()">
+    <button class="btn btn-default" ng-click="$ctrl.dismiss()">
       <span translate>Cancel invitation</span>
     </button>
   </div>

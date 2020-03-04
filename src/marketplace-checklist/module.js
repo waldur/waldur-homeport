@@ -7,5 +7,8 @@ export default module => {
   module.config(routes);
   module.run(registerSidebarExtension);
   module.component('marketplaceChecklistProject', marketplaceChecklistProject);
-  module.component('marketplaceChecklistOverview', marketplaceChecklistOverview);
+  module.component(
+    'marketplaceChecklistOverview',
+    marketplaceChecklistOverview,
+  );
 };

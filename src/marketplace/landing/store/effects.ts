@@ -2,20 +2,27 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { Category } from '@waldur/marketplace/types';
 import { stateGo } from '@waldur/store/coreSaga';
-import { getWorkspace, getCustomer, getProject } from '@waldur/workspace/selectors';
+import {
+  getWorkspace,
+  getCustomer,
+  getProject,
+} from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import * as api from '../../common/api';
+
 import * as actions from './actions';
 import * as constants from './constants';
 
 function* getCategories() {
   const customer = yield select(getCustomer);
   const project = yield select(getProject);
-  const options = {params: {
-    allowed_customer_uuid: customer.uuid,
-    project_uuid: project && project.uuid,
-  }};
+  const options = {
+    params: {
+      allowed_customer_uuid: customer.uuid,
+      project_uuid: project && project.uuid,
+    },
+  };
   try {
     const categories: Category[] = yield call(api.getCategories, options);
     yield put(actions.categoriesFetchSuccess(categories));
@@ -59,7 +66,7 @@ function* getOfferings() {
 
 function* gotoOffering(action) {
   const offeringId = action.payload.offeringId;
-  const params = {offering_uuid: offeringId};
+  const params = { offering_uuid: offeringId };
   const workspace: WorkspaceType = yield select(getWorkspace);
   if (workspace === 'organization') {
     yield put(stateGo('marketplace-offering-customer', params));

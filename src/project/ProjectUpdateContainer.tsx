@@ -13,7 +13,7 @@ import { ProjectUpdateForm } from './ProjectUpdateForm';
 
 const ProjectUpdateComponent = props =>
   props.canManage ? (
-    <ProjectUpdateForm {...props}/>
+    <ProjectUpdateForm {...props} />
   ) : (
     <ProjectDetails
       name={props.project.name}
@@ -35,11 +35,15 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  updateProject: data => actions.updateProject({
-    ...data,
-    uuid: ownProps.project.uuid,
-    cache: ownProps.project,
-  }, dispatch),
+  updateProject: data =>
+    actions.updateProject(
+      {
+        ...data,
+        uuid: ownProps.project.uuid,
+        cache: ownProps.project,
+      },
+      dispatch,
+    ),
 });
 
 const enhance = compose(

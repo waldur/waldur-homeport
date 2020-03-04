@@ -15,14 +15,11 @@ export default module => {
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('OpenStack.FloatingIP', {
-    order: [
-      'pull',
-      'destroy'
-    ],
+    order: ['pull', 'destroy'],
     options: {
       pull: {
-        title: gettext('Synchronise')
+        title: gettext('Synchronise'),
       },
-    }
+    },
   });
 }

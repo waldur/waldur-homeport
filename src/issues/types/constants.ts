@@ -29,17 +29,21 @@ export const ISSUE_TEXT_CLASSES = {
 };
 
 const ISSUE_DESCRIPTIONS = {
-  INCIDENT: translate('Incident - client issue with service usage or availability (interruptions, degradation of quality).'),
-  SERVICE_REQUEST: translate('Service Request - client’s request to modify, add, change or remove partially or completely a particular service.'),
-  INFORMATIONAL: translate('Informational - client’s request to get or provide additional information related to a service.'),
-  CHANGE_REQUEST: translate('Change request - client’s request to perform a generic modification of data or service.'),
+  INCIDENT: translate(
+    'Incident - client issue with service usage or availability (interruptions, degradation of quality).',
+  ),
+  SERVICE_REQUEST: translate(
+    'Service Request - client’s request to modify, add, change or remove partially or completely a particular service.',
+  ),
+  INFORMATIONAL: translate(
+    'Informational - client’s request to get or provide additional information related to a service.',
+  ),
+  CHANGE_REQUEST: translate(
+    'Change request - client’s request to perform a generic modification of data or service.',
+  ),
 };
 
-export const ISSUE_STATUSES = [
-  'Resolved',
-  'Unresolved',
-  'Won\'t fix',
-];
+export const ISSUE_STATUSES = ['Resolved', 'Unresolved', "Won't fix"];
 
 export const ISSUE_TYPE_CHOICES = Object.keys(ISSUE_IDS).map(item => {
   return {

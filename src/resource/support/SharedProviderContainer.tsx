@@ -7,8 +7,8 @@ import { SharedProviderTabsContainer } from './SharedProviderTabs';
 
 export const SharedProviderContainer = () => (
   <>
-    <SharedProviderFilterContainer/>
-    <SharedProviderTabsContainer/>
+    <SharedProviderFilterContainer />
+    <SharedProviderTabsContainer />
   </>
 );
 

@@ -7,14 +7,15 @@
     </h4>
   </span>
   <span ng-if="::auth.loginLogo">
-    <img ng-src="{{ ::auth.loginLogo }}">
+    <img ng-src="{{ ::auth.loginLogo }}" />
   </span>
   <h4 ng-if="auth.isSignupFormVisible">
     <span translate>Register to</span> {{ ::auth.shortPageTitle }}
   </h4>
   <p>
     <span ng-if="!auth.isSignupFormVisible" translate>
-      Your single pane of control for all cloud services. Login in to see it in action.
+      Your single pane of control for all cloud services. Login in to see it in
+      action.
     </span>
     <span ng-if="auth.isSignupFormVisible" translate>
       Create an account
@@ -23,56 +24,83 @@
   <!-- Login form -->
   <form ng-if="auth.showLoginForm()" class="m-b-sm" name="auth.LoginForm">
     <div class="form-group">
-      <input type="text"
+      <input
+        type="text"
         class="form-control"
         ng-model="auth.user.username"
         placeholder="{{ 'Username' | translate }}"
-        required="">
+        required=""
+      />
     </div>
     <div class="form-group">
-      <input type="password"
+      <input
+        type="password"
         class="form-control"
         ng-model="auth.user.password"
         placeholder="{{ 'Password' | translate }}"
-        required="">
+        required=""
+      />
     </div>
-    <button type="submit"
+    <button
+      type="submit"
       class="btn btn-primary btn-block"
-      submit-button="auth.signin()">
+      submit-button="auth.signin()"
+    >
       <span translate>Login</span>
     </button>
-    <p class="text-danger"
-      ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
+    <p
+      class="text-danger"
+      ng-repeat="error in auth.getErrors()"
+      ng-bind="error"
+    ></p>
   </form>
   <!-- Registration form -->
   <form ng-if="auth.showRegisterForm()" class="m-b-sm" name="auth.RegisterForm">
     <div class="form-group">
-      <input type="text"
+      <input
+        type="text"
         ng-model="auth.user.username"
         placeholder="{{ 'Username' | translate }}"
-        class="form-control" required="">
+        class="form-control"
+        required=""
+      />
     </div>
     <div class="form-group">
-      <input type="text"
+      <input
+        type="text"
         ng-model="auth.user.full_name"
         placeholder="{{ 'Full name' | translate }}"
-        class="form-control">
+        class="form-control"
+      />
     </div>
     <div class="form-group">
-      <input type="email" required="" class="form-control" ng-model="auth.user.email"
-        placeholder="{{ 'Email' | translate }}">
+      <input
+        type="email"
+        required=""
+        class="form-control"
+        ng-model="auth.user.email"
+        placeholder="{{ 'Email' | translate }}"
+      />
     </div>
     <div class="form-group">
-      <input type="password"
+      <input
+        type="password"
         ng-model="auth.user.password"
         placeholder="{{ 'Password' | translate }}"
-        class="form-control" required="">
+        class="form-control"
+        required=""
+      />
     </div>
-    <p class="text-danger"
-      ng-repeat="error in auth.getErrors()" ng-bind="error"></p>
-    <button class="btn btn-primary btn-block"
+    <p
+      class="text-danger"
+      ng-repeat="error in auth.getErrors()"
+      ng-bind="error"
+    ></p>
+    <button
+      class="btn btn-primary btn-block"
       submit-button="auth.signup()"
-      type="submit">
+      type="submit"
+    >
       <span translate>Register</span>
     </button>
   </form>
@@ -80,28 +108,47 @@
     <small translate>Or use social login</small>
   </p>
   <div ng-if="auth.showGoogle()" class="m-b-sm">
-    <button ng-click="auth.authenticate('google')" class="btn btn-google btn-block">
+    <button
+      ng-click="auth.authenticate('google')"
+      class="btn btn-google btn-block"
+    >
       <i class="fa fa-google-plus-square" aria-hidden="true"></i>
       <auth-button-text mode="auth.mode" provider="Google"></auth-button-text>
     </button>
   </div>
   <div ng-if="auth.showFacebook()" class="m-b-sm">
-    <button ng-click="auth.authenticate('facebook')" class="btn btn-facebook btn-block">
+    <button
+      ng-click="auth.authenticate('facebook')"
+      class="btn btn-facebook btn-block"
+    >
       <i class="fa fa-facebook-square" aria-hidden="true"></i>
       <auth-button-text mode="auth.mode" provider="Facebook"></auth-button-text>
     </button>
   </div>
   <div ng-if="auth.showSmartId()" class="m-b-sm">
-    <button ng-click="auth.authenticate('smartid')" class="btn btn-smartid btn-block">
+    <button
+      ng-click="auth.authenticate('smartid')"
+      class="btn btn-smartid btn-block"
+    >
       <i class="fa fa-id-card-o" aria-hidden="true"></i>
-      <span ng-if="auth.mode === 'register'" translate>Register with trusted identity</span>
-      <span ng-if="auth.mode !== 'register'" translate>Sign in with trusted identity</span>
+      <span ng-if="auth.mode === 'register'" translate
+        >Register with trusted identity</span
+      >
+      <span ng-if="auth.mode !== 'register'" translate
+        >Sign in with trusted identity</span
+      >
     </button>
   </div>
   <div ng-if="auth.showTARA()" class="m-b-sm">
-    <button ng-click="auth.authenticate('tara')" class="btn btn-smartid btn-block">
+    <button
+      ng-click="auth.authenticate('tara')"
+      class="btn btn-smartid btn-block"
+    >
       <i class="fa fa-id-card-o" aria-hidden="true"></i>
-      <auth-button-text mode="auth.mode" provider="{{ auth.getTARALabel() }}"></auth-button-text>
+      <auth-button-text
+        mode="auth.mode"
+        provider="{{ auth.getTARALabel() }}"
+      ></auth-button-text>
     </button>
   </div>
   <div ng-if="auth.showSaml2()">

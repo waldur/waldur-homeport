@@ -6,8 +6,10 @@ import { CancelButton } from './CancelButton';
 const renderButton = (options = {}) =>
   shallow(<CancelButton disabled={false} label="Cancel" {...options} />);
 
-const isDisabled = (wrapper: ShallowWrapper) => wrapper.find('button').prop('disabled');
-const clickButton = (wrapper: ShallowWrapper) => wrapper.find('button').simulate('click');
+const isDisabled = (wrapper: ShallowWrapper) =>
+  wrapper.find('button').prop('disabled');
+const clickButton = (wrapper: ShallowWrapper) =>
+  wrapper.find('button').simulate('click');
 
 describe('CancelButton', () => {
   it('renders enabled button', () => {

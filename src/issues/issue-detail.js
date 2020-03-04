@@ -1,7 +1,10 @@
 import template from './issue-detail.html';
 
 const linkify = s =>
-  s.replace(/\[(.+?)\|(.+)\]/g, (_, name, href) => `<a href="${href}">${name}</a>`);
+  s.replace(
+    /\[(.+?)\|(.+)\]/g,
+    (_, name, href) => `<a href="${href}">${name}</a>`,
+  );
 
 const issueDetail = {
   template,
@@ -39,15 +42,18 @@ const issueDetail = {
           this.staffOrSupport = user.is_staff || user.is_support;
         }),
         this.issuesService.$get(this.$stateParams.uuid).then(issue => {
-          this.issue = {...issue, description: linkify(issue.description)};
+          this.issue = { ...issue, description: linkify(issue.description) };
         }),
       ]);
     }
 
     showLink() {
-      return this.issue.link && (this.currentUser.is_staff || this.currentUser.is_support);
+      return (
+        this.issue.link &&
+        (this.currentUser.is_staff || this.currentUser.is_support)
+      );
     }
-  }
+  },
 };
 
 export default issueDetail;

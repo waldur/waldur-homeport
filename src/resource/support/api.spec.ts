@@ -1,6 +1,6 @@
 import { parseProjects } from './api';
 
-// tslint:disable-next-line
+// eslint-disable-next-line
 const fixture = require('./api.fixture.json');
 
 describe('parseProjects', () => {

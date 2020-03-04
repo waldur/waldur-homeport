@@ -1,7 +1,10 @@
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { Flavor, Subnet } from '@waldur/openstack/openstack-instance/types';
-import { formatVolumeTypeChoices, getDefaultVolumeType } from '@waldur/openstack/openstack-instance/utils';
+import {
+  formatVolumeTypeChoices,
+  getDefaultVolumeType,
+} from '@waldur/openstack/openstack-instance/utils';
 import { formatFlavor } from '@waldur/resource/utils';
 
 import { getFlavors, getSubnets, getVolumeTypes } from './api';
@@ -10,8 +13,9 @@ const CLUSTER_NAME_PATTERN = new RegExp('^[a-z0-9]([-a-z0-9])+[a-z0-9]$');
 
 export const rancherClusterName = (value: string) =>
   // tslint:disable-next-line:max-line-length
-  !value.match(CLUSTER_NAME_PATTERN) ? translate('Name must consist of lower case alphanumeric characters.') :
-  undefined ;
+  !value.match(CLUSTER_NAME_PATTERN)
+    ? translate('Name must consist of lower case alphanumeric characters.')
+    : undefined;
 
 const formatSubnetOption = (subnet: Subnet) => ({
   label: `${subnet.network_name} / ${subnet.name} (${subnet.cidr})`,
@@ -33,7 +37,7 @@ const getMountPointChoices = () => {
 };
 
 export const loadData = async settings => {
-  const params = {settings};
+  const params = { settings };
   const flavors = await getFlavors(params);
   const subnets = await getSubnets(params);
   const volumeTypes = await getVolumeTypes(params);

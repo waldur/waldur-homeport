@@ -18,8 +18,10 @@ interface QueryProps<Variables, Data> {
   children: React.StatelessComponent<QueryChildProps<Data>>;
 }
 
-export class Query<Variables = object, Data = object> extends
-  React.Component<QueryProps<Variables, Data>, QueryState<Data>> {
+export class Query<Variables = object, Data = object> extends React.Component<
+  QueryProps<Variables, Data>,
+  QueryState<Data>
+> {
   state = {
     loading: true,
     loaded: false,
@@ -72,9 +74,9 @@ export class Query<Variables = object, Data = object> extends
         error,
       });
     }
-  }
+  };
 
   render() {
-    return this.props.children({...this.state, loadData: this.loadData});
+    return this.props.children({ ...this.state, loadData: this.loadData });
   }
 }

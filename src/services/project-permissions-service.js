@@ -1,7 +1,7 @@
 // @ngInject
 export default function projectPermissionsService(baseServiceClass, ncUtils) {
   let ServiceClass = baseServiceClass.extend({
-    init:function() {
+    init: function() {
       this._super();
       this.endpoint = '/project-permissions/';
     },
@@ -10,7 +10,7 @@ export default function projectPermissionsService(baseServiceClass, ncUtils) {
       return this.$delete(this.getPermissionKey(permission));
     },
 
-    getPermissionKey: ncUtils.getUUID
+    getPermissionKey: ncUtils.getUUID,
   });
   return new ServiceClass();
 }

@@ -7,6 +7,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { isStaff, isOwner } from '@waldur/workspace/selectors';
 
 import { canManageCustomer } from '../create/selectors';
+
 import { CustomerEditDetails } from './CustomerEditDetails';
 import * as actions from './store/actions';
 
@@ -16,8 +17,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  uploadLogo: formData => actions.uploadLogo({customerUuid: props.customer.uuid, image: formData.image}, dispatch),
-  removeLogo: () => actions.removeLogo({customer: props.customer}, dispatch),
+  uploadLogo: formData =>
+    actions.uploadLogo(
+      { customerUuid: props.customer.uuid, image: formData.image },
+      dispatch,
+    ),
+  removeLogo: () => actions.removeLogo({ customer: props.customer }, dispatch),
 });
 
 const enhance = compose(
@@ -27,4 +32,6 @@ const enhance = compose(
 
 export const CustomerEditDetailsContainer = enhance(CustomerEditDetails);
 
-export default connectAngularComponent(CustomerEditDetailsContainer, ['customer']);
+export default connectAngularComponent(CustomerEditDetailsContainer, [
+  'customer',
+]);

@@ -4,7 +4,7 @@ const resourceBarChart = {
   template,
   bindings: {
     projects: '<items',
-  }
+  },
 };
 
 export default resourceBarChart;

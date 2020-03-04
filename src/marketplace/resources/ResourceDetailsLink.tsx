@@ -19,7 +19,8 @@ export const ResourceDetailsLink = (props: ResourceDetailsLinkProps) => {
         params={{
           uuid: props.item.resource_uuid,
         }}
-        label={props.children}/>
+        label={props.children}
+      />
     );
   } else {
     return (

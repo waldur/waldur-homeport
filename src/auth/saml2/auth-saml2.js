@@ -12,14 +12,16 @@ const authSaml2 = {
       this.ENV = ENV;
     }
 
-    $onInit(){
+    $onInit() {
       this.providerLabel = this.ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_LABEL;
     }
 
     login() {
-      return this.Saml2Service.login(this.ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_URL);
+      return this.Saml2Service.login(
+        this.ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_URL,
+      );
     }
-  }
+  },
 };
 
 export default authSaml2;

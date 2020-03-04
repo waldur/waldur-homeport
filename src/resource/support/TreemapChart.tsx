@@ -100,7 +100,7 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
 
   render() {
     const { width, height } = this.props;
-    const style = {width, height};
+    const style = { width, height };
     return (
       <>
         <h2>
@@ -108,7 +108,7 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
             total: this.props.tooltipValueFormatter(this.props.total),
           })}
         </h2>
-        <div style={style} ref={container => this.container = container}/>
+        <div style={style} ref={container => (this.container = container)} />
       </>
     );
   }

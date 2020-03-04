@@ -4,11 +4,17 @@ const addProjectMember = {
   template,
   bindings: {
     close: '&',
-    resolve: '<'
+    resolve: '<',
   },
   controller: class AddProjectMemberDialogController {
     // @ngInject
-    constructor(projectPermissionsService, customersService, $q, ENV, ErrorMessageFormatter) {
+    constructor(
+      projectPermissionsService,
+      customersService,
+      $q,
+      ENV,
+      ErrorMessageFormatter,
+    ) {
       this.$q = $q;
       this.projectPermissionsService = projectPermissionsService;
       this.customersService = customersService;
@@ -22,12 +28,12 @@ const addProjectMember = {
       this.addTitle = gettext('Add project member');
       this.projectModel = {
         role: null,
-        expiration_time: null
+        expiration_time: null,
       };
 
       this.possibleRoles = [
         { name: roles.manager, value: 'manager' },
-        { name: roles.admin, value: 'admin' }
+        { name: roles.admin, value: 'admin' },
       ];
       this.datetime = {
         name: 'expiration_time',
@@ -35,10 +41,12 @@ const addProjectMember = {
           format: 'dd.MM.yyyy',
           altInputFormats: ['M!/d!/yyyy'],
           dateOptions: {
-            minDate: moment().add(1, 'days').toDate(),
-            startingDay: 1
-          }
-        }
+            minDate: moment()
+              .add(1, 'days')
+              .toDate(),
+            startingDay: 1,
+          },
+        },
       };
 
       this.loading = true;
@@ -55,41 +63,53 @@ const addProjectMember = {
         this.addTitle = gettext('Edit project member');
         this.projectModel.user = this.resolve.editUser;
         this.projectModel.role = this.resolve.editUser.role;
-        this.projectModel.expiration_time = this.resolve.editUser.expiration_time ?
-          new Date(this.resolve.editUser.expiration_time) :
-          null;
+        this.projectModel.expiration_time = this.resolve.editUser
+          .expiration_time
+          ? new Date(this.resolve.editUser.expiration_time)
+          : null;
         return this.$q.resolve();
       } else {
-        return this.customersService.getAll({
-          operation: 'users', UUID: this.resolve.currentCustomer.uuid
-        }).then((users) => {
-          this.users = users.filter((user) => {
-            return this.resolve.addedUsers.indexOf(user.uuid) === -1;
+        return this.customersService
+          .getAll({
+            operation: 'users',
+            UUID: this.resolve.currentCustomer.uuid,
+          })
+          .then(users => {
+            this.users = users.filter(user => {
+              return this.resolve.addedUsers.indexOf(user.uuid) === -1;
+            });
           });
-        });
       }
     }
 
     saveUser() {
       this.errors = [];
       this.saving = true;
-      return this.saveProjectPermissions()
-        .then(() => {
+      return this.saveProjectPermissions().then(
+        () => {
           this.close();
           this.saving = false;
-        }, (error) => {
+        },
+        error => {
           this.saving = false;
           this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
-        });
+        },
+      );
     }
 
     saveProjectPermissions() {
       if (this.resolve.editUser) {
-        if((this.resolve.editUser.role !== this.projectModel.role ||
-          this.resolve.editUser.expiration_time !== this.projectModel.expiration_time)) {
+        if (
+          this.resolve.editUser.role !== this.projectModel.role ||
+          this.resolve.editUser.expiration_time !==
+            this.projectModel.expiration_time
+        ) {
           return this.checkPermissionAction();
-        } else if (this.resolve.editUser.role === this.projectModel.role ||
-          this.resolve.editUser.expiration_time === this.projectModel.expiration_time) {
+        } else if (
+          this.resolve.editUser.role === this.projectModel.role ||
+          this.resolve.editUser.expiration_time ===
+            this.projectModel.expiration_time
+        ) {
           return this.$q.resolve();
         }
       } else {
@@ -101,13 +121,18 @@ const addProjectMember = {
     }
 
     checkPermissionAction() {
-      if (this.resolve.editUser.expiration_time !== this.projectModel.expiration_time &&
-        this.resolve.editUser.role === this.projectModel.role) {
+      if (
+        this.resolve.editUser.expiration_time !==
+          this.projectModel.expiration_time &&
+        this.resolve.editUser.role === this.projectModel.role
+      ) {
         return this.updatePermission(this.resolve.editUser.permission);
       }
-      return this.projectPermissionsService.deletePermission(this.resolve.editUser.permission).then(() => {
-        return this.createPermission(this.projectModel.role);
-      });
+      return this.projectPermissionsService
+        .deletePermission(this.resolve.editUser.permission)
+        .then(() => {
+          return this.createPermission(this.projectModel.role);
+        });
     }
 
     updatePermission(permission) {
@@ -128,7 +153,7 @@ const addProjectMember = {
       instance.role = role;
       return instance.$save();
     }
-  }
+  },
 };
 
 export default addProjectMember;

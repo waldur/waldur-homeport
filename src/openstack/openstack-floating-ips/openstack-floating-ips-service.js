@@ -4,7 +4,7 @@ export default function openstackFloatingIpsService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/openstack-floating-ips/';
-    }
+    },
   });
   return new ServiceClass();
 }

@@ -10,10 +10,16 @@ import * as constants from './constants';
 
 function* generateServiceProviderSecretCode(action) {
   const { serviceProvider } = action.payload;
-  const successMessage = translate('Service provider API secret code has been generated.');
-  const errorMessage = translate('Unable to generate service provider API secret code.');
+  const successMessage = translate(
+    'Service provider API secret code has been generated.',
+  );
+  const errorMessage = translate(
+    'Unable to generate service provider API secret code.',
+  );
   try {
-    const data = yield api.generateServiceProviderSecretCode(serviceProvider.uuid);
+    const data = yield api.generateServiceProviderSecretCode(
+      serviceProvider.uuid,
+    );
     yield put(actions.secretCodeRegenerateSuccess(data.api_secret_code));
     yield put(closeModalDialog());
     yield put(showSuccess(successMessage));
@@ -26,7 +32,9 @@ function* generateServiceProviderSecretCode(action) {
 
 function* getServiceProviderSecretCode(action) {
   const { serviceProvider } = action.payload;
-  const errorMessage = translate('Unable to get service provider API secret code.');
+  const errorMessage = translate(
+    'Unable to get service provider API secret code.',
+  );
   try {
     const data = yield api.getServiceProviderSecretCode(serviceProvider.uuid);
     const secretCode = data.api_secret_code ? data.api_secret_code : '';
@@ -37,6 +45,12 @@ function* getServiceProviderSecretCode(action) {
 }
 
 export default function*() {
-  yield takeEvery(constants.SERVICE_PROVIDER_CODE_REGENERATE_START, generateServiceProviderSecretCode);
-  yield takeEvery(constants.SERVICE_PROVIDER_CODE_FETCH_START, getServiceProviderSecretCode);
+  yield takeEvery(
+    constants.SERVICE_PROVIDER_CODE_REGENERATE_START,
+    generateServiceProviderSecretCode,
+  );
+  yield takeEvery(
+    constants.SERVICE_PROVIDER_CODE_FETCH_START,
+    getServiceProviderSecretCode,
+  );
 }

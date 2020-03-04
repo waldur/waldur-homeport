@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 
 import './TablePageSize.scss';
 
-const options = [10, 25, 50, 100].map(v => ({name: v, value: v}));
+const options = [10, 25, 50, 100].map(v => ({ name: v, value: v }));
 
 interface TablePageSizeProps {
   pageSize: number;
@@ -17,15 +17,15 @@ export const TablePageSize = (props: TablePageSizeProps) => {
   return (
     <div>
       <span className="m-r-sm">{translate('Show')}</span>
-        <Select
-          className="table-page-size"
-          value={pageSize}
-          labelKey="name"
-          valueKey="value"
-          options={options}
-          clearable={false}
-          onChange={value => props.updatePageSize(value)}
-        />
+      <Select
+        className="table-page-size"
+        value={pageSize}
+        labelKey="name"
+        valueKey="value"
+        options={options}
+        clearable={false}
+        onChange={value => props.updatePageSize(value)}
+      />
       <span className="m-l-sm">{translate('entries')}</span>
     </div>
   );

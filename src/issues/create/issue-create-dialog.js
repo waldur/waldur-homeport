@@ -11,7 +11,7 @@ const DEFAULT_OPTIONS = {
   descriptionPlaceholder: gettext('Request description'),
   summaryLabel: gettext('Title'),
   summaryPlaceholder: gettext('Request title'),
-  submitTitle: gettext('Create')
+  submitTitle: gettext('Create'),
 };
 
 const issueCreateDialog = {
@@ -19,7 +19,7 @@ const issueCreateDialog = {
   bindings: {
     close: '&',
     dismiss: '&',
-    resolve: '<'
+    resolve: '<',
   },
   controller: class IssueCreateDialogController {
     // @ngInject
@@ -32,7 +32,8 @@ const issueCreateDialog = {
       ncUtilsFlash,
       IssueTypesService,
       ErrorMessageFormatter,
-      coreUtils) {
+      coreUtils,
+    ) {
       this.service = issuesService;
       this.$q = $q;
       this.$state = $state;
@@ -48,48 +49,66 @@ const issueCreateDialog = {
     $onInit() {
       this.initFileInput();
       this.filteredTemplates = [];
-      this.$q.all([this.IssueTypesService.getDefaultType(), getTemplates()])
-      .then(([defaultType, templates]) => {
-        this.issue = angular.copy(this.resolve.issue) || {};
-        if (!this.issue.type) {
-          this.issue.type = defaultType;
-          this.issueTypeEditable = true;
-        }
-        this.options = angular.extend({}, DEFAULT_OPTIONS, this.resolve.options);
-        this.emptyFieldMessage = gettext('You did not enter a field.');
-        this.templates = templates;
-      });
-
-      this.$scope.$watch(() => this.issue ? this.issue.type : null, issueType => {
-        if (!this.issue) {
-          return;
-        }
-        if (issueType) {
-          this.filteredTemplates = this.templates.filter(option => ISSUE_IDS[option.issue_type] === issueType);
-        } else {
-          this.filteredTemplates = [];
-        }
-        if (this.filteredTemplates.length === 0) {
-          if (this.issueTemplate) {
-            this.issueTemplate = null;
-            this.issue.summary = '';
-            this.issue.description = '';
+      this.$q
+        .all([this.IssueTypesService.getDefaultType(), getTemplates()])
+        .then(([defaultType, templates]) => {
+          this.issue = angular.copy(this.resolve.issue) || {};
+          if (!this.issue.type) {
+            this.issue.type = defaultType;
+            this.issueTypeEditable = true;
           }
-        }
-      });
+          this.options = angular.extend(
+            {},
+            DEFAULT_OPTIONS,
+            this.resolve.options,
+          );
+          this.emptyFieldMessage = gettext('You did not enter a field.');
+          this.templates = templates;
+        });
+
+      this.$scope.$watch(
+        () => (this.issue ? this.issue.type : null),
+        issueType => {
+          if (!this.issue) {
+            return;
+          }
+          if (issueType) {
+            this.filteredTemplates = this.templates.filter(
+              option => ISSUE_IDS[option.issue_type] === issueType,
+            );
+          } else {
+            this.filteredTemplates = [];
+          }
+          if (this.filteredTemplates.length === 0) {
+            if (this.issueTemplate) {
+              this.issueTemplate = null;
+              this.issue.summary = '';
+              this.issue.description = '';
+            }
+          }
+        },
+      );
     }
 
     initFileInput() {
       const fileInput = document.getElementById('fileInput');
       const fileButton = document.getElementById('fileButton');
 
-      fileButton.addEventListener('click', () => {
-        fileInput.click();
-      }, false);
+      fileButton.addEventListener(
+        'click',
+        () => {
+          fileInput.click();
+        },
+        false,
+      );
 
-      fileInput.addEventListener('change', () => {
-        this.$timeout(() => this.files = fileInput.files);
-      }, false);
+      fileInput.addEventListener(
+        'change',
+        () => {
+          this.$timeout(() => (this.files = fileInput.files));
+        },
+        false,
+      );
     }
 
     onTemplateSelect(template) {
@@ -113,17 +132,27 @@ const issueCreateDialog = {
         return this.$q.reject();
       }
       this.saving = true;
-      return this.createIssue().then(issue => {
-        this.service.clearAllCacheForCurrentEndpoint();
-        this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {requestId} has been created.'), {requestId: issue.key}));
-        return this.$state.go('support.detail', {uuid: issue.uuid}).then(() => {
-          this.close();
+      return this.createIssue()
+        .then(issue => {
+          this.service.clearAllCacheForCurrentEndpoint();
+          this.ncUtilsFlash.success(
+            this.coreUtils.templateFormatter(
+              gettext('Request {requestId} has been created.'),
+              { requestId: issue.key },
+            ),
+          );
+          return this.$state
+            .go('support.detail', { uuid: issue.uuid })
+            .then(() => {
+              this.close();
+            });
+        })
+        .catch(response => {
+          this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
+        })
+        .finally(() => {
+          this.saving = false;
         });
-      }).catch(response => {
-        this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
-      }).finally(() => {
-        this.saving = false;
-      });
     }
 
     createIssue() {
@@ -131,7 +160,7 @@ const issueCreateDialog = {
         type: this.issue.type,
         summary: this.issue.summary,
         description: this.getDescription(),
-        is_reported_manually: true
+        is_reported_manually: true,
       };
       if (this.issue.customer) {
         issue.customer = this.issue.customer.url;
@@ -153,7 +182,7 @@ const issueCreateDialog = {
         return this.$q.all(promises).then(() => issue);
       });
     }
-  }
+  },
 };
 
 export default issueCreateDialog;

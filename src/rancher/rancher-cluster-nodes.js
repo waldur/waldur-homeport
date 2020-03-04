@@ -5,8 +5,8 @@ const rancherClusterNodes = {
   controller: RancherClusterNodesListController,
   controllerAs: 'ListController',
   bindings: {
-    resource: '<'
-  }
+    resource: '<',
+  },
 };
 
 export default rancherClusterNodes;
@@ -16,34 +16,39 @@ function RancherClusterNodesListController(
   baseResourceListController,
   rancherNodesService,
   actionUtilsService,
-  ncUtils) {
+  ncUtils,
+) {
   let controllerScope = this;
   let ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       let fn = this._super.bind(this);
       this.loading = true;
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'nodes').then(result => {
-        this.listActions = result;
-        fn();
-        this.service = rancherNodesService;
-        this.addRowFields(['instance_uuid', 'instance_name']);
-        this.resourcePollingDisabled = true;
-      });
+      actionUtilsService
+        .loadNestedActions(this, controllerScope.resource, 'nodes')
+        .then(result => {
+          this.listActions = result;
+          fn();
+          this.service = rancherNodesService;
+          this.addRowFields(['instance_uuid', 'instance_name']);
+          this.resourcePollingDisabled = true;
+        });
     },
     getTableOptions: function() {
       let options = this._super();
       options.noDataText = gettext('There are no Kubernetes nodes yet.');
-      options.noMatchesText = gettext('No Kubernetes nodes found matching filter.');
+      options.noMatchesText = gettext(
+        'No Kubernetes nodes found matching filter.',
+      );
 
       options.columns = [
         {
           title: gettext('Node'),
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           title: gettext('State'),
-          render: row => this.renderResourceState(row)
+          render: row => this.renderResourceState(row),
         },
         {
           title: gettext('Instance'),
@@ -53,11 +58,11 @@ function RancherClusterNodesListController(
             }
             let href = $state.href('resources.details', {
               uuid: row.instance_uuid,
-              resource_type: 'OpenStackTenant.Instance'
+              resource_type: 'OpenStackTenant.Instance',
             });
             return ncUtils.renderLink(href, row.instance_name);
-          }
-        }
+          },
+        },
       ];
       return options;
     },

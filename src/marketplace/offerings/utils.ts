@@ -15,7 +15,9 @@ export function setStateBreadcrumbs(): void {
   ];
 }
 
-const ARTICLE_CODE_PATTERN = new RegExp('^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$');
+const ARTICLE_CODE_PATTERN = new RegExp(
+  '^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$',
+);
 
 export const articleCodeValidator = (value: string) => {
   if (!value) {

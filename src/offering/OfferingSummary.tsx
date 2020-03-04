@@ -18,7 +18,7 @@ const OfferingSummary: React.FC<OfferingSummaryProps> = props => (
     <div className="ibox-content">
       <Row>
         <Col lg={12}>
-          <OfferingHeader offering={props.offering} summary={props.summary}/>
+          <OfferingHeader offering={props.offering} summary={props.summary} />
         </Col>
       </Row>
       <Row>
@@ -30,4 +30,7 @@ const OfferingSummary: React.FC<OfferingSummaryProps> = props => (
   </div>
 );
 
-export default connectAngularComponent(OfferingSummary, ['offering', 'summary']);
+export default connectAngularComponent(OfferingSummary, [
+  'offering',
+  'summary',
+]);

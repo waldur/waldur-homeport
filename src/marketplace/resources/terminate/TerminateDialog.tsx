@@ -26,7 +26,10 @@ interface StateProps {
   orderCanBeApproved: boolean;
 }
 
-type TerminateDialogProps = OwnProps & DispatchProps & StateProps & InjectedFormProps;
+type TerminateDialogProps = OwnProps &
+  DispatchProps &
+  StateProps &
+  InjectedFormProps;
 
 export const PureTerminateDialog = (props: TerminateDialogProps) => (
   <form onSubmit={props.handleSubmit(props.submitRequest)}>
@@ -36,19 +39,31 @@ export const PureTerminateDialog = (props: TerminateDialogProps) => (
       })}
       footer={
         <>
-          <CloseDialogButton/>
+          <CloseDialogButton />
           <SubmitButton
             submitting={props.submitting}
-            label={props.orderCanBeApproved ? translate('Submit') : translate('Request for a termination')}
+            label={
+              props.orderCanBeApproved
+                ? translate('Submit')
+                : translate('Request for a termination')
+            }
             className="btn btn-danger"
           />
         </>
-      }>
-      {translate('Are you sure you would like to terminate resource {resourceName}?', {
-        resourceName: props.resolve.resource.name,
-      })}
+      }
+    >
+      {translate(
+        'Are you sure you would like to terminate resource {resourceName}?',
+        {
+          resourceName: props.resolve.resource.name,
+        },
+      )}
       {props.resolve.action.dialogSubtitle && (
-        <div dangerouslySetInnerHTML={{__html: props.resolve.action.dialogSubtitle}}/>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: props.resolve.action.dialogSubtitle,
+          }}
+        />
       )}
     </ModalDialog>
   </form>

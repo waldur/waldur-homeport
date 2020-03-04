@@ -21,7 +21,10 @@
     <tbody ng-repeat="service in $ctrl.services">
       <tr>
         <td>
-          <provider-icon type="service.service_settings_type" size="img-xs"></provider-icon>
+          <provider-icon
+            type="service.service_settings_type"
+            size="img-xs"
+          ></provider-icon>
         </td>
         <td>
           {{ service.service_settings_name }}
@@ -43,9 +46,11 @@
           </span>
         </td>
         <td>
-          <button type="button"
+          <button
+            type="button"
             class="btn btn-sm btn-default"
-            ng-click="$ctrl.explainPlan(service)">
+            ng-click="$ctrl.explainPlan(service)"
+          >
             <i class="fa fa-eye"></i>
             <span translate>Explain plan</span>
           </button>
@@ -57,7 +62,10 @@
             {{ ::service.error_message }}
           </span>
           <span ng-if="service.optimized_presets">
-            <cost-plan-flavors service-type="service.service_settings_type" items="service.optimized_presets"></cost-plan-flavors>
+            <cost-plan-flavors
+              service-type="service.service_settings_type"
+              items="service.optimized_presets"
+            ></cost-plan-flavors>
           </span>
           <span ng-if="service.details">{{ service.details }}</span>
         </td>

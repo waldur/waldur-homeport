@@ -1,24 +1,36 @@
 <div ng-class="{'has-error': $ctrl.hasError() }">
   <div class="input-group">
     <p class="input-group-addon" uib-tooltip="{{'No quota set' | translate}}">
-      <input type="checkbox"
+      <input
+        type="checkbox"
         ng-disabled="!$ctrl.choice.selected"
         ng-model="$ctrl.quota.unlimited"
-        ng-change="$ctrl.onLimitChange()">
+        ng-change="$ctrl.onLimitChange()"
+      />
     </p>
-    <input class="form-control" type="number" name="{{$ctrl.quota.name}}"
+    <input
+      class="form-control"
+      type="number"
+      name="{{$ctrl.quota.name}}"
       ng-model="$ctrl.quota.limit"
       multiply-by="$ctrl.multiplyFactor"
       ng-disabled="!$ctrl.choice.selected || $ctrl.quota.unlimited"
-      ng-change="$ctrl.onLimitChange()">
+      ng-change="$ctrl.onLimitChange()"
+    />
   </div>
   <p>
-    <i class="fa fa-exclamation-triangle"
+    <i
+      class="fa fa-exclamation-triangle"
       uib-tooltip="{{'Quota usage exceeds limit.' | translate}}"
-      ng-if="$ctrl.exceeds() && $ctrl.choice.selected">
+      ng-if="$ctrl.exceeds() && $ctrl.choice.selected"
+    >
     </i>
     {{ $ctrl.getUsageSummary() }}
   </p>
-  <uib-progressbar max="$ctrl.quota.limit" value="$ctrl.quota.usage" type="warning">
+  <uib-progressbar
+    max="$ctrl.quota.limit"
+    value="$ctrl.quota.usage"
+    type="warning"
+  >
   </uib-progressbar>
 </div>

@@ -4,7 +4,7 @@ export default function openstackSnapshotsService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/openstacktenant-snapshots/';
-    }
+    },
   });
   return new ServiceClass();
 }

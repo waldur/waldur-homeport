@@ -15,7 +15,12 @@ export const StepsList = (props: StepsListProps) => {
   const stepIndex = props.choices.indexOf(props.value);
 
   return (
-    <div className={classNames({disabled: props.disabled}, 'shopping-cart-steps')}>
+    <div
+      className={classNames(
+        { disabled: props.disabled },
+        'shopping-cart-steps',
+      )}
+    >
       {props.choices.map((title, index) => (
         <Step
           key={index}

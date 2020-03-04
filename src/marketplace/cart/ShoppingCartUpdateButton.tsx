@@ -14,7 +14,9 @@ interface ShoppingCartUpdateButtonProps {
   icon?: string;
 }
 
-export const ShoppingCartUpdateButton = (props: ShoppingCartUpdateButtonProps) => (
+export const ShoppingCartUpdateButton = (
+  props: ShoppingCartUpdateButtonProps,
+) => (
   <OfferingButton
     icon="fa fa-refresh"
     isActive={true}

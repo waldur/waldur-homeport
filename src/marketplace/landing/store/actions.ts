@@ -8,7 +8,7 @@ export const categoriesFetchStart = () => ({
 
 export const categoriesFetchSuccess = (categories: Category[]) => ({
   type: constants.CATEGORIES_FETCH_SUCCESS,
-  payload: {categories},
+  payload: { categories },
 });
 
 export const categoriesFetchError = () => ({
@@ -21,7 +21,7 @@ export const offeringsFetchStart = () => ({
 
 export const offeringsFetchSuccess = (offerings: Offering[]) => ({
   type: constants.OFFERINGS_FETCH_SUCCESS,
-  payload: {offerings},
+  payload: { offerings },
 });
 
 export const offeringsFetchError = () => ({

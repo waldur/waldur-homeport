@@ -18,9 +18,11 @@
     <span translate>There are no events for this resource.</span>
   </div>
 
-  <div id="vertical-timeline"
+  <div
+    id="vertical-timeline"
     class="vertical-container dark-timeline"
-    ng-if="$ctrl.events.length">
+    ng-if="$ctrl.events.length"
+  >
     <div class="vertical-timeline-block" ng-repeat="event in $ctrl.events">
       <div class="vertical-timeline-icon" ng-class="::event.color">
         <i class="fa" ng-class="::event.icon"></i>
@@ -28,13 +30,16 @@
 
       <div class="vertical-timeline-content">
         <p ng-bind-html="::event.message"></p>
-        <a class="btn btn-sm btn-primary" ng-click="$ctrl.showEventDetails(event)">
+        <a
+          class="btn btn-sm btn-primary"
+          ng-click="$ctrl.showEventDetails(event)"
+        >
           <i class="fa fa-eye"></i>
           <span translate>More info</span>
         </a>
         <span class="vertical-date">
           {{ ::event.date | formatRelative }} ago
-          <br/>
+          <br />
           <small>{{ ::event.date | dateTime }}</small>
         </span>
       </div>
@@ -45,3 +50,4 @@
       <span translate>Close</span>
     </button>
   </div>
+</div>

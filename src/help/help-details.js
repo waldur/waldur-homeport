@@ -17,13 +17,13 @@ const helpDetails = {
     getModel() {
       const helpData = HelpRegistry.get();
       const helpItems = helpData[this.$stateParams.type].helpItems;
-      for(let item of helpItems) {
+      for (let item of helpItems) {
         if (item.key !== this.$stateParams.name) continue;
         return item;
       }
       return null;
     }
-  }
+  },
 };
 
 export default helpDetails;

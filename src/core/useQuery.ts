@@ -13,11 +13,17 @@ interface QueryInterface<PayloadType = any> {
   call(): void;
 }
 
-type LoaderInterface<VariablesType, PayloadType> = (vars?: VariablesType) => Promise<PayloadType>;
+type LoaderInterface<VariablesType, PayloadType> = (
+  vars?: VariablesType,
+) => Promise<PayloadType>;
 
-export function useQuery<PayloadType = any, VariablesType = string | Record<string, any>>(
-  method?: LoaderInterface<VariablesType, PayloadType>, variables?: VariablesType
-  ): QueryInterface<PayloadType> {
+export function useQuery<
+  PayloadType = any,
+  VariablesType = string | Record<string, any>
+>(
+  method?: LoaderInterface<VariablesType, PayloadType>,
+  variables?: VariablesType,
+): QueryInterface<PayloadType> {
   const [state, setState] = React.useState({
     loading: false,
     loaded: false,
@@ -40,25 +46,27 @@ export function useQuery<PayloadType = any, VariablesType = string | Record<stri
       loading: true,
       erred: false,
     }));
-    method(variables).then(data => {
-      safeSetState({
-        data,
-        loading: false,
-        loaded: true,
-        erred: false,
-        error: undefined,
+    method(variables)
+      .then(data => {
+        safeSetState({
+          data,
+          loading: false,
+          loaded: true,
+          erred: false,
+          error: undefined,
+        });
+      })
+      .catch(error => {
+        safeSetState(prevState => ({
+          ...prevState,
+          loading: false,
+          erred: true,
+          error,
+        }));
       });
-    }).catch(error => {
-      safeSetState(prevState => ({
-        ...prevState,
-        loading: false,
-        erred: true,
-        error,
-      }));
-    });
     return () => {
       didCancel = true;
     };
   }, [method, variables]);
-  return {state, call};
+  return { state, call };
 }

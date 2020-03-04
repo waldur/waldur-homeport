@@ -7,6 +7,7 @@ import { AttributesTable } from '@waldur/marketplace/details/attributes/Attribut
 import { Section } from '@waldur/marketplace/types';
 
 import { FORM_ID } from '../store/constants';
+
 import { hasError } from './utils';
 
 const PureOverviewSummary = props => {
@@ -49,11 +50,11 @@ const PureOverviewSummary = props => {
   return (
     <>
       <h3>{translate('Overview')}</h3>
-      {props.nameInvalid ? <p>{translate('Name is not valid.')}</p> :
-        <AttributesTable
-          attributes={props.formData}
-          sections={[schema]}
-        />}
+      {props.nameInvalid ? (
+        <p>{translate('Name is not valid.')}</p>
+      ) : (
+        <AttributesTable attributes={props.formData} sections={[schema]} />
+      )}
     </>
   );
 };

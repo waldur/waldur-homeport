@@ -15,28 +15,16 @@ interface OwnProps {
 export const EnvironmentVariablePanel = (props: OwnProps) => (
   <Panel>
     <Panel.Heading>
-      <RemoveButton onClick={() => props.onRemove(props.index)}/>
-      <h4>{translate('Variable #{index}', {index: props.index + 1})}</h4>
+      <RemoveButton onClick={() => props.onRemove(props.index)} />
+      <h4>{translate('Variable #{index}', { index: props.index + 1 })}</h4>
     </Panel.Heading>
     <Panel.Body>
       <FormSection name={props.variable}>
-        <FormGroup
-          label={translate('Name')}
-          required={true}>
-          <Field
-            name="name"
-            component="input"
-            className="form-control"
-          />
+        <FormGroup label={translate('Name')} required={true}>
+          <Field name="name" component="input" className="form-control" />
         </FormGroup>
-        <FormGroup
-          label={translate('Value')}
-          required={true}>
-          <Field
-            name="value"
-            component="input"
-            className="form-control"
-          />
+        <FormGroup label={translate('Value')} required={true}>
+          <Field name="value" component="input" className="form-control" />
         </FormGroup>
       </FormSection>
     </Panel.Body>

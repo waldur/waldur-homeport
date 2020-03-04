@@ -12,7 +12,8 @@ export default function createAction(ctx): ResourceAction {
     title: translate('Change plan'),
     useResolve: true,
     dialogSize: 'lg',
-    isVisible: marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
+    isVisible:
+      marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
     validators: [validateState('OK')],
   };
 }

@@ -2,18 +2,28 @@ import { translate } from '@waldur/i18n';
 
 // @ngInject
 export default function actionUtilsService(
-  ncUtilsFlash, $rootScope, $http, $q, $uibModal, $injector, ncUtils, features,
-  resourcesService, ActionConfiguration, usersService) {
+  ncUtilsFlash,
+  $rootScope,
+  $http,
+  $q,
+  $uibModal,
+  $injector,
+  ncUtils,
+  features,
+  resourcesService,
+  ActionConfiguration,
+  usersService,
+) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return usersService.getCurrentUser().then(user => {
       const config = ActionConfiguration[model.resource_type];
       if (Array.isArray(config)) {
-        return this.parseActions(config, {resource: model, user});
+        return this.parseActions(config, { resource: model, user });
       }
       return resourcesService.getOption(model.url).then(response => {
-        const order = config && config.order || Object.keys(response.actions);
-        const options = config && config.options || {};
+        const order = (config && config.order) || Object.keys(response.actions);
+        const options = (config && config.options) || {};
         return order.reduce((result, name) => {
           let action = angular.merge({}, response.actions[name], options[name]);
           if (this.actionHasToBeAdded(action, model, user)) {
@@ -32,15 +42,16 @@ export default function actionUtilsService(
 
   this.parseActions = function(actions, context) {
     const result = {};
-    for(const func of actions) {
-      const {name, fields, validators, isVisible, ...rest} = func(context);
+    for (const func of actions) {
+      const { name, fields, validators, isVisible, ...rest } = func(context);
       if (typeof isVisible === 'boolean' && !isVisible) {
         continue;
       }
       const reason = this.parseValidators(validators, context);
-      const url = rest.method === 'DELETE'
-        ? context.resource.url
-        : context.resource.url + name + '/';
+      const url =
+        rest.method === 'DELETE'
+          ? context.resource.url
+          : context.resource.url + name + '/';
       result[name] = {
         ...rest,
         name,
@@ -56,7 +67,7 @@ export default function actionUtilsService(
   this.parseValidators = function(validators, context) {
     let reason = '';
     if (validators) {
-      for(const validator of validators) {
+      for (const validator of validators) {
         reason = validator(context);
         if (reason) {
           return reason;
@@ -68,7 +79,7 @@ export default function actionUtilsService(
   this.parseFields = function(fields) {
     if (fields) {
       const options = {};
-      for(const field of fields) {
+      for (const field of fields) {
         options[field.name] = field;
       }
       return options;
@@ -83,7 +94,11 @@ export default function actionUtilsService(
     if (typeof action.isVisible === 'boolean') {
       return !action.isVisible;
     }
-    action.isVisible = action.isVisible || function () {return true;};
+    action.isVisible =
+      action.isVisible ||
+      function() {
+        return true;
+      };
     if (!action.isVisible(model, usersService.currentUser)) {
       return false;
     }
@@ -111,12 +126,19 @@ export default function actionUtilsService(
 
   this.confirmAction = function(model, name) {
     const custom = ActionConfiguration[model.resource_type];
-    let confirmTextSuffix = custom && custom.delete_message || '';
+    let confirmTextSuffix = (custom && custom.delete_message) || '';
     if (name === 'destroy') {
-      const context = { resourceType: model.resource_type || 'resource'};
-      let confirmText = (model.state === 'Erred')
-        ? translate('Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. ', context)
-        : translate('Are you sure you want to delete a {resourceType}? ', context);
+      const context = { resourceType: model.resource_type || 'resource' };
+      let confirmText =
+        model.state === 'Erred'
+          ? translate(
+              'Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. ',
+              context,
+            )
+          : translate(
+              'Are you sure you want to delete a {resourceType}? ',
+              context,
+            );
       if (confirmTextSuffix) {
         confirmText += confirmTextSuffix;
       }
@@ -128,7 +150,10 @@ export default function actionUtilsService(
 
   this.applyAction = function(controller, resource, action) {
     let vm = this;
-    let promise = (action.method === 'DELETE') ? $http.delete(action.url) : $http.post(action.url);
+    let promise =
+      action.method === 'DELETE'
+        ? $http.delete(action.url)
+        : $http.post(action.url);
 
     function onSuccess(response) {
       if (response.status === 201 || response.status === 202) {
@@ -150,12 +175,18 @@ export default function actionUtilsService(
       }
     }
 
-    return promise.then(onSuccess, controller.handleActionException.bind(controller));
+    return promise.then(
+      onSuccess,
+      controller.handleActionException.bind(controller),
+    );
   };
 
   this.handleActionSuccess = function(action) {
-    let template = action.successMessage ||
-        translate('Request to {action} has been accepted.', { action: action.title.toLowerCase() });
+    let template =
+      action.successMessage ||
+      translate('Request to {action} has been accepted.', {
+        action: action.title.toLowerCase(),
+      });
     ncUtilsFlash.success(template);
     if (action.onSuccess) {
       action.onSuccess($injector);
@@ -166,21 +197,21 @@ export default function actionUtilsService(
 
   this.openActionDialog = function(controller, resource, name, action) {
     let component = action.component || 'actionDialog';
-    const params = {component, size: action.dialogSize};
+    const params = { component, size: action.dialogSize };
     if (action.useResolve) {
       angular.extend(params, {
         resolve: {
           action: () => action,
           controller: () => controller,
           resource: () => resource,
-        }
+        },
       });
     } else {
       let dialogScope = $rootScope.$new();
       angular.extend(dialogScope, {
         action,
         controller,
-        resource
+        resource,
       });
       params.scope = dialogScope;
     }
@@ -197,9 +228,15 @@ export default function actionUtilsService(
           nestedActions.push({
             title: action.title,
             iconClass: action.iconClass,
-            callback: this.buttonClick.bind(this, controller, model, key, action),
+            callback: this.buttonClick.bind(
+              this,
+              controller,
+              model,
+              key,
+              action,
+            ),
             disabled: !action.enabled,
-            titleAttr: action.reason
+            titleAttr: action.reason,
           });
         }
       });

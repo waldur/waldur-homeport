@@ -1,85 +1,94 @@
-import {attachInvitationUtils, invitationUtilsService} from './utils.js';
+import { attachInvitationUtils, invitationUtilsService } from './utils.js';
 import coreModule from '../core/module';
 
 describe('invitationUtilsService', () => {
-
   function initModule(module) {
     module.constant('ENV', {
       apiEndpoint: 'https://example.com/',
       plugins: {
         WALDUR_CORE: {
-          AUTHENTICATION_METHODS: [
-            'LOCAL_SIGNIN',
-          ]
-        }
-      }
+          AUTHENTICATION_METHODS: ['LOCAL_SIGNIN'],
+        },
+      },
     });
     module.service('invitationUtilsService', invitationUtilsService);
     module.run(attachInvitationUtils);
     coreModule(module);
   }
 
-  initModule(angular.module('invitationUtilsModule', ['ngResource', 'ui.router']));
+  initModule(
+    angular.module('invitationUtilsModule', ['ngResource', 'ui.router']),
+  );
   beforeEach(angular.mock.module('invitationUtilsModule'));
 
   let emailConfirmedDialogResult = {
     result: {
-      then: (callback) => callback(true),
+      then: callback => callback(true),
     },
     closed: {
-      then: () => {
-      }
-    }
+      then: () => {},
+    },
   };
   let invitationCanceledDialogResult = {
     result: {
-      then: () => {
-      },
+      then: () => {},
     },
     closed: {
-      then: (callback) => callback()
-    }
+      then: callback => callback(),
+    },
   };
 
   let token = 'token';
-  beforeEach(angular.mock.module(function ($provide) {
-    $provide.factory('$auth', function () {
-      return {
-        isAuthenticated: jasmine.createSpy('isAuthenticated').and.returnValue(true),
-      };
-    });
-    $provide.factory('invitationService', function ($q) {
-      return {
-        getInvitationToken: jasmine.createSpy('getInvitationToken').and.returnValue(token),
-        setInvitationToken: jasmine.createSpy('setInvitationToken'),
-        accept: jasmine.createSpy('accept').and.returnValue($q.when([])),
-        clearInvitationToken: jasmine.createSpy('clearInvitationToken')
-      };
-    });
-    $provide.factory('usersService', function ($q) {
-      return {
-        mandatoryFieldsMissing: jasmine.createSpy('mandatoryFieldsMissing').and.returnValue(false),
-        getCurrentUser: jasmine.createSpy('getCurrentUser').and.returnValue($q.when([]))
-      };
-    });
-    $provide.factory('ncUtilsFlash', function () {
-      return {
-        success: jasmine.createSpy('success'),
-        error: jasmine.createSpy('error')
-      };
-    });
-    $provide.factory('$uibModal', function () {
-      return {
-        open: jasmine.createSpy('open').and.returnValue(emailConfirmedDialogResult)
-      };
-    });
-    $provide.service('$uibModalStack', function () {});
-    $provide.factory('$state', function () {
-      return {
-        go: jasmine.createSpy('go')
-      };
-    });
-  }));
+  beforeEach(
+    angular.mock.module(function($provide) {
+      $provide.factory('$auth', function() {
+        return {
+          isAuthenticated: jasmine
+            .createSpy('isAuthenticated')
+            .and.returnValue(true),
+        };
+      });
+      $provide.factory('invitationService', function($q) {
+        return {
+          getInvitationToken: jasmine
+            .createSpy('getInvitationToken')
+            .and.returnValue(token),
+          setInvitationToken: jasmine.createSpy('setInvitationToken'),
+          accept: jasmine.createSpy('accept').and.returnValue($q.when([])),
+          clearInvitationToken: jasmine.createSpy('clearInvitationToken'),
+        };
+      });
+      $provide.factory('usersService', function($q) {
+        return {
+          mandatoryFieldsMissing: jasmine
+            .createSpy('mandatoryFieldsMissing')
+            .and.returnValue(false),
+          getCurrentUser: jasmine
+            .createSpy('getCurrentUser')
+            .and.returnValue($q.when([])),
+        };
+      });
+      $provide.factory('ncUtilsFlash', function() {
+        return {
+          success: jasmine.createSpy('success'),
+          error: jasmine.createSpy('error'),
+        };
+      });
+      $provide.factory('$uibModal', function() {
+        return {
+          open: jasmine
+            .createSpy('open')
+            .and.returnValue(emailConfirmedDialogResult),
+        };
+      });
+      $provide.service('$uibModalStack', function() {});
+      $provide.factory('$state', function() {
+        return {
+          go: jasmine.createSpy('go'),
+        };
+      });
+    }),
+  );
 
   let instance;
   let $auth;
@@ -90,7 +99,16 @@ describe('invitationUtilsService', () => {
   let ncUtilsFlash;
   let $state;
 
-  beforeEach(inject((_invitationUtilsService_, _$auth_, _$rootScope_, _$uibModal_, _usersService_, _invitationService_, _ncUtilsFlash_, _$state_) => {
+  beforeEach(inject((
+    _invitationUtilsService_,
+    _$auth_,
+    _$rootScope_,
+    _$uibModal_,
+    _usersService_,
+    _invitationService_,
+    _ncUtilsFlash_,
+    _$state_,
+  ) => {
     instance = _invitationUtilsService_;
     $auth = _$auth_;
     $rootScope = _$rootScope_;

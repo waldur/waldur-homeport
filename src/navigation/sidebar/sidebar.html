@@ -8,45 +8,57 @@
             {{ ::$ctrl.shortPageTitle }}
           </span>
           <span ng-if="::$ctrl.sidebarLogo">
-            <img ng-src="{{ ::$ctrl.sidebarLogo }}">
+            <img ng-src="{{ ::$ctrl.sidebarLogo }}" />
           </span>
         </a>
       </li>
       <li class="nav-header">
         <user-sidebar></user-sidebar>
       </li>
-      <li ui-sref-active="active"
+      <li
+        ui-sref-active="active"
         ng-repeat="item in $ctrl.items"
-        ng-class="$ctrl.getItemCss(item)">
-        <a ui-sref="{{ item.link }}"
+        ng-class="$ctrl.getItemCss(item)"
+      >
+        <a
+          ui-sref="{{ item.link }}"
           ng-attr-id="{{item.key}}"
-          ng-if="item.link" ng-click="$ctrl.onMenuClick($event, item)">
+          ng-if="item.link"
+          ng-click="$ctrl.onMenuClick($event, item)"
+        >
           <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
           <span class="nav-label">{{ item.label | translate }}</span>
-          <span class="label label-default pull-right"
+          <span
+            class="label label-default pull-right"
             ng-if="::item.countFieldKey"
-            ng-bind="item.count">
+            ng-bind="item.count"
+          >
           </span>
           <span class="fa arrow" ng-if="::item.children"></span>
         </a>
-        <a ng-if="::item.action"
-          ng-click="$ctrl.onMenuClick($event, item)">
+        <a ng-if="::item.action" ng-click="$ctrl.onMenuClick($event, item)">
           <i class="fa {{ ::item.icon }} fixed-width-icon"></i>
           <span class="nav-label">{{ item.label | translate }}</span>
           <span class="fa arrow" ng-if="::item.children"></span>
         </a>
-        <ul class="nav nav-second-level ng-hide"
+        <ul
+          class="nav nav-second-level ng-hide"
           ng-show="item.expanded"
-          ng-if="::item.children">
-          <li ui-sref-active="active"
+          ng-if="::item.children"
+        >
+          <li
+            ui-sref-active="active"
             ng-repeat="child in item.children"
-            ng-class="$ctrl.getItemCss(child)">
+            ng-class="$ctrl.getItemCss(child)"
+          >
             <a ui-sref="{{ child.link }}">
               <i class="fa {{ ::child.icon }}"></i>
               <span class="nav-label">{{ child.label | translate }}</span>
-              <span class="label label-info pull-right"
+              <span
+                class="label label-info pull-right"
                 ng-if="::child.countFieldKey"
-                ng-bind="child.count">
+                ng-bind="child.count"
+              >
               </span>
             </a>
           </li>

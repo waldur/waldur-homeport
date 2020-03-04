@@ -6,5 +6,5 @@ const reportWithoutSnapshots = report =>
   report.filter(section => section.header.toLowerCase() !== 'snapshots');
 
 export const OracleReport = props => (
-  <OfferingReportComponent report={reportWithoutSnapshots(props.report)}/>
+  <OfferingReportComponent report={reportWithoutSnapshots(props.report)} />
 );

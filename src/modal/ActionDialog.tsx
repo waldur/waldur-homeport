@@ -19,10 +19,14 @@ export const ActionDialog: React.FC<ActionDialogProps> = props => (
       title={props.title}
       footer={
         <div>
-          <SubmitButton submitting={props.submitting} label={props.submitLabel} />
+          <SubmitButton
+            submitting={props.submitting}
+            label={props.submitLabel}
+          />
           <CloseDialogButton />
         </div>
-      }>
+      }
+    >
       <FormContainer submitting={props.submitting}>
         {props.children}
       </FormContainer>

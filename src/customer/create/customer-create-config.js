@@ -1,8 +1,10 @@
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 
 const formatCompanyTypes = ENV =>
-  (ENV.plugins.WALDUR_CORE.COMPANY_TYPES || [])
-    .map(item => ({ value: item, display_name: item }));
+  (ENV.plugins.WALDUR_CORE.COMPANY_TYPES || []).map(item => ({
+    value: item,
+    display_name: item,
+  }));
 
 export default ENV => [
   {
@@ -60,7 +62,7 @@ export default ENV => [
         label: gettext('Logo'),
         accept: '.jpg, .jpeg, .png, .svg',
       },
-    ]
+    ],
   },
   {
     name: gettext('Billing'),
@@ -111,8 +113,10 @@ export default ENV => [
         name: 'vat_code',
         label: gettext('EU VAT ID'),
         type: 'string',
-        help_text: gettext('Please provide your EU VAT ID if you are registered in the European Union.'),
+        help_text: gettext(
+          'Please provide your EU VAT ID if you are registered in the European Union.',
+        ),
       },
-    ]
-  }
+    ],
+  },
 ];

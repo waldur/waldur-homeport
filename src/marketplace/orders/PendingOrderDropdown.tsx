@@ -12,7 +12,11 @@ import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import * as actions from '@waldur/marketplace/orders/store/actions';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { getCustomer, isOwnerOrStaff, getWorkspace } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  isOwnerOrStaff,
+  getWorkspace,
+} from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { OrderDetailsLink } from './OrderDetailsLink';
@@ -28,8 +32,9 @@ interface PendingOrderIndicatorProps extends ToggleOpenProps {
   workspace: string;
 }
 
-export class PurePendingOrderIndicator extends React.Component<PendingOrderIndicatorProps> {
-
+export class PurePendingOrderIndicator extends React.Component<
+  PendingOrderIndicatorProps
+> {
   componentDidMount() {
     const { workspace, customer } = this.props;
     if (!customer) {
@@ -76,78 +81,44 @@ export class PurePendingOrderIndicator extends React.Component<PendingOrderIndic
         open={isOpen}
         onToggle={handleToggleOpen}
         className="PendingOrderDropdown"
-        id="pending-dropdown">
+        id="pending-dropdown"
+      >
         <Dropdown.Toggle
           noCaret={true}
-          className="PendingOrderDropdown__Toggle">
+          className="PendingOrderDropdown__Toggle"
+        >
           <li className="navbar-indicator">
             <a onClick={handleToggleOpen}>
-              <i className={'fa fa-bell'}/>
+              <i className={'fa fa-bell'} />
               {count > 0 && (
                 <span className={'label label-warning'}>{count}</span>
               )}
             </a>
           </li>
         </Dropdown.Toggle>
-        <Dropdown.Menu
-          className="dropdown-orders dropdown-menu-right">
-          {
-            limitedOrders.map(order => (
-              <PendingOrderDropdownItem
-                key={order.uuid}
-                order={order}
-                {...this.props}
-                onClick={handleToggleOpen}/>
-            ))
-          }
+        <Dropdown.Menu className="dropdown-orders dropdown-menu-right">
+          {limitedOrders.map(order => (
+            <PendingOrderDropdownItem
+              key={order.uuid}
+              order={order}
+              {...this.props}
+              onClick={handleToggleOpen}
+            />
+          ))}
 
           <li>
             <div className="text-center link-block">
               <ShowAllLink
                 handleToggleOpen={handleToggleOpen}
-                workspace={workspace}/>
+                workspace={workspace}
+              />
             </div>
           </li>
-
         </Dropdown.Menu>
       </Dropdown>
     );
   }
 }
-
-const PendingOrderDropdownItem = props => (
-  <>
-    <li>
-      <OrderDetailsLink
-        order_uuid={props.order.uuid}
-        customer_uuid={props.customer.uuid}
-        project_uuid={props.order.project_uuid}
-        className="dropdown-item"
-        onClick={props.onClick}>
-          <div>
-            {props.order.items.map(item =>
-              <div key={item.uuid}>
-                <p>
-                <span>{getNamePrefix(item.type)} </span>
-                <strong>{item.attributes.name}</strong>
-                </p>
-                <span className="display-flex text-muted small">{getLabel(item.offering_type)}</span>
-              </div>
-            )}
-            <Row>
-              <Col sm={7}>
-                <small>{translate('Requested by')} {props.order.created_by_full_name}</small>
-              </Col>
-              <Col sm={5} className="text-right">
-                <small>{formatFromNow(props.order.created)}</small>
-              </Col>
-            </Row>
-          </div>
-      </OrderDetailsLink>
-    </li>
-    <li className="dropdown-divider"/>
-  </>
-);
 
 const getNamePrefix = (type: OrderItemType) => {
   switch (type) {
@@ -162,6 +133,45 @@ const getNamePrefix = (type: OrderItemType) => {
   }
 };
 
+const PendingOrderDropdownItem = props => (
+  <>
+    <li>
+      <OrderDetailsLink
+        order_uuid={props.order.uuid}
+        customer_uuid={props.customer.uuid}
+        project_uuid={props.order.project_uuid}
+        className="dropdown-item"
+        onClick={props.onClick}
+      >
+        <div>
+          {props.order.items.map(item => (
+            <div key={item.uuid}>
+              <p>
+                <span>{getNamePrefix(item.type)} </span>
+                <strong>{item.attributes.name}</strong>
+              </p>
+              <span className="display-flex text-muted small">
+                {getLabel(item.offering_type)}
+              </span>
+            </div>
+          ))}
+          <Row>
+            <Col sm={7}>
+              <small>
+                {translate('Requested by')} {props.order.created_by_full_name}
+              </small>
+            </Col>
+            <Col sm={5} className="text-right">
+              <small>{formatFromNow(props.order.created)}</small>
+            </Col>
+          </Row>
+        </div>
+      </OrderDetailsLink>
+    </li>
+    <li className="dropdown-divider" />
+  </>
+);
+
 const ShowAllLink = props => {
   const { workspace, handleToggleOpen } = props;
   switch (workspace) {
@@ -169,8 +179,9 @@ const ShowAllLink = props => {
       return (
         <Link
           state="marketplace-my-order-items"
-          params={{filterState: 'pending'}}
-          onClick={handleToggleOpen}>
+          params={{ filterState: 'pending' }}
+          onClick={handleToggleOpen}
+        >
           <strong>{translate('Show all')}</strong>
         </Link>
       );
@@ -178,8 +189,9 @@ const ShowAllLink = props => {
       return (
         <Link
           state="marketplace-order-list"
-          params={{filterState: 'pending'}}
-          onClick={handleToggleOpen}>
+          params={{ filterState: 'pending' }}
+          onClick={handleToggleOpen}
+        >
           <strong>{translate('Show all')}</strong>
         </Link>
       );
@@ -190,17 +202,16 @@ const ShowAllLink = props => {
 
 const mapStateToProps = state => {
   const { pendingOrders } = state.marketplace.orders;
-  return ({
+  return {
     customer: getCustomer(state),
     isOwnerOrStaff: isOwnerOrStaff(state),
     pendingOrders,
     workspace: getWorkspace(state),
-  });
+  };
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchPendingOrders: params =>
-    dispatch(actions.fetchPendingOrders(params)),
+  fetchPendingOrders: params => dispatch(actions.fetchPendingOrders(params)),
 });
 
 const enhance = compose(

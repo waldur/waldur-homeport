@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { InjectedFormProps } from 'redux-form';
 
-import { SubmitButton, CancelButton, FormContainer, TextField } from '@waldur/form-react';
+import {
+  SubmitButton,
+  CancelButton,
+  FormContainer,
+  TextField,
+} from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import * as constants from './constants';
@@ -28,10 +33,7 @@ export const PureIssueCommentsForm = (props: PureIssueCommentsFormProps) => {
   return (
     <div className="comments-form">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormContainer
-          submitting={submitting}
-          clearOnUnmount={false}
-        >
+        <FormContainer submitting={submitting} clearOnUnmount={false}>
           <TextField name={constants.FORM_FIELDS.comment} />
         </FormContainer>
         <div className="comments-form__controls m-t-md">
@@ -40,10 +42,7 @@ export const PureIssueCommentsForm = (props: PureIssueCommentsFormProps) => {
             disabled={uiDisabled || pristine}
             label={translate('Add')}
           />
-          <CancelButton
-            onClick={onCancel}
-            label={translate('Cancel')}
-          />
+          <CancelButton onClick={onCancel} label={translate('Cancel')} />
         </div>
       </form>
     </div>

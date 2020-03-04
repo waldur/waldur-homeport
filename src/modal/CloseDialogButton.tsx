@@ -16,11 +16,17 @@ interface DispatchProps {
 
 type Props = TranslateProps & OwnProps & DispatchProps;
 
-const PureCloseDialogButton = ({ translate, dismiss, label, className }: Props) => (
+const PureCloseDialogButton = ({
+  translate,
+  dismiss,
+  label,
+  className,
+}: Props) => (
   <button
     type="button"
     className={className || 'btn btn-default'}
-    onClick={dismiss}>
+    onClick={dismiss}
+  >
     <span>{label || translate('Cancel')}</span>
   </button>
 );
@@ -29,6 +35,9 @@ const mapDispatchToProps = dispatch => ({
   dismiss: () => dispatch(closeModalDialog()),
 });
 
-const enhance = compose(connect<{}, DispatchProps, OwnProps>(undefined, mapDispatchToProps), withTranslation);
+const enhance = compose(
+  connect<{}, DispatchProps, OwnProps>(undefined, mapDispatchToProps),
+  withTranslation,
+);
 
 export const CloseDialogButton = enhance(PureCloseDialogButton);

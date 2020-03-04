@@ -12,7 +12,7 @@ interface MessageDialogProps {
 }
 
 export const MessageDialog = (props: MessageDialogProps) => (
-  <ModalDialog title={props.resolve.title} footer={<CloseDialogButton/>}>
+  <ModalDialog title={props.resolve.title} footer={<CloseDialogButton />}>
     {props.resolve.message}
   </ModalDialog>
 );

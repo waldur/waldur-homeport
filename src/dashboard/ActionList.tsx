@@ -16,7 +16,8 @@ export const ActionList = (props: ActionListProps) => (
       <ListGroupItem
         key={index}
         onClick={action.onClick}
-        className={classNames({'fist-item': index === 0})}>
+        className={classNames({ 'fist-item': index === 0 })}
+      >
         <Label bsStyle="success" className="m-r-sm m-l-sm">
           <i className="fa fa-plus" />
         </Label>

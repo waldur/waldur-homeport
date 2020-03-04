@@ -13,6 +13,7 @@ import { Customer } from '@waldur/workspace/types';
 
 import { ResourceState } from '../types';
 import { ResourceUsageButton } from '../usage/ResourceUsageButton';
+
 import { TABLE_PUBLIC_RESOURCE } from './constants';
 import { PublicResourcesListPlaceholder } from './PublicResourcesListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
@@ -71,11 +72,11 @@ export const TableComponent = props => {
   return (
     <Table
       {...props}
-      placeholderComponent={<PublicResourcesListPlaceholder/>}
+      placeholderComponent={<PublicResourcesListPlaceholder />}
       columns={columns}
       verboseName={translate('Resources')}
       enableExport={true}
-      initialSorting={{field: 'created', mode: 'desc'}}
+      initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
     />
@@ -147,4 +148,6 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const PublicResourcesList = enhance(TableComponent) as React.ComponentType<{}>;
+export const PublicResourcesList = enhance(
+  TableComponent,
+) as React.ComponentType<{}>;

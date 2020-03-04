@@ -16,7 +16,10 @@
         <cost-plan-component component="item.preset"></cost-plan-component>
       </td>
       <td ng-switch="$ctrl.serviceType">
-        <openstack-flavor-info flavor="item.flavor" ng-switch-when="OpenStackTenant"></openstack-flavor-info>
+        <openstack-flavor-info
+          flavor="item.flavor"
+          ng-switch-when="OpenStackTenant"
+        ></openstack-flavor-info>
         <span ng-switch-when="Azure">{{item.size.name}}</span>
         <span ng-switch-default translate>N/A</span>
       </td>

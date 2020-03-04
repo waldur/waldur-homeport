@@ -74,10 +74,11 @@ async function loadOrderItem(order_item_uuid) {
   updateBreadcrumbs(orderItem);
   const offering = await api.getOffering(orderItem.offering_uuid);
   const plugins = await api.getPlugins();
-  const limits = plugins.find(plugin => plugin.offering_type === offering.type).available_limits;
+  const limits = plugins.find(plugin => plugin.offering_type === offering.type)
+    .available_limits;
   const category = await api.getCategory(offering.category_uuid);
   const sections = category.sections;
-  const tabs = getTabs({offering, sections});
+  const tabs = getTabs({ offering, sections });
   return {
     orderItem,
     offering,
@@ -92,7 +93,7 @@ const OrderItemDetailsContainer: React.FC<{}> = () => (
       // Don't render loading indicator if order item is refreshing
       // since if it is in pending state it is refreshed via periodic polling
       if (loading && !loaded) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
       }
       if (error) {
         return <h3>{translate('Unable to get order item.')}</h3>;
@@ -105,7 +106,7 @@ const OrderItemDetailsContainer: React.FC<{}> = () => (
             limits={data.limits}
             loadData={loadData}
           />
-          <OfferingTabsComponent tabs={data.tabs}/>
+          <OfferingTabsComponent tabs={data.tabs} />
         </>
       );
     }}

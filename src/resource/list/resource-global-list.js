@@ -1,7 +1,11 @@
 import './resource-global-list.scss';
 
 // @ngInject
-function ResourceGlobalListController($rootScope, $scope, baseResourceListController) {
+function ResourceGlobalListController(
+  $rootScope,
+  $scope,
+  baseResourceListController,
+) {
   let controllerScope = this;
   let ResourceController = baseResourceListController.extend({
     init: function() {
@@ -44,14 +48,18 @@ function ResourceGlobalListController($rootScope, $scope, baseResourceListContro
       return options;
     },
     connectWatchers: function() {
-      $scope.$watch(() => controllerScope.filter, () => {
-        $rootScope.$broadcast('gotoFirstPage');
-        controllerScope.getList();
-      }, true);
+      $scope.$watch(
+        () => controllerScope.filter,
+        () => {
+          $rootScope.$broadcast('gotoFirstPage');
+          controllerScope.getList();
+        },
+        true,
+      );
     },
     getFilter: function() {
       return controllerScope.filter;
-    }
+    },
   });
   controllerScope.__proto__ = new ResourceController();
 }
@@ -62,7 +70,7 @@ const resourceGlobalList = {
   templateUrl: 'views/partials/filtered-list.html',
   bindings: {
     filter: '<',
-  }
+  },
 };
 
 export default resourceGlobalList;

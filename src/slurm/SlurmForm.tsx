@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { StringField, SelectField, FormContainer} from '@waldur/form-react';
+import { StringField, SelectField, FormContainer } from '@waldur/form-react';
 
 export const SlurmForm = ({ translate, container }) => (
   <FormContainer {...container}>
@@ -35,10 +35,7 @@ export const SlurmForm = ({ translate, container }) => (
       required={true}
       validate={required}
     />
-    <StringField
-      name="port"
-      label={translate('Port')}
-    />
+    <StringField name="port" label={translate('Port')} />
     <StringField
       name="gateway"
       label={translate('Gateway')}

@@ -15,7 +15,7 @@ interface DialogBodyProps extends OwnProps, InjectedFormProps, StateProps {
   error: any;
   submitRequest(data: any): void;
   orderCanBeApproved: boolean;
-  initialValues: {limits: Limits};
+  initialValues: { limits: Limits };
 }
 
 export const DialogBody = connector((props: DialogBodyProps) => (
@@ -24,18 +24,25 @@ export const DialogBody = connector((props: DialogBodyProps) => (
       title={translate('Change resource limits')}
       footer={
         <>
-          <CloseDialogButton/>
+          <CloseDialogButton />
           {!props.loading && (
             <SubmitButton
               submitting={props.submitting}
-              label={props.orderCanBeApproved ? translate('Submit') : translate('Request for a change')}
+              label={
+                props.orderCanBeApproved
+                  ? translate('Submit')
+                  : translate('Request for a change')
+              }
             />
           )}
         </>
-      }>
-      {
-        props.loading ? <LoadingSpinner/> :
-        props.error ?  <h3>{translate('Unable to load data.')}</h3> :
+      }
+    >
+      {props.loading ? (
+        <LoadingSpinner />
+      ) : props.error ? (
+        <h3>{translate('Unable to load data.')}</h3>
+      ) : (
         <ChangeLimitsComponent
           plan={props.data.plan}
           periods={props.periods}
@@ -44,7 +51,7 @@ export const DialogBody = connector((props: DialogBodyProps) => (
           totalPeriods={props.totalPeriods}
           offeringLimits={props.data.offeringLimits}
         />
-      }
+      )}
     </ModalDialog>
   </form>
 ));

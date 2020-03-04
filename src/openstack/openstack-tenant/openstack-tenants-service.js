@@ -4,7 +4,7 @@ export default function openstackTenantsService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/openstack-tenants/';
-    }
+    },
   });
   return new ServiceClass();
 }

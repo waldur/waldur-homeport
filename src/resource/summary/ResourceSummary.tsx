@@ -11,7 +11,9 @@ interface ResourceSummaryProps {
 }
 
 export const ResourceSummary = (props: ResourceSummaryProps) => {
-  const SummaryComponent = ResourceSummaryRegistry.get(props.resource.resource_type) || ResourceSummaryBase;
+  const SummaryComponent =
+    ResourceSummaryRegistry.get(props.resource.resource_type) ||
+    ResourceSummaryBase;
   return (
     <dl className="dl-horizontal resource-details-table col-sm-12">
       <SummaryComponent resource={props.resource} />

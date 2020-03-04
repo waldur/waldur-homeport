@@ -12,7 +12,7 @@ const SupportOrderItemsContainer = () => (
       showProviderFilter={true}
       showOfferingFilter={true}
     />
-    <SupportOrderItemsList/>
+    <SupportOrderItemsList />
   </div>
 );
 

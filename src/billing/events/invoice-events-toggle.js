@@ -20,7 +20,7 @@ class InvoiceEventsToggleController {
 const invoiceEventsToggle = {
   template,
   bindings: {
-    item: '<'
+    item: '<',
   },
   controller: InvoiceEventsToggleController,
 };

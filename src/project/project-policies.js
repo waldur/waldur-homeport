@@ -3,7 +3,7 @@ import template from './project-policies.html';
 const projectPolicies = {
   template: template,
   bindings: {
-    project: '<'
+    project: '<',
   },
   controller: class ProjectPoliciesController {
     // @ngInject
@@ -16,7 +16,8 @@ const projectPolicies = {
       priceEstimatesService,
       FreeIPAQuotaService,
       $rootScope,
-      $q) {
+      $q,
+    ) {
       this.ENV = ENV;
       this.projectsService = projectsService;
       this.priceEstimatesService = priceEstimatesService;
@@ -32,46 +33,56 @@ const projectPolicies = {
       this.currency = this.ENV.currency;
       this.canManage = false;
       this.projectCertifications = angular.copy(this.project.certifications);
-      this.certificationsList = this.project.certifications.map(x => x.name).join(', ');
+      this.certificationsList = this.project.certifications
+        .map(x => x.name)
+        .join(', ');
 
       this.estimate = angular.copy(this.project.billing_price_estimate);
       this.isHardLimit = this.checkIsHardLimit(this.estimate);
       this.quota = this.FreeIPAQuotaService.loadQuota(this.project);
 
       this.loading = true;
-      this.$q.all([
-        this.certificationsService.getAll().then(certifications => {
-          this.certifications = certifications;
-        }),
+      this.$q
+        .all([
+          this.certificationsService.getAll().then(certifications => {
+            this.certifications = certifications;
+          }),
 
-        this.customersService.isOwnerOrStaff().then(canManage => {
-          this.canManage = canManage;
-        })
-      ]).finally(() => this.loading = false);
+          this.customersService.isOwnerOrStaff().then(canManage => {
+            this.canManage = canManage;
+          }),
+        ])
+        .finally(() => (this.loading = false));
     }
 
     updatePolicies() {
-      let promises = [
-        this.updatePriceEstimate(),
-        this.saveCertifications(),
-      ];
+      let promises = [this.updatePriceEstimate(), this.saveCertifications()];
 
       if (this.quota) {
-        promises.push(this.FreeIPAQuotaService.saveQuota(this.project, this.quota));
+        promises.push(
+          this.FreeIPAQuotaService.saveQuota(this.project, this.quota),
+        );
       }
 
-      return this.$q.all(promises).then(() => {
-        this.ncUtilsFlash.success(gettext('Project policies have been updated.'));
-      }).catch((response) => {
-        if (response.status === 400) {
-          for (let name in response.data) {
-            let error = response.data[name];
-            this.ncUtilsFlash.error(error);
+      return this.$q
+        .all(promises)
+        .then(() => {
+          this.ncUtilsFlash.success(
+            gettext('Project policies have been updated.'),
+          );
+        })
+        .catch(response => {
+          if (response.status === 400) {
+            for (let name in response.data) {
+              let error = response.data[name];
+              this.ncUtilsFlash.error(error);
+            }
+          } else {
+            this.ncUtilsFlash.error(
+              gettext('An error occurred during policy update.'),
+            );
           }
-        } else {
-          this.ncUtilsFlash.error(gettext('An error occurred during policy update.'));
-        }
-      });
+        });
     }
 
     updatePriceEstimate() {
@@ -84,17 +95,19 @@ const projectPolicies = {
 
     saveCertifications() {
       function mapItems(items) {
-        return items.map(item => ({url: item.url}));
+        return items.map(item => ({ url: item.url }));
       }
       const oldItems = mapItems(this.project.certifications);
       const newItems = mapItems(this.projectCertifications);
       if (angular.equals(oldItems, newItems)) {
         return this.$q.resolve();
       } else {
-        return this.projectsService.updateCertifications(this.project.url, newItems).then(() => {
-          this.projectsService.clearAllCacheForCurrentEndpoint();
-          this.$rootScope.$broadcast('refreshProjectList');
-        });
+        return this.projectsService
+          .updateCertifications(this.project.url, newItems)
+          .then(() => {
+            this.projectsService.clearAllCacheForCurrentEndpoint();
+            this.$rootScope.$broadcast('refreshProjectList');
+          });
       }
     }
 
@@ -103,9 +116,12 @@ const projectPolicies = {
     }
 
     isOverThreshold() {
-      return this.estimate.threshold > 0 && this.estimate.total >= this.estimate.threshold;
+      return (
+        this.estimate.threshold > 0 &&
+        this.estimate.total >= this.estimate.threshold
+      );
     }
-  }
+  },
 };
 
 export default projectPolicies;

@@ -7,14 +7,20 @@ import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
 import { ResourceShowUsageButton } from './ResourceShowUsageButton';
 
 interface Props {
-  row: Pick<Resource, 'state' | 'plan' | 'is_usage_based' | 'uuid' | 'offering_uuid' | 'name'>;
+  row: Pick<
+    Resource,
+    'state' | 'plan' | 'is_usage_based' | 'uuid' | 'offering_uuid' | 'name'
+  >;
 }
 
 export const ResourceUsageButton = ({ row }: Props) => {
-  const disabled = !row.is_usage_based || !row.plan || !['OK', 'Updating', 'Terminating', 'Terminated'].includes(row.state);
+  const disabled =
+    !row.is_usage_based ||
+    !row.plan ||
+    !['OK', 'Updating', 'Terminating', 'Terminated'].includes(row.state);
   const body = (
-    <div className={classNames('btn-group', {disabled})}>
-      <ResourceShowUsageButton resource={row.uuid}/>
+    <div className={classNames('btn-group', { disabled })}>
+      <ResourceShowUsageButton resource={row.uuid} />
       {['OK', 'Updating'].includes(row.state) && (
         <ResourceCreateUsageButton
           offering_uuid={row.offering_uuid}

@@ -23,7 +23,7 @@ export const EnvironmentVariablesList = props => (
           onRemove={props.fields.remove}
         />
       ))}
-      <EnvironmentVariableAddButton onClick={() => props.fields.push({})}/>
+      <EnvironmentVariableAddButton onClick={() => props.fields.push({})} />
     </Col>
   </div>
 );

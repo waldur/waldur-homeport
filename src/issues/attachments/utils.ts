@@ -3,15 +3,24 @@ import accept from 'attr-accept';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
-export const validateFiles = (files: File[] = [], excludedTypes: string | string[]): { accepted: File[], rejected: File[] } => {
+export const validateFiles = (
+  files: File[] = [],
+  excludedTypes: string | string[],
+): { accepted: File[]; rejected: File[] } => {
   const rejected = [];
   const accepted = [];
 
   for (const file of files) {
-    const isRejected = excludedTypes && excludedTypes.length && accept({
-      name: file.name,
-      type: file.type,
-    }, excludedTypes);
+    const isRejected =
+      excludedTypes &&
+      excludedTypes.length &&
+      accept(
+        {
+          name: file.name,
+          type: file.type,
+        },
+        excludedTypes,
+      );
 
     isRejected ? rejected.push(file) : accepted.push(file);
   }
@@ -40,9 +49,13 @@ export const getErrorMessage = (files: File[]): string => {
     fileList = `${files[0].name}.`;
   }
 
-  return `${files.length > 1 ? filesMessage : fileMessage}: ${fileList} \n ${reasonMessage}`;
+  return `${
+    files.length > 1 ? filesMessage : fileMessage
+  }: ${fileList} \n ${reasonMessage}`;
 };
 
-export const openAttachmentModal = (url: string) => openModalDialog('IssueAttachmentModal', { resolve: { url } });
+export const openAttachmentModal = (url: string) =>
+  openModalDialog('IssueAttachmentModal', { resolve: { url } });
 
-export const getFileName = (url: string): string => url.slice(url.lastIndexOf('/') + 1);
+export const getFileName = (url: string): string =>
+  url.slice(url.lastIndexOf('/') + 1);

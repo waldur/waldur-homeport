@@ -9,13 +9,19 @@ export const ListField = (params: ListFieldParameters) => {
     <div className="form-group">
       <label className="control-label col-sm-2">{params.label}</label>
       <div className="col-sm-5 same-padding-as-control-label">
-        <Field name={params.formFieldName}
-               component={fieldProps =>
-                 <InternalListField configuration={params.configuration}
-                                    selectedOption={fieldProps.input.value}
-                                    onOptionSelected={newValue => fieldProps.input.onChange(newValue)}/>}
+        <Field
+          name={params.formFieldName}
+          component={fieldProps => (
+            <InternalListField
+              configuration={params.configuration}
+              selectedOption={fieldProps.input.value}
+              onOptionSelected={newValue => fieldProps.input.onChange(newValue)}
+            />
+          )}
         />
-        {params.description && <p className="help-block m-b-none text-muted">{params.description}</p>}
+        {params.description && (
+          <p className="help-block m-b-none text-muted">{params.description}</p>
+        )}
       </div>
     </div>
   );

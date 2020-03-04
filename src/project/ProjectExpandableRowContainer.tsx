@@ -9,61 +9,85 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
-import { ExpandableRow, ResourceExpandableRow } from '@waldur/resource/ResourceExpandableRow';
+import {
+  ExpandableRow,
+  ResourceExpandableRow,
+} from '@waldur/resource/ResourceExpandableRow';
 import { Quota, Project } from '@waldur/workspace/types';
 
 const parseQuotas = (quotaItems: Quota[]): ExpandableRow[] => {
   const categories = getDashboardCategories();
-  const quotas = categories.reduce((acc, category) => [...acc, ...category.quotas], []);
-  const usages = quotaItems.reduce((map, quota) => ({
-    ...map,
-    [quota.name]: quota.usage,
-  }), {});
+  const quotas = categories.reduce(
+    (acc, category) => [...acc, ...category.quotas],
+    [],
+  );
+  const usages = quotaItems.reduce(
+    (map, quota) => ({
+      ...map,
+      [quota.name]: quota.usage,
+    }),
+    {},
+  );
 
-  return quotas.filter(quota => usages[quota.quota]).map(quota => {
-    const usage = usages[quota.quota] || 0;
-    const { formatter, units } = getFormatterUnits(quota.type, usage);
-    const current = units ? `${formatter(usage)} ${units}` : formatter(usage);
-    return {
-      label: quota.title,
-      value: current,
-    };
-  });
+  return quotas
+    .filter(quota => usages[quota.quota])
+    .map(quota => {
+      const usage = usages[quota.quota] || 0;
+      const { formatter, units } = getFormatterUnits(quota.type, usage);
+      const current = units ? `${formatter(usage)} ${units}` : formatter(usage);
+      return {
+        label: quota.title,
+        value: current,
+      };
+    });
 };
 
-const parseCounters = (categories: Category[], counters: object): ExpandableRow[] => {
-  return categories.map(category => ({
-    label: category.title,
-    value: counters[`marketplace_category_${category.uuid}`],
-  })).filter(row => row.value);
+const parseCounters = (
+  categories: Category[],
+  counters: object,
+): ExpandableRow[] => {
+  return categories
+    .map(category => ({
+      label: category.title,
+      value: counters[`marketplace_category_${category.uuid}`],
+    }))
+    .filter(row => row.value);
 };
 
 const getProjectCounters = (projectId: string) =>
   get(`/projects/${projectId}/counters/`).then(response => response.data);
 
 const combineRows = (rows: ExpandableRow[]): ExpandableRow[] =>
-  rows.filter(item => item.value).sort((a, b) => a.label.localeCompare(b.label));
+  rows
+    .filter(item => item.value)
+    .sort((a, b) => a.label.localeCompare(b.label));
 
 async function loadData(props): Promise<ExpandableRow[]> {
-  const quotaRows = isFeatureVisible('resources.legacy') ? parseQuotas(props.quotas) : [];
+  const quotaRows = isFeatureVisible('resources.legacy')
+    ? parseQuotas(props.quotas)
+    : [];
   if (!isFeatureVisible('marketplace')) {
     return combineRows(quotaRows);
   }
-  const categories = await getCategories({params: {field: ['uuid', 'title']}});
+  const categories = await getCategories({
+    params: { field: ['uuid', 'title'] },
+  });
   const counters = await getProjectCounters(props.uuid);
   const counterRows = parseCounters(categories, counters);
   return combineRows([...quotaRows, ...counterRows]);
 }
 
-export const ProjectExpandableRowContainer: React.FC<{row: Project}> = props => (
+export const ProjectExpandableRowContainer: React.FC<{
+  row: Project;
+}> = props => (
   <Query loader={loadData} variables={props.row}>
     {({ loading, error, data }) => {
       if (loading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
       } else if (error) {
         return <span>{translate('Unable to load project resources.')}</span>;
       } else {
-        return <ResourceExpandableRow rows={data}/>;
+        return <ResourceExpandableRow rows={data} />;
       }
     }}
   </Query>

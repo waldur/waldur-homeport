@@ -12,10 +12,10 @@ interface Props {
 }
 
 export const getAccountingTypeOptions: () => Options<BillingType> = () => [
-  {label: translate('Usage-based'), value: 'usage'},
-  {label: translate('Fixed price'), value: 'fixed'},
-  {label: translate('One-time'), value: 'one'},
-  {label: translate('One-time on plan switch'), value: 'few'},
+  { label: translate('Usage-based'), value: 'usage' },
+  { label: translate('Fixed price'), value: 'fixed' },
+  { label: translate('One-time'), value: 'one' },
+  { label: translate('One-time on plan switch'), value: 'few' },
 ];
 
 export const ComponentAccountingTypeField: React.FC<Props> = props => (
@@ -23,8 +23,17 @@ export const ComponentAccountingTypeField: React.FC<Props> = props => (
     <Field
       name="billing_type"
       validate={required}
-      onChange={(_, newOption: Option<BillingType>, prevOption: Option<BillingType>) => {
-        if (newOption && prevOption && newOption.value === 'usage' && prevOption.value === 'fixed') {
+      onChange={(
+        _,
+        newOption: Option<BillingType>,
+        prevOption: Option<BillingType>,
+      ) => {
+        if (
+          newOption &&
+          prevOption &&
+          newOption.value === 'usage' &&
+          prevOption.value === 'fixed'
+        ) {
           props.removeOfferingQuotas();
         }
       }}

@@ -3,14 +3,18 @@ const restoredVolumesList = {
   controllerAs: 'ListController',
   templateUrl: 'views/partials/filtered-list.html',
   bindings: {
-    resource: '<'
+    resource: '<',
   },
 };
 
 export default restoredVolumesList;
 
 // @ngInject
-function RestoredVolumesListController($filter, baseResourceListController, openstackVolumesService) {
+function RestoredVolumesListController(
+  $filter,
+  baseResourceListController,
+  openstackVolumesService,
+) {
   let controllerScope = this;
   let ResourceController = baseResourceListController.extend({
     init: function() {
@@ -27,10 +31,10 @@ function RestoredVolumesListController($filter, baseResourceListController, open
     getTableOptions: function() {
       let options = this._super();
       options.noDataText = gettext('You have no restored volumes yet.');
-      options.noMatchesText = gettext('No restored volumes found matching filter.');
-      options.hiddenColumns = [
-        'provider',
-      ];
+      options.noMatchesText = gettext(
+        'No restored volumes found matching filter.',
+      );
+      options.hiddenColumns = ['provider'];
 
       options.columns.push(
         {
@@ -38,7 +42,7 @@ function RestoredVolumesListController($filter, baseResourceListController, open
           title: gettext('Size'),
           render: function(row) {
             return $filter('filesize')(row.size);
-          }
+          },
         },
         {
           id: 'created',
@@ -46,8 +50,8 @@ function RestoredVolumesListController($filter, baseResourceListController, open
           className: 'desktop',
           render: function(row) {
             return $filter('shortDate')(row.created) || '&mdash;';
-          }
-        }
+          },
+        },
       );
       return options;
     },

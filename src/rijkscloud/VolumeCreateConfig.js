@@ -1,16 +1,12 @@
 const RijkscloudVolumeConfig = {
-  order: [
-    'name',
-    'description',
-    'size',
-  ],
+  order: ['name', 'description', 'size'],
   options: {
     name: {
       type: 'string',
       required: true,
       label: gettext('Volume name'),
       form_text: gettext('This name will be visible in accounting data.'),
-      maxlength: 150
+      maxlength: 150,
     },
     description: {
       type: 'text',

@@ -2,9 +2,16 @@ import * as React from 'react';
 import * as Row from 'react-bootstrap/lib/Row';
 import { reduxForm } from 'redux-form';
 
-import { BookingStateFilter, getStates} from '@waldur/booking/BookingStateFilter';
+import {
+  BookingStateFilter,
+  getStates,
+} from '@waldur/booking/BookingStateFilter';
 
-const PureBookingsFilter = () => <Row><BookingStateFilter/></Row>;
+const PureBookingsFilter = () => (
+  <Row>
+    <BookingStateFilter />
+  </Row>
+);
 
 const enhance = reduxForm({
   form: 'BookingsFilter',
@@ -13,4 +20,6 @@ const enhance = reduxForm({
   },
 });
 
-export const BookingsFilter = enhance(PureBookingsFilter) as React.ComponentType<{}>;
+export const BookingsFilter = enhance(
+  PureBookingsFilter,
+) as React.ComponentType<{}>;

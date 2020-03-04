@@ -1,19 +1,24 @@
 import * as React from 'react';
 
-import { FormContainer, SelectField} from '@waldur/form-react';
+import { FormContainer, SelectField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 
 export const OpenStackPluginOptionsForm = ({ container, locale }) => {
-  const STORAGE_MODE_OPTIONS = React.useMemo(() => [
-    {
-      label: translate('Fixed — use common storage quota'),
-      value: 'fixed',
-    },
-    {
-      label: translate('Dynamic — use separate volume types for tracking pricing'),
-      value: 'dynamic',
-    },
-  ], locale);
+  const STORAGE_MODE_OPTIONS = React.useMemo(
+    () => [
+      {
+        label: translate('Fixed — use common storage quota'),
+        value: 'fixed',
+      },
+      {
+        label: translate(
+          'Dynamic — use separate volume types for tracking pricing',
+        ),
+        value: 'dynamic',
+      },
+    ],
+    locale,
+  );
 
   return (
     <FormContainer {...container}>
@@ -23,7 +28,9 @@ export const OpenStackPluginOptionsForm = ({ container, locale }) => {
         options={STORAGE_MODE_OPTIONS}
         simpleValue={true}
         required={true}
-        description={translate('Offering needs to be saved before pricing for dynamic components could be set.')}
+        description={translate(
+          'Offering needs to be saved before pricing for dynamic components could be set.',
+        )}
       />
     </FormContainer>
   );

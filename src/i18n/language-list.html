@@ -1,17 +1,23 @@
-<ul class="list-inline language-list m-t-md text-center"
-  ng-if="::$ctrl.inlineList">
-  <li ng-repeat="language in $ctrl.languageChoices | orderBy: 'code'"
+<ul
+  class="list-inline language-list m-t-md text-center"
+  ng-if="::$ctrl.inlineList"
+>
+  <li
+    ng-repeat="language in $ctrl.languageChoices | orderBy: 'code'"
     ng-click="$ctrl.selectLanguage(language)"
-    class="list-inline-item cursor-pointer">
+    class="list-inline-item cursor-pointer"
+  >
     <span ng-class="{'font-bold': language === $ctrl.currentLanguage}">
       {{ language.label | translate }}
     </span>
   </li>
 </ul>
 
-<ui-select ng-model="$ctrl.currentLanguage"
+<ui-select
+  ng-model="$ctrl.currentLanguage"
   ng-change="$ctrl.selectLanguage($ctrl.currentLanguage)"
-  ng-if="::$ctrl.selectBox">
+  ng-if="::$ctrl.selectBox"
+>
   <ui-select-match placeholder="{{'Please select your language' | translate}}">
     {{$select.selected.label}}
   </ui-select-match>

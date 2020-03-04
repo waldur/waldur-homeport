@@ -1,11 +1,10 @@
 // @ngInject
-export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
+export default function actionConfig(
+  ActionConfigurationProvider,
+  DEFAULT_EDIT_ACTION,
+) {
   ActionConfigurationProvider.register('OpenStack.SubNet', {
-    order: [
-      'edit',
-      'pull',
-      'destroy'
-    ],
+    order: ['edit', 'pull', 'destroy'],
     options: {
       edit: {
         ...DEFAULT_EDIT_ACTION,
@@ -25,8 +24,8 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
         },
       },
       pull: {
-        title: gettext('Synchronise')
+        title: gettext('Synchronise'),
       },
-    }
+    },
   });
 }

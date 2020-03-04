@@ -4,7 +4,7 @@ const resourceVolumesList = {
   templateUrl: 'views/partials/filtered-list.html',
   bindings: {
     onListReceive: '&',
-  }
+  },
 };
 
 export default resourceVolumesList;
@@ -20,14 +20,22 @@ function VolumesListController(
   $filter,
   ENV,
   TableExtensionService,
-  features) {
+  features,
+) {
   let controllerScope = this;
   let ResourceController = BaseProjectResourcesTabController.extend({
-    init:function() {
+    init: function() {
       this.category = ENV.Volumes;
       this.controllerScope = controllerScope;
       this._super();
-      this.addRowFields(['size', 'instance', 'instance_name', 'bootable', 'backend_id', 'source_snapshot']);
+      this.addRowFields([
+        'size',
+        'instance',
+        'instance_name',
+        'bootable',
+        'backend_id',
+        'source_snapshot',
+      ]);
       $scope.$on('refreshVolumesList', function() {
         $timeout(function() {
           controllerScope.resetCache();
@@ -48,7 +56,7 @@ function VolumesListController(
             return '&ndash;';
           }
           return $filter('filesize')(row.size);
-        }
+        },
       });
       options.columns.push({
         title: gettext('Attached to'),
@@ -61,15 +69,20 @@ function VolumesListController(
           let uuid = ncUtils.getUUID(row.instance);
           let href = $state.href('resources.details', {
             uuid: uuid,
-            resource_type: 'OpenStackTenant.Instance'
+            resource_type: 'OpenStackTenant.Instance',
           });
-          return ncUtils.renderLink(href, $sanitize(row.instance_name) || 'OpenStack instance');
-        }
+          return ncUtils.renderLink(
+            href,
+            $sanitize(row.instance_name) || 'OpenStack instance',
+          );
+        },
       });
       return options;
     },
     getTableActions: function() {
-      let actions = TableExtensionService.getTableActions('resource-volumes-list');
+      let actions = TableExtensionService.getTableActions(
+        'resource-volumes-list',
+      );
       if (this.category !== undefined) {
         actions.push(this.getCreateAction());
       }
@@ -80,7 +93,7 @@ function VolumesListController(
     },
     getCreateTitle: function() {
       return gettext('Add volumes');
-    }
+    },
   });
   controllerScope.__proto__ = new ResourceController();
 }

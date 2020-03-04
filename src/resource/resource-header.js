@@ -4,7 +4,7 @@ import { getCategoryLink } from '@waldur/marketplace/utils';
 
 const resourceHeader = {
   template: template,
-  controller: class ResourceHeaderController{
+  controller: class ResourceHeaderController {
     // @ngInject
     constructor(
       $rootScope,
@@ -18,7 +18,8 @@ const resourceHeader = {
       resourceUtils,
       ResourceBreadcrumbsService,
       BreadcrumbsService,
-      ncUtilsFlash) {
+      ncUtilsFlash,
+    ) {
       this.$rootScope = $rootScope;
       this.$stateParams = $stateParams;
       this.$state = $state;
@@ -45,12 +46,17 @@ const resourceHeader = {
     }
 
     activate() {
-      this.$scope.$watch(() => this.model, () => this.refreshBreadcrumbs(), true);
+      this.$scope.$watch(
+        () => this.model,
+        () => this.refreshBreadcrumbs(),
+        true,
+      );
       this.loading = true;
-      this.getModel().then(response => {
-        this.model = response;
-        this.afterActivate(response);
-      }, this.modelNotFound.bind(this))
+      this.getModel()
+        .then(response => {
+          this.model = response;
+          this.afterActivate(response);
+        }, this.modelNotFound.bind(this))
         .finally(() => {
           this.loading = false;
         });
@@ -61,20 +67,25 @@ const resourceHeader = {
       if (!this.model) {
         return;
       }
-      this.BreadcrumbsService.items = this.ResourceBreadcrumbsService.getItems(this.model);
+      this.BreadcrumbsService.items = this.ResourceBreadcrumbsService.getItems(
+        this.model,
+      );
       this.BreadcrumbsService.activeItem = this.model.name;
     }
 
     afterActivate() {
       this.refreshPromise = this.$interval(
         blockingExecutor(this.reInitResource.bind(this)),
-        this.ENV.resourcesTimerInterval * 1000
+        this.ENV.resourcesTimerInterval * 1000,
       );
       this.activeItem = getCategoryLink(this.model.marketplace_category_uuid);
     }
 
     getModel() {
-      return this.resourcesService.$get(this.$stateParams.resource_type, this.$stateParams.uuid);
+      return this.resourcesService.$get(
+        this.$stateParams.resource_type,
+        this.$stateParams.uuid,
+      );
     }
 
     modelNotFound() {
@@ -83,15 +94,17 @@ const resourceHeader = {
         return;
       }
       if (this.features.isVisible('resources.legacy')) {
-        const state = this.resourceUtils.getListState(this.ENV.resourceCategory[this.model.resource_type]);
-        this.$state.go(state, {uuid: this.model.project_uuid});
+        const state = this.resourceUtils.getListState(
+          this.ENV.resourceCategory[this.model.resource_type],
+        );
+        this.$state.go(state, { uuid: this.model.project_uuid });
       } else if (this.features.isVisible('marketplace')) {
         this.$state.go('marketplace-project-resources', {
           category_uuid: this.model.marketplace_category_uuid,
           uuid: this.model.project_uuid,
         });
       } else {
-        this.$state.go('project.details', {uuid: this.model.project_uuid});
+        this.$state.go('project.details', { uuid: this.model.project_uuid });
       }
     }
 
@@ -99,15 +112,18 @@ const resourceHeader = {
       if (!this.enableRefresh) {
         return;
       }
-      return this.getModel().then(model => {
-        this.model = model;
-        this.$rootScope.$broadcast('refreshResourceSucceeded');
-      }, error => {
-        if (error.status === 404) {
-          this.ncUtilsFlash.error(gettext('Resource is gone.'));
-          this.modelNotFound();
-        }
-      });
+      return this.getModel().then(
+        model => {
+          this.model = model;
+          this.$rootScope.$broadcast('refreshResourceSucceeded');
+        },
+        error => {
+          if (error.status === 404) {
+            this.ncUtilsFlash.error(gettext('Resource is gone.'));
+            this.modelNotFound();
+          }
+        },
+      );
     }
 
     handleActionException(response) {
@@ -116,7 +132,7 @@ const resourceHeader = {
         this.ncUtilsFlash.error(message);
       }
     }
-  }
+  },
 };
 
 export default resourceHeader;

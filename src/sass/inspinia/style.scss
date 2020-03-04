@@ -6,31 +6,33 @@
 */
 
 // Variables, Mixins
-@import "variables";
+@import 'variables';
 
 // INSPINIA Theme Elements
-@import "typography";
-@import "navigation";
-@import "top_navigation";
-@import "buttons";
-@import "elements";
-@import "sidebar";
-@import "base";
-@import "pages";
+@import 'typography';
+@import 'navigation';
+@import 'top_navigation';
+@import 'buttons';
+@import 'elements';
+@import 'sidebar';
+@import 'base';
+@import 'pages';
 
 // Media query style
-@import "media";
+@import 'media';
 
 // Clear layout on print mode
 @media print {
   nav.navbar-static-side {
     display: none;
   }
-  body { overflow: visible !important; }
+  body {
+    overflow: visible !important;
+  }
 
   #page-wrapper {
     margin: 0;
   }
 }
 
-@import "jquery.steps";
+@import 'jquery.steps';

@@ -1,5 +1,5 @@
 export function randomDate() {
-  return new Date(+(new Date()) - Math.floor(Math.random() * 10000000000));
+  return new Date(+new Date() - Math.floor(Math.random() * 10000000000));
 }
 
 export function randomChoice(items) {
@@ -29,7 +29,9 @@ export function randomInteger(start, end) {
 }
 
 export function randomId() {
-  return Math.floor((1 + Math.random()) * 0x100000).toString(10).toUpperCase();
+  return Math.floor((1 + Math.random()) * 0x100000)
+    .toString(10)
+    .toUpperCase();
 }
 
 export function getRandomDataset(n, start, end) {

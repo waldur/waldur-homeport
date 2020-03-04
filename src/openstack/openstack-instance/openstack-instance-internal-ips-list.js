@@ -1,6 +1,6 @@
 const openstackInternalIpsList = {
   bindings: {
-    resource: '<'
+    resource: '<',
   },
   templateUrl: 'views/partials/filtered-list.html',
   controller: OpenstackInternalIpsListController,
@@ -9,7 +9,9 @@ const openstackInternalIpsList = {
 
 // @ngInject
 function OpenstackInternalIpsListController(
-  baseResourceListController, actionUtilsService) {
+  baseResourceListController,
+  actionUtilsService,
+) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -19,19 +21,23 @@ function OpenstackInternalIpsListController(
       let fn = this._super.bind(this);
 
       this.loading = true;
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
-        this.listActions = result;
-        fn();
-        this.addRowFields(['internal_ips_set']);
-      });
+      actionUtilsService
+        .loadNestedActions(this, controllerScope.resource, list_type)
+        .then(result => {
+          this.listActions = result;
+          fn();
+          this.addRowFields(['internal_ips_set']);
+        });
     },
     afterGetList: function() {
       this.list = this.list[0] ? this.list[0].internal_ips_set : [];
     },
     reInitResource: function(resource) {
-      this.service.$get(resource.resource_type, resource.uuid)
+      this.service
+        .$get(resource.resource_type, resource.uuid)
         .then(response => {
-          this.controllerScope.resource.internal_ips_set = response.internal_ips_set;
+          this.controllerScope.resource.internal_ips_set =
+            response.internal_ips_set;
         });
     },
     getTableOptions: function() {
@@ -42,27 +48,27 @@ function OpenstackInternalIpsListController(
         columns: [
           {
             title: gettext('IPv4 address'),
-            render: row => row.ip4_address
+            render: row => row.ip4_address,
           },
           {
             title: gettext('MAC address'),
-            render: row => row.mac_address
+            render: row => row.mac_address,
           },
           {
             title: gettext('Subnet Name'),
-            render: row => row.subnet_name
+            render: row => row.subnet_name,
           },
           {
             title: gettext('Subnet CIDR'),
-            render: row => row.subnet_cidr
+            render: row => row.subnet_cidr,
           },
         ],
-        tableActions: this.getTableActions()
+        tableActions: this.getTableActions(),
       };
     },
     getFilter: function() {
       return {
-        uuid: controllerScope.resource.uuid
+        uuid: controllerScope.resource.uuid,
       };
     },
     getTableActions: function() {

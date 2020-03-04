@@ -6,7 +6,7 @@ import {
   featuresProviderConfig,
   httpInterceptor,
   errorsHandler,
-  closeDialogs
+  closeDialogs,
 } from './app';
 import { ncUtilsFlash } from './utils';
 import { uibDropdownFix } from './shims/uibDropdownFix';

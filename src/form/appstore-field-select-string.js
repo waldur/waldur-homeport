@@ -4,7 +4,7 @@ const appstoreFieldSelectString = {
   template,
   bindings: {
     field: '<',
-    model: '<'
+    model: '<',
   },
 };
 

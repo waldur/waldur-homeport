@@ -12,6 +12,7 @@ import { CreatedField } from '@waldur/resource/summary/CreatedField';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { getResource } from '../common/api';
+
 import { ResourceStateField } from './list/ResourceStateField';
 import { Resource } from './types';
 
@@ -35,14 +36,17 @@ async function fetchResource(uuid) {
 }
 
 export const ResourceDetailsPage = () => {
-  const {state: resourceProps, call: loadResource} = useQuery(fetchResource, $state.params.resource_uuid);
+  const { state: resourceProps, call: loadResource } = useQuery(
+    fetchResource,
+    $state.params.resource_uuid,
+  );
   React.useEffect(loadResource, []);
   if (resourceProps.error && resourceProps.error.status === 404) {
     $state.go('errorPage.notFound');
     return;
   }
   if (!resourceProps.loaded) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
   const resource = resourceProps.data;
   return (
@@ -51,11 +55,11 @@ export const ResourceDetailsPage = () => {
         <dl className="dl-horizontal resource-details-table col-sm-12">
           <Field
             label={translate('State')}
-            value={<ResourceStateField row={resource as Resource}/>}
+            value={<ResourceStateField row={resource as Resource} />}
           />
           <Field
             label={translate('Created')}
-            value={<CreatedField resource={resource}/>}
+            value={<CreatedField resource={resource} />}
           />
           <Field
             label={translate('UUID')}
@@ -70,7 +74,7 @@ export const ResourceDetailsPage = () => {
             <Tabs defaultActiveKey="schedules" id="resource-details">
               <Tab eventKey="schedules" title={translate('Schedules')}>
                 <div className="m-t-sm">
-                  <Calendar events={resource.attributes.schedules}/>
+                  <Calendar events={resource.attributes.schedules} />
                 </div>
               </Tab>
             </Tabs>

@@ -10,7 +10,8 @@ import CustomerRole from './CustomerRole';
 const TableComponent = props => {
   const { translate, filterColumns } = props;
   return (
-    <Table {...props}
+    <Table
+      {...props}
       columns={filterColumns([
         {
           title: translate('Organization name'),
@@ -23,7 +24,7 @@ const TableComponent = props => {
         },
       ])}
       verboseName={translate('organizations')}
-      actions={<CustomerCreateButton/>}
+      actions={<CustomerCreateButton />}
       enableExport={true}
     />
   );

@@ -29,59 +29,61 @@ interface StateProps {
 
 type OfferingTabsProps = OwnProps & TranslateProps & StateProps;
 
-export const PureOfferingTabs: React.FC<OfferingTabsProps > = props => {
+export const PureOfferingTabs: React.FC<OfferingTabsProps> = props => {
   const issue = {
     uuid: props.offering.issue_uuid,
     url: props.offering.issue,
   };
-  const showOracleReport = isOracleOffering(props.offering) && props.offering.report;
+  const showOracleReport =
+    isOracleOffering(props.offering) && props.offering.report;
   const Summary = showOracleReport ? (
     <Row>
       <Col md={6}>
         <div className="m-b-md">
-          <OfferingSummaryTab offering={props.offering} summary={props.summary}/>
+          <OfferingSummaryTab
+            offering={props.offering}
+            summary={props.summary}
+          />
         </div>
         <Panel>
           <Panel.Heading>
-            <Panel.Title>
-              {props.translate('Snapshots')}
-            </Panel.Title>
+            <Panel.Title>{props.translate('Snapshots')}</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            <OracleSnapshots report={props.offering.report}/>
+            <OracleSnapshots report={props.offering.report} />
           </Panel.Body>
         </Panel>
       </Col>
       <Col md={6}>
-        <OracleReport report={props.offering.report}/>
+        <OracleReport report={props.offering.report} />
       </Col>
     </Row>
   ) : (
-    <OfferingSummaryTab offering={props.offering} summary={props.summary}/>
+    <OfferingSummaryTab offering={props.offering} summary={props.summary} />
   );
   return (
     <Tabs unmountOnExit={true} defaultActiveKey="summary" id="offeringSummary">
       <Tab title={props.translate('Summary')} eventKey="summary">
-        <div className="m-t-sm">
-          {Summary}
-        </div>
+        <div className="m-t-sm">{Summary}</div>
       </Tab>
       <Tab title={props.translate('Audit log')} eventKey="events">
         <div className="m-t-sm">
-          <OfferingEvents offering={props.offering}/>
+          <OfferingEvents offering={props.offering} />
         </div>
       </Tab>
       {props.showComments && (
         <Tab title={props.translate('Comments')} eventKey="comments">
           <div className="m-t-sm">
-            <IssueCommentsContainer issue={issue} renderHeader={false}/>
+            <IssueCommentsContainer issue={issue} renderHeader={false} />
           </div>
         </Tab>
       )}
       {props.offering.marketplace_resource_uuid && (
         <Tab title={props.translate('Order items')} eventKey="order-items">
           <div className="m-t-sm">
-            <ResourceOrderItems resource_uuid={props.offering.marketplace_resource_uuid}/>
+            <ResourceOrderItems
+              resource_uuid={props.offering.marketplace_resource_uuid}
+            />
           </div>
         </Tab>
       )}
@@ -90,8 +92,11 @@ export const PureOfferingTabs: React.FC<OfferingTabsProps > = props => {
 };
 
 const connector = connect<StateProps, {}, OwnProps>((state, ownProps) => ({
-  showComments: isVisible(state, 'offering.comments') &&
+  showComments:
+    isVisible(state, 'offering.comments') &&
     Boolean(ownProps.offering.issue && ownProps.offering.issue_key),
 }));
 
-export const OfferingTabs = withTranslation(connector(PureOfferingTabs)) as React.ComponentType<OwnProps>;
+export const OfferingTabs = withTranslation(
+  connector(PureOfferingTabs),
+) as React.ComponentType<OwnProps>;

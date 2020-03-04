@@ -4,7 +4,7 @@ export default function zabbixHostsService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/zabbix-hosts/';
-    }
+    },
   });
   return new ServiceClass();
 }

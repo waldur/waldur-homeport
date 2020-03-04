@@ -6,7 +6,8 @@ import { PureIssueCommentsFormContainer } from './IssueCommentsFormContainer';
 const initialProps = {
   formId: 'id',
 };
-const renderWrapper = (props?) => shallow(<PureIssueCommentsFormContainer {...initialProps} {...props} />);
+const renderWrapper = (props?) =>
+  shallow(<PureIssueCommentsFormContainer {...initialProps} {...props} />);
 
 describe('IssueCommentsFormMainContainer', () => {
   it('renders null if not opened', () => {

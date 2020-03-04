@@ -22,8 +22,10 @@ interface OwnProps {
 export const DataVolumePanel = (props: OwnProps) => (
   <Panel>
     <Panel.Heading>
-      <RemoveButton onClick={() => props.onRemove(props.volumeIndex)}/>
-      <h4>{translate('Data volume #{index}', {index: props.volumeIndex + 1})}</h4>
+      <RemoveButton onClick={() => props.onRemove(props.volumeIndex)} />
+      <h4>
+        {translate('Data volume #{index}', { index: props.volumeIndex + 1 })}
+      </h4>
     </Panel.Heading>
     <Panel.Body>
       <FormSection name={props.volumePath}>
@@ -41,7 +43,7 @@ export const DataVolumePanel = (props: OwnProps) => (
           nodeIndex={props.nodeIndex}
           volumeIndex={props.volumeIndex}
         />
-        <VolumeTypeGroup volumeTypes={props.volumeTypes}/>
+        <VolumeTypeGroup volumeTypes={props.volumeTypes} />
       </FormSection>
     </Panel.Body>
   </Panel>

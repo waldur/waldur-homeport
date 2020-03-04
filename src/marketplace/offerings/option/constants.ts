@@ -1,6 +1,6 @@
 import { FieldType } from './types';
 
-export const FIELD_TYPES: Array<{value: FieldType, label: string}> = [
+export const FIELD_TYPES: Array<{ value: FieldType; label: string }> = [
   {
     value: 'boolean',
     label: 'Boolean',

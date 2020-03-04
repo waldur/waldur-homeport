@@ -35,13 +35,13 @@ export default class BillingUtils {
         },
         {
           title: gettext('Canceled'),
-          value: 'canceled'
+          value: 'canceled',
         },
         {
           title: gettext('Created'),
-          value: 'created'
-        }
-      ]
+          value: 'created',
+        },
+      ],
     };
   }
 
@@ -56,19 +56,26 @@ export default class BillingUtils {
 
         tooltip: function(row) {
           if (row.state !== 'created') {
-            return gettext('Notification only for the created invoice can be sent.');
+            return gettext(
+              'Notification only for the created invoice can be sent.',
+            );
           }
-        }
-      }
+        },
+      },
     ];
   }
 
   sendNotification(invoice) {
-    this.invoicesService.sendNotification(invoice.uuid).then(() => {
-      this.ncUtilsFlash.success(gettext('Record notification has been sent to organization owners.'));
-    }).catch(() => {
-      this.ncUtilsFlash.error(gettext('Unable to send record notification.'));
-    });
+    this.invoicesService
+      .sendNotification(invoice.uuid)
+      .then(() => {
+        this.ncUtilsFlash.success(
+          gettext('Record notification has been sent to organization owners.'),
+        );
+      })
+      .catch(() => {
+        this.ncUtilsFlash.error(gettext('Unable to send record notification.'));
+      });
   }
 
   groupInvoiceItems(items) {
@@ -76,7 +83,7 @@ export default class BillingUtils {
       default: {
         items: [],
         name: '',
-      }
+      },
     };
     this.groupInvoiceSubItems(items, projects);
     return Object.keys(projects).map(key => projects[key]);

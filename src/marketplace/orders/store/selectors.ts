@@ -1,4 +1,9 @@
-import { isOwner, isAdmin, isManager, isStaff } from '@waldur/workspace/selectors';
+import {
+  isOwner,
+  isAdmin,
+  isManager,
+  isStaff,
+} from '@waldur/workspace/selectors';
 
 const getOrders = state => state.marketplace.orders;
 export const getStateChangeStatus = state => getOrders(state).stateChangeStatus;

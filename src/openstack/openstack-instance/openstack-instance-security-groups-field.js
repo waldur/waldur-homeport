@@ -4,7 +4,7 @@ const openstackInstanceSecurityGroupsField = {
   template,
   bindings: {
     model: '<',
-    field: '<'
+    field: '<',
   },
   controller: class FieldController {
     // @ngInject
@@ -13,16 +13,18 @@ const openstackInstanceSecurityGroupsField = {
     }
 
     openDetailsDialog() {
-      const securityGroups = this.model[this.field.name].map(choice => choice.object);
+      const securityGroups = this.model[this.field.name].map(
+        choice => choice.object,
+      );
       this.$uibModal.open({
         component: 'securityGroupsDialog',
         resolve: {
-          securityGroups: () => securityGroups
+          securityGroups: () => securityGroups,
         },
-        size: 'lg'
+        size: 'lg',
       });
     }
-  }
+  },
 };
 
 export default openstackInstanceSecurityGroupsField;

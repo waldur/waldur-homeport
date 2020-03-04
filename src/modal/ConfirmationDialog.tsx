@@ -18,7 +18,9 @@ interface ConfirmationDialogProps {
   };
 }
 
-const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({resolve: {title, body, deferred}}) => {
+const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
+  resolve: { title, body, deferred },
+}) => {
   const dispatch = useDispatch();
   const closeDialog = () => dispatch(closeModalDialog());
 
@@ -35,14 +37,15 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({resolve: {title,
   return (
     <ModalDialog
       title={title}
-      footer={(
+      footer={
         <>
           <Button onClick={handleSubmit}>{translate('Yes')}</Button>
           <Button onClick={handleCancel}>{translate('No')}</Button>
         </>
-      )}
-      children={body}
-    />
+      }
+    >
+      {body}
+    </ModalDialog>
   );
 };
 

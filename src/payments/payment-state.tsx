@@ -5,7 +5,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 export type PaymentStateType = 'Erred' | 'Approved' | 'Created' | 'Cancelled';
 
-const LABEL_CLASSES: {[key in PaymentStateType]: StateVariant} = {
+const LABEL_CLASSES: { [key in PaymentStateType]: StateVariant } = {
   Erred: 'warning',
   Approved: 'primary',
   Created: 'primary',

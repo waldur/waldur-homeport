@@ -21,5 +21,5 @@ export default {
     get maxValue() {
       return Math.round(this.field.max_value / this.field.factor);
     }
-  }
+  },
 };

@@ -12,7 +12,7 @@
           <label class="control-label m-b-sm">
             <span translate>Name</span>
           </label>
-          <input type="text" class="form-control" ng-model="$ctrl.plan.name">
+          <input type="text" class="form-control" ng-model="$ctrl.plan.name" />
         </div>
         <div class="form-group">
           <label class="control-label m-b-sm">
@@ -20,17 +20,20 @@
           </label>
           <cost-plan-certifications
             plan="$ctrl.plan"
-            certifications="$ctrl.certifications">
+            certifications="$ctrl.certifications"
+          >
+          </cost-plan-certifications>
         </div>
         <cost-plan-items
           items="$ctrl.plan.items"
           presets="$ctrl.presets"
           on-add="$ctrl.addItem()"
-          on-delete="$ctrl.deleteItem(item)">
+          on-delete="$ctrl.deleteItem(item)"
+        >
         </cost-plan-items>
         <p class="m-t-sm">
-          <strong translate>Total planned resource consumption</strong>:
-          {{ $ctrl.getTotalConsumption() | formatFlavor }}
+          <strong translate>Total planned resource consumption</strong>: {{
+          $ctrl.getTotalConsumption() | formatFlavor }}
         </p>
       </div>
     </uib-tab>
@@ -41,19 +44,23 @@
       </uib-tab-heading>
       <div class="panel-body">
         <loading-spinner ng-if="$ctrl.isEvaluating"></loading-spinner>
-        <cost-plan-optimizer ng-if="!$ctrl.isEvaluating" services="$ctrl.optimalServices"></cost-plan-optimizer>
+        <cost-plan-optimizer
+          ng-if="!$ctrl.isEvaluating"
+          services="$ctrl.optimalServices"
+        ></cost-plan-optimizer>
       </div>
     </uib-tab>
-</div>
+  </uib-tabset>
 </div>
 <div class="modal-footer">
-  <button type="button"
+  <button
+    type="button"
     class="btn btn-primary"
-    submit-button="$ctrl.saveAndClose()">
+    submit-button="$ctrl.saveAndClose()"
+  >
     <span translate>Save</span>
   </button>
-  <button class="btn btn-default"
-    ng-click="$ctrl.dismiss()">
+  <button class="btn btn-default" ng-click="$ctrl.dismiss()">
     <span translate>Cancel</span>
   </button>
 </div>

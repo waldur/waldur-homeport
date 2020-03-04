@@ -11,11 +11,13 @@ export const CustomerExpandableRow = props => (
   <Query loader={loadCustomerResources} variables={props.row}>
     {({ loading, error, data }) => {
       if (loading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
       } else if (error) {
-        return <span>{translate('Unable to load organization resources.')}</span>;
+        return (
+          <span>{translate('Unable to load organization resources.')}</span>
+        );
       } else {
-        return <ResourceExpandableRow rows={data}/>;
+        return <ResourceExpandableRow rows={data} />;
       }
     }}
   </Query>

@@ -5,7 +5,7 @@ import SafeAnchor from './AngularRouterAnchor';
 import createChainedFunction from './createChainedFunction';
 
 interface PaginationButtonProps {
-  componentClass?: React.ComponentType<{disabled?: boolean, onClick: any}>;
+  componentClass?: React.ComponentType<{ disabled?: boolean; onClick: any }>;
   className?: string;
   eventKey?: any;
   onSelect?(eventKey: any, e: React.SyntheticEvent<{}>): void;
@@ -32,25 +32,24 @@ class PaginationButton extends React.Component<PaginationButtonProps> {
     if (onSelect) {
       onSelect(eventKey, event);
     }
-  }
+  };
 
   render() {
     const {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       componentClass: Component,
       active,
       disabled,
       onClick,
       className,
       style,
-      ...props} = this.props;
+      ...props
+    } = this.props;
 
     delete props.onSelect;
 
     return (
-      <li
-        className={classNames(className, { active, disabled })}
-        style={style}
-      >
+      <li className={classNames(className, { active, disabled })} style={style}>
         <SafeAnchor
           {...props}
           disabled={disabled}

@@ -1,7 +1,7 @@
 const invoicesList = {
   controller: InvoicesListController,
   controllerAs: 'ListController',
-  templateUrl: 'views/partials/filtered-list.html'
+  templateUrl: 'views/partials/filtered-list.html',
 };
 
 export default invoicesList;
@@ -15,7 +15,8 @@ function InvoicesListController(
   BillingUtils,
   ncUtils,
   $state,
-  $filter) {
+  $filter,
+) {
   let controllerScope = this;
   let InvoicesController = baseControllerListClass.extend({
     init: function() {
@@ -40,42 +41,42 @@ function InvoicesListController(
             title: gettext('Invoice number'),
             className: 'all',
             render: function(row) {
-              const href = $state.href('billingDetails', {uuid: row.uuid});
+              const href = $state.href('billingDetails', { uuid: row.uuid });
               return ncUtils.renderLink(href, row.number);
-            }
+            },
           },
           {
             title: gettext('State'),
             className: 'all',
-            render: row => row.state
+            render: row => row.state,
           },
           {
             title: gettext('Price'),
             className: 'all',
-            render: row => $filter('defaultCurrency')(row.price)
+            render: row => $filter('defaultCurrency')(row.price),
           },
           {
             title: gettext('Tax'),
             className: 'min-tablet-l',
-            render: row => $filter('defaultCurrency')(row.tax)
+            render: row => $filter('defaultCurrency')(row.tax),
           },
           {
             title: gettext('Total'),
             className: 'min-tablet-l',
-            render: row => $filter('defaultCurrency')(row.total)
+            render: row => $filter('defaultCurrency')(row.total),
           },
           {
             title: gettext('Invoice date'),
             className: 'all',
-            render: row => row.invoice_date || '&mdash;'
+            render: row => row.invoice_date || '&mdash;',
           },
           {
             title: gettext('Due date'),
             className: 'min-tablet-l',
-            render: row => row.due_date || '&mdash;'
-          }
+            render: row => row.due_date || '&mdash;',
+          },
         ],
-        rowActions: this.getRowActions()
+        rowActions: this.getRowActions(),
       };
     },
     getRowActions: function() {
@@ -88,15 +89,15 @@ function InvoicesListController(
       return angular.merge({}, base, {
         choices: base.choices.concat({
           title: gettext('Paid'),
-          value: 'paid'
-        })
+          value: 'paid',
+        }),
       });
     },
     getFilter: function() {
       return {
-        customer: this.currentCustomer.url
+        customer: this.currentCustomer.url,
       };
-    }
+    },
   });
 
   controllerScope.__proto__ = new InvoicesController();

@@ -1,13 +1,7 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 
-type BootstrapStyle =
-  | 'primary'
-  | 'success'
-  | 'info'
-  | 'warning'
-  | 'danger'
-;
+type BootstrapStyle = 'primary' | 'success' | 'info' | 'warning' | 'danger';
 
 interface AwesomeCheckboxProps {
   bsStyle?: BootstrapStyle;
@@ -19,10 +13,15 @@ interface AwesomeCheckboxProps {
   disabled?: boolean;
 }
 
-export const AwesomeCheckbox: React.FC<AwesomeCheckboxProps> = (props: AwesomeCheckboxProps) => (
-  <div className={
-    classNames('checkbox', 'awesome-checkbox', `checkbox-${props.bsStyle}`,
-      {'m-r-sm': props.marginRight}
+export const AwesomeCheckbox: React.FC<AwesomeCheckboxProps> = (
+  props: AwesomeCheckboxProps,
+) => (
+  <div
+    className={classNames(
+      'checkbox',
+      'awesome-checkbox',
+      `checkbox-${props.bsStyle}`,
+      { 'm-r-sm': props.marginRight },
     )}
   >
     <input
@@ -32,9 +31,7 @@ export const AwesomeCheckbox: React.FC<AwesomeCheckboxProps> = (props: AwesomeCh
       onChange={event => props.onChange(event.target.checked)}
       disabled={props.disabled}
     />
-    <label htmlFor={props.id}>
-      {props.label}
-    </label>
+    <label htmlFor={props.id}>{props.label}</label>
   </div>
 );
 

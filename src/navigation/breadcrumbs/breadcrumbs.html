@@ -3,7 +3,9 @@
     <a ng-if="item.action || item.state" ng-click="$ctrl.onClick(item)">
       {{ item.label | translate }}
     </a>
-    <span ng-if="!(item.action || item.state)">{{ item.label | translate }}</span>
+    <span ng-if="!(item.action || item.state)"
+      >{{ item.label | translate }}</span
+    >
   </li>
   <li class="active">
     <strong>{{ $ctrl.activeItem | translate }}</strong>

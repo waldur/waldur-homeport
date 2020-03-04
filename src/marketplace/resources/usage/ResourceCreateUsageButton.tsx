@@ -8,9 +8,13 @@ import ActionButton from '@waldur/table-react/ActionButton';
 import { UsageReportContext } from './types';
 
 // tslint:disable-next-line:variable-name
-const openResourceUsageDialog = (resource_uuid: string, resource_name: string, offering_uuid: string) =>
+const openResourceUsageDialog = (
+  resource_uuid: string,
+  resource_name: string,
+  offering_uuid: string,
+) =>
   openModalDialog('marketplaceResourceCreateUsageDialog', {
-    resolve: {resource_uuid, resource_name, offering_uuid},
+    resolve: { resource_uuid, resource_name, offering_uuid },
   });
 
 interface DispatchProps {
@@ -26,12 +30,21 @@ const PureResourceUsageButton = (props: UsageReportContext & DispatchProps) => (
 );
 
 const mapDispatchToProps = (dispatch, ownProps: UsageReportContext) => ({
-  openDialog: () => dispatch(openResourceUsageDialog(
-    ownProps.resource_uuid,
-    ownProps.resource_name,
-    ownProps.offering_uuid)
-  ),
+  openDialog: () =>
+    dispatch(
+      openResourceUsageDialog(
+        ownProps.resource_uuid,
+        ownProps.resource_name,
+        ownProps.offering_uuid,
+      ),
+    ),
 });
 
-export const ResourceCreateUsageButton = connect<{}, DispatchProps, UsageReportContext>(
-  null, mapDispatchToProps)(PureResourceUsageButton);
+export const ResourceCreateUsageButton = connect<
+  {},
+  DispatchProps,
+  UsageReportContext
+>(
+  null,
+  mapDispatchToProps,
+)(PureResourceUsageButton);

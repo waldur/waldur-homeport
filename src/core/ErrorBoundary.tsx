@@ -45,7 +45,7 @@ export function withError<P>(Component: React.ComponentType<P>) {
   }
   const Wrapper: React.ComponentType<P> = props => (
     <ErrorBoundary>
-      <Component {...props}/>
+      <Component {...props} />
     </ErrorBoundary>
   );
   Wrapper.displayName = `withError(${Component.name})`;

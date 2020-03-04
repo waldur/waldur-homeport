@@ -2,8 +2,11 @@
   <tbody>
     <tr ng-hide="$ctrl.active">
       <td class="no-padding">
-        <button type="button" class="btn btn-default"
-          ng-click="$ctrl.toggleField()">
+        <button
+          type="button"
+          class="btn btn-default"
+          ng-click="$ctrl.toggleField()"
+        >
           <i class="fa fa-plus"></i>
           <span translate>Add data volume</span>
         </button>
@@ -14,12 +17,22 @@
     </tr>
     <tr ng-show="$ctrl.active">
       <td class="no-padding">
-        <appstore-field-integer model="$ctrl.model" field="$ctrl.field" form="$ctrl.form"></appstore-field-integer>
+        <appstore-field-integer
+          model="$ctrl.model"
+          field="$ctrl.field"
+          form="$ctrl.form"
+        ></appstore-field-integer>
       </td>
       <td class="no-padding">
-        <button type="button" class="btn btn-default"
-          ng-click="$ctrl.toggleField()">
-          <i class="fa fa-trash-o" uib-tooltip="{{ 'Disable data volume' | translate}}"></i>
+        <button
+          type="button"
+          class="btn btn-default"
+          ng-click="$ctrl.toggleField()"
+        >
+          <i
+            class="fa fa-trash-o"
+            uib-tooltip="{{ 'Disable data volume' | translate}}"
+          ></i>
         </button>
       </td>
     </tr>

@@ -5,9 +5,13 @@
       class="btn btn-default btn-sm"
       ng-repeat="filter in $ctrl.searchFilters"
       ng-model="filter.chosen"
-      ng-disabled="$ctrl.isLoading">
+      ng-disabled="$ctrl.isLoading"
+    >
       {{ filter.title | translate }}
     </label>
   </div>
-  <i class="fa fa-spinner {{$ctrl.isLoading ? 'fa-spin' : ''}}" ng-show="$ctrl.isLoading"></i>
+  <i
+    class="fa fa-spinner {{$ctrl.isLoading ? 'fa-spin' : ''}}"
+    ng-show="$ctrl.isLoading"
+  ></i>
 </div>

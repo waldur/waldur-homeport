@@ -9,12 +9,13 @@ export const FormGroupWithError = inputProps => (
     label={inputProps.label}
     description={inputProps.description}
     required={inputProps.required}
-    className={inputProps.meta.touched && inputProps.meta.error ? 'form-group has-error' : 'form-group'}>
-    <input
-      {...inputProps.input}
-      className="form-control"
-      type="text"
-    />
+    className={
+      inputProps.meta.touched && inputProps.meta.error
+        ? 'form-group has-error'
+        : 'form-group'
+    }
+  >
+    <input {...inputProps.input} className="form-control" type="text" />
     {inputProps.meta.touched && <FieldError error={inputProps.meta.error} />}
   </FormGroup>
 );

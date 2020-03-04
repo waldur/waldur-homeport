@@ -6,24 +6,24 @@ const selectWorkspaceDialog = {
   controller: SelectWorkspaceDialogController,
   bindings: {
     dismiss: '&',
-    close: '&'
-  }
+    close: '&',
+  },
 };
 
 export default selectWorkspaceDialog;
 
 // @ngInject
 function SelectWorkspaceDialogController(
-    $scope,
-    $uibModal,
-    $state,
-    $q,
-    customersService,
-    currentStateService,
-    usersService,
-    ncUtils,
-    ENV
-  ) {
+  $scope,
+  $uibModal,
+  $state,
+  $q,
+  customersService,
+  currentStateService,
+  usersService,
+  ncUtils,
+  ENV,
+) {
   let ctrl = this;
   ctrl.organizations = [];
   ctrl.projects = [];
@@ -45,22 +45,38 @@ function SelectWorkspaceDialogController(
   };
 
   ctrl.filterOrganization = function(organization) {
-    if (organization.name.toLowerCase().indexOf(ctrl.organizationSearchInput.toLowerCase()) >= 0) {
+    if (
+      organization.name
+        .toLowerCase()
+        .indexOf(ctrl.organizationSearchInput.toLowerCase()) >= 0
+    ) {
       return true;
     }
-    if (organization.abbreviation.toLowerCase().indexOf(ctrl.organizationSearchInput.toLowerCase()) >= 0) {
+    if (
+      organization.abbreviation
+        .toLowerCase()
+        .indexOf(ctrl.organizationSearchInput.toLowerCase()) >= 0
+    ) {
       return true;
     }
     return false;
   };
 
   ctrl.gotoOrganization = function(organization) {
-    let promise = $state.go('organization.dashboard', {uuid: organization.uuid}, {reload: true});
+    let promise = $state.go(
+      'organization.dashboard',
+      { uuid: organization.uuid },
+      { reload: true },
+    );
     return blockAndClose(promise);
   };
 
   ctrl.gotoProject = function(project) {
-    let promise = $state.go('project.details', {uuid: project.uuid}, {reload: true});
+    let promise = $state.go(
+      'project.details',
+      { uuid: project.uuid },
+      { reload: true },
+    );
     return blockAndClose(promise);
   };
 
@@ -79,7 +95,7 @@ function SelectWorkspaceDialogController(
 
   ctrl.createProject = function() {
     let promise = $state.go('organization.createProject', {
-      uuid: ctrl.selectedOrganization.uuid
+      uuid: ctrl.selectedOrganization.uuid,
     });
     return blockAndClose(promise);
   };
@@ -107,28 +123,48 @@ function SelectWorkspaceDialogController(
 
       usersService.getCurrentUser().then(function(user) {
         ctrl.currentUser = user;
-        ctrl.canCreateOrganization = ctrl.currentUser.is_staff || ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER;
+        ctrl.canCreateOrganization =
+          ctrl.currentUser.is_staff ||
+          ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER;
       }),
 
-      customersService.getAll({
-        field: ['name', 'uuid', 'projects', 'owners', 'abbreviation', 'is_service_provider'],
-        o: 'name'
-      }).then(function(organizations) {
-        if (ctrl.selectedOrganization) {
-          organizations = organizations.filter(function(organization) {
-            return organization.uuid !== ctrl.selectedOrganization.uuid;
-          });
-        }
-        ctrl.organizations = ctrl.organizations.concat(organizations);
+      customersService
+        .getAll({
+          field: [
+            'name',
+            'uuid',
+            'projects',
+            'owners',
+            'abbreviation',
+            'is_service_provider',
+          ],
+          o: 'name',
+        })
+        .then(function(organizations) {
+          if (ctrl.selectedOrganization) {
+            organizations = organizations.filter(function(organization) {
+              return organization.uuid !== ctrl.selectedOrganization.uuid;
+            });
+          }
+          ctrl.organizations = ctrl.organizations.concat(organizations);
 
-        angular.forEach(ctrl.organizations, organization => {
-          organization.ownerOrStaff = customersService.checkCustomerUser(organization, ctrl.currentUser);
-          organization.canGotoDashboard = organization.ownerOrStaff || ctrl.currentUser.is_support;
-          organization.projects = ncUtils.sortArrayOfObjects(organization.projects, 'name', 0);
-        });
-      }).finally(() => {
-        $scope.$emit('selectWorkspaceDialog.initialized');
-      })
+          angular.forEach(ctrl.organizations, organization => {
+            organization.ownerOrStaff = customersService.checkCustomerUser(
+              organization,
+              ctrl.currentUser,
+            );
+            organization.canGotoDashboard =
+              organization.ownerOrStaff || ctrl.currentUser.is_support;
+            organization.projects = ncUtils.sortArrayOfObjects(
+              organization.projects,
+              'name',
+              0,
+            );
+          });
+        })
+        .finally(() => {
+          $scope.$emit('selectWorkspaceDialog.initialized');
+        }),
     ]);
   }
 

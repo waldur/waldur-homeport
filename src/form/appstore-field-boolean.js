@@ -4,7 +4,7 @@ const appstoreFieldBoolean = {
   template,
   bindings: {
     field: '<',
-    model: '<'
+    model: '<',
   },
 };
 

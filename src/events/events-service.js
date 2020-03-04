@@ -6,7 +6,7 @@ export default function eventsService($q, baseServiceClass, ENV) {
       this.endpoint = '/events/';
     },
     setDefaultFilter: function() {
-      this.defaultFilter = {exclude_extra: true};
+      this.defaultFilter = { exclude_extra: true };
     },
     getEventGroups: function() {
       let vm = this;
@@ -22,8 +22,8 @@ export default function eventsService($q, baseServiceClass, ENV) {
         });
       }
     },
-    getResourceEvents: function (resource) {
-      return this.getList({scope: resource.url}).then(function(response) {
+    getResourceEvents: function(resource) {
+      return this.getList({ scope: resource.url }).then(function(response) {
         return response.map(function(event) {
           return {
             name: event.event_type.replace('resource_', '').replace(/_/g, ' '),

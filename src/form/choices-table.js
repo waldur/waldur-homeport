@@ -14,7 +14,7 @@ export default function choicesTable() {
       filterOptions: '=',
       selectItem: '&',
       enableSelect: '<',
-    }
+    },
   };
 }
 
@@ -25,14 +25,15 @@ class TableController {
     if (this.filterOptions) {
       $scope.$watch(
         () => this.filterValue,
-        filterValue => this.filter = {
-          [this.filterOptions.name]: filterValue
-        }
+        filterValue =>
+          (this.filter = {
+            [this.filterOptions.name]: filterValue,
+          }),
       );
     }
     this.style = {
       'max-height': '300px',
-      'overflow-y': 'auto'
+      'overflow-y': 'auto',
     };
   }
 
@@ -40,7 +41,10 @@ class TableController {
     if (angular.isUndefined(this.enableSelect)) {
       this.enableSelect = true;
     }
-    if (this.filterOptions && angular.isDefined(this.filterOptions.defaultValue)) {
+    if (
+      this.filterOptions &&
+      angular.isDefined(this.filterOptions.defaultValue)
+    ) {
       this.filterValue = this.filterOptions.defaultValue;
     }
   }

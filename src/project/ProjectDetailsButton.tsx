@@ -19,7 +19,7 @@ const PureProjectDetailsButton = props => (
 );
 
 const openProjectDialog = (project: Project) =>
-  openModalDialog('projectDialog', {resolve: {project}, size: 'lg'});
+  openModalDialog('projectDialog', { resolve: { project }, size: 'lg' });
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
   openProjectDialog: () => dispatch(openProjectDialog(ownProps.project)),
@@ -27,4 +27,6 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
 
 const enhance = connect(null, mapDispatchToProps);
 
-export const ProjectDetailsButton = enhance(PureProjectDetailsButton) as React.ComponentType<OwnProps>;
+export const ProjectDetailsButton = enhance(
+  PureProjectDetailsButton,
+) as React.ComponentType<OwnProps>;

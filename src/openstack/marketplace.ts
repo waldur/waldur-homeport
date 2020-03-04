@@ -42,24 +42,29 @@ const ServiceSettingsAttributes = (): Attribute[] => [
 const serializeVolumeTypeLimits = limits =>
   Object.keys(limits)
     .filter(key => key.startsWith('gigabytes_') && limits[key])
-    .reduce((r, i) => ({
-      ...r,
-      [i]: limits[i],
-    }), {});
+    .reduce(
+      (r, i) => ({
+        ...r,
+        [i]: limits[i],
+      }),
+      {},
+    );
 
-const limitSerializer = limits => limits && ({
-  cores: limits.cores,
-  ram: limits.ram && limits.ram * 1024,
-  storage: limits.storage && limits.storage * 1024,
-  ...serializeVolumeTypeLimits(limits),
-});
+const limitSerializer = limits =>
+  limits && {
+    cores: limits.cores,
+    ram: limits.ram && limits.ram * 1024,
+    storage: limits.storage && limits.storage * 1024,
+    ...serializeVolumeTypeLimits(limits),
+  };
 
-const limitParser = limits => limits && ({
-  cores: limits.cores,
-  ram: limits.ram && limits.ram / 1024,
-  storage: limits.storage && limits.storage / 1024,
-  ...serializeVolumeTypeLimits(limits),
-});
+const limitParser = limits =>
+  limits && {
+    cores: limits.cores,
+    ram: limits.ram && limits.ram / 1024,
+    storage: limits.storage && limits.storage / 1024,
+    ...serializeVolumeTypeLimits(limits),
+  };
 
 registerOfferingType({
   type: 'Packages.Template',

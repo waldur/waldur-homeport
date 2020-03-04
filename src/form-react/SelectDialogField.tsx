@@ -32,7 +32,9 @@ interface OwnProps {
   input: CustomComponentInputProps<SelectDialogFieldChoice>;
 }
 
-export class SelectDialogFieldComponent extends React.Component<OwnProps & TranslateProps> {
+export class SelectDialogFieldComponent extends React.Component<
+  OwnProps & TranslateProps
+> {
   state = {
     showListDialog: false,
     value: null,
@@ -40,16 +42,16 @@ export class SelectDialogFieldComponent extends React.Component<OwnProps & Trans
 
   openSelectDialog = e => {
     e.preventDefault();
-    this.setState({showListDialog: true});
-  }
+    this.setState({ showListDialog: true });
+  };
 
   closeSelectDialog = () => {
-    this.setState({showListDialog: false});
-  }
+    this.setState({ showListDialog: false });
+  };
 
   onChange = value => {
-    this.setState({value});
-  }
+    this.setState({ value });
+  };
 
   componentDidMount() {
     if (this.props.preSelectFirst && this.props.choices.length !== 0) {
@@ -70,9 +72,10 @@ export class SelectDialogFieldComponent extends React.Component<OwnProps & Trans
     return (
       <div className="form-control-static">
         <a onClick={this.openSelectDialog} id={props.id}>
-          {props.input.value && props.input.value.name || props.label || props.translate('Show choices')}
-          {' '}
-          <i className="fa fa-caret-down"/>
+          {(props.input.value && props.input.value.name) ||
+            props.label ||
+            props.translate('Show choices')}{' '}
+          <i className="fa fa-caret-down" />
         </a>
         <AppstoreListDialog
           show={this.state.showListDialog}

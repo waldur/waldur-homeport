@@ -18,29 +18,29 @@ interface PureUserDashboardProps extends TranslateProps {
 
 const PureUserDashboard: React.FC<PureUserDashboardProps> = props => (
   <div className="wrapper wrapper-content">
-    {props.renderCustomerCreatePrompt &&
+    {props.renderCustomerCreatePrompt && (
       <div className="row">
         <div className="col-md-12">
-          <CustomerCreatePromptContainer/>
+          <CustomerCreatePromptContainer />
         </div>
       </div>
-    }
+    )}
     <div className="row">
       <div className="col-md-6">
         <Panel title={props.translate('Owned organizations')}>
-          <CustomerPermissions/>
+          <CustomerPermissions />
         </Panel>
       </div>
       <div className="col-md-6">
         <Panel title={props.translate('Managed projects')}>
-          <ProjectPermissions/>
+          <ProjectPermissions />
         </Panel>
       </div>
     </div>
     <div className="row">
       <div className="col-md-12">
         <Panel title={props.translate('Audit logs')}>
-          <CurrentUserEvents/>
+          <CurrentUserEvents />
         </Panel>
       </div>
     </div>
@@ -51,10 +51,7 @@ const mapStateToProps = state => ({
   renderCustomerCreatePrompt: renderCustomerCreatePrompt(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps), withTranslation);
 
 const UserDashboard = enhance(PureUserDashboard);
 

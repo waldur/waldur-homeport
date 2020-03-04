@@ -10,7 +10,8 @@ export class invitationUtilsService {
     $rootScope,
     $timeout,
     $uibModal,
-    ENV) {
+    ENV,
+  ) {
     this.invitationService = invitationService;
     this.usersService = usersService;
     this.ncUtilsFlash = ncUtilsFlash;
@@ -20,7 +21,8 @@ export class invitationUtilsService {
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
     this.$uibModal = $uibModal;
-    this.validateInvitationEmail = ENV.plugins.WALDUR_CORE.VALIDATE_INVITATION_EMAIL;
+    this.validateInvitationEmail =
+      ENV.plugins.WALDUR_CORE.VALIDATE_INVITATION_EMAIL;
   }
 
   init() {
@@ -38,12 +40,16 @@ export class invitationUtilsService {
         this.usersService.getCurrentUser().then(user => {
           let token = this.invitationService.getInvitationToken();
           if (token && !this.usersService.mandatoryFieldsMissing(user)) {
-            this.confirmInvitation(token).then(replaceEmail => {
-              this.acceptInvitation(token, replaceEmail);
-            }).catch(() => {
-              this.invitationService.clearInvitationToken();
-              this.ncUtilsFlash.error(gettext('Invitation could not be accepted'));
-            });
+            this.confirmInvitation(token)
+              .then(replaceEmail => {
+                this.acceptInvitation(token, replaceEmail);
+              })
+              .catch(() => {
+                this.invitationService.clearInvitationToken();
+                this.ncUtilsFlash.error(
+                  gettext('Invitation could not be accepted'),
+                );
+              });
           }
         });
       }
@@ -57,15 +63,17 @@ export class invitationUtilsService {
      If user is logged in and token is not valid - clear the token and redirect to user profile with the error message.
      */
     if (this.$auth.isAuthenticated()) {
-      return this.confirmInvitation(token).then(replaceEmail => {
-        this.acceptInvitation(token, replaceEmail).then(() => {
+      return this.confirmInvitation(token)
+        .then(replaceEmail => {
+          this.acceptInvitation(token, replaceEmail).then(() => {
+            this.$state.go('profile.details');
+          });
+        })
+        .catch(() => {
+          this.invitationService.clearInvitationToken();
+          this.ncUtilsFlash.error(gettext('Invitation is not valid anymore.'));
           this.$state.go('profile.details');
         });
-      }).catch(() => {
-        this.invitationService.clearInvitationToken();
-        this.ncUtilsFlash.error(gettext('Invitation is not valid anymore.'));
-        this.$state.go('profile.details');
-      });
     } else {
       this.invitationService.setInvitationToken(token);
       this.$state.go('register');
@@ -73,11 +81,16 @@ export class invitationUtilsService {
   }
 
   acceptInvitation(token, replaceEmail) {
-    return this.invitationService.accept(token, replaceEmail).then(() => {
-      this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
-      this.invitationService.clearInvitationToken();
-      this.$rootScope.$broadcast('refreshCustomerList', {updateSignal: true});
-    }).catch(this.showError.bind(this));
+    return this.invitationService
+      .accept(token, replaceEmail)
+      .then(() => {
+        this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
+        this.invitationService.clearInvitationToken();
+        this.$rootScope.$broadcast('refreshCustomerList', {
+          updateSignal: true,
+        });
+      })
+      .catch(this.showError.bind(this));
   }
 
   confirmInvitation(token) {
@@ -87,7 +100,7 @@ export class invitationUtilsService {
         token: () => token,
         acceptNewEmail: () => true,
         rejectNewEmail: () => false,
-      }
+      },
     });
     const deferred = this.$q.defer();
     dialog.result.then(result => deferred.resolve(result));
@@ -102,7 +115,11 @@ export class invitationUtilsService {
       this.invitationService.clearInvitationToken();
       this.ncUtilsFlash.error(gettext('Invitation is not valid.'));
     } else if (response.status === 500) {
-      this.ncUtilsFlash.error(gettext('Internal server error occurred. Please try again or contact support.'));
+      this.ncUtilsFlash.error(
+        gettext(
+          'Internal server error occurred. Please try again or contact support.',
+        ),
+      );
     }
   }
 }

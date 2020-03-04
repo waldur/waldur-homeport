@@ -1,9 +1,14 @@
 import * as React from 'react';
 import { Omit } from 'react-redux';
 
-import { Offering, Attribute, OrderItemDetailsProps, OfferingConfigurationFormProps } from '@waldur/marketplace/types';
+import {
+  Offering,
+  Attribute,
+  OrderItemDetailsProps,
+  OfferingConfigurationFormProps,
+} from '@waldur/marketplace/types';
 
-const REGISTRY: {[key: string]: Omit<OfferingConfiguration, 'type'>} = {};
+const REGISTRY: { [key: string]: Omit<OfferingConfiguration, 'type'> } = {};
 
 export type Limits = Record<string, number>;
 
@@ -15,7 +20,10 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   pluginOptionsForm?: React.ComponentType<any>;
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
   checkoutSummaryComponent?: any;
-  serializer?: (attributes: AttributesType, offering: Offering) => RequestPaylodType;
+  serializer?: (
+    attributes: AttributesType,
+    offering: Offering,
+  ) => RequestPaylodType;
   limitSerializer?: LimitParser;
   limitParser?: LimitParser;
   label: string;
@@ -34,36 +42,58 @@ export interface Option {
 }
 
 export function registerOfferingType(config: OfferingConfiguration) {
-  const {type, ...rest} = config;
+  const { type, ...rest } = config;
   REGISTRY[type] = rest;
 }
 
 export function getFormComponent(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].component;
+  return (
+    REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].component
+  );
 }
 
 export function getDetailsComponent(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].detailsComponent;
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].detailsComponent
+  );
 }
 
 export function getFormSerializer(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].serializer || (x => x);
+  return (
+    (REGISTRY.hasOwnProperty(offeringType) &&
+      REGISTRY[offeringType].serializer) ||
+    (x => x)
+  );
 }
 
 export function getFormLimitSerializer(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].limitSerializer || (x => x);
+  return (
+    (REGISTRY.hasOwnProperty(offeringType) &&
+      REGISTRY[offeringType].limitSerializer) ||
+    (x => x)
+  );
 }
 
 export function getFormLimitParser(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].limitParser || (x => x);
+  return (
+    (REGISTRY.hasOwnProperty(offeringType) &&
+      REGISTRY[offeringType].limitParser) ||
+    (x => x)
+  );
 }
 
 export function getCheckoutSummaryComponent(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].checkoutSummaryComponent;
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].checkoutSummaryComponent
+  );
 }
 
 export function getOfferingTypes(): Option[] {
-  const keys = Object.keys(REGISTRY).filter(key => !REGISTRY[key].disableOfferingCreation);
+  const keys = Object.keys(REGISTRY).filter(
+    key => !REGISTRY[key].disableOfferingCreation,
+  );
   return keys.map(key => ({
     value: key,
     label: REGISTRY[key].label,
@@ -71,27 +101,42 @@ export function getOfferingTypes(): Option[] {
 }
 
 export function showOfferingOptions(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showOptions;
+  return (
+    REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showOptions
+  );
 }
 
 export function showOfferingLimits(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showOfferingLimits;
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].showOfferingLimits
+  );
 }
 
 export function isOfferingTypeSchedulable(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].schedulable;
+  return (
+    REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].schedulable
+  );
 }
 
 export function getPluginOptionsForm(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].pluginOptionsForm;
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].pluginOptionsForm
+  );
 }
 
 export function showComponentsList(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showComponents;
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].showComponents
+  );
 }
 
 export function getProviderType(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].providerType;
+  return (
+    REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].providerType
+  );
 }
 
 export function getLabel(offeringType: string) {
@@ -99,6 +144,7 @@ export function getLabel(offeringType: string) {
 }
 
 export function getAttributes(offeringType: string) {
-  const func = REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].attributes;
+  const func =
+    REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].attributes;
   return func ? func() : [];
 }

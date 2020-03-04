@@ -19,4 +19,6 @@ const enhance = compose(
   }),
 );
 
-export const SupportResourcesList = enhance(TableComponent) as React.ComponentType<{}>;
+export const SupportResourcesList = enhance(
+  TableComponent,
+) as React.ComponentType<{}>;

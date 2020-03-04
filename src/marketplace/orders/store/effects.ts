@@ -11,14 +11,16 @@ import * as constants from './constants';
 function* approveOrder(action) {
   const { orderUuid } = action.payload;
   try {
-    yield put(actions.setOrderStateChangeStatus({approving: true}));
+    yield put(actions.setOrderStateChangeStatus({ approving: true }));
     yield call(api.approveOrder, orderUuid);
     yield put(showSuccess(translate('Order has been approved.')));
   } catch (error) {
-    const errorMessage = `${translate('Unable to approve order.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to approve order.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
-  yield put(actions.setOrderStateChangeStatus({approving: false}));
+  yield put(actions.setOrderStateChangeStatus({ approving: false }));
 }
 
 function* fetchPendingOrders(action) {
@@ -27,7 +29,9 @@ function* fetchPendingOrders(action) {
     const orders = yield call(api.getOrdersList, params);
     yield put(actions.fetchPendingOrdersSuccess(orders));
   } catch (error) {
-    const errorMessage = `${translate('Unable to load pending orders.')} ${format(error)}`;
+    const errorMessage = `${translate(
+      'Unable to load pending orders.',
+    )} ${format(error)}`;
     yield put(showError(errorMessage));
   }
 }
@@ -35,14 +39,16 @@ function* fetchPendingOrders(action) {
 function* rejectOrder(action) {
   const { orderUuid } = action.payload;
   try {
-    yield put(actions.setOrderStateChangeStatus({rejecting: true}));
+    yield put(actions.setOrderStateChangeStatus({ rejecting: true }));
     yield call(api.rejectOrder, orderUuid);
     yield put(showSuccess(translate('Order has been rejected.')));
   } catch (error) {
-    const errorMessage = `${translate('Unable to reject order.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to reject order.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
-  yield put(actions.setOrderStateChangeStatus({rejecting: false}));
+  yield put(actions.setOrderStateChangeStatus({ rejecting: false }));
 }
 
 export default function*() {

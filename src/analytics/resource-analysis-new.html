@@ -3,7 +3,9 @@
 </div>
 <div class="row m-t-md" ng-if="!$ctrl.loading">
   <div ng-if="$ctrl.total === 0">
-    <h2 translate class="text-center m-t-xl">There are no resources in the organization.</h2>
+    <h2 translate class="text-center m-t-xl">
+      There are no resources in the organization.
+    </h2>
   </div>
   <div ng-if="$ctrl.total > 0">
     <div class="col-sm-6">
@@ -14,7 +16,8 @@
             <span
               ng-if="::$ctrl.customer.abbreviation"
               ng-bind="::$ctrl.customer.abbreviation"
-              uib-tooltip="{{ ::$ctrl.customer.name }}">
+              uib-tooltip="{{ ::$ctrl.customer.name }}"
+            >
             </span>
             <span
               ng-if="::!$ctrl.customer.abbreviation"
@@ -24,7 +27,10 @@
           </h5>
         </div>
         <div class="ibox-content">
-          <resource-pie-chart items="$ctrl.pieChart" total="$ctrl.total"></resource-pie-chart>
+          <resource-pie-chart
+            items="$ctrl.pieChart"
+            total="$ctrl.total"
+          ></resource-pie-chart>
         </div>
       </div>
     </div>

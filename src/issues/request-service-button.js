@@ -16,7 +16,9 @@ const requestServiceButton = {
     }
 
     loadCustomer() {
-      return this.currentStateService.getCustomer().then(customer => this.currentCustomer = customer);
+      return this.currentStateService
+        .getCustomer()
+        .then(customer => (this.currentCustomer = customer));
     }
 
     requestService() {
@@ -26,18 +28,20 @@ const requestServiceButton = {
         resolve: {
           issue: () => ({
             customer: this.currentCustomer,
-            type: this.ISSUE_IDS.SERVICE_REQUEST
+            type: this.ISSUE_IDS.SERVICE_REQUEST,
           }),
           options: {
             title: gettext('Request a new service'),
-            descriptionPlaceholder: gettext('Please clarify why do you need it'),
+            descriptionPlaceholder: gettext(
+              'Please clarify why do you need it',
+            ),
             descriptionLabel: gettext('Motivation'),
             summaryLabel: gettext('Service name'),
-          }
-        }
+          },
+        },
       });
     }
-  }
+  },
 };
 
 export default requestServiceButton;

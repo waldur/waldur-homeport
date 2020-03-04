@@ -1,6 +1,14 @@
-<ui-select ng-model="$ctrl.selected" name="type" required on-select="$ctrl.updateModelValue($select.selected)">
+<ui-select
+  ng-model="$ctrl.selected"
+  name="type"
+  required
+  on-select="$ctrl.updateModelValue($select.selected)"
+>
   <ui-select-match placeholder="{{ 'Select request type' | translate }}...">
-    <i class="fa" ng-class="[$select.selected.iconClass, $select.selected.textClass]"></i>
+    <i
+      class="fa"
+      ng-class="[$select.selected.iconClass, $select.selected.textClass]"
+    ></i>
     {{ $select.selected.label | translate }}
   </ui-select-match>
   <ui-select-choices repeat="option in $ctrl.types">

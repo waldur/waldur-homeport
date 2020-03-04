@@ -23,9 +23,14 @@ interface ServiceProviderSecretCodeProps extends TranslateProps {
   getServiceProviderSecretCode(): void;
 }
 
-class PureServiceProviderSecretCode extends React.Component<ServiceProviderSecretCodeProps> {
+class PureServiceProviderSecretCode extends React.Component<
+  ServiceProviderSecretCodeProps
+> {
   componentDidUpdate(prevProps) {
-    if (this.props.serviceProvider && prevProps.serviceProvider !== this.props.serviceProvider) {
+    if (
+      this.props.serviceProvider &&
+      prevProps.serviceProvider !== this.props.serviceProvider
+    ) {
       this.props.getServiceProviderSecretCode();
     }
   }
@@ -37,14 +42,18 @@ class PureServiceProviderSecretCode extends React.Component<ServiceProviderSecre
           {this.props.translate('API secret code:')}
         </div>
         <div className="service-provider-secret-code__value m-l-xs">
-          <SecretValueField value={this.props.secretCode.code}/>
+          <SecretValueField value={this.props.secretCode.code} />
         </div>
         <div className="service-provider-secret-code__generate-btn m-l-xs">
           <ActionButton
             title={this.props.translate('Regenerate')}
             action={this.props.showSecretCodeRegenerateConfirm}
             className="btn btn-primary"
-            icon={this.props.secretCode.generating ? 'fa fa-spinner fa-spin' : undefined}
+            icon={
+              this.props.secretCode.generating
+                ? 'fa fa-spinner fa-spin'
+                : undefined
+            }
           />
         </div>
       </div>
@@ -57,8 +66,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  showSecretCodeRegenerateConfirm: () => dispatch(actions.showSecretCodeRegenerateConfirm(ownProps.serviceProvider)),
-  getServiceProviderSecretCode: () => dispatch(actions.secretCodeFetchStart(ownProps.serviceProvider)),
+  showSecretCodeRegenerateConfirm: () =>
+    dispatch(actions.showSecretCodeRegenerateConfirm(ownProps.serviceProvider)),
+  getServiceProviderSecretCode: () =>
+    dispatch(actions.secretCodeFetchStart(ownProps.serviceProvider)),
 });
 
-export const ServiceProviderSecretCode = connect(mapStateToProps, mapDispatchToProps)(PureServiceProviderSecretCode);
+export const ServiceProviderSecretCode = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PureServiceProviderSecretCode);

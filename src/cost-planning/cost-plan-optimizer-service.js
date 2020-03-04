@@ -15,14 +15,16 @@ export default function costPlanOptimizerService($http) {
 
   function applyPostprocessors(items) {
     return items.map(item =>
-      postprocessors.reduce((result, postprocessor) =>
-        postprocessor(result), item)
-      );
+      postprocessors.reduce(
+        (result, postprocessor) => postprocessor(result),
+        item,
+      ),
+    );
   }
 
   function parseResponse(response) {
     let plans = response.data;
-    angular.forEach(plans, item => item.price = parseFloat(item.price));
+    angular.forEach(plans, item => (item.price = parseFloat(item.price)));
     plans.sort(comparePrice);
     return applyPostprocessors(plans);
   }
@@ -34,6 +36,6 @@ export default function costPlanOptimizerService($http) {
 
     evaluate(plan) {
       return $http.get(`${plan.url}evaluate/`).then(parseResponse);
-    }
+    },
   };
 }

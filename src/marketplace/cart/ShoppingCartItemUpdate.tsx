@@ -10,13 +10,13 @@ import { Plan, Offering } from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as api from '../common/api';
-
-import '../details/OfferingDetails.scss';
-
 import { OrderSummary } from '../details/OrderSummary';
 import { OrderItemResponse } from '../orders/types';
+
 import { ShoppingCartItemUpdateForm } from './ShoppingCartItemUpdateForm';
 import { getItemSelectorFactory } from './store/selectors';
+
+import '../details/OfferingDetails.scss';
 
 interface PureShoppingCartItemUpdateProps {
   offering: Offering;
@@ -26,42 +26,43 @@ interface PureShoppingCartItemUpdateProps {
 }
 
 const PureShoppingCartItemUpdate = (props: PureShoppingCartItemUpdateProps) => (
-    <>
-      {props.offering.description && (
-        <div className="bs-callout bs-callout-success">
-          {props.offering.description}
-        </div>
-      )}
-      <Row>
-        <Col md={9}>
-          <h3 className="header-bottom-border">
-            {translate('Shopping cart item update')}
-          </h3>
-          <ShoppingCartItemUpdateForm
-            initialAttributes={props.shoppingCartItem.attributes}
-            initialLimits={props.shoppingCartItem.limits}
-            offering={props.offering}
-            limits={props.limits}
-            plan={props.plan}
-          />
-        </Col>
-        <Col md={3}>
-          <h3 className="header-bottom-border">
-            {translate('Order summary')}
-          </h3>
-          <OrderSummary
-            offering={{...props.offering, uuid: props.shoppingCartItem.uuid}}
-            updateMode={true}/>
-        </Col>
-      </Row>
-    </>
-  );
+  <>
+    {props.offering.description && (
+      <div className="bs-callout bs-callout-success">
+        {props.offering.description}
+      </div>
+    )}
+    <Row>
+      <Col md={9}>
+        <h3 className="header-bottom-border">
+          {translate('Shopping cart item update')}
+        </h3>
+        <ShoppingCartItemUpdateForm
+          initialAttributes={props.shoppingCartItem.attributes}
+          initialLimits={props.shoppingCartItem.limits}
+          offering={props.offering}
+          limits={props.limits}
+          plan={props.plan}
+        />
+      </Col>
+      <Col md={3}>
+        <h3 className="header-bottom-border">{translate('Order summary')}</h3>
+        <OrderSummary
+          offering={{ ...props.offering, uuid: props.shoppingCartItem.uuid }}
+          updateMode={true}
+        />
+      </Col>
+    </Row>
+  </>
+);
 
 interface ShoppingCartItemUpdateProps {
   shoppingCartItem: OrderItemResponse;
 }
 
-class ShoppingCartItemUpdateComponent extends React.Component<ShoppingCartItemUpdateProps> {
+class ShoppingCartItemUpdateComponent extends React.Component<
+  ShoppingCartItemUpdateProps
+> {
   state = {
     loading: false,
     loaded: false,
@@ -72,19 +73,24 @@ class ShoppingCartItemUpdateComponent extends React.Component<ShoppingCartItemUp
 
   async loadData() {
     try {
-      this.setState({loading: true});
-      const offering = await api.getOffering(this.props.shoppingCartItem.offering_uuid);
+      this.setState({ loading: true });
+      const offering = await api.getOffering(
+        this.props.shoppingCartItem.offering_uuid,
+      );
       const plugins = await api.getPlugins();
-      const limits = plugins.find(plugin => plugin.offering_type === offering.type).available_limits;
+      const limits = plugins.find(
+        plugin => plugin.offering_type === offering.type,
+      ).available_limits;
       let plan = {};
       if (offering && this.props.shoppingCartItem.plan_uuid) {
-        plan = offering.plans.find(offeringPlan =>
-          offeringPlan.uuid === this.props.shoppingCartItem.plan_uuid
+        plan = offering.plans.find(
+          offeringPlan =>
+            offeringPlan.uuid === this.props.shoppingCartItem.plan_uuid,
         );
       }
-      this.setState({loading: false, loaded: true, plan, offering, limits});
+      this.setState({ loading: false, loaded: true, plan, offering, limits });
     } catch (error) {
-      this.setState({loading: false, loaded: false});
+      this.setState({ loading: false, loaded: false });
     }
   }
 
@@ -94,7 +100,7 @@ class ShoppingCartItemUpdateComponent extends React.Component<ShoppingCartItemUp
 
   render() {
     if (this.state.loading) {
-      return <LoadingSpinner/>;
+      return <LoadingSpinner />;
     }
     if (!this.state.loading && !this.state.loaded) {
       return translate('Unable to load offering.');
@@ -113,9 +119,13 @@ class ShoppingCartItemUpdateComponent extends React.Component<ShoppingCartItemUp
 }
 
 const mapStateToProps = state => ({
-  shoppingCartItem: getItemSelectorFactory($state.params.order_item_uuid)(state),
+  shoppingCartItem: getItemSelectorFactory($state.params.order_item_uuid)(
+    state,
+  ),
 });
 
-export const ShoppingCartItemUpdate = connect(mapStateToProps)(ShoppingCartItemUpdateComponent);
+export const ShoppingCartItemUpdate = connect(mapStateToProps)(
+  ShoppingCartItemUpdateComponent,
+);
 
 export default connectAngularComponent(ShoppingCartItemUpdate);

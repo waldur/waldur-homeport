@@ -7,7 +7,7 @@ export default function issuesHelpdesk() {
     controller: IssuesHelpdeskController,
     controllerAs: '$ctrl',
     scope: {},
-    bindToController: true
+    bindToController: true,
   };
 }
 

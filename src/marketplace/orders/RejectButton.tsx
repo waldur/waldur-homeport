@@ -9,18 +9,20 @@ interface RejectButtonProps {
   tooltip?: string;
 }
 
-export const RejectButton = ({onClick, submitting, tooltip}: RejectButtonProps) =>
-  wrapTooltip(tooltip, (
+export const RejectButton = ({
+  onClick,
+  submitting,
+  tooltip,
+}: RejectButtonProps) =>
+  wrapTooltip(
+    tooltip,
     <button
       type="button"
       className="btn btn-danger btn-sm"
       onClick={onClick}
-      disabled={submitting}>
-        <i className="fa fa-ban"/>
-        {' '}
-        {translate('Reject')}
-        {' '}
-        {submitting && <i className="fa fa-spinner fa-spin m-r-xs"/>}
-    </button>
-  )
-);
+      disabled={submitting}
+    >
+      <i className="fa fa-ban" /> {translate('Reject')}{' '}
+      {submitting && <i className="fa fa-spinner fa-spin m-r-xs" />}
+    </button>,
+  );

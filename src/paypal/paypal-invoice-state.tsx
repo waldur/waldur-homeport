@@ -5,7 +5,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 export type InvoiceStateType = 'DRAFT' | 'SENT' | 'CANCELLED' | 'PAID';
 
-const LABEL_CLASSES: {[key in InvoiceStateType]: StateVariant} = {
+const LABEL_CLASSES: { [key in InvoiceStateType]: StateVariant } = {
   DRAFT: 'warning',
   SENT: 'primary',
   CANCELLED: 'danger',

@@ -13,11 +13,12 @@ import { AnswersTable } from './AnswersTable';
 import { useProjectChecklist } from './useChecklist';
 
 const SubmitButton = ({ submitting, submit }) => (
-  <Button
-    onClick={() => submit()}
-    bsStyle="primary"
-    disabled={submitting}>
-    {submitting && <><i className="fa fa-spinner fa-spin"/>{' '}</>}
+  <Button onClick={() => submit()} bsStyle="primary" disabled={submitting}>
+    {submitting && (
+      <>
+        <i className="fa fa-spinner fa-spin" />{' '}
+      </>
+    )}
     {translate('Submit')}
   </Button>
 );
@@ -31,7 +32,7 @@ const ProjectChecklist = () => {
   const state = useProjectChecklist(project);
 
   if (state.checklistLoading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   } else if (state.checklistErred) {
     return <>{translate('Unable to load checklists.')}</>;
   } else if (state.checklistOptions) {
@@ -49,12 +50,12 @@ const ProjectChecklist = () => {
           clearable={false}
         />
         {state.questionsLoading ? (
-          <LoadingSpinner/>
+          <LoadingSpinner />
         ) : state.questionsErred ? (
           <>{translate('Unable to load questions and answers.')}</>
         ) : (
           <>
-            <AnswersSummary answers={state.answers}/>
+            <AnswersSummary answers={state.answers} />
             <AnswersTable
               questions={state.questionsList}
               answers={state.answers}

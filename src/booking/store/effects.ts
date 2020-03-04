@@ -6,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
 import * as constants from '../constants';
+
 import { setBookingItems } from './actions';
 
 function* fetchBookings(action) {
@@ -13,7 +14,9 @@ function* fetchBookings(action) {
     const response = yield call(api.getBookingsList, action.payload);
     yield put(setBookingItems(action.payload.offering_uuid, response));
   } catch (error) {
-    const errorMessage = `${translate('Unable to fetch offering bookings.')} ${format(error)}`;
+    const errorMessage = `${translate(
+      'Unable to fetch offering bookings.',
+    )} ${format(error)}`;
     yield put(showError(errorMessage));
   }
 }
@@ -25,7 +28,9 @@ function* acceptBookingItem(action) {
     yield put(setBookingItems(action.payload.offering_uuid, response));
     yield put(showSuccess(translate('Booking has been accepted.')));
   } catch (error) {
-    const errorMessage = `${translate('Unable to accept booking.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to accept booking.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
 }
@@ -37,7 +42,9 @@ function* rejectBookingItem(action) {
     yield put(setBookingItems(action.payload.offering_uuid, response));
     yield put(showSuccess(translate('Booking has been rejected.')));
   } catch (error) {
-    const errorMessage = `${translate('Unable to reject booking.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to reject booking.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
 }

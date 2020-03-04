@@ -20,13 +20,13 @@ describe('IssueAttachmentsContainer', () => {
     getAttachments: () => undefined,
     translate,
   };
-  const renderWrapper = (props?) => shallow(<PureIssueAttachmentsContainer {...initialProps} {...props} />);
+  const renderWrapper = (props?) =>
+    shallow(<PureIssueAttachmentsContainer {...initialProps} {...props} />);
 
   describe('IssueAttachmentsContainer', () => {
-
     it('invokes getAttachments function', () => {
       const getAttachments = jest.fn();
-      renderWrapper({getAttachments});
+      renderWrapper({ getAttachments });
       expect(getAttachments).toBeCalled();
     });
 

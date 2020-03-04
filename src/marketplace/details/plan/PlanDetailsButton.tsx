@@ -25,9 +25,13 @@ const PurePlanDetailsButton = (props: Props) => (
 );
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
-  showPlanDetailsDialog: () => dispatch(showPlanDetailsDialog(ownProps.resource)),
+  showPlanDetailsDialog: () =>
+    dispatch(showPlanDetailsDialog(ownProps.resource)),
 });
 
-export const PlanDetailsButton = connect(null, mapDispatchToProps)(PurePlanDetailsButton);
+export const PlanDetailsButton = connect(
+  null,
+  mapDispatchToProps,
+)(PurePlanDetailsButton);
 
 export default connectAngularComponent(PlanDetailsButton, ['resource']);

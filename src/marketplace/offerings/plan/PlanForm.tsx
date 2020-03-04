@@ -47,19 +47,19 @@ const enhance = compose(connectPlanComponents, withTranslation);
 export const PlanForm = enhance((props: PlanFormProps) => (
   <FormSection name={props.plan}>
     <FormGroup label={props.translate('Name')} required={true}>
-      <PlanNameField/>
+      <PlanNameField />
     </FormGroup>
     <FormGroup label={props.translate('Price')}>
-      <PriceField plan={props.plan}/>
+      <PriceField plan={props.plan} />
     </FormGroup>
     <FormGroup label={props.translate('Billing period')} required={true}>
-      <PlanBillingPeriodField/>
+      <PlanBillingPeriodField />
     </FormGroup>
     <FormGroup label={props.translate('Description')}>
-      <PlanDescriptionField/>
+      <PlanDescriptionField />
     </FormGroup>
-    <ArticleCodeField/>
-    <ProductCodeField/>
+    <ArticleCodeField />
+    <ProductCodeField />
     {props.components && props.components.length > 0 && (
       <PlanComponents
         components={props.components.filter(component => component.type)}

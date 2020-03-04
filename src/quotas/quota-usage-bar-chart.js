@@ -17,35 +17,49 @@ const quotaUsageBarChart = {
     }
 
     getSummary(quota) {
-      return this.coreUtils.templateFormatter(gettext('{usage} of {limit} used'), {
-        usage: this.$filter('quotaValue')(quota.usage, quota.name),
-        limit: this.$filter('quotaValue')(quota.limit, quota.name),
-      });
+      return this.coreUtils.templateFormatter(
+        gettext('{usage} of {limit} used'),
+        {
+          usage: this.$filter('quotaValue')(quota.usage, quota.name),
+          limit: this.$filter('quotaValue')(quota.limit, quota.name),
+        },
+      );
     }
 
     getExisting(quota) {
-      return this.coreUtils.templateFormatter(gettext('Existing quota usage: {usage}'), {
-        usage: this.$filter('quotaValue')(quota.usage, quota.name),
-      });
+      return this.coreUtils.templateFormatter(
+        gettext('Existing quota usage: {usage}'),
+        {
+          usage: this.$filter('quotaValue')(quota.usage, quota.name),
+        },
+      );
     }
 
     getPlanned(quota) {
-      return this.coreUtils.templateFormatter(gettext('Planned quota usage: {usage}'), {
-        usage: this.$filter('quotaValue')(quota.required, quota.name),
-      });
+      return this.coreUtils.templateFormatter(
+        gettext('Planned quota usage: {usage}'),
+        {
+          usage: this.$filter('quotaValue')(quota.required, quota.name),
+        },
+      );
     }
 
     getAvailable(quota) {
       let availableQuota = quota.limit - quota.usage;
-      return this.coreUtils.templateFormatter(gettext('Available quota usage: {usage}'), {
-        usage: this.$filter('quotaValue')(availableQuota, quota.name),
-      });
+      return this.coreUtils.templateFormatter(
+        gettext('Available quota usage: {usage}'),
+        {
+          usage: this.$filter('quotaValue')(availableQuota, quota.name),
+        },
+      );
     }
 
     getExceeds() {
-      return this.coreUtils.templateFormatter(gettext('Quota usage exceeds available limit.'));
+      return this.coreUtils.templateFormatter(
+        gettext('Quota usage exceeds available limit.'),
+      );
     }
-  }
+  },
 };
 
 export default quotaUsageBarChart;

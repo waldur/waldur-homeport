@@ -12,7 +12,7 @@ export default function appstoreForm() {
     },
     controller: AppstoreFormController,
     controllerAs: '$ctrl',
-    bindToController: true
+    bindToController: true,
   };
 }
 
@@ -24,7 +24,9 @@ class AppstoreFormController {
     const order = this.fields.order;
     const model = this.model;
 
-    this.fieldsList = order.map(name => options[name]).filter(angular.isDefined);
+    this.fieldsList = order
+      .map(name => options[name])
+      .filter(angular.isDefined);
     angular.forEach(watchers, (watcher, field) => {
       $scope.$watch(() => model[field], watcher.bind(null, model, options));
     });

@@ -19,10 +19,10 @@ export interface Subnet {
   name: string;
   cidr: string;
   gateway_ip: string;
-  allocation_pools: Array<{[key: string]: string}>;
+  allocation_pools: Array<{ [key: string]: string }>;
   ip_version: number;
   enable_dhcp: boolean;
-  dns_nameservers: Array<{[key: string]: string}>;
+  dns_nameservers: Array<{ [key: string]: string }>;
   network: string;
   network_name?: string;
 }

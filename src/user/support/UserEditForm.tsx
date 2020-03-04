@@ -2,15 +2,29 @@ import * as React from 'react';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { dateTime } from '@waldur/core/utils';
-import { FieldError, FormContainer, SecretField, SelectField, StringField, SubmitButton } from '@waldur/form-react';
+import {
+  FieldError,
+  FormContainer,
+  SecretField,
+  SelectField,
+  StringField,
+  SubmitButton,
+} from '@waldur/form-react';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { StaticField } from '@waldur/user/support/StaticField';
-import { formatRegistrationMethod, formatUserStatus } from '@waldur/user/support/utils';
+import {
+  formatRegistrationMethod,
+  formatUserStatus,
+} from '@waldur/user/support/utils';
 import { UserDetails } from '@waldur/workspace/types';
 
 import { EmailField } from './EmailField';
 import { TermsOfService } from './TermsOfService';
-import { tokenOptions, tokenLifetimeTooltip, TokenLifetimeWarning } from './TokenLifetimeField';
+import {
+  tokenOptions,
+  tokenLifetimeTooltip,
+  TokenLifetimeWarning,
+} from './TokenLifetimeField';
 
 interface UserEditFormData {
   full_name: string;
@@ -42,11 +56,13 @@ interface UserEditFormProps extends TranslateProps, InjectedFormProps {
 export const PureUserEditForm = (props: UserEditFormProps) => (
   <form
     onSubmit={props.handleSubmit(props.updateUser)}
-    className="form-horizontal col-sm-10 col-xs-12">
+    className="form-horizontal col-sm-10 col-xs-12"
+  >
     <FormContainer
       submitting={props.submitting}
       labelClass="col-sm-3"
-      controlClass="col-sm-7">
+      controlClass="col-sm-7"
+    >
       {props.protected ? (
         <StaticField
           label={translate('Full name')}
@@ -59,38 +75,38 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           required={props.isRequired('full_name')}
         />
       )}
-      {props.nativeNameIsVisible && !props.protected &&
+      {props.nativeNameIsVisible && !props.protected && (
         <StringField
           label={translate('Native name')}
           name="native_name"
           required={props.isRequired('native_name')}
         />
-      }
-      {props.nativeNameIsVisible && props.protected &&
+      )}
+      {props.nativeNameIsVisible && props.protected && (
         <StaticField
           label={translate('Native name')}
           value={props.user.native_name}
         />
-      }
-      <EmailField user={props.user} protected={props.protected}/>
-      {props.fieldIsVisible('registration_method') &&
+      )}
+      <EmailField user={props.user} protected={props.protected} />
+      {props.fieldIsVisible('registration_method') && (
         <StaticField
           label={translate('Registration method')}
           value={formatRegistrationMethod(props.user)}
         />
-      }
-      {props.isVisibleForSupportOrStaff &&
+      )}
+      {props.isVisibleForSupportOrStaff && (
         <StaticField
           label={translate('User status')}
           value={formatUserStatus(props.user)}
         />
-      }
-      {props.user.civil_number &&
+      )}
+      {props.user.civil_number && (
         <StaticField
           label={translate('ID code')}
           value={props.user.civil_number}
         />
-      }
+      )}
       {props.fieldIsVisible('organization') && !props.protected && (
         <StringField
           label={translate('Organization name')}
@@ -104,45 +120,42 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           value={props.user.organization}
         />
       )}
-      {props.fieldIsVisible('job_title') && !props.protected &&
+      {props.fieldIsVisible('job_title') && !props.protected && (
         <StringField
           label={translate('Job position')}
           name="job_title"
           required={props.isRequired('job_title')}
         />
-      }
+      )}
       {props.fieldIsVisible('job_title') && props.protected && (
         <StaticField
           label={translate('Job position')}
           value={props.user.job_title}
         />
       )}
-      {props.isVisibleForSupportOrStaff &&
+      {props.isVisibleForSupportOrStaff && (
         <StringField
           label={translate('Description')}
           name="description"
           required={props.isRequired('description')}
         />
-      }
-      {props.fieldIsVisible('phone_number') && !props.protected &&
+      )}
+      {props.fieldIsVisible('phone_number') && !props.protected && (
         <StringField
           label={translate('Phone number')}
           name="phone_number"
           required={props.isRequired('phone_number')}
         />
-      }
-      {props.fieldIsVisible('phone_number') && props.protected &&
+      )}
+      {props.fieldIsVisible('phone_number') && props.protected && (
         <StaticField
           label={translate('Phone number')}
           value={props.user.phone_number}
         />
-      }
-      <hr/>
+      )}
+      <hr />
       {props.userTokenIsVisible && (
-        <SecretField
-          name="token"
-          label={translate('Current API token')}
-        />
+        <SecretField name="token" label={translate('Current API token')} />
       )}
       {props.userTokenIsVisible && (
         <SelectField
@@ -153,7 +166,7 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           valueKey="value"
         />
       )}
-      {props.userTokenIsVisible && <TokenLifetimeWarning/>}
+      {props.userTokenIsVisible && <TokenLifetimeWarning />}
       <TermsOfService
         initial={props.initial}
         agreementDate={dateTime(props.user.agreement_date)}
@@ -161,30 +174,32 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
     </FormContainer>
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-9">
-        <FieldError error={props.error}/>
-        {!props.initial ?
+        <FieldError error={props.error} />
+        {!props.initial ? (
           <SubmitButton
             className="btn btn-primary m-r-sm m-b-sm m-t-sm"
             submitting={props.submitting}
             label={props.translate('Update profile')}
-          /> :
+          />
+        ) : (
           <SubmitButton
             submitting={props.submitting}
             label={props.translate('Let’s get started')}
           />
-        }
-        {(!props.initial && props.showDeleteButton) &&
+        )}
+        {!props.initial && props.showDeleteButton && (
           <button
             id="remove-btn"
             type="button"
             className="btn btn-danger"
-            onClick={props.showUserRemoval}>
+            onClick={props.showUserRemoval}
+          >
             {props.translate('Remove profile')}
           </button>
-        }
+        )}
       </div>
     </div>
   </form>
 );
 
-export const UserEditForm = reduxForm({form: 'userEdit'})(PureUserEditForm);
+export const UserEditForm = reduxForm({ form: 'userEdit' })(PureUserEditForm);

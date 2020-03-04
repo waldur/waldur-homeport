@@ -7,22 +7,28 @@ describe('IssueNavigationService', () => {
   let service;
   let isOwnerOrStaff;
 
-  const hasLink = (items, link) => items.filter(item => item.link === link).length >= 1;
+  const hasLink = (items, link) =>
+    items.filter(item => item.link === link).length >= 1;
 
   beforeEach(inject((_$rootScope_, _$q_) => {
     $scope = _$rootScope_.$new();
     deferred = _$q_.defer();
     const usersService = {
-      getCurrentUser: () => deferred.promise
+      getCurrentUser: () => deferred.promise,
     };
     const currentStateService = {
-      getOwnerOrStaff: () => isOwnerOrStaff
+      getOwnerOrStaff: () => isOwnerOrStaff,
     };
     const features = {
-      isVisible: () => true
+      isVisible: () => true,
     };
     $state = jasmine.createSpyObj('$state', ['go']);
-    service = new IssueNavigationService($state, usersService, currentStateService, features);
+    service = new IssueNavigationService(
+      $state,
+      usersService,
+      currentStateService,
+      features,
+    );
     isOwnerOrStaff = false;
   }));
 
@@ -50,7 +56,7 @@ describe('IssueNavigationService', () => {
   it('returns sidebar with helpdesk link if user is global support', () => {
     deferred.resolve({ is_support: true });
     let sidebar;
-    service.getSidebarItems().then(items => sidebar = items);
+    service.getSidebarItems().then(items => (sidebar = items));
     $scope.$apply();
     expect(hasLink(sidebar, 'support.helpdesk')).toBe(true);
   });
@@ -59,7 +65,7 @@ describe('IssueNavigationService', () => {
     isOwnerOrStaff = true;
     deferred.resolve({ is_staff: true });
     let sidebar;
-    service.getSidebarItems().then(items => sidebar = items);
+    service.getSidebarItems().then(items => (sidebar = items));
     $scope.$apply();
     expect(hasLink(sidebar, 'support.dashboard')).toBe(true);
   });
@@ -68,7 +74,7 @@ describe('IssueNavigationService', () => {
     isOwnerOrStaff = true;
     deferred.resolve({ is_staff: true, is_support: true });
     let sidebar;
-    service.getSidebarItems().then(items => sidebar = items);
+    service.getSidebarItems().then(items => (sidebar = items));
     $scope.$apply();
     expect(hasLink(sidebar, 'support.helpdesk')).toBe(true);
     expect(hasLink(sidebar, 'support.dashboard')).toBe(true);

@@ -9,5 +9,5 @@ interface Props {
 
 export const TablePlaceholder = ({ query, verboseName }: Props) => {
   const message = getMessage({ query, verboseName });
-  return (<p>{message}</p>);
+  return <p>{message}</p>;
 };

@@ -19,8 +19,10 @@ const OfferingReportDialog = (props: OfferingReportDialogProps) => (
     title={props.translate('Report details')}
     footer={<CloseDialogButton />}
   >
-    <OfferingReportComponent report={props.resolve.report}/>
+    <OfferingReportComponent report={props.resolve.report} />
   </ModalDialog>
 );
 
-export default connectAngularComponent(withTranslation(OfferingReportDialog), ['resolve']);
+export default connectAngularComponent(withTranslation(OfferingReportDialog), [
+  'resolve',
+]);

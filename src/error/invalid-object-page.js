@@ -11,7 +11,7 @@ const invalidObjectPage = {
     goBack() {
       this.NavigationUtilsService.goBack();
     }
-  }
+  },
 };
 
 export default invalidObjectPage;

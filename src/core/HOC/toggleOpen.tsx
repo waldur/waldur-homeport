@@ -5,12 +5,19 @@ export interface ToggleOpenProps {
   handleToggleOpen(): void;
 }
 
-export const toggleOpen = OriginalComponent => class ToggleOpen extends React.Component<any> {
-  state = { isOpen: false };
+export const toggleOpen = OriginalComponent =>
+  class ToggleOpen extends React.Component<any> {
+    state = { isOpen: false };
 
-  handleToggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
+    handleToggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
-  render() {
-    return (<OriginalComponent {...this.props} {...this.state} handleToggleOpen={this.handleToggleOpen} />);
-  }
-};
+    render() {
+      return (
+        <OriginalComponent
+          {...this.props}
+          {...this.state}
+          handleToggleOpen={this.handleToggleOpen}
+        />
+      );
+    }
+  };

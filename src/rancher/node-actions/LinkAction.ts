@@ -12,10 +12,14 @@ export default function createAction(ctx): ResourceAction {
     isVisible: !ctx.resource.instance && ctx.user.is_staff,
     init: async (resource, _, action) => {
       const instances = await getAll<OpenStackInstance>(
-        '/openstacktenant-instances/', {params: {
-          project_uuid: resource.project_uuid,
-          o: 'name',
-        }});
+        '/openstacktenant-instances/',
+        {
+          params: {
+            project_uuid: resource.project_uuid,
+            o: 'name',
+          },
+        },
+      );
 
       action.fields.instance.choices = instances.map(choice => ({
         value: choice.url,

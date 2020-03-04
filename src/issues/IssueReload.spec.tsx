@@ -9,7 +9,8 @@ describe('IssueReload', () => {
   const initialProps = {
     translate,
   };
-  const renderWrapper = (props?) => shallow(<PureIssueReload {...initialProps} {...props} />);
+  const renderWrapper = (props?) =>
+    shallow(<PureIssueReload {...initialProps} {...props} />);
 
   it('spinning if prop loading is true', () => {
     const wrapper = renderWrapper({ loading: true });

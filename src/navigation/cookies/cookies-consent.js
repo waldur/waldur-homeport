@@ -16,7 +16,7 @@ const cookiesConsent = {
     hideConsent() {
       this.$window.localStorage['hideCookiesConsent'] = true;
     }
-  }
+  },
 };
 
 export default cookiesConsent;

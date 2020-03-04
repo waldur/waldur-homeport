@@ -23,7 +23,8 @@ describe('Selectors', () => {
       latitude: '60.1781296',
       longitude: '24.830555',
       description: 'CSC is a Finnish center of expertise in ICT and HPC.',
-      logo: 'http://www.hermanit.fi/wp-content/uploads/2016/09/CSC_2012_LOGO_RGB_72dpi.jpg',
+      logo:
+        'http://www.hermanit.fi/wp-content/uploads/2016/09/CSC_2012_LOGO_RGB_72dpi.jpg',
     };
     expect(selectServiceProvider(state)).toEqual(expected);
   });
@@ -56,18 +57,25 @@ describe('Selectors', () => {
   });
 
   it('should return countries to render', () => {
-    const expected = [ 'Estonia', 'Iceland', 'Finland', 'Sweden', 'Denmark', 'Norway' ];
+    const expected = [
+      'Estonia',
+      'Iceland',
+      'Finland',
+      'Sweden',
+      'Denmark',
+      'Norway',
+    ];
     expect(selectCountriesToRender(state)).toEqual(expected);
   });
 
   it('it should create selector factory that creates selector for accumulation of properties(name or country) among organizations', () => {
     const expected = [
-      {name: 'Estonia'},
-      {name: 'Iceland'},
-      {name: 'Finland'},
-      {name: 'Sweden'},
-      {name: 'Denmark'},
-      {name: 'Norway'},
+      { name: 'Estonia' },
+      { name: 'Iceland' },
+      { name: 'Finland' },
+      { name: 'Sweden' },
+      { name: 'Denmark' },
+      { name: 'Norway' },
     ];
     expect(propertySelectorFactory('country')(state)).toEqual(expected);
   });

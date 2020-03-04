@@ -67,8 +67,5 @@
       "services": ["Amazon", "Azure", "DigitalOcean", "OpenStackTenant"]
     }
   ],
-  "futureCategories": [
-    "support",
-    "apps"
-  ]
+  "futureCategories": ["support", "apps"]
 }

@@ -3,9 +3,9 @@
   @include property(margin, 20 60);
   @include property(padding, 20);
   border-radius: 1px;
-  background: #FFFFFF;
-  border: 0px solid #D8D8D8;
-  box-shadow: 0px 2px 2px 0px rgba(223, 223, 223, 0.50);
+  background: #ffffff;
+  border: 0px solid #d8d8d8;
+  box-shadow: 0px 2px 2px 0px rgba(223, 223, 223, 0.5);
   &.no-styles {
     background: transparent;
     border: none;

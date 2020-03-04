@@ -7,7 +7,7 @@ const getSettingsUUID = (_, props) => props.offering.scope_uuid;
 
 const makeGetVariable = () => {
   return createSelector(
-    [ getCustomer, getSettingsUUID ],
+    [getCustomer, getSettingsUUID],
     (customer, settingsUUID) => ({
       customer_uuid: customer.uuid,
       settings_uuid: settingsUUID,

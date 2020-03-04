@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { ResourceAnalysisItem } from './ResourceAnalysisItem';
-
 import { Project } from './types';
 
 interface ResourceAnalysisListProps {
@@ -16,9 +15,9 @@ export const ResourceAnalysisList = (props: ResourceAnalysisListProps) => {
     </li>
   ));
 
-  if (!body.length) { return null; }
+  if (!body.length) {
+    return null;
+  }
 
-  return (
-    <ul className="resource-analysis__list">{body}</ul>
-  );
+  return <ul className="resource-analysis__list">{body}</ul>;
 };

@@ -7,7 +7,7 @@ export default function issuesActivityStream() {
     controller: IssuesActivityStreamController,
     controllerAs: '$ctrl',
     scope: {},
-    bindToController: true
+    bindToController: true,
   };
 }
 
@@ -23,8 +23,8 @@ function IssuesActivityStreamController(issueCommentsService, $uibModal) {
     $uibModal.open({
       component: 'userPopover',
       resolve: {
-        user: () => user
-      }
+        user: () => user,
+      },
     });
   };
 }

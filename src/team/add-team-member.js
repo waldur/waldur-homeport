@@ -5,7 +5,7 @@ const addTeamMember = {
   template,
   bindings: {
     close: '&',
-    resolve: '<'
+    resolve: '<',
   },
   controller: class AddTeamMemberDialogController {
     // @ngInject
@@ -16,7 +16,8 @@ const addTeamMember = {
       projectPermissionsService,
       ENV,
       ErrorMessageFormatter,
-      $filter) {
+      $filter,
+    ) {
       this.$q = $q;
       this.customersService = customersService;
       this.customerPermissionsService = customerPermissionsService;
@@ -31,15 +32,24 @@ const addTeamMember = {
       this.addText = gettext('Save');
       this.addTitle = gettext('Edit team member');
       this.userModel = {
-        expiration_time: null
+        expiration_time: null,
       };
 
       this.canChangeRole = this.customersService.checkCustomerUser(
-        this.resolve.currentCustomer, this.resolve.currentUser);
+        this.resolve.currentCustomer,
+        this.resolve.currentUser,
+      );
 
-      this.canManageOwner = this.resolve.currentUser.is_staff ||
-        (this.customersService.isOwner(this.resolve.currentCustomer, this.resolve.editUser) &&
-          this.customersService.isOwner(this.resolve.currentCustomer, this.resolve.currentUser) &&
+      this.canManageOwner =
+        this.resolve.currentUser.is_staff ||
+        (this.customersService.isOwner(
+          this.resolve.currentCustomer,
+          this.resolve.editUser,
+        ) &&
+          this.customersService.isOwner(
+            this.resolve.currentCustomer,
+            this.resolve.currentUser,
+          ) &&
           this.ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS);
 
       if (!this.canChangeRole) {
@@ -55,7 +65,7 @@ const addTeamMember = {
         choices: [
           { value: 'admin', display_name: this.ENV.roles.admin },
           { value: 'manager', display_name: this.ENV.roles.manager },
-        ]
+        ],
       };
       this.projectExpirationTimeField = {
         name: 'expiration_time',
@@ -64,15 +74,21 @@ const addTeamMember = {
           format: 'dd.MM.yyyy',
           altInputFormats: ['M!/d!/yyyy'],
           dateOptions: {
-            minDate: moment().add(1, 'days').toDate(),
-            startingDay: 1
-          }
-        }
+            minDate: moment()
+              .add(1, 'days')
+              .toDate(),
+            startingDay: 1,
+          },
+        },
       };
 
-      this.ownerExpirationTimeField = angular.extend({}, this.projectExpirationTimeField, {
-        disableInput: !this.canChangeRole || !this.canManageOwner
-      });
+      this.ownerExpirationTimeField = angular.extend(
+        {},
+        this.projectExpirationTimeField,
+        {
+          disableInput: !this.canChangeRole || !this.canManageOwner,
+        },
+      );
 
       this.formatData();
     }
@@ -81,31 +97,33 @@ const addTeamMember = {
       this.projects = [];
       this.userModel.user = this.resolve.editUser;
       this.userModel.role = this.resolve.editUser.role;
-      this.userModel.expiration_time = this.resolve.editUser.expiration_time ?
-        new Date(this.resolve.editUser.expiration_time) :
-        null;
+      this.userModel.expiration_time = this.resolve.editUser.expiration_time
+        ? new Date(this.resolve.editUser.expiration_time)
+        : null;
 
-      this.projects = angular.copy(this.resolve.currentCustomer.projects).map(project => {
-        let displayProject = {
-          role: null,
-          permission: null,
-          expiration_time: null,
-          uuid: project.uuid,
-          name: project.name,
-          url: project.url
-        };
-        this.resolve.editUser.projects.some(permissionProject => {
-          if (permissionProject.uuid === project.uuid) {
-            displayProject.role = permissionProject.role;
-            displayProject.permission = permissionProject.permission;
-            displayProject.expiration_time = permissionProject.expiration_time ?
-              new Date(permissionProject.expiration_time) :
-              null;
-          }
-          return permissionProject.uuid === project.uuid;
+      this.projects = angular
+        .copy(this.resolve.currentCustomer.projects)
+        .map(project => {
+          let displayProject = {
+            role: null,
+            permission: null,
+            expiration_time: null,
+            uuid: project.uuid,
+            name: project.name,
+            url: project.url,
+          };
+          this.resolve.editUser.projects.some(permissionProject => {
+            if (permissionProject.uuid === project.uuid) {
+              displayProject.role = permissionProject.role;
+              displayProject.permission = permissionProject.permission;
+              displayProject.expiration_time = permissionProject.expiration_time
+                ? new Date(permissionProject.expiration_time)
+                : null;
+            }
+            return permissionProject.uuid === project.uuid;
+          });
+          return displayProject;
         });
-        return displayProject;
-      });
 
       this.emptyProjectList = !this.projects.length;
     }
@@ -113,16 +131,18 @@ const addTeamMember = {
     saveUser() {
       this.errors = [];
       this.saving = true;
-      return this.$q.all([
-        this.saveCustomerPermission(),
-        this.saveProjectPermissions()
-      ]).then(() => {
-        this.close();
-        this.saving = false;
-      }, error => {
-        this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
-        this.saving = false;
-      });
+      return this.$q
+        .all([this.saveCustomerPermission(), this.saveProjectPermissions()])
+        .then(
+          () => {
+            this.close();
+            this.saving = false;
+          },
+          error => {
+            this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
+            this.saving = false;
+          },
+        );
     }
 
     saveCustomerPermission() {
@@ -130,11 +150,18 @@ const addTeamMember = {
       model.url = this.resolve.editUser.permission;
       model.expiration_time = this.userModel.expiration_time;
 
-      if (this.userModel.role !== this.resolve.editUser.role && !this.userModel.role) {
-        return this.customerPermissionsService.deletePermission(this.resolve.editUser.permission);
+      if (
+        this.userModel.role !== this.resolve.editUser.role &&
+        !this.userModel.role
+      ) {
+        return this.customerPermissionsService.deletePermission(
+          this.resolve.editUser.permission,
+        );
       } else if (!this.resolve.editUser.role && this.userModel.role) {
         return this.createCustomerPermission();
-      } else if (this.userModel.expiration_time !== this.resolve.editUser.expiration_time) {
+      } else if (
+        this.userModel.expiration_time !== this.resolve.editUser.expiration_time
+      ) {
         return this.customerPermissionsService.update(model);
       }
     }
@@ -159,11 +186,17 @@ const addTeamMember = {
         this.resolve.editUser.projects.forEach(existingPermission => {
           if (project.permission === existingPermission.permission) {
             exists = true;
-            if (project.role === existingPermission.role &&
-              project.expiration_time !== existingPermission.expiration_time) {
+            if (
+              project.role === existingPermission.role &&
+              project.expiration_time !== existingPermission.expiration_time
+            ) {
               update = true;
-            } else if ((!project.role && existingPermission.role) ||
-              (project.role && existingPermission.role && project.role !== existingPermission.role)) {
+            } else if (
+              (!project.role && existingPermission.role) ||
+              (project.role &&
+                existingPermission.role &&
+                project.role !== existingPermission.role)
+            ) {
               permissionsToDelete.push(existingPermission.permission);
             }
             if (project.role && project.role !== existingPermission.role) {
@@ -203,7 +236,7 @@ const addTeamMember = {
         return this.$q.all(renewalPromises.concat(creationPromises));
       });
     }
-  }
+  },
 };
 
 export default addTeamMember;

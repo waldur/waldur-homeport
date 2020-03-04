@@ -5,17 +5,28 @@ import { ENV } from '@waldur/core/services';
 import { useQuery } from '@waldur/core/useQuery';
 import { getLatinNameValidators, required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { NumberField, TextField, StringField, FormContainer, SelectField } from '@waldur/form-react';
+import {
+  NumberField,
+  TextField,
+  StringField,
+  FormContainer,
+  SelectField,
+} from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { parseIntField } from '@waldur/marketplace/common/utils';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { loadVolumeAvailabilityZones, loadVolumeTypes } from '../api';
-import { formatVolumeTypeChoices, getDefaultVolumeType } from '../openstack-instance/utils';
+import {
+  formatVolumeTypeChoices,
+  getDefaultVolumeType,
+} from '../openstack-instance/utils';
 
-const validateSize = (value: number) => value < 1024 || value > 1024 * 4096 ?
-  translate('Size should be between 1 and 4096 GB.') : undefined;
+const validateSize = (value: number) =>
+  value < 1024 || value > 1024 * 4096
+    ? translate('Size should be between 1 and 4096 GB.')
+    : undefined;
 
 const loadData = async settings => {
   const zones = await loadVolumeAvailabilityZones(settings);
@@ -24,7 +35,9 @@ const loadData = async settings => {
     return {
       zones,
       volumeTypes: formatVolumeTypeChoices(volumeTypes),
-      defaultVolumeType: getDefaultVolumeType(formatVolumeTypeChoices(volumeTypes)),
+      defaultVolumeType: getDefaultVolumeType(
+        formatVolumeTypeChoices(volumeTypes),
+      ),
     };
   } else {
     return {
@@ -36,7 +49,7 @@ const loadData = async settings => {
 };
 
 export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps> = props => {
-  const {call, state} = useQuery(loadData, props.offering.scope_uuid);
+  const { call, state } = useQuery(loadData, props.offering.scope_uuid);
 
   React.useEffect(call, []);
 
@@ -54,7 +67,7 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
   }, [state.loaded]);
 
   if (state.loading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   if (state.error) {
@@ -70,8 +83,9 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
       <FormContainer
         submitting={props.submitting}
         labelClass="col-sm-3"
-        controlClass="col-sm-9">
-        <ProjectField/>
+        controlClass="col-sm-9"
+      >
+        <ProjectField />
         <StringField
           label={translate('Volume name')}
           required={true}
@@ -84,7 +98,7 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
           parse={parseIntField}
           min={1}
           max={4096}
-          format={v => v ? v / 1024 : ''}
+          format={v => (v ? v / 1024 : '')}
           normalize={v => Number(v) * 1024}
           unit={translate('GB')}
           validate={validateSize}
@@ -97,8 +111,14 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
             labelKey="name"
             valueKey="url"
             simpleValue={true}
-            required={ENV.plugins.WALDUR_OPENSTACK_TENANT.REQUIRE_AVAILABILITY_ZONE}
-            validate={ENV.plugins.WALDUR_OPENSTACK_TENANT.REQUIRE_AVAILABILITY_ZONE ? required : undefined}
+            required={
+              ENV.plugins.WALDUR_OPENSTACK_TENANT.REQUIRE_AVAILABILITY_ZONE
+            }
+            validate={
+              ENV.plugins.WALDUR_OPENSTACK_TENANT.REQUIRE_AVAILABILITY_ZONE
+                ? required
+                : undefined
+            }
           />
         )}
         {state.data.volumeTypes.length > 0 && (

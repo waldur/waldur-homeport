@@ -11,23 +11,32 @@ export default function userDetails() {
 }
 
 // @ngInject
-function UserDetailsController($scope, $state, $stateParams, usersService,
-  stateUtilsService, currentStateService, WorkspaceService, SidebarExtensionService) {
-
+function UserDetailsController(
+  $scope,
+  $state,
+  $stateParams,
+  usersService,
+  stateUtilsService,
+  currentStateService,
+  WorkspaceService,
+  SidebarExtensionService,
+) {
   function getDashboardTab(user) {
     const prevWorkspace = stateUtilsService.getPrevWorkspace();
     if (prevWorkspace === 'project') {
       return {
         label: gettext('Back to project'),
         icon: 'fa-arrow-left',
-        action: stateUtilsService.goBack
+        action: stateUtilsService.goBack,
       };
-    } else if (prevWorkspace === 'organization' &&
-      (currentStateService.getOwnerOrStaff() || user.is_support)) {
+    } else if (
+      prevWorkspace === 'organization' &&
+      (currentStateService.getOwnerOrStaff() || user.is_support)
+    ) {
       return {
         label: gettext('Back to organization'),
         icon: 'fa-arrow-left',
-        action: stateUtilsService.goBack
+        action: stateUtilsService.goBack,
       };
     }
   }
@@ -35,40 +44,52 @@ function UserDetailsController($scope, $state, $stateParams, usersService,
   function updateSidebar() {
     usersService.getCurrentUser().then(function(user) {
       let dashboardTab = getDashboardTab(user);
-      if (angular.isUndefined($stateParams.uuid) || $stateParams.uuid === user.uuid) {
+      if (
+        angular.isUndefined($stateParams.uuid) ||
+        $stateParams.uuid === user.uuid
+      ) {
         if (dashboardTab) {
-          $scope.items = SidebarExtensionService.filterItems([dashboardTab].concat(PRIVATE_USER_TABS));
+          $scope.items = SidebarExtensionService.filterItems(
+            [dashboardTab].concat(PRIVATE_USER_TABS),
+          );
         } else {
           $scope.items = SidebarExtensionService.filterItems(PRIVATE_USER_TABS);
         }
         $scope.isPrivate = true;
         $scope.currentUser = user;
-        $scope.context = {user: user};
+        $scope.context = { user: user };
         WorkspaceService.setWorkspace({
           hasCustomer: true,
           workspace: WOKSPACE_NAMES.user,
-          currentUser: user
+          currentUser: user,
         });
       } else {
-        usersService.$get($stateParams.uuid).then(function(user) {
-          if (dashboardTab) {
-            $scope.items = SidebarExtensionService.filterItems([dashboardTab].concat(PUBLIC_USER_TABS));
-          } else {
-            $scope.items = SidebarExtensionService.filterItems(PUBLIC_USER_TABS);
-          }
-          $scope.currentUser = user;
-          $scope.isPrivate = false;
-          $scope.context = {user: user};
-          WorkspaceService.setWorkspace({
-            hasCustomer: true,
-            workspace: WOKSPACE_NAMES.user,
-            currentUser: user
+        usersService
+          .$get($stateParams.uuid)
+          .then(function(user) {
+            if (dashboardTab) {
+              $scope.items = SidebarExtensionService.filterItems(
+                [dashboardTab].concat(PUBLIC_USER_TABS),
+              );
+            } else {
+              $scope.items = SidebarExtensionService.filterItems(
+                PUBLIC_USER_TABS,
+              );
+            }
+            $scope.currentUser = user;
+            $scope.isPrivate = false;
+            $scope.context = { user: user };
+            WorkspaceService.setWorkspace({
+              hasCustomer: true,
+              workspace: WOKSPACE_NAMES.user,
+              currentUser: user,
+            });
+          })
+          .catch(function(response) {
+            if (response.status === 404) {
+              $state.go('errorPage.notFound');
+            }
           });
-        }).catch(function(response) {
-          if (response.status === 404) {
-            $state.go('errorPage.notFound');
-          }
-        });
       }
     });
   }
