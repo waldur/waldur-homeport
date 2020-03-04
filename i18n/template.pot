@@ -7273,9 +7273,12 @@ msgstr ""
 msgid "Unable to cancel order item."
 msgstr ""
 
-#: src/user/support/UserEmailChangeCallback.tsx
 #: src/user/support/useEmailChange.ts
 msgid "Unable to change email."
+msgstr ""
+
+#: src/user/support/UserEmailChangeCallback.tsx
+msgid "Unable to confirm email."
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.js
@@ -7339,6 +7342,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to fetch comments."
+msgstr ""
+
+#: src/user/support/UserEmailChangeCallback.tsx
+msgid "Unable to fetch current user."
 msgstr ""
 
 #: src/table-react/Table.tsx
