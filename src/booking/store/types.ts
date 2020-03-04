@@ -30,6 +30,7 @@ export interface TimeSelectProps {
   interval?: number;
   isDisabled?: boolean;
   label?: string | ReactElement;
+  options?: any[];
 }
 
 export interface PureDateProps {
