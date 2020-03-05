@@ -28,9 +28,13 @@ export const PureDateField = (props: PureDateProps) => (
         todayButtonLabel={translate('Today')}
         dateFormat="DD-MM-YYYY"
         value={moment(props.value).format()}
-        onChange={ (_, formattedValue) => props.onChange(
-          handleChange( formattedValue, moment(props.value).format('HH:mm') )
-        )}
+        onChange={ (_, formattedValue) => {
+          if (props.withTime) {
+            props.onChange(handleChange( formattedValue, moment(props.value).format('HH:mm') ));
+          } else {
+            props.onChange(formattedValue);
+          }
+        }}
       />
     </div>
     {props.withTime &&

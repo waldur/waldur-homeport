@@ -166,6 +166,7 @@ export class PureOfferingConfigurationForm extends React.Component<
           {props.offering.type === OFFERING_TYPE_BOOKING && (
             <CalendarField
               name="attributes.schedules"
+              cal={props.calendar}
               excludedEvents={this.state.availableDates}
               label={translate('Select dates')}
             />
@@ -178,6 +179,7 @@ export class PureOfferingConfigurationForm extends React.Component<
 
 const mapStateToProps = state => ({
   customer: getCustomer(state),
+  calendar: state.calendar,
 });
 
 const enhance = connect(mapStateToProps);

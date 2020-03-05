@@ -15,12 +15,12 @@ const timeMinutes = [ 30, 60, 120, 180, 240, 300, 360, 420, 480, 1440 ];
 
 const getDayLabel = (day: number): string => moment.weekdays(day);
 
-const handleWeekDays = (arr, e): number[] => {
-  const intVal = parseInt(e.target.value, null);
-  if (arr.includes(intVal)) {
-    return (arr.filter(item => item !== intVal));
+const handleWeekDays = (weekdayNumbers, dayNumber): number[] => {
+  const intVal = parseInt(dayNumber, null);
+  if (weekdayNumbers.includes(intVal)) {
+    return weekdayNumbers.filter(item => item !== intVal);
   } else {
-    return (arr.concat(intVal));
+    return weekdayNumbers.concat(intVal);
   }
 };
 
@@ -97,7 +97,7 @@ export const CalendarSettings: React.FC = () => {
                 className="weekday"
                 value={day}
                 checked={daysOfWeek.includes(day)}
-                onChange={e => setDaysOfWeek(handleWeekDays(daysOfWeek, e))}/>
+                onChange={e => setDaysOfWeek(handleWeekDays(daysOfWeek, e.target.value))}/>
               <label htmlFor={`weekday-${day}`}>{getDayLabel(day)[0]}</label>
             </Tooltip>
           ))}

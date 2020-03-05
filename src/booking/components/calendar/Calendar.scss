@@ -11,7 +11,7 @@
   color: white;
 }
 
-.fc-event {
+.fc-eventi {
   border-radius: 100px;
   font-size: 12px;
   line-height: 20px;
@@ -44,7 +44,9 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  input[type='checkbox'] {
+
+  margin-top: 5px;
+  input[type=checkbox]{
     height: 0;
     width: 0;
     visibility: hidden;
@@ -53,33 +55,35 @@
     cursor: pointer;
     text-indent: -9999px;
     max-width: 100%;
-    min-width: 48px;
+    min-width: 46px;
     height: 100%;
     background: grey;
     display: block;
     border-radius: 100px;
+    border: 2px solid transparent;
     position: relative;
+    margin: 0;
   }
   label:after {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 0;
-    width: 45%;
-    height: 90%;
+    width: 50%;
+    height: 100%;
     background: #fff;
     border-radius: 90px;
     transition: 0.3s;
-    transform: translateX(5%) translateY(-50%);
+    transform: translateX(0%);
   }
   input:checked + label {
     background: #1ab394;
     &:after {
-      transform: translateX(115%) translateY(-50%);
+      transform: translateX(100%);
     }
   }
   label:active:after {
-    transform: translateX(50%) translateY(-50%);
+    transform: translateX(50%);
   }
 }
 
@@ -90,6 +94,65 @@
     padding: 8px;
     background-color: white;
   }
+}
+.fc-day-header {
+  border: 0;
+  padding: 8px
+}
+
+.fc-disabled-day {
+  background-color: rgba(0,0,0,.01);
+}
+
+.date-input-group {
+  display: table;
+}
+
+.weekDays-selector input {
+  display: none !important;
+
+  &[type=checkbox] {
+    & + label {
+      display: inline-block;
+      border-radius: 50px;
+      background: #dddddd;
+      height: 30px;
+      width: 30px;
+      margin: 0;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+    }
+    &:checked + label {
+      background: #1ab394;
+      color: #ffffff;
+    }
+  }
+}
+
+.fc-head {
+  border-bottom: 1px solid #9d9d9d;
+}
+
+.fc-body {
+  box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
+}
+
+.fc-event-time,
+.fc-event-title {
+  padding: 0 1px;
+  float: left;
+  clear: none;
+  margin-right: 10px;
+}
+
+.fc-head {
+  background-color: white;
+    & .table-bordered>thead>tr>th {
+      border: 0;
+      padding: 8px;
+      background-color: white;
+    }
 }
 .fc-day-header {
   border: 0;
@@ -124,3 +187,114 @@
   background: #1ab394;
   color: #ffffff;
 }
+
+.fc-popover {
+  background-color: white;
+  color: white;
+  box-shadow: 1px 1px 10px rgba(0,0,0,.2);
+    .fc-header {
+      background-color: #1AB394;
+    }
+}
+
+
+.fc-event {
+  position: relative;
+  display: block;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  border-radius: 3px;
+  font-weight: 500;
+  border: 1px solid #ddd;
+  box-shadow: 0 5px 10px -5px rgba(0,0,0,.75);
+  transition-property: transform, box-shadow;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+  will-change: transform, box-shadow;
+}
+
+.fc-event,
+.fc-event-dot {
+  background-color: #ffffff;
+  color: #1ab394;
+  position: relative;
+}
+.fc-resizer {
+  content: "";
+  position: absolute;
+  width: 30px;
+  min-width: 10%;
+  height: 100%;
+  border: 2px solid #1AB394;
+}
+.fc-start-resizer {
+  left: 0;
+  top: -1px;
+  border-radius: 3px 0 0 3px;
+  border-bottom: 0;
+  border-right: 0;
+}
+.fc-end-resizer {
+  right: 0;
+  bottom: -1px;
+  border-radius: 0 3px 3px 0;
+  border-top: 0;
+  border-left: 0;
+}
+
+
+.fc-event .fc-title {
+  font-weight: 500;
+}
+.fc-event i{
+  font-size: 26px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.fc-event:hover {
+  color: #18a689;
+  text-decoration: none;
+  box-shadow: 0 10px 25px -10px rgba(0,0,0,.75);
+  transform: translateY(-2px);
+
+}
+
+
+.fc-not-allowed,
+.fc-not-allowed .fc-event {
+  cursor: not-allowed;
+}
+
+.fc-event .fc-bg {
+  z-index: 1;
+  background: #fff;
+  opacity: .25;
+}
+
+.fc-event .fc-resizer {
+  position: absolute;
+  z-index: 4;
+}
+
+.fc-event .fc-resizer {
+  display: none;
+}
+
+.fc-event.fc-allow-mouse-resize .fc-resizer,
+.fc-event.fc-selected .fc-resizer {
+  display: block;
+}
+
+.fc-event.fc-selected .fc-resizer:before {
+  content: "";
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+

@@ -30,7 +30,7 @@ export const TimeSelectField = (props: TimeSelectProps) => (
       simpleValue={true}
       searchable={false}
       clearable={false}
-      options={getOptions(30)}
+      options={props.options || getOptions(30)}
       value={props.value}
       onChange={value => props.onChange(value)}
       disabled={props.isDisabled}

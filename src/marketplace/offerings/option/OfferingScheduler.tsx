@@ -1,186 +1,125 @@
 import { EventInput } from '@fullcalendar/core';
+import * as moment from 'moment';
 import * as React from 'react';
-import DatePicker from 'react-16-bootstrap-date-picker';
-import * as Panel from 'react-bootstrap/lib/Panel';
-import { connect } from 'react-redux';
-import Select from 'react-select';
+import {connect} from 'react-redux';
 import { compose } from 'redux';
-import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
+import {WrappedFieldArrayProps, formValueSelector} from 'redux-form';
 
-import { EditableCalendar } from '@waldur/booking/components/calendar/EditableCalendar';
+import { AddCalendarEvent} from '@waldur/booking/components/AddCalendarEvent';
+import {PureCalendar} from '@waldur/booking/components/calendar/PureCalendar';
+import { CalendarSettings } from '@waldur/booking/components/CalendarSettings';
 import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
-import { createCalendarBookingEvent, deleteCalendarBookingEvent } from '@waldur/booking/utils';
-import { getOptions } from '@waldur/form-react/TimeSelectField';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import {addBooking, removeBooking, setBookings, updateBooking} from '@waldur/booking/store/actions';
+import {ConfigProps, State} from '@waldur/booking/store/types';
+import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { withModal } from '@waldur/modal/withModal';
 
 import './OfferingScheduler.scss';
 
-type OfferingSchedulerProps = TranslateProps &
-  WrappedFieldArrayProps<any> & {
-    setModalProps: (event) => void;
-    openModal: (cb) => void;
-    schedules: EventInput[];
-  };
-
-const TimeSelectFieldInput = props => (
-  <>
-    {props.label && <label className="col-sm-1 control-label" htmlFor={`workingHours-${props.name}`}>{props.label}</label>}
-    <Select
-      className="col-sm-4"
-      name={props.name}
-      simpleValue={true}
-      searchable={false}
-      options={getOptions(props.interval || 30)}
-      value={props.value}
-      onChange={value => props.onChange(
-        prevState => ({ ...prevState, [props.name]: value })
-      )}
-    />
-  </>
-);
-
-interface WorkingHoursProps {
-  minTime: string;
-  maxTime: string;
-}
+type OfferingSchedulerProps = TranslateProps & WrappedFieldArrayProps<any> & {
+  setModalProps: (event) => void;
+  openModal: (cb) => void;
+  schedules: EventInput[];
+  events: EventInput[];
+  config: ConfigProps;
+  calendar: State;
+  addBooking: (payload: EventInput) => void;
+  updateBooking: (payload: {event: EventInput, oldId: string}) => void;
+  removeBooking: (id: number | string) => void;
+  scheduleBooking: ({event: EventInput}) => void;
+  removeSchedule: ({event: EventInput}) => void;
+  updateScheduledBooking: (payload) => void;
+  setBooking: (bookings) => void;
+};
 
 export const PureOfferingScheduler = (props: OfferingSchedulerProps) => {
-  const [start, setStart] = React.useState<Date>();
-  const [end, setEnd] = React.useState<Date>();
-  const previousValues = React.useRef({ start, end });
-
-  const [isFirst, setIsFirst] = React.useState<boolean>(false);
-  const [weekends, setWeekends] = React.useState<boolean>(true);
-  const [workingHours, setWorkingHours] = React.useState<WorkingHoursProps>({
-    minTime: '00:00', maxTime: '24:00',
-  });
-
-  React.useEffect(() => {
-    if (previousValues.current.start !== start && previousValues.current.end !== end) {
-      previousValues.current = { start, end };
-      const field = createCalendarBookingEvent({
-        id: 'single-entity',
-        type: 'availability',
-        title: 'Availability',
-        start, end, weekends, workingHours,
-      });
-      if (isFirst) {
-        deleteCalendarBookingEvent(props.fields, {id: 'single-entity'});
-      }
-      props.fields.push(field);
-      setIsFirst(true);
-    }
-  });
-
+  const {config, schedules} = props.calendar;
   return (
-    <div className="form-group">
-      <FormGroup
-        label="Single select"
-        labelClassName="control-label col-sm-2"
-        valueClassName="col-sm-8"
-        description="Allow bookings to be scheduled at weekends">
-        <Panel>
-          <Panel.Heading>
-            <h3>Schedule availability</h3>
-          </Panel.Heading>
-          <Panel.Body>
-            <FormGroup
-              label={'Start date'}
-              labelClassName="control-label col-sm-3"
-              valueClassName="col-sm-6">
-              <DatePicker id="availabilityStart" name="start" value={start} onChange={val => setStart(val)}/>
-            </FormGroup>
-            <FormGroup
-              label={'End date'}
-              labelClassName="control-label col-sm-3"
-              valueClassName="col-sm-6">
-              <DatePicker id="availabilityEnd" name="end" value={end} onChange={val => setEnd(val)}/>
-            </FormGroup>
-            <FormGroup
-              label={'Working hours'}
-              labelClassName="control-label col-sm-3"
-              description="Daily available booking time range">
-              <TimeSelectFieldInput name="minTime" value={workingHours.minTime} onChange={setWorkingHours}/>
-              <TimeSelectFieldInput label="to" name="maxTime" value={workingHours.maxTime} onChange={setWorkingHours}/>
-            </FormGroup>
-            <FormGroup
-              label="Include weekends"
-              labelClassName="control-label col-sm-3"
-              valueClassName="col-sm-offset-1 checkbox-toggle"
-              description="Allow bookings to be scheduled at weekends">
-              <input type="checkbox" id="weekendsToggle" checked={weekends} onChange={() => setWeekends(!weekends)}/>
-              <label style={{marginTop: 5, marginLeft: 30}} htmlFor="weekendsToggle">Toggle weekends</label>
-            </FormGroup>
-            <button
-              className="btn btn-primary pull-right"
-              onClick={() => props.fields.push(createCalendarBookingEvent({
-                start, end, title: 'Availability', id: 7357, type: 'availability',
-              }))}>
-              Confirm
-            </button>
-          </Panel.Body>
-        </Panel>
+    <div className="col-sm-12">
+
+      <FormGroup classNameWithoutLabel="p-h-m col-sm-10 col-lg-8 col-centered">
+        <h3 className="header-bottom-border">{translate('Booking configuration')}</h3>
+        <CalendarSettings />
       </FormGroup>
 
-      <div className="form-group">
-        <div className="col-sm-push-2 col-sm-8 component-separator">
-          <span><h3>OR <br /> select availability range from calendar below</h3></span>
-          <hr />
-        </div>
-      </div>
+      <h3 className="p-h-m col-sm-8 col-centered header-bottom-border">
+        {translate('Booking availability ')}
+      </h3>
+      <FormGroup classNameWithoutLabel="col-sm-8 col-centered">
+        <AddCalendarEvent
+          useTime={false}
+          showAllDay={false}
+          event={{
+            id: 'config',
+            type: 'availability',
+            constraint: 'businessHours',
+            // allDay: true,
+            start: moment().format('MM-DD-YYYY'),
+            end: moment().add(1, 'day').format('MM-DD-YYYY'),
+            extendedProps: {config},
+          }}
+          setBooking={event => {
+            if (schedules.filter(item => item.id === event.id).length > 0) {
+              const formID = props.fields.getAll().findIndex(item => item.id === event.id);
+              props.fields.remove(formID);
+              props.fields.push(event);
+              props.updateScheduledBooking({event, oldId: event.id});
+            } else {
+              props.fields.push(event);
+              props.scheduleBooking({event});
+            }
+          }}
+        />
+      </FormGroup>
 
-      <FormGroup
-        label="Multi select"
-        labelClassName="control-label col-sm-2"
-        valueClassName="col-sm-8"
-        description="Select custom dates for availability">
-        <Panel>
-          <Panel.Heading>
-            <h3>Schedule multiple availability</h3>
-          </Panel.Heading>
-          <Panel.Body>
-            <EditableCalendar
-              weekends={weekends}
-              workingHours={workingHours}
-              events={props.schedules}
-              onSelectDate={event => props.fields.push(createCalendarBookingEvent({ ...event, type: 'availability' }) )}
-              onSelectEvent={prevEvent => {
-                props.setModalProps({
-                  event: prevEvent.event,
-                  destroy: () => deleteCalendarBookingEvent(props.fields, prevEvent.event),
-                });
-                props.openModal(event => {
-                  const field = createCalendarBookingEvent({ ...prevEvent.event.extendedProps, event });
-                  deleteCalendarBookingEvent(props.fields, prevEvent.event);
-                  props.fields.push(field);
-                });
-              }}
-              eventResize={slot => {
-                const field = createCalendarBookingEvent(slot.event);
-                deleteCalendarBookingEvent(props.fields, slot.prevEvent);
-                props.fields.push(field);
-              }}
-              eventDrop={slot => {
-                const field = createCalendarBookingEvent(slot.event);
-                deleteCalendarBookingEvent(props.fields, slot.oldEvent);
-                props.fields.push(field);
-              }}
-            />
-          </Panel.Body>
-        </Panel>
+      <FormGroup classNameWithoutLabel="p-h-m col-sm-10 col-centered">
+        <PureCalendar
+          calendarType="create"
+          calendar={{bookings: props.fields.getAll(), schedules, config}}
+          onSelectDate={event => {
+            props.fields.push({...event, config});
+            props.scheduleBooking({event: { ...event, config}});
+          }}
+          onEventClick={({event, oldId, formID}) => {
+            props.setModalProps({
+              event,
+              deleteBooking: () => {
+                props.fields.remove(formID);
+                props.removeSchedule(oldId);
+                },
+            });
+            props.openModal(onSuccess => {
+              props.fields.remove(formID);
+              props.fields.push(onSuccess);
+              props.updateScheduledBooking(onSuccess);
+            });
+          }}
+          updateCallback={payload => {
+            props.fields.remove(payload.formID);
+            props.fields.push(payload.event);
+            props.updateScheduledBooking(payload);
+          }}
+        />
       </FormGroup>
     </div>
   );
 };
 
+const mapDispatchToProps = dispatch => ({
+  setBooking: e => dispatch(setBookings(e)),
+  scheduleBooking: payload => dispatch(addBooking(payload.event)),
+  removeSchedule: oldId => dispatch(removeBooking(oldId)),
+  updateScheduledBooking: payload => dispatch(updateBooking(payload)),
+});
+
 const mapStateToProps = state => ({
   schedules: formValueSelector('marketplaceOfferingCreate')(state, 'schedules'),
+  calendar: state.calendar,
 });
 
 const enhance = compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   withTranslation,
   withModal(CalendarEventModal),
 );

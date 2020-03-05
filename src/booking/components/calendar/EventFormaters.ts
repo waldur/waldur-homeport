@@ -1,7 +1,10 @@
 export function availabilityEvent(event) {
-  if (event && event.type === 'availability' || event.extendedProps.type === 'availability') {
+  if (event && (event || event.extendedProps).type === 'availability') {
     event.rendering = 'background';
-    event.backgroundColor = 'green';
+    event.constraint = 'businessHours';
+    if (event.title === '') {
+      event.title = 'Availability';
+    }
   }
 }
 
@@ -12,15 +15,15 @@ export function statedEvent(event) {
 }
 
 export function configurationEvent(event) {
-  if (event && event.type === ( 'single-entity' || 'config' || 'availability-config')) {
-    event.constants = 'businessHours';
+  if (event && event.type === ( 'single-entity' || 'config' || 'availability-hours' || 'availability')) {
+    event.constraint = 'businessHours';
   }
 }
 
 export function scheduleEvent(event) {
-  if (event && event.type === 'ScheduleBooking') {
+  if (event && (event || event.extendedProps).type === 'scheduleBooking') {
     event.rendering = undefined;
-    event.constants = 'businessHours';
+    event.constraint = 'availableForBooking';
     event.backgroundColor = 'pink';
   }
 }

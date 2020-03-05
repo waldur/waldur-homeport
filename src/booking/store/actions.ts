@@ -43,7 +43,7 @@ export const addBooking = payload => ({
     end: payload.end,
     allDay: payload.allDay,
     title: payload.title,
-    extendedProps: payload.extendedProps,
+    extendedProps: payload.extendedProps || payload.config,
   },
 });
 
