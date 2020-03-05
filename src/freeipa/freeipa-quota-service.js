@@ -14,7 +14,7 @@ export default class FreeIPAQuotaService {
       const quota = this.findQuota(scope);
       if (quota) {
         const context = {
-          unlimited: quota.limit === -1
+          unlimited: quota.limit === -1,
         };
         return angular.extend({}, quota, context);
       }
@@ -25,11 +25,13 @@ export default class FreeIPAQuotaService {
     if (quota.unlimited) {
       quota.limit = -1;
     }
-    return this.quotasService.update({
-      url: quota.url,
-      limit: quota.limit,
-    }).then(() => {
-      this.findQuota(scope).limit = quota.limit;
-    });
+    return this.quotasService
+      .update({
+        url: quota.url,
+        limit: quota.limit,
+      })
+      .then(() => {
+        this.findQuota(scope).limit = quota.limit;
+      });
   }
 }

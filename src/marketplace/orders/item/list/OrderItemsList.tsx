@@ -55,10 +55,10 @@ export const TableComponent = props => {
   return (
     <Table
       {...props}
-      placeholderComponent={<OrderItemslistTablePlaceholder/>}
+      placeholderComponent={<OrderItemslistTablePlaceholder />}
       columns={columns}
       verboseName={translate('Order items')}
-      initialSorting={{field: 'created', mode: 'desc'}}
+      initialSorting={{ field: 'created', mode: 'desc' }}
     />
   );
 };
@@ -67,7 +67,9 @@ const OrderItemsListTableOptions = {
   table: TABLE_PUBLIC_ORDERS,
   fetchData: createFetcher('marketplace-order-items'),
   mapPropsToFilter: props => {
-    const filter: Record<string, string> = {provider_uuid: props.customer.uuid};
+    const filter: Record<string, string> = {
+      provider_uuid: props.customer.uuid,
+    };
     if (props.filter) {
       if (props.filter.offering) {
         filter.offering_uuid = props.filter.offering.uuid;

@@ -11,4 +11,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 const enhance = connect(null, mapDispatchToProps);
 
-export const ComparisonItemRemoveButtonContainer = enhance(ComparisonItemRemoveButton);
+export const ComparisonItemRemoveButtonContainer = enhance(
+  ComparisonItemRemoveButton,
+);

@@ -13,15 +13,15 @@ import { ShoppingCartSteps } from './ShoppingCartSteps';
 const CheckoutPage = () => (
   <Row>
     <Col lg={8}>
-      <ShoppingCartSteps/>
-      <ShoppingCart/>
+      <ShoppingCartSteps />
+      <ShoppingCart />
       <div className="display-flex justify-content-between m-t-md">
-        <BackButton/>
-        <ForwardButton/>
+        <BackButton />
+        <ForwardButton />
       </div>
     </Col>
     <Col lg={4}>
-      <ShoppingCartSidebar/>
+      <ShoppingCartSidebar />
     </Col>
   </Row>
 );

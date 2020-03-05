@@ -8,8 +8,15 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { mergeProps } from '../create/OfferingCreateContainer';
 import { updateOffering, FORM_ID } from '../store/constants';
-import { getStep, isOfferingManagementDisabled, isLoading, isLoaded, isErred } from '../store/selectors';
+import {
+  getStep,
+  isOfferingManagementDisabled,
+  isLoading,
+  isLoaded,
+  isErred,
+} from '../store/selectors';
 import { OfferingStep } from '../types';
+
 import { OfferingUpdateDialog } from './OfferingUpdateDialog';
 import { getInitialValues } from './utils';
 
@@ -23,11 +30,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateOffering: data => updateOffering({
-    ...data,
-    offeringUuid: $state.params.offering_uuid,
-  }, dispatch),
-  loadOffering: offeringUuid => dispatch(actions.loadOfferingStart(offeringUuid)),
+  updateOffering: data =>
+    updateOffering(
+      {
+        ...data,
+        offeringUuid: $state.params.offering_uuid,
+      },
+      dispatch,
+    ),
+  loadOffering: offeringUuid =>
+    dispatch(actions.loadOfferingStart(offeringUuid)),
   setStep: (step: OfferingStep) => dispatch(actions.setStep(step)),
 });
 

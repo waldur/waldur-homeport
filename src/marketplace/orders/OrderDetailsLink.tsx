@@ -8,9 +8,10 @@ import { OuterState } from '@waldur/workspace/types';
 const PureOrderDetailsLink = props => (
   <Link
     state={props.state}
-    params={{...props.params, order_uuid: props.order_uuid}}
+    params={{ ...props.params, order_uuid: props.order_uuid }}
     className={props.className}
-    onClick={props.onClick}>
+    onClick={props.onClick}
+  >
     {props.children}
   </Link>
 );
@@ -27,27 +28,29 @@ interface OwnProps {
   onClick?: () => void;
 }
 
-const connector = connect<StateProps, {}, OwnProps, OuterState>((state, ownProps) => {
-  const workspace = getWorkspace(state);
-  if (workspace === 'organization') {
-    return {
-      state: 'marketplace-order-details-customer',
-    };
-  } else if (workspace === 'project') {
-    return {
-      state: 'marketplace-order-details',
-      params: {
-        uuid: ownProps.project_uuid,
-      },
-    };
-  } else if (workspace === 'support') {
-    return {
-      state: 'marketplace-order-details-customer',
-      params: {
-        uuid: ownProps.customer_uuid,
-      },
-    };
-  }
-});
+const connector = connect<StateProps, {}, OwnProps, OuterState>(
+  (state, ownProps) => {
+    const workspace = getWorkspace(state);
+    if (workspace === 'organization') {
+      return {
+        state: 'marketplace-order-details-customer',
+      };
+    } else if (workspace === 'project') {
+      return {
+        state: 'marketplace-order-details',
+        params: {
+          uuid: ownProps.project_uuid,
+        },
+      };
+    } else if (workspace === 'support') {
+      return {
+        state: 'marketplace-order-details-customer',
+        params: {
+          uuid: ownProps.customer_uuid,
+        },
+      };
+    }
+  },
+);
 
 export const OrderDetailsLink = connector(PureOrderDetailsLink);

@@ -4,7 +4,7 @@ export default function openstackSnapshotSchedulesService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/openstacktenant-snapshot-schedules/';
-    }
+    },
   });
   return new ServiceClass();
 }

@@ -11,9 +11,11 @@ export const OfferingRuntimeState = (props: Props) => (
   <StateIndicator
     label={props.state}
     variant={
-      props.state === 'Erred' ? 'danger' :
-      props.state === 'Terminated' ? 'warning' :
-      'primary'
+      props.state === 'Erred'
+        ? 'danger'
+        : props.state === 'Terminated'
+        ? 'warning'
+        : 'primary'
     }
     active={['Creating', 'Updating', 'Terminating'].includes(props.state)}
   />

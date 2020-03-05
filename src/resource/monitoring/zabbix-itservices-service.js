@@ -4,7 +4,7 @@ export default function zabbixItservicesService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/zabbix-itservices/';
-    }
+    },
   });
   return new ServiceClass();
 }

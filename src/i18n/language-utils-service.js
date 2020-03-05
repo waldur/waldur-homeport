@@ -25,11 +25,10 @@ export default class LanguageUtilsService {
     const key = this.$translate.storageKey();
     const storage = this.$translate.storage();
     const code = storage.get(key);
-    const current = (
-      this.findLanguageByCode(code)
-        || this.findLanguageByCode(this.ENV.defaultLanguage)
-        || this.getChoices()[0]
-    );
+    const current =
+      this.findLanguageByCode(code) ||
+      this.findLanguageByCode(this.ENV.defaultLanguage) ||
+      this.getChoices()[0];
     this.setCurrentLanguage(current);
   }
 

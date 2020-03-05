@@ -17,9 +17,9 @@ interface StateProps {
 
 const PureMyOrderItemsFilter = (props: StateProps) => (
   <Row>
-    <ProjectFilter customer_uuid={props.customer.uuid}/>
-    <OrderStateFilter/>
-    <OrderTypeFilter/>
+    <ProjectFilter customer_uuid={props.customer.uuid} />
+    <OrderStateFilter />
+    <OrderTypeFilter />
   </Row>
 );
 
@@ -28,8 +28,10 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  reduxForm({form: 'MyOrderItemsFilter'}),
+  reduxForm({ form: 'MyOrderItemsFilter' }),
   connect(mapStateToProps),
 );
 
-export const MyOrderItemsFilter = enhance(PureMyOrderItemsFilter) as React.ComponentType<{}>;
+export const MyOrderItemsFilter = enhance(
+  PureMyOrderItemsFilter,
+) as React.ComponentType<{}>;

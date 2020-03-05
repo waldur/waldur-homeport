@@ -18,16 +18,25 @@ const initialProps = {
   handleToggleOpen: () => null,
   isOpen: false,
 };
-const renderWrapper = (props?) => shallow(<PureResourceAnalysisItem {...initialProps} {...props} />);
+const renderWrapper = (props?) =>
+  shallow(<PureResourceAnalysisItem {...initialProps} {...props} />);
 
-const getPieChartsListContent = (container: ShallowWrapper) => container.find('.resource-analysis-item__pie-chart-list .chart-content');
-const getPieChartsListTitle = (container: ShallowWrapper) => container.find('.resource-analysis-item__pie-chart-list .chart-title');
-const getBarChartsList = (container: ShallowWrapper) => container.find('.resource-analysis-item__bar-chart-list');
-const getBarChartsListTitle = (container: ShallowWrapper) => container.find('.resource-analysis-item__bar-chart-list .chart-title');
-const getPieCharts = (container: ShallowWrapper) => getPieChartsListContent(container).find(EChart);
-const getBarCharts = (container: ShallowWrapper) => getBarChartsList(container).find(EChart);
-const getTitle = (container: ShallowWrapper) => container.find('.resource-analysis-item__title');
-const getTooltip = (container: ShallowWrapper) => getTitle(container).find(Tooltip);
+const getPieChartsListContent = (container: ShallowWrapper) =>
+  container.find('.resource-analysis-item__pie-chart-list .chart-content');
+const getPieChartsListTitle = (container: ShallowWrapper) =>
+  container.find('.resource-analysis-item__pie-chart-list .chart-title');
+const getBarChartsList = (container: ShallowWrapper) =>
+  container.find('.resource-analysis-item__bar-chart-list');
+const getBarChartsListTitle = (container: ShallowWrapper) =>
+  container.find('.resource-analysis-item__bar-chart-list .chart-title');
+const getPieCharts = (container: ShallowWrapper) =>
+  getPieChartsListContent(container).find(EChart);
+const getBarCharts = (container: ShallowWrapper) =>
+  getBarChartsList(container).find(EChart);
+const getTitle = (container: ShallowWrapper) =>
+  container.find('.resource-analysis-item__title');
+const getTooltip = (container: ShallowWrapper) =>
+  getTitle(container).find(Tooltip);
 
 describe('PureResourceAnalysisItem', () => {
   it('renders pie charts', () => {
@@ -37,7 +46,9 @@ describe('PureResourceAnalysisItem', () => {
   });
 
   it('renders classname on exceeded quota title', () => {
-    const wrapper = renderWrapper({ pieChartsData: [pieCharts.limitedExceeded] });
+    const wrapper = renderWrapper({
+      pieChartsData: [pieCharts.limitedExceeded],
+    });
     expect(getPieChartsListTitle(wrapper).hasClass('text-danger')).toBe(true);
   });
 
@@ -63,7 +74,11 @@ describe('PureResourceAnalysisItem', () => {
 
   it('renders tooltip and class name on exceeded project title', () => {
     const wrapper = renderWrapper();
-    expect(getTitle(wrapper).find('h4').hasClass('text-danger')).toBe(true);
+    expect(
+      getTitle(wrapper)
+        .find('h4')
+        .hasClass('text-danger'),
+    ).toBe(true);
     expect(getTooltip(wrapper).length).toBe(1);
   });
 

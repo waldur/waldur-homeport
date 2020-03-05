@@ -18,7 +18,9 @@ interface OfferingDetailsProps {
 }
 
 export const OfferingDetails = (props: OfferingDetailsProps) => {
-  const CheckoutSummaryComponent = getCheckoutSummaryComponent(props.offering.type);
+  const CheckoutSummaryComponent = getCheckoutSummaryComponent(
+    props.offering.type,
+  );
   return (
     <>
       {props.offering.description && (
@@ -37,16 +39,15 @@ export const OfferingDetails = (props: OfferingDetailsProps) => {
           />
         </Col>
         <Col md={3}>
-          <h3 className="header-bottom-border">
-            {translate('Order summary')}
-          </h3>
-          {CheckoutSummaryComponent ?
-            <CheckoutSummaryComponent {...props} /> :
-            <OrderSummary offering={props.offering}/>
-          }
+          <h3 className="header-bottom-border">{translate('Order summary')}</h3>
+          {CheckoutSummaryComponent ? (
+            <CheckoutSummaryComponent {...props} />
+          ) : (
+            <OrderSummary offering={props.offering} />
+          )}
         </Col>
       </Row>
-      <OfferingTabsComponent tabs={props.tabs}/>
+      <OfferingTabsComponent tabs={props.tabs} />
     </>
   );
 };

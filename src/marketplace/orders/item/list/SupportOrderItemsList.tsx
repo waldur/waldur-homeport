@@ -39,9 +39,6 @@ const mapStateToProps = state => ({
   customer: getCustomer(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const SupportOrderItemsList = enhance(TableComponent);

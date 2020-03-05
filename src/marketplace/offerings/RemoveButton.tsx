@@ -11,7 +11,8 @@ export const RemoveButton = withTranslation((props: RemoveButtonProps) => (
     type="button"
     className="close"
     aria-label={props.translate('Remove')}
-    onClick={props.onClick}>
+    onClick={props.onClick}
+  >
     <span aria-hidden="true">&times;</span>
   </button>
 ));

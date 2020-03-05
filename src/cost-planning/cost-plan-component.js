@@ -3,8 +3,8 @@ import template from './cost-plan-component.html';
 const costPlanComponent = {
   template,
   bindings: {
-    component: '<'
-  }
+    component: '<',
+  },
 };
 
 export default costPlanComponent;

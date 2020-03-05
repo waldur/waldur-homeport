@@ -9,7 +9,7 @@ import { Field } from '@waldur/resource/summary';
 import { getConfig, getNativeNameVisible } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-interface  CustomerDetailsProps extends TranslateProps {
+interface CustomerDetailsProps extends TranslateProps {
   customer: Customer;
   organizationSubnetsVisible: boolean;
   organizationDomainVisible: boolean;
@@ -17,25 +17,20 @@ interface  CustomerDetailsProps extends TranslateProps {
 }
 
 export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
-  translate, customer, organizationSubnetsVisible, nativeNameVisible, organizationDomainVisible,
+  translate,
+  customer,
+  organizationSubnetsVisible,
+  nativeNameVisible,
+  organizationDomainVisible,
 }) => (
   <Panel>
-    <Panel.Heading>
-      {translate('Organization details')}
-    </Panel.Heading>
+    <Panel.Heading>{translate('Organization details')}</Panel.Heading>
 
     <Panel.Body>
       <dl className="dl-horizontal resource-details-table">
+        <Field label={translate('Name')} value={customer.display_name} />
 
-        <Field
-          label={translate('Name')}
-          value={customer.display_name}
-        />
-
-        <Field
-          label={translate('Organization type')}
-          value={customer.type}
-        />
+        <Field label={translate('Organization type')} value={customer.type} />
 
         {nativeNameVisible && (
           <Field
@@ -63,7 +58,10 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
 
         <Field
           label={translate('Accounting start date')}
-          value={customer.accounting_start_date && formatDateTime(customer.accounting_start_date)}
+          value={
+            customer.accounting_start_date &&
+            formatDateTime(customer.accounting_start_date)
+          }
         />
 
         <Field
@@ -76,20 +74,14 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
           value={customer.address || customer.contact_details}
         />
 
-        <Field
-          label={translate('Contact e-mail')}
-          value={customer.email}
-        />
+        <Field label={translate('Contact e-mail')} value={customer.email} />
 
         <Field
           label={translate('Contact phone')}
           value={customer.phone_number}
         />
 
-        <Field
-          label={translate('VAT code')}
-          value={customer.vat_code}
-        />
+        <Field label={translate('VAT code')} value={customer.vat_code} />
 
         <Field
           label={translate('VAT rate')}
@@ -97,24 +89,17 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
         />
 
         <Field
-          label={translate('Subnets from where connection to self-service is allowed.')}
+          label={translate(
+            'Subnets from where connection to self-service is allowed.',
+          )}
           value={organizationSubnetsVisible && customer.access_subnets}
         />
 
-        <Field
-          label={translate('Country')}
-          value={customer.country_name}
-        />
+        <Field label={translate('Country')} value={customer.country_name} />
 
-        <Field
-          label={translate('Postal code')}
-          value={customer.postal}
-        />
+        <Field label={translate('Postal code')} value={customer.postal} />
 
-        <Field
-          label={translate('Bank name')}
-          value={customer.bank_name}
-        />
+        <Field label={translate('Bank name')} value={customer.bank_name} />
 
         <Field
           label={translate('Bank account')}
@@ -131,6 +116,8 @@ const mapStateToProps = state => ({
   nativeNameVisible: getNativeNameVisible(state),
 });
 
-export const CustomerDetails = connect(mapStateToProps)(withTranslation(PureCustomerDetails));
+export const CustomerDetails = connect(mapStateToProps)(
+  withTranslation(PureCustomerDetails),
+);
 
 export default connectAngularComponent(CustomerDetails, ['customer']);

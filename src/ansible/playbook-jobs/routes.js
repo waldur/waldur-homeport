@@ -12,8 +12,8 @@ export default function ansibleRoutes($stateProvider) {
       template: '<application-list></application-list>',
       data: {
         pageTitle: gettext('Applications'),
-        feature: 'ansible'
-      }
+        feature: 'ansible',
+      },
     })
 
     .state('project.resources.ansible.details', {
@@ -23,7 +23,6 @@ export default function ansibleRoutes($stateProvider) {
         pageTitle: gettext('Application details'),
         pageClass: 'gray-bg',
         feature: 'ansible',
-      }
-    })
-  ;
+      },
+    });
 }

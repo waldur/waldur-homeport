@@ -3,7 +3,10 @@ import { Field } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/services';
 import { Limits } from '@waldur/marketplace/common/registry';
-import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
+import {
+  parseIntField,
+  formatIntField,
+} from '@waldur/marketplace/common/utils';
 import { getResourceComponentValidator } from '@waldur/marketplace/offerings/store/limits';
 
 import { ComponentRowType } from './connector';
@@ -30,22 +33,16 @@ const CellWrapper = props => (
   </td>
 );
 
-export const ComponentRow: React.FC<Props> = ({component, limits}) => (
+export const ComponentRow: React.FC<Props> = ({ component, limits }) => (
   <tr>
     <td>
-      <p className="form-control-static">
-        {component.name}
-      </p>
+      <p className="form-control-static">{component.name}</p>
     </td>
     <td>
-      <p className="form-control-static">
-        {component.usage}
-      </p>
+      <p className="form-control-static">{component.usage}</p>
     </td>
     <td>
-      <p className="form-control-static">
-        {component.limit}
-      </p>
+      <p className="form-control-static">{component.limit}</p>
     </td>
     <Field
       name={`limits.${component.type}`}
@@ -57,9 +54,7 @@ export const ComponentRow: React.FC<Props> = ({component, limits}) => (
       limits={limits}
     />
     {component.prices.map((price, innerIndex) => (
-      <td key={innerIndex}>
-        {defaultCurrency(price)}
-      </td>
+      <td key={innerIndex}>{defaultCurrency(price)}</td>
     ))}
   </tr>
 );

@@ -11,7 +11,8 @@ export default function createAction(ctx): ResourceAction {
     component: 'marketplaceResourceTerminateDialog',
     title: translate('Terminate'),
     useResolve: true,
-    isVisible: marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
+    isVisible:
+      marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
     validators: [validateState('OK', 'Erred')],
   };
 }

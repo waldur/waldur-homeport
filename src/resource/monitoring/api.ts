@@ -2,11 +2,9 @@ import { getById, getList, post, deleteById } from '@waldur/core/api';
 
 import { ZabbixLinkApi, ZabbixTemplateApi } from './types';
 
-export const fetchHost = (uuid: string) =>
-  getById('/zabbix-hosts/', uuid);
+export const fetchHost = (uuid: string) => getById('/zabbix-hosts/', uuid);
 
-export const deleteHost = (uuid: string) =>
-  deleteById('/zabbix-hosts/', uuid);
+export const deleteHost = (uuid: string) => deleteById('/zabbix-hosts/', uuid);
 
 export const loadLinks: ZabbixLinkApi = request =>
   getList('/zabbix-openstack-links/', request);

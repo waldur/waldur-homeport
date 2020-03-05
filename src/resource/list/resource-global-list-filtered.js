@@ -9,7 +9,7 @@ const RESOURCE_STATES = [
   'Update Scheduled',
   'Updating',
   'Deletion Scheduled',
-  'Deleting'
+  'Deleting',
 ];
 
 const resourceGlobalListFiltered = {
@@ -39,7 +39,7 @@ const resourceGlobalListFiltered = {
             display_name: option.name,
             value: option.uuid,
             img_src: getServiceIcon(option.type),
-            type: option.type
+            type: option.type,
           });
           return acc;
         }, []);
@@ -49,7 +49,7 @@ const resourceGlobalListFiltered = {
     getOptions(choices) {
       return choices.sort().map(choice => ({
         display_name: choice.split('.').join(' '),
-        value: choice
+        value: choice,
       }));
     }
 
@@ -84,8 +84,7 @@ const resourceGlobalListFiltered = {
         delete this.filter.external_ip;
       }
     }
-
-  }
+  },
 };
 
 export default resourceGlobalListFiltered;

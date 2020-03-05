@@ -17,12 +17,15 @@ interface Props extends TranslateProps {
 }
 
 const PureEventDetailsDialog = (props: Props) => (
-  <ModalDialog title={props.translate('Event details')} footer={<CloseDialogButton/>}>
+  <ModalDialog
+    title={props.translate('Event details')}
+    footer={<CloseDialogButton />}
+  >
     <EventDetailsTable
       event={props.resolve.event}
       translate={props.translate}
       isStaffOrSupport={props.isStaffOrSupport}
-      />
+    />
   </ModalDialog>
 );
 
@@ -30,10 +33,7 @@ const mapStateToProps = state => ({
   isStaffOrSupport: isStaffOrSupport(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  withTranslation,
-);
+const enhance = compose(connect(mapStateToProps), withTranslation);
 
 export const EventDetailsDialog = enhance(PureEventDetailsDialog);
 

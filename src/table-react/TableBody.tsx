@@ -5,7 +5,7 @@ import { Column } from './types';
 interface TableBodyProps {
   rows: any[];
   columns: Column[];
-  expandableRow?: React.ComponentType<{row: any}>;
+  expandableRow?: React.ComponentType<{ row: any }>;
   toggleRow(row: any): void;
   toggled: object;
 }
@@ -20,7 +20,13 @@ const TableCells = ({ row, columns }) => (
   </>
 );
 
-export const TableBody = ({ rows, columns, expandableRow, toggleRow, toggled }: TableBodyProps) => (
+export const TableBody = ({
+  rows,
+  columns,
+  expandableRow,
+  toggleRow,
+  toggled,
+}: TableBodyProps) => (
   <tbody>
     {rows.map((row, rowIndex) => (
       <React.Fragment key={rowIndex}>
@@ -28,18 +34,18 @@ export const TableBody = ({ rows, columns, expandableRow, toggleRow, toggled }: 
           {expandableRow && (
             <td onClick={() => toggleRow(row.uuid)}>
               {toggled[row.uuid] ? (
-                <i className="fa fa-chevron-down"/>
+                <i className="fa fa-chevron-down" />
               ) : (
-                <i className="fa fa-chevron-right"/>
+                <i className="fa fa-chevron-right" />
               )}
             </td>
           )}
-          <TableCells row={row} columns={columns}/>
+          <TableCells row={row} columns={columns} />
         </tr>
         {expandableRow && toggled[row.uuid] && (
           <tr>
             <td colSpan={columns.length + 1}>
-              {React.createElement(expandableRow, {row})}
+              {React.createElement(expandableRow, { row })}
             </td>
           </tr>
         )}

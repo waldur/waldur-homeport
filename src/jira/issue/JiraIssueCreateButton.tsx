@@ -12,12 +12,13 @@ const PureJiraIssueCreateButton = props => {
     <ActionButton
       title={translate('Create request')}
       action={onClick}
-      icon="fa fa-plus"/>
+      icon="fa fa-plus"
+    />
   );
 };
 
 const createRequestDialog = project =>
-  openModalDialog('jiraIssueCreateDialog', {resolve: {project}});
+  openModalDialog('jiraIssueCreateDialog', { resolve: { project } });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: () => dispatch(createRequestDialog(ownProps.project)),

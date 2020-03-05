@@ -9,7 +9,8 @@ const initialProps = {
   resource: {},
   translate,
 };
-const renderWrapper = (props?) => shallow(<PureResourceSummaryButton {...initialProps} {...props} />);
+const renderWrapper = (props?) =>
+  shallow(<PureResourceSummaryButton {...initialProps} {...props} />);
 
 const getButton = (container: ShallowWrapper) => container.find('.btn');
 

@@ -13,17 +13,14 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Flavor } from '@waldur/openstack/openstack-instance/types';
-import { formatVolumeTypeChoices } from '@waldur/openstack/openstack-instance/utils';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
-import { getFlavors, getSubnets, getVolumeTypes } from '../api';
 import { NodeFlavorGroup } from '../NodeFlavorGroup';
 import { NodeRoleGroup } from '../NodeRoleGroup';
+import { NodeStorageGroup } from '../NodeStorageGroup';
 import { SubnetGroup } from '../SubnetGroup';
-import { SystemVolumeSizeGroup } from '../SystemVolumeSizeGroup';
-import { SystemVolumeTypeGroup } from '../SystemVolumeTypeGroup';
-import { formatSubnetOption, formatFlavorOption } from '../utils';
+import { loadData } from '../utils';
 
 interface OwnProps {
   resolve: { cluster: any };
@@ -41,44 +38,47 @@ interface FormData {
   };
 }
 
-async function loadData(cluster) {
-  const params = {settings: cluster.tenant_settings};
-  const flavors = await getFlavors(params);
-  const subnets = await getSubnets(params);
-  const volumeTypes = await getVolumeTypes(params);
-  const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
-  return {
-    subnets: subnets.map(formatSubnetOption),
-    flavors: flavors.map(formatFlavorOption),
-    volumeTypes: volumeTypeChoices,
-  };
-}
-
 const defaultProps = {
   labelClassName: 'control-label col-sm-3',
   valueClassName: 'col-sm-9',
 };
 
+const serializeDataVolume = ({ size, ...volumeRest }) => ({
+  ...volumeRest,
+  size: size * 1024,
+});
+
+const serializeNode = (cluster, formData) => ({
+  cluster: cluster.url,
+  roles: formData.roles.filter(role => role),
+  subnet: formData.attributes.subnet,
+  flavor: formData.flavor.url,
+  system_volume_size: formData.system_volume_size * 1024,
+  system_volume_type: formData.system_volume_type,
+  data_volumes: (formData.data_volumes || []).map(serializeDataVolume),
+});
+
 export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   form: 'RancherNodeCreate',
 })(props => {
-  const {call, state} = useQuery(loadData, props.resolve.cluster);
+  const { call, state } = useQuery(
+    loadData,
+    props.resolve.cluster.tenant_settings,
+  );
   React.useEffect(call, []);
 
   const dispatch = useDispatch();
 
   const createNode = React.useCallback(async (formData: FormData) => {
     try {
-      await post('/rancher-nodes/', {
-        cluster: props.resolve.cluster.url,
-        roles: formData.roles.filter(role => role),
-        subnet: formData.attributes.subnet,
-        flavor: formData.flavor.url,
-        system_volume_size: formData.system_volume_size * 1024,
-        system_volume_type: formData.system_volume_type,
-      });
+      await post(
+        '/rancher-nodes/',
+        serializeNode(props.resolve.cluster, formData),
+      );
     } catch (error) {
-      const errorMessage = `${translate('Unable to create node.')} ${format(error)}`;
+      const errorMessage = `${translate('Unable to create node.')} ${format(
+        error,
+      )}`;
       dispatch(showError(errorMessage));
       return;
     }
@@ -92,7 +92,7 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
         title={translate('Create node')}
         footer={
           <>
-            <CloseDialogButton/>
+            <CloseDialogButton />
             <SubmitButton
               disabled={state.loading || props.invalid || props.submitting}
               submitting={props.submitting}
@@ -101,14 +101,23 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
           </>
         }
       >
-        {(state.loading || !state.loaded) ? <LoadingSpinner/> :
-        state.error ? <p>{translate('Unable to load data.')}</p> : (
+        {state.loading || !state.loaded ? (
+          <LoadingSpinner />
+        ) : state.error ? (
+          <p>{translate('Unable to load data.')}</p>
+        ) : (
           <>
-            <NodeRoleGroup {...defaultProps}/>
-            <NodeFlavorGroup options={state.data.flavors} {...defaultProps}/>
-            <SubnetGroup options={state.data.subnets} {...defaultProps}/>
-            <SystemVolumeSizeGroup {...defaultProps}/>
-            <SystemVolumeTypeGroup {...defaultProps} volumeTypes={state.data.volumeTypes}/>
+            <NodeRoleGroup {...defaultProps} />
+            <NodeFlavorGroup options={state.data.flavors} {...defaultProps} />
+            <SubnetGroup options={state.data.subnets} {...defaultProps} />
+            <NodeStorageGroup
+              volumeTypes={state.data.volumeTypes}
+              mountPoints={state.data.mountPoints}
+              defaultVolumeType={state.data.defaultVolumeType}
+              smOffset={3}
+              sm={9}
+              {...defaultProps}
+            />
           </>
         )}
       </ModalDialog>

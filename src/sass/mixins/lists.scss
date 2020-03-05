@@ -1,17 +1,17 @@
 @mixin clear-list {
-    margin: 0;
-    padding: 0;
-    > li {
-        list-style: none;
-    }
+  margin: 0;
+  padding: 0;
+  > li {
+    list-style: none;
+  }
 }
 
 @mixin clear-list-inline {
-    margin: 0;
-    padding: 0;
-    > li {
-        list-style: none;
-        display: inline-block;
-        vertical-align: middle;
-    }
+  margin: 0;
+  padding: 0;
+  > li {
+    list-style: none;
+    display: inline-block;
+    vertical-align: middle;
+  }
 }

@@ -1,7 +1,7 @@
 // @ngInject
 export default function SlurmPackagesService(baseServiceClass) {
   let ServiceClass = baseServiceClass.extend({
-    init:function() {
+    init: function() {
       this._super();
       this.endpoint = '/slurm-packages/';
     },

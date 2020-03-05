@@ -37,34 +37,41 @@ export const getScopeChartOptions = (dates: string[], values: Value[]) => ({
   ],
 });
 
-export const getResourceChartOptions = (dates, usages, limits, units: string) => {
-  const series = limits ? [
-    {
-      name: translate('Usage'),
-      type: 'line',
-      stack: 'Quota',
-      data: usages,
-      lineStyle: { color: '#91c7ae' },
-      itemStyle: { color: '#91c7ae' },
-      areaStyle: { color: '#91c7ae' },
-    },
-    {
-      name: translate('Limit'),
-      type: 'line',
-      stack: 'Quota',
-      data: limits,
-      lineStyle: { color: '#d48265' },
-      itemStyle: { color: '#d48265' },
-      areaStyle: { color: '#d48265' },
-    },
-  ] : [
-    {
-      type: 'bar',
-      data: usages,
-      itemStyle: { color: '#91c7ae' },
-      barMinHeight: 5,
-    },
-  ];
+export const getResourceChartOptions = (
+  dates,
+  usages,
+  limits,
+  units: string,
+) => {
+  const series = limits
+    ? [
+        {
+          name: translate('Usage'),
+          type: 'line',
+          stack: 'Quota',
+          data: usages,
+          lineStyle: { color: '#91c7ae' },
+          itemStyle: { color: '#91c7ae' },
+          areaStyle: { color: '#91c7ae' },
+        },
+        {
+          name: translate('Limit'),
+          type: 'line',
+          stack: 'Quota',
+          data: limits,
+          lineStyle: { color: '#d48265' },
+          itemStyle: { color: '#d48265' },
+          areaStyle: { color: '#d48265' },
+        },
+      ]
+    : [
+        {
+          type: 'bar',
+          data: usages,
+          itemStyle: { color: '#91c7ae' },
+          barMinHeight: 5,
+        },
+      ];
   return {
     tooltip: {
       trigger: 'axis',

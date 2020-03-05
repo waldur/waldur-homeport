@@ -18,13 +18,15 @@ interface CalendarEventModalProps {
     event: EventInput & {
       extendedProps: {
         type: string;
-      }
-    }
+      };
+    };
   };
 }
 
-export class CalendarEventModal extends React.Component<CalendarEventModalProps, EventInput> {
-
+export class CalendarEventModal extends React.Component<
+  CalendarEventModalProps,
+  EventInput
+> {
   constructor(props) {
     super(props);
     const { event } = props.modalProps;
@@ -53,9 +55,10 @@ export class CalendarEventModal extends React.Component<CalendarEventModalProps,
   render() {
     const { closeModal, isOpen, modalProps: {event} } = this.props;
     const { start, end, allDay, title } = this.state;
+
     return (
       <Modal show={isOpen} onHide={closeModal}>
-        <Modal.Header style={{backgroundColor: '#1ab394', color: '#f3f3f4'}}>
+        <Modal.Header style={{ backgroundColor: '#1ab394', color: '#f3f3f4' }}>
           <h2 className="col-sm-offset-2 col-sm-9">
             {event.extendedProps.type === 'availability' ? translate('Edit availability') : translate('Edit booking')}
           </h2>
@@ -106,6 +109,7 @@ export class CalendarEventModal extends React.Component<CalendarEventModalProps,
                 className="col-sm-offset-1 col-sm-2"
                 style={{borderColor: 'transparent'}}
                 onClick={closeModal}>
+              >
                 {translate('Cancel')}
               </Button>
               <Button

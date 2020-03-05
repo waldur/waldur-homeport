@@ -12,7 +12,11 @@ interface TypeListDialogProps {
 }
 
 export const TypeListDialog = (props: TypeListDialogProps) => (
-  <ModalDialog title={props.dialogTitle} bodyClassName="types-list-dialog" footer={<CloseDialogButton/>}>
+  <ModalDialog
+    title={props.dialogTitle}
+    bodyClassName="types-list-dialog"
+    footer={<CloseDialogButton />}
+  >
     {props.types.map((type, i) => (
       <div key={i}>
         <span className="left-padding">{type.title}</span>

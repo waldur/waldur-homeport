@@ -20,20 +20,26 @@ import { OrderItemSummary } from './OrderItemSummary';
 import { OrderItemTerminateButton } from './OrderItemTerminateButton';
 import { OrderItemTypeIndicator } from './OrderItemTypeIndicator';
 
-export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): void}) => {
+export const OrderItemDetails = (
+  props: OrderItemDetailsProps & { loadData(): void },
+) => {
   const DetailsComponent = getDetailsComponent(props.orderItem.offering_type);
   // Refresh order item details each 5 seconds until it is switched from pending state to terminal state
-  const pollingDelay = ['pending', 'executing'].includes(props.orderItem.state) ? 5000 : null;
+  const pollingDelay = ['pending', 'executing'].includes(props.orderItem.state)
+    ? 5000
+    : null;
   useInterval(props.loadData, pollingDelay);
   return (
     <Row>
       <Col md={9}>
-        <PanelGroup accordion={true} id="order-item-details" defaultActiveKey="summary">
+        <PanelGroup
+          accordion={true}
+          id="order-item-details"
+          defaultActiveKey="summary"
+        >
           <Panel eventKey="summary">
             <Panel.Heading>
-              <Panel.Title toggle={true}>
-                {translate('Summary')}
-              </Panel.Title>
+              <Panel.Title toggle={true}>{translate('Summary')}</Panel.Title>
             </Panel.Heading>
             <Panel.Body collapsible={true}>
               <OrderItemDetailsField label={translate('Description')}>
@@ -43,7 +49,7 @@ export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): voi
                 />
               </OrderItemDetailsField>
               <OrderItemDetailsField label={translate('Type')}>
-                <OrderItemTypeIndicator orderItem={props.orderItem}/>
+                <OrderItemTypeIndicator orderItem={props.orderItem} />
               </OrderItemDetailsField>
               <OrderItemDetailsField label={translate('State')}>
                 {titleCase(props.orderItem.state)}
@@ -55,7 +61,9 @@ export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): voi
               )}
               {props.orderItem.resource_uuid && (
                 <OrderItemDetailsField label={translate('Resource')}>
-                  <ResourceDetailsLink item={props.orderItem as ResourceReference}>
+                  <ResourceDetailsLink
+                    item={props.orderItem as ResourceReference}
+                  >
                     {translate('Resource link')}
                   </ResourceDetailsLink>
                 </OrderItemDetailsField>
@@ -74,7 +82,9 @@ export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): voi
             <Panel eventKey="plan">
               <Panel.Heading>
                 <Panel.Title toggle={true}>
-                {props.orderItem.type === 'Create' ? translate('New plan') : translate('Plan')}
+                  {props.orderItem.type === 'Create'
+                    ? translate('New plan')
+                    : translate('Plan')}
                 </Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible={true}>
@@ -88,19 +98,25 @@ export const OrderItemDetails = (props: OrderItemDetailsProps & {loadData(): voi
           )}
           <Panel eventKey="details">
             <Panel.Heading>
-              <Panel.Title toggle={true}>
-                {translate('Details')}
-              </Panel.Title>
+              <Panel.Title toggle={true}>{translate('Details')}</Panel.Title>
             </Panel.Heading>
             <Panel.Body collapsible={true}>
-              <OrderItemDetailsHeader orderItem={props.orderItem} offering={props.offering}/>
-              {DetailsComponent && <DetailsComponent orderItem={props.orderItem} offering={props.offering}/>}
+              <OrderItemDetailsHeader
+                orderItem={props.orderItem}
+                offering={props.offering}
+              />
+              {DetailsComponent && (
+                <DetailsComponent
+                  orderItem={props.orderItem}
+                  offering={props.offering}
+                />
+              )}
             </Panel.Body>
           </Panel>
         </PanelGroup>
       </Col>
       <Col md={3}>
-        <OrderItemDetailsSummary offering={props.offering}/>
+        <OrderItemDetailsSummary offering={props.offering} />
       </Col>
     </Row>
   );

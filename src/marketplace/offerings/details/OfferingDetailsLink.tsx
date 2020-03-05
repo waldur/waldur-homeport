@@ -9,7 +9,7 @@ interface OfferingDetailsLinkProps {
 export const OfferingDetailsLink: React.FC<OfferingDetailsLinkProps> = props => (
   <Link
     state="marketplace-offering-details"
-    params={{offering_uuid: props.offering_uuid}}
+    params={{ offering_uuid: props.offering_uuid }}
   >
     {props.children}
   </Link>

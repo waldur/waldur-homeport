@@ -11,9 +11,7 @@ interface Props {
 
 export const AccountingPeriodFilter = (props: Props) => (
   <div className="form-group col-sm-3">
-    <label className="control-label">
-      {translate('Accounting period')}
-    </label>
-    <AccountingPeriodField options={props.options}/>
+    <label className="control-label">{translate('Accounting period')}</label>
+    <AccountingPeriodField options={props.options} />
   </div>
 );

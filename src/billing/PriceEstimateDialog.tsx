@@ -21,7 +21,7 @@ const PriceEstimateDialog = (props: PriceEstimateDialogProps) => (
   <ModalDialog
     title={props.translate('Price estimate details')}
     footer={<CloseDialogButton />}
->
+  >
     <table className="table table-bordered">
       <thead>
         <tr>
@@ -43,4 +43,6 @@ const PriceEstimateDialog = (props: PriceEstimateDialogProps) => (
   </ModalDialog>
 );
 
-export default connectAngularComponent(withTranslation(PriceEstimateDialog), ['resolve']);
+export default connectAngularComponent(withTranslation(PriceEstimateDialog), [
+  'resolve',
+]);

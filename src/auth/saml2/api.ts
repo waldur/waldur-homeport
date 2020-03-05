@@ -5,8 +5,9 @@ export const getSaml2IdentityProviders = (name: string) => {
   const params = {
     params: { name: name || '' },
   };
-  return $http.get(`${ENV.apiEndpoint}api-auth/saml2/providers`, params)
-       .then(({ data }) => Array.isArray(data) ? data : []);
+  return $http
+    .get(`${ENV.apiEndpoint}api-auth/saml2/providers`, params)
+    .then(({ data }) => (Array.isArray(data) ? data : []));
 };
 
 export const loginSaml2 = (provider: string) =>

@@ -5,7 +5,13 @@ export default {
   template: template,
   controller: class SiteHeader {
     // @ngInject
-    constructor(authService, usersService, ENV, NavigationUtilsService, $scope) {
+    constructor(
+      authService,
+      usersService,
+      ENV,
+      NavigationUtilsService,
+      $scope,
+    ) {
       this.authService = authService;
       this.headerLogo = ENV.loginLogo;
       this.usersService = usersService;
@@ -25,12 +31,14 @@ export default {
     checkUser() {
       this.isAuthenticated = this.authService.isAuthenticated();
       if (this.isAuthenticated) {
-        this.usersService.isCurrentUserValid().then(result => this.isValidUser = result);
+        this.usersService
+          .isCurrentUserValid()
+          .then(result => (this.isValidUser = result));
       }
     }
 
     logout() {
       this.authService.logout();
     }
-  }
+  },
 };

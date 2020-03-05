@@ -20,21 +20,24 @@ const SelectTenantField = props => (
   />
 );
 
-const loadData = projectId => getAll(
-  '/openstacktenant-service-project-link/',
-  {params: {project_uuid: projectId}}
-);
+const loadData = projectId =>
+  getAll('/openstacktenant-service-project-link/', {
+    params: { project_uuid: projectId },
+  });
 
 export const TenantSelector = props => {
   if (!props.project) {
     return null;
   }
 
-  const {state: resourceProps, call: loadResource} = useQuery(loadData, props.project.uuid);
+  const { state: resourceProps, call: loadResource } = useQuery(
+    loadData,
+    props.project.uuid,
+  );
   React.useEffect(loadResource, [props.project]);
 
   if (resourceProps.loading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   if (resourceProps.erred) {
@@ -47,7 +50,8 @@ export const TenantSelector = props => {
         labelClassName="control-label col-sm-3"
         valueClassName="col-sm-9"
         required={true}
-        label={translate('Tenant')}>
+        label={translate('Tenant')}
+      >
         <Field
           name="attributes.tenant_settings"
           validate={required}

@@ -12,7 +12,8 @@ export const getHistoryQuotas = state => state.analytics.quotasHistory;
 export const getTenants = state => state.analytics.tenants;
 export const getProjectFromProps = (_, props) => props.project;
 export const getLocale = state => state.locale;
-export const getVisibleQuotasFilter = state => quotas => quotas.filter(quota => isVisible(state, quota.name));
+export const getVisibleQuotasFilter = state => quotas =>
+  quotas.filter(quota => isVisible(state, quota.name));
 
 export const getQuotasSelector = createSelector(
   getTenants,
@@ -22,7 +23,7 @@ export const getQuotasSelector = createSelector(
       .filter(tenant => tenant.project_uuid === project.uuid)
       .map(tenant => tenant.quotas);
     return utils.combineQuotas(quotas);
-  }
+  },
 );
 
 export const getHistoryQuotasSelector = createSelector(
@@ -30,11 +31,14 @@ export const getHistoryQuotasSelector = createSelector(
   getHistoryQuotas,
   getProjectFromProps,
   (tenants, historyQuotas, project) => {
-    const resultingTenants = tenants.filter(tenant => tenant.project_uuid === project.uuid);
+    const resultingTenants = tenants.filter(
+      tenant => tenant.project_uuid === project.uuid,
+    );
     const resultingQuotas = resultingTenants.map(tenant =>
-      utils.setHistoryQuotasName(dictToList(historyQuotas[tenant.uuid])));
+      utils.setHistoryQuotasName(dictToList(historyQuotas[tenant.uuid])),
+    );
     return utils.combineHistoryQuotas(resultingQuotas);
-  }
+  },
 );
 
 export const getProjectsSelector = createSelector(
@@ -42,7 +46,10 @@ export const getProjectsSelector = createSelector(
   getSearchValue,
   getLocale,
   (projects, searchValue, locale) => {
-    const resultingProjects = projects.filter(project => project.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1);
+    const resultingProjects = projects.filter(
+      project =>
+        project.name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1,
+    );
     return utils.sortProjectsByName(resultingProjects, locale);
   },
 );
@@ -79,7 +86,9 @@ export const getBarChartsDataSelector = createSelector(
   getMaxSizeNamesSelector,
   getLocale,
   (quotas, fileSizeNames, locale) => {
-    if (!quotas) { return []; }
+    if (!quotas) {
+      return [];
+    }
     let resultingQuotas = utils.setHistoryQuotasName(quotas);
     resultingQuotas = utils.addRegistryConfig(resultingQuotas);
     resultingQuotas = resultingQuotas.map(quota => ({
@@ -99,10 +108,10 @@ export const getExceededQuotasSelector = createSelector(
     resultingQuotas = quotasVisibilityFilter(resultingQuotas);
     resultingQuotas = utils.addRegistryConfig(resultingQuotas);
     return utils.getExceededQuotas(resultingQuotas);
-  }
+  },
 );
 
 export const getBarChartsLoadingSelector = createSelector(
   getHistoryQuotasSelector,
-  quotas => quotas ? false : true,
+  quotas => (quotas ? false : true),
 );

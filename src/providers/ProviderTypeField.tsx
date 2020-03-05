@@ -7,7 +7,7 @@ import { getServiceIcon } from '@waldur/providers/registry';
 const providerRenderer = optionRenderer({
   labelKey: 'name',
   iconKey: provider => getServiceIcon(provider.type),
-  imgStyle: {width: 19},
+  imgStyle: { width: 19 },
 });
 
 export const ProviderTypeField = props => (

@@ -16,19 +16,16 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
     <tr className="gray-bg">
       <th>{props.section.title}</th>
       {props.items.map((item, index) => (
-        <th key={index}>
-          {item.name}
-        </th>
+        <th key={index}>{item.name}</th>
       ))}
-      {props.items.length < COMPARISON_COLUMNS && range(COMPARISON_COLUMNS - props.items.length).map(index =>
-        <td key={index}/>
-      )}
+      {props.items.length < COMPARISON_COLUMNS &&
+        range(COMPARISON_COLUMNS - props.items.length).map(index => (
+          <td key={index} />
+        ))}
     </tr>
     {props.section.attributes.map((attribute, index1) => (
       <tr key={index1}>
-        <td>
-          {attribute.title}
-        </td>
+        <td>{attribute.title}</td>
         {props.items.map((item, index2) => (
           <td key={index2}>
             <AttributeCell
@@ -37,9 +34,10 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
             />
           </td>
         ))}
-        {props.items.length < COMPARISON_COLUMNS && range(COMPARISON_COLUMNS - props.items.length).map(index =>
-          <td key={index}/>
-        )}
+        {props.items.length < COMPARISON_COLUMNS &&
+          range(COMPARISON_COLUMNS - props.items.length).map(index => (
+            <td key={index} />
+          ))}
       </tr>
     ))}
   </>

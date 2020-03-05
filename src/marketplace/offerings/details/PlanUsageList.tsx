@@ -44,7 +44,7 @@ export const TableComponent = props => {
       verboseName={translate('offerings')}
       showPageSizeSelector={true}
       enableExport={true}
-      initialSorting={{field: 'usage', mode: 'desc'}}
+      initialSorting={{ field: 'usage', mode: 'desc' }}
     />
   );
 };
@@ -56,21 +56,12 @@ const TableOptions = {
     offering_uuid: props.offering_uuid,
   }),
   verboseName: translate('plans'),
-  exportRow: row => [
-    row.plan_name,
-    row.limit,
-    row.usage,
-  ],
-  exportFields: [
-    'Plan',
-    'Limit',
-    'Active plan count',
-  ],
+  exportRow: row => [row.plan_name, row.limit, row.usage],
+  exportFields: ['Plan', 'Limit', 'Active plan count'],
 };
 
-const connector = compose(
-  connectTable(TableOptions),
-  withTranslation,
-);
+const connector = compose(connectTable(TableOptions), withTranslation);
 
-export const PlanUsageList = connector(TableComponent) as React.ComponentType<PlanUsageListProps>;
+export const PlanUsageList = connector(TableComponent) as React.ComponentType<
+  PlanUsageListProps
+>;

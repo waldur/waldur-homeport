@@ -8,7 +8,7 @@ import { getTableOptions } from './registry';
 import { getTableState } from './store';
 
 function* fetchList(action) {
-  const {table, extraFilter} = action.payload;
+  const { table, extraFilter } = action.payload;
   try {
     const state = yield select(getTableState(table));
     const options = getTableOptions(table);

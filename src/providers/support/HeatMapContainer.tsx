@@ -43,6 +43,9 @@ const mapDispatchToProps = dispatch => ({
   fetchServiceUsageStart: () => dispatch(fetchServiceUsageStart()),
 });
 
-const HeatMapContainer = connect(mapStateToProps, mapDispatchToProps)(HeatMapComponent);
+const HeatMapContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HeatMapComponent);
 
 export default connectAngularComponent(HeatMapContainer);

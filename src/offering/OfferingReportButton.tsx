@@ -13,18 +13,20 @@ interface OfferingReportButtonProps extends TranslateProps {
   };
 }
 
-export const PureOfferingReportButton = (props: OfferingReportButtonProps) => (
+export const PureOfferingReportButton = (props: OfferingReportButtonProps) =>
   props.offering.report ? (
     <button
       className="btn btn-info pull-right btn-sm m-l-sm"
-      onClick={props.openReport}>
-      <i className="fa fa-book"/>&nbsp;
+      onClick={props.openReport}
+    >
+      <i className="fa fa-book" />
+      &nbsp;
       {props.translate('Show report')}
     </button>
-  ) : null
-);
+  ) : null;
 
-export const openReport = report => openModalDialog('offeringReportDialog', {resolve: {report}, size: 'lg'});
+export const openReport = report =>
+  openModalDialog('offeringReportDialog', { resolve: { report }, size: 'lg' });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   openReport: () => dispatch(openReport(ownProps.offering.report)),

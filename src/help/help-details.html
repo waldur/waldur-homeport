@@ -1,23 +1,23 @@
 <div>
-    <div class="white-box">
-        <div>
-            <a ui-sref="help.list">Back to help topics</a>
-        </div>
+  <div class="white-box">
+    <div>
+      <a ui-sref="help.list">Back to help topics</a>
     </div>
+  </div>
 
-    <div class="container">
-        <div class="instructions-header">
-            <h1>{{$ctrl.model && $ctrl.model.title}}</h1>
-        </div>
+  <div class="container">
+    <div class="instructions-header">
+      <h1>{{ $ctrl.model && $ctrl.model.title }}</h1>
     </div>
-    <div class="white-box">
-        <div class="instruction-page" ng-if="!$ctrl.model">
-            <h2>Help page is not available</h2>
-        </div>
-        <div ng-if="$ctrl.model" bind-html-compile="$ctrl.model.template"></div>
-        <div class="clearfix"></div>
-        <div class="m-t-md">
-            <a ui-sref="help.list">Back to help topics</a>
-        </div>
+  </div>
+  <div class="white-box">
+    <div class="instruction-page" ng-if="!$ctrl.model">
+      <h2>Help page is not available</h2>
     </div>
+    <div ng-if="$ctrl.model" bind-html-compile="$ctrl.model.template"></div>
+    <div class="clearfix"></div>
+    <div class="m-t-md">
+      <a ui-sref="help.list">Back to help topics</a>
+    </div>
+  </div>
 </div>

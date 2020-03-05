@@ -7,7 +7,7 @@ It uses yarn for dependency management and webpack as module bundler.
 
 __Development/testing__:
 
-- Linux (CentOS 7 and Ubuntu 14.04 tested) or OS X
+- Linux (CentOS 7 and Ubuntu 18.04 tested) or OS X
 - 2 GB of RAM
 
 ## Installation
@@ -20,14 +20,14 @@ yum --assumeyes update
 yum install --assumeyes bzip2 git wget
 ```
 
-Example for Ubuntu 14.04 LTS:
+Example for Ubuntu 18.04 LTS:
 ```
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install git wget
 ```
 
-2. Install stable Node.js and yarn:
+2. Install LTS Node.js and yarn:
 ```
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
 source ~/.bashrc

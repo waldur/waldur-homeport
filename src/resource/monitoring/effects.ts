@@ -58,18 +58,18 @@ function* handleCreateHost(action) {
 function* handleLoadLinks(action) {
   try {
     const options = yield call(api.loadLinks, action.payload);
-    yield put(actions.loadLinks.success({options}));
+    yield put(actions.loadLinks.success({ options }));
   } catch (error) {
-    yield put(actions.loadLinks.success({options: []}));
+    yield put(actions.loadLinks.success({ options: [] }));
   }
 }
 
 function* handleLoadTemplates(action) {
   try {
     const options = yield call(api.loadTemplates, action.payload);
-    yield put(actions.loadTemplates.success({options}));
+    yield put(actions.loadTemplates.success({ options }));
   } catch (error) {
-    yield put(actions.loadTemplates.success({options: []}));
+    yield put(actions.loadTemplates.success({ options: [] }));
   }
 }
 

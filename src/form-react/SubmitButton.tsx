@@ -5,16 +5,19 @@ interface SubmitButtonProps {
   label: string;
   disabled?: boolean;
   className?: string;
+  onClick?(): void;
 }
 
-export const SubmitButton: React.FC<SubmitButtonProps> = (props: SubmitButtonProps) => (
+export const SubmitButton: React.FC<SubmitButtonProps> = (
+  props: SubmitButtonProps,
+) => (
   <button
     type="submit"
     className={props.className}
-    disabled={props.submitting || props.disabled === true}>
-    {props.submitting && (
-      <i className="fa fa-spinner fa-spin m-r-xs"/>
-    )}
+    disabled={props.submitting || props.disabled === true}
+    onClick={props.onClick}
+  >
+    {props.submitting && <i className="fa fa-spinner fa-spin m-r-xs" />}
     {props.label}
   </button>
 );

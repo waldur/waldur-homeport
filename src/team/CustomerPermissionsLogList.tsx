@@ -8,15 +8,13 @@ import { OuterState } from '@waldur/workspace/types';
 export const PureCustomerPermissionsLogList = getEventsList({
   mapPropsToFilter: props => ({
     scope: props.customer.url,
-    event_type: [
-      'role_granted',
-      'role_revoked',
-      'role_updated',
-    ],
+    event_type: ['role_granted', 'role_revoked', 'role_updated'],
   }),
 });
 
-const enhance = connect((state: OuterState) => ({ customer: getCustomer(state) }));
+const enhance = connect((state: OuterState) => ({
+  customer: getCustomer(state),
+}));
 
 const CustomerPermissionsLogList = enhance(PureCustomerPermissionsLogList);
 

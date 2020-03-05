@@ -8,7 +8,7 @@ import { ToogleButtonFilter } from '@waldur/table-react/ToggleButtonFilter';
 const PureCustomerEventsFilter = () => (
   <Field
     name="feature"
-    component={props =>
+    component={props => (
       <ToogleButtonFilter
         choices={[
           {
@@ -26,7 +26,7 @@ const PureCustomerEventsFilter = () => (
         ]}
         {...props.input}
       />
-    }
+    )}
   />
 );
 

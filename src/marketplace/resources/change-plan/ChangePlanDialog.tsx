@@ -17,10 +17,19 @@ interface ChangePlanDialogProps {
 
 export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = props => (
   <Query
-    variables={{resource_uuid: props.resolve.resource.marketplace_resource_uuid}}
+    variables={{
+      resource_uuid: props.resolve.resource.marketplace_resource_uuid,
+    }}
     loader={loadData}
   >
-    {queryProps => <DialogBody {...queryProps} initialValues={queryProps.data ? queryProps.data.initialValues : undefined}/>}
+    {queryProps => (
+      <DialogBody
+        {...queryProps}
+        initialValues={
+          queryProps.data ? queryProps.data.initialValues : undefined
+        }
+      />
+    )}
   </Query>
 );
 

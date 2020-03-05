@@ -13,18 +13,18 @@ import { JiraIssueCreateButton } from './JiraIssueCreateButton';
 import { JiraIssuePriorityField } from './JiraIssuePriorityField';
 import { JiraIssueStatusField } from './JiraIssueStatusField';
 
-const IssueSlaField = withTranslation((props: {row: JiraIssue} & TranslateProps) => (
-  <Tooltip label={props.translate('Time to resolution')} id="slaField">
-    {props.row.first_response_sla ? formatDateTime(props.row.first_response_sla) : 'N/A'}
-  </Tooltip>
-));
+const IssueSlaField = withTranslation(
+  (props: { row: JiraIssue } & TranslateProps) => (
+    <Tooltip label={props.translate('Time to resolution')} id="slaField">
+      {props.row.first_response_sla
+        ? formatDateTime(props.row.first_response_sla)
+        : 'N/A'}
+    </Tooltip>
+  ),
+);
 
 const formatIssueKey = props => (
-  <ResourceLink
-    type="JIRA.Issue"
-    uuid={props.row.uuid}
-    label={props.row.key}
-  />
+  <ResourceLink type="JIRA.Issue" uuid={props.row.uuid} label={props.row.key} />
 );
 
 const TableComponent = props => {
@@ -36,11 +36,11 @@ const TableComponent = props => {
     },
     {
       title: translate('Status'),
-      render: ({ row }) => <JiraIssueStatusField {...row}/>,
+      render: ({ row }) => <JiraIssueStatusField {...row} />,
     },
     {
       title: translate('Priority'),
-      render: ({ row }) => <JiraIssuePriorityField {...row}/>,
+      render: ({ row }) => <JiraIssuePriorityField {...row} />,
     },
     {
       title: translate('Title'),
@@ -48,7 +48,8 @@ const TableComponent = props => {
     },
     {
       title: translate('Description'),
-      render: ({ row }) => row.description ? formatLongText(row.description) : 'N/A',
+      render: ({ row }) =>
+        row.description ? formatLongText(row.description) : 'N/A',
     },
     {
       title: translate('Assigned to'),
@@ -67,7 +68,7 @@ const TableComponent = props => {
     <Table
       {...props}
       columns={columns}
-      actions={<JiraIssueCreateButton project={props.resource}/>}
+      actions={<JiraIssueCreateButton project={props.resource} />}
       verboseName={translate('requests')}
       hasQuery={true}
       enableExport={true}
@@ -79,7 +80,7 @@ const TableOptions = {
   table: 'jiraIssues',
   fetchData: createFetcher('jira-issues'),
   queryField: 'summary',
-  mapPropsToFilter: ({ resource }) => ({jira_project_uuid: resource.uuid}),
+  mapPropsToFilter: ({ resource }) => ({ jira_project_uuid: resource.uuid }),
   exportFields: [
     'key',
     'type',

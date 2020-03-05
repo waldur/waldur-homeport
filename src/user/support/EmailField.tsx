@@ -10,7 +10,11 @@ import { StaticField } from './StaticField';
 export const EmailField = props => {
   const dispatch = useDispatch();
   const openChangeDialog = React.useCallback(() => {
-    dispatch(openModalDialog('userEmailChangeDialog', {resolve: {user: props.user}}));
+    dispatch(
+      openModalDialog('userEmailChangeDialog', {
+        resolve: { user: props.user },
+      }),
+    );
   }, []);
   return (
     <>
@@ -21,7 +25,9 @@ export const EmailField = props => {
         <div className="col-sm-9 col-md-8">
           <p className="form-control-static">{props.user.email}</p>
           {!props.user.requested_email && !props.protected && (
-            <Button onClick={openChangeDialog}>{translate('Change email')}</Button>
+            <Button onClick={openChangeDialog}>
+              {translate('Change email')}
+            </Button>
           )}
         </div>
       </div>

@@ -17,18 +17,24 @@ describe('TableBody', () => {
   });
 
   it('should render untoggled expandable indicator if expandable component is provided', () => {
-    const wrapper = renderWrapper({expandableRow, toggled: {}});
+    const wrapper = renderWrapper({ expandableRow, toggled: {} });
     expect(wrapper.find('.fa-chevron-right').length).toBe(1);
     expect(wrapper.find('td').length).toBe(COLUMNS.length + 1);
   });
 
   it('should render toggled expandable indicator according to props', () => {
-    const wrapper = renderWrapper({expandableRow, toggled: {[ROW_UUID]: true}});
+    const wrapper = renderWrapper({
+      expandableRow,
+      toggled: { [ROW_UUID]: true },
+    });
     expect(wrapper.find('.fa-chevron-down').length).toBe(1);
   });
 
   it('should render extra row if it is expanded', () => {
-    const wrapper = renderWrapper({expandableRow, toggled: {[ROW_UUID]: true}});
+    const wrapper = renderWrapper({
+      expandableRow,
+      toggled: { [ROW_UUID]: true },
+    });
     expect(wrapper.find('h3').length).toBe(1);
   });
 });

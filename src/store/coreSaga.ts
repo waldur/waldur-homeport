@@ -12,6 +12,14 @@ export const emitSignal = (signal: string, params?: {}) => ({
   params,
 });
 
+const showNotification = (type, message) => ({
+  type: SHOW_NOTIFICATION,
+  payload: {
+    type,
+    message,
+  },
+});
+
 export const showSuccess = message => showNotification('success', message);
 
 export const showError = message => showNotification('danger', message);
@@ -25,19 +33,14 @@ export const stateGo = (to, params?: object, options?: object) => ({
   },
 });
 
-const showNotification = (type, message) => ({
-  type: SHOW_NOTIFICATION,
-  payload: {
-    type,
-    message,
-  },
-});
-
 export default function* watchEmit() {
-  yield takeEvery<any>(EMIT_SIGNAL, action => $rootScope.$broadcast(action.signal, action.params));
+  yield takeEvery<any>(EMIT_SIGNAL, action =>
+    $rootScope.$broadcast(action.signal, action.params),
+  );
 
-  yield takeEvery<any>(SHOW_NOTIFICATION, ({ payload: {type, message} }) =>
-    ngInjector.get('Flash').create(type, message));
+  yield takeEvery<any>(SHOW_NOTIFICATION, ({ payload: { type, message } }) =>
+    ngInjector.get('Flash').create(type, message),
+  );
 
   yield takeEvery<any>(STATE_GO, action => {
     $state.go(action.payload.to, action.payload.params, action.payload.options);

@@ -9,24 +9,29 @@ import { SharedProviderCustomers } from './SharedProviderCustomers';
 import { providerSelector } from './SharedProviderFilter';
 import { SharedProviderResources } from './SharedProviderResources';
 
-const SharedProviderTabs = ({ provider }) => provider ? (
-  <div className="ibox">
-    <div className="ibox-content">
-      <Tabs defaultActiveKey={1} id="shared-provider-tabs" unmountOnExit={true}>
-        <Tab eventKey={1} title={translate('Organizations')}>
-          <div className="m-t-sm">
-            <SharedProviderCustomers provider_uuid={provider.uuid}/>
-          </div>
-        </Tab>
-        <Tab eventKey={2} title={translate('VMs')}>
-          <div className="m-t-sm">
-            <SharedProviderResources provider_uuid={provider.uuid}/>
-          </div>
-        </Tab>
-      </Tabs>
+const SharedProviderTabs = ({ provider }) =>
+  provider ? (
+    <div className="ibox">
+      <div className="ibox-content">
+        <Tabs
+          defaultActiveKey={1}
+          id="shared-provider-tabs"
+          unmountOnExit={true}
+        >
+          <Tab eventKey={1} title={translate('Organizations')}>
+            <div className="m-t-sm">
+              <SharedProviderCustomers provider_uuid={provider.uuid} />
+            </div>
+          </Tab>
+          <Tab eventKey={2} title={translate('VMs')}>
+            <div className="m-t-sm">
+              <SharedProviderResources provider_uuid={provider.uuid} />
+            </div>
+          </Tab>
+        </Tabs>
+      </div>
     </div>
-  </div>
-) : null;
+  ) : null;
 
 const mapStateToProps = state => ({
   provider: providerSelector(state),

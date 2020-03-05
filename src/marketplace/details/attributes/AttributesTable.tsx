@@ -11,12 +11,8 @@ interface AttributesTableProps {
 }
 
 export const AttributesTable = (props: AttributesTableProps) => (
-  <Table
-    bordered={true}
-    hover={true}
-    responsive={true}
-  >
-     <tbody>
+  <Table bordered={true} hover={true} responsive={true}>
+    <tbody>
       {props.sections.map((section, index) => (
         <AttributeSection
           key={index}

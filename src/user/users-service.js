@@ -9,8 +9,8 @@ export default function usersService(baseServiceClass, $q, ENV, $rootScope) {
 
     setCurrentUser: function(user) {
       // TODO: Migrate to Redux and make code DRY
-      $rootScope.$broadcast('CURRENT_USER_UPDATED', {user});
       this.currentUser = user;
+      return $rootScope.$broadcast('CURRENT_USER_UPDATED', { user });
     },
 
     resetCurrentUser: function() {
@@ -21,7 +21,7 @@ export default function usersService(baseServiceClass, $q, ENV, $rootScope) {
       if (this.currentUser) {
         return $q.when(this.currentUser);
       }
-      return this.getList({current:''}).then(response => {
+      return this.getList({ current: '' }).then(response => {
         this.setCurrentUser(response[0]);
         return this.currentUser;
       });
@@ -35,12 +35,14 @@ export default function usersService(baseServiceClass, $q, ENV, $rootScope) {
 
     mandatoryFieldsMissing: function(user) {
       return ENV.userMandatoryFields.reduce(
-        (result, item) => result || !user[item], false);
+        (result, item) => result || !user[item],
+        false,
+      );
     },
 
     getCounters: function(query) {
       return this.getFactory(false, '/user-counters/').get(query).$promise;
-    }
+    },
   });
   return new ServiceClass();
 }

@@ -19,9 +19,12 @@ const ResourceSummaryField = ({ translate, resource }) => (
     {resource.flavor_name && (
       <Tooltip
         id="resourceSummary"
-        label={translate('Flavor name: {flavor_name}', {flavor_name: resource.flavor_name})}>
+        label={translate('Flavor name: {flavor_name}', {
+          flavor_name: resource.flavor_name,
+        })}
+      >
         {' '}
-        <i className="fa fa-question-circle"/>
+        <i className="fa fa-question-circle" />
       </Tooltip>
     )}
   </>
@@ -41,14 +44,14 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
   const { translate } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props}/>
+      <PureResourceSummaryBase {...props} />
       <Field
         label={translate('Summary')}
-        value={<ResourceSummaryField {...props}/>}
+        value={<ResourceSummaryField {...props} />}
       />
       <Field
         label={translate('Access')}
-        value={<ResourceAccessInfo {...props}/>}
+        value={<ResourceAccessInfo {...props} />}
       />
       <Field
         label={translate('Internal IP')}
@@ -58,14 +61,8 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
         label={translate('External IP')}
         value={formatIpList(props.resource.external_ips)}
       />
-      <Field
-        label={translate('SSH key')}
-        value={props.resource.key_name}
-      />
-      <Field
-        label={translate('Uptime')}
-        value={formatUptime(props)}
-      />
+      <Field label={translate('SSH key')} value={props.resource.key_name} />
+      <Field label={translate('Uptime')} value={formatUptime(props)} />
     </>
   );
 };

@@ -74,10 +74,12 @@ const filterData = (collector: CollectedData): FilteredData[] => {
     const components = Object.keys(category.components).map(type => {
       const component = category.components[type];
       const reportedUsage = Object.keys(component.reported_usage).map(date => ({
-        date, value: component.reported_usage[date],
+        date,
+        value: component.reported_usage[date],
       }));
       const fixedUsage = Object.keys(component.fixed_usage).map(date => ({
-        date, value: component.fixed_usage[date],
+        date,
+        value: component.fixed_usage[date],
       }));
       return {
         name: component.name,
@@ -94,53 +96,81 @@ const filterData = (collector: CollectedData): FilteredData[] => {
   });
 };
 
-const formatMetrics = (category: FilteredData, variant: 'reportedUsage' | 'fixedUsage'): string[] => {
+const formatMetrics = (
+  category: FilteredData,
+  variant: 'reportedUsage' | 'fixedUsage',
+): string[] => {
   return category.components
     .filter(component => component[variant].filter(row => row.value).length > 0)
-    .map(component => `${component.name} (${variant === 'reportedUsage' ? 'usage' : 'fixed'})`);
+    .map(
+      component =>
+        `${component.name} (${
+          variant === 'reportedUsage' ? 'usage' : 'fixed'
+        })`,
+    );
 };
 
-const formatChart = (category: FilteredData, variant: 'reportedUsage' | 'fixedUsage'): object[] => {
+const formatChart = (
+  category: FilteredData,
+  variant: 'reportedUsage' | 'fixedUsage',
+): object[] => {
   return category.components
     .filter(component => component[variant].filter(row => row.value).length > 0)
     .map(component => {
-      const sorted = component[variant].sort((a, b) => a.date.localeCompare(b.date));
+      const sorted = component[variant].sort((a, b) =>
+        a.date.localeCompare(b.date),
+      );
       const dates = sorted.map(row => row.date);
       const values = sorted.map(row => row.value);
-      return getResourceChartOptions(dates, values, null, component.measured_unit);
+      return getResourceChartOptions(
+        dates,
+        values,
+        null,
+        component.measured_unit,
+      );
     });
 };
 
-const formatData = (list: FilteredData[], workspace: WorkspaceType): Category[] => {
-  return list.map(category => {
-    return {
-      title: category.title,
-      metrics: [
-        ...formatMetrics(category, 'reportedUsage'),
-        ...formatMetrics(category, 'fixedUsage'),
-      ],
-      charts: [
-        ...formatChart(category, 'reportedUsage'),
-        ...formatChart(category, 'fixedUsage'),
-      ],
-      actions: [
-        {
-          title: translate('Add resource'),
-          onClick: () => {
-            const state = workspace === 'organization' ? 'marketplace-category-customer' : 'marketplace-category';
-            $state.go(state, {category_uuid: category.uuid});
+const formatData = (
+  list: FilteredData[],
+  workspace: WorkspaceType,
+): Category[] => {
+  return list
+    .map(category => {
+      return {
+        title: category.title,
+        metrics: [
+          ...formatMetrics(category, 'reportedUsage'),
+          ...formatMetrics(category, 'fixedUsage'),
+        ],
+        charts: [
+          ...formatChart(category, 'reportedUsage'),
+          ...formatChart(category, 'fixedUsage'),
+        ],
+        actions: [
+          {
+            title: translate('Add resource'),
+            onClick: () => {
+              const state =
+                workspace === 'organization'
+                  ? 'marketplace-category-customer'
+                  : 'marketplace-category';
+              $state.go(state, { category_uuid: category.uuid });
+            },
           },
-        },
-      ],
-    };
-  })
-  .filter(category => category.charts.length > 0)
-  .sort((a, b) => a.title.localeCompare(b.title));
+        ],
+      };
+    })
+    .filter(category => category.charts.length > 0)
+    .sort((a, b) => a.title.localeCompare(b.title));
 };
 
-export async function loadMarketplaceCategories(workspace: WorkspaceType, scope: Scope): Promise<Category[]> {
-  const params = {scope: scope.url};
-  const rows = await getCategoryUsages({params});
+export async function loadMarketplaceCategories(
+  workspace: WorkspaceType,
+  scope: Scope,
+): Promise<Category[]> {
+  const params = { scope: scope.url };
+  const rows = await getCategoryUsages({ params });
   const collector = collectData(rows);
   const list = filterData(collector);
   return formatData(list, workspace);

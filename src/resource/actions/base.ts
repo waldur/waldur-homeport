@@ -43,10 +43,7 @@ export function createDefaultEditAction(): ResourceAction {
     type: 'form',
     method: 'PUT',
     successMessage: translate('Resource has been updated.'),
-    fields: [
-      createNameField(),
-      createDescriptionField(),
-    ],
+    fields: [createNameField(), createDescriptionField()],
   };
 }
 
@@ -60,18 +57,26 @@ export function createPullAction(ctx: ActionContext): ResourceAction {
   };
 }
 
-export function validateState(...validStates: ResourceState[]): (ctx: ActionContext) => string {
+export function validateState(
+  ...validStates: ResourceState[]
+): (ctx: ActionContext) => string {
   return ctx => {
     if (!validStates.includes(ctx.resource.state)) {
-      return translate('Valid states for operation: {validStates}.', {validStates: validStates.join(', ')});
+      return translate('Valid states for operation: {validStates}.', {
+        validStates: validStates.join(', '),
+      });
     }
   };
 }
 
-export function validateRuntimeState(...validStates: string[]): (ctx: ActionContext) => string {
+export function validateRuntimeState(
+  ...validStates: string[]
+): (ctx: ActionContext) => string {
   return ctx => {
     if (!validStates.includes(ctx.resource.runtime_state)) {
-      return translate('Valid runtime states for operation: {validStates}.', {validStates: validStates.join(', ')});
+      return translate('Valid runtime states for operation: {validStates}.', {
+        validStates: validStates.join(', '),
+      });
     }
   };
 }

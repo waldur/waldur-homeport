@@ -7,24 +7,25 @@ export default function customerUsersList() {
     scope: {},
     bindToController: {
       customer: '=',
-      options: '='
-    }
+      options: '=',
+    },
   };
 }
 
 // @ngInject
 function CustomerUsersListController(
-    baseControllerListClass,
-    customerPermissionsService,
-    customersService,
-    projectPermissionsService,
-    currentStateService,
-    usersService,
-    ncUtils,
-    $q,
-    $uibModal,
-    $state,
-    ENV) {
+  baseControllerListClass,
+  customerPermissionsService,
+  customersService,
+  projectPermissionsService,
+  currentStateService,
+  usersService,
+  ncUtils,
+  $q,
+  $uibModal,
+  $state,
+  ENV,
+) {
   let controllerScope = this;
   let TeamController = baseControllerListClass.extend({
     init: function() {
@@ -37,14 +38,22 @@ function CustomerUsersListController(
         this.loadCustomer(),
         usersService.getCurrentUser().then(user => {
           this.currentUser = user;
+        }),
+      ])
+        .then(() => {
+          this.isOwnerOrStaff = customersService.checkCustomerUser(
+            this.currentCustomer,
+            this.currentUser,
+          );
+          this.tableOptions = angular.extend(
+            this.getTableOptions(),
+            controllerScope.options,
+          );
+          fn();
         })
-      ]).then(() => {
-        this.isOwnerOrStaff = customersService.checkCustomerUser(this.currentCustomer, this.currentUser);
-        this.tableOptions = angular.extend(this.getTableOptions(), controllerScope.options);
-        fn();
-      }).finally(() => {
-        this.loading = false;
-      });
+        .finally(() => {
+          this.loading = false;
+        });
     },
     loadCustomer: function() {
       if (controllerScope.customer) {
@@ -64,13 +73,13 @@ function CustomerUsersListController(
         columns: [
           {
             title: gettext('Member'),
-            render: ncUtils.renderAvatar
+            render: ncUtils.renderAvatar,
           },
           {
             title: gettext('E-mail'),
             render: function(row) {
               return row.email;
-            }
+            },
           },
           {
             title: gettext('Owner'),
@@ -81,40 +90,42 @@ function CustomerUsersListController(
               return '<span class="fa {cls}" title="{title}"></span>'
                 .replace('{cls}', cls)
                 .replace('{title}', title);
-            }
+            },
           },
           {
             title: ENV.roles.manager + ' in:',
             className: 'desktop',
             render: function(row) {
               return vm.formatProjectRolesList('manager', row);
-            }
+            },
           },
           {
             title: ENV.roles.admin + ' in:',
             className: 'desktop',
             render: function(row) {
               return vm.formatProjectRolesList('admin', row);
-            }
-          }
+            },
+          },
         ],
-        rowActions: this.getRowActions()
+        rowActions: this.getRowActions(),
       };
     },
-    formatProjectRolesList: function (roleName, row) {
+    formatProjectRolesList: function(roleName, row) {
       let filteredProjects = row.projects.filter(function(item) {
         return item.role === roleName;
       });
       if (filteredProjects.length === 0) {
         return gettext('No projects are assigned to this role.');
       }
-      return filteredProjects.map(function(item) {
-        let projectName = item.name;
-        let href = $state.href('project.details', { uuid: item.uuid });
-        return '<a href="{href}">{projectName}</a>'
-          .replace('{projectName}', projectName)
-          .replace('{href}', href);
-      }).join(', ');
+      return filteredProjects
+        .map(function(item) {
+          let projectName = item.name;
+          let href = $state.href('project.details', { uuid: item.uuid });
+          return '<a href="{href}">{projectName}</a>'
+            .replace('{projectName}', projectName)
+            .replace('{href}', href);
+        })
+        .join(', ');
     },
     getRowActions: function() {
       return [
@@ -122,28 +133,33 @@ function CustomerUsersListController(
           title: gettext('Details'),
           iconClass: 'fa fa-eye',
           callback: this.openDetails.bind(this),
-          isVisible: () => this.isOwnerOrStaff || this.currentUser.is_support
+          isVisible: () => this.isOwnerOrStaff || this.currentUser.is_support,
         },
         {
           title: gettext('Edit'),
           iconClass: 'fa fa-pencil',
           callback: this.openPopup.bind(this),
-          isVisible: () => this.isOwnerOrStaff
+          isVisible: () => this.isOwnerOrStaff,
         },
         {
           title: gettext('Remove'),
           iconClass: 'fa fa-trash',
           callback: this.remove.bind(this),
-          isVisible: () => this.isOwnerOrStaff
-        }
+          isVisible: () => this.isOwnerOrStaff,
+        },
       ];
     },
     getList: function(filter) {
-      return this._super(angular.extend({
-        operation: 'users',
-        UUID: this.currentCustomer.uuid,
-        o: 'concatenated_name'
-      }, filter));
+      return this._super(
+        angular.extend(
+          {
+            operation: 'users',
+            UUID: this.currentCustomer.uuid,
+            o: 'concatenated_name',
+          },
+          filter,
+        ),
+      );
     },
     removeInstance: function(user) {
       let deferred = $q.defer();
@@ -158,7 +174,7 @@ function CustomerUsersListController(
             },
             function(response) {
               deferred.reject(response.data.detail);
-            }
+            },
           );
         } else {
           deferred.resolve();
@@ -170,26 +186,28 @@ function CustomerUsersListController(
       $uibModal.open({
         component: 'userPopover',
         resolve: {
-          user_uuid: () => user.uuid
-        }
+          user_uuid: () => user.uuid,
+        },
       });
     },
     openPopup: function(user) {
       let currentCustomer = this.currentCustomer,
         currentUser = this.currentUser,
         editUser = user;
-      $uibModal.open({
-        component: 'addTeamMember',
-        resolve: {
-          currentCustomer: () => currentCustomer,
-          currentUser: () => currentUser,
-          editUser: () => editUser,
-        }
-      }).result.then(function() {
-        controllerScope.resetCache();
-        customerPermissionsService.clearAllCacheForCurrentEndpoint();
-      });
-    }
+      $uibModal
+        .open({
+          component: 'addTeamMember',
+          resolve: {
+            currentCustomer: () => currentCustomer,
+            currentUser: () => currentUser,
+            editUser: () => editUser,
+          },
+        })
+        .result.then(function() {
+          controllerScope.resetCache();
+          customerPermissionsService.clearAllCacheForCurrentEndpoint();
+        });
+    },
   });
 
   controllerScope.__proto__ = new TeamController();

@@ -17,12 +17,17 @@ interface Props {
 
 const connector = connect(null, dispatch => ({
   // tslint:disable-next-line: variable-name
-  openUserDialog: user_uuid => dispatch(openModalDialog(
-    'userPopover', {resolve: {user_uuid}})),
+  openUserDialog: user_uuid =>
+    dispatch(openModalDialog('userPopover', { resolve: { user_uuid } })),
 
-    // tslint:disable-next-line: variable-name
-  openCustomerDialog: customer_uuid => dispatch(openModalDialog(
-    'customerPopover', {resolve: {customer_uuid}, size: 'lg'})),
+  // tslint:disable-next-line: variable-name
+  openCustomerDialog: customer_uuid =>
+    dispatch(
+      openModalDialog('customerPopover', {
+        resolve: { customer_uuid },
+        size: 'lg',
+      }),
+    ),
 }));
 
 export const IssueRow = connector((props: Props) => (
@@ -32,30 +37,28 @@ export const IssueRow = connector((props: Props) => (
         <Link
           label={props.item.key || 'N/A'}
           state="support.detail"
-          params={{uuid: props.item.uuid}}
+          params={{ uuid: props.item.uuid }}
         />
       </Tooltip>
     </td>
     <td>
       {props.item.summary}
-      <br/>
+      <br />
       <small className="text-muted">
-        {translate('Opened by')}
-        {' '}
+        {translate('Opened by')}{' '}
         <a onClick={() => props.openUserDialog(props.item.caller_uuid)}>
           {props.item.caller_full_name}
-        </a>
-        {' '}
+        </a>{' '}
         {props.item.customer_uuid && (
           <>
-            {translate('from')}
-            {' '}
-            <a onClick={() => props.openCustomerDialog(props.item.customer_uuid)}>
+            {translate('from')}{' '}
+            <a
+              onClick={() => props.openCustomerDialog(props.item.customer_uuid)}
+            >
               {props.item.customer_name}
             </a>
           </>
-        )}
-        {' '}
+        )}{' '}
         at {formatDate(props.item.created)}
       </small>
     </td>

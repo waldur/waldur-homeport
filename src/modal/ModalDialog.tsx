@@ -16,10 +16,6 @@ export const ModalDialog = (props: Props) => (
     <div className={classNames('modal-body', props.bodyClassName)}>
       {props.children}
     </div>
-    {props.footer &&
-      <div className="modal-footer">
-        {props.footer}
-      </div>
-    }
+    {props.footer && <div className="modal-footer">{props.footer}</div>}
   </div>
 );

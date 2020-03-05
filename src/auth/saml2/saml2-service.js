@@ -6,8 +6,8 @@ export default class Saml2Service {
     store.dispatch({
       type: loginSaml2.REQUEST,
       payload: {
-        'identity-provider': { url }
-      }
+        'identity-provider': { url },
+      },
     });
   }
 }

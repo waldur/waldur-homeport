@@ -7,17 +7,19 @@ import { getSummary } from '@waldur/quotas/QuotaUsageBarChart';
 import { getExisting } from '@waldur/quotas/QuotaUsageBarChart';
 import { getPlanned } from '@waldur/quotas/QuotaUsageBarChart';
 import { getAvailable } from '@waldur/quotas/QuotaUsageBarChart';
-import { getExceeds } from '@waldur/quotas/QuotaUsageBarChart';
 
-import { ProgressTooltipMessage, QuotaUsageBarChartDescription } from './QuotaUsageBarChart';
+import {
+  ProgressTooltipMessage,
+  QuotaUsageBarChartDescription,
+} from './QuotaUsageBarChart';
 
 describe('exceeds', () => {
-  it('should return false if quota\'s usage and required sum is less than limit', () => {
+  it("should return false if quota's usage and required sum is less than limit", () => {
     const quota = quotas[0];
     expect(exceeds(quota)).toEqual(false);
   });
 
-  it('should return true if quota\'s usage and required sum exceeds limit', () => {
+  it("should return true if quota's usage and required sum exceeds limit", () => {
     const quota = quotas[1];
     expect(exceeds(quota)).toEqual(true);
   });
@@ -51,44 +53,32 @@ describe('getAvailable', () => {
   });
 });
 
-describe('getExceeds', () => {
-  it('should return right message', () => {
-    const expected = 'Package amount quota usage exceeds available limit.';
-    expect(getExceeds(quotas[0])).toEqual(expected);
-  });
-});
-
 describe('ProgressTooltipMessage', () => {
-  const renderWrapper = props =>
-    shallow(
-      <ProgressTooltipMessage {...props}/>
-    );
+  const renderWrapper = props => shallow(<ProgressTooltipMessage {...props} />);
 
-  it('should render danger message if quota\'s usage exceeds limit', () => {
-    const wrapper = renderWrapper({quota: quotas[1]});
-    const expectedMessage = 'Package amount quota usage exceeds available limit.';
+  it("should render danger message if quota's usage exceeds limit", () => {
+    const wrapper = renderWrapper({ quota: quotas[1] });
+    const expectedMessage = 'Quota usage exceeds available limit.';
     expect(wrapper.find('.text-danger').text()).toContain(expectedMessage);
   });
 
-  it('should not render danger message if quota\'s usage does not exceed limit', () => {
-    const wrapper = renderWrapper({quota: quotas[0]});
+  it("should not render danger message if quota's usage does not exceed limit", () => {
+    const wrapper = renderWrapper({ quota: quotas[0] });
     expect(wrapper.find('.text-danger')).toHaveLength(0);
   });
 });
 
 describe('QuotaUsageBarChartDescription', () => {
   const renderWrapper = props =>
-    shallow(
-      <QuotaUsageBarChartDescription {...props}/>
-    );
+    shallow(<QuotaUsageBarChartDescription {...props} />);
 
-  it('should render danger message if quota\'s usage exceeds limit', () => {
-    const wrapper = renderWrapper({quota: quotas[1]});
+  it("should render danger message if quota's usage exceeds limit", () => {
+    const wrapper = renderWrapper({ quota: quotas[1] });
     expect(wrapper.find('.fa-exclamation-triangle')).toHaveLength(1);
   });
 
-  it('should not render danger message if quota\'s usage does not exceed limit', () => {
-    const wrapper = renderWrapper({quota: quotas[0]});
+  it("should not render danger message if quota's usage does not exceed limit", () => {
+    const wrapper = renderWrapper({ quota: quotas[0] });
     expect(wrapper.find('.fa-exclamation-triangle')).toHaveLength(0);
   });
 });

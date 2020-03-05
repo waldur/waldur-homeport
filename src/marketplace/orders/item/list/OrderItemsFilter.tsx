@@ -26,16 +26,12 @@ interface StateProps {
 const PureOrderItemsFilter = (props: OwnProps & StateProps) => (
   <Row>
     {props.showOfferingFilter && (
-      <OfferingAutocomplete offeringFilter={props.offeringFilter}/>
+      <OfferingAutocomplete offeringFilter={props.offeringFilter} />
     )}
-    {props.showOrganizationFilter && (
-      <OrganizationAutocomplete/>
-    )}
-    {props.showProviderFilter && (
-      <ProviderAutocomplete/>
-    )}
-    <OrderStateFilter/>
-    <OrderTypeFilter/>
+    {props.showOrganizationFilter && <OrganizationAutocomplete />}
+    {props.showProviderFilter && <ProviderAutocomplete />}
+    <OrderStateFilter />
+    <OrderTypeFilter />
   </Row>
 );
 
@@ -44,9 +40,9 @@ const filterSelector = createSelector(
   getWorkspace,
   (customer, workspace) => {
     if (workspace === 'organization') {
-      return {customer_uuid: customer.uuid};
+      return { customer_uuid: customer.uuid };
     }
-  }
+  },
 );
 
 const mapStateToProps = state => ({
@@ -54,8 +50,10 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  reduxForm<{}, OwnProps>({form: 'OrderItemFilter'}),
+  reduxForm<{}, OwnProps>({ form: 'OrderItemFilter' }),
   connect<StateProps, {}, OwnProps>(mapStateToProps),
 );
 
-export const OrderItemsFilter = enhance(PureOrderItemsFilter) as React.ComponentType<OwnProps>;
+export const OrderItemsFilter = enhance(
+  PureOrderItemsFilter,
+) as React.ComponentType<OwnProps>;

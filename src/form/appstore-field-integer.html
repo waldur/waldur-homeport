@@ -1,5 +1,6 @@
 <div class="input-group col-md-6">
-  <input type="number"
+  <input
+    type="number"
     min="0"
     ng-min="$ctrl.field.min"
     ng-max="$ctrl.field.max"
@@ -18,14 +19,26 @@
   </span>
 </div>
 
-<p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.pattern" translate>
+<p
+  class="help-block text-danger"
+  ng-if="$ctrl.form[$ctrl.field.name].$error.pattern"
+  translate
+>
   Not a valid value
 </p>
 
-<p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.min">
-  <span translate>Minimal valid value is</span> {{ $ctrl.field.min/$ctrl.field.factor }} {{ ::$ctrl.field.units }}
+<p
+  class="help-block text-danger"
+  ng-if="$ctrl.form[$ctrl.field.name].$error.min"
+>
+  <span translate>Minimal valid value is</span>
+  {{ $ctrl.field.min / $ctrl.field.factor }} {{ ::$ctrl.field.units }}
 </p>
 
-<p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.max">
-  <span translate>Maximal valid value is</span> {{ $ctrl.field.max/$ctrl.field.factor }} {{ ::$ctrl.field.units }}
+<p
+  class="help-block text-danger"
+  ng-if="$ctrl.form[$ctrl.field.name].$error.max"
+>
+  <span translate>Maximal valid value is</span>
+  {{ $ctrl.field.max / $ctrl.field.factor }} {{ ::$ctrl.field.units }}
 </p>

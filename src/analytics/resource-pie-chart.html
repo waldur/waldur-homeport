@@ -7,8 +7,10 @@
       <table class="table table-bordered">
         <tr ng-repeat="item in items">
           <td>
-            <span class="resource-pie-chart-indicator"
-              ng-style="{'background-color': item.color}"></span>
+            <span
+              class="resource-pie-chart-indicator"
+              ng-style="{'background-color': item.color}"
+            ></span>
             {{ item.label | translate }}
           </td>
           <td>

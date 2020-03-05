@@ -9,7 +9,7 @@ export interface Limits {
 
 export interface OfferingFormData {
   plan?: Plan;
-  attributes?: {[key: string]: any};
+  attributes?: { [key: string]: any };
   project?: Project;
   limits?: Limits;
 }

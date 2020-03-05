@@ -7,30 +7,32 @@ export default function issueRegistration() {
     controller: IssueRegistrationController,
     controllerAs: '$ctrl',
     scope: {
-      onSearch: '&'
+      onSearch: '&',
     },
-    bindToController: true
+    bindToController: true,
   };
 }
 
 class IssueRegistrationController {
   // @ngInject
-  constructor($state,
-              $scope,
-              $q,
-              $uibModal,
-              ENV,
-              features,
-              issuesService,
-              ncUtilsFlash,
-              usersService,
-              issueUsersService,
-              issuePrioritiesService,
-              customersService,
-              projectsService,
-              resourcesService,
-              ErrorMessageFormatter,
-              coreUtils) {
+  constructor(
+    $state,
+    $scope,
+    $q,
+    $uibModal,
+    ENV,
+    features,
+    issuesService,
+    ncUtilsFlash,
+    usersService,
+    issueUsersService,
+    issuePrioritiesService,
+    customersService,
+    projectsService,
+    resourcesService,
+    ErrorMessageFormatter,
+    coreUtils,
+  ) {
     this.$state = $state;
     this.$scope = $scope;
     this.$q = $q;
@@ -58,49 +60,63 @@ class IssueRegistrationController {
     this.issuePrioritiesService.getAll().then(priorities => {
       this.priorities = priorities;
     });
-    this.$scope.$watch(() => this.issue.caller, () => {
-      this.issue.customer = null;
-      this.refreshCustomers();
-    });
-    this.$scope.$watch(() => this.issue.customer, () => {
-      this.issue.project = null;
-      this.refreshProjects();
-    });
-    this.$scope.$watch(() => this.issue.project, () => {
-      this.issue.resource = null;
-      this.refreshResources();
-    });
-    this.$scope.$watch(() => this.issue.scope, () => {
-      this.issue.resource = null;
-      this.refreshResources();
-    });
+    this.$scope.$watch(
+      () => this.issue.caller,
+      () => {
+        this.issue.customer = null;
+        this.refreshCustomers();
+      },
+    );
+    this.$scope.$watch(
+      () => this.issue.customer,
+      () => {
+        this.issue.project = null;
+        this.refreshProjects();
+      },
+    );
+    this.$scope.$watch(
+      () => this.issue.project,
+      () => {
+        this.issue.resource = null;
+        this.refreshResources();
+      },
+    );
+    this.$scope.$watch(
+      () => this.issue.scope,
+      () => {
+        this.issue.resource = null;
+        this.refreshResources();
+      },
+    );
     this.scopes = this.getScopes();
     this.emptyFieldMessage = gettext('You did not enter a field.');
   }
 
   getScopes() {
-    const filterResourceType = resourceType => this.features.isVisible(
-      this.ENV.resourceCategory[resourceType]
-    );
+    const filterResourceType = resourceType =>
+      this.features.isVisible(this.ENV.resourceCategory[resourceType]);
 
     const formatChoice = resourceType => ({
       display_name: resourceType.split('.').join(' '),
-      value: resourceType
+      value: resourceType,
     });
 
     const types = Object.keys(this.ENV.resourceCategory);
-    return types.filter(filterResourceType).sort().map(formatChoice);
+    return types
+      .filter(filterResourceType)
+      .sort()
+      .map(formatChoice);
   }
 
   refreshUsers(name) {
-    const params = name && {full_name: name};
+    const params = name && { full_name: name };
     return this.usersService.getList(params).then(users => {
       this.users = users;
     });
   }
 
   refreshSupportUsers(name) {
-    const params = name && {name: name};
+    const params = name && { name: name };
     return this.issueUsersService.getList(params).then(users => {
       this.supportUsers = users;
     });
@@ -111,7 +127,7 @@ class IssueRegistrationController {
       return;
     }
     let params = {
-      user_uuid: this.issue.caller.uuid
+      user_uuid: this.issue.caller.uuid,
     };
     if (name) {
       params.name = name;
@@ -126,7 +142,7 @@ class IssueRegistrationController {
       return;
     }
     let params = {
-      customer: this.issue.customer.uuid
+      customer: this.issue.customer.uuid,
     };
     if (name) {
       params.name = name;
@@ -147,7 +163,7 @@ class IssueRegistrationController {
     let params = {
       project_uuid: this.issue.project.uuid,
       resource_type: this.issue.scope.value,
-      field: ['name', 'url']
+      field: ['name', 'url'],
     };
     if (name) {
       params.name = name;
@@ -162,19 +178,19 @@ class IssueRegistrationController {
 
   filterByCaller(caller) {
     return this.onSearch({
-      filter: {caller}
+      filter: { caller },
     });
   }
 
   filterByCustomer(customer) {
     return this.onSearch({
-      filter: {customer}
+      filter: { customer },
     });
   }
 
   filterByProject(project) {
     return this.onSearch({
-      filter: {project}
+      filter: { project },
     });
   }
 
@@ -188,7 +204,7 @@ class IssueRegistrationController {
       customer: this.issue.customer.url,
       summary: this.issue.summary,
       description: this.issue.description,
-      caller: this.issue.caller.url
+      caller: this.issue.caller.url,
     };
     if (this.issue.project) {
       issue.project = this.issue.project.url;
@@ -203,23 +219,32 @@ class IssueRegistrationController {
       issue.priority = this.issue.priority.name;
     }
     this.saving = true;
-    return this.service.createIssue(issue).then(issue => {
-      this.service.clearAllCacheForCurrentEndpoint();
-      this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {key} has been created.'), {key: issue.key}));
-      return this.$state.go('support.detail', {uuid: issue.uuid});
-    }).catch(response => {
-      this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
-    }).finally(() => {
-      this.saving = false;
-    });
+    return this.service
+      .createIssue(issue)
+      .then(issue => {
+        this.service.clearAllCacheForCurrentEndpoint();
+        this.ncUtilsFlash.success(
+          this.coreUtils.templateFormatter(
+            gettext('Request {key} has been created.'),
+            { key: issue.key },
+          ),
+        );
+        return this.$state.go('support.detail', { uuid: issue.uuid });
+      })
+      .catch(response => {
+        this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
+      })
+      .finally(() => {
+        this.saving = false;
+      });
   }
 
   openUserDialog(user) {
     this.$uibModal.open({
       component: 'userPopover',
       resolve: {
-        user: () => user
-      }
+        user: () => user,
+      },
     });
   }
 
@@ -229,7 +254,7 @@ class IssueRegistrationController {
       size: 'lg',
       resolve: {
         customer_uuid: () => customer.uuid,
-      }
+      },
     });
   }
 }

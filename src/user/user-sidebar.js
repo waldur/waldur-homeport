@@ -5,8 +5,8 @@ import { PRIVATE_USER_TABS } from './constants';
 function UserSidebarController($scope, authService, usersService) {
   this.items = PRIVATE_USER_TABS;
   this.logout = authService.logout;
-  usersService.getCurrentUser().then(user => this.user = user);
-  $scope.$on('CURRENT_USER_UPDATED', (event, { user }) => this.user = user);
+  usersService.getCurrentUser().then(user => (this.user = user));
+  $scope.$on('CURRENT_USER_UPDATED', (event, { user }) => (this.user = user));
 }
 
 const userSidebar = {

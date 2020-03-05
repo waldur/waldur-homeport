@@ -1,17 +1,27 @@
 <fieldset class="form-group" ng-repeat="(name, field) in $ctrl.fields">
   <div ng-if="$ctrl.renderLabel(field)">
     <div class="control-label col-sm-3">
-      <label for="{{ field.name }}" uib-tooltip="{{ field.help_text | translate }}">
+      <label
+        for="{{ field.name }}"
+        uib-tooltip="{{ field.help_text | translate }}"
+      >
         <i class="fa fa-question-circle" ng-if="field.help_text"></i>
         <field-label field="field"></field-label>
       </label>
     </div>
     <div ng-class="$ctrl.getClass(field)">
-      <appstore-field field="field" model="$ctrl.model" form="$ctrl.form"></appstore-field>
+      <appstore-field
+        field="field"
+        model="$ctrl.model"
+        form="$ctrl.form"
+      ></appstore-field>
       <p class="help-block m-b-n-xs text-muted" ng-if="field.form_text">
         {{ field.form_text | translate }}
       </p>
-      <appstore-field-errors field="field" errors="$ctrl.errors"></appstore-field-errors>
+      <appstore-field-errors
+        field="field"
+        errors="$ctrl.errors"
+      ></appstore-field-errors>
     </div>
   </div>
   <div ng-if="!$ctrl.renderLabel(field)" class="col-sm-offset-3 col-sm-6">

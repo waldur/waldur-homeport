@@ -5,14 +5,17 @@ import { BillingType } from '@waldur/marketplace/types';
 
 import { ComponentDisableQuotaField } from './ComponentDisableQuotaField';
 import { ComponentLimitAmountField } from './ComponentLimitAmountField';
-import { ComponentLimitPeriodField, LimitPeriodOption } from './ComponentLimitPeriodField';
+import {
+  ComponentLimitPeriodField,
+  LimitPeriodOption,
+} from './ComponentLimitPeriodField';
 import { ComponentMaxValueField } from './ComponentMaxValueField';
 import { ComponentMinValueField } from './ComponentMinValueField';
 import { ComponentUseLimitForBillingField } from './ComponentUseLimitForBillingField';
 
 interface Values {
   billingType: {
-    value: BillingType
+    value: BillingType;
   };
   limitPeriod: LimitPeriodOption;
   disableQuotas: boolean;
@@ -24,19 +27,19 @@ const enhance = formValues(() => ({
   disableQuotas: 'disable_quotas',
 }));
 
-export const ComponentLimit = enhance((props: Values) => (
+export const ComponentLimit = enhance((props: Values) =>
   props.billingType && props.billingType.value === 'usage' ? (
     <>
-      <ComponentLimitPeriodField limitPeriod={props.limitPeriod}/>
-      <ComponentLimitAmountField/>
-      <ComponentDisableQuotaField/>
+      <ComponentLimitPeriodField limitPeriod={props.limitPeriod} />
+      <ComponentLimitAmountField />
+      <ComponentDisableQuotaField />
       {!props.disableQuotas && (
         <>
-          <ComponentMinValueField/>
-          <ComponentMaxValueField/>
+          <ComponentMinValueField />
+          <ComponentMaxValueField />
         </>
       )}
-      <ComponentUseLimitForBillingField/>
+      <ComponentUseLimitForBillingField />
     </>
-  ) : null
-)) as React.ComponentType<{}>;
+  ) : null,
+) as React.ComponentType<{}>;

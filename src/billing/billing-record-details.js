@@ -5,7 +5,7 @@ import { getItemName } from './utils';
 const billingRecordDetails = {
   template,
   bindings: {
-    invoice: '<'
+    invoice: '<',
   },
   controller: class BillingRecordDetailsController {
     // @ngInject
@@ -24,7 +24,7 @@ const billingRecordDetails = {
     getItemName(item) {
       return getItemName(item);
     }
-  }
+  },
 };
 
 export default billingRecordDetails;

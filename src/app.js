@@ -10,56 +10,62 @@ export function protectStates($rootScope, $state, $auth, features, $window) {
 
   $rootScope.$state = $state;
 
-  $rootScope.$on('$stateChangeStart',
-    function(event, toState, toParams, fromState, fromParams) {
-      let nextState = getNextState();
-      if (nextState) {
-        event.preventDefault();
-        if (nextState.params) {
-          $state.go(nextState.state, nextState.params);
-        } else {
-          $state.go(nextState);
-        }
+  $rootScope.$on('$stateChangeStart', function(
+    event,
+    toState,
+    toParams,
+    fromState,
+    fromParams,
+  ) {
+    let nextState = getNextState();
+    if (nextState) {
+      event.preventDefault();
+      if (nextState.params) {
+        $state.go(nextState.state, nextState.params);
+      } else {
+        $state.go(nextState);
+      }
+    }
+
+    function getNextState() {
+      const attemptState = $window.localStorage.getItem('goToStateAfterLogin');
+      if (attemptState) {
+        return redirectToAttemptState(attemptState);
       }
 
-      function getNextState() {
-        const attemptState = $window.localStorage.getItem('goToStateAfterLogin');
-        if (attemptState) {
-          return redirectToAttemptState(attemptState);
-        }
-
-        let data = toState.data;
-        if (!data) {
-          return;
-        } else if (data.disabled) {
-          return 'errorPage.otherwise';
-        } else if (data.anonymous && $auth.isAuthenticated()) {
-          return 'profile.details';
-        } else if (data.feature && !features.isVisible(data.feature)) {
-          return 'errorPage.otherwise';
-        }
+      let data = toState.data;
+      if (!data) {
+        return;
+      } else if (data.disabled) {
+        return 'errorPage.otherwise';
+      } else if (data.anonymous && $auth.isAuthenticated()) {
+        return 'profile.details';
+      } else if (data.feature && !features.isVisible(data.feature)) {
+        return 'errorPage.otherwise';
       }
+    }
 
-      function redirectToAttemptState(attemptState) {
-        if ($auth.isAuthenticated()) {
-          $window.localStorage.removeItem('goToStateAfterLogin');
-          const nextState = JSON.parse(attemptState);
-          return {
-            state: nextState.state,
-            params: nextState.params,
-          };
-        }
+    function redirectToAttemptState(attemptState) {
+      if ($auth.isAuthenticated()) {
+        $window.localStorage.removeItem('goToStateAfterLogin');
+        const nextState = JSON.parse(attemptState);
+        return {
+          state: nextState.state,
+          params: nextState.params,
+        };
       }
+    }
 
-      $rootScope.prevPreviousState = fromState;
-      $rootScope.prevPreviousParams = fromParams;
-    });
+    $rootScope.prevPreviousState = fromState;
+    $rootScope.prevPreviousParams = fromParams;
+  });
 }
 
 // @ngInject
 function decorateState($stateProvider, decorator) {
   $stateProvider.decorator('views', function(state, parent) {
-    let result = {}, views = parent(state);
+    let result = {},
+      views = parent(state);
 
     angular.forEach(views, function(config, name) {
       config.resolve = config.resolve || {};
@@ -79,7 +85,7 @@ function getCurrentUser(usersService, $q) {
   return usersService.isCurrentUserValid().then(function(result) {
     if (!result) {
       return $q.reject({
-        redirectTo: 'initialdata.view'
+        redirectTo: 'initialdata.view',
       });
     }
   });
@@ -112,13 +118,21 @@ export function extendEnv(ENV) {
 
 // @ngInject
 export function featuresProviderConfig(ENV, featuresProvider) {
-  featuresProvider.setDisabledFeatures(ENV.toBeFeatures.concat(ENV.disabledFeatures));
+  featuresProvider.setDisabledFeatures(
+    ENV.toBeFeatures.concat(ENV.disabledFeatures),
+  );
   featuresProvider.setEnabledFeatures(ENV.enabledFeatures);
   featuresProvider.setVisibility(ENV.featuresVisible);
 }
 
 // @ngInject
-export function httpInterceptor($q, ncUtilsFlash, ENV, ErrorMessageFormatter, $rootScope) {
+export function httpInterceptor(
+  $q,
+  ncUtilsFlash,
+  ENV,
+  ErrorMessageFormatter,
+  $rootScope,
+) {
   let timeouts = {},
     abortRequests;
   function getKey(config) {
@@ -167,7 +181,7 @@ export function httpInterceptor($q, ncUtilsFlash, ENV, ErrorMessageFormatter, $r
         }
       }
       return $q.reject(rejection);
-    }
+    },
   };
 }
 

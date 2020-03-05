@@ -1,21 +1,32 @@
 <div class="panel panel-default">
   <div class="panel-heading" translate>Policies</div>
   <div class="panel-body">
-    <form name="$ctrl.policiesForm" class="form-horizontal" visible-if="'freeipa'">
+    <form
+      name="$ctrl.policiesForm"
+      class="form-horizontal"
+      visible-if="'freeipa'"
+    >
       <freeipa-quota
         quota="$ctrl.quota"
         can-manage="$ctrl.canUpdateQuota"
-        currency="$ctrl.currency">
+        currency="$ctrl.currency"
+      >
       </freeipa-quota>
     </form>
 
-    <customer-threshold model="$ctrl.thresholdModel" field="$ctrl.thresholdField"></customer-threshold>
+    <customer-threshold
+      model="$ctrl.thresholdModel"
+      field="$ctrl.thresholdField"
+    ></customer-threshold>
     <div class="form-horizontal">
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-          <button type="submit" class="btn btn-primary"
+          <button
+            type="submit"
+            class="btn btn-primary"
             submit-button="$ctrl.updatePolicies()"
-            ng-disabled="$ctrl.policiesForm.$invalid">
+            ng-disabled="$ctrl.policiesForm.$invalid"
+          >
             <span translate>Update</span>
           </button>
         </div>

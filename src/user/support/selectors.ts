@@ -35,8 +35,10 @@ export const isVisibleForSupportOrStaff = state => {
   return user.is_support || user.is_staff;
 };
 
-export const userLanguageIsVisible = state => isVisible(state, 'user.preferred_language');
+export const userLanguageIsVisible = state =>
+  isVisible(state, 'user.preferred_language');
 
-export const userCompetenceIsVisible = state => isVisible(state, 'user.competence');
+export const userCompetenceIsVisible = state =>
+  isVisible(state, 'user.competence');
 
 export const isVisibleSupport = state => isVisible(state, 'support');

@@ -14,7 +14,10 @@ interface UserDetailsDialogProps extends TranslateProps {
 
 const PureUserDetailsDialog = (props: UserDetailsDialogProps) => {
   return (
-    <ModalDialog title={props.translate('User details')} footer={<CloseDialogButton/>}>
+    <ModalDialog
+      title={props.translate('User details')}
+      footer={<CloseDialogButton />}
+    >
       <UserDetailsView user={props.resolve.user} />
     </ModalDialog>
   );

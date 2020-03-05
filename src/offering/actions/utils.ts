@@ -10,10 +10,14 @@ export const validatePermissions = (ctx: ActionContext<Offering>) => {
   return translate(`Only staff users are allowed to perform this action.`);
 };
 
-export function validateOfferingState(...validStates: OfferingState[]): (ctx: ActionContext<Offering>) => string {
+export function validateOfferingState(
+  ...validStates: OfferingState[]
+): (ctx: ActionContext<Offering>) => string {
   return ctx => {
     if (!validStates.includes(ctx.resource.state)) {
-      return translate('Valid states for operation: {validStates}.', {validStates: validStates.join(', ')});
+      return translate('Valid states for operation: {validStates}.', {
+        validStates: validStates.join(', '),
+      });
     }
   };
 }

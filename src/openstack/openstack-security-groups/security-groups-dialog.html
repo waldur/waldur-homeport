@@ -18,7 +18,7 @@
     </thead>
     <tbody ng-repeat="group in $ctrl.securityGroups">
       <tr ng-repeat="rule in group.rules track by $index">
-        <td rowspan="{{group.rules.length}}" ng-if="$index ===0">
+        <td rowspan="{{ group.rules.length }}" ng-if="$index ===0">
           <strong>{{ group.name | uppercase }}</strong>
           <div ng-if="group.description">({{ group.description }})</div>
         </td>

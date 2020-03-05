@@ -20,7 +20,7 @@ import keysModule from './keys/module';
 import supportModule from './support/module';
 import './events';
 
-export default (module) => {
+export default module => {
   module.component('userEvents', userEvents);
   module.component('userManage', userManage);
   module.component('userSidebar', userSidebar);

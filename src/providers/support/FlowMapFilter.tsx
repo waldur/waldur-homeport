@@ -47,10 +47,9 @@ const PureFlowMapFilter = (props: FlowMapFilterProps) => (
         <FormContainer
           labelClass="m-r-md"
           controlClass="m-r-md"
-          submitting={props.submitting}>
-          <StringField
-            label={props.translate('Month')}
-            name="month"/>
+          submitting={props.submitting}
+        >
+          <StringField label={props.translate('Month')} name="month" />
           <SelectField
             className="metrics-select"
             label={props.translate('Metric')}
@@ -83,9 +82,6 @@ const PureFlowMapFilter = (props: FlowMapFilterProps) => (
   </div>
 );
 
-const enhance = compose(
-  reduxForm({form: 'flowMapFilter'}),
-  withTranslation,
-);
+const enhance = compose(reduxForm({ form: 'flowMapFilter' }), withTranslation);
 
 export const FlowMapFilter = enhance(PureFlowMapFilter);

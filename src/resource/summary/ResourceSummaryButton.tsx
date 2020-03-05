@@ -13,26 +13,30 @@ interface PureResourceSummaryButtonProps extends TranslateProps {
   disabled?: boolean;
 }
 
-export const PureResourceSummaryButton = (props: PureResourceSummaryButtonProps) => {
+export const PureResourceSummaryButton = (
+  props: PureResourceSummaryButtonProps,
+) => {
   const { showDetailsModal, translate, disabled } = props;
   return (
     <div
-      className={classNames({disabled}, 'btn btn-default btn-sm')}
-      onClick={showDetailsModal}>
+      className={classNames({ disabled }, 'btn btn-default btn-sm')}
+      onClick={showDetailsModal}
+    >
       {translate('Details')}
     </div>
   );
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  showDetailsModal: (): void => dispatch(openModalDialog(
-    'resource-summary-modal', { resolve: { url: ownProps.url } })),
+  showDetailsModal: (): void =>
+    dispatch(
+      openModalDialog('resource-summary-modal', {
+        resolve: { url: ownProps.url },
+      }),
+    ),
 });
 
-const enhance = compose(
-  connect(null, mapDispatchToProps),
-  withTranslation,
-);
+const enhance = compose(connect(null, mapDispatchToProps), withTranslation);
 
 export const ResourceSummaryButton = enhance(PureResourceSummaryButton);
 

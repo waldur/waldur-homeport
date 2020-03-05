@@ -9,20 +9,17 @@ import { ZabbixHostStateButton } from './ZabbixHostStateButton';
 
 const renderField = props => {
   const mockStore = configureStore();
-  const store = mockStore({config: {featuresVisible: true}});
+  const store = mockStore({ config: { featuresVisible: true } });
   return mount(
     <Provider store={store}>
-      <ZabbixHostField
-        resource={{url: 'url'}}
-        {...props}
-      />
-    </Provider>
+      <ZabbixHostField resource={{ url: 'url' }} {...props} />
+    </Provider>,
   );
 };
 
 describe('ResourceMonitoringField', () => {
   it('renders host state if it is available', () => {
-    const resource = {zabbix_host: {state: 'OK'}};
+    const resource = { zabbix_host: { state: 'OK' } };
     const wrapper = renderField({ resource });
     expect(wrapper.find(ZabbixHostStateButton).length).toBe(1);
   });

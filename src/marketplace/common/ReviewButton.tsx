@@ -10,11 +10,9 @@ const connector = connect(state => ({
   isVisible: isVisible(state, 'marketplace.review'),
 }));
 
-const PureReviewButton = props => props.isVisible ? (
-  <OfferingButton
-    icon="fa fa-comments"
-    title={translate('Write review')}
-  />
-) : null;
+const PureReviewButton = props =>
+  props.isVisible ? (
+    <OfferingButton icon="fa fa-comments" title={translate('Write review')} />
+  ) : null;
 
 export const ReviewButton = connector(PureReviewButton);

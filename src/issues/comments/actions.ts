@@ -64,7 +64,10 @@ export const issueCommentsDeleteSuccess = (commentId: string) => ({
   },
 });
 
-export const issueCommentsDeleteError = (error: Response, commentId: string) => ({
+export const issueCommentsDeleteError = (
+  error: Response,
+  commentId: string,
+) => ({
   type: constants.ISSUE_COMMENTS_DELETE_ERROR,
   payload: {
     error,

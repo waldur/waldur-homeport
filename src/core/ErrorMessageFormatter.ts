@@ -2,7 +2,9 @@ import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
 const formatErrorObject = error =>
-  Object.keys(error).map(key => `${key}: ${error[key]}`).join(', ');
+  Object.keys(error)
+    .map(key => `${key}: ${error[key]}`)
+    .join(', ');
 
 export const format = response => {
   /*
@@ -25,7 +27,10 @@ export const format = response => {
 
   if (response.status === -1) {
     // tslint:disable-next-line max-line-length
-    return translate('Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.', {apiEndpoint: ENV.apiEndpoint});
+    return translate(
+      'Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.',
+      { apiEndpoint: ENV.apiEndpoint },
+    );
   }
 
   let message = `${response.status}: ${response.statusText}.`;
@@ -36,13 +41,17 @@ export const format = response => {
     } else if (response.data.detail) {
       message += ' ' + response.data.detail;
     } else if (Array.isArray(response.data)) {
-      message += ' ' + response.data.map(item => {
-        if (typeof item === 'object') {
-          return formatErrorObject(item);
-        } else {
-          return item;
-        }
-      }).join('. ');
+      message +=
+        ' ' +
+        response.data
+          .map(item => {
+            if (typeof item === 'object') {
+              return formatErrorObject(item);
+            } else {
+              return item;
+            }
+          })
+          .join('. ');
     } else if (typeof response.data === 'object') {
       message += ' ' + formatErrorObject(response.data);
     }
@@ -52,7 +61,6 @@ export const format = response => {
 };
 
 export default class ErrorMessageFormatter {
-
   format = format;
 
   formatErrorFields(error) {

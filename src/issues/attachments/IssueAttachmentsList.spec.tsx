@@ -12,7 +12,8 @@ describe('IssueAttachmentsList', () => {
     attachments,
     uploading: 0,
   };
-  const renderWrapper = (props?) => shallow(<IssueAttachmentsList {...inititalProps} {...props} />);
+  const renderWrapper = (props?) =>
+    shallow(<IssueAttachmentsList {...inititalProps} {...props} />);
 
   it('does not render anything if list is empty', () => {
     const wrapper = renderWrapper({ attachments: [] });

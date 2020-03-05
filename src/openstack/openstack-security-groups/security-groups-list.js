@@ -1,6 +1,6 @@
 const openstackSecurityGroupsList = {
   bindings: {
-    resource: '<'
+    resource: '<',
   },
   templateUrl: 'views/partials/filtered-list.html',
   controller: OpenstackSecurityGroupsListController,
@@ -9,7 +9,12 @@ const openstackSecurityGroupsList = {
 
 // @ngInject
 function OpenstackSecurityGroupsListController(
-  baseResourceListController, openstackSecurityGroupsService, actionUtilsService, $scope, $timeout) {
+  baseResourceListController,
+  openstackSecurityGroupsService,
+  actionUtilsService,
+  $scope,
+  $timeout,
+) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -19,12 +24,14 @@ function OpenstackSecurityGroupsListController(
       let fn = this._super.bind(this);
 
       this.loading = true;
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
-        this.listActions = result;
-        fn();
-        this.addRowFields(['rules']);
-        this.service = openstackSecurityGroupsService;
-      });
+      actionUtilsService
+        .loadNestedActions(this, controllerScope.resource, list_type)
+        .then(result => {
+          this.listActions = result;
+          fn();
+          this.addRowFields(['rules']);
+          this.service = openstackSecurityGroupsService;
+        });
 
       $scope.$on('refreshSecurityGroupsList', function() {
         $timeout(function() {
@@ -35,28 +42,30 @@ function OpenstackSecurityGroupsListController(
     getTableOptions: function() {
       let options = this._super();
       options.noDataText = gettext('No security groups yet.');
-      options.noMatchesText = gettext('No security groups found matching filter.');
+      options.noMatchesText = gettext(
+        'No security groups found matching filter.',
+      );
       options.columns = [
         {
           title: gettext('Name'),
           orderField: 'name',
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           title: gettext('State'),
-          render: row => this.renderResourceState(row)
-        }
+          render: row => this.renderResourceState(row),
+        },
       ];
       return options;
     },
     getFilter: function() {
       return {
-        tenant_uuid: controllerScope.resource.uuid
+        tenant_uuid: controllerScope.resource.uuid,
       };
     },
     getTableActions: function() {
       return this.listActions;
-    }
+    },
   });
 
   controllerScope.__proto__ = new controllerClass();

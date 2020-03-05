@@ -21,24 +21,28 @@ interface PlanDetailsDialogProps {
 async function loadData(resourceId: string) {
   const resource = await getResource(resourceId);
   const offering = await getOffering(resource.offering_uuid);
-  const plan = resource.plan && offering.plans.find(item => item.url === resource.plan);
+  const plan =
+    resource.plan && offering.plans.find(item => item.url === resource.plan);
   const limitParser = getFormLimitParser(offering.type);
   return {
     offering,
     plan: plan && {
       ...plan,
-      unit_price: typeof plan.unit_price === 'string' ? parseFloat(plan.unit_price) : plan.unit_price,
+      unit_price:
+        typeof plan.unit_price === 'string'
+          ? parseFloat(plan.unit_price)
+          : plan.unit_price,
     },
     ...combinePrices(plan, limitParser(resource.limits), offering),
   };
 }
 
 const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = props => (
-  <ModalDialog title={translate('Plan details')} footer={<CloseDialogButton/>}>
+  <ModalDialog title={translate('Plan details')} footer={<CloseDialogButton />}>
     <Query loader={loadData} variables={props.resolve.resourceId}>
       {({ loading, data, error }) => {
         if (loading) {
-          return <LoadingSpinner/>;
+          return <LoadingSpinner />;
         }
         if (error) {
           return <p>{translate('Unable to load plan details.')}</p>;
@@ -47,19 +51,36 @@ const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = props => (
           return <p>{translate('Resource does not have plan.')}</p>;
         }
         return (
-        <>
-          <p><strong>{translate('Plan name')}</strong>: {data.plan.name}</p>
-          {data.plan.description && (
-            <p><strong>{translate('Plan description')}</strong>: {data.plan.description}</p>
-          )}
-          {data.plan.unit_price > 0 && (
-            <>
-              <p><strong>{translate('Plan price')}</strong>: {defaultCurrency(data.plan.unit_price)}</p>
-              <p><strong>{translate('Billing period')}</strong>: <BillingPeriod unit={data.plan.unit}/></p>
-            </>
-          )}
-          <PureDetailsTable {...data} formGroupClassName="" columnClassName="" viewMode={true}/>
-        </>);
+          <>
+            <p>
+              <strong>{translate('Plan name')}</strong>: {data.plan.name}
+            </p>
+            {data.plan.description && (
+              <p>
+                <strong>{translate('Plan description')}</strong>:{' '}
+                {data.plan.description}
+              </p>
+            )}
+            {data.plan.unit_price > 0 && (
+              <>
+                <p>
+                  <strong>{translate('Plan price')}</strong>:{' '}
+                  {defaultCurrency(data.plan.unit_price)}
+                </p>
+                <p>
+                  <strong>{translate('Billing period')}</strong>:{' '}
+                  <BillingPeriod unit={data.plan.unit} />
+                </p>
+              </>
+            )}
+            <PureDetailsTable
+              {...data}
+              formGroupClassName=""
+              columnClassName=""
+              viewMode={true}
+            />
+          </>
+        );
       }}
     </Query>
   </ModalDialog>

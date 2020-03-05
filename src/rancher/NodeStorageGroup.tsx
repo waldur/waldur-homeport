@@ -7,8 +7,15 @@ import { SystemVolumeTypeGroup } from './SystemVolumeTypeGroup';
 
 export const NodeStorageGroup = props => (
   <>
-    <SystemVolumeSizeGroup/>
-    <SystemVolumeTypeGroup volumeTypes={props.volumeTypes}/>
+    <SystemVolumeSizeGroup
+      labelClassName={props.labelClassName}
+      valueClassName={props.valueClassName}
+    />
+    <SystemVolumeTypeGroup
+      volumeTypes={props.volumeTypes}
+      labelClassName={props.labelClassName}
+      valueClassName={props.valueClassName}
+    />
     {props.mountPoints.length > 0 && (
       <FieldArray
         name="data_volumes"
@@ -17,6 +24,8 @@ export const NodeStorageGroup = props => (
         mountPoints={props.mountPoints}
         volumeTypes={props.volumeTypes}
         defaultVolumeType={props.defaultVolumeType}
+        smOffset={props.smOffset}
+        sm={props.sm}
       />
     )}
   </>

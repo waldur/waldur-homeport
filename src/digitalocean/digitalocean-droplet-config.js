@@ -1,18 +1,11 @@
 export default {
-  order: [
-    'name',
-    'region',
-    'image',
-    'size',
-    'ssh_public_key',
-    'user_data'
-  ],
+  order: ['name', 'region', 'image', 'size', 'ssh_public_key', 'user_data'],
   options: {
     name: {
       type: 'string',
       required: true,
       label: gettext('VM name'),
-      maxlength: 150
+      maxlength: 150,
     },
     region: {
       type: 'list',
@@ -21,9 +14,9 @@ export default {
       columns: [
         {
           name: 'name',
-          label: gettext('Region name')
-        }
-      ]
+          label: gettext('Region name'),
+        },
+      ],
     },
     image: {
       type: 'list',
@@ -32,14 +25,14 @@ export default {
       columns: [
         {
           name: 'name',
-          label: gettext('Image name')
+          label: gettext('Image name'),
         },
         {
           name: 'is_official',
           label: gettext('Is official'),
-        }
+        },
       ],
-      formatter: imageFormatter
+      formatter: imageFormatter,
     },
     size: {
       type: 'list',
@@ -48,24 +41,24 @@ export default {
       columns: [
         {
           name: 'name',
-          label: gettext('Size name')
+          label: gettext('Size name'),
         },
         {
           name: 'cores',
-          label: gettext('vCPU')
+          label: gettext('vCPU'),
         },
         {
           name: 'ram',
           label: gettext('RAM'),
-          filter: 'filesize'
+          filter: 'filesize',
         },
         {
           name: 'disk',
           label: gettext('Storage'),
-          filter: 'filesize'
-        }
+          filter: 'filesize',
+        },
       ],
-      formatter: sizeFormatter
+      formatter: sizeFormatter,
     },
     ssh_public_key: {
       type: 'list',
@@ -73,24 +66,27 @@ export default {
       columns: [
         {
           name: 'name',
-          label: gettext('Name')
+          label: gettext('Name'),
         },
         {
           name: 'fingerprint',
-          label: gettext('Fingerprint')
-        }
+          label: gettext('Fingerprint'),
+        },
       ],
-      warningMessage: 'SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.'
+      warningMessage:
+        'SSH public key is required for accessing a provisioned VM. You can add a key in your <a ui-sref="profile.keys">profile</a>.',
     },
     user_data: {
       type: 'text',
       label: gettext('User data'),
-      help_text: gettext('Additional data that will be added to instance on provisioning.')
-    }
+      help_text: gettext(
+        'Additional data that will be added to instance on provisioning.',
+      ),
+    },
   },
   watchers: {
-    region: regionWatcher
-  }
+    region: regionWatcher,
+  },
 };
 
 function validateAndSort(model, options, validator, comparator, name) {
@@ -113,7 +109,11 @@ function imageFormatter($filter, value) {
   if (value.is_official) {
     return value.name + ' distribution';
   } else {
-    return value.name + ' snapshot created at ' + $filter('shortDate')(value.created_at);
+    return (
+      value.name +
+      ' snapshot created at ' +
+      $filter('shortDate')(value.created_at)
+    );
   }
 }
 

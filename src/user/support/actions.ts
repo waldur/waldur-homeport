@@ -5,7 +5,7 @@ import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 
 export const showUserDetails = user =>
-  openModalDialog('UserDetailsDialog', {resolve: { user }, size: 'lg'});
+  openModalDialog('UserDetailsDialog', { resolve: { user }, size: 'lg' });
 
 export const showUserRemoval = () => {
   const resolve = {
@@ -16,16 +16,18 @@ export const showUserRemoval = () => {
     options: {
       title: translate('Account removal'),
       hideTitle: true,
-      descriptionPlaceholder: translate('Why would you want to go away? Help us become better please!'),
+      descriptionPlaceholder: translate(
+        'Why would you want to go away? Help us become better please!',
+      ),
       descriptionLabel: translate('Reason'),
       submitTitle: translate('Request removal'),
     },
   };
-  return openModalDialog('issueCreateDialog', {resolve});
+  return openModalDialog('issueCreateDialog', { resolve });
 };
 
 export const showUserRemovalMessage = resolve => {
-  return openModalDialog('UserRemovalMessageDialog', {resolve});
+  return openModalDialog('UserRemovalMessageDialog', { resolve });
 };
 
 export const updateUser = createFormAction('waldur/user/UPDATE');

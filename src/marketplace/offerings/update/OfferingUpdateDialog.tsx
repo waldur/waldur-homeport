@@ -26,8 +26,9 @@ interface OfferingUpdateDialogProps extends InjectedFormProps {
   loadOffering(offeringUuid: string): void;
 }
 
-export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogProps> {
-
+export class OfferingUpdateDialog extends React.Component<
+  OfferingUpdateDialogProps
+> {
   constructor(props) {
     super(props);
     setStateBreadcrumbs();
@@ -48,10 +49,11 @@ export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogPr
       erred,
       handleSubmit,
       updateOffering,
-      ...rest} = this.props;
+      ...rest
+    } = this.props;
 
     if (loading) {
-      return <LoadingSpinner/>;
+      return <LoadingSpinner />;
     } else if (erred) {
       return <p>{translate('Unable to load data.')}</p>;
     } else if (loaded) {
@@ -60,8 +62,14 @@ export class OfferingUpdateDialog extends React.Component<OfferingUpdateDialogPr
           <Col lg={10} lgOffset={1}>
             <form
               onSubmit={handleSubmit(updateOffering)}
-              className="form-horizontal">
-              <Wizard steps={STEPS} tabs={TABS} {...rest} submitLabel={translate('Update')}/>
+              className="form-horizontal"
+            >
+              <Wizard
+                steps={STEPS}
+                tabs={TABS}
+                {...rest}
+                submitLabel={translate('Update')}
+              />
             </form>
           </Col>
         </Row>

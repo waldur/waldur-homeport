@@ -1,4 +1,4 @@
 // functions
 @function rem($n) {
-    @return $n / 16 + rem;
+  @return $n / 16 + rem;
 }

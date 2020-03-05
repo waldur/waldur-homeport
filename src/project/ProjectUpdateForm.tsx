@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { reduxForm, InjectedFormProps } from 'redux-form';
 
-import { TextField, FormContainer, FieldError, SubmitButton } from '@waldur/form-react';
+import {
+  TextField,
+  FormContainer,
+  FieldError,
+  SubmitButton,
+} from '@waldur/form-react';
 import { StaticField } from '@waldur/form-react/StaticField';
 import { TranslateProps } from '@waldur/i18n';
 
@@ -20,26 +25,28 @@ interface ProjectUpdateFormProps extends TranslateProps, InjectedFormProps {
 export const PureProjectUpdateForm = (props: ProjectUpdateFormProps) => (
   <form
     onSubmit={props.handleSubmit(props.updateProject)}
-    className="form-horizontal">
+    className="form-horizontal"
+  >
     <FormContainer
       submitting={props.submitting}
       labelClass="col-sm-3"
-      controlClass="col-sm-9">
+      controlClass="col-sm-9"
+    >
       {ProjectNameField(props)}
       <TextField
         label={props.translate('Project description')}
         name="description"
       />
-      {props.project_type &&
+      {props.project_type && (
         <StaticField
           label={props.translate('Project type')}
           value={props.project_type}
         />
-      }
+      )}
     </FormContainer>
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-9">
-        <FieldError error={props.error}/>
+        <FieldError error={props.error} />
         <SubmitButton
           submitting={props.submitting}
           disabled={props.invalid}
@@ -50,4 +57,6 @@ export const PureProjectUpdateForm = (props: ProjectUpdateFormProps) => (
   </form>
 );
 
-export const ProjectUpdateForm = reduxForm({form: 'projectUpdate'})(PureProjectUpdateForm);
+export const ProjectUpdateForm = reduxForm({ form: 'projectUpdate' })(
+  PureProjectUpdateForm,
+);

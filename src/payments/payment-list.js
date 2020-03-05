@@ -10,7 +10,8 @@ export default paymentsList;
 function PaymentsListController(
   baseControllerListClass,
   paymentsService,
-  $filter) {
+  $filter,
+) {
   let controllerScope = this;
   let PaymentsController = baseControllerListClass.extend({
     init: function() {
@@ -28,16 +29,18 @@ function PaymentsListController(
             className: 'all',
             render: function(row) {
               let index = vm.findIndexById(row);
-              return '<payment-state payment="controller.list[{index}]"></payment-state>'
-                .replace('{index}', index);
-            }
+              return '<payment-state payment="controller.list[{index}]"></payment-state>'.replace(
+                '{index}',
+                index,
+              );
+            },
           },
           {
             title: gettext('Type'),
             className: 'all',
             render: function(row) {
               return row.type || 'N/A';
-            }
+            },
           },
           {
             title: gettext('Date'),
@@ -52,7 +55,7 @@ function PaymentsListController(
             render: function(row) {
               return $filter('defaultCurrency')(row.amount) || 'N/A';
             },
-          }
+          },
         ],
       };
     },
@@ -60,7 +63,7 @@ function PaymentsListController(
       angular.forEach(this.list, function(payment) {
         payment.type = 'PayPal';
       });
-    }
+    },
   });
 
   controllerScope.__proto__ = new PaymentsController();

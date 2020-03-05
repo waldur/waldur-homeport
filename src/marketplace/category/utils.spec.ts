@@ -20,6 +20,8 @@ describe('countSelectedFilterValues', () => {
       'list-security_in_transit-0': 'option2',
       'list-security_in_transit-1': 'option1',
     };
-    expect(countSelectedFilterValues(filterValues, 'security_in_transit')).toEqual(2);
+    expect(
+      countSelectedFilterValues(filterValues, 'security_in_transit'),
+    ).toEqual(2);
   });
 });

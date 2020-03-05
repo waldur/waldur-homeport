@@ -1,15 +1,15 @@
 @mixin property($property, $values) {
-    $px : ();
-    @each $value in $values {
-        $px: append($px,  $value + px);
-    }
-    #{$property}: $px;
+  $px: ();
+  @each $value in $values {
+    $px: append($px, $value + px);
+  }
+  #{$property}: $px;
 }
 
 @mixin boxshadow($values, $color) {
-    $px : ();
-    @each $value in $values {
-        $px: append($px,  $value + px);
-    }
-    box-shadow: $px $color;
+  $px: ();
+  @each $value in $values {
+    $px: append($px, $value + px);
+  }
+  box-shadow: $px $color;
 }

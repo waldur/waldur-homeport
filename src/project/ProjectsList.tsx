@@ -17,20 +17,18 @@ import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
 import { ProjectTablePlaceholder } from './ProjectTablePlaceholder';
 
 const ProjectLink = ({ row }) => (
-  <Link
-    state="project.details"
-    params={{ uuid: row.uuid }}
-    label={row.name}
-  />
+  <Link state="project.details" params={{ uuid: row.uuid }} label={row.name} />
 );
 
 const ProjectCostField = ({ row }) =>
-  defaultCurrency(row.billing_price_estimate && row.billing_price_estimate.total || 0);
+  defaultCurrency(
+    (row.billing_price_estimate && row.billing_price_estimate.total) || 0,
+  );
 
 const ProjectActionsField = ({ row }) => (
   <div className="btn-group">
-    <ProjectDetailsButton project={row}/>
-    <ProjectDeleteButton project={row}/>
+    <ProjectDetailsButton project={row} />
+    <ProjectDeleteButton project={row} />
   </div>
 );
 
@@ -69,8 +67,8 @@ export const TableComponent = props => {
       verboseName={translate('projects')}
       hasQuery={true}
       showPageSizeSelector={true}
-      placeholderComponent={<ProjectTablePlaceholder/>}
-      actions={<ProjectCreateButton/>}
+      placeholderComponent={<ProjectTablePlaceholder />}
+      actions={<ProjectCreateButton />}
       expandableRow={ProjectExpandableRowContainer}
       enableExport={true}
     />
@@ -85,22 +83,11 @@ const TableOptions = {
     customer: getCustomer(state).uuid,
     o: 'name',
   }),
-  exportRow: row => [
-    row.name,
-    row.description,
-    formatDateTime(row.created),
-  ],
-  exportFields: [
-    'Name',
-    'Description',
-    'Created',
-  ],
+  exportRow: row => [row.name, row.description, formatDateTime(row.created)],
+  exportFields: ['Name', 'Description', 'Created'],
 };
 
-const enhance = compose(
-  connectTable(TableOptions),
-  withTranslation,
-);
+const enhance = compose(connectTable(TableOptions), withTranslation);
 
 export const ProjectsList = enhance(TableComponent);
 

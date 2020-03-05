@@ -5,9 +5,18 @@ import { OpenStackSnapshotScheduleSummary } from './OpenStackSnapshotScheduleSum
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
-  ResourceSummary.register('OpenStackTenant.SnapshotSchedule', OpenStackSnapshotScheduleSummary);
-  module.service('openstackSnapshotSchedulesService', openstackSnapshotSchedulesService);
-  module.component('openstackSnapshotSchedulesList', openstackSnapshotSchedulesList);
+  ResourceSummary.register(
+    'OpenStackTenant.SnapshotSchedule',
+    OpenStackSnapshotScheduleSummary,
+  );
+  module.service(
+    'openstackSnapshotSchedulesService',
+    openstackSnapshotSchedulesService,
+  );
+  module.component(
+    'openstackSnapshotSchedulesList',
+    openstackSnapshotSchedulesList,
+  );
   module.config(actionConfig);
   module.config(tabsConfig);
   module.run(breadcrumbsConfig);
@@ -17,51 +26,49 @@ export default module => {
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('OpenStackTenant.SnapshotSchedule', {
-    order: [
-      'update',
-      'activate',
-      'deactivate',
-      'destroy',
-    ],
+    order: ['update', 'activate', 'deactivate', 'destroy'],
     options: {
       update: {
         title: gettext('Edit'),
         successMessage: gettext('Snapshot schedule has been updated.'),
         fields: {
           schedule: {
-            type: 'crontab'
+            type: 'crontab',
           },
           timezone: {
             type: 'timezone',
           },
-        }
+        },
       },
-    }
+    },
   });
 }
 
 // @ngInject
 function stateConfig(ResourceStateConfigurationProvider) {
-  ResourceStateConfigurationProvider.register('OpenStackTenant.SnapshotSchedule', {
-    error_states: [
-      'error'
-    ]
-  });
+  ResourceStateConfigurationProvider.register(
+    'OpenStackTenant.SnapshotSchedule',
+    {
+      error_states: ['error'],
+    },
+  );
 }
 
-
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
-  ResourceTabsConfigurationProvider.register('OpenStackTenant.SnapshotSchedule', {
-    order: [
-      'snapshots',
-      ...DEFAULT_SUBRESOURCE_TABS.order,
-    ],
-    options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
-      snapshots: {
-        heading: gettext('Snapshots'),
-        component: 'openstackSnapshotsNestedList'
-      },
-    })
-  });
+function tabsConfig(
+  ResourceTabsConfigurationProvider,
+  DEFAULT_SUBRESOURCE_TABS,
+) {
+  ResourceTabsConfigurationProvider.register(
+    'OpenStackTenant.SnapshotSchedule',
+    {
+      order: ['snapshots', ...DEFAULT_SUBRESOURCE_TABS.order],
+      options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
+        snapshots: {
+          heading: gettext('Snapshots'),
+          component: 'openstackSnapshotsNestedList',
+        },
+      }),
+    },
+  );
 }

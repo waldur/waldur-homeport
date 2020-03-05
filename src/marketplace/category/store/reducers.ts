@@ -11,7 +11,6 @@ const INITIAL_STATE = {
 export const categoryReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
-
     case constants.SET_FILTER_QUERY:
       return {
         ...state,
@@ -48,10 +47,9 @@ export const categoryReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export const categoryOfferingsReducer = (state = {items: []}, action) => {
+export const categoryOfferingsReducer = (state = { items: [] }, action) => {
   const { type, payload } = action;
   switch (type) {
-
     case constants.LOAD_OFFERINGS_START:
       return {
         ...state,

@@ -11,7 +11,9 @@ export default class AnsiblePlaybooksService {
   }
 
   get(uuid) {
-    return this.$http.get(`${this.endpoint}${uuid}/`).then(response => response.data);
+    return this.$http
+      .get(`${this.endpoint}${uuid}/`)
+      .then(response => response.data);
   }
 
   getAll() {

@@ -3,9 +3,14 @@
 </div>
 <div ng-if="!$ctrl.loading" class="wrapper wrapper-content">
   <div ng-if="$ctrl.userHasProfile">
-    <freeipa-account-edit profile="$ctrl.profile" on-profile-removed="$ctrl.refreshProfile()"></freeipa-account-edit>
+    <freeipa-account-edit
+      profile="$ctrl.profile"
+      on-profile-removed="$ctrl.refreshProfile()"
+    ></freeipa-account-edit>
   </div>
   <div ng-if="!$ctrl.userHasProfile">
-    <freeipa-account-create on-profile-added="$ctrl.refreshProfile()"></freeipa-account-create>
+    <freeipa-account-create
+      on-profile-added="$ctrl.refreshProfile()"
+    ></freeipa-account-create>
   </div>
 </div>

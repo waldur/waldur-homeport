@@ -10,13 +10,11 @@ interface CategoryItemProps {
 }
 
 export const CategoryItem = (props: CategoryItemProps) => (
-  <li className={classNames('m-b-xs', {'link--active': props.active})}>
-    <i className="fa fa-angle-right"/>
-    {' '}
+  <li className={classNames('m-b-xs', { 'link--active': props.active })}>
+    <i className="fa fa-angle-right" />{' '}
     <CategoryLink category_uuid={props.category.uuid}>
       {props.category.title}
-    </CategoryLink>
-    {' '}
+    </CategoryLink>{' '}
     ({props.category.offering_count})
   </li>
 );

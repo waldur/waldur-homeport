@@ -31,7 +31,9 @@ const useChecklistSelector = () => {
       setChecklistLoading(true);
       setChecklistErred(false);
       try {
-        const checklists = (await getAll<Checklist>('/marketplace-checklists/')).map(item => ({
+        const checklists = (
+          await getAll<Checklist>('/marketplace-checklists/')
+        ).map(item => ({
           ...item,
           name: translate('{name} ({questions_count} questions)', item),
         }));
@@ -42,7 +44,9 @@ const useChecklistSelector = () => {
       } catch (error) {
         setChecklistLoading(false);
         setChecklistErred(true);
-        const errorMessage = `${translate('Unable to load checklists.')} ${format(error)}`;
+        const errorMessage = `${translate(
+          'Unable to load checklists.',
+        )} ${format(error)}`;
         dispatch(showError(errorMessage));
         return;
       }
@@ -60,7 +64,7 @@ const useChecklistSelector = () => {
 };
 
 export const useProjectChecklist = project => {
-  const {checklist, ...checklistLoader} = useChecklistSelector();
+  const { checklist, ...checklistLoader } = useChecklistSelector();
 
   const [questionsList, setQuestionsList] = useState([]);
   const [questionsLoading, setQuestionsLoading] = useState(true);
@@ -76,18 +80,29 @@ export const useProjectChecklist = project => {
       setQuestionsLoading(true);
       setQuestionsErred(false);
       try {
-        const questions = await getAll(`/marketplace-checklists/${checklist.uuid}/questions/`);
-        const answersList = await getAll<Answer>(`/marketplace-checklists/${checklist.uuid}/answers/${project.uuid}/`);
+        const questions = await getAll(
+          `/marketplace-checklists/${checklist.uuid}/questions/`,
+        );
+        const answersList = await getAll<Answer>(
+          `/marketplace-checklists/${checklist.uuid}/answers/${project.uuid}/`,
+        );
         setQuestionsList(questions);
-        setAnswers(answersList.reduce((result, answer) => ({
-          ...result,
-          [answer.question_uuid]: answer.value,
-        }), {}));
+        setAnswers(
+          answersList.reduce(
+            (result, answer) => ({
+              ...result,
+              [answer.question_uuid]: answer.value,
+            }),
+            {},
+          ),
+        );
         setQuestionsLoading(false);
       } catch (error) {
         setQuestionsLoading(false);
         setQuestionsErred(true);
-        const errorMessage = `${translate('Unable to load questions and answers.')} ${format(error)}`;
+        const errorMessage = `${translate(
+          'Unable to load questions and answers.',
+        )} ${format(error)}`;
         dispatch(showError(errorMessage));
         return;
       }
@@ -105,10 +120,15 @@ export const useProjectChecklist = project => {
         question_uuid,
         value: answers[question_uuid],
       }));
-      await post(`/marketplace-checklists/${checklist.uuid}/answers/${project.uuid}/submit/`, payload);
+      await post(
+        `/marketplace-checklists/${checklist.uuid}/answers/${project.uuid}/submit/`,
+        payload,
+      );
     } catch (error) {
       setSubmitting(false);
-      const errorMessage = `${translate('Unable to submit answers.')} ${format(error)}`;
+      const errorMessage = `${translate('Unable to submit answers.')} ${format(
+        error,
+      )}`;
       dispatch(showError(errorMessage));
       return;
     }
@@ -130,7 +150,7 @@ export const useProjectChecklist = project => {
 };
 
 export const useChecklistOverview = () => {
-  const {checklist, ...checklistLoader} = useChecklistSelector();
+  const { checklist, ...checklistLoader } = useChecklistSelector();
 
   const [statsList, setStatsList] = useState([]);
   const [statsLoading, setStatsLoading] = useState(true);
@@ -143,13 +163,17 @@ export const useChecklistOverview = () => {
       setStatsLoading(true);
       setStatsErred(false);
       try {
-        const stats = await getAll(`/marketplace-checklists/${checklist.uuid}/stats/`);
+        const stats = await getAll(
+          `/marketplace-checklists/${checklist.uuid}/stats/`,
+        );
         setStatsList(stats);
         setStatsLoading(false);
       } catch (error) {
         setStatsLoading(false);
         setStatsErred(true);
-        const errorMessage = `${translate('Unable to load compliance overview.')} ${format(error)}`;
+        const errorMessage = `${translate(
+          'Unable to load compliance overview.',
+        )} ${format(error)}`;
         dispatch(showError(errorMessage));
         return;
       }

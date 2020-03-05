@@ -7,6 +7,7 @@ import { getUser } from '@waldur/workspace/selectors';
 import { OuterState, User } from '@waldur/workspace/types';
 
 import { getIssues } from '../api';
+
 import { IssuesShortListComponent } from './IssuesShortListComponent';
 import { Issue } from './types';
 
@@ -22,11 +23,9 @@ const connector = connect((state: OuterState) => ({
 }));
 
 export const IssuesShortList = connector((props: Props) => (
-  <Query
-    loader={loadUserIssues}
-    variables={props.user}
-    children={IssuesShortListComponent}
-  />
+  <Query loader={loadUserIssues} variables={props.user}>
+    {IssuesShortListComponent}
+  </Query>
 ));
 
 export default connectAngularComponent(IssuesShortList);

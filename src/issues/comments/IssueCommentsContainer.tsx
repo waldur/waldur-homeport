@@ -14,7 +14,11 @@ import * as actions from './actions';
 import * as constants from './constants';
 import { IssueCommentsFormMainContainer } from './IssueCommentsFormMainContainer';
 import { IssueCommentsList } from './IssueCommentsList';
-import { getCommentsSelector, getIsLoading, getCommentsGetErred } from './selectors';
+import {
+  getCommentsSelector,
+  getIsLoading,
+  getCommentsGetErred,
+} from './selectors';
 import { Comment, Issue } from './types';
 
 interface PureIssueCommentsContainerProps extends TranslateProps {
@@ -28,7 +32,9 @@ interface PureIssueCommentsContainerProps extends TranslateProps {
   renderHeader: boolean;
 }
 
-export class PureIssueCommentsContainer extends React.Component<PureIssueCommentsContainerProps> {
+export class PureIssueCommentsContainer extends React.Component<
+  PureIssueCommentsContainerProps
+> {
   state = {
     dropzoneActive: false,
   };
@@ -53,14 +59,16 @@ export class PureIssueCommentsContainer extends React.Component<PureIssueComment
   onDrop = files => {
     this.setState({ dropzoneActive: false });
     this.props.putAttachments(files);
-  }
+  };
 
   openDownloadModal = () => this.dropzoneNode.open();
 
   render() {
     const { comments, loading, issue, translate, erred } = this.props;
     const { dropzoneActive } = this.state;
-    const body = loading ? <LoadingSpinner /> : (
+    const body = loading ? (
+      <LoadingSpinner />
+    ) : (
       <>
         <IssueCommentsList comments={comments} />
         <IssueCommentsFormMainContainer
@@ -77,14 +85,14 @@ export class PureIssueCommentsContainer extends React.Component<PureIssueComment
         onDrop={this.onDrop}
         onDragEnter={this.onDragEnter}
         onDragLeave={this.onDragLeave}
-        ref={node => this.dropzoneNode = node}
+        ref={node => (this.dropzoneNode = node)}
       >
-        {dropzoneActive &&
+        {dropzoneActive && (
           <LoadingOverlay
             className="loading-overlay_border_dashed"
             message={translate('Drop files to attach them to the issue.')}
           />
-        }
+        )}
         {this.props.renderHeader ? (
           <div className="ibox">
             <div className="ibox-title content-between-center">
@@ -93,11 +101,11 @@ export class PureIssueCommentsContainer extends React.Component<PureIssueComment
                 <IssueReload issueUrl={issue.url} />
               </div>
             </div>
-            <div className="ibox-content">
-              {body}
-            </div>
+            <div className="ibox-content">{body}</div>
           </div>
-        ) : body}
+        ) : (
+          body
+        )}
       </Dropzone>
     );
   }
@@ -110,9 +118,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  putAttachments: (files: File[]): void => dispatch(issueAttachmentsPut(ownProps.issue.url, files)),
-  fetchComments: (): void => dispatch(actions.issueCommentsGet(ownProps.issue.url)),
-  setIssue: (issue: Issue): void => dispatch(actions.issueCommentsIssueSet(issue)),
+  putAttachments: (files: File[]): void =>
+    dispatch(issueAttachmentsPut(ownProps.issue.url, files)),
+  fetchComments: (): void =>
+    dispatch(actions.issueCommentsGet(ownProps.issue.url)),
+  setIssue: (issue: Issue): void =>
+    dispatch(actions.issueCommentsIssueSet(issue)),
 });
 
 const enhance = compose(

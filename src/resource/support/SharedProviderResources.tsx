@@ -16,15 +16,21 @@ interface CustomerResource extends Resource {
   customer_uuid: string;
 }
 
-const TableComponent = (props: TableProps<CustomerResource> & {provider_uuid: string}) => {
+const TableComponent = (
+  props: TableProps<CustomerResource> & { provider_uuid: string },
+) => {
   const columns: Array<Column<CustomerResource>> = [
     {
       title: translate('Name'),
-      render: ({ row }) => <ResourceName resource={row}/>,
+      render: ({ row }) => <ResourceName resource={row} />,
     },
     {
       title: translate('Organization'),
-      render: ({ row }) => <OrganizationLink row={{uuid: row.customer_uuid, name: row.customer_name}}/>,
+      render: ({ row }) => (
+        <OrganizationLink
+          row={{ uuid: row.customer_uuid, name: row.customer_name }}
+        />
+      ),
     },
     {
       title: translate('Created at'),
@@ -32,7 +38,7 @@ const TableComponent = (props: TableProps<CustomerResource> & {provider_uuid: st
     },
     {
       title: translate('State'),
-      render: ({ row }) => <ResourceState resource={row}/>,
+      render: ({ row }) => <ResourceState resource={row} />,
     },
   ];
 
@@ -55,13 +61,13 @@ const exportRow = (row: CustomerResource) => [
   row.state,
 ];
 
-const exportFields = () => ([
+const exportFields = () => [
   translate('Name'),
   translate('Organization'),
   translate('Created at'),
   translate('Type'),
   translate('State'),
-]);
+];
 
 const mapPropsToFilter = props => ({
   service_settings_uuid: props.provider_uuid,
@@ -76,5 +82,6 @@ const TableOptions: TableOptions = {
   exportAll: true,
 };
 
-export const SharedProviderResources = connectTable(TableOptions)(TableComponent) as
-  React.ComponentType<{provider_uuid: string}>;
+export const SharedProviderResources = connectTable(TableOptions)(
+  TableComponent,
+) as React.ComponentType<{ provider_uuid: string }>;

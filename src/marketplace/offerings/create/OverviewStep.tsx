@@ -17,7 +17,8 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
     submitting={false}
     labelClass="col-sm-2"
     controlClass="col-sm-8"
-    clearOnUnmount={false}>
+    clearOnUnmount={false}
+  >
     <StringField
       name="name"
       label={props.translate('Name')}

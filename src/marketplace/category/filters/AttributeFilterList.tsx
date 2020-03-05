@@ -10,10 +10,14 @@ import { AttributeFilterSection } from './AttributeFilterSection';
 const SUPPORTED_TYPES = ['choice', 'list', 'boolean'];
 
 const prepareSections = sections =>
-  sections.map(section => ({
-    ...section,
-    attributes: section.attributes.filter(attribute => SUPPORTED_TYPES.indexOf(attribute.type) !== -1),
-  })).filter(section => section.attributes.length > 0);
+  sections
+    .map(section => ({
+      ...section,
+      attributes: section.attributes.filter(
+        attribute => SUPPORTED_TYPES.indexOf(attribute.type) !== -1,
+      ),
+    }))
+    .filter(section => section.attributes.length > 0);
 
 interface AttributeFilterListContainerState {
   sections: Section[];
@@ -21,9 +25,11 @@ interface AttributeFilterListContainerState {
   loaded: boolean;
 }
 
-export const AttributeFilterList = (props: AttributeFilterListContainerState) => {
+export const AttributeFilterList = (
+  props: AttributeFilterListContainerState,
+) => {
   if (props.loading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   if (!props.loaded) {

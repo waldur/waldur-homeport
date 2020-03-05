@@ -10,12 +10,12 @@ import { UserEditContainer } from './support/UserEditContainer';
 const UserManage = () => {
   const user = useSelector(getUser);
   if (!user) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
   return (
     <div className="row wrapper p-b-xl">
       <div className="col-lg-10">
-        <UserEditContainer user={user}/>
+        <UserEditContainer user={user} />
       </div>
     </div>
   );

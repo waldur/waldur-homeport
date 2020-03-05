@@ -16,7 +16,9 @@ eventsRegistry.registerGroup({
     },
     {
       key: 'project_name_update_succeeded',
-      title: gettext('Project has been renamed from {project_previous_name} to {project_link}.'),
+      title: gettext(
+        'Project has been renamed from {project_previous_name} to {project_link}.',
+      ),
     },
     {
       key: 'project_update_succeeded',

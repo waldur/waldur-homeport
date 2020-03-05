@@ -12,13 +12,14 @@ import {
   isRequired,
   isVisibleForSupportOrStaff,
   isVisibleSupport,
-  userTokenIsVisible
+  userTokenIsVisible,
 } from '@waldur/user/support/selectors';
 import { UserEditForm } from '@waldur/user/support/UserEditForm';
 import { UserDetails } from '@waldur/workspace/types';
 
 import '../user-edit.scss';
 import * as actions from './actions';
+import { EmailChangeForm } from './EmailChangeForm';
 
 interface UserUpdateComponentProps {
   showDeleteButton: boolean;
@@ -26,6 +27,9 @@ interface UserUpdateComponentProps {
 }
 
 const UserUpdateComponent: React.FC<UserUpdateComponentProps> = props => {
+  if (!props.user.email) {
+    return <EmailChangeForm user={props.user} />;
+  }
   return (
     <div className="row">
       <div className="col-sm-2 col-xs-12 user-edit">
@@ -34,8 +38,15 @@ const UserUpdateComponent: React.FC<UserUpdateComponentProps> = props => {
             <Gravatar email={props.user.email} size={100} />
           </div>
           <span className="manage-gravatar">
-            {translate('Manage at')}<br />
-            <a href="https://gravatar.com" target="_blank">gravatar.com</a>
+            {translate('Manage at')}
+            <br />
+            <a
+              href="https://gravatar.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              gravatar.com
+            </a>
           </span>
         </div>
       </div>
@@ -50,7 +61,9 @@ UserUpdateComponent.defaultProps = {
 
 const getProtectedMethods = (state: any): string[] => {
   const plugins = getConfig(state).plugins;
-  return plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || [];
+  return (
+    plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || []
+  );
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -61,28 +74,36 @@ const mapStateToProps = (state, ownProps) => ({
   fieldIsVisible: fieldIsVisible(ownProps),
   isRequired,
   nativeNameIsVisible: getNativeNameVisible(state),
-  protected: getProtectedMethods(state).includes(ownProps.user.registration_method),
+  protected: getProtectedMethods(state).includes(
+    ownProps.user.registration_method,
+  ),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   let updateUser;
   if (ownProps.onSave) {
-    updateUser = data => ownProps.onSave({
-      ...data,
-      agree_with_policy: true,
-    });
+    updateUser = data =>
+      ownProps.onSave({
+        ...data,
+        agree_with_policy: true,
+      });
   } else {
-    updateUser = data => actions.updateUser({
-      ...data,
-      uuid: ownProps.user.uuid,
-      agree_with_policy: true,
-    }, dispatch);
+    updateUser = data =>
+      actions.updateUser(
+        {
+          ...data,
+          uuid: ownProps.user.uuid,
+          agree_with_policy: true,
+        },
+        dispatch,
+      );
   }
 
   return {
     updateUser,
     dispatchRemoval: () => dispatch(actions.showUserRemoval()),
-    dispatchMessage: resolve => dispatch(actions.showUserRemovalMessage(resolve)),
+    dispatchMessage: resolve =>
+      dispatch(actions.showUserRemovalMessage(resolve)),
   };
 };
 
@@ -95,10 +116,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   if (isVisibleSupportFeature) {
     showUserRemoval = dispatchRemoval;
   } else {
-    showUserRemoval = () => dispatchMessage({
-      supportEmail: ENV.supportEmail,
-      userName: user.full_name,
-    });
+    showUserRemoval = () =>
+      dispatchMessage({
+        supportEmail: ENV.supportEmail,
+        userName: user.full_name,
+      });
   }
 
   return {
@@ -116,4 +138,8 @@ const enhance = compose(
 
 export const UserEditContainer = enhance(UserUpdateComponent);
 
-export default connectAngularComponent(UserEditContainer, ['user', 'initial', 'onSave']);
+export default connectAngularComponent(UserEditContainer, [
+  'user',
+  'initial',
+  'onSave',
+]);

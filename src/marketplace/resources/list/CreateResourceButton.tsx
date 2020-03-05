@@ -23,9 +23,12 @@ const PureCreateResourceButton = (props: OwnProps & DispatchProps) => (
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   return {
-    onClick: () => dispatch(stateGo('marketplace-category', {
-      category_uuid: ownProps.category_uuid,
-    })),
+    onClick: () =>
+      dispatch(
+        stateGo('marketplace-category', {
+          category_uuid: ownProps.category_uuid,
+        }),
+      ),
   };
 };
 

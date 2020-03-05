@@ -17,9 +17,9 @@ interface CustomerResourcesFilterProps {
 
 const PureCustomerResourcesFilter: React.FC<CustomerResourcesFilterProps> = props => (
   <Row>
-    <ProjectFilter customer_uuid={props.customer.uuid}/>
-    <CategoryFilter/>
-    <ResourceStateFilter/>
+    <ProjectFilter customer_uuid={props.customer.uuid} />
+    <CategoryFilter />
+    <ResourceStateFilter />
   </Row>
 );
 
@@ -28,8 +28,10 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  reduxForm({form: 'CustomerResourcesFilter'}),
+  reduxForm({ form: 'CustomerResourcesFilter' }),
   connect(mapStateToProps),
 );
 
-export const CustomerResourcesFilter = enhance(PureCustomerResourcesFilter) as React.ComponentType<{}>;
+export const CustomerResourcesFilter = enhance(
+  PureCustomerResourcesFilter,
+) as React.ComponentType<{}>;

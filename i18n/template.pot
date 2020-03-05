@@ -1800,6 +1800,10 @@ msgstr ""
 msgid "Do you really want to delete comment?"
 msgstr ""
 
+#: src/rancher/node-actions/UnlinkAction.ts
+msgid "Do you want to unlink instance {name}?"
+msgstr ""
+
 #: src/rancher/RancherNodeSummary.tsx
 msgid "Docker version"
 msgstr ""
@@ -1922,7 +1926,7 @@ msgstr ""
 msgid "Email update"
 msgstr ""
 
-#: src/user/support/UserEmailChangeDialog.tsx
+#: src/user/support/useEmailChange.ts
 msgid "Email verification has been sent. Please check your inbox."
 msgstr ""
 
@@ -3583,6 +3587,10 @@ msgstr ""
 msgid "Networks"
 msgstr ""
 
+#: src/user/support/EmailChangeForm.tsx
+msgid "New e-mail address"
+msgstr ""
+
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "New email"
 msgstr ""
@@ -4329,10 +4337,6 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
-#: src/quotas/constants.js
-msgid "Package amount"
-msgstr ""
-
 #: src/error/routes.js
 msgid "Page is not found."
 msgstr ""
@@ -4950,10 +4954,6 @@ msgstr ""
 msgid "Project roles"
 msgstr ""
 
-#: src/quotas/constants.js
-msgid "Project service"
-msgstr ""
-
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
@@ -5113,6 +5113,11 @@ msgstr ""
 #: src/project/ProjectCreateButton.tsx
 #: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
+msgstr ""
+
+#: src/quotas/QuotaUsageBarChart.tsx
+#: src/quotas/quota-usage-bar-chart.js
+msgid "Quota usage exceeds available limit."
 msgstr ""
 
 #: src/providers/details/provider-project-link-quota.html
@@ -5509,6 +5514,10 @@ msgstr ""
 msgid "Requested by"
 msgstr ""
 
+#: src/user/support/EmailChangeForm.tsx
+msgid "Requested e-mail"
+msgstr ""
+
 #: src/user/support/EmailField.tsx
 msgid "Requested email"
 msgstr ""
@@ -5857,11 +5866,6 @@ msgstr ""
 #: src/team/add-project-member.js
 #: src/team/add-team-member.js
 msgid "Save"
-msgstr ""
-
-#: src/controllers/base-controller-class-es6.js
-#: src/controllers/base-controller-class.js
-msgid "Saving of {vm_name} was successful."
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
@@ -7269,9 +7273,12 @@ msgstr ""
 msgid "Unable to cancel order item."
 msgstr ""
 
-#: src/user/support/UserEmailChangeCallback.tsx
-#: src/user/support/UserEmailChangeDialog.tsx
+#: src/user/support/useEmailChange.ts
 msgid "Unable to change email."
+msgstr ""
+
+#: src/user/support/UserEmailChangeCallback.tsx
+msgid "Unable to confirm email."
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.js
@@ -7337,6 +7344,10 @@ msgstr ""
 msgid "Unable to fetch comments."
 msgstr ""
 
+#: src/user/support/UserEmailChangeCallback.tsx
+msgid "Unable to fetch current user."
+msgstr ""
+
 #: src/table-react/Table.tsx
 msgid "Unable to fetch data."
 msgstr ""
@@ -7371,11 +7382,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/store/effects.ts
 msgid "Unable to generate service provider API secret code."
-msgstr ""
-
-#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-msgid "Unable to get checkout summary data."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -7724,6 +7730,10 @@ msgstr ""
 msgid "Unlimited"
 msgstr ""
 
+#: src/rancher/node-actions/UnlinkAction.ts
+msgid "Unlink instance"
+msgstr ""
+
 #: src/paypal/paypal-invoices-list.js
 msgid "Unpaid"
 msgstr ""
@@ -8011,7 +8021,7 @@ msgid "User {user_link} has revoked {affected_user_link}."
 msgstr ""
 
 #: src/auth/events.ts
-msgid "User {user_link} logged out  successfully with SAML2."
+msgid "User {user_link} logged out successfully with SAML2."
 msgstr ""
 
 #: src/auth/auth-login.html
@@ -8149,6 +8159,10 @@ msgstr ""
 
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 msgid "Variable #{index}"
+msgstr ""
+
+#: src/user/support/EmailChangeForm.tsx
+msgid "Verify e-mail"
 msgstr ""
 
 #: src/user/support/UserEmailChangeCallback.tsx
@@ -8714,11 +8728,6 @@ msgstr ""
 
 #: src/resource/events.ts
 msgid "{resource_name} has been deleted."
-msgstr ""
-
-#: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
-msgid "{type} quota usage exceeds available limit."
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx

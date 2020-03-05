@@ -18,7 +18,9 @@ export function* analyticsProjectsFetch() {
     return projects;
   } catch (error) {
     yield put(actions.analyticsProjectsFetchError(error));
-    const errorMessage = `${translate('Unable to fetch projects.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to fetch projects.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
 }
@@ -31,7 +33,9 @@ export function* analyticsTenantsFetch() {
     return tenants;
   } catch (error) {
     yield put(actions.analyticsProjectsFetchError(error));
-    const errorMessage = `${translate('Unable to fetch tenants.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to fetch tenants.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
 }
@@ -39,10 +43,16 @@ export function* analyticsTenantsFetch() {
 export function* analyticsHistoryQuotaFetch(tenantUuid, quotaUuid) {
   try {
     const data = yield call(api.fetchQuotaHistory, quotaUuid);
-    yield put(actions.analyticsHistoryQuotaFetchSuccess(data, tenantUuid, quotaUuid));
+    yield put(
+      actions.analyticsHistoryQuotaFetchSuccess(data, tenantUuid, quotaUuid),
+    );
   } catch (error) {
-    yield put(actions.analyticsHistoryQuotaFetchError(error, tenantUuid, quotaUuid));
-    const errorMessage = `${translate('Unable to fetch quota history.')} ${format(error)}`;
+    yield put(
+      actions.analyticsHistoryQuotaFetchError(error, tenantUuid, quotaUuid),
+    );
+    const errorMessage = `${translate(
+      'Unable to fetch quota history.',
+    )} ${format(error)}`;
     yield put(showError(errorMessage));
   }
 }

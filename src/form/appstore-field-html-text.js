@@ -17,20 +17,20 @@ const appstoreFieldHtmlText = {
     $onInit() {
       this.loading = true;
       loadSummernote().then(() => {
-        this.$ocLazyLoad.load({name: 'summernote'});
+        this.$ocLazyLoad.load({ name: 'summernote' });
         this.options = {
           height: 150,
           toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']]
-          ]
+            ['height', ['height']],
+          ],
         };
         this.loading = false;
       });
     }
-  }
+  },
 };
 
 export default appstoreFieldHtmlText;

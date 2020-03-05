@@ -2,11 +2,11 @@ const INITIAL_STATE = null;
 
 export const INIT_CONFIG = 'waldur/core/INIT_CONFIG';
 
-export const initConfig = (config) => ({
+export const initConfig = config => ({
   type: INIT_CONFIG,
   payload: {
-    config
-  }
+    config,
+  },
 });
 
 const getFeaturesMap = features => {
@@ -17,27 +17,34 @@ const getFeaturesMap = features => {
   return map;
 };
 
-export const reducer = (state=INITIAL_STATE, action) => {
-  switch(action.type) {
+export const reducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case INIT_CONFIG: {
+      const {
+        toBeFeatures = [],
+        disabledFeatures = [],
+        enabledFeatures = [],
+      } = action.payload.config;
+      return {
+        ...action.payload.config,
+        disabledFeatures: getFeaturesMap(toBeFeatures.concat(disabledFeatures)),
+        enabledFeatures: getFeaturesMap(enabledFeatures),
+      };
+    }
 
-  case INIT_CONFIG: {
-    const {toBeFeatures = [], disabledFeatures = [], enabledFeatures = []} = action.payload.config;
-    return {
-      ...action.payload.config,
-      disabledFeatures: getFeaturesMap(toBeFeatures.concat(disabledFeatures)),
-      enabledFeatures: getFeaturesMap(enabledFeatures),
-    };
-  }
-
-  default:
-    return state;
+    default:
+      return state;
   }
 };
 
 export const getConfig = state => state.config;
 
 export const isVisible = (state, feature) => {
-  const {featuresVisible, disabledFeatures = {}, enabledFeatures = {}} = state.config;
+  const {
+    featuresVisible,
+    disabledFeatures = {},
+    enabledFeatures = {},
+  } = state.config;
   if (feature === undefined || feature === null) {
     return true;
   }

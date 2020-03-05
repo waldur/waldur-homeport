@@ -11,6 +11,7 @@ import { Column } from '@waldur/table-react/types';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueTypeIcon } from '../types/IssueTypeIcon';
+
 import { IssueCreateButton } from './IssueCreateButton';
 
 interface OwnProps {
@@ -32,7 +33,7 @@ export const TableComponent: React.FC<IssueTableProps> = props => {
       render: ({ row }) => (
         <Link
           state="support.detail"
-          params={{uuid: row.uuid}}
+          params={{ uuid: row.uuid }}
           label={row.key || 'N/A'}
         />
       ),
@@ -42,21 +43,27 @@ export const TableComponent: React.FC<IssueTableProps> = props => {
       title: translate('Status'),
       render: ({ row }) => (
         <>
-          <IssueTypeIcon type={row.type} />
-          {' '}
-          {row.status || 'N/A'}
+          <IssueTypeIcon type={row.type} /> {row.status || 'N/A'}
         </>
       ),
       orderField: 'status',
     },
     {
       title: translate('Title'),
-      render: ({ row }) => <span className="ellipsis" style={{width: 150}}>{row.summary}</span>,
+      render: ({ row }) => (
+        <span className="ellipsis" style={{ width: 150 }}>
+          {row.summary}
+        </span>
+      ),
       orderField: 'summary',
     },
     {
       title: translate('Description'),
-      render: ({ row }) => <span className="ellipsis" style={{width: 150}}>{row.description}</span>,
+      render: ({ row }) => (
+        <span className="ellipsis" style={{ width: 150 }}>
+          {row.description}
+        </span>
+      ),
     },
     {
       title: translate('Service type'),
@@ -106,7 +113,7 @@ export const TableComponent: React.FC<IssueTableProps> = props => {
       hasQuery={true}
       showPageSizeSelector={true}
       enableExport={true}
-      actions={props.scope && <IssueCreateButton scope={props.scope}/>}
+      actions={props.scope && <IssueCreateButton scope={props.scope} />}
     />
   );
 };
@@ -116,7 +123,7 @@ TableComponent.defaultProps = {
 };
 
 const exportRow = (row, props) => {
-  const {supportOrStaff, hiddenColumns} = props;
+  const { supportOrStaff, hiddenColumns } = props;
   const result = [
     row.key || 'N/A',
     row.status || 'N/A',
@@ -142,13 +149,15 @@ const exportRow = (row, props) => {
 };
 
 const exportFields = props => {
-  const {supportOrStaff, hiddenColumns} = props;
+  const { supportOrStaff, hiddenColumns } = props;
   return [
     translate('Key'),
     translate('Status'),
     translate('Title'),
     translate('Description'),
-    supportOrStaff && !hiddenColumns.includes('resource_type') && translate('Service type'),
+    supportOrStaff &&
+      !hiddenColumns.includes('resource_type') &&
+      translate('Service type'),
     !hiddenColumns.includes('customer') && translate('Organization'),
     translate('Caller'),
     supportOrStaff && translate('Reporter'),
@@ -173,6 +182,8 @@ const mapStateToProps = state => ({
 
 const connector = connect(mapStateToProps);
 
-export const IssuesList = connector(connectTable(TableOptions)(TableComponent)) as React.ComponentType<OwnProps>;
+export const IssuesList = connector(
+  connectTable(TableOptions)(TableComponent),
+) as React.ComponentType<OwnProps>;
 
 export default connectAngularComponent(IssuesList, ['filter']);

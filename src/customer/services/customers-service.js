@@ -1,29 +1,36 @@
 // @ngInject
-export default function customersService(baseServiceClass, $state, $q, $http, ENV, currentStateService, usersService) {
+export default function customersService(
+  baseServiceClass,
+  $state,
+  $q,
+  $http,
+  ENV,
+  currentStateService,
+  usersService,
+) {
   let ServiceClass = baseServiceClass.extend({
     filterByCustomer: false,
     countryChoices: [],
 
-    init:function() {
+    init: function() {
       this._super();
       this.endpoint = '/customers/';
     },
     getBalanceHistory: function(uuid) {
-      let query = {UUID: uuid, operation: 'balance_history'};
+      let query = { UUID: uuid, operation: 'balance_history' };
       return this.getList(query);
     },
     getCounters: function(query) {
-      let extendedQuery = angular.extend({operation: 'counters'}, query);
+      let extendedQuery = angular.extend({ operation: 'counters' }, query);
       return this.getFactory(false).get(extendedQuery).$promise;
     },
     isOwnerOrStaff: function() {
       let vm = this;
-      return $q.all([
-        currentStateService.getCustomer(),
-        usersService.getCurrentUser()
-      ]).then(function(result) {
-        return vm.checkCustomerUser.apply(vm, result);
-      });
+      return $q
+        .all([currentStateService.getCustomer(), usersService.getCurrentUser()])
+        .then(function(result) {
+          return vm.checkCustomerUser.apply(vm, result);
+        });
     },
     checkCustomerUser: function(customer, user) {
       if (user && user.is_staff) {
@@ -46,7 +53,7 @@ export default function customersService(baseServiceClass, $state, $q, $http, EN
       } else {
         return $http({
           method: 'OPTIONS',
-          url: ENV.apiEndpoint + 'api/customers/'
+          url: ENV.apiEndpoint + 'api/customers/',
         }).then(function(response) {
           vm.countryChoices = response.data.actions.POST.country.choices;
           return vm.countryChoices;
@@ -59,12 +66,11 @@ export default function customersService(baseServiceClass, $state, $q, $http, EN
       });
     },
     refreshCurrentCustomer(customerUuid) {
-      return this.$get(customerUuid)
-      .then(customer => {
+      return this.$get(customerUuid).then(customer => {
         currentStateService.setCustomer(customer);
         return customer;
       });
-    }
+    },
   });
   return new ServiceClass();
 }

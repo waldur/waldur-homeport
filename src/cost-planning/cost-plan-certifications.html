@@ -3,7 +3,8 @@
     {{ $item.name }}
   </ui-select-match>
   <ui-select-choices
-    repeat="certification in $ctrl.certifications | filter: {name: $select.search} track by certification.uuid">
+    repeat="certification in $ctrl.certifications | filter: {name: $select.search} track by certification.uuid"
+  >
     <div ng-bind-html="certification.name | highlight: $select.search"></div>
   </ui-select-choices>
 </ui-select>

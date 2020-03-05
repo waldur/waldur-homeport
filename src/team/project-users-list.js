@@ -16,7 +16,8 @@ export default function ProjectUsersListController(
   ENV,
   $q,
   $rootScope,
-  $uibModal) {
+  $uibModal,
+) {
   let controllerScope = this;
   let TeamController = baseControllerListClass.extend({
     init: function() {
@@ -32,9 +33,12 @@ export default function ProjectUsersListController(
         }),
         usersService.getCurrentUser().then(user => {
           controllerScope.currentUser = user;
-        })
+        }),
       ]).then(() => {
-        this.isOwnerOrStaff = customersService.checkCustomerUser(controllerScope.currentCustomer, controllerScope.currentUser);
+        this.isOwnerOrStaff = customersService.checkCustomerUser(
+          controllerScope.currentCustomer,
+          controllerScope.currentUser,
+        );
         this.getProjectRole('manager').then(result => {
           this.isProjectManager = !this.isOwnerOrStaff && result.length > 0;
           this.tableOptions = this.getTableOptions();
@@ -50,23 +54,23 @@ export default function ProjectUsersListController(
         columns: [
           {
             title: gettext('Member'),
-            render: ncUtils.renderAvatar
+            render: ncUtils.renderAvatar,
           },
           {
             title: gettext('E-mail'),
             render: function(row) {
               return row.email;
-            }
+            },
           },
           {
             title: gettext('Role in project'),
             render: function(row) {
               return ENV.roles[row.role];
-            }
-          }
+            },
+          },
         ],
         tableActions: this.getTableActions(),
-        rowActions: this.getRowActions()
+        rowActions: this.getRowActions(),
       };
     },
     getTableActions: function() {
@@ -75,8 +79,8 @@ export default function ProjectUsersListController(
           {
             title: gettext('Add member'),
             iconClass: 'fa fa-plus',
-            callback: this.openPopup.bind(this)
-          }
+            callback: this.openPopup.bind(this),
+          },
         ];
       }
     },
@@ -86,8 +90,8 @@ export default function ProjectUsersListController(
         {
           title: gettext('Details'),
           iconClass: 'fa fa-eye',
-          callback: this.openDetails.bind(this)
-        }
+          callback: this.openDetails.bind(this),
+        },
       ];
 
       if (this.isOwnerOrStaff) {
@@ -108,9 +112,11 @@ export default function ProjectUsersListController(
           },
           tooltip: function(row) {
             if (vm.isProjectManager && row.role === 'manager') {
-              return gettext('Project manager cannot edit users with same role.');
+              return gettext(
+                'Project manager cannot edit users with same role.',
+              );
             }
-          }
+          },
         });
       }
 
@@ -123,8 +129,8 @@ export default function ProjectUsersListController(
       $uibModal.open({
         component: 'userPopover',
         resolve: {
-          user_uuid: () => user.uuid
-        }
+          user_uuid: () => user.uuid,
+        },
       });
     },
     openPopup: function(user) {
@@ -132,32 +138,35 @@ export default function ProjectUsersListController(
         addedUsers = this.list.map(function(users) {
           return users.uuid;
         });
-      $uibModal.open({
-        component: 'addProjectMember',
-        resolve: {
-          currentProject: () => controllerScope.currentProject,
-          currentCustomer: () => controllerScope.currentCustomer,
-          editUser: () => user,
-          isProjectManager: () => isProjectManager,
-          addedUsers: () => addedUsers
-        }
-      }).result.then(function() {
-        controllerScope.resetCache();
-      });
+      $uibModal
+        .open({
+          component: 'addProjectMember',
+          resolve: {
+            currentProject: () => controllerScope.currentProject,
+            currentCustomer: () => controllerScope.currentCustomer,
+            editUser: () => user,
+            isProjectManager: () => isProjectManager,
+            addedUsers: () => addedUsers,
+          },
+        })
+        .result.then(function() {
+          controllerScope.resetCache();
+        });
     },
     getFilter: function() {
       return {
         operation: 'users',
         UUID: controllerScope.currentProject.uuid,
-        o: 'concatenated_name'
+        o: 'concatenated_name',
       };
     },
     getProjectRole: function(role) {
       return projectPermissionsService.getList({
         user_url: controllerScope.currentUser.url,
         project: controllerScope.currentProject.uuid,
-        role: role});
-    }
+        role: role,
+      });
+    },
   });
 
   controllerScope.__proto__ = new TeamController();

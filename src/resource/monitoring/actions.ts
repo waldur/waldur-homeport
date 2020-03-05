@@ -40,13 +40,18 @@ export const deleteFailure = () => ({
 });
 
 export const openDetailsDialog = resource =>
-  openModalDialog('monitoringDetailsDialog', {resolve: {resource}, size: 'lg'});
+  openModalDialog('monitoringDetailsDialog', {
+    resolve: { resource },
+    size: 'lg',
+  });
 
 export const openCreateDialog = resource =>
-  openModalDialog('monitoringCreateDialog', {resolve: {resource}});
+  openModalDialog('monitoringCreateDialog', { resolve: { resource } });
 
 export const loadLinks = createFormAction('waldur/monitoring/LOAD_LINKS');
 
-export const loadTemplates = createFormAction('waldur/monitoring/LOAD_TEMPLATES');
+export const loadTemplates = createFormAction(
+  'waldur/monitoring/LOAD_TEMPLATES',
+);
 
 export const createHost = createFormAction('waldur/monitoring/CREATE_HOST');

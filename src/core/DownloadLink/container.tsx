@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 
-import { downloadRequest as downloadAction} from './actions';
-import { downloadReset as resetAction} from './actions';
+import {
+  downloadRequest as downloadAction,
+  downloadReset as resetAction,
+} from './actions';
 import { PureDownloadLink } from './component';
 import { getDownloadLinkState } from './reducers';
 
@@ -27,6 +29,9 @@ const mapStateToDispatch = (dispatch, ownProps) => ({
   onReset: () => dispatch(resetAction()),
 });
 
-const connector = connect<StateProps, DispatchProps, OwnProps>(getDownloadLinkState, mapStateToDispatch);
+const connector = connect<StateProps, DispatchProps, OwnProps>(
+  getDownloadLinkState,
+  mapStateToDispatch,
+);
 
 export const DownloadLink = connector(PureDownloadLink);

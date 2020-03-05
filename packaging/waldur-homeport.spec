@@ -1,12 +1,12 @@
 # BuildRequiresRepo: epel-release
-# BuildRequiresRepo: https://rpm.nodesource.com/pub_8.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
+# BuildRequiresRepo: https://rpm.nodesource.com/pub_12.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
 
 %define __conf_dir %{_sysconfdir}/%{name}
 %define __data_dir %{_datadir}/%{name}
 
 Name: waldur-homeport
 Summary: Waldur HomePort
-Version: 4.4.5
+Version: 4.5.4
 Release: 1.el7
 License: MIT
 Source0: %{name}-%{version}.tar.gz
@@ -61,6 +61,30 @@ rm -rf %{buildroot}
 %config(noreplace) %{__conf_dir}/nginx.conf
 
 %changelog
+* Fri Feb 28 2020 Jenkins <jenkins@opennodecloud.com> - 4.5.4-1.el7
+- New upstream release
+
+* Fri Feb 28 2020 Jenkins <jenkins@opennodecloud.com> - 4.5.2-1.el7
+- New upstream release
+
+* Sat Feb 22 2020 Jenkins <jenkins@opennodecloud.com> - 4.5.1-1.el7
+- New upstream release
+
+* Sat Feb 22 2020 Jenkins <jenkins@opennodecloud.com> - 4.5.0-1.el7
+- New upstream release
+
+* Tue Feb 18 2020 Jenkins <jenkins@opennodecloud.com> - 4.4.9-1.el7
+- New upstream release
+
+* Sat Feb 8 2020 Jenkins <jenkins@opennodecloud.com> - 4.4.8-1.el7
+- New upstream release
+
+* Fri Feb 7 2020 Jenkins <jenkins@opennodecloud.com> - 4.4.7-1.el7
+- New upstream release
+
+* Thu Feb 6 2020 Jenkins <jenkins@opennodecloud.com> - 4.4.6-1.el7
+- New upstream release
+
 * Mon Feb 3 2020 Jenkins <jenkins@opennodecloud.com> - 4.4.5-1.el7
 - New upstream release
 

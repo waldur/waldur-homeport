@@ -3,11 +3,14 @@
     items="items"
     context="context"
     expanded-item="'marketplace-resources'"
-    active-item="$ctrl.activeItem">
+    active-item="$ctrl.activeItem"
+  >
   </sidebar>
 </div>
-<div id="page-wrapper"
-  ng-class="$ctrl.$state.current.data.pageClass || 'white-bg'">
+<div
+  id="page-wrapper"
+  ng-class="$ctrl.$state.current.data.pageClass || 'white-bg'"
+>
   <cookies-consent></cookies-consent>
   <div ng-if="!$ctrl.model">
     <loading-spinner></loading-spinner>
@@ -20,7 +23,10 @@
         <breadcrumbs-container></breadcrumbs-container>
       </div>
     </div>
-    <resource-details resource="$ctrl.model" controller="$ctrl"></resource-details>
+    <resource-details
+      resource="$ctrl.model"
+      controller="$ctrl"
+    ></resource-details>
     <div class="footer-indent"></div>
     <app-footer></app-footer>
   </div>

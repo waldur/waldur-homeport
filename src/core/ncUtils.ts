@@ -10,8 +10,12 @@ export function isCustomerQuotaReached(customer, quotaName) {
   const quotas = customer.quotas || [];
   for (const quota of quotas) {
     const name = getPrettyQuotaName(quota.name);
-    if (name === quotaName && quota.limit > -1 && (quota.limit === quota.usage || quota.limit === 0)) {
-      return {name, usage: [quota.limit, quota.usage]};
+    if (
+      name === quotaName &&
+      quota.limit > -1 &&
+      (quota.limit === quota.usage || quota.limit === 0)
+    ) {
+      return { name, usage: [quota.limit, quota.usage] };
     }
   }
   return false;

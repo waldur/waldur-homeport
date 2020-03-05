@@ -4,7 +4,7 @@ export default function openstackNetworksService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/openstack-networks/';
-    }
+    },
   });
   return new ServiceClass();
 }

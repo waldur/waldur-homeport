@@ -1,6 +1,6 @@
 const azureSQLDatabasesList = {
   bindings: {
-    resource: '<'
+    resource: '<',
   },
   templateUrl: 'views/partials/filtered-list.html',
   controller: azureSQLDatabasesListController,
@@ -9,19 +9,24 @@ const azureSQLDatabasesList = {
 
 // @ngInject
 function azureSQLDatabasesListController(
-  baseResourceListController, azureSQLDatabasesService, actionUtilsService) {
+  baseResourceListController,
+  azureSQLDatabasesService,
+  actionUtilsService,
+) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       let fn = this._super.bind(this);
       this.loading = true;
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'databases').then(result => {
-        this.listActions = result;
-        fn();
-        this.service = azureSQLDatabasesService;
-        this.addRowFields(['charset']);
-      });
+      actionUtilsService
+        .loadNestedActions(this, controllerScope.resource, 'databases')
+        .then(result => {
+          this.listActions = result;
+          fn();
+          this.service = azureSQLDatabasesService;
+          this.addRowFields(['charset']);
+        });
     },
 
     getTableOptions: function() {
@@ -52,12 +57,12 @@ function azureSQLDatabasesListController(
     },
     getFilter: function() {
       return {
-        server_uuid: controllerScope.resource.uuid
+        server_uuid: controllerScope.resource.uuid,
       };
     },
     getTableActions: function() {
       return this.listActions;
-    }
+    },
   });
 
   controllerScope.__proto__ = new controllerClass();

@@ -2,7 +2,9 @@
 function formatPackage($filter) {
   return function(resource) {
     if (resource) {
-      return `${resource.name} / ${resource.category} (${$filter('formatFlavor')(resource)})`;
+      return `${resource.name} / ${resource.category} (${$filter(
+        'formatFlavor',
+      )(resource)})`;
     }
   };
 }

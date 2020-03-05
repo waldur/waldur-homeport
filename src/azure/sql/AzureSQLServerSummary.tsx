@@ -11,28 +11,27 @@ import { PureAzureResourceSummary } from '../AzureResourceSummary';
 
 const ValueWithTooltip = ({ value, tooltip }) => (
   <>
-    <Tooltip
-      id="compute-generation"
-      label={tooltip}>
-      <i className="fa fa-question-circle"/>
-    </Tooltip>
-    {' '}
+    <Tooltip id="compute-generation" label={tooltip}>
+      <i className="fa fa-question-circle" />
+    </Tooltip>{' '}
     {value}
   </>
 );
 
-const PureAzureSQLServerSummary = (props: ResourceSummaryProps<AzureSQLServer>) => {
+const PureAzureSQLServerSummary = (
+  props: ResourceSummaryProps<AzureSQLServer>,
+) => {
   const { translate, resource } = props;
   return (
     <>
-      <PureAzureResourceSummary {...props}/>
+      <PureAzureResourceSummary {...props} />
       {resource.fqdn && (
         <Field label={translate('Connection details')}>
           {`psql --host=${resource.fqdn} --port=5432 --username=${resource.username}@${resource.name} --dbname=postgres`}
         </Field>
       )}
       <Field label={translate('Password')}>
-        <UserPassword password={resource.password}/>
+        <UserPassword password={resource.password} />
       </Field>
       <Field label={translate('Pricing tier')}>
         <ValueWithTooltip
@@ -50,15 +49,9 @@ const PureAzureSQLServerSummary = (props: ResourceSummaryProps<AzureSQLServer>) 
       <Field label={translate('Storage size')}>
         {formatFilesize(resource.storage_mb || 5120)}
       </Field>
-      <Field label={translate('vCores')}>
-        1
-      </Field>
-      <Field label={translate('Memory per vCore')}>
-        2 GB
-      </Field>
-      <Field label={translate('Storage type')}>
-        Azure Standard Storage
-      </Field>
+      <Field label={translate('vCores')}>1</Field>
+      <Field label={translate('Memory per vCore')}>2 GB</Field>
+      <Field label={translate('Storage type')}>Azure Standard Storage</Field>
     </>
   );
 };

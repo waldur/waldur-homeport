@@ -13,8 +13,8 @@ import { UserDetailsButton } from './UserDetailsButton';
 
 const UserActionsButton = props => (
   <ButtonGroup>
-    <UserDetailsButton {...props}/>
-    <UserActivateButton {...props}/>
+    <UserDetailsButton {...props} />
+    <UserActivateButton {...props} />
   </ButtonGroup>
 );
 
@@ -26,9 +26,7 @@ const PhoneNumberField = ({ row }) => (
   <span>{renderFieldOrDash(row.phone_number)}</span>
 );
 
-const EmailField = ({ row }) => (
-  <span>{renderFieldOrDash(row.email)}</span>
-);
+const EmailField = ({ row }) => <span>{renderFieldOrDash(row.email)}</span>;
 
 const FullNameField = ({ row }) => (
   <span>{renderFieldOrDash(row.full_name)}</span>
@@ -39,23 +37,22 @@ const OrganizationField = ({ row }) => (
 );
 
 const StaffStatusField = ({ row }) => {
-  return <BooleanField value={row.is_staff}/>;
+  return <BooleanField value={row.is_staff} />;
 };
 
 const UserStatusField = ({ row }) => {
-  return <BooleanField value={row.is_active}/>;
+  return <BooleanField value={row.is_active} />;
 };
 
-const OrganizationRolesField = ({row}) => {
+const OrganizationRolesField = ({ row }) => {
   if (row.customer_permissions && row.customer_permissions.length > 0) {
     return row.customer_permissions.map((permission, index) => {
       return (
         <span key={index}>
           <Tooltip key={index} label={permission.role} id="customer-role">
-            {permission.customer_name}
-            {' '}
-            <i className="fa fa-question-circle"/>
-          </Tooltip><br/>
+            {permission.customer_name} <i className="fa fa-question-circle" />
+          </Tooltip>
+          <br />
         </span>
       );
     });
@@ -64,16 +61,19 @@ const OrganizationRolesField = ({row}) => {
   }
 };
 
-const ProjectRolesField = ({row}) => {
+const ProjectRolesField = ({ row }) => {
   if (row.project_permissions && row.project_permissions.length > 0) {
     return row.project_permissions.map((permission, index) => {
       return (
         <span key={index}>
-          <Tooltip key={index} label={`${permission.role} (${permission.customer_name})`} id="project-role">
-            {permission.project_name}
-            {' '}
-            <i className="fa fa-question-circle"/>
-          </Tooltip><br/>
+          <Tooltip
+            key={index}
+            label={`${permission.role} (${permission.customer_name})`}
+            id="project-role"
+          >
+            {permission.project_name} <i className="fa fa-question-circle" />
+          </Tooltip>
+          <br />
         </span>
       );
     });
@@ -83,63 +83,65 @@ const ProjectRolesField = ({row}) => {
 };
 
 const SupportStatusField = ({ row }) => {
-  return <BooleanField value={row.is_support}/>;
+  return <BooleanField value={row.is_support} />;
 };
 
 const TableComponent = props => {
   const { translate } = props;
   return (
-    <Table {...props} columns={[
-      {
-        title: translate('Full name'),
-        render: FullNameField,
-      },
-      {
-        title: translate('Email'),
-        render: EmailField,
-        orderField: 'email',
-      },
-      {
-        title: translate('Phone number'),
-        render: PhoneNumberField,
-        orderField: 'phone_number',
-      },
-      {
-        title: translate('Organization'),
-        render: OrganizationField,
-      },
-      {
-        title: translate('Organization roles'),
-        render: OrganizationRolesField,
-      },
-      {
-        title: translate('Project roles'),
-        render: ProjectRolesField,
-      },
-      {
-        title: translate('Staff'),
-        render: StaffStatusField,
-        className: 'text-center',
-      },
-      {
-        title: translate('Support'),
-        render: SupportStatusField,
-        className: 'text-center',
-      },
-      {
-        title: translate('Status'),
-        render: UserStatusField,
-        className: 'text-center',
-      },
-      {
-        title: translate('Actions'),
-        render: UserActionsButton,
-        className: 'text-center col-md-2',
-      },
-    ]}
-    showPageSizeSelector={true}
-    verboseName={translate('users')}
-    enableExport={true}
+    <Table
+      {...props}
+      columns={[
+        {
+          title: translate('Full name'),
+          render: FullNameField,
+        },
+        {
+          title: translate('Email'),
+          render: EmailField,
+          orderField: 'email',
+        },
+        {
+          title: translate('Phone number'),
+          render: PhoneNumberField,
+          orderField: 'phone_number',
+        },
+        {
+          title: translate('Organization'),
+          render: OrganizationField,
+        },
+        {
+          title: translate('Organization roles'),
+          render: OrganizationRolesField,
+        },
+        {
+          title: translate('Project roles'),
+          render: ProjectRolesField,
+        },
+        {
+          title: translate('Staff'),
+          render: StaffStatusField,
+          className: 'text-center',
+        },
+        {
+          title: translate('Support'),
+          render: SupportStatusField,
+          className: 'text-center',
+        },
+        {
+          title: translate('Status'),
+          render: UserStatusField,
+          className: 'text-center',
+        },
+        {
+          title: translate('Actions'),
+          render: UserActionsButton,
+          className: 'text-center col-md-2',
+        },
+      ]}
+      showPageSizeSelector={true}
+      verboseName={translate('users')}
+      enableExport={true}
     />
   );
 };
@@ -150,6 +152,7 @@ export const formatRoleFilter = filter => {
     filter.role.map(item => {
       formattedRole[item.value] = true;
     });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { role, ...rest } = filter;
     return {
       ...rest,
@@ -179,6 +182,16 @@ export const formatStatusFilter = filter => {
 
 const formatFilter = compose(formatStatusFilter, formatRoleFilter);
 
+export const getOrganizationsWhereOwner = permissions => {
+  const customerNames = [];
+  permissions.map(perm => {
+    if (perm.role === 'owner') {
+      customerNames.push(perm.customer_name);
+    }
+  });
+  return customerNames.join(', ');
+};
+
 const TableOptions = {
   table: 'userList',
   fetchData: createFetcher('users'),
@@ -202,23 +215,10 @@ const TableOptions = {
   ],
 };
 
-export const getOrganizationsWhereOwner = permissions => {
-  const customerNames = [];
-  permissions.map(perm => {
-    if (perm.role === 'owner') {
-      customerNames.push(perm.customer_name);
-    }
-  });
-  return customerNames.join(', ');
-};
-
 const mapStateToProps = state => ({
   userFilter: getFormValues('userFilter')(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const UserList = enhance(TableComponent);

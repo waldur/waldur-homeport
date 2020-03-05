@@ -20,12 +20,17 @@ class DialogController {
             type: this.ISSUE_IDS.SERVICE_REQUEST,
             summary: gettext('Incorrect organization details'),
             customer: this.resolve.customer,
-          })
-        }
+          }),
+        },
       });
     } else {
-      const context = {supportEmail: this.ENV.supportEmail};
-      this.message = this.coreUtils.templateFormatter(gettext('To correct details of your organization, please send an email to <a href="mailto:{supportEmail}">{supportEmail}</a> highlighting the errors in current details. Thank you!'), context);
+      const context = { supportEmail: this.ENV.supportEmail };
+      this.message = this.coreUtils.templateFormatter(
+        gettext(
+          'To correct details of your organization, please send an email to <a href="mailto:{supportEmail}">{supportEmail}</a> highlighting the errors in current details. Thank you!',
+        ),
+        context,
+      );
     }
   }
 }
@@ -37,7 +42,7 @@ const customerReportError = {
     resolve: '<',
     dismiss: '&',
     close: '&',
-  }
+  },
 };
 
 export default customerReportError;

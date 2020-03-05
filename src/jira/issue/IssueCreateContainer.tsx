@@ -12,7 +12,7 @@ import { JiraProject } from './types';
 
 interface IssueCreateDialogContainerProps {
   resolve: {
-    project: JiraProject
+    project: JiraProject;
   };
 }
 
@@ -27,26 +27,31 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadProjectIssues: query =>
-    actions.loadProjectIssues({query, project: ownProps.project}, dispatch),
+    actions.loadProjectIssues({ query, project: ownProps.project }, dispatch),
 
   loadProjectResources: query =>
-    actions.loadProjectResources({query, project: ownProps.project}, dispatch),
+    actions.loadProjectResources(
+      { query, project: ownProps.project },
+      dispatch,
+    ),
 
   createIssue: data =>
-    actions.createIssue({...data, project: ownProps.project}, dispatch),
+    actions.createIssue({ ...data, project: ownProps.project }, dispatch),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const enhance = compose(
   connector,
-  reduxForm({form: FORM_ID}),
+  reduxForm({ form: FORM_ID }),
   withTranslation,
 );
 
 const IssueCreateDialogComponent = enhance(IssueCreateDialog);
 
-export const IssueCreateDialogContainer = (props: IssueCreateDialogContainerProps) => (
+export const IssueCreateDialogContainer = (
+  props: IssueCreateDialogContainerProps,
+) => (
   <IssueCreateDialogComponent
     project={props.resolve.project}
     initialValues={{

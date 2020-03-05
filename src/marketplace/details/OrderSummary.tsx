@@ -23,11 +23,15 @@ export const SummaryTable = (props: OrderSummaryProps) => (
   <table className="table offering-details-section-table">
     <tbody>
       <tr>
-        <td><strong>{translate('Offering')}</strong></td>
+        <td>
+          <strong>{translate('Offering')}</strong>
+        </td>
         <td>{props.offering.name}</td>
       </tr>
       <tr>
-        <td><strong>{translate('Service provider')}</strong></td>
+        <td>
+          <strong>{translate('Service provider')}</strong>
+        </td>
         <td>
           <ProviderLink customer_uuid={props.offering.customer_uuid}>
             {props.offering.customer_name}
@@ -36,29 +40,37 @@ export const SummaryTable = (props: OrderSummaryProps) => (
       </tr>
       {props.offering.rating && (
         <tr>
-          <td><strong>{translate('Rating')}</strong></td>
-          <td><RatingStars rating={props.offering.rating} size="medium"/></td>
+          <td>
+            <strong>{translate('Rating')}</strong>
+          </td>
+          <td>
+            <RatingStars rating={props.offering.rating} size="medium" />
+          </td>
         </tr>
       )}
       <tr>
-        <td><strong>{translate('Invoiced to')}</strong></td>
+        <td>
+          <strong>{translate('Invoiced to')}</strong>
+        </td>
         <td>{props.customer.name}</td>
       </tr>
       {props.project && (
         <tr>
-          <td><strong>{translate('Project')}</strong></td>
+          <td>
+            <strong>{translate('Project')}</strong>
+          </td>
           <td>{props.project.name}</td>
         </tr>
       )}
-      {props.extraComponent ? React.createElement(props.extraComponent, props) : null}
+      {props.extraComponent
+        ? React.createElement(props.extraComponent, props)
+        : null}
       {props.formData && props.formData.plan && (
         <tr>
           <td className="text-lg">
-            <BillingPeriod unit={props.formData.plan.unit}/>
+            <BillingPeriod unit={props.formData.plan.unit} />
           </td>
-          <td className="text-lg">
-            {defaultCurrency(props.total)}
-          </td>
+          <td className="text-lg">{defaultCurrency(props.total)}</td>
         </tr>
       )}
     </tbody>
@@ -67,22 +79,26 @@ export const SummaryTable = (props: OrderSummaryProps) => (
 
 const PureOrderSummary = (props: OrderSummaryProps) => (
   <>
-    <OfferingLogo src={props.offering.thumbnail} size="small"/>
-    <SummaryTable {...props}/>
+    <OfferingLogo src={props.offering.thumbnail} size="small" />
+    <SummaryTable {...props} />
     <div className="display-flex justify-content-between">
-      {!props.updateMode ?
+      {!props.updateMode ? (
         <ShoppingCartButtonContainer
           item={formatOrderItemForCreate(props)}
           flavor="primary"
           disabled={!props.formValid}
-        /> :
+        />
+      ) : (
         <ShoppingCartUpdateButtonContainer
           item={formatOrderItemForUpdate(props)}
           flavor="primary"
           disabled={!props.formValid}
         />
-      }
-      <OfferingCompareButtonContainer offering={props.offering} flavor="secondary"/>
+      )}
+      <OfferingCompareButtonContainer
+        offering={props.offering}
+        flavor="secondary"
+      />
     </div>
   </>
 );
@@ -103,4 +119,8 @@ const mapStateToProps = (state, ownProps) => ({
   formValid: isValid('marketplaceOffering')(state),
 });
 
-export const OrderSummary = connect<OrderSummaryStateProps, {}, {offering: Offering}>(mapStateToProps)(PureOrderSummary);
+export const OrderSummary = connect<
+  OrderSummaryStateProps,
+  {},
+  { offering: Offering }
+>(mapStateToProps)(PureOrderSummary);

@@ -11,10 +11,12 @@ export default function createAction(): ResourceAction<OpenStackInstance> {
     method: 'POST',
     title: translate('Update floating IPs'),
     validators: [validateState('OK')],
-    fields: [{
-      name: 'floating_ips',
-      component: 'openstackInstanceFloatingIps',
-    }],
+    fields: [
+      {
+        name: 'floating_ips',
+        component: 'openstackInstanceFloatingIps',
+      },
+    ],
     init: async (resource: OpenStackInstance, form, action) => {
       const floatingIps = await loadFloatingIps(resource.service_settings_uuid);
 

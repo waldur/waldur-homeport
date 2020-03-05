@@ -16,15 +16,9 @@ export const ResourceExpandableRow = (props: ResourceExpandableRowProps) =>
   props.rows.length > 0 ? (
     <dl className="dl-horizontal m-t-sm resource-details-table">
       {props.rows.map((row, index) => (
-        <Field
-          key={index}
-          label={row.label}
-          value={row.value}
-        />
+        <Field key={index} label={row.label} value={row.value} />
       ))}
     </dl>
   ) : (
-    <p>
-      {translate('There are no resources yet.')}
-    </p>
+    <p>{translate('There are no resources yet.')}</p>
   );

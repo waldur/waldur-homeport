@@ -10,6 +10,12 @@ export default module => {
   module.component('marketplaceOrdersList', marketplaceOrdersList);
   module.component('marketplaceOrderDetails', marketplaceOrderDetails);
   module.component('marketplaceOrderItemDetails', marketplaceOrderItemDetails);
-  module.component('marketplaceTermsOfServiceDialog', marketplaceTermsOfServiceDialog);
-  module.component('marketplacePendingOrderDropdown', marketplacePendingOrderDropdown);
+  module.component(
+    'marketplaceTermsOfServiceDialog',
+    marketplaceTermsOfServiceDialog,
+  );
+  module.component(
+    'marketplacePendingOrderDropdown',
+    marketplacePendingOrderDropdown,
+  );
 };

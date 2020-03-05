@@ -19,7 +19,7 @@ async function loadData(offering_uuid: string) {
   const offering = await getOffering(offering_uuid);
   const category = await getCategory(offering.category_uuid);
   const sections = category.sections;
-  const tabs = getTabs({offering, sections});
+  const tabs = getTabs({ offering, sections });
   return {
     offering,
     tabs,
@@ -27,11 +27,14 @@ async function loadData(offering_uuid: string) {
 }
 
 const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => (
-  <ModalDialog title={translate('Offering details')} footer={<CloseDialogButton/>}>
+  <ModalDialog
+    title={translate('Offering details')}
+    footer={<CloseDialogButton />}
+  >
     <Query loader={loadData} variables={props.resolve.offeringUuid}>
       {({ loading, data, error }) => {
         if (loading) {
-          return <LoadingSpinner/>;
+          return <LoadingSpinner />;
         }
         if (error) {
           return <h3>{translate('Unable to load offering details.')}</h3>;
@@ -46,7 +49,7 @@ const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => (
                 </div>
               )}
             </p>
-            <OfferingTabsComponent tabs={data.tabs}/>
+            <OfferingTabsComponent tabs={data.tabs} />
           </>
         );
       }}

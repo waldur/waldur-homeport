@@ -1,17 +1,22 @@
 <loading-spinner ng-if="$ctrl.loading"></loading-spinner>
 <div ng-if="$ctrl.loaded">
-  <ui-select ng-model="$ctrl.model[$ctrl.field.name]" ng-if="$ctrl.choices.length > 0">
-    <ui-select-match placeholder="{{ 'Select SSH public key...' | translate}}">
-      {{$select.selected.display_name }}
+  <ui-select
+    ng-model="$ctrl.model[$ctrl.field.name]"
+    ng-if="$ctrl.choices.length > 0"
+  >
+    <ui-select-match placeholder="{{ 'Select SSH public key...' | translate }}">
+      {{ $select.selected.display_name }}
     </ui-select-match>
     <ui-select-choices
-      repeat="item.value as item in $ctrl.choices | filter: {display_name: $select.search} track by item.value">
+      repeat="item.value as item in $ctrl.choices | filter: {display_name: $select.search} track by item.value"
+    >
       <div ng-bind-html="item.display_name | highlight: $select.search"></div>
     </ui-select-choices>
   </ui-select>
   <div
     class="form-control-static"
-    ng-if="!$ctrl.choices || $ctrl.choices.length === 0">
-    {{ "There are no SSH public keys yet." | translate }}
+    ng-if="!$ctrl.choices || $ctrl.choices.length === 0"
+  >
+    {{ 'There are no SSH public keys yet.' | translate }}
   </div>
 </div>

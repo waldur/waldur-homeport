@@ -7,12 +7,8 @@ import { translate } from '@waldur/i18n';
 
 import { ResourceAccessInfo } from './ResourceAccessInfo';
 
-const renderComponent = resource => shallow(
-  <ResourceAccessInfo
-    resource={resource}
-    translate={translate}
-  />
-);
+const renderComponent = resource =>
+  shallow(<ResourceAccessInfo resource={resource} translate={translate} />);
 
 describe('ResourceAccessInfo', () => {
   it('renders placeholder if access url is not defined', () => {
@@ -22,7 +18,7 @@ describe('ResourceAccessInfo', () => {
 
   it('renders comma separated list', () => {
     const ips = ['10.1.0.100', '192.168.1.203'];
-    const wrapper = renderComponent({access_url: ips});
+    const wrapper = renderComponent({ access_url: ips });
     expect(wrapper.text()).toBe(ips.join(', '));
   });
 

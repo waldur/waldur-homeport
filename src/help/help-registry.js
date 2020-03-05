@@ -1,4 +1,4 @@
-import {HELP_TITLES} from './constants';
+import { HELP_TITLES } from './constants';
 
 class HelpRegistry {
   constructor() {
@@ -21,14 +21,17 @@ class HelpRegistry {
     } else {
       this.helpData[type] = {
         title: title || this.getTitle(type),
-        helpItems: [data]
+        helpItems: [data],
       };
       this.isSorted = false;
     }
   }
 
   getTitle(typeName) {
-    return (typeName && HELP_TITLES[typeName]) || typeName[0].toUpperCase() + typeName.slice(1);
+    return (
+      (typeName && HELP_TITLES[typeName]) ||
+      typeName[0].toUpperCase() + typeName.slice(1)
+    );
   }
 
   get() {

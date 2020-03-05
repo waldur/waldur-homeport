@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { InjectedFormProps } from 'redux-form';
-import { Field } from 'redux-form';
+import { InjectedFormProps, Field } from 'redux-form';
 
 import { SubmitButton, FieldError } from '@waldur/form-react';
-import { RadioButtonChoice, RadioButtonField } from '@waldur/form-react/RadioButtonField';
+import {
+  RadioButtonChoice,
+  RadioButtonField,
+} from '@waldur/form-react/RadioButtonField';
 import { TranslateProps } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -56,31 +58,48 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
       defaultItemClassName={getColumnClassName()}
       isHiddenInput={true}
       choices={[
-        new RadioButtonChoice(constants.ROLES.customer, (
-          <MessageButton
-            iconClass="svgfonticon svgfonticon-customer"
-            title={translate('Organization')}
-          >
-            {translate('Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place.')}
-          </MessageButton>
-        )),
-        renderServiceProvider && new RadioButtonChoice(constants.ROLES.provider, (
-          <MessageButton
-            iconClass="svgfonticon svgfonticon-provider"
-            title={translate('Service Provider')}
-          >
-            {translate('Register as a customer of our portal and provider your cloud services through Waldur\'s Marketplace.')}
-          </MessageButton>
-        )),
+        new RadioButtonChoice(
+          constants.ROLES.customer,
+          (
+            <MessageButton
+              iconClass="svgfonticon svgfonticon-customer"
+              title={translate('Organization')}
+            >
+              {translate(
+                'Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place.',
+              )}
+            </MessageButton>
+          ),
+        ),
+        renderServiceProvider &&
+          new RadioButtonChoice(
+            constants.ROLES.provider,
+            (
+              <MessageButton
+                iconClass="svgfonticon svgfonticon-provider"
+                title={translate('Service Provider')}
+              >
+                {translate(
+                  "Register as a customer of our portal and provider your cloud services through Waldur's Marketplace.",
+                )}
+              </MessageButton>
+            ),
+          ),
       ]}
     />
   );
 
   const getTitle = () => {
-    const customerTitle1 = translate('You do not currently have any organizations.');
+    const customerTitle1 = translate(
+      'You do not currently have any organizations.',
+    );
     const customerTitle2 = translate('Please create a new one:');
-    const roleLabel = translate('Please create a new one picking the profile that best matches your organization:');
-    return getColumnsNumber() === 1 ? [customerTitle1, <br key={1}/>, customerTitle2] : [customerTitle1, <br key={2}/>, roleLabel];
+    const roleLabel = translate(
+      'Please create a new one picking the profile that best matches your organization:',
+    );
+    return getColumnsNumber() === 1
+      ? [customerTitle1, <br key={1} />, customerTitle2]
+      : [customerTitle1, <br key={2} />, roleLabel];
   };
 
   return (
@@ -88,17 +107,19 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <ModalDialog
           title={getTitle()}
-          footer={<div>
-            <div className="content-center">
-              <FieldError error={error} />
+          footer={
+            <div>
+              <div className="content-center">
+                <FieldError error={error} />
+              </div>
+              <div className="content-center">
+                <SubmitButton
+                  submitting={submitting}
+                  label={translate('Create')}
+                />
+              </div>
             </div>
-            <div className="content-center">
-              <SubmitButton
-                submitting={submitting}
-                label={translate('Create')}
-              />
-            </div>
-          </div>}
+          }
         >
           <Field
             name={constants.FIELD_NAMES.role}

@@ -9,7 +9,7 @@ import ActionButton from '@waldur/table-react/ActionButton';
 
 import './CustomerEditDetails.scss';
 
-// tslint:disable-next-line
+// eslint-disable-next-line
 const DEFAULT_LOGO = require('./logo-placeholder.png');
 
 interface CustomerEditDetailsProps {
@@ -19,6 +19,8 @@ interface CustomerEditDetailsProps {
   formData: CustomerDetailsEditFormData;
   canEdit: boolean;
 }
+
+const hasChosenImage = ({ formData }) => formData && formData.image;
 
 const renderRemoveButton = props => {
   if (hasChosenImage(props)) {
@@ -39,43 +41,43 @@ const renderLogo = props => {
   }
 };
 
-const hasChosenImage = ({ formData }) => formData && formData.image;
-
-export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = (props: CustomerEditDetailsProps) => {
+export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = (
+  props: CustomerEditDetailsProps,
+) => {
   const { canEdit } = props;
   return (
     <div className="panel panel-default">
-      <div className="panel-heading">
-        {translate('Organization logo')}
-      </div>
+      <div className="panel-heading">{translate('Organization logo')}</div>
       <div className="panel-body">
         <div className="customer-edit-details">
           <Row>
             <Col md={canEdit ? 6 : 12}>
               <div className="organization-logo">
                 <div className="organization-img-wrapper">
-                  <img src={renderLogo(props)} alt="Organization logo here"/>
+                  <img src={renderLogo(props)} alt="Organization logo here" />
                 </div>
               </div>
             </Col>
-            {canEdit &&
+            {canEdit && (
               <Col md={6}>
                 <div className="organization-logo-actions">
-                  {renderRemoveButton(props) &&
+                  {renderRemoveButton(props) && (
                     <ActionButton
                       className="btn btn-sm btn-danger m-b-sm"
                       title={translate('Remove logo')}
                       action={props.removeLogo}
-                      icon="fa fa-trash"/>
-                  }
-                  {canEdit &&
+                      icon="fa fa-trash"
+                    />
+                  )}
+                  {canEdit && (
                     <CustomerEditDetailsForm
                       hasChosenImage={hasChosenImage(props)}
-                      onSubmit={props.uploadLogo}/>
-                  }
+                      onSubmit={props.uploadLogo}
+                    />
+                  )}
                 </div>
               </Col>
-            }
+            )}
           </Row>
         </div>
       </div>

@@ -7,9 +7,11 @@ describe('Core filters', () => {
   describe('defaultCurrency', () => {
     let defaultCurrencyFilter;
 
-    beforeEach(angular.mock.module($provide => {
-      $provide.constant('ENV', {currency: '€'});
-    }));
+    beforeEach(
+      angular.mock.module($provide => {
+        $provide.constant('ENV', { currency: '€' });
+      }),
+    );
 
     beforeEach(inject(_defaultCurrencyFilter_ => {
       defaultCurrencyFilter = _defaultCurrencyFilter_;

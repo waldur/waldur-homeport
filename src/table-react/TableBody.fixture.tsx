@@ -24,10 +24,5 @@ const ROWS = [
   },
 ];
 
-export const renderWrapper = (props?) => render(
-  <TableBody
-    columns={COLUMNS}
-    rows={ROWS}
-    {...props}
-  />
-);
+export const renderWrapper = (props?) =>
+  render(<TableBody columns={COLUMNS} rows={ROWS} {...props} />);

@@ -7,11 +7,13 @@ import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 
 import { PureAzureResourceSummary } from '../AzureResourceSummary';
 
-const PureAzureSQLDatabaseSummary = (props: ResourceSummaryProps<AzureSQLDatabase>) => {
+const PureAzureSQLDatabaseSummary = (
+  props: ResourceSummaryProps<AzureSQLDatabase>,
+) => {
   const { translate, resource } = props;
   return (
     <>
-      <PureAzureResourceSummary {...props}/>
+      <PureAzureResourceSummary {...props} />
       <Field label={translate('Server')}>
         <ResourceLink
           type="Azure.SQLServer"
@@ -19,14 +21,12 @@ const PureAzureSQLDatabaseSummary = (props: ResourceSummaryProps<AzureSQLDatabas
           label={resource.server_name}
         />
       </Field>
-      <Field label={translate('Charset')}>
-        {resource.charset}
-      </Field>
-      <Field label={translate('Collation')}>
-        {resource.collation}
-      </Field>
+      <Field label={translate('Charset')}>{resource.charset}</Field>
+      <Field label={translate('Collation')}>{resource.collation}</Field>
     </>
   );
 };
 
-export const AzureSQLDatabaseSummary = withTranslation(PureAzureSQLDatabaseSummary);
+export const AzureSQLDatabaseSummary = withTranslation(
+  PureAzureSQLDatabaseSummary,
+);

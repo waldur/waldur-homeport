@@ -16,7 +16,7 @@ const authSaml2Trigger = {
         component: 'authSaml2Dialog',
       });
     }
-  }
+  },
 };
 
 export default authSaml2Trigger;

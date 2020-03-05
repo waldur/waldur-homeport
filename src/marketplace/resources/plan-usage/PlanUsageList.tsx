@@ -53,7 +53,7 @@ export const TableComponent = props => {
       verboseName={translate('plans')}
       showPageSizeSelector={true}
       enableExport={true}
-      initialSorting={{field: 'usage', mode: 'desc'}}
+      initialSorting={{ field: 'usage', mode: 'desc' }}
     />
   );
 };

@@ -2,7 +2,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 
 const vmwareVirtualMachinePorts = {
   bindings: {
-    resource: '<'
+    resource: '<',
   },
   templateUrl: 'views/partials/filtered-list.html',
   controller: VMwareVirtualMachinePortsController,
@@ -11,7 +11,11 @@ const vmwareVirtualMachinePorts = {
 
 // @ngInject
 function VMwareVirtualMachinePortsController(
-  $scope, baseResourceListController, actionUtilsService, vmwarePortsService) {
+  $scope,
+  baseResourceListController,
+  actionUtilsService,
+  vmwarePortsService,
+) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -33,9 +37,11 @@ function VMwareVirtualMachinePortsController(
       });
     },
     loadPortActions: function() {
-      return actionUtilsService.loadNestedActions(this, controllerScope.resource, 'ports').then(result => {
-        this.listActions = result;
-      });
+      return actionUtilsService
+        .loadNestedActions(this, controllerScope.resource, 'ports')
+        .then(result => {
+          this.listActions = result;
+        });
     },
     getTableOptions: function() {
       let options = this._super();
@@ -48,28 +54,28 @@ function VMwareVirtualMachinePortsController(
           className: 'all',
           render: function(row) {
             return vm.renderResourceName(row);
-          }
+          },
         },
         {
           title: gettext('Network'),
           className: 'min-tablet-l',
           render: function(row) {
             return row.network_name;
-          }
+          },
         },
         {
           title: gettext('MAC address'),
           className: 'min-tablet-l',
           render: function(row) {
             return row.mac_address;
-          }
+          },
         },
         {
           title: gettext('State'),
           className: 'min-tablet-l',
           render: function(row) {
             return vm.renderResourceState(row);
-          }
+          },
         },
         {
           title: gettext('Created'),
@@ -85,7 +91,7 @@ function VMwareVirtualMachinePortsController(
     },
     getFilter: function() {
       return {
-        vm_uuid: controllerScope.resource.uuid
+        vm_uuid: controllerScope.resource.uuid,
       };
     },
   });

@@ -4,7 +4,7 @@ export default function issueUsersService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/support-users/';
-    }
+    },
   });
   return new ServiceClass();
 }

@@ -13,21 +13,26 @@ export default function createAction(): ResourceAction {
     title: translate('Show console log'),
     type: 'callback',
     execute: resource => {
-      getConsoleOutput(resource.uuid).then(response => {
-        const win = window.open();
-        if (win == null) {
-          alert(translate('Unable to open console log'));
-          return;
-        }
-        const doc = win.document;
-        doc.open();
-        doc.write(`<pre>${response.data}</pre>`);
-        doc.close();
-      }).catch(error => {
-        const ctx = {message: format(error)};
-        const message = translate('Unable to show console log. Error message: {message}', ctx);
-        alert(message);
-      });
+      getConsoleOutput(resource.uuid)
+        .then(response => {
+          const win = window.open();
+          if (win == null) {
+            alert(translate('Unable to open console log'));
+            return;
+          }
+          const doc = win.document;
+          doc.open();
+          doc.write(`<pre>${response.data}</pre>`);
+          doc.close();
+        })
+        .catch(error => {
+          const ctx = { message: format(error) };
+          const message = translate(
+            'Unable to show console log. Error message: {message}',
+            ctx,
+          );
+          alert(message);
+        });
     },
     validators: [validateState('OK')],
   };

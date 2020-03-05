@@ -8,9 +8,9 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 const SelectFlavorField = props => (
   <Select
-     value={props.input.value}
-     onChange={props.input.onChange}
-     options={props.options}
+    value={props.input.value}
+    onChange={props.input.onChange}
+    options={props.options}
   />
 );
 
@@ -19,7 +19,8 @@ export const NodeFlavorGroup = props => (
     label={translate('Flavor')}
     required={true}
     labelClassName={props.labelClassName}
-    valueClassName={props.valueClassName}>
+    valueClassName={props.valueClassName}
+  >
     <Field
       name="flavor"
       component={SelectFlavorField}

@@ -20,7 +20,7 @@ const resourceDetails = {
       }
       this.header = this.resourceUtils.formatResourceType(this.resource);
     }
-  }
+  },
 };
 
 export default resourceDetails;

@@ -7,19 +7,14 @@ export type OrderState =
   | 'executing'
   | 'done'
   | 'terminated'
-  | 'erred'
-  ;
+  | 'erred';
 
 export interface StatusChange {
   approving: boolean;
   rejecting: boolean;
 }
 
-export type OrderItemType =
-  | 'Create'
-  | 'Update'
-  | 'Terminate'
-  ;
+export type OrderItemType = 'Create' | 'Update' | 'Terminate';
 
 export interface OrderItemResponse {
   name?: string;

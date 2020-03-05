@@ -15,7 +15,7 @@ const resourceStorageTabs = {
         this.currentProject = project;
         this.$scope.$on('refreshCounts', this.refreshCount.bind(this));
         this.loading = true;
-        return this.refreshCount().then(() => this.loading = false);
+        return this.refreshCount().then(() => (this.loading = false));
       });
     }
 
@@ -42,7 +42,7 @@ const resourceStorageTabs = {
         this.snapshotsCount = counts['OpenStackTenant.Snapshot'];
       });
     }
-  }
+  },
 };
 
 export default resourceStorageTabs;

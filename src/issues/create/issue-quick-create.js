@@ -7,23 +7,25 @@ export default function issueQuickCreate() {
     controller: IssueQuickCreateController,
     controllerAs: '$ctrl',
     scope: {},
-    bindToController: true
+    bindToController: true,
   };
 }
 
 class IssueQuickCreateController {
   // @ngInject
-  constructor($state,
-              $scope,
-              $q,
-              issuesService,
-              ncUtilsFlash,
-              customersService,
-              projectsService,
-              resourcesService,
-              usersService,
-              ErrorMessageFormatter,
-              coreUtils) {
+  constructor(
+    $state,
+    $scope,
+    $q,
+    issuesService,
+    ncUtilsFlash,
+    customersService,
+    projectsService,
+    resourcesService,
+    usersService,
+    ErrorMessageFormatter,
+    coreUtils,
+  ) {
     this.$state = $state;
     this.$scope = $scope;
     this.$q = $q;
@@ -40,15 +42,21 @@ class IssueQuickCreateController {
   }
 
   init() {
-    this.$scope.$watch(() => this.issue.customer, () => {
-      this.issue.project = null;
-      this.refreshProjects();
-      this.refreshProjectRequired();
-    });
-    this.$scope.$watch(() => this.issue.project, () => {
-      this.issue.resource = null;
-      this.refreshResources();
-    });
+    this.$scope.$watch(
+      () => this.issue.customer,
+      () => {
+        this.issue.project = null;
+        this.refreshProjects();
+        this.refreshProjectRequired();
+      },
+    );
+    this.$scope.$watch(
+      () => this.issue.project,
+      () => {
+        this.issue.resource = null;
+        this.refreshResources();
+      },
+    );
     this.emptyFieldMessage = gettext('You did not enter a field.');
     this.projectRequired = false;
     this.usersService.getCurrentUser().then(user => {
@@ -79,8 +87,10 @@ class IssueQuickCreateController {
       return;
     }
 
-    this.projectRequired = this.issue.customer.owners.find(
-      owner => owner.uuid === this.user.uuid) === undefined;
+    this.projectRequired =
+      this.issue.customer.owners.find(
+        owner => owner.uuid === this.user.uuid,
+      ) === undefined;
   }
 
   refreshProjects(name) {
@@ -88,7 +98,7 @@ class IssueQuickCreateController {
       return;
     }
     let params = {
-      customer: this.issue.customer.uuid
+      customer: this.issue.customer.uuid,
     };
     if (name) {
       params.name = name;
@@ -105,7 +115,7 @@ class IssueQuickCreateController {
 
     let params = {
       project_uuid: this.issue.project.uuid,
-      field: ['name', 'url']
+      field: ['name', 'url'],
     };
     if (name) {
       params.name = name;
@@ -136,14 +146,23 @@ class IssueQuickCreateController {
     }
 
     this.saving = true;
-    return this.service.createIssue(issue).then(issue => {
-      this.service.clearAllCacheForCurrentEndpoint();
-      this.ncUtilsFlash.success(this.coreUtils.templateFormatter(gettext('Request {requestId} has been created.'), {requestId: issue.key}));
-      return this.$state.go('support.detail', {uuid: issue.uuid});
-    }).catch(response => {
-      this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
-    }).finally(() => {
-      this.saving = false;
-    });
+    return this.service
+      .createIssue(issue)
+      .then(issue => {
+        this.service.clearAllCacheForCurrentEndpoint();
+        this.ncUtilsFlash.success(
+          this.coreUtils.templateFormatter(
+            gettext('Request {requestId} has been created.'),
+            { requestId: issue.key },
+          ),
+        );
+        return this.$state.go('support.detail', { uuid: issue.uuid });
+      })
+      .catch(response => {
+        this.ncUtilsFlash.error(this.ErrorMessageFormatter.format(response));
+      })
+      .finally(() => {
+        this.saving = false;
+      });
   }
 }

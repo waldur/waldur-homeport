@@ -5,12 +5,7 @@ import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 
 export const StatsTable = props => (
-  <Table
-    responsive={true}
-    bordered={true}
-    striped={true}
-    className="m-t-md"
-  >
+  <Table responsive={true} bordered={true} striped={true} className="m-t-md">
     <thead>
       <tr>
         <th className="col-sm-1">#</th>
@@ -21,16 +16,18 @@ export const StatsTable = props => (
     <tbody>
       {props.stats.map((customer, index) => (
         <tr key={customer.uuid}>
-          <td>
-            {index + 1}
-          </td>
-          <td>
-            {customer.name}
-          </td>
+          <td>{index + 1}</td>
+          <td>{customer.name}</td>
           <td>
             <StateIndicator
               label={`${customer.score} %`}
-              variant={customer.score < 25 ? 'danger' : customer.score < 75 ? 'warning' : 'primary'}
+              variant={
+                customer.score < 25
+                  ? 'danger'
+                  : customer.score < 75
+                  ? 'warning'
+                  : 'primary'
+              }
             />
           </td>
         </tr>

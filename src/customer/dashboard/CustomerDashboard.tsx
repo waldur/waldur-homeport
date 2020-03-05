@@ -26,16 +26,18 @@ interface CustomerDashboardProps {
 export const CustomerDashboard = (props: CustomerDashboardProps) => (
   <>
     <DashboardHeader
-      title={translate('Welcome, {user}!', {user: props.user.full_name})}
-      subtitle={translate('Overview of {organization} organization', {organization: props.customer.name})}
+      title={translate('Welcome, {user}!', { user: props.user.full_name })}
+      subtitle={translate('Overview of {organization} organization', {
+        organization: props.customer.name,
+      })}
     />
     <Query loader={loadSummary} variables={props.customer}>
       {({ loading, data }) => {
         if (loading) {
-          return <LoadingSpinner/>;
+          return <LoadingSpinner />;
         }
         return (
-          <div style={{paddingLeft: 10}}>
+          <div style={{ paddingLeft: 10 }}>
             <Row>
               {data.map((item, index) => (
                 <Col key={index} md={4}>
@@ -47,16 +49,18 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => (
                 </Col>
               ))}
               <Col md={4}>
-                <CustomerActions customer={props.customer} user={props.user}/>
+                <CustomerActions customer={props.customer} user={props.user} />
               </Col>
             </Row>
             {props.marketplaceEnabled && (
               <Panel title={translate('Resources')}>
-                <CustomerResourcesList/>
+                <CustomerResourcesList />
               </Panel>
             )}
             <CategoryResourcesList
-              loader={(customer: Customer) => loadCategories('organization', customer)}
+              loader={(customer: Customer) =>
+                loadCategories('organization', customer)
+              }
               scope={props.customer}
             />
           </div>

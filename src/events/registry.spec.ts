@@ -19,11 +19,14 @@ describe('Event registry', () => {
         {
           key: event.event_type,
           title: 'User {user} authenticated successfully.',
-          formatter: e => `User ${e.user_full_name} authenticated successfully.`,
+          formatter: e =>
+            `User ${e.user_full_name} authenticated successfully.`,
         },
       ],
     });
-    expect(registry.formatEvent(event)).toBe('User Alice Lebowski authenticated successfully.');
+    expect(registry.formatEvent(event)).toBe(
+      'User Alice Lebowski authenticated successfully.',
+    );
   });
 
   it('uses custom context if possible', () => {
@@ -39,7 +42,8 @@ describe('Event registry', () => {
         },
       ],
     });
-    const expected = 'User <a href="a45c8927e176455781f63e7c7baf9567">Alice Lebowski</a> authenticated successfully.';
+    const expected =
+      'User <a href="a45c8927e176455781f63e7c7baf9567">Alice Lebowski</a> authenticated successfully.';
     expect(registry.formatEvent(event)).toBe(expected);
   });
 
@@ -53,7 +57,8 @@ describe('Event registry', () => {
         },
       ],
     });
-    expect(registry.formatEvent(event)).toBe('User Alice Lebowski authenticated successfully.');
+    expect(registry.formatEvent(event)).toBe(
+      'User Alice Lebowski authenticated successfully.',
+    );
   });
-
 });

@@ -7,7 +7,7 @@ export default function invitationAccept() {
     controllerAs: '$ctrl',
     template: template,
     scope: {},
-    bindToController: true
+    bindToController: true,
   };
 }
 

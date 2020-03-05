@@ -9,7 +9,10 @@ import { Field } from './Field';
 import { ResourceSummaryProps } from './types';
 
 const formatErrorField = (props: ResourceSummaryProps) => {
-  if (props.resource.state !== 'Erred' && props.resource.runtime_state !== 'ERROR') {
+  if (
+    props.resource.state !== 'Erred' &&
+    props.resource.runtime_state !== 'ERROR'
+  ) {
     return null;
   }
   if (!props.resource.error_message) {
@@ -18,31 +21,24 @@ const formatErrorField = (props: ResourceSummaryProps) => {
   return props.resource.error_message;
 };
 
-export function PureResourceSummaryBase<T extends Resource = any>(props: ResourceSummaryProps<T>) {
+export function PureResourceSummaryBase<T extends Resource = any>(
+  props: ResourceSummaryProps<T>,
+) {
   const { translate, resource } = props;
   return (
     <>
-      <Field
-        label={translate('State')}
-        value={<ResourceState {...props}/>}
-      />
+      <Field label={translate('State')} value={<ResourceState {...props} />} />
       <Field
         label={translate('Error message')}
         value={formatErrorField(props)}
       />
       {!props.resource.marketplace_offering_uuid && (
-        <Field
-          label={translate('Provider')}
-          value={resource.service_name}
-        />
+        <Field label={translate('Provider')} value={resource.service_name} />
       )}
-      <Field
-        label={translate('Description')}
-        value={resource.description}
-      />
+      <Field label={translate('Description')} value={resource.description} />
       <Field
         label={translate('Created')}
-        value={<CreatedField resource={props.resource}/>}
+        value={<CreatedField resource={props.resource} />}
       />
       <Field
         label={translate('UUID')}

@@ -8,7 +8,7 @@ function poweredByController(ENV) {
 
 const poweredBy = {
   template,
-  controller: poweredByController
+  controller: poweredByController,
 };
 
 export default poweredBy;

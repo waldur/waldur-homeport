@@ -3,11 +3,22 @@ import { takeEvery, put, call, select } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
-import { showSuccess, stateGo, emitSignal, showError } from '@waldur/store/coreSaga';
+import {
+  showSuccess,
+  stateGo,
+  emitSignal,
+  showError,
+} from '@waldur/store/coreSaga';
 import { deleteEntity } from '@waldur/table-react/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { createProject, gotoProjectList, updateProject, GOTO_PROJECT_CREATE, DELETE_PROJECT } from './actions';
+import {
+  createProject,
+  gotoProjectList,
+  updateProject,
+  GOTO_PROJECT_CREATE,
+  DELETE_PROJECT,
+} from './actions';
 import * as api from './api';
 
 export function* handleCreateProject(action) {
@@ -16,10 +27,13 @@ export function* handleCreateProject(action) {
 
   try {
     const customer = yield select(getCustomer);
-    const response = yield call(api.createProject, {...action.payload, customer});
+    const response = yield call(api.createProject, {
+      ...action.payload,
+      customer,
+    });
     const project = response.data;
-    yield put(stateGo('project.details', {uuid: project.uuid}));
-    yield put(emitSignal('refreshProjectList', {project}));
+    yield put(stateGo('project.details', { uuid: project.uuid }));
+    yield put(emitSignal('refreshProjectList', { project }));
     yield put(createProject.success());
     yield put(showSuccess(successMessage));
   } catch (error) {
@@ -34,12 +48,12 @@ export function* handleCreateProject(action) {
 
 function* handleGotoProjectCreate() {
   const customer = yield select(getCustomer);
-  yield put(stateGo('organization.createProject', {uuid: customer.uuid}));
+  yield put(stateGo('organization.createProject', { uuid: customer.uuid }));
 }
 
 function* handleGotoProjectList() {
   const customer = yield select(getCustomer);
-  yield put(stateGo('organization.projects', {uuid: customer.uuid}));
+  yield put(stateGo('organization.projects', { uuid: customer.uuid }));
 }
 
 export function* handleUpdateProject(action) {
@@ -50,7 +64,7 @@ export function* handleUpdateProject(action) {
     const response = yield call(api.updateProject, action.payload);
     const project = response.data;
     yield call(api.dangerouslyUpdateProject, action.payload.cache, project);
-    yield put(emitSignal('refreshProjectList', {project}));
+    yield put(emitSignal('refreshProjectList', { project }));
     yield put(updateProject.success());
     yield put(showSuccess(successMessage));
   } catch (error) {

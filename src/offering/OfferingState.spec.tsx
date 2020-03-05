@@ -10,8 +10,8 @@ const renderState = state => {
   const store = mockStore({});
   return mount(
     <Provider store={store}>
-      <OfferingState offering={{state}}/>
-    </Provider>
+      <OfferingState offering={{ state }} />
+    </Provider>,
   );
 };
 

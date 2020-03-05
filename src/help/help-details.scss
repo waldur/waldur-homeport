@@ -29,7 +29,7 @@
 }
 pre.code {
   white-space: pre-wrap;
-  background-color: #FFFAE5;
+  background-color: #fffae5;
 }
 .image-box-overlay {
   position: fixed;
@@ -85,7 +85,8 @@ pre.code {
   }
 
   .instruction-page-two-column {
-    .instruction-image, .instruction-content {
+    .instruction-image,
+    .instruction-content {
       width: 50%;
       min-width: 260px;
     }

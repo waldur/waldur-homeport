@@ -17,18 +17,20 @@ export default function resourcePieChart() {
         type: 'pie',
         data: {
           labels: scope.items.map(item => item.label),
-          datasets: [{
-            data: scope.items.map(item => item.value),
-            backgroundColor: scope.items.map(item => item.color)
-          }]
+          datasets: [
+            {
+              data: scope.items.map(item => item.value),
+              backgroundColor: scope.items.map(item => item.color),
+            },
+          ],
         },
         options: {
           maintainAspectRatio: false,
           legend: {
-            display: false
-          }
-        }
+            display: false,
+          },
+        },
       });
-    }
+    },
   };
 }

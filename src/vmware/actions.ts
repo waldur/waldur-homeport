@@ -62,13 +62,18 @@ export function actionsConfig(ActionConfigurationProvider) {
         type: 'callback',
         enabled: true,
         execute: resource => {
-          getConsoleURL(resource.uuid).then(response => {
-            window.open(response.data.url);
-          }).catch(error => {
-            const ctx = {message: format(error)};
-            const message = translate('Unable to open console. Error message: {message}', ctx);
-            alert(message);
-          });
+          getConsoleURL(resource.uuid)
+            .then(response => {
+              window.open(response.data.url);
+            })
+            .catch(error => {
+              const ctx = { message: format(error) };
+              const message = translate(
+                'Unable to open console. Error message: {message}',
+                ctx,
+              );
+              alert(message);
+            });
         },
         validators: [validateState('OK')],
       },

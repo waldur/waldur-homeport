@@ -6,8 +6,8 @@ import { connectAngularComponent } from '@waldur/store/connect';
 const ResourceIssuesList = props => (
   <IssuesList
     hiddenColumns={['customer', 'resource_type']}
-    filter={{resource: props.resource.url}}
-    scope={{resource: props.resource}}
+    filter={{ resource: props.resource.url }}
+    scope={{ resource: props.resource }}
   />
 );
 

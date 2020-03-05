@@ -8,6 +8,6 @@ export default function resourceTab($filter, $compile, $parse) {
       const template = `<${component} resource="${attributes.resource}" tab="${attributes.tab}"></${component}>`;
       element.html(template);
       $compile(element.contents())(scope);
-    }
+    },
   };
 }

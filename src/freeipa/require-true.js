@@ -6,7 +6,7 @@ const requireTrue = function() {
       ctrl.$validators.requireTrue = function(modelValue) {
         return !!modelValue;
       };
-    }
+    },
   };
 };
 

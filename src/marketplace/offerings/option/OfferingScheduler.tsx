@@ -17,10 +17,8 @@ import { withModal } from '@waldur/modal/withModal';
 
 import './OfferingScheduler.scss';
 
-type OfferingSchedulerProps =
-  TranslateProps &
-  WrappedFieldArrayProps<any> &
-  {
+type OfferingSchedulerProps = TranslateProps &
+  WrappedFieldArrayProps<any> & {
     setModalProps: (event) => void;
     openModal: (cb) => void;
     schedules: EventInput[];

@@ -5,9 +5,9 @@ import { compose } from 'redux';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { issueAttachmentsGet } from '@waldur/issues/attachments/actions';
-import { getIsLoading as  getAttachmentsIsLoading} from '@waldur/issues/attachments/selectors';
+import { getIsLoading as getAttachmentsIsLoading } from '@waldur/issues/attachments/selectors';
 import { issueCommentsGet } from '@waldur/issues/comments/actions';
-import { getIsLoading as  getCommentsIsLoading } from '@waldur/issues/comments/selectors';
+import { getIsLoading as getCommentsIsLoading } from '@waldur/issues/comments/selectors';
 
 import './IssueReload.scss';
 
@@ -30,7 +30,7 @@ export const PureIssueReload = (props: PureIssueReloadProps) => {
 };
 
 const mapStateToProps = state => ({
-  loading:  getAttachmentsIsLoading(state) ||  getCommentsIsLoading(state),
+  loading: getAttachmentsIsLoading(state) || getCommentsIsLoading(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

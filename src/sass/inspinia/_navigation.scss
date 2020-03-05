@@ -14,16 +14,20 @@ $navbar-bg-dark: darken($nav-bg, 3%);
   color: #ffffff;
 }
 
-.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
+.navbar-default .nav > li > a:hover,
+.navbar-default .nav > li > a:focus {
   background-color: $navbar-bg-dark;
   color: white;
 }
 
-.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
   background: #fff;
 }
 
-.nav.navbar-top-links > li > a:hover, .nav.navbar-top-links > li > a:focus {
+.nav.navbar-top-links > li > a:hover,
+.nav.navbar-top-links > li > a:focus {
   background-color: transparent;
 }
 
@@ -136,15 +140,18 @@ $navbar-bg-dark: darken($nav-bg, 3%);
   left: auto;
 }
 
-.dropdown-orders, .dropdown-alerts {
+.dropdown-orders,
+.dropdown-alerts {
   padding: 10px 10px 10px 10px;
 }
 
-.dropdown-orders li a, .dropdown-alerts li a {
+.dropdown-orders li a,
+.dropdown-alerts li a {
   font-size: 12px;
 }
 
-.dropdown-orders li em, .dropdown-alerts li em {
+.dropdown-orders li em,
+.dropdown-alerts li em {
   font-size: 10px;
 }
 
@@ -156,7 +163,6 @@ $navbar-bg-dark: darken($nav-bg, 3%);
   padding: 33px 25px;
   background-color: $nav-bg;
   background-image: $nav-profile-pattern;
-
 }
 
 .pace-done .nav-header {
@@ -168,7 +174,6 @@ ul.nav-second-level {
 }
 
 .nav {
-
   & > li.active {
     border-left: 4px solid darken($navy, 2%);
     background: $navbar-bg-dark;
@@ -179,7 +184,7 @@ ul.nav-second-level {
   }
   &-item--expanded {
     .fa.arrow:before {
-      content: "\f107";
+      content: '\f107';
     }
   }
 }
@@ -193,7 +198,7 @@ ul.nav-second-level {
 }
 
 .nav-header a {
-  color: #DFE4ED;
+  color: #dfe4ed;
 }
 
 .nav-header .text-muted {
@@ -245,7 +250,7 @@ ul.nav-second-level {
 }
 
 .fa.arrow:before {
-  content: "\f104";
+  content: '\f104';
 }
 
 .nav-second-level li,
@@ -266,7 +271,10 @@ ul.nav-second-level {
   margin-bottom: 10px;
 }
 
-body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav li:hover > .nav-second-level,
+body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar
+  .nav
+  li:hover
+  > .nav-second-level,
 .mini-navbar .nav li:focus > .nav-second-level {
   display: block;
   border-radius: 0 2px 2px 0;
@@ -301,7 +309,7 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
 }
 
 .mini-navbar li.active .nav-second-level {
-  left: 65px
+  left: 65px;
 }
 
 .navbar-default .special_link a {
@@ -343,7 +351,11 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   padding: 18px 0;
 }
 
-.pace-done .navbar-static-side, .pace-done .nav-header, .pace-done li.active, .pace-done #page-wrapper, .pace-done .footer {
+.pace-done .navbar-static-side,
+.pace-done .nav-header,
+.pace-done li.active,
+.pace-done #page-wrapper,
+.pace-done .footer {
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -357,7 +369,8 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   z-index: 2030;
 }
 
-.navbar-fixed-top, .navbar-static-top {
+.navbar-fixed-top,
+.navbar-static-top {
   background: $gray;
 }
 
@@ -365,13 +378,15 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   margin-top: 0;
 }
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
   background: none;
-  border-color: #DDDDDD #DDDDDD rgba(0, 0, 0, 0);
+  border-color: #dddddd #dddddd rgba(0, 0, 0, 0);
   border-bottom: $gray;
   border-image: none;
   border-style: solid;
@@ -414,7 +429,8 @@ body.fixed-nav.fixed-nav-basic.body-small .navbar-fixed-top {
   left: 0;
 }
 
-body.fixed-nav.fixed-nav-basic.fixed-sidebar.mini-navbar.body-small .navbar-fixed-top {
+body.fixed-nav.fixed-nav-basic.fixed-sidebar.mini-navbar.body-small
+  .navbar-fixed-top {
   left: 220px;
 }
 
@@ -430,7 +446,9 @@ body.mini-navbar .navbar-static-side {
   width: 70px;
 }
 
-body.mini-navbar .profile-element, body.mini-navbar .nav-label, body.mini-navbar .navbar-default .nav li a span {
+body.mini-navbar .profile-element,
+body.mini-navbar .nav-label,
+body.mini-navbar .navbar-default .nav li a span {
   display: none;
 }
 
@@ -508,12 +526,24 @@ body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
   height: auto;
 }
 
-body.fixed-sidebar.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
+body.fixed-sidebar.mini-navbar
+  .navbar-default
+  .nav
+  > li
+  > .nav-second-level
+  li
+  a {
   font-size: 12px;
   border-radius: 3px;
 }
 
-body.canvas-menu.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
+body.canvas-menu.mini-navbar
+  .navbar-default
+  .nav
+  > li
+  > .nav-second-level
+  li
+  a {
   font-size: 13px;
   border-radius: 3px;
 }
@@ -532,7 +562,7 @@ body.canvas-menu.mini-navbar .navbar-default .nav > li > .nav-second-level li a 
 
 .fixed-sidebar.mini-navbar li.active .nav-second-level,
 .canvas-menu.mini-navbar li.active .nav-second-level {
-  left: 0
+  left: 0;
 }
 
 body.fixed-sidebar.mini-navbar .navbar-default .nav > li > a,
@@ -553,12 +583,12 @@ body.canvas-menu.mini-navbar .navbar-default .nav li .profile-element a span {
 
 .canvas-menu.mini-navbar .nav-second-level li a,
 .fixed-sidebar.mini-navbar .nav-second-level li a {
-  padding: 7px 10px 7px 52px
+  padding: 7px 10px 7px 52px;
 }
 
 .fixed-sidebar.mini-navbar .nav-second-level,
 .canvas-menu.mini-navbar .nav-second-level {
-  left: 0
+  left: 0;
 }
 
 body.canvas-menu nav.navbar-static-side {

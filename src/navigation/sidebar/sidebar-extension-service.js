@@ -1,4 +1,4 @@
-import {flatten} from '../../core/utils';
+import { flatten } from '../../core/utils';
 
 export default class SidebarExtensionService {
   // @ngInject
@@ -72,7 +72,10 @@ export default class SidebarExtensionService {
   getCounters(items) {
     let counters = [];
     const visitItem = item => {
-      if (item.hasOwnProperty('countFieldKey') && this.features.isVisible(item.feature)) {
+      if (
+        item.hasOwnProperty('countFieldKey') &&
+        this.features.isVisible(item.feature)
+      ) {
         counters.push(item.countFieldKey);
       }
     };

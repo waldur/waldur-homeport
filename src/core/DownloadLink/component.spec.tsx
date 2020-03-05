@@ -17,7 +17,7 @@ const setupFixture = (props?) => {
       loaded={false}
       erred={false}
       {...props}
-    />
+    />,
   );
   return {
     wrapper,
@@ -28,35 +28,35 @@ const setupFixture = (props?) => {
 
 describe('DownloadLink component', () => {
   it('does not render any indicators by default', () => {
-    const {wrapper} = setupFixture();
+    const { wrapper } = setupFixture();
     expect(wrapper.find('.text-info').length).toBe(0);
     expect(wrapper.find('.text-success').length).toBe(0);
     expect(wrapper.find('.text-danger').length).toBe(0);
   });
 
   it('renders spinner if file is loading', () => {
-    const {wrapper} = setupFixture({loading: true});
+    const { wrapper } = setupFixture({ loading: true });
     expect(wrapper.find('.text-info').length).toBe(1);
   });
 
   it('renders success indicator if file is loaded', () => {
-    const {wrapper} = setupFixture({loaded: true});
+    const { wrapper } = setupFixture({ loaded: true });
     expect(wrapper.find('.text-success').length).toBe(1);
   });
 
   it('renders warning if loading failed', () => {
-    const {wrapper} = setupFixture({erred: true});
+    const { wrapper } = setupFixture({ erred: true });
     expect(wrapper.find('.text-danger').length).toBe(1);
   });
 
   it('starts downloading when link is clicked', () => {
-    const {wrapper, mockDownload} = setupFixture();
+    const { wrapper, mockDownload } = setupFixture();
     wrapper.find('a').simulate('click');
     expect(mockDownload).toHaveBeenCalled();
   });
 
   it('resets state when link is destroyed', () => {
-    const {wrapper, mockReset} = setupFixture();
+    const { wrapper, mockReset } = setupFixture();
     wrapper.unmount();
     expect(mockReset).toHaveBeenCalled();
   });

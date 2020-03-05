@@ -5,7 +5,7 @@ const filterSelector = {
   bindings: {
     options: '<',
     isLoading: '<',
-    onSelect: '&'
+    onSelect: '&',
   },
   controller: class FilterSelectorController {
     // @ngInject
@@ -15,14 +15,18 @@ const filterSelector = {
 
     $onInit() {
       this.chosenItem = this.options.choices[0];
-      this.$scope.$watch(() => this.chosenItem, () => {
-        if (this.chosenItem) {
-          this.options.value = this.chosenItem.value;
-        }
-        this.onSelect();
-      }, true);
+      this.$scope.$watch(
+        () => this.chosenItem,
+        () => {
+          if (this.chosenItem) {
+            this.options.value = this.chosenItem.value;
+          }
+          this.onSelect();
+        },
+        true,
+      );
     }
-  }
+  },
 };
 
 export default filterSelector;

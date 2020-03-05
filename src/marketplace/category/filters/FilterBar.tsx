@@ -21,9 +21,9 @@ export class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
   }
 
   setFilterQuery = e => {
-    this.setState({filter: e.target.value});
+    this.setState({ filter: e.target.value });
     this.applyQuery();
-  }
+  };
 
   applyQuery = debounce(() => {
     this.props.setFilterQuery(this.state.filter);

@@ -8,7 +8,7 @@ interface Props extends TranslateProps {
 
 export const TableRefreshButton = ({ fetch, translate }: Props) => (
   <a className="btn btn-default btn-sm" onClick={fetch}>
-    <i className="fa fa-refresh"/>
+    <i className="fa fa-refresh" />
     &nbsp;{translate('Refresh')}
   </a>
 );

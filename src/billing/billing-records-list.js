@@ -1,7 +1,7 @@
 const billingRecordsList = {
   controller: RecordsListController,
   controllerAs: 'ListController',
-  templateUrl: 'views/partials/filtered-list.html'
+  templateUrl: 'views/partials/filtered-list.html',
 };
 
 export default billingRecordsList;
@@ -15,7 +15,8 @@ function RecordsListController(
   ncUtils,
   BillingUtils,
   $state,
-  $filter) {
+  $filter,
+) {
   let controllerScope = this;
   let InvoicesController = baseControllerListClass.extend({
     init: function() {
@@ -40,27 +41,27 @@ function RecordsListController(
             title: gettext('Record number'),
             className: 'all',
             render: function(row) {
-              const href = $state.href('billingDetails', {uuid: row.uuid});
+              const href = $state.href('billingDetails', { uuid: row.uuid });
               return ncUtils.renderLink(href, row.number);
-            }
+            },
           },
           {
             title: gettext('State'),
             className: 'all',
-            render: row => row.state
+            render: row => row.state,
           },
           {
             title: gettext('Record period'),
             className: 'all',
-            render: row => BillingUtils.formatPeriod(row)
+            render: row => BillingUtils.formatPeriod(row),
           },
           {
             title: '<price-tooltip></price-tooltip>' + gettext('Total'),
             className: 'all',
-            render: row => $filter('defaultCurrency')(row.price)
-          }
+            render: row => $filter('defaultCurrency')(row.price),
+          },
         ],
-        rowActions: this.getRowActions()
+        rowActions: this.getRowActions(),
       };
     },
     getRowActions: function() {
@@ -73,9 +74,9 @@ function RecordsListController(
     },
     getFilter: function() {
       return {
-        customer: this.currentCustomer.url
+        customer: this.currentCustomer.url,
       };
-    }
+    },
   });
 
   controllerScope.__proto__ = new InvoicesController();

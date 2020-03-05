@@ -4,7 +4,7 @@ export default function issueCommentsService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/support-comments/';
-    }
+    },
   });
   return new ServiceClass();
 }

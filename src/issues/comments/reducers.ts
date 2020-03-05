@@ -1,6 +1,9 @@
 import { Action } from '@waldur/core/reducerActions';
 import { omit } from '@waldur/core/utils';
-import { ISSUE_ATTACHMENTS_DELETE_SUCCESS, ISSUE_ATTACHMENTS_PUT_SUCCESS } from '@waldur/issues/attachments/constants';
+import {
+  ISSUE_ATTACHMENTS_DELETE_SUCCESS,
+  ISSUE_ATTACHMENTS_PUT_SUCCESS,
+} from '@waldur/issues/attachments/constants';
 
 import * as constants from './constants';
 import { Payload, State } from './types';
@@ -17,7 +20,10 @@ const INITIAL_STATE: State = {
   getErred: false,
 };
 
-export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) => {
+export const reducer = (
+  state: State = INITIAL_STATE,
+  action: Action<Payload>,
+) => {
   const { type, payload } = action;
   switch (type) {
     case constants.ISSUE_COMMENTS_GET:
@@ -52,7 +58,9 @@ export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) =
     case constants.ISSUE_COMMENTS_UPDATE_SUCCESS:
       return {
         ...state,
-        items: state.items.map(item => item.uuid === payload.item.uuid ? payload.item : item),
+        items: state.items.map(item =>
+          item.uuid === payload.item.uuid ? payload.item : item,
+        ),
       };
     case constants.ISSUE_COMMENTS_UPDATE_ERROR:
       return {
@@ -82,15 +90,14 @@ export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) =
     case ISSUE_ATTACHMENTS_PUT_SUCCESS:
       return {
         ...state,
-        pendingAttachments: [
-          ...state.pendingAttachments,
-          payload.item,
-        ],
+        pendingAttachments: [...state.pendingAttachments, payload.item],
       };
     case ISSUE_ATTACHMENTS_DELETE_SUCCESS:
       return {
         ...state,
-        pendingAttachments: state.pendingAttachments.filter(attachment => attachment.uuid !== payload.uuid),
+        pendingAttachments: state.pendingAttachments.filter(
+          attachment => attachment.uuid !== payload.uuid,
+        ),
       };
     case constants.ISSUE_COMMENTS_PENDING_ATTACHMENTS_RESET:
       return {
@@ -100,7 +107,8 @@ export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) =
     case constants.ISSUE_COMMENTS_FORM_TOGGLE:
       return {
         ...state,
-        activeFormId: state.activeFormId !== payload.formId ? payload.formId : null,
+        activeFormId:
+          state.activeFormId !== payload.formId ? payload.formId : null,
       };
     case constants.ISSUE_COMMENTS_UI_DISABLE:
       return {

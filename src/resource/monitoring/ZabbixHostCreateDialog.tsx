@@ -18,7 +18,8 @@ const ZabbixHostCreateDialog = props => (
     submitLabel={props.translate('Create Zabbix host')}
     onSubmit={props.handleSubmit(props.createHost)}
     submitting={props.submitting}
-    error={props.error}>
+    error={props.error}
+  >
     <SelectAsyncField
       name="service_project_link"
       label={props.translate('Zabbix provider')}
@@ -52,7 +53,7 @@ const ZabbixHostCreateDialog = props => (
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadLinks: () =>
-    actions.loadLinks({resource: ownProps.resolve.resource.url}, dispatch),
+    actions.loadLinks({ resource: ownProps.resolve.resource.url }, dispatch),
 
   loadTemplates: query => {
     const request: ZabbixTemplateRequest = {
@@ -65,14 +66,19 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 
   createHost: data =>
-    actions.createHost({...data, resource: ownProps.resolve.resource}, dispatch),
+    actions.createHost(
+      { ...data, resource: ownProps.resolve.resource },
+      dispatch,
+    ),
 });
 
 const enhance = compose(
-  reduxForm({form: 'monitoringCreate'}),
-  formValues({link: 'service_project_link'}),
+  reduxForm({ form: 'monitoringCreate' }),
+  formValues({ link: 'service_project_link' }),
   connect(null, mapDispatchToProps),
   withTranslation,
 );
 
-export default connectAngularComponent(enhance(ZabbixHostCreateDialog), ['resolve']);
+export default connectAngularComponent(enhance(ZabbixHostCreateDialog), [
+  'resolve',
+]);

@@ -7,5 +7,5 @@ function AuthLogoutCompletedController(authService) {
 
 export default {
   template,
-  controller: AuthLogoutCompletedController
+  controller: AuthLogoutCompletedController,
 };

@@ -12,8 +12,8 @@ export default function aboutRoutes($stateProvider) {
       templateUrl: 'views/tos/index.html',
       data: {
         bodyClass: 'old',
-        pageTitle: gettext('Terms of service')
-      }
+        pageTitle: gettext('Terms of service'),
+      },
     })
 
     .state('tos.freeipa', {
@@ -22,8 +22,8 @@ export default function aboutRoutes($stateProvider) {
       data: {
         bodyClass: 'old',
         pageTitle: gettext('Terms of service'),
-        feature: 'freeipa'
-      }
+        feature: 'freeipa',
+      },
     })
 
     .state('about', {
@@ -37,8 +37,8 @@ export default function aboutRoutes($stateProvider) {
       templateUrl: 'views/about/index.html',
       data: {
         bodyClass: 'old',
-        pageTitle: gettext('About')
-      }
+        pageTitle: gettext('About'),
+      },
     })
 
     .state('policy', {
@@ -52,7 +52,7 @@ export default function aboutRoutes($stateProvider) {
       templateUrl: 'views/policy/privacy.html',
       data: {
         bodyClass: 'old',
-        pageTitle: gettext('Privacy policy')
-      }
+        pageTitle: gettext('Privacy policy'),
+      },
     });
 }

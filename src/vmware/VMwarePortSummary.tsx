@@ -7,15 +7,9 @@ const PureVMwarePortSummary = props => {
   const { translate, resource } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props}/>
-      <Field
-        label={translate('MAC address')}
-        value={resource.mac_address}
-      />
-      <Field
-        label={translate('Network')}
-        value={resource.network_name}
-      />
+      <PureResourceSummaryBase {...props} />
+      <Field label={translate('MAC address')} value={resource.mac_address} />
+      <Field label={translate('Network')} value={resource.network_name} />
     </>
   );
 };

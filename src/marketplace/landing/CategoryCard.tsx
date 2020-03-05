@@ -16,7 +16,7 @@ export const CategoryCard = (props: CategoryCardProps) => (
       className="category-thumb"
       category_uuid={props.category.uuid}
     >
-      <OfferingLogo src={props.category.icon}/>
+      <OfferingLogo src={props.category.icon} />
     </CategoryLink>
     <div className="category-card-body">
       <h3 className="category-title">

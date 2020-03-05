@@ -29,8 +29,8 @@ const CustomerEvents = connect(mapStateToProps)(PureCustomerEvents);
 
 const CustomerEventsView = props => (
   <>
-    <CustomerEventsFilter/>
-    <CustomerEvents {...props}/>
+    <CustomerEventsFilter />
+    <CustomerEvents {...props} />
   </>
 );
 

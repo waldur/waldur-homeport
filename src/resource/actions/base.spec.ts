@@ -14,7 +14,7 @@ const user = {
   url: 'Valid URL',
   uuid: 'Valid UUID',
 };
-const ctx = {resource, user};
+const ctx = { resource, user };
 
 describe('Resource state validation', () => {
   it('validates resource state', () => {
@@ -22,7 +22,9 @@ describe('Resource state validation', () => {
   });
 
   it('validates resource states list', () => {
-    expect(validateState('Creating', 'Updating')(ctx)).toBe('Valid states for operation: Creating, Updating.');
+    expect(validateState('Creating', 'Updating')(ctx)).toBe(
+      'Valid states for operation: Creating, Updating.',
+    );
   });
 
   it('skips validation if resource is in target state', () => {
@@ -32,11 +34,15 @@ describe('Resource state validation', () => {
 
 describe('Resource runtime state validation', () => {
   it('validates resource state', () => {
-    expect(validateRuntimeState('OK')(ctx)).toBe('Valid runtime states for operation: OK.');
+    expect(validateRuntimeState('OK')(ctx)).toBe(
+      'Valid runtime states for operation: OK.',
+    );
   });
 
   it('validates resource states list', () => {
-    expect(validateRuntimeState('SHUTOFF', 'TERMINATED')(ctx)).toBe('Valid runtime states for operation: SHUTOFF, TERMINATED.');
+    expect(validateRuntimeState('SHUTOFF', 'TERMINATED')(ctx)).toBe(
+      'Valid runtime states for operation: SHUTOFF, TERMINATED.',
+    );
   });
 
   it('skips validation if resource is in target state', () => {

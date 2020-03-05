@@ -16,7 +16,8 @@ const offeringDetails = {
       BreadcrumbsService,
       ncUtilsFlash,
       $stateParams,
-      $state) {
+      $state,
+    ) {
       this.offeringsService = offeringsService;
       this.projectsService = projectsService;
       this.customersService = customersService;
@@ -33,19 +34,24 @@ const offeringDetails = {
         this.$state.go('errorPage.notFound');
         return;
       }
-      this.offeringsService.$get(this.$stateParams.uuid)
+      this.offeringsService
+        .$get(this.$stateParams.uuid)
         .then(offering => {
           this.offering = offering;
-          return this.projectsService.$get(offering.project_uuid).then(project => {
-            return { project };
-          });
+          return this.projectsService
+            .$get(offering.project_uuid)
+            .then(project => {
+              return { project };
+            });
         })
         .then(({ project }) => {
-          return this.customersService.$get(project.customer_uuid).then(customer => {
-            this.currentStateService.setCustomer(customer);
-            this.currentStateService.setProject(project);
-            return { customer, project };
-          });
+          return this.customersService
+            .$get(project.customer_uuid)
+            .then(customer => {
+              this.currentStateService.setCustomer(customer);
+              this.currentStateService.setProject(project);
+              return { customer, project };
+            });
         })
         .then(({ customer, project }) => {
           this.WorkspaceService.setWorkspace({
@@ -55,9 +61,13 @@ const offeringDetails = {
             workspace: WOKSPACE_NAMES.project,
           });
         })
-        .then(() => this.offeringsService.getOffering(this.offering.template_uuid).then(template => {
-          this.offeringConfig = template.config;
-        }))
+        .then(() =>
+          this.offeringsService
+            .getOffering(this.offering.template_uuid)
+            .then(template => {
+              this.offeringConfig = template.config;
+            }),
+        )
         .then(() => this.refreshBreadcrumbs())
         .catch(() => {
           this.$state.go('errorPage.notFound');
@@ -77,8 +87,8 @@ const offeringDetails = {
           label: gettext('Project workspace'),
           state: 'project.details',
           params: {
-            uuid: this.offering.project_uuid
-          }
+            uuid: this.offering.project_uuid,
+          },
         },
         {
           label: gettext('Resources'),
@@ -117,7 +127,7 @@ const offeringDetails = {
     get showReportButton() {
       return !isOracleOffering(this.offering) && this.offering.report;
     }
-  }
+  },
 };
 
 export default offeringDetails;

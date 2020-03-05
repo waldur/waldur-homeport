@@ -23,13 +23,17 @@ class PureOrderItemTerminateButton extends React.Component<Props> {
     this.setState({ loading: true });
     try {
       await terminateOrderItem(this.props.uuid);
-      this.props.showSuccess(translate('Order item has cancel has been scheduled.'));
+      this.props.showSuccess(
+        translate('Order item has cancel has been scheduled.'),
+      );
       this.props.loadData();
     } catch (response) {
-      this.props.showSuccess(`${translate('Unable to cancel order item.')} ${format(response)}`);
+      this.props.showSuccess(
+        `${translate('Unable to cancel order item.')} ${format(response)}`,
+      );
     }
     this.setState({ loading: false });
-  }
+  };
 
   render() {
     return (
@@ -44,4 +48,7 @@ class PureOrderItemTerminateButton extends React.Component<Props> {
   }
 }
 
-export const OrderItemTerminateButton = connect(null, {showSuccess, showError})(PureOrderItemTerminateButton);
+export const OrderItemTerminateButton = connect(null, {
+  showSuccess,
+  showError,
+})(PureOrderItemTerminateButton);

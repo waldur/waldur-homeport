@@ -4,12 +4,7 @@ import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
 import { Project, Customer } from '@waldur/workspace/types';
 
-export type BillingPeriod =
-  | 'hour'
-  | 'day'
-  | 'half_month'
-  | 'month'
-  ;
+export type BillingPeriod = 'hour' | 'day' | 'half_month' | 'month';
 
 export interface GeolocationPoint {
   latitude: number;
@@ -25,12 +20,7 @@ export interface BaseComponent {
   description: string;
 }
 
-export type BillingType =
-  | 'usage'
-  | 'fixed'
-  | 'one'
-  | 'few'
-  ;
+export type BillingType = 'usage' | 'fixed' | 'one' | 'few';
 
 export interface OfferingComponent extends BaseComponent {
   billing_type: BillingType;
@@ -51,8 +41,8 @@ export interface Plan {
   init_price?: number | string;
   switch_price?: number | string;
   unit: BillingPeriod;
-  quotas: {[key: string]: number};
-  prices: {[key: string]: number};
+  quotas: { [key: string]: number };
+  prices: { [key: string]: number };
   is_active: boolean;
   archived: boolean;
 }
@@ -70,7 +60,7 @@ export interface OptionField {
 
 export interface OfferingOptions {
   order: string[];
-  options: {[key: string]: OptionField};
+  options: { [key: string]: OptionField };
 }
 
 export interface ComparedOffering {
@@ -133,8 +123,7 @@ type AttributeType =
   | 'choice'
   | 'list'
   | 'password'
-  | 'html'
-  ;
+  | 'html';
 
 export interface Attribute {
   default?: any;

@@ -21,9 +21,11 @@ const checkPattern = (value: string, _, props) => {
 };
 
 const checkDuplicate = (value, _, props) =>
-  props.customer.projects.find(project => project.name === value && project.uuid !== props.project_uuid) ?
-  props.translate('Name is duplicated. Choose other name.') :
-  undefined;
+  props.customer.projects.find(
+    project => project.name === value && project.uuid !== props.project_uuid,
+  )
+    ? props.translate('Name is duplicated. Choose other name.')
+    : undefined;
 
 const validateProjectName = (value, _, props) =>
   checkDuplicate(value, _, props) || checkPattern(value, _, props);

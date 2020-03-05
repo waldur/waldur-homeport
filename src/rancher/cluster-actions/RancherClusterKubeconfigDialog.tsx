@@ -12,8 +12,9 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { showSuccess } from '@waldur/store/coreSaga';
 
 const getKubeconfigFile = resourceId =>
-  get(`/rancher-clusters/${resourceId}/kubeconfig_file/`)
-  .then(response => response.data.config);
+  get(`/rancher-clusters/${resourceId}/kubeconfig_file/`).then(
+    response => response.data.config,
+  );
 
 const KubeconfigFilePanel = props => {
   const dispatch = useDispatch();
@@ -24,19 +25,19 @@ const KubeconfigFilePanel = props => {
 
   return (
     <>
-      <p>
-        {translate('Put this into ~/.kube/config:')}
-      </p>
-      <pre style={{height: 200}}>{props.config}</pre>
+      <p>{translate('Put this into ~/.kube/config:')}</p>
+      <pre style={{ height: 200 }}>{props.config}</pre>
       <p className="m-b-sm m-t-sm">
         <a onClick={onClick}>
-          <i className="fa fa-copy"/>
-          {' '}
-          {translate('Copy to clipboard')}
+          <i className="fa fa-copy" /> {translate('Copy to clipboard')}
         </a>
       </p>
       <p>
-        <a href="http://kubernetes.io/docs/user-guide/prereqs/" target="_blank">
+        <a
+          href="http://kubernetes.io/docs/user-guide/prereqs/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {translate('Then download (if needed) and run kubectl')}
         </a>
       </p>
@@ -45,17 +46,27 @@ const KubeconfigFilePanel = props => {
 };
 
 export const RancherClusterKubeconfigDialog = props => {
-  const {state: resourceProps, call: loadResource} = useQuery(getKubeconfigFile, props.resolve.resource.uuid);
+  const { state: resourceProps, call: loadResource } = useQuery(
+    getKubeconfigFile,
+    props.resolve.resource.uuid,
+  );
   React.useEffect(loadResource, []);
   return (
     <ModalDialog
       title={translate('Kubeconfig file')}
-      footer={<CloseDialogButton/>}>
-      {resourceProps.loading ? <LoadingSpinner/> :
-      resourceProps.erred ? <div>{translate('Unable to load data.')}</div> :
-      resourceProps.loaded ? <KubeconfigFilePanel config={resourceProps.data}/> : null}
+      footer={<CloseDialogButton />}
+    >
+      {resourceProps.loading ? (
+        <LoadingSpinner />
+      ) : resourceProps.erred ? (
+        <div>{translate('Unable to load data.')}</div>
+      ) : resourceProps.loaded ? (
+        <KubeconfigFilePanel config={resourceProps.data} />
+      ) : null}
     </ModalDialog>
   );
 };
 
-export default connectAngularComponent(RancherClusterKubeconfigDialog, ['resolve']);
+export default connectAngularComponent(RancherClusterKubeconfigDialog, [
+  'resolve',
+]);

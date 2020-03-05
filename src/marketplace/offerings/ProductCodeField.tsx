@@ -11,7 +11,9 @@ export const ProductCodeField = () => (
     name="product_code"
     validate={articleCodeValidator}
     label={translate('Product code')}
-    description={translate('Technical name intended for integration and automated reporting.')}
+    description={translate(
+      'Technical name intended for integration and automated reporting.',
+    )}
     component={FormGroupWithError}
   />
 );

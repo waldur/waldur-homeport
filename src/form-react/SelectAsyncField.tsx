@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import { Async, ReactAsyncSelectProps } from 'react-select';
 
@@ -18,7 +19,8 @@ export const SelectAsyncField = (props: SelectAsyncFieldProps) => {
     controlClass,
     validate,
     normalize,
-    ...rest} = props;
+    ...rest
+  } = props;
   return React.createElement(Async, {
     ...rest,
     name: input.name,

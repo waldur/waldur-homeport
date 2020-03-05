@@ -5,16 +5,14 @@ import { Field } from 'redux-form';
 import { translate } from '@waldur/i18n';
 
 export const getStates = () => [
-  {value: 'Creating', label: translate('Unconfirmed')},
-  {value: 'OK', label: translate('Accepted')},
-  {value: 'Terminated', label: translate('Rejected')},
+  { value: 'Creating', label: translate('Unconfirmed') },
+  { value: 'OK', label: translate('Accepted') },
+  { value: 'Terminated', label: translate('Rejected') },
 ];
 
 export const BookingStateFilter = () => (
   <div className="form-group">
-    <label className="control-label">
-      {translate('State')}
-    </label>
+    <label className="control-label">{translate('State')}</label>
     <Field
       name="state"
       component={fieldProps => (

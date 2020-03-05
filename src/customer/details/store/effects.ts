@@ -13,7 +13,7 @@ export function* uploadLogo(action) {
   const errorMessage = translate('Unable to upload logo.');
 
   try {
-    yield call(api.uploadLogo, {customerUuid, image});
+    yield call(api.uploadLogo, { customerUuid, image });
     yield put(emitSignal('refreshCustomer'));
     yield put(actions.uploadLogo.success());
     yield put(showSuccess(successMessage));
@@ -34,7 +34,7 @@ export function* removeLogo(action) {
   try {
     yield put(reset('customerLogo'));
     if (customer.image) {
-      yield call(api.removeLogo, {customerUuid: customer.uuid});
+      yield call(api.removeLogo, { customerUuid: customer.uuid });
       yield put(emitSignal('refreshCustomer'));
       yield put(showSuccess(successMessage));
     }

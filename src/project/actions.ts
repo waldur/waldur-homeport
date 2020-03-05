@@ -16,8 +16,14 @@ export const gotoProjectCreate = () => ({
 
 export const deleteProject = (project: Project) => ({
   type: DELETE_PROJECT,
-  payload: {project},
+  payload: { project },
 });
 
-export const showProjectRemoveDialog = (action: () => void, projectName: string) =>
-  openModalDialog('projectRemoveDialog', {resolve: { action, projectName }, size: 'md'});
+export const showProjectRemoveDialog = (
+  action: () => void,
+  projectName: string,
+) =>
+  openModalDialog('projectRemoveDialog', {
+    resolve: { action, projectName },
+    size: 'md',
+  });

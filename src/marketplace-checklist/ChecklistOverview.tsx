@@ -14,7 +14,7 @@ const ChecklistOverview = () => {
   const state = useChecklistOverview();
 
   if (state.checklistLoading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   } else if (state.checklistErred) {
     return <>{translate('Unable to load checklists.')}</>;
   } else if (state.checklistOptions) {
@@ -30,16 +30,16 @@ const ChecklistOverview = () => {
           onChange={state.setChecklist}
           options={state.checklistOptions}
           clearable={false}
-          wrapperStyle={{zIndex: 2000}} /* Because leaflet z-index is 1000 */
+          wrapperStyle={{ zIndex: 2000 }} /* Because leaflet z-index is 1000 */
         />
         {state.statsLoading ? (
-          <LoadingSpinner/>
+          <LoadingSpinner />
         ) : state.statsErred ? (
           <>{translate('Unable to load compiance overview.')}</>
         ) : (
           <Panel className="m-t-md">
-            <CustomerMap customers={state.statsList}/>
-            <StatsTable stats={state.statsList}/>
+            <CustomerMap customers={state.statsList} />
+            <StatsTable stats={state.statsList} />
           </Panel>
         )}
       </>

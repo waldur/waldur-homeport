@@ -7,7 +7,7 @@ const helpList = {
     $onInit() {
       this.helpData = HelpRegistry.getSorted();
     }
-  }
+  },
 };
 
 export default helpList;

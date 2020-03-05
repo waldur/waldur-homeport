@@ -10,27 +10,38 @@
   <div ng-if="$ctrl.loadingOrganizations">
     <loading-spinner></loading-spinner>
   </div>
-  <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length === 0" class="row">
+  <div
+    ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length === 0"
+    class="row"
+  >
     <div class="middle-box text-center">
       <h3 class="font-bold m-b-lg">
         <span translate>You do not belong to any organization yet.</span>
       </h3>
       <div>
-        <a class="btn btn-default" id="add-new-organization"
+        <a
+          class="btn btn-default"
+          id="add-new-organization"
           ng-click="$ctrl.createOrganization()"
-          ng-if="$ctrl.canCreateOrganization">
+          ng-if="$ctrl.canCreateOrganization"
+        >
           <i class="fa fa-plus"></i>
           <span translate>Add new organization</span>
         </a>
       </div>
     </div>
   </div>
-  <div ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length > 0" class="row">
+  <div
+    ng-if="!$ctrl.loadingOrganizations && $ctrl.organizations.length > 0"
+    class="row"
+  >
     <div class="workspace-listing col-md-6 col-xs-12 m-b-md">
-      <a class="pull-right btn btn-sm btn-default"
+      <a
+        class="pull-right btn btn-sm btn-default"
         id="add-new-organization"
         ng-click="$ctrl.createOrganization()"
-        ng-if="$ctrl.canCreateOrganization">
+        ng-if="$ctrl.canCreateOrganization"
+      >
         <i class="fa fa-plus"></i>
         <span translate>Add new</span>
         <span class="hidden-xs" translate>organization</span>
@@ -40,25 +51,35 @@
       </h3>
       <div class="form-group">
         <div class="search-box">
-          <input id="organization-search-box"
+          <input
+            id="organization-search-box"
             type="text"
             class="form-control"
             ng-model="$ctrl.organizationSearchInput"
             ng-model-options="{ debounce: 500 }"
-            placeholder="{{ 'Filter organizations' | translate }}">
+            placeholder="{{ 'Filter organizations' | translate }}"
+          />
           <label for="organization-search-box">
             <i class="fa fa-search"></i>
           </label>
         </div>
       </div>
-      <div class="list-group" slimscroll="{height:300}" id="organization-selector">
-        <div class="list-group-item"
+      <div
+        class="list-group"
+        slimscroll="{height:300}"
+        id="organization-selector"
+      >
+        <div
+          class="list-group-item"
           ng-repeat="organization in $ctrl.organizations | filter: $ctrl.filterOrganization as filteredOrganizations"
           ng-class="{active: organization.uuid == $ctrl.selectedOrganization.uuid}"
-          ng-click="$ctrl.selectOrganization(organization)">
-          <a class="btn btn-xs btn-default pull-right"
+          ng-click="$ctrl.selectOrganization(organization)"
+        >
+          <a
+            class="btn btn-xs btn-default pull-right"
             ng-if="organization.canGotoDashboard"
-            submit-button="$ctrl.gotoOrganization(organization)">
+            submit-button="$ctrl.gotoOrganization(organization)"
+          >
             <span translate>Select</span>
           </a>
           <div
@@ -66,34 +87,41 @@
             ng-if="organization.abbreviation"
             uib-tooltip="{{ organization.name }}"
             tooltip-append-to-body="true"
-            tooltip-class="select-workspace-dialog__tooltip--order">
+            tooltip-class="select-workspace-dialog__tooltip--order"
+          >
             {{ organization.abbreviation }}
-            <i ng-if="organization.is_service_provider"
-            tooltip-append-to-body="true"
-            uib-tooltip="{{ 'Service provider' | translate }}"
-            class="provider-icon svgfonticon svgfonticon-provider"></i>
+            <i
+              ng-if="organization.is_service_provider"
+              tooltip-append-to-body="true"
+              uib-tooltip="{{ 'Service provider' | translate }}"
+              class="provider-icon svgfonticon svgfonticon-provider"
+            ></i>
             <extension-point id="organization-selector"></extension-point>
           </div>
-          <div
-            class="ellipsis"
-            ng-if="!organization.abbreviation">
+          <div class="ellipsis" ng-if="!organization.abbreviation">
             {{ organization.name }}
-            <i ng-if="organization.is_service_provider"
-            tooltip-append-to-body="true"
-            uib-tooltip="{{ 'Service provider' | translate }}"
-            class="provider-icon svgfonticon svgfonticon-provider"></i>
+            <i
+              ng-if="organization.is_service_provider"
+              tooltip-append-to-body="true"
+              uib-tooltip="{{ 'Service provider' | translate }}"
+              class="provider-icon svgfonticon svgfonticon-provider"
+            ></i>
             <extension-point id="organization-selector"></extension-point>
           </div>
         </div>
         <div class="list-group-item" ng-if="filteredOrganizations.length === 0">
-          <span class="ellipsis" translate>There are no organizations matching filter.</span>
+          <span class="ellipsis" translate
+            >There are no organizations matching filter.</span
+          >
         </div>
       </div>
     </div>
     <div class="col-md-6 col-xs-12">
-      <a class="pull-right btn btn-sm btn-default"
+      <a
+        class="pull-right btn btn-sm btn-default"
         ng-click="$ctrl.createProject()"
-        ng-if="$ctrl.selectedOrganization.ownerOrStaff">
+        ng-if="$ctrl.selectedOrganization.ownerOrStaff"
+      >
         <i class="fa fa-plus"></i>
         <span translate>Add new project</span>
       </a>
@@ -103,12 +131,14 @@
       </h3>
       <div class="form-group">
         <div class="search-box">
-          <input id="project-search-box"
+          <input
+            id="project-search-box"
             type="text"
             class="form-control"
             ng-model="$ctrl.projectSearchInput"
             ng-model-options="{ debounce: 500 }"
-            placeholder="{{ 'Filter projects' | translate }}">
+            placeholder="{{ 'Filter projects' | translate }}"
+          />
           <label for="project-search-box">
             <i class="fa fa-search"></i>
           </label>
@@ -116,19 +146,28 @@
       </div>
       <div ng-if="$ctrl.selectedOrganization.projects.length == 0">
         <p class="text-center text-danger">
-          <span translate>There are no projects yet for this organization.</span>
+          <span translate
+            >There are no projects yet for this organization.</span
+          >
         </p>
       </div>
-      <div ng-show="$ctrl.selectedOrganization.projects.length > 0"
+      <div
+        ng-show="$ctrl.selectedOrganization.projects.length > 0"
         class="list-group"
         slimscroll
         height="300"
-        id="project-selector">
-        <div class="list-group-item"
+        id="project-selector"
+      >
+        <div
+          class="list-group-item"
           ng-repeat="project in $ctrl.selectedOrganization.projects | filter: {name: $ctrl.projectSearchInput}"
           ng-class="{active: project.uuid == $ctrl.selectedProject.uuid}"
-          ng-click="$ctrl.selectProject(project)">
-          <a class="btn btn-xs btn-default pull-right" submit-button="$ctrl.gotoProject(project)">
+          ng-click="$ctrl.selectProject(project)"
+        >
+          <a
+            class="btn btn-xs btn-default pull-right"
+            submit-button="$ctrl.gotoProject(project)"
+          >
             <span translate>Select</span>
           </a>
           <div class="ellipsis">{{ project.name }}</div>

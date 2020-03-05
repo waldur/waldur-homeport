@@ -9,15 +9,12 @@ export const NodeRoleField = props => (
     value={props.input.value}
     onChange={props.input.onChange}
     name="role"
-    type="checkbox">
+    type="checkbox"
+  >
     <ToggleButton value="controlplane">
       {translate('Control plane')}
     </ToggleButton>
-    <ToggleButton value="etcd">
-      {translate('etcd')}
-    </ToggleButton>
-    <ToggleButton value="worker">
-      {translate('Worker')}
-    </ToggleButton>
+    <ToggleButton value="etcd">{translate('etcd')}</ToggleButton>
+    <ToggleButton value="worker">{translate('Worker')}</ToggleButton>
   </ToggleButtonGroup>
 );

@@ -6,6 +6,7 @@ import { translate } from '@waldur/i18n';
 
 import { RemoveButton } from '../RemoveButton';
 import { getPlanData } from '../store/selectors';
+
 import { PlanForm } from './PlanForm';
 
 interface OwnProps {
@@ -21,11 +22,11 @@ interface StateProps {
 const PurePlanPanel = (props: OwnProps & StateProps) => (
   <Panel className={props.archived ? 'disabled' : undefined}>
     <Panel.Heading>
-      <RemoveButton onClick={() => props.onRemove(props.index)}/>
-      <h4>{translate('Plan #{index}', {index: props.index + 1})}</h4>
+      <RemoveButton onClick={() => props.onRemove(props.index)} />
+      <h4>{translate('Plan #{index}', { index: props.index + 1 })}</h4>
     </Panel.Heading>
     <Panel.Body>
-      <PlanForm plan={props.plan} archived={props.archived}/>
+      <PlanForm plan={props.plan} archived={props.archived} />
     </Panel.Body>
   </Panel>
 );

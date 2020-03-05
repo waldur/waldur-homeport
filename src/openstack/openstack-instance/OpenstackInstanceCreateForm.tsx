@@ -16,22 +16,36 @@ import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import * as api from '@waldur/openstack/api';
-import { flavorValidator, flavorComparator, internalIpFormatter } from '@waldur/openstack/openstack-instance/openstack-instance-config';
-import { OpenstackInstanceNetworks, getDefaultFloatingIps } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
+import {
+  flavorValidator,
+  flavorComparator,
+  internalIpFormatter,
+} from '@waldur/openstack/openstack-instance/openstack-instance-config';
+import {
+  OpenstackInstanceNetworks,
+  getDefaultFloatingIps,
+} from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
-import { Subnet, FloatingIp, ServiceComponent, Flavor, SshKey } from '@waldur/openstack/openstack-instance/types';
+import {
+  Subnet,
+  FloatingIp,
+  ServiceComponent,
+  Flavor,
+  SshKey,
+} from '@waldur/openstack/openstack-instance/types';
 import {
   validateAndSort,
   calculateSystemVolumeSize,
   formatVolumeTypeChoices,
   getDefaultVolumeType,
-  validateOpenstackInstanceName
+  validateOpenstackInstanceName,
 } from '@waldur/openstack/openstack-instance/utils';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 import { User } from '@waldur/workspace/types';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 import { AvailabilityZone } from '../types';
+
 import { AvailabilityZoneGroup } from './AvailabilityZoneGroup';
 // import { CreateSecurityGroupButton } from './CreateSecurityGroupButton';
 import { DataVolumeSizeGroup } from './DataVolumeSizeGroup';
@@ -66,8 +80,12 @@ interface OpenstackInstanceCreateFormComponentProps {
 
 const nameValidators = [required, validateOpenstackInstanceName];
 
-export class OpenstackInstanceCreateFormComponent extends
-  React.Component<OfferingConfigurationFormProps & OpenstackInstanceCreateFormComponentProps & TranslateProps, OpenstackInstanceCreateFormState> {
+export class OpenstackInstanceCreateFormComponent extends React.Component<
+  OfferingConfigurationFormProps &
+    OpenstackInstanceCreateFormComponentProps &
+    TranslateProps,
+  OpenstackInstanceCreateFormState
+> {
   state = {
     loading: false,
     loaded: false,
@@ -86,14 +104,16 @@ export class OpenstackInstanceCreateFormComponent extends
   async loadData() {
     const scopeUuid = this.props.offering.scope_uuid;
     try {
-      this.setState({loading: true});
+      this.setState({ loading: true });
       const images = await api.loadImages(scopeUuid);
       const flavors = await api.loadFlavors(scopeUuid);
       const sshKeys = await api.loadSshKeys(this.props.currentUser.uuid);
       const securityGroups = await api.loadSecurityGroups(scopeUuid);
       const subnets = await api.loadSubnets(scopeUuid);
       const floatingIps = await api.loadFloatingIps(scopeUuid);
-      const availabilityZones = await api.loadInstanceAvailabilityZones(scopeUuid);
+      const availabilityZones = await api.loadInstanceAvailabilityZones(
+        scopeUuid,
+      );
       // const settings = (await $http.get(this.props.offering.scope)).data;
       // const tenantUUID = settings.scope ? getUUID(settings.scope) : undefined;
 
@@ -124,10 +144,12 @@ export class OpenstackInstanceCreateFormComponent extends
         const image = images.find(s => s.url === initial.image);
         // tslint:disable-next-line: variable-name
         const security_groups = initial.security_groups.map(s =>
-          securityGroups.find(g => g.url === s.url));
+          securityGroups.find(g => g.url === s.url),
+        );
         // tslint:disable-next-line: variable-name
-        const availability_zone = initial.availability_zone && availabilityZones.find(
-          s => s.url === initial.availability_zone);
+        const availability_zone =
+          initial.availability_zone &&
+          availabilityZones.find(s => s.url === initial.availability_zone);
         const networksMap = {};
         initial.internal_ips_set.map(item => {
           networksMap[item.subnet] = 'false';
@@ -139,7 +161,9 @@ export class OpenstackInstanceCreateFormComponent extends
         const networks = Object.keys(networksMap).map(key => {
           const subnet = subnets.find(s => s.url === key);
           const value = networksMap[key];
-          const floatingIp = defaults.find(s => s.url === value) || floatingIps.find(s => s.url === value);
+          const floatingIp =
+            defaults.find(s => s.url === value) ||
+            floatingIps.find(s => s.url === value);
           return {
             subnet: {
               ...subnet,
@@ -158,15 +182,18 @@ export class OpenstackInstanceCreateFormComponent extends
           system_volume_type: defaultVolumeType,
           data_volume_type: defaultVolumeType,
         };
-        this.props.initialize({attributes, project: this.props.project});
+        this.props.initialize({ attributes, project: this.props.project });
       } else {
-        this.props.initialize({attributes: {
-          system_volume_type: defaultVolumeType,
-          data_volume_type: defaultVolumeType,
-        }, project: this.props.project});
+        this.props.initialize({
+          attributes: {
+            system_volume_type: defaultVolumeType,
+            data_volume_type: defaultVolumeType,
+          },
+          project: this.props.project,
+        });
       }
     } catch (error) {
-      this.setState({loading: false, loaded: false});
+      this.setState({ loading: false, loaded: false });
     }
   }
 
@@ -175,29 +202,46 @@ export class OpenstackInstanceCreateFormComponent extends
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.image !== this.props.image || prevProps.flavor !== this.props.flavor) {
+    if (
+      prevProps.image !== this.props.image ||
+      prevProps.flavor !== this.props.flavor
+    ) {
       const formData = {
         image: this.props.image,
         flavor: this.props.flavor,
         system_volume_size: this.props.systemVolumeSize,
       };
-      this.props.change('attributes.system_volume_size', calculateSystemVolumeSize(formData));
+      this.props.change(
+        'attributes.system_volume_size',
+        calculateSystemVolumeSize(formData),
+      );
     }
   }
 
   updateFlavorChoices = () =>
-    validateAndSort({image: this.props.image}, this.state.flavors, flavorValidator, flavorComparator)
+    validateAndSort(
+      { image: this.props.image },
+      this.state.flavors,
+      flavorValidator,
+      flavorComparator,
+    );
 
   validateFlavor = value => {
-    if (this.props.flavor && flavorValidator({image: value}, this.props.flavor)) {
+    if (
+      this.props.flavor &&
+      flavorValidator({ image: value }, this.props.flavor)
+    ) {
       this.props.change('attributes.flavor', null);
     }
-  }
+  };
 
-  setDataVolumeActive = value => this.setState({isDataVolumeActive: value});
+  setDataVolumeActive = value => this.setState({ isDataVolumeActive: value });
 
   shouldComponentUpdate(prevProps) {
-    if (prevProps.valid !== this.props.valid || prevProps.invalid !== this.props.invalid) {
+    if (
+      prevProps.valid !== this.props.valid ||
+      prevProps.invalid !== this.props.invalid
+    ) {
       return false;
     }
     return true;
@@ -205,13 +249,13 @@ export class OpenstackInstanceCreateFormComponent extends
 
   render() {
     if (this.state.loading) {
-      return <LoadingSpinner/>;
+      return <LoadingSpinner />;
     }
 
     if (!this.state.loading && !this.state.loaded) {
       return (
         <h3 className="text-center">
-          {translate('Unable to get form\'s data.')}
+          {translate("Unable to get form's data.")}
         </h3>
       );
     }
@@ -219,73 +263,69 @@ export class OpenstackInstanceCreateFormComponent extends
     if (this.state.loaded) {
       return (
         <form className="form-horizontal">
-          <ProjectField/>
-          <CreateResourceFormGroup
-            label={translate('VM name')}
-            required={true}
-          >
+          <ProjectField />
+          <CreateResourceFormGroup label={translate('VM name')} required={true}>
             <Field
               name="attributes.name"
               component={renderValidationWrapper(StringField)}
               validate={nameValidators}
             />
           </CreateResourceFormGroup>
-          <ImageGroup images={this.state.images} validateFlavor={this.validateFlavor}/>
-          <FlavorGroup flavors={this.updateFlavorChoices()}/>
-          <AvailabilityZoneGroup availabilityZones={this.state.availabilityZones} />
-          <SystemVolumeSizeGroup/>
-          <SystemVolumeTypeGroup volumeTypes={this.state.volumeTypes}/>
+          <ImageGroup
+            images={this.state.images}
+            validateFlavor={this.validateFlavor}
+          />
+          <FlavorGroup flavors={this.updateFlavorChoices()} />
+          <AvailabilityZoneGroup
+            availabilityZones={this.state.availabilityZones}
+          />
+          <SystemVolumeSizeGroup />
+          <SystemVolumeTypeGroup volumeTypes={this.state.volumeTypes} />
           <DataVolumeSizeGroup
             isActive={this.state.isDataVolumeActive}
             setActive={this.setDataVolumeActive}
           />
           {this.state.isDataVolumeActive && (
-            <DataVolumeTypeGroup
-              volumeTypes={this.state.volumeTypes}
-            />
+            <DataVolumeTypeGroup volumeTypes={this.state.volumeTypes} />
           )}
-          <PublicKeyGroup sshKeys={this.state.sshKeys}/>
+          <PublicKeyGroup sshKeys={this.state.sshKeys} />
           <CreateResourceFormGroup label={translate('Security groups')}>
             <Field
               name="attributes.security_groups"
-              component={fieldProps =>
+              component={fieldProps => (
                 <OpenstackInstanceSecurityGroups
                   securityGroups={this.state.securityGroups}
                   input={fieldProps.input}
                 />
-              }
+              )}
             />
           </CreateResourceFormGroup>
           <CreateResourceFormGroup label={translate('Networks')}>
             <Field
               name="attributes.networks"
-              component={fieldProps =>
+              component={fieldProps => (
                 <OpenstackInstanceNetworks
                   input={fieldProps.input}
                   subnets={this.state.subnets}
                   floatingIps={this.state.floatingIps}
                 />
-              }
+              )}
             />
           </CreateResourceFormGroup>
           <CreateResourceFormGroup label={translate('Description')}>
             <Field
               name="attributes.description"
-              component={fieldProps =>
-                <TextField
-                  maxLength={500}
-                  {...fieldProps.input}
-                />
-              }
+              component={fieldProps => (
+                <TextField maxLength={500} {...fieldProps.input} />
+              )}
             />
           </CreateResourceFormGroup>
           <CreateResourceFormGroup label={translate('User data')}>
-            <Field
-              name="attributes.user_data"
-              component={TextField}
-            />
+            <Field name="attributes.user_data" component={TextField} />
             <div className="help-block m-b-none text-muted">
-              {translate('Additional data that will be added to instance on provisioning.')}
+              {translate(
+                'Additional data that will be added to instance on provisioning.',
+              )}
             </div>
           </CreateResourceFormGroup>
         </form>

@@ -9,19 +9,24 @@ interface PlanFieldProps {
   offering?: Offering;
 }
 
-export const PlanField = (props: PlanFieldProps) => props.offering.plans.length > 0 ? (
-  <div className="form-group">
-    <label className="control-label col-sm-3">
-      {translate('Plan')}
-      <span className="text-danger"> *</span>
-    </label>
-    <div className="col-sm-9">
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        <div style={{flexGrow: 1}}>
-          <PlanSelectField plans={props.offering.plans.filter(plan => plan.archived === false)}/>
+export const PlanField = (props: PlanFieldProps) =>
+  props.offering.plans.length > 0 ? (
+    <div className="form-group">
+      <label className="control-label col-sm-3">
+        {translate('Plan')}
+        <span className="text-danger"> *</span>
+      </label>
+      <div className="col-sm-9">
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ flexGrow: 1 }}>
+            <PlanSelectField
+              plans={props.offering.plans.filter(
+                plan => plan.archived === false,
+              )}
+            />
+          </div>
+          <PlanDescriptionButton className="btn btn-md btn-default pull-right m-l-sm" />
         </div>
-        <PlanDescriptionButton className="btn btn-md btn-default pull-right m-l-sm"/>
       </div>
     </div>
-  </div>
-) : null;
+  ) : null;

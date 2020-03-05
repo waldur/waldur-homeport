@@ -20,7 +20,7 @@ const appstoreFormFieldset = {
     renderLabel(field) {
       return field.type !== 'boolean' && field.type !== 'label';
     }
-  }
+  },
 };
 
 export default appstoreFormFieldset;

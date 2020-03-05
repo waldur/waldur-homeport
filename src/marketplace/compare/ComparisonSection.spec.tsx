@@ -6,7 +6,9 @@ import { ComparisonSection } from './ComparisonSection';
 
 describe('ComparisonSection', () => {
   it('renders comparison section', () => {
-    const wrapper = shallow(<ComparisonSection section={SystemSection} items={Offerings} />);
+    const wrapper = shallow(
+      <ComparisonSection section={SystemSection} items={Offerings} />,
+    );
     expect(wrapper.html()).toMatchSnapshot();
   });
 });

@@ -6,26 +6,36 @@ export default function openstackBackupsList() {
     controllerAs: 'ListController',
     scope: {},
     bindToController: {
-      resource: '='
-    }
+      resource: '=',
+    },
   };
 }
 
 // @ngInject
 function OpenStackBackupsListController(
-  baseResourceListController, openstackBackupsService, actionUtilsService, $filter) {
+  baseResourceListController,
+  openstackBackupsService,
+  actionUtilsService,
+  $filter,
+) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       let fn = this._super.bind(this);
       this.loading = true;
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, 'backups').then(result => {
-        this.listActions = result;
-        fn();
-        this.service = openstackBackupsService;
-        this.addRowFields(['kept_until', 'instance_internal_ips_set', 'instance_security_groups']);
-      });
+      actionUtilsService
+        .loadNestedActions(this, controllerScope.resource, 'backups')
+        .then(result => {
+          this.listActions = result;
+          fn();
+          this.service = openstackBackupsService;
+          this.addRowFields([
+            'kept_until',
+            'instance_internal_ips_set',
+            'instance_security_groups',
+          ]);
+        });
     },
     getTableOptions: function() {
       let options = this._super();
@@ -38,20 +48,20 @@ function OpenStackBackupsListController(
           title: gettext('Name'),
           className: 'all',
           orderField: 'name',
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           title: gettext('Description'),
-          render: row => row.description || 'N/A'
+          render: row => row.description || 'N/A',
         },
         {
           title: gettext('Keep until'),
-          render: row => $filter('shortDate')(row.kept_until) || '&mdash;'
+          render: row => $filter('shortDate')(row.kept_until) || '&mdash;',
         },
         {
           title: gettext('State'),
           className: 'min-tablet-l',
-          render: row => this.renderResourceState(row)
+          render: row => this.renderResourceState(row),
         },
       ];
       return options;
@@ -61,14 +71,14 @@ function OpenStackBackupsListController(
         'OpenStackTenant.Instance': 'instance',
         'OpenStackTenant.BackupSchedule': 'backup_schedule',
       };
-      const {resource_type, url} = controllerScope.resource;
+      const { resource_type, url } = controllerScope.resource;
       let field = fields[resource_type];
       if (field) {
         return {
-          [field]: url
+          [field]: url,
         };
       }
-    }
+    },
   });
 
   controllerScope.__proto__ = new controllerClass();

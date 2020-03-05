@@ -4,7 +4,14 @@ import { translate } from '@waldur/i18n';
 
 import { ResourceRow } from './ResourceRow';
 
-export const ResourcesList = ({ resources, offering, value, toggleResource, plans, assignPlan }) => (
+export const ResourcesList = ({
+  resources,
+  offering,
+  value,
+  toggleResource,
+  plans,
+  assignPlan,
+}) => (
   <table className="table">
     <thead>
       <tr>
@@ -14,7 +21,7 @@ export const ResourcesList = ({ resources, offering, value, toggleResource, plan
         <th>{translate('Name')}</th>
         <th>{translate('Backend ID')}</th>
         <th>{translate('Actions')}</th>
-          {offering.billable && <th className="col-sm-2">{translate('Plan')}</th>}
+        {offering.billable && <th className="col-sm-2">{translate('Plan')}</th>}
       </tr>
     </thead>
     <tbody>

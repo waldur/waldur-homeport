@@ -14,8 +14,8 @@ export default class EventDialogsService {
     this.$uibModal.open({
       component: 'eventDetailsDialog',
       resolve: {
-        event: () => event
-      }
+        event: () => event,
+      },
     });
   }
 }

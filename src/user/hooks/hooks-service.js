@@ -6,7 +6,7 @@ export default function hooksService(baseServiceClass, ENV) {
   };
 
   let ServiceClass = baseServiceClass.extend({
-    init:function() {
+    init: function() {
       this._super();
       this.endpoint = '/hooks/';
     },
@@ -29,13 +29,13 @@ export default function hooksService(baseServiceClass, ENV) {
     },
     cleanupOptions: function(input, output) {
       let fields = ['is_active', 'event_groups', 'email', 'destination_url'];
-      for(let i in fields) {
+      for (let i in fields) {
         let field = fields[i];
         if (input[field] !== undefined) {
           output[field] = input[field];
         }
       }
-    }
+    },
   });
   return new ServiceClass();
 }

@@ -20,7 +20,7 @@ export const CustomRadioButton = (props: CustomRadioButtonProps) => (
           checked={props.input.value === choice.value}
           {...props}
         />
-        <div className="custom-checkmark"/>
+        <div className="custom-checkmark" />
         <span className="radio-label">{choice.label}</span>
       </label>
     ))}

@@ -22,12 +22,16 @@ interface ShoppingCartItemProps {
 
 const TosCell = (props: ShoppingCartItemProps) => (
   <td className="text-center">
-    {(props.item.offering_shared && props.item.offering_billable && props.item.offering_terms_of_service) ?
+    {props.item.offering_shared &&
+    props.item.offering_billable &&
+    props.item.offering_terms_of_service ? (
       <TermsOfService
         name={props.item.offering_uuid}
         offering_terms_of_service={props.item.offering_terms_of_service}
-      /> : <span>&mdash;</span>
-    }
+      />
+    ) : (
+      <span>&mdash;</span>
+    )}
   </td>
 );
 
@@ -38,17 +42,20 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
         <div className="offering-thumb">
           <Tooltip id="offering-tooltip" label={props.item.offering_name}>
             <ShoppingCartItemUpdateLink order_item_uuid={props.item.uuid}>
-              <OfferingLogo src={props.item.offering_thumbnail}/>
+              <OfferingLogo src={props.item.offering_thumbnail} />
             </ShoppingCartItemUpdateLink>
           </Tooltip>
         </div>
         <div className="offering-info">
           <h5 className="offering-title">
-          <ShoppingCartItemUpdateLink order_item_uuid={props.item.uuid}>
+            <ShoppingCartItemUpdateLink order_item_uuid={props.item.uuid}>
               {props.item.attributes.name || props.item.offering_name}
-          </ShoppingCartItemUpdateLink>
+            </ShoppingCartItemUpdateLink>
           </h5>
-          <p>{props.item.attributes.description || props.item.offering_description}</p>
+          <p>
+            {props.item.attributes.description ||
+              props.item.offering_description}
+          </p>
         </div>
       </div>
     </td>
@@ -57,14 +64,16 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => (
     </td>
     <td className="text-center">
       <span className="btn-group">
-        <a className={classNames('btn btn-outline btn-danger btn-sm', {disabled: props.isRemovingItem})}
-          onClick={props.onRemove}>
-          <i className="fa fa-trash"/>
-          {' '}
-          {translate('Remove')}
+        <a
+          className={classNames('btn btn-outline btn-danger btn-sm', {
+            disabled: props.isRemovingItem,
+          })}
+          onClick={props.onRemove}
+        >
+          <i className="fa fa-trash" /> {translate('Remove')}
         </a>
       </span>
     </td>
-    {props.termsOfServiceIsVisible && <TosCell {...props}/>}
+    {props.termsOfServiceIsVisible && <TosCell {...props} />}
   </tr>
 );

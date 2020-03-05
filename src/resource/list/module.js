@@ -9,7 +9,10 @@ import resourceGlobalListFiltered from './resource-global-list-filtered';
 
 export default module => {
   module.service('baseResourceListController', baseResourceListController);
-  module.service('BaseProjectResourcesTabController', BaseProjectResourcesTabController);
+  module.service(
+    'BaseProjectResourcesTabController',
+    BaseProjectResourcesTabController,
+  );
   module.component('resourceStorageTabs', resourceStorageTabs);
   module.component('resourceVmsList', resourceVmsList);
   module.component('resourcePrivateCloudsList', resourcePrivateCloudsList);

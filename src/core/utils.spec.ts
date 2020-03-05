@@ -64,11 +64,11 @@ describe('getUUID', () => {
 
 describe('pick', () => {
   it('selects fields from object', () => {
-    const source = {username: 'admin', password: 'secret', domain: 'default'};
+    const source = { username: 'admin', password: 'secret', domain: 'default' };
     const fields = ['username', 'password'];
-    const expected = {username: 'admin', password: 'secret'};
+    const expected = { username: 'admin', password: 'secret' };
     const picker = pick(fields);
-    expect(picker((source))).toEqual(expected);
+    expect(picker(source)).toEqual(expected);
   });
 });
 
@@ -78,13 +78,16 @@ describe('toKeyValue', () => {
   });
 
   it('formats object to query parameter string', () => {
-    const actual = toKeyValue({release_floating_ips: false, delete_volumes: true});
+    const actual = toKeyValue({
+      release_floating_ips: false,
+      delete_volumes: true,
+    });
     const expected = 'release_floating_ips=false&delete_volumes=true';
     expect(actual).toBe(expected);
   });
 
   it('encodes escape sequences for special characters', () => {
-    const actual = toKeyValue({title: 'Valid string?'});
+    const actual = toKeyValue({ title: 'Valid string?' });
     const expected = 'title=Valid%20string%3F';
     expect(actual).toBe(expected);
   });
@@ -92,7 +95,7 @@ describe('toKeyValue', () => {
 
 describe('parseQueryString', () => {
   it('parses query string', () => {
-    const expected = {page: '10', page_size: '50'};
+    const expected = { page: '10', page_size: '50' };
     expect(parseQueryString('page=10&page_size=50')).toEqual(expected);
   });
 });

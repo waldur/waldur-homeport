@@ -4,7 +4,7 @@ export interface SecurityGroup {
   name: string;
   settings: string;
   description: string;
-  rules: Array<{[key: string]: string | number}>;
+  rules: Array<{ [key: string]: string | number }>;
 }
 
 export interface SecurityGroupOption extends SecurityGroup {

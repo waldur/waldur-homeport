@@ -19,7 +19,9 @@ export default class CustomerCreateService {
   createCustomer(model) {
     const customer = {};
     angular.extend(customer, this.composeCustomerModel(model));
-    return sendForm('POST', `${this.ENV.apiEndpoint}api/customers/`, {...customer})
+    return sendForm('POST', `${this.ENV.apiEndpoint}api/customers/`, {
+      ...customer,
+    })
       .then(response => response.data)
       .then(customer => {
         if (model.role === constants.ROLES.provider) {
@@ -55,7 +57,7 @@ export default class CustomerCreateService {
       'postal',
       'bank_name',
       'bank_account',
-      'image'
+      'image',
     ];
 
     let model = {};

@@ -14,7 +14,7 @@ const PureIssueCreateButton = props => (
 );
 
 const createRequestDialog = scope =>
-  openModalDialog('issueCreateDialog', {resolve: {issue: scope}});
+  openModalDialog('issueCreateDialog', { resolve: { issue: scope } });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: () => dispatch(createRequestDialog(ownProps.scope)),

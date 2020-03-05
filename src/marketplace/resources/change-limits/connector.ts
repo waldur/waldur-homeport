@@ -8,6 +8,7 @@ import { getBillingPeriods } from '@waldur/marketplace/common/utils';
 import { orderCanBeApproved as getOrderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
 
 import { changeLimits } from '../store/constants';
+
 import { FetchedData } from './utils';
 
 const FORM_ID = 'marketplaceChangeLimits';
@@ -52,7 +53,10 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
         subTotal,
       };
     });
-    const total = components.reduce((result, item) => result + item.subTotal, 0);
+    const total = components.reduce(
+      (result, item) => result + item.subTotal,
+      0,
+    );
     const totalPeriods = multipliers.map(mult => mult * total || 0);
     return {
       periods,
@@ -70,15 +74,19 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
-  submitRequest: data => changeLimits({
-    marketplace_resource_uuid: ownProps.data.resource.uuid,
-    resource_uuid: ownProps.data.resource.resource_uuid,
-    resource_type: ownProps.data.resource.resource_type,
-    limits: ownProps.data.limitSerializer(data.limits),
-  }, dispatch),
+  submitRequest: data =>
+    changeLimits(
+      {
+        marketplace_resource_uuid: ownProps.data.resource.uuid,
+        resource_uuid: ownProps.data.resource.resource_uuid,
+        resource_type: ownProps.data.resource.resource_type,
+        limits: ownProps.data.limitSerializer(data.limits),
+      },
+      dispatch,
+    ),
 });
 
 export const connector = compose(
-  reduxForm<{plan: any, limits: Limits}, OwnProps>({form: FORM_ID}),
+  reduxForm<{ plan: any; limits: Limits }, OwnProps>({ form: FORM_ID }),
   connect(mapStateToProps, mapDispatchToProps),
 );

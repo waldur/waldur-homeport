@@ -13,7 +13,9 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
   if (ctx.resource.state === 'OK' && ctx.resource.runtime_state === 'ACTIVE') {
     return translate('Please stop the instance before its removal.');
   }
-  return translate('Instance should be shutoff and OK or erred. Please contact support.');
+  return translate(
+    'Instance should be shutoff and OK or erred. Please contact support.',
+  );
 }
 
 export default function createAction(): ResourceAction<OpenStackInstance> {

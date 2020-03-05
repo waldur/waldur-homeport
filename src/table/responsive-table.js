@@ -15,12 +15,21 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { blockingExecutor } from '@waldur/core/services';
 
 // @ngInject
-export default function responsiveTable($rootScope, $q, $timeout, $interval, $compile, $filter, ENV, features) {
+export default function responsiveTable(
+  $rootScope,
+  $q,
+  $timeout,
+  $interval,
+  $compile,
+  $filter,
+  ENV,
+  features,
+) {
   return {
     restrict: 'E',
     scope: {
       controller: '=tableCtrl',
-      isVisible: '='
+      isVisible: '=',
     },
     template: '<table class="table table-striped"></table>',
     link: function(scope, element) {
@@ -35,7 +44,10 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         table.rows().every(function() {
           let rowData = this.data();
           if (rowData.uuid === data.uuid) {
-            table.row(this).data(data).draw();
+            table
+              .row(this)
+              .data(data)
+              .draw();
           }
         });
       });
@@ -45,7 +57,10 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         table.rows().every(function() {
           let rowData = this.data();
           if (rowData && rowData.uuid === uuid) {
-            table.row(this).remove().draw();
+            table
+              .row(this)
+              .remove()
+              .draw();
           }
         });
       });
@@ -84,24 +99,27 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         });
       });
 
-      scope.$watchCollection('controller.tableOptions.tableActions', actions => {
-        if (!table || !actions) {
-          return;
-        }
-        actions.map(function(action, index) {
-          const button = table.buttons(`.btn-${index}`);
-          if (action.disabled) {
-            button.disable();
-          } else {
-            button.enable();
+      scope.$watchCollection(
+        'controller.tableOptions.tableActions',
+        actions => {
+          if (!table || !actions) {
+            return;
           }
-          button.action(function() {
-            $timeout(function() {
-              action.callback();
+          actions.map(function(action, index) {
+            const button = table.buttons(`.btn-${index}`);
+            if (action.disabled) {
+              button.disable();
+            } else {
+              button.enable();
+            }
+            button.action(function() {
+              $timeout(function() {
+                action.callback();
+              });
             });
           });
-        });
-      });
+        },
+      );
 
       // http://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs
       scope.$watch('isVisible', function() {
@@ -129,29 +147,33 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
           buttons: buttons && buttons,
           columns: columns,
           language: {
-            emptyTable:     $filter('translate')(options.noDataText),
-            zeroRecords:    $filter('translate')(options.noMatchesText),
-            info:           $filter('translate')(gettext('Showing _START_ to _END_ of _TOTAL_ entries')),
-            lengthMenu:     $filter('translate')(gettext('Show _MENU_ entries')),
+            emptyTable: $filter('translate')(options.noDataText),
+            zeroRecords: $filter('translate')(options.noMatchesText),
+            info: $filter('translate')(
+              gettext('Showing _START_ to _END_ of _TOTAL_ entries'),
+            ),
+            lengthMenu: $filter('translate')(gettext('Show _MENU_ entries')),
             loadingRecords: $filter('translate')(gettext('Loading...')),
-            processing:     $filter('translate')(gettext('Processing...')),
-            search:         $filter('translate')(gettext('Search')),
+            processing: $filter('translate')(gettext('Processing...')),
+            search: $filter('translate')(gettext('Search')),
             paginate: {
-              first:        $filter('translate')(gettext('First')),
-              last:         $filter('translate')(gettext('Last')),
-              next:         $filter('translate')(gettext('Next')),
-              previous:     $filter('translate')(gettext('Previous')),
+              first: $filter('translate')(gettext('First')),
+              last: $filter('translate')(gettext('Last')),
+              next: $filter('translate')(gettext('Next')),
+              previous: $filter('translate')(gettext('Previous')),
             },
           },
           fnDrawCallback: function() {
-            $(element).find('tr').each(function(index, element) {
-              try {
-                $compile(element)(childScope);
-              } catch (e) {
-                // Skip error
-              }
-            });
-          }
+            $(element)
+              .find('tr')
+              .each(function(index, element) {
+                try {
+                  $compile(element)(childScope);
+                } catch (e) {
+                  // Skip error
+                }
+              });
+          },
         };
 
         if (options.scrollY) {
@@ -183,7 +205,12 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         table.on('deselect', selectionHandler);
 
         // eslint-disable-next-line no-unused-vars
-        table.on('responsive-display.dt', function(event, datatable, row, show) {
+        table.on('responsive-display.dt', function(
+          event,
+          datatable,
+          row,
+          show,
+        ) {
           if (show) {
             $compile(row.node().nextSibling)(scope);
           }
@@ -206,22 +233,26 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         }
 
         let exportButtonTitle = $filter('translate')(gettext('Export as'));
-        let exportButtonText = '<i class="fa fa-download"></i> ' + exportButtonTitle + ' <i class="caret"></i>';
+        let exportButtonText =
+          '<i class="fa fa-download"></i> ' +
+          exportButtonTitle +
+          ' <i class="caret"></i>';
 
         let refreshButtonTitle = $filter('translate')(gettext('Refresh'));
-        let refreshButtonText = '<i class="fa fa-refresh"></i> ' + refreshButtonTitle;
+        let refreshButtonText =
+          '<i class="fa fa-refresh"></i> ' + refreshButtonTitle;
 
         let exportButtons = getExportButtons(
           options.columns.length,
           options.rowActions,
-          ['copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'print']
+          ['copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'print'],
         );
         let exportCollection = {
           extend: 'collection',
           text: exportButtonText,
           autoClose: true,
           fade: 0,
-          buttons: exportButtons
+          buttons: exportButtons,
         };
         let buttons = [exportCollection];
         if (options.tableActions) {
@@ -234,7 +265,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
             $timeout(function() {
               scope.controller.resetCache();
             });
-          }
+          },
         });
         return buttons;
       }
@@ -255,33 +286,45 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         columns = columns.filter(function(column) {
           return !column.feature || features.isVisible(column.feature);
         });
-        columns = columns.filter(column => !column.hasOwnProperty('isVisible') || column.isVisible());
+        columns = columns.filter(
+          column => !column.hasOwnProperty('isVisible') || column.isVisible(),
+        );
         if (options.rowActions && options.rowActions.length) {
-          let actionColumn = getActionColumn(options.rowActions, options.actionsColumnWidth);
+          let actionColumn = getActionColumn(
+            options.rowActions,
+            options.actionsColumnWidth,
+          );
           columns.push(actionColumn);
         }
         return columns;
       }
 
       function connectTranslate(table) {
-        if(rootScopeListener) {
+        if (rootScopeListener) {
           rootScopeListener();
           rootScopeListener = null;
         }
-        rootScopeListener = $rootScope.$on('$translateChangeSuccess', function() {
-          angular.forEach(getColumns(), function(column, index) {
-            table.columns(index).header().to$().text(column.title);
-          });
-          table.columns.adjust().draw();
-          angular.forEach(getButtons(), function(button, index) {
-            table.buttons(index).text(button.text);
-          });
-        });
+        rootScopeListener = $rootScope.$on(
+          '$translateChangeSuccess',
+          function() {
+            angular.forEach(getColumns(), function(column, index) {
+              table
+                .columns(index)
+                .header()
+                .to$()
+                .text(column.title);
+            });
+            table.columns.adjust().draw();
+            angular.forEach(getButtons(), function(button, index) {
+              table.buttons(index).text(button.text);
+            });
+          },
+        );
         scope.$on('$destroy', function() {
-          if(rootScopeListener) {
+          if (rootScopeListener) {
             rootScopeListener();
           }
-          if(childScope) {
+          if (childScope) {
             childScope.$destroy();
           }
         });
@@ -294,7 +337,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
 
         let timer = $interval(
           blockingExecutor(scope.controller.resetCache.bind(scope.controller)),
-          ENV.countersTimerInterval * 1000
+          ENV.countersTimerInterval * 1000,
         );
         scope.$on('$destroy', function() {
           $interval.cancel(timer);
@@ -303,7 +346,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
 
       function setupActionWatcher(action, uniqueClassName) {
         if (action.hasOwnProperty('isDisabled')) {
-          scope.$watch(action.isDisabled, function(newValue, oldValue){
+          scope.$watch(action.isDisabled, function(newValue, oldValue) {
             if (newValue !== oldValue) {
               let action = $('.' + uniqueClassName);
               action.toggleClass('disabled');
@@ -326,8 +369,9 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
                 action.callback();
               });
             },
-            className: (action.disabled && 'disabled' || '') + ' ' + uniqueClassName,
-            titleAttr: action.titleAttr
+            className:
+              ((action.disabled && 'disabled') || '') + ' ' + uniqueClassName,
+            titleAttr: action.titleAttr,
           };
         });
       }
@@ -335,15 +379,14 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
       function registerEvents(table) {
         table.on('click', 'tr', function() {
           let rowShown = false;
-          table.rows().every(function(rowIndex){
+          table.rows().every(function(rowIndex) {
             if (table.row(rowIndex).child.isShown()) {
               rowShown = true;
             }
           });
           if (rowShown) {
             scope.controller.toggleRefresh(true);
-          }
-          else {
+          } else {
             scope.controller.toggleRefresh(false);
           }
         });
@@ -378,21 +421,30 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
             if (options.rowActions instanceof Function) {
               return options.rowActions.call(scope.controller, row);
             }
-            let template = '<button title="{tooltip}" class="btn btn-default btn-sm {cls}" {disabled} row-index="{row}" action-index="{action}">{name}</button>';
-            let visibleButtons = spec.filter((action) => !action.hasOwnProperty('isVisible') || action.isVisible(row));
-            let buttons = visibleButtons.map(function(action, index) {
-              let disabled = action.isDisabled && action.isDisabled(row) && 'disabled' || '';
-              let tooltip = action.tooltip && action.tooltip(row) || '';
-              return template.replace('{disabled}', disabled)
-                             .replace('{cls}', action.className)
-                             .replace('{row}', meta.row)
-                             .replace('{action}', index)
-                             .replace('{name}', formatActionName(action))
-                             .replace('{tooltip}', tooltip);
-            }).join('');
+            let template =
+              '<button title="{tooltip}" class="btn btn-default btn-sm {cls}" {disabled} row-index="{row}" action-index="{action}">{name}</button>';
+            let visibleButtons = spec.filter(
+              action =>
+                !action.hasOwnProperty('isVisible') || action.isVisible(row),
+            );
+            let buttons = visibleButtons
+              .map(function(action, index) {
+                let disabled =
+                  (action.isDisabled && action.isDisabled(row) && 'disabled') ||
+                  '';
+                let tooltip = (action.tooltip && action.tooltip(row)) || '';
+                return template
+                  .replace('{disabled}', disabled)
+                  .replace('{cls}', action.className)
+                  .replace('{row}', meta.row)
+                  .replace('{action}', index)
+                  .replace('{name}', formatActionName(action))
+                  .replace('{tooltip}', tooltip);
+              })
+              .join('');
             return '<div class="btn-group">' + buttons + '</div>';
           },
-          width: width
+          width: width,
         };
       }
 
@@ -426,7 +478,7 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
                 }
               }
               return doc;
-            }
+            },
           };
         });
       }
@@ -449,12 +501,14 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         let selectedItems = getSelectedItems(table);
         scope.controller.requestLoad(request, filter).then(function() {
           let total = scope.controller.getTotal();
-          $q.when([drawCallback({
-            draw: request.draw,
-            recordsTotal: total,
-            recordsFiltered: total,
-            data: scope.controller.list
-          })]).then(function() {
+          $q.when([
+            drawCallback({
+              draw: request.draw,
+              recordsTotal: total,
+              recordsFiltered: total,
+              data: scope.controller.list,
+            }),
+          ]).then(function() {
             selectItems(table, selectedItems);
           });
         });
@@ -480,13 +534,13 @@ export default function responsiveTable($rootScope, $q, $timeout, $interval, $co
         let items = [];
 
         if (table) {
-          table.rows({selected: true}).every(function() {
+          table.rows({ selected: true }).every(function() {
             items.push(this.data());
           });
         }
 
         return items;
       }
-    }
+    },
   };
 }

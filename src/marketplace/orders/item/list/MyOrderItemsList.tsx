@@ -61,7 +61,7 @@ const TableComponent = props => {
       {...props}
       placeholderComponent={<OrderItemslistTablePlaceholder />}
       columns={columns}
-      initialSorting={{field: 'created', mode: 'desc'}}
+      initialSorting={{ field: 'created', mode: 'desc' }}
       showPageSizeSelector={true}
       verboseName={translate('Order items')}
       enableExport={true}
@@ -70,7 +70,7 @@ const TableComponent = props => {
 };
 
 const mapPropsToFilter = props => {
-  const filter: Record<string, string> = {o: '-created'};
+  const filter: Record<string, string> = { o: '-created' };
   if (props.customer) {
     filter.customer_uuid = props.customer.uuid;
   }
@@ -121,9 +121,6 @@ const mapStateToProps = state => ({
   customer: getCustomer(state),
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-);
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const MyOrderItemsList = enhance(TableComponent);

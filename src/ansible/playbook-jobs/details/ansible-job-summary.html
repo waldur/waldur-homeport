@@ -1,7 +1,7 @@
 <div class="row m-md">
   <div class="col-md-6">
     <div class="profile-image" ng-if="$ctrl.job.playbook_image">
-      <img ng-src="{{ $ctrl.job.playbook_image }}">
+      <img ng-src="{{ $ctrl.job.playbook_image }}" />
     </div>
     <div>
       <h2 class="no-margins">
@@ -59,7 +59,8 @@
               type="button"
               class="btn btn-danger btn-xs"
               ng-class="{'disabled': !$ctrl.canRemove}"
-              submit-button="$ctrl.remove()">
+              submit-button="$ctrl.remove()"
+            >
               <i class="fa fa-trash"></i>
               <span translate>Remove application</span>
             </button>
@@ -81,7 +82,9 @@
     <uib-tab index="1">
       <uib-tab-heading translate>Related resources</uib-tab-heading>
       <div class="panel-body" ng-if="active==1">
-        <ansible-job-resources-list job="$ctrl.job"></ansible-job-resources-list>
+        <ansible-job-resources-list
+          job="$ctrl.job"
+        ></ansible-job-resources-list>
       </div>
     </uib-tab>
   </uib-tabset>

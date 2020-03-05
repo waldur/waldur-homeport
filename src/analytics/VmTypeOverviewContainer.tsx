@@ -9,17 +9,15 @@ import { connectAngularComponent } from '@waldur/store/connect';
 const VmTypeOverviewComponent = props => {
   return (
     <>
-      <VmOverviewFilterContainer {...props}/>
+      <VmOverviewFilterContainer {...props} />
       <div className="ibox-content">
-        <VmTypeOverview {...props}/>
+        <VmTypeOverview {...props} />
       </div>
     </>
   );
 };
 
-const enhance = compose(
-  withTranslation,
-);
+const enhance = compose(withTranslation);
 
 const VmTypeOverviewContainer = enhance(VmTypeOverviewComponent);
 export default connectAngularComponent(VmTypeOverviewContainer);

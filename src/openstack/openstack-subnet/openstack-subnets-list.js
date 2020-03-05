@@ -1,6 +1,6 @@
 const openstackSubnetsList = {
   bindings: {
-    resource: '<'
+    resource: '<',
   },
   templateUrl: 'views/partials/filtered-list.html',
   controller: OpenstackSubnetsListController,
@@ -9,7 +9,9 @@ const openstackSubnetsList = {
 
 // @ngInject
 function OpenstackSubnetsListController(
-  baseResourceListController, openstackSubnetsService) {
+  baseResourceListController,
+  openstackSubnetsService,
+) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -30,34 +32,34 @@ function OpenstackSubnetsListController(
           orderField: 'name',
           render: function(row) {
             return vm.renderResourceName(row);
-          }
+          },
         },
         {
           title: gettext('CIDR'),
           className: 'min-tablet-l',
           render: function(row) {
             return row.cidr;
-          }
+          },
         },
         {
           title: gettext('State'),
           className: 'min-tablet-l',
           render: function(row) {
             return vm.renderResourceState(row);
-          }
-        }
+          },
+        },
       ];
 
       return options;
     },
     getFilter: function() {
       return {
-        network_uuid: controllerScope.resource.uuid
+        network_uuid: controllerScope.resource.uuid,
       };
     },
     getTableActions: function() {
       return [];
-    }
+    },
   });
 
   controllerScope.__proto__ = new controllerClass();

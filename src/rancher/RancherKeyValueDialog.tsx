@@ -11,8 +11,9 @@ export const RancherKeyValueDialog = props => {
   return (
     <ModalDialog
       title={translate('Annotations & labels')}
-      footer={<CloseDialogButton/>}>
-        <KeyValueTable items={props.resolve.items}/>
+      footer={<CloseDialogButton />}
+    >
+      <KeyValueTable items={props.resolve.items} />
     </ModalDialog>
   );
 };

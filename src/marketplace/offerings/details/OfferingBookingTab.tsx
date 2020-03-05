@@ -16,13 +16,14 @@ import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
 
 interface PureOfferingBookingTabProps {
-  offeringBookingFetch: ({offering_uuid}: {offering_uuid: string}) => void;
+  offeringBookingFetch: ({ offering_uuid }: { offering_uuid: string }) => void;
   offering: Offering;
   bookingOrderItems: OrderItemDetailsType[];
 }
 
-export class PureOfferingBookingTab extends React.Component<PureOfferingBookingTabProps> {
-
+export class PureOfferingBookingTab extends React.Component<
+  PureOfferingBookingTabProps
+> {
   calendarRef = React.createRef();
   state = {
     activeBookingId: null,
@@ -55,23 +56,25 @@ export class PureOfferingBookingTab extends React.Component<PureOfferingBookingT
 
   getCalendarEvents() {
     const items = this.getBookingItems();
-    const bookedEvents = items.reduce((acc, item) => {
-      const { schedules } = item.attributes;
-      schedules.forEach(event => {
-        event.state = item.state;
-        event.className = classNames({
-          'progress': item.state === 'Creating',
-          'event-terminated': item.state === 'Terminated',
-          'event-isFocused': item.uuid === this.state.activeBookingId,
+    const bookedEvents = items
+      .reduce((acc, item) => {
+        const { schedules } = item.attributes;
+        schedules.forEach(event => {
+          event.state = item.state;
+          event.className = classNames({
+            progress: item.state === 'Creating',
+            'event-terminated': item.state === 'Terminated',
+            'event-isFocused': item.uuid === this.state.activeBookingId,
+          });
+          event.color = classNames({
+            '#f8ac59': item.state === 'Terminated',
+            '#18a689': item.uuid === this.state.activeBookingId,
+          });
         });
-        event.color = classNames({
-          '#f8ac59': item.state === 'Terminated',
-          '#18a689': item.uuid === this.state.activeBookingId,
-        });
-      });
-      acc.push(...schedules);
-      return acc;
-    }, []).map(cloneDeep);
+        acc.push(...schedules);
+        return acc;
+      }, [])
+      .map(cloneDeep);
     const availabilityItems = this.getAvailabilityBookingItems();
     return eventsMapper([...bookedEvents, ...availabilityItems]);
   }
@@ -95,12 +98,12 @@ export class PureOfferingBookingTab extends React.Component<PureOfferingBookingT
             height="auto"
             eventLimit={false}
             events={this.getCalendarEvents()}
-            eventRender={info => eventRender({...info, withTooltip: true})}
+            eventRender={info => eventRender({ ...info, withTooltip: true })}
           />
         </Col>
         <Col md={6}>
           <BookingsFilter />
-          <BookingsList offeringUuid={this.props.offering.uuid}/>
+          <BookingsList offeringUuid={this.props.offering.uuid} />
         </Col>
       </Row>
     );

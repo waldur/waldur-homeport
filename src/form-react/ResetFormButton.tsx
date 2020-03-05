@@ -11,11 +11,17 @@ interface Props extends TranslateProps {
   className?: string;
 }
 
-const PureResetFormButton = ({ resetForm, label, className, translate }: Props) => (
+const PureResetFormButton = ({
+  resetForm,
+  label,
+  className,
+  translate,
+}: Props) => (
   <button
     type="button"
     className={className || 'btn btn-danger'}
-    onClick={resetForm}>
+    onClick={resetForm}
+  >
     <span>{label || translate('Reset')}</span>
   </button>
 );
@@ -24,6 +30,9 @@ const mapDispatchToProps = (dispatch, props) => ({
   resetForm: () => dispatch(reset(props.formName)),
 });
 
-const enhance = compose(connect(undefined, mapDispatchToProps), withTranslation);
+const enhance = compose(
+  connect(undefined, mapDispatchToProps),
+  withTranslation,
+);
 
 export const ResetFormButton = enhance(PureResetFormButton);

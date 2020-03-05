@@ -13,13 +13,16 @@ export const renderSummary = props => {
   const store = mockStore();
   return mount(
     <Provider store={store}>
-      <SlurmAllocationSummary {...props} translate={translate}/>
-    </Provider>
+      <SlurmAllocationSummary {...props} translate={translate} />
+    </Provider>,
   );
 };
 
 export const getField = (wrapper: ReactWrapper, label: string): string =>
-  wrapper.find({label}).find('dd').text();
+  wrapper
+    .find({ label })
+    .find('dd')
+    .text();
 
 export const resource = {
   resource_type: 'SLURM.Allocation',

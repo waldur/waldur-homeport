@@ -17,7 +17,9 @@ import {
 } from './selectors';
 import { Project, Quota, ChartData } from './types';
 
-interface PureResourceAnalysisItemProps extends TranslateProps, ToggleOpenProps {
+interface PureResourceAnalysisItemProps
+  extends TranslateProps,
+    ToggleOpenProps {
   exceededQuotas: Quota[];
   project: Project;
   pieChartsData: ChartData[];
@@ -25,19 +27,33 @@ interface PureResourceAnalysisItemProps extends TranslateProps, ToggleOpenProps 
   barChartsLoading: boolean;
 }
 
-export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) => {
-  const { project, isOpen, handleToggleOpen, pieChartsData, barChartsData, translate, exceededQuotas, barChartsLoading } = props;
+export const PureResourceAnalysisItem = (
+  props: PureResourceAnalysisItemProps,
+) => {
+  const {
+    project,
+    isOpen,
+    handleToggleOpen,
+    pieChartsData,
+    barChartsData,
+    translate,
+    exceededQuotas,
+    barChartsLoading,
+  } = props;
   const usagePieCharts = pieChartsData.map(pieChart => {
     const { limit, options, id, label, exceeds, maxFileSizeName } = pieChart;
-    const content = limit === -1 ? translate('Unlimited') : (<EChart options={options} />);
-    const title = `${label}${(maxFileSizeName ? `, ${maxFileSizeName}` : '')} :`;
+    const content =
+      limit === -1 ? translate('Unlimited') : <EChart options={options} />;
+    const title = `${label}${maxFileSizeName ? `, ${maxFileSizeName}` : ''} :`;
 
     return (
       <li key={id}>
-        <span className={classNames({
-          'chart-title': true,
-          'text-danger': exceeds,
-        })}>
+        <span
+          className={classNames({
+            'chart-title': true,
+            'text-danger': exceeds,
+          })}
+        >
           {title}
         </span>
         <span className="chart-content">{content}</span>
@@ -46,25 +62,28 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
   });
   const usageBarCharts = barChartsData.map(barChart => {
     const { options, id, label, exceeds, maxFileSizeName } = barChart;
-    const title = `${label}${(maxFileSizeName ? `, ${maxFileSizeName}` : '')} :`;
+    const title = `${label}${maxFileSizeName ? `, ${maxFileSizeName}` : ''} :`;
 
     return (
       <li key={id}>
-        <span className={classNames(
-          'chart-title',
-          { 'text-danger': exceeds, }
-        )}>
+        <span className={classNames('chart-title', { 'text-danger': exceeds })}>
           {title}
         </span>
         <span className="chart-content">
           <EChart options={options} />
         </span>
-      </li >
+      </li>
     );
   });
-  const tooltipLabelContent = exceededQuotas.length && exceededQuotas.map(quota => (
-    <p key={`exceeds-quota-${quota.uuid}`}>{translate('{quota} usage exceeds quota limit.', { quota: quota.label })}</p>
-  ));
+  const tooltipLabelContent =
+    exceededQuotas.length &&
+    exceededQuotas.map(quota => (
+      <p key={`exceeds-quota-${quota.uuid}`}>
+        {translate('{quota} usage exceeds quota limit.', {
+          quota: quota.label,
+        })}
+      </p>
+    ));
 
   return (
     <div>
@@ -72,49 +91,42 @@ export const PureResourceAnalysisItem = (props: PureResourceAnalysisItemProps) =
         className={classNames(
           'resource-analysis-item__title',
           'content-between-center',
-          { opened: isOpen, }
+          { opened: isOpen },
         )}
         onClick={handleToggleOpen}
       >
         <h4 className={classNames({ 'text-danger': !!exceededQuotas.length })}>
           <span>{project.name}</span>
-          {!!exceededQuotas.length &&
-            <Tooltip
-              id={project.uuid}
-              label={tooltipLabelContent}
-            >
+          {!!exceededQuotas.length && (
+            <Tooltip id={project.uuid} label={tooltipLabelContent}>
               <i className="fa fa-exclamation-triangle" />
             </Tooltip>
-          }
+          )}
         </h4>
         <div>
           <i
-            className={classNames(
-              'fa',
-              {
-                'fa-angle-up': isOpen,
-                'fa-angle-down': !isOpen,
-              })}
+            className={classNames('fa', {
+              'fa-angle-up': isOpen,
+              'fa-angle-down': !isOpen,
+            })}
           />
         </div>
       </div>
       <div className="resource-analysis-item__content">
-        {isOpen &&
-          <ul className={
-            classNames(
-              'resource-analysis-item__bar-chart-list',
-              {
-                'content-center-center': barChartsLoading,
-              }
-            )}>
-            {
-              barChartsLoading ? (<LoadingSpinner />) : usageBarCharts
-            }
+        {isOpen && (
+          <ul
+            className={classNames('resource-analysis-item__bar-chart-list', {
+              'content-center-center': barChartsLoading,
+            })}
+          >
+            {barChartsLoading ? <LoadingSpinner /> : usageBarCharts}
           </ul>
-        }
-        {!isOpen &&
-          <ul className="resource-analysis-item__pie-chart-list">{usagePieCharts}</ul>
-        }
+        )}
+        {!isOpen && (
+          <ul className="resource-analysis-item__pie-chart-list">
+            {usagePieCharts}
+          </ul>
+        )}
       </div>
     </div>
   );
@@ -127,10 +139,6 @@ const mapStateToProps = (state, ownProps) => ({
   exceededQuotas: getExceededQuotasSelector(state, ownProps),
 });
 
-const enhance = compose(
-  toggleOpen,
-  connect(mapStateToProps),
-  withTranslation,
-);
+const enhance = compose(toggleOpen, connect(mapStateToProps), withTranslation);
 
 export const ResourceAnalysisItem = enhance(PureResourceAnalysisItem);

@@ -6,10 +6,10 @@ export default function appstoreFieldText() {
     template: template,
     scope: {
       field: '=',
-      model: '='
+      model: '=',
     },
     controller: function() {},
     controllerAs: '$ctrl',
-    bindToController: true
+    bindToController: true,
   };
 }

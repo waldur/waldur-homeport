@@ -28,7 +28,7 @@ export const OrderItem = (props: OrderItemProps) => (
               order_item_uuid={props.item.uuid}
               project_uuid={props.project_uuid}
             >
-              <OfferingLogo src={props.item.offering_thumbnail}/>
+              <OfferingLogo src={props.item.offering_thumbnail} />
             </OrderItemDetailsLink>
           </Tooltip>
         </div>
@@ -41,7 +41,10 @@ export const OrderItem = (props: OrderItemProps) => (
               {props.item.attributes.name || props.item.offering_name}
             </OrderItemDetailsLink>
           </h5>
-          <p>{props.item.attributes.description || props.item.offering_description}</p>
+          <p>
+            {props.item.attributes.description ||
+              props.item.offering_description}
+          </p>
           {props.item.resource_uuid && (
             <p>
               <ResourceDetailsLink item={props.item as ResourceReference}>
@@ -55,9 +58,7 @@ export const OrderItem = (props: OrderItemProps) => (
     <td className="text-center text-lg">
       {defaultCurrency(props.item.cost || 0)}
     </td>
-    <td className="text-center">
-      {props.item.state}
-    </td>
+    <td className="text-center">{props.item.state}</td>
     <td className="text-center">
       <span className="btn-group">
         {props.editable && (

@@ -1,4 +1,5 @@
 1. Install repository configuration package:
+
 ```
 # For Debian 9 (codename: stretch)
 # wget http://repo.zabbix.com/zabbix/3.0/debian/pool/main/z/zabbix-release/zabbix-release_3.0-2+stretch_all.deb
@@ -15,11 +16,13 @@
 ```
 
 2. Install agent package:
+
 ```
 # apt-get install zabbix-agent
 ```
 
 3. Configure Zabbix agent by modifying `/etc/zabbix/zabbix_agentd.conf` file:
+
 ```
 Server={ZABBIX_SERVER_IP}
 ServerActive={ZABBIX_SERVER_IP}
@@ -27,6 +30,7 @@ Hostname={ZABBIX_CLIENT_ID}
 ```
 
 4. Start and enable Zabbix agent:
+
 ```
 systemctl start zabbix-agent
 systemctl enable zabbix-agent

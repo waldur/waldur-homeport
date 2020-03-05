@@ -8,7 +8,10 @@ import quotasService from './quotas-service';
 export default module => {
   module.service('currentStateService', currentStateService);
   module.service('joinService', joinService);
-  module.service('joinServiceProjectLinkService', joinServiceProjectLinkService);
+  module.service(
+    'joinServiceProjectLinkService',
+    joinServiceProjectLinkService,
+  );
   module.service('priceEstimationService', priceEstimationService);
   module.service('projectPermissionsService', projectPermissionsService);
   module.service('quotasService', quotasService);

@@ -15,7 +15,9 @@ export const JobStateIndicator = (props: JobStateIndicatorProps) => (
   <StateIndicator
     label={props.model.state}
     variant={props.model.state === 'Erred' ? 'danger' : 'info'}
-    active={props.model.state === 'Scheduled' || props.model.state === 'Executing'}
+    active={
+      props.model.state === 'Scheduled' || props.model.state === 'Executing'
+    }
   />
 );
 

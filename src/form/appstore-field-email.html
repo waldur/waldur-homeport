@@ -1,20 +1,20 @@
-<input type="email"
+<input
+  type="email"
   class="form-control"
   id="{{ $ctrl.field.name }}"
   name="{{ ::$ctrl.field.name }}"
   ng-model="$ctrl.model[$ctrl.field.name]"
   placeholder="{{ $ctrl.field.placeholder }}"
   ng-required="$ctrl.field.required"
-  ng-maxlength="{{ $ctrl.field.maxlength }}"/>
-<p class="text-danger"
-  ng-if="$ctrl.showRequiredError()">
+  ng-maxlength="{{ $ctrl.field.maxlength }}"
+/>
+<p class="text-danger" ng-if="$ctrl.showRequiredError()">
   <span translate>This field is required</span>.
 </p>
-<p class="text-danger"
-  ng-if="$ctrl.showMaxLengthError()">
-  <span>{{$ctrl.getMaxLengthErrorMessage()}}</span>.
+<p class="text-danger" ng-if="$ctrl.showMaxLengthError()">
+  <span>{{ $ctrl.getMaxLengthErrorMessage() }}</span
+  >.
 </p>
-<p class="text-danger"
-  ng-if="$ctrl.showEmailError()">
+<p class="text-danger" ng-if="$ctrl.showEmailError()">
   <span>Email is invalid</span>.
 </p>

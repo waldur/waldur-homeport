@@ -1,14 +1,15 @@
 <div>
   <div ng-click="lightbox = !lightbox">
-    <img ng-src="{{ $ctrl.image }}">
+    <img ng-src="{{ $ctrl.image }}" />
   </div>
   <div ng-show="lightbox">
-    <div class="image-box-overlay">
-    </div>
+    <div class="image-box-overlay"></div>
     <div class="image-box-content">
       <div class="image-wrapper">
-        <img class="lightbox-image" ng-src="{{ $ctrl.image }}"/>
-        <a class="image-close" ng-click="lightbox = !lightbox"><i class="fa fa-close"></i></a>
+        <img class="lightbox-image" ng-src="{{ $ctrl.image }}" />
+        <a class="image-close" ng-click="lightbox = !lightbox"
+          ><i class="fa fa-close"></i
+        ></a>
       </div>
     </div>
   </div>

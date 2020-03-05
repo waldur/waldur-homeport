@@ -13,7 +13,7 @@ export default function tabCounterService($q) {
       getCountersError: function() {
         // It may redirect or display message
       },
-      tabs: []
+      tabs: [],
     };
     let options = angular.extend(defaultOptions, customOptions);
     updateCounters(options);

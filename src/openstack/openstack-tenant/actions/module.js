@@ -8,5 +8,8 @@ function actionConfig(ActionConfigurationProvider) {
 
 export default module => {
   module.config(actionConfig);
-  module.component('openstackTenantRequestDirectAccess', openstackTenantRequestDirectAccess);
+  module.component(
+    'openstackTenantRequestDirectAccess',
+    openstackTenantRequestDirectAccess,
+  );
 };

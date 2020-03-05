@@ -3,8 +3,8 @@ const instanceVolumes = {
   controller: OpenstackVolumesList,
   controllerAs: 'ListController',
   bindings: {
-    resource: '<'
-  }
+    resource: '<',
+  },
 };
 
 export default instanceVolumes;
@@ -16,7 +16,8 @@ function OpenstackVolumesList(
   $filter,
   $timeout,
   ncUtils,
-  openstackVolumesService) {
+  openstackVolumesService,
+) {
   let controllerScope = this;
   let ResourceController = baseResourceListController.extend({
     init: function() {
@@ -41,11 +42,11 @@ function OpenstackVolumesList(
         {
           title: gettext('Name'),
           className: 'all',
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           title: gettext('Size'),
-          render: row => $filter('filesize')(row.size)
+          render: row => $filter('filesize')(row.size),
         },
         {
           title: gettext('Bootable'),
@@ -57,21 +58,21 @@ function OpenstackVolumesList(
         },
         {
           title: gettext('Attached to'),
-          render: row => row.device || 'N/A'
+          render: row => row.device || 'N/A',
         },
         {
           title: gettext('State'),
           className: 'min-tablet-l',
-          render: row => this.renderResourceState(row)
+          render: row => this.renderResourceState(row),
         },
       ];
       return options;
     },
     getFilter: function() {
       return {
-        instance_uuid: controllerScope.resource.uuid
+        instance_uuid: controllerScope.resource.uuid,
       };
-    }
+    },
   });
   controllerScope.__proto__ = new ResourceController();
 }

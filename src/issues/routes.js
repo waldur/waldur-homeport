@@ -18,8 +18,8 @@ export default function issueRoutes($stateProvider) {
       abstract: true,
       data: {
         auth: true,
-        workspace: WOKSPACE_NAMES.support
-      }
+        workspace: WOKSPACE_NAMES.support,
+      },
     })
 
     .state('support.dashboard', {
@@ -28,8 +28,8 @@ export default function issueRoutes($stateProvider) {
       data: {
         pageTitle: gettext('Support dashboard'),
         hideBreadcrumbs: true,
-        feature: 'support'
-      }
+        feature: 'support',
+      },
     })
 
     .state('support.helpdesk', {
@@ -37,8 +37,8 @@ export default function issueRoutes($stateProvider) {
       template: '<issues-helpdesk></issues-helpdesk>',
       data: {
         pageTitle: gettext('Helpdesk dashboard'),
-        feature: 'support'
-      }
+        feature: 'support',
+      },
     })
 
     .state('support.detail', {
@@ -46,17 +46,18 @@ export default function issueRoutes($stateProvider) {
       template: '<issue-detail></issue-detail>',
       data: {
         pageTitle: gettext('Request detail'),
-        feature: 'support'
-      }
+        feature: 'support',
+      },
     })
 
     .state('support.list', {
       url: 'list/',
-      template: '<div class="ibox"><div class="ibox-content"><issues-list filter="{}"></issues-list></div></div>',
+      template:
+        '<div class="ibox"><div class="ibox-content"><issues-list filter="{}"></issues-list></div></div>',
       data: {
         pageTitle: gettext('Support requests'),
-        feature: 'support'
-      }
+        feature: 'support',
+      },
     })
 
     .state('support.organizations', {
@@ -67,8 +68,8 @@ export default function issueRoutes($stateProvider) {
         pageTitle: gettext('Financial overview'),
       },
       resolve: {
-        permission: checkPermission
-      }
+        permission: checkPermission,
+      },
     })
 
     .state('support.users', {
@@ -76,11 +77,11 @@ export default function issueRoutes($stateProvider) {
       template: '<user-list-view></user-list-view>',
       data: {
         pageTitle: gettext('Users'),
-        feature: 'support.users'
+        feature: 'support.users',
       },
       resolve: {
-        permission: checkPermission
-      }
+        permission: checkPermission,
+      },
     })
 
     .state('support.flowmap', {
@@ -88,11 +89,11 @@ export default function issueRoutes($stateProvider) {
       template: '<flow-map-view></flow-map-view>',
       data: {
         pageTitle: gettext('Flowmap'),
-        feature: 'support.flowmap'
+        feature: 'support.flowmap',
       },
       resolve: {
-        permission: checkPermission
-      }
+        permission: checkPermission,
+      },
     })
 
     .state('support.heatmap', {
@@ -100,11 +101,11 @@ export default function issueRoutes($stateProvider) {
       template: '<heat-map></heat-map>',
       data: {
         pageTitle: gettext('Heatmap'),
-        feature: 'support.heatmap'
+        feature: 'support.heatmap',
       },
       resolve: {
-        permission: checkPermission
-      }
+        permission: checkPermission,
+      },
     })
 
     .state('support.sankey-diagram', {
@@ -112,10 +113,10 @@ export default function issueRoutes($stateProvider) {
       template: '<sankey-diagram></sankey-diagram>',
       data: {
         pageTitle: gettext('Sankey diagram'),
-        feature: 'support.sankey-diagram'
+        feature: 'support.sankey-diagram',
       },
       resolve: {
-        permission: checkPermission
-      }
+        permission: checkPermission,
+      },
     });
 }

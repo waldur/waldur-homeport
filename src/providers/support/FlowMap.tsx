@@ -5,8 +5,10 @@ import loadLeafleat from '@waldur/shims/load-leaflet';
 
 import './FlowMap.scss';
 
-const loadEsriLeaflet = () => import(/* webpackChunkName: "esri-leaflet" */ 'esri-leaflet');
-const loadFlowmapLayer = () => import(/* webpackChunkName: "CanvasFlowmapLayer" */ './CanvasFlowmapLayer');
+const loadEsriLeaflet = () =>
+  import(/* webpackChunkName: "esri-leaflet" */ 'esri-leaflet');
+const loadFlowmapLayer = () =>
+  import(/* webpackChunkName: "CanvasFlowmapLayer" */ './CanvasFlowmapLayer');
 
 interface FlowMapProps {
   center?: number[];
@@ -33,7 +35,7 @@ export default class FlowMap extends React.Component<FlowMapProps> {
   }
 
   async loadAll() {
-    const { leaflet} = await loadLeafleat();
+    const { leaflet } = await loadLeafleat();
     this.leaflet = leaflet;
 
     await loadFlowmapLayer();
@@ -98,7 +100,7 @@ export default class FlowMap extends React.Component<FlowMapProps> {
       });
       return features;
     }, []),
-  })
+  });
 
   setFlowmapLayer(data) {
     if (this.leaflet) {
@@ -126,15 +128,20 @@ export default class FlowMap extends React.Component<FlowMapProps> {
 
   flowmapLaterClickHandler = e => {
     if (e.sharedOriginFeatures.length) {
-      this.props.selectServiceProvider(e.layer.feature.properties.provider_uuid);
+      this.props.selectServiceProvider(
+        e.layer.feature.properties.provider_uuid,
+      );
       this.props.showInfoPanel();
-      this.oneToManyFlowmapLayer.selectFeaturesForPathDisplay(e.sharedOriginFeatures, 'SELECTION_NEW');
+      this.oneToManyFlowmapLayer.selectFeaturesForPathDisplay(
+        e.sharedOriginFeatures,
+        'SELECTION_NEW',
+      );
     }
     if (e.sharedDestinationFeatures.length) {
       const content = e.layer.feature.properties.consumer_name;
       e.layer.setPopupContent(content);
     }
-  }
+  };
 
   extendViewport(data, center) {
     if (this.leaflet) {
@@ -165,8 +172,8 @@ export default class FlowMap extends React.Component<FlowMapProps> {
 
   render() {
     if (!this.leaflet) {
-      return  <LoadingSpinner />;
+      return <LoadingSpinner />;
     }
-    return (<div ref={node => this.mapNode = node} id="flow-map" />);
+    return <div ref={node => (this.mapNode = node)} id="flow-map" />;
   }
 }

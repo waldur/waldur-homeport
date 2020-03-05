@@ -11,12 +11,14 @@ interface StepProps {
 
 export const Step: React.FC<StepProps> = (props: StepProps) => (
   <a
-    className={classNames('step', {active: props.active, disabled: props.disabled})}
-    onClick={() => props.onClick()}>
+    className={classNames('step', {
+      active: props.active,
+      disabled: props.disabled,
+    })}
+    onClick={() => props.onClick()}
+  >
     <h4 className="step-title">
-      {props.complete && <i className="fa fa-check-circle"/>}
-      {' '}
-      {props.title}
+      {props.complete && <i className="fa fa-check-circle" />} {props.title}
     </h4>
   </a>
 );

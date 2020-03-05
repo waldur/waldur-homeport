@@ -19,20 +19,16 @@ export const FormGroup: React.FC<FormGroupProps> = props => (
         <label className={props.labelClassName}>
           {props.description && (
             <Tooltip id="form-field-tooltip" label={props.description}>
-              <i className="fa fa-question-circle"/>{' '}
+              <i className="fa fa-question-circle" />{' '}
             </Tooltip>
           )}
           {props.label}
           {props.required && <span className="text-danger"> *</span>}
         </label>
-        <div className={props.valueClassName}>
-          {props.children}
-        </div>
+        <div className={props.valueClassName}>{props.children}</div>
       </>
     ) : (
-      <div className={props.classNameWithoutLabel}>
-        {props.children}
-      </div>
+      <div className={props.classNameWithoutLabel}>{props.children}</div>
     )}
   </div>
 );

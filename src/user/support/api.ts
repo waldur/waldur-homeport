@@ -14,7 +14,7 @@ export const updateUser = user =>
   });
 
 export const activateUser = userUuid =>
-  patch(`/users/${userUuid}/`, {is_active: true});
+  patch(`/users/${userUuid}/`, { is_active: true });
 
 export const deactivateUser = userUuid =>
-  patch(`/users/${userUuid}/`, {is_active: false});
+  patch(`/users/${userUuid}/`, { is_active: false });

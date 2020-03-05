@@ -16,11 +16,11 @@ const projectDetailsButton = {
         component: 'projectDialog',
         size: 'lg',
         resolve: {
-          project: () => this.project
-        }
+          project: () => this.project,
+        },
       });
     }
-  }
+  },
 };
 
 export default projectDetailsButton;

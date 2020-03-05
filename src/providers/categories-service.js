@@ -11,7 +11,7 @@ export default function CategoriesService(ENV) {
 
   function prepareCategory(category) {
     return angular.extend({}, category, {
-      services: category.services.filter(serviceIsEnabled)
+      services: category.services.filter(serviceIsEnabled),
     });
   }
 

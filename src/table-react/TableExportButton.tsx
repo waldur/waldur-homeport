@@ -30,13 +30,16 @@ export const TableExportButton = ({ exportAs }: Props) => {
   return (
     <Dropdown id="export-button">
       <Dropdown.Toggle className="btn-sm">
-        <i className="fa fa-download"/>&nbsp;
+        <i className="fa fa-download" />
+        &nbsp;
         {translate('Export as')}
       </Dropdown.Toggle>
       <Dropdown.Menu>
         {exporters.map(({ label, format }) => (
           <li role="presentation" key={format} onClick={() => exportAs(format)}>
-            <a role="menuitem" tabIndex={-1}>{label}</a>
+            <a role="menuitem" tabIndex={-1}>
+              {label}
+            </a>
           </li>
         ))}
       </Dropdown.Menu>

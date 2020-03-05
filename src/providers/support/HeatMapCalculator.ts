@@ -1,6 +1,10 @@
 import { Feature, UsageData } from './types';
 
-export const getTotal = (usageData: UsageData, country: string, entity: string) => {
+export const getTotal = (
+  usageData: UsageData,
+  country: string,
+  entity: string,
+) => {
   const key = `${entity}_uuid`;
   return usageData.usage.reduce((total, entry) => {
     const uuid = entry.provider_to_consumer[key];
@@ -34,35 +38,44 @@ export const getStyle = (feature: Feature) => ({
 });
 
 export const getDataForCountry = (usage: UsageData, country: string) => {
-  return Object.keys(usage.service_providers).reduce((acc, uuid) => {
-    if (usage.organizations[uuid].country === country) {
-      acc.providers.push(usage.organizations[uuid]);
-    }
-    usage.service_providers[uuid].map(consumerUuid => {
-      if (usage.organizations[consumerUuid].country === country
-        && acc.consumers.indexOf(usage.organizations[consumerUuid]) === -1) {
-        acc.consumers.push(usage.organizations[consumerUuid]);
+  return Object.keys(usage.service_providers).reduce(
+    (acc, uuid) => {
+      if (usage.organizations[uuid].country === country) {
+        acc.providers.push(usage.organizations[uuid]);
       }
-    });
-    return acc;
-  }, {providers: [], consumers: []});
+      usage.service_providers[uuid].map(consumerUuid => {
+        if (
+          usage.organizations[consumerUuid].country === country &&
+          acc.consumers.indexOf(usage.organizations[consumerUuid]) === -1
+        ) {
+          acc.consumers.push(usage.organizations[consumerUuid]);
+        }
+      });
+      return acc;
+    },
+    { providers: [], consumers: [] },
+  );
 };
 
-export const getChartData = (serviceUsage: UsageData, countries: string[], features: Feature[]) => {
+export const getChartData = (
+  serviceUsage: UsageData,
+  countries: string[],
+  features: Feature[],
+) => {
   const chartData = [];
   countries.map(country => {
     features.map(feature => {
       if (feature.properties.name === country) {
         chartData.push({
-            ...feature,
-            properties: {
-              ...feature.properties,
-              diff: getDiff(serviceUsage, country),
-              data: getDataForCountry(serviceUsage, country),
-            },
-          });
-        }
-      });
+          ...feature,
+          properties: {
+            ...feature.properties,
+            diff: getDiff(serviceUsage, country),
+            data: getDataForCountry(serviceUsage, country),
+          },
+        });
+      }
+    });
   });
   return chartData;
 };

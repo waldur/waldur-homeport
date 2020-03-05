@@ -23,11 +23,11 @@ export const FlowMapView = (props: FlowMapViewProps) => (
       selectServiceProvider={props.serviceProviderSelect}
       showInfoPanel={props.showInfoPanel}
     />
-    {props.infoPanelIsVisible &&
+    {props.infoPanelIsVisible && (
       <MapInfoPanel
         onPanelClose={() => props.hideInfoPanel()}
         data={props.selectedServiceProvider}
       />
-    }
+    )}
   </>
 );

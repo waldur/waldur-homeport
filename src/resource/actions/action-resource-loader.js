@@ -22,7 +22,7 @@ export default function ActionResourceLoader($q, $filter, HttpUtils) {
       let choices = formatChoices(field, items);
       if (field.emptyLabel && !field.required) {
         choices.unshift({
-          display_name: field.emptyLabel
+          display_name: field.emptyLabel,
         });
       }
       field.choices = choices;
@@ -49,7 +49,7 @@ export default function ActionResourceLoader($q, $filter, HttpUtils) {
   function formatChoices(field, items) {
     return items.map(item => ({
       value: valueFormatter(field, item),
-      display_name: displayFormatter(field, item)
+      display_name: displayFormatter(field, item),
     }));
   }
 

@@ -15,13 +15,17 @@
         <label class="control-label" translate>Resource type</label>
         <ui-select
           ng-model="$ctrl.resourceTypeFilter"
-          on-select="$ctrl.onResourceTypeSelect()">
+          on-select="$ctrl.onResourceTypeSelect()"
+        >
           <ui-select-match
             placeholder="{{ 'Select resource type' | translate }}"
-            allow-clear="true">
+            allow-clear="true"
+          >
             {{ $select.selected.display_name }}
           </ui-select-match>
-          <ui-select-choices repeat="option in $ctrl.resourceTypeOptions track by option.value">
+          <ui-select-choices
+            repeat="option in $ctrl.resourceTypeOptions track by option.value"
+          >
             {{ option.display_name }}
           </ui-select-choices>
         </ui-select>
@@ -31,13 +35,17 @@
         <label class="control-label" translate>State</label>
         <ui-select
           ng-model="$ctrl.stateFilter"
-          on-select="$ctrl.onStateSelect()">
+          on-select="$ctrl.onStateSelect()"
+        >
           <ui-select-match
             placeholder="{{ 'Select state' | translate }}"
-            allow-clear="true">
+            allow-clear="true"
+          >
             {{ $select.selected.display_name }}
           </ui-select-match>
-          <ui-select-choices repeat="option in $ctrl.stateOptions track by option.value">
+          <ui-select-choices
+            repeat="option in $ctrl.stateOptions track by option.value"
+          >
             {{ option.display_name }}
           </ui-select-choices>
         </ui-select>
@@ -47,15 +55,19 @@
         <label class="control-label" translate>Service Provider</label>
         <ui-select
           ng-model="$ctrl.serviceProviderFilter"
-          on-select="$ctrl.onServiceProviderSelect()">
+          on-select="$ctrl.onServiceProviderSelect()"
+        >
           <ui-select-match
             placeholder="{{ 'Select service provider' | translate }}"
-            allow-clear="true">
+            allow-clear="true"
+          >
             {{ $select.selected.display_name }}
           </ui-select-match>
-          <ui-select-choices repeat="option in $ctrl.serviceProviderOptions track by option.value">
+          <ui-select-choices
+            repeat="option in $ctrl.serviceProviderOptions track by option.value"
+          >
             <span uib-tooltip="{{ option.type }}">
-              <img ng-src="{{option.img_src}}" ng-style="{'width': '19px'}">
+              <img ng-src="{{ option.img_src }}" ng-style="{'width': '19px'}" />
               {{ option.display_name }}
             </span>
           </ui-select-choices>
@@ -64,7 +76,12 @@
 
       <div class="form-group">
         <label class="control-label" translate>External IP</label>
-        <input type="text" class="form-control" ng-model="$ctrl.externalIp" ng-change="$ctrl.onExternalIpChange()"/>
+        <input
+          type="text"
+          class="form-control"
+          ng-model="$ctrl.externalIp"
+          ng-change="$ctrl.onExternalIpChange()"
+        />
       </div>
     </div>
   </div>

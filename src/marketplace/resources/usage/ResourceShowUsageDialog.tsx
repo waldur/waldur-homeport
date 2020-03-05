@@ -12,8 +12,11 @@ interface ResourceUsageDialogProps {
 }
 
 const ResourceShowUsageDialog = (props: ResourceUsageDialogProps) => (
-  <ModalDialog title={translate('Resource usage')} footer={<CloseDialogButton/>}>
-    <ResourceUsagesList resource_uuid={props.resolve.resource_uuid}/>
+  <ModalDialog
+    title={translate('Resource usage')}
+    footer={<CloseDialogButton />}
+  >
+    <ResourceUsagesList resource_uuid={props.resolve.resource_uuid} />
   </ModalDialog>
 );
 

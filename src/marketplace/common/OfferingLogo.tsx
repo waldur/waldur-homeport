@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import './OfferingLogo.scss';
 
-// tslint:disable-next-line
+// eslint-disable-next-line
 const DefaultLogo = require('./OfferingLogo.svg');
 
 interface OfferingLogoProps {
@@ -15,7 +15,5 @@ export const OfferingLogo = (props: OfferingLogoProps) => {
   if (props.size === 'small') {
     className = 'marketplace-offering-logo--small';
   }
-  return (
-    <img src={props.src || DefaultLogo} className={className}/>
-  );
+  return <img src={props.src || DefaultLogo} className={className} />;
 };

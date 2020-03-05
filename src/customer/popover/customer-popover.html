@@ -9,22 +9,22 @@
   <uib-tabset ng-if="!$ctrl.loading" active="active">
     <uib-tab heading="Company data" index="'summary'">
       <div class="panel-body m-l-n m-r-n" ng-if="active === 'summary'">
-        <customer-summary customer="$ctrl.customer">
+        <customer-summary customer="$ctrl.customer"></customer-summary>
       </div>
     </uib-tab>
     <uib-tab heading="Authorized personnel" index="'users'">
       <div class="panel-body m-l-n m-r-n" ng-if="active === 'users'">
         <customer-users-details-list
           customer="$ctrl.customer"
-          options="$ctrl.options">
+          options="$ctrl.options"
+        >
         </customer-users-details-list>
       </div>
     </uib-tab>
   </uib-tabset>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default"
-    ng-click="$ctrl.dismiss()">
+  <button class="btn btn-default" ng-click="$ctrl.dismiss()">
     <span translate>OK</span>
   </button>
 </div>

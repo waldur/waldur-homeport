@@ -1,6 +1,6 @@
 const openstackFloatingIpsList = {
   bindings: {
-    resource: '<'
+    resource: '<',
   },
   templateUrl: 'views/partials/filtered-list.html',
   controller: OpenstackFloatingIpsListController,
@@ -9,7 +9,12 @@ const openstackFloatingIpsList = {
 
 // @ngInject
 function OpenstackFloatingIpsListController(
-  baseResourceListController, openstackFloatingIpsService, actionUtilsService, $state, ncUtils) {
+  baseResourceListController,
+  openstackFloatingIpsService,
+  actionUtilsService,
+  $state,
+  ncUtils,
+) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -20,11 +25,13 @@ function OpenstackFloatingIpsListController(
       let fn = this._super.bind(this);
 
       this.loading = true;
-      actionUtilsService.loadNestedActions(this, controllerScope.resource, list_type).then(result => {
-        this.listActions = result;
-        fn();
-        this.service = openstackFloatingIpsService;
-      });
+      actionUtilsService
+        .loadNestedActions(this, controllerScope.resource, list_type)
+        .then(result => {
+          this.listActions = result;
+          fn();
+          this.service = openstackFloatingIpsService;
+        });
     },
     getTableOptions: function() {
       let options = this._super();
@@ -33,11 +40,11 @@ function OpenstackFloatingIpsListController(
       options.columns = [
         {
           title: gettext('Floating IP'),
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           title: gettext('State'),
-          render: row => this.renderResourceState(row)
+          render: row => this.renderResourceState(row),
         },
         {
           title: gettext('Instance'),
@@ -47,17 +54,17 @@ function OpenstackFloatingIpsListController(
             }
             let href = $state.href('resources.details', {
               uuid: row.instance_uuid,
-              resource_type: 'OpenStackTenant.Instance'
+              resource_type: 'OpenStackTenant.Instance',
             });
             return ncUtils.renderLink(href, row.instance_name);
-          }
-        }
+          },
+        },
       ];
       return options;
     },
     getFilter: function() {
       return {
-        tenant_uuid: controllerScope.resource.uuid
+        tenant_uuid: controllerScope.resource.uuid,
       };
     },
     getTableActions: function() {

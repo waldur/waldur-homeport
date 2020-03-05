@@ -1,6 +1,10 @@
 import { $rootScope } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { validateState, createNameField, createDescriptionField } from '@waldur/resource/actions/base';
+import {
+  validateState,
+  createNameField,
+  createDescriptionField,
+} from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
 export default function createAction(): ResourceAction {
@@ -21,7 +25,9 @@ export default function createAction(): ResourceAction {
         type: 'integer',
         required: true,
         label: translate('Retention time'),
-        help_text: translate('Retention time in days, if 0 - resource will be kept forever'),
+        help_text: translate(
+          'Retention time in days, if 0 - resource will be kept forever',
+        ),
         min_value: 0,
         max_value: 2147483647,
       },

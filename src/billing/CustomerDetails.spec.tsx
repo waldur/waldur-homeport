@@ -22,7 +22,9 @@ const Customer = {
 
 describe('CustomerDetails', () => {
   it('renders all rows', () => {
-    const wrapper = render(<PureCustomerDetails customer={Customer} translate={translate}/>);
+    const wrapper = render(
+      <PureCustomerDetails customer={Customer} translate={translate} />,
+    );
     expect(wrapper.html()).toMatchSnapshot();
   });
 });

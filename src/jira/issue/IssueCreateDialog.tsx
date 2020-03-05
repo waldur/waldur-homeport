@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { InjectedFormProps } from 'redux-form';
 
-import { StringField, TextField, SelectIconField, SelectAsyncField } from '@waldur/form-react';
+import {
+  StringField,
+  TextField,
+  SelectIconField,
+  SelectAsyncField,
+} from '@waldur/form-react';
 import { optionRenderer } from '@waldur/form-react/optionRenderer';
 import { TranslateProps } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
@@ -18,14 +23,16 @@ interface IssueCreateDialogProps extends TranslateProps, InjectedFormProps {
 }
 
 const issueOptionRenderer = (option: JiraIssue) => (
-  <span>{option.key || 'N/A'}: {option.summary}</span>
+  <span>
+    {option.key || 'N/A'}: {option.summary}
+  </span>
 );
 
 const resourceOptionRenderer = optionRenderer({
   labelKey: 'name',
   tooltipKey: 'resource_type',
   iconKey: (resource: Resource) => getResourceIcon(resource.resource_type),
-  imgStyle: {width: 19},
+  imgStyle: { width: 19 },
 });
 
 export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
@@ -34,7 +41,8 @@ export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
     submitLabel={props.translate('Create request')}
     onSubmit={props.handleSubmit(props.createIssue)}
     submitting={props.submitting}
-    error={props.error}>
+    error={props.error}
+  >
     <SelectIconField
       name="type"
       label={props.translate('Request type')}
@@ -62,10 +70,7 @@ export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
       label={props.translate('Summary')}
       required={true}
     />
-    <TextField
-      name="description"
-      label={props.translate('Description')}
-    />
+    <TextField name="description" label={props.translate('Description')} />
     <SelectIconField
       name="priority"
       label={props.translate('Priority')}
@@ -76,7 +81,7 @@ export const IssueCreateDialog = (props: IssueCreateDialogProps) => (
       valueKey="url"
       iconKey="icon_url"
       tooltipKey="description"
-      imgStyle={{width: 19}}
+      imgStyle={{ width: 19 }}
     />
     <SelectAsyncField
       name="resource"

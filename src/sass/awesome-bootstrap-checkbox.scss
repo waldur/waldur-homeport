@@ -2,58 +2,55 @@
 // Checkboxes
 // --------------------------------------------------
 
-
 $font-family-icon: 'FontAwesome' !default;
-$fa-var-check: "\f00c" !default;
+$fa-var-check: '\f00c' !default;
 $check-icon: $fa-var-check !default;
 $input-border: #ccc;
 $input-color: #fff;
 $input-bg-disabled: #fff;
-$brand-primary:         darken(#428bca, 6.5%); // #337ab7
-$brand-success:         #5cb85c;
-$brand-info:            #5bc0de;
-$brand-warning:         #f0ad4e;
-$brand-danger:          #d9534f;
+$brand-primary: darken(#428bca, 6.5%); // #337ab7
+$brand-success: #5cb85c;
+$brand-info: #5bc0de;
+$brand-warning: #f0ad4e;
+$brand-danger: #d9534f;
 
 @mixin checkbox-variant($parent, $color) {
-  #{$parent} input[type="checkbox"]:checked + label,
-  #{$parent} input[type="radio"]:checked + label {
+  #{$parent} input[type='checkbox']:checked + label,
+  #{$parent} input[type='radio']:checked + label {
     &::before {
       background-color: $color;
       border-color: $color;
     }
-    &::after{
+    &::after {
       color: #fff;
     }
   }
 }
 
 @mixin checkbox-variant-indeterminate($parent, $color) {
-  #{$parent} input[type="checkbox"]:indeterminate + label,
-  #{$parent} input[type="radio"]:indeterminate + label {
+  #{$parent} input[type='checkbox']:indeterminate + label,
+  #{$parent} input[type='radio']:indeterminate + label {
     &::before {
       background-color: $color;
       border-color: $color;
     }
-    &::after{
+    &::after {
       background-color: #fff;
     }
   }
 }
 
-
-
-.awesome-checkbox{
+.awesome-checkbox {
   padding-left: 20px;
 
-  label{
+  label {
     display: inline-block;
     vertical-align: middle;
     position: relative;
     padding-left: 5px;
 
-    &::before{
-      content: "";
+    &::before {
+      content: '';
       display: inline-block;
       position: absolute;
       width: 17px;
@@ -65,7 +62,7 @@ $brand-danger:          #d9534f;
       background-color: #fff;
     }
 
-    &::after{
+    &::after {
       display: inline-block;
       position: absolute;
       width: 16px;
@@ -80,19 +77,19 @@ $brand-danger:          #d9534f;
     }
   }
 
-  input[type="checkbox"],
-  input[type="radio"] {
+  input[type='checkbox'],
+  input[type='radio'] {
     opacity: 0;
     z-index: 1;
 
-    &:checked + label::after{
+    &:checked + label::after {
       font-family: $font-family-icon;
       content: $check-icon;
     }
 
-    &:indeterminate + label::after{
+    &:indeterminate + label::after {
       display: block;
-      content: "";
+      content: '';
       width: 10px;
       height: 3px;
       background-color: #555555;
@@ -101,22 +98,21 @@ $brand-danger:          #d9534f;
       margin-top: 7px;
     }
 
-    &:disabled + label{
+    &:disabled + label {
       opacity: 0.65;
 
-      &::before{
+      &::before {
         background-color: $input-bg-disabled;
         cursor: not-allowed;
       }
     }
-
   }
 
-  &.checkbox-circle label::before{
+  &.checkbox-circle label::before {
     border-radius: 50%;
   }
 
-  &.checkbox-inline{
+  &.checkbox-inline {
     margin-top: 0;
   }
 }
@@ -126,7 +122,6 @@ $brand-danger:          #d9534f;
 @include checkbox-variant('.checkbox-info', $brand-info);
 @include checkbox-variant('.checkbox-warning', $brand-warning);
 @include checkbox-variant('.checkbox-success', $brand-success);
-
 
 @include checkbox-variant-indeterminate('.checkbox-primary', $brand-primary);
 @include checkbox-variant-indeterminate('.checkbox-danger', $brand-danger);

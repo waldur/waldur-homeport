@@ -1,5 +1,11 @@
 // @ngInject
-export default function storeLastState($rootScope, $state, $injector, usersService, UserSettings) {
+export default function storeLastState(
+  $rootScope,
+  $state,
+  $injector,
+  usersService,
+  UserSettings,
+) {
   $rootScope.$on('logoutStart', function() {
     if (usersService.currentUser) {
       const user_uuid = usersService.currentUser.uuid;
@@ -11,4 +17,3 @@ export default function storeLastState($rootScope, $state, $injector, usersServi
     }
   });
 }
-

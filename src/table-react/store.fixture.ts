@@ -11,5 +11,8 @@ export const initialState = {
       email: 'alice@gmail.com',
     },
   },
-  order: ['10ff42e159d7472fb35d4db517e6c16e', '412ff42e159g7472fb3524db517e65165'],
+  order: [
+    '10ff42e159d7472fb35d4db517e6c16e',
+    '412ff42e159g7472fb3524db517e65165',
+  ],
 };

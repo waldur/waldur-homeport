@@ -10,7 +10,10 @@ const customerTeam = {
 
     $onInit() {
       this.$scope.$emit('customerTeam.initialized');
-      this.$scope.$on('customerTeam.selectInvitationTab', this.selectInvitationTab.bind(this));
+      this.$scope.$on(
+        'customerTeam.selectInvitationTab',
+        this.selectInvitationTab.bind(this),
+      );
     }
 
     usersTabSelected() {
@@ -21,7 +24,7 @@ const customerTeam = {
       this.$scope.active = 1;
       this.$scope.$digest();
     }
-  }
+  },
 };
 
 export default customerTeam;

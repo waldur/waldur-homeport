@@ -1,18 +1,15 @@
 <div class="table-responsive">
   <table class="table table-borderless">
     <tr>
-      <th translate>Name
-      </td>
+      <td translate>Name</td>
       <td>{{ $ctrl.provider.name }}</td>
     </tr>
     <tr>
-      <th translate>Type
-      </td>
+      <td translate>Type</td>
       <td>{{ $ctrl.provider.service_type }}</td>
     </tr>
     <tr ng-if="$ctrl.provider.homepage">
-      <th translate>Homepage
-      </td>
+      <td translate>Homepage</td>
       <td>
         <a ng-href="{{ $ctrl.provider.homepage }}" target="_blank">
           <i class="fa fa-external-link"></i>
@@ -21,8 +18,7 @@
       </td>
     </tr>
     <tr ng-if="$ctrl.provider.terms_of_services">
-      <th translate>Terms of Services
-      </td>
+      <td translate>Terms of Services</td>
       <td>
         <a ng-href="{{ ::$ctrl.provider.terms_of_services }}" target="_blank">
           <i class="fa fa-external-link"></i>
@@ -31,8 +27,7 @@
       </td>
     </tr>
     <tr ng-if="$ctrl.provider.certifications.length > 0">
-      <th translate>Certifications
-      </td>
+      <td translate>Certifications</td>
       <td>
         <ul class="list-inline">
           <li ng-repeat="certification in $ctrl.provider.certifications">
@@ -45,6 +40,7 @@
       </td>
     </tr>
   </table>
+
   <div ng-if="$ctrl.center">
     <h4 translate>Physical locations</h4>
     <div ng-if="$ctrl.loading">
@@ -56,7 +52,8 @@
         height="300px"
         markers="$ctrl.markers"
         maxbounds="$ctrl.maxbounds"
-        center="$ctrl.center">
+        center="$ctrl.center"
+      >
       </leaflet>
     </div>
   </div>
