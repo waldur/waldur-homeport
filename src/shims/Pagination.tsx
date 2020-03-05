@@ -1,6 +1,10 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-import { bsClass, getClassSet, splitBsProps } from 'react-bootstrap/lib/utils/bootstrapUtils';
+import {
+  bsClass,
+  getClassSet,
+  splitBsProps,
+} from 'react-bootstrap/lib/utils/bootstrapUtils';
 
 import PaginationButton from './PaginationButton';
 
@@ -50,7 +54,10 @@ interface PaginationProps {
   /**
    * You can use a custom element for the buttons
    */
-  buttonComponentClass: React.ComponentType<{disabled?: boolean, onClick: any}>;
+  buttonComponentClass: React.ComponentType<{
+    disabled?: boolean;
+    onClick: any;
+  }>;
 
   className?: string;
 }
@@ -69,7 +76,12 @@ class Pagination extends React.Component<PaginationProps> {
   };
 
   renderPageButtons(
-    activePage, items, maxButtons, boundaryLinks, ellipsis, buttonProps
+    activePage,
+    items,
+    maxButtons,
+    boundaryLinks,
+    ellipsis,
+    buttonProps,
   ) {
     const pageButtons = [];
 
@@ -80,9 +92,9 @@ class Pagination extends React.Component<PaginationProps> {
       startPage = Math.max(
         Math.min(
           activePage - Math.floor(maxButtons / 2),
-          items - maxButtons + 1
+          items - maxButtons + 1,
         ),
-        1
+        1,
       );
       endPage = startPage + maxButtons - 1;
     } else {
@@ -99,7 +111,7 @@ class Pagination extends React.Component<PaginationProps> {
           active={page === activePage}
         >
           {page}
-        </PaginationButton>
+        </PaginationButton>,
       );
     }
 
@@ -114,19 +126,14 @@ class Pagination extends React.Component<PaginationProps> {
             <span aria-label="More">
               {ellipsis === true ? '\u2026' : ellipsis}
             </span>
-          </PaginationButton>
+          </PaginationButton>,
         );
       }
 
       pageButtons.unshift(
-        <PaginationButton
-          {...buttonProps}
-          key={1}
-          eventKey={1}
-          active={false}
-        >
+        <PaginationButton {...buttonProps} key={1} eventKey={1} active={false}>
           1
-        </PaginationButton>
+        </PaginationButton>,
       );
     }
 
@@ -141,7 +148,7 @@ class Pagination extends React.Component<PaginationProps> {
             <span aria-label="More">
               {ellipsis === true ? '\u2026' : ellipsis}
             </span>
-          </PaginationButton>
+          </PaginationButton>,
         );
       }
 
@@ -154,7 +161,7 @@ class Pagination extends React.Component<PaginationProps> {
             active={false}
           >
             {items}
-          </PaginationButton>
+          </PaginationButton>,
         );
       }
     }
@@ -176,7 +183,8 @@ class Pagination extends React.Component<PaginationProps> {
       onSelect,
       buttonComponentClass,
       className,
-      ...props} = this.props;
+      ...props
+    } = this.props;
 
     const [bsProps, elementProps] = splitBsProps(props);
 
@@ -188,19 +196,14 @@ class Pagination extends React.Component<PaginationProps> {
     };
 
     return (
-      <ul
-        {...elementProps}
-        className={classNames(className, classes)}
-      >
+      <ul {...elementProps} className={classNames(className, classes)}>
         {first && (
           <PaginationButton
             {...buttonProps}
             eventKey={1}
             disabled={activePage === 1}
           >
-            <span aria-label="First">
-              {first === true ? '\u00ab' : first}
-            </span>
+            <span aria-label="First">{first === true ? '\u00ab' : first}</span>
           </PaginationButton>
         )}
         {prev && (
@@ -209,14 +212,17 @@ class Pagination extends React.Component<PaginationProps> {
             eventKey={activePage - 1}
             disabled={activePage === 1}
           >
-            <span aria-label="Previous">
-              {prev === true ? '\u2039' : prev}
-            </span>
+            <span aria-label="Previous">{prev === true ? '\u2039' : prev}</span>
           </PaginationButton>
         )}
 
         {this.renderPageButtons(
-          activePage, items, maxButtons, boundaryLinks, ellipsis, buttonProps
+          activePage,
+          items,
+          maxButtons,
+          boundaryLinks,
+          ellipsis,
+          buttonProps,
         )}
 
         {next && (
@@ -225,9 +231,7 @@ class Pagination extends React.Component<PaginationProps> {
             eventKey={activePage + 1}
             disabled={activePage >= items}
           >
-            <span aria-label="Next">
-              {next === true ? '\u203a' : next}
-            </span>
+            <span aria-label="Next">{next === true ? '\u203a' : next}</span>
           </PaginationButton>
         )}
         {last && (
@@ -236,9 +240,7 @@ class Pagination extends React.Component<PaginationProps> {
             eventKey={items}
             disabled={activePage >= items}
           >
-            <span aria-label="Last">
-              {last === true ? '\u00bb' : last}
-            </span>
+            <span aria-label="Last">{last === true ? '\u00bb' : last}</span>
           </PaginationButton>
         )}
       </ul>

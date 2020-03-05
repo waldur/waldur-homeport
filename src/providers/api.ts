@@ -8,6 +8,9 @@ const serializeDetails = (provider: ProviderCreateFormData) => {
   return serializer(provider.details);
 };
 
+const getSettingsUrl = uuid =>
+  `${ENV.apiEndpoint}api/service-settings/${uuid}/`;
+
 export const updateProvider = provider =>
   sendForm('patch', getSettingsUrl(provider.details.uuid), {
     name: provider.name,
@@ -15,8 +18,6 @@ export const updateProvider = provider =>
   });
 
 export const fetchProvider = uuid => $http.get(getSettingsUrl(uuid));
-
-const getSettingsUrl = uuid => `${ENV.apiEndpoint}api/service-settings/${uuid}/`;
 
 export const refreshProjectList = () =>
   $rootScope.$broadcast('refreshProjectList');

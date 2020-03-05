@@ -14,16 +14,19 @@ interface OfferingButtonProps {
   disabled?: boolean;
 }
 
-export const OfferingButton: React.FC<OfferingButtonProps> = (props: OfferingButtonProps) => {
+export const OfferingButton: React.FC<OfferingButtonProps> = (
+  props: OfferingButtonProps,
+) => {
   if (props.flavor === 'primary') {
     return (
       <button
         type="button"
-        className={classNames('btn btn-sm btn-primary', {disabled: props.disabled})}
-        onClick={props.onClick}>
-        <i className={props.icon}/>
-        {' '}
-        {props.title}
+        className={classNames('btn btn-sm btn-primary', {
+          disabled: props.disabled,
+        })}
+        onClick={props.onClick}
+      >
+        <i className={props.icon} /> {props.title}
       </button>
     );
   } else if (props.flavor === 'secondary') {
@@ -31,9 +34,12 @@ export const OfferingButton: React.FC<OfferingButtonProps> = (props: OfferingBut
       <Tooltip
         label={props.title}
         id="offering-button"
-        className={classNames('btn btn-sm btn-default', {disabled: props.disabled})}
-        onClick={props.onClick}>
-        <i className={props.icon}/>
+        className={classNames('btn btn-sm btn-default', {
+          disabled: props.disabled,
+        })}
+        onClick={props.onClick}
+      >
+        <i className={props.icon} />
       </Tooltip>
     );
   }
@@ -41,9 +47,12 @@ export const OfferingButton: React.FC<OfferingButtonProps> = (props: OfferingBut
     <Tooltip
       label={props.title}
       id="offering-button"
-      className={classNames('offering-button', {'offering-button-active': props.isActive})}
-      onClick={props.onClick}>
-      <i className={props.icon}/>
+      className={classNames('offering-button', {
+        'offering-button-active': props.isActive,
+      })}
+      onClick={props.onClick}
+    >
+      <i className={props.icon} />
     </Tooltip>
   );
 };

@@ -13,8 +13,8 @@ const securityGroupsDialog = {
   bindings: {
     dismiss: '&',
     close: '&',
-    resolve: '='
-  }
+    resolve: '=',
+  },
 };
 
 export default securityGroupsDialog;

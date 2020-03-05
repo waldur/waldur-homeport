@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { withTranslation, Translate, TranslateProps } from '@waldur/i18n';
-
 import { ResourceState } from '@waldur/resource/types';
 
 import { ZabbixHostDetailsButton } from './ZabbixHostDetailsButton';
@@ -49,7 +48,7 @@ interface Props extends TranslateProps {
 
 export const PureZabbixHostStateButton = (props: Props) => {
   const params = mapStateToParams(props.host.state, props.translate);
-  return <ZabbixHostDetailsButton host={props.host} {...params}/>;
+  return <ZabbixHostDetailsButton host={props.host} {...params} />;
 };
 
 export const ZabbixHostStateButton = withTranslation(PureZabbixHostStateButton);

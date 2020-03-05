@@ -10,7 +10,11 @@ const getFilesizeQuota = label => ({
   minFileSizeName: 'MB',
   formatterTemplatePie: fileSizeName => item =>
     `${item.seriesName}<br />
-    ${item.marker}${item.name}: ${formatFilesize(item.value, 'MB', fileSizeName)}`,
+    ${item.marker}${item.name}: ${formatFilesize(
+      item.value,
+      'MB',
+      fileSizeName,
+    )}`,
   formatterTemplateBar: fileSizeName => ([usage, limit]) =>
     `${usage.axisValue}<br />
     ${usage.marker}${usage.seriesName}: ${usage.value} ${fileSizeName}<br />
@@ -22,14 +26,15 @@ const getCountQuota = label => ({
   valueType: constants.valueType.unit,
 });
 
-export const getRegisteredQuota = (quotaName: string) => ({
-  vcpu: getCountQuota(translate('vCPU count')),
-  ram: getFilesizeQuota(translate('RAM size')),
-  storage: getFilesizeQuota(translate('Block storage size')),
-  floating_ip_count: getCountQuota(translate('Floating IP count')),
-  instances: getCountQuota(translate('Instance count')),
-  volumes_size: getFilesizeQuota(translate('Volume size')),
-  snapshots_size: getFilesizeQuota(translate('Snapshot size')),
-  volumes: getCountQuota(translate('Block volume count')),
-  snapshots: getCountQuota(translate('Block snapshot count')),
-}[quotaName]);
+export const getRegisteredQuota = (quotaName: string) =>
+  ({
+    vcpu: getCountQuota(translate('vCPU count')),
+    ram: getFilesizeQuota(translate('RAM size')),
+    storage: getFilesizeQuota(translate('Block storage size')),
+    floating_ip_count: getCountQuota(translate('Floating IP count')),
+    instances: getCountQuota(translate('Instance count')),
+    volumes_size: getFilesizeQuota(translate('Volume size')),
+    snapshots_size: getFilesizeQuota(translate('Snapshot size')),
+    volumes: getCountQuota(translate('Block volume count')),
+    snapshots: getCountQuota(translate('Block snapshot count')),
+  }[quotaName]);

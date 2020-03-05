@@ -15,12 +15,16 @@ const customerThreshold = {
     }
 
     $onInit() {
-      this.model.isHardLimit = this.priceEstimatesService.isHardLimit(this.model.priceEstimate);
+      this.model.isHardLimit = this.priceEstimatesService.isHardLimit(
+        this.model.priceEstimate,
+      );
       this.updateLimit();
     }
 
     updateLimit() {
-      this.model.priceEstimate.limit = this.model.isHardLimit ? this.model.priceEstimate.threshold : -1;
+      this.model.priceEstimate.limit = this.model.isHardLimit
+        ? this.model.priceEstimate.threshold
+        : -1;
     }
 
     thresholdChanged() {
@@ -29,10 +33,11 @@ const customerThreshold = {
     }
 
     validateThreshold() {
-      let isValid = this.model.priceEstimate.threshold >= this.model.priceEstimate.total;
+      let isValid =
+        this.model.priceEstimate.threshold >= this.model.priceEstimate.total;
       this.thresholdForm.threshold.$setValidity('exceedsThreshold', isValid);
     }
-  }
+  },
 };
 
 export default customerThreshold;

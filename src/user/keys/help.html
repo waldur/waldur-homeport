@@ -1,65 +1,79 @@
 <h3>Ubuntu</h3>
 <p>
-On your machine create public and private SSH keys using the command-line:
-<pre class="code">mkdir ~/.ssh
+  On your machine create public and private SSH keys using the command-line:
+</p>
+<pre class="code">
+mkdir ~/.ssh
 chmod 700 ~/.ssh
 ssh-keygen -t rsa
 </pre>
-</p>
 <p>
-You will be asked to confirm keys location and create passphrase to protect your private key:
-<pre class="code">Generating public/private rsa key pair.
+  You will be asked to confirm keys location and create passphrase to protect
+  your private key:
+</p>
+<pre class="code">
+Generating public/private rsa key pair.
 Enter file in which to save the key (/home/b/.ssh/id_rsa):
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
 Your identification has been saved in /home/b/.ssh/id_rsa.
-Your public key has been saved in /home/b/.ssh/id_rsa.pub.</pre>
-</p>
+Your public key has been saved in /home/b/.ssh/id_rsa.pub.</pre
+>
 <p>
-After successful creation you should copy id_rsa.pub (your public key)
-content and paste it into "Public key" input on Add key page<br/>
-For other Linux systems search instructions for your distribution.
+  After successful creation you should copy id_rsa.pub (your public key) content
+  and paste it into "Public key" input on Add key page<br />
+  For other Linux systems search instructions for your distribution.
 </p>
 <h3>OS X</h3>
 <p>
-Instructions are pretty much the same as for Linux,<br/>
-but you may omit directory creation and enter only this line
-<pre class="code"> ssh-keygen -t rsa</pre>
+  Instructions are pretty much the same as for Linux,<br />
+  but you may omit directory creation and enter only this line
 </p>
+<pre class="code"> ssh-keygen -t rsa</pre>
 <h3>Windows</h3>
 <p>
-On of the possible ways to create SSH keys on Windows is using <a href="https://git-scm.com/download/win">Git
-Bash</a>.
-This set of steps is based this tool, you need to install it to proceed further.
+  On of the possible ways to create SSH keys on Windows is using
+  <a href="https://git-scm.com/download/win">Git Bash</a>. This set of steps is
+  based this tool, you need to install it to proceed further.
 </p>
 <p>
-At first check if you already have public key, if so you can use it on our Add Key page.
-Open Git Bash and enter:
+  At first check if you already have public key, if so you can use it on our Add
+  Key page. Open Git Bash and enter:
+</p>
 <pre class="code"> ls -al ~/.ssh</pre>
-This command will show existing files in your .ssh directory. Public key has .pub extension
-(usually id_rsa.pub)
+<p>
+  This command will show existing files in your .ssh directory. Public key has
+  .pub extension (usually id_rsa.pub)
 </p>
 <p>
-To generate new SSH key pair in your Git Bash enter:
+  To generate new SSH key pair in your Git Bash enter:
+</p>
 <pre class="code"> ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</pre>
-This will create new ssh key, using the provided email as a label, when you see information about
-choosing keys directory just press Enter. <br/>
-You will also be asked to enter a passphrase.
-After all is done you will see output like this:
+<p>
+  This will create new ssh key, using the provided email as a label, when you
+  see information about choosing keys directory just press Enter. <br />
+  You will also be asked to enter a passphrase. After all is done you will see
+  output like this:
+</p>
 <pre class="code">
 # Your identification has been saved in /Users/you/.ssh/id_rsa.
 # Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
 # The key fingerprint is:
-# 01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com</pre>
-</p>
+# 01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com</pre
+>
 <p>
-Next, you have to enable your ssh-agent and add keys that you have created. <br/>
-Open your Git Bash and start the agent:
+  Next, you have to enable your ssh-agent and add keys that you have created.
+  <br />
+  Open your Git Bash and start the agent:
+</p>
 <pre class="code">
 # start the ssh-agent in the background
-ssh-agent - s</pre>
-Add your SSH key to ssh-agent:
-<pre class="code">
-ssh-add ~/.ssh/id_rsa</pre>
-That's it, you are ready to go!
+ssh-agent - s</pre
+>
+<p>
+  Add your SSH key to ssh-agent:
+</p>
+<pre class="code">ssh-add ~/.ssh/id_rsa</pre>
+<p>
+  That's it, you are ready to go!
 </p>

@@ -41,24 +41,21 @@ const getChartData = (props: PlanUsageRowProps) => ({
   ],
 });
 
-export const PlanUsageDialog = (props: {resolve: PlanUsageRowProps}) => (
+export const PlanUsageDialog = (props: { resolve: PlanUsageRowProps }) => (
   <ModalDialog
     title={translate('Plan capacity')}
-    footer={<CloseDialogButton/>}>
+    footer={<CloseDialogButton />}
+  >
     <p>
-      <strong>{translate('Provider')}</strong>:
-      {' '}
+      <strong>{translate('Provider')}</strong>:{' '}
       {props.resolve.row.customer_provider_name}
     </p>
     <p>
-      <strong>{translate('Offering')}</strong>:
-      {' '}
+      <strong>{translate('Offering')}</strong>:{' '}
       {props.resolve.row.offering_name}
     </p>
     <p>
-      <strong>{translate('Plan')}</strong>:
-      {' '}
-      {props.resolve.row.plan_name}
+      <strong>{translate('Plan')}</strong>: {props.resolve.row.plan_name}
     </p>
     <EChart options={getChartData(props.resolve)} height="300px" />
   </ModalDialog>

@@ -1,25 +1,25 @@
 @mixin transition($property, $duration, $timing) {
-    transition-property: $property;
-    transition-duration: $duration;
-    transition-timing-function: $timing;
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
 }
 
 .spin {
-    animation-name: spin;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    z-index: 100;
-    &.fast {
-        animation-duration: 600ms;
-    }
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  z-index: 100;
+  &.fast {
+    animation-duration: 600ms;
+  }
 }
 
 @keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

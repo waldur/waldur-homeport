@@ -4,7 +4,7 @@ export default function keysService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/keys/';
-    }
+    },
   });
   return new ServiceClass();
 }

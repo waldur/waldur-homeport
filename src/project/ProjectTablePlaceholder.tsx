@@ -12,9 +12,14 @@ export const ProjectTablePlaceholder = () => (
     illustration={Illustration}
     title={translate(`Your organization does not have any projects yet.`)}
     // tslint:disable-next-line: max-line-length
-    description={translate(`Project aggregates and isolates teams and resources.`)}
+    description={translate(
+      `Project aggregates and isolates teams and resources.`,
+    )}
     action={
-      <Link state="organization.createProject" className="btn btn-success btn-md">
+      <Link
+        state="organization.createProject"
+        className="btn btn-success btn-md"
+      >
         {translate('Create your first project')}
       </Link>
     }

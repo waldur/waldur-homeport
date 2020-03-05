@@ -23,7 +23,11 @@ export const MonitoringGuide = (props: MonitoringGuideProps) => {
 
   return (
     <>
-      <p>{props.translate('In order to enable monitoring you should install and configure Zabbix agent on monitored virtual machine.')}</p>
+      <p>
+        {props.translate(
+          'In order to enable monitoring you should install and configure Zabbix agent on monitored virtual machine.',
+        )}
+      </p>
       <HtmlTabList
         tabs={[
           {

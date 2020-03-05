@@ -1,11 +1,10 @@
 <div class="profile-element" uib-dropdown uib-dropdown-fix>
-  <img gravatar-src="Ctrl.user.email" class="img-circle" gravatar-size="48">
+  <img gravatar-src="Ctrl.user.email" class="img-circle" gravatar-size="48" />
   <a uib-dropdown-toggle>
     <span class="clear">
       <span class="block m-t-xs">
-        <strong class="font-bold">
-          <span ng-if="Ctrl.user.full_name">{{ Ctrl.user.full_name }}</span>
-          <span ng-if="!Ctrl.user.full_name" translate>User profile</strong>
+        <span ng-if="Ctrl.user.full_name">{{ Ctrl.user.full_name }}</span>
+        <span ng-if="!Ctrl.user.full_name" translate>User profile</span>
       </span>
       <span class="text-muted text-xs block">
         <span ng-if="Ctrl.user.job_title">{{ Ctrl.user.job_title }}</span>
@@ -21,6 +20,8 @@
       </a>
     </li>
     <li class="divider"></li>
-    <li><a ng-click="Ctrl.logout()"><span translate>Log out</span></a></li>
+    <li>
+      <a ng-click="Ctrl.logout()"><span translate>Log out</span></a>
+    </li>
   </ul>
 </div>

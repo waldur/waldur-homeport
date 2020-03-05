@@ -12,7 +12,7 @@ const openstackSubnet = {
     $onInit() {
       this.pattern = PRIVATE_CIDR_PATTERN;
     }
-  }
+  },
 };
 
 export default openstackSubnet;

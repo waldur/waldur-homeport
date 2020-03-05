@@ -2,9 +2,11 @@
   <div class="m-b-sm clearfix">
     <span>
       <strong>{{ quota.name | quotaName }}</strong>
-      <i class="fa fa-exclamation-triangle"
-         ng-if="$ctrl.exceeds(quota)"
-         uib-tooltip-html="$ctrl.getExceeds(quota)">
+      <i
+        class="fa fa-exclamation-triangle"
+        ng-if="$ctrl.exceeds(quota)"
+        uib-tooltip-html="$ctrl.getExceeds(quota)"
+      >
       </i>
     </span>
     <span class="pull-right text-muted">
@@ -12,8 +14,7 @@
     </span>
   </div>
   <div>
-    <uib-progress max="quota.limit"
-      uib-tooltip-template="'quota-tooltip.html'">
+    <uib-progress max="quota.limit" uib-tooltip-template="'quota-tooltip.html'">
       <uib-bar value="quota.usage" type="success"></uib-bar>
       <uib-bar value="quota.required" type="warning"></uib-bar>
     </uib-progress>

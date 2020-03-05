@@ -6,6 +6,6 @@ export interface CustomComponentInputProps<T> {
 
 export interface FilterOptions {
   name: string;
-  choices: Array<{value: string; label: string}>;
+  choices: Array<{ value: string; label: string }>;
   defaultValue: string;
 }

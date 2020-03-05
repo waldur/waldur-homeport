@@ -7,7 +7,7 @@ const chartColors = {
   green: 'rgb(75, 192, 192)',
   blue: 'rgb(54, 162, 235)',
   purple: 'rgb(153, 102, 255)',
-  grey: 'rgb(231,233,237)'
+  grey: 'rgb(231,233,237)',
 };
 
 const resourceCategories = [
@@ -39,7 +39,7 @@ const resourceCategories = [
 
 const parseUsage = listToDict(
   item => item.name,
-  item => item.usage
+  item => item.usage,
 );
 
 export default class ResourceChartService {
@@ -61,30 +61,34 @@ export default class ResourceChartService {
   }
 
   parseProject(categories, total, project) {
-    const usage = this.parseQuotas(categories, project.quotas)
-      .map(category => angular.extend({}, category, {
-        relative: Math.round(category.value * 100.0 / total)
-      }));
+    const usage = this.parseQuotas(categories, project.quotas).map(category =>
+      angular.extend({}, category, {
+        relative: Math.round((category.value * 100.0) / total),
+      }),
+    );
     return {
       name: project.name,
       uuid: project.uuid,
       categories: usage,
-      total: this.getTotal(usage)
+      total: this.getTotal(usage),
     };
   }
 
   parseQuotas(categories, quotas) {
     const usage = parseUsage(quotas);
-    return categories.map(category => ({
-      label: category.label,
-      color: category.color,
-      value: usage[category.quota],
-    })).filter(category => category.value > 0);
+    return categories
+      .map(category => ({
+        label: category.label,
+        color: category.color,
+        value: usage[category.quota],
+      }))
+      .filter(category => category.value > 0);
   }
 
   getCategories() {
-    return resourceCategories
-      .filter(category => this.features.isVisible(category.feature));
+    return resourceCategories.filter(category =>
+      this.features.isVisible(category.feature),
+    );
   }
 
   getTotal(categories) {

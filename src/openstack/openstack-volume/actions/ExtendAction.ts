@@ -12,10 +12,7 @@ export default function createAction(): ResourceAction<Volume> {
     method: 'POST',
     component: 'volumeExtendDialog',
     title: translate('Extend'),
-    validators: [
-      isBootable,
-      validateState('OK'),
-    ],
+    validators: [isBootable, validateState('OK')],
     fields: [],
   };
 }

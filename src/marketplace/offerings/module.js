@@ -13,9 +13,24 @@ export default module => {
   module.component('marketplaceMyOfferings', marketplaceMyOfferings);
   module.component('marketplaceOfferingCreate', marketplaceOfferingCreate);
   module.component('marketplaceOfferingUpdate', marketplaceOfferingUpdate);
-  module.component('marketplaceOfferingDetailsPage', marketplaceOfferingDetailsPage);
-  module.component('marketplaceOfferingDetailsButton', marketplaceOfferingDetailsButton);
-  module.component('marketplaceOfferingDetailsDialog', marketplaceOfferingDetailsDialog);
-  module.component('marketplacePauseOfferingDialog', marketplacePauseOfferingDialog);
-  module.component('serviceSettingsDetailsDialog', serviceSettingsDetailsDialog);
+  module.component(
+    'marketplaceOfferingDetailsPage',
+    marketplaceOfferingDetailsPage,
+  );
+  module.component(
+    'marketplaceOfferingDetailsButton',
+    marketplaceOfferingDetailsButton,
+  );
+  module.component(
+    'marketplaceOfferingDetailsDialog',
+    marketplaceOfferingDetailsDialog,
+  );
+  module.component(
+    'marketplacePauseOfferingDialog',
+    marketplacePauseOfferingDialog,
+  );
+  module.component(
+    'serviceSettingsDetailsDialog',
+    serviceSettingsDetailsDialog,
+  );
 };

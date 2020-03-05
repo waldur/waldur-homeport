@@ -5,18 +5,19 @@
 </div>
 <div class="modal-body">
   <form name="$ctrl.LoginForm">
-    <div class="form-group"
-         ng-class="{disabled: $ctrl.isAuthenticating}">
+    <div class="form-group" ng-class="{disabled: $ctrl.isAuthenticating}">
       <label for="phoneNumber" class="control-label">
         <span translate>Mobile phone number</span>
       </label>
       <div class="input-group">
         <span class="input-group-addon">{{::$ctrl.mobilePrefix}}</span>
-        <input type="tel"
-               id="phoneNumber"
-               ng-model="$ctrl.phoneNumber"
-               class="form-control"
-               required>
+        <input
+          type="tel"
+          id="phoneNumber"
+          ng-model="$ctrl.phoneNumber"
+          class="form-control"
+          required
+        />
       </div>
     </div>
     <div class="form-group" ng-if="$ctrl.challengeCode">
@@ -34,13 +35,12 @@
     type="submit"
     class="btn btn-primary"
     ng-disabled="$ctrl.LoginForm.$invalid"
-    submit-button="$ctrl.submit()">
+    submit-button="$ctrl.submit()"
+  >
     <i class="fa fa-sign-in"></i>
     <span translate>Sign in</span>
   </button>
-  <button class="btn btn-default"
-    type="button"
-    ng-click="$ctrl.dismiss()">
+  <button class="btn btn-default" type="button" ng-click="$ctrl.dismiss()">
     <span translate>Cancel</span>
   </button>
 </div>

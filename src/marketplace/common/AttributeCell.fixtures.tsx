@@ -1,4 +1,8 @@
-import { Attribute, Section, ComparedOffering } from '@waldur/marketplace/types';
+import {
+  Attribute,
+  Section,
+  ComparedOffering,
+} from '@waldur/marketplace/types';
 
 export const ListAttribute: Attribute = {
   key: 'node_information_cpu',
@@ -71,12 +75,8 @@ export const Offerings: ComparedOffering[] = [
   {
     name: 'University of Iceland',
     attributes: {
-      node_information_cpu: [
-        'E5-2650v3-8860v4',
-      ],
-      node_information_gpu: [
-        'gpu_NVidia_K80',
-      ],
+      node_information_cpu: ['E5-2650v3-8860v4'],
+      node_information_gpu: ['gpu_NVidia_K80'],
       home_path: '/opt/',
       iske_certified: true,
     },
@@ -84,13 +84,8 @@ export const Offerings: ComparedOffering[] = [
   {
     name: 'UT Rocket',
     attributes: {
-      node_information_cpu: [
-        'Gold_6132',
-        'E5-2680v3',
-      ],
-      node_information_gpu: [
-        'gpu_NVidia_P100',
-      ],
+      node_information_cpu: ['Gold_6132', 'E5-2680v3'],
+      node_information_gpu: ['gpu_NVidia_P100'],
       home_path: '/opt/',
       iske_certified: false,
     },

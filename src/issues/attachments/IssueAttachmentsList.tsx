@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { IssueAttachment } from './IssueAttachment';
 import { IssueAttachmentLoading } from './IssueAttachmentLoading';
-
 import './IssueAttachmentsList.scss';
 import { Attachment } from './types';
 
@@ -28,15 +27,15 @@ const getAttachmentsLoading = (count: number) => {
 
 export const IssueAttachmentsList = (props: IssueAttachmentsListProps) => {
   const { attachments, uploading } = props;
-  const attachmentsList = attachments.length ? attachments.map((attachment: Attachment) =>
-    (
-      <li key={attachment.uuid}>
-        <IssueAttachment attachment={attachment} />
-      </li>
-    )
-  ) : [];
+  const attachmentsList = attachments.length
+    ? attachments.map((attachment: Attachment) => (
+        <li key={attachment.uuid}>
+          <IssueAttachment attachment={attachment} />
+        </li>
+      ))
+    : [];
   const attachmentsLoadingList = getAttachmentsLoading(uploading);
   const body = [...attachmentsList, ...attachmentsLoadingList];
 
-  return body.length ? (<ul className="attachment-list">{body}</ul>) : null;
+  return body.length ? <ul className="attachment-list">{body}</ul> : null;
 };

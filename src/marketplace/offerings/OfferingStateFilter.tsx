@@ -5,17 +5,15 @@ import { Field } from 'redux-form';
 import { translate } from '@waldur/i18n';
 
 export const getStates = () => [
-  {value: 'Draft', label: translate('Draft')},
-  {value: 'Active', label: translate('Active')},
-  {value: 'Paused', label: translate('Paused')},
-  {value: 'Archived', label: translate('Archived')},
+  { value: 'Draft', label: translate('Draft') },
+  { value: 'Active', label: translate('Active') },
+  { value: 'Paused', label: translate('Paused') },
+  { value: 'Archived', label: translate('Archived') },
 ];
 
 export const OfferingStateFilter = () => (
   <div className="form-group col-sm-3">
-    <label className="control-label">
-      {translate('State')}
-    </label>
+    <label className="control-label">{translate('State')}</label>
     <Field
       name="state"
       component={fieldProps => (

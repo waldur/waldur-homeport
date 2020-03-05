@@ -15,14 +15,17 @@ interface PureIssueCommentsFomrMainContainerProps extends TranslateProps {
   toggle(): void;
 }
 
-export const PureIssueCommentsFormMainContainer = (props: PureIssueCommentsFomrMainContainerProps) => {
+export const PureIssueCommentsFormMainContainer = (
+  props: PureIssueCommentsFomrMainContainerProps,
+) => {
   const { opened, toggle, formId, uiDisabled, translate } = props;
 
   return (
     <div>
       <div className="m-t-lg">
-        {opened ?
-          <span className="text-muted">{translate('Comment')}</span> :
+        {opened ? (
+          <span className="text-muted">{translate('Comment')}</span>
+        ) : (
           <button
             className="btn btn-default"
             disabled={uiDisabled}
@@ -31,12 +34,11 @@ export const PureIssueCommentsFormMainContainer = (props: PureIssueCommentsFomrM
             <i className="fa fa-comment-o" />
             <span className="p-w-xs">{translate('Add comment')}</span>
           </button>
-        }
+        )}
       </div>
       <IssueCommentsFormContainer formId={formId} />
     </div>
   );
-
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -45,7 +47,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  toggle: (): void => dispatch(actions.issueCommentsFormToggle(ownProps.formId)),
+  toggle: (): void =>
+    dispatch(actions.issueCommentsFormToggle(ownProps.formId)),
 });
 
 const enhance = compose(
@@ -53,4 +56,6 @@ const enhance = compose(
   withTranslation,
 );
 
-export const IssueCommentsFormMainContainer = enhance(PureIssueCommentsFormMainContainer);
+export const IssueCommentsFormMainContainer = enhance(
+  PureIssueCommentsFormMainContainer,
+);

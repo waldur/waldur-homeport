@@ -3,7 +3,7 @@ import template from './billing-record-header.html';
 const billingRecordHeader = {
   template,
   bindings: {
-    invoice: '<'
+    invoice: '<',
   },
   controller: class BillingRecordHeaderController {
     // @ngInject
@@ -25,23 +25,23 @@ const billingRecordHeader = {
           label: gettext('Organization workspace'),
           state: 'organization.details',
           params: {
-            uuid: customerUUID
-          }
+            uuid: customerUUID,
+          },
         },
         {
           label: gettext('Accounting records'),
           state: 'organization.billing.tabs',
           params: {
-            uuid: customerUUID
-          }
-        }
+            uuid: customerUUID,
+          },
+        },
       ];
     }
 
     printLink() {
       this.$window.print();
     }
-  }
+  },
 };
 
 export default billingRecordHeader;

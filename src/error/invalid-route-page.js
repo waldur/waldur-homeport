@@ -11,7 +11,7 @@ const invalidRoutePage = {
     goBack() {
       this.NavigationUtilsService.goBack();
     }
-  }
+  },
 };
 
 export default invalidRoutePage;

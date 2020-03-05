@@ -4,10 +4,14 @@ interface ComparisonItemRemoveButtonProps {
   onClick(): void;
 }
 
-export const ComparisonItemRemoveButton = (props: ComparisonItemRemoveButtonProps) => (
-  <a className="text-muted comparison-item-close"
+export const ComparisonItemRemoveButton = (
+  props: ComparisonItemRemoveButtonProps,
+) => (
+  <a
+    className="text-muted comparison-item-close"
     title="Remove from comparison"
-    onClick={props.onClick}>
-    <i className="fa fa-close"/>
+    onClick={props.onClick}
+  >
+    <i className="fa fa-close" />
   </a>
 );

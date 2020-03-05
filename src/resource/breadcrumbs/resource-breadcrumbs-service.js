@@ -17,9 +17,9 @@ export default class ResourceBreadcrumbsService {
         label: gettext('Project workspace'),
         state: 'project.details',
         params: {
-          uuid: resource.project_uuid
-        }
-      }
+          uuid: resource.project_uuid,
+        },
+      },
     ];
 
     const func = this.breadcrumbs[resource.resource_type];
@@ -36,10 +36,10 @@ export default class ResourceBreadcrumbsService {
           },
           {
             params: {
-              uuid: resource.project_uuid
+              uuid: resource.project_uuid,
             },
             ...this.CATEGORY_ITEMS[category],
-          }
+          },
         ]);
       }
     } else if (this.features.isVisible('marketplace')) {
@@ -53,8 +53,8 @@ export default class ResourceBreadcrumbsService {
             uuid: resource.project_uuid,
           },
           label: resource.marketplace_category_name,
-          state: 'marketplace-project-resources'
-        }
+          state: 'marketplace-project-resources',
+        },
       ]);
     }
     return items;

@@ -17,7 +17,7 @@ const authValimoTrigger = {
         component: 'authValimoDialog',
       });
     }
-  }
+  },
 };
 
 export default authValimoTrigger;

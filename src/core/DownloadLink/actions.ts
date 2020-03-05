@@ -1,8 +1,13 @@
-import { DOWNLOAD_REQUEST, DOWNLOAD_SUCCESS, DOWNLOAD_FAILURE, DOWNLOAD_RESET } from './constants';
+import {
+  DOWNLOAD_REQUEST,
+  DOWNLOAD_SUCCESS,
+  DOWNLOAD_FAILURE,
+  DOWNLOAD_RESET,
+} from './constants';
 
 export const downloadRequest = (url, filename) => ({
   type: DOWNLOAD_REQUEST,
-  payload: {url, filename},
+  payload: { url, filename },
 });
 
 export const downloadSuccess = () => ({

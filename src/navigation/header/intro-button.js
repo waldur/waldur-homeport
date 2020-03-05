@@ -6,10 +6,9 @@ export default function introButton() {
     replace: true,
     scope: {},
     controllerAs: '$ctrl',
-    controller: IntroButtonController
+    controller: IntroButtonController,
   };
 }
-
 
 class IntroButtonController {
   // @ngInject

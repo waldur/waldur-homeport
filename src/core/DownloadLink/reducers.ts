@@ -1,4 +1,9 @@
-import { DOWNLOAD_REQUEST, DOWNLOAD_SUCCESS, DOWNLOAD_FAILURE, DOWNLOAD_RESET } from './constants';
+import {
+  DOWNLOAD_REQUEST,
+  DOWNLOAD_SUCCESS,
+  DOWNLOAD_FAILURE,
+  DOWNLOAD_RESET,
+} from './constants';
 
 const INITIAL_STATE = {
   loading: false,
@@ -9,31 +14,31 @@ const INITIAL_STATE = {
 export function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case DOWNLOAD_REQUEST:
-    return {
-      loading: true,
-      loaded: false,
-      erred: false,
-    };
+      return {
+        loading: true,
+        loaded: false,
+        erred: false,
+      };
 
     case DOWNLOAD_SUCCESS:
-    return {
-      loading: false,
-      loaded: true,
-      erred: false,
-    };
+      return {
+        loading: false,
+        loaded: true,
+        erred: false,
+      };
 
     case DOWNLOAD_FAILURE:
-    return {
-      loading: false,
-      loaded: false,
-      erred: true,
-    };
+      return {
+        loading: false,
+        loaded: false,
+        erred: true,
+      };
 
     case DOWNLOAD_RESET:
-    return INITIAL_STATE;
+      return INITIAL_STATE;
 
     default:
-    return state;
+      return state;
   }
 }
 

@@ -7,12 +7,12 @@ const providerProjectLinkQuota = {
     quota: '<',
     multiplyFactor: '<',
   },
-  require:{
+  require: {
     parentForm: '^form',
   },
   controller: class ProviderProjectLinkQuotaController {
     // @ngInject
-    constructor(coreUtils, $filter){
+    constructor(coreUtils, $filter) {
       this.$filter = $filter;
       this.coreUtils = coreUtils;
       this.multiplyFactor = this.multiplyFactor || 1;
@@ -20,20 +20,21 @@ const providerProjectLinkQuota = {
     exceeds() {
       return this.quota.limit < this.quota.usage && !this.quota.unlimited;
     }
-    getUsageSummary(){
+    getUsageSummary() {
       return this.coreUtils.templateFormatter(gettext('{usage} used'), {
         usage: this.$filter('quotaValue')(this.quota.usage, this.quota.name),
       });
     }
     onLimitChange() {
       this.choice.dirty = true;
-      let limitValidity = this.quota.unlimited || this.quota.limit >= this.quota.usage;
+      let limitValidity =
+        this.quota.unlimited || this.quota.limit >= this.quota.usage;
       this.parentForm[this.quota.name].$setValidity('minLimit', limitValidity);
     }
     hasError() {
       return this.parentForm[this.quota.name].$error.minLimit;
     }
-  }
+  },
 };
 
 export default providerProjectLinkQuota;

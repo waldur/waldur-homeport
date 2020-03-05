@@ -6,11 +6,16 @@ import { UserDetails } from '@waldur/workspace/types';
 
 import { useEmailChange } from './useEmailChange';
 
-export const EmailChangeForm = ({ user }: {user: UserDetails}) => {
-  const {handleSubmit, submitting, email, setEmail} = useEmailChange(user);
+export const EmailChangeForm = ({ user }: { user: UserDetails }) => {
+  const { handleSubmit, submitting, email, setEmail } = useEmailChange(user);
 
   return (
-    <form onSubmit={event => {event.preventDefault(); handleSubmit(); }}>
+    <form
+      onSubmit={event => {
+        event.preventDefault();
+        handleSubmit();
+      }}
+    >
       {user.requested_email && (
         <div className="form-group">
           <label htmlFor="emailAddress">{translate('Requested e-mail')}</label>

@@ -5,7 +5,7 @@ const customerPopover = {
   bindings: {
     dismiss: '&',
     close: '&',
-    resolve: '<'
+    resolve: '<',
   },
   controller: class CustomerPopoverController {
     // @ngInject
@@ -14,7 +14,7 @@ const customerPopover = {
       this.customersService = customersService;
       this.options = {
         scrollY: '400px',
-        scrollCollapse: true
+        scrollCollapse: true,
       };
     }
 
@@ -26,13 +26,13 @@ const customerPopover = {
     }
 
     loadData() {
-      return this.customersService.$get(
-        this.resolve.customer_uuid
-      ).then(customer => {
-        this.customer = customer;
-      });
+      return this.customersService
+        .$get(this.resolve.customer_uuid)
+        .then(customer => {
+          this.customer = customer;
+        });
     }
-  }
+  },
 };
 
 export default customerPopover;

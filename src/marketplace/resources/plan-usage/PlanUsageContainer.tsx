@@ -7,8 +7,8 @@ import { PlanUsageList } from './PlanUsageList';
 
 const PlanUsageContainer = () => (
   <div className="ibox-content">
-    <PlanUsageFilter/>
-    <PlanUsageList/>
+    <PlanUsageFilter />
+    <PlanUsageList />
   </div>
 );
 

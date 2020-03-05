@@ -11,9 +11,6 @@ export default function createAction(): ResourceAction<Volume> {
     title: translate('Synchronise'),
     method: 'POST',
     type: 'button',
-    validators: [
-      hasBackendId,
-      validateState('OK', 'Erred'),
-    ],
+    validators: [hasBackendId, validateState('OK', 'Erred')],
   };
 }

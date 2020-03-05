@@ -16,16 +16,22 @@ export const useEmailChange = user => {
   const handleSubmit = React.useCallback(async () => {
     setSubmitting(false);
     try {
-      await post(`/users/${user.uuid}/change_email/`,  {email});
+      await post(`/users/${user.uuid}/change_email/`, { email });
     } catch (error) {
-      const errorMessage = `${translate('Unable to change email.')} ${format(error)}`;
+      const errorMessage = `${translate('Unable to change email.')} ${format(
+        error,
+      )}`;
       dispatch(showError(errorMessage));
       return;
     }
-    dispatch(showSuccess(translate('Email verification has been sent. Please check your inbox.')));
+    dispatch(
+      showSuccess(
+        translate('Email verification has been sent. Please check your inbox.'),
+      ),
+    );
     dispatch(closeModalDialog());
-    dispatch(userUpdated({...user, requested_email: email}));
+    dispatch(userUpdated({ ...user, requested_email: email }));
   }, [email]);
 
-  return {handleSubmit, submitting, email, setEmail};
+  return { handleSubmit, submitting, email, setEmail };
 };

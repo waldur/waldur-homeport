@@ -14,7 +14,7 @@ const providerIcon = {
         return this.utils.getServiceIcon(this.type);
       }
     }
-  }
+  },
 };
 
 export default providerIcon;

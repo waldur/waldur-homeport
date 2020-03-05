@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { StringField, SecretField, FormContainer} from '@waldur/form-react';
+import { StringField, SecretField, FormContainer } from '@waldur/form-react';
 
 export const OpenStackForm = ({ translate, container }) => (
   <FormContainer {...container}>
@@ -10,7 +10,9 @@ export const OpenStackForm = ({ translate, container }) => (
       label={translate('API URL')}
       required={true}
       validate={required}
-      description={translate('Keystone auth URL (e.g. http://keystone.example.com:5000/v3)')}
+      description={translate(
+        'Keystone auth URL (e.g. http://keystone.example.com:5000/v3)',
+      )}
     />
     <StringField
       name="username"
@@ -37,12 +39,16 @@ export const OpenStackForm = ({ translate, container }) => (
       label={translate('External network ID')}
       required={true}
       validate={required}
-      description={translate('It is used to automatically assign floating IP to your virtual machine.')}
+      description={translate(
+        'It is used to automatically assign floating IP to your virtual machine.',
+      )}
     />
     <StringField
       name="availability_zone"
       label={translate('Availability zone')}
-      description={translate('Default availability zone for provisioned instances.')}
+      description={translate(
+        'Default availability zone for provisioned instances.',
+      )}
     />
   </FormContainer>
 );

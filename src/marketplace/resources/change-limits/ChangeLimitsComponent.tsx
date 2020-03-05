@@ -18,8 +18,7 @@ export const ChangeLimitsComponent: React.FC<Props> = props => (
   <div>
     {props.plan ? (
       <p>
-        <strong>{translate('Current plan')}</strong>:{' '}
-        {props.plan.name}
+        <strong>{translate('Current plan')}</strong>: {props.plan.name}
       </p>
     ) : (
       <p>{translate('Resource does not have any plan.')}</p>
@@ -34,7 +33,7 @@ export const ChangeLimitsComponent: React.FC<Props> = props => (
           {props.periods.map((period, index) => (
             <th className="col-sm-1" key={index}>
               {period}
-              <PriceTooltip/>
+              <PriceTooltip />
             </th>
           ))}
         </tr>
@@ -48,13 +47,9 @@ export const ChangeLimitsComponent: React.FC<Props> = props => (
           />
         ))}
         <tr>
-          <td colSpan={4}>
-            {translate('Total')}
-          </td>
+          <td colSpan={4}>{translate('Total')}</td>
           {props.totalPeriods.map((price, index) => (
-            <td key={index}>
-              {defaultCurrency(price)}
-            </td>
+            <td key={index}>{defaultCurrency(price)}</td>
           ))}
         </tr>
       </tbody>

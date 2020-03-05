@@ -18,11 +18,13 @@ export default function projectsService($q, $http, baseServiceClass) {
       return deferred.promise;
     },
     getCounters: function(defaultQuery) {
-      let query = angular.extend({operation: 'counters'}, defaultQuery);
+      let query = angular.extend({ operation: 'counters' }, defaultQuery);
       return this.getFactory(false).get(query).$promise;
     },
     updateCertifications: function(project_url, certifications) {
-      return $http.post(project_url + 'update_certifications/', { certifications });
+      return $http.post(project_url + 'update_certifications/', {
+        certifications,
+      });
     },
   });
   return new ServiceClass();

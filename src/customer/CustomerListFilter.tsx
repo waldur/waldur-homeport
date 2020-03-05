@@ -5,7 +5,6 @@ import { reduxForm } from 'redux-form';
 
 import { AccountingPeriodField } from './AccountingPeriodField';
 import { AccountingRunningField } from './AccountingRunningField';
-
 import { AccountingPeriodOption } from './types';
 
 interface Props {
@@ -18,10 +17,10 @@ export const PureCustomerListFilter = (props: Props) => (
       <form className="form-inline">
         <Row>
           <Col sm={9}>
-            <AccountingPeriodField options={props.accountingPeriods}/>
+            <AccountingPeriodField options={props.accountingPeriods} />
           </Col>
           <Col sm={3}>
-            <AccountingRunningField/>
+            <AccountingRunningField />
           </Col>
         </Row>
       </form>

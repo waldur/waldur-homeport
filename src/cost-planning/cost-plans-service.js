@@ -10,7 +10,7 @@ export default function costPlansService($http, baseServiceClass) {
         });
         return plan;
       });
-    }
+    },
   });
   return new ServiceClass();
 }

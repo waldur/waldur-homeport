@@ -12,7 +12,9 @@ export default function IssueTypesService(ENV, usersService) {
       if (result) {
         return ISSUE_TYPE_CHOICES;
       } else {
-        return ISSUE_TYPE_CHOICES.filter(x => x.id !== ISSUE_IDS.CHANGE_REQUEST);
+        return ISSUE_TYPE_CHOICES.filter(
+          x => x.id !== ISSUE_IDS.CHANGE_REQUEST,
+        );
       }
     });
   }

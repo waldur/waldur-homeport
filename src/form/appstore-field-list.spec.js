@@ -1,55 +1,59 @@
 import appstoreFieldList from './appstore-field-list';
 
 describe('Appstore field list', () => {
-
   const API_ENDPOINT = 'https://example.com/';
 
   function initModule(module) {
     module.directive('appstoreFieldList', appstoreFieldList);
   }
 
-  initModule(angular.module('appstoreFieldListModule', ['ngResource', 'ui.router']));
+  initModule(
+    angular.module('appstoreFieldListModule', ['ngResource', 'ui.router']),
+  );
   beforeEach(angular.mock.module('appstoreFieldListModule'));
 
-  beforeEach(angular.mock.module(function ($provide) {
-    $provide.factory('$uibModal', function () {
-      return {
-      };
-    });
-    $provide.service('$uibModalStack', function(){});
-    $provide.factory('coreUtils', function () {
-      return {
-        templateFormatter: jasmine.createSpy('templateFormatter'),
-      };
-    });
-  }));
+  beforeEach(
+    angular.mock.module(function($provide) {
+      $provide.factory('$uibModal', function() {
+        return {};
+      });
+      $provide.service('$uibModalStack', function() {});
+      $provide.factory('coreUtils', function() {
+        return {
+          templateFormatter: jasmine.createSpy('templateFormatter'),
+        };
+      });
+    }),
+  );
 
   let field = {
     choices: [
       {
         fingerprint: 'e3:77:8f:90:cd:3f:6f:61:61:f2:f8:4b:cc:f8:1f:44',
         name: 'my-key',
-        public_key: 'ssh-rsa brd1oBjTIfE1Hou0K7wKa1GHJhD+HmYmmV test@example.com',
+        public_key:
+          'ssh-rsa brd1oBjTIfE1Hou0K7wKa1GHJhD+HmYmmV test@example.com',
         url: `${API_ENDPOINT}/api/keys/b5c7b66ffc6c419090557391c90dfff4/`,
         user_uuid: 'a8ed784de4474284a6088261537a6430',
-        uuid: 'b5c7b66ffc6c419090557391c90dfff4'
-      }
+        uuid: 'b5c7b66ffc6c419090557391c90dfff4',
+      },
     ],
     columns: [
       {
         label: 'Name',
-        name: 'name'
+        name: 'name',
       },
       {
         label: 'Fingerprint',
-        name: 'fingerprint'
-      }
+        name: 'fingerprint',
+      },
     ],
-    emptyMessage: 'You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.',
+    emptyMessage:
+      'You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.',
     label: 'SSH public key',
     name: 'ssh_public_key',
     preselectFirst: true,
-    type: 'list'
+    type: 'list',
   };
   let model = {};
   let $rootScope, $compile;
@@ -62,7 +66,8 @@ describe('Appstore field list', () => {
     let scope = $rootScope.$new();
     scope.field = field;
     scope.model = model;
-    let html = '<appstore-field-list field="field" model="model"></appstore-field-list>';
+    let html =
+      '<appstore-field-list field="field" model="model"></appstore-field-list>';
     let element = angular.element(html);
     element = $compile(element)(scope);
     let controller = element.controller('appstoreFieldList');

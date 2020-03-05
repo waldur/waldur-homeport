@@ -1,6 +1,13 @@
 <div class="m-b-sm">
-  <button type="button" class="btn btn-saml2 btn-block" submit-button="$ctrl.login()">
+  <button
+    type="button"
+    class="btn btn-saml2 btn-block"
+    submit-button="$ctrl.login()"
+  >
     <i class="fa fa-university" aria-hidden="true"></i>
-    <auth-button-text mode="$ctrl.mode" provider="{{$ctrl.providerLabel}}"></auth-button-text>
+    <auth-button-text
+      mode="$ctrl.mode"
+      provider="{{ $ctrl.providerLabel }}"
+    ></auth-button-text>
   </button>
 </div>

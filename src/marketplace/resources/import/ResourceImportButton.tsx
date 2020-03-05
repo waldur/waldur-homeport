@@ -20,8 +20,13 @@ const PureResourceImportButton: React.FC<Props> = props => (
 );
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  openDialog: () => dispatch(openModalDialog('marketplaceResourceImportDialog', {
-    resolve: ownProps, size: 'lg'})),
+  openDialog: () =>
+    dispatch(
+      openModalDialog('marketplaceResourceImportDialog', {
+        resolve: ownProps,
+        size: 'lg',
+      }),
+    ),
 });
 
 const connector = connect(null, mapDispatchToProps);

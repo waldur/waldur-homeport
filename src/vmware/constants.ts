@@ -20,7 +20,8 @@ export const GUEST_OS_CHOICES = {
   WIN_NET_ENTERPRISE_64: 'Windows Server 2003, Enterprise Edition (64 bit)',
   WIN_LONGHORN: 'Windows Longhorn (experimental)',
   WIN_LONGHORN_64: 'Windows Longhorn (64 bit) (experimental)',
-  WIN_NET_DATACENTER_64: 'Windows Server 2003, Datacenter Edition (64 bit) (experimental)',
+  WIN_NET_DATACENTER_64:
+    'Windows Server 2003, Datacenter Edition (64 bit) (experimental)',
   WIN_VISTA: 'Windows Vista',
   WIN_VISTA_64: 'Windows Vista (64 bit)',
   WINDOWS_7: 'Windows 7',

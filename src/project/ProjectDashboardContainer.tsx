@@ -3,7 +3,12 @@ import { createSelector } from 'reselect';
 
 import { isVisible } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { getUser, getProject, isManager, isOwnerOrStaff } from '@waldur/workspace/selectors';
+import {
+  getUser,
+  getProject,
+  isManager,
+  isOwnerOrStaff,
+} from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
 import { ProjectDashboard } from './ProjectDashboard';

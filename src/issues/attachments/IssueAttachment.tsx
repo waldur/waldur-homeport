@@ -31,26 +31,23 @@ const getThumbnail = (attachment: Attachment, openModalHandler) => {
 };
 
 export const PureIssueAttachment = (props: PureIssueAttachmentProps) => {
-  const {
-    attachment,
-    isDeleting,
-    deleteAttachment,
-    openModal,
-  } = props;
+  const { attachment, isDeleting, deleteAttachment, openModal } = props;
 
   return (
     <div className="attachment-item">
-      {isDeleting &&
+      {isDeleting && (
         <div className="attachment-item__overlay">
           <LoadingSpinner />
         </div>
-      }
+      )}
       <div className="attachment-item__thumb">
         {getThumbnail(attachment, openModal)}
       </div>
       <div className="attachment-item__description">
         <div className="attachment-item__description-name">
-          <a href={attachment.file} download="true">{utils.getFileName(attachment.file)}</a>
+          <a href={attachment.file} download="true">
+            {utils.getFileName(attachment.file)}
+          </a>
           <div className="attachment-item__delete" onClick={deleteAttachment}>
             <i className="fa fa-trash" aria-hidden="true" />
           </div>
@@ -74,9 +71,14 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    deleteAttachment: (): void => dispatch(actions.issueAttachmentsDelete(ownProps.attachment.uuid)),
-    openModal: (): void => dispatch(utils.openAttachmentModal(ownProps.attachment.file)),
+    deleteAttachment: (): void =>
+      dispatch(actions.issueAttachmentsDelete(ownProps.attachment.uuid)),
+    openModal: (): void =>
+      dispatch(utils.openAttachmentModal(ownProps.attachment.file)),
   };
 };
 
-export const IssueAttachment = connect(mapStateToProps, mapDispatchToProps)(PureIssueAttachment);
+export const IssueAttachment = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PureIssueAttachment);

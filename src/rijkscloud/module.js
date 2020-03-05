@@ -16,9 +16,9 @@ function actionConfig(ActionConfigurationProvider) {
     order: ['pull', 'destroy'],
     options: {
       pull: {
-        title: gettext('Synchronise')
+        title: gettext('Synchronise'),
       },
-    }
+    },
   };
   ActionConfigurationProvider.register('Rijkscloud.Volume', actions);
   ActionConfigurationProvider.register('Rijkscloud.Instance', actions);

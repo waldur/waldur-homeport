@@ -7,19 +7,28 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { MARKETPLACE_FILTER_FORM } from '../store/constants';
+
 import { AttributeFilterListContainer } from './AttributeFilterListContainer';
 
 const PureAttributeFilterListDialog = (props: TranslateProps) => (
-  <ModalDialog title={props.translate('Attributes filter')}
+  <ModalDialog
+    title={props.translate('Attributes filter')}
     footer={[
-      <CloseDialogButton key={1} label={props.translate('Apply')} className="btn btn-primary"/>,
+      <CloseDialogButton
+        key={1}
+        label={props.translate('Apply')}
+        className="btn btn-primary"
+      />,
       <ResetFormButton key={2} formName={MARKETPLACE_FILTER_FORM} />,
-      <CloseDialogButton key={3}/>,
-    ]}>
+      <CloseDialogButton key={3} />,
+    ]}
+  >
     <AttributeFilterListContainer />
   </ModalDialog>
 );
 
-export const AttributeFilterListDialog = withTranslation(PureAttributeFilterListDialog);
+export const AttributeFilterListDialog = withTranslation(
+  PureAttributeFilterListDialog,
+);
 
 export default connectAngularComponent(AttributeFilterListDialog);

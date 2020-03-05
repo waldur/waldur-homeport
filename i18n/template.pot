@@ -8021,7 +8021,7 @@ msgid "User {user_link} has revoked {affected_user_link}."
 msgstr ""
 
 #: src/auth/events.ts
-msgid "User {user_link} logged out  successfully with SAML2."
+msgid "User {user_link} logged out successfully with SAML2."
 msgstr ""
 
 #: src/auth/auth-login.html

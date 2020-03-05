@@ -7,12 +7,14 @@ export default function AnsibleJobsService(ENV, $http, baseServiceClass) {
     },
 
     create: function(payload) {
-      return $http.post(`${ENV.apiEndpoint}api${this.endpoint}`, payload)
+      return $http
+        .post(`${ENV.apiEndpoint}api${this.endpoint}`, payload)
         .then(response => response.data);
     },
 
     estimate: function(payload) {
-      return $http.post(`${ENV.apiEndpoint}api/ansible-estimator/`, payload)
+      return $http
+        .post(`${ENV.apiEndpoint}api/ansible-estimator/`, payload)
         .then(response => response.data);
     },
 
@@ -27,7 +29,7 @@ export default function AnsibleJobsService(ENV, $http, baseServiceClass) {
         service_project_link: provider.service_project_link_url,
       };
       return payload;
-    }
+    },
   });
   return new ServiceClass();
 }

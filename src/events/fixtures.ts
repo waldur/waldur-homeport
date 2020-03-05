@@ -10,7 +10,8 @@ export const event: Event = {
     ip_address: '8.8.8.8',
   },
   created: '2018-01-05T04:47:04.982Z',
-  message: 'User alice with full name Alice Lebowski authenticated successfully with username and password.',
+  message:
+    'User alice with full name Alice Lebowski authenticated successfully with username and password.',
 };
 
 export const eventGroups: EventGroup[] = [
@@ -19,7 +20,8 @@ export const eventGroups: EventGroup[] = [
     events: [
       {
         key: 'auth_logged_in_with_username',
-        title: 'User {user_link} authenticated successfully with username and password.',
+        title:
+          'User {user_link} authenticated successfully with username and password.',
       },
       {
         key: 'auth_logged_in_with_facebook',

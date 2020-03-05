@@ -12,7 +12,7 @@ export default function registerSidebarExtension(SidebarExtensionService) {
         parent: 'resources',
         countFieldKey: 'slurm',
         index: 1000,
-      }
+      },
     ];
   });
 }

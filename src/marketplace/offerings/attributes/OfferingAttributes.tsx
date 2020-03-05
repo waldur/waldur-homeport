@@ -32,13 +32,13 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = props => (
                 <Col smOffset={props.labelCols} sm={props.controlCols}>
                   <Field
                     name={`attributes.${attribute.key}`}
-                    component={prop =>
+                    component={prop => (
                       <AwesomeCheckbox
                         id={`attributes.${attribute.key}`}
                         label={attribute.title}
                         {...prop.input}
                       />
-                    }
+                    )}
                   />
                 </Col>
               </div>
@@ -47,7 +47,11 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = props => (
           const attr = configAttrField(attribute);
           return (
             <div className="form-group" key={attributeIndex}>
-              <Col className="control-label" sm={props.labelCols} componentClass="label">
+              <Col
+                className="control-label"
+                sm={props.labelCols}
+                componentClass="label"
+              >
                 {attribute.title}
               </Col>
               <Col sm={props.controlCols}>
@@ -62,7 +66,7 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = props => (
                   name={`attributes.${attribute.key}`}
                   {...attr}
                   component={fieldProps => (
-                    <FieldError error={fieldProps.meta.error}/>
+                    <FieldError error={fieldProps.meta.error} />
                   )}
                 />
               </Col>

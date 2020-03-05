@@ -12,8 +12,8 @@ export class OpenstackInstanceSecurityGroupsStory extends React.Component {
   };
 
   setSelectedSecurityGroups = (values: Array<Option<OptionValues>>) => {
-    this.setState({selectedSecurityGroups: values});
-  }
+    this.setState({ selectedSecurityGroups: values });
+  };
 
   render() {
     return (
@@ -22,8 +22,9 @@ export class OpenstackInstanceSecurityGroupsStory extends React.Component {
           value: this.state.selectedSecurityGroups,
           onChange: this.setSelectedSecurityGroups,
         }}
-        securityGroups={securityGroups}/>
-      );
+        securityGroups={securityGroups}
+      />
+    );
   }
 }
 

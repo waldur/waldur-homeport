@@ -20,18 +20,13 @@ export default module => {
 // @ngInject
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStack.Network', {
-    order: [
-      'edit',
-      'pull',
-      'create_subnet',
-      'destroy'
-    ],
+    order: ['edit', 'pull', 'create_subnet', 'destroy'],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
-        successMessage: gettext('Network has been updated.')
+        successMessage: gettext('Network has been updated.'),
       }),
       pull: {
-        title: gettext('Synchronise')
+        title: gettext('Synchronise'),
       },
       create_subnet: {
         title: gettext('Create subnet'),
@@ -44,7 +39,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
           allocation_pool: {
             component: 'openstackAllocationPool',
             label: gettext('Internal network allocation pool'),
-            parentField: 'cidr'
+            parentField: 'cidr',
           },
           gateway_ip: {
             type: 'string',
@@ -56,24 +51,24 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
             required: false,
             label: gettext('Do not configure a gateway for this subnet'),
           },
-        })
+        }),
       },
     },
   });
 }
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
+function tabsConfig(
+  ResourceTabsConfigurationProvider,
+  DEFAULT_SUBRESOURCE_TABS,
+) {
   ResourceTabsConfigurationProvider.register('OpenStack.Network', {
-    order: [
-      'subnets',
-      ...DEFAULT_SUBRESOURCE_TABS.order,
-    ],
+    order: ['subnets', ...DEFAULT_SUBRESOURCE_TABS.order],
     options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
       subnets: {
         heading: 'Subnets',
         component: 'openstackSubnetsList',
       },
-    })
+    }),
   });
 }

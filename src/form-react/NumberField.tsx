@@ -11,18 +11,14 @@ interface NumberFieldProps extends FormField {
 }
 
 export const NumberField = (props: NumberFieldProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, parse, format, ...rest } = props;
   const control = (
-    <input
-      {...props.input}
-      type="number"
-      className="form-control"
-      {...rest}
-    />
+    <input {...props.input} type="number" className="form-control" {...rest} />
   );
   if (props.unit) {
     return (
-      <div className="input-group" style={{maxWidth: '15em'}}>
+      <div className="input-group" style={{ maxWidth: '15em' }}>
         {control}
         <span className="input-group-addon">{props.unit}</span>
       </div>

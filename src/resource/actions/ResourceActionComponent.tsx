@@ -20,7 +20,9 @@ const getButtonClass = action => ({
   remove: action.destructive,
 });
 
-export const ResourceActionComponent = (props: ResourceActionComponentProps) => (
+export const ResourceActionComponent = (
+  props: ResourceActionComponentProps,
+) => (
   <DropdownButton
     title={translate('Actions')}
     id="actions-dropdown-btn"
@@ -41,15 +43,20 @@ export const ResourceActionComponent = (props: ResourceActionComponentProps) => 
           className={classNames(getButtonClass(props.actions[key]))}
           onSelect={() => props.onSelect(key, props.actions[key])}
         >
-          {props.actions[key].reason ?
+          {props.actions[key].reason ? (
             <>
-              <Tooltip key={key} label={props.actions[key].reason} id="action-reason">
-                <i className="fa fa-question-circle"/>
-              </Tooltip>
-              {' '}
+              <Tooltip
+                key={key}
+                label={props.actions[key].reason}
+                id="action-reason"
+              >
+                <i className="fa fa-question-circle" />
+              </Tooltip>{' '}
               {props.actions[key].title}
-            </> : props.actions[key].title
-          }
+            </>
+          ) : (
+            props.actions[key].title
+          )}
         </MenuItem>
       ))
     )}

@@ -1,4 +1,4 @@
-export const countryInfo = ({data}) => {
+export const countryInfo = ({ data }) => {
   let providers = '';
   let consumers = '';
   data.providers.map(provider => {
@@ -23,11 +23,20 @@ export const countryInfo = ({data}) => {
                   </div>
                 </div>`;
   });
-  const providersHeader = providers.length > 0 ? `<div class="ibox-title">
+  const providersHeader =
+    providers.length > 0
+      ? `<div class="ibox-title">
                                                     <h5>Providers</h5>
-                                                  </div>` : '';
-  const consumersHeader = consumers.length > 0 ? `<div class="ibox-title">
+                                                  </div>`
+      : '';
+  const consumersHeader =
+    consumers.length > 0
+      ? `<div class="ibox-title">
                                                     <h5>Consumers</h5>
-                                                  </div>` : '';
-  return `<div id="country-info" class="ibox">${providersHeader + providers + consumersHeader + consumers}</div>`;
+                                                  </div>`
+      : '';
+  return `<div id="country-info" class="ibox">${providersHeader +
+    providers +
+    consumersHeader +
+    consumers}</div>`;
 };

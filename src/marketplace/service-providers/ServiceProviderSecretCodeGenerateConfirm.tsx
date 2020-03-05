@@ -17,17 +17,36 @@ interface ServiceProviderSecretCodeRegenerateAlertProps extends TranslateProps {
   };
 }
 
-const ServiceProviderSecretCodeRegenerateAlert = withTranslation((props: ServiceProviderSecretCodeRegenerateAlertProps) => (
-  <ModalDialog title={props.translate('Alert')} footer={[
-    <ActionButton  key="2" className="btn btn-success" icon="fa fa-check" title={props.translate('Regenerate')} action={props.generateServiceProviderSecretCode}/>,
-    <CloseDialogButton key="1" className="btn btn-danger"/>,
-  ]}>
-    {props.translate('After secret API code has been regenerated, it will not be possible to submit usage with the old key.')}
-  </ModalDialog>
-));
+const ServiceProviderSecretCodeRegenerateAlert = withTranslation(
+  (props: ServiceProviderSecretCodeRegenerateAlertProps) => (
+    <ModalDialog
+      title={props.translate('Alert')}
+      footer={[
+        <ActionButton
+          key="2"
+          className="btn btn-success"
+          icon="fa fa-check"
+          title={props.translate('Regenerate')}
+          action={props.generateServiceProviderSecretCode}
+        />,
+        <CloseDialogButton key="1" className="btn btn-danger" />,
+      ]}
+    >
+      {props.translate(
+        'After secret API code has been regenerated, it will not be possible to submit usage with the old key.',
+      )}
+    </ModalDialog>
+  ),
+);
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  generateServiceProviderSecretCode: () => dispatch(actions.secretCodeRegenerateStart(ownProps.resolve.serviceProvider)),
+  generateServiceProviderSecretCode: () =>
+    dispatch(
+      actions.secretCodeRegenerateStart(ownProps.resolve.serviceProvider),
+    ),
 });
 
-export default connectAngularComponent(connect(null, mapDispatchToProps)(ServiceProviderSecretCodeRegenerateAlert), ['resolve']);
+export default connectAngularComponent(
+  connect(null, mapDispatchToProps)(ServiceProviderSecretCodeRegenerateAlert),
+  ['resolve'],
+);

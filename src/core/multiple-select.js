@@ -5,7 +5,7 @@ export default function multipleSelect() {
     template: template,
     restrict: 'A',
     scope: {
-      choices: '='
+      choices: '=',
     },
   };
 }

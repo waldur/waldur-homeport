@@ -26,8 +26,8 @@ import { Flavor } from './types';
 
 interface FormData {
   name?: string;
-  service?: {name: string};
-  image?: {name: string};
+  service?: { name: string };
+  image?: { name: string };
   flavor?: Flavor;
   attributes?: Record<string, any>;
 }
@@ -40,11 +40,19 @@ const getTotalStorage = formData =>
   formData.system_volume_size + (formData.data_volume_size || 0);
 
 const getStoragePrice = (formData, components) => {
-  const systemVolumeComponent = formData.system_volume_type ? `gigabytes_${formData.system_volume_type.name}` : 'storage';
-  const systemVolumePrice = formData.system_volume_size / 1024.0 * (components[systemVolumeComponent] || 0);
+  const systemVolumeComponent = formData.system_volume_type
+    ? `gigabytes_${formData.system_volume_type.name}`
+    : 'storage';
+  const systemVolumePrice =
+    (formData.system_volume_size / 1024.0) *
+    (components[systemVolumeComponent] || 0);
 
-  const dataVolumeComponent = formData.data_volume_type ? `gigabytes_${formData.data_volume_type.name}` : 'storage';
-  const dataVolumePrice = formData.data_volume_size / 1024.0 * (components[dataVolumeComponent] || 0);
+  const dataVolumeComponent = formData.data_volume_type
+    ? `gigabytes_${formData.data_volume_type.name}`
+    : 'storage';
+  const dataVolumePrice =
+    (formData.data_volume_size / 1024.0) *
+    (components[dataVolumeComponent] || 0);
 
   return systemVolumePrice + dataVolumePrice;
 };
@@ -57,7 +65,7 @@ const getDailyPrice = (formData, components) => {
    */
   if (components && formData.flavor) {
     const cpu = formData.flavor.cores * components.cores;
-    const ram = formData.flavor.ram * components.ram / 1024.0;
+    const ram = (formData.flavor.ram * components.ram) / 1024.0;
     const storagePrice = getStoragePrice(formData, components);
 
     return cpu + ram + storagePrice;
@@ -66,7 +74,8 @@ const getDailyPrice = (formData, components) => {
   }
 };
 
-const getMonthlyPrice = (formData, components) => getDailyPrice(formData, components) * 30;
+const getMonthlyPrice = (formData, components) =>
+  getDailyPrice(formData, components) * 30;
 
 function extendVolumeTypeQuotas(formData, usages, limits) {
   const quotas = [];
@@ -78,21 +87,24 @@ function extendVolumeTypeQuotas(formData, usages, limits) {
     }
     if (formData.system_volume_type) {
       const key = `gigabytes_${formData.system_volume_type.name}`;
-      required[key] = (required[key] || 0) + formData.system_volume_size / 1024.0;
+      required[key] =
+        (required[key] || 0) + formData.system_volume_size / 1024.0;
     }
-    Object.keys(limits).filter(key => key.startsWith('gigabytes_')).map(key => {
-      quotas.push({
-        name: key,
-        usage: usages[key] || 0,
-        limit: limits[key],
-        required: required[key] || 0,
+    Object.keys(limits)
+      .filter(key => key.startsWith('gigabytes_'))
+      .map(key => {
+        quotas.push({
+          name: key,
+          usage: usages[key] || 0,
+          limit: limits[key],
+          required: required[key] || 0,
+        });
       });
-    });
   }
   return quotas;
 }
 
-const getQuotas = ({formData, usages, limits, project, components}) => {
+const getQuotas = ({ formData, usages, limits, project, components }) => {
   const quotas: Quota[] = [
     {
       name: 'vcpu',
@@ -125,7 +137,8 @@ const getQuotas = ({formData, usages, limits, project, components}) => {
   return quotas;
 };
 
-const formDataSelector = state => (getFormValues('marketplaceOffering')(state) || {}) as FormData;
+const formDataSelector = state =>
+  (getFormValues('marketplaceOffering')(state) || {}) as FormData;
 
 const formHasFlavorSelector = state => Boolean(formDataSelector(state).flavor);
 
@@ -141,56 +154,74 @@ const flavorSelector = state => {
   return formAttrs.flavor ? formAttrs.flavor : {};
 };
 
-export const OpenstackInstanceCheckoutSummary: React.FC<OwnProps> = ({ offering }) => {
+export const OpenstackInstanceCheckoutSummary: React.FC<OwnProps> = ({
+  offering,
+}) => {
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
   const formIsValid = useSelector(formIsValidSelector);
   const formHasFlavor = useSelector(formHasFlavorSelector);
   const formData = useSelector(formAttributesSelector);
   const flavor = useSelector(flavorSelector);
-  const total = useSelector(state => pricesSelector(state, {offering})).total;
-  const components = React.useMemo(() => offering.plans.length > 0 ? offering.plans[0].prices : {}, [offering]);
-  const usages = React.useMemo(() => parseQuotasUsage(offering.quotas || []), [offering]);
-  const limits = React.useMemo(() => parseQuotas(offering.quotas || []), [offering]);
-  const dailyPrice = React.useMemo(() => getDailyPrice(formData, components), [formData, components]);
+  const total = useSelector(state => pricesSelector(state, { offering })).total;
+  const components = React.useMemo(
+    () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
+    [offering],
+  );
+  const usages = React.useMemo(() => parseQuotasUsage(offering.quotas || []), [
+    offering,
+  ]);
+  const limits = React.useMemo(() => parseQuotas(offering.quotas || []), [
+    offering,
+  ]);
+  const dailyPrice = React.useMemo(() => getDailyPrice(formData, components), [
+    formData,
+    components,
+  ]);
 
   const quotas = React.useMemo(
-    () => getQuotas({ formData, usages, limits, project, components}),
-    [formData, usages, limits, project, components]
+    () => getQuotas({ formData, usages, limits, project, components }),
+    [formData, usages, limits, project, components],
   );
 
-  const orderItem = React.useMemo(() => formatOrderItemForCreate({
-    formData: {attributes: formData},
-    offering,
-    customer,
-    project,
-    total,
-    formValid: formIsValid,
-  }), [
-    formData,
-    offering,
-    customer,
-    project,
-    total,
-    formIsValid,
-  ]);
+  const orderItem = React.useMemo(
+    () =>
+      formatOrderItemForCreate({
+        formData: { attributes: formData },
+        offering,
+        customer,
+        project,
+        total,
+        formValid: formIsValid,
+      }),
+    [formData, offering, customer, project, total, formIsValid],
+  );
 
   return (
     <>
       {!formIsValid && (
         <p id="invalid-info">
-          {formHasFlavor && translate('Resource configuration is invalid. Please fix errors in form.')}
-          {!formHasFlavor && translate('Please select flavor to see price estimate.')}
+          {formHasFlavor &&
+            translate(
+              'Resource configuration is invalid. Please fix errors in form.',
+            )}
+          {!formHasFlavor &&
+            translate('Please select flavor to see price estimate.')}
         </p>
       )}
-      {(!offering.shared && !offering.billable) && (
-        <p dangerouslySetInnerHTML={{
-          __html: translate('Note that this virtual machine will not be charged separately for {organization}.', {
-            organization: $sanitize(customer.name),
-          }),
-        }}/>
+      {!offering.shared && !offering.billable && (
+        <p
+          dangerouslySetInnerHTML={{
+            __html: translate(
+              'Note that this virtual machine will not be charged separately for {organization}.',
+              {
+                organization: $sanitize(customer.name),
+              },
+            ),
+          }}
+        />
       )}
-      <OfferingLogo src={offering.thumbnail} size="small"/>
+      <OfferingLogo src={offering.thumbnail} size="small" />
       {formIsValid && (
         <Table bordered={true}>
           <tbody>
@@ -224,37 +255,26 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OwnProps> = ({ offering 
               <td>
                 <strong>{translate('RAM')}</strong>
               </td>
-              <td>
-                {formatFilesize(flavor.ram)}
-              </td>
+              <td>{formatFilesize(flavor.ram)}</td>
             </tr>
             <tr>
               <td>
                 <strong>{translate('Total storage')}</strong>
               </td>
-              <td>
-                {formatFilesize(getTotalStorage(formData))}
-              </td>
+              <td>{formatFilesize(getTotalStorage(formData))}</td>
             </tr>
             <tr>
               <td>
-                <strong>{translate('Price per day')}</strong>
-                {' '}
-                <PriceTooltip/>
+                <strong>{translate('Price per day')}</strong> <PriceTooltip />
               </td>
-              <td>
-                {defaultCurrency(dailyPrice)}
-              </td>
+              <td>{defaultCurrency(dailyPrice)}</td>
             </tr>
             <tr>
               <td>
-                <strong>{translate('Price per 30 days')}</strong>
-                {' '}
-                <PriceTooltip/>
+                <strong>{translate('Price per 30 days')}</strong>{' '}
+                <PriceTooltip />
               </td>
-              <td>
-                {defaultCurrency(30 * dailyPrice)}
-              </td>
+              <td>{defaultCurrency(30 * dailyPrice)}</td>
             </tr>
             <tr>
               <td>
@@ -275,27 +295,31 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OwnProps> = ({ offering 
               <td>{offering.name}</td>
             </tr>
             <tr>
-            <td>
-              <strong>{translate('Service provider')}</strong>
-            </td>
-            <td>
-              <ProviderLink customer_uuid={offering.customer_uuid}>
-                {offering.customer_name}
-              </ProviderLink>
-            </td>
-          </tr>
-          {offering.rating && (
-            <tr>
-              <td><strong>{translate('Rating')}</strong></td>
-              <td><RatingStars rating={offering.rating} size="medium"/></td>
+              <td>
+                <strong>{translate('Service provider')}</strong>
+              </td>
+              <td>
+                <ProviderLink customer_uuid={offering.customer_uuid}>
+                  {offering.customer_name}
+                </ProviderLink>
+              </td>
             </tr>
-          )}
+            {offering.rating && (
+              <tr>
+                <td>
+                  <strong>{translate('Rating')}</strong>
+                </td>
+                <td>
+                  <RatingStars rating={offering.rating} size="medium" />
+                </td>
+              </tr>
+            )}
           </tbody>
         </Table>
       )}
       {components && (
         <Panel title={translate('Limits')}>
-          <QuotaUsageBarChart quotas={quotas}/>
+          <QuotaUsageBarChart quotas={quotas} />
         </Panel>
       )}
       <div className="display-flex justify-content-between">
@@ -304,7 +328,10 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OwnProps> = ({ offering 
           flavor="primary"
           disabled={!formIsValid}
         />
-        <OfferingCompareButtonContainer offering={offering} flavor="secondary"/>
+        <OfferingCompareButtonContainer
+          offering={offering}
+          flavor="secondary"
+        />
       </div>
     </>
   );

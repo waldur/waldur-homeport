@@ -12,7 +12,8 @@ function ProjectVirtualMachinesListController(
   $scope,
   $timeout,
   ENV,
-  TableExtensionService) {
+  TableExtensionService,
+) {
   let controllerScope = this;
   let ResourceController = BaseProjectResourcesTabController.extend({
     init: function() {
@@ -20,8 +21,14 @@ function ProjectVirtualMachinesListController(
       this.category = ENV.VirtualMachines;
       this._super();
       this.addRowFields([
-        'internal_ips', 'external_ips', 'floating_ips', 'internal_ips_set',
-        'flavor_name', 'cores', 'ram', 'disk'
+        'internal_ips',
+        'external_ips',
+        'floating_ips',
+        'internal_ips_set',
+        'flavor_name',
+        'cores',
+        'ram',
+        'disk',
       ]);
       $scope.$on('refreshVirtualMachinesList', function() {
         $timeout(function() {
@@ -32,7 +39,9 @@ function ProjectVirtualMachinesListController(
     getTableOptions: function() {
       let options = this._super();
       options.noDataText = gettext('You have no virtual machines yet.');
-      options.noMatchesText = gettext('No virtual machines found matching filter.');
+      options.noMatchesText = gettext(
+        'No virtual machines found matching filter.',
+      );
       options.columns.push({
         title: gettext('Internal IP'),
         orderField: 'internal_ips',
@@ -42,7 +51,7 @@ function ProjectVirtualMachinesListController(
             return '&ndash;';
           }
           return ips.join(', ');
-        }
+        },
       });
       options.columns.push({
         title: gettext('External IP'),
@@ -53,13 +62,15 @@ function ProjectVirtualMachinesListController(
             return '&ndash;';
           }
           return ips.join(', ');
-        }
+        },
       });
       return options;
     },
     getTableActions: function() {
       let actions = this._super();
-      let tableActions = TableExtensionService.getTableActions('resource-vms-list');
+      let tableActions = TableExtensionService.getTableActions(
+        'resource-vms-list',
+      );
       return actions.concat(tableActions);
     },
     getCreateTitle: function() {

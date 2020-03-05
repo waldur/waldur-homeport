@@ -6,7 +6,7 @@ import { OfferingStateFilter, getStates } from './OfferingStateFilter';
 
 const PureOfferingsFilter = () => (
   <Row>
-    <OfferingStateFilter/>
+    <OfferingStateFilter />
   </Row>
 );
 
@@ -17,4 +17,6 @@ const enhance = reduxForm({
   },
 });
 
-export const OfferingsFilter = enhance(PureOfferingsFilter) as React.ComponentType<{}>;
+export const OfferingsFilter = enhance(
+  PureOfferingsFilter,
+) as React.ComponentType<{}>;

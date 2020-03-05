@@ -15,7 +15,7 @@ export const EventField = (props: EventFieldProps) => {
     return null;
   }
   if (props.state) {
-    value = <Link state={props.state} params={props.params} label={value}/>;
+    value = <Link state={props.state} params={props.params} label={value} />;
   }
   return (
     <tr>

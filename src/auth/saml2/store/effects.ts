@@ -29,7 +29,9 @@ export function* handleSaml2LoginSaga(action) {
     if (error.status === 400) {
       errorMessage = error.data.error_message;
     } else {
-      errorMessage = `${translate('Unable to login via SAML2 protocol.')} ${format(error)}`;
+      errorMessage = `${translate(
+        'Unable to login via SAML2 protocol.',
+      )} ${format(error)}`;
     }
     yield put(showError(errorMessage));
   }

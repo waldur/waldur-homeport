@@ -5,7 +5,7 @@ export const userPopover = {
   bindings: {
     dismiss: '&',
     close: '&',
-    resolve: '<'
+    resolve: '<',
   },
   controller: class UserPopoverController {
     // @ngInject
@@ -20,15 +20,18 @@ export const userPopover = {
     loadUser() {
       if (this.resolve.user_uuid) {
         this.loading = true;
-        this.usersService.$get(this.resolve.user_uuid).then(user => {
-          this.user = user;
-        }).finally(() => {
-          this.loading = false;
-        });
+        this.usersService
+          .$get(this.resolve.user_uuid)
+          .then(user => {
+            this.user = user;
+          })
+          .finally(() => {
+            this.loading = false;
+          });
       } else {
         this.loading = false;
         this.user = this.resolve.user;
       }
     }
-  }
+  },
 };

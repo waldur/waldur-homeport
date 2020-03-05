@@ -12,14 +12,18 @@ import { getResource } from './selectors';
 export function* summarySourceFetch(action) {
   const { url } = action.payload;
   const resource = yield select(getResource, { resolve: { url } });
-  if (resource && resource.url === url) { return; }
+  if (resource && resource.url === url) {
+    return;
+  }
   yield put(actions.summaryResourceFetchStart());
   try {
     const response = yield call(api.fetchResource, url);
     yield put(actions.summaryResourceFetchSuccess(response.data));
   } catch (error) {
     yield put(actions.summaryResourceFetchError(error));
-    const message = `${translate('Unable to fetch attachment.')} ${format(error)}`;
+    const message = `${translate('Unable to fetch attachment.')} ${format(
+      error,
+    )}`;
     yield put(showError(message));
   }
 }

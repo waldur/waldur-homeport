@@ -7,8 +7,7 @@ import { formatCrontab } from '@waldur/resource/crontab';
 import { ResourceSummaryProps } from '@waldur/resource/summary';
 import { Schedule } from '@waldur/resource/types';
 
-export const getResourceIcon = type =>
-  getServiceIcon(type.split('.')[0]);
+export const getResourceIcon = type => getServiceIcon(type.split('.')[0]);
 
 const RESOURCE_TYPE_LABELS = {};
 
@@ -72,7 +71,7 @@ export const formatSummary = resource => {
 
 export const formatDefault = value => value || <span>&mdash;</span>;
 
-export const formatCommaList = (items: string []) =>
+export const formatCommaList = (items: string[]) =>
   items.length === 0 ? <span>&ndash;</span> : items.join(', ');
 
 export const formatSchedule = ({ resource }) => (
@@ -83,5 +82,7 @@ export const formatSchedule = ({ resource }) => (
 
 export const formatRetentionTime = (props: ResourceSummaryProps<Schedule>) =>
   props.resource.retention_time === 0
-  ? props.translate('Keep forever')
-  : props.translate('{number} days', {number: props.resource.retention_time});
+    ? props.translate('Keep forever')
+    : props.translate('{number} days', {
+        number: props.resource.retention_time,
+      });

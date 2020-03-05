@@ -15,7 +15,11 @@ interface EventDetailsTableProps extends TranslateProps {
 const showLink = (event, isStaffOrSupport) =>
   event.issue_link && isStaffOrSupport;
 
-export const EventDetailsTable = ({ translate, event, isStaffOrSupport }: EventDetailsTableProps) => (
+export const EventDetailsTable = ({
+  translate,
+  event,
+  isStaffOrSupport,
+}: EventDetailsTableProps) => (
   <table className="table table-borderless">
     <tbody>
       <EventField
@@ -32,10 +36,7 @@ export const EventDetailsTable = ({ translate, event, isStaffOrSupport }: EventD
         label={translate('IP address')}
         value={event.context.ip_address}
       />
-      <EventField
-        label={translate('Event type')}
-        value={event.event_type}
-      />
+      <EventField label={translate('Event type')} value={event.event_type} />
       <EventField
         label={translate('Error message')}
         value={event.context.error_message}
@@ -69,13 +70,17 @@ export const EventDetailsTable = ({ translate, event, isStaffOrSupport }: EventD
         label={translate('Resource configuration')}
         value={event.context.resource_configuration}
       />
-      <EventField
-        label={translate('Message')}
-        value={event.message}
-      />
+      <EventField label={translate('Message')} value={event.message} />
       <EventField
         label={translate('Issue link')}
-        value={showLink(event, isStaffOrSupport) && <ExternalLink label={translate('Open')} url={event.context.issue_link}/>}
+        value={
+          showLink(event, isStaffOrSupport) && (
+            <ExternalLink
+              label={translate('Open')}
+              url={event.context.issue_link}
+            />
+          )
+        }
       />
     </tbody>
   </table>

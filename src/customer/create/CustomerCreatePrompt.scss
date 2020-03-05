@@ -2,14 +2,14 @@
   label {
     width: 100%;
   }
-  .checked .message-button{
+  .checked .message-button {
     background-color: #337ab7;
     border-color: #337ab7;
     color: #fff;
   }
 }
 
-@media(min-width: 769px) and (max-width: 1000px) {
+@media (min-width: 769px) and (max-width: 1000px) {
   .customer-create-prompt {
     .message-button {
       min-height: 299px;

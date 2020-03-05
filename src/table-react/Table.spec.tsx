@@ -23,17 +23,17 @@ describe('Table', () => {
 
   describe('special states', () => {
     it('renders spinner if list is loading', () => {
-      const wrapper = shallow(<Table {...defaultProps} loading={true}/>);
-      expect(wrapper.contains(<LoadingSpinner/>)).toBe(true);
+      const wrapper = shallow(<Table {...defaultProps} loading={true} />);
+      expect(wrapper.contains(<LoadingSpinner />)).toBe(true);
     });
 
     it('renders message if loading failed', () => {
-      const wrapper = shallow(<Table {...defaultProps} error="Not found"/>);
+      const wrapper = shallow(<Table {...defaultProps} error="Not found" />);
       expect(wrapper.contains('Unable to fetch data.')).toBe(true);
     });
 
     it('renders message if list is empty', () => {
-      const wrapper = mount(<Table {...defaultProps}/>);
+      const wrapper = mount(<Table {...defaultProps} />);
       expect(wrapper.contains('There are no items yet.')).toBe(true);
     });
 
@@ -43,10 +43,13 @@ describe('Table', () => {
     });
 
     it('renders custom message if list is empty and verboseName is set and query is set', () => {
-      const wrapper = mount(<Table {...defaultProps} verboseName="projects" query="my projects" />);
-      expect(wrapper.contains('There are no projects found matching the filter.')).toBe(true);
+      const wrapper = mount(
+        <Table {...defaultProps} verboseName="projects" query="my projects" />,
+      );
+      expect(
+        wrapper.contains('There are no projects found matching the filter.'),
+      ).toBe(true);
     });
-
   });
 
   describe('data rendering', () => {
@@ -79,8 +82,9 @@ describe('Table', () => {
               type: 'OpenStack Instance',
               name: 'Web server',
             },
-          ]}/>
-        );
+          ]}
+        />,
+      );
     });
 
     it('renders column headers', () => {

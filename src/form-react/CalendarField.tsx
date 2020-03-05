@@ -1,12 +1,17 @@
-import {EventInput} from '@fullcalendar/core';
+import { EventInput } from '@fullcalendar/core';
 import * as React from 'react';
-import {FieldArray, WrappedFieldArrayProps} from 'redux-form';
+import { FieldArray, WrappedFieldArrayProps } from 'redux-form';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
-import {CalendarEventModal} from '@waldur/booking/components/modal/CalendarEventModal';
-import { eventsMapper, createCalendarBookingEvent, availabilityCellRender, deleteCalendarBookingEvent } from '@waldur/booking/utils';
+import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
+import {
+  eventsMapper,
+  createCalendarBookingEvent,
+  availabilityCellRender,
+  deleteCalendarBookingEvent,
+} from '@waldur/booking/utils';
 import { Event } from '@waldur/events/types';
-import {withModal} from '@waldur/modal/withModal';
+import { withModal } from '@waldur/modal/withModal';
 
 type CalendarComponentProps = WrappedFieldArrayProps<any> & {
   excludedEvents?: Event[];
@@ -16,7 +21,6 @@ type CalendarComponentProps = WrappedFieldArrayProps<any> & {
 };
 
 export class CalendarComponent extends React.Component<CalendarComponentProps> {
-
   state = {
     view: {
       type: undefined,
@@ -26,17 +30,22 @@ export class CalendarComponent extends React.Component<CalendarComponentProps> {
   deleteBooking = e => deleteCalendarBookingEvent(this.props.fields, e);
 
   handleBooking = event => {
-    this.props.setModalProps({ event, destroy: () => this.deleteBooking(event) });
+    this.props.setModalProps({
+      event,
+      destroy: () => this.deleteBooking(event),
+    });
     this.props.openModal(onSuccess => {
-      this.props.fields.push(createCalendarBookingEvent({ ...event.extendedProps, ...onSuccess }));
+      this.props.fields.push(
+        createCalendarBookingEvent({ ...event.extendedProps, ...onSuccess }),
+      );
       this.deleteBooking(event);
     });
-  }
+  };
 
   getValidRange = events => ({
     start: Math.min(...events.map(event => Date.parse(event.start))),
     end: Math.max(...events.map(event => Date.parse(event.end))),
-  })
+  });
 
   render() {
     const { excludedEvents, fields } = this.props;
@@ -53,14 +62,20 @@ export class CalendarComponent extends React.Component<CalendarComponentProps> {
         eventResizableFromStart={false}
         events={events}
         eventLimit={false}
-        dayRender={({date, el}) => availabilityCellRender(events, ({date, el}))}
+        dayRender={({ date, el }) =>
+          availabilityCellRender(events, { date, el })
+        }
         validRange={this.getValidRange(events)}
-        viewSkeletonRender={({view}) => {
+        viewSkeletonRender={({ view }) => {
           if (view.type !== this.state.view.type) {
             this.setState({ view });
           }
         }}
-        select={event => fields.push(createCalendarBookingEvent({...event, type: 'ScheduleBooking'}))}
+        select={event =>
+          fields.push(
+            createCalendarBookingEvent({ ...event, type: 'ScheduleBooking' }),
+          )
+        }
         eventClick={e => this.handleBooking(e.event)}
       />
     );

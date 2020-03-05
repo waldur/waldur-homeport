@@ -10,16 +10,22 @@ const initialProps = {
   formId: constants.MAIN_FORM_ID,
   translate,
 };
-const renderWrapper = (props?) => shallow(<PureIssueCommentsFormMainContainer {...initialProps} {...props} />);
+const renderWrapper = (props?) =>
+  shallow(<PureIssueCommentsFormMainContainer {...initialProps} {...props} />);
 
-const clickTogglerButton = container => container.find('.btn.btn-default').simulate('click');
-const hasOpenedContent = container => container.contains(<span className="text-muted">{translate('Comment')}</span>);
-const hasClosedContent = container => container.contains(
-  <button className="btn btn-default">
-    <i className="fa fa-comment-o" />
-    <span className="p-w-xs">{translate('Add comment')}</span>
-  </button>
-);
+const clickTogglerButton = container =>
+  container.find('.btn.btn-default').simulate('click');
+const hasOpenedContent = container =>
+  container.contains(
+    <span className="text-muted">{translate('Comment')}</span>,
+  );
+const hasClosedContent = container =>
+  container.contains(
+    <button className="btn btn-default">
+      <i className="fa fa-comment-o" />
+      <span className="p-w-xs">{translate('Add comment')}</span>
+    </button>,
+  );
 
 describe('IssueCommentsFormMainContainer', () => {
   it('toggle content', () => {

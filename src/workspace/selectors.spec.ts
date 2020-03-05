@@ -16,7 +16,7 @@ describe('isOwnerOrStaff selector', () => {
   };
 
   it('returns true if user is staff', () => {
-    const workspace = {user: staff};
+    const workspace = { user: staff };
     const actual = isOwnerOrStaff({ workspace });
     expect(actual).toBe(true);
   });

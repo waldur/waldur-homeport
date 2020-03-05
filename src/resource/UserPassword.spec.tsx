@@ -10,7 +10,7 @@ describe('UserPassword', () => {
   const getIcon = () => wrapper.find('a').prop('className');
 
   beforeEach(() => {
-    wrapper = mount(<UserPassword password="secret"/>);
+    wrapper = mount(<UserPassword password="secret" />);
   });
 
   it('renders placeholder and open eye icon by default', () => {

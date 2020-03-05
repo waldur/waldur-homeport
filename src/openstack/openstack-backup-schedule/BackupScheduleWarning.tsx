@@ -8,14 +8,16 @@ const BackupScheduleWarning = () => (
   <Panel id="backup-schedule-message">
     <Panel.Heading>
       <Panel.Title toggle={true}>
-        <i className="fa fa-warning"/>
-        {' '}
-        {translate('Backup schedule caveats')}
+        <i className="fa fa-warning" /> {translate('Backup schedule caveats')}
       </Panel.Title>
     </Panel.Heading>
     <Panel.Collapse>
       <Panel.Body>
-        <div dangerouslySetInnerHTML={{__html: require('./BackupScheduleWarning.md')}}/>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: require('./BackupScheduleWarning.md'),
+          }}
+        />
       </Panel.Body>
     </Panel.Collapse>
   </Panel>

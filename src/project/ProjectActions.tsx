@@ -43,8 +43,11 @@ export const ProjectActions = (props: ProjectActionsProps) => {
   const actions = [
     getDetailsAction(props.project),
     getTeamAction(props),
-    getIssueAction({issue: {project: props.project}, state: 'project.issues'}),
+    getIssueAction({
+      issue: { project: props.project },
+      state: 'project.issues',
+    }),
     getSupportPortalAction(),
   ].filter(action => action !== undefined);
-  return <ActionList actions={actions}/>;
+  return <ActionList actions={actions} />;
 };

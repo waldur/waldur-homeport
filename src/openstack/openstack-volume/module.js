@@ -29,29 +29,23 @@ function actionsConfig(ActionConfigurationProvider) {
 // @ngInject
 function stateConfig(ResourceStateConfigurationProvider) {
   ResourceStateConfigurationProvider.register('OpenStackTenant.Volume', {
-    error_states: [
-      'error'
-    ]
+    error_states: ['error'],
   });
 }
 
 // @ngInject
 function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('OpenStackTenant.Volume', {
-    order: [
-      'snapshots',
-      'snapshot_schedules',
-      ...DEFAULT_RESOURCE_TABS.order,
-    ],
+    order: ['snapshots', 'snapshot_schedules', ...DEFAULT_RESOURCE_TABS.order],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       snapshots: {
         heading: gettext('Snapshots'),
-        component: 'openstackVolumeSnapshots'
+        component: 'openstackVolumeSnapshots',
       },
       snapshot_schedules: {
         heading: gettext('Snapshot schedules'),
-        component: 'openstackSnapshotSchedulesList'
+        component: 'openstackSnapshotSchedulesList',
       },
-    })
+    }),
   });
 }

@@ -8,11 +8,19 @@ export default {
 };
 
 // @ngInject
-function InvitationRejectController($state, $stateParams, invitationService, ncUtilsFlash) {
-  invitationService.reject($stateParams.token).then(function() {
-    ncUtilsFlash.info(translate('Invitation has been rejectd.'));
-    $state.go('login');
-  }, function() {
-    ncUtilsFlash.error(translate('Unable to reject invitation.'));
-  });
+function InvitationRejectController(
+  $state,
+  $stateParams,
+  invitationService,
+  ncUtilsFlash,
+) {
+  invitationService.reject($stateParams.token).then(
+    function() {
+      ncUtilsFlash.info(translate('Invitation has been rejectd.'));
+      $state.go('login');
+    },
+    function() {
+      ncUtilsFlash.error(translate('Unable to reject invitation.'));
+    },
+  );
 }

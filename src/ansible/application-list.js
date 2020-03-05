@@ -16,7 +16,8 @@ function ApplicationListController(
   ENV,
   currentStateService,
   ApplicationService,
-  AnsibleJobsService) {
+  AnsibleJobsService,
+) {
   let controllerScope = this;
   let Controller = baseControllerListClass.extend({
     init: function() {
@@ -51,7 +52,7 @@ function ApplicationListController(
         {
           title: gettext('Name'),
           orderField: 'name',
-          render: row => this.buildLinkTag(row)
+          render: row => this.buildLinkTag(row),
         },
         {
           title: gettext('Playbook'),
@@ -60,7 +61,7 @@ function ApplicationListController(
             if (applicationType === APPLICATION_TYPE.PLAYBOOK_JOB) {
               return row.playbook_name;
             }
-          }
+          },
         },
         {
           title: gettext('State'),
@@ -68,36 +69,36 @@ function ApplicationListController(
           render: row => {
             const index = this.findIndexById(row);
             return this.buildStateTag(index);
-          }
+          },
         },
         {
           title: gettext('Creation date'),
           orderField: 'created',
           render: function(row) {
             return $filter('dateTime')(row.created);
-          }
-        }
+          },
+        },
       ];
     },
-    buildStateTag: function (index, applicationType) {
+    buildStateTag: function(index, applicationType) {
       if (applicationType === APPLICATION_TYPE.PLAYBOOK_JOB) {
         return `<ansible-job-state model="controller.list[${index}]"></ansible-job-state>`;
       }
     },
-    buildLinkTag: function (row) {
+    buildLinkTag: function(row) {
       const applicationType = this.getApplicationType(row);
       return '<a href="{href}">{name}</a>'
         .replace('{href}', this.buildStateTransition(row, applicationType))
         .replace('{name}', this.buildLinkName(row, applicationType));
     },
-    buildLinkName: function (row) {
+    buildLinkName: function(row) {
       return row.name;
     },
-    buildStateTransition: function (row, applicationType) {
+    buildStateTransition: function(row, applicationType) {
       if (applicationType === APPLICATION_TYPE.PLAYBOOK_JOB) {
         return $state.href('project.resources.ansible.details', {
           uuid: this.project.uuid,
-          jobId: row.uuid
+          jobId: row.uuid,
         });
       }
     },
@@ -117,13 +118,13 @@ function ApplicationListController(
           title: gettext('Remove application'),
           iconClass: 'fa fa-trash',
           callback: this.remove.bind(controllerScope),
-          isDisabled: (app) => !checkState(app),
-          tooltip: (app) => {
+          isDisabled: app => !checkState(app),
+          tooltip: app => {
             if (!checkState(app)) {
               return gettext('Please wait until provisioning is completed.');
             }
-          }
-        }
+          },
+        },
       ];
     },
     getTableActions: function() {
@@ -139,7 +140,7 @@ function ApplicationListController(
       if (row.type === 'playbook_job') {
         return APPLICATION_TYPE.PLAYBOOK_JOB;
       }
-    }
+    },
   });
   controllerScope.__proto__ = new Controller();
 }

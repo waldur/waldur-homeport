@@ -46,7 +46,7 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Resources')}
-      initialSorting={{field: 'created', mode: 'desc'}}
+      initialSorting={{ field: 'created', mode: 'desc' }}
       showPageSizeSelector={true}
     />
   );
@@ -55,10 +55,13 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ProjectResourcesList',
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: props => props.project ? ({
-    project_uuid: props.project.uuid,
-    state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
-  }) : {},
+  mapPropsToFilter: props =>
+    props.project
+      ? {
+          project_uuid: props.project.uuid,
+          state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+        }
+      : {},
 };
 
 const mapStateToProps = state => ({

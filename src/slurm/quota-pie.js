@@ -4,20 +4,21 @@ export default function quotaPie() {
   return {
     restrict: 'E',
     scope: {
-      value: '<'
+      value: '<',
     },
-    template: '<svg viewBox="-1 -1 2.1 2.1" style="transform: rotate(-90deg); height: 15px"></svg>',
+    template:
+      '<svg viewBox="-1 -1 2.1 2.1" style="transform: rotate(-90deg); height: 15px"></svg>',
     link: function(scope, element) {
       const svgEl = element[0].querySelector('svg');
 
       const slices = [
         {
           percent: scope.value,
-          color: 'Coral'
+          color: 'Coral',
         },
         {
           percent: 1 - scope.value,
-          color: '#00ab6b'
+          color: '#00ab6b',
         },
       ];
       let cumulativePercent = 0;
@@ -38,7 +39,7 @@ export default function quotaPie() {
         const [endX, endY] = getCoordinatesForPercent(cumulativePercent);
 
         // if the slice is more than 50%, take the large arc (the long way around)
-        const largeArcFlag = slice.percent > .5 ? 1 : 0;
+        const largeArcFlag = slice.percent > 0.5 ? 1 : 0;
 
         // create an array and join it just for code readability
         const pathData = [
@@ -48,11 +49,14 @@ export default function quotaPie() {
         ].join(' ');
 
         // create a <path> and append it to the <svg> element
-        const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const pathEl = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'path',
+        );
         pathEl.setAttribute('d', pathData);
         pathEl.setAttribute('fill', slice.color);
         svgEl.appendChild(pathEl);
       });
-    }
+    },
   };
 }

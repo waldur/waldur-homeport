@@ -11,21 +11,21 @@ const parseQuotaName = name => quotaNames[name] || name;
 
 export const parseQuotas = listToDict(
   item => parseQuotaName(item.name),
-  item => item.limit
+  item => item.limit,
 );
 
 export const parseQuotasUsage = listToDict(
   item => parseQuotaName(item.name),
-  item => item.usage
+  item => item.usage,
 );
 
 export const PRIVATE_CIDR_PATTERN = new RegExp(
   // Class A
-  '(^(10)(\.([2]([0-5][0-5]|[01234][6-9])|[1][0-9][0-9]|[1-9][0-9]|[0-9])){2}\.0/24$)' +
-  // Class B
-  '|(^(172)\.(1[6-9]|2[0-9]|3[0-1])(\.(2[0-4][0-9]|25[0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9]))\.0/24$)' +
-  // Class C
-  '|(^(192)\.(168)(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]))\.0/24$)'
+  '(^(10)(.([2]([0-5][0-5]|[01234][6-9])|[1][0-9][0-9]|[1-9][0-9]|[0-9])){2}.0/24$)' +
+    // Class B
+    '|(^(172).(1[6-9]|2[0-9]|3[0-1])(.(2[0-4][0-9]|25[0-5]|[1][0-9][0-9]|[1-9][0-9]|[0-9])).0/24$)' +
+    // Class C
+    '|(^(192).(168)(.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])).0/24$)',
 );
 
 export const validatePrivateSubnetCIDR = value => {

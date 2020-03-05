@@ -44,4 +44,7 @@ export const setOrderStateFilter = (formName, filterOption) =>
   change(formName, 'state', filterOption);
 
 export const showTermsOfServiceDialog = (content: string) =>
-  openModalDialog('marketplaceTermsOfServiceDialog', {resolve: {content}, size: 'md'});
+  openModalDialog('marketplaceTermsOfServiceDialog', {
+    resolve: { content },
+    size: 'md',
+  });

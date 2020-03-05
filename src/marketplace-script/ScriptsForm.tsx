@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { FieldArray } from 'redux-form';
 
-import { FormContainer, SelectField} from '@waldur/form-react';
+import { FormContainer, SelectField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { getForm } from '@waldur/marketplace/offerings/store/selectors';
 
@@ -54,12 +54,14 @@ export const ScriptsForm = ({ container }) => {
         />
         <AceField
           name="pull"
-          label={translate('Script for regular update of resource and its accounting')}
+          label={translate(
+            'Script for regular update of resource and its accounting',
+          )}
           required={true}
           mode={language}
         />
       </FormContainer>
-      <FieldArray name="environ" component={EnvironmentVariablesList}/>
+      <FieldArray name="environ" component={EnvironmentVariablesList} />
     </>
   );
 };

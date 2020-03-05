@@ -11,10 +11,17 @@ export default function snapshotCreateDialog() {
 }
 
 // @ngInject
-function SnapshotCreateDialogController(ENV, $q, $rootScope, $scope, resourcesService, actionUtilsService) {
+function SnapshotCreateDialogController(
+  ENV,
+  $q,
+  $rootScope,
+  $scope,
+  resourcesService,
+  actionUtilsService,
+) {
   $scope.pattern = ENV.enforceLatinName && LATIN_NAME_PATTERN;
   $scope.snapshot = {
-    name: $scope.resource.name + '-snapshot'
+    name: $scope.resource.name + '-snapshot',
   };
   $scope.submitForm = function() {
     if ($scope.SnapshotForm.$invalid) {
@@ -23,13 +30,16 @@ function SnapshotCreateDialogController(ENV, $q, $rootScope, $scope, resourcesSe
     let form = resourcesService.$create($scope.action.url);
     form.name = $scope.snapshot.name;
     form.description = $scope.snapshot.description;
-    return form.$save().then(() => {
-      actionUtilsService.handleActionSuccess($scope.action);
-      $scope.errors = {};
-      $scope.$close();
-      $scope.controller.reInitResource($scope.resource);
-    }).catch(response => {
-      $scope.errors = response.data;
-    });
+    return form
+      .$save()
+      .then(() => {
+        actionUtilsService.handleActionSuccess($scope.action);
+        $scope.errors = {};
+        $scope.$close();
+        $scope.controller.reInitResource($scope.resource);
+      })
+      .catch(response => {
+        $scope.errors = response.data;
+      });
   };
 }

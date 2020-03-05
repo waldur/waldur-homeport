@@ -7,11 +7,13 @@ const resourcePrivateCloudsList = {
 export default resourcePrivateCloudsList;
 
 // @ngInject
-function ProjectPrivateCloudsTabController($scope,
-                                           $timeout,
-                                           BaseProjectResourcesTabController,
-                                           ENV,
-                                           TableExtensionService) {
+function ProjectPrivateCloudsTabController(
+  $scope,
+  $timeout,
+  BaseProjectResourcesTabController,
+  ENV,
+  TableExtensionService,
+) {
   let controllerScope = this;
   let ResourceController = BaseProjectResourcesTabController.extend({
     init: function() {
@@ -28,17 +30,21 @@ function ProjectPrivateCloudsTabController($scope,
     getTableOptions: function() {
       let options = this._super();
       options.noDataText = gettext('You have no private clouds yet.');
-      options.noMatchesText = gettext('No private clouds found matching filter.');
+      options.noMatchesText = gettext(
+        'No private clouds found matching filter.',
+      );
       return options;
     },
     getTableActions: function() {
       let actions = this._super();
-      let tableActions = TableExtensionService.getTableActions('resource-private-clouds-list');
+      let tableActions = TableExtensionService.getTableActions(
+        'resource-private-clouds-list',
+      );
       return actions.concat(tableActions);
     },
     getCreateTitle: function() {
       return gettext('Add private cloud');
-    }
+    },
   });
   controllerScope.__proto__ = new ResourceController();
 }

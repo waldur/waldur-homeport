@@ -1,13 +1,18 @@
 import { Option } from '@waldur/marketplace/common/registry';
-import { AttributesType, Category, OfferingComponent, OfferingOptions } from '@waldur/marketplace/types';
+import {
+  AttributesType,
+  Category,
+  OfferingComponent,
+  OfferingOptions,
+} from '@waldur/marketplace/types';
 
 export interface PlanFormData {
   archived: boolean;
   name: string;
   unit: Option;
   unit_price: number;
-  prices: {[key: string]: number};
-  quotas: {[key: string]: number};
+  prices: { [key: string]: number };
+  quotas: { [key: string]: number };
   description?: string;
   article_code?: string;
   product_code?: string;
@@ -31,7 +36,7 @@ export interface ScheduleFormData {
   id: string;
 }
 
-export type OfferingLimits = Record<string, {min: number; max: number}>;
+export type OfferingLimits = Record<string, { min: number; max: number }>;
 
 export interface OfferingFormData {
   name: string;
@@ -63,8 +68,8 @@ export interface PlanRequest {
   name: string;
   unit: string;
   unit_price: number;
-  quotas?: {[key: string]: number};
-  prices?: {[key: string]: number};
+  quotas?: { [key: string]: number };
+  prices?: { [key: string]: number };
   description?: string;
   article_code?: string;
   product_code?: string;

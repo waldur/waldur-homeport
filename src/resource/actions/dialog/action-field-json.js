@@ -1,7 +1,7 @@
 import template from './action-field-json.html';
 
 class ActionFieldJsonController {
-  validateJSON () {
+  validateJSON() {
     try {
       JSON.parse(this.model[this.field.name]);
       this.form[this.field.name].$setValidity('valid', true);

@@ -1,7 +1,12 @@
 const invitationStorageToken = 'ncInvitationToken';
 
 // @ngInject
-export default function invitationService(baseServiceClass, $http, ENV, $window) {
+export default function invitationService(
+  baseServiceClass,
+  $http,
+  ENV,
+  $window,
+) {
   let ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
@@ -12,7 +17,7 @@ export default function invitationService(baseServiceClass, $http, ENV, $window)
     },
     accept: function(invitation_uuid, replace_email) {
       return this.executeAction(invitation_uuid, 'accept', {
-        replace_email: replace_email
+        replace_email: replace_email,
       });
     },
     cancel: function(invitation_uuid) {
@@ -22,13 +27,20 @@ export default function invitationService(baseServiceClass, $http, ENV, $window)
       return this.executeAction(invitation_uuid, 'send');
     },
     approve: function(token) {
-      return $http.post(`${ENV.apiEndpoint}api/user-invitations/approve/`, {token});
+      return $http.post(`${ENV.apiEndpoint}api/user-invitations/approve/`, {
+        token,
+      });
     },
     reject: function(token) {
-      return $http.post(`${ENV.apiEndpoint}api/user-invitations/reject/`, {token});
+      return $http.post(`${ENV.apiEndpoint}api/user-invitations/reject/`, {
+        token,
+      });
     },
     executeAction: function(invitation_uuid, action, data) {
-      return $http.post(`${ENV.apiEndpoint}api/user-invitations/${invitation_uuid}/${action}/`, data);
+      return $http.post(
+        `${ENV.apiEndpoint}api/user-invitations/${invitation_uuid}/${action}/`,
+        data,
+      );
     },
     setInvitationToken: function(invitationUUID) {
       if (invitationUUID) {
@@ -40,7 +52,7 @@ export default function invitationService(baseServiceClass, $http, ENV, $window)
     },
     clearInvitationToken: function() {
       $window.localStorage.removeItem(invitationStorageToken);
-    }
+    },
   });
   return new ServiceClass();
 }

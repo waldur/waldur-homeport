@@ -1,7 +1,13 @@
 import { loadDatatables } from '@waldur/shims/load-datatables';
 
 // @ngInject
-export default function baseControllerListClass(ENV, $rootScope, currentStateService, ncUtils, ncUtilsFlash) {
+export default function baseControllerListClass(
+  ENV,
+  $rootScope,
+  currentStateService,
+  ncUtils,
+  ncUtilsFlash,
+) {
   /**
    * Use controllerScope.__proto__ = new Controller() in needed controller
    * use this.controllerScope for changes in event handler
@@ -34,7 +40,9 @@ export default function baseControllerListClass(ENV, $rootScope, currentStateSer
       this.hideNoDataText = true;
       this.initialized = false;
       loadDatatables().then(() => {
-        this.listPromise = this.getList().finally(() => this.initialized = true);
+        this.listPromise = this.getList().finally(
+          () => (this.initialized = true),
+        );
         this.blockListElement();
       });
       // reset after state change
@@ -73,9 +81,11 @@ export default function baseControllerListClass(ENV, $rootScope, currentStateSer
       return {};
     },
     getChosenUserFilter: function() {
-      let filters = {...this.selectFilter.value};
+      let filters = { ...this.selectFilter.value };
       if (this.userFilter.choices) {
-        const values = this.userFilter.choices.filter(x => x.chosen).map(x => x.value);
+        const values = this.userFilter.choices
+          .filter(x => x.chosen)
+          .map(x => x.value);
         filters[this.userFilter.name] = values;
       }
       return filters;
@@ -85,10 +95,18 @@ export default function baseControllerListClass(ENV, $rootScope, currentStateSer
       filter = filter || {};
       this.orderField = filter.o || this.orderField;
       this.service.cacheTime = this.cacheTime;
-      filter = angular.extend(filter, this.getChosenUserFilter(), this.getFilter());
+      filter = angular.extend(
+        filter,
+        this.getChosenUserFilter(),
+        this.getFilter(),
+      );
       this.listPromise = this.service.getList(filter).then(response => {
         if (this.mergeListFieldIdentifier) {
-          this.list = ncUtils.mergeLists(this.list, response, this.mergeListFieldIdentifier);
+          this.list = ncUtils.mergeLists(
+            this.list,
+            response,
+            this.mergeListFieldIdentifier,
+          );
         } else {
           this.list = response;
         }
@@ -97,8 +115,8 @@ export default function baseControllerListClass(ENV, $rootScope, currentStateSer
           this.controllerScope.onListReceive({
             $event: {
               filter: filter,
-              response: response
-            }
+              response: response,
+            },
           });
         }
         this.hideNoDataText = false;
@@ -141,9 +159,11 @@ export default function baseControllerListClass(ENV, $rootScope, currentStateSer
     blockListElement: function() {
       if (this.listPromise && this.listPromise.finally) {
         this.loading = true;
-        this.listPromise.finally(function() {
-          this.loading = false;
-        }.bind(this));
+        this.listPromise.finally(
+          function() {
+            this.loading = false;
+          }.bind(this),
+        );
       }
     },
     afterGetList: function() {},
@@ -175,7 +195,8 @@ export default function baseControllerListClass(ENV, $rootScope, currentStateSer
       }
 
       if (this.list.length === 0 && this.currentPage > 1) {
-        this.controllerScope.service.page = this.controllerScope.currentPage = this.currentPage - 1;
+        this.controllerScope.service.page = this.controllerScope.currentPage =
+          this.currentPage - 1;
         this.controllerScope.getList();
       }
 
@@ -203,7 +224,7 @@ export default function baseControllerListClass(ENV, $rootScope, currentStateSer
         let message = response.data.detail || response.data.status;
         ncUtilsFlash.error(message);
       }
-    }
+    },
   });
 
   return ControllerListClass;

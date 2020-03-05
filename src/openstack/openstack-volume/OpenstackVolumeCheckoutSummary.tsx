@@ -33,13 +33,16 @@ const getDailyPrice = (formData, components) => {
     return 0;
   }
   const size = formData.size / 1024.0;
-  const component = formData.type ? `gigabytes_${formData.type.name}` : 'storage';
+  const component = formData.type
+    ? `gigabytes_${formData.type.name}`
+    : 'storage';
   return size * (components[component] || 0);
 };
 
-const getMonthlyPrice = (formData, components) => getDailyPrice(formData, components) * 30;
+const getMonthlyPrice = (formData, components) =>
+  getDailyPrice(formData, components) * 30;
 
-const getQuotas = ({formData, usages, limits, project, components}) => {
+const getQuotas = ({ formData, usages, limits, project, components }) => {
   const quotas: Quota[] = [
     {
       name: 'storage',
@@ -54,14 +57,16 @@ const getQuotas = ({formData, usages, limits, project, components}) => {
       const key = `gigabytes_${formData.type.name}`;
       required[key] = (required[key] || 0) + formData.size / 1024.0;
     }
-    Object.keys(limits).filter(key => key.startsWith('gigabytes_')).map(key => {
-      quotas.push({
-        name: key,
-        usage: usages[key] || 0,
-        limit: limits[key],
-        required: required[key] || 0,
+    Object.keys(limits)
+      .filter(key => key.startsWith('gigabytes_'))
+      .map(key => {
+        quotas.push({
+          name: key,
+          usage: usages[key] || 0,
+          limit: limits[key],
+          required: required[key] || 0,
+        });
       });
-    });
   }
   if (project && project.billing_price_estimate) {
     quotas.push({
@@ -78,7 +83,8 @@ interface OwnProps {
   offering: Offering;
 }
 
-const formDataSelector = state => (getFormValues('marketplaceOffering')(state) || {}) as any;
+const formDataSelector = state =>
+  (getFormValues('marketplaceOffering')(state) || {}) as any;
 
 const formIsValidSelector = state => isValid('marketplaceOffering')(state);
 
@@ -87,52 +93,67 @@ const formAttributesSelector = state => {
   return formData && formData.attributes ? formData.attributes : {};
 };
 
-export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({ offering }) => {
+export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({
+  offering,
+}) => {
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
   const formData = useSelector(formAttributesSelector);
   const formIsValid = useSelector(formIsValidSelector);
-  const total = useSelector(state => pricesSelector(state, {offering})).total;
-  const components = React.useMemo(() => offering.plans.length > 0 ? offering.plans[0].prices : {}, [offering]);
-  const usages = React.useMemo(() => parseQuotasUsage(offering.quotas || []), [offering]);
-  const limits = React.useMemo(() => parseQuotas(offering.quotas || []), [offering]);
-  const dailyPrice = React.useMemo(() => getDailyPrice(formData, components), [formData, components]);
+  const total = useSelector(state => pricesSelector(state, { offering })).total;
+  const components = React.useMemo(
+    () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
+    [offering],
+  );
+  const usages = React.useMemo(() => parseQuotasUsage(offering.quotas || []), [
+    offering,
+  ]);
+  const limits = React.useMemo(() => parseQuotas(offering.quotas || []), [
+    offering,
+  ]);
+  const dailyPrice = React.useMemo(() => getDailyPrice(formData, components), [
+    formData,
+    components,
+  ]);
 
   const quotas = React.useMemo(
-    () => getQuotas({ formData, usages, limits, project, components}),
-    [formData, usages, limits, project, components]
+    () => getQuotas({ formData, usages, limits, project, components }),
+    [formData, usages, limits, project, components],
   );
 
-  const orderItem = React.useMemo(() => formatOrderItemForCreate({
-    formData: {attributes: formData},
-    offering,
-    customer,
-    project,
-    total,
-    formValid: formIsValid,
-  }), [
-    formData,
-    offering,
-    customer,
-    project,
-    total,
-    formIsValid,
-  ]);
+  const orderItem = React.useMemo(
+    () =>
+      formatOrderItemForCreate({
+        formData: { attributes: formData },
+        offering,
+        customer,
+        project,
+        total,
+        formValid: formIsValid,
+      }),
+    [formData, offering, customer, project, total, formIsValid],
+  );
 
   return (
     <>
       <p id="invalid-info">
-        {!formData.size && translate('Please enter volume size to see price estimate.')}
+        {!formData.size &&
+          translate('Please enter volume size to see price estimate.')}
       </p>
-      {(!offering.shared && !offering.billable) && (
-        <p dangerouslySetInnerHTML={{
-          __html: translate('Note that this volume will not be charged separately for {organization}.', {
-            organization: $sanitize(customer.name),
-          }),
-        }}/>
+      {!offering.shared && !offering.billable && (
+        <p
+          dangerouslySetInnerHTML={{
+            __html: translate(
+              'Note that this volume will not be charged separately for {organization}.',
+              {
+                organization: $sanitize(customer.name),
+              },
+            ),
+          }}
+        />
       )}
-      <OfferingLogo src={offering.thumbnail} size="small"/>
-      {!!formData.size &&
+      <OfferingLogo src={offering.thumbnail} size="small" />
+      {!!formData.size && (
         <Table bordered={true}>
           <tbody>
             <tr>
@@ -159,29 +180,26 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({ offering })
             </tr>
             {offering.rating && (
               <tr>
-                <td><strong>{translate('Rating')}</strong></td>
-                <td><RatingStars rating={offering.rating} size="medium"/></td>
+                <td>
+                  <strong>{translate('Rating')}</strong>
+                </td>
+                <td>
+                  <RatingStars rating={offering.rating} size="medium" />
+                </td>
               </tr>
             )}
             <tr>
               <td>
-                <strong>{translate('Price per day')}</strong>
-                {' '}
-                <PriceTooltip/>
+                <strong>{translate('Price per day')}</strong> <PriceTooltip />
               </td>
-              <td>
-                {defaultCurrency(dailyPrice)}
-              </td>
+              <td>{defaultCurrency(dailyPrice)}</td>
             </tr>
             <tr>
               <td>
-                <strong>{translate('Price per 30 days')}</strong>
-                {' '}
-                <PriceTooltip/>
+                <strong>{translate('Price per 30 days')}</strong>{' '}
+                <PriceTooltip />
               </td>
-              <td>
-                {defaultCurrency(dailyPrice * 30)}
-              </td>
+              <td>{defaultCurrency(dailyPrice * 30)}</td>
             </tr>
             <tr>
               <td>
@@ -197,10 +215,10 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({ offering })
             </tr>
           </tbody>
         </Table>
-      }
+      )}
       {components && (
         <Panel title={translate('Limits')}>
-          <QuotaUsageBarChart quotas={quotas}/>
+          <QuotaUsageBarChart quotas={quotas} />
         </Panel>
       )}
       <div className="display-flex justify-content-between">
@@ -209,7 +227,10 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({ offering })
           flavor="primary"
           disabled={!formIsValid}
         />
-        <OfferingCompareButtonContainer offering={offering} flavor="secondary"/>
+        <OfferingCompareButtonContainer
+          offering={offering}
+          flavor="secondary"
+        />
       </div>
     </>
   );

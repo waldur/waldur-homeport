@@ -5,14 +5,15 @@ export default function routes($stateProvider) {
   $stateProvider
     .state('support.resources', {
       url: 'resources/',
-      template: '<resource-global-list-filtered></resource-global-list-filtered>',
+      template:
+        '<resource-global-list-filtered></resource-global-list-filtered>',
       data: {
         feature: 'resources.legacy',
         pageTitle: gettext('Resources'),
       },
       resolve: {
-        permission: checkPermission
-      }
+        permission: checkPermission,
+      },
     })
 
     .state('support.resources-treemap', {
@@ -23,8 +24,8 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Resources usage'),
       },
       resolve: {
-        permission: checkPermission
-      }
+        permission: checkPermission,
+      },
     })
 
     .state('support.shared-providers', {
@@ -35,7 +36,7 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Shared providers'),
       },
       resolve: {
-        permission: checkPermission
-      }
+        permission: checkPermission,
+      },
     });
 }

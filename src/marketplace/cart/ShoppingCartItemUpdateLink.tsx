@@ -19,8 +19,9 @@ type MergedProps = StateProps & OwnProps;
 const PureShoppingCartUpdateLink: React.FC<MergedProps> = props => (
   <Link
     state={props.state}
-    params={{order_item_uuid: props.order_item_uuid}}
-    className={props.className}>
+    params={{ order_item_uuid: props.order_item_uuid }}
+    className={props.className}
+  >
     {props.children}
   </Link>
 );

@@ -16,19 +16,28 @@ interface UserActivateButtonProps extends TranslateProps {
   onClick: () => void;
 }
 
-const PureUserActivateButton = (props: UserActivateButtonProps) => props.user.is_staff ? (
-  <Tooltip
-    id="user-activate"
-    label={props.row.is_active ?
-      translate('Inactive user will not be able to login into the portal.') :
-      translate('Active user will be able to login into the portal.')}
+const PureUserActivateButton = (props: UserActivateButtonProps) =>
+  props.user.is_staff ? (
+    <Tooltip
+      id="user-activate"
+      label={
+        props.row.is_active
+          ? translate(
+              'Inactive user will not be able to login into the portal.',
+            )
+          : translate('Active user will be able to login into the portal.')
+      }
     >
-    <ActionButton
-      title={props.row.is_active ? props.translate('Deactivate') : props.translate('Activate')}
-      action={props.onClick}
-    />
-  </Tooltip>
-) : null;
+      <ActionButton
+        title={
+          props.row.is_active
+            ? props.translate('Deactivate')
+            : props.translate('Activate')
+        }
+        action={props.onClick}
+      />
+    </Tooltip>
+  ) : null;
 
 const mapStatToProps = state => ({
   user: getUser(state),

@@ -14,33 +14,43 @@ interface PlanDescriptionButtonProps extends TranslateProps {
   formData: any;
 }
 
-export const PurePlanDescriptionButton = withTranslation((props: PlanDescriptionButtonProps) => {
-  let planDescription = '';
-  if (props.formData && props.formData.plan && props.formData.plan.description) {
-    planDescription = props.formData.plan.description;
-  }
-  if (props.planDescription) {
-    planDescription = props.planDescription;
-  }
-  if (!planDescription) {
-    return null;
-  }
-  return (
-    <ActionButton
-      title={props.translate('Details')}
-      action={() => props.showOfferingPlanDescription(planDescription)}
-      icon="fa fa-eye"
-      className={props.className}
-    />
-  );
-});
+export const PurePlanDescriptionButton = withTranslation(
+  (props: PlanDescriptionButtonProps) => {
+    let planDescription = '';
+    if (
+      props.formData &&
+      props.formData.plan &&
+      props.formData.plan.description
+    ) {
+      planDescription = props.formData.plan.description;
+    }
+    if (props.planDescription) {
+      planDescription = props.planDescription;
+    }
+    if (!planDescription) {
+      return null;
+    }
+    return (
+      <ActionButton
+        title={props.translate('Details')}
+        action={() => props.showOfferingPlanDescription(planDescription)}
+        icon="fa fa-eye"
+        className={props.className}
+      />
+    );
+  },
+);
 
 const mapStateToProps = state => ({
   formData: getFormValues(FORM_ID)(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  showOfferingPlanDescription: planDescription => dispatch(showOfferingPlanDescription(planDescription)),
+  showOfferingPlanDescription: planDescription =>
+    dispatch(showOfferingPlanDescription(planDescription)),
 });
 
-export const PlanDescriptionButton = connect(mapStateToProps, mapDispatchToProps)(PurePlanDescriptionButton);
+export const PlanDescriptionButton = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PurePlanDescriptionButton);

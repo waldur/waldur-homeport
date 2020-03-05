@@ -9,13 +9,15 @@ export const ComponentDisableQuotaField: React.FC<{}> = () => (
   <FormGroup>
     <Field
       name="disable_quotas"
-      component={prop =>
+      component={prop => (
         <AwesomeCheckbox
           id="disable_quotas"
-          label={translate('Do not allow user to specify quotas when offering is provisioned.')}
+          label={translate(
+            'Do not allow user to specify quotas when offering is provisioned.',
+          )}
           {...prop.input}
         />
-      }
+      )}
     />
   </FormGroup>
 );

@@ -19,7 +19,10 @@ registerResourceTypeLabel('VMware.Disk', 'VM Disk');
 registerResourceTypeLabel('VMware.Port', 'VM Network Adapter');
 
 export default module => {
-  ResourceSummary.register('VMware.VirtualMachine', VMwareVirtualMachineSummary);
+  ResourceSummary.register(
+    'VMware.VirtualMachine',
+    VMwareVirtualMachineSummary,
+  );
   ResourceSummary.register('VMware.Disk', VMwareDiskSummary);
   ResourceSummary.register('VMware.Port', VMwarePortSummary);
   module.config(tabsConfig);

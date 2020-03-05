@@ -20,24 +20,28 @@ export default function slurmAllocationUsageChart() {
             responsive: true,
             tooltips: {
               mode: 'index',
-              intersect: false
+              intersect: false,
             },
             legend: {
-              display: false
+              display: false,
             },
             scales: {
-              xAxes: [{
-                stacked: true,
-              }],
-              yAxes: [{
-                stacked: true
-              }]
-            }
-          }
+              xAxes: [
+                {
+                  stacked: true,
+                },
+              ],
+              yAxes: [
+                {
+                  stacked: true,
+                },
+              ],
+            },
+          },
         };
         new Chart.default(ctx, options);
         scope.$digest();
       });
-    }
+    },
   };
 }

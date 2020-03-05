@@ -25,7 +25,12 @@ export const fetchListStart = (table: string, extraFilter?: any) => ({
   },
 });
 
-export const fetchListDone = (table: string, entities: object, order: number[], resultCount: number) => ({
+export const fetchListDone = (
+  table: string,
+  entities: object,
+  order: number[],
+  resultCount: number,
+) => ({
   type: FETCH_LIST_DONE,
   payload: {
     table,

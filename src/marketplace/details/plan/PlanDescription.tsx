@@ -13,8 +13,15 @@ interface PlanDescriptionProps extends TranslateProps {
 }
 
 const PlanDescription = withTranslation((props: PlanDescriptionProps) => (
-  <ModalDialog title={props.translate('Plan description')} footer={<CloseDialogButton />}>
-    <div dangerouslySetInnerHTML={{__html: $sanitize(props.resolve.plan_description)}}/>
+  <ModalDialog
+    title={props.translate('Plan description')}
+    footer={<CloseDialogButton />}
+  >
+    <div
+      dangerouslySetInnerHTML={{
+        __html: $sanitize(props.resolve.plan_description),
+      }}
+    />
   </ModalDialog>
 ));
 

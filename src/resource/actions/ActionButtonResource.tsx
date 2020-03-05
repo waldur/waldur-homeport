@@ -21,10 +21,12 @@ async function loadActions(url) {
       actions[key] = rawActions[key];
     }
   }
-  return {resource, actions};
+  return { resource, actions };
 }
 
-export class ActionButtonResource extends React.Component<ActionButtonResourceProps> {
+export class ActionButtonResource extends React.Component<
+  ActionButtonResourceProps
+> {
   state = {
     loading: false,
     error: undefined,
@@ -33,9 +35,9 @@ export class ActionButtonResource extends React.Component<ActionButtonResourcePr
   };
 
   getActions = async () => {
-    this.setState({loading: true});
+    this.setState({ loading: true });
     try {
-      const {resource, actions} = await loadActions(this.props.url);
+      const { resource, actions } = await loadActions(this.props.url);
       this.setState({
         loading: false,
         resource,
@@ -47,22 +49,23 @@ export class ActionButtonResource extends React.Component<ActionButtonResourcePr
         error,
       });
     }
-  }
+  };
 
   openDropdown = (isOpen: boolean) => {
     if (isOpen) {
       this.getActions();
     }
-  }
+  };
 
   triggerAction = (name: string, action: object) => {
     const controller = {
       handleActionException: () => undefined,
       reInitResource: () => undefined,
     };
-    return ngInjector.get('actionUtilsService')
+    return ngInjector
+      .get('actionUtilsService')
       .buttonClick(controller, this.state.resource, name, action);
-  }
+  };
 
   render() {
     return (

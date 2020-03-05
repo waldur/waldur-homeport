@@ -1,25 +1,47 @@
-<ng-form name="$ctrl.thresholdForm" ng-class="{'form-horizontal': $ctrl.field.horizontal}">
+<ng-form
+  name="$ctrl.thresholdForm"
+  ng-class="{'form-horizontal': $ctrl.field.horizontal}"
+>
   <div class="form-group">
-    <label for="threshold" class="control-label" ng-class="{'col-sm-3': $ctrl.field.horizontal}">
+    <label
+      for="threshold"
+      class="control-label"
+      ng-class="{'col-sm-3': $ctrl.field.horizontal}"
+    >
       <span translate>Cost threshold</span>
       <helpicon
-        help-text="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></helpicon>
+        help-text="{{
+          'Upper bound of monthly resource cost provisioned from shared providers.'
+            | translate
+        }}"
+      ></helpicon>
     </label>
     <div ng-class="{'col-sm-9 col-lg-6': $ctrl.field.horizontal}">
       <div class="input-group">
-        <input id="threshold" type="number" class="form-control" required name="threshold"
+        <input
+          id="threshold"
+          type="number"
+          class="form-control"
+          required
+          name="threshold"
           ng-change="$ctrl.thresholdChanged()"
-          ng-model="$ctrl.model.priceEstimate.threshold" ng-min="0">
+          ng-model="$ctrl.model.priceEstimate.threshold"
+          ng-min="0"
+        />
         <div class="input-group-addon">
           {{ ::$ctrl.currency }}
         </div>
       </div>
-      <p class="help-block text-danger"
-        ng-if="$ctrl.thresholdForm.threshold.$error.min">
+      <p
+        class="help-block text-danger"
+        ng-if="$ctrl.thresholdForm.threshold.$error.min"
+      >
         <span translate>Minimal valid value is 0</span>
       </p>
-      <p class="help-block text-danger"
-        ng-if="$ctrl.thresholdForm.threshold.$error.exceedsThreshold">
+      <p
+        class="help-block text-danger"
+        ng-if="$ctrl.thresholdForm.threshold.$error.exceedsThreshold"
+      >
         <span translate>Estimated cost exceeds threshold</span>
       </p>
     </div>
@@ -28,14 +50,24 @@
     <div ng-class="{'col-sm-offset-3 col-sm-9': $ctrl.field.horizontal}">
       <price-tooltip></price-tooltip>
       <span translate>Estimated cost for current month</span>:
-      <span id="priceEstimate">{{::$ctrl.model.priceEstimate.total | defaultCurrency}}</span>
+      <span
+        id="priceEstimate"
+        >{{::$ctrl.model.priceEstimate.total | defaultCurrency}}</span
+      >
     </div>
   </div>
   <div class="form-group">
     <div ng-class="{'col-sm-offset-3 col-sm-9': $ctrl.field.horizontal}">
       <div class="awesome-checkbox checkbox-success">
-        <input type="checkbox" ng-model="$ctrl.model.isHardLimit" ng-change="$ctrl.updateLimit()" id="isHardLimit"/>
-        <label for="isHardLimit" translate>Disable provisioning when threshold is reached.</label>
+        <input
+          type="checkbox"
+          ng-model="$ctrl.model.isHardLimit"
+          ng-change="$ctrl.updateLimit()"
+          id="isHardLimit"
+        />
+        <label for="isHardLimit" translate
+          >Disable provisioning when threshold is reached.</label
+        >
       </div>
     </div>
   </div>

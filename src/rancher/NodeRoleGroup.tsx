@@ -12,11 +12,8 @@ export const NodeRoleGroup = props => (
     label={translate('Role')}
     required={true}
     labelClassName={props.labelClassName}
-    valueClassName={props.valueClassName}>
-    <Field
-      name="roles"
-      component={NodeRoleField}
-      validate={required}
-    />
+    valueClassName={props.valueClassName}
+  >
+    <Field name="roles" component={NodeRoleField} validate={required} />
   </FormGroup>
 );

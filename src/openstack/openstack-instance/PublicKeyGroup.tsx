@@ -11,7 +11,7 @@ export const PublicKeyGroup = props => (
   <CreateResourceFormGroup label={translate('SSH public key')}>
     <Field
       name="attributes.ssh_public_key"
-      component={fieldProps =>
+      component={fieldProps => (
         <SelectDialogField
           columns={[
             {
@@ -27,14 +27,13 @@ export const PublicKeyGroup = props => (
           input={fieldProps.input}
           preSelectFirst={true}
           emptyMessage={
-          <>
-            {translate(`You have not added any SSH keys to your`)}
-            {' '}
-            <Link state="profile.keys">{translate('profile.')}</Link>
-          </>
+            <>
+              {translate(`You have not added any SSH keys to your`)}{' '}
+              <Link state="profile.keys">{translate('profile.')}</Link>
+            </>
           }
         />
-      }
+      )}
     />
   </CreateResourceFormGroup>
 );

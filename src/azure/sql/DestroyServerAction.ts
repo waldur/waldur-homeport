@@ -12,6 +12,8 @@ export default function createAction(): ResourceAction {
     title: translate('Destroy'),
     validators: [validateState('OK', 'Erred')],
     onSuccess: cacheInvalidationFactory('azureSQLDatabasesService'),
-    dialogSubtitle: translate('Deleting PostgreSQL server will cause deletion of all databases created within server.'),
+    dialogSubtitle: translate(
+      'Deleting PostgreSQL server will cause deletion of all databases created within server.',
+    ),
   };
 }

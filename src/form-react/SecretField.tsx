@@ -13,10 +13,11 @@ export class SecretField extends React.Component<SecretFieldProps> {
   };
 
   onToggle = () => {
-    this.setState({showSecret: !this.state.showSecret});
-  }
+    this.setState({ showSecret: !this.state.showSecret });
+  };
 
   render() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { input, label, validate, ...rest } = this.props;
     const { showSecret } = this.state;
     const iconClass = classNames('fa password-icon', {
@@ -31,10 +32,13 @@ export class SecretField extends React.Component<SecretFieldProps> {
           autoComplete="new-password"
           className="form-control"
           placeholder={this.props.placeholder}
-          {...rest}/>
-        <a className={iconClass}
+          {...rest}
+        />
+        <a
+          className={iconClass}
           title={showSecret ? 'Hide' : 'Show'}
-          onClick={this.onToggle}/>
+          onClick={this.onToggle}
+        />
       </div>
     );
   }

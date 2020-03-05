@@ -22,4 +22,7 @@ const mapDispatchToProps = dispatch => ({
   showHookUpdateDialog: () => dispatch(showHookUpdateDialog()),
 });
 
-export const HookCreateButton = connect(undefined, mapDispatchToProps)(PureHookCreateButton);
+export const HookCreateButton = connect(
+  undefined,
+  mapDispatchToProps,
+)(PureHookCreateButton);

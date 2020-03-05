@@ -6,19 +6,29 @@ export default function authActivation() {
     controller: AuthActivationController,
     controllerAs: 'auth',
     template: template,
-    scope: {}
+    scope: {},
   };
 }
 
 // @ngInject
-function AuthActivationController($state, $stateParams, authService, ncUtilsFlash) {
-  authService.activate({
-    user_uuid: $stateParams.user_uuid,
-    token: $stateParams.token
-  }).then(function() {
-    ncUtilsFlash.info(gettext('Account has been activated.'));
-    $state.go('initialdata.view');
-  }, function() {
-    ncUtilsFlash.error(gettext('Unable to activate account.'));
-  });
+function AuthActivationController(
+  $state,
+  $stateParams,
+  authService,
+  ncUtilsFlash,
+) {
+  authService
+    .activate({
+      user_uuid: $stateParams.user_uuid,
+      token: $stateParams.token,
+    })
+    .then(
+      function() {
+        ncUtilsFlash.info(gettext('Account has been activated.'));
+        $state.go('initialdata.view');
+      },
+      function() {
+        ncUtilsFlash.error(gettext('Unable to activate account.'));
+      },
+    );
 }

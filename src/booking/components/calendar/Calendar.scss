@@ -1,5 +1,5 @@
 .fc-button {
-  padding: 0 .6em;
+  padding: 0 0.6em;
 }
 
 .fc-header-toolbar .btn {
@@ -32,9 +32,9 @@
 .fc-popover {
   background-color: white;
   color: white;
-  box-shadow: 1px 1px 10px rgba(0,0,0,.2);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
   .fc-header {
-    background-color: #1AB394;
+    background-color: #1ab394;
   }
 }
 
@@ -44,7 +44,7 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  input[type=checkbox]{
+  input[type='checkbox'] {
     height: 0;
     width: 0;
     visibility: hidden;

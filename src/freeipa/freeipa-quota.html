@@ -8,25 +8,26 @@
         <label
           class="btn btn-default"
           ng-model="$ctrl.quota.unlimited"
-          uib-btn-radio="true">
+          uib-btn-radio="true"
+        >
           <span translate>Unlimited</span>
         </label>
         <label
           class="btn btn-default"
           ng-model="$ctrl.quota.unlimited"
-          uib-btn-radio="false">
+          uib-btn-radio="false"
+        >
           <span translate>Set limit</span>
         </label>
       </div>
 
-      <div
-        ng-if="!$ctrl.quota.unlimited"
-        class="m-t-sm input-group">
+      <div ng-if="!$ctrl.quota.unlimited" class="m-t-sm input-group">
         <input
           class="form-control"
           type="number"
           ng-model="$ctrl.quota.limit"
-          min="0">
+          min="0"
+        />
         <div class="input-group-addon">
           {{ ::$ctrl.currency }}
         </div>

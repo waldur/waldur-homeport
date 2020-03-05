@@ -3,15 +3,16 @@ import * as React from 'react';
 
 import { FileUploadField } from './FileUploadField';
 
-const renderField = (props?) => mount(
-  <FileUploadField
-    name="password"
-    label="Password"
-    buttonLabel="Browse"
-    showFileName={true}
-    {...props}
-  />
-);
+const renderField = (props?) =>
+  mount(
+    <FileUploadField
+      name="password"
+      label="Password"
+      buttonLabel="Browse"
+      showFileName={true}
+      {...props}
+    />,
+  );
 
 const file = {
   type: 'image/png',
@@ -34,7 +35,7 @@ describe('FileUploadField', () => {
     const handler = jest.fn();
     const wrapper = renderField({
       accept: 'application/text',
-      input: {onChange: handler},
+      input: { onChange: handler },
     });
     wrapper.find('input').simulate('change', event);
     expect(handler).toBeCalledWith(null);
@@ -45,7 +46,7 @@ describe('FileUploadField', () => {
     const handler = jest.fn();
     const wrapper = renderField({
       accept: 'image/png',
-      input: {onChange: handler},
+      input: { onChange: handler },
     });
     wrapper.find('input').simulate('change', event);
     expect(handler).toBeCalledWith(file);
@@ -55,7 +56,7 @@ describe('FileUploadField', () => {
   it('accepts any file type if requirement is not specified', () => {
     const handler = jest.fn();
     const wrapper = renderField({
-      input: {onChange: handler},
+      input: { onChange: handler },
     });
     wrapper.find('input').simulate('change', event);
     expect(handler).toBeCalledWith(file);

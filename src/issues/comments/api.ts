@@ -10,10 +10,14 @@ export const getComments = (issue: string) => {
 };
 
 export const createComment = (description: string, uuid: string) => {
-  return sendForm('POST', `${ENV.apiEndpoint}api/support-issues/${uuid}/comment/`, {
-    is_public: true,
-    description,
-  });
+  return sendForm(
+    'POST',
+    `${ENV.apiEndpoint}api/support-issues/${uuid}/comment/`,
+    {
+      is_public: true,
+      description,
+    },
+  );
 };
 
 export const updateComment = (description: string, uuid: string) => {

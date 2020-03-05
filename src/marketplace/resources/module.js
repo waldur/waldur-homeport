@@ -15,19 +15,52 @@ import marketplaceResourceImportDialog from './import/ResourceImportDialog';
 import marketplaceResourceDetails from './ResourceDetailsPage';
 
 export default module => {
-  module.component('marketplaceCustomerResourcesList', marketplaceCustomerResourcesList);
-  module.component('marketplaceProjectResourcesList', marketplaceProjectResourcesList);
-  module.component('marketplacePublicResourcesList', marketplacePublicResourcesList);
-  module.component('marketplaceSupportResourcesList', marketplaceSupportResourcesList);
-  module.component('marketplaceResourceShowUsageButton', marketplaceResourceShowUsageButton);
-  module.component('marketplaceResourceShowUsageDialog', marketplaceResourceShowUsageDialog);
-  module.component('marketplaceResourceCreateUsageDialog', marketplaceResourceCreateUsageDialog);
+  module.component(
+    'marketplaceCustomerResourcesList',
+    marketplaceCustomerResourcesList,
+  );
+  module.component(
+    'marketplaceProjectResourcesList',
+    marketplaceProjectResourcesList,
+  );
+  module.component(
+    'marketplacePublicResourcesList',
+    marketplacePublicResourcesList,
+  );
+  module.component(
+    'marketplaceSupportResourcesList',
+    marketplaceSupportResourcesList,
+  );
+  module.component(
+    'marketplaceResourceShowUsageButton',
+    marketplaceResourceShowUsageButton,
+  );
+  module.component(
+    'marketplaceResourceShowUsageDialog',
+    marketplaceResourceShowUsageDialog,
+  );
+  module.component(
+    'marketplaceResourceCreateUsageDialog',
+    marketplaceResourceCreateUsageDialog,
+  );
   module.component('marketplaceSupportUsageList', marketplaceSupportUsageList);
-  module.component('marketplaceResourcePlanChangeDialog', marketplaceResourcePlanChangeDialog);
-  module.component('marketplaceResourceChangeLimitsDialog', marketplaceResourceChangeLimitsDialog);
+  module.component(
+    'marketplaceResourcePlanChangeDialog',
+    marketplaceResourcePlanChangeDialog,
+  );
+  module.component(
+    'marketplaceResourceChangeLimitsDialog',
+    marketplaceResourceChangeLimitsDialog,
+  );
   module.component('marketplacePlanUsagesList', marketplacePlanUsagesList);
   module.component('marketplacePlanUsageDialog', marketplacePlanUsageDialog);
-  module.component('marketplaceResourceTerminateDialog', marketplaceResourceTerminateDialog);
-  module.component('marketplaceResourceImportDialog', marketplaceResourceImportDialog);
+  module.component(
+    'marketplaceResourceTerminateDialog',
+    marketplaceResourceTerminateDialog,
+  );
+  module.component(
+    'marketplaceResourceImportDialog',
+    marketplaceResourceImportDialog,
+  );
   module.component('marketplaceResourceDetails', marketplaceResourceDetails);
 };

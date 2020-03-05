@@ -22,5 +22,5 @@ export const CATEGORY_ITEMS = {
   jiraProject: {
     label: gettext('Service desk'),
     state: 'project.resources.jira-projects',
-  }
+  },
 };

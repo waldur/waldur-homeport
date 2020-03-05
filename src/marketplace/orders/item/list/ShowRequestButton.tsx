@@ -8,7 +8,8 @@ export const ShowRequestButton = ({ row }) => (
     order_uuid={row.order_uuid}
     customer_uuid={row.customer_uuid}
     project_uuid={row.project_uuid}
-    className="btn btn-default btn-sm">
+    className="btn btn-default btn-sm"
+  >
     {translate('Show request')}
   </OrderDetailsLink>
 );

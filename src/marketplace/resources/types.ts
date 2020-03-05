@@ -11,8 +11,7 @@ export type ResourceState =
   | 'Erred'
   | 'Updating'
   | 'Terminating'
-  | 'Terminated'
-  ;
+  | 'Terminated';
 
 export interface Resource extends ResourceReference {
   name?: string;

@@ -28,34 +28,35 @@ class ProjectCreateComponent extends React.Component<ProjectCreateProps> {
   };
 
   componentDidMount() {
-    Promise.all([
-      api.loadProjectTypes(),
-      api.loadCertifications(),
-    ]).then(([projectTypes, certifications]) => {
-      this.setState({
-        projectTypes,
-        certifications,
-        loaded: true,
-        erred: false,
+    Promise.all([api.loadProjectTypes(), api.loadCertifications()])
+      .then(([projectTypes, certifications]) => {
+        this.setState({
+          projectTypes,
+          certifications,
+          loaded: true,
+          erred: false,
+        });
+      })
+      .catch(() => {
+        this.setState({
+          loaded: false,
+          erred: true,
+        });
       });
-    }).catch(() => {
-      this.setState({
-        loaded: false,
-        erred: true,
-      });
-    });
   }
 
   render() {
     if (this.state.erred) {
       return (
         <h3 className="text-center">
-          {this.props.translate('Unable to load project types or certifications.')}
+          {this.props.translate(
+            'Unable to load project types or certifications.',
+          )}
         </h3>
       );
     }
     if (!this.state.loaded) {
-      return <LoadingSpinner/>;
+      return <LoadingSpinner />;
     }
     return (
       <ProjectCreateForm
@@ -80,7 +81,7 @@ const mapDispatchToProps = dispatch => ({
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withTranslation,
-  reduxForm({form: 'projectCreate'}),
+  reduxForm({ form: 'projectCreate' }),
 );
 
 const ProjectCreateContainer = enhance(ProjectCreateComponent);

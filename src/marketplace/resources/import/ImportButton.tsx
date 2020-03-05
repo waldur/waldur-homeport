@@ -5,13 +5,15 @@ import { translate } from '@waldur/i18n';
 
 export const ImportButton = ({ disabled, submitting, onClick }) => (
   <button
-    className={classNames('btn btn-primary', {disabled: disabled || submitting })}
+    className={classNames('btn btn-primary', {
+      disabled: disabled || submitting,
+    })}
     type="button"
-    onClick={onClick}>
+    onClick={onClick}
+  >
     {submitting && (
       <>
-        <i className="fa fa-spinner fa-spin"/>
-        {' '}
+        <i className="fa fa-spinner fa-spin" />{' '}
       </>
     )}
     {translate('Import')}

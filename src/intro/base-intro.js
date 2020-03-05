@@ -1,14 +1,16 @@
 export default class BaseIntro {
   // @ngInject
-  constructor($rootScope,
-              $q,
-              ncIntroUtils,
-              WorkspaceService,
-              NavigationUtilsService,
-              usersService,
-              ENV,
-              customersService,
-              features) {
+  constructor(
+    $rootScope,
+    $q,
+    ncIntroUtils,
+    WorkspaceService,
+    NavigationUtilsService,
+    usersService,
+    ENV,
+    customersService,
+    features,
+  ) {
     this.$rootScope = $rootScope;
     this.$q = $q;
     this.ncIntroUtils = ncIntroUtils;
@@ -23,24 +25,33 @@ export default class BaseIntro {
   }
 
   setup() {
-   /**
-    * @description
-    * # setup
-    * @flow
-    * Users lands on `profile.details` state.
-    *   1. Display a hint on how to select organization.
-    *   2. Open select workspace dialog
-    *   If user declines dialog:
-    *     return to step 1
-    *   User selects workspace
-    *
-    * If user stops at any of these steps the state has to be saved
-    *   and it should be possible to invoke intro for the current step by hitting intro-button.
-    */
+    /**
+     * @description
+     * # setup
+     * @flow
+     * Users lands on `profile.details` state.
+     *   1. Display a hint on how to select organization.
+     *   2. Open select workspace dialog
+     *   If user declines dialog:
+     *     return to step 1
+     *   User selects workspace
+     *
+     * If user stops at any of these steps the state has to be saved
+     *   and it should be possible to invoke intro for the current step by hitting intro-button.
+     */
     this.$rootScope.$on('WORKSPACE_CHANGED', this.refreshWorkspace.bind(this));
-    this.$rootScope.$on('selectWorkspaceToggle.initialized', this.workspaceToggleIntro.bind(this));
-    this.$rootScope.$on('selectWorkspaceDialog.initialized', this.selectWorkspaceDialogIntro.bind(this));
-    this.$rootScope.$on('selectWorkspaceDialog.dismissed', this.selectWorkspaceDialogDismissed.bind(this));
+    this.$rootScope.$on(
+      'selectWorkspaceToggle.initialized',
+      this.workspaceToggleIntro.bind(this),
+    );
+    this.$rootScope.$on(
+      'selectWorkspaceDialog.initialized',
+      this.selectWorkspaceDialogIntro.bind(this),
+    );
+    this.$rootScope.$on(
+      'selectWorkspaceDialog.dismissed',
+      this.selectWorkspaceDialogDismissed.bind(this),
+    );
   }
 
   refreshWorkspace() {
@@ -48,7 +59,8 @@ export default class BaseIntro {
     let newWorkspace = this.WorkspaceService.getWorkspace();
     if (!angular.equals(this.workspace, newWorkspace)) {
       this.workspace = newWorkspace;
-      let newHasPermission = (this.workspace.hasCustomer && this.features.isVisible('intro'));
+      let newHasPermission =
+        this.workspace.hasCustomer && this.features.isVisible('intro');
       if (newHasPermission !== this.hasPermissions) {
         this.hasPermissions = newHasPermission;
       }
@@ -69,9 +81,9 @@ export default class BaseIntro {
         {
           element: '#select-workspace-title',
           intro: gettext('To start please select a workspace'),
-          doneLabel: gettext('Ok, what\'s next?')
-        }
-      ]
+          doneLabel: gettext("Ok, what's next?"),
+        },
+      ],
     };
     this.ncIntroUtils.intro('select-workspace-intro', options);
     this.ncIntroUtils.onComplete(() => {
@@ -87,39 +99,41 @@ export default class BaseIntro {
 
     let userCanCreateOrganization = false;
     let canSelectOrganization = false;
-    this.$q.all([
-      this.userCanCreateOrganization().then(canCreateOrganization => {
-        userCanCreateOrganization = canCreateOrganization;
-      }),
-      this.customersAvailable().then(customersAvailable => {
-        canSelectOrganization = customersAvailable;
-      })
-    ]).then(() => {
-      let options = {
-        steps: []
-      };
+    this.$q
+      .all([
+        this.userCanCreateOrganization().then(canCreateOrganization => {
+          userCanCreateOrganization = canCreateOrganization;
+        }),
+        this.customersAvailable().then(customersAvailable => {
+          canSelectOrganization = customersAvailable;
+        }),
+      ])
+      .then(() => {
+        let options = {
+          steps: [],
+        };
 
-      if (userCanCreateOrganization) {
-        options.steps.push({
-          element: '#add-new-organization',
-          intro: gettext('Add a new organization')
-        });
-      }
+        if (userCanCreateOrganization) {
+          options.steps.push({
+            element: '#add-new-organization',
+            intro: gettext('Add a new organization'),
+          });
+        }
 
-      if (canSelectOrganization) {
-        options.steps.push({
-          element: '#organization-selector',
-          intro: gettext('Select one to go to a customer workspace'),
-          position: 'top',
-        });
-      }
+        if (canSelectOrganization) {
+          options.steps.push({
+            element: '#organization-selector',
+            intro: gettext('Select one to go to a customer workspace'),
+            position: 'top',
+          });
+        }
 
-      if (!options.steps.length) {
-        this.ncIntroUtils.cleanUp();
-      } else {
-        this.ncIntroUtils.intro('select-workspace-dialog-intro', options);
-      }
-    });
+        if (!options.steps.length) {
+          this.ncIntroUtils.cleanUp();
+        } else {
+          this.ncIntroUtils.intro('select-workspace-dialog-intro', options);
+        }
+      });
   }
 
   customersAvailable() {
@@ -129,8 +143,10 @@ export default class BaseIntro {
   }
 
   userCanCreateOrganization() {
-    return this.usersService.getCurrentUser().then((user) => {
-      return user.is_staff || this.ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER;
+    return this.usersService.getCurrentUser().then(user => {
+      return (
+        user.is_staff || this.ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER
+      );
     });
   }
 
@@ -142,8 +158,14 @@ export default class BaseIntro {
     let workspace = this.WorkspaceService.getWorkspace();
     if (!workspace.customer && workspace.hasCustomer) {
       this.workspaceToggleIntro(this.$rootScope);
-    } else if (this.previous_state.name && this.previous_state.name !== 'select-workspace-intro') {
-      this.ncIntroUtils.intro(this.previous_state.name, this.previous_state.options);
+    } else if (
+      this.previous_state.name &&
+      this.previous_state.name !== 'select-workspace-intro'
+    ) {
+      this.ncIntroUtils.intro(
+        this.previous_state.name,
+        this.previous_state.options,
+      );
       this.ncIntroUtils.onComplete(this.previous_state.onComplete);
     }
   }

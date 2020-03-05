@@ -5,7 +5,7 @@ const invoiceEventsDialog = {
   bindings: {
     dismiss: '&',
     close: '&',
-    resolve: '<'
+    resolve: '<',
   },
   controller: class InvoiceEventsDialogController {
     // @ngInject
@@ -18,16 +18,16 @@ const invoiceEventsDialog = {
       this.loading = true;
       this.erred = false;
       this.InvoiceEventsService.loadEvents(this.resolve.item)
-        .then(events => this.events = events)
-        .catch(() => this.erred = true)
-        .finally(() => this.loading = false);
+        .then(events => (this.events = events))
+        .catch(() => (this.erred = true))
+        .finally(() => (this.loading = false));
     }
 
     showEventDetails(event) {
       this.close();
       this.EventDialogsService.eventDetails(event.original);
     }
-  }
+  },
 };
 
 export default invoiceEventsDialog;

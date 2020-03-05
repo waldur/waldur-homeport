@@ -17,7 +17,7 @@ class CustomerManageController {
     $filter,
     $rootScope,
     ENV,
-    ISSUE_IDS
+    ISSUE_IDS,
   ) {
     this.customersService = customersService;
     this.invoicesService = invoicesService;
@@ -42,23 +42,33 @@ class CustomerManageController {
   }
 
   refreshCustomer() {
-    this.customersService.refreshCurrentCustomer(this.customer.uuid).then(customer => this.customer = customer);
+    this.customersService
+      .refreshCurrentCustomer(this.customer.uuid)
+      .then(customer => (this.customer = customer));
   }
 
   loadCustomer() {
     this.loading = true;
-    return this.currentStateService.getCustomer().then((customer) => {
-      this.customer = customer;
-      return this.loadCustomerPermissions(customer);
-    }).finally(() => {
-      this.loading = false;
-    });
+    return this.currentStateService
+      .getCustomer()
+      .then(customer => {
+        this.customer = customer;
+        return this.loadCustomerPermissions(customer);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   }
 
   loadCustomerPermissions(customer) {
     return this.getInvoices(customer).then(invoices => {
       return this.usersService.getCurrentUser().then(user => {
-        const deleteAction = new DeleteCustomerAction(this.ENV, customer, user, invoices);
+        const deleteAction = new DeleteCustomerAction(
+          this.ENV,
+          customer,
+          user,
+          invoices,
+        );
         this.canDeleteCustomer = deleteAction.hasPermission;
         this.deleteNeedsSupport = deleteAction.needsSupport;
         this.deleteNotification = deleteAction.notification;
@@ -94,30 +104,35 @@ class CustomerManageController {
             title: gettext('Organization removal'),
             hideTitle: true,
             descriptionLabel: gettext('Reason'),
-            descriptionPlaceholder: gettext('Why do you need to remove organization with existing projects?'),
+            descriptionPlaceholder: gettext(
+              'Why do you need to remove organization with existing projects?',
+            ),
             submitTitle: gettext('Request removal'),
-          }
-        }
+          },
+        },
       });
     }
 
     const confirmDelete = confirm(translate(gettext('Confirm deletion?')));
     if (confirmDelete) {
       this.currentStateService.setCustomer(null);
-      this.customer.$delete().then(() => {
-        this.customersService.clearAllCacheForCurrentEndpoint();
-        this.$state.go('profile.details').then(() => {
-          this.stateUtilsService.clear();
-          this.currentStateService.setHasCustomer(false);
-        });
-      }, () => this.currentStateService.setCustomer(this.customer));
+      this.customer.$delete().then(
+        () => {
+          this.customersService.clearAllCacheForCurrentEndpoint();
+          this.$state.go('profile.details').then(() => {
+            this.stateUtilsService.clear();
+            this.currentStateService.setHasCustomer(false);
+          });
+        },
+        () => this.currentStateService.setCustomer(this.customer),
+      );
     }
   }
 
   reportError() {
     return this.$uibModal.open({
       component: 'customerReportError',
-      resolve: () => ({customer: this.customer})
+      resolve: () => ({ customer: this.customer }),
     });
   }
 }

@@ -18,6 +18,6 @@ export default function languageSelector() {
         this.currentLanguage = language;
         this.utils.setCurrentLanguage(language);
       }
-    }
+    },
   };
 }

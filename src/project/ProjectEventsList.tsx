@@ -29,8 +29,8 @@ const ProjectEvents = connect(mapStateToProps)(PureProjectEvents);
 
 const ProjectEventsView = props => (
   <>
-    <ProjectEventsFilter/>
-    <ProjectEvents {...props}/>
+    <ProjectEventsFilter />
+    <ProjectEvents {...props} />
   </>
 );
 

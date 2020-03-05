@@ -14,13 +14,8 @@ interface CategoryResourcesListProps<Scope = object> {
 const LoadingErred = ({ loadData }) => (
   <div className="text-center">
     <h3>{translate('Unable to load charts.')}</h3>
-    <button
-      onClick={loadData}
-      type="button"
-      className="btn btn-default">
-      <i className="fa fa-refresh"/>
-      {' '}
-      {translate('Reload')}
+    <button onClick={loadData} type="button" className="btn btn-default">
+      <i className="fa fa-refresh" /> {translate('Reload')}
     </button>
   </div>
 );
@@ -29,15 +24,15 @@ export const CategoryResourcesList = (props: CategoryResourcesListProps) => (
   <Query loader={props.loader} variables={props.scope}>
     {({ loading, data, error, loadData }) => {
       if (loading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
       }
       if (error) {
-        return <LoadingErred loadData={loadData}/>;
+        return <LoadingErred loadData={loadData} />;
       }
       return (
         <>
           {data.map((category, index) => (
-            <CategoryResources key={index} category={category}/>
+            <CategoryResources key={index} category={category} />
           ))}
         </>
       );

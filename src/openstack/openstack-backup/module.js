@@ -13,7 +13,10 @@ export default module => {
   module.service('openstackBackupsService', openstackBackupsService);
   module.directive('openstackBackupsList', openstackBackupsList);
   module.directive('backupSnapshotsList', backupSnapshotsList);
-  module.component('openstackBackupRestoreSummary', openstackBackupRestoreSummary);
+  module.component(
+    'openstackBackupRestoreSummary',
+    openstackBackupRestoreSummary,
+  );
   module.config(actionsConfig);
   module.config(tabsConfig);
   module.run(breadcrumbsConfig);

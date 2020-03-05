@@ -8,12 +8,8 @@ interface OrderStepsProps {
   step: OrderStep;
 }
 
-const STEPS = [
-  'Configure',
-  'Approve',
-  'Review',
-];
+const STEPS = ['Configure', 'Approve', 'Review'];
 
 export const OrderSteps = (props: OrderStepsProps) => (
-  <StepsList choices={STEPS} value={props.step}/>
+  <StepsList choices={STEPS} value={props.step} />
 );

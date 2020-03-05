@@ -33,17 +33,23 @@ class SafeAnchor extends React.Component<any> {
     if (onClick) {
       onClick(event);
     }
-  }
+  };
 
   handleKeyDown = event => {
     if (event.key === ' ') {
       event.preventDefault();
       this.handleClick(event);
     }
-  }
+  };
 
   render() {
-    const { componentClass: Component, disabled, eventKey, ...props } = this.props;
+    const {
+      componentClass: Component,
+      disabled,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      eventKey,
+      ...props
+    } = this.props;
     let newProps = props;
 
     if (disabled) {

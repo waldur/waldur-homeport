@@ -1,7 +1,13 @@
 // @ngInject
-export default function resourcesService(baseServiceClass, ENV, $http, servicesService, $q) {
+export default function resourcesService(
+  baseServiceClass,
+  ENV,
+  $http,
+  servicesService,
+  $q,
+) {
   let ServiceClass = baseServiceClass.extend({
-    init:function() {
+    init: function() {
       this._super();
       this.endpoint = '/resources/';
     },
@@ -19,11 +25,9 @@ export default function resourcesService(baseServiceClass, ENV, $http, servicesS
     getUrlByType: function(resource_type) {
       if (resource_type === 'JIRA.Issue') {
         return $q.when(`${ENV.apiEndpoint}api/jira-issues/`);
-      }
-      else if (resource_type === 'Support.Offering') {
+      } else if (resource_type === 'Support.Offering') {
         return $q.when(`${ENV.apiEndpoint}api/support-offerings/`);
-      }
-      else if (resource_type === 'Rancher.Node') {
+      } else if (resource_type === 'Rancher.Node') {
         return $q.when(`${ENV.apiEndpoint}api/rancher-nodes/`);
       }
       let parts = resource_type.split('.');
@@ -42,8 +46,13 @@ export default function resourcesService(baseServiceClass, ENV, $http, servicesS
       if (cache && cache.time > new Date().getTime()) {
         return $q.when(cache.data);
       } else {
-        return $http.get(url, {params: params}).then(function(response) {
-          vm.setCache(ENV.countsCacheTime, response.data, cacheKey, '/resources/');
+        return $http.get(url, { params: params }).then(function(response) {
+          vm.setCache(
+            ENV.countsCacheTime,
+            response.data,
+            cacheKey,
+            '/resources/',
+          );
           return response.data;
         });
       }

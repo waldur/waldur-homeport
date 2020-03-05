@@ -29,7 +29,13 @@ export function stateUtilsService($state) {
 
 // @ngInject
 export function attachStateUtils($rootScope, stateUtilsService) {
-  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+  $rootScope.$on('$stateChangeSuccess', function(
+    event,
+    toState,
+    toParams,
+    fromState,
+    fromParams,
+  ) {
     stateUtilsService.setPrevState(fromState, fromParams);
   });
 }

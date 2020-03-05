@@ -4,15 +4,16 @@
     type="checkbox"
     name="{{ ::$ctrl.field.name }}"
     ng-model="$ctrl.model[$ctrl.field.name]"
-    ng-required="$ctrl.field.required"/>
-  <label for="{{ ::$ctrl.field.name }}"> <span translate>I accept the</span>&nbsp;
+    ng-required="$ctrl.field.required"
+  />
+  <label for="{{ ::$ctrl.field.name }}">
+    <span translate>I accept the</span>&nbsp;
     <a ui-sref="{{ ::$ctrl.field.sref }}" target="_blank">
       <i class="fa fa-external-link"></i>
       <span translate>Terms of Service</span>
     </a>
   </label>
 </div>
-<p class="text-danger"
-  ng-if="$ctrl.showRequiredError()">
+<p class="text-danger" ng-if="$ctrl.showRequiredError()">
   <span translate>Please accept Terms of Services to proceed.</span>
 </p>

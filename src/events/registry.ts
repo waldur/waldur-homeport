@@ -12,7 +12,7 @@ export class EventRegistry {
       const defaultFormatter = event => {
         let context = event;
         if (group.context) {
-          context = {...context, ...group.context(event)};
+          context = { ...context, ...group.context(event) };
         }
         return translate(type.title, context);
       };

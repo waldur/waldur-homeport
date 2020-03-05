@@ -9,10 +9,7 @@ describe('TypeListDialog', () => {
 
   beforeEach(() => {
     wrapper = shallow(
-      <TypeListDialog
-        dialogTitle="Event types"
-        types={eventGroups}
-      />
+      <TypeListDialog dialogTitle="Event types" types={eventGroups} />,
     );
   });
 
@@ -23,5 +20,4 @@ describe('TypeListDialog', () => {
   it('renders each event type as list item', () => {
     expect(wrapper.find('li').length).toBe(5);
   });
-
 });

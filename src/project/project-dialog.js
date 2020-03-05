@@ -5,7 +5,7 @@ const projectDialog = {
   bindings: {
     dismiss: '&',
     close: '&',
-    resolve: '<'
+    resolve: '<',
   },
   controller: class ProjectDialogController {
     // @ngInject
@@ -17,7 +17,7 @@ const projectDialog = {
       this.project = this.resolve.project;
       this.showProviders = !this.features.isVisible('marketplace');
     }
-  }
+  },
 };
 
 export default projectDialog;

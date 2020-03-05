@@ -22,7 +22,7 @@ const makeAccountingPeriods = () => {
     const label = date.format('MMMM, YYYY');
     choices.push({
       label,
-      value: { year, month, current: i === 0},
+      value: { year, month, current: i === 0 },
     });
     date = date.subtract(1, 'month');
   }
@@ -36,10 +36,12 @@ interface Props {
 
 const PureSupportUsageFilter = (props: Props) => (
   <Row>
-    <AccountingPeriodFilter options={props.options}/>
-    <OrganizationAutocomplete/>
-    <ProjectFilter customer_uuid={props.customer ? props.customer.uuid : null}/>
-    <OfferingAutocomplete/>
+    <AccountingPeriodFilter options={props.options} />
+    <OrganizationAutocomplete />
+    <ProjectFilter
+      customer_uuid={props.customer ? props.customer.uuid : null}
+    />
+    <OfferingAutocomplete />
   </Row>
 );
 
@@ -55,9 +57,6 @@ const mapStateToProps = createSelector(
   }),
 );
 
-const enhance = compose(
-  reduxForm({form: FORM_ID}),
-  connect(mapStateToProps),
-);
+const enhance = compose(reduxForm({ form: FORM_ID }), connect(mapStateToProps));
 
 export const SupportUsageFilter = enhance(PureSupportUsageFilter);

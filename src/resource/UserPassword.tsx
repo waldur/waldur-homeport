@@ -12,9 +12,10 @@ export class UserPassword extends React.Component<UserPasswordProps> {
     showPassword: false,
   };
 
-  toggle = () => this.setState({
-    showPassword: !this.state.showPassword,
-  })
+  toggle = () =>
+    this.setState({
+      showPassword: !this.state.showPassword,
+    });
 
   render() {
     const iconClass = classNames('fa', {
@@ -27,13 +28,8 @@ export class UserPassword extends React.Component<UserPasswordProps> {
           className={iconClass}
           title={translate('Show password')}
           onClick={this.toggle}
-        />
-        {' '}
-        {
-          this.state.showPassword ?
-          this.props.password :
-          '***************'
-        }
+        />{' '}
+        {this.state.showPassword ? this.props.password : '***************'}
       </span>
     );
   }

@@ -1,4 +1,4 @@
-[class^="button"] {
+[class^='button'] {
   @include transition(all, 0.1s, ease);
 }
 
@@ -35,7 +35,7 @@
   position: relative;
   &:before {
     @include icon-fa;
-    content: "\f110";
+    content: '\f110';
     font-size: 20px;
     display: inline-block;
     text-align: center;
@@ -60,5 +60,4 @@
       transform: rotate(360deg);
     }
   }
-
 }

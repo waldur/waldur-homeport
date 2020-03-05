@@ -1,5 +1,19 @@
-import { reset, startSubmit, stopSubmit, blur, formValueSelector } from 'redux-form';
-import { call, put, take, takeEvery, takeLatest, select, race } from 'redux-saga/effects';
+import {
+  reset,
+  startSubmit,
+  stopSubmit,
+  blur,
+  formValueSelector,
+} from 'redux-form';
+import {
+  call,
+  put,
+  take,
+  takeEvery,
+  takeLatest,
+  select,
+  race,
+} from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
@@ -17,7 +31,12 @@ import { showError } from '@waldur/store/coreSaga';
 import * as actions from './actions';
 import * as api from './api';
 import * as constants from './constants';
-import { getActiveFormId, getIssue, getPendingAttachments, getComments } from './selectors';
+import {
+  getActiveFormId,
+  getIssue,
+  getPendingAttachments,
+  getComments,
+} from './selectors';
 import * as utils from './utils';
 
 export function* issueCommentsGet(action) {
@@ -27,18 +46,26 @@ export function* issueCommentsGet(action) {
     yield put(actions.issueCommentsGetSuccess(response.data));
   } catch (error) {
     yield put(actions.issueCommentsGetError(error));
-    const errorMessage = `${translate('Unable to fetch comments.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to fetch comments.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
 }
 
-export function* issueCommentsCreate(formId: string, message: string, issueId: string) {
+export function* issueCommentsCreate(
+  formId: string,
+  message: string,
+  issueId: string,
+) {
   try {
     const response = yield call(api.createComment, message, issueId);
     yield put(actions.issueCommentsCreateSuccess(response.data));
   } catch (error) {
     yield put(actions.issueCommentsCreateError(error));
-    const errorMessage = `${translate('Unable to post comment.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to post comment.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
     return;
   }
@@ -55,7 +82,9 @@ export function* issueCommentsUpdate(message: string, commentId: string) {
     yield put(actions.issueCommentsUpdateSuccess(response.data));
   } catch (error) {
     yield put(actions.issueCommentsUpdateError(error));
-    const errorMessage = `${translate('Unable to edit comment.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to edit comment.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
 }
@@ -67,7 +96,9 @@ export function* issueCommentsDelete(action) {
     yield put(actions.issueCommentsDeleteSuccess(commentId));
   } catch (error) {
     yield put(actions.issueCommentsDeleteError(error, commentId));
-    const errorMessage = `${translate('Unable to delete comment.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to delete comment.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
 }
@@ -103,6 +134,12 @@ export function* issueCommentsFormSubmit(action) {
   yield put(actions.issueCommentsUiDisable(false));
 }
 
+export function* issueCommentsWrapAttachment(attachments: Attachment[]) {
+  const issue = yield select(getIssue);
+  const commentDescription = utils.createJiraComment(null, attachments);
+  yield call(issueCommentsCreate, undefined, commentDescription, issue.uuid);
+}
+
 export function* issueCommentsAttachmentsPutStart() {
   yield put(actions.issueCommentsUiDisable(true));
   const activeFormId = yield select(getActiveFormId);
@@ -115,9 +152,16 @@ export function* issueCommentsAttachmentsPutStart() {
     ]);
     if (result.type === ISSUE_ATTACHMENTS_PUT_SUCCESS && activeFormId) {
       const getCommentDescription = formValueSelector(activeFormId);
-      let commentDescription = yield select(getCommentDescription, constants.FORM_FIELDS.comment);
-      commentDescription = utils.createJiraComment(commentDescription, [result.payload.item]);
-      yield put(blur(activeFormId, constants.FORM_FIELDS.comment, commentDescription));
+      let commentDescription = yield select(
+        getCommentDescription,
+        constants.FORM_FIELDS.comment,
+      );
+      commentDescription = utils.createJiraComment(commentDescription, [
+        result.payload.item,
+      ]);
+      yield put(
+        blur(activeFormId, constants.FORM_FIELDS.comment, commentDescription),
+      );
     }
     count = yield select(getUploading);
   }
@@ -127,12 +171,6 @@ export function* issueCommentsAttachmentsPutStart() {
     yield put(actions.issueCommentsPendingAttachmentsReset());
   }
   yield put(actions.issueCommentsUiDisable(false));
-}
-
-export function* issueCommentsWrapAttachment(attachments: Attachment[]) {
-  const issue = yield select(getIssue);
-  const commentDescription = utils.createJiraComment(null, attachments);
-  yield call(issueCommentsCreate, undefined, commentDescription, issue.uuid);
 }
 
 export function* issueCommentsPendingAttachmentsDelete() {
@@ -145,7 +183,16 @@ export function* issueCommentsPendingAttachmentsDelete() {
 export default function*() {
   yield takeEvery(constants.ISSUE_COMMENTS_GET, issueCommentsGet);
   yield takeEvery(constants.ISSUE_COMMENTS_DELETE, issueCommentsDelete);
-  yield takeEvery(constants.ISSUE_COMMENTS_FORM_SUBMIT, issueCommentsFormSubmit);
-  yield takeEvery(constants.ISSUE_COMMENTS_PENDING_ATTACHMENTS_DELETE, issueCommentsPendingAttachmentsDelete);
-  yield takeLatest(ISSUE_ATTACHMENTS_PUT_START, issueCommentsAttachmentsPutStart);
+  yield takeEvery(
+    constants.ISSUE_COMMENTS_FORM_SUBMIT,
+    issueCommentsFormSubmit,
+  );
+  yield takeEvery(
+    constants.ISSUE_COMMENTS_PENDING_ATTACHMENTS_DELETE,
+    issueCommentsPendingAttachmentsDelete,
+  );
+  yield takeLatest(
+    ISSUE_ATTACHMENTS_PUT_START,
+    issueCommentsAttachmentsPutStart,
+  );
 }

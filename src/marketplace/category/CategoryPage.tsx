@@ -21,7 +21,7 @@ export const CategoryPage = () => (
     </Col>
     <Col lg={9}>
       <div className="m-b-md p-sm gray-bg">
-        <div style={{display: 'flex'}}>
+        <div style={{ display: 'flex' }}>
           <FilterBarContainer />
           <MediaQuery maxWidth={768}>
             <MobileFilterActions />

@@ -14,7 +14,8 @@ const ansibleJobCreate = {
       AnsiblePlaybooksService,
       keysService,
       usersService,
-      currentStateService) {
+      currentStateService,
+    ) {
       this.$q = $q;
       this.$stateParams = $stateParams;
       this.$state = $state;
@@ -30,23 +31,29 @@ const ansibleJobCreate = {
     }
 
     $onInit() {
-      this.$q.all([
-        this.loadKeys(),
-        this.loadServices(),
-        this.loadPlaybook(),
-      ]).finally(() => this.loading = false);
-      this.sshKeysNotAvailable = this.$filter('translate')(gettext('You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.'));
-      this.sshKeyNotSelected = this.$filter('translate')(gettext('You have not selected any SSH key yet.'));
+      this.$q
+        .all([this.loadKeys(), this.loadServices(), this.loadPlaybook()])
+        .finally(() => (this.loading = false));
+      this.sshKeysNotAvailable = this.$filter('translate')(
+        gettext(
+          'You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.',
+        ),
+      );
+      this.sshKeyNotSelected = this.$filter('translate')(
+        gettext('You have not selected any SSH key yet.'),
+      );
     }
 
     loadKeys() {
       return this.usersService.getCurrentUser().then(user => {
-        return this.keysService.getAll({
-          user_uuid: user.uuid,
-          is_shared: false
-        }).then(keys => {
-          this.keys = keys;
-        });
+        return this.keysService
+          .getAll({
+            user_uuid: user.uuid,
+            is_shared: false,
+          })
+          .then(keys => {
+            this.keys = keys;
+          });
       });
     }
 
@@ -66,8 +73,9 @@ const ansibleJobCreate = {
     }
 
     loadPlaybook() {
-      return this.AnsiblePlaybooksService.get(this.$stateParams.category)
-        .then(playbook => this.playbook = playbook);
+      return this.AnsiblePlaybooksService.get(this.$stateParams.category).then(
+        playbook => (this.playbook = playbook),
+      );
     }
 
     initModel() {
@@ -97,19 +105,21 @@ const ansibleJobCreate = {
             columns: [
               {
                 name: 'name',
-                label: gettext('Name')
+                label: gettext('Name'),
               },
               {
                 name: 'fingerprint',
-                label: gettext('Fingerprint')
-              }
+                label: gettext('Fingerprint'),
+              },
             ],
             required: true,
             choices: this.keys,
             preselectFirst: true,
-            emptyMessage: gettext('You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.')
+            emptyMessage: gettext(
+              'You have not added any SSH keys to your <a ui-sref="profile.keys">profile</a>.',
+            ),
           },
-        }
+        },
       };
 
       this.playbook.parameters.forEach(parameter => {
@@ -135,24 +145,31 @@ const ansibleJobCreate = {
 
     createJob() {
       const payload = this.AnsibleJobsService.getPayload(
-        this.model, this.playbook, this.selectedService);
+        this.model,
+        this.playbook,
+        this.selectedService,
+      );
       return this.AnsibleJobsService.create(payload);
     }
 
     save() {
-      this.createJob().then(job => {
-        this.ncUtilsFlash.success(gettext('Application creation has been scheduled.'));
-        this.AnsibleJobsService.clearAllCacheForCurrentEndpoint();
-        this.$state.go('project.resources.ansible.details', {
-          uuid: job.project_uuid,
-          jobId: job.uuid
+      this.createJob()
+        .then(job => {
+          this.ncUtilsFlash.success(
+            gettext('Application creation has been scheduled.'),
+          );
+          this.AnsibleJobsService.clearAllCacheForCurrentEndpoint();
+          this.$state.go('project.resources.ansible.details', {
+            uuid: job.project_uuid,
+            jobId: job.uuid,
+          });
+        })
+        .catch(response => {
+          this.errors = response.data;
+          this.ncUtilsFlash.error(gettext('Unable to create application.'));
         });
-      }).catch(response => {
-        this.errors = response.data;
-        this.ncUtilsFlash.error(gettext('Unable to create application.'));
-      });
     }
-  }
+  },
 };
 
 export default ansibleJobCreate;

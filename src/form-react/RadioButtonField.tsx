@@ -17,24 +17,36 @@ export class RadioButtonChoice {
     public value: any,
     public label: React.ReactNode,
     public itemClassName?: string,
-  ) {
-  }
+  ) {}
 }
 
 export const RadioButtonField: React.FC<RadioButtonFieldProps> = props => {
-  const { input, choices, WrapperElement, wrapperClassName, ItemElement, defaultItemClassName, isHiddenInput, ...rest } = props;
+  const {
+    input,
+    choices,
+    WrapperElement,
+    wrapperClassName,
+    ItemElement,
+    defaultItemClassName,
+    isHiddenInput,
+    ...rest
+  } = props;
   return (
     <WrapperElement className={wrapperClassName}>
       {choices.map((choice, index) => {
-        if (!choice) { return null; }
+        if (!choice) {
+          return null;
+        }
         return (
           <ItemElement
             className={classNames(choice.itemClassName || defaultItemClassName)}
             key={index}
           >
-            <label className={classNames({
-              checked: input.value === choice.value,
-            })}>
+            <label
+              className={classNames({
+                checked: input.value === choice.value,
+              })}
+            >
               <input
                 {...input}
                 className={classNames({

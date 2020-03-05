@@ -1,6 +1,6 @@
 // https://fullcalendar.io/docs
 
-import {translate} from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { eventRender } from '../utils';
 

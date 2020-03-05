@@ -1,6 +1,13 @@
 class ProviderUtilsService {
   // @ngInject
-  constructor($q, ENV, joinService, servicesService, usersService, customersService) {
+  constructor(
+    $q,
+    ENV,
+    joinService,
+    servicesService,
+    usersService,
+    customersService,
+  ) {
     this.$q = $q;
     this.ENV = ENV;
     this.joinService = joinService;
@@ -15,7 +22,10 @@ class ProviderUtilsService {
     if (context.provider) {
       provider = context.provider;
     } else {
-      provider = await this.joinService.$get(context.provider_type, context.provider_uuid);
+      provider = await this.joinService.$get(
+        context.provider_type,
+        context.provider_uuid,
+      );
     }
 
     settings = await this.servicesService.$get(null, provider.settings);
@@ -25,16 +35,24 @@ class ProviderUtilsService {
     if (!settings.customer) {
       settingsVisible = user.is_staff;
     } else {
-      const customer = await this.customersService.$get(null, settings.customer);
+      const customer = await this.customersService.$get(
+        null,
+        settings.customer,
+      );
       settingsVisible = this.customersService.checkCustomerUser(customer, user);
 
       // Do not display provider settings for tenants if direct access is not enabled
       if (provider.service_type === 'OpenStackTenant') {
-        settingsVisible = settingsVisible && this.ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE;
+        settingsVisible =
+          settingsVisible &&
+          this.ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE;
       }
 
       // Do not display provider settings if only staff manages services but user is not staff
-      if (this.ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES && !user.is_staff) {
+      if (
+        this.ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES &&
+        !user.is_staff
+      ) {
         settingsVisible = false;
       }
     }

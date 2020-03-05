@@ -26,7 +26,10 @@ export const analyticsSearchFilterChange = (searchValue: string) => ({
   },
 });
 
-export const analyticsHistoryQuotaFetch = (tenantUuid: string, quotaUuid: string) => ({
+export const analyticsHistoryQuotaFetch = (
+  tenantUuid: string,
+  quotaUuid: string,
+) => ({
   type: constants.ANALYTICS_HISTORY_QUOTA_FETCH,
   payload: {
     tenantUuid,
@@ -34,7 +37,11 @@ export const analyticsHistoryQuotaFetch = (tenantUuid: string, quotaUuid: string
   },
 });
 
-export const analyticsHistoryQuotaFetchSuccess = (quotas: Quota[], tenantUuid: string, quotaUuid: string) => ({
+export const analyticsHistoryQuotaFetchSuccess = (
+  quotas: Quota[],
+  tenantUuid: string,
+  quotaUuid: string,
+) => ({
   type: constants.ANALYTICS_HISTORY_QUOTA_FETCH_SUCCESS,
   payload: {
     quotas,
@@ -43,7 +50,11 @@ export const analyticsHistoryQuotaFetchSuccess = (quotas: Quota[], tenantUuid: s
   },
 });
 
-export const analyticsHistoryQuotaFetchError = (error: any, tenantUuid: string, quotaUuid: string) => ({
+export const analyticsHistoryQuotaFetchError = (
+  error: any,
+  tenantUuid: string,
+  quotaUuid: string,
+) => ({
   type: constants.ANALYTICS_HISTORY_QUOTA_FETCH_ERROR,
   payload: {
     error,

@@ -3,7 +3,11 @@ import { getLink } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
 const getOfferingContext = event => ({
-  offering_link: getLink('offeringDetails', {uuid: event.offering_uuid}, event.offering_name),
+  offering_link: getLink(
+    'offeringDetails',
+    { uuid: event.offering_uuid },
+    event.offering_name,
+  ),
 });
 
 eventsRegistry.registerGroup({

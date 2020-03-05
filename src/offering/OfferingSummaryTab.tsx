@@ -12,20 +12,29 @@ interface OfferingSummaryTabProps extends TranslateProps {
   summary?: string;
 }
 
-export const OfferingSummaryTab = withTranslation((props: OfferingSummaryTabProps) => (
-  <>
-    {props.summary && <p
-      className="m-b-md"
-      dangerouslySetInnerHTML={{__html: $sanitize(props.summary)}}/>}
-    <Panel>
-      <Panel.Heading>
-        <Panel.Title>
-          {props.translate('Description')}
-        </Panel.Title>
-      </Panel.Heading>
-      <Panel.Body>
-        <div dangerouslySetInnerHTML={{__html: $sanitize(formatJiraMarkup(props.offering.issue_description))}}/>
-      </Panel.Body>
-    </Panel>
-  </>
-));
+export const OfferingSummaryTab = withTranslation(
+  (props: OfferingSummaryTabProps) => (
+    <>
+      {props.summary && (
+        <p
+          className="m-b-md"
+          dangerouslySetInnerHTML={{ __html: $sanitize(props.summary) }}
+        />
+      )}
+      <Panel>
+        <Panel.Heading>
+          <Panel.Title>{props.translate('Description')}</Panel.Title>
+        </Panel.Heading>
+        <Panel.Body>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: $sanitize(
+                formatJiraMarkup(props.offering.issue_description),
+              ),
+            }}
+          />
+        </Panel.Body>
+      </Panel>
+    </>
+  ),
+);

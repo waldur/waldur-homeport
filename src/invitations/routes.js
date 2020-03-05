@@ -4,9 +4,9 @@ export default function authRoutes($stateProvider) {
     .state('invitation', {
       url: '/invitation/:uuid/',
       data: {
-        bodyClass: 'old'
+        bodyClass: 'old',
       },
-      template: '<invitation-accept></invitation-accept>'
+      template: '<invitation-accept></invitation-accept>',
     })
 
     .state('invitation-approve', {
@@ -14,7 +14,7 @@ export default function authRoutes($stateProvider) {
       template: '<invitation-approve></invitation-approve>',
       data: {
         bodyClass: 'old',
-      }
+      },
     })
 
     .state('invitation-reject', {
@@ -22,6 +22,6 @@ export default function authRoutes($stateProvider) {
       template: '<invitation-reject></invitation-reject>',
       data: {
         bodyClass: 'old',
-      }
+      },
     });
 }

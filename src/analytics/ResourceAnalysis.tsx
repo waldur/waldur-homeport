@@ -20,13 +20,25 @@ interface PureResourceAnalysisProps extends TranslateProps {
   fetchProjects(): void;
 }
 
-export class PureResourceAnalysis extends React.Component<PureResourceAnalysisProps> {
-  componentDidMount() { this.props.fetchProjects(); }
+export class PureResourceAnalysis extends React.Component<
+  PureResourceAnalysisProps
+> {
+  componentDidMount() {
+    this.props.fetchProjects();
+  }
 
   render() {
-    const { searchValue, translate, projects, onSearchFilterChange, loading } = this.props;
+    const {
+      searchValue,
+      translate,
+      projects,
+      onSearchFilterChange,
+      loading,
+    } = this.props;
 
-    if (loading) { return (<LoadingSpinner />); }
+    if (loading) {
+      return <LoadingSpinner />;
+    }
 
     return (
       <div className="ibox">
@@ -65,7 +77,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSearchFilterChange: (evt: React.ChangeEvent<HTMLInputElement>) => dispatch(actions.analyticsSearchFilterChange(evt.target.value)),
+  onSearchFilterChange: (evt: React.ChangeEvent<HTMLInputElement>) =>
+    dispatch(actions.analyticsSearchFilterChange(evt.target.value)),
   fetchProjects: () => dispatch(actions.analyticsProjectsFetch()),
 });
 

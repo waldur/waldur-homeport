@@ -21,7 +21,7 @@ function InvitationsListController(
   InvitationCreateAction,
   InvitationSendAction,
   InvitationCancelAction,
-  ENV
+  ENV,
 ) {
   let controllerScope = this;
   let InvitationController = baseControllerListClass.extend({
@@ -30,14 +30,16 @@ function InvitationsListController(
       this.service = invitationService;
       let fn = this._super.bind(this);
       this.loading = true;
-      this.loadContext().then(() => {
-        this.actionContext = this.getActionContext();
-        this.tableOptions = this.getTableOptions();
-        fn();
-      }).finally(() => {
-        $scope.$emit('invitationList.initialized');
-        this.loading = false;
-      });
+      this.loadContext()
+        .then(() => {
+          this.actionContext = this.getActionContext();
+          this.tableOptions = this.getTableOptions();
+          fn();
+        })
+        .finally(() => {
+          $scope.$emit('invitationList.initialized');
+          this.loading = false;
+        });
     },
     loadContext: function() {
       return $q.all([
@@ -46,7 +48,7 @@ function InvitationsListController(
         }),
         usersService.getCurrentUser().then(user => {
           this.currentUser = user;
-        })
+        }),
       ]);
     },
     getActionContext: function() {
@@ -58,7 +60,7 @@ function InvitationsListController(
     },
     getFilter: function() {
       return {
-        customer: this.currentCustomer.uuid
+        customer: this.currentCustomer.uuid,
       };
     },
     getUserFilter: function() {
@@ -80,17 +82,17 @@ function InvitationsListController(
           },
           {
             title: gettext('Canceled'),
-            value: 'canceled'
+            value: 'canceled',
           },
           {
             title: gettext('Expired'),
-            value: 'expired'
+            value: 'expired',
           },
           {
             title: gettext('Accepted'),
-            value: 'accepted'
-          }
-        ]
+            value: 'accepted',
+          },
+        ],
       };
     },
     getTableOptions: function() {
@@ -104,10 +106,12 @@ function InvitationsListController(
             className: 'all',
             orderField: 'email',
             render: function(row) {
-              let avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'
-                .replace('{gravatarSrc}', row.email);
+              let avatar = '<img gravatar-src="\'{gravatarSrc}\'" gravatar-size="100" alt="" class="avatar-img img-xs">'.replace(
+                '{gravatarSrc}',
+                row.email,
+              );
               return avatar + ' ' + row.email;
-            }
+            },
           },
           {
             title: gettext('Role'),
@@ -118,13 +122,13 @@ function InvitationsListController(
                 return ENV.roles.owner;
               } else if (row.project_role) {
                 let href = $state.href('project.details', {
-                  uuid: ncUtils.getUUID(row.project)
+                  uuid: ncUtils.getUUID(row.project),
                 });
                 let roleTitle = ENV.roles[row.project_role] || 'Unknown';
                 let title = roleTitle + ' in ' + row.project_name;
                 return ncUtils.renderLink(href, title);
               }
-            }
+            },
           },
           {
             title: gettext('Status'),
@@ -132,7 +136,7 @@ function InvitationsListController(
             orderField: 'state',
             render: function(row) {
               return row.state;
-            }
+            },
           },
           {
             title: gettext('Created at'),
@@ -140,7 +144,7 @@ function InvitationsListController(
             orderField: 'created',
             render: function(row) {
               return $filter('shortDate')(row.created);
-            }
+            },
           },
           {
             title: gettext('Expires at'),
@@ -148,7 +152,7 @@ function InvitationsListController(
             orderable: false,
             render: function(row) {
               return $filter('shortDate')(row.expires);
-            }
+            },
           },
           {
             title: gettext('URL'),
@@ -156,16 +160,14 @@ function InvitationsListController(
             orderable: false,
             render: function(row) {
               return row.link_template.replace('{uuid}', row.uuid);
-            }
-          }
+            },
+          },
         ],
-        tableActions: [
-          InvitationCreateAction(this.actionContext),
-        ],
+        tableActions: [InvitationCreateAction(this.actionContext)],
         rowActions: [
           InvitationSendAction(this.actionContext),
           InvitationCancelAction(this.actionContext),
-        ]
+        ],
       };
     },
   });

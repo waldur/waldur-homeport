@@ -19,7 +19,8 @@ export const DescriptionStep = (props: DescriptionStepProps) => (
       submitting={false}
       labelClass="col-sm-2"
       controlClass="col-sm-8"
-      clearOnUnmount={false}>
+      clearOnUnmount={false}
+    >
       <SelectField
         name="category"
         label={props.translate('Category')}

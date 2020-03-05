@@ -12,17 +12,19 @@ interface ChoicesTableFilterProps {
   wrapperClassName?: string;
 }
 
-export class ChoicesTableFilter extends React.Component<ChoicesTableFilterProps> {
+export class ChoicesTableFilter extends React.Component<
+  ChoicesTableFilterProps
+> {
   getBtnClass = (index, choice, props) => {
     if (index === 0 && !props.input.value) {
       return 'btn btn-sm btn-primary';
     }
     return classNames(
       'btn btn-sm',
-      {'btn-default': choice.value !== props.input.value},
-      {'btn-primary': choice.value === props.input.value}
+      { 'btn-default': choice.value !== props.input.value },
+      { 'btn-primary': choice.value === props.input.value },
     );
-  }
+  };
 
   componentDidMount() {
     if (this.props.filterOptions.defaultValue) {
@@ -41,12 +43,13 @@ export class ChoicesTableFilter extends React.Component<ChoicesTableFilterProps>
                 key={index}
                 onClick={() => props.input.onChange(choice.value)}
                 className={this.getBtnClass(index, choice, props)}
-                type="button">
-                  {choice.label}
+                type="button"
+              >
+                {choice.label}
               </button>
             ))}
-          </div>)
-        }
+          </div>
+        )}
       </>
     );
   }

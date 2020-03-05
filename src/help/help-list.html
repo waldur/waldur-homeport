@@ -1,24 +1,24 @@
 <div>
-    <div class="container">
-        <h1 translate>Help topics</h1>
-    </div>
+  <div class="container">
+    <h1 translate>Help topics</h1>
+  </div>
 
-    <div class="white-box list-box">
-        <ul class="object-list" ng-repeat="helpBlock in $ctrl.helpData">
-            <li class="list-item list-header">
-                <div class="additional-cell display-for-mobile">
-                    <span class="list-sort">{{helpBlock.title}}</span>
-                </div>
-            </li>
-            <li class="list-item" ng-repeat="item in helpBlock.helpItems">
-                <div class="additional-cell display-for-mobile">
-                    <h3 class="item-title">
-                        <a ui-sref="help.details({name: item.key, type: item.type})">
-                            {{ item.name }}
-                        </a>
-                    </h3>
-                </div>
-            </li>
-        </ul>
-    </div>
+  <div class="white-box list-box">
+    <ul class="object-list" ng-repeat="helpBlock in $ctrl.helpData">
+      <li class="list-item list-header">
+        <div class="additional-cell display-for-mobile">
+          <span class="list-sort">{{ helpBlock.title }}</span>
+        </div>
+      </li>
+      <li class="list-item" ng-repeat="item in helpBlock.helpItems">
+        <div class="additional-cell display-for-mobile">
+          <h3 class="item-title">
+            <a ui-sref="help.details({name: item.key, type: item.type})">
+              {{ item.name }}
+            </a>
+          </h3>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

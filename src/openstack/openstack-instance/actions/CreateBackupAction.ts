@@ -1,5 +1,9 @@
 import { translate } from '@waldur/i18n';
-import { validateState, createLatinNameField, createDescriptionField } from '@waldur/resource/actions/base';
+import {
+  validateState,
+  createLatinNameField,
+  createDescriptionField,
+} from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
 export default function createAction(): ResourceAction {
@@ -20,7 +24,9 @@ export default function createAction(): ResourceAction {
         type: 'datetime',
         required: false,
         label: translate('Kept until'),
-        help_text: translate('Guaranteed time of backup retention. If null - keep forever.'),
+        help_text: translate(
+          'Guaranteed time of backup retention. If null - keep forever.',
+        ),
       },
     ],
   };

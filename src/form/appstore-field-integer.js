@@ -11,7 +11,7 @@ const appstoreFieldInteger = {
     if (this.field.type === 'integer' && !this.field.factor) {
       this.field.factor = 1;
     }
-  }
+  },
 };
 
 export default appstoreFieldInteger;

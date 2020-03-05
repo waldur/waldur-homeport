@@ -6,12 +6,15 @@ export default function quotasService(baseServiceClass) {
       this.endpoint = '/quotas/';
     },
     getHistory: function(url, start, end, points_count) {
-      return this.getList({
-        start: start,
-        end: end,
-        points_count: points_count
-      }, url + 'history/');
-    }
+      return this.getList(
+        {
+          start: start,
+          end: end,
+          points_count: points_count,
+        },
+        url + 'history/',
+      );
+    },
   });
   return new ServiceClass();
 }

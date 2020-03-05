@@ -17,17 +17,11 @@ const TABS = {
 };
 
 export const DEFAULT_RESOURCE_TABS = {
-  order: [
-    'issues',
-    'orderItems',
-    'events',
-  ],
-  options: TABS
+  order: ['issues', 'orderItems', 'events'],
+  options: TABS,
 };
 
 export const DEFAULT_SUBRESOURCE_TABS = {
-  order: [
-    'events',
-  ],
-  options: TABS
+  order: ['events'],
+  options: TABS,
 };

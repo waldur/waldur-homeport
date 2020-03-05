@@ -9,10 +9,15 @@ import { getInviteAction } from './InviteUserAction';
 import { CustomerActionsProps } from './types';
 
 export const CustomerActions = (props: CustomerActionsProps) => (
-  <ActionList actions={[
-    getProjectAction(props),
-    getInviteAction(props),
-    getIssueAction({issue: {customer: props.customer}, state: 'organization.issues'}),
-    getSupportPortalAction(),
-  ].filter(action => action !== undefined)}/>
+  <ActionList
+    actions={[
+      getProjectAction(props),
+      getInviteAction(props),
+      getIssueAction({
+        issue: { customer: props.customer },
+        state: 'organization.issues',
+      }),
+      getSupportPortalAction(),
+    ].filter(action => action !== undefined)}
+  />
 );

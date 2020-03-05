@@ -1,11 +1,21 @@
 <ul class="list-group">
-  <li class="list-group-item checkbox awesome-checkbox checkbox-success"
+  <li
+    class="list-group-item checkbox awesome-checkbox checkbox-success"
     ng-repeat="choice in choices | orderBy:'title'"
-    ng-class="{'disabled': choice.disabled}">
-    <input id="{{ 'checkbox-' + $index }}" type="checkbox" ng-model="choice.selected">
+    ng-class="{'disabled': choice.disabled}"
+  >
+    <input
+      id="{{ 'checkbox-' + $index }}"
+      type="checkbox"
+      ng-model="choice.selected"
+    />
     <label for="{{ 'checkbox-' + $index }}">
       {{ choice.title | translate }}
-      <helpicon class="pull-right" help-text="{{ choice.help_text }}" ng-if="choice.help_text"></helpicon>
+      <helpicon
+        class="pull-right"
+        help-text="{{ choice.help_text }}"
+        ng-if="choice.help_text"
+      ></helpicon>
     </label>
     <small ng-bind="choice.subtitle" ng-if="choice.subtitle"></small>
   </li>

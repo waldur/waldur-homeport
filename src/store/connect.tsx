@@ -9,7 +9,7 @@ import store from './store';
 export function withStore<P>(Component: React.ComponentType<P>) {
   const Wrapper: React.ComponentType<P> = props => (
     <Provider store={store}>
-      <Component {...props}/>
+      <Component {...props} />
     </Provider>
   );
   Wrapper.displayName = `withStore(${Component.name})`;

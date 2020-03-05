@@ -14,42 +14,39 @@ interface OfferingHeaderProps {
 
 export const OfferingHeader: React.FC<OfferingHeaderProps> = props => (
   <dl className="dl-horizontal resource-details-table col-sm-12">
-    <Field
-      label={translate('Name')}
-      value={props.offering.name}
-    />
+    <Field label={translate('Name')} value={props.offering.name} />
 
-    <Field
-      label={translate('Type')}
-      value={getLabel(props.offering.type)}
-    />
+    <Field label={translate('Type')} value={getLabel(props.offering.type)} />
 
     <Field
       label={translate('Category')}
       value={props.offering.category_title}
     />
 
-    <Field
-      label={translate('State')}
-      value={props.offering.state}
-    />
+    <Field label={translate('State')} value={props.offering.state} />
 
     <Field
       label={translate('Shared')}
-      value={(
-        <Tooltip id="shared-flag" label={translate('Accessible to all customers.')}>
-          <BooleanField value={props.offering.shared}/>
+      value={
+        <Tooltip
+          id="shared-flag"
+          label={translate('Accessible to all customers.')}
+        >
+          <BooleanField value={props.offering.shared} />
         </Tooltip>
-      )}
+      }
     />
 
     <Field
       label={translate('Billing enabled')}
-      value={(
-        <Tooltip id="billing-flag" label={translate('Purchase and usage is invoiced.')}>
-          <BooleanField value={props.offering.billable}/>
+      value={
+        <Tooltip
+          id="billing-flag"
+          label={translate('Purchase and usage is invoiced.')}
+        >
+          <BooleanField value={props.offering.billable} />
         </Tooltip>
-      )}
+      }
     />
 
     <Field

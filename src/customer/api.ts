@@ -42,21 +42,31 @@ const getQuotaRows = props => {
       value: counters.nc_offering_count,
       visible: isFeatureVisible('offering'),
     },
-  ].filter(row => row.visible).filter(row => row.value);
+  ]
+    .filter(row => row.visible)
+    .filter(row => row.value);
 };
 
-const parseCategories = (categories: Category[], counters: object): ExpandableRow[] => {
-  return categories.map(category => ({
-    label: category.title,
-    value: counters[`marketplace_category_${category.uuid}`],
-  })).filter(row => row.value).sort((a, b) => a.label.localeCompare(b.label));
+const parseCategories = (
+  categories: Category[],
+  counters: object,
+): ExpandableRow[] => {
+  return categories
+    .map(category => ({
+      label: category.title,
+      value: counters[`marketplace_category_${category.uuid}`],
+    }))
+    .filter(row => row.value)
+    .sort((a, b) => a.label.localeCompare(b.label));
 };
 
 export async function loadCustomerResources(props): Promise<ExpandableRow[]> {
   if (!isFeatureVisible('marketplace')) {
     return getQuotaRows(props);
   } else {
-    const categories = await getCategories({params: {field: ['uuid', 'title']}});
+    const categories = await getCategories({
+      params: { field: ['uuid', 'title'] },
+    });
     const counters = await getCustomerCounters(props.uuid);
     return parseCategories(categories, counters);
   }

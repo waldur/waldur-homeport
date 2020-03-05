@@ -16,7 +16,7 @@ interface OfferingGridProps extends OfferingsListType {
 
 export const OfferingGrid: React.FC<OfferingGridProps> = props => {
   if (props.loading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   if (!props.loaded) {
@@ -41,7 +41,7 @@ export const OfferingGrid: React.FC<OfferingGridProps> = props => {
         <table className="table table-borderless">
           <tbody>
             {props.items.map((offering, index) => (
-              <MobileOfferingCard key={index} offering={offering}/>
+              <MobileOfferingCard key={index} offering={offering} />
             ))}
           </tbody>
         </table>
@@ -50,7 +50,7 @@ export const OfferingGrid: React.FC<OfferingGridProps> = props => {
         <Row>
           {props.items.map((offering, index) => (
             <Col key={index} md={props.width} sm={6}>
-              <OfferingCard offering={offering}/>
+              <OfferingCard offering={offering} />
             </Col>
           ))}
         </Row>

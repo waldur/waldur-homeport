@@ -4,7 +4,7 @@ const freeipaAccount = {
   template: template,
   controller: class FreeIPAAccountController {
     // @ngInject
-    constructor(freeipaService, usersService){
+    constructor(freeipaService, usersService) {
       this.freeipaService = freeipaService;
       this.usersService = usersService;
     }
@@ -26,7 +26,7 @@ const freeipaAccount = {
         });
       });
     }
-  }
+  },
 };
 
 export default freeipaAccount;

@@ -9,15 +9,9 @@ interface ResourceActionsButtonProps {
   row: Resource;
 }
 
-export const ResourceActionsButton = ({row}: ResourceActionsButtonProps) => (
+export const ResourceActionsButton = ({ row }: ResourceActionsButtonProps) => (
   <>
-    <ActionButtonResource
-      disabled={row.scope === null}
-      url={row.scope}
-    />
-    <ResourceSummaryButton
-      disabled={row.scope === null}
-      url={row.scope}
-    />
+    <ActionButtonResource disabled={row.scope === null} url={row.scope} />
+    <ResourceSummaryButton disabled={row.scope === null} url={row.scope} />
   </>
 );

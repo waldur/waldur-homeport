@@ -17,7 +17,7 @@ export const TermsOfServiceDialog = (props: TermsOfServiceDialogProps) => (
     title={translate('Terms of Service')}
     footer={<CloseDialogButton />}
   >
-    <TermsOfServiceContent content={props.resolve.content}/>
+    <TermsOfServiceContent content={props.resolve.content} />
   </ModalDialog>
 );
 

@@ -11,10 +11,12 @@ export default class InvoiceEventsService {
   loadEvents(item) {
     // TODO: Remove extra check after https://opennode.atlassian.net/browse/WAL-1211
     if (item.scope_type && item.scope_uuid) {
-      return this.eventsService.getAll({
-        resource_type: item.scope_type,
-        resource_uuid: item.scope_uuid
-      }).then(this.parseEvents.bind(this));
+      return this.eventsService
+        .getAll({
+          resource_type: item.scope_type,
+          resource_uuid: item.scope_uuid,
+        })
+        .then(this.parseEvents.bind(this));
     } else {
       return this.$q.resolve([]);
     }

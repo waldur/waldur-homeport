@@ -7,55 +7,77 @@ import { Plan, Offering } from '@waldur/marketplace/types';
 
 import { Component, PricesData } from './types';
 
-export const combinePrices = (plan: Plan, limits: Limits, offering: Offering): PricesData => {
+export const combinePrices = (
+  plan: Plan,
+  limits: Limits,
+  offering: Offering,
+): PricesData => {
   if (plan && offering) {
-    const {periods, multipliers} = getBillingPeriods(plan.unit);
+    const { periods, multipliers } = getBillingPeriods(plan.unit);
     const offeringLimits = parseOfferingLimits(offering);
-    const components: Component[] = offering.components
-      .map(component => {
-        let amount = 0;
-        if (limits && limits[component.type]) {
-          amount = limits[component.type] || 0;
-        } else if (component.billing_type === 'fixed') {
-          amount = plan.quotas[component.type] || 0;
-        }
-        const price = plan.prices[component.type] || 0;
-        const subTotal = price * amount;
-        const prices = multipliers.map(mult => mult * subTotal);
-        return {
-          ...component,
-          amount,
-          prices,
-          subTotal,
-          price,
-          min_value: offeringLimits[component.type].min,
-          max_value: offeringLimits[component.type].max,
-        };
-      });
+    const components: Component[] = offering.components.map(component => {
+      let amount = 0;
+      if (limits && limits[component.type]) {
+        amount = limits[component.type] || 0;
+      } else if (component.billing_type === 'fixed') {
+        amount = plan.quotas[component.type] || 0;
+      }
+      const price = plan.prices[component.type] || 0;
+      const subTotal = price * amount;
+      const prices = multipliers.map(mult => mult * subTotal);
+      return {
+        ...component,
+        amount,
+        prices,
+        subTotal,
+        price,
+        min_value: offeringLimits[component.type].min,
+        max_value: offeringLimits[component.type].max,
+      };
+    });
 
-    const usageComponents = components.filter(component => component.billing_type === 'usage');
-    const usageSubTotal = usageComponents.reduce((result, item) => result + item.subTotal, 0);
+    const usageComponents = components.filter(
+      component => component.billing_type === 'usage',
+    );
+    const usageSubTotal = usageComponents.reduce(
+      (result, item) => result + item.subTotal,
+      0,
+    );
 
-    const fixedComponents = components.filter(component => component.billing_type === 'fixed');
-    const fixedSubTotal = fixedComponents.reduce((result, item) => result + item.subTotal, 0);
+    const fixedComponents = components.filter(
+      component => component.billing_type === 'fixed',
+    );
+    const fixedSubTotal = fixedComponents.reduce(
+      (result, item) => result + item.subTotal,
+      0,
+    );
 
     const subscriptionSubTotal = usageSubTotal + fixedSubTotal;
-    const subscriptionSubTotalPeriods = multipliers.map(mult => mult * subscriptionSubTotal || 0);
+    const subscriptionSubTotalPeriods = multipliers.map(
+      mult => mult * subscriptionSubTotal || 0,
+    );
 
-    const initPrice = typeof plan.init_price === 'string' ? parseFloat(plan.init_price) : plan.init_price;
+    const initPrice =
+      typeof plan.init_price === 'string'
+        ? parseFloat(plan.init_price)
+        : plan.init_price;
     const total = subscriptionSubTotal + initPrice;
-    const totalPeriods = subscriptionSubTotalPeriods.map(val => val + initPrice);
+    const totalPeriods = subscriptionSubTotalPeriods.map(
+      val => val + initPrice,
+    );
 
-    return {components, periods, total, totalPeriods};
+    return { components, periods, total, totalPeriods };
   } else {
-    return {components: [], periods: [], total: 0, totalPeriods: []};
+    return { components: [], periods: [], total: 0, totalPeriods: [] };
   }
 };
 
 const getPlan = (state, props) => {
   if (props.viewMode && props.orderItem) {
     if (props.orderItem.plan_uuid) {
-      return props.offering.plans.find(plan => plan.uuid === props.orderItem.plan_uuid);
+      return props.offering.plans.find(
+        plan => plan.uuid === props.orderItem.plan_uuid,
+      );
     } else {
       return props.offering.plans[0];
     }

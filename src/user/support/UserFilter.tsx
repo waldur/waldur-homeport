@@ -19,7 +19,8 @@ const PureUserFilter = (props: UserFilterProps) => (
     <FormContainer
       labelClass="m-r-md"
       controlClass="m-r-md"
-      submitting={props.submitting}>
+      submitting={props.submitting}
+    >
       <StringField
         label={props.translate('Full name')}
         name="full_name"
@@ -97,7 +98,7 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  reduxForm({form: 'userFilter'}),
+  reduxForm({ form: 'userFilter' }),
   connect(mapStateToProps),
   withTranslation,
 );

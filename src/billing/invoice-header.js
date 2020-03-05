@@ -3,7 +3,7 @@ import template from './invoice-header.html';
 const invoiceHeader = {
   template,
   bindings: {
-    invoice: '<'
+    invoice: '<',
   },
   controller: class InvoiceHeaderController {
     // @ngInject
@@ -31,12 +31,12 @@ const invoiceHeader = {
       this.$uibModal.open({
         component: 'invoiceTimelineDialog',
         resolve: {
-          invoice: () => this.invoice
+          invoice: () => this.invoice,
         },
-        size: 'lg'
+        size: 'lg',
       });
     }
-  }
+  },
 };
 
 export default invoiceHeader;

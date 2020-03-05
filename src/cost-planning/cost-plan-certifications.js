@@ -4,8 +4,8 @@ const costPlanCertifications = {
   template,
   bindings: {
     certifications: '<',
-    plan: '<'
-  }
+    plan: '<',
+  },
 };
 
 export default costPlanCertifications;

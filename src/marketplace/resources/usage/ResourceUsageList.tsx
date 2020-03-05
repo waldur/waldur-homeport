@@ -42,7 +42,7 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ResourceUsages',
   fetchData: createFetcher('marketplace-component-usages'),
-  mapPropsToFilter: props => ({resource_uuid: props.resource_uuid}),
+  mapPropsToFilter: props => ({ resource_uuid: props.resource_uuid }),
   exportRow: row => [
     row.date,
     row.usage,
@@ -50,13 +50,9 @@ const TableOptions = {
     row.type,
     row.name,
   ],
-  exportFields: [
-    'Date',
-    'Value',
-    'Unit',
-    'Type',
-    'Name',
-  ],
+  exportFields: ['Date', 'Value', 'Unit', 'Type', 'Name'],
 };
 
-export const ResourceUsagesList = withTranslation(connectTable(TableOptions)(TableComponent));
+export const ResourceUsagesList = withTranslation(
+  connectTable(TableOptions)(TableComponent),
+);

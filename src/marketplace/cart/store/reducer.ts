@@ -1,4 +1,5 @@
 import { State } from '../types';
+
 import * as constants from './constants';
 
 const INITIAL_STATE: State = {

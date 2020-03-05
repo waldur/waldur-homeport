@@ -21,7 +21,9 @@ import { OpenStackAllocationPool } from './OpenStackAllocationPool';
 import { OpenStackSubnetField } from './OpenStackSubnetField';
 import { validatePrivateSubnetCIDR } from './utils';
 
-export class OpenStackPackageForm extends React.Component<OfferingConfigurationFormProps> {
+export class OpenStackPackageForm extends React.Component<
+  OfferingConfigurationFormProps
+> {
   componentDidMount() {
     const { project, plan } = this.props;
     const defaults = getDefaults(this.props.offering);
@@ -47,29 +49,34 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
         <FormContainer
           submitting={props.submitting}
           labelClass="col-sm-3"
-          controlClass="col-sm-9">
-          <ProjectField/>
+          controlClass="col-sm-9"
+        >
+          <ProjectField />
           <StringField
             label={translate('Tenant name')}
             name="attributes.name"
-            description={translate('This name will be visible in accounting data.')}
+            description={translate(
+              'This name will be visible in accounting data.',
+            )}
             validate={getLatinNameValidators()}
             required={true}
           />
-          <PlanField offering={props.offering}/>
-          <PlanDetailsTable offering={props.offering} limits={props.limits}/>
+          <PlanField offering={props.offering} />
+          <PlanDetailsTable offering={props.offering} limits={props.limits} />
           <TextField
             label={translate('Tenant description')}
             name="attributes.description"
           />
           {ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE && (
-            <LabelField label={translate('Access')}/>
+            <LabelField label={translate('Access')} />
           )}
           {ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE && (
             <StringField
               label={translate('Initial admin username')}
               placeholder={translate('generate automatically')}
-              tooltip={translate('Leave blank if you want admin username to be auto-generated.')}
+              tooltip={translate(
+                'Leave blank if you want admin username to be auto-generated.',
+              )}
               name="attributes.user_username"
             />
           )}
@@ -77,7 +84,9 @@ export class OpenStackPackageForm extends React.Component<OfferingConfigurationF
             <SecretField
               label={translate('Initial admin password')}
               placeholder={translate('generate automatically')}
-              tooltip={translate('Leave blank if you want admin password to be auto-generated.')}
+              tooltip={translate(
+                'Leave blank if you want admin password to be auto-generated.',
+              )}
               name="attributes.user_password"
             />
           )}

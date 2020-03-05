@@ -3,8 +3,8 @@ import template from './jira-project-checkout-summary.html';
 const jiraProjectCheckoutSummary = {
   template: template,
   bindings: {
-    model: '<'
-  }
+    model: '<',
+  },
 };
 
 export default jiraProjectCheckoutSummary;

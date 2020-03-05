@@ -24,7 +24,9 @@ eventsRegistry.registerGroup({
     },
     {
       key: 'user_password_updated',
-      title: gettext('Password has been changed for user {affected_user_link}.'),
+      title: gettext(
+        'Password has been changed for user {affected_user_link}.',
+      ),
     },
     {
       key: 'user_update_succeeded',
@@ -39,11 +41,15 @@ eventsRegistry.registerGroup({
   events: [
     {
       key: 'ssh_key_creation_succeeded',
-      title: gettext('SSH key {ssh_key_name} has been created for user {user_link}'),
+      title: gettext(
+        'SSH key {ssh_key_name} has been created for user {user_link}',
+      ),
     },
     {
       key: 'ssh_key_deletion_succeeded',
-      title: gettext('SSH key {ssh_key_name} has been deleted for user {user_link}'),
+      title: gettext(
+        'SSH key {ssh_key_name} has been deleted for user {user_link}',
+      ),
     },
   ],
 });

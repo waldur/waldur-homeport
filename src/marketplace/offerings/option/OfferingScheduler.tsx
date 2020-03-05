@@ -8,16 +8,17 @@ import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
 
 import { EditableCalendar } from '@waldur/booking/components/calendar/EditableCalendar';
 import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
-import {createCalendarBookingEvent, deleteCalendarBookingEvent} from '@waldur/booking/utils';
+import {
+  createCalendarBookingEvent,
+  deleteCalendarBookingEvent,
+} from '@waldur/booking/utils';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { withModal } from '@waldur/modal/withModal';
 
 import './OfferingScheduler.scss';
 
-type OfferingSchedulerProps =
-  TranslateProps &
-  WrappedFieldArrayProps<any> &
-  {
+type OfferingSchedulerProps = TranslateProps &
+  WrappedFieldArrayProps<any> & {
     setModalProps: (event) => void;
     openModal: (cb) => void;
     schedules: EventInput[];
@@ -33,14 +34,22 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
         <Panel.Body>
           <EditableCalendar
             events={props.schedules}
-            onSelectDate={event => props.fields.push(createCalendarBookingEvent({ ...event, type: 'availability' }) )}
+            onSelectDate={event =>
+              props.fields.push(
+                createCalendarBookingEvent({ ...event, type: 'availability' }),
+              )
+            }
             onSelectEvent={prevEvent => {
               props.setModalProps({
                 event: prevEvent.event,
-                destroy: () => deleteCalendarBookingEvent(props.fields, prevEvent.event),
+                destroy: () =>
+                  deleteCalendarBookingEvent(props.fields, prevEvent.event),
               });
               props.openModal(event => {
-                const field = createCalendarBookingEvent({ ...prevEvent.event.extendedProps, event });
+                const field = createCalendarBookingEvent({
+                  ...prevEvent.event.extendedProps,
+                  event,
+                });
                 deleteCalendarBookingEvent(props.fields, prevEvent.event);
                 props.fields.push(field);
               });
@@ -69,7 +78,7 @@ const mapStateToProps = state => ({
 const enhance = compose(
   connect(mapStateToProps),
   withTranslation,
-  withModal(CalendarEventModal)
+  withModal(CalendarEventModal),
 );
 
 export const OfferingScheduler = enhance(PureOfferingScheduler);

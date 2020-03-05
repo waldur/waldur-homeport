@@ -7,40 +7,65 @@
       <loading-spinner></loading-spinner>
     </div>
     <div ng-if="!loading">
-      <p ng-if="::action.dialogSubtitle" bind-html-compile="action.dialogSubtitle"></p>
+      <p
+        ng-if="::action.dialogSubtitle"
+        bind-html-compile="action.dialogSubtitle"
+      ></p>
       <div class="form-group" ng-if="action.name === 'destroy'">
         <label class="control-label">
           <h4>
             <b translate>You are about to delete:</b>
-            {{resource.name}}
+            {{ resource.name }}
           </h4>
         </label>
       </div>
-      <div class="form-group"
+      <div
+        class="form-group"
         ng-repeat="(name, field) in fields"
-        ng-class="field.formGroupClass">
-        <label class="control-label"
+        ng-class="field.formGroupClass"
+      >
+        <label
+          class="control-label"
           for="action-{{ name }}"
-          ng-if="field.type != 'boolean'">
+          ng-if="field.type != 'boolean'"
+        >
           <field-label field="field"></field-label>
-          <helpicon help-text="{{ ::field.help_text }}" ng-if="::field.help_text"></helpicon>
+          <helpicon
+            help-text="{{ ::field.help_text }}"
+            ng-if="::field.help_text"
+          ></helpicon>
         </label>
         <div>
-          <action-field field="field" model="form" form="ActionForm" context="{resource: resource}"></action-field>
-          <p class="text-danger" ng-repeat="error in errors[name]" ng-bind="error"></p>
+          <action-field
+            field="field"
+            model="form"
+            form="ActionForm"
+            context="{resource: resource}"
+          ></action-field>
+          <p
+            class="text-danger"
+            ng-repeat="error in errors[name]"
+            ng-bind="error"
+          ></p>
         </div>
       </div>
-      <p class="text-danger" ng-repeat="error in errors.non_field_errors" ng-bind="error"></p>
+      <p
+        class="text-danger"
+        ng-repeat="error in errors.non_field_errors"
+        ng-bind="error"
+      ></p>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary"
+    <button
+      type="submit"
+      class="btn btn-primary"
       ng-disabled="!submitActive()"
-      submit-button="submitForm()">
+      submit-button="submitForm()"
+    >
       <span translate>Submit</span>
     </button>
-    <button type="button" class="btn btn-default"
-      ng-click="cancel()">
+    <button type="button" class="btn btn-default" ng-click="cancel()">
       <span translate>Cancel</span>
     </button>
   </div>

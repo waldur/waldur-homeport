@@ -9,8 +9,8 @@ export default function analyticsRoutes($stateProvider) {
       abstract: true,
       template: '<ui-view></ui-view>',
       resolve: {
-        module: moduleLoader
-      }
+        module: moduleLoader,
+      },
     })
 
     .state('organization.analysis.resources', {
@@ -18,8 +18,8 @@ export default function analyticsRoutes($stateProvider) {
       template: '<resource-analysis-container></resource-analysis-container>',
       data: {
         pageClass: 'gray-bg',
-        pageTitle: gettext('Resource usage')
-      }
+        pageTitle: gettext('Resource usage'),
+      },
     })
 
     .state('support.vm-type-overview', {
@@ -31,7 +31,7 @@ export default function analyticsRoutes($stateProvider) {
       },
       resolve: {
         permission: checkPermission,
-        module: moduleLoader
-      }
+        module: moduleLoader,
+      },
     });
 }

@@ -12,7 +12,6 @@
         <provider-details provider="$ctrl.provider"></provider-details>
       </div>
     </uib-tab>
-    </uib-tab>
     <uib-tab index="2" ng-if="$ctrl.editable">
       <uib-tab-heading translate>Quotas</uib-tab-heading>
       <div class="panel-body" ng-if="active==2">
@@ -28,8 +27,7 @@
   </uib-tabset>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default"
-    ng-click="$ctrl.dismiss()">
+  <button class="btn btn-default" ng-click="$ctrl.dismiss()">
     <span translate>OK</span>
   </button>
 </div>

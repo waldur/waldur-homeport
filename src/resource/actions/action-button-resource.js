@@ -10,7 +10,12 @@ class ActionButtonController {
   }
 
   onClick(name, action) {
-    this.actionUtilsService.buttonClick(this.buttonController, this.buttonModel, name, action);
+    this.actionUtilsService.buttonClick(
+      this.buttonController,
+      this.buttonModel,
+      name,
+      action,
+    );
   }
 
   onToggle(open) {
@@ -25,24 +30,27 @@ class ActionButtonController {
   buttonClass(action) {
     return {
       disabled: !action.enabled || action.pending,
-      remove: action.destructive
+      remove: action.destructive,
     };
   }
 
   openList() {
     this.loading = true;
     this.actions = [];
-    this.actionUtilsService.loadActions(this.buttonModel).then(actions => {
-      let actionsObj = {};
-      angular.forEach(actions, (value, key) => {
-        if (!value.tab) {
-          actionsObj[key] = value;
-        }
+    this.actionUtilsService
+      .loadActions(this.buttonModel)
+      .then(actions => {
+        let actionsObj = {};
+        angular.forEach(actions, (value, key) => {
+          if (!value.tab) {
+            actionsObj[key] = value;
+          }
+        });
+        this.actions = actionsObj;
+      })
+      .finally(() => {
+        this.loading = false;
       });
-      this.actions = actionsObj;
-    }).finally(() => {
-      this.loading = false;
-    });
   }
 }
 
@@ -51,8 +59,8 @@ const actionButtonResource = {
   controller: ActionButtonController,
   bindings: {
     buttonController: '<',
-    buttonModel: '<'
-  }
+    buttonModel: '<',
+  },
 };
 
 export default actionButtonResource;

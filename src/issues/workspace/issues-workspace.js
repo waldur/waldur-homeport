@@ -18,8 +18,13 @@ export default {
         workspace: WOKSPACE_NAMES.support,
       });
 
-      this.IssueNavigationService.getSidebarItems().then(items => this.items = items);
-      this.unlisten = this.$rootScope.$on('$stateChangeSuccess', this.syncNavigation.bind(this));
+      this.IssueNavigationService.getSidebarItems().then(
+        items => (this.items = items),
+      );
+      this.unlisten = this.$rootScope.$on(
+        '$stateChangeSuccess',
+        this.syncNavigation.bind(this),
+      );
       this.syncNavigation();
     }
 
@@ -35,5 +40,5 @@ export default {
     gotoDashboard() {
       return this.IssueNavigationService.gotoDashboard();
     }
-  }
+  },
 };

@@ -9,11 +9,7 @@ interface CancelButtonProps {
 export const CancelButton = (props: CancelButtonProps) => {
   const { label, ...rest } = props;
   return (
-    <button
-      className="btn btn-link"
-      type="button"
-      {...rest}
-    >
+    <button className="btn btn-link" type="button" {...rest}>
       {label}
     </button>
   );

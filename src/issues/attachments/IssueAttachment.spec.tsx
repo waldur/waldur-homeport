@@ -14,11 +14,14 @@ describe('IssueAttachment', () => {
     deleteAttachment: () => undefined,
     openModal: () => undefined,
   };
-  const renderWrapper = (props?) => shallow(<PureIssueAttachment {...inititalProps} {...props} />);
+  const renderWrapper = (props?) =>
+    shallow(<PureIssueAttachment {...inititalProps} {...props} />);
 
   it('renders thumbnail', () => {
     const wrapper = renderWrapper({ attachment });
-    expect(wrapper.find('.attachment-item__thumb img').prop('src')).toBe(attachment.file);
+    expect(wrapper.find('.attachment-item__thumb img').prop('src')).toBe(
+      attachment.file,
+    );
   });
 
   it('renders file icon', () => {
@@ -28,7 +31,9 @@ describe('IssueAttachment', () => {
     };
     const wrapper = renderWrapper({ attachment: currAttachment });
     expect(wrapper.find('.attachment-item__thumb .fa.fa-file').length).toBe(1);
-    expect(wrapper.find('.attachment-item__thumb a').prop('href')).toBe('file.txt');
+    expect(wrapper.find('.attachment-item__thumb a').prop('href')).toBe(
+      'file.txt',
+    );
   });
 
   it('renders description', () => {
@@ -36,8 +41,12 @@ describe('IssueAttachment', () => {
     const anchor = wrapper.find('.attachment-item__description-name a');
     expect(anchor.text()).toBe('panda.jpg');
     expect(anchor.prop('href')).toBe(attachment.file);
-    expect(wrapper.find('.attachment-item__description-date').text()).toBe(formatDateTime(attachment.created));
-    expect(wrapper.find('.attachment-item__description-size').text()).toBe('62.6 KB');
+    expect(wrapper.find('.attachment-item__description-date').text()).toBe(
+      formatDateTime(attachment.created),
+    );
+    expect(wrapper.find('.attachment-item__description-size').text()).toBe(
+      '62.6 KB',
+    );
   });
 
   it('renders deleting overlay', () => {

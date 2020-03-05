@@ -16,13 +16,15 @@ import { getResource, getLoading } from './selectors';
 interface PureResourceSummaryModalProps extends TranslateProps {
   loading: boolean;
   resolve: {
-    url: string,
+    url: string;
   };
   resource: BaseResource;
   fetchResource(): void;
 }
 
-export class PureResourceSummaryModal extends React.Component<PureResourceSummaryModalProps> {
+export class PureResourceSummaryModal extends React.Component<
+  PureResourceSummaryModalProps
+> {
   componentDidMount() {
     this.props.fetchResource();
   }
@@ -30,11 +32,12 @@ export class PureResourceSummaryModal extends React.Component<PureResourceSummar
   render() {
     const { resource, translate, loading } = this.props;
     return (
-      <ModalDialog
-        title={translate('Details')}
-        footer={<CloseDialogButton />}
-      >
-        {loading ? <LoadingSpinner /> : resource && <ResourceSummary resource={resource} />}
+      <ModalDialog title={translate('Details')} footer={<CloseDialogButton />}>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          resource && <ResourceSummary resource={resource} />
+        )}
       </ModalDialog>
     );
   }
@@ -46,7 +49,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchResource: (): void => dispatch(actions.summaryResourceFetch(ownProps.resolve.url)),
+  fetchResource: (): void =>
+    dispatch(actions.summaryResourceFetch(ownProps.resolve.url)),
 });
 
 const enhance = compose(

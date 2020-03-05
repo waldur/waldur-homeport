@@ -23,14 +23,18 @@ interface PureIssueAttachmentsContainerProps extends TranslateProps {
   uploading: number;
 }
 
-export class PureIssueAttachmentsContainer extends React.Component<PureIssueAttachmentsContainerProps> {
+export class PureIssueAttachmentsContainer extends React.Component<
+  PureIssueAttachmentsContainerProps
+> {
   state = {
     dropzoneActive: false,
   };
 
   dropzoneNode: Dropzone;
 
-  componentDidMount() { this.props.getAttachments(); }
+  componentDidMount() {
+    this.props.getAttachments();
+  }
 
   onDragEnter = () => this.setState({ dropzoneActive: true });
 
@@ -39,7 +43,7 @@ export class PureIssueAttachmentsContainer extends React.Component<PureIssueAtta
   onDrop = files => {
     this.setState({ dropzoneActive: false });
     this.props.putAttachments(files);
-  }
+  };
 
   openDownloadModal = () => this.dropzoneNode.open();
 
@@ -54,15 +58,15 @@ export class PureIssueAttachmentsContainer extends React.Component<PureIssueAtta
         onDrop={this.onDrop}
         onDragEnter={this.onDragEnter}
         onDragLeave={this.onDragLeave}
-        ref={node => this.dropzoneNode = node}
+        ref={node => (this.dropzoneNode = node)}
       >
-        {dropzoneActive &&
+        {dropzoneActive && (
           <div className="dropzone__overlay">
             <div className="dropzone__overlay-message">
               {translate('Drop files to attach them to the issue.')}
             </div>
           </div>
-        }
+        )}
         <div className="ibox">
           <div className="ibox-title content-between-center">
             <h4>{translate('Attachments')}</h4>
@@ -71,19 +75,25 @@ export class PureIssueAttachmentsContainer extends React.Component<PureIssueAtta
             </div>
           </div>
           <div className="ibox-content">
-            {loading ?
-              <LoadingSpinner /> :
+            {loading ? (
+              <LoadingSpinner />
+            ) : (
               <div className="attachments__container">
                 <div className="attachments__container-message">
                   <i className="fa fa-cloud-upload" aria-hidden="true" />
-                  <span>{translate('Drop files to attach, or')} <a onClick={this.openDownloadModal}>{translate('browse')}.</a></span>
+                  <span>
+                    {translate('Drop files to attach, or')}{' '}
+                    <a onClick={this.openDownloadModal}>
+                      {translate('browse')}.
+                    </a>
+                  </span>
                 </div>
                 <IssueAttachmentsList
                   attachments={attachments}
                   uploading={uploading}
                 />
               </div>
-            }
+            )}
           </div>
         </div>
       </Dropzone>
@@ -98,8 +108,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  getAttachments: (): void => dispatch(actions.issueAttachmentsGet(ownProps.issue.url)),
-  putAttachments: (files: File[]): void => dispatch(actions.issueAttachmentsPut(ownProps.issue.url, files)),
+  getAttachments: (): void =>
+    dispatch(actions.issueAttachmentsGet(ownProps.issue.url)),
+  putAttachments: (files: File[]): void =>
+    dispatch(actions.issueAttachmentsPut(ownProps.issue.url, files)),
 });
 
 const enhance = compose(

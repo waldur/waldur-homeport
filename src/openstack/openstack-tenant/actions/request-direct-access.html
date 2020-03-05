@@ -1,10 +1,16 @@
 <div class="modal-header">
-  <h3 class="modal-title" translate>Request direct access to {{ $ctrl.tenant.name }}</h3>
+  <h3 class="modal-title" translate>
+    Request direct access to {{ $ctrl.tenant.name }}
+  </h3>
 </div>
 <div>
   <div class="modal-body">
-    <p translate>To get access, please send a request to {{$ctrl.supportEmail}}.</p>
-    <p translate>Please note that request should specify tenant and provide a reason.</p>
+    <p translate>
+      To get access, please send a request to {{ $ctrl.supportEmail }}.
+    </p>
+    <p translate>
+      Please note that request should specify tenant and provide a reason.
+    </p>
   </div>
   <div class="modal-footer">
     <button class="btn btn-default" type="button" ng-click="$ctrl.close()">

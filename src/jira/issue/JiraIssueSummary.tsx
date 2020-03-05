@@ -2,7 +2,11 @@ import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
+import {
+  Field,
+  ResourceSummaryProps,
+  PureResourceSummaryBase,
+} from '@waldur/resource/summary';
 
 import { JiraIssuePriorityField } from './JiraIssuePriorityField';
 import { JiraIssueResourceField } from './JiraIssueResourceField';
@@ -29,38 +33,26 @@ const PureJiraIssueSummary = (props: ResourceSummaryProps) => {
   const { translate, resource } = props;
   return (
     <span>
-      <PureResourceSummaryBase {...props}/>
-      <Field
-        label={translate('Key')}
-        value={resource.key}
-      />
+      <PureResourceSummaryBase {...props} />
+      <Field label={translate('Key')} value={resource.key} />
       <Field
         label={translate('Status')}
-        value={<JiraIssueStatusField {...resource}/>}
+        value={<JiraIssueStatusField {...resource} />}
       />
       <Field
         label={translate('Priority')}
-        value={<JiraIssuePriorityField {...resource}/>}
+        value={<JiraIssuePriorityField {...resource} />}
       />
-      <Field
-        label={translate('Title')}
-        value={resource.summary}
-      />
-      <Field
-        label={translate('Description')}
-        value={resource.description}
-      />
-      <Field
-        label={translate('Project')}
-        value={formatProject(resource)}
-      />
+      <Field label={translate('Title')} value={resource.summary} />
+      <Field label={translate('Description')} value={resource.description} />
+      <Field label={translate('Project')} value={formatProject(resource)} />
       <Field
         label={translate('Parent request')}
         value={formatParent(resource)}
       />
       <Field
         label={translate('Related resource')}
-        value={resource.scope && <JiraIssueResourceField {...resource}/>}
+        value={resource.scope && <JiraIssueResourceField {...resource} />}
       />
     </span>
   );

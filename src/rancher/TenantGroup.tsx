@@ -13,7 +13,10 @@ import { SubnetGroup } from './SubnetGroup';
 import { loadData } from './utils';
 
 export const TenantGroup = props => {
-  const {state: resourceProps, call: loadResource} = useQuery(loadData, props.tenant);
+  const { state: resourceProps, call: loadResource } = useQuery(
+    loadData,
+    props.tenant,
+  );
   React.useEffect(loadResource, [props.tenant]);
 
   const dispatch = useDispatch();
@@ -22,7 +25,7 @@ export const TenantGroup = props => {
   }, []);
 
   if (resourceProps.loading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   if (resourceProps.erred) {
@@ -32,11 +35,12 @@ export const TenantGroup = props => {
   if (resourceProps.loaded) {
     return (
       <>
-        <SubnetGroup options={resourceProps.data.subnets}/>
+        <SubnetGroup options={resourceProps.data.subnets} />
         <FormGroup
           labelClassName="control-label col-sm-3"
           valueClassName="col-sm-9"
-          label={translate('Nodes')}>
+          label={translate('Nodes')}
+        >
           <FieldArray
             name="attributes.nodes"
             component={NodeList}

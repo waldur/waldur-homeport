@@ -3,9 +3,11 @@ import { createNameField } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
 import { Offering } from '../types';
+
 import { validatePermissions, validateOfferingState } from './utils';
 
-const formatReport = resource => resource.report ? JSON.stringify(resource.report) : '';
+const formatReport = resource =>
+  resource.report ? JSON.stringify(resource.report) : '';
 
 export default function createAction(): ResourceAction<Offering> {
   return {
@@ -19,8 +21,10 @@ export default function createAction(): ResourceAction<Offering> {
       {
         name: 'report',
         label: translate('Report'),
-        help_text: translate('Example: [{"header": "Database instance info", "body": "data"}]'),
-        serializer: (value: string) => value ? JSON.parse(value) : undefined,
+        help_text: translate(
+          'Example: [{"header": "Database instance info", "body": "data"}]',
+        ),
+        serializer: (value: string) => (value ? JSON.parse(value) : undefined),
         init: (_, resource, form) => {
           form.report = formatReport(resource);
         },
@@ -30,6 +34,5 @@ export default function createAction(): ResourceAction<Offering> {
       },
     ],
     validators: [validateOfferingState('OK', 'Erred'), validatePermissions],
-
   };
 }

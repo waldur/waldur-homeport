@@ -15,22 +15,27 @@ export const getIssueAction = (props: ReportIssueActionProps) => {
     onClick() {
       const features = ngInjector.get('features');
       if (features.isVisible('support')) {
-        $uibModal.open({
-          component: 'issueCreateDialog',
-          resolve: {
-            issue: () => props.issue,
-          },
-        }).result.then(() => {
-          $state.go(props.state);
-        });
+        $uibModal
+          .open({
+            component: 'issueCreateDialog',
+            resolve: {
+              issue: () => props.issue,
+            },
+          })
+          .result.then(() => {
+            $state.go(props.state);
+          });
       } else {
-        const context = {supportEmail: ENV.supportEmail};
-        const message = translate('To report an issue, please send an email to <a href="mailto:{supportEmail}">{supportEmail}</a>.', context);
+        const context = { supportEmail: ENV.supportEmail };
+        const message = translate(
+          'To report an issue, please send an email to <a href="mailto:{supportEmail}">{supportEmail}</a>.',
+          context,
+        );
         $uibModal.open({
           component: 'messageDialog',
           resolve: {
             title: () => translate('Report an issue'),
-            message: () => <p dangerouslySetInnerHTML={{__html: message}}/>,
+            message: () => <p dangerouslySetInnerHTML={{ __html: message }} />,
           },
         });
       }

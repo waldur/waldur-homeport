@@ -11,13 +11,16 @@ interface HelpLinkProps {
   children: any;
 }
 
-const hasHelp = (type: string, name: string) => HelpRegistry.hasItem(type, name);
+const hasHelp = (type: string, name: string) =>
+  HelpRegistry.hasItem(type, name);
 
-export const HelpLink = ({name, type, children}: HelpLinkProps) =>
+export const HelpLink = ({ name, type, children }: HelpLinkProps) =>
   hasHelp(type, name) ? (
-    <Link state="help.details" params={{name, type}} target="_blank">
+    <Link state="help.details" params={{ name, type }} target="_blank">
       {children}
     </Link>
-  ) : children;
+  ) : (
+    children
+  );
 
 export default connectAngularComponent(HelpLink);

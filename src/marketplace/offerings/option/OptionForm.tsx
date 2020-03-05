@@ -11,19 +11,22 @@ import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 import { DisplayNameField } from '../DisplayNameField';
 import { FormGroup } from '../FormGroup';
 import { InternalNameField } from '../InternalNameField';
+
 import { FIELD_TYPES } from './constants';
 import { FieldType } from './types';
 
 const selector = formValueSelector(FORM_ID);
 
-const connector = connect<{type?: string}, {}, {option: string}>((state, ownProps) => {
-  const option = selector(state, ownProps.option);
-  if (option.type) {
-    return {type: option.type.value};
-  } else {
-    return {};
-  }
-});
+const connector = connect<{ type?: string }, {}, { option: string }>(
+  (state, ownProps) => {
+    const option = selector(state, ownProps.option);
+    if (option.type) {
+      return { type: option.type.value };
+    } else {
+      return {};
+    }
+  },
+);
 
 const StringField = props => (
   <Field
@@ -35,18 +38,20 @@ const StringField = props => (
   />
 );
 
-const RequiredField = withTranslation((props: TranslateProps & {option: string}) => (
-  <Field
-    name={`${props.option}.required`}
-    component={fieldProps => (
-      <AwesomeCheckbox
-        id={`${props.option}.required`}
-        label={props.translate('Required')}
-        {...fieldProps.input}
-      />
-    )}
-  />
-));
+const RequiredField = withTranslation(
+  (props: TranslateProps & { option: string }) => (
+    <Field
+      name={`${props.option}.required`}
+      component={fieldProps => (
+        <AwesomeCheckbox
+          id={`${props.option}.required`}
+          label={props.translate('Required')}
+          {...fieldProps.input}
+        />
+      )}
+    />
+  ),
+);
 
 const OptionTypeField = props => (
   <Field
@@ -63,57 +68,68 @@ const OptionTypeField = props => (
   />
 );
 
-const MinMaxFields = withTranslation((props: TranslateProps & {option: string}) => (
-  <>
-    <FormGroup label={props.translate('Minimal value')}>
-      <Field
-        name={`${props.option}.min`}
-        type="number"
-        className="form-control"
-        component="input"
-      />
-    </FormGroup>
-    <FormGroup label={props.translate('Maximal value')}>
-      <Field
-        name={`${props.option}.max`}
-        type="number"
-        className="form-control"
-        component="input"
-      />
-    </FormGroup>
-  </>
-));
+const MinMaxFields = withTranslation(
+  (props: TranslateProps & { option: string }) => (
+    <>
+      <FormGroup label={props.translate('Minimal value')}>
+        <Field
+          name={`${props.option}.min`}
+          type="number"
+          className="form-control"
+          component="input"
+        />
+      </FormGroup>
+      <FormGroup label={props.translate('Maximal value')}>
+        <Field
+          name={`${props.option}.max`}
+          type="number"
+          className="form-control"
+          component="input"
+        />
+      </FormGroup>
+    </>
+  ),
+);
 
 interface OptionFormProps extends TranslateProps {
   option: string;
   type: FieldType;
 }
 
-export const OptionForm = connector(withTranslation((props: OptionFormProps) => (
-  <>
-    <InternalNameField name={`${props.option}.name`}/>
-    <DisplayNameField name={`${props.option}.label`}/>
-    <FormGroup label={props.translate('Description')}>
-      <StringField option={props.option} name="help_text"/>
-    </FormGroup>
-    <FormGroup label={props.translate('Type')} required={true}>
-      <OptionTypeField option={props.option} validate={required}/>
-    </FormGroup>
-    {(props.type === 'integer' || props.type === 'money') && (
-      <MinMaxFields option={props.option}/>
-    )}
-    {props.type === 'select_string' && (
-      <FormGroup label={props.translate('Choices as comma-separated list')} required={true}>
-        <StringField option={props.option} name="choices" validate={required}/>
+export const OptionForm = connector(
+  withTranslation((props: OptionFormProps) => (
+    <>
+      <InternalNameField name={`${props.option}.name`} />
+      <DisplayNameField name={`${props.option}.label`} />
+      <FormGroup label={props.translate('Description')}>
+        <StringField option={props.option} name="help_text" />
       </FormGroup>
-    )}
-    {props.type === 'string' && (
-      <FormGroup label={props.translate('Default value')}>
-        <StringField option={props.option} name="default"/>
+      <FormGroup label={props.translate('Type')} required={true}>
+        <OptionTypeField option={props.option} validate={required} />
       </FormGroup>
-    )}
-    <FormGroup>
-      <RequiredField option={props.option}/>
-    </FormGroup>
-  </>
-)));
+      {(props.type === 'integer' || props.type === 'money') && (
+        <MinMaxFields option={props.option} />
+      )}
+      {props.type === 'select_string' && (
+        <FormGroup
+          label={props.translate('Choices as comma-separated list')}
+          required={true}
+        >
+          <StringField
+            option={props.option}
+            name="choices"
+            validate={required}
+          />
+        </FormGroup>
+      )}
+      {props.type === 'string' && (
+        <FormGroup label={props.translate('Default value')}>
+          <StringField option={props.option} name="default" />
+        </FormGroup>
+      )}
+      <FormGroup>
+        <RequiredField option={props.option} />
+      </FormGroup>
+    </>
+  )),
+);

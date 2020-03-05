@@ -1,9 +1,11 @@
 import { Option } from 'react-select';
 
-export type PhoneNumber = string | {
-  national_number: string;
-  country_code: string;
-};
+export type PhoneNumber =
+  | string
+  | {
+      national_number: string;
+      country_code: string;
+    };
 
 // Customer has only two mandatory fields: name and email, rest are optional.
 export interface Customer {

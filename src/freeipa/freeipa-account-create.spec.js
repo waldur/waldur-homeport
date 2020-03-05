@@ -2,7 +2,6 @@ import freeipaAccountCreate from './freeipa-account-create';
 import filtersModule from '../core/filters';
 
 describe('FreeIPA account create', () => {
-
   function initModule(module) {
     module.component('freeipaAccountCreate', freeipaAccountCreate);
     module.constant('ENV', {
@@ -11,28 +10,40 @@ describe('FreeIPA account create', () => {
     });
     filtersModule(module);
   }
-  initModule(angular.module('freeipaAccountCreateModule', ['ngResource', 'ui.router', 'pascalprecht.translate']));
+  initModule(
+    angular.module('freeipaAccountCreateModule', [
+      'ngResource',
+      'ui.router',
+      'pascalprecht.translate',
+    ]),
+  );
   beforeEach(angular.mock.module('freeipaAccountCreateModule'));
 
-  beforeEach(angular.mock.module(function($provide) {
-    $provide.factory('freeipaService', function($q) {
-      return {
-        createProfile: jasmine.createSpy('createProfile').and.returnValue($q.when([])),
-      };
-    });
-    $provide.factory('ncUtilsFlash', function() {
-      return {
-        success: jasmine.createSpy('success'),
-      };
-    });
-    $provide.factory('usersService', function($q) {
-      return {
-        getCurrentUser: jasmine.createSpy('createProfile').and.returnValue($q.when({
-          username: 'admin'
-        }))
-      };
-    });
-  }));
+  beforeEach(
+    angular.mock.module(function($provide) {
+      $provide.factory('freeipaService', function($q) {
+        return {
+          createProfile: jasmine
+            .createSpy('createProfile')
+            .and.returnValue($q.when([])),
+        };
+      });
+      $provide.factory('ncUtilsFlash', function() {
+        return {
+          success: jasmine.createSpy('success'),
+        };
+      });
+      $provide.factory('usersService', function($q) {
+        return {
+          getCurrentUser: jasmine.createSpy('createProfile').and.returnValue(
+            $q.when({
+              username: 'admin',
+            }),
+          ),
+        };
+      });
+    }),
+  );
 
   let freeipaService;
   let $rootScope;

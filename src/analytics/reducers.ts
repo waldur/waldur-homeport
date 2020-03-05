@@ -12,7 +12,10 @@ const INITIAL_STATE: State = {
   quotasHistory: {},
 };
 
-export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) => {
+export const reducer = (
+  state: State = INITIAL_STATE,
+  action: Action<Payload>,
+) => {
   const { type, payload } = action;
   switch (type) {
     case constants.ANALYTICS_PROJECTS_FETCH:

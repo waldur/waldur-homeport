@@ -3,7 +3,7 @@ import template from './price-estimate-button.html';
 export default {
   template,
   bindings: {
-    customer: '<'
+    customer: '<',
   },
   controller: class PriceEstimateButtonController {
     // @ngInject
@@ -17,9 +17,11 @@ export default {
         component: 'priceEstimateDialog',
         size: 'lg',
         resolve: {
-          items: this.PriceEstimateUtilsService.loadInvoiceItems(this.customer.uuid),
-        }
+          items: this.PriceEstimateUtilsService.loadInvoiceItems(
+            this.customer.uuid,
+          ),
+        },
       });
     }
-  }
+  },
 };

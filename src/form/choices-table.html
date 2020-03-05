@@ -4,7 +4,8 @@
       ng-repeat="choice in $ctrl.filterOptions.choices"
       class="btn btn-default btn-sm"
       ng-model="$ctrl.filterValue"
-      uib-btn-radio="choice.value">
+      uib-btn-radio="choice.value"
+    >
       {{ ::choice.label | translate }}
     </label>
   </div>
@@ -17,26 +18,35 @@
         <th ng-if="::$ctrl.enableSelect"></th>
         <th ng-repeat="column in $ctrl.columns" ng-class="column.headerClass">
           {{ ::column.label | translate }}
-          <price-tooltip ng-if="column.priceTooltip" estimated="column.priceEstimated"></price-tooltip>
+          <price-tooltip
+            ng-if="column.priceTooltip"
+            estimated="column.priceEstimated"
+          ></price-tooltip>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="choice in $ctrl.choices|filter:$ctrl.filter"
+      <tr
+        ng-repeat="choice in $ctrl.choices|filter:$ctrl.filter"
         ng-click="!choice.disabled && $ctrl.selectItem({item: choice})"
         ng-keyup="$event.keyCode === 13 && $ctrl.selectItem({item: choice})"
-        ng-class="{'cursor-pointer': $ctrl.enableSelect}">
+        ng-class="{'cursor-pointer': $ctrl.enableSelect}"
+      >
         <td ng-if="::$ctrl.enableSelect">
           <span ng-if="choice.disabled">
-            <i class="fa fa-ban" uib-tooltip="{{choice.disabledReason}}"></i>
+            <i class="fa fa-ban" uib-tooltip="{{ choice.disabledReason }}"></i>
           </span>
           <input
             type="radio"
             ng-if="!choice.disabled"
             ng-model="$ctrl.value"
-            ng-value="choice">
+            ng-value="choice"
+          />
         </td>
-        <td ng-repeat="column in $ctrl.columns" ng-class="{disabled: choice.disabled}">
+        <td
+          ng-repeat="column in $ctrl.columns"
+          ng-class="{disabled: choice.disabled}"
+        >
           {{ ::$ctrl.formatValue(column, choice) }}
         </td>
       </tr>

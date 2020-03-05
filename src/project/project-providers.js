@@ -13,17 +13,19 @@ const projectProviders = {
 
     $onInit() {
       this.loading = true;
-      this.service.loadLinks(this.project)
+      this.service
+        .loadLinks(this.project)
         .then(context => {
           this.choices = context.choices;
           this.canManage = context.canManage;
-        }).finally(() => this.loading = false);
+        })
+        .finally(() => (this.loading = false));
     }
 
     save() {
       return this.service.saveLinks(this.project, this.choices);
     }
-  }
+  },
 };
 
 export default projectProviders;

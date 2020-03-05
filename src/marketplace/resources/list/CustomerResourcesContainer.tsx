@@ -7,8 +7,8 @@ import { CustomerResourcesList } from './CustomerResourcesList';
 
 const CustomerResourcesContainer = () => (
   <div className="ibox-content">
-    <CustomerResourcesFilter/>
-    <CustomerResourcesList/>
+    <CustomerResourcesFilter />
+    <CustomerResourcesList />
   </div>
 );
 

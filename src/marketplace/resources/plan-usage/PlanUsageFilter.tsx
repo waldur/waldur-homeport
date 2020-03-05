@@ -13,11 +13,11 @@ const offeringProps = {
 
 const PurePlanUsageFilter = () => (
   <Row>
-    <ProviderAutocomplete className="col-sm-6"/>
-    <OfferingAutocomplete {...offeringProps} className="col-sm-6"/>
+    <ProviderAutocomplete className="col-sm-6" />
+    <OfferingAutocomplete {...offeringProps} className="col-sm-6" />
   </Row>
 );
 
-const enhance = reduxForm({form: 'PlanUsageFilter'});
+const enhance = reduxForm({ form: 'PlanUsageFilter' });
 
 export const PlanUsageFilter = enhance(PurePlanUsageFilter);

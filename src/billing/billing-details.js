@@ -18,7 +18,8 @@ const billingDetails = {
       paypalInvoicesService,
       features,
       titleService,
-      BillingUtils) {
+      BillingUtils,
+    ) {
       this.ENV = ENV;
       this.$state = $state;
       this.$stateParams = $stateParams;
@@ -39,41 +40,48 @@ const billingDetails = {
       this.showAccountingRecords = this.ENV.accountingMode === 'accounting';
       this.invoice = {};
       this.loading = true;
-      this.loadInvoice().finally(() => this.loading = false);
+      this.loadInvoice().finally(() => (this.loading = false));
       this.titleService.setTitle(this.BillingUtils.getPageTitle());
     }
 
     loadInvoice() {
-      return this.getInvoiceService().$get(this.$stateParams.uuid).then(invoice => {
-        this.invoice = angular.extend({
-          period: this.BillingUtils.formatPeriod(invoice),
-          items: invoice.items},
-          invoice,
-        );
+      return this.getInvoiceService()
+        .$get(this.$stateParams.uuid)
+        .then(invoice => {
+          this.invoice = angular.extend(
+            {
+              period: this.BillingUtils.formatPeriod(invoice),
+              items: invoice.items,
+            },
+            invoice,
+          );
 
-        return invoice;
-      })
-      .then(invoice => {
-        const customer_uuid = this.ncUtils.getUUID(invoice.customer);
-        return this.customersService.$get(customer_uuid);
-      })
-      .then(currentCustomer => {
-        this.WorkspaceService.setWorkspace({
-          customer: currentCustomer,
-          project: null,
-          hasCustomer: true,
-          workspace: WOKSPACE_NAMES.organization,
-        });
+          return invoice;
+        })
+        .then(invoice => {
+          const customer_uuid = this.ncUtils.getUUID(invoice.customer);
+          return this.customersService.$get(customer_uuid);
+        })
+        .then(currentCustomer => {
+          this.WorkspaceService.setWorkspace({
+            customer: currentCustomer,
+            project: null,
+            hasCustomer: true,
+            workspace: WOKSPACE_NAMES.organization,
+          });
 
-        return this.usersService.getCurrentUser().then(currentUser => {
-          const status = this.customersService.checkCustomerUser(currentCustomer, currentUser);
-          this.currentStateService.setOwnerOrStaff(status);
-          this.currentStateService.setCustomer(currentCustomer);
+          return this.usersService.getCurrentUser().then(currentUser => {
+            const status = this.customersService.checkCustomerUser(
+              currentCustomer,
+              currentUser,
+            );
+            this.currentStateService.setOwnerOrStaff(status);
+            this.currentStateService.setCustomer(currentCustomer);
+          });
+        })
+        .catch(() => {
+          this.$state.go('errorPage.notFound');
         });
-      })
-      .catch(() => {
-        this.$state.go('errorPage.notFound');
-      });
     }
 
     getInvoiceService() {
@@ -83,7 +91,7 @@ const billingDetails = {
         return this.invoicesService;
       }
     }
-  }
+  },
 };
 
 export default billingDetails;

@@ -7,45 +7,45 @@ const tabs = {
     data: {
       pageTitle: gettext('User dashboard'),
       pageClass: 'gray-bg',
-      hideBreadcrumbs: true
-    }
+      hideBreadcrumbs: true,
+    },
   },
   events: {
     url: 'events/',
     template: '<user-events user="currentUser"></user-events>',
     data: {
-      pageTitle: gettext('Audit logs')
-    }
+      pageTitle: gettext('Audit logs'),
+    },
   },
   keys: {
     url: 'keys/',
     template: '<key-list></key-list>',
     data: {
-      pageTitle: gettext('SSH keys')
-    }
+      pageTitle: gettext('SSH keys'),
+    },
   },
   notifications: {
     url: 'notifications/',
     template: '<hook-list></hook-list>',
     data: {
-      pageTitle: gettext('Notifications')
-    }
+      pageTitle: gettext('Notifications'),
+    },
   },
   manage: {
     url: 'manage/',
     template: '<user-manage></user-manage>',
     data: {
-      pageTitle: gettext('Manage')
-    }
+      pageTitle: gettext('Manage'),
+    },
   },
   freeipa: {
     url: 'freeipa-account/',
     template: '<freeipa-account></freeipa-account>',
     data: {
       pageTitle: gettext('FreeIPA account'),
-      feature: 'freeipa'
-    }
-  }
+      feature: 'freeipa',
+    },
+  },
 };
 
 // @ngInject
@@ -64,7 +64,7 @@ export default function($stateProvider) {
       abstract: true,
       data: {
         auth: true,
-        workspace: WOKSPACE_NAMES.user
+        workspace: WOKSPACE_NAMES.user,
       },
       template: '<user-details></user-details>',
     })
@@ -81,7 +81,7 @@ export default function($stateProvider) {
       abstract: true,
       data: {
         auth: true,
-        workspace: WOKSPACE_NAMES.user
+        workspace: WOKSPACE_NAMES.user,
       },
       template: '<user-details></user-details>',
       resolve: {
@@ -100,7 +100,7 @@ export default function($stateProvider) {
       template: '<user-email-change-callback></user-email-change-callback>',
       data: {
         bodyClass: 'old',
-      }
+      },
     })
 
     .state('keys', {
@@ -110,12 +110,12 @@ export default function($stateProvider) {
       data: {
         auth: true,
         pageTitle: gettext('Add SSH key'),
-        workspace: WOKSPACE_NAMES.user
-      }
+        workspace: WOKSPACE_NAMES.user,
+      },
     })
 
     .state('keys.create', {
       url: 'add/',
-      template: '<key-create></key-create>'
+      template: '<key-create></key-create>',
     });
 }

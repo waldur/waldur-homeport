@@ -17,6 +17,6 @@ export default function uiSrefActiveIf($state) {
 
       $scope.$on('$stateChangeSuccess', update);
       update();
-    }
+    },
   };
 }

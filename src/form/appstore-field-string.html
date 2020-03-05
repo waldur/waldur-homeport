@@ -1,4 +1,5 @@
-<input type="text"
+<input
+  type="text"
   class="form-control"
   id="{{ $ctrl.field.name }}"
   name="{{ ::$ctrl.field.name }}"
@@ -7,16 +8,15 @@
   ng-readonly="$ctrl.field.read_only"
   ng-required="$ctrl.field.required"
   ng-maxlength="{{ $ctrl.field.maxlength }}"
-  ng-pattern="$ctrl.field.pattern">
-<p class="text-danger"
-  ng-if="$ctrl.showRequiredError()">
+  ng-pattern="$ctrl.field.pattern"
+/>
+<p class="text-danger" ng-if="$ctrl.showRequiredError()">
   <span translate>This field is required.</span>
 </p>
-<p class="text-danger"
-  ng-if="$ctrl.showPatternError()">
+<p class="text-danger" ng-if="$ctrl.showPatternError()">
   <span translate>This field contains invalid characters.</span>
 </p>
-<p class="text-danger"
-  ng-if="$ctrl.showMaxLengthError()">
-  <span>{{$ctrl.getMaxLengthErrorMessage()}}</span>.
+<p class="text-danger" ng-if="$ctrl.showMaxLengthError()">
+  <span>{{ $ctrl.getMaxLengthErrorMessage() }}</span
+  >.
 </p>

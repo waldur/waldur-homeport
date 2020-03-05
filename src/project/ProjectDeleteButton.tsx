@@ -28,7 +28,9 @@ const mapStateToProps = state => {
   if (!ownerOrStaff) {
     return {
       disabled: true,
-      tooltip: translate('You don\'t have enough privileges to perform this operation.'),
+      tooltip: translate(
+        "You don't have enough privileges to perform this operation.",
+      ),
     };
   } else {
     return {
@@ -38,10 +40,17 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
-  showProjectRemoveDialog: () => dispatch(showProjectRemoveDialog(() =>
-    dispatch(deleteProject(ownProps.project)), ownProps.project.name)),
+  showProjectRemoveDialog: () =>
+    dispatch(
+      showProjectRemoveDialog(
+        () => dispatch(deleteProject(ownProps.project)),
+        ownProps.project.name,
+      ),
+    ),
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);
 
-export const ProjectDeleteButton = enhance(PureProjectDeleteButton) as React.ComponentType<OwnProps>;
+export const ProjectDeleteButton = enhance(
+  PureProjectDeleteButton,
+) as React.ComponentType<OwnProps>;

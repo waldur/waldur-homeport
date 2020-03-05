@@ -14,27 +14,26 @@ import { ResourceStateFilter } from './ResourceStateFilter';
 
 const PurePublicResourcesFilter = props => (
   <Row>
-    <OfferingAutocomplete offeringFilter={props.offeringFilter}/>
-    <OrganizationAutocomplete/>
-    <CategoryFilter/>
-    <ResourceStateFilter/>
+    <OfferingAutocomplete offeringFilter={props.offeringFilter} />
+    <OrganizationAutocomplete />
+    <CategoryFilter />
+    <ResourceStateFilter />
   </Row>
 );
 
-const filterSelector = createSelector(
-  getCustomer,
-  customer => ({
-    customer_uuid: customer.uuid,
-  }),
-);
+const filterSelector = createSelector(getCustomer, customer => ({
+  customer_uuid: customer.uuid,
+}));
 
 const mapStateToProps = state => ({
   offeringFilter: filterSelector(state),
 });
 
 const enhance = compose(
-  reduxForm({form: 'PublicResourcesFilter'}),
+  reduxForm({ form: 'PublicResourcesFilter' }),
   connect(mapStateToProps),
 );
 
-export const PublicResourcesFilter = enhance(PurePublicResourcesFilter) as React.ComponentType<{}>;
+export const PublicResourcesFilter = enhance(
+  PurePublicResourcesFilter,
+) as React.ComponentType<{}>;

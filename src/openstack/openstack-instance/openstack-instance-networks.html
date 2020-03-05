@@ -5,7 +5,8 @@
         <select
           ng-options="choice.value as choice.display_name for choice in $ctrl.getFreeSubnets(item.subnet)"
           ng-model="item.subnet"
-          class="form-control">
+          class="form-control"
+        >
           <option ng-if="!item.subnet" value="" translate>Select subnet</option>
         </select>
       </td>
@@ -14,7 +15,8 @@
           ng-options="choice.value as choice.display_name for choice in $ctrl.getFreeFloatingIps(item.floating_ip)"
           ng-model="item.floating_ip"
           ng-class="{disabled: !item.subnet}"
-          class="form-control">
+          class="form-control"
+        >
         </select>
       </td>
       <td class="p-r-n">
@@ -22,7 +24,8 @@
           type="button"
           class="btn btn-default"
           uib-tooltip="{{ 'Delete' | translate }}"
-          ng-click="$ctrl.deleteItem(item)">
+          ng-click="$ctrl.deleteItem(item)"
+        >
           <i class="fa fa-trash-o"></i>
         </button>
       </td>
@@ -34,7 +37,8 @@
   type="button"
   class="btn btn-default"
   ng-click="$ctrl.addItem()"
-  ng-class="{disabled: !$ctrl.hasFreeSubnets()}">
+  ng-class="{disabled: !$ctrl.hasFreeSubnets()}"
+>
   <i class="fa fa-plus"></i>
   <span translate>Add</span>
 </button>

@@ -7,5 +7,4 @@ export const gotoResource = (type, uuid) => {
   });
 };
 
-export const refreshResource = () =>
-  $rootScope.$broadcast('refreshResource');
+export const refreshResource = () => $rootScope.$broadcast('refreshResource');

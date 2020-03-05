@@ -8,8 +8,15 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { loadDataStart, setStep } from '../store/actions';
 import { FORM_ID, createOffering } from '../store/constants';
-import { getStep, isLoading, isLoaded, isOfferingManagementDisabled, isErred } from '../store/selectors';
+import {
+  getStep,
+  isLoading,
+  isLoaded,
+  isOfferingManagementDisabled,
+  isErred,
+} from '../store/selectors';
 import { OfferingStep, STEPS } from '../types';
+
 import { OfferingCreateDialog } from './OfferingCreateDialog';
 
 const mapStateToProps = state => ({
@@ -48,7 +55,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps, mergeProps);
 const validate = values => {
   const errors: any = {};
   if (!values.plans || !values.plans.length) {
-    errors.plans = {_error: translate('At least one plan must be entered')};
+    errors.plans = { _error: translate('At least one plan must be entered') };
   }
   return errors;
 };

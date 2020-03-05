@@ -23,9 +23,12 @@ export function attachHooks($rootScope, authService, WorkspaceService) {
     store.dispatch(userLoggedOut());
   });
 
-  $rootScope.$on('setCurrentCustomer', (_, { customer }: {customer: Customer}) => {
-    store.dispatch(setCurrentCustomer(customer));
-  });
+  $rootScope.$on(
+    'setCurrentCustomer',
+    (_, { customer }: { customer: Customer }) => {
+      store.dispatch(setCurrentCustomer(customer));
+    },
+  );
 
   $rootScope.$on('setCurrentProject', (_, { project }) => {
     store.dispatch(setCurrentProject(project));

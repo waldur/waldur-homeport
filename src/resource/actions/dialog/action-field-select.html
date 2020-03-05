@@ -5,10 +5,13 @@
   ng-if="$ctrl.field.choices && $ctrl.field.choices.length !== 0"
   class="form-control"
   ng-disabled="$ctrl.field.disableInput"
-  ng-required="$ctrl.field.required">
+  ng-required="$ctrl.field.required"
+>
   <option value="">Select an option</option>
 </select>
 <div
   class="form-control-static"
-  ng-if="!$ctrl.field.choices || $ctrl.field.choices.length === 0">N/A
+  ng-if="!$ctrl.field.choices || $ctrl.field.choices.length === 0"
+>
+  N/A
 </div>

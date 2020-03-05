@@ -8,13 +8,10 @@ import { translate } from '@waldur/i18n';
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
 export const FlavorGroup = props => (
-  <CreateResourceFormGroup
-    label={translate('Flavor')}
-    required={true}
-  >
+  <CreateResourceFormGroup label={translate('Flavor')} required={true}>
     <Field
       name="attributes.flavor"
-      component={fieldProps =>
+      component={fieldProps => (
         <SelectDialogField
           id="flavor"
           columns={[
@@ -40,7 +37,7 @@ export const FlavorGroup = props => (
           choices={props.flavors}
           input={fieldProps.input}
         />
-      }
+      )}
     />
   </CreateResourceFormGroup>
 );

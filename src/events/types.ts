@@ -1,4 +1,4 @@
-type ContextMapper = (event: any) => {[key: string]: string};
+type ContextMapper = (event: any) => { [key: string]: string };
 
 export interface EventType {
   key: string;

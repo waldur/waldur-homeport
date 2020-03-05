@@ -1,8 +1,15 @@
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
-import { validateState, validateRuntimeState } from '@waldur/resource/actions/base';
-import { ResourceAction, ActionField, ActionContext } from '@waldur/resource/actions/types';
+import {
+  validateState,
+  validateRuntimeState,
+} from '@waldur/resource/actions/base';
+import {
+  ResourceAction,
+  ActionField,
+  ActionContext,
+} from '@waldur/resource/actions/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
 function flavorFormatter(flavor) {
@@ -19,7 +26,9 @@ function formatFlavorChoices(choices, resource) {
     }));
 }
 
-function createNewFlavorField(ctx: ActionContext<OpenStackInstance>): ActionField {
+function createNewFlavorField(
+  ctx: ActionContext<OpenStackInstance>,
+): ActionField {
   return {
     name: 'flavor',
     type: 'select',
@@ -39,7 +48,9 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
   }
 }
 
-export default function createAction(ctx: ActionContext<OpenStackInstance>): ResourceAction {
+export default function createAction(
+  ctx: ActionContext<OpenStackInstance>,
+): ResourceAction {
   return {
     name: 'change_flavor',
     type: 'form',

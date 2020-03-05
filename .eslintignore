@@ -1,0 +1,4 @@
+*.spec.ts
+*.spec.tsx
+*.fixture.ts
+typings.d.ts

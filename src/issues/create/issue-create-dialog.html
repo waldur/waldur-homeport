@@ -43,9 +43,14 @@
         Request type
       </label>
       <div ng-class="{disabled: $ctrl.saving}">
-        <issue-type-select model="$ctrl.issue" field="{name: 'type'}"></issue-type-select>
-        <div class="help-block text-danger"
-          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required">
+        <issue-type-select
+          model="$ctrl.issue"
+          field="{name: 'type'}"
+        ></issue-type-select>
+        <div
+          class="help-block text-danger"
+          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.type.$touched) && $ctrl.IssueForm.type.$error.required"
+        >
           <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
         </div>
       </div>
@@ -59,8 +64,11 @@
         <ui-select
           ng-model="$ctrl.issueTemplate"
           name="template"
-          on-select="$ctrl.onTemplateSelect($select.selected)">
-          <ui-select-match placeholder="{{ 'Select issue template' | translate }}...">
+          on-select="$ctrl.onTemplateSelect($select.selected)"
+        >
+          <ui-select-match
+            placeholder="{{ 'Select issue template' | translate }}..."
+          >
             {{ $select.selected.name }}
           </ui-select-match>
           <ui-select-choices repeat="option in $ctrl.filteredTemplates">
@@ -75,16 +83,20 @@
         {{::$ctrl.options.summaryLabel | translate }}
       </label>
       <div>
-        <input type="text"
+        <input
+          type="text"
           id="issueSummary"
           ng-model="$ctrl.issue.summary"
           class="form-control"
           name="summary"
           placeholder="{{ $ctrl.options.summaryPlaceholder | translate }}"
           required
-          ng-class="{disabled: $ctrl.saving}">
-        <div class="help-block text-danger"
-          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.summary.$touched) && $ctrl.IssueForm.summary.$error.required">
+          ng-class="{disabled: $ctrl.saving}"
+        />
+        <div
+          class="help-block text-danger"
+          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.summary.$touched) && $ctrl.IssueForm.summary.$error.required"
+        >
           <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
         </div>
       </div>
@@ -94,17 +106,21 @@
         {{ ::$ctrl.options.descriptionLabel | translate }}
       </label>
       <div>
-        <textarea type="text"
+        <textarea
+          type="text"
           id="issueDescription"
           ng-model="$ctrl.issue.description"
           class="form-control h-150"
           name="description"
           placeholder="{{ $ctrl.options.descriptionPlaceholder | translate }}"
           required
-          ng-class="{disabled: $ctrl.saving}">
+          ng-class="{disabled: $ctrl.saving}"
+        >
         </textarea>
-        <div class="help-block text-danger"
-          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required">
+        <div
+          class="help-block text-danger"
+          ng-if="($ctrl.IssueForm.$submitted || $ctrl.IssueForm.description.$touched) && $ctrl.IssueForm.description.$error.required"
+        >
           <span>{{ $ctrl.emptyFieldMessage | translate }}</span>
         </div>
       </div>
@@ -131,22 +147,13 @@
         Attachments
       </label>
       <div ng-class="{disabled: $ctrl.saving}">
-        <input
-          type="file"
-          id="fileInput"
-          multiple
-          style="display:none">
-        <button
-          type="button"
-          class="btn btn-default"
-          id="fileButton"
-          translate>
+        <input type="file" id="fileInput" multiple style="display:none" />
+        <button type="button" class="btn btn-default" id="fileButton" translate>
           Select some files
         </button>
         <ul>
           <li ng-repeat="file in $ctrl.files">
-            {{ file.name }}
-            ({{ file.size | filesize:'B' }})
+            {{ file.name }} ({{ file.size | filesize: 'B' }})
           </li>
         </ul>
       </div>

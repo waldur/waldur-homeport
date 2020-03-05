@@ -43,14 +43,21 @@ export class LeafletMap extends React.Component<LeafletMapProps> {
 
   initMap() {
     const map = this.leaflet.map(this.mapNode);
-    const position = [this.props.positions[0].latitude, this.props.positions[0].longitude];
+    const position = [
+      this.props.positions[0].latitude,
+      this.props.positions[0].longitude,
+    ];
     map.setView(position, 13);
 
-    this.leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    this.leaflet
+      .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:
+          '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      })
+      .addTo(map);
 
-    this.leaflet.marker(position)
+    this.leaflet
+      .marker(position)
       .addTo(map)
       .bindPopup(translate('Service provider'));
 
@@ -64,10 +71,10 @@ export class LeafletMap extends React.Component<LeafletMapProps> {
     if (this.state.loaded) {
       return (
         <div
-          ref={node => this.mapNode = node}
-          style={{width: '100%', height: 300}}
+          ref={node => (this.mapNode = node)}
+          style={{ width: '100%', height: 300 }}
         />
       );
-      }
+    }
   }
 }

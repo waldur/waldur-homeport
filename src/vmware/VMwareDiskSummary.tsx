@@ -8,11 +8,8 @@ const PureVMwareDiskSummary = props => {
   const { translate, resource } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props}/>
-      <Field
-        label={translate('Size')}
-        value={formatFilesize(resource.size)}
-      />
+      <PureResourceSummaryBase {...props} />
+      <Field label={translate('Size')} value={formatFilesize(resource.size)} />
     </>
   );
 };

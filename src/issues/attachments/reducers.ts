@@ -12,7 +12,10 @@ const INITIAL_STATE: State = {
   filter: constants.ISSUE_ATTACHMENTS_FILTER_NAMES.name,
 };
 
-export const reducer = (state: State = INITIAL_STATE, action: Action<Payload>) => {
+export const reducer = (
+  state: State = INITIAL_STATE,
+  action: Action<Payload>,
+) => {
   const { type, payload } = action;
   switch (type) {
     case constants.ISSUE_ATTACHMENTS_GET:

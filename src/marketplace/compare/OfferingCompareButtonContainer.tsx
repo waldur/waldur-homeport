@@ -31,6 +31,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-const enhance = connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps);
+const enhance = connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
 export const OfferingCompareButtonContainer = enhance(OfferingCompareButton);

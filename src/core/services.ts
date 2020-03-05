@@ -38,7 +38,7 @@ export const blockingExecutor = (callback: () => IPromise<any>) => {
       return;
     }
     isExecuting = true;
-    return $q.when(callback()).finally(() => isExecuting = false);
+    return $q.when(callback()).finally(() => (isExecuting = false));
   };
 };
 

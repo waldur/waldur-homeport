@@ -12,7 +12,10 @@ export default module => {
   module.config(tabsConfig);
   module.run(costPlanningConfig);
   module.service('openstackTenantsService', openstackTenantsService);
-  module.component('appstoreFieldSelectOpenstackTenant', appstoreFieldSelectOpenstackTenant);
+  module.component(
+    'appstoreFieldSelectOpenstackTenant',
+    appstoreFieldSelectOpenstackTenant,
+  );
   filtersModule(module);
   actionsModule(module);
 };

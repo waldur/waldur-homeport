@@ -9,27 +9,28 @@ import { DialogBody } from './ZabbixHostDetailsDialog';
 
 describe('ZabbixHostDetailsDialog', () => {
   describe('DialogBody', () => {
-
     const renderBody = (props?) =>
-      shallow(<DialogBody translate={translate} {...props}/>);
+      shallow(<DialogBody translate={translate} {...props} />);
 
     it('renders spinner if data is still loading', () => {
-      const wrapper = renderBody({loading: true});
+      const wrapper = renderBody({ loading: true });
       expect(wrapper.find(LoadingSpinner).length).toBe(1);
     });
 
     it('renders error message if loading has failed', () => {
-      const wrapper = renderBody({erred: true});
-      expect(wrapper.contains('Unable to load Zabbix host details.')).toBe(true);
+      const wrapper = renderBody({ erred: true });
+      expect(wrapper.contains('Unable to load Zabbix host details.')).toBe(
+        true,
+      );
     });
 
     it('preselects chart tab if host is OK', () => {
-      const wrapper = renderBody({host: {state: 'OK'}});
+      const wrapper = renderBody({ host: { state: 'OK' } });
       expect(wrapper.find(Tabs).prop('defaultActiveKey')).toBe(2);
     });
 
     it('selects details tab if host is not OK', () => {
-      const wrapper = renderBody({host: {state: 'Erred'}});
+      const wrapper = renderBody({ host: { state: 'Erred' } });
       expect(wrapper.find(Tabs).prop('defaultActiveKey')).toBe(1);
     });
   });

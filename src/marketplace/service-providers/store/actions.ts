@@ -3,7 +3,10 @@ import { openModalDialog } from '@waldur/modal/actions';
 import * as constants from './constants';
 
 export const showSecretCodeRegenerateConfirm = serviceProvider =>
-  openModalDialog('MarketplaceServiceProviderSecretCodeGenerateConfirm', {resolve: {serviceProvider}, size: 'md'});
+  openModalDialog('MarketplaceServiceProviderSecretCodeGenerateConfirm', {
+    resolve: { serviceProvider },
+    size: 'md',
+  });
 
 export const secretCodeRegenerateStart = serviceProvider => ({
   type: constants.SERVICE_PROVIDER_CODE_REGENERATE_START,

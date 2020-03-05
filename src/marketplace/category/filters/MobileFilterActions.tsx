@@ -18,11 +18,9 @@ export const PureMobileFilterActions: React.FC<MobileFilterActionsProps> = props
   <button
     type="button"
     className="btn btn-primary btn-info"
-    onClick={props.showAttributeFilterDialog}>
-    <i className="fa fa-filter"/>
-    {' '}
-    {props.translate('Filter')}
-    {' '}
+    onClick={props.showAttributeFilterDialog}
+  >
+    <i className="fa fa-filter" /> {props.translate('Filter')}{' '}
     {props.filterValues && `(${countSelectedFilters(props.filterValues)})`}
   </button>
 );

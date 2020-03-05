@@ -6,7 +6,7 @@
   display: inline-block;
 }
 
-.sidebar-collapse .nav>li>a i {
+.sidebar-collapse .nav > li > a i {
   margin-right: 6px;
   display: block;
   float: left;

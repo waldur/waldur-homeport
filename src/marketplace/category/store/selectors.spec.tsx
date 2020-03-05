@@ -1,7 +1,7 @@
 import { formatAttributesFilter } from './selectors';
 
 describe('formatAttributesFilter', () => {
-  it('should properly format data from redux form to comply with backend\'s expected format', () => {
+  it("should properly format data from redux form to comply with backend's expected format", () => {
     const filterQuery = {
       'list-secure_at_rest-0': 'very secure',
       'list-secure_at_rest-1': 'less secure',

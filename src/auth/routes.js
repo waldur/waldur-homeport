@@ -13,7 +13,7 @@ export default function authRoutes($stateProvider) {
       data: {
         bodyClass: 'old',
         anonymous: true,
-      }
+      },
     })
 
     .state('register', {
@@ -21,8 +21,8 @@ export default function authRoutes($stateProvider) {
       template: '<auth-login mode="\'register\'"></auth-login>',
       data: {
         bodyClass: 'old',
-        anonymous: true
-      }
+        anonymous: true,
+      },
     })
 
     .state('home.activate', {
@@ -31,14 +31,14 @@ export default function authRoutes($stateProvider) {
       data: {
         anonymous: true,
         bodyClass: 'old',
-      }
+      },
     })
 
     .state('initialdata', {
       parent: 'home',
       url: '/initial-data/',
       template: '<ui-view></ui-view>',
-      abstract: true
+      abstract: true,
     })
 
     .state('initialdata.view', {
@@ -47,11 +47,11 @@ export default function authRoutes($stateProvider) {
       noInitialData: true,
       data: {
         auth: true,
-        bodyClass: 'old'
+        bodyClass: 'old',
       },
       resolve: {
         // @ngInject
-        currentUser: usersService => usersService.getCurrentUser()
-      }
+        currentUser: usersService => usersService.getCurrentUser(),
+      },
     });
 }

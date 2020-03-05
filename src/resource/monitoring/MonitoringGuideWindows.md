@@ -1,9 +1,11 @@
 1. Download pre-compiled Zabbix agent from <a target="_blank" href="https://www.zabbix.com/download_agents">official Zabbix download page</a> and manually install and start it using Command Prompt:
+
 ```
 C:\Users\admin><full system path to zabbix_agentd.exe> --config <full system path to zabbix_agentd.win.conf> --install
 ```
 
 2. Configure Zabbix agent by modifying `zabbix_agentd.win.conf` file:
+
 ```
 Server={ZABBIX_SERVER_IP}
 ServerActive={ZABBIX_SERVER_IP}
@@ -11,6 +13,7 @@ Hostname={ZABBIX_CLIENT_ID}
 ```
 
 3. Start Zabbix agent:
+
 ```
 C:\Users\admin><full system path to zabbix_agentd.exe> --start
 ```

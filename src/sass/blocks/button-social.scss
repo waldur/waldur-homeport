@@ -4,7 +4,10 @@
   background-color: $color;
   border-color: $color;
 
-  &:hover, &:focus, &:active, &:active:hover {
+  &:hover,
+  &:focus,
+  &:active,
+  &:active:hover {
     color: $color;
     background-color: white;
   }
@@ -35,9 +38,9 @@
 }
 
 .btn-saml2-edu {
-  @include btn-social(#F8AC59);
+  @include btn-social(#f8ac59);
 }
 
 .btn-smartid {
-  @include btn-social(#6E4CD3);
+  @include btn-social(#6e4cd3);
 }

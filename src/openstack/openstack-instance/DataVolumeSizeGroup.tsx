@@ -15,7 +15,7 @@ export const DataVolumeSizeGroup = props => (
       units="GB"
       isActive={props.isActive}
       setActive={props.setActive}
-      format={v => v ? v / 1024 : ''}
+      format={v => (v ? v / 1024 : '')}
       normalize={v => Number(v) * 1024}
     />
   </CreateResourceFormGroup>

@@ -9,7 +9,15 @@ const authValimoDialog = {
   },
   controller: class AuthValimoDialogController {
     // @ngInject
-    constructor($scope, $rootScope, $state, authService, AuthValimoService, ncUtilsFlash, ENV) {
+    constructor(
+      $scope,
+      $rootScope,
+      $state,
+      authService,
+      AuthValimoService,
+      ncUtilsFlash,
+      ENV,
+    ) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$state = $state;
@@ -31,16 +39,27 @@ const authValimoDialog = {
 
     submit() {
       this.isAuthenticating = true;
-      return this.AuthValimoService.login(this.mobilePrefix.concat(this.phoneNumber)).then(result => {
-        this.challengeCode = result.message;
-        this.authResultId = result.uuid;
-      }).then(() => {
-        return this.pollAuthResult(this.authResultId).then(result => this.parseAuthResult(result));
-      }).catch(response => {
-        this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to authenticate using Mobile ID.'));
-      }).finally(() => {
-        this.isAuthenticating = false;
-      });
+      return this.AuthValimoService.login(
+        this.mobilePrefix.concat(this.phoneNumber),
+      )
+        .then(result => {
+          this.challengeCode = result.message;
+          this.authResultId = result.uuid;
+        })
+        .then(() => {
+          return this.pollAuthResult(this.authResultId).then(result =>
+            this.parseAuthResult(result),
+          );
+        })
+        .catch(response => {
+          this.ncUtilsFlash.errorFromResponse(
+            response,
+            gettext('Unable to authenticate using Mobile ID.'),
+          );
+        })
+        .finally(() => {
+          this.isAuthenticating = false;
+        });
     }
 
     async pollAuthResult() {
@@ -48,7 +67,10 @@ const authValimoDialog = {
       do {
         result = await this.AuthValimoService.getAuthResult(this.authResultId);
         await delay(2000);
-      } while (this.isAlive && (result.state === 'Scheduled' || result.state === 'Processing'));
+      } while (
+        this.isAlive &&
+        (result.state === 'Scheduled' || result.state === 'Processing')
+      );
       this.$scope.$digest();
       return result;
     }
@@ -58,20 +80,26 @@ const authValimoDialog = {
         return;
       }
       if (result.state === 'OK') {
-        this.authService.loginSuccess({data: {token: result.token, method: 'valimo'}});
+        this.authService.loginSuccess({
+          data: { token: result.token, method: 'valimo' },
+        });
         this.$state.go('profile.details');
       } else if (result.state === 'Canceled') {
         if (result.details === 'User is not registered.') {
           this.ncUtilsFlash.error(result.details);
           return;
         }
-        const message = gettext('Authentication with Mobile ID has been canceled by user or timed out. Details:');
+        const message = gettext(
+          'Authentication with Mobile ID has been canceled by user or timed out. Details:',
+        );
         this.ncUtilsFlash.error(message + result.details);
       } else {
-        this.ncUtilsFlash.error(gettext('Unexpected exception happened during login process.'));
+        this.ncUtilsFlash.error(
+          gettext('Unexpected exception happened during login process.'),
+        );
       }
     }
-  }
+  },
 };
 
 export default authValimoDialog;

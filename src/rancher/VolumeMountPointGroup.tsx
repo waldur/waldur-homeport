@@ -55,16 +55,18 @@ const useMinimalSize = (form, nodeIndex, volumeIndex) => {
 };
 
 export const VolumeMountPointGroup = props => {
-  const setValidVolumeSize = useMinimalSize(props.form, props.nodeIndex, props.volumeIndex);
-  const validateMountPoint = React.useMemo(() =>
-    [required, createMountPointValidator(props.nodeIndex)],
-    [props.nodeIndex]
+  const setValidVolumeSize = useMinimalSize(
+    props.form,
+    props.nodeIndex,
+    props.volumeIndex,
+  );
+  const validateMountPoint = React.useMemo(
+    () => [required, createMountPointValidator(props.nodeIndex)],
+    [props.nodeIndex],
   );
 
   return (
-    <FormGroup
-      label={translate('Mount point')}
-      required={true}>
+    <FormGroup label={translate('Mount point')} required={true}>
       <Field
         name="mount_point"
         options={props.mountPoints}

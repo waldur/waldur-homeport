@@ -16,8 +16,10 @@ interface OfferingTabsProps {
 
 export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
   const attributes = props.offering.attributes;
-  const filterSection = (section: Section) => section.attributes.some(
-    attr => props.offering.attributes.hasOwnProperty(attr.key));
+  const filterSection = (section: Section) =>
+    section.attributes.some(attr =>
+      props.offering.attributes.hasOwnProperty(attr.key),
+    );
   const sections = props.sections.filter(filterSection);
 
   const basicSections = sections.filter(s => s.is_standalone === false);
@@ -27,22 +29,28 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     {
       visible: !!props.offering.full_description,
       title: translate('Description'),
-      component: () => <OverviewTab offering={props.offering}/>,
+      component: () => <OverviewTab offering={props.offering} />,
     },
     {
       visible: !!props.offering.terms_of_service,
       title: translate('Terms of service'),
-      component: () => <TermsOfServiceContent content={props.offering.terms_of_service}/>,
+      component: () => (
+        <TermsOfServiceContent content={props.offering.terms_of_service} />
+      ),
     },
     {
       visible: basicSections.length > 0,
       title: translate('Features'),
-      component: () => <AttributesTable attributes={attributes} sections={basicSections}/>,
+      component: () => (
+        <AttributesTable attributes={attributes} sections={basicSections} />
+      ),
     },
     {
       visible: props.offering.screenshots.length > 0,
       title: translate('Screenshots'),
-      component: () => <ScreenshotsTab screenshots={props.offering.screenshots}/>,
+      component: () => (
+        <ScreenshotsTab screenshots={props.offering.screenshots} />
+      ),
     },
   ];
 
@@ -50,7 +58,9 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     tabs.push({
       visible: true,
       title: section.title,
-      component: () => <AttributesTable attributes={attributes} sections={[section]}/>,
+      component: () => (
+        <AttributesTable attributes={attributes} sections={[section]} />
+      ),
     });
   });
   tabs = tabs.filter(tab => tab.visible);

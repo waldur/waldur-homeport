@@ -19,8 +19,9 @@ type MergedProps = StateProps & OwnProps;
 const PureOfferingLink: React.FC<MergedProps> = props => (
   <Link
     state={props.state}
-    params={{offering_uuid: props.offering_uuid}}
-    className={props.className}>
+    params={{ offering_uuid: props.offering_uuid }}
+    className={props.className}
+  >
     {props.children}
   </Link>
 );

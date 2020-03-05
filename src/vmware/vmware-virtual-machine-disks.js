@@ -5,8 +5,8 @@ const instanceVolumes = {
   controller: VMwareVirtualMachineDisksList,
   controllerAs: 'ListController',
   bindings: {
-    resource: '<'
-  }
+    resource: '<',
+  },
 };
 
 export default instanceVolumes;
@@ -17,7 +17,8 @@ function VMwareVirtualMachineDisksList(
   $filter,
   $scope,
   vmwareDisksService,
-  actionUtilsService) {
+  actionUtilsService,
+) {
   let controllerScope = this;
   let ResourceController = baseResourceListController.extend({
     init: function() {
@@ -40,9 +41,11 @@ function VMwareVirtualMachineDisksList(
     },
 
     loadDiskActions: function() {
-      return actionUtilsService.loadNestedActions(this, controllerScope.resource, 'disks').then(result => {
-        this.listActions = result;
-      });
+      return actionUtilsService
+        .loadNestedActions(this, controllerScope.resource, 'disks')
+        .then(result => {
+          this.listActions = result;
+        });
     },
 
     getTableOptions: function() {
@@ -53,17 +56,17 @@ function VMwareVirtualMachineDisksList(
         {
           title: gettext('Name'),
           className: 'all',
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           title: gettext('Size'),
           orderField: 'size',
-          render: row => $filter('filesize')(row.size)
+          render: row => $filter('filesize')(row.size),
         },
         {
           title: gettext('State'),
           className: 'min-tablet-l',
-          render: row => this.renderResourceState(row)
+          render: row => this.renderResourceState(row),
         },
         {
           title: gettext('Created'),
@@ -75,12 +78,12 @@ function VMwareVirtualMachineDisksList(
     },
     getFilter: function() {
       return {
-        vm_uuid: controllerScope.resource.uuid
+        vm_uuid: controllerScope.resource.uuid,
       };
     },
     getTableActions: function() {
       return this.listActions;
-    }
+    },
   });
   controllerScope.__proto__ = new ResourceController();
 }

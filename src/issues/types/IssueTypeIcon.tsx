@@ -12,10 +12,8 @@ export const IssueTypeIcon = props => {
   const iconClass = ISSUE_ICONS[type] || ISSUE_ICONS.INCIDENT;
   const textClass = ISSUE_TEXT_CLASSES[type] || ISSUE_TEXT_CLASSES.INCIDENT;
   return (
-    <Tooltip
-      id="issue-type-icon"
-      label={translate(props.type)}>
-      <i className={classNames('fa', iconClass, textClass)}/>
+    <Tooltip id="issue-type-icon" label={translate(props.type)}>
+      <i className={classNames('fa', iconClass, textClass)} />
     </Tooltip>
   );
 };

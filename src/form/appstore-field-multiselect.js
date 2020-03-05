@@ -4,17 +4,17 @@ const appstoreFieldMultiselect = {
   template,
   bindings: {
     model: '<',
-    field: '<'
+    field: '<',
   },
   controller: class FieldController {
     $onInit() {
       if (this.field.parser) {
         const choices = this.field.choices.map(this.field.parser);
-        this.field = angular.extend({}, this.field, {choices});
+        this.field = angular.extend({}, this.field, { choices });
       }
 
       if (this.field.default) {
-        let defaultValue = this.field.choices.filter((item) => {
+        let defaultValue = this.field.choices.filter(item => {
           return item.object.name === this.field.default;
         })[0];
         if (defaultValue) {
@@ -26,7 +26,7 @@ const appstoreFieldMultiselect = {
     isLocked(item) {
       return this.field.default && item.display_name === this.field.default;
     }
-  }
+  },
 };
 
 export default appstoreFieldMultiselect;
