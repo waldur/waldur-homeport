@@ -9,6 +9,8 @@ export const EstimatedCostField = ({ row }) => {
   if (ENV.accountingMode === 'accounting') {
     return defaultCurrency(estimate.total);
   } else {
-    return defaultCurrency(parseFloat(estimate.total) + parseFloat(estimate.tax));
+    return defaultCurrency(
+      parseFloat(estimate.total) + parseFloat(estimate.tax),
+    );
   }
 };

@@ -1,5 +1,14 @@
-import { getOffering, getResource, getPlan } from '@waldur/marketplace/common/api';
-import { getFormLimitSerializer, getFormLimitParser, LimitParser, Limits } from '@waldur/marketplace/common/registry';
+import {
+  getOffering,
+  getResource,
+  getPlan,
+} from '@waldur/marketplace/common/api';
+import {
+  getFormLimitSerializer,
+  getFormLimitParser,
+  LimitParser,
+  Limits,
+} from '@waldur/marketplace/common/registry';
 import { parseOfferingLimits } from '@waldur/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@waldur/marketplace/offerings/store/types';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
@@ -12,7 +21,7 @@ export interface FetchedData {
   limitSerializer: LimitParser;
   usages: Limits;
   limits: Limits;
-  initialValues: {limits: Limits};
+  initialValues: { limits: Limits };
   offeringLimits: OfferingLimits;
 }
 
@@ -33,6 +42,6 @@ export async function loadData({ resource_uuid }): Promise<FetchedData> {
     usages,
     limits,
     offeringLimits,
-    initialValues: {limits},
+    initialValues: { limits },
   };
 }

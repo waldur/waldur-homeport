@@ -1,6 +1,9 @@
 import { translate } from '@waldur/i18n';
 import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
-import { validateState, validateRuntimeState } from '@waldur/resource/actions/base';
+import {
+  validateState,
+  validateRuntimeState,
+} from '@waldur/resource/actions/base';
 import { ResourceAction, ActionContext } from '@waldur/resource/actions/types';
 
 function validate(ctx: ActionContext<OpenStackInstance>): string {
@@ -15,10 +18,6 @@ export default function createAction(): ResourceAction {
     type: 'button',
     method: 'POST',
     title: translate('Restart'),
-    validators: [
-      validate,
-      validateState('OK'),
-      validateRuntimeState('ACTIVE'),
-    ],
+    validators: [validate, validateState('OK'), validateRuntimeState('ACTIVE')],
   };
 }

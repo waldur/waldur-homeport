@@ -12,5 +12,5 @@ export const appFooter = {
       this.supportEmail = ENV.supportEmail;
       this.supportPhone = ENV.supportPhone;
     }
-  }
+  },
 };

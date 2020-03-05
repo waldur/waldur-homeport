@@ -26,7 +26,7 @@ const ansiblePriceExplanation = {
         disk: prices.disk * requirements.disk,
       };
     }
-  }
+  },
 };
 
 export default ansiblePriceExplanation;

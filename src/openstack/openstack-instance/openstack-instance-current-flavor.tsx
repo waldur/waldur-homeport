@@ -12,11 +12,17 @@ interface OpenStackInstanceCurrentFlavorProps extends TranslateProps {
   };
 }
 
-const OpenStackInstanceCurrentFlavor = (props: OpenStackInstanceCurrentFlavorProps) => (
+const OpenStackInstanceCurrentFlavor = (
+  props: OpenStackInstanceCurrentFlavorProps,
+) => (
   <p>
     <strong>{props.translate('Current flavor')}: </strong>
-    {props.context.resource.flavor_name} ({formatFlavor(props.context.resource)})
+    {props.context.resource.flavor_name} ({formatFlavor(props.context.resource)}
+    )
   </p>
 );
 
-export default connectAngularComponent(withTranslation(OpenStackInstanceCurrentFlavor), ['context']);
+export default connectAngularComponent(
+  withTranslation(OpenStackInstanceCurrentFlavor),
+  ['context'],
+);

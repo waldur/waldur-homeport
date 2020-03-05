@@ -26,6 +26,8 @@ describe('formatCrontab', () => {
   });
 
   it('formats schedule for every year', () => {
-    expect(formatCrontab('0 0 1 1 *')).toBe('Every month on the 1st of January at 00:00');
+    expect(formatCrontab('0 0 1 1 *')).toBe(
+      'Every month on the 1st of January at 00:00',
+    );
   });
 });

@@ -7,18 +7,27 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">
         <span translate>Required certifications</span>
-        <i class="fa fa-question-circle"
-          uib-tooltip="{{ 'Provider certification required by this project' | translate }}"></i>
+        <i
+          class="fa fa-question-circle"
+          uib-tooltip="{{
+            'Provider certification required by this project' | translate
+          }}"
+        ></i>
       </label>
       <div class="col-sm-9">
         <ui-select
           multiple
           ng-model="$ctrl.projectCertifications"
-          ng-if="$ctrl.canManage">
-          <ui-select-match placeholder="{{ 'Select certifications' | translate }}">
+          ng-if="$ctrl.canManage"
+        >
+          <ui-select-match
+            placeholder="{{ 'Select certifications' | translate }}"
+          >
             {{ $item.name }}
           </ui-select-match>
-          <ui-select-choices repeat="item in $ctrl.certifications | filter: {name: $select.search} track by item.url">
+          <ui-select-choices
+            repeat="item in $ctrl.certifications | filter: {name: $select.search} track by item.url"
+          >
             <div ng-bind-html="item.name | highlight: $select.search"></div>
           </ui-select-choices>
         </ui-select>
@@ -31,19 +40,29 @@
     <freeipa-quota
       quota="$ctrl.quota"
       can-manage="$ctrl.canManage"
-      currency="$ctrl.currency">
+      currency="$ctrl.currency"
+    >
     </freeipa-quota>
 
     <div visible-if="'projectCostDetails'">
       <div class="form-group">
         <label class="col-sm-3 control-label">
           <span translate>Cost threshold</span>
-          <i class="fa fa-question-circle"
-            uib-tooltip="{{ 'Upper bound of monthly resource cost provisioned from shared providers.' | translate }}"></i>
+          <i
+            class="fa fa-question-circle"
+            uib-tooltip="{{
+              'Upper bound of monthly resource cost provisioned from shared providers.'
+                | translate
+            }}"
+          ></i>
         </label>
         <div class="col-sm-9 col-lg-3">
           <div class="input-group" ng-if="$ctrl.canManage">
-            <input type="number" ng-model="$ctrl.estimate.threshold" class="form-control">
+            <input
+              type="number"
+              ng-model="$ctrl.estimate.threshold"
+              class="form-control"
+            />
             <div class="input-group-addon">
               {{ ::$ctrl.currency }}
             </div>
@@ -55,9 +74,11 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-          <i class="fa fa-exclamation-triangle"
+          <i
+            class="fa fa-exclamation-triangle"
             ng-if="$ctrl.isOverThreshold()"
-            uib-tooltip="{{ 'Estimated cost exceeds threshold.' | translate }}"></i>
+            uib-tooltip="{{ 'Estimated cost exceeds threshold.' | translate }}"
+          ></i>
           <span translate>Estimated cost for current month</span>:
           {{ $ctrl.estimate.total | defaultCurrency }}
         </div>
@@ -65,8 +86,14 @@
       <div class="form-group" ng-if="$ctrl.canManage">
         <div class="col-sm-offset-3 col-sm-9">
           <div class="awesome-checkbox checkbox-success">
-            <input type="checkbox" ng-model="$ctrl.isHardLimit" id="isHardLimit"/>
-            <label for="isHardLimit" translate>Disable provisioning when threshold is reached.</label>
+            <input
+              type="checkbox"
+              ng-model="$ctrl.isHardLimit"
+              id="isHardLimit"
+            />
+            <label for="isHardLimit" translate
+              >Disable provisioning when threshold is reached.</label
+            >
           </div>
         </div>
       </div>
@@ -74,10 +101,14 @@
 
     <div class="form-group" ng-if="$ctrl.canManage">
       <div class="col-sm-offset-3">
-        <button type="submit" class="btn btn-primary" submit-button="$ctrl.updatePolicies()">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          submit-button="$ctrl.updatePolicies()"
+        >
           <span translate>Update policies</span>
         </button>
       </div>
     </div>
-</div>
+  </form>
 </div>

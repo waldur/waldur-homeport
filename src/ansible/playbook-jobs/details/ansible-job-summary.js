@@ -23,20 +23,29 @@ const ansibleJobSummary = {
     }
 
     remove() {
-      if (confirm('Please confirm that you want to delete this application. All related virtual machines will be removed.')) {
-        return this.AnsibleJobsService.$deleteByUrl(this.job.url).then(() => {
-          this.AnsibleJobsService.clearAllCacheForCurrentEndpoint();
-          this.resourcesService.clearAllCacheForCurrentEndpoint();
-          this.ncUtilsFlash.success(gettext('Application has been deleted'));
-          return this.$state.go('project.resources.ansible.list', {
-            uuid: this.job.project_uuid
+      if (
+        confirm(
+          'Please confirm that you want to delete this application. All related virtual machines will be removed.',
+        )
+      ) {
+        return this.AnsibleJobsService.$deleteByUrl(this.job.url)
+          .then(() => {
+            this.AnsibleJobsService.clearAllCacheForCurrentEndpoint();
+            this.resourcesService.clearAllCacheForCurrentEndpoint();
+            this.ncUtilsFlash.success(gettext('Application has been deleted'));
+            return this.$state.go('project.resources.ansible.list', {
+              uuid: this.job.project_uuid,
+            });
+          })
+          .catch(response => {
+            this.ncUtilsFlash.errorFromResponse(
+              response,
+              gettext('Unable to delete application'),
+            );
           });
-        }).catch(response => {
-          this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to delete application'));
-        });
       }
     }
-  }
+  },
 };
 
 export default ansibleJobSummary;

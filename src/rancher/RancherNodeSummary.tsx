@@ -2,7 +2,11 @@ import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
+import {
+  Field,
+  ResourceSummaryProps,
+  PureResourceSummaryBase,
+} from '@waldur/resource/summary';
 
 import { KeyValueButton } from './KeyValueButton';
 
@@ -13,13 +17,15 @@ const formatInstance = resource =>
       uuid={resource.instance_uuid}
       label={resource.instance_name}
     />
-  ) : <span>&ndash;</span>;
+  ) : (
+    <span>&ndash;</span>
+  );
 
 const PureRancherNodeSummary = (props: ResourceSummaryProps) => {
   const { translate } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props}/>
+      <PureResourceSummaryBase {...props} />
       <Field
         label={translate('Kubernetes version')}
         value={props.resource.k8s_version}
@@ -30,28 +36,40 @@ const PureRancherNodeSummary = (props: ResourceSummaryProps) => {
       />
       <Field
         label={translate('CPU')}
-        value={props.resource.cpu_allocated &&
-          `${props.resource.cpu_allocated} / ${props.resource.cpu_total} cores`}
+        value={
+          props.resource.cpu_allocated &&
+          `${props.resource.cpu_allocated} / ${props.resource.cpu_total} cores`
+        }
       />
       <Field
         label={translate('RAM')}
-        value={props.resource.ram_total &&
-          `${props.resource.ram_allocated} / ${props.resource.ram_total} GiB`}
+        value={
+          props.resource.ram_total &&
+          `${props.resource.ram_allocated} / ${props.resource.ram_total} GiB`
+        }
       />
       <Field
         label={translate('Pods')}
-        value={props.resource.pods_total &&
-          `${props.resource.pods_allocated} / ${props.resource.pods_total}`}
+        value={
+          props.resource.pods_total &&
+          `${props.resource.pods_allocated} / ${props.resource.pods_total}`
+        }
       />
       <Field
         label={translate('Labels')}
-        value={Object.keys(props.resource.labels).length > 0 &&
-          <KeyValueButton items={props.resource.labels}/>}
+        value={
+          Object.keys(props.resource.labels).length > 0 && (
+            <KeyValueButton items={props.resource.labels} />
+          )
+        }
       />
       <Field
         label={translate('Annotations')}
-        value={Object.keys(props.resource.annotations).length > 0 &&
-          <KeyValueButton items={props.resource.annotations}/>}
+        value={
+          Object.keys(props.resource.annotations).length > 0 && (
+            <KeyValueButton items={props.resource.annotations} />
+          )
+        }
       />
       <Field
         label={translate('OpenStack Instance')}

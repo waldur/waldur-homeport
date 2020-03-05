@@ -31,8 +31,14 @@ describe('Customer dashboard chart API', () => {
 
     expect(chart.current).toEqual('EUR300');
     expect(chart.data.length).toEqual(12);
-    expect(chart.data[chart.data.length - 1].label).toEqual('EUR300 at 2018-10-31, estimated');
-    expect(chart.data[chart.data.length - 2].label).toEqual('EUR200 at 2018-09-01');
-    expect(chart.data[chart.data.length - 4].label).toEqual('EUR0 at 2018-09-01');
+    expect(chart.data[chart.data.length - 1].label).toEqual(
+      'EUR300 at 2018-10-31, estimated',
+    );
+    expect(chart.data[chart.data.length - 2].label).toEqual(
+      'EUR200 at 2018-09-01',
+    );
+    expect(chart.data[chart.data.length - 4].label).toEqual(
+      'EUR0 at 2018-09-01',
+    );
   });
 });

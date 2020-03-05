@@ -7,9 +7,7 @@ import { organizationAutocomplete } from '@waldur/marketplace/common/autocomplet
 
 export const OrganizationAutocomplete = () => (
   <div className="form-group col-sm-3">
-    <label className="control-label">
-      {translate('Client organization')}
-    </label>
+    <label className="control-label">{translate('Client organization')}</label>
     <Field
       name="organization"
       component={fieldProps => (

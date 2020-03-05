@@ -22,11 +22,23 @@ export default module => {
   module.component('marketplaceCompare', marketplaceCompare);
   module.component('comparisonIndicator', comparisonIndicator);
   module.component('marketplaceOffering', marketplaceOffering);
-  module.component('marketplaceOfferingPlanDescription', marketplaceOfferingPlanDescription);
-  module.component('marketplacePlanDetailsButton', marketplacePlanDetailsButton);
-  module.component('marketplacePlanDetailsDialog', marketplacePlanDetailsDialog);
+  module.component(
+    'marketplaceOfferingPlanDescription',
+    marketplaceOfferingPlanDescription,
+  );
+  module.component(
+    'marketplacePlanDetailsButton',
+    marketplacePlanDetailsButton,
+  );
+  module.component(
+    'marketplacePlanDetailsDialog',
+    marketplacePlanDetailsDialog,
+  );
   module.component('marketplaceCategory', marketplaceCategory);
-  module.component('marketplaceAttributeFilterListDialog', marketplaceAttributeFilterListDialog);
+  module.component(
+    'marketplaceAttributeFilterListDialog',
+    marketplaceAttributeFilterListDialog,
+  );
   module.service('providersService', providersService);
   module.config(routes);
   module.run(registerSidebarExtension);

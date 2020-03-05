@@ -18,7 +18,7 @@ const costPlanItems = {
       });
       return this.presets.filter(preset => !used_choices[preset.url]);
     }
-  }
+  },
 };
 
 export default costPlanItems;

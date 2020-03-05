@@ -13,10 +13,13 @@ const initialProps = {
   fetchResource: () => null,
   translate,
 };
-const renderWrapper = (props?) => shallow(<PureResourceSummaryModal {...initialProps} {...props} />);
+const renderWrapper = (props?) =>
+  shallow(<PureResourceSummaryModal {...initialProps} {...props} />);
 
-const getSummary = (container: ShallowWrapper) => container.find(ResourceSummary);
-const getSpinner = (container: ShallowWrapper) => container.find(LoadingSpinner);
+const getSummary = (container: ShallowWrapper) =>
+  container.find(ResourceSummary);
+const getSpinner = (container: ShallowWrapper) =>
+  container.find(LoadingSpinner);
 
 describe('PureResourceSummaryModal', () => {
   it('Render ResourceSummary component.', () => {

@@ -16,9 +16,11 @@ interface ServiceProviderRegisterButtonProps extends TranslateProps {
 
 const renderButton = (props: ServiceProviderRegisterButtonProps) => {
   if (props.loading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   } else if (props.serviceProvider) {
-    return `${props.translate('Registered at:')} ${dateTime(props.serviceProvider.created)}`;
+    return `${props.translate('Registered at:')} ${dateTime(
+      props.serviceProvider.created,
+    )}`;
   } else if (props.canRegisterServiceProvider) {
     return (
       <ActionButton
@@ -33,8 +35,6 @@ const renderButton = (props: ServiceProviderRegisterButtonProps) => {
   }
 };
 
-export const ServiceProviderRegisterButton = (props: ServiceProviderRegisterButtonProps) => (
-  <>
-    {renderButton(props)}
-  </>
-);
+export const ServiceProviderRegisterButton = (
+  props: ServiceProviderRegisterButtonProps,
+) => <>{renderButton(props)}</>;

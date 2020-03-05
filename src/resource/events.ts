@@ -23,7 +23,9 @@ eventsRegistry.registerGroup({
     },
     {
       key: 'resource_creation_scheduled',
-      title: gettext('{resource_link} creation has been scheduled by {user_link}.'),
+      title: gettext(
+        '{resource_link} creation has been scheduled by {user_link}.',
+      ),
     },
     {
       key: 'resource_creation_succeeded',
@@ -35,7 +37,9 @@ eventsRegistry.registerGroup({
     },
     {
       key: 'resource_deletion_scheduled',
-      title: gettext('{resource_link} has been scheduled to deletion by {user_link}.'),
+      title: gettext(
+        '{resource_link} has been scheduled to deletion by {user_link}.',
+      ),
     },
     {
       key: 'resource_deletion_succeeded',
@@ -51,7 +55,9 @@ eventsRegistry.registerGroup({
     },
     {
       key: 'resource_restart_scheduled',
-      title: gettext('{resource_link} has been scheduled to restart by {user_link}.'),
+      title: gettext(
+        '{resource_link} has been scheduled to restart by {user_link}.',
+      ),
     },
     {
       key: 'resource_restart_succeeded',
@@ -63,7 +69,9 @@ eventsRegistry.registerGroup({
     },
     {
       key: 'resource_start_scheduled',
-      title: gettext('{resource_link} has been scheduled to start by {user_link}.'),
+      title: gettext(
+        '{resource_link} has been scheduled to start by {user_link}.',
+      ),
     },
     {
       key: 'resource_start_succeeded',
@@ -75,7 +83,9 @@ eventsRegistry.registerGroup({
     },
     {
       key: 'resource_stop_scheduled',
-      title: gettext('{resource_link} has been scheduled to stop by {user_link}.'),
+      title: gettext(
+        '{resource_link} has been scheduled to stop by {user_link}.',
+      ),
     },
     {
       key: 'resource_stop_succeeded',

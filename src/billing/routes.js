@@ -7,16 +7,16 @@ export default function billingRoutes($stateProvider) {
       abstract: true,
       data: {
         pageTitle: gettext('Accounting'),
-      }
+      },
     })
 
     .state('organization.billing.tabs', {
       url: '',
-      template: '<billing-tabs></billing-tabs>'
+      template: '<billing-tabs></billing-tabs>',
     })
 
     .state('billingDetails', {
       url: '/billing/:uuid/',
-      template: '<billing-details></billing-details>'
+      template: '<billing-details></billing-details>',
     });
 }

@@ -10,7 +10,7 @@ function AuthLogoutFailedController(ncUtils) {
 
 const authLogoutFailed = {
   template,
-  controller: AuthLogoutFailedController
+  controller: AuthLogoutFailedController,
 };
 
 export default authLogoutFailed;

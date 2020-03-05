@@ -17,7 +17,7 @@ export default function initAuthProvider(ENV, $authProvider) {
   if (ENV.plugins.WALDUR_AUTH_SOCIAL.GOOGLE_CLIENT_ID) {
     $authProvider.google({
       clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.GOOGLE_CLIENT_ID,
-      url: ENV.apiEndpoint + 'api-auth/google/'
+      url: ENV.apiEndpoint + 'api-auth/google/',
     });
   }
 
@@ -36,16 +36,20 @@ export default function initAuthProvider(ENV, $authProvider) {
       name: 'tara',
       clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID,
       url: ENV.apiEndpoint + 'api-auth/tara/',
-      authorizationEndpoint:
-        ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_SANDBOX
-          ? 'https://tara-test.ria.ee/oidc/authorize'
-          : 'https://tara.ria.ee/oidc/authorize',
+      authorizationEndpoint: ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_SANDBOX
+        ? 'https://tara-test.ria.ee/oidc/authorize'
+        : 'https://tara.ria.ee/oidc/authorize',
       redirectUri: window.location.origin + '/login_completed/',
       scope: ['openid'],
       scopePrefix: '',
       scopeDelimiter: ' ',
       ui_locales: () => ngInjector.get('LanguageUtilsService').current.code,
-      state: () => encodeURIComponent(Math.random().toString(36).substr(2)),
+      state: () =>
+        encodeURIComponent(
+          Math.random()
+            .toString(36)
+            .substr(2),
+        ),
       requiredUrlParams: ['scope', 'state', 'ui_locales'],
     });
   }

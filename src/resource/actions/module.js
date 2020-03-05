@@ -3,7 +3,7 @@ import ActionResourceLoader from './action-resource-loader';
 import actionUtilsService from './action-utils-service';
 import actionButtonResource from './action-button-resource';
 import ActionConfiguration from './action-configuration';
-import {defaultFieldOptions, defaultEditAction} from './constants';
+import { defaultFieldOptions, defaultEditAction } from './constants';
 import dialogModule from './dialog/module';
 
 export default module => {

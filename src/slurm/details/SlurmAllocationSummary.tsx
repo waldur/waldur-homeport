@@ -3,7 +3,11 @@ import * as React from 'react';
 import { Link } from '@waldur/core/Link';
 import { formatFilesize, minutesToHours } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';
-import { Field, ResourceSummaryProps, PureResourceSummaryBase } from '@waldur/resource/summary';
+import {
+  Field,
+  ResourceSummaryProps,
+  PureResourceSummaryBase,
+} from '@waldur/resource/summary';
 
 const formatLoginDetails = props =>
   !props.resource.username ? (
@@ -11,24 +15,30 @@ const formatLoginDetails = props =>
       state="profile.freeipa"
       label={props.translate('FreeIPA account needs to be set up.')}
     />
-  ) : `${props.resource.username}@${props.resource.gateway}`;
+  ) : (
+    `${props.resource.username}@${props.resource.gateway}`
+  );
 
 const formatSubmitDetails = props => (
   <span className="html-description">
-    {props.resource.batch_service === 'MOAB' ? 'qsub' : 'sbatch'} -A {props.resource.backend_id}
+    {props.resource.batch_service === 'MOAB' ? 'qsub' : 'sbatch'} -A{' '}
+    {props.resource.backend_id}
     {props.resource.homepage && (
-      <a href={props.resource.homepage}
+      <a
+        href={props.resource.homepage}
         target="_blank"
-        title={props.translate('Batch processing documentation')}>
+        rel="noopener noreferrer"
+        title={props.translate('Batch processing documentation')}
+      >
         &nbsp;
-        <i className="fa fa-info-circle"/>
+        <i className="fa fa-info-circle" />
       </a>
     )}
   </span>
 );
 
 const formatQuota = (translate, usage, limit) =>
-  translate('{usage} of {limit}', {usage, limit});
+  translate('{usage} of {limit}', { usage, limit });
 
 const formatCPU = props => {
   const usage = minutesToHours(props.resource.cpu_usage);
@@ -52,7 +62,7 @@ const PureSlurmAllocationSummary = (props: ResourceSummaryProps) => {
   const { translate } = props;
   return (
     <span>
-      <PureResourceSummaryBase {...props}/>
+      <PureResourceSummaryBase {...props} />
       <Field
         label={translate('Login details')}
         value={formatLoginDetails(props)}
@@ -61,20 +71,13 @@ const PureSlurmAllocationSummary = (props: ResourceSummaryProps) => {
         label={translate('Submit with')}
         value={formatSubmitDetails(props)}
       />
-      <Field
-        label={translate('CPU')}
-        value={formatCPU(props)}
-      />
-      <Field
-        label={translate('GPU')}
-        value={formatGPU(props)}
-      />
-      <Field
-        label={translate('RAM')}
-        value={formatRAM(props)}
-      />
+      <Field label={translate('CPU')} value={formatCPU(props)} />
+      <Field label={translate('GPU')} value={formatGPU(props)} />
+      <Field label={translate('RAM')} value={formatRAM(props)} />
     </span>
   );
 };
 
-export const SlurmAllocationSummary = withTranslation(PureSlurmAllocationSummary);
+export const SlurmAllocationSummary = withTranslation(
+  PureSlurmAllocationSummary,
+);

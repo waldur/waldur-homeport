@@ -3,14 +3,18 @@ const ansibleJobResourcesList = {
   controllerAs: 'ListController',
   templateUrl: 'views/partials/filtered-list.html',
   bindings: {
-    job: '<'
+    job: '<',
   },
 };
 
 export default ansibleJobResourcesList;
 
 // @ngInject
-function AnsibleJobResourcesController($scope, baseResourceListController, resourcesService) {
+function AnsibleJobResourcesController(
+  $scope,
+  baseResourceListController,
+  resourcesService,
+) {
   const controllerScope = this;
   const ResourceController = baseResourceListController.extend({
     init: function() {
@@ -22,7 +26,7 @@ function AnsibleJobResourcesController($scope, baseResourceListController, resou
     },
     getFilter: function() {
       return {
-        tag: controllerScope.job.tag
+        tag: controllerScope.job.tag,
       };
     },
     connectWatchers: function() {

@@ -18,7 +18,7 @@ const customerCountryField = {
     }
 
     loadCountries() {
-      return this.customersService.loadCountries().then((countryChoices) => {
+      return this.customersService.loadCountries().then(countryChoices => {
         this.countryChoices = countryChoices;
       });
     }

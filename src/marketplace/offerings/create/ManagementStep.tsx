@@ -50,14 +50,14 @@ export const ManagementStep = (props: ManagementStepProps) => (
         />
       )}
     </FormContainer>
-    {(props.editable && props.serviceSettingsForm) ? (
+    {props.editable && props.serviceSettingsForm ? (
       <FormSection name="service_settings">
         {React.createElement(props.serviceSettingsForm, {
           translate: props.translate,
           container: ContainerProps,
         })}
       </FormSection>
-    ) : (!props.showOptions && props.typeLabel) ? (
+    ) : !props.showOptions && props.typeLabel ? (
       <div className="form-group">
         <div className="col-sm-8 col-sm-offset-2">
           <Button onClick={props.openServiceSettingsDetails}>
@@ -66,8 +66,12 @@ export const ManagementStep = (props: ManagementStepProps) => (
         </div>
       </div>
     ) : null}
-    {props.schedulable && <FieldArray name="schedules" component={OfferingScheduler}/>}
-    {props.showOptions && <FieldArray name="options" component={OfferingOptions}/>}
+    {props.schedulable && (
+      <FieldArray name="schedules" component={OfferingScheduler} />
+    )}
+    {props.showOptions && (
+      <FieldArray name="options" component={OfferingOptions} />
+    )}
     {props.pluginOptionsForm && (
       <FormSection name="plugin_options">
         {React.createElement(props.pluginOptionsForm, {

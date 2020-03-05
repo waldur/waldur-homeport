@@ -22,7 +22,7 @@ const makeAccountingPeriods = (start: moment.Moment) => {
     const label = date.format('MMMM, YYYY');
     choices.push({
       label,
-      value: { year, month, current: i === 0},
+      value: { year, month, current: i === 0 },
     });
     date = date.subtract(1, 'month');
   }
@@ -38,7 +38,7 @@ async function oldestInvoice() {
   const response = await getList('/invoices/', params);
   if (response.length === 1) {
     const invoice = response[0];
-    return moment({year: invoice.year, month: invoice.month - 1});
+    return moment({ year: invoice.year, month: invoice.month - 1 });
   } else {
     return moment().startOf('month');
   }
@@ -51,24 +51,24 @@ async function loadData() {
     accounting_period: accountingPeriods[0],
     accounting_is_running: getOptions()[0],
   };
-  return {initialValues, accountingPeriods};
+  return { initialValues, accountingPeriods };
 }
 
 export const CustomerListComponent = () => (
   <Query loader={loadData}>
     {({ loading, error, data }) => {
       if (loading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
       }
       if (error) {
         return <span>{translate('Unable to load financial overview.')}</span>;
       }
       return (
         <>
-          <CustomerListFilter {...data}/>
+          <CustomerListFilter {...data} />
           <div className="ibox-content">
             <CustomerList />
-            <TotalCostContainer/>
+            <TotalCostContainer />
           </div>
         </>
       );

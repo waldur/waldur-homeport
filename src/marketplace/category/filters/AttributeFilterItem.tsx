@@ -12,12 +12,13 @@ interface AttributeFilterItemProps {
 
 export const AttributeFilterItem: React.FC<AttributeFilterItemProps> = props => (
   <MediaQuery minWidth={768}>
-    {matches => matches ? (
-      <>
-        {props.title}
-        {props.children}
-      </>
-    ) : (
+    {matches =>
+      matches ? (
+        <>
+          {props.title}
+          {props.children}
+        </>
+      ) : (
         <CollapsibleItem
           title={props.title}
           content={props.children}

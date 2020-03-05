@@ -28,24 +28,35 @@
       <div class="col-sm-offset-3 col-sm-5">
         <button
           class="btn btn-info m-r-sm"
-          uib-tooltip="{{ 'Add Waldur user ssh keys to the FreeIPA profile' | translate }}"
-          ng-click="$ctrl.syncProfile()">
+          uib-tooltip="{{
+            'Add Waldur user ssh keys to the FreeIPA profile' | translate
+          }}"
+          ng-click="$ctrl.syncProfile()"
+        >
           <i class="fa fa-refresh"></i>
           <span translate>Sync profile</span>
         </button>
         <button
           class="btn btn-warning"
-          uib-tooltip="{{ 'Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems' | translate }}"
+          uib-tooltip="{{
+            'Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems'
+              | translate
+          }}"
           ng-click="$ctrl.disableProfile()"
-          ng-if="$ctrl.profile.is_active">
+          ng-if="$ctrl.profile.is_active"
+        >
           <i class="fa fa-toggle-on"></i>
           <span translate>Disable profile</span>
         </button>
         <button
           class="btn btn-success"
-          uib-tooltip="{{ 'Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems' | translate }}"
+          uib-tooltip="{{
+            'Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems'
+              | translate
+          }}"
           ng-click="$ctrl.enableProfile()"
-          ng-if="!$ctrl.profile.is_active">
+          ng-if="!$ctrl.profile.is_active"
+        >
           <i class="fa fa-toggle-off"></i>
           <span translate>Enable profile</span>
         </button>

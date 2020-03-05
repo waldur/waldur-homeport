@@ -22,8 +22,10 @@
           <ui-select-match placeholder="{{ 'Select size...' | translate }}">
             {{ formatSize($select.selected) }}
           </ui-select-match>
-          <ui-select-choices repeat="size in sizes track by size.uuid"
-            ui-disable-choice="!size.enabled">
+          <ui-select-choices
+            repeat="size in sizes track by size.uuid"
+            ui-disable-choice="!size.enabled"
+          >
             {{ formatSize(size) }}
           </ui-select-choices>
         </ui-select>
@@ -37,9 +39,12 @@
               type="radio"
               ng-model="options.resizeType"
               name="resizeType"
-              value="flexible">
+              value="flexible"
+            />
             <strong translate>Flexible</strong>
-            <p translate>Increase a droplet's RAM and CPU only (not the storage).</p>
+            <p translate>
+              Increase a droplet's RAM and CPU only (not the storage).
+            </p>
           </label>
         </div>
       </div>
@@ -52,26 +57,33 @@
               type="radio"
               ng-model="options.resizeType"
               name="resizeType"
-              value="permanent">
+              value="permanent"
+            />
             <strong translate>Permanent</strong>
             <p translate>Increase a droplet's RAM, CPU and SSD disk.</p>
           </label>
         </div>
       </div>
 
-      <div class="form-group"
-        ng-if="errors.non_field_errors">
-        <p class="text-danger"
+      <div class="form-group" ng-if="errors.non_field_errors">
+        <p
+          class="text-danger"
           ng-repeat="error in errors.non_field_errors"
-          ng-bind="error">
-        </p>
+          ng-bind="error"
+        ></p>
       </div>
     </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary"
+  <button
+    class="btn btn-primary"
     ng-class="{'disabled': !action.enabled || !options.newSize}"
-    submit-button="submitForm()"><span translate>Submit</span></button>
-  <button class="btn btn-default" ng-click="$dismiss()" translate>Cancel</button>
+    submit-button="submitForm()"
+  >
+    <span translate>Submit</span>
+  </button>
+  <button class="btn btn-default" ng-click="$dismiss()" translate>
+    Cancel
+  </button>
 </div>

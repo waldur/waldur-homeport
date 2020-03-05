@@ -10,8 +10,7 @@ export const ChangePlanComponent = (props: FetchedData) => (
   <div>
     {props.resource.plan_name ? (
       <p>
-        <strong>{translate('Current plan')}</strong>:{' '}
-        {props.resource.plan_name}
+        <strong>{translate('Current plan')}</strong>: {props.resource.plan_name}
       </p>
     ) : (
       <p>{translate('Resource does not have any plan.')}</p>

@@ -12,10 +12,19 @@ import { registerTable } from './registry';
 import { getTableState } from './store';
 import { TableOptions, Sorting } from './types';
 
+const getId = (row, index) => {
+  if (row.uuid) {
+    return row.uuid;
+  } else if (row.pk) {
+    return row.pk;
+  }
+  return index;
+};
+
 export function connectTable(options: TableOptions) {
   return function wrapper<P = {}>(Component: React.ComponentType<P>) {
     const Wrapper: React.ComponentType<P> = props => {
-      const {table} = options;
+      const { table } = options;
       registerTable(options);
 
       const mapDispatchToProps = dispatch => ({
@@ -27,21 +36,24 @@ export function connectTable(options: TableOptions) {
           return dispatch(actions.fetchListStart(table, propFilter));
         },
         gotoPage: page => dispatch(actions.fetchListGotoPage(table, page)),
-        exportAs: format => dispatch(actions.exportTableAs(table, format, props)),
+        exportAs: format =>
+          dispatch(actions.exportTableAs(table, format, props)),
         setQuery: query => dispatch(actions.setFilterQuery(table, query)),
         updatePageSize: size => dispatch(actions.updatePageSize(table, size)),
         resetPagination: () => dispatch(actions.resetPagination(table)),
-        sortList: (sorting: Sorting) => dispatch(actions.sortListStart(table, sorting)),
+        sortList: (sorting: Sorting) =>
+          dispatch(actions.sortListStart(table, sorting)),
         toggleRow: (row: any) => dispatch(actions.toggleRow(table, row)),
       });
 
-      const filterByFeature = state => columns => columns.filter(
-        column => !column.feature || isVisible(state, column.feature)
-      );
+      const filterByFeature = state => columns =>
+        columns.filter(
+          column => !column.feature || isVisible(state, column.feature),
+        );
 
       const filterColumns = state => columns => {
         return filterByFeature(state)(columns).filter(
-          column => column.visible === undefined || column.visible === true
+          column => column.visible === undefined || column.visible === true,
         );
       };
 
@@ -57,7 +69,7 @@ export function connectTable(options: TableOptions) {
       );
 
       const ConnectedComponent = enhance(Component);
-      return <ConnectedComponent {...props}/>;
+      return <ConnectedComponent {...props} />;
     };
     Wrapper.displayName = `connectTable(${Component.name})`;
     return Wrapper;
@@ -67,9 +79,13 @@ export function connectTable(options: TableOptions) {
 export const formatLongText = value =>
   value.length > 100 ? (
     <Tooltip label={value} id="longText">
-      <span className="ellipsis" style={{width: 150}}>{value}</span>
+      <span className="ellipsis" style={{ width: 150 }}>
+        {value}
+      </span>
     </Tooltip>
-  ) : value;
+  ) : (
+    value
+  );
 
 export const transformRows = (rows: any[]) => {
   const entities: object = {};
@@ -81,21 +97,15 @@ export const transformRows = (rows: any[]) => {
   return { entities, order };
 };
 
-const getId = (row, index) => {
-  if (row.uuid) {
-    return row.uuid;
-  } else if (row.pk) {
-    return row.pk;
-  }
-  return index;
-};
-
-export const renderFieldOrDash = field => field ? field : '\u2014';
+export const renderFieldOrDash = field => (field ? field : '\u2014');
 
 export function getMessage({ query, verboseName }) {
-  const context = {verboseName: verboseName || translate('items')};
+  const context = { verboseName: verboseName || translate('items') };
   if (query && query !== '') {
-    return translate('There are no {verboseName} found matching the filter.', context);
+    return translate(
+      'There are no {verboseName} found matching the filter.',
+      context,
+    );
   } else {
     return translate('There are no {verboseName} yet.', context);
   }

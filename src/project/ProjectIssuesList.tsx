@@ -9,13 +9,10 @@ import { IssuesList } from '@waldur/issues/list/IssuesList';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 
-const mapStateToProps = createSelector(
-  getProject,
-  project => ({
-    scope: {project},
-    filter: {project: project && project.url},
-  }),
-);
+const mapStateToProps = createSelector(getProject, project => ({
+  scope: { project },
+  filter: { project: project && project.url },
+}));
 
 const ProjectIssuesListComponent = connect(mapStateToProps)(IssuesList);
 
@@ -24,7 +21,7 @@ const ProjectIssuesList = () => (
     <Row>
       <Col md={12}>
         <Panel>
-          <ProjectIssuesListComponent hiddenColumns={['customer']}/>
+          <ProjectIssuesListComponent hiddenColumns={['customer']} />
         </Panel>
       </Col>
     </Row>

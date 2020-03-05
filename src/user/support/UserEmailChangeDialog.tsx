@@ -9,10 +9,10 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { useEmailChange } from './useEmailChange';
 
-export const UserEmailChangeDialog = ({ resolve: {user} }) => {
+export const UserEmailChangeDialog = ({ resolve: { user } }) => {
   const dispatch = useDispatch();
 
-  const {handleSubmit, submitting, email, setEmail} = useEmailChange(user);
+  const { handleSubmit, submitting, email, setEmail } = useEmailChange(user);
 
   const handleClose = React.useCallback(() => {
     dispatch(closeModalDialog());
@@ -26,13 +26,16 @@ export const UserEmailChangeDialog = ({ resolve: {user} }) => {
           <Button
             bsStyle="primary"
             onClick={handleSubmit}
-            disabled={email === user.email || !email || submitting}>
-            {submitting && <><i className="fa fa-spinner fa-spin"/>{' '}</>}
+            disabled={email === user.email || !email || submitting}
+          >
+            {submitting && (
+              <>
+                <i className="fa fa-spinner fa-spin" />{' '}
+              </>
+            )}
             {translate('Submit')}
           </Button>
-          <Button
-            onClick={handleClose}
-            disabled={submitting}>
+          <Button onClick={handleClose} disabled={submitting}>
             {translate('Cancel')}
           </Button>
         </>

@@ -13,12 +13,11 @@ export const LoadingOverlay = (props: LoadingOverlayProps) => {
   const { message, className } = props;
   return (
     <div className={`loading-overlay ${className}`}>
-      {message ?
-        <div className="loading-overlay__message">
-          {message}
-        </div> :
+      {message ? (
+        <div className="loading-overlay__message">{message}</div>
+      ) : (
         <LoadingSpinner />
-      }
+      )}
     </div>
   );
 };

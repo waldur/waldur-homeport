@@ -10,35 +10,36 @@ export default jiraProjectsList;
 function JiraProjectsListController(
   $filter,
   baseResourceListController,
-  JiraProjectService) {
+  JiraProjectService,
+) {
   let controllerScope = this;
   let ResourceController = baseResourceListController.extend({
     init: function() {
       this.controllerScope = controllerScope;
       this._super();
       this.service = JiraProjectService;
-      this.addRowFields([
-        'template_name', 'template_description'
-      ]);
+      this.addRowFields(['template_name', 'template_description']);
     },
     getTableOptions: function() {
       let options = this._super();
       options.noDataText = gettext('You have no service desk projects yet.');
-      options.noMatchesText = gettext('No service desk projects found matching filter.');
+      options.noMatchesText = gettext(
+        'No service desk projects found matching filter.',
+      );
       options.columns = [
         {
           title: gettext('Name'),
           className: 'all',
           orderField: 'name',
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           title: gettext('Type'),
-          render: row => this.formatType(row)
+          render: row => this.formatType(row),
         },
         {
           title: gettext('Provider'),
-          render: row => row.service_name
+          render: row => row.service_name,
         },
         {
           title: gettext('Created'),
@@ -58,7 +59,7 @@ function JiraProjectsListController(
     },
     getFilter: function() {
       return {
-        project_uuid: this.currentProject.uuid
+        project_uuid: this.currentProject.uuid,
       };
     },
   });

@@ -37,9 +37,6 @@ const connector = connect<
     change(form: string, field: string, value: any): FormAction;
   },
   { projects: Project[] }
->(
-  undefined,
-  mapDispatchToProps
-);
+>(undefined, mapDispatchToProps);
 
 export const ProjectSelectField = connector(PureProjectSelectField);

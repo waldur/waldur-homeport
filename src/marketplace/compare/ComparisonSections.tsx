@@ -18,7 +18,10 @@ interface ComparisonSectionsState {
   categoryUuid: string;
 }
 
-export class ComparisonSections extends React.Component<ComparisonSectionsProps, ComparisonSectionsState> {
+export class ComparisonSections extends React.Component<
+  ComparisonSectionsProps,
+  ComparisonSectionsState
+> {
   state = {
     sections: [],
     loading: true,
@@ -58,7 +61,13 @@ export class ComparisonSections extends React.Component<ComparisonSectionsProps,
     }
 
     if (this.state.loading) {
-      return <tr><td><LoadingSpinner/></td></tr>;
+      return (
+        <tr>
+          <td>
+            <LoadingSpinner />
+          </td>
+        </tr>
+      );
     }
 
     if (!this.state.loaded) {
@@ -82,7 +91,7 @@ export class ComparisonSections extends React.Component<ComparisonSectionsProps,
         key={index}
         section={section}
         items={this.props.items}
-        />
-      ));
+      />
+    ));
   }
 }

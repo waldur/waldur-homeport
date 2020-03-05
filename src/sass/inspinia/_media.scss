@@ -19,7 +19,6 @@
 }
 
 @media (max-width: 768px) {
-
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 0;
@@ -79,7 +78,9 @@
     display: block;
   }
 
-  .navbar-static-side { display: none; }
+  .navbar-static-side {
+    display: none;
+  }
 
   body:not(.mini-navbar) {
     -webkit-transition: background-color 500ms linear;
@@ -87,13 +88,11 @@
     -o-transition: background-color 500ms linear;
     -ms-transition: background-color 500ms linear;
     transition: background-color 500ms linear;
-    background-color: #f3f3f4
+    background-color: #f3f3f4;
   }
-
 }
 
 @media (max-width: 350px) {
-
   .timeline-item .date {
     text-align: left;
     width: 110px;
@@ -128,5 +127,4 @@
     text-align: left;
     display: inline-block;
   }
-
 }

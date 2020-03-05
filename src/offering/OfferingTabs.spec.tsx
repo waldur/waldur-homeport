@@ -8,11 +8,11 @@ import { OFFERING } from './OfferingTabs.fixture';
 
 const renderComponent = () => {
   const mockStore = configureStore();
-  const store = mockStore({config: {featuresVisible: true}});
+  const store = mockStore({ config: { featuresVisible: true } });
   const wrapper = mount(
     <Provider store={store}>
       <OfferingTabs offering={OFFERING} summary="" />
-    </Provider>
+    </Provider>,
   );
   return wrapper.html();
 };

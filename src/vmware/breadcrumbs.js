@@ -7,8 +7,8 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService) {
         state: 'resources.details',
         params: {
           uuid: resource.vm_uuid,
-          resource_type: 'VMware.VirtualMachine'
-        }
+          resource_type: 'VMware.VirtualMachine',
+        },
       },
       {
         label: gettext('Disks'),
@@ -17,7 +17,7 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService) {
           uuid: resource.vm_uuid,
           resource_type: 'VMware.VirtualMachine',
           tab: 'disks',
-        }
+        },
       },
     ];
   });
@@ -29,8 +29,8 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService) {
         state: 'resources.details',
         params: {
           uuid: resource.vm_uuid,
-          resource_type: 'VMware.VirtualMachine'
-        }
+          resource_type: 'VMware.VirtualMachine',
+        },
       },
       {
         label: gettext('Network adapters'),
@@ -39,7 +39,7 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService) {
           uuid: resource.vm_uuid,
           resource_type: 'VMware.VirtualMachine',
           tab: 'ports',
-        }
+        },
       },
     ];
   });

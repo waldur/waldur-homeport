@@ -14,31 +14,34 @@ export const PureCustomerDetails = (props: CustomerDetailsProps) => {
   const customer = normalizeCustomerDetails(props.customer);
   return (
     <address>
-      <div><strong>{customer.name}</strong></div>
+      <div>
+        <strong>{customer.name}</strong>
+      </div>
 
-      {customer.address && (
-        <div>{customer.address}</div>
-      )}
+      {customer.address && <div>{customer.address}</div>}
 
       {customer.country && customer.postal && (
-        <div>{customer.country}, {customer.postal}</div>
+        <div>
+          {customer.country}, {customer.postal}
+        </div>
       )}
 
       {customer.phone_number && (
         <div>
-          <abbr title={props.translate('Phone')}>P:</abbr>
-          {' '}{formatPhone(customer.phone_number)}
+          <abbr title={props.translate('Phone')}>P:</abbr>{' '}
+          {formatPhone(customer.phone_number)}
         </div>
       )}
 
       {customer.bank_name && customer.bank_account && (
-        <div>{customer.bank_name}, {customer.bank_account}</div>
+        <div>
+          {customer.bank_name}, {customer.bank_account}
+        </div>
       )}
 
       {customer.vat_code && (
         <div>
-          <abbr>{props.translate('VAT')}:</abbr>
-          {' '}{customer.vat_code}
+          <abbr>{props.translate('VAT')}:</abbr> {customer.vat_code}
         </div>
       )}
 

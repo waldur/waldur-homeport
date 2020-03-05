@@ -25,7 +25,9 @@ const mapStateToProps = state => {
   if (!ownerOrStaff) {
     return {
       disabled: true,
-      tooltip: translate('You don\'t have enough privileges to perform this operation.'),
+      tooltip: translate(
+        "You don't have enough privileges to perform this operation.",
+      ),
     };
   } else if (isCustomerQuotaReached(customer, 'project')) {
     return {
@@ -41,4 +43,6 @@ const mapStateToProps = state => {
 
 const enhance = connect(mapStateToProps, { gotoProjectCreate });
 
-export const ProjectCreateButton = enhance(PureProjectCreateButton) as React.ComponentType<{}>;
+export const ProjectCreateButton = enhance(
+  PureProjectCreateButton,
+) as React.ComponentType<{}>;

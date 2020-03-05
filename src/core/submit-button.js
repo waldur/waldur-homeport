@@ -3,7 +3,7 @@ export default function submitButton($q) {
   return {
     restrict: 'A',
     scope: {
-      submit: '&submitButton'
+      submit: '&submitButton',
     },
     link: function(scope, element) {
       element.bind('click', function() {
@@ -12,6 +12,6 @@ export default function submitButton($q) {
           element.removeClass('disabled').removeClass('button-spinner');
         });
       });
-    }
+    },
   };
 }

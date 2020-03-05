@@ -28,7 +28,7 @@ export interface TableOptions {
   table: string;
   fetchData: any;
   queryField?: string;
-  exportFields?: string[] | ((props: any) => string []);
+  exportFields?: string[] | ((props: any) => string[]);
   exportRow?: (Entity, props: any) => string[];
   exportAll?: boolean;
   getDefaultFilter?: (state: any) => any;
@@ -38,7 +38,7 @@ export interface TableOptions {
 
 export interface Column<RowType = Entity> {
   title: string;
-  render: React.ComponentType<{row: RowType}>;
+  render: React.ComponentType<{ row: RowType }>;
   className?: string;
   orderField?: string;
   visible?: boolean;

@@ -40,7 +40,8 @@ const angularPattern = /^\[((?:[$a-zA-Z0-9]+:)?(?:[$a-zA-Z0-9]+))\] (.*?)\n?(\S+
 
 function normalizeEvent(event) {
   // We only care about mutating an exception
-  const exception = event.exception && event.exception.values && event.exception.values[0];
+  const exception =
+    event.exception && event.exception.values && event.exception.values[0];
 
   if (exception) {
     const matches = angularPattern.exec(exception.value);

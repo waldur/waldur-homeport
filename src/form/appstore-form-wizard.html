@@ -1,37 +1,65 @@
-<ng-form id="form" class="wizard-big wizard clearfix" role="application" name="$ctrl.Form" novalidate="novalidate">
+<ng-form
+  id="form"
+  class="wizard-big wizard clearfix"
+  role="application"
+  name="$ctrl.Form"
+  novalidate="novalidate"
+>
   <div class="steps clearfix" ng-if="$ctrl.steps.length > 1">
     <ul role="tablist">
-      <li role="tab"
+      <li
+        role="tab"
         ng-class="$ctrl.getCurrentStepClass($index)"
         ng-repeat="step in $ctrl.steps track by $index"
         aria-disabled="{{ !$ctrl.selected($index) }}"
-        aria-selected="{{ $ctrl.selected($index) }}">
-        <a id="form-t-{{ $index }}"
-          aria-controls="form-p-{{ $index }}">
-          <span class="number">{{ $index+1 }}. </span>{{ ::step.name }}
+        aria-selected="{{ $ctrl.selected($index) }}"
+      >
+        <a id="form-t-{{ $index }}" aria-controls="form-p-{{ $index }}">
+          <span class="number">{{ $index + 1 }}. </span>{{ ::step.name }}
         </a>
       </li>
     </ul>
   </div>
   <div class="content clearfix">
-    <fieldset role="tabpanel" class="p-md"
+    <fieldset
+      role="tabpanel"
+      class="p-md"
       ng-form="$ctrl.form{{ $index }}"
       ng-repeat="step in $ctrl.steps"
       id="form-p-{{ $index }}"
       aria-labelledby="form-h-{{ $index }}"
       aria-hidden="{{ !$ctrl.selected($index) }}"
       ng-if="$ctrl.selected($index)"
-      ng-class="{'current': $ctrl.selected($index)}">
+      ng-class="{'current': $ctrl.selected($index)}"
+    >
       <h2>{{ ::step.title }}</h2>
       <div class="row">
         <div class="col-lg-8" ng-init="formIndex = $index">
-          <div class="form-group" ng-repeat="(name, field) in step.fields" ng-if="!field.hidden">
-            <helpicon ng-if="field.help_text" help-text="{{ field.help_text }}"></helpicon>
-            <label ng-if="field.label" for="{{ field.name }}" class="control-label">
+          <div
+            class="form-group"
+            ng-repeat="(name, field) in step.fields"
+            ng-if="!field.hidden"
+          >
+            <helpicon
+              ng-if="field.help_text"
+              help-text="{{ field.help_text }}"
+            ></helpicon>
+            <label
+              ng-if="field.label"
+              for="{{ field.name }}"
+              class="control-label"
+            >
               <field-label field="field"></field-label>
             </label>
-            <appstore-field field="field" model="$ctrl.model" form="$ctrl.form{{ formIndex }}"></appstore-field>
-            <appstore-field-errors field="field" errors="$ctrl.model.errors"></appstore-field-errors>
+            <appstore-field
+              field="field"
+              model="$ctrl.model"
+              form="$ctrl.form{{ formIndex }}"
+            ></appstore-field>
+            <appstore-field-errors
+              field="field"
+              errors="$ctrl.model.errors"
+            ></appstore-field-errors>
           </div>
         </div>
       </div>
@@ -45,13 +73,15 @@
     <button
       ng-if="!$ctrl.hasPrevious()"
       ng-click="$ctrl.cancel()"
-      class="btn btn-default m-r-sm">
+      class="btn btn-default m-r-sm"
+    >
       <span translate>Cancel</span>
     </button>
     <button
       ng-if="$ctrl.hasPrevious()"
       ng-click="$ctrl.previous()"
-      class="btn btn-default m-r-sm">
+      class="btn btn-default m-r-sm"
+    >
       <span translate>Previous</span>
     </button>
     <button
@@ -59,13 +89,15 @@
       ng-click="$ctrl.next()"
       uib-tooltip="{{ $ctrl.getTooltip() }}"
       class="btn btn-primary"
-      tooltip-class="select-workspace-dialog__tooltip--order">
+      tooltip-class="select-workspace-dialog__tooltip--order"
+    >
       <span translate>Next</span>
     </button>
     <button
       ng-if="!$ctrl.hasNext()"
       submit-button="$ctrl.save()"
-      class="btn btn-primary">
+      class="btn btn-primary"
+    >
       <span translate>Finish</span>
     </button>
   </div>

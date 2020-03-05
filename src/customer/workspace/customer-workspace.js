@@ -5,7 +5,7 @@ export default function customerWorkspace() {
     restrict: 'E',
     template: template,
     controller: CustomerWorkspaceController,
-    transclude: true
+    transclude: true,
   };
 }
 
@@ -21,8 +21,8 @@ export function CustomerWorkspaceController(
   BillingUtils,
   BreadcrumbsService,
   titleService,
-  SidebarExtensionService) {
-
+  SidebarExtensionService,
+) {
   $scope.titleService = titleService;
   activate();
 
@@ -47,8 +47,8 @@ export function CustomerWorkspaceController(
         label: gettext('Organization workspace'),
         state: 'organization.dashboard',
         params: {
-          uuid: $scope.currentCustomer.uuid
-        }
+          uuid: $scope.currentCustomer.uuid,
+        },
       },
     ];
   }
@@ -79,18 +79,20 @@ export function CustomerWorkspaceController(
           {
             label: gettext('Cost analysis'),
             icon: 'fa-pie-chart',
-            link: 'organization.analysis.cost({uuid: $ctrl.context.customer.uuid})',
+            link:
+              'organization.analysis.cost({uuid: $ctrl.context.customer.uuid})',
             feature: 'analytics.cost',
             index: 100,
           },
           {
             label: gettext('Resource usage'),
             icon: 'fa-tachometer',
-            link: 'organization.analysis.resources({uuid: $ctrl.context.customer.uuid})',
+            link:
+              'organization.analysis.resources({uuid: $ctrl.context.customer.uuid})',
             feature: 'analytics.resources',
             index: 200,
-          }
-        ]
+          },
+        ],
       },
       {
         label: gettext('Audit logs'),
@@ -126,24 +128,31 @@ export function CustomerWorkspaceController(
         label: gettext('Manage'),
         icon: 'fa-wrench',
         link: 'organization.manage({uuid: $ctrl.context.customer.uuid})',
-        index: 9999
-      }
+        index: 9999,
+      },
     ];
-    $scope.items = SidebarExtensionService.mergeItems($scope.items, customItems);
+    $scope.items = SidebarExtensionService.mergeItems(
+      $scope.items,
+      customItems,
+    );
   }
 
   function refreshWorkspace() {
     const options = WorkspaceService.getWorkspace();
-    if (options && options.customer && !angular.equals($scope.currentCustomer, options.customer)) {
+    if (
+      options &&
+      options.customer &&
+      !angular.equals($scope.currentCustomer, options.customer)
+    ) {
       $scope.currentCustomer = options.customer;
-      $scope.context = {customer: options.customer};
+      $scope.context = { customer: options.customer };
       SidebarExtensionService.getItems('customer').then(customItems => {
         setItems(customItems);
         tabCounterService.connect({
           $scope: $scope,
           tabs: $scope.items,
           getCounters: getCounters.bind(null, options.customer),
-          getCountersError: getCountersError
+          getCountersError: getCountersError,
         });
       });
       refreshBreadcrumbs();
@@ -153,9 +162,9 @@ export function CustomerWorkspaceController(
   function getCounters(customer) {
     const fields = SidebarExtensionService.getCounters($scope.items);
     let query = angular.extend(
-        {UUID: customer.uuid, fields},
-        joinService.defaultFilter,
-        eventsService.defaultFilter
+      { UUID: customer.uuid, fields },
+      joinService.defaultFilter,
+      eventsService.defaultFilter,
     );
     return customersService.getCounters(query);
   }

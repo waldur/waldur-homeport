@@ -11,7 +11,7 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Marketplace'),
         hideBreadcrumbs: true,
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-landing-customer', {
@@ -22,7 +22,7 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Marketplace'),
         hideBreadcrumbs: true,
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-compare', {
@@ -32,7 +32,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Compare items'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-compare-customer', {
@@ -42,7 +42,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Compare items'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-checkout', {
@@ -52,7 +52,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Marketplace checkout'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-offering', {
@@ -62,7 +62,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Offering details'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-offering-customer', {
@@ -72,17 +72,18 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Offering details'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-offering-details', {
       url: 'marketplace-offering-details/:offering_uuid/',
-      template: '<marketplace-offering-details-page></marketplace-offering-details-page>',
+      template:
+        '<marketplace-offering-details-page></marketplace-offering-details-page>',
       parent: 'organization',
       data: {
         pageTitle: gettext('Offering details'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-category', {
@@ -92,7 +93,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Marketplace offerings'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-category-customer', {
@@ -102,7 +103,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Marketplace offerings'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-order-list', {
@@ -112,7 +113,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('My orders'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-provider-details', {
@@ -122,7 +123,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Provider details'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-provider-details-customer', {
@@ -132,7 +133,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Provider details'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-services', {
@@ -149,7 +150,7 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Public offerings'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
-      }
+      },
     })
 
     .state('marketplace-my-offerings', {
@@ -160,7 +161,7 @@ export default function routes($stateProvider) {
         pageTitle: gettext('My offerings'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
-      }
+      },
     })
 
     .state('marketplace-offering-create', {
@@ -171,7 +172,7 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Add offering'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
-      }
+      },
     })
 
     .state('marketplace-offering-update', {
@@ -181,7 +182,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Update offering'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-order-details', {
@@ -191,29 +192,31 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Order details'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-order-item-details', {
       url: 'marketplace-order-item-details/:order_item_uuid/',
-      template: '<marketplace-order-item-details></marketplace-order-item-details>',
+      template:
+        '<marketplace-order-item-details></marketplace-order-item-details>',
       parent: 'project',
       data: {
         pageTitle: gettext('Order item details'),
         feature: 'marketplace',
         renderDocumentTitle: true,
-      }
+      },
     })
 
     .state('marketplace-order-item-details-customer', {
       url: 'marketplace-order-item-details/:order_item_uuid/',
-      template: '<marketplace-order-item-details></marketplace-order-item-details>',
+      template:
+        '<marketplace-order-item-details></marketplace-order-item-details>',
       parent: 'organization',
       data: {
         pageTitle: gettext('Order item details'),
         feature: 'marketplace',
         renderDocumentTitle: true,
-      }
+      },
     })
 
     .state('marketplace-order-details-customer', {
@@ -223,7 +226,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Order details'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-order-items', {
@@ -234,40 +237,43 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Public orders'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
-      }
+      },
     })
 
     .state('marketplace-my-order-items', {
       url: 'marketplace-my-order-items/?filterState',
-      template: '<marketplace-my-order-items-list></marketplace-my-order-items-list>',
+      template:
+        '<marketplace-my-order-items-list></marketplace-my-order-items-list>',
       parent: 'organization',
       data: {
         pageTitle: gettext('My orders'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
-      }
+      },
     })
 
     .state('marketplace-customer-resources', {
       url: 'marketplace-customer-resources/',
-      template: '<marketplace-customer-resources-list></marketplace-customer-resources-list>',
+      template:
+        '<marketplace-customer-resources-list></marketplace-customer-resources-list>',
       parent: 'organization',
       data: {
         pageTitle: gettext('My resources'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
-      }
+      },
     })
 
     .state('marketplace-public-resources', {
       url: 'marketplace-public-resources/',
-      template: '<marketplace-public-resources-list></marketplace-public-resources-list>',
+      template:
+        '<marketplace-public-resources-list></marketplace-public-resources-list>',
       parent: 'organization',
       data: {
         pageTitle: gettext('Public resources'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
-      }
+      },
     })
 
     .state('marketplace-public-resource-details', {
@@ -278,12 +284,13 @@ export default function routes($stateProvider) {
         pageTitle: gettext('Public resources'),
         feature: 'marketplace',
         sidebarState: 'marketplace-services',
-      }
+      },
     })
 
     .state('marketplace-support-resources', {
       url: 'marketplace-support-resources/',
-      template: '<marketplace-support-resources-list></marketplace-support-resources-list>',
+      template:
+        '<marketplace-support-resources-list></marketplace-support-resources-list>',
       parent: 'support',
       data: {
         feature: 'marketplace',
@@ -291,12 +298,13 @@ export default function routes($stateProvider) {
       },
       resolve: {
         permission: checkPermission,
-      }
+      },
     })
 
     .state('marketplace-support-order-items', {
       url: 'order-items/',
-      template: '<marketplace-support-order-items-list></marketplace-support-order-items-list>',
+      template:
+        '<marketplace-support-order-items-list></marketplace-support-order-items-list>',
       parent: 'support',
       data: {
         feature: 'marketplace',
@@ -304,7 +312,7 @@ export default function routes($stateProvider) {
       },
       resolve: {
         permission: checkPermission,
-      }
+      },
     })
 
     .state('marketplace-support-plan-usages', {
@@ -317,12 +325,13 @@ export default function routes($stateProvider) {
       },
       resolve: {
         permission: checkPermission,
-      }
+      },
     })
 
     .state('marketplace-support-usage-reports', {
       url: 'usage-reports/',
-      template: '<marketplace-support-usage-list></marketplace-support-usage-list>',
+      template:
+        '<marketplace-support-usage-list></marketplace-support-usage-list>',
       parent: 'support',
       data: {
         feature: 'marketplace',
@@ -330,7 +339,7 @@ export default function routes($stateProvider) {
       },
       resolve: {
         permission: checkPermission,
-      }
+      },
     })
 
     .state('marketplace-resources', {
@@ -341,32 +350,35 @@ export default function routes($stateProvider) {
 
     .state('marketplace-project-resources', {
       url: 'marketplace-resources/:category_uuid/',
-      template: '<marketplace-project-resources-list></marketplace-project-resources-list>',
+      template:
+        '<marketplace-project-resources-list></marketplace-project-resources-list>',
       parent: 'project',
       data: {
         pageTitle: gettext('Resources'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-resources'
-      }
+        sidebarState: 'marketplace-resources',
+      },
     })
 
     .state('marketplace-shopping-cart-item-update', {
       url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
-      template: '<marketplace-shopping-cart-item-update></marketplace-shopping-cart-item-update>',
+      template:
+        '<marketplace-shopping-cart-item-update></marketplace-shopping-cart-item-update>',
       parent: 'project',
       data: {
         pageTitle: gettext('Shopping cart item update'),
         feature: 'marketplace',
-      }
+      },
     })
 
     .state('marketplace-shopping-cart-item-update-customer', {
       url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
-      template: '<marketplace-shopping-cart-item-update></marketplace-shopping-cart-item-update>',
+      template:
+        '<marketplace-shopping-cart-item-update></marketplace-shopping-cart-item-update>',
       parent: 'organization',
       data: {
         pageTitle: gettext('Shopping cart item update'),
         feature: 'marketplace',
-      }
+      },
     });
 }

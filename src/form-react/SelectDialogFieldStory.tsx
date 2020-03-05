@@ -11,13 +11,15 @@ class SelectDialogFieldStory extends React.Component {
   };
 
   onSelectValue = selectedValue => {
-    this.setState({selectedValue});
-  }
+    this.setState({ selectedValue });
+  };
 
   render() {
     return (
       <>
-        <div><strong>{`Selected value: ${this.state.selectedValue}`}</strong></div>
+        <div>
+          <strong>{`Selected value: ${this.state.selectedValue}`}</strong>
+        </div>
         <SelectDialogField
           dialogTitle="Select Image"
           input={{

@@ -5,7 +5,11 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table-react/actions';
-import { updateUser, activateUser, deactivateUser } from '@waldur/user/support/actions';
+import {
+  updateUser,
+  activateUser,
+  deactivateUser,
+} from '@waldur/user/support/actions';
 
 import * as api from './api';
 
@@ -32,13 +36,15 @@ export function* handleUpdateUser(action) {
 export function* handleActivateUser(action) {
   try {
     yield call(api.activateUser, action.payload.uuid);
-    const user = {...action.payload, is_active: true};
+    const user = { ...action.payload, is_active: true };
     yield put(updateEntity(USERS_TABLE, user.uuid, user));
     yield put(activateUser.success());
     yield put(showSuccess(translate('User has been activated.')));
   } catch (error) {
     yield put(activateUser.failure());
-    const errorMessage = `${translate('Unable to activate user.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to activate user.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
 }
@@ -46,13 +52,15 @@ export function* handleActivateUser(action) {
 export function* handleDeactivateUser(action) {
   try {
     yield call(api.deactivateUser, action.payload.uuid);
-    const user = {...action.payload, is_active: false};
+    const user = { ...action.payload, is_active: false };
     yield put(updateEntity(USERS_TABLE, user.uuid, user));
     yield put(activateUser.success());
     yield put(showSuccess(translate('User has been deactivated.')));
   } catch (error) {
     yield put(activateUser.failure());
-    const errorMessage = `${translate('Unable to deactivate user.')} ${format(error)}`;
+    const errorMessage = `${translate('Unable to deactivate user.')} ${format(
+      error,
+    )}`;
     yield put(showError(errorMessage));
   }
 }

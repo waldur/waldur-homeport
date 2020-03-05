@@ -1,12 +1,16 @@
 <div class="row">
   <div class="col-md-9">
-    <appstore-field-multiselect model="$ctrl.model" field="$ctrl.field"></appstore-field-multiselect>
+    <appstore-field-multiselect
+      model="$ctrl.model"
+      field="$ctrl.field"
+    ></appstore-field-multiselect>
   </div>
   <div class="col-md-3">
     <button
       class="btn btn-default"
       ng-click="$ctrl.openDetailsDialog()"
-      ng-disabled="!$ctrl.model[$ctrl.field.name]">
+      ng-disabled="!$ctrl.model[$ctrl.field.name]"
+    >
       <i class="fa fa-eye"></i>
       <span translate>Details</span>
     </button>

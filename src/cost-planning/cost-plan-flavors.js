@@ -5,7 +5,7 @@ const costPlanFlavors = {
   bindings: {
     items: '<',
     serviceType: '<',
-  }
+  },
 };
 
 export default costPlanFlavors;

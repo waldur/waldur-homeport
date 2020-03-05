@@ -1,7 +1,12 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, SecretField, TextField } from '@waldur/form-react';
+import {
+  FormContainer,
+  StringField,
+  SecretField,
+  TextField,
+} from '@waldur/form-react';
 
 export const RancherProviderForm = ({ translate, container }) => (
   <FormContainer {...container}>

@@ -5,8 +5,8 @@ export default function userSelector() {
     restrict: 'E',
     scope: {
       users: '=',
-      model: '='
+      model: '=',
     },
-    template: template
+    template: template,
   };
 }

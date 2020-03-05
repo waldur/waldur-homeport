@@ -12,7 +12,10 @@ export default class DeleteCustomerAction {
   }
 
   get hasPermission() {
-    return this.user.is_staff || (this.isOwner && this.ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER);
+    return (
+      this.user.is_staff ||
+      (this.isOwner && this.ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER)
+    );
   }
 
   get needsSupport() {
@@ -21,10 +24,14 @@ export default class DeleteCustomerAction {
 
   get notification() {
     if (this.hasProjects) {
-      return gettext('Organization contains projects. Please remove them first.');
+      return gettext(
+        'Organization contains projects. Please remove them first.',
+      );
     }
     if (this.hasActiveInvoices) {
-      return gettext('Organization contains invoices. Please remove them first.');
+      return gettext(
+        'Organization contains invoices. Please remove them first.',
+      );
     }
   }
 
@@ -37,6 +44,8 @@ export default class DeleteCustomerAction {
   }
 
   get hasActiveInvoices() {
-    return this.invoices.some(invoice => (invoice.state !== 'pending') || (parseFloat(invoice.price) > 0));
+    return this.invoices.some(
+      invoice => invoice.state !== 'pending' || parseFloat(invoice.price) > 0,
+    );
   }
 }

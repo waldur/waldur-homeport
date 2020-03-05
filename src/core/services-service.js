@@ -3,7 +3,7 @@ export default function servicesService(baseServiceClass, $q) {
   let ServiceClass = baseServiceClass.extend({
     services: null,
 
-    init:function() {
+    init: function() {
       this._super();
     },
     getServicesList: function() {
@@ -20,7 +20,7 @@ export default function servicesService(baseServiceClass, $q) {
       }
 
       return deferred.promise;
-    }
+    },
   });
   return new ServiceClass();
 }

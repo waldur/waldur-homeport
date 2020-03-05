@@ -1,16 +1,13 @@
 // @ngInject
-export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
+export default function actionConfig(
+  ActionConfigurationProvider,
+  DEFAULT_EDIT_ACTION,
+) {
   ActionConfigurationProvider.register('SLURM.Allocation', {
-    order: [
-      'details',
-      'pull',
-      'edit',
-      'cancel',
-      'destroy'
-    ],
+    order: ['details', 'pull', 'edit', 'cancel', 'destroy'],
     options: {
       pull: {
-        title: gettext('Synchronise')
+        title: gettext('Synchronise'),
       },
       details: {
         title: gettext('Details'),
@@ -40,9 +37,9 @@ export default function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_A
             label: gettext('RAM limit, MB'),
             required: true,
             resource_default_value: true,
-          }
-        }
+          },
+        },
       }),
-    }
+    },
   });
 }

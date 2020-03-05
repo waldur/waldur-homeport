@@ -3,7 +3,10 @@ import * as Col from 'react-bootstrap/lib/Col';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
+import {
+  parseIntField,
+  formatIntField,
+} from '@waldur/marketplace/common/utils';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 interface Props {
@@ -21,24 +24,16 @@ export const OfferingLimitsTable: React.FC<Props> = props => (
       <table className="table table-borderless">
         <thead>
           <tr>
-            <th>
-              {translate('Name')}
-            </th>
-            <th>
-              {translate('Min amount')}
-            </th>
-            <th>
-              {translate('Max amount')}
-            </th>
+            <th>{translate('Name')}</th>
+            <th>{translate('Min amount')}</th>
+            <th>{translate('Max amount')}</th>
           </tr>
         </thead>
         <tbody>
           {props.components.map((component, index) => (
             <tr key={index}>
               <td>
-                <div className="form-control-static">
-                  {component.name}
-                </div>
+                <div className="form-control-static">{component.name}</div>
               </td>
               <td>
                 <Field

@@ -17,13 +17,10 @@ interface StateProps {
 
 type Props = StateProps;
 class PureOrderStateFilter extends React.Component<Props> {
-
   render() {
     return (
       <div className="form-group col-sm-3">
-        <label className="control-label">
-          {translate('State')}
-        </label>
+        <label className="control-label">{translate('State')}</label>
         <Field
           name="state"
           component={fieldProps => (
@@ -46,8 +43,6 @@ const mapStateToProps = state => {
   };
 };
 
-const enhance = compose(
-  connect(mapStateToProps),
-);
+const enhance = compose(connect(mapStateToProps));
 
 export const OrderStateFilter = enhance(PureOrderStateFilter);

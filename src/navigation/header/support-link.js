@@ -2,11 +2,13 @@ import template from './support-link.html';
 
 class SupportLinkController {
   // @ngInject
-  constructor (IssueNavigationService) {
+  constructor(IssueNavigationService) {
     this.IssueNavigationService = IssueNavigationService;
   }
 
-  gotoSupport() { this.IssueNavigationService.gotoDashboard(); }
+  gotoSupport() {
+    this.IssueNavigationService.gotoDashboard();
+  }
 
   get supportIsVisible() {
     return this.IssueNavigationService.isVisible;
@@ -19,6 +21,6 @@ export default function supportLink() {
     replace: true,
     scope: {},
     controllerAs: '$ctrl',
-    controller: SupportLinkController
+    controller: SupportLinkController,
   };
 }

@@ -4,8 +4,8 @@ import './quotas-table.scss';
 const quotasTable = {
   template,
   bindings: {
-    resource: '<'
-  }
+    resource: '<',
+  },
 };
 
 export default quotasTable;

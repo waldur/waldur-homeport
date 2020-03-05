@@ -14,24 +14,30 @@
         <div class="pull-right">
           <button
             class="btn btn-default btn-sm"
-            ng-click="$ctrl.reInitResource($ctrl.offering)">
+            ng-click="$ctrl.reInitResource($ctrl.offering)"
+          >
             <i class="fa fa-refresh"></i>
             <span translate>Refresh</span>
           </button>
           <offering-report-button
             ng-if="$ctrl.showReportButton"
-            offering="$ctrl.offering">
+            offering="$ctrl.offering"
+          >
           </offering-report-button>
           <action-button-resource
             button-model="$ctrl.offering"
-            button-controller="$ctrl">
+            button-controller="$ctrl"
+          >
           </action-button-resource>
           <extension-point id="offering-details-button"></extension-point>
         </div>
         <breadcrumbs-container></breadcrumbs-container>
       </div>
     </div>
-    <offering-summary offering="$ctrl.offering" summary="$ctrl.offeringConfig.summary"></offering-summary>
+    <offering-summary
+      offering="$ctrl.offering"
+      summary="$ctrl.offeringConfig.summary"
+    ></offering-summary>
   </div>
   <div class="footer-indent"></div>
   <app-footer></app-footer>

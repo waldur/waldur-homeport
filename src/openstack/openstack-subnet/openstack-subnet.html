@@ -5,6 +5,10 @@
   ng-pattern="$ctrl.pattern"
   class="form-control"
 />
-<p class="help-block text-danger" ng-if="$ctrl.form[$ctrl.field.name].$error.pattern" translate>
+<p
+  class="help-block text-danger"
+  ng-if="$ctrl.form[$ctrl.field.name].$error.pattern"
+  translate
+>
   Enter private IPv4 CIDR.
 </p>

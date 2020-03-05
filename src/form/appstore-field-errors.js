@@ -6,10 +6,10 @@ export default function appstoreFieldErrors() {
     template: template,
     scope: {
       errors: '=',
-      field: '='
+      field: '=',
     },
     controller: function() {},
     controllerAs: '$ctrl',
-    bindToController: true
+    bindToController: true,
   };
 }

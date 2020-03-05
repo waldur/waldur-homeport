@@ -12,36 +12,10 @@ import exportExcel from './excel';
 import { getTableOptions } from './registry';
 import { selectTableRows } from './selectors';
 
-export function* exportTable(action) {
-  const { table, format, props } = action.payload;
-  let rows = yield select(state => selectTableRows(state, table));
-  const { exportFields, exportRow, fetchData, exportAll, mapPropsToFilter } = getTableOptions(table);
-
-  if (exportAll) {
-    yield put(blockStart(table));
-    let propFilter;
-    if (mapPropsToFilter) {
-      propFilter = mapPropsToFilter(props);
-    }
-    rows = yield call(fetchAll, fetchData, propFilter);
-    yield put(blockStop(table));
-  }
-
-  const fields = typeof exportFields === 'function' ? exportFields(props) : exportFields;
-
-  const data = {
-    fields,
-    data: rows.map(row => exportRow(row, props)),
-  };
-  exporters[format](table, data);
+function saveAsPdf(table, data) {
+  const blob = new Blob([data], { type: 'application/pdf' });
+  FileSaver.saveAs(blob, `${table}.pdf`);
 }
-
-const exporters = {
-  csv: saveAsCsv,
-  clipboard: exportToClipboard,
-  pdf: exportAsPdf,
-  excel: exportExcel,
-};
 
 async function exportAsPdf(table, data) {
   const pdfmake = await loadPdfMake();
@@ -49,9 +23,11 @@ async function exportAsPdf(table, data) {
     text: field + '',
     style: 'tableHeader',
   }));
-  const rows = data.data.map(row => row.map(cell => ({
-    text: cell + '',
-  })));
+  const rows = data.data.map(row =>
+    row.map(cell => ({
+      text: cell + '',
+    })),
+  );
   const doc: Record<string, object> = {
     content: [
       {
@@ -88,18 +64,51 @@ async function exportAsPdf(table, data) {
   pdf.getBuffer(buffer => saveAsPdf(table, buffer));
 }
 
-function saveAsPdf(table, data) {
-  const blob = new Blob([data], {type: 'application/pdf'});
-  FileSaver.saveAs(blob, `${table}.pdf`);
-}
-
 function saveAsCsv(table, data) {
   const csv = Papa.unparse(data);
-  const blob = new Blob([csv], {type: 'text/plain;charset=utf-8'});
+  const blob = new Blob([csv], { type: 'text/plain;charset=utf-8' });
   FileSaver.saveAs(blob, `${table}.csv`);
 }
 
 function exportToClipboard(_, data) {
   const text = Papa.unparse(data);
   copyToClipboard(text);
+}
+
+const exporters = {
+  csv: saveAsCsv,
+  clipboard: exportToClipboard,
+  pdf: exportAsPdf,
+  excel: exportExcel,
+};
+
+export function* exportTable(action) {
+  const { table, format, props } = action.payload;
+  let rows = yield select(state => selectTableRows(state, table));
+  const {
+    exportFields,
+    exportRow,
+    fetchData,
+    exportAll,
+    mapPropsToFilter,
+  } = getTableOptions(table);
+
+  if (exportAll) {
+    yield put(blockStart(table));
+    let propFilter;
+    if (mapPropsToFilter) {
+      propFilter = mapPropsToFilter(props);
+    }
+    rows = yield call(fetchAll, fetchData, propFilter);
+    yield put(blockStop(table));
+  }
+
+  const fields =
+    typeof exportFields === 'function' ? exportFields(props) : exportFields;
+
+  const data = {
+    fields,
+    data: rows.map(row => exportRow(row, props)),
+  };
+  exporters[format](table, data);
 }

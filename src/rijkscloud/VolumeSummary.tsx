@@ -13,7 +13,7 @@ const PureVolumeSummary = (props: ResourceSummaryProps) => {
   const { translate } = props;
   return (
     <>
-      <PureResourceSummaryBase {...props}/>
+      <PureResourceSummaryBase {...props} />
       <Field
         label={translate('Size')}
         value={formatFilesize(props.resource.size)}

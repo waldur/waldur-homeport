@@ -9,31 +9,27 @@ describe('HttpUtils', () => {
 
   it('fetches and merges all pages in correct order using header links', () => {
     let result;
-    httpUtils.getAll('https://example.com/api/customers/').then(data => result = data);
+    httpUtils
+      .getAll('https://example.com/api/customers/')
+      .then(data => (result = data));
 
     $httpBackend
       .when('GET', 'https://example.com/api/customers/')
-      .respond(200, [
-        {name: 'Customer 1'},
-        {name: 'Customer 2'},
-      ], {
-        link: '<https://example.com/api/customers/?page=2>; rel="next"'
+      .respond(200, [{ name: 'Customer 1' }, { name: 'Customer 2' }], {
+        link: '<https://example.com/api/customers/?page=2>; rel="next"',
       });
 
     $httpBackend
       .when('GET', 'https://example.com/api/customers/?page=2')
-      .respond(200, [
-        {name: 'Customer 3'},
-        {name: 'Customer 4'},
-      ]);
+      .respond(200, [{ name: 'Customer 3' }, { name: 'Customer 4' }]);
 
     $httpBackend.flush();
 
     expect(result).toEqual([
-      {name: 'Customer 1'},
-      {name: 'Customer 2'},
-      {name: 'Customer 3'},
-      {name: 'Customer 4'},
+      { name: 'Customer 1' },
+      { name: 'Customer 2' },
+      { name: 'Customer 3' },
+      { name: 'Customer 4' },
     ]);
   });
 });

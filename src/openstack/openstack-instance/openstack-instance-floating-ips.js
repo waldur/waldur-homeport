@@ -5,7 +5,7 @@ const FLOATING_IP_CHOICES = [
   {
     value: true,
     display_name: gettext('Auto-assign floating IP'),
-  }
+  },
 ];
 
 const openstackInstanceFloatingIps = {
@@ -36,26 +36,30 @@ const openstackInstanceFloatingIps = {
         value: internal_ip.subnet,
       }));
       this.floating_ips = FLOATING_IP_CHOICES.concat(this.field.choices);
-      this.$scope.$watch(() => this.items, () => {
-        const items = this.items.filter(item => item.subnet);
-        this.model.floating_ips = items.map(item => {
-          if (item.floating_ip === true) {
-            return {
-              subnet: item.subnet
-            };
-          } else {
-            return {
-              subnet: item.subnet,
-              url: item.floating_ip,
-            };
-          }
-        });
-      }, true);
+      this.$scope.$watch(
+        () => this.items,
+        () => {
+          const items = this.items.filter(item => item.subnet);
+          this.model.floating_ips = items.map(item => {
+            if (item.floating_ip === true) {
+              return {
+                subnet: item.subnet,
+              };
+            } else {
+              return {
+                subnet: item.subnet,
+                url: item.floating_ip,
+              };
+            }
+          });
+        },
+        true,
+      );
     }
 
     addItem() {
       this.items.push({
-        floating_ip: true
+        floating_ip: true,
       });
       this.form.$setDirty();
     }
@@ -65,7 +69,7 @@ const openstackInstanceFloatingIps = {
       this.items.splice(index);
       this.form.$setDirty();
     }
-  }
+  },
 };
 
 export default openstackInstanceFloatingIps;

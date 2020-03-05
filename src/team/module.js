@@ -10,7 +10,10 @@ import projectPermissionsLogList from './ProjectPermissionsLogList';
 import './events';
 
 export default module => {
-  module.service('customerPermissionsLogService', customerPermissionsLogService);
+  module.service(
+    'customerPermissionsLogService',
+    customerPermissionsLogService,
+  );
   module.service('projectPermissionsLogService', projectPermissionsLogService);
   module.directive('userSelector', userSelector);
   module.component('addProjectMember', addProjectMember);

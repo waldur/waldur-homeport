@@ -2,16 +2,23 @@
   multiple
   ng-model="$ctrl.model[$ctrl.field.name]"
   ng-if="$ctrl.field.choices && $ctrl.field.choices.length !== 0"
-  theme="bootstrap">
-  <ui-select-match ui-lock-choice="$ctrl.isLocked($item)" placeholder="{{ $ctrl.field.placeholder | translate }}">
+  theme="bootstrap"
+>
+  <ui-select-match
+    ui-lock-choice="$ctrl.isLocked($item)"
+    placeholder="{{ $ctrl.field.placeholder | translate }}"
+  >
     {{ $item.display_name }}
   </ui-select-match>
-  <ui-select-choices repeat="item in $ctrl.field.choices | filter: {display_name: $select.search} track by item.value">
+  <ui-select-choices
+    repeat="item in $ctrl.field.choices | filter: {display_name: $select.search} track by item.value"
+  >
     <div ng-bind-html="item.display_name | highlight: $select.search"></div>
   </ui-select-choices>
 </ui-select>
 <div
   class="form-control-static"
-  ng-if="!$ctrl.field.choices || $ctrl.field.choices.length === 0">
+  ng-if="!$ctrl.field.choices || $ctrl.field.choices.length === 0"
+>
   N/A
 </div>

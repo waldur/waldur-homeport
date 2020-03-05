@@ -6,7 +6,7 @@ const slurmAllocationDetailsDialog = {
     resolve: '<',
     dismiss: '&',
     close: '&',
-  }
+  },
 };
 
 export default slurmAllocationDetailsDialog;

@@ -11,7 +11,8 @@ export const NodeRemoveButton = (props: NodeRemoveButtonProps) => (
     type="button"
     className="close"
     aria-label={translate('Remove')}
-    onClick={props.onClick}>
+    onClick={props.onClick}
+  >
     <span aria-hidden="true">&times;</span>
   </button>
 );

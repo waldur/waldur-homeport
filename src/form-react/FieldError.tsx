@@ -4,10 +4,7 @@ interface FieldErrorProps {
   error?: string;
 }
 
-export const FieldError = (props: FieldErrorProps) => (
+export const FieldError = (props: FieldErrorProps) =>
   props.error ? (
-    <div className="help-block text-danger">
-      {props.error}
-    </div>
-  ) : null
-);
+    <div className="help-block text-danger">{props.error}</div>
+  ) : null;

@@ -7,7 +7,7 @@ const providerProjectLinkQuotas = {
   },
   controller: class ProviderProjectLinkQuotasController {
     // @ngInject
-    constructor ($scope, quotasService, $q) {
+    constructor($scope, quotasService, $q) {
       this.multiplyFactor = 1024;
       this.quotaNames = ['ram', 'vcpu', 'storage'];
       this.quotasService = quotasService;
@@ -15,14 +15,14 @@ const providerProjectLinkQuotas = {
 
       $scope.$on('onSave', this.onSave.bind(this));
     }
-    $onInit(){
+    $onInit() {
       this.initializeChoices();
     }
     initializeChoices() {
-      angular.forEach(this.choices, (choice) => {
+      angular.forEach(this.choices, choice => {
         choice.quotas = {};
 
-        angular.forEach(this.quotaNames, (name) => {
+        angular.forEach(this.quotaNames, name => {
           choice.quotas[name] = {
             limit: 0,
             usage: 0,
@@ -30,47 +30,56 @@ const providerProjectLinkQuotas = {
             unlimited: true,
           };
 
-          if (choice.link && choice.link.quotas && choice.link.quotas.length > 1) {
-            choice.quotas[name] = choice.link.quotas.filter((quota) => {return quota.name === name;})[0];
+          if (
+            choice.link &&
+            choice.link.quotas &&
+            choice.link.quotas.length > 1
+          ) {
+            choice.quotas[name] = choice.link.quotas.filter(quota => {
+              return quota.name === name;
+            })[0];
           }
 
           if (choice.quotas[name].limit === -1) {
             choice.quotas[name].unlimited = true;
             choice.quotas[name].limit = 0;
           }
-
         });
       });
     }
     onSave() {
-      this.choices.filter((choice) => {
-        return choice.selected && choice.link_url && choice.dirty;
-      }).map((choice) => {
-        let updateQuotasPromises = this.quotaNames.map((name) => {
-          choice.quotas[name].url = choice.link.quotas.filter((quota) => { return quota.name === name; })[0].url;
-          return this.updateQuota(choice.quotas[name]).then(() => {
-            if (choice.dirty) {
-              choice.subtitle = gettext('Quotas updated.');
+      this.choices
+        .filter(choice => {
+          return choice.selected && choice.link_url && choice.dirty;
+        })
+        .map(choice => {
+          let updateQuotasPromises = this.quotaNames.map(name => {
+            choice.quotas[name].url = choice.link.quotas.filter(quota => {
+              return quota.name === name;
+            })[0].url;
+            return this.updateQuota(choice.quotas[name]).then(() => {
+              if (choice.dirty) {
+                choice.subtitle = gettext('Quotas updated.');
+              }
+              choice.dirty = false;
+            });
+          });
+
+          this.$q.all(updateQuotasPromises).catch(response => {
+            let reason = '';
+            if (response.data && response.data.detail) {
+              reason = response.data.detail;
             }
-            choice.dirty = false;
+            choice.subtitle = gettext('Unable to set quotas.') + ' ' + reason;
           });
         });
 
-        this.$q.all(updateQuotasPromises).catch((response) => {
-          let reason = '';
-          if (response.data && response.data.detail) {
-            reason = response.data.detail;
-          }
-          choice.subtitle = gettext('Unable to set quotas.') + ' ' + reason;
-        });
-      });
-
-      let clearedChoices = this.choices.filter((choice) => {
+      let clearedChoices = this.choices.filter(choice => {
         return !choice.selected && !choice.link_url;
       });
 
-      angular.forEach(clearedChoices, (choice) => {
-        angular.forEach(this.quotaNames, (name) => {
+      angular.forEach(clearedChoices, choice => {
+        angular.forEach(this.quotaNames, name => {
           choice.quotas[name].usage = 0;
         });
       });
@@ -78,12 +87,12 @@ const providerProjectLinkQuotas = {
     updateQuota(quota) {
       let payload = {
         limit: quota.unlimited ? -1 : quota.limit,
-        url: quota.url
+        url: quota.url,
       };
 
       return this.quotasService.update(payload);
     }
-  }
+  },
 };
 
 export default providerProjectLinkQuotas;

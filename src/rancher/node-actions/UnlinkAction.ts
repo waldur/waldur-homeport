@@ -8,6 +8,8 @@ export default function createAction(ctx): ResourceAction {
     method: 'POST',
     title: translate('Unlink instance'),
     isVisible: ctx.resource.instance !== null && ctx.user.is_staff,
-    dialogSubtitle: translate('Do you want to unlink instance {name}?', {name: ctx.resource.instance_name}),
+    dialogSubtitle: translate('Do you want to unlink instance {name}?', {
+      name: ctx.resource.instance_name,
+    }),
   };
 }

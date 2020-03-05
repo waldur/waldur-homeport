@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { Async } from 'react-select';
 import { Field } from 'redux-form';
 
@@ -21,8 +20,8 @@ export const AsyncSelectField = props => {
           simpleValue={true}
           value={fieldProps.input.value}
           onChange={fieldProps.input.onChange}
-      />
-    )}
+        />
+      )}
     />
   );
 };

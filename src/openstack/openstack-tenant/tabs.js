@@ -1,5 +1,8 @@
 // @ngInject
-export default function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+export default function tabsConfig(
+  ResourceTabsConfigurationProvider,
+  DEFAULT_RESOURCE_TABS,
+) {
   ResourceTabsConfigurationProvider.register('OpenStack.Tenant', {
     order: [
       'networks',
@@ -11,20 +14,20 @@ export default function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RE
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       networks: {
         heading: gettext('Networks'),
-        component: 'openstackTenantNetworks'
+        component: 'openstackTenantNetworks',
       },
       security_groups: {
         heading: gettext('Security groups'),
-        component: 'openstackSecurityGroupsList'
+        component: 'openstackSecurityGroupsList',
       },
       floating_ips: {
         heading: gettext('Floating IPs'),
-        component: 'openstackFloatingIpsList'
+        component: 'openstackFloatingIpsList',
       },
       quotas: {
         heading: gettext('Quotas'),
-        component: 'quotasTable'
+        component: 'quotasTable',
       },
-    })
+    }),
   });
 }

@@ -23,8 +23,8 @@ export const renderSummary = props => {
   });
   return mount(
     <Provider store={store}>
-      <OpenStackTenantSummary {...rest} translate={translate}/>
-    </Provider>
+      <OpenStackTenantSummary {...rest} translate={translate} />
+    </Provider>,
   );
 };
 
@@ -54,7 +54,7 @@ export const resource = {
 };
 
 export const getField = (wrapper: ReactWrapper, label: string): ReactWrapper =>
-  wrapper.find({label}).find('dd');
+  wrapper.find({ label }).find('dd');
 
 export const hasUsername = (wrapper: ReactWrapper): boolean =>
   getField(wrapper, 'Username').length === 1;

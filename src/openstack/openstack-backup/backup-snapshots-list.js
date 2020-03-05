@@ -6,14 +6,17 @@ export default function openStackBackupsList() {
     controllerAs: 'ListController',
     scope: {},
     bindToController: {
-      resource: '='
-    }
+      resource: '=',
+    },
   };
 }
 
 // @ngInject
 function backupSnapshotsListController(
-  baseResourceListController, openstackSnapshotsService, $filter) {
+  baseResourceListController,
+  openstackSnapshotsService,
+  $filter,
+) {
   let controllerScope = this;
   let controllerClass = baseResourceListController.extend({
     init: function() {
@@ -32,31 +35,31 @@ function backupSnapshotsListController(
           title: gettext('Name'),
           className: 'all',
           orderField: 'name',
-          render: row => this.renderResourceName(row)
+          render: row => this.renderResourceName(row),
         },
         {
           title: gettext('Description'),
-          render: row => row.description || 'N/A'
+          render: row => row.description || 'N/A',
         },
         {
           title: gettext('Size'),
-          render: row => $filter('filesize')(row.size)
+          render: row => $filter('filesize')(row.size),
         },
         {
           title: gettext('Created'),
-          render: row => $filter('shortDate')(row.created) || '&mdash;'
+          render: row => $filter('shortDate')(row.created) || '&mdash;',
         },
         {
           title: gettext('State'),
           className: 'min-tablet-l',
-          render: row => this.renderResourceState(row)
+          render: row => this.renderResourceState(row),
         },
       ];
       return options;
     },
     getFilter: function() {
-      return {backup_uuid: controllerScope.resource.uuid};
-    }
+      return { backup_uuid: controllerScope.resource.uuid };
+    },
   });
 
   controllerScope.__proto__ = new controllerClass();

@@ -1,13 +1,18 @@
 // @ngInject
-export default function joinService(baseServiceClass, servicesService, $http, $q) {
+export default function joinService(
+  baseServiceClass,
+  servicesService,
+  $http,
+  $q,
+) {
   let ServiceClass = baseServiceClass.extend({
-    init:function() {
+    init: function() {
       this._super();
       this.endpoint = '/services/';
     },
 
     setDefaultFilter: function() {
-      this.defaultFilter = {o: 'name'};
+      this.defaultFilter = { o: 'name' };
     },
 
     create: function(url, options) {
@@ -20,7 +25,7 @@ export default function joinService(baseServiceClass, servicesService, $http, $q
 
     createOrUpdate: function(method, url, options) {
       let fd = new FormData();
-      for(let name in options) {
+      for (let name in options) {
         fd.append(name, options[name]);
       }
       return $http({
@@ -28,12 +33,15 @@ export default function joinService(baseServiceClass, servicesService, $http, $q
         url: url,
         data: fd,
         transformRequest: angular.identity,
-        headers: {'Content-Type': undefined}
-      }).then(function(response) {
-        return response.data;
-      }, function(response) {
-        return $q.reject(response);
-      });
+        headers: { 'Content-Type': undefined },
+      }).then(
+        function(response) {
+          return response.data;
+        },
+        function(response) {
+          return $q.reject(response);
+        },
+      );
     },
 
     $get: function(service_type, uuid) {
@@ -61,7 +69,7 @@ export default function joinService(baseServiceClass, servicesService, $http, $q
       return servicesService.getServicesList().then(function(services) {
         return services[service_type].url;
       });
-    }
+    },
   });
   return new ServiceClass();
 }

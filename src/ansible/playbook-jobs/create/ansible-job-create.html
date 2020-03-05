@@ -5,7 +5,9 @@
         <loading-spinner></loading-spinner>
       </div>
       <div class="ibox" ng-if="$ctrl.selectedService">
-        <div class="ibox-title"><h3>{{ $ctrl.playbook.name }}</h3></div>
+        <div class="ibox-title">
+          <h3>{{ $ctrl.playbook.name }}</h3>
+        </div>
         <div class="ibox-content">
           <div class="form-horizontal">
             <div class="form-group">
@@ -20,7 +22,8 @@
               fields="$ctrl.fields"
               model="$ctrl.model"
               errors="$ctrl.errors"
-              form="$ctrl.form">
+              form="$ctrl.form"
+            >
             </appstore-form>
           </div>
         </div>
@@ -29,14 +32,16 @@
             type="submit"
             class="btn btn-primary pull-right"
             ng-disabled="!$ctrl.isValid"
-            submit-button="$ctrl.save()">
+            submit-button="$ctrl.save()"
+          >
             <i class="fa fa-shopping-cart"></i>
             <span translate>Create</span>
           </button>
           <button
             type="button"
             class="btn btn-default"
-            ng-click="$ctrl.resetService()">
+            ng-click="$ctrl.resetService()"
+          >
             <span translate>Cancel</span>
           </button>
         </div>
@@ -46,18 +51,19 @@
       <div
         ng-if="!$ctrl.keys.length"
         class="ibox-content"
-        bind-html-compile="$ctrl.sshKeysNotAvailable">
-      </div>
+        bind-html-compile="$ctrl.sshKeysNotAvailable"
+      ></div>
       <div
         ng-if="$ctrl.keys.length && !$ctrl.model.ssh_public_key"
         class="ibox-content"
-        ng-bind-html="$ctrl.sshKeyNotSelected">
-      </div>
+        ng-bind-html="$ctrl.sshKeyNotSelected"
+      ></div>
       <div ng-if="$ctrl.model.ssh_public_key">
         <ansible-job-checkout-summary
           job="$ctrl.model"
           playbook="$ctrl.playbook"
-          provider="$ctrl.selectedService">
+          provider="$ctrl.selectedService"
+        >
         </ansible-job-checkout-summary>
       </div>
     </div>

@@ -11,7 +11,7 @@ const invalidQuotaPage = {
     goBack() {
       this.NavigationUtilsService.goBack();
     }
-  }
+  },
 };
 
 export default invalidQuotaPage;

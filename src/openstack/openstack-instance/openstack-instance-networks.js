@@ -9,7 +9,7 @@ const FLOATING_IP_CHOICES = [
   {
     value: true,
     display_name: gettext('Auto-assign floating IP'),
-  }
+  },
 ];
 
 const openstackInstanceNetworks = {
@@ -31,10 +31,14 @@ const openstackInstanceNetworks = {
       this.initSubnetChoices();
       this.initFloatingIpChoices();
       this.initSubnetFromModel();
-      this.$scope.$watch(() => this.items, () => {
-        this.serializeSubnets();
-        this.serializeFloatingIps();
-      }, true);
+      this.$scope.$watch(
+        () => this.items,
+        () => {
+          this.serializeSubnets();
+          this.serializeFloatingIps();
+        },
+        true,
+      );
     }
 
     initSubnetChoices() {
@@ -51,7 +55,7 @@ const openstackInstanceNetworks = {
     serializeSubnets() {
       const items = this.getValidItems();
       this.model.internal_ips_set = items.map(item => ({
-        subnet: item.subnet
+        subnet: item.subnet,
       }));
     }
 
@@ -71,7 +75,7 @@ const openstackInstanceNetworks = {
           // Auto-assign floating IP
           if (item.floating_ip === true) {
             return {
-              subnet: item.subnet
+              subnet: item.subnet,
             };
           } else {
             return {
@@ -112,7 +116,11 @@ const openstackInstanceNetworks = {
     getFreeFloatingIps(current_choice) {
       let used_choices = {};
       angular.forEach(this.items, item => {
-        if (item.floating_ip && item.floating_ip !== true && item.floating_ip !== current_choice) {
+        if (
+          item.floating_ip &&
+          item.floating_ip !== true &&
+          item.floating_ip !== current_choice
+        ) {
           used_choices[item.floating_ip] = true;
         }
       });
@@ -121,7 +129,7 @@ const openstackInstanceNetworks = {
 
     addItem() {
       this.items.push({
-        floating_ip: ''
+        floating_ip: '',
       });
       this.form.$setDirty();
     }
@@ -131,7 +139,7 @@ const openstackInstanceNetworks = {
       this.items.splice(index, 1);
       this.form.$setDirty();
     }
-  }
+  },
 };
 
 export default openstackInstanceNetworks;

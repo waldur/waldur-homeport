@@ -4,7 +4,11 @@ import { gettext } from '@waldur/i18n';
 
 const getIssueContext = event => ({
   ...getCallerContext(event),
-  issue_link: getLink('support.detail', {uuid: event.issue_uuid}, event.issue_key),
+  issue_link: getLink(
+    'support.detail',
+    { uuid: event.issue_uuid },
+    event.issue_key,
+  ),
 });
 
 eventsRegistry.registerGroup({

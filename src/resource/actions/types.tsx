@@ -53,8 +53,7 @@ export type ActionField<Resource = BaseResource> =
   | TextField<Resource>
   | SelectField<Resource>
   | IntegerField<Resource>
-  | ComponentField<Resource>
-;
+  | ComponentField<Resource>;
 
 type ActionType = 'button' | 'form' | 'callback';
 

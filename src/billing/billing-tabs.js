@@ -4,7 +4,14 @@ const billingTabs = {
   template,
   controller: class BillingTabsController {
     // @ngInject
-    constructor(BreadcrumbsService, titleService, BillingUtils, ENV, features, currentStateService) {
+    constructor(
+      BreadcrumbsService,
+      titleService,
+      BillingUtils,
+      ENV,
+      features,
+      currentStateService,
+    ) {
       this.BreadcrumbsService = BreadcrumbsService;
       this.titleService = titleService;
       this.utils = BillingUtils;
@@ -18,9 +25,11 @@ const billingTabs = {
       this.BreadcrumbsService.activeItem = this.utils.getTabTitle();
       this.showAccountingRecords = this.ENV.accountingMode === 'accounting';
       this.payPalVisible = this.features.isVisible('paypal');
-      this.currentStateService.getCustomer().then(customer => this.customer = customer);
+      this.currentStateService
+        .getCustomer()
+        .then(customer => (this.customer = customer));
     }
-  }
+  },
 };
 
 export default billingTabs;

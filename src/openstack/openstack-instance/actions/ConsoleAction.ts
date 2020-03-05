@@ -12,10 +12,16 @@ const validatePermissions = (ctx: ActionContext) => {
   if (ctx.user.is_staff) {
     return;
   }
-  if (!ctx.user.is_support && ENV.plugins.WALDUR_OPENSTACK_TENANT.ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS) {
+  if (
+    !ctx.user.is_support &&
+    ENV.plugins.WALDUR_OPENSTACK_TENANT
+      .ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS
+  ) {
     return;
   }
-  return translate('Only staff and organization users are allowed to open console.');
+  return translate(
+    'Only staff and organization users are allowed to open console.',
+  );
 };
 
 export default function createAction(): ResourceAction {
@@ -24,13 +30,18 @@ export default function createAction(): ResourceAction {
     title: translate('Open console'),
     type: 'callback',
     execute: resource => {
-      getConsoleURL(resource.uuid).then(response => {
-        window.open(response.data.url);
-      }).catch(error => {
-        const ctx = {message: format(error)};
-        const message = translate('Unable to open console. Error message: {message}', ctx);
-        alert(message);
-      });
+      getConsoleURL(resource.uuid)
+        .then(response => {
+          window.open(response.data.url);
+        })
+        .catch(error => {
+          const ctx = { message: format(error) };
+          const message = translate(
+            'Unable to open console. Error message: {message}',
+            ctx,
+          );
+          alert(message);
+        });
     },
     validators: [validateState('OK'), validatePermissions],
   };

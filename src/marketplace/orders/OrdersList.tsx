@@ -26,7 +26,7 @@ export const TableComponent = props => {
     },
     {
       title: translate('Created by'),
-      render: ({ row }) => row.created_by_full_name ||  row.created_by_username,
+      render: ({ row }) => row.created_by_full_name || row.created_by_username,
     },
     {
       title: translate('State'),
@@ -35,11 +35,13 @@ export const TableComponent = props => {
     },
     {
       title: translate('Approved at'),
-      render: ({ row }) => row.approved_at ? formatDateTime(row.approved_at) : '\u2014',
+      render: ({ row }) =>
+        row.approved_at ? formatDateTime(row.approved_at) : '\u2014',
     },
     {
       title: translate('Approved by'),
-      render: ({ row }) => row.approved_by_full_name ||  row.approved_by_username || '\u2014',
+      render: ({ row }) =>
+        row.approved_by_full_name || row.approved_by_username || '\u2014',
     },
     {
       title: translate('Cost'),
@@ -55,7 +57,7 @@ export const TableComponent = props => {
       verboseName={translate('Orders')}
       hasQuery={true}
       showPageSizeSelector={true}
-      initialSorting={{field: 'created', mode: 'desc'}}
+      initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
     />
   );
@@ -64,13 +66,13 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ordersList',
   fetchData: createFetcher('marketplace-orders'),
-  mapPropsToFilter: props => ({project_uuid: props.project.uuid}),
+  mapPropsToFilter: props => ({ project_uuid: props.project.uuid }),
   exportRow: row => [
     formatDateTime(row.created),
-    row.created_by_full_name ||  row.created_by_username,
+    row.created_by_full_name || row.created_by_username,
     row.state,
     row.approved_at ? formatDateTime(row.approved_at) : '\u2014',
-    row.row.approved_by_full_name ||  row.approved_by_username || '\u2014',
+    row.row.approved_by_full_name || row.approved_by_username || '\u2014',
     row.total_cost,
   ],
   exportFields: [

@@ -6,9 +6,7 @@ export interface ExternalLinkProps {
 }
 
 export const ExternalLink = (props: ExternalLinkProps) => (
-  <a href={props.url} target="_blank">
-    <i className="fa fa-external-link"/>
-    {' '}
-    {props.label}
+  <a href={props.url} target="_blank" rel="noopener noreferrer">
+    <i className="fa fa-external-link" /> {props.label}
   </a>
 );

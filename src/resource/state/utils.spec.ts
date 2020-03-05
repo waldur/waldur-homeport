@@ -69,7 +69,8 @@ describe('getResourceState', () => {
       variant: 'warning',
       label: 'ONLINE',
       active: false,
-      tooltip: 'Service settings of this resource are in state erred., error message: Server does not respond.',
+      tooltip:
+        'Service settings of this resource are in state erred., error message: Server does not respond.',
     });
   });
 
@@ -86,7 +87,8 @@ describe('getResourceState', () => {
       variant: 'primary',
       label: 'Updating',
       active: true,
-      tooltip: 'Updating OpenStack Instance, current state on backend: RESIZING.',
+      tooltip:
+        'Updating OpenStack Instance, current state on backend: RESIZING.',
     });
   });
 
@@ -99,13 +101,14 @@ describe('getResourceState', () => {
       runtime_state: 'RESIZING',
       service_settings_state: 'OK',
       action: 'change_flavor',
-      action_details: {message: 'Changing flavor from small to large.'},
+      action_details: { message: 'Changing flavor from small to large.' },
     };
     expect(getResourceState(resource)).toEqual({
       variant: 'primary',
       label: 'Changing flavor',
       active: true,
-      tooltip: 'Changing flavor from small to large., current state on backend: RESIZING.',
+      tooltip:
+        'Changing flavor from small to large., current state on backend: RESIZING.',
     });
   });
 });

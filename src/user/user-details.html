@@ -1,5 +1,9 @@
 <sidebar items="items" context="context"></sidebar>
-<div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'" ng-if="currentUser">
+<div
+  id="page-wrapper"
+  ng-class="$state.current.data.pageClass || 'white-bg'"
+  ng-if="currentUser"
+>
   <cookies-consent></cookies-consent>
   <nc-header></nc-header>
   <div class="row wrapper white-bg page-heading">
@@ -7,7 +11,9 @@
       <h2>{{ $state.current.data.pageTitle | translate }}</h2>
       <ol class="breadcrumb" ng-if="!$state.current.data.hideBreadcrumbs">
         <li>
-          <a ng-if="isPrivate" ui-sref="profile.details" translate>User dashboard</a>
+          <a ng-if="isPrivate" ui-sref="profile.details" translate
+            >User dashboard</a
+          >
           <span ng-if="!isPrivate">{{ currentUser.full_name }}</span>
         </li>
         <li class="active">

@@ -13,12 +13,17 @@ const initialProps = {
   attachments: [attachment],
   translate,
 };
-const renderWrapper = (props?) => shallow(<PureIssueCommentItem {...initialProps} {...props} />);
+const renderWrapper = (props?) =>
+  shallow(<PureIssueCommentItem {...initialProps} {...props} />);
 
-const getDialogButton = (container: ShallowWrapper) => container.find('.comment-item__header a');
-const getToggleButton = (container: ShallowWrapper) => container.find('.comment-item__edit');
-const getDeleteButton = (container: ShallowWrapper) => container.find('.comment-item__delete');
-const hasDeleteButton = (container: ShallowWrapper) => container.find('.comment-item__delete').length === 1;
+const getDialogButton = (container: ShallowWrapper) =>
+  container.find('.comment-item__header a');
+const getToggleButton = (container: ShallowWrapper) =>
+  container.find('.comment-item__edit');
+const getDeleteButton = (container: ShallowWrapper) =>
+  container.find('.comment-item__delete');
+const hasDeleteButton = (container: ShallowWrapper) =>
+  container.find('.comment-item__delete').length === 1;
 
 describe('IssueCommentItem', () => {
   it('open user dialog', () => {

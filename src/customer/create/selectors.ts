@@ -1,6 +1,9 @@
 import { createSelector } from 'reselect';
 
-import { isStaff, getUserCustomerPermissions } from '@waldur/workspace/selectors';
+import {
+  isStaff,
+  getUserCustomerPermissions,
+} from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
 export const canManageCustomer = (state: any): boolean =>
@@ -18,5 +21,5 @@ export const renderCustomerCreatePrompt = createSelector(
       return userCustomerPermissions.length === 0;
     }
     return userCustomerPermissions.length === 0 && ownerCanManageCustomer;
-  }
+  },
 );

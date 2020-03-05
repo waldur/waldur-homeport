@@ -6,7 +6,7 @@ import { initConfig } from './config';
 export function attachHooks($rootScope, authService, ENV) {
   store.dispatch(initConfig(ENV));
 
-  $rootScope.$on('$translateChangeSuccess', (event, {language}) => {
+  $rootScope.$on('$translateChangeSuccess', (event, { language }) => {
     store.dispatch(localeUpdated(language));
   });
 }

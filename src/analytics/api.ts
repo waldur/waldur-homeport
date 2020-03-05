@@ -17,10 +17,12 @@ export const fetchQuotaHistory = (quotaUuid: string) => {
   });
 };
 
-export const loadServiceProviders = () => getList('/service-settings/', {
-  type: 'OpenStackTenant',
-});
+export const loadServiceProviders = () =>
+  getList('/service-settings/', {
+    type: 'OpenStackTenant',
+  });
 
-export const fetchTenants = (customerId: string) => getList('/openstack-tenants/', {
-  customer_uuid: customerId,
-});
+export const fetchTenants = (customerId: string) =>
+  getList('/openstack-tenants/', {
+    customer_uuid: customerId,
+  });

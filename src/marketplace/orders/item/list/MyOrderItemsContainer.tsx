@@ -5,6 +5,7 @@ import { $state } from '@waldur/core/services';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { setOrderStateFilter } from '../../store/actions';
+
 import { MyOrderItemsFilter } from './MyOrderItemsFilter';
 import { MyOrderItemsList } from './MyOrderItemsList';
 
@@ -19,7 +20,6 @@ interface Props {
 }
 
 class PureOrderItemsContainer extends React.Component<Props> {
-
   componentWillMount() {
     const { filterState } = $state.params;
     if (filterState) {
@@ -34,8 +34,8 @@ class PureOrderItemsContainer extends React.Component<Props> {
   render() {
     return (
       <div className="ibox-content">
-        <MyOrderItemsFilter/>
-        <MyOrderItemsList/>
+        <MyOrderItemsFilter />
+        <MyOrderItemsList />
       </div>
     );
   }
@@ -49,7 +49,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   setOrderStateFilter: filterOption =>
-      dispatch(setOrderStateFilter('MyOrderItemsFilter', filterOption)),
+    dispatch(setOrderStateFilter('MyOrderItemsFilter', filterOption)),
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);

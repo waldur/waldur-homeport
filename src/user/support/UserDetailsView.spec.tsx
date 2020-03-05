@@ -1,4 +1,8 @@
-import { ordinaryUser, staffUser, supportUser } from '@waldur/user/support/fixtures';
+import {
+  ordinaryUser,
+  staffUser,
+  supportUser,
+} from '@waldur/user/support/fixtures';
 
 import { userManageIsVisible, isVisibleForSupportOrStaff } from './selectors';
 

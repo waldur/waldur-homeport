@@ -1,5 +1,6 @@
 const breadcrumbsContainer = {
-  template: '<breadcrumbs items="$ctrl.items" active-item="$ctrl.activeItem"></breadcrumbs>',
+  template:
+    '<breadcrumbs items="$ctrl.items" active-item="$ctrl.activeItem"></breadcrumbs>',
   controller: class BreadcrumbsContainerController {
     // @ngInject
     constructor(BreadcrumbsService) {
@@ -19,7 +20,7 @@ const breadcrumbsContainer = {
       this.activeItem = this.BreadcrumbsService.activeItem;
       this.items = this.BreadcrumbsService.items;
     }
-  }
+  },
 };
 
 export default breadcrumbsContainer;

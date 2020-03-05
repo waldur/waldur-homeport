@@ -2,7 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { CategoriesListType, OfferingsListType } from '@waldur/marketplace/types';
+import {
+  CategoriesListType,
+  OfferingsListType,
+} from '@waldur/marketplace/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
@@ -20,7 +23,9 @@ interface LandingPageContainerProps {
   customer: Customer;
 }
 
-export class LandingPageContainer extends React.Component<LandingPageContainerProps> {
+export class LandingPageContainer extends React.Component<
+  LandingPageContainerProps
+> {
   componentDidMount() {
     this.props.getCategories();
     this.props.getOfferings();
@@ -28,11 +33,14 @@ export class LandingPageContainer extends React.Component<LandingPageContainerPr
 
   render() {
     return (
-      <LandingPage {...this.props}
-        loadOfferings={query => offeringsAutocomplete({
-          name: query,
-          allowed_customer_uuid: this.props.customer.uuid,
-        })}
+      <LandingPage
+        {...this.props}
+        loadOfferings={query =>
+          offeringsAutocomplete({
+            name: query,
+            allowed_customer_uuid: this.props.customer.uuid,
+          })
+        }
       />
     );
   }

@@ -20,5 +20,6 @@ export const EditableCalendar = (props: EditableCalendarProps) => (
     select={event => props.onSelectDate(event)}
     eventDrop={event => props.eventDrop(event)}
     eventClick={event => props.onSelectEvent(event)}
-    eventResize={event => props.eventResize(event)}/>
+    eventResize={event => props.eventResize(event)}
+  />
 );

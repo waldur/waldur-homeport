@@ -7,7 +7,7 @@ import { EventDetailsTable } from './EventDetailsTable';
 import { event } from './fixtures';
 
 jest.mock('@waldur/core/services', () => ({
-  $state: {href: x => x},
+  $state: { href: x => x },
 }));
 
 const renderTable = (props?) =>
@@ -17,24 +17,39 @@ const renderTable = (props?) =>
       translate={translate}
       isStaffOrSupport={true}
       {...props}
-    />
+    />,
   );
 
 const getRowLabels = (wrapper: ReactWrapper) =>
-  wrapper.find('tr').map(tr => tr.find('td').first().text());
+  wrapper.find('tr').map(tr =>
+    tr
+      .find('td')
+      .first()
+      .text(),
+  );
 
 const getEventMessage = (wrapper: ReactWrapper) =>
-  wrapper.find({label: 'Message'}).find('td').last().text();
+  wrapper
+    .find({ label: 'Message' })
+    .find('td')
+    .last()
+    .text();
 
 describe('EventDetailsDialog', () => {
   it('renders table row for each field', () => {
     const wrapper = renderTable();
-    const expected = ['Timestamp', 'User', 'IP address', 'Event type', 'Message'];
+    const expected = [
+      'Timestamp',
+      'User',
+      'IP address',
+      'Event type',
+      'Message',
+    ];
     expect(getRowLabels(wrapper)).toEqual(expected);
   });
 
   it('conceals row for empty field', () => {
-    const wrapper = renderTable({event: {...event, message: undefined}});
+    const wrapper = renderTable({ event: { ...event, message: undefined } });
     const expected = ['Timestamp', 'User', 'IP address', 'Event type'];
     expect(getRowLabels(wrapper)).toEqual(expected);
   });

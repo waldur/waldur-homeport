@@ -4,7 +4,7 @@ const openstackSnapshotsList = {
   templateUrl: 'views/partials/filtered-list.html',
   bindings: {
     onListReceive: '&',
-  }
+  },
 };
 
 export default openstackSnapshotsList;
@@ -19,7 +19,8 @@ function SnapshotsListController(
   BaseProjectResourcesTabController,
   ncUtils,
   TableExtensionService,
-  features) {
+  features,
+) {
   let controllerScope = this;
   let ResourceController = BaseProjectResourcesTabController.extend({
     init: function() {
@@ -34,7 +35,7 @@ function SnapshotsListController(
     },
     getFilter: function() {
       return {
-        resource_type: 'OpenStackTenant.Snapshot'
+        resource_type: 'OpenStackTenant.Snapshot',
       };
     },
     getTableOptions: function() {
@@ -51,7 +52,7 @@ function SnapshotsListController(
             return '&ndash;';
           }
           return $filter('filesize')(row.size);
-        }
+        },
       });
       options.columns.push({
         title: gettext('Volume'),
@@ -63,15 +64,20 @@ function SnapshotsListController(
           let uuid = ncUtils.getUUID(row.source_volume);
           let href = $state.href('resources.details', {
             uuid: uuid,
-            resource_type: 'OpenStackTenant.Volume'
+            resource_type: 'OpenStackTenant.Volume',
           });
-          return ncUtils.renderLink(href, $sanitize(row.source_volume_name) || 'Link');
-        }
+          return ncUtils.renderLink(
+            href,
+            $sanitize(row.source_volume_name) || 'Link',
+          );
+        },
       });
       return options;
     },
     getTableActions: function() {
-      let actions = TableExtensionService.getTableActions('openstack-snapshots-list');
+      let actions = TableExtensionService.getTableActions(
+        'openstack-snapshots-list',
+      );
       if (this.category !== undefined) {
         actions.push(this.getCreateAction());
       }
@@ -82,7 +88,7 @@ function SnapshotsListController(
     },
     getCreateTitle: function() {
       return gettext('Add snapshots');
-    }
+    },
   });
   controllerScope.__proto__ = new ResourceController();
 }

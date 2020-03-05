@@ -50,7 +50,7 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Resources')}
-      initialSorting={{field: 'created', mode: 'desc'}}
+      initialSorting={{ field: 'created', mode: 'desc' }}
     />
   );
 };
@@ -58,10 +58,13 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'CustomerResourcesList',
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: props => props.customer ? ({
-    customer_uuid: props.customer.uuid,
-    state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
-  }) : {},
+  mapPropsToFilter: props =>
+    props.customer
+      ? {
+          customer_uuid: props.customer.uuid,
+          state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+        }
+      : {},
 };
 
 const mapStateToProps = state => ({

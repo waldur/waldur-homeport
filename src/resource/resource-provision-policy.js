@@ -1,10 +1,17 @@
 // @ngInject
-export default function ResourceProvisionPolicy(ENV, ncUtils, customersService) {
+export default function ResourceProvisionPolicy(
+  ENV,
+  ncUtils,
+  customersService,
+) {
   function isProjectManager(project) {
     if (!project.permissions) {
       return true;
     }
-    return project.permissions.filter(permission => permission.role === 'manager').length === 1;
+    return (
+      project.permissions.filter(permission => permission.role === 'manager')
+        .length === 1
+    );
   }
   return {
     checkResource(user, customer, project, key) {
@@ -17,18 +24,28 @@ export default function ResourceProvisionPolicy(ENV, ncUtils, customersService) 
         // 1) user is staff;
         // 2) user is organization owner;
         // 3) user is project manager and MANAGER_CAN_MANAGE_TENANTS is true.
-        if (ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES && !user.is_staff) {
+        if (
+          ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES &&
+          !user.is_staff
+        ) {
           disabled = true;
-          errorMessage = gettext('Only staff can create virtual private cloud.');
+          errorMessage = gettext(
+            'Only staff can create virtual private cloud.',
+          );
         }
         if (!customersService.checkCustomerUser(customer, user)) {
-          if (!ENV.plugins.WALDUR_OPENSTACK.MANAGER_CAN_MANAGE_TENANTS || !isProjectManager(project)) {
+          if (
+            !ENV.plugins.WALDUR_OPENSTACK.MANAGER_CAN_MANAGE_TENANTS ||
+            !isProjectManager(project)
+          ) {
             disabled = true;
-            errorMessage = gettext('You do not have permissions to create private cloud for current project.');
+            errorMessage = gettext(
+              'You do not have permissions to create private cloud for current project.',
+            );
           }
         }
       }
       return { disabled, errorMessage };
-    }
+    },
   };
 }

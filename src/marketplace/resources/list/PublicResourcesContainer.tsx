@@ -7,8 +7,8 @@ import { PublicResourcesList } from './PublicResourcesList';
 
 const PublicResourcesContainer = () => (
   <div className="ibox-content">
-    <PublicResourcesFilter/>
-    <PublicResourcesList/>
+    <PublicResourcesFilter />
+    <PublicResourcesList />
   </div>
 );
 

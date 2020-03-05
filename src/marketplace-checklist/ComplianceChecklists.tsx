@@ -14,9 +14,14 @@ import { PieChart } from './PieChart';
 
 export const ComplianceChecklists = () => {
   const project = useSelector(getProject);
-  const {call, state} = useQuery(
-    project && (() => get(`/projects/${project.uuid}/marketplace-checklists/`)
-      .then(response => response.data)), [project]);
+  const { call, state } = useQuery(
+    project &&
+      (() =>
+        get(`/projects/${project.uuid}/marketplace-checklists/`).then(
+          response => response.data,
+        )),
+    [project],
+  );
   React.useEffect(call, []);
 
   if (!project) {
@@ -24,7 +29,7 @@ export const ComplianceChecklists = () => {
   }
 
   if (state.loading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   if (state.error) {

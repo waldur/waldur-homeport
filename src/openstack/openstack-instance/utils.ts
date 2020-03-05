@@ -6,20 +6,16 @@ import { formatFlavor } from '@waldur/resource/utils';
 import { VolumeType } from '../types';
 
 export const validateAndSort = (formData, choices, validator, comparator) =>
-  choices.map(choice => ({
-    ...choice,
-    disabled: validator(formData, choice),
-  })).sort(comparator);
+  choices
+    .map(choice => ({
+      ...choice,
+      disabled: validator(formData, choice),
+    }))
+    .sort(comparator);
 
 export const formatFlavorTitle = flavor => {
   const props = formatFlavor(flavor);
   return `${flavor.name} (${props})`;
-};
-
-export const calculateSystemVolumeSize = formData => {
-  const minValue = getMinSystemVolumeSize(formData);
-  const currentValue = formData.system_volume_size || 0;
-  return Math.max(currentValue, minValue);
 };
 
 export const getMinSystemVolumeSize = formData => {
@@ -28,10 +24,17 @@ export const getMinSystemVolumeSize = formData => {
   return Math.max(imageMinValue, flavorMinValue);
 };
 
+export const calculateSystemVolumeSize = formData => {
+  const minValue = getMinSystemVolumeSize(formData);
+  const currentValue = formData.system_volume_size || 0;
+  return Math.max(currentValue, minValue);
+};
+
 export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): Option[] =>
   volumeTypes.map(volumeType => ({
-    label: volumeType.description ?
-      `${volumeType.name} (${volumeType.description})` : volumeType.name,
+    label: volumeType.description
+      ? `${volumeType.name} (${volumeType.description})`
+      : volumeType.name,
     value: volumeType.url,
     name: volumeType.name,
     is_default: volumeType.is_default,
@@ -56,7 +59,10 @@ export const validateOpenstackInstanceName = (name: string) => {
   // qualified per RFC 1034 (page 7).
   const trimmed = name.endsWith('.') ? name.slice(0, -1) : name;
   if (trimmed.length > MAX_NAME_LENGTH) {
-    return translate('"{trimmed}" exceeds the {max_len} character FQDN limit', {trimmed, max_len: MAX_NAME_LENGTH});
+    return translate('"{trimmed}" exceeds the {max_len} character FQDN limit', {
+      trimmed,
+      max_len: MAX_NAME_LENGTH,
+    });
   }
 
   const labels = trimmed.split('.');
@@ -67,11 +73,16 @@ export const validateOpenstackInstanceName = (name: string) => {
     }
 
     if (label.endsWith('-') || label.startsWith('-')) {
-      return translate('Name "{label}" must not start or end with a hyphen', {label});
+      return translate('Name "{label}" must not start or end with a hyphen', {
+        label,
+      });
     }
 
     if (!DNS_LABEL_REGEX.test(label)) {
-      return translate('Name "{label}" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen', {label});
+      return translate(
+        'Name "{label}" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen',
+        { label },
+      );
     }
   }
 
@@ -79,6 +90,6 @@ export const validateOpenstackInstanceName = (name: string) => {
   // it's an FQDN.
   const tld = labels[labels.length - 1];
   if (labels.length > 1 && NUMBER_REGEX.test(tld)) {
-    return translate('TLD "{tld}" must not be all numeric', {tld});
+    return translate('TLD "{tld}" must not be all numeric', { tld });
   }
 };

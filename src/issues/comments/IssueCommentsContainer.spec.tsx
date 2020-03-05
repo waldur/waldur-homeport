@@ -16,7 +16,8 @@ const initialProps = {
   fetchComments: () => null,
   setIssue: x => x,
 };
-const renderWrapper = (props?) => shallow(<PureIssueCommentsContainer {...initialProps} {...props} />);
+const renderWrapper = (props?) =>
+  shallow(<PureIssueCommentsContainer {...initialProps} {...props} />);
 
 const getLoadingSpinner = container => container.find(LoadingSpinner);
 const getIssueCommentsList = container => container.find(IssueCommentsList);

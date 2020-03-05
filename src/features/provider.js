@@ -36,6 +36,6 @@ export default class featuresProvider {
       }
       return this.visibility;
     };
-    return {isVisible};
+    return { isVisible };
   }
 }

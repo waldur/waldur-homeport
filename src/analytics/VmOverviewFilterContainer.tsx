@@ -9,7 +9,9 @@ import { withTranslation, TranslateProps } from '@waldur/i18n';
 import * as api from './api';
 import { VmOverviewFilter } from './VmOverviewFilter';
 
-class VmOverviewFilterComponent extends React.Component<InjectedFormProps&TranslateProps> {
+class VmOverviewFilterComponent extends React.Component<
+  InjectedFormProps & TranslateProps
+> {
   state = {
     loaded: false,
     erred: false,
@@ -17,20 +19,24 @@ class VmOverviewFilterComponent extends React.Component<InjectedFormProps&Transl
   };
 
   componentDidMount() {
-    api.loadServiceProviders().then(serviceProviders => {
-      const formatedServiceProviders = formatServiceProviders(serviceProviders);
-      this.setState({
-        serviceProviders: formatedServiceProviders,
-        loaded: true,
-        erred: false,
+    api
+      .loadServiceProviders()
+      .then(serviceProviders => {
+        const formatedServiceProviders = formatServiceProviders(
+          serviceProviders,
+        );
+        this.setState({
+          serviceProviders: formatedServiceProviders,
+          loaded: true,
+          erred: false,
+        });
+      })
+      .catch(() => {
+        this.setState({
+          loaded: false,
+          erred: true,
+        });
       });
-    })
-    .catch(() => {
-      this.setState({
-        loaded: false,
-        erred: true,
-      });
-    });
   }
 
   render() {
@@ -42,16 +48,21 @@ class VmOverviewFilterComponent extends React.Component<InjectedFormProps&Transl
       );
     }
     if (!this.state.loaded) {
-      return <LoadingSpinner/>;
+      return <LoadingSpinner />;
     }
-    return <VmOverviewFilter {...this.props} serviceProviders={this.state.serviceProviders}/>;
+    return (
+      <VmOverviewFilter
+        {...this.props}
+        serviceProviders={this.state.serviceProviders}
+      />
+    );
   }
 }
 
 const enhance = compose(
   reduxForm({
     form: 'vmOverviewFilter',
-    initialValues: {shared: true},
+    initialValues: { shared: true },
   }),
   withTranslation,
 );

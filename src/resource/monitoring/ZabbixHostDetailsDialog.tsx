@@ -28,15 +28,13 @@ interface ZabbixHostDetailsDialogProps extends TranslateProps {
 
 const DialogFooter = ({ host }) => (
   <>
-    <ZabbixHostDeleteButton host={host}/>
-    {' '}
-    <CloseDialogButton/>
+    <ZabbixHostDeleteButton host={host} /> <CloseDialogButton />
   </>
 );
 
 export const DialogBody = props => {
   if (props.loading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   } else if (props.host) {
     let defaultTab = 1;
     if (props.host.state === 'OK') {
@@ -47,7 +45,7 @@ export const DialogBody = props => {
         <Tab eventKey={1} title={props.translate('Details')}>
           <div className="row m-t-md">
             <dl className="dl-horizontal resource-details-table col-sm-12">
-              <ZabbixHostSummary resource={props.host}/>
+              <ZabbixHostSummary resource={props.host} />
             </dl>
           </div>
         </Tab>
@@ -61,14 +59,17 @@ export const DialogBody = props => {
   }
 };
 
-class ZabbixHostDetailsDialog extends React.Component<ZabbixHostDetailsDialogProps> {
+class ZabbixHostDetailsDialog extends React.Component<
+  ZabbixHostDetailsDialogProps
+> {
   render() {
     return (
       <ModalDialog
         title={this.props.translate('Monitoring details')}
-        footer={<DialogFooter host={this.props.host}/>}
-        children={<DialogBody {...this.props}/>}
-      />
+        footer={<DialogFooter host={this.props.host} />}
+      >
+        <DialogBody {...this.props} />
+      </ModalDialog>
     );
   }
 
@@ -86,4 +87,6 @@ const enhance = compose(
   withTranslation,
 );
 
-export default connectAngularComponent(enhance(ZabbixHostDetailsDialog), ['resolve']);
+export default connectAngularComponent(enhance(ZabbixHostDetailsDialog), [
+  'resolve',
+]);

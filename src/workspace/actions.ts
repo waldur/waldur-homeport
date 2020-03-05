@@ -10,12 +10,12 @@ import { WorkspaceType, Project } from './types';
 
 export const userLoggedIn = user => ({
   type: USER_LOGGED_IN,
-  payload: {user},
+  payload: { user },
 });
 
 export const userUpdated = user => ({
   type: USER_UPDATED,
-  payload: {user},
+  payload: { user },
 });
 
 export const userLoggedOut = () => ({

@@ -10,13 +10,9 @@ interface AwesomeCheckboxFieldProps extends FormField {
 }
 
 export const AwesomeCheckboxField = (props: AwesomeCheckboxFieldProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
   return (
-    <AwesomeCheckbox
-      label={label}
-      id="checkbox-field"
-      {...props.input}
-      {...rest}
-    />
+    <AwesomeCheckbox label={label} id="checkbox-field" {...input} {...rest} />
   );
 };

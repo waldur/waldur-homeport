@@ -29,7 +29,7 @@ const connector = connect((state: OuterState) => {
       $state.go('marketplace-landing');
     }
   };
-  return {goBack};
+  return { goBack };
 });
 
 export const BackButton = connector(PureBackButton);

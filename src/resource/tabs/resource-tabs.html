@@ -2,9 +2,14 @@
   <uib-tab
     ng-repeat="tab in $ctrl.tabs"
     heading="{{ tab.heading | translate }}"
-    index="::tab.name">
+    index="::tab.name"
+  >
     <div class="panel-body" ng-if="$ctrl.active==tab.name">
-      <resource-tab resource="$ctrl.resource" tab="tab" is-visible="active==tab.name"></resource-tab>
+      <resource-tab
+        resource="$ctrl.resource"
+        tab="tab"
+        is-visible="active==tab.name"
+      ></resource-tab>
     </div>
   </uib-tab>
 </uib-tabset>

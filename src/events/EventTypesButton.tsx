@@ -9,7 +9,10 @@ const EventTypesButton = ({ onShowEventTypes, translate }) => (
   <ActionButton
     title={translate('Event types')}
     action={onShowEventTypes}
-    icon="fa fa-question-circle"/>
+    icon="fa fa-question-circle"
+  />
 );
 
-export default withTranslation(connect(null, { onShowEventTypes: showEventTypes })(EventTypesButton));
+export default withTranslation(
+  connect(null, { onShowEventTypes: showEventTypes })(EventTypesButton),
+);

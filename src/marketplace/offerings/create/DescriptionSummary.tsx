@@ -8,14 +8,18 @@ import { AttributesTable } from '@waldur/marketplace/details/attributes/Attribut
 import { FORM_ID } from '../store/constants';
 import { getCategory } from '../store/selectors';
 import { formatAttributes } from '../store/utils';
+
 import { hasError } from './utils';
 
 const PureDescriptionSummary = props => (
   <>
     <h3>{translate('Description')}</h3>
-    {props.categoryInvalid ? <p>{translate('Category is invalid.')}</p> :
-     props.attributesInvalid ? <p>{translate('Attributes are invalid.')}</p> : (
-       <>
+    {props.categoryInvalid ? (
+      <p>{translate('Category is invalid.')}</p>
+    ) : props.attributesInvalid ? (
+      <p>{translate('Attributes are invalid.')}</p>
+    ) : (
+      <>
         <p>
           <strong>{translate('Category')}</strong>: {props.category.title}
         </p>
@@ -25,8 +29,8 @@ const PureDescriptionSummary = props => (
             sections={props.sections}
           />
         )}
-       </>
-     )}
+      </>
+    )}
   </>
 );
 
@@ -44,7 +48,8 @@ const connector = connect(state => {
   }
 
   const attributes = formatAttributes(category, formData.attributes || {});
-  const filterSection = section => section.attributes.some(attr => attributes.hasOwnProperty(attr.key));
+  const filterSection = section =>
+    section.attributes.some(attr => attributes.hasOwnProperty(attr.key));
   const sections = category.sections.filter(filterSection);
 
   return {

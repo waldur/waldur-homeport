@@ -1,17 +1,11 @@
 const InstanceCreateConfig = {
-  order: [
-    'name',
-    'flavor',
-    'internal_ip',
-    'floating_ip',
-    'user_data'
-  ],
+  order: ['name', 'flavor', 'internal_ip', 'floating_ip', 'user_data'],
   options: {
     name: {
       type: 'string',
       required: true,
       label: gettext('VM name'),
-      maxlength: 150
+      maxlength: 150,
     },
     flavor: {
       type: 'list',
@@ -20,26 +14,26 @@ const InstanceCreateConfig = {
       columns: [
         {
           name: 'name',
-          label: gettext('Flavor name')
+          label: gettext('Flavor name'),
         },
         {
           name: 'cores',
-          label: gettext('vCPU')
+          label: gettext('vCPU'),
         },
         {
           name: 'ram',
           label: gettext('RAM'),
-          filter: 'filesize'
+          filter: 'filesize',
         },
       ],
-      formatter: flavorFormatter
+      formatter: flavorFormatter,
     },
     internal_ip: {
       type: 'select',
       label: gettext('Internal IP'),
       parser: item => ({
         value: item.url,
-        display_name: item.address
+        display_name: item.address,
       }),
       serializer: item => item.value,
       resource: context => ({
@@ -47,7 +41,7 @@ const InstanceCreateConfig = {
         params: {
           settings_uuid: context.settings_uuid,
           is_available: true,
-        }
+        },
       }),
     },
     floating_ip: {
@@ -55,7 +49,7 @@ const InstanceCreateConfig = {
       label: gettext('Floating IP'),
       parser: item => ({
         value: item.url,
-        display_name: item.address
+        display_name: item.address,
       }),
       serializer: item => item.value,
       resource: context => ({
@@ -63,14 +57,16 @@ const InstanceCreateConfig = {
         params: {
           settings_uuid: context.settings_uuid,
           is_available: true,
-        }
+        },
       }),
     },
     user_data: {
       type: 'text',
       label: gettext('User data'),
-      help_text: gettext('Additional data that will be added to instance on provisioning.')
-    }
+      help_text: gettext(
+        'Additional data that will be added to instance on provisioning.',
+      ),
+    },
   },
 };
 

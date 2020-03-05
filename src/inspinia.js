@@ -23,12 +23,12 @@ function fix_height() {
   let navbarHeight = $('nav.navbar-default').height();
   let wrapperHeight = $('#page-wrapper').height();
 
-  if(navbarHeight > wrapperHeight){
+  if (navbarHeight > wrapperHeight) {
     $('#page-wrapper').css('min-height', navbarHeight + 'px');
   }
 
-  if(navbarHeight < wrapperHeight){
-    $('#page-wrapper').css('min-height', $(window).height()  + 'px');
+  if (navbarHeight < wrapperHeight) {
+    $('#page-wrapper').css('min-height', $(window).height() + 'px');
   }
 
   if ($('body').hasClass('fixed-nav')) {
@@ -43,12 +43,12 @@ function fix_height() {
 export default function loadInspinia() {
   $(window).bind('load resize scroll', function() {
     updateSidebar();
-    if(!$('body').hasClass('body-small')) {
+    if (!$('body').hasClass('body-small')) {
       fix_height();
     }
   });
 
-  setTimeout(function(){
+  setTimeout(function() {
     fix_height();
     updateSidebar();
   });

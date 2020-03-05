@@ -3,7 +3,7 @@ export default function multiplyBy() {
     restrict: 'A',
     require: 'ngModel',
     scope: {
-      multiplyBy: '='
+      multiplyBy: '=',
     },
     link: function(scope, element, attrs, ngModelController) {
       if (scope.multiplyBy) {
@@ -11,6 +11,6 @@ export default function multiplyBy() {
         ngModelController.$parsers.unshift(x => x * factor);
         ngModelController.$formatters.unshift(x => Math.round(x / factor));
       }
-    }
+    },
   };
 }

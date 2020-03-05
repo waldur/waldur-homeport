@@ -3,8 +3,8 @@ import template from './image-box.html';
 const imageBox = {
   template,
   bindings: {
-    image: '@'
-  }
+    image: '@',
+  },
 };
 
 export default imageBox;

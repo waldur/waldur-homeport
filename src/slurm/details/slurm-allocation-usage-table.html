@@ -8,7 +8,9 @@
         <uib-tab ng-repeat="chart in $ctrl.charts" index="$index">
           <uib-tab-heading>{{ chart.name }}</uib-tab-heading>
           <div class="panel-body" ng-if="active==$index">
-            <slurm-allocation-usage-chart chart="chart"></slurm-allocation-usage-chart>
+            <slurm-allocation-usage-chart
+              chart="chart"
+            ></slurm-allocation-usage-chart>
           </div>
         </uib-tab>
       </uib-tabset>
@@ -19,7 +21,8 @@
       <li ng-repeat="user in $ctrl.users" uib-tooltip="{{ user.freeipa_name }}">
         <span
           class="slurm-allocation-usage-table__indicator"
-          ng-style="{'background-color': user.color}"></span>
+          ng-style="{'background-color': user.color}"
+        ></span>
         {{ user.full_name || user.freeipa_name }}
       </li>
     </ul>

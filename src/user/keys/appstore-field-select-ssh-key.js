@@ -15,21 +15,27 @@ class AppstoreFieldSelectSshKeyController {
   loadKeys() {
     this.loading = true;
     return this.usersService.getCurrentUser().then(user => {
-      return this.keysService.getAll({
-        user_uuid: user.uuid,
-        is_shared: false
-      }).then(keys => {
-        this.choices = keys.map(key => ({
-          display_name: key.name,
-          value: `SSH public key: ${key.public_key}`
-        }));
-        this.loading = false;
-        this.loaded = true;
-      }).catch(response => {
-        this.ncUtilsFlash.errorFromResponse(response, gettext('Unable to get list of SSH public keys.'));
-        this.loading = false;
-        this.loaded = false;
-      });
+      return this.keysService
+        .getAll({
+          user_uuid: user.uuid,
+          is_shared: false,
+        })
+        .then(keys => {
+          this.choices = keys.map(key => ({
+            display_name: key.name,
+            value: `SSH public key: ${key.public_key}`,
+          }));
+          this.loading = false;
+          this.loaded = true;
+        })
+        .catch(response => {
+          this.ncUtilsFlash.errorFromResponse(
+            response,
+            gettext('Unable to get list of SSH public keys.'),
+          );
+          this.loading = false;
+          this.loaded = false;
+        });
     });
   }
 }
@@ -38,7 +44,7 @@ const appstoreFieldSelectSshKey = {
   template,
   bindings: {
     field: '<',
-    model: '<'
+    model: '<',
   },
   controller: AppstoreFieldSelectSshKeyController,
 };

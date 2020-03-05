@@ -13,9 +13,7 @@ interface ShopCategoriesProps {
 
 export const ShopCategories = (props: ShopCategoriesProps) => (
   <section>
-    <h3 className="shopping-cart-sidebar-title">
-      {translate('Categories')}
-    </h3>
+    <h3 className="shopping-cart-sidebar-title">{translate('Categories')}</h3>
     <ul className="list-unstyled">
       {props.categories.map((category, index) => (
         <CategoryItem

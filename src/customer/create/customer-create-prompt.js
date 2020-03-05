@@ -5,7 +5,7 @@ const customerCreatePrompt = {
   bindings: {
     dismiss: '&',
     close: '&',
-  }
+  },
 };
 
 export default customerCreatePrompt;

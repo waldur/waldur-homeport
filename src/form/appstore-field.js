@@ -9,10 +9,12 @@ export default function appstoreField($filter, $compile, $parse) {
         fieldType = field.type.replace('_', '-');
       }
 
-      const component = field.component && $filter('snakeCase')(field.component) || `appstore-field-${fieldType}`;
+      const component =
+        (field.component && $filter('snakeCase')(field.component)) ||
+        `appstore-field-${fieldType}`;
       const template = `<${component} model="${attributes.model}" field="${attributes.field}" form="${attributes.form}"></${component}>`;
       element.html(template);
       $compile(element.contents())(scope);
-    }
+    },
   };
 }

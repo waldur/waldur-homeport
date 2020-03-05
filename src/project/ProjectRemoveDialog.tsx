@@ -16,32 +16,38 @@ interface ProjectRemoveDialogProps extends TranslateProps {
   dismiss: () => void;
 }
 
-const PureProjectRemoveDialog = withTranslation((props: ProjectRemoveDialogProps) => (
-  <ModalDialog
-    title={props.translate('Project removal')}
-    footer={[
-      <ActionButton
-        key={1}
-        title={props.translate('Yes')}
-        action={() => {
-          props.resolve.action();
-          props.dismiss();
-        }}
-        className="btn btn-sm btn-danger"
-      />,
-      <CloseDialogButton key={2} className="btn btn-sm btn-default"/>,
-    ]}
-  >
-    {props.translate('Are you sure you would like to delete project {projectName}?',
-      {projectName: props.resolve.projectName}
-    )}
-  </ModalDialog>
-));
+const PureProjectRemoveDialog = withTranslation(
+  (props: ProjectRemoveDialogProps) => (
+    <ModalDialog
+      title={props.translate('Project removal')}
+      footer={[
+        <ActionButton
+          key={1}
+          title={props.translate('Yes')}
+          action={() => {
+            props.resolve.action();
+            props.dismiss();
+          }}
+          className="btn btn-sm btn-danger"
+        />,
+        <CloseDialogButton key={2} className="btn btn-sm btn-default" />,
+      ]}
+    >
+      {props.translate(
+        'Are you sure you would like to delete project {projectName}?',
+        { projectName: props.resolve.projectName },
+      )}
+    </ModalDialog>
+  ),
+);
 
 const mapDispatchToProps = dispatch => ({
   dismiss: () => dispatch(closeModalDialog()),
 });
 
-const ProjectRemoveDialog = connect(null, mapDispatchToProps)(PureProjectRemoveDialog);
+const ProjectRemoveDialog = connect(
+  null,
+  mapDispatchToProps,
+)(PureProjectRemoveDialog);
 
 export default connectAngularComponent(ProjectRemoveDialog, ['resolve']);

@@ -21,10 +21,12 @@ const UserEmailChangeCallback = () => {
   React.useEffect(() => {
     async function load() {
       try {
-        await post('/users/confirm_email/', {code: $state.params.token});
+        await post('/users/confirm_email/', { code: $state.params.token });
         dispatch(showSuccess(translate('Email has been updated.')));
       } catch (error) {
-        const errorMessage = `${translate('Unable to confirm email.')} ${format(error)}`;
+        const errorMessage = `${translate('Unable to confirm email.')} ${format(
+          error,
+        )}`;
         dispatch(showError(errorMessage));
       }
 
@@ -35,9 +37,11 @@ const UserEmailChangeCallback = () => {
 
       let currentUser;
       try {
-        currentUser = await getFirst('/users/', {current: true});
+        currentUser = await getFirst('/users/', { current: true });
       } catch (error) {
-        const errorMessage = `${translate('Unable to fetch current user.')} ${format(error)}`;
+        const errorMessage = `${translate(
+          'Unable to fetch current user.',
+        )} ${format(error)}`;
         dispatch(showError(errorMessage));
       }
 
@@ -52,8 +56,10 @@ const UserEmailChangeCallback = () => {
 
   return (
     <div className="middle-box text-center">
-      <LoadingSpinner/>
-      <h3 className="app-title centered">{translate('Verifying email change')}</h3>
+      <LoadingSpinner />
+      <h3 className="app-title centered">
+        {translate('Verifying email change')}
+      </h3>
     </div>
   );
 };

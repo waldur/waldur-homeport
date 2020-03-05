@@ -16,7 +16,7 @@ interface WizardProps extends TranslateProps {
   submitting: boolean;
   invalid: boolean;
   isLastStep: boolean;
-  tabs: {[key: string]: React.ComponentType<any>};
+  tabs: { [key: string]: React.ComponentType<any> };
   submitLabel?: string;
 }
 
@@ -29,11 +29,13 @@ export const Wizard = withTranslation((props: WizardProps) => (
       disabled={props.submitting}
     />
     {/* Render all tabs so that all validators would be processed */}
-    {props.steps.map(step =>
+    {props.steps.map(step => (
       <div key={step} className={step === props.step ? undefined : 'hidden'}>
-        {React.createElement(props.tabs[step], {isVisible: step === props.step})}
+        {React.createElement(props.tabs[step], {
+          isVisible: step === props.step,
+        })}
       </div>
-    )}
+    ))}
     <div className="form-group">
       <Col smOffset={2} sm={8}>
         <div className="display-flex justify-content-between m-t-md">
@@ -41,7 +43,10 @@ export const Wizard = withTranslation((props: WizardProps) => (
             title={props.translate('Back')}
             action={props.goBack}
             icon="fa fa-arrow-left"
-            className={classNames({disabled: props.submitting}, 'btn btn-outline btn-default')}
+            className={classNames(
+              { disabled: props.submitting },
+              'btn btn-outline btn-default',
+            )}
           />
           {!props.isLastStep && (
             <ActionButton

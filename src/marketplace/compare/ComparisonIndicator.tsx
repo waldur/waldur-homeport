@@ -14,19 +14,25 @@ interface ComparisonIndicatorProps {
 }
 
 const PureComparisonIndicator = (props: ComparisonIndicatorProps) =>
-  ['organization', 'project'].indexOf(props.workspace) !== -1  ? (
-  <NavbarIndicator
-    state={props.workspace === 'organization' ? 'marketplace-compare-customer' : 'marketplace-compare'}
-    iconClass="fa fa-balance-scale"
-    count={props.count}
-  />
-) : null;
+  ['organization', 'project'].indexOf(props.workspace) !== -1 ? (
+    <NavbarIndicator
+      state={
+        props.workspace === 'organization'
+          ? 'marketplace-compare-customer'
+          : 'marketplace-compare'
+      }
+      iconClass="fa fa-balance-scale"
+      count={props.count}
+    />
+  ) : null;
 
 const mapStateToProps = state => ({
   count: getCount(state),
   workspace: getWorkspace(state),
 });
 
-export const ComparisonIndicator = connect(mapStateToProps)(PureComparisonIndicator);
+export const ComparisonIndicator = connect(mapStateToProps)(
+  PureComparisonIndicator,
+);
 
 export default connectAngularComponent(ComparisonIndicator);

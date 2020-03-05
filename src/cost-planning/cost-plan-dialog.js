@@ -3,11 +3,7 @@ import template from './cost-plan-dialog.html';
 // Although it is not used directly as these labels come from backend
 // they are listed explicitly in order to extract labels for translation.
 // eslint-disable-next-line no-unused-vars
-const PRESET_VARIANTS = [
-  gettext('Small'),
-  gettext('Medium'),
-  gettext('Large'),
-];
+const PRESET_VARIANTS = [gettext('Small'), gettext('Medium'), gettext('Large')];
 
 const costPlanDialog = {
   template,
@@ -23,7 +19,8 @@ const costPlanDialog = {
       costPresetsService,
       certificationsService,
       costPlanOptimizerService,
-      $q) {
+      $q,
+    ) {
       this.costPlansService = costPlansService;
       this.costPresetsService = costPresetsService;
       this.certificationsService = certificationsService;
@@ -41,7 +38,7 @@ const costPlanDialog = {
         this.plan = {
           name: gettext('New plan'),
           items: [],
-          certifications: []
+          certifications: [],
         };
         this.addItem();
       }
@@ -49,10 +46,16 @@ const costPlanDialog = {
 
     loadData() {
       this.loading = true;
-      this.$q.all([
-        this.costPresetsService.getAll().then(presets => this.presets = presets),
-        this.certificationsService.getAll().then(certifications => this.certifications = certifications),
-      ]).finally(() => this.loading = false);
+      this.$q
+        .all([
+          this.costPresetsService
+            .getAll()
+            .then(presets => (this.presets = presets)),
+          this.certificationsService
+            .getAll()
+            .then(certifications => (this.certifications = certifications)),
+        ])
+        .finally(() => (this.loading = false));
     }
 
     addItem() {
@@ -79,30 +82,33 @@ const costPlanDialog = {
         preset: item.preset.url,
         quantity: item.quantity,
       }));
-      plan.certifications = this.plan.certifications.map(({url}) => ({url}));
+      plan.certifications = this.plan.certifications.map(({ url }) => ({
+        url,
+      }));
 
       let promise;
       if (this.plan.url) {
         plan.url = this.plan.url;
         promise = this.costPlansService.update(plan);
       } else {
-        promise = plan.$save().then(plan => this.plan.url = plan.url);
+        promise = plan.$save().then(plan => (this.plan.url = plan.url));
       }
 
       this.saving = true;
-      return promise
-        .finally(() => this.saving = false);
+      return promise.finally(() => (this.saving = false));
     }
 
     getTotalConsumption() {
-      let cores = 0, ram = 0, disk = 0;
+      let cores = 0,
+        ram = 0,
+        disk = 0;
       const items = this.getValidItems();
       angular.forEach(items, item => {
         cores += item.preset.cores * item.quantity;
         ram += item.preset.ram * item.quantity;
         disk += item.preset.disk * item.quantity;
       });
-      return {cores, ram, disk};
+      return { cores, ram, disk };
     }
 
     getValidItems() {
@@ -119,11 +125,12 @@ const costPlanDialog = {
 
     evaluatePlan() {
       this.isEvaluating = true;
-      this.costPlanOptimizerService.evaluate(this.plan)
-        .then(services => this.optimalServices = services)
-        .finally(() => this.isEvaluating = false);
+      this.costPlanOptimizerService
+        .evaluate(this.plan)
+        .then(services => (this.optimalServices = services))
+        .finally(() => (this.isEvaluating = false));
     }
-  }
+  },
 };
 
 export default costPlanDialog;

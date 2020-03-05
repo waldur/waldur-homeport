@@ -10,15 +10,16 @@ export default function createAction(): ResourceAction {
     type: 'form',
     method: 'POST',
     title: translate('Attach'),
-    validators: [
-      validateRuntimeState('available'),
-    ],
+    validators: [validateRuntimeState('available')],
     init: async (resource, _, action) => {
       const params = {
         attach_volume_uuid: resource.uuid,
         field: ['url', 'name'],
       };
-      const instances = await getAll<VirtualMachine>('/openstacktenant-instances/', {params});
+      const instances = await getAll<VirtualMachine>(
+        '/openstacktenant-instances/',
+        { params },
+      );
       action.fields.instance.choices = instances.map(choice => ({
         value: choice.url,
         display_name: choice.name,

@@ -15,7 +15,8 @@ import { TenantGroup } from './TenantGroup';
 import { TenantSelector } from './TenantSelector';
 import { rancherClusterName } from './utils';
 
-const getTenant = state => formValueSelector(FORM_ID)(state, 'attributes.tenant_settings');
+const getTenant = state =>
+  formValueSelector(FORM_ID)(state, 'attributes.tenant_settings');
 
 export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = props => {
   React.useEffect(() => {
@@ -23,7 +24,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
     const initialData = {
       project,
       plan,
-      attributes: {nodes: []},
+      attributes: { nodes: [] },
       limits: {
         node: 0,
       },
@@ -41,16 +42,19 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
       <FormContainer
         submitting={props.submitting}
         labelClass="col-sm-3"
-        controlClass="col-sm-9">
-        <ProjectField/>
+        controlClass="col-sm-9"
+      >
+        <ProjectField />
         <StringField
           label={translate('Cluster name')}
           name="attributes.name"
-          description={translate('This name will be visible in accounting data.')}
+          description={translate(
+            'This name will be visible in accounting data.',
+          )}
           validate={[required, rancherClusterName]}
           required={true}
         />
-        <PlanField offering={props.offering}/>
+        <PlanField offering={props.offering} />
         <PlanDetailsTable
           offering={props.offering}
           limits={props.limits}
@@ -60,8 +64,8 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
           label={translate('Cluster description')}
           name="attributes.description"
         />
-        <TenantSelector project={props.project}/>
-        {tenant && <TenantGroup tenant={tenant}/>}
+        <TenantSelector project={props.project} />
+        {tenant && <TenantGroup tenant={tenant} />}
       </FormContainer>
     </form>
   );

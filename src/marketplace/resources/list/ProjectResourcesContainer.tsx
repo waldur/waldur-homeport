@@ -10,13 +10,6 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ProjectResourcesList } from './ProjectResourcesList';
 
-// tslint:disable-next-line: variable-name
-async function loadData(category_uuid) {
-  const category = await getCategory(category_uuid, {params: {field: ['columns', 'title']}});
-  updateBreadcrumbs(category);
-  return {columns: category.columns};
-}
-
 function updateBreadcrumbs(category: Category) {
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
   const titleService = ngInjector.get('titleService');
@@ -24,17 +17,32 @@ function updateBreadcrumbs(category: Category) {
 
   $timeout(() => {
     BreadcrumbsService.activeItem = category.title;
-    titleService.setTitle(translate('{category} resources', {category: category.title}));
+    titleService.setTitle(
+      translate('{category} resources', { category: category.title }),
+    );
   });
+}
+
+// tslint:disable-next-line: variable-name
+async function loadData(category_uuid) {
+  const category = await getCategory(category_uuid, {
+    params: { field: ['columns', 'title'] },
+  });
+  updateBreadcrumbs(category);
+  return { columns: category.columns };
 }
 
 export const ProjectResourcesContainer: React.FC<{}> = () => (
   <Query loader={loadData} variables={$state.params.category_uuid}>
     {({ loading, data, error }) => {
       if (loading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
       } else if (error) {
-        return <span>{translate('Unable to load marketplace category details')}</span>;
+        return (
+          <span>
+            {translate('Unable to load marketplace category details')}
+          </span>
+        );
       } else {
         return (
           <ProjectResourcesList

@@ -8,17 +8,22 @@ import { getProject } from '@waldur/workspace/selectors';
 import { Project, OuterState } from '@waldur/workspace/types';
 
 import { FORM_ID } from '../details/constants';
-import { PureOfferingConfigurator, PureOfferingConfiguratorProps } from '../details/OfferingConfigurator';
+import {
+  PureOfferingConfigurator,
+  PureOfferingConfiguratorProps,
+} from '../details/OfferingConfigurator';
 import { OfferingFormData } from '../details/types';
 
 const storeConnector = connect<
   { project: Project },
   {},
-  { offering: Offering,
-    plan: Plan,
-    limits: string[],
-    initialLimits: AttributesType,
-    initialAttributes: AttributesType },
+  {
+    offering: Offering;
+    plan: Plan;
+    limits: string[];
+    initialLimits: AttributesType;
+    initialAttributes: AttributesType;
+  },
   OuterState
 >(state => ({
   project: getProject(state),
@@ -37,9 +42,6 @@ const formConnector = reduxForm<
   PureOfferingConfiguratorProps
 >({ form: FORM_ID, validate });
 
-const enhance = compose(
-  storeConnector,
-  formConnector
-);
+const enhance = compose(storeConnector, formConnector);
 
 export const ShoppingCartItemUpdateForm = enhance(PureOfferingConfigurator);

@@ -9,8 +9,8 @@ export default function appstoreFieldList() {
     controllerAs: '$ctrl',
     bindToController: {
       field: '=',
-      model: '='
-    }
+      model: '=',
+    },
   };
 }
 
@@ -23,12 +23,12 @@ class FieldController {
 
     if (this.field.parser) {
       const choices = this.field.choices.map(this.field.parser);
-      this.field = angular.extend({}, this.field, {choices});
+      this.field = angular.extend({}, this.field, { choices });
     }
 
     if (this.field.comparator) {
       const choices = this.field.choices.sort(this.field.comparator);
-      this.field = angular.extend({}, this.field, {choices});
+      this.field = angular.extend({}, this.field, { choices });
     }
 
     if (this.field.preselectFirst && this.field.choices.length > 0) {
@@ -38,10 +38,14 @@ class FieldController {
     this.hasChoices = this.field.choices && this.field.choices.length > 0;
     this.renderWarning = this.field.required && !this.hasChoices;
     this.renderEmpty = !this.field.required && !this.hasChoices;
-    this.warningMessage = this.field.warningMessage ||
-      this.coreUtils.templateFormatter(gettext('{fieldLabel} is required for provisioning resource.'),
-        {fieldLabel: this.field.label});
-    this.emptyMessage = this.field.emptyMessage || gettext('There are no items yet.');
+    this.warningMessage =
+      this.field.warningMessage ||
+      this.coreUtils.templateFormatter(
+        gettext('{fieldLabel} is required for provisioning resource.'),
+        { fieldLabel: this.field.label },
+      );
+    this.emptyMessage =
+      this.field.emptyMessage || gettext('There are no items yet.');
   }
 
   openDialog() {
@@ -50,9 +54,9 @@ class FieldController {
       component: 'appstoreListDialog',
       resolve: {
         field: () => vm.field,
-        model: () => vm.model
+        model: () => vm.model,
       },
-      size: vm.field.dialogSize
+      size: vm.field.dialogSize,
     });
   }
 

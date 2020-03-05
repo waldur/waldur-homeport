@@ -6,9 +6,9 @@ import { getFormValues } from 'redux-form';
 
 import { BookingActions } from '@waldur/booking/BookingActions';
 import { bookingDataTemplate } from '@waldur/booking/components/utils';
-import { TABLE_NAME} from '@waldur/booking/constants';
+import { TABLE_NAME } from '@waldur/booking/constants';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
-import { withTranslation, translate} from '@waldur/i18n';
+import { withTranslation, translate } from '@waldur/i18n';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
@@ -32,15 +32,19 @@ const ExpandableRow = ({ row }: DetailedInfo) => (
   <div className="container-fluid">
     <h3>{translate('Schedules')}:</h3>
     {row.attributes.schedules.map(({ end, start, title, allDay }, index) => (
-      <div className="form-horizontal">
+      <div className="form-horizontal" key={index}>
         {bookingDataTemplate({
-          'Title': title,
+          Title: title,
           'All day': allDay ? 'Yes' : 'No',
-          'End': formatShortDateTime(end),
-          'Start': formatShortDateTime(start),
-          'State': row.state === 'Creating' ? 'Waiting for confirmation...' : row.state,
+          End: formatShortDateTime(end),
+          Start: formatShortDateTime(start),
+          State:
+            row.state === 'Creating'
+              ? 'Waiting for confirmation...'
+              : row.state,
         })}
-        {row.attributes.schedules.length > 1 && row.attributes.schedules.length !== (index + 1) && <hr/>}
+        {row.attributes.schedules.length > 1 &&
+          row.attributes.schedules.length !== index + 1 && <hr />}
       </div>
     ))}
   </div>
@@ -50,8 +54,11 @@ const TableComponent = props => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({row}) => (
-        <OrderItemDetailsLink order_item_uuid={row.uuid} project_uuid={row.project_uuid}>
+      render: ({ row }) => (
+        <OrderItemDetailsLink
+          order_item_uuid={row.uuid}
+          project_uuid={row.project_uuid}
+        >
           {row.attributes.name || row.offering_name}
         </OrderItemDetailsLink>
       ),
@@ -75,7 +82,9 @@ const TableComponent = props => {
   if (!props.actionsDisabled) {
     columns.push({
       title: translate('Actions'),
-      render: ({row}) => <BookingActions row={row} refresh={() => props.fetch()} />,
+      render: ({ row }) => (
+        <BookingActions row={row} refresh={() => props.fetch()} />
+      ),
     });
   }
   return (
@@ -84,14 +93,14 @@ const TableComponent = props => {
       columns={columns}
       showPageSizeSelector={true}
       verboseName={translate('Bookings')}
-      initialSorting={{field: 'created', mode: 'desc'}}
+      initialSorting={{ field: 'created', mode: 'desc' }}
       expandableRow={ExpandableRow}
     />
   );
 };
 
 const mapPropsToFilter = props => {
-  const filter: Record<string, string | boolean > = {
+  const filter: Record<string, string | boolean> = {
     offering_uuid: props.offeringUuid,
   };
   if (props.customer) {
@@ -123,4 +132,6 @@ const enhance = compose(
   withTranslation,
 );
 
-export const BookingsList = enhance(TableComponent) as React.ComponentType<BookingsList>;
+export const BookingsList = enhance(TableComponent) as React.ComponentType<
+  BookingsList
+>;

@@ -7,8 +7,8 @@ import { SupportUsageList } from './SupportUsageList';
 
 const SupportUsageContainer = () => (
   <div className="ibox-content">
-    <SupportUsageFilter/>
-    <SupportUsageList/>
+    <SupportUsageFilter />
+    <SupportUsageList />
   </div>
 );
 

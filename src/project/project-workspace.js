@@ -10,8 +10,8 @@ export default function ProjectWorkspaceController(
   $state,
   BreadcrumbsService,
   titleService,
-  SidebarExtensionService) {
-
+  SidebarExtensionService,
+) {
   activate();
 
   $scope.titleService = titleService;
@@ -38,13 +38,13 @@ export default function ProjectWorkspaceController(
           label: gettext('Project workspace'),
           state: 'project.details',
           params: {
-            uuid: $scope.currentProject.uuid
-          }
+            uuid: $scope.currentProject.uuid,
+          },
         },
       ];
       if ($state.current.name.includes('resources')) {
         items.push({
-          label: gettext('Resources')
+          label: gettext('Resources'),
         });
       }
       BreadcrumbsService.items = items;
@@ -80,7 +80,8 @@ export default function ProjectWorkspaceController(
           },
           {
             key: 'private_clouds',
-            link: 'project.resources.clouds({uuid: $ctrl.context.project.uuid})',
+            link:
+              'project.resources.clouds({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-cloud',
             label: gettext('Private clouds'),
             feature: 'private_clouds',
@@ -89,14 +90,15 @@ export default function ProjectWorkspaceController(
           },
           {
             key: 'storages',
-            link: 'project.resources.storage.tabs({uuid: $ctrl.context.project.uuid})',
+            link:
+              'project.resources.storage.tabs({uuid: $ctrl.context.project.uuid})',
             icon: 'fa-hdd-o',
             label: gettext('Storage'),
             feature: 'storage',
             countFieldKey: 'storages',
             index: 400,
           },
-        ]
+        ],
       },
       {
         key: 'eventlog',
@@ -130,9 +132,12 @@ export default function ProjectWorkspaceController(
         link: 'project.cost-planning({uuid: $ctrl.context.project.uuid})',
         feature: 'cost-planning',
         index: 900,
-      }
+      },
     ];
-    $scope.items = SidebarExtensionService.mergeItems($scope.items, customItems);
+    $scope.items = SidebarExtensionService.mergeItems(
+      $scope.items,
+      customItems,
+    );
     addBackToOrganizationItemIfAllowed($scope.items);
     $scope.items = filterItemsByProjectType($scope.items);
   }
@@ -154,7 +159,7 @@ export default function ProjectWorkspaceController(
     }
     return fn(items).map(parent => {
       if (parent.children) {
-        return {...parent, children: fn(parent.children)};
+        return { ...parent, children: fn(parent.children) };
       } else {
         return parent;
       }
@@ -167,7 +172,10 @@ export default function ProjectWorkspaceController(
     if (!sidebarItems) {
       return;
     }
-    const itemsMap = sidebarItems.reduce((map, item) => ({...map, [item]: true}), {});
+    const itemsMap = sidebarItems.reduce(
+      (map, item) => ({ ...map, [item]: true }),
+      {},
+    );
     const filterItems = items => items.filter(item => itemsMap[item.key]);
     return filterItems;
   }
@@ -178,14 +186,14 @@ export default function ProjectWorkspaceController(
         return;
       }
       $scope.currentProject = project;
-      $scope.context = {project: project};
+      $scope.context = { project: project };
       SidebarExtensionService.getItems('project').then(customItems => {
         setItems(customItems);
         tabCounterService.connect({
           $scope: $scope,
           tabs: $scope.items,
           getCounters: getCounters.bind(null, project),
-          getCountersError: getCountersError
+          getCountersError: getCountersError,
         });
       });
       refreshBreadcrumbs();
@@ -195,8 +203,8 @@ export default function ProjectWorkspaceController(
   function getCounters(project) {
     const fields = SidebarExtensionService.getCounters($scope.items);
     let query = angular.extend(
-      {UUID: project.uuid, fields},
-      eventsService.defaultFilter
+      { UUID: project.uuid, fields },
+      eventsService.defaultFilter,
     );
     return projectsService.getCounters(query);
   }
@@ -204,7 +212,7 @@ export default function ProjectWorkspaceController(
   function getCountersError(error) {
     if (error.status === 404) {
       projectsService.getFirst().then(function(project) {
-        $state.go('project.details', {uuid: project.uuid});
+        $state.go('project.details', { uuid: project.uuid });
       });
     }
   }
@@ -213,7 +221,7 @@ export default function ProjectWorkspaceController(
     return {
       label: gettext('Back to organization'),
       icon: 'fa-arrow-left',
-      action: () => $state.go('organization.dashboard', {uuid: customerUuid}),
+      action: () => $state.go('organization.dashboard', { uuid: customerUuid }),
     };
   }
 }

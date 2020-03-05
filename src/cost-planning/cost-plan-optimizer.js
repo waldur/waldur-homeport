@@ -9,7 +9,7 @@ const costPlanOptimizer = {
     explainPlan(plan) {
       plan.expanded = !plan.expanded;
     }
-  }
+  },
 };
 
 export default costPlanOptimizer;

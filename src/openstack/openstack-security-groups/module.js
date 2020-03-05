@@ -10,8 +10,14 @@ import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 export default module => {
-  ResourceSummary.register('OpenStack.SecurityGroup', OpenStackSecurityGroupSummary);
-  module.service('openstackSecurityGroupsService', openstackSecurityGroupsService);
+  ResourceSummary.register(
+    'OpenStack.SecurityGroup',
+    OpenStackSecurityGroupSummary,
+  );
+  module.service(
+    'openstackSecurityGroupsService',
+    openstackSecurityGroupsService,
+  );
   module.component('openstackSecurityGroupsList', openstackSecurityGroupsList);
   module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
@@ -24,29 +30,28 @@ export default module => {
 };
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_SUBRESOURCE_TABS) {
+function tabsConfig(
+  ResourceTabsConfigurationProvider,
+  DEFAULT_SUBRESOURCE_TABS,
+) {
   ResourceTabsConfigurationProvider.register('OpenStack.SecurityGroup', {
-    order: [
-      'rules',
-      ...DEFAULT_SUBRESOURCE_TABS.order,
-    ],
-    options: angular.merge({
-      rules: {
-        heading: 'Rules',
-        component: 'securityGroupRulesList'
-      }
-    }, DEFAULT_SUBRESOURCE_TABS.options)
+    order: ['rules', ...DEFAULT_SUBRESOURCE_TABS.order],
+    options: angular.merge(
+      {
+        rules: {
+          heading: 'Rules',
+          component: 'securityGroupRulesList',
+        },
+      },
+      DEFAULT_SUBRESOURCE_TABS.options,
+    ),
   });
 }
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
   ActionConfigurationProvider.register('OpenStack.SecurityGroup', {
-    order: [
-      'edit',
-      'set_rules',
-      'destroy'
-    ],
+    order: ['edit', 'set_rules', 'destroy'],
     options: {
       edit: angular.merge({}, DEFAULT_EDIT_ACTION, {
         successMessage: gettext('Security group has been updated.'),
@@ -57,7 +62,7 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
         isVisible: model => model.name !== 'default',
       },
       pull: {
-        title: gettext('Synchronise')
+        title: gettext('Synchronise'),
       },
       set_rules: {
         title: gettext('Set rules'),
@@ -67,14 +72,15 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
           rules: {
             component: 'securityGroupRuleEditor',
             resource_default_value: true,
-          }
+          },
         },
         dialogSize: 'lg',
-        serializer: model => model.rules.map(rule => ({
-          ...rule,
-          protocol: rule.protocol === null ? '' : rule.protocol,
-        })),
-      }
-    }
+        serializer: model =>
+          model.rules.map(rule => ({
+            ...rule,
+            protocol: rule.protocol === null ? '' : rule.protocol,
+          })),
+      },
+    },
   });
 }

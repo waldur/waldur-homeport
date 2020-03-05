@@ -16,32 +16,32 @@ interface OwnProps {
 type ConnectedProps = OwnProps & InjectedFormProps & TranslateProps;
 
 const PureCustomerEditDetailsForm = (props: ConnectedProps) => (
-  <form
-    onSubmit={props.handleSubmit(props.onSubmit)}
-    className="form-vertical">
-      <div>
-        <Field
-          name="image"
-          validate={required}
-          component={fieldProps =>
-            <FileUploadField
-              {...fieldProps}
-              accept=".jpg, .jpeg, .png, .svg"
-              buttonLabel={translate('Upload new')}
-            />
-          }
-        />
-      </div>
-      {props.hasChosenImage && <SubmitButton
+  <form onSubmit={props.handleSubmit(props.onSubmit)} className="form-vertical">
+    <div>
+      <Field
+        name="image"
+        validate={required}
+        component={fieldProps => (
+          <FileUploadField
+            {...fieldProps}
+            accept=".jpg, .jpeg, .png, .svg"
+            buttonLabel={translate('Upload new')}
+          />
+        )}
+      />
+    </div>
+    {props.hasChosenImage && (
+      <SubmitButton
         className="btn btn-sm btn-success m-t-sm"
         submitting={props.submitting}
         label={props.translate('Update')}
-      />}
+      />
+    )}
   </form>
 );
 
 const enhance = compose(
-  reduxForm<CustomerDetailsEditFormData, OwnProps>({form: 'customerLogo'}),
+  reduxForm<CustomerDetailsEditFormData, OwnProps>({ form: 'customerLogo' }),
   withTranslation,
 );
 

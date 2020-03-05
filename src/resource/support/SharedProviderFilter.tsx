@@ -13,7 +13,7 @@ const providerAutocomplete = (query: string) => {
     field: ['name', 'uuid'],
     o: 'name',
   };
-  return getList('/service-settings/', params).then(options => ({options}));
+  return getList('/service-settings/', params).then(options => ({ options }));
 };
 
 export const SharedProviderFilter = () => (
@@ -21,9 +21,7 @@ export const SharedProviderFilter = () => (
     <div className="ibox-content">
       <div className="row">
         <div className="form-group col-sm-3">
-          <label className="control-label">
-            {translate('Provider')}
-          </label>
+          <label className="control-label">{translate('Provider')}</label>
           <Field
             name="provider"
             component={fieldProps => (
@@ -45,8 +43,9 @@ export const SharedProviderFilter = () => (
 
 const FORM_ID = 'SharedProviderFilter';
 
-export const providerSelector = state => formValueSelector(FORM_ID)(state, 'provider');
+export const providerSelector = state =>
+  formValueSelector(FORM_ID)(state, 'provider');
 
-const enhance = reduxForm({form: FORM_ID});
+const enhance = reduxForm({ form: FORM_ID });
 
 export const SharedProviderFilterContainer = enhance(SharedProviderFilter);

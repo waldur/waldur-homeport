@@ -4,18 +4,17 @@ export const localeUpdated = locale => ({
   type: LOCALE_UPDATED,
   payload: {
     locale,
-  }
+  },
 });
 
 const INITIAL_STATE = null;
 
-export const reducer = (state=INITIAL_STATE, action) => {
-  switch(action.type) {
+export const reducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case LOCALE_UPDATED:
+      return action.payload.locale;
 
-  case LOCALE_UPDATED:
-    return action.payload.locale;
-
-  default:
-    return state;
+    default:
+      return state;
   }
 };

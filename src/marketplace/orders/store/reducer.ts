@@ -9,11 +9,11 @@ const INITIAL_STATE = {
   },
   tableFilter: {
     stateOptions: [
-      {value: 'pending', label: translate('Pending')},
-      {value: 'executing', label: translate('Executing')},
-      {value: 'done', label: translate('Done')},
-      {value: 'erred', label: translate('Erred')},
-      {value: 'terminated', label: translate('Terminated')},
+      { value: 'pending', label: translate('Pending') },
+      { value: 'executing', label: translate('Executing') },
+      { value: 'done', label: translate('Done') },
+      { value: 'erred', label: translate('Erred') },
+      { value: 'terminated', label: translate('Terminated') },
     ],
   },
   pendingOrders: [],

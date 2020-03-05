@@ -28,7 +28,7 @@ const PureKeyRemoveDialog = withTranslation((props: KeyRemoveDialogProps) => (
         }}
         className="btn btn-sm btn-danger"
       />,
-      <CloseDialogButton key={2} className="btn btn-sm btn-default"/>,
+      <CloseDialogButton key={2} className="btn btn-sm btn-default" />,
     ]}
   >
     {props.translate('Are you sure you would like to delete the key?')}

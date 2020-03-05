@@ -27,9 +27,12 @@ const appstoreFieldTel = {
     }
 
     getMaxLengthErrorMessage() {
-      return this.coreUtils.templateFormatter(gettext('Field length must be less than {maxlength} symbols'), {
-        maxlength: this.field.maxlength,
-      });
+      return this.coreUtils.templateFormatter(
+        gettext('Field length must be less than {maxlength} symbols'),
+        {
+          maxlength: this.field.maxlength,
+        },
+      );
     }
   },
 };

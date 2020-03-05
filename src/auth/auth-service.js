@@ -17,11 +17,20 @@
  *    he is redirected back to the HomePort.
  *
  * 5) Authentication token and authentication method is cleaned up in the local storage.
-*/
+ */
 
 // @ngInject
 export default function authService(
-  $http, $auth, $rootScope, $window, $state, usersService, currentStateService, ncUtilsFlash, ENV) {
+  $http,
+  $auth,
+  $rootScope,
+  $window,
+  $state,
+  usersService,
+  currentStateService,
+  ncUtilsFlash,
+  ENV,
+) {
   let vm = this;
 
   vm.signin = signin;
@@ -37,7 +46,9 @@ export default function authService(
 
   function signin(username, password) {
     $rootScope.$broadcast('enableRequests');
-    return $auth.login({username: username, password: password}).then(loginSuccess);
+    return $auth
+      .login({ username: username, password: password })
+      .then(loginSuccess);
   }
 
   function authenticate(provider) {
@@ -60,7 +71,9 @@ export default function authService(
   }
 
   function activate(user) {
-    return $http.post(ENV.apiEndpoint + 'api-auth/activation/', user).then(loginSuccess);
+    return $http
+      .post(ENV.apiEndpoint + 'api-auth/activation/', user)
+      .then(loginSuccess);
   }
 
   function setAuthenticationMethod(method) {
@@ -77,8 +90,15 @@ export default function authService(
 
   function logout() {
     const authenticationMethod = getAuthenticationMethod();
-    if (authenticationMethod === 'saml2' && ENV.plugins.WALDUR_AUTH_SAML2.ENABLE_SINGLE_LOGOUT) {
-      ncUtilsFlash.success(gettext('SAML2 single logout has been started. Please wait until it completes.'));
+    if (
+      authenticationMethod === 'saml2' &&
+      ENV.plugins.WALDUR_AUTH_SAML2.ENABLE_SINGLE_LOGOUT
+    ) {
+      ncUtilsFlash.success(
+        gettext(
+          'SAML2 single logout has been started. Please wait until it completes.',
+        ),
+      );
       $window.location = ENV.apiEndpoint + 'api-auth/saml2/logout/';
     } else {
       localLogout();
@@ -88,7 +108,7 @@ export default function authService(
   function localLogout() {
     $rootScope.$broadcast('logoutStart');
     delete $http.defaults.headers.common.Authorization;
-    vm.user = {isAuthenticated: false};
+    vm.user = { isAuthenticated: false };
     usersService.currentUser = null;
     usersService.cleanAllCache();
     $auth.logout();

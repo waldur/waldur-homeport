@@ -102,15 +102,20 @@ const FIXED_COMPONENTS: OfferingComponent[] = [
 
 describe('Marketplace offering serializer', () => {
   it('should skip quotas for built-in usage components', () => {
-    expect(formatOfferingRequest(OFFERING_FORM_DATA, USAGE_COMPONENTS).plans[0].quotas).toEqual({});
+    expect(
+      formatOfferingRequest(OFFERING_FORM_DATA, USAGE_COMPONENTS).plans[0]
+        .quotas,
+    ).toEqual({});
   });
 
   it('should not skip quotas for built-in fixed components', () => {
-    expect(formatOfferingRequest(OFFERING_FORM_DATA, FIXED_COMPONENTS).plans[0].quotas).toEqual({
+    expect(
+      formatOfferingRequest(OFFERING_FORM_DATA, FIXED_COMPONENTS).plans[0]
+        .quotas,
+    ).toEqual({
       disk: 10,
       ram: 10,
       cpu: 10,
     });
   });
-
 });

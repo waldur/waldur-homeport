@@ -5,7 +5,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 export type MonitoringStateType = 'Unregistered' | 'Erred' | 'Warning' | 'OK';
 
-const LABEL_CLASSES: {[key in MonitoringStateType]: StateVariant} = {
+const LABEL_CLASSES: { [key in MonitoringStateType]: StateVariant } = {
   Unregistered: 'plain',
   Erred: 'danger',
   Warning: 'warning',

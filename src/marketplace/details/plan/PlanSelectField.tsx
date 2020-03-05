@@ -24,7 +24,9 @@ export const PlanSelectField = (props: PlanSelectFieldProps) => (
           options={props.plans}
           clearable={false}
         />
-        {fieldProps.meta.touched && <FieldError error={fieldProps.meta.error} />}
+        {fieldProps.meta.touched && (
+          <FieldError error={fieldProps.meta.error} />
+        )}
       </>
     )}
   />

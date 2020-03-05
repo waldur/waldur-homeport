@@ -6,9 +6,12 @@ interface RowProps {
   label: React.ReactNode;
 }
 
-export const Row = (props: RowProps) => (props.isVisible !== false && props.value) ? (
-  <tr>
-    <td><strong>{props.label}</strong></td>
-    <td>{props.value}</td>
-  </tr>
-) : null;
+export const Row = (props: RowProps) =>
+  props.isVisible !== false && props.value ? (
+    <tr>
+      <td>
+        <strong>{props.label}</strong>
+      </td>
+      <td>{props.value}</td>
+    </tr>
+  ) : null;

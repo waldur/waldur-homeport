@@ -1,1 +1,2 @@
-export const getServiceProviderSecretCode = state => state.marketplace.serviceProvider.secretCode;
+export const getServiceProviderSecretCode = state =>
+  state.marketplace.serviceProvider.secretCode;

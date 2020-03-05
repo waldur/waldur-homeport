@@ -20,9 +20,14 @@ const PurePlansList = withTranslation((props: PlansListProps) => (
 
     <Col smOffset={2} sm={8}>
       {props.fields.map((plan, index) => (
-        <PlanPanel key={index} plan={plan} index={index} onRemove={props.fields.remove}/>
+        <PlanPanel
+          key={index}
+          plan={plan}
+          index={index}
+          onRemove={props.fields.remove}
+        />
       ))}
-      <PlanAddButton onClick={() => props.fields.push({})}/>
+      <PlanAddButton onClick={() => props.fields.push({})} />
     </Col>
   </div>
 ));
@@ -37,6 +42,6 @@ export class PlansList extends React.Component<PlansListProps> {
   }
 
   render() {
-    return <PurePlansList {...this.props}/>;
+    return <PurePlansList {...this.props} />;
   }
 }

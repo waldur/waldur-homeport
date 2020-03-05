@@ -7,10 +7,11 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 
 import * as api from '../../common/api';
+
 import * as constants from './constants';
 
 function* handleSubmitUsage(action) {
-  const {period, components} = action.payload;
+  const { period, components } = action.payload;
   const payload = {
     plan_period: period.value.uuid,
     usages: Object.keys(components).map(key => ({
@@ -25,7 +26,9 @@ function* handleSubmitUsage(action) {
     yield put(constants.submitUsage.success());
     yield put(closeModalDialog());
   } catch (error) {
-    const errorMessage = `${translate('Unable to submit usage report.')} ${format(error)}`;
+    const errorMessage = `${translate(
+      'Unable to submit usage report.',
+    )} ${format(error)}`;
     yield put(showError(errorMessage));
     const formError = new SubmissionError({
       _error: errorMessage,
@@ -35,58 +38,99 @@ function* handleSubmitUsage(action) {
 }
 
 function* handleSwitchPlan(action) {
-  const { marketplace_resource_uuid, resource_uuid, resource_type, plan_url } = action.payload;
+  const {
+    marketplace_resource_uuid,
+    resource_uuid,
+    resource_type,
+    plan_url,
+  } = action.payload;
   try {
     yield call(api.switchPlan, marketplace_resource_uuid, plan_url);
-    yield put(showSuccess(translate('Resource plan change request has been submitted.')));
+    yield put(
+      showSuccess(
+        translate('Resource plan change request has been submitted.'),
+      ),
+    );
     yield put(constants.switchPlan.success());
     yield put(closeModalDialog());
-    yield put(stateGo('resources.details', {
-      uuid: resource_uuid,
-      resource_type,
-      tab: 'orderItems',
-    }));
+    yield put(
+      stateGo('resources.details', {
+        uuid: resource_uuid,
+        resource_type,
+        tab: 'orderItems',
+      }),
+    );
   } catch (error) {
-    const errorMessage = `${translate('Unable to submit plan change request.')} ${format(error)}`;
+    const errorMessage = `${translate(
+      'Unable to submit plan change request.',
+    )} ${format(error)}`;
     yield put(showError(errorMessage));
     yield put(constants.switchPlan.success());
   }
 }
 
 function* handleChangeLimits(action) {
-  const { marketplace_resource_uuid, resource_uuid, resource_type, limits } = action.payload;
+  const {
+    marketplace_resource_uuid,
+    resource_uuid,
+    resource_type,
+    limits,
+  } = action.payload;
   try {
     yield call(api.changeLimits, marketplace_resource_uuid, limits);
-    yield put(showSuccess(translate('Resource limits change request has been submitted.')));
+    yield put(
+      showSuccess(
+        translate('Resource limits change request has been submitted.'),
+      ),
+    );
     yield put(constants.changeLimits.success());
     yield put(closeModalDialog());
-    yield put(stateGo('resources.details', {
-      uuid: resource_uuid,
-      resource_type,
-      tab: 'orderItems',
-    }));
+    yield put(
+      stateGo('resources.details', {
+        uuid: resource_uuid,
+        resource_type,
+        tab: 'orderItems',
+      }),
+    );
   } catch (error) {
-    const errorMessage = `${translate('Unable to submit limits change request.')} ${format(error)}`;
+    const errorMessage = `${translate(
+      'Unable to submit limits change request.',
+    )} ${format(error)}`;
     yield put(showError(errorMessage));
     yield put(constants.changeLimits.success());
   }
 }
 
 function* handleTerminateResource(action) {
-  const { marketplace_resource_uuid, resource_uuid, resource_type } = action.payload;
+  const {
+    marketplace_resource_uuid,
+    resource_uuid,
+    resource_type,
+  } = action.payload;
   try {
     yield call(api.terminateResource, marketplace_resource_uuid);
-    yield put(showSuccess(translate('Resource termination request has been submitted.')));
+    yield put(
+      showSuccess(
+        translate('Resource termination request has been submitted.'),
+      ),
+    );
     yield put(constants.terminateResource.success());
     yield put(closeModalDialog());
-    const state = resource_type === 'Support.Offering' ? 'offeringDetails' : 'resources.details';
-    yield put(stateGo(state, {
-      uuid: resource_uuid,
-      resource_type,
-      tab: 'orderItems',
-    }));
+    const state =
+      resource_type === 'Support.Offering'
+        ? 'offeringDetails'
+        : 'resources.details';
+    yield put(
+      stateGo(state, {
+        uuid: resource_uuid,
+        resource_type,
+        tab: 'orderItems',
+      }),
+    );
   } catch (error) {
-    const errorMessage = `${translate('Unable to submit resource termination request.')} ${format(error)}`;
+    const errorMessage = `${translate(
+      'Unable to submit resource termination request.',
+    )} ${format(error)}`;
     yield put(showError(errorMessage));
     yield put(constants.terminateResource.success());
   }
@@ -95,8 +139,20 @@ function* handleTerminateResource(action) {
 function* handlePeriodChange(action) {
   const { period } = action.payload;
   for (const component of period.components) {
-    yield put(change(constants.FORM_ID, `components.${component.type}.amount`, component.usage));
-    yield put(change(constants.FORM_ID, `components.${component.type}.description`, component.description));
+    yield put(
+      change(
+        constants.FORM_ID,
+        `components.${component.type}.amount`,
+        component.usage,
+      ),
+    );
+    yield put(
+      change(
+        constants.FORM_ID,
+        `components.${component.type}.description`,
+        component.description,
+      ),
+    );
   }
 }
 

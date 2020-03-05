@@ -9,7 +9,12 @@ export default class NavigationUtilsService {
   goBack() {
     const state = this.$rootScope.prevPreviousState;
     const params = this.$rootScope.prevPreviousParams;
-    if (state && state.name && state.name !== 'errorPage.notFound' && state.name !== 'errorPage.limitQuota') {
+    if (
+      state &&
+      state.name &&
+      state.name !== 'errorPage.notFound' &&
+      state.name !== 'errorPage.limitQuota'
+    ) {
       this.$state.go(state.name, params);
     } else {
       this.$state.go('profile.details');

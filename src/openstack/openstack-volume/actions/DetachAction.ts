@@ -1,5 +1,8 @@
 import { translate } from '@waldur/i18n';
-import { validateRuntimeState, validateState } from '@waldur/resource/actions/base';
+import {
+  validateRuntimeState,
+  validateState,
+} from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { Volume } from '@waldur/resource/types';
 

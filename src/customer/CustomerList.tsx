@@ -16,19 +16,37 @@ import { CustomerExpandableRow } from './CustomerExpandableRow';
 import { EstimatedCostField } from './EstimatedCostField';
 import { OrganizationLink } from './OrganizationLink';
 
-const AbbreviationField = ({ row }) => <span>{renderFieldOrDash(row.abbreviation)}</span>;
+const AbbreviationField = ({ row }) => (
+  <span>{renderFieldOrDash(row.abbreviation)}</span>
+);
 
-const CreatedDateField = ({ row }) => <span>{renderFieldOrDash(formatDate(row.created))}</span>;
+const CreatedDateField = ({ row }) => (
+  <span>{renderFieldOrDash(formatDate(row.created))}</span>
+);
 
-const AccountingStartDateField = ({ row }) => <span>{renderFieldOrDash(formatDate(row.accounting_start_date))}</span>;
+const AccountingStartDateField = ({ row }) => (
+  <span>{renderFieldOrDash(formatDate(row.accounting_start_date))}</span>
+);
 
-const RegistrationCodeField = ({ row }) => <span>{renderFieldOrDash(row.registration_code)}</span>;
+const RegistrationCodeField = ({ row }) => (
+  <span>{renderFieldOrDash(row.registration_code)}</span>
+);
 
-const AgreementNumberField = ({ row }) => <span>{renderFieldOrDash(row.agreement_number)}</span>;
+const AgreementNumberField = ({ row }) => (
+  <span>{renderFieldOrDash(row.agreement_number)}</span>
+);
+
+const renderTitleWithPriceTooltip = title => (
+  <>
+    <PriceTooltip /> {title}
+  </>
+);
 
 export const TableComponent = props => {
   const { filterColumns, customerListFilter } = props;
-  const accountingPeriodIsCurrent = customerListFilter.accounting_period && customerListFilter.accounting_period.value.current;
+  const accountingPeriodIsCurrent =
+    customerListFilter.accounting_period &&
+    customerListFilter.accounting_period.value.current;
   const columns = filterColumns([
     {
       title: translate('Organization'),
@@ -93,20 +111,18 @@ export const TableComponent = props => {
   );
 };
 
-const renderTitleWithPriceTooltip = title =>
-  <><PriceTooltip/>{' '}{title}</>;
-
 const exportRow = (row, props) => {
   const base = [
     row.name,
     row.abbreviation,
     formatDate(row.created),
     formatDate(row.accounting_start_date),
-    CurrentCostField({row}),
+    CurrentCostField({ row }),
   ];
-  return props.customerListFilter.accounting_period && props.customerListFilter.accounting_period.value.current ?
-    [...base, EstimatedCostField({row})] :
-    base;
+  return props.customerListFilter.accounting_period &&
+    props.customerListFilter.accounting_period.value.current
+    ? [...base, EstimatedCostField({ row })]
+    : base;
 };
 
 const exportFields = props => {
@@ -116,17 +132,35 @@ const exportFields = props => {
     translate('Created'),
     translate('Start day of accounting'),
   ];
-  const accountingPeriodIsCurrent = props.customerListFilter.accounting_period && props.customerListFilter.accounting_period.value.current;
+  const accountingPeriodIsCurrent =
+    props.customerListFilter.accounting_period &&
+    props.customerListFilter.accounting_period.value.current;
   const vatNotIncluded = ENV.accountingMode === 'accounting';
-  const vatMessage = vatNotIncluded ? translate('VAT is not included') : translate('VAT is included');
-  return accountingPeriodIsCurrent ? [
-    ...base,
-    `${translate('Current cost')} (${vatMessage})`,
-    `${translate('Estimated cost')} (${vatMessage})`,
-  ] : [
-    ...base,
-    `${translate('Cost')} (${vatMessage})`,
-  ];
+  const vatMessage = vatNotIncluded
+    ? translate('VAT is not included')
+    : translate('VAT is included');
+  return accountingPeriodIsCurrent
+    ? [
+        ...base,
+        `${translate('Current cost')} (${vatMessage})`,
+        `${translate('Estimated cost')} (${vatMessage})`,
+      ]
+    : [...base, `${translate('Cost')} (${vatMessage})`];
+};
+
+const formatFilter = filter => {
+  if (filter) {
+    if (filter.accounting_period) {
+      return {
+        accounting_is_running: filter.accounting_is_running
+          ? filter.accounting_is_running.value
+          : undefined,
+        year: filter.accounting_period.value.year,
+        month: filter.accounting_period.value.month,
+      };
+    }
+    return filter;
+  }
 };
 
 const TableOptions = {
@@ -136,19 +170,6 @@ const TableOptions = {
   mapPropsToFilter: props => formatFilter(props.customerListFilter),
   exportRow,
   exportFields,
-};
-
-const formatFilter = filter => {
-  if (filter) {
-    if (filter.accounting_period) {
-      return {
-        accounting_is_running: filter.accounting_is_running ? filter.accounting_is_running.value : undefined,
-        year: filter.accounting_period.value.year,
-        month: filter.accounting_period.value.month,
-      };
-    }
-    return filter;
-  }
 };
 
 const mapStateToProps = state => ({

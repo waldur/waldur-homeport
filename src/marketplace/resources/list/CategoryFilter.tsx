@@ -7,9 +7,7 @@ import { categoryAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
 export const CategoryFilter: React.FC<{}> = () => (
   <div className="form-group col-sm-3">
-    <label className="control-label">
-      {translate('Category')}
-    </label>
+    <label className="control-label">{translate('Category')}</label>
     <Field
       name="category"
       component={fieldProps => (

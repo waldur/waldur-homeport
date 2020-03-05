@@ -24,4 +24,7 @@ const mapDispatchToProps = dispatch => ({
   showHookUpdateDialog: row => dispatch(showHookUpdateDialog(row)),
 });
 
-export const HookUpdateButton = connect(undefined, mapDispatchToProps)(PureHookUpdateButton);
+export const HookUpdateButton = connect(
+  undefined,
+  mapDispatchToProps,
+)(PureHookUpdateButton);

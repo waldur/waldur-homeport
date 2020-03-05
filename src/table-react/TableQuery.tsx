@@ -17,7 +17,7 @@ interface State {
 export class TableQuery extends React.Component<Props, State> {
   constructor(props) {
     super(props);
-    this.state = {query: props.query || ''};
+    this.state = { query: props.query || '' };
   }
 
   setQuery = event => {
@@ -25,7 +25,7 @@ export class TableQuery extends React.Component<Props, State> {
       query: event.target.value,
     });
     this.applyQuery();
-  }
+  };
 
   applyQuery = debounce(() => {
     this.props.setQuery(this.state.query);
@@ -34,12 +34,14 @@ export class TableQuery extends React.Component<Props, State> {
   render() {
     return (
       <div className="pull-right text-right table-query">
-        <label>{translate('Search')}
+        <label>
+          {translate('Search')}
           <input
             type="search"
             className="form-control input-sm"
             value={this.state.query}
-            onChange={this.setQuery}/>
+            onChange={this.setQuery}
+          />
         </label>
       </div>
     );

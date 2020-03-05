@@ -9,16 +9,15 @@
       <h2>
         {{ ::$ctrl.pageTitle }}
       </h2>
-      <p translate>To get your clouds under control, please fill in your data.</p>
+      <p translate>
+        To get your clouds under control, please fill in your data.
+      </p>
     </div>
   </div>
   <div class="row initial-data-page">
     <div class="ibox col-md-offset-2 col-md-8 col-lg-6 col-lg-offset-3">
       <div class="ibox-content">
-        <user-edit
-          user="$ctrl.user"
-          on-save="$ctrl.save"
-          initial="true">
+        <user-edit user="$ctrl.user" on-save="($ctrl.save)" initial="true">
         </user-edit>
       </div>
     </div>

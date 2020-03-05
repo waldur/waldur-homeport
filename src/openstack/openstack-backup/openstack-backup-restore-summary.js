@@ -1,5 +1,6 @@
 const openstackBackupRestoreSummary = {
-  template: '<openstack-instance-checkout-summary ng-if="$ctrl.resource" model="$ctrl.summaryModel"></openstack-instance-checkout-summary>',
+  template:
+    '<openstack-instance-checkout-summary ng-if="$ctrl.resource" model="$ctrl.summaryModel"></openstack-instance-checkout-summary>',
   bindings: {
     model: '<',
     field: '<',
@@ -22,16 +23,20 @@ const openstackBackupRestoreSummary = {
       if (!this.context.resource.metadata) {
         this.resourcesService
           .$get(null, null, this.context.resource.url)
-          .then(resource => this.resource = resource);
+          .then(resource => (this.resource = resource));
       } else {
         this.resource = this.context.resource;
       }
     }
 
     setupWatcher() {
-      this.$scope.$watch(() => [this.model, this.resource], () => {
-        this.summaryModel = this.getSummaryModel();
-      }, true);
+      this.$scope.$watch(
+        () => [this.model, this.resource],
+        () => {
+          this.summaryModel = this.getSummaryModel();
+        },
+        true,
+      );
     }
 
     getSummaryModel() {
@@ -58,7 +63,7 @@ const openstackBackupRestoreSummary = {
         data_volume_size: 0,
       };
     }
-  }
+  },
 };
 
 export default openstackBackupRestoreSummary;

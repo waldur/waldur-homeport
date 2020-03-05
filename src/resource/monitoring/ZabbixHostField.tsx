@@ -23,20 +23,17 @@ export const PureZabbixHostField = (props: ZabbixHostFieldProps) => {
   }
   let value;
   if (props.resource.zabbix_host) {
-    value = <ZabbixHostStateButton host={props.resource.zabbix_host}/>;
+    value = <ZabbixHostStateButton host={props.resource.zabbix_host} />;
   } else {
-    value = <ZabbixHostCreateButton resource={props.resource}/>;
+    value = <ZabbixHostCreateButton resource={props.resource} />;
   }
-  return (
-    <Field
-      label={props.translate('Monitoring')}
-      value={value}
-    />
-  );
+  return <Field label={props.translate('Monitoring')} value={value} />;
 };
 
 const mapStateToProps = state => ({
   isVisible: monitoringIsVisible(state),
 });
 
-export const ZabbixHostField = connect(mapStateToProps)(withTranslation(PureZabbixHostField));
+export const ZabbixHostField = connect(mapStateToProps)(
+  withTranslation(PureZabbixHostField),
+);

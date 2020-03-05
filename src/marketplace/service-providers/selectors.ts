@@ -12,8 +12,7 @@ export const renderServiceProvider = createSelector(
   serviceProviderIsVisible,
   ownerCanRegisterServiceProvider,
   isStaff,
-  (visible, ownerCan, staff) =>
-  visible && (staff || ownerCan)
+  (visible, ownerCan, staff) => visible && (staff || ownerCan),
 );
 
 export const canRegisterServiceProviderForCustomer = createSelector(
@@ -22,5 +21,5 @@ export const canRegisterServiceProviderForCustomer = createSelector(
   isStaff,
   isOwner,
   (visible, ownerCan, staff, owner) =>
-  visible && (staff || (ownerCan && owner))
+    visible && (staff || (ownerCan && owner)),
 );

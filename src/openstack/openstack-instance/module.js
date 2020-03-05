@@ -12,14 +12,32 @@ import registerExtensionPoint from './header-extension';
 import openStackInstanceTenantButton from './OpenStackInstanceTenantButton';
 
 export default module => {
-  ResourceSummary.register('OpenStackTenant.Instance', OpenStackInstanceSummary);
-  module.component('openstackInstanceCurrentFlavor', openstackInstanceCurrentFlavor);
-  module.component('openstackInstanceSecurityGroupsField', openstackInstanceSecurityGroupsField);
-  module.component('openstackInstanceInternalIpsList', openstackInstanceInternalIpsList);
+  ResourceSummary.register(
+    'OpenStackTenant.Instance',
+    OpenStackInstanceSummary,
+  );
+  module.component(
+    'openstackInstanceCurrentFlavor',
+    openstackInstanceCurrentFlavor,
+  );
+  module.component(
+    'openstackInstanceSecurityGroupsField',
+    openstackInstanceSecurityGroupsField,
+  );
+  module.component(
+    'openstackInstanceInternalIpsList',
+    openstackInstanceInternalIpsList,
+  );
   module.component('openstackInstanceDataVolume', openstackInstanceDataVolume);
   module.component('openstackInstanceNetworks', openstackInstanceNetworks);
-  module.component('openstackInstanceFloatingIps', openstackInstanceFloatingIps);
-  module.component('openstackInstanceTenantButton', openStackInstanceTenantButton);
+  module.component(
+    'openstackInstanceFloatingIps',
+    openstackInstanceFloatingIps,
+  );
+  module.component(
+    'openstackInstanceTenantButton',
+    openStackInstanceTenantButton,
+  );
   module.config(actionConfig);
   module.config(stateConfig);
   module.config(tabsConfig);
@@ -34,14 +52,8 @@ function actionConfig(ActionConfigurationProvider) {
 // @ngInject
 function stateConfig(ResourceStateConfigurationProvider) {
   ResourceStateConfigurationProvider.register('OpenStackTenant.Instance', {
-    error_states: [
-      'ERROR'
-    ],
-    shutdown_states: [
-      'SHUTOFF',
-      'STOPPED',
-      'SUSPENDED'
-    ]
+    error_states: ['ERROR'],
+    shutdown_states: ['SHUTOFF', 'STOPPED', 'SUSPENDED'],
   });
 }
 
@@ -58,20 +70,20 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       volumes: {
         heading: gettext('Volumes'),
-        component: 'openstackInstanceVolumes'
+        component: 'openstackInstanceVolumes',
       },
       backups: {
         heading: gettext('Backups'),
-        component: 'openstackBackupsList'
+        component: 'openstackBackupsList',
       },
       backup_schedules: {
         heading: gettext('Backup schedules'),
-        component: 'openstackBackupSchedulesList'
+        component: 'openstackBackupSchedulesList',
       },
       internal_ips_set: {
         heading: gettext('Internal IPs'),
-        component: 'openstackInstanceInternalIpsList'
+        component: 'openstackInstanceInternalIpsList',
       },
-    })
+    }),
   });
 }

@@ -14,15 +14,15 @@ interface CartIndicatorProps {
 }
 
 const PureCartIndicator = (props: CartIndicatorProps) =>
-props.project ? (
-  <NavbarIndicator
-    state={'marketplace-checkout'}
-    params={{uuid: props.project.uuid}}
-    iconClass="fa fa-shopping-cart"
-    labelClass="label label-warning"
-    count={props.count}
-  />
-) : null;
+  props.project ? (
+    <NavbarIndicator
+      state={'marketplace-checkout'}
+      params={{ uuid: props.project.uuid }}
+      iconClass="fa fa-shopping-cart"
+      labelClass="label label-warning"
+      count={props.count}
+    />
+  ) : null;
 
 const mapStateToProps = state => ({
   count: getCount(state),

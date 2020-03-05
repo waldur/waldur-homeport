@@ -7,11 +7,18 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { formatRegistrationMethod, formatUserStatus } from '@waldur/user/support/utils';
+import {
+  formatRegistrationMethod,
+  formatUserStatus,
+} from '@waldur/user/support/utils';
 import { UserDetails } from '@waldur/workspace/types';
 
 import { Row } from './Row';
-import { userLanguageIsVisible, userCompetenceIsVisible, isVisibleForSupportOrStaff } from './selectors';
+import {
+  userLanguageIsVisible,
+  userCompetenceIsVisible,
+  isVisibleForSupportOrStaff,
+} from './selectors';
 
 interface StateProps {
   userLanguageIsVisible: boolean;
@@ -29,28 +36,19 @@ export type UserDetailsTableProps = TranslateProps & StateProps & OwnProps;
 const PureUserDetailsTable = (props: UserDetailsTableProps) => (
   <Table responsive={true} bordered={true}>
     <tbody>
-      <Row
-        label={props.translate('Full name')}
-        value={props.user.full_name}
-      />
+      <Row label={props.translate('Full name')} value={props.user.full_name} />
       {props.nativeNameVisible && (
         <Row
           label={props.translate('Native name')}
           value={props.user.native_name}
         />
       )}
-      <Row
-        label={props.translate('ID code')}
-        value={props.user.civil_number}
-      />
+      <Row label={props.translate('ID code')} value={props.user.civil_number} />
       <Row
         label={props.translate('Phone numbers')}
         value={props.user.phone_number}
       />
-      <Row
-        label={props.translate('E-mail')}
-        value={props.user.email}
-      />
+      <Row label={props.translate('E-mail')} value={props.user.email} />
       <Row
         label={props.translate('Preferred language')}
         value={props.user.preferred_language}

@@ -30,8 +30,8 @@ class DialogController {
             descriptionLabel: gettext('Description'),
             summaryLabel: gettext('Tenant name'),
             hideTitle: true,
-          }
-        }
+          },
+        },
       });
     }
   }
@@ -44,7 +44,7 @@ const openstackTenantRequestDirectAccess = {
     resolve: '<',
     dismiss: '&',
     close: '&',
-  }
+  },
 };
 
 export default openstackTenantRequestDirectAccess;

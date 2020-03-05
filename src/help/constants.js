@@ -9,5 +9,5 @@ export const HELP_CATEGORIES = {
 export const HELP_TITLES = {
   [HELP_CATEGORIES.providers]: gettext('Providers'),
   [HELP_CATEGORIES.sshKeys]: gettext('How to generate SSH key'),
-  [HELP_CATEGORIES.logging]: gettext('Events')
+  [HELP_CATEGORIES.logging]: gettext('Events'),
 };

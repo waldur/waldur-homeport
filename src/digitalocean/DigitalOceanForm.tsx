@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { SecretField, FormContainer} from '@waldur/form-react';
+import { SecretField, FormContainer } from '@waldur/form-react';
 
-export const DigitalOceanForm = ({translate, container}) => (
+export const DigitalOceanForm = ({ translate, container }) => (
   <FormContainer {...container}>
     <SecretField
       name="token"

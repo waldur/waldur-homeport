@@ -14,7 +14,8 @@ const invitationConfirmDialog = {
       this.usersService = usersService;
       this.$timeout = $timeout;
       this.invitationCheckInterval = ENV.invitationCheckInterval;
-      this.validateInvitationEmail = ENV.plugins.WALDUR_CORE.VALIDATE_INVITATION_EMAIL;
+      this.validateInvitationEmail =
+        ENV.plugins.WALDUR_CORE.VALIDATE_INVITATION_EMAIL;
     }
 
     $onInit() {
@@ -23,27 +24,39 @@ const invitationConfirmDialog = {
     }
 
     invitationCheck(token) {
-      this.invitationService.check(token).then(response => {
-        this.usersService.getCurrentUser().then(user => {
-          let invitation = response.data;
-          if (!user.email || user.email === invitation.email) {
-            this.closeDecliningNewEmail();
-          }
+      this.invitationService
+        .check(token)
+        .then(response => {
+          this.usersService.getCurrentUser().then(user => {
+            let invitation = response.data;
+            if (!user.email || user.email === invitation.email) {
+              this.closeDecliningNewEmail();
+            }
 
-          if (this.validateInvitationEmail && user.email && user.email !== invitation.email) {
+            if (
+              this.validateInvitationEmail &&
+              user.email &&
+              user.email !== invitation.email
+            ) {
+              this.dismiss();
+            }
+
+            this.invitation = invitation;
+            this.user = user;
+          });
+        })
+        .catch(response => {
+          if (response.status === -1 || response.status >= 500) {
+            this.$timeout(
+              this.invitationCheck.bind(this),
+              this.invitationCheckInterval,
+              true,
+              token,
+            );
+          } else {
             this.dismiss();
           }
-
-          this.invitation = invitation;
-          this.user = user;
         });
-      }).catch(response => {
-        if (response.status === -1 || response.status >= 500) {
-          this.$timeout(this.invitationCheck.bind(this), this.invitationCheckInterval, true, token);
-        } else {
-          this.dismiss();
-        }
-      });
     }
 
     invitationChecked() {
@@ -51,13 +64,13 @@ const invitationConfirmDialog = {
     }
 
     closeAcceptingNewEmail() {
-      this.close({$value: this.resolve.acceptNewEmail});
+      this.close({ $value: this.resolve.acceptNewEmail });
     }
 
     closeDecliningNewEmail() {
-      this.close({$value: this.resolve.rejectNewEmail});
+      this.close({ $value: this.resolve.rejectNewEmail });
     }
-  }
+  },
 };
 
 export default invitationConfirmDialog;

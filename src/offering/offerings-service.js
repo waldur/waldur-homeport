@@ -18,9 +18,10 @@ export default function offeringsService(baseServiceClass, $http, ENV) {
 
     createOffering: function(offering) {
       const endpoint = 'api/support-offerings/';
-      return $http.post(ENV.apiEndpoint + endpoint, offering)
+      return $http
+        .post(ENV.apiEndpoint + endpoint, offering)
         .then(response => response.data);
-    }
+    },
   });
   return new ServiceClass();
 }

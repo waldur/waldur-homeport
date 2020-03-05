@@ -5,14 +5,14 @@ const workspaceIconClasses = {
   organization: 'fa-sitemap',
   project: 'fa-bookmark',
   user: 'fa-user',
-  support: 'fa-question-circle'
+  support: 'fa-question-circle',
 };
 
 const workspaceButtonClasses = {
   organization: 'btn-primary',
   project: 'btn-success',
   user: 'btn-info',
-  support: 'btn-warning'
+  support: 'btn-warning',
 };
 
 class SelectWorkspaceToggleController {
@@ -25,7 +25,10 @@ class SelectWorkspaceToggleController {
   }
 
   $onInit() {
-    this.unlisten = this.$rootScope.$on('WORKSPACE_CHANGED', this.refreshWorkspace.bind(this));
+    this.unlisten = this.$rootScope.$on(
+      'WORKSPACE_CHANGED',
+      this.refreshWorkspace.bind(this),
+    );
     this.refreshWorkspace();
     this.$scope.$emit('selectWorkspaceToggle.initialized');
   }
@@ -46,7 +49,8 @@ class SelectWorkspaceToggleController {
   }
 
   getTitle() {
-    const customerName = this.customer && this.getOrganizationDisplayName(this.customer);
+    const customerName =
+      this.customer && this.getOrganizationDisplayName(this.customer);
     if (this.customer && this.workspace === 'organization') {
       return customerName;
     } else if (this.project && this.workspace === 'project') {
@@ -55,7 +59,9 @@ class SelectWorkspaceToggleController {
   }
 
   getOrganizationDisplayName(organization) {
-    return this.isMobile() && organization.abbreviation ? organization.abbreviation : organization.display_name;
+    return this.isMobile() && organization.abbreviation
+      ? organization.abbreviation
+      : organization.display_name;
   }
 
   isMobile() {
@@ -72,7 +78,7 @@ class SelectWorkspaceToggleController {
 
   getTooltip() {
     if (!this.hasCustomer) {
-      return gettext('You don\'t have any organization yet.');
+      return gettext("You don't have any organization yet.");
     }
   }
 

@@ -4,7 +4,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import * as constants from './constants';
 
 export const showAttributeFilter = () =>
-  openModalDialog('marketplaceAttributeFilterListDialog', {size: 'sm'});
+  openModalDialog('marketplaceAttributeFilterListDialog', { size: 'sm' });
 
 export const setFilterQuery = (filterQuery: string) => ({
   type: constants.SET_FILTER_QUERY,

@@ -5,5 +5,8 @@ import marketplaceShoppingCartItemUpdate from './ShoppingCartItemUpdate';
 export default module => {
   module.component('marketplaceCheckout', marketplaceCheckout);
   module.component('cartIndicator', cartIndicator);
-  module.component('marketplaceShoppingCartItemUpdate', marketplaceShoppingCartItemUpdate);
+  module.component(
+    'marketplaceShoppingCartItemUpdate',
+    marketplaceShoppingCartItemUpdate,
+  );
 };

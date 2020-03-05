@@ -9,11 +9,7 @@ import {
   submitForm,
   renderOptionalFieldForm,
 } from './FormContainer.fixture';
-import {
-  errorOnSubmit,
-  setFieldValue,
-  getTestFormValues,
-} from './testUtils';
+import { errorOnSubmit, setFieldValue, getTestFormValues } from './testUtils';
 
 describe('FormContainer', () => {
   it('renders form group for each field', () => {
@@ -29,7 +25,7 @@ describe('FormContainer', () => {
     });
 
     it('disables all input fields if form is submitting', () => {
-      const wrapper = renderTestForm({submitting: true, required: false});
+      const wrapper = renderTestForm({ submitting: true, required: false });
       expect(getNameField(wrapper).prop('disabled')).toBe(true);
       expect(getDescriptionField(wrapper).prop('disabled')).toBe(true);
     });
@@ -42,7 +38,7 @@ describe('FormContainer', () => {
     });
 
     it('indicates required field', () => {
-      const wrapper = renderTestForm({required: true});
+      const wrapper = renderTestForm({ required: true });
       expect(getRequiredFields(wrapper).length).toBe(2);
     });
   });
@@ -54,11 +50,11 @@ describe('FormContainer', () => {
     });
 
     it('renders errors for each field individually', () => {
-      const {onSubmit, promise} = errorOnSubmit({
+      const { onSubmit, promise } = errorOnSubmit({
         name: 'This field is required.',
         description: 'This field is too short.',
       });
-      const wrapper = renderTestForm({onSubmit});
+      const wrapper = renderTestForm({ onSubmit });
       submitForm(wrapper);
       return promise.then(() => {
         expect(getErrors(wrapper).length).toBe(2);
@@ -76,23 +72,23 @@ describe('FormContainer', () => {
     });
 
     setFieldValue(wrapper, 'type', 'task');
-    expect(getTestFormValues(wrapper)).toEqual({type: 'task'});
+    expect(getTestFormValues(wrapper)).toEqual({ type: 'task' });
   });
 
   it('renders field description if provided', () => {
     const description = 'This name will be visible in accounting data.';
-    const wrapper = renderTestForm({description});
+    const wrapper = renderTestForm({ description });
     const actual = getDescriptions(wrapper).first();
     expect(actual.text()).toBe(description);
   });
 
   it('renders label class for each form group if provided', () => {
-    const wrapper = renderTestForm({labelClass: 'col-sm-3'});
+    const wrapper = renderTestForm({ labelClass: 'col-sm-3' });
     expect(wrapper.find('label.col-sm-3').length).toBe(2);
   });
 
   it('renders control class for each form group if provided', () => {
-    const wrapper = renderTestForm({controlClass: 'col-sm-5'});
+    const wrapper = renderTestForm({ controlClass: 'col-sm-5' });
     expect(wrapper.find('div.col-sm-5').length).toBe(2);
   });
 });

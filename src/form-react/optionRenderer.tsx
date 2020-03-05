@@ -12,18 +12,21 @@ export interface RendererConfig {
 }
 
 const renderIcon = (src, imgStyle) => (
-  <img src={src} style={{
-    display: 'inline-block',
-    marginRight: 10,
-    position: 'relative',
-    top: -2,
-    verticalAlign: 'middle',
-    ...imgStyle,
-  }}/>
+  <img
+    src={src}
+    style={{
+      display: 'inline-block',
+      marginRight: 10,
+      position: 'relative',
+      top: -2,
+      verticalAlign: 'middle',
+      ...imgStyle,
+    }}
+  />
 );
 
 export const optionRenderer = (config: RendererConfig) => option => {
-  const {iconKey, labelKey, tooltipKey, imgStyle} = config;
+  const { iconKey, labelKey, tooltipKey, imgStyle } = config;
   let src;
   if (typeof iconKey === 'function') {
     src = iconKey(option);
@@ -39,14 +42,16 @@ export const optionRenderer = (config: RendererConfig) => option => {
   const img = renderIcon(src, imgStyle);
   if (tooltipKey) {
     return (
-      <div style={{overflow: 'hidden'}}>
-        <Tooltip label={option[tooltipKey]} id="iconTooltip" children={img}/>
+      <div style={{ overflow: 'hidden' }}>
+        <Tooltip label={option[tooltipKey]} id="iconTooltip">
+          {img}
+        </Tooltip>
         {label}
       </div>
     );
   }
   return (
-    <div style={{overflow: 'hidden'}}>
+    <div style={{ overflow: 'hidden' }}>
       {img}
       {label}
     </div>

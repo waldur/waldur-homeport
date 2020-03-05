@@ -12,8 +12,10 @@ import { removeHook } from './api';
 import * as constants from './constants';
 
 const mapDispatchToProps = dispatch => ({
-  showConfirmDialog: (action: () => void) => dispatch(showHookRemoveConfirmation(action)),
-  removeEntity: (id: string) => dispatch(deleteEntity(constants.hooksListTable, id)),
+  showConfirmDialog: (action: () => void) =>
+    dispatch(showHookRemoveConfirmation(action)),
+  removeEntity: (id: string) =>
+    dispatch(deleteEntity(constants.hooksListTable, id)),
   showError: (message: string) => dispatch(showError(message)),
   showSuccess: (message: string) => dispatch(showSuccess(message)),
 });
@@ -35,7 +37,10 @@ interface HookRemoveButtonState {
   removed: boolean;
 }
 
-class HookRemoveButtonComponent extends React.Component<OwnProps & DispatchProps & TranslateProps, HookRemoveButtonState> {
+class HookRemoveButtonComponent extends React.Component<
+  OwnProps & DispatchProps & TranslateProps,
+  HookRemoveButtonState
+> {
   state = {
     removing: false,
     removed: false,
@@ -43,7 +48,7 @@ class HookRemoveButtonComponent extends React.Component<OwnProps & DispatchProps
 
   async removeHook(uuid: string, url: string) {
     try {
-      this.setState({removing: true});
+      this.setState({ removing: true });
       await removeHook(url);
       this.props.removeEntity(uuid);
       this.props.showSuccess(this.props.translate('Hook has been removed.'));
@@ -57,7 +62,9 @@ class HookRemoveButtonComponent extends React.Component<OwnProps & DispatchProps
     return (
       <ActionButton
         title={this.props.translate('Remove')}
-        action={() => this.props.showConfirmDialog(() => this.removeHook(uuid, url))}
+        action={() =>
+          this.props.showConfirmDialog(() => this.removeHook(uuid, url))
+        }
         icon={this.state.removing ? 'fa fa-spinner fa-spin' : 'fa fa-trash'}
         disabled={this.state.removing}
       />

@@ -28,6 +28,6 @@ export function ncUtilsFlash(Flash, $rootScope, ErrorMessageFormatter) {
       const details = ErrorMessageFormatter.format(response);
       const errorMessage = `${message}. ${details}`;
       this.error(errorMessage);
-    }
+    },
   };
 }

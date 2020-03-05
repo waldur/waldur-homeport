@@ -60,13 +60,17 @@ const TableOptions = {
 
 const enhance = connectTable(TableOptions);
 
-export const ResourceOrderItems = enhance(TableComponent) as
-  React.ComponentType<ResourceOrderItemsProps>;
+export const ResourceOrderItems = enhance(
+  TableComponent,
+) as React.ComponentType<ResourceOrderItemsProps>;
 
-const ResourceOrderItemsTab = props => props.resource.marketplace_resource_uuid ? (
-  <ResourceOrderItems resource_uuid={props.resource.marketplace_resource_uuid}/>
-) : (
-  <h3>{translate('Resource is not connected to the marketplace yet.')}</h3>
-);
+const ResourceOrderItemsTab = props =>
+  props.resource.marketplace_resource_uuid ? (
+    <ResourceOrderItems
+      resource_uuid={props.resource.marketplace_resource_uuid}
+    />
+  ) : (
+    <h3>{translate('Resource is not connected to the marketplace yet.')}</h3>
+  );
 
 export default connectAngularComponent(ResourceOrderItemsTab, ['resource']);

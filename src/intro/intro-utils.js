@@ -18,7 +18,8 @@ export default class ncIntroUtils {
     };
     this.ngIntroService.setOptions(this.state.options);
 
-    let steps_passed = angular.fromJson(this.$window.localStorage['INTRO_STEPS']) || [];
+    let steps_passed =
+      angular.fromJson(this.$window.localStorage['INTRO_STEPS']) || [];
     if (steps_passed.indexOf(name) !== -1) {
       return;
     } else {

@@ -18,14 +18,16 @@ export default module => {
   ResourceSummary.register('Rancher.Node', RancherNodeSummary);
   module.service('rancherNodesService', rancherNodesService);
   module.component('rancherClusterNodes', rancherClusterNodes);
-  module.component('rancherClusterKubeconfigDialog', RancherClusterKubeconfigDialog);
+  module.component(
+    'rancherClusterKubeconfigDialog',
+    RancherClusterKubeconfigDialog,
+  );
   module.component('rancherKeyValueDialog', rancherKeyValueDialog);
   module.component('rancherCreateNodeDialog', rancherCreateNodeDialog);
   module.config(actionsConfig);
   module.config(tabsConfig);
   module.run(breadcrumbsConfig);
 };
-
 
 // @ngInject
 function actionsConfig(ActionConfigurationProvider) {
@@ -36,16 +38,13 @@ function actionsConfig(ActionConfigurationProvider) {
 // @ngInject
 function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
   ResourceTabsConfigurationProvider.register('Rancher.Cluster', {
-    order: [
-      'nodes',
-      ...DEFAULT_RESOURCE_TABS.order,
-    ],
+    order: ['nodes', ...DEFAULT_RESOURCE_TABS.order],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       nodes: {
         heading: gettext('Nodes'),
-        component: 'rancherClusterNodes'
+        component: 'rancherClusterNodes',
       },
-    })
+    }),
   });
   ResourceTabsConfigurationProvider.register('Rancher.Node', {
     order: [],

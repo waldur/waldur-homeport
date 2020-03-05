@@ -12,13 +12,22 @@ import template from './auth-login.html';
 export const authLogin = {
   template,
   bindings: {
-    mode: '<' // Either "login" or "register"
+    mode: '<', // Either "login" or "register"
   },
   controllerAs: 'auth',
   controller: class AuthLoginController {
     // @ngInject
-    constructor(ENV, $q, $state, authService,
-                ncUtilsFlash, invitationService, usersService, UserSettings, coreUtils) {
+    constructor(
+      ENV,
+      $q,
+      $state,
+      authService,
+      ncUtilsFlash,
+      invitationService,
+      usersService,
+      UserSettings,
+      coreUtils,
+    ) {
       this.ENV = ENV;
       this.$q = $q;
       this.$state = $state;
@@ -30,13 +39,19 @@ export const authLogin = {
       this.coreUtils = coreUtils;
 
       this.loginLogo = ENV.loginLogo;
-      this.pageTitle = this.coreUtils.templateFormatter(gettext('Welcome to {pageTitle}!'), { pageTitle: ENV.shortPageTitle });
+      this.pageTitle = this.coreUtils.templateFormatter(
+        gettext('Welcome to {pageTitle}!'),
+        { pageTitle: ENV.shortPageTitle },
+      );
       this.shortPageTitle = ENV.shortPageTitle;
 
-      this.methods = ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS.reduce((result, item) => {
-        result[item] = true;
-        return result;
-      }, {});
+      this.methods = ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS.reduce(
+        (result, item) => {
+          result[item] = true;
+          return result;
+        },
+        {},
+      );
       this.isSignupFormVisible = this.mode === 'register';
       this.user = {};
       this.errors = {};
@@ -56,12 +71,19 @@ export const authLogin = {
     }
 
     showRegisterButton() {
-      return !this.isSignupFormVisible &&
-          (!this.ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED || this.ENV.plugins.WALDUR_CORE.ALLOW_SIGNUP_WITHOUT_INVITATION);
+      return (
+        !this.isSignupFormVisible &&
+        (!this.ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED ||
+          this.ENV.plugins.WALDUR_CORE.ALLOW_SIGNUP_WITHOUT_INVITATION)
+      );
     }
 
     showRegisterForm() {
-      return this.methods.LOCAL_SIGNUP && this.isSignupFormVisible && !this.civilNumberRequired;
+      return (
+        this.methods.LOCAL_SIGNUP &&
+        this.isSignupFormVisible &&
+        !this.civilNumberRequired
+      );
     }
 
     showSocialSignup() {
@@ -73,19 +95,31 @@ export const authLogin = {
     }
 
     showGoogle() {
-      return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.GOOGLE_CLIENT_ID;
+      return (
+        this.showSocialSignup() &&
+        !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.GOOGLE_CLIENT_ID
+      );
     }
 
     showFacebook() {
-      return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID;
+      return (
+        this.showSocialSignup() &&
+        !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID
+      );
     }
 
     showSmartId() {
-      return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID;
+      return (
+        this.showSocialSignup() &&
+        !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.SMARTIDEE_CLIENT_ID
+      );
     }
 
     showTARA() {
-      return this.showSocialSignup() && !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID;
+      return (
+        this.showSocialSignup() &&
+        !!this.ENV.plugins.WALDUR_AUTH_SOCIAL.TARA_CLIENT_ID
+      );
     }
 
     getTARALabel() {
@@ -98,11 +132,17 @@ export const authLogin = {
     }
 
     showSaml2() {
-      return this.methods.SAML2 && !!this.ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_URL;
+      return (
+        this.methods.SAML2 &&
+        !!this.ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_URL
+      );
     }
 
     showSaml2Providers() {
-      return this.methods.SAML2 && this.ENV.plugins.WALDUR_AUTH_SAML2.ALLOW_TO_SELECT_IDENTITY_PROVIDER;
+      return (
+        this.methods.SAML2 &&
+        this.ENV.plugins.WALDUR_AUTH_SAML2.ALLOW_TO_SELECT_IDENTITY_PROVIDER
+      );
     }
 
     gotoRegister() {
@@ -128,7 +168,10 @@ export const authLogin = {
        4) check if invitation token is valid using REST API.
       */
 
-      if (!this.ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED || this.mode !== 'register') {
+      if (
+        !this.ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED ||
+        this.mode !== 'register'
+      ) {
         return;
       }
 
@@ -143,14 +186,19 @@ export const authLogin = {
         return;
       }
 
-      this.invitationService.check(token).then(result => {
-        if (result.data.civil_number_required) {
-          this.civilNumberRequired = true;
-        }
-      }, () => {
-        this.ncUtilsFlash.error(gettext('Unable to validate invitation token.'));
-        this.$state.go('errorPage.notFound');
-      });
+      this.invitationService.check(token).then(
+        result => {
+          if (result.data.civil_number_required) {
+            this.civilNumberRequired = true;
+          }
+        },
+        () => {
+          this.ncUtilsFlash.error(
+            gettext('Unable to validate invitation token.'),
+          );
+          this.$state.go('errorPage.notFound');
+        },
+      );
     }
 
     signin() {
@@ -158,15 +206,17 @@ export const authLogin = {
         return this.$q.reject();
       }
       this.errors = {};
-      return this.authService.signin(this.user.username, this.user.password)
-                 .then(this.loginSuccess.bind(this))
-                 .catch(response => this.errors = response.data);
+      return this.authService
+        .signin(this.user.username, this.user.password)
+        .then(this.loginSuccess.bind(this))
+        .catch(response => (this.errors = response.data));
     }
 
     authenticate(provider) {
-      return this.authService.authenticate(provider)
-                 .then(this.loginSuccess.bind(this))
-                 .catch(response => this.errors = response.data);
+      return this.authService
+        .authenticate(provider)
+        .then(this.loginSuccess.bind(this))
+        .catch(response => (this.errors = response.data));
     }
 
     loginSuccess() {
@@ -178,7 +228,7 @@ export const authLogin = {
         if (data && data.name && data.params) {
           return this.$state.go(data.name, data.params);
         } else {
-          return this.$state.go('profile.details', {}, {reload: true});
+          return this.$state.go('profile.details', {}, { reload: true });
         }
       });
     }
@@ -212,14 +262,21 @@ export const authLogin = {
         return this.$q.reject();
       }
       this.errors = {};
-      return this.authService.signup(this.user).then(() => {
-        this.ncUtilsFlash.info(gettext('Confirmation mail has been sent. Please check your inbox!'));
-        this.isSignupFormVisible = false;
-        this.user = {};
-        return true;
-      }, response => {
-        this.errors = response.data;
-      });
+      return this.authService.signup(this.user).then(
+        () => {
+          this.ncUtilsFlash.info(
+            gettext(
+              'Confirmation mail has been sent. Please check your inbox!',
+            ),
+          );
+          this.isSignupFormVisible = false;
+          this.user = {};
+          return true;
+        },
+        response => {
+          this.errors = response.data;
+        },
+      );
     }
-  }
+  },
 };

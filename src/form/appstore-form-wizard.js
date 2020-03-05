@@ -52,7 +52,7 @@ const appstoreFormWizard = {
       return {
         first: index === 0,
         current: selected,
-        disabled: !selected
+        disabled: !selected,
       };
     }
 
@@ -82,7 +82,11 @@ const appstoreFormWizard = {
       for (let erredFieldName in this.model.errors) {
         for (let stepIndex = 0; stepIndex < this.steps.length; stepIndex++) {
           let step = this.steps[stepIndex];
-          for (let fieldIndex = 0; fieldIndex < step.fields.length; fieldIndex++) {
+          for (
+            let fieldIndex = 0;
+            fieldIndex < step.fields.length;
+            fieldIndex++
+          ) {
             let currentField = step.fields[fieldIndex];
             if (currentField.name === erredFieldName) {
               result.push(currentField.label);
@@ -93,7 +97,7 @@ const appstoreFormWizard = {
 
       return result.join(', ');
     }
-  }
+  },
 };
 
 export default appstoreFormWizard;

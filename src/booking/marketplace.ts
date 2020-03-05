@@ -1,6 +1,5 @@
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
-
 import { OfferingConfigurationDetails } from '@waldur/offering/OfferingConfigurationDetails';
 import { OfferingConfigurationForm } from '@waldur/offering/OfferingConfigurationForm';
 

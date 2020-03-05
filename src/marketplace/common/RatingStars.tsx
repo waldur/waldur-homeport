@@ -11,13 +11,21 @@ interface RatingStarsProps {
   size?: 'default' | 'medium';
 }
 
-export const RatingStars: React.FC<RatingStarsProps> = (props: RatingStarsProps) => (
-  <div className={classNames('rating-stars', {
-    'rating-stars-default': props.size === 'default',
-    'rating-stars-medium': props.size === 'medium',
-    })}>
-    {range(props.rating).map(key => <i className="fa fa-star filled" key={key}/>)}
-    {range(props.max - props.rating).map(key => <i className="fa fa-star" key={key}/>)}
+export const RatingStars: React.FC<RatingStarsProps> = (
+  props: RatingStarsProps,
+) => (
+  <div
+    className={classNames('rating-stars', {
+      'rating-stars-default': props.size === 'default',
+      'rating-stars-medium': props.size === 'medium',
+    })}
+  >
+    {range(props.rating).map(key => (
+      <i className="fa fa-star filled" key={key} />
+    ))}
+    {range(props.max - props.rating).map(key => (
+      <i className="fa fa-star" key={key} />
+    ))}
   </div>
 );
 

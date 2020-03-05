@@ -41,7 +41,9 @@ describe('Quotas', () => {
     });
 
     it('displays backup_storage value that is formatted with filesize filter', () => {
-      expect(quotaValueFilter(1.99 * 1024 * 1024, 'backup_storage')).toBe('1.9 TB');
+      expect(quotaValueFilter(1.99 * 1024 * 1024, 'backup_storage')).toBe(
+        '1.9 TB',
+      );
     });
 
     it('displays ∞ if value === -1', () => {

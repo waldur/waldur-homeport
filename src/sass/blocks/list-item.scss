@@ -37,7 +37,8 @@
   }
   // &.list-header
   &.list {
-    &:hover, &.selected {
+    &:hover,
+    &.selected {
       background-color: $expandable-hover;
     }
     // &:hover
@@ -117,7 +118,7 @@
       .subtitle {
         display: block;
         @include property(font-size, $small-font);
-        color: #8F8F8F;
+        color: #8f8f8f;
         strong {
           color: black;
         }

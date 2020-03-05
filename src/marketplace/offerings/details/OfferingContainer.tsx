@@ -29,13 +29,15 @@ function updateBreadcrumbs(offering: Offering) {
       {
         label: translate('My services'),
       },
-      offering.shared ? {
-        label: translate('Public offerings'),
-        state: 'marketplace-vendor-offerings',
-      } : {
-        label: translate('My offerings'),
-        state: 'marketplace-my-offerings',
-      },
+      offering.shared
+        ? {
+            label: translate('Public offerings'),
+            state: 'marketplace-vendor-offerings',
+          }
+        : {
+            label: translate('My offerings'),
+            state: 'marketplace-my-offerings',
+          },
     ];
     titleService.setTitle(offering.name);
   });
@@ -48,15 +50,15 @@ async function loadData(offering_uuid: string) {
   const sections = category.sections;
 
   const tabs = [
-    ...getTabs({offering, sections}),
+    ...getTabs({ offering, sections }),
     {
       visible: offering.billable,
       title: translate('Plan capacity'),
-      component: () => <PlanUsageList offering_uuid={offering.uuid}/>,
+      component: () => <PlanUsageList offering_uuid={offering.uuid} />,
     },
     {
       title: translate('Bookings'),
-      component: () => <OfferingBookingTab offering={offering}/>,
+      component: () => <OfferingBookingTab offering={offering} />,
       visible: offering.type === OFFERING_TYPE_BOOKING,
     },
   ].filter(tab => tab.visible);
@@ -68,14 +70,12 @@ export const OfferingContainer = () => (
   <Query loader={loadData} variables={$state.params.offering_uuid}>
     {({ loading, data, error }) => {
       if (loading) {
-        return <LoadingSpinner/>;
+        return <LoadingSpinner />;
       }
       if (error) {
         return <h3>{translate('Unable to load offering details.')}</h3>;
       }
-      return (
-        <OfferingDetails offering={data.offering} tabs={data.tabs}/>
-      );
+      return <OfferingDetails offering={data.offering} tabs={data.tabs} />;
     }}
   </Query>
 );

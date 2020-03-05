@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { SecretField, StringField, FormContainer} from '@waldur/form-react';
+import { SecretField, StringField, FormContainer } from '@waldur/form-react';
 
-export const JiraForm = ({translate, container}) => (
+export const JiraForm = ({ translate, container }) => (
   <FormContainer {...container}>
     <StringField
       label={translate('Backend URL')}

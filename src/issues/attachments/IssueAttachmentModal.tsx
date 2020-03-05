@@ -15,13 +15,18 @@ interface PureIssueAttachmentModalProps {
   };
 }
 
-export class PureIssueAttachmentModal extends React.Component<PureIssueAttachmentModalProps> {
+export class PureIssueAttachmentModal extends React.Component<
+  PureIssueAttachmentModalProps
+> {
   state = {
     loading: true,
   };
 
   render() {
-    const { closeModal, resolve: { url } } = this.props;
+    const {
+      closeModal,
+      resolve: { url },
+    } = this.props;
 
     return (
       <div className="attachment-modal">
@@ -30,7 +35,11 @@ export class PureIssueAttachmentModal extends React.Component<PureIssueAttachmen
         </div>
         <div className="modal-header">
           <div className="modal-title">
-            <h3><a href={url} download="true">{utils.getFileName(url)}</a></h3>
+            <h3>
+              <a href={url} download="true">
+                {utils.getFileName(url)}
+              </a>
+            </h3>
           </div>
         </div>
         <div className="modal-body attachment-modal__img">
@@ -50,6 +59,9 @@ const mapDispatchToProps = dispatch => ({
   closeModal: (): void => dispatch(closeModalDialog()),
 });
 
-export const IssueAttachmentModal = connect(null, mapDispatchToProps)(PureIssueAttachmentModal);
+export const IssueAttachmentModal = connect(
+  null,
+  mapDispatchToProps,
+)(PureIssueAttachmentModal);
 
 export default connectAngularComponent(IssueAttachmentModal, ['resolve']);

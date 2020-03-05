@@ -18,7 +18,7 @@ const appstoreFieldMoney = {
       this.field.min = 0;
       this.field.factor = 1;
     }
-  }
+  },
 };
 
 export default appstoreFieldMoney;

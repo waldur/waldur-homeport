@@ -1,7 +1,12 @@
 // @ngInject
 export default function ProviderProjectsService(
-  $q, customersService, projectsService, joinService, joinServiceProjectLinkService, ncUtilsFlash) {
-
+  $q,
+  customersService,
+  projectsService,
+  joinService,
+  joinServiceProjectLinkService,
+  ncUtilsFlash,
+) {
   return {
     loadLinks,
     saveLinks,
@@ -17,12 +22,14 @@ export default function ProviderProjectsService(
   }
 
   function loadServices(project) {
-    return joinService.getAll({
-      customer: project.customer_uuid,
-      field: ['uuid', 'url', 'service_type', 'name'],
-    }).catch(() => {
-      ncUtilsFlash.error(gettext('Unable to fetch project providers.'));
-    });
+    return joinService
+      .getAll({
+        customer: project.customer_uuid,
+        field: ['uuid', 'url', 'service_type', 'name'],
+      })
+      .catch(() => {
+        ncUtilsFlash.error(gettext('Unable to fetch project providers.'));
+      });
   }
 
   function makeChoices(project, services) {
@@ -52,15 +59,19 @@ export default function ProviderProjectsService(
       $q.all(choices.filter(isStaleLink).map(removeLink)),
     ]);
 
-    return promise.then(() => {
-      projectsService.cleanAllCache();
-      return projectsService.$get(project.uuid).then(newProject => {
-        project.services = newProject.services;
+    return promise
+      .then(() => {
+        projectsService.cleanAllCache();
+        return projectsService.$get(project.uuid).then(newProject => {
+          project.services = newProject.services;
+        });
+      })
+      .then(() => {
+        joinService.clearAllCacheForCurrentEndpoint();
+        ncUtilsFlash.success(
+          gettext('Project providers links have been updated.'),
+        );
       });
-    }).then(() => {
-      joinService.clearAllCacheForCurrentEndpoint();
-      ncUtilsFlash.success(gettext('Project providers links have been updated.'));
-    });
   }
 
   function isNewLink(choice) {
@@ -78,7 +89,8 @@ export default function ProviderProjectsService(
       .then(link => {
         choice.link_url = link.url;
         choice.subtitle = gettext('Link created');
-      }).catch(response => {
+      })
+      .catch(response => {
         let reason = '';
         if (response.data && response.data.non_field_errors) {
           reason = response.data.non_field_errors;
@@ -95,7 +107,8 @@ export default function ProviderProjectsService(
       .then(() => {
         choice.link_url = null;
         choice.subtitle = gettext('Link removed');
-      }).catch(response => {
+      })
+      .catch(response => {
         let reason = '';
         if (response.data && response.data.detail) {
           reason = response.data.detail;

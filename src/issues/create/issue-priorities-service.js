@@ -4,7 +4,7 @@ export default function issuePrioritiesService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/support-priorities/';
-    }
+    },
   });
   return new ServiceClass();
 }

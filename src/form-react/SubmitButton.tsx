@@ -8,15 +8,16 @@ interface SubmitButtonProps {
   onClick?(): void;
 }
 
-export const SubmitButton: React.FC<SubmitButtonProps> = (props: SubmitButtonProps) => (
+export const SubmitButton: React.FC<SubmitButtonProps> = (
+  props: SubmitButtonProps,
+) => (
   <button
     type="submit"
     className={props.className}
     disabled={props.submitting || props.disabled === true}
-    onClick={props.onClick}>
-    {props.submitting && (
-      <i className="fa fa-spinner fa-spin m-r-xs"/>
-    )}
+    onClick={props.onClick}
+  >
+    {props.submitting && <i className="fa fa-spinner fa-spin m-r-xs" />}
     {props.label}
   </button>
 );

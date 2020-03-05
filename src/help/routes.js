@@ -10,7 +10,7 @@ export default function helpRoutes($stateProvider) {
         bodyClass: 'old',
         auth: true,
         feature: 'help',
-      }
+      },
     })
 
     .state('help.list', {

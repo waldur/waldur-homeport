@@ -1,16 +1,19 @@
-export default class FreeIPAService{
+export default class FreeIPAService {
   // @ngInject
   constructor($http, ENV) {
     this.endpoint = `${ENV.apiEndpoint}api/freeipa-profiles/`;
     this.$http = $http;
   }
 
-  createProfile(username, agreeWithPolicy){
-    return this.$http.post(this.endpoint, {username, agree_with_policy: agreeWithPolicy});
+  createProfile(username, agreeWithPolicy) {
+    return this.$http.post(this.endpoint, {
+      username,
+      agree_with_policy: agreeWithPolicy,
+    });
   }
 
   getProfile(user) {
-    return this.$http.get(this.endpoint, {params: {user: user.uuid}});
+    return this.$http.get(this.endpoint, { params: { user: user.uuid } });
   }
 
   resourceAction(uuid, action) {

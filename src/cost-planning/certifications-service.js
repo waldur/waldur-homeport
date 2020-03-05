@@ -4,7 +4,7 @@ export default function certificationsService(baseServiceClass) {
     init: function() {
       this._super();
       this.endpoint = '/service-certifications/';
-    }
+    },
   });
   return new ServiceClass();
 }

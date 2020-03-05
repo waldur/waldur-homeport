@@ -18,7 +18,7 @@ const customerDomainField = {
         this.user = user;
       });
     }
-  }
+  },
 };
 
 export default customerDomainField;

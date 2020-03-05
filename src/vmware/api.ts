@@ -42,10 +42,7 @@ export const loadFormOptions = async (props: {
       limits,
     };
   } else {
-    const [
-      templates,
-      limits,
-    ] = await Promise.all([
+    const [templates, limits] = await Promise.all([
       getAll('/vmware-templates/', options),
       getLimits(props.settings_uuid),
     ]);

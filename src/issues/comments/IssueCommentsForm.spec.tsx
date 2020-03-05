@@ -10,7 +10,8 @@ describe('IssueCommentsForm', () => {
   const initialProps = {
     translate,
   };
-  const renderWrapper = (props?) => shallow(<PureIssueCommentsForm {...initialProps} {...props} />);
+  const renderWrapper = (props?) =>
+    shallow(<PureIssueCommentsForm {...initialProps} {...props} />);
 
   it('handles form submit', () => {
     const handleSubmit = jest.fn();

@@ -22,35 +22,38 @@ interface ProjectDashboardProps {
   marketplaceChecklistEnabled: boolean;
 }
 
-export const ProjectDashboard = (props: ProjectDashboardProps) => props.project ? (
-  <>
-    <DashboardHeader
-      title={translate('Welcome, {user}!', {user: props.user.full_name})}
-      subtitle={translate('Overview of {project} project', {project: props.project.name})}
-    />
-    <div style={{paddingLeft: 10}}>
-      <Row>
-        <Col md={8}>
-          <ProjectCounters project={props.project}/>
-        </Col>
-        <Col md={4}>
-          <ProjectActions {...props}/>
-        </Col>
-      </Row>
-      {props.marketplaceChecklistEnabled && (
-        <Panel title={translate('Compliance checklists')}>
-          <ComplianceChecklists/>
-        </Panel>
-      )}
-      {props.marketplaceEnabled && (
-        <Panel title={translate('Resources')}>
-          <ProjectResourcesList/>
-        </Panel>
-      )}
-      <CategoryResourcesList
-        loader={(project: Project) => loadCategories('project', project)}
-        scope={props.project}
+export const ProjectDashboard = (props: ProjectDashboardProps) =>
+  props.project ? (
+    <>
+      <DashboardHeader
+        title={translate('Welcome, {user}!', { user: props.user.full_name })}
+        subtitle={translate('Overview of {project} project', {
+          project: props.project.name,
+        })}
       />
-    </div>
-  </>
-) : null;
+      <div style={{ paddingLeft: 10 }}>
+        <Row>
+          <Col md={8}>
+            <ProjectCounters project={props.project} />
+          </Col>
+          <Col md={4}>
+            <ProjectActions {...props} />
+          </Col>
+        </Row>
+        {props.marketplaceChecklistEnabled && (
+          <Panel title={translate('Compliance checklists')}>
+            <ComplianceChecklists />
+          </Panel>
+        )}
+        {props.marketplaceEnabled && (
+          <Panel title={translate('Resources')}>
+            <ProjectResourcesList />
+          </Panel>
+        )}
+        <CategoryResourcesList
+          loader={(project: Project) => loadCategories('project', project)}
+          scope={props.project}
+        />
+      </div>
+    </>
+  ) : null;

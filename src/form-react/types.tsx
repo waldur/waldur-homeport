@@ -1,5 +1,11 @@
 import { ReactNode } from 'react';
-import { WrappedFieldInputProps, Validator, Normalizer, Formatter, Parser } from 'redux-form';
+import {
+  WrappedFieldInputProps,
+  Validator,
+  Normalizer,
+  Formatter,
+  Parser,
+} from 'redux-form';
 
 export interface FormField {
   name?: string;

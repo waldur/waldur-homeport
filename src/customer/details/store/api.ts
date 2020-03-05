@@ -11,7 +11,11 @@ interface RemoveLogoParams {
 }
 
 export const uploadLogo = (params: UpdateLogoParams) =>
-  sendForm('PATCH', `${ENV.apiEndpoint}api/customers/${params.customerUuid}/`, {image: params.image});
+  sendForm('PATCH', `${ENV.apiEndpoint}api/customers/${params.customerUuid}/`, {
+    image: params.image,
+  });
 
 export const removeLogo = (params: RemoveLogoParams) =>
-  sendForm('PATCH', `${ENV.apiEndpoint}api/customers/${params.customerUuid}/`, {image: ''});
+  sendForm('PATCH', `${ENV.apiEndpoint}api/customers/${params.customerUuid}/`, {
+    image: '',
+  });

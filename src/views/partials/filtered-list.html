@@ -2,19 +2,24 @@
   <loading-spinner></loading-spinner>
 </div>
 <div ng-if="ListController.initialized">
-  <div class="row" ng-if="ListController.userFilter.choices || ListController.selectFilter.choices">
+  <div
+    class="row"
+    ng-if="ListController.userFilter.choices || ListController.selectFilter.choices"
+  >
     <div class="col-md-9" ng-if="ListController.userFilter">
       <filter-list
         on-select="ListController.getList()"
         is-loading="ListController.loading"
-        search-filters="ListController.userFilter.choices">
+        search-filters="ListController.userFilter.choices"
+      >
       </filter-list>
     </div>
     <div class="col-md-3" ng-if="ListController.selectFilter.choices">
       <filter-selector
         on-select="ListController.getList()"
         is-loading="ListController.loading"
-        options="ListController.selectFilter">
+        options="ListController.selectFilter"
+      >
       </filter-selector>
     </div>
   </div>

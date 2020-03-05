@@ -15,7 +15,7 @@ export const AttributeSection = (props: AttributeSectionProps) => (
     {!props.hideHeader && (
       <tr className="gray-bg">
         <th>{props.section.title}</th>
-        <th/>
+        <th />
       </tr>
     )}
     {props.section.attributes
@@ -24,7 +24,8 @@ export const AttributeSection = (props: AttributeSectionProps) => (
         <AttributeRow
           key={index}
           value={props.attributes[attr.key]}
-          attribute={attr}/>
-    ))}
+          attribute={attr}
+        />
+      ))}
   </>
 );

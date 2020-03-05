@@ -12,6 +12,7 @@ import { Project } from '@waldur/workspace/types';
 
 import { ResourceImportButton } from '../import/ResourceImportButton';
 import { Resource } from '../types';
+
 import { CategoryColumnField } from './CategoryColumnField';
 import { CreateResourceButton } from './CreateResourceButton';
 import { ResourceActionsButton } from './ResourceActionsButton';
@@ -47,7 +48,7 @@ export const TableComponent = props => {
   props.columns.map((column: CategoryColumn) => {
     columns.push({
       title: column.title,
-      render: ({row}) => CategoryColumnField({ row, column }),
+      render: ({ row }) => CategoryColumnField({ row, column }),
     });
   });
 
@@ -64,7 +65,7 @@ export const TableComponent = props => {
           project_uuid={props.project && props.project.uuid}
         />
       )}
-      <CreateResourceButton category_uuid={props.category_uuid}/>
+      <CreateResourceButton category_uuid={props.category_uuid} />
     </>
   );
 
@@ -74,7 +75,7 @@ export const TableComponent = props => {
       columns={columns}
       verboseName={translate('Resources')}
       actions={tableActions}
-      initialSorting={{field: 'created', mode: 'desc'}}
+      initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
     />
@@ -84,11 +85,14 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ProjectResourcesList',
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: props => props.project ? ({
-    project_uuid: props.project.uuid,
-    category_uuid: props.category_uuid,
-    state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
-  }) : {},
+  mapPropsToFilter: props =>
+    props.project
+      ? {
+          project_uuid: props.project.uuid,
+          category_uuid: props.category_uuid,
+          state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+        }
+      : {},
   queryField: 'name',
 };
 

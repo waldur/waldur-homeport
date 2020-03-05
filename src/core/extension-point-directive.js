@@ -8,6 +8,6 @@ export default function extensionPoint($compile, extensionPointService) {
         element.html(templates.join(''));
         $compile(element.contents())(scope);
       }
-    }
+    },
   };
 }

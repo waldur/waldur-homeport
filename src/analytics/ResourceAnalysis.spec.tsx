@@ -17,12 +17,16 @@ const initialProps = {
   translate,
 };
 
-const renderWrapper = (props?) => shallow(<PureResourceAnalysis {...initialProps} {...props} />);
+const renderWrapper = (props?) =>
+  shallow(<PureResourceAnalysis {...initialProps} {...props} />);
 
-const getLoadingSpinner = (container: ShallowWrapper) => container.find(LoadingSpinner);
-const getResourceAnalysisList = (container: ShallowWrapper) => container.find(ResourceAnalysisList);
+const getLoadingSpinner = (container: ShallowWrapper) =>
+  container.find(LoadingSpinner);
+const getResourceAnalysisList = (container: ShallowWrapper) =>
+  container.find(ResourceAnalysisList);
 const getTitle = (container: ShallowWrapper) => container.find('.ibox-title');
-const getSearchInput = (container: ShallowWrapper) => container.find('.search-box input');
+const getSearchInput = (container: ShallowWrapper) =>
+  container.find('.search-box input');
 
 describe('ResourceAnalysis', () => {
   it('renders LoadingSpinner on loading', () => {
@@ -36,7 +40,11 @@ describe('ResourceAnalysis', () => {
 
   it('renders project count', () => {
     const wrapper = renderWrapper();
-    expect(getTitle(wrapper).text().indexOf('1') !== -1).toBe(true);
+    expect(
+      getTitle(wrapper)
+        .text()
+        .indexOf('1') !== -1,
+    ).toBe(true);
   });
 
   it('invokes handler on input on change event', () => {

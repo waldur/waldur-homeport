@@ -12,8 +12,8 @@ export class SecretValueField extends React.Component<SecretValueFieldProps> {
   };
 
   onToggle = () => {
-    this.setState({showSecret: !this.state.showSecret});
-  }
+    this.setState({ showSecret: !this.state.showSecret });
+  };
 
   render() {
     const { showSecret } = this.state;
@@ -30,9 +30,11 @@ export class SecretValueField extends React.Component<SecretValueFieldProps> {
           autoComplete="new-password"
           className="form-control"
         />
-        <a className={iconClass}
+        <a
+          className={iconClass}
           title={showSecret ? 'Hide' : 'Show'}
-          onClick={this.onToggle}/>
+          onClick={this.onToggle}
+        />
       </div>
     );
   }

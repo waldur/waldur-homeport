@@ -15,6 +15,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
 import { ResourceState } from '../types';
+
 import { CustomerResourcesListPlaceholder } from './CustomerResourcesListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
@@ -62,12 +63,15 @@ export const TableComponent = props => {
       title: translate('Actions'),
       render: ({ row }) => {
         const body = (
-          <div className={classNames({disabled: !row.is_usage_based})}>
-            <ResourceShowUsageButton resource={row.uuid}/>
+          <div className={classNames({ disabled: !row.is_usage_based })}>
+            <ResourceShowUsageButton resource={row.uuid} />
           </div>
         );
         if (!row.is_usage_based) {
-          return wrapTooltip(translate('Usage information is not available.'), body);
+          return wrapTooltip(
+            translate('Usage information is not available.'),
+            body,
+          );
         } else {
           return body;
         }
@@ -79,9 +83,9 @@ export const TableComponent = props => {
     <Table
       {...props}
       columns={columns}
-      placeholderComponent={<CustomerResourcesListPlaceholder/>}
+      placeholderComponent={<CustomerResourcesListPlaceholder />}
       verboseName={translate('Resources')}
-      initialSorting={{field: 'created', mode: 'desc'}}
+      initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       hasQuery={true}
       showPageSizeSelector={true}
@@ -118,13 +122,7 @@ const exportRow = row => [
   row.plan_name,
 ];
 
-const exportFields = [
-  'Name',
-  'Project',
-  'Category',
-  'State',
-  'Plan',
-];
+const exportFields = ['Name', 'Project', 'Category', 'State', 'Plan'];
 
 const TableOptions = {
   table: 'CustomerResourcesList',
@@ -145,4 +143,6 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const CustomerResourcesList = enhance(TableComponent) as React.ComponentType<{}>;
+export const CustomerResourcesList = enhance(
+  TableComponent,
+) as React.ComponentType<{}>;

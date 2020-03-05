@@ -15,7 +15,12 @@ import { openModalDialog } from '@waldur/modal/actions';
 import * as actions from './actions';
 import './IssueCommentItem.scss';
 import { IssueCommentsFormContainer } from './IssueCommentsFormContainer';
-import { getIsDeleting, getIsUiDisabled, getIsFormToggleDisabled, getUser } from './selectors';
+import {
+  getIsDeleting,
+  getIsUiDisabled,
+  getIsFormToggleDisabled,
+  getUser,
+} from './selectors';
 import { Comment, User } from './types';
 import * as utils from './utils';
 
@@ -48,12 +53,17 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
     toggleForm,
     translate,
   } = props;
-  const userList = users && users[comment.author_uuid] && users[comment.author_uuid].map(currentUser =>
-    (<span>{currentUser.toUpperCase()}</span>)
-  );
+  const userList =
+    users &&
+    users[comment.author_uuid] &&
+    users[comment.author_uuid].map((currentUser, index) => (
+      <React.Fragment key={index}>{currentUser.toUpperCase()}</React.Fragment>
+    ));
   const onCommentClick = evt => {
     const target = evt.target as HTMLElement;
-    if (!target.matches('img')) { return; }
+    if (!target.matches('img')) {
+      return;
+    }
     openAttachmentPreview(target.getAttribute('src'));
   };
 
@@ -61,7 +71,8 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
     <div className="comment-item vertical-timeline-block">
       {deleting && <LoadingOverlay />}
       <div className="vertical-timeline-icon">
-        <Gravatar className="b-r-xl img-sm"
+        <Gravatar
+          className="b-r-xl img-sm"
           email={comment.author_email || ''}
           size={32}
           default="mm"
@@ -74,7 +85,7 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
             <span>{translate('commented:')}</span>
           </div>
           <div className="comment-item__controls">
-            {(user.is_staff || user.uuid === comment.author_uuid) &&
+            {(user.is_staff || user.uuid === comment.author_uuid) && (
               <>
                 <button
                   className="comment-item__edit btn btn-link"
@@ -91,7 +102,7 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
                   <i className="fa fa-trash" aria-hidden="true" />
                 </button>
               </>
-            }
+            )}
             {!comment.is_public && (
               <span className="label label-default text-uppercase">
                 {translate('Internal')}
@@ -101,14 +112,21 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
         </div>
         <div
           className="comment-item__content"
-          dangerouslySetInnerHTML={{ __html: $sanitize(utils.formatJiraMarkup(comment.description, attachments)) }}
+          dangerouslySetInnerHTML={{
+            __html: $sanitize(
+              utils.formatJiraMarkup(comment.description, attachments),
+            ),
+          }}
           onClick={onCommentClick}
         />
         <div className="small text-muted m-t-sm">
           <div>{userList}</div>
           <div>{formatMediumDateTime(new Date(comment.created))}</div>
         </div>
-        <IssueCommentsFormContainer formId={comment.uuid} defaultMessage={comment.description} />
+        <IssueCommentsFormContainer
+          formId={comment.uuid}
+          defaultMessage={comment.description}
+        />
       </div>
     </div>
   );
@@ -126,10 +144,14 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  toggleForm: (): void => dispatch(actions.issueCommentsFormToggle(ownProps.comment.uuid)),
-  openDeleteDialog: (): void => dispatch(createDeleteDialog(ownProps.comment.uuid)),
-  openUserDialog: (): void => dispatch(utils.openUserModal(ownProps.comment.author_uuid)),
-  openAttachmentPreview: (url: string): void => dispatch(openAttachmentModal(url)),
+  toggleForm: (): void =>
+    dispatch(actions.issueCommentsFormToggle(ownProps.comment.uuid)),
+  openDeleteDialog: (): void =>
+    dispatch(createDeleteDialog(ownProps.comment.uuid)),
+  openUserDialog: (): void =>
+    dispatch(utils.openUserModal(ownProps.comment.author_uuid)),
+  openAttachmentPreview: (url: string): void =>
+    dispatch(openAttachmentModal(url)),
 });
 
 const enhance = compose(

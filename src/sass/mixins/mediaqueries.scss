@@ -1,29 +1,41 @@
 @mixin bp($point) {
-    $bp-xs: "(max-width : 480px)";
-    $bp-xs-helpdesk: "(min-width : 480px) and (max-width : 768px)";
-    $bp-sm: "(min-width : 768px) and (max-width : 992px)";
-    $bp-md: "(min-width : 992px) and (max-width : 1200px)";
-    $bp-lightmd: "(min-width : 1200px) and (max-width : 1260px)";
-    $bp-lg: "(min-width : 1260px)";
+  $bp-xs: '(max-width : 480px)';
+  $bp-xs-helpdesk: '(min-width : 480px) and (max-width : 768px)';
+  $bp-sm: '(min-width : 768px) and (max-width : 992px)';
+  $bp-md: '(min-width : 992px) and (max-width : 1200px)';
+  $bp-lightmd: '(min-width : 1200px) and (max-width : 1260px)';
+  $bp-lg: '(min-width : 1260px)';
 
-    // extrasmall mobile
-    @if $point == xs {
-        @media #{$bp-xs} { @content; }
-        @media #{$bp-xs-helpdesk} { @content; }
+  // extrasmall mobile
+  @if $point == xs {
+    @media #{$bp-xs} {
+      @content;
     }
-    // small (not only mobile)
-    @if $point == sm {
-        @media #{$bp-sm} { @content; }
+    @media #{$bp-xs-helpdesk} {
+      @content;
     }
-    // medium smallscreen laptop & tablets & some mobile
-    @if $point == md {
-        @media #{$bp-md} { @content; }
+  }
+  // small (not only mobile)
+  @if $point == sm {
+    @media #{$bp-sm} {
+      @content;
     }
-    @if $point == lightmd {
-        @media #{$bp-lightmd} { @content; }
+  }
+  // medium smallscreen laptop & tablets & some mobile
+  @if $point == md {
+    @media #{$bp-md} {
+      @content;
     }
-    // medium big screens
-    @if $point == lg {
-        @media #{$bp-lg} { @content; }
+  }
+  @if $point == lightmd {
+    @media #{$bp-lightmd} {
+      @content;
     }
+  }
+  // medium big screens
+  @if $point == lg {
+    @media #{$bp-lg} {
+      @content;
+    }
+  }
 }

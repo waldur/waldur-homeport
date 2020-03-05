@@ -45,7 +45,7 @@ const securityGroupRuleEditor = {
 
     addRule() {
       this.target.push({
-        protocol: PROTOCOLS[0]
+        protocol: PROTOCOLS[0],
       });
       this.form.$setDirty();
     }
@@ -57,7 +57,7 @@ const securityGroupRuleEditor = {
       }
       this.form.$setDirty();
     }
-  }
+  },
 };
 
 export default securityGroupRuleEditor;

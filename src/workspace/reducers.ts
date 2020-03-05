@@ -17,7 +17,6 @@ const INITIAL_STATE: Workspace = {
 
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-
     case USER_LOGGED_IN:
     case USER_UPDATED:
       return {

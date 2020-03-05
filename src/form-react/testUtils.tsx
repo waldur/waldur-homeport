@@ -12,19 +12,22 @@ import {
 
 export const withTestStore = store => WrappedComponent => (
   <Provider store={store}>
-    <WrappedComponent/>
+    <WrappedComponent />
   </Provider>
 );
 
 export const withReduxForm = WrappedComponent => {
-  const reducer = combineReducers({form: formReducer});
+  const reducer = combineReducers({ form: formReducer });
   const store = createStore(reducer);
   return withTestStore(store)(WrappedComponent);
 };
 
-export const withTestForm = WrappedComponent => reduxForm({form: 'testForm'})(WrappedComponent);
+export const withTestForm = WrappedComponent =>
+  reduxForm({ form: 'testForm' })(WrappedComponent);
 
-export const mountTestForm: (component: React.ComponentType) => ReactWrapper = compose(mount, withReduxForm, withTestForm);
+export const mountTestForm: (
+  component: React.ComponentType,
+) => ReactWrapper = compose(mount, withReduxForm, withTestForm);
 
 export const errorOnSubmit = error => {
   const formError = new SubmissionError(error);
@@ -35,7 +38,7 @@ export const errorOnSubmit = error => {
       throw formError;
     };
   });
-  return {onSubmit, promise};
+  return { onSubmit, promise };
 };
 
 export const setFieldValue = (wrapper, field, value) =>

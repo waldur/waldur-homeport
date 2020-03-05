@@ -7,7 +7,8 @@ class SummaryController {
     $uibModal,
     currentStateService,
     ErrorMessageFormatter,
-    AnsibleJobsService) {
+    AnsibleJobsService,
+  ) {
     this.$q = $q;
     this.$uibModal = $uibModal;
     this.currentStateService = currentStateService;
@@ -18,28 +19,36 @@ class SummaryController {
   $onInit() {
     this.prices = {};
     this.loading = true;
-    this.loadData().then(() => {
-      this.loading = false;
-    }).catch(response => {
-      this.error = this.ErrorMessageFormatter.format(response);
-      this.loading = false;
-    });
+    this.loadData()
+      .then(() => {
+        this.loading = false;
+      })
+      .catch(response => {
+        this.error = this.ErrorMessageFormatter.format(response);
+        this.loading = false;
+      });
   }
 
   loadData() {
-    return this.$q.all([
-      this.currentStateService.getProject(),
-      this.currentStateService.getCustomer(),
-      this.getEstimate()
-    ]).then(([project, customer, estimate]) => {
-      this.project = project;
-      this.customer = customer;
-      this.estimate = estimate;
-    });
+    return this.$q
+      .all([
+        this.currentStateService.getProject(),
+        this.currentStateService.getCustomer(),
+        this.getEstimate(),
+      ])
+      .then(([project, customer, estimate]) => {
+        this.project = project;
+        this.customer = customer;
+        this.estimate = estimate;
+      });
   }
 
   getEstimate() {
-    const payload = this.AnsibleJobsService.getPayload(this.job, this.playbook, this.provider);
+    const payload = this.AnsibleJobsService.getPayload(
+      this.job,
+      this.playbook,
+      this.provider,
+    );
     return this.AnsibleJobsService.estimate(payload);
   }
 
@@ -64,7 +73,7 @@ class SummaryController {
       component: 'ansiblePriceExplanation',
       resolve: {
         estimate: () => this.estimate,
-      }
+      },
     });
   }
 }
@@ -76,7 +85,7 @@ const ansibleJobCheckoutSummary = {
     job: '<',
     provider: '<',
     playbook: '<',
-  }
+  },
 };
 
 export default ansibleJobCheckoutSummary;

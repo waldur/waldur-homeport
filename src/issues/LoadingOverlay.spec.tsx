@@ -8,9 +8,12 @@ import { LoadingOverlay } from './LoadingOverlay';
 const renderWrapper = (options = {}) =>
   shallow(<LoadingOverlay {...options} />);
 
-const hasSpinner = (wrapper: ShallowWrapper) => wrapper.find(LoadingSpinner).length === 1;
-const hasClass = (wrapper: ShallowWrapper, className: string) => wrapper.find(`.${className}`).length === 1;
-const hasMessage = (wrapper: ShallowWrapper) => wrapper.find('.loading-overlay__message').length === 1;
+const hasSpinner = (wrapper: ShallowWrapper) =>
+  wrapper.find(LoadingSpinner).length === 1;
+const hasClass = (wrapper: ShallowWrapper, className: string) =>
+  wrapper.find(`.${className}`).length === 1;
+const hasMessage = (wrapper: ShallowWrapper) =>
+  wrapper.find('.loading-overlay__message').length === 1;
 
 describe('LoadingOverlay', () => {
   it('renders spinner', () => {

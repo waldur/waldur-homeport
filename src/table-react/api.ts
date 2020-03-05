@@ -6,6 +6,17 @@ import { parseQueryString } from '@waldur/core/utils';
 
 import { Fetcher, TableRequest } from './types';
 
+export function getNextPageNumber(link: string): number {
+  if (link) {
+    const parts = parseQueryString(link.split('/?')[1]);
+    if (parts && parts.page) {
+      return parseInt(parts.page, 10);
+    }
+  } else {
+    return null;
+  }
+}
+
 export function createFetcher(endpoint: string): Fetcher {
   return (request: TableRequest) => {
     const url = `${ENV.apiEndpoint}api/${endpoint}/`;
@@ -29,7 +40,10 @@ export function createFetcher(endpoint: string): Fetcher {
   };
 }
 
-export async function fetchAll(fetch: Fetcher, filter?: Record<string, string>) {
+export async function fetchAll(
+  fetch: Fetcher,
+  filter?: Record<string, string>,
+) {
   const request: TableRequest = {
     pageSize: 50,
     currentPage: 1,
@@ -49,15 +63,4 @@ export async function fetchAll(fetch: Fetcher, filter?: Record<string, string>) 
     }
   }
   return result;
-}
-
-export function getNextPageNumber(link: string): number {
-  if (link) {
-    const parts = parseQueryString(link.split('/?')[1]);
-    if (parts && parts.page) {
-      return parseInt(parts.page, 10);
-    }
-  } else {
-    return null;
-  }
 }

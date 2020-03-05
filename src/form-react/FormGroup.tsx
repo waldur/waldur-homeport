@@ -27,7 +27,8 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
       layout,
       meta: { touched, error },
       children,
-      ...rest} = this.props;
+      ...rest
+    } = this.props;
     const newProps = {
       input,
       ...omit(rest, 'clearOnUnmount'),
@@ -40,18 +41,33 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
     return (
       <div className="form-group">
         {!hideLabel && (
-          <label className={layout !== 'vertical' ? classNames('control-label', labelClass) : undefined}>
+          <label
+            className={
+              layout !== 'vertical'
+                ? classNames('control-label', labelClass)
+                : undefined
+            }
+          >
             {tooltip && (
               <Tooltip id="form-field-tooltip" label={tooltip}>
-                <i className="fa fa-question-circle"/>{' '}
+                <i className="fa fa-question-circle" />{' '}
               </Tooltip>
             )}
-            {label}{required && <span className="text-danger"> *</span>}
+            {label}
+            {required && <span className="text-danger"> *</span>}
           </label>
         )}
-        <div className={layout !== 'vertical' ? classNames(controlClass, {'col-sm-offset-3': hideLabel}) : undefined}>
-          {React.cloneElement((children as any), newProps)}
-          {description && <p className="help-block m-b-none text-muted">{description}</p>}
+        <div
+          className={
+            layout !== 'vertical'
+              ? classNames(controlClass, { 'col-sm-offset-3': hideLabel })
+              : undefined
+          }
+        >
+          {React.cloneElement(children as any, newProps)}
+          {description && (
+            <p className="help-block m-b-none text-muted">{description}</p>
+          )}
           {touched && <FieldError error={error} />}
         </div>
       </div>
@@ -60,7 +76,9 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
 
   componentWillUnmount() {
     const { meta, input, clearOnUnmount } = this.props;
-    if (clearOnUnmount === false) { return; }
+    if (clearOnUnmount === false) {
+      return;
+    }
     meta.dispatch(clearFields(meta.form, false, false, input.name));
   }
 }

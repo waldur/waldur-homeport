@@ -8,6 +8,6 @@ export default function visible(features) {
       if (!features.isVisible(attrs.visible)) {
         element.remove();
       }
-    }
+    },
   };
 }

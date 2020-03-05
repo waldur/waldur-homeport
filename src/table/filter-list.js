@@ -5,7 +5,7 @@ const filterList = {
   bindings: {
     searchFilters: '<',
     isLoading: '<',
-    onSelect: '&'
+    onSelect: '&',
   },
   controller: class FilterListController {
     // @ngInject
@@ -14,11 +14,15 @@ const filterList = {
     }
 
     $onInit() {
-      this.$scope.$watch(() => this.searchFilters, () => {
-        this.onSelect();
-      }, true);
+      this.$scope.$watch(
+        () => this.searchFilters,
+        () => {
+          this.onSelect();
+        },
+        true,
+      );
     }
-  }
+  },
 };
 
 export default filterList;

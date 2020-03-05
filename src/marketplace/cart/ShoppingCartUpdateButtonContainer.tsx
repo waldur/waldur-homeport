@@ -5,6 +5,7 @@ import { isUpdatingItem } from '@waldur/marketplace/cart/store/selectors';
 import { OuterState } from '@waldur/marketplace/cart/types';
 
 import { OrderItemResponse } from '../orders/types';
+
 import { ShoppingCartUpdateButton } from './ShoppingCartUpdateButton';
 import { updateItemRequest } from './store/actions';
 
@@ -26,6 +27,11 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
   updateItem: () => dispatch(updateItemRequest(ownProps.item)),
 });
 
-const enhance = connect<{}, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps);
+const enhance = connect<{}, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
-export const ShoppingCartUpdateButtonContainer = enhance(ShoppingCartUpdateButton);
+export const ShoppingCartUpdateButtonContainer = enhance(
+  ShoppingCartUpdateButton,
+);

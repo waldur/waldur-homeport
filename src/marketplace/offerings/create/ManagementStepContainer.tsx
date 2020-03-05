@@ -7,13 +7,14 @@ import {
   showOfferingOptions,
   getProviderType,
   isOfferingTypeSchedulable,
-  getPluginOptionsForm
+  getPluginOptionsForm,
 } from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { findProvider } from '@waldur/providers/registry';
 
 import { getOffering, getType, getTypeLabel } from '../store/selectors';
+
 import { ManagementStep, ManagementStepProps } from './ManagementStep';
 
 const mapStateToProps = state => {
@@ -38,10 +39,13 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  openServiceSettingsDetails: () => dispatch(openModalDialog(
-    'serviceSettingsDetailsDialog', {size: 'lg'})),
+  openServiceSettingsDetails: () =>
+    dispatch(openModalDialog('serviceSettingsDetailsDialog', { size: 'lg' })),
 });
 
-const connector = compose(withTranslation, connect(mapStateToProps, mapDispatchToProps));
+const connector = compose(
+  withTranslation,
+  connect(mapStateToProps, mapDispatchToProps),
+);
 
 export const ManagementStepContainer = connector(ManagementStep);

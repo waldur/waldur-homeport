@@ -3,7 +3,10 @@ import Select from 'react-select';
 import { Validator } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { parseIntField, formatIntField } from '@waldur/marketplace/common/utils';
+import {
+  parseIntField,
+  formatIntField,
+} from '@waldur/marketplace/common/utils';
 
 import { CustomRadioButton } from './CustomRadioButton';
 
@@ -53,7 +56,7 @@ export const configAttrField = attribute => {
             multi={true}
           />
         ),
-        normalize: v => v ? v : '',
+        normalize: v => (v ? v : ''),
       };
       break;
     case 'choice':
@@ -67,22 +70,23 @@ export const configAttrField = attribute => {
             labelKey="title"
           />
         ),
-        normalize: v => v ? v : '',
+        normalize: v => (v ? v : ''),
       };
       break;
     case 'boolean':
       attr = {
         component: componentProp => {
           const choices = [
-            {value: '', label: 'All'},
-            {value: 'true', label: 'Yes'},
-            {value: 'false', label: 'No'},
+            { value: '', label: 'All' },
+            { value: 'true', label: 'Yes' },
+            { value: 'false', label: 'No' },
           ];
           return (
             <CustomRadioButton
               choices={choices}
               name={attribute.key}
-              input={componentProp.input}/>
+              input={componentProp.input}
+            />
           );
         },
       };

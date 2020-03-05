@@ -10,7 +10,11 @@ import { Attachment } from '@waldur/issues/attachments/types';
 import * as actions from './actions';
 import * as constants from './constants';
 import { IssueCommentsForm } from './IssueCommentsForm';
-import { getCommentFormIsOpen, getPendingAttachments, getIsUiDisabled } from './selectors';
+import {
+  getCommentFormIsOpen,
+  getPendingAttachments,
+  getIsUiDisabled,
+} from './selectors';
 
 interface PureIssueCommentsFormContainerProps extends InjectedFormProps {
   opened: boolean;
@@ -26,7 +30,13 @@ interface PureIssueCommentsFormContainerProps extends InjectedFormProps {
 }
 
 const onCancel = (props: PureIssueCommentsFormContainerProps) => () => {
-  const { reset, deletePendingAttachments, formToggle, submitting, cancelSubmit } = props;
+  const {
+    reset,
+    deletePendingAttachments,
+    formToggle,
+    submitting,
+    cancelSubmit,
+  } = props;
 
   if (!submitting) {
     reset();
@@ -36,16 +46,17 @@ const onCancel = (props: PureIssueCommentsFormContainerProps) => () => {
   cancelSubmit();
 };
 
-export const PureIssueCommentsFormContainer = (props: PureIssueCommentsFormContainerProps) => {
+export const PureIssueCommentsFormContainer = (
+  props: PureIssueCommentsFormContainerProps,
+) => {
   const { attachments, uploadingAttachments, opened } = props;
 
-  if (!opened) { return null; }
+  if (!opened) {
+    return null;
+  }
   return (
     <div>
-      <IssueCommentsForm
-        {...props}
-        onCancel={onCancel(props)}
-      />
+      <IssueCommentsForm {...props} onCancel={onCancel(props)} />
       <IssueAttachmentsList
         attachments={attachments}
         uploading={uploadingAttachments}
@@ -66,10 +77,18 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  formToggle: (): void => dispatch(actions.issueCommentsFormToggle(ownProps.formId)),
-  onSubmit: (data: { [key: string]: string }): void => dispatch(actions.issueCommentsFormSubmit(data[constants.FORM_FIELDS.comment], ownProps.formId)),
+  formToggle: (): void =>
+    dispatch(actions.issueCommentsFormToggle(ownProps.formId)),
+  onSubmit: (data: { [key: string]: string }): void =>
+    dispatch(
+      actions.issueCommentsFormSubmit(
+        data[constants.FORM_FIELDS.comment],
+        ownProps.formId,
+      ),
+    ),
   cancelSubmit: (): void => dispatch(actions.issueCommentsFormSubmitCancel()),
-  deletePendingAttachments: (): void => dispatch(actions.issueCommentsPendingAttachmentsDelete()),
+  deletePendingAttachments: (): void =>
+    dispatch(actions.issueCommentsPendingAttachmentsDelete()),
 });
 
 const enhance = compose(
@@ -80,4 +99,6 @@ const enhance = compose(
   }),
 );
 
-export const IssueCommentsFormContainer = enhance(PureIssueCommentsFormContainer);
+export const IssueCommentsFormContainer = enhance(
+  PureIssueCommentsFormContainer,
+);

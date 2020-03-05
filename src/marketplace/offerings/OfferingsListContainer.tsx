@@ -7,8 +7,8 @@ import { OfferingsList } from './OfferingsList';
 
 const OfferingsListContainer = () => (
   <div className="ibox-content">
-    <OfferingsFilter/>
-    <OfferingsList/>
+    <OfferingsFilter />
+    <OfferingsList />
   </div>
 );
 

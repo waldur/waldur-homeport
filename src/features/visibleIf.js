@@ -27,6 +27,6 @@ export default function visibleIf(features) {
         }
         unbind();
       });
-    }
+    },
   };
 }

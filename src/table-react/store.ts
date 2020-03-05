@@ -23,82 +23,85 @@ const INITIAL_STATE: TableState = {
 
 const pagination = (state = INITIAL_STATE, action): TableState => {
   switch (action.type) {
-  case actions.FETCH_LIST_START:
-    return {
-      ...state,
-      loading: true,
-    };
+    case actions.FETCH_LIST_START:
+      return {
+        ...state,
+        loading: true,
+      };
 
-  case actions.FETCH_LIST_DONE:
-    return {
-      ...state,
-      entities: action.payload.entities,
-      order: action.payload.order,
-      pagination: {
-        ...state.pagination,
-        resultCount: action.payload.resultCount,
-      },
-      loading: false,
-      error: null,
-    };
+    case actions.FETCH_LIST_DONE:
+      return {
+        ...state,
+        entities: action.payload.entities,
+        order: action.payload.order,
+        pagination: {
+          ...state.pagination,
+          resultCount: action.payload.resultCount,
+        },
+        loading: false,
+        error: null,
+      };
 
-  case actions.FETCH_LIST_ERROR:
-    return {
-      ...state,
-      loading: false,
-      error: action.payload.error,
-    };
+    case actions.FETCH_LIST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
 
-  case actions.FETCH_LIST_GOTO_PAGE:
-    return {
-      ...state,
-      pagination: {
-        ...state.pagination,
-        currentPage: action.payload.page,
-      },
-    };
+    case actions.FETCH_LIST_GOTO_PAGE:
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          currentPage: action.payload.page,
+        },
+      };
 
-  case actions.SET_FILTER_QUERY:
-    return {
-      ...state,
-      query: action.payload.query,
-    };
+    case actions.SET_FILTER_QUERY:
+      return {
+        ...state,
+        query: action.payload.query,
+      };
 
-  case actions.RESET_PAGINATION:
-    return {
-      ...state,
-      pagination: {
-        ...state.pagination,
-        currentPage: 1,
-      },
-    };
+    case actions.RESET_PAGINATION:
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          currentPage: 1,
+        },
+      };
 
-  case actions.ENTITY_CREATE:
-    return {
-      ...state,
-      entities: {
-        ...state.entities,
-        [action.payload.uuid]: action.payload.content,
-      },
-      order: [...state.order, action.payload.uuid],
-    };
+    case actions.ENTITY_CREATE:
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          [action.payload.uuid]: action.payload.content,
+        },
+        order: [...state.order, action.payload.uuid],
+      };
 
-  case actions.ENTITY_UPDATE:
-    return {
-      ...state,
-      entities: {
-        ...state.entities,
-        [action.payload.uuid]: action.payload.content,
-      },
-    };
+    case actions.ENTITY_UPDATE:
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          [action.payload.uuid]: action.payload.content,
+        },
+      };
 
     case actions.ENTITY_DELETE:
-      const {[action.payload.uuid]: _, ...entities} = state.entities;
+      const { [action.payload.uuid]: _, ...entities } = state.entities;
       const index = state.order.indexOf(action.payload.uuid);
       return {
         ...state,
         entities,
-        order: [...state.order.slice(0, index), ...state.order.slice(index + 1)],
+        order: [
+          ...state.order.slice(0, index),
+          ...state.order.slice(index + 1),
+        ],
       };
 
     case actions.PAGE_SIZE_UPDATE:
@@ -150,8 +153,8 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         },
       };
 
-  default:
-    return state;
+    default:
+      return state;
   }
 };
 

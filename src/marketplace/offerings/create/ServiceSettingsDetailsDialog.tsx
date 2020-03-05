@@ -16,7 +16,7 @@ import { getOffering } from '../store/selectors';
 
 export const ServiceSettingsDetailsDialog = () => {
   const offering = useSelector(getOffering);
-  const {state, call} = useQuery(async () => {
+  const { state, call } = useQuery(async () => {
     const provider = (await $http.get(offering.offering.scope)).data;
     return {
       initialValues: {
@@ -30,23 +30,27 @@ export const ServiceSettingsDetailsDialog = () => {
   React.useEffect(call, []);
 
   const dispatch = useDispatch();
-  const updateProvider = React.useCallback(data => actions.updateProvider(data, dispatch), []);
+  const updateProvider = React.useCallback(
+    data => actions.updateProvider(data, dispatch),
+    [],
+  );
 
   return (
     <ModalDialog
       title={translate('Provider details')}
       footer={<CloseDialogButton />}
     >
-      {state.loading ? <LoadingSpinner/> :
-       state.error ? <h3>{translate('Unable to load provider details.')}</h3> :
-       !state.loaded ? null : (
+      {state.loading ? (
+        <LoadingSpinner />
+      ) : state.error ? (
+        <h3>{translate('Unable to load provider details.')}</h3>
+      ) : !state.loaded ? null : (
         <ProviderUpdateForm
           {...state.data}
           updateProvider={updateProvider}
           translate={translate}
         />
-       )
-      }
+      )}
     </ModalDialog>
   );
 };

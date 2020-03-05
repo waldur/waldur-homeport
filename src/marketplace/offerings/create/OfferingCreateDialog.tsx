@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 
 import { STEPS, OfferingStep } from '../types';
 import { setStateBreadcrumbs } from '../utils';
+
 import { AccountingStepContainer } from './AccountingStepContainer';
 import { DescriptionStepContainer } from './DescriptionStepContainer';
 import { ManagementStepContainer } from './ManagementStepContainer';
@@ -38,8 +39,9 @@ interface OfferingCreateDialogProps extends InjectedFormProps {
   goNext(): void;
 }
 
-export class OfferingCreateDialog extends React.Component<OfferingCreateDialogProps> {
-
+export class OfferingCreateDialog extends React.Component<
+  OfferingCreateDialogProps
+> {
   constructor(props) {
     super(props);
     setStateBreadcrumbs();
@@ -60,10 +62,11 @@ export class OfferingCreateDialog extends React.Component<OfferingCreateDialogPr
       erred,
       handleSubmit,
       createOffering,
-      ...rest} = this.props;
+      ...rest
+    } = this.props;
 
     if (loading) {
-      return <LoadingSpinner/>;
+      return <LoadingSpinner />;
     } else if (erred) {
       return <p>{translate('Unable to load data.')}</p>;
     } else if (loaded) {
@@ -72,8 +75,9 @@ export class OfferingCreateDialog extends React.Component<OfferingCreateDialogPr
           <Col lg={10} lgOffset={1}>
             <form
               onSubmit={handleSubmit(createOffering)}
-              className="form-horizontal">
-              <Wizard steps={STEPS} tabs={TABS} {...rest}/>
+              className="form-horizontal"
+            >
+              <Wizard steps={STEPS} tabs={TABS} {...rest} />
             </form>
           </Col>
         </Row>
