@@ -6,12 +6,10 @@
     class="details-table__row"
     ng-repeat="quota in $ctrl.resource.quotas | orderBy:'name'"
   >
-    <div class="details-table__key">
-      {{ ::quota.name | quotaName }}:
-    </div>
+    <div class="details-table__key">{{ ::quota.name | quotaName }}:</div>
     <div class="details-table__value">
-      {{ quota.usage | quotaValue:quota.name }} <span translate>of</span>
-      {{ quota.limit | quotaValue:quota.name }}
+      {{ quota.usage | quotaValue: quota.name }} <span translate>of</span>
+      {{ quota.limit | quotaValue: quota.name }}
     </div>
   </div>
 </div>

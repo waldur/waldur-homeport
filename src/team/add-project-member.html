@@ -27,8 +27,10 @@
 
     <div class="form-group" ng-if="$ctrl.resolve.editUser">
       <p class="form-control-static">
-        <strong translate>User</strong>: {{ $ctrl.resolve.editUser.full_name ||
-        $ctrl.resolve.editUser.username }}
+        <strong translate>User</strong>:
+        {{
+          $ctrl.resolve.editUser.full_name || $ctrl.resolve.editUser.username
+        }}
       </p>
     </div>
 

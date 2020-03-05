@@ -27,14 +27,14 @@
   class="help-block text-danger"
   ng-if="$ctrl.form[$ctrl.field.name].$error.min"
 >
-  <span translate>Minimal valid value is</span> {{ $ctrl.minValue }} {{
-  ::$ctrl.field.units }}
+  <span translate>Minimal valid value is</span> {{ $ctrl.minValue }}
+  {{ ::$ctrl.field.units }}
 </p>
 
 <p
   class="help-block text-danger"
   ng-if="$ctrl.form[$ctrl.field.name].$error.max"
 >
-  <span translate>Maximal valid value is</span> {{ $ctrl.maxValue }} {{
-  ::$ctrl.field.units }}
+  <span translate>Maximal valid value is</span> {{ $ctrl.maxValue }}
+  {{ ::$ctrl.field.units }}
 </p>

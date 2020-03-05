@@ -67,7 +67,7 @@
             repeat="option in $ctrl.serviceProviderOptions track by option.value"
           >
             <span uib-tooltip="{{ option.type }}">
-              <img ng-src="{{option.img_src}}" ng-style="{'width': '19px'}" />
+              <img ng-src="{{ option.img_src }}" ng-style="{'width': '19px'}" />
               {{ option.display_name }}
             </span>
           </ui-select-choices>

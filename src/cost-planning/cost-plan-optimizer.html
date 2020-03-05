@@ -39,7 +39,7 @@
         </td>
         <td>
           <span ng-if="service.price">
-            {{ (service.price * 30) | defaultCurrency }}
+            {{ service.price * 30 | defaultCurrency }}
           </span>
           <span ng-if="!service.price" translate>
             N/A

@@ -32,8 +32,8 @@
       </button>
       <a
         class="btn btn-primary"
-        download="invoice-{{$ctrl.invoice.number}}.pdf"
-        ng-href="{{$ctrl.invoice.pdf}}"
+        download="invoice-{{ $ctrl.invoice.number }}.pdf"
+        ng-href="{{ $ctrl.invoice.pdf }}"
         target="_self"
         ng-if="$ctrl.canDownloadInvoice()"
       >

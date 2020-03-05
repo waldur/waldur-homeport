@@ -18,8 +18,10 @@
   ng-change="$ctrl.selectLanguage($ctrl.currentLanguage)"
   ng-if="::$ctrl.selectBox"
 >
-  <ui-select-match placeholder="{{'Please select your language' | translate}}">
-    {{$select.selected.label}}
+  <ui-select-match
+    placeholder="{{ 'Please select your language' | translate }}"
+  >
+    {{ $select.selected.label }}
   </ui-select-match>
   <ui-select-choices repeat="item in $ctrl.languageChoices | orderBy: 'code'">
     <div ng-bind-html="item.label | highlight: $select.search"></div>

@@ -23,8 +23,8 @@
             ></billing-customer-details>
             <div>
               <span
-                ><strong><span translate>Invoice date</span>:</strong> {{
-                ::$ctrl.invoice.invoice_date || '&mdash;'}}</span
+                ><strong><span translate>Invoice date</span>:</strong>
+                {{ ::$ctrl.invoice.invoice_date || '&mdash;'}}</span
               ><br />
               <span>
                 <strong><span translate>Due date</span>:</strong>
@@ -59,24 +59,24 @@
                     <strong>{{ $ctrl.getItemName(item) }}</strong>
                   </div>
                   <small>
-                    <span translate>Start time</span>: {{ ::item.start ||
-                    '&mdash;' | dateTime }}. <span translate>End time</span>: {{
-                    ::item.end || '&mdash;' | dateTime }}.
+                    <span translate>Start time</span>:
+                    {{ ::item.start || '&mdash;' | dateTime }}.
+                    <span translate>End time</span>:
+                    {{ ::item.end || '&mdash;' | dateTime }}.
                   </small>
                   <div ng-if="item.details.service_provider_name">
                     <small>
-                      <span translate>Service provider</span>: {{
-                      ::item.details.service_provider_name }}
+                      <span translate>Service provider</span>:
+                      {{ ::item.details.service_provider_name }}
                     </small>
                   </div>
-                  <!-- <invoice-events-toggle item="item"></invoice-events-toggle> -->
                 </td>
                 <td>{{ item.factor || item.quantity }}</td>
                 <td>{{ ::item.unit_price | defaultCurrency}}</td>
                 <td ng-if="$ctrl.invoice.issuer_details.vat_code">
                   {{ ::item.tax | defaultCurrency}}
                 </td>
-                <td>{{ (item.total || item.price) | defaultCurrency}}</td>
+                <td>{{ item.total || item.price | defaultCurrency }}</td>
               </tr>
             </tbody>
           </table>

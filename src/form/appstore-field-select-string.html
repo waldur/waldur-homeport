@@ -1,6 +1,6 @@
 <ui-select ng-model="$ctrl.model[$ctrl.field.name]">
-  <ui-select-match placeholder="{{$ctrl.field.placeholder | translate}}">
-    {{$select.selected }}
+  <ui-select-match placeholder="{{ $ctrl.field.placeholder | translate }}">
+    {{ $select.selected }}
   </ui-select-match>
   <ui-select-choices
     repeat="item in $ctrl.field.choices | filter: $select.search"

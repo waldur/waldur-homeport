@@ -5,9 +5,9 @@
     ng-if="$ctrl.choices.length > 0"
   >
     <ui-select-match
-      placeholder="{{ 'Select OpenStack tenant...' | translate}}"
+      placeholder="{{ 'Select OpenStack tenant...' | translate }}"
     >
-      {{$select.selected.display_name }}
+      {{ $select.selected.display_name }}
     </ui-select-match>
     <ui-select-choices
       repeat="item.value as item in $ctrl.choices | filter: {display_name: $select.search} track by item.value"
@@ -19,6 +19,6 @@
     class="form-control-static"
     ng-if="!$ctrl.choices || $ctrl.choices.length === 0"
   >
-    {{ "There are no OpenStack tenants yet." | translate }}
+    {{ 'There are no OpenStack tenants yet.' | translate }}
   </div>
 </div>

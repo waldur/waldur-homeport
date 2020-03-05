@@ -3,7 +3,7 @@
   ng-model="$ctrl.model[$ctrl.field.name]"
   reset-search-input="false"
 >
-  <ui-select-match>{{$select.selected.display_name}}</ui-select-match>
+  <ui-select-match>{{ $select.selected.display_name }}</ui-select-match>
   <ui-select-choices
     repeat="choice.value as choice in $ctrl.choices |
      filter: { display_name: $select.search } track by $index"

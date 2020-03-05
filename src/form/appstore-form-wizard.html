@@ -15,7 +15,7 @@
         aria-selected="{{ $ctrl.selected($index) }}"
       >
         <a id="form-t-{{ $index }}" aria-controls="form-p-{{ $index }}">
-          <span class="number">{{ $index+1 }}. </span>{{ ::step.name }}
+          <span class="number">{{ $index + 1 }}. </span>{{ ::step.name }}
         </a>
       </li>
     </ul>
@@ -66,8 +66,8 @@
     </fieldset>
   </div>
   <div ng-if="$ctrl.model.errors" class="error">
-    <span translate>Following fields contain errors</span>: {{
-    $ctrl.getErredFields() }}
+    <span translate>Following fields contain errors</span>:
+    {{ $ctrl.getErredFields() }}
   </div>
   <div class="actions p-xs">
     <button
