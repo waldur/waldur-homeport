@@ -1,7 +1,6 @@
 import { InjectedFormProps } from 'redux-form';
 
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
-import { Offering } from '@waldur/marketplace/types';
 import { Project, Customer } from '@waldur/workspace/types';
 
 export type BillingPeriod = 'hour' | 'day' | 'half_month' | 'month';

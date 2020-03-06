@@ -1,8 +1,6 @@
 import { Offering, Plan } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
-import { OfferingFormData } from './types';
-
 export interface Limits {
   [key: string]: number;
 }

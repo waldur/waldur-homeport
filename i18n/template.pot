@@ -7105,11 +7105,11 @@ msgid "To correct details of your organization, please send an email to <a href=
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.html
-msgid "To create custom flavour, please send a request to {{$ctrl.supportEmail}}."
+msgid "To create custom flavour, please send a request to {{ $ctrl.supportEmail }}."
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/request-direct-access.html
-msgid "To get access, please send a request to {{$ctrl.supportEmail}}."
+msgid "To get access, please send a request to {{ $ctrl.supportEmail }}."
 msgstr ""
 
 #: src/auth/auth-init.html
