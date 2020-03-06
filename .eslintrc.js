@@ -27,7 +27,6 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
       },
     },
-    'import/internal-regex': '^@waldur/',
   },
   rules: {
     'react/prop-types': 'off',
@@ -41,6 +40,13 @@ module.exports = {
       'error',
       {
         'newlines-between': 'always',
+        'pathGroups': [
+          {
+            'pattern': '@waldur/**',
+            'group': 'internal',
+            'position': 'after'
+          }
+        ],
         groups: [
           'builtin',
           'external',
