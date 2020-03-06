@@ -190,9 +190,9 @@
     }
   },
   "lint-staged": {
-    "./src/*.{js,jsx,ts,tsx,htm,html}": [
+    "**/*.{js,jsx,ts,tsx,htm,html}": [
       "yarn prettier --write",
-      "yarn eslint --ext ts,tsx src --fix-dry-run"
+      "yarn eslint --ext ts,tsx --fix"
     ]
   }
 }
