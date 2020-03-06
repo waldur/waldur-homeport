@@ -1,9 +1,9 @@
 import * as moment from 'moment-timezone';
 import * as React from 'react';
 
-import {formatTime} from '@waldur/core/dateUtils';
-import {SelectField} from '@waldur/form-react';
-import {FormField} from '@waldur/form-react/types';
+import { formatTime } from '@waldur/core/dateUtils';
+import { SelectField } from '@waldur/form-react';
+import { FormField } from '@waldur/form-react/types';
 
 function getMomentDayRange(interval = 5) {
   const start = moment.utc().startOf('day');
@@ -19,19 +19,21 @@ function getMomentDayRange(interval = 5) {
   return timeArray;
 }
 
-export const getDurationOptions = (timeArray: number[], units = 'minutes') => timeArray.map(
-  timeUnit => ({
-    value: moment(moment.duration({[units]: timeUnit}).asMilliseconds()).format('HH:mm'),
-    label: moment.duration({[units]: timeUnit}).humanize(),
-  })
-);
-
-export const getOptions = (interval: number) => getMomentDayRange(interval)
-  .map(formatTime)
-  .map(formattedOption => ({
-    label: formattedOption,
-    value: formattedOption,
+export const getDurationOptions = (timeArray: number[], units = 'minutes') =>
+  timeArray.map(timeUnit => ({
+    value: moment(
+      moment.duration({ [units]: timeUnit }).asMilliseconds(),
+    ).format('HH:mm'),
+    label: moment.duration({ [units]: timeUnit }).humanize(),
   }));
+
+export const getOptions = (interval: number) =>
+  getMomentDayRange(interval)
+    .map(formatTime)
+    .map(formattedOption => ({
+      label: formattedOption,
+      value: formattedOption,
+    }));
 
 interface TimeSelectFieldProps {
   interval?: number;

@@ -1,6 +1,6 @@
-import {DateInput} from '@fullcalendar/core/datelib/env';
-import {EventInput} from '@fullcalendar/core/structs/event';
-import {ReactElement} from 'react';
+import { DateInput } from '@fullcalendar/core/datelib/env';
+import { EventInput } from '@fullcalendar/core/structs/event';
+import { ReactElement } from 'react';
 
 export interface State {
   schedules: EventInput[];
@@ -11,7 +11,7 @@ export interface State {
 export interface ConfigProps {
   weekends?: boolean;
   businessHours?: {
-    startTime: string
+    startTime: string;
     endTime: string;
     daysOfWeek: number[];
   };
@@ -40,12 +40,14 @@ export interface PureDateProps {
   className?: string | string[];
   isDisabled?: boolean;
   label?: string | ReactElement;
-  withTime?: {
-    className?: string | string[];
-    interval?: number;
-    isDisabled?: boolean;
-    label?: string | ReactElement;
-  } | boolean;
+  withTime?:
+    | {
+        className?: string | string[];
+        interval?: number;
+        isDisabled?: boolean;
+        label?: string | ReactElement;
+      }
+    | boolean;
 }
 
 export interface EditableCalendarProps {
@@ -56,5 +58,5 @@ export interface EditableCalendarProps {
   eventDrop?: (event) => void;
   eventResize?: (event) => void;
   calendarType: 'create' | 'edit' | 'read';
-  updateCallback: ({event, oldId, formID}) => void;
+  updateCallback: ({ event, oldId, formID }) => void;
 }

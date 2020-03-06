@@ -156,7 +156,17 @@ export const formatOfferingRequest = (
   if (request.schedules) {
     result.attributes = {
       ...result.attributes,
-      schedules: request.schedules.map(pick(['start', 'end', 'title', 'type', 'id', 'config', 'extendedProps'])),
+      schedules: request.schedules.map(
+        pick([
+          'start',
+          'end',
+          'title',
+          'type',
+          'id',
+          'config',
+          'extendedProps',
+        ]),
+      ),
     };
   }
 

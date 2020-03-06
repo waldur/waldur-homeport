@@ -1,5 +1,5 @@
 import { EventInput } from '@fullcalendar/core';
-import {EventApi} from '@fullcalendar/core/api/EventApi';
+import { EventApi } from '@fullcalendar/core/api/EventApi';
 
 import { randomId } from '@waldur/core/fixtures';
 
@@ -70,17 +70,20 @@ interface EventHandlers {
   prevEvent?: EventInput | EventApi;
 }
 
-export const calendarEventPayloadCreator = ({event, oldEvent, prevEvent}: EventHandlers, eventList?) => {
-  const {start, end, id, extendedProps, title, allDay} = event;
+export const calendarEventPayloadCreator = (
+  { event, oldEvent, prevEvent }: EventHandlers,
+  eventList?,
+) => {
+  const { start, end, id, extendedProps, title, allDay } = event;
   const payload = {
-    event: {id, start, end, allDay, title, extendedProps},
+    event: { id, start, end, allDay, title, extendedProps },
     oldId: event.id,
     formID: null,
   };
   if (oldEvent || prevEvent) {
     payload.oldId = (oldEvent || prevEvent).id;
   }
-  if ( eventList ) {
+  if (eventList) {
     payload.formID = eventList.findIndex(item => item.id === payload.oldId);
   }
   return payload;

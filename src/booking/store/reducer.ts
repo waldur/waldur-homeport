@@ -39,10 +39,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
     case constants.ADD_BOOKING:
       return {
         ...state,
-        schedules: [
-          ...state.schedules,
-          payload,
-        ],
+        schedules: [...state.schedules, payload],
       };
 
     case constants.UPDATE_BOOKING:
@@ -50,10 +47,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
       const updatedList = state.schedules.filter(item => item.id !== oldId);
       return {
         ...state,
-        schedules: [
-          ...updatedList,
-          event,
-        ],
+        schedules: [...updatedList, event],
       };
 
     case constants.REMOVE_BOOKING:
@@ -61,9 +55,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
       const removedList = state.schedules.filter(item => item.id !== bookingId);
       return {
         ...state,
-        schedules: [
-          ...removedList,
-        ],
+        schedules: [...removedList],
       };
 
     case constants.SET_CONFIG:
@@ -75,7 +67,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
         },
       };
     case constants.SET_BOOKINGS:
-      const {bookings} = payload;
+      const { bookings } = payload;
       return {
         ...state,
         bookings,

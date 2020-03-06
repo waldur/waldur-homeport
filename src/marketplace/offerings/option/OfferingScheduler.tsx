@@ -1,45 +1,52 @@
 import { EventInput } from '@fullcalendar/core';
 import * as moment from 'moment';
 import * as React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {WrappedFieldArrayProps, formValueSelector} from 'redux-form';
+import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
 
-import { AddCalendarEvent} from '@waldur/booking/components/AddCalendarEvent';
-import {PureCalendar} from '@waldur/booking/components/calendar/PureCalendar';
+import { AddCalendarEvent } from '@waldur/booking/components/AddCalendarEvent';
+import { PureCalendar } from '@waldur/booking/components/calendar/PureCalendar';
 import { CalendarSettings } from '@waldur/booking/components/CalendarSettings';
 import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
-import {addBooking, removeBooking, setBookings, updateBooking} from '@waldur/booking/store/actions';
-import {ConfigProps, State} from '@waldur/booking/store/types';
+import {
+  addBooking,
+  removeBooking,
+  setBookings,
+  updateBooking,
+} from '@waldur/booking/store/actions';
+import { ConfigProps, State } from '@waldur/booking/store/types';
 import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { withModal } from '@waldur/modal/withModal';
 
 import './OfferingScheduler.scss';
 
-type OfferingSchedulerProps = TranslateProps & WrappedFieldArrayProps<any> & {
-  setModalProps: (event) => void;
-  openModal: (cb) => void;
-  schedules: EventInput[];
-  events: EventInput[];
-  config: ConfigProps;
-  calendar: State;
-  addBooking: (payload: EventInput) => void;
-  updateBooking: (payload: {event: EventInput, oldId: string}) => void;
-  removeBooking: (id: number | string) => void;
-  scheduleBooking: ({event: EventInput}) => void;
-  removeSchedule: ({event: EventInput}) => void;
-  updateScheduledBooking: (payload) => void;
-  setBooking: (bookings) => void;
-};
+type OfferingSchedulerProps = TranslateProps &
+  WrappedFieldArrayProps<any> & {
+    setModalProps: (event) => void;
+    openModal: (cb) => void;
+    schedules: EventInput[];
+    events: EventInput[];
+    config: ConfigProps;
+    calendar: State;
+    addBooking: (payload: EventInput) => void;
+    updateBooking: (payload: { event: EventInput; oldId: string }) => void;
+    removeBooking: (id: number | string) => void;
+    scheduleBooking: ({ event: EventInput }) => void;
+    removeSchedule: ({ event: EventInput }) => void;
+    updateScheduledBooking: (payload) => void;
+    setBooking: (bookings) => void;
+  };
 
 export const PureOfferingScheduler = (props: OfferingSchedulerProps) => {
-  const {config, schedules} = props.calendar;
+  const { config, schedules } = props.calendar;
   return (
     <div className="col-sm-12">
-
       <FormGroup classNameWithoutLabel="p-h-m col-sm-10 col-lg-8 col-centered">
-        <h3 className="header-bottom-border">{translate('Booking configuration')}</h3>
+        <h3 className="header-bottom-border">
+          {translate('Booking configuration')}
+        </h3>
         <CalendarSettings />
       </FormGroup>
 
@@ -56,18 +63,22 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => {
             constraint: 'businessHours',
             // allDay: true,
             start: moment().format('MM-DD-YYYY'),
-            end: moment().add(1, 'day').format('MM-DD-YYYY'),
-            extendedProps: {config},
+            end: moment()
+              .add(1, 'day')
+              .format('MM-DD-YYYY'),
+            extendedProps: { config },
           }}
           setBooking={event => {
             if (schedules.filter(item => item.id === event.id).length > 0) {
-              const formID = props.fields.getAll().findIndex(item => item.id === event.id);
+              const formID = props.fields
+                .getAll()
+                .findIndex(item => item.id === event.id);
               props.fields.remove(formID);
               props.fields.push(event);
-              props.updateScheduledBooking({event, oldId: event.id});
+              props.updateScheduledBooking({ event, oldId: event.id });
             } else {
               props.fields.push(event);
-              props.scheduleBooking({event});
+              props.scheduleBooking({ event });
             }
           }}
         />
@@ -76,18 +87,18 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => {
       <FormGroup classNameWithoutLabel="p-h-m col-sm-10 col-centered">
         <PureCalendar
           calendarType="create"
-          calendar={{bookings: props.fields.getAll(), schedules, config}}
+          calendar={{ bookings: props.fields.getAll(), schedules, config }}
           onSelectDate={event => {
-            props.fields.push({...event, config});
-            props.scheduleBooking({event: { ...event, config}});
+            props.fields.push({ ...event, config });
+            props.scheduleBooking({ event: { ...event, config } });
           }}
-          onEventClick={({event, oldId, formID}) => {
+          onEventClick={({ event, oldId, formID }) => {
             props.setModalProps({
               event,
               deleteBooking: () => {
                 props.fields.remove(formID);
                 props.removeSchedule(oldId);
-                },
+              },
             });
             props.openModal(onSuccess => {
               props.fields.remove(formID);

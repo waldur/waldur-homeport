@@ -15,7 +15,11 @@ export function statedEvent(event) {
 }
 
 export function configurationEvent(event) {
-  if (event && event.type === ( 'single-entity' || 'config' || 'availability-hours' || 'availability')) {
+  if (
+    event &&
+    event.type ===
+      ('single-entity' || 'config' || 'availability-hours' || 'availability')
+  ) {
     event.constraint = 'businessHours';
   }
 }
