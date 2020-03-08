@@ -5709,6 +5709,10 @@ msgstr ""
 msgid "Resources import has failed."
 msgstr ""
 
+#: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
+msgid "Resources represent the services you are using."
+msgstr ""
+
 #: src/issues/workspace/issue-navigation-service.js
 #: src/resource/support/routes.js
 msgid "Resources usage"
@@ -8319,6 +8323,10 @@ msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
 msgid "You do not currently have any organizations."
+msgstr ""
+
+#: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
+msgid "You do not have any resources yet."
 msgstr ""
 
 #: src/resource/resource-provision-policy.js
