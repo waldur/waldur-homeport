@@ -182,6 +182,10 @@ msgstr ""
 msgid "Active count"
 msgstr ""
 
+#: src/marketplace/offerings/create/AccountingSummary.tsx
+msgid "Active plans"
+msgstr ""
+
 #: src/user/support/UserActivateButton.tsx
 msgid "Active user will be able to login into the portal."
 msgstr ""
@@ -437,7 +441,7 @@ msgstr ""
 msgid "Amazon EC2 provider"
 msgstr ""
 
-#: src/marketplace/offerings/create/AccountingSummary.tsx
+#: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/payments/payment-list.js
@@ -538,6 +542,10 @@ msgstr ""
 
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 msgid "Archived"
+msgstr ""
+
+#: src/marketplace/offerings/create/AccountingSummary.tsx
+msgid "Archived plans"
 msgstr ""
 
 #: src/resource/actions/action-utils-service.js
@@ -4565,7 +4573,7 @@ msgid "Plan does not have limit"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
-#: src/marketplace/offerings/create/AccountingSummary.tsx
+#: src/marketplace/offerings/create/PlanSummary.tsx
 msgid "Plan name"
 msgstr ""
 
@@ -4756,7 +4764,7 @@ msgstr ""
 #: src/billing/invoices-list.js
 #: src/cost-planning/cost-plan-flavors.html
 #: src/jira/project/jira-project-checkout-summary.html
-#: src/marketplace/offerings/create/AccountingSummary.tsx
+#: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/Order.tsx
@@ -5727,6 +5735,10 @@ msgstr ""
 
 #: src/marketplace/resources/import/useImportDialog.tsx
 msgid "Resources import has failed."
+msgstr ""
+
+#: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
+msgid "Resources represent the services you are using."
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
@@ -7136,11 +7148,11 @@ msgid "To correct details of your organization, please send an email to <a href=
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.html
-msgid "To create custom flavour, please send a request to {{$ctrl.supportEmail}}."
+msgid "To create custom flavour, please send a request to {{ $ctrl.supportEmail }}."
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/request-direct-access.html
-msgid "To get access, please send a request to {{$ctrl.supportEmail}}."
+msgid "To get access, please send a request to {{ $ctrl.supportEmail }}."
 msgstr ""
 
 #: src/auth/auth-init.html
@@ -7747,7 +7759,7 @@ msgstr ""
 msgid "Unit price"
 msgstr ""
 
-#: src/marketplace/offerings/create/AccountingSummary.tsx
+#: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 msgid "Units"
 msgstr ""
@@ -8350,6 +8362,10 @@ msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
 msgid "You do not currently have any organizations."
+msgstr ""
+
+#: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
+msgid "You do not have any resources yet."
 msgstr ""
 
 #: src/resource/resource-provision-policy.js

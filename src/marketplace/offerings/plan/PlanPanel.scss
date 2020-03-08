@@ -1,0 +1,15 @@
+#plan-panel {
+  .panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h4 {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

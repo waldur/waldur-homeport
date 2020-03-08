@@ -8,6 +8,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
   ],
+  plugins: ['react-hooks'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -27,7 +28,6 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
       },
     },
-    'import/internal-regex': '^@waldur/',
   },
   rules: {
     'react/prop-types': 'off',
@@ -41,6 +41,13 @@ module.exports = {
       'error',
       {
         'newlines-between': 'always',
+        pathGroups: [
+          {
+            pattern: '@waldur/**',
+            group: 'internal',
+            position: 'after',
+          },
+        ],
         groups: [
           'builtin',
           'external',
@@ -55,6 +62,8 @@ module.exports = {
         },
       },
     ],
+    'react-hooks/rules-of-hooks': 'warn',
+    'react-hooks/exhaustive-deps': 'warn',
   },
   globals: {
     gettext: true,

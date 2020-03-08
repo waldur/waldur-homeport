@@ -22,7 +22,7 @@ const useChecklistSelector = () => {
   const [checklistOptions, setChecklistOptions] = useState([]);
   const [checklistLoading, setChecklistLoading] = useState(true);
   const [checklistErred, setChecklistErred] = useState(false);
-  const [checklist, setChecklist] = useState();
+  const [checklist, setChecklist] = useState<Checklist>();
 
   const dispatch = useDispatch();
 
@@ -70,7 +70,7 @@ export const useProjectChecklist = project => {
   const [questionsLoading, setQuestionsLoading] = useState(true);
   const [questionsErred, setQuestionsErred] = useState(true);
 
-  const [answers, setAnswers] = useState();
+  const [answers, setAnswers] = useState<{}>();
   const [submitting, setSubmitting] = useState(false);
 
   const dispatch = useDispatch();
@@ -89,7 +89,7 @@ export const useProjectChecklist = project => {
         setQuestionsList(questions);
         setAnswers(
           answersList.reduce(
-            (result, answer) => ({
+            (result, answer: Answer) => ({
               ...result,
               [answer.question_uuid]: answer.value,
             }),

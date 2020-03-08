@@ -15,6 +15,7 @@ import { Resource } from '../types';
 
 import { CategoryColumnField } from './CategoryColumnField';
 import { CreateResourceButton } from './CreateResourceButton';
+import { EmptyResourcesListPlaceholder } from './EmptyResourcesListPlaceholder';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
@@ -74,6 +75,7 @@ export const TableComponent = props => {
       {...props}
       columns={columns}
       verboseName={translate('Resources')}
+      placeholderComponent={<EmptyResourcesListPlaceholder />}
       actions={tableActions}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
