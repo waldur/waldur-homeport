@@ -14,7 +14,9 @@
     "build-stats": "cross-env NODE_ENV=production webpack --config=webpack.config.prod.js --profile --json > stats.json",
     "build-dll": "webpack --config webpack.config.dll.js -p --hide-modules --mode=production",
     "build-dll-dev": "webpack --config webpack.config.dll.js --hide-modules --mode=development",
-    "test": "yarn eslint --ext ts,tsx src && jest --verbose --runInBand && npm run build",
+    "format": "yarn prettier --write \"src/**/*.js\" \"src/**/*.jsx\" \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
+    "lint": "yarn eslint --ext ts,tsx src",
+    "test": "yarn format && yarn lint && jest --verbose --runInBand && npm run build",
     "ci:conf": "mkdirp build/scripts/configs/ && cp src/configs/test-config.json build/scripts/configs/config.json",
     "ci:start": "yarn build && yarn ci:conf && yarn serve build -l 8001",
     "ci:run": "cypress run",
@@ -190,9 +192,12 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,htm,html}": [
+    "**/*.{js,jsx,ts,tsx}": [
       "yarn prettier --write",
       "yarn eslint --ext ts,tsx --fix"
+    ],
+    "**/*.{css,scss}": [
+      "yarn prettier --write"
     ]
   }
 }
