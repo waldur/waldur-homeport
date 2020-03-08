@@ -34,7 +34,7 @@ interface SelectField<Resource> extends BaseField<Resource> {
 
 interface TextField<Resource> extends BaseField<Resource> {
   type: 'string' | 'text';
-  pattern?: string;
+  pattern?: string | RegExp;
   maxlength: number;
 }
 

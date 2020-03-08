@@ -7,8 +7,6 @@ interface RadioButtonFieldProps extends FormField {
   isHiddenInput?: boolean;
   choices: RadioButtonChoice[];
   wrapperClassName?: string;
-  WrapperElement?: string;
-  ItemElement?: string;
   defaultItemClassName?: string;
 }
 
@@ -24,21 +22,19 @@ export const RadioButtonField: React.FC<RadioButtonFieldProps> = props => {
   const {
     input,
     choices,
-    WrapperElement,
     wrapperClassName,
-    ItemElement,
     defaultItemClassName,
     isHiddenInput,
     ...rest
   } = props;
   return (
-    <WrapperElement className={wrapperClassName}>
+    <div className={wrapperClassName}>
       {choices.map((choice, index) => {
         if (!choice) {
           return null;
         }
         return (
-          <ItemElement
+          <div
             className={classNames(choice.itemClassName || defaultItemClassName)}
             key={index}
           >
@@ -59,15 +55,13 @@ export const RadioButtonField: React.FC<RadioButtonFieldProps> = props => {
               />
               {choice.label}
             </label>
-          </ItemElement>
+          </div>
         );
       })}
-    </WrapperElement>
+    </div>
   );
 };
 
 RadioButtonField.defaultProps = {
-  WrapperElement: 'div',
-  ItemElement: 'div',
   defaultItemClassName: 'row',
 };

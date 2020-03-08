@@ -24,7 +24,7 @@ export default function createAction(): ResourceAction<Offering> {
         help_text: translate(
           'Example: [{"header": "Database instance info", "body": "data"}]',
         ),
-        serializer: (value: string) => (value ? JSON.parse(value) : undefined),
+        serializer: (value: any) => (value ? JSON.parse(value) : undefined),
         init: (_, resource, form) => {
           form.report = formatReport(resource);
         },
