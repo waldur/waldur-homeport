@@ -1,18 +1,16 @@
-import ProjectDashboard from './ProjectDashboardContainer';
-import projectDetails from './ProjectUpdateContainer';
 import projectDetailsButton from './project-details-button';
-import projectCreate from './ProjectCreateContainer';
-import ProjectWorkspaceController from './project-workspace';
-import projectPolicies from './project-policies';
-import ProviderProjectsService from './project-providers-service';
-import projectProviders from './project-providers';
 import projectDialog from './project-dialog';
-import projectIssues from './ProjectIssuesList';
-import projectEvents from './ProjectEventsList';
-import projectsList from './ProjectsList';
+import projectPolicies from './project-policies';
 import projectTeam from './project-team';
+import ProjectWorkspaceController from './project-workspace';
+import projectCreate from './ProjectCreateContainer';
+import ProjectDashboard from './ProjectDashboardContainer';
+import projectEvents from './ProjectEventsList';
+import projectIssues from './ProjectIssuesList';
 import projectRemoveDialog from './ProjectRemoveDialog';
 import projectsService from './projects-service';
+import projectsList from './ProjectsList';
+import projectDetails from './ProjectUpdateContainer';
 import projectRoutes from './routes';
 import './events';
 
@@ -23,8 +21,6 @@ export default module => {
   module.component('projectCreate', projectCreate);
   module.controller('ProjectWorkspaceController', ProjectWorkspaceController);
   module.component('projectPolicies', projectPolicies);
-  module.service('ProviderProjectsService', ProviderProjectsService);
-  module.component('projectProviders', projectProviders);
   module.component('projectDialog', projectDialog);
   module.component('projectIssues', projectIssues);
   module.component('projectEvents', projectEvents);
