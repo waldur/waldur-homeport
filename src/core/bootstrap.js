@@ -1,5 +1,6 @@
-import stableMode from '@waldur/configs/modes/stable.json';
 import experimentalMode from '@waldur/configs/modes/experimental.json';
+import stableMode from '@waldur/configs/modes/stable.json';
+
 import attachTracking from './tracking';
 
 const CONFIG_FILE = 'scripts/configs/config.json';
@@ -12,6 +13,9 @@ function renderError(details) {
   document.querySelector('.erred-screen').setAttribute('style', '');
   document.querySelector('#wrapper').remove();
   document.querySelector('.erred-screen-message').textContent = details;
+  document.querySelector('#retry-bootstrap').addEventListener('click', () => {
+    location.reload();
+  });
 }
 
 async function loadConfig() {
