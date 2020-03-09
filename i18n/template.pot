@@ -335,11 +335,6 @@ msgstr ""
 msgid "Add volumes"
 msgstr ""
 
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Adding link"
-msgstr ""
-
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
@@ -890,10 +885,6 @@ msgstr ""
 msgid "CPU"
 msgstr ""
 
-#: src/providers/details/provider-project-link-quotas.html
-msgid "CPU limit"
-msgstr ""
-
 #: src/slurm/actions.js
 msgid "CPU limit, minutes"
 msgstr ""
@@ -985,7 +976,6 @@ msgid "Category is invalid."
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
-#: src/providers/details/provider-details.html
 msgid "Certifications"
 msgstr ""
 
@@ -1731,7 +1721,6 @@ msgstr ""
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/project-details-button.html
-#: src/providers/details/dialog.html
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -2482,10 +2471,6 @@ msgstr ""
 msgid "Home organization domain name"
 msgstr ""
 
-#: src/providers/details/provider-details.html
-msgid "Homepage"
-msgstr ""
-
 #: src/user/hooks/HookRemoveButton.tsx
 msgid "Hook has been removed."
 msgstr ""
@@ -3097,16 +3082,6 @@ msgstr ""
 msgid "Link OpenStack Instance"
 msgstr ""
 
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Link created"
-msgstr ""
-
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Link removed"
-msgstr ""
-
 #: src/configs/base-config.js
 msgid "Lithuanian"
 msgstr ""
@@ -3493,7 +3468,6 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
-#: src/providers/details/provider-details.html
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -3763,10 +3737,6 @@ msgstr ""
 msgid "No projects are assigned to this role."
 msgstr ""
 
-#: src/providers/details/provider-project-link-quota.html
-msgid "No quota set"
-msgstr ""
-
 #: src/billing/billing-records-list.js
 msgid "No records found matching filter."
 msgstr ""
@@ -3960,7 +3930,6 @@ msgstr ""
 #: src/customer/popover/customer-popover.html
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/project/project-dialog.html
-#: src/providers/details/dialog.html
 #: src/user/user-popover.html
 msgid "OK"
 msgstr ""
@@ -4479,10 +4448,6 @@ msgstr ""
 msgid "Permissions log"
 msgstr ""
 
-#: src/providers/details/provider-project-link-quotas.html
-msgid "Permitted"
-msgstr ""
-
 #: src/billing/CustomerDetails.tsx
 msgid "Phone"
 msgstr ""
@@ -4495,10 +4460,6 @@ msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
 msgid "Phone numbers"
-msgstr ""
-
-#: src/providers/details/provider-details.html
-msgid "Physical locations"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanField.tsx
@@ -4632,10 +4593,6 @@ msgstr ""
 msgid "Please provide registration code of your company."
 msgstr ""
 
-#: src/providers/details/provider-project-link-quotas.html
-msgid "Please provide valid quotas."
-msgstr ""
-
 #: src/customer/create/customer-create-config.js
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
@@ -4654,14 +4611,6 @@ msgstr ""
 
 #: src/form-react/list-field/ListFieldModal.tsx
 msgid "Please select one"
-msgstr ""
-
-#: src/providers/details/provider-projects.html
-msgid "Please select projects where usage of the provider is permitted."
-msgstr ""
-
-#: src/project/project-providers.html
-msgid "Please select providers allowed to be used in this project."
 msgstr ""
 
 #: src/marketplace/offerings/create/AccountingStep.tsx
@@ -4940,7 +4889,6 @@ msgid "Project manager cannot edit users with same role."
 msgstr ""
 
 #: src/project/ProjectNameField.tsx
-#: src/providers/details/provider-project-link-quotas.html
 #: src/team/add-team-member.html
 #: src/user/list/ProjectPermissions.tsx
 msgid "Project name"
@@ -4948,10 +4896,6 @@ msgstr ""
 
 #: src/project/project-policies.js
 msgid "Project policies have been updated."
-msgstr ""
-
-#: src/project/project-providers-service.js
-msgid "Project providers links have been updated."
 msgstr ""
 
 #: src/project/ProjectRemoveDialog.tsx
@@ -4992,7 +4936,6 @@ msgstr ""
 #: src/customer/routes.js
 #: src/customer/workspace/customer-workspace.js
 #: src/navigation/workspace/select-workspace-dialog.html
-#: src/providers/details/dialog.html
 msgid "Projects"
 msgstr ""
 
@@ -5029,7 +4972,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ServiceSettingsDetailsDialog.tsx
 #: src/marketplace/routes.js
-#: src/providers/details/dialog.html
 msgid "Provider details"
 msgstr ""
 
@@ -5054,7 +4996,6 @@ msgid "Provider type"
 msgstr ""
 
 #: src/help/constants.js
-#: src/project/project-dialog.html
 msgid "Providers"
 msgstr ""
 
@@ -5128,17 +5069,8 @@ msgstr ""
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
-#: src/providers/details/provider-project-link-quota.html
-msgid "Quota usage exceeds limit."
-msgstr ""
-
 #: src/openstack/openstack-tenant/tabs.js
-#: src/providers/details/dialog.html
 msgid "Quotas"
-msgstr ""
-
-#: src/providers/details/provider-project-link-quotas.js
-msgid "Quotas updated."
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -5149,10 +5081,6 @@ msgstr ""
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "RAM"
-msgstr ""
-
-#: src/providers/details/provider-project-link-quotas.html
-msgid "RAM limit GB"
 msgstr ""
 
 #: src/slurm/actions.js
@@ -5379,11 +5307,6 @@ msgstr ""
 
 #: src/user/support/UserEditForm.tsx
 msgid "Remove profile"
-msgstr ""
-
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Removing link"
 msgstr ""
 
 #: src/offering/actions/UpdateAction.ts
@@ -5872,9 +5795,7 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/cost-planning/cost-plan-dialog.html
-#: src/project/project-providers.html
 #: src/providers/ProviderUpdateForm.tsx
-#: src/providers/details/provider-projects.html
 #: src/team/add-project-member.js
 #: src/team/add-team-member.js
 msgid "Save"
@@ -6589,10 +6510,6 @@ msgstr ""
 msgid "Storage"
 msgstr ""
 
-#: src/providers/details/provider-project-link-quotas.html
-msgid "Storage limit GB"
-msgstr ""
-
 #: src/openstack/OpenStackPluginOptionsForm.tsx
 msgid "Storage mode"
 msgstr ""
@@ -6880,10 +6797,6 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: src/providers/details/provider-details.html
-msgid "Terms of Services"
-msgstr ""
-
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/routes/about.js
 msgid "Terms of service"
@@ -6993,16 +6906,8 @@ msgstr ""
 msgid "There are no projects yet for this organization."
 msgstr ""
 
-#: src/providers/details/provider-projects.html
-msgid "There are no projects yet."
-msgstr ""
-
 #: src/cost-planning/cost-plan-optimizer.html
 msgid "There are no providers for this deployment plan."
-msgstr ""
-
-#: src/project/project-providers.html
-msgid "There are no providers yet."
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
@@ -7227,7 +7132,6 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/payments/payment-list.js
-#: src/providers/details/provider-details.html
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
 msgstr ""
@@ -7309,11 +7213,6 @@ msgstr ""
 msgid "Unable to create key."
 msgstr ""
 
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Unable to create link."
-msgstr ""
-
 #: src/rancher/cluster-actions/CreateNodeDialog.tsx
 msgid "Unable to create node."
 msgstr ""
@@ -7336,11 +7235,6 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to delete comment."
-msgstr ""
-
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Unable to delete link."
 msgstr ""
 
 #: src/issues/comments/effects.ts
@@ -7366,10 +7260,6 @@ msgstr ""
 
 #: src/booking/store/effects.ts
 msgid "Unable to fetch offering bookings."
-msgstr ""
-
-#: src/project/project-providers-service.js
-msgid "Unable to fetch project providers."
 msgstr ""
 
 #: src/analytics/effects.ts
@@ -7637,10 +7527,6 @@ msgstr ""
 
 #: src/billing/billing-utils.js
 msgid "Unable to send record notification."
-msgstr ""
-
-#: src/providers/details/provider-project-link-quotas.js
-msgid "Unable to set quotas."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
@@ -8345,10 +8231,6 @@ msgstr ""
 msgid "You don't have any organization yet."
 msgstr ""
 
-#: src/project/project-providers.html
-msgid "You don't have enough permission to edit providers for current project."
-msgstr ""
-
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectDeleteButton.tsx
 msgid "You don't have enough privileges to perform this operation."
@@ -8754,10 +8636,6 @@ msgstr ""
 #: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "{usage} of {limit} used"
-msgstr ""
-
-#: src/providers/details/provider-project-link-quota.js
-msgid "{usage} used"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
