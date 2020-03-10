@@ -955,6 +955,10 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: src/rancher/tabs.js
+msgid "Catalogs"
+msgstr ""
+
 #: src/marketplace/category/ShopCategories.tsx
 msgid "Categories"
 msgstr ""
@@ -1671,6 +1675,7 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
+#: src/rancher/ClusterCatalogList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -3468,6 +3473,7 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
+#: src/rancher/ClusterCatalogList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -3829,7 +3835,7 @@ msgstr ""
 
 #: src/rancher/TenantGroup.tsx
 #: src/rancher/breadcrumbs.js
-#: src/rancher/module.js
+#: src/rancher/tabs.js
 msgid "Nodes"
 msgstr ""
 
@@ -7145,6 +7151,7 @@ msgid "Type to search"
 msgstr ""
 
 #: src/invitations/invitations-list.js
+#: src/rancher/ClusterCatalogList.tsx
 msgid "URL"
 msgstr ""
 
@@ -8406,6 +8413,10 @@ msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
 msgid "by"
+msgstr ""
+
+#: src/rancher/ClusterCatalogList.tsx
+msgid "catalogs"
 msgstr ""
 
 #: src/issues/workspace/issues-activity-stream.html
