@@ -942,6 +942,10 @@ msgstr ""
 msgid "Cancel payment"
 msgstr ""
 
+#: src/user/support/RequestedEmail.tsx
+msgid "Cancel request"
+msgstr ""
+
 #: src/billing/billing-utils.js
 #: src/invitations/invitations-list.js
 msgid "Canceled"
@@ -1918,6 +1922,10 @@ msgstr ""
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Email"
+msgstr ""
+
+#: src/user/support/EmailField.tsx
+msgid "Email change request has been cancelled."
 msgstr ""
 
 #: src/user/support/UserEmailChangeCallback.tsx
@@ -5455,7 +5463,7 @@ msgstr ""
 msgid "Requested e-mail"
 msgstr ""
 
-#: src/user/support/EmailField.tsx
+#: src/user/support/RequestedEmail.tsx
 msgid "Requested email"
 msgstr ""
 
@@ -7194,6 +7202,10 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 msgid "Unable to cancel order item."
+msgstr ""
+
+#: src/user/support/EmailField.tsx
+msgid "Unable to cancel request."
 msgstr ""
 
 #: src/user/support/useEmailChange.ts
