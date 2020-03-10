@@ -7,7 +7,7 @@ interface PanelProps {
   actions?: React.ReactNode;
 }
 
-const Panel: React.FC<PanelProps> = ({
+export const Panel: React.FC<PanelProps> = ({
   title,
   children,
   className,
@@ -23,5 +23,3 @@ const Panel: React.FC<PanelProps> = ({
     <div className="ibox-content">{children}</div>
   </div>
 );
-
-export default Panel;

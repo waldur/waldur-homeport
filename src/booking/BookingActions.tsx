@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import * as constants from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 

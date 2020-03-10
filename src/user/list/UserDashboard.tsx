@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import Panel from '@waldur/core/Panel';
+import { Panel } from '@waldur/core/Panel';
 import { CustomerCreatePromptContainer } from '@waldur/customer/create/CustomerCreatePromptContainer';
 import { renderCustomerCreatePrompt } from '@waldur/customer/create/selectors';
 import { withTranslation, TranslateProps } from '@waldur/i18n';

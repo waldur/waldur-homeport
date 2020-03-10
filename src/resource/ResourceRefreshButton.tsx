@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 
 import { refreshResource } from './actions';
 

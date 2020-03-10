@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { isCustomerQuotaReached } from '@waldur/core/ncUtils';
 import { translate } from '@waldur/i18n/translate';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { gotoProjectCreate } from './actions';

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 import { UserDetails } from '@waldur/workspace/types';
 
 import * as actions from './actions';

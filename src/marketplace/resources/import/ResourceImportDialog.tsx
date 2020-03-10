@@ -3,7 +3,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import Panel from '@waldur/core/Panel';
+import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';

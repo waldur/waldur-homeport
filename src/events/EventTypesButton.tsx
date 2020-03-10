@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { showEventTypes } from '@waldur/events/actions';
 import { withTranslation } from '@waldur/i18n/translate';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 
 const EventTypesButton = ({ onShowEventTypes, translate }) => (
   <ActionButton

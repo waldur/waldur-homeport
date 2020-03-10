@@ -4,7 +4,7 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import Panel from '@waldur/core/Panel';
+import { Panel } from '@waldur/core/Panel';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';

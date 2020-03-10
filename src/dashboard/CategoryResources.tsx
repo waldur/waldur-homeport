@@ -5,7 +5,7 @@ import * as ToggleButton from 'react-bootstrap/lib/ToggleButton';
 import * as ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
 
 import { EChart } from '@waldur/core/EChart';
-import Panel from '@waldur/core/Panel';
+import { Panel } from '@waldur/core/Panel';
 import { ActionList } from '@waldur/dashboard/ActionList';
 import { translate } from '@waldur/i18n';
 

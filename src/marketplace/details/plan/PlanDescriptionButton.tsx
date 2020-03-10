@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { showOfferingPlanDescription } from '@waldur/marketplace/details/plan/actions';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 
 interface PlanDescriptionButtonProps extends TranslateProps {
   showOfferingPlanDescription(planDescription: string): void;

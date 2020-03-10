@@ -3,7 +3,7 @@ import * as Table from 'react-bootstrap/lib/Table';
 import { useSelector } from 'react-redux';
 import { getFormValues, isValid } from 'redux-form';
 
-import Panel from '@waldur/core/Panel';
+import { Panel } from '@waldur/core/Panel';
 import { defaultCurrency, $sanitize } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
