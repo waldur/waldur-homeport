@@ -3,6 +3,8 @@ import * as React from 'react';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
+import { CatalogCreateButton } from './CatalogCreateButton';
+
 const TableComponent = props => {
   const { translate } = props;
   return (
@@ -23,6 +25,7 @@ const TableComponent = props => {
         },
       ]}
       verboseName={translate('catalogs')}
+      actions={<CatalogCreateButton cluster={props.resource} />}
     />
   );
 };
