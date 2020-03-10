@@ -2,22 +2,31 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import breadcrumbsConfig from './breadcrumbs';
 import clusterActions from './cluster-actions';
+import rancherCreateNodeDialog from './cluster-actions/CreateNodeDialog';
+import RancherClusterKubeconfigDialog from './cluster-actions/RancherClusterKubeconfigDialog';
+import rancherClusterCatalogs from './ClusterCatalogList';
 import nodeActions from './node-actions';
 import './marketplace';
 import './provider';
-import rancherNodesService from './rancher-nodes-service';
 import rancherClusterNodes from './rancher-cluster-nodes';
-import RancherClusterKubeconfigDialog from './cluster-actions/RancherClusterKubeconfigDialog';
-import rancherCreateNodeDialog from './cluster-actions/CreateNodeDialog';
-import rancherKeyValueDialog from './RancherKeyValueDialog';
+import rancherNodesService from './rancher-nodes-service';
 import { RancherClusterSummary } from './RancherClusterSummary';
+import rancherKeyValueDialog from './RancherKeyValueDialog';
 import { RancherNodeSummary } from './RancherNodeSummary';
+import { tabsConfig } from './tabs';
+
+// @ngInject
+function actionsConfig(ActionConfigurationProvider) {
+  ActionConfigurationProvider.register('Rancher.Node', nodeActions);
+  ActionConfigurationProvider.register('Rancher.Cluster', clusterActions);
+}
 
 export default module => {
   ResourceSummary.register('Rancher.Cluster', RancherClusterSummary);
   ResourceSummary.register('Rancher.Node', RancherNodeSummary);
   module.service('rancherNodesService', rancherNodesService);
   module.component('rancherClusterNodes', rancherClusterNodes);
+  module.component('rancherClusterCatalogs', rancherClusterCatalogs);
   module.component(
     'rancherClusterKubeconfigDialog',
     RancherClusterKubeconfigDialog,
@@ -28,26 +37,3 @@ export default module => {
   module.config(tabsConfig);
   module.run(breadcrumbsConfig);
 };
-
-// @ngInject
-function actionsConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('Rancher.Node', nodeActions);
-  ActionConfigurationProvider.register('Rancher.Cluster', clusterActions);
-}
-
-// @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
-  ResourceTabsConfigurationProvider.register('Rancher.Cluster', {
-    order: ['nodes', ...DEFAULT_RESOURCE_TABS.order],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
-      nodes: {
-        heading: gettext('Nodes'),
-        component: 'rancherClusterNodes',
-      },
-    }),
-  });
-  ResourceTabsConfigurationProvider.register('Rancher.Node', {
-    order: [],
-    options: {},
-  });
-}
