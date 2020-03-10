@@ -88,7 +88,7 @@
     "papaparse": "^4.3.6",
     "pdfmake": "^0.1.31",
     "prop-types": "^15.6.2",
-    "react": "^16.8.4",
+    "react": "^16.13.0",
     "react-16-bootstrap-date-picker": "^5.1.2",
     "react-ace": "^8.0.0",
     "react-bootstrap": "^0.32.4",
