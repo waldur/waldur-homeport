@@ -46,6 +46,8 @@ cd waldur-homeport
 yarn
 ```
 
+PS. If you see errors related to fsevents on OS X, the workaround is: `yarn cache clean && yarn upgrade && yarn`.
+
 5. Create `/src/configs/custom-config.json`:
 ```
 cp src/configs/config.json.example src/configs/config.json
