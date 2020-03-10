@@ -860,6 +860,10 @@ msgstr ""
 msgid "Bootable"
 msgstr ""
 
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Branch"
+msgstr ""
+
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Browse"
 msgstr ""
@@ -953,6 +957,14 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
 msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr ""
+
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Catalog URL"
+msgstr ""
+
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Catalog has been created."
 msgstr ""
 
 #: src/rancher/tabs.js
@@ -1315,6 +1327,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/rancher/CatalogCreateButton.tsx
 #: src/user/hooks/hook-details.html
 msgid "Create"
 msgstr ""
@@ -1345,6 +1358,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Create backup schedule for OpenStack instance"
+msgstr ""
+
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Create catalog"
 msgstr ""
 
 #: src/vmware/actions.ts
@@ -1675,6 +1692,7 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
+#: src/rancher/CatalogCreateDialog.tsx
 #: src/rancher/ClusterCatalogList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -3473,6 +3491,7 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
+#: src/rancher/CatalogCreateDialog.tsx
 #: src/rancher/ClusterCatalogList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -4353,6 +4372,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/CatalogCreateDialog.tsx
 #: src/vmware/VMwareForm.tsx
 msgid "Password"
 msgstr ""
@@ -6545,6 +6565,7 @@ msgstr ""
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
+#: src/rancher/CatalogCreateDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
@@ -7210,6 +7231,10 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "Unable to create application."
+msgstr ""
+
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Unable to create catalog."
 msgstr ""
 
 #: src/invitations/actions/invitation-dialog-service.js
@@ -7937,6 +7962,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/CatalogCreateDialog.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 #: src/team/user-selector.html
