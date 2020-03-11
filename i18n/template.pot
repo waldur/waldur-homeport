@@ -1712,6 +1712,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/rancher/CatalogCreateDialog.tsx
 #: src/rancher/ClusterCatalogList.tsx
+#: src/rancher/ClusterProjectList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -3515,6 +3516,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/rancher/CatalogCreateDialog.tsx
 #: src/rancher/ClusterCatalogList.tsx
+#: src/rancher/ClusterProjectList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -4984,6 +4986,7 @@ msgstr ""
 #: src/customer/routes.js
 #: src/customer/workspace/customer-workspace.js
 #: src/navigation/workspace/select-workspace-dialog.html
+#: src/rancher/tabs.js
 msgid "Projects"
 msgstr ""
 
@@ -6505,6 +6508,7 @@ msgstr ""
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
+#: src/rancher/ClusterProjectList.tsx
 #: src/rancher/rancher-cluster-nodes.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
@@ -8556,6 +8560,7 @@ msgid "profile."
 msgstr ""
 
 #: src/project/ProjectsList.tsx
+#: src/rancher/ClusterProjectList.tsx
 #: src/user/list/ProjectPermissions.tsx
 msgid "projects"
 msgstr ""

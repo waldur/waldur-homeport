@@ -4,7 +4,7 @@ export function tabsConfig(
   DEFAULT_RESOURCE_TABS,
 ) {
   ResourceTabsConfigurationProvider.register('Rancher.Cluster', {
-    order: ['nodes', 'catalogs', ...DEFAULT_RESOURCE_TABS.order],
+    order: ['nodes', 'catalogs', 'projects', ...DEFAULT_RESOURCE_TABS.order],
     options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
       nodes: {
         heading: gettext('Nodes'),
@@ -13,6 +13,10 @@ export function tabsConfig(
       catalogs: {
         heading: gettext('Catalogs'),
         component: 'rancherClusterCatalogs',
+      },
+      projects: {
+        heading: gettext('Projects'),
+        component: 'rancherClusterProjects',
       },
     }),
   });
