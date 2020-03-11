@@ -154,6 +154,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/paypal/paypal-invoice-actions.html
 #: src/project/ProjectsList.tsx
+#: src/rancher/ClusterCatalogList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
@@ -545,6 +546,10 @@ msgstr ""
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType}?"
+msgstr ""
+
+#: src/rancher/CatalogDeleteDialog.tsx
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr ""
 
 #: src/project/ProjectRemoveDialog.tsx
@@ -969,6 +974,10 @@ msgstr ""
 
 #: src/rancher/CatalogCreateDialog.tsx
 msgid "Catalog has been created."
+msgstr ""
+
+#: src/rancher/CatalogDeleteDialog.tsx
+msgid "Catalog has been deleted."
 msgstr ""
 
 #: src/rancher/tabs.js
@@ -1641,11 +1650,16 @@ msgstr ""
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/project/ProjectDeleteButton.tsx
+#: src/rancher/CatalogDeleteButton.tsx
 msgid "Delete"
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostDeleteButton.tsx
 msgid "Delete Zabbix host"
+msgstr ""
+
+#: src/rancher/CatalogDeleteDialog.tsx
+msgid "Delete catalog"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
@@ -6574,6 +6588,7 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/CatalogDeleteDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
@@ -7275,6 +7290,10 @@ msgstr ""
 
 #: src/issues/attachments/effects.ts
 msgid "Unable to delete attachment."
+msgstr ""
+
+#: src/rancher/CatalogDeleteDialog.tsx
+msgid "Unable to delete catalog."
 msgstr ""
 
 #: src/issues/comments/effects.ts

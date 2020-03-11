@@ -2,6 +2,7 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import breadcrumbsConfig from './breadcrumbs';
 import rancherCatalogCreateDialog from './CatalogCreateDialog';
+import rancherCatalogDeleteDialog from './CatalogDeleteDialog';
 import clusterActions from './cluster-actions';
 import rancherCreateNodeDialog from './cluster-actions/CreateNodeDialog';
 import RancherClusterKubeconfigDialog from './cluster-actions/RancherClusterKubeconfigDialog';
@@ -35,6 +36,7 @@ export default module => {
   module.component('rancherKeyValueDialog', rancherKeyValueDialog);
   module.component('rancherCreateNodeDialog', rancherCreateNodeDialog);
   module.component('rancherCatalogCreateDialog', rancherCatalogCreateDialog);
+  module.component('rancherCatalogDeleteDialog', rancherCatalogDeleteDialog);
   module.config(actionsConfig);
   module.config(tabsConfig);
   module.run(breadcrumbsConfig);
