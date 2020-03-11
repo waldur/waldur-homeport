@@ -7,6 +7,7 @@ import clusterActions from './cluster-actions';
 import rancherCreateNodeDialog from './cluster-actions/CreateNodeDialog';
 import RancherClusterKubeconfigDialog from './cluster-actions/RancherClusterKubeconfigDialog';
 import rancherClusterCatalogs from './ClusterCatalogList';
+import rancherClusterProjects from './ClusterProjectList';
 import nodeActions from './node-actions';
 import './marketplace';
 import './provider';
@@ -29,6 +30,7 @@ export default module => {
   module.service('rancherNodesService', rancherNodesService);
   module.component('rancherClusterNodes', rancherClusterNodes);
   module.component('rancherClusterCatalogs', rancherClusterCatalogs);
+  module.component('rancherClusterProjects', rancherClusterProjects);
   module.component(
     'rancherClusterKubeconfigDialog',
     RancherClusterKubeconfigDialog,
