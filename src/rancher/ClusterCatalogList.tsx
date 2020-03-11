@@ -4,6 +4,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 import { CatalogCreateButton } from './CatalogCreateButton';
+import { CatalogDeleteButton } from './CatalogDeleteButton';
 
 const TableComponent = props => {
   const { translate } = props;
@@ -22,6 +23,10 @@ const TableComponent = props => {
         {
           title: translate('URL'),
           render: ({ row }) => <span>{row.catalog_url}</span>,
+        },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <CatalogDeleteButton catalog={row} />,
         },
       ]}
       verboseName={translate('catalogs')}

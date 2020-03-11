@@ -11,6 +11,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { Resource } from '@waldur/resource/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { createEntity } from '@waldur/table-react/actions';
 
 interface FormData {
   name: string;
@@ -34,10 +35,12 @@ const useCatalogCreateDialog = cluster => {
     async formData => {
       try {
         setSubmitting(true);
-        await post('/rancher-catalogs/', {
+        const response = await post('/rancher-catalogs/', {
           scope: cluster.url,
           ...formData,
         });
+        const catalog = response.data;
+        dispatch(createEntity('rancher-catalogs', catalog.uuid, catalog));
       } catch (error) {
         const errorMessage = `${translate(
           'Unable to create catalog.',
