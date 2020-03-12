@@ -6,6 +6,7 @@ import {
   Attribute,
   OrderItemDetailsProps,
   OfferingConfigurationFormProps,
+  OfferingComponent,
 } from '@waldur/marketplace/types';
 
 const REGISTRY: { [key: string]: Omit<OfferingConfiguration, 'type'> } = {};
@@ -34,6 +35,10 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   attributes?(): Attribute[];
   disableOfferingCreation?: boolean;
   schedulable?: boolean;
+  offeringComponentsFilter?: (
+    formData: any,
+    components: OfferingComponent[],
+  ) => OfferingComponent[];
 }
 
 export interface Option {
@@ -147,4 +152,11 @@ export function getAttributes(offeringType: string) {
   const func =
     REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].attributes;
   return func ? func() : [];
+}
+
+export function getOfferingComponentsFilter(offeringType: string) {
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].offeringComponentsFilter
+  );
 }
