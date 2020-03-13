@@ -66,6 +66,15 @@ const limitParser = limits =>
     ...serializeVolumeTypeLimits(limits),
   };
 
+const offeringComponentsFilter = (formData, components) => {
+  const storageMode = (formData.plugin_options || {}).storage_mode || 'fixed';
+  if (storageMode == 'fixed') {
+    return components.filter(c => ['ram', 'cores', 'storage'].includes(c.type));
+  } else {
+    return components.filter(c => c.type !== 'storage');
+  }
+};
+
 registerOfferingType({
   type: 'Packages.Template',
   get label() {
@@ -79,4 +88,5 @@ registerOfferingType({
   providerType: 'OpenStack',
   attributes: ServiceSettingsAttributes,
   showOfferingLimits: true,
+  offeringComponentsFilter,
 });
