@@ -160,3 +160,14 @@ export function getOfferingComponentsFilter(offeringType: string) {
     REGISTRY[offeringType].offeringComponentsFilter
   );
 }
+
+export const filterOfferingComponents = (
+  offering: Offering,
+): OfferingComponent[] => {
+  let offeringComponents: OfferingComponent[] = offering.components;
+  const offeringComponentsFilter = getOfferingComponentsFilter(offering.type);
+  if (offeringComponentsFilter) {
+    offeringComponents = offeringComponentsFilter(offering, offeringComponents);
+  }
+  return offeringComponents;
+};

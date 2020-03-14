@@ -5,6 +5,7 @@ import {
 } from '@waldur/form-react/SelectDialogField';
 import { translate } from '@waldur/i18n';
 import { getOffering, getResource } from '@waldur/marketplace/common/api';
+import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Offering, Plan } from '@waldur/marketplace/types';
 
@@ -23,7 +24,7 @@ const getColumns = (offering: Offering): SelectDialogFieldColumn[] => [
     name: 'name',
     label: translate('Name'),
   },
-  ...offering.components
+  ...filterOfferingComponents(offering)
     .sort((a, b) => a.name.localeCompare(b.name))
     .map(component => ({
       name: component.type,

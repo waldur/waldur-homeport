@@ -1,4 +1,7 @@
-import { getFormLimitParser } from '@waldur/marketplace/common/registry';
+import {
+  getFormLimitParser,
+  filterOfferingComponents,
+} from '@waldur/marketplace/common/registry';
 import { getBillingPeriods } from '@waldur/marketplace/common/utils';
 import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { Limits } from '@waldur/marketplace/details/types';
@@ -15,7 +18,8 @@ export const combinePrices = (
   if (plan && offering) {
     const { periods, multipliers } = getBillingPeriods(plan.unit);
     const offeringLimits = parseOfferingLimits(offering);
-    const components: Component[] = offering.components.map(component => {
+    const offeringComponents = filterOfferingComponents(offering);
+    const components: Component[] = offeringComponents.map(component => {
       let amount = 0;
       if (limits && limits[component.type]) {
         amount = limits[component.type] || 0;
