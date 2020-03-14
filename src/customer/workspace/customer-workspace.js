@@ -1,18 +1,8 @@
 import template from './customer-workspace.html';
 
-export default function customerWorkspace() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: CustomerWorkspaceController,
-    transclude: true,
-  };
-}
-
 // @ngInject
 export function CustomerWorkspaceController(
   $scope,
-  joinService,
   eventsService,
   customersService,
   $state,
@@ -24,34 +14,6 @@ export function CustomerWorkspaceController(
   SidebarExtensionService,
 ) {
   $scope.titleService = titleService;
-  activate();
-
-  function activate() {
-    $scope.$on('WORKSPACE_CHANGED', refreshWorkspace);
-    $scope.$on('$stateChangeSuccess', () => {
-      if ($state.current.data && $state.current.data) {
-        $scope.pageTitle = $state.current.data.pageTitle;
-      }
-      refreshBreadcrumbs();
-    });
-    refreshWorkspace();
-  }
-
-  function refreshBreadcrumbs() {
-    BreadcrumbsService.activeItem = $scope.pageTitle;
-    if (!$scope.currentCustomer) {
-      return;
-    }
-    BreadcrumbsService.items = [
-      {
-        label: gettext('Organization workspace'),
-        state: 'organization.dashboard',
-        params: {
-          uuid: $scope.currentCustomer.uuid,
-        },
-      },
-    ];
-  }
 
   function setItems(customItems) {
     $scope.items = [
@@ -137,6 +99,37 @@ export function CustomerWorkspaceController(
     );
   }
 
+  function refreshBreadcrumbs() {
+    BreadcrumbsService.activeItem = $scope.pageTitle;
+    if (!$scope.currentCustomer) {
+      return;
+    }
+    BreadcrumbsService.items = [
+      {
+        label: gettext('Organization workspace'),
+        state: 'organization.dashboard',
+        params: {
+          uuid: $scope.currentCustomer.uuid,
+        },
+      },
+    ];
+  }
+
+  function getCounters(customer) {
+    const fields = SidebarExtensionService.getCounters($scope.items);
+    const query = angular.extend(
+      { UUID: customer.uuid, fields },
+      eventsService.defaultFilter,
+    );
+    return customersService.getCounters(query);
+  }
+
+  function getCountersError(error) {
+    if (error.status === 404) {
+      $state.go('errorPage.notFound');
+    }
+  }
+
   function refreshWorkspace() {
     const options = WorkspaceService.getWorkspace();
     if (
@@ -159,19 +152,25 @@ export function CustomerWorkspaceController(
     }
   }
 
-  function getCounters(customer) {
-    const fields = SidebarExtensionService.getCounters($scope.items);
-    let query = angular.extend(
-      { UUID: customer.uuid, fields },
-      joinService.defaultFilter,
-      eventsService.defaultFilter,
-    );
-    return customersService.getCounters(query);
+  function activate() {
+    $scope.$on('WORKSPACE_CHANGED', refreshWorkspace);
+    $scope.$on('$stateChangeSuccess', () => {
+      if ($state.current.data && $state.current.data) {
+        $scope.pageTitle = $state.current.data.pageTitle;
+      }
+      refreshBreadcrumbs();
+    });
+    refreshWorkspace();
   }
 
-  function getCountersError(error) {
-    if (error.status === 404) {
-      $state.go('errorPage.notFound');
-    }
-  }
+  activate();
+}
+
+export default function customerWorkspace() {
+  return {
+    restrict: 'E',
+    template: template,
+    controller: CustomerWorkspaceController,
+    transclude: true,
+  };
 }

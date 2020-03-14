@@ -21,7 +21,7 @@ export const wrapTooltip = (label, children) =>
     children
   );
 
-const ActionButton: React.FC<ActionButtonProps> = props =>
+export const ActionButton: React.FC<ActionButtonProps> = props =>
   wrapTooltip(
     props.tooltip,
     <button
@@ -36,5 +36,3 @@ const ActionButton: React.FC<ActionButtonProps> = props =>
 ActionButton.defaultProps = {
   className: 'btn btn-sm btn-default',
 };
-
-export default ActionButton;

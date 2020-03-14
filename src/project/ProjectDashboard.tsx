@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
-import Panel from '@waldur/core/Panel';
+import { Panel } from '@waldur/core/Panel';
 import { loadCategories } from '@waldur/dashboard/api';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';

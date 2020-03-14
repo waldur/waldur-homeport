@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 
 import { showPlanDetailsDialog } from './actions';
 

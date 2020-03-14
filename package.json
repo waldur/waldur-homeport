@@ -1,6 +1,6 @@
 {
   "name": "waldur-homeport",
-  "version": "4.5.6",
+  "version": "4.5.7",
   "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://github.com/opennode/waldur-homeport",
   "license": "MIT",
@@ -14,22 +14,26 @@
     "build-stats": "cross-env NODE_ENV=production webpack --config=webpack.config.prod.js --profile --json > stats.json",
     "build-dll": "webpack --config webpack.config.dll.js -p --hide-modules --mode=production",
     "build-dll-dev": "webpack --config webpack.config.dll.js --hide-modules --mode=development",
-    "test": "yarn eslint --ext ts,tsx src && jest --verbose --runInBand && npm run build",
+    "format:check": "yarn prettier --check \"src/**/*.js\" \"src/**/*.jsx\" \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
+    "format:fix": "yarn prettier --write \"src/**/*.js\" \"src/**/*.jsx\" \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
+    "lint:check": "yarn eslint --ext ts,tsx src",
+    "lint:fix": "yarn eslint --fix --ext ts,tsx src",
+    "test": "yarn format:check && yarn lint:check && jest --verbose --runInBand && npm run build",
     "ci:conf": "mkdirp build/scripts/configs/ && cp src/configs/test-config.json build/scripts/configs/config.json",
     "ci:start": "yarn build && yarn ci:conf && yarn serve build -l 8001",
     "ci:run": "cypress run",
     "ci:test": "start-server-and-test ci:start http://localhost:8001/ ci:run"
   },
   "dependencies": {
-    "@fullcalendar/bootstrap": "^4.3.0",
-    "@fullcalendar/core": "^4.2.0",
-    "@fullcalendar/daygrid": "^4.2.0",
-    "@fullcalendar/interaction": "^4.2.0",
-    "@fullcalendar/list": "^4.3.0",
-    "@fullcalendar/moment": "^4.3.0",
-    "@fullcalendar/moment-timezone": "^4.3.0",
-    "@fullcalendar/react": "^4.2.0",
-    "@fullcalendar/timegrid": "^4.2.0",
+    "@fullcalendar/bootstrap": "~4.3.0",
+    "@fullcalendar/core": "~4.3.0",
+    "@fullcalendar/daygrid": "~4.3.0",
+    "@fullcalendar/interaction": "~4.3.0",
+    "@fullcalendar/list": "~4.3.0",
+    "@fullcalendar/moment": "~4.3.0",
+    "@fullcalendar/moment-timezone": "~4.3.0",
+    "@fullcalendar/react": "~4.3.0",
+    "@fullcalendar/timegrid": "~4.3.0",
     "@sentry/browser": "5.4.0",
     "@tweenjs/tween.js": "^17.2.0",
     "angular": "~1.5.11",
@@ -79,14 +83,14 @@
     "jszip": "^3.1.3",
     "leaflet": "^1.0.3",
     "lodash.debounce": "^4.0.8",
-    "moment": "~2.19.3",
-    "moment-timezone": "^0.5.21",
+    "moment": "~2.24.0",
+    "moment-timezone": "^0.5.25",
     "npm-font-open-sans": "^1.0.3",
     "oclazyload": "^1.1.0",
     "papaparse": "^4.3.6",
     "pdfmake": "^0.1.31",
     "prop-types": "^15.6.2",
-    "react": "^16.8.4",
+    "react": "^16.13.0",
     "react-16-bootstrap-date-picker": "^5.1.2",
     "react-ace": "^8.0.0",
     "react-bootstrap": "^0.32.4",
@@ -146,6 +150,7 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
     "expose-loader": "^0.7.5",
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
@@ -190,9 +195,12 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,htm,html}": [
+    "**/*.{js,jsx,ts,tsx}": [
       "yarn prettier --write",
       "yarn eslint --ext ts,tsx --fix"
+    ],
+    "**/*.{css,scss}": [
+      "yarn prettier --write"
     ]
   }
 }

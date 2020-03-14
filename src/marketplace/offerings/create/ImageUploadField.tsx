@@ -5,7 +5,7 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { FileUploadField } from '@waldur/form-react';
 import { FileUploadFieldProps } from '@waldur/form-react/FileUploadField';
 import { translate } from '@waldur/i18n';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 
 const getImageUrl = image => {
   if (image instanceof File) {

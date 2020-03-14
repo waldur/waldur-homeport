@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { withTranslation } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 
 const EventDetailsButton = ({ row, onShowEventsDetails, translate }) => (
   <ActionButton

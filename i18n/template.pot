@@ -154,6 +154,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/paypal/paypal-invoice-actions.html
 #: src/project/ProjectsList.tsx
+#: src/rancher/ClusterCatalogList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
@@ -333,11 +334,6 @@ msgstr ""
 
 #: src/resource/list/resource-volumes-list.js
 msgid "Add volumes"
-msgstr ""
-
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Adding link"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
@@ -550,6 +546,10 @@ msgstr ""
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType}?"
+msgstr ""
+
+#: src/rancher/CatalogDeleteDialog.tsx
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr ""
 
 #: src/project/ProjectRemoveDialog.tsx
@@ -865,6 +865,10 @@ msgstr ""
 msgid "Bootable"
 msgstr ""
 
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Branch"
+msgstr ""
+
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Browse"
 msgstr ""
@@ -888,10 +892,6 @@ msgstr ""
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "CPU"
-msgstr ""
-
-#: src/providers/details/provider-project-link-quotas.html
-msgid "CPU limit"
 msgstr ""
 
 #: src/slurm/actions.js
@@ -951,6 +951,10 @@ msgstr ""
 msgid "Cancel payment"
 msgstr ""
 
+#: src/user/support/RequestedEmail.tsx
+msgid "Cancel request"
+msgstr ""
+
 #: src/billing/billing-utils.js
 #: src/invitations/invitations-list.js
 msgid "Canceled"
@@ -962,6 +966,22 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
 msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr ""
+
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Catalog URL"
+msgstr ""
+
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Catalog has been created."
+msgstr ""
+
+#: src/rancher/CatalogDeleteDialog.tsx
+msgid "Catalog has been deleted."
+msgstr ""
+
+#: src/rancher/tabs.js
+msgid "Catalogs"
 msgstr ""
 
 #: src/marketplace/category/ShopCategories.tsx
@@ -985,7 +1005,6 @@ msgid "Category is invalid."
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
-#: src/providers/details/provider-details.html
 msgid "Certifications"
 msgstr ""
 
@@ -1321,6 +1340,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/rancher/CatalogCreateButton.tsx
 #: src/user/hooks/hook-details.html
 msgid "Create"
 msgstr ""
@@ -1351,6 +1371,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 msgid "Create backup schedule for OpenStack instance"
+msgstr ""
+
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Create catalog"
 msgstr ""
 
 #: src/vmware/actions.ts
@@ -1626,11 +1650,16 @@ msgstr ""
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/project/ProjectDeleteButton.tsx
+#: src/rancher/CatalogDeleteButton.tsx
 msgid "Delete"
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostDeleteButton.tsx
 msgid "Delete Zabbix host"
+msgstr ""
+
+#: src/rancher/CatalogDeleteDialog.tsx
+msgid "Delete catalog"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
@@ -1681,6 +1710,9 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
+#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/ClusterCatalogList.tsx
+#: src/rancher/ClusterProjectList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -1731,7 +1763,6 @@ msgstr ""
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/project-details-button.html
-#: src/providers/details/dialog.html
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -1924,6 +1955,10 @@ msgstr ""
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Email"
+msgstr ""
+
+#: src/user/support/EmailField.tsx
+msgid "Email change request has been cancelled."
 msgstr ""
 
 #: src/user/support/UserEmailChangeCallback.tsx
@@ -2480,10 +2515,6 @@ msgstr ""
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 msgid "Home organization domain name"
-msgstr ""
-
-#: src/providers/details/provider-details.html
-msgid "Homepage"
 msgstr ""
 
 #: src/user/hooks/HookRemoveButton.tsx
@@ -3097,16 +3128,6 @@ msgstr ""
 msgid "Link OpenStack Instance"
 msgstr ""
 
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Link created"
-msgstr ""
-
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Link removed"
-msgstr ""
-
 #: src/configs/base-config.js
 msgid "Lithuanian"
 msgstr ""
@@ -3493,7 +3514,9 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
-#: src/providers/details/provider-details.html
+#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/ClusterCatalogList.tsx
+#: src/rancher/ClusterProjectList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -3763,10 +3786,6 @@ msgstr ""
 msgid "No projects are assigned to this role."
 msgstr ""
 
-#: src/providers/details/provider-project-link-quota.html
-msgid "No quota set"
-msgstr ""
-
 #: src/billing/billing-records-list.js
 msgid "No records found matching filter."
 msgstr ""
@@ -3859,7 +3878,7 @@ msgstr ""
 
 #: src/rancher/TenantGroup.tsx
 #: src/rancher/breadcrumbs.js
-#: src/rancher/module.js
+#: src/rancher/tabs.js
 msgid "Nodes"
 msgstr ""
 
@@ -3960,7 +3979,6 @@ msgstr ""
 #: src/customer/popover/customer-popover.html
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/project/project-dialog.html
-#: src/providers/details/dialog.html
 #: src/user/user-popover.html
 msgid "OK"
 msgstr ""
@@ -4378,6 +4396,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/CatalogCreateDialog.tsx
 #: src/vmware/VMwareForm.tsx
 msgid "Password"
 msgstr ""
@@ -4479,10 +4498,6 @@ msgstr ""
 msgid "Permissions log"
 msgstr ""
 
-#: src/providers/details/provider-project-link-quotas.html
-msgid "Permitted"
-msgstr ""
-
 #: src/billing/CustomerDetails.tsx
 msgid "Phone"
 msgstr ""
@@ -4495,10 +4510,6 @@ msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
 msgid "Phone numbers"
-msgstr ""
-
-#: src/providers/details/provider-details.html
-msgid "Physical locations"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanField.tsx
@@ -4632,10 +4643,6 @@ msgstr ""
 msgid "Please provide registration code of your company."
 msgstr ""
 
-#: src/providers/details/provider-project-link-quotas.html
-msgid "Please provide valid quotas."
-msgstr ""
-
 #: src/customer/create/customer-create-config.js
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
@@ -4654,14 +4661,6 @@ msgstr ""
 
 #: src/form-react/list-field/ListFieldModal.tsx
 msgid "Please select one"
-msgstr ""
-
-#: src/providers/details/provider-projects.html
-msgid "Please select projects where usage of the provider is permitted."
-msgstr ""
-
-#: src/project/project-providers.html
-msgid "Please select providers allowed to be used in this project."
 msgstr ""
 
 #: src/marketplace/offerings/create/AccountingStep.tsx
@@ -4940,7 +4939,6 @@ msgid "Project manager cannot edit users with same role."
 msgstr ""
 
 #: src/project/ProjectNameField.tsx
-#: src/providers/details/provider-project-link-quotas.html
 #: src/team/add-team-member.html
 #: src/user/list/ProjectPermissions.tsx
 msgid "Project name"
@@ -4948,10 +4946,6 @@ msgstr ""
 
 #: src/project/project-policies.js
 msgid "Project policies have been updated."
-msgstr ""
-
-#: src/project/project-providers-service.js
-msgid "Project providers links have been updated."
 msgstr ""
 
 #: src/project/ProjectRemoveDialog.tsx
@@ -4992,7 +4986,7 @@ msgstr ""
 #: src/customer/routes.js
 #: src/customer/workspace/customer-workspace.js
 #: src/navigation/workspace/select-workspace-dialog.html
-#: src/providers/details/dialog.html
+#: src/rancher/tabs.js
 msgid "Projects"
 msgstr ""
 
@@ -5029,7 +5023,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ServiceSettingsDetailsDialog.tsx
 #: src/marketplace/routes.js
-#: src/providers/details/dialog.html
 msgid "Provider details"
 msgstr ""
 
@@ -5054,7 +5047,6 @@ msgid "Provider type"
 msgstr ""
 
 #: src/help/constants.js
-#: src/project/project-dialog.html
 msgid "Providers"
 msgstr ""
 
@@ -5128,17 +5120,8 @@ msgstr ""
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
-#: src/providers/details/provider-project-link-quota.html
-msgid "Quota usage exceeds limit."
-msgstr ""
-
 #: src/openstack/openstack-tenant/tabs.js
-#: src/providers/details/dialog.html
 msgid "Quotas"
-msgstr ""
-
-#: src/providers/details/provider-project-link-quotas.js
-msgid "Quotas updated."
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -5149,10 +5132,6 @@ msgstr ""
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "RAM"
-msgstr ""
-
-#: src/providers/details/provider-project-link-quotas.html
-msgid "RAM limit GB"
 msgstr ""
 
 #: src/slurm/actions.js
@@ -5381,11 +5360,6 @@ msgstr ""
 msgid "Remove profile"
 msgstr ""
 
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Removing link"
-msgstr ""
-
 #: src/offering/actions/UpdateAction.ts
 msgid "Report"
 msgstr ""
@@ -5526,7 +5500,7 @@ msgstr ""
 msgid "Requested e-mail"
 msgstr ""
 
-#: src/user/support/EmailField.tsx
+#: src/user/support/RequestedEmail.tsx
 msgid "Requested email"
 msgstr ""
 
@@ -5872,9 +5846,7 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/cost-planning/cost-plan-dialog.html
-#: src/project/project-providers.html
 #: src/providers/ProviderUpdateForm.tsx
-#: src/providers/details/provider-projects.html
 #: src/team/add-project-member.js
 #: src/team/add-team-member.js
 msgid "Save"
@@ -6536,6 +6508,7 @@ msgstr ""
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
+#: src/rancher/ClusterProjectList.tsx
 #: src/rancher/rancher-cluster-nodes.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
@@ -6589,10 +6562,6 @@ msgstr ""
 msgid "Storage"
 msgstr ""
 
-#: src/providers/details/provider-project-link-quotas.html
-msgid "Storage limit GB"
-msgstr ""
-
 #: src/openstack/OpenStackPluginOptionsForm.tsx
 msgid "Storage mode"
 msgstr ""
@@ -6622,6 +6591,8 @@ msgstr ""
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
+#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/CatalogDeleteDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
@@ -6880,10 +6851,6 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: src/providers/details/provider-details.html
-msgid "Terms of Services"
-msgstr ""
-
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/routes/about.js
 msgid "Terms of service"
@@ -6993,16 +6960,8 @@ msgstr ""
 msgid "There are no projects yet for this organization."
 msgstr ""
 
-#: src/providers/details/provider-projects.html
-msgid "There are no projects yet."
-msgstr ""
-
 #: src/cost-planning/cost-plan-optimizer.html
 msgid "There are no providers for this deployment plan."
-msgstr ""
-
-#: src/project/project-providers.html
-msgid "There are no providers yet."
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
@@ -7227,7 +7186,6 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/payments/payment-list.js
-#: src/providers/details/provider-details.html
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
 msgstr ""
@@ -7241,6 +7199,7 @@ msgid "Type to search"
 msgstr ""
 
 #: src/invitations/invitations-list.js
+#: src/rancher/ClusterCatalogList.tsx
 msgid "URL"
 msgstr ""
 
@@ -7285,6 +7244,10 @@ msgstr ""
 msgid "Unable to cancel order item."
 msgstr ""
 
+#: src/user/support/EmailField.tsx
+msgid "Unable to cancel request."
+msgstr ""
+
 #: src/user/support/useEmailChange.ts
 msgid "Unable to change email."
 msgstr ""
@@ -7301,17 +7264,16 @@ msgstr ""
 msgid "Unable to create application."
 msgstr ""
 
+#: src/rancher/CatalogCreateDialog.tsx
+msgid "Unable to create catalog."
+msgstr ""
+
 #: src/invitations/actions/invitation-dialog-service.js
 msgid "Unable to create invitation."
 msgstr ""
 
 #: src/user/keys/KeyCreateForm.tsx
 msgid "Unable to create key."
-msgstr ""
-
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Unable to create link."
 msgstr ""
 
 #: src/rancher/cluster-actions/CreateNodeDialog.tsx
@@ -7334,13 +7296,12 @@ msgstr ""
 msgid "Unable to delete attachment."
 msgstr ""
 
-#: src/issues/comments/effects.ts
-msgid "Unable to delete comment."
+#: src/rancher/CatalogDeleteDialog.tsx
+msgid "Unable to delete catalog."
 msgstr ""
 
-#: src/project/project-providers-service.js
-#: src/providers/details/provider-projects.js
-msgid "Unable to delete link."
+#: src/issues/comments/effects.ts
+msgid "Unable to delete comment."
 msgstr ""
 
 #: src/issues/comments/effects.ts
@@ -7366,10 +7327,6 @@ msgstr ""
 
 #: src/booking/store/effects.ts
 msgid "Unable to fetch offering bookings."
-msgstr ""
-
-#: src/project/project-providers-service.js
-msgid "Unable to fetch project providers."
 msgstr ""
 
 #: src/analytics/effects.ts
@@ -7637,10 +7594,6 @@ msgstr ""
 
 #: src/billing/billing-utils.js
 msgid "Unable to send record notification."
-msgstr ""
-
-#: src/providers/details/provider-project-link-quotas.js
-msgid "Unable to set quotas."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
@@ -8044,6 +7997,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/CatalogCreateDialog.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 #: src/team/user-selector.html
@@ -8345,10 +8299,6 @@ msgstr ""
 msgid "You don't have any organization yet."
 msgstr ""
 
-#: src/project/project-providers.html
-msgid "You don't have enough permission to edit providers for current project."
-msgstr ""
-
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectDeleteButton.tsx
 msgid "You don't have enough privileges to perform this operation."
@@ -8526,6 +8476,10 @@ msgstr ""
 msgid "by"
 msgstr ""
 
+#: src/rancher/ClusterCatalogList.tsx
+msgid "catalogs"
+msgstr ""
+
 #: src/issues/workspace/issues-activity-stream.html
 msgid "commented on"
 msgstr ""
@@ -8606,6 +8560,7 @@ msgid "profile."
 msgstr ""
 
 #: src/project/ProjectsList.tsx
+#: src/rancher/ClusterProjectList.tsx
 #: src/user/list/ProjectPermissions.tsx
 msgid "projects"
 msgstr ""
@@ -8754,10 +8709,6 @@ msgstr ""
 #: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "{usage} of {limit} used"
-msgstr ""
-
-#: src/providers/details/provider-project-link-quota.js
-msgid "{usage} used"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx

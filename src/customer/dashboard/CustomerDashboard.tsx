@@ -4,7 +4,7 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import Panel from '@waldur/core/Panel';
+import { Panel } from '@waldur/core/Panel';
 import { Query } from '@waldur/core/Query';
 import { loadCategories } from '@waldur/dashboard/api';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';

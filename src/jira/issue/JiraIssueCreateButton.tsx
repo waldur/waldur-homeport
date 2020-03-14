@@ -4,7 +4,7 @@ import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 
 const PureJiraIssueCreateButton = props => {
   const { translate, onClick } = props;

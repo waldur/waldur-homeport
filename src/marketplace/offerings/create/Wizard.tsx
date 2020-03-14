@@ -5,7 +5,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import { SubmitButton } from '@waldur/form-react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 
 interface WizardProps extends TranslateProps {
   steps: string[];

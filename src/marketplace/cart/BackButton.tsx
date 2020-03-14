@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import ActionButton from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table-react/ActionButton';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 

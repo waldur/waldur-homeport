@@ -1,6 +1,7 @@
-import { formValueSelector } from 'redux-form';
+import { formValueSelector, getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { getOfferingComponentsFilter } from '@waldur/marketplace/common/registry';
 import { OfferingComponent } from '@waldur/marketplace/types';
 import {
   isOwnerOrStaff,
@@ -31,10 +32,16 @@ export const getComponents = (state, type): OfferingComponent[] => {
   const formComponents: OfferingComponent[] = formatComponents(
     getForm(state, 'components') || [],
   );
-  return [
+  let components = [
     ...builtinComponents,
     ...formComponents.filter(c => !builtinTypes.includes(c.type)),
   ];
+  const offeringComponentsFilter = getOfferingComponentsFilter(type);
+  if (offeringComponentsFilter) {
+    const formData = getFormValues(FORM_ID)(state);
+    components = offeringComponentsFilter(formData, components);
+  }
+  return components;
 };
 
 export const getTypeLabel = (state: any): string => {
