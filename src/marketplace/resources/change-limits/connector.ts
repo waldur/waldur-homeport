@@ -3,7 +3,10 @@ import { compose } from 'redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 
 import { QueryChildProps } from '@waldur/core/Query';
-import { Limits } from '@waldur/marketplace/common/registry';
+import {
+  Limits,
+  filterOfferingComponents,
+} from '@waldur/marketplace/common/registry';
 import { getBillingPeriods } from '@waldur/marketplace/common/utils';
 import { orderCanBeApproved as getOrderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
 
@@ -39,7 +42,8 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
     const newLimits = formSelector(state, 'limits');
     const { offering, plan, usages, limits: currentLimits } = ownProps.data;
     const { periods, multipliers } = getBillingPeriods(plan.unit);
-    const components = offering.components.map(component => {
+    const offeringComponents = filterOfferingComponents(offering);
+    const components = offeringComponents.map(component => {
       const price = plan.prices[component.type] || 0;
       const subTotal = price * newLimits[component.type] || 0;
       const prices = multipliers.map(mult => mult * subTotal);
