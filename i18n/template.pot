@@ -494,6 +494,10 @@ msgstr ""
 msgid "Application price explanation"
 msgstr ""
 
+#: src/rancher/tabs.js
+msgid "Application templates"
+msgstr ""
+
 #: src/analytics/resource-chart-service.js
 #: src/ansible/constants.js
 #: src/ansible/playbook-jobs/details/ansible-job-details.js
@@ -968,6 +972,10 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: src/rancher/ClusterTemplateList.tsx
+msgid "Catalog"
+msgstr ""
+
 #: src/rancher/CatalogCreateDialog.tsx
 msgid "Catalog URL"
 msgstr ""
@@ -981,7 +989,7 @@ msgid "Catalog has been deleted."
 msgstr ""
 
 #: src/rancher/tabs.js
-msgid "Catalogs"
+msgid "Catalogues"
 msgstr ""
 
 #: src/marketplace/category/ShopCategories.tsx
@@ -1713,6 +1721,7 @@ msgstr ""
 #: src/rancher/CatalogCreateDialog.tsx
 #: src/rancher/ClusterCatalogList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/rancher/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -3517,6 +3526,7 @@ msgstr ""
 #: src/rancher/CatalogCreateDialog.tsx
 #: src/rancher/ClusterCatalogList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/rancher/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -5109,6 +5119,10 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
+#: src/rancher/TemplateDetail.tsx
+msgid "Questions"
+msgstr ""
+
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
 #: src/resource/resource-provision-policy.js
@@ -5170,6 +5184,10 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Rating"
+msgstr ""
+
+#: src/rancher/TemplateDetail.tsx
+msgid "Readme"
 msgstr ""
 
 #: src/customer/details/customer-manage.js
@@ -6509,6 +6527,7 @@ msgstr ""
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/rancher/ClusterTemplateList.tsx
 #: src/rancher/rancher-cluster-nodes.js
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
@@ -6896,6 +6915,10 @@ msgstr ""
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
+msgstr ""
+
+#: src/rancher/CatalogTemplateList.tsx
+msgid "There are no applications templates."
 msgstr ""
 
 #: src/ansible/application-list.js
@@ -7383,6 +7406,14 @@ msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "Unable to load actions"
+msgstr ""
+
+#: src/rancher/TemplateDetail.tsx
+msgid "Unable to load application template details."
+msgstr ""
+
+#: src/rancher/CatalogTemplateList.tsx
+msgid "Unable to load applications templates."
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
@@ -8464,6 +8495,10 @@ msgstr ""
 msgid "Zabbix provider"
 msgstr ""
 
+#: src/rancher/ClusterTemplateList.tsx
+msgid "application templates"
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
 msgstr ""
@@ -8477,7 +8512,7 @@ msgid "by"
 msgstr ""
 
 #: src/rancher/ClusterCatalogList.tsx
-msgid "catalogs"
+msgid "catalogues"
 msgstr ""
 
 #: src/issues/workspace/issues-activity-stream.html

@@ -2,24 +2,25 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
 
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 // const OfflinePlugin = require('offline-plugin');
 
 const baseConfig = require('./webpack.config.common.js');
 const utils = require('./webpack.utils');
-
 module.exports = merge(baseConfig, {
+
   devtool: 'source-map',
   mode: 'production',
   optimization: {
+    minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
+      new TerserPlugin({
         sourceMap: true,
         parallel: true,
-        uglifyOptions: {
+        exclude: /\.min\.js$/gi,
+        terserOptions: {
           mangle: true,
-          exclude: [/\.min\.js$/gi]
         }
       })
     ]
