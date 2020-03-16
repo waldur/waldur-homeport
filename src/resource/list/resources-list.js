@@ -1,3 +1,4 @@
+/* eslint-disable */
 import loadLeafleat from '@waldur/shims/load-leaflet';
 
 // @ngInject
@@ -5,7 +6,6 @@ export default function baseResourceListController(
   baseControllerListClass,
   ENV,
   resourcesService,
-  priceEstimationService,
   servicesService,
   currentStateService,
   usersService,
@@ -287,7 +287,6 @@ export default function baseResourceListController(
       this._super(resource);
       servicesService.clearAllCacheForCurrentEndpoint();
       projectsService.clearAllCacheForCurrentEndpoint();
-      priceEstimationService.clearAllCacheForCurrentEndpoint();
     },
     reInitResource: function(resource) {
       let vm = this;
