@@ -20,6 +20,7 @@ import rancherKeyValueDialog from './RancherKeyValueDialog';
 import { RancherNodeSummary } from './RancherNodeSummary';
 import rancherRoutes from './routes';
 import { tabsConfig } from './tabs';
+import rancherTemplateDetails from './TemplateDetail';
 
 // @ngInject
 function actionsConfig(ActionConfigurationProvider) {
@@ -44,6 +45,7 @@ export default module => {
   module.component('rancherCreateNodeDialog', rancherCreateNodeDialog);
   module.component('rancherCatalogCreateDialog', rancherCatalogCreateDialog);
   module.component('rancherCatalogDeleteDialog', rancherCatalogDeleteDialog);
+  module.component('rancherTemplateDetails', rancherTemplateDetails);
   module.config(actionsConfig);
   module.config(tabsConfig);
   module.config(rancherRoutes);

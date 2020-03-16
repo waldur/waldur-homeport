@@ -163,6 +163,7 @@
     "lint-staged": "^10.0.8",
     "lodash": "^4.17.11",
     "markdown-loader": "^4.0.0",
+    "marked": "^0.8.0",
     "mini-css-extract-plugin": "^0.4.5",
     "ng-annotate-loader": "^0.2.0",
     "node-sass": "^4.12.0",

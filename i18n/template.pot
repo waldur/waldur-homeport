@@ -5119,6 +5119,10 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
+#: src/rancher/TemplateDetail.tsx
+msgid "Questions"
+msgstr ""
+
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
 #: src/resource/resource-provision-policy.js
@@ -5180,6 +5184,10 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Rating"
+msgstr ""
+
+#: src/rancher/TemplateDetail.tsx
+msgid "Readme"
 msgstr ""
 
 #: src/customer/details/customer-manage.js
@@ -7398,6 +7406,10 @@ msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "Unable to load actions"
+msgstr ""
+
+#: src/rancher/TemplateDetail.tsx
+msgid "Unable to load application template details."
 msgstr ""
 
 #: src/rancher/CatalogTemplateList.tsx
