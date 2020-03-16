@@ -16,7 +16,10 @@ const TableComponent = props => {
         render: ({ row }) => (
           <Link
             state="rancher-catalog-details"
-            params={{ uuid: row.uuid }}
+            params={{
+              catalogUuid: row.uuid,
+              uuid: props.resource.project_uuid,
+            }}
             label={row.name}
           />
         ),

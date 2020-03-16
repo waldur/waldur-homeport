@@ -14,7 +14,7 @@ import { TemplateCard } from './TemplateCard';
 const CatalogTemplatesList = () => {
   const { state, call } = useQuery(() =>
     getAll('/rancher-templates/', {
-      params: { catalog_uuid: $state.params.uuid },
+      params: { catalog_uuid: $state.params.catalogUuid },
     }),
   );
   React.useEffect(call, []);
