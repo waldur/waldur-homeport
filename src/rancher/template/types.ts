@@ -9,4 +9,5 @@ export interface Question {
   default?: string | boolean;
   group: string;
   required: boolean;
+  showIf?: string;
 }
