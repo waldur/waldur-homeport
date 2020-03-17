@@ -6002,6 +6002,10 @@ msgstr ""
 msgid "Select affected resource..."
 msgstr ""
 
+#: src/rancher/template/EnumField.tsx
+msgid "Select an option..."
+msgstr ""
+
 #: src/issues/create/issue-registration.html
 msgid "Select assignee..."
 msgstr ""

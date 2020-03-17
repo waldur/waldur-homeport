@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
-import * as Table from 'react-bootstrap/lib/Table';
 
 import { getById, get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -9,6 +8,7 @@ import { $state } from '@waldur/core/services';
 import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
+import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { FormattedMarkdown } from './FormattedMarkdown';
@@ -39,19 +39,6 @@ const TemplateHeader = props => (
       <FormattedMarkdown text={props.version.app_readme} />
     </Col>
   </Row>
-);
-
-const TemplateQuestions = props => (
-  <Table>
-    <tbody>
-      {props.questions.map((question, index) => (
-        <tr key={index}>
-          <td>{question.label}</td>
-          <td>{question.description}</td>
-        </tr>
-      ))}
-    </tbody>
-  </Table>
 );
 
 export const TemplateDetail = () => {
