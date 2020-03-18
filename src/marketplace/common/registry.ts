@@ -31,6 +31,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   showOptions?: boolean;
   showComponents?: boolean;
   showOfferingLimits?: boolean;
+  onlyOnePlan?: boolean;
   providerType?: string;
   attributes?(): Attribute[];
   disableOfferingCreation?: boolean;
@@ -115,6 +116,14 @@ export function showOfferingLimits(offeringType: string) {
   return (
     REGISTRY.hasOwnProperty(offeringType) &&
     REGISTRY[offeringType].showOfferingLimits
+  );
+}
+
+export function hidePlanAddButton(offeringType: string, fields: Array<any>) {
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].onlyOnePlan &&
+    fields.length
   );
 }
 
