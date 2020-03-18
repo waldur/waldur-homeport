@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { $state } from '@waldur/core/services';
 
 const rancherClusterNodes = {

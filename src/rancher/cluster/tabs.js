@@ -30,8 +30,4 @@ export function tabsConfig(
       },
     }),
   });
-  ResourceTabsConfigurationProvider.register('Rancher.Node', {
-    order: [],
-    options: {},
-  });
 }

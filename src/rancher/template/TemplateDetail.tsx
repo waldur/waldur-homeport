@@ -3,6 +3,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import { getById, get } from '@waldur/core/api';
+import { FormattedMarkdown } from '@waldur/core/FormattedMarkdown';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { useQuery } from '@waldur/core/useQuery';
@@ -10,8 +11,6 @@ import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
 import { connectAngularComponent } from '@waldur/store/connect';
-
-import { FormattedMarkdown } from './FormattedMarkdown';
 
 const getTemplate = templateUuid =>
   getById('/rancher-templates/', templateUuid);

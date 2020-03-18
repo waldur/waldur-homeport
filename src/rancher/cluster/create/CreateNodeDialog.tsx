@@ -16,11 +16,11 @@ import { Flavor } from '@waldur/openstack/openstack-instance/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
-import { NodeFlavorGroup } from '../NodeFlavorGroup';
-import { NodeRoleGroup } from '../NodeRoleGroup';
-import { NodeStorageGroup } from '../NodeStorageGroup';
-import { SubnetGroup } from '../SubnetGroup';
-import { loadData } from '../utils';
+import { NodeFlavorGroup } from './NodeFlavorGroup';
+import { NodeRoleGroup } from './NodeRoleGroup';
+import { NodeStorageGroup } from './NodeStorageGroup';
+import { SubnetGroup } from './SubnetGroup';
+import { loadData } from './utils';
 
 interface OwnProps {
   resolve: { cluster: any };
