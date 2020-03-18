@@ -88,5 +88,6 @@ registerOfferingType({
   providerType: 'OpenStack',
   attributes: ServiceSettingsAttributes,
   showOfferingLimits: true,
+  onlyOnePlan: true,
   offeringComponentsFilter,
 });

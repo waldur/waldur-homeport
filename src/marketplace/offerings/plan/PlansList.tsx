@@ -1,12 +1,14 @@
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
+import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
 
 import { PlanAddButton } from './PlanAddButton';
 import { PlanPanel } from './PlanPanel';
 
-export const PlansList = props => (
+const PlansListComponent = props => (
   <div className="form-group">
     <Col smOffset={2} sm={8} className="m-b-sm">
       <p className="form-control-static">
@@ -23,7 +25,16 @@ export const PlansList = props => (
           onRemove={props.fields.remove}
         />
       ))}
-      <PlanAddButton onClick={() => props.fields.push({})} />
+
+      {!hidePlanAddButton(props.selectedProvider.value, props.fields) && (
+        <PlanAddButton onClick={() => props.fields.push({})} />
+      )}
     </Col>
   </div>
 );
+
+const mapStateToProps = state => ({
+  selectedProvider: state.form.marketplaceOfferingCreate.values.type,
+});
+
+export const PlansList = connect(mapStateToProps, null)(PlansListComponent);
