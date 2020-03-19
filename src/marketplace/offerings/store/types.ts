@@ -53,6 +53,7 @@ export interface OfferingFormData {
   options?: OptionFormData[];
   schedules?: ScheduleFormData[];
   plugin_options?: Record<string, any>;
+  secret_options?: Record<string, any>;
   service_settings?: any;
   thumbnail?: File;
   scope?: string;
@@ -91,6 +92,7 @@ export interface OfferingRequest {
   plans?: PlanRequest[];
   options?: OfferingOptions;
   plugin_options?: Record<string, any>;
+  secret_options?: Record<string, any>;
   schedules?: ScheduleFormData[];
   scope?: string;
   service_attributes?: any;

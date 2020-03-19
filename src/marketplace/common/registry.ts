@@ -19,6 +19,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
   component: React.ComponentType<OfferingConfigurationFormProps>;
   pluginOptionsForm?: React.ComponentType<any>;
+  secretOptionsForm?: React.ComponentType<any>;
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
   checkoutSummaryComponent?: any;
   serializer?: (
@@ -137,6 +138,13 @@ export function getPluginOptionsForm(offeringType: string) {
   return (
     REGISTRY.hasOwnProperty(offeringType) &&
     REGISTRY[offeringType].pluginOptionsForm
+  );
+}
+
+export function getSecretOptionsForm(offeringType: string) {
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].secretOptionsForm
   );
 }
 

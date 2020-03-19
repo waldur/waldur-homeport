@@ -13,7 +13,7 @@ registerOfferingType({
   },
   component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
-  pluginOptionsForm: ScriptsForm,
+  secretOptionsForm: ScriptsForm,
   serializer,
   showOptions: true,
   showComponents: true,

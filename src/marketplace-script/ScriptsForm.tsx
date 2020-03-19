@@ -20,7 +20,7 @@ const PROGRAMMING_LANGUAGE_CHOICES = [
   },
 ];
 
-const getLanguage = state => (getForm(state, 'plugin_options') || {}).language;
+const getLanguage = state => (getForm(state, 'secret_options') || {}).language;
 
 export const ScriptsForm = ({ container }) => {
   const language = useSelector(getLanguage);
