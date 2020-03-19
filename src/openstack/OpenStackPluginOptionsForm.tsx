@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { FormContainer, SelectField } from '@waldur/form-react';
+import { FormContainer, SelectField, NumberField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 
-export const OpenStackPluginOptionsForm = ({ container, locale }) => {
+export const OpenStackPluginOptionsForm = ({ container }) => {
   const STORAGE_MODE_OPTIONS = React.useMemo(
     () => [
       {
@@ -17,7 +17,7 @@ export const OpenStackPluginOptionsForm = ({ container, locale }) => {
         value: 'dynamic',
       },
     ],
-    locale,
+    [],
   );
 
   return (
@@ -31,6 +31,11 @@ export const OpenStackPluginOptionsForm = ({ container, locale }) => {
         description={translate(
           'Offering needs to be saved before pricing for dynamic components could be set.',
         )}
+      />
+      <NumberField
+        name="snapshot_size_limit_gb"
+        label={translate('Snapshot size limit')}
+        unit="GB"
       />
     </FormContainer>
   );
