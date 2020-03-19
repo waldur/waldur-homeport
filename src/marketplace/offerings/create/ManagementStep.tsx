@@ -14,6 +14,7 @@ import { OfferingScheduler } from '../option/OfferingScheduler';
 
 export interface ManagementStepProps extends TranslateProps {
   pluginOptionsForm?: React.ComponentType<any>;
+  secretOptionsForm?: React.ComponentType<any>;
   showOptions: boolean;
   schedulable?: boolean;
   serviceSettingsForm?: React.ComponentType<ProviderFormProps>;
@@ -75,6 +76,13 @@ export const ManagementStep = (props: ManagementStepProps) => (
     {props.pluginOptionsForm && (
       <FormSection name="plugin_options">
         {React.createElement(props.pluginOptionsForm, {
+          container: ContainerProps,
+        })}
+      </FormSection>
+    )}
+    {props.secretOptionsForm && (
+      <FormSection name="secret_options">
+        {React.createElement(props.secretOptionsForm, {
           container: ContainerProps,
         })}
       </FormSection>

@@ -8,6 +8,7 @@ import {
   getProviderType,
   isOfferingTypeSchedulable,
   getPluginOptionsForm,
+  getSecretOptionsForm,
 } from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -29,6 +30,7 @@ const mapStateToProps = state => {
     props.showOptions = showOfferingOptions(type);
     props.schedulable = isOfferingTypeSchedulable(type);
     props.pluginOptionsForm = getPluginOptionsForm(type);
+    props.secretOptionsForm = getSecretOptionsForm(type);
     const providerType = getProviderType(type);
     if (providerType) {
       const providerConfig = findProvider(providerType);
