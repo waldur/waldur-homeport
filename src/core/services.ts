@@ -11,7 +11,8 @@ export let $q = null;
 // When application is initialized, it is replaced with actual service.
 export let $sanitize = x => x;
 
-export const defaultCurrency = value => $filter('defaultCurrency')(value);
+export const defaultCurrency = value =>
+  $filter ? $filter('defaultCurrency')(value) : value;
 
 export default function injectServices($injector) {
   ENV = $injector.get('ENV');
