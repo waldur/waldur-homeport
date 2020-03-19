@@ -76,6 +76,7 @@ interface Quota {
 export interface Offering {
   quotas?: Quota[];
   uuid?: string;
+  url?: string;
   thumbnail: string;
   name: string;
   native_name?: string;
