@@ -1,9 +1,15 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 
-import { FormContainer, SelectField } from '@waldur/form-react';
+import { FormContainer, SelectField, NumberField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
+import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 
-export const OpenStackPluginOptionsForm = ({ container, locale }) => {
+const pluginOptionsSelector = state =>
+  formValueSelector(FORM_ID)(state, 'plugin_options');
+
+export const OpenStackPluginOptionsForm = ({ container }) => {
   const STORAGE_MODE_OPTIONS = React.useMemo(
     () => [
       {
@@ -17,8 +23,10 @@ export const OpenStackPluginOptionsForm = ({ container, locale }) => {
         value: 'dynamic',
       },
     ],
-    locale,
+    [],
   );
+
+  const pluginOptions = useSelector(pluginOptionsSelector);
 
   return (
     <FormContainer {...container}>
@@ -28,10 +36,17 @@ export const OpenStackPluginOptionsForm = ({ container, locale }) => {
         options={STORAGE_MODE_OPTIONS}
         simpleValue={true}
         required={true}
-        description={translate(
-          'Offering needs to be saved before pricing for dynamic components could be set.',
-        )}
       />
+      {pluginOptions.storage_mode == 'dynamic' && (
+        <NumberField
+          name="snapshot_size_limit_gb"
+          label={translate('Snapshot size limit')}
+          unit="GB"
+          description={translate(
+            'Additional space to apply to storage quota to be used by snapshots.',
+          )}
+        />
+      )}
     </FormContainer>
   );
 };
