@@ -28,9 +28,6 @@ export const OpenStackPluginOptionsForm = ({ container }) => {
         options={STORAGE_MODE_OPTIONS}
         simpleValue={true}
         required={true}
-        description={translate(
-          'Offering needs to be saved before pricing for dynamic components could be set.',
-        )}
       />
       <NumberField
         name="snapshot_size_limit_gb"
