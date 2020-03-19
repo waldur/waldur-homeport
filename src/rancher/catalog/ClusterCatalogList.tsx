@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { Link } from '@waldur/core/Link';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
@@ -8,28 +9,41 @@ import { CatalogDeleteButton } from './CatalogDeleteButton';
 
 const TableComponent = props => {
   const { translate } = props;
+  const columns = React.useMemo(
+    () => [
+      {
+        title: translate('Name'),
+        render: ({ row }) => (
+          <Link
+            state="rancher-catalog-details"
+            params={{
+              catalogUuid: row.uuid,
+              uuid: props.resource.project_uuid,
+            }}
+            label={row.name}
+          />
+        ),
+      },
+      {
+        title: translate('Description'),
+        render: ({ row }) => <span>{row.description}</span>,
+      },
+      {
+        title: translate('URL'),
+        render: ({ row }) => <span>{row.catalog_url}</span>,
+      },
+      {
+        title: translate('Actions'),
+        render: ({ row }) => <CatalogDeleteButton catalog={row} />,
+      },
+    ],
+    [translate],
+  );
   return (
     <Table
       {...props}
-      columns={[
-        {
-          title: translate('Name'),
-          render: ({ row }) => <span>{row.name}</span>,
-        },
-        {
-          title: translate('Description'),
-          render: ({ row }) => <span>{row.description}</span>,
-        },
-        {
-          title: translate('URL'),
-          render: ({ row }) => <span>{row.catalog_url}</span>,
-        },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => <CatalogDeleteButton catalog={row} />,
-        },
-      ]}
-      verboseName={translate('catalogs')}
+      columns={columns}
+      verboseName={translate('catalogues')}
       actions={<CatalogCreateButton cluster={props.resource} />}
     />
   );
@@ -42,6 +56,7 @@ const TableOptions = {
   exportRow: row => [row.name, row.description, row.catalog_url],
   mapPropsToFilter: props => ({
     cluster_uuid: props.resource.uuid,
+    scope_type: 'cluster',
   }),
 };
 

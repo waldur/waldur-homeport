@@ -102,6 +102,7 @@ export const getInitialValues = state => {
     schedules,
     options,
     plugin_options: offering.plugin_options,
+    secret_options: offering.secret_options,
     plans: offering.plans,
     components: offering.components ? parseComponents(offering.components) : [],
     limits: offering.components ? parseOfferingLimits(offering) : {},

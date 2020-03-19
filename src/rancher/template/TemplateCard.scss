@@ -1,0 +1,37 @@
+.template-card {
+  display: block;
+  position: relative;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-bottom: 30px;
+
+  .template-thumb {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 10px;
+
+    & > img {
+      display: block;
+      height: 6em;
+      margin: 10px auto;
+      margin-bottom: 0px;
+    }
+  }
+
+  .template-card-body {
+    padding: 18px;
+    padding-top: 0px;
+    text-align: center;
+  }
+
+  .template-title {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: normal;
+    height: 4em;
+    overflow: hidden;
+    line-height: 1.4em;
+  }
+}

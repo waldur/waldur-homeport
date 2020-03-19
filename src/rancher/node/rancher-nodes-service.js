@@ -1,6 +1,6 @@
 // @ngInject
 export default function rancherNodesService(baseServiceClass) {
-  let ServiceClass = baseServiceClass.extend({
+  const ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/rancher-nodes/';

@@ -76,6 +76,7 @@ interface Quota {
 export interface Offering {
   quotas?: Quota[];
   uuid?: string;
+  url?: string;
   thumbnail: string;
   name: string;
   native_name?: string;
@@ -98,6 +99,7 @@ export interface Offering {
   components: OfferingComponent[];
   options?: OfferingOptions;
   plugin_options?: Record<string, any>;
+  secret_options?: Record<string, any>;
   plans?: Plan[];
   type: string;
   state: string;

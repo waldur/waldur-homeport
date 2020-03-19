@@ -19,6 +19,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
   component: React.ComponentType<OfferingConfigurationFormProps>;
   pluginOptionsForm?: React.ComponentType<any>;
+  secretOptionsForm?: React.ComponentType<any>;
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
   checkoutSummaryComponent?: any;
   serializer?: (
@@ -31,6 +32,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   showOptions?: boolean;
   showComponents?: boolean;
   showOfferingLimits?: boolean;
+  onlyOnePlan?: boolean;
   providerType?: string;
   attributes?(): Attribute[];
   disableOfferingCreation?: boolean;
@@ -118,6 +120,14 @@ export function showOfferingLimits(offeringType: string) {
   );
 }
 
+export function hidePlanAddButton(offeringType: string, fields: Array<any>) {
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].onlyOnePlan &&
+    fields.length
+  );
+}
+
 export function isOfferingTypeSchedulable(offeringType: string) {
   return (
     REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].schedulable
@@ -128,6 +138,13 @@ export function getPluginOptionsForm(offeringType: string) {
   return (
     REGISTRY.hasOwnProperty(offeringType) &&
     REGISTRY[offeringType].pluginOptionsForm
+  );
+}
+
+export function getSecretOptionsForm(offeringType: string) {
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].secretOptionsForm
   );
 }
 
@@ -160,3 +177,14 @@ export function getOfferingComponentsFilter(offeringType: string) {
     REGISTRY[offeringType].offeringComponentsFilter
   );
 }
+
+export const filterOfferingComponents = (
+  offering: Offering,
+): OfferingComponent[] => {
+  let offeringComponents: OfferingComponent[] = offering.components;
+  const offeringComponentsFilter = getOfferingComponentsFilter(offering.type);
+  if (offeringComponentsFilter) {
+    offeringComponents = offeringComponentsFilter(offering, offeringComponents);
+  }
+  return offeringComponents;
+};

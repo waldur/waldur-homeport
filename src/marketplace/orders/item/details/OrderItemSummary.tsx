@@ -4,7 +4,7 @@ import * as React from 'react';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
-import { Offering } from '@waldur/marketplace/types';
+import { Offering, OfferingComponent } from '@waldur/marketplace/types';
 
 interface OrderItemSummaryProps {
   orderItem: OrderItemDetailsType;
@@ -12,10 +12,19 @@ interface OrderItemSummaryProps {
 }
 
 interface Context {
-  orderItem: OrderItemDetailsType;
+  orderItem: Pick<
+    OrderItemDetailsType,
+    | 'attributes'
+    | 'limits'
+    | 'resource_name'
+    | 'old_plan_name'
+    | 'new_plan_name'
+    | 'old_cost_estimate'
+    | 'new_cost_estimate'
+  >;
   user: string;
-  approved: string;
-  offering: Offering;
+  approved?: string;
+  components: OfferingComponent[];
 }
 
 const getCreateSummary = (ctx: Context): string => {
@@ -24,7 +33,6 @@ const getCreateSummary = (ctx: Context): string => {
     {
       user: ctx.user,
       resource_name: ctx.orderItem.attributes.name,
-      resource_type: ctx.orderItem.resource_type,
       plan_name: ctx.orderItem.new_plan_name || 'Default',
     },
   );
@@ -35,22 +43,27 @@ const getCreateSummary = (ctx: Context): string => {
   }
 };
 
+const formatComponent = (limits, componentMap, key) =>
+  [
+    `${key.toLocaleUpperCase()}:`,
+    limits[key] / (componentMap[key]?.factor || 1),
+    componentMap[key]?.measured_unit,
+  ]
+    .filter(x => x)
+    .join(' ');
+
 const formatLimits = (limits, componentMap) =>
   Object.keys(limits)
     .sort()
-    .map(
-      key =>
-        `${key.toLocaleUpperCase()}: ${limits[key] /
-          componentMap[key].factor} ${componentMap[key].measured_unit}`,
-    )
+    .map(key => formatComponent(limits, componentMap, key))
     .join(', ');
 
 const getComponentMap = components =>
   components.reduce((r, c) => ({ ...r, [c.type]: c || 1 }), {});
 
-const getUpdateSummary = (ctx: Context) => {
+export const getUpdateSummary = (ctx: Context) => {
   let msg;
-  const componentMap = getComponentMap(ctx.offering.components);
+  const componentMap = getComponentMap(ctx.components);
   if (ctx.orderItem.attributes.old_limits) {
     msg = translate(
       '{user} has requested changing of limits from "{old_limits}" to "{new_limits}".',
@@ -96,7 +109,6 @@ const getTerminateSummary = (ctx: Context) => {
     {
       user: ctx.user,
       resource_name: ctx.orderItem.resource_name,
-      resource_type: ctx.orderItem.resource_type,
       plan_name: ctx.orderItem.old_plan_name || 'Default',
     },
   );
@@ -123,7 +135,7 @@ const getContext = (
       time: moment(orderItem.order_approved_at).format('HH:mm'),
     });
   }
-  return { user, approved, orderItem, offering };
+  return { user, approved, orderItem, components: offering.components };
 };
 
 const getMessage = (

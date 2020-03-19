@@ -42,6 +42,11 @@ const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => (
         return (
           <>
             <h3>{data.offering.name}</h3>
+            <h3>
+              {translate('Service provider: ')}
+              {data.offering.customer_name}
+            </h3>
+
             <p>
               {data.offering.description && (
                 <div className="bs-callout bs-callout-success">

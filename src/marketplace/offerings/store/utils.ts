@@ -163,6 +163,7 @@ export const formatOfferingRequest = (
   }
 
   result.plugin_options = request.plugin_options;
+  result.secret_options = request.secret_options;
 
   if (request.plans) {
     // Pick either built-in or custom fixed components.

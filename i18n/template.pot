@@ -76,7 +76,7 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/rancher/RancherClusterSummary.tsx
+#: src/rancher/cluster/RancherClusterSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Access"
 msgstr ""
@@ -154,7 +154,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/paypal/paypal-invoice-actions.html
 #: src/project/ProjectsList.tsx
-#: src/rancher/ClusterCatalogList.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
@@ -226,7 +226,7 @@ msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/openstack/openstack-instance/openstack-instance-data-volume.html
-#: src/rancher/DataVolumeAddButton.tsx
+#: src/rancher/cluster/create/DataVolumeAddButton.tsx
 msgid "Add data volume"
 msgstr ""
 
@@ -346,6 +346,10 @@ msgstr ""
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr ""
+
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr ""
@@ -456,11 +460,11 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
-#: src/rancher/RancherNodeSummary.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
 msgid "Annotations"
 msgstr ""
 
-#: src/rancher/RancherKeyValueDialog.tsx
+#: src/rancher/node/RancherKeyValueDialog.tsx
 msgid "Annotations & labels"
 msgstr ""
 
@@ -492,6 +496,10 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 msgid "Application price explanation"
+msgstr ""
+
+#: src/rancher/cluster/tabs.js
+msgid "Application templates"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
@@ -548,7 +556,7 @@ msgstr ""
 msgid "Are you sure you want to delete a {resourceType}?"
 msgstr ""
 
-#: src/rancher/CatalogDeleteDialog.tsx
+#: src/rancher/catalog/CatalogDeleteDialog.tsx
 msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr ""
 
@@ -767,7 +775,7 @@ msgid "Bank name"
 msgstr ""
 
 #: src/rancher/RancherProviderForm.tsx
-#: src/rancher/marketplace.ts
+#: src/rancher/cluster/create/marketplace.ts
 msgid "Base image name"
 msgstr ""
 
@@ -865,7 +873,7 @@ msgstr ""
 msgid "Bootable"
 msgstr ""
 
-#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Branch"
 msgstr ""
 
@@ -888,7 +896,7 @@ msgid "CIDR"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/rancher/RancherNodeSummary.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "CPU"
@@ -968,20 +976,24 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
-#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
+msgid "Catalog"
+msgstr ""
+
+#: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Catalog URL"
 msgstr ""
 
-#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Catalog has been created."
 msgstr ""
 
-#: src/rancher/CatalogDeleteDialog.tsx
+#: src/rancher/catalog/CatalogDeleteDialog.tsx
 msgid "Catalog has been deleted."
 msgstr ""
 
-#: src/rancher/tabs.js
-msgid "Catalogs"
+#: src/rancher/cluster/tabs.js
+msgid "Catalogues"
 msgstr ""
 
 #: src/marketplace/category/ShopCategories.tsx
@@ -1126,7 +1138,7 @@ msgid "Cloud block storage size"
 msgstr ""
 
 #: src/rancher/RancherProviderForm.tsx
-#: src/rancher/marketplace.ts
+#: src/rancher/cluster/create/marketplace.ts
 msgid "Cloud init template"
 msgstr ""
 
@@ -1139,11 +1151,11 @@ msgstr ""
 msgid "Cluster"
 msgstr ""
 
-#: src/rancher/RancherClusterForm.tsx
+#: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "Cluster description"
 msgstr ""
 
-#: src/rancher/RancherClusterForm.tsx
+#: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "Cluster name"
 msgstr ""
 
@@ -1274,7 +1286,7 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
-#: src/rancher/NodeRoleField.tsx
+#: src/rancher/cluster/create/NodeRoleField.tsx
 msgid "Control plane"
 msgstr ""
 
@@ -1282,7 +1294,7 @@ msgstr ""
 msgid "Copy of"
 msgstr ""
 
-#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/table-react/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
@@ -1340,7 +1352,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
-#: src/rancher/CatalogCreateButton.tsx
+#: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/user/hooks/hook-details.html
 msgid "Create"
 msgstr ""
@@ -1373,7 +1385,7 @@ msgstr ""
 msgid "Create backup schedule for OpenStack instance"
 msgstr ""
 
-#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Create catalog"
 msgstr ""
 
@@ -1389,8 +1401,8 @@ msgstr ""
 msgid "Create network for OpenStack tenant"
 msgstr ""
 
-#: src/rancher/cluster-actions/CreateNodeAction.ts
-#: src/rancher/cluster-actions/CreateNodeDialog.tsx
+#: src/rancher/cluster/actions/CreateNodeAction.ts
+#: src/rancher/cluster/create/CreateNodeDialog.tsx
 msgid "Create node"
 msgstr ""
 
@@ -1568,11 +1580,11 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: src/rancher/DataVolumePanel.tsx
+#: src/rancher/cluster/create/DataVolumePanel.tsx
 msgid "Data volume #{index}"
 msgstr ""
 
-#: src/rancher/VolumeSizeGroup.tsx
+#: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "Data volume should have at least {size} GB."
 msgstr ""
 
@@ -1650,7 +1662,7 @@ msgstr ""
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/project/ProjectDeleteButton.tsx
-#: src/rancher/CatalogDeleteButton.tsx
+#: src/rancher/catalog/CatalogDeleteButton.tsx
 msgid "Delete"
 msgstr ""
 
@@ -1658,7 +1670,7 @@ msgstr ""
 msgid "Delete Zabbix host"
 msgstr ""
 
-#: src/rancher/CatalogDeleteDialog.tsx
+#: src/rancher/catalog/CatalogDeleteDialog.tsx
 msgid "Delete catalog"
 msgstr ""
 
@@ -1710,9 +1722,10 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
-#: src/rancher/CatalogCreateDialog.tsx
-#: src/rancher/ClusterCatalogList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -1737,7 +1750,7 @@ msgstr ""
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.js
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
-#: src/rancher/node-actions/DestroyAction.ts
+#: src/rancher/node/actions/DestroyAction.ts
 msgid "Destroy"
 msgstr ""
 
@@ -1839,11 +1852,11 @@ msgstr ""
 msgid "Do you really want to delete comment?"
 msgstr ""
 
-#: src/rancher/node-actions/UnlinkAction.ts
+#: src/rancher/node/actions/UnlinkAction.ts
 msgid "Do you want to unlink instance {name}?"
 msgstr ""
 
-#: src/rancher/RancherNodeSummary.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
 msgid "Docker version"
 msgstr ""
 
@@ -1917,7 +1930,7 @@ msgstr ""
 msgid "EU VAT ID"
 msgstr ""
 
-#: src/rancher/VolumeMountPointGroup.tsx
+#: src/rancher/cluster/create/VolumeMountPointGroup.tsx
 msgid "Each mount point should be used once at most."
 msgstr ""
 
@@ -2239,7 +2252,7 @@ msgstr ""
 msgid "File download has been started."
 msgstr ""
 
-#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 msgid "File has been copied"
 msgstr ""
 
@@ -2305,7 +2318,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/rancher/NodeFlavorGroup.tsx
+#: src/rancher/cluster/create/NodeFlavorGroup.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
@@ -2413,8 +2426,8 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/volume-extend.html
-#: src/rancher/SystemVolumeSizeGroup.tsx
-#: src/rancher/VolumeSizeGroup.tsx
+#: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
+#: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "GB"
 msgstr ""
 
@@ -2455,7 +2468,7 @@ msgstr ""
 msgid "General information"
 msgstr ""
 
-#: src/rancher/cluster-actions/KubeconfigFileAction.ts
+#: src/rancher/cluster/actions/KubeconfigFileAction.ts
 msgid "Generate Kubeconfig file"
 msgstr ""
 
@@ -2708,7 +2721,7 @@ msgstr ""
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 #: src/openstack/openstack-volume/actions/AttachAction.ts
-#: src/rancher/rancher-cluster-nodes.js
+#: src/rancher/node/rancher-cluster-nodes.js
 msgid "Instance"
 msgstr ""
 
@@ -3019,7 +3032,7 @@ msgstr ""
 #: src/issues/list/IssuesShortListComponent.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/rancher/KeyValueTable.tsx
+#: src/rancher/node/KeyValueTable.tsx
 msgid "Key"
 msgstr ""
 
@@ -3044,15 +3057,15 @@ msgstr ""
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
-#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 msgid "Kubeconfig file"
 msgstr ""
 
-#: src/rancher/NodePanel.tsx
+#: src/rancher/cluster/create/NodePanel.tsx
 msgid "Kubernetes node #{index}"
 msgstr ""
 
-#: src/rancher/RancherNodeSummary.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
 msgid "Kubernetes version"
 msgstr ""
 
@@ -3060,7 +3073,7 @@ msgstr ""
 msgid "Label that is visible to users in Marketplace."
 msgstr ""
 
-#: src/rancher/RancherNodeSummary.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
 msgid "Labels"
 msgstr ""
 
@@ -3124,7 +3137,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: src/rancher/node-actions/LinkAction.ts
+#: src/rancher/node/actions/LinkAction.ts
 msgid "Link OpenStack Instance"
 msgstr ""
 
@@ -3431,7 +3444,7 @@ msgstr ""
 msgid "Motivation"
 msgstr ""
 
-#: src/rancher/VolumeMountPointGroup.tsx
+#: src/rancher/cluster/create/VolumeMountPointGroup.tsx
 msgid "Mount point"
 msgstr ""
 
@@ -3514,9 +3527,10 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
-#: src/rancher/CatalogCreateDialog.tsx
-#: src/rancher/ClusterCatalogList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/list/resource-global-list.js
@@ -3557,7 +3571,7 @@ msgstr ""
 msgid "Name is too short, names should be at least two alphanumeric characters."
 msgstr ""
 
-#: src/rancher/utils.ts
+#: src/rancher/cluster/create/utils.ts
 msgid "Name must consist of lower case alphanumeric characters."
 msgstr ""
 
@@ -3664,7 +3678,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/rancher/rancher-cluster-nodes.js
+#: src/rancher/node/rancher-cluster-nodes.js
 msgid "No Kubernetes nodes found matching filter."
 msgstr ""
 
@@ -3864,21 +3878,21 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
-#: src/rancher/rancher-cluster-nodes.js
+#: src/rancher/node/rancher-cluster-nodes.js
 msgid "Node"
 msgstr ""
 
-#: src/rancher/cluster-actions/CreateNodeDialog.tsx
+#: src/rancher/cluster/create/CreateNodeDialog.tsx
 msgid "Node has been created."
 msgstr ""
 
-#: src/rancher/NodeAddButton.tsx
+#: src/rancher/cluster/create/NodeAddButton.tsx
 msgid "Node plan"
 msgstr ""
 
-#: src/rancher/TenantGroup.tsx
-#: src/rancher/breadcrumbs.js
-#: src/rancher/tabs.js
+#: src/rancher/cluster/create/TenantGroup.tsx
+#: src/rancher/cluster/tabs.js
+#: src/rancher/node/breadcrumbs.js
 msgid "Nodes"
 msgstr ""
 
@@ -3892,7 +3906,7 @@ msgid "Not a valid value"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-#: src/rancher/rancher-cluster-nodes.js
+#: src/rancher/node/rancher-cluster-nodes.js
 msgid "Not assigned"
 msgstr ""
 
@@ -3950,7 +3964,7 @@ msgstr ""
 msgid "Number of CPU cores should be multiple of cores per socket."
 msgstr ""
 
-#: src/rancher/RancherClusterCheckoutSummary.tsx
+#: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Number of control plane nodes"
 msgstr ""
 
@@ -3963,7 +3977,7 @@ msgstr ""
 msgid "Number of created instances"
 msgstr ""
 
-#: src/rancher/RancherClusterCheckoutSummary.tsx
+#: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Number of etcd nodes"
 msgstr ""
 
@@ -3972,7 +3986,7 @@ msgstr ""
 msgid "Number of running instances"
 msgstr ""
 
-#: src/rancher/RancherClusterCheckoutSummary.tsx
+#: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Number of worker nodes"
 msgstr ""
 
@@ -4029,10 +4043,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Offering logo"
-msgstr ""
-
-#: src/openstack/OpenStackPluginOptionsForm.tsx
-msgid "Offering needs to be saved before pricing for dynamic components could be set."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -4133,7 +4143,7 @@ msgstr ""
 msgid "OpenStack Images"
 msgstr ""
 
-#: src/rancher/RancherNodeSummary.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
 msgid "OpenStack Instance"
 msgstr ""
 
@@ -4142,7 +4152,7 @@ msgid "OpenStack events"
 msgstr ""
 
 #: src/openstack/openstack-instance/marketplace.ts
-#: src/rancher/node-actions/LinkAction.ts
+#: src/rancher/node/actions/LinkAction.ts
 msgid "OpenStack instance"
 msgstr ""
 
@@ -4396,7 +4406,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/vmware/VMwareForm.tsx
 msgid "Password"
 msgstr ""
@@ -4695,7 +4705,7 @@ msgstr ""
 msgid "Plugin options are invalid."
 msgstr ""
 
-#: src/rancher/RancherNodeSummary.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
 msgid "Pods"
 msgstr ""
 
@@ -4986,7 +4996,7 @@ msgstr ""
 #: src/customer/routes.js
 #: src/customer/workspace/customer-workspace.js
 #: src/navigation/workspace/select-workspace-dialog.html
-#: src/rancher/tabs.js
+#: src/rancher/cluster/tabs.js
 msgid "Projects"
 msgstr ""
 
@@ -5092,7 +5102,7 @@ msgstr ""
 msgid "Purchase and usage is invoiced."
 msgstr ""
 
-#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 msgid "Put this into ~/.kube/config:"
 msgstr ""
 
@@ -5107,6 +5117,10 @@ msgstr ""
 
 #: src/marketplace-checklist/AnswersTable.tsx
 msgid "Question"
+msgstr ""
+
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Questions"
 msgstr ""
 
 #: src/error/routes.js
@@ -5127,7 +5141,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/rancher/RancherNodeSummary.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
@@ -5148,21 +5162,21 @@ msgid "RAM usage"
 msgstr ""
 
 #: src/rancher/RancherProviderForm.tsx
-#: src/rancher/marketplace.ts
+#: src/rancher/cluster/create/marketplace.ts
 msgid "Rancher access key"
 msgstr ""
 
-#: src/rancher/marketplace.ts
+#: src/rancher/cluster/create/marketplace.ts
 msgid "Rancher cluster"
 msgstr ""
 
 #: src/rancher/RancherProviderForm.tsx
-#: src/rancher/marketplace.ts
+#: src/rancher/cluster/create/marketplace.ts
 msgid "Rancher secret key"
 msgstr ""
 
 #: src/rancher/RancherProviderForm.tsx
-#: src/rancher/marketplace.ts
+#: src/rancher/cluster/create/marketplace.ts
 msgid "Rancher server URL"
 msgstr ""
 
@@ -5170,6 +5184,10 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Rating"
+msgstr ""
+
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Readme"
 msgstr ""
 
 #: src/customer/details/customer-manage.js
@@ -5331,7 +5349,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
-#: src/rancher/NodeRemoveButton.tsx
+#: src/rancher/cluster/create/NodeRemoveButton.tsx
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 #: src/user/hooks/HookRemoveButton.tsx
@@ -5749,7 +5767,7 @@ msgstr ""
 
 #: src/invitations/actions/invitation-dialog.html
 #: src/invitations/invitations-list.js
-#: src/rancher/NodeRoleGroup.tsx
+#: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/team/add-project-member.html
 #: src/team/add-team-member.html
 #: src/user/list/ProjectPermissions.tsx
@@ -5982,6 +6000,10 @@ msgstr ""
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 msgid "Select affected resource..."
+msgstr ""
+
+#: src/rancher/template/EnumField.tsx
+msgid "Select an option..."
 msgstr ""
 
 #: src/issues/create/issue-registration.html
@@ -6228,6 +6250,10 @@ msgstr ""
 msgid "Service provider type"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+msgid "Service provider:"
+msgstr ""
+
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Service settings are invalid."
 msgstr ""
@@ -6301,7 +6327,7 @@ msgid "Show console log"
 msgstr ""
 
 #: src/billing/price-estimate-button.html
-#: src/rancher/KeyValueButton.tsx
+#: src/rancher/node/KeyValueButton.tsx
 msgid "Show details"
 msgstr ""
 
@@ -6431,6 +6457,10 @@ msgstr ""
 msgid "Snapshot size"
 msgstr ""
 
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Snapshot size limit"
+msgstr ""
+
 #: src/offering/OfferingTabs.tsx
 #: src/openstack/openstack-backup/tabs.js
 #: src/openstack/openstack-snapshot-schedule/module.js
@@ -6509,7 +6539,8 @@ msgstr ""
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/rancher/rancher-cluster-nodes.js
+#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-global-list.js
 #: src/resource/list/resources-list.js
@@ -6591,8 +6622,8 @@ msgstr ""
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
-#: src/rancher/CatalogCreateDialog.tsx
-#: src/rancher/CatalogDeleteDialog.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/catalog/CatalogDeleteDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
@@ -6606,7 +6637,7 @@ msgstr ""
 msgid "Submit with"
 msgstr ""
 
-#: src/rancher/SubnetGroup.tsx
+#: src/rancher/cluster/create/SubnetGroup.tsx
 msgid "Subnet"
 msgstr ""
 
@@ -6705,12 +6736,12 @@ msgid "System volume couldn't be detached."
 msgstr ""
 
 #: src/openstack/openstack-instance/SystemVolumeSizeGroup.tsx
-#: src/rancher/SystemVolumeSizeGroup.tsx
+#: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 msgid "System volume size"
 msgstr ""
 
 #: src/openstack/openstack-instance/SystemVolumeTypeGroup.tsx
-#: src/rancher/SystemVolumeTypeGroup.tsx
+#: src/rancher/cluster/create/SystemVolumeTypeGroup.tsx
 msgid "System volume type"
 msgstr ""
 
@@ -6781,7 +6812,7 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/rancher/TenantSelector.tsx
+#: src/rancher/cluster/create/TenantSelector.tsx
 msgid "Tenant"
 msgstr ""
 
@@ -6876,11 +6907,11 @@ msgstr ""
 msgid "The project will be changed for all items in cart."
 msgstr ""
 
-#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 msgid "Then download (if needed) and run kubectl"
 msgstr ""
 
-#: src/rancher/rancher-cluster-nodes.js
+#: src/rancher/node/rancher-cluster-nodes.js
 msgid "There are no Kubernetes nodes yet."
 msgstr ""
 
@@ -6896,6 +6927,10 @@ msgstr ""
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
+msgstr ""
+
+#: src/rancher/template/CatalogTemplateList.tsx
+msgid "There are no applications templates."
 msgstr ""
 
 #: src/ansible/application-list.js
@@ -7021,7 +7056,7 @@ msgstr ""
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/project/ProjectNameField.tsx
-#: src/rancher/RancherClusterForm.tsx
+#: src/rancher/cluster/create/RancherClusterForm.tsx
 #: src/rijkscloud/VolumeCreateConfig.js
 #: src/slurm/AllocationForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -7118,7 +7153,7 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: src/rancher/RancherClusterCheckoutSummary.tsx
+#: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total CPU"
 msgstr ""
 
@@ -7130,11 +7165,11 @@ msgstr ""
 msgid "Total cost:"
 msgstr ""
 
-#: src/rancher/RancherClusterCheckoutSummary.tsx
+#: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total memory"
 msgstr ""
 
-#: src/rancher/RancherClusterCheckoutSummary.tsx
+#: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total number of nodes"
 msgstr ""
 
@@ -7148,7 +7183,7 @@ msgid "Total price"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/rancher/RancherClusterCheckoutSummary.tsx
+#: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total storage"
 msgstr ""
 
@@ -7199,7 +7234,7 @@ msgid "Type to search"
 msgstr ""
 
 #: src/invitations/invitations-list.js
-#: src/rancher/ClusterCatalogList.tsx
+#: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "URL"
 msgstr ""
 
@@ -7264,7 +7299,7 @@ msgstr ""
 msgid "Unable to create application."
 msgstr ""
 
-#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Unable to create catalog."
 msgstr ""
 
@@ -7276,7 +7311,7 @@ msgstr ""
 msgid "Unable to create key."
 msgstr ""
 
-#: src/rancher/cluster-actions/CreateNodeDialog.tsx
+#: src/rancher/cluster/create/CreateNodeDialog.tsx
 msgid "Unable to create node."
 msgstr ""
 
@@ -7296,7 +7331,7 @@ msgstr ""
 msgid "Unable to delete attachment."
 msgstr ""
 
-#: src/rancher/CatalogDeleteDialog.tsx
+#: src/rancher/catalog/CatalogDeleteDialog.tsx
 msgid "Unable to delete catalog."
 msgstr ""
 
@@ -7385,6 +7420,14 @@ msgstr ""
 msgid "Unable to load actions"
 msgstr ""
 
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Unable to load application template details."
+msgstr ""
+
+#: src/rancher/template/CatalogTemplateList.tsx
+msgid "Unable to load applications templates."
+msgstr ""
+
 #: src/marketplace/category/filters/AttributeFilterList.tsx
 msgid "Unable to load category sections."
 msgstr ""
@@ -7419,8 +7462,8 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
-#: src/rancher/cluster-actions/CreateNodeDialog.tsx
-#: src/rancher/cluster-actions/RancherClusterKubeconfigDialog.tsx
+#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
+#: src/rancher/cluster/create/CreateNodeDialog.tsx
 msgid "Unable to load data."
 msgstr ""
 
@@ -7519,11 +7562,11 @@ msgstr ""
 msgid "Unable to load service providers."
 msgstr ""
 
-#: src/rancher/TenantGroup.tsx
+#: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Unable to load tenant data."
 msgstr ""
 
-#: src/rancher/TenantSelector.tsx
+#: src/rancher/cluster/create/TenantSelector.tsx
 msgid "Unable to load tenant."
 msgstr ""
 
@@ -7695,7 +7738,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr ""
 
-#: src/rancher/node-actions/UnlinkAction.ts
+#: src/rancher/node/actions/UnlinkAction.ts
 msgid "Unlink instance"
 msgstr ""
 
@@ -7997,7 +8040,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/rancher/CatalogCreateDialog.tsx
+#: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 #: src/team/user-selector.html
@@ -8103,7 +8146,7 @@ msgstr ""
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#: src/rancher/KeyValueTable.tsx
+#: src/rancher/node/KeyValueTable.tsx
 msgid "Value"
 msgstr ""
 
@@ -8170,7 +8213,7 @@ msgstr ""
 
 #: src/analytics/registry.ts
 #: src/dashboard/categories.ts
-#: src/rancher/VolumeSizeGroup.tsx
+#: src/rancher/cluster/create/VolumeSizeGroup.tsx
 #: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
 msgstr ""
@@ -8178,7 +8221,7 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/actions/RetypeAction.ts
-#: src/rancher/VolumeTypeGroup.tsx
+#: src/rancher/cluster/create/VolumeTypeGroup.tsx
 msgid "Volume type"
 msgstr ""
 
@@ -8214,7 +8257,7 @@ msgstr ""
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 
-#: src/rancher/NodeRoleField.tsx
+#: src/rancher/cluster/create/NodeRoleField.tsx
 msgid "Worker"
 msgstr ""
 
@@ -8464,6 +8507,10 @@ msgstr ""
 msgid "Zabbix provider"
 msgstr ""
 
+#: src/rancher/template/ClusterTemplateList.tsx
+msgid "application templates"
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
 msgstr ""
@@ -8476,8 +8523,8 @@ msgstr ""
 msgid "by"
 msgstr ""
 
-#: src/rancher/ClusterCatalogList.tsx
-msgid "catalogs"
+#: src/rancher/catalog/ClusterCatalogList.tsx
+msgid "catalogues"
 msgstr ""
 
 #: src/issues/workspace/issues-activity-stream.html
@@ -8500,7 +8547,7 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
-#: src/rancher/NodeRoleField.tsx
+#: src/rancher/cluster/create/NodeRoleField.tsx
 msgid "etcd"
 msgstr ""
 

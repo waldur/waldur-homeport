@@ -4,6 +4,7 @@ import {
   getFormLimitSerializer,
   getFormLimitParser,
   Limits,
+  filterOfferingComponents,
 } from '@waldur/marketplace/common/registry';
 import { minAmount, maxAmount } from '@waldur/marketplace/common/utils';
 import { Offering, OfferingComponent } from '@waldur/marketplace/types';
@@ -71,8 +72,11 @@ const parseComponentLimits = (components: OfferingComponent[]) =>
     {},
   );
 
-export const parseOfferingLimits = (offering: Offering): OfferingLimits =>
-  parseLimitValues(offering.type, parseComponentLimits(offering.components));
+export const parseOfferingLimits = (offering: Offering): OfferingLimits => {
+  const components = filterOfferingComponents(offering);
+  const rawLimits = parseComponentLimits(components);
+  return parseLimitValues(offering.type, rawLimits);
+};
 
 export const getDefaults = (offering: Offering) => {
   const limits = parseOfferingLimits(offering);
