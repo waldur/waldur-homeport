@@ -346,6 +346,10 @@ msgstr ""
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr ""
 
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr ""
+
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr ""
@@ -4041,10 +4045,6 @@ msgstr ""
 msgid "Offering logo"
 msgstr ""
 
-#: src/openstack/OpenStackPluginOptionsForm.tsx
-msgid "Offering needs to be saved before pricing for dynamic components could be set."
-msgstr ""
-
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering state has been updated."
 msgstr ""
@@ -6250,6 +6250,10 @@ msgstr ""
 msgid "Service provider type"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+msgid "Service provider:"
+msgstr ""
+
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Service settings are invalid."
 msgstr ""
@@ -6451,6 +6455,10 @@ msgstr ""
 #: src/analytics/registry.ts
 #: src/dashboard/categories.ts
 msgid "Snapshot size"
+msgstr ""
+
+#: src/openstack/OpenStackPluginOptionsForm.tsx
+msgid "Snapshot size limit"
 msgstr ""
 
 #: src/offering/OfferingTabs.tsx
