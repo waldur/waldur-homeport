@@ -55,6 +55,7 @@ const limitSerializer = limits =>
     cores: limits.cores,
     ram: limits.ram && limits.ram * 1024,
     storage: limits.storage && limits.storage * 1024,
+    snapshot: limits.snapshot && limits.snapshot * 1024,
     ...serializeVolumeTypeLimits(limits),
   };
 
@@ -63,6 +64,7 @@ const limitParser = limits =>
     cores: limits.cores,
     ram: limits.ram && limits.ram / 1024,
     storage: limits.storage && limits.storage / 1024,
+    snapshot: limits.snapshot && limits.snapshot / 1024,
     ...serializeVolumeTypeLimits(limits),
   };
 
