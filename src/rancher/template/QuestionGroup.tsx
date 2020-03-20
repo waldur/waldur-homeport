@@ -1,23 +1,23 @@
 import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import * as FormGroup from 'react-bootstrap/lib/FormGroup';
+import * as Row from 'react-bootstrap/lib/Row';
 
+import { GroupHeader } from './GroupHeader';
 import { QuestionItem } from './QuestionItem';
 import { Question } from './types';
+import { groupByN } from './utils';
 
 export const QuestionGroup: React.FC<{
   title: string;
   questions: Question[];
 }> = ({ title, questions }) => (
   <React.Fragment>
-    <FormGroup>
-      <Col smOffset={2} sm={10}>
-        <ControlLabel>{title}</ControlLabel>
-      </Col>
-    </FormGroup>
-    {questions.map((question, questionIndex) => (
-      <QuestionItem key={questionIndex} question={question} />
+    <GroupHeader title={title} />
+    {groupByN(2, questions).map((group, groupIndex) => (
+      <Row key={groupIndex}>
+        {group.map((question, questionIndex) => (
+          <QuestionItem key={questionIndex} question={question} />
+        ))}
+      </Row>
     ))}
   </React.Fragment>
 );

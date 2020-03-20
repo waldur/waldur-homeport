@@ -1,10 +1,18 @@
 import * as React from 'react';
-import * as FormGroup from 'react-bootstrap/lib/FormGroup';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
 import { FORM_ID, FIELD_MAP } from './constants';
+import { StringField } from './StringField';
 import { Question } from './types';
+
+const parseDefaultValue = (question: Question) => {
+  if (question.type === 'boolean') {
+    return Boolean(question.default);
+  } else {
+    return question.default;
+  }
+};
 
 export const QuestionItem: React.FC<{
   question: Question;
@@ -13,13 +21,15 @@ export const QuestionItem: React.FC<{
 
   React.useEffect(() => {
     if (question.default) {
-      dispatch(change(FORM_ID, question.variable, question.default));
+      dispatch(
+        change(
+          FORM_ID,
+          `answers.${question.variable}`,
+          parseDefaultValue(question),
+        ),
+      );
     }
-  }, [question]);
+  });
 
-  return (
-    <FormGroup>
-      {React.createElement(FIELD_MAP[question.type], { question })}
-    </FormGroup>
-  );
+  return React.createElement(FIELD_MAP[question.type] || StringField, question);
 };

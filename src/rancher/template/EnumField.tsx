@@ -4,17 +4,17 @@ import * as FormControl from 'react-bootstrap/lib/FormControl';
 import { translate } from '@waldur/i18n';
 
 import { DecoratedField } from './DecoratedField';
-import { Question } from './types';
+import { FieldProps } from './types';
 
-export const EnumField: React.FC<{ question: Question }> = ({ question }) => (
+export const EnumField: React.FC<FieldProps> = props => (
   <DecoratedField
-    question={question}
+    {...props}
     component={fieldProps => (
       <FormControl componentClass="select" {...fieldProps.input}>
         <option>{translate('Select an option...')}</option>
-        {(question.options || []).map((question, index) => (
-          <option value={question} key={index}>
-            {question}
+        {(props.options || []).map((option, index) => (
+          <option value={option} key={index}>
+            {option}
           </option>
         ))}
       </FormControl>

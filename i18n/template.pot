@@ -482,12 +482,20 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
+#: src/rancher/template/ApplicationConfiguration.tsx
+msgid "Application configuration"
+msgstr ""
+
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "Application creation has been scheduled."
 msgstr ""
 
 #: src/ansible/playbook-jobs/routes.js
 msgid "Application details"
+msgstr ""
+
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Application has been created."
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-summary.js
@@ -1240,6 +1248,10 @@ msgstr ""
 msgid "Compute generation"
 msgstr ""
 
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Configuration"
+msgstr ""
+
 #: src/cost-planning/cost-plan-dialog.html
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
@@ -1375,6 +1387,10 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Create an availability"
+msgstr ""
+
+#: src/rancher/template/TemplateQuestions.tsx
+msgid "Create application"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
@@ -1725,6 +1741,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -3530,6 +3547,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -3585,6 +3603,10 @@ msgstr ""
 
 #: src/project/ProjectNameField.tsx
 msgid "Name should contain at least 3 symbols."
+msgstr ""
+
+#: src/rancher/template/ApplicationConfiguration.tsx
+msgid "Namespace"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -4889,6 +4911,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
 #: src/resource/list/resource-global-list.js
 msgid "Project"
 msgstr ""
@@ -5119,10 +5142,6 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
-#: src/rancher/template/TemplateDetail.tsx
-msgid "Questions"
-msgstr ""
-
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
 #: src/resource/resource-provision-policy.js
@@ -5184,10 +5203,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Rating"
-msgstr ""
-
-#: src/rancher/template/TemplateDetail.tsx
-msgid "Readme"
 msgstr ""
 
 #: src/customer/details/customer-manage.js
@@ -6675,6 +6690,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Summary"
@@ -7296,6 +7312,7 @@ msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
+#: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to create application."
 msgstr ""
 
@@ -8179,6 +8196,7 @@ msgid "Verifying email change"
 msgstr ""
 
 #: src/navigation/app-footer.html
+#: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
 msgstr ""
 

@@ -43,7 +43,10 @@ const CatalogTemplatesList = () => {
     <Row>
       {state.data.map((template, index) => (
         <Col key={index} md={4} sm={6}>
-          <TemplateCard template={template} />
+          <TemplateCard
+            template={template}
+            clusterUuid={$state.params.clusterUuid}
+          />
         </Col>
       ))}
     </Row>
