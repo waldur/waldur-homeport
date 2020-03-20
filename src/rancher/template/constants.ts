@@ -5,6 +5,7 @@ import { StringField } from './StringField';
 export const FIELD_MAP = {
   boolean: BooleanField,
   string: StringField,
+  password: StringField,
   enum: EnumField,
   secret: EnumField,
 };

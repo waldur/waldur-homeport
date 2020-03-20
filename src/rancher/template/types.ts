@@ -1,13 +1,16 @@
 type QuestionType = 'boolean' | 'string' | 'enum' | 'secret';
 
-export interface Question {
-  variable: string;
+export interface FieldProps {
   label: string;
-  description: string;
-  type: QuestionType;
+  description?: string;
+  variable: string;
   options?: string[];
+  required?: boolean;
+}
+
+export interface Question extends FieldProps {
+  type: QuestionType;
   default?: string | boolean;
-  group: string;
-  required: boolean;
+  group?: string;
   showIf?: string;
 }
