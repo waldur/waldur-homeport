@@ -9,7 +9,6 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const baseConfig = require('./webpack.config.common.js');
 const utils = require('./webpack.utils');
 module.exports = merge(baseConfig, {
-
   devtool: 'source-map',
   mode: 'production',
   optimization: {
@@ -21,9 +20,9 @@ module.exports = merge(baseConfig, {
         exclude: /\.min\.js$/gi,
         terserOptions: {
           mangle: true,
-        }
-      })
-    ]
+        },
+      }),
+    ],
   },
   plugins: [
     new webpack.DllReferencePlugin({
