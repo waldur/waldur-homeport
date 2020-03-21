@@ -5803,6 +5803,7 @@ msgid "Role management events"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
+#: src/customer/CustomerListFilter.tsx
 msgid "Running accounting"
 msgstr ""
 
