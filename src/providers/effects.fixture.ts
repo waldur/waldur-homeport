@@ -6,7 +6,6 @@ import * as effects from './effects';
 export const setupFixture = ({ state, action }) => {
   const mockUpdateProvider = jest.spyOn(api, 'updateProvider');
   jest.spyOn(api, 'refreshProjectList').mockReturnValue(null);
-  jest.spyOn(api, 'refreshProvidersList').mockReturnValue(null);
 
   const dispatched = [];
   const store = {

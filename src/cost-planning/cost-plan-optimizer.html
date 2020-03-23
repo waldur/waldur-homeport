@@ -5,7 +5,6 @@
   <table class="table">
     <thead>
       <tr>
-        <th></th>
         <th translate>Provider</th>
         <th>
           <span translate>Price per day</span>
@@ -20,12 +19,6 @@
     </thead>
     <tbody ng-repeat="service in $ctrl.services">
       <tr>
-        <td>
-          <provider-icon
-            type="service.service_settings_type"
-            size="img-xs"
-          ></provider-icon>
-        </td>
         <td>
           {{ service.service_settings_name }}
         </td>

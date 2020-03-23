@@ -33,39 +33,5 @@
     "marketplace.documents"
   ],
   "featuresVisible": false,
-  "appStoreCategories": [
-    {
-      "name": "Virtual machines",
-      "type": "provider",
-      "icon": "desktop",
-      "key": "vms",
-      "services": ["Amazon", "Azure", "DigitalOcean", "OpenStackTenant"]
-    },
-    {
-      "name": "Private clouds",
-      "type": "provider",
-      "icon": "cloud",
-      "key": "private_clouds",
-      "services": ["OpenStack"]
-    },
-    {
-      "name": "Storages",
-      "type": "provider",
-      "key": "storages",
-      "services": ["OpenStackTenant"]
-    },
-    {
-      "name": "Batch processing",
-      "type": "provider",
-      "key": "slurm",
-      "services": ["SLURM"]
-    }
-  ],
-  "serviceCategories": [
-    {
-      "name": "Virtual machines",
-      "services": ["Amazon", "Azure", "DigitalOcean", "OpenStackTenant"]
-    }
-  ],
   "futureCategories": ["support", "apps"]
 }
