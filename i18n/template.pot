@@ -158,6 +158,7 @@ msgstr ""
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
+#: src/team/ProjectUsersList.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
