@@ -7189,7 +7189,7 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
-#: src/resource/support/TreemapChart.tsx
+#: src/resource/support/TreemapChartFilter.tsx
 msgid "Total: {total}"
 msgstr ""
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Panel from 'react-bootstrap/lib/Panel';
 import { reduxForm, Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
@@ -10,41 +11,61 @@ import { QuotaList, QuotaChoice } from './types';
 interface TreemapChartFilterProps {
   quotas: QuotaList;
   loading: boolean;
+  total?: number;
 }
 
 export const PureTreemapChartFilter = (props: TreemapChartFilterProps) => (
-  <div className="ibox">
-    <div className="ibox-content border-bottom">
-      <div className="row">
-        <div className="col-sm-9">
-          <Field
-            name="accounting_is_running"
-            component={fieldProps => (
-              <AwesomeCheckbox
-                label={translate('Show with running accounting')}
-                id="accounting-is-running"
-                disabled={props.loading}
-                {...fieldProps.input}
-              />
-            )}
-          />
+  <Panel defaultExpanded>
+    <Panel.Heading>
+      <Panel.Title toggle>Toggle panel</Panel.Title>
+    </Panel.Heading>
+
+    <Panel.Collapse>
+      <Panel.Body>
+        <div className="ibox">
+          <div className="ibox-content border-bottom">
+            <div className="row">
+              <div className="col-sm-9">
+                <Field
+                  name="accounting_is_running"
+                  component={fieldProps => (
+                    <AwesomeCheckbox
+                      label={translate('Show with running accounting')}
+                      id="accounting-is-running"
+                      disabled={props.loading}
+                      {...fieldProps.input}
+                    />
+                  )}
+                />
+              </div>
+              <div className="col-sm-3">
+                <Field
+                  name="quota"
+                  component={fieldProps => (
+                    <QuotaSelector
+                      quotas={props.quotas}
+                      value={fieldProps.input.value}
+                      handleChange={fieldProps.input.onChange}
+                      disabled={props.loading}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-12">
+                <h2>
+                  {translate('Total: {total}', {
+                    total: props.total,
+                  })}
+                </h2>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="col-sm-3">
-          <Field
-            name="quota"
-            component={fieldProps => (
-              <QuotaSelector
-                quotas={props.quotas}
-                value={fieldProps.input.value}
-                handleChange={fieldProps.input.onChange}
-                disabled={props.loading}
-              />
-            )}
-          />
-        </div>
-      </div>
-    </div>
-  </div>
+      </Panel.Body>
+    </Panel.Collapse>
+  </Panel>
 );
 
 export const TreemapChartFilter = reduxForm<

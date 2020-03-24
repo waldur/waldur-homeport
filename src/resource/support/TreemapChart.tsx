@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { translate } from '@waldur/i18n';
 import loadEcharts from '@waldur/shims/load-echarts';
 
 import { levelOptions } from './styles';
@@ -13,7 +12,6 @@ interface TreemapChartProps {
   theme?: string;
   data: TreemapData;
   tooltipValueFormatter?(value: number): string;
-  total?: number;
 }
 
 export class TreemapChart extends React.Component<TreemapChartProps> {
@@ -103,11 +101,6 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
     const style = { width, height };
     return (
       <>
-        <h2>
-          {translate('Total: {total}', {
-            total: this.props.tooltipValueFormatter(this.props.total),
-          })}
-        </h2>
         <div style={style} ref={container => (this.container = container)} />
       </>
     );
