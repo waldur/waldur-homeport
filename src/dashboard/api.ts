@@ -2,13 +2,9 @@ import * as moment from 'moment-timezone';
 
 import { get } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
-import { ngInjector } from '@waldur/core/services';
-import { translate } from '@waldur/i18n';
 import { WorkspaceType } from '@waldur/workspace/types';
 
-import { getDashboardCategories } from './categories';
 import { Category } from './CategoryResources';
-import { getResourceChartOptions } from './chart';
 import { loadMarketplaceCategories } from './marketplace';
 import { Quota, Scope, Chart, ChartData } from './types';
 
@@ -25,16 +21,6 @@ const getDailyQuotas = params =>
   get<DailyQuota>('/daily-quotas/', { params }).then(response => response.data);
 
 export type ChartLoader = (scope: Scope) => Promise<Chart[]>;
-
-const formatCharts = (charts: Chart[]) =>
-  charts.map(chart =>
-    getResourceChartOptions(
-      chart.data.map(item => item.label),
-      chart.data.map(item => item.value),
-      null,
-      chart.units || translate('Count'),
-    ),
-  );
 
 export const getFormatterUnits = (
   chartType: 'filesize' | 'hours',
@@ -104,35 +90,7 @@ export async function loadCategories(
   workspace: WorkspaceType,
   scope: Scope,
 ): Promise<Category[]> {
-  const result: Category[] = [];
-  const features = ngInjector.get('features');
-  if (features.isVisible('marketplace')) {
-    const marketplaceCategories = await loadMarketplaceCategories(
-      workspace,
-      scope,
-    );
-    result.push(...marketplaceCategories);
-  } else {
-    const categories = getDashboardCategories();
-    const quotas = categories.reduce(
-      (acc, category) => [...acc, ...category.quotas],
-      [],
-    );
-    const charts = await getDailyQuotaCharts(quotas, scope);
-    for (const category of categories) {
-      const metrics = category.quotas.map(quota => quota.title);
-      const formattedCharts = formatCharts(
-        charts.filter(chart => metrics.includes(chart.title)),
-      );
-      result.push({
-        metrics,
-        title: category.title,
-        charts: formattedCharts,
-        actions: category.actions,
-      });
-    }
-  }
-  return result;
+  return await loadMarketplaceCategories(workspace, scope);
 }
 
 export const padMissingValues = (items: DateValuePair[], count) => {

@@ -424,7 +424,6 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/customer/api.ts
 #: src/slurm/table-extension.js
 msgid "Allocations"
 msgstr ""
@@ -795,7 +794,6 @@ msgstr ""
 msgid "Batch block storage size"
 msgstr ""
 
-#: src/dashboard/categories.ts
 #: src/resource/breadcrumbs/resource-categories.js
 #: src/slurm/routes.js
 #: src/slurm/sidebar.js
@@ -837,16 +835,11 @@ msgstr ""
 msgid "Billing period"
 msgstr ""
 
-#: src/dashboard/categories.ts
-msgid "Block device count"
-msgstr ""
-
 #: src/analytics/resource-chart-service.js
 msgid "Block devices"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/categories.ts
 msgid "Block snapshot count"
 msgstr ""
 
@@ -855,7 +848,6 @@ msgid "Block storage size"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/categories.ts
 msgid "Block volume count"
 msgstr ""
 
@@ -913,7 +905,6 @@ msgstr ""
 msgid "CPU limit, minutes"
 msgstr ""
 
-#: src/dashboard/categories.ts
 #: src/slurm/details/constants.js
 msgid "CPU usage"
 msgstr ""
@@ -1239,10 +1230,6 @@ msgstr ""
 msgid "Components are invalid."
 msgstr ""
 
-#: src/dashboard/categories.ts
-msgid "Compute"
-msgstr ""
-
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Compute generation"
 msgstr ""
@@ -1338,10 +1325,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-dialog.js
 msgid "Could not create organization"
-msgstr ""
-
-#: src/dashboard/api.ts
-msgid "Count"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -2456,7 +2439,6 @@ msgstr ""
 msgid "GPU limit, minutes"
 msgstr ""
 
-#: src/dashboard/categories.ts
 #: src/slurm/details/constants.js
 msgid "GPU usage"
 msgstr ""
@@ -4870,8 +4852,6 @@ msgid "Privacy policy"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/customer/api.ts
-#: src/dashboard/categories.ts
 #: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
@@ -5169,7 +5149,6 @@ msgstr ""
 msgid "RAM size"
 msgstr ""
 
-#: src/dashboard/categories.ts
 #: src/slurm/details/constants.js
 msgid "RAM usage"
 msgstr ""
@@ -5529,10 +5508,6 @@ msgstr ""
 
 #: src/user/support/RequestedEmail.tsx
 msgid "Requested email"
-msgstr ""
-
-#: src/customer/api.ts
-msgid "Requests"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -6457,7 +6432,6 @@ msgid "Snapshot schedules"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/categories.ts
 msgid "Snapshot size"
 msgstr ""
 
@@ -6585,8 +6559,6 @@ msgid "Stopping"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/customer/api.ts
-#: src/dashboard/categories.ts
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -8106,7 +8078,6 @@ msgstr ""
 msgid "VM type overview"
 msgstr ""
 
-#: src/customer/api.ts
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "VMs"
@@ -8186,7 +8157,6 @@ msgid "Version"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/dashboard/categories.ts
 #: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
@@ -8214,7 +8184,6 @@ msgid "Volume name"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/categories.ts
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 #: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
