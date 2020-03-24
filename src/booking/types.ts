@@ -43,7 +43,7 @@ export interface TimeSelectProps {
 export interface PureDateProps {
   onChange: (value) => void;
   name: string;
-  value: DateInput;
+  value: Date | string | number | number[];
   className?: string | string[];
   isDisabled?: boolean;
   label?: string | ReactElement;
