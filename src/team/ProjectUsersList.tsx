@@ -39,7 +39,7 @@ const TableComponent = props => {
           render: ({ row }) => <>{ENV.roles[row.role]}</>,
         },
         {
-          title: translate('Role in project'),
+          title: translate('Actions'),
           render: ProjectUserActions,
         },
       ]}
