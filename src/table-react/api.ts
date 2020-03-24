@@ -17,9 +17,15 @@ export function getNextPageNumber(link: string): number {
   }
 }
 
-export function createFetcher(endpoint: string): Fetcher {
+export function createFetcher(
+  endpoint: string,
+  generateUrl?: (request: TableRequest) => string,
+): Fetcher {
   return (request: TableRequest) => {
-    const url = `${ENV.apiEndpoint}api/${endpoint}/`;
+    let url = `${ENV.apiEndpoint}api/${endpoint}/`;
+    if (generateUrl) {
+      url = generateUrl(request);
+    }
     const params = {
       page: request.currentPage,
       page_size: request.pageSize,

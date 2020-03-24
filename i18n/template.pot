@@ -244,6 +244,7 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
+#: src/team/ProjectUserAddButton.tsx
 #: src/team/project-users-list.js
 msgid "Add member"
 msgstr ""
@@ -1779,6 +1780,7 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/slurm/actions.js
+#: src/team/ProjectUserDetailsButton.tsx
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 #: src/user/support/UserDetailsButton.tsx
@@ -1914,6 +1916,7 @@ msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
 #: src/invitations/actions/invitation-dialog.html
+#: src/team/ProjectUsersList.tsx
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 #: src/team/user-selector.html
@@ -3339,6 +3342,7 @@ msgid "Medium"
 msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
+#: src/team/ProjectUsersList.tsx
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 msgid "Member"
@@ -5338,6 +5342,7 @@ msgstr ""
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
 #: src/rancher/cluster/create/NodeRemoveButton.tsx
+#: src/team/ProjectUserDeleteButton.tsx
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 #: src/user/hooks/HookRemoveButton.tsx
@@ -5763,6 +5768,7 @@ msgstr ""
 msgid "Role expires on"
 msgstr ""
 
+#: src/team/ProjectUsersList.tsx
 #: src/team/project-users-list.js
 msgid "Role in project"
 msgstr ""
@@ -8006,6 +8012,10 @@ msgstr ""
 msgid "User {user_link} logged out successfully with SAML2."
 msgstr ""
 
+#: src/team/ProjectUserDeleteButton.tsx
+msgid "User {user} has been deleted from project."
+msgstr ""
+
 #: src/auth/auth-login.html
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
@@ -8597,6 +8607,10 @@ msgstr ""
 
 #: src/issues/list/IssuesList.tsx
 msgid "support requests"
+msgstr ""
+
+#: src/team/ProjectUsersList.tsx
+msgid "team members"
 msgstr ""
 
 #: src/user/support/utils.ts
