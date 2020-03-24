@@ -3,9 +3,6 @@ import * as React from 'react';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
-import { getFormatterUnits } from '@waldur/dashboard/api';
-import { getDashboardCategories } from '@waldur/dashboard/categories';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
@@ -13,34 +10,7 @@ import {
   ExpandableRow,
   ResourceExpandableRow,
 } from '@waldur/resource/ResourceExpandableRow';
-import { Quota, Project } from '@waldur/workspace/types';
-
-const parseQuotas = (quotaItems: Quota[]): ExpandableRow[] => {
-  const categories = getDashboardCategories();
-  const quotas = categories.reduce(
-    (acc, category) => [...acc, ...category.quotas],
-    [],
-  );
-  const usages = quotaItems.reduce(
-    (map, quota) => ({
-      ...map,
-      [quota.name]: quota.usage,
-    }),
-    {},
-  );
-
-  return quotas
-    .filter(quota => usages[quota.quota])
-    .map(quota => {
-      const usage = usages[quota.quota] || 0;
-      const { formatter, units } = getFormatterUnits(quota.type, usage);
-      const current = units ? `${formatter(usage)} ${units}` : formatter(usage);
-      return {
-        label: quota.title,
-        value: current,
-      };
-    });
-};
+import { Project } from '@waldur/workspace/types';
 
 const parseCounters = (
   categories: Category[],
@@ -63,18 +33,12 @@ const combineRows = (rows: ExpandableRow[]): ExpandableRow[] =>
     .sort((a, b) => a.label.localeCompare(b.label));
 
 async function loadData(props): Promise<ExpandableRow[]> {
-  const quotaRows = isFeatureVisible('resources.legacy')
-    ? parseQuotas(props.quotas)
-    : [];
-  if (!isFeatureVisible('marketplace')) {
-    return combineRows(quotaRows);
-  }
   const categories = await getCategories({
     params: { field: ['uuid', 'title'] },
   });
   const counters = await getProjectCounters(props.uuid);
   const counterRows = parseCounters(categories, counters);
-  return combineRows([...quotaRows, ...counterRows]);
+  return combineRows(counterRows);
 }
 
 export const ProjectExpandableRowContainer: React.FC<{
