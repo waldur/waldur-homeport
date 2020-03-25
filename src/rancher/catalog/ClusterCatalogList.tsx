@@ -38,7 +38,7 @@ const TableComponent = props => {
         render: ({ row }) => <CatalogDeleteButton catalog={row} />,
       },
     ],
-    [translate],
+    [translate, props.resource],
   );
   return (
     <Table
