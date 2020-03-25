@@ -33,7 +33,9 @@ export function connectTable(options: TableOptions) {
           if (options.mapPropsToFilter) {
             propFilter = options.mapPropsToFilter(props);
           }
-          return dispatch(actions.fetchListStart(table, propFilter));
+          return dispatch(
+            actions.fetchListStart(table, propFilter, options.pullInterval),
+          );
         },
         gotoPage: page => dispatch(actions.fetchListGotoPage(table, page)),
         exportAs: format =>

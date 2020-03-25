@@ -17,11 +17,16 @@ export const SORT_LIST_START = 'waldur/table/SORT_LIST_START';
 export const SORT_LIST_DONE = 'waldur/table/SORT_LIST_DONE';
 export const TOGGLE_ROW = 'waldur/table/TOGGLE_ROW';
 
-export const fetchListStart = (table: string, extraFilter?: any) => ({
+export const fetchListStart = (
+  table: string,
+  extraFilter?: Record<string, any>,
+  pullInterval?: number | (() => number),
+) => ({
   type: FETCH_LIST_START,
   payload: {
     table,
     extraFilter,
+    pullInterval,
   },
 });
 

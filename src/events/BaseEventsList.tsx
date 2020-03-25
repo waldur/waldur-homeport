@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { $sanitize } from '@waldur/core/services';
+import { $sanitize, ENV } from '@waldur/core/services';
 import eventsRegistry from '@waldur/events/registry';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
@@ -56,6 +56,7 @@ export const getEventsList = (extraOptions?) => {
     exportFields: ['message', 'created'],
     exportRow: row => [row.message, row.created],
     ...extraOptions,
+    pullInterval: () => ENV.countersTimerInterval * 1000,
   };
 
   return connectTable(TableOptions)(TableComponent);
