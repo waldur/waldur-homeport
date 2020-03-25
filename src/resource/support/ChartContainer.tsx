@@ -113,7 +113,11 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
         }
         return (
           <>
-            <TreemapChartFilter quotas={quotas} loading={loading} />
+            <TreemapChartFilter
+              quotas={quotas}
+              loading={loading}
+              total={total}
+            />
             {loading && <LoadingSpinner />}
             {error && <span>{translate('Unable to load locations.')}</span>}
             {data && !loading && !error && (
@@ -123,7 +127,6 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
                 height={500}
                 data={chartData[props.quota.key]}
                 tooltipValueFormatter={tooltipValueFormatter}
-                total={total}
               />
             )}
           </>

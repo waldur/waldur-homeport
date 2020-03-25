@@ -7160,7 +7160,7 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
-#: src/resource/support/TreemapChart.tsx
+#: src/resource/support/TreemapChartFilter.tsx
 msgid "Total: {total}"
 msgstr ""
 
@@ -8716,6 +8716,10 @@ msgstr ""
 
 #: src/resource/events.ts
 msgid "{resource_name} has been deleted."
+msgstr ""
+
+#: src/resource/support/TreemapChartFilter.tsx
+msgid "{state} controls"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx

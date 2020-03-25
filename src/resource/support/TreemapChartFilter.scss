@@ -1,0 +1,8 @@
+#toggle-controls-label {
+  cursor: pointer;
+  display: inline-block;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
