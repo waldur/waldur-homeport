@@ -28,7 +28,9 @@ export const PureTreemapChartFilter = (props: TreemapChartFilterProps) => {
       <Panel.Heading>
         <Panel.Title>
           <h4 id="toggle-controls-label" onClick={togglePanel}>
-            {!open ? 'Show' : 'Hide'} controls
+            {translate('{state} controls', {
+              state: !open ? 'Show' : 'Hide',
+            })}
           </h4>
         </Panel.Title>
       </Panel.Heading>
@@ -67,11 +69,11 @@ export const PureTreemapChartFilter = (props: TreemapChartFilterProps) => {
               </div>
               <div className="row">
                 <div className="col-sm-12">
-                  <h3 className="text-right">
+                  <h4 className="text-right">
                     {translate('Total: {total}', {
                       total: props.total,
                     })}
-                  </h3>
+                  </h4>
                 </div>
               </div>
             </div>

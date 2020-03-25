@@ -8750,6 +8750,10 @@ msgstr ""
 msgid "{resource_name} has been deleted."
 msgstr ""
 
+#: src/resource/support/TreemapChartFilter.tsx
+msgid "{state} controls"
+msgstr ""
+
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "{usage} of {limit}"
