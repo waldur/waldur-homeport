@@ -68,12 +68,10 @@ export const PureTreemapChartFilter = (props: TreemapChartFilterProps) => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-sm-12">
-                  <h4 className="text-right">
-                    {translate('Total: {total}', {
-                      total: props.total,
-                    })}
-                  </h4>
+                <div className="col-sm-12 text-right">
+                  {translate('Total: {total}', {
+                    total: props.total,
+                  })}
                 </div>
               </div>
             </div>
