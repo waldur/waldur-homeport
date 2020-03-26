@@ -7,13 +7,17 @@ import './TemplateCard.scss';
 
 interface TemplateCardProps {
   template: any;
+  clusterUuid: string;
 }
 
 export const TemplateCard = (props: TemplateCardProps) => (
   <div className="template-card">
     <Link
       state="rancher-template-details"
-      params={{ templateUuid: props.template.uuid }}
+      params={{
+        clusterUuid: props.clusterUuid,
+        templateUuid: props.template.uuid,
+      }}
       className="template-thumb"
     >
       <OfferingLogo src={props.template.icon} />
@@ -22,7 +26,10 @@ export const TemplateCard = (props: TemplateCardProps) => (
       <h3 className="template-title">
         <Link
           state="rancher-template-details"
-          params={{ templateUuid: props.template.uuid }}
+          params={{
+            clusterUuid: props.clusterUuid,
+            templateUuid: props.template.uuid,
+          }}
         >
           {props.template.name}
         </Link>

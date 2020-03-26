@@ -5,9 +5,9 @@ import { Field } from 'redux-form';
 import { translate } from '@waldur/i18n';
 
 export const getOptions = () => [
-  { value: null, label: translate('All') },
   { value: true, label: translate('Running accounting') },
   { value: false, label: translate('Not running accounting') },
+  { value: null, label: translate('All') },
 ];
 
 export const AccountingRunningField = () => (

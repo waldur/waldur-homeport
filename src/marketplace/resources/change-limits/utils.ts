@@ -8,6 +8,7 @@ import {
   getFormLimitParser,
   LimitParser,
   Limits,
+  filterOfferingComponents,
 } from '@waldur/marketplace/common/registry';
 import { parseOfferingLimits } from '@waldur/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@waldur/marketplace/offerings/store/types';
@@ -31,8 +32,16 @@ export async function loadData({ resource_uuid }): Promise<FetchedData> {
   const plan = await getPlan(resource.plan_uuid);
   const limitParser = getFormLimitParser(offering.type);
   const limitSerializer = getFormLimitSerializer(offering.type);
+  const components = filterOfferingComponents(offering);
   const usages = limitParser(resource.current_usages);
-  const limits = limitParser(resource.limits);
+  const resourceLimits = limitParser(resource.limits);
+  const limits: Record<string, number> = components.reduce(
+    (result, component) => ({
+      ...result,
+      [component.type]: resourceLimits[component.type],
+    }),
+    {},
+  );
   const offeringLimits = parseOfferingLimits(offering);
   return {
     resource,

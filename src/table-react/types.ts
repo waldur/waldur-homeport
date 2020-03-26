@@ -34,6 +34,7 @@ export interface TableOptions {
   getDefaultFilter?: (state: any) => any;
   mapPropsToFilter?: (props: any) => any;
   placeholderComponent?: React.ComponentType;
+  pullInterval?: number | (() => number);
 }
 
 export interface Column<RowType = Entity> {

@@ -39,10 +39,10 @@ export const ComponentRow: React.FC<Props> = ({ component, limits }) => (
       <p className="form-control-static">{component.name}</p>
     </td>
     <td>
-      <p className="form-control-static">{component.usage}</p>
+      <p className="form-control-static">{component.usage || 'N/A'}</p>
     </td>
     <td>
-      <p className="form-control-static">{component.limit}</p>
+      <p className="form-control-static">{component.limit || 'N/A'}</p>
     </td>
     <Field
       name={`limits.${component.type}`}

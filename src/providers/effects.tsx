@@ -16,7 +16,6 @@ export function* handleUpdateProvider(action) {
     yield put(showSuccess(successMessage));
     yield put(updateProvider.success());
     yield call(api.refreshProjectList);
-    yield call(api.refreshProvidersList);
   } catch (error) {
     const formError = new SubmissionError({
       _error: errorMessage,

@@ -424,7 +424,6 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/customer/api.ts
 #: src/slurm/table-extension.js
 msgid "Allocations"
 msgstr ""
@@ -482,12 +481,20 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
+#: src/rancher/template/ApplicationConfiguration.tsx
+msgid "Application configuration"
+msgstr ""
+
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 msgid "Application creation has been scheduled."
 msgstr ""
 
 #: src/ansible/playbook-jobs/routes.js
 msgid "Application details"
+msgstr ""
+
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Application has been created."
 msgstr ""
 
 #: src/ansible/playbook-jobs/details/ansible-job-summary.js
@@ -787,8 +794,6 @@ msgstr ""
 msgid "Batch block storage size"
 msgstr ""
 
-#: src/configs/base-config.js
-#: src/dashboard/categories.ts
 #: src/resource/breadcrumbs/resource-categories.js
 #: src/slurm/routes.js
 #: src/slurm/sidebar.js
@@ -830,16 +835,11 @@ msgstr ""
 msgid "Billing period"
 msgstr ""
 
-#: src/dashboard/categories.ts
-msgid "Block device count"
-msgstr ""
-
 #: src/analytics/resource-chart-service.js
 msgid "Block devices"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/categories.ts
 msgid "Block snapshot count"
 msgstr ""
 
@@ -848,7 +848,6 @@ msgid "Block storage size"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/categories.ts
 msgid "Block volume count"
 msgstr ""
 
@@ -906,7 +905,6 @@ msgstr ""
 msgid "CPU limit, minutes"
 msgstr ""
 
-#: src/dashboard/categories.ts
 #: src/slurm/details/constants.js
 msgid "CPU usage"
 msgstr ""
@@ -1232,12 +1230,12 @@ msgstr ""
 msgid "Components are invalid."
 msgstr ""
 
-#: src/dashboard/categories.ts
-msgid "Compute"
-msgstr ""
-
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Compute generation"
+msgstr ""
+
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Configuration"
 msgstr ""
 
 #: src/cost-planning/cost-plan-dialog.html
@@ -1329,10 +1327,6 @@ msgstr ""
 msgid "Could not create organization"
 msgstr ""
 
-#: src/dashboard/api.ts
-msgid "Count"
-msgstr ""
-
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetails.tsx
 msgid "Country"
@@ -1375,6 +1369,10 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Create an availability"
+msgstr ""
+
+#: src/rancher/template/TemplateQuestions.tsx
+msgid "Create application"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
@@ -1725,6 +1723,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -2440,7 +2439,6 @@ msgstr ""
 msgid "GPU limit, minutes"
 msgstr ""
 
-#: src/dashboard/categories.ts
 #: src/slurm/details/constants.js
 msgid "GPU usage"
 msgstr ""
@@ -3530,6 +3528,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -3585,6 +3584,10 @@ msgstr ""
 
 #: src/project/ProjectNameField.tsx
 msgid "Name should contain at least 3 symbols."
+msgstr ""
+
+#: src/rancher/template/ApplicationConfiguration.tsx
+msgid "Namespace"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -4849,9 +4852,6 @@ msgid "Privacy policy"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/configs/base-config.js
-#: src/customer/api.ts
-#: src/dashboard/categories.ts
 #: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
@@ -4889,6 +4889,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
 #: src/resource/list/resource-global-list.js
 msgid "Project"
 msgstr ""
@@ -5052,10 +5053,6 @@ msgstr ""
 msgid "Provider name"
 msgstr ""
 
-#: src/providers/ProviderTypeField.tsx
-msgid "Provider type"
-msgstr ""
-
 #: src/help/constants.js
 msgid "Providers"
 msgstr ""
@@ -5119,10 +5116,6 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
-#: src/rancher/template/TemplateDetail.tsx
-msgid "Questions"
-msgstr ""
-
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
 #: src/resource/resource-provision-policy.js
@@ -5156,7 +5149,6 @@ msgstr ""
 msgid "RAM size"
 msgstr ""
 
-#: src/dashboard/categories.ts
 #: src/slurm/details/constants.js
 msgid "RAM usage"
 msgstr ""
@@ -5184,10 +5176,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Rating"
-msgstr ""
-
-#: src/rancher/template/TemplateDetail.tsx
-msgid "Readme"
 msgstr ""
 
 #: src/customer/details/customer-manage.js
@@ -5520,10 +5508,6 @@ msgstr ""
 
 #: src/user/support/RequestedEmail.tsx
 msgid "Requested email"
-msgstr ""
-
-#: src/customer/api.ts
-msgid "Requests"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -6073,10 +6057,6 @@ msgstr ""
 msgid "Select project..."
 msgstr ""
 
-#: src/providers/ProviderTypeField.tsx
-msgid "Select provider type"
-msgstr ""
-
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
@@ -6192,7 +6172,6 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
-#: src/configs/base-config.js
 #: src/jira/sidebar.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Service desk"
@@ -6453,7 +6432,6 @@ msgid "Snapshot schedules"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/categories.ts
 msgid "Snapshot size"
 msgstr ""
 
@@ -6581,8 +6559,6 @@ msgid "Stopping"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/customer/api.ts
-#: src/dashboard/categories.ts
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -6607,10 +6583,6 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Storage type"
-msgstr ""
-
-#: src/configs/base-config.js
-msgid "Storages"
 msgstr ""
 
 #: src/digitalocean/droplet-resize.html
@@ -6675,6 +6647,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Summary"
@@ -7187,7 +7160,7 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
-#: src/resource/support/TreemapChart.tsx
+#: src/resource/support/TreemapChartFilter.tsx
 msgid "Total: {total}"
 msgstr ""
 
@@ -7296,6 +7269,7 @@ msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
+#: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to create application."
 msgstr ""
 
@@ -8104,7 +8078,6 @@ msgstr ""
 msgid "VM type overview"
 msgstr ""
 
-#: src/customer/api.ts
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "VMs"
@@ -8179,12 +8152,11 @@ msgid "Verifying email change"
 msgstr ""
 
 #: src/navigation/app-footer.html
+#: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/configs/base-config.js
-#: src/dashboard/categories.ts
 #: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
@@ -8212,7 +8184,6 @@ msgid "Volume name"
 msgstr ""
 
 #: src/analytics/registry.ts
-#: src/dashboard/categories.ts
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 #: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
@@ -8225,7 +8196,6 @@ msgstr ""
 msgid "Volume type"
 msgstr ""
 
-#: src/configs/base-config.js
 #: src/openstack/openstack-instance/module.js
 #: src/resource/list/resource-storage-tabs.html
 msgid "Volumes"
@@ -8746,6 +8716,10 @@ msgstr ""
 
 #: src/resource/events.ts
 msgid "{resource_name} has been deleted."
+msgstr ""
+
+#: src/resource/support/TreemapChartFilter.tsx
+msgid "{state} controls"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx

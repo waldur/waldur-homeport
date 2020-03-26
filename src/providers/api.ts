@@ -1,5 +1,5 @@
 import { sendForm } from '@waldur/core/api';
-import { $http, $rootScope, ENV } from '@waldur/core/services';
+import { $rootScope, ENV } from '@waldur/core/services';
 
 import { ProviderCreateFormData } from './types';
 
@@ -17,10 +17,5 @@ export const updateProvider = provider =>
     ...serializeDetails(provider),
   });
 
-export const fetchProvider = uuid => $http.get(getSettingsUrl(uuid));
-
 export const refreshProjectList = () =>
   $rootScope.$broadcast('refreshProjectList');
-
-export const refreshProvidersList = () =>
-  $rootScope.$broadcast('refreshProviderList');

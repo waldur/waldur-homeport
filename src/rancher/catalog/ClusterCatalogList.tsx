@@ -17,6 +17,7 @@ const TableComponent = props => {
           <Link
             state="rancher-catalog-details"
             params={{
+              clusterUuid: props.resource.uuid,
               catalogUuid: row.uuid,
               uuid: props.resource.project_uuid,
             }}
@@ -37,7 +38,7 @@ const TableComponent = props => {
         render: ({ row }) => <CatalogDeleteButton catalog={row} />,
       },
     ],
-    [translate],
+    [translate, props.resource],
   );
   return (
     <Table

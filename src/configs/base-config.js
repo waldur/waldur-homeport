@@ -26,81 +26,10 @@ const ENV = {
   },
 
   // Index of category inside of appStoreCategories
-  AllResources: -1,
   VirtualMachines: 0,
   PrivateClouds: 1,
   Storages: 3,
   Volumes: 4,
-
-  appStoreCategories: [
-    {
-      name: gettext('Virtual machines'),
-      type: 'provider',
-      icon: 'desktop',
-      key: 'vms',
-      services: [
-        'DigitalOcean',
-        'Azure',
-        'Amazon',
-        'OpenStackTenant',
-        'Rijkscloud',
-      ],
-    },
-    {
-      name: gettext('Private clouds'),
-      type: 'provider',
-      icon: 'cloud',
-      key: 'private_clouds',
-      services: ['OpenStack'],
-    },
-    {
-      name: gettext('Storages'),
-      type: 'provider',
-      key: 'storages',
-      services: ['OpenStackTenant', 'Rijkscloud'],
-    },
-    {
-      name: gettext('Volumes'),
-      type: 'provider',
-      key: 'volumes',
-      services: ['OpenStackTenant', 'Rijkscloud'],
-    },
-    {
-      name: gettext('Batch processing'),
-      type: 'provider',
-      key: 'slurm',
-      services: ['SLURM'],
-    },
-    {
-      name: gettext('Service desk'),
-      type: 'provider',
-      key: 'jiraProject',
-      services: ['JIRA'],
-    },
-  ],
-  serviceCategories: [
-    {
-      name: gettext('Virtual machines'),
-      services: [
-        'Amazon',
-        'Azure',
-        'DigitalOcean',
-        'OpenStackTenant',
-        'Rijkscloud',
-      ],
-    },
-    {
-      name: gettext('Service desk'),
-      services: ['JIRA'],
-    },
-    {
-      name: gettext('Batch processing'),
-      services: ['SLURM'],
-    },
-  ],
-
-  // optional list of disabled services, for example, ['Amazon', 'Azure']
-  disabledServices: [],
 
   resourceCategory: {
     'Amazon.Instance': 'vms',
