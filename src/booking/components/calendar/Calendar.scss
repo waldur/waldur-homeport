@@ -20,15 +20,6 @@
   }
 }
 
-.event-terminated {
-  background-color: #f8ac59;
-  display: none;
-}
-
-.event-isFocused {
-  background-color: #1a252f;
-}
-
 .fc-popover {
   background-color: white;
   color: white;
@@ -63,22 +54,52 @@
   label:after {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 0;
-    width: 45%;
-    height: 90%;
+    bottom: 0;
+    margin: 2px;
+    width: 46%;
+    height: 84%;
     background: #fff;
-    border-radius: 90px;
-    transition: 0.3s;
-    transform: translateX(5%) translateY(-50%);
+    border-radius: 100px;
+    transition: 0.2s;
+    transform: translateX(0%);
   }
   input:checked + label {
     background: #1ab394;
     &:after {
-      transform: translateX(115%) translateY(-50%);
+      transform: translateX(100%);
     }
   }
   label:active:after {
-    transform: translateX(50%) translateY(-50%);
+    transform: translateX(50%);
+  }
+}
+
+.weekDays-selector {
+  margin: 8px 20px 0;
+  display: flex;
+  justify-content: space-between;
+
+  & input {
+    display: none !important;
+
+    &[type='checkbox'] {
+      & + label {
+        display: inline-block;
+        border-radius: 50px;
+        background: #dddddd;
+        height: 30px;
+        width: 30px;
+        margin: 0;
+        line-height: 30px;
+        text-align: center;
+        cursor: pointer;
+      }
+      &:checked + label {
+        background: #1ab394;
+        color: #ffffff;
+      }
+    }
   }
 }
