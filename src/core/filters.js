@@ -1,3 +1,4 @@
+import { formatDate, formatRelative } from './dateUtils';
 import {
   formatFilesize,
   formatSnakeCase,
@@ -5,7 +6,6 @@ import {
   titleCase,
   dateTime,
 } from './utils';
-import { formatDate, formatRelative } from './dateUtils';
 
 function replace() {
   return function(input, search, replacement) {
@@ -24,10 +24,10 @@ function defaultCurrency(ENV, $filter) {
       return value;
     }
     let fractionSize = 2;
-    if (value !== 0 && value < 0.01) {
+    if (value !== 0 && Math.abs(value) < 0.01) {
       fractionSize = 3;
     }
-    if (value !== 0 && value < 0.001) {
+    if (value !== 0 && Math.abs(value) < 0.001) {
       fractionSize = 4;
     }
     return $filter('currency')(value, ENV.currency, fractionSize);
