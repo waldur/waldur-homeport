@@ -1,4 +1,4 @@
-import { EventInput } from '@fullcalendar/core';
+import { EventInput, EventApi } from '@fullcalendar/core';
 import { ReactElement } from 'react';
 
 export interface State {
@@ -66,4 +66,21 @@ export interface EditableCalendarProps {
   eventResize?: (event) => void;
   calendarType: 'create' | 'edit' | 'read';
   updateCallback: ({ event, oldId, formID }) => void;
+}
+
+export interface WaldurCalendarProps {
+  calendarType: 'create' | 'edit' | 'read';
+  calendarState: State;
+
+  setBookings: (payload: BookingProps[]) => void;
+  addBooking: (payload: BookingProps) => void;
+  updateBooking: (payload: {
+    oldId: string;
+    event: BookingProps | EventApi;
+  }) => void;
+  removeBooking: (oldId: string) => void;
+
+  setModalProps: (props) => void;
+  openModal: (cb) => void;
+  getAllEvents: (cb) => void;
 }

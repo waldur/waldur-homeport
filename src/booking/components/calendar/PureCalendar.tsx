@@ -17,30 +17,14 @@ import {
   updateBooking,
   removeBooking,
 } from '@waldur/booking/store/actions';
-import { BookingProps, State } from '@waldur/booking/types';
+import { BookingProps, WaldurCalendarProps } from '@waldur/booking/types';
 import { randomId } from '@waldur/core/fixtures';
 import { withModal } from '@waldur/modal/withModal';
 
+import { eventContentUi } from '../EventContentUi';
 import { CalendarEventModal } from '../modal/CalendarEventModal';
 
 import { defaultConfig } from './defaultConfig';
-
-interface WaldurCalendarProps {
-  calendarType: 'create' | 'edit' | 'read';
-  calendarState: State;
-
-  setBookings: (payload: BookingProps[]) => void;
-  addBooking: (payload: BookingProps) => void;
-  updateBooking: (payload: {
-    oldId: string;
-    event: BookingProps | EventApi;
-  }) => void;
-  removeBooking: (oldId: string) => void;
-
-  setModalProps: (props) => void;
-  openModal: (cb) => void;
-  getAllEvents: (cb) => void;
-}
 
 class PureCalendarComponent extends React.Component<
   WaldurCalendarProps,
@@ -58,29 +42,57 @@ class PureCalendarComponent extends React.Component<
       extendedProps: {
         uniqueID: `${randomId()}-${arg.jsEvent.timeStamp}`,
       },
-    };
+    } as BookingProps;
     this.props.addBooking(event);
   };
 
-  handleEventClick = arg => {
+  handleEventClick = (arg: { event: EventApi; el: HTMLElement }) => {
     this.props.setModalProps({
       event: arg.event,
       destroy: () => this.handleEventRemoved(arg),
     });
-    this.props.openModal(onSuccess =>
-      this.handleEventUpdate(arg.event, onSuccess),
+    this.props.openModal((onSuccess: BookingProps) =>
+      this.handleEventUpdate({ oldEvent: arg.event, event: onSuccess }),
     );
   };
 
-  handleEventUpdate = (oldBooking: EventApi, newBooking: EventApi) => {
-    const oldId = oldBooking.extendedProps.uniqueID;
-    this.props.updateBooking({ oldId, event: newBooking });
+  handleEventUpdate = ({
+    event,
+    oldEvent,
+    prevEvent,
+  }: {
+    event: EventApi | BookingProps;
+    prevEvent?: EventApi;
+    oldEvent?: EventApi | BookingProps;
+  }) => {
+    const oldId = (prevEvent || oldEvent).extendedProps.uniqueID;
+    this.props.updateBooking({ oldId, event });
   };
 
-  handleEventRemoved = ({ event, el }) => {
+  handleEventRemoved = ({
+    event,
+    el,
+  }: {
+    event: EventApi;
+    el: HTMLElement;
+  }) => {
     const oldId = event.extendedProps.uniqueID;
     ReactDOM.unmountComponentAtNode(el);
     this.props.removeBooking(oldId);
+  };
+
+  handleEventRender = (arg: {
+    el: HTMLElement;
+    event: EventApi | BookingProps;
+  }) => {
+    if (arg.el.className.includes('fc-event')) {
+      arg.el.setAttribute(
+        'class',
+        arg.el.className + ' booking booking-' + arg.event.id,
+      );
+      ReactDOM.render(eventContentUi(arg), arg.el);
+      return arg.el;
+    }
   };
 
   createEventSources = ({ schedules, bookings }) => [
@@ -95,6 +107,7 @@ class PureCalendarComponent extends React.Component<
         } else if (event.id === 'Schedule') {
           event.overlap = false;
           event.constraint = 'Availability';
+          event.className = 'booking';
         }
         return event;
       },
@@ -124,7 +137,6 @@ class PureCalendarComponent extends React.Component<
   }
 
   render() {
-    console.log(this.props);
     const { config, schedules, bookings } = this.props.calendarState;
     return (
       <FullCalendar
@@ -145,21 +157,22 @@ class PureCalendarComponent extends React.Component<
         height="auto"
         eventOverlap={false}
         eventStartEditable={true}
+        eventRender={this.handleEventRender}
+        eventMouseEnter={arg =>
+          arg.el.setAttribute('class', arg.el.className + ' booking-isHovered ')
+        }
+        eventMouseLeave={arg => arg.event.setProp('classNames', '')}
         eventSources={this.createEventSources({ schedules, bookings })}
         select={this.handleSelect}
-        eventDrop={({ oldEvent, event }) =>
-          this.handleEventUpdate(oldEvent, event)
-        }
-        eventResize={({ prevEvent, event }) =>
-          this.handleEventUpdate(prevEvent, event)
-        }
+        eventDrop={this.handleEventUpdate}
+        eventResize={this.handleEventUpdate}
         eventClick={this.handleEventClick}
       />
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: { bookings: any }) => ({
   calendarState: state.bookings,
 });
 
@@ -167,7 +180,7 @@ const mapDispatchToProps = dispatch => ({
   addBooking: (payload: BookingProps) => dispatch(addBooking(payload)),
   updateBooking: ({ oldId, event }) =>
     dispatch(updateBooking({ oldId, event })),
-  removeBooking: payload => dispatch(removeBooking(payload)),
+  removeBooking: (payload: string | number) => dispatch(removeBooking(payload)),
 });
 
 const enhance = compose(
