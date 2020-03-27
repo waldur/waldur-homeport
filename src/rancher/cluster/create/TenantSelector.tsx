@@ -14,14 +14,14 @@ const SelectTenantField = props => (
     value={props.input.value}
     onChange={props.input.onChange}
     options={props.options}
-    labelKey="service_name"
+    labelKey="name"
     valueKey="settings"
     simpleValue={true}
   />
 );
 
 const loadData = projectId =>
-  getAll('/openstacktenant-service-project-link/', {
+  getAll('/openstacktenant/', {
     params: { project_uuid: projectId },
   });
 

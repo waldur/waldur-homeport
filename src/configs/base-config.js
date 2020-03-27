@@ -49,7 +49,7 @@ const ENV = {
   },
   defaultListCacheTime: 60 * 10,
   optionsCacheTime: 10 * 1000,
-  disabledFeatures: ['cost-planning', 'resources.legacy'],
+  disabledFeatures: ['cost-planning'],
   enabledFeatures: [
     'billing',
     'customers',

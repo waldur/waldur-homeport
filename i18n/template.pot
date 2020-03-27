@@ -522,10 +522,6 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: src/resource/list/resource-global-list-filtered.html
-msgid "Apply filters"
-msgstr ""
-
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/marketplace/orders/ApproveButton.tsx
 msgid "Approve"
@@ -1238,6 +1234,10 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
+#: src/rancher/template/QuestionGroup.tsx
+msgid "Configuration options"
+msgstr ""
+
 #: src/cost-planning/cost-plan-dialog.html
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
@@ -1774,7 +1774,6 @@ msgstr ""
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
-#: src/project/project-details-button.html
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -2208,7 +2207,6 @@ msgid "Extending"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/resource/list/resource-global-list-filtered.html
 #: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
@@ -3532,7 +3530,6 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
-#: src/resource/list/resource-global-list.js
 #: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/slurm-allocation-list.js
@@ -4244,7 +4241,6 @@ msgstr ""
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/StatsTable.tsx
-#: src/resource/list/resource-global-list.js
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/list/ProjectPermissions.tsx
@@ -4852,7 +4848,6 @@ msgid "Privacy policy"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Private clouds"
@@ -4890,7 +4885,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
-#: src/resource/list/resource-global-list.js
 msgid "Project"
 msgstr ""
 
@@ -5650,10 +5644,6 @@ msgstr ""
 msgid "Resource termination request has been submitted."
 msgstr ""
 
-#: src/resource/list/resource-global-list-filtered.html
-msgid "Resource type"
-msgstr ""
-
 #: src/analytics/routes.js
 #: src/customer/workspace/customer-workspace.js
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
@@ -5681,7 +5671,6 @@ msgstr ""
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ChartContainer.tsx
 #: src/resource/support/TreemapChartFilter.tsx
-#: src/resource/support/routes.js
 msgid "Resources"
 msgstr ""
 
@@ -6066,10 +6055,6 @@ msgstr ""
 msgid "Select request type"
 msgstr ""
 
-#: src/resource/list/resource-global-list-filtered.html
-msgid "Select resource type"
-msgstr ""
-
 #: src/user/support/UserFilter.tsx
 msgid "Select role"
 msgstr ""
@@ -6081,7 +6066,6 @@ msgid "Select security groups..."
 msgstr ""
 
 #: src/analytics/VmOverviewFilter.tsx
-#: src/resource/list/resource-global-list-filtered.html
 msgid "Select service provider"
 msgstr ""
 
@@ -6095,10 +6079,6 @@ msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
 msgid "Select some files"
-msgstr ""
-
-#: src/resource/list/resource-global-list-filtered.html
-msgid "Select state"
 msgstr ""
 
 #: src/booking/BookingStateFilter.tsx
@@ -6160,7 +6140,6 @@ msgid "Server"
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
-#: src/resource/list/resource-global-list-filtered.html
 msgid "Service Provider"
 msgstr ""
 
@@ -6519,8 +6498,6 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/node/rancher-cluster-nodes.js
 #: src/rancher/template/ClusterTemplateList.tsx
-#: src/resource/list/resource-global-list-filtered.html
-#: src/resource/list/resource-global-list.js
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -6562,7 +6539,6 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/quotas/constants.js
 #: src/resource/breadcrumbs/resource-categories.js
@@ -8157,7 +8133,6 @@ msgid "Version"
 msgstr ""
 
 #: src/analytics/resource-chart-service.js
-#: src/project/project-workspace.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Virtual machines"

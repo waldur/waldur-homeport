@@ -9,7 +9,10 @@ export const groupQuestions = (
   questions.reduce(
     (groups, question) => ({
       ...groups,
-      [question.group]: [...(groups[question.group] || []), question],
+      [question.group || '']: [
+        ...(groups[question.group || ''] || []),
+        question,
+      ],
     }),
     {},
   );

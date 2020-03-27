@@ -27,36 +27,18 @@ export default class ResourceBreadcrumbsService {
       return items.concat(func(resource));
     }
 
-    if (this.features.isVisible('resources.legacy')) {
-      const category = this.ENV.resourceCategory[resource.resource_type];
-      if (category) {
-        return items.concat([
-          {
-            label: gettext('Resources'),
-          },
-          {
-            params: {
-              uuid: resource.project_uuid,
-            },
-            ...this.CATEGORY_ITEMS[category],
-          },
-        ]);
-      }
-    } else if (this.features.isVisible('marketplace')) {
-      return items.concat([
-        {
-          label: gettext('Resources'),
+    return items.concat([
+      {
+        label: gettext('Resources'),
+      },
+      {
+        params: {
+          category_uuid: resource.marketplace_category_uuid,
+          uuid: resource.project_uuid,
         },
-        {
-          params: {
-            category_uuid: resource.marketplace_category_uuid,
-            uuid: resource.project_uuid,
-          },
-          label: resource.marketplace_category_name,
-          state: 'marketplace-project-resources',
-        },
-      ]);
-    }
-    return items;
+        label: resource.marketplace_category_name,
+        state: 'marketplace-project-resources',
+      },
+    ]);
   }
 }
