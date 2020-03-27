@@ -88,14 +88,16 @@ export const TemplateDetail = () => {
         id="application-template-form"
         defaultActiveKey="configuration"
       >
-        <Panel eventKey="readme">
-          <Panel.Heading>
-            <Panel.Title toggle={true}>{translate('Summary')}</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body collapsible={true}>
-            <FormattedMarkdown text={state.data.version.readme} />
-          </Panel.Body>
-        </Panel>
+        {state.data.version.readme && (
+          <Panel eventKey="readme">
+            <Panel.Heading>
+              <Panel.Title toggle={true}>{translate('Summary')}</Panel.Title>
+            </Panel.Heading>
+            <Panel.Body collapsible={true}>
+              <FormattedMarkdown text={state.data.version.readme} />
+            </Panel.Body>
+          </Panel>
+        )}
         <Panel eventKey="configuration">
           <Panel.Heading>
             <Panel.Title toggle={true}>

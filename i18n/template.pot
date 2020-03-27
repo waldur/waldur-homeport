@@ -1238,6 +1238,10 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
+#: src/rancher/template/QuestionGroup.tsx
+msgid "Configuration options"
+msgstr ""
+
 #: src/cost-planning/cost-plan-dialog.html
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
