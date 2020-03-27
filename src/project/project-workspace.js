@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ngInject
 export default function ProjectWorkspaceController(
   $scope,
@@ -59,46 +60,6 @@ export default function ProjectWorkspaceController(
         label: gettext('Dashboard'),
         link: 'project.details({uuid: $ctrl.context.project.uuid})',
         index: 100,
-      },
-      {
-        label: gettext('Resources'),
-        icon: 'fa-files-o',
-        link: 'project.resources',
-        key: 'resources',
-        feature: 'resources.legacy',
-        index: 300,
-        orderByLabel: true,
-        children: [
-          {
-            key: 'vms',
-            link: 'project.resources.vms({uuid: $ctrl.context.project.uuid})',
-            icon: 'fa-desktop',
-            label: gettext('Virtual machines'),
-            feature: 'vms',
-            countFieldKey: 'vms',
-            index: 100,
-          },
-          {
-            key: 'private_clouds',
-            link:
-              'project.resources.clouds({uuid: $ctrl.context.project.uuid})',
-            icon: 'fa-cloud',
-            label: gettext('Private clouds'),
-            feature: 'private_clouds',
-            countFieldKey: 'private_clouds',
-            index: 200,
-          },
-          {
-            key: 'storages',
-            link:
-              'project.resources.storage.tabs({uuid: $ctrl.context.project.uuid})',
-            icon: 'fa-hdd-o',
-            label: gettext('Storage'),
-            feature: 'storage',
-            countFieldKey: 'storages',
-            index: 400,
-          },
-        ],
       },
       {
         key: 'eventlog',
