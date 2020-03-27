@@ -1,6 +1,7 @@
-import template from './resource-header.html';
 import { blockingExecutor } from '@waldur/core/services';
 import { getCategoryLink } from '@waldur/marketplace/utils';
+
+import template from './resource-header.html';
 
 const resourceHeader = {
   template: template,
@@ -93,12 +94,7 @@ const resourceHeader = {
         this.$state.go('errorPage.notFound');
         return;
       }
-      if (this.features.isVisible('resources.legacy')) {
-        const state = this.resourceUtils.getListState(
-          this.ENV.resourceCategory[this.model.resource_type],
-        );
-        this.$state.go(state, { uuid: this.model.project_uuid });
-      } else if (this.features.isVisible('marketplace')) {
+      if (this.model.marketplace_category_uuid) {
         this.$state.go('marketplace-project-resources', {
           category_uuid: this.model.marketplace_category_uuid,
           uuid: this.model.project_uuid,
@@ -128,7 +124,7 @@ const resourceHeader = {
 
     handleActionException(response) {
       if (response.status === 409) {
-        let message = response.data.detail || response.data.status;
+        const message = response.data.detail || response.data.status;
         this.ncUtilsFlash.error(message);
       }
     }
