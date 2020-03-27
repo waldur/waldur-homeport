@@ -11,6 +11,7 @@ import {
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { ImageUploadField } from './ImageUploadField';
+import { WysiwygEditor } from './WysiwygEditor';
 
 export const OverviewStep = withTranslation((props: TranslateProps) => (
   <FormContainer
@@ -31,10 +32,9 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       label={props.translate('Description')}
       maxLength={500}
     />
-    <TextField
+    <WysiwygEditor
       name="full_description"
       label={props.translate('Full description')}
-      maxLength={5000}
     />
     <StringField
       name="native_name"

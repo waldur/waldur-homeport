@@ -1,6 +1,4 @@
 import { get } from '@waldur/core/api';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 import { ExpandableRow } from '@waldur/resource/ResourceExpandableRow';
@@ -10,42 +8,6 @@ export const getTotal = params =>
 
 const getCustomerCounters = (customerId: string) =>
   get(`/customers/${customerId}/counters/`).then(response => response.data);
-
-const getQuotaRows = props => {
-  const counters = props.quotas.reduce((acc, quota) => ({
-    ...acc,
-    [quota.name]: quota.usage,
-  }));
-  return [
-    {
-      label: translate('VMs'),
-      value: counters.nc_vm_count,
-      visible: true,
-    },
-    {
-      label: translate('Storage'),
-      value: counters.nc_storage_count,
-      visible: true,
-    },
-    {
-      label: translate('Private clouds'),
-      value: counters.nc_private_cloud_count,
-      visible: true,
-    },
-    {
-      label: translate('Allocations'),
-      value: counters.nc_allocation_count,
-      visible: isFeatureVisible('slurm'),
-    },
-    {
-      label: translate('Requests'),
-      value: counters.nc_offering_count,
-      visible: isFeatureVisible('offering'),
-    },
-  ]
-    .filter(row => row.visible)
-    .filter(row => row.value);
-};
 
 const parseCategories = (
   categories: Category[],
@@ -61,13 +23,9 @@ const parseCategories = (
 };
 
 export async function loadCustomerResources(props): Promise<ExpandableRow[]> {
-  if (!isFeatureVisible('marketplace')) {
-    return getQuotaRows(props);
-  } else {
-    const categories = await getCategories({
-      params: { field: ['uuid', 'title'] },
-    });
-    const counters = await getCustomerCounters(props.uuid);
-    return parseCategories(categories, counters);
-  }
+  const categories = await getCategories({
+    params: { field: ['uuid', 'title'] },
+  });
+  const counters = await getCustomerCounters(props.uuid);
+  return parseCategories(categories, counters);
 }

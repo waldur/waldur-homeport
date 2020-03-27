@@ -1,4 +1,5 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
+import { call, put, select, takeEvery, take, race } from 'redux-saga/effects';
 
 import { transformRows } from '@waldur/table-react/utils';
 
@@ -8,7 +9,7 @@ import { getTableOptions } from './registry';
 import { getTableState } from './store';
 
 function* fetchList(action) {
-  const { table, extraFilter } = action.payload;
+  const { table, extraFilter, pullInterval } = action.payload;
   try {
     const state = yield select(getTableState(table));
     const options = getTableOptions(table);
@@ -40,6 +41,24 @@ function* fetchList(action) {
     yield put(actions.fetchListDone(table, entities, order, resultCount));
     if (state.sorting && state.sorting.loading) {
       yield put(actions.sortListDone(table));
+    }
+    if (pullInterval) {
+      const { execute } = yield race({
+        skip: take(
+          action =>
+            [actions.FETCH_LIST_START, actions.RESET_PAGINATION].includes(
+              action.type,
+            ) && action.payload.table === table,
+        ),
+        execute: delay(
+          typeof pullInterval === 'function' ? pullInterval() : pullInterval,
+        ),
+      });
+      if (execute) {
+        yield put(
+          actions.fetchListStart(table, extraFilter, options.pullInterval),
+        );
+      }
     }
   } catch (error) {
     yield put(actions.fetchListError(table, error));

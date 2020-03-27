@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as Form from 'react-bootstrap/lib/Form';
 import { reduxForm, FormSection } from 'redux-form';
 
+import { ENV } from '@waldur/core/services';
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 
@@ -42,7 +43,7 @@ export const TemplateQuestions = connector(props => {
         className="btn btn-sm btn-success m-t-sm"
         submitting={props.submitting}
         label={translate('Create application')}
-        disabled={props.invalid}
+        disabled={props.invalid || ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE}
       />
     </Form>
   );
