@@ -1774,7 +1774,6 @@ msgstr ""
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
-#: src/project/project-details-button.html
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
