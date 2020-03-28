@@ -59,14 +59,3 @@
   align-items: flex-start;
   flex-wrap: wrap;
 }
-
-@mixin row-centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: row-reverse;
-  > .col {
-    flex: 0 0 auto;
-    @include property(padding, 0 10);
-  } // > .col
-}
