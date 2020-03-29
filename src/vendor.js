@@ -1,6 +1,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+// eslint-disable-next-line import/no-unresolved
 import 'expose-loader?$!expose-loader?jQuery!jquery';
 import 'angular';
 import moment from 'moment-timezone';
@@ -45,7 +46,6 @@ import 'intro.js';
 import 'intro.js/introjs.css';
 import 'angular-intro.js';
 
-import 'summernote/dist/summernote.css';
 import 'react-select/dist/react-select.css';
 
 // if (process.env.NODE_ENV === 'production') {
