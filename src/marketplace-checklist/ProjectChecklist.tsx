@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
@@ -29,7 +30,7 @@ const ProjectChecklist = () => {
     return null;
   }
 
-  const state = useProjectChecklist(project);
+  const state = useProjectChecklist(project, $state.params.category);
 
   if (state.checklistLoading) {
     return <LoadingSpinner />;

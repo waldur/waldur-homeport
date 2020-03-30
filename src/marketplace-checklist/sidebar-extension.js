@@ -1,24 +1,23 @@
+import { getAll } from '@waldur/core/api';
+
 import { FEATURE, ICON_CLASS } from './constants';
+
+const getCategories = () => getAll('/marketplace-checklists-categories/');
+
+const getCategoryLink = category =>
+  `marketplace-checklist-project({uuid: $ctrl.context.project.uuid, category: '${category.uuid}'})`;
 
 // @ngInject
 export default function registerSidebarExtension(SidebarExtensionService) {
   SidebarExtensionService.register('project', () => {
-    return [
-      {
-        label: gettext('Compliance'),
+    return getCategories().then(categories => {
+      return categories.map((category, index) => ({
+        label: category.name,
         icon: ICON_CLASS,
-        link:
-          'marketplace-checklist-project({uuid: $ctrl.context.project.uuid})',
+        link: getCategoryLink(category),
         feature: FEATURE,
-        index: 220,
-      },
-      {
-        label: gettext('Training and education'),
-        icon: ICON_CLASS,
-        feature: FEATURE,
-        index: 221,
-        action: () => alert('This feature is not implemented yet'),
-      },
-    ];
+        index: 220 + index,
+      }));
+    });
   });
 }
