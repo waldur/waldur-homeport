@@ -1,5 +1,4 @@
 import bootstrapPlugin from '@fullcalendar/bootstrap';
-import { OptionsInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
@@ -17,7 +16,7 @@ import '@fullcalendar/timegrid/main.css';
 import './Calendar.scss';
 import { defaultConfig } from './defaultConfig';
 
-export const Calendar = (props: OptionsInput) => (
+export const Calendar = props => (
   <FullCalendar
     plugins={[
       dayGridPlugin,
