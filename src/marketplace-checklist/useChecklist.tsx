@@ -18,7 +18,7 @@ interface Answer {
   value: boolean;
 }
 
-const useChecklistSelector = (categoryId?: string) => {
+const useChecklistSelector = (categoryId: string) => {
   const [checklistOptions, setChecklistOptions] = useState([]);
   const [checklistLoading, setChecklistLoading] = useState(true);
   const [checklistErred, setChecklistErred] = useState(false);
@@ -153,8 +153,8 @@ export const useProjectChecklist = (project, categoryId) => {
   };
 };
 
-export const useChecklistOverview = () => {
-  const { checklist, ...checklistLoader } = useChecklistSelector();
+export const useChecklistOverview = (categoryId: string) => {
+  const { checklist, ...checklistLoader } = useChecklistSelector(categoryId);
 
   const [statsList, setStatsList] = useState([]);
   const [statsLoading, setStatsLoading] = useState(true);

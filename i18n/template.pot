@@ -1207,10 +1207,6 @@ msgstr ""
 msgid "Compliance checklists"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
-msgid "Compliance overview"
-msgstr ""
-
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/cost-planning/cost-plan-flavors.html
 msgid "Component"
@@ -7180,10 +7176,6 @@ msgstr ""
 
 #: src/billing/billing-record-details.html
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
-msgstr ""
-
-#: src/issues/workspace/issue-navigation-service.js
-msgid "Training and education"
 msgstr ""
 
 #: src/user/user-popover.html
