@@ -13,9 +13,6 @@ import 'font-awesome/css/font-awesome.css';
 import 'world-flags-sprite/stylesheets/flags16.css';
 import 'npm-font-open-sans';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/js/tooltip';
-import 'bootstrap/js/modal';
-import 'bootstrap/js/dropdown';
 
 import 'angular-cron-jobs';
 import 'angular-cron-jobs/dist/angular-cron-jobs.css';
