@@ -5,8 +5,21 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
 import { AnswerGroup } from './AnswerGroup';
+import { Question, Answers } from './types';
 
-const QuestionGroup = ({ question, answers }) => (
+interface TableProps {
+  answers: Answers;
+  questions: Question[];
+  setAnswers(answers: Answers): void;
+}
+
+const QuestionGroup = ({
+  question,
+  answers,
+}: {
+  answers: Answers;
+  question: Question;
+}) => (
   <>
     {question.description}
     {answers[question.uuid] !== question.correct_answer &&
@@ -34,7 +47,7 @@ const TableHeader = () => (
   </thead>
 );
 
-const TableBody = ({ questions, answers, setAnswers }) => (
+const TableBody = ({ questions, answers, setAnswers }: TableProps) => (
   <tbody>
     {questions.map((question, index) => (
       <tr key={question.uuid}>
@@ -54,7 +67,11 @@ const TableBody = ({ questions, answers, setAnswers }) => (
   </tbody>
 );
 
-export const AnswersTable = ({ questions, answers, setAnswers }) => (
+export const AnswersTable = ({
+  questions,
+  answers,
+  setAnswers,
+}: TableProps) => (
   <Table responsive={true} bordered={true} striped={true} className="m-t-md">
     <TableHeader />
     <TableBody
