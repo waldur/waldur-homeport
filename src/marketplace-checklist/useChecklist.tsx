@@ -1,22 +1,18 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getAll, post } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 
-interface Checklist {
-  name: string;
-  description: string;
-  uuid: string;
-  questions_count: number;
-}
-
-interface Answer {
-  question_uuid: string;
-  value: boolean;
-}
+import {
+  getChecklists,
+  getQuestions,
+  getAnswers,
+  postAnswers,
+  getStats,
+} from './api';
+import { Checklist, Answer, ChecklistStats } from './types';
 
 const useChecklistSelector = (categoryId: string) => {
   const [checklistOptions, setChecklistOptions] = useState([]);
@@ -31,13 +27,7 @@ const useChecklistSelector = (categoryId: string) => {
       setChecklistLoading(true);
       setChecklistErred(false);
       try {
-        const checklists = (
-          await getAll<Checklist>(
-            categoryId
-              ? `/marketplace-checklists-categories/${categoryId}/checklists/`
-              : '/marketplace-checklists/',
-          )
-        ).map(item => ({
+        const checklists = (await getChecklists(categoryId)).map(item => ({
           ...item,
           name: translate('{name} ({questions_count} questions)', item),
         }));
@@ -84,12 +74,8 @@ export const useProjectChecklist = (project, categoryId) => {
       setQuestionsLoading(true);
       setQuestionsErred(false);
       try {
-        const questions = await getAll(
-          `/marketplace-checklists/${checklist.uuid}/questions/`,
-        );
-        const answersList = await getAll<Answer>(
-          `/marketplace-checklists/${checklist.uuid}/answers/${project.uuid}/`,
-        );
+        const questions = await getQuestions(checklist.uuid);
+        const answersList = await getAnswers(checklist.uuid, project.uuid);
         setQuestionsList(questions);
         setAnswers(
           answersList.reduce(
@@ -124,10 +110,7 @@ export const useProjectChecklist = (project, categoryId) => {
         question_uuid,
         value: answers[question_uuid],
       }));
-      await post(
-        `/marketplace-checklists/${checklist.uuid}/answers/${project.uuid}/submit/`,
-        payload,
-      );
+      await postAnswers(checklist.uuid, project.uuid, payload);
     } catch (error) {
       setSubmitting(false);
       const errorMessage = `${translate('Unable to submit answers.')} ${format(
@@ -156,7 +139,7 @@ export const useProjectChecklist = (project, categoryId) => {
 export const useChecklistOverview = (categoryId: string) => {
   const { checklist, ...checklistLoader } = useChecklistSelector(categoryId);
 
-  const [statsList, setStatsList] = useState([]);
+  const [statsList, setStatsList] = useState<ChecklistStats[]>([]);
   const [statsLoading, setStatsLoading] = useState(true);
   const [statsErred, setStatsErred] = useState(true);
 
@@ -167,9 +150,7 @@ export const useChecklistOverview = (categoryId: string) => {
       setStatsLoading(true);
       setStatsErred(false);
       try {
-        const stats = await getAll(
-          `/marketplace-checklists/${checklist.uuid}/stats/`,
-        );
+        const stats = await getStats(checklist.uuid);
         setStatsList(stats);
         setStatsLoading(false);
       } catch (error) {

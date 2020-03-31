@@ -56,7 +56,10 @@ const ProjectChecklist = () => {
           <>{translate('Unable to load questions and answers.')}</>
         ) : (
           <>
-            <AnswersSummary answers={state.answers} />
+            <AnswersSummary
+              questions={state.questionsList}
+              answers={state.answers}
+            />
             <AnswersTable
               questions={state.questionsList}
               answers={state.answers}

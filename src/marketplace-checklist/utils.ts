@@ -1,14 +1,6 @@
-import { getAll } from '@waldur/core/api';
-
+import { getCategories } from './api';
 import { FEATURE, ICON_CLASS } from './constants';
-
-interface Category {
-  name: string;
-  uuid: string;
-}
-
-const getCategories = () =>
-  getAll<Category>('/marketplace-checklists-categories/');
+import { Category } from './types';
 
 const getMenuItems = linkFunction => () => {
   return getCategories().then(categories => {
