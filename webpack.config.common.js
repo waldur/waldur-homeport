@@ -71,25 +71,49 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader?sourceMap',
-          utils.isProd ? 'css-loader' : 'css-loader?sourceMap',
-          utils.isProd ? 'postcss-loader' : 'postcss-loader?sourceMap',
-          utils.isProd
-            ? 'sass-loader?includePaths[]=' + scssPath
-            : 'sass-loader?sourceMap&includePaths[]=' + scssPath,
+          {
+            loader: 'cache-loader',
+          },
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !utils.isProd,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !utils.isProd,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !utils.isProd,
+              sassOptions: {
+                includePaths: [scssPath],
+              },
+            },
+          },
         ],
       },
       {
         test: /\.css$/,
         use: [
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader?sourceMap',
-          utils.isProd ? 'css-loader' : 'css-loader?sourceMap',
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !utils.isProd,
+            },
+          },
         ],
       },
       {
         test: /\.font\.js/,
         use: [
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader?sourceMap',
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           {
             loader: 'webfonts-loader',

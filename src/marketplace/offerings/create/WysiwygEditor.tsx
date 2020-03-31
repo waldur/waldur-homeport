@@ -1,95 +1,103 @@
 import * as React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { translate } from '@waldur/i18n';
+
 import './WysiwygEditor.scss';
+
+const TOOLBAR_OPTIONS = [
+  'inline',
+  'blockType',
+  'fontSize',
+  'list',
+  'textAlign',
+  'link',
+  'embedded',
+  'emoji',
+  'image',
+  'remove',
+  'history',
+];
+
+interface DraftModule {
+  Editor: any;
+  htmlToDraft: any;
+  convertToRaw: any;
+  draftToHtml: any;
+  ContentState: any;
+  EditorState: any;
+}
 
 export const WysiwygEditor = props => {
   const [editorState, setEditorState] = useState();
-  const [editor, setEditor] = useState();
+  const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
+  const [erred, setErred] = useState(false);
 
-  let _contentState, _editorState, _convertToRaw, _draftToHtml, _htmlToDraft;
-  Promise.all([
-    import('draft-js'),
-    import('draftjs-to-html'),
-    import('html-to-draftjs'),
-    import('react-draft-wysiwyg'),
-  ]).then(
-    ([
-      { ContentState, EditorState, convertToRaw },
-      { default: draftToHtml },
-      { default: htmlToDraft },
-    ]) => {
-      _contentState = ContentState;
-      _editorState = EditorState;
-      _convertToRaw = convertToRaw;
-      _draftToHtml = draftToHtml;
-      _htmlToDraft = htmlToDraft;
-    },
-  );
+  const moduleRef = React.useRef<DraftModule>();
+  const contentRef = React.useRef();
 
   useEffect(() => {
-    setTimeout(() => {
-      const contentBlock = _htmlToDraft(props.input.value);
-      if (contentBlock) {
-        const contentState = _contentState.createFromBlockArray(
-          contentBlock.contentBlocks,
+    async function loadAll() {
+      try {
+        moduleRef.current = await import(
+          /* webpackChunkName: "draft-js" */ './draftjs-module'
         );
-        const editorState = _editorState.createWithContent(contentState);
-        setEditorState(editorState);
+
+        const contentBlock = moduleRef.current.htmlToDraft(props.input.value);
+        if (contentBlock) {
+          const contentState = moduleRef.current.ContentState.createFromBlockArray(
+            contentBlock.contentBlocks,
+          );
+          const editorState = moduleRef.current.EditorState.createWithContent(
+            contentState,
+          );
+          setEditorState(editorState);
+        }
+        setLoading(false);
+        setLoaded(true);
+      } catch (e) {
+        setErred(e);
+        setLoading(false);
+        setLoaded(false);
       }
-    });
+    }
+    loadAll();
   }, []);
 
-  // This updates the redux-form wrapper
-  const changeValue = useCallback(
-    editorState => {
-      const htmlValue = _draftToHtml(
-        _convertToRaw(editorState.getCurrentContent()),
-      );
+  const onEditorStateChange = React.useCallback(editorState => {
+    const htmlValue = moduleRef.current.draftToHtml(
+      moduleRef.current.convertToRaw(editorState.getCurrentContent()),
+    );
+    if (contentRef.current != htmlValue) {
       props.input.onChange(htmlValue);
-    },
-    [editorState],
-  );
-
-  const onEditorStateChange = editorState => {
+      contentRef.current = htmlValue;
+    }
     setEditorState(editorState);
-    changeValue(editorState);
-  };
+  }, []);
 
-  useEffect(() => {
-    import('react-draft-wysiwyg').then(module => {
-      const { Editor } = module;
-      const editorJsx = (
-        <Editor
-          {...props.input}
-          toolbar={{
-            options: [
-              'inline',
-              'blockType',
-              'fontSize',
-              'list',
-              'textAlign',
-              'link',
-              'embedded',
-              'emoji',
-              'image',
-              'remove',
-              'history',
-            ],
-          }}
-          editorState={editorState}
-          wrapperClassName="demo-wrapper"
-          editorClassName="demo-editor"
-          onEditorStateChange={onEditorStateChange}
-          onChange={e => {
-            e.preventDefault();
-          }}
-        />
-      );
-      setEditor(editorJsx);
-    });
-  }, [editorState]);
+  if (erred) {
+    return <>{translate('Unable to load editor')}</>;
+  }
 
-  return <div>{editor}</div>;
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (loaded) {
+    const Editor = moduleRef.current.Editor;
+    return (
+      <Editor
+        toolbar={{ options: TOOLBAR_OPTIONS }}
+        editorState={editorState}
+        wrapperClassName="demo-wrapper"
+        editorClassName="demo-editor"
+        onEditorStateChange={onEditorStateChange}
+      />
+    );
+  }
+  return null;
 };
