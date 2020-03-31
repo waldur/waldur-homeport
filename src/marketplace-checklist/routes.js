@@ -4,7 +4,7 @@ import { FEATURE } from './constants';
 export default function routes($stateProvider) {
   $stateProvider
     .state('marketplace-checklist-project', {
-      url: 'marketplace-checklist-project/',
+      url: 'marketplace-checklist-project/:category/',
       template:
         '<marketplace-checklist-project></marketplace-checklist-project>',
       parent: 'project',
@@ -15,7 +15,7 @@ export default function routes($stateProvider) {
     })
 
     .state('marketplace-checklist-overview', {
-      url: 'marketplace-checklist-overview/',
+      url: 'marketplace-checklist-overview/:category/',
       template:
         '<marketplace-checklist-overview></marketplace-checklist-overview>',
       parent: 'support',

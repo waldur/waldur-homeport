@@ -400,6 +400,7 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+#: src/booking/components/calendar/defaultConfig.ts
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
 msgstr ""
@@ -426,6 +427,10 @@ msgstr ""
 
 #: src/slurm/table-extension.js
 msgid "Allocations"
+msgstr ""
+
+#: src/booking/components/CalendarSettings.tsx
+msgid "Allow bookings to be scheduled at weekends"
 msgstr ""
 
 #: src/auth/auth-login.html
@@ -876,6 +881,10 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
+#: src/booking/components/CalendarSettings.tsx
+msgid "Business hours"
+msgstr ""
+
 #: src/user/support/TokenLifetimeField.tsx
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr ""
@@ -1191,16 +1200,11 @@ msgid "Complete"
 msgstr ""
 
 #: src/marketplace-checklist/routes.js
-#: src/marketplace-checklist/sidebar-extension.js
 msgid "Compliance"
 msgstr ""
 
 #: src/project/ProjectDashboard.tsx
 msgid "Compliance checklists"
-msgstr ""
-
-#: src/issues/workspace/issue-navigation-service.js
-msgid "Compliance overview"
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-price-explanation.html
@@ -1569,6 +1573,10 @@ msgstr ""
 msgid "Currently there are no booking requests."
 msgstr ""
 
+#: src/booking/components/CalendarSettings.tsx
+msgid "Daily available booking time range"
+msgstr ""
+
 #: src/customer/routes.js
 #: src/customer/workspace/customer-workspace.js
 #: src/issues/workspace/issue-navigation-service.js
@@ -1616,6 +1624,10 @@ msgstr ""
 
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Date of reporting"
+msgstr ""
+
+#: src/booking/components/calendar/defaultConfig.ts
+msgid "Day"
 msgstr ""
 
 #: src/user/support/UserActivateButton.tsx
@@ -2675,6 +2687,10 @@ msgstr ""
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
+#: src/booking/components/CalendarSettings.tsx
+msgid "Include weekends"
+msgstr ""
+
 #: src/customer/details/customer-report-error.html
 #: src/customer/details/customer-report-error.js
 msgid "Incorrect organization details"
@@ -3392,6 +3408,10 @@ msgstr ""
 msgid "Minimum allowed value"
 msgstr ""
 
+#: src/booking/components/CalendarSettings.tsx
+msgid "Minimum booking time slot duration."
+msgstr ""
+
 #: src/auth/valimo/auth-valimo-dialog.html
 msgid "Mobile phone number"
 msgstr ""
@@ -3420,6 +3440,7 @@ msgstr ""
 msgid "Monitoring system is being updated."
 msgstr ""
 
+#: src/booking/components/calendar/defaultConfig.ts
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Month"
 msgstr ""
@@ -5983,6 +6004,10 @@ msgstr ""
 msgid "Select assignee..."
 msgstr ""
 
+#: src/booking/components/CalendarSettings.tsx
+msgid "Select available weekdays"
+msgstr ""
+
 #: src/issues/create/issue-registration.html
 msgid "Select caller..."
 msgstr ""
@@ -7025,8 +7050,16 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
+#: src/booking/components/CalendarSettings.tsx
+msgid "Time slot"
+msgstr ""
+
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "Time to resolution"
+msgstr ""
+
+#: src/booking/components/CalendarSettings.tsx
+msgid "Time zone"
 msgstr ""
 
 #: src/events/BaseEventsList.tsx
@@ -7087,6 +7120,7 @@ msgstr ""
 msgid "To start please select a workspace"
 msgstr ""
 
+#: src/booking/components/calendar/defaultConfig.ts
 #: src/booking/components/modal/DateAndTimeSelect.tsx
 msgid "Today"
 msgstr ""
@@ -7142,11 +7176,6 @@ msgstr ""
 
 #: src/billing/billing-record-details.html
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
-msgstr ""
-
-#: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace-checklist/sidebar-extension.js
-msgid "Training and education"
 msgstr ""
 
 #: src/user/user-popover.html
@@ -8184,6 +8213,10 @@ msgstr ""
 msgid "Website URL"
 msgstr ""
 
+#: src/booking/components/calendar/defaultConfig.ts
+msgid "Week"
+msgstr ""
+
 #: src/auth/auth-init.js
 #: src/auth/auth-login.js
 msgid "Welcome to {pageTitle}!"
@@ -8572,6 +8605,10 @@ msgstr ""
 
 #: src/issues/list/IssuesList.tsx
 msgid "support requests"
+msgstr ""
+
+#: src/booking/components/CalendarSettings.tsx
+msgid "till"
 msgstr ""
 
 #: src/user/support/utils.ts

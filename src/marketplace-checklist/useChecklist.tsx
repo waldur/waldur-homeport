@@ -18,7 +18,7 @@ interface Answer {
   value: boolean;
 }
 
-const useChecklistSelector = () => {
+const useChecklistSelector = (categoryId: string) => {
   const [checklistOptions, setChecklistOptions] = useState([]);
   const [checklistLoading, setChecklistLoading] = useState(true);
   const [checklistErred, setChecklistErred] = useState(false);
@@ -32,7 +32,11 @@ const useChecklistSelector = () => {
       setChecklistErred(false);
       try {
         const checklists = (
-          await getAll<Checklist>('/marketplace-checklists/')
+          await getAll<Checklist>(
+            categoryId
+              ? `/marketplace-checklists-categories/${categoryId}/checklists/`
+              : '/marketplace-checklists/',
+          )
         ).map(item => ({
           ...item,
           name: translate('{name} ({questions_count} questions)', item),
@@ -63,8 +67,8 @@ const useChecklistSelector = () => {
   };
 };
 
-export const useProjectChecklist = project => {
-  const { checklist, ...checklistLoader } = useChecklistSelector();
+export const useProjectChecklist = (project, categoryId) => {
+  const { checklist, ...checklistLoader } = useChecklistSelector(categoryId);
 
   const [questionsList, setQuestionsList] = useState([]);
   const [questionsLoading, setQuestionsLoading] = useState(true);
@@ -149,8 +153,8 @@ export const useProjectChecklist = project => {
   };
 };
 
-export const useChecklistOverview = () => {
-  const { checklist, ...checklistLoader } = useChecklistSelector();
+export const useChecklistOverview = (categoryId: string) => {
+  const { checklist, ...checklistLoader } = useChecklistSelector(categoryId);
 
   const [statsList, setStatsList] = useState([]);
   const [statsLoading, setStatsLoading] = useState(true);

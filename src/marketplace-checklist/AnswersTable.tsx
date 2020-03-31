@@ -9,16 +9,18 @@ import { AnswerGroup } from './AnswerGroup';
 const QuestionGroup = ({ question, answers }) => (
   <>
     {question.description}
-    {!answers[question.uuid] && question.solution && <p>{question.solution}</p>}
-    {!answers[question.uuid] && question.category_uuid && (
-      <p>
-        <Link
-          state="marketplace-category"
-          params={{ category_uuid: question.category_uuid }}
-          label={translate('Find solution')}
-        />
-      </p>
-    )}
+    {answers[question.uuid] !== question.correct_answer &&
+      question.solution && <p>{question.solution}</p>}
+    {answers[question.uuid] !== question.correct_answer &&
+      question.category_uuid && (
+        <p>
+          <Link
+            state="marketplace-category"
+            params={{ category_uuid: question.category_uuid }}
+            label={translate('Find solution')}
+          />
+        </p>
+      )}
   </>
 );
 

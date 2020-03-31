@@ -1,5 +1,5 @@
-import marketplaceChecklistProject from './ProjectChecklist';
 import marketplaceChecklistOverview from './ChecklistOverview';
+import marketplaceChecklistProject from './ProjectChecklist';
 import routes from './routes';
 import registerSidebarExtension from './sidebar-extension';
 

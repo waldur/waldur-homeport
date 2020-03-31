@@ -39,18 +39,6 @@ const REPORT_ITEMS = [
     feature: 'marketplace',
   },
   {
-    label: gettext('Compliance overview'),
-    icon: 'fa-list-ol',
-    link: 'marketplace-checklist-overview',
-    feature: 'marketplace.checklist',
-  },
-  {
-    label: gettext('Training and education'),
-    icon: 'fa-list-ol',
-    feature: 'marketplace.checklist',
-    action: () => alert('This feature is not implemented yet'),
-  },
-  {
     label: gettext('Plan capacity'),
     icon: 'fa-puzzle-piece',
     link: 'marketplace-support-plan-usages',
@@ -185,6 +173,11 @@ export default class IssueNavigationService {
         }
         return items;
       })
+      .then(items =>
+        this.sidebarExtensionService
+          .getItems('support')
+          .then(extra => [...items, ...extra]),
+      )
       .then(items => {
         if (this.currentUser.is_support || this.currentUser.is_staff) {
           return [
