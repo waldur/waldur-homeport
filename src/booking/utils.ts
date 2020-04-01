@@ -3,6 +3,8 @@ import * as moment from 'moment';
 
 import { randomId } from '@waldur/core/fixtures';
 
+import { BookingProps } from './types';
+
 export const createCalendarBookingEvent = ({
   type,
   allDay,
@@ -31,7 +33,7 @@ export const deleteCalendarBookingEvent = (events, booking) => {
 
 export const eventsMapper = events =>
   events.map(event => {
-    if (event.type === 'availability') {
+    if (event.type === 'Availability') {
       event.rendering = 'inverse-background';
       event.groupId = 'availableForBooking';
       event.backgroundColor = 'pink';
@@ -41,28 +43,6 @@ export const eventsMapper = events =>
     }
     return event;
   });
-
-interface DayRender {
-  date: Date;
-  el: HTMLElement;
-  allDay?: boolean;
-}
-
-export const availabilityCellRender = (
-  events: EventInput[],
-  dayRender: DayRender,
-) => {
-  events.map(event => {
-    const currentDate = Date.parse(dayRender.date.toString());
-    const isStart = Date.parse(event.start as string) === currentDate;
-    const isBetween =
-      Date.parse(event.start as string) < currentDate &&
-      currentDate < Date.parse(event.end as string);
-    if (event.type === 'availability' && (isStart || isBetween)) {
-      dayRender.el.style.backgroundColor = 'rgba(0,250,0,.2)';
-    }
-  });
-};
 
 export const timelineLabels = (interval: number) => {
   const periodsInADay = moment.duration(1, 'day').as('minutes');
@@ -78,4 +58,38 @@ export const timelineLabels = (interval: number) => {
     });
   }
   return timeLabels;
+};
+
+type EventMap = (
+  events: BookingProps[],
+  showAvailability?: boolean,
+) => EventInput[];
+
+export const mapBookingEvents: EventMap = (events, showAvailability) =>
+  events.map(event => {
+    if (event.extendedProps.type === 'Availability') {
+      console.log('showAvailability: ', showAvailability ? null : 'background');
+      event.rendering = showAvailability ? undefined : 'background';
+      event.overlap = true;
+      event.classNames = 'fc-event-Availability';
+    } else if (event.extendedProps.type === 'Schedule') {
+      event.overlap = false;
+      event.constraint = ['availability', 'Availability', 'businessHours'];
+      event.classNames = 'fc-event-Schedule';
+    }
+    return event;
+  });
+
+export const handleTitle = ({ event, el }) => {
+  if (!event.title || event.title === '') {
+    return el.querySelector('.fc-title').prepend(event.extendedProps.type);
+  }
+};
+
+export const handleTime = ({ event, el }) => {
+  if (event.allDay) {
+    const content = el.querySelector('.fc-content');
+    return (content.innerHTML =
+      '<i class="fa fa-clock-o"> All-day </i>' + content.innerHTML);
+  }
 };
