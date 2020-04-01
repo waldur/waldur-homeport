@@ -43,10 +43,8 @@ export const reducer = (state = INITIAL_STATE, action) => {
       };
 
     case constants.UPDATE_BOOKING:
-      const { event, oldId } = payload;
-      const updatedList = state.schedules.filter(
-        item => item.extendedProps.uniqueID !== oldId,
-      );
+      const { event, oldID } = payload;
+      const updatedList = state.schedules.filter(item => item.id !== oldID);
       return {
         ...state,
         schedules: [...updatedList, event],
@@ -54,9 +52,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
 
     case constants.REMOVE_BOOKING:
       const { bookingId } = payload;
-      const removedList = state.schedules.filter(
-        item => item.extendedProps.uniqueID !== bookingId,
-      );
+      const removedList = state.schedules.filter(item => item.id !== bookingId);
       return {
         ...state,
         schedules: [...removedList],

@@ -22,8 +22,8 @@ export interface ConfigProps {
 
 export interface BookingProps extends EventInput {
   extendedProps: {
-    uniqueID: string;
-    type?: string;
+    type: string;
+    bookingID?: string;
     config?: ConfigProps;
   };
 }
@@ -57,30 +57,19 @@ export interface PureDateProps {
     | boolean;
 }
 
-export interface EditableCalendarProps {
-  onSelectDate: (event) => void;
-  calendar: State;
-  formEvents?: EventInput[];
-  onEventClick: (event) => void;
-  eventDrop?: (event) => void;
-  eventResize?: (event) => void;
-  calendarType: 'create' | 'edit' | 'read';
-  updateCallback: ({ event, oldId, formID }) => void;
-}
-
 export interface WaldurCalendarProps {
   calendarType: 'create' | 'edit' | 'read';
   calendarState: State;
 
-  setBookings: (payload: BookingProps[]) => void;
   addBooking: (payload: BookingProps) => void;
+  setBookings: (payload: BookingProps[]) => void;
   updateBooking: (payload: {
-    oldId: string;
+    oldID: BookingProps['id'];
     event: BookingProps | EventApi;
   }) => void;
-  removeBooking: (oldId: string) => void;
+  removeBooking: (oldID: BookingProps['id']) => void;
 
   setModalProps: (props) => void;
   openModal: (cb) => void;
-  getAllEvents: (cb) => void;
+  getAllEvents?: (cb) => void;
 }
