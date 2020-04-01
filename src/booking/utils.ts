@@ -62,14 +62,13 @@ export const timelineLabels = (interval: number) => {
 
 type EventMap = (
   events: BookingProps[],
-  showAvailability?: boolean,
+  showAvailability?: undefined | 'background' | 'none',
 ) => EventInput[];
 
 export const mapBookingEvents: EventMap = (events, showAvailability) =>
   events.map(event => {
     if (event.extendedProps.type === 'Availability') {
-      console.log('showAvailability: ', showAvailability ? null : 'background');
-      event.rendering = showAvailability ? undefined : 'background';
+      event.rendering = showAvailability;
       event.overlap = true;
       event.classNames = 'fc-event-Availability';
     } else if (event.extendedProps.type === 'Schedule') {
