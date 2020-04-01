@@ -37,10 +37,11 @@ const customerPolicies = {
 
       this.currency = this.ENV.currency;
       this.quota = this.FreeIPAQuotaService.loadQuota(this.customer);
+      this.actionsExpanded = false;
     }
 
     updatePolicies() {
-      let promises = [
+      const promises = [
         this.priceEstimatesService
           .update(this.thresholdModel.priceEstimate)
           .then(() => {
@@ -64,8 +65,8 @@ const customerPolicies = {
         })
         .catch(response => {
           if (response.status === 400) {
-            for (let name in response.data) {
-              let message = response.data[name];
+            for (const name in response.data) {
+              const message = response.data[name];
               this.ncUtilsFlash.error(message);
             }
           } else {
@@ -74,6 +75,10 @@ const customerPolicies = {
             );
           }
         });
+    }
+
+    toggleActions() {
+      this.actionsExpanded = !this.actionsExpanded;
     }
   },
 };

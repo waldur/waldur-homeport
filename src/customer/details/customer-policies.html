@@ -1,6 +1,19 @@
-<div class="panel panel-default">
-  <div class="panel-heading" translate>Policies</div>
-  <div class="panel-body">
+<div class="settings">
+  <div class="settings-header">
+    <div class="settings-title" translate>Policies</div>
+    <button
+      class="btn btn-default"
+      type="button"
+      ng-click="$ctrl.toggleActions()"
+    >
+      <span ng-if="!$ctrl.actionsExpanded" translate>Expand</span>
+      <span ng-if="$ctrl.actionsExpanded" translate>Collapse</span>
+    </button>
+    <p class="settings-subtitle">
+      Update cost threshold and FreeIPA group quota.
+    </p>
+  </div>
+  <div ng-if="$ctrl.actionsExpanded">
     <form
       name="$ctrl.policiesForm"
       class="form-horizontal"
