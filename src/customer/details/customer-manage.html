@@ -10,13 +10,9 @@
     can-update-quota="$ctrl.canUpdateQuota"
   ></customer-policies>
   <div class="settings">
-    <div class="settings-header">
+    <div class="settings-header" ng-click="$ctrl.toggleActions()">
       <div class="settings-title" translate>Organization actions</div>
-      <button
-        class="btn btn-default"
-        type="button"
-        ng-click="$ctrl.toggleActions()"
-      >
+      <button class="btn btn-default" type="button">
         <span ng-if="!$ctrl.actionsExpanded" translate>Expand</span>
         <span ng-if="$ctrl.actionsExpanded" translate>Collapse</span>
       </button>

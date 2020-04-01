@@ -27,15 +27,11 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
   const [expanded, setExpanded] = React.useState(false);
   return (
     <div className="settings">
-      <div className="settings-header">
+      <div className="settings-header" onClick={() => setExpanded(!expanded)}>
         <div className="settings-title">
           {translate('Organization details')}
         </div>
-        <button
-          className="btn btn-default"
-          type="button"
-          onClick={() => setExpanded(!expanded)}
-        >
+        <button className="btn btn-default" type="button">
           {expanded ? translate('Collapse') : translate('Expand')}
         </button>
         <p className="settings-subtitle">
