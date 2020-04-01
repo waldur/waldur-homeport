@@ -1,0 +1,33 @@
+.settings {
+  border-top: 1px solid #e5e5e5;
+}
+
+.settings-header {
+  position: relative;
+  padding: 20px 110px 20px 0;
+  cursor: pointer;
+}
+
+.settings-title {
+  font-size: 20px;
+}
+
+.settings-subtitle {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.settings-header button {
+  position: absolute;
+  top: 20px;
+  right: 6px;
+  min-width: 80px;
+}
+
+.highlight {
+  padding: 25px;
+  margin-bottom: 14px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 4px;
+}
