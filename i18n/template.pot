@@ -5032,6 +5032,10 @@ msgstr ""
 msgid "Projects list"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+msgid "Provided by {provider}"
+msgstr ""
+
 #: src/ansible/playbook-jobs/create/ansible-job-create.html
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/cost-planning/cost-plan-optimizer.html
@@ -7511,6 +7515,7 @@ msgstr ""
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Unable to load offering details."
 msgstr ""
