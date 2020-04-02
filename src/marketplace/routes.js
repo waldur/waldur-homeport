@@ -86,6 +86,25 @@ export default function routes($stateProvider) {
       },
     })
 
+    .state('marketplace-public-offering', {
+      url: '/marketplace-public-offering/',
+      abstract: true,
+      templateUrl: 'views/partials/base.html',
+      data: {
+        hideHeader: true,
+      },
+    })
+
+    .state('marketplace-public-offering.details', {
+      url: ':uuid/',
+      template:
+        '<marketplace-public-offering-details-page></marketplace-public-offering-details>',
+      data: {
+        pageTitle: gettext('Offering details'),
+        feature: 'marketplace',
+      },
+    })
+
     .state('marketplace-category', {
       url: 'marketplace-category/:category_uuid/',
       template: '<marketplace-category></marketplace-category>',
