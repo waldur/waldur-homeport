@@ -136,6 +136,7 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/booking/BookingsList.tsx
 #: src/cost-planning/cost-plan-items.html
 #: src/cost-planning/cost-plan-optimizer.html
@@ -275,6 +276,10 @@ msgstr ""
 
 #: src/user/list/CustomerCreateButton.tsx
 msgid "Add organization"
+msgstr ""
+
+#: src/billing/PaymentProfileList.tsx
+msgid "Add payment profile"
 msgstr ""
 
 #: src/marketplace/offerings/plan/PlanAddButton.tsx
@@ -1670,6 +1675,7 @@ msgstr ""
 msgid "Default value"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/cost-planning/cost-plan-items.html
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
@@ -1834,6 +1840,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
 msgstr ""
@@ -1954,6 +1961,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/openstack/openstack-backup-schedule/module.js
@@ -2014,6 +2022,7 @@ msgstr ""
 msgid "Enable profile"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/user/hooks/hook-details.html
 msgid "Enabled"
 msgstr ""
@@ -3513,6 +3522,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/booking/BookingsList.tsx
 #: src/cost-planning/cost-plan-dialog.html
@@ -4483,6 +4493,10 @@ msgstr ""
 
 #: src/paypal/paypal-invoices-list.js
 msgid "Payment pending"
+msgstr ""
+
+#: src/customer/details/customer-manage.html
+msgid "Payment profiles"
 msgstr ""
 
 #: src/billing/billing-utils.js
@@ -6506,6 +6520,7 @@ msgstr ""
 #: src/ansible/application-list.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/azure/sql/azure-sql-databases-list.js
+#: src/billing/PaymentProfileList.tsx
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/booking/BookingStateFilter.tsx
@@ -7202,6 +7217,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/jira/project/jira-project-config.js
 #: src/jira/project/jira-projects-list.js
@@ -8605,6 +8621,10 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/list/CustomerPermissions.tsx
 msgid "organizations"
+msgstr ""
+
+#: src/billing/PaymentProfileList.tsx
+msgid "payment profiles"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx

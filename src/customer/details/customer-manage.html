@@ -10,6 +10,21 @@
     can-update-quota="$ctrl.canUpdateQuota"
   ></customer-policies>
   <div class="settings">
+    <div class="settings-header" ng-click="$ctrl.toggleProfiles()">
+      <div class="settings-title" translate>Payment profiles</div>
+      <button class="btn btn-default" type="button">
+        <span ng-if="!$ctrl.profilesExpanded" translate>Expand</span>
+        <span ng-if="$ctrl.profilesExpanded" translate>Collapse</span>
+      </button>
+      <p class="settings-subtitle">
+        Payment profile defines how invoices are processed.
+      </p>
+    </div>
+    <div ng-if="$ctrl.profilesExpanded">
+      <payment-profile-list></payment-profile-list>
+    </div>
+  </div>
+  <div class="settings">
     <div class="settings-header" ng-click="$ctrl.toggleActions()">
       <div class="settings-title" translate>Organization actions</div>
       <button class="btn btn-default" type="button">
