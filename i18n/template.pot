@@ -6520,7 +6520,6 @@ msgstr ""
 #: src/ansible/application-list.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/azure/sql/azure-sql-databases-list.js
-#: src/billing/PaymentProfileList.tsx
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/booking/BookingStateFilter.tsx
@@ -6568,6 +6567,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/invitations/invitations-list.js
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
