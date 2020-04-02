@@ -101,13 +101,8 @@
 }
 
 .fc-event {
-  position: relative;
-  display: block;
-  font-size: 0.85em;
-  line-height: 1.4;
-  border-radius: 3px;
-  padding: 2px 4px;
-  margin: 4px;
+  padding: 4px 4px 2px;
+  margin: 6px 3px;
   border-style: solid;
 
   &.fc-day-grid-event {
@@ -118,21 +113,19 @@
   }
 
   &-Creating {
-    border-color: hsl(35, 98%, 65%);
+    border-color: #fdb44e;
     background: hsl(36, 95%, 93%);
     color: darken(#fdb44d, 12%);
-    &.isActive,
     &.isHovered {
-      background: #fa607e;
+      background: #fdb44e;
     }
   }
 
   &-Availability,
   &-OK {
-    border-color: hsl(168, 75%, 40%);
-    background: hsl(168, 70%, 83%);
+    border-color: #19b394;
+    background: #b5f2e6;
     color: darken(#1ab394, 12%);
-    &.isActive,
     &.isHovered {
       background: #19b394;
     }
@@ -142,7 +135,6 @@
     border-color: #fa607e;
     background: rgba(#fdc5d0, 0.7);
     color: darken(#fa607e, 12%);
-    &.isActive,
     &.isHovered {
       background: #fa607e;
     }
@@ -152,21 +144,26 @@
     border-color: #4786ff;
     background: rgba(rgb(218, 231, 255), 0.7);
     color: darken(#4788ff, 12%);
-    &.isActive,
     &.isHovered {
       background: #4786ff;
     }
   }
 
   &.isHovered {
-    //background: #4786ff;
     color: #fff;
     box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
   }
 
+  &.isActive .booking-tooltip {
+    display: flex;
+    flex-direction: column;
+  }
+
   & .booking-tooltip {
     position: absolute;
+    display: none;
     min-width: 150px;
+    background-color: rgba(0, 0, 0, 0.7);
     border: 1px solid rgba(166, 168, 179, 0.2);
     border-radius: 4px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
