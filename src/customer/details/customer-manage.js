@@ -1,5 +1,6 @@
-import template from './customer-manage.html';
 import DeleteCustomerAction from './customer-delete';
+import template from './customer-manage.html';
+import './customer-manage.css';
 
 class CustomerManageController {
   // @ngInject
@@ -39,6 +40,7 @@ class CustomerManageController {
   $onInit() {
     this.loadCustomer();
     this.$rootScope.$on('refreshCustomer', this.refreshCustomer.bind(this));
+    this.actionsExpanded = false;
   }
 
   refreshCustomer() {
@@ -134,6 +136,10 @@ class CustomerManageController {
       component: 'customerReportError',
       resolve: () => ({ customer: this.customer }),
     });
+  }
+
+  toggleActions() {
+    this.actionsExpanded = !this.actionsExpanded;
   }
 }
 

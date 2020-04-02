@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as Panel from 'react-bootstrap/lib/Panel';
 import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -8,6 +7,8 @@ import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { getConfig, getNativeNameVisible } from '@waldur/store/config';
 import { connectAngularComponent } from '@waldur/store/connect';
+
+import { CustomerEditDetailsContainer } from './CustomerEditDetailsContainer';
 
 interface CustomerDetailsProps extends TranslateProps {
   customer: Customer;
@@ -22,93 +23,113 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
   organizationSubnetsVisible,
   nativeNameVisible,
   organizationDomainVisible,
-}) => (
-  <Panel>
-    <Panel.Heading>{translate('Organization details')}</Panel.Heading>
+}) => {
+  const [expanded, setExpanded] = React.useState(false);
+  return (
+    <div className="settings">
+      <div className="settings-header" onClick={() => setExpanded(!expanded)}>
+        <div className="settings-title">
+          {translate('Organization details')}
+        </div>
+        <button className="btn btn-default" type="button">
+          {expanded ? translate('Collapse') : translate('Expand')}
+        </button>
+        <p className="settings-subtitle">
+          Update your organization name, logo, accounting and contact details.
+        </p>
+      </div>
 
-    <Panel.Body>
-      <dl className="dl-horizontal resource-details-table">
-        <Field label={translate('Name')} value={customer.display_name} />
+      {expanded && (
+        <div>
+          <dl className="dl-horizontal resource-details-table">
+            <Field label={translate('Name')} value={customer.display_name} />
 
-        <Field label={translate('Organization type')} value={customer.type} />
+            <Field
+              label={translate('Organization type')}
+              value={customer.type}
+            />
 
-        {nativeNameVisible && (
-          <Field
-            label={translate('Native name')}
-            value={customer.native_name}
-          />
-        )}
+            {nativeNameVisible && (
+              <Field
+                label={translate('Native name')}
+                value={customer.native_name}
+              />
+            )}
 
-        <Field
-          label={translate('Abbreviation')}
-          value={customer.abbreviation}
-        />
+            <Field
+              label={translate('Abbreviation')}
+              value={customer.abbreviation}
+            />
 
-        {organizationDomainVisible && (
-          <Field
-            label={translate('Home organization domain name')}
-            value={customer.domain}
-          />
-        )}
+            {organizationDomainVisible && (
+              <Field
+                label={translate('Home organization domain name')}
+                value={customer.domain}
+              />
+            )}
 
-        <Field
-          label={translate('Registry code')}
-          value={customer.registration_code}
-        />
+            <Field
+              label={translate('Registry code')}
+              value={customer.registration_code}
+            />
 
-        <Field
-          label={translate('Accounting start date')}
-          value={
-            customer.accounting_start_date &&
-            formatDateTime(customer.accounting_start_date)
-          }
-        />
+            <Field
+              label={translate('Accounting start date')}
+              value={
+                customer.accounting_start_date &&
+                formatDateTime(customer.accounting_start_date)
+              }
+            />
 
-        <Field
-          label={translate('Agreement number')}
-          value={customer.agreement_number}
-        />
+            <Field
+              label={translate('Agreement number')}
+              value={customer.agreement_number}
+            />
 
-        <Field
-          label={translate('Address')}
-          value={customer.address || customer.contact_details}
-        />
+            <Field
+              label={translate('Address')}
+              value={customer.address || customer.contact_details}
+            />
 
-        <Field label={translate('Contact e-mail')} value={customer.email} />
+            <Field label={translate('Contact e-mail')} value={customer.email} />
 
-        <Field
-          label={translate('Contact phone')}
-          value={customer.phone_number}
-        />
+            <Field
+              label={translate('Contact phone')}
+              value={customer.phone_number}
+            />
 
-        <Field label={translate('VAT code')} value={customer.vat_code} />
+            <Field label={translate('VAT code')} value={customer.vat_code} />
 
-        <Field
-          label={translate('VAT rate')}
-          value={`${customer.default_tax_percent}%`}
-        />
+            <Field
+              label={translate('VAT rate')}
+              value={`${customer.default_tax_percent}%`}
+            />
 
-        <Field
-          label={translate(
-            'Subnets from where connection to self-service is allowed.',
-          )}
-          value={organizationSubnetsVisible && customer.access_subnets}
-        />
+            <Field
+              label={translate(
+                'Subnets from where connection to self-service is allowed.',
+              )}
+              value={organizationSubnetsVisible && customer.access_subnets}
+            />
 
-        <Field label={translate('Country')} value={customer.country_name} />
+            <Field label={translate('Country')} value={customer.country_name} />
 
-        <Field label={translate('Postal code')} value={customer.postal} />
+            <Field label={translate('Postal code')} value={customer.postal} />
 
-        <Field label={translate('Bank name')} value={customer.bank_name} />
+            <Field label={translate('Bank name')} value={customer.bank_name} />
 
-        <Field
-          label={translate('Bank account')}
-          value={customer.bank_account}
-        />
-      </dl>
-    </Panel.Body>
-  </Panel>
-);
+            <Field
+              label={translate('Bank account')}
+              value={customer.bank_account}
+            />
+          </dl>
+
+          <CustomerEditDetailsContainer customer={customer} />
+        </div>
+      )}
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
   organizationSubnetsVisible: getConfig(state).organizationSubnetsVisible,

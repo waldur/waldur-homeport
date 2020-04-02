@@ -1170,6 +1170,12 @@ msgstr ""
 msgid "Code should consist of latin symbols or numbers."
 msgstr ""
 
+#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/customer-manage.html
+#: src/customer/details/customer-policies.html
+msgid "Collapse"
+msgstr ""
+
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Collation"
 msgstr ""
@@ -2175,6 +2181,12 @@ msgstr ""
 #: src/quotas/QuotaUsageBarChart.tsx
 #: src/quotas/quota-usage-bar-chart.js
 msgid "Existing quota usage: {usage}"
+msgstr ""
+
+#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/customer-manage.html
+#: src/customer/details/customer-policies.html
+msgid "Expand"
 msgstr ""
 
 #: src/team/add-team-member.html
@@ -3274,7 +3286,7 @@ msgstr ""
 msgid "Marketplace offerings"
 msgstr ""
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
+#: src/customer/details/customer-manage.html
 msgid "Marketplace service provider"
 msgstr ""
 
@@ -4294,10 +4306,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-dialog.js
 msgid "Organization has been created."
-msgstr ""
-
-#: src/customer/details/CustomerEditDetails.tsx
-msgid "Organization logo"
 msgstr ""
 
 #: src/user/list/CustomerPermissions.tsx
@@ -5379,6 +5387,18 @@ msgstr ""
 
 #: src/user/support/UserEditForm.tsx
 msgid "Remove profile"
+msgstr ""
+
+#: src/customer/details/customer-manage.html
+msgid "Remove project"
+msgstr ""
+
+#: src/customer/details/customer-manage.html
+msgid "Removed organizations cannot be restored!"
+msgstr ""
+
+#: src/customer/details/customer-manage.html
+msgid "Removing the organization will delete all related resources."
 msgstr ""
 
 #: src/offering/actions/UpdateAction.ts
@@ -8278,8 +8298,16 @@ msgstr ""
 msgid "You are about to delete:"
 msgstr ""
 
+#: src/customer/details/customer-manage.html
+msgid "You can create issue by pressing the button below"
+msgstr ""
+
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "You can find offerings to order in the marketplace"
+msgstr ""
+
+#: src/customer/details/customer-manage.html
+msgid "You can register organization as a marketplace service provider by pressing the button below"
 msgstr ""
 
 #: src/customer/details/customer-manage.html

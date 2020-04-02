@@ -2,42 +2,65 @@
   <loading-spinner></loading-spinner>
 </div>
 
-<div ng-if="!$ctrl.loading">
+<div ng-if="!$ctrl.loading" style="padding-left: 10px">
   <customer-details customer="$ctrl.customer"></customer-details>
-  <div class="row">
-    <div class="col-md-6">
-      <customer-policies
-        ng-if="$ctrl.canUpdateCustomerPolicies"
-        customer="$ctrl.customer"
-        can-update-quota="$ctrl.canUpdateQuota"
-      ></customer-policies>
-    </div>
-    <div class="col-md-6">
-      <customer-edit-details customer="$ctrl.customer"></customer-edit-details>
-    </div>
-  </div>
-  <marketplace-service-provider-management
+  <customer-policies
+    ng-if="$ctrl.canUpdateCustomerPolicies"
     customer="$ctrl.customer"
-  ></marketplace-service-provider-management>
-  <div class="panel panel-default">
-    <div class="panel-heading" translate>Organization actions</div>
-    <div class="panel-body">
-      <a ng-click="$ctrl.reportError()" class="btn btn-success">
-        <i class="fa fa-bug"></i>
-        <span translate>Report incorrect data</span>
-      </a>
+    can-update-quota="$ctrl.canUpdateQuota"
+  ></customer-policies>
+  <div class="settings">
+    <div class="settings-header" ng-click="$ctrl.toggleActions()">
+      <div class="settings-title" translate>Organization actions</div>
+      <button class="btn btn-default" type="button">
+        <span ng-if="!$ctrl.actionsExpanded" translate>Expand</span>
+        <span ng-if="$ctrl.actionsExpanded" translate>Collapse</span>
+      </button>
+      <p class="settings-subtitle">
+        Register organization as service provider and remove organization.
+      </p>
     </div>
-    <div class="panel-body" ng-if="$ctrl.canDeleteCustomer">
-      <p translate>You can remove this organization by pressing the button</p>
-      <a ng-click="$ctrl.removeCustomer()" class="btn btn-danger">
-        <i class="fa fa-trash"></i>
-        <span translate>Remove organization</span>
-      </a>
-    </div>
-    <div class="panel-body" ng-if="!$ctrl.canDeleteCustomer">
-      <h3>
-        <span translate>Only staff can remove organization.</span>
-      </h3>
+    <div ng-if="$ctrl.actionsExpanded">
+      <div class="highlight">
+        <h3 translate>Marketplace service provider</h3>
+        <p translate>
+          You can register organization as a marketplace service provider by
+          pressing the button below
+        </p>
+        <marketplace-service-provider-management
+          customer="$ctrl.customer"
+        ></marketplace-service-provider-management>
+      </div>
+
+      <div class="highlight">
+        <h3 translate>Report incorrect data</h3>
+        <p translate>You can create issue by pressing the button below</p>
+        <a ng-click="$ctrl.reportError()" class="btn btn-success">
+          <i class="fa fa-bug"></i>
+          <span translate>Report incorrect data</span>
+        </a>
+      </div>
+      <div class="highlight" ng-if="$ctrl.canDeleteCustomer">
+        <h3 class="text-danger" translate>Remove project</h3>
+        <ul>
+          <li translate>
+            You can remove this organization by pressing the button
+          </li>
+          <li translate>
+            Removing the organization will delete all related resources.
+          </li>
+          <li translate>Removed organizations cannot be restored!</li>
+        </ul>
+        <a ng-click="$ctrl.removeCustomer()" class="btn btn-danger">
+          <i class="fa fa-trash"></i>
+          <span translate>Remove organization</span>
+        </a>
+      </div>
+      <div class="highlight" ng-if="!$ctrl.canDeleteCustomer">
+        <h3>
+          <span translate>Only staff can remove organization.</span>
+        </h3>
+      </div>
     </div>
   </div>
 </div>
