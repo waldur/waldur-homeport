@@ -11,15 +11,15 @@ import { getCustomer } from '@waldur/workspace/selectors';
 export const TableComponent = props => {
   const columns = [
     {
-      title: translate('Name'),
-      render: ({ row }) => row.name,
-    },
-    {
       title: translate('Type'),
       render: ({ row }) => row.payment_type_display,
     },
     {
-      title: translate('State'),
+      title: translate('Name'),
+      render: ({ row }) => row.name,
+    },
+    {
+      title: translate('Status'),
       render: ({ row }) => (
         <StateIndicator
           label={row.is_active ? translate('Enabled') : translate('Disabled')}
