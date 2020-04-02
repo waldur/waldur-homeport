@@ -51,8 +51,10 @@ export const reducer = (state = INITIAL_STATE, action) => {
       };
 
     case constants.REMOVE_BOOKING:
-      const { bookingId } = payload;
-      const removedList = state.schedules.filter(item => item.id !== bookingId);
+      const removedList = state.schedules.filter(
+        item => item.id !== payload.bookingID,
+      );
+      console.log(removedList);
       return {
         ...state,
         schedules: [...removedList],
