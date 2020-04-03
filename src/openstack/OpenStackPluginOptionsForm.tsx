@@ -37,7 +37,7 @@ export const OpenStackPluginOptionsForm = ({ container }) => {
         simpleValue={true}
         required={true}
       />
-      {pluginOptions.storage_mode == 'dynamic' && (
+      {pluginOptions && pluginOptions.storage_mode == 'dynamic' && (
         <NumberField
           name="snapshot_size_limit_gb"
           label={translate('Snapshot size limit')}
