@@ -32,9 +32,12 @@ export const PublicOfferingDetails = () => {
       <div className="wrapper wrapper-content">
         <div className="white-box">
           <div style={{ display: 'flex' }} className="m-b-lg">
-            <OfferingLogo src={offering.thumbnail} style={{ width: 64 }} />
+            <OfferingLogo
+              src={offering.thumbnail}
+              style={{ maxWidth: 64, maxHeight: 64 }}
+            />
             <div className="m-l-sm">
-              <h2>{offering.name}</h2>
+              <h2 style={{ marginTop: 0 }}>{offering.name}</h2>
               <p>
                 {translate('Provided by {provider}', {
                   provider: offering.customer_name,
