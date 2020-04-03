@@ -1,3 +1,4 @@
+/* eslint-disable */
 import './vendor';
 import './globals';
 import './sass/style.scss';
@@ -39,7 +40,6 @@ import servicesModule from './services/module';
 import freeipaModule from './freeipa/module';
 import rootModule from './module';
 import priceModule from './price/module';
-import ansibleModule from './ansible/module';
 import introModule from './intro/module';
 import analyticsRoutes from './analytics/routes';
 import azureModule from './azure/module';
@@ -113,7 +113,6 @@ modalModule(appModule);
 configModule(appModule);
 servicesModule(appModule);
 freeipaModule(appModule);
-ansibleModule(appModule);
 introModule(appModule);
 azureModule(appModule);
 slurmModule(appModule);
