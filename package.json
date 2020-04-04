@@ -87,7 +87,6 @@
     "moment": "~2.24.0",
     "moment-timezone": "^0.5.25",
     "npm-font-open-sans": "^1.0.3",
-    "oclazyload": "^1.1.0",
     "papaparse": "^4.3.6",
     "pdfmake": "^0.1.31",
     "prop-types": "^15.6.2",

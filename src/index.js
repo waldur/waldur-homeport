@@ -71,7 +71,6 @@ const appModule = angular.module('waldur', [
   'ui.bootstrap',
   'ui.slimscroll',
   'angular-bind-html-compile',
-  'oc.lazyLoad',
   'angular-intro',
 ]);
 
