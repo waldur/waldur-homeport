@@ -26,7 +26,7 @@ describe('Table reducer', () => {
   });
 
   it('should handle start action', () => {
-    const state = reducer(
+    const state: any = reducer(
       {},
       {
         type: actions.FETCH_LIST_START,
@@ -39,7 +39,7 @@ describe('Table reducer', () => {
   });
 
   it('should handle done action', () => {
-    const state = reducer(
+    const state: any = reducer(
       {},
       {
         type: actions.FETCH_LIST_DONE,
@@ -55,7 +55,7 @@ describe('Table reducer', () => {
   });
 
   it('should handle error action', () => {
-    const state = reducer(
+    const state: any = reducer(
       {},
       {
         type: actions.FETCH_LIST_ERROR,
@@ -70,7 +70,7 @@ describe('Table reducer', () => {
   });
 
   it('should handle goto page action', () => {
-    const state = reducer(
+    const state: any = reducer(
       {},
       {
         type: actions.FETCH_LIST_GOTO_PAGE,
@@ -96,7 +96,7 @@ describe('Table reducer', () => {
         },
       },
     );
-    const state = reducer(prevState, {
+    const state: any = reducer(prevState, {
       type: actions.ENTITY_CREATE,
       payload: {
         table: 'users',
@@ -145,7 +145,7 @@ describe('Table reducer', () => {
         },
       },
     );
-    const state = reducer(prevState, {
+    const state: any = reducer(prevState, {
       type: actions.ENTITY_UPDATE,
       payload: {
         table: 'users',
@@ -188,7 +188,7 @@ describe('Table reducer', () => {
         },
       },
     );
-    const state = reducer(prevState, {
+    const state: any = reducer(prevState, {
       type: actions.ENTITY_DELETE,
       payload: {
         table: 'users',
@@ -206,7 +206,7 @@ describe('Table reducer', () => {
   });
 
   it('should handle PAGE_SIZE_UPDATE action', () => {
-    const state = reducer(
+    const state: any = reducer(
       {},
       {
         type: actions.PAGE_SIZE_UPDATE,
@@ -225,7 +225,7 @@ describe('Table reducer', () => {
       mode: 'desc',
       loading: true,
     };
-    const state = reducer(
+    const state: any = reducer(
       {},
       {
         type: actions.SORT_LIST_START,
@@ -242,7 +242,7 @@ describe('Table reducer', () => {
   });
 
   it('should handle toggleRow action', () => {
-    const state = reducer(
+    const state: any = reducer(
       {},
       {
         type: actions.TOGGLE_ROW,
