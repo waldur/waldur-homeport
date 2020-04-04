@@ -1707,9 +1707,9 @@ msgstr ""
 #: src/slurm/actions.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
+#: src/user/UserSidebar.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
-#: src/user/user-sidebar.html
 msgid "Details"
 msgstr ""
 
@@ -3072,7 +3072,7 @@ msgstr ""
 
 #: src/navigation/header/logout-link.html
 #: src/navigation/header/site-header.html
-#: src/user/user-sidebar.html
+#: src/user/UserSidebar.tsx
 msgid "Log out"
 msgstr ""
 
@@ -7676,7 +7676,7 @@ msgstr ""
 msgid "User management events"
 msgstr ""
 
-#: src/user/user-sidebar.html
+#: src/user/UserSidebar.tsx
 msgid "User profile"
 msgstr ""
 

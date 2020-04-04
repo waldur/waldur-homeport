@@ -94,7 +94,7 @@
     "react": "^16.13.1",
     "react-16-bootstrap-date-picker": "^5.1.2",
     "react-ace": "^8.0.0",
-    "react-bootstrap": "^0.32.4",
+    "react-bootstrap": "0.33.1",
     "react-dom": "^16.13.1",
     "react-draft-wysiwyg": "^1.14.4",
     "react-dropzone": "4.1.3",
