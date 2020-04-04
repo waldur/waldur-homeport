@@ -58,7 +58,6 @@ const appModule = angular.module('waldur', [
   'ui.router',
   'ngCookies',
   'ngResource',
-  'duScroll',
   'ui.gravatar',
   'ui.select',
   'ngAnimate',
