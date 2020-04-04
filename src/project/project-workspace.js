@@ -86,14 +86,6 @@ export default function ProjectWorkspaceController(
         countFieldKey: 'users',
         index: 800,
       },
-      {
-        key: 'cost-planning',
-        label: gettext('Cost planning'),
-        icon: 'fa-calculator',
-        link: 'project.cost-planning({uuid: $ctrl.context.project.uuid})',
-        feature: 'cost-planning',
-        index: 900,
-      },
     ];
     $scope.items = SidebarExtensionService.mergeItems(
       $scope.items,

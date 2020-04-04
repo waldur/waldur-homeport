@@ -1,5 +1,4 @@
 import analyticsModule from './analytics/module';
-import costPlanModule from './cost-plan/module';
 import openstackBackupScheduleModule from './openstack-backup-schedule/module';
 import openstackBackupModule from './openstack-backup/module';
 import openstackFloatingIpsModule from './openstack-floating-ips/module';
@@ -28,5 +27,4 @@ export default module => {
   openstackFloatingIpsModule(module);
   openstackSnapshotModule(module);
   openstackSnapshotScheduleModule(module);
-  costPlanModule(module);
 };

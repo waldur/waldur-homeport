@@ -138,8 +138,6 @@ msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
 #: src/booking/BookingsList.tsx
-#: src/cost-planning/cost-plan-items.html
-#: src/cost-planning/cost-plan-optimizer.html
 #: src/events/BaseEventsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -235,7 +233,6 @@ msgstr ""
 msgid "Add environment variable"
 msgstr ""
 
-#: src/cost-planning/cost-plan-items.html
 #: src/marketplace/compare/ComparisonItemPlaceholder.tsx
 msgid "Add item"
 msgstr ""
@@ -889,7 +886,6 @@ msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/cost-planning/cost-plan-dialog.html
 #: src/digitalocean/droplet-resize.html
 #: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
@@ -1169,10 +1165,6 @@ msgstr ""
 msgid "Compliance checklists"
 msgstr ""
 
-#: src/cost-planning/cost-plan-flavors.html
-msgid "Component"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentsList.tsx
 msgid "Component #{index}"
 msgstr ""
@@ -1182,7 +1174,6 @@ msgstr ""
 msgid "Component name"
 msgstr ""
 
-#: src/cost-planning/cost-plan-items.html
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Components"
 msgstr ""
@@ -1203,7 +1194,6 @@ msgstr ""
 msgid "Configuration options"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.html
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Configure"
@@ -1267,11 +1257,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 msgid "Cost"
-msgstr ""
-
-#: src/project/project-workspace.js
-#: src/project/routes.js
-msgid "Cost planning"
 msgstr ""
 
 #: src/customer/details/customer-threshold.html
@@ -1370,10 +1355,6 @@ msgstr ""
 
 #: src/customer/create/customer-create-dialog.html
 msgid "Create organization"
-msgstr ""
-
-#: src/cost-planning/cost-plans-list.js
-msgid "Create plan"
 msgstr ""
 
 #: src/customer/routes.js
@@ -1617,7 +1598,6 @@ msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/cost-planning/cost-plan-items.html
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
@@ -1642,14 +1622,6 @@ msgstr ""
 
 #: src/azure/sql/DestroyServerAction.ts
 msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
-msgstr ""
-
-#: src/cost-planning/cost-plan-dialog.html
-msgid "Deployment plan"
-msgstr ""
-
-#: src/cost-planning/cost-plan-items.html
-msgid "Deployment plan does not have any item yet."
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -1727,7 +1699,6 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
-#: src/cost-planning/cost-plans-list.js
 #: src/events/EventDetailsButton.tsx
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -2042,10 +2013,6 @@ msgstr ""
 msgid "Estonian"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.html
-msgid "Evaluate"
-msgstr ""
-
 #: src/events/EventDetailsDialog.tsx
 msgid "Event details"
 msgstr ""
@@ -2146,10 +2113,6 @@ msgstr ""
 
 #: src/invitations/invitations-list.js
 msgid "Expires at"
-msgstr ""
-
-#: src/cost-planning/cost-plan-optimizer.html
-msgid "Explain plan"
 msgstr ""
 
 #: src/marketplace/landing/LandingPage.tsx
@@ -2276,7 +2239,6 @@ msgstr ""
 msgid "Fixed — use common storage quota"
 msgstr ""
 
-#: src/cost-planning/cost-plan-flavors.html
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -3036,10 +2998,6 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.js
-msgid "Large"
-msgstr ""
-
 #: src/table/responsive-table.js
 msgid "Last"
 msgstr ""
@@ -3294,10 +3252,6 @@ msgstr ""
 msgid "Measured unit"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.js
-msgid "Medium"
-msgstr ""
-
 #: src/customer/popover/customer-users-details-list.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
@@ -3438,18 +3392,11 @@ msgstr ""
 msgid "My services"
 msgstr ""
 
-#: src/cost-planning/cost-plan-flavors.html
-#: src/cost-planning/cost-plan-optimizer.html
-msgid "N/A"
-msgstr ""
-
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/booking/BookingsList.tsx
-#: src/cost-planning/cost-plan-dialog.html
-#: src/cost-planning/cost-plans-list.js
 #: src/customer/create/customer-create-config.js
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetails.tsx
@@ -3614,7 +3561,6 @@ msgstr ""
 msgid "New limit"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.js
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "New plan"
@@ -3678,10 +3624,6 @@ msgstr ""
 
 #: src/openstack/openstack-backup/openstack-backups-list.js
 msgid "No backups yet."
-msgstr ""
-
-#: src/cost-planning/cost-plans-list.js
-msgid "No cost plans found matching filter."
 msgstr ""
 
 #: src/azure/sql/azure-sql-databases-list.js
@@ -4691,7 +4633,6 @@ msgid "Previous"
 msgstr ""
 
 #: src/billing/invoices-list.js
-#: src/cost-planning/cost-plan-flavors.html
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
@@ -4725,7 +4666,6 @@ msgstr ""
 msgid "Price per 365 days"
 msgstr ""
 
-#: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/common/utils.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -4746,7 +4686,6 @@ msgstr ""
 msgid "Price per hour"
 msgstr ""
 
-#: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/common/utils.ts
 msgid "Price per month"
@@ -4939,7 +4878,6 @@ msgstr ""
 msgid "Provided by {provider}"
 msgstr ""
 
-#: src/cost-planning/cost-plan-optimizer.html
 #: src/events/EventDetailsTable.tsx
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -5033,8 +4971,6 @@ msgstr ""
 
 #: src/billing/billing-record-details.html
 #: src/billing/invoice-details.html
-#: src/cost-planning/cost-plan-flavors.html
-#: src/cost-planning/cost-plan-items.html
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts
 msgid "Quantity"
@@ -5248,7 +5184,6 @@ msgstr ""
 msgid "Remote network"
 msgstr ""
 
-#: src/cost-planning/cost-plans-list.js
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
@@ -5436,7 +5371,6 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.html
 #: src/project/project-policies.html
 msgid "Required certifications"
 msgstr ""
@@ -5747,7 +5681,6 @@ msgid "Sankey diagram"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/cost-planning/cost-plan-dialog.html
 #: src/providers/ProviderUpdateForm.tsx
 #: src/team/add-project-member.js
 #: src/team/add-team-member.js
@@ -5873,10 +5806,6 @@ msgstr ""
 msgid "Select SSH public key..."
 msgstr ""
 
-#: src/cost-planning/cost-plan-items.html
-msgid "Select a component"
-msgstr ""
-
 #: src/customer/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
@@ -5906,7 +5835,6 @@ msgstr ""
 msgid "Select category..."
 msgstr ""
 
-#: src/cost-planning/cost-plan-certifications.html
 #: src/project/ProjectCreateForm.tsx
 #: src/project/project-policies.html
 msgid "Select certifications"
@@ -6302,10 +6230,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Skip floating IP assignment"
-msgstr ""
-
-#: src/cost-planning/cost-plan-dialog.js
-msgid "Small"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/module.js
@@ -6849,10 +6773,6 @@ msgstr ""
 msgid "There are no projects yet for this organization."
 msgstr ""
 
-#: src/cost-planning/cost-plan-optimizer.html
-msgid "There are no providers for this deployment plan."
-msgstr ""
-
 #: src/issues/list/IssuesShortListComponent.tsx
 msgid "There are no requests yet."
 msgstr ""
@@ -7027,10 +6947,6 @@ msgstr ""
 
 #: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total number of nodes"
-msgstr ""
-
-#: src/cost-planning/cost-plan-dialog.html
-msgid "Total planned resource consumption"
 msgstr ""
 
 #: src/billing/billing-record-details.html
@@ -8201,10 +8117,6 @@ msgstr ""
 
 #: src/error/invalid-quota-page.html
 msgid "You have exceeded maximum number of quotas."
-msgstr ""
-
-#: src/cost-planning/cost-plans-list.js
-msgid "You have no cost plans yet"
 msgstr ""
 
 #: src/vmware/vmware-virtual-machine-disks.js

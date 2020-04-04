@@ -164,14 +164,5 @@ export default function projectRoutes($stateProvider) {
       data: {
         pageTitle: gettext('Team'),
       },
-    })
-
-    .state('project.cost-planning', {
-      url: 'cost-planning/',
-      template: '<cost-plans-list></cost-plans-list>',
-      data: {
-        pageTitle: gettext('Cost planning'),
-        feature: 'cost-planning',
-      },
     });
 }
