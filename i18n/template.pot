@@ -4125,10 +4125,6 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: src/resource/list/resources-list.js
-msgid "Open map"
-msgstr ""
-
 #: src/dashboard/SupportPortalAction.ts
 msgid "Open support portal"
 msgstr ""

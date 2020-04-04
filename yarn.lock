@@ -1921,14 +1921,6 @@ angular-intro.js@~3.1.3:
   resolved "https://registry.yarnpkg.com/angular-intro.js/-/angular-intro.js-3.1.3.tgz#b1d5e0c8929084e00b2036ccab941a9f21ac1e60"
   integrity sha1-sdXgyJKQhOALIDbMq5QanyGsHmA=
 
-angular-leaflet-directive@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/angular-leaflet-directive/-/angular-leaflet-directive-0.10.0.tgz#ec2059f4c1017d5be720ba9a9a1e05801ea017a1"
-  integrity sha1-7CBZ9MEBfVvnILqamh4FgB6gF6E=
-  dependencies:
-    angular "1.x"
-    leaflet "0.7.x"
-
 angular-loader@~1.5.11:
   version "1.5.11"
   resolved "https://registry.yarnpkg.com/angular-loader/-/angular-loader-1.5.11.tgz#f2a5aad0227c12ca902b7fc23bfcec69991368a1"
@@ -1999,7 +1991,7 @@ angular-ui-router@~0.2.13:
   dependencies:
     angular "^1.0.8"
 
-angular@1.x, angular@^1.0.8, angular@^1.2.5, angular@~1.5.11:
+angular@^1.0.8, angular@^1.2.5, angular@~1.5.11:
   version "1.5.11"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.5.11.tgz#8c5ba7386f15965c9acf3429f6881553aada30d6"
   integrity sha1-jFunOG8VllyazzQp9ogVU6raMNY=
@@ -8023,11 +8015,6 @@ leaflet-virtual-grid@^1.0.5:
   integrity sha512-S4lcMOTGYjDUinAAM5xz65miEWHWI+WQo7V/vOVlos4Jn2jAZiQomMGu/MIZS7KrFGx33GDVaOYAx0wnV92NBA==
   dependencies:
     leaflet "^1.0.0"
-
-leaflet@0.7.x:
-  version "0.7.7"
-  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-0.7.7.tgz#1e352ba54e63d076451fa363c900890cb2cf75ee"
-  integrity sha1-HjUrpU5j0HZFH6NjyQCJDLLPde4=
 
 leaflet@^1.0.0:
   version "1.3.1"
