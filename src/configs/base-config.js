@@ -44,8 +44,6 @@ const ENV = {
     'SLURM.Allocation': 'slurm',
     'JIRA.Project': 'jiraProject',
     'JIRA.Issue': 'jiraProject',
-    'Rijkscloud.Instance': 'vms',
-    'Rijkscloud.Volume': 'storages',
   },
   defaultListCacheTime: 60 * 10,
   optionsCacheTime: 10 * 1000,

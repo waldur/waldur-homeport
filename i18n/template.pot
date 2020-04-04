@@ -41,10 +41,6 @@ msgstr ""
 msgid "API URL"
 msgstr ""
 
-#: src/rijkscloud/ProviderForm.tsx
-msgid "API key"
-msgstr ""
-
 #: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
 msgid "API secret code:"
 msgstr ""
@@ -340,7 +336,6 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
@@ -1662,7 +1657,6 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
-#: src/rijkscloud/VolumeCreateConfig.js
 #: src/slurm/slurm-allocation-list.js
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -2243,7 +2237,6 @@ msgstr ""
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/cluster/create/NodeFlavorGroup.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
 
@@ -2253,7 +2246,6 @@ msgstr ""
 
 #: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
 msgstr ""
 
@@ -2278,7 +2270,6 @@ msgid "Flexible"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Floating IP"
 msgstr ""
 
@@ -2691,7 +2682,6 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Internal IP"
 msgstr ""
 
@@ -4998,7 +4988,6 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "RAM"
@@ -6203,7 +6192,6 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource/list/resource-volumes-list.js
-#: src/rijkscloud/VolumeSummary.tsx
 #: src/vmware/VMwareDiskSummary.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
@@ -6503,7 +6491,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
 #: src/openstack/openstack-volume/actions/PullAction.ts
 #: src/resource/actions/base.ts
-#: src/rijkscloud/module.js
 #: src/slurm/actions.js
 #: src/vmware/actions.ts
 msgid "Synchronise"
@@ -6826,7 +6813,6 @@ msgstr ""
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/project/ProjectNameField.tsx
 #: src/rancher/cluster/create/RancherClusterForm.tsx
-#: src/rijkscloud/VolumeCreateConfig.js
 #: src/slurm/AllocationForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "This name will be visible in accounting data."
@@ -7642,10 +7628,6 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: src/rijkscloud/ProviderForm.tsx
-msgid "User ID"
-msgstr ""
-
 #: src/user/support/effects.ts
 msgid "User could not been updated"
 msgstr ""
@@ -7658,7 +7640,6 @@ msgstr ""
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
 msgstr ""
 
@@ -7850,7 +7831,6 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
 msgstr ""
 
@@ -7958,12 +7938,10 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
-#: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume name"
 msgstr ""
 
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
-#: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
 msgstr ""
 
@@ -8394,7 +8372,6 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "vCPU"
 msgstr ""
 
