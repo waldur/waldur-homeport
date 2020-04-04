@@ -2289,7 +2289,7 @@ msgstr ""
 msgid "Flavor exclude regex"
 msgstr ""
 
-#: src/analytics/FlavorsList.tsx
+#: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
@@ -2299,11 +2299,11 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
-#: src/analytics/VmTypeOverview.tsx
+#: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Flavors"
 msgstr ""
 
-#: src/analytics/FlavorsList.tsx
+#: src/openstack/analytics/FlavorsList.tsx
 msgid "Flavors List"
 msgstr ""
 
@@ -2595,14 +2595,14 @@ msgstr ""
 msgid "Image here"
 msgstr ""
 
-#: src/analytics/ImagesList.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/analytics/ImagesList.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Image name"
 msgstr ""
 
-#: src/analytics/VmTypeOverview.tsx
+#: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Images"
 msgstr ""
 
@@ -3934,8 +3934,8 @@ msgstr ""
 msgid "Number of cores in a VM"
 msgstr ""
 
-#: src/analytics/FlavorsList.tsx
-#: src/analytics/ImagesList.tsx
+#: src/openstack/analytics/FlavorsList.tsx
+#: src/openstack/analytics/ImagesList.tsx
 msgid "Number of created instances"
 msgstr ""
 
@@ -3943,8 +3943,8 @@ msgstr ""
 msgid "Number of etcd nodes"
 msgstr ""
 
-#: src/analytics/FlavorsList.tsx
-#: src/analytics/ImagesList.tsx
+#: src/openstack/analytics/FlavorsList.tsx
+#: src/openstack/analytics/ImagesList.tsx
 msgid "Number of running instances"
 msgstr ""
 
@@ -4097,7 +4097,7 @@ msgstr ""
 msgid "Open support portal"
 msgstr ""
 
-#: src/analytics/ImagesList.tsx
+#: src/openstack/analytics/ImagesList.tsx
 msgid "OpenStack Images"
 msgstr ""
 
@@ -5980,7 +5980,7 @@ msgstr ""
 msgid "Select security groups..."
 msgstr ""
 
-#: src/analytics/VmOverviewFilter.tsx
+#: src/openstack/analytics/VmOverviewFilter.tsx
 msgid "Select service provider"
 msgstr ""
 
@@ -6224,7 +6224,7 @@ msgstr ""
 msgid "Show request"
 msgstr ""
 
-#: src/analytics/VmOverviewFilter.tsx
+#: src/openstack/analytics/VmOverviewFilter.tsx
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
 msgstr ""
@@ -7399,7 +7399,7 @@ msgstr ""
 msgid "Unable to load service provider."
 msgstr ""
 
-#: src/analytics/VmOverviewFilterContainer.tsx
+#: src/openstack/analytics/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
 msgstr ""
 
@@ -7938,8 +7938,8 @@ msgstr ""
 msgid "VM name"
 msgstr ""
 
-#: src/analytics/routes.js
 #: src/issues/workspace/issue-navigation-service.js
+#: src/openstack/analytics/routes.js
 msgid "VM type overview"
 msgstr ""
 

@@ -41,7 +41,6 @@ import freeipaModule from './freeipa/module';
 import rootModule from './module';
 import priceModule from './price/module';
 import introModule from './intro/module';
-import analyticsModule from './analytics/module';
 import azureModule from './azure/module';
 import slurmModule from './slurm/module';
 import paypalModule from './paypal/module';
@@ -126,7 +125,6 @@ vmwareModule(appModule);
 rancherModule(appModule);
 marketplaceScriptModule(appModule);
 marketplaceChecklistModule(appModule);
-analyticsModule(appModule);
 
 if (process.env.NODE_ENV !== 'production') {
   const storybookModule = require('./marketplace/storybook.js').default;

@@ -2,11 +2,11 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { reduxForm, InjectedFormProps } from 'redux-form';
 
-import { formatServiceProviders } from '@waldur/analytics/utils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 import * as api from './api';
+import { formatServiceProviders } from './utils';
 import { VmOverviewFilter } from './VmOverviewFilter';
 
 class VmOverviewFilterComponent extends React.Component<

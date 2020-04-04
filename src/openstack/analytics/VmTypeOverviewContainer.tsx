@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { compose } from 'redux';
 
-import { VmOverviewFilterContainer } from '@waldur/analytics/VmOverviewFilterContainer';
-import { VmTypeOverview } from '@waldur/analytics/VmTypeOverview';
 import { withTranslation } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
+
+import { VmOverviewFilterContainer } from './VmOverviewFilterContainer';
+import { VmTypeOverview } from './VmTypeOverview';
 
 const VmTypeOverviewComponent = props => {
   return (

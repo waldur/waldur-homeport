@@ -1,20 +1,22 @@
-import openstackTenantModule from './openstack-tenant/module';
-import openstackInstanceModule from './openstack-instance/module';
-import openstackVolumeModule from './openstack-volume/module';
-import openstackBackupModule from './openstack-backup/module';
-import openstackBackupScheduleModule from './openstack-backup-schedule/module';
-import openstackNetworkModule from './openstack-network/module';
-import openstackSubnetModule from './openstack-subnet/module';
-import openstackSecurityGroupsModule from './openstack-security-groups/module';
-import openstackFloatingIpsModule from './openstack-floating-ips/module';
-import openstackSnapshotModule from './openstack-snapshot/module';
-import openstackSnapshotScheduleModule from './openstack-snapshot-schedule/module';
+import analyticsModule from './analytics/module';
 import costPlanModule from './cost-plan/module';
+import openstackBackupScheduleModule from './openstack-backup-schedule/module';
+import openstackBackupModule from './openstack-backup/module';
+import openstackFloatingIpsModule from './openstack-floating-ips/module';
+import openstackInstanceModule from './openstack-instance/module';
+import openstackNetworkModule from './openstack-network/module';
+import openstackSecurityGroupsModule from './openstack-security-groups/module';
+import openstackSnapshotScheduleModule from './openstack-snapshot-schedule/module';
+import openstackSnapshotModule from './openstack-snapshot/module';
+import openstackSubnetModule from './openstack-subnet/module';
+import openstackTenantModule from './openstack-tenant/module';
+import openstackVolumeModule from './openstack-volume/module';
 import './provider';
 import './events';
 import './marketplace';
 
 export default module => {
+  analyticsModule(module);
   openstackTenantModule(module);
   openstackInstanceModule(module);
   openstackVolumeModule(module);

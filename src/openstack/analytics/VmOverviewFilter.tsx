@@ -2,14 +2,13 @@ import * as React from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
-import { ServiceProvider } from '@waldur/analytics/types';
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { TranslateProps } from '@waldur/i18n';
 
 import './VmOverviewFilter.scss';
 
 interface VmOverviewFilterProps extends TranslateProps {
-  serviceProviders: ServiceProvider[];
+  serviceProviders: any[];
 }
 
 export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
