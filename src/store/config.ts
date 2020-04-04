@@ -10,7 +10,7 @@ export const initConfig = config => ({
 });
 
 const getFeaturesMap = features => {
-  let map = {};
+  const map = {};
   features.forEach(feature => {
     map[feature] = true;
   });

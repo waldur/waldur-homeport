@@ -13,7 +13,7 @@ const composeEnhancers =
   compose;
 const sagaMiddleware = createSagaMiddleware();
 
-let middlewares = [sagaMiddleware];
+const middlewares = [sagaMiddleware];
 let enhancedMiddlewares;
 
 if (process.env.NODE_ENV !== 'production') {

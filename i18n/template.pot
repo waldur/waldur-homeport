@@ -465,10 +465,6 @@ msgstr ""
 msgid "An error occurred on project removal."
 msgstr ""
 
-#: src/customer/workspace/customer-workspace.js
-msgid "Analytics"
-msgstr ""
-
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Annotations"
 msgstr ""
@@ -503,7 +499,6 @@ msgstr ""
 msgid "Application templates"
 msgstr ""
 
-#: src/analytics/resource-chart-service.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
 msgstr ""
@@ -819,22 +814,6 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
-msgstr ""
-
-#: src/analytics/resource-chart-service.js
-msgid "Block devices"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "Block snapshot count"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "Block storage size"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "Block volume count"
 msgstr ""
 
 #: src/booking/marketplace.ts
@@ -1288,10 +1267,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 msgid "Cost"
-msgstr ""
-
-#: src/customer/workspace/customer-workspace.js
-msgid "Cost analysis"
 msgstr ""
 
 #: src/project/project-workspace.js
@@ -2266,7 +2241,6 @@ msgstr ""
 msgid "Filter organizations"
 msgstr ""
 
-#: src/analytics/ResourceAnalysis.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Filter projects"
 msgstr ""
@@ -2346,7 +2320,6 @@ msgstr ""
 msgid "Floating IP"
 msgstr ""
 
-#: src/analytics/registry.ts
 #: src/quotas/constants.js
 msgid "Floating IP count"
 msgstr ""
@@ -2714,10 +2687,6 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/AttachAction.ts
 #: src/rancher/node/rancher-cluster-nodes.js
 msgid "Instance"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "Instance count"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
@@ -3099,7 +3068,6 @@ msgstr ""
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
-#: src/analytics/utils.ts
 #: src/dashboard/chart.ts
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
@@ -4818,7 +4786,6 @@ msgstr ""
 msgid "Privacy policy"
 msgstr ""
 
-#: src/analytics/resource-chart-service.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Private clouds"
@@ -4964,10 +4931,6 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: src/analytics/ResourceAnalysis.tsx
-msgid "Projects ({count})"
-msgstr ""
-
 #: src/team/add-team-member.html
 msgid "Projects list"
 msgstr ""
@@ -5107,10 +5070,6 @@ msgstr ""
 
 #: src/slurm/actions.js
 msgid "RAM limit, MB"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "RAM size"
 msgstr ""
 
 #: src/slurm/details/constants.js
@@ -5277,10 +5236,6 @@ msgstr ""
 
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 msgid "Remaining amount"
-msgstr ""
-
-#: src/analytics/utils.ts
-msgid "Remaining limit"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -5531,10 +5486,6 @@ msgstr ""
 msgid "Resource configuration is invalid. Please fix errors in form."
 msgstr ""
 
-#: src/analytics/resource-analysis-new.html
-msgid "Resource count in"
-msgstr ""
-
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Resource description"
 msgstr ""
@@ -5613,8 +5564,6 @@ msgstr ""
 msgid "Resource termination request has been submitted."
 msgstr ""
 
-#: src/analytics/routes.js
-#: src/customer/workspace/customer-workspace.js
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 #: src/resource/support/ChartContainer.tsx
 msgid "Resource usage"
@@ -5640,10 +5589,6 @@ msgstr ""
 #: src/resource/support/ChartContainer.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Resources"
-msgstr ""
-
-#: src/analytics/resource-analysis-new.html
-msgid "Resources by projects"
 msgstr ""
 
 #: src/marketplace/resources/import/useImportDialog.tsx
@@ -6380,10 +6325,6 @@ msgstr ""
 msgid "Snapshot schedules"
 msgstr ""
 
-#: src/analytics/registry.ts
-msgid "Snapshot size"
-msgstr ""
-
 #: src/openstack/OpenStackPluginOptionsForm.tsx
 msgid "Snapshot size limit"
 msgstr ""
@@ -6920,10 +6861,6 @@ msgstr ""
 msgid "There are no resources available."
 msgstr ""
 
-#: src/analytics/resource-analysis-new.html
-msgid "There are no resources in the organization."
-msgstr ""
-
 #: src/resource/ResourceExpandableRow.tsx
 msgid "There are no resources yet."
 msgstr ""
@@ -7063,7 +7000,6 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
-#: src/analytics/resource-pie-chart.html
 #: src/billing/PriceEstimateDialog.tsx
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
@@ -7274,18 +7210,6 @@ msgstr ""
 
 #: src/booking/store/effects.ts
 msgid "Unable to fetch offering bookings."
-msgstr ""
-
-#: src/analytics/effects.ts
-msgid "Unable to fetch projects."
-msgstr ""
-
-#: src/analytics/effects.ts
-msgid "Unable to fetch quota history."
-msgstr ""
-
-#: src/analytics/effects.ts
-msgid "Unable to fetch tenants."
 msgstr ""
 
 #: src/invitations/actions/invitation-dialog.js
@@ -7650,7 +7574,6 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: src/analytics/ResourceAnalysisItem.tsx
 #: src/freeipa/freeipa-quota.html
 msgid "Unlimited"
 msgstr ""
@@ -7756,7 +7679,6 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
-#: src/analytics/utils.ts
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
@@ -8099,7 +8021,6 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/analytics/resource-chart-service.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Virtual machines"
@@ -8125,7 +8046,6 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
-#: src/analytics/registry.ts
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 #: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
@@ -8536,7 +8456,6 @@ msgstr ""
 msgid "requests"
 msgstr ""
 
-#: src/analytics/resource-bar-chart.html
 #: src/resource/support/SharedProviderResources.tsx
 msgid "resources"
 msgstr ""
@@ -8567,7 +8486,6 @@ msgstr ""
 msgid "vCPU"
 msgstr ""
 
-#: src/analytics/registry.ts
 #: src/quotas/constants.js
 msgid "vCPU count"
 msgstr ""
@@ -8594,10 +8512,6 @@ msgstr ""
 
 #: src/resource/utils.tsx
 msgid "{number} days"
-msgstr ""
-
-#: src/analytics/ResourceAnalysisItem.tsx
-msgid "{quota} usage exceeds quota limit."
 msgstr ""
 
 #: src/resource/state/utils.ts
