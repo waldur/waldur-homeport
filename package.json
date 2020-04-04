@@ -36,7 +36,7 @@
     "@fullcalendar/timegrid": "~4.2.0",
     "@sentry/browser": "5.4.0",
     "@tweenjs/tween.js": "^17.2.0",
-    "angular": "~1.5.11",
+    "angular": "~1.7.9",
     "angular-animate": "~1.5.11",
     "angular-bind-html-compile-ci-dev": "^1.2.2",
     "angular-cookies": "~1.5.11",
