@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as Navbar from 'react-bootstrap/lib/Navbar';
 import * as Row from 'react-bootstrap/lib/Row';
 
-import { isFeatureVisible } from '@waldur/features/connect';
 import { LanguageSelector } from '@waldur/i18n/LanguageSelector';
 import { ShoppingCartIndicator } from '@waldur/marketplace/cart/ShoppingCartIndicator';
 import { ComparisonIndicator } from '@waldur/marketplace/compare/ComparisonIndicator';
@@ -12,13 +11,13 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { DocsLink } from './DocsLink';
 import { ExternalLinks } from './ExternalLinks';
+import { IntroButton } from './IntroButton';
 import { LogoutLink } from './LogoutLink';
 import { MainSearch } from './MainSearch';
 import { SupportLink } from './SupportLink';
 
 const SidebarToggle = angular2react('sidebarToggle');
 const SelectWorkspaceToggle = angular2react('selectWorkspaceToggle');
-const IntroButton = angular2react('introButton');
 
 export const AppHeader = () => (
   <Row className="border-bottom">
@@ -26,10 +25,10 @@ export const AppHeader = () => (
       <Navbar.Header className="m-b-sm">
         <SidebarToggle />
         <SelectWorkspaceToggle />
-        {isFeatureVisible('mainSearch') && <MainSearch />}
+        <MainSearch />
       </Navbar.Header>
       <ul className="nav navbar-top-links navbar-right hidden-xs-stable">
-        {isFeatureVisible('intro') && <IntroButton />}
+        <IntroButton />
         <ExternalLinks />
         <SupportLink />
         <DocsLink />

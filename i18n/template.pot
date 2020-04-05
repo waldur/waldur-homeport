@@ -2412,7 +2412,7 @@ msgstr ""
 msgid "Guest OS"
 msgstr ""
 
-#: src/navigation/header/intro-button.html
+#: src/navigation/header/IntroButton.tsx
 msgid "Guide me"
 msgstr ""
 
