@@ -1,6 +1,6 @@
 import languageList from './language-list';
-import languageSelectorMenuItem from './language-selector-menu-item';
 import LanguageUtilsService from './language-utils-service';
+import languageSelectorMenuItem from './LanguageSelectorMenuItem';
 
 // @ngInject
 function checkLanguage(LanguageUtilsService) {

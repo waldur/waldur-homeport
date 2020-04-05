@@ -2,32 +2,15 @@ import * as React from 'react';
 import * as Dropdown from 'react-bootstrap/lib/Dropdown';
 import * as MenuItem from 'react-bootstrap/lib/MenuItem';
 
-import { ngInjector } from '@waldur/core/services';
-import { connectAngularComponent } from '@waldur/store/connect';
-
 import { translate } from './translate';
-
-interface Language {
-  code: string;
-  label: string;
-}
+import { useLanguageSelector } from './useLanguageSelector';
 
 export const LanguageSelector = () => {
-  const service = ngInjector.get('LanguageUtilsService');
-
-  const [currentLanguage, setCurrentLanguage] = React.useState<Language>(
-    service.getCurrentLanguage(),
-  );
-
-  const languageChoices = React.useMemo<Language[]>(
-    () => service.getChoices().sort((a, b) => a.code.localeCompare(b.code)),
-    [],
-  );
-
-  const setLanguage = React.useCallback((language: Language) => {
-    setCurrentLanguage(language);
-    service.setCurrentLanguage(language);
-  }, []);
+  const {
+    currentLanguage,
+    languageChoices,
+    setLanguage,
+  } = useLanguageSelector();
 
   if (languageChoices.length < 2) {
     return null;
@@ -56,8 +39,3 @@ export const LanguageSelector = () => {
     </Dropdown>
   );
 };
-
-export default () => ({
-  ...connectAngularComponent(LanguageSelector),
-  replace: true,
-});
