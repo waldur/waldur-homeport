@@ -4,6 +4,7 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ShoppingCartIndicator } from '@waldur/marketplace/cart/ShoppingCartIndicator';
+import { ComparisonIndicator } from '@waldur/marketplace/compare/ComparisonIndicator';
 import { PendingOrderIndicator } from '@waldur/marketplace/orders/PendingOrderIndicator';
 import { angular2react } from '@waldur/shims/angular2react';
 import { connectAngularComponent } from '@waldur/store/connect';
@@ -16,7 +17,6 @@ const SelectWorkspaceToggle = angular2react('selectWorkspaceToggle');
 const MainSearch = angular2react('mainSearch');
 const IntroButton = angular2react('introButton');
 const SupportLink = angular2react('supportLink');
-const ComparisonIndicator = angular2react('comparisonIndicator');
 const LanguageSelector = angular2react('languageSelector');
 const LogoutLink = angular2react('logoutLink');
 
