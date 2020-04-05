@@ -1,3 +1,4 @@
+import { IPromise } from 'angular';
 import * as React from 'react';
 
 interface QueryState<PayloadType = any> {
@@ -15,7 +16,7 @@ interface QueryInterface<PayloadType = any> {
 
 type LoaderInterface<VariablesType, PayloadType> = (
   vars?: VariablesType,
-) => Promise<PayloadType>;
+) => IPromise<PayloadType> | Promise<PayloadType>;
 
 export function useQuery<
   PayloadType = any,
@@ -46,7 +47,7 @@ export function useQuery<
       loading: true,
       erred: false,
     }));
-    method(variables)
+    (method(variables) as Promise<PayloadType>)
       .then(data => {
         safeSetState({
           data,

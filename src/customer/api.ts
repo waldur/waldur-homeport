@@ -3,8 +3,15 @@ import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 import { ExpandableRow } from '@waldur/resource/ResourceExpandableRow';
 
+interface TotalStats {
+  price: number;
+  total: number;
+}
+
 export const getTotal = params =>
-  get('/billing-total-cost/', params).then(response => response.data);
+  get<TotalStats>('/billing-total-cost/', params).then(
+    response => response.data,
+  );
 
 const getCustomerCounters = (customerId: string) =>
   get(`/customers/${customerId}/counters/`).then(response => response.data);

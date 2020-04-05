@@ -11,8 +11,12 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showSuccess } from '@waldur/store/coreSaga';
 
+interface KubeconfigFile {
+  config: string;
+}
+
 const getKubeconfigFile = resourceId =>
-  get(`/rancher-clusters/${resourceId}/kubeconfig_file/`).then(
+  get<KubeconfigFile>(`/rancher-clusters/${resourceId}/kubeconfig_file/`).then(
     response => response.data.config,
   );
 

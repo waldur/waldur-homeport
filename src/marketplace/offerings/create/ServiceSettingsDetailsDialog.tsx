@@ -14,10 +14,16 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { getOffering } from '../store/selectors';
 
+interface ProviderData {
+  type: string;
+  name: string;
+}
+
 export const ServiceSettingsDetailsDialog = () => {
   const offering = useSelector(getOffering);
   const { state, call } = useQuery(async () => {
-    const provider = (await $http.get(offering.offering.scope)).data;
+    const provider = (await $http.get(offering.offering.scope))
+      .data as ProviderData;
     return {
       initialValues: {
         name: provider.name,
