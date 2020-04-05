@@ -5722,7 +5722,7 @@ msgid "Script language"
 msgstr ""
 
 #: src/issues/create/issue-registration.html
-#: src/navigation/header/main-search.html
+#: src/navigation/header/MainSearch.tsx
 #: src/table-react/TableQuery.tsx
 #: src/table/responsive-table.js
 msgid "Search"

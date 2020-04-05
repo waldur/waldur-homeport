@@ -13,10 +13,10 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import { DocsLink } from './DocsLink';
 import { ExternalLinks } from './ExternalLinks';
 import { LogoutLink } from './LogoutLink';
+import { MainSearch } from './MainSearch';
 
 const SidebarToggle = angular2react('sidebarToggle');
 const SelectWorkspaceToggle = angular2react('selectWorkspaceToggle');
-const MainSearch = angular2react('mainSearch');
 const IntroButton = angular2react('introButton');
 const SupportLink = angular2react('supportLink');
 
