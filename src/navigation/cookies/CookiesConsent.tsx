@@ -36,11 +36,11 @@ export const CookiesConsent = () => {
           </a>
         </h3>
       </Col>
-      <Row sm={2} xs={12} className="text-center">
+      <Col sm={2} xs={12} className="text-center">
         <button className="btn btn-xl btn-primary" onClick={hideConsent}>
           {translate('Got it!')}
         </button>
-      </Row>
+      </Col>
     </Row>
   );
 };
