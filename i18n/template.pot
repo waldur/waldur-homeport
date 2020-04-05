@@ -3070,7 +3070,7 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: src/navigation/header/logout-link.html
+#: src/navigation/header/LogoutLink.tsx
 #: src/navigation/header/site-header.html
 #: src/user/UserSidebar.tsx
 msgid "Log out"
