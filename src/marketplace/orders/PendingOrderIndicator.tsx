@@ -11,7 +11,6 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import * as actions from '@waldur/marketplace/orders/store/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 import {
   getCustomer,
   isOwnerOrStaff,
@@ -20,7 +19,7 @@ import {
 import { Customer } from '@waldur/workspace/types';
 
 import { OrderDetailsLink } from './OrderDetailsLink';
-import './PendingOrderDropdown.scss';
+import './PendingOrderIndicator.scss';
 import { OrderItemDetailsType, OrderItemType } from './types';
 
 interface PendingOrderIndicatorProps extends ToggleOpenProps {
@@ -220,5 +219,3 @@ const enhance = compose(
 );
 
 export const PendingOrderIndicator = enhance(PurePendingOrderIndicator);
-
-export default connectAngularComponent(PendingOrderIndicator);

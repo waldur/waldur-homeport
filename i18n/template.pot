@@ -4344,15 +4344,15 @@ msgstr ""
 msgid "Pending"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Pending approval for changing of"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Pending approval for creation of"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Pending approval for removal of"
 msgstr ""
 
@@ -5344,7 +5344,7 @@ msgstr ""
 msgid "Requested"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Requested by"
 msgstr ""
 
@@ -6100,7 +6100,7 @@ msgstr ""
 msgid "Show _MENU_ entries"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Show all"
 msgstr ""
 
