@@ -2393,7 +2393,7 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
-#: src/navigation/cookies/cookies-consent.html
+#: src/navigation/cookies/CookiesConsent.tsx
 msgid "Got it!"
 msgstr ""
 
@@ -2994,6 +2994,10 @@ msgstr ""
 
 #: src/configs/base-config.js
 msgid "Latvian"
+msgstr ""
+
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "Learn more"
 msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
@@ -6822,7 +6826,7 @@ msgstr ""
 msgid "This value is invalid."
 msgstr ""
 
-#: src/navigation/cookies/cookies-consent.html
+#: src/navigation/cookies/CookiesConsent.tsx
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
