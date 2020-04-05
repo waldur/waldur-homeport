@@ -3,6 +3,7 @@ import * as Navbar from 'react-bootstrap/lib/Navbar';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { LanguageSelector } from '@waldur/i18n/LanguageSelector';
 import { ShoppingCartIndicator } from '@waldur/marketplace/cart/ShoppingCartIndicator';
 import { ComparisonIndicator } from '@waldur/marketplace/compare/ComparisonIndicator';
 import { PendingOrderIndicator } from '@waldur/marketplace/orders/PendingOrderIndicator';
@@ -17,7 +18,6 @@ const SelectWorkspaceToggle = angular2react('selectWorkspaceToggle');
 const MainSearch = angular2react('mainSearch');
 const IntroButton = angular2react('introButton');
 const SupportLink = angular2react('supportLink');
-const LanguageSelector = angular2react('languageSelector');
 const LogoutLink = angular2react('logoutLink');
 
 export const AppHeader = () => (
