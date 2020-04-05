@@ -1786,7 +1786,7 @@ msgstr ""
 msgid "Docker version"
 msgstr ""
 
-#: src/navigation/header/docs-link.html
+#: src/navigation/header/DocsLink.tsx
 msgid "Documentation"
 msgstr ""
 

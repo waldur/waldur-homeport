@@ -8,6 +8,7 @@ import { PendingOrderIndicator } from '@waldur/marketplace/orders/PendingOrderIn
 import { angular2react } from '@waldur/shims/angular2react';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { DocsLink } from './DocsLink';
 import { ExternalLinks } from './ExternalLinks';
 
 const SidebarToggle = angular2react('sidebarToggle');
@@ -15,7 +16,6 @@ const SelectWorkspaceToggle = angular2react('selectWorkspaceToggle');
 const MainSearch = angular2react('mainSearch');
 const IntroButton = angular2react('introButton');
 const SupportLink = angular2react('supportLink');
-const DocsLink = angular2react('docsLink');
 const ComparisonIndicator = angular2react('comparisonIndicator');
 const LanguageSelector = angular2react('languageSelector');
 const LogoutLink = angular2react('logoutLink');
