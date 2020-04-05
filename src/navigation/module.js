@@ -1,4 +1,6 @@
-import { appFooter } from './app-footer';
+import { connectAngularComponent } from '@waldur/store/connect';
+
+import { AppFooter } from './AppFooter';
 import breadcrumbsModule from './breadcrumbs/module';
 import cookiesModule from './cookies/module';
 import headerModule from './header/module';
@@ -12,7 +14,7 @@ export default module => {
   module.service('NavigationUtilsService', NavigationUtilsService);
   module.service('titleService', titleService);
   module.run(setTitleFromState);
-  module.component('appFooter', appFooter);
+  module.component('appFooter', connectAngularComponent(AppFooter));
   breadcrumbsModule(module);
   cookiesModule(module);
   headerModule(module);

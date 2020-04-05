@@ -2422,7 +2422,6 @@ msgid "Heatmap"
 msgstr ""
 
 #: src/help/routes.js
-#: src/navigation/app-footer.html
 msgid "Help"
 msgstr ""
 
@@ -4714,7 +4713,7 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
-#: src/navigation/app-footer.html
+#: src/navigation/AppFooter.tsx
 #: src/routes/about.js
 msgid "Privacy policy"
 msgstr ""
@@ -6650,7 +6649,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
-#: src/navigation/app-footer.html
+#: src/navigation/AppFooter.tsx
 #: src/user/support/TermsOfService.tsx
 msgid "Terms of Service"
 msgstr ""
@@ -7916,7 +7915,7 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
-#: src/navigation/app-footer.html
+#: src/navigation/AppFooter.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
 msgstr ""
