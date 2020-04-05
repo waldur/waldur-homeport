@@ -14,11 +14,11 @@ import { DocsLink } from './DocsLink';
 import { ExternalLinks } from './ExternalLinks';
 import { LogoutLink } from './LogoutLink';
 import { MainSearch } from './MainSearch';
+import { SupportLink } from './SupportLink';
 
 const SidebarToggle = angular2react('sidebarToggle');
 const SelectWorkspaceToggle = angular2react('selectWorkspaceToggle');
 const IntroButton = angular2react('introButton');
-const SupportLink = angular2react('supportLink');
 
 export const AppHeader = () => (
   <Row className="border-bottom">

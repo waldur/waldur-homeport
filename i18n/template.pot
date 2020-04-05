@@ -6450,7 +6450,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: src/navigation/header/support-link.html
+#: src/navigation/header/SupportLink.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Support"
