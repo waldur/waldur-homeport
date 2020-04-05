@@ -1,102 +1,19 @@
-import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
-
-// @ngInject
-function loadProject(
-  $stateParams,
-  $q,
-  $state,
-  usersService,
-  currentStateService,
-  projectsService,
-  projectPermissionsService,
-  customersService,
-  WorkspaceService,
-) {
-  if (!$stateParams.uuid) {
-    return $q.reject();
-  }
-
-  return usersService
-    .getCurrentUser()
-    .then(user => {
-      return projectsService.$get($stateParams.uuid).then(project => {
-        return projectPermissionsService
-          .getList({
-            user: user.uuid,
-            project: project.uuid,
-          })
-          .then(permissions => {
-            project.permissions = permissions;
-            return { project };
-          });
-      });
-    })
-    .then(({ project }) => {
-      return customersService.$get(project.customer_uuid).then(customer => {
-        currentStateService.setCustomer(customer);
-        currentStateService.setProject(project);
-        return { customer, project };
-      });
-    })
-    .then(({ customer, project }) => {
-      WorkspaceService.setWorkspace({
-        customer: customer,
-        project: project,
-        hasCustomer: true,
-        workspace: WOKSPACE_NAMES.project,
-      });
-      return project;
-    })
-    .catch(response => {
-      if (response.status === 404) {
-        $state.go('errorPage.notFound');
-      }
-    });
-}
-
-// @ngInject
-function projectController(
-  $scope,
-  usersService,
-  currentStateService,
-  customersService,
-) {
-  usersService.getCurrentUser().then(currentUser => {
-    currentStateService.getCustomer().then(currentCustomer => {
-      currentStateService.getProject().then(currentProject => {
-        $scope.currentProject = currentProject;
-
-        const status = customersService.checkCustomerUser(
-          currentCustomer,
-          currentUser,
-        );
-        currentStateService.setOwnerOrStaff(status);
-      });
-    });
-  });
-}
-
 // @ngInject
 export default function projectRoutes($stateProvider) {
   $stateProvider
     .state('project', {
       url: '/projects/:uuid/',
       abstract: true,
-      templateUrl: 'views/project/base.html',
+      template: '<project-base></project-base>',
       data: {
         auth: true,
-        workspace: WOKSPACE_NAMES.project,
+        workspace: 'project',
       },
-      resolve: {
-        currentProject: loadProject,
-      },
-      controller: projectController,
     })
 
     .state('project.details', {
       url: '',
-      template:
-        '<project-dashboard project="currentProject"></project-dashboard>',
+      template: '<project-dashboard></project-dashboard>',
       data: {
         pageTitle: gettext('Dashboard'),
         pageClass: 'gray-bg',
@@ -116,7 +33,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.events', {
       url: 'events/',
-      template: '<project-events project="currentProject"></project-events>',
+      template: '<project-events></project-events>',
       data: {
         pageTitle: gettext('Audit logs'),
       },
