@@ -1,3 +1,4 @@
+import certificationsService from './certifications-service';
 import projectDialog from './project-dialog';
 import projectPolicies from './project-policies';
 import projectTeam from './project-team';
@@ -28,5 +29,6 @@ export default module => {
   module.component('projectTeam', projectTeam);
   module.component('projectRemoveDialog', projectRemoveDialog);
   module.service('projectsService', projectsService);
+  module.service('certificationsService', certificationsService);
   module.config(projectRoutes);
 };
