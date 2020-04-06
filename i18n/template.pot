@@ -77,10 +77,6 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: src/aws/AmazonForm.tsx
-msgid "Access key ID"
-msgstr ""
-
 #: src/digitalocean/DigitalOceanForm.tsx
 msgid "Access token"
 msgstr ""
@@ -432,10 +428,6 @@ msgstr ""
 
 #: src/auth/auth-login.html
 msgid "Already have an account?"
-msgstr ""
-
-#: src/aws/help.js
-msgid "Amazon EC2 provider"
 msgstr ""
 
 #: src/marketplace/offerings/create/PlanSummary.tsx
@@ -2483,10 +2475,6 @@ msgstr ""
 #: src/help/constants.js
 #: src/user/keys/help.js
 msgid "How to generate SSH key"
-msgstr ""
-
-#: src/aws/help.js
-msgid "How to obtain credentials for Amazon EC2 provider"
 msgstr ""
 
 #: src/azure/provider/help.js
@@ -5734,10 +5722,6 @@ msgstr ""
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Search for apps and services..."
-msgstr ""
-
-#: src/aws/AmazonForm.tsx
-msgid "Secret access key"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
