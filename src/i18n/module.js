@@ -1,5 +1,5 @@
-import languageList from './language-list';
 import LanguageUtilsService from './language-utils-service';
+import languageList from './LanguageList';
 import languageSelectorMenuItem from './LanguageSelectorMenuItem';
 
 // @ngInject

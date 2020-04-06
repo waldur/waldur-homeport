@@ -4557,7 +4557,7 @@ msgstr ""
 msgid "Please select type in Management tab first."
 msgstr ""
 
-#: src/i18n/language-list.html
+#: src/i18n/LanguageList.tsx
 msgid "Please select your language"
 msgstr ""
 
