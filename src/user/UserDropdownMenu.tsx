@@ -17,7 +17,7 @@ const getSidebarItems = () =>
     isFeatureVisible(item.feature),
   ).map(item => ({ ...item, href: $state.href(item.link) }));
 
-export const UserSidebar = () => {
+export const UserDropdownMenu = () => {
   const user = useSelector(getUser);
   const logout = () => ngInjector.get('authService').logout();
   const menuItems = React.useMemo(getSidebarItems, []);
@@ -46,4 +46,4 @@ export const UserSidebar = () => {
   );
 };
 
-export default connectAngularComponent(UserSidebar);
+export default connectAngularComponent(UserDropdownMenu);
