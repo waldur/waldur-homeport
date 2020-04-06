@@ -8462,6 +8462,10 @@ msgstr ""
 msgid "{resource_name} has been deleted."
 msgstr ""
 
+#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
+msgid "{shortPageTitle} | {pageTitle} ({name})"
+msgstr ""
+
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "{state} controls"
 msgstr ""
