@@ -23,7 +23,7 @@ module.exports = {
     alias: {
       '@waldur': path.resolve('./src/'),
       sass: path.resolve('./src/sass/'),
-    }
+    },
   },
   devtool: 'source-map',
   module: {
@@ -49,7 +49,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              transpileOnly: true
+              transpileOnly: true,
             },
           },
         ],
@@ -71,23 +71,49 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader?sourceMap',
-          utils.isProd ? 'css-loader': 'css-loader?sourceMap',
-          utils.isProd ? 'postcss-loader': 'postcss-loader?sourceMap',
-          utils.isProd ? 'sass-loader?includePaths[]=' + scssPath : 'sass-loader?sourceMap&includePaths[]=' + scssPath,
-        ]
+          {
+            loader: 'cache-loader',
+          },
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !utils.isProd,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: !utils.isProd,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !utils.isProd,
+              sassOptions: {
+                includePaths: [scssPath],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
         use: [
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader?sourceMap',
-          utils.isProd ? 'css-loader' : 'css-loader?sourcemap',
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !utils.isProd,
+            },
+          },
         ],
       },
       {
         test: /\.font\.js/,
         use: [
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader?sourceMap',
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           {
             loader: 'webfonts-loader',
@@ -104,8 +130,8 @@ module.exports = {
             loader: 'file-loader',
             options: {
               publicPath: '../',
-              name: 'fonts/[name].[ext]?[hash]'
-            }
+              name: 'fonts/[name].[ext]?[hash]',
+            },
           },
         ],
       },
@@ -116,7 +142,7 @@ module.exports = {
             loader: 'file-loader',
             options: {
               publicPath: '../',
-              name: 'images/[name].[ext]?[hash]'
+              name: 'images/[name].[ext]?[hash]',
             },
           },
         ],
@@ -130,7 +156,7 @@ module.exports = {
           {
             loader: 'markdown-loader',
           },
-        ]
+        ],
       },
     ],
   },
@@ -142,22 +168,38 @@ module.exports = {
       chunks: ['index'],
       alwaysWriteToDisk: true,
       chunksSortMode: function(a, b) {
-        return (a.names[0] < b.names[0]) ? 1 : -1;
-      }
+        return a.names[0] < b.names[0] ? 1 : -1;
+      },
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name]-bundle.css?[contenthash]'
+      filename: 'css/[name]-bundle.css?[contenthash]',
     }),
     // some files are not referenced explicitly, copy them.
     new CopyWebpackPlugin([
-      {from: './src/views', to: utils.formatPath('./views')},
-      {from: path.resolve(imagesPath, './appstore'), to: utils.formatPath('images/appstore')},
-      {from: path.resolve(imagesPath, './help'), to: utils.formatPath('images/help')},
-      {from: path.resolve(imagesPath, './waldur'), to: utils.formatPath('images/waldur')},
-      {from: path.resolve(imagesPath, './service-providers'), to: utils.formatPath('images/service-providers')},
+      { from: './src/views', to: utils.formatPath('./views') },
+      {
+        from: path.resolve(imagesPath, './appstore'),
+        to: utils.formatPath('images/appstore'),
+      },
+      {
+        from: path.resolve(imagesPath, './help'),
+        to: utils.formatPath('images/help'),
+      },
+      {
+        from: path.resolve(imagesPath, './waldur'),
+        to: utils.formatPath('images/waldur'),
+      },
+      {
+        from: path.resolve(imagesPath, './service-providers'),
+        to: utils.formatPath('images/service-providers'),
+      },
       // favicon is a part of white-labeling, store such resources separately.
       // https://opennode.atlassian.net/wiki/display/WD/HomePort+configuration#HomePortconfiguration-White-labeling
-      {from: path.resolve(imagesPath, './favicon.ico'), to: utils.formatPath('images/favicon.ico'), toType: 'file'},
+      {
+        from: path.resolve(imagesPath, './favicon.ico'),
+        to: utils.formatPath('images/favicon.ico'),
+        toType: 'file',
+      },
       // manifest.json is an experimental feature that is currently breaking caching
       // {from:  './app/manifest.json', to: utils.formatPath('manifest.json'), toType: 'file'},
     ]),
@@ -178,8 +220,8 @@ module.exports = {
         ],
         destination: path.resolve('./i18n/template.pot'),
         lineNumbers: false,
-        markerNames: ['gettext', 'translate']
-      }
+        markerNames: ['gettext', 'translate'],
+      },
     }),
   ],
   stats: {
@@ -188,5 +230,5 @@ module.exports = {
     version: false,
     warnings: false,
     errorDetails: true,
-  }
+  },
 };

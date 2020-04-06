@@ -10,7 +10,7 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
       "@waldur/*": ["src/*"]
@@ -24,6 +24,7 @@
   },
   "include": [
     "./src/**/*",
+    "./cypress/**/*",
   ],
   "exclude": [
     "./src/**/*.spec.ts",

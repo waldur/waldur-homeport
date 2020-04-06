@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 interface ExternalLink {
   label: string;
@@ -41,6 +40,4 @@ const mapStateToProps = state => {
   };
 };
 
-const ExternalLinksContainer = connect(mapStateToProps)(ExternalLinksComponent);
-
-export default connectAngularComponent(ExternalLinksContainer);
+export const ExternalLinks = connect(mapStateToProps)(ExternalLinksComponent);

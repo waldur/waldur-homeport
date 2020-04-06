@@ -1,3 +1,4 @@
+/* eslint-disable */
 const resourceVolumesList = {
   controller: VolumesListController,
   controllerAs: 'ListController',
@@ -80,14 +81,11 @@ function VolumesListController(
       return options;
     },
     getTableActions: function() {
-      let actions = TableExtensionService.getTableActions(
+      const actions = TableExtensionService.getTableActions(
         'resource-volumes-list',
       );
       if (this.category !== undefined) {
         actions.push(this.getCreateAction());
-      }
-      if (features.isVisible('openMap')) {
-        actions.push(this.getMapAction());
       }
       return actions;
     },

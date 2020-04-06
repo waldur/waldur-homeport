@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
@@ -34,5 +33,3 @@ const mapStateToProps = state => ({
 export const ComparisonIndicator = connect(mapStateToProps)(
   PureComparisonIndicator,
 );
-
-export default connectAngularComponent(ComparisonIndicator);

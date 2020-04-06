@@ -5,8 +5,12 @@ import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction, ActionContext } from '@waldur/resource/actions/types';
 
+interface ConsoleResponse {
+  url: string;
+}
+
 const getConsoleURL = (id: string) =>
-  get(`/openstacktenant-instances/${id}/console/`);
+  get<ConsoleResponse>(`/openstacktenant-instances/${id}/console/`);
 
 const validatePermissions = (ctx: ActionContext) => {
   if (ctx.user.is_staff) {

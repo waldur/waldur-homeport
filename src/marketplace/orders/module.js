@@ -1,9 +1,8 @@
-import marketplaceOrdersList from './OrdersList';
-import marketplaceOrderDetails from './OrderDetailsContainer';
-import marketplaceTermsOfServiceDialog from './TermsOfServiceDialog';
 import marketplaceOrderItemDetails from './item/details/OrderItemDetailsContainer';
 import orderItemListModule from './item/list/module';
-import marketplacePendingOrderDropdown from '../orders/PendingOrderDropdown';
+import marketplaceOrderDetails from './OrderDetailsContainer';
+import marketplaceOrdersList from './OrdersList';
+import marketplaceTermsOfServiceDialog from './TermsOfServiceDialog';
 
 export default module => {
   orderItemListModule(module);
@@ -13,9 +12,5 @@ export default module => {
   module.component(
     'marketplaceTermsOfServiceDialog',
     marketplaceTermsOfServiceDialog,
-  );
-  module.component(
-    'marketplacePendingOrderDropdown',
-    marketplacePendingOrderDropdown,
   );
 };

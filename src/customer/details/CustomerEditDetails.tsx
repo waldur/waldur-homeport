@@ -46,41 +46,36 @@ export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = (
 ) => {
   const { canEdit } = props;
   return (
-    <div className="panel panel-default">
-      <div className="panel-heading">{translate('Organization logo')}</div>
-      <div className="panel-body">
-        <div className="customer-edit-details">
-          <Row>
-            <Col md={canEdit ? 6 : 12}>
-              <div className="organization-logo">
-                <div className="organization-img-wrapper">
-                  <img src={renderLogo(props)} alt="Organization logo here" />
-                </div>
-              </div>
-            </Col>
-            {canEdit && (
-              <Col md={6}>
-                <div className="organization-logo-actions">
-                  {renderRemoveButton(props) && (
-                    <ActionButton
-                      className="btn btn-sm btn-danger m-b-sm"
-                      title={translate('Remove logo')}
-                      action={props.removeLogo}
-                      icon="fa fa-trash"
-                    />
-                  )}
-                  {canEdit && (
-                    <CustomerEditDetailsForm
-                      hasChosenImage={hasChosenImage(props)}
-                      onSubmit={props.uploadLogo}
-                    />
-                  )}
-                </div>
-              </Col>
-            )}
-          </Row>
-        </div>
-      </div>
+    <div className="customer-edit-details">
+      <Row>
+        <Col md={3}>
+          <div className="organization-logo">
+            <div className="organization-img-wrapper">
+              <img src={renderLogo(props)} alt="Organization logo here" />
+            </div>
+          </div>
+        </Col>
+        {canEdit && (
+          <Col md={9}>
+            <div className="organization-logo-actions">
+              {renderRemoveButton(props) && (
+                <ActionButton
+                  className="btn btn-sm btn-danger m-b-sm"
+                  title={translate('Remove logo')}
+                  action={props.removeLogo}
+                  icon="fa fa-trash"
+                />
+              )}
+              {canEdit && (
+                <CustomerEditDetailsForm
+                  hasChosenImage={hasChosenImage(props)}
+                  onSubmit={props.uploadLogo}
+                />
+              )}
+            </div>
+          </Col>
+        )}
+      </Row>
     </div>
   );
 };

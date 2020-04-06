@@ -1,20 +1,22 @@
-import invoicesService from './invoices-service';
-import BillingUtils from './billing-utils';
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import billingDetails from './billing-details';
-import invoiceHeader from './invoice-header';
-import invoiceDetails from './invoice-details';
-import invoicesList from './invoices-list';
-import billingCustomerDetails from './CustomerDetails';
 import billingRecordDetails from './billing-record-details';
 import billingRecordHeader from './billing-record-header';
 import billingRecordsList from './billing-records-list';
 import billingTabs from './billing-tabs';
-import PriceEstimateUtilsService from './price-estimate-utils-service';
+import BillingUtils from './billing-utils';
+import billingCustomerDetails from './CustomerDetails';
+import eventsModule from './events/module';
+import invoiceDetails from './invoice-details';
+import invoiceHeader from './invoice-header';
+import invoicesList from './invoices-list';
+import invoicesService from './invoices-service';
+import { PaymentProfileList } from './PaymentProfileList';
 import priceEstimateButton from './price-estimate-button';
+import PriceEstimateUtilsService from './price-estimate-utils-service';
 import priceEstimateDialog from './PriceEstimateDialog';
 import billingRoutes from './routes';
-import eventsModule from './events/module';
-import { formatPhone } from './filters';
 import './events';
 
 export default module => {
@@ -32,7 +34,10 @@ export default module => {
   module.component('billingTabs', billingTabs);
   module.component('priceEstimateButton', priceEstimateButton);
   module.component('priceEstimateDialog', priceEstimateDialog);
+  module.component(
+    'paymentProfileList',
+    connectAngularComponent(PaymentProfileList),
+  );
   module.config(billingRoutes);
   eventsModule(module);
-  module.filter('formatPhone', () => formatPhone);
 };

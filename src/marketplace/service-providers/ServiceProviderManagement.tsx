@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as Panel from 'react-bootstrap/lib/Panel';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -74,29 +73,24 @@ class ServiceProviderWrapper extends React.Component<
 
   render() {
     return (
-      <Panel>
-        <Panel.Heading>
-          {this.props.translate('Marketplace service provider')}
-        </Panel.Heading>
-        <Panel.Body>
-          <ServiceProviderRegisterButton
-            registerServiceProvider={this.registerServiceProvider}
-            {...this.props}
-            {...this.state}
-          />
-          {this.props.customer && this.props.customer.is_service_provider && (
-            <>
-              <br />
-              <ServiceProviderSecretCode
-                serviceProvider={this.state.serviceProvider}
-                showError={this.props.showError}
-                showSuccess={this.props.showSuccess}
-                translate={translate}
-              />
-            </>
-          )}
-        </Panel.Body>
-      </Panel>
+      <>
+        <ServiceProviderRegisterButton
+          registerServiceProvider={this.registerServiceProvider}
+          {...this.props}
+          {...this.state}
+        />
+        {this.props.customer && this.props.customer.is_service_provider && (
+          <>
+            <br />
+            <ServiceProviderSecretCode
+              serviceProvider={this.state.serviceProvider}
+              showError={this.props.showError}
+              showSuccess={this.props.showSuccess}
+              translate={translate}
+            />
+          </>
+        )}
+      </>
     );
   }
 }

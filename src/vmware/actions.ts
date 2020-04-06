@@ -4,8 +4,12 @@ import { $rootScope } from '@waldur/core/services';
 import { translate, gettext } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 
+interface ConsleResponse {
+  url: string;
+}
+
 const getConsoleURL = (id: string) =>
-  get(`/vmware-virtual-machine/${id}/console/`);
+  get<ConsleResponse>(`/vmware-virtual-machine/${id}/console/`);
 
 export function actionsConfig(ActionConfigurationProvider) {
   ActionConfigurationProvider.register('VMware.VirtualMachine', {

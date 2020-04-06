@@ -32,31 +32,6 @@ export function CustomerWorkspaceController(
         index: 300,
       },
       {
-        label: gettext('Analytics'),
-        icon: 'fa-bar-chart-o',
-        link: 'organization.analysis',
-        feature: 'analytics',
-        index: 500,
-        children: [
-          {
-            label: gettext('Cost analysis'),
-            icon: 'fa-pie-chart',
-            link:
-              'organization.analysis.cost({uuid: $ctrl.context.customer.uuid})',
-            feature: 'analytics.cost',
-            index: 100,
-          },
-          {
-            label: gettext('Resource usage'),
-            icon: 'fa-tachometer',
-            link:
-              'organization.analysis.resources({uuid: $ctrl.context.customer.uuid})',
-            feature: 'analytics.resources',
-            index: 200,
-          },
-        ],
-      },
-      {
         label: gettext('Audit logs'),
         icon: 'fa-bell-o',
         link: 'organization.details({uuid: $ctrl.context.customer.uuid})',

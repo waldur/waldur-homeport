@@ -4,7 +4,9 @@ import * as Table from 'react-bootstrap/lib/Table';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 
-export const StatsTable = props => (
+import { ChecklistStats } from './types';
+
+export const StatsTable = ({ stats }: { stats: ChecklistStats[] }) => (
   <Table responsive={true} bordered={true} striped={true} className="m-t-md">
     <thead>
       <tr>
@@ -14,7 +16,7 @@ export const StatsTable = props => (
       </tr>
     </thead>
     <tbody>
-      {props.stats.map((customer, index) => (
+      {stats.map((customer, index) => (
         <tr key={customer.uuid}>
           <td>{index + 1}</td>
           <td>{customer.name}</td>

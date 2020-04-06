@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { GeolocationPoint } from '@waldur/marketplace/types';
 import loadLeafleat from '@waldur/shims/load-leaflet';
+
+import { ChecklistStats } from './types';
 
 // tslint:disable-next-line: no-var-requires
 const iconGreen = require('@waldur/images/marker-icon-green.png');
@@ -11,13 +12,8 @@ const iconRed = require('@waldur/images/marker-icon-red.png');
 // tslint:disable-next-line: no-var-requires
 const iconYellow = require('@waldur/images/marker-icon-yellow.png');
 
-interface Customer extends GeolocationPoint {
-  name: string;
-  score: number;
-}
-
 interface CustomerMapProps {
-  customers: Customer[];
+  customers: ChecklistStats[];
 }
 
 export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => {

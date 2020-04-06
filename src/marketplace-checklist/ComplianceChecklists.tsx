@@ -6,20 +6,30 @@ import { useSelector } from 'react-redux';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { useQuery } from '@waldur/core/useQuery';
-import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';
 import { translate } from '@waldur/i18n';
 import { getProject } from '@waldur/workspace/selectors';
 
+import { ChartHeader } from './ChartHeader';
 import { PieChart } from './PieChart';
+
+interface Checklist {
+  uuid: string;
+  name: string;
+  score: number;
+  positive_count: number;
+  negative_count: number;
+  unknown_count: number;
+}
+
+const getChecklists = (projectId: string) =>
+  get<Checklist[]>(`/projects/${projectId}/marketplace-checklists/`).then(
+    response => response.data,
+  );
 
 export const ComplianceChecklists = () => {
   const project = useSelector(getProject);
   const { call, state } = useQuery(
-    project &&
-      (() =>
-        get(`/projects/${project.uuid}/marketplace-checklists/`).then(
-          response => response.data,
-        )),
+    project && (() => getChecklists(project.uuid)),
     [project],
   );
   React.useEffect(call, []);
@@ -44,10 +54,7 @@ export const ComplianceChecklists = () => {
     <Row>
       {state.data.map(checklist => (
         <Col key={checklist.uuid} md={3}>
-          <DashboardCounter
-            label={`${checklist.score} %`}
-            value={checklist.name}
-          />
+          <ChartHeader label={`${checklist.score} %`} value={checklist.name} />
           <PieChart
             positive={checklist.positive_count}
             negative={checklist.negative_count}

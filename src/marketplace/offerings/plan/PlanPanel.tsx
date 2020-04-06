@@ -30,7 +30,7 @@ const PurePlanPanel = (props: OwnProps & StateProps) => {
   };
 
   return (
-    <Panel expanded={open} id="plan-panel">
+    <Panel defaultExpanded={open} id="plan-panel">
       <Panel.Heading>
         <h4 onClick={togglePanel}>
           {translate('Plan #{index}', { index: props.index + 1 })}

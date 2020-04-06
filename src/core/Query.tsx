@@ -1,3 +1,4 @@
+import { IPromise } from 'angular';
 import * as React from 'react';
 
 interface QueryState<Data> {
@@ -14,7 +15,7 @@ export interface QueryChildProps<Data> extends QueryState<Data> {
 
 interface QueryProps<Variables, Data> {
   variables?: Variables;
-  loader(variables: Variables): Promise<Data>;
+  loader(variables: Variables): IPromise<Data> | Promise<Data>;
   children: React.StatelessComponent<QueryChildProps<Data>>;
 }
 

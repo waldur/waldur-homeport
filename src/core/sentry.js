@@ -7,11 +7,6 @@ only then decide if we need to install Sentry client or not.
 
 import * as Sentry from '@sentry/browser';
 
-export default module => {
-  module.factory('$exceptionHandler', exceptionHandlerFactory);
-  module.run(attachSentry);
-};
-
 // @ngInject
 function exceptionHandlerFactory($log, ENV) {
   return function(exception, cause) {
@@ -23,16 +18,6 @@ function exceptionHandlerFactory($log, ENV) {
     }
     $log.warn(exception, cause);
   };
-}
-
-// @ngInject
-function attachSentry(ENV) {
-  if (ENV.SENTRY_DSN) {
-    Sentry.init({
-      dsn: ENV.SENTRY_DSN,
-      beforeSend: normalizeEvent,
-    });
-  }
 }
 
 // See https://github.com/angular/angular.js/blob/v1.4.7/src/minErr.js
@@ -53,9 +38,26 @@ function normalizeEvent(event) {
 
       event.message = exception.type + ': ' + exception.value;
       // auto set a new tag specifically for the angular error url
-      event.extra.angularDocs = matches[3].substr(0, 250);
+      if (event.extra) {
+        event.extra.angularDocs = matches[3].substr(0, 250);
+      }
     }
   }
 
   return event;
 }
+
+// @ngInject
+function attachSentry(ENV) {
+  if (ENV.SENTRY_DSN) {
+    Sentry.init({
+      dsn: ENV.SENTRY_DSN,
+      beforeSend: normalizeEvent,
+    });
+  }
+}
+
+export default module => {
+  module.factory('$exceptionHandler', exceptionHandlerFactory);
+  module.run(attachSentry);
+};

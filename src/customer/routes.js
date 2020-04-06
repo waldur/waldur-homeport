@@ -126,6 +126,7 @@ export default function organizationRoutes($stateProvider) {
       template: '<customer-manage></customer-manage>',
       data: {
         pageTitle: gettext('Manage organization'),
+        hideBreadcrumbs: true,
       },
     })
 

@@ -6,8 +6,12 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
 
 const utils = require('./webpack.utils');
+
+const HOST = 'localhost';
+const PORT = 8001;
 
 module.exports = merge(baseConfig, {
   mode: 'development',
@@ -38,6 +42,10 @@ module.exports = merge(baseConfig, {
     new HtmlWebpackHarddiskPlugin({
       outputPath: utils.formatPath('.'),
     }),
+    new CleanTerminalPlugin({
+      message: `dev server running on http://${HOST}:${PORT}`,
+      onlyInWatchMode: false,
+    }),
   ],
   devServer: {
     // look for missing files in app folder (app has to be built one more time for this)
@@ -46,6 +54,6 @@ module.exports = merge(baseConfig, {
     inline: true,
     port: 8001,
     publicPath: '/',
-    stats: 'errors-only'
+    stats: 'errors-only',
   },
 });

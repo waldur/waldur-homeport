@@ -3,6 +3,7 @@ import * as Panel from 'react-bootstrap/lib/Panel';
 import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -11,7 +12,7 @@ import { StatsTable } from './StatsTable';
 import { useChecklistOverview } from './useChecklist';
 
 const ChecklistOverview = () => {
-  const state = useChecklistOverview();
+  const state = useChecklistOverview($state.params.category);
 
   if (state.checklistLoading) {
     return <LoadingSpinner />;

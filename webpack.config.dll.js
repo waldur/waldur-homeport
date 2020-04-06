@@ -16,9 +16,6 @@ module.exports = {
       'lodash',
       'jquery',
       'moment-timezone',
-      'bootstrap/js/tooltip',
-      'bootstrap/js/modal',
-      'bootstrap/js/dropdown',
       'file-saver',
       'papaparse',
 
@@ -71,7 +68,6 @@ module.exports = {
       'angular-sanitize',
       'angular-ui-bootstrap',
       'angular-bind-html-compile-ci-dev',
-      'oclazyload',
       'angular-intro.js',
 
       './src/shims/slimscroll',
@@ -94,19 +90,22 @@ module.exports = {
       // Temporary workaround for Angular UI router and React Bootstrap integration
       {
         test: /SafeAnchor\.js$/,
-        loader: 'ts-loader'
+        loader: 'ts-loader',
       },
     ],
   },
 
   plugins: [
     // Moment locales extraction
-    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /(az|en-gb|et|ru|lt|lv)/),
+    new webpack.ContextReplacementPlugin(
+      /moment[/\\]locale$/,
+      /(az|en-gb|et|ru|lt|lv)/,
+    ),
 
     // Temporary workaround for Angular UI router and React Bootstrap integration
     new webpack.NormalModuleReplacementPlugin(
       /SafeAnchor\.js/,
-      path.resolve('./src/shims/AngularRouterAnchor.tsx')
+      path.resolve('./src/shims/AngularRouterAnchor.tsx'),
     ),
     new webpack.DllPlugin({
       // The path to the manifest file which maps between
