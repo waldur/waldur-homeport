@@ -201,6 +201,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Update offering'),
         feature: 'marketplace',
+        renderDocumentTitle: true,
       },
     })
 
