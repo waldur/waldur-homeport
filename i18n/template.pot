@@ -1699,7 +1699,7 @@ msgstr ""
 #: src/slurm/actions.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
-#: src/user/UserSidebar.tsx
+#: src/user/UserDropdownMenu.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Details"
@@ -3063,7 +3063,7 @@ msgstr ""
 
 #: src/navigation/header/LogoutLink.tsx
 #: src/navigation/header/site-header.html
-#: src/user/UserSidebar.tsx
+#: src/user/UserDropdownMenu.tsx
 msgid "Log out"
 msgstr ""
 
@@ -7502,6 +7502,10 @@ msgstr ""
 msgid "Update offering"
 msgstr ""
 
+#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
+msgid "Update offering ({name})"
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Update plan for an existing resource"
 msgstr ""
@@ -7663,7 +7667,7 @@ msgstr ""
 msgid "User management events"
 msgstr ""
 
-#: src/user/UserSidebar.tsx
+#: src/user/UserDropdownMenu.tsx
 msgid "User profile"
 msgstr ""
 
@@ -8460,10 +8464,6 @@ msgstr ""
 
 #: src/resource/events.ts
 msgid "{resource_name} has been deleted."
-msgstr ""
-
-#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
-msgid "{shortPageTitle} | {pageTitle} ({name})"
 msgstr ""
 
 #: src/resource/support/TreemapChartFilter.tsx

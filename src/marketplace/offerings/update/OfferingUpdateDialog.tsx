@@ -43,12 +43,14 @@ export class OfferingUpdateDialog extends React.Component<
     this.props.setStep(STEPS[0]);
   }
 
-  componentDidUpdate() {
-    ngInjector.get('titleService').setTitle(
-      translate('Update offering ({name})', {
-        name: this.props.initialValues.name,
-      }),
-    );
+  componentDidUpdate(prevProps) {
+    if (this.props.initialValues.name !== prevProps.initialValues.name) {
+      ngInjector.get('titleService').setTitle(
+        translate('Update offering ({name})', {
+          name: this.props.initialValues.name,
+        }),
+      );
+    }
   }
 
   render() {
