@@ -27,6 +27,12 @@ const REPORT_ITEMS = [
     feature: 'support.users',
   },
   {
+    label: gettext('Financial overview'),
+    icon: 'fa-university',
+    link: 'support.organizations',
+    feature: 'support.organizations',
+  },
+  {
     label: gettext('Orders'),
     icon: 'fa-files-o',
     link: 'marketplace-support-order-items',
@@ -61,12 +67,6 @@ const REPORT_ITEMS = [
     icon: 'fa-random',
     link: 'support.shared-providers',
     feature: 'support.shared-providers',
-  },
-  {
-    label: gettext('Financial overview'),
-    icon: 'fa-university',
-    link: 'support.organizations',
-    feature: 'support.organizations',
   },
   {
     label: gettext('Usage overview'),
