@@ -601,9 +601,9 @@ msgid "Audit log"
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
-#: src/project/project-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/project/routes.js
+#: src/project/utils.ts
 #: src/user/constants.js
 #: src/user/list/UserDashboard.tsx
 #: src/user/routes.js
@@ -682,7 +682,7 @@ msgid "Back to login"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/project-workspace.js
+#: src/project/utils.ts
 #: src/user/user-details.js
 msgid "Back to organization"
 msgstr ""
@@ -1496,10 +1496,10 @@ msgid "Daily available booking time range"
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/project-workspace.js
 #: src/project/routes.js
+#: src/project/utils.ts
 #: src/user/constants.js
 msgid "Dashboard"
 msgstr ""
@@ -2864,10 +2864,10 @@ msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/jira/project/tabs.js
-#: src/project/project-workspace.js
 #: src/project/routes.js
+#: src/project/utils.ts
 #: src/resource/tabs/constants.js
 msgid "Issues"
 msgstr ""
@@ -3109,7 +3109,7 @@ msgstr ""
 msgid "MOAB allocation"
 msgstr ""
 
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/user/constants.js
 #: src/user/routes.js
 #: src/user/support/UserDetailsView.tsx
@@ -4844,7 +4844,7 @@ msgid "Project {project_name} has been deleted."
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/navigation/workspace/select-workspace-dialog.html
 #: src/rancher/cluster/tabs.js
 msgid "Projects"
@@ -6526,9 +6526,9 @@ msgid "Tax number"
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
-#: src/project/project-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/project/routes.js
+#: src/project/utils.ts
 msgid "Team"
 msgstr ""
 

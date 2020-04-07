@@ -6,7 +6,11 @@ export interface MenuItemType {
   params?: Record<string, string>;
   index?: number;
   countFieldKey?: string;
-  count?: number;
   children?: MenuItemType[];
   action?(): void;
+}
+
+export interface SidebarProps {
+  items: MenuItemType[];
+  counters?: Record<string, number>;
 }

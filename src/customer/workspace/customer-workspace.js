@@ -1,4 +1,7 @@
+import { connectSidebarCounters } from '@waldur/navigation/sidebar/utils';
+
 import template from './customer-workspace.html';
+import { getDefaultItems } from './utils';
 
 // @ngInject
 export function CustomerWorkspaceController(
@@ -6,7 +9,6 @@ export function CustomerWorkspaceController(
   eventsService,
   customersService,
   $state,
-  tabCounterService,
   WorkspaceService,
   BillingUtils,
   BreadcrumbsService,
@@ -14,86 +16,6 @@ export function CustomerWorkspaceController(
   SidebarExtensionService,
 ) {
   $scope.titleService = titleService;
-
-  function setItems(customer, customItems) {
-    $scope.items = [
-      {
-        label: gettext('Dashboard'),
-        icon: 'fa-th-large',
-        state: 'organization.dashboard',
-        params: {
-          uuid: customer.uuid,
-        },
-        index: 100,
-      },
-      {
-        label: gettext('Projects'),
-        icon: 'fa-bookmark',
-        state: 'organization.projects',
-        params: {
-          uuid: customer.uuid,
-        },
-        feature: 'projects',
-        countFieldKey: 'projects',
-        index: 300,
-      },
-      {
-        label: gettext('Audit logs'),
-        icon: 'fa-bell-o',
-        state: 'organization.details',
-        params: {
-          uuid: customer.uuid,
-        },
-        feature: 'eventlog',
-        index: 600,
-      },
-      {
-        label: gettext('Issues'),
-        icon: 'fa-question-circle',
-        state: 'organization.issues',
-        params: {
-          uuid: customer.uuid,
-        },
-        feature: 'support',
-        index: 700,
-      },
-      {
-        label: gettext('Team'),
-        icon: 'fa-group',
-        state: 'organization.team',
-        params: {
-          uuid: customer.uuid,
-        },
-        feature: 'team',
-        key: 'team',
-        countFieldKey: 'users',
-        index: 900,
-      },
-      {
-        label: BillingUtils.getTabTitle(),
-        icon: 'fa-file-text-o',
-        state: 'organization.billing.tabs',
-        params: {
-          uuid: customer.uuid,
-        },
-        feature: 'billing',
-        index: 1000,
-      },
-      {
-        label: gettext('Manage'),
-        icon: 'fa-wrench',
-        state: 'organization.manage',
-        params: {
-          uuid: customer.uuid,
-        },
-        index: 9999,
-      },
-    ];
-    $scope.items = SidebarExtensionService.mergeItems(
-      $scope.items,
-      customItems,
-    );
-  }
 
   function refreshBreadcrumbs() {
     BreadcrumbsService.activeItem = $scope.pageTitle;
@@ -111,8 +33,7 @@ export function CustomerWorkspaceController(
     ];
   }
 
-  function getCounters(customer) {
-    const fields = SidebarExtensionService.getCounters($scope.items);
+  function getCounters(fields, customer) {
     const query = angular.extend(
       { UUID: customer.uuid, fields },
       eventsService.defaultFilter,
@@ -135,12 +56,19 @@ export function CustomerWorkspaceController(
     ) {
       $scope.currentCustomer = options.customer;
       SidebarExtensionService.getItems('customer').then(customItems => {
-        setItems(options.customer, customItems);
-        tabCounterService.connect({
-          $scope: $scope,
-          tabs: $scope.items,
-          getCounters: getCounters.bind(null, options.customer),
-          getCountersError: getCountersError,
+        const defaultItems = getDefaultItems(options.customer);
+        $scope.items = SidebarExtensionService.mergeItems(
+          defaultItems,
+          customItems,
+        );
+        const fields = SidebarExtensionService.getCounters($scope.items);
+        connectSidebarCounters({
+          $scope,
+          getCounters: () => getCounters(fields, options.customer),
+          getCountersError,
+          getCountersSuccess: counters => {
+            $scope.counters = counters;
+          },
         });
       });
       refreshBreadcrumbs();

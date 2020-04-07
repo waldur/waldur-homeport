@@ -1,37 +1,17 @@
+import { translate } from '../i18n/translate';
+
+import { baseServiceClass, listCache } from './base-service';
 import ErrorMessageFormatter from './ErrorMessageFormatter';
-import submitButton from './submit-button';
+import extensionPoint from './extension-point-directive';
+import extensionPointService from './extension-point-service';
 import loadingSpinner from './LoadingSpinner';
 import messageDialog from './MessageDialog';
 import multipleSelect from './multiple-select';
-import sentryModule from './sentry';
-import { baseServiceClass, listCache } from './base-service';
-import servicesService from './services-service';
-import tabCounterService from './tab-counters-service';
 import ncUtils from './ncUtils';
-import extensionPoint from './extension-point-directive';
-import extensionPointService from './extension-point-service';
+import sentryModule from './sentry';
 import injectServices from './services';
-import { translate } from '../i18n/translate';
-
-export default module => {
-  module.service('coreUtils', () => ({ templateFormatter: translate }));
-  module.service('ErrorMessageFormatter', ErrorMessageFormatter);
-  module.service('ncUtils', ncUtils);
-  module.service('baseServiceClass', baseServiceClass);
-  module.factory('listCache', listCache);
-  module.service('servicesService', servicesService);
-  module.service('tabCounterService', tabCounterService);
-  module.directive('submitButton', submitButton);
-  module.component('loadingSpinner', loadingSpinner);
-  module.component('messageDialog', messageDialog);
-  module.directive('multipleSelect', multipleSelect);
-  module.directive('extensionPoint', extensionPoint);
-  module.service('extensionPointService', extensionPointService);
-  module.run(redirectToState);
-  module.run(scrollToTop);
-  module.run(injectServices);
-  sentryModule(module);
-};
+import servicesService from './services-service';
+import submitButton from './submit-button';
 
 // @ngInject
 function redirectToState($rootScope, $state, $injector) {
@@ -71,3 +51,22 @@ function scrollToTop($rootScope, $document) {
     $('#wrapper').scrollTop(0);
   });
 }
+
+export default module => {
+  module.service('coreUtils', () => ({ templateFormatter: translate }));
+  module.service('ErrorMessageFormatter', ErrorMessageFormatter);
+  module.service('ncUtils', ncUtils);
+  module.service('baseServiceClass', baseServiceClass);
+  module.factory('listCache', listCache);
+  module.service('servicesService', servicesService);
+  module.directive('submitButton', submitButton);
+  module.component('loadingSpinner', loadingSpinner);
+  module.component('messageDialog', messageDialog);
+  module.directive('multipleSelect', multipleSelect);
+  module.directive('extensionPoint', extensionPoint);
+  module.service('extensionPointService', extensionPointService);
+  module.run(redirectToState);
+  module.run(scrollToTop);
+  module.run(injectServices);
+  sentryModule(module);
+};

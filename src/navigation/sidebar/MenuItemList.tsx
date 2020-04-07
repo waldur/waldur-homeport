@@ -1,27 +1,43 @@
 import * as React from 'react';
 
 import { MenuItem } from './MenuItem';
-import { MenuItemType } from './types';
+import { SidebarProps, MenuItemType } from './types';
 import { useMenuList } from './useMenuList';
 
-export const MenuItemList = ({ items }: { items: MenuItemType[] }) => {
+export const MenuItemList: React.FC<SidebarProps> = ({ items, counters }) => {
   const { getItemCss, expandedItem, onClick } = useMenuList(items);
-  return (
+
+  const ItemList: React.FC<{
+    items: MenuItemType[];
+    render?(item: MenuItemType): React.ReactNode;
+  }> = ({ items, render }) => (
     <>
       {items.map((item, index) => (
         <li key={index} className={getItemCss(item)}>
-          <MenuItem item={item} onClick={onClick} />
-          {expandedItem === item && item.children && (
-            <ul className="nav nav-second-level">
-              {item.children.map((child, index) => (
-                <li key={index} className={getItemCss(child)}>
-                  <MenuItem item={child} onClick={onClick} />
-                </li>
-              ))}
-            </ul>
-          )}
+          <MenuItem
+            item={item}
+            onClick={onClick}
+            counter={
+              counters && item.countFieldKey && counters[item.countFieldKey]
+            }
+          />
+          {render && render(item)}
         </li>
       ))}
     </>
+  );
+
+  return (
+    <ItemList
+      items={items}
+      render={item =>
+        expandedItem === item &&
+        item.children && (
+          <ul className="nav nav-second-level">
+            <ItemList items={item.children} />
+          </ul>
+        )
+      }
+    />
   );
 };
