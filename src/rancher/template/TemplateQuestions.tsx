@@ -12,7 +12,7 @@ import { Question } from './types';
 import { groupQuestions } from './utils';
 
 interface OwnProps {
-  questions: Question[];
+  questions?: Question[];
   versions: string[];
   projects: string[];
   namespaces: string[];
@@ -23,28 +23,31 @@ const connector = reduxForm<any, OwnProps>({
   form: 'RancherTemplateQuestions',
 });
 
-export const TemplateQuestions = connector(props => {
-  const groups = React.useMemo(() => groupQuestions(props.questions), [
-    props.questions,
-  ]);
+const AnswersSection = ({ questions }: { questions: Question[] }) => {
+  const groups = React.useMemo(() => groupQuestions(questions), [questions]);
+
   return (
-    <Form onSubmit={props.handleSubmit(props.createApplication)}>
-      <ApplicationConfiguration {...props} />
-      <FormSection name="answers">
-        {Object.keys(groups).map((group, groupIndex) => (
-          <QuestionGroup
-            key={groupIndex}
-            title={group}
-            questions={groups[group]}
-          />
-        ))}
-      </FormSection>
-      <SubmitButton
-        className="btn btn-sm btn-success m-t-sm"
-        submitting={props.submitting}
-        label={translate('Create application')}
-        disabled={props.invalid || ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE}
-      />
-    </Form>
+    <FormSection name="answers">
+      {Object.keys(groups).map((group, groupIndex) => (
+        <QuestionGroup
+          key={groupIndex}
+          title={group}
+          questions={groups[group]}
+        />
+      ))}
+    </FormSection>
   );
-});
+};
+
+export const TemplateQuestions = connector(props => (
+  <Form onSubmit={props.handleSubmit(props.createApplication)}>
+    <ApplicationConfiguration {...props} />
+    {props.questions && <AnswersSection questions={props.questions} />}
+    <SubmitButton
+      className="btn btn-sm btn-success m-t-sm"
+      submitting={props.submitting}
+      label={translate('Create application')}
+      disabled={props.invalid || ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE}
+    />
+  </Form>
+));
