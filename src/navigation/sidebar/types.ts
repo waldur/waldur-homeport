@@ -10,7 +10,7 @@ export interface MenuItemType {
   action?(): void;
 }
 
-export interface SidebarProps {
+export interface SidebarMenuProps {
   items: MenuItemType[];
   counters?: Record<string, number>;
 }

@@ -1,10 +1,13 @@
 import * as React from 'react';
 
 import { MenuItem } from './MenuItem';
-import { SidebarProps, MenuItemType } from './types';
+import { SidebarMenuProps, MenuItemType } from './types';
 import { useMenuList } from './useMenuList';
 
-export const MenuItemList: React.FC<SidebarProps> = ({ items, counters }) => {
+export const SidebarMenu: React.FC<SidebarMenuProps> = ({
+  items,
+  counters,
+}) => {
   const { getItemCss, expandedItem, onClick } = useMenuList(items);
 
   const ItemList: React.FC<{
