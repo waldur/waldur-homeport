@@ -10,7 +10,7 @@ import { Project } from '@waldur/workspace/types';
 const openProjectDialog = (project: Project) =>
   openModalDialog('projectDialog', { resolve: { project }, size: 'lg' });
 
-export const ProjectDetailsButton = ({ project }: { project?: Project }) => {
+export const ProjectDetailsButton = ({ project }: { project: Project }) => {
   const dispatch = useDispatch();
   const callback = React.useCallback(
     () => dispatch(openProjectDialog(project)),
@@ -25,4 +25,4 @@ export const ProjectDetailsButton = ({ project }: { project?: Project }) => {
   );
 };
 
-export default connectAngularComponent(ProjectDetailsButton);
+export default connectAngularComponent(ProjectDetailsButton, ['project']);
