@@ -40,10 +40,11 @@ export const BrandName = () => {
     <li className="brand-name hidden-xs">
       <a onClick={onLogoClick}>
         {ENV.sidebarLogo ? (
-          <img src={ENV.sidebarLogo} />
+          <img src={ENV.sidebarLogo} style={{ maxHeight: 60, maxWidth: 200 }} />
         ) : (
           <>
-            <i className="fa fa-th-large"></i> {ENV.shortPageTitle}
+            <i className="fa fa-th-large"></i>{' '}
+            <span className="ellipsis">{ENV.shortPageTitle}</span>
           </>
         )}
       </a>
