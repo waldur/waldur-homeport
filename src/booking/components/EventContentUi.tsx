@@ -1,7 +1,7 @@
 import { EventApi } from '@fullcalendar/core';
 import * as moment from 'moment-timezone';
 import * as React from 'react';
-import { OverlayTrigger } from 'react-bootstrap';
+import * as OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import * as Tooltip from 'react-bootstrap/lib/Tooltip';
 
 import { BookingProps } from '../types';
