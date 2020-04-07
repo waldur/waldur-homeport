@@ -72,4 +72,13 @@ export interface WaldurCalendarProps {
   setModalProps: (props) => void;
   openModal: (cb) => void;
   getAllEvents?: (cb) => void;
+  formEvents?: BookingProps[] | Event[];
+}
+
+export interface BookingModalProps {
+  isOpen: boolean;
+  toggle: () => void;
+  event: BookingProps | null | undefined;
+  onSuccess: (event: BookingProps | EventInput) => any;
+  onDelete: () => void;
 }
