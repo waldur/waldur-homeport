@@ -119,6 +119,7 @@
     "@types/classnames": "^2.2.3",
     "@types/enzyme": "^3.1.14",
     "@types/jest": "^25.1.4",
+    "@types/jquery": "^3.3.34",
     "@types/lodash": "^4.14.117",
     "@types/moment-timezone": "^0.5.9",
     "@types/react": "^16.8.8",
