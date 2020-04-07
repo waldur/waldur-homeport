@@ -1,4 +1,4 @@
-import sidebar from './sidebar';
+import sidebar from './Sidebar';
 import SidebarExtensionService from './sidebar-extension-service';
 
 export default module => {

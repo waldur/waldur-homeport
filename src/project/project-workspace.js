@@ -52,18 +52,24 @@ export default function ProjectWorkspaceController(
     }
   }
 
-  function setItems(customItems) {
+  function setItems(project, customItems) {
     $scope.items = [
       {
         key: 'dashboard',
         icon: 'fa-th-large',
         label: gettext('Dashboard'),
-        link: 'project.details({uuid: $ctrl.context.project.uuid})',
+        state: 'project.details',
+        params: {
+          uuid: project.uuid,
+        },
         index: 100,
       },
       {
         key: 'eventlog',
-        link: 'project.events({uuid: $ctrl.context.project.uuid})',
+        state: 'project.events',
+        params: {
+          uuid: project.uuid,
+        },
         icon: 'fa-bell-o',
         label: gettext('Audit logs'),
         feature: 'eventlog',
@@ -71,7 +77,10 @@ export default function ProjectWorkspaceController(
       },
       {
         key: 'support',
-        link: 'project.issues({uuid: $ctrl.context.project.uuid})',
+        state: 'project.issues',
+        params: {
+          uuid: project.uuid,
+        },
         icon: 'fa-question-circle',
         label: gettext('Issues'),
         feature: 'support',
@@ -80,7 +89,10 @@ export default function ProjectWorkspaceController(
       {
         label: gettext('Team'),
         icon: 'fa-group',
-        link: 'project.team({uuid: $ctrl.context.project.uuid})',
+        state: 'project.team',
+        params: {
+          uuid: project.uuid,
+        },
         feature: 'team',
         key: 'team',
         countFieldKey: 'users',
@@ -92,7 +104,6 @@ export default function ProjectWorkspaceController(
       customItems,
     );
     addBackToOrganizationItemIfAllowed($scope.items);
-    $scope.items = filterItemsByProjectType($scope.items);
   }
 
   function addBackToOrganizationItemIfAllowed(items) {
@@ -105,43 +116,14 @@ export default function ProjectWorkspaceController(
     });
   }
 
-  function filterItemsByProjectType(items) {
-    const fn = getFilterFunction();
-    if (!fn) {
-      return items;
-    }
-    return fn(items).map(parent => {
-      if (parent.children) {
-        return { ...parent, children: fn(parent.children) };
-      } else {
-        return parent;
-      }
-    });
-  }
-
-  function getFilterFunction() {
-    const conf = ENV.sidebarItemsByProjectType;
-    const sidebarItems = conf && conf[$scope.currentProject.type_name];
-    if (!sidebarItems) {
-      return;
-    }
-    const itemsMap = sidebarItems.reduce(
-      (map, item) => ({ ...map, [item]: true }),
-      {},
-    );
-    const filterItems = items => items.filter(item => itemsMap[item.key]);
-    return filterItems;
-  }
-
   function refreshProject() {
     currentStateService.getProject().then(function(project) {
       if (!project) {
         return;
       }
       $scope.currentProject = project;
-      $scope.context = { project: project };
       SidebarExtensionService.getItems('project').then(customItems => {
-        setItems(customItems);
+        setItems(project, customItems);
         tabCounterService.connect({
           $scope: $scope,
           tabs: $scope.items,
@@ -174,7 +156,8 @@ export default function ProjectWorkspaceController(
     return {
       label: gettext('Back to organization'),
       icon: 'fa-arrow-left',
-      action: () => $state.go('organization.dashboard', { uuid: customerUuid }),
+      state: 'organization.dashboard',
+      params: { uuid: customerUuid },
     };
   }
 }

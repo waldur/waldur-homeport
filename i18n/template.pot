@@ -761,7 +761,6 @@ msgstr ""
 
 #: src/resource/breadcrumbs/resource-categories.js
 #: src/slurm/routes.js
-#: src/slurm/sidebar.js
 msgid "Batch processing"
 msgstr ""
 
@@ -5970,7 +5969,6 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
-#: src/jira/sidebar.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Service desk"
 msgstr ""

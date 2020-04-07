@@ -15,18 +15,24 @@ export function CustomerWorkspaceController(
 ) {
   $scope.titleService = titleService;
 
-  function setItems(customItems) {
+  function setItems(customer, customItems) {
     $scope.items = [
       {
         label: gettext('Dashboard'),
         icon: 'fa-th-large',
-        link: 'organization.dashboard({uuid: $ctrl.context.customer.uuid})',
+        state: 'organization.dashboard',
+        params: {
+          uuid: customer.uuid,
+        },
         index: 100,
       },
       {
         label: gettext('Projects'),
         icon: 'fa-bookmark',
-        link: 'organization.projects({uuid: $ctrl.context.customer.uuid})',
+        state: 'organization.projects',
+        params: {
+          uuid: customer.uuid,
+        },
         feature: 'projects',
         countFieldKey: 'projects',
         index: 300,
@@ -34,21 +40,30 @@ export function CustomerWorkspaceController(
       {
         label: gettext('Audit logs'),
         icon: 'fa-bell-o',
-        link: 'organization.details({uuid: $ctrl.context.customer.uuid})',
+        state: 'organization.details',
+        params: {
+          uuid: customer.uuid,
+        },
         feature: 'eventlog',
         index: 600,
       },
       {
         label: gettext('Issues'),
         icon: 'fa-question-circle',
-        link: 'organization.issues({uuid: $ctrl.context.customer.uuid})',
+        state: 'organization.issues',
+        params: {
+          uuid: customer.uuid,
+        },
         feature: 'support',
         index: 700,
       },
       {
         label: gettext('Team'),
         icon: 'fa-group',
-        link: 'organization.team({uuid: $ctrl.context.customer.uuid})',
+        state: 'organization.team',
+        params: {
+          uuid: customer.uuid,
+        },
         feature: 'team',
         key: 'team',
         countFieldKey: 'users',
@@ -57,14 +72,20 @@ export function CustomerWorkspaceController(
       {
         label: BillingUtils.getTabTitle(),
         icon: 'fa-file-text-o',
-        link: 'organization.billing.tabs({uuid: $ctrl.context.customer.uuid})',
+        state: 'organization.billing.tabs',
+        params: {
+          uuid: customer.uuid,
+        },
         feature: 'billing',
         index: 1000,
       },
       {
         label: gettext('Manage'),
         icon: 'fa-wrench',
-        link: 'organization.manage({uuid: $ctrl.context.customer.uuid})',
+        state: 'organization.manage',
+        params: {
+          uuid: customer.uuid,
+        },
         index: 9999,
       },
     ];
@@ -113,9 +134,8 @@ export function CustomerWorkspaceController(
       !angular.equals($scope.currentCustomer, options.customer)
     ) {
       $scope.currentCustomer = options.customer;
-      $scope.context = { customer: options.customer };
       SidebarExtensionService.getItems('customer').then(customItems => {
-        setItems(customItems);
+        setItems(options.customer, customItems);
         tabCounterService.connect({
           $scope: $scope,
           tabs: $scope.items,
