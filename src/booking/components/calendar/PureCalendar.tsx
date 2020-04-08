@@ -44,8 +44,6 @@ class PureCalendarComponent extends React.Component<WaldurCalendarProps> {
   calendarComponentRef = React.createRef<FullCalendar>();
 
   handleSelect = arg => {
-    console.log(arg);
-
     const { allDay, startStr, start, endStr, end } = arg;
     const event = {
       start: allDay ? startStr : start,
