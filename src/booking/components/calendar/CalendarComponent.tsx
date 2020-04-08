@@ -13,16 +13,14 @@ import {
   mapBookingEvents,
   handleTime,
   handleTitle,
+  handleEventUpdate,
+  handleSelect,
+  keysOf,
+  filterObject,
 } from '@waldur/booking/utils';
 
 import BookingModal from '../modal/BookingModal';
 
-import {
-  handleSelect,
-  filterObject,
-  keysOf,
-  handleEventUpdate,
-} from './calendarHelpers';
 import { defaultOptions } from './defaultOptions';
 
 export const getCalendarState = state => state.bookings;
@@ -102,7 +100,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       select: arg => {
         const event = handleSelect(
           arg,
-          props.calendarType === 'create' ? 'Availability' : 'Schedule',
+          props.calendarType === 'create' && 'Availability',
         );
         props.addEventCb(event);
       },
@@ -125,10 +123,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       ...calendarState.config,
       select: arg =>
         addEvent(
-          handleSelect(
-            arg,
-            props.calendarType === 'create' ? 'Availability' : 'Schedule',
-          ),
+          handleSelect(arg, props.calendarType === 'create' && 'Availability'),
         ),
       eventMouseEnter: mouseEnter,
       eventMouseLeave: mouseLeave,
@@ -171,8 +166,8 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     calendarState.config,
     calendarState.schedules,
     calendarRef,
-    modal,
     focused,
+    modal,
   ]);
 
   return (
@@ -184,12 +179,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
           toggle={toggleModal}
           event={modal.event}
           onDelete={() => dispatch(removeBooking(modal.event.id))}
-          onSuccess={cb =>
-            updateEvent({
-              oldEvent: modal.event,
-              event: { ...modal.event, ...cb },
-            })
-          }
+          onSuccess={cb => dispatch(updateBooking(cb))}
         />
       ) : null}
     </div>

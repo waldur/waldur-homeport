@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/lib/Button';
 import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import * as Modal from 'react-bootstrap/lib/Modal';
 
-import { BookingModalProps } from '@waldur/booking/types';
+import { BookingModalProps, BookingProps } from '@waldur/booking/types';
 import { translate } from '@waldur/i18n';
 
 import { DateAndTimeSelectField } from './DateAndTimeSelect';
@@ -28,9 +28,14 @@ const BookingModal = ({
     toggle();
   };
   const handleSubmit = () => {
+    const { id, extendedProps } = event;
     const payload = {
-      ...event,
-      ...newEvent,
+      oldID: id as BookingProps['id'],
+      event: {
+        id,
+        extendedProps,
+        ...newEvent,
+      },
     };
     onSuccess(payload);
     toggle();

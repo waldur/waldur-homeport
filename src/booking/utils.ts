@@ -1,4 +1,4 @@
-import { EventInput } from '@fullcalendar/core';
+import { EventInput, EventApi } from '@fullcalendar/core';
 import * as moment from 'moment';
 
 import { randomId } from '@waldur/core/fixtures';
@@ -70,11 +70,11 @@ export const mapBookingEvents: EventMap = (events, showAvailability) =>
     if (event.extendedProps.type === 'Availability') {
       event.rendering = showAvailability;
       event.overlap = true;
-      event.classNames = 'fc-event-Availability';
+      event.classNames = 'booking booking-Availability';
     } else if (event.extendedProps.type === 'Schedule') {
       event.overlap = false;
       event.constraint = ['availability', 'Availability', 'businessHours'];
-      event.classNames = 'fc-event-Schedule';
+      event.classNames = 'booking booking-Schedule';
     }
     return event;
   });
@@ -92,3 +92,44 @@ export const handleTime = ({ event, el }) => {
       '<i class="fa fa-clock-o"> All-day </i>' + content.innerHTML);
   }
 };
+
+export const handleSelect = (arg, type = 'Schedule'): BookingProps => {
+  const { allDay, startStr, start, endStr, end } = arg;
+  const event = {
+    start: allDay ? startStr : start,
+    end: allDay ? endStr : end,
+    allDay,
+    id: `${randomId()}-${arg.jsEvent.timeStamp}`,
+    title: '',
+    extendedProps: { type },
+  };
+  return event;
+};
+
+interface Updater {
+  event: BookingProps | EventInput | EventApi | any;
+  oldEvent?: BookingProps | EventApi;
+  prevEvent?: EventApi;
+}
+
+export const handleEventUpdate = ({ event, oldEvent, prevEvent }: Updater) => {
+  const oldID: BookingProps['id'] =
+    (prevEvent && prevEvent.id) || (oldEvent && oldEvent.id);
+  return { oldID, event };
+};
+
+export function keysOf<T>(o: T) {
+  return Object.keys(o) as (keyof T)[];
+}
+
+export function filterObject<T>(
+  option: T,
+  predicate: (propName: keyof T) => boolean,
+) {
+  return keysOf(option).reduce((acc, propName) => {
+    if (predicate(propName)) {
+      acc[propName] = option[propName];
+    }
+    return acc;
+  }, {} as Partial<T>);
+}

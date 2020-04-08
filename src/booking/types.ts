@@ -79,6 +79,9 @@ export interface BookingModalProps {
   isOpen: boolean;
   toggle: () => void;
   event: BookingProps | null | undefined;
-  onSuccess: (event: BookingProps | EventInput) => any;
+  onSuccess: (payload: {
+    oldID: BookingProps['id'];
+    event: BookingProps;
+  }) => any;
   onDelete: () => void;
 }
