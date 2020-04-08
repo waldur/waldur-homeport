@@ -1,7 +1,7 @@
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { OptionsInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction'; // needed for dayClick
+import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import momentPlugin from '@fullcalendar/moment';
 import momentTimezonePlugin from '@fullcalendar/moment-timezone';
