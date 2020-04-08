@@ -12,17 +12,6 @@ msgstr ""
 msgid "(VAT is not included)"
 msgstr ""
 
-#: src/error/invalid-object-page.html
-#: src/error/invalid-route-page.html
-msgid "404"
-msgstr ""
-
-#: src/error/invalid-object-page.html
-#: src/error/invalid-quota-page.html
-#: src/error/invalid-route-page.html
-msgid "< Back"
-msgstr ""
-
 #: src/marketplace-checklist/AnswerGroup.tsx
 msgid "?"
 msgstr ""
@@ -672,6 +661,9 @@ msgstr ""
 msgid "Azure provider"
 msgstr ""
 
+#: src/error/InvalidObjectPage.tsx
+#: src/error/InvalidQuotaPage.tsx
+#: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/navigation/header/site-header.html
 msgid "Back"
@@ -4256,11 +4248,11 @@ msgstr ""
 msgid "Page is not found."
 msgstr ""
 
-#: src/error/invalid-object-page.html
+#: src/error/InvalidObjectPage.tsx
 msgid "Page is not found. You've either entered invalid URL or don't have enough permissions to view this page."
 msgstr ""
 
-#: src/error/invalid-route-page.html
+#: src/error/InvalidRoutePage.tsx
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr ""
 
@@ -8093,7 +8085,7 @@ msgstr ""
 msgid "You don't have permission to send this invitation."
 msgstr ""
 
-#: src/error/invalid-quota-page.html
+#: src/error/InvalidQuotaPage.tsx
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 

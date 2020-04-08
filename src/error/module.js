@@ -1,11 +1,22 @@
+import { connectAngularComponent } from '@waldur/store/connect';
+
+import { InvalidObjectPage } from './InvalidObjectPage';
+import { InvalidQuotaPage } from './InvalidQuotaPage';
+import { InvalidRoutePage } from './InvalidRoutePage';
 import errorRoutes from './routes';
-import invalidObjectPage from './invalid-object-page';
-import invalidQuotaPage from './invalid-quota-page';
-import invalidRoutePage from './invalid-route-page';
 
 export default module => {
   module.config(errorRoutes);
-  module.component('invalidObjectPage', invalidObjectPage);
-  module.component('invalidQuotaPage', invalidQuotaPage);
-  module.component('invalidRoutePage', invalidRoutePage);
+  module.component(
+    'invalidObjectPage',
+    connectAngularComponent(InvalidObjectPage),
+  );
+  module.component(
+    'invalidQuotaPage',
+    connectAngularComponent(InvalidQuotaPage),
+  );
+  module.component(
+    'invalidRoutePage',
+    connectAngularComponent(InvalidRoutePage),
+  );
 };
