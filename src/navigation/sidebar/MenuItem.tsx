@@ -20,7 +20,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   <a onClick={() => onClick(item)}>
     <i className={classNames('fa', item.icon, 'fixed-width-icon')}></i>
     <span className="nav-label">{translate(item.label)}</span>
-    {counter && <Label className="pull-right">{counter}</Label>}
+    {counter ? <Label className="pull-right">{counter}</Label> : null}
     {item.children && <span className="fa arrow"></span>}
   </a>
 );
