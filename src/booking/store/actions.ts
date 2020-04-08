@@ -47,20 +47,20 @@ export const addBooking = (payload: BookingProps) => ({
   },
 });
 
-export const removeBooking = (bookingId: number | string) => ({
+export const removeBooking = (bookingID: number | string) => ({
   type: constants.REMOVE_BOOKING,
   payload: {
-    bookingId,
+    bookingID,
   },
 });
 
 export const updateBooking = (payload: {
-  oldId: string;
+  oldID: BookingProps['id'];
   event: BookingProps;
 }) => ({
   type: constants.UPDATE_BOOKING,
   payload: {
-    oldId: payload.oldId,
+    oldID: payload.oldID,
     event: {
       id: payload.event.id,
       start: payload.event.start,

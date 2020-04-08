@@ -7,7 +7,6 @@ import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEve
 import {
   eventsMapper,
   createCalendarBookingEvent,
-  availabilityCellRender,
   deleteCalendarBookingEvent,
 } from '@waldur/booking/utils';
 import { Event } from '@waldur/events/types';
@@ -62,9 +61,6 @@ export class CalendarComponent extends React.Component<CalendarComponentProps> {
         eventResizableFromStart={false}
         events={events}
         eventLimit={false}
-        dayRender={({ date, el }) =>
-          availabilityCellRender(events, { date, el })
-        }
         validRange={this.getValidRange(events)}
         viewSkeletonRender={({ view }) => {
           if (view.type !== this.state.view.type) {

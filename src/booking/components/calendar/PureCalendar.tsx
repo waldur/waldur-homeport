@@ -1,5 +1,5 @@
 import bootstrapPlugin from '@fullcalendar/bootstrap';
-import { EventApi, EventInput } from '@fullcalendar/core';
+import { EventApi, View } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
@@ -18,131 +18,114 @@ import {
   removeBooking,
 } from '@waldur/booking/store/actions';
 import { BookingProps, WaldurCalendarProps } from '@waldur/booking/types';
+import {
+  mapBookingEvents,
+  handleTitle,
+  handleTime,
+} from '@waldur/booking/utils';
 import { randomId } from '@waldur/core/fixtures';
 import { withModal } from '@waldur/modal/withModal';
 
-import { eventContentUi } from '../EventContentUi';
 import { CalendarEventModal } from '../modal/CalendarEventModal';
 
 import { defaultConfig } from './defaultConfig';
 
-class PureCalendarComponent extends React.Component<
-  WaldurCalendarProps,
-  FullCalendar
-> {
+type Updater = {
+  event: EventApi | BookingProps;
+  oldEvent?: EventApi | BookingProps;
+  prevEvent?: EventApi;
+};
+type Remover = {
+  el: HTMLElement;
+  event: EventApi | BookingProps;
+};
+
+class PureCalendarComponent extends React.Component<WaldurCalendarProps> {
   calendarComponentRef = React.createRef<FullCalendar>();
 
   handleSelect = arg => {
+    console.log(arg);
+
     const { allDay, startStr, start, endStr, end } = arg;
     const event = {
       start: allDay ? startStr : start,
       end: allDay ? endStr : end,
-      id: this.props.calendarType === 'create' ? 'Availability' : 'Schedule',
       allDay,
+      id: `${randomId()}-${arg.jsEvent.timeStamp}`,
+      title: '',
       extendedProps: {
-        uniqueID: `${randomId()}-${arg.jsEvent.timeStamp}`,
+        type:
+          this.props.calendarType === 'create' ? 'Availability' : 'Schedule',
       },
     } as BookingProps;
     this.props.addBooking(event);
   };
 
-  handleEventClick = (arg: { event: EventApi; el: HTMLElement }) => {
+  handleEventClick = arg => {
     this.props.setModalProps({
       event: arg.event,
-      destroy: () => this.handleEventRemoved(arg),
+      destroy: () => {
+        this.handleEventRemoved(arg);
+        arg.event.remove();
+      },
     });
-    this.props.openModal((onSuccess: BookingProps) =>
-      this.handleEventUpdate({ oldEvent: arg.event, event: onSuccess }),
-    );
+    this.props.openModal((cb: BookingProps) => {
+      const { extendedProps, id } = arg.event;
+      this.props.updateBooking({
+        oldID: id,
+        event: { id, extendedProps, ...cb },
+      });
+    });
   };
 
-  handleEventUpdate = ({
-    event,
-    oldEvent,
-    prevEvent,
-  }: {
-    event: EventApi | BookingProps;
-    prevEvent?: EventApi;
-    oldEvent?: EventApi | BookingProps;
-  }) => {
-    const oldId = (prevEvent || oldEvent).extendedProps.uniqueID;
-    this.props.updateBooking({ oldId, event });
+  handleEventUpdate = ({ event, oldEvent, prevEvent }: Updater) => {
+    const oldID = (prevEvent && prevEvent.id) || (oldEvent && oldEvent.id);
+    this.props.updateBooking({ oldID, event });
   };
 
-  handleEventRemoved = ({
-    event,
-    el,
-  }: {
-    event: EventApi;
-    el: HTMLElement;
-  }) => {
-    const oldId = event.extendedProps.uniqueID;
+  handleEventRemoved = ({ event, el }: Remover) => {
+    this.props.removeBooking(event.id);
     ReactDOM.unmountComponentAtNode(el);
-    this.props.removeBooking(oldId);
   };
 
   handleEventRender = (arg: {
     el: HTMLElement;
-    event: EventApi | BookingProps;
+    event: EventApi;
+    view: View;
   }) => {
-    if (arg.el.className.includes('fc-event')) {
-      arg.el.setAttribute(
-        'class',
-        arg.el.className + ' booking booking-' + arg.event.id,
-      );
-      ReactDOM.render(eventContentUi(arg), arg.el);
+    if (arg.el && arg.el.classList.contains('fc-event')) {
+      if (arg.view.type === 'dayGridMonth') {
+        handleTime(arg);
+        handleTitle(arg);
+      }
       return arg.el;
     }
   };
 
-  createEventSources = ({ schedules, bookings }) => [
+  createEventSources = () => [
     {
-      events: this.props.calendarType === 'create' ? schedules : bookings,
+      events: mapBookingEvents(this.props.calendarState.bookings, 'background'),
       editable: false,
       selectable: false,
-      eventDataTransform: (event: EventInput) => {
-        if (event.id === 'Availability') {
-          event.rendering = 'background';
-          event.overlap = true;
-        } else if (event.id === 'Schedule') {
-          event.overlap = false;
-          event.constraint = 'Availability';
-          event.className = 'booking';
-        }
-        return event;
-      },
     },
     {
-      events: schedules,
+      events: mapBookingEvents(this.props.calendarState.schedules),
       selectable: true,
       editable: true,
-      eventDataTransform: (event: EventInput) => {
-        if (event.id === 'Availability') {
-          event.rendering = undefined;
-        } else if (event.id === 'Schedule') {
-          event.overlap = false;
-          event.constraint = 'Availability';
-        } else {
-          return null;
-        }
-        return event;
-      },
     },
   ];
 
   componentWillUnmount() {
+    this.props.getAllEvents;
     const getApi = this.calendarComponentRef.current.getApi();
     getApi.removeAllEventSources();
     getApi.destroy();
   }
 
   render() {
-    const { config, schedules, bookings } = this.props.calendarState;
     return (
       <FullCalendar
         ref={this.calendarComponentRef}
-        {...defaultConfig}
-        {...config}
         plugins={[
           dayGridPlugin,
           timeGridPlugin,
@@ -152,35 +135,45 @@ class PureCalendarComponent extends React.Component<
           momentPlugin,
           listPlugin,
         ]}
-        selectable={true}
-        eventLimit={false}
+        {...defaultConfig}
+        {...this.props.calendarState.config}
         height="auto"
-        eventOverlap={false}
-        eventStartEditable={true}
+        progressiveEventRendering={true}
+        eventSources={this.createEventSources()}
         eventRender={this.handleEventRender}
-        eventMouseEnter={arg =>
-          arg.el.setAttribute('class', arg.el.className + ' booking-isHovered ')
-        }
-        eventMouseLeave={arg => arg.event.setProp('classNames', '')}
-        eventSources={this.createEventSources({ schedules, bookings })}
         select={this.handleSelect}
         eventDrop={this.handleEventUpdate}
         eventResize={this.handleEventUpdate}
         eventClick={this.handleEventClick}
+        eventMouseEnter={({ event }) => {
+          if (!event.classNames.includes('isHovered')) {
+            event.setProp(
+              'classNames',
+              ` fc-event-${event.extendedProps.type} isHovered `,
+            );
+          }
+        }}
+        eventMouseLeave={({ event }) => {
+          if (event.classNames.includes('isHovered')) {
+            event.setProp(
+              'classNames',
+              ` fc-event-${event.extendedProps.type} `,
+            );
+          }
+        }}
       />
     );
   }
 }
 
-const mapStateToProps = (state: { bookings: any }) => ({
+const mapStateToProps = state => ({
   calendarState: state.bookings,
 });
 
 const mapDispatchToProps = dispatch => ({
-  addBooking: (payload: BookingProps) => dispatch(addBooking(payload)),
-  updateBooking: ({ oldId, event }) =>
-    dispatch(updateBooking({ oldId, event })),
-  removeBooking: (payload: string | number) => dispatch(removeBooking(payload)),
+  addBooking: payload => dispatch(addBooking(payload)),
+  updateBooking: payload => dispatch(updateBooking(payload)),
+  removeBooking: payload => dispatch(removeBooking(payload)),
 });
 
 const enhance = compose(

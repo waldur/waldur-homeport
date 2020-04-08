@@ -1,7 +1,9 @@
-import { EventInput } from '@fullcalendar/core';
+import { EventInput, EventApi } from '@fullcalendar/core';
 import * as moment from 'moment';
 
 import { randomId } from '@waldur/core/fixtures';
+
+import { BookingProps } from './types';
 
 export const createCalendarBookingEvent = ({
   type,
@@ -31,7 +33,7 @@ export const deleteCalendarBookingEvent = (events, booking) => {
 
 export const eventsMapper = events =>
   events.map(event => {
-    if (event.type === 'availability') {
+    if (event.type === 'Availability') {
       event.rendering = 'inverse-background';
       event.groupId = 'availableForBooking';
       event.backgroundColor = 'pink';
@@ -41,28 +43,6 @@ export const eventsMapper = events =>
     }
     return event;
   });
-
-interface DayRender {
-  date: Date;
-  el: HTMLElement;
-  allDay?: boolean;
-}
-
-export const availabilityCellRender = (
-  events: EventInput[],
-  dayRender: DayRender,
-) => {
-  events.map(event => {
-    const currentDate = Date.parse(dayRender.date.toString());
-    const isStart = Date.parse(event.start as string) === currentDate;
-    const isBetween =
-      Date.parse(event.start as string) < currentDate &&
-      currentDate < Date.parse(event.end as string);
-    if (event.type === 'availability' && (isStart || isBetween)) {
-      dayRender.el.style.backgroundColor = 'rgba(0,250,0,.2)';
-    }
-  });
-};
 
 export const timelineLabels = (interval: number) => {
   const periodsInADay = moment.duration(1, 'day').as('minutes');
@@ -79,3 +59,77 @@ export const timelineLabels = (interval: number) => {
   }
   return timeLabels;
 };
+
+type EventMap = (
+  events: BookingProps[],
+  showAvailability?: undefined | 'background' | 'none',
+) => EventInput[];
+
+export const mapBookingEvents: EventMap = (events, showAvailability) =>
+  events.map(event => {
+    if (event.extendedProps.type === 'Availability') {
+      event.rendering = showAvailability;
+      event.overlap = true;
+      event.classNames = 'booking booking-Availability';
+    } else if (event.extendedProps.type === 'Schedule') {
+      event.overlap = false;
+      event.constraint = ['availability', 'Availability', 'businessHours'];
+      event.classNames = 'booking booking-Schedule';
+    }
+    return event;
+  });
+
+export const handleTitle = ({ event, el }) => {
+  if (!event.title || event.title === '') {
+    return el.querySelector('.fc-title').prepend(event.extendedProps.type);
+  }
+};
+
+export const handleTime = ({ event, el }) => {
+  if (event.allDay) {
+    const content = el.querySelector('.fc-content');
+    return (content.innerHTML =
+      '<i class="fa fa-clock-o"> All-day </i>' + content.innerHTML);
+  }
+};
+
+export const handleSelect = (arg, type = 'Schedule'): BookingProps => {
+  const { allDay, startStr, start, endStr, end } = arg;
+  const event = {
+    start: allDay ? startStr : start,
+    end: allDay ? endStr : end,
+    allDay,
+    id: `${randomId()}-${arg.jsEvent.timeStamp}`,
+    title: '',
+    extendedProps: { type },
+  };
+  return event;
+};
+
+interface Updater {
+  event: BookingProps | EventInput | EventApi | any;
+  oldEvent?: BookingProps | EventApi;
+  prevEvent?: EventApi;
+}
+
+export const handleEventUpdate = ({ event, oldEvent, prevEvent }: Updater) => {
+  const oldID: BookingProps['id'] =
+    (prevEvent && prevEvent.id) || (oldEvent && oldEvent.id);
+  return { oldID, event };
+};
+
+export function keysOf<T>(o: T) {
+  return Object.keys(o) as (keyof T)[];
+}
+
+export function filterObject<T>(
+  option: T,
+  predicate: (propName: keyof T) => boolean,
+) {
+  return keysOf(option).reduce((acc, propName) => {
+    if (predicate(propName)) {
+      acc[propName] = option[propName];
+    }
+    return acc;
+  }, {} as Partial<T>);
+}
