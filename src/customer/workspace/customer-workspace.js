@@ -1,7 +1,4 @@
-import { connectSidebarCounters } from '@waldur/navigation/sidebar/utils';
-
 import template from './customer-workspace.html';
-import { getDefaultItems } from './utils';
 
 // @ngInject
 export function CustomerWorkspaceController(
@@ -13,7 +10,6 @@ export function CustomerWorkspaceController(
   BillingUtils,
   BreadcrumbsService,
   titleService,
-  SidebarExtensionService,
 ) {
   $scope.titleService = titleService;
 
@@ -33,46 +29,10 @@ export function CustomerWorkspaceController(
     ];
   }
 
-  function getCounters(fields, customer) {
-    const query = angular.extend(
-      { UUID: customer.uuid, fields },
-      eventsService.defaultFilter,
-    );
-    return customersService.getCounters(query);
-  }
-
-  function getCountersError(error) {
-    if (error.status === 404) {
-      $state.go('errorPage.notFound');
-    }
-  }
-
   function refreshWorkspace() {
     const options = WorkspaceService.getWorkspace();
-    if (
-      options &&
-      options.customer &&
-      !angular.equals($scope.currentCustomer, options.customer)
-    ) {
-      $scope.currentCustomer = options.customer;
-      SidebarExtensionService.getItems('customer').then(customItems => {
-        const defaultItems = getDefaultItems(options.customer);
-        $scope.items = SidebarExtensionService.mergeItems(
-          defaultItems,
-          customItems,
-        );
-        const fields = SidebarExtensionService.getCounters($scope.items);
-        connectSidebarCounters({
-          $scope,
-          getCounters: () => getCounters(fields, options.customer),
-          getCountersError,
-          getCountersSuccess: counters => {
-            $scope.counters = counters;
-          },
-        });
-      });
-      refreshBreadcrumbs();
-    }
+    $scope.currentCustomer = options.customer;
+    refreshBreadcrumbs();
   }
 
   function activate() {

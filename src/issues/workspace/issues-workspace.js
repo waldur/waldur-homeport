@@ -1,5 +1,6 @@
-import template from './issues-workspace.html';
 import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
+
+import template from './issues-workspace.html';
 
 export default {
   template: template,
@@ -18,9 +19,6 @@ export default {
         workspace: WOKSPACE_NAMES.support,
       });
 
-      this.IssueNavigationService.getSidebarItems().then(
-        items => (this.items = items),
-      );
       this.unlisten = this.$rootScope.$on(
         '$stateChangeSuccess',
         this.syncNavigation.bind(this),

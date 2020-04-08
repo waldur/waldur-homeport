@@ -1,3 +1,5 @@
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import filtersModule from './filters';
 import hooksModule from './hooks/module';
 import keysModule from './keys/module';
@@ -16,10 +18,12 @@ import { userPopover } from './user-popover';
 import userDropdownMenu from './UserDropdownMenu';
 import userManage from './UserManage';
 import usersService from './users-service';
+import { UserSidebar } from './UserSidebar';
 import { stateUtilsService, attachStateUtils } from './utils';
 import './events';
 
 export default module => {
+  module.component('userSidebar', connectAngularComponent(UserSidebar));
   module.component('userEvents', userEvents);
   module.component('userManage', userManage);
   module.component('userDropdownMenu', userDropdownMenu);

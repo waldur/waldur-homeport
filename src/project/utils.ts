@@ -1,6 +1,18 @@
-import { translate } from '@waldur/i18n';
+import { createSelector } from 'reselect';
 
-export const getDefaultItems = project => [
+import { get } from '@waldur/core/api';
+import { ngInjector } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
+import { MenuItemType } from '@waldur/navigation/sidebar/types';
+import {
+  getUser,
+  getCustomer,
+  isOwnerOrStaff,
+  getProject,
+} from '@waldur/workspace/selectors';
+import { Project, OuterState, Customer, User } from '@waldur/workspace/types';
+
+const getDefaultItems = project => [
   {
     key: 'dashboard',
     icon: 'fa-th-large',
@@ -47,9 +59,45 @@ export const getDefaultItems = project => [
   },
 ];
 
-export const getBackToOrganization = customerUuid => ({
-  label: translate('Back to organization'),
-  icon: 'fa-arrow-left',
-  state: 'organization.dashboard',
-  params: { uuid: customerUuid },
-});
+export const getSidebarItems = createSelector<
+  OuterState,
+  User,
+  Customer,
+  Project,
+  boolean,
+  MenuItemType[]
+>(
+  getUser,
+  getCustomer,
+  getProject,
+  isOwnerOrStaff,
+  (user, customer, project, ownerOrStaff) => {
+    if (!project || !customer || !user) {
+      return [];
+    }
+    if (ownerOrStaff || user.is_support) {
+      return [
+        {
+          key: 'back',
+          label: translate('Back to organization'),
+          icon: 'fa-arrow-left',
+          state: 'organization.dashboard',
+          params: { uuid: customer.uuid },
+        },
+        ...getDefaultItems(project),
+      ];
+    } else {
+      return getDefaultItems(project);
+    }
+  },
+);
+
+export const getProjectCounters = (project: Project, fields: string[]) =>
+  get(`/projects/${project.uuid}/counters/`, { params: { fields } }).then(
+    response => response.data,
+  );
+
+export const getExtraSidebarItems = () => {
+  const SidebarExtensionService = ngInjector.get('SidebarExtensionService');
+  return SidebarExtensionService.getItems('project');
+};

@@ -1,52 +1,62 @@
-export const PRIVATE_USER_TABS = [
+import { translate } from '@waldur/i18n';
+
+export const getPrivateUserTabs = () => [
   {
-    label: gettext('Dashboard'),
+    label: translate('Dashboard'),
     icon: 'fa-th-large',
     state: 'profile.details',
+    key: 'details',
   },
   {
-    label: gettext('Audit logs'),
+    label: translate('Audit logs'),
     icon: 'fa-bell-o',
     state: 'profile.events',
+    key: 'events',
   },
   {
-    label: gettext('SSH Keys'),
+    label: translate('SSH Keys'),
     icon: 'fa-key',
     state: 'profile.keys',
+    key: 'keys',
     feature: 'user.ssh-keys',
   },
   {
-    label: gettext('Notifications'),
+    label: translate('Notifications'),
     icon: 'fa-envelope',
     state: 'profile.notifications',
+    key: 'notifications',
     feature: 'notifications',
   },
   {
-    label: gettext('Manage'),
+    label: translate('Manage'),
     icon: 'fa-wrench',
     state: 'profile.manage',
+    key: 'manage',
   },
   {
-    label: gettext('FreeIPA account'),
+    label: translate('FreeIPA account'),
     icon: 'fa-user',
     state: 'profile.freeipa',
+    key: 'freeipa',
     feature: 'freeipa',
   },
 ];
 
 export const getPublicUserTabs = user => [
   {
-    label: gettext('Audit logs'),
+    label: translate('Audit logs'),
     icon: 'fa-bell-o',
     state: 'users.details',
+    key: 'details',
     params: {
       uuid: user.uuid,
     },
   },
   {
-    label: gettext('SSH Keys'),
+    label: translate('SSH Keys'),
     icon: 'fa-key',
     state: 'users.keys',
+    key: 'keys',
     params: {
       uuid: user.uuid,
     },

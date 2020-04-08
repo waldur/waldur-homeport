@@ -44,3 +44,8 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
     />
   );
 };
+
+SidebarMenu.defaultProps = {
+  items: [],
+  counters: {},
+};

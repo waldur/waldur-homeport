@@ -594,7 +594,7 @@ msgstr ""
 #: src/customer/workspace/utils.ts
 #: src/project/routes.js
 #: src/project/utils.ts
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/list/UserDashboard.tsx
 #: src/user/routes.js
 msgid "Audit logs"
@@ -676,7 +676,7 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 #: src/project/utils.ts
-#: src/user/user-details.js
+#: src/user/UserSidebar.tsx
 msgid "Back to organization"
 msgstr ""
 
@@ -685,7 +685,7 @@ msgid "Back to personal dashboard"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/user/user-details.js
+#: src/user/UserSidebar.tsx
 msgid "Back to project"
 msgstr ""
 
@@ -1493,7 +1493,7 @@ msgstr ""
 #: src/issues/workspace/issue-navigation-service.js
 #: src/project/routes.js
 #: src/project/utils.ts
-#: src/user/constants.js
+#: src/user/constants.ts
 msgid "Dashboard"
 msgstr ""
 
@@ -2294,7 +2294,7 @@ msgstr ""
 msgid "Free"
 msgstr ""
 
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/routes.js
 msgid "FreeIPA account"
 msgstr ""
@@ -3110,7 +3110,7 @@ msgid "MOAB allocation"
 msgstr ""
 
 #: src/customer/workspace/utils.ts
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/routes.js
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
@@ -3834,7 +3834,7 @@ msgstr ""
 msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.js
 msgid "Notifications"
@@ -5620,7 +5620,7 @@ msgstr ""
 msgid "SQL server name"
 msgstr ""
 
-#: src/user/constants.js
+#: src/user/constants.ts
 msgid "SSH Keys"
 msgstr ""
 
