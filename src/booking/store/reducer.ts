@@ -54,7 +54,6 @@ export const reducer = (state = INITIAL_STATE, action) => {
       const removedList = state.schedules.filter(
         item => item.id !== payload.bookingID,
       );
-      console.log(removedList);
       return {
         ...state,
         schedules: [...removedList],
