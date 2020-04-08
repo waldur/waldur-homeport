@@ -39,13 +39,13 @@ const BookingModal = ({
     setNewEvent({ ...newEvent, [name]: value });
 
   return (
-    <Modal show={isOpen} onHide={toggle} style={{ marginTop: 150 }}>
+    <Modal show={isOpen} onHide={toggle}>
       <Modal.Header>
-        <Modal.Title className="col-sm-push-2 col-sm-9">
+        <h2 className="col-sm-push-2 col-sm-9">
           {event.extendedProps.type === ('availability' || 'Availability')
             ? translate('Edit an availability')
             : translate('Edit booking event')}
-        </Modal.Title>
+        </h2>
         <button
           type="button"
           className="close"
@@ -111,7 +111,15 @@ const BookingModal = ({
             currentTime={moment(newEvent.end, 'DD/MM/YYYY HH:mm', true)}
             onChange={newDateValue => handleChange('end', newDateValue)}
           />
-          <ButtonGroup>
+
+          <ButtonGroup
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              justifyItems: 'center',
+              marginTop: 30,
+            }}
+          >
             <Button bsStyle="danger btn-outline" onClick={handleDelete}>
               {translate('Delete')}
             </Button>
