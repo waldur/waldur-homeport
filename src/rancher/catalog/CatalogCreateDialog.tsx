@@ -28,6 +28,10 @@ interface OwnProps {
   };
 }
 
+interface Catalog {
+  uuid: string;
+}
+
 const useCatalogCreateDialog = cluster => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
@@ -35,7 +39,7 @@ const useCatalogCreateDialog = cluster => {
     async formData => {
       try {
         setSubmitting(true);
-        const response = await post('/rancher-catalogs/', {
+        const response = await post<Catalog>('/rancher-catalogs/', {
           scope: cluster.url,
           ...formData,
         });

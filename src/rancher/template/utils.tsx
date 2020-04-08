@@ -26,10 +26,15 @@ export const groupByN = (n, data) => {
 const getTemplate = templateUuid =>
   getById('/rancher-templates/', templateUuid);
 
+interface TemplateVersion {
+  readme: string;
+  questions: Question[];
+}
+
 const getTemplateVersion = (templateUuid, versionUuid) =>
-  get(`/rancher-template-versions/${templateUuid}/${versionUuid}/`).then(
-    response => response.data,
-  );
+  get<TemplateVersion>(
+    `/rancher-template-versions/${templateUuid}/${versionUuid}/`,
+  ).then(response => response.data);
 
 const getProjects = clusterUuid =>
   getAll('/rancher-projects/', { params: { cluster_uuid: clusterUuid } });

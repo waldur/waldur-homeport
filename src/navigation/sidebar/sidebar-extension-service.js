@@ -70,7 +70,7 @@ export default class SidebarExtensionService {
   }
 
   getCounters(items) {
-    let counters = [];
+    const counters = [];
     const visitItem = item => {
       if (
         item.hasOwnProperty('countFieldKey') &&

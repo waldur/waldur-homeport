@@ -86,6 +86,25 @@ export default function routes($stateProvider) {
       },
     })
 
+    .state('marketplace-public-offering', {
+      url: '/marketplace-public-offering/',
+      abstract: true,
+      templateUrl: 'views/partials/base.html',
+      data: {
+        hideHeader: true,
+      },
+    })
+
+    .state('marketplace-public-offering.details', {
+      url: ':uuid/',
+      template:
+        '<marketplace-public-offering-details-page></marketplace-public-offering-details>',
+      data: {
+        pageTitle: gettext('Offering details'),
+        feature: 'marketplace',
+      },
+    })
+
     .state('marketplace-category', {
       url: 'marketplace-category/:category_uuid/',
       template: '<marketplace-category></marketplace-category>',
@@ -149,7 +168,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Public offerings'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-services',
       },
     })
 
@@ -160,7 +178,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('My offerings'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-services',
       },
     })
 
@@ -171,7 +188,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Add offering'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-services',
       },
     })
 
@@ -182,6 +198,7 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Update offering'),
         feature: 'marketplace',
+        renderDocumentTitle: true,
       },
     })
 
@@ -236,7 +253,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Public orders'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-services',
       },
     })
 
@@ -248,7 +264,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('My orders'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-services',
       },
     })
 
@@ -260,7 +275,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('My resources'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-services',
       },
     })
 
@@ -272,7 +286,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Public resources'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-services',
       },
     })
 
@@ -283,7 +296,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Public resources'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-services',
       },
     })
 
@@ -356,7 +368,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Resources'),
         feature: 'marketplace',
-        sidebarState: 'marketplace-resources',
       },
     })
 

@@ -3,6 +3,7 @@ import { IHttpService, IPromise } from 'angular';
 export let ENV = null;
 export let $http: IHttpService;
 export let $rootScope = null;
+export let $compile = null;
 export let $state = null;
 export let $filter = null;
 export let ngInjector = null;
@@ -18,6 +19,7 @@ export default function injectServices($injector) {
   ENV = $injector.get('ENV');
   $http = $injector.get('$http');
   $rootScope = $injector.get('$rootScope');
+  $compile = $injector.get('$compile');
   $state = $injector.get('$state');
   $filter = $injector.get('$filter');
   $q = $injector.get('$q');

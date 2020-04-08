@@ -41,6 +41,7 @@ class CustomerManageController {
     this.loadCustomer();
     this.$rootScope.$on('refreshCustomer', this.refreshCustomer.bind(this));
     this.actionsExpanded = false;
+    this.profilesExpanded = false;
   }
 
   refreshCustomer() {
@@ -140,6 +141,10 @@ class CustomerManageController {
 
   toggleActions() {
     this.actionsExpanded = !this.actionsExpanded;
+  }
+
+  toggleProfiles() {
+    this.profilesExpanded = !this.profilesExpanded;
   }
 }
 

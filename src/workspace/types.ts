@@ -5,6 +5,8 @@ export interface User {
   uuid: string;
   customer_permissions?: Permission[];
   full_name?: string;
+  email?: string;
+  job_title?: string;
 }
 
 export interface UserDetails extends User {

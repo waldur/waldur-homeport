@@ -41,10 +41,6 @@ msgstr ""
 msgid "API URL"
 msgstr ""
 
-#: src/rijkscloud/ProviderForm.tsx
-msgid "API key"
-msgstr ""
-
 #: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
 msgid "API secret code:"
 msgstr ""
@@ -79,10 +75,6 @@ msgstr ""
 #: src/rancher/cluster/RancherClusterSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Access"
-msgstr ""
-
-#: src/aws/AmazonForm.tsx
-msgid "Access key ID"
 msgstr ""
 
 #: src/digitalocean/DigitalOceanForm.tsx
@@ -136,9 +128,8 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/booking/BookingsList.tsx
-#: src/cost-planning/cost-plan-items.html
-#: src/cost-planning/cost-plan-optimizer.html
 #: src/events/BaseEventsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -234,7 +225,6 @@ msgstr ""
 msgid "Add environment variable"
 msgstr ""
 
-#: src/cost-planning/cost-plan-items.html
 #: src/marketplace/compare/ComparisonItemPlaceholder.tsx
 msgid "Add item"
 msgstr ""
@@ -275,6 +265,10 @@ msgstr ""
 
 #: src/user/list/CustomerCreateButton.tsx
 msgid "Add organization"
+msgstr ""
+
+#: src/billing/PaymentProfileList.tsx
+msgid "Add payment profile"
 msgstr ""
 
 #: src/marketplace/offerings/plan/PlanAddButton.tsx
@@ -338,7 +332,6 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
 
@@ -437,10 +430,6 @@ msgstr ""
 msgid "Already have an account?"
 msgstr ""
 
-#: src/aws/help.js
-msgid "Amazon EC2 provider"
-msgstr ""
-
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -458,10 +447,6 @@ msgstr ""
 
 #: src/project/effects.ts
 msgid "An error occurred on project removal."
-msgstr ""
-
-#: src/customer/workspace/customer-workspace.js
-msgid "Analytics"
 msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
@@ -490,35 +475,14 @@ msgstr ""
 msgid "Application configuration"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-create.js
-msgid "Application creation has been scheduled."
-msgstr ""
-
-#: src/ansible/playbook-jobs/routes.js
-msgid "Application details"
-msgstr ""
-
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Application has been created."
-msgstr ""
-
-#: src/ansible/playbook-jobs/details/ansible-job-summary.js
-msgid "Application has been deleted"
-msgstr ""
-
-#: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-msgid "Application price explanation"
 msgstr ""
 
 #: src/rancher/cluster/tabs.js
 msgid "Application templates"
 msgstr ""
 
-#: src/analytics/resource-chart-service.js
-#: src/ansible/constants.js
-#: src/ansible/playbook-jobs/details/ansible-job-details.js
-#: src/ansible/playbook-jobs/routes.js
-#: src/ansible/playbook-jobs/sidebar.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Applications"
 msgstr ""
@@ -637,9 +601,9 @@ msgid "Audit log"
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
-#: src/project/project-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/project/routes.js
+#: src/project/utils.ts
 #: src/user/constants.js
 #: src/user/list/UserDashboard.tsx
 #: src/user/routes.js
@@ -718,7 +682,7 @@ msgid "Back to login"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/project-workspace.js
+#: src/project/utils.ts
 #: src/user/user-details.js
 msgid "Back to organization"
 msgstr ""
@@ -797,7 +761,6 @@ msgstr ""
 
 #: src/resource/breadcrumbs/resource-categories.js
 #: src/slurm/routes.js
-#: src/slurm/sidebar.js
 msgid "Batch processing"
 msgstr ""
 
@@ -834,22 +797,6 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
-msgstr ""
-
-#: src/analytics/resource-chart-service.js
-msgid "Block devices"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "Block snapshot count"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "Block storage size"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "Block volume count"
 msgstr ""
 
 #: src/booking/marketplace.ts
@@ -899,7 +846,6 @@ msgstr ""
 msgid "CIDR"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
@@ -918,20 +864,14 @@ msgstr ""
 msgid "CSV"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
-msgid "Calculating costs"
-msgstr ""
-
 #: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-create.html
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/cost-planning/cost-plan-dialog.html
 #: src/digitalocean/droplet-resize.html
 #: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
@@ -1084,7 +1024,6 @@ msgstr ""
 msgid "Charts"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/jira/project/jira-project-checkout-summary.html
 msgid "Checkout summary"
 msgstr ""
@@ -1122,7 +1061,6 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/billing/events/invoice-events-dialog.html
 #: src/customer/details/customer-report-error.html
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.html
@@ -1213,11 +1151,6 @@ msgstr ""
 msgid "Compliance checklists"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-#: src/cost-planning/cost-plan-flavors.html
-msgid "Component"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentsList.tsx
 msgid "Component #{index}"
 msgstr ""
@@ -1227,7 +1160,6 @@ msgstr ""
 msgid "Component name"
 msgstr ""
 
-#: src/cost-planning/cost-plan-items.html
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Components"
 msgstr ""
@@ -1248,7 +1180,6 @@ msgstr ""
 msgid "Configuration options"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.html
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Configure"
@@ -1314,15 +1245,6 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: src/customer/workspace/customer-workspace.js
-msgid "Cost analysis"
-msgstr ""
-
-#: src/project/project-workspace.js
-#: src/project/routes.js
-msgid "Cost planning"
-msgstr ""
-
 #: src/customer/details/customer-threshold.html
 #: src/project/ProjectCounters.tsx
 #: src/project/project-policies.html
@@ -1342,7 +1264,6 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-create.html
 #: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/freeipa/freeipa-account-create.html
@@ -1422,10 +1343,6 @@ msgstr ""
 msgid "Create organization"
 msgstr ""
 
-#: src/cost-planning/cost-plans-list.js
-msgid "Create plan"
-msgstr ""
-
 #: src/customer/routes.js
 msgid "Create project"
 msgstr ""
@@ -1459,7 +1376,6 @@ msgstr ""
 msgid "Create your first project"
 msgstr ""
 
-#: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/billing/billing-utils.js
 #: src/booking/BookingsList.tsx
 #: src/customer/CustomerList.tsx
@@ -1533,10 +1449,6 @@ msgstr ""
 msgid "Creating snapshot schedule"
 msgstr ""
 
-#: src/ansible/application-list.js
-msgid "Creation date"
-msgstr ""
-
 #: src/offering/OracleSnapshots.tsx
 msgid "Creation time"
 msgstr ""
@@ -1584,10 +1496,10 @@ msgid "Daily available booking time range"
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/project-workspace.js
 #: src/project/routes.js
+#: src/project/utils.ts
 #: src/user/constants.js
 msgid "Dashboard"
 msgstr ""
@@ -1670,8 +1582,8 @@ msgstr ""
 msgid "Default value"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/cost-planning/cost-plan-items.html
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
@@ -1698,16 +1610,6 @@ msgstr ""
 msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.html
-msgid "Deployment plan"
-msgstr ""
-
-#: src/cost-planning/cost-plan-items.html
-msgid "Deployment plan does not have any item yet."
-msgstr ""
-
-#: src/ansible/playbook-jobs/create/ansible-job-create.js
-#: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/issues/create/issue-quick-create.html
@@ -1746,7 +1648,6 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
-#: src/rijkscloud/VolumeCreateConfig.js
 #: src/slurm/slurm-allocation-list.js
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -1783,7 +1684,6 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
-#: src/cost-planning/cost-plans-list.js
 #: src/events/EventDetailsButton.tsx
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -1798,9 +1698,9 @@ msgstr ""
 #: src/slurm/actions.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
+#: src/user/UserDropdownMenu.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
-#: src/user/user-sidebar.html
 msgid "Details"
 msgstr ""
 
@@ -1834,6 +1734,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
 msgstr ""
@@ -1876,7 +1777,7 @@ msgstr ""
 msgid "Docker version"
 msgstr ""
 
-#: src/navigation/header/docs-link.html
+#: src/navigation/header/DocsLink.tsx
 msgid "Documentation"
 msgstr ""
 
@@ -1954,6 +1855,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/openstack/openstack-backup-schedule/module.js
@@ -2014,6 +1916,7 @@ msgstr ""
 msgid "Enable profile"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/user/hooks/hook-details.html
 msgid "Enabled"
 msgstr ""
@@ -2093,10 +1996,6 @@ msgstr ""
 
 #: src/configs/base-config.js
 msgid "Estonian"
-msgstr ""
-
-#: src/cost-planning/cost-plan-dialog.html
-msgid "Evaluate"
 msgstr ""
 
 #: src/events/EventDetailsDialog.tsx
@@ -2201,14 +2100,6 @@ msgstr ""
 msgid "Expires at"
 msgstr ""
 
-#: src/cost-planning/cost-plan-optimizer.html
-msgid "Explain plan"
-msgstr ""
-
-#: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
-msgid "Explain price"
-msgstr ""
-
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Explore {deployment} Marketplace"
 msgstr ""
@@ -2298,7 +2189,6 @@ msgstr ""
 msgid "Filter organizations"
 msgstr ""
 
-#: src/analytics/ResourceAnalysis.tsx
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Filter projects"
 msgstr ""
@@ -2312,7 +2202,6 @@ msgstr ""
 msgid "Find solution"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/user/keys/KeysList.tsx
@@ -2335,12 +2224,10 @@ msgstr ""
 msgid "Fixed — use common storage quota"
 msgstr ""
 
-#: src/cost-planning/cost-plan-flavors.html
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/cluster/create/NodeFlavorGroup.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor"
 msgstr ""
 
@@ -2348,9 +2235,8 @@ msgstr ""
 msgid "Flavor exclude regex"
 msgstr ""
 
-#: src/analytics/FlavorsList.tsx
+#: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
 msgstr ""
 
@@ -2358,11 +2244,11 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
-#: src/analytics/VmTypeOverview.tsx
+#: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Flavors"
 msgstr ""
 
-#: src/analytics/FlavorsList.tsx
+#: src/openstack/analytics/FlavorsList.tsx
 msgid "Flavors List"
 msgstr ""
 
@@ -2375,11 +2261,9 @@ msgid "Flexible"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Floating IP"
 msgstr ""
 
-#: src/analytics/registry.ts
 #: src/quotas/constants.js
 msgid "Floating IP count"
 msgstr ""
@@ -2500,7 +2384,7 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
-#: src/navigation/cookies/cookies-consent.html
+#: src/navigation/cookies/CookiesConsent.tsx
 msgid "Got it!"
 msgstr ""
 
@@ -2519,7 +2403,7 @@ msgstr ""
 msgid "Guest OS"
 msgstr ""
 
-#: src/navigation/header/intro-button.html
+#: src/navigation/header/IntroButton.tsx
 msgid "Guide me"
 msgstr ""
 
@@ -2529,7 +2413,6 @@ msgid "Heatmap"
 msgstr ""
 
 #: src/help/routes.js
-#: src/navigation/app-footer.html
 msgid "Help"
 msgstr ""
 
@@ -2593,10 +2476,6 @@ msgstr ""
 msgid "How to generate SSH key"
 msgstr ""
 
-#: src/aws/help.js
-msgid "How to obtain credentials for Amazon EC2 provider"
-msgstr ""
-
 #: src/azure/provider/help.js
 msgid "How to obtain credentials for Azure provider"
 msgstr ""
@@ -2655,14 +2534,14 @@ msgstr ""
 msgid "Image here"
 msgstr ""
 
-#: src/analytics/ImagesList.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
+#: src/openstack/analytics/ImagesList.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Image name"
 msgstr ""
 
-#: src/analytics/VmTypeOverview.tsx
+#: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Images"
 msgstr ""
 
@@ -2749,10 +2628,6 @@ msgstr ""
 msgid "Instance"
 msgstr ""
 
-#: src/analytics/registry.ts
-msgid "Instance count"
-msgstr ""
-
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 msgid "Instance does not have any floating IPs yet."
 msgstr ""
@@ -2793,7 +2668,6 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "Internal IP"
 msgstr ""
 
@@ -2941,7 +2815,6 @@ msgstr ""
 msgid "Invoice number"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
@@ -2991,10 +2864,10 @@ msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/jira/project/tabs.js
-#: src/project/project-workspace.js
 #: src/project/routes.js
+#: src/project/utils.ts
 #: src/resource/tabs/constants.js
 msgid "Issues"
 msgstr ""
@@ -3101,16 +2974,16 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.js
-msgid "Large"
-msgstr ""
-
 #: src/table/responsive-table.js
 msgid "Last"
 msgstr ""
 
 #: src/configs/base-config.js
 msgid "Latvian"
+msgstr ""
+
+#: src/navigation/cookies/CookiesConsent.tsx
+msgid "Learn more"
 msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
@@ -3133,7 +3006,6 @@ msgstr ""
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr ""
 
-#: src/analytics/utils.ts
 #: src/dashboard/chart.ts
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
@@ -3188,9 +3060,9 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: src/navigation/header/logout-link.html
+#: src/navigation/header/LogoutLink.tsx
 #: src/navigation/header/site-header.html
-#: src/user/user-sidebar.html
+#: src/user/UserDropdownMenu.tsx
 msgid "Log out"
 msgstr ""
 
@@ -3237,7 +3109,7 @@ msgstr ""
 msgid "MOAB allocation"
 msgstr ""
 
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/user/constants.js
 #: src/user/routes.js
 #: src/user/support/UserDetailsView.tsx
@@ -3358,10 +3230,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentMeasuredUnitField.tsx
 msgid "Measured unit"
-msgstr ""
-
-#: src/cost-planning/cost-plan-dialog.js
-msgid "Medium"
 msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
@@ -3504,19 +3372,11 @@ msgstr ""
 msgid "My services"
 msgstr ""
 
-#: src/cost-planning/cost-plan-flavors.html
-#: src/cost-planning/cost-plan-optimizer.html
-msgid "N/A"
-msgstr ""
-
-#: src/ansible/application-list.js
-#: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/booking/BookingsList.tsx
-#: src/cost-planning/cost-plan-dialog.html
-#: src/cost-planning/cost-plans-list.js
 #: src/customer/create/customer-create-config.js
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetails.tsx
@@ -3681,7 +3541,6 @@ msgstr ""
 msgid "New limit"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.js
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "New plan"
@@ -3731,10 +3590,6 @@ msgstr ""
 msgid "No allocations yet."
 msgstr ""
 
-#: src/ansible/application-list.js
-msgid "No applications found matching filter."
-msgstr ""
-
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 msgid "No backup schedules found matching filter."
 msgstr ""
@@ -3749,10 +3604,6 @@ msgstr ""
 
 #: src/openstack/openstack-backup/openstack-backups-list.js
 msgid "No backups yet."
-msgstr ""
-
-#: src/cost-planning/cost-plans-list.js
-msgid "No cost plans found matching filter."
 msgstr ""
 
 #: src/azure/sql/azure-sql-databases-list.js
@@ -4005,8 +3856,8 @@ msgstr ""
 msgid "Number of cores in a VM"
 msgstr ""
 
-#: src/analytics/FlavorsList.tsx
-#: src/analytics/ImagesList.tsx
+#: src/openstack/analytics/FlavorsList.tsx
+#: src/openstack/analytics/ImagesList.tsx
 msgid "Number of created instances"
 msgstr ""
 
@@ -4014,8 +3865,8 @@ msgstr ""
 msgid "Number of etcd nodes"
 msgstr ""
 
-#: src/analytics/FlavorsList.tsx
-#: src/analytics/ImagesList.tsx
+#: src/openstack/analytics/FlavorsList.tsx
+#: src/openstack/analytics/ImagesList.tsx
 msgid "Number of running instances"
 msgstr ""
 
@@ -4164,15 +4015,11 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: src/resource/list/resources-list.js
-msgid "Open map"
-msgstr ""
-
 #: src/dashboard/SupportPortalAction.ts
 msgid "Open support portal"
 msgstr ""
 
-#: src/analytics/ImagesList.tsx
+#: src/openstack/analytics/ImagesList.tsx
 msgid "OpenStack Images"
 msgstr ""
 
@@ -4372,10 +4219,6 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: src/ansible/playbook-jobs/details/ansible-job-summary.html
-msgid "Output log"
-msgstr ""
-
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 msgid "Overview"
 msgstr ""
@@ -4416,10 +4259,6 @@ msgstr ""
 #: src/billing/invoices-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "Paid"
-msgstr ""
-
-#: src/ansible/playbook-jobs/details/ansible-job-summary.html
-msgid "Parameters"
 msgstr ""
 
 #: src/jira/issue/IssueCreateDialog.tsx
@@ -4485,21 +4324,25 @@ msgstr ""
 msgid "Payment pending"
 msgstr ""
 
+#: src/customer/details/customer-manage.html
+msgid "Payment profiles"
+msgstr ""
+
 #: src/billing/billing-utils.js
 #: src/invitations/invitations-list.js
 #: src/marketplace/orders/store/reducer.ts
 msgid "Pending"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Pending approval for changing of"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Pending approval for creation of"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Pending approval for removal of"
 msgstr ""
 
@@ -4619,10 +4462,6 @@ msgstr ""
 msgid "Plans are invalid."
 msgstr ""
 
-#: src/ansible/application-list.js
-msgid "Playbook"
-msgstr ""
-
 #: src/form/appstore-field-tos.html
 msgid "Please accept Terms of Services to proceed."
 msgstr ""
@@ -4705,7 +4544,7 @@ msgstr ""
 msgid "Please select type in Management tab first."
 msgstr ""
 
-#: src/i18n/language-list.html
+#: src/i18n/LanguageList.tsx
 msgid "Please select your language"
 msgstr ""
 
@@ -4723,10 +4562,6 @@ msgstr ""
 
 #: src/marketplace/offerings/InternalNameField.tsx
 msgid "Please use Latin letters without spaces only."
-msgstr ""
-
-#: src/ansible/application-list.js
-msgid "Please wait until provisioning is completed."
 msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -4777,9 +4612,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/billing/invoices-list.js
-#: src/cost-planning/cost-plan-flavors.html
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
@@ -4813,8 +4646,6 @@ msgstr ""
 msgid "Price per 365 days"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
-#: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/common/utils.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -4835,8 +4666,6 @@ msgstr ""
 msgid "Price per hour"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
-#: src/cost-planning/cost-plan-optimizer.html
 #: src/marketplace/common/BillingPeriod.tsx
 #: src/marketplace/common/utils.ts
 msgid "Price per month"
@@ -4871,12 +4700,11 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
-#: src/navigation/app-footer.html
+#: src/navigation/AppFooter.tsx
 #: src/routes/about.js
 msgid "Privacy policy"
 msgstr ""
 
-#: src/analytics/resource-chart-service.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Private clouds"
@@ -4894,7 +4722,6 @@ msgstr ""
 msgid "Product configuration"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-checkout-summary.html
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
@@ -4996,7 +4823,6 @@ msgstr ""
 msgid "Project type"
 msgstr ""
 
-#: src/ansible/playbook-jobs/details/ansible-job-details.js
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
@@ -5018,23 +4844,20 @@ msgid "Project {project_name} has been deleted."
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/navigation/workspace/select-workspace-dialog.html
 #: src/rancher/cluster/tabs.js
 msgid "Projects"
-msgstr ""
-
-#: src/analytics/ResourceAnalysis.tsx
-msgid "Projects ({count})"
 msgstr ""
 
 #: src/team/add-team-member.html
 msgid "Projects list"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-create.html
-#: src/ansible/playbook-jobs/details/ansible-job-summary.html
-#: src/cost-planning/cost-plan-optimizer.html
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
+msgid "Provided by {provider}"
+msgstr ""
+
 #: src/events/EventDetailsTable.tsx
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -5128,8 +4951,6 @@ msgstr ""
 
 #: src/billing/billing-record-details.html
 #: src/billing/invoice-details.html
-#: src/cost-planning/cost-plan-flavors.html
-#: src/cost-planning/cost-plan-items.html
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts
 msgid "Quantity"
@@ -5154,11 +4975,9 @@ msgstr ""
 msgid "Quotas"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "RAM"
@@ -5166,10 +4985,6 @@ msgstr ""
 
 #: src/slurm/actions.js
 msgid "RAM limit, MB"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "RAM size"
 msgstr ""
 
 #: src/slurm/details/constants.js
@@ -5317,10 +5132,6 @@ msgstr ""
 msgid "Related resource"
 msgstr ""
 
-#: src/ansible/playbook-jobs/details/ansible-job-summary.html
-msgid "Related resources"
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 msgid "Release floating IPs"
 msgstr ""
@@ -5342,10 +5153,6 @@ msgstr ""
 msgid "Remaining amount"
 msgstr ""
 
-#: src/analytics/utils.ts
-msgid "Remaining limit"
-msgstr ""
-
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/security-group-rules-list.html
 msgid "Remote CIDR"
@@ -5356,7 +5163,6 @@ msgstr ""
 msgid "Remote network"
 msgstr ""
 
-#: src/cost-planning/cost-plans-list.js
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
@@ -5366,11 +5172,6 @@ msgstr ""
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
-msgstr ""
-
-#: src/ansible/application-list.js
-#: src/ansible/playbook-jobs/details/ansible-job-summary.html
-msgid "Remove application"
 msgstr ""
 
 #: src/marketplace/compare/OfferingCompareButton.tsx
@@ -5533,7 +5334,7 @@ msgstr ""
 msgid "Requested"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Requested by"
 msgstr ""
 
@@ -5549,13 +5350,8 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.html
 #: src/project/project-policies.html
 msgid "Required certifications"
-msgstr ""
-
-#: src/ansible/playbook-jobs/create/ansible-price-explanation.html
-msgid "Requirements"
 msgstr ""
 
 #: src/invitations/actions/send.js
@@ -5601,10 +5397,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 msgid "Resource configuration is invalid. Please fix errors in form."
-msgstr ""
-
-#: src/analytics/resource-analysis-new.html
-msgid "Resource count in"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
@@ -5685,8 +5477,6 @@ msgstr ""
 msgid "Resource termination request has been submitted."
 msgstr ""
 
-#: src/analytics/routes.js
-#: src/customer/workspace/customer-workspace.js
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 #: src/resource/support/ChartContainer.tsx
 msgid "Resource usage"
@@ -5696,7 +5486,6 @@ msgstr ""
 msgid "Resource usage for {resource}"
 msgstr ""
 
-#: src/ansible/playbook-jobs/details/ansible-job-details.js
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/issues/workspace/issue-navigation-service.js
@@ -5713,10 +5502,6 @@ msgstr ""
 #: src/resource/support/ChartContainer.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Resources"
-msgstr ""
-
-#: src/analytics/resource-analysis-new.html
-msgid "Resources by projects"
 msgstr ""
 
 #: src/marketplace/resources/import/useImportDialog.tsx
@@ -5864,8 +5649,6 @@ msgstr ""
 msgid "SSH keys"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-create.js
-#: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 msgid "SSH public key"
@@ -5877,7 +5660,6 @@ msgid "Sankey diagram"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/cost-planning/cost-plan-dialog.html
 #: src/providers/ProviderUpdateForm.tsx
 #: src/team/add-project-member.js
 #: src/team/add-team-member.js
@@ -5930,7 +5712,7 @@ msgid "Script language"
 msgstr ""
 
 #: src/issues/create/issue-registration.html
-#: src/navigation/header/main-search.html
+#: src/navigation/header/MainSearch.tsx
 #: src/table-react/TableQuery.tsx
 #: src/table/responsive-table.js
 msgid "Search"
@@ -5939,10 +5721,6 @@ msgstr ""
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Search for apps and services..."
-msgstr ""
-
-#: src/aws/AmazonForm.tsx
-msgid "Secret access key"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -6003,10 +5781,6 @@ msgstr ""
 msgid "Select SSH public key..."
 msgstr ""
 
-#: src/cost-planning/cost-plan-items.html
-msgid "Select a component"
-msgstr ""
-
 #: src/customer/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
@@ -6036,7 +5810,6 @@ msgstr ""
 msgid "Select category..."
 msgstr ""
 
-#: src/cost-planning/cost-plan-certifications.html
 #: src/project/ProjectCreateForm.tsx
 #: src/project/project-policies.html
 msgid "Select certifications"
@@ -6110,7 +5883,7 @@ msgstr ""
 msgid "Select security groups..."
 msgstr ""
 
-#: src/analytics/VmOverviewFilter.tsx
+#: src/openstack/analytics/VmOverviewFilter.tsx
 msgid "Select service provider"
 msgstr ""
 
@@ -6196,7 +5969,6 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
-#: src/jira/sidebar.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Service desk"
 msgstr ""
@@ -6313,7 +6085,7 @@ msgstr ""
 msgid "Show _MENU_ entries"
 msgstr ""
 
-#: src/marketplace/orders/PendingOrderDropdown.tsx
+#: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Show all"
 msgstr ""
 
@@ -6354,7 +6126,7 @@ msgstr ""
 msgid "Show request"
 msgstr ""
 
-#: src/analytics/VmOverviewFilter.tsx
+#: src/openstack/analytics/VmOverviewFilter.tsx
 #: src/providers/support/FlowMapFilter.tsx
 msgid "Show shared"
 msgstr ""
@@ -6405,7 +6177,6 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource/list/resource-volumes-list.js
-#: src/rijkscloud/VolumeSummary.tsx
 #: src/vmware/VMwareDiskSummary.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
@@ -6434,10 +6205,6 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.js
-msgid "Small"
-msgstr ""
-
 #: src/openstack/openstack-snapshot/module.js
 msgid "Snapshot has been updated."
 msgstr ""
@@ -6453,10 +6220,6 @@ msgstr ""
 #: src/openstack/openstack-snapshot-schedule/breadcrumbs.js
 #: src/openstack/openstack-volume/module.js
 msgid "Snapshot schedules"
-msgstr ""
-
-#: src/analytics/registry.ts
-msgid "Snapshot size"
 msgstr ""
 
 #: src/openstack/OpenStackPluginOptionsForm.tsx
@@ -6503,8 +6266,6 @@ msgstr ""
 msgid "Starting"
 msgstr ""
 
-#: src/ansible/application-list.js
-#: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/azure/sql/azure-sql-databases-list.js
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
@@ -6553,6 +6314,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/invitations/invitations-list.js
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
@@ -6580,7 +6342,6 @@ msgstr ""
 msgid "Stopping"
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -6674,7 +6435,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: src/navigation/header/support-link.html
+#: src/navigation/header/SupportLink.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Support"
@@ -6715,7 +6476,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
 #: src/openstack/openstack-volume/actions/PullAction.ts
 #: src/resource/actions/base.ts
-#: src/rijkscloud/module.js
 #: src/slurm/actions.js
 #: src/vmware/actions.ts
 msgid "Synchronise"
@@ -6766,9 +6526,9 @@ msgid "Tax number"
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
-#: src/project/project-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/project/routes.js
+#: src/project/utils.ts
 msgid "Team"
 msgstr ""
 
@@ -6871,7 +6631,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
-#: src/navigation/app-footer.html
+#: src/navigation/AppFooter.tsx
 #: src/user/support/TermsOfService.tsx
 msgid "Terms of Service"
 msgstr ""
@@ -6925,10 +6685,6 @@ msgstr ""
 
 #: src/rancher/template/CatalogTemplateList.tsx
 msgid "There are no applications templates."
-msgstr ""
-
-#: src/ansible/application-list.js
-msgid "There are no applications yet."
 msgstr ""
 
 #: src/team/add-team-member.html
@@ -6989,20 +6745,12 @@ msgstr ""
 msgid "There are no projects yet for this organization."
 msgstr ""
 
-#: src/cost-planning/cost-plan-optimizer.html
-msgid "There are no providers for this deployment plan."
-msgstr ""
-
 #: src/issues/list/IssuesShortListComponent.tsx
 msgid "There are no requests yet."
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "There are no resources available."
-msgstr ""
-
-#: src/analytics/resource-analysis-new.html
-msgid "There are no resources in the organization."
 msgstr ""
 
 #: src/resource/ResourceExpandableRow.tsx
@@ -7043,7 +6791,6 @@ msgstr ""
 msgid "This field is required."
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/jira/project/jira-project-config.js
@@ -7051,7 +6798,6 @@ msgstr ""
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/project/ProjectNameField.tsx
 #: src/rancher/cluster/create/RancherClusterForm.tsx
-#: src/rijkscloud/VolumeCreateConfig.js
 #: src/slurm/AllocationForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "This name will be visible in accounting data."
@@ -7061,7 +6807,7 @@ msgstr ""
 msgid "This value is invalid."
 msgstr ""
 
-#: src/navigation/cookies/cookies-consent.html
+#: src/navigation/cookies/CookiesConsent.tsx
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
@@ -7145,8 +6891,6 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
-#: src/analytics/resource-pie-chart.html
-#: src/ansible/playbook-jobs/create/ansible-price-explanation.html
 #: src/billing/PriceEstimateDialog.tsx
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
@@ -7176,10 +6920,6 @@ msgstr ""
 msgid "Total number of nodes"
 msgstr ""
 
-#: src/cost-planning/cost-plan-dialog.html
-msgid "Total planned resource consumption"
-msgstr ""
-
 #: src/billing/billing-record-details.html
 #: src/billing/invoice-details.html
 msgid "Total price"
@@ -7202,6 +6942,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/jira/project/jira-project-config.js
 #: src/jira/project/jira-projects-list.js
@@ -7293,7 +7034,6 @@ msgstr ""
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
-#: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to create application."
 msgstr ""
@@ -7320,10 +7060,6 @@ msgstr ""
 
 #: src/user/support/effects.ts
 msgid "Unable to deactivate user."
-msgstr ""
-
-#: src/ansible/playbook-jobs/details/ansible-job-summary.js
-msgid "Unable to delete application"
 msgstr ""
 
 #: src/issues/attachments/effects.ts
@@ -7361,18 +7097,6 @@ msgstr ""
 
 #: src/booking/store/effects.ts
 msgid "Unable to fetch offering bookings."
-msgstr ""
-
-#: src/analytics/effects.ts
-msgid "Unable to fetch projects."
-msgstr ""
-
-#: src/analytics/effects.ts
-msgid "Unable to fetch quota history."
-msgstr ""
-
-#: src/analytics/effects.ts
-msgid "Unable to fetch tenants."
 msgstr ""
 
 #: src/invitations/actions/invitation-dialog.js
@@ -7511,6 +7235,7 @@ msgstr ""
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 msgid "Unable to load offering details."
 msgstr ""
@@ -7561,7 +7286,7 @@ msgstr ""
 msgid "Unable to load service provider."
 msgstr ""
 
-#: src/analytics/VmOverviewFilterContainer.tsx
+#: src/openstack/analytics/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
 msgstr ""
 
@@ -7736,7 +7461,6 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: src/analytics/ResourceAnalysisItem.tsx
 #: src/freeipa/freeipa-quota.html
 msgid "Unlimited"
 msgstr ""
@@ -7774,6 +7498,10 @@ msgstr ""
 
 #: src/marketplace/routes.js
 msgid "Update offering"
+msgstr ""
+
+#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
+msgid "Update offering ({name})"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
@@ -7842,7 +7570,6 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
-#: src/analytics/utils.ts
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
@@ -7890,10 +7617,6 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: src/rijkscloud/ProviderForm.tsx
-msgid "User ID"
-msgstr ""
-
 #: src/user/support/effects.ts
 msgid "User could not been updated"
 msgstr ""
@@ -7906,7 +7629,6 @@ msgstr ""
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
 msgstr ""
 
@@ -7943,7 +7665,7 @@ msgstr ""
 msgid "User management events"
 msgstr ""
 
-#: src/user/user-sidebar.html
+#: src/user/UserDropdownMenu.tsx
 msgid "User profile"
 msgstr ""
 
@@ -8098,12 +7820,11 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
 msgstr ""
 
-#: src/analytics/routes.js
 #: src/issues/workspace/issue-navigation-service.js
+#: src/openstack/analytics/routes.js
 msgid "VM type overview"
 msgstr ""
 
@@ -8180,12 +7901,11 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
-#: src/navigation/app-footer.html
+#: src/navigation/AppFooter.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
 msgstr ""
 
-#: src/analytics/resource-chart-service.js
 #: src/project/routes.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Virtual machines"
@@ -8207,13 +7927,10 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
-#: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume name"
 msgstr ""
 
-#: src/analytics/registry.ts
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
-#: src/rijkscloud/VolumeCreateConfig.js
 msgid "Volume size"
 msgstr ""
 
@@ -8369,10 +8086,6 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: src/cost-planning/cost-plans-list.js
-msgid "You have no cost plans yet"
-msgstr ""
-
 #: src/vmware/vmware-virtual-machine-disks.js
 msgid "You have no disks yet."
 msgstr ""
@@ -8435,14 +8148,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 msgid "You have not added any SSH keys to your"
-msgstr ""
-
-#: src/ansible/playbook-jobs/create/ansible-job-create.js
-msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
-msgstr ""
-
-#: src/ansible/playbook-jobs/create/ansible-job-create.js
-msgid "You have not selected any SSH key yet."
 msgstr ""
 
 #: src/marketplace/cart/ForwardButton.tsx
@@ -8607,6 +8312,10 @@ msgstr ""
 msgid "organizations"
 msgstr ""
 
+#: src/billing/PaymentProfileList.tsx
+msgid "payment profiles"
+msgstr ""
+
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "plans"
@@ -8626,7 +8335,6 @@ msgstr ""
 msgid "requests"
 msgstr ""
 
-#: src/analytics/resource-bar-chart.html
 #: src/resource/support/SharedProviderResources.tsx
 msgid "resources"
 msgstr ""
@@ -8653,11 +8361,9 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#: src/rijkscloud/InstanceCreateConfig.js
 msgid "vCPU"
 msgstr ""
 
-#: src/analytics/registry.ts
 #: src/quotas/constants.js
 msgid "vCPU count"
 msgstr ""
@@ -8684,10 +8390,6 @@ msgstr ""
 
 #: src/resource/utils.tsx
 msgid "{number} days"
-msgstr ""
-
-#: src/analytics/ResourceAnalysisItem.tsx
-msgid "{quota} usage exceeds quota limit."
 msgstr ""
 
 #: src/resource/state/utils.ts

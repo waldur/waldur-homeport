@@ -29,13 +29,20 @@ const makeAccountingPeriods = (start: moment.Moment) => {
   return choices;
 };
 
+interface Invoice {
+  year: number;
+  month: number;
+}
+
+const getInvoices = params => getList<Invoice>('/invoices/', params);
+
 async function oldestInvoice() {
   const params = {
     page_size: 1,
     o: ['year', 'month'],
     field: ['year', 'month'],
   };
-  const response = await getList('/invoices/', params);
+  const response = await getInvoices(params);
   if (response.length === 1) {
     const invoice = response[0];
     return moment({ year: invoice.year, month: invoice.month - 1 });

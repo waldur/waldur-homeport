@@ -68,7 +68,6 @@ module.exports = {
       'angular-sanitize',
       'angular-ui-bootstrap',
       'angular-bind-html-compile-ci-dev',
-      'oclazyload',
       'angular-intro.js',
 
       './src/shims/slimscroll',

@@ -1,5 +1,7 @@
 import { getAll, getList } from '@waldur/core/api';
 
+import { Issue } from './list/types';
+
 interface IssueTemplateAttachment {
   name: string;
   field: string;
@@ -14,4 +16,4 @@ interface IssueTemplate {
 
 export const getTemplates = () => getAll<IssueTemplate>('/support-templates/');
 
-export const getIssues = params => getList('/support-issues/', params);
+export const getIssues = params => getList<Issue>('/support-issues/', params);

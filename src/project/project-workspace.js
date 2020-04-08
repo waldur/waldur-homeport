@@ -1,11 +1,14 @@
-/* eslint-disable */
+import { translate } from '@waldur/i18n';
+import { connectSidebarCounters } from '@waldur/navigation/sidebar/utils';
+
+import { getDefaultItems, getBackToOrganization } from './utils';
+
 // @ngInject
 export default function ProjectWorkspaceController(
   $scope,
   ENV,
   usersService,
   currentStateService,
-  tabCounterService,
   eventsService,
   projectsService,
   $state,
@@ -13,17 +16,9 @@ export default function ProjectWorkspaceController(
   titleService,
   SidebarExtensionService,
 ) {
-  activate();
-
   $scope.titleService = titleService;
-
-  function activate() {
-    $scope.$on('WORKSPACE_CHANGED', () => refreshProject());
-    refreshProject();
-
-    $scope.$on('$stateChangeSuccess', () => refreshBreadcrumbs());
-    refreshBreadcrumbs();
-  }
+  $scope.items = [];
+  $scope.counters = {};
 
   function refreshBreadcrumbs() {
     if ($state.current.data && $state.current.data) {
@@ -34,9 +29,9 @@ export default function ProjectWorkspaceController(
       if (!BreadcrumbsService.activeItem) {
         BreadcrumbsService.activeItem = $scope.currentProject.name;
       }
-      let items = [
+      const items = [
         {
-          label: gettext('Project workspace'),
+          label: translate('Project workspace'),
           state: 'project.details',
           params: {
             uuid: $scope.currentProject.uuid,
@@ -45,144 +40,74 @@ export default function ProjectWorkspaceController(
       ];
       if ($state.current.name.includes('resources')) {
         items.push({
-          label: gettext('Resources'),
+          label: translate('Resources'),
         });
       }
       BreadcrumbsService.items = items;
     }
   }
 
-  function setItems(customItems) {
-    $scope.items = [
-      {
-        key: 'dashboard',
-        icon: 'fa-th-large',
-        label: gettext('Dashboard'),
-        link: 'project.details({uuid: $ctrl.context.project.uuid})',
-        index: 100,
-      },
-      {
-        key: 'eventlog',
-        link: 'project.events({uuid: $ctrl.context.project.uuid})',
-        icon: 'fa-bell-o',
-        label: gettext('Audit logs'),
-        feature: 'eventlog',
-        index: 500,
-      },
-      {
-        key: 'support',
-        link: 'project.issues({uuid: $ctrl.context.project.uuid})',
-        icon: 'fa-question-circle',
-        label: gettext('Issues'),
-        feature: 'support',
-        index: 600,
-      },
-      {
-        label: gettext('Team'),
-        icon: 'fa-group',
-        link: 'project.team({uuid: $ctrl.context.project.uuid})',
-        feature: 'team',
-        key: 'team',
-        countFieldKey: 'users',
-        index: 800,
-      },
-      {
-        key: 'cost-planning',
-        label: gettext('Cost planning'),
-        icon: 'fa-calculator',
-        link: 'project.cost-planning({uuid: $ctrl.context.project.uuid})',
-        feature: 'cost-planning',
-        index: 900,
-      },
-    ];
-    $scope.items = SidebarExtensionService.mergeItems(
-      $scope.items,
-      customItems,
-    );
-    addBackToOrganizationItemIfAllowed($scope.items);
-    $scope.items = filterItemsByProjectType($scope.items);
-  }
-
-  function addBackToOrganizationItemIfAllowed(items) {
-    currentStateService.getCustomer().then(customer => {
-      usersService.getCurrentUser().then(currentUser => {
-        if (currentStateService.getOwnerOrStaff() || currentUser.is_support) {
-          items.unshift(getBackToOrganization(customer.uuid));
-        }
-      });
+  function getCounters(fields, project) {
+    return projectsService.getCounters({
+      UUID: project.uuid,
+      ...fields,
+      ...eventsService.defaultFilter,
     });
-  }
-
-  function filterItemsByProjectType(items) {
-    const fn = getFilterFunction();
-    if (!fn) {
-      return items;
-    }
-    return fn(items).map(parent => {
-      if (parent.children) {
-        return { ...parent, children: fn(parent.children) };
-      } else {
-        return parent;
-      }
-    });
-  }
-
-  function getFilterFunction() {
-    const conf = ENV.sidebarItemsByProjectType;
-    const sidebarItems = conf && conf[$scope.currentProject.type_name];
-    if (!sidebarItems) {
-      return;
-    }
-    const itemsMap = sidebarItems.reduce(
-      (map, item) => ({ ...map, [item]: true }),
-      {},
-    );
-    const filterItems = items => items.filter(item => itemsMap[item.key]);
-    return filterItems;
-  }
-
-  function refreshProject() {
-    currentStateService.getProject().then(function(project) {
-      if (!project) {
-        return;
-      }
-      $scope.currentProject = project;
-      $scope.context = { project: project };
-      SidebarExtensionService.getItems('project').then(customItems => {
-        setItems(customItems);
-        tabCounterService.connect({
-          $scope: $scope,
-          tabs: $scope.items,
-          getCounters: getCounters.bind(null, project),
-          getCountersError: getCountersError,
-        });
-      });
-      refreshBreadcrumbs();
-    });
-  }
-
-  function getCounters(project) {
-    const fields = SidebarExtensionService.getCounters($scope.items);
-    let query = angular.extend(
-      { UUID: project.uuid, fields },
-      eventsService.defaultFilter,
-    );
-    return projectsService.getCounters(query);
   }
 
   function getCountersError(error) {
     if (error.status === 404) {
-      projectsService.getFirst().then(function(project) {
+      projectsService.getFirst().then(project => {
         $state.go('project.details', { uuid: project.uuid });
       });
     }
   }
 
-  function getBackToOrganization(customerUuid) {
-    return {
-      label: gettext('Back to organization'),
-      icon: 'fa-arrow-left',
-      action: () => $state.go('organization.dashboard', { uuid: customerUuid }),
-    };
+  async function getNavItems() {
+    const customer = await currentStateService.getCustomer();
+    const currentUser = await usersService.getCurrentUser();
+    if (currentStateService.getOwnerOrStaff() || currentUser.is_support) {
+      return [getBackToOrganization(customer.uuid)];
+    }
+    return [];
   }
+
+  async function refreshSidebar(project) {
+    const navItems = await getNavItems();
+    const defaultItems = getDefaultItems(project);
+    const customItems = await SidebarExtensionService.getItems('project');
+    $scope.items = SidebarExtensionService.mergeItems(
+      [...navItems, ...defaultItems],
+      customItems,
+    );
+    const fields = SidebarExtensionService.getCounters($scope.items);
+    connectSidebarCounters({
+      $scope,
+      getCounters: () => getCounters(fields, project),
+      getCountersError,
+      getCountersSuccess: counters => {
+        $scope.counters = counters;
+      },
+    });
+  }
+
+  async function refreshProject() {
+    const project = await currentStateService.getProject();
+    if (!project) {
+      return;
+    }
+    $scope.currentProject = project;
+    refreshSidebar(project);
+    refreshBreadcrumbs();
+  }
+
+  function activate() {
+    $scope.$on('WORKSPACE_CHANGED', () => refreshProject());
+    refreshProject();
+
+    $scope.$on('$stateChangeSuccess', () => refreshBreadcrumbs());
+    refreshBreadcrumbs();
+  }
+
+  activate();
 }

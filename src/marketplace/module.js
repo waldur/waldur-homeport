@@ -1,26 +1,24 @@
-import routes from './routes';
-import marketplaceLanding from './landing/LandingPageContainer';
+import marketplaceCartModule from './cart/module';
+import marketplaceCategory from './category/CategoryPage';
+import marketplaceAttributeFilterListDialog from './category/filters/AttributeFilterListDialog';
 import marketplaceCompare from './compare/ComparisonContainer';
-import comparisonIndicator from './compare/ComparisonIndicator';
 import marketplaceOffering from './details/DetailsPage';
 import marketplaceOfferingPlanDescription from './details/plan/PlanDescription';
 import marketplacePlanDetailsButton from './details/plan/PlanDetailsButton';
 import marketplacePlanDetailsDialog from './details/plan/PlanDetailsDialog';
-import marketplaceCategory from './category/CategoryPage';
-import marketplaceAttributeFilterListDialog from './category/filters/AttributeFilterListDialog';
 import registerExtensionPoint from './extension-point';
-import providersService from './providers-service';
-import registerSidebarExtension from './sidebar';
-import marketplaceCartModule from './cart/module';
+import marketplaceLanding from './landing/LandingPageContainer';
 import marketplaceOfferingsModule from './offerings/module';
 import marketplaceOrdersModule from './orders/module';
-import marketplaceProvidersModule from './service-providers/module';
+import providersService from './providers-service';
 import marketplaceResourceModule from './resources/module';
+import routes from './routes';
+import marketplaceProvidersModule from './service-providers/module';
+import registerSidebarExtension from './sidebar';
 
 export default module => {
   module.component('marketplaceLanding', marketplaceLanding);
   module.component('marketplaceCompare', marketplaceCompare);
-  module.component('comparisonIndicator', comparisonIndicator);
   module.component('marketplaceOffering', marketplaceOffering);
   module.component(
     'marketplaceOfferingPlanDescription',

@@ -1,3 +1,4 @@
+/* eslint-disable */
 const openstackSnapshotsList = {
   controller: SnapshotsListController,
   controllerAs: 'ListController',
@@ -75,14 +76,11 @@ function SnapshotsListController(
       return options;
     },
     getTableActions: function() {
-      let actions = TableExtensionService.getTableActions(
+      const actions = TableExtensionService.getTableActions(
         'openstack-snapshots-list',
       );
       if (this.category !== undefined) {
         actions.push(this.getCreateAction());
-      }
-      if (features.isVisible('openMap')) {
-        actions.push(this.getMapAction());
       }
       return actions;
     },

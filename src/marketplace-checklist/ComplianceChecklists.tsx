@@ -12,14 +12,24 @@ import { getProject } from '@waldur/workspace/selectors';
 import { ChartHeader } from './ChartHeader';
 import { PieChart } from './PieChart';
 
+interface Checklist {
+  uuid: string;
+  name: string;
+  score: number;
+  positive_count: number;
+  negative_count: number;
+  unknown_count: number;
+}
+
+const getChecklists = (projectId: string) =>
+  get<Checklist[]>(`/projects/${projectId}/marketplace-checklists/`).then(
+    response => response.data,
+  );
+
 export const ComplianceChecklists = () => {
   const project = useSelector(getProject);
   const { call, state } = useQuery(
-    project &&
-      (() =>
-        get(`/projects/${project.uuid}/marketplace-checklists/`).then(
-          response => response.data,
-        )),
+    project && (() => getChecklists(project.uuid)),
     [project],
   );
   React.useEffect(call, []);

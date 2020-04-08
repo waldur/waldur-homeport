@@ -6,7 +6,7 @@ interface DashboardCounterProps {
 }
 
 export const DashboardCounter = (props: DashboardCounterProps) =>
-  props.value ? (
+  props.value !== undefined ? (
     <>
       <h1 className="m-b-xs">{props.value}</h1>
       <p className="text-uppercase">{props.label}</p>

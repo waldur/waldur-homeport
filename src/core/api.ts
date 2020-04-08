@@ -21,8 +21,8 @@ export function getById<T = {}>(
   endpoint: string,
   id: string,
   options?: {},
-): Promise<T> {
-  return get(`${endpoint}${id}/`, options).then(response => response.data);
+): IPromise<T> {
+  return get<T>(`${endpoint}${id}/`, options).then(response => response.data);
 }
 
 export function remove<T = {}>(

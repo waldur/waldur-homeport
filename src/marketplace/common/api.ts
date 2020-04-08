@@ -30,10 +30,10 @@ import { OfferingDocument } from '../offerings/store/types';
 import { Resource } from '../resources/types';
 import { ResourcePlanPeriod } from '../resources/usage/types';
 
-// tslint:disable: variable-name
-
-export const getPlugins: () => Promise<PluginMetadata[]> = () =>
-  get('/marketplace-plugins/').then(response => response.data);
+export const getPlugins = () =>
+  get<PluginMetadata[]>('/marketplace-plugins/').then(
+    response => response.data,
+  );
 
 export const getCategories = (options?: {}) =>
   getAll<Category>('/marketplace-categories/', options);
@@ -56,10 +56,9 @@ export const getAllOfferings = (options?: {}) =>
 export const getProviderOfferings = (customerUuid: string) =>
   getAllOfferings({ params: { customer_uuid: customerUuid } });
 
-export const getPlan = (id: string): Promise<any> =>
-  getById<any>('/marketplace-plans/', id);
+export const getPlan = (id: string) => getById<any>('/marketplace-plans/', id);
 
-export const getOffering = (id: string): Promise<Offering> =>
+export const getOffering = (id: string) =>
   getById<Offering>('/marketplace-offerings/', id);
 
 export const createOffering = data =>
@@ -198,10 +197,7 @@ export const getImportableResources = (offering_uuid: string) =>
     `/marketplace-offerings/${offering_uuid}/importable_resources/`,
   );
 
-export const importResource = ({
-  offering_uuid,
-  ...payload
-}): Promise<Resource> =>
+export const importResource = ({ offering_uuid, ...payload }) =>
   post<Resource>(
     `/marketplace-offerings/${offering_uuid}/import_resource/`,
     payload,

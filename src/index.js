@@ -1,3 +1,4 @@
+/* eslint-disable */
 import './vendor';
 import './globals';
 import './sass/style.scss';
@@ -16,7 +17,6 @@ import bookingModule from './booking/module';
 import authModule from './auth/module';
 import invitationsModule from './invitations/module';
 import formModule from './form/module';
-import awsModule from './aws/module';
 import openstackModule from './openstack/module';
 import digitaloceanModule from './digitalocean/module';
 import customerModule from './customer/module';
@@ -25,7 +25,6 @@ import eventsModule from './events/module';
 import routesModule from './routes/module';
 import offeringsModule from './offering/module';
 import helpModule from './help/module';
-import costPlanningModule from './cost-planning/module';
 import coreModule from './core/module';
 import filtersModule from './core/filters';
 import quotasModule from './quotas/module';
@@ -39,9 +38,7 @@ import servicesModule from './services/module';
 import freeipaModule from './freeipa/module';
 import rootModule from './module';
 import priceModule from './price/module';
-import ansibleModule from './ansible/module';
 import introModule from './intro/module';
-import analyticsRoutes from './analytics/routes';
 import azureModule from './azure/module';
 import slurmModule from './slurm/module';
 import paypalModule from './paypal/module';
@@ -49,7 +46,6 @@ import storeModule from './store/module';
 import jiraModule from './jira/module';
 import workspaceModule from './workspace/module';
 import formReactModule from './form-react/module';
-import rijkscloudModule from './rijkscloud/module';
 import marketplaceModule from './marketplace/module';
 import vmwareModule from './vmware/module';
 import rancherModule from './rancher/module';
@@ -61,7 +57,6 @@ const appModule = angular.module('waldur', [
   'ui.router',
   'ngCookies',
   'ngResource',
-  'duScroll',
   'ui.gravatar',
   'ui.select',
   'ngAnimate',
@@ -74,7 +69,6 @@ const appModule = angular.module('waldur', [
   'ui.bootstrap',
   'ui.slimscroll',
   'angular-bind-html-compile',
-  'oc.lazyLoad',
   'angular-intro',
 ]);
 
@@ -94,7 +88,6 @@ invitationsModule(appModule);
 formModule(appModule);
 formReactModule(appModule);
 priceModule(appModule);
-awsModule(appModule);
 openstackModule(appModule);
 digitaloceanModule(appModule);
 customerModule(appModule);
@@ -103,7 +96,6 @@ eventsModule(appModule);
 routesModule(appModule);
 offeringsModule(appModule);
 helpModule(appModule);
-costPlanningModule(appModule);
 coreModule(appModule);
 filtersModule(appModule);
 quotasModule(appModule);
@@ -113,7 +105,6 @@ modalModule(appModule);
 configModule(appModule);
 servicesModule(appModule);
 freeipaModule(appModule);
-ansibleModule(appModule);
 introModule(appModule);
 azureModule(appModule);
 slurmModule(appModule);
@@ -121,13 +112,11 @@ paypalModule(appModule);
 storeModule(appModule);
 jiraModule(appModule);
 workspaceModule(appModule);
-rijkscloudModule(appModule);
 marketplaceModule(appModule);
 vmwareModule(appModule);
 rancherModule(appModule);
 marketplaceScriptModule(appModule);
 marketplaceChecklistModule(appModule);
-appModule.config(analyticsRoutes);
 
 if (process.env.NODE_ENV !== 'production') {
   const storybookModule = require('./marketplace/storybook.js').default;

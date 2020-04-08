@@ -10,11 +10,14 @@ import BooleanField from '@waldur/table-react/BooleanField';
 
 interface OfferingHeaderProps {
   offering: Offering;
+  hideName?: boolean;
 }
 
 export const OfferingHeader: React.FC<OfferingHeaderProps> = props => (
   <dl className="dl-horizontal resource-details-table col-sm-12">
-    <Field label={translate('Name')} value={props.offering.name} />
+    {!props.hideName && (
+      <Field label={translate('Name')} value={props.offering.name} />
+    )}
 
     <Field label={translate('Type')} value={getLabel(props.offering.type)} />
 

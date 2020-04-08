@@ -38,7 +38,6 @@ import 'angular-sanitize';
 import 'angular-ui-bootstrap';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'angular-bind-html-compile-ci-dev';
-import 'oclazyload';
 import 'intro.js';
 import 'intro.js/introjs.css';
 import 'angular-intro.js';

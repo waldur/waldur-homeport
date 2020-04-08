@@ -1,6 +1,4 @@
 /* eslint-disable */
-import loadLeafleat from '@waldur/shims/load-leaflet';
-
 // @ngInject
 export default function baseResourceListController(
   baseControllerListClass,
@@ -12,7 +10,6 @@ export default function baseResourceListController(
   projectsService,
   ResourceProvisionPolicy,
   $uibModal,
-  $ocLazyLoad,
   $rootScope,
   $state,
   $sanitize,
@@ -78,7 +75,6 @@ export default function baseResourceListController(
             },
           },
         ],
-        tableActions: this.getTableActions(),
         rowActions: function(row) {
           let index = this.findIndexById(row);
           return (
@@ -112,22 +108,8 @@ export default function baseResourceListController(
       const index = this.findIndexById(row);
       return `<${component} resource="controller.list[${index}]"></${component}>`;
     },
-    getTableActions: function() {
-      let actions = [];
-      if (ENV.featuresVisible || ENV.toBeFeatures.indexOf('openMap') === -1) {
-        actions.push(this.getMapAction());
-      }
-      return actions;
-    },
     getCategoryKey: function() {
       return this.categories[this.category];
-    },
-    getMapAction: function() {
-      return {
-        title: gettext('Open map'),
-        iconClass: 'fa fa-map-marker',
-        callback: this.openMap.bind(this),
-      };
     },
     rowFields: [
       'uuid',
@@ -192,27 +174,6 @@ export default function baseResourceListController(
         });
       });
       return markers;
-    },
-    openMap: function() {
-      let markers = this.getMarkers();
-
-      if (!markers) {
-        alert('No virtual machines with coordinates.');
-      } else {
-        let scope = $rootScope.$new();
-        scope.markers = markers;
-        loadLeafleat().then(module => {
-          $ocLazyLoad.load({ name: module.default });
-          // eslint-disable-next-line no-undef
-          scope.maxbounds = new L.LatLngBounds(markers);
-          $uibModal.open({
-            template:
-              '<leaflet width="100%" markers="markers" maxbounds="maxbounds"></leaflet>',
-            windowClass: 'map-dialog',
-            scope: scope,
-          });
-        });
-      }
     },
     projectHasNonSharedService: function(project) {
       for (let i = 0; i < project.services.length; i++) {

@@ -2,7 +2,7 @@ const HELPDESK_ITEMS = [
   {
     label: gettext('Helpdesk'),
     icon: 'fa-headphones',
-    link: 'support.helpdesk',
+    state: 'support.helpdesk',
   },
 ];
 
@@ -10,12 +10,12 @@ const DASHBOARD_ITEMS = [
   {
     label: gettext('Dashboard'),
     icon: 'fa-th-large',
-    link: 'support.dashboard',
+    state: 'support.dashboard',
   },
   {
     label: gettext('Support requests'),
     icon: 'fa-list',
-    link: 'support.list',
+    state: 'support.list',
   },
 ];
 
@@ -23,73 +23,73 @@ const REPORT_ITEMS = [
   {
     label: gettext('Users'),
     icon: 'fa-users',
-    link: 'support.users',
+    state: 'support.users',
     feature: 'support.users',
+  },
+  {
+    label: gettext('Financial overview'),
+    icon: 'fa-university',
+    state: 'support.organizations',
+    feature: 'support.organizations',
   },
   {
     label: gettext('Orders'),
     icon: 'fa-files-o',
-    link: 'marketplace-support-order-items',
+    state: 'marketplace-support-order-items',
     feature: 'marketplace',
   },
   {
     label: gettext('Resources'),
     icon: 'fa-files-o',
-    link: 'marketplace-support-resources',
+    state: 'marketplace-support-resources',
     feature: 'marketplace',
   },
   {
     label: gettext('Plan capacity'),
     icon: 'fa-puzzle-piece',
-    link: 'marketplace-support-plan-usages',
+    state: 'marketplace-support-plan-usages',
     feature: 'marketplace',
   },
   {
     label: gettext('Usage reports'),
     icon: 'fa-puzzle-piece',
-    link: 'marketplace-support-usage-reports',
+    state: 'marketplace-support-usage-reports',
     feature: 'marketplace',
   },
   {
     label: gettext('Resources usage'),
     icon: 'fa-map',
-    link: 'support.resources-treemap',
+    state: 'support.resources-treemap',
     feature: 'support.resources-treemap',
   },
   {
     label: gettext('Shared providers'),
     icon: 'fa-random',
-    link: 'support.shared-providers',
+    state: 'support.shared-providers',
     feature: 'support.shared-providers',
-  },
-  {
-    label: gettext('Financial overview'),
-    icon: 'fa-university',
-    link: 'support.organizations',
-    feature: 'support.organizations',
   },
   {
     label: gettext('Usage overview'),
     icon: 'fa-map',
-    link: 'support.usage',
+    state: 'support.usage',
     feature: 'support.usage',
     children: [
       {
         label: gettext('Flowmap'),
         icon: 'fa-sitemap',
-        link: 'support.flowmap',
+        state: 'support.flowmap',
         feature: 'support.flowmap',
       },
       {
         label: gettext('Heatmap'),
         icon: 'fa-fire',
-        link: 'support.heatmap',
+        state: 'support.heatmap',
         feature: 'support.heatmap',
       },
       {
         label: gettext('Sankey diagram'),
         icon: 'fa-code-fork',
-        link: 'support.sankey-diagram',
+        state: 'support.sankey-diagram',
         feature: 'support.sankey-diagram',
       },
     ],
@@ -97,7 +97,7 @@ const REPORT_ITEMS = [
   {
     label: gettext('VM type overview'),
     icon: 'fa-desktop',
-    link: 'support.vm-type-overview',
+    state: 'support.vm-type-overview',
     feature: 'support.vm-type-overview',
   },
 ];

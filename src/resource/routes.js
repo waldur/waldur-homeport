@@ -72,7 +72,6 @@ export default function resourceRoutes($stateProvider) {
       data: {
         auth: true,
         workspace: WOKSPACE_NAMES.project,
-        sidebarState: 'project.resources',
         pageClass: 'gray-bg',
       },
     })

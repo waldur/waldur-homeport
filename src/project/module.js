@@ -1,3 +1,5 @@
+import certificationsService from './certifications-service';
+import projectBase from './project-base';
 import projectDialog from './project-dialog';
 import projectPolicies from './project-policies';
 import projectTeam from './project-team';
@@ -15,6 +17,7 @@ import projectRoutes from './routes';
 import './events';
 
 export default module => {
+  module.directive('projectBase', projectBase);
   module.component('projectDashboard', ProjectDashboard);
   module.component('projectDetails', projectDetails);
   module.component('projectDetailsButton', projectDetailsButton);
@@ -28,5 +31,6 @@ export default module => {
   module.component('projectTeam', projectTeam);
   module.component('projectRemoveDialog', projectRemoveDialog);
   module.service('projectsService', projectsService);
+  module.service('certificationsService', certificationsService);
   module.config(projectRoutes);
 };
