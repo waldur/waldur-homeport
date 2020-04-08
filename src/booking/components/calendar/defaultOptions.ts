@@ -25,15 +25,16 @@ export const defaultOptions: OptionsInput = {
     center: 'title',
     right: 'dayGridMonth,timeGridWeek,timeGridDay',
   },
+  firstDay: 1,
   editable: true,
   selectable: true,
   timeZone: 'local',
   progressiveEventRendering: true,
   lazyFetching: false,
-  eventLimit: false,
+  eventLimit: 6,
   views: {
     agenda: {
-      eventLimit: 5,
+      eventLimit: 3,
     },
   },
   allDayMaintainDuration: false,
