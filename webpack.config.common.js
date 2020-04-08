@@ -115,12 +115,7 @@ module.exports = {
         use: [
           utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
-          {
-            loader: 'webfonts-loader',
-            options: {
-              embed: utils.isProd,
-            },
-          },
+          'webfonts-loader',
         ],
       },
       {
