@@ -394,6 +394,7 @@ msgid "All"
 msgstr ""
 
 #: src/booking/components/calendar/defaultConfig.ts
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
 msgstr ""
@@ -1583,6 +1584,7 @@ msgid "Default value"
 msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1868,6 +1870,11 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
+msgid "Edit an availability"
+msgstr ""
+
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
 msgstr ""
@@ -1925,6 +1932,7 @@ msgstr ""
 msgid "Encountered an empty component"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "End"
 msgstr ""
@@ -5659,6 +5667,7 @@ msgstr ""
 msgid "Sankey diagram"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/providers/ProviderUpdateForm.tsx
 #: src/team/add-project-member.js
@@ -6248,6 +6257,7 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/openstack/openstack-instance/actions/StartAction.ts
 msgid "Start"
@@ -6839,6 +6849,7 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html

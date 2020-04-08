@@ -71,10 +71,10 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'cache-loader',
           },
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
             options: {
