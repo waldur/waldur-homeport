@@ -75,6 +75,7 @@ export default function baseResourceListController(
             },
           },
         ],
+        tableActions: this.getTableActions(),
         rowActions: function(row) {
           let index = this.findIndexById(row);
           return (
@@ -89,6 +90,9 @@ export default function baseResourceListController(
         delete options.rowActions;
       }
       return options;
+    },
+    getTableActions: function() {
+      return [];
     },
     renderResourceName: function(row) {
       // Hack for datatables.net
