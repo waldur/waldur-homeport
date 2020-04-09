@@ -35,7 +35,12 @@ const TableComponent = props => {
       },
       {
         title: translate('Actions'),
-        render: ({ row }) => <CatalogDeleteButton catalog={row} />,
+        render: ({ row }) =>
+          row.scope_type === 'cluster' ? (
+            <CatalogDeleteButton catalog={row} />
+          ) : (
+            'N/A'
+          ),
       },
     ],
     [translate, props.resource],
@@ -57,7 +62,6 @@ const TableOptions = {
   exportRow: row => [row.name, row.description, row.catalog_url],
   mapPropsToFilter: props => ({
     cluster_uuid: props.resource.uuid,
-    scope_type: 'cluster',
   }),
 };
 
