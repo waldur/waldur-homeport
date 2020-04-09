@@ -27,4 +27,14 @@ describe('formatFlavor', () => {
     };
     expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM, 1.2 TB storage');
   });
+
+  it('renders volume type quotas if they are defined', () => {
+    const flavor = {
+      cores: 1,
+      ram: 2 * 1024,
+      gigabytes_ssd: 100,
+      gigabytes_gpfs: 300,
+    };
+    expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM, 100 GB SSD, 300 GB GPFS');
+  });
 });

@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
 import { getTypeDisplay, getServiceIcon } from '@waldur/providers/registry';
 import { formatCrontab } from '@waldur/resource/crontab';
 import { ResourceSummaryProps } from '@waldur/resource/summary';
@@ -34,22 +35,43 @@ const LIST_STATES = {
 export const getListState = category =>
   LIST_STATES[category] || 'project.resources.vms';
 
-export const formatFlavor = resource => {
-  const storage = resource.disk || resource.storage;
-  const parts = [
-    {
-      label: 'vCPU',
-      value: resource.cores,
-    },
-    {
-      label: 'RAM',
-      value: resource.ram && formatFilesize(resource.ram),
-    },
-    {
+const formatStorage = limits => {
+  const parts = [];
+  const volumeTypes = Object.keys(limits).filter(key =>
+    key.startsWith('gigabytes_'),
+  );
+  const hasVolumeTypes = volumeTypes.length > 0;
+  if (hasVolumeTypes) {
+    volumeTypes.forEach(key => {
+      const label = key.split('gigabytes_', 2)[1].toLocaleUpperCase();
+      parts.push({
+        label,
+        value: `${limits[key]} GB`,
+      });
+    });
+  } else {
+    const storage = limits.disk || limits.storage;
+    parts.push({
       label: 'storage',
       value: storage && formatFilesize(storage),
+    });
+  }
+  return parts;
+};
+
+export const formatFlavor = limits => {
+  const parts = [
+    {
+      label: translate('vCPU'),
+      value: limits.cores,
     },
+    {
+      label: translate('RAM'),
+      value: limits.ram && formatFilesize(limits.ram),
+    },
+    ...formatStorage(limits),
   ];
+
   return parts
     .filter(part => part.value)
     .map(part => `${part.value} ${part.label}`)
