@@ -37,8 +37,8 @@ export const getListState = category =>
 
 const formatStorage = limits => {
   const parts = [];
-  const volumeTypes = Object.keys(limits).filter(key =>
-    key.startsWith('gigabytes_'),
+  const volumeTypes = Object.keys(limits).filter(
+    key => key.startsWith('gigabytes_') && limits[key] > 0,
   );
   const hasVolumeTypes = volumeTypes.length > 0;
   if (hasVolumeTypes) {
