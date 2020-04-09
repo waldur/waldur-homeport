@@ -52,7 +52,7 @@ const formatStorage = limits => {
   } else {
     const storage = limits.disk || limits.storage;
     parts.push({
-      label: 'storage',
+      label: translate('storage'),
       value: storage && formatFilesize(storage),
     });
   }
