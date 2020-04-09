@@ -4,7 +4,6 @@ import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import {
   StringField,
-  TextField,
   FormContainer,
   FileUploadField,
 } from '@waldur/form-react';
@@ -27,11 +26,7 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       validate={required}
       maxLength={150}
     />
-    <TextField
-      name="description"
-      label={props.translate('Description')}
-      maxLength={500}
-    />
+    <WysiwygEditor name="description" label={props.translate('Description')} />
     <WysiwygEditor
       name="full_description"
       label={props.translate('Full description')}
@@ -41,15 +36,13 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       label={props.translate('Native name')}
       maxLength={150}
     />
-    <TextField
+    <WysiwygEditor
       name="native_description"
       label={props.translate('Native description')}
-      maxLength={500}
     />
-    <TextField
+    <WysiwygEditor
       name="terms_of_service"
       label={props.translate('Terms of Service')}
-      maxLength={500}
     />
     <ImageUploadField
       name="thumbnail"
