@@ -47,8 +47,6 @@ describe('formatFlavor', () => {
       gigabytes_ssd: 0,
       gigabytes_gpfs: 300,
     };
-    expect(formatFlavor(flavor)).toBe(
-      '1 vCPU, 2 GB RAM, 300 GB GPFS',
-    );
+    expect(formatFlavor(flavor)).toBe('1 vCPU, 2 GB RAM, 300 GB GPFS');
   });
 });
