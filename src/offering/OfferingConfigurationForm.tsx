@@ -69,7 +69,7 @@ export class PureOfferingConfigurationForm extends React.Component<
           labelClass="col-sm-3"
           controlClass="col-sm-9"
         >
-          <ProjectField />
+          <ProjectField previewMode={props.previewMode} />
           <StringField
             name="attributes.name"
             label={translate('Name')}

@@ -4606,6 +4606,14 @@ msgstr ""
 msgid "Preferred language"
 msgstr ""
 
+#: src/marketplace/offerings/PreviewOfferingButton.tsx
+msgid "Preview"
+msgstr ""
+
+#: src/marketplace/offerings/PreviewOfferingDialog.tsx
+msgid "Preview offering"
+msgstr ""
+
 #: src/form/appstore-form-wizard.html
 #: src/table-react/TablePagination.tsx
 #: src/table/responsive-table.js

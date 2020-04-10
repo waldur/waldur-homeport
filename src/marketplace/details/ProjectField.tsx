@@ -38,7 +38,7 @@ const PureProjectField = props =>
             <ProjectSelectField projects={props.projects} />
           </div>
         )}
-        <ProjectCreateButton />
+        {!props.previewMode && <ProjectCreateButton />}
       </div>
       <div className="help-block m-b-none text-muted">
         {translate('The project will be changed for all items in cart.')}
