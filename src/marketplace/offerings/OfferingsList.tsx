@@ -6,6 +6,7 @@ import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
+import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
 import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
@@ -48,7 +49,14 @@ export const TableComponent = props => {
   if (!props.actionsDisabled) {
     columns.push({
       title: translate('Actions'),
-      render: ({ row }) => <OfferingActions row={row} />,
+      render: ({ row }) => {
+        return (
+          <React.Fragment>
+            <OfferingActions row={row} />
+            <PreviewOfferingButton offering={row} />
+          </React.Fragment>
+        );
+      },
     });
   }
 

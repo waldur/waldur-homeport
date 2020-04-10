@@ -203,6 +203,7 @@ export interface OfferingConfigurationFormProps extends InjectedFormProps {
   initialLimits?: AttributesType;
   customer?: Customer;
   limits: string[];
+  previewMode?: boolean;
 }
 
 export interface OrderItemDetailsProps {

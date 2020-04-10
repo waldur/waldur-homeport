@@ -9,6 +9,7 @@ import marketplaceOfferingDetailsDialog from './details/OfferingDetailsDialog';
 import { PublicOfferingDetails } from './details/PublicOfferingDetails';
 import marketplaceMyOfferings from './MyOfferingsListContainer';
 import marketplaceVendorOfferings from './OfferingsListContainer';
+import marketplacePreviewOfferingDialog from './PreviewOfferingDialog';
 import marketplaceOfferingUpdate from './update/OfferingUpdateContainer';
 
 export default module => {
@@ -39,5 +40,9 @@ export default module => {
   module.component(
     'serviceSettingsDetailsDialog',
     serviceSettingsDetailsDialog,
+  );
+  module.component(
+    'marketplacePreviewOfferingDialog',
+    marketplacePreviewOfferingDialog,
   );
 };
