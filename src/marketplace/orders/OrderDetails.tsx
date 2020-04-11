@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
+import useInterval from 'react-use/esm/useInterval';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
 import { $state } from '@waldur/core/services';
-import { useInterval } from '@waldur/core/useInterval';
 import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getOrderDetails } from '@waldur/marketplace/common/api';
