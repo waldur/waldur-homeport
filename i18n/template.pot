@@ -2624,7 +2624,7 @@ msgstr ""
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 #: src/openstack/openstack-volume/actions/AttachAction.ts
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 msgid "Instance"
 msgstr ""
 
@@ -2964,6 +2964,10 @@ msgstr ""
 
 #: src/rancher/cluster/create/NodePanel.tsx
 msgid "Kubernetes node #{index}"
+msgstr ""
+
+#: src/rancher/node/ClusterNodesList.tsx
+msgid "Kubernetes nodes"
 msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
@@ -3574,10 +3578,6 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/rancher/node/rancher-cluster-nodes.js
-msgid "No Kubernetes nodes found matching filter."
-msgstr ""
-
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "No access info"
 msgstr ""
@@ -3766,7 +3766,7 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 msgid "Node"
 msgstr ""
 
@@ -3794,7 +3794,7 @@ msgid "Not a valid value"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 msgid "Not assigned"
 msgstr ""
 
@@ -6317,7 +6317,7 @@ msgstr ""
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -6678,10 +6678,6 @@ msgstr ""
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 msgid "Then download (if needed) and run kubectl"
-msgstr ""
-
-#: src/rancher/node/rancher-cluster-nodes.js
-msgid "There are no Kubernetes nodes yet."
 msgstr ""
 
 #: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
