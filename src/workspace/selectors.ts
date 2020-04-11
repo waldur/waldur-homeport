@@ -61,6 +61,9 @@ export const isOwnerOrStaff = createSelector(
 );
 
 const checkRole = (project, user, role) => {
+  if (!project || !user) {
+    return false;
+  }
   const projectUser = project.permissions.find(
     perm => perm.user_uuid === user.uuid,
   );
