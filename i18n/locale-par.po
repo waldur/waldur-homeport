@@ -48,6 +48,35 @@ msgstr "Department roles"
 msgid "Select project..."
 msgstr "Select department"
 
+#: src/customer/dashboard/CreateProjectAction.ts
+#: src/project/ProjectCreateButton.tsx
+#: src/project/ProjectCreateForm.tsx
+msgid "Add project"
+msgstr "Add department"
+
+#: src/team/add-project-member.js
+msgid "Add project member"
+msgstr "Add department member"
+
+#: src/customer/routes.js
+msgid "Create project"
+msgstr "Create department"
+
+#: src/team/customer-users-list.js
+msgid "No projects are assigned to this role."
+msgstr "No departments are assigned to this role."
+
+#: src/project/ProjectNameField.tsx
+#: src/team/add-team-member.html
+#: src/user/list/ProjectPermissions.tsx
+msgid "Project name"
+msgstr "Department name"
+
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
+msgid "Project description"
+msgstr "Department description"
+
 #: src/team/add-team-member.html
 msgid "There are no available projects."
 msgstr "There are no available departments."
