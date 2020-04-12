@@ -58,7 +58,11 @@ export function angular2react<Props extends object>(
       if (!this.state.scope) {
         return;
       }
-      this.state.scope.$destroy();
+      try {
+        this.state.scope.$destroy();
+      } catch (e) {
+        // Suppress warning if scope is already destroyed
+      }
     }
 
     shouldComponentUpdate(): boolean {

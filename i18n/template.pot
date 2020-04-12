@@ -4195,7 +4195,7 @@ msgstr ""
 
 #: src/billing/billing-record-header.js
 #: src/billing/invoice-header.html
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/CustomerWorkspace.tsx
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts

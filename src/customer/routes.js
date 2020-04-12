@@ -70,7 +70,7 @@ export default function organizationRoutes($stateProvider) {
         auth: true,
         workspace: WOKSPACE_NAMES.organization,
       },
-      template: '<customer-workspace><div ui-view></div></customer-workspace>',
+      template: '<customer-workspace></customer-workspace>',
       resolve: {
         currentCustomer: loadCustomer,
       },
@@ -89,8 +89,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.details', {
       url: 'events/',
-      template:
-        '<customer-events customer="currentCustomer"></customer-events>',
+      template: '<customer-events></customer-events>',
       data: {
         pageTitle: gettext('Audit logs'),
       },

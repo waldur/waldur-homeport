@@ -1,13 +1,16 @@
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import customerWorkspace from './customer-workspace';
 import customerEvents from './CustomerEventsList';
 import customerIssues from './CustomerIssuesList';
 import { CustomerSidebar } from './CustomerSidebar';
 import customerTeam from './CustomerTeam';
+import { CustomerWorkspace } from './CustomerWorkspace';
 
 export default module => {
-  module.directive('customerWorkspace', customerWorkspace);
+  module.component(
+    'customerWorkspace',
+    connectAngularComponent(CustomerWorkspace),
+  );
   module.component('customerIssues', customerIssues);
   module.component('customerEvents', customerEvents);
   module.component('customerTeam', customerTeam);

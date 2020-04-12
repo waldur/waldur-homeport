@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
+import useAsync from 'react-use/esm/useAsync';
 
-import { useQuery } from '@waldur/core/useQuery';
 import { Sidebar } from '@waldur/navigation/sidebar/Sidebar';
 import { SidebarMenuProps } from '@waldur/navigation/sidebar/types';
 import { mergeItems, getCounterFields } from '@waldur/navigation/sidebar/utils';
@@ -17,17 +17,13 @@ export const ProjectSidebar = () => {
   const project = useSelector(getProject);
   const sidebarItems = useSelector(getSidebarItems);
 
-  const { state, call } = useQuery<SidebarMenuProps>(async () => {
+  const { value } = useAsync<SidebarMenuProps>(async () => {
     const extraItems = await getExtraSidebarItems();
     const items = mergeItems(sidebarItems, extraItems);
     const fields = getCounterFields(items);
     const counters = await getProjectCounters(project, fields);
     return { items, counters };
-  }, []);
-
-  React.useEffect(() => {
-    call();
   }, [project]);
 
-  return <Sidebar items={state.data?.items} counters={state.data?.counters} />;
+  return <Sidebar items={value?.items} counters={value?.counters} />;
 };

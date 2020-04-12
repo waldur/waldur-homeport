@@ -15,7 +15,6 @@ import userEdit from './support/UserEditContainer';
 import userListView from './support/UserListView';
 import userDetails from './user-details';
 import { userPopover } from './user-popover';
-import userDropdownMenu from './UserDropdownMenu';
 import userManage from './UserManage';
 import usersService from './users-service';
 import { UserSidebar } from './UserSidebar';
@@ -26,7 +25,6 @@ export default module => {
   module.component('userSidebar', connectAngularComponent(UserSidebar));
   module.component('userEvents', userEvents);
   module.component('userManage', userManage);
-  module.component('userDropdownMenu', userDropdownMenu);
   module.directive('userDetails', userDetails);
   module.component('userEdit', userEdit);
   module.component('userDashboard', userDashboard);
