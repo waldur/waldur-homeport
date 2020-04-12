@@ -37,7 +37,7 @@ interface State<Props> {
  */
 export function angular2react<Props extends object>(
   componentName: string,
-  componentBindings?: Record<string, string>,
+  componentBindings?: string[],
 ): React.ComponentClass<Props> {
   return class extends React.Component<Props, State<Props>> {
     state: State<Props> = {
@@ -69,7 +69,7 @@ export function angular2react<Props extends object>(
     render() {
       const bindings: { [key: string]: string } = {};
       if (componentBindings) {
-        for (const binding in componentBindings) {
+        for (const binding of componentBindings) {
           bindings[kebabCase(binding)] = `props.${binding}`;
         }
       }

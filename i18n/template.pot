@@ -2364,7 +2364,7 @@ msgid "Gateway IP of this subnet"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/project/project-dialog.html
+#: src/project/ProjectDetailsDialog.tsx
 msgid "General"
 msgstr ""
 
@@ -3880,7 +3880,6 @@ msgstr ""
 
 #: src/customer/popover/customer-popover.html
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#: src/project/project-dialog.html
 #: src/user/user-popover.html
 msgid "OK"
 msgstr ""
@@ -4577,7 +4576,7 @@ msgid "Pods"
 msgstr ""
 
 #: src/customer/details/customer-policies.html
-#: src/project/project-dialog.html
+#: src/project/ProjectDetailsDialog.tsx
 msgid "Policies"
 msgstr ""
 
@@ -4773,7 +4772,7 @@ msgstr ""
 msgid "Project description"
 msgstr ""
 
-#: src/project/project-dialog.html
+#: src/project/ProjectDetailsDialog.tsx
 msgid "Project details"
 msgstr ""
 

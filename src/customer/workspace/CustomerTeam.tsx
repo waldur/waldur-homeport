@@ -13,7 +13,12 @@ const InvitationsList = angular2react('invitationsList');
 
 export const CustomerTeam = () => (
   <div className="tabs-container m-l-sm">
-    <Tabs unmountOnExit mountOnEnter defaultActiveKey="users">
+    <Tabs
+      unmountOnExit
+      mountOnEnter
+      defaultActiveKey="users"
+      id="customer-team"
+    >
       <Tab title={translate('Users')} eventKey="users">
         <PanelBody>
           <CustomerUsersList />
