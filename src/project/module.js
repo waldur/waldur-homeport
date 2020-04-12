@@ -3,7 +3,6 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import certificationsService from './certifications-service';
 import projectBase from './project-base';
 import projectPolicies from './project-policies';
-import projectTeam from './project-team';
 import projectCreate from './ProjectCreateContainer';
 import ProjectDashboard from './ProjectDashboardContainer';
 import projectDetailsButton from './ProjectDetailsButton';
@@ -14,6 +13,7 @@ import projectRemoveDialog from './ProjectRemoveDialog';
 import projectsService from './projects-service';
 import { ProjectSidebar } from './ProjectSidebar';
 import projectsList from './ProjectsList';
+import projectTeam from './ProjectTeam';
 import projectRoutes from './routes';
 
 import './events';

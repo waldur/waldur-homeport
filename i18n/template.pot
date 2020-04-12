@@ -4378,7 +4378,7 @@ msgid "Permanent"
 msgstr ""
 
 #: src/customer/workspace/CustomerTeam.tsx
-#: src/project/project-team.html
+#: src/project/ProjectTeam.tsx
 msgid "Permissions log"
 msgstr ""
 
@@ -7795,7 +7795,7 @@ msgstr ""
 #: src/customer/workspace/CustomerTeam.tsx
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/project-team.html
+#: src/project/ProjectTeam.tsx
 msgid "Users"
 msgstr ""
 
