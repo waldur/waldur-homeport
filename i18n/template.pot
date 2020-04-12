@@ -5203,10 +5203,6 @@ msgid "Remove profile"
 msgstr ""
 
 #: src/customer/details/customer-manage.html
-msgid "Remove project"
-msgstr ""
-
-#: src/customer/details/customer-manage.html
 msgid "Removed organizations cannot be restored!"
 msgstr ""
 
