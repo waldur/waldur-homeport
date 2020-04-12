@@ -2759,7 +2759,7 @@ msgstr ""
 msgid "Invitation token is not found."
 msgstr ""
 
-#: src/customer/workspace/customer-team.html
+#: src/customer/workspace/CustomerTeam.tsx
 msgid "Invitations"
 msgstr ""
 
@@ -4378,7 +4378,7 @@ msgstr ""
 msgid "Permanent"
 msgstr ""
 
-#: src/customer/workspace/customer-team.html
+#: src/customer/workspace/CustomerTeam.tsx
 #: src/project/project-team.html
 msgid "Permissions log"
 msgstr ""
@@ -7797,7 +7797,7 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
-#: src/customer/workspace/customer-team.html
+#: src/customer/workspace/CustomerTeam.tsx
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
 #: src/project/project-team.html

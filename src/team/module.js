@@ -1,7 +1,6 @@
 import addProjectMember from './add-project-member';
 import addTeamMember from './add-team-member';
 import customerUsersList from './customer-users-list';
-import customerPermissionsLogList from './CustomerPermissionsLogList';
 import { projectUsers } from './project-users-list';
 import projectPermissionsLogList from './ProjectPermissionsLogList';
 import userSelector from './user-selector';
@@ -13,6 +12,5 @@ export default module => {
   module.component('addTeamMember', addTeamMember);
   module.directive('customerUsersList', customerUsersList);
   module.component('projectUsers', projectUsers);
-  module.component('customerPermissionsLogList', customerPermissionsLogList);
   module.component('projectPermissionsLogList', projectPermissionsLogList);
 };
