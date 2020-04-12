@@ -6204,7 +6204,7 @@ msgid "Updating"
 msgstr "Yenilənir"
 
 #: src/resource/state/constants.js
-msgid "Updating floaating IPs"
+msgid "Updating floating IPs"
 msgstr "Dəyişən IP-lərın yenilənməsi"
 
 #: src/resource/state/constants.js
