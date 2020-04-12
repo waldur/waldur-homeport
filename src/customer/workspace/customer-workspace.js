@@ -1,7 +1,7 @@
 import template from './customer-workspace.html';
 
 // @ngInject
-export function CustomerWorkspaceController(
+function CustomerWorkspaceController(
   $scope,
   eventsService,
   customersService,

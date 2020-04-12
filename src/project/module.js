@@ -5,7 +5,6 @@ import projectBase from './project-base';
 import projectDialog from './project-dialog';
 import projectPolicies from './project-policies';
 import projectTeam from './project-team';
-import ProjectWorkspaceController from './project-workspace';
 import projectCreate from './ProjectCreateContainer';
 import ProjectDashboard from './ProjectDashboardContainer';
 import projectDetailsButton from './ProjectDetailsButton';
@@ -27,7 +26,6 @@ export default module => {
   module.component('projectDetails', projectDetails);
   module.component('projectDetailsButton', projectDetailsButton);
   module.component('projectCreate', projectCreate);
-  module.controller('ProjectWorkspaceController', ProjectWorkspaceController);
   module.component('projectPolicies', projectPolicies);
   module.component('projectDialog', projectDialog);
   module.component('projectIssues', projectIssues);

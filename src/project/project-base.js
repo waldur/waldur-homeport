@@ -1,22 +1,59 @@
+import { translate } from '@waldur/i18n';
+
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 import template from './project-base.html';
 
 // @ngInject
-function projectController(
+function ProjectWorkspaceController(
   $scope,
-  usersService,
-  currentStateService,
   $stateParams,
   $state,
+  currentStateService,
   projectsService,
   projectPermissionsService,
   customersService,
   WorkspaceService,
+  usersService,
+  BreadcrumbsService,
+  titleService,
 ) {
-  if (!$stateParams.uuid) {
-    $state.go('errorPage.notFound');
-    return;
+  $scope.titleService = titleService;
+
+  function refreshBreadcrumbs() {
+    if ($state.current.data && $state.current.data) {
+      BreadcrumbsService.activeItem = $state.current.data.pageTitle;
+    }
+
+    if ($scope.currentProject) {
+      if (!BreadcrumbsService.activeItem) {
+        BreadcrumbsService.activeItem = $scope.currentProject.name;
+      }
+      const items = [
+        {
+          label: translate('Project workspace'),
+          state: 'project.details',
+          params: {
+            uuid: $scope.currentProject.uuid,
+          },
+        },
+      ];
+      if ($state.current.name.includes('resources')) {
+        items.push({
+          label: translate('Resources'),
+        });
+      }
+      BreadcrumbsService.items = items;
+    }
+  }
+
+  async function refreshProject() {
+    const project = await currentStateService.getProject();
+    if (!project) {
+      return;
+    }
+    $scope.currentProject = project;
+    refreshBreadcrumbs();
   }
 
   async function loadData() {
@@ -47,10 +84,25 @@ function projectController(
     }
   }
 
-  loadData();
+  function activate() {
+    if (!$stateParams.uuid) {
+      $state.go('errorPage.notFound');
+      return;
+    }
+
+    loadData();
+
+    $scope.$on('WORKSPACE_CHANGED', () => refreshProject());
+    refreshProject();
+
+    $scope.$on('$stateChangeSuccess', () => refreshBreadcrumbs());
+    refreshBreadcrumbs();
+  }
+
+  activate();
 }
 
 export default () => ({
   template,
-  controller: projectController,
+  controller: ProjectWorkspaceController,
 });
