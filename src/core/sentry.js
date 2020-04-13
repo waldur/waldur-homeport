@@ -38,9 +38,10 @@ function normalizeEvent(event) {
 
       event.message = exception.type + ': ' + exception.value;
       // auto set a new tag specifically for the angular error url
-      if (event.extra) {
-        event.extra.angularDocs = matches[3].substr(0, 250);
-      }
+      event.extra = {
+        ...event.extra,
+        angularDocs: matches[3].substr(0, 250),
+      };
     }
   }
 
