@@ -1,7 +1,8 @@
 import * as classNames from 'classnames';
 import { cloneDeep } from 'lodash';
 import * as React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Row from 'react-bootstrap/lib/Row';
 import { connect } from 'react-redux';
 
 import { BookingsFilter } from '@waldur/booking/BookingsFilter';

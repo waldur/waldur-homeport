@@ -3,5 +3,10 @@ import { ngInjector } from '@waldur/core/services';
 export const marketplaceIsVisible = () =>
   ngInjector.get('features').isVisible('marketplace');
 
-export const getCategoryLink = id =>
-  `marketplace-project-resources({uuid: $ctrl.context.project.uuid, category_uuid: '${id}'})`;
+export const getCategoryLink = (projectId, categoryId) => ({
+  state: 'marketplace-project-resources',
+  params: {
+    uuid: projectId,
+    category_uuid: categoryId,
+  },
+});

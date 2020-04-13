@@ -12,17 +12,6 @@ msgstr ""
 msgid "(VAT is not included)"
 msgstr ""
 
-#: src/error/invalid-object-page.html
-#: src/error/invalid-route-page.html
-msgid "404"
-msgstr ""
-
-#: src/error/invalid-object-page.html
-#: src/error/invalid-quota-page.html
-#: src/error/invalid-route-page.html
-msgid "< Back"
-msgstr ""
-
 #: src/marketplace-checklist/AnswerGroup.tsx
 msgid "?"
 msgstr ""
@@ -75,10 +64,6 @@ msgstr ""
 #: src/rancher/cluster/RancherClusterSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Access"
-msgstr ""
-
-#: src/aws/AmazonForm.tsx
-msgid "Access key ID"
 msgstr ""
 
 #: src/digitalocean/DigitalOceanForm.tsx
@@ -398,6 +383,7 @@ msgid "All"
 msgstr ""
 
 #: src/booking/components/calendar/defaultConfig.ts
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
 msgstr ""
@@ -432,10 +418,6 @@ msgstr ""
 
 #: src/auth/auth-login.html
 msgid "Already have an account?"
-msgstr ""
-
-#: src/aws/help.js
-msgid "Amazon EC2 provider"
 msgstr ""
 
 #: src/marketplace/offerings/create/PlanSummary.tsx
@@ -609,10 +591,10 @@ msgid "Audit log"
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
-#: src/project/project-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/project/routes.js
-#: src/user/constants.js
+#: src/project/utils.ts
+#: src/user/constants.ts
 #: src/user/list/UserDashboard.tsx
 #: src/user/routes.js
 msgid "Audit logs"
@@ -679,6 +661,9 @@ msgstr ""
 msgid "Azure provider"
 msgstr ""
 
+#: src/error/InvalidObjectPage.tsx
+#: src/error/InvalidQuotaPage.tsx
+#: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/navigation/header/site-header.html
 msgid "Back"
@@ -690,8 +675,8 @@ msgid "Back to login"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/project-workspace.js
-#: src/user/user-details.js
+#: src/project/utils.ts
+#: src/user/UserSidebar.tsx
 msgid "Back to organization"
 msgstr ""
 
@@ -700,7 +685,7 @@ msgid "Back to personal dashboard"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/user/user-details.js
+#: src/user/UserSidebar.tsx
 msgid "Back to project"
 msgstr ""
 
@@ -769,7 +754,6 @@ msgstr ""
 
 #: src/resource/breadcrumbs/resource-categories.js
 #: src/slurm/routes.js
-#: src/slurm/sidebar.js
 msgid "Batch processing"
 msgstr ""
 
@@ -1505,11 +1489,11 @@ msgid "Daily available booking time range"
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/project-workspace.js
 #: src/project/routes.js
-#: src/user/constants.js
+#: src/project/utils.ts
+#: src/user/constants.ts
 msgid "Dashboard"
 msgstr ""
 
@@ -1592,6 +1576,7 @@ msgid "Default value"
 msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1707,7 +1692,7 @@ msgstr ""
 #: src/slurm/actions.js
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
-#: src/user/UserSidebar.tsx
+#: src/user/UserDropdownMenu.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Details"
@@ -1877,6 +1862,11 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
+msgid "Edit an availability"
+msgstr ""
+
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
 msgstr ""
@@ -1934,6 +1924,7 @@ msgstr ""
 msgid "Encountered an empty component"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "End"
 msgstr ""
@@ -2303,7 +2294,7 @@ msgstr ""
 msgid "Free"
 msgstr ""
 
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/routes.js
 msgid "FreeIPA account"
 msgstr ""
@@ -2373,7 +2364,7 @@ msgid "Gateway IP of this subnet"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/project/project-dialog.html
+#: src/project/ProjectDetailsDialog.tsx
 msgid "General"
 msgstr ""
 
@@ -2483,10 +2474,6 @@ msgstr ""
 #: src/help/constants.js
 #: src/user/keys/help.js
 msgid "How to generate SSH key"
-msgstr ""
-
-#: src/aws/help.js
-msgid "How to obtain credentials for Amazon EC2 provider"
 msgstr ""
 
 #: src/azure/provider/help.js
@@ -2637,7 +2624,7 @@ msgstr ""
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 #: src/openstack/openstack-volume/actions/AttachAction.ts
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 msgid "Instance"
 msgstr ""
 
@@ -2772,7 +2759,7 @@ msgstr ""
 msgid "Invitation token is not found."
 msgstr ""
 
-#: src/customer/workspace/customer-team.html
+#: src/customer/workspace/CustomerTeam.tsx
 msgid "Invitations"
 msgstr ""
 
@@ -2877,12 +2864,16 @@ msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/jira/project/tabs.js
-#: src/project/project-workspace.js
 #: src/project/routes.js
+#: src/project/utils.ts
 #: src/resource/tabs/constants.js
 msgid "Issues"
+msgstr ""
+
+#: src/issues/list/IssuesListTablePlaceholder.tsx
+msgid "Issues are trackable requests to the operator."
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
@@ -2973,6 +2964,10 @@ msgstr ""
 
 #: src/rancher/cluster/create/NodePanel.tsx
 msgid "Kubernetes node #{index}"
+msgstr ""
+
+#: src/rancher/node/ClusterNodesList.tsx
+msgid "Kubernetes nodes"
 msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
@@ -3075,7 +3070,7 @@ msgstr ""
 
 #: src/navigation/header/LogoutLink.tsx
 #: src/navigation/header/site-header.html
-#: src/user/UserSidebar.tsx
+#: src/user/UserDropdownMenu.tsx
 msgid "Log out"
 msgstr ""
 
@@ -3122,8 +3117,8 @@ msgstr ""
 msgid "MOAB allocation"
 msgstr ""
 
-#: src/customer/workspace/customer-workspace.js
-#: src/user/constants.js
+#: src/customer/workspace/utils.ts
+#: src/user/constants.ts
 #: src/user/routes.js
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
@@ -3583,10 +3578,6 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/rancher/node/rancher-cluster-nodes.js
-msgid "No Kubernetes nodes found matching filter."
-msgstr ""
-
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "No access info"
 msgstr ""
@@ -3775,7 +3766,7 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 msgid "Node"
 msgstr ""
 
@@ -3803,7 +3794,7 @@ msgid "Not a valid value"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 msgid "Not assigned"
 msgstr ""
 
@@ -3847,7 +3838,7 @@ msgstr ""
 msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.js
 msgid "Notifications"
@@ -3889,7 +3880,6 @@ msgstr ""
 
 #: src/customer/popover/customer-popover.html
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#: src/project/project-dialog.html
 #: src/user/user-popover.html
 msgid "OK"
 msgstr ""
@@ -4205,7 +4195,7 @@ msgstr ""
 
 #: src/billing/billing-record-header.js
 #: src/billing/invoice-header.html
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/CustomerWorkspace.tsx
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts
@@ -4261,11 +4251,11 @@ msgstr ""
 msgid "Page is not found."
 msgstr ""
 
-#: src/error/invalid-object-page.html
+#: src/error/InvalidObjectPage.tsx
 msgid "Page is not found. You've either entered invalid URL or don't have enough permissions to view this page."
 msgstr ""
 
-#: src/error/invalid-route-page.html
+#: src/error/InvalidRoutePage.tsx
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr ""
 
@@ -4387,8 +4377,8 @@ msgstr ""
 msgid "Permanent"
 msgstr ""
 
-#: src/customer/workspace/customer-team.html
-#: src/project/project-team.html
+#: src/customer/workspace/CustomerTeam.tsx
+#: src/project/ProjectTeam.tsx
 msgid "Permissions log"
 msgstr ""
 
@@ -4557,7 +4547,7 @@ msgstr ""
 msgid "Please select type in Management tab first."
 msgstr ""
 
-#: src/i18n/language-list.html
+#: src/i18n/LanguageList.tsx
 msgid "Please select your language"
 msgstr ""
 
@@ -4586,7 +4576,7 @@ msgid "Pods"
 msgstr ""
 
 #: src/customer/details/customer-policies.html
-#: src/project/project-dialog.html
+#: src/project/ProjectDetailsDialog.tsx
 msgid "Policies"
 msgstr ""
 
@@ -4617,6 +4607,14 @@ msgstr ""
 #: src/customer/popover/customer-users-details-list.js
 #: src/user/support/UserDetailsTable.tsx
 msgid "Preferred language"
+msgstr ""
+
+#: src/marketplace/offerings/PreviewOfferingButton.tsx
+msgid "Preview"
+msgstr ""
+
+#: src/marketplace/offerings/PreviewOfferingDialog.tsx
+msgid "Preview offering"
 msgstr ""
 
 #: src/form/appstore-form-wizard.html
@@ -4774,7 +4772,7 @@ msgstr ""
 msgid "Project description"
 msgstr ""
 
-#: src/project/project-dialog.html
+#: src/project/ProjectDetailsDialog.tsx
 msgid "Project details"
 msgstr ""
 
@@ -4839,7 +4837,7 @@ msgstr ""
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
-#: src/project/project-workspace.js
+#: src/project/project-base.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 msgid "Project workspace"
 msgstr ""
@@ -4857,7 +4855,7 @@ msgid "Project {project_name} has been deleted."
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/navigation/workspace/select-workspace-dialog.html
 #: src/rancher/cluster/tabs.js
 msgid "Projects"
@@ -4991,6 +4989,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
+#: src/resource/utils.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 #: src/slurm/slurm-allocation-list.js
 msgid "RAM"
@@ -5201,10 +5200,6 @@ msgstr ""
 
 #: src/user/support/UserEditForm.tsx
 msgid "Remove profile"
-msgstr ""
-
-#: src/customer/details/customer-manage.html
-msgid "Remove project"
 msgstr ""
 
 #: src/customer/details/customer-manage.html
@@ -5510,7 +5505,7 @@ msgstr ""
 #: src/offering/offering-details.js
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
-#: src/project/project-workspace.js
+#: src/project/project-base.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ChartContainer.tsx
 #: src/resource/support/TreemapChartFilter.tsx
@@ -5633,7 +5628,7 @@ msgstr ""
 msgid "SQL server name"
 msgstr ""
 
-#: src/user/constants.js
+#: src/user/constants.ts
 msgid "SSH Keys"
 msgstr ""
 
@@ -5672,6 +5667,7 @@ msgstr ""
 msgid "Sankey diagram"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/providers/ProviderUpdateForm.tsx
 #: src/team/add-project-member.js
@@ -5734,10 +5730,6 @@ msgstr ""
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Search for apps and services..."
-msgstr ""
-
-#: src/aws/AmazonForm.tsx
-msgid "Secret access key"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -5986,7 +5978,6 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
-#: src/jira/sidebar.js
 #: src/resource/breadcrumbs/resource-categories.js
 msgid "Service desk"
 msgstr ""
@@ -6266,6 +6257,7 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/openstack/openstack-instance/actions/StartAction.ts
 msgid "Start"
@@ -6320,7 +6312,7 @@ msgstr ""
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -6544,9 +6536,9 @@ msgid "Tax number"
 msgstr ""
 
 #: src/customer/routes.js
-#: src/customer/workspace/customer-workspace.js
-#: src/project/project-workspace.js
+#: src/customer/workspace/utils.ts
 #: src/project/routes.js
+#: src/project/utils.ts
 msgid "Team"
 msgstr ""
 
@@ -6681,10 +6673,6 @@ msgstr ""
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 msgid "Then download (if needed) and run kubectl"
-msgstr ""
-
-#: src/rancher/node/rancher-cluster-nodes.js
-msgid "There are no Kubernetes nodes yet."
 msgstr ""
 
 #: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
@@ -6857,6 +6845,7 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
@@ -7518,6 +7507,10 @@ msgstr ""
 msgid "Update offering"
 msgstr ""
 
+#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
+msgid "Update offering ({name})"
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Update plan for an existing resource"
 msgstr ""
@@ -7552,7 +7545,7 @@ msgid "Updating"
 msgstr ""
 
 #: src/resource/state/constants.js
-msgid "Updating floaating IPs"
+msgid "Updating floating IPs"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -7679,7 +7672,7 @@ msgstr ""
 msgid "User management events"
 msgstr ""
 
-#: src/user/UserSidebar.tsx
+#: src/user/UserDropdownMenu.tsx
 msgid "User profile"
 msgstr ""
 
@@ -7799,10 +7792,10 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
-#: src/customer/workspace/customer-team.html
+#: src/customer/workspace/CustomerTeam.tsx
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/project-team.html
+#: src/project/ProjectTeam.tsx
 msgid "Users"
 msgstr ""
 
@@ -8096,7 +8089,7 @@ msgstr ""
 msgid "You don't have permission to send this invitation."
 msgstr ""
 
-#: src/error/invalid-quota-page.html
+#: src/error/InvalidQuotaPage.tsx
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
@@ -8206,6 +8199,10 @@ msgstr ""
 
 #: src/invitations/utils.js
 msgid "Your invitation was accepted."
+msgstr ""
+
+#: src/issues/list/IssuesListTablePlaceholder.tsx
+msgid "Your organization does not have any issues yet."
 msgstr ""
 
 #: src/project/ProjectTablePlaceholder.tsx
@@ -8353,6 +8350,10 @@ msgstr ""
 msgid "resources"
 msgstr ""
 
+#: src/resource/utils.tsx
+msgid "storage"
+msgstr ""
+
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "support"
 msgstr ""
@@ -8375,6 +8376,7 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/resource/utils.tsx
 msgid "vCPU"
 msgstr ""
 

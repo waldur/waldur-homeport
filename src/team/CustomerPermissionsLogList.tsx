@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
 import { getEventsList } from '@waldur/events/BaseEventsList';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
@@ -16,6 +15,6 @@ const enhance = connect((state: OuterState) => ({
   customer: getCustomer(state),
 }));
 
-const CustomerPermissionsLogList = enhance(PureCustomerPermissionsLogList);
-
-export default connectAngularComponent(CustomerPermissionsLogList);
+export const CustomerPermissionsLogList = enhance(
+  PureCustomerPermissionsLogList,
+);

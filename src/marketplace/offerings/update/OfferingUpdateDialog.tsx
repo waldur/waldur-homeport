@@ -4,7 +4,7 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state } from '@waldur/core/services';
+import { $state, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
 import { TABS } from '../create/OfferingCreateDialog';
@@ -12,7 +12,8 @@ import { Wizard } from '../create/Wizard';
 import { STEPS, OfferingStep } from '../types';
 import { setStateBreadcrumbs } from '../utils';
 
-interface OfferingUpdateDialogProps extends InjectedFormProps {
+interface OfferingUpdateDialogProps
+  extends InjectedFormProps<{ name: string }> {
   step: OfferingStep;
   updateOffering(): void;
   loading: boolean;
@@ -40,6 +41,16 @@ export class OfferingUpdateDialog extends React.Component<
     }
     this.props.loadOffering($state.params.offering_uuid);
     this.props.setStep(STEPS[0]);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.initialValues.name !== prevProps.initialValues.name) {
+      ngInjector.get('titleService').setTitle(
+        translate('Update offering ({name})', {
+          name: this.props.initialValues.name,
+        }),
+      );
+    }
   }
 
   render() {

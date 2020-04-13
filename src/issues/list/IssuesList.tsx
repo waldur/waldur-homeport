@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { IssuesListTablePlaceholder } from '@waldur/issues/list/IssuesListTablePlaceholder';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableProps } from '@waldur/table-react/Table';
@@ -112,6 +113,7 @@ export const TableComponent: React.FC<IssueTableProps> = props => {
       verboseName={translate('support requests')}
       hasQuery={true}
       showPageSizeSelector={true}
+      placeholderComponent={<IssuesListTablePlaceholder />}
       enableExport={true}
       actions={props.scope && <IssueCreateButton scope={props.scope} />}
     />

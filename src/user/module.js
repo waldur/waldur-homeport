@@ -1,3 +1,5 @@
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import filtersModule from './filters';
 import hooksModule from './hooks/module';
 import keysModule from './keys/module';
@@ -13,17 +15,16 @@ import userEdit from './support/UserEditContainer';
 import userListView from './support/UserListView';
 import userDetails from './user-details';
 import { userPopover } from './user-popover';
-import userToken from './user-token';
 import userManage from './UserManage';
 import usersService from './users-service';
-import userSidebar from './UserSidebar';
+import { UserSidebar } from './UserSidebar';
 import { stateUtilsService, attachStateUtils } from './utils';
 import './events';
 
 export default module => {
+  module.component('userSidebar', connectAngularComponent(UserSidebar));
   module.component('userEvents', userEvents);
   module.component('userManage', userManage);
-  module.component('userSidebar', userSidebar);
   module.directive('userDetails', userDetails);
   module.component('userEdit', userEdit);
   module.component('userDashboard', userDashboard);
@@ -37,7 +38,6 @@ export default module => {
   module.service('usersService', usersService);
   module.run(attachStateUtils);
   module.config(userRoutes);
-  module.component('userToken', userToken);
   filtersModule(module);
   hooksModule(module);
   keysModule(module);

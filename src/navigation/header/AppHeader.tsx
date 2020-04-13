@@ -6,6 +6,7 @@ import { LanguageSelector } from '@waldur/i18n/LanguageSelector';
 import { ShoppingCartIndicator } from '@waldur/marketplace/cart/ShoppingCartIndicator';
 import { ComparisonIndicator } from '@waldur/marketplace/compare/ComparisonIndicator';
 import { PendingOrderIndicator } from '@waldur/marketplace/orders/PendingOrderIndicator';
+import { SidebarToggle } from '@waldur/navigation/sidebar/SidebarToggle';
 import { angular2react } from '@waldur/shims/angular2react';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -16,7 +17,6 @@ import { LogoutLink } from './LogoutLink';
 import { MainSearch } from './MainSearch';
 import { SupportLink } from './SupportLink';
 
-const SidebarToggle = angular2react('sidebarToggle');
 const SelectWorkspaceToggle = angular2react('selectWorkspaceToggle');
 
 export const AppHeader = () => (

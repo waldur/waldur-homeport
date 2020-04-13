@@ -10,9 +10,12 @@ import { Project } from '@waldur/workspace/types';
 const openProjectDialog = (project: Project) =>
   openModalDialog('projectDialog', { resolve: { project }, size: 'lg' });
 
-export const ProjectDetailsButton = (props: { project: Project }) => {
+export const ProjectDetailsButton = ({ project }: { project: Project }) => {
   const dispatch = useDispatch();
-  const callback = () => dispatch(openProjectDialog(props.project));
+  const callback = React.useCallback(
+    () => dispatch(openProjectDialog(project)),
+    [project],
+  );
   return (
     <ActionButton
       title={translate('Details')}

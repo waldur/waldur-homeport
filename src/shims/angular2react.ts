@@ -37,7 +37,7 @@ interface State<Props> {
  */
 export function angular2react<Props extends object>(
   componentName: string,
-  componentBindings?: Record<string, string>,
+  componentBindings?: string[],
 ): React.ComponentClass<Props> {
   return class extends React.Component<Props, State<Props>> {
     state: State<Props> = {
@@ -58,7 +58,11 @@ export function angular2react<Props extends object>(
       if (!this.state.scope) {
         return;
       }
-      this.state.scope.$destroy();
+      try {
+        this.state.scope.$destroy();
+      } catch (e) {
+        // Suppress warning if scope is already destroyed
+      }
     }
 
     shouldComponentUpdate(): boolean {
@@ -69,7 +73,7 @@ export function angular2react<Props extends object>(
     render() {
       const bindings: { [key: string]: string } = {};
       if (componentBindings) {
-        for (const binding in componentBindings) {
+        for (const binding of componentBindings) {
           bindings[kebabCase(binding)] = `props.${binding}`;
         }
       }

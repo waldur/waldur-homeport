@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 import { isEmpty } from '@waldur/core/utils';
 import { getEventsList } from '@waldur/events/BaseEventsList';
 import { connectAngularComponent } from '@waldur/store/connect';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerEventsFilter } from './CustomerEventsFilter';
 
@@ -22,6 +23,7 @@ export const PureCustomerEvents = getEventsList({
 });
 
 const mapStateToProps = state => ({
+  customer: getCustomer(state),
   userFilter: getFormValues('customerEventsFilter')(state),
 });
 
@@ -34,4 +36,4 @@ const CustomerEventsView = props => (
   </>
 );
 
-export default connectAngularComponent(CustomerEventsView, ['customer']);
+export default connectAngularComponent(CustomerEventsView);
