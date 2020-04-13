@@ -67,7 +67,10 @@ type EventMap = (
 
 export const mapBookingEvents: EventMap = (events, showAvailability) =>
   events.map(event => {
-    if (event.extendedProps.type === 'Availability') {
+    if (
+      event.extendedProps.type === 'Availability' ||
+      event.type === 'availability'
+    ) {
       event.rendering = showAvailability;
       event.overlap = true;
       event.classNames = 'booking booking-Availability';
@@ -78,6 +81,22 @@ export const mapBookingEvents: EventMap = (events, showAvailability) =>
     }
     return event;
   });
+
+export const transformBookingEvent = (event, showAvailability = true) => {
+  if (
+    event.extendedProps.type === 'Availability' ||
+    event.type === 'availability'
+  ) {
+    event.rendering = showAvailability ? 'background' : undefined;
+    event.overlap = true;
+    event.classNames = 'booking booking-Availability';
+  } else if (event.extendedProps.type === 'Schedule') {
+    event.overlap = false;
+    event.constraint = ['availability', 'Availability', 'businessHours'];
+    event.classNames = 'booking booking-Schedule';
+  }
+  return event;
+};
 
 export const handleTitle = ({ event, el }) => {
   if (!event.title || event.title === '') {
