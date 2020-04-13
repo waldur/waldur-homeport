@@ -1,7 +1,7 @@
 import * as React from 'react';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
-import { TermsOfServiceContent } from '@waldur/marketplace/common/TermsOfServiceContent';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { connectAngularComponent } from '@waldur/store/connect';
@@ -17,7 +17,7 @@ export const TermsOfServiceDialog = (props: TermsOfServiceDialogProps) => (
     title={translate('Terms of Service')}
     footer={<CloseDialogButton />}
   >
-    <TermsOfServiceContent content={props.resolve.content} />
+    <FormattedHtml html={props.resolve.content} />
   </ModalDialog>
 );
 
