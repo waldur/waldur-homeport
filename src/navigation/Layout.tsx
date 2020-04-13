@@ -3,10 +3,10 @@ import * as React from 'react';
 import { angular2react } from '@waldur/shims/angular2react';
 
 import { AppFooter } from './AppFooter';
+import { BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { AppHeader } from './header/AppHeader';
 
-const BreadcrumbsContainer = angular2react('breadcrumbsContainer');
 const UIView = angular2react('uiView');
 
 interface LayoutProps {

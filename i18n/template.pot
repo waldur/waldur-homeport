@@ -3986,10 +3986,6 @@ msgstr ""
 msgid "Only staff and organization users are allowed to open console."
 msgstr ""
 
-#: src/resource/resource-provision-policy.js
-msgid "Only staff can create virtual private cloud."
-msgstr ""
-
 #: src/openstack/openstack-tenant/actions/utils.ts
 msgid "Only staff can manage OpenStack tenant."
 msgstr ""
@@ -4973,7 +4969,6 @@ msgstr ""
 
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
-#: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
 msgstr ""
 
@@ -8066,10 +8061,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
 msgid "You do not have any resources yet."
-msgstr ""
-
-#: src/resource/resource-provision-policy.js
-msgid "You do not have permissions to create private cloud for current project."
 msgstr ""
 
 #: src/navigation/workspace/select-workspace-toggle.js
