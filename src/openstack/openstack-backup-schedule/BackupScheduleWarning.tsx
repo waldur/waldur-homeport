@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as Panel from 'react-bootstrap/lib/Panel';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -13,11 +14,7 @@ const BackupScheduleWarning = () => (
     </Panel.Heading>
     <Panel.Collapse>
       <Panel.Body>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: require('./BackupScheduleWarning.md'),
-          }}
-        />
+        <FormattedHtml html={require('./BackupScheduleWarning.md')} />
       </Panel.Body>
     </Panel.Collapse>
   </Panel>

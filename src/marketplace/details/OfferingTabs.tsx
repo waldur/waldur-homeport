@@ -1,7 +1,7 @@
 import * as React from 'react';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
-import { TermsOfServiceContent } from '@waldur/marketplace/common/TermsOfServiceContent';
 import { Section, Offering } from '@waldur/marketplace/types';
 
 import { AttributesTable } from './attributes/AttributesTable';
@@ -34,9 +34,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     {
       visible: !!props.offering.terms_of_service,
       title: translate('Terms of service'),
-      component: () => (
-        <TermsOfServiceContent content={props.offering.terms_of_service} />
-      ),
+      component: () => <FormattedHtml html={props.offering.terms_of_service} />,
     },
     {
       visible: basicSections.length > 0,

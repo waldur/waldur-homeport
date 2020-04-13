@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { InjectedFormProps } from 'redux-form';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -59,11 +60,7 @@ export const PureTerminateDialog = (props: TerminateDialogProps) => (
         },
       )}
       {props.resolve.action.dialogSubtitle && (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: props.resolve.action.dialogSubtitle,
-          }}
-        />
+        <FormattedHtml html={props.resolve.action.dialogSubtitle} />
       )}
     </ModalDialog>
   </form>

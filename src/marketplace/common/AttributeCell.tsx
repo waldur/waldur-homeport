@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { $sanitize } from '@waldur/core/services';
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 
 import { Attribute } from '../types';
 
@@ -57,9 +57,7 @@ export const AttributeCell: React.FC<AttributeCellProps> = ({
     }
 
     case 'html':
-      return (
-        <div dangerouslySetInnerHTML={{ __html: $sanitize(value) as string }} />
-      );
+      return <FormattedHtml html={value.toString()} />;
 
     default:
       return <>{value === undefined ? 'N/A' : value}</>;
