@@ -55,6 +55,7 @@ const ENV = {
     'import',
     'marketplace',
     'marketplace.my-offerings',
+    'marketplace.checklist',
     'notifications',
     'offering.comments',
     'private_clouds',
