@@ -33,6 +33,12 @@ msgstr ""
 msgid "Project"
 msgstr "Department"
 
+#: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
+#: src/marketplace/resources/list/ProjectFilter.tsx
+msgid "Select project..."
+msgstr "Select department..."
+
 
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
