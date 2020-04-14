@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { $sanitize } from '@waldur/core/services';
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -17,11 +17,7 @@ const PlanDescription = withTranslation((props: PlanDescriptionProps) => (
     title={props.translate('Plan description')}
     footer={<CloseDialogButton />}
   >
-    <div
-      dangerouslySetInnerHTML={{
-        __html: $sanitize(props.resolve.plan_description),
-      }}
-    />
+    <FormattedHtml html={props.resolve.plan_description} />
   </ModalDialog>
 ));
 

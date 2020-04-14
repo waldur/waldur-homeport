@@ -8,7 +8,6 @@ export default function baseResourceListController(
   currentStateService,
   usersService,
   projectsService,
-  ResourceProvisionPolicy,
   $uibModal,
   $rootScope,
   $state,

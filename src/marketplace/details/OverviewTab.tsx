@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
-import { $sanitize } from '@waldur/core/services';
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 
@@ -22,11 +22,7 @@ export const OverviewTab = (props: OverviewTabProps) => (
   <Row>
     <Col md={6}>
       <h4>{translate('Offering details')}</h4>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: $sanitize(props.offering.full_description),
-        }}
-      />
+      <FormattedHtml html={props.offering.full_description} />
     </Col>
     <Col md={6}>
       {props.offering.vendor_details && (
@@ -35,11 +31,7 @@ export const OverviewTab = (props: OverviewTabProps) => (
             <h4>{translate('Service provider details')}</h4>
             <DemoButton />
           </div>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: $sanitize(props.offering.vendor_details),
-            }}
-          />
+          <FormattedHtml html={props.offering.vendor_details} />
         </>
       )}
 

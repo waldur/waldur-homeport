@@ -1,20 +1,19 @@
-import resourceUtils from './resource-utils-service';
+import actionsModule from './actions/module';
+import resourceBreadcrumbsModule from './breadcrumbs/module';
+import filtersModule from './filters';
+import resourcesListModule from './list/module';
+import monitoringModule from './monitoring/module';
 import resourceDetails from './resource-details';
-import resourceRoutes from './routes';
 import resourceHeader from './resource-header';
+import resourceUtils from './resource-utils-service';
 import resourceName from './ResourceName';
 import resourceRefreshButton from './ResourceRefreshButton';
 import resourcesService from './resources-service';
-import ResourceProvisionPolicy from './resource-provision-policy';
-import resourceSummaryModule from './summary/module';
-import resourceBreadcrumbsModule from './breadcrumbs/module';
+import resourceRoutes from './routes';
 import resourceStateModule from './state/module';
-import resourceTabsModule from './tabs/module';
-import resourcesListModule from './list/module';
-import monitoringModule from './monitoring/module';
-import actionsModule from './actions/module';
+import resourceSummaryModule from './summary/module';
 import supportModule from './support/module';
-import filtersModule from './filters';
+import resourceTabsModule from './tabs/module';
 import './events';
 
 export default module => {
@@ -25,7 +24,6 @@ export default module => {
   module.component('resourceRefreshButton', resourceRefreshButton);
   module.config(resourceRoutes);
   module.service('resourcesService', resourcesService);
-  module.service('ResourceProvisionPolicy', ResourceProvisionPolicy);
   resourceSummaryModule(module);
   resourceBreadcrumbsModule(module);
   resourceStateModule(module);

@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { $state, ENV, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { $uibModal } from '@waldur/modal/services';
@@ -35,7 +36,7 @@ export const getIssueAction = (props: ReportIssueActionProps) => {
           component: 'messageDialog',
           resolve: {
             title: () => translate('Report an issue'),
-            message: () => <p dangerouslySetInnerHTML={{ __html: message }} />,
+            message: () => <FormattedHtml html={message} />,
           },
         });
       }
