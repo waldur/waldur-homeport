@@ -11,6 +11,29 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "Language: pro\n"
 
+#: src/booking/BookingsList.tsx
+#: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/events/EventDetailsTable.tsx
+#: src/invitations/actions/invitation-dialog.html
+#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
+#: src/issues/issue-detail.html
+#: src/jira/issue/JiraIssueSummary.tsx
+#: src/jira/project/jira-project-checkout-summary.html
+#: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/OrderSummary.tsx
+#: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectFilter.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
+msgid "Project"
+msgstr "Department"
+
+
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
 #: src/navigation/workspace/select-workspace-dialog.html
