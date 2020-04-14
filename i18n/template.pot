@@ -443,7 +443,7 @@ msgstr ""
 msgid "Annotations"
 msgstr ""
 
-#: src/rancher/node/RancherKeyValueDialog.tsx
+#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
 msgid "Annotations & labels"
 msgstr ""
 
@@ -574,6 +574,10 @@ msgstr ""
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 #: src/issues/create/issue-create-dialog.html
 msgid "Attachments"
+msgstr ""
+
+#: src/marketplace/resources/ResourceSummary.tsx
+msgid "Attributes"
 msgstr ""
 
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
@@ -941,6 +945,7 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -1041,11 +1046,13 @@ msgstr ""
 
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client organization"
 msgstr ""
 
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client project"
 msgstr ""
@@ -1378,7 +1385,7 @@ msgstr ""
 #: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
@@ -2866,6 +2873,7 @@ msgstr ""
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
 #: src/jira/project/tabs.js
+#: src/marketplace/resources/ResourceTabs.tsx
 #: src/project/routes.js
 #: src/project/utils.ts
 #: src/resource/tabs/constants.js
@@ -2933,7 +2941,7 @@ msgstr ""
 #: src/issues/list/IssuesShortListComponent.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/rancher/node/KeyValueTable.tsx
+#: src/marketplace/resources/KeyValueTable.tsx
 msgid "Key"
 msgstr ""
 
@@ -3940,6 +3948,7 @@ msgstr ""
 msgid "Offering state has changed to {offering_state}."
 msgstr ""
 
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Offering type"
@@ -4094,6 +4103,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/ResourceTabs.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/tabs/constants.js
 msgid "Order items"
@@ -4396,6 +4406,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -5679,7 +5690,7 @@ msgid "Schedule"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/ResourceTabs.tsx
 msgid "Schedules"
 msgstr ""
 
@@ -6106,7 +6117,7 @@ msgid "Show console log"
 msgstr ""
 
 #: src/billing/price-estimate-button.html
-#: src/rancher/node/KeyValueButton.tsx
+#: src/marketplace/resources/KeyValueButton.tsx
 msgid "Show details"
 msgstr ""
 
@@ -6287,7 +6298,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -6979,7 +6990,7 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "UUID"
 msgstr ""
@@ -7869,9 +7880,9 @@ msgid "Valid states for operation: {validStates}."
 msgstr ""
 
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
+#: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#: src/rancher/node/KeyValueTable.tsx
 msgid "Value"
 msgstr ""
 

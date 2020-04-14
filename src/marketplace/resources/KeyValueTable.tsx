@@ -15,7 +15,11 @@ export const KeyValueTable = props => (
       {Object.keys(props.items).map(key => (
         <tr key={key}>
           <td>{key}</td>
-          <td>{props.items[key]}</td>
+          <td>
+            {typeof props.items[key] === 'object'
+              ? JSON.stringify(props.items[key])
+              : props.items[key]}
+          </td>
         </tr>
       ))}
     </tbody>
