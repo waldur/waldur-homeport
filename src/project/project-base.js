@@ -13,7 +13,7 @@ function ProjectWorkspaceController(
   $scope.titleService = titleService;
 
   function refreshBreadcrumbs() {
-    if ($state.current.data && $state.current.data) {
+    if ($state.current.data) {
       BreadcrumbsService.activeItem = $state.current.data.pageTitle;
     }
 

@@ -102,19 +102,17 @@ class ShoppingCartItemUpdateComponent extends React.Component<
     if (this.state.loading) {
       return <LoadingSpinner />;
     }
-    if (!this.state.loading && !this.state.loaded) {
+    if (!this.state.loaded) {
       return translate('Unable to load offering.');
     }
-    if (this.state.loaded) {
-      return (
-        <PureShoppingCartItemUpdate
-          plan={this.state.plan}
-          offering={this.state.offering}
-          shoppingCartItem={this.props.shoppingCartItem}
-          limits={this.state.limits}
-        />
-      );
-    }
+    return (
+      <PureShoppingCartItemUpdate
+        plan={this.state.plan}
+        offering={this.state.offering}
+        shoppingCartItem={this.props.shoppingCartItem}
+        limits={this.state.limits}
+      />
+    );
   }
 }
 

@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const utils = require('./webpack.utils');
 
 const target = 'build.dll';
 

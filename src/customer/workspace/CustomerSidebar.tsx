@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import useAsync from 'react-use/esm/useAsync';
+import useAsync from 'react-use/lib/useAsync';
 
 import { Sidebar } from '@waldur/navigation/sidebar/Sidebar';
 import { SidebarMenuProps } from '@waldur/navigation/sidebar/types';

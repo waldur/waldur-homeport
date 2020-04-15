@@ -5,7 +5,7 @@ export default function hooksService(baseServiceClass, ENV) {
     webhook: '/hooks-web/',
   };
 
-  let ServiceClass = baseServiceClass.extend({
+  const ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/hooks/';
@@ -17,20 +17,19 @@ export default function hooksService(baseServiceClass, ENV) {
       return Object.keys(endpoints);
     },
     create: function(hook) {
-      let url = this.getUrlByType(hook.hook_type);
-      let instance = this.$create(url);
+      const url = this.getUrlByType(hook.hook_type);
+      const instance = this.$create(url);
       this.cleanupOptions(hook, instance);
       return instance.$save();
     },
     update: function(hook) {
-      let data = {};
+      const data = {};
       this.cleanupOptions(hook, data);
       return this.$update(null, hook.url, data);
     },
     cleanupOptions: function(input, output) {
-      let fields = ['is_active', 'event_groups', 'email', 'destination_url'];
-      for (let i in fields) {
-        let field = fields[i];
+      const fields = ['is_active', 'event_groups', 'email', 'destination_url'];
+      for (const field of fields) {
         if (input[field] !== undefined) {
           output[field] = input[field];
         }

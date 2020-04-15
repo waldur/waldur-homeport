@@ -89,7 +89,7 @@ export const getCustomerCounters = (customer: Customer, fields: string[]) =>
     response => response.data,
   );
 
-export const getExtraSidebarItems = (): MenuItemType[] => {
+export const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
   const SidebarExtensionService = ngInjector.get('SidebarExtensionService');
   return SidebarExtensionService.getItems('customer');
 };

@@ -76,5 +76,6 @@ export class LeafletMap extends React.Component<LeafletMapProps> {
         />
       );
     }
+    return null;
   }
 }

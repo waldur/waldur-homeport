@@ -10,6 +10,9 @@ export default function registerSidebarExtension(
 ) {
   SidebarExtensionService.register('customer', async () => {
     const customer = await currentStateService.getCustomer();
+    if (!customer) {
+      return [];
+    }
     const items = [
       {
         key: 'marketplace',
@@ -23,7 +26,7 @@ export default function registerSidebarExtension(
       },
     ];
 
-    if (customer && customer.is_service_provider) {
+    if (customer.is_service_provider) {
       return [
         ...items,
         {

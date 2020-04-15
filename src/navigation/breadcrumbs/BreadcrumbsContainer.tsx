@@ -1,5 +1,5 @@
 import * as React from 'react';
-import useEffectOnce from 'react-use/esm/useEffectOnce';
+import useEffectOnce from 'react-use/lib/useEffectOnce';
 
 import { ngInjector } from '@waldur/core/services';
 

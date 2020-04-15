@@ -17,7 +17,9 @@ import { FORM_ID } from '../store/constants';
 import { hasError } from './utils';
 
 const PureManagementSummary = props => {
-  if (props.tabHasError) {
+  const type = props.formData?.type;
+
+  if (!type || props.tabHasError) {
     return (
       <>
         <h3>{translate('Management')}</h3>
@@ -34,11 +36,9 @@ const PureManagementSummary = props => {
     );
   }
 
-  const type = props.formData.type;
-
   const section: Section = {
     title: translate('Management'),
-    attributes: type ? getAttributes(type.value) : [],
+    attributes: getAttributes(type.value),
   };
 
   const providerType = getProviderType(type.value);

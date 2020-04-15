@@ -383,7 +383,6 @@ msgid "All"
 msgstr ""
 
 #: src/booking/components/calendar/defaultConfig.ts
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
 msgstr ""
@@ -410,10 +409,6 @@ msgstr ""
 
 #: src/slurm/table-extension.js
 msgid "Allocations"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Allow bookings to be scheduled at weekends"
 msgstr ""
 
 #: src/auth/auth-login.html
@@ -823,10 +818,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Browse"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Business hours"
 msgstr ""
 
 #: src/user/support/TokenLifetimeField.tsx
@@ -1491,10 +1482,6 @@ msgstr ""
 msgid "Currently there are no booking requests."
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Daily available booking time range"
-msgstr ""
-
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
 #: src/issues/workspace/issue-navigation-service.js
@@ -1583,7 +1570,6 @@ msgid "Default value"
 msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1869,11 +1855,6 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
-msgid "Edit an availability"
-msgstr ""
-
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
 msgstr ""
@@ -1931,7 +1912,6 @@ msgstr ""
 msgid "Encountered an empty component"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "End"
 msgstr ""
@@ -2583,10 +2563,6 @@ msgstr ""
 
 #: src/issues/types/constants.ts
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Include weekends"
 msgstr ""
 
 #: src/customer/details/customer-report-error.html
@@ -3302,10 +3278,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentMinValueField.tsx
 msgid "Minimum allowed value"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Minimum booking time slot duration."
 msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.html
@@ -5673,7 +5645,6 @@ msgstr ""
 msgid "Sankey diagram"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/providers/ProviderUpdateForm.tsx
 #: src/team/add-project-member.js
@@ -5811,10 +5782,6 @@ msgstr ""
 
 #: src/issues/create/issue-registration.html
 msgid "Select assignee..."
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Select available weekdays"
 msgstr ""
 
 #: src/issues/create/issue-registration.html
@@ -6263,7 +6230,6 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/openstack/openstack-instance/actions/StartAction.ts
 msgid "Start"
@@ -6828,16 +6794,8 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Time slot"
-msgstr ""
-
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "Time to resolution"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Time zone"
 msgstr ""
 
 #: src/events/BaseEventsList.tsx
@@ -6851,7 +6809,6 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
@@ -8362,10 +8319,6 @@ msgstr ""
 
 #: src/issues/list/IssuesList.tsx
 msgid "support requests"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "till"
 msgstr ""
 
 #: src/user/support/utils.ts

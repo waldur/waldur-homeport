@@ -108,9 +108,10 @@ export class HeatMap extends React.Component<HeatMapProps> {
   render() {
     if (this.state.loading) {
       return <LoadingSpinner />;
-    }
-    if (this.state.loaded) {
+    } else if (this.state.loaded) {
       return <div ref={node => (this.mapNode = node)} id="heat-map" />;
+    } else {
+      return null;
     }
   }
 }

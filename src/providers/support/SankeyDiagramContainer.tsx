@@ -38,37 +38,41 @@ class SankeyDiagramComponent extends React.Component<
 
   formatProvidersToConsumersLink() {
     const links = [];
-    Object.keys(this.props.serviceUsage.service_providers).map(providerUuid => {
-      this.props.serviceUsage.service_providers[providerUuid].map(
-        consumerUuid => {
-          links.push({
-            source: this.props.serviceUsage.organizations[consumerUuid].name,
-            target: this.props.serviceUsage.organizations[providerUuid].name,
-            value: this.sankeyDiagramCalculator.calculateValue(
-              this.props.serviceUsage,
-              providerUuid,
-              consumerUuid,
-            ),
-          });
-        },
-      );
-    });
+    Object.keys(this.props.serviceUsage.service_providers).forEach(
+      providerUuid => {
+        this.props.serviceUsage.service_providers[providerUuid].map(
+          consumerUuid => {
+            links.push({
+              source: this.props.serviceUsage.organizations[consumerUuid].name,
+              target: this.props.serviceUsage.organizations[providerUuid].name,
+              value: this.sankeyDiagramCalculator.calculateValue(
+                this.props.serviceUsage,
+                providerUuid,
+                consumerUuid,
+              ),
+            });
+          },
+        );
+      },
+    );
     return links;
   }
 
   formatCountriesToProvidersLink() {
     const links = [];
-    Object.keys(this.props.serviceUsage.service_providers).map(providerUuid => {
-      const provider = this.props.serviceUsage.organizations[providerUuid];
-      links.push({
-        source: provider.name,
-        target: provider.country,
-        value: this.sankeyDiagramCalculator.calculateValueForCountry(
-          this.props.serviceUsage,
-          providerUuid,
-        ),
-      });
-    });
+    Object.keys(this.props.serviceUsage.service_providers).forEach(
+      providerUuid => {
+        const provider = this.props.serviceUsage.organizations[providerUuid];
+        links.push({
+          source: provider.name,
+          target: provider.country,
+          value: this.sankeyDiagramCalculator.calculateValueForCountry(
+            this.props.serviceUsage,
+            providerUuid,
+          ),
+        });
+      },
+    );
     return links;
   }
 

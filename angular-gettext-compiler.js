@@ -3,7 +3,6 @@
 'use strict';
 
 var po = require('pofile');
-var _ = require('lodash');
 
 var noContext = '$$noContext';
 
