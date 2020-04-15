@@ -6,7 +6,7 @@
     class="row wrapper white-bg page-heading"
     ng-hide="$state.current.data.hideBreadcrumbs"
   >
-    <div class="col-lg-6">
+    <div class="col-lg-12">
       <h2 ng-if="$state.current.data.renderDocumentTitle">
         {{ titleService.getTitle() }}
       </h2>
@@ -17,14 +17,6 @@
         {{ currentProject.description }}
       </p>
       <breadcrumbs-container></breadcrumbs-container>
-    </div>
-    <div class="col-lg-6" ng-if="$state.current.name === 'project.details'">
-      <div class="title-action">
-        <extension-point id="project-dashboard-button"></extension-point>
-        <project-details-button
-          project="currentProject"
-        ></project-details-button>
-      </div>
     </div>
   </div>
   <div class="footer-indent m-l-sm" ng-if="currentProject" ui-view></div>

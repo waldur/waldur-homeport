@@ -66,7 +66,8 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ordersList',
   fetchData: createFetcher('marketplace-orders'),
-  mapPropsToFilter: props => ({ project_uuid: props.project.uuid }),
+  mapPropsToFilter: props =>
+    props.project ? { project_uuid: props.project.uuid } : {},
   exportRow: row => [
     formatDateTime(row.created),
     row.created_by_full_name || row.created_by_username,

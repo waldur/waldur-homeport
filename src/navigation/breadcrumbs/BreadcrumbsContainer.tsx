@@ -18,7 +18,7 @@ export const BreadcrumbsContainer = () => {
 
   useEffectOnce(() => {
     refresh();
-    BreadcrumbsService.listen(refresh);
+    return BreadcrumbsService.listen(refresh);
   });
 
   return <Breadcrumbs items={items} activeItem={activeItem} />;

@@ -1,14 +1,13 @@
 import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
+import { KeyValueButton } from '@waldur/marketplace/resources/KeyValueButton';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
   PureResourceSummaryBase,
 } from '@waldur/resource/summary';
-
-import { KeyValueButton } from './KeyValueButton';
 
 const formatInstance = resource =>
   resource.instance ? (

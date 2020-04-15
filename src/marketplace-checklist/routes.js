@@ -9,8 +9,9 @@ export default function routes($stateProvider) {
         '<marketplace-checklist-project></marketplace-checklist-project>',
       parent: 'project',
       data: {
-        pageTitle: gettext('Compliance'),
+        pageTitle: gettext(' '),
         feature: FEATURE,
+        renderDocumentTitle: true,
       },
     })
 
