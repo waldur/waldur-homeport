@@ -1,5 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
+import useToggle from 'react-use/lib/useToggle';
 
 import { FormField } from './types';
 
@@ -7,39 +8,31 @@ interface SecretFieldProps extends FormField {
   placeholder?: string;
 }
 
-export class SecretField extends React.Component<SecretFieldProps> {
-  state = {
-    showSecret: false,
-  };
+export const SecretField: React.FC<SecretFieldProps> = props => {
+  const [showSecret, onToggle] = useToggle(false);
 
-  onToggle = () => {
-    this.setState({ showSecret: !this.state.showSecret });
-  };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { input, label, validate, ...rest } = props;
+  const iconClass = classNames('fa password-icon', {
+    'fa-eye-slash': showSecret,
+    'fa-eye': !showSecret,
+  });
 
-  render() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { input, label, validate, ...rest } = this.props;
-    const { showSecret } = this.state;
-    const iconClass = classNames('fa password-icon', {
-      'fa-eye-slash': showSecret,
-      'fa-eye': !showSecret,
-    });
-    return (
-      <div className="has-password">
-        <input
-          {...this.props.input}
-          type={showSecret ? 'text' : 'password'}
-          autoComplete="new-password"
-          className="form-control"
-          placeholder={this.props.placeholder}
-          {...rest}
-        />
-        <a
-          className={iconClass}
-          title={showSecret ? 'Hide' : 'Show'}
-          onClick={this.onToggle}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="has-password">
+      <input
+        {...props.input}
+        type={showSecret ? 'text' : 'password'}
+        autoComplete="new-password"
+        className="form-control"
+        placeholder={props.placeholder}
+        {...rest}
+      />
+      <a
+        className={iconClass}
+        title={showSecret ? 'Hide' : 'Show'}
+        onClick={onToggle}
+      />
+    </div>
+  );
+};
