@@ -8163,6 +8163,10 @@ msgstr ""
 msgid "You have the right to purchase service without additional approval."
 msgstr ""
 
+#: src/issues/list/IssuesListTablePlaceholder.tsx
+msgid "You haven't created any issues yet."
+msgstr ""
+
 #: src/freeipa/freeipa-account-create.js
 msgid "You must agree with terms of service."
 msgstr ""
@@ -8201,10 +8205,6 @@ msgstr ""
 
 #: src/invitations/utils.js
 msgid "Your invitation was accepted."
-msgstr ""
-
-#: src/issues/list/IssuesListTablePlaceholder.tsx
-msgid "Your organization does not have any issues yet."
 msgstr ""
 
 #: src/project/ProjectTablePlaceholder.tsx
