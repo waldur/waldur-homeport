@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import useEffectOnce from 'react-use/esm/useEffectOnce';
 
 import { $state, ngInjector, $rootScope } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
@@ -26,23 +25,23 @@ function refreshBreadcrumbs(currentCustomer, pageTitle) {
 }
 
 export const CustomerWorkspace = () => {
-  const [pageTitle, setPageTitle] = React.useState();
-  const [pageClass, setPageClass] = React.useState();
-  const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState();
+  const [pageTitle, setPageTitle] = React.useState<string>();
+  const [pageClass, setPageClass] = React.useState<string>();
+  const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState<boolean>();
   const customer = useSelector(getCustomer);
 
   function refreshState() {
     const data = $state.current?.data;
-    setPageTitle(data?.pageTitle);
+    setPageTitle(translate(data?.pageTitle));
     setPageClass(data?.pageClass);
     setHideBreadcrumbs(data?.hideBreadcrumbs);
-    refreshBreadcrumbs(customer, data?.pageTitle);
+    refreshBreadcrumbs(customer, translate(data?.pageTitle));
   }
 
-  useEffectOnce(() => {
+  React.useEffect(() => {
     refreshState();
     return $rootScope.$on('$stateChangeSuccess', refreshState);
-  });
+  }, []);
 
   return (
     <Layout
