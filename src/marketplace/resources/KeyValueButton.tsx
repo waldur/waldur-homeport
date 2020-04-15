@@ -9,7 +9,7 @@ export const KeyValueButton = props => {
 
   const showDetails = React.useCallback(() => {
     const resolve = { items: props.items };
-    dispatch(openModalDialog('rancherKeyValueDialog', { resolve }));
+    dispatch(openModalDialog('marketplaceKeyValueDialog', { resolve }));
   }, []);
 
   return (

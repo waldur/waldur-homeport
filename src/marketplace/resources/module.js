@@ -5,6 +5,7 @@ import marketplaceCustomerResourcesList from './list/CustomerResourcesContainer'
 import marketplaceProjectResourcesList from './list/ProjectResourcesContainer';
 import marketplacePublicResourcesList from './list/PublicResourcesContainer';
 import marketplaceSupportResourcesList from './list/SupportResourcesContainer';
+import marketplaceKeyValueDialog from './MarketplaceKeyValueDialog';
 import marketplacePlanUsagesList from './plan-usage/PlanUsageContainer';
 import marketplacePlanUsageDialog from './plan-usage/PlanUsageDialog';
 import marketplaceResourceDetails from './ResourceDetailsPage';
@@ -63,4 +64,5 @@ export default module => {
     marketplaceResourceImportDialog,
   );
   module.component('marketplaceResourceDetails', marketplaceResourceDetails);
+  module.component('marketplaceKeyValueDialog', marketplaceKeyValueDialog);
 };

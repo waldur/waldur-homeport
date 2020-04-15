@@ -7,7 +7,7 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { KeyValueTable } from './KeyValueTable';
 
-export const RancherKeyValueDialog = props => {
+export const MarketplaceKeyValueDialog = props => {
   return (
     <ModalDialog
       title={translate('Annotations & labels')}
@@ -18,4 +18,4 @@ export const RancherKeyValueDialog = props => {
   );
 };
 
-export default connectAngularComponent(RancherKeyValueDialog, ['resolve']);
+export default connectAngularComponent(MarketplaceKeyValueDialog, ['resolve']);
