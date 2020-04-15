@@ -21,8 +21,14 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
         props.offering,
       );
     }
+    if (props.formData.plan) {
+      request.limits = { ...props.formData.plan.quotas };
+    }
     if (props.formData.limits) {
-      request.limits = limitSerializer(props.formData.limits);
+      request.limits = {
+        ...request.limits,
+        ...limitSerializer(props.formData.limits),
+      };
     }
     const project = props.project || props.formData.project;
     if (project) {
