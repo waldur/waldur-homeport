@@ -2,9 +2,8 @@ import { latinName } from '@waldur/resource/actions/constants';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import openstackSnapshotsList from './openstack-snapshots-list';
-import openstackSnapshotsNestedList from './openstack-snapshots-nested-list';
-import openstackSnapshotsService from './openstack-snapshots-service';
 import { OpenStackSnapshotSummary } from './OpenStackSnapshotSummary';
+import openstackSnapshotsNestedList from './ScheduleSnapshotsList';
 import restoredVolumesList from './SnapshotRestoredVolumesList';
 
 // @ngInject
@@ -64,7 +63,6 @@ export default module => {
     OpenStackSnapshotSummary,
   );
   module.config(tabsConfig);
-  module.service('openstackSnapshotsService', openstackSnapshotsService);
   module.component('openstackSnapshotsList', openstackSnapshotsList);
   module.component(
     'openstackSnapshotsNestedList',
