@@ -556,8 +556,8 @@ msgstr ""
 msgid "Attach"
 msgstr ""
 
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource/list/resource-volumes-list.js
 msgid "Attached to"
 msgstr ""
@@ -808,7 +808,7 @@ msgstr ""
 msgid "Bookings"
 msgstr ""
 
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 msgid "Bootable"
 msgstr ""
 
@@ -1379,7 +1379,8 @@ msgstr ""
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -1621,9 +1622,11 @@ msgstr ""
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
@@ -3398,9 +3401,11 @@ msgstr ""
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
@@ -3636,10 +3641,6 @@ msgstr ""
 msgid "No resources found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
-msgid "No restored volumes found matching filter."
-msgstr ""
-
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
@@ -3659,7 +3660,6 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-#: src/openstack/openstack-volume/openstack-volume-snapshots.js
 msgid "No snapshots found matching filter."
 msgstr ""
 
@@ -3675,7 +3675,6 @@ msgstr ""
 msgid "No virtual machines found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource/list/resource-volumes-list.js
 msgid "No volumes found matching filter."
 msgstr ""
@@ -6094,12 +6093,13 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/resource/list/resource-volumes-list.js
 #: src/vmware/VMwareDiskSummary.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
@@ -6219,9 +6219,11 @@ msgstr ""
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
@@ -6870,7 +6872,7 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/payments/payment-list.js
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
@@ -8019,16 +8021,11 @@ msgstr ""
 msgid "You have no resources yet."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
-msgid "You have no restored volumes yet."
-msgstr ""
-
 #: src/jira/project/jira-projects-list.js
 msgid "You have no service desk projects yet."
 msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-#: src/openstack/openstack-volume/openstack-volume-snapshots.js
 msgid "You have no snapshots yet."
 msgstr ""
 
@@ -8049,7 +8046,6 @@ msgstr ""
 msgid "You have no virtual machines yet."
 msgstr ""
 
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/resource/list/resource-volumes-list.js
 msgid "You have no volumes yet."
 msgstr ""
@@ -8271,11 +8267,16 @@ msgstr ""
 msgid "resources"
 msgstr ""
 
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+msgid "restored volumes"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 msgid "security groups"
 msgstr ""
 
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 msgid "snapshots"
 msgstr ""
 
@@ -8319,6 +8320,10 @@ msgstr ""
 
 #: src/vmware/marketplace.ts
 msgid "vSphere Virtual Machine"
+msgstr ""
+
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+msgid "volumes"
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
