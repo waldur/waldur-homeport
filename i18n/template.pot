@@ -1005,7 +1005,7 @@ msgid "Charge for usage-based component is based on user-requested limit."
 msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
-#: src/azure/sql/azure-sql-databases-list.js
+#: src/azure/sql/DatabasesList.tsx
 msgid "Charset"
 msgstr ""
 
@@ -3360,7 +3360,7 @@ msgstr ""
 msgid "My services"
 msgstr ""
 
-#: src/azure/sql/azure-sql-databases-list.js
+#: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
@@ -3572,14 +3572,6 @@ msgstr ""
 
 #: src/slurm/slurm-allocation-list.js
 msgid "No allocations yet."
-msgstr ""
-
-#: src/azure/sql/azure-sql-databases-list.js
-msgid "No databases found matching filter."
-msgstr ""
-
-#: src/azure/sql/azure-sql-databases-list.js
-msgid "No databases yet."
 msgstr ""
 
 #: src/vmware/vmware-virtual-machine-disks.js
@@ -6222,7 +6214,7 @@ msgstr ""
 msgid "Starting"
 msgstr ""
 
-#: src/azure/sql/azure-sql-databases-list.js
+#: src/azure/sql/DatabasesList.tsx
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/booking/BookingStateFilter.tsx
@@ -8204,6 +8196,10 @@ msgstr ""
 
 #: src/resource/state/utils.ts
 msgid "current state on backend: {resourceState}."
+msgstr ""
+
+#: src/azure/sql/DatabasesList.tsx
+msgid "databases"
 msgstr ""
 
 #: src/table-react/TablePageSize.tsx
