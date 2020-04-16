@@ -3396,7 +3396,7 @@ msgstr ""
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-network/openstack-tenant-networks.js
-#: src/openstack/openstack-security-groups/security-groups-list.js
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-subnet/openstack-subnets-list.js
@@ -3651,14 +3651,6 @@ msgstr ""
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
-msgstr ""
-
-#: src/openstack/openstack-security-groups/security-groups-list.js
-msgid "No security groups found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-security-groups/security-groups-list.js
-msgid "No security groups yet."
 msgstr ""
 
 #: src/jira/project/jira-projects-list.js
@@ -6241,7 +6233,7 @@ msgstr ""
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-network/openstack-tenant-networks.js
-#: src/openstack/openstack-security-groups/security-groups-list.js
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-subnet/openstack-subnets-list.js
@@ -8289,6 +8281,10 @@ msgstr ""
 
 #: src/resource/support/SharedProviderResources.tsx
 msgid "resources"
+msgstr ""
+
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+msgid "security groups"
 msgstr ""
 
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
