@@ -1,12 +1,18 @@
-import openstackBackupsService from './openstack-backups-service';
-import openstackBackupsList from './openstack-backups-list';
-import backupSnapshotsList from './backup-snapshots-list';
-import openstackBackupRestoreSummary from './openstack-backup-restore-summary';
-import actions from './actions';
-import tabsConfig from './tabs';
-import breadcrumbsConfig from './breadcrumbs';
-import { OpenStackBackupSummary } from './OpenStackBackupSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+
+import actions from './actions';
+import backupSnapshotsList from './BackupSnapshotsList';
+import breadcrumbsConfig from './breadcrumbs';
+import openstackBackupRestoreSummary from './openstack-backup-restore-summary';
+import openstackBackupsList from './openstack-backups-list';
+import openstackBackupsService from './openstack-backups-service';
+import { OpenStackBackupSummary } from './OpenStackBackupSummary';
+import tabsConfig from './tabs';
+
+// @ngInject
+function actionsConfig(ActionConfigurationProvider) {
+  ActionConfigurationProvider.register('OpenStackTenant.Backup', actions);
+}
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Backup', OpenStackBackupSummary);
@@ -21,8 +27,3 @@ export default module => {
   module.config(tabsConfig);
   module.run(breadcrumbsConfig);
 };
-
-// @ngInject
-function actionsConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('OpenStackTenant.Backup', actions);
-}
