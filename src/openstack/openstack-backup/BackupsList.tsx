@@ -58,6 +58,6 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const BackupSnapshotsList = connectTable(TableOptions)(TableComponent);
+const BackupsList = connectTable(TableOptions)(TableComponent);
 
-export default connectAngularComponent(BackupSnapshotsList, ['resource']);
+export default connectAngularComponent(BackupsList, ['resource']);
