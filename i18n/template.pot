@@ -2247,7 +2247,7 @@ msgstr ""
 msgid "Flexible"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "Floating IP"
 msgstr ""
 
@@ -2605,7 +2605,7 @@ msgid "Initial username"
 msgstr ""
 
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-volume/actions/AttachAction.ts
 #: src/rancher/node/ClusterNodesList.tsx
 msgid "Instance"
@@ -3590,14 +3590,6 @@ msgstr ""
 msgid "No entries to show here"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-msgid "No floating IPs found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-msgid "No floating IPs yet."
-msgstr ""
-
 #: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
 msgid "No internal IPs found matching filter."
 msgstr ""
@@ -3755,7 +3747,7 @@ msgstr ""
 msgid "Not a valid value"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 msgid "Not assigned"
 msgstr ""
@@ -6255,7 +6247,7 @@ msgstr ""
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
@@ -8228,6 +8220,10 @@ msgstr ""
 
 #: src/events/BaseEventsList.tsx
 msgid "events"
+msgstr ""
+
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+msgid "floating IPs"
 msgstr ""
 
 #: src/issues/list/IssueRow.tsx
