@@ -1,10 +1,10 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
+import openstackBackupsList from './BackupsList';
 import backupSnapshotsList from './BackupSnapshotsList';
 import breadcrumbsConfig from './breadcrumbs';
 import openstackBackupRestoreSummary from './openstack-backup-restore-summary';
-import openstackBackupsList from './openstack-backups-list';
 import openstackBackupsService from './openstack-backups-service';
 import { OpenStackBackupSummary } from './OpenStackBackupSummary';
 import tabsConfig from './tabs';
