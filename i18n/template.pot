@@ -2818,7 +2818,7 @@ msgid "Invoices list"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr ""
@@ -3170,11 +3170,8 @@ msgid "Max amount"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 msgid "Max number of backups"
-msgstr ""
-
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-msgid "Max number of snapshots"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -3400,7 +3397,7 @@ msgstr ""
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
@@ -3648,14 +3645,6 @@ msgstr ""
 
 #: src/jira/project/jira-projects-list.js
 msgid "No service desk projects found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-msgid "No snapshot schedules found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-msgid "No snapshot schedules yet."
 msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
@@ -5595,7 +5584,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Schedule"
@@ -6218,7 +6207,7 @@ msgstr ""
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
@@ -8273,6 +8262,10 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 msgid "security groups"
+msgstr ""
+
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+msgid "snapshot schedules"
 msgstr ""
 
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
