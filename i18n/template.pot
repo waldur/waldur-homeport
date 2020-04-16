@@ -264,10 +264,6 @@ msgstr ""
 msgid "Add plan"
 msgstr ""
 
-#: src/resource/list/resource-private-clouds-list.js
-msgid "Add private cloud"
-msgstr ""
-
 #: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -305,10 +301,6 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "Add user input field"
-msgstr ""
-
-#: src/resource/list/resource-vms-list.js
-msgid "Add virtual machine"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
@@ -2093,7 +2085,6 @@ msgid "Extending"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
 msgstr ""
@@ -2632,7 +2623,6 @@ msgid "Internal"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Internal IP"
 msgstr ""
@@ -3593,10 +3583,6 @@ msgstr ""
 msgid "No ports yet."
 msgstr ""
 
-#: src/resource/list/resource-private-clouds-list.js
-msgid "No private clouds found matching filter."
-msgstr ""
-
 #: src/team/customer-users-list.js
 msgid "No projects are assigned to this role."
 msgstr ""
@@ -3620,10 +3606,6 @@ msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
 msgid "No users found matching filter."
-msgstr ""
-
-#: src/resource/list/resource-vms-list.js
-msgid "No virtual machines found matching filter."
 msgstr ""
 
 #: src/customer/create/customer-create-prompt.html
@@ -4579,8 +4561,7 @@ msgstr ""
 msgid "Privacy policy"
 msgstr ""
 
-#: src/project/routes.js
-#: src/resource/breadcrumbs/resource-categories.js
+#: src/openstack/utils.ts
 msgid "Private clouds"
 msgstr ""
 
@@ -7751,8 +7732,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/project/routes.js
-#: src/resource/breadcrumbs/resource-categories.js
+#: src/openstack/utils.ts
 msgid "Virtual machines"
 msgstr ""
 
@@ -7934,10 +7914,6 @@ msgstr ""
 msgid "You have no invoices yet."
 msgstr ""
 
-#: src/resource/list/resource-private-clouds-list.js
-msgid "You have no private clouds yet."
-msgstr ""
-
 #: src/quotas/quotas-table.html
 msgid "You have no quotas yet."
 msgstr ""
@@ -7965,10 +7941,6 @@ msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
 msgid "You have no users yet."
-msgstr ""
-
-#: src/resource/list/resource-vms-list.js
-msgid "You have no virtual machines yet."
 msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx

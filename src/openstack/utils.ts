@@ -1,3 +1,4 @@
+import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
 import { listToDict } from '../core/utils';
@@ -36,3 +37,23 @@ export const validatePrivateSubnetCIDR = value => {
     return translate('Enter private IPv4 CIDR.');
   }
 };
+
+export const getTenantListState = projectId => ({
+  label: translate('Private clouds'),
+  state: 'marketplace-project-resources',
+  params: {
+    category_uuid:
+      ENV.plugins.WALDUR_MARKETPLACE_OPENSTACK.TENANT_CATEGORY_UUID,
+    uuid: projectId,
+  },
+});
+
+export const getInstanceListState = projectId => ({
+  label: translate('Virtual machines'),
+  state: 'marketplace-project-resources',
+  params: {
+    category_uuid:
+      ENV.plugins.WALDUR_MARKETPLACE_OPENSTACK.INSTANCE_CATEGORY_UUID,
+    uuid: projectId,
+  },
+});
