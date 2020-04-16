@@ -6,7 +6,7 @@ import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import BooleanField from '@waldur/table-react/BooleanField';
+import { BooleanField } from '@waldur/table-react/BooleanField';
 
 const TableComponent = props => {
   const { translate } = props;
