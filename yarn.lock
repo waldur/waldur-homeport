@@ -2052,11 +2052,6 @@ angular-loader@~1.5.11:
   resolved "https://registry.yarnpkg.com/angular-loader/-/angular-loader-1.5.11.tgz#f2a5aad0227c12ca902b7fc23bfcec69991368a1"
   integrity sha1-8qWq0CJ8EsqQK3/CO/zsaZkTaKE=
 
-angular-mocks@~1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-mocks/-/angular-mocks-1.5.11.tgz#a0e1dd0ea55fd77ee7a757d75536c5e964c86f81"
-  integrity sha1-oOHdDqVf137np1fXVTbF6WTIb4E=
-
 angular-resource@~1.5.11:
   version "1.5.11"
   resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.5.11.tgz#d93ea619184a2e0ee3ae338265758363172929f0"
