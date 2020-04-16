@@ -17,8 +17,8 @@ function actionsConfig(ActionConfigurationProvider) {
 export default module => {
   ResourceSummary.register('OpenStackTenant.Backup', OpenStackBackupSummary);
   module.service('openstackBackupsService', openstackBackupsService);
-  module.directive('openstackBackupsList', openstackBackupsList);
-  module.directive('backupSnapshotsList', backupSnapshotsList);
+  module.component('openstackBackupsList', openstackBackupsList);
+  module.component('backupSnapshotsList', backupSnapshotsList);
   module.component(
     'openstackBackupRestoreSummary',
     openstackBackupRestoreSummary,
