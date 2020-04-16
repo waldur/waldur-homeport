@@ -1378,7 +1378,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/openstack/openstack-backup/backup-snapshots-list.js
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -1618,8 +1618,8 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
@@ -2814,7 +2814,7 @@ msgstr ""
 msgid "Invoices list"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
@@ -2902,7 +2902,7 @@ msgstr ""
 msgid "Keep forever"
 msgstr ""
 
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup/BackupsList.tsx
 msgid "Keep until"
 msgstr ""
 
@@ -3166,7 +3166,7 @@ msgstr ""
 msgid "Max amount"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 msgid "Max number of backups"
 msgstr ""
 
@@ -3391,9 +3391,9 @@ msgstr ""
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
@@ -3574,22 +3574,6 @@ msgstr ""
 msgid "No allocations yet."
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-msgid "No backup schedules found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-msgid "No backup schedules yet."
-msgstr ""
-
-#: src/openstack/openstack-backup/openstack-backups-list.js
-msgid "No backups found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-backup/openstack-backups-list.js
-msgid "No backups yet."
-msgstr ""
-
 #: src/azure/sql/azure-sql-databases-list.js
 msgid "No databases found matching filter."
 msgstr ""
@@ -3705,14 +3689,12 @@ msgstr ""
 msgid "No snapshot schedules yet."
 msgstr ""
 
-#: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 #: src/openstack/openstack-volume/openstack-volume-snapshots.js
 msgid "No snapshots found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 msgid "No snapshots yet."
 msgstr ""
@@ -5652,7 +5634,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
@@ -6150,7 +6132,7 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-backup/backup-snapshots-list.js
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-list.js
@@ -6270,9 +6252,9 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
@@ -8196,6 +8178,14 @@ msgstr ""
 msgid "application templates"
 msgstr ""
 
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+msgid "backup schedules"
+msgstr ""
+
+#: src/openstack/openstack-backup/BackupsList.tsx
+msgid "backups"
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
 msgstr ""
@@ -8307,6 +8297,10 @@ msgstr ""
 
 #: src/resource/support/SharedProviderResources.tsx
 msgid "resources"
+msgstr ""
+
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+msgid "snapshots"
 msgstr ""
 
 #: src/resource/utils.tsx
