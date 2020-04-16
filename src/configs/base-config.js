@@ -16,35 +16,6 @@ const ENV = {
   // Either 'accounting' or 'billing'
   accountingMode: 'accounting',
 
-  resourcesTypes: {
-    vms: 'vms',
-    storages: 'storages',
-    volumes: 'volumes',
-    private_clouds: 'private_clouds',
-    slurm: 'slurm',
-    jiraProject: 'jiraProject',
-  },
-
-  // Index of category inside of appStoreCategories
-  VirtualMachines: 0,
-  PrivateClouds: 1,
-  Storages: 3,
-  Volumes: 4,
-
-  resourceCategory: {
-    'Amazon.Instance': 'vms',
-    'Azure.VirtualMachine': 'vms',
-    'DigitalOcean.Droplet': 'vms',
-    'OpenStack.Tenant': 'private_clouds',
-    'OpenStackTenant.Instance': 'vms',
-    'OpenStackTenant.Volume': 'storages',
-    'OpenStackTenant.Snapshot': 'storages',
-    'Zabbix.Host': 'apps',
-    'Zabbix.ITService': 'apps',
-    'SLURM.Allocation': 'slurm',
-    'JIRA.Project': 'jiraProject',
-    'JIRA.Issue': 'jiraProject',
-  },
   defaultListCacheTime: 60 * 10,
   optionsCacheTime: 10 * 1000,
   disabledFeatures: [],

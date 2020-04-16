@@ -5732,10 +5732,6 @@ msgstr ""
 msgid "Select service provider"
 msgstr ""
 
-#: src/issues/create/issue-registration.html
-msgid "Select service type..."
-msgstr ""
-
 #: src/digitalocean/droplet-resize.html
 msgid "Select size..."
 msgstr ""
@@ -5878,7 +5874,6 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 msgid "Service type"
