@@ -2,11 +2,11 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
 import openstackInstanceVolumes from './InstanceVolumesList';
-import openstackVolumeSnapshots from './openstack-volume-snapshots';
 import openstackVolumesService from './openstack-volumes-service';
 import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
 import snapshotCreateDialog from './snapshot-create';
 import volumeExtendDialog from './volume-extend';
+import openstackVolumeSnapshots from './VolumeSnapshotsList';
 import './marketplace';
 
 // @ngInject
