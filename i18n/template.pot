@@ -2821,7 +2821,7 @@ msgid "Is active"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-network/openstack-tenant-networks.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
 msgid "Is external"
 msgstr ""
 
@@ -3395,7 +3395,7 @@ msgstr ""
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
-#: src/openstack/openstack-network/openstack-tenant-networks.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
@@ -3602,14 +3602,6 @@ msgstr ""
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 msgid "No members found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-msgid "No networks found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-msgid "No networks yet."
 msgstr ""
 
 #: src/payments/payment-list.js
@@ -6232,7 +6224,7 @@ msgstr ""
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
-#: src/openstack/openstack-network/openstack-tenant-networks.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
@@ -6347,7 +6339,7 @@ msgstr ""
 msgid "Subnet has been updated."
 msgstr ""
 
-#: src/openstack/openstack-network/openstack-tenant-networks.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-subnet/breadcrumbs.js
 msgid "Subnets"
 msgstr ""
@@ -8233,6 +8225,10 @@ msgstr ""
 
 #: src/table-react/utils.tsx
 msgid "items"
+msgstr ""
+
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+msgid "networks"
 msgstr ""
 
 #: src/quotas/quotas-table.html
