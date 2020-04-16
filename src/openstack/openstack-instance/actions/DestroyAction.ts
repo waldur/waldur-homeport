@@ -1,4 +1,3 @@
-import { cacheInvalidationFactory } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
 import { ResourceAction, ActionContext } from '@waldur/resource/actions/types';
@@ -40,6 +39,6 @@ export default function createAction(): ResourceAction<OpenStackInstance> {
         default_value: true,
       },
     ],
-    onSuccess: cacheInvalidationFactory('openstackFloatingIpsService'),
+    // TODO: invalidate cache when action succeeds
   };
 }

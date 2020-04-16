@@ -1,7 +1,6 @@
 import { latinName } from '@waldur/resource/actions/constants';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-import openstackSnapshotsList from './openstack-snapshots-list';
 import { OpenStackSnapshotSummary } from './OpenStackSnapshotSummary';
 import openstackSnapshotsNestedList from './ScheduleSnapshotsList';
 import restoredVolumesList from './SnapshotRestoredVolumesList';
@@ -63,7 +62,6 @@ export default module => {
     OpenStackSnapshotSummary,
   );
   module.config(tabsConfig);
-  module.component('openstackSnapshotsList', openstackSnapshotsList);
   module.component(
     'openstackSnapshotsNestedList',
     openstackSnapshotsNestedList,

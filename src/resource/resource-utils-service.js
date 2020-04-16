@@ -1,4 +1,4 @@
-import { getResourceIcon, formatResourceType, getListState } from './utils';
+import { getResourceIcon, formatResourceType } from './utils';
 
 const getIcon = item => {
   const type = item.resource_type || item.type;
@@ -10,5 +10,5 @@ const getIcon = item => {
 
 // @ngInject
 export default function resourceUtils() {
-  return { formatResourceType, getIcon, getListState };
+  return { formatResourceType, getIcon };
 }

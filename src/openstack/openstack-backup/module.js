@@ -5,7 +5,6 @@ import openstackBackupsList from './BackupsList';
 import backupSnapshotsList from './BackupSnapshotsList';
 import breadcrumbsConfig from './breadcrumbs';
 import openstackBackupRestoreSummary from './openstack-backup-restore-summary';
-import openstackBackupsService from './openstack-backups-service';
 import { OpenStackBackupSummary } from './OpenStackBackupSummary';
 import tabsConfig from './tabs';
 
@@ -16,7 +15,6 @@ function actionsConfig(ActionConfigurationProvider) {
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Backup', OpenStackBackupSummary);
-  module.service('openstackBackupsService', openstackBackupsService);
   module.component('openstackBackupsList', openstackBackupsList);
   module.component('backupSnapshotsList', backupSnapshotsList);
   module.component(

@@ -110,20 +110,6 @@ export default function projectRoutes($stateProvider) {
       },
     })
 
-    .state('project.resources.storage', {
-      url: 'storage/',
-      template: '<ui-view></ui-view>',
-      data: {
-        pageTitle: gettext('Storage'),
-      },
-      abstract: true,
-    })
-
-    .state('project.resources.storage.tabs', {
-      url: '',
-      template: '<resource-storage-tabs></resource-storage-tabs>',
-    })
-
     .state('project.team', {
       url: 'team/',
       template: '<project-team>',

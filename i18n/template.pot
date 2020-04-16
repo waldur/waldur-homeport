@@ -291,10 +291,6 @@ msgstr ""
 msgid "Add security group"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-msgid "Add snapshots"
-msgstr ""
-
 #: src/project/ProjectActions.tsx
 msgid "Add team member"
 msgstr ""
@@ -313,10 +309,6 @@ msgstr ""
 
 #: src/resource/list/resource-vms-list.js
 msgid "Add virtual machine"
-msgstr ""
-
-#: src/resource/list/resource-volumes-list.js
-msgid "Add volumes"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
@@ -468,10 +460,6 @@ msgstr ""
 msgid "Application templates"
 msgstr ""
 
-#: src/resource/breadcrumbs/resource-categories.js
-msgid "Applications"
-msgstr ""
-
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
 msgid "Apply"
 msgstr ""
@@ -558,7 +546,6 @@ msgstr ""
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/resource/list/resource-volumes-list.js
 msgid "Attached to"
 msgstr ""
 
@@ -751,11 +738,6 @@ msgstr ""
 msgid "Batch block storage size"
 msgstr ""
 
-#: src/resource/breadcrumbs/resource-categories.js
-#: src/slurm/routes.js
-msgid "Batch processing"
-msgstr ""
-
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "Batch processing documentation"
 msgstr ""
@@ -836,7 +818,6 @@ msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "CPU"
 msgstr ""
 
@@ -1385,7 +1366,6 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/vmware/vmware-virtual-machine-disks.js
 #: src/vmware/vmware-virtual-machine-ports.js
 msgid "Created"
@@ -1640,7 +1620,6 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
@@ -2329,7 +2308,6 @@ msgid "GB"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "GPU"
 msgstr ""
 
@@ -3417,7 +3395,6 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
 #: src/vmware/vmware-virtual-machine-ports.js
@@ -3570,14 +3547,6 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/slurm/slurm-allocation-list.js
-msgid "No allocations found matching filter."
-msgstr ""
-
-#: src/slurm/slurm-allocation-list.js
-msgid "No allocations yet."
-msgstr ""
-
 #: src/vmware/vmware-virtual-machine-disks.js
 msgid "No disks found matching filter."
 msgstr ""
@@ -3649,20 +3618,12 @@ msgstr ""
 msgid "No service desk projects found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-msgid "No snapshots found matching filter."
-msgstr ""
-
 #: src/customer/popover/customer-users-details-list.js
 msgid "No users found matching filter."
 msgstr ""
 
 #: src/resource/list/resource-vms-list.js
 msgid "No virtual machines found matching filter."
-msgstr ""
-
-#: src/resource/list/resource-volumes-list.js
-msgid "No volumes found matching filter."
 msgstr ""
 
 #: src/customer/create/customer-create-prompt.html
@@ -3703,10 +3664,6 @@ msgstr ""
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 msgid "Not assigned"
-msgstr ""
-
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-msgid "Not known"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
@@ -4783,7 +4740,6 @@ msgstr ""
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "Provider"
 msgstr ""
 
@@ -4896,7 +4852,6 @@ msgstr ""
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "RAM"
 msgstr ""
 
@@ -5878,10 +5833,6 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
-#: src/resource/breadcrumbs/resource-categories.js
-msgid "Service desk"
-msgstr ""
-
 #: src/jira/project/jira-project-checkout-summary.html
 msgid "Service desk project name"
 msgstr ""
@@ -6081,12 +6032,10 @@ msgstr ""
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
-#: src/resource/list/resource-volumes-list.js
 #: src/vmware/VMwareDiskSummary.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
@@ -6140,7 +6089,6 @@ msgstr ""
 #: src/openstack/openstack-backup/tabs.js
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/openstack/openstack-volume/module.js
-#: src/resource/list/resource-storage-tabs.html
 msgid "Snapshots"
 msgstr ""
 
@@ -6219,7 +6167,6 @@ msgstr ""
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/user/hooks/HooksList.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
 #: src/vmware/vmware-virtual-machine-ports.js
@@ -6257,9 +6204,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/project/routes.js
 #: src/quotas/constants.js
-#: src/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
 msgstr ""
 
@@ -7816,7 +7761,6 @@ msgid "Virtual machines count"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Volume"
 msgstr ""
 
@@ -7842,7 +7786,6 @@ msgid "Volume type"
 msgstr ""
 
 #: src/openstack/openstack-instance/module.js
-#: src/resource/list/resource-storage-tabs.html
 msgid "Volumes"
 msgstr ""
 
@@ -8011,10 +7954,6 @@ msgstr ""
 msgid "You have no service desk projects yet."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-msgid "You have no snapshots yet."
-msgstr ""
-
 #: src/invitations/invitations-list.js
 msgid "You have no team invitations yet."
 msgstr ""
@@ -8030,10 +7969,6 @@ msgstr ""
 
 #: src/resource/list/resource-vms-list.js
 msgid "You have no virtual machines yet."
-msgstr ""
-
-#: src/resource/list/resource-volumes-list.js
-msgid "You have no volumes yet."
 msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -8410,7 +8345,6 @@ msgid "{state} controls"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "{usage} of {limit}"
 msgstr ""
 
