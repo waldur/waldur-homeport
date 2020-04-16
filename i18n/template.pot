@@ -829,8 +829,8 @@ msgid "By submitting the form you are agreeing to the"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
 msgid "CIDR"
 msgstr ""
 
@@ -3399,7 +3399,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
@@ -3665,14 +3665,6 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
 msgid "No snapshots yet."
-msgstr ""
-
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-msgid "No subnets found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-msgid "No subnets yet."
 msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
@@ -6228,7 +6220,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
 #: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-volume/openstack-instance-volumes.js
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
@@ -8289,6 +8281,10 @@ msgstr ""
 
 #: src/resource/utils.tsx
 msgid "storage"
+msgstr ""
+
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+msgid "subnets"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
