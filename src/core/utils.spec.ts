@@ -103,6 +103,8 @@ describe('parseQueryString', () => {
 
 describe('truncate', () => {
   it('truncate long string', () => {
-    expect(truncate('Academy of social and political sciences')).toEqual('Academy of soc...ical sciences');
+    expect(truncate('Academy of social and political sciences')).toEqual(
+      'Academy of soc...ical sciences',
+    );
   });
 });
