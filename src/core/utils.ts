@@ -159,3 +159,19 @@ export function copyToClipboard(text) {
   document.execCommand('copy');
   document.body.removeChild(hiddenDiv);
 }
+
+// Taken from https://stackoverflow.com/questions/5723154
+export const truncate = (fullStr: string, strLen = 30, separator = '...') => {
+  if (fullStr.length <= strLen) return fullStr;
+
+  const sepLen = separator.length,
+    charsToShow = strLen - sepLen,
+    frontChars = Math.ceil(charsToShow / 2),
+    backChars = Math.floor(charsToShow / 2);
+
+  return (
+    fullStr.substr(0, frontChars) +
+    separator +
+    fullStr.substr(fullStr.length - backChars)
+  );
+};
