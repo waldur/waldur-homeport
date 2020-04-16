@@ -29,6 +29,7 @@ export interface OfferingComponent extends BaseComponent {
   use_limit_for_billing?: boolean;
   max_value?: number;
   min_value?: number;
+  factor?: number;
 }
 
 export interface Plan {

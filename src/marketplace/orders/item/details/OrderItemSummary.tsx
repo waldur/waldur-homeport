@@ -11,6 +11,10 @@ interface OrderItemSummaryProps {
   offering: Offering;
 }
 
+type ComponentMap = Record<string, OfferingComponent>;
+
+type Limits = Record<string, number>;
+
 interface Context {
   orderItem: Pick<
     OrderItemDetailsType,
@@ -43,7 +47,11 @@ const getCreateSummary = (ctx: Context): string => {
   }
 };
 
-const formatComponent = (limits, componentMap, key) =>
+const formatComponent = (
+  limits: Limits,
+  componentMap: ComponentMap,
+  key: string,
+) =>
   [
     `${key.toLocaleUpperCase()}:`,
     limits[key] / (componentMap[key]?.factor || 1),
@@ -52,14 +60,14 @@ const formatComponent = (limits, componentMap, key) =>
     .filter(x => x)
     .join(' ');
 
-const formatLimits = (limits, componentMap) =>
+const formatLimits = (limits: Limits, componentMap: ComponentMap) =>
   Object.keys(limits)
     .sort()
     .map(key => formatComponent(limits, componentMap, key))
     .join(', ');
 
-const getComponentMap = components =>
-  components.reduce((r, c) => ({ ...r, [c.type]: c || 1 }), {});
+const getComponentMap = (components: OfferingComponent[]): ComponentMap =>
+  components.reduce((r, c) => ({ ...r, [c.type]: c }), {});
 
 export const getUpdateSummary = (ctx: Context) => {
   let msg;
