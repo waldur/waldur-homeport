@@ -1358,7 +1358,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
+#: src/vmware/DisksList.tsx
 #: src/vmware/vmware-virtual-machine-ports.js
 msgid "Created"
 msgstr ""
@@ -3385,8 +3385,8 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
+#: src/vmware/DisksList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
 #: src/vmware/vmware-virtual-machine-ports.js
 msgid "Name"
 msgstr ""
@@ -3535,10 +3535,6 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "No access info."
-msgstr ""
-
-#: src/vmware/vmware-virtual-machine-disks.js
-msgid "No disks found matching filter."
 msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
@@ -6008,8 +6004,8 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/vmware/DisksList.tsx
 #: src/vmware/VMwareDiskSummary.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
 msgstr ""
 
@@ -6141,7 +6137,7 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/hooks/HooksList.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
+#: src/vmware/DisksList.tsx
 #: src/vmware/vmware-virtual-machine-ports.js
 msgid "State"
 msgstr ""
@@ -7897,10 +7893,6 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: src/vmware/vmware-virtual-machine-disks.js
-msgid "You have no disks yet."
-msgstr ""
-
 #: src/billing/invoices-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "You have no invoices yet."
@@ -8053,6 +8045,10 @@ msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
 msgid "databases"
+msgstr ""
+
+#: src/vmware/DisksList.tsx
+msgid "disks"
 msgstr ""
 
 #: src/table-react/TablePageSize.tsx
