@@ -1346,7 +1346,7 @@ msgstr ""
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/jira/project/jira-projects-list.js
+#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
@@ -3340,8 +3340,8 @@ msgstr ""
 #: src/customer/details/CustomerDetails.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/jira/project/JiraProjectSummary.tsx
+#: src/jira/project/JiraProjectsList.tsx
 #: src/jira/project/jira-project-config.js
-#: src/jira/project/jira-projects-list.js
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -3598,10 +3598,6 @@ msgstr ""
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
-msgstr ""
-
-#: src/jira/project/jira-projects-list.js
-msgid "No service desk projects found matching filter."
 msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
@@ -4714,7 +4710,7 @@ msgid "Provided by {provider}"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
-#: src/jira/project/jira-projects-list.js
+#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/providers/support/MapInfoPanel.tsx
@@ -6106,6 +6102,7 @@ msgstr ""
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -6765,8 +6762,8 @@ msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
+#: src/jira/project/JiraProjectsList.tsx
 #: src/jira/project/jira-project-config.js
-#: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -7921,10 +7918,6 @@ msgstr ""
 msgid "You have no resources yet."
 msgstr ""
 
-#: src/jira/project/jira-projects-list.js
-msgid "You have no service desk projects yet."
-msgstr ""
-
 #: src/invitations/invitations-list.js
 msgid "You have no team invitations yet."
 msgstr ""
@@ -8161,6 +8154,10 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 msgid "security groups"
+msgstr ""
+
+#: src/jira/project/JiraProjectsList.tsx
+msgid "service desk projects"
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
