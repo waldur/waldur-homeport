@@ -1,7 +1,6 @@
 import actionsModule from './actions/module';
 import resourceBreadcrumbsModule from './breadcrumbs/module';
 import filtersModule from './filters';
-import resourcesListModule from './list/module';
 import monitoringModule from './monitoring/module';
 import resourceDetails from './resource-details';
 import resourceHeader from './resource-header';
@@ -28,7 +27,6 @@ export default module => {
   resourceBreadcrumbsModule(module);
   resourceStateModule(module);
   resourceTabsModule(module);
-  resourcesListModule(module);
   monitoringModule(module);
   actionsModule(module);
   filtersModule(module);

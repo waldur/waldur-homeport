@@ -3383,7 +3383,6 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
-#: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -3569,10 +3568,6 @@ msgstr ""
 
 #: src/billing/billing-records-list.js
 msgid "No records found matching filter."
-msgstr ""
-
-#: src/resource/list/resources-list.js
-msgid "No resources found matching filter."
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
@@ -4694,7 +4689,6 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/providers/support/MapInfoPanel.tsx
-#: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -6117,7 +6111,6 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
-#: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/hooks/HooksList.tsx
@@ -7888,10 +7881,6 @@ msgstr ""
 
 #: src/billing/billing-records-list.js
 msgid "You have no records yet."
-msgstr ""
-
-#: src/resource/list/resources-list.js
-msgid "You have no resources yet."
 msgstr ""
 
 #: src/invitations/invitations-list.js
