@@ -1,5 +1,6 @@
 import { translate } from '@waldur/i18n';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 
 import { SnapshotSchedulesList } from '../openstack-snapshot-schedule/SnapshotSchedulesList';
 
