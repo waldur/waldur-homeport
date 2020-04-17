@@ -1359,7 +1359,7 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/vmware/DisksList.tsx
-#: src/vmware/vmware-virtual-machine-ports.js
+#: src/vmware/PortsList.tsx
 msgid "Created"
 msgstr ""
 
@@ -3065,8 +3065,8 @@ msgid "Logout failed"
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
-#: src/vmware/vmware-virtual-machine-ports.js
 msgid "MAC address"
 msgstr ""
 
@@ -3386,8 +3386,8 @@ msgstr ""
 #: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
 #: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Name"
 msgstr ""
 
@@ -3461,8 +3461,8 @@ msgid "Negative"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
-#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Network"
 msgstr ""
 
@@ -3569,14 +3569,6 @@ msgstr ""
 
 #: src/payments/payment-list.js
 msgid "No payments yet"
-msgstr ""
-
-#: src/vmware/vmware-virtual-machine-ports.js
-msgid "No ports found matching filter."
-msgstr ""
-
-#: src/vmware/vmware-virtual-machine-ports.js
-msgid "No ports yet."
 msgstr ""
 
 #: src/team/customer-users-list.js
@@ -6138,7 +6130,7 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/vmware/DisksList.tsx
-#: src/vmware/vmware-virtual-machine-ports.js
+#: src/vmware/PortsList.tsx
 msgid "State"
 msgstr ""
 
@@ -8124,6 +8116,10 @@ msgstr ""
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "plans"
+msgstr ""
+
+#: src/vmware/PortsList.tsx
+msgid "ports"
 msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx

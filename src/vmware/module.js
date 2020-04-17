@@ -6,9 +6,8 @@ import { registerResourceTypeLabel } from '@waldur/resource/utils';
 import { actionsConfig } from './actions';
 import breadcrumbsConfig from './breadcrumbs';
 import vmwareVirtualMachineDisks from './DisksList';
+import vmwareVirtualMachinePorts from './PortsList';
 import { tabsConfig } from './tabs';
-import vmwarePortsService from './vmware-ports-service';
-import vmwareVirtualMachinePorts from './vmware-virtual-machine-ports';
 import { VMwareDiskSummary } from './VMwareDiskSummary';
 import { VMwarePortSummary } from './VMwarePortSummary';
 import { VMwareVirtualMachineSummary } from './VMwareVirtualMachineSummary';
@@ -27,7 +26,6 @@ export default module => {
   module.config(tabsConfig);
   module.config(actionsConfig);
   module.run(breadcrumbsConfig);
-  module.service('vmwarePortsService', vmwarePortsService);
   module.component('vmwareVirtualMachineDisks', vmwareVirtualMachineDisks);
   module.component('vmwareVirtualMachinePorts', vmwareVirtualMachinePorts);
 };
