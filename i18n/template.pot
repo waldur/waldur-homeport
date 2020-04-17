@@ -2479,7 +2479,7 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "IPv4 address"
 msgstr ""
 
@@ -3064,7 +3064,7 @@ msgstr ""
 msgid "Logout failed"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 msgid "MAC address"
@@ -3539,14 +3539,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
 msgid "No entries to show here"
-msgstr ""
-
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
-msgid "No internal IPs found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
-msgid "No internal IPs yet."
 msgstr ""
 
 #: src/invitations/invitations-list.js
@@ -6213,11 +6205,11 @@ msgstr ""
 msgid "Subnet"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet CIDR"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet Name"
 msgstr ""
 
@@ -8078,6 +8070,10 @@ msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
 msgid "hours"
+msgstr ""
+
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+msgid "internal IPs"
 msgstr ""
 
 #: src/table-react/utils.tsx

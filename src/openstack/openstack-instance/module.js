@@ -1,48 +1,16 @@
-import openstackInstanceCurrentFlavor from './openstack-instance-current-flavor';
-import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
-import openstackInstanceInternalIpsList from './openstack-instance-internal-ips-list';
-import openstackInstanceNetworks from './openstack-instance-networks';
-import openstackInstanceFloatingIps from './openstack-instance-floating-ips';
-import openstackInstanceDataVolume from './openstack-instance-data-volume';
-import actions from './actions';
-import { OpenStackInstanceSummary } from './OpenStackInstanceSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
-import './marketplace';
-import registerExtensionPoint from './header-extension';
-import openStackInstanceTenantButton from './OpenStackInstanceTenantButton';
 
-export default module => {
-  ResourceSummary.register(
-    'OpenStackTenant.Instance',
-    OpenStackInstanceSummary,
-  );
-  module.component(
-    'openstackInstanceCurrentFlavor',
-    openstackInstanceCurrentFlavor,
-  );
-  module.component(
-    'openstackInstanceSecurityGroupsField',
-    openstackInstanceSecurityGroupsField,
-  );
-  module.component(
-    'openstackInstanceInternalIpsList',
-    openstackInstanceInternalIpsList,
-  );
-  module.component('openstackInstanceDataVolume', openstackInstanceDataVolume);
-  module.component('openstackInstanceNetworks', openstackInstanceNetworks);
-  module.component(
-    'openstackInstanceFloatingIps',
-    openstackInstanceFloatingIps,
-  );
-  module.component(
-    'openstackInstanceTenantButton',
-    openStackInstanceTenantButton,
-  );
-  module.config(actionConfig);
-  module.config(stateConfig);
-  module.config(tabsConfig);
-  module.run(registerExtensionPoint);
-};
+import actions from './actions';
+import registerExtensionPoint from './header-extension';
+import openstackInstanceInternalIpsList from './InternalIpsList';
+import openstackInstanceCurrentFlavor from './openstack-instance-current-flavor';
+import openstackInstanceDataVolume from './openstack-instance-data-volume';
+import openstackInstanceFloatingIps from './openstack-instance-floating-ips';
+import openstackInstanceNetworks from './openstack-instance-networks';
+import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
+import { OpenStackInstanceSummary } from './OpenStackInstanceSummary';
+import openStackInstanceTenantButton from './OpenStackInstanceTenantButton';
+import './marketplace';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
@@ -87,3 +55,36 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     }),
   });
 }
+
+export default module => {
+  ResourceSummary.register(
+    'OpenStackTenant.Instance',
+    OpenStackInstanceSummary,
+  );
+  module.component(
+    'openstackInstanceCurrentFlavor',
+    openstackInstanceCurrentFlavor,
+  );
+  module.component(
+    'openstackInstanceSecurityGroupsField',
+    openstackInstanceSecurityGroupsField,
+  );
+  module.component(
+    'openstackInstanceInternalIpsList',
+    openstackInstanceInternalIpsList,
+  );
+  module.component('openstackInstanceDataVolume', openstackInstanceDataVolume);
+  module.component('openstackInstanceNetworks', openstackInstanceNetworks);
+  module.component(
+    'openstackInstanceFloatingIps',
+    openstackInstanceFloatingIps,
+  );
+  module.component(
+    'openstackInstanceTenantButton',
+    openStackInstanceTenantButton,
+  );
+  module.config(actionConfig);
+  module.config(stateConfig);
+  module.config(tabsConfig);
+  module.run(registerExtensionPoint);
+};
