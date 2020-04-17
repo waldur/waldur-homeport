@@ -3,7 +3,6 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 import breadcrumbsConfig from './breadcrumbs';
 import { formatAllocationPool } from './filters';
 import openstackAllocationPool from './openstack-allocation-pool';
-import openstackNetworksService from './openstack-networks-service';
 import { OpenStackNetworkSummary } from './OpenStackNetworkSummary';
 import openstackTenantNetworks from './TenantNetworksList';
 
@@ -65,7 +64,6 @@ function tabsConfig(
 
 export default module => {
   ResourceSummary.register('OpenStack.Network', OpenStackNetworkSummary);
-  module.service('openstackNetworksService', openstackNetworksService);
   module.component('openstackAllocationPool', openstackAllocationPool);
   module.component('openstackTenantNetworks', openstackTenantNetworks);
   module.filter('formatAllocationPool', formatAllocationPool);

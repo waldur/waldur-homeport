@@ -7,7 +7,6 @@ import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
 import securityGroupRuleEditor from './security-group-rule-editor';
 import securityGroupRulesList from './security-group-rules-list';
 import securityGroupsDialog from './security-groups-dialog';
-import openstackSecurityGroupsService from './security-groups-service';
 import openstackSecurityGroupsList from './SecurityGroupsList';
 
 // @ngInject
@@ -70,10 +69,6 @@ export default module => {
   ResourceSummary.register(
     'OpenStack.SecurityGroup',
     OpenStackSecurityGroupSummary,
-  );
-  module.service(
-    'openstackSecurityGroupsService',
-    openstackSecurityGroupsService,
   );
   module.component('openstackSecurityGroupsList', openstackSecurityGroupsList);
   module.component('securityGroupRulesList', securityGroupRulesList);
