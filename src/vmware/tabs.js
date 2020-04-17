@@ -1,19 +1,21 @@
+import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
+
+import { DisksList } from './DisksList';
+import { PortsList } from './PortsList';
+
 // @ngInject
-export function tabsConfig(
-  ResourceTabsConfigurationProvider,
-  DEFAULT_RESOURCE_TABS,
-) {
-  ResourceTabsConfigurationProvider.register('VMware.VirtualMachine', {
-    order: ['disks', 'ports', ...DEFAULT_RESOURCE_TABS.order],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
-      disks: {
-        heading: gettext('Disks'),
-        component: 'vmwareVirtualMachineDisks',
-      },
-      ports: {
-        heading: gettext('Network adapters'),
-        component: 'vmwareVirtualMachinePorts',
-      },
-    }),
-  });
+export function tabsConfig(ResourceTabsConfigurationProvider) {
+  ResourceTabsConfigurationProvider.register('VMware.VirtualMachine', () => [
+    {
+      key: 'disks',
+      title: translate('Disks'),
+      component: DisksList,
+    },
+    {
+      key: 'ports',
+      title: translate('Network adapters'),
+      component: PortsList,
+    },
+    ...getDefaultResourceTabs(),
+  ]);
 }

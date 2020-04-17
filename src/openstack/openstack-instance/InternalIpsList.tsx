@@ -3,7 +3,6 @@ import * as React from 'react';
 import { getById } from '@waldur/core/api';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { VirtualMachine } from '@waldur/resource/types';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -54,6 +53,4 @@ const TableOptions = {
   }),
 };
 
-const InternalIpsList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(InternalIpsList, ['resource']);
+export const InternalIpsList = connectTable(TableOptions)(TableComponent);

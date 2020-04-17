@@ -1,33 +1,34 @@
+import { translate } from '@waldur/i18n';
+import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
+
+import { ClusterCatalogList } from '../catalog/ClusterCatalogList';
+import { ClusterProjectList } from '../ClusterProjectList';
+import { ClusterNodesList } from '../node/ClusterNodesList';
+import { ClusterTemplatesList } from '../template/ClusterTemplateList';
+
 // @ngInject
-export function tabsConfig(
-  ResourceTabsConfigurationProvider,
-  DEFAULT_RESOURCE_TABS,
-) {
-  ResourceTabsConfigurationProvider.register('Rancher.Cluster', {
-    order: [
-      'nodes',
-      'catalogs',
-      'projects',
-      'templates',
-      ...DEFAULT_RESOURCE_TABS.order,
-    ],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
-      nodes: {
-        heading: gettext('Nodes'),
-        component: 'rancherClusterNodes',
-      },
-      catalogs: {
-        heading: gettext('Catalogues'),
-        component: 'rancherClusterCatalogs',
-      },
-      projects: {
-        heading: gettext('Projects'),
-        component: 'rancherClusterProjects',
-      },
-      templates: {
-        heading: gettext('Application templates'),
-        component: 'rancherClusterTemplates',
-      },
-    }),
-  });
+export function tabsConfig(ResourceTabsConfigurationProvider) {
+  ResourceTabsConfigurationProvider.register('Rancher.Cluster', () => [
+    {
+      key: 'nodes',
+      title: translate('Nodes'),
+      component: ClusterNodesList,
+    },
+    {
+      key: 'catalogs',
+      title: translate('Catalogues'),
+      component: ClusterCatalogList,
+    },
+    {
+      key: 'projects',
+      title: translate('Projects'),
+      component: ClusterProjectList,
+    },
+    {
+      key: 'templates',
+      title: translate('Application templates'),
+      component: ClusterTemplatesList,
+    },
+    ...getDefaultResourceTabs(),
+  ]);
 }

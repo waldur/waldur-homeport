@@ -1,15 +1,16 @@
+import { translate } from '@waldur/i18n';
+import { getEventsTab } from '@waldur/resource/tabs/constants';
+
+import { BackupSnapshotsList } from './BackupSnapshotsList';
+
 // @ngInject
-export default function tabsConfig(
-  ResourceTabsConfigurationProvider,
-  DEFAULT_SUBRESOURCE_TABS,
-) {
-  ResourceTabsConfigurationProvider.register('OpenStackTenant.Backup', {
-    order: ['snapshots', ...DEFAULT_SUBRESOURCE_TABS.order],
-    options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
-      snapshots: {
-        heading: gettext('Snapshots'),
-        component: 'backupSnapshotsList',
-      },
-    }),
-  });
+export default function tabsConfig(ResourceTabsConfigurationProvider) {
+  ResourceTabsConfigurationProvider.register('OpenStackTenant.Backup', () => [
+    {
+      key: 'snapshots',
+      title: translate('Snapshots'),
+      component: BackupSnapshotsList,
+    },
+    getEventsTab(),
+  ]);
 }

@@ -1,27 +1,32 @@
-const TABS = {
-  events: {
-    heading: gettext('Audit log'),
-    component: 'resourceEvents',
-  },
-  issues: {
-    heading: gettext('Issues'),
-    component: 'resourceIssues',
-    feature: 'support',
-  },
-  orderItems: {
-    heading: gettext('Order items'),
-    component: 'marketplaceResourceOrderItems',
-    feature: 'marketplace',
-    isVisible: resource => Boolean(resource.marketplace_resource_uuid),
-  },
-};
+import { translate } from '@waldur/i18n';
+import { ResourceOrderItemsTab } from '@waldur/marketplace/orders/item/list/ResourceOrderItems';
 
-export const DEFAULT_RESOURCE_TABS = {
-  order: ['issues', 'orderItems', 'events'],
-  options: TABS,
-};
+import { ResourceEvents } from './ResourceEvents';
+import { ResourceIssuesList } from './ResourceIssuesList';
 
-export const DEFAULT_SUBRESOURCE_TABS = {
-  order: ['events'],
-  options: TABS,
-};
+export const getEventsTab = () => ({
+  key: 'events',
+  title: translate('Audit log'),
+  component: ResourceEvents,
+});
+
+const getIssuesTab = () => ({
+  key: 'issues',
+  title: translate('Issues'),
+  component: ResourceIssuesList,
+  feature: 'support',
+});
+
+const getOrderItemsTab = () => ({
+  key: 'orderItems',
+  title: translate('Order items'),
+  component: ResourceOrderItemsTab,
+  feature: 'marketplace',
+  isVisible: resource => Boolean(resource.marketplace_resource_uuid),
+});
+
+export const getDefaultResourceTabs = () => [
+  getEventsTab(),
+  getIssuesTab(),
+  getOrderItemsTab(),
+];

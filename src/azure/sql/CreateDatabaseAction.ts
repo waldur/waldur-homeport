@@ -1,4 +1,3 @@
-import { cacheInvalidationFactory } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import {
   validateState,
@@ -18,6 +17,6 @@ export default function createAction(): ResourceAction {
     method: 'POST',
     validators: [validateState('OK')],
     fields: [createNameField(), createDescriptionField()],
-    onSuccess: cacheInvalidationFactory('azureSQLDatabasesService'),
+    // TODO: invalidate cache when action succeeds
   };
 }

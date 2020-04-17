@@ -5,7 +5,6 @@ import { formatFilesize } from '@waldur/core/utils';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -54,6 +53,4 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const VolumeSnapshotsList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(VolumeSnapshotsList, ['resource']);
+export const VolumeSnapshotsList = connectTable(TableOptions)(TableComponent);

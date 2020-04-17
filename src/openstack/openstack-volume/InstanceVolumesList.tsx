@@ -3,7 +3,6 @@ import * as React from 'react';
 import { formatFilesize } from '@waldur/core/utils';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { BooleanField } from '@waldur/table-react/BooleanField';
 
@@ -51,6 +50,4 @@ const TableOptions = {
   }),
 };
 
-const InstanceVolumesList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(InstanceVolumesList, ['resource']);
+export const InstanceVolumesList = connectTable(TableOptions)(TableComponent);

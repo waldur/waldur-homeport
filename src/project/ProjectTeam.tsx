@@ -12,7 +12,13 @@ const ProjectUsersList = angular2react('projectUsers');
 
 export const ProjectTeam = () => (
   <div className="tabs-container m-l-sm">
-    <Tabs unmountOnExit mountOnEnter defaultActiveKey="users" id="project-team">
+    <Tabs
+      unmountOnExit
+      mountOnEnter
+      defaultActiveKey="users"
+      animation={false}
+      id="project-team"
+    >
       <Tab title={translate('Users')} eventKey="users">
         <PanelBody>
           <ProjectUsersList />

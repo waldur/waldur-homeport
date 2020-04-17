@@ -1,6 +1,4 @@
 // @ngInject
 export default function tabsConfig(ResourceTabsConfigurationProvider) {
-  ResourceTabsConfigurationProvider.register('JIRA.Issue', {
-    order: [],
-  });
+  ResourceTabsConfigurationProvider.register('JIRA.Issue', () => []);
 }

@@ -4,7 +4,6 @@ import marketplaceAttributeFilterListDialog from './category/filters/AttributeFi
 import marketplaceCompare from './compare/ComparisonContainer';
 import marketplaceOffering from './details/DetailsPage';
 import marketplaceOfferingPlanDescription from './details/plan/PlanDescription';
-import marketplacePlanDetailsButton from './details/plan/PlanDetailsButton';
 import marketplacePlanDetailsDialog from './details/plan/PlanDetailsDialog';
 import registerExtensionPoint from './extension-point';
 import marketplaceLanding from './landing/LandingPageContainer';
@@ -23,10 +22,6 @@ export default module => {
   module.component(
     'marketplaceOfferingPlanDescription',
     marketplaceOfferingPlanDescription,
-  );
-  module.component(
-    'marketplacePlanDetailsButton',
-    marketplacePlanDetailsButton,
   );
   module.component(
     'marketplacePlanDetailsDialog',

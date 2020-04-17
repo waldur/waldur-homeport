@@ -1,10 +1,13 @@
+import { translate } from '@waldur/i18n';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+import { getEventsTab } from '@waldur/resource/tabs/constants';
+
+import { NetworkSubnetsList } from '../openstack-subnet/NetworkSubnetsList';
 
 import breadcrumbsConfig from './breadcrumbs';
 import { formatAllocationPool } from './filters';
 import openstackAllocationPool from './openstack-allocation-pool';
 import { OpenStackNetworkSummary } from './OpenStackNetworkSummary';
-import openstackTenantNetworks from './TenantNetworksList';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
@@ -47,25 +50,20 @@ function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
 }
 
 // @ngInject
-function tabsConfig(
-  ResourceTabsConfigurationProvider,
-  DEFAULT_SUBRESOURCE_TABS,
-) {
-  ResourceTabsConfigurationProvider.register('OpenStack.Network', {
-    order: ['subnets', ...DEFAULT_SUBRESOURCE_TABS.order],
-    options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
-      subnets: {
-        heading: 'Subnets',
-        component: 'openstackSubnetsList',
-      },
-    }),
-  });
+function tabsConfig(ResourceTabsConfigurationProvider) {
+  ResourceTabsConfigurationProvider.register('OpenStack.Network', () => [
+    {
+      key: 'subnets',
+      title: translate('Subnets'),
+      component: NetworkSubnetsList,
+    },
+    getEventsTab(),
+  ]);
 }
 
 export default module => {
   ResourceSummary.register('OpenStack.Network', OpenStackNetworkSummary);
   module.component('openstackAllocationPool', openstackAllocationPool);
-  module.component('openstackTenantNetworks', openstackTenantNetworks);
   module.filter('formatAllocationPool', formatAllocationPool);
   module.config(actionConfig);
   module.config(tabsConfig);
