@@ -39,25 +39,21 @@ const getReportItems = () => [
     label: translate('Orders'),
     icon: 'fa-files-o',
     state: 'marketplace-support-order-items',
-    feature: 'marketplace',
   },
   {
     label: translate('Resources'),
     icon: 'fa-files-o',
     state: 'marketplace-support-resources',
-    feature: 'marketplace',
   },
   {
     label: translate('Plan capacity'),
     icon: 'fa-puzzle-piece',
     state: 'marketplace-support-plan-usages',
-    feature: 'marketplace',
   },
   {
     label: translate('Usage reports'),
     icon: 'fa-puzzle-piece',
     state: 'marketplace-support-usage-reports',
-    feature: 'marketplace',
   },
   {
     label: translate('Resources usage'),

@@ -8,8 +8,10 @@ import './HeatMap.scss';
 import { getStyle, getChartData } from './HeatMapCalculator';
 import { UsageData, Feature } from './types';
 
+/*Source: https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json */
+
 const loadCountries = () =>
-  import(/* webpackChunkName: "countries" */ './countries.geo.js');
+  import(/* webpackChunkName: "countries" */ './countries.geo.json');
 
 interface HeatMapProps {
   center?: number[];
@@ -108,9 +110,10 @@ export class HeatMap extends React.Component<HeatMapProps> {
   render() {
     if (this.state.loading) {
       return <LoadingSpinner />;
-    }
-    if (this.state.loaded) {
+    } else if (this.state.loaded) {
       return <div ref={node => (this.mapNode = node)} id="heat-map" />;
+    } else {
+      return null;
     }
   }
 }

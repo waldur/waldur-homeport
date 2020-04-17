@@ -1,25 +1,13 @@
-import volumeExtendDialog from './volume-extend';
-import snapshotCreateDialog from './snapshot-create';
-import openstackVolumesService from './openstack-volumes-service';
-import openstackInstanceVolumes from './openstack-instance-volumes';
-import openstackVolumeSnapshots from './openstack-volume-snapshots';
-import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
-import './marketplace';
+
 import actions from './actions';
-
-export default module => {
-  ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);
-  module.service('openstackVolumesService', openstackVolumesService);
-  module.directive('volumeExtendDialog', volumeExtendDialog);
-  module.directive('snapshotCreateDialog', snapshotCreateDialog);
-  module.component('openstackInstanceVolumes', openstackInstanceVolumes);
-  module.component('openstackVolumeSnapshots', openstackVolumeSnapshots);
-
-  module.config(actionsConfig);
-  module.config(stateConfig);
-  module.config(tabsConfig);
-};
+import openstackInstanceVolumes from './InstanceVolumesList';
+import openstackVolumesService from './openstack-volumes-service';
+import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
+import snapshotCreateDialog from './snapshot-create';
+import volumeExtendDialog from './volume-extend';
+import openstackVolumeSnapshots from './VolumeSnapshotsList';
+import './marketplace';
 
 // @ngInject
 function actionsConfig(ActionConfigurationProvider) {
@@ -49,3 +37,16 @@ function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
     }),
   });
 }
+
+export default module => {
+  ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);
+  module.service('openstackVolumesService', openstackVolumesService);
+  module.directive('volumeExtendDialog', volumeExtendDialog);
+  module.directive('snapshotCreateDialog', snapshotCreateDialog);
+  module.component('openstackInstanceVolumes', openstackInstanceVolumes);
+  module.component('openstackVolumeSnapshots', openstackVolumeSnapshots);
+
+  module.config(actionsConfig);
+  module.config(stateConfig);
+  module.config(tabsConfig);
+};

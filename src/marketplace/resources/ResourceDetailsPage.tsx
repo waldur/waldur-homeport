@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
-import useAsync from 'react-use/esm/useAsync';
+import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state, ngInjector } from '@waldur/core/services';

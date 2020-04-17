@@ -10,7 +10,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Marketplace'),
         hideBreadcrumbs: true,
-        feature: 'marketplace',
       },
     })
 
@@ -21,7 +20,6 @@ export default function routes($stateProvider) {
       data: {
         pageTitle: gettext('Marketplace'),
         hideBreadcrumbs: true,
-        feature: 'marketplace',
       },
     })
 
@@ -31,7 +29,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Compare items'),
-        feature: 'marketplace',
       },
     })
 
@@ -41,7 +38,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Compare items'),
-        feature: 'marketplace',
       },
     })
 
@@ -51,7 +47,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Marketplace checkout'),
-        feature: 'marketplace',
       },
     })
 
@@ -61,7 +56,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Offering details'),
-        feature: 'marketplace',
       },
     })
 
@@ -71,7 +65,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Offering details'),
-        feature: 'marketplace',
       },
     })
 
@@ -82,7 +75,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Offering details'),
-        feature: 'marketplace',
       },
     })
 
@@ -101,7 +93,6 @@ export default function routes($stateProvider) {
         '<marketplace-public-offering-details-page></marketplace-public-offering-details>',
       data: {
         pageTitle: gettext('Offering details'),
-        feature: 'marketplace',
       },
     })
 
@@ -111,7 +102,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Marketplace offerings'),
-        feature: 'marketplace',
       },
     })
 
@@ -121,7 +111,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Marketplace offerings'),
-        feature: 'marketplace',
       },
     })
 
@@ -131,7 +120,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('My orders'),
-        feature: 'marketplace',
       },
     })
 
@@ -141,7 +129,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Provider details'),
-        feature: 'marketplace',
       },
     })
 
@@ -151,7 +138,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Provider details'),
-        feature: 'marketplace',
       },
     })
 
@@ -167,7 +153,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Public offerings'),
-        feature: 'marketplace',
       },
     })
 
@@ -177,7 +162,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('My offerings'),
-        feature: 'marketplace',
       },
     })
 
@@ -187,7 +171,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Add offering'),
-        feature: 'marketplace',
       },
     })
 
@@ -197,7 +180,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Update offering'),
-        feature: 'marketplace',
         renderDocumentTitle: true,
       },
     })
@@ -208,7 +190,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Order details'),
-        feature: 'marketplace',
       },
     })
 
@@ -219,7 +200,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Order item details'),
-        feature: 'marketplace',
         renderDocumentTitle: true,
       },
     })
@@ -231,7 +211,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Order item details'),
-        feature: 'marketplace',
         renderDocumentTitle: true,
       },
     })
@@ -242,7 +221,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Order details'),
-        feature: 'marketplace',
       },
     })
 
@@ -252,7 +230,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Public orders'),
-        feature: 'marketplace',
       },
     })
 
@@ -263,7 +240,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('My orders'),
-        feature: 'marketplace',
       },
     })
 
@@ -274,7 +250,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('My resources'),
-        feature: 'marketplace',
       },
     })
 
@@ -285,7 +260,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Public resources'),
-        feature: 'marketplace',
       },
     })
 
@@ -295,7 +269,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Public resources'),
-        feature: 'marketplace',
       },
     })
 
@@ -305,7 +278,6 @@ export default function routes($stateProvider) {
         '<marketplace-support-resources-list></marketplace-support-resources-list>',
       parent: 'support',
       data: {
-        feature: 'marketplace',
         pageTitle: gettext('Resources'),
       },
       resolve: {
@@ -319,7 +291,6 @@ export default function routes($stateProvider) {
         '<marketplace-support-order-items-list></marketplace-support-order-items-list>',
       parent: 'support',
       data: {
-        feature: 'marketplace',
         pageTitle: gettext('Orders'),
       },
       resolve: {
@@ -332,7 +303,6 @@ export default function routes($stateProvider) {
       template: '<marketplace-plan-usages-list></marketplace-plan-usages-list>',
       parent: 'support',
       data: {
-        feature: 'marketplace',
         pageTitle: gettext('Plan capacity'),
       },
       resolve: {
@@ -346,7 +316,6 @@ export default function routes($stateProvider) {
         '<marketplace-support-usage-list></marketplace-support-usage-list>',
       parent: 'support',
       data: {
-        feature: 'marketplace',
         pageTitle: gettext('Usage reports'),
       },
       resolve: {
@@ -367,7 +336,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Resources'),
-        feature: 'marketplace',
       },
     })
 
@@ -378,7 +346,6 @@ export default function routes($stateProvider) {
       parent: 'project',
       data: {
         pageTitle: gettext('Shopping cart item update'),
-        feature: 'marketplace',
       },
     })
 
@@ -389,7 +356,6 @@ export default function routes($stateProvider) {
       parent: 'organization',
       data: {
         pageTitle: gettext('Shopping cart item update'),
-        feature: 'marketplace',
       },
     });
 }

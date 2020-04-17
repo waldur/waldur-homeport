@@ -146,47 +146,6 @@ export default function baseResourceListController(
         }
       }
     },
-    getMarkers: function() {
-      let items = this.controllerScope.list.filter(function hasCoordinates(
-        item,
-      ) {
-        return item.latitude !== null && item.longitude !== null;
-      });
-
-      let points = {};
-      items.forEach(function groupMarkersByCoordinates(item) {
-        let key = [item.latitude, item.longitude];
-        if (!points[key]) {
-          points[key] = [];
-        }
-        points[key].push(item);
-      });
-
-      let markers = [];
-      angular.forEach(points, function createMarker(items) {
-        let item = items[0];
-        let message = items
-          .map(function(item) {
-            return item.name;
-          })
-          .join('<br/>');
-        markers.push({
-          lat: item.latitude,
-          lng: item.longitude,
-          message: message,
-        });
-      });
-      return markers;
-    },
-    projectHasNonSharedService: function(project) {
-      for (let i = 0; i < project.services.length; i++) {
-        let service = project.services[i];
-        if (!service.shared) {
-          return true;
-        }
-      }
-      return false;
-    },
     loadInitialContext: function() {
       return $q.all([
         currentStateService

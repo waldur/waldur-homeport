@@ -1,16 +1,8 @@
-import openstackFloatingIpsService from './openstack-floating-ips-service';
-import openstackFloatingIpsList from './openstack-floating-ips-list';
-import breadcrumbsConfig from './breadcrumbs';
-import { OpenStackFloatingIpSummary } from './OpenStackFloatingIpSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-export default module => {
-  ResourceSummary.register('OpenStack.FloatingIP', OpenStackFloatingIpSummary);
-  module.service('openstackFloatingIpsService', openstackFloatingIpsService);
-  module.component('openstackFloatingIpsList', openstackFloatingIpsList);
-  module.config(actionConfig);
-  module.run(breadcrumbsConfig);
-};
+import breadcrumbsConfig from './breadcrumbs';
+import openstackFloatingIpsList from './FloatingIpsList';
+import { OpenStackFloatingIpSummary } from './OpenStackFloatingIpSummary';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
@@ -23,3 +15,10 @@ function actionConfig(ActionConfigurationProvider) {
     },
   });
 }
+
+export default module => {
+  ResourceSummary.register('OpenStack.FloatingIP', OpenStackFloatingIpSummary);
+  module.component('openstackFloatingIpsList', openstackFloatingIpsList);
+  module.config(actionConfig);
+  module.run(breadcrumbsConfig);
+};

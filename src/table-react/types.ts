@@ -24,7 +24,7 @@ interface TableResponse {
 
 export type Fetcher = (request: TableRequest) => IPromise<TableResponse>;
 
-export interface TableOptions {
+export interface TableOptionsType {
   table: string;
   fetchData: any;
   queryField?: string;

@@ -41,22 +41,21 @@ export const reducer = (
         uploading: state.uploading + payload.uploading,
       };
     case constants.ISSUE_ATTACHMENTS_PUT_SUCCESS:
-      const { uploading } = state;
       return {
         ...state,
         items: [...state.items, payload.item],
-        uploading: uploading > 0 ? uploading - 1 : 0,
+        uploading: state.uploading > 0 ? state.uploading - 1 : 0,
       };
     case constants.ISSUE_ATTACHMENTS_PUT_ERROR:
       return {
         ...state,
         errors: [...state.errors, payload.error],
-        uploading: uploading > 0 ? uploading - 1 : 0,
+        uploading: state.uploading > 0 ? state.uploading - 1 : 0,
       };
     case constants.ISSUE_ATTACHMENTS_PUT_REJECT:
       return {
         ...state,
-        uploading: uploading > 0 ? uploading - 1 : 0,
+        uploading: state.uploading > 0 ? state.uploading - 1 : 0,
       };
     case constants.ISSUE_ATTACHMENTS_DELETE_START:
       return {

@@ -59,7 +59,7 @@ const getQuotas = ({ formData, usages, limits, project, components }) => {
     }
     Object.keys(limits)
       .filter(key => key.startsWith('gigabytes_'))
-      .map(key => {
+      .forEach(key => {
         quotas.push({
           name: key,
           usage: usages[key] || 0,
@@ -90,7 +90,7 @@ const formIsValidSelector = state => isValid('marketplaceOffering')(state);
 
 const formAttributesSelector = state => {
   const formData = formDataSelector(state);
-  return formData && formData.attributes ? formData.attributes : {};
+  return formData.attributes || {};
 };
 
 export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({

@@ -1,19 +1,13 @@
+import { getUUID } from '@waldur/core/utils';
+
+import { getTenantListState } from '../utils';
+
 // @ngInject
-export default function breadcrumbsConfig(
-  ResourceBreadcrumbsService,
-  ncUtils,
-  CATEGORY_ITEMS,
-) {
+export default function breadcrumbsConfig(ResourceBreadcrumbsService) {
   ResourceBreadcrumbsService.register('OpenStack.Network', resource => {
-    const tenant_uuid = ncUtils.getUUID(resource.tenant);
+    const tenant_uuid = getUUID(resource.tenant);
     return [
-      {
-        label: CATEGORY_ITEMS.private_clouds.label,
-        state: CATEGORY_ITEMS.private_clouds.state,
-        params: {
-          uuid: resource.project_uuid,
-        },
-      },
+      getTenantListState(resource.project_uuid),
       {
         label: resource.tenant_name,
         state: 'resources.details',

@@ -78,7 +78,7 @@ export class ComparisonSections extends React.Component<
       );
     }
 
-    if (this.state.loaded && !this.state.sections.length) {
+    if (!this.state.sections.length) {
       return (
         <h3 className="text-center">
           {translate('There are no sections for comparison yet.')}

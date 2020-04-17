@@ -1,32 +1,9 @@
-import openstackBackupSchedulesList from './openstack-backup-schedules-list';
-import openstackBackupSchedulesService from './openstack-backup-schedules-service';
-import breadcrumbsConfig from './breadcrumbs';
-import { OpenStackBackupScheduleSummary } from './OpenStackBackupScheduleSummary';
-import openstackBackupScheduleWarning from './BackupScheduleWarning';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-export default module => {
-  ResourceSummary.register(
-    'OpenStackTenant.BackupSchedule',
-    OpenStackBackupScheduleSummary,
-  );
-  module.service(
-    'openstackBackupSchedulesService',
-    openstackBackupSchedulesService,
-  );
-  module.component(
-    'openstackBackupSchedulesList',
-    openstackBackupSchedulesList,
-  );
-  module.component(
-    'openstackBackupScheduleWarning',
-    openstackBackupScheduleWarning,
-  );
-  module.config(actionConfig);
-  module.config(tabsConfig);
-  module.config(stateConfig);
-  module.run(breadcrumbsConfig);
-};
+import openstackBackupSchedulesList from './BackupSchedulesList';
+import openstackBackupScheduleWarning from './BackupScheduleWarning';
+import breadcrumbsConfig from './breadcrumbs';
+import { OpenStackBackupScheduleSummary } from './OpenStackBackupScheduleSummary';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
@@ -77,3 +54,22 @@ function tabsConfig(
     }),
   });
 }
+
+export default module => {
+  ResourceSummary.register(
+    'OpenStackTenant.BackupSchedule',
+    OpenStackBackupScheduleSummary,
+  );
+  module.component(
+    'openstackBackupSchedulesList',
+    openstackBackupSchedulesList,
+  );
+  module.component(
+    'openstackBackupScheduleWarning',
+    openstackBackupScheduleWarning,
+  );
+  module.config(actionConfig);
+  module.config(tabsConfig);
+  module.config(stateConfig);
+  module.run(breadcrumbsConfig);
+};

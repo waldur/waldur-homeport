@@ -4,10 +4,10 @@ import * as Label from 'react-bootstrap/lib/Label';
 const getColor = value =>
   value === null
     ? 'primary'
-    : value < 0.8
-    ? 'danger'
     : value < 0.6
     ? 'warning'
+    : value < 0.8
+    ? 'danger'
     : 'success';
 
 export const PlanRemainingColumn = ({ row }) => (

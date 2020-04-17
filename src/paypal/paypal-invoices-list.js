@@ -1,3 +1,4 @@
+/* eslint-disable */
 const paypalInvoicesList = {
   controller: PayPalInvoicesListController,
   controllerAs: 'ListController',
@@ -19,7 +20,6 @@ function PayPalInvoicesListController(
   let controllerScope = this;
   let InvoicesController = baseControllerListClass.extend({
     init: function() {
-      this.controllerScope = controllerScope;
       this.service = paypalInvoicesService;
       this.controllerScope = controllerScope;
       let fn = this._super.bind(this);

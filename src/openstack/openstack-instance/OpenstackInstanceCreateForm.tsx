@@ -252,7 +252,7 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
       return <LoadingSpinner />;
     }
 
-    if (!this.state.loading && !this.state.loaded) {
+    if (!this.state.loaded) {
       return (
         <h3 className="text-center">
           {translate("Unable to get form's data.")}
@@ -260,77 +260,75 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
       );
     }
 
-    if (this.state.loaded) {
-      return (
-        <form className="form-horizontal">
-          <ProjectField />
-          <CreateResourceFormGroup label={translate('VM name')} required={true}>
-            <Field
-              name="attributes.name"
-              component={renderValidationWrapper(StringField)}
-              validate={nameValidators}
-            />
-          </CreateResourceFormGroup>
-          <ImageGroup
-            images={this.state.images}
-            validateFlavor={this.validateFlavor}
+    return (
+      <form className="form-horizontal">
+        <ProjectField />
+        <CreateResourceFormGroup label={translate('VM name')} required={true}>
+          <Field
+            name="attributes.name"
+            component={renderValidationWrapper(StringField)}
+            validate={nameValidators}
           />
-          <FlavorGroup flavors={this.updateFlavorChoices()} />
-          <AvailabilityZoneGroup
-            availabilityZones={this.state.availabilityZones}
+        </CreateResourceFormGroup>
+        <ImageGroup
+          images={this.state.images}
+          validateFlavor={this.validateFlavor}
+        />
+        <FlavorGroup flavors={this.updateFlavorChoices()} />
+        <AvailabilityZoneGroup
+          availabilityZones={this.state.availabilityZones}
+        />
+        <SystemVolumeSizeGroup />
+        <SystemVolumeTypeGroup volumeTypes={this.state.volumeTypes} />
+        <DataVolumeSizeGroup
+          isActive={this.state.isDataVolumeActive}
+          setActive={this.setDataVolumeActive}
+        />
+        {this.state.isDataVolumeActive && (
+          <DataVolumeTypeGroup volumeTypes={this.state.volumeTypes} />
+        )}
+        <PublicKeyGroup sshKeys={this.state.sshKeys} />
+        <CreateResourceFormGroup label={translate('Security groups')}>
+          <Field
+            name="attributes.security_groups"
+            component={fieldProps => (
+              <OpenstackInstanceSecurityGroups
+                securityGroups={this.state.securityGroups}
+                input={fieldProps.input}
+              />
+            )}
           />
-          <SystemVolumeSizeGroup />
-          <SystemVolumeTypeGroup volumeTypes={this.state.volumeTypes} />
-          <DataVolumeSizeGroup
-            isActive={this.state.isDataVolumeActive}
-            setActive={this.setDataVolumeActive}
+        </CreateResourceFormGroup>
+        <CreateResourceFormGroup label={translate('Networks')}>
+          <Field
+            name="attributes.networks"
+            component={fieldProps => (
+              <OpenstackInstanceNetworks
+                input={fieldProps.input}
+                subnets={this.state.subnets}
+                floatingIps={this.state.floatingIps}
+              />
+            )}
           />
-          {this.state.isDataVolumeActive && (
-            <DataVolumeTypeGroup volumeTypes={this.state.volumeTypes} />
-          )}
-          <PublicKeyGroup sshKeys={this.state.sshKeys} />
-          <CreateResourceFormGroup label={translate('Security groups')}>
-            <Field
-              name="attributes.security_groups"
-              component={fieldProps => (
-                <OpenstackInstanceSecurityGroups
-                  securityGroups={this.state.securityGroups}
-                  input={fieldProps.input}
-                />
-              )}
-            />
-          </CreateResourceFormGroup>
-          <CreateResourceFormGroup label={translate('Networks')}>
-            <Field
-              name="attributes.networks"
-              component={fieldProps => (
-                <OpenstackInstanceNetworks
-                  input={fieldProps.input}
-                  subnets={this.state.subnets}
-                  floatingIps={this.state.floatingIps}
-                />
-              )}
-            />
-          </CreateResourceFormGroup>
-          <CreateResourceFormGroup label={translate('Description')}>
-            <Field
-              name="attributes.description"
-              component={fieldProps => (
-                <TextField maxLength={500} {...fieldProps.input} />
-              )}
-            />
-          </CreateResourceFormGroup>
-          <CreateResourceFormGroup label={translate('User data')}>
-            <Field name="attributes.user_data" component={TextField} />
-            <div className="help-block m-b-none text-muted">
-              {translate(
-                'Additional data that will be added to instance on provisioning.',
-              )}
-            </div>
-          </CreateResourceFormGroup>
-        </form>
-      );
-    }
+        </CreateResourceFormGroup>
+        <CreateResourceFormGroup label={translate('Description')}>
+          <Field
+            name="attributes.description"
+            component={fieldProps => (
+              <TextField maxLength={500} {...fieldProps.input} />
+            )}
+          />
+        </CreateResourceFormGroup>
+        <CreateResourceFormGroup label={translate('User data')}>
+          <Field name="attributes.user_data" component={TextField} />
+          <div className="help-block m-b-none text-muted">
+            {translate(
+              'Additional data that will be added to instance on provisioning.',
+            )}
+          </div>
+        </CreateResourceFormGroup>
+      </form>
+    );
   }
 }
 

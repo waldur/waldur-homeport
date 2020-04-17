@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
-import BooleanField from '@waldur/table-react/BooleanField';
+import { BooleanField } from '@waldur/table-react/BooleanField';
 
 const renderValue = value => (value ? value : <span>&mdash;</span>);
 

@@ -1,8 +1,7 @@
 export default class ResourceBreadcrumbsService {
   // @ngInject
-  constructor(ENV, CATEGORY_ITEMS, features) {
+  constructor(ENV, features) {
     this.ENV = ENV;
-    this.CATEGORY_ITEMS = CATEGORY_ITEMS;
     this.features = features;
     this.breadcrumbs = {};
   }

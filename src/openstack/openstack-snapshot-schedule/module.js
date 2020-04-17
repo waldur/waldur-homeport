@@ -1,27 +1,8 @@
-import openstackSnapshotSchedulesList from './openstack-snapshot-schedules-list';
-import openstackSnapshotSchedulesService from './openstack-snapshot-schedules-service';
-import breadcrumbsConfig from './breadcrumbs';
-import { OpenStackSnapshotScheduleSummary } from './OpenStackSnapshotScheduleSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-export default module => {
-  ResourceSummary.register(
-    'OpenStackTenant.SnapshotSchedule',
-    OpenStackSnapshotScheduleSummary,
-  );
-  module.service(
-    'openstackSnapshotSchedulesService',
-    openstackSnapshotSchedulesService,
-  );
-  module.component(
-    'openstackSnapshotSchedulesList',
-    openstackSnapshotSchedulesList,
-  );
-  module.config(actionConfig);
-  module.config(tabsConfig);
-  module.run(breadcrumbsConfig);
-  module.config(stateConfig);
-};
+import breadcrumbsConfig from './breadcrumbs';
+import { OpenStackSnapshotScheduleSummary } from './OpenStackSnapshotScheduleSummary';
+import openstackSnapshotSchedulesList from './SnapshotSchedulesList';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
@@ -72,3 +53,18 @@ function tabsConfig(
     },
   );
 }
+
+export default module => {
+  ResourceSummary.register(
+    'OpenStackTenant.SnapshotSchedule',
+    OpenStackSnapshotScheduleSummary,
+  );
+  module.component(
+    'openstackSnapshotSchedulesList',
+    openstackSnapshotSchedulesList,
+  );
+  module.config(actionConfig);
+  module.config(tabsConfig);
+  module.run(breadcrumbsConfig);
+  module.config(stateConfig);
+};

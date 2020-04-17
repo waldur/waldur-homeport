@@ -80,7 +80,7 @@ export const mapBookingEvents: EventMap = (events, showAvailability) =>
   });
 
 export const handleTitle = ({ event, el }) => {
-  if (!event.title || event.title === '') {
+  if (!event.title) {
     return el.querySelector('.fc-title').prepend(event.extendedProps.type);
   }
 };

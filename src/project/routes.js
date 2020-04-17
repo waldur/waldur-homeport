@@ -88,42 +88,6 @@ export default function projectRoutes($stateProvider) {
       },
     })
 
-    .state('project.resources', {
-      url: '',
-      abstract: true,
-      template: '<ui-view></ui-view>',
-    })
-
-    .state('project.resources.vms', {
-      url: 'virtual-machines/',
-      template: '<resource-vms-list></resource-vms-list>',
-      data: {
-        pageTitle: gettext('Virtual machines'),
-      },
-    })
-
-    .state('project.resources.clouds', {
-      url: 'private-clouds/',
-      template: '<resource-private-clouds-list></resource-private-clouds-list>',
-      data: {
-        pageTitle: gettext('Private clouds'),
-      },
-    })
-
-    .state('project.resources.storage', {
-      url: 'storage/',
-      template: '<ui-view></ui-view>',
-      data: {
-        pageTitle: gettext('Storage'),
-      },
-      abstract: true,
-    })
-
-    .state('project.resources.storage.tabs', {
-      url: '',
-      template: '<resource-storage-tabs></resource-storage-tabs>',
-    })
-
     .state('project.team', {
       url: 'team/',
       template: '<project-team>',

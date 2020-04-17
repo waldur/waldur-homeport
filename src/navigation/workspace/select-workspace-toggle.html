@@ -6,7 +6,11 @@
   tooltip-placement="bottom"
 >
   <i ng-class="['fa', 'm-r-xs', $ctrl.getIconClass()]"></i>
-  <span ng-attr-id="select-workspace-title" ng-if="$ctrl.getTitle()"
+  <span
+    ng-attr-id="select-workspace-title"
+    ng-if="$ctrl.getTitle()"
+    uib-tooltip="{{ $ctrl.getTitleTooltip() }}"
+    tooltip-placement="bottom"
     >{{ $ctrl.getTitle() }}
     <extension-point id="organization-selector"></extension-point>
   </span>

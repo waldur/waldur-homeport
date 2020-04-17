@@ -1,5 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
+import useToggle from 'react-use/lib/useToggle';
 
 import { translate } from '@waldur/i18n';
 
@@ -7,30 +8,19 @@ interface UserPasswordProps {
   password: string;
 }
 
-export class UserPassword extends React.Component<UserPasswordProps> {
-  state = {
-    showPassword: false,
-  };
-
-  toggle = () =>
-    this.setState({
-      showPassword: !this.state.showPassword,
-    });
-
-  render() {
-    const iconClass = classNames('fa', {
-      'fa-eye': !this.state.showPassword,
-      'fa-eye-slash': this.state.showPassword,
-    });
-    return (
-      <span>
-        <a
-          className={iconClass}
-          title={translate('Show password')}
-          onClick={this.toggle}
-        />{' '}
-        {this.state.showPassword ? this.props.password : '***************'}
-      </span>
-    );
-  }
-}
+export const UserPassword: React.FC<UserPasswordProps> = props => {
+  const [showPassword, toggle] = useToggle(false);
+  return (
+    <>
+      <a
+        className={classNames('fa', {
+          'fa-eye': !showPassword,
+          'fa-eye-slash': showPassword,
+        })}
+        title={translate('Show password')}
+        onClick={toggle}
+      />{' '}
+      {showPassword ? props.password : '***************'}
+    </>
+  );
+};

@@ -71,7 +71,7 @@ function walkJs(node, fn, parentComment) {
 
   for (var key in node) {
     var obj = node[key];
-    if (node && node.leadingComments) {
+    if (node.leadingComments) {
       parentComment = node;
     }
     if (typeof obj === 'object') {

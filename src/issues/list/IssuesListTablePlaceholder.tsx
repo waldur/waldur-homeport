@@ -9,7 +9,7 @@ const Illustration = require('@waldur/images/table-placeholders/undraw_empty_xct
 export const IssuesListTablePlaceholder = () => (
   <ImageTablePlaceholder
     illustration={Illustration}
-    title={translate(`Your organization does not have any issues yet.`)}
+    title={translate(`You haven't created any issues yet.`)}
     // tslint:disable-next-line: max-line-length
     description={translate(`Issues are trackable requests to the operator.`)}
   />

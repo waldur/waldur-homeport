@@ -5,7 +5,7 @@ interface Props {
   value: boolean;
 }
 
-const BooleanField = ({ value }: Props) => (
+export const BooleanField = ({ value }: Props) => (
   <i
     className={classNames('fa', {
       'fa-check': value,
@@ -13,5 +13,3 @@ const BooleanField = ({ value }: Props) => (
     })}
   />
 );
-
-export default BooleanField;

@@ -1,21 +1,11 @@
-import openstackAllocationPool from './openstack-allocation-pool';
-import openstackNetworksService from './openstack-networks-service';
-import openstackTenantNetworks from './openstack-tenant-networks';
-import { formatAllocationPool } from './filters';
-import breadcrumbsConfig from './breadcrumbs';
-import { OpenStackNetworkSummary } from './OpenStackNetworkSummary';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-export default module => {
-  ResourceSummary.register('OpenStack.Network', OpenStackNetworkSummary);
-  module.service('openstackNetworksService', openstackNetworksService);
-  module.component('openstackAllocationPool', openstackAllocationPool);
-  module.component('openstackTenantNetworks', openstackTenantNetworks);
-  module.filter('formatAllocationPool', formatAllocationPool);
-  module.config(actionConfig);
-  module.config(tabsConfig);
-  module.run(breadcrumbsConfig);
-};
+import breadcrumbsConfig from './breadcrumbs';
+import { formatAllocationPool } from './filters';
+import openstackAllocationPool from './openstack-allocation-pool';
+import openstackNetworksService from './openstack-networks-service';
+import { OpenStackNetworkSummary } from './OpenStackNetworkSummary';
+import openstackTenantNetworks from './TenantNetworksList';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
@@ -72,3 +62,14 @@ function tabsConfig(
     }),
   });
 }
+
+export default module => {
+  ResourceSummary.register('OpenStack.Network', OpenStackNetworkSummary);
+  module.service('openstackNetworksService', openstackNetworksService);
+  module.component('openstackAllocationPool', openstackAllocationPool);
+  module.component('openstackTenantNetworks', openstackTenantNetworks);
+  module.filter('formatAllocationPool', formatAllocationPool);
+  module.config(actionConfig);
+  module.config(tabsConfig);
+  module.run(breadcrumbsConfig);
+};

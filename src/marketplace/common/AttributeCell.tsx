@@ -19,7 +19,7 @@ export const AttributeCell: React.FC<AttributeCellProps> = ({
     case 'list': {
       const titles = [];
       if (Array.isArray(value)) {
-        value.map(key => {
+        value.forEach(key => {
           const option = attr.options.find(item => item.key === key);
           if (option) {
             titles.push(option.title);

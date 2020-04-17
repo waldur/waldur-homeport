@@ -1,10 +1,19 @@
+import * as ResourceSummary from '@waldur/resource/summary/registry';
+
 import actionConfig from './actions';
 import breadcrumbsConfig from './breadcrumbs';
-import openstackSubnetsService from './openstack-subnets-service';
+import openstackSubnetsList from './NetworkSubnetsList';
 import openstackSubnet from './openstack-subnet';
-import openstackSubnetsList from './openstack-subnets-list';
+import openstackSubnetsService from './openstack-subnets-service';
 import { OpenStackSubNetSummary } from './OpenStackSubNetSummary';
-import * as ResourceSummary from '@waldur/resource/summary/registry';
+
+// @ngInject
+function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
+  ResourceTabsConfigurationProvider.register('OpenStack.SubNet', {
+    ...DEFAULT_RESOURCE_TABS,
+    order: ['events'],
+  });
+}
 
 export default module => {
   ResourceSummary.register('OpenStack.SubNet', OpenStackSubNetSummary);
@@ -15,11 +24,3 @@ export default module => {
   module.config(actionConfig);
   module.config(tabsConfig);
 };
-
-// @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
-  ResourceTabsConfigurationProvider.register('OpenStack.SubNet', {
-    ...DEFAULT_RESOURCE_TABS,
-    order: ['events'],
-  });
-}

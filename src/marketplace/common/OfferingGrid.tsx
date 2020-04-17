@@ -27,7 +27,7 @@ export const OfferingGrid: React.FC<OfferingGridProps> = props => {
     );
   }
 
-  if (props.loaded && !props.items.length) {
+  if (!props.items.length) {
     return (
       <h3 className="text-center">
         {translate('There are no offerings in marketplace yet.')}

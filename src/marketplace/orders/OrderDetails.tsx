@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
-import useInterval from 'react-use/esm/useInterval';
+import useInterval from 'react-use/lib/useInterval';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';

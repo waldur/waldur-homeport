@@ -33,8 +33,9 @@ export const PlanSummary = (props: PlanProps) => (
                   : 'N/A'}
               </td>
               <td>
-                {(props.plan.prices && props.plan.prices[component.type]) ||
-                props.plan.prices[component.type] === 0
+                {props.plan.prices &&
+                (props.plan.prices[component.type] ||
+                  props.plan.prices[component.type] === 0)
                   ? props.plan.prices[component.type]
                   : 'N/A'}
               </td>

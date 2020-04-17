@@ -264,10 +264,6 @@ msgstr ""
 msgid "Add plan"
 msgstr ""
 
-#: src/resource/list/resource-private-clouds-list.js
-msgid "Add private cloud"
-msgstr ""
-
 #: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -291,10 +287,6 @@ msgstr ""
 msgid "Add security group"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-msgid "Add snapshots"
-msgstr ""
-
 #: src/project/ProjectActions.tsx
 msgid "Add team member"
 msgstr ""
@@ -309,14 +301,6 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "Add user input field"
-msgstr ""
-
-#: src/resource/list/resource-vms-list.js
-msgid "Add virtual machine"
-msgstr ""
-
-#: src/resource/list/resource-volumes-list.js
-msgid "Add volumes"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
@@ -383,7 +367,6 @@ msgid "All"
 msgstr ""
 
 #: src/booking/components/calendar/defaultConfig.ts
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "All day"
 msgstr ""
@@ -410,10 +393,6 @@ msgstr ""
 
 #: src/slurm/table-extension.js
 msgid "Allocations"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Allow bookings to be scheduled at weekends"
 msgstr ""
 
 #: src/auth/auth-login.html
@@ -471,10 +450,6 @@ msgstr ""
 
 #: src/rancher/cluster/tabs.js
 msgid "Application templates"
-msgstr ""
-
-#: src/resource/breadcrumbs/resource-categories.js
-msgid "Applications"
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
@@ -561,9 +536,8 @@ msgstr ""
 msgid "Attach"
 msgstr ""
 
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource/list/resource-volumes-list.js
 msgid "Attached to"
 msgstr ""
 
@@ -756,11 +730,6 @@ msgstr ""
 msgid "Batch block storage size"
 msgstr ""
 
-#: src/resource/breadcrumbs/resource-categories.js
-#: src/slurm/routes.js
-msgid "Batch processing"
-msgstr ""
-
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "Batch processing documentation"
 msgstr ""
@@ -813,7 +782,7 @@ msgstr ""
 msgid "Bookings"
 msgstr ""
 
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 msgid "Bootable"
 msgstr ""
 
@@ -825,10 +794,6 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Business hours"
-msgstr ""
-
 #: src/user/support/TokenLifetimeField.tsx
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr ""
@@ -838,14 +803,13 @@ msgid "By submitting the form you are agreeing to the"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
 msgid "CIDR"
 msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "CPU"
 msgstr ""
 
@@ -1014,7 +978,7 @@ msgid "Charge for usage-based component is based on user-requested limit."
 msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
-#: src/azure/sql/azure-sql-databases-list.js
+#: src/azure/sql/DatabasesList.tsx
 msgid "Charset"
 msgstr ""
 
@@ -1387,12 +1351,13 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/vmware/vmware-virtual-machine-disks.js
 #: src/vmware/vmware-virtual-machine-ports.js
 msgid "Created"
@@ -1491,10 +1456,6 @@ msgstr ""
 msgid "Currently there are no booking requests."
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Daily available booking time range"
-msgstr ""
-
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
 #: src/issues/workspace/issue-navigation-service.js
@@ -1583,7 +1544,6 @@ msgid "Default value"
 msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1632,12 +1592,15 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
@@ -1649,7 +1612,6 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
@@ -1869,11 +1831,6 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
-msgid "Edit an availability"
-msgstr ""
-
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
 msgstr ""
@@ -1931,7 +1888,6 @@ msgstr ""
 msgid "Encountered an empty component"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "End"
 msgstr ""
@@ -2129,7 +2085,6 @@ msgid "Extending"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
 msgstr ""
@@ -2267,7 +2222,7 @@ msgstr ""
 msgid "Flexible"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "Floating IP"
 msgstr ""
 
@@ -2344,7 +2299,6 @@ msgid "GB"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "GPU"
 msgstr ""
 
@@ -2585,10 +2539,6 @@ msgstr ""
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Include weekends"
-msgstr ""
-
 #: src/customer/details/customer-report-error.html
 #: src/customer/details/customer-report-error.js
 msgid "Incorrect organization details"
@@ -2629,7 +2579,7 @@ msgid "Initial username"
 msgstr ""
 
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-volume/actions/AttachAction.ts
 #: src/rancher/node/ClusterNodesList.tsx
 msgid "Instance"
@@ -2673,7 +2623,6 @@ msgid "Internal"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Internal IP"
 msgstr ""
@@ -2838,14 +2787,14 @@ msgstr ""
 msgid "Invoices list"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-network/openstack-tenant-networks.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
 msgid "Is external"
 msgstr ""
 
@@ -2926,7 +2875,7 @@ msgstr ""
 msgid "Keep forever"
 msgstr ""
 
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup/BackupsList.tsx
 msgid "Keep until"
 msgstr ""
 
@@ -3190,12 +3139,9 @@ msgstr ""
 msgid "Max amount"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 msgid "Max number of backups"
-msgstr ""
-
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-msgid "Max number of snapshots"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -3304,10 +3250,6 @@ msgstr ""
 msgid "Minimum allowed value"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Minimum booking time slot duration."
-msgstr ""
-
 #: src/auth/valimo/auth-valimo-dialog.html
 msgid "Mobile phone number"
 msgstr ""
@@ -3388,7 +3330,7 @@ msgstr ""
 msgid "My services"
 msgstr ""
 
-#: src/azure/sql/azure-sql-databases-list.js
+#: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
@@ -3419,16 +3361,18 @@ msgstr ""
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-#: src/openstack/openstack-security-groups/security-groups-list.js
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
@@ -3441,7 +3385,6 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
 #: src/vmware/vmware-virtual-machine-ports.js
@@ -3594,52 +3537,12 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/slurm/slurm-allocation-list.js
-msgid "No allocations found matching filter."
-msgstr ""
-
-#: src/slurm/slurm-allocation-list.js
-msgid "No allocations yet."
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-msgid "No backup schedules found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-msgid "No backup schedules yet."
-msgstr ""
-
-#: src/openstack/openstack-backup/openstack-backups-list.js
-msgid "No backups found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-backup/openstack-backups-list.js
-msgid "No backups yet."
-msgstr ""
-
-#: src/azure/sql/azure-sql-databases-list.js
-msgid "No databases found matching filter."
-msgstr ""
-
-#: src/azure/sql/azure-sql-databases-list.js
-msgid "No databases yet."
-msgstr ""
-
 #: src/vmware/vmware-virtual-machine-disks.js
 msgid "No disks found matching filter."
 msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
 msgid "No entries to show here"
-msgstr ""
-
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-msgid "No floating IPs found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-msgid "No floating IPs yet."
 msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
@@ -3664,14 +3567,6 @@ msgstr ""
 msgid "No members found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-msgid "No networks found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-msgid "No networks yet."
-msgstr ""
-
 #: src/payments/payment-list.js
 msgid "No payments found matching filter."
 msgstr ""
@@ -3688,10 +3583,6 @@ msgstr ""
 msgid "No ports yet."
 msgstr ""
 
-#: src/resource/list/resource-private-clouds-list.js
-msgid "No private clouds found matching filter."
-msgstr ""
-
 #: src/team/customer-users-list.js
 msgid "No projects are assigned to this role."
 msgstr ""
@@ -3704,66 +3595,17 @@ msgstr ""
 msgid "No resources found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
-msgid "No restored volumes found matching filter."
-msgstr ""
-
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
-msgstr ""
-
-#: src/openstack/openstack-security-groups/security-groups-list.js
-msgid "No security groups found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-security-groups/security-groups-list.js
-msgid "No security groups yet."
 msgstr ""
 
 #: src/jira/project/jira-projects-list.js
 msgid "No service desk projects found matching filter."
 msgstr ""
 
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-msgid "No snapshot schedules found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-msgid "No snapshot schedules yet."
-msgstr ""
-
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-#: src/openstack/openstack-volume/openstack-volume-snapshots.js
-msgid "No snapshots found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-msgid "No snapshots yet."
-msgstr ""
-
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-msgid "No subnets found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-msgid "No subnets yet."
-msgstr ""
-
 #: src/customer/popover/customer-users-details-list.js
 msgid "No users found matching filter."
-msgstr ""
-
-#: src/resource/list/resource-vms-list.js
-msgid "No virtual machines found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource/list/resource-volumes-list.js
-msgid "No volumes found matching filter."
 msgstr ""
 
 #: src/customer/create/customer-create-prompt.html
@@ -3801,13 +3643,9 @@ msgstr ""
 msgid "Not a valid value"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 msgid "Not assigned"
-msgstr ""
-
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-msgid "Not known"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
@@ -4723,8 +4561,7 @@ msgstr ""
 msgid "Privacy policy"
 msgstr ""
 
-#: src/project/routes.js
-#: src/resource/breadcrumbs/resource-categories.js
+#: src/openstack/utils.ts
 msgid "Private clouds"
 msgstr ""
 
@@ -4884,7 +4721,6 @@ msgstr ""
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "Provider"
 msgstr ""
 
@@ -4997,7 +4833,6 @@ msgstr ""
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "RAM"
 msgstr ""
 
@@ -5673,7 +5508,6 @@ msgstr ""
 msgid "Sankey diagram"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/providers/ProviderUpdateForm.tsx
 #: src/team/add-project-member.js
@@ -5681,9 +5515,9 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Schedule"
@@ -5813,10 +5647,6 @@ msgstr ""
 msgid "Select assignee..."
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Select available weekdays"
-msgstr ""
-
 #: src/issues/create/issue-registration.html
 msgid "Select caller..."
 msgstr ""
@@ -5902,10 +5732,6 @@ msgstr ""
 msgid "Select service provider"
 msgstr ""
 
-#: src/issues/create/issue-registration.html
-msgid "Select service type..."
-msgstr ""
-
 #: src/digitalocean/droplet-resize.html
 msgid "Select size..."
 msgstr ""
@@ -5984,10 +5810,6 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
-#: src/resource/breadcrumbs/resource-categories.js
-msgid "Service desk"
-msgstr ""
-
 #: src/jira/project/jira-project-checkout-summary.html
 msgid "Service desk project name"
 msgstr ""
@@ -6052,7 +5874,6 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 msgid "Service type"
@@ -6183,15 +6004,14 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-backup/backup-snapshots-list.js
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource/list/resource-volumes-list.js
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/vmware/VMwareDiskSummary.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
@@ -6245,7 +6065,6 @@ msgstr ""
 #: src/openstack/openstack-backup/tabs.js
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/openstack/openstack-volume/module.js
-#: src/resource/list/resource-storage-tabs.html
 msgid "Snapshots"
 msgstr ""
 
@@ -6263,7 +6082,6 @@ msgstr ""
 msgid "Staff and Support user"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/openstack/openstack-instance/actions/StartAction.ts
 msgid "Start"
@@ -6282,7 +6100,7 @@ msgstr ""
 msgid "Starting"
 msgstr ""
 
-#: src/azure/sql/azure-sql-databases-list.js
+#: src/azure/sql/DatabasesList.tsx
 #: src/billing/billing-records-list.js
 #: src/billing/invoices-list.js
 #: src/booking/BookingStateFilter.tsx
@@ -6304,16 +6122,18 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-backup/openstack-backups-list.js
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-#: src/openstack/openstack-security-groups/security-groups-list.js
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/payments/payment-list.js
 #: src/paypal/paypal-invoices-list.js
 #: src/project/ProjectResourcesList.tsx
@@ -6323,7 +6143,6 @@ msgstr ""
 #: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/user/hooks/HooksList.tsx
 #: src/vmware/vmware-virtual-machine-disks.js
 #: src/vmware/vmware-virtual-machine-ports.js
@@ -6361,9 +6180,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/project/routes.js
 #: src/quotas/constants.js
-#: src/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
 msgstr ""
 
@@ -6423,7 +6240,7 @@ msgstr ""
 msgid "Subnet has been updated."
 msgstr ""
 
-#: src/openstack/openstack-network/openstack-tenant-networks.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-subnet/breadcrumbs.js
 msgid "Subnets"
 msgstr ""
@@ -6828,16 +6645,8 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Time slot"
-msgstr ""
-
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "Time to resolution"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Time zone"
 msgstr ""
 
 #: src/events/BaseEventsList.tsx
@@ -6851,7 +6660,6 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.html
@@ -6971,7 +6779,7 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/payments/payment-list.js
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
@@ -7919,8 +7727,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/project/routes.js
-#: src/resource/breadcrumbs/resource-categories.js
+#: src/openstack/utils.ts
 msgid "Virtual machines"
 msgstr ""
 
@@ -7929,7 +7736,6 @@ msgid "Virtual machines count"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Volume"
 msgstr ""
 
@@ -7955,7 +7761,6 @@ msgid "Volume type"
 msgstr ""
 
 #: src/openstack/openstack-instance/module.js
-#: src/resource/list/resource-storage-tabs.html
 msgid "Volumes"
 msgstr ""
 
@@ -8104,10 +7909,6 @@ msgstr ""
 msgid "You have no invoices yet."
 msgstr ""
 
-#: src/resource/list/resource-private-clouds-list.js
-msgid "You have no private clouds yet."
-msgstr ""
-
 #: src/quotas/quotas-table.html
 msgid "You have no quotas yet."
 msgstr ""
@@ -8120,17 +7921,8 @@ msgstr ""
 msgid "You have no resources yet."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
-msgid "You have no restored volumes yet."
-msgstr ""
-
 #: src/jira/project/jira-projects-list.js
 msgid "You have no service desk projects yet."
-msgstr ""
-
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-#: src/openstack/openstack-volume/openstack-volume-snapshots.js
-msgid "You have no snapshots yet."
 msgstr ""
 
 #: src/invitations/invitations-list.js
@@ -8146,21 +7938,16 @@ msgstr ""
 msgid "You have no users yet."
 msgstr ""
 
-#: src/resource/list/resource-vms-list.js
-msgid "You have no virtual machines yet."
-msgstr ""
-
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource/list/resource-volumes-list.js
-msgid "You have no volumes yet."
-msgstr ""
-
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 msgid "You have not added any SSH keys to your"
 msgstr ""
 
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "You have the right to purchase service without additional approval."
+msgstr ""
+
+#: src/issues/list/IssuesListTablePlaceholder.tsx
+msgid "You haven't created any issues yet."
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.js
@@ -8203,10 +7990,6 @@ msgstr ""
 msgid "Your invitation was accepted."
 msgstr ""
 
-#: src/issues/list/IssuesListTablePlaceholder.tsx
-msgid "Your organization does not have any issues yet."
-msgstr ""
-
 #: src/project/ProjectTablePlaceholder.tsx
 msgid "Your organization does not have any projects yet."
 msgstr ""
@@ -8239,6 +8022,14 @@ msgstr ""
 msgid "application templates"
 msgstr ""
 
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+msgid "backup schedules"
+msgstr ""
+
+#: src/openstack/openstack-backup/BackupsList.tsx
+msgid "backups"
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
 msgstr ""
@@ -8267,6 +8058,10 @@ msgstr ""
 msgid "current state on backend: {resourceState}."
 msgstr ""
 
+#: src/azure/sql/DatabasesList.tsx
+msgid "databases"
+msgstr ""
+
 #: src/table-react/TablePageSize.tsx
 msgid "entries"
 msgstr ""
@@ -8281,6 +8076,10 @@ msgstr ""
 
 #: src/events/BaseEventsList.tsx
 msgid "events"
+msgstr ""
+
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+msgid "floating IPs"
 msgstr ""
 
 #: src/issues/list/IssueRow.tsx
@@ -8302,6 +8101,10 @@ msgstr ""
 
 #: src/table-react/utils.tsx
 msgid "items"
+msgstr ""
+
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+msgid "networks"
 msgstr ""
 
 #: src/quotas/quotas-table.html
@@ -8352,8 +8155,30 @@ msgstr ""
 msgid "resources"
 msgstr ""
 
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+msgid "restored volumes"
+msgstr ""
+
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+msgid "security groups"
+msgstr ""
+
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+msgid "snapshot schedules"
+msgstr ""
+
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+msgid "snapshots"
+msgstr ""
+
 #: src/resource/utils.tsx
 msgid "storage"
+msgstr ""
+
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+msgid "subnets"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -8362,10 +8187,6 @@ msgstr ""
 
 #: src/issues/list/IssuesList.tsx
 msgid "support requests"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "till"
 msgstr ""
 
 #: src/user/support/utils.ts
@@ -8392,6 +8213,10 @@ msgstr ""
 
 #: src/vmware/marketplace.ts
 msgid "vSphere Virtual Machine"
+msgstr ""
+
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+msgid "volumes"
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
@@ -8487,7 +8312,6 @@ msgid "{state} controls"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "{usage} of {limit}"
 msgstr ""
 

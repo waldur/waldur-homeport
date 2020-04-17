@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 
@@ -58,13 +57,6 @@ const useChecklistSelector = (categoryId: string) => {
   };
 };
 
-const setHeaderAndBreadcrumbsTitle = (name: string) => {
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  BreadcrumbsService.activeItem = name;
-
-  ngInjector.get('titleService').setTitle(name);
-};
-
 export const useProjectChecklist = (project, categoryId) => {
   const { checklist, ...checklistLoader } = useChecklistSelector(categoryId);
 
@@ -106,7 +98,6 @@ export const useProjectChecklist = (project, categoryId) => {
       }
     }
     if (checklist) {
-      setHeaderAndBreadcrumbsTitle(checklist.name);
       load();
     }
   }, [checklist]);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
-import useEffectOnce from 'react-use/esm/useEffectOnce';
+import useEffectOnce from 'react-use/lib/useEffectOnce';
 
 import { ngInjector } from '@waldur/core/services';
 

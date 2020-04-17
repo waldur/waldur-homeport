@@ -23,7 +23,7 @@ export const CategoriesList = withTranslation((props: CategoriesListProps) => {
     );
   }
 
-  if (props.loaded && !props.items) {
+  if (!props.items) {
     return (
       <h3 className="text-center">
         {props.translate('There are no categories in marketplace yet.')}

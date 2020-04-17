@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 import { connect } from 'react-redux';
+import useEffectOnce from 'react-use/lib/useEffectOnce';
 import { compose } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -59,24 +60,17 @@ export const DialogBody = props => {
   }
 };
 
-class ZabbixHostDetailsDialog extends React.Component<
-  ZabbixHostDetailsDialogProps
-> {
-  render() {
-    return (
-      <ModalDialog
-        title={this.props.translate('Monitoring details')}
-        footer={<DialogFooter host={this.props.host} />}
-      >
-        <DialogBody {...this.props} />
-      </ModalDialog>
-    );
-  }
-
-  componenDidMount() {
-    this.props.onFetch();
-  }
-}
+const ZabbixHostDetailsDialog: React.FC<ZabbixHostDetailsDialogProps> = props => {
+  useEffectOnce(props.onFetch);
+  return (
+    <ModalDialog
+      title={props.translate('Monitoring details')}
+      footer={<DialogFooter host={props.host} />}
+    >
+      <DialogBody {...props} />
+    </ModalDialog>
+  );
+};
 
 const mapStateToDispatch = (dispatch, ownProps) => ({
   onFetch: () => dispatch(fetchZabbixHost(ownProps.resolve.resource.uuid)),

@@ -97,7 +97,7 @@ export const getProjectCounters = (project: Project, fields: string[]) =>
     response => response.data,
   );
 
-export const getExtraSidebarItems = () => {
+export const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
   const SidebarExtensionService = ngInjector.get('SidebarExtensionService');
   return SidebarExtensionService.getItems('project');
 };

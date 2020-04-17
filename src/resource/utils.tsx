@@ -25,16 +25,6 @@ export const formatResourceType = resource => {
   return service + ' ' + parts[1];
 };
 
-const LIST_STATES = {
-  apps: 'project.resources.apps',
-  private_clouds: 'project.resources.clouds',
-  storages: 'project.resources.storage.tabs',
-  vms: 'project.resources.vms',
-};
-
-export const getListState = category =>
-  LIST_STATES[category] || 'project.resources.vms';
-
 const formatStorage = limits => {
   const parts = [];
   const volumeTypes = Object.keys(limits).filter(
