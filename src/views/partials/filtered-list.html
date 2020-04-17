@@ -7,6 +7,22 @@
     ng-if="ListController.userFilter.choices || ListController.selectFilter.choices"
   >
     <div class="col-md-9" ng-if="ListController.userFilter">
+      <div
+        ng-repeat="paymentProfile in ListController.currentCustomer.payment_profiles | limitTo:1"
+      >
+        <span
+          ng-if="paymentProfile.is_active && paymentProfile.payment_type === 'fixed_price'"
+        >
+          <span ng-if="ListController.currentCustomer.agreement_number"
+            >Organization has signed a fixed price agreement
+            {{ ListController.currentCustomer.agreement_number }}.
+            <span ng-if="ListController.currentCustomer.end_date">
+              End date of the agreement is
+              {{ ListController.currentCustomer.end_date }}.</span>
+          </span>
+        </span>
+      </div>
+
       <filter-list
         on-select="ListController.getList()"
         is-loading="ListController.loading"
