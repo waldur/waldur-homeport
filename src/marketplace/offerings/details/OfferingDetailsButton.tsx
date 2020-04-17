@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
 const openOfferingDetailsDialog = (offeringUuid: string) =>
@@ -29,9 +28,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   openDialog: () => dispatch(openOfferingDetailsDialog(ownProps.offering)),
 });
 
-const OfferingDetailsButton = connect(
+export const OfferingDetailsButton = connect(
   null,
   mapDispatchToProps,
 )(PureOfferingDetailsButton);
-
-export default connectAngularComponent(OfferingDetailsButton, ['offering']);

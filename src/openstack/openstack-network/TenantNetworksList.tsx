@@ -3,7 +3,6 @@ import * as React from 'react';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { BooleanField } from '@waldur/table-react/BooleanField';
 
@@ -22,7 +21,7 @@ const TableComponent = props => {
           render: ({ row }) =>
             row.subnets
               .map(subnet => `${subnet.name}: ${subnet.cidr}`)
-              .join(',') || 'N/A',
+              .join(', ') || 'N/A',
         },
         {
           title: translate('State'),
@@ -34,9 +33,7 @@ const TableComponent = props => {
         },
       ]}
       verboseName={translate('networks')}
-      actions={
-        <NestedListActions resource={props.resource} tab="openstack-networks" />
-      }
+      actions={<NestedListActions resource={props.resource} tab="networks" />}
     />
   );
 };
@@ -49,6 +46,4 @@ const TableOptions = {
   }),
 };
 
-const TenantNetworksList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(TenantNetworksList, ['resource']);
+export const TenantNetworksList = connectTable(TableOptions)(TableComponent);

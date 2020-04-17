@@ -4,7 +4,6 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -52,6 +51,4 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const PortsList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(PortsList, ['resource']);
+export const PortsList = connectTable(TableOptions)(TableComponent);

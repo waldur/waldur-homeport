@@ -5405,6 +5405,10 @@ msgstr ""
 msgid "Role management events"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/module.js
+msgid "Rules"
+msgstr ""
+
 #: src/customer/AccountingRunningField.tsx
 msgid "Running accounting"
 msgstr ""
@@ -6211,6 +6215,7 @@ msgid "Subnet has been updated."
 msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-network/module.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
 msgid "Subnets"
 msgstr ""
@@ -7364,6 +7369,7 @@ msgstr ""
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/slurm/tabs.js
 msgid "Usage"
 msgstr ""
 

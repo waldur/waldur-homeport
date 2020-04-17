@@ -1,7 +1,6 @@
-import marketplaceOrderItemsList from './OrderItemsContainer';
 import marketplaceMyOrderItemsList from './MyOrderItemsContainer';
+import marketplaceOrderItemsList from './OrderItemsContainer';
 import marketplaceSupportOrderItemsList from './SupportOrderItemsContainer';
-import marketplaceResourceOrderItems from './ResourceOrderItems';
 
 export default module => {
   module.component('marketplaceOrderItemsList', marketplaceOrderItemsList);
@@ -9,9 +8,5 @@ export default module => {
   module.component(
     'marketplaceSupportOrderItemsList',
     marketplaceSupportOrderItemsList,
-  );
-  module.component(
-    'marketplaceResourceOrderItems',
-    marketplaceResourceOrderItems,
   );
 };

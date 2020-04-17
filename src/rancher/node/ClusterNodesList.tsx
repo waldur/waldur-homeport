@@ -4,7 +4,6 @@ import { Link } from '@waldur/core/Link';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -54,6 +53,4 @@ const TableOptions = {
   }),
 };
 
-const ClusterNodesList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(ClusterNodesList, ['resource']);
+export const ClusterNodesList = connectTable(TableOptions)(TableComponent);

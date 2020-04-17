@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 import { CatalogCreateButton } from './CatalogCreateButton';
@@ -65,6 +64,4 @@ const TableOptions = {
   }),
 };
 
-const ClusterCatalogList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(ClusterCatalogList, ['resource']);
+export const ClusterCatalogList = connectTable(TableOptions)(TableComponent);

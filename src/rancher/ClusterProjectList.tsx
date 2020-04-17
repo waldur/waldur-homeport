@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -37,6 +36,4 @@ const TableOptions = {
   }),
 };
 
-const ClusterProjectList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(ClusterProjectList, ['resource']);
+export const ClusterProjectList = connectTable(TableOptions)(TableComponent);
