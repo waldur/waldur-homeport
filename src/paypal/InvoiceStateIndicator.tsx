@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 export type InvoiceStateType = 'DRAFT' | 'SENT' | 'CANCELLED' | 'PAID';
 
@@ -24,5 +23,3 @@ export const InvoiceStateIndicator = (props: InvoiceStateIndicatorProps) => (
     variant={LABEL_CLASSES[props.model.state] || 'info'}
   />
 );
-
-export default connectAngularComponent(InvoiceStateIndicator, ['model']);

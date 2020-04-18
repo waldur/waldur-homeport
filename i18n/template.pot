@@ -117,6 +117,8 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
+#: src/billing/InvoicesList.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/booking/BookingsList.tsx
 #: src/events/BaseEventsList.tsx
@@ -132,12 +134,14 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
+#: src/paypal/InvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
+#: src/team/ProjectUsersList.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
@@ -223,7 +227,7 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
-#: src/team/project-users-list.js
+#: src/team/AddMemberButton.tsx
 msgid "Add member"
 msgstr ""
 
@@ -391,10 +395,6 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/slurm/table-extension.js
-msgid "Allocations"
-msgstr ""
-
 #: src/auth/auth-login.html
 msgid "Already have an account?"
 msgstr ""
@@ -402,7 +402,7 @@ msgstr ""
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/payments/payment-list.js
+#: src/payments/PaymentsList.tsx
 msgid "Amount"
 msgstr ""
 
@@ -588,6 +588,10 @@ msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.js
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgstr ""
+
+#: src/customer/popover/CustomerPopover.tsx
+msgid "Authorized personnel"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -867,12 +871,12 @@ msgstr ""
 msgid "Cancel request"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/InvoicesFilter.tsx
 #: src/invitations/invitations-list.js
 msgid "Canceled"
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Cancelled"
 msgstr ""
 
@@ -998,7 +1002,7 @@ msgstr ""
 msgid "Choose option"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/actions/invitation-dialog.js
 #: src/team/user-selector.html
 msgid "Civil number"
@@ -1094,11 +1098,15 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
+#: src/customer/popover/CustomerPopover.tsx
+msgid "Company data"
+msgstr ""
+
 #: src/marketplace/routes.js
 msgid "Compare items"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "Competence"
 msgstr ""
@@ -1340,7 +1348,7 @@ msgstr ""
 msgid "Create your first project"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/InvoicesFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/CustomerList.tsx
 #: src/issues/issue-detail.html
@@ -1493,7 +1501,7 @@ msgstr ""
 
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
-#: src/payments/payment-list.js
+#: src/payments/PaymentsList.tsx
 msgid "Date"
 msgstr ""
 
@@ -1659,8 +1667,8 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/slurm/actions.js
+#: src/team/UserDetailsButton.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/user/UserDropdownMenu.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -1761,7 +1769,7 @@ msgid "Done"
 msgstr ""
 
 #: src/billing/invoice-header.html
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
 msgid "Download invoice"
 msgstr ""
 
@@ -1770,7 +1778,7 @@ msgid "Download order PDF file"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr ""
 
@@ -1783,9 +1791,9 @@ msgstr ""
 msgid "Drop files to attach, or"
 msgstr ""
 
+#: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Due date"
 msgstr ""
 
@@ -1793,10 +1801,10 @@ msgstr ""
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/actions/invitation-dialog.html
+#: src/team/ProjectUsersList.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/team/user-selector.html
 #: src/user/support/UserDetailsTable.tsx
 msgid "E-mail"
@@ -1825,8 +1833,8 @@ msgstr ""
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
+#: src/team/AddMemberButton.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/vmware/actions.ts
 msgid "Edit"
 msgstr ""
@@ -2736,9 +2744,9 @@ msgstr ""
 msgid "Invoice No."
 msgstr ""
 
+#: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Invoice date"
 msgstr ""
 
@@ -2762,12 +2770,12 @@ msgstr ""
 msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
 msgstr ""
 
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
 
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/billing/InvoicesList.tsx
+#: src/paypal/InvoicesList.tsx
 msgid "Invoice number"
 msgstr ""
 
@@ -2861,7 +2869,7 @@ msgstr ""
 msgid "JIRA user with excessive privileges"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Job position"
@@ -3194,9 +3202,9 @@ msgstr ""
 msgid "Measured unit"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
+#: src/team/ProjectUsersList.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 msgid "Member"
 msgstr ""
 
@@ -3544,39 +3552,17 @@ msgstr ""
 msgid "No invitations found matching filter."
 msgstr ""
 
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
-msgid "No invoices found matching filter."
-msgstr ""
-
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 msgid "No members found matching filter."
-msgstr ""
-
-#: src/payments/payment-list.js
-msgid "No payments found matching filter."
-msgstr ""
-
-#: src/payments/payment-list.js
-msgid "No payments yet"
 msgstr ""
 
 #: src/team/customer-users-list.js
 msgid "No projects are assigned to this role."
 msgstr ""
 
-#: src/billing/billing-records-list.js
-msgid "No records found matching filter."
-msgstr ""
-
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
-msgstr ""
-
-#: src/customer/popover/customer-users-details-list.js
-msgid "No users found matching filter."
 msgstr ""
 
 #: src/customer/create/customer-create-prompt.html
@@ -3651,7 +3637,7 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
@@ -3695,7 +3681,6 @@ msgstr ""
 msgid "Number of worker nodes"
 msgstr ""
 
-#: src/customer/popover/customer-popover.html
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/user/user-popover.html
 msgid "OK"
@@ -4008,6 +3993,10 @@ msgstr ""
 msgid "Organization type"
 msgstr ""
 
+#: src/customer/popover/CustomerPopover.tsx
+msgid "Organization users list"
+msgstr ""
+
 #: src/billing/billing-record-header.js
 #: src/billing/invoice-header.html
 #: src/customer/workspace/CustomerWorkspace.tsx
@@ -4074,8 +4063,8 @@ msgstr ""
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr ""
 
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/billing/InvoicesFilter.tsx
+#: src/paypal/InvoicesFilter.tsx
 msgid "Paid"
 msgstr ""
 
@@ -4112,7 +4101,7 @@ msgstr ""
 msgid "Paused"
 msgstr ""
 
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
 msgid "Pay invoice"
 msgstr ""
 
@@ -4138,7 +4127,7 @@ msgstr ""
 msgid "Payment is being processed, please wait."
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Payment pending"
 msgstr ""
 
@@ -4146,7 +4135,7 @@ msgstr ""
 msgid "Payment profiles"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/InvoicesFilter.tsx
 #: src/invitations/invitations-list.js
 #: src/marketplace/orders/store/reducer.ts
 msgid "Pending"
@@ -4201,7 +4190,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
 msgid "Phone number"
@@ -4420,7 +4409,7 @@ msgstr ""
 msgid "Powered by"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "Preferred language"
 msgstr ""
@@ -4439,7 +4428,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: src/billing/invoices-list.js
+#: src/billing/InvoicesList.tsx
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
@@ -4447,7 +4436,7 @@ msgstr ""
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Price"
 msgstr ""
 
@@ -4621,7 +4610,7 @@ msgstr ""
 msgid "Project manager"
 msgstr ""
 
-#: src/team/project-users-list.js
+#: src/team/UserRemoveButton.tsx
 msgid "Project manager cannot edit users with same role."
 msgstr ""
 
@@ -4857,16 +4846,16 @@ msgstr ""
 msgid "Record no."
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Record notification has been sent to organization owners."
 msgstr ""
 
-#: src/billing/billing-records-list.js
+#: src/billing/BillingRecordsList.tsx
 msgid "Record number"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
 #: src/billing/billing-record-details.html
-#: src/billing/billing-records-list.js
 msgid "Record period"
 msgstr ""
 
@@ -4990,8 +4979,8 @@ msgstr ""
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
 #: src/rancher/cluster/create/NodeRemoveButton.tsx
+#: src/team/UserRemoveButton.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -5397,7 +5386,7 @@ msgstr ""
 msgid "Role expires on"
 msgstr ""
 
-#: src/team/project-users-list.js
+#: src/team/ProjectUsersList.tsx
 msgid "Role in project"
 msgstr ""
 
@@ -5760,11 +5749,11 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Send notification"
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Sent"
 msgstr ""
 
@@ -6075,8 +6064,8 @@ msgid "Starting"
 msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
-#: src/billing/billing-records-list.js
-#: src/billing/invoices-list.js
+#: src/billing/BillingRecordsList.tsx
+#: src/billing/InvoicesList.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
@@ -6109,8 +6098,8 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
-#: src/payments/payment-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/payments/PaymentsList.tsx
+#: src/paypal/InvoicesList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
@@ -6324,8 +6313,8 @@ msgstr ""
 msgid "Taking a snapshot"
 msgstr ""
 
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/billing/InvoicesList.tsx
+#: src/paypal/InvoicesList.tsx
 msgid "Tax"
 msgstr ""
 
@@ -6338,6 +6327,10 @@ msgstr ""
 #: src/project/routes.js
 #: src/project/utils.ts
 msgid "Team"
+msgstr ""
+
+#: src/team/UserRemoveButton.tsx
+msgid "Team member has been removed."
 msgstr ""
 
 #: src/customer/dashboard/api.ts
@@ -6481,7 +6474,6 @@ msgstr ""
 msgid "There are no SSH public keys yet."
 msgstr ""
 
-#: src/paypal/paypal-invoice-actions.html
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
@@ -6687,12 +6679,12 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
+#: src/billing/InvoicesList.tsx
 #: src/billing/PriceEstimateDialog.tsx
-#: src/billing/billing-records-list.js
-#: src/billing/invoices-list.js
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Total"
 msgstr ""
 
@@ -6755,7 +6747,7 @@ msgstr ""
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/payments/payment-list.js
+#: src/payments/PaymentsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
 msgstr ""
@@ -6870,6 +6862,10 @@ msgstr ""
 msgid "Unable to delete comment."
 msgstr ""
 
+#: src/team/UserRemoveButton.tsx
+msgid "Unable to delete team member."
+msgstr ""
+
 #: src/issues/comments/effects.ts
 msgid "Unable to edit comment."
 msgstr ""
@@ -6975,7 +6971,12 @@ msgstr ""
 msgid "Unable to load compliance overview."
 msgstr ""
 
+#: src/team/ProjectUsersList.tsx
+msgid "Unable to load data"
+msgstr ""
+
 #: src/customer/TotalCostComponent.tsx
+#: src/customer/popover/CustomerPopover.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -7159,7 +7160,7 @@ msgstr ""
 msgid "Unable to save user."
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Unable to send record notification."
 msgstr ""
 
@@ -7265,7 +7266,7 @@ msgstr ""
 msgid "Unlink instance"
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Unpaid"
 msgstr ""
 
@@ -7876,17 +7877,8 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
-msgid "You have no invoices yet."
-msgstr ""
-
 #: src/quotas/quotas-table.html
 msgid "You have no quotas yet."
-msgstr ""
-
-#: src/billing/billing-records-list.js
-msgid "You have no records yet."
 msgstr ""
 
 #: src/invitations/invitations-list.js
@@ -7894,12 +7886,7 @@ msgid "You have no team invitations yet."
 msgstr ""
 
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 msgid "You have no team members yet."
-msgstr ""
-
-#: src/customer/popover/customer-users-details-list.js
-msgid "You have no users yet."
 msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -8071,6 +8058,11 @@ msgstr ""
 msgid "internal IPs"
 msgstr ""
 
+#: src/billing/InvoicesList.tsx
+#: src/paypal/InvoicesList.tsx
+msgid "invoices"
+msgstr ""
+
 #: src/table-react/utils.tsx
 msgid "items"
 msgstr ""
@@ -8104,6 +8096,10 @@ msgstr ""
 msgid "payment profiles"
 msgstr ""
 
+#: src/payments/PaymentsList.tsx
+msgid "payments"
+msgstr ""
+
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "plans"
@@ -8121,6 +8117,10 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/user/list/ProjectPermissions.tsx
 msgid "projects"
+msgstr ""
+
+#: src/billing/BillingRecordsList.tsx
+msgid "records"
 msgstr ""
 
 #: src/jira/issue/JiraIssuesList.tsx
@@ -8169,10 +8169,15 @@ msgstr ""
 msgid "support requests"
 msgstr ""
 
+#: src/team/ProjectUsersList.tsx
+msgid "team members"
+msgstr ""
+
 #: src/user/support/utils.ts
 msgid "token will not timeout"
 msgstr ""
 
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"
 msgstr ""
