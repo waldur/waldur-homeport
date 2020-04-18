@@ -25,6 +25,9 @@ function RecordsListController(
       return usersService.getCurrentUser().then(currentUser => {
         this.currentUser = currentUser;
         return currentStateService.getCustomer().then(currentCustomer => {
+          this.activeFixedPricePaymentProfile = this.findActiveFixedPricePaymentProfile(
+            currentCustomer.payment_profiles,
+          );
           this.currentCustomer = currentCustomer;
           this.tableOptions = this.getTableOptions();
           return fn();
@@ -76,6 +79,13 @@ function RecordsListController(
       return {
         customer: this.currentCustomer.url,
       };
+    },
+    findActiveFixedPricePaymentProfile: function(paymentProfiles) {
+      return paymentProfiles.find(
+        paymentProfile =>
+          paymentProfile.is_active &&
+          paymentProfile.payment_type === 'fixed_price',
+      );
     },
   });
 
