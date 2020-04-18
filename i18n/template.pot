@@ -589,6 +589,10 @@ msgstr ""
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
+#: src/customer/popover/CustomerPopover.tsx
+msgid "Authorized personnel"
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.js
 #: src/openstack/openstack-instance/openstack-instance-networks.js
@@ -997,7 +1001,7 @@ msgstr ""
 msgid "Choose option"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/actions/invitation-dialog.js
 #: src/team/user-selector.html
 msgid "Civil number"
@@ -1093,11 +1097,15 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
+#: src/customer/popover/CustomerPopover.tsx
+msgid "Company data"
+msgstr ""
+
 #: src/marketplace/routes.js
 msgid "Compare items"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "Competence"
 msgstr ""
@@ -1792,7 +1800,7 @@ msgstr ""
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
@@ -2860,7 +2868,7 @@ msgstr ""
 msgid "JIRA user with excessive privileges"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Job position"
@@ -3193,7 +3201,7 @@ msgstr ""
 msgid "Measured unit"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 msgid "Member"
@@ -3557,10 +3565,6 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
-msgid "No users found matching filter."
-msgstr ""
-
 #: src/customer/create/customer-create-prompt.html
 msgid "No, I will do it later"
 msgstr ""
@@ -3677,7 +3681,6 @@ msgstr ""
 msgid "Number of worker nodes"
 msgstr ""
 
-#: src/customer/popover/customer-popover.html
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/user/user-popover.html
 msgid "OK"
@@ -3990,6 +3993,10 @@ msgstr ""
 msgid "Organization type"
 msgstr ""
 
+#: src/customer/popover/CustomerPopover.tsx
+msgid "Organization users list"
+msgstr ""
+
 #: src/billing/billing-record-header.js
 #: src/billing/invoice-header.html
 #: src/customer/workspace/CustomerWorkspace.tsx
@@ -4183,7 +4190,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
 msgid "Phone number"
@@ -4402,7 +4409,7 @@ msgstr ""
 msgid "Powered by"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "Preferred language"
 msgstr ""
@@ -6957,6 +6964,7 @@ msgid "Unable to load compliance overview."
 msgstr ""
 
 #: src/customer/TotalCostComponent.tsx
+#: src/customer/popover/CustomerPopover.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -7870,10 +7878,6 @@ msgstr ""
 msgid "You have no team members yet."
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
-msgid "You have no users yet."
-msgstr ""
-
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 msgid "You have not added any SSH keys to your"
 msgstr ""
@@ -8158,6 +8162,7 @@ msgstr ""
 msgid "token will not timeout"
 msgstr ""
 
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"
 msgstr ""

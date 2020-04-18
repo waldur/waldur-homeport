@@ -1,10 +1,10 @@
 import * as React from 'react';
+import * as Table from 'react-bootstrap/lib/Table';
 
 import { Customer } from '@waldur/customer/types';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
+import { translate } from '@waldur/i18n';
 
-interface CustomerSummaryProps extends TranslateProps {
+interface CustomerSummaryProps {
   customer: Customer;
 }
 
@@ -18,26 +18,17 @@ const Row = ({ label, value }) =>
     </tr>
   ) : null;
 
-export const PureCustomerSummary = ({
-  customer,
-  translate,
-}: CustomerSummaryProps) => (
-  <div className="table-responsive">
-    <table className="table table-bordered">
-      <tbody>
-        <Row label={translate('Organization type')} value={customer.type} />
-        <Row
-          label={translate('Registration code')}
-          value={customer.registration_code}
-        />
-        <Row label={translate('Legal address')} value={customer.address} />
-        <Row label={translate('Contact email')} value={customer.email} />
-        <Row label={translate('Contact phone')} value={customer.phone_number} />
-      </tbody>
-    </table>
-  </div>
+export const CustomerSummary = ({ customer }: CustomerSummaryProps) => (
+  <Table responsive bordered>
+    <tbody>
+      <Row label={translate('Organization type')} value={customer.type} />
+      <Row
+        label={translate('Registration code')}
+        value={customer.registration_code}
+      />
+      <Row label={translate('Legal address')} value={customer.address} />
+      <Row label={translate('Contact email')} value={customer.email} />
+      <Row label={translate('Contact phone')} value={customer.phone_number} />
+    </tbody>
+  </Table>
 );
-
-export default connectAngularComponent(withTranslation(PureCustomerSummary), [
-  'customer',
-]);
