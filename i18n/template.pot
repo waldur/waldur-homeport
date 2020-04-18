@@ -393,10 +393,6 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/slurm/table-extension.js
-msgid "Allocations"
-msgstr ""
-
 #: src/auth/auth-login.html
 msgid "Already have an account?"
 msgstr ""
