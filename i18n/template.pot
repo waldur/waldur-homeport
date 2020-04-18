@@ -134,7 +134,8 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
+#: src/paypal/InvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
@@ -870,7 +871,7 @@ msgstr ""
 msgid "Canceled"
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Cancelled"
 msgstr ""
 
@@ -1759,7 +1760,7 @@ msgid "Done"
 msgstr ""
 
 #: src/billing/invoice-header.html
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
 msgid "Download invoice"
 msgstr ""
 
@@ -1768,7 +1769,7 @@ msgid "Download order PDF file"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr ""
 
@@ -1783,7 +1784,7 @@ msgstr ""
 
 #: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Due date"
 msgstr ""
 
@@ -2736,7 +2737,7 @@ msgstr ""
 
 #: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Invoice date"
 msgstr ""
 
@@ -2760,12 +2761,12 @@ msgstr ""
 msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
 msgstr ""
 
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
 
 #: src/billing/InvoicesList.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Invoice number"
 msgstr ""
 
@@ -3542,10 +3543,6 @@ msgstr ""
 msgid "No invitations found matching filter."
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
-msgid "No invoices found matching filter."
-msgstr ""
-
 #: src/team/customer-users-list.js
 #: src/team/project-users-list.js
 msgid "No members found matching filter."
@@ -4060,7 +4057,7 @@ msgid "Page is not found. You've either entered invalid URL or trying to reach d
 msgstr ""
 
 #: src/billing/InvoicesFilter.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Paid"
 msgstr ""
 
@@ -4097,7 +4094,7 @@ msgstr ""
 msgid "Paused"
 msgstr ""
 
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
 msgid "Pay invoice"
 msgstr ""
 
@@ -4123,7 +4120,7 @@ msgstr ""
 msgid "Payment is being processed, please wait."
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Payment pending"
 msgstr ""
 
@@ -4432,7 +4429,7 @@ msgstr ""
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Price"
 msgstr ""
 
@@ -5749,7 +5746,7 @@ msgstr ""
 msgid "Send notification"
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Sent"
 msgstr ""
 
@@ -6095,7 +6092,7 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/payments/PaymentsList.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
@@ -6310,7 +6307,7 @@ msgid "Taking a snapshot"
 msgstr ""
 
 #: src/billing/InvoicesList.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Tax"
 msgstr ""
 
@@ -6466,7 +6463,6 @@ msgstr ""
 msgid "There are no SSH public keys yet."
 msgstr ""
 
-#: src/paypal/paypal-invoice-actions.html
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
@@ -6677,7 +6673,7 @@ msgstr ""
 #: src/billing/PriceEstimateDialog.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Total"
 msgstr ""
 
@@ -7250,7 +7246,7 @@ msgstr ""
 msgid "Unlink instance"
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Unpaid"
 msgstr ""
 
@@ -7861,10 +7857,6 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
-msgid "You have no invoices yet."
-msgstr ""
-
 #: src/quotas/quotas-table.html
 msgid "You have no quotas yet."
 msgstr ""
@@ -8052,6 +8044,7 @@ msgid "internal IPs"
 msgstr ""
 
 #: src/billing/InvoicesList.tsx
+#: src/paypal/InvoicesList.tsx
 msgid "invoices"
 msgstr ""
 
