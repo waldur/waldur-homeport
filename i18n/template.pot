@@ -3560,6 +3560,10 @@ msgstr ""
 msgid "No projects are assigned to this role."
 msgstr ""
 
+#: src/billing/billing-records-list.js
+msgid "No records found matching filter."
+msgstr ""
+
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
@@ -4851,11 +4855,13 @@ msgid "Record notification has been sent to organization owners."
 msgstr ""
 
 #: src/billing/BillingRecordsList.tsx
+#: src/billing/billing-records-list.js
 msgid "Record number"
 msgstr ""
 
 #: src/billing/BillingRecordsList.tsx
 #: src/billing/billing-record-details.html
+#: src/billing/billing-records-list.js
 msgid "Record period"
 msgstr ""
 
@@ -6066,6 +6072,7 @@ msgstr ""
 #: src/azure/sql/DatabasesList.tsx
 #: src/billing/BillingRecordsList.tsx
 #: src/billing/InvoicesList.tsx
+#: src/billing/billing-records-list.js
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
@@ -6682,6 +6689,7 @@ msgstr ""
 #: src/billing/BillingRecordsList.tsx
 #: src/billing/InvoicesList.tsx
 #: src/billing/PriceEstimateDialog.tsx
+#: src/billing/billing-records-list.js
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/InvoicesList.tsx
@@ -7879,6 +7887,10 @@ msgstr ""
 
 #: src/quotas/quotas-table.html
 msgid "You have no quotas yet."
+msgstr ""
+
+#: src/billing/billing-records-list.js
+msgid "You have no records yet."
 msgstr ""
 
 #: src/invitations/invitations-list.js

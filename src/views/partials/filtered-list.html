@@ -7,18 +7,6 @@
     ng-if="ListController.userFilter.choices || ListController.selectFilter.choices"
   >
     <div class="col-md-9" ng-if="ListController.userFilter">
-      <div ng-if="ListController.activeFixedPricePaymentProfile">
-        <span
-          ng-if="ListController.activeFixedPricePaymentProfile.agreement_number"
-          >Organization has signed a fixed price agreement
-          {{ ListController.activeFixedPricePaymentProfile.agreement_number }}.
-          <span ng-if="ListController.activeFixedPricePaymentProfile.end_date">
-            End date of the agreement is
-            {{ ListController.activeFixedPricePaymentProfile.end_date }}.
-          </span>
-        </span>
-      </div>
-
       <filter-list
         on-select="ListController.getList()"
         is-loading="ListController.loading"
