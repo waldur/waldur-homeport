@@ -117,6 +117,8 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
+#: src/billing/InvoicesList.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/booking/BookingsList.tsx
 #: src/events/BaseEventsList.tsx
@@ -867,7 +869,7 @@ msgstr ""
 msgid "Cancel request"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/InvoicesFilter.tsx
 #: src/invitations/invitations-list.js
 msgid "Canceled"
 msgstr ""
@@ -1340,7 +1342,7 @@ msgstr ""
 msgid "Create your first project"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/InvoicesFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/CustomerList.tsx
 #: src/issues/issue-detail.html
@@ -1783,8 +1785,8 @@ msgstr ""
 msgid "Drop files to attach, or"
 msgstr ""
 
+#: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/billing/invoices-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "Due date"
 msgstr ""
@@ -2736,8 +2738,8 @@ msgstr ""
 msgid "Invoice No."
 msgstr ""
 
+#: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/billing/invoices-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "Invoice date"
 msgstr ""
@@ -2766,7 +2768,7 @@ msgstr ""
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
 
-#: src/billing/invoices-list.js
+#: src/billing/InvoicesList.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Invoice number"
 msgstr ""
@@ -3544,7 +3546,6 @@ msgstr ""
 msgid "No invitations found matching filter."
 msgstr ""
 
-#: src/billing/invoices-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "No invoices found matching filter."
 msgstr ""
@@ -3564,10 +3565,6 @@ msgstr ""
 
 #: src/team/customer-users-list.js
 msgid "No projects are assigned to this role."
-msgstr ""
-
-#: src/billing/billing-records-list.js
-msgid "No records found matching filter."
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
@@ -3651,7 +3648,7 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
@@ -4074,7 +4071,7 @@ msgstr ""
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr ""
 
-#: src/billing/invoices-list.js
+#: src/billing/InvoicesFilter.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Paid"
 msgstr ""
@@ -4146,7 +4143,7 @@ msgstr ""
 msgid "Payment profiles"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/InvoicesFilter.tsx
 #: src/invitations/invitations-list.js
 #: src/marketplace/orders/store/reducer.ts
 msgid "Pending"
@@ -4439,7 +4436,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: src/billing/invoices-list.js
+#: src/billing/InvoicesList.tsx
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
@@ -4857,16 +4854,16 @@ msgstr ""
 msgid "Record no."
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Record notification has been sent to organization owners."
 msgstr ""
 
-#: src/billing/billing-records-list.js
+#: src/billing/BillingRecordsList.tsx
 msgid "Record number"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
 #: src/billing/billing-record-details.html
-#: src/billing/billing-records-list.js
 msgid "Record period"
 msgstr ""
 
@@ -5760,7 +5757,7 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Send notification"
 msgstr ""
 
@@ -6075,8 +6072,8 @@ msgid "Starting"
 msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
-#: src/billing/billing-records-list.js
-#: src/billing/invoices-list.js
+#: src/billing/BillingRecordsList.tsx
+#: src/billing/InvoicesList.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
@@ -6324,7 +6321,7 @@ msgstr ""
 msgid "Taking a snapshot"
 msgstr ""
 
-#: src/billing/invoices-list.js
+#: src/billing/InvoicesList.tsx
 #: src/paypal/paypal-invoices-list.js
 msgid "Tax"
 msgstr ""
@@ -6687,9 +6684,9 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
+#: src/billing/InvoicesList.tsx
 #: src/billing/PriceEstimateDialog.tsx
-#: src/billing/billing-records-list.js
-#: src/billing/invoices-list.js
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/paypal-invoices-list.js
@@ -7159,7 +7156,7 @@ msgstr ""
 msgid "Unable to save user."
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Unable to send record notification."
 msgstr ""
 
@@ -7876,17 +7873,12 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: src/billing/invoices-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "You have no invoices yet."
 msgstr ""
 
 #: src/quotas/quotas-table.html
 msgid "You have no quotas yet."
-msgstr ""
-
-#: src/billing/billing-records-list.js
-msgid "You have no records yet."
 msgstr ""
 
 #: src/invitations/invitations-list.js
@@ -8071,6 +8063,10 @@ msgstr ""
 msgid "internal IPs"
 msgstr ""
 
+#: src/billing/InvoicesList.tsx
+msgid "invoices"
+msgstr ""
+
 #: src/table-react/utils.tsx
 msgid "items"
 msgstr ""
@@ -8121,6 +8117,10 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/user/list/ProjectPermissions.tsx
 msgid "projects"
+msgstr ""
+
+#: src/billing/BillingRecordsList.tsx
+msgid "records"
 msgstr ""
 
 #: src/jira/issue/JiraIssuesList.tsx

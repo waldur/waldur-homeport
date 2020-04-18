@@ -25,59 +25,6 @@ export default class BillingUtils {
     return `${this.ENV.shortPageTitle} | ${this.getTabTitle()}`;
   }
 
-  getUserFilter() {
-    return {
-      name: 'state',
-      choices: [
-        {
-          title: gettext('Pending'),
-          value: 'pending',
-        },
-        {
-          title: gettext('Canceled'),
-          value: 'canceled',
-        },
-        {
-          title: gettext('Created'),
-          value: 'created',
-        },
-      ],
-    };
-  }
-
-  getTableActions() {
-    return [
-      {
-        title: gettext('Send notification'),
-        iconClass: 'fa fa-envelope-o',
-        callback: this.sendNotification.bind(this),
-
-        isDisabled: row => row.state !== 'created',
-
-        tooltip: function(row) {
-          if (row.state !== 'created') {
-            return gettext(
-              'Notification only for the created invoice can be sent.',
-            );
-          }
-        },
-      },
-    ];
-  }
-
-  sendNotification(invoice) {
-    this.invoicesService
-      .sendNotification(invoice.uuid)
-      .then(() => {
-        this.ncUtilsFlash.success(
-          gettext('Record notification has been sent to organization owners.'),
-        );
-      })
-      .catch(() => {
-        this.ncUtilsFlash.error(gettext('Unable to send record notification.'));
-      });
-  }
-
   groupInvoiceItems(items) {
     let projects = {
       default: {
