@@ -4,7 +4,6 @@ import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { formatCrontab } from '@waldur/resource/crontab';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { BooleanField } from '@waldur/table-react/BooleanField';
 
@@ -55,6 +54,4 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const SnapshotSchedulesList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(SnapshotSchedulesList, ['resource']);
+export const SnapshotSchedulesList = connectTable(TableOptions)(TableComponent);

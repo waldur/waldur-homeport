@@ -1,4 +1,7 @@
+import { translate } from '@waldur/i18n';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+import { getEventsTab } from '@waldur/resource/tabs/constants';
+import { angular2react } from '@waldur/shims/angular2react';
 
 import breadcrumbsConfig from './breadcrumbs';
 import filtersModule from './filters';
@@ -7,26 +10,21 @@ import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
 import securityGroupRuleEditor from './security-group-rule-editor';
 import securityGroupRulesList from './security-group-rules-list';
 import securityGroupsDialog from './security-groups-dialog';
-import openstackSecurityGroupsService from './security-groups-service';
-import openstackSecurityGroupsList from './SecurityGroupsList';
+
+const SecurityGroupRulesList = angular2react('securityGroupRulesList', [
+  'resource',
+]);
 
 // @ngInject
-function tabsConfig(
-  ResourceTabsConfigurationProvider,
-  DEFAULT_SUBRESOURCE_TABS,
-) {
-  ResourceTabsConfigurationProvider.register('OpenStack.SecurityGroup', {
-    order: ['rules', ...DEFAULT_SUBRESOURCE_TABS.order],
-    options: angular.merge(
-      {
-        rules: {
-          heading: 'Rules',
-          component: 'securityGroupRulesList',
-        },
-      },
-      DEFAULT_SUBRESOURCE_TABS.options,
-    ),
-  });
+function tabsConfig(ResourceTabsConfigurationProvider) {
+  ResourceTabsConfigurationProvider.register('OpenStack.SecurityGroup', () => [
+    {
+      key: 'rules',
+      title: translate('Rules'),
+      component: SecurityGroupRulesList,
+    },
+    getEventsTab(),
+  ]);
 }
 
 // @ngInject
@@ -71,11 +69,6 @@ export default module => {
     'OpenStack.SecurityGroup',
     OpenStackSecurityGroupSummary,
   );
-  module.service(
-    'openstackSecurityGroupsService',
-    openstackSecurityGroupsService,
-  );
-  module.component('openstackSecurityGroupsList', openstackSecurityGroupsList);
   module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
   module.component('securityGroupsDialog', securityGroupsDialog);

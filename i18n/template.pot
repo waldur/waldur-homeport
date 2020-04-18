@@ -1346,7 +1346,7 @@ msgstr ""
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/jira/project/jira-projects-list.js
+#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
@@ -1358,8 +1358,8 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
-#: src/vmware/vmware-virtual-machine-ports.js
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
 msgid "Created"
 msgstr ""
 
@@ -2479,7 +2479,7 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "IPv4 address"
 msgstr ""
 
@@ -3064,9 +3064,9 @@ msgstr ""
 msgid "Logout failed"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+#: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
-#: src/vmware/vmware-virtual-machine-ports.js
 msgid "MAC address"
 msgstr ""
 
@@ -3340,8 +3340,8 @@ msgstr ""
 #: src/customer/details/CustomerDetails.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/jira/project/JiraProjectSummary.tsx
+#: src/jira/project/JiraProjectsList.tsx
 #: src/jira/project/jira-project-config.js
-#: src/jira/project/jira-projects-list.js
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -3383,11 +3383,10 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
-#: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
-#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Name"
 msgstr ""
 
@@ -3461,8 +3460,8 @@ msgid "Negative"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
-#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Network"
 msgstr ""
 
@@ -3537,20 +3536,8 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/vmware/vmware-virtual-machine-disks.js
-msgid "No disks found matching filter."
-msgstr ""
-
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
 msgid "No entries to show here"
-msgstr ""
-
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
-msgid "No internal IPs found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
-msgid "No internal IPs yet."
 msgstr ""
 
 #: src/invitations/invitations-list.js
@@ -3575,14 +3562,6 @@ msgstr ""
 msgid "No payments yet"
 msgstr ""
 
-#: src/vmware/vmware-virtual-machine-ports.js
-msgid "No ports found matching filter."
-msgstr ""
-
-#: src/vmware/vmware-virtual-machine-ports.js
-msgid "No ports yet."
-msgstr ""
-
 #: src/team/customer-users-list.js
 msgid "No projects are assigned to this role."
 msgstr ""
@@ -3591,17 +3570,9 @@ msgstr ""
 msgid "No records found matching filter."
 msgstr ""
 
-#: src/resource/list/resources-list.js
-msgid "No resources found matching filter."
-msgstr ""
-
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
-msgstr ""
-
-#: src/jira/project/jira-projects-list.js
-msgid "No service desk projects found matching filter."
 msgstr ""
 
 #: src/customer/popover/customer-users-details-list.js
@@ -4714,11 +4685,10 @@ msgid "Provided by {provider}"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
-#: src/jira/project/jira-projects-list.js
+#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/providers/support/MapInfoPanel.tsx
-#: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -5435,6 +5405,10 @@ msgstr ""
 msgid "Role management events"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/module.js
+msgid "Rules"
+msgstr ""
+
 #: src/customer/AccountingRunningField.tsx
 msgid "Running accounting"
 msgstr ""
@@ -6012,8 +5986,8 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/vmware/DisksList.tsx
 #: src/vmware/VMwareDiskSummary.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
 msgstr ""
 
@@ -6106,6 +6080,7 @@ msgstr ""
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -6140,12 +6115,11 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
-#: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/hooks/HooksList.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
-#: src/vmware/vmware-virtual-machine-ports.js
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
 msgid "State"
 msgstr ""
 
@@ -6228,11 +6202,11 @@ msgstr ""
 msgid "Subnet"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet CIDR"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet Name"
 msgstr ""
 
@@ -6241,6 +6215,7 @@ msgid "Subnet has been updated."
 msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-network/module.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
 msgid "Subnets"
 msgstr ""
@@ -6765,8 +6740,8 @@ msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
+#: src/jira/project/JiraProjectsList.tsx
 #: src/jira/project/jira-project-config.js
-#: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -7394,6 +7369,7 @@ msgstr ""
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/slurm/tabs.js
 msgid "Usage"
 msgstr ""
 
@@ -7900,10 +7876,6 @@ msgstr ""
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
 
-#: src/vmware/vmware-virtual-machine-disks.js
-msgid "You have no disks yet."
-msgstr ""
-
 #: src/billing/invoices-list.js
 #: src/paypal/paypal-invoices-list.js
 msgid "You have no invoices yet."
@@ -7915,14 +7887,6 @@ msgstr ""
 
 #: src/billing/billing-records-list.js
 msgid "You have no records yet."
-msgstr ""
-
-#: src/resource/list/resources-list.js
-msgid "You have no resources yet."
-msgstr ""
-
-#: src/jira/project/jira-projects-list.js
-msgid "You have no service desk projects yet."
 msgstr ""
 
 #: src/invitations/invitations-list.js
@@ -8062,6 +8026,10 @@ msgstr ""
 msgid "databases"
 msgstr ""
 
+#: src/vmware/DisksList.tsx
+msgid "disks"
+msgstr ""
+
 #: src/table-react/TablePageSize.tsx
 msgid "entries"
 msgstr ""
@@ -8097,6 +8065,10 @@ msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
 msgid "hours"
+msgstr ""
+
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+msgid "internal IPs"
 msgstr ""
 
 #: src/table-react/utils.tsx
@@ -8137,6 +8109,10 @@ msgstr ""
 msgid "plans"
 msgstr ""
 
+#: src/vmware/PortsList.tsx
+msgid "ports"
+msgstr ""
+
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 msgid "profile."
 msgstr ""
@@ -8161,6 +8137,10 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 msgid "security groups"
+msgstr ""
+
+#: src/jira/project/JiraProjectsList.tsx
+msgid "service desk projects"
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx

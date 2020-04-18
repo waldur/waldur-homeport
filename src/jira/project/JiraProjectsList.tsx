@@ -1,10 +1,9 @@
 import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { formatFilesize } from '@waldur/core/utils';
-import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -19,12 +18,12 @@ const TableComponent = props => {
           orderField: 'name',
         },
         {
-          title: translate('Description'),
-          render: ({ row }) => row.description || 'N/A',
+          title: translate('Type'),
+          render: ({ row }) => row.template_name || 'N/A',
         },
         {
-          title: translate('Size'),
-          render: ({ row }) => formatFilesize(row.size),
+          title: translate('Provider'),
+          render: ({ row }) => row.service_name,
         },
         {
           title: translate('Created'),
@@ -36,21 +35,21 @@ const TableComponent = props => {
           render: ({ row }) => <ResourceState resource={row} />,
         },
       ]}
-      verboseName={translate('snapshots')}
-      hasQuery={false}
-      actions={<NestedListActions resource={props.resource} tab="snapshots" />}
+      verboseName={translate('service desk projects')}
     />
   );
 };
 
 const mapPropsToFilter = props => ({
-  source_volume_uuid: props.resource.uuid,
+  project_uuid: props.resource.uuid,
 });
 
 const TableOptions = {
-  table: 'openstacktenant-snapshots',
-  fetchData: createFetcher('openstacktenant-snapshots'),
+  table: 'jira-projects',
+  fetchData: createFetcher('jira-projects'),
   mapPropsToFilter,
 };
 
-export const VolumeSnapshotsList = connectTable(TableOptions)(TableComponent);
+const JiraProjectsList = connectTable(TableOptions)(TableComponent);
+
+export default connectAngularComponent(JiraProjectsList, ['resource']);

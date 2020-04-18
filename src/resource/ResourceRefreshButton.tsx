@@ -1,19 +1,14 @@
 import * as React from 'react';
 
-import { withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
+import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
 import { refreshResource } from './actions';
 
-export const PureResourceRefreshButton = props => (
+export const ResourceRefreshButton = () => (
   <ActionButton
-    title={props.translate('Refresh')}
+    title={translate('Refresh')}
     icon="fa fa-refresh"
     action={refreshResource}
   />
 );
-
-export const ResourceRefreshButton = withTranslation(PureResourceRefreshButton);
-
-export default connectAngularComponent(ResourceRefreshButton);

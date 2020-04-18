@@ -1,11 +1,10 @@
 import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
-import useEffectOnce from 'react-use/lib/useEffectOnce';
+import useAsync from 'react-use/lib/useAsync';
 
 import { ngInjector } from '@waldur/core/services';
 
 export const NestedListActions = ({ resource, tab }) => {
-  const [actions, setActions] = React.useState({});
   const controller = {
     handleActionException: () => {
       console.log('handleActionException');
@@ -15,13 +14,17 @@ export const NestedListActions = ({ resource, tab }) => {
     },
   };
 
-  const actionUtilsService = ngInjector.get('actionUtilsService');
+  const { value: actions } = useAsync(
+    () =>
+      ngInjector
+        .get('actionUtilsService')
+        .loadNestedActions(controller, resource, tab),
+    [],
+  );
 
-  useEffectOnce(() => {
-    actionUtilsService
-      .loadNestedActions(controller, resource, tab)
-      .then(setActions);
-  });
+  if (!actions) {
+    return null;
+  }
 
   return (
     <>
@@ -29,6 +32,7 @@ export const NestedListActions = ({ resource, tab }) => {
         <Button
           bsSize="sm"
           disabled={actions[key].disabled}
+          title={actions[key].titleAttr}
           key={key}
           onClick={() => actions[key].callback()}
         >

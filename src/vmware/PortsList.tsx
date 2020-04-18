@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { formatFilesize } from '@waldur/core/utils';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
@@ -19,12 +18,12 @@ const TableComponent = props => {
           orderField: 'name',
         },
         {
-          title: translate('Description'),
-          render: ({ row }) => row.description || 'N/A',
+          title: translate('Network'),
+          render: ({ row }) => row.network_name || 'N/A',
         },
         {
-          title: translate('Size'),
-          render: ({ row }) => formatFilesize(row.size),
+          title: translate('MAC address'),
+          render: ({ row }) => row.mac_address || 'N/A',
         },
         {
           title: translate('Created'),
@@ -36,21 +35,20 @@ const TableComponent = props => {
           render: ({ row }) => <ResourceState resource={row} />,
         },
       ]}
-      verboseName={translate('snapshots')}
-      hasQuery={false}
-      actions={<NestedListActions resource={props.resource} tab="snapshots" />}
+      verboseName={translate('ports')}
+      actions={<NestedListActions resource={props.resource} tab="ports" />}
     />
   );
 };
 
 const mapPropsToFilter = props => ({
-  source_volume_uuid: props.resource.uuid,
+  vm_uuid: props.resource.uuid,
 });
 
 const TableOptions = {
-  table: 'openstacktenant-snapshots',
-  fetchData: createFetcher('openstacktenant-snapshots'),
+  table: 'vmware-ports',
+  fetchData: createFetcher('vmware-ports'),
   mapPropsToFilter,
 };
 
-export const VolumeSnapshotsList = connectTable(TableOptions)(TableComponent);
+export const PortsList = connectTable(TableOptions)(TableComponent);

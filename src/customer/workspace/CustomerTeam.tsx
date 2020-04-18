@@ -18,6 +18,7 @@ export const CustomerTeam = () => (
       mountOnEnter
       defaultActiveKey="users"
       id="customer-team"
+      animation={false}
     >
       <Tab title={translate('Users')} eventKey="users">
         <PanelBody>

@@ -4,7 +4,6 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatFilesize } from '@waldur/core/utils';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -50,6 +49,4 @@ const TableOptions = {
   }),
 };
 
-const BackupSnapshotsList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(BackupSnapshotsList, ['resource']);
+export const BackupSnapshotsList = connectTable(TableOptions)(TableComponent);

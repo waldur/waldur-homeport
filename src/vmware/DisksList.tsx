@@ -19,10 +19,6 @@ const TableComponent = props => {
           orderField: 'name',
         },
         {
-          title: translate('Description'),
-          render: ({ row }) => row.description || 'N/A',
-        },
-        {
           title: translate('Size'),
           render: ({ row }) => formatFilesize(row.size),
         },
@@ -36,21 +32,21 @@ const TableComponent = props => {
           render: ({ row }) => <ResourceState resource={row} />,
         },
       ]}
-      verboseName={translate('snapshots')}
+      verboseName={translate('disks')}
       hasQuery={false}
-      actions={<NestedListActions resource={props.resource} tab="snapshots" />}
+      actions={<NestedListActions resource={props.resource} tab="disks" />}
     />
   );
 };
 
 const mapPropsToFilter = props => ({
-  source_volume_uuid: props.resource.uuid,
+  vm_uuid: props.resource.uuid,
 });
 
 const TableOptions = {
-  table: 'openstacktenant-snapshots',
-  fetchData: createFetcher('openstacktenant-snapshots'),
+  table: 'vmware-disks',
+  fetchData: createFetcher('vmware-disks'),
   mapPropsToFilter,
 };
 
-export const VolumeSnapshotsList = connectTable(TableOptions)(TableComponent);
+export const DisksList = connectTable(TableOptions)(TableComponent);

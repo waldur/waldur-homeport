@@ -3,7 +3,6 @@ import * as React from 'react';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -37,6 +36,4 @@ const TableOptions = {
   }),
 };
 
-const SecurityGroupsList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(SecurityGroupsList, ['resource']);
+export const SecurityGroupsList = connectTable(TableOptions)(TableComponent);

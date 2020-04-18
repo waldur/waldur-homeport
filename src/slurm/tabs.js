@@ -1,15 +1,17 @@
+import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
+import { angular2react } from '@waldur/shims/angular2react';
+
+const SlurmAllocationUsageTable = angular2react('slurmAllocationUsageTable', [
+  'resource',
+]);
 // @ngInject
-export default function tabsConfig(
-  ResourceTabsConfigurationProvider,
-  DEFAULT_RESOURCE_TABS,
-) {
-  ResourceTabsConfigurationProvider.register('SLURM.Allocation', {
-    order: ['usage', ...DEFAULT_RESOURCE_TABS.order],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
-      usage: {
-        heading: 'Usage',
-        component: 'slurmAllocationUsageTable',
-      },
-    }),
-  });
+export default function tabsConfig(ResourceTabsConfigurationProvider) {
+  ResourceTabsConfigurationProvider.register('SLURM.Allocation', () => [
+    {
+      key: 'usage',
+      title: translate('Usage'),
+      component: SlurmAllocationUsageTable,
+    },
+    ...getDefaultResourceTabs(),
+  ]);
 }

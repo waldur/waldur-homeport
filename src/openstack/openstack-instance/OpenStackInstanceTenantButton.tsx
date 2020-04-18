@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 const ManageSecurityGroupsButton = props => (
   <Link
@@ -39,7 +38,3 @@ export const OpenStackInstanceTenantButton = props =>
       <ManageNetworksButton resource={props.resource} />{' '}
     </>
   ) : null;
-
-export default connectAngularComponent(OpenStackInstanceTenantButton, [
-  'resource',
-]);

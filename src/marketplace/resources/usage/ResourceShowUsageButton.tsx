@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
 const openResourceUsageDialog = (id: string) =>
@@ -32,5 +31,3 @@ export const ResourceShowUsageButton = connect(
   null,
   mapDispatchToProps,
 )(PureResourceUsageButton);
-
-export default connectAngularComponent(ResourceShowUsageButton, ['resource']);

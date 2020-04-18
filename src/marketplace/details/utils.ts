@@ -21,10 +21,10 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
         props.offering,
       );
     }
-    if (props.formData.plan) {
-      request.limits = { ...props.formData.plan.quotas };
-    }
     if (props.formData.limits) {
+      if (props.formData.plan) {
+        request.limits = { ...props.formData.plan.quotas };
+      }
       request.limits = {
         ...request.limits,
         ...limitSerializer(props.formData.limits),

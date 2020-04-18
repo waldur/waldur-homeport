@@ -11,7 +11,6 @@ import marketplacePlanUsageDialog from './plan-usage/PlanUsageDialog';
 import marketplaceResourceDetails from './ResourceDetailsPage';
 import marketplaceResourceTerminateDialog from './terminate/TerminateContainer';
 import marketplaceResourceCreateUsageDialog from './usage/ResourceCreateUsageDialog';
-import marketplaceResourceShowUsageButton from './usage/ResourceShowUsageButton';
 import marketplaceResourceShowUsageDialog from './usage/ResourceShowUsageDialog';
 import marketplaceSupportUsageList from './usage/SupportUsageContainer';
 
@@ -31,10 +30,6 @@ export default module => {
   module.component(
     'marketplaceSupportResourcesList',
     marketplaceSupportResourcesList,
-  );
-  module.component(
-    'marketplaceResourceShowUsageButton',
-    marketplaceResourceShowUsageButton,
   );
   module.component(
     'marketplaceResourceShowUsageDialog',

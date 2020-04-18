@@ -1,4 +1,4 @@
-const JiraProjectConfig = {
+export const JiraProjectConfig = {
   order: ['name', 'key', 'template', 'description'],
   options: {
     name: {
@@ -41,10 +41,5 @@ const JiraProjectConfig = {
     },
   },
   summaryComponent: 'jiraProjectCheckoutSummary',
-  onSuccess: onSuccess,
+  // TODO: Invalidate cache when action succeeds
 };
-
-function onSuccess($injector) {
-  const JiraProjectService = $injector.get('JiraProjectService');
-  JiraProjectService.clearAllCacheForCurrentEndpoint();
-}
