@@ -141,6 +141,7 @@ msgstr ""
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
+#: src/team/ProjectUsersList.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
@@ -226,7 +227,7 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
-#: src/team/project-users-list.js
+#: src/team/AddMemberButton.tsx
 msgid "Add member"
 msgstr ""
 
@@ -1666,8 +1667,8 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/slurm/actions.js
+#: src/team/UserDetailsButton.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/user/UserDropdownMenu.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -1802,8 +1803,8 @@ msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/actions/invitation-dialog.html
+#: src/team/ProjectUsersList.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/team/user-selector.html
 #: src/user/support/UserDetailsTable.tsx
 msgid "E-mail"
@@ -1832,8 +1833,8 @@ msgstr ""
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
+#: src/team/AddMemberButton.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/vmware/actions.ts
 msgid "Edit"
 msgstr ""
@@ -3202,8 +3203,8 @@ msgid "Measured unit"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
+#: src/team/ProjectUsersList.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 msgid "Member"
 msgstr ""
 
@@ -3552,7 +3553,6 @@ msgid "No invitations found matching filter."
 msgstr ""
 
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 msgid "No members found matching filter."
 msgstr ""
 
@@ -4610,7 +4610,7 @@ msgstr ""
 msgid "Project manager"
 msgstr ""
 
-#: src/team/project-users-list.js
+#: src/team/UserRemoveButton.tsx
 msgid "Project manager cannot edit users with same role."
 msgstr ""
 
@@ -4979,8 +4979,8 @@ msgstr ""
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
 #: src/rancher/cluster/create/NodeRemoveButton.tsx
+#: src/team/UserRemoveButton.tsx
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -5386,7 +5386,7 @@ msgstr ""
 msgid "Role expires on"
 msgstr ""
 
-#: src/team/project-users-list.js
+#: src/team/ProjectUsersList.tsx
 msgid "Role in project"
 msgstr ""
 
@@ -6329,6 +6329,10 @@ msgstr ""
 msgid "Team"
 msgstr ""
 
+#: src/team/UserRemoveButton.tsx
+msgid "Team member has been removed."
+msgstr ""
+
 #: src/customer/dashboard/api.ts
 msgid "Team size"
 msgstr ""
@@ -6858,6 +6862,10 @@ msgstr ""
 msgid "Unable to delete comment."
 msgstr ""
 
+#: src/team/UserRemoveButton.tsx
+msgid "Unable to delete team member."
+msgstr ""
+
 #: src/issues/comments/effects.ts
 msgid "Unable to edit comment."
 msgstr ""
@@ -6961,6 +6969,10 @@ msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load compliance overview."
+msgstr ""
+
+#: src/team/ProjectUsersList.tsx
+msgid "Unable to load data"
 msgstr ""
 
 #: src/customer/TotalCostComponent.tsx
@@ -7874,7 +7886,6 @@ msgid "You have no team invitations yet."
 msgstr ""
 
 #: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 msgid "You have no team members yet."
 msgstr ""
 
@@ -8156,6 +8167,10 @@ msgstr ""
 
 #: src/issues/list/IssuesList.tsx
 msgid "support requests"
+msgstr ""
+
+#: src/team/ProjectUsersList.tsx
+msgid "team members"
 msgstr ""
 
 #: src/user/support/utils.ts

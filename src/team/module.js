@@ -1,8 +1,11 @@
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import addProjectMember from './add-project-member';
 import addTeamMember from './add-team-member';
 import customerUsersList from './customer-users-list';
-import { projectUsers } from './project-users-list';
+import { ProjectUsersList } from './ProjectUsersList';
 import userSelector from './user-selector';
+
 import './events';
 
 export default module => {
@@ -10,5 +13,5 @@ export default module => {
   module.component('addProjectMember', addProjectMember);
   module.component('addTeamMember', addTeamMember);
   module.directive('customerUsersList', customerUsersList);
-  module.component('projectUsers', projectUsers);
+  module.component('projectUsers', connectAngularComponent(ProjectUsersList));
 };
