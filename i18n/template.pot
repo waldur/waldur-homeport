@@ -55,7 +55,7 @@ msgid "Accept"
 msgstr ""
 
 #: src/booking/BookingStateFilter.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 msgid "Accepted"
 msgstr ""
 
@@ -123,6 +123,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/events/BaseEventsList.tsx
+#: src/invitations/InvitationsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
@@ -846,7 +847,7 @@ msgstr ""
 #: src/digitalocean/droplet-resize.html
 #: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/issues/create/issue-create-dialog.html
@@ -877,7 +878,7 @@ msgid "Cancel request"
 msgstr ""
 
 #: src/billing/InvoicesFilter.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 msgid "Canceled"
 msgstr ""
 
@@ -1381,7 +1382,7 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -1857,7 +1858,7 @@ msgid "Edit team member"
 msgstr ""
 
 #: src/auth/auth-login.html
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -2068,11 +2069,11 @@ msgstr ""
 msgid "Expiration time"
 msgstr ""
 
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 msgid "Expired"
 msgstr ""
 
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 msgid "Expires at"
 msgstr ""
 
@@ -2692,7 +2693,7 @@ msgstr ""
 msgid "Invitation has been approved."
 msgstr ""
 
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Invitation has been canceled."
 msgstr ""
 
@@ -2704,7 +2705,7 @@ msgstr ""
 msgid "Invitation has been rejectd."
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "Invitation has been sent again."
 msgstr ""
 
@@ -2736,7 +2737,7 @@ msgstr ""
 msgid "Invite team member"
 msgstr ""
 
-#: src/invitations/actions/create.js
+#: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/invitation-dialog.html
 msgid "Invite user"
 msgstr ""
@@ -3557,10 +3558,6 @@ msgstr ""
 msgid "No entries to show here"
 msgstr ""
 
-#: src/invitations/invitations-list.js
-msgid "No invitations found matching filter."
-msgstr ""
-
 #: src/customer/team/ProjectRolesList.tsx
 msgid "No projects are assigned to this role."
 msgstr ""
@@ -3778,15 +3775,15 @@ msgstr ""
 msgid "One-time on plan switch"
 msgstr ""
 
-#: src/invitations/actions/create.js
+#: src/invitations/actions/InvitationCreateButton.tsx
 msgid "Only customer owner or staff can invite users."
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr ""
 
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Only pending invitation can be canceled."
 msgstr ""
 
@@ -4141,7 +4138,7 @@ msgid "Payment profiles"
 msgstr ""
 
 #: src/billing/InvoicesFilter.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 #: src/marketplace/orders/store/reducer.ts
 msgid "Pending"
 msgstr ""
@@ -4940,7 +4937,7 @@ msgid "Reject"
 msgstr ""
 
 #: src/booking/BookingStateFilter.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 msgid "Rejected"
 msgstr ""
 
@@ -5143,7 +5140,7 @@ msgstr ""
 msgid "Request-based item"
 msgstr ""
 
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 msgid "Requested"
 msgstr ""
 
@@ -5167,7 +5164,7 @@ msgstr ""
 msgid "Required certifications"
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "Resend"
 msgstr ""
 
@@ -5378,8 +5375,8 @@ msgid "Review"
 msgstr ""
 
 #: src/customer/team/add-team-member.html
+#: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/invitation-dialog.html
-#: src/invitations/invitations-list.js
 #: src/project/team/add-project-member.html
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/list/ProjectPermissions.tsx
@@ -6118,7 +6115,7 @@ msgid "State"
 msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
@@ -6766,7 +6763,7 @@ msgstr ""
 msgid "Type to search"
 msgstr ""
 
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "URL"
 msgstr ""
@@ -6804,7 +6801,7 @@ msgstr ""
 msgid "Unable to authenticate using Mobile ID."
 msgstr ""
 
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Unable to cancel invitation."
 msgstr ""
 
@@ -7159,7 +7156,7 @@ msgstr ""
 msgid "Unable to remove logo."
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "Unable to resend invitation."
 msgstr ""
 
@@ -7872,11 +7869,11 @@ msgstr ""
 msgid "You don't have enough privileges to perform this operation."
 msgstr ""
 
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 msgid "You don't have permission to cancel this invitation."
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "You don't have permission to send this invitation."
 msgstr ""
 
@@ -7886,10 +7883,6 @@ msgstr ""
 
 #: src/quotas/quotas-table.html
 msgid "You have no quotas yet."
-msgstr ""
-
-#: src/invitations/invitations-list.js
-msgid "You have no team invitations yet."
 msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -8091,6 +8084,10 @@ msgstr ""
 msgid "organizations"
 msgstr ""
 
+#: src/invitations/RoleField.tsx
+msgid "owner"
+msgstr ""
+
 #: src/billing/PaymentProfileList.tsx
 msgid "payment profiles"
 msgstr ""
@@ -8166,6 +8163,10 @@ msgstr ""
 
 #: src/issues/list/IssuesList.tsx
 msgid "support requests"
+msgstr ""
+
+#: src/invitations/InvitationsList.tsx
+msgid "team invitations"
 msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx
@@ -8290,6 +8291,10 @@ msgstr ""
 
 #: src/resource/events.ts
 msgid "{resource_name} has been deleted."
+msgstr ""
+
+#: src/invitations/RoleField.tsx
+msgid "{role} in {project}"
 msgstr ""
 
 #: src/resource/support/TreemapChartFilter.tsx
