@@ -5,7 +5,6 @@ import './sass/style.scss';
 import '../svgfonts.font';
 
 import featuresModule from './features/module';
-import teamModule from './team/module';
 import issuesModule from './issues/module';
 import userModule from './user/module';
 import providersModule from './providers/module';
@@ -28,7 +27,6 @@ import helpModule from './help/module';
 import coreModule from './core/module';
 import filtersModule from './core/filters';
 import quotasModule from './quotas/module';
-import tableModule from './table/module';
 import i18nModule from './i18n/module';
 import modalModule from './modal/module';
 import bootstrap from './core/bootstrap';
@@ -74,7 +72,6 @@ const appModule = angular.module('waldur', [
 
 rootModule(appModule);
 featuresModule(appModule);
-teamModule(appModule);
 issuesModule(appModule);
 userModule(appModule);
 providersModule(appModule);
@@ -99,7 +96,6 @@ helpModule(appModule);
 coreModule(appModule);
 filtersModule(appModule);
 quotasModule(appModule);
-tableModule(appModule);
 i18nModule(appModule);
 modalModule(appModule);
 configModule(appModule);

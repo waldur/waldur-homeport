@@ -108,7 +108,7 @@ export const ProjectUsersList = () => {
     return <LoadingSpinner />;
   }
   if (error) {
-    return translate('Unable to load data');
+    return <>{translate('Unable to load data')}</>;
   }
   return (
     <ProjectUsersListComponent

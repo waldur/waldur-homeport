@@ -4,39 +4,32 @@ import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 import { translate } from '@waldur/i18n';
-import { angular2react } from '@waldur/shims/angular2react';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { CustomerPermissionsLogList } from '@waldur/team/CustomerPermissionsLogList';
 
-const CustomerUsersList = angular2react('customerUsersList');
-const InvitationsList = angular2react('invitationsList');
+import { ProjectPermissionsLogList } from './ProjectPermissionsLogList';
+import { ProjectUsersList } from './ProjectUsersList';
 
-export const CustomerTeam = () => (
+export const ProjectTeam = () => (
   <div className="tabs-container m-l-sm">
     <Tabs
       unmountOnExit
       mountOnEnter
       defaultActiveKey="users"
-      id="customer-team"
       animation={false}
+      id="project-team"
     >
       <Tab title={translate('Users')} eventKey="users">
         <PanelBody>
-          <CustomerUsersList />
-        </PanelBody>
-      </Tab>
-      <Tab title={translate('Invitations')} eventKey="invitations">
-        <PanelBody>
-          <InvitationsList />
+          <ProjectUsersList />
         </PanelBody>
       </Tab>
       <Tab title={translate('Permissions log')} eventKey="permissions">
         <PanelBody>
-          <CustomerPermissionsLogList />
+          <ProjectPermissionsLogList />
         </PanelBody>
       </Tab>
     </Tabs>
   </div>
 );
 
-export default connectAngularComponent(CustomerTeam);
+export default connectAngularComponent(ProjectTeam);
