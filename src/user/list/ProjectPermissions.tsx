@@ -37,4 +37,4 @@ const TableOptions = {
   exportRow: row => [row.customer_name, row.role === 'owner'],
 };
 
-export default connectTable(TableOptions)(TableComponent);
+export const ProjectPermissions = connectTable(TableOptions)(TableComponent);

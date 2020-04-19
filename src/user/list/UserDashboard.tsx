@@ -9,8 +9,8 @@ import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { CurrentUserEvents } from './CurrentUserEvents';
-import CustomerPermissions from './CustomerPermissions';
-import ProjectPermissions from './ProjectPermissions';
+import { CustomerPermissions } from './CustomerPermissions';
+import { ProjectPermissions } from './ProjectPermissions';
 
 interface PureUserDashboardProps extends TranslateProps {
   renderCustomerCreatePrompt: boolean;

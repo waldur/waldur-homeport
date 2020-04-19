@@ -3,8 +3,6 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import filtersModule from './filters';
 import hooksModule from './hooks/module';
 import keysModule from './keys/module';
-import userOrganizations from './list/CustomerPermissions';
-import userProjects from './list/ProjectPermissions';
 import userDashboard from './list/UserDashboard';
 import userEvents from './list/UserEvents';
 import userRoutes from './routes';
@@ -28,8 +26,6 @@ export default module => {
   module.directive('userDetails', userDetails);
   module.component('userEdit', userEdit);
   module.component('userDashboard', userDashboard);
-  module.component('userOrganizations', userOrganizations);
-  module.component('userProjects', userProjects);
   module.component('userPopover', userPopover);
   module.component('userPopoverTable', userPopoverTable);
   module.component('userDetailsDialog', userDetailsDialog);

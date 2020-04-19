@@ -121,6 +121,7 @@ msgstr ""
 #: src/billing/InvoicesList.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/booking/BookingsList.tsx
+#: src/customer/team/CustomerUsersList.tsx
 #: src/events/BaseEventsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -137,11 +138,11 @@ msgstr ""
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/InvoicesList.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 #: src/table/responsive-table.js
-#: src/team/ProjectUsersList.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
@@ -183,7 +184,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
-#: src/team/add-project-member.js
+#: src/project/team/add-project-member.js
 msgid "Add"
 msgstr ""
 
@@ -227,7 +228,7 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
-#: src/team/AddMemberButton.tsx
+#: src/project/team/AddMemberButton.tsx
 msgid "Add member"
 msgstr ""
 
@@ -274,7 +275,7 @@ msgstr ""
 msgid "Add project"
 msgstr ""
 
-#: src/team/add-project-member.js
+#: src/project/team/add-project-member.js
 msgid "Add project member"
 msgstr ""
 
@@ -328,6 +329,10 @@ msgstr ""
 #: src/customer/details/CustomerDetails.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
+msgstr ""
+
+#: src/customer/team/CustomerUsersList.tsx
+msgid "Admin in:"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerDetails.tsx
@@ -837,6 +842,7 @@ msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
+#: src/customer/team/add-team-member.html
 #: src/digitalocean/droplet-resize.html
 #: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
@@ -850,9 +856,8 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
+#: src/project/team/add-project-member.html
 #: src/resource/actions/dialog/action-dialog.html
-#: src/team/add-project-member.html
-#: src/team/add-team-member.html
 #: src/user/hooks/hook-details.html
 #: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -1004,7 +1009,7 @@ msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/actions/invitation-dialog.js
-#: src/team/user-selector.html
+#: src/project/team/user-selector.html
 msgid "Civil number"
 msgstr ""
 
@@ -1655,6 +1660,7 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
+#: src/customer/team/UserDetailsButton.tsx
 #: src/events/EventDetailsButton.tsx
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -1663,12 +1669,11 @@ msgstr ""
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
+#: src/project/team/UserDetailsButton.tsx
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/slurm/actions.js
-#: src/team/UserDetailsButton.tsx
-#: src/team/customer-users-list.js
 #: src/user/UserDropdownMenu.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -1802,10 +1807,10 @@ msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
+#: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/actions/invitation-dialog.html
-#: src/team/ProjectUsersList.tsx
-#: src/team/customer-users-list.js
-#: src/team/user-selector.html
+#: src/project/team/ProjectUsersList.tsx
+#: src/project/team/user-selector.html
 #: src/user/support/UserDetailsTable.tsx
 msgid "E-mail"
 msgstr ""
@@ -1827,14 +1832,14 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
+#: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/openstack/openstack-backup-schedule/module.js
 #: src/openstack/openstack-snapshot-schedule/module.js
+#: src/project/team/AddMemberButton.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
-#: src/team/AddMemberButton.tsx
-#: src/team/customer-users-list.js
 #: src/vmware/actions.ts
 msgid "Edit"
 msgstr ""
@@ -1843,11 +1848,11 @@ msgstr ""
 msgid "Edit booking event"
 msgstr ""
 
-#: src/team/add-project-member.js
+#: src/project/team/add-project-member.js
 msgid "Edit project member"
 msgstr ""
 
-#: src/team/add-team-member.js
+#: src/customer/team/add-team-member.js
 msgid "Edit team member"
 msgstr ""
 
@@ -2059,7 +2064,7 @@ msgstr ""
 msgid "Expand"
 msgstr ""
 
-#: src/team/add-team-member.html
+#: src/customer/team/add-team-member.html
 msgid "Expiration time"
 msgstr ""
 
@@ -2723,7 +2728,7 @@ msgstr ""
 msgid "Invitation token is not found."
 msgstr ""
 
-#: src/customer/workspace/CustomerTeam.tsx
+#: src/customer/team/CustomerTeam.tsx
 msgid "Invitations"
 msgstr ""
 
@@ -3113,6 +3118,10 @@ msgstr ""
 msgid "Management"
 msgstr ""
 
+#: src/customer/team/CustomerUsersList.tsx
+msgid "Manager in:"
+msgstr ""
+
 #: src/marketplace/details/utils.ts
 #: src/marketplace/routes.js
 #: src/marketplace/sidebar.js
@@ -3203,8 +3212,8 @@ msgid "Measured unit"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
-#: src/team/ProjectUsersList.tsx
-#: src/team/customer-users-list.js
+#: src/customer/team/CustomerUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
 msgid "Member"
 msgstr ""
 
@@ -3552,11 +3561,7 @@ msgstr ""
 msgid "No invitations found matching filter."
 msgstr ""
 
-#: src/team/customer-users-list.js
-msgid "No members found matching filter."
-msgstr ""
-
-#: src/team/customer-users-list.js
+#: src/customer/team/ProjectRolesList.tsx
 msgid "No projects are assigned to this role."
 msgstr ""
 
@@ -3967,7 +3972,7 @@ msgstr ""
 msgid "Organization owner"
 msgstr ""
 
-#: src/team/add-team-member.html
+#: src/customer/team/add-team-member.html
 msgid "Organization owner role expires on"
 msgstr ""
 
@@ -4042,7 +4047,7 @@ msgstr ""
 msgid "Owned organizations"
 msgstr ""
 
-#: src/team/customer-users-list.js
+#: src/customer/team/CustomerUsersList.tsx
 #: src/user/list/CustomerPermissions.tsx
 msgid "Owner"
 msgstr ""
@@ -4181,8 +4186,8 @@ msgstr ""
 msgid "Permanent"
 msgstr ""
 
-#: src/customer/workspace/CustomerTeam.tsx
-#: src/project/ProjectTeam.tsx
+#: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Permissions log"
 msgstr ""
 
@@ -4610,12 +4615,12 @@ msgstr ""
 msgid "Project manager"
 msgstr ""
 
-#: src/team/UserRemoveButton.tsx
+#: src/project/team/UserRemoveButton.tsx
 msgid "Project manager cannot edit users with same role."
 msgstr ""
 
+#: src/customer/team/add-team-member.html
 #: src/project/ProjectNameField.tsx
-#: src/team/add-team-member.html
 #: src/user/list/ProjectPermissions.tsx
 msgid "Project name"
 msgstr ""
@@ -4665,7 +4670,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: src/team/add-team-member.html
+#: src/customer/team/add-team-member.html
 msgid "Projects list"
 msgstr ""
 
@@ -4975,12 +4980,12 @@ msgstr ""
 msgid "Remote network"
 msgstr ""
 
+#: src/customer/team/UserRemoveButton.tsx
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
+#: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/NodeRemoveButton.tsx
-#: src/team/UserRemoveButton.tsx
-#: src/team/customer-users-list.js
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -5372,25 +5377,25 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
+#: src/customer/team/add-team-member.html
 #: src/invitations/actions/invitation-dialog.html
 #: src/invitations/invitations-list.js
+#: src/project/team/add-project-member.html
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
-#: src/team/add-project-member.html
-#: src/team/add-team-member.html
 #: src/user/list/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
 msgstr ""
 
-#: src/team/add-project-member.html
+#: src/project/team/add-project-member.html
 msgid "Role expires on"
 msgstr ""
 
-#: src/team/ProjectUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
 msgid "Role in project"
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "Role management events"
 msgstr ""
 
@@ -5472,9 +5477,9 @@ msgid "Sankey diagram"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
+#: src/customer/team/add-team-member.js
+#: src/project/team/add-project-member.js
 #: src/providers/ProviderUpdateForm.tsx
-#: src/team/add-project-member.js
-#: src/team/add-team-member.js
 msgid "Save"
 msgstr ""
 
@@ -5731,7 +5736,7 @@ msgstr ""
 msgid "Select type..."
 msgstr ""
 
-#: src/team/user-selector.html
+#: src/project/team/user-selector.html
 msgid "Select user..."
 msgstr ""
 
@@ -6329,7 +6334,8 @@ msgstr ""
 msgid "Team"
 msgstr ""
 
-#: src/team/UserRemoveButton.tsx
+#: src/customer/team/UserRemoveButton.tsx
+#: src/project/team/UserRemoveButton.tsx
 msgid "Team member has been removed."
 msgstr ""
 
@@ -6483,11 +6489,11 @@ msgstr ""
 msgid "There are no applications templates."
 msgstr ""
 
-#: src/team/add-team-member.html
+#: src/customer/team/add-team-member.html
 msgid "There are no available projects."
 msgstr ""
 
-#: src/team/add-project-member.html
+#: src/project/team/add-project-member.html
 msgid "There are no available users."
 msgstr ""
 
@@ -6862,7 +6868,8 @@ msgstr ""
 msgid "Unable to delete comment."
 msgstr ""
 
-#: src/team/UserRemoveButton.tsx
+#: src/customer/team/UserRemoveButton.tsx
+#: src/project/team/UserRemoveButton.tsx
 msgid "Unable to delete team member."
 msgstr ""
 
@@ -6971,7 +6978,7 @@ msgstr ""
 msgid "Unable to load compliance overview."
 msgstr ""
 
-#: src/team/ProjectUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
 msgid "Unable to load data"
 msgstr ""
 
@@ -7409,9 +7416,9 @@ msgstr ""
 msgid "Used in the period"
 msgstr ""
 
+#: src/customer/team/add-team-member.html
 #: src/events/EventDetailsTable.tsx
-#: src/team/add-project-member.html
-#: src/team/add-team-member.html
+#: src/project/team/add-project-member.html
 msgid "User"
 msgstr ""
 
@@ -7511,43 +7518,43 @@ msgstr ""
 msgid "User {user_link} authenticated successfully with username and password."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted organization support role in {customer_link} to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr ""
 
@@ -7563,10 +7570,10 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/project/team/user-selector.html
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
-#: src/team/user-selector.html
 #: src/vmware/VMwareForm.tsx
 msgid "Username"
 msgstr ""
@@ -7583,10 +7590,10 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
-#: src/customer/workspace/CustomerTeam.tsx
+#: src/customer/team/CustomerTeam.tsx
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/ProjectTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Users"
 msgstr ""
 
@@ -7830,11 +7837,11 @@ msgstr ""
 msgid "You can start filling this table by creating your first offering."
 msgstr ""
 
-#: src/team/add-team-member.js
+#: src/customer/team/add-team-member.js
 msgid "You cannot change your own role."
 msgstr ""
 
-#: src/team/add-team-member.js
+#: src/customer/team/add-team-member.js
 msgid "You cannot manage other organization owner."
 msgstr ""
 
@@ -7883,10 +7890,6 @@ msgstr ""
 
 #: src/invitations/invitations-list.js
 msgid "You have no team invitations yet."
-msgstr ""
-
-#: src/team/customer-users-list.js
-msgid "You have no team members yet."
 msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -8075,10 +8078,6 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: src/marketplace/offerings/details/PlanUsageList.tsx
-msgid "offerings"
-msgstr ""
-
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "order items"
 msgstr ""
@@ -8169,7 +8168,8 @@ msgstr ""
 msgid "support requests"
 msgstr ""
 
-#: src/team/ProjectUsersList.tsx
+#: src/customer/team/CustomerUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
 msgid "team members"
 msgstr ""
 

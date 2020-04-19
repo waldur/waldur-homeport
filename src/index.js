@@ -5,7 +5,6 @@ import './sass/style.scss';
 import '../svgfonts.font';
 
 import featuresModule from './features/module';
-import teamModule from './team/module';
 import issuesModule from './issues/module';
 import userModule from './user/module';
 import providersModule from './providers/module';
@@ -74,7 +73,6 @@ const appModule = angular.module('waldur', [
 
 rootModule(appModule);
 featuresModule(appModule);
-teamModule(appModule);
 issuesModule(appModule);
 userModule(appModule);
 providersModule(appModule);
