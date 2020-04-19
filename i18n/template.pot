@@ -143,7 +143,6 @@ msgstr ""
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
-#: src/table/responsive-table.js
 #: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
@@ -1164,7 +1163,6 @@ msgid "Configure"
 msgstr ""
 
 #: src/customer/details/customer-manage.js
-#: src/table/base-list-controller.js
 msgid "Confirm deletion?"
 msgstr ""
 
@@ -2082,7 +2080,6 @@ msgid "Explore {deployment} Marketplace"
 msgstr ""
 
 #: src/table-react/TableExportButton.tsx
-#: src/table/responsive-table.js
 msgid "Export as"
 msgstr ""
 
@@ -2186,10 +2183,6 @@ msgstr ""
 
 #: src/form/appstore-form-wizard.html
 msgid "Finish"
-msgstr ""
-
-#: src/table/responsive-table.js
-msgid "First"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
@@ -2953,10 +2946,6 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: src/table/responsive-table.js
-msgid "Last"
-msgstr ""
-
 #: src/configs/base-config.js
 msgid "Latvian"
 msgstr ""
@@ -3027,10 +3016,6 @@ msgstr ""
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "Loading actions"
-msgstr ""
-
-#: src/table/responsive-table.js
-msgid "Loading..."
 msgstr ""
 
 #: src/azure/AzureResourceSummary.tsx
@@ -3530,7 +3515,6 @@ msgstr ""
 #: src/form/appstore-form-wizard.html
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/table-react/TablePagination.tsx
-#: src/table/responsive-table.js
 msgid "Next"
 msgstr ""
 
@@ -4426,7 +4410,6 @@ msgstr ""
 
 #: src/form/appstore-form-wizard.html
 #: src/table-react/TablePagination.tsx
-#: src/table/responsive-table.js
 msgid "Previous"
 msgstr ""
 
@@ -4525,10 +4508,6 @@ msgstr ""
 
 #: src/openstack/utils.ts
 msgid "Private clouds"
-msgstr ""
-
-#: src/table/responsive-table.js
-msgid "Processing..."
 msgstr ""
 
 #: src/marketplace/offerings/ProductCodeField.tsx
@@ -4867,7 +4846,6 @@ msgstr ""
 #: src/offering/offering-details.html
 #: src/resource/ResourceRefreshButton.tsx
 #: src/table-react/TableRefreshButton.tsx
-#: src/table/responsive-table.js
 msgid "Refresh"
 msgstr ""
 
@@ -5528,7 +5506,6 @@ msgstr ""
 #: src/issues/create/issue-registration.html
 #: src/navigation/header/MainSearch.tsx
 #: src/table-react/TableQuery.tsx
-#: src/table/responsive-table.js
 msgid "Search"
 msgstr ""
 
@@ -5882,10 +5859,6 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: src/table/responsive-table.js
-msgid "Show _MENU_ entries"
-msgstr ""
-
 #: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Show all"
 msgstr ""
@@ -5943,10 +5916,6 @@ msgstr ""
 #: src/customer/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
-msgstr ""
-
-#: src/table/responsive-table.js
-msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr ""
 
 #: src/table-react/TableInfo.tsx
