@@ -19,7 +19,6 @@ import 'angular-cron-jobs/dist/angular-cron-jobs.css';
 import 'angular-animate';
 import 'angular-cookies';
 import 'angular-loader';
-import 'angular-gravatar';
 import 'angular-flash-alert';
 import 'angular-flash-alert/dist/angular-flash.css';
 import 'angulartics';

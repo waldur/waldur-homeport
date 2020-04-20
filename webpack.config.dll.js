@@ -51,7 +51,6 @@ module.exports = {
       'angular-animate',
       'angular-cookies',
       'angular-loader',
-      'angular-gravatar',
       'angular-flash-alert',
       'angulartics',
       'angulartics-google-analytics',
