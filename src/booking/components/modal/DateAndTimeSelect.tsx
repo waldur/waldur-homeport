@@ -33,9 +33,7 @@ export const DateAndTimeSelectField = (props: DateAndTimeSelectField) => (
         dateFormat="DD-MM-YYYY"
         value={props.currentTime.toISOString()}
         onChange={(_, formattedValue) =>
-          props.onChange(
-            moment.utc(formattedValue, 'DD-MM-YYYY', true).toDate(),
-          )
+          props.onChange(moment(formattedValue, 'DD-MM-YYYY', true).toDate())
         }
       />
     </div>
