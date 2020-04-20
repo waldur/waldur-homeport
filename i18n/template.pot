@@ -176,7 +176,7 @@ msgstr ""
 msgid "Active user will be able to login into the portal."
 msgstr ""
 
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "Activity stream"
 msgstr ""
 
@@ -4841,7 +4841,7 @@ msgid "Record period"
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/offering/offering-details.html
 #: src/resource/ResourceRefreshButton.tsx
@@ -5537,7 +5537,7 @@ msgid "Security groups details"
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "See all"
 msgstr ""
 
@@ -6537,7 +6537,7 @@ msgstr ""
 msgid "There are no {verboseName} yet."
 msgstr ""
 
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "There is no activity yet."
 msgstr ""
 
@@ -6950,6 +6950,7 @@ msgstr ""
 
 #: src/customer/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
+#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -7962,7 +7963,7 @@ msgstr ""
 msgid "catalogues"
 msgstr ""
 
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "commented on"
 msgstr ""
 
