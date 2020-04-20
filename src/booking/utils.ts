@@ -3,7 +3,7 @@ import * as moment from 'moment';
 
 import { randomId } from '@waldur/core/fixtures';
 
-import { BookingProps } from './types';
+import { BookingProps, ConfigProps } from './types';
 
 export const createCalendarBookingEvent = ({
   type,
@@ -36,7 +36,6 @@ export const eventsMapper = events =>
     if (event.type === 'Availability') {
       event.rendering = 'inverse-background';
       event.groupId = 'availableForBooking';
-      event.backgroundColor = 'pink';
     } else {
       event.rendering = undefined;
       event.constraint = 'availableForBooking';
@@ -74,7 +73,7 @@ export const mapBookingEvents: EventMap = (events, showAvailability) =>
       event.rendering = showAvailability;
       event.overlap = true;
       event.classNames = 'booking booking-Availability';
-    } else if (event.extendedProps.type === 'Schedule') {
+    } else {
       event.overlap = false;
       event.constraint = ['availability', 'Availability', 'businessHours'];
       event.classNames = 'booking booking-Schedule';
@@ -82,18 +81,18 @@ export const mapBookingEvents: EventMap = (events, showAvailability) =>
     return event;
   });
 
-export const transformBookingEvent = (event, showAvailability = true) => {
-  if (
-    event.extendedProps.type === 'Availability' ||
-    event.type === 'availability'
-  ) {
-    event.rendering = showAvailability ? 'background' : undefined;
+export const transformBookingEvent = (event, showAvailability = false) => {
+  if (event.extendedProps.type === 'Availability') {
+    event.rendering = showAvailability ? undefined : 'background';
+    event.classNames = showAvailability ? 'booking booking-Availability' : '';
+    event.background = 'green';
     event.overlap = true;
-    event.classNames = 'booking booking-Availability';
+    //event.groupId = 'businessHours';
   } else if (event.extendedProps.type === 'Schedule') {
     event.overlap = false;
-    event.constraint = ['availability', 'Availability', 'businessHours'];
+    event.constraint = 'businessHours';
     event.classNames = 'booking booking-Schedule';
+    event.background = 'blue';
   }
   return event;
 };
@@ -112,21 +111,31 @@ export const handleTime = ({ event, el }) => {
   }
 };
 
-export const handleSelect = (arg, type = 'Schedule'): BookingProps => {
-  const { allDay, startStr, start, endStr, end } = arg;
-  const event = {
-    start: allDay ? startStr : start,
-    end: allDay ? endStr : end,
-    allDay,
-    id: `${randomId()}-${arg.jsEvent.timeStamp}`,
-    title: '',
-    extendedProps: { type },
-  };
-  return event;
+export const createBooking = ({
+  id,
+  start,
+  end,
+  allDay,
+  title = '',
+  extendedProps,
+}: EventApi | EventInput | BookingProps): BookingProps => ({
+  id,
+  start,
+  end,
+  allDay,
+  title,
+  extendedProps,
+});
+
+export const handleSelect = (arg, calendarType): BookingProps => {
+  const type = calendarType === 'create' ? 'Availability' : 'Schedule';
+  const id = `${randomId()}-${arg.jsEvent.timeStamp}`;
+
+  return createBooking({ ...arg, id, extendedProps: { type } });
 };
 
 interface Updater {
-  event: BookingProps | EventInput | EventApi | any;
+  event: BookingProps | EventInput | EventApi;
   oldEvent?: BookingProps | EventApi;
   prevEvent?: EventApi;
 }
@@ -152,3 +161,40 @@ export function filterObject<T>(
     return acc;
   }, {} as Partial<T>);
 }
+
+export const createTimeSlots = (
+  { startStr, endStr, start, end },
+  config: ConfigProps,
+  event,
+) => {
+  const startT = moment(
+    `${startStr} ${config.businessHours.startTime}`,
+    'YYYY-MM-DD HH:mm',
+  );
+  const endT = moment(
+    `${endStr} ${config.businessHours.endTime}`,
+    'YYYY-MM-DD HH:mm',
+  ).subtract(1, 'day');
+  const timeSlots = [];
+  const mStart = moment(start);
+  const mEnd = moment(end);
+
+  if (!mStart.isSame(mEnd, 'day')) {
+    while (startT < endT) {
+      timeSlots.push({
+        start: startT.clone().format(),
+        end: moment(
+          startT.clone().format('YYYY-MM-DD ') + config.businessHours.endTime,
+        ).format(),
+        id: event.id,
+        title: event.title,
+        extendedProps: {
+          type: event.extendedProps.type,
+          config,
+        },
+      });
+      startT.add(moment.duration(1, 'day'));
+    }
+  }
+  return timeSlots;
+};

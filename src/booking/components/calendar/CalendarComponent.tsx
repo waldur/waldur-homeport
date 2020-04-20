@@ -1,22 +1,19 @@
 import { Calendar, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment-timezone';
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import {
-  addBooking,
-  updateBooking,
-  removeBooking,
-} from '@waldur/booking/store/actions';
 import { BookingProps, State } from '@waldur/booking/types';
 import {
-  mapBookingEvents,
   handleTime,
   handleTitle,
   handleEventUpdate,
   handleSelect,
+  createBooking,
   keysOf,
   filterObject,
+  transformBookingEvent,
+  createTimeSlots,
 } from '@waldur/booking/utils';
 
 import BookingModal from '../modal/BookingModal';
@@ -26,11 +23,12 @@ import { defaultOptions } from './defaultOptions';
 export const getCalendarState = state => state.bookings;
 
 export interface CalendarComponentProps {
-  options?: OptionsInput;
   calendarType: 'create' | 'edit' | 'read';
-
   extraEvents?: BookingProps[];
+  options?: OptionsInput;
   addEventCb?: (event: BookingProps) => any;
+  removeEventCb?: (id: BookingProps['id']) => any;
+  timeSlots?: (cb) => any;
 }
 
 export const CalendarComponent = (props: CalendarComponentProps) => {
@@ -39,8 +37,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
   const oldDate = React.useRef<Date>();
   const oldOptionsRef = React.useRef<OptionsInput>(props.options);
 
-  const calendarState: State = useSelector(getCalendarState);
-  const dispatch = useDispatch();
+  const { config }: State = useSelector(getCalendarState);
 
   const [modal, setModal] = React.useState({
     isOpen: false,
@@ -66,21 +63,41 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     return momentDatetime.toDate();
   };
 
-  const mouseEnter = arg =>
-    focused !== arg.event.id && setFocused(arg.event.id);
-
-  const mouseLeave = arg => focused === arg.event.id && setFocused('');
-
-  const addEvent = (event: BookingProps) => dispatch(addBooking(event));
-
   const toggleModal = () => setModal({ isOpen: false, el: null, event: null });
+  const eventMouseEnter = ({ event }) =>
+    focused !== event.id && setFocused(event.id);
+  const eventMouseLeave = ({ event }) => focused === event.id && setFocused('');
+
+  const select = arg => {
+    const event = handleSelect(arg, props.calendarType);
+
+    if (props.calendarType === 'edit') {
+      return props.addEventCb(event);
+    }
+
+    if (props.calendarType === 'create') {
+      const eventSlots = createTimeSlots(arg, config, event);
+      return props.timeSlots(eventSlots);
+    }
+  };
+
+  const eventClick = ({ el, event }) => {
+    if (
+      props.calendarType !== 'create' &&
+      event.extendedProps.type === 'Availability'
+    ) {
+      return;
+    }
+    setModal({ isOpen: true, el, event });
+  };
 
   const updateEvent = arg => {
     const { oldID, event } = handleEventUpdate(arg);
-    dispatch(updateBooking({ oldID, event }));
+    props.removeEventCb(oldID);
+    props.addEventCb(createBooking(event));
   };
 
-  const handleEventRender = arg => {
+  const eventRender = arg => {
     if (arg.el && arg.el.classList.contains('fc-event')) {
       if (focused === arg.event.id) {
         arg.el.classList.add('isHovered');
@@ -93,22 +110,42 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     }
   };
 
+  const handleConfig = () => {
+    if (props.calendarType !== 'create') {
+      return {
+        ...config,
+        minTime: config.businessHours.startTime,
+        maxTime: config.businessHours.endTime,
+      };
+    } else return config;
+  };
+
   React.useEffect(() => {
+    const eventConstraint = props.extraEvents.filter(
+      event => event.type || event.extendedProps.type === 'Availability',
+    );
+    const newConfig = eventConstraint.map(event => event.extendedProps.config);
+    const addConfig = !newConfig && newConfig[0];
     const cal = new Calendar(elRef.current!, {
       ...defaultOptions,
-      ...calendarState.config,
-      select: arg => {
-        const event = handleSelect(
-          arg,
-          props.calendarType === 'create' && 'Availability',
-        );
-        props.addEventCb(event);
-      },
-      eventClick: ({ el, event }) => setModal({ isOpen: true, el, event }),
-      eventRender: handleEventRender,
+      ...handleConfig(),
+      ...addConfig,
+      eventClick,
+      eventRender,
+      allDaySlot: props.calendarType === 'create',
+      editable: props.calendarType !== 'read',
+      selectable: props.calendarType !== 'read',
+      eventConstraint: eventConstraint,
+      selectOverlap: event => event.extendedProps.type === 'Availability',
+      eventDataTransform: event =>
+        transformBookingEvent(event, props.calendarType === 'create'),
     });
     calendarRef.current = cal;
-    cal.removeAllEventSources();
+
+    calendarRef.current.removeAllEventSources();
+    if (props.extraEvents) {
+      calendarRef.current.addEventSource(props.extraEvents);
+    }
 
     cal.render();
     oldDate.current = getNewDate();
@@ -119,17 +156,28 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
   React.useEffect(() => {
     const cal = calendarRef.current!;
     const newDate = getNewDate();
+    const eventConstraint = props.extraEvents.filter(
+      event => event.type || event.extendedProps.type === 'Availability',
+    );
+    const newConfig = eventConstraint.map(event => event.extendedProps.config);
+    const constraint = props.extraEvents.filter(
+      event => event.type || event.extendedProps.type === 'Availability',
+    );
+    const addConf = newConfig && newConfig[0];
+    cal.removeAllEventSources();
+    cal.addEventSource(props.extraEvents);
     const options = {
-      ...calendarState.config,
-      select: arg =>
-        addEvent(
-          handleSelect(arg, props.calendarType === 'create' && 'Availability'),
-        ),
-      eventMouseEnter: mouseEnter,
-      eventMouseLeave: mouseLeave,
+      ...handleConfig(),
+      ...addConf,
+      select,
+      slotEventOverlap: false,
+      eventMouseEnter,
+      eventMouseLeave,
       eventDrop: updateEvent,
       eventResize: updateEvent,
-      eventRender: handleEventRender,
+      eventRender,
+      selectOverlap: event => event.extendedProps.type === 'Availability',
+      selectConstraint: props.calendarType === 'edit' ? constraint : null,
     };
 
     if (
@@ -143,32 +191,21 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
 
     const oldOptions = oldOptionsRef.current;
     if (oldOptions !== options) {
-      cal.removeAllEventSources();
-      cal.addEventSource(
-        mapBookingEvents(calendarState.bookings, 'background'),
-      );
-      cal.addEventSource(mapBookingEvents(calendarState.schedules));
-
       const removes = oldOptions
         ? keysOf(oldOptions).filter(optionName => !(optionName in options))
         : [];
+
       const updates: Partial<OptionsInput> = oldOptions
         ? filterObject(
             options,
             propName => options[propName] != oldOptions[propName],
           )
         : options;
+
       cal.mutateOptions(updates, removes, true);
       oldOptionsRef.current = options;
     }
-    cal.rerenderEvents();
-  }, [
-    calendarState.config,
-    calendarState.schedules,
-    calendarRef,
-    focused,
-    modal,
-  ]);
+  }, [props.extraEvents, calendarRef, config, focused, modal]);
 
   return (
     <div className="calendar-container">
@@ -178,8 +215,11 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
           isOpen={modal.isOpen}
           toggle={toggleModal}
           event={modal.event}
-          onDelete={() => dispatch(removeBooking(modal.event.id))}
-          onSuccess={cb => dispatch(updateBooking(cb))}
+          onDelete={() => props.removeEventCb(modal.event.id)}
+          onSuccess={cb => {
+            props.removeEventCb(modal.event.id);
+            props.addEventCb(cb.event);
+          }}
         />
       ) : null}
     </div>
