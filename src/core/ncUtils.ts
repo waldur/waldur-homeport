@@ -1,5 +1,3 @@
-import { formatRelative } from './dateUtils';
-import { $sanitize } from './services';
 import { getUUID, toKeyValue, parseQueryString } from './utils';
 
 function getPrettyQuotaName(name) {
@@ -39,15 +37,6 @@ function getQueryString() {
     return parts[1];
   }
   return '';
-}
-
-function renderLink(href, name) {
-  return `<a ng-non-bindable href="${href}">${$sanitize(name)}</a>`;
-}
-
-function renderAvatar(user) {
-  const avatar = `<img gravatar-src="'${user.email}'" gravatar-size="100" class="avatar-img img-xs">`;
-  return avatar + ' ' + $sanitize(user.full_name || user.username);
 }
 
 function booleanField(value) {
@@ -131,10 +120,7 @@ export default () => ({
   isCustomerQuotaReached,
   getQuotaUsage,
   getQueryString,
-  relativeDate: formatRelative,
   getUUID,
-  renderLink,
-  renderAvatar,
   booleanField,
   parseQueryString,
   toKeyValue,
