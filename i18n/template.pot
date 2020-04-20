@@ -1904,6 +1904,10 @@ msgstr ""
 msgid "End"
 msgstr ""
 
+#: src/billing/billing-tabs.html
+msgid "End date of the agreement is"
+msgstr ""
+
 #: src/billing/billing-record-details.html
 #: src/billing/invoice-details.html
 msgid "End time"
@@ -3942,6 +3946,10 @@ msgstr ""
 
 #: src/customer/create/customer-create-dialog.js
 msgid "Organization has been created."
+msgstr ""
+
+#: src/billing/billing-tabs.html
+msgid "Organization has signed a fixed price agreement"
 msgstr ""
 
 #: src/user/list/CustomerPermissions.tsx
