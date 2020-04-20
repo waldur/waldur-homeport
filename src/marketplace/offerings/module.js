@@ -4,11 +4,11 @@ import marketplacePauseOfferingDialog from './actions/PauseOfferingDialog';
 import marketplaceOfferingCreate from './create/OfferingCreateContainer';
 import serviceSettingsDetailsDialog from './create/ServiceSettingsDetailsDialog';
 import marketplaceOfferingDetailsPage from './details/OfferingContainer';
-import marketplaceOfferingDetailsButton from './details/OfferingDetailsButton';
 import marketplaceOfferingDetailsDialog from './details/OfferingDetailsDialog';
 import { PublicOfferingDetails } from './details/PublicOfferingDetails';
 import marketplaceMyOfferings from './MyOfferingsListContainer';
 import marketplaceVendorOfferings from './OfferingsListContainer';
+import marketplacePreviewOfferingDialog from './PreviewOfferingDialog';
 import marketplaceOfferingUpdate from './update/OfferingUpdateContainer';
 
 export default module => {
@@ -25,10 +25,6 @@ export default module => {
     connectAngularComponent(PublicOfferingDetails),
   );
   module.component(
-    'marketplaceOfferingDetailsButton',
-    marketplaceOfferingDetailsButton,
-  );
-  module.component(
     'marketplaceOfferingDetailsDialog',
     marketplaceOfferingDetailsDialog,
   );
@@ -39,5 +35,9 @@ export default module => {
   module.component(
     'serviceSettingsDetailsDialog',
     serviceSettingsDetailsDialog,
+  );
+  module.component(
+    'marketplacePreviewOfferingDialog',
+    marketplacePreviewOfferingDialog,
   );
 };

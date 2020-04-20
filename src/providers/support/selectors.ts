@@ -62,7 +62,7 @@ export const propertySelectorFactory = target =>
   createSelector(selectServiceUsage, serviceUsage => {
     const names = [];
     const namesObjects = [];
-    Object.keys(serviceUsage.service_providers).map(providerUuid => {
+    Object.keys(serviceUsage.service_providers).forEach(providerUuid => {
       const name = serviceUsage.organizations[providerUuid][target];
       if (names.indexOf(name) === -1) {
         namesObjects.push({
@@ -70,7 +70,7 @@ export const propertySelectorFactory = target =>
         });
         names.push(name);
       }
-      serviceUsage.service_providers[providerUuid].map(consumerUuid => {
+      serviceUsage.service_providers[providerUuid].forEach(consumerUuid => {
         const consumerName = serviceUsage.organizations[consumerUuid][target];
         if (names.indexOf(consumerName) === -1) {
           namesObjects.push({

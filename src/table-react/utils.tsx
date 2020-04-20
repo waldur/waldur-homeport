@@ -10,7 +10,7 @@ import { selectTableRows } from '@waldur/table-react/selectors';
 import * as actions from './actions';
 import { registerTable } from './registry';
 import { getTableState } from './store';
-import { TableOptions, Sorting } from './types';
+import { TableOptionsType, Sorting } from './types';
 
 const getId = (row, index) => {
   if (row.uuid) {
@@ -21,7 +21,7 @@ const getId = (row, index) => {
   return index;
 };
 
-export function connectTable(options: TableOptions) {
+export function connectTable(options: TableOptionsType) {
   return function wrapper<P = {}>(Component: React.ComponentType<P>) {
     const Wrapper: React.ComponentType<P> = props => {
       const { table } = options;
@@ -92,7 +92,7 @@ export const formatLongText = value =>
 export const transformRows = (rows: any[]) => {
   const entities: object = {};
   const order: any[] = [];
-  rows.map((row, index) => {
+  rows.forEach((row, index) => {
     entities[getId(row, index)] = row;
     order.push(getId(row, index));
   });
@@ -103,7 +103,7 @@ export const renderFieldOrDash = field => (field ? field : '\u2014');
 
 export function getMessage({ query, verboseName }) {
   const context = { verboseName: verboseName || translate('items') };
-  if (query && query !== '') {
+  if (query) {
     return translate(
       'There are no {verboseName} found matching the filter.',
       context,

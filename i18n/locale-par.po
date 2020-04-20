@@ -11,31 +11,137 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "Language: pro\n"
 
+#: src/booking/BookingsList.tsx
+#: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/events/EventDetailsTable.tsx
+#: src/invitations/actions/invitation-dialog.html
+#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
+#: src/issues/issue-detail.html
+#: src/jira/issue/JiraIssueSummary.tsx
+#: src/jira/project/jira-project-checkout-summary.html
+#: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/OrderSummary.tsx
+#: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectFilter.tsx
+#: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/rancher/template/ApplicationConfiguration.tsx
+msgid "Project"
+msgstr "Department"
 
-msgid "Dashboard"
-msgstr "Command Control"
+#: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
+#: src/marketplace/resources/list/ProjectFilter.tsx
+msgid "Select project..."
+msgstr "Select department..."
 
-msgid "Explore {deployment} Marketplace"
-msgstr "Explore {deployment} Response"
 
-msgid "Marketplace"
-msgstr "Response"
+#: src/customer/routes.js
+#: src/customer/workspace/utils.ts
+#: src/navigation/workspace/select-workspace-dialog.html
+#: src/rancher/cluster/tabs.js
+msgid "Projects"
+msgstr "Departments"
 
-#: src/marketplace/routes.js
-msgid "Marketplace checkout"
-msgstr "Response checkout"
+#: src/team/add-team-member.html
+msgid "Projects list"
+msgstr "Departments list"
 
-#: src/marketplace/routes.js
-#: src/marketplace/sidebar.js
-msgid "Marketplace offerings"
-msgstr "Response offerings"
+#: src/marketplace/details/utils.ts
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
+#: src/offering/offering-details.js
+#: src/project/project-base.js
+#: src/resource/breadcrumbs/resource-breadcrumbs-service.js
+msgid "Project workspace"
+msgstr "Department workspace"
 
-#: src/marketplace/routes.js
-#: src/marketplace/sidebar.js
-msgid "Marketplace orders"
-msgstr "Response orders"
+#: src/project/ProjectRemoveDialog.tsx
+msgid "Project removal"
+msgstr "Department removal"
 
-#: src/marketplace/service-providers/ServiceProviderManagement.tsx
-msgid "Marketplace service provider"
-msgstr "Response service provider"
+#: src/customer/details/customer-manage.html
+msgid "Remove project"
+msgstr "Remove department"
 
+#: src/user/support/UserList.tsx
+msgid "Project roles"
+msgstr "Department roles"
+
+#: src/issues/create/issue-quick-create.html
+#: src/issues/create/issue-registration.html
+#: src/marketplace/resources/list/ProjectFilter.tsx
+msgid "Select project..."
+msgstr "Select department"
+
+#: src/customer/dashboard/CreateProjectAction.ts
+#: src/project/ProjectCreateButton.tsx
+#: src/project/ProjectCreateForm.tsx
+msgid "Add project"
+msgstr "Add department"
+
+#: src/team/add-project-member.js
+msgid "Add project member"
+msgstr "Add department member"
+
+#: src/customer/routes.js
+msgid "Create project"
+msgstr "Create department"
+
+#: src/team/customer-users-list.js
+msgid "No projects are assigned to this role."
+msgstr "No departments are assigned to this role."
+
+#: src/project/ProjectNameField.tsx
+#: src/team/add-team-member.html
+#: src/user/list/ProjectPermissions.tsx
+msgid "Project name"
+msgstr "Department name"
+
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
+msgid "Project description"
+msgstr "Department description"
+
+#: src/team/add-team-member.html
+msgid "There are no available projects."
+msgstr "There are no available departments."
+
+#: src/navigation/workspace/select-workspace-dialog.html
+msgid "There are no projects yet for this organization."
+msgstr "There are no department yet for this organization."
+
+#: src/project/ProjectUpdateForm.tsx
+msgid "Update project details"
+msgstr "Update department details"
+
+#: src/project/ProjectsList.tsx
+#: src/rancher/ClusterProjectList.tsx
+#: src/user/list/ProjectPermissions.tsx
+msgid "projects"
+msgstr "departments"
+
+#: src/jira/project/JiraProjectSummary.tsx
+#: src/project/ProjectCreateForm.tsx
+#: src/project/ProjectUpdateForm.tsx
+msgid "Project type"
+msgstr "Department type"
+
+#: src/project/events.ts
+msgid "Project {project_link} has been created."
+msgstr "Department {project_link} has been created."
+
+#: src/project/events.ts
+msgid "Project {project_link} has been updated."
+msgstr "Department {project_link} has been updated."
+
+#: src/project/events.ts
+msgid "Project {project_name} has been deleted."
+msgstr "Department {project_name} has been deleted."
+
+#: src/project/ProjectCreateForm.tsx
+msgid "Provider certification required by this department."
+msgstr ""

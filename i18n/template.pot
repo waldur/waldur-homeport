@@ -12,17 +12,6 @@ msgstr ""
 msgid "(VAT is not included)"
 msgstr ""
 
-#: src/error/invalid-object-page.html
-#: src/error/invalid-route-page.html
-msgid "404"
-msgstr ""
-
-#: src/error/invalid-object-page.html
-#: src/error/invalid-quota-page.html
-#: src/error/invalid-route-page.html
-msgid "< Back"
-msgstr ""
-
 #: src/marketplace-checklist/AnswerGroup.tsx
 msgid "?"
 msgstr ""
@@ -66,7 +55,7 @@ msgid "Accept"
 msgstr ""
 
 #: src/booking/BookingStateFilter.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 msgid "Accepted"
 msgstr ""
 
@@ -128,9 +117,13 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
+#: src/billing/InvoicesList.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/booking/BookingsList.tsx
+#: src/customer/team/CustomerUsersList.tsx
 #: src/events/BaseEventsList.tsx
+#: src/invitations/InvitationsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
@@ -143,12 +136,13 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
+#: src/paypal/InvoicesList.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
-#: src/table/responsive-table.js
 #: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx
@@ -182,7 +176,7 @@ msgstr ""
 msgid "Active user will be able to login into the portal."
 msgstr ""
 
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "Activity stream"
 msgstr ""
 
@@ -190,7 +184,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
-#: src/team/add-project-member.js
+#: src/project/team/add-project-member.js
 msgid "Add"
 msgstr ""
 
@@ -234,7 +228,7 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
-#: src/team/project-users-list.js
+#: src/project/team/AddMemberButton.tsx
 msgid "Add member"
 msgstr ""
 
@@ -275,17 +269,13 @@ msgstr ""
 msgid "Add plan"
 msgstr ""
 
-#: src/resource/list/resource-private-clouds-list.js
-msgid "Add private cloud"
-msgstr ""
-
 #: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
 msgid "Add project"
 msgstr ""
 
-#: src/team/add-project-member.js
+#: src/project/team/add-project-member.js
 msgid "Add project member"
 msgstr ""
 
@@ -302,10 +292,6 @@ msgstr ""
 msgid "Add security group"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-msgid "Add snapshots"
-msgstr ""
-
 #: src/project/ProjectActions.tsx
 msgid "Add team member"
 msgstr ""
@@ -320,14 +306,6 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
 msgid "Add user input field"
-msgstr ""
-
-#: src/resource/list/resource-vms-list.js
-msgid "Add virtual machine"
-msgstr ""
-
-#: src/resource/list/resource-volumes-list.js
-msgid "Add volumes"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
@@ -351,6 +329,10 @@ msgstr ""
 #: src/customer/details/CustomerDetails.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
+msgstr ""
+
+#: src/customer/team/CustomerUsersList.tsx
+msgid "Admin in:"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerDetails.tsx
@@ -418,14 +400,6 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/slurm/table-extension.js
-msgid "Allocations"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Allow bookings to be scheduled at weekends"
-msgstr ""
-
 #: src/auth/auth-login.html
 msgid "Already have an account?"
 msgstr ""
@@ -433,7 +407,7 @@ msgstr ""
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/payments/payment-list.js
+#: src/payments/PaymentsList.tsx
 msgid "Amount"
 msgstr ""
 
@@ -453,7 +427,7 @@ msgstr ""
 msgid "Annotations"
 msgstr ""
 
-#: src/rancher/node/RancherKeyValueDialog.tsx
+#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
 msgid "Annotations & labels"
 msgstr ""
 
@@ -481,10 +455,6 @@ msgstr ""
 
 #: src/rancher/cluster/tabs.js
 msgid "Application templates"
-msgstr ""
-
-#: src/resource/breadcrumbs/resource-categories.js
-msgid "Applications"
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
@@ -571,9 +541,8 @@ msgstr ""
 msgid "Attach"
 msgstr ""
 
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource/list/resource-volumes-list.js
 msgid "Attached to"
 msgstr ""
 
@@ -584,6 +553,10 @@ msgstr ""
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 #: src/issues/create/issue-create-dialog.html
 msgid "Attachments"
+msgstr ""
+
+#: src/marketplace/resources/ResourceSummary.tsx
+msgid "Attributes"
 msgstr ""
 
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
@@ -604,7 +577,7 @@ msgstr ""
 #: src/customer/workspace/utils.ts
 #: src/project/routes.js
 #: src/project/utils.ts
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/list/UserDashboard.tsx
 #: src/user/routes.js
 msgid "Audit logs"
@@ -620,6 +593,10 @@ msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.js
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgstr ""
+
+#: src/customer/popover/CustomerPopover.tsx
+msgid "Authorized personnel"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -671,6 +648,9 @@ msgstr ""
 msgid "Azure provider"
 msgstr ""
 
+#: src/error/InvalidObjectPage.tsx
+#: src/error/InvalidQuotaPage.tsx
+#: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/navigation/header/site-header.html
 msgid "Back"
@@ -683,7 +663,7 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 #: src/project/utils.ts
-#: src/user/user-details.js
+#: src/user/UserSidebar.tsx
 msgid "Back to organization"
 msgstr ""
 
@@ -692,7 +672,7 @@ msgid "Back to personal dashboard"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/user/user-details.js
+#: src/user/UserSidebar.tsx
 msgid "Back to project"
 msgstr ""
 
@@ -759,11 +739,6 @@ msgstr ""
 msgid "Batch block storage size"
 msgstr ""
 
-#: src/resource/breadcrumbs/resource-categories.js
-#: src/slurm/routes.js
-msgid "Batch processing"
-msgstr ""
-
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "Batch processing documentation"
 msgstr ""
@@ -816,7 +791,7 @@ msgstr ""
 msgid "Bookings"
 msgstr ""
 
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 msgid "Bootable"
 msgstr ""
 
@@ -828,10 +803,6 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Business hours"
-msgstr ""
-
 #: src/user/support/TokenLifetimeField.tsx
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr ""
@@ -841,14 +812,13 @@ msgid "By submitting the form you are agreeing to the"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-groups-dialog.html
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
 msgid "CIDR"
 msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "CPU"
 msgstr ""
 
@@ -872,10 +842,11 @@ msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
+#: src/customer/team/add-team-member.html
 #: src/digitalocean/droplet-resize.html
 #: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/issues/create/issue-create-dialog.html
@@ -885,9 +856,8 @@ msgstr ""
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
+#: src/project/team/add-project-member.html
 #: src/resource/actions/dialog/action-dialog.html
-#: src/team/add-project-member.html
-#: src/team/add-team-member.html
 #: src/user/hooks/hook-details.html
 #: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -906,12 +876,12 @@ msgstr ""
 msgid "Cancel request"
 msgstr ""
 
-#: src/billing/billing-utils.js
-#: src/invitations/invitations-list.js
+#: src/billing/InvoicesFilter.tsx
+#: src/invitations/InvitationsFilter.tsx
 msgid "Canceled"
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Cancelled"
 msgstr ""
 
@@ -948,6 +918,7 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -1016,7 +987,7 @@ msgid "Charge for usage-based component is based on user-requested limit."
 msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
-#: src/azure/sql/azure-sql-databases-list.js
+#: src/azure/sql/DatabasesList.tsx
 msgid "Charset"
 msgstr ""
 
@@ -1036,9 +1007,9 @@ msgstr ""
 msgid "Choose option"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/actions/invitation-dialog.js
-#: src/team/user-selector.html
+#: src/project/team/user-selector.html
 msgid "Civil number"
 msgstr ""
 
@@ -1048,11 +1019,13 @@ msgstr ""
 
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client organization"
 msgstr ""
 
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client project"
 msgstr ""
@@ -1130,11 +1103,15 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
+#: src/customer/popover/CustomerPopover.tsx
+msgid "Company data"
+msgstr ""
+
 #: src/marketplace/routes.js
 msgid "Compare items"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "Competence"
 msgstr ""
@@ -1186,7 +1163,6 @@ msgid "Configure"
 msgstr ""
 
 #: src/customer/details/customer-manage.js
-#: src/table/base-list-controller.js
 msgid "Confirm deletion?"
 msgstr ""
 
@@ -1376,25 +1352,26 @@ msgstr ""
 msgid "Create your first project"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/InvoicesFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/CustomerList.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/jira/project/jira-projects-list.js
+#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/slurm/slurm-allocation-list.js
-#: src/vmware/vmware-virtual-machine-disks.js
-#: src/vmware/vmware-virtual-machine-ports.js
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
 msgid "Created"
 msgstr ""
 
@@ -1403,7 +1380,7 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -1491,16 +1468,12 @@ msgstr ""
 msgid "Currently there are no booking requests."
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Daily available booking time range"
-msgstr ""
-
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
 #: src/issues/workspace/issue-navigation-service.js
 #: src/project/routes.js
 #: src/project/utils.ts
-#: src/user/constants.js
+#: src/user/constants.ts
 msgid "Dashboard"
 msgstr ""
 
@@ -1532,7 +1505,7 @@ msgstr ""
 
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
-#: src/payments/payment-list.js
+#: src/payments/PaymentsList.tsx
 msgid "Date"
 msgstr ""
 
@@ -1631,12 +1604,15 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
@@ -1648,7 +1624,6 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
@@ -1684,6 +1659,7 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
+#: src/customer/team/UserDetailsButton.tsx
 #: src/events/EventDetailsButton.tsx
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -1692,12 +1668,11 @@ msgstr ""
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
+#: src/project/team/UserDetailsButton.tsx
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/slurm/actions.js
-#: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/user/UserDropdownMenu.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -1798,7 +1773,7 @@ msgid "Done"
 msgstr ""
 
 #: src/billing/invoice-header.html
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
 msgid "Download invoice"
 msgstr ""
 
@@ -1807,7 +1782,7 @@ msgid "Download order PDF file"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
 msgstr ""
 
@@ -1820,9 +1795,9 @@ msgstr ""
 msgid "Drop files to attach, or"
 msgstr ""
 
+#: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Due date"
 msgstr ""
 
@@ -1830,11 +1805,11 @@ msgstr ""
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
+#: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/actions/invitation-dialog.html
-#: src/team/customer-users-list.js
-#: src/team/project-users-list.js
-#: src/team/user-selector.html
+#: src/project/team/ProjectUsersList.tsx
+#: src/project/team/user-selector.html
 #: src/user/support/UserDetailsTable.tsx
 msgid "E-mail"
 msgstr ""
@@ -1856,14 +1831,14 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
+#: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/openstack/openstack-backup-schedule/module.js
 #: src/openstack/openstack-snapshot-schedule/module.js
+#: src/project/team/AddMemberButton.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
-#: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/vmware/actions.ts
 msgid "Edit"
 msgstr ""
@@ -1872,16 +1847,16 @@ msgstr ""
 msgid "Edit booking event"
 msgstr ""
 
-#: src/team/add-project-member.js
+#: src/project/team/add-project-member.js
 msgid "Edit project member"
 msgstr ""
 
-#: src/team/add-team-member.js
+#: src/customer/team/add-team-member.js
 msgid "Edit team member"
 msgstr ""
 
 #: src/auth/auth-login.html
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -2088,15 +2063,15 @@ msgstr ""
 msgid "Expand"
 msgstr ""
 
-#: src/team/add-team-member.html
+#: src/customer/team/add-team-member.html
 msgid "Expiration time"
 msgstr ""
 
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 msgid "Expired"
 msgstr ""
 
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 msgid "Expires at"
 msgstr ""
 
@@ -2105,7 +2080,6 @@ msgid "Explore {deployment} Marketplace"
 msgstr ""
 
 #: src/table-react/TableExportButton.tsx
-#: src/table/responsive-table.js
 msgid "Export as"
 msgstr ""
 
@@ -2122,7 +2096,6 @@ msgid "Extending"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
 msgstr ""
@@ -2212,10 +2185,6 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-#: src/table/responsive-table.js
-msgid "First"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Fixed price"
 msgstr ""
@@ -2260,7 +2229,7 @@ msgstr ""
 msgid "Flexible"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "Floating IP"
 msgstr ""
 
@@ -2294,7 +2263,7 @@ msgstr ""
 msgid "Free"
 msgstr ""
 
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/routes.js
 msgid "FreeIPA account"
 msgstr ""
@@ -2337,7 +2306,6 @@ msgid "GB"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "GPU"
 msgstr ""
 
@@ -2364,7 +2332,7 @@ msgid "Gateway IP of this subnet"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/project/project-dialog.html
+#: src/project/ProjectDetailsDialog.tsx
 msgid "General"
 msgstr ""
 
@@ -2518,7 +2486,7 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "IPv4 address"
 msgstr ""
 
@@ -2578,10 +2546,6 @@ msgstr ""
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Include weekends"
-msgstr ""
-
 #: src/customer/details/customer-report-error.html
 #: src/customer/details/customer-report-error.js
 msgid "Incorrect organization details"
@@ -2622,9 +2586,9 @@ msgid "Initial username"
 msgstr ""
 
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-volume/actions/AttachAction.ts
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 msgid "Instance"
 msgstr ""
 
@@ -2666,7 +2630,6 @@ msgid "Internal"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/resource/list/resource-vms-list.js
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Internal IP"
 msgstr ""
@@ -2723,7 +2686,7 @@ msgstr ""
 msgid "Invitation has been approved."
 msgstr ""
 
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Invitation has been canceled."
 msgstr ""
 
@@ -2735,7 +2698,7 @@ msgstr ""
 msgid "Invitation has been rejectd."
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "Invitation has been sent again."
 msgstr ""
 
@@ -2759,7 +2722,7 @@ msgstr ""
 msgid "Invitation token is not found."
 msgstr ""
 
-#: src/customer/workspace/customer-team.html
+#: src/customer/team/CustomerTeam.tsx
 msgid "Invitations"
 msgstr ""
 
@@ -2767,7 +2730,7 @@ msgstr ""
 msgid "Invite team member"
 msgstr ""
 
-#: src/invitations/actions/create.js
+#: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/invitation-dialog.html
 msgid "Invite user"
 msgstr ""
@@ -2780,9 +2743,9 @@ msgstr ""
 msgid "Invoice No."
 msgstr ""
 
+#: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Invoice date"
 msgstr ""
 
@@ -2806,12 +2769,12 @@ msgstr ""
 msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
 msgstr ""
 
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
 
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/billing/InvoicesList.tsx
+#: src/paypal/InvoicesList.tsx
 msgid "Invoice number"
 msgstr ""
 
@@ -2831,14 +2794,14 @@ msgstr ""
 msgid "Invoices list"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-network/openstack-tenant-networks.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
 msgid "Is external"
 msgstr ""
 
@@ -2866,10 +2829,15 @@ msgstr ""
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
 #: src/jira/project/tabs.js
+#: src/marketplace/resources/ResourceTabs.tsx
 #: src/project/routes.js
 #: src/project/utils.ts
 #: src/resource/tabs/constants.js
 msgid "Issues"
+msgstr ""
+
+#: src/issues/list/IssuesListTablePlaceholder.tsx
+msgid "Issues are trackable requests to the operator."
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx
@@ -2900,7 +2868,7 @@ msgstr ""
 msgid "JIRA user with excessive privileges"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Job position"
@@ -2914,7 +2882,7 @@ msgstr ""
 msgid "Keep forever"
 msgstr ""
 
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup/BackupsList.tsx
 msgid "Keep until"
 msgstr ""
 
@@ -2929,7 +2897,7 @@ msgstr ""
 #: src/issues/list/IssuesShortListComponent.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/rancher/node/KeyValueTable.tsx
+#: src/marketplace/resources/KeyValueTable.tsx
 msgid "Key"
 msgstr ""
 
@@ -2962,6 +2930,10 @@ msgstr ""
 msgid "Kubernetes node #{index}"
 msgstr ""
 
+#: src/rancher/node/ClusterNodesList.tsx
+msgid "Kubernetes nodes"
+msgstr ""
+
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Kubernetes version"
 msgstr ""
@@ -2972,10 +2944,6 @@ msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Labels"
-msgstr ""
-
-#: src/table/responsive-table.js
-msgid "Last"
 msgstr ""
 
 #: src/configs/base-config.js
@@ -3050,10 +3018,6 @@ msgstr ""
 msgid "Loading actions"
 msgstr ""
 
-#: src/table/responsive-table.js
-msgid "Loading..."
-msgstr ""
-
 #: src/azure/AzureResourceSummary.tsx
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -3099,9 +3063,9 @@ msgstr ""
 msgid "Logout failed"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+#: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
-#: src/vmware/vmware-virtual-machine-ports.js
 msgid "MAC address"
 msgstr ""
 
@@ -3110,7 +3074,7 @@ msgid "MOAB allocation"
 msgstr ""
 
 #: src/customer/workspace/utils.ts
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/routes.js
 #: src/user/support/UserDetailsView.tsx
 msgid "Manage"
@@ -3138,6 +3102,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Management"
+msgstr ""
+
+#: src/customer/team/CustomerUsersList.tsx
+msgid "Manager in:"
 msgstr ""
 
 #: src/marketplace/details/utils.ts
@@ -3174,12 +3142,9 @@ msgstr ""
 msgid "Max amount"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 msgid "Max number of backups"
-msgstr ""
-
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-msgid "Max number of snapshots"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -3232,9 +3197,9 @@ msgstr ""
 msgid "Measured unit"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
-#: src/team/customer-users-list.js
-#: src/team/project-users-list.js
+#: src/customer/popover/CustomerUsersList.tsx
+#: src/customer/team/CustomerUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
 msgid "Member"
 msgstr ""
 
@@ -3286,10 +3251,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentMinValueField.tsx
 msgid "Minimum allowed value"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Minimum booking time slot duration."
 msgstr ""
 
 #: src/auth/valimo/auth-valimo-dialog.html
@@ -3372,7 +3333,7 @@ msgstr ""
 msgid "My services"
 msgstr ""
 
-#: src/azure/sql/azure-sql-databases-list.js
+#: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
@@ -3382,8 +3343,8 @@ msgstr ""
 #: src/customer/details/CustomerDetails.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/jira/project/JiraProjectSummary.tsx
+#: src/jira/project/JiraProjectsList.tsx
 #: src/jira/project/jira-project-config.js
-#: src/jira/project/jira-projects-list.js
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
@@ -3403,16 +3364,18 @@ msgstr ""
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-backup/openstack-backups-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-#: src/openstack/openstack-security-groups/security-groups-list.js
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectsList.tsx
@@ -3423,12 +3386,10 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
-#: src/resource/list/resources-list.js
 #: src/resource/support/SharedProviderResources.tsx
-#: src/slurm/slurm-allocation-list.js
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
-#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Name"
 msgstr ""
 
@@ -3502,8 +3463,8 @@ msgid "Negative"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+#: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
-#: src/vmware/vmware-virtual-machine-ports.js
 msgid "Network"
 msgstr ""
 
@@ -3554,7 +3515,6 @@ msgstr ""
 #: src/form/appstore-form-wizard.html
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/table-react/TablePagination.tsx
-#: src/table/responsive-table.js
 msgid "Next"
 msgstr ""
 
@@ -3570,10 +3530,6 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/rancher/node/rancher-cluster-nodes.js
-msgid "No Kubernetes nodes found matching filter."
-msgstr ""
-
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "No access info"
 msgstr ""
@@ -3582,176 +3538,17 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/slurm/slurm-allocation-list.js
-msgid "No allocations found matching filter."
-msgstr ""
-
-#: src/slurm/slurm-allocation-list.js
-msgid "No allocations yet."
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-msgid "No backup schedules found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-msgid "No backup schedules yet."
-msgstr ""
-
-#: src/openstack/openstack-backup/openstack-backups-list.js
-msgid "No backups found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-backup/openstack-backups-list.js
-msgid "No backups yet."
-msgstr ""
-
-#: src/azure/sql/azure-sql-databases-list.js
-msgid "No databases found matching filter."
-msgstr ""
-
-#: src/azure/sql/azure-sql-databases-list.js
-msgid "No databases yet."
-msgstr ""
-
-#: src/vmware/vmware-virtual-machine-disks.js
-msgid "No disks found matching filter."
-msgstr ""
-
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
 msgid "No entries to show here"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-msgid "No floating IPs found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-msgid "No floating IPs yet."
-msgstr ""
-
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
-msgid "No internal IPs found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
-msgid "No internal IPs yet."
-msgstr ""
-
-#: src/invitations/invitations-list.js
-msgid "No invitations found matching filter."
-msgstr ""
-
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
-msgid "No invoices found matching filter."
-msgstr ""
-
-#: src/team/customer-users-list.js
-#: src/team/project-users-list.js
-msgid "No members found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-msgid "No networks found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-msgid "No networks yet."
-msgstr ""
-
-#: src/payments/payment-list.js
-msgid "No payments found matching filter."
-msgstr ""
-
-#: src/payments/payment-list.js
-msgid "No payments yet"
-msgstr ""
-
-#: src/vmware/vmware-virtual-machine-ports.js
-msgid "No ports found matching filter."
-msgstr ""
-
-#: src/vmware/vmware-virtual-machine-ports.js
-msgid "No ports yet."
-msgstr ""
-
-#: src/resource/list/resource-private-clouds-list.js
-msgid "No private clouds found matching filter."
-msgstr ""
-
-#: src/team/customer-users-list.js
+#: src/customer/team/ProjectRolesList.tsx
 msgid "No projects are assigned to this role."
-msgstr ""
-
-#: src/billing/billing-records-list.js
-msgid "No records found matching filter."
-msgstr ""
-
-#: src/resource/list/resources-list.js
-msgid "No resources found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
-msgid "No restored volumes found matching filter."
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/form-react/AsyncSelectField.tsx
 msgid "No results found"
-msgstr ""
-
-#: src/openstack/openstack-security-groups/security-groups-list.js
-msgid "No security groups found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-security-groups/security-groups-list.js
-msgid "No security groups yet."
-msgstr ""
-
-#: src/jira/project/jira-projects-list.js
-msgid "No service desk projects found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-msgid "No snapshot schedules found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-msgid "No snapshot schedules yet."
-msgstr ""
-
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-#: src/openstack/openstack-volume/openstack-volume-snapshots.js
-msgid "No snapshots found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-msgid "No snapshots yet."
-msgstr ""
-
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-msgid "No subnets found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-msgid "No subnets yet."
-msgstr ""
-
-#: src/customer/popover/customer-users-details-list.js
-msgid "No users found matching filter."
-msgstr ""
-
-#: src/resource/list/resource-vms-list.js
-msgid "No virtual machines found matching filter."
-msgstr ""
-
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource/list/resource-volumes-list.js
-msgid "No volumes found matching filter."
 msgstr ""
 
 #: src/customer/create/customer-create-prompt.html
@@ -3762,7 +3559,7 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 msgid "Node"
 msgstr ""
 
@@ -3789,13 +3586,9 @@ msgstr ""
 msgid "Not a valid value"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+#: src/rancher/node/ClusterNodesList.tsx
 msgid "Not assigned"
-msgstr ""
-
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-msgid "Not known"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
@@ -3830,11 +3623,11 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
-#: src/user/constants.js
+#: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.js
 msgid "Notifications"
@@ -3874,9 +3667,7 @@ msgstr ""
 msgid "Number of worker nodes"
 msgstr ""
 
-#: src/customer/popover/customer-popover.html
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#: src/project/project-dialog.html
 #: src/user/user-popover.html
 msgid "OK"
 msgstr ""
@@ -3937,6 +3728,7 @@ msgstr ""
 msgid "Offering state has changed to {offering_state}."
 msgstr ""
 
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Offering type"
@@ -3967,24 +3759,20 @@ msgstr ""
 msgid "One-time on plan switch"
 msgstr ""
 
-#: src/invitations/actions/create.js
+#: src/invitations/actions/InvitationCreateButton.tsx
 msgid "Only customer owner or staff can invite users."
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "Only pending and expired invitations can be sent again."
 msgstr ""
 
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Only pending invitation can be canceled."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
 msgid "Only staff and organization users are allowed to open console."
-msgstr ""
-
-#: src/resource/resource-provision-policy.js
-msgid "Only staff can create virtual private cloud."
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/utils.ts
@@ -4095,6 +3883,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/ResourceTabs.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/resource/tabs/constants.js
 msgid "Order items"
@@ -4164,7 +3953,7 @@ msgstr ""
 msgid "Organization owner"
 msgstr ""
 
-#: src/team/add-team-member.html
+#: src/customer/team/add-team-member.html
 msgid "Organization owner role expires on"
 msgstr ""
 
@@ -4190,9 +3979,13 @@ msgstr ""
 msgid "Organization type"
 msgstr ""
 
+#: src/customer/popover/CustomerPopover.tsx
+msgid "Organization users list"
+msgstr ""
+
 #: src/billing/billing-record-header.js
 #: src/billing/invoice-header.html
-#: src/customer/workspace/customer-workspace.js
+#: src/customer/workspace/CustomerWorkspace.tsx
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts
@@ -4235,7 +4028,7 @@ msgstr ""
 msgid "Owned organizations"
 msgstr ""
 
-#: src/team/customer-users-list.js
+#: src/customer/team/CustomerUsersList.tsx
 #: src/user/list/CustomerPermissions.tsx
 msgid "Owner"
 msgstr ""
@@ -4248,16 +4041,16 @@ msgstr ""
 msgid "Page is not found."
 msgstr ""
 
-#: src/error/invalid-object-page.html
+#: src/error/InvalidObjectPage.tsx
 msgid "Page is not found. You've either entered invalid URL or don't have enough permissions to view this page."
 msgstr ""
 
-#: src/error/invalid-route-page.html
+#: src/error/InvalidRoutePage.tsx
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr ""
 
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/billing/InvoicesFilter.tsx
+#: src/paypal/InvoicesFilter.tsx
 msgid "Paid"
 msgstr ""
 
@@ -4294,7 +4087,7 @@ msgstr ""
 msgid "Paused"
 msgstr ""
 
-#: src/paypal/paypal-invoice-actions.html
+#: src/paypal/InvoiceActions.tsx
 msgid "Pay invoice"
 msgstr ""
 
@@ -4320,7 +4113,7 @@ msgstr ""
 msgid "Payment is being processed, please wait."
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Payment pending"
 msgstr ""
 
@@ -4328,8 +4121,8 @@ msgstr ""
 msgid "Payment profiles"
 msgstr ""
 
-#: src/billing/billing-utils.js
-#: src/invitations/invitations-list.js
+#: src/billing/InvoicesFilter.tsx
+#: src/invitations/InvitationsFilter.tsx
 #: src/marketplace/orders/store/reducer.ts
 msgid "Pending"
 msgstr ""
@@ -4374,8 +4167,8 @@ msgstr ""
 msgid "Permanent"
 msgstr ""
 
-#: src/customer/workspace/customer-team.html
-#: src/project/project-team.html
+#: src/customer/team/CustomerTeam.tsx
+#: src/project/team/ProjectTeam.tsx
 msgid "Permissions log"
 msgstr ""
 
@@ -4383,7 +4176,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
 msgid "Phone number"
@@ -4397,6 +4190,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -4573,7 +4367,7 @@ msgid "Pods"
 msgstr ""
 
 #: src/customer/details/customer-policies.html
-#: src/project/project-dialog.html
+#: src/project/ProjectDetailsDialog.tsx
 msgid "Policies"
 msgstr ""
 
@@ -4601,18 +4395,25 @@ msgstr ""
 msgid "Powered by"
 msgstr ""
 
-#: src/customer/popover/customer-users-details-list.js
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "Preferred language"
 msgstr ""
 
+#: src/marketplace/offerings/PreviewOfferingButton.tsx
+msgid "Preview"
+msgstr ""
+
+#: src/marketplace/offerings/PreviewOfferingDialog.tsx
+msgid "Preview offering"
+msgstr ""
+
 #: src/form/appstore-form-wizard.html
 #: src/table-react/TablePagination.tsx
-#: src/table/responsive-table.js
 msgid "Previous"
 msgstr ""
 
-#: src/billing/invoices-list.js
+#: src/billing/InvoicesList.tsx
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
@@ -4620,7 +4421,7 @@ msgstr ""
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Price"
 msgstr ""
 
@@ -4705,13 +4506,8 @@ msgstr ""
 msgid "Privacy policy"
 msgstr ""
 
-#: src/project/routes.js
-#: src/resource/breadcrumbs/resource-categories.js
+#: src/openstack/utils.ts
 msgid "Private clouds"
-msgstr ""
-
-#: src/table/responsive-table.js
-msgid "Processing..."
 msgstr ""
 
 #: src/marketplace/offerings/ProductCodeField.tsx
@@ -4761,7 +4557,7 @@ msgstr ""
 msgid "Project description"
 msgstr ""
 
-#: src/project/project-dialog.html
+#: src/project/ProjectDetailsDialog.tsx
 msgid "Project details"
 msgstr ""
 
@@ -4795,12 +4591,12 @@ msgstr ""
 msgid "Project manager"
 msgstr ""
 
-#: src/team/project-users-list.js
+#: src/project/team/UserRemoveButton.tsx
 msgid "Project manager cannot edit users with same role."
 msgstr ""
 
+#: src/customer/team/add-team-member.html
 #: src/project/ProjectNameField.tsx
-#: src/team/add-team-member.html
 #: src/user/list/ProjectPermissions.tsx
 msgid "Project name"
 msgstr ""
@@ -4826,7 +4622,7 @@ msgstr ""
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
-#: src/project/project-workspace.js
+#: src/project/project-base.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 msgid "Project workspace"
 msgstr ""
@@ -4850,7 +4646,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: src/team/add-team-member.html
+#: src/customer/team/add-team-member.html
 msgid "Projects list"
 msgstr ""
 
@@ -4859,14 +4655,12 @@ msgid "Provided by {provider}"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
-#: src/jira/project/jira-projects-list.js
+#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/providers/support/MapInfoPanel.tsx
-#: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "Provider"
 msgstr ""
 
@@ -4962,7 +4756,6 @@ msgstr ""
 
 #: src/error/routes.js
 #: src/project/ProjectCreateButton.tsx
-#: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
 msgstr ""
 
@@ -4978,8 +4771,8 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
+#: src/resource/utils.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "RAM"
 msgstr ""
 
@@ -5034,26 +4827,25 @@ msgstr ""
 msgid "Record no."
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Record notification has been sent to organization owners."
 msgstr ""
 
-#: src/billing/billing-records-list.js
+#: src/billing/BillingRecordsList.tsx
 msgid "Record number"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
 #: src/billing/billing-record-details.html
-#: src/billing/billing-records-list.js
 msgid "Record period"
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/offering/offering-details.html
 #: src/resource/ResourceRefreshButton.tsx
 #: src/table-react/TableRefreshButton.tsx
-#: src/table/responsive-table.js
 msgid "Refresh"
 msgstr ""
 
@@ -5123,7 +4915,7 @@ msgid "Reject"
 msgstr ""
 
 #: src/booking/BookingStateFilter.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 msgid "Rejected"
 msgstr ""
 
@@ -5163,12 +4955,12 @@ msgstr ""
 msgid "Remote network"
 msgstr ""
 
+#: src/customer/team/UserRemoveButton.tsx
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
+#: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/NodeRemoveButton.tsx
-#: src/team/customer-users-list.js
-#: src/team/project-users-list.js
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -5188,10 +4980,6 @@ msgstr ""
 
 #: src/user/support/UserEditForm.tsx
 msgid "Remove profile"
-msgstr ""
-
-#: src/customer/details/customer-manage.html
-msgid "Remove project"
 msgstr ""
 
 #: src/customer/details/customer-manage.html
@@ -5330,7 +5118,7 @@ msgstr ""
 msgid "Request-based item"
 msgstr ""
 
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsFilter.tsx
 msgid "Requested"
 msgstr ""
 
@@ -5354,7 +5142,7 @@ msgstr ""
 msgid "Required certifications"
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "Resend"
 msgstr ""
 
@@ -5497,7 +5285,7 @@ msgstr ""
 #: src/offering/offering-details.js
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
-#: src/project/project-workspace.js
+#: src/project/project-base.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ChartContainer.tsx
 #: src/resource/support/TreemapChartFilter.tsx
@@ -5564,26 +5352,30 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
+#: src/customer/team/add-team-member.html
+#: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/invitation-dialog.html
-#: src/invitations/invitations-list.js
+#: src/project/team/add-project-member.html
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
-#: src/team/add-project-member.html
-#: src/team/add-team-member.html
 #: src/user/list/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
 msgstr ""
 
-#: src/team/add-project-member.html
+#: src/project/team/add-project-member.html
 msgid "Role expires on"
 msgstr ""
 
-#: src/team/project-users-list.js
+#: src/project/team/ProjectUsersList.tsx
 msgid "Role in project"
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "Role management events"
+msgstr ""
+
+#: src/openstack/openstack-security-groups/module.js
+msgid "Rules"
 msgstr ""
 
 #: src/customer/AccountingRunningField.tsx
@@ -5620,7 +5412,7 @@ msgstr ""
 msgid "SQL server name"
 msgstr ""
 
-#: src/user/constants.js
+#: src/user/constants.ts
 msgid "SSH Keys"
 msgstr ""
 
@@ -5660,22 +5452,22 @@ msgid "Sankey diagram"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
+#: src/customer/team/add-team-member.js
+#: src/project/team/add-project-member.js
 #: src/providers/ProviderUpdateForm.tsx
-#: src/team/add-project-member.js
-#: src/team/add-team-member.js
 msgid "Save"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Schedule"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/ResourceTabs.tsx
 msgid "Schedules"
 msgstr ""
 
@@ -5714,7 +5506,6 @@ msgstr ""
 #: src/issues/create/issue-registration.html
 #: src/navigation/header/MainSearch.tsx
 #: src/table-react/TableQuery.tsx
-#: src/table/responsive-table.js
 msgid "Search"
 msgstr ""
 
@@ -5746,7 +5537,7 @@ msgid "Security groups details"
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "See all"
 msgstr ""
 
@@ -5796,10 +5587,6 @@ msgstr ""
 
 #: src/issues/create/issue-registration.html
 msgid "Select assignee..."
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Select available weekdays"
 msgstr ""
 
 #: src/issues/create/issue-registration.html
@@ -5887,10 +5674,6 @@ msgstr ""
 msgid "Select service provider"
 msgstr ""
 
-#: src/issues/create/issue-registration.html
-msgid "Select service type..."
-msgstr ""
-
 #: src/digitalocean/droplet-resize.html
 msgid "Select size..."
 msgstr ""
@@ -5927,7 +5710,7 @@ msgstr ""
 msgid "Select type..."
 msgstr ""
 
-#: src/team/user-selector.html
+#: src/project/team/user-selector.html
 msgid "Select user..."
 msgstr ""
 
@@ -5945,11 +5728,11 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Send notification"
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Sent"
 msgstr ""
 
@@ -5967,10 +5750,6 @@ msgstr ""
 
 #: src/issues/types/constants.ts
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
-msgstr ""
-
-#: src/resource/breadcrumbs/resource-categories.js
-msgid "Service desk"
 msgstr ""
 
 #: src/jira/project/jira-project-checkout-summary.html
@@ -6037,7 +5816,6 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: src/issues/create/issue-registration.html
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 msgid "Service type"
@@ -6081,10 +5859,6 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: src/table/responsive-table.js
-msgid "Show _MENU_ entries"
-msgstr ""
-
 #: src/marketplace/orders/PendingOrderIndicator.tsx
 msgid "Show all"
 msgstr ""
@@ -6102,7 +5876,7 @@ msgid "Show console log"
 msgstr ""
 
 #: src/billing/price-estimate-button.html
-#: src/rancher/node/KeyValueButton.tsx
+#: src/marketplace/resources/KeyValueButton.tsx
 msgid "Show details"
 msgstr ""
 
@@ -6144,10 +5918,6 @@ msgstr ""
 msgid "Show with running accounting"
 msgstr ""
 
-#: src/table/responsive-table.js
-msgid "Showing _START_ to _END_ of _TOTAL_ entries"
-msgstr ""
-
 #: src/table-react/TableInfo.tsx
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr ""
@@ -6168,17 +5938,16 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-backup/backup-snapshots-list.js
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource/list/resource-volumes-list.js
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/vmware/DisksList.tsx
 #: src/vmware/VMwareDiskSummary.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
 msgid "Size"
 msgstr ""
 
@@ -6230,7 +5999,6 @@ msgstr ""
 #: src/openstack/openstack-backup/tabs.js
 #: src/openstack/openstack-snapshot-schedule/module.js
 #: src/openstack/openstack-volume/module.js
-#: src/resource/list/resource-storage-tabs.html
 msgid "Snapshots"
 msgstr ""
 
@@ -6266,12 +6034,13 @@ msgstr ""
 msgid "Starting"
 msgstr ""
 
-#: src/azure/sql/azure-sql-databases-list.js
-#: src/billing/billing-records-list.js
-#: src/billing/invoices-list.js
+#: src/azure/sql/DatabasesList.tsx
+#: src/billing/BillingRecordsList.tsx
+#: src/billing/InvoicesList.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -6282,40 +6051,40 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
-#: src/openstack/openstack-backup/backup-snapshots-list.js
-#: src/openstack/openstack-backup/openstack-backups-list.js
-#: src/openstack/openstack-floating-ips/openstack-floating-ips-list.js
-#: src/openstack/openstack-network/openstack-tenant-networks.js
-#: src/openstack/openstack-security-groups/security-groups-list.js
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js
-#: src/openstack/openstack-subnet/openstack-subnets-list.js
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/payments/payment-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/payments/PaymentsList.tsx
+#: src/paypal/InvoicesList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/rancher/node/rancher-cluster-nodes.js
+#: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
-#: src/resource/list/resources-list.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
-#: src/slurm/slurm-allocation-list.js
 #: src/user/hooks/HooksList.tsx
-#: src/vmware/vmware-virtual-machine-disks.js
-#: src/vmware/vmware-virtual-machine-ports.js
+#: src/vmware/DisksList.tsx
+#: src/vmware/PortsList.tsx
 msgid "State"
 msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
@@ -6345,9 +6114,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/project/routes.js
 #: src/quotas/constants.js
-#: src/resource/breadcrumbs/resource-categories.js
 msgid "Storage"
 msgstr ""
 
@@ -6395,11 +6162,11 @@ msgstr ""
 msgid "Subnet"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet CIDR"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "Subnet Name"
 msgstr ""
 
@@ -6407,7 +6174,8 @@ msgstr ""
 msgid "Subnet has been updated."
 msgstr ""
 
-#: src/openstack/openstack-network/openstack-tenant-networks.js
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+#: src/openstack/openstack-network/module.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
 msgid "Subnets"
 msgstr ""
@@ -6516,8 +6284,8 @@ msgstr ""
 msgid "Taking a snapshot"
 msgstr ""
 
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
+#: src/billing/InvoicesList.tsx
+#: src/paypal/InvoicesList.tsx
 msgid "Tax"
 msgstr ""
 
@@ -6530,6 +6298,11 @@ msgstr ""
 #: src/project/routes.js
 #: src/project/utils.ts
 msgid "Team"
+msgstr ""
+
+#: src/customer/team/UserRemoveButton.tsx
+#: src/project/team/UserRemoveButton.tsx
+msgid "Team member has been removed."
 msgstr ""
 
 #: src/customer/dashboard/api.ts
@@ -6665,10 +6438,6 @@ msgstr ""
 msgid "Then download (if needed) and run kubectl"
 msgstr ""
 
-#: src/rancher/node/rancher-cluster-nodes.js
-msgid "There are no Kubernetes nodes yet."
-msgstr ""
-
 #: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
 msgid "There are no OpenStack tenants yet."
 msgstr ""
@@ -6677,7 +6446,6 @@ msgstr ""
 msgid "There are no SSH public keys yet."
 msgstr ""
 
-#: src/paypal/paypal-invoice-actions.html
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
@@ -6687,11 +6455,11 @@ msgstr ""
 msgid "There are no applications templates."
 msgstr ""
 
-#: src/team/add-team-member.html
+#: src/customer/team/add-team-member.html
 msgid "There are no available projects."
 msgstr ""
 
-#: src/team/add-project-member.html
+#: src/project/team/add-project-member.html
 msgid "There are no available users."
 msgstr ""
 
@@ -6769,7 +6537,7 @@ msgstr ""
 msgid "There are no {verboseName} yet."
 msgstr ""
 
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "There is no activity yet."
 msgstr ""
 
@@ -6816,16 +6584,8 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "Time slot"
-msgstr ""
-
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "Time to resolution"
-msgstr ""
-
-#: src/booking/components/CalendarSettings.tsx
-msgid "Time zone"
 msgstr ""
 
 #: src/events/BaseEventsList.tsx
@@ -6891,12 +6651,12 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
+#: src/billing/InvoicesList.tsx
 #: src/billing/PriceEstimateDialog.tsx
-#: src/billing/billing-records-list.js
-#: src/billing/invoices-list.js
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesList.tsx
 msgid "Total"
 msgstr ""
 
@@ -6944,8 +6704,8 @@ msgstr ""
 
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
+#: src/jira/project/JiraProjectsList.tsx
 #: src/jira/project/jira-project-config.js
-#: src/jira/project/jira-projects-list.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -6958,8 +6718,8 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/payments/payment-list.js
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+#: src/payments/PaymentsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
 msgstr ""
@@ -6972,12 +6732,12 @@ msgstr ""
 msgid "Type to search"
 msgstr ""
 
-#: src/invitations/invitations-list.js
+#: src/invitations/InvitationsList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "URL"
 msgstr ""
 
-#: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "UUID"
 msgstr ""
@@ -7010,7 +6770,7 @@ msgstr ""
 msgid "Unable to authenticate using Mobile ID."
 msgstr ""
 
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Unable to cancel invitation."
 msgstr ""
 
@@ -7072,6 +6832,11 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to delete comment."
+msgstr ""
+
+#: src/customer/team/UserRemoveButton.tsx
+#: src/project/team/UserRemoveButton.tsx
+msgid "Unable to delete team member."
 msgstr ""
 
 #: src/issues/comments/effects.ts
@@ -7179,7 +6944,13 @@ msgstr ""
 msgid "Unable to load compliance overview."
 msgstr ""
 
+#: src/project/team/ProjectUsersList.tsx
+msgid "Unable to load data"
+msgstr ""
+
 #: src/customer/TotalCostComponent.tsx
+#: src/customer/popover/CustomerPopover.tsx
+#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -7355,7 +7126,7 @@ msgstr ""
 msgid "Unable to remove logo."
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "Unable to resend invitation."
 msgstr ""
 
@@ -7363,7 +7134,7 @@ msgstr ""
 msgid "Unable to save user."
 msgstr ""
 
-#: src/billing/billing-utils.js
+#: src/billing/SendNotificationButton.tsx
 msgid "Unable to send record notification."
 msgstr ""
 
@@ -7469,7 +7240,7 @@ msgstr ""
 msgid "Unlink instance"
 msgstr ""
 
-#: src/paypal/paypal-invoices-list.js
+#: src/paypal/InvoicesFilter.tsx
 msgid "Unpaid"
 msgstr ""
 
@@ -7538,7 +7309,7 @@ msgid "Updating"
 msgstr ""
 
 #: src/resource/state/constants.js
-msgid "Updating floaating IPs"
+msgid "Updating floating IPs"
 msgstr ""
 
 #: src/resource/state/constants.js
@@ -7573,6 +7344,7 @@ msgstr ""
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/slurm/tabs.js
 msgid "Usage"
 msgstr ""
 
@@ -7611,9 +7383,9 @@ msgstr ""
 msgid "Used in the period"
 msgstr ""
 
+#: src/customer/team/add-team-member.html
 #: src/events/EventDetailsTable.tsx
-#: src/team/add-project-member.html
-#: src/team/add-team-member.html
+#: src/project/team/add-project-member.html
 msgid "User"
 msgstr ""
 
@@ -7713,43 +7485,43 @@ msgstr ""
 msgid "User {user_link} authenticated successfully with username and password."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted organization support role in {customer_link} to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
 msgstr ""
 
-#: src/team/events.ts
+#: src/project/team/events.ts
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr ""
 
@@ -7765,10 +7537,10 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/project/team/user-selector.html
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
-#: src/team/user-selector.html
 #: src/vmware/VMwareForm.tsx
 msgid "Username"
 msgstr ""
@@ -7785,10 +7557,10 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
-#: src/customer/workspace/customer-team.html
+#: src/customer/team/CustomerTeam.tsx
 #: src/issues/routes.js
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/project-team.html
+#: src/project/team/ProjectTeam.tsx
 msgid "Users"
 msgstr ""
 
@@ -7867,9 +7639,9 @@ msgid "Valid states for operation: {validStates}."
 msgstr ""
 
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
+#: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#: src/rancher/node/KeyValueTable.tsx
 msgid "Value"
 msgstr ""
 
@@ -7906,8 +7678,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/project/routes.js
-#: src/resource/breadcrumbs/resource-categories.js
+#: src/openstack/utils.ts
 msgid "Virtual machines"
 msgstr ""
 
@@ -7916,7 +7687,6 @@ msgid "Virtual machines count"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
 msgid "Volume"
 msgstr ""
 
@@ -7942,7 +7712,6 @@ msgid "Volume type"
 msgstr ""
 
 #: src/openstack/openstack-instance/module.js
-#: src/resource/list/resource-storage-tabs.html
 msgid "Volumes"
 msgstr ""
 
@@ -8035,11 +7804,11 @@ msgstr ""
 msgid "You can start filling this table by creating your first offering."
 msgstr ""
 
-#: src/team/add-team-member.js
+#: src/customer/team/add-team-member.js
 msgid "You cannot change your own role."
 msgstr ""
 
-#: src/team/add-team-member.js
+#: src/customer/team/add-team-member.js
 msgid "You cannot manage other organization owner."
 msgstr ""
 
@@ -8061,10 +7830,6 @@ msgstr ""
 msgid "You do not have any resources yet."
 msgstr ""
 
-#: src/resource/resource-provision-policy.js
-msgid "You do not have permissions to create private cloud for current project."
-msgstr ""
-
 #: src/navigation/workspace/select-workspace-toggle.js
 msgid "You don't have any organization yet."
 msgstr ""
@@ -8074,76 +7839,20 @@ msgstr ""
 msgid "You don't have enough privileges to perform this operation."
 msgstr ""
 
-#: src/invitations/actions/cancel.js
+#: src/invitations/actions/InvitationCancelButton.tsx
 msgid "You don't have permission to cancel this invitation."
 msgstr ""
 
-#: src/invitations/actions/send.js
+#: src/invitations/actions/InvitationSendButton.tsx
 msgid "You don't have permission to send this invitation."
 msgstr ""
 
-#: src/error/invalid-quota-page.html
+#: src/error/InvalidQuotaPage.tsx
 msgid "You have exceeded maximum number of quotas."
-msgstr ""
-
-#: src/vmware/vmware-virtual-machine-disks.js
-msgid "You have no disks yet."
-msgstr ""
-
-#: src/billing/invoices-list.js
-#: src/paypal/paypal-invoices-list.js
-msgid "You have no invoices yet."
-msgstr ""
-
-#: src/resource/list/resource-private-clouds-list.js
-msgid "You have no private clouds yet."
 msgstr ""
 
 #: src/quotas/quotas-table.html
 msgid "You have no quotas yet."
-msgstr ""
-
-#: src/billing/billing-records-list.js
-msgid "You have no records yet."
-msgstr ""
-
-#: src/resource/list/resources-list.js
-msgid "You have no resources yet."
-msgstr ""
-
-#: src/openstack/openstack-snapshot/openstack-snapshot-restored-volumes-list.js
-msgid "You have no restored volumes yet."
-msgstr ""
-
-#: src/jira/project/jira-projects-list.js
-msgid "You have no service desk projects yet."
-msgstr ""
-
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js
-#: src/openstack/openstack-volume/openstack-volume-snapshots.js
-msgid "You have no snapshots yet."
-msgstr ""
-
-#: src/invitations/invitations-list.js
-msgid "You have no team invitations yet."
-msgstr ""
-
-#: src/team/customer-users-list.js
-#: src/team/project-users-list.js
-msgid "You have no team members yet."
-msgstr ""
-
-#: src/customer/popover/customer-users-details-list.js
-msgid "You have no users yet."
-msgstr ""
-
-#: src/resource/list/resource-vms-list.js
-msgid "You have no virtual machines yet."
-msgstr ""
-
-#: src/openstack/openstack-volume/openstack-instance-volumes.js
-#: src/resource/list/resource-volumes-list.js
-msgid "You have no volumes yet."
 msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -8152,6 +7861,10 @@ msgstr ""
 
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "You have the right to purchase service without additional approval."
+msgstr ""
+
+#: src/issues/list/IssuesListTablePlaceholder.tsx
+msgid "You haven't created any issues yet."
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.js
@@ -8226,6 +7939,14 @@ msgstr ""
 msgid "application templates"
 msgstr ""
 
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+msgid "backup schedules"
+msgstr ""
+
+#: src/openstack/openstack-backup/BackupsList.tsx
+msgid "backups"
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
 msgstr ""
@@ -8242,7 +7963,7 @@ msgstr ""
 msgid "catalogues"
 msgstr ""
 
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "commented on"
 msgstr ""
 
@@ -8252,6 +7973,14 @@ msgstr ""
 
 #: src/resource/state/utils.ts
 msgid "current state on backend: {resourceState}."
+msgstr ""
+
+#: src/azure/sql/DatabasesList.tsx
+msgid "databases"
+msgstr ""
+
+#: src/vmware/DisksList.tsx
+msgid "disks"
 msgstr ""
 
 #: src/table-react/TablePageSize.tsx
@@ -8268,6 +7997,10 @@ msgstr ""
 
 #: src/events/BaseEventsList.tsx
 msgid "events"
+msgstr ""
+
+#: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+msgid "floating IPs"
 msgstr ""
 
 #: src/issues/list/IssueRow.tsx
@@ -8287,16 +8020,25 @@ msgstr ""
 msgid "hours"
 msgstr ""
 
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+msgid "internal IPs"
+msgstr ""
+
+#: src/billing/InvoicesList.tsx
+#: src/paypal/InvoicesList.tsx
+msgid "invoices"
+msgstr ""
+
 #: src/table-react/utils.tsx
 msgid "items"
 msgstr ""
 
-#: src/quotas/quotas-table.html
-msgid "of"
+#: src/openstack/openstack-network/TenantNetworksList.tsx
+msgid "networks"
 msgstr ""
 
-#: src/marketplace/offerings/details/PlanUsageList.tsx
-msgid "offerings"
+#: src/quotas/quotas-table.html
+msgid "of"
 msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
@@ -8312,13 +8054,25 @@ msgstr ""
 msgid "organizations"
 msgstr ""
 
+#: src/invitations/RoleField.tsx
+msgid "owner"
+msgstr ""
+
 #: src/billing/PaymentProfileList.tsx
 msgid "payment profiles"
+msgstr ""
+
+#: src/payments/PaymentsList.tsx
+msgid "payments"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 msgid "plans"
+msgstr ""
+
+#: src/vmware/PortsList.tsx
+msgid "ports"
 msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
@@ -8331,12 +8085,46 @@ msgstr ""
 msgid "projects"
 msgstr ""
 
+#: src/billing/BillingRecordsList.tsx
+msgid "records"
+msgstr ""
+
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "requests"
 msgstr ""
 
 #: src/resource/support/SharedProviderResources.tsx
 msgid "resources"
+msgstr ""
+
+#: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+msgid "restored volumes"
+msgstr ""
+
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+msgid "security groups"
+msgstr ""
+
+#: src/jira/project/JiraProjectsList.tsx
+msgid "service desk projects"
+msgstr ""
+
+#: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+msgid "snapshot schedules"
+msgstr ""
+
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+#: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
+#: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+msgid "snapshots"
+msgstr ""
+
+#: src/resource/utils.tsx
+msgid "storage"
+msgstr ""
+
+#: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+msgid "subnets"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -8347,20 +8135,27 @@ msgstr ""
 msgid "support requests"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
-msgid "till"
+#: src/invitations/InvitationsList.tsx
+msgid "team invitations"
+msgstr ""
+
+#: src/customer/team/CustomerUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
+msgid "team members"
 msgstr ""
 
 #: src/user/support/utils.ts
 msgid "token will not timeout"
 msgstr ""
 
+#: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
+#: src/resource/utils.tsx
 msgid "vCPU"
 msgstr ""
 
@@ -8374,6 +8169,10 @@ msgstr ""
 
 #: src/vmware/marketplace.ts
 msgid "vSphere Virtual Machine"
+msgstr ""
+
+#: src/openstack/openstack-volume/InstanceVolumesList.tsx
+msgid "volumes"
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
@@ -8464,12 +8263,15 @@ msgstr ""
 msgid "{resource_name} has been deleted."
 msgstr ""
 
+#: src/invitations/RoleField.tsx
+msgid "{role} in {project}"
+msgstr ""
+
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "{state} controls"
 msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#: src/slurm/slurm-allocation-list.js
 msgid "{usage} of {limit}"
 msgstr ""
 

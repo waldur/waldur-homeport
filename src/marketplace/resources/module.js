@@ -1,18 +1,18 @@
+import marketplaceResourceChangeLimitsDialog from './change-limits/ChangeLimitsDialog';
+import marketplaceResourcePlanChangeDialog from './change-plan/ChangePlanDialog';
+import marketplaceResourceImportDialog from './import/ResourceImportDialog';
 import marketplaceCustomerResourcesList from './list/CustomerResourcesContainer';
 import marketplaceProjectResourcesList from './list/ProjectResourcesContainer';
 import marketplacePublicResourcesList from './list/PublicResourcesContainer';
 import marketplaceSupportResourcesList from './list/SupportResourcesContainer';
-import marketplaceResourceShowUsageButton from './usage/ResourceShowUsageButton';
-import marketplaceResourceShowUsageDialog from './usage/ResourceShowUsageDialog';
-import marketplaceResourceCreateUsageDialog from './usage/ResourceCreateUsageDialog';
-import marketplaceSupportUsageList from './usage/SupportUsageContainer';
-import marketplaceResourcePlanChangeDialog from './change-plan/ChangePlanDialog';
-import marketplaceResourceChangeLimitsDialog from './change-limits/ChangeLimitsDialog';
+import marketplaceKeyValueDialog from './MarketplaceKeyValueDialog';
 import marketplacePlanUsagesList from './plan-usage/PlanUsageContainer';
 import marketplacePlanUsageDialog from './plan-usage/PlanUsageDialog';
-import marketplaceResourceTerminateDialog from './terminate/TerminateContainer';
-import marketplaceResourceImportDialog from './import/ResourceImportDialog';
 import marketplaceResourceDetails from './ResourceDetailsPage';
+import marketplaceResourceTerminateDialog from './terminate/TerminateContainer';
+import marketplaceResourceCreateUsageDialog from './usage/ResourceCreateUsageDialog';
+import marketplaceResourceShowUsageDialog from './usage/ResourceShowUsageDialog';
+import marketplaceSupportUsageList from './usage/SupportUsageContainer';
 
 export default module => {
   module.component(
@@ -30,10 +30,6 @@ export default module => {
   module.component(
     'marketplaceSupportResourcesList',
     marketplaceSupportResourcesList,
-  );
-  module.component(
-    'marketplaceResourceShowUsageButton',
-    marketplaceResourceShowUsageButton,
   );
   module.component(
     'marketplaceResourceShowUsageDialog',
@@ -63,4 +59,5 @@ export default module => {
     marketplaceResourceImportDialog,
   );
   module.component('marketplaceResourceDetails', marketplaceResourceDetails);
+  module.component('marketplaceKeyValueDialog', marketplaceKeyValueDialog);
 };

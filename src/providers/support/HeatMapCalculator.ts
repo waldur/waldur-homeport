@@ -21,8 +21,6 @@ export const getDiff = (usage: UsageData, country: string) =>
 export const getColor = diff => {
   if (diff > 0) {
     return '#1BBBE3';
-  } else if (diff < 0) {
-    return '#FF4233';
   } else {
     return '#FF4233';
   }
@@ -63,8 +61,8 @@ export const getChartData = (
   features: Feature[],
 ) => {
   const chartData = [];
-  countries.map(country => {
-    features.map(feature => {
+  countries.forEach(country => {
+    features.forEach(feature => {
       if (feature.properties.name === country) {
         chartData.push({
           ...feature,

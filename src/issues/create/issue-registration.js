@@ -1,18 +1,5 @@
 import template from './issue-registration.html';
 
-export default function issueRegistration() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: IssueRegistrationController,
-    controllerAs: '$ctrl',
-    scope: {
-      onSearch: '&',
-    },
-    bindToController: true,
-  };
-}
-
 class IssueRegistrationController {
   // @ngInject
   constructor(
@@ -81,31 +68,7 @@ class IssueRegistrationController {
         this.refreshResources();
       },
     );
-    this.$scope.$watch(
-      () => this.issue.scope,
-      () => {
-        this.issue.resource = null;
-        this.refreshResources();
-      },
-    );
-    this.scopes = this.getScopes();
     this.emptyFieldMessage = gettext('You did not enter a field.');
-  }
-
-  getScopes() {
-    const filterResourceType = resourceType =>
-      this.features.isVisible(this.ENV.resourceCategory[resourceType]);
-
-    const formatChoice = resourceType => ({
-      display_name: resourceType.split('.').join(' '),
-      value: resourceType,
-    });
-
-    const types = Object.keys(this.ENV.resourceCategory);
-    return types
-      .filter(filterResourceType)
-      .sort()
-      .map(formatChoice);
   }
 
   refreshUsers(name) {
@@ -126,7 +89,7 @@ class IssueRegistrationController {
     if (!this.issue.caller) {
       return;
     }
-    let params = {
+    const params = {
       user_uuid: this.issue.caller.uuid,
     };
     if (name) {
@@ -141,14 +104,14 @@ class IssueRegistrationController {
     if (!this.issue.customer) {
       return;
     }
-    let params = {
+    const params = {
       customer: this.issue.customer.uuid,
     };
     if (name) {
       params.name = name;
     }
     this.projectsService.filterByCustomer = false;
-    let promise = this.projectsService.getList(params).then(projects => {
+    const promise = this.projectsService.getList(params).then(projects => {
       this.projects = projects;
     });
     this.projectsService.filterByCustomer = true;
@@ -156,20 +119,19 @@ class IssueRegistrationController {
   }
 
   refreshResources(name) {
-    if (!this.issue.project || !this.issue.scope) {
+    if (!this.issue.project) {
       return;
     }
 
-    let params = {
+    const params = {
       project_uuid: this.issue.project.uuid,
-      resource_type: this.issue.scope.value,
       field: ['name', 'url'],
     };
     if (name) {
       params.name = name;
     }
     this.resourcesService.filterByCustomer = false;
-    let promise = this.resourcesService.getList(params).then(resources => {
+    const promise = this.resourcesService.getList(params).then(resources => {
       this.resources = resources;
     });
     this.resourcesService.filterByCustomer = true;
@@ -199,7 +161,7 @@ class IssueRegistrationController {
     if (this.IssueForm.$invalid) {
       return this.$q.reject();
     }
-    let issue = {
+    const issue = {
       type: this.issue.type,
       customer: this.issue.customer.url,
       summary: this.issue.summary,
@@ -257,4 +219,17 @@ class IssueRegistrationController {
       },
     });
   }
+}
+
+export default function issueRegistration() {
+  return {
+    restrict: 'E',
+    template: template,
+    controller: IssueRegistrationController,
+    controllerAs: '$ctrl',
+    scope: {
+      onSearch: '&',
+    },
+    bindToController: true,
+  };
 }

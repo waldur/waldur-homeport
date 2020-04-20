@@ -41,7 +41,7 @@ export const TableComponent = props => {
     <Table
       {...props}
       columns={columns}
-      verboseName={translate('offerings')}
+      verboseName={translate('plans')}
       showPageSizeSelector={true}
       enableExport={true}
       initialSorting={{ field: 'usage', mode: 'desc' }}
@@ -55,7 +55,6 @@ const TableOptions = {
   mapPropsToFilter: props => ({
     offering_uuid: props.offering_uuid,
   }),
-  verboseName: translate('plans'),
   exportRow: row => [row.plan_name, row.limit, row.usage],
   exportFields: ['Plan', 'Limit', 'Active plan count'],
 };

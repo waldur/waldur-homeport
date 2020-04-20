@@ -40,7 +40,7 @@ export const AttributeFilterList = (
     );
   }
 
-  if (props.loaded && !props.sections.length) {
+  if (!props.sections.length) {
     return (
       <h3 className="text-center">
         {translate('There are no category sections yet.')}

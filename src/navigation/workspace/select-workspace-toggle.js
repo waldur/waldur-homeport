@@ -1,3 +1,5 @@
+import { truncate } from '@waldur/core/utils';
+
 import template from './select-workspace-toggle.html';
 import './select-workspace-toggle.scss';
 
@@ -49,6 +51,19 @@ class SelectWorkspaceToggleController {
   }
 
   getTitle() {
+    const customerName =
+      this.customer && this.getOrganizationDisplayName(this.customer);
+    if (this.customer && this.workspace === 'organization') {
+      return truncate(customerName);
+    } else if (this.project && this.workspace === 'project') {
+      return `${truncate(customerName)} > ${truncate(this.project.name)}`;
+    }
+  }
+
+  getTitleTooltip() {
+    if (this.customer && this.customer.display_name.length < 30) {
+      return;
+    }
     const customerName =
       this.customer && this.getOrganizationDisplayName(this.customer);
     if (this.customer && this.workspace === 'organization') {

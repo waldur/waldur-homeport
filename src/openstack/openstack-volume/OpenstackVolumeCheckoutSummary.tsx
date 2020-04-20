@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues, isValid } from 'redux-form';
 
 import { Panel } from '@waldur/core/Panel';
-import { defaultCurrency, $sanitize } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
@@ -59,7 +59,7 @@ const getQuotas = ({ formData, usages, limits, project, components }) => {
     }
     Object.keys(limits)
       .filter(key => key.startsWith('gigabytes_'))
-      .map(key => {
+      .forEach(key => {
         quotas.push({
           name: key,
           usage: usages[key] || 0,
@@ -90,7 +90,7 @@ const formIsValidSelector = state => isValid('marketplaceOffering')(state);
 
 const formAttributesSelector = state => {
   const formData = formDataSelector(state);
-  return formData && formData.attributes ? formData.attributes : {};
+  return formData.attributes || {};
 };
 
 export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({
@@ -141,16 +141,14 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({
           translate('Please enter volume size to see price estimate.')}
       </p>
       {!offering.shared && !offering.billable && (
-        <p
-          dangerouslySetInnerHTML={{
-            __html: translate(
-              'Note that this volume will not be charged separately for {organization}.',
-              {
-                organization: $sanitize(customer.name),
-              },
-            ),
-          }}
-        />
+        <p>
+          {translate(
+            'Note that this volume will not be charged separately for {organization}.',
+            {
+              organization: customer.name,
+            },
+          )}
+        </p>
       )}
       <OfferingLogo src={offering.thumbnail} size="small" />
       {!!formData.size && (

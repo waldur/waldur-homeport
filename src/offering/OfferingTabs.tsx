@@ -62,7 +62,13 @@ export const PureOfferingTabs: React.FC<OfferingTabsProps> = props => {
     <OfferingSummaryTab offering={props.offering} summary={props.summary} />
   );
   return (
-    <Tabs unmountOnExit={true} defaultActiveKey="summary" id="offeringSummary">
+    <Tabs
+      mountOnEnter
+      unmountOnExit
+      defaultActiveKey="summary"
+      id="offeringSummary"
+      animation={false}
+    >
       <Tab title={props.translate('Summary')} eventKey="summary">
         <div className="m-t-sm">{Summary}</div>
       </Tab>

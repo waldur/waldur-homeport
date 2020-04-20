@@ -71,10 +71,10 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
+          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'cache-loader',
           },
-          utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -115,12 +115,7 @@ module.exports = {
         use: [
           utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
-          {
-            loader: 'webfonts-loader',
-            options: {
-              embed: utils.isProd,
-            },
-          },
+          'webfonts-loader',
         ],
       },
       {

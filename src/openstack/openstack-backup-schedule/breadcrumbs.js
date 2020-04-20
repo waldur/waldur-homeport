@@ -1,21 +1,15 @@
+import { getUUID } from '@waldur/core/utils';
+
+import { getInstanceListState } from '../utils';
+
 // @ngInject
-export default function breadcrumbsConfig(
-  ResourceBreadcrumbsService,
-  ncUtils,
-  CATEGORY_ITEMS,
-) {
+export default function breadcrumbsConfig(ResourceBreadcrumbsService) {
   ResourceBreadcrumbsService.register(
     'OpenStackTenant.BackupSchedule',
     resource => {
-      const instance_uuid = ncUtils.getUUID(resource.instance);
+      const instance_uuid = getUUID(resource.instance);
       return [
-        {
-          label: CATEGORY_ITEMS.vms.label,
-          state: CATEGORY_ITEMS.vms.state,
-          params: {
-            uuid: resource.project_uuid,
-          },
-        },
+        getInstanceListState(resource.project_uuid),
         {
           label: resource.instance_name,
           state: 'resources.details',

@@ -98,7 +98,7 @@ export const transformBookingEvent = (event, showAvailability = false) => {
 };
 
 export const handleTitle = ({ event, el }) => {
-  if (!event.title || event.title === '') {
+  if (!event.title) {
     return el.querySelector('.fc-title').prepend(event.extendedProps.type);
   }
 };

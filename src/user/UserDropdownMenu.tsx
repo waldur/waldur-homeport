@@ -7,20 +7,22 @@ import { useSelector } from 'react-redux';
 import { ngInjector, $state } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { PRIVATE_USER_TABS } from './constants';
+import { getPrivateUserTabs } from './constants';
 
 const getSidebarItems = () =>
-  PRIVATE_USER_TABS.filter(item =>
-    isFeatureVisible(item.feature),
-  ).map(item => ({ ...item, href: $state.href(item.state) }));
+  getPrivateUserTabs()
+    .filter(item => isFeatureVisible(item.feature))
+    .map(item => ({ ...item, href: $state.href(item.state) }));
 
 export const UserDropdownMenu = () => {
   const user = useSelector(getUser);
   const logout = () => ngInjector.get('authService').logout();
   const menuItems = React.useMemo(getSidebarItems, []);
+  if (!user) {
+    return null;
+  }
   return (
     <li className="nav-header">
       <Dropdown id="user-sidebar" className="profile-element">
@@ -47,5 +49,3 @@ export const UserDropdownMenu = () => {
     </li>
   );
 };
-
-export default connectAngularComponent(UserDropdownMenu);

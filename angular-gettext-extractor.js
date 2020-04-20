@@ -71,7 +71,7 @@ function walkJs(node, fn, parentComment) {
 
   for (var key in node) {
     var obj = node[key];
-    if (node && node.leadingComments) {
+    if (node.leadingComments) {
       parentComment = node;
     }
     if (typeof obj === 'object') {
@@ -206,7 +206,7 @@ var Extractor = (function() {
       item.msgctxt = context;
     }
 
-    if (plural && plural !== '') {
+    if (plural) {
       if (item.msgid_plural && item.msgid_plural !== plural) {
         throw new Error(
           'Incompatible plural definitions for ' +

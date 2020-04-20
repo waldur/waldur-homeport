@@ -1,37 +1,24 @@
-<div ng-controller="ProjectWorkspaceController">
-  <sidebar items="items" counters="counters"></sidebar>
+<project-sidebar></project-sidebar>
+<div id="page-wrapper" ng-class="$state.current.data.pageClass || 'white-bg'">
+  <cookies-consent></cookies-consent>
+  <nc-header ng-hide="$state.current.data.hideHeader"></nc-header>
   <div
-    id="page-wrapper"
-    ng-class="$state.current.data.pageClass || 'white-bg'"
+    class="row wrapper white-bg page-heading"
+    ng-hide="$state.current.data.hideBreadcrumbs"
   >
-    <cookies-consent></cookies-consent>
-    <nc-header ng-hide="$state.current.data.hideHeader"></nc-header>
-    <div
-      class="row wrapper white-bg page-heading"
-      ng-hide="$state.current.data.hideBreadcrumbs"
-    >
-      <div class="col-lg-6">
-        <h2 ng-if="$state.current.data.renderDocumentTitle">
-          {{ titleService.getTitle() }}
-        </h2>
-        <h2 ng-if="!$state.current.data.renderDocumentTitle">
-          {{ $state.current.data.pageTitle | translate }}
-        </h2>
-        <p ng-if="currentProject.description">
-          {{ currentProject.description }}
-        </p>
-        <breadcrumbs-container></breadcrumbs-container>
-      </div>
-      <div class="col-lg-6" ng-if="$state.current.name === 'project.details'">
-        <div class="title-action">
-          <extension-point id="project-dashboard-button"></extension-point>
-          <project-details-button
-            project="currentProject"
-          ></project-details-button>
-        </div>
-      </div>
+    <div class="col-lg-12">
+      <h2 ng-if="$state.current.data.renderDocumentTitle">
+        {{ titleService.getTitle() }}
+      </h2>
+      <h2 ng-if="!$state.current.data.renderDocumentTitle">
+        {{ $state.current.data.pageTitle | translate }}
+      </h2>
+      <p ng-if="currentProject.description">
+        {{ currentProject.description }}
+      </p>
+      <breadcrumbs-container></breadcrumbs-container>
     </div>
-    <div class="footer-indent m-l-sm" ng-if="currentProject" ui-view></div>
-    <app-footer></app-footer>
   </div>
+  <div class="footer-indent m-l-sm" ng-if="currentProject" ui-view></div>
+  <app-footer></app-footer>
 </div>

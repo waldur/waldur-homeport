@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const utils = require('./webpack.utils');
 
 const target = 'build.dll';
 
@@ -52,7 +51,6 @@ module.exports = {
       'angular-animate',
       'angular-cookies',
       'angular-loader',
-      'angular-gravatar',
       'angular-flash-alert',
       'angulartics',
       'angulartics-google-analytics',

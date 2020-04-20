@@ -224,26 +224,9 @@
       </div>
       <div class="form-group">
         <label class="col-sm-3 control-label">
-          <span translate>Service type</span>
-        </label>
-        <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.project}">
-          <ui-select ng-model="$ctrl.issue.scope">
-            <ui-select-match
-              placeholder="{{ 'Select service type...' | translate }}"
-            >
-              {{ $select.selected.display_name }}
-            </ui-select-match>
-            <ui-select-choices repeat="option in $ctrl.scopes">
-              {{ option.display_name }}
-            </ui-select-choices>
-          </ui-select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label">
           <span translate>Affected resource</span>
         </label>
-        <div class="col-sm-6" ng-class="{disabled: !$ctrl.issue.scope}">
+        <div class="col-sm-6">
           <ui-select ng-model="$ctrl.issue.resource">
             <ui-select-match
               placeholder="{{ 'Select affected resource...' | translate }}"

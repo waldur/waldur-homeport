@@ -1,17 +1,20 @@
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import issueCommentsService from './issue-comments-service';
-import { attachStateUtils } from './issue-navigation-service';
-import IssueNavigationService from './issue-navigation-service';
-import issuesWorkspace from './issues-workspace';
-import { issuesDashboard } from './issues-dashboard';
-import issuesActivityStream from './issues-activity-stream';
+import IssueNavigationService, {
+  attachStateUtils,
+} from './issue-navigation-service';
 import issuesHelpdesk from './issues-helpdesk';
+import issuesWorkspace from './issues-workspace';
+import { IssuesDashboard } from './IssuesDashboard';
+import { SupportSidebar } from './SupportSidebar';
 
 export default module => {
   module.run(attachStateUtils);
   module.service('issueCommentsService', issueCommentsService);
   module.service('IssueNavigationService', IssueNavigationService);
+  module.component('supportSidebar', connectAngularComponent(SupportSidebar));
   module.component('issuesWorkspace', issuesWorkspace);
-  module.component('issuesDashboard', issuesDashboard);
-  module.directive('issuesActivityStream', issuesActivityStream);
+  module.component('issuesDashboard', connectAngularComponent(IssuesDashboard));
   module.directive('issuesHelpdesk', issuesHelpdesk);
 };

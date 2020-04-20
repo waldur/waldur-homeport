@@ -15,8 +15,8 @@ import { ResourceState } from '../types';
 import { ResourceUsageButton } from '../usage/ResourceUsageButton';
 
 import { TABLE_PUBLIC_RESOURCE } from './constants';
+import { PublicResourceLink } from './PublicResourceLink';
 import { PublicResourcesListPlaceholder } from './PublicResourcesListPlaceholder';
-import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 
 interface ResourceFilter {
@@ -35,7 +35,7 @@ export const TableComponent = props => {
   const columns = [
     {
       title: translate('Name'),
-      render: ResourceNameField,
+      render: PublicResourceLink,
       orderField: 'name',
     },
     {

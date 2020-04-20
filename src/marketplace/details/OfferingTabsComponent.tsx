@@ -21,7 +21,7 @@ export const OfferingTabsComponent: React.FC<OfferingTabsComponentProps> = props
   return (
     <Tabs
       defaultActiveKey="tab-0"
-      id="tabs"
+      id="offering-tabs"
       className="m-t-lg offering-tabs"
       unmountOnExit={true}
     >

@@ -1,93 +1,92 @@
-const HELPDESK_ITEMS = [
+import { translate } from '@waldur/i18n';
+import { filterItems } from '@waldur/navigation/sidebar/utils';
+
+const getHelpdeskItems = () => [
   {
-    label: gettext('Helpdesk'),
+    label: translate('Helpdesk'),
     icon: 'fa-headphones',
     state: 'support.helpdesk',
   },
 ];
 
-const DASHBOARD_ITEMS = [
+const getDashboardItems = () => [
   {
-    label: gettext('Dashboard'),
+    label: translate('Dashboard'),
     icon: 'fa-th-large',
     state: 'support.dashboard',
   },
   {
-    label: gettext('Support requests'),
+    label: translate('Support requests'),
     icon: 'fa-list',
     state: 'support.list',
   },
 ];
 
-const REPORT_ITEMS = [
+const getReportItems = () => [
   {
-    label: gettext('Users'),
+    label: translate('Users'),
     icon: 'fa-users',
     state: 'support.users',
     feature: 'support.users',
   },
   {
-    label: gettext('Financial overview'),
+    label: translate('Financial overview'),
     icon: 'fa-university',
     state: 'support.organizations',
     feature: 'support.organizations',
   },
   {
-    label: gettext('Orders'),
+    label: translate('Orders'),
     icon: 'fa-files-o',
     state: 'marketplace-support-order-items',
-    feature: 'marketplace',
   },
   {
-    label: gettext('Resources'),
+    label: translate('Resources'),
     icon: 'fa-files-o',
     state: 'marketplace-support-resources',
-    feature: 'marketplace',
   },
   {
-    label: gettext('Plan capacity'),
+    label: translate('Plan capacity'),
     icon: 'fa-puzzle-piece',
     state: 'marketplace-support-plan-usages',
-    feature: 'marketplace',
   },
   {
-    label: gettext('Usage reports'),
+    label: translate('Usage reports'),
     icon: 'fa-puzzle-piece',
     state: 'marketplace-support-usage-reports',
-    feature: 'marketplace',
   },
   {
-    label: gettext('Resources usage'),
+    label: translate('Resources usage'),
     icon: 'fa-map',
     state: 'support.resources-treemap',
     feature: 'support.resources-treemap',
   },
   {
-    label: gettext('Shared providers'),
+    label: translate('Shared providers'),
     icon: 'fa-random',
     state: 'support.shared-providers',
     feature: 'support.shared-providers',
   },
   {
-    label: gettext('Usage overview'),
+    label: translate('Usage overview'),
     icon: 'fa-map',
     state: 'support.usage',
     feature: 'support.usage',
     children: [
       {
-        label: gettext('Flowmap'),
+        label: translate('Flowmap'),
         icon: 'fa-sitemap',
         state: 'support.flowmap',
         feature: 'support.flowmap',
       },
       {
-        label: gettext('Heatmap'),
+        label: translate('Heatmap'),
         icon: 'fa-fire',
         state: 'support.heatmap',
         feature: 'support.heatmap',
       },
       {
-        label: gettext('Sankey diagram'),
+        label: translate('Sankey diagram'),
         icon: 'fa-code-fork',
         state: 'support.sankey-diagram',
         feature: 'support.sankey-diagram',
@@ -95,7 +94,7 @@ const REPORT_ITEMS = [
     ],
   },
   {
-    label: gettext('VM type overview'),
+    label: translate('VM type overview'),
     icon: 'fa-desktop',
     state: 'support.vm-type-overview',
     feature: 'support.vm-type-overview',
@@ -152,12 +151,8 @@ export default class IssueNavigationService {
         if (!this.features.isVisible('support')) {
           return [];
         }
-        const dashboardItems = this.sidebarExtensionService.filterItems(
-          DASHBOARD_ITEMS,
-        );
-        const helpdeskItems = this.sidebarExtensionService.filterItems(
-          HELPDESK_ITEMS,
-        );
+        const dashboardItems = filterItems(getDashboardItems());
+        const helpdeskItems = filterItems(getHelpdeskItems());
         if (user.is_support && !user.is_staff) {
           return helpdeskItems;
         } else if (user.is_support && user.is_staff) {
@@ -180,10 +175,7 @@ export default class IssueNavigationService {
       )
       .then(items => {
         if (this.currentUser.is_support || this.currentUser.is_staff) {
-          return [
-            ...items,
-            ...this.sidebarExtensionService.filterItems(REPORT_ITEMS),
-          ];
+          return [...items, ...filterItems(getReportItems())];
         }
         return items;
       });
@@ -212,15 +204,15 @@ export default class IssueNavigationService {
   getBackItemLabel() {
     const prevWorkspace = this.prevWorkspace;
     if (prevWorkspace === 'project') {
-      return gettext('Back to project');
+      return translate('Back to project');
     } else if (
       prevWorkspace === 'organization' &&
       (this.currentStateService.getOwnerOrStaff() ||
         this.currentUser.is_support)
     ) {
-      return gettext('Back to organization');
+      return translate('Back to organization');
     } else if (prevWorkspace === 'user') {
-      return gettext('Back to personal dashboard');
+      return translate('Back to personal dashboard');
     }
   }
 }

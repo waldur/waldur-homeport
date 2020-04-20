@@ -6,7 +6,7 @@ import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
 import { createFetcher, Table, connectTable } from '@waldur/table-react';
 import { TableProps } from '@waldur/table-react/Table';
-import { Column, TableOptions } from '@waldur/table-react/types';
+import { Column, TableOptionsType } from '@waldur/table-react/types';
 import { renderFieldOrDash } from '@waldur/table-react/utils';
 
 const AbbreviationField = ({ row }) => (
@@ -66,7 +66,7 @@ const mapPropsToFilter = props => ({
   service_settings_uuid: props.provider_uuid,
 });
 
-const TableOptions: TableOptions = {
+const TableOptions: TableOptionsType = {
   table: 'SharedProviderCustomers',
   fetchData: createFetcher('openstack-shared-settings-customers'),
   exportRow,

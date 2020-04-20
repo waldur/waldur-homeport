@@ -7698,7 +7698,7 @@ msgid "Updating"
 msgstr ""
 
 #: src/resource/state/constants.js
-msgid "Updating floaating IPs"
+msgid "Updating floating IPs"
 msgstr ""
 
 #: src/resource/state/constants.js

@@ -4,6 +4,7 @@ import { Field, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { WysiwygEditor } from '@waldur/marketplace/offerings/create/WysiwygEditor';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { ArticleCodeField } from '../ArticleCodeField';
@@ -33,13 +34,7 @@ const PlanNameField = () => (
 );
 
 const PlanDescriptionField = () => (
-  <Field
-    name="description"
-    component="textarea"
-    rows="5"
-    maxLength="500"
-    className="form-control"
-  />
+  <Field name="description" component={WysiwygEditor} />
 );
 
 const enhance = compose(connectPlanComponents, withTranslation);

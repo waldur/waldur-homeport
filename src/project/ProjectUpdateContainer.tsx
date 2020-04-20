@@ -4,7 +4,6 @@ import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
@@ -52,5 +51,3 @@ const enhance = compose(
 );
 
 export const ProjectUpdateContainer = enhance(ProjectUpdateComponent);
-
-export default connectAngularComponent(ProjectUpdateContainer, ['project']);

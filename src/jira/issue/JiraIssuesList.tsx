@@ -5,7 +5,6 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { JiraIssue } from '@waldur/jira/issue/types';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { formatLongText } from '@waldur/table-react/utils';
 
@@ -103,6 +102,4 @@ const TableOptions = {
   ],
 };
 
-const JiraIssuesList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(JiraIssuesList, ['resource']);
+export const JiraIssuesList = connectTable(TableOptions)(TableComponent);

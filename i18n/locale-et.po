@@ -8198,7 +8198,7 @@ msgid "Updating"
 msgstr "Uuendab"
 
 #: src/resource/state/constants.js
-msgid "Updating floaating IPs"
+msgid "Updating floating IPs"
 msgstr "Uuendan liikuivad IP-sid"
 
 #: src/resource/state/constants.js

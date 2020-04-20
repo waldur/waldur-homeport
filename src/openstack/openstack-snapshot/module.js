@@ -1,27 +1,9 @@
-import openstackSnapshotsService from './openstack-snapshots-service';
-import openstackSnapshotsList from './openstack-snapshots-list';
-import openstackSnapshotsNestedList from './openstack-snapshots-nested-list';
-import restoredVolumesList from './openstack-snapshot-restored-volumes-list';
-import { OpenStackSnapshotSummary } from './OpenStackSnapshotSummary';
-import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { latinName } from '@waldur/resource/actions/constants';
+import * as ResourceSummary from '@waldur/resource/summary/registry';
+import { getEventsTab } from '@waldur/resource/tabs/constants';
 
-export default module => {
-  ResourceSummary.register(
-    'OpenStackTenant.Snapshot',
-    OpenStackSnapshotSummary,
-  );
-  module.config(tabsConfig);
-  module.service('openstackSnapshotsService', openstackSnapshotsService);
-  module.component('openstackSnapshotsList', openstackSnapshotsList);
-  module.component(
-    'openstackSnapshotsNestedList',
-    openstackSnapshotsNestedList,
-  );
-  module.component('restoredVolumesList', restoredVolumesList);
-  module.config(actionConfig);
-  module.config(stateConfig);
-};
+import { OpenStackSnapshotSummary } from './OpenStackSnapshotSummary';
+import { SnapshotRestoredVolumesList } from './SnapshotRestoredVolumesList';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
@@ -62,14 +44,23 @@ function stateConfig(ResourceStateConfigurationProvider) {
 }
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
-  ResourceTabsConfigurationProvider.register('OpenStackTenant.Snapshot', {
-    order: ['restored', ...DEFAULT_RESOURCE_TABS.order],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
-      restored: {
-        heading: gettext('Restored volumes'),
-        component: 'restoredVolumesList',
-      },
-    }),
-  });
+function tabsConfig(ResourceTabsConfigurationProvider) {
+  ResourceTabsConfigurationProvider.register('OpenStackTenant.Snapshot', () => [
+    {
+      key: 'restored',
+      title: translate('Restored volumes'),
+      component: SnapshotRestoredVolumesList,
+    },
+    getEventsTab(),
+  ]);
 }
+
+export default module => {
+  ResourceSummary.register(
+    'OpenStackTenant.Snapshot',
+    OpenStackSnapshotSummary,
+  );
+  module.config(tabsConfig);
+  module.config(actionConfig);
+  module.config(stateConfig);
+};

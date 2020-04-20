@@ -21,10 +21,11 @@ export const AttributeFilterItem: React.FC<AttributeFilterItemProps> = props => 
       ) : (
         <CollapsibleItem
           title={props.title}
-          content={props.children}
           selected={props.selected}
           counter={props.counter}
-        />
+        >
+          {props.children}
+        </CollapsibleItem>
       )
     }
   </MediaQuery>

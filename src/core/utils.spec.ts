@@ -6,6 +6,7 @@ import {
   pick,
   toKeyValue,
   parseQueryString,
+  truncate,
 } from './utils';
 
 describe('formatFilesize', () => {
@@ -97,5 +98,13 @@ describe('parseQueryString', () => {
   it('parses query string', () => {
     const expected = { page: '10', page_size: '50' };
     expect(parseQueryString('page=10&page_size=50')).toEqual(expected);
+  });
+});
+
+describe('truncate', () => {
+  it('truncate long string', () => {
+    expect(truncate('Academy of social and political sciences')).toEqual(
+      'Academy of soc...ical sciences',
+    );
   });
 });

@@ -1,25 +1,15 @@
-import volumeExtendDialog from './volume-extend';
-import snapshotCreateDialog from './snapshot-create';
-import openstackVolumesService from './openstack-volumes-service';
-import openstackInstanceVolumes from './openstack-instance-volumes';
-import openstackVolumeSnapshots from './openstack-volume-snapshots';
-import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
+import { translate } from '@waldur/i18n';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
-import './marketplace';
+import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
+
+import { SnapshotSchedulesList } from '../openstack-snapshot-schedule/SnapshotSchedulesList';
+
 import actions from './actions';
-
-export default module => {
-  ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);
-  module.service('openstackVolumesService', openstackVolumesService);
-  module.directive('volumeExtendDialog', volumeExtendDialog);
-  module.directive('snapshotCreateDialog', snapshotCreateDialog);
-  module.component('openstackInstanceVolumes', openstackInstanceVolumes);
-  module.component('openstackVolumeSnapshots', openstackVolumeSnapshots);
-
-  module.config(actionsConfig);
-  module.config(stateConfig);
-  module.config(tabsConfig);
-};
+import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
+import snapshotCreateDialog from './snapshot-create';
+import volumeExtendDialog from './volume-extend';
+import './marketplace';
+import { VolumeSnapshotsList } from './VolumeSnapshotsList';
 
 // @ngInject
 function actionsConfig(ActionConfigurationProvider) {
@@ -34,18 +24,27 @@ function stateConfig(ResourceStateConfigurationProvider) {
 }
 
 // @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider, DEFAULT_RESOURCE_TABS) {
-  ResourceTabsConfigurationProvider.register('OpenStackTenant.Volume', {
-    order: ['snapshots', 'snapshot_schedules', ...DEFAULT_RESOURCE_TABS.order],
-    options: angular.merge({}, DEFAULT_RESOURCE_TABS.options, {
-      snapshots: {
-        heading: gettext('Snapshots'),
-        component: 'openstackVolumeSnapshots',
-      },
-      snapshot_schedules: {
-        heading: gettext('Snapshot schedules'),
-        component: 'openstackSnapshotSchedulesList',
-      },
-    }),
-  });
+function tabsConfig(ResourceTabsConfigurationProvider) {
+  ResourceTabsConfigurationProvider.register('OpenStackTenant.Volume', () => [
+    {
+      key: 'snapshots',
+      title: translate('Snapshots'),
+      component: VolumeSnapshotsList,
+    },
+    {
+      key: 'snapshot_schedules',
+      title: translate('Snapshot schedules'),
+      component: SnapshotSchedulesList,
+    },
+    ...getDefaultResourceTabs(),
+  ]);
 }
+
+export default module => {
+  ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);
+  module.directive('volumeExtendDialog', volumeExtendDialog);
+  module.directive('snapshotCreateDialog', snapshotCreateDialog);
+  module.config(actionsConfig);
+  module.config(stateConfig);
+  module.config(tabsConfig);
+};

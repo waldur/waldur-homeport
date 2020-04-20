@@ -22,7 +22,13 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
       );
     }
     if (props.formData.limits) {
-      request.limits = limitSerializer(props.formData.limits);
+      if (props.formData.plan) {
+        request.limits = { ...props.formData.plan.quotas };
+      }
+      request.limits = {
+        ...request.limits,
+        ...limitSerializer(props.formData.limits),
+      };
     }
     const project = props.project || props.formData.project;
     if (project) {

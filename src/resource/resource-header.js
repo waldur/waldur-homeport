@@ -16,7 +16,6 @@ const resourceHeader = {
       ENV,
       features,
       resourcesService,
-      resourceUtils,
       ResourceBreadcrumbsService,
       BreadcrumbsService,
       ncUtilsFlash,
@@ -29,7 +28,6 @@ const resourceHeader = {
       this.ENV = ENV;
       this.features = features;
       this.resourcesService = resourcesService;
-      this.resourceUtils = resourceUtils;
       this.ResourceBreadcrumbsService = ResourceBreadcrumbsService;
       this.BreadcrumbsService = BreadcrumbsService;
       this.ncUtilsFlash = ncUtilsFlash;

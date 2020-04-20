@@ -3,8 +3,8 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Panel from 'react-bootstrap/lib/Panel';
 import * as PanelGroup from 'react-bootstrap/lib/PanelGroup';
 import * as Row from 'react-bootstrap/lib/Row';
+import useInterval from 'react-use/lib/useInterval';
 
-import { useInterval } from '@waldur/core/useInterval';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getDetailsComponent } from '@waldur/marketplace/common/registry';

@@ -1,9 +1,12 @@
-import breadcrumbs from './breadcrumbs';
-import breadcrumbsContainer from './breadcrumbs-container';
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import BreadcrumbsService from './breadcrumbs-service';
+import { BreadcrumbsContainer } from './BreadcrumbsContainer';
 
 export default module => {
-  module.component('breadcrumbs', breadcrumbs);
-  module.component('breadcrumbsContainer', breadcrumbsContainer);
+  module.component(
+    'breadcrumbsContainer',
+    connectAngularComponent(BreadcrumbsContainer),
+  );
   module.service('BreadcrumbsService', BreadcrumbsService);
 };

@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { $sanitize, ENV } from '@waldur/core/services';
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { ENV } from '@waldur/core/services';
 import eventsRegistry from '@waldur/events/registry';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
@@ -9,11 +10,7 @@ import EventDetailsButton from './EventDetailsButton';
 import EventTypesButton from './EventTypesButton';
 
 const EventMessageField = ({ row }) => (
-  <span
-    dangerouslySetInnerHTML={{
-      __html: $sanitize(eventsRegistry.formatEvent(row)),
-    }}
-  />
+  <FormattedHtml html={eventsRegistry.formatEvent(row)} />
 );
 
 const EventDateField = ({ row }) => <span>{formatDateTime(row.created)}</span>;

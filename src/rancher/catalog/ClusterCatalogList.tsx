@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 import { CatalogCreateButton } from './CatalogCreateButton';
@@ -35,7 +34,12 @@ const TableComponent = props => {
       },
       {
         title: translate('Actions'),
-        render: ({ row }) => <CatalogDeleteButton catalog={row} />,
+        render: ({ row }) =>
+          row.scope_type === 'cluster' ? (
+            <CatalogDeleteButton catalog={row} />
+          ) : (
+            'N/A'
+          ),
       },
     ],
     [translate, props.resource],
@@ -57,10 +61,7 @@ const TableOptions = {
   exportRow: row => [row.name, row.description, row.catalog_url],
   mapPropsToFilter: props => ({
     cluster_uuid: props.resource.uuid,
-    scope_type: 'cluster',
   }),
 };
 
-const ClusterCatalogList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(ClusterCatalogList, ['resource']);
+export const ClusterCatalogList = connectTable(TableOptions)(TableComponent);

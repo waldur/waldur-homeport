@@ -3,7 +3,6 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import { Panel } from '@waldur/core/Panel';
-import { loadCategories } from '@waldur/dashboard/api';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { translate } from '@waldur/i18n';
@@ -50,10 +49,7 @@ export const ProjectDashboard = (props: ProjectDashboardProps) =>
             <ProjectResourcesList />
           </Panel>
         )}
-        <CategoryResourcesList
-          loader={(project: Project) => loadCategories('project', project)}
-          scope={props.project}
-        />
+        <CategoryResourcesList scopeType="project" scope={props.project} />
       </div>
     </>
   ) : null;

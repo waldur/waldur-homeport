@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import BooleanField from '@waldur/table-react/BooleanField';
+import { BooleanField } from '@waldur/table-react/BooleanField';
 import { Table, connectTable, createFetcher } from '@waldur/table-react/index';
 
 import { UserActivateButton } from './UserActivateButton';

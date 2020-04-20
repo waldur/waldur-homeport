@@ -4,5 +4,5 @@ import vmModule from './vm/module';
 
 export default module => {
   sqlModule(module);
-  vmModule(module);
+  vmModule();
 };

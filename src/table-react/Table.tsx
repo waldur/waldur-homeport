@@ -133,10 +133,6 @@ class Table extends React.Component<TableProps> {
     }
   }
 
-  componentWillUnmount() {
-    this.props.resetPagination();
-  }
-
   componentDidUpdate(prevProps: TableProps) {
     if (
       prevProps.pagination.currentPage !== this.props.pagination.currentPage

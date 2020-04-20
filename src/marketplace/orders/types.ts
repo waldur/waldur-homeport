@@ -44,6 +44,8 @@ export interface OrderItemResponse {
   plan_description?: string;
   plan_unit?: BillingPeriod;
   project: string;
+  project_name: string;
+  customer_name?: string;
   customer_uuid?: string;
   category_title?: string;
   category_uuid?: string;
@@ -51,6 +53,7 @@ export interface OrderItemResponse {
   error_message?: string;
   limits: Record<string, number>;
   current_usages?: Record<string, number>;
+  scope?: string;
 }
 
 export interface OrderItemDetailsType extends OrderItemResponse {

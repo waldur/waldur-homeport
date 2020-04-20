@@ -1,4 +1,3 @@
-// Based on https://github.com/coatue-oss/angular2react
 import { IScope } from 'angular';
 import kebabCase from 'lodash.kebabcase';
 import * as React from 'react';
@@ -9,103 +8,65 @@ interface Scope<Props> extends IScope {
   props: Props;
 }
 
-interface State<Props> {
-  didInitialCompile: boolean;
-  scope?: Scope<Props>;
-}
-
-/**
- * Wraps an Angular component in React. Returns a new React component.
- *
- * Usage:
- *
- *   ```ts
- *   const Bar = { bindings: {...}, template: '...', ... }
- *
- *   angular
- *     .module('foo', [])
- *     .component('bar', Bar)
- *
- *   type Props = {
- *     onChange(value: number): void
- *   }
- *
- *   const Bar = angular2react<Props>('bar', Bar, $compile)
- *
- *   <Bar onChange={...} />
- *   ```
- */
 export function angular2react<Props extends object>(
   componentName: string,
-  componentBindings?: Record<string, string>,
-): React.ComponentClass<Props> {
-  return class extends React.Component<Props, State<Props>> {
-    state: State<Props> = {
-      didInitialCompile: false,
-    };
+  componentBindings?: string[],
+): React.FC<Props> {
+  const Wrapper: React.FC<Props> = props => {
+    const [didInitialCompile, setDidInitialCompile] = React.useState(false);
 
-    static displayName = componentName;
+    // Initialize AngularJS component scope when ReactJS component is mounted
+    const [scope, setScope] = React.useState<Scope<Props>>(() =>
+      Object.assign($rootScope.$new(true), { props }),
+    );
 
-    UNSAFE_componentWillMount() {
-      this.setState({
-        scope: Object.assign($rootScope.$new(true), {
-          props: this.props,
-        }),
-      });
-    }
+    const destroyScope = React.useCallback(() => {
+      return () => {
+        scope.$destroy();
+      };
+    }, [scope]);
 
-    componentWillUnmount() {
-      if (!this.state.scope) {
-        return;
-      }
-      this.state.scope.$destroy();
-    }
+    // Destroy AngularJS component scope when ReactJS component is unmounted
+    React.useEffect(destroyScope, []);
 
-    shouldComponentUpdate(): boolean {
-      return false;
-    }
+    const updateProps = React.useCallback(() => {
+      setScope(Object.assign(scope, { props }));
+      try {
+        scope.$digest();
+      } catch (e) {}
+    }, [scope, props]);
 
-    // called only once to set up DOM, after componentWillMount
-    render() {
-      const bindings: { [key: string]: string } = {};
+    // Update AngularJS component props when ReactJS props are updated
+    React.useEffect(updateProps, [props]);
+
+    // Map ReactJS props to AngularJS component props
+    const bindings = React.useMemo(() => {
+      const result = {};
       if (componentBindings) {
-        for (const binding in componentBindings) {
-          bindings[kebabCase(binding)] = `props.${binding}`;
+        for (const binding of componentBindings) {
+          result[kebabCase(binding)] = `props.${binding}`;
         }
       }
-      return React.createElement(kebabCase(componentName), {
-        ...bindings,
-        ref: this.compile.bind(this),
-      });
-    }
+      return result;
+    }, []);
 
-    // makes angular aware of changed props
-    // if we're not inside a digest cycle, kicks off a digest cycle before setting.
-    UNSAFE_componentWillReceiveProps(props: Props) {
-      if (!this.state.scope) {
-        return;
-      }
-      this.setState({ scope: { ...this.state.scope, props } });
-      this.digest();
-    }
-
-    private compile(element: HTMLElement) {
-      if (this.state.didInitialCompile || !this.state.scope) {
+    const compile = (element: HTMLElement) => {
+      if (didInitialCompile) {
         return;
       }
 
-      $compile(element)(this.state.scope);
-      this.digest();
-      this.setState({ didInitialCompile: true });
-    }
-
-    private digest() {
-      if (!this.state.scope) {
-        return;
-      }
+      $compile(element)(scope);
       try {
-        this.state.scope.$digest();
+        scope.$digest();
       } catch (e) {}
-    }
+      setDidInitialCompile(true);
+    };
+
+    return React.createElement(kebabCase(componentName), {
+      ...bindings,
+      ref: compile,
+    });
   };
+  Wrapper.displayName = componentName;
+  return Wrapper;
 }

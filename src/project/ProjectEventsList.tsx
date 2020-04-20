@@ -13,8 +13,10 @@ export const PureProjectEvents = getEventsList({
   mapPropsToFilter: props => {
     const filter = {
       ...props.userFilter,
-      scope: props.project.url,
     };
+    if (props.project) {
+      filter.scope = props.project.url;
+    }
     if (props.userFilter && isEmpty(props.userFilter.feature)) {
       filter.feature = ['projects', 'resources'];
     }

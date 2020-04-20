@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import useAsync from 'react-use/lib/useAsync';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
@@ -31,55 +31,49 @@ interface DraftModule {
   EditorState: any;
 }
 
-export const WysiwygEditor = props => {
-  const [editorState, setEditorState] = useState();
-  const [loading, setLoading] = useState(true);
-  const [loaded, setLoaded] = useState(false);
-  const [erred, setErred] = useState(false);
+const loadModule = () =>
+  import(/* webpackChunkName: "draft-js" */ './draftjs-module');
 
-  const moduleRef = React.useRef<DraftModule>();
+export const WysiwygEditor = props => {
+  const [editorState, setEditorState] = React.useState();
+
   const contentRef = React.useRef();
 
-  useEffect(() => {
-    async function loadAll() {
-      try {
-        moduleRef.current = await import(
-          /* webpackChunkName: "draft-js" */ './draftjs-module'
-        );
+  const { loading, error, value: moduleValue } = useAsync<DraftModule>(
+    loadModule,
+  );
 
-        const contentBlock = moduleRef.current.htmlToDraft(props.input.value);
-        if (contentBlock) {
-          const contentState = moduleRef.current.ContentState.createFromBlockArray(
-            contentBlock.contentBlocks,
-          );
-          const editorState = moduleRef.current.EditorState.createWithContent(
-            contentState,
-          );
-          setEditorState(editorState);
-        }
-        setLoading(false);
-        setLoaded(true);
-      } catch (e) {
-        setErred(e);
-        setLoading(false);
-        setLoaded(false);
+  React.useEffect(() => {
+    if (!moduleValue) {
+      return;
+    }
+    const contentBlock = moduleValue.htmlToDraft(props.input.value);
+    if (contentBlock) {
+      const contentState = moduleValue.ContentState.createFromBlockArray(
+        contentBlock.contentBlocks,
+      );
+      const editorState = moduleValue.EditorState.createWithContent(
+        contentState,
+      );
+      setEditorState(editorState);
+    }
+  }, [moduleValue]);
+
+  const onEditorStateChange = React.useCallback(
+    editorState => {
+      const htmlValue = moduleValue.draftToHtml(
+        moduleValue.convertToRaw(editorState.getCurrentContent()),
+      );
+      if (contentRef.current != htmlValue) {
+        props.input.onChange(htmlValue);
+        contentRef.current = htmlValue;
       }
-    }
-    loadAll();
-  }, []);
+      setEditorState(editorState);
+    },
+    [moduleValue, props.input],
+  );
 
-  const onEditorStateChange = React.useCallback(editorState => {
-    const htmlValue = moduleRef.current.draftToHtml(
-      moduleRef.current.convertToRaw(editorState.getCurrentContent()),
-    );
-    if (contentRef.current != htmlValue) {
-      props.input.onChange(htmlValue);
-      contentRef.current = htmlValue;
-    }
-    setEditorState(editorState);
-  }, []);
-
-  if (erred) {
+  if (error) {
     return <>{translate('Unable to load editor')}</>;
   }
 
@@ -87,10 +81,9 @@ export const WysiwygEditor = props => {
     return <LoadingSpinner />;
   }
 
-  if (loaded) {
-    const Editor = moduleRef.current.Editor;
+  if (moduleValue) {
     return (
-      <Editor
+      <moduleValue.Editor
         toolbar={{ options: TOOLBAR_OPTIONS }}
         editorState={editorState}
         wrapperClassName="demo-wrapper"

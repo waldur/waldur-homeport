@@ -42,9 +42,7 @@ const renderLogo = props => {
   }
 };
 
-export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = (
-  props: CustomerEditDetailsProps,
-) => {
+export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = props => {
   const { canEdit } = props;
   return (
     <div className="customer-edit-details">
@@ -67,12 +65,10 @@ export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = (
                   icon="fa fa-trash"
                 />
               )}
-              {canEdit && (
-                <CustomerEditDetailsForm
-                  hasChosenImage={hasChosenImage(props)}
-                  onSubmit={props.uploadLogo}
-                />
-              )}
+              <CustomerEditDetailsForm
+                hasChosenImage={hasChosenImage(props)}
+                onSubmit={props.uploadLogo}
+              />
             </div>
           </Col>
         )}

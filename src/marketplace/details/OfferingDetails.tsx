@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { getCheckoutSummaryComponent } from '@waldur/marketplace/common/registry';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
@@ -25,7 +26,7 @@ export const OfferingDetails = (props: OfferingDetailsProps) => {
     <>
       {props.offering.description && (
         <div className="bs-callout bs-callout-success">
-          {props.offering.description}
+          <FormattedHtml html={props.offering.description} />
         </div>
       )}
       <Row>
