@@ -67,8 +67,6 @@ module.exports = {
       'angular-ui-bootstrap',
       'angular-bind-html-compile-ci-dev',
       'angular-intro.js',
-
-      './src/shims/slimscroll',
     ],
   },
   output: {
