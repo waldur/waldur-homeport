@@ -45,22 +45,23 @@ const BookingModal = ({
 
   return (
     <Modal show={isOpen} onHide={toggle}>
-      <Modal.Header>
-        <h2 className="col-sm-push-2 col-sm-9">
+      <Modal.Header style={{ backgroundColor: '#19b394' }}>
+        <Modal.Title style={{ color: 'white', paddingLeft: 12 }}>
           {event.extendedProps.type === ('availability' || 'Availability')
             ? translate('Edit an availability')
             : translate('Edit booking event')}
-        </h2>
-        <button
-          type="button"
-          className="close"
-          aria-label="Close"
-          onClick={toggle}
-        >
-          <span aria-hidden="true" style={{ padding: '1rem' }}>
-            &times;
-          </span>
-        </button>
+          <button
+            type="button"
+            className="close"
+            aria-label="Close"
+            onClick={toggle}
+            style={{ color: 'white', fontSize: 22 }}
+          >
+            <span aria-hidden="true" style={{ padding: '1rem' }}>
+              &times;
+            </span>
+          </button>
+        </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -125,10 +126,10 @@ const BookingModal = ({
               marginTop: 30,
             }}
           >
-            <Button bsStyle="danger btn-outline" onClick={handleDelete}>
+            <Button bsStyle="delete" onClick={handleDelete}>
               {translate('Delete')}
             </Button>
-            <Button bsStyle="primary btn-outline" onClick={handleSubmit}>
+            <Button bsStyle="primary" onClick={handleSubmit}>
               {translate('Save')}
             </Button>
           </ButtonGroup>
