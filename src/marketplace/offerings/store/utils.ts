@@ -157,7 +157,7 @@ export const formatOfferingRequest = (
     result.attributes = {
       ...result.attributes,
       schedules: request.schedules.map(
-        pick(['start', 'end', 'title', 'type', 'id']),
+        pick(['start', 'end', 'title', 'id', 'allDay', 'extendedProps']),
       ),
     };
   }
