@@ -34,6 +34,7 @@ export interface Customer {
   owners: User[];
   projects?: Project[];
   is_service_provider?: boolean;
+  abbreviation?: string;
 }
 
 interface Permission {

@@ -29,6 +29,22 @@ export const isSupport = (state: OuterState): boolean =>
 export const isStaffOrSupport = (state: OuterState): boolean =>
   isStaff(state) || isSupport(state);
 
+const checkIsOwner = (customer, user) => {
+  for (let i = 0; i < customer.owners.length; i++) {
+    if (user && user.uuid === customer.owners[i].uuid) {
+      return true;
+    }
+  }
+  return false;
+};
+
+export const checkCustomerUser = (customer, user) => {
+  if (user && user.is_staff) {
+    return true;
+  }
+  return customer && checkIsOwner(customer, user);
+};
+
 export const getOwner = createSelector(
   getUser,
   getCustomer,

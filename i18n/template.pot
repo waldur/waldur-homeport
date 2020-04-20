@@ -232,7 +232,7 @@ msgstr ""
 msgid "Add member"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 msgid "Add new"
 msgstr ""
 
@@ -240,11 +240,11 @@ msgstr ""
 msgid "Add new offering"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Add new organization"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "Add new project"
 msgstr ""
 
@@ -852,7 +852,6 @@ msgstr ""
 #: src/issues/create/issue-create-dialog.html
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
-#: src/navigation/workspace/select-workspace-dialog.html
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
@@ -2158,11 +2157,11 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 msgid "Filter organizations"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "Filter projects"
 msgstr ""
 
@@ -2348,7 +2347,7 @@ msgstr ""
 msgid "Go to marketplace"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
 msgid "Go to my profile"
 msgstr ""
 
@@ -4007,9 +4006,12 @@ msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
 #: src/customer/CustomerList.tsx
-#: src/navigation/workspace/select-workspace-dialog.html
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"
+msgstr ""
+
+#: src/navigation/workspace/OrganizationsPanel.tsx
+msgid "Organizations ({count})"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -4641,9 +4643,12 @@ msgstr ""
 
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
-#: src/navigation/workspace/select-workspace-dialog.html
 #: src/rancher/cluster/tabs.js
 msgid "Projects"
+msgstr ""
+
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "Projects ({count})"
 msgstr ""
 
 #: src/customer/team/add-team-member.html
@@ -5560,7 +5565,8 @@ msgstr ""
 #: src/form-react/AppstoreListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "Select"
 msgstr ""
 
@@ -5714,7 +5720,7 @@ msgstr ""
 msgid "Select user..."
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/navigation/workspace/select-workspace-toggle.html
 msgid "Select workspace"
 msgstr ""
@@ -5774,7 +5780,7 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Service provider"
@@ -6501,7 +6507,7 @@ msgstr ""
 msgid "There are no offerings in marketplace yet."
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 msgid "There are no organizations matching filter."
 msgstr ""
 
@@ -6509,7 +6515,11 @@ msgstr ""
 msgid "There are no other plans available."
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "There are no projects matching filter."
+msgstr ""
+
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
 msgstr ""
 
@@ -6944,6 +6954,7 @@ msgstr ""
 msgid "Unable to load compliance overview."
 msgstr ""
 
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Unable to load data"
 msgstr ""
@@ -7818,8 +7829,8 @@ msgstr ""
 msgid "You did not enter a field."
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
-msgid "You do not belong to any organization yet."
+#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
+msgid "You do not belong to any organization yet"
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
@@ -8045,7 +8056,7 @@ msgstr ""
 msgid "order items"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 msgid "organization"
 msgstr ""
 
