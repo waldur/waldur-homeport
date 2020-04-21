@@ -4,21 +4,16 @@ import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsB
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { OpenStackInstanceTenantButton } from '@waldur/openstack/openstack-instance/OpenStackInstanceTenantButton';
-import { angular2react } from '@waldur/shims/angular2react';
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { ActionButtonResource } from './actions/ActionButtonResource';
 import * as registry from './resource-configuration';
 import { ResourceRefreshButton } from './ResourceRefreshButton';
 import { ResourceSummary } from './summary/ResourceSummary';
 import { ResourceTabs } from './tabs/ResourceTabs';
 import { formatResourceType } from './utils';
 
-const ActionButtonResource = angular2react<any>('actionButtonResource', [
-  'buttonModel',
-  'buttonController',
-]);
-
-export const ResourceDetails = ({ resource, controller }) => {
+export const ResourceDetails = ({ resource }) => {
   const [header, setHeader] = React.useState();
 
   React.useEffect(() => {
@@ -40,10 +35,7 @@ export const ResourceDetails = ({ resource, controller }) => {
         <div className="row m-b-md">
           <div className="col-lg-12">
             <div className="pull-right">
-              <ActionButtonResource
-                buttonModel={resource}
-                buttonController={controller}
-              />
+              <ActionButtonResource url={resource.url} />
               <ResourceRefreshButton />
               <OpenStackInstanceTenantButton resource={resource} />
               {resource.marketplace_offering_uuid && (

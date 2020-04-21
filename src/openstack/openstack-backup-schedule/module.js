@@ -1,12 +1,10 @@
 import { translate } from '@waldur/i18n';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
-import { getEventsTab } from '@waldur/resource/tabs/constants';
-
-import { BackupsList } from '../openstack-backup/BackupsList';
 
 import openstackBackupScheduleWarning from './BackupScheduleWarning';
 import breadcrumbsConfig from './breadcrumbs';
 import { OpenStackBackupScheduleSummary } from './OpenStackBackupScheduleSummary';
+import './tabs';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
@@ -42,21 +40,6 @@ function stateConfig(ResourceStateConfigurationProvider) {
   );
 }
 
-// @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider) {
-  ResourceTabsConfigurationProvider.register(
-    'OpenStackTenant.BackupSchedule',
-    () => [
-      {
-        key: 'backups',
-        title: translate('Backups'),
-        component: BackupsList,
-      },
-      getEventsTab(),
-    ],
-  );
-}
-
 export default module => {
   ResourceSummary.register(
     'OpenStackTenant.BackupSchedule',
@@ -67,7 +50,6 @@ export default module => {
     openstackBackupScheduleWarning,
   );
   module.config(actionConfig);
-  module.config(tabsConfig);
   module.config(stateConfig);
   module.run(breadcrumbsConfig);
 };

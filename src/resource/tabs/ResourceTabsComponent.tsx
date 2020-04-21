@@ -3,7 +3,17 @@ import * as PanelBody from 'react-bootstrap/lib/PanelBody';
 import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
-export const ResourceTabsComponent = ({ tabs, activeKey, resource }) => (
+import { ResourceTab } from './types';
+
+export const ResourceTabsComponent = ({
+  tabs,
+  activeKey,
+  resource,
+}: {
+  tabs: ResourceTab[];
+  activeKey?: string;
+  resource: any;
+}) => (
   <Tabs
     id="ResourceTabsComponent"
     defaultActiveKey={activeKey}

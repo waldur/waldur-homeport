@@ -64,7 +64,6 @@ const appModule = angular.module('waldur', [
   'ngSanitize',
   'angular-cron-jobs',
   'ui.bootstrap',
-  'ui.slimscroll',
   'angular-bind-html-compile',
   'angular-intro',
 ]);
