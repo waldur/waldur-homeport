@@ -8,6 +8,7 @@ import { ResourceActionComponent } from './ResourceActionComponent';
 interface ActionButtonResourceProps {
   url: string;
   disabled?: boolean;
+  controller?: any;
 }
 
 async function loadActions(url) {
@@ -58,7 +59,7 @@ export class ActionButtonResource extends React.Component<
   };
 
   triggerAction = (name: string, action: object) => {
-    const controller = {
+    const controller = this.props.controller || {
       handleActionException: () => undefined,
       reInitResource: () => undefined,
     };

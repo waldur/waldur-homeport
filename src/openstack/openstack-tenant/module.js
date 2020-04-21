@@ -5,11 +5,10 @@ import appstoreFieldSelectOpenstackTenant from './appstore-field-select-openstac
 import filtersModule from './filters';
 import openstackTenantsService from './openstack-tenants-service';
 import { OpenStackTenantSummary } from './OpenStackTenantSummary';
-import tabsConfig from './tabs';
+import './tabs';
 
 export default module => {
   ResourceSummary.register('OpenStack.Tenant', OpenStackTenantSummary);
-  module.config(tabsConfig);
   module.service('openstackTenantsService', openstackTenantsService);
   module.component(
     'appstoreFieldSelectOpenstackTenant',

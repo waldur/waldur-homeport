@@ -51,7 +51,6 @@ module.exports = {
       'angular-animate',
       'angular-cookies',
       'angular-loader',
-      'angular-gravatar',
       'angular-flash-alert',
       'angulartics',
       'angulartics-google-analytics',
@@ -68,8 +67,6 @@ module.exports = {
       'angular-ui-bootstrap',
       'angular-bind-html-compile-ci-dev',
       'angular-intro.js',
-
-      './src/shims/slimscroll',
     ],
   },
   output: {

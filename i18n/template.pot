@@ -176,7 +176,7 @@ msgstr ""
 msgid "Active user will be able to login into the portal."
 msgstr ""
 
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "Activity stream"
 msgstr ""
 
@@ -210,7 +210,6 @@ msgid "Add component"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-#: src/openstack/openstack-instance/openstack-instance-data-volume.html
 #: src/rancher/cluster/create/DataVolumeAddButton.tsx
 msgid "Add data volume"
 msgstr ""
@@ -232,7 +231,7 @@ msgstr ""
 msgid "Add member"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 msgid "Add new"
 msgstr ""
 
@@ -240,11 +239,11 @@ msgstr ""
 msgid "Add new offering"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Add new organization"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "Add new project"
 msgstr ""
 
@@ -453,7 +452,7 @@ msgstr ""
 msgid "Application has been created."
 msgstr ""
 
-#: src/rancher/cluster/tabs.js
+#: src/rancher/cluster/tabs.ts
 msgid "Application templates"
 msgstr ""
 
@@ -568,7 +567,7 @@ msgid "Attributes filter"
 msgstr ""
 
 #: src/offering/OfferingTabs.tsx
-#: src/resource/tabs/constants.js
+#: src/resource/tabs/constants.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr ""
@@ -706,13 +705,13 @@ msgid "Backup schedule has been updated"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/breadcrumbs.js
-#: src/openstack/openstack-instance/module.js
+#: src/openstack/openstack-instance/tabs.ts
 msgid "Backup schedules"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/module.js
+#: src/openstack/openstack-backup-schedule/tabs.ts
 #: src/openstack/openstack-backup/breadcrumbs.js
-#: src/openstack/openstack-instance/module.js
+#: src/openstack/openstack-instance/tabs.ts
 msgid "Backups"
 msgstr ""
 
@@ -852,7 +851,6 @@ msgstr ""
 #: src/issues/create/issue-create-dialog.html
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
-#: src/navigation/workspace/select-workspace-dialog.html
 #: src/openstack/openstack-volume/snapshot-create.html
 #: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
@@ -905,7 +903,7 @@ msgstr ""
 msgid "Catalog has been deleted."
 msgstr ""
 
-#: src/rancher/cluster/tabs.js
+#: src/rancher/cluster/tabs.ts
 msgid "Catalogues"
 msgstr ""
 
@@ -1486,7 +1484,6 @@ msgid "Data volume should have at least {size} GB."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-#: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Data volume size:"
 msgstr ""
 
@@ -1494,7 +1491,7 @@ msgstr ""
 msgid "Data volume type"
 msgstr ""
 
-#: src/azure/sql/azure-sql-server-tabs.js
+#: src/azure/sql/tabs.ts
 msgid "Databases"
 msgstr ""
 
@@ -1696,7 +1693,6 @@ msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-#: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Disable data volume"
 msgstr ""
 
@@ -1715,7 +1711,7 @@ msgid "Disabled"
 msgstr ""
 
 #: src/vmware/breadcrumbs.js
-#: src/vmware/tabs.js
+#: src/vmware/tabs.ts
 msgid "Disks"
 msgstr ""
 
@@ -2162,11 +2158,11 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 msgid "Filter organizations"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "Filter projects"
 msgstr ""
 
@@ -2242,7 +2238,7 @@ msgid "Floating IP count"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/breadcrumbs.js
-#: src/openstack/openstack-tenant/tabs.js
+#: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr ""
 
@@ -2352,7 +2348,7 @@ msgstr ""
 msgid "Go to marketplace"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
 msgid "Go to my profile"
 msgstr ""
 
@@ -2638,7 +2634,7 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
-#: src/openstack/openstack-instance/module.js
+#: src/openstack/openstack-instance/tabs.ts
 msgid "Internal IPs"
 msgstr ""
 
@@ -2832,11 +2828,11 @@ msgstr ""
 
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
-#: src/jira/project/tabs.js
+#: src/jira/project/tabs.ts
 #: src/marketplace/resources/ResourceTabs.tsx
 #: src/project/routes.js
 #: src/project/utils.ts
-#: src/resource/tabs/constants.js
+#: src/resource/tabs/constants.ts
 msgid "Issues"
 msgstr ""
 
@@ -3473,7 +3469,7 @@ msgid "Network"
 msgstr ""
 
 #: src/vmware/breadcrumbs.js
-#: src/vmware/tabs.js
+#: src/vmware/tabs.ts
 msgid "Network adapters"
 msgstr ""
 
@@ -3485,7 +3481,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-network/breadcrumbs.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
-#: src/openstack/openstack-tenant/tabs.js
+#: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
 msgstr ""
@@ -3576,7 +3572,7 @@ msgid "Node plan"
 msgstr ""
 
 #: src/rancher/cluster/create/TenantGroup.tsx
-#: src/rancher/cluster/tabs.js
+#: src/rancher/cluster/tabs.ts
 #: src/rancher/node/breadcrumbs.js
 msgid "Nodes"
 msgstr ""
@@ -3889,7 +3885,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/ResourceTabs.tsx
 #: src/offering/OfferingTabs.tsx
-#: src/resource/tabs/constants.js
+#: src/resource/tabs/constants.ts
 msgid "Order items"
 msgstr ""
 
@@ -4015,9 +4011,12 @@ msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
 #: src/customer/CustomerList.tsx
-#: src/navigation/workspace/select-workspace-dialog.html
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"
+msgstr ""
+
+#: src/navigation/workspace/OrganizationsPanel.tsx
+msgid "Organizations ({count})"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -4125,8 +4124,16 @@ msgstr ""
 msgid "Payment pending"
 msgstr ""
 
+#: src/customer/CustomerPaymentProfile.tsx
+msgid "Payment profile"
+msgstr ""
+
 #: src/customer/details/customer-manage.html
 msgid "Payment profiles"
+msgstr ""
+
+#: src/customer/CustomerPaymentProfile.tsx
+msgid "Payment type {type}"
 msgstr ""
 
 #: src/billing/InvoicesFilter.tsx
@@ -4649,9 +4656,12 @@ msgstr ""
 
 #: src/customer/routes.js
 #: src/customer/workspace/utils.ts
-#: src/navigation/workspace/select-workspace-dialog.html
-#: src/rancher/cluster/tabs.js
+#: src/rancher/cluster/tabs.ts
 msgid "Projects"
+msgstr ""
+
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "Projects ({count})"
 msgstr ""
 
 #: src/customer/team/add-team-member.html
@@ -4772,7 +4782,7 @@ msgstr ""
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
-#: src/openstack/openstack-tenant/tabs.js
+#: src/openstack/openstack-tenant/tabs.ts
 msgid "Quotas"
 msgstr ""
 
@@ -4849,7 +4859,7 @@ msgid "Record period"
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/offering/offering-details.html
 #: src/resource/ResourceRefreshButton.tsx
@@ -5325,7 +5335,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/module.js
+#: src/openstack/openstack-snapshot/tabs.ts
 msgid "Restored volumes"
 msgstr ""
 
@@ -5382,7 +5392,7 @@ msgstr ""
 msgid "Role management events"
 msgstr ""
 
-#: src/openstack/openstack-security-groups/module.js
+#: src/openstack/openstack-security-groups/tabs.ts
 msgid "Rules"
 msgstr ""
 
@@ -5535,7 +5545,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: src/openstack/openstack-security-groups/breadcrumbs.js
-#: src/openstack/openstack-tenant/tabs.js
+#: src/openstack/openstack-tenant/tabs.ts
 msgid "Security groups"
 msgstr ""
 
@@ -5545,7 +5555,7 @@ msgid "Security groups details"
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "See all"
 msgstr ""
 
@@ -5568,7 +5578,8 @@ msgstr ""
 #: src/form-react/AppstoreListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "Select"
 msgstr ""
 
@@ -5722,7 +5733,7 @@ msgstr ""
 msgid "Select user..."
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/navigation/workspace/select-workspace-toggle.html
 msgid "Select workspace"
 msgstr ""
@@ -5782,7 +5793,7 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Service provider"
@@ -5995,7 +6006,7 @@ msgid "Snapshot schedule has been updated."
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/breadcrumbs.js
-#: src/openstack/openstack-volume/module.js
+#: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
 msgstr ""
 
@@ -6004,9 +6015,9 @@ msgid "Snapshot size limit"
 msgstr ""
 
 #: src/offering/OfferingTabs.tsx
-#: src/openstack/openstack-backup/tabs.js
-#: src/openstack/openstack-snapshot-schedule/module.js
-#: src/openstack/openstack-volume/module.js
+#: src/openstack/openstack-backup/tabs.ts
+#: src/openstack/openstack-snapshot-schedule/tabs.ts
+#: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshots"
 msgstr ""
 
@@ -6183,7 +6194,7 @@ msgid "Subnet has been updated."
 msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
-#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-network/tabs.ts
 #: src/openstack/openstack-subnet/breadcrumbs.js
 msgid "Subnets"
 msgstr ""
@@ -6509,7 +6520,7 @@ msgstr ""
 msgid "There are no offerings in marketplace yet."
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 msgid "There are no organizations matching filter."
 msgstr ""
 
@@ -6517,7 +6528,11 @@ msgstr ""
 msgid "There are no other plans available."
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "There are no projects matching filter."
+msgstr ""
+
+#: src/navigation/workspace/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
 msgstr ""
 
@@ -6545,7 +6560,7 @@ msgstr ""
 msgid "There are no {verboseName} yet."
 msgstr ""
 
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "There is no activity yet."
 msgstr ""
 
@@ -6952,12 +6967,14 @@ msgstr ""
 msgid "Unable to load compliance overview."
 msgstr ""
 
+#: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Unable to load data"
 msgstr ""
 
 #: src/customer/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
+#: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -7351,7 +7368,7 @@ msgstr ""
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/slurm/tabs.js
+#: src/slurm/tabs.ts
 msgid "Usage"
 msgstr ""
 
@@ -7718,7 +7735,7 @@ msgstr ""
 msgid "Volume type"
 msgstr ""
 
-#: src/openstack/openstack-instance/module.js
+#: src/openstack/openstack-instance/tabs.ts
 msgid "Volumes"
 msgstr ""
 
@@ -7825,8 +7842,8 @@ msgstr ""
 msgid "You did not enter a field."
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
-msgid "You do not belong to any organization yet."
+#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
+msgid "You do not belong to any organization yet"
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
@@ -7970,7 +7987,7 @@ msgstr ""
 msgid "catalogues"
 msgstr ""
 
-#: src/issues/workspace/issues-activity-stream.html
+#: src/issues/workspace/IssuesActivityStream.tsx
 msgid "commented on"
 msgstr ""
 
@@ -8052,7 +8069,7 @@ msgstr ""
 msgid "order items"
 msgstr ""
 
-#: src/navigation/workspace/select-workspace-dialog.html
+#: src/navigation/workspace/OrganizationsPanel.tsx
 msgid "organization"
 msgstr ""
 

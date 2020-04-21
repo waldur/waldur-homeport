@@ -1,9 +1,8 @@
 import { latinName } from '@waldur/resource/actions/constants';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
-import { getEventsTab } from '@waldur/resource/tabs/constants';
 
 import { OpenStackSnapshotSummary } from './OpenStackSnapshotSummary';
-import { SnapshotRestoredVolumesList } from './SnapshotRestoredVolumesList';
+import './tabs';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
@@ -43,24 +42,11 @@ function stateConfig(ResourceStateConfigurationProvider) {
   });
 }
 
-// @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider) {
-  ResourceTabsConfigurationProvider.register('OpenStackTenant.Snapshot', () => [
-    {
-      key: 'restored',
-      title: translate('Restored volumes'),
-      component: SnapshotRestoredVolumesList,
-    },
-    getEventsTab(),
-  ]);
-}
-
 export default module => {
   ResourceSummary.register(
     'OpenStackTenant.Snapshot',
     OpenStackSnapshotSummary,
   );
-  module.config(tabsConfig);
   module.config(actionConfig);
   module.config(stateConfig);
 };

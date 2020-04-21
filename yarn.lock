@@ -2035,13 +2035,6 @@ angular-flash-alert@~1.1.0:
   resolved "https://registry.yarnpkg.com/angular-flash-alert/-/angular-flash-alert-1.1.1.tgz#01445de81bc394b8b9dee80cd7697923d944a5e6"
   integrity sha1-AURd6BvDlLi53ugM12l5I9lEpeY=
 
-angular-gravatar@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/angular-gravatar/-/angular-gravatar-0.4.2.tgz#91f0a18600b1e16b938d947474a889053ac33f97"
-  integrity sha1-kfChhgCx4WuTjZR0dKiJBTrDP5c=
-  dependencies:
-    angular "^1.2.5"
-
 angular-intro.js@~3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/angular-intro.js/-/angular-intro.js-3.1.3.tgz#b1d5e0c8929084e00b2036ccab941a9f21ac1e60"
@@ -2112,7 +2105,7 @@ angular-ui-router@~0.2.13:
   dependencies:
     angular "^1.0.8"
 
-angular@^1.0.8, angular@^1.2.5, angular@~1.5.11:
+angular@^1.0.8, angular@~1.5.11:
   version "1.5.11"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.5.11.tgz#8c5ba7386f15965c9acf3429f6881553aada30d6"
   integrity sha1-jFunOG8VllyazzQp9ogVU6raMNY=
