@@ -2,7 +2,6 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
 import openstackInstanceCurrentFlavor from './openstack-instance-current-flavor';
-import openstackInstanceDataVolume from './openstack-instance-data-volume';
 import openstackInstanceFloatingIps from './openstack-instance-floating-ips';
 import openstackInstanceNetworks from './openstack-instance-networks';
 import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
@@ -36,7 +35,6 @@ export default module => {
     'openstackInstanceSecurityGroupsField',
     openstackInstanceSecurityGroupsField,
   );
-  module.component('openstackInstanceDataVolume', openstackInstanceDataVolume);
   module.component('openstackInstanceNetworks', openstackInstanceNetworks);
   module.component(
     'openstackInstanceFloatingIps',
