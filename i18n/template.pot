@@ -210,7 +210,6 @@ msgid "Add component"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-#: src/openstack/openstack-instance/openstack-instance-data-volume.html
 #: src/rancher/cluster/create/DataVolumeAddButton.tsx
 msgid "Add data volume"
 msgstr ""
@@ -1485,7 +1484,6 @@ msgid "Data volume should have at least {size} GB."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-#: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Data volume size:"
 msgstr ""
 
@@ -1695,7 +1693,6 @@ msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-#: src/openstack/openstack-instance/openstack-instance-data-volume.html
 msgid "Disable data volume"
 msgstr ""
 
