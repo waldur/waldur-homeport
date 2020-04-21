@@ -10,7 +10,6 @@ import resourceRoutes from './routes';
 import resourceStateModule from './state/module';
 import resourceSummaryModule from './summary/module';
 import supportModule from './support/module';
-import resourceTabsModule from './tabs/module';
 import './events';
 
 export default module => {
@@ -22,7 +21,6 @@ export default module => {
   resourceSummaryModule(module);
   resourceBreadcrumbsModule(module);
   resourceStateModule(module);
-  resourceTabsModule(module);
   monitoringModule(module);
   actionsModule(module);
   filtersModule(module);

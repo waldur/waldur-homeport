@@ -1,7 +1,4 @@
-import { translate } from '@waldur/i18n';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
-import { getEventsTab } from '@waldur/resource/tabs/constants';
-import { angular2react } from '@waldur/shims/angular2react';
 
 import breadcrumbsConfig from './breadcrumbs';
 import filtersModule from './filters';
@@ -10,22 +7,7 @@ import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
 import securityGroupRuleEditor from './security-group-rule-editor';
 import securityGroupRulesList from './security-group-rules-list';
 import securityGroupsDialog from './security-groups-dialog';
-
-const SecurityGroupRulesList = angular2react('securityGroupRulesList', [
-  'resource',
-]);
-
-// @ngInject
-function tabsConfig(ResourceTabsConfigurationProvider) {
-  ResourceTabsConfigurationProvider.register('OpenStack.SecurityGroup', () => [
-    {
-      key: 'rules',
-      title: translate('Rules'),
-      component: SecurityGroupRulesList,
-    },
-    getEventsTab(),
-  ]);
-}
+import './tabs';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
@@ -74,7 +56,6 @@ export default module => {
   module.component('securityGroupsDialog', securityGroupsDialog);
   module.component('securityGroupsDialogReact', securityGroupsDialogReact);
   filtersModule(module);
-  module.config(tabsConfig);
   module.config(actionConfig);
   module.run(breadcrumbsConfig);
 };

@@ -5,7 +5,7 @@ import RancherClusterKubeconfigDialog from './actions/RancherClusterKubeconfigDi
 import rancherCreateNodeDialog from './create/CreateNodeDialog';
 import './create/marketplace';
 import { RancherClusterSummary } from './RancherClusterSummary';
-import { tabsConfig } from './tabs';
+import './tabs';
 
 // @ngInject
 function actionsConfig(ActionConfigurationProvider) {
@@ -19,6 +19,5 @@ export default module => {
     RancherClusterKubeconfigDialog,
   );
   module.component('rancherCreateNodeDialog', rancherCreateNodeDialog);
-  module.config(tabsConfig);
   module.config(actionsConfig);
 };

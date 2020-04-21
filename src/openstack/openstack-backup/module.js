@@ -4,7 +4,7 @@ import actions from './actions';
 import breadcrumbsConfig from './breadcrumbs';
 import openstackBackupRestoreSummary from './openstack-backup-restore-summary';
 import { OpenStackBackupSummary } from './OpenStackBackupSummary';
-import tabsConfig from './tabs';
+import './tabs';
 
 // @ngInject
 function actionsConfig(ActionConfigurationProvider) {
@@ -18,6 +18,5 @@ export default module => {
     openstackBackupRestoreSummary,
   );
   module.config(actionsConfig);
-  module.config(tabsConfig);
   module.run(breadcrumbsConfig);
 };

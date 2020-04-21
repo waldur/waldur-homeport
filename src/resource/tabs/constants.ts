@@ -3,21 +3,22 @@ import { ResourceOrderItemsTab } from '@waldur/marketplace/orders/item/list/Reso
 
 import { ResourceEvents } from './ResourceEvents';
 import { ResourceIssuesList } from './ResourceIssuesList';
+import { ResourceTab } from './types';
 
-export const getEventsTab = () => ({
+export const getEventsTab = (): ResourceTab => ({
   key: 'events',
   title: translate('Audit log'),
   component: ResourceEvents,
 });
 
-const getIssuesTab = () => ({
+const getIssuesTab = (): ResourceTab => ({
   key: 'issues',
   title: translate('Issues'),
   component: ResourceIssuesList,
   feature: 'support',
 });
 
-const getOrderItemsTab = () => ({
+const getOrderItemsTab = (): ResourceTab => ({
   key: 'orderItems',
   title: translate('Order items'),
   component: ResourceOrderItemsTab,
@@ -25,7 +26,7 @@ const getOrderItemsTab = () => ({
   isVisible: resource => Boolean(resource.marketplace_resource_uuid),
 });
 
-export const getDefaultResourceTabs = () => [
+export const getDefaultResourceTabs = (): ResourceTab[] => [
   getEventsTab(),
   getIssuesTab(),
   getOrderItemsTab(),
