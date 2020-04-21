@@ -3335,6 +3335,7 @@ msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/billing/PaymentProfileDetails.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/booking/BookingsList.tsx
@@ -6725,6 +6726,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
+#: src/billing/PaymentProfileDetails.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/jira/project/JiraProjectsList.tsx

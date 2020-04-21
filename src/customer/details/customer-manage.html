@@ -9,7 +9,10 @@
     customer="$ctrl.customer"
     can-update-quota="$ctrl.canUpdateQuota"
   ></customer-policies>
-  <div class="settings">
+  <div
+    class="settings"
+    ng-if="!$ctrl.customer.is_company || ($ctrl.customer.is_company && $ctrl.customer.payment_profiles.length)"
+  >
     <div class="settings-header" ng-click="$ctrl.toggleProfiles()">
       <div class="settings-title" translate>Payment profiles</div>
       <button class="btn btn-default" type="button">
@@ -21,7 +24,12 @@
       </p>
     </div>
     <div ng-if="$ctrl.profilesExpanded">
-      <payment-profile-list></payment-profile-list>
+      <payment-profile-for-organization-owner
+        ng-if="$ctrl.customer.is_company && $ctrl.isOwner"
+      ></payment-profile-for-organization-owner>
+      <payment-profile-list
+        ng-if="!$ctrl.customer.is_company"
+      ></payment-profile-list>
     </div>
   </div>
   <div class="settings">
