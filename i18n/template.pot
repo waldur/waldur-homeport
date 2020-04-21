@@ -4116,8 +4116,16 @@ msgstr ""
 msgid "Payment pending"
 msgstr ""
 
+#: src/customer/CustomerPaymentProfile.tsx
+msgid "Payment profile"
+msgstr ""
+
 #: src/customer/details/customer-manage.html
 msgid "Payment profiles"
+msgstr ""
+
+#: src/customer/CustomerPaymentProfile.tsx
+msgid "Payment type {type}"
 msgstr ""
 
 #: src/billing/InvoicesFilter.tsx
