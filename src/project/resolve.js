@@ -1,3 +1,5 @@
+import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
+
 // @ngInject
 export function loadProject(
   $state,
