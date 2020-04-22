@@ -1,8 +1,8 @@
 import { getTemplates } from '@waldur/issues/api';
+import { putAttachment } from '@waldur/issues/attachments/api';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 
 import template from './issue-create-dialog.html';
-import { putAttachment } from '@waldur/issues/attachments/api';
 
 const DEFAULT_OPTIONS = {
   title: gettext('Create request'),
@@ -32,7 +32,6 @@ const issueCreateDialog = {
       ncUtilsFlash,
       IssueTypesService,
       ErrorMessageFormatter,
-      coreUtils,
     ) {
       this.service = issuesService;
       this.$q = $q;
@@ -42,7 +41,6 @@ const issueCreateDialog = {
       this.ncUtilsFlash = ncUtilsFlash;
       this.IssueTypesService = IssueTypesService;
       this.ErrorMessageFormatter = ErrorMessageFormatter;
-      this.coreUtils = coreUtils;
       this.files = [];
     }
 
@@ -136,10 +134,9 @@ const issueCreateDialog = {
         .then(issue => {
           this.service.clearAllCacheForCurrentEndpoint();
           this.ncUtilsFlash.success(
-            this.coreUtils.templateFormatter(
-              gettext('Request {requestId} has been created.'),
-              { requestId: issue.key },
-            ),
+            translate('Request {requestId} has been created.', {
+              requestId: issue.key,
+            }),
           );
           return this.$state
             .go('support.detail', { uuid: issue.uuid })
@@ -156,7 +153,7 @@ const issueCreateDialog = {
     }
 
     createIssue() {
-      let issue = {
+      const issue = {
         type: this.issue.type,
         summary: this.issue.summary,
         description: this.getDescription(),

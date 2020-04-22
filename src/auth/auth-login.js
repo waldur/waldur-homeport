@@ -29,7 +29,6 @@ export const authLogin = {
       invitationService,
       usersService,
       UserSettings,
-      coreUtils,
     ) {
       this.ENV = ENV;
       this.$q = $q;
@@ -40,13 +39,11 @@ export const authLogin = {
       this.invitationService = invitationService;
       this.usersService = usersService;
       this.UserSettings = UserSettings;
-      this.coreUtils = coreUtils;
 
       this.loginLogo = ENV.loginLogo;
-      this.pageTitle = this.coreUtils.templateFormatter(
-        translate('Welcome to {pageTitle}!'),
-        { pageTitle: ENV.shortPageTitle },
-      );
+      this.pageTitle = translate('Welcome to {pageTitle}!', {
+        pageTitle: ENV.shortPageTitle,
+      });
       this.shortPageTitle = ENV.shortPageTitle;
 
       this.methods = ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS.reduce(

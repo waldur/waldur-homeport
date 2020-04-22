@@ -18,7 +18,6 @@ class IssueRegistrationController {
     projectsService,
     resourcesService,
     ErrorMessageFormatter,
-    coreUtils,
   ) {
     this.$state = $state;
     this.$scope = $scope;
@@ -36,7 +35,6 @@ class IssueRegistrationController {
     this.projectsService = projectsService;
     this.resourcesService = resourcesService;
     this.ErrorMessageFormatter = ErrorMessageFormatter;
-    this.coreUtils = coreUtils;
     this.init();
   }
 
@@ -68,7 +66,7 @@ class IssueRegistrationController {
         this.refreshResources();
       },
     );
-    this.emptyFieldMessage = gettext('You did not enter a field.');
+    this.emptyFieldMessage = translate('You did not enter a field.');
   }
 
   refreshUsers(name) {
@@ -186,10 +184,7 @@ class IssueRegistrationController {
       .then(issue => {
         this.service.clearAllCacheForCurrentEndpoint();
         this.ncUtilsFlash.success(
-          this.coreUtils.templateFormatter(
-            gettext('Request {key} has been created.'),
-            { key: issue.key },
-          ),
+          translate('Request {key} has been created.', { key: issue.key }),
         );
         return this.$state.go('support.detail', { uuid: issue.uuid });
       })

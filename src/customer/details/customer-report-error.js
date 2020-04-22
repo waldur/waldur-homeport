@@ -1,13 +1,14 @@
+import { translate } from '@waldur/i18n';
+
 import template from './customer-report-error.html';
 
 class DialogController {
   // @ngInject
-  constructor(features, $uibModal, ISSUE_IDS, ENV, coreUtils) {
+  constructor(features, $uibModal, ISSUE_IDS, ENV) {
     this.features = features;
     this.$uibModal = $uibModal;
     this.ISSUE_IDS = ISSUE_IDS;
     this.ENV = ENV;
-    this.coreUtils = coreUtils;
   }
 
   $onInit() {
@@ -25,10 +26,8 @@ class DialogController {
       });
     } else {
       const context = { supportEmail: this.ENV.supportEmail };
-      this.message = this.coreUtils.templateFormatter(
-        gettext(
-          'To correct details of your organization, please send an email to <a href="mailto:{supportEmail}">{supportEmail}</a> highlighting the errors in current details. Thank you!',
-        ),
+      this.message = translate(
+        'To correct details of your organization, please send an email to <a href="mailto:{supportEmail}">{supportEmail}</a> highlighting the errors in current details. Thank you!',
         context,
       );
     }

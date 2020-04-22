@@ -1,5 +1,3 @@
-import { translate } from '../i18n/translate';
-
 import { baseServiceClass, listCache } from './base-service';
 import ErrorMessageFormatter from './ErrorMessageFormatter';
 import extensionPoint from './extension-point-directive';
@@ -56,7 +54,6 @@ function defaultErrorHandler($state) {
 }
 
 export default module => {
-  module.service('coreUtils', () => ({ templateFormatter: translate }));
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
   module.service('ncUtils', ncUtils);
   module.service('baseServiceClass', baseServiceClass);

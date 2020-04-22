@@ -1,25 +1,12 @@
-import template from './appstore-field-list.html';
+import { translate } from '@waldur/i18n';
 
-export default function appstoreFieldList() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {},
-    controller: FieldController,
-    controllerAs: '$ctrl',
-    bindToController: {
-      field: '=',
-      model: '=',
-    },
-  };
-}
+import template from './appstore-field-list.html';
 
 class FieldController {
   // @ngInject
-  constructor($uibModal, $filter, coreUtils) {
+  constructor($uibModal, $filter) {
     this.$uibModal = $uibModal;
     this.$filter = $filter;
-    this.coreUtils = coreUtils;
 
     if (this.field.parser) {
       const choices = this.field.choices.map(this.field.parser);
@@ -40,10 +27,9 @@ class FieldController {
     this.renderEmpty = !this.field.required && !this.hasChoices;
     this.warningMessage =
       this.field.warningMessage ||
-      this.coreUtils.templateFormatter(
-        gettext('{fieldLabel} is required for provisioning resource.'),
-        { fieldLabel: this.field.label },
-      );
+      translate('{fieldLabel} is required for provisioning resource.', {
+        fieldLabel: this.field.label,
+      });
     this.emptyMessage =
       this.field.emptyMessage || gettext('There are no items yet.');
   }
@@ -70,4 +56,18 @@ class FieldController {
     }
     return value.name;
   }
+}
+
+export default function appstoreFieldList() {
+  return {
+    restrict: 'E',
+    template: template,
+    scope: {},
+    controller: FieldController,
+    controllerAs: '$ctrl',
+    bindToController: {
+      field: '=',
+      model: '=',
+    },
+  };
 }
