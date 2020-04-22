@@ -28,8 +28,11 @@ async function loadActions(url) {
 }
 
 export const ActionButtonResource: React.FC<ActionButtonResourceProps> = props => {
-  const [{ loading, error, value }, getActions] = useAsyncFn(() =>
-    loadActions(props.url),
+  const { url } = props;
+
+  const [{ loading, error, value }, getActions] = useAsyncFn(
+    () => loadActions(url),
+    [url],
   );
 
   const [open, onToggle] = useBoolean(false);

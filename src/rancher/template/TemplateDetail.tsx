@@ -23,7 +23,10 @@ export const TemplateDetail = () => {
     params: { templateUuid, clusterUuid },
   } = useCurrentStateAndParams();
 
-  const state = useAsync(() => loadData(templateUuid, clusterUuid), []);
+  const state = useAsync(() => loadData(templateUuid, clusterUuid), [
+    templateUuid,
+    clusterUuid,
+  ]);
 
   const project = useSelector(state =>
     formValueSelector(FORM_ID)(state, 'project'),
