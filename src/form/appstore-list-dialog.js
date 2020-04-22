@@ -7,10 +7,11 @@ class DialogController {
     this.field = this.resolve.field;
     this.model = this.resolve.model;
     this.value = this.model[this.field.name];
-    (this.title = this.field.dialogTitle || translate('Select {fieldLabel}')),
-      {
+    this.title =
+      this.field.dialogTitle ||
+      translate('Select {fieldLabel}', {
         fieldLabel: this.field.label,
-      };
+      });
     this.choices = this.field.choices;
     this.columns = this.field.columns;
     this.filterOptions = this.field.filterOptions;

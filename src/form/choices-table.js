@@ -21,9 +21,7 @@ class TableController {
       'max-height': '300px',
       'overflow-y': 'auto',
     };
-  }
 
-  $onInit() {
     if (angular.isUndefined(this.enableSelect)) {
       this.enableSelect = true;
     }
