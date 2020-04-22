@@ -4,6 +4,7 @@ import { withStore } from '@waldur/store/connect';
 import { ProjectDashboardContainer } from './ProjectDashboardContainer';
 import { ProjectEventsView } from './ProjectEventsList';
 import { ProjectIssuesList } from './ProjectIssuesList';
+import { ProjectWorkspace } from './ProjectWorkspace';
 import { loadProject } from './resolve';
 import { ProjectTeam } from './team/ProjectTeam';
 
@@ -12,7 +13,7 @@ export const states = [
     name: 'project',
     url: '/projects/:uuid/',
     abstract: true,
-    template: '<project-base></project-base>',
+    component: withStore(ProjectWorkspace),
     data: {
       auth: true,
       workspace: 'project',
