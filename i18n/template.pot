@@ -3634,6 +3634,10 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
+#: src/user/hooks/HookListTablePlaceholder.tsx
+msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr ""
+
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Number of CPU cores per socket"
 msgstr ""
@@ -7883,6 +7887,10 @@ msgstr ""
 
 #: src/error/InvalidQuotaPage.tsx
 msgid "You have exceeded maximum number of quotas."
+msgstr ""
+
+#: src/user/hooks/HookListTablePlaceholder.tsx
+msgid "You have no notifications yet."
 msgstr ""
 
 #: src/quotas/quotas-table.html
