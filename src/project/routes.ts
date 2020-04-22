@@ -1,3 +1,4 @@
+import { gettext } from '@waldur/i18n';
 import { withStore } from '@waldur/store/connect';
 
 import { ProjectDashboardContainer } from './ProjectDashboardContainer';

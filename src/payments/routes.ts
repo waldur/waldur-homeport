@@ -1,3 +1,4 @@
+import { gettext } from '@waldur/i18n';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
 

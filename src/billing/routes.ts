@@ -1,3 +1,5 @@
+import { gettext } from '@waldur/i18n';
+
 export const states = [
   {
     name: 'organization.billing',
