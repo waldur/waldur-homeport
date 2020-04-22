@@ -69,7 +69,6 @@ function updateBreadcrumbs(orderItem: OrderItemDetailsType) {
   });
 }
 
-// tslint:disable-next-line: variable-name
 async function loadOrderItem(order_item_uuid) {
   const orderItem = await api.getOrderItem(order_item_uuid);
   updateBreadcrumbs(orderItem);

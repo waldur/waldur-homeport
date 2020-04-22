@@ -9,9 +9,8 @@ async function loadVfs(fontFamilies) {
   // Load fonts into Virtual File System for pdfkit
   const baseURL = 'fonts/';
   const vfs = {};
-  // tslint:disable-next-line: forin
+
   for (const fontFamily in fontFamilies) {
-    // tslint:disable-next-line: forin
     for (const font in fontFamilies[fontFamily]) {
       const file = fontFamilies[fontFamily][font];
       const response = await Axios.get(baseURL + file, {

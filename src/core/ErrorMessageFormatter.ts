@@ -26,7 +26,6 @@ export const format = response => {
   }
 
   if (response.status === -1) {
-    // tslint:disable-next-line max-line-length
     return translate(
       'Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.',
       { apiEndpoint: ENV.apiEndpoint },

@@ -5,11 +5,8 @@ import loadLeafleat from '@waldur/shims/load-leaflet';
 
 import { ChecklistStats } from './types';
 
-// tslint:disable-next-line: no-var-requires
 const iconGreen = require('@waldur/images/marker-icon-green.png');
-// tslint:disable-next-line: no-var-requires
 const iconRed = require('@waldur/images/marker-icon-red.png');
-// tslint:disable-next-line: no-var-requires
 const iconYellow = require('@waldur/images/marker-icon-yellow.png');
 
 interface CustomerMapProps {

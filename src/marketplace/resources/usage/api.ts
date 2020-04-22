@@ -24,7 +24,6 @@ export const getPeriodLabel = (
   }
 };
 
-// tslint:disable-next-line: variable-name
 export const getUsageComponents = async (params: UsageReportContext) => {
   const offering = await getOffering(params.offering_uuid);
   const periods = await getResourcePlanPeriods(params.resource_uuid);

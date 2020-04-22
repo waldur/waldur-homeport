@@ -9,7 +9,7 @@ const serializer = ({
   datastore,
   folder,
   networks,
-  // tslint:disable-next-line: trailing-comma
+
   ...rest
 }) => ({
   template: template && template.url,

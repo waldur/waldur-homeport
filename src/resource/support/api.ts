@@ -20,10 +20,9 @@ export function parseProjects(projects, quotaNames) {
       currentPrice = project.billing_price_estimate.current;
       estimatedPrice = project.billing_price_estimate.total;
     }
-    // tslint:disable-next-line no-string-literal
+
     quotas['current_price'] = currentPrice;
 
-    // tslint:disable-next-line no-string-literal
     quotas['estimated_price'] = estimatedPrice;
 
     const name = project.customer_abbreviation || project.customer_name;
@@ -62,7 +61,6 @@ export function parseProjects(projects, quotaNames) {
   return quotaTrees;
 }
 
-// tslint:disable-next-line:variable-name
 export const loadData = (accounting_is_running: boolean) => {
   const field = [
     'name',

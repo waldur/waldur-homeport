@@ -13,7 +13,6 @@ import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types
 
 import { AvailabilityZone, VolumeType } from './types';
 
-// tslint:disable:variable-name
 export const loadFlavors = (settings_uuid: string) =>
   getAll<Flavor>('/openstacktenant-flavors/', { params: { settings_uuid } });
 

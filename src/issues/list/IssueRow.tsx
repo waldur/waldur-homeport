@@ -16,11 +16,9 @@ interface Props {
 }
 
 const connector = connect(null, dispatch => ({
-  // tslint:disable-next-line: variable-name
   openUserDialog: user_uuid =>
     dispatch(openModalDialog('userPopover', { resolve: { user_uuid } })),
 
-  // tslint:disable-next-line: variable-name
   openCustomerDialog: customer_uuid =>
     dispatch(
       openModalDialog('customerPopover', {

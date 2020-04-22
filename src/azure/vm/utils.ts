@@ -22,7 +22,6 @@ const formatImageOption = (image: Image): Option => {
   };
 };
 
-// tslint:disable:variable-name
 export const loadData = (settings_uuid: string) =>
   Promise.all([
     getLocations(settings_uuid),

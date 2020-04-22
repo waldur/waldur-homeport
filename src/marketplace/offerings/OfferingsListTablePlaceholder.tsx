@@ -7,7 +7,6 @@ import { ImageTablePlaceholder } from '@waldur/table-react/ImageTablePlaceholder
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, OuterState } from '@waldur/workspace/types';
 
-// tslint:disable-next-line: no-var-requires
 const TwoDocumentsIllustration: string = require('@waldur/images/table-placeholders/undraw_no_data_qbuo.svg');
 
 const PureOfferingsListTablePlaceholder = ({

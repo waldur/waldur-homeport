@@ -105,7 +105,6 @@ export const useProjectChecklist = (project, categoryId) => {
   const submit = useCallback(async () => {
     setSubmitting(true);
     try {
-      // tslint:disable-next-line: variable-name
       const payload = Object.keys(answers).map(question_uuid => ({
         question_uuid,
         value: answers[question_uuid],
