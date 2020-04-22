@@ -11,6 +11,7 @@ export const DashboardHeader = (props: DashboardHeaderProps) => (
       margin: -15,
       paddingTop: 10,
       paddingLeft: 25,
+      marginBottom: 0,
     }}
   >
     <h2>{props.title}</h2>

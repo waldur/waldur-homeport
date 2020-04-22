@@ -1,3 +1,5 @@
+import Axios from 'axios';
+
 import experimentalMode from '@waldur/configs/modes/experimental.json';
 import stableMode from '@waldur/configs/modes/stable.json';
 
@@ -19,12 +21,9 @@ function renderError(details) {
 }
 
 async function loadConfig() {
-  const initInjector = angular.injector(['ng']);
-  const $http = initInjector.get('$http');
-
   let frontendSettings, backendSettings;
   try {
-    const frontendResponse = await $http.get(CONFIG_FILE);
+    const frontendResponse = await Axios.get(CONFIG_FILE);
     frontendSettings = frontendResponse.data;
   } catch (error) {
     if (error.status === 404) {
@@ -44,7 +43,7 @@ async function loadConfig() {
   }
 
   try {
-    const backendResponse = await $http.get(
+    const backendResponse = await Axios.get(
       `${frontendSettings.apiEndpoint}api/configuration/`,
     );
     backendSettings = backendResponse.data;

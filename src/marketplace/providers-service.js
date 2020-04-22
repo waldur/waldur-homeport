@@ -1,7 +1,8 @@
-export default class providersService {
+import Axios from 'axios';
+
+export default class ProvidersService {
   // @ngInject
-  constructor($http, ENV) {
-    this.$http = $http;
+  constructor(ENV) {
     this.ENV = ENV;
   }
 
@@ -10,7 +11,7 @@ export default class providersService {
   }
 
   register(customer) {
-    return this.$http.post(this.endpoint, {
+    return Axios.post(this.endpoint, {
       customer: customer.url,
       enable_notifications: false,
     });

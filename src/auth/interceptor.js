@@ -1,67 +1,39 @@
+import Axios from 'axios';
+
+import { ngInjector } from '@waldur/core/services';
+
 // @ngInject
 function initAuthToken($auth, $http) {
   // When application starts up, we need to inject auth token if it exists
   const token = $auth.getToken();
   if (token) {
-    $http.defaults.headers.common.Authorization = 'Token ' + token;
+    Axios.defaults.headers.common['Authorization'] = 'Token ' + token;
+    $http.defaults.headers.common['Authorization'] = 'Token ' + token;
   }
 }
 
-// @ngInject
-function invalidTokenInterceptor($injector, $q) {
-  // On 401 error received, user session has expired and he should logged out
-  // We need to use $injector in order to break circular dependency injection
-  return {
-    responseError: function(response) {
-      const authService = $injector.get('authService');
-      const $state = $injector.get('$state');
-      const $stateParams = $injector.get('$stateParams');
-      if (response.status === 401) {
-        authService.localLogout(
-          $state.current.name
-            ? {
-                toState: $state.current.name,
-                toParams: JSON.parse(JSON.stringify($stateParams)),
-              }
-            : undefined,
-        );
-      }
-      return $q.reject(response);
-    },
-  };
-}
-
-// @ngInject
-export function abortRequestsInterceptor($injector) {
-  const $q = $injector.get('$q');
-  const $rootScope = $injector.get('$rootScope');
-
-  let abortRequests;
-  $rootScope.$on('abortRequests', function() {
-    abortRequests = true;
-  });
-  $rootScope.$on('enableRequests', function() {
-    abortRequests = false;
-  });
-
-  return {
-    request: function(config) {
-      // When user is logged out, all REST API requests are aborted.
-      if (abortRequests && /\/api\//.test(config.url)) {
-        const canceler = $q.defer();
-        config.timeout = canceler.promise;
-        canceler.resolve();
-      }
-      return config;
-    },
-  };
-}
-
-// @ngInject
-function attachHttpInterceptor($httpProvider) {
-  $httpProvider.interceptors.push(invalidTokenInterceptor);
-  $httpProvider.interceptors.push(abortRequestsInterceptor);
-}
+// On 401 error received, user session has expired and he should logged out
+Axios.interceptors.response.use(
+  function(response) {
+    return response;
+  },
+  function invalidTokenInterceptor(error) {
+    const authService = ngInjector.get('authService');
+    const $state = ngInjector.get('$state');
+    const $stateParams = ngInjector.get('$stateParams');
+    if (error.response.status === 401) {
+      authService.localLogout(
+        $state.current.name
+          ? {
+              toState: $state.current.name,
+              toParams: JSON.parse(JSON.stringify($stateParams)),
+            }
+          : undefined,
+      );
+    }
+    return Promise.reject(error);
+  },
+);
 
 // @ngInject
 function requireAuth(
@@ -142,7 +114,6 @@ function requireAuth(
 }
 
 export default module => {
-  module.config(attachHttpInterceptor);
   module.run(requireAuth);
   module.run(initAuthToken);
 };

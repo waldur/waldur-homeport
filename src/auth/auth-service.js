@@ -18,14 +18,15 @@
  *
  * 5) Authentication token and authentication method is cleaned up in the local storage.
  */
+import Axios from 'axios';
 
 import { translate } from '@waldur/i18n';
 
 export class AuthService {
   // @ngInject
   constructor(
-    $http,
     $auth,
+    $http,
     $rootScope,
     $window,
     $state,
@@ -34,8 +35,8 @@ export class AuthService {
     ncUtilsFlash,
     ENV,
   ) {
-    this.$http = $http;
     this.$auth = $auth;
+    this.$http = $http;
     this.$rootScope = $rootScope;
     this.$window = $window;
     this.$state = $state;
@@ -62,15 +63,12 @@ export class AuthService {
 
   signup(user) {
     this.$rootScope.$broadcast('enableRequests');
-    return this.$http.post(
-      this.ENV.apiEndpoint + 'api-auth/registration/',
-      user,
-    );
+    return Axios.post(this.ENV.apiEndpoint + 'api-auth/registration/', user);
   }
 
   async activate(user) {
     const url = this.ENV.apiEndpoint + 'api-auth/activation/';
-    const response = await this.$http.post(url, user);
+    const response = await Axios.post(url, user);
     this.loginSuccess(response);
   }
 
@@ -114,7 +112,8 @@ export class AuthService {
 
   localLogout(params) {
     this.$rootScope.$broadcast('logoutStart');
-    delete this.$http.defaults.headers.common.Authorization;
+    delete this.$http.defaults.headers.common['Authorization'];
+    delete Axios.defaults.headers.common['Authorization'];
     this.user = { isAuthenticated: false };
     this.usersService.currentUser = null;
     this.usersService.cleanAllCache();
@@ -125,7 +124,8 @@ export class AuthService {
   }
 
   setAuthHeader(token) {
-    this.$http.defaults.headers.common.Authorization = 'Token ' + token;
+    this.$http.defaults.headers.common['Authorization'] = 'Token ' + token;
+    Axios.defaults.headers.common['Authorization'] = 'Token ' + token;
   }
 
   isAuthenticated() {

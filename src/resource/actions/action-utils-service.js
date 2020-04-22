@@ -1,10 +1,11 @@
+import Axios from 'axios';
+
 import { translate } from '@waldur/i18n';
 
 // @ngInject
 export default function actionUtilsService(
   ncUtilsFlash,
   $rootScope,
-  $http,
   $q,
   $uibModal,
   $injector,
@@ -25,7 +26,11 @@ export default function actionUtilsService(
         const order = (config && config.order) || Object.keys(response.actions);
         const options = (config && config.options) || {};
         return order.reduce((result, name) => {
-          let action = angular.merge({}, response.actions[name], options[name]);
+          const action = angular.merge(
+            {},
+            response.actions[name],
+            options[name],
+          );
           if (this.actionHasToBeAdded(action, model, user)) {
             result[name] = action;
           }
@@ -126,7 +131,7 @@ export default function actionUtilsService(
 
   this.confirmAction = function(model, name) {
     const custom = ActionConfiguration[model.resource_type];
-    let confirmTextSuffix = (custom && custom.delete_message) || '';
+    const confirmTextSuffix = (custom && custom.delete_message) || '';
     if (name === 'destroy') {
       const context = { resourceType: model.resource_type || 'resource' };
       let confirmText =
@@ -149,11 +154,11 @@ export default function actionUtilsService(
   };
 
   this.applyAction = function(controller, resource, action) {
-    let vm = this;
-    let promise =
+    const vm = this;
+    const promise =
       action.method === 'DELETE'
-        ? $http.delete(action.url)
-        : $http.post(action.url);
+        ? Axios.delete(action.url)
+        : Axios.post(action.url);
 
     function onSuccess(response) {
       if (response.status === 201 || response.status === 202) {
@@ -182,7 +187,7 @@ export default function actionUtilsService(
   };
 
   this.handleActionSuccess = function(action) {
-    let template =
+    const template =
       action.successMessage ||
       translate('Request to {action} has been accepted.', {
         action: action.title.toLowerCase(),
@@ -196,7 +201,7 @@ export default function actionUtilsService(
   };
 
   this.openActionDialog = function(controller, resource, name, action) {
-    let component = action.component || 'actionDialog';
+    const component = action.component || 'actionDialog';
     const params = { component, size: action.dialogSize };
     if (action.useResolve) {
       angular.extend(params, {
@@ -207,7 +212,7 @@ export default function actionUtilsService(
         },
       });
     } else {
-      let dialogScope = $rootScope.$new();
+      const dialogScope = $rootScope.$new();
       angular.extend(dialogScope, {
         action,
         controller,
@@ -222,7 +227,7 @@ export default function actionUtilsService(
 
   this.loadNestedActions = function(controller, model, tab) {
     return this.loadActions(model).then(actions => {
-      let nestedActions = [];
+      const nestedActions = [];
       angular.forEach(actions, (action, key) => {
         if (action.tab && action.tab === tab) {
           nestedActions.push({

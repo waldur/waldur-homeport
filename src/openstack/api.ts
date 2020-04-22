@@ -1,5 +1,6 @@
+import Axios from 'axios';
+
 import { getAll } from '@waldur/core/api';
-import { $http } from '@waldur/core/services';
 import {
   Flavor,
   FloatingIp,
@@ -55,7 +56,7 @@ export const loadSshKeys = (user_uuid: string) =>
   getAll<SshKey>('/keys/', { params: { user_uuid } });
 
 export const loadServiceSettings = (scope: string) =>
-  $http.get(scope).then(response => response.data);
+  Axios.get(scope).then(response => response.data);
 
 export const loadInstances = () =>
   getAll<OpenStackInstance>('/openstacktenant-instances/');

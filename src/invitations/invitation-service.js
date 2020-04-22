@@ -1,13 +1,10 @@
+import Axios from 'axios';
+
 const invitationStorageToken = 'ncInvitationToken';
 
 // @ngInject
-export default function invitationService(
-  baseServiceClass,
-  $http,
-  ENV,
-  $window,
-) {
-  let ServiceClass = baseServiceClass.extend({
+export default function invitationService(baseServiceClass, ENV, $window) {
+  const ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/user-invitations/';
@@ -27,17 +24,17 @@ export default function invitationService(
       return this.executeAction(invitation_uuid, 'send');
     },
     approve: function(token) {
-      return $http.post(`${ENV.apiEndpoint}api/user-invitations/approve/`, {
+      return Axios.post(`${ENV.apiEndpoint}api/user-invitations/approve/`, {
         token,
       });
     },
     reject: function(token) {
-      return $http.post(`${ENV.apiEndpoint}api/user-invitations/reject/`, {
+      return Axios.post(`${ENV.apiEndpoint}api/user-invitations/reject/`, {
         token,
       });
     },
     executeAction: function(invitation_uuid, action, data) {
-      return $http.post(
+      return Axios.post(
         `${ENV.apiEndpoint}api/user-invitations/${invitation_uuid}/${action}/`,
         data,
       );
