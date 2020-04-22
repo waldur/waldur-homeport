@@ -1,13 +1,10 @@
+import { parseQueryString, getQueryString } from '@waldur/core/utils';
+
 import template from './payment-approve.html';
 
 // @ngInject
-function PaymentApproveController(
-  ncUtils,
-  ncUtilsFlash,
-  paymentsService,
-  $state,
-) {
-  const qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+function PaymentApproveController(ncUtilsFlash, paymentsService, $state) {
+  const qs = parseQueryString(getQueryString());
   if (!qs.paymentId || !qs.PayerID || !qs.token) {
     ncUtilsFlash.error(
       gettext('Invalid URL. Unable to parse payment details.'),

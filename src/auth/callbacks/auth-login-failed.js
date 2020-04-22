@@ -1,8 +1,9 @@
+import { parseQueryString, getQueryString } from '@waldur/core/utils';
+
 import template from './auth-login-failed.html';
 
-// @ngInject
-function AuthLoginFailedController(ncUtils) {
-  const qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+function AuthLoginFailedController() {
+  const qs = parseQueryString(getQueryString());
   if (qs && qs.message) {
     this.message = decodeURIComponent(qs.message);
   }

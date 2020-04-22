@@ -1,5 +1,7 @@
 import Axios from 'axios';
 
+import { toKeyValue } from '@waldur/core/utils';
+
 import template from './action-dialog.html';
 
 // @ngInject
@@ -11,7 +13,6 @@ function ActionDialogController(
   actionUtilsService,
   ncUtilsFlash,
   ActionResourceLoader,
-  ncUtils,
   DEFAULT_FIELD_OPTIONS,
 ) {
   angular.extend($scope, {
@@ -109,7 +110,7 @@ function ActionDialogController(
       let promise;
       let url;
       if ($scope.action.method === 'DELETE') {
-        url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
+        url = $scope.action.url + '?' + toKeyValue($scope.form);
         promise = Axios.delete(url);
       } else if ($scope.action.method === 'PUT') {
         url = $scope.resource.url;

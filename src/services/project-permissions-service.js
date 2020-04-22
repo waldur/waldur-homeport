@@ -1,6 +1,8 @@
+import { getUUID } from '@waldur/core/utils';
+
 // @ngInject
-export default function projectPermissionsService(baseServiceClass, ncUtils) {
-  let ServiceClass = baseServiceClass.extend({
+export default function projectPermissionsService(baseServiceClass) {
+  const ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/project-permissions/';
@@ -10,7 +12,7 @@ export default function projectPermissionsService(baseServiceClass, ncUtils) {
       return this.$delete(this.getPermissionKey(permission));
     },
 
-    getPermissionKey: ncUtils.getUUID,
+    getPermissionKey: getUUID,
   });
   return new ServiceClass();
 }

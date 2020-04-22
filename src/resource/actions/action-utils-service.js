@@ -9,7 +9,6 @@ export default function actionUtilsService(
   $q,
   $uibModal,
   $injector,
-  ncUtils,
   features,
   resourcesService,
   ActionConfiguration,

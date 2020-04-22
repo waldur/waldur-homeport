@@ -109,6 +109,18 @@ export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');
 
 export const range = n => Array.from(Array(n).keys());
 
+export function getQueryString() {
+  // Example input: http://example.com/#/approve/?foo=123&bar=456
+  // Example output: foo=123&bar=456
+
+  const hash = document.location.hash;
+  const parts = hash.split('?');
+  if (parts.length > 1) {
+    return parts[1];
+  }
+  return '';
+}
+
 export function parseQueryString(qs) {
   // Example input: foo=123&bar=456
   // Example output: {foo: "123", bar: "456"}
@@ -175,3 +187,55 @@ export const truncate = (fullStr: string, strLen = 30, separator = '...') => {
     fullStr.substr(fullStr.length - backChars)
   );
 };
+
+function getPrettyQuotaName(name) {
+  return name.replace(/nc_|_count/g, '').replace(/_/g, ' ');
+}
+
+export function isCustomerQuotaReached(customer, quotaName) {
+  const quotas = customer.quotas || [];
+  for (const quota of quotas) {
+    const name = getPrettyQuotaName(quota.name);
+    if (
+      name === quotaName &&
+      quota.limit > -1 &&
+      (quota.limit === quota.usage || quota.limit === 0)
+    ) {
+      return { name, usage: [quota.limit, quota.usage] };
+    }
+  }
+  return false;
+}
+
+export function mergeLists(list1, list2, fieldIdentifier) {
+  list1 = list1 || [];
+  list2 = list2 || [];
+  fieldIdentifier = fieldIdentifier || 'uuid';
+  const itemByUuid = {};
+  const newListUuids = list2.map(item => {
+    return item[fieldIdentifier];
+  });
+  for (const item of list1) {
+    itemByUuid[item[fieldIdentifier]] = item;
+  }
+
+  // Remove stale items
+  list1 = list1.filter(item => {
+    return newListUuids.indexOf(item[fieldIdentifier]) !== -1;
+  });
+
+  // Add or update remaining items
+  for (const item2 of list2) {
+    const item1 = itemByUuid[item2[fieldIdentifier]];
+    if (!item1) {
+      list1.push(item2);
+      continue;
+    }
+    for (const key in item2) {
+      if (item2.hasOwnProperty(key)) {
+        item1[key] = item2[key];
+      }
+    }
+  }
+  return list1;
+}

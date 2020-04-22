@@ -1,5 +1,7 @@
+import { getUUID } from '@waldur/core/utils';
+
 // @ngInject
-export default function customerPermissionsService(baseServiceClass, ncUtils) {
+export default function customerPermissionsService(baseServiceClass) {
   const ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
@@ -10,7 +12,7 @@ export default function customerPermissionsService(baseServiceClass, ncUtils) {
       return this.$delete(this.getPermissionKey(permission));
     },
 
-    getPermissionKey: ncUtils.getUUID,
+    getPermissionKey: getUUID,
   });
   return new ServiceClass();
 }
