@@ -1,3 +1,4 @@
+import { translate } from '@waldur/i18n';
 import { getTemplates } from '@waldur/issues/api';
 import { putAttachment } from '@waldur/issues/attachments/api';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';

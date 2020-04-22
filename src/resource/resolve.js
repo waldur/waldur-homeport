@@ -1,7 +1,5 @@
-import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
-
 // @ngInject
-function loadResource(
+export function loadResource(
   $stateParams,
   $q,
   $state,
@@ -45,7 +43,7 @@ function loadResource(
 }
 
 // @ngInject
-function ResourceController(
+export function ResourceController(
   $scope,
   usersService,
   currentStateService,
@@ -60,34 +58,4 @@ function ResourceController(
       currentStateService.setOwnerOrStaff(status);
     });
   });
-}
-
-// @ngInject
-export default function resourceRoutes($stateProvider) {
-  $stateProvider
-    .state('resources', {
-      url: '/resources/',
-      abstract: true,
-      template: '<ui-view></ui-view>',
-      data: {
-        auth: true,
-        workspace: WOKSPACE_NAMES.project,
-        pageClass: 'gray-bg',
-      },
-    })
-
-    .state('resources.details', {
-      url: ':resource_type/:uuid/:tab',
-      template: '<resource-header></resource-header>',
-      params: {
-        tab: {
-          value: '',
-          dynamic: true,
-        },
-      },
-      resolve: {
-        resource: loadResource,
-      },
-      controller: ResourceController,
-    });
 }

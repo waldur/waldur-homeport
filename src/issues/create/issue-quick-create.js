@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import template from './issue-quick-create.html';
 
 class IssueQuickCreateController {
@@ -25,10 +27,9 @@ class IssueQuickCreateController {
     this.resourcesService = resourcesService;
     this.usersService = usersService;
     this.ErrorMessageFormatter = ErrorMessageFormatter;
-    this.init();
   }
 
-  init() {
+  $onInit() {
     this.$scope.$watch(
       () => this.issue.customer,
       () => {
@@ -44,7 +45,7 @@ class IssueQuickCreateController {
         this.refreshResources();
       },
     );
-    this.emptyFieldMessage = gettext('You did not enter a field.');
+    this.emptyFieldMessage = translate('You did not enter a field.');
     this.projectRequired = false;
     this.usersService.getCurrentUser().then(user => {
       this.user = user;

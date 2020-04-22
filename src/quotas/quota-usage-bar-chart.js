@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import template from './quota-usage-bar-chart.html';
 
 const quotaUsageBarChart = {

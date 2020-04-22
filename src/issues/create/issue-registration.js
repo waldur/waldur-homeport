@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import template from './issue-registration.html';
 
 class IssueRegistrationController {

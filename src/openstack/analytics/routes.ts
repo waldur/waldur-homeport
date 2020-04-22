@@ -1,11 +1,12 @@
-import { checkPermission } from '@waldur/issues/routes';
+import { gettext } from '@waldur/i18n';
+import { checkPermission } from '@waldur/issues/utils';
 import { withStore } from '@waldur/store/connect';
 
 import { VmTypeOverviewContainer } from './VmTypeOverviewContainer';
 
-// @ngInject
-export default function analyticsRoutes($stateProvider) {
-  $stateProvider.state('support.vm-type-overview', {
+export const states = [
+  {
+    name: 'support.vm-type-overview',
     url: 'vm-type-overview/',
     component: withStore(VmTypeOverviewContainer),
     data: {
@@ -15,5 +16,10 @@ export default function analyticsRoutes($stateProvider) {
     resolve: {
       permission: checkPermission,
     },
-  });
+  },
+];
+
+export default function registerRoutes($stateProvider) {
+  states.forEach(({ name, ...rest }) => $stateProvider.state(name, rest));
 }
+registerRoutes.$inject = ['$stateProvider'];
