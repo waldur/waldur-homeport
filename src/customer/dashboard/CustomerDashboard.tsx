@@ -53,17 +53,19 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => {
               <CustomerActions customer={props.customer} user={props.user} />
             </Col>
           </Row>
-          <Panel title={translate('Resources')}>
-            <CustomerResourcesList />
-          </Panel>
-          {isFeatureVisible('customer.dashboard.category-resources-list') && (
-            <CategoryResourcesList
-              scopeType="organization"
-              scope={props.customer}
-            />
-          )}
         </div>
       ) : null}
+      <>
+        <Panel title={translate('Resources')}>
+          <CustomerResourcesList />
+        </Panel>
+        {isFeatureVisible('customer.dashboard.category-resources-list') && (
+          <CategoryResourcesList
+            scopeType="organization"
+            scope={props.customer}
+          />
+        )}
+      </>
     </>
   );
 };
