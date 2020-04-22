@@ -37,7 +37,7 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => {
       />
       {loading ? (
         <LoadingSpinner />
-      ) : (
+      ) : Array.isArray(value) ? (
         <div style={{ paddingLeft: 10 }}>
           <Row>
             {value.map((item, index) => (
@@ -63,7 +63,7 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => {
             />
           )}
         </div>
-      )}
+      ) : null}
     </>
   );
 };
