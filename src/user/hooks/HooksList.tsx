@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { titleCase } from '@waldur/core/utils';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, createFetcher, connectTable } from '@waldur/table-react';
+import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { hooksListTable } from './constants';
@@ -62,6 +63,7 @@ const TableComponent = props => {
       showPageSizeSelector={true}
       verboseName={translate('Notifications')}
       actions={<HookCreateButton />}
+      placeholderComponent={<HookListTablePlaceholder />}
       enableExport={true}
     />
   );
