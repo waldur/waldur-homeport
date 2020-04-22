@@ -1,4 +1,5 @@
 import { checkPermission } from '@waldur/issues/routes';
+import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
 
 import { CheckoutPage } from './cart/CheckoutPage';
@@ -108,7 +109,7 @@ export default function routes($stateProvider) {
     .state('marketplace-public-offering', {
       url: '/marketplace-public-offering/',
       abstract: true,
-      templateUrl: 'views/partials/base.html',
+      component: withStore(AnonymousLayout),
       data: {
         hideHeader: true,
       },

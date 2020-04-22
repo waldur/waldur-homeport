@@ -1,3 +1,4 @@
+import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
 
 import { InvalidObjectPage } from './InvalidObjectPage';
@@ -8,7 +9,7 @@ import { InvalidRoutePage } from './InvalidRoutePage';
 export default function errorRoutes($stateProvider) {
   $stateProvider
     .state('errorPage', {
-      templateUrl: 'views/partials/base.html',
+      component: withStore(AnonymousLayout),
       abstract: true,
       data: {
         bodyClass: 'old',

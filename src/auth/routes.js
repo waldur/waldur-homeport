@@ -1,10 +1,13 @@
+import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
+import { withStore } from '@waldur/store/connect';
+
 // @ngInject
 export default function authRoutes($stateProvider) {
   $stateProvider
     .state('home', {
       url: '',
       abstract: true,
-      templateUrl: 'views/partials/base.html',
+      component: withStore(AnonymousLayout),
     })
 
     .state('login', {

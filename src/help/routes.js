@@ -1,10 +1,13 @@
+import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
+import { withStore } from '@waldur/store/connect';
+
 // @ngInject
 export default function helpRoutes($stateProvider) {
   $stateProvider
     .state('help', {
       url: '/help/',
       abstract: true,
-      templateUrl: 'views/partials/base.html',
+      component: withStore(AnonymousLayout),
       data: {
         pageTitle: gettext('Help'),
         bodyClass: 'old',

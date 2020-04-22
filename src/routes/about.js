@@ -1,10 +1,13 @@
+import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
+import { withStore } from '@waldur/store/connect';
+
 // @ngInject
 export default function aboutRoutes($stateProvider) {
   $stateProvider
     .state('tos', {
       url: '/tos/',
       abstract: true,
-      templateUrl: 'views/partials/base.html',
+      component: withStore(AnonymousLayout),
     })
 
     .state('tos.index', {
@@ -29,7 +32,7 @@ export default function aboutRoutes($stateProvider) {
     .state('about', {
       url: '/about/',
       abstract: true,
-      templateUrl: 'views/partials/base.html',
+      component: withStore(AnonymousLayout),
     })
 
     .state('about.index', {
@@ -44,7 +47,7 @@ export default function aboutRoutes($stateProvider) {
     .state('policy', {
       url: '/policy/',
       abstract: true,
-      templateUrl: 'views/partials/base.html',
+      component: withStore(AnonymousLayout),
     })
 
     .state('policy.privacy', {
