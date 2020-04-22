@@ -7,6 +7,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableProps } from '@waldur/table-react/Table';
 import { Column, TableOptionsType } from '@waldur/table-react/types';
 
+import { ResourceRowActions } from '../actions/ResourceRowActions';
 import { ResourceName } from '../ResourceName';
 import { ResourceState } from '../state/ResourceState';
 import { Resource } from '../types';
@@ -39,6 +40,10 @@ const TableComponent = (
     {
       title: translate('State'),
       render: ({ row }) => <ResourceState resource={row} />,
+    },
+    {
+      title: translate('Actions'),
+      render: ({ row }) => <ResourceRowActions resource={row} />,
     },
   ];
 
