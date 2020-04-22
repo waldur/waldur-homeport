@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 export type PaymentStateType = 'Erred' | 'Approved' | 'Created' | 'Cancelled';
 
@@ -25,5 +24,3 @@ export const PaymentStateIndicator = (props: PaymentStateIndicatorProps) => (
     active={props.payment.state === 'Created'}
   />
 );
-
-export default connectAngularComponent(PaymentStateIndicator, ['payment']);

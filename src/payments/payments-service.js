@@ -2,7 +2,7 @@ import Axios from 'axios';
 
 // @ngInject
 export default function paymentsService(baseServiceClass, ENV) {
-  let ServiceClass = baseServiceClass.extend({
+  const ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/paypal-payments/';

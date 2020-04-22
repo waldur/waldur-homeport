@@ -7,7 +7,7 @@ function PaymentCancelController(
   paymentsService,
   $state,
 ) {
-  let qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+  const qs = ncUtils.parseQueryString(ncUtils.getQueryString());
   if (!qs.token) {
     ncUtilsFlash.error(
       gettext('Invalid URL. Unable to parse payment details.'),
