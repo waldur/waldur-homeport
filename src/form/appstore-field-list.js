@@ -7,7 +7,9 @@ class FieldController {
   constructor($uibModal, $filter) {
     this.$uibModal = $uibModal;
     this.$filter = $filter;
+  }
 
+  $onInit() {
     if (this.field.parser) {
       const choices = this.field.choices.map(this.field.parser);
       this.field = angular.extend({}, this.field, { choices });

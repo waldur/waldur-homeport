@@ -1,7 +1,7 @@
 import template from './appstore-list-dialog.html';
 
 class DialogController {
-  constructor() {
+  $onInit() {
     this.field = this.resolve.field;
     this.model = this.resolve.model;
     this.value = this.model[this.field.name];

@@ -8,7 +8,7 @@ export default {
     form: '<',
   },
   controller: class {
-    constructor() {
+    $onInit() {
       if (!this.field.factor) {
         this.field.factor = 1;
       }

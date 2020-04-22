@@ -5,12 +5,14 @@ const actionFieldCrontab = {
     model: '<',
     field: '<',
   },
-  controller: function() {
-    this.field.config = this.field.config || {
-      options: {
-        allowMinute: false,
-      },
-    };
+  controller: class Controller {
+    $onInit() {
+      this.field.config = this.field.config || {
+        options: {
+          allowMinute: false,
+        },
+      };
+    }
   },
 };
 
