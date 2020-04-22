@@ -10,15 +10,33 @@ interface ResourceActionComponentProps {
   onToggle: (isOpen: boolean) => void;
   onSelect: (name: string, action: object) => void;
   disabled?: boolean;
+  open?: boolean;
   loading?: boolean;
   error?: object;
   actions: object;
 }
 
-const getButtonClass = action => ({
-  disabled: !action.enabled || action.pending,
-  remove: action.destructive,
-});
+const ActionItem = ({ action, key, onSelect }) => (
+  <MenuItem
+    eventKey={key}
+    className={classNames({
+      remove: action.destructive,
+    })}
+    disabled={!action.enabled || action.pending}
+    onSelect={() => onSelect(key, action)}
+  >
+    {action.reason ? (
+      <>
+        <Tooltip key={key} label={action.reason} id={`action-reason-${key}`}>
+          <i className="fa fa-question-circle" />
+        </Tooltip>{' '}
+        {action.title}
+      </>
+    ) : (
+      action.title
+    )}
+  </MenuItem>
+);
 
 export const ResourceActionComponent = (
   props: ResourceActionComponentProps,
@@ -26,39 +44,28 @@ export const ResourceActionComponent = (
   <DropdownButton
     title={translate('Actions')}
     id="actions-dropdown-btn"
-    className={props.disabled ? 'disabled' : ''}
     onToggle={props.onToggle}
+    open={props.open}
+    disabled={props.disabled}
   >
-    {props.loading ? (
-      <MenuItem eventKey="1">{translate('Loading actions')}</MenuItem>
-    ) : props.error ? (
-      <MenuItem eventKey="1">{translate('Unable to load actions')}</MenuItem>
-    ) : Object.keys(props.actions).length === 0 ? (
-      <MenuItem eventKey="2">{translate('There are no actions.')}</MenuItem>
-    ) : (
-      Object.keys(props.actions).map(key => (
-        <MenuItem
-          key={key}
-          eventKey={key}
-          className={classNames(getButtonClass(props.actions[key]))}
-          onSelect={() => props.onSelect(key, props.actions[key])}
-        >
-          {props.actions[key].reason ? (
-            <>
-              <Tooltip
-                key={key}
-                label={props.actions[key].reason}
-                id="action-reason"
-              >
-                <i className="fa fa-question-circle" />
-              </Tooltip>{' '}
-              {props.actions[key].title}
-            </>
-          ) : (
-            props.actions[key].title
-          )}
-        </MenuItem>
-      ))
-    )}
+    {props.open ? (
+      props.loading ? (
+        <MenuItem eventKey="1">{translate('Loading actions')}</MenuItem>
+      ) : props.error ? (
+        <MenuItem eventKey="1">{translate('Unable to load actions')}</MenuItem>
+      ) : props.actions ? (
+        Object.keys(props.actions).length === 0 ? (
+          <MenuItem eventKey="2">{translate('There are no actions.')}</MenuItem>
+        ) : (
+          Object.keys(props.actions).map(key => (
+            <ActionItem
+              key={key}
+              action={props.actions[key]}
+              onSelect={props.onSelect}
+            />
+          ))
+        )
+      ) : null
+    ) : null}
   </DropdownButton>
 );

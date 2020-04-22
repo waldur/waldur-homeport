@@ -1,43 +1,30 @@
-import * as classNames from 'classnames';
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import * as Button from 'react-bootstrap/lib/Button';
+import { useDispatch } from 'react-redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 
-interface PureResourceSummaryButtonProps extends TranslateProps {
+interface ResourceSummaryButtonProps {
   url: string;
-  showDetailsModal(): void;
   disabled?: boolean;
 }
 
-export const PureResourceSummaryButton = (
-  props: PureResourceSummaryButtonProps,
-) => {
-  const { showDetailsModal, translate, disabled } = props;
-  return (
-    <div
-      className={classNames({ disabled }, 'btn btn-default btn-sm')}
-      onClick={showDetailsModal}
-    >
-      {translate('Details')}
-    </div>
-  );
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  showDetailsModal: (): void =>
+export const ResourceSummaryButton: React.FC<ResourceSummaryButtonProps> = ({
+  disabled,
+  url,
+}) => {
+  const dispatch = useDispatch();
+  const showDetailsModal = () => {
     dispatch(
       openModalDialog('resource-summary-modal', {
-        resolve: { url: ownProps.url },
+        resolve: { url },
       }),
-    ),
-});
-
-const enhance = compose(connect(null, mapDispatchToProps), withTranslation);
-
-export const ResourceSummaryButton = enhance(PureResourceSummaryButton);
-
-export default connectAngularComponent(ResourceSummaryButton, ['url']);
+    );
+  };
+  return (
+    <Button disabled={disabled} bsSize="small" onClick={showDetailsModal}>
+      {translate('Details')}
+    </Button>
+  );
+};

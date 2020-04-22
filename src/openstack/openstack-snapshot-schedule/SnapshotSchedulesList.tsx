@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
+import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { formatCrontab } from '@waldur/resource/crontab';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
@@ -33,6 +34,10 @@ const TableComponent = props => {
         {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
+        },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <ResourceRowActions resource={row} />,
         },
       ]}
       verboseName={translate('snapshot schedules')}

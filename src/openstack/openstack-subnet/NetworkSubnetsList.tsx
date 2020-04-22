@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
@@ -21,6 +22,10 @@ const TableComponent = props => {
         {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
+        },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <ResourceRowActions resource={row} />,
         },
       ]}
       verboseName={translate('subnets')}
