@@ -10,6 +10,10 @@ export default function authRoutes($stateProvider) {
     .state('login', {
       url: '/login/',
       template: '<auth-login mode="\'login\'"></auth-login>',
+      params: {
+        toState: '',
+        toParams: {},
+      },
       data: {
         bodyClass: 'old',
         anonymous: true,

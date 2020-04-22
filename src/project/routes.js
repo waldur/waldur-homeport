@@ -1,4 +1,11 @@
+import { withStore } from '@waldur/store/connect';
+
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+
+import { ProjectDashboardContainer } from './ProjectDashboardContainer';
+import { ProjectEventsView } from './ProjectEventsList';
+import { ProjectIssuesList } from './ProjectIssuesList';
+import { ProjectTeam } from './team/ProjectTeam';
 
 // @ngInject
 function loadProject(
@@ -62,7 +69,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.details', {
       url: '',
-      template: '<project-dashboard></project-dashboard>',
+      component: withStore(ProjectDashboardContainer),
       data: {
         pageTitle: gettext('Dashboard'),
         pageClass: 'gray-bg',
@@ -72,7 +79,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.issues', {
       url: 'issues/',
-      template: '<project-issues></project-issues>',
+      component: withStore(ProjectIssuesList),
       data: {
         feature: 'support',
         pageTitle: gettext('Issues'),
@@ -82,7 +89,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.events', {
       url: 'events/',
-      template: '<project-events></project-events>',
+      component: withStore(ProjectEventsView),
       data: {
         pageTitle: gettext('Audit logs'),
       },
@@ -90,7 +97,7 @@ export default function projectRoutes($stateProvider) {
 
     .state('project.team', {
       url: 'team/',
-      template: '<project-team>',
+      component: withStore(ProjectTeam),
       data: {
         pageTitle: gettext('Team'),
       },

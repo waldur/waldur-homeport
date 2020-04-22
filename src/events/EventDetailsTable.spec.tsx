@@ -6,9 +6,11 @@ import { translate } from '@waldur/i18n';
 import { EventDetailsTable } from './EventDetailsTable';
 import { event } from './fixtures';
 
-jest.mock('@waldur/core/services', () => ({
-  $state: { href: x => x },
-}));
+jest.mock('@waldur/core/Link', () => {
+  return {
+    Link: ({ label, children }) => <a>{label || children}</a>,
+  };
+});
 
 const renderTable = (props?) =>
   mount(

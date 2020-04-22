@@ -12,7 +12,6 @@ import { SubmitButton } from '@waldur/form-react/SubmitButton';
 import { TextField } from '@waldur/form-react/TextField';
 import { HelpLink } from '@waldur/help/HelpLink';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { showSuccess } from '@waldur/store/coreSaga';
 
 import { createKey } from './api';
@@ -110,5 +109,3 @@ const enhance = compose(
 );
 
 export const KeyCreateForm = enhance(PureKeyCreateForm);
-
-export default connectAngularComponent(KeyCreateForm);

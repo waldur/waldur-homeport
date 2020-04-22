@@ -1,4 +1,4 @@
-import analyticsModule from './analytics/module';
+import routes from './analytics/routes';
 import openstackBackupScheduleModule from './openstack-backup-schedule/module';
 import openstackBackupModule from './openstack-backup/module';
 import openstackFloatingIpsModule from './openstack-floating-ips/module';
@@ -15,7 +15,7 @@ import './events';
 import './marketplace';
 
 export default module => {
-  analyticsModule(module);
+  module.config(routes);
   openstackTenantModule(module);
   openstackInstanceModule(module);
   openstackVolumeModule(module);

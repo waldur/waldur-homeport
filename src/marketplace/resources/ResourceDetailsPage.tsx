@@ -1,12 +1,12 @@
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state, ngInjector } from '@waldur/core/services';
+import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { getResource } from '../common/api';
 
@@ -33,14 +33,23 @@ async function fetchResource(uuid) {
 }
 
 export const ResourceDetailsPage = () => {
-  const state = useAsync(() => fetchResource($state.params.resource_uuid));
+  const {
+    params: { resource_uuid },
+  } = useCurrentStateAndParams();
+
+  const state = useAsync(() => fetchResource(resource_uuid), [resource_uuid]);
+
+  const router = useRouter();
+
   if (state.error) {
-    $state.go('errorPage.notFound');
-    return;
+    router.stateService.go('errorPage.notFound');
+    return null;
   }
+
   if (state.loading) {
     return <LoadingSpinner />;
   }
+
   const resource = state.value;
   return (
     <>
@@ -57,5 +66,3 @@ export const ResourceDetailsPage = () => {
     </>
   );
 };
-
-export default connectAngularComponent(ResourceDetailsPage);

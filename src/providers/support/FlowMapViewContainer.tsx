@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { connectAngularComponent } from '@waldur/store/connect';
-
 import {
   fetchServiceUsageStart,
   serviceProviderSelect,
@@ -54,6 +52,4 @@ const mapDispatchToProps = {
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);
 
-const FlowMapViewContainer = enhance(FlowMapViewComponent);
-
-export default connectAngularComponent(FlowMapViewContainer);
+export const FlowMapViewContainer = enhance(FlowMapViewComponent);

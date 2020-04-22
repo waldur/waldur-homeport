@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import template from './auth-login.html';
 
 // TODO:
@@ -21,6 +23,7 @@ export const authLogin = {
       ENV,
       $q,
       $state,
+      $uiRouterGlobals,
       authService,
       ncUtilsFlash,
       invitationService,
@@ -31,6 +34,7 @@ export const authLogin = {
       this.ENV = ENV;
       this.$q = $q;
       this.$state = $state;
+      this.$uiRouterGlobals = $uiRouterGlobals;
       this.authService = authService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.invitationService = invitationService;
@@ -40,7 +44,7 @@ export const authLogin = {
 
       this.loginLogo = ENV.loginLogo;
       this.pageTitle = this.coreUtils.templateFormatter(
-        gettext('Welcome to {pageTitle}!'),
+        translate('Welcome to {pageTitle}!'),
         { pageTitle: ENV.shortPageTitle },
       );
       this.shortPageTitle = ENV.shortPageTitle;
@@ -181,7 +185,7 @@ export const authLogin = {
 
       const token = this.invitationService.getInvitationToken();
       if (!token) {
-        this.ncUtilsFlash.error(gettext('Invitation token is not found.'));
+        this.ncUtilsFlash.error(translate('Invitation token is not found.'));
         this.$state.go('errorPage.notFound');
         return;
       }
@@ -194,7 +198,7 @@ export const authLogin = {
         },
         () => {
           this.ncUtilsFlash.error(
-            gettext('Unable to validate invitation token.'),
+            translate('Unable to validate invitation token.'),
           );
           this.$state.go('errorPage.notFound');
         },
@@ -220,17 +224,12 @@ export const authLogin = {
     }
 
     loginSuccess() {
-      // TODO: Migrate to Angular-UI Router v1.0
-      // And use $transition service which supports promises
-      // https://github.com/angular-ui/ui-router/issues/1153
-      return this.usersService.getCurrentUser().then(user => {
-        const data = this.UserSettings.getSettings(user.uuid);
-        if (data && data.name && data.params) {
-          return this.$state.go(data.name, data.params);
-        } else {
-          return this.$state.go('profile.details', {}, { reload: true });
-        }
-      });
+      const { toState, toParams } = this.$uiRouterGlobals.params;
+      if (toState) {
+        return this.$state.go(toState, toParams, { reload: true });
+      } else {
+        return this.$state.go('profile.details', { reload: true });
+      }
     }
 
     getErrors() {
@@ -238,14 +237,14 @@ export const authLogin = {
         return '';
       }
 
-      let prettyErrors = [];
+      const prettyErrors = [];
       if (angular.isString(this.errors)) {
         return [this.errors];
       }
       if (angular.isString(this.errors.detail)) {
         return [this.errors.detail];
       }
-      for (let key in this.errors) {
+      for (const key in this.errors) {
         if (this.errors.hasOwnProperty(key)) {
           if (angular.isArray(this.errors[key])) {
             prettyErrors.push(key + ': ' + this.errors[key].join(', '));
@@ -265,7 +264,7 @@ export const authLogin = {
       return this.authService.signup(this.user).then(
         () => {
           this.ncUtilsFlash.info(
-            gettext(
+            translate(
               'Confirmation mail has been sent. Please check your inbox!',
             ),
           );

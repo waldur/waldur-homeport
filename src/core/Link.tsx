@@ -1,6 +1,5 @@
+import { UISref } from '@uirouter/react';
 import * as React from 'react';
-
-import { $state } from './services';
 
 interface LinkProps {
   label?: React.ReactNode;
@@ -13,12 +12,13 @@ interface LinkProps {
 }
 
 export const Link = (props: LinkProps) => (
-  <a
-    href={$state.href(props.state, props.params)}
-    className={props.className}
-    target={props.target}
-    onClick={props.onClick}
-  >
-    {props.label || props.children}
-  </a>
+  <UISref to={props.state} params={props.params}>
+    <a
+      target={props.target}
+      onClick={props.onClick}
+      className={props.className}
+    >
+      {props.label || props.children}
+    </a>
+  </UISref>
 );

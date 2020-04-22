@@ -7,7 +7,6 @@ import { Query } from '@waldur/core/Query';
 import { $filter } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { loadData, parseProjects } from './api';
 import { treemapFilterSelector } from './selectors';
@@ -143,4 +142,4 @@ const mapStateToProps = state => ({
 
 const enhance = compose(connect(mapStateToProps), withTranslation);
 
-export default connectAngularComponent(enhance(TreemapContainer));
+export const ResourcesTreemap = enhance(TreemapContainer);

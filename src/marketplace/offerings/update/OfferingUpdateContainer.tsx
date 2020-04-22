@@ -4,7 +4,6 @@ import { reduxForm } from 'redux-form';
 
 import { $state } from '@waldur/core/services';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { mergeProps } from '../create/OfferingCreateContainer';
 import { updateOffering, FORM_ID } from '../store/constants';
@@ -53,6 +52,4 @@ const enhance = compose(
   }),
 );
 
-const OfferingUpdateContainer = enhance(OfferingUpdateDialog);
-
-export default connectAngularComponent(OfferingUpdateContainer);
+export const OfferingUpdateContainer = enhance(OfferingUpdateDialog);

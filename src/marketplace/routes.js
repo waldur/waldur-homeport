@@ -1,11 +1,39 @@
 import { checkPermission } from '@waldur/issues/routes';
+import { withStore } from '@waldur/store/connect';
+
+import { CheckoutPage } from './cart/CheckoutPage';
+import { ShoppingCartItemUpdate } from './cart/ShoppingCartItemUpdate';
+import { CategoryPage } from './category/CategoryPage';
+import { MarketplaceComparison } from './compare/ComparisonContainer';
+import { OfferingDetailsPage } from './details/DetailsPage';
+import { MarketplaceLanding } from './landing/LandingPageContainer';
+import { OfferingCreateContainer } from './offerings/create/OfferingCreateContainer';
+import { OfferingContainer } from './offerings/details/OfferingContainer';
+import { PublicOfferingDetails } from './offerings/details/PublicOfferingDetails';
+import { MyOfferingsListContainer } from './offerings/MyOfferingsListContainer';
+import { OfferingsListContainer } from './offerings/OfferingsListContainer';
+import { OfferingUpdateContainer } from './offerings/update/OfferingUpdateContainer';
+import { OrderItemDetailsContainer } from './orders/item/details/OrderItemDetailsContainer';
+import { MyOrderItemsContainer } from './orders/item/list/MyOrderItemsContainer';
+import { OrderItemsContainer } from './orders/item/list/OrderItemsContainer';
+import { SupportOrderItemsContainer } from './orders/item/list/SupportOrderItemsContainer';
+import { OrderDetailsContainer } from './orders/OrderDetailsContainer';
+import { OrdersList } from './orders/OrdersList';
+import { CustomerResourcesContainer } from './resources/list/CustomerResourcesContainer';
+import { ProjectResourcesContainer } from './resources/list/ProjectResourcesContainer';
+import { PublicResourcesContainer } from './resources/list/PublicResourcesContainer';
+import { SupportResourcesContainer } from './resources/list/SupportResourcesContainer';
+import { PlanUsageContainer } from './resources/plan-usage/PlanUsageContainer';
+import { ResourceDetailsPage } from './resources/ResourceDetailsPage';
+import { SupportUsageContainer } from './resources/usage/SupportUsageContainer';
+import { ProviderDetails } from './service-providers/ProviderDetails';
 
 // @ngInject
 export default function routes($stateProvider) {
   $stateProvider
     .state('marketplace-landing', {
       url: 'marketplace/',
-      template: '<marketplace-landing></marketplace-landing>',
+      component: withStore(MarketplaceLanding),
       parent: 'project',
       data: {
         pageTitle: gettext('Marketplace'),
@@ -15,7 +43,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-landing-customer', {
       url: 'marketplace/',
-      template: '<marketplace-landing></marketplace-landing>',
+      component: withStore(MarketplaceLanding),
       parent: 'organization',
       data: {
         pageTitle: gettext('Marketplace'),
@@ -25,7 +53,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-compare', {
       url: 'marketplace-compare/',
-      template: '<marketplace-compare></marketplace-compare>',
+      component: withStore(MarketplaceComparison),
       parent: 'project',
       data: {
         pageTitle: gettext('Compare items'),
@@ -34,7 +62,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-compare-customer', {
       url: 'marketplace-compare/',
-      template: '<marketplace-compare></marketplace-compare>',
+      component: withStore(MarketplaceComparison),
       parent: 'organization',
       data: {
         pageTitle: gettext('Compare items'),
@@ -43,7 +71,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-checkout', {
       url: 'marketplace-checkout/',
-      template: '<marketplace-checkout></marketplace-checkout>',
+      component: withStore(CheckoutPage),
       parent: 'project',
       data: {
         pageTitle: gettext('Marketplace checkout'),
@@ -52,7 +80,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-offering', {
       url: 'marketplace-offering/:offering_uuid/',
-      template: '<marketplace-offering></marketplace-offering>',
+      component: withStore(OfferingDetailsPage),
       parent: 'project',
       data: {
         pageTitle: gettext('Offering details'),
@@ -61,7 +89,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-offering-customer', {
       url: 'marketplace-offering/:offering_uuid/',
-      template: '<marketplace-offering></marketplace-offering>',
+      component: withStore(OfferingDetailsPage),
       parent: 'organization',
       data: {
         pageTitle: gettext('Offering details'),
@@ -70,8 +98,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-offering-details', {
       url: 'marketplace-offering-details/:offering_uuid/',
-      template:
-        '<marketplace-offering-details-page></marketplace-offering-details-page>',
+      component: withStore(OfferingContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('Offering details'),
@@ -89,8 +116,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-public-offering.details', {
       url: ':uuid/',
-      template:
-        '<marketplace-public-offering-details-page></marketplace-public-offering-details>',
+      component: withStore(PublicOfferingDetails),
       data: {
         pageTitle: gettext('Offering details'),
       },
@@ -98,7 +124,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-category', {
       url: 'marketplace-category/:category_uuid/',
-      template: '<marketplace-category></marketplace-category>',
+      component: withStore(CategoryPage),
       parent: 'project',
       data: {
         pageTitle: gettext('Marketplace offerings'),
@@ -107,7 +133,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-category-customer', {
       url: 'marketplace-category/:category_uuid/',
-      template: '<marketplace-category></marketplace-category>',
+      component: withStore(CategoryPage),
       parent: 'organization',
       data: {
         pageTitle: gettext('Marketplace offerings'),
@@ -116,7 +142,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-order-list', {
       url: 'marketplace-order-list/',
-      template: '<marketplace-orders-list></marketplace-orders-list>',
+      component: withStore(OrdersList),
       parent: 'project',
       data: {
         pageTitle: gettext('My orders'),
@@ -125,7 +151,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-provider-details', {
       url: 'marketplace-provider-details/:customer_uuid/',
-      template: '<marketplace-provider-details></marketplace-provider-details>',
+      component: withStore(ProviderDetails),
       parent: 'project',
       data: {
         pageTitle: gettext('Provider details'),
@@ -134,7 +160,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-provider-details-customer', {
       url: 'marketplace-provider-details/:customer_uuid/',
-      template: '<marketplace-provider-details></marketplace-provider-details>',
+      component: withStore(ProviderDetails),
       parent: 'organization',
       data: {
         pageTitle: gettext('Provider details'),
@@ -149,7 +175,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-vendor-offerings', {
       url: 'marketplace-offerings/',
-      template: '<marketplace-vendor-offerings></marketplace-vendor-offerings>',
+      component: withStore(OfferingsListContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('Public offerings'),
@@ -158,7 +184,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-my-offerings', {
       url: 'marketplace-my-offerings/',
-      template: '<marketplace-my-offerings></marketplace-my-offerings>',
+      component: withStore(MyOfferingsListContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('My offerings'),
@@ -167,7 +193,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-offering-create', {
       url: 'marketplace-offering-create/',
-      template: '<marketplace-offering-create></marketplace-offering-create>',
+      component: withStore(OfferingCreateContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('Add offering'),
@@ -176,7 +202,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-offering-update', {
       url: 'marketplace-offering-update/:offering_uuid/',
-      template: '<marketplace-offering-update></marketplace-offering-update>',
+      component: withStore(OfferingUpdateContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('Update offering'),
@@ -186,7 +212,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-order-details', {
       url: 'marketplace-order-details/:order_uuid/',
-      template: '<marketplace-order-details></marketplace-order-details>',
+      component: withStore(OrderDetailsContainer),
       parent: 'project',
       data: {
         pageTitle: gettext('Order details'),
@@ -195,8 +221,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-order-item-details', {
       url: 'marketplace-order-item-details/:order_item_uuid/',
-      template:
-        '<marketplace-order-item-details></marketplace-order-item-details>',
+      component: withStore(OrderItemDetailsContainer),
       parent: 'project',
       data: {
         pageTitle: gettext('Order item details'),
@@ -206,8 +231,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-order-item-details-customer', {
       url: 'marketplace-order-item-details/:order_item_uuid/',
-      template:
-        '<marketplace-order-item-details></marketplace-order-item-details>',
+      component: withStore(OrderItemDetailsContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('Order item details'),
@@ -217,7 +241,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-order-details-customer', {
       url: 'marketplace-order-details/:order_uuid/',
-      template: '<marketplace-order-details></marketplace-order-details>',
+      component: withStore(OrderDetailsContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('Order details'),
@@ -226,7 +250,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-order-items', {
       url: 'marketplace-order-items/',
-      template: '<marketplace-order-items-list></marketplace-order-items-list>',
+      component: withStore(OrderItemsContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('Public orders'),
@@ -235,8 +259,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-my-order-items', {
       url: 'marketplace-my-order-items/?filterState',
-      template:
-        '<marketplace-my-order-items-list></marketplace-my-order-items-list>',
+      component: withStore(MyOrderItemsContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('My orders'),
@@ -245,8 +268,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-customer-resources', {
       url: 'marketplace-customer-resources/',
-      template:
-        '<marketplace-customer-resources-list></marketplace-customer-resources-list>',
+      component: withStore(CustomerResourcesContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('My resources'),
@@ -255,8 +277,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-public-resources', {
       url: 'marketplace-public-resources/',
-      template:
-        '<marketplace-public-resources-list></marketplace-public-resources-list>',
+      component: withStore(PublicResourcesContainer),
       parent: 'organization',
       data: {
         pageTitle: gettext('Public resources'),
@@ -265,7 +286,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-public-resource-details', {
       url: 'marketplace-public-resource-details/:resource_uuid/',
-      template: '<marketplace-resource-details></marketplace-resource-details>',
+      component: withStore(ResourceDetailsPage),
       parent: 'organization',
       data: {
         pageTitle: gettext('Public resources'),
@@ -274,8 +295,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-support-resources', {
       url: 'marketplace-support-resources/',
-      template:
-        '<marketplace-support-resources-list></marketplace-support-resources-list>',
+      component: withStore(SupportResourcesContainer),
       parent: 'support',
       data: {
         pageTitle: gettext('Resources'),
@@ -287,8 +307,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-support-order-items', {
       url: 'order-items/',
-      template:
-        '<marketplace-support-order-items-list></marketplace-support-order-items-list>',
+      component: withStore(SupportOrderItemsContainer),
       parent: 'support',
       data: {
         pageTitle: gettext('Orders'),
@@ -300,7 +319,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-support-plan-usages', {
       url: 'plan-usages/',
-      template: '<marketplace-plan-usages-list></marketplace-plan-usages-list>',
+      component: withStore(PlanUsageContainer),
       parent: 'support',
       data: {
         pageTitle: gettext('Plan capacity'),
@@ -312,8 +331,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-support-usage-reports', {
       url: 'usage-reports/',
-      template:
-        '<marketplace-support-usage-list></marketplace-support-usage-list>',
+      component: withStore(SupportUsageContainer),
       parent: 'support',
       data: {
         pageTitle: gettext('Usage reports'),
@@ -331,8 +349,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-project-resources', {
       url: 'marketplace-resources/:category_uuid/',
-      template:
-        '<marketplace-project-resources-list></marketplace-project-resources-list>',
+      component: withStore(ProjectResourcesContainer),
       parent: 'project',
       data: {
         pageTitle: gettext('Resources'),
@@ -341,8 +358,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-shopping-cart-item-update', {
       url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
-      template:
-        '<marketplace-shopping-cart-item-update></marketplace-shopping-cart-item-update>',
+      component: withStore(ShoppingCartItemUpdate),
       parent: 'project',
       data: {
         pageTitle: gettext('Shopping cart item update'),
@@ -351,8 +367,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-shopping-cart-item-update-customer', {
       url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
-      template:
-        '<marketplace-shopping-cart-item-update></marketplace-shopping-cart-item-update>',
+      component: withStore(ShoppingCartItemUpdate),
       parent: 'organization',
       data: {
         pageTitle: gettext('Shopping cart item update'),

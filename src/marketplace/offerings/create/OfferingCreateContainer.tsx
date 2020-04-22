@@ -4,7 +4,6 @@ import { reduxForm } from 'redux-form';
 
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { loadDataStart, setStep } from '../store/actions';
 import { FORM_ID, createOffering } from '../store/constants';
@@ -68,6 +67,4 @@ const enhance = compose(
   }),
 );
 
-const OfferingCreateContainer = enhance(OfferingCreateDialog);
-
-export default connectAngularComponent(OfferingCreateContainer);
+export const OfferingCreateContainer = enhance(OfferingCreateDialog);

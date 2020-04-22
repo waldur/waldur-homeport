@@ -1,17 +1,15 @@
+import { useRouter } from '@uirouter/react';
 import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
 import { useDispatch } from 'react-redux';
 
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-export const CreateSecurityGroupButton = props => {
-  if (!props.tenantUUID) {
-    return null;
-  }
+export const CreateSecurityGroupButton = ({ tenantUUID }) => {
+  const router = useRouter();
 
   const dispatch = useDispatch();
 
@@ -25,12 +23,16 @@ export const CreateSecurityGroupButton = props => {
     } catch {
       return;
     }
-    $state.go('resources.details', {
+    router.stateService.go('resources.details', {
       resource_type: 'OpenStack.Tenant',
-      uuid: props.tenantUUID,
+      uuid: tenantUUID,
       tab: 'security_groups',
     });
-  }, []);
+  }, [router, dispatch, tenantUUID]);
+
+  if (!tenantUUID) {
+    return null;
+  }
 
   return (
     <CreateResourceFormGroup>

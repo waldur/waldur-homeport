@@ -1,4 +1,13 @@
+import { ProjectsList } from '@waldur/project/ProjectsList';
+import { withStore } from '@waldur/store/connect';
+
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+import { ProjectCreateContainer } from '../project/ProjectCreateContainer';
+
+import { CustomerDashboardContainer } from './dashboard/CustomerDashboardContainer';
+import { CustomerTeam } from './team/CustomerTeam';
+import { CustomerEventsView } from './workspace/CustomerEventsList';
+import { CustomerIssuesList } from './workspace/CustomerIssuesList';
 
 // @ngInject
 function loadCustomer(
@@ -79,7 +88,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.dashboard', {
       url: 'dashboard/',
-      template: '<customer-dashboard></customer-dashboard>',
+      component: withStore(CustomerDashboardContainer),
       data: {
         pageTitle: gettext('Dashboard'),
         pageClass: 'gray-bg',
@@ -89,7 +98,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.details', {
       url: 'events/',
-      template: '<customer-events></customer-events>',
+      component: withStore(CustomerEventsView),
       data: {
         pageTitle: gettext('Audit logs'),
       },
@@ -97,7 +106,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.issues', {
       url: 'issues/',
-      template: '<customer-issues></customer-issues>',
+      component: withStore(CustomerIssuesList),
       data: {
         feature: 'support',
         pageTitle: gettext('Issues'),
@@ -106,7 +115,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.projects', {
       url: 'projects/',
-      template: '<projects-list></projects-list>',
+      component: withStore(ProjectsList),
       data: {
         pageTitle: gettext('Projects'),
       },
@@ -114,7 +123,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.team', {
       url: 'team/',
-      template: '<customer-team></customer-team>',
+      component: withStore(CustomerTeam),
       data: {
         pageTitle: gettext('Team'),
       },
@@ -131,7 +140,7 @@ export default function organizationRoutes($stateProvider) {
 
     .state('organization.createProject', {
       url: 'createProject/',
-      template: '<project-create></project-create>',
+      component: withStore(ProjectCreateContainer),
       data: {
         pageTitle: gettext('Create project'),
       },

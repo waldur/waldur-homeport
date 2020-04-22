@@ -24,8 +24,6 @@ import 'angular-flash-alert/dist/angular-flash.css';
 import 'angulartics';
 import 'angulartics-google-analytics';
 import 'angular-resource';
-import 'angular-scroll';
-import 'angular-ui-router';
 import 'ui-select';
 import 'ui-select/dist/select.css';
 import 'satellizer';

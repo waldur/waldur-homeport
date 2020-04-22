@@ -1,21 +1,21 @@
-import authService from './auth-service';
-import { authLogin } from './auth-login';
-import poweredBy from './powered-by';
-import { authInit } from './auth-init';
 import authActivation from './auth-activation';
-import authRoutes from './routes';
-import initAuthProvider from './auth-config';
-import interceptorModule from './interceptor';
-import UserSettings from './user-settings';
-import storeLastState from './store-state';
-import callbacksModule from './callbacks/module';
-import saml2Module from './saml2/module';
-import valimoModule from './valimo/module';
 import authButtonText from './auth-button-text';
+import initAuthProvider from './auth-config';
+import { authInit } from './auth-init';
+import { authLogin } from './auth-login';
+import { AuthService } from './auth-service';
+import callbacksModule from './callbacks/module';
+import interceptorModule from './interceptor';
+import poweredBy from './powered-by';
+import authRoutes from './routes';
+import saml2Module from './saml2/module';
+import storeLastState from './store-state';
+import UserSettings from './user-settings';
+import valimoModule from './valimo/module';
 import './events';
 
 export default module => {
-  module.service('authService', authService);
+  module.service('authService', AuthService);
   module.component('authButtonText', authButtonText);
   module.component('authLogin', authLogin);
   module.component('poweredBy', poweredBy);

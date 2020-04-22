@@ -1,15 +1,13 @@
 import * as React from 'react';
 
-import { connectAngularComponent } from '@waldur/store/connect';
+import { Panel } from '@waldur/core/Panel';
 
 import { SupportUsageFilter } from './SupportUsageFilter';
 import { SupportUsageList } from './SupportUsageList';
 
-const SupportUsageContainer = () => (
-  <div className="ibox-content">
+export const SupportUsageContainer = () => (
+  <Panel>
     <SupportUsageFilter />
     <SupportUsageList />
-  </div>
+  </Panel>
 );
-
-export default connectAngularComponent(SupportUsageContainer);

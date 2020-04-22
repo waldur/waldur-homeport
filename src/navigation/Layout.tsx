@@ -1,13 +1,10 @@
+import { UIView } from '@uirouter/react';
 import * as React from 'react';
-
-import { angular2react } from '@waldur/shims/angular2react';
 
 import { AppFooter } from './AppFooter';
 import { BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { AppHeader } from './header/AppHeader';
-
-const UIView = angular2react('uiView');
 
 interface LayoutProps {
   sidebar: React.ReactNode;

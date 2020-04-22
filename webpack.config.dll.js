@@ -55,8 +55,6 @@ module.exports = {
       'angulartics',
       'angulartics-google-analytics',
       'angular-resource',
-      'angular-scroll',
-      'angular-ui-router',
       'ui-select',
       'satellizer',
       'angular-translate',

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { IssuesList } from '@waldur/issues/list/IssuesList';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 const mapStateToProps = createSelector(getCustomer, customer => ({
@@ -13,8 +12,6 @@ const mapStateToProps = createSelector(getCustomer, customer => ({
 
 const CustomerIssuesListComponent = connect(mapStateToProps)(IssuesList);
 
-const CustomerIssuesList = () => (
+export const CustomerIssuesList = () => (
   <CustomerIssuesListComponent hiddenColumns={['customer']} />
 );
-
-export default connectAngularComponent(CustomerIssuesList);
