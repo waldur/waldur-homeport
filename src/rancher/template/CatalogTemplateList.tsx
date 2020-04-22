@@ -1,23 +1,29 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
+import useAsync from 'react-use/lib/useAsync';
 
 import { getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state } from '@waldur/core/services';
-import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { TemplateCard } from './TemplateCard';
 
-const CatalogTemplatesList = () => {
-  const { state, call } = useQuery(() =>
-    getAll('/rancher-templates/', {
-      params: { catalog_uuid: $state.params.catalogUuid },
-    }),
+export const CatalogTemplatesList = () => {
+  const {
+    params: { catalogUuid, clusterUuid },
+  } = useCurrentStateAndParams();
+
+  const loadData = React.useCallback(
+    () =>
+      getAll('/rancher-templates/', {
+        params: { catalog_uuid: catalogUuid },
+      }),
+    [catalogUuid],
   );
-  React.useEffect(call, []);
+
+  const state = useAsync(loadData, []);
 
   if (state.loading) {
     return <LoadingSpinner />;
@@ -27,11 +33,7 @@ const CatalogTemplatesList = () => {
     return <h3>{translate('Unable to load applications templates.')}</h3>;
   }
 
-  if (!state.loaded) {
-    return null;
-  }
-
-  if (!state.data.length) {
+  if (!state.value?.length) {
     return (
       <h3 className="text-center">
         {translate('There are no applications templates.')}
@@ -41,16 +43,11 @@ const CatalogTemplatesList = () => {
 
   return (
     <Row>
-      {state.data.map((template, index) => (
+      {state.value.map((template, index) => (
         <Col key={index} md={4} sm={6}>
-          <TemplateCard
-            template={template}
-            clusterUuid={$state.params.clusterUuid}
-          />
+          <TemplateCard template={template} clusterUuid={clusterUuid} />
         </Col>
       ))}
     </Row>
   );
 };
-
-export default connectAngularComponent(CatalogTemplatesList);

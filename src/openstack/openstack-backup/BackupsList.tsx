@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
+import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -29,6 +29,10 @@ const TableComponent = props => {
         {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
+        },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <ResourceRowActions resource={row} />,
         },
       ]}
       verboseName={translate('backups')}
@@ -58,6 +62,4 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const BackupsList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(BackupsList, ['resource']);
+export const BackupsList = connectTable(TableOptions)(TableComponent);

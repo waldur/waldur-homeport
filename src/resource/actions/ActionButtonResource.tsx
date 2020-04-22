@@ -1,4 +1,6 @@
 import * as React from 'react';
+import useAsyncFn from 'react-use/lib/useAsyncFn';
+import useBoolean from 'react-use/lib/useBoolean';
 
 import { ngInjector, $http } from '@waldur/core/services';
 
@@ -8,6 +10,7 @@ import { ResourceActionComponent } from './ResourceActionComponent';
 interface ActionButtonResourceProps {
   url: string;
   disabled?: boolean;
+  controller?: any;
 }
 
 async function loadActions(url) {
@@ -24,59 +27,41 @@ async function loadActions(url) {
   return { resource, actions };
 }
 
-export class ActionButtonResource extends React.Component<
-  ActionButtonResourceProps
-> {
-  state = {
-    loading: false,
-    error: undefined,
-    actions: {},
-    resource: undefined,
-  };
+export const ActionButtonResource: React.FC<ActionButtonResourceProps> = props => {
+  const { url } = props;
 
-  getActions = async () => {
-    this.setState({ loading: true });
-    try {
-      const { resource, actions } = await loadActions(this.props.url);
-      this.setState({
-        loading: false,
-        resource,
-        actions,
-      });
-    } catch (error) {
-      this.setState({
-        loading: false,
-        error,
-      });
-    }
-  };
+  const [{ loading, error, value }, getActions] = useAsyncFn(
+    () => loadActions(url),
+    [url],
+  );
 
-  openDropdown = (isOpen: boolean) => {
-    if (isOpen) {
-      this.getActions();
-    }
-  };
+  const [open, onToggle] = useBoolean(false);
 
-  triggerAction = (name: string, action: object) => {
-    const controller = {
+  const loadActionsIfOpen = React.useCallback(() => {
+    open && getActions();
+  }, [open, getActions]);
+
+  React.useEffect(loadActionsIfOpen, [open]);
+
+  const triggerAction = (name: string, action: object) => {
+    const controller = props.controller || {
       handleActionException: () => undefined,
       reInitResource: () => undefined,
     };
     return ngInjector
       .get('actionUtilsService')
-      .buttonClick(controller, this.state.resource, name, action);
+      .buttonClick(controller, value.resource, name, action);
   };
 
-  render() {
-    return (
-      <ResourceActionComponent
-        disabled={this.props.disabled}
-        loading={this.state.loading}
-        error={this.state.error}
-        actions={this.state.actions}
-        onToggle={this.openDropdown}
-        onSelect={this.triggerAction}
-      />
-    );
-  }
-}
+  return (
+    <ResourceActionComponent
+      open={open}
+      disabled={props.disabled}
+      loading={loading}
+      error={error}
+      actions={value?.actions}
+      onToggle={onToggle}
+      onSelect={triggerAction}
+    />
+  );
+};

@@ -1,17 +1,17 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import * as Panel from 'react-bootstrap/lib/Panel';
 import * as PanelGroup from 'react-bootstrap/lib/PanelGroup';
 import { useSelector, useDispatch } from 'react-redux';
+import useAsync from 'react-use/lib/useAsync';
 import { formValueSelector } from 'redux-form';
 
 import { post } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { FormattedMarkdown } from '@waldur/core/FormattedMarkdown';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
 import { FORM_ID } from './constants';
@@ -19,8 +19,14 @@ import { TemplateHeader } from './TemplateHeader';
 import { loadData } from './utils';
 
 export const TemplateDetail = () => {
-  const { state, call } = useQuery(loadData);
-  React.useEffect(call, []);
+  const {
+    params: { templateUuid, clusterUuid },
+  } = useCurrentStateAndParams();
+
+  const state = useAsync(() => loadData(templateUuid, clusterUuid), [
+    templateUuid,
+    clusterUuid,
+  ]);
 
   const project = useSelector(state =>
     formValueSelector(FORM_ID)(state, 'project'),
@@ -33,11 +39,11 @@ export const TemplateDetail = () => {
   const namespaces = React.useMemo(
     () =>
       project
-        ? state.data.projects
+        ? state.value.projects
             .find(p => p.name === project)
             .namespaces.map(({ name }) => name)
         : [],
-    [project, state.data],
+    [project, state.value],
   );
 
   const dispatch = useDispatch();
@@ -49,9 +55,9 @@ export const TemplateDetail = () => {
           name: formData.name,
           description: formData.description,
           version: formData.version,
-          template_uuid: state.data.template.uuid,
-          project_uuid: state.data.projects.find(p => p.name === project).uuid,
-          namespace_uuid: state.data.namespaces.find(p => p.name === namespace)
+          template_uuid: state.value.template.uuid,
+          project_uuid: state.value.projects.find(p => p.name === project).uuid,
+          namespace_uuid: state.value.namespaces.find(p => p.name === namespace)
             .uuid,
           answers: formData.answers,
         });
@@ -64,7 +70,7 @@ export const TemplateDetail = () => {
       }
       dispatch(showSuccess(translate('Application has been created.')));
     },
-    [dispatch, state.data, namespace, project],
+    [dispatch, state.value, namespace, project],
   );
 
   if (state.loading) {
@@ -75,26 +81,26 @@ export const TemplateDetail = () => {
     return <h3>{translate('Unable to load application template details.')}</h3>;
   }
 
-  if (!state.loaded) {
+  if (!state.value) {
     return null;
   }
 
   return (
     <>
-      <TemplateHeader {...state.data} />
+      <TemplateHeader {...state.value} />
 
       <PanelGroup
         accordion={true}
         id="application-template-form"
         defaultActiveKey="configuration"
       >
-        {state.data.version.readme && (
+        {state.value.version.readme && (
           <Panel eventKey="readme">
             <Panel.Heading>
               <Panel.Title toggle={true}>{translate('Summary')}</Panel.Title>
             </Panel.Heading>
             <Panel.Body collapsible={true}>
-              <FormattedMarkdown text={state.data.version.readme} />
+              <FormattedMarkdown text={state.value.version.readme} />
             </Panel.Body>
           </Panel>
         )}
@@ -106,11 +112,11 @@ export const TemplateDetail = () => {
           </Panel.Heading>
           <Panel.Body collapsible={true}>
             <TemplateQuestions
-              questions={state.data.version.questions}
-              versions={state.data.template.versions}
-              projects={state.data.projectOptions}
+              questions={state.value.version.questions}
+              versions={state.value.template.versions}
+              projects={state.value.projectOptions}
               namespaces={namespaces}
-              initialValues={state.data.initialValues}
+              initialValues={state.value.initialValues}
               createApplication={createApplication}
             />
           </Panel.Body>
@@ -119,5 +125,3 @@ export const TemplateDetail = () => {
     </>
   );
 };
-
-export default connectAngularComponent(TemplateDetail);

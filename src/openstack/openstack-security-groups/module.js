@@ -7,27 +7,7 @@ import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
 import securityGroupRuleEditor from './security-group-rule-editor';
 import securityGroupRulesList from './security-group-rules-list';
 import securityGroupsDialog from './security-groups-dialog';
-import openstackSecurityGroupsService from './security-groups-service';
-import openstackSecurityGroupsList from './SecurityGroupsList';
-
-// @ngInject
-function tabsConfig(
-  ResourceTabsConfigurationProvider,
-  DEFAULT_SUBRESOURCE_TABS,
-) {
-  ResourceTabsConfigurationProvider.register('OpenStack.SecurityGroup', {
-    order: ['rules', ...DEFAULT_SUBRESOURCE_TABS.order],
-    options: angular.merge(
-      {
-        rules: {
-          heading: 'Rules',
-          component: 'securityGroupRulesList',
-        },
-      },
-      DEFAULT_SUBRESOURCE_TABS.options,
-    ),
-  });
-}
+import './tabs';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider, DEFAULT_EDIT_ACTION) {
@@ -71,17 +51,11 @@ export default module => {
     'OpenStack.SecurityGroup',
     OpenStackSecurityGroupSummary,
   );
-  module.service(
-    'openstackSecurityGroupsService',
-    openstackSecurityGroupsService,
-  );
-  module.component('openstackSecurityGroupsList', openstackSecurityGroupsList);
   module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
   module.component('securityGroupsDialog', securityGroupsDialog);
   module.component('securityGroupsDialogReact', securityGroupsDialogReact);
   filtersModule(module);
-  module.config(tabsConfig);
   module.config(actionConfig);
   module.run(breadcrumbsConfig);
 };

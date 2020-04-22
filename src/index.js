@@ -1,14 +1,16 @@
 /* eslint-disable */
+
+import { UI_ROUTER_REACT_HYBRID } from '@uirouter/react-hybrid';
+import '@uirouter/angularjs/release/stateEvents';
+
 import './vendor';
 import './globals';
 import './sass/style.scss';
 import '../svgfonts.font';
 
 import featuresModule from './features/module';
-import teamModule from './team/module';
 import issuesModule from './issues/module';
 import userModule from './user/module';
-import providersModule from './providers/module';
 import projectModule from './project/module';
 import navigationModule from './navigation/module';
 import resourceModule from './resource/module';
@@ -28,7 +30,6 @@ import helpModule from './help/module';
 import coreModule from './core/module';
 import filtersModule from './core/filters';
 import quotasModule from './quotas/module';
-import tableModule from './table/module';
 import i18nModule from './i18n/module';
 import modalModule from './modal/module';
 import bootstrap from './core/bootstrap';
@@ -55,9 +56,10 @@ import marketplaceChecklistModule from './marketplace-checklist/module';
 const appModule = angular.module('waldur', [
   'satellizer',
   'ui.router',
+  UI_ROUTER_REACT_HYBRID,
+  'ui.router.state.events',
   'ngCookies',
   'ngResource',
-  'ui.gravatar',
   'ui.select',
   'ngAnimate',
   'pascalprecht.translate',
@@ -67,17 +69,14 @@ const appModule = angular.module('waldur', [
   'ngSanitize',
   'angular-cron-jobs',
   'ui.bootstrap',
-  'ui.slimscroll',
   'angular-bind-html-compile',
   'angular-intro',
 ]);
 
 rootModule(appModule);
 featuresModule(appModule);
-teamModule(appModule);
 issuesModule(appModule);
 userModule(appModule);
-providersModule(appModule);
 projectModule(appModule);
 navigationModule(appModule);
 resourceModule(appModule);
@@ -99,7 +98,6 @@ helpModule(appModule);
 coreModule(appModule);
 filtersModule(appModule);
 quotasModule(appModule);
-tableModule(appModule);
 i18nModule(appModule);
 modalModule(appModule);
 configModule(appModule);

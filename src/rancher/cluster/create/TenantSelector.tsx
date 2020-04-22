@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Select from 'react-select';
+import useAsync from 'react-use/lib/useAsync';
 import { Field } from 'redux-form';
 
 import { getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { useQuery } from '@waldur/core/useQuery';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -26,25 +26,19 @@ const loadData = projectId =>
   });
 
 export const TenantSelector = props => {
-  if (!props.project) {
-    return null;
-  }
-
-  const { state: resourceProps, call: loadResource } = useQuery(
-    loadData,
-    props.project.uuid,
-  );
-  React.useEffect(loadResource, [props.project]);
+  const resourceProps = useAsync(() => loadData(props.project.uuid), [
+    props.project,
+  ]);
 
   if (resourceProps.loading) {
     return <LoadingSpinner />;
   }
 
-  if (resourceProps.erred) {
+  if (resourceProps.error) {
     return <div>{translate('Unable to load tenant.')}</div>;
   }
 
-  if (resourceProps.loaded) {
+  if (resourceProps.value) {
     return (
       <FormGroup
         labelClassName="control-label col-sm-3"
@@ -55,7 +49,7 @@ export const TenantSelector = props => {
         <Field
           name="attributes.tenant_settings"
           validate={required}
-          options={resourceProps.data}
+          options={resourceProps.value}
           component={SelectTenantField}
         />
       </FormGroup>

@@ -12,7 +12,7 @@ export default function issuesHelpdesk() {
 }
 
 class IssuesHelpdeskController {
-  constructor() {
+  $onInit() {
     this.listFilter = {};
   }
 

@@ -6,7 +6,6 @@ import { createSelector } from 'reselect';
 
 import { Panel } from '@waldur/core/Panel';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 
 const mapStateToProps = createSelector(getProject, project => ({
@@ -16,7 +15,7 @@ const mapStateToProps = createSelector(getProject, project => ({
 
 const ProjectIssuesListComponent = connect(mapStateToProps)(IssuesList);
 
-const ProjectIssuesList = () => (
+export const ProjectIssuesList = () => (
   <div className="wrapper wrapper-content">
     <Row>
       <Col md={12}>
@@ -27,5 +26,3 @@ const ProjectIssuesList = () => (
     </Row>
   </div>
 );
-
-export default connectAngularComponent(ProjectIssuesList);

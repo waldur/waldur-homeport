@@ -61,7 +61,7 @@ class SelectWorkspaceToggleController {
   }
 
   getTitleTooltip() {
-    if (this.customer.display_name.length < 30) {
+    if (this.customer && this.customer.display_name.length < 30) {
       return;
     }
     const customerName =

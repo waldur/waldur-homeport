@@ -1,12 +1,15 @@
+import { withStore } from '@waldur/store/connect';
+
+import { ChecklistOverview } from './ChecklistOverview';
 import { FEATURE } from './constants';
+import { ProjectChecklist } from './ProjectChecklist';
 
 // @ngInject
 export default function routes($stateProvider) {
   $stateProvider
     .state('marketplace-checklist-project', {
       url: 'marketplace-checklist-project/:category/',
-      template:
-        '<marketplace-checklist-project></marketplace-checklist-project>',
+      component: withStore(ProjectChecklist),
       parent: 'project',
       data: {
         pageTitle: gettext('Compliance'),
@@ -16,8 +19,7 @@ export default function routes($stateProvider) {
 
     .state('marketplace-checklist-overview', {
       url: 'marketplace-checklist-overview/:category/',
-      template:
-        '<marketplace-checklist-overview></marketplace-checklist-overview>',
+      component: withStore(ChecklistOverview),
       parent: 'support',
       data: {
         pageTitle: gettext('Compliance'),

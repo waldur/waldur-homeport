@@ -3,7 +3,6 @@ import * as React from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 interface ResourceOrderItemsProps {
@@ -64,7 +63,7 @@ export const ResourceOrderItems = enhance(
   TableComponent,
 ) as React.ComponentType<ResourceOrderItemsProps>;
 
-const ResourceOrderItemsTab = props =>
+export const ResourceOrderItemsTab = props =>
   props.resource.marketplace_resource_uuid ? (
     <ResourceOrderItems
       resource_uuid={props.resource.marketplace_resource_uuid}
@@ -72,5 +71,3 @@ const ResourceOrderItemsTab = props =>
   ) : (
     <h3>{translate('Resource is not connected to the marketplace yet.')}</h3>
   );
-
-export default connectAngularComponent(ResourceOrderItemsTab, ['resource']);

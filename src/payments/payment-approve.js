@@ -6,10 +6,8 @@ function PaymentApproveController(
   ncUtilsFlash,
   paymentsService,
   $state,
-  $rootScope,
-  currentStateService,
 ) {
-  let qs = ncUtils.parseQueryString(ncUtils.getQueryString());
+  const qs = ncUtils.parseQueryString(ncUtils.getQueryString());
   if (!qs.paymentId || !qs.PayerID || !qs.token) {
     ncUtilsFlash.error(
       gettext('Invalid URL. Unable to parse payment details.'),
@@ -24,9 +22,6 @@ function PaymentApproveController(
     })
     .then(() => {
       ncUtilsFlash.success(gettext('Payment has been processed successfully.'));
-      currentStateService.reloadCurrentCustomer(function() {
-        $rootScope.$broadcast('customerBalance:refresh');
-      });
       $state.go('profile.details');
     });
 }

@@ -9,8 +9,7 @@ const appstoreFieldFile = {
   },
   controller: class AppstoreFieldFileController {
     // @ngInject
-    constructor(coreUtils, formUtils) {
-      this.coreUtils = coreUtils;
+    constructor(formUtils) {
       this.formUtils = formUtils;
     }
 

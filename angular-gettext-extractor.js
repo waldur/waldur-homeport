@@ -206,7 +206,7 @@ var Extractor = (function() {
       item.msgctxt = context;
     }
 
-    if (plural && plural !== '') {
+    if (plural) {
       if (item.msgid_plural && item.msgid_plural !== plural) {
         throw new Error(
           'Incompatible plural definitions for ' +

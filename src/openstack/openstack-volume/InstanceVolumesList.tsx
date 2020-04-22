@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
+import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { BooleanField } from '@waldur/table-react/BooleanField';
 
@@ -37,6 +37,10 @@ const TableComponent = props => {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
         },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <ResourceRowActions resource={row} />,
+        },
       ]}
       verboseName={translate('volumes')}
     />
@@ -51,6 +55,4 @@ const TableOptions = {
   }),
 };
 
-const InstanceVolumesList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(InstanceVolumesList, ['resource']);
+export const InstanceVolumesList = connectTable(TableOptions)(TableComponent);

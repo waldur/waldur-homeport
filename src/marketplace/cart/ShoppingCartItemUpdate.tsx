@@ -7,7 +7,6 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { Plan, Offering } from '@waldur/marketplace/types';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as api from '../common/api';
 import { OrderSummary } from '../details/OrderSummary';
@@ -125,5 +124,3 @@ const mapStateToProps = state => ({
 export const ShoppingCartItemUpdate = connect(mapStateToProps)(
   ShoppingCartItemUpdateComponent,
 );
-
-export default connectAngularComponent(ShoppingCartItemUpdate);

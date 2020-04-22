@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getUser, getCustomer } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
@@ -11,6 +10,6 @@ const mapStateToProps = (state: OuterState) => ({
   customer: getCustomer(state),
 });
 
-const CustomerDashboardContainer = connect(mapStateToProps)(CustomerDashboard);
-
-export default connectAngularComponent(CustomerDashboardContainer);
+export const CustomerDashboardContainer = connect(mapStateToProps)(
+  CustomerDashboard,
+);

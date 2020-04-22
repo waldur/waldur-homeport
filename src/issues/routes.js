@@ -1,3 +1,10 @@
+import { CustomerListContainer } from '@waldur/customer/CustomerListContainer';
+import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
+import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';
+import { SankeyDiagramContainer } from '@waldur/providers/support/SankeyDiagramContainer';
+import { withStore } from '@waldur/store/connect';
+import { UserListView } from '@waldur/user/support/UserListView';
+
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 // @ngInject
@@ -62,7 +69,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.organizations', {
       url: 'organizations/',
-      template: '<customer-list></customer-list>',
+      component: withStore(CustomerListContainer),
       data: {
         feature: 'support.organizations',
         pageTitle: gettext('Financial overview'),
@@ -74,7 +81,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.users', {
       url: 'users/',
-      template: '<user-list-view></user-list-view>',
+      component: withStore(UserListView),
       data: {
         pageTitle: gettext('Users'),
         feature: 'support.users',
@@ -86,7 +93,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.flowmap', {
       url: 'flowmap/',
-      template: '<flow-map-view></flow-map-view>',
+      component: withStore(FlowMapViewContainer),
       data: {
         pageTitle: gettext('Flowmap'),
         feature: 'support.flowmap',
@@ -98,7 +105,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.heatmap', {
       url: 'heatmap/',
-      template: '<heat-map></heat-map>',
+      component: withStore(HeatMapContainer),
       data: {
         pageTitle: gettext('Heatmap'),
         feature: 'support.heatmap',
@@ -110,7 +117,7 @@ export default function issueRoutes($stateProvider) {
 
     .state('support.sankey-diagram', {
       url: 'sankey-diagram/',
-      template: '<sankey-diagram></sankey-diagram>',
+      component: withStore(SankeyDiagramContainer),
       data: {
         pageTitle: gettext('Sankey diagram'),
         feature: 'support.sankey-diagram',

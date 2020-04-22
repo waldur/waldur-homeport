@@ -16,7 +16,6 @@ import appstoreFieldString from './appstore-field-string';
 import appstoreFieldTel from './appstore-field-tel';
 import appstoreFieldText from './appstore-field-text';
 import appstoreFieldTos from './appstore-field-tos';
-import appstoreForm from './appstore-form';
 import appstoreFormFieldset from './appstore-form-fieldset';
 import appstoreFormWizard from './appstore-form-wizard';
 import appstoreListDialog from './appstore-list-dialog';
@@ -28,7 +27,6 @@ import multiplyBy from './multiply-by';
 
 export default module => {
   module.service('formUtils', FormUtils);
-  module.directive('appstoreForm', appstoreForm);
   module.directive('appstoreField', appstoreField);
   module.component('appstoreFormFieldset', appstoreFormFieldset);
   module.component('appstoreFieldString', appstoreFieldString);

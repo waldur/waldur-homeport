@@ -2,7 +2,7 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import breadcrumbsConfig from './breadcrumbs';
 import { OpenStackSnapshotScheduleSummary } from './OpenStackSnapshotScheduleSummary';
-import openstackSnapshotSchedulesList from './SnapshotSchedulesList';
+import './tabs';
 
 // @ngInject
 function actionConfig(ActionConfigurationProvider) {
@@ -35,36 +35,12 @@ function stateConfig(ResourceStateConfigurationProvider) {
   );
 }
 
-// @ngInject
-function tabsConfig(
-  ResourceTabsConfigurationProvider,
-  DEFAULT_SUBRESOURCE_TABS,
-) {
-  ResourceTabsConfigurationProvider.register(
-    'OpenStackTenant.SnapshotSchedule',
-    {
-      order: ['snapshots', ...DEFAULT_SUBRESOURCE_TABS.order],
-      options: angular.merge({}, DEFAULT_SUBRESOURCE_TABS.options, {
-        snapshots: {
-          heading: gettext('Snapshots'),
-          component: 'openstackSnapshotsNestedList',
-        },
-      }),
-    },
-  );
-}
-
 export default module => {
   ResourceSummary.register(
     'OpenStackTenant.SnapshotSchedule',
     OpenStackSnapshotScheduleSummary,
   );
-  module.component(
-    'openstackSnapshotSchedulesList',
-    openstackSnapshotSchedulesList,
-  );
   module.config(actionConfig);
-  module.config(tabsConfig);
   module.run(breadcrumbsConfig);
   module.config(stateConfig);
 };

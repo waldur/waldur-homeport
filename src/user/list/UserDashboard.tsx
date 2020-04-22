@@ -6,11 +6,10 @@ import { Panel } from '@waldur/core/Panel';
 import { CustomerCreatePromptContainer } from '@waldur/customer/create/CustomerCreatePromptContainer';
 import { renderCustomerCreatePrompt } from '@waldur/customer/create/selectors';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { CurrentUserEvents } from './CurrentUserEvents';
-import CustomerPermissions from './CustomerPermissions';
-import ProjectPermissions from './ProjectPermissions';
+import { CustomerPermissions } from './CustomerPermissions';
+import { ProjectPermissions } from './ProjectPermissions';
 
 interface PureUserDashboardProps extends TranslateProps {
   renderCustomerCreatePrompt: boolean;
@@ -53,6 +52,4 @@ const mapStateToProps = state => ({
 
 const enhance = compose(connect(mapStateToProps), withTranslation);
 
-const UserDashboard = enhance(PureUserDashboard);
-
-export default connectAngularComponent(UserDashboard);
+export const UserDashboard = enhance(PureUserDashboard);

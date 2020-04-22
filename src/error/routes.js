@@ -1,8 +1,15 @@
+import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
+import { withStore } from '@waldur/store/connect';
+
+import { InvalidObjectPage } from './InvalidObjectPage';
+import { InvalidQuotaPage } from './InvalidQuotaPage';
+import { InvalidRoutePage } from './InvalidRoutePage';
+
 // @ngInject
 export default function errorRoutes($stateProvider) {
   $stateProvider
     .state('errorPage', {
-      templateUrl: 'views/partials/base.html',
+      component: withStore(AnonymousLayout),
       abstract: true,
       data: {
         bodyClass: 'old',
@@ -10,7 +17,7 @@ export default function errorRoutes($stateProvider) {
     })
 
     .state('errorPage.notFound', {
-      template: '<invalid-object-page></invalid-object-page>',
+      component: withStore(InvalidObjectPage),
       data: {
         pageTitle: gettext('Page is not found.'),
       },
@@ -18,14 +25,14 @@ export default function errorRoutes($stateProvider) {
 
     .state('errorPage.otherwise', {
       url: '*path',
-      template: '<invalid-route-page></invalid-route-page-page>',
+      component: withStore(InvalidRoutePage),
       data: {
         pageTitle: gettext('Object is not found.'),
       },
     })
 
     .state('errorPage.limitQuota', {
-      template: '<invalid-quota-page></invalid-quota-page>',
+      component: withStore(InvalidQuotaPage),
       data: {
         pageTitle: gettext('Quota has been reached.'),
       },

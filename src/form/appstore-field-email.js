@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import template from './appstore-field-email.html';
 
 const appstoreFieldEmail = {
@@ -9,8 +11,7 @@ const appstoreFieldEmail = {
   },
   controller: class AppstoreFieldEmailController {
     // @ngInject
-    constructor(coreUtils, formUtils) {
-      this.coreUtils = coreUtils;
+    constructor(formUtils) {
       this.formUtils = formUtils;
     }
 
@@ -31,12 +32,9 @@ const appstoreFieldEmail = {
     }
 
     getMaxLengthErrorMessage() {
-      return this.coreUtils.templateFormatter(
-        gettext('Field length must be less than {maxlength} symbols'),
-        {
-          maxlength: this.field.maxlength,
-        },
-      );
+      return translate('Field length must be less than {maxlength} symbols', {
+        maxlength: this.field.maxlength,
+      });
     }
   },
 };

@@ -51,13 +51,10 @@ module.exports = {
       'angular-animate',
       'angular-cookies',
       'angular-loader',
-      'angular-gravatar',
       'angular-flash-alert',
       'angulartics',
       'angulartics-google-analytics',
       'angular-resource',
-      'angular-scroll',
-      'angular-ui-router',
       'ui-select',
       'satellizer',
       'angular-translate',
@@ -68,8 +65,6 @@ module.exports = {
       'angular-ui-bootstrap',
       'angular-bind-html-compile-ci-dev',
       'angular-intro.js',
-
-      './src/shims/slimscroll',
     ],
   },
   output: {

@@ -1,26 +1,20 @@
+import { translate } from '@waldur/i18n';
+
 import template from './auth-init.html';
 
 export const authInit = {
   template,
   controller: class AuthInitController {
     // @ngInject
-    constructor(
-      usersService,
-      $state,
-      $rootScope,
-      ENV,
-      ncUtilsFlash,
-      coreUtils,
-    ) {
+    constructor(usersService, $state, $rootScope, ENV, ncUtilsFlash) {
       this.usersService = usersService;
       this.$state = $state;
       this.$rootScope = $rootScope;
       this.ncUtilsFlash = ncUtilsFlash;
       this.user = {};
-      this.pageTitle = coreUtils.templateFormatter(
-        gettext('Welcome to {pageTitle}!'),
-        { pageTitle: ENV.shortPageTitle },
-      );
+      this.pageTitle = translate('Welcome to {pageTitle}!', {
+        pageTitle: ENV.shortPageTitle,
+      });
       this.save = this.save.bind(this);
     }
 

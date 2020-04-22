@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
+import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -39,6 +39,10 @@ const TableComponent = props => {
             );
           },
         },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <ResourceRowActions resource={row} />,
+        },
       ]}
       verboseName={translate('Kubernetes nodes')}
       actions={<NestedListActions resource={props.resource} tab="nodes" />}
@@ -54,6 +58,4 @@ const TableOptions = {
   }),
 };
 
-const ClusterNodesList = connectTable(TableOptions)(TableComponent);
-
-export default connectAngularComponent(ClusterNodesList, ['resource']);
+export const ClusterNodesList = connectTable(TableOptions)(TableComponent);

@@ -4,10 +4,9 @@ import issueCommentsService from './issue-comments-service';
 import IssueNavigationService, {
   attachStateUtils,
 } from './issue-navigation-service';
-import issuesActivityStream from './issues-activity-stream';
-import { issuesDashboard } from './issues-dashboard';
 import issuesHelpdesk from './issues-helpdesk';
 import issuesWorkspace from './issues-workspace';
+import { IssuesDashboard } from './IssuesDashboard';
 import { SupportSidebar } from './SupportSidebar';
 
 export default module => {
@@ -16,7 +15,6 @@ export default module => {
   module.service('IssueNavigationService', IssueNavigationService);
   module.component('supportSidebar', connectAngularComponent(SupportSidebar));
   module.component('issuesWorkspace', issuesWorkspace);
-  module.component('issuesDashboard', issuesDashboard);
-  module.directive('issuesActivityStream', issuesActivityStream);
+  module.component('issuesDashboard', connectAngularComponent(IssuesDashboard));
   module.directive('issuesHelpdesk', issuesHelpdesk);
 };

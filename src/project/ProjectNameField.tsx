@@ -4,7 +4,7 @@ import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { StringField } from '@waldur/form-react';
 import { TranslateProps } from '@waldur/i18n';
 
-const checkPattern = (value: string, _, props) => {
+const checkPattern = (value: string, props) => {
   if (!value) {
     return props.translate('Name is required field.');
   }
@@ -20,7 +20,7 @@ const checkPattern = (value: string, _, props) => {
   return props.translate('Name contains invalid symbols.');
 };
 
-const checkDuplicate = (value, _, props) =>
+const checkDuplicate = (value, props) =>
   props.customer.projects.find(
     project => project.name === value && project.uuid !== props.project_uuid,
   )
@@ -28,7 +28,7 @@ const checkDuplicate = (value, _, props) =>
     : undefined;
 
 const validateProjectName = (value, _, props) =>
-  checkDuplicate(value, _, props) || checkPattern(value, _, props);
+  checkDuplicate(value, props) || checkPattern(value, props);
 
 export const ProjectNameField = ({ translate }: TranslateProps) => (
   <StringField

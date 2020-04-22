@@ -1,3 +1,4 @@
+import { UIRouterContextComponent } from '@uirouter/react-hybrid';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 
@@ -9,7 +10,9 @@ import store from './store';
 export function withStore<P>(Component: React.ComponentType<P>) {
   const Wrapper: React.ComponentType<P> = props => (
     <Provider store={store}>
-      <Component {...props} />
+      <UIRouterContextComponent>
+        <Component {...props} />
+      </UIRouterContextComponent>
     </Provider>
   );
   Wrapper.displayName = `withStore(${Component.name})`;

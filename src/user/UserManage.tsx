@@ -2,12 +2,11 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { UserEditContainer } from './support/UserEditContainer';
 
-const UserManage = () => {
+export const UserManage = () => {
   const user = useSelector(getUser);
   if (!user) {
     return <LoadingSpinner />;
@@ -20,5 +19,3 @@ const UserManage = () => {
     </div>
   );
 };
-
-export default connectAngularComponent(UserManage);

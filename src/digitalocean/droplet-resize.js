@@ -1,19 +1,10 @@
 import template from './droplet-resize.html';
 
-export default function dropletResizeDialog() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: DropletResizeDialogController,
-  };
-}
-
 // @ngInject
 function DropletResizeDialogController(
   $scope,
   $filter,
   resourcesService,
-  resourceUtils,
   actionUtilsService,
   ActionResourceLoader,
 ) {
@@ -70,7 +61,7 @@ function DropletResizeDialogController(
     isValidSize: function(size) {
       // 1. New size should not be the same as the current size
       // 2. New size disk should not be lower then current size disk
-      let droplet = $scope.resource;
+      const droplet = $scope.resource;
       return (
         size.disk !== droplet.disk &&
         size.cores !== droplet.cores &&
@@ -79,7 +70,7 @@ function DropletResizeDialogController(
       );
     },
     submitForm: function() {
-      let form = resourcesService.$create($scope.action.url);
+      const form = resourcesService.$create($scope.action.url);
       form.size = $scope.options.newSize.url;
       form.disk = $scope.options.resizeType === 'permanent';
       return form.$save().then(
@@ -96,4 +87,12 @@ function DropletResizeDialogController(
     },
   });
   $scope.init();
+}
+
+export default function dropletResizeDialog() {
+  return {
+    restrict: 'E',
+    template: template,
+    controller: DropletResizeDialogController,
+  };
 }

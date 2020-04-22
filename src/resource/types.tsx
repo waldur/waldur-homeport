@@ -42,7 +42,15 @@ export interface Volume extends Resource {
   service_uuid?: string;
 }
 
+interface InternalIp {
+  ip4_address?: string;
+  mac_address?: string;
+  subnet_name?: string;
+  subnet_cidr?: string;
+}
+
 export interface VirtualMachine extends Resource {
+  internal_ips_set?: InternalIp[];
   cores: number;
   disk: number;
   ram: number;

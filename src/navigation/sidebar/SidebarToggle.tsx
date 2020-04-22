@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { $rootScope } from '@waldur/core/services';
+import { ngInjector } from '@waldur/core/services';
 
 export const SidebarToggle = () => {
   React.useEffect(() => {
-    return $rootScope.$on('$stateChangeStart', function() {
+    return ngInjector.get('$transitions').onStart({}, function() {
       if (
         $('body').hasClass('mini-navbar') &&
         $('body').hasClass('body-small')
