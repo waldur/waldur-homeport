@@ -1,9 +1,17 @@
+import { withStore } from '@waldur/store/connect';
+
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+
+import { HooksList } from './hooks/HooksList';
+import { KeyCreateForm } from './keys/KeyCreateForm';
+import { KeysList } from './keys/KeysList';
+import { UserDashboard } from './list/UserDashboard';
+import { UserManage } from './UserManage';
 
 const tabs = {
   dashboard: {
     url: '',
-    template: '<user-dashboard></user-dashboard>',
+    component: withStore(UserDashboard),
     data: {
       pageTitle: gettext('User dashboard'),
       pageClass: 'gray-bg',
@@ -19,21 +27,21 @@ const tabs = {
   },
   keys: {
     url: 'keys/',
-    template: '<key-list></key-list>',
+    component: withStore(KeysList),
     data: {
       pageTitle: gettext('SSH keys'),
     },
   },
   notifications: {
     url: 'notifications/',
-    template: '<hook-list></hook-list>',
+    component: withStore(HooksList),
     data: {
       pageTitle: gettext('Notifications'),
     },
   },
   manage: {
     url: 'manage/',
-    template: '<user-manage></user-manage>',
+    component: withStore(UserManage),
     data: {
       pageTitle: gettext('Manage'),
     },
@@ -116,6 +124,6 @@ export default function($stateProvider) {
 
     .state('keys.create', {
       url: 'add/',
-      template: '<key-create></key-create>',
+      component: withStore(KeyCreateForm),
     });
 }

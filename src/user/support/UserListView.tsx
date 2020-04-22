@@ -1,11 +1,9 @@
 import * as React from 'react';
 
-import { connectAngularComponent } from '@waldur/store/connect';
-
 import { UserFilter } from './UserFilter';
 import { UserList } from './UserList';
 
-const PureUserListView = () => (
+export const UserListView = () => (
   <>
     <div className="ibox-content m-b-sm border-bottom">
       <UserFilter />
@@ -15,5 +13,3 @@ const PureUserListView = () => (
     </div>
   </>
 );
-
-export default connectAngularComponent(PureUserListView);

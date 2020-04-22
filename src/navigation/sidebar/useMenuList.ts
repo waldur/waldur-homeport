@@ -1,3 +1,4 @@
+import { useRouter, useOnStateChanged } from '@uirouter/react';
 import * as classNames from 'classnames';
 import * as React from 'react';
 
@@ -8,10 +9,12 @@ import { MenuItemType } from './types';
 export const useMenuList = (items: MenuItemType[]) => {
   const [expandedItem, setExpandedItem] = React.useState<MenuItemType>();
   const [activeItem, setActiveItem] = React.useState<MenuItemType>();
+  const router = useRouter();
 
-  React.useEffect(() => {
-    const matches = (item: MenuItemType) =>
-      item.state && $state.is(item.state, item.params);
+  const matches = (item: MenuItemType) =>
+    item.state && $state.is(item.state, item.params);
+
+  const updateItems = () => {
     for (const item of items) {
       if (matches(item)) {
         setActiveItem(item);
@@ -25,7 +28,10 @@ export const useMenuList = (items: MenuItemType[]) => {
         }
       }
     }
-  }, [items]);
+  };
+
+  React.useEffect(updateItems, [items]);
+  useOnStateChanged(() => updateItems());
 
   const getItemCss = (item: MenuItemType) =>
     classNames({
@@ -44,13 +50,13 @@ export const useMenuList = (items: MenuItemType[]) => {
       item.action();
     } else if (item.state) {
       setActiveItem(item);
-      $state.go(item.state, item.params);
+      router.stateService.go(item.state, item.params);
     }
   };
 
   return {
     getItemCss,
     expandedItem,
-    onClick: onClick,
+    onClick,
   };
 };

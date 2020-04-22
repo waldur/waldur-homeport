@@ -19,121 +19,128 @@
  * 5) Authentication token and authentication method is cleaned up in the local storage.
  */
 
-// @ngInject
-export default function authService(
-  $http,
-  $auth,
-  $rootScope,
-  $window,
-  $state,
-  usersService,
-  currentStateService,
-  ncUtilsFlash,
-  ENV,
-) {
-  let vm = this;
+import { translate } from '@waldur/i18n';
 
-  vm.signin = signin;
-  vm.signup = signup;
-  vm.activate = activate;
-  vm.logout = logout;
-  vm.localLogout = localLogout;
-  vm.isAuthenticated = isAuthenticated;
-  vm.authenticate = authenticate;
-  vm.getDownloadLink = getDownloadLink;
-  vm.getLink = getLink;
-  vm.loginSuccess = loginSuccess;
-
-  function signin(username, password) {
-    $rootScope.$broadcast('enableRequests');
-    return $auth
-      .login({ username: username, password: password })
-      .then(loginSuccess);
+export class AuthService {
+  // @ngInject
+  constructor(
+    $http,
+    $auth,
+    $rootScope,
+    $window,
+    $state,
+    usersService,
+    currentStateService,
+    ncUtilsFlash,
+    ENV,
+  ) {
+    this.$http = $http;
+    this.$auth = $auth;
+    this.$rootScope = $rootScope;
+    this.$window = $window;
+    this.$state = $state;
+    this.usersService = usersService;
+    this.currentStateService = currentStateService;
+    this.ncUtilsFlash = ncUtilsFlash;
+    this.ENV = ENV;
   }
 
-  function authenticate(provider) {
-    $rootScope.$broadcast('enableRequests');
-    return $auth.authenticate(provider).then(loginSuccess);
+  async signin(username, password) {
+    this.$rootScope.$broadcast('enableRequests');
+    const response = await this.$auth.login({
+      username,
+      password,
+    });
+    this.loginSuccess(response);
   }
 
-  function loginSuccess(response) {
-    vm.user = response.data;
-    setAuthenticationMethod(response.data.method);
-    setAuthHeader(vm.user.token);
-    $auth.setToken(vm.user.token);
-    vm.user.isAuthenticated = true;
-    $rootScope.$broadcast('authService:signin');
+  async authenticate(provider) {
+    this.$rootScope.$broadcast('enableRequests');
+    const response = await this.$auth.authenticate(provider);
+    this.loginSuccess(response);
   }
 
-  function signup(user) {
-    $rootScope.$broadcast('enableRequests');
-    return $http.post(ENV.apiEndpoint + 'api-auth/registration/', user);
+  signup(user) {
+    this.$rootScope.$broadcast('enableRequests');
+    return this.$http.post(
+      this.ENV.apiEndpoint + 'api-auth/registration/',
+      user,
+    );
   }
 
-  function activate(user) {
-    return $http
-      .post(ENV.apiEndpoint + 'api-auth/activation/', user)
-      .then(loginSuccess);
+  async activate(user) {
+    const url = this.ENV.apiEndpoint + 'api-auth/activation/';
+    const response = await this.$http.post(url, user);
+    this.loginSuccess(response);
   }
 
-  function setAuthenticationMethod(method) {
+  loginSuccess(response) {
+    this.user = response.data;
+    this.setAuthenticationMethod(response.data.method);
+    this.setAuthHeader(this.user.token);
+    this.$auth.setToken(this.user.token);
+    this.user.isAuthenticated = true;
+    this.$rootScope.$broadcast('authService:signin');
+  }
+
+  setAuthenticationMethod(method) {
     localStorage['authenticationMethod'] = method;
   }
 
-  function resetAuthenticationMethod() {
+  resetAuthenticationMethod() {
     localStorage.removeItem('authenticationMethod');
   }
 
-  function getAuthenticationMethod() {
+  getAuthenticationMethod() {
     return localStorage['authenticationMethod'];
   }
 
-  function logout() {
-    const authenticationMethod = getAuthenticationMethod();
+  logout() {
+    const authenticationMethod = this.getAuthenticationMethod();
     if (
       authenticationMethod === 'saml2' &&
-      ENV.plugins.WALDUR_AUTH_SAML2.ENABLE_SINGLE_LOGOUT
+      this.ENV.plugins.WALDUR_AUTH_SAML2.ENABLE_SINGLE_LOGOUT
     ) {
-      ncUtilsFlash.success(
-        gettext(
+      this.ncUtilsFlash.success(
+        translate(
           'SAML2 single logout has been started. Please wait until it completes.',
         ),
       );
-      $window.location = ENV.apiEndpoint + 'api-auth/saml2/logout/';
+      this.$window.location = this.ENV.apiEndpoint + 'api-auth/saml2/logout/';
     } else {
-      localLogout();
+      this.localLogout();
     }
   }
 
-  function localLogout() {
-    $rootScope.$broadcast('logoutStart');
-    delete $http.defaults.headers.common.Authorization;
-    vm.user = { isAuthenticated: false };
-    usersService.currentUser = null;
-    usersService.cleanAllCache();
-    $auth.logout();
-    $rootScope.$broadcast('abortRequests');
-    $state.go('login');
-    resetAuthenticationMethod();
+  localLogout(params) {
+    this.$rootScope.$broadcast('logoutStart');
+    delete this.$http.defaults.headers.common.Authorization;
+    this.user = { isAuthenticated: false };
+    this.usersService.currentUser = null;
+    this.usersService.cleanAllCache();
+    this.$auth.logout();
+    this.$rootScope.$broadcast('abortRequests');
+    this.$state.go('login', params);
+    this.resetAuthenticationMethod();
   }
 
-  function setAuthHeader(token) {
-    $http.defaults.headers.common.Authorization = 'Token ' + token;
+  setAuthHeader(token) {
+    this.$http.defaults.headers.common.Authorization = 'Token ' + token;
   }
 
-  function isAuthenticated() {
-    return $auth.isAuthenticated();
+  isAuthenticated() {
+    return this.$auth.isAuthenticated();
   }
 
-  function getDownloadLink(href) {
+  getDownloadLink(href) {
     if (href) {
-      return href + '?x-auth-token=' + $auth.getToken() + '&download=true';
+      return href + '?x-auth-token=' + this.$auth.getToken() + '&download=true';
     }
   }
 
-  function getLink(href) {
+  getLink(href) {
     if (href) {
-      return href + '?x-auth-token=' + $auth.getToken();
+      return href + '?x-auth-token=' + this.$auth.getToken();
     }
   }
 }

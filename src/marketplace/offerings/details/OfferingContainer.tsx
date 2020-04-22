@@ -1,14 +1,14 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
+import useAsync from 'react-use/lib/useAsync';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Query } from '@waldur/core/Query';
-import { $state, ngInjector } from '@waldur/core/services';
+import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getOffering, getCategory } from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { Offering } from '@waldur/marketplace/types';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { OfferingBookingTab } from './OfferingBookingTab';
 import { OfferingDetails } from './OfferingDetails';
@@ -66,18 +66,22 @@ async function loadData(offering_uuid: string) {
   return { offering, tabs };
 }
 
-export const OfferingContainer = () => (
-  <Query loader={loadData} variables={$state.params.offering_uuid}>
-    {({ loading, data, error }) => {
-      if (loading) {
-        return <LoadingSpinner />;
-      }
-      if (error) {
-        return <h3>{translate('Unable to load offering details.')}</h3>;
-      }
-      return <OfferingDetails offering={data.offering} tabs={data.tabs} />;
-    }}
-  </Query>
-);
+export const OfferingContainer = () => {
+  const {
+    params: { offering_uuid },
+  } = useCurrentStateAndParams();
 
-export default connectAngularComponent(OfferingContainer);
+  const { loading, value, error } = useAsync(() => loadData(offering_uuid), [
+    offering_uuid,
+  ]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <h3>{translate('Unable to load offering details.')}</h3>;
+  }
+
+  return <OfferingDetails offering={value.offering} tabs={value.tabs} />;
+};

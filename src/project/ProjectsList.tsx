@@ -5,7 +5,6 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { formatLongText } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -90,5 +89,3 @@ const TableOptions = {
 const enhance = compose(connectTable(TableOptions), withTranslation);
 
 export const ProjectsList = enhance(TableComponent);
-
-export default connectAngularComponent(ProjectsList);

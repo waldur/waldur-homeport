@@ -5,13 +5,12 @@ import Select from 'react-select';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { CustomerMap } from './CustomerMap';
 import { StatsTable } from './StatsTable';
 import { useChecklistOverview } from './useChecklist';
 
-const ChecklistOverview = () => {
+export const ChecklistOverview = () => {
   const state = useChecklistOverview($state.params.category);
 
   if (state.checklistLoading) {
@@ -49,5 +48,3 @@ const ChecklistOverview = () => {
     return null;
   }
 };
-
-export default connectAngularComponent(ChecklistOverview);

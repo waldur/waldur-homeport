@@ -6,7 +6,7 @@ import {
   CategoriesListType,
   OfferingsListType,
 } from '@waldur/marketplace/types';
-import { connectAngularComponent } from '@waldur/store/connect';
+import { withStore } from '@waldur/store/connect';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -60,4 +60,4 @@ const mapStateToProps = state => ({
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);
 
-export default connectAngularComponent(enhance(LandingPageContainer));
+export const MarketplaceLanding = withStore(enhance(LandingPageContainer));

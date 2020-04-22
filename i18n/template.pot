@@ -747,11 +747,11 @@ msgstr ""
 msgid "Base image name"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Batch RAM"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Batch block storage size"
 msgstr ""
 
@@ -764,7 +764,7 @@ msgstr ""
 msgid "Batch service"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Batch vCPU"
 msgstr ""
 
@@ -1058,11 +1058,11 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Cloud RAM"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Cloud block storage size"
 msgstr ""
 
@@ -1071,7 +1071,7 @@ msgstr ""
 msgid "Cloud init template"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Cloud vCPU"
 msgstr ""
 
@@ -1373,7 +1373,6 @@ msgstr ""
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
@@ -1470,7 +1469,7 @@ msgstr ""
 msgid "Current plan"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Current price per month"
 msgstr ""
 
@@ -1955,7 +1954,7 @@ msgstr ""
 msgid "Error message"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Esimated price per month"
 msgstr ""
 
@@ -3361,7 +3360,6 @@ msgstr ""
 #: src/customer/details/CustomerDetails.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/jira/project/JiraProjectSummary.tsx
-#: src/jira/project/JiraProjectsList.tsx
 #: src/jira/project/jira-project-config.js
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
@@ -4695,7 +4693,6 @@ msgid "Provided by {provider}"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
-#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/providers/support/MapInfoPanel.tsx
@@ -5310,7 +5307,7 @@ msgid "Resource termination request has been submitted."
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Resource usage"
 msgstr ""
 
@@ -5331,7 +5328,7 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/project/project-base.js
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Resources"
 msgstr ""
@@ -5805,10 +5802,6 @@ msgstr ""
 msgid "Service desk project type"
 msgstr ""
 
-#: src/jira/routes.js
-msgid "Service desk projects"
-msgstr ""
-
 #: src/issues/request-service-button.js
 msgid "Service name"
 msgstr ""
@@ -6085,7 +6078,6 @@ msgstr ""
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/jira/project/JiraProjectsList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -6758,7 +6750,6 @@ msgstr ""
 #: src/billing/PaymentProfileDetails.tsx
 #: src/billing/PaymentProfileList.tsx
 #: src/billing/PriceEstimateDialog.tsx
-#: src/jira/project/JiraProjectsList.tsx
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -7038,7 +7029,7 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Unable to load locations."
 msgstr ""
 
@@ -7664,23 +7655,23 @@ msgstr ""
 msgid "VMware Tools"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "VPC RAM"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "VPC block storage size"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "VPC floating IP count"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "VPC instance count"
 msgstr ""
 
-#: src/resource/support/ChartContainer.tsx
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "VPC vCPU"
 msgstr ""
 
@@ -8162,10 +8153,6 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 msgid "security groups"
-msgstr ""
-
-#: src/jira/project/JiraProjectsList.tsx
-msgid "service desk projects"
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx

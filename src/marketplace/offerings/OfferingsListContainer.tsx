@@ -1,15 +1,13 @@
 import * as React from 'react';
 
-import { connectAngularComponent } from '@waldur/store/connect';
+import { Panel } from '@waldur/core/Panel';
 
 import { OfferingsFilter } from './OfferingsFilter';
 import { OfferingsList } from './OfferingsList';
 
-const OfferingsListContainer = () => (
-  <div className="ibox-content">
+export const OfferingsListContainer = () => (
+  <Panel>
     <OfferingsFilter />
     <OfferingsList />
-  </div>
+  </Panel>
 );
-
-export default connectAngularComponent(OfferingsListContainer);

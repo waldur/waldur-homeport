@@ -9,14 +9,17 @@ export const ResourceTabsComponent = ({
   tabs,
   activeKey,
   resource,
+  onSelect,
 }: {
   tabs: ResourceTab[];
   activeKey?: string;
   resource: any;
+  onSelect: React.EventHandler<any>;
 }) => (
   <Tabs
     id="ResourceTabsComponent"
-    defaultActiveKey={activeKey}
+    activeKey={activeKey}
+    onSelect={onSelect}
     mountOnEnter
     unmountOnExit
     animation={false}

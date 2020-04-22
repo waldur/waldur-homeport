@@ -79,6 +79,12 @@ export default function resourceRoutes($stateProvider) {
     .state('resources.details', {
       url: ':resource_type/:uuid/:tab',
       template: '<resource-header></resource-header>',
+      params: {
+        tab: {
+          value: '',
+          dynamic: true,
+        },
+      },
       resolve: {
         resource: loadResource,
       },

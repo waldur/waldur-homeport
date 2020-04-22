@@ -1,12 +1,11 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { AnswersSummary } from './AnswersSummary';
@@ -24,13 +23,17 @@ const SubmitButton = ({ submitting, submit }) => (
   </Button>
 );
 
-const ProjectChecklist = () => {
+export const ProjectChecklist = () => {
   const project = useSelector(getProject);
   if (!project) {
     return null;
   }
 
-  const state = useProjectChecklist(project, $state.params.category);
+  const {
+    params: { category },
+  } = useCurrentStateAndParams();
+
+  const state = useProjectChecklist(project, category);
 
   if (state.checklistLoading) {
     return <LoadingSpinner />;
@@ -79,5 +82,3 @@ const ProjectChecklist = () => {
     return null;
   }
 };
-
-export default connectAngularComponent(ProjectChecklist);

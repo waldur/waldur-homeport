@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { connectAngularComponent } from '@waldur/store/connect';
-
 import { fetchServiceUsageStart } from './actions';
 import { FlowMapFilter } from './FlowMapFilter';
 import { HeatMap } from './HeatMap';
@@ -43,9 +41,7 @@ const mapDispatchToProps = dispatch => ({
   fetchServiceUsageStart: () => dispatch(fetchServiceUsageStart()),
 });
 
-const HeatMapContainer = connect(
+export const HeatMapContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(HeatMapComponent);
-
-export default connectAngularComponent(HeatMapContainer);

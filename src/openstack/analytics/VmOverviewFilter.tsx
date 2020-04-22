@@ -3,11 +3,11 @@ import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import './VmOverviewFilter.scss';
 
-interface VmOverviewFilterProps extends TranslateProps {
+interface VmOverviewFilterProps {
   serviceProviders: any[];
 }
 
@@ -20,7 +20,7 @@ export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
           component={prop => (
             <AwesomeCheckbox
               id="show-shared"
-              label={props.translate('Show shared')}
+              label={translate('Show shared')}
               {...prop.input}
             />
           )}
@@ -31,7 +31,7 @@ export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
             component={prop => (
               <Select
                 className="service-provider-selector"
-                placeholder={props.translate('Select service provider')}
+                placeholder={translate('Select service provider')}
                 labelKey="name"
                 valueKey="value"
                 value={prop.input.value}

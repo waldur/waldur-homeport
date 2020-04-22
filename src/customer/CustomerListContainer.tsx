@@ -6,7 +6,6 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
 import { CustomerListFilter } from '@waldur/customer/CustomerListFilter';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { getOptions } from './AccountingRunningField';
 import { CustomerList } from './CustomerList';
@@ -61,7 +60,7 @@ async function loadData() {
   return { initialValues, accountingPeriods };
 }
 
-export const CustomerListComponent = () => (
+export const CustomerListContainer = () => (
   <Query loader={loadData}>
     {({ loading, error, data }) => {
       if (loading) {
@@ -82,5 +81,3 @@ export const CustomerListComponent = () => (
     }}
   </Query>
 );
-
-export default connectAngularComponent(CustomerListComponent);

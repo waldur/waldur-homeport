@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { titleCase } from '@waldur/core/utils';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, createFetcher, connectTable } from '@waldur/table-react';
 import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
@@ -89,5 +88,3 @@ const mapStateToProps = state => ({
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const HooksList = enhance(TableComponent);
-
-export default connectAngularComponent(HooksList);
