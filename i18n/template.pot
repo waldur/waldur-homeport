@@ -4701,6 +4701,10 @@ msgstr ""
 msgid "Provision new resource"
 msgstr ""
 
+#: src/user/keys/KeysListTablePlaceholder.tsx
+msgid "Public SSH keys will be injected into services that allow key-based access."
+msgstr ""
+
 #: src/user/keys/KeyCreateForm.tsx
 msgid "Public key"
 msgstr ""
@@ -6440,6 +6444,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
 msgid "There are no OpenStack tenants yet."
+msgstr ""
+
+#: src/user/keys/KeysListTablePlaceholder.tsx
+msgid "There are no SSH keys yet."
 msgstr ""
 
 #: src/user/keys/appstore-field-select-ssh-key.html
