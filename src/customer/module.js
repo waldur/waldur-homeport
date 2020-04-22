@@ -8,6 +8,7 @@ import customerWorkspaceModule from './workspace/module';
 import './events';
 
 export default module => {
+  customerTeamModule(module);
   customerCreateModule(module);
   customerDetailsModule(module);
   customerPopoverModule(module);
