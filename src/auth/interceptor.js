@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import Qs from 'qs';
 
 import { ngInjector } from '@waldur/core/services';
 
@@ -11,6 +12,8 @@ function initAuthToken($auth, $http) {
     $http.defaults.headers.common['Authorization'] = 'Token ' + token;
   }
 }
+
+Axios.defaults.paramsSerializer = Qs.stringify;
 
 // On 401 error received, user session has expired and he should logged out
 Axios.interceptors.response.use(
