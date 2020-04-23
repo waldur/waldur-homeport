@@ -1,3 +1,4 @@
+import angular from 'angular';
 import Axios from 'axios';
 
 import experimentalMode from '@waldur/configs/modes/experimental.json';
@@ -26,20 +27,28 @@ async function loadConfig() {
     const frontendResponse = await Axios.get(CONFIG_FILE);
     frontendSettings = frontendResponse.data;
   } catch (error) {
-    if (error.status === 404) {
+    if (!error.response) {
+      renderError(`Unable to fetch client configuration file.`);
+      return;
+    } else if (error.response.status === 404) {
       // fallback to default configuration
       frontendSettings = {
         apiEndpoint: 'http://localhost:8080/',
       };
-    } else if (error instanceof SyntaxError) {
-      renderError(
-        `Unable to parse client configuration file ${CONFIG_FILE}. Error message: ${error}`,
-      );
-      return;
     } else {
       renderError(error);
       return;
     }
+  }
+
+  // Axios swallows JSON parse error
+  if (typeof frontendSettings !== 'object') {
+    renderError(`Unable to parse client configuration file ${CONFIG_FILE}.`);
+    return;
+  } else if (!frontendSettings.apiEndpoint) {
+    frontendSettings = {
+      apiEndpoint: 'http://localhost:8080/',
+    };
   }
 
   try {
@@ -71,9 +80,9 @@ export default async function bootstrap(modulename) {
   if (!config) {
     return;
   }
-  window.$$CUSTOMENV = config;
-  window.$$MODES = modes;
-  attachTracking(window.$$CUSTOMENV);
+  window['$$CUSTOMENV'] = config;
+  window['$$MODES'] = modes;
+  attachTracking(window['$$CUSTOMENV']);
 
   angular.element(document).ready(function() {
     angular.bootstrap(document, [modulename], { strictDi: true });
