@@ -2,6 +2,9 @@ import { gettext } from '@waldur/i18n';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
 
+import { PaymentApprove } from './PaymentApprove';
+import { PaymentCancel } from './PaymentCancel';
+
 export const states = [
   {
     name: 'payment',
@@ -17,7 +20,7 @@ export const states = [
   {
     name: 'payment.approve',
     url: 'approve/',
-    template: '<payment-approve></payment-approve>',
+    component: withStore(PaymentApprove),
     data: {
       pageTitle: gettext('Approve payment'),
     },
@@ -26,7 +29,7 @@ export const states = [
   {
     name: 'payment.cancel',
     url: 'cancel/',
-    template: '<payment-cancel></payment-cancel>',
+    component: withStore(PaymentCancel),
     data: {
       pageTitle: gettext('Cancel payment'),
     },

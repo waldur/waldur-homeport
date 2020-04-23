@@ -423,7 +423,7 @@ msgstr ""
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/payments/PaymentsList.tsx
+#: src/paypal/PaymentsList.tsx
 msgid "Amount"
 msgstr ""
 
@@ -482,7 +482,7 @@ msgstr ""
 msgid "Approve"
 msgstr ""
 
-#: src/payments/routes.ts
+#: src/paypal/routes.ts
 msgid "Approve payment"
 msgstr ""
 
@@ -882,7 +882,7 @@ msgstr ""
 msgid "Cancel invitation"
 msgstr ""
 
-#: src/payments/routes.ts
+#: src/paypal/routes.ts
 msgid "Cancel payment"
 msgstr ""
 
@@ -1517,7 +1517,7 @@ msgstr ""
 
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
-#: src/payments/PaymentsList.tsx
+#: src/paypal/PaymentsList.tsx
 msgid "Date"
 msgstr ""
 
@@ -2675,8 +2675,8 @@ msgstr ""
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
-#: src/payments/payment-approve.js
-#: src/payments/payment-cancel.js
+#: src/paypal/PaymentApprove.tsx
+#: src/paypal/PaymentCancel.tsx
 msgid "Invalid URL. Unable to parse payment details."
 msgstr ""
 
@@ -4128,13 +4128,13 @@ msgstr ""
 msgid "Payment for {customer_link} has been cancelled."
 msgstr ""
 
-#: src/payments/payment-approve.js
-#: src/payments/payment-cancel.js
+#: src/paypal/PaymentApprove.tsx
+#: src/paypal/PaymentCancel.tsx
 msgid "Payment has been processed successfully."
 msgstr ""
 
-#: src/payments/payment-approve.html
-#: src/payments/payment-cancel.html
+#: src/paypal/PaymentApprove.tsx
+#: src/paypal/PaymentCancel.tsx
 msgid "Payment is being processed, please wait."
 msgstr ""
 
@@ -6102,8 +6102,8 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
-#: src/payments/PaymentsList.tsx
 #: src/paypal/InvoicesList.tsx
+#: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
@@ -6760,7 +6760,7 @@ msgstr ""
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/payments/PaymentsList.tsx
+#: src/paypal/PaymentsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
 msgstr ""
@@ -7134,6 +7134,11 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to post comment."
+msgstr ""
+
+#: src/paypal/PaymentApprove.tsx
+#: src/paypal/PaymentCancel.tsx
+msgid "Unable to process payment."
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
@@ -8104,7 +8109,7 @@ msgstr ""
 msgid "payment profiles"
 msgstr ""
 
-#: src/payments/PaymentsList.tsx
+#: src/paypal/PaymentsList.tsx
 msgid "payments"
 msgstr ""
 
