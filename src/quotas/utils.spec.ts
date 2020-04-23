@@ -34,5 +34,4 @@ describe('formatQuotaValue', () => {
     const availableQuota = 4000 - 2000;
     expect(formatQuotaValue(availableQuota, 'instance')).toEqual(expected);
   });
-
 });

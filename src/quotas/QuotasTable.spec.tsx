@@ -12,7 +12,7 @@ const renderComponent = resource => {
 
 describe('QuotasTable', () => {
   it('renders table for quotas', () => {
-    const html = renderComponent({quotas});
+    const html = renderComponent({ quotas });
     expect(html).toMatchSnapshot();
   });
-})
+});
