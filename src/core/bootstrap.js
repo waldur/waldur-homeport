@@ -48,13 +48,14 @@ async function loadConfig() {
     );
     backendSettings = backendResponse.data;
   } catch (error) {
-    if (error.status === -1) {
+    if (!error.response) {
       renderError(
         `Unfortunately, connection to server has failed. Please check if you can connect to ${frontendSettings.apiEndpoint} from your browser and contact support if the error continues.`,
       );
-    } else if (error.status >= 400) {
+      return;
+    } else if (error.response.status >= 400) {
       renderError(
-        `Unable to fetch server configuration. Error message: ${error.statusText}`,
+        `Unable to fetch server configuration. Error message: ${error.response.statusText}`,
       );
     } else {
       renderError(error);
