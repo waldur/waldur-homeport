@@ -1,0 +1,119 @@
+[
+  {
+    "url": "http://localhost:8080/api/quotas/195da441ee7840068e02ba627d7f9923/",
+    "uuid": "195da441ee7840068e02ba627d7f9923",
+    "name": "network_count",
+    "limit": 100,
+    "usage": 1,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/52c88c85e81a4f07a0d042d1ff9ac525/",
+    "uuid": "52c88c85e81a4f07a0d042d1ff9ac525",
+    "name": "snapshots",
+    "limit": 50,
+    "usage": 2,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/01a65807d7c44e969960b257c6554b0a/",
+    "uuid": "01a65807d7c44e969960b257c6554b0a",
+    "name": "subnet_count",
+    "limit": 100,
+    "usage": 1,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/98c480a03a314741b240c3b94a19b467/",
+    "uuid": "98c480a03a314741b240c3b94a19b467",
+    "name": "instances",
+    "limit": 30,
+    "usage": 5,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/94d30a8e04f749fa90e6d65abc07713d/",
+    "uuid": "94d30a8e04f749fa90e6d65abc07713d",
+    "name": "snapshots_size",
+    "limit": -1,
+    "usage": 51200,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/e6018e9743354fd5bc0a762d5bcd6028/",
+    "uuid": "e6018e9743354fd5bc0a762d5bcd6028",
+    "name": "vcpu",
+    "limit": 64,
+    "usage": 3,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/9001a3b2c61e4770893955063c8a6c08/",
+    "uuid": "9001a3b2c61e4770893955063c8a6c08",
+    "name": "security_group_count",
+    "limit": 100,
+    "usage": 8,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/afc0524c8e424f678d8e465f2da0de9e/",
+    "uuid": "afc0524c8e424f678d8e465f2da0de9e",
+    "name": "security_group_rule_count",
+    "limit": 100,
+    "usage": 14,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/14c7cdd6b52641c49e14f98fa86f798b/",
+    "uuid": "14c7cdd6b52641c49e14f98fa86f798b",
+    "name": "ram",
+    "limit": 131072,
+    "usage": 5120,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/6553bff7df8544fda087a943040da535/",
+    "uuid": "6553bff7df8544fda087a943040da535",
+    "name": "floating_ip_count",
+    "limit": 50,
+    "usage": 6,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/976487c34100471eb8bfe95edca54221/",
+    "uuid": "976487c34100471eb8bfe95edca54221",
+    "name": "volumes_size",
+    "limit": -1,
+    "usage": 250880,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/796ffd5dfd5c482fbc6fad8d82c368fd/",
+    "uuid": "796ffd5dfd5c482fbc6fad8d82c368fd",
+    "name": "volumes",
+    "limit": 50,
+    "usage": 8,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  },
+  {
+    "url": "http://localhost:8080/api/quotas/c45c5c9fedc544e3b368b6c94fd995a8/",
+    "uuid": "c45c5c9fedc544e3b368b6c94fd995a8",
+    "name": "storage",
+    "limit": 302080,
+    "usage": 302080,
+    "scope": "http://localhost:8080/api/openstack-tenants/32ff3e5a563c4f569b87fb53dc71cafb/",
+    "threshold": 0
+  }
+]

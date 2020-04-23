@@ -1,13 +1,11 @@
 import { translate } from '@waldur/i18n';
+import { QuotasTable } from '@waldur/quotas/QuotasTable';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
-import { angular2react } from '@waldur/shims/angular2react';
 
 import { FloatingIpsList } from '../openstack-floating-ips/FloatingIpsList';
 import { TenantNetworksList } from '../openstack-network/TenantNetworksList';
 import { SecurityGroupsList } from '../openstack-security-groups/SecurityGroupsList';
-
-const QuotasTable = angular2react('quotasTable', ['resource']);
 
 ResourceTabsConfiguration.register('OpenStack.Tenant', () => [
   {

@@ -640,7 +640,6 @@ msgid "Availability zone"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "Available quota usage: {usage}"
 msgstr ""
 
@@ -2069,7 +2068,6 @@ msgid "Executing"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
@@ -2249,7 +2247,7 @@ msgstr ""
 msgid "Floating IP"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Floating IP count"
 msgstr ""
 
@@ -2637,7 +2635,7 @@ msgstr ""
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Instances count"
 msgstr ""
 
@@ -3302,7 +3300,7 @@ msgstr ""
 msgid "Month"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Monthly cost"
 msgstr ""
 
@@ -4283,7 +4281,6 @@ msgid "Plan price"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "Planned quota usage: {usage}"
 msgstr ""
 
@@ -4801,7 +4798,6 @@ msgid "Quota has been reached."
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
@@ -6040,7 +6036,7 @@ msgstr ""
 msgid "Snapshots"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Snapshots count"
 msgstr ""
 
@@ -6151,7 +6147,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Storage"
 msgstr ""
 
@@ -7728,7 +7724,7 @@ msgstr ""
 msgid "Virtual machines"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Virtual machines count"
 msgstr ""
 
@@ -7761,7 +7757,7 @@ msgstr ""
 msgid "Volumes"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Volumes count"
 msgstr ""
 
@@ -7901,7 +7897,7 @@ msgstr ""
 msgid "You have no notifications yet."
 msgstr ""
 
-#: src/quotas/quotas-table.html
+#: src/quotas/QuotasTable.tsx
 msgid "You have no quotas yet."
 msgstr ""
 
@@ -8087,10 +8083,6 @@ msgstr ""
 msgid "networks"
 msgstr ""
 
-#: src/quotas/quotas-table.html
-msgid "of"
-msgstr ""
-
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "order items"
 msgstr ""
@@ -8205,7 +8197,7 @@ msgstr ""
 msgid "vCPU"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "vCPU count"
 msgstr ""
 
@@ -8317,12 +8309,12 @@ msgstr ""
 msgid "{state} controls"
 msgstr ""
 
+#: src/quotas/QuotasTable.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "{usage} of {limit}"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "{usage} of {limit} used"
 msgstr ""
 

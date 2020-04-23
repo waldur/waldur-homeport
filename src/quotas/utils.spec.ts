@@ -10,6 +10,10 @@ describe('formatQuotaName', () => {
     const expected = 'Security groups';
     expect(formatQuotaName('security_groups')).toEqual(expected);
   });
+
+  it('Displays snake_case strings replacing underscores with spaces, general case multiple words', () => {
+    expect(formatQuotaName('creepy_quota_value')).toEqual('Creepy quota value');
+  });
 });
 
 describe('formatQuotaValue', () => {
@@ -30,4 +34,5 @@ describe('formatQuotaValue', () => {
     const availableQuota = 4000 - 2000;
     expect(formatQuotaValue(availableQuota, 'instance')).toEqual(expected);
   });
+
 });
