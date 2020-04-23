@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ResourceLink } from './ResourceLink';
 import { getResourceIcon, formatResourceType, formatDefault } from './utils';
@@ -56,5 +55,3 @@ export const ResourceName = (props: ResourceNameProps) =>
       <ResourceWarning resource={props.resource} />
     </span>
   ) : null;
-
-export default connectAngularComponent(ResourceName, ['resource']);
