@@ -1,6 +1,5 @@
-/* eslint-disable */
-
 import { UI_ROUTER_REACT_HYBRID } from '@uirouter/react-hybrid';
+import * as angular from 'angular';
 import '@uirouter/angularjs/release/stateEvents';
 
 import './vendor';
@@ -8,49 +7,47 @@ import './globals';
 import './sass/style.scss';
 import '../svgfonts.font';
 
-import featuresModule from './features/module';
-import issuesModule from './issues/module';
-import userModule from './user/module';
-import projectModule from './project/module';
-import navigationModule from './navigation/module';
-import resourceModule from './resource/module';
-import billingModule from './billing/module';
-import bookingModule from './booking/module';
 import authModule from './auth/module';
-import invitationsModule from './invitations/module';
-import formModule from './form/module';
-import openstackModule from './openstack/module';
-import digitaloceanModule from './digitalocean/module';
-import customerModule from './customer/module';
-import paymentsModule from './payments/module';
-import eventsModule from './events/module';
-import routesModule from './routes/module';
-import offeringsModule from './offering/module';
-import helpModule from './help/module';
-import coreModule from './core/module';
-import filtersModule from './core/filters';
-import i18nModule from './i18n/module';
-import modalModule from './modal/module';
-import bootstrap from './core/bootstrap';
-import errorModule from './error/module';
-import configModule from './configs/module';
-import servicesModule from './services/module';
-import freeipaModule from './freeipa/module';
-import rootModule from './module';
-import priceModule from './price/module';
-import introModule from './intro/module';
 import azureModule from './azure/module';
-import slurmModule from './slurm/module';
-import paypalModule from './paypal/module';
-import storeModule from './store/module';
-import jiraModule from './jira/module';
-import workspaceModule from './workspace/module';
+import billingModule from './billing/module';
+import configModule from './configs/module';
+import bootstrap from './core/bootstrap';
+import filtersModule from './core/filters';
+import coreModule from './core/module';
+import customerModule from './customer/module';
+import digitaloceanModule from './digitalocean/module';
+import errorModule from './error/module';
+import eventsModule from './events/module';
+import featuresModule from './features/module';
 import formReactModule from './form-react/module';
-import marketplaceModule from './marketplace/module';
-import vmwareModule from './vmware/module';
-import rancherModule from './rancher/module';
-import marketplaceScriptModule from './marketplace-script/module';
+import formModule from './form/module';
+import freeipaModule from './freeipa/module';
+import helpModule from './help/module';
+import i18nModule from './i18n/module';
+import introModule from './intro/module';
+import invitationsModule from './invitations/module';
+import issuesModule from './issues/module';
+import jiraModule from './jira/module';
 import marketplaceChecklistModule from './marketplace-checklist/module';
+import marketplaceModule from './marketplace/module';
+import modalModule from './modal/module';
+import rootModule from './module';
+import navigationModule from './navigation/module';
+import offeringsModule from './offering/module';
+import openstackModule from './openstack/module';
+import paymentsModule from './payments/module';
+import paypalModule from './paypal/module';
+import priceModule from './price/module';
+import projectModule from './project/module';
+import rancherModule from './rancher/module';
+import resourceModule from './resource/module';
+import routesModule from './routes/module';
+import servicesModule from './services/module';
+import slurmModule from './slurm/module';
+import storeModule from './store/module';
+import userModule from './user/module';
+import vmwareModule from './vmware/module';
+import workspaceModule from './workspace/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -80,7 +77,6 @@ projectModule(appModule);
 navigationModule(appModule);
 resourceModule(appModule);
 billingModule(appModule);
-bookingModule(appModule);
 authModule(appModule);
 invitationsModule(appModule);
 formModule(appModule);
@@ -111,10 +107,11 @@ workspaceModule(appModule);
 marketplaceModule(appModule);
 vmwareModule(appModule);
 rancherModule(appModule);
-marketplaceScriptModule(appModule);
 marketplaceChecklistModule(appModule);
 
 function requirePlugins(module) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
   const context = require.context('./plugins', true, /module\.js$/);
   context.keys().forEach(key => {
     const plugin = context(key).default;

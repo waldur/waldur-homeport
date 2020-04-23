@@ -1,3 +1,0 @@
-import './marketplace';
-
-export default () => {};
