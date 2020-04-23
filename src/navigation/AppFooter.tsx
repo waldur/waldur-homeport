@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
+import './AppFooter.scss';
 
 export const AppFooter = () => {
   const {
