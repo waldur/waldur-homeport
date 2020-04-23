@@ -1,9 +1,11 @@
+import { formatFlavor } from '@waldur/resource/utils';
+
 export function internalIpFormatter(subnet) {
   return `${subnet.name} (${subnet.cidr})`;
 }
 
-export function flavorFormatter($filter, flavor) {
-  const props = $filter('formatFlavor')(flavor);
+export function flavorFormatter(flavor) {
+  const props = formatFlavor(flavor);
   return `${flavor.name} (${props})`;
 }
 

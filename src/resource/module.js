@@ -1,6 +1,5 @@
 import actionsModule from './actions/module';
 import resourceBreadcrumbsModule from './breadcrumbs/module';
-import filtersModule from './filters';
 import monitoringModule from './monitoring/module';
 import resourceHeader from './resource-header';
 import resourceDetails from './ResourceDetails';
@@ -21,6 +20,5 @@ export default module => {
   resourceStateModule(module);
   monitoringModule(module);
   actionsModule(module);
-  filtersModule(module);
   supportModule(module);
 };

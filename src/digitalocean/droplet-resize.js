@@ -1,9 +1,10 @@
+import { formatFlavor } from '@waldur/resource/utils';
+
 import template from './droplet-resize.html';
 
 // @ngInject
 function DropletResizeDialogController(
   $scope,
-  $filter,
   resourcesService,
   actionUtilsService,
   ActionResourceLoader,
@@ -27,7 +28,7 @@ function DropletResizeDialogController(
           $scope.error = error.message;
         });
     },
-    formatSize: resource => $filter('formatFlavor')(resource),
+    formatSize: resource => formatFlavor(resource),
     loadDroplet: function() {
       return resourcesService
         .$get(null, null, $scope.resource.url, {
