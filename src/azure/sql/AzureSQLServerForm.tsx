@@ -11,7 +11,6 @@ import { translate } from '@waldur/i18n';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
-// tslint:disable-next-line:variable-name
 const loadData = (settings_uuid: string) =>
   getLocations(settings_uuid).then(locations => ({ locations }));
 

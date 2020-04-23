@@ -4,9 +4,7 @@ import { Option } from 'react-select';
 import { Field } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-// import { $http } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
-// import { getUUID } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { TextField, StringField } from '@waldur/form-react';
 import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
@@ -47,7 +45,6 @@ import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 import { AvailabilityZone } from '../types';
 
 import { AvailabilityZoneGroup } from './AvailabilityZoneGroup';
-// import { CreateSecurityGroupButton } from './CreateSecurityGroupButton';
 import { DataVolumeSizeGroup } from './DataVolumeSizeGroup';
 import { DataVolumeTypeGroup } from './DataVolumeTypeGroup';
 import { FlavorGroup } from './FlavorGroup';
@@ -68,7 +65,6 @@ interface OpenstackInstanceCreateFormState {
   availabilityZones: AvailabilityZone[];
   volumeTypes: Option[];
   isDataVolumeActive: boolean;
-  // tenantUUID?: string;
 }
 
 interface OpenstackInstanceCreateFormComponentProps {
@@ -98,7 +94,6 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
     availabilityZones: [],
     volumeTypes: [],
     isDataVolumeActive: false,
-    // tenantUUID: undefined,
   };
 
   async loadData() {
@@ -114,8 +109,6 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
       const availabilityZones = await api.loadInstanceAvailabilityZones(
         scopeUuid,
       );
-      // const settings = (await $http.get(this.props.offering.scope)).data;
-      // const tenantUUID = settings.scope ? getUUID(settings.scope) : undefined;
 
       let volumeTypeChoices = [];
       let defaultVolumeType;
@@ -136,17 +129,14 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
         sshKeys,
         availabilityZones,
         volumeTypes: volumeTypeChoices,
-        // tenantUUID,
       });
       const initial = this.props.initialAttributes;
       if (initial) {
         const flavor = flavors.find(s => s.url === initial.flavor);
         const image = images.find(s => s.url === initial.image);
-        // tslint:disable-next-line: variable-name
         const security_groups = initial.security_groups.map(s =>
           securityGroups.find(g => g.url === s.url),
         );
-        // tslint:disable-next-line: variable-name
         const availability_zone =
           initial.availability_zone &&
           availabilityZones.find(s => s.url === initial.availability_zone);

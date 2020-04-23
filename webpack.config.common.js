@@ -10,7 +10,7 @@ const imagesPath = path.resolve('./src/images');
 
 module.exports = {
   entry: {
-    index: './src/index.js',
+    index: './src/index.ts',
   },
   output: {
     path: utils.formatPath('.'),

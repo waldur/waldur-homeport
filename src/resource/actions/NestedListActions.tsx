@@ -7,9 +7,11 @@ import { ngInjector } from '@waldur/core/services';
 export const NestedListActions = ({ resource, tab }) => {
   const controller = {
     handleActionException: () => {
+      // eslint-disable-next-line no-console
       console.log('handleActionException');
     },
     reInitResource: () => {
+      // eslint-disable-next-line no-console
       console.log('reInitResource');
     },
   };

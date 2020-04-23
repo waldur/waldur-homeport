@@ -1,4 +1,3 @@
-// tslint:disable-next-line:ban-types
 export default function createChainedFunction(...funcs) {
   return funcs
     .filter(f => f != null)

@@ -1,3 +1,3 @@
-import { $http } from '@waldur/core/services';
+import Axios from 'axios';
 
-export const removeHook = (url: string) => $http.delete(url);
+export const removeHook = (url: string) => Axios.delete(url);

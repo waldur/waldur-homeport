@@ -36,7 +36,6 @@ const PureAzureSQLServerSummary = (
       <Field label={translate('Pricing tier')}>
         <ValueWithTooltip
           value="Basic"
-          // tslint:disable-next-line:max-line-length
           tooltip="Workloads that require light compute and I/O performance. Examples include servers used for development or testing or small-scale infrequently used applications."
         />
       </Field>

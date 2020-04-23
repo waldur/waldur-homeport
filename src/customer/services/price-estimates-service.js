@@ -1,7 +1,8 @@
+import Axios from 'axios';
+
 export default class PriceEstimatesService {
   // @ngInject
-  constructor($http, ENV) {
-    this.$http = $http;
+  constructor(ENV) {
     this.endpoint = ENV.apiEndpoint + 'api/price-estimates/';
   }
 
@@ -13,7 +14,7 @@ export default class PriceEstimatesService {
   }
 
   update(billing_price_estimate) {
-    return this.$http.put(billing_price_estimate.url, {
+    return Axios.put(billing_price_estimate.url, {
       threshold: billing_price_estimate.threshold,
       limit: billing_price_estimate.limit,
     });

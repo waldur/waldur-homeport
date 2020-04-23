@@ -152,6 +152,7 @@ export default function registerSidebarExtension(
         index: 220,
       },
       {
+        key: 'marketplace-project-resources',
         label: translate('Resources'),
         icon: 'fa-files-o',
         index: 300,

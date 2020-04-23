@@ -1,10 +1,8 @@
-import { IPromise } from 'angular';
+import Axios from 'axios';
 import FileSaver from 'file-saver';
 
-import { $http } from '@waldur/core/services';
-
-export const downloadFile = (url: string, filename: string): IPromise<void> =>
-  $http({
+export const downloadFile = (url: string, filename: string): Promise<void> =>
+  Axios.request({
     url,
     method: 'GET',
     responseType: 'blob',

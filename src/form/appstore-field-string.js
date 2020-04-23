@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import template from './appstore-field-string.html';
 
 const appstoreFieldString = {

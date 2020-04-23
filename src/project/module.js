@@ -1,7 +1,6 @@
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import certificationsService from './certifications-service';
-import projectBase from './project-base';
 import projectPolicies from './project-policies';
 import projectDialog from './ProjectDetailsDialog';
 import projectRemoveDialog from './ProjectRemoveDialog';
@@ -13,7 +12,6 @@ import teamModule from './team/module';
 import './events';
 
 export default module => {
-  module.directive('projectBase', projectBase);
   module.component('projectSidebar', connectAngularComponent(ProjectSidebar));
   module.component('projectPolicies', projectPolicies);
   module.component('projectDialog', projectDialog);

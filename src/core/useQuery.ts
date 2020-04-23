@@ -1,4 +1,3 @@
-import { IPromise } from 'angular';
 import * as React from 'react';
 
 interface QueryState<PayloadType = any> {
@@ -16,7 +15,7 @@ interface QueryInterface<PayloadType = any> {
 
 type LoaderInterface<VariablesType, PayloadType> = (
   vars?: VariablesType,
-) => IPromise<PayloadType> | Promise<PayloadType>;
+) => Promise<PayloadType>;
 
 export function useQuery<
   PayloadType = any,

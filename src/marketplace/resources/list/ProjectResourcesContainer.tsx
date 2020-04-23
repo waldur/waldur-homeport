@@ -23,7 +23,6 @@ function updateBreadcrumbs(category: Category) {
   });
 }
 
-// tslint:disable-next-line: variable-name
 async function loadData(category_uuid) {
   const category = await getCategory(category_uuid, {
     params: { field: ['columns', 'title'] },

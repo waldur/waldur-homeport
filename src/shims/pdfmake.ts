@@ -1,4 +1,6 @@
-import { ENV, $http } from '@waldur/core/services';
+import Axios from 'axios';
+
+import { ENV } from '@waldur/core/services';
 
 // Avoid to re-download the fonts every time pdfmake is used, useful for SPA.
 let pdfMakeInstance: any = null;
@@ -7,12 +9,11 @@ async function loadVfs(fontFamilies) {
   // Load fonts into Virtual File System for pdfkit
   const baseURL = 'fonts/';
   const vfs = {};
-  // tslint:disable-next-line: forin
+
   for (const fontFamily in fontFamilies) {
-    // tslint:disable-next-line: forin
     for (const font in fontFamilies[fontFamily]) {
       const file = fontFamilies[fontFamily][font];
-      const response = await $http.get(baseURL + file, {
+      const response = await Axios.get(baseURL + file, {
         responseType: 'arraybuffer',
       });
       vfs[file] = response.data;

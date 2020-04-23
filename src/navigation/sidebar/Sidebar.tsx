@@ -4,7 +4,6 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import { LanguageSelectorMenuItem } from '@waldur/i18n/LanguageSelectorMenuItem';
 import { DocsLink } from '@waldur/navigation/header/DocsLink';
 import { SupportLink } from '@waldur/navigation/header/SupportLink';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { UserDropdownMenu } from '@waldur/user/UserDropdownMenu';
 
 import './Sidebar.css';
@@ -28,5 +27,3 @@ export const Sidebar: React.FC<SidebarMenuProps> = props => (
     </Scrollbars>
   </nav>
 );
-
-export default connectAngularComponent(Sidebar, ['items', 'counters']);

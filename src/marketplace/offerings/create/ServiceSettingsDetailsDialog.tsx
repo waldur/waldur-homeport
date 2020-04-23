@@ -1,8 +1,8 @@
+import Axios from 'axios';
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $http } from '@waldur/core/services';
 import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -22,7 +22,7 @@ interface ProviderData {
 export const ServiceSettingsDetailsDialog = () => {
   const offering = useSelector(getOffering);
   const { state, call } = useQuery(async () => {
-    const provider = (await $http.get(offering.offering.scope))
+    const provider = (await Axios.get(offering.offering.scope))
       .data as ProviderData;
     return {
       initialValues: {

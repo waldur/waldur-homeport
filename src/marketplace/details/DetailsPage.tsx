@@ -11,7 +11,6 @@ import { OfferingDetails } from './OfferingDetails';
 import { getTabs } from './OfferingTabs';
 import { updateBreadcrumbs } from './utils';
 
-// tslint:disable-next-line: variable-name
 async function loadData(offering_uuid: string) {
   const offering = await getOffering(offering_uuid);
   const category = await getCategory(offering.category_uuid);

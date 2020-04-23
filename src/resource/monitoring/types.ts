@@ -1,5 +1,3 @@
-import { IPromise } from 'angular';
-
 import { ResourceState } from '@waldur/resource/types';
 
 export interface ZabbixLink {
@@ -15,7 +13,7 @@ export interface ZabbixLinkRequest {
 
 export type ZabbixLinkApi = (
   request: ZabbixLinkRequest,
-) => IPromise<ZabbixLink[]>;
+) => Promise<ZabbixLink[]>;
 
 export interface ZabbixTemplate {
   name: string;
@@ -29,7 +27,7 @@ export interface ZabbixTemplateRequest {
 
 export type ZabbixTemplateApi = (
   request: ZabbixTemplateRequest,
-) => IPromise<ZabbixTemplate[]>;
+) => Promise<ZabbixTemplate[]>;
 
 export interface ZabbixHost {
   state: ResourceState;

@@ -5,7 +5,6 @@ import extensionPointService from './extension-point-service';
 import loadingSpinner from './LoadingSpinner';
 import messageDialog from './MessageDialog';
 import multipleSelect from './multiple-select';
-import ncUtils from './ncUtils';
 import sentryModule from './sentry';
 import injectServices from './services';
 import servicesService from './services-service';
@@ -55,7 +54,6 @@ function defaultErrorHandler($state) {
 
 export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
-  module.service('ncUtils', ncUtils);
   module.service('baseServiceClass', baseServiceClass);
   module.factory('listCache', listCache);
   module.service('servicesService', servicesService);

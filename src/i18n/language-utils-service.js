@@ -1,9 +1,9 @@
-// @ngInject
+import Axios from 'axios';
+
 export default class LanguageUtilsService {
   // @ngInject
-  constructor($translate, $http, ENV) {
+  constructor($translate, ENV) {
     this.$translate = $translate;
-    this.$http = $http;
     this.ENV = ENV;
   }
 
@@ -15,7 +15,7 @@ export default class LanguageUtilsService {
     this.current = language;
     this.$translate.use(language.code);
     moment.locale(language.code);
-    this.$http.defaults.headers.common['Accept-Language'] = language.code;
+    Axios.defaults.headers.common['Accept-Language'] = language.code;
   }
 
   checkLanguage() {

@@ -1,7 +1,7 @@
-import { IHttpResponse } from 'angular';
+import Axios, { AxiosResponse } from 'axios';
 
 import { getNextPageUrl } from '@waldur/core/api';
-import { ENV, $http } from '@waldur/core/services';
+import { ENV } from '@waldur/core/services';
 import { parseQueryString } from '@waldur/core/utils';
 
 import { Fetcher, TableRequest } from './types';
@@ -18,12 +18,12 @@ export function getNextPageNumber(link: string): number {
 }
 
 export const parseResponse = (url, params) =>
-  $http({
+  Axios.request({
     method: 'GET',
     url,
     params,
-  }).then((response: IHttpResponse<any>) => {
-    const resultCount = parseInt(response.headers()['x-result-count'], 10);
+  }).then((response: AxiosResponse<any>) => {
+    const resultCount = parseInt(response.headers['x-result-count'], 10);
     return {
       rows: Array.isArray(response.data) ? response.data : [],
       resultCount,

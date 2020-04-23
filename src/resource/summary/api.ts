@@ -1,3 +1,3 @@
-import { $http } from '@waldur/core/services';
+import Axios from 'axios';
 
-export const fetchResource = url => $http.get(url);
+export const fetchResource = url => Axios.get(url);

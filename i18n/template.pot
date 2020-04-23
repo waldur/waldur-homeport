@@ -45,7 +45,7 @@ msgstr ""
 msgid "Abbreviation"
 msgstr ""
 
-#: src/routes/about.js
+#: src/routes/about.ts
 #: src/views/about/index.html
 msgid "About"
 msgstr ""
@@ -87,7 +87,7 @@ msgid "Account removal"
 msgstr ""
 
 #: src/billing/billing-utils.js
-#: src/billing/routes.js
+#: src/billing/routes.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Accounting"
 msgstr ""
@@ -205,7 +205,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: src/user/routes.js
+#: src/user/routes.ts
 msgid "Add SSH key"
 msgstr ""
 
@@ -269,7 +269,7 @@ msgid "Add notification"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingCreateButton.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Add offering"
 msgstr ""
 
@@ -423,7 +423,7 @@ msgstr ""
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/payments/PaymentsList.tsx
+#: src/paypal/PaymentsList.tsx
 msgid "Amount"
 msgstr ""
 
@@ -482,7 +482,7 @@ msgstr ""
 msgid "Approve"
 msgstr ""
 
-#: src/payments/routes.js
+#: src/paypal/routes.ts
 msgid "Approve payment"
 msgstr ""
 
@@ -589,13 +589,13 @@ msgstr ""
 msgid "Audit log"
 msgstr ""
 
-#: src/customer/routes.js
+#: src/customer/routes.ts
 #: src/customer/workspace/utils.ts
-#: src/project/routes.js
+#: src/project/routes.ts
 #: src/project/utils.ts
 #: src/user/constants.ts
 #: src/user/list/UserDashboard.tsx
-#: src/user/routes.js
+#: src/user/tabs.js
 msgid "Audit logs"
 msgstr ""
 
@@ -640,7 +640,6 @@ msgid "Availability zone"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "Available quota usage: {usage}"
 msgstr ""
 
@@ -883,7 +882,7 @@ msgstr ""
 msgid "Cancel invitation"
 msgstr ""
 
-#: src/payments/routes.js
+#: src/paypal/routes.ts
 msgid "Cancel payment"
 msgstr ""
 
@@ -1122,7 +1121,7 @@ msgstr ""
 msgid "Company data"
 msgstr ""
 
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Compare items"
 msgstr ""
 
@@ -1135,7 +1134,7 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-#: src/marketplace-checklist/routes.js
+#: src/marketplace-checklist/routes.ts
 msgid "Compliance"
 msgstr ""
 
@@ -1334,7 +1333,7 @@ msgstr ""
 msgid "Create organization"
 msgstr ""
 
-#: src/customer/routes.js
+#: src/customer/routes.ts
 msgid "Create project"
 msgstr ""
 
@@ -1482,10 +1481,10 @@ msgstr ""
 msgid "Currently there are no booking requests."
 msgstr ""
 
-#: src/customer/routes.js
+#: src/customer/routes.ts
 #: src/customer/workspace/utils.ts
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/routes.js
+#: src/project/routes.ts
 #: src/project/utils.ts
 #: src/user/constants.ts
 msgid "Dashboard"
@@ -1518,7 +1517,7 @@ msgstr ""
 
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
-#: src/payments/PaymentsList.tsx
+#: src/paypal/PaymentsList.tsx
 msgid "Date"
 msgstr ""
 
@@ -2069,7 +2068,6 @@ msgid "Executing"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
@@ -2182,7 +2180,7 @@ msgstr ""
 msgid "Filter projects"
 msgstr ""
 
-#: src/issues/routes.js
+#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Financial overview"
 msgstr ""
@@ -2249,7 +2247,7 @@ msgstr ""
 msgid "Floating IP"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Floating IP count"
 msgstr ""
 
@@ -2258,7 +2256,7 @@ msgstr ""
 msgid "Floating IPs"
 msgstr ""
 
-#: src/issues/routes.js
+#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Flowmap"
 msgstr ""
@@ -2280,7 +2278,7 @@ msgid "Free"
 msgstr ""
 
 #: src/user/constants.ts
-#: src/user/routes.js
+#: src/user/tabs.js
 msgid "FreeIPA account"
 msgstr ""
 
@@ -2391,12 +2389,12 @@ msgstr ""
 msgid "Guide me"
 msgstr ""
 
-#: src/issues/routes.js
+#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Heatmap"
 msgstr ""
 
-#: src/help/routes.js
+#: src/help/routes.ts
 msgid "Help"
 msgstr ""
 
@@ -2408,7 +2406,7 @@ msgstr ""
 msgid "Helpdesk"
 msgstr ""
 
-#: src/issues/routes.js
+#: src/issues/routes.ts
 msgid "Helpdesk dashboard"
 msgstr ""
 
@@ -2637,7 +2635,7 @@ msgstr ""
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Instances count"
 msgstr ""
 
@@ -2677,8 +2675,8 @@ msgstr ""
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
-#: src/payments/payment-approve.js
-#: src/payments/payment-cancel.js
+#: src/paypal/PaymentApprove.tsx
+#: src/paypal/PaymentCancel.tsx
 msgid "Invalid URL. Unable to parse payment details."
 msgstr ""
 
@@ -2842,11 +2840,11 @@ msgstr ""
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
-#: src/customer/routes.js
+#: src/customer/routes.ts
 #: src/customer/workspace/utils.ts
 #: src/jira/project/tabs.ts
 #: src/marketplace/resources/ResourceTabs.tsx
-#: src/project/routes.js
+#: src/project/routes.ts
 #: src/project/utils.ts
 #: src/resource/tabs/constants.ts
 msgid "Issues"
@@ -3091,8 +3089,8 @@ msgstr ""
 
 #: src/customer/workspace/utils.ts
 #: src/user/constants.ts
-#: src/user/routes.js
 #: src/user/support/UserDetailsView.tsx
+#: src/user/tabs.js
 msgid "Manage"
 msgstr ""
 
@@ -3104,7 +3102,7 @@ msgstr ""
 msgid "Manage networks"
 msgstr ""
 
-#: src/customer/routes.js
+#: src/customer/routes.ts
 msgid "Manage organization"
 msgstr ""
 
@@ -3125,12 +3123,12 @@ msgid "Manager in:"
 msgstr ""
 
 #: src/marketplace/details/utils.ts
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
 msgid "Marketplace"
 msgstr ""
 
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Marketplace checkout"
 msgstr ""
 
@@ -3138,7 +3136,7 @@ msgstr ""
 msgid "Marketplace offering does not have any usage-based components."
 msgstr ""
 
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Marketplace offerings"
 msgstr ""
 
@@ -3302,7 +3300,7 @@ msgstr ""
 msgid "Month"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Monthly cost"
 msgstr ""
 
@@ -3327,18 +3325,18 @@ msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
 msgid "My offerings"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
 msgid "My orders"
 msgstr ""
 
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
 msgid "My resources"
 msgstr ""
@@ -3645,7 +3643,7 @@ msgstr ""
 
 #: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
-#: src/user/routes.js
+#: src/user/tabs.js
 msgid "Notifications"
 msgstr ""
 
@@ -3692,7 +3690,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: src/error/routes.js
+#: src/error/routes.ts
 msgid "Object is not found."
 msgstr ""
 
@@ -3716,7 +3714,7 @@ msgstr ""
 #: src/marketplace/details/OverviewTab.tsx
 #: src/marketplace/offerings/details/OfferingDetailsButton.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Offering details"
 msgstr ""
 
@@ -3877,7 +3875,7 @@ msgid "Order Summary"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Order details"
 msgstr ""
 
@@ -3893,7 +3891,7 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Order item details"
 msgstr ""
 
@@ -3916,7 +3914,7 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Orders"
 msgstr ""
 
@@ -4064,7 +4062,7 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
-#: src/error/routes.js
+#: src/error/routes.ts
 msgid "Page is not found."
 msgstr ""
 
@@ -4130,13 +4128,13 @@ msgstr ""
 msgid "Payment for {customer_link} has been cancelled."
 msgstr ""
 
-#: src/payments/payment-approve.js
-#: src/payments/payment-cancel.js
+#: src/paypal/PaymentApprove.tsx
+#: src/paypal/PaymentCancel.tsx
 msgid "Payment has been processed successfully."
 msgstr ""
 
-#: src/payments/payment-approve.html
-#: src/payments/payment-cancel.html
+#: src/paypal/PaymentApprove.tsx
+#: src/paypal/PaymentCancel.tsx
 msgid "Payment is being processed, please wait."
 msgstr ""
 
@@ -4242,7 +4240,7 @@ msgstr ""
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Plan capacity"
 msgstr ""
 
@@ -4283,7 +4281,6 @@ msgid "Plan price"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "Planned quota usage: {usage}"
 msgstr ""
 
@@ -4537,7 +4534,7 @@ msgid "Priority"
 msgstr ""
 
 #: src/navigation/AppFooter.tsx
-#: src/routes/about.js
+#: src/routes/about.ts
 msgid "Privacy policy"
 msgstr ""
 
@@ -4657,7 +4654,7 @@ msgstr ""
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
-#: src/project/project-base.js
+#: src/project/ProjectWorkspace.tsx
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 msgid "Project workspace"
 msgstr ""
@@ -4674,7 +4671,7 @@ msgstr ""
 msgid "Project {project_name} has been deleted."
 msgstr ""
 
-#: src/customer/routes.js
+#: src/customer/routes.ts
 #: src/customer/workspace/utils.ts
 #: src/rancher/cluster/tabs.ts
 msgid "Projects"
@@ -4710,7 +4707,7 @@ msgid "Provider certification required by this project."
 msgstr ""
 
 #: src/marketplace/offerings/create/ServiceSettingsDetailsDialog.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Provider details"
 msgstr ""
 
@@ -4748,18 +4745,18 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
 msgid "Public offerings"
 msgstr ""
 
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
 msgid "Public orders"
 msgstr ""
 
 #: src/marketplace/resources/ResourceDetailsPage.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
 msgid "Public resources"
 msgstr ""
@@ -4795,13 +4792,12 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
-#: src/error/routes.js
+#: src/error/routes.ts
 #: src/project/ProjectCreateButton.tsx
 msgid "Quota has been reached."
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
@@ -5092,7 +5088,7 @@ msgstr ""
 msgid "Request description"
 msgstr ""
 
-#: src/issues/routes.js
+#: src/issues/routes.ts
 msgid "Request detail"
 msgstr ""
 
@@ -5321,12 +5317,12 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
 #: src/offering/offering-details.js
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
-#: src/project/project-base.js
+#: src/project/ProjectWorkspace.tsx
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
@@ -5342,7 +5338,7 @@ msgid "Resources represent the services you are using."
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/resource/support/routes.js
+#: src/resource/support/routes.ts
 msgid "Resources usage"
 msgstr ""
 
@@ -5478,7 +5474,7 @@ msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr ""
 
 #: src/user/keys/KeysList.tsx
-#: src/user/routes.js
+#: src/user/tabs.js
 msgid "SSH keys"
 msgstr ""
 
@@ -5487,7 +5483,7 @@ msgstr ""
 msgid "SSH public key"
 msgstr ""
 
-#: src/issues/routes.js
+#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Sankey diagram"
 msgstr ""
@@ -5876,7 +5872,7 @@ msgid "Shared"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/resource/support/routes.js
+#: src/resource/support/routes.ts
 msgid "Shared providers"
 msgstr ""
 
@@ -5889,7 +5885,7 @@ msgid "Shopping cart item has been updated."
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartItemUpdate.tsx
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Shopping cart item update"
 msgstr ""
 
@@ -6040,7 +6036,7 @@ msgstr ""
 msgid "Snapshots"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Snapshots count"
 msgstr ""
 
@@ -6106,8 +6102,8 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
-#: src/payments/PaymentsList.tsx
 #: src/paypal/InvoicesList.tsx
+#: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
@@ -6151,7 +6147,7 @@ msgstr ""
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Storage"
 msgstr ""
 
@@ -6246,7 +6242,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: src/issues/routes.js
+#: src/issues/routes.ts
 #: src/issues/workspace/issues-workspace.html
 msgid "Support dashboard"
 msgstr ""
@@ -6255,7 +6251,7 @@ msgstr ""
 msgid "Support request events"
 msgstr ""
 
-#: src/issues/routes.js
+#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Support requests"
 msgstr ""
@@ -6330,9 +6326,9 @@ msgstr ""
 msgid "Tax number"
 msgstr ""
 
-#: src/customer/routes.js
+#: src/customer/routes.ts
 #: src/customer/workspace/utils.ts
-#: src/project/routes.js
+#: src/project/routes.ts
 #: src/project/utils.ts
 msgid "Team"
 msgstr ""
@@ -6447,7 +6443,7 @@ msgid "Terms of Service"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/routes/about.js
+#: src/routes/about.ts
 msgid "Terms of service"
 msgstr ""
 
@@ -6764,7 +6760,7 @@ msgstr ""
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#: src/payments/PaymentsList.tsx
+#: src/paypal/PaymentsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 msgid "Type"
 msgstr ""
@@ -7140,6 +7136,11 @@ msgstr ""
 msgid "Unable to post comment."
 msgstr ""
 
+#: src/paypal/PaymentApprove.tsx
+#: src/paypal/PaymentCancel.tsx
+msgid "Unable to process payment."
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to register service provider."
 msgstr ""
@@ -7313,7 +7314,7 @@ msgstr ""
 msgid "Update notification"
 msgstr ""
 
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Update offering"
 msgstr ""
 
@@ -7407,7 +7408,7 @@ msgid "Usage report has been submitted."
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace/routes.js
+#: src/marketplace/routes.ts
 msgid "Usage reports"
 msgstr ""
 
@@ -7439,7 +7440,7 @@ msgstr ""
 msgid "User could not been updated"
 msgstr ""
 
-#: src/user/routes.js
+#: src/user/tabs.js
 #: src/user/user-details.html
 msgid "User dashboard"
 msgstr ""
@@ -7604,7 +7605,7 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
-#: src/issues/routes.js
+#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
 #: src/project/team/ProjectTeam.tsx
 msgid "Users"
@@ -7642,7 +7643,7 @@ msgid "VM name"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/openstack/analytics/routes.js
+#: src/openstack/analytics/routes.ts
 msgid "VM type overview"
 msgstr ""
 
@@ -7728,7 +7729,7 @@ msgstr ""
 msgid "Virtual machines"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Virtual machines count"
 msgstr ""
 
@@ -7761,7 +7762,7 @@ msgstr ""
 msgid "Volumes"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "Volumes count"
 msgstr ""
 
@@ -7901,7 +7902,7 @@ msgstr ""
 msgid "You have no notifications yet."
 msgstr ""
 
-#: src/quotas/quotas-table.html
+#: src/quotas/QuotasTable.tsx
 msgid "You have no quotas yet."
 msgstr ""
 
@@ -8087,10 +8088,6 @@ msgstr ""
 msgid "networks"
 msgstr ""
 
-#: src/quotas/quotas-table.html
-msgid "of"
-msgstr ""
-
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "order items"
 msgstr ""
@@ -8112,7 +8109,7 @@ msgstr ""
 msgid "payment profiles"
 msgstr ""
 
-#: src/payments/PaymentsList.tsx
+#: src/paypal/PaymentsList.tsx
 msgid "payments"
 msgstr ""
 
@@ -8205,7 +8202,7 @@ msgstr ""
 msgid "vCPU"
 msgstr ""
 
-#: src/quotas/constants.js
+#: src/quotas/constants.ts
 msgid "vCPU count"
 msgstr ""
 
@@ -8317,12 +8314,12 @@ msgstr ""
 msgid "{state} controls"
 msgstr ""
 
+#: src/quotas/QuotasTable.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "{usage} of {limit}"
 msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#: src/quotas/quota-usage-bar-chart.js
 msgid "{usage} of {limit} used"
 msgstr ""
 

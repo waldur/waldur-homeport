@@ -1,5 +1,8 @@
-import template from './billing-details.html';
+import { getUUID } from '@waldur/core/utils';
+
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+
+import template from './billing-details.html';
 
 const billingDetails = {
   template,
@@ -13,7 +16,6 @@ const billingDetails = {
       currentStateService,
       customersService,
       usersService,
-      ncUtils,
       invoicesService,
       paypalInvoicesService,
       features,
@@ -27,7 +29,6 @@ const billingDetails = {
       this.currentStateService = currentStateService;
       this.customersService = customersService;
       this.usersService = usersService;
-      this.ncUtils = ncUtils;
       this.titleService = titleService;
       this.BillingUtils = BillingUtils;
       this.features = features;
@@ -59,7 +60,7 @@ const billingDetails = {
           return invoice;
         })
         .then(invoice => {
-          const customer_uuid = this.ncUtils.getUUID(invoice.customer);
+          const customer_uuid = getUUID(invoice.customer);
           return this.customersService.$get(customer_uuid);
         })
         .then(currentCustomer => {
