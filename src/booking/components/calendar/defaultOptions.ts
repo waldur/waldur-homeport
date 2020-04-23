@@ -20,6 +20,7 @@ export const defaultOptions: OptionsInput = {
   height: 'auto',
   themeSystem: 'bootstrap',
   handleWindowResize: true,
+  aspectRatio: 1.25,
   header: {
     left: 'prev,today,next',
     center: 'title',
@@ -31,12 +32,6 @@ export const defaultOptions: OptionsInput = {
     meridiem: 'short',
     hour12: false,
     omitZeroMinute: true,
-  },
-  slotLabelFormat: {
-    hour: 'numeric',
-    minute: '2-digit',
-    omitZeroMinute: true,
-    meridiem: 'short',
   },
   firstDay: 1,
   timeZone: 'local',

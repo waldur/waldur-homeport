@@ -81,36 +81,6 @@ export const mapBookingEvents: EventMap = (events, showAvailability) =>
     return event;
   });
 
-export const transformBookingEvent = (event, showAvailability = false) => {
-  if (event.extendedProps.type === 'Availability') {
-    event.rendering = showAvailability ? undefined : 'background';
-    event.classNames = showAvailability ? 'booking booking-Availability' : '';
-    event.background = 'green';
-    event.overlap = true;
-    //event.groupId = 'businessHours';
-  } else if (event.extendedProps.type === 'Schedule') {
-    event.overlap = false;
-    event.constraint = 'businessHours';
-    event.classNames = 'booking booking-Schedule';
-    event.background = 'blue';
-  }
-  return event;
-};
-
-export const handleTitle = ({ event, el }) => {
-  if (!event.title) {
-    return el.querySelector('.fc-title').prepend(event.extendedProps.type);
-  }
-};
-
-export const handleTime = ({ event, el }) => {
-  if (event.allDay) {
-    const content = el.querySelector('.fc-content');
-    return (content.innerHTML =
-      '<i class="fa fa-clock-o"> All-day </i>' + content.innerHTML);
-  }
-};
-
 export const createBooking = ({
   id,
   start,

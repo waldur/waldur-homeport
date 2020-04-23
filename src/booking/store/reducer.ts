@@ -6,8 +6,6 @@ const INITIAL_STATE: State = {
   schedules: [],
   config: {
     weekends: true,
-    minTime: '00:00',
-    maxTime: '24:00',
     slotDuration: '01:00:00',
     businessHours: {
       startTime: '00:00',
