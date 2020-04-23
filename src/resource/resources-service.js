@@ -2,18 +2,17 @@
 export default function resourcesService(
   baseServiceClass,
   ENV,
-  $http,
   servicesService,
   $q,
 ) {
-  let ServiceClass = baseServiceClass.extend({
+  const ServiceClass = baseServiceClass.extend({
     init: function() {
       this._super();
       this.endpoint = '/resources/';
     },
 
     $get: function(resource_type, uuid, url) {
-      let $get = this._super.bind(this);
+      const $get = this._super.bind(this);
       if (url) {
         return $get(null, url);
       }
@@ -30,32 +29,12 @@ export default function resourcesService(
       } else if (resource_type === 'Rancher.Node') {
         return $q.when(`${ENV.apiEndpoint}api/rancher-nodes/`);
       }
-      let parts = resource_type.split('.');
-      let service_type = parts[0];
-      let type = parts[1];
+      const parts = resource_type.split('.');
+      const service_type = parts[0];
+      const type = parts[1];
       return servicesService.getServicesList().then(function(services) {
         return services[service_type].resources[type];
       });
-    },
-
-    countByType: function(params) {
-      let vm = this;
-      let url = ENV.apiEndpoint + 'api' + '/resources/count/';
-      let cacheKey = url + JSON.stringify(params) + 'x-result-count';
-      let cache = this.getCache(cacheKey);
-      if (cache && cache.time > new Date().getTime()) {
-        return $q.when(cache.data);
-      } else {
-        return $http.get(url, { params: params }).then(function(response) {
-          vm.setCache(
-            ENV.countsCacheTime,
-            response.data,
-            cacheKey,
-            '/resources/',
-          );
-          return response.data;
-        });
-      }
     },
   });
   return new ServiceClass();

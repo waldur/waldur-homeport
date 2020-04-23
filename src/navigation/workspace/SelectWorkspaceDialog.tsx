@@ -1,3 +1,4 @@
+import { useRouter } from '@uirouter/react';
 import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
 import * as Row from 'react-bootstrap/lib/Row';
@@ -5,7 +6,6 @@ import { useSelector } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -27,6 +27,8 @@ export const SelectWorkspaceDialog = () => {
     loadOrganizations,
     [],
   );
+
+  const router = useRouter();
 
   return (
     <>
@@ -52,7 +54,7 @@ export const SelectWorkspaceDialog = () => {
         )}
       </div>
       <div className="modal-footer">
-        <Button onClick={() => $state.go('profile.details')}>
+        <Button onClick={() => router.stateService.go('profile.details')}>
           {translate('Go to my profile')}
         </Button>
         <CloseDialogButton />

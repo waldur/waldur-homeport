@@ -1,10 +1,10 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
+import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state } from '@waldur/core/services';
-import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { getOffering, getCategory } from '@waldur/marketplace/common/api';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
@@ -14,20 +14,22 @@ import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsC
 import { OfferingHeader } from './OfferingHeader';
 
 export const PublicOfferingDetails = () => {
-  const { state, call } = useQuery(async () => {
-    const offering = await getOffering($state.params.uuid);
+  const {
+    params: { uuid },
+  } = useCurrentStateAndParams();
+  const state = useAsync(async () => {
+    const offering = await getOffering(uuid);
     const category = await getCategory(offering.category_uuid);
     const tabs = getTabs({ offering, sections: category.sections });
     return { offering, tabs };
-  });
-  React.useEffect(call, []);
+  }, [uuid]);
 
   if (state.loading) {
     return <LoadingSpinner />;
   } else if (state.error) {
     return <h3>{translate('Unable to load offering details.')}</h3>;
-  } else if (state.loaded) {
-    const { offering, tabs } = state.data;
+  } else if (state.value) {
+    const { offering, tabs } = state.value;
     return (
       <div className="wrapper wrapper-content">
         <div className="white-box">

@@ -1,4 +1,8 @@
 /* eslint-disable */
+
+import { UI_ROUTER_REACT_HYBRID } from '@uirouter/react-hybrid';
+import '@uirouter/angularjs/release/stateEvents';
+
 import './vendor';
 import './globals';
 import './sass/style.scss';
@@ -7,7 +11,6 @@ import '../svgfonts.font';
 import featuresModule from './features/module';
 import issuesModule from './issues/module';
 import userModule from './user/module';
-import providersModule from './providers/module';
 import projectModule from './project/module';
 import navigationModule from './navigation/module';
 import resourceModule from './resource/module';
@@ -53,6 +56,8 @@ import marketplaceChecklistModule from './marketplace-checklist/module';
 const appModule = angular.module('waldur', [
   'satellizer',
   'ui.router',
+  UI_ROUTER_REACT_HYBRID,
+  'ui.router.state.events',
   'ngCookies',
   'ngResource',
   'ui.select',
@@ -72,7 +77,6 @@ rootModule(appModule);
 featuresModule(appModule);
 issuesModule(appModule);
 userModule(appModule);
-providersModule(appModule);
 projectModule(appModule);
 navigationModule(appModule);
 resourceModule(appModule);
@@ -111,11 +115,6 @@ vmwareModule(appModule);
 rancherModule(appModule);
 marketplaceScriptModule(appModule);
 marketplaceChecklistModule(appModule);
-
-if (process.env.NODE_ENV !== 'production') {
-  const storybookModule = require('./marketplace/storybook.js').default;
-  storybookModule(appModule);
-}
 
 function requirePlugins(module) {
   const context = require.context('./plugins', true, /module\.js$/);

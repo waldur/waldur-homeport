@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import template from './quota-usage-bar-chart.html';
 
 const quotaUsageBarChart = {
@@ -7,8 +9,7 @@ const quotaUsageBarChart = {
   },
   controller: class ComponentController {
     // @ngInject
-    constructor(coreUtils, $filter) {
-      this.coreUtils = coreUtils;
+    constructor($filter) {
       this.$filter = $filter;
     }
 
@@ -17,47 +18,33 @@ const quotaUsageBarChart = {
     }
 
     getSummary(quota) {
-      return this.coreUtils.templateFormatter(
-        gettext('{usage} of {limit} used'),
-        {
-          usage: this.$filter('quotaValue')(quota.usage, quota.name),
-          limit: this.$filter('quotaValue')(quota.limit, quota.name),
-        },
-      );
+      return translate('{usage} of {limit} used', {
+        usage: this.$filter('quotaValue')(quota.usage, quota.name),
+        limit: this.$filter('quotaValue')(quota.limit, quota.name),
+      });
     }
 
     getExisting(quota) {
-      return this.coreUtils.templateFormatter(
-        gettext('Existing quota usage: {usage}'),
-        {
-          usage: this.$filter('quotaValue')(quota.usage, quota.name),
-        },
-      );
+      return translate('Existing quota usage: {usage}', {
+        usage: this.$filter('quotaValue')(quota.usage, quota.name),
+      });
     }
 
     getPlanned(quota) {
-      return this.coreUtils.templateFormatter(
-        gettext('Planned quota usage: {usage}'),
-        {
-          usage: this.$filter('quotaValue')(quota.required, quota.name),
-        },
-      );
+      return translate('Planned quota usage: {usage}', {
+        usage: this.$filter('quotaValue')(quota.required, quota.name),
+      });
     }
 
     getAvailable(quota) {
-      let availableQuota = quota.limit - quota.usage;
-      return this.coreUtils.templateFormatter(
-        gettext('Available quota usage: {usage}'),
-        {
-          usage: this.$filter('quotaValue')(availableQuota, quota.name),
-        },
-      );
+      const availableQuota = quota.limit - quota.usage;
+      return translate('Available quota usage: {usage}', {
+        usage: this.$filter('quotaValue')(availableQuota, quota.name),
+      });
     }
 
     getExceeds() {
-      return this.coreUtils.templateFormatter(
-        gettext('Quota usage exceeds available limit.'),
-      );
+      return translate('Quota usage exceeds available limit.');
     }
   },
 };

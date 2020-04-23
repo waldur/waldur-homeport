@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { Panel } from '@waldur/core/Panel';
 import { $state } from '@waldur/core/services';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { setOrderStateFilter } from '../../store/actions';
 
@@ -22,7 +22,7 @@ interface Props {
 const filterOptionsSelector = state =>
   state.marketplace.orders.tableFilter.stateOptions;
 
-const OrderItemsContainer: React.FC<Props> = () => {
+export const MyOrderItemsContainer: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const filterOptions = useSelector(filterOptionsSelector);
   React.useEffect(() => {
@@ -36,11 +36,9 @@ const OrderItemsContainer: React.FC<Props> = () => {
   }, [filterOptions, dispatch]);
 
   return (
-    <div className="ibox-content">
+    <Panel>
       <MyOrderItemsFilter />
       <MyOrderItemsList />
-    </div>
+    </Panel>
   );
 };
-
-export default connectAngularComponent(OrderItemsContainer);

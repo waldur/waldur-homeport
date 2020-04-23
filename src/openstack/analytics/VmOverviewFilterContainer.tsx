@@ -1,70 +1,35 @@
 import * as React from 'react';
-import { compose } from 'redux';
-import { reduxForm, InjectedFormProps } from 'redux-form';
+import useAsync from 'react-use/lib/useAsync';
+import { reduxForm } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
-import * as api from './api';
+import { loadServiceProviders } from './api';
 import { formatServiceProviders } from './utils';
 import { VmOverviewFilter } from './VmOverviewFilter';
 
-class VmOverviewFilterComponent extends React.Component<
-  InjectedFormProps & TranslateProps
-> {
-  state = {
-    loaded: false,
-    erred: false,
-    serviceProviders: [],
-  };
-
-  componentDidMount() {
-    api
-      .loadServiceProviders()
-      .then(serviceProviders => {
-        const formatedServiceProviders = formatServiceProviders(
-          serviceProviders,
-        );
-        this.setState({
-          serviceProviders: formatedServiceProviders,
-          loaded: true,
-          erred: false,
-        });
-      })
-      .catch(() => {
-        this.setState({
-          loaded: false,
-          erred: true,
-        });
-      });
+const VmOverviewFilterComponent = props => {
+  const { error, value, loading } = useAsync(async () => {
+    const serviceProviders = await loadServiceProviders();
+    return formatServiceProviders(serviceProviders);
+  }, []);
+  if (loading) {
+    return <LoadingSpinner />;
   }
-
-  render() {
-    if (this.state.erred) {
-      return (
-        <h3 className="text-center">
-          {this.props.translate('Unable to load service providers.')}
-        </h3>
-      );
-    }
-    if (!this.state.loaded) {
-      return <LoadingSpinner />;
-    }
+  if (error) {
     return (
-      <VmOverviewFilter
-        {...this.props}
-        serviceProviders={this.state.serviceProviders}
-      />
+      <h3 className="text-center">
+        {translate('Unable to load service providers.')}
+      </h3>
     );
   }
-}
+  return <VmOverviewFilter {...props} serviceProviders={value} />;
+};
 
-const enhance = compose(
-  reduxForm({
-    form: 'vmOverviewFilter',
-    initialValues: { shared: true },
-  }),
-  withTranslation,
-);
+const enhance = reduxForm({
+  form: 'vmOverviewFilter',
+  initialValues: { shared: true },
+});
 
 export const VmOverviewFilterContainer = enhance(VmOverviewFilterComponent);

@@ -1,6 +1,6 @@
 import { Offering } from './types';
 
-// tslint:disable:max-line-length
+
 export const OFFERING: Offering = {
   url:
     'http://localhost:8080/api/support-offerings/af8195ec67a148d9bac07c953b554e5f/',

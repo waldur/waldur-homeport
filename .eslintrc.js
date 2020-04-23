@@ -64,6 +64,7 @@ module.exports = {
     ],
     'react-hooks/rules-of-hooks': 'warn',
     'react-hooks/exhaustive-deps': 'warn',
+    '@typescript-eslint/no-this-alias': 'warn',
   },
   globals: {
     gettext: true,

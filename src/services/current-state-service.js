@@ -3,18 +3,16 @@
  * Notice: CurrentStateService can not make any backend calls. It stores only selected on user-side objects.
  */
 // @ngInject
-export default function currentStateService($q, ENV, ncUtils, $rootScope) {
-  let vm = this;
+export default function currentStateService($q, ENV, $rootScope) {
+  const vm = this;
   vm.getCustomer = getCustomer;
   vm.setCustomer = setCustomer;
-  vm.reloadCurrentCustomer = reloadCurrentCustomer;
   vm.isCustomerDefined = false;
 
   vm.getProject = getProject;
   vm.setProject = setProject;
   vm.getCustomerUuid = getCustomerUuid;
   vm.getProjectUuid = getProjectUuid;
-  vm.isQuotaExceeded = isQuotaExceeded;
 
   vm.getHasCustomer = getHasCustomer;
   vm.setHasCustomer = setHasCustomer;
@@ -80,17 +78,5 @@ export default function currentStateService($q, ENV, ncUtils, $rootScope) {
   function setOwnerOrStaff(value) {
     ownerOrStaff = value;
     $rootScope.$broadcast('ownerOrStaff', value);
-  }
-
-  function isQuotaExceeded(entity) {
-    return vm.getCustomer().then(function(response) {
-      response.quotas = response.quotas || [];
-      return ncUtils.isCustomerQuotaReached(response, entity);
-    });
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  function reloadCurrentCustomer(callback) {
-    // TODO: Remove calls to this method
   }
 }

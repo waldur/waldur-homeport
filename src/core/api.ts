@@ -1,14 +1,14 @@
-import { IHttpPromise, IPromise } from 'angular';
+import Axios, { AxiosPromise, Method } from 'axios';
 
-import { $http, ENV } from './services';
+import { ENV } from './services';
 
-export function get<T = {}>(endpoint: string, options?: {}): IHttpPromise<T> {
-  return $http.get(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function get<T = {}>(endpoint: string, options?: {}): AxiosPromise<T> {
+  return Axios.get(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
-export function getList<T = {}>(endpoint: string, params?: {}): IPromise<T[]> {
+export function getList<T = {}>(endpoint: string, params?: {}): Promise<T[]> {
   const options = params ? { params } : undefined;
-  return get(endpoint, options).then(response =>
+  return get<T>(endpoint, options).then(response =>
     Array.isArray(response.data) ? response.data : [],
   );
 }
@@ -21,15 +21,15 @@ export function getById<T = {}>(
   endpoint: string,
   id: string,
   options?: {},
-): IPromise<T> {
+): Promise<T> {
   return get<T>(`${endpoint}${id}/`, options).then(response => response.data);
 }
 
 export function remove<T = {}>(
   endpoint: string,
   options?: {},
-): IHttpPromise<T> {
-  return $http.delete(`${ENV.apiEndpoint}api${endpoint}`, options);
+): AxiosPromise<T> {
+  return Axios.delete(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
 export function deleteById<T = {}>(endpoint, id, options?) {
@@ -38,26 +38,26 @@ export function deleteById<T = {}>(endpoint, id, options?) {
   );
 }
 
-export function post<T = {}>(endpoint: string, options?: {}): IHttpPromise<T> {
-  return $http.post(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function post<T = {}>(endpoint: string, options?: {}): AxiosPromise<T> {
+  return Axios.post(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
-export function patch<T = {}>(endpoint: string, options?: {}): IHttpPromise<T> {
-  return $http.patch(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function patch<T = {}>(endpoint: string, options?: {}): AxiosPromise<T> {
+  return Axios.patch(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
 export function sendForm<T = {}>(
-  method: string,
+  method: Method,
   url: string,
   options,
-): IHttpPromise<T> {
+): AxiosPromise<T> {
   const data = new FormData();
   for (const name of Object.keys(options)) {
     if (options[name] !== undefined) {
       data.append(name, options[name]);
     }
   }
-  return $http({
+  return Axios.request({
     method,
     url,
     data,
@@ -68,7 +68,7 @@ export function sendForm<T = {}>(
 
 export const getNextPageUrl = response => {
   // Extract next page URL from header links
-  const link = response.headers('link');
+  const link = response.headers['link'];
   if (!link) {
     return null;
   }
@@ -96,7 +96,7 @@ export async function getAll<T = {}>(
     }
     const url = getNextPageUrl(response);
     if (url) {
-      response = await $http.get(url);
+      response = await Axios.get(url);
     } else {
       break;
     }

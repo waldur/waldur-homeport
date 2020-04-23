@@ -6,7 +6,6 @@ import { reduxForm, InjectedFormProps } from 'redux-form';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
@@ -84,6 +83,4 @@ const enhance = compose(
   reduxForm({ form: 'projectCreate' }),
 );
 
-const ProjectCreateContainer = enhance(ProjectCreateComponent);
-
-export default connectAngularComponent(ProjectCreateContainer);
+export const ProjectCreateContainer = enhance(ProjectCreateComponent);

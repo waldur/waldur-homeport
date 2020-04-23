@@ -1,12 +1,16 @@
+import * as React from 'react';
+
 import {
   getField,
   renderSummary,
   resource,
 } from './SlurmAllocationSummary.fixture';
 
-jest.mock('@waldur/core/services', () => ({
-  $state: { href: () => 'validUrl' },
-}));
+jest.mock('@waldur/core/Link', () => {
+  return {
+    Link: ({ label, children }) => <a>{label || children}</a>,
+  };
+});
 
 describe('SlurmAllocationSummary', () => {
   it('renders quota usage', () => {

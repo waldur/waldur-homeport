@@ -1,7 +1,7 @@
+import Axios from 'axios';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { $http } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { ActionButton } from '@waldur/table-react/ActionButton';
@@ -18,7 +18,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   const dispatch = useDispatch();
   const callback = async () => {
     try {
-      await $http.delete(user.permission);
+      await Axios.delete(user.permission);
       dispatch(showSuccess(translate('Team member has been removed.')));
     } catch (e) {
       dispatch(showError(translate('Unable to delete team member.')));

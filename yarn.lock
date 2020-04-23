@@ -1567,10 +1567,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/redux-form@^7.4.12":
-  version "7.5.7"
-  resolved "https://registry.yarnpkg.com/@types/redux-form/-/redux-form-7.5.7.tgz#86cd4a8166754b1e5dfb595cce54ad6be9207af1"
-  integrity sha512-eGckhoBP2mlFYAVs171GupFf26p8jgJpHCoiNkRt7QC/n16LDG4YdTmSQpnfQZ2awe1lXhHBcz73jLIDC8rl8w==
+"@types/redux-form@^8.2.3":
+  version "8.2.3"
+  resolved "https://registry.yarnpkg.com/@types/redux-form/-/redux-form-8.2.3.tgz#928bc686be7aeec8075bf4ec2bc4749e5299c981"
+  integrity sha512-5L5y9SfeXHu8jF+wdUzQnN+q3drHk6+MgPr5YDsHuxqbAsUeXDF2UQ38YmT8pbTVGZxUQwFXX+x58SuWxZnO7Q==
   dependencies:
     "@types/react" "*"
     redux "^3.6.0 || ^4.0.0"
@@ -1664,6 +1664,36 @@
     lodash "^4.17.15"
     semver "^6.3.0"
     tsutils "^3.17.1"
+
+"@uirouter/angularjs@1.0.25":
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.25.tgz#9969788eca03bc3f8b1d1b39946713a18e824e33"
+  integrity sha512-kf9bxBhqa1ZUw0aDlz4H17VqAD30MVJY6HM7J628vDeNN9yZt7SDYpwqSrR3y6NBadZUPjaKsDoKsyQQSWArNA==
+  dependencies:
+    "@uirouter/core" "6.0.4"
+
+"@uirouter/core@6.0.4":
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-6.0.4.tgz#fcdc75ab10f1035176acf87a27d9d27a0101ecf9"
+  integrity sha512-TQ9XOzZY+jmWKkU4993MAEBIy7Bs3kijDzj+A6RHR8gq/3UoQm3Q/l1igfao5GZyBjid7eRVeipPK14ovCYQ3g==
+
+"@uirouter/react-hybrid@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@uirouter/react-hybrid/-/react-hybrid-1.0.1.tgz#798da3b084eced0473394f3bab89b831dd082c82"
+  integrity sha512-h218kvaAbdSxfPWLLLmB8B641SMdE5EtsKoYaZqQCqg/Cf5mKo5ouIQpgL8ThUBXgHXiUU0ejeogRYRJ+u2fTA==
+  dependencies:
+    "@uirouter/angularjs" "1.0.25"
+    "@uirouter/core" "6.0.4"
+    "@uirouter/react" "1.0.2"
+
+"@uirouter/react@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@uirouter/react/-/react-1.0.2.tgz#a3690ff0435e7e57c1d0528038ccf9ef5ab74a0d"
+  integrity sha512-PCKSuT2HOzE5Ub/QQ1N4hugL9hFJFnZjgp2vzjZRzfoqKwsFyCcU8PgQ5j3intqcbUqX4FR0ethXm0BZIfKsNA==
+  dependencies:
+    "@uirouter/core" "6.0.4"
+    classnames "^2.2.5"
+    prop-types "^15.6.1"
 
 "@vusion/webfonts-generator@^0.6.0":
   version "0.6.0"
@@ -2010,20 +2040,20 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-angular-animate@~1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.5.11.tgz#1baa43c303d1b93c4e6aa89453b39114b7a1c669"
-  integrity sha1-G6pDwwPRuTxOaqiUU7ORFLehxmk=
+angular-animate@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.7.9.tgz#a397f82434c1e7ed5b7a298fa70fc3de989a6785"
+  integrity sha512-fV+AISy/HTzurQH2ngsJg+lLIvfu0ahc1h4AYKauaXVw97rZc2k4iUA1bMstiEyClsdayQX568kjQc1NK+oYhw==
 
 angular-bind-html-compile-ci-dev@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/angular-bind-html-compile-ci-dev/-/angular-bind-html-compile-ci-dev-1.2.2.tgz#fb85dba1ab8e8ceb9564a4260dd360ddd43606ab"
   integrity sha1-+4XboauOjOuVZKQmDdNg3dQ2Bqs=
 
-"angular-cookies@>=1.2.26 <=1.5", angular-cookies@~1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.5.11.tgz#88558de7c5044dcc3abeb79614d7ef8107ba49c0"
-  integrity sha1-iFWN58UETcw6vreWFNfvgQe6ScA=
+"angular-cookies@>=1.2.26 <1.8", angular-cookies@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.7.9.tgz#0f0cd2a9d1c81e5b8d6c6711d41f0909f9d0b8e0"
+  integrity sha512-3eRq/aPrtCZKDWQnc3nW3sFoMbLiHkCkyDF2O9u7VXnqvVsUPaipk5R1ZqahgcSQHQrN/F5IU4T4nrz52qAZmA==
 
 angular-cron-jobs@^3.2.0:
   version "3.2.0"
@@ -2040,75 +2070,60 @@ angular-intro.js@~3.1.3:
   resolved "https://registry.yarnpkg.com/angular-intro.js/-/angular-intro.js-3.1.3.tgz#b1d5e0c8929084e00b2036ccab941a9f21ac1e60"
   integrity sha1-sdXgyJKQhOALIDbMq5QanyGsHmA=
 
-angular-loader@~1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-loader/-/angular-loader-1.5.11.tgz#f2a5aad0227c12ca902b7fc23bfcec69991368a1"
-  integrity sha1-8qWq0CJ8EsqQK3/CO/zsaZkTaKE=
+angular-loader@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-loader/-/angular-loader-1.7.9.tgz#525c12a2e914d81345f58289fb705882430d938a"
+  integrity sha512-Hei0AQ96P2qzduWZtAsHvxUnLSLSAxpkjYc7F0JAwNPA14rXYKt20a9crc8CWd/v45Dkz7+SFhb2QMx5nCyNLQ==
 
-angular-resource@~1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.5.11.tgz#d93ea619184a2e0ee3ae338265758363172929f0"
-  integrity sha1-2T6mGRhKLg7jrjOCZXWDYxcpKfA=
+angular-resource@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.7.9.tgz#fa53623fae2c60debe2410d692447dcb0ba02396"
+  integrity sha512-rXXhCE2qT31Pn4Sl+2XL+ntv4zxnA2OzY+clCl8/pOp/s/gIzxpQlEtXipo3QK8Qur3glbIkeF/bJw+gjVAdUw==
 
-angular-route@~1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-route/-/angular-route-1.5.11.tgz#49614f3a167f54291e449fe8ba05d39c58924b83"
-  integrity sha1-SWFPOhZ/VCkeRJ/ougXTnFiSS4M=
+angular-sanitize@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.7.9.tgz#6b4d5e826abdabd352b13a7c65c8c74daf6a7b15"
+  integrity sha512-nB/xe7JQWF9nLvhHommAICQ3eWrfRETo0EVGFESi952CDzDa+GAJ/2BFBNw44QqQPxj1Xua/uYKrbLsOGWZdbQ==
 
-angular-sanitize@~1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.5.11.tgz#ebfb3f343e543f9b2ef050fb4c2e9ee048d1772f"
-  integrity sha1-6/s/ND5UP5su8FD7TC6e4EjRdy8=
-
-angular-scroll@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/angular-scroll/-/angular-scroll-1.0.2.tgz#2768ff35dbe1ce40e0c3fbedd4534888299c3e2d"
-  integrity sha1-J2j/NdvhzkDgw/vt1FNIiCmcPi0=
-
-angular-translate-loader-static-files@~2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/angular-translate-loader-static-files/-/angular-translate-loader-static-files-2.7.2.tgz#1254c6b90a231ba7f0eb846ccb13c5afee09807f"
-  integrity sha1-ElTGuQojG6fw64RsyxPFr+4JgH8=
+angular-translate-loader-static-files@^2.18.2:
+  version "2.18.2"
+  resolved "https://registry.yarnpkg.com/angular-translate-loader-static-files/-/angular-translate-loader-static-files-2.18.2.tgz#c179673e76524ab07bf26b8f3a725fa08a937cfb"
+  integrity sha512-fhQNn2e0LOOH3YY5fFeLIgSGHuF/QvoX5dqnF7eaacpEMCzBf6OkVp1SMwEhjGjDIuntJbLGCh5CM5dMpiZYUA==
   dependencies:
-    angular-translate "~2.7.2"
+    angular-translate "~2.18.2"
 
-angular-translate-storage-cookie@~2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/angular-translate-storage-cookie/-/angular-translate-storage-cookie-2.7.2.tgz#37bf377a4fcbd27a34efc64d26709c5bc9c7b340"
-  integrity sha1-N783ek/L0no078ZNJnCcW8nHs0A=
+angular-translate-storage-cookie@^2.18.2, angular-translate-storage-cookie@~2.18.2:
+  version "2.18.2"
+  resolved "https://registry.yarnpkg.com/angular-translate-storage-cookie/-/angular-translate-storage-cookie-2.18.2.tgz#fe759e5749c3f2a93831276d629800cd6f3b42e7"
+  integrity sha512-9JlS9WM+1jU7XDFvgzMKrZT+a81g7KJAISmGVGxtEtOQT+YRlNZ9YlqPVqAP7BBQuVrZwZVnB0tqFSUufqfnpA==
   dependencies:
-    angular-cookies ">=1.2.26 <=1.5"
-    angular-translate "~2.7.2"
+    angular-cookies ">=1.2.26 <1.8"
+    angular-translate "~2.18.2"
 
-angular-translate-storage-local@~2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/angular-translate-storage-local/-/angular-translate-storage-local-2.7.2.tgz#b8e529686fce7792052af983dad384c25382f9fb"
-  integrity sha1-uOUpaG/Od5IFKvmD2tOEwlOC+fs=
+angular-translate-storage-local@^2.18.2:
+  version "2.18.2"
+  resolved "https://registry.yarnpkg.com/angular-translate-storage-local/-/angular-translate-storage-local-2.18.2.tgz#ab07916b7e7a8d7f31f11e9bc98c7706c4af0ce5"
+  integrity sha512-GdZ9h6slIRaVQFyjI+EX2DaBiFBS2/hgHWYj3LwbhFBZGH5p/zZnx0s1T/5oiyOpcjLqcuosUTlHJ5LjmbwXDA==
   dependencies:
-    angular-translate "~2.7.2"
-    angular-translate-storage-cookie "~2.7.2"
+    angular-translate "~2.18.2"
+    angular-translate-storage-cookie "~2.18.2"
 
-angular-translate@~2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/angular-translate/-/angular-translate-2.7.2.tgz#6ce3a3e07f6f2d4436d8b78f0e324294ab31a167"
-  integrity sha1-bOOj4H9vLUQ22LePDjJClKsxoWc=
+angular-translate@^2.18.2, angular-translate@~2.18.2:
+  version "2.18.2"
+  resolved "https://registry.yarnpkg.com/angular-translate/-/angular-translate-2.18.2.tgz#2a26653d179f7043c0ffa66fdf65155d01c82e06"
+  integrity sha512-aAtNieh0fUv6yM6vKuWsdswT0BbOf6kvsu+QZ15Fp10rKEienMs3M8aPWyd9IVZ5pA1GaRJir6T8OvWGG4J+Fw==
+  dependencies:
+    angular "^1.7.9"
 
 angular-ui-bootstrap@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-2.5.0.tgz#2facefb915386655dc5f44150258032517236d01"
   integrity sha1-L6zvuRU4ZlXcX0QVAlgDJRcjbQE=
 
-angular-ui-router@~0.2.13:
-  version "0.2.18"
-  resolved "https://registry.yarnpkg.com/angular-ui-router/-/angular-ui-router-0.2.18.tgz#1dad70415c73d7046fd2e130df03d62fb7464360"
-  integrity sha1-Ha1wQVxz1wRv0uEw3wPWL7dGQ2A=
-  dependencies:
-    angular "^1.0.8"
-
-angular@^1.0.8, angular@~1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.5.11.tgz#8c5ba7386f15965c9acf3429f6881553aada30d6"
-  integrity sha1-jFunOG8VllyazzQp9ogVU6raMNY=
+angular@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.9.tgz#e52616e8701c17724c3c238cfe4f9446fd570bc4"
+  integrity sha512-5se7ZpcOtu0MBFlzGv5dsM1quQDoDeUTwZrWjGtTNA7O88cD8TEk5IEKCTDa3uECV9XnvKREVUr7du1ACiWGFQ==
 
 angulartics-google-analytics@^0.4.0:
   version "0.4.0"
@@ -2480,6 +2495,13 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
+
+axios@^0.19.2:
+  version "0.19.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+  integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+  dependencies:
+    follow-redirects "1.5.10"
 
 babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -4238,6 +4260,13 @@ debug@4.1.1, debug@^4.0.1, debug@^4.1.1:
   dependencies:
     ms "^2.1.1"
 
+debug@=3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+  integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
+  dependencies:
+    ms "2.0.0"
+
 debug@^2.2.0:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
@@ -5817,6 +5846,13 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
+
+follow-redirects@1.5.10:
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
+  integrity sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==
+  dependencies:
+    debug "=3.1.0"
 
 follow-redirects@^1.0.0:
   version "1.11.0"
@@ -11190,10 +11226,10 @@ redux-form-saga@^0.2.0:
   resolved "https://registry.yarnpkg.com/redux-form-saga/-/redux-form-saga-0.2.0.tgz#a9d3df4f5183fab3327ec82ebbc4af8a8d7f207f"
   integrity sha512-Ap1zsmLS4DHQk4nFC2QsPSP18+udfi375TKmylmC22/Dx7bWTa/YYzVVLyT9e4oVpKIG2lxnd3YtFqEdaDPftQ==
 
-redux-form@^8.2.6:
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-8.3.1.tgz#a2958375d85fa064690285848dda3c9b22828fab"
-  integrity sha512-YEr0w+KftgN0l6cLVlpsLDqnATw/MIG7wpxCJwPdLC2PWbTv/0H9T7Ny6n8r1KZAfvTXUlX61jm4obFP7bggbw==
+redux-form@^8.3.5:
+  version "8.3.5"
+  resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-8.3.5.tgz#937629401d9249ecc557f385818a5095ca5898a8"
+  integrity sha512-GSpi9pbEor2wmL2cie+svP8QCylbwjlpAFegOHPaxSrQQm2Mk8ZHVWVObJUfF9cXcczIzB/bH/xOdIqeNl1OCA==
   dependencies:
     "@babel/runtime" "^7.8.4"
     es6-error "^4.1.1"
@@ -11204,7 +11240,6 @@ redux-form@^8.2.6:
     lodash-es "^4.17.15"
     prop-types "^15.6.1"
     react-is "^16.12.0"
-    react-lifecycles-compat "^3.0.4"
 
 redux-logger@^3.0.6:
   version "3.0.6"

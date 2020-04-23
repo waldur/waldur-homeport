@@ -1,10 +1,12 @@
+import { useRouter } from '@uirouter/react';
 import * as React from 'react';
 
-import { ENV, ngInjector, $state } from '@waldur/core/services';
+import { ENV, ngInjector } from '@waldur/core/services';
 
 import { WOKSPACE_NAMES } from '../workspace/constants';
 
 export const BrandName = () => {
+  const router = useRouter();
   const onLogoClick = event => {
     const WorkspaceService = ngInjector.get('WorkspaceService');
     const workspaceData = WorkspaceService.getWorkspace();
@@ -12,27 +14,27 @@ export const BrandName = () => {
     event.preventDefault();
     switch (workspace) {
       case WOKSPACE_NAMES.organization:
-        $state.go(
+        router.stateService.go(
           'organization.dashboard',
           { uuid: workspaceData.customer.uuid },
           { reload: true },
         );
         break;
       case WOKSPACE_NAMES.support:
-        $state.go('support.dashboard', { reload: true });
+        router.stateService.go('support.dashboard', { reload: true });
         break;
       case WOKSPACE_NAMES.project:
-        $state.go(
+        router.stateService.go(
           'project.details',
           { uuid: workspaceData.project.uuid },
           { reload: true },
         );
         break;
       case WOKSPACE_NAMES.user:
-        $state.go('profile.details', { reload: true });
+        router.stateService.go('profile.details', { reload: true });
         break;
       default:
-        $state.go('profile.details', { reload: true });
+        router.stateService.go('profile.details', { reload: true });
         break;
     }
   };

@@ -1,7 +1,8 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 
-import { $state, ngInjector, $rootScope } from '@waldur/core/services';
+import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { Layout } from '@waldur/navigation/Layout';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -29,19 +30,17 @@ export const CustomerWorkspace = () => {
   const [pageClass, setPageClass] = React.useState<string>();
   const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState<boolean>();
   const customer = useSelector(getCustomer);
+  const { state, params } = useCurrentStateAndParams();
 
   function refreshState() {
-    const data = $state.current?.data;
+    const data = state?.data;
     setPageTitle(translate(data?.pageTitle));
     setPageClass(data?.pageClass);
     setHideBreadcrumbs(data?.hideBreadcrumbs);
     refreshBreadcrumbs(customer, translate(data?.pageTitle));
   }
 
-  React.useEffect(() => {
-    refreshState();
-    return $rootScope.$on('$stateChangeSuccess', refreshState);
-  }, []);
+  React.useEffect(refreshState, [state, params]);
 
   return (
     <Layout

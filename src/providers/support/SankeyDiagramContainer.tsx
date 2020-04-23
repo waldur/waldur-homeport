@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { connectAngularComponent } from '@waldur/store/connect';
-
 import { fetchServiceUsageStart } from './actions';
 import { FlowMapFilter } from './FlowMapFilter';
 import SankeyDiagram from './SankeyDiagram';
@@ -97,9 +95,7 @@ const matchDispatchToProps = dispatch => ({
   fetchServiceUsageStart: () => dispatch(fetchServiceUsageStart()),
 });
 
-const SankeyDiagramContainer = connect(
+export const SankeyDiagramContainer = connect(
   mapStateToProps,
   matchDispatchToProps,
 )(SankeyDiagramComponent);
-
-export default connectAngularComponent(SankeyDiagramContainer);

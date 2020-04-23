@@ -1,15 +1,6 @@
-import template from './issue-quick-create.html';
+import { translate } from '@waldur/i18n';
 
-export default function issueQuickCreate() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: IssueQuickCreateController,
-    controllerAs: '$ctrl',
-    scope: {},
-    bindToController: true,
-  };
-}
+import template from './issue-quick-create.html';
 
 class IssueQuickCreateController {
   // @ngInject
@@ -24,7 +15,6 @@ class IssueQuickCreateController {
     resourcesService,
     usersService,
     ErrorMessageFormatter,
-    coreUtils,
   ) {
     this.$state = $state;
     this.$scope = $scope;
@@ -37,11 +27,9 @@ class IssueQuickCreateController {
     this.resourcesService = resourcesService;
     this.usersService = usersService;
     this.ErrorMessageFormatter = ErrorMessageFormatter;
-    this.coreUtils = coreUtils;
-    this.init();
   }
 
-  init() {
+  $onInit() {
     this.$scope.$watch(
       () => this.issue.customer,
       () => {
@@ -57,7 +45,7 @@ class IssueQuickCreateController {
         this.refreshResources();
       },
     );
-    this.emptyFieldMessage = gettext('You did not enter a field.');
+    this.emptyFieldMessage = translate('You did not enter a field.');
     this.projectRequired = false;
     this.usersService.getCurrentUser().then(user => {
       this.user = user;
@@ -65,7 +53,7 @@ class IssueQuickCreateController {
   }
 
   refreshCustomers(name) {
-    let params = {};
+    const params = {};
     if (name) {
       params.name = name;
     }
@@ -97,7 +85,7 @@ class IssueQuickCreateController {
     if (!this.issue.customer) {
       return;
     }
-    let params = {
+    const params = {
       customer: this.issue.customer.uuid,
     };
     if (name) {
@@ -113,7 +101,7 @@ class IssueQuickCreateController {
       return;
     }
 
-    let params = {
+    const params = {
       project_uuid: this.issue.project.uuid,
       field: ['name', 'url'],
     };
@@ -130,7 +118,7 @@ class IssueQuickCreateController {
     if (this.IssueForm.$invalid) {
       return this.$q.reject();
     }
-    let issue = {
+    const issue = {
       type: this.issue.type,
       summary: this.issue.summary,
       description: this.issue.description,
@@ -151,10 +139,9 @@ class IssueQuickCreateController {
       .then(issue => {
         this.service.clearAllCacheForCurrentEndpoint();
         this.ncUtilsFlash.success(
-          this.coreUtils.templateFormatter(
-            gettext('Request {requestId} has been created.'),
-            { requestId: issue.key },
-          ),
+          translate('Request {requestId} has been created.', {
+            requestId: issue.key,
+          }),
         );
         return this.$state.go('support.detail', { uuid: issue.uuid });
       })
@@ -165,4 +152,15 @@ class IssueQuickCreateController {
         this.saving = false;
       });
   }
+}
+
+export default function issueQuickCreate() {
+  return {
+    restrict: 'E',
+    template: template,
+    controller: IssueQuickCreateController,
+    controllerAs: '$ctrl',
+    scope: {},
+    bindToController: true,
+  };
 }

@@ -16,18 +16,18 @@ interface ResourceActionComponentProps {
   actions: object;
 }
 
-const ActionItem = ({ action, key, onSelect }) => (
+const ActionItem = ({ action, actionKey, onSelect }) => (
   <MenuItem
-    eventKey={key}
+    eventKey={actionKey}
     className={classNames({
       remove: action.destructive,
     })}
     disabled={!action.enabled || action.pending}
-    onSelect={() => onSelect(key, action)}
+    onSelect={() => onSelect(actionKey, action)}
   >
     {action.reason ? (
       <>
-        <Tooltip key={key} label={action.reason} id={`action-reason-${key}`}>
+        <Tooltip label={action.reason} id={`action-reason-${actionKey}`}>
           <i className="fa fa-question-circle" />
         </Tooltip>{' '}
         {action.title}
@@ -61,6 +61,7 @@ export const ResourceActionComponent = (
             <ActionItem
               key={key}
               action={props.actions[key]}
+              actionKey={key}
               onSelect={props.onSelect}
             />
           ))

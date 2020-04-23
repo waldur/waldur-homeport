@@ -1,5 +1,4 @@
 import { getById, get, getAll } from '@waldur/core/api';
-import { $state } from '@waldur/core/services';
 
 import { Question } from './types';
 
@@ -39,13 +38,13 @@ const getTemplateVersion = (templateUuid, versionUuid) =>
 const getProjects = clusterUuid =>
   getAll('/rancher-projects/', { params: { cluster_uuid: clusterUuid } });
 
-export const loadData = async () => {
-  const template: any = await getTemplate($state.params.templateUuid);
+export const loadData = async (templateUuid, clusterUuid) => {
+  const template: any = await getTemplate(templateUuid);
   const version = await getTemplateVersion(
     template.uuid,
     template.default_version,
   );
-  const projects: any[] = await getProjects($state.params.clusterUuid);
+  const projects: any[] = await getProjects(clusterUuid);
   const projectOptions = projects.map(({ name }) => name);
   const namespaces = projects[0].namespaces;
   const namespaceOptions = namespaces.map(({ name }) => name);

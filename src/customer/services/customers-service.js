@@ -1,14 +1,15 @@
+import Axios from 'axios';
+
 // @ngInject
 export default function customersService(
   baseServiceClass,
   $state,
   $q,
-  $http,
   ENV,
   currentStateService,
   usersService,
 ) {
-  let ServiceClass = baseServiceClass.extend({
+  const ServiceClass = baseServiceClass.extend({
     filterByCustomer: false,
     countryChoices: [],
 
@@ -16,19 +17,12 @@ export default function customersService(
       this._super();
       this.endpoint = '/customers/';
     },
-    getBalanceHistory: function(uuid) {
-      let query = { UUID: uuid, operation: 'balance_history' };
-      return this.getList(query);
-    },
-    getCounters: function(query) {
-      let extendedQuery = angular.extend({ operation: 'counters' }, query);
-      return this.getFactory(false).get(extendedQuery).$promise;
-    },
     isOwnerOrStaff: function() {
-      let vm = this;
+      const vm = this;
       return $q
         .all([currentStateService.getCustomer(), usersService.getCurrentUser()])
         .then(function(result) {
+          // eslint-disable-next-line prefer-spread
           return vm.checkCustomerUser.apply(vm, result);
         });
     },
@@ -47,11 +41,11 @@ export default function customersService(
       return false;
     },
     loadCountries: function() {
-      let vm = this;
+      const vm = this;
       if (vm.countryChoices.length !== 0) {
         return $q.when(vm.countryChoices);
       } else {
-        return $http({
+        return Axios.request({
           method: 'OPTIONS',
           url: ENV.apiEndpoint + 'api/customers/',
         }).then(function(response) {
@@ -61,8 +55,8 @@ export default function customersService(
       }
     },
     countCustomers: function() {
-      return $http.head(ENV.apiEndpoint + 'api/customers/').then(response => {
-        return parseInt(response.headers()['x-result-count']);
+      return Axios.head(ENV.apiEndpoint + 'api/customers/').then(response => {
+        return parseInt(response.headers['x-result-count']);
       });
     },
     refreshCurrentCustomer(customerUuid) {

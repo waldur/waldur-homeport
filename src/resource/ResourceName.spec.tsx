@@ -8,11 +8,11 @@ import '@waldur/openstack/provider';
 
 import { ResourceName } from './ResourceName';
 
-jest.mock('@waldur/core/services', () => ({
-  $state: {
-    href: (_, params) => `/resource/${params.resource_type}/${params.uuid}/`,
-  },
-}));
+jest.mock('@waldur/core/Link', () => {
+  return {
+    Link: ({ label, children }) => <a>{label || children}</a>,
+  };
+});
 
 const resource = {
   name: 'FreeIPA server',
@@ -49,12 +49,6 @@ describe('ResourceName', () => {
     const wrapper = renderLink();
     const img = wrapper.find('img').prop('src');
     expect(img).toBe('images/appstore/icon-openstack.png');
-  });
-
-  it('renders a link', () => {
-    const wrapper = renderLink();
-    const href = wrapper.find('a').prop('href');
-    expect(href).toBe('/resource/OpenStackTenant.Instance/VALID_UUID/');
   });
 
   it('renders a warning', () => {

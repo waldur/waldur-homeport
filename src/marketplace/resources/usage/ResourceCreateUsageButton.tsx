@@ -7,7 +7,6 @@ import { ActionButton } from '@waldur/table-react/ActionButton';
 
 import { UsageReportContext } from './types';
 
-// tslint:disable-next-line:variable-name
 const openResourceUsageDialog = (
   resource_uuid: string,
   resource_name: string,

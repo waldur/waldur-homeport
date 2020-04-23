@@ -4,13 +4,10 @@ import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 import { translate } from '@waldur/i18n';
-import { angular2react } from '@waldur/shims/angular2react';
-import { connectAngularComponent } from '@waldur/store/connect';
+import { InvitationsList } from '@waldur/invitations/InvitationsList';
 
 import { CustomerPermissionsLogList } from './CustomerPermissionsLogList';
 import { CustomerUsersList } from './CustomerUsersList';
-
-const InvitationsList = angular2react('invitationsList');
 
 export const CustomerTeam = () => (
   <div className="tabs-container m-l-sm">
@@ -39,5 +36,3 @@ export const CustomerTeam = () => (
     </Tabs>
   </div>
 );
-
-export default connectAngularComponent(CustomerTeam);

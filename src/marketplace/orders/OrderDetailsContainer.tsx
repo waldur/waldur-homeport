@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { OrderDetails } from './OrderDetails';
 import * as actions from './store/actions';
@@ -24,5 +23,3 @@ const enhance = compose(
 );
 
 export const OrderDetailsContainer = enhance(OrderDetails);
-
-export default connectAngularComponent(OrderDetailsContainer);

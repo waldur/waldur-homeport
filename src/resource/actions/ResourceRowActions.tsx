@@ -10,7 +10,7 @@ import { ActionButtonResource } from './ActionButtonResource';
 
 export const ResourceRowActions = ({ resource }) => {
   const user = useSelector(getUser);
-  if (user.is_support && !user.is_staff) {
+  if (!user || (user.is_support && !user.is_staff)) {
     return null;
   }
   return (

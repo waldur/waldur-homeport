@@ -1,8 +1,9 @@
+import Axios from 'axios';
 import * as React from 'react';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useBoolean from 'react-use/lib/useBoolean';
 
-import { ngInjector, $http } from '@waldur/core/services';
+import { ngInjector } from '@waldur/core/services';
 
 import './ActionButtonResource.scss';
 import { ResourceActionComponent } from './ResourceActionComponent';
@@ -14,7 +15,7 @@ interface ActionButtonResourceProps {
 }
 
 async function loadActions(url) {
-  const response = await $http.get(url);
+  const response = await Axios.get(url);
   const resource = response.data;
   const actionUtilsService = ngInjector.get('actionUtilsService');
   const rawActions = await actionUtilsService.loadActions(resource);
@@ -28,8 +29,11 @@ async function loadActions(url) {
 }
 
 export const ActionButtonResource: React.FC<ActionButtonResourceProps> = props => {
-  const [{ loading, error, value }, getActions] = useAsyncFn(() =>
-    loadActions(props.url),
+  const { url } = props;
+
+  const [{ loading, error, value }, getActions] = useAsyncFn(
+    () => loadActions(url),
+    [url],
   );
 
   const [open, onToggle] = useBoolean(false);

@@ -4,7 +4,6 @@ import * as Tab from 'react-bootstrap/lib/Tab';
 import * as Tabs from 'react-bootstrap/lib/Tabs';
 
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ProjectPermissionsLogList } from './ProjectPermissionsLogList';
 import { ProjectUsersList } from './ProjectUsersList';
@@ -31,5 +30,3 @@ export const ProjectTeam = () => (
     </Tabs>
   </div>
 );
-
-export default connectAngularComponent(ProjectTeam);

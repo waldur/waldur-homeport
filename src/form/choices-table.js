@@ -1,29 +1,15 @@
 import template from './choices-table.html';
 
-export default function choicesTable() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {},
-    controller: TableController,
-    controllerAs: '$ctrl',
-    bindToController: {
-      choices: '=',
-      columns: '=',
-      value: '=',
-      filterOptions: '=',
-      selectItem: '&',
-      enableSelect: '<',
-    },
-  };
-}
-
 class TableController {
   // @ngInject
   constructor($filter, $scope) {
     this.$filter = $filter;
+    this.$scope = $scope;
+  }
+
+  $onInit() {
     if (this.filterOptions) {
-      $scope.$watch(
+      this.$scope.$watch(
         () => this.filterValue,
         filterValue =>
           (this.filter = {
@@ -35,9 +21,7 @@ class TableController {
       'max-height': '300px',
       'overflow-y': 'auto',
     };
-  }
 
-  $onInit() {
     if (angular.isUndefined(this.enableSelect)) {
       this.enableSelect = true;
     }
@@ -56,4 +40,22 @@ class TableController {
     }
     return this.$filter(column.filter)(value);
   }
+}
+
+export default function choicesTable() {
+  return {
+    restrict: 'E',
+    template: template,
+    scope: {},
+    controller: TableController,
+    controllerAs: '$ctrl',
+    bindToController: {
+      choices: '=',
+      columns: '=',
+      value: '=',
+      filterOptions: '=',
+      selectItem: '&',
+      enableSelect: '<',
+    },
+  };
 }

@@ -6,7 +6,6 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getProject } from '@waldur/workspace/selectors';
 
@@ -96,6 +95,4 @@ const enhance = compose(
   withTranslation,
 );
 
-export const CustomerList = enhance(TableComponent);
-
-export default connectAngularComponent(CustomerList);
+export const OrdersList = enhance(TableComponent);

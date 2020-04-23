@@ -1,14 +1,15 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
+import useAsyncFn from 'react-use/lib/useAsyncFn';
+import useEffectOnce from 'react-use/lib/useEffectOnce';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Query } from '@waldur/core/Query';
-import { $state, ngInjector } from '@waldur/core/services';
+import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { OrderItemDetails } from './OrderItemDetails';
 
@@ -68,7 +69,6 @@ function updateBreadcrumbs(orderItem: OrderItemDetailsType) {
   });
 }
 
-// tslint:disable-next-line: variable-name
 async function loadOrderItem(order_item_uuid) {
   const orderItem = await api.getOrderItem(order_item_uuid);
   updateBreadcrumbs(orderItem);
@@ -87,30 +87,40 @@ async function loadOrderItem(order_item_uuid) {
   };
 }
 
-const OrderItemDetailsContainer: React.FC<{}> = () => (
-  <Query loader={loadOrderItem} variables={$state.params.order_item_uuid}>
-    {({ loading, loaded, data, error, loadData }) => {
-      // Don't render loading indicator if order item is refreshing
-      // since if it is in pending state it is refreshed via periodic polling
-      if (loading && !loaded) {
-        return <LoadingSpinner />;
-      }
-      if (error) {
-        return <h3>{translate('Unable to get order item.')}</h3>;
-      }
-      return (
-        <>
-          <OrderItemDetails
-            orderItem={data.orderItem}
-            offering={data.offering}
-            limits={data.limits}
-            loadData={loadData}
-          />
-          <OfferingTabsComponent tabs={data.tabs} />
-        </>
-      );
-    }}
-  </Query>
-);
+export const OrderItemDetailsContainer: React.FC<{}> = () => {
+  const {
+    params: { order_item_uuid },
+  } = useCurrentStateAndParams();
 
-export default connectAngularComponent(OrderItemDetailsContainer);
+  const [{ loading, value, error }, loadData] = useAsyncFn(
+    () => loadOrderItem(order_item_uuid),
+    [order_item_uuid],
+  );
+
+  useEffectOnce(() => {
+    loadData();
+  });
+
+  // Don't render loading indicator if order item is refreshing
+  // since if it is in pending state it is refreshed via periodic polling
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  if (error) {
+    return <h3>{translate('Unable to get order item.')}</h3>;
+  }
+  if (!value) {
+    return null;
+  }
+  return (
+    <>
+      <OrderItemDetails
+        orderItem={value.orderItem}
+        offering={value.offering}
+        limits={value.limits}
+        loadData={loadData}
+      />
+      <OfferingTabsComponent tabs={value.tabs} />
+    </>
+  );
+};

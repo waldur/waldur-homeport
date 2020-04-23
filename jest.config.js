@@ -1,20 +1,21 @@
 module.exports = {
   transform: {
-    '^.+\\.(tsx?|jsx?)$': 'ts-jest'
+    '^.+\\.(tsx?|jsx?)$': 'ts-jest',
+    '^.+\\.svg$': '<rootDir>/test/svgTransform.js',
   },
   testRegex: '\\.spec\\.tsx?$',
-  moduleFileExtensions: ['ts','tsx','js','jsx','json'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   moduleNameMapper: {
     '@waldur/(.*)': '<rootDir>/src/$1',
-    '\\.(css|scss|svg)$': '<rootDir>/test/style-mock.js'
+    '\\.(css|scss|svg)$': '<rootDir>/test/style-mock.js',
   },
   setupFiles: ['<rootDir>/test/enzyme-setup.js', 'jest-date-mock'],
   modulePathIgnorePatterns: ['<rootDir>/node_modules/'],
   globals: {
     'ts-jest': {
       diagnostics: {
-        ignoreCodes: [151001]
-      }
-    }
-  }
+        ignoreCodes: [151001],
+      },
+    },
+  },
 };

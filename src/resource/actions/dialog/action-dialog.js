@@ -1,25 +1,18 @@
-import template from './action-dialog.html';
+import Axios from 'axios';
 
-// TODO: Convert directive to Angular 1.5 component
-export default function actionDialog() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: ActionDialogController,
-  };
-}
+import { toKeyValue } from '@waldur/core/utils';
+
+import template from './action-dialog.html';
 
 // @ngInject
 function ActionDialogController(
   $scope,
   $q,
-  $http,
   $state,
   $rootScope,
   actionUtilsService,
   ncUtilsFlash,
   ActionResourceLoader,
-  ncUtils,
   DEFAULT_FIELD_OPTIONS,
 ) {
   angular.extend($scope, {
@@ -97,7 +90,7 @@ function ActionDialogController(
       if ($scope.ActionForm.$invalid) {
         return $q.reject();
       }
-      let fields = $scope.action.fields;
+      const fields = $scope.action.fields;
       if (!$scope.action.url) {
         $scope.action.url = $scope.resource.url + $scope.action.name + '/';
       }
@@ -105,10 +98,10 @@ function ActionDialogController(
       if ($scope.action.serializer) {
         form = $scope.action.serializer($scope.form);
       } else {
-        for (let name in fields) {
+        for (const name in fields) {
           if ($scope.form[name] !== null) {
-            let field = fields[name];
-            let serializer = field.serializer || angular.identity;
+            const field = fields[name];
+            const serializer = field.serializer || angular.identity;
             form[name] = serializer($scope.form[name], field);
           }
         }
@@ -117,13 +110,13 @@ function ActionDialogController(
       let promise;
       let url;
       if ($scope.action.method === 'DELETE') {
-        url = $scope.action.url + '?' + ncUtils.toKeyValue($scope.form);
-        promise = $http.delete(url);
+        url = $scope.action.url + '?' + toKeyValue($scope.form);
+        promise = Axios.delete(url);
       } else if ($scope.action.method === 'PUT') {
         url = $scope.resource.url;
-        promise = $http.put(url, form);
+        promise = Axios.put(url, form);
       } else {
-        promise = $http.post($scope.action.url, form);
+        promise = Axios.post($scope.action.url, form);
       }
 
       return promise.then(
@@ -156,4 +149,13 @@ function ActionDialogController(
     },
   });
   $scope.init();
+}
+
+// TODO: Convert directive to Angular 1.5 component
+export default function actionDialog() {
+  return {
+    restrict: 'E',
+    template: template,
+    controller: ActionDialogController,
+  };
 }

@@ -1,8 +1,10 @@
+import Axios from 'axios';
+
 import { sendForm } from '@waldur/core/api';
-import { ENV, $http } from '@waldur/core/services';
+import { ENV } from '@waldur/core/services';
 
 export const getComments = (issue: string) => {
-  return $http.get(`${ENV.apiEndpoint}api/support-comments/`, {
+  return Axios.get(`${ENV.apiEndpoint}api/support-comments/`, {
     params: {
       issue,
     },
@@ -28,5 +30,5 @@ export const updateComment = (description: string, uuid: string) => {
 };
 
 export const deleteComment = (uuid: string) => {
-  return $http.delete(`${ENV.apiEndpoint}api/support-comments/${uuid}/`);
+  return Axios.delete(`${ENV.apiEndpoint}api/support-comments/${uuid}/`);
 };

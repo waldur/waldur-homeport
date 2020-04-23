@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { $state } from '@waldur/core/services';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, createFetcher, connectTable } from '@waldur/table-react';
 import { KeysListTablePlaceholder } from '@waldur/user/keys/KeysListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
@@ -63,5 +62,3 @@ const mapStateToProps = state => ({
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const KeysList = enhance(TableComponent);
-
-export default connectAngularComponent(KeysList);

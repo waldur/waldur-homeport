@@ -1,8 +1,10 @@
+import Axios from 'axios';
+
 import { sendForm } from '@waldur/core/api';
-import { ENV, $http } from '@waldur/core/services';
+import { ENV } from '@waldur/core/services';
 
 export const getAttachments = (issue: string) => {
-  return $http.get(`${ENV.apiEndpoint}api/support-attachments/`, {
+  return Axios.get(`${ENV.apiEndpoint}api/support-attachments/`, {
     params: {
       issue,
     },
@@ -17,5 +19,5 @@ export const putAttachment = (issueUrl: string, file: File) => {
 };
 
 export const deleteAttachment = (uuid: string) => {
-  return $http.delete(`${ENV.apiEndpoint}api/support-attachments/{${uuid}}/`);
+  return Axios.delete(`${ENV.apiEndpoint}api/support-attachments/{${uuid}}/`);
 };

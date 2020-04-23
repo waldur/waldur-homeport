@@ -29,7 +29,6 @@ export function formatPhone(value) {
 
 // This is temporary workaround until data migration is completed.
 export const normalizeCustomerDetails = details => {
-  // tslint:disable variable-name
   const name = details.name || details.company;
   const display_name = details.display_name;
   const address = details.address || details.contact_details;
