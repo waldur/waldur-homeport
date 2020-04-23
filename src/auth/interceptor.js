@@ -22,6 +22,9 @@ Axios.interceptors.response.use(
     return response;
   },
   function invalidTokenInterceptor(error) {
+    if (!ngInjector) {
+      return;
+    }
     const authService = ngInjector.get('authService');
     const $state = ngInjector.get('$state');
     const $stateParams = ngInjector.get('$stateParams');
