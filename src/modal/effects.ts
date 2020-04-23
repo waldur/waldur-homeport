@@ -11,7 +11,15 @@ function openModalDialog(action) {
       resolve[key] = () => params.resolve[key];
     });
   }
-  $uibModal.open({ component, resolve, size: params && params.size });
+  $uibModal
+    .open({ component, resolve, size: params && params.size })
+    .result.catch(function error(error) {
+      if (error === 'backdrop click') {
+        // do nothing
+      } else {
+        throw error;
+      }
+    });
 }
 
 function closeModalDialog() {
