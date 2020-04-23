@@ -1,8 +1,11 @@
-import Axios, { AxiosPromise, Method } from 'axios';
+import Axios, { AxiosPromise, Method, AxiosRequestConfig } from 'axios';
 
 import { ENV } from './services';
 
-export function get<T = {}>(endpoint: string, options?: {}): AxiosPromise<T> {
+export function get<T = {}>(
+  endpoint: string,
+  options?: AxiosRequestConfig,
+): AxiosPromise<T> {
   return Axios.get(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
@@ -20,30 +23,30 @@ export function getFirst<T = {}>(endpoint, params?) {
 export function getById<T = {}>(
   endpoint: string,
   id: string,
-  options?: {},
+  options?: AxiosRequestConfig,
 ): Promise<T> {
   return get<T>(`${endpoint}${id}/`, options).then(response => response.data);
 }
 
 export function remove<T = {}>(
   endpoint: string,
-  options?: {},
+  options?: AxiosRequestConfig,
 ): AxiosPromise<T> {
   return Axios.delete(`${ENV.apiEndpoint}api${endpoint}`, options);
 }
 
-export function deleteById<T = {}>(endpoint, id, options?) {
+export function deleteById<T = {}>(endpoint, id, options?: AxiosRequestConfig) {
   return remove<T>(`${endpoint}${id}/`, options).then(
     response => response.data,
   );
 }
 
-export function post<T = {}>(endpoint: string, options?: {}): AxiosPromise<T> {
-  return Axios.post(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function post<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
+  return Axios.post(`${ENV.apiEndpoint}api${endpoint}`, data);
 }
 
-export function patch<T = {}>(endpoint: string, options?: {}): AxiosPromise<T> {
-  return Axios.patch(`${ENV.apiEndpoint}api${endpoint}`, options);
+export function patch<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
+  return Axios.patch(`${ENV.apiEndpoint}api${endpoint}`, data);
 }
 
 export function sendForm<T = {}>(
@@ -85,7 +88,7 @@ export const getNextPageUrl = response => {
 
 export async function getAll<T = {}>(
   endpoint: string,
-  options?: {},
+  options?: AxiosRequestConfig,
 ): Promise<T[]> {
   let response = await get(endpoint, options);
   let result = [];

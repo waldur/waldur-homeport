@@ -13,7 +13,8 @@ function initAuthToken($auth, $http) {
   }
 }
 
-Axios.defaults.paramsSerializer = Qs.stringify;
+Axios.defaults.paramsSerializer = params =>
+  Qs.stringify(params, { arrayFormat: 'repeat' });
 
 // On 401 error received, user session has expired and he should logged out
 Axios.interceptors.response.use(

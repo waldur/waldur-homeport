@@ -54,15 +54,17 @@ export const useOrganizationFilter = (organizations: Customer[]) => {
 
 export const loadOrganizations = () =>
   getAll<Customer>('/customers/', {
-    field: [
-      'name',
-      'uuid',
-      'projects',
-      'owners',
-      'abbreviation',
-      'is_service_provider',
-    ],
-    o: 'name',
+    params: {
+      field: [
+        'name',
+        'uuid',
+        'projects',
+        'owners',
+        'abbreviation',
+        'is_service_provider',
+      ],
+      o: 'name',
+    },
   });
 
 const filterProject = (project: Project, filter: string): boolean => {
