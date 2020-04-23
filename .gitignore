@@ -22,7 +22,6 @@ cypress/videos
 src/configs/config.json
 src/configs/test/config.json
 
-tslint/rules/*.js
 build/
 build.dev/
 build.dll/
