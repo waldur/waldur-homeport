@@ -29,7 +29,7 @@ export const states = [
       resource: loadResource,
     },
     data: {
-      activeKey: 'marketplace-project-resources',
+      sidebarKey: 'marketplace-project-resources',
     },
   },
 ];

@@ -196,6 +196,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Public offerings'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -206,6 +207,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('My offerings'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -216,6 +218,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Add offering'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -279,6 +282,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Public orders'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -289,6 +293,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('My orders'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -299,6 +304,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('My resources'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -309,6 +315,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Public resources'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -319,6 +326,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Public resources'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
