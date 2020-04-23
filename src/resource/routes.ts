@@ -1,6 +1,6 @@
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
-import { loadResource, ResourceController } from './resolve';
+import { loadResource } from './resolve';
 
 export const states = [
   {
@@ -28,7 +28,9 @@ export const states = [
     resolve: {
       resource: loadResource,
     },
-    controller: ResourceController,
+    data: {
+      activeKey: 'marketplace-project-resources',
+    },
   },
 ];
 

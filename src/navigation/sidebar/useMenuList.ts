@@ -1,8 +1,10 @@
-import { useRouter, useOnStateChanged } from '@uirouter/react';
+import {
+  useRouter,
+  useOnStateChanged,
+  useCurrentStateAndParams,
+} from '@uirouter/react';
 import * as classNames from 'classnames';
 import * as React from 'react';
-
-import { $state } from '@waldur/core/services';
 
 import { MenuItemType } from './types';
 
@@ -11,13 +13,19 @@ export const useMenuList = (items: MenuItemType[]) => {
   const [activeItem, setActiveItem] = React.useState<MenuItemType>();
   const router = useRouter();
 
+  const { state } = useCurrentStateAndParams();
+
   const matches = (item: MenuItemType) =>
-    item.state && $state.is(item.state, item.params);
+    (item.key && state?.data?.activeKey === item.key) ||
+    (item.state && router.stateService.is(item.state, item.params));
 
   const updateItems = () => {
     for (const item of items) {
       if (matches(item)) {
         setActiveItem(item);
+        if (item.children) {
+          setExpandedItem(item);
+        }
       } else if (item.children) {
         for (const child of item.children) {
           if (matches(child)) {
