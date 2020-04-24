@@ -56,10 +56,6 @@ class CustomerManageController {
       .getCustomer()
       .then(customer => {
         this.customer = customer;
-        this.isOwner = this.customersService.isOwner(
-          this.customer,
-          this.usersService.getCurrentUser().$$state.value,
-        );
         return this.loadCustomerPermissions(customer);
       })
       .finally(() => {
