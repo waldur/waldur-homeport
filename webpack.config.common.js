@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AngularGetTextPlugin = require('./angular-gettext-plugin');
@@ -156,6 +157,9 @@ module.exports = {
     ],
   },
   plugins: [
+    // Ignore all locale files of moment.js
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
     new HtmlWebpackPlugin({
       template: './src/index-template.html',
       filename: utils.formatPath('index.html'),

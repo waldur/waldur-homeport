@@ -5,7 +5,18 @@ import 'regenerator-runtime/runtime';
 import 'expose-loader?$!expose-loader?jQuery!jquery';
 import 'angular';
 import moment from 'moment-timezone';
-window.moment = moment;
+require('moment/locale/ar');
+require('moment/locale/az');
+require('moment/locale/en-gb');
+require('moment/locale/et');
+require('moment/locale/fi');
+require('moment/locale/lt');
+require('moment/locale/lv');
+require('moment/locale/ru');
+require('moment/locale/uk');
+moment.locale('en-gb');
+
+window['moment'] = moment;
 
 import './shims';
 
