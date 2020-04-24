@@ -45,10 +45,6 @@ async function loadConfig() {
   if (typeof frontendSettings !== 'object') {
     renderError(`Unable to parse client configuration file ${CONFIG_FILE}.`);
     return;
-  } else if (!frontendSettings.apiEndpoint) {
-    frontendSettings = {
-      apiEndpoint: 'http://localhost:8080/',
-    };
   }
 
   try {
