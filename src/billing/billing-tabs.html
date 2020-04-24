@@ -9,16 +9,6 @@
     <uib-tab ng-if="$ctrl.showAccountingRecords">
       <uib-tab-heading translate>Accounting records</uib-tab-heading>
       <div class="panel-body">
-        <div ng-if="$ctrl.activeFixedPricePaymentProfile">
-          <span ng-if="$ctrl.activeFixedPricePaymentProfile.agreement_number">
-            <span translate>Organization has signed a fixed price agreement</span>
-            {{ $ctrl.activeFixedPricePaymentProfile.agreement_number }}.
-            <span ng-if="$ctrl.activeFixedPricePaymentProfile.end_date">
-              <span translate>End date of the agreement is</span>
-              {{ $ctrl.activeFixedPricePaymentProfile.end_date }}.
-            </span>
-          </span>
-        </div>
         <billing-records-list></billing-records-list>
       </div>
     </uib-tab>
