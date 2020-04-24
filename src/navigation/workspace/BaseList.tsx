@@ -20,7 +20,7 @@ export const BaseList = ({
       const query = `[data-uuid="${itemId}"]`;
       const itemElement = view.querySelector(query);
       if (itemElement) {
-        view.scroll(0, itemElement.offsetTop);
+        view.scrollTop = itemElement.offsetTop;
       }
     }
   }, [scrollBarRef, itemId]);
