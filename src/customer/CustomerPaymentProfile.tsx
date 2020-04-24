@@ -31,7 +31,7 @@ export const CustomerPaymentProfile = (props: CustomerPaymentProfileProps) => {
             })}
             id="fieldLabel"
           >
-            {translate(activePaymentProfile.name)}
+            {activePaymentProfile.name}
           </Tooltip>
         </dd>
       </div>
