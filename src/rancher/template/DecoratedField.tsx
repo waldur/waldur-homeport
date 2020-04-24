@@ -11,11 +11,17 @@ import { FieldProps } from './types';
 
 interface OwnProps extends FieldProps {
   component: React.ComponentType<WrappedFieldProps>;
+  action?: React.ReactNode;
 }
 
 export const DecoratedField: React.FC<OwnProps> = props => (
   <Col sm={6}>
     <FormGroup>
+      {props.action ? (
+        <div className="pull-right">
+          <small>{props.action}</small>
+        </div>
+      ) : null}
       <p>
         <DecoratedLabel label={props.label} required={props.required} />
       </p>

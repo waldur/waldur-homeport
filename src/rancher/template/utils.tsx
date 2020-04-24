@@ -99,6 +99,7 @@ export const loadData = async (templateUuid, clusterUuid) => {
     version: template.default_version,
     project: projectOptions[0],
     namespace: namespaceOptions ? namespaceOptions[0] : undefined,
+    useNewNamespace: namespaceOptions.length === 0,
   };
   return {
     template,
