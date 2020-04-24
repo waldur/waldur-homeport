@@ -32,10 +32,6 @@ export const TemplateDetail = () => {
     formValueSelector(FORM_ID)(state, 'project'),
   );
 
-  const namespace = useSelector(state =>
-    formValueSelector(FORM_ID)(state, 'namespace'),
-  );
-
   const namespaces = React.useMemo(
     () =>
       project
@@ -57,8 +53,13 @@ export const TemplateDetail = () => {
           version: formData.version,
           template_uuid: state.value.template.uuid,
           project_uuid: state.value.projects.find(p => p.name === project).uuid,
-          namespace_uuid: state.value.namespaces.find(p => p.name === namespace)
-            .uuid,
+          namespace_name: formData.useNewNamespace
+            ? formData.newNamespace
+            : undefined,
+          namespace_uuid: formData.useNewNamespace
+            ? undefined
+            : state.value.namespaces.find(p => p.name === formData.namespace)
+                .uuid,
           answers: formData.answers,
         });
       } catch (error) {
@@ -70,7 +71,7 @@ export const TemplateDetail = () => {
       }
       dispatch(showSuccess(translate('Application has been created.')));
     },
-    [dispatch, state.value, namespace, project],
+    [dispatch, state.value, project],
   );
 
   if (state.loading) {

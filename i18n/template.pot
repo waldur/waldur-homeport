@@ -312,6 +312,10 @@ msgstr ""
 msgid "Add team member"
 msgstr ""
 
+#: src/rancher/template/NamespaceField.tsx
+msgid "Add to a new namespace"
+msgstr ""
+
 #: src/marketplace/cart/ShoppingCartButton.tsx
 msgid "Add to cart"
 msgstr ""
@@ -3451,7 +3455,7 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
-#: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/NamespaceField.tsx
 msgid "Namespace"
 msgstr ""
 
@@ -5621,7 +5625,7 @@ msgstr ""
 msgid "Select affected resource..."
 msgstr ""
 
-#: src/rancher/template/EnumField.tsx
+#: src/rancher/template/SelectControl.tsx
 msgid "Select an option..."
 msgstr ""
 
@@ -7423,6 +7427,10 @@ msgstr ""
 msgid "Usages"
 msgstr ""
 
+#: src/rancher/template/NamespaceField.tsx
+msgid "Use an existing namespace"
+msgstr ""
+
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 msgid "Use sudo"
@@ -8034,6 +8042,10 @@ msgstr ""
 
 #: src/vmware/DisksList.tsx
 msgid "disks"
+msgstr ""
+
+#: src/rancher/template/NamespaceField.tsx
+msgid "e.g. MyApp"
 msgstr ""
 
 #: src/table-react/TablePageSize.tsx

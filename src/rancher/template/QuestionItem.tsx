@@ -19,7 +19,7 @@ export const QuestionItem: React.FC<{
 }> = ({ question }) => {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  const setInitialValue = React.useCallback(() => {
     if (question.default) {
       dispatch(
         change(
@@ -29,7 +29,9 @@ export const QuestionItem: React.FC<{
         ),
       );
     }
-  });
+  }, [question, dispatch]);
+
+  React.useEffect(setInitialValue, [question]);
 
   return React.createElement(FIELD_MAP[question.type] || StringField, question);
 };

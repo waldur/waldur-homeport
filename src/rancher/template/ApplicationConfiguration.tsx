@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 
 import { EnumField } from './EnumField';
 import { GroupHeader } from './GroupHeader';
+import { NamespaceField } from './NamespaceField';
 import { StringField } from './StringField';
 
 export const ApplicationConfiguration = props => (
@@ -25,12 +26,7 @@ export const ApplicationConfiguration = props => (
         variable="project"
         options={props.projects}
       />
-      <EnumField
-        required={true}
-        label={translate('Namespace')}
-        variable="namespace"
-        options={props.namespaces}
-      />
+      <NamespaceField options={props.namespaces} />
     </Row>
   </>
 );

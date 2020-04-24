@@ -11,15 +11,18 @@ import { groupByN } from './utils';
 export const QuestionGroup: React.FC<{
   title: string;
   questions: Question[];
-}> = ({ title, questions }) => (
-  <React.Fragment>
-    <GroupHeader title={title || translate('Configuration options')} />
-    {groupByN(2, questions).map((group, groupIndex) => (
-      <Row key={groupIndex}>
-        {group.map((question, questionIndex) => (
-          <QuestionItem key={questionIndex} question={question} />
-        ))}
-      </Row>
-    ))}
-  </React.Fragment>
-);
+}> = ({ title, questions }) => {
+  const groups = React.useMemo(() => groupByN(2, questions), [questions]);
+  return (
+    <React.Fragment>
+      <GroupHeader title={title || translate('Configuration options')} />
+      {groups.map((group, groupIndex) => (
+        <Row key={groupIndex}>
+          {group.map((question, questionIndex) => (
+            <QuestionItem key={questionIndex} question={question} />
+          ))}
+        </Row>
+      ))}
+    </React.Fragment>
+  );
+};

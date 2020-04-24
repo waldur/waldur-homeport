@@ -8,16 +8,20 @@ import { Field } from 'redux-form';
 import { DecoratedLabel } from './DecoratedLabel';
 import { FieldProps } from './types';
 
+const renderControl = props => (
+  <Checkbox {...props.input}>
+    <DecoratedLabel label={props.label} required={props.required} />
+  </Checkbox>
+);
+
 export const BooleanField: React.FC<FieldProps> = props => (
   <Col sm={6}>
     <FormGroup>
       <Field
         name={props.variable}
-        component={fieldProps => (
-          <Checkbox {...fieldProps.input}>
-            <DecoratedLabel label={props.label} required={props.required} />
-          </Checkbox>
-        )}
+        component={renderControl}
+        label={props.label}
+        required={props.required}
       />
       {props.description && <HelpBlock>{props.description}</HelpBlock>}
     </FormGroup>
