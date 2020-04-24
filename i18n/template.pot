@@ -461,6 +461,10 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
+#: src/rancher/template/utils.tsx
+msgid "Application catalogues"
+msgstr ""
+
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Application configuration"
 msgstr ""
@@ -470,6 +474,7 @@ msgid "Application has been created."
 msgstr ""
 
 #: src/rancher/cluster/tabs.ts
+#: src/rancher/template/utils.tsx
 msgid "Application templates"
 msgstr ""
 
@@ -4655,6 +4660,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/offering-details.js
 #: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/utils.tsx
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 msgid "Project workspace"
 msgstr ""
@@ -5325,6 +5331,7 @@ msgstr ""
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/utils.tsx
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
