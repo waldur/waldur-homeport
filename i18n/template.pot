@@ -482,6 +482,10 @@ msgstr ""
 msgid "Application templates"
 msgstr ""
 
+#: src/rancher/cluster/tabs.ts
+msgid "Applications"
+msgstr ""
+
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
 msgid "Apply"
 msgstr ""
@@ -912,6 +916,7 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 msgid "Catalog"
 msgstr ""
@@ -1390,6 +1395,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/vmware/DisksList.tsx
@@ -3400,6 +3406,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
@@ -4568,6 +4575,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Project"
 msgstr ""
@@ -6110,6 +6118,7 @@ msgstr ""
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -6359,6 +6368,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Template"
@@ -7995,6 +8005,10 @@ msgstr ""
 
 #: src/rancher/template/ClusterTemplateList.tsx
 msgid "application templates"
+msgstr ""
+
+#: src/rancher/cluster/ClusterApplicationsList.tsx
+msgid "applications"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
