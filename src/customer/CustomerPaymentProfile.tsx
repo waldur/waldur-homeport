@@ -2,12 +2,7 @@ import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-
-interface PaymentProfile {
-  name: string;
-  payment_type: string;
-  is_active: boolean;
-}
+import { PaymentProfile } from '@waldur/workspace/types';
 
 interface CustomerPaymentProfileProps {
   paymentProfiles: PaymentProfile[];

@@ -1,5 +1,6 @@
 import { connectAngularComponent } from '@waldur/store/connect';
 
+import { AgreementInfo } from './AgreementInfo';
 import billingDetails from './billing-details';
 import billingRecordDetails from './billing-record-details';
 import billingRecordHeader from './billing-record-header';
@@ -34,6 +35,7 @@ export default module => {
     'billingRecordsList',
     connectAngularComponent(BillingRecordsList),
   );
+  module.component('agreementInfo', connectAngularComponent(AgreementInfo));
   module.component('billingTabs', billingTabs);
   module.component('priceEstimateButton', priceEstimateButton);
   module.component('priceEstimateDialog', priceEstimateDialog);
