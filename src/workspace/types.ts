@@ -27,6 +27,18 @@ export interface UserDetails extends User {
   is_active: boolean;
 }
 
+interface PaymentProfileAttributes {
+  end_date: string;
+  agreement_number: string;
+}
+
+export interface PaymentProfile {
+  name: string;
+  payment_type: string;
+  is_active: boolean;
+  attributes: PaymentProfileAttributes;
+}
+
 export interface Customer {
   name: string;
   uuid: string;
@@ -35,6 +47,7 @@ export interface Customer {
   projects?: Project[];
   is_service_provider?: boolean;
   abbreviation?: string;
+  payment_profiles?: PaymentProfile[];
 }
 
 interface Permission {
