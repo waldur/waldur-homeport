@@ -17,6 +17,9 @@ type LoaderInterface<VariablesType, PayloadType> = (
   vars?: VariablesType,
 ) => Promise<PayloadType>;
 
+/**
+ * @deprecated Please use useAsync hook instead from react-use package.
+ */
 export function useQuery<
   PayloadType = any,
   VariablesType = string | Record<string, any>

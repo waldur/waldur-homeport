@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { checkPermission } from '@waldur/issues/utils';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
@@ -30,7 +31,7 @@ import { ResourceDetailsPage } from './resources/ResourceDetailsPage';
 import { SupportUsageContainer } from './resources/usage/SupportUsageContainer';
 import { ProviderDetails } from './service-providers/ProviderDetails';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'marketplace-landing',
     url: 'marketplace/',

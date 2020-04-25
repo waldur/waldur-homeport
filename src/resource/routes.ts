@@ -1,8 +1,10 @@
+import { StateDeclaration } from '@waldur/core/types';
+
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 import { loadResource } from './resolve';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'resources',
     url: '/resources/',

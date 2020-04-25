@@ -1,6 +1,7 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'organization.billing',
     url: 'billing/',

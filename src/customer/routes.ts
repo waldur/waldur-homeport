@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { ProjectsList } from '@waldur/project/ProjectsList';
 import { withStore } from '@waldur/store/connect';
@@ -11,7 +12,7 @@ import { loadCustomer, CustomerController } from './utils';
 import { CustomerEventsView } from './workspace/CustomerEventsList';
 import { CustomerIssuesList } from './workspace/CustomerIssuesList';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'organization',
     url: '/organizations/:uuid/',
