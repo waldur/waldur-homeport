@@ -22,6 +22,8 @@ interface DataDeclaration {
   erred: boolean;
   /** Breadcrumbs component is concealed as long as this parameter is set to true. */
   hideBreadcrumbs: boolean;
+  /** Page header component is concealed as long as this parameter is set to true. */
+  hideHeader: boolean;
   /** Workspace declaration is used by workspace selector. */
   workspace: string;
   /** Page class name is applied to page wrapper element automatically */
