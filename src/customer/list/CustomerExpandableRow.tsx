@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
-import { CustomerPaymentProfile } from '@waldur/customer/CustomerPaymentProfile';
 import { translate } from '@waldur/i18n';
 import { ResourceExpandableRow } from '@waldur/resource/ResourceExpandableRow';
 
 import { loadCustomerResources } from './api';
+import { CustomerPaymentProfile } from './CustomerPaymentProfile';
 
 export const CustomerExpandableRow = props => (
   <Query loader={loadCustomerResources} variables={props.row}>
