@@ -4,11 +4,11 @@ import * as React from 'react';
 import { getList } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
-import { CustomerListFilter } from '@waldur/customer/CustomerListFilter';
 import { translate } from '@waldur/i18n';
 
 import { getOptions } from './AccountingRunningField';
 import { CustomerList } from './CustomerList';
+import { CustomerListFilter } from './CustomerListFilter';
 import { TotalCostContainer } from './TotalCostComponent';
 
 const makeAccountingPeriods = (start: moment.Moment) => {

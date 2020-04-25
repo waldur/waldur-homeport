@@ -38,8 +38,8 @@ msgstr ""
 msgid "API token lifetime"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
 #: src/customer/details/CustomerDetails.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 msgid "Abbreviation"
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Accounting"
 msgstr ""
 
-#: src/customer/AccountingPeriodFilter.tsx
+#: src/customer/list/AccountingPeriodFilter.tsx
 msgid "Accounting period"
 msgstr ""
 
@@ -382,8 +382,8 @@ msgid "Agree with ToS"
 msgstr ""
 
 #: src/billing/billing-record-details.html
-#: src/customer/CustomerList.tsx
 #: src/customer/details/CustomerDetails.tsx
+#: src/customer/list/CustomerList.tsx
 msgid "Agreement number"
 msgstr ""
 
@@ -391,7 +391,7 @@ msgstr ""
 msgid "Alert"
 msgstr ""
 
-#: src/customer/AccountingRunningField.tsx
+#: src/customer/list/AccountingRunningField.tsx
 msgid "All"
 msgstr ""
 
@@ -1242,7 +1242,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -1382,7 +1382,7 @@ msgstr ""
 
 #: src/billing/InvoicesFilter.tsx
 #: src/booking/BookingsList.tsx
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -1462,7 +1462,7 @@ msgstr ""
 msgid "Current API token"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 msgid "Current cost"
 msgstr ""
 
@@ -1972,7 +1972,7 @@ msgstr ""
 msgid "Esimated price per month"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 msgid "Estimated cost"
@@ -3038,7 +3038,7 @@ msgstr ""
 msgid "Lithuanian"
 msgstr ""
 
-#: src/customer/TotalCostComponent.tsx
+#: src/customer/list/TotalCostComponent.tsx
 msgid "Loading"
 msgstr ""
 
@@ -3621,7 +3621,7 @@ msgstr ""
 msgid "Not assigned"
 msgstr ""
 
-#: src/customer/AccountingRunningField.tsx
+#: src/customer/list/AccountingRunningField.tsx
 msgid "Not running accounting"
 msgstr ""
 
@@ -3934,8 +3934,8 @@ msgstr ""
 msgid "Orders"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
 #: src/customer/create/CustomerCreatePrompt.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/create/issue-create-dialog.html
@@ -4044,7 +4044,7 @@ msgstr ""
 msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"
 msgstr ""
@@ -4158,7 +4158,7 @@ msgstr ""
 msgid "Payment pending"
 msgstr ""
 
-#: src/customer/CustomerPaymentProfile.tsx
+#: src/customer/list/CustomerPaymentProfile.tsx
 msgid "Payment profile"
 msgstr ""
 
@@ -4166,7 +4166,7 @@ msgstr ""
 msgid "Payment profiles"
 msgstr ""
 
-#: src/customer/CustomerPaymentProfile.tsx
+#: src/customer/list/CustomerPaymentProfile.tsx
 msgid "Payment type {type}"
 msgstr ""
 
@@ -4946,7 +4946,7 @@ msgstr ""
 msgid "Registered at:"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Registration code"
 msgstr ""
@@ -5436,7 +5436,7 @@ msgstr ""
 msgid "Rules"
 msgstr ""
 
-#: src/customer/AccountingRunningField.tsx
+#: src/customer/list/AccountingRunningField.tsx
 msgid "Running accounting"
 msgstr ""
 
@@ -5631,7 +5631,7 @@ msgstr ""
 msgid "Select SSH public key..."
 msgstr ""
 
-#: src/customer/AccountingPeriodField.tsx
+#: src/customer/list/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
 
@@ -5968,7 +5968,7 @@ msgstr ""
 msgid "Show user details"
 msgstr ""
 
-#: src/customer/AccountingRunningField.tsx
+#: src/customer/list/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr ""
@@ -6076,7 +6076,7 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 msgid "Start day of accounting"
 msgstr ""
 
@@ -6732,7 +6732,7 @@ msgstr ""
 msgid "Total cost"
 msgstr ""
 
-#: src/customer/TotalCostField.tsx
+#: src/customer/list/TotalCostField.tsx
 msgid "Total cost:"
 msgstr ""
 
@@ -7013,7 +7013,7 @@ msgstr ""
 msgid "Unable to load data"
 msgstr ""
 
-#: src/customer/TotalCostComponent.tsx
+#: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -7038,7 +7038,7 @@ msgstr ""
 msgid "Unable to load file."
 msgstr ""
 
-#: src/customer/CustomerListContainer.tsx
+#: src/customer/list/CustomerListContainer.tsx
 msgid "Unable to load financial overview."
 msgstr ""
 
@@ -7084,7 +7084,7 @@ msgstr ""
 msgid "Unable to load order details."
 msgstr ""
 
-#: src/customer/CustomerExpandableRow.tsx
+#: src/customer/list/CustomerExpandableRow.tsx
 msgid "Unable to load organization resources."
 msgstr ""
 
@@ -7646,11 +7646,11 @@ msgstr ""
 msgid "VAT code"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 msgid "VAT is included"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 msgid "VAT is not included"
 msgstr ""
 

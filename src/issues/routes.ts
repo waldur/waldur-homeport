@@ -1,5 +1,5 @@
 import { StateDeclaration } from '@waldur/core/types';
-import { CustomerListContainer } from '@waldur/customer/CustomerListContainer';
+import { CustomerListContainer } from '@waldur/customer/list/CustomerListContainer';
 import { gettext } from '@waldur/i18n';
 import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
 import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';

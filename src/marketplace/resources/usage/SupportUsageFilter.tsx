@@ -6,8 +6,8 @@ import { compose } from 'redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { AccountingPeriodFilter } from '@waldur/customer/AccountingPeriodFilter';
-import { AccountingPeriodOption } from '@waldur/customer/types';
+import { AccountingPeriodFilter } from '@waldur/customer/list/AccountingPeriodFilter';
+import { AccountingPeriodOption } from '@waldur/customer/list/types';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';

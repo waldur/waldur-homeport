@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { OrganizationLink } from '@waldur/customer/OrganizationLink';
+import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableProps } from '@waldur/table-react/Table';
