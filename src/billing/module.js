@@ -13,6 +13,7 @@ import invoiceDetails from './invoice-details';
 import invoiceHeader from './invoice-header';
 import invoicesService from './invoices-service';
 import { InvoicesList } from './InvoicesList';
+import { PaymentProfileDetails } from './PaymentProfileDetails';
 import { PaymentProfileList } from './PaymentProfileList';
 import priceEstimateButton from './price-estimate-button';
 import PriceEstimateUtilsService from './price-estimate-utils-service';
@@ -42,6 +43,10 @@ export default module => {
   module.component(
     'paymentProfileList',
     connectAngularComponent(PaymentProfileList),
+  );
+  module.component(
+    'paymentProfileForOrganizationOwner',
+    connectAngularComponent(PaymentProfileDetails),
   );
   module.config(billingRoutes);
   eventsModule(module);

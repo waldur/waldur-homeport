@@ -33,9 +33,12 @@ interface PaymentProfileAttributes {
 }
 
 export interface PaymentProfile {
+  is_active: boolean;
   name: string;
   payment_type: string;
-  is_active: boolean;
+  payment_type_display: string;
+  organization_uuid: string;
+  url: string;
   attributes: PaymentProfileAttributes;
 }
 
