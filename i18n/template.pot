@@ -2695,7 +2695,7 @@ msgstr ""
 msgid "Invalid URL. Unable to parse payment details."
 msgstr ""
 
-#: src/invitations/invitation-approve.html
+#: src/invitations/InvitationApprove.tsx
 msgid "Invitation approval"
 msgstr ""
 
@@ -2711,7 +2711,7 @@ msgstr ""
 msgid "Invitation email is:"
 msgstr ""
 
-#: src/invitations/invitation-approve.js
+#: src/invitations/InvitationApprove.tsx
 msgid "Invitation has been approved."
 msgstr ""
 
@@ -2723,8 +2723,8 @@ msgstr ""
 msgid "Invitation has been created."
 msgstr ""
 
-#: src/invitations/invitation-reject.js
-msgid "Invitation has been rejectd."
+#: src/invitations/InvitationReject.tsx
+msgid "Invitation has been rejected."
 msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
@@ -2743,7 +2743,7 @@ msgstr ""
 msgid "Invitation is not valid."
 msgstr ""
 
-#: src/invitations/invitation-reject.html
+#: src/invitations/InvitationReject.tsx
 msgid "Invitation rejection"
 msgstr ""
 
@@ -6822,7 +6822,7 @@ msgstr ""
 msgid "Unable to add item to shopping cart."
 msgstr ""
 
-#: src/invitations/invitation-approve.js
+#: src/invitations/InvitationApprove.tsx
 msgid "Unable to approve invitation."
 msgstr ""
 
@@ -7172,7 +7172,7 @@ msgstr ""
 msgid "Unable to reject booking."
 msgstr ""
 
-#: src/invitations/invitation-reject.js
+#: src/invitations/InvitationReject.tsx
 msgid "Unable to reject invitation."
 msgstr ""
 
@@ -7953,7 +7953,7 @@ msgstr ""
 msgid "You need approval to finish purchasing of services."
 msgstr ""
 
-#: src/invitations/invitation-accept.html
+#: src/invitations/InvitationAccept.tsx
 msgid "You will be redirected in a moment."
 msgstr ""
 
@@ -7977,7 +7977,7 @@ msgstr ""
 msgid "Your current email is:"
 msgstr ""
 
-#: src/invitations/invitation-accept.html
+#: src/invitations/InvitationAccept.tsx
 msgid "Your invitation is being processed."
 msgstr ""
 

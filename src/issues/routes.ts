@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { CustomerListContainer } from '@waldur/customer/CustomerListContainer';
 import { gettext } from '@waldur/i18n';
 import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
@@ -10,7 +11,7 @@ import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 import { checkPermission } from './utils';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'support',
     url: '/support/',

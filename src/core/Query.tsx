@@ -18,6 +18,9 @@ interface QueryProps<Variables, Data> {
   children: React.StatelessComponent<QueryChildProps<Data>>;
 }
 
+/**
+ * @deprecated Please use useAsync hook instead from react-use package.
+ */
 export class Query<Variables = object, Data = object> extends React.Component<
   QueryProps<Variables, Data>,
   QueryState<Data>

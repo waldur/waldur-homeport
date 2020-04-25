@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
 
@@ -6,7 +7,7 @@ function resolveCurrentUser(usersService) {
 }
 resolveCurrentUser.$inject = ['usersService'];
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'home',
     url: '',
@@ -60,7 +61,6 @@ export const states = [
     name: 'initialdata.view',
     url: '',
     template: '<auth-init></auth-init>',
-    noInitialData: true,
     data: {
       auth: true,
       bodyClass: 'old',

@@ -1,4 +1,6 @@
-export const states = [
+import { StateDeclaration } from '@waldur/core/types';
+
+export const states: StateDeclaration[] = [
   {
     name: 'home.login_completed',
     url: '/login_completed/:token/:method/',

@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { withStore } from '@waldur/store/connect';
 
@@ -6,7 +7,7 @@ import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 import { KeyCreateForm } from './keys/KeyCreateForm';
 import { tabs, requireIdParam } from './tabs';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'profile',
     url: '/profile/',
