@@ -10,7 +10,7 @@ interface CustomerPaymentProfileProps {
 
 export const CustomerPaymentProfile = (props: CustomerPaymentProfileProps) => {
   if (!props.paymentProfiles) {
-    return;
+    return null;
   }
   const activePaymentProfile = props.paymentProfiles.find(
     element => element.is_active,
