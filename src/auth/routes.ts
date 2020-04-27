@@ -2,6 +2,8 @@ import { StateDeclaration } from '@waldur/core/types';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
 
+import { AuthActivation } from './AuthActivation';
+
 function resolveCurrentUser(usersService) {
   return usersService.getCurrentUser();
 }
@@ -42,7 +44,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'home.activate',
     url: '/activate/:user_uuid/:token/',
-    template: '<auth-activation></auth-activation>',
+    component: withStore(AuthActivation),
     data: {
       anonymous: true,
       bodyClass: 'old',

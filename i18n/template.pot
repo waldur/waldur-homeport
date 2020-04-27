@@ -74,11 +74,11 @@ msgstr ""
 msgid "Accessible to all customers."
 msgstr ""
 
-#: src/auth/auth-activation.html
+#: src/auth/AuthActivation.tsx
 msgid "Account activation"
 msgstr ""
 
-#: src/auth/auth-activation.js
+#: src/auth/AuthActivation.tsx
 msgid "Account has been activated."
 msgstr ""
 
@@ -6810,7 +6810,7 @@ msgstr ""
 msgid "Unable to accept booking."
 msgstr ""
 
-#: src/auth/auth-activation.js
+#: src/auth/AuthActivation.tsx
 msgid "Unable to activate account."
 msgstr ""
 

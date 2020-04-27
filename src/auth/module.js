@@ -1,4 +1,3 @@
-import authActivation from './auth-activation';
 import authButtonText from './auth-button-text';
 import initAuthProvider from './auth-config';
 import { authInit } from './auth-init';
@@ -20,7 +19,6 @@ export default module => {
   module.component('authLogin', authLogin);
   module.component('poweredBy', poweredBy);
   module.component('authInit', authInit);
-  module.directive('authActivation', authActivation);
   module.config(authRoutes);
   module.config(initAuthProvider);
   interceptorModule(module);
