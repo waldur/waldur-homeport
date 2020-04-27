@@ -16,7 +16,8 @@ import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { createApp } from './api';
 import { FORM_ID } from './constants';
 import { TemplateHeader } from './TemplateHeader';
-import { loadData, setValue, getValue } from './utils';
+import { FormData } from './types';
+import { serializeApplication, parseVisibleQuestions, loadData } from './utils';
 
 export const TemplateDetail = () => {
   const {
@@ -32,15 +33,7 @@ export const TemplateDetail = () => {
     formValueSelector(FORM_ID)(state, 'project'),
   );
 
-  const namespaces = React.useMemo(
-    () =>
-      project
-        ? state.value.projects
-            .find(p => p.name === project)
-            .namespaces.map(({ name }) => name)
-        : [],
-    [project, state.value],
-  );
+  const namespaces = React.useMemo(() => project?.namespaces || [], [project]);
 
   const answers = useSelector(state =>
     formValueSelector(FORM_ID)(state, 'answers'),
@@ -48,62 +41,23 @@ export const TemplateDetail = () => {
 
   const questions = state?.value?.questions;
 
-  const visibleQuestions = React.useMemo(() => {
-    if (!questions) {
-      return [];
-    }
-    return questions.filter(question => {
-      if (!question.showIf) {
-        return true;
-      }
-      for (const variable in question.showIf) {
-        const value = variable
-          .split('.')
-          .reduce(
-            (result, item) => (result === undefined ? undefined : result[item]),
-            answers,
-          );
-        if (value === undefined && !question.showIf[variable]) {
-          return true;
-        }
-        if (value !== question.showIf[variable]) {
-          return false;
-        }
-      }
-      return true;
-    });
-  }, [answers, questions]);
+  const visibleQuestions = React.useMemo(
+    () => parseVisibleQuestions(questions, answers),
+    [questions, answers],
+  );
 
   const dispatch = useDispatch();
 
   const createApplication = React.useCallback(
-    async formData => {
+    async (formData: FormData) => {
       try {
-        await createApp({
-          name: formData.name,
-          description: formData.description,
-          version: formData.version,
-          template_uuid: state.value.template.uuid,
-          project_uuid: state.value.projects.find(p => p.name === project).uuid,
-          namespace_name: formData.useNewNamespace
-            ? formData.newNamespace
-            : undefined,
-          namespace_uuid: formData.useNewNamespace
-            ? undefined
-            : state.value.namespaces.find(p => p.name === formData.namespace)
-                .uuid,
-          answers: visibleQuestions.reduce(
-            (result, question) => ({
-              ...result,
-              ...setValue(
-                result,
-                question.variable,
-                getValue(formData.answers, question.variable),
-              ),
-            }),
-            {},
+        await createApp(
+          serializeApplication(
+            formData,
+            state.value.template,
+            visibleQuestions,
           ),
-        });
+        );
       } catch (error) {
         const errorMessage = `${translate(
           'Unable to create application.',
@@ -113,7 +67,7 @@ export const TemplateDetail = () => {
       }
       dispatch(showSuccess(translate('Application has been created.')));
     },
-    [dispatch, state.value, project, visibleQuestions],
+    [dispatch, state.value, visibleQuestions],
   );
 
   if (state.loading) {
@@ -157,7 +111,7 @@ export const TemplateDetail = () => {
             <TemplateQuestions
               questions={visibleQuestions}
               versions={state.value.template.versions}
-              projects={state.value.projectOptions}
+              projects={state.value.projects}
               namespaces={namespaces}
               initialValues={state.value.initialValues}
               createApplication={createApplication}

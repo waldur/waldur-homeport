@@ -5,7 +5,7 @@ import {
   getProjects,
 } from './api';
 import { refreshBreadcrumbs } from './breadcrumbs';
-import { Question, TemplateVersion } from './types';
+import { FormData, Template, Question } from './types';
 
 export const groupQuestions = (
   questions: Question[],
@@ -27,12 +27,12 @@ export const groupByN = (n: number, data: any[]) => {
   return result;
 };
 
-const parseQuestions = (version: TemplateVersion) => {
-  const questionsMap = version.questions.reduce((result, question) => ({
+export const parseQuestions = (questions: Question[]) => {
+  const questionsMap = questions.reduce((result, question) => ({
     ...result,
     [question.variable]: question,
   }));
-  const questions = version.questions.map(question => ({
+  return questions.map(question => ({
     ...question,
     showIf:
       question.showIf && typeof question.showIf === 'string'
@@ -45,7 +45,6 @@ const parseQuestions = (version: TemplateVersion) => {
           }, {})
         : undefined,
   }));
-  return questions;
 };
 
 export const loadData = async (templateUuid: string, clusterUuid: string) => {
@@ -57,24 +56,20 @@ export const loadData = async (templateUuid: string, clusterUuid: string) => {
     template.default_version,
   );
   const projects = await getProjects(clusterUuid);
-  const projectOptions = projects.map(({ name }) => name);
   const namespaces = projects[0].namespaces;
-  const namespaceOptions = namespaces.map(({ name }) => name);
   const initialValues = {
     version: template.default_version,
-    project: projectOptions[0],
-    namespace: namespaceOptions ? namespaceOptions[0] : undefined,
-    useNewNamespace: namespaceOptions.length === 0,
+    project: projects[0],
+    namespace: namespaces ? namespaces[0] : undefined,
+    useNewNamespace: namespaces.length === 0,
   };
-  const questions = parseQuestions(version);
+  const questions = parseQuestions(version.questions);
 
   return {
     template,
     version,
     projects,
-    projectOptions,
     namespaces,
-    namespaceOptions,
     initialValues,
     questions,
   };
@@ -103,3 +98,63 @@ export function setValue(obj, path, value) {
   o[a[0]] = value;
   return obj;
 }
+
+const serializeAnswer = (question: Question, answers: object) => {
+  const value = getValue(answers, question.variable);
+  if (question.type === 'secret') {
+    return value.id;
+  } else {
+    return value;
+  }
+};
+
+export const serializeApplication = (
+  formData: FormData,
+  template: Template,
+  visibleQuestions: Question[],
+) => ({
+  name: formData.name,
+  description: formData.description,
+  version: formData.version,
+  template_uuid: template.uuid,
+  project_uuid: formData.project.uuid,
+  namespace_name: formData.useNewNamespace ? formData.newNamespace : undefined,
+  namespace_uuid: formData.useNewNamespace
+    ? undefined
+    : formData.namespace.uuid,
+  answers: visibleQuestions.reduce(
+    (result, question) => ({
+      ...result,
+      ...setValue(
+        result,
+        question.variable,
+        serializeAnswer(question, formData.answers),
+      ),
+    }),
+    {},
+  ),
+});
+
+export const parseVisibleQuestions = (
+  questions: Question[],
+  answers: object,
+) => {
+  if (!questions) {
+    return [];
+  }
+  return questions.filter(question => {
+    if (typeof question.showIf !== 'object') {
+      return true;
+    }
+    for (const variable in question.showIf) {
+      const value = getValue(answers, variable);
+      if (value === undefined && !question.showIf[variable]) {
+        return true;
+      }
+      if (value !== question.showIf[variable]) {
+        return false;
+      }
+    }
+    return true;
+  });
+};

@@ -45,3 +45,14 @@ export interface Cluster {
   uuid: string;
   marketplace_category_uuid: string;
 }
+
+export interface FormData {
+  name: string;
+  description: string;
+  version: string;
+  useNewNamespace: boolean;
+  newNamespace?: string;
+  namespace: Namespace;
+  project: RancherProject;
+  answers: object;
+}
