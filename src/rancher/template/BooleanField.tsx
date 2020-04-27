@@ -9,7 +9,12 @@ import { DecoratedLabel } from './DecoratedLabel';
 import { FieldProps } from './types';
 
 const renderControl = props => (
-  <Checkbox {...props.input}>
+  <Checkbox
+    checked={props.input.value}
+    onChange={(e: React.ChangeEvent<any>) =>
+      props.input.onChange(e.target.checked)
+    }
+  >
     <DecoratedLabel label={props.label} required={props.required} />
   </Checkbox>
 );

@@ -8,7 +8,7 @@ import { Question } from './types';
 
 const parseDefaultValue = (question: Question) => {
   if (question.type === 'boolean') {
-    return Boolean(question.default);
+    return question.default === 'true';
   } else {
     return question.default;
   }
@@ -20,14 +20,9 @@ export const QuestionItem: React.FC<{
   const dispatch = useDispatch();
 
   const setInitialValue = React.useCallback(() => {
-    if (question.default) {
-      dispatch(
-        change(
-          FORM_ID,
-          `answers.${question.variable}`,
-          parseDefaultValue(question),
-        ),
-      );
+    const value = parseDefaultValue(question);
+    if (value) {
+      dispatch(change(FORM_ID, `answers.${question.variable}`, value));
     }
   }, [question, dispatch]);
 

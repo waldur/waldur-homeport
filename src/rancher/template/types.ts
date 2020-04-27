@@ -12,5 +12,36 @@ export interface Question extends FieldProps {
   type: QuestionType;
   default?: string | boolean;
   group?: string;
-  showIf?: string;
+  showIf?: string | Record<string, string | boolean>;
+}
+
+export interface TemplateVersion {
+  readme: string;
+  questions: Question[];
+}
+
+export interface Namespace {
+  name: string;
+  uuid: string;
+}
+
+export interface RancherProject {
+  name: string;
+  uuid: string;
+  namespaces: Namespace[];
+}
+
+export interface Template {
+  name: string;
+  uuid: string;
+  default_version: string;
+  catalog_name: string;
+  catalog_uuid: string;
+  versions: string[];
+}
+
+export interface Cluster {
+  name: string;
+  uuid: string;
+  marketplace_category_uuid: string;
 }

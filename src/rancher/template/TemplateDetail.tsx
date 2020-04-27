@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 import { formValueSelector } from 'redux-form';
 
-import { post } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { FormattedMarkdown } from '@waldur/core/FormattedMarkdown';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -14,9 +13,10 @@ import { translate } from '@waldur/i18n';
 import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
+import { createApp } from './api';
 import { FORM_ID } from './constants';
 import { TemplateHeader } from './TemplateHeader';
-import { loadData } from './utils';
+import { loadData, setValue, getValue } from './utils';
 
 export const TemplateDetail = () => {
   const {
@@ -42,12 +42,44 @@ export const TemplateDetail = () => {
     [project, state.value],
   );
 
+  const answers = useSelector(state =>
+    formValueSelector(FORM_ID)(state, 'answers'),
+  );
+
+  const questions = state?.value?.questions;
+
+  const visibleQuestions = React.useMemo(() => {
+    if (!questions) {
+      return [];
+    }
+    return questions.filter(question => {
+      if (!question.showIf) {
+        return true;
+      }
+      for (const variable in question.showIf) {
+        const value = variable
+          .split('.')
+          .reduce(
+            (result, item) => (result === undefined ? undefined : result[item]),
+            answers,
+          );
+        if (value === undefined && !question.showIf[variable]) {
+          return true;
+        }
+        if (value !== question.showIf[variable]) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }, [answers, questions]);
+
   const dispatch = useDispatch();
 
   const createApplication = React.useCallback(
     async formData => {
       try {
-        await post('/rancher-apps/', {
+        await createApp({
           name: formData.name,
           description: formData.description,
           version: formData.version,
@@ -60,18 +92,28 @@ export const TemplateDetail = () => {
             ? undefined
             : state.value.namespaces.find(p => p.name === formData.namespace)
                 .uuid,
-          answers: formData.answers,
+          answers: visibleQuestions.reduce(
+            (result, question) => ({
+              ...result,
+              ...setValue(
+                result,
+                question.variable,
+                getValue(formData.answers, question.variable),
+              ),
+            }),
+            {},
+          ),
         });
       } catch (error) {
         const errorMessage = `${translate(
           'Unable to create application.',
         )} ${format(error)}`;
         dispatch(showError(errorMessage));
-        return;
+        throw error;
       }
       dispatch(showSuccess(translate('Application has been created.')));
     },
-    [dispatch, state.value, project],
+    [dispatch, state.value, project, visibleQuestions],
   );
 
   if (state.loading) {
@@ -113,7 +155,7 @@ export const TemplateDetail = () => {
           </Panel.Heading>
           <Panel.Body collapsible={true}>
             <TemplateQuestions
-              questions={state.value.version.questions}
+              questions={visibleQuestions}
               versions={state.value.template.versions}
               projects={state.value.projectOptions}
               namespaces={namespaces}
