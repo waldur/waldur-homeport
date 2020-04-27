@@ -1,5 +1,5 @@
-import AuthValimoService from './auth-valimo-service';
 import authValimoDialog from './auth-valimo-dialog';
+import AuthValimoService from './auth-valimo-service';
 import authValimoTrigger from './auth-valimo-trigger';
 
 export default module => {

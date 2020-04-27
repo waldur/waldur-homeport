@@ -1,5 +1,5 @@
-import IssueAttachmentsContainer from './IssueAttachmentsContainer';
 import IssueAttachmentModal from './IssueAttachmentModal';
+import IssueAttachmentsContainer from './IssueAttachmentsContainer';
 
 export default module => {
   module.component('issueAttachmentsContainer', IssueAttachmentsContainer);

@@ -1,7 +1,7 @@
-import Saml2Service from './saml2-service';
-import AuthSaml2Dialog from './AuthSaml2Dialog';
-import authSaml2Trigger from './auth-saml2-trigger';
 import authSaml2 from './auth-saml2';
+import authSaml2Trigger from './auth-saml2-trigger';
+import AuthSaml2Dialog from './AuthSaml2Dialog';
+import Saml2Service from './saml2-service';
 
 export default module => {
   module.service('Saml2Service', Saml2Service);

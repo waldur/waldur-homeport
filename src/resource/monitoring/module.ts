@@ -1,7 +1,7 @@
-import monitoringCreateDialog from './ZabbixHostCreateDialog';
-import monitoringDetailsDialog from './ZabbixHostDetailsDialog';
 import zabbixHostsService from './zabbix-hosts-service';
 import zabbixItservicesService from './zabbix-itservices-service';
+import monitoringCreateDialog from './ZabbixHostCreateDialog';
+import monitoringDetailsDialog from './ZabbixHostDetailsDialog';
 
 export default module => {
   module.component('monitoringDetailsDialog', monitoringDetailsDialog);

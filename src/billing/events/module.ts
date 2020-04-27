@@ -1,6 +1,6 @@
 import invoiceEventsDialog from './invoice-events-dialog';
-import invoiceEventsToggle from './invoice-events-toggle';
 import InvoiceEventsService from './invoice-events-service';
+import invoiceEventsToggle from './invoice-events-toggle';
 
 export default module => {
   module.service('InvoiceEventsService', InvoiceEventsService);

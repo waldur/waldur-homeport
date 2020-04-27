@@ -1,10 +1,10 @@
-import helpRoutes from './routes';
-import helpList from './help-list';
-import helpDetails from './help-details';
-import helpLink from './HelpLink';
 import helpContentOneColumn from './help-content-one-column';
 import helpContentTwoColumn from './help-content-two-column';
+import helpDetails from './help-details';
+import helpList from './help-list';
+import helpLink from './HelpLink';
 import imageBox from './image-box';
+import helpRoutes from './routes';
 
 export default module => {
   module.config(helpRoutes);

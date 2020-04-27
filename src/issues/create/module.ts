@@ -1,8 +1,8 @@
 import issueCreateDialog from './issue-create-dialog';
+import issuePrioritiesService from './issue-priorities-service';
 import issueQuickCreate from './issue-quick-create';
 import issueRegistration from './issue-registration';
 import issueUsersService from './issue-users';
-import issuePrioritiesService from './issue-priorities-service';
 
 export default module => {
   module.component('issueCreateDialog', issueCreateDialog);

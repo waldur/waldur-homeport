@@ -1,6 +1,6 @@
 import { ISSUE_IDS } from './constants';
-import IssueTypesService from './issue-types-service';
 import issueTypeSelect from './issue-type-select';
+import IssueTypesService from './issue-types-service';
 import issueTypeIcon from './IssueTypeIcon';
 
 export default module => {

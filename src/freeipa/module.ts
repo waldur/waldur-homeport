@@ -1,9 +1,9 @@
-import freeipaService from './freeipaService';
-import FreeIPAQuotaService from './freeipa-quota-service';
-import freeipaAccountEdit from './freeipa-account-edit';
-import freeipaAccountCreate from './freeipa-account-create';
 import freeipaAccount from './freeipa-account';
+import freeipaAccountCreate from './freeipa-account-create';
+import freeipaAccountEdit from './freeipa-account-edit';
 import freeipaQuota from './freeipa-quota';
+import FreeIPAQuotaService from './freeipa-quota-service';
+import freeipaService from './freeipaService';
 import requireTrue from './require-true';
 
 export default module => {

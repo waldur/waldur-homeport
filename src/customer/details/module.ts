@@ -1,9 +1,9 @@
-import customerDetails from './CustomerDetails';
-import customerEditDetails from './CustomerEditDetailsContainer';
 import customerManage from './customer-manage';
 import customerPolicies from './customer-policies';
 import customerReportError from './customer-report-error';
 import customerThreshold from './customer-threshold';
+import customerDetails from './CustomerDetails';
+import customerEditDetails from './CustomerEditDetailsContainer';
 
 export default module => {
   module.component('customerDetails', customerDetails);

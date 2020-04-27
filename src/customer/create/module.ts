@@ -1,8 +1,8 @@
 import customerCountryField from './customer-country-field';
-import customerDomainField from './customer-domain-field';
 import customerCreateDialog from './customer-create-dialog';
-import customerCreatePrompt from './CustomerCreatePromptContainer';
 import CustomerCreateService from './customer-create-service';
+import customerDomainField from './customer-domain-field';
+import customerCreatePrompt from './CustomerCreatePromptContainer';
 
 export default module => {
   module.component('customerCountryField', customerCountryField);

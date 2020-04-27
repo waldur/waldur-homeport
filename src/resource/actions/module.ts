@@ -1,10 +1,10 @@
-import HttpUtils from './http-utils';
-import ActionResourceLoader from './action-resource-loader';
-import actionUtilsService from './action-utils-service';
 import actionButtonResource from './action-button-resource';
 import ActionConfiguration from './action-configuration';
+import ActionResourceLoader from './action-resource-loader';
+import actionUtilsService from './action-utils-service';
 import { defaultFieldOptions, defaultEditAction } from './constants';
 import dialogModule from './dialog/module';
+import HttpUtils from './http-utils';
 
 export default module => {
   module.service('HttpUtils', HttpUtils);

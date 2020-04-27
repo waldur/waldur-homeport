@@ -1,9 +1,9 @@
-import eventsService from './events-service';
-import eventDetailsDialog from './EventDetailsDialog';
-import eventTypesDialog from './EventTypesDialog';
 import EventDialogsService from './event-dialogs-service';
-import attachServices from './services';
 import eventGroups from './event-groups';
+import eventDetailsDialog from './EventDetailsDialog';
+import eventsService from './events-service';
+import eventTypesDialog from './EventTypesDialog';
+import attachServices from './services';
 import './help';
 
 export default module => {
