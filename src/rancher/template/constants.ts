@@ -1,5 +1,6 @@
 import { BooleanField } from './BooleanField';
 import { EnumField } from './EnumField';
+import { SecretField } from './SecretField';
 import { StringField } from './StringField';
 
 export const FIELD_MAP = {
@@ -7,7 +8,7 @@ export const FIELD_MAP = {
   string: StringField,
   password: StringField,
   enum: EnumField,
-  secret: EnumField,
+  secret: SecretField,
 };
 
 export const FORM_ID = 'RancherTemplateQuestions';

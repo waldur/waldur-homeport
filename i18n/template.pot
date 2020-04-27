@@ -7023,6 +7023,7 @@ msgstr ""
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
+#: src/rancher/template/SecretField.tsx
 msgid "Unable to load data."
 msgstr ""
 

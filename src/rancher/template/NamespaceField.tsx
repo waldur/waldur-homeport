@@ -37,7 +37,12 @@ export const NamespaceField = ({ options }) => {
           placeholder={translate('e.g. MyApp')}
         />
       ) : (
-        <SelectControl options={options} input={fieldProps.input} />
+        <SelectControl
+          options={options}
+          input={fieldProps.input}
+          getLabel={({ name }) => name}
+          getValue={({ url }) => url}
+        />
       ),
     [useNew, options],
   );

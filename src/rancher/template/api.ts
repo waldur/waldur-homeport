@@ -19,3 +19,8 @@ export const getProjects = (clusterUuid: string) =>
   });
 
 export const createApp = payload => post('/rancher-apps/', payload);
+
+export const getProjectSecrets = (projectUuid: string) =>
+  get<any[]>(`/rancher-projects/${projectUuid}/secrets/`).then(
+    response => response.data,
+  );

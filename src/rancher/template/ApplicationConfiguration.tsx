@@ -25,6 +25,8 @@ export const ApplicationConfiguration = props => (
         label={translate('Project')}
         variable="project"
         options={props.projects}
+        getLabel={({ name }) => name}
+        getValue={({ url }) => url}
       />
       <NamespaceField options={props.namespaces} />
     </Row>

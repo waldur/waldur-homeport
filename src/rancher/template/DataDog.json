@@ -1,0 +1,254 @@
+[
+  {
+    "variable": "defaultImage",
+    "label": "Use Default Datadog Image",
+    "description": "Use default Datadog image or specify a custom one",
+    "type": "boolean",
+    "default": "true",
+    "group": "Container Images"
+  },
+  {
+    "variable": "clusterAgent.enabled",
+    "label": "Enable Cluster Agent Metrics(Kubernetes 1.10+ only)",
+    "description": "Use the cluster-agent for cluster metrics (Kubernetes 1.10+ only), https://docs.datadoghq.com/agent/kubernetes/cluster/",
+    "type": "boolean",
+    "default": "false",
+    "group": "Cluster Agent"
+  },
+  {
+    "variable": "clusterAgent.metricsProvider.enabled",
+    "label": "Enable the metricsProvider",
+    "description": "Enable the metricsProvider to be able to scale based on metrics in Datadog",
+    "type": "boolean",
+    "default": "true",
+    "group": "Cluster Agent",
+    "showIf": "clusterAgent.enabled=true"
+  },
+  {
+    "variable": "datadog.appKey",
+    "label": "Datadog Metrics App Key",
+    "description": "Datadog App key required to use metricsProvider",
+    "type": "string",
+    "required": true,
+    "group": "Cluster Agent",
+    "showIf": "clusterAgent.enabled=true&&clusterAgent.metricsProvider.enabled=true&&datadog.appKeyExistingSecret="
+  },
+  {
+    "variable": "datadog.appKeyExistingSecret",
+    "label": "Select Existing Datadog App Key(Secret)",
+    "description": "If set, use the secret with a provided name instead of creating a new appKey secret.",
+    "type": "secret",
+    "group": "Cluster Agent",
+    "showIf": "clusterAgent.enabled=true&&clusterAgent.metricsProvider.enabled=true&&datadog.appKey="
+  },
+  {
+    "variable": "datadog.apiKey",
+    "label": "Datadog API Key",
+    "description": "Enter your Datadog API Key.",
+    "type": "string",
+    "required": true,
+    "group": "Agent Configuration",
+    "showIf": "datadog.apiKeyExistingSecret="
+  },
+  {
+    "variable": "datadog.apiKeyExistingSecret",
+    "label": "Select Existing Datadog API Key(Secret)",
+    "description": "If set, use the secret with a provided name instead of creating a new apiKey secret.",
+    "type": "secret",
+    "group": "Agent Configuration",
+    "showIf": "datadog.apiKey="
+  },
+  {
+    "variable": "datadog.site",
+    "label": "Datadog Site URL",
+    "description": "The site of the Datadog intake to send Agent data to",
+    "type": "enum",
+    "required": true,
+    "default": "datadoghq.com",
+    "group": "Agent Configuration",
+    "options": [
+      "datadoghq.com",
+      "datadoghq.eu",
+      "custom"
+    ]
+  },
+  {
+    "variable": "datadog.dd_url",
+    "label": "Datadog Custom Site URL",
+    "description": "The host of the Datadog intake server to send Agent data to, only set this option if you need the Agent to send data to a custom URL",
+    "type": "string",
+    "required": true,
+    "group": "Agent Configuration",
+    "showIf": "datadog.site=custom"
+  },
+  {
+    "variable": "datadog.logLevel",
+    "label": "Log Level",
+    "description": "Set Agent logging verbosity",
+    "type": "enum",
+    "default": "warn",
+    "group": "Agent Configuration",
+    "options": [
+      "trace",
+      "debug",
+      "info",
+      "warn",
+      "error",
+      "critical",
+      "off"
+    ]
+  },
+  {
+    "variable": "datadog.tags",
+    "label": "Host Tags",
+    "description": "Host tags, separated by spaces. For example: 'simple-tag-0 tag-key-1:tag-value-1'",
+    "type": "string",
+    "group": "Agent Configuration"
+  },
+  {
+    "variable": "datadog.useCriSocketVolume",
+    "label": "Enable Mounting The Container Runtime Socket In Agent Containers",
+    "description": "Enable container runtime socket volume mounting",
+    "type": "boolean",
+    "default": "true",
+    "group": "Agent Configuration"
+  },
+  {
+    "variable": "datadog.criSocketPath",
+    "label": "Path To The Container Runtime Socket(Optional)",
+    "description": "Path to the container runtime socket (if different from Docker), default to `/var/run/docker.sock`",
+    "type": "string",
+    "group": "Agent Configuration",
+    "showIf": "datadog.useCriSocketVolume=true"
+  },
+  {
+    "variable": "datadog.nonLocalTraffic",
+    "label": "DogStatsD Non-Local Traffic",
+    "description": "Whether DogStatsD should listen to non local UDP traffic, required to send custom metrics",
+    "type": "boolean",
+    "default": "false",
+    "group": "Agent Configuration"
+  },
+  {
+    "variable": "datadog.collectEvents",
+    "label": "Collect Events",
+    "description": "Enable event collection from the kubernetes API",
+    "type": "boolean",
+    "default": "false",
+    "group": "Agent Configuration"
+  },
+  {
+    "variable": "datadog.podLabelsAsTags",
+    "label": "Extract Pod Labels as Tags",
+    "description": "Specify a JSON map, where the map key is the source label name and the map value the datadog tag name. E.g: '{\"app\":\"kube_app\",\"release\":\"helm_release\"}'",
+    "type": "string",
+    "group": "Datadog Tagging"
+  },
+  {
+    "variable": "datadog.podAnnotationsAsTags",
+    "label": "Extract Pod Annotations as Tags",
+    "description": "Specify a JSON map, where the map key is the source label name and the map value the datadog tag name. E.g: '{\"app\":\"kube_app\",\"release\":\"helm_release\"}'",
+    "type": "string",
+    "group": "Datadog Tagging"
+  },
+  {
+    "variable": "datadog.nodeLabelsAsTags",
+    "label": "Extract Node Labels As Tags",
+    "description": "Specify a JSON map, where the map key is the source label name and the map value the datadog tag name. E.g: '{\"app\":\"kube_app\",\"release\":\"helm_release\"}'",
+    "type": "string",
+    "group": "Datadog Tagging"
+  },
+  {
+    "variable": "daemonset.rkeETCDControlPlane",
+    "label": "Run datadog pod on RKE Control Plane Nodes",
+    "description": "Configure Datadog Agent pods with the required tolerations to be deployed on the RKE etcd and control plane.",
+    "type": "boolean",
+    "default": "true",
+    "group": "Daemonset Configuration"
+  },
+  {
+    "variable": "daemonset.useHostNetwork",
+    "label": "Use HostNetwork",
+    "description": "Bind ports on the hostNetwork. Useful for CNI networking where hostPort might not be supported. The ports will need to be available on all hosts",
+    "type": "boolean",
+    "default": "false",
+    "group": "Daemonset Configuration"
+  },
+  {
+    "variable": "daemonset.useHostPort",
+    "label": "Use HostPort",
+    "description": "Sets the hostPort to the same value of the container port",
+    "type": "boolean",
+    "default": "false",
+    "group": "Daemonset Configuration"
+  },
+  {
+    "variable": "daemonset.useHostPID",
+    "label": "Use HostPID",
+    "description": "Run the agent in the host's PID namespace",
+    "type": "boolean",
+    "default": "false",
+    "group": "Daemonset Configuration"
+  },
+  {
+    "variable": "datadog.httpProxy",
+    "label": "Datadog Proxy for HTTP Requests",
+    "description": "An http URL to use as a proxy for http requests",
+    "type": "string",
+    "group": "Proxy Configuration"
+  },
+  {
+    "variable": "datadog.httpsProxy",
+    "label": "Datadog Proxy for HTTPS Requests",
+    "description": "An http URL to use as a proxy for https requests",
+    "type": "string",
+    "group": "Proxy Configuration"
+  },
+  {
+    "variable": "datadog.noProxy",
+    "label": "Datadog No-Proxy List(separated by a space)",
+    "description": "a space-separated list of URLs for which no proxy should be used",
+    "type": "string",
+    "group": "Proxy Configuration"
+  },
+  {
+    "variable": "datadog.apmEnabled",
+    "label": "Enable APM",
+    "description": "Run the trace-agent along with the infrastructure agent, allowing the container to accept traces on 8126/tcp",
+    "type": "boolean",
+    "default": "false",
+    "group": "Optional Collection Agents"
+  },
+  {
+    "variable": "datadog.apmNonLocalTraffic",
+    "label": "Allow APM Non-local Traffic",
+    "description": "Allow non-local traffic when tracing from other containers",
+    "type": "boolean",
+    "default": "false",
+    "group": "Optional Collection Agents"
+  },
+  {
+    "variable": "datadog.processAgentEnabled",
+    "label": "Enable Live Process Agent",
+    "description": "Enable live process collection in the process-agent",
+    "type": "boolean",
+    "default": "false",
+    "group": "Optional Collection Agents"
+  },
+  {
+    "variable": "datadog.logsEnabled",
+    "label": "Collect Logs",
+    "description": "Run the log-agent along with the infrastructure agent",
+    "type": "boolean",
+    "default": "false",
+    "group": "Optional Collection Agents"
+  },
+  {
+    "variable": "kubeStateMetrics.enabled",
+    "label": "Deployment KubeState Metrics Deployment",
+    "description": "Create a kube-state-metrics deployment",
+    "type": "boolean",
+    "default": "true",
+    "group": "Kube-State-Metrics"
+  }
+]
