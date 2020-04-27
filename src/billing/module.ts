@@ -2,10 +2,10 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import { AgreementInfo } from './AgreementInfo';
 import billingDetails from './billing-details';
-import billingRecordDetails from './billing-record-details';
 import billingRecordHeader from './billing-record-header';
 import billingTabs from './billing-tabs';
 import BillingUtils from './billing-utils';
+import { BillingRecordDetails } from './BillingRecordDetails';
 import { BillingRecordsList } from './BillingRecordsList';
 import billingCustomerDetails from './CustomerDetails';
 import eventsModule from './events/module';
@@ -30,7 +30,10 @@ export default module => {
   module.component('invoiceDetails', invoiceDetails);
   module.component('invoicesList', connectAngularComponent(InvoicesList));
   module.component('billingCustomerDetails', billingCustomerDetails);
-  module.component('billingRecordDetails', billingRecordDetails);
+  module.component(
+    'billingRecordDetails',
+    connectAngularComponent(BillingRecordDetails, ['invoice']),
+  );
   module.component('billingRecordHeader', billingRecordHeader);
   module.component(
     'billingRecordsList',

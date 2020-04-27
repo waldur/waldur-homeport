@@ -8,7 +8,7 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 msgid "(VAT is not included)"
 msgstr ""
 
@@ -381,7 +381,7 @@ msgstr ""
 msgid "Agree with ToS"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/list/CustomerList.tsx
 msgid "Agreement number"
@@ -1934,7 +1934,7 @@ msgstr ""
 msgid "End date of the agreement is"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 #: src/billing/invoice-details.html
 msgid "End time"
 msgstr ""
@@ -2284,7 +2284,7 @@ msgstr ""
 msgid "Following fields contain errors"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 msgid "For"
 msgstr ""
 
@@ -2874,7 +2874,7 @@ msgstr ""
 msgid "It is used to automatically assign floating IP to your virtual machine."
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 #: src/billing/invoice-details.html
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/orders/Order.tsx
@@ -4799,7 +4799,7 @@ msgstr ""
 msgid "Put this into ~/.kube/config:"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 #: src/billing/invoice-details.html
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts
@@ -4878,7 +4878,7 @@ msgstr ""
 msgid "Recent additions"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 msgid "Record no."
 msgstr ""
 
@@ -4890,8 +4890,8 @@ msgstr ""
 msgid "Record number"
 msgstr ""
 
+#: src/billing/BillingRecordDetails.tsx
 #: src/billing/BillingRecordsList.tsx
-#: src/billing/billing-record-details.html
 msgid "Record period"
 msgstr ""
 
@@ -5823,7 +5823,7 @@ msgstr ""
 msgid "Service name"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 #: src/billing/invoice-details.html
 #: src/marketplace/details/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
@@ -6080,7 +6080,7 @@ msgstr ""
 msgid "Start day of accounting"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 #: src/billing/invoice-details.html
 msgid "Start time"
 msgstr ""
@@ -6330,7 +6330,7 @@ msgstr ""
 msgid "TLD \"{tld}\" must not be all numeric"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 #: src/billing/invoice-details.html
 msgid "TOTAL"
 msgstr ""
@@ -6744,7 +6744,7 @@ msgstr ""
 msgid "Total number of nodes"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 #: src/billing/invoice-details.html
 msgid "Total price"
 msgstr ""
@@ -6758,7 +6758,7 @@ msgstr ""
 msgid "Total: {total}"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
@@ -7288,7 +7288,7 @@ msgstr ""
 msgid "Unit"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/billing/BillingRecordDetails.tsx
 #: src/billing/invoice-details.html
 #: src/offering/actions/CompleteAction.ts
 msgid "Unit price"

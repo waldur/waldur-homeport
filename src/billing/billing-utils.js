@@ -26,14 +26,16 @@ export default class BillingUtils {
   }
 
   groupInvoiceItems(items) {
-    let projects = {
+    const projects = {
       default: {
         items: [],
         name: '',
       },
     };
     this.groupInvoiceSubItems(items, projects);
-    return Object.keys(projects).map(key => projects[key]);
+    return Object.keys(projects)
+      .map(key => projects[key])
+      .sort((a, b) => a.name.localeCompare(b.name));
   }
 
   groupInvoiceSubItems(items, projects) {

@@ -1,4 +1,6 @@
-export function getItemName(item) {
+import { InvoiceItem } from './types';
+
+export function getItemName(item: InvoiceItem) {
   if (item.details) {
     // eslint-disable-next-line no-unused-vars
     const {

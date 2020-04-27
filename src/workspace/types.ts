@@ -51,6 +51,7 @@ export interface Customer {
   is_service_provider?: boolean;
   abbreviation?: string;
   payment_profiles?: PaymentProfile[];
+  agreement_number?: string;
 }
 
 interface Permission {
