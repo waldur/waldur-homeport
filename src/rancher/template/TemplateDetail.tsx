@@ -39,7 +39,7 @@ export const TemplateDetail = () => {
     formValueSelector(FORM_ID)(state, 'answers'),
   );
 
-  const questions = state?.value?.questions;
+  const questions = state.value?.questions;
 
   const visibleQuestions = React.useMemo(
     () => parseVisibleQuestions(questions, answers),
