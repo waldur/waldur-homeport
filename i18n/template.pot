@@ -5070,6 +5070,10 @@ msgstr ""
 msgid "Report incorrect data"
 msgstr ""
 
+#: src/offering/OfferingReportComponent.tsx
+msgid "Report is invalid."
+msgstr ""
+
 #: src/marketplace/resources/usage/ResourceCreateUsageButton.tsx
 msgid "Report usage"
 msgstr ""
