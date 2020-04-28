@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import './IssueAttachmentModal.scss';
 import * as utils from './utils';
@@ -63,5 +62,3 @@ export const IssueAttachmentModal = connect(
   null,
   mapDispatchToProps,
 )(PureIssueAttachmentModal);
-
-export default connectAngularComponent(IssueAttachmentModal, ['resolve']);

@@ -1,9 +1,15 @@
-import UserEmailChangeCallback from './UserEmailChangeCallback';
-import UserEmailChangeDialog from './UserEmailChangeDialog';
-import UserRemovalMessageDialog from './UserRemovalMessageDialog';
+import { connectAngularComponent } from '@waldur/store/connect';
+
+import { UserEmailChangeDialog } from './UserEmailChangeDialog';
+import { UserRemovalMessageDialog } from './UserRemovalMessageDialog';
 
 export default module => {
-  module.component('userRemovalMessageDialog', UserRemovalMessageDialog);
-  module.component('userEmailChangeDialog', UserEmailChangeDialog);
-  module.component('userEmailChangeCallback', UserEmailChangeCallback);
+  module.component(
+    'userRemovalMessageDialog',
+    connectAngularComponent(UserRemovalMessageDialog, ['resolve']),
+  );
+  module.component(
+    'userEmailChangeDialog',
+    connectAngularComponent(UserEmailChangeDialog, ['resolve']),
+  );
 };

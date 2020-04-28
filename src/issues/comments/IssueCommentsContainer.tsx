@@ -8,7 +8,6 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { issueAttachmentsPut } from '@waldur/issues/attachments/actions';
 import { IssueReload } from '@waldur/issues/IssueReload';
 import { LoadingOverlay } from '@waldur/issues/LoadingOverlay';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
 import * as constants from './constants';
@@ -132,5 +131,3 @@ const enhance = compose(
 );
 
 export const IssueCommentsContainer = enhance(PureIssueCommentsContainer);
-
-export default connectAngularComponent(IssueCommentsContainer, ['issue']);

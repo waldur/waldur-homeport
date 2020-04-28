@@ -66,6 +66,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     '@typescript-eslint/no-this-alias': 'warn',
     'no-console': 'error',
+    'import/no-named-as-default': 'error',
   },
   globals: {
     gettext: true,

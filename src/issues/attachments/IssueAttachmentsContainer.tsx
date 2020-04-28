@@ -6,7 +6,6 @@ import { compose } from 'redux';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { IssueReload } from '@waldur/issues/IssueReload';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
 import './IssueAttachmentsContainer.scss';
@@ -120,5 +119,3 @@ const enhance = compose(
 );
 
 export const IssueAttachmentsContainer = enhance(PureIssueAttachmentsContainer);
-
-export default connectAngularComponent(IssueAttachmentsContainer, ['issue']);

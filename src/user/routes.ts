@@ -5,6 +5,7 @@ import { withStore } from '@waldur/store/connect';
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 import { KeyCreateForm } from './keys/KeyCreateForm';
+import { UserEmailChangeCallback } from './support/UserEmailChangeCallback';
 import { tabs, requireIdParam } from './tabs';
 
 export const states: StateDeclaration[] = [
@@ -49,7 +50,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'user-email-change',
     url: '/user_email_change/:token/',
-    template: '<user-email-change-callback></user-email-change-callback>',
+    component: withStore(UserEmailChangeCallback),
     data: {
       bodyClass: 'old',
     },
