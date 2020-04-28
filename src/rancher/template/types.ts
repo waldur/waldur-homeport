@@ -8,11 +8,16 @@ export interface FieldProps {
   required?: boolean;
 }
 
-export interface Question extends FieldProps {
+interface BaseQuestion extends FieldProps {
   type: QuestionType;
   default?: string | boolean;
   group?: string;
   showIf?: string | Record<string, string | boolean>;
+}
+
+export interface Question extends BaseQuestion {
+  subquestions?: BaseQuestion[];
+  showSubquestionIf?: boolean | string;
 }
 
 export interface TemplateVersion {

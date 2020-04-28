@@ -1,0 +1,149 @@
+[
+  {
+    "variable": "defaultImage",
+    "label": "Use Default Images",
+    "description": "Use default Docker images",
+    "type": "boolean",
+    "default": "true",
+    "group": "Container Images",
+    "subquestions": [
+      {
+        "variable": "image",
+        "label": "Image Name",
+        "description": "MySQL image name",
+        "type": "string",
+        "default": "ranchercharts/mysql"
+      },
+      {
+        "variable": "imageTag",
+        "label": "Image Tag",
+        "description": "MySQL image tag",
+        "type": "string",
+        "default": "5.7.14"
+      },
+      {
+        "variable": "busybox.image",
+        "label": "Image Image Name",
+        "description": "Busybox image name",
+        "type": "string",
+        "default": "ranchercharts/busybox"
+      },
+      {
+        "variable": "busybox.tag",
+        "label": "Busybox Image Tag",
+        "description": "Busybox image tag",
+        "type": "string",
+        "default": "1.29.3"
+      }
+    ],
+    "showSubquestionIf": "false"
+  },
+  {
+    "variable": "mysqlDatabase",
+    "label": "MySQL Database",
+    "description": "Name of database to create",
+    "type": "string",
+    "required": true,
+    "default": "admin",
+    "group": "MySQL Settings"
+  },
+  {
+    "variable": "mysqlUser",
+    "label": "MySQL Username",
+    "description": "Username of user to create",
+    "type": "string",
+    "required": true,
+    "default": "admin",
+    "group": "MySQL Settings"
+  },
+  {
+    "variable": "mysqlPassword",
+    "label": "MySQL Password",
+    "description": "MySQL Password for the new user, defaults to a random 10-character alphanumeric string if not set",
+    "type": "password",
+    "group": "MySQL Settings"
+  },
+  {
+    "variable": "persistence.enabled",
+    "label": "Persistent Volume Enabled",
+    "description": "Enable persistence using PVC",
+    "type": "boolean",
+    "required": true,
+    "default": "false",
+    "group": "Persistent Volume",
+    "subquestions": [
+      {
+        "variable": "persistence.size",
+        "label": "Volume Size",
+        "description": "Volume Size",
+        "type": "string",
+        "required": true,
+        "default": "8Gi"
+      },
+      {
+        "variable": "persistence.storageClass",
+        "label": "Default storageClass",
+        "description": "If undefined or null, uses the default StorageClass. Defaults to null.",
+        "type": "storageclass"
+      },
+      {
+        "variable": "persistence.existingClaim",
+        "label": "Existing Persistent Volume Claim for mysql",
+        "description": "If not empty, uses the specified existing PVC instead of creating new one",
+        "type": "pvc"
+      }
+    ],
+    "showSubquestionIf": "true"
+  },
+  {
+    "variable": "service.port",
+    "label": "MySQL NodePort number",
+    "description": "Service port for access to MySQL",
+    "type": "string",
+    "required": true,
+    "default": "3306",
+    "group": "MySQL Settings"
+  },
+  {
+    "variable": "service.type",
+    "label": "MySQL Service Type",
+    "description": "MySQL K8s Service type",
+    "type": "enum",
+    "required": true,
+    "default": "ClusterIP",
+    "group": "Services and Load Balancing",
+    "options": [
+      "ClusterIP",
+      "NodePort"
+    ],
+    "subquestions": [
+      {
+        "variable": "service.nodePort",
+        "label": "Service NodePort number",
+        "description": "NodePort port number(to set explicitly, choose port between 30000-32767)",
+        "type": "int",
+        "min": 30000,
+        "max": 32767
+      }
+    ],
+    "showSubquestionIf": "NodePort"
+  },
+  {
+    "variable": "metrics.enabled",
+    "label": "Enable MySQL Metrics",
+    "description": "Enable mysql prometheus metrics exporter",
+    "type": "boolean",
+    "default": "false",
+    "group": "Metrics",
+    "subquestions": [
+      {
+        "variable": "metrics.serviceMonitor.enabled",
+        "label": "Create MySQL ServiceMonitor for Prometheus Operator",
+        "description": "Set this to `true` to create ServiceMonitor for Prometheus operator",
+        "type": "boolean",
+        "default": "false"
+      }
+    ],
+    "showSubquestionIf": "true"
+  }
+]

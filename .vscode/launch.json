@@ -10,7 +10,7 @@
       "name": "Jest Test",
       "program": "${workspaceFolder}/node_modules/.bin/jest",
       "args": [
-        "${fileBasenameNoExtension}",
+        "${file}",
         "--config",
         "jest.config.js"
       ],
