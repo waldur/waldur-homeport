@@ -1,11 +1,17 @@
 import { VirtualMachine } from '@waldur/resource/types';
 
+interface RancherClusterReference {
+  uuid: string;
+  name: string;
+}
+
 export interface OpenStackInstance extends VirtualMachine {
   flavor_name: string;
   floating_ips?: string[];
   runtime_state: 'SHUTOFF' | 'ACTIVE';
   security_groups?: string[];
   availability_zone_name?: string;
+  rancher_cluster?: RancherClusterReference;
 }
 
 export interface Subnet {

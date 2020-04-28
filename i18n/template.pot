@@ -4852,6 +4852,7 @@ msgstr ""
 msgid "Rancher access key"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/rancher/cluster/create/marketplace.ts
 msgid "Rancher cluster"
 msgstr ""
