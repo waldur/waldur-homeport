@@ -8,20 +8,15 @@ import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { angular2react } from '@waldur/shims/angular2react';
 import { getCustomer } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
 
 import './BillingRecordDetails.css';
+import { CustomerDetails } from './CustomerDetails';
 import { Invoice, InvoiceItem } from './types';
 import { getItemName } from './utils';
 
 const BillingRecordHeader = angular2react<{ invoice: Invoice }>(
   'billingRecordHeader',
   ['invoice'],
-);
-
-const BillingCustomerDetails = angular2react<{ customer: Customer }>(
-  'billingCustomerDetails',
-  ['customer'],
 );
 
 export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
@@ -54,9 +49,7 @@ export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
                   {invoice.customer_details && (
                     <div>
                       {translate('For')}:{' '}
-                      <BillingCustomerDetails
-                        customer={invoice.customer_details}
-                      />
+                      <CustomerDetails customer={invoice.customer_details} />
                     </div>
                   )}
                   <div>

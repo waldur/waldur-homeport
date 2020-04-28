@@ -105,7 +105,6 @@ msgid "Accounting record"
 msgstr ""
 
 #: src/billing/billing-record-header.js
-#: src/billing/billing-tabs.html
 msgid "Accounting records"
 msgstr ""
 
@@ -150,7 +149,7 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -1823,7 +1822,7 @@ msgstr ""
 
 #: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Due date"
 msgstr ""
 
@@ -1991,8 +1990,8 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: src/billing/billing-tabs.html
-msgid "Estimated cost for the current month:"
+#: src/billing/EstimatedCost.tsx
+msgid "Estimated cost for the current month: {cost}"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
@@ -2778,7 +2777,7 @@ msgstr ""
 
 #: src/billing/InvoicesList.tsx
 #: src/billing/invoice-details.html
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Invoice date"
 msgstr ""
 
@@ -2807,7 +2806,7 @@ msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
 
 #: src/billing/InvoicesList.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Invoice number"
 msgstr ""
 
@@ -2817,10 +2816,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Invoiced to"
-msgstr ""
-
-#: src/billing/billing-tabs.html
-msgid "Invoices"
 msgstr ""
 
 #: src/billing/invoice-header.html
@@ -4477,7 +4472,7 @@ msgstr ""
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Price"
 msgstr ""
 
@@ -6136,7 +6131,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -6353,7 +6348,7 @@ msgid "Taking a snapshot"
 msgstr ""
 
 #: src/billing/InvoicesList.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Tax"
 msgstr ""
 
@@ -6733,7 +6728,7 @@ msgstr ""
 #: src/billing/PriceEstimateDialog.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Total"
 msgstr ""
 
@@ -8125,7 +8120,7 @@ msgid "internal IPs"
 msgstr ""
 
 #: src/billing/InvoicesList.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "invoices"
 msgstr ""
 

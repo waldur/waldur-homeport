@@ -1,9 +1,7 @@
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import { AgreementInfo } from './AgreementInfo';
 import billingDetails from './billing-details';
 import billingRecordHeader from './billing-record-header';
-import billingTabs from './billing-tabs';
 import BillingUtils from './billing-utils';
 import { BillingRecordDetails } from './BillingRecordDetails';
 import { BillingRecordsList } from './BillingRecordsList';
@@ -12,7 +10,6 @@ import eventsModule from './events/module';
 import invoiceDetails from './invoice-details';
 import invoiceHeader from './invoice-header';
 import invoicesService from './invoices-service';
-import { InvoicesList } from './InvoicesList';
 import { PaymentProfileDetails } from './PaymentProfileDetails';
 import { PaymentProfileList } from './PaymentProfileList';
 import priceEstimateButton from './price-estimate-button';
@@ -28,7 +25,6 @@ export default module => {
   module.component('billingDetails', billingDetails);
   module.component('invoiceHeader', invoiceHeader);
   module.component('invoiceDetails', invoiceDetails);
-  module.component('invoicesList', connectAngularComponent(InvoicesList));
   module.component('billingCustomerDetails', billingCustomerDetails);
   module.component(
     'billingRecordDetails',
@@ -39,8 +35,6 @@ export default module => {
     'billingRecordsList',
     connectAngularComponent(BillingRecordsList),
   );
-  module.component('agreementInfo', connectAngularComponent(AgreementInfo));
-  module.component('billingTabs', billingTabs);
   module.component('priceEstimateButton', priceEstimateButton);
   module.component('priceEstimateDialog', priceEstimateDialog);
   module.component(

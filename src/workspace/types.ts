@@ -43,6 +43,9 @@ export interface PaymentProfile {
 }
 
 export interface Customer {
+  billing_price_estimate?: {
+    total: string;
+  };
   name: string;
   uuid: string;
   url: string;
