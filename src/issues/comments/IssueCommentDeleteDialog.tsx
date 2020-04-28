@@ -5,7 +5,6 @@ import { compose } from 'redux';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
 
@@ -40,5 +39,3 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 const enhance = compose(connect(null, mapDispatchToProps), withTranslation);
 
 export const IssueCommentDeleteDialog = enhance(PureIssueCommentDeleteDialog);
-
-export default connectAngularComponent(IssueCommentDeleteDialog, ['resolve']);

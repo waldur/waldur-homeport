@@ -8,7 +8,6 @@ import { ComparisonIndicator } from '@waldur/marketplace/compare/ComparisonIndic
 import { PendingOrderIndicator } from '@waldur/marketplace/orders/PendingOrderIndicator';
 import { SidebarToggle } from '@waldur/navigation/sidebar/SidebarToggle';
 import { angular2react } from '@waldur/shims/angular2react';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { DocsLink } from './DocsLink';
 import { ExternalLinks } from './ExternalLinks';
@@ -41,5 +40,3 @@ export const AppHeader = () => (
     </Navbar>
   </Row>
 );
-
-export default connectAngularComponent(AppHeader);
