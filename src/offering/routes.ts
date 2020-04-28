@@ -5,9 +5,6 @@ export const states: StateDeclaration[] = [
     name: 'offeringDetails',
     url: '/offering/:uuid/',
     template: '<offering-details></offering-details>',
-    data: {
-      feature: 'offering',
-    },
   },
 ];
 
