@@ -4,7 +4,6 @@ export interface FieldProps {
   label: string;
   description?: string;
   variable: string;
-  options?: string[];
   required?: boolean;
 }
 

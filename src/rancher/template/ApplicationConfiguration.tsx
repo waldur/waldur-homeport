@@ -7,8 +7,15 @@ import { EnumField } from './EnumField';
 import { GroupHeader } from './GroupHeader';
 import { NamespaceField } from './NamespaceField';
 import { StringField } from './StringField';
+import { RancherProject, Namespace } from './types';
 
-export const ApplicationConfiguration = props => (
+interface ApplicationConfigurationProps {
+  versions: string[];
+  projects: RancherProject[];
+  namespaces: Namespace[];
+}
+
+export const ApplicationConfiguration: React.FC<ApplicationConfigurationProps> = props => (
   <>
     <GroupHeader title={translate('Application configuration')} />
     <Row>
