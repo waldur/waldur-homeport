@@ -58,12 +58,12 @@ export const TemplateDetail = () => {
             visibleQuestions,
           ),
         );
-      } catch (error) {
+      } catch ({ response }) {
         const errorMessage = `${translate(
           'Unable to create application.',
-        )} ${format(error)}`;
+        )} ${format(response)}`;
         dispatch(showError(errorMessage));
-        throw error;
+        return;
       }
       dispatch(showSuccess(translate('Application has been created.')));
     },

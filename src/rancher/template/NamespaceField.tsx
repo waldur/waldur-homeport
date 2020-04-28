@@ -75,6 +75,7 @@ export const NamespaceField: React.FC<NamespaceFieldProps> = ({ options }) => {
 
   return (
     <DecoratedField
+      required={true}
       validate={[required, validateNamespace]}
       label={translate('Namespace')}
       variable={useNew ? 'newNamespace' : 'namespace'}
