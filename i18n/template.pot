@@ -2373,6 +2373,10 @@ msgstr ""
 msgid "Generate Kubeconfig file"
 msgstr ""
 
+#: src/rancher/template/PasswordField.tsx
+msgid "Generate password"
+msgstr ""
+
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
 msgstr ""
