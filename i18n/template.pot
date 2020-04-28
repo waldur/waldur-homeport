@@ -3475,6 +3475,10 @@ msgstr ""
 msgid "Namespace"
 msgstr ""
 
+#: src/rancher/template/NamespaceField.tsx
+msgid "Namespace should be unique."
+msgstr ""
+
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 msgid "Native description"

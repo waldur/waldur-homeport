@@ -12,6 +12,7 @@ import { FieldProps } from './types';
 interface OwnProps extends FieldProps {
   component: React.ComponentType<WrappedFieldProps>;
   action?: React.ReactNode;
+  validate?: any;
 }
 
 export const DecoratedField: React.FC<OwnProps> = props => (
@@ -28,7 +29,13 @@ export const DecoratedField: React.FC<OwnProps> = props => (
       <Field
         name={props.variable}
         component={props.component}
-        validate={props.required ? required : undefined}
+        validate={
+          props.validate
+            ? props.validate
+            : props.required
+            ? required
+            : undefined
+        }
       />
       <HelpBlock>
         <span className="text-muted">{props.description}</span>

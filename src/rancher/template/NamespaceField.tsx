@@ -3,10 +3,13 @@ import * as FormControl from 'react-bootstrap/lib/FormControl';
 import { useSelector } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
+import { FieldError } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 
 import { DecoratedField } from './DecoratedField';
 import { SelectControl } from './SelectControl';
+import { Namespace } from './types';
 
 const NamespaceSwitcher = () => (
   <Field
@@ -24,7 +27,11 @@ const NamespaceSwitcher = () => (
   />
 );
 
-export const NamespaceField = ({ options }) => {
+interface NamespaceFieldProps {
+  options: Namespace[];
+}
+
+export const NamespaceField: React.FC<NamespaceFieldProps> = ({ options }) => {
   const useNew = useSelector(state =>
     formValueSelector('RancherTemplateQuestions')(state, 'useNewNamespace'),
   );
@@ -32,10 +39,15 @@ export const NamespaceField = ({ options }) => {
   const renderControl = React.useCallback(
     fieldProps =>
       useNew ? (
-        <FormControl
-          {...fieldProps.input}
-          placeholder={translate('e.g. MyApp')}
-        />
+        <>
+          <FormControl
+            {...fieldProps.input}
+            placeholder={translate('e.g. MyApp')}
+          />
+          {fieldProps.meta.touched && (
+            <FieldError error={fieldProps.meta.error} />
+          )}
+        </>
       ) : (
         <SelectControl
           options={options}
@@ -47,9 +59,23 @@ export const NamespaceField = ({ options }) => {
     [useNew, options],
   );
 
+  const namespaceNames = React.useMemo(
+    () => options.map(option => option.name),
+    [options],
+  );
+
+  const validateNamespace = React.useCallback(
+    (value: string | Namespace) => {
+      if (typeof value === 'string' && namespaceNames.includes(value)) {
+        return translate('Namespace should be unique.');
+      }
+    },
+    [namespaceNames],
+  );
+
   return (
     <DecoratedField
-      required={true}
+      validate={[required, validateNamespace]}
       label={translate('Namespace')}
       variable={useNew ? 'newNamespace' : 'namespace'}
       action={options.length > 0 ? <NamespaceSwitcher /> : null}

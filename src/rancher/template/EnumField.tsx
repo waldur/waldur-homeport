@@ -7,6 +7,7 @@ import { FieldProps } from './types';
 interface EnumFieldProps extends FieldProps {
   getLabel?(option: any): string;
   getValue?(option: any): string;
+  options?: any[];
 }
 
 export const EnumField: React.FC<EnumFieldProps> = props => {
