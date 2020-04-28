@@ -84,7 +84,7 @@ const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 const InvoicesListComponent = enhance(TableComponent);
 
-export const InvoicesList = () => (
+export const PayPalInvoicesList = () => (
   <>
     <InvoicesFilter />
     <InvoicesListComponent />
