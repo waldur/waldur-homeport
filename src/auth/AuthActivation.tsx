@@ -17,7 +17,7 @@ export const AuthActivation = () => {
 
   const activateAccount = React.useCallback(async () => {
     try {
-      ngInjector.get('authService').activate({
+      await ngInjector.get('authService').activate({
         user_uuid,
         token,
       });
