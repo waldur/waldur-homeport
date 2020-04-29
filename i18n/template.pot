@@ -5519,6 +5519,7 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
+#: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "SSH public key"
 msgstr ""
 

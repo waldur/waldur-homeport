@@ -3,13 +3,20 @@ import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, TextField } from '@waldur/form-react';
+import {
+  FormContainer,
+  SelectAsyncField,
+  StringField,
+  TextField,
+} from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
+import { loadSshKeys } from '@waldur/openstack/api';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { TenantGroup } from './TenantGroup';
 import { TenantSelector } from './TenantSelector';
@@ -37,6 +44,13 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
 
   const tenant = useSelector(getTenant);
 
+  const user = useSelector(getUser);
+
+  const loadSshKeyOptions = React.useCallback(
+    () => loadSshKeys(user.uuid).then(options => ({ options })),
+    [user.uuid],
+  );
+
   return (
     <form className="form-horizontal">
       <FormContainer
@@ -63,6 +77,13 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
         <TextField
           label={translate('Cluster description')}
           name="attributes.description"
+        />
+        <SelectAsyncField
+          name="attributes.ssh_public_key"
+          label={translate('SSH public key')}
+          labelKey="name"
+          valueKey="url"
+          loadOptions={loadSshKeyOptions}
         />
         {props.project && <TenantSelector project={props.project} />}
         {tenant && <TenantGroup tenant={tenant} />}
