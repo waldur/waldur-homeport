@@ -58,7 +58,7 @@ export const TemplateDetail = () => {
             visibleQuestions,
           ),
         );
-      } catch ({ response }) {
+      } catch (response) {
         const errorMessage = `${translate(
           'Unable to create application.',
         )} ${format(response)}`;
