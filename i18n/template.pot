@@ -3062,6 +3062,7 @@ msgstr ""
 msgid "Logging user in"
 msgstr ""
 
+#: src/auth/LoginPasswordForm.tsx
 #: src/auth/auth-login.html
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 msgid "Login"
@@ -4103,6 +4104,7 @@ msgstr ""
 msgid "Parent request"
 msgstr ""
 
+#: src/auth/LoginPasswordForm.tsx
 #: src/auth/auth-login.html
 #: src/azure/sql/AzureSQLServerSummary.tsx
 #: src/jira/JiraForm.tsx
@@ -7613,6 +7615,7 @@ msgstr ""
 msgid "User {user_link} logged out successfully with SAML2."
 msgstr ""
 
+#: src/auth/LoginPasswordForm.tsx
 #: src/auth/auth-login.html
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html

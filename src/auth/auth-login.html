@@ -21,39 +21,9 @@
       Create an account
     </span>
   </p>
-  <!-- Login form -->
-  <form ng-if="auth.showLoginForm()" class="m-b-sm" name="auth.LoginForm">
-    <div class="form-group">
-      <input
-        type="text"
-        class="form-control"
-        ng-model="auth.user.username"
-        placeholder="{{ 'Username' | translate }}"
-        required=""
-      />
-    </div>
-    <div class="form-group">
-      <input
-        type="password"
-        class="form-control"
-        ng-model="auth.user.password"
-        placeholder="{{ 'Password' | translate }}"
-        required=""
-      />
-    </div>
-    <button
-      type="submit"
-      class="btn btn-primary btn-block"
-      submit-button="auth.signin()"
-    >
-      <span translate>Login</span>
-    </button>
-    <p
-      class="text-danger"
-      ng-repeat="error in auth.getErrors()"
-      ng-bind="error"
-    ></p>
-  </form>
+  <div ng-if="auth.showLoginForm()">
+    <login-password-form></login-password-form>
+  </div>
   <!-- Registration form -->
   <form ng-if="auth.showRegisterForm()" class="m-b-sm" name="auth.RegisterForm">
     <div class="form-group">

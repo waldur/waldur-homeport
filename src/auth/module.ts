@@ -1,3 +1,5 @@
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import authButtonText from './auth-button-text';
 import initAuthProvider from './auth-config';
 import { authInit } from './auth-init';
@@ -5,6 +7,7 @@ import { authLogin } from './auth-login';
 import { AuthService } from './auth-service';
 import callbacksModule from './callbacks/module';
 import interceptorModule from './interceptor';
+import { LoginPasswordForm } from './LoginPasswordForm';
 import poweredBy from './powered-by';
 import authRoutes from './routes';
 import saml2Module from './saml2/module';
@@ -16,6 +19,10 @@ import './events';
 export default module => {
   module.service('authService', AuthService);
   module.component('authButtonText', authButtonText);
+  module.component(
+    'loginPasswordForm',
+    connectAngularComponent(LoginPasswordForm),
+  );
   module.component('authLogin', authLogin);
   module.component('poweredBy', poweredBy);
   module.component('authInit', authInit);

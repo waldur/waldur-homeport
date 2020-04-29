@@ -23,7 +23,6 @@ export const authLogin = {
       ENV,
       $q,
       $state,
-      $uiRouterGlobals,
       authService,
       ncUtilsFlash,
       invitationService,
@@ -33,7 +32,6 @@ export const authLogin = {
       this.ENV = ENV;
       this.$q = $q;
       this.$state = $state;
-      this.$uiRouterGlobals = $uiRouterGlobals;
       this.authService = authService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.invitationService = invitationService;
@@ -202,31 +200,11 @@ export const authLogin = {
       );
     }
 
-    signin() {
-      if (this.LoginForm.$invalid) {
-        return this.$q.reject();
-      }
-      this.errors = {};
-      return this.authService
-        .signin(this.user.username, this.user.password)
-        .then(this.loginSuccess.bind(this))
-        .catch(response => (this.errors = response.data));
-    }
-
     authenticate(provider) {
       return this.authService
         .authenticate(provider)
-        .then(this.loginSuccess.bind(this))
+        .then(response => this.authService.redirectOnSuccess(response))
         .catch(response => (this.errors = response.data));
-    }
-
-    loginSuccess() {
-      const { toState, toParams } = this.$uiRouterGlobals.params;
-      if (toState) {
-        return this.$state.go(toState, toParams, { reload: true });
-      } else {
-        return this.$state.go('profile.details', { reload: true });
-      }
     }
 
     getErrors() {
