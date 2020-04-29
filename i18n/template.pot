@@ -1197,7 +1197,7 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#: src/auth/auth-login.js
+#: src/auth/SignupForm.tsx
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
@@ -1880,7 +1880,7 @@ msgstr ""
 msgid "Edit team member"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SignupForm.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserFilter.tsx
@@ -2317,7 +2317,7 @@ msgstr ""
 msgid "Full description"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SignupForm.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
@@ -3062,7 +3062,7 @@ msgstr ""
 msgid "Logging user in"
 msgstr ""
 
-#: src/auth/LoginPasswordForm.tsx
+#: src/auth/SigninForm.tsx
 #: src/auth/auth-login.html
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 msgid "Login"
@@ -4104,8 +4104,8 @@ msgstr ""
 msgid "Parent request"
 msgstr ""
 
-#: src/auth/LoginPasswordForm.tsx
-#: src/auth/auth-login.html
+#: src/auth/SigninForm.tsx
+#: src/auth/SignupForm.tsx
 #: src/azure/sql/AzureSQLServerSummary.tsx
 #: src/jira/JiraForm.tsx
 #: src/openstack/OpenStackForm.tsx
@@ -4333,8 +4333,12 @@ msgstr ""
 msgid "Please enter reason why offering has been paused."
 msgstr ""
 
-#: src/auth/LoginPasswordForm.tsx
+#: src/auth/SigninForm.tsx
 msgid "Please enter username and password."
+msgstr ""
+
+#: src/auth/SignupForm.tsx
+msgid "Please enter username, password and email."
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
@@ -4928,7 +4932,7 @@ msgstr ""
 msgid "Region name"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SignupForm.tsx
 msgid "Register"
 msgstr ""
 
@@ -7619,8 +7623,8 @@ msgstr ""
 msgid "User {user_link} logged out successfully with SAML2."
 msgstr ""
 
-#: src/auth/LoginPasswordForm.tsx
-#: src/auth/auth-login.html
+#: src/auth/SigninForm.tsx
+#: src/auth/SignupForm.tsx
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
 #: src/jira/JiraForm.tsx

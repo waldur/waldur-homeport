@@ -51,13 +51,13 @@ export const authLogin = {
         },
         {},
       );
+    }
+
+    $onInit() {
       this.isSignupFormVisible = this.mode === 'register';
       this.user = {};
       this.errors = {};
       this.civilNumberRequired = false;
-    }
-
-    $onInit() {
       this.checkRegistrationMethods();
     }
 
@@ -229,28 +229,6 @@ export const authLogin = {
         }
       }
       return prettyErrors;
-    }
-
-    signup() {
-      if (this.RegisterForm.$invalid) {
-        return this.$q.reject();
-      }
-      this.errors = {};
-      return this.authService.signup(this.user).then(
-        () => {
-          this.ncUtilsFlash.info(
-            translate(
-              'Confirmation mail has been sent. Please check your inbox!',
-            ),
-          );
-          this.isSignupFormVisible = false;
-          this.user = {};
-          return true;
-        },
-        response => {
-          this.errors = response.data;
-        },
-      );
     }
   },
 };

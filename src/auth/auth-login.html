@@ -22,58 +22,12 @@
     </span>
   </p>
   <div ng-if="auth.showLoginForm()">
-    <login-password-form></login-password-form>
+    <signin-form></signin-form>
   </div>
   <!-- Registration form -->
-  <form ng-if="auth.showRegisterForm()" class="m-b-sm" name="auth.RegisterForm">
-    <div class="form-group">
-      <input
-        type="text"
-        ng-model="auth.user.username"
-        placeholder="{{ 'Username' | translate }}"
-        class="form-control"
-        required=""
-      />
-    </div>
-    <div class="form-group">
-      <input
-        type="text"
-        ng-model="auth.user.full_name"
-        placeholder="{{ 'Full name' | translate }}"
-        class="form-control"
-      />
-    </div>
-    <div class="form-group">
-      <input
-        type="email"
-        required=""
-        class="form-control"
-        ng-model="auth.user.email"
-        placeholder="{{ 'Email' | translate }}"
-      />
-    </div>
-    <div class="form-group">
-      <input
-        type="password"
-        ng-model="auth.user.password"
-        placeholder="{{ 'Password' | translate }}"
-        class="form-control"
-        required=""
-      />
-    </div>
-    <p
-      class="text-danger"
-      ng-repeat="error in auth.getErrors()"
-      ng-bind="error"
-    ></p>
-    <button
-      class="btn btn-primary btn-block"
-      submit-button="auth.signup()"
-      type="submit"
-    >
-      <span translate>Register</span>
-    </button>
-  </form>
+  <div ng-if="auth.showRegisterForm()">
+    <signup-form></signup-form>
+  </div>
   <p ng-if="auth.showSocialSignupLabel()">
     <small translate>Or use social login</small>
   </p>

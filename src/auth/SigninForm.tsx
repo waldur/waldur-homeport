@@ -29,9 +29,9 @@ const signin = async (values: FormData) => {
   }
 };
 
-const FORM_ID = 'LoginPassword';
+const FORM_ID = 'SigninForm';
 
-export const LoginPasswordForm = reduxForm<FormData>({ form: FORM_ID })(
+export const SigninForm = reduxForm<FormData>({ form: FORM_ID })(
   ({ submitting, handleSubmit, error }) => (
     <form className="m-b-sm" onSubmit={handleSubmit(signin)}>
       <InputGroup
