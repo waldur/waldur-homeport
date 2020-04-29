@@ -4333,6 +4333,10 @@ msgstr ""
 msgid "Please enter reason why offering has been paused."
 msgstr ""
 
+#: src/auth/LoginPasswordForm.tsx
+msgid "Please enter username and password."
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Please enter volume size to see price estimate."
 msgstr ""
