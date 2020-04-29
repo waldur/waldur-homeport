@@ -26,17 +26,17 @@ async function loadConfig() {
   try {
     const frontendResponse = await Axios.get(CONFIG_FILE);
     frontendSettings = frontendResponse.data;
-  } catch (error) {
-    if (!error.response) {
+  } catch (response) {
+    if (!response) {
       renderError(`Unable to fetch client configuration file.`);
       return;
-    } else if (error.response.status === 404) {
+    } else if (response.status === 404) {
       // fallback to default configuration
       frontendSettings = {
         apiEndpoint: 'http://localhost:8080/',
       };
     } else {
-      renderError(error);
+      renderError(response);
       return;
     }
   }
@@ -52,18 +52,18 @@ async function loadConfig() {
       `${frontendSettings.apiEndpoint}api/configuration/`,
     );
     backendSettings = backendResponse.data;
-  } catch (error) {
-    if (!error.response) {
+  } catch (response) {
+    if (!response) {
       renderError(
         `Unfortunately, connection to server has failed. Please check if you can connect to ${frontendSettings.apiEndpoint} from your browser and contact support if the error continues.`,
       );
       return;
-    } else if (error.response.status >= 400) {
+    } else if (response.status >= 400) {
       renderError(
-        `Unable to fetch server configuration. Error message: ${error.response.statusText}`,
+        `Unable to fetch server configuration. Error message: ${response.statusText}`,
       );
     } else {
-      renderError(error);
+      renderError(response);
     }
     return;
   }

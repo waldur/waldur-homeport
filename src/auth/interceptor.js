@@ -38,7 +38,8 @@ Axios.interceptors.response.use(
           : undefined,
       );
     }
-    return Promise.reject(error);
+    // See also: https://github.com/axios/axios/issues/960
+    return Promise.reject(error.response);
   },
 );
 

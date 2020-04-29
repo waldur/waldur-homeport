@@ -48,12 +48,14 @@ const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = props => {
         await createKey(data);
         dispatch(showSuccess(translate('The key has been created.')));
         router.stateService.go('profile.keys');
-      } catch ({ response }) {
-        throw new SubmissionError({
-          _error: response.data.public_key
-            ? response.data.public_key
-            : translate('Unable to create key.'),
-        });
+      } catch (response) {
+        throw new SubmissionError(
+          response.data
+            ? response.data
+            : {
+                _error: translate('Unable to create key.'),
+              },
+        );
       }
     },
     [dispatch, change, router],
