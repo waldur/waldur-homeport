@@ -6727,6 +6727,7 @@ msgstr ""
 #: src/billing/InvoicesList.tsx
 #: src/billing/PriceEstimateDialog.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Total"
