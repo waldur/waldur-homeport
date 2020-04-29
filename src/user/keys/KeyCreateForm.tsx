@@ -1,9 +1,8 @@
+import { useRouter } from '@uirouter/react';
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useDispatch } from 'react-redux';
 import { InjectedFormProps, reduxForm, SubmissionError } from 'redux-form';
 
-import { $state } from '@waldur/core/services';
 import { CancelButton } from '@waldur/form-react/CancelButton';
 import { FieldError } from '@waldur/form-react/FieldError';
 import { FormContainer } from '@waldur/form-react/FormContainer';
@@ -11,101 +10,97 @@ import { StringField } from '@waldur/form-react/StringField';
 import { SubmitButton } from '@waldur/form-react/SubmitButton';
 import { TextField } from '@waldur/form-react/TextField';
 import { HelpLink } from '@waldur/help/HelpLink';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/coreSaga';
 
 import { createKey } from './api';
 
-interface DispatchProps {
-  showSuccess: (message: string) => void;
+interface FormData {
+  name: string;
+  public_key: string;
 }
 
-class PureKeyCreateForm extends React.Component<
-  DispatchProps & TranslateProps & InjectedFormProps
-> {
-  createKey = async (values: { name: string; public_key: string }) => {
-    let data = { ...values };
-    try {
-      if (!values.name) {
-        const name = this.extractNameFromKey(values.public_key);
-        data = { ...values, name };
-        this.props.change('name', name);
-      }
-      await createKey(data);
-      this.props.showSuccess(this.props.translate('The key has been created.'));
-      $state.go('profile.keys');
-    } catch (response) {
-      throw new SubmissionError({
-        _error: response.data.public_key
-          ? response.data.public_key
-          : this.props.translate('Unable to create key.'),
-      });
+const extractNameFromKey = (publicKey: string) => {
+  if (publicKey) {
+    const key = publicKey.split(' ');
+    if (key.length === 3 && key[2]) {
+      return key[2].trim();
     }
-  };
-
-  extractNameFromKey(publicKey: string) {
-    if (publicKey) {
-      const key = publicKey.split(' ');
-      if (key.length === 3 && key[2]) {
-        return key[2].trim();
-      }
-    }
-    return '';
   }
+  return '';
+};
 
-  render() {
-    const props = this.props;
-    return (
-      <form
-        onSubmit={props.handleSubmit(this.createKey)}
-        className="form-horizontal col-sm-10 col-xs-12"
+const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = props => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const change = props.change;
+
+  const processRequest = React.useCallback(
+    async (values: FormData) => {
+      let data = { ...values };
+      try {
+        if (!values.name) {
+          const name = extractNameFromKey(values.public_key);
+          data = { ...values, name };
+          change('name', name);
+        }
+        await createKey(data);
+        dispatch(showSuccess(translate('The key has been created.')));
+        router.stateService.go('profile.keys');
+      } catch ({ response }) {
+        throw new SubmissionError({
+          _error: response.data.public_key
+            ? response.data.public_key
+            : translate('Unable to create key.'),
+        });
+      }
+    },
+    [dispatch, change, router],
+  );
+
+  return (
+    <form
+      onSubmit={props.handleSubmit(processRequest)}
+      className="form-horizontal col-sm-10 col-xs-12"
+    >
+      <FormContainer
+        submitting={props.submitting}
+        labelClass="col-sm-3"
+        controlClass="col-sm-7"
       >
-        <FormContainer
-          submitting={props.submitting}
-          labelClass="col-sm-3"
-          controlClass="col-sm-7"
-        >
-          <StringField label={props.translate('Key name')} name="name" />
-          <TextField
-            label={
-              <>
-                <HelpLink type="keys" name="ssh">
-                  <i className="fa fa-question-circle" />
-                </HelpLink>{' '}
-                {props.translate('Public key')}
-              </>
-            }
-            name="public_key"
-            required={true}
+        <StringField label={translate('Key name')} name="name" />
+        <TextField
+          label={
+            <>
+              <HelpLink type="keys" name="ssh">
+                <i className="fa fa-question-circle" />
+              </HelpLink>{' '}
+              {translate('Public key')}
+            </>
+          }
+          name="public_key"
+          required={true}
+        />
+      </FormContainer>
+      <div className="form-group">
+        <div className="col-sm-offset-3 col-sm-9">
+          <FieldError error={props.error} />
+          <SubmitButton
+            className="btn btn-primary m-r-sm m-b-sm m-t-sm"
+            submitting={props.submitting}
+            label={translate('Add key')}
           />
-        </FormContainer>
-        <div className="form-group">
-          <div className="col-sm-offset-3 col-sm-9">
-            <FieldError error={props.error} />
-            <SubmitButton
-              className="btn btn-primary m-r-sm m-b-sm m-t-sm"
-              submitting={props.submitting}
-              label={props.translate('Add key')}
-            />
-            <CancelButton
-              onClick={() => $state.go('profile.keys')}
-              label={props.translate('Cancel')}
-            />
-          </div>
+          <CancelButton
+            onClick={() => router.stateService.go('profile.keys')}
+            label={translate('Cancel')}
+          />
         </div>
-      </form>
-    );
-  }
-}
+      </div>
+    </form>
+  );
+};
 
-const mapDispatchToProps = dispatch => ({
-  showSuccess: (message: string) => dispatch(showSuccess(message)),
-});
-
-const enhance = compose(
-  connect(null, mapDispatchToProps),
-  reduxForm({ form: 'keyCreate' }),
-  withTranslation,
+export const KeyCreateForm = reduxForm<FormData>({ form: 'keyCreate' })(
+  PureKeyCreateForm,
 );
-
-export const KeyCreateForm = enhance(PureKeyCreateForm);
