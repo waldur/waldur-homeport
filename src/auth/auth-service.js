@@ -30,6 +30,7 @@ export class AuthService {
     $rootScope,
     $window,
     $state,
+    $uiRouterGlobals,
     usersService,
     currentStateService,
     ncUtilsFlash,
@@ -40,6 +41,7 @@ export class AuthService {
     this.$rootScope = $rootScope;
     this.$window = $window;
     this.$state = $state;
+    this.$uiRouterGlobals = $uiRouterGlobals;
     this.usersService = usersService;
     this.currentStateService = currentStateService;
     this.ncUtilsFlash = ncUtilsFlash;
@@ -79,6 +81,15 @@ export class AuthService {
     this.$auth.setToken(this.user.token);
     this.user.isAuthenticated = true;
     this.$rootScope.$broadcast('authService:signin');
+  }
+
+  redirectOnSuccess() {
+    const { toState, toParams } = this.$uiRouterGlobals.params;
+    if (toState) {
+      return this.$state.go(toState, toParams, { reload: true });
+    } else {
+      return this.$state.go('profile.details', { reload: true });
+    }
   }
 
   setAuthenticationMethod(method) {
