@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
@@ -113,6 +114,12 @@ export const PureDetailsTable: React.FC<PlanDetailsTableProps> = (
                   viewMode={props.viewMode}
                 />
               )}
+              <tr>
+                <td colSpan={3}>{translate('Total')}</td>
+                {props.totalPeriods.map((price, index) => (
+                  <td key={index}>{defaultCurrency(price)}</td>
+                ))}
+              </tr>
             </tbody>
           </table>
         )}
