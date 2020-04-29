@@ -22,13 +22,11 @@ Axios.interceptors.response.use(
     return response;
   },
   function invalidTokenInterceptor(error) {
-    if (!ngInjector) {
-      return;
-    }
-    const authService = ngInjector.get('authService');
-    const $state = ngInjector.get('$state');
-    const $stateParams = ngInjector.get('$stateParams');
-    if (error.response.status === 401) {
+    if (error.response && error.response.status === 401 && ngInjector) {
+      const authService = ngInjector.get('authService');
+      const $state = ngInjector.get('$state');
+      const $stateParams = ngInjector.get('$stateParams');
+
       authService.localLogout(
         $state.current.name
           ? {
@@ -37,9 +35,10 @@ Axios.interceptors.response.use(
             }
           : undefined,
       );
+    } else {
+      // See also: https://github.com/axios/axios/issues/960
+      return Promise.reject(error.response);
     }
-    // See also: https://github.com/axios/axios/issues/960
-    return Promise.reject(error.response);
   },
 );
 
