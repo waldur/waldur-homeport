@@ -146,7 +146,6 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
-    "expose-loader": "^0.7.5",
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-harddisk-plugin": "^1.0.1",
