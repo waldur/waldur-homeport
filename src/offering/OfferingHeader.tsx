@@ -6,7 +6,6 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { Field } from './Field';
@@ -100,5 +99,3 @@ const mapStateToProps = (state, ownProps) => {
 const enhance = compose(connect(mapStateToProps), withTranslation);
 
 export const OfferingHeader = enhance(PureOfferingHeader);
-
-export default connectAngularComponent(OfferingHeader, ['offering', 'summary']);
