@@ -19,7 +19,7 @@ export const InvitationApprove = () => {
   useEffectOnce(() => {
     async function processToken() {
       try {
-        ngInjector.get('invitationUtilsService').approve(token);
+        await ngInjector.get('invitationUtilsService').approve(token);
         dispatch(showSuccess(translate('Invitation has been approved.')));
         router.stateService.go('login');
       } catch (e) {
