@@ -11,6 +11,7 @@ interface LayoutProps {
   pageClass?: string;
   hideBreadcrumbs?: boolean;
   pageTitle?: string;
+  actions?: React.ReactNode;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
@@ -18,6 +19,8 @@ export const Layout: React.FC<LayoutProps> = ({
   pageClass,
   hideBreadcrumbs,
   pageTitle,
+  actions,
+  children,
 }) => (
   <>
     {sidebar}
@@ -28,10 +31,12 @@ export const Layout: React.FC<LayoutProps> = ({
         <div className="row wrapper white-bg page-heading">
           <div className="col-lg-12">
             {pageTitle ? <h2>{pageTitle}</h2> : null}
+            {actions}
             <BreadcrumbsContainer />
           </div>
         </div>
       )}
+      {children}
       <div className="footer-indent">
         <UIView />
       </div>

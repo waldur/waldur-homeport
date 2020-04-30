@@ -23,3 +23,9 @@ export interface Offering {
   [key: string]: any;
   marketplace_resource_uuid?: string;
 }
+
+export interface OfferingTemplate {
+  config: {
+    summary: string;
+  };
+}

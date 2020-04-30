@@ -1,39 +1,37 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useDispatch } from 'react-redux';
 
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 
-interface OfferingReportButtonProps extends TranslateProps {
-  openReport: () => void;
-  offering: {
-    report?: object;
-  };
+import { Offering } from './types';
+
+interface OfferingReportButtonProps {
+  offering: Pick<Partial<Offering>, 'report'>;
 }
-
-export const PureOfferingReportButton = (props: OfferingReportButtonProps) =>
-  props.offering.report ? (
-    <button
-      className="btn btn-info pull-right btn-sm m-l-sm"
-      onClick={props.openReport}
-    >
-      <i className="fa fa-book" />
-      &nbsp;
-      {props.translate('Show report')}
-    </button>
-  ) : null;
 
 export const openReport = report =>
   openModalDialog('offeringReportDialog', { resolve: { report }, size: 'lg' });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  openReport: () => dispatch(openReport(ownProps.offering.report)),
-});
-
-const enhance = compose(withTranslation, connect(null, mapDispatchToProps));
-
-const OfferingReportButton = enhance(PureOfferingReportButton);
-
-export default connectAngularComponent(OfferingReportButton, ['offering']);
+export const OfferingReportButton: React.FC<OfferingReportButtonProps> = ({
+  offering,
+}) => {
+  const dispatch = useDispatch();
+  const openReport = React.useCallback(
+    () => dispatch(openReport(offering.report)),
+    [offering.report, dispatch],
+  );
+  if (!offering.report) {
+    return null;
+  }
+  return (
+    <button
+      className="btn btn-info pull-right btn-sm m-l-sm"
+      onClick={openReport}
+    >
+      <i className="fa fa-book" />
+      &nbsp;
+      {translate('Show report')}
+    </button>
+  );
+};

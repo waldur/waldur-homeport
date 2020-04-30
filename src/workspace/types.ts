@@ -81,6 +81,7 @@ export interface Project {
   permissions: Permission[];
   quotas: Quota[];
   billing_price_estimate?: BillingPriceEstimate;
+  customer_uuid?: string;
 }
 
 export type WorkspaceType = 'user' | 'project' | 'organization' | 'support';
