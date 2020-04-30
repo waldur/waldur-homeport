@@ -39,8 +39,8 @@ function redirectToState($rootScope, $state, $injector) {
 // @ngInject
 function scrollToTop($rootScope) {
   $rootScope.$on('$stateChangeSuccess', function() {
-    $(document).scrollTop(0);
-    $('#wrapper').scrollTop(0);
+    document.scrollTop = 0;
+    document.querySelector('#wrapper').scrollTop = 0;
   });
 }
 

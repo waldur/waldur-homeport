@@ -13,7 +13,6 @@ module.exports = {
       '@sentry/types',
       '@sentry/utils',
       'lodash',
-      'jquery',
       'moment-timezone',
       'file-saver',
       'papaparse',

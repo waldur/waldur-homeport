@@ -1,8 +1,6 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-// eslint-disable-next-line import/no-unresolved
-import 'expose-loader?$!expose-loader?jQuery!jquery';
 import 'angular';
 import moment from 'moment-timezone';
 require('moment/locale/ar');
