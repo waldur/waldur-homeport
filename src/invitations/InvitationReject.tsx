@@ -19,7 +19,7 @@ export const InvitationReject = () => {
   useEffectOnce(() => {
     async function processToken() {
       try {
-        ngInjector.get('invitationUtilsService').reject(token);
+        await ngInjector.get('invitationUtilsService').reject(token);
         dispatch(showSuccess(translate('Invitation has been rejected.')));
         router.stateService.go('login');
       } catch (e) {
