@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { Offering } from './types';
 
@@ -20,5 +19,3 @@ export const PureOfferingState = (props: OfferingStateProps) =>
   ) : null;
 
 export const OfferingState = withTranslation(PureOfferingState);
-
-export default connectAngularComponent(OfferingState, ['offering']);

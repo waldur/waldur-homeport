@@ -1,12 +1,17 @@
-import { shallow } from 'enzyme';
+import { render } from 'enzyme';
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
 
-import { PureOfferingReportButton } from './OfferingReportButton';
+import { OfferingReportButton } from './OfferingReportButton';
+import { withReduxForm } from '@waldur/form-react/testUtils';
 
-const renderButton = (props?) =>
-  shallow(<PureOfferingReportButton translate={translate} {...props} />);
+const renderButton = (props?) => {
+  const Component = () => (
+    <OfferingReportButton translate={translate} {...props} />
+  );
+  return render(withReduxForm(Component));
+};
 
 describe('OfferingReportButton', () => {
   it('conceals button if report is not provided', () => {

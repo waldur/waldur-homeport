@@ -1,7 +1,6 @@
 import marketplaceAttributeFilterListDialog from './category/filters/AttributeFilterListDialog';
 import marketplaceOfferingPlanDescription from './details/plan/PlanDescription';
 import marketplacePlanDetailsDialog from './details/plan/PlanDetailsDialog';
-import registerExtensionPoint from './extension-point';
 import marketplaceOfferingsModule from './offerings/module';
 import marketplaceOrdersModule from './orders/module';
 import providersService from './providers-service';
@@ -26,7 +25,6 @@ export default module => {
   module.service('providersService', providersService);
   module.config(routes);
   module.run(registerSidebarExtension);
-  module.run(registerExtensionPoint);
   marketplaceOfferingsModule(module);
   marketplaceOrdersModule(module);
   marketplaceProvidersModule(module);

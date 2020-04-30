@@ -1,4 +1,8 @@
-import { getAll } from '@waldur/core/api';
+import { getAll, getById } from '@waldur/core/api';
+import { Customer } from '@waldur/customer/types';
+import { Project } from '@waldur/workspace/types';
+
+import { Offering, OfferingTemplate } from './types';
 
 const tenantSerializer = ({ name, backend_id, project_name }) => ({
   name: `${project_name} / ${name}`,
@@ -33,3 +37,13 @@ export const fetchInstanceOptions = (query, customerId) =>
   }).then(options => ({
     options: options.map(instanceSerializer),
   }));
+
+export const getOffering = uuid =>
+  getById<Offering>('/support-offerings/', uuid);
+
+export const getOfferingTemplate = uuid =>
+  getById<OfferingTemplate>('/support-offering-templates/', uuid);
+
+export const getProject = uuid => getById<Project>('/projects/', uuid);
+
+export const getCustomer = uuid => getById<Customer>('/customers/', uuid);
