@@ -1,8 +1,10 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+import { connectAngularComponent } from '@waldur/store/connect';
 
 import clusterActions from './actions';
-import RancherClusterKubeconfigDialog from './actions/RancherClusterKubeconfigDialog';
-import rancherCreateNodeDialog from './create/CreateNodeDialog';
+import { RancherClusterKubeconfigDialog } from './actions/RancherClusterKubeconfigDialog';
+import { ApplicationDetailsDialog } from './ApplicationDetailsDialog';
+import { CreateNodeDialog } from './create/CreateNodeDialog';
 import './create/marketplace';
 import { RancherClusterSummary } from './RancherClusterSummary';
 import './tabs';
@@ -16,8 +18,15 @@ export default module => {
   ResourceSummary.register('Rancher.Cluster', RancherClusterSummary);
   module.component(
     'rancherClusterKubeconfigDialog',
-    RancherClusterKubeconfigDialog,
+    connectAngularComponent(RancherClusterKubeconfigDialog, ['resolve']),
   );
-  module.component('rancherCreateNodeDialog', rancherCreateNodeDialog);
+  module.component(
+    'rancherCreateNodeDialog',
+    connectAngularComponent(CreateNodeDialog, ['resolve']),
+  );
+  module.component(
+    'rancherApplicationDetailsDialog',
+    connectAngularComponent(ApplicationDetailsDialog, ['resolve']),
+  );
   module.config(actionsConfig);
 };

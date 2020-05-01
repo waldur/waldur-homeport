@@ -153,6 +153,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
@@ -451,7 +452,12 @@ msgid "Annotations & labels"
 msgstr ""
 
 #: src/marketplace-checklist/AnswersTable.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Answer"
+msgstr ""
+
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+msgid "Answers"
 msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx
@@ -470,6 +476,10 @@ msgstr ""
 
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Application configuration"
+msgstr ""
+
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+msgid "Application details"
 msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
@@ -915,6 +925,7 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 msgid "Catalog"
@@ -1695,6 +1706,7 @@ msgstr ""
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/team/UserDetailsButton.tsx
+#: src/rancher/cluster/ApplicationDetailsButton.tsx
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -2926,6 +2938,7 @@ msgstr ""
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Key"
 msgstr ""
 
@@ -3026,6 +3039,7 @@ msgid "Limits are invalid."
 msgstr ""
 
 #: src/issues/issue-detail.html
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Link"
 msgstr ""
 
@@ -3827,6 +3841,7 @@ msgstr ""
 
 #: src/events/EventDetailsTable.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "Open"
 msgstr ""
@@ -4820,6 +4835,7 @@ msgid "Quantity"
 msgstr ""
 
 #: src/marketplace-checklist/AnswersTable.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Question"
 msgstr ""
 
@@ -6271,6 +6287,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
@@ -6396,6 +6413,7 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
@@ -7739,6 +7757,7 @@ msgstr ""
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr ""
 
@@ -7771,6 +7790,7 @@ msgid "Verifying email change"
 msgstr ""
 
 #: src/navigation/AppFooter.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
 msgstr ""
