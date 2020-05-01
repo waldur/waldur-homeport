@@ -1,6 +1,7 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
@@ -17,6 +18,10 @@ module.exports = {
     },
     project: './tsconfig.json',
     tsconfigRootDir: './',
+  },
+  env: {
+    browser: true,
+    es6: true,
   },
   settings: {
     react: {
@@ -68,6 +73,7 @@ module.exports = {
     'no-console': 'error',
     'import/no-named-as-default': 'error',
     'require-await': 'error',
+    'no-prototype-builtins': 'off',
   },
   globals: {
     gettext: true,

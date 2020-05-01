@@ -93,6 +93,7 @@ export async function getAll<T = {}>(
   let response = await get(endpoint, options);
   let result = [];
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     if (Array.isArray(response.data)) {
       result = result.concat(response.data);
