@@ -100,7 +100,7 @@ export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
                               <span>{translate('Start time')}</span>:{' '}
                               {item.start ? formatDateTime(item.start) : '-'}.
                               <span>{translate('End time')}</span>:{' '}
-                              {item.start ? formatDateTime(item.end) : '-'}.
+                              {item.end ? formatDateTime(item.end) : '-'}.
                             </small>
                             {item.details.service_provider_name && (
                               <div>
