@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
 import { ngInjector, defaultCurrency } from '@waldur/core/services';
-import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { angular2react } from '@waldur/shims/angular2react';
@@ -11,8 +9,8 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import './BillingRecordDetails.css';
 import { CustomerDetails } from './CustomerDetails';
+import { InvoiceItemDetails } from './InvoiceItemDetails';
 import { Invoice, InvoiceItem } from './types';
-import { getItemName } from './utils';
 
 const BillingRecordHeader = angular2react<{ invoice: Invoice }>(
   'billingRecordHeader',
@@ -85,31 +83,10 @@ export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
                       {project.items.map((item: InvoiceItem, itemIndex) => (
                         <tr key={itemIndex}>
                           <td>
-                            <div>
-                              <strong>{getItemName(item)}</strong>
-                            </div>
-                            <Tooltip
-                              id={`project-${projectIndex}-${itemIndex}`}
-                              label={translate(
-                                'Tracked using UTC timezone, displayed with your browser’s timezone.',
-                              )}
-                            >
-                              <i className="fa fa-question-circle m-l-xs"></i>
-                            </Tooltip>{' '}
-                            <small>
-                              <span>{translate('Start time')}</span>:{' '}
-                              {item.start ? formatDateTime(item.start) : '-'}.
-                              <span>{translate('End time')}</span>:{' '}
-                              {item.end ? formatDateTime(item.end) : '-'}.
-                            </small>
-                            {item.details.service_provider_name && (
-                              <div>
-                                <small>
-                                  <span>{translate('Service provider')}</span>:{' '}
-                                  {item.details.service_provider_name}
-                                </small>
-                              </div>
-                            )}
+                            <InvoiceItemDetails
+                              item={item}
+                              itemId={`item-${projectIndex}-${itemIndex}`}
+                            />
                           </td>
                           <td>{item.factor || item.quantity}</td>
                           <td>{defaultCurrency(item.unit_price)}</td>

@@ -7,8 +7,8 @@ import { BillingRecordDetails } from './BillingRecordDetails';
 import { BillingRecordsList } from './BillingRecordsList';
 import billingCustomerDetails from './CustomerDetails';
 import eventsModule from './events/module';
-import invoiceDetails from './invoice-details';
 import invoiceHeader from './invoice-header';
+import { InvoiceDetails } from './InvoiceDetails';
 import invoicesService from './invoices-service';
 import { PaymentProfileDetails } from './PaymentProfileDetails';
 import { PaymentProfileList } from './PaymentProfileList';
@@ -24,7 +24,10 @@ export default module => {
   module.service('PriceEstimateUtilsService', PriceEstimateUtilsService);
   module.component('billingDetails', billingDetails);
   module.component('invoiceHeader', invoiceHeader);
-  module.component('invoiceDetails', invoiceDetails);
+  module.component(
+    'invoiceDetails',
+    connectAngularComponent(InvoiceDetails, ['invoice']),
+  );
   module.component('billingCustomerDetails', billingCustomerDetails);
   module.component(
     'billingRecordDetails',
