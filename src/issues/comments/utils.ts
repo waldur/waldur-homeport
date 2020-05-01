@@ -83,7 +83,7 @@ export const formatJiraMarkup = (
     .replace(/\*(\S.*)\*/g, '<b>$1</b>')
 
     // Italic
-    .replace(/\b\_(\S.*)\_\b/g, '<i>$1</i>')
+    .replace(/\b_(\S.*)_\b/g, '<i>$1</i>')
 
     // Monospaced text
     .replace(/\{\{([^}]+)\}\}/g, '<code>$1</code>')
@@ -118,7 +118,7 @@ export const formatJiraMarkup = (
     })
 
     // Images
-    .replace(/\!(.+)\|thumbnail!/g, (_, fileName) => {
+    .replace(/!(.+)\|thumbnail!/g, (_, fileName) => {
       const attachment = getAttachmentByFileName(attachments, fileName);
       return attachment
         ? `<img src="${attachment.file}" title="${fileName}" />`

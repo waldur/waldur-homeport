@@ -23,7 +23,7 @@ import './PendingOrderIndicator.scss';
 import { OrderItemDetailsType, OrderItemType } from './types';
 
 interface PendingOrderIndicatorProps extends ToggleOpenProps {
-  fetchPendingOrders: ({}) => void;
+  fetchPendingOrders(params: any): void;
   pendingOrders: OrderItemDetailsType[];
   isOwnerOrStaff: boolean;
   customer: Customer;
