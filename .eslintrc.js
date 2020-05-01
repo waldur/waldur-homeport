@@ -67,6 +67,7 @@ module.exports = {
     '@typescript-eslint/no-this-alias': 'warn',
     'no-console': 'error',
     'import/no-named-as-default': 'error',
+    'require-await': 'error',
   },
   globals: {
     gettext: true,
