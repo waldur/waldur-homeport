@@ -1,4 +1,4 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import * as React from 'react';
 import * as Panel from 'react-bootstrap/lib/Panel';
 import * as PanelGroup from 'react-bootstrap/lib/PanelGroup';
@@ -23,6 +23,8 @@ export const TemplateDetail = () => {
   const {
     params: { templateUuid, clusterUuid },
   } = useCurrentStateAndParams();
+
+  const router = useRouter();
 
   const state = useAsync(() => loadData(templateUuid, clusterUuid), [
     templateUuid,
@@ -58,6 +60,11 @@ export const TemplateDetail = () => {
             visibleQuestions,
           ),
         );
+        router.stateService.go('resources.details', {
+          uuid: clusterUuid,
+          resource_type: 'Rancher.Cluster',
+          tab: 'applications',
+        });
       } catch (response) {
         const errorMessage = `${translate(
           'Unable to create application.',
@@ -67,7 +74,7 @@ export const TemplateDetail = () => {
       }
       dispatch(showSuccess(translate('Application has been created.')));
     },
-    [dispatch, state.value, visibleQuestions],
+    [dispatch, router.stateService, clusterUuid, state.value, visibleQuestions],
   );
 
   if (state.loading) {
