@@ -8,7 +8,6 @@ import { copyToClipboard } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { showSuccess } from '@waldur/store/coreSaga';
 
 interface KubeconfigFile {
@@ -70,7 +69,3 @@ export const RancherClusterKubeconfigDialog = props => {
     </ModalDialog>
   );
 };
-
-export default connectAngularComponent(RancherClusterKubeconfigDialog, [
-  'resolve',
-]);
