@@ -125,6 +125,7 @@ msgstr ""
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
@@ -302,6 +303,11 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 msgid "Add rule"
+msgstr ""
+
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/actions/OfferingAddScreenshotButton.tsx
+msgid "Add screenshot"
 msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
@@ -534,6 +540,10 @@ msgstr ""
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType}?"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
+msgid "Are you sure you want to delete the screenshot?"
 msgstr ""
 
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
@@ -836,6 +846,7 @@ msgstr ""
 msgid "Branch"
 msgstr ""
 
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Browse"
 msgstr ""
@@ -1204,6 +1215,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Confirmation"
 msgstr ""
@@ -1396,6 +1408,7 @@ msgstr ""
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
@@ -1595,6 +1608,7 @@ msgstr ""
 #: src/billing/PaymentProfileList.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
+#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
@@ -1633,6 +1647,8 @@ msgstr ""
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -3390,6 +3406,8 @@ msgstr ""
 #: src/jira/project/jira-project-config.js
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -3752,6 +3770,10 @@ msgstr ""
 msgid "Offering details"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingScreenshotsListTablePlaceholder.tsx
+msgid "Offering doesn't have screenshots."
+msgstr ""
+
 #: src/offering/events.ts
 msgid "Offering events"
 msgstr ""
@@ -3770,6 +3792,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Offering logo"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
+msgid "Offering screenshots ({name})"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -3797,6 +3823,10 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 msgid "Offerings"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+msgid "Offerings screenshots"
 msgstr ""
 
 #: src/intro/base-intro.js
@@ -4388,6 +4418,10 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 msgid "Please provide registration code of your company."
+msgstr ""
+
+#: src/marketplace/offerings/OfferingScreenshotsListTablePlaceholder.tsx
+msgid "Please provide visual material describing the Offering"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -5572,7 +5606,26 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Screenshot has been added."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Screenshot has been removed."
+msgstr ""
+
+#: src/marketplace/offerings/ScreenshotThumbnail.tsx
+#: src/marketplace/offerings/ViewOfferingScreenshotDialog.tsx
+msgid "Screenshot here"
+msgstr ""
+
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+msgid "Screenshot:"
+msgstr ""
+
 #: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/offerings/actions/OfferingActions.tsx
+#: src/marketplace/routes.ts
 msgid "Screenshots"
 msgstr ""
 
@@ -6226,6 +6279,7 @@ msgstr ""
 
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -6680,6 +6734,10 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+msgid "Thumbnail"
+msgstr ""
+
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortListComponent.tsx
 msgid "Time in progress"
@@ -6858,6 +6916,10 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to add item to shopping cart."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to add screenshot."
 msgstr ""
 
 #: src/invitations/InvitationApprove.tsx
@@ -7234,6 +7296,10 @@ msgstr ""
 
 #: src/customer/details/store/effects.ts
 msgid "Unable to remove logo."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to remove screenshot."
 msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
@@ -7793,6 +7859,10 @@ msgstr ""
 #: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
+msgstr ""
+
+#: src/marketplace/offerings/ViewOfferingScreenshotDialog.tsx
+msgid "Viewing screenshot"
 msgstr ""
 
 #: src/openstack/utils.ts

@@ -164,6 +164,50 @@ function* loadOffering(action) {
   }
 }
 
+function* addOfferingScreenshot(action: Action<any>) {
+  const { formData, offering } = action.payload;
+  try {
+    const response = yield call(
+      api.uploadOfferingScreenshot,
+      formData,
+      offering,
+    );
+    yield put(showSuccess(translate('Screenshot has been added.')));
+    if (response.status === 201) {
+      yield put(closeModalDialog());
+      yield loadOffering({
+        payload: {
+          offeringUuid: offering.uuid,
+        },
+      });
+    }
+  } catch (error) {
+    const errorMessage = `${translate('Unable to add screenshot.')} ${format(
+      error,
+    )}`;
+    yield put(showError(errorMessage));
+  }
+}
+
+function* removeOfferingScreenshot(action: Action<any>) {
+  const { offering, screenshot } = action.payload;
+  try {
+    yield call(api.deleteOfferingScreenshot, screenshot.uuid);
+    yield put(showSuccess(translate('Screenshot has been removed.')));
+    yield put(closeModalDialog());
+    yield loadOffering({
+      payload: {
+        offeringUuid: offering.uuid,
+      },
+    });
+  } catch (error) {
+    const errorMessage = `${translate('Unable to remove screenshot.')} ${format(
+      error,
+    )}`;
+    yield put(showError(errorMessage));
+  }
+}
+
 export default function*() {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
   yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
@@ -173,4 +217,9 @@ export default function*() {
   yield takeEvery(constants.createOffering.REQUEST, createOffering);
   yield takeEvery(constants.updateOffering.REQUEST, updateOffering);
   yield takeEvery(constants.UPDATE_OFFERING_STATE, updateOfferingState);
+  yield takeEvery(constants.ADD_OFFERING_SCREENSHOT, addOfferingScreenshot);
+  yield takeEvery(
+    constants.REMOVE_OFFERING_SCREENSHOT,
+    removeOfferingScreenshot,
+  );
 }
