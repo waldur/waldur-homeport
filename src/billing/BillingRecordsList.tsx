@@ -12,9 +12,9 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { InvoicesFilter } from './InvoicesFilter';
 import { SendNotificationButton } from './SendNotificationButton';
+import { formatPeriod } from './utils';
 
-const RecordPeriodField = ({ row: { year, month } }) =>
-  `${year}-${month < 10 ? '0' : ''}${month}`;
+const RecordPeriodField = ({ row }) => formatPeriod(row);
 
 const TableComponent = props => {
   const { translate } = props;

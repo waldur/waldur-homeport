@@ -20,16 +20,13 @@ export const InvoiceItemDetails = ({ item, itemId }) => (
       <i className="fa fa-question-circle m-l-xs"></i>
     </Tooltip>{' '}
     <small>
-      <span>{translate('Start time')}</span>:{' '}
-      {item.start ? formatDateTime(item.start) : '-'}.
-      <span>{translate('End time')}</span>:{' '}
-      {item.end ? formatDateTime(item.end) : '-'}.
+      {translate('Start time')}: {item.start ? formatDateTime(item.start) : '-'}
+      .{translate('End time')}: {item.end ? formatDateTime(item.end) : '-'}.
     </small>
     {item.details.service_provider_name && (
       <div>
         <small>
-          <span>{translate('Service provider')}</span>:{' '}
-          {item.details.service_provider_name}
+          {translate('Service provider')}: {item.details.service_provider_name}
         </small>
       </div>
     )}

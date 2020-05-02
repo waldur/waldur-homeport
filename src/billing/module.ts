@@ -1,14 +1,7 @@
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import billingDetails from './billing-details';
-import billingRecordHeader from './billing-record-header';
 import BillingUtils from './billing-utils';
-import { BillingRecordDetails } from './BillingRecordDetails';
-import { BillingRecordsList } from './BillingRecordsList';
-import billingCustomerDetails from './CustomerDetails';
 import eventsModule from './events/module';
-import invoiceHeader from './invoice-header';
-import { InvoiceDetails } from './InvoiceDetails';
 import invoicesService from './invoices-service';
 import { PaymentProfileDetails } from './PaymentProfileDetails';
 import { PaymentProfileList } from './PaymentProfileList';
@@ -22,22 +15,6 @@ export default module => {
   module.service('invoicesService', invoicesService);
   module.service('BillingUtils', BillingUtils);
   module.service('PriceEstimateUtilsService', PriceEstimateUtilsService);
-  module.component('billingDetails', billingDetails);
-  module.component('invoiceHeader', invoiceHeader);
-  module.component(
-    'invoiceDetails',
-    connectAngularComponent(InvoiceDetails, ['invoice']),
-  );
-  module.component('billingCustomerDetails', billingCustomerDetails);
-  module.component(
-    'billingRecordDetails',
-    connectAngularComponent(BillingRecordDetails, ['invoice']),
-  );
-  module.component('billingRecordHeader', billingRecordHeader);
-  module.component(
-    'billingRecordsList',
-    connectAngularComponent(BillingRecordsList),
-  );
   module.component('priceEstimateButton', priceEstimateButton);
   module.component('priceEstimateDialog', priceEstimateDialog);
   module.component(

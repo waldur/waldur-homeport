@@ -2,6 +2,7 @@ import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { withStore } from '@waldur/store/connect';
 
+import { BillingDetails } from './BillingDetails';
 import { BillingTabs } from './BillingTabs';
 
 export const states: StateDeclaration[] = [
@@ -24,7 +25,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'billingDetails',
     url: '/billing/:uuid/',
-    template: '<billing-details></billing-details>',
+    component: withStore(BillingDetails),
   },
 ];
 
