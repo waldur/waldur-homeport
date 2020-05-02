@@ -100,11 +100,11 @@ msgstr ""
 msgid "Accounting plans"
 msgstr ""
 
-#: src/billing/billing-record-header.html
+#: src/billing/BillingDetails.tsx
 msgid "Accounting record"
 msgstr ""
 
-#: src/billing/billing-record-header.js
+#: src/billing/BillingDetails.tsx
 msgid "Accounting records"
 msgstr ""
 
@@ -1825,7 +1825,7 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-#: src/billing/invoice-header.html
+#: src/billing/DownloadInvoiceButton.tsx
 #: src/paypal/InvoiceActions.tsx
 msgid "Download invoice"
 msgstr ""
@@ -2794,7 +2794,7 @@ msgstr ""
 msgid "Invite user"
 msgstr ""
 
-#: src/billing/invoice-header.html
+#: src/billing/BillingDetails.tsx
 msgid "Invoice"
 msgstr ""
 
@@ -2845,7 +2845,7 @@ msgstr ""
 msgid "Invoiced to"
 msgstr ""
 
-#: src/billing/invoice-header.html
+#: src/billing/BillingDetails.tsx
 msgid "Invoices list"
 msgstr ""
 
@@ -4069,8 +4069,7 @@ msgstr ""
 msgid "Organization users list"
 msgstr ""
 
-#: src/billing/billing-record-header.js
-#: src/billing/invoice-header.html
+#: src/billing/BillingDetails.tsx
 #: src/customer/workspace/CustomerWorkspace.tsx
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
@@ -4594,11 +4593,11 @@ msgstr ""
 msgid "Pricing tier"
 msgstr ""
 
-#: src/billing/invoice-header.html
+#: src/billing/PrintInvoiceButton.tsx
 msgid "Print invoice"
 msgstr ""
 
-#: src/billing/billing-record-header.html
+#: src/billing/PrintInvoiceButton.tsx
 msgid "Print record"
 msgstr ""
 
@@ -7111,6 +7110,7 @@ msgstr ""
 msgid "Unable to load data"
 msgstr ""
 
+#: src/billing/BillingDetails.tsx
 #: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx

@@ -11,6 +11,8 @@ export interface InvoiceItem {
   price: string;
   factor: number;
   quantity?: number;
+  project_uuid?: string;
+  project_name?: string;
 }
 
 export interface Invoice {
@@ -24,4 +26,6 @@ export interface Invoice {
   tax: any;
   total: any;
   items: InvoiceItem[];
+  year: number;
+  month: number;
 }

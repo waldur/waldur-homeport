@@ -20,3 +20,35 @@ export function getItemName(item: InvoiceItem) {
   }
   return item.name;
 }
+
+export const formatPeriod = ({ year, month }) =>
+  `${year}-${month < 10 ? '0' : ''}${month}`;
+
+const groupInvoiceSubItems = (items: InvoiceItem[], projects) => {
+  items.forEach(item => {
+    if (!item.project_uuid) {
+      projects.default.items.push(item);
+    } else {
+      if (!projects[item.project_uuid]) {
+        projects[item.project_uuid] = {
+          items: [],
+          name: item.project_name,
+        };
+      }
+      projects[item.project_uuid].items.push(item);
+    }
+  });
+};
+
+export const groupInvoiceItems = (items: InvoiceItem[]) => {
+  const projects = {
+    default: {
+      items: [],
+      name: '',
+    },
+  };
+  groupInvoiceSubItems(items, projects);
+  return Object.keys(projects)
+    .map(key => projects[key])
+    .sort((a, b) => a.name.localeCompare(b.name));
+};

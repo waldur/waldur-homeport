@@ -24,33 +24,4 @@ export default class BillingUtils {
   getPageTitle() {
     return `${this.ENV.shortPageTitle} | ${this.getTabTitle()}`;
   }
-
-  groupInvoiceItems(items) {
-    const projects = {
-      default: {
-        items: [],
-        name: '',
-      },
-    };
-    this.groupInvoiceSubItems(items, projects);
-    return Object.keys(projects)
-      .map(key => projects[key])
-      .sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  groupInvoiceSubItems(items, projects) {
-    items.forEach(item => {
-      if (!item.project_uuid) {
-        projects.default.items.push(item);
-      } else {
-        if (!projects[item.project_uuid]) {
-          projects[item.project_uuid] = {
-            items: [],
-            name: item.project_name,
-          };
-        }
-        projects[item.project_uuid].items.push(item);
-      }
-    });
-  }
 }
