@@ -6,6 +6,8 @@ import { ngInjector, ENV } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { PayPalInvoicesList } from '@waldur/paypal/PayPalInvoicesList';
 
+import { getTabTitle, getPageTitle } from '../utils';
+
 import { AgreementInfo } from './AgreementInfo';
 import { BillingRecordsList } from './BillingRecordsList';
 import { EstimatedCost } from './EstimatedCost';
@@ -15,11 +17,10 @@ const updateBreadcrumbs = () => {
   if (!ngInjector) {
     return;
   }
-  const BillingUtils = ngInjector.get('BillingUtils');
   const titleService = ngInjector.get('titleService');
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  titleService.setTitle(BillingUtils.getPageTitle());
-  BreadcrumbsService.activeItem = BillingUtils.getTabTitle();
+  titleService.setTitle(getPageTitle());
+  BreadcrumbsService.activeItem = getTabTitle();
 };
 
 export const BillingTabs = () => {

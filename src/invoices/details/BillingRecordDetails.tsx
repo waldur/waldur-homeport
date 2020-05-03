@@ -7,10 +7,12 @@ import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import './BillingRecordDetails.css';
+import { Invoice, InvoiceItem } from '../types';
+import { formatPeriod } from '../utils';
+
 import { CustomerDetails } from './CustomerDetails';
 import { InvoiceItemDetails } from './InvoiceItemDetails';
-import { Invoice, InvoiceItem } from './types';
-import { formatPeriod, groupInvoiceItems } from './utils';
+import { groupInvoiceItems } from './utils';
 
 export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
   const customer = useSelector(getCustomer);
