@@ -4989,7 +4989,7 @@ msgstr ""
 msgid "Register to"
 msgstr ""
 
-#: src/auth/auth-button-text.js
+#: src/auth/AuthButtonText.tsx
 msgid "Register with"
 msgstr ""
 
@@ -6058,7 +6058,7 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: src/auth/auth-button-text.js
+#: src/auth/AuthButtonText.tsx
 msgid "Sign in with"
 msgstr ""
 

@@ -1,13 +1,17 @@
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import authSaml2 from './auth-saml2';
-import authSaml2Trigger from './auth-saml2-trigger';
+import { AuthSaml2Button } from './AuthSaml2Button';
 import { AuthSaml2Dialog } from './AuthSaml2Dialog';
-import Saml2Service from './saml2-service';
+import { AuthSaml2Trigger } from './AuthSaml2Trigger';
 
 export default module => {
-  module.service('Saml2Service', Saml2Service);
   module.component('authSaml2Dialog', connectAngularComponent(AuthSaml2Dialog));
-  module.component('authSaml2Trigger', authSaml2Trigger);
-  module.component('authSaml2', authSaml2);
+  module.component(
+    'authSaml2Trigger',
+    connectAngularComponent(AuthSaml2Trigger, ['mode']),
+  );
+  module.component(
+    'authSaml2',
+    connectAngularComponent(AuthSaml2Button, ['mode']),
+  );
 };
