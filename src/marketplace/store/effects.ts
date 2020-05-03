@@ -1,6 +1,5 @@
 import { all, fork } from 'redux-saga/effects';
 
-import bookingEffects from '../../booking/store/effects';
 import cartEffects from '../cart/store/effects';
 import categoryEffects from '../category/store/effects';
 import comparisonEffects from '../compare/store/effects';
@@ -20,6 +19,5 @@ export default function*() {
     fork(ordersEffects),
     fork(resourcesEffects),
     fork(serviceProviderEffects),
-    fork(bookingEffects),
   ]);
 }
