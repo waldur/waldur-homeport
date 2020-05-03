@@ -1,12 +1,15 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
+
+import { AuthActivation } from './AuthActivation';
 
 function resolveCurrentUser(usersService) {
   return usersService.getCurrentUser();
 }
 resolveCurrentUser.$inject = ['usersService'];
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'home',
     url: '',
@@ -41,7 +44,7 @@ export const states = [
   {
     name: 'home.activate',
     url: '/activate/:user_uuid/:token/',
-    template: '<auth-activation></auth-activation>',
+    component: withStore(AuthActivation),
     data: {
       anonymous: true,
       bodyClass: 'old',
@@ -60,7 +63,6 @@ export const states = [
     name: 'initialdata.view',
     url: '',
     template: '<auth-init></auth-init>',
-    noInitialData: true,
     data: {
       auth: true,
       bodyClass: 'old',

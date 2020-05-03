@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
@@ -6,7 +7,7 @@ import { InvalidObjectPage } from './InvalidObjectPage';
 import { InvalidQuotaPage } from './InvalidQuotaPage';
 import { InvalidRoutePage } from './InvalidRoutePage';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'errorPage',
     component: withStore(AnonymousLayout),

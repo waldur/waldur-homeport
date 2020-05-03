@@ -19,10 +19,12 @@ const TableComponent = props => {
         {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
+          className: 'col-sm-2',
         },
         {
           title: translate('Actions'),
           render: ({ row }) => <ResourceRowActions resource={row} />,
+          className: 'col-sm-2',
         },
       ]}
       verboseName={translate('security groups')}

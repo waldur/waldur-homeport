@@ -33,7 +33,9 @@ export function angular2react<Props extends object>(
       setScope(Object.assign(scope, { props }));
       try {
         scope.$digest();
-      } catch (e) {}
+      } catch (e) {
+        // Suppress error
+      }
     }, [scope, props]);
 
     // Update AngularJS component props when ReactJS props are updated
@@ -58,7 +60,9 @@ export function angular2react<Props extends object>(
       $compile(element)(scope);
       try {
         scope.$digest();
-      } catch (e) {}
+      } catch (e) {
+        // Suppress error
+      }
       setDidInitialCompile(true);
     };
 

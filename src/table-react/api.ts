@@ -56,6 +56,7 @@ export async function fetchAll(
   let response = await fetch(request);
   let result = [];
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     result = result.concat(response.rows);
     if (response.nextPage) {

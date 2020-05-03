@@ -1,4 +1,4 @@
-import { Offering, Category } from '@waldur/marketplace/types';
+import { Offering, Category, Screenshot } from '@waldur/marketplace/types';
 
 import { OfferingStep } from '../types';
 
@@ -23,6 +23,29 @@ export const updateOfferingState = (
     reason,
   },
 });
+
+export const addOfferingScreenshot = (formData: any, offering: Offering) => {
+  return {
+    type: constants.ADD_OFFERING_SCREENSHOT,
+    payload: {
+      formData,
+      offering,
+    },
+  };
+};
+
+export const removeOfferingScreenshot = (
+  offering: Offering,
+  screenshot: Screenshot,
+) => {
+  return {
+    type: constants.REMOVE_OFFERING_SCREENSHOT,
+    payload: {
+      offering,
+      screenshot,
+    },
+  };
+};
 
 export const loadDataStart = () => ({
   type: constants.LOAD_DATA_START,

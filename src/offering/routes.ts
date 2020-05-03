@@ -1,9 +1,13 @@
-export const states = [
+import { StateDeclaration } from '@waldur/core/types';
+import { withStore } from '@waldur/store/connect';
+
+import { OfferingDetails } from './OfferingDetails';
+
+export const states: StateDeclaration[] = [
   {
     name: 'offeringDetails',
     url: '/offering/:uuid/',
-    template: '<offering-details></offering-details>',
-    feature: 'offering',
+    component: withStore(OfferingDetails),
   },
 ];
 

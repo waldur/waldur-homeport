@@ -145,6 +145,23 @@ export const updateOfferingState = (offeringUuid, action, reason) =>
     reason && { paused_reason: reason },
   ).then(response => response.data);
 
+export const uploadOfferingScreenshot = (formData, offering) => {
+  const reqData = {
+    image: formData.screenshots,
+    name: formData.name,
+    description: formData.description,
+    offering: offering.url,
+  };
+  return sendForm(
+    'POST',
+    `${ENV.apiEndpoint}api/marketplace-screenshots/`,
+    reqData,
+  );
+};
+
+export const deleteOfferingScreenshot = (screenshotUuid: string) =>
+  deleteById('/marketplace-screenshots/', screenshotUuid);
+
 export const getServiceProviderList = (params?: {}) =>
   getList<ServiceProvider>('/marketplace-service-providers/', params);
 

@@ -4,6 +4,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Geolocations } from '@waldur/marketplace/types';
 import loadLeafleat from '@waldur/shims/load-leaflet';
+import './LeafletMap.scss';
 
 interface LeafletMapProps {
   positions: Geolocations;

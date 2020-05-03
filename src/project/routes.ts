@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { withStore } from '@waldur/store/connect';
 
@@ -8,7 +9,7 @@ import { ProjectWorkspace } from './ProjectWorkspace';
 import { loadProject } from './resolve';
 import { ProjectTeam } from './team/ProjectTeam';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'project',
     url: '/projects/:uuid/',

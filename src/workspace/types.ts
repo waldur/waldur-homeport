@@ -27,15 +27,25 @@ export interface UserDetails extends User {
   is_active: boolean;
 }
 
-interface PaymentProfile {
+interface PaymentProfileAttributes {
+  end_date: string;
+  agreement_number: string;
+}
+
+export interface PaymentProfile {
   is_active: boolean;
   name: string;
   payment_type: string;
+  payment_type_display: string;
   organization_uuid: string;
   url: string;
+  attributes: PaymentProfileAttributes;
 }
 
 export interface Customer {
+  billing_price_estimate?: {
+    total: string;
+  };
   name: string;
   uuid: string;
   url: string;
@@ -44,6 +54,7 @@ export interface Customer {
   is_service_provider?: boolean;
   abbreviation?: string;
   payment_profiles?: PaymentProfile[];
+  agreement_number?: string;
 }
 
 interface Permission {
@@ -70,6 +81,7 @@ export interface Project {
   permissions: Permission[];
   quotas: Quota[];
   billing_price_estimate?: BillingPriceEstimate;
+  customer_uuid?: string;
 }
 
 export type WorkspaceType = 'user' | 'project' | 'organization' | 'support';

@@ -20,10 +20,9 @@ export const reducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
     case constants.BOOKINGS_SET:
-      const { offeringId, items } = payload;
       return {
         ...state,
-        [offeringId]: items,
+        [payload.offeringId]: payload.items,
       };
 
     case constants.BOOKING_ACCEPT:
@@ -43,20 +42,20 @@ export const reducer = (state = INITIAL_STATE, action) => {
       };
 
     case constants.UPDATE_BOOKING:
-      const { event, oldID } = payload;
-      const updatedList = state.schedules.filter(item => item.id !== oldID);
       return {
         ...state,
-        schedules: [...updatedList, event],
+        schedules: [
+          ...state.schedules.filter(item => item.id !== payload.oldID),
+          payload.event,
+        ],
       };
 
     case constants.REMOVE_BOOKING:
-      const removedList = state.schedules.filter(
-        item => item.id !== payload.bookingID,
-      );
       return {
         ...state,
-        schedules: [...removedList],
+        schedules: state.schedules.filter(
+          item => item.id !== payload.bookingID,
+        ),
       };
 
     case constants.SET_CONFIG:
@@ -68,10 +67,9 @@ export const reducer = (state = INITIAL_STATE, action) => {
         },
       };
     case constants.SET_BOOKINGS:
-      const { bookings } = payload;
       return {
         ...state,
-        bookings,
+        bookings: payload.bookings,
       };
 
     default:

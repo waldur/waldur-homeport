@@ -13,7 +13,8 @@ function initAuthToken($auth, $http) {
   }
 }
 
-Axios.defaults.paramsSerializer = Qs.stringify;
+Axios.defaults.paramsSerializer = params =>
+  Qs.stringify(params, { arrayFormat: 'repeat' });
 
 // On 401 error received, user session has expired and he should logged out
 Axios.interceptors.response.use(
@@ -21,10 +22,11 @@ Axios.interceptors.response.use(
     return response;
   },
   function invalidTokenInterceptor(error) {
-    const authService = ngInjector.get('authService');
-    const $state = ngInjector.get('$state');
-    const $stateParams = ngInjector.get('$stateParams');
-    if (error.response.status === 401) {
+    if (error.response && error.response.status === 401 && ngInjector) {
+      const authService = ngInjector.get('authService');
+      const $state = ngInjector.get('$state');
+      const $stateParams = ngInjector.get('$stateParams');
+
       authService.localLogout(
         $state.current.name
           ? {
@@ -33,8 +35,10 @@ Axios.interceptors.response.use(
             }
           : undefined,
       );
+    } else {
+      // See also: https://github.com/axios/axios/issues/960
+      return Promise.reject(error.response);
     }
-    return Promise.reject(error);
   },
 );
 

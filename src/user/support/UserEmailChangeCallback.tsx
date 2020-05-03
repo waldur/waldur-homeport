@@ -6,7 +6,6 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 
 function delay(ms) {
@@ -15,7 +14,7 @@ function delay(ms) {
   });
 }
 
-const UserEmailChangeCallback = () => {
+export const UserEmailChangeCallback = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -63,5 +62,3 @@ const UserEmailChangeCallback = () => {
     </div>
   );
 };
-
-export default connectAngularComponent(UserEmailChangeCallback);

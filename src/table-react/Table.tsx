@@ -59,7 +59,7 @@ class Table extends React.Component<TableProps> {
           />
         )}
         {this.hasRows() && <TableInfo {...this.props.pagination} />}
-        {this.renderBody()}
+        <div className="table-container">{this.renderBody()}</div>
         {this.hasRows() && (
           <TablePagination
             {...this.props.pagination}

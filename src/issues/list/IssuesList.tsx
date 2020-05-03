@@ -125,7 +125,7 @@ TableComponent.defaultProps = {
 };
 
 const exportRow = (row, props) => {
-  const { supportOrStaff, hiddenColumns } = props;
+  const { supportOrStaff, hiddenColumns = [] } = props;
   const result = [
     row.key || 'N/A',
     row.status || 'N/A',
@@ -151,7 +151,7 @@ const exportRow = (row, props) => {
 };
 
 const exportFields = props => {
-  const { supportOrStaff, hiddenColumns } = props;
+  const { supportOrStaff, hiddenColumns = [] } = props;
   return [
     translate('Key'),
     translate('Status'),

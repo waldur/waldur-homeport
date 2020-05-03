@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { withStore } from '@waldur/store/connect';
 
@@ -5,7 +6,7 @@ import { ChecklistOverview } from './ChecklistOverview';
 import { FEATURE } from './constants';
 import { ProjectChecklist } from './ProjectChecklist';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'marketplace-checklist-project',
     url: 'marketplace-checklist-project/:category/',

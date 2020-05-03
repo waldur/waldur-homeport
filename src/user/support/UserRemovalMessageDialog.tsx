@@ -3,7 +3,6 @@ import * as React from 'react';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 interface UserRemovalMessageDialogProps extends TranslateProps {
   resolve: {
@@ -45,5 +44,3 @@ export const PureUserRemovalMessageDialog = (
 export const UserRemovalMessageDialog = withTranslation(
   PureUserRemovalMessageDialog,
 );
-
-export default connectAngularComponent(UserRemovalMessageDialog, ['resolve']);

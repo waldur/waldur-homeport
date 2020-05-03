@@ -23,7 +23,7 @@ export const ProjectSidebar = () => {
     const fields = getCounterFields(items);
     const counters = await getProjectCounters(project, fields);
     return { items, counters };
-  }, []);
+  }, [project]);
 
   return <Sidebar items={value?.items} counters={value?.counters} />;
 };

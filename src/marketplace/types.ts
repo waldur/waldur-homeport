@@ -113,6 +113,7 @@ export interface Offering {
 }
 
 export interface Screenshot {
+  image: string;
   thumbnail: string;
   name: string;
   description: string;

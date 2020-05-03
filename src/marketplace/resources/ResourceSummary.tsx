@@ -6,6 +6,7 @@ import { CreatedField } from '@waldur/resource/summary/CreatedField';
 
 import { KeyValueButton } from './KeyValueButton';
 import { MarketplaceResourceStateField } from './list/MarketplaceResourceStateField';
+import { ResourceDetailsLink } from './ResourceDetailsLink';
 import { Resource } from './types';
 
 export const ResourceSummary = ({ resource }) => (
@@ -37,6 +38,14 @@ export const ResourceSummary = ({ resource }) => (
         Object.keys(resource.attributes).length > 0 && (
           <KeyValueButton items={resource.attributes} />
         )
+      }
+    />
+    <Field
+      label={translate('Resource')}
+      value={
+        <ResourceDetailsLink item={resource}>
+          {translate('Resource link')}
+        </ResourceDetailsLink>
       }
     />
   </dl>

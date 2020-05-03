@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
@@ -5,7 +6,7 @@ import { withStore } from '@waldur/store/connect';
 import { PaymentApprove } from './PaymentApprove';
 import { PaymentCancel } from './PaymentCancel';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'payment',
     url: '/payment/',

@@ -1,4 +1,4 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import * as React from 'react';
 import * as Panel from 'react-bootstrap/lib/Panel';
 import * as PanelGroup from 'react-bootstrap/lib/PanelGroup';
@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 import { formValueSelector } from 'redux-form';
 
-import { post } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { FormattedMarkdown } from '@waldur/core/FormattedMarkdown';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -14,14 +13,18 @@ import { translate } from '@waldur/i18n';
 import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
+import { createApp } from './api';
 import { FORM_ID } from './constants';
 import { TemplateHeader } from './TemplateHeader';
-import { loadData } from './utils';
+import { FormData } from './types';
+import { serializeApplication, parseVisibleQuestions, loadData } from './utils';
 
 export const TemplateDetail = () => {
   const {
     params: { templateUuid, clusterUuid },
   } = useCurrentStateAndParams();
+
+  const router = useRouter();
 
   const state = useAsync(() => loadData(templateUuid, clusterUuid), [
     templateUuid,
@@ -32,45 +35,46 @@ export const TemplateDetail = () => {
     formValueSelector(FORM_ID)(state, 'project'),
   );
 
-  const namespace = useSelector(state =>
-    formValueSelector(FORM_ID)(state, 'namespace'),
+  const namespaces = React.useMemo(() => project?.namespaces || [], [project]);
+
+  const answers = useSelector(state =>
+    formValueSelector(FORM_ID)(state, 'answers'),
   );
 
-  const namespaces = React.useMemo(
-    () =>
-      project
-        ? state.value.projects
-            .find(p => p.name === project)
-            .namespaces.map(({ name }) => name)
-        : [],
-    [project, state.value],
+  const questions = state.value?.questions;
+
+  const visibleQuestions = React.useMemo(
+    () => parseVisibleQuestions(questions, answers),
+    [questions, answers],
   );
 
   const dispatch = useDispatch();
 
   const createApplication = React.useCallback(
-    async formData => {
+    async (formData: FormData) => {
       try {
-        await post('/rancher-apps/', {
-          name: formData.name,
-          description: formData.description,
-          version: formData.version,
-          template_uuid: state.value.template.uuid,
-          project_uuid: state.value.projects.find(p => p.name === project).uuid,
-          namespace_uuid: state.value.namespaces.find(p => p.name === namespace)
-            .uuid,
-          answers: formData.answers,
+        await createApp(
+          serializeApplication(
+            formData,
+            state.value.template,
+            visibleQuestions,
+          ),
+        );
+        router.stateService.go('resources.details', {
+          uuid: clusterUuid,
+          resource_type: 'Rancher.Cluster',
+          tab: 'applications',
         });
-      } catch (error) {
+      } catch (response) {
         const errorMessage = `${translate(
           'Unable to create application.',
-        )} ${format(error)}`;
+        )} ${format(response)}`;
         dispatch(showError(errorMessage));
         return;
       }
       dispatch(showSuccess(translate('Application has been created.')));
     },
-    [dispatch, state.value, namespace, project],
+    [dispatch, router.stateService, clusterUuid, state.value, visibleQuestions],
   );
 
   if (state.loading) {
@@ -112,9 +116,9 @@ export const TemplateDetail = () => {
           </Panel.Heading>
           <Panel.Body collapsible={true}>
             <TemplateQuestions
-              questions={state.value.version.questions}
+              questions={visibleQuestions}
               versions={state.value.template.versions}
-              projects={state.value.projectOptions}
+              projects={state.value.projects}
               namespaces={namespaces}
               initialValues={state.value.initialValues}
               createApplication={createApplication}

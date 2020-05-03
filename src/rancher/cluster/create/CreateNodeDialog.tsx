@@ -13,7 +13,6 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Flavor } from '@waldur/openstack/openstack-instance/types';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
 import { NodeFlavorGroup } from './NodeFlavorGroup';
@@ -124,5 +123,3 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
     </form>
   );
 });
-
-export default connectAngularComponent(CreateNodeDialog, ['resolve']);

@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { useEmailChange } from './useEmailChange';
 
@@ -56,5 +55,3 @@ export const UserEmailChangeDialog = ({ resolve: { user } }) => {
     </ModalDialog>
   );
 };
-
-export default connectAngularComponent(UserEmailChangeDialog, ['resolve']);

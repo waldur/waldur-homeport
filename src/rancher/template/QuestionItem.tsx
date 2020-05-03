@@ -8,7 +8,7 @@ import { Question } from './types';
 
 const parseDefaultValue = (question: Question) => {
   if (question.type === 'boolean') {
-    return Boolean(question.default);
+    return question.default === 'true';
   } else {
     return question.default;
   }
@@ -19,17 +19,14 @@ export const QuestionItem: React.FC<{
 }> = ({ question }) => {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (question.default) {
-      dispatch(
-        change(
-          FORM_ID,
-          `answers.${question.variable}`,
-          parseDefaultValue(question),
-        ),
-      );
+  const setInitialValue = React.useCallback(() => {
+    const value = parseDefaultValue(question);
+    if (value) {
+      dispatch(change(FORM_ID, `answers.${question.variable}`, value));
     }
-  });
+  }, [question, dispatch]);
+
+  React.useEffect(setInitialValue, [question]);
 
   return React.createElement(FIELD_MAP[question.type] || StringField, question);
 };

@@ -108,8 +108,12 @@ const resourceHeader = {
       }
       return this.getModel().then(
         model => {
-          this.model = model;
-          this.$rootScope.$broadcast('refreshResourceSucceeded');
+          if (!model.modified || model.modified !== this.model.modified) {
+            this.model = model;
+            this.$rootScope.$broadcast('refreshResourceSucceeded');
+          } else {
+            // Skip update to avoid extra re-rendering
+          }
         },
         error => {
           if (error.status === 404) {

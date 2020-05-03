@@ -50,9 +50,10 @@ const serializeNode = subnet => ({
   data_volumes: (nodeRest.data_volumes || []).map(serializeDataVolume),
 });
 
-const serializer = ({ subnet, nodes, ...clusterRest }) => ({
+const serializer = ({ subnet, nodes, ssh_public_key, ...clusterRest }) => ({
   ...clusterRest,
   nodes: nodes.map(serializeNode(subnet)),
+  ssh_public_key: ssh_public_key ? ssh_public_key.url : undefined,
 });
 
 registerOfferingType({

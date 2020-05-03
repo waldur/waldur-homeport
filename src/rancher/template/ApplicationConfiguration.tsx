@@ -5,9 +5,17 @@ import { translate } from '@waldur/i18n';
 
 import { EnumField } from './EnumField';
 import { GroupHeader } from './GroupHeader';
+import { NamespaceField } from './NamespaceField';
 import { StringField } from './StringField';
+import { RancherProject, Namespace } from './types';
 
-export const ApplicationConfiguration = props => (
+interface ApplicationConfigurationProps {
+  versions: string[];
+  projects: RancherProject[];
+  namespaces: Namespace[];
+}
+
+export const ApplicationConfiguration: React.FC<ApplicationConfigurationProps> = props => (
   <>
     <GroupHeader title={translate('Application configuration')} />
     <Row>
@@ -24,13 +32,10 @@ export const ApplicationConfiguration = props => (
         label={translate('Project')}
         variable="project"
         options={props.projects}
+        getLabel={({ name }) => name}
+        getValue={({ url }) => url}
       />
-      <EnumField
-        required={true}
-        label={translate('Namespace')}
-        variable="namespace"
-        options={props.namespaces}
-      />
+      <NamespaceField options={props.namespaces} />
     </Row>
   </>
 );

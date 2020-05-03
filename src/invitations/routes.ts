@@ -1,17 +1,24 @@
-export const states = [
+import { StateDeclaration } from '@waldur/core/types';
+import { withStore } from '@waldur/store/connect';
+
+import { InvitationAccept } from './InvitationAccept';
+import { InvitationApprove } from './InvitationApprove';
+import { InvitationReject } from './InvitationReject';
+
+export const states: StateDeclaration[] = [
   {
     name: 'invitation',
     url: '/invitation/:uuid/',
     data: {
       bodyClass: 'old',
     },
-    template: '<invitation-accept></invitation-accept>',
+    component: withStore(InvitationAccept),
   },
 
   {
     name: 'invitation-approve',
     url: '/invitation_approve/:token/',
-    template: '<invitation-approve></invitation-approve>',
+    component: withStore(InvitationApprove),
     data: {
       bodyClass: 'old',
     },
@@ -20,7 +27,7 @@ export const states = [
   {
     name: 'invitation-reject',
     url: '/invitation_reject/:token/',
-    template: '<invitation-reject></invitation-reject>',
+    component: withStore(InvitationReject),
     data: {
       bodyClass: 'old',
     },

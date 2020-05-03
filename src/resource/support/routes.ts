@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { checkPermission } from '@waldur/issues/utils';
 import { withStore } from '@waldur/store/connect';
@@ -5,7 +6,7 @@ import { withStore } from '@waldur/store/connect';
 import { ResourcesTreemap } from './ResourcesTreemap';
 import { SharedProviderContainer } from './SharedProviderContainer';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'support.resources-treemap',
     url: 'resources-treemap/',

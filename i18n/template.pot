@@ -8,7 +8,7 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/invoices/details/BillingRecordDetails.tsx
 msgid "(VAT is not included)"
 msgstr ""
 
@@ -38,8 +38,8 @@ msgstr ""
 msgid "API token lifetime"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
 #: src/customer/details/CustomerDetails.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 msgid "Abbreviation"
@@ -74,11 +74,11 @@ msgstr ""
 msgid "Accessible to all customers."
 msgstr ""
 
-#: src/auth/auth-activation.html
+#: src/auth/AuthActivation.tsx
 msgid "Account activation"
 msgstr ""
 
-#: src/auth/auth-activation.js
+#: src/auth/AuthActivation.tsx
 msgid "Account has been activated."
 msgstr ""
 
@@ -86,13 +86,13 @@ msgstr ""
 msgid "Account removal"
 msgstr ""
 
-#: src/billing/billing-utils.js
-#: src/billing/routes.ts
+#: src/invoices/routes.ts
+#: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Accounting"
 msgstr ""
 
-#: src/customer/AccountingPeriodFilter.tsx
+#: src/customer/list/AccountingPeriodFilter.tsx
 msgid "Accounting period"
 msgstr ""
 
@@ -100,12 +100,11 @@ msgstr ""
 msgid "Accounting plans"
 msgstr ""
 
-#: src/billing/billing-record-header.html
+#: src/invoices/details/BillingDetails.tsx
 msgid "Accounting record"
 msgstr ""
 
-#: src/billing/billing-record-header.js
-#: src/billing/billing-tabs.html
+#: src/invoices/details/BillingDetails.tsx
 msgid "Accounting records"
 msgstr ""
 
@@ -118,14 +117,15 @@ msgid "Accounting type"
 msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
-#: src/billing/BillingRecordsList.tsx
-#: src/billing/InvoicesList.tsx
-#: src/billing/PaymentProfileList.tsx
 #: src/booking/BookingsList.tsx
+#: src/customer/details/PaymentProfileList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
@@ -150,10 +150,11 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/actions/action-button-resource.html
@@ -277,7 +278,7 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
-#: src/billing/PaymentProfileList.tsx
+#: src/customer/details/PaymentProfileList.tsx
 msgid "Add payment profile"
 msgstr ""
 
@@ -304,12 +305,21 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/actions/OfferingAddScreenshotButton.tsx
+msgid "Add screenshot"
+msgstr ""
+
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Add security group"
 msgstr ""
 
 #: src/project/ProjectActions.tsx
 msgid "Add team member"
+msgstr ""
+
+#: src/rancher/template/NamespaceField.tsx
+msgid "Add to a new namespace"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartButton.tsx
@@ -377,9 +387,9 @@ msgstr ""
 msgid "Agree with ToS"
 msgstr ""
 
-#: src/billing/billing-record-details.html
-#: src/customer/CustomerList.tsx
 #: src/customer/details/CustomerDetails.tsx
+#: src/customer/list/CustomerList.tsx
+#: src/invoices/details/BillingRecordDetails.tsx
 msgid "Agreement number"
 msgstr ""
 
@@ -387,7 +397,7 @@ msgstr ""
 msgid "Alert"
 msgstr ""
 
-#: src/customer/AccountingRunningField.tsx
+#: src/customer/list/AccountingRunningField.tsx
 msgid "All"
 msgstr ""
 
@@ -448,7 +458,12 @@ msgid "Annotations & labels"
 msgstr ""
 
 #: src/marketplace-checklist/AnswersTable.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Answer"
+msgstr ""
+
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+msgid "Answers"
 msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx
@@ -461,8 +476,16 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
+#: src/rancher/template/breadcrumbs.ts
+msgid "Application catalogues"
+msgstr ""
+
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Application configuration"
+msgstr ""
+
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+msgid "Application details"
 msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
@@ -470,7 +493,12 @@ msgid "Application has been created."
 msgstr ""
 
 #: src/rancher/cluster/tabs.ts
+#: src/rancher/template/breadcrumbs.ts
 msgid "Application templates"
+msgstr ""
+
+#: src/rancher/cluster/tabs.ts
+msgid "Applications"
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
@@ -512,6 +540,10 @@ msgstr ""
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType}?"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
+msgid "Are you sure you want to delete the screenshot?"
 msgstr ""
 
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
@@ -771,8 +803,8 @@ msgstr ""
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr ""
 
-#: src/billing/billing-utils.js
 #: src/customer/create/customer-create-config.js
+#: src/invoices/utils.ts
 msgid "Billing"
 msgstr ""
 
@@ -814,6 +846,7 @@ msgstr ""
 msgid "Branch"
 msgstr ""
 
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Browse"
 msgstr ""
@@ -890,8 +923,8 @@ msgstr ""
 msgid "Cancel request"
 msgstr ""
 
-#: src/billing/InvoicesFilter.tsx
 #: src/invitations/InvitationsFilter.tsx
+#: src/invoices/list/InvoicesFilter.tsx
 msgid "Canceled"
 msgstr ""
 
@@ -903,6 +936,8 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 msgid "Catalog"
 msgstr ""
@@ -1048,8 +1083,8 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
-#: src/billing/events/invoice-events-dialog.html
 #: src/customer/details/customer-report-error.html
+#: src/invoices/events/invoice-events-dialog.html
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.html
 #: src/openstack/openstack-tenant/actions/request-direct-access.html
 #: src/slurm/details/slurm-allocation-details-dialog.html
@@ -1180,11 +1215,12 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Confirmation"
 msgstr ""
 
-#: src/auth/auth-login.js
+#: src/auth/SignupForm.tsx
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
@@ -1228,7 +1264,7 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -1366,12 +1402,13 @@ msgstr ""
 msgid "Create your first project"
 msgstr ""
 
-#: src/billing/InvoicesFilter.tsx
 #: src/booking/BookingsList.tsx
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
+#: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
@@ -1381,6 +1418,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/vmware/DisksList.tsx
@@ -1447,7 +1485,7 @@ msgstr ""
 msgid "Current API token"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 msgid "Current cost"
 msgstr ""
 
@@ -1567,9 +1605,10 @@ msgstr ""
 msgid "Default value"
 msgstr ""
 
-#: src/billing/PaymentProfileList.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
+#: src/customer/details/PaymentProfileList.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
+#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
@@ -1608,6 +1647,8 @@ msgstr ""
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -1681,6 +1722,7 @@ msgstr ""
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/team/UserDetailsButton.tsx
+#: src/rancher/cluster/ApplicationDetailsButton.tsx
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -1720,7 +1762,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: src/billing/PaymentProfileList.tsx
+#: src/customer/details/PaymentProfileList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
 msgstr ""
@@ -1783,7 +1825,7 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-#: src/billing/invoice-header.html
+#: src/invoices/details/DownloadInvoiceButton.tsx
 #: src/paypal/InvoiceActions.tsx
 msgid "Download invoice"
 msgstr ""
@@ -1806,9 +1848,9 @@ msgstr ""
 msgid "Drop files to attach, or"
 msgstr ""
 
-#: src/billing/InvoicesList.tsx
-#: src/billing/invoice-details.html
-#: src/paypal/InvoicesList.tsx
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Due date"
 msgstr ""
 
@@ -1841,7 +1883,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
-#: src/billing/PaymentProfileList.tsx
+#: src/customer/details/PaymentProfileList.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
@@ -1866,7 +1908,7 @@ msgstr ""
 msgid "Edit team member"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SignupForm.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserFilter.tsx
@@ -1902,7 +1944,7 @@ msgstr ""
 msgid "Enable profile"
 msgstr ""
 
-#: src/billing/PaymentProfileList.tsx
+#: src/customer/details/PaymentProfileList.tsx
 #: src/user/hooks/hook-details.html
 msgid "Enabled"
 msgstr ""
@@ -1915,12 +1957,11 @@ msgstr ""
 msgid "End"
 msgstr ""
 
-#: src/billing/billing-tabs.html
+#: src/invoices/list/AgreementInfo.tsx
 msgid "End date of the agreement is"
 msgstr ""
 
-#: src/billing/billing-record-details.html
-#: src/billing/invoice-details.html
+#: src/invoices/details/InvoiceItemDetails.tsx
 msgid "End time"
 msgstr ""
 
@@ -1957,7 +1998,7 @@ msgstr ""
 msgid "Esimated price per month"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
 msgid "Estimated cost"
@@ -1976,8 +2017,8 @@ msgstr ""
 msgid "Estimated cost for current month"
 msgstr ""
 
-#: src/billing/billing-tabs.html
-msgid "Estimated cost for the current month:"
+#: src/invoices/list/EstimatedCost.tsx
+msgid "Estimated cost for the current month: {cost}"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
@@ -2269,7 +2310,7 @@ msgstr ""
 msgid "Following fields contain errors"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/invoices/details/BillingRecordDetails.tsx
 msgid "For"
 msgstr ""
 
@@ -2290,7 +2331,7 @@ msgstr ""
 msgid "FreeIPA group quota"
 msgstr ""
 
-#: src/billing/invoice-details.html
+#: src/invoices/details/InvoiceDetails.tsx
 msgid "From"
 msgstr ""
 
@@ -2303,7 +2344,7 @@ msgstr ""
 msgid "Full description"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SignupForm.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
@@ -2356,6 +2397,10 @@ msgstr ""
 
 #: src/rancher/cluster/actions/KubeconfigFileAction.ts
 msgid "Generate Kubeconfig file"
+msgstr ""
+
+#: src/rancher/template/PasswordField.tsx
+msgid "Generate password"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
@@ -2680,7 +2725,7 @@ msgstr ""
 msgid "Invalid URL. Unable to parse payment details."
 msgstr ""
 
-#: src/invitations/invitation-approve.html
+#: src/invitations/InvitationApprove.tsx
 msgid "Invitation approval"
 msgstr ""
 
@@ -2696,7 +2741,7 @@ msgstr ""
 msgid "Invitation email is:"
 msgstr ""
 
-#: src/invitations/invitation-approve.js
+#: src/invitations/InvitationApprove.tsx
 msgid "Invitation has been approved."
 msgstr ""
 
@@ -2708,8 +2753,8 @@ msgstr ""
 msgid "Invitation has been created."
 msgstr ""
 
-#: src/invitations/invitation-reject.js
-msgid "Invitation has been rejectd."
+#: src/invitations/InvitationReject.tsx
+msgid "Invitation has been rejected."
 msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
@@ -2728,7 +2773,7 @@ msgstr ""
 msgid "Invitation is not valid."
 msgstr ""
 
-#: src/invitations/invitation-reject.html
+#: src/invitations/InvitationReject.tsx
 msgid "Invitation rejection"
 msgstr ""
 
@@ -2749,37 +2794,37 @@ msgstr ""
 msgid "Invite user"
 msgstr ""
 
-#: src/billing/invoice-header.html
+#: src/invoices/details/BillingDetails.tsx
 msgid "Invoice"
 msgstr ""
 
-#: src/billing/invoice-details.html
+#: src/invoices/details/InvoiceDetails.tsx
 msgid "Invoice No."
 msgstr ""
 
-#: src/billing/InvoicesList.tsx
-#: src/billing/invoice-details.html
-#: src/paypal/InvoicesList.tsx
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Invoice date"
 msgstr ""
 
-#: src/billing/events.ts
+#: src/invoices/events.ts
 msgid "Invoice events"
 msgstr ""
 
-#: src/billing/events/invoice-events-dialog.html
+#: src/invoices/events/invoice-events-dialog.html
 msgid "Invoice events timeline"
 msgstr ""
 
-#: src/billing/events.ts
+#: src/invoices/events.ts
 msgid "Invoice for organization {customer_link} for the period of {period} has been created."
 msgstr ""
 
-#: src/billing/events.ts
+#: src/invoices/events.ts
 msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
 msgstr ""
 
-#: src/billing/events.ts
+#: src/invoices/events.ts
 msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
 msgstr ""
 
@@ -2787,8 +2832,8 @@ msgstr ""
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
 
-#: src/billing/InvoicesList.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Invoice number"
 msgstr ""
 
@@ -2800,11 +2845,7 @@ msgstr ""
 msgid "Invoiced to"
 msgstr ""
 
-#: src/billing/billing-tabs.html
-msgid "Invoices"
-msgstr ""
-
-#: src/billing/invoice-header.html
+#: src/invoices/details/BillingDetails.tsx
 msgid "Invoices list"
 msgstr ""
 
@@ -2859,8 +2900,8 @@ msgstr ""
 msgid "It is used to automatically assign floating IP to your virtual machine."
 msgstr ""
 
-#: src/billing/billing-record-details.html
-#: src/billing/invoice-details.html
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/orders/Order.tsx
 msgid "Item"
@@ -2912,6 +2953,7 @@ msgstr ""
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Key"
 msgstr ""
 
@@ -3012,6 +3054,7 @@ msgid "Limits are invalid."
 msgstr ""
 
 #: src/issues/issue-detail.html
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Link"
 msgstr ""
 
@@ -3023,7 +3066,7 @@ msgstr ""
 msgid "Lithuanian"
 msgstr ""
 
-#: src/customer/TotalCostComponent.tsx
+#: src/customer/list/TotalCostComponent.tsx
 msgid "Loading"
 msgstr ""
 
@@ -3048,6 +3091,7 @@ msgstr ""
 msgid "Logging user in"
 msgstr ""
 
+#: src/auth/SigninForm.tsx
 #: src/auth/auth-login.html
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 msgid "Login"
@@ -3308,7 +3352,7 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: src/billing/events/invoice-events-dialog.html
+#: src/invoices/events/invoice-events-dialog.html
 msgid "More info"
 msgstr ""
 
@@ -3349,18 +3393,19 @@ msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/billing/PaymentProfileDetails.tsx
-#: src/billing/PaymentProfileList.tsx
-#: src/billing/PriceEstimateDialog.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/create/customer-create-config.js
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/PaymentProfileDetails.tsx
+#: src/customer/details/PaymentProfileList.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/jira/project/jira-project-config.js
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -3396,6 +3441,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
@@ -3451,8 +3497,12 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
-#: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/NamespaceField.tsx
 msgid "Namespace"
+msgstr ""
+
+#: src/rancher/template/NamespaceField.tsx
+msgid "Namespace should be unique."
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -3605,7 +3655,7 @@ msgstr ""
 msgid "Not assigned"
 msgstr ""
 
-#: src/customer/AccountingRunningField.tsx
+#: src/customer/list/AccountingRunningField.tsx
 msgid "Not running accounting"
 msgstr ""
 
@@ -3637,7 +3687,7 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
-#: src/billing/SendNotificationButton.tsx
+#: src/invoices/list/SendNotificationButton.tsx
 msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
@@ -3718,6 +3768,10 @@ msgstr ""
 msgid "Offering details"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingScreenshotsListTablePlaceholder.tsx
+msgid "Offering doesn't have screenshots."
+msgstr ""
+
 #: src/offering/events.ts
 msgid "Offering events"
 msgstr ""
@@ -3736,6 +3790,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Offering logo"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
+msgid "Offering screenshots ({name})"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -3763,6 +3821,10 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 msgid "Offerings"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+msgid "Offerings screenshots"
 msgstr ""
 
 #: src/intro/base-intro.js
@@ -3807,6 +3869,7 @@ msgstr ""
 
 #: src/events/EventDetailsTable.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "Open"
 msgstr ""
@@ -3918,8 +3981,8 @@ msgstr ""
 msgid "Orders"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
 #: src/customer/create/CustomerCreatePrompt.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/create/issue-create-dialog.html
@@ -3962,7 +4025,7 @@ msgstr ""
 msgid "Organization has been created."
 msgstr ""
 
-#: src/billing/billing-tabs.html
+#: src/invoices/list/AgreementInfo.tsx
 msgid "Organization has signed a fixed price agreement"
 msgstr ""
 
@@ -4005,9 +4068,8 @@ msgstr ""
 msgid "Organization users list"
 msgstr ""
 
-#: src/billing/billing-record-header.js
-#: src/billing/invoice-header.html
 #: src/customer/workspace/CustomerWorkspace.tsx
+#: src/invoices/details/BillingDetails.tsx
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts
@@ -4028,7 +4090,7 @@ msgstr ""
 msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"
 msgstr ""
@@ -4074,7 +4136,7 @@ msgstr ""
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr ""
 
-#: src/billing/InvoicesFilter.tsx
+#: src/invoices/list/InvoicesFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Paid"
 msgstr ""
@@ -4084,7 +4146,8 @@ msgstr ""
 msgid "Parent request"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SigninForm.tsx
+#: src/auth/SignupForm.tsx
 #: src/azure/sql/AzureSQLServerSummary.tsx
 #: src/jira/JiraForm.tsx
 #: src/openstack/OpenStackForm.tsx
@@ -4142,7 +4205,7 @@ msgstr ""
 msgid "Payment pending"
 msgstr ""
 
-#: src/customer/CustomerPaymentProfile.tsx
+#: src/customer/list/CustomerPaymentProfile.tsx
 msgid "Payment profile"
 msgstr ""
 
@@ -4150,12 +4213,12 @@ msgstr ""
 msgid "Payment profiles"
 msgstr ""
 
-#: src/customer/CustomerPaymentProfile.tsx
+#: src/customer/list/CustomerPaymentProfile.tsx
 msgid "Payment type {type}"
 msgstr ""
 
-#: src/billing/InvoicesFilter.tsx
 #: src/invitations/InvitationsFilter.tsx
+#: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace/orders/store/reducer.ts
 msgid "Pending"
 msgstr ""
@@ -4205,7 +4268,7 @@ msgstr ""
 msgid "Permissions log"
 msgstr ""
 
-#: src/billing/CustomerDetails.tsx
+#: src/invoices/details/CustomerDetails.tsx
 msgid "Phone"
 msgstr ""
 
@@ -4312,6 +4375,14 @@ msgstr ""
 msgid "Please enter reason why offering has been paused."
 msgstr ""
 
+#: src/auth/SigninForm.tsx
+msgid "Please enter username and password."
+msgstr ""
+
+#: src/auth/SignupForm.tsx
+msgid "Please enter username, password and email."
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Please enter volume size to see price estimate."
 msgstr ""
@@ -4344,6 +4415,10 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 msgid "Please provide registration code of your company."
+msgstr ""
+
+#: src/marketplace/offerings/OfferingScreenshotsListTablePlaceholder.tsx
+msgid "Please provide visual material describing the Offering"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
@@ -4445,7 +4520,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: src/billing/InvoicesList.tsx
+#: src/invoices/list/InvoicesList.tsx
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
@@ -4453,12 +4528,8 @@ msgstr ""
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Price"
-msgstr ""
-
-#: src/billing/PriceEstimateDialog.tsx
-msgid "Price estimate details"
 msgstr ""
 
 #: src/marketplace/common/utils.ts
@@ -4517,11 +4588,11 @@ msgstr ""
 msgid "Pricing tier"
 msgstr ""
 
-#: src/billing/invoice-header.html
+#: src/invoices/details/PrintInvoiceButton.tsx
 msgid "Print invoice"
 msgstr ""
 
-#: src/billing/billing-record-header.html
+#: src/invoices/details/PrintInvoiceButton.tsx
 msgid "Print record"
 msgstr ""
 
@@ -4568,6 +4639,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Project"
 msgstr ""
@@ -4653,8 +4725,9 @@ msgstr ""
 
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-#: src/offering/offering-details.js
+#: src/offering/OfferingDetails.tsx
 #: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/breadcrumbs.ts
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 msgid "Project workspace"
 msgstr ""
@@ -4781,14 +4854,15 @@ msgstr ""
 msgid "Put this into ~/.kube/config:"
 msgstr ""
 
-#: src/billing/billing-record-details.html
-#: src/billing/invoice-details.html
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts
 msgid "Quantity"
 msgstr ""
 
 #: src/marketplace-checklist/AnswersTable.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Question"
 msgstr ""
 
@@ -4826,6 +4900,7 @@ msgstr ""
 msgid "Rancher access key"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/rancher/cluster/create/marketplace.ts
 msgid "Rancher cluster"
 msgstr ""
@@ -4860,27 +4935,27 @@ msgstr ""
 msgid "Recent additions"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/invoices/details/BillingRecordDetails.tsx
 msgid "Record no."
 msgstr ""
 
-#: src/billing/SendNotificationButton.tsx
+#: src/invoices/list/SendNotificationButton.tsx
 msgid "Record notification has been sent to organization owners."
 msgstr ""
 
-#: src/billing/BillingRecordsList.tsx
+#: src/invoices/list/BillingRecordsList.tsx
 msgid "Record number"
 msgstr ""
 
-#: src/billing/BillingRecordsList.tsx
-#: src/billing/billing-record-details.html
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/list/BillingRecordsList.tsx
 msgid "Record period"
 msgstr ""
 
 #: src/issues/list/IssuesShortListComponent.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/orders/OrderDetails.tsx
-#: src/offering/offering-details.html
+#: src/offering/OfferingActions.tsx
 #: src/resource/ResourceRefreshButton.tsx
 #: src/table-react/TableRefreshButton.tsx
 msgid "Refresh"
@@ -4900,7 +4975,7 @@ msgstr ""
 msgid "Region name"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SignupForm.tsx
 msgid "Register"
 msgstr ""
 
@@ -4928,7 +5003,7 @@ msgstr ""
 msgid "Registered at:"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Registration code"
 msgstr ""
@@ -5043,6 +5118,10 @@ msgstr ""
 msgid "Report incorrect data"
 msgstr ""
 
+#: src/offering/OfferingReportComponent.tsx
+msgid "Report is invalid."
+msgstr ""
+
 #: src/marketplace/resources/usage/ResourceCreateUsageButton.tsx
 msgid "Report usage"
 msgstr ""
@@ -5092,7 +5171,7 @@ msgstr ""
 msgid "Request detail"
 msgstr ""
 
-#: src/offering/offering-details.html
+#: src/offering/OfferingDetails.tsx
 msgid "Request details"
 msgstr ""
 
@@ -5205,6 +5284,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Resource"
 msgstr ""
 
@@ -5286,6 +5366,7 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItem.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Resource link"
 msgstr ""
 
@@ -5319,10 +5400,11 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
-#: src/offering/offering-details.js
+#: src/offering/OfferingDetails.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/breadcrumbs.ts
 #: src/resource/breadcrumbs/resource-breadcrumbs-service.js
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
@@ -5377,7 +5459,7 @@ msgstr ""
 msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr ""
 
-#: src/billing/events/invoice-events-dialog.html
+#: src/invoices/events/invoice-events-dialog.html
 msgid "Retry"
 msgstr ""
 
@@ -5415,7 +5497,7 @@ msgstr ""
 msgid "Rules"
 msgstr ""
 
-#: src/customer/AccountingRunningField.tsx
+#: src/customer/list/AccountingRunningField.tsx
 msgid "Running accounting"
 msgstr ""
 
@@ -5480,6 +5562,7 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
+#: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "SSH public key"
 msgstr ""
 
@@ -5516,7 +5599,26 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Screenshot has been added."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Screenshot has been removed."
+msgstr ""
+
+#: src/marketplace/offerings/ScreenshotThumbnail.tsx
+#: src/marketplace/offerings/ViewOfferingScreenshotDialog.tsx
+msgid "Screenshot here"
+msgstr ""
+
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+msgid "Screenshot:"
+msgstr ""
+
 #: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/offerings/actions/OfferingActions.tsx
+#: src/marketplace/routes.ts
 msgid "Screenshots"
 msgstr ""
 
@@ -5610,7 +5712,7 @@ msgstr ""
 msgid "Select SSH public key..."
 msgstr ""
 
-#: src/customer/AccountingPeriodField.tsx
+#: src/customer/list/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
 
@@ -5619,7 +5721,7 @@ msgstr ""
 msgid "Select affected resource..."
 msgstr ""
 
-#: src/rancher/template/EnumField.tsx
+#: src/rancher/template/SelectControl.tsx
 msgid "Select an option..."
 msgstr ""
 
@@ -5766,7 +5868,7 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: src/billing/SendNotificationButton.tsx
+#: src/invoices/list/SendNotificationButton.tsx
 msgid "Send notification"
 msgstr ""
 
@@ -5802,8 +5904,7 @@ msgstr ""
 msgid "Service name"
 msgstr ""
 
-#: src/billing/billing-record-details.html
-#: src/billing/invoice-details.html
+#: src/invoices/details/InvoiceItemDetails.tsx
 #: src/marketplace/details/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
@@ -5909,12 +6010,11 @@ msgstr ""
 msgid "Show console log"
 msgstr ""
 
-#: src/billing/price-estimate-button.html
 #: src/marketplace/resources/KeyValueButton.tsx
 msgid "Show details"
 msgstr ""
 
-#: src/billing/events/invoice-events-toggle.html
+#: src/invoices/events/invoice-events-toggle.html
 msgid "Show events"
 msgstr ""
 
@@ -5947,7 +6047,7 @@ msgstr ""
 msgid "Show user details"
 msgstr ""
 
-#: src/customer/AccountingRunningField.tsx
+#: src/customer/list/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr ""
@@ -6055,12 +6155,11 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 msgid "Start day of accounting"
 msgstr ""
 
-#: src/billing/billing-record-details.html
-#: src/billing/invoice-details.html
+#: src/invoices/details/InvoiceItemDetails.tsx
 msgid "Start time"
 msgstr ""
 
@@ -6069,11 +6168,11 @@ msgid "Starting"
 msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
-#: src/billing/BillingRecordsList.tsx
-#: src/billing/InvoicesList.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -6102,10 +6201,11 @@ msgstr ""
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -6116,7 +6216,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: src/billing/PaymentProfileList.tsx
+#: src/customer/details/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
@@ -6169,6 +6269,7 @@ msgstr ""
 
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -6221,7 +6322,7 @@ msgstr ""
 msgid "Subscription ID"
 msgstr ""
 
-#: src/billing/invoice-details.html
+#: src/invoices/details/InvoiceDetails.tsx
 msgid "Subtotal"
 msgstr ""
 
@@ -6230,6 +6331,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
@@ -6300,7 +6402,7 @@ msgstr ""
 msgid "System volume type"
 msgstr ""
 
-#: src/billing/invoice-details.html
+#: src/invoices/details/InvoiceDetails.tsx
 msgid "TAX"
 msgstr ""
 
@@ -6308,8 +6410,8 @@ msgstr ""
 msgid "TLD \"{tld}\" must not be all numeric"
 msgstr ""
 
-#: src/billing/billing-record-details.html
-#: src/billing/invoice-details.html
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
 msgid "TOTAL"
 msgstr ""
 
@@ -6317,8 +6419,9 @@ msgstr ""
 msgid "Taking a snapshot"
 msgstr ""
 
-#: src/billing/InvoicesList.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/invoices/details/InvoiceDetails.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Tax"
 msgstr ""
 
@@ -6355,6 +6458,8 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr ""
 
 #: src/issues/create/issue-create-dialog.html
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Template"
@@ -6522,7 +6627,7 @@ msgstr ""
 msgid "There are no comments yet."
 msgstr ""
 
-#: src/billing/events/invoice-events-dialog.html
+#: src/invoices/events/invoice-events-dialog.html
 msgid "There are no events for this resource."
 msgstr ""
 
@@ -6620,6 +6725,10 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
+#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+msgid "Thumbnail"
+msgstr ""
+
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortListComponent.tsx
 msgid "Time in progress"
@@ -6651,7 +6760,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: src/billing/invoice-details.html
+#: src/invoices/details/InvoiceDetails.tsx
 msgid "To"
 msgstr ""
 
@@ -6692,12 +6801,12 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
-#: src/billing/BillingRecordsList.tsx
-#: src/billing/InvoicesList.tsx
-#: src/billing/PriceEstimateDialog.tsx
+#: src/invoices/list/BillingRecordsList.tsx
+#: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "Total"
 msgstr ""
 
@@ -6709,7 +6818,7 @@ msgstr ""
 msgid "Total cost"
 msgstr ""
 
-#: src/customer/TotalCostField.tsx
+#: src/customer/list/TotalCostField.tsx
 msgid "Total cost:"
 msgstr ""
 
@@ -6721,8 +6830,8 @@ msgstr ""
 msgid "Total number of nodes"
 msgstr ""
 
-#: src/billing/billing-record-details.html
-#: src/billing/invoice-details.html
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
 msgid "Total price"
 msgstr ""
 
@@ -6735,7 +6844,7 @@ msgstr ""
 msgid "Total: {total}"
 msgstr ""
 
-#: src/billing/billing-record-details.html
+#: src/invoices/details/InvoiceItemDetails.tsx
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
@@ -6743,9 +6852,8 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
-#: src/billing/PaymentProfileDetails.tsx
-#: src/billing/PaymentProfileList.tsx
-#: src/billing/PriceEstimateDialog.tsx
+#: src/customer/details/PaymentProfileDetails.tsx
+#: src/customer/details/PaymentProfileList.tsx
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -6787,7 +6895,7 @@ msgstr ""
 msgid "Unable to accept booking."
 msgstr ""
 
-#: src/auth/auth-activation.js
+#: src/auth/AuthActivation.tsx
 msgid "Unable to activate account."
 msgstr ""
 
@@ -6799,7 +6907,11 @@ msgstr ""
 msgid "Unable to add item to shopping cart."
 msgstr ""
 
-#: src/invitations/invitation-approve.js
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to add screenshot."
+msgstr ""
+
+#: src/invitations/InvitationApprove.tsx
 msgid "Unable to approve invitation."
 msgstr ""
 
@@ -6990,16 +7102,19 @@ msgstr ""
 msgid "Unable to load data"
 msgstr ""
 
-#: src/customer/TotalCostComponent.tsx
+#: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
+#: src/invoices/details/BillingDetails.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
+#: src/offering/OfferingDetails.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
+#: src/rancher/template/SecretField.tsx
 msgid "Unable to load data."
 msgstr ""
 
@@ -7007,7 +7122,7 @@ msgstr ""
 msgid "Unable to load editor"
 msgstr ""
 
-#: src/billing/events/invoice-events-dialog.html
+#: src/invoices/events/invoice-events-dialog.html
 msgid "Unable to load events for this resource."
 msgstr ""
 
@@ -7015,7 +7130,7 @@ msgstr ""
 msgid "Unable to load file."
 msgstr ""
 
-#: src/customer/CustomerListContainer.tsx
+#: src/customer/list/CustomerListContainer.tsx
 msgid "Unable to load financial overview."
 msgstr ""
 
@@ -7061,7 +7176,7 @@ msgstr ""
 msgid "Unable to load order details."
 msgstr ""
 
-#: src/customer/CustomerExpandableRow.tsx
+#: src/customer/list/CustomerExpandableRow.tsx
 msgid "Unable to load organization resources."
 msgstr ""
 
@@ -7149,7 +7264,7 @@ msgstr ""
 msgid "Unable to reject booking."
 msgstr ""
 
-#: src/invitations/invitation-reject.js
+#: src/invitations/InvitationReject.tsx
 msgid "Unable to reject invitation."
 msgstr ""
 
@@ -7173,6 +7288,10 @@ msgstr ""
 msgid "Unable to remove logo."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to remove screenshot."
+msgstr ""
+
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Unable to resend invitation."
 msgstr ""
@@ -7181,7 +7300,7 @@ msgstr ""
 msgid "Unable to save user."
 msgstr ""
 
-#: src/billing/SendNotificationButton.tsx
+#: src/invoices/list/SendNotificationButton.tsx
 msgid "Unable to send record notification."
 msgstr ""
 
@@ -7264,8 +7383,8 @@ msgstr ""
 msgid "Unit"
 msgstr ""
 
-#: src/billing/billing-record-details.html
-#: src/billing/invoice-details.html
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
 #: src/offering/actions/CompleteAction.ts
 msgid "Unit price"
 msgstr ""
@@ -7419,6 +7538,10 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Usages"
+msgstr ""
+
+#: src/rancher/template/NamespaceField.tsx
+msgid "Use an existing namespace"
 msgstr ""
 
 #: src/slurm/SlurmForm.tsx
@@ -7576,7 +7699,8 @@ msgstr ""
 msgid "User {user_link} logged out successfully with SAML2."
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SigninForm.tsx
+#: src/auth/SignupForm.tsx
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
 #: src/jira/JiraForm.tsx
@@ -7611,7 +7735,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: src/billing/CustomerDetails.tsx
+#: src/invoices/details/CustomerDetails.tsx
 msgid "VAT"
 msgstr ""
 
@@ -7619,11 +7743,11 @@ msgstr ""
 msgid "VAT code"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 msgid "VAT is included"
 msgstr ""
 
-#: src/customer/CustomerList.tsx
+#: src/customer/list/CustomerList.tsx
 msgid "VAT is not included"
 msgstr ""
 
@@ -7689,6 +7813,7 @@ msgstr ""
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr ""
 
@@ -7721,8 +7846,13 @@ msgid "Verifying email change"
 msgstr ""
 
 #: src/navigation/AppFooter.tsx
+#: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
+msgstr ""
+
+#: src/marketplace/offerings/ViewOfferingScreenshotDialog.tsx
+msgid "Viewing screenshot"
 msgstr ""
 
 #: src/openstack/utils.ts
@@ -7926,7 +8056,7 @@ msgstr ""
 msgid "You need approval to finish purchasing of services."
 msgstr ""
 
-#: src/invitations/invitation-accept.html
+#: src/invitations/InvitationAccept.tsx
 msgid "You will be redirected in a moment."
 msgstr ""
 
@@ -7950,7 +8080,7 @@ msgstr ""
 msgid "Your current email is:"
 msgstr ""
 
-#: src/invitations/invitation-accept.html
+#: src/invitations/InvitationAccept.tsx
 msgid "Your invitation is being processed."
 msgstr ""
 
@@ -7988,6 +8118,10 @@ msgstr ""
 
 #: src/rancher/template/ClusterTemplateList.tsx
 msgid "application templates"
+msgstr ""
+
+#: src/rancher/cluster/ClusterApplicationsList.tsx
+msgid "applications"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -8034,6 +8168,10 @@ msgstr ""
 msgid "disks"
 msgstr ""
 
+#: src/rancher/template/NamespaceField.tsx
+msgid "e.g. MyApp"
+msgstr ""
+
 #: src/table-react/TablePageSize.tsx
 msgid "entries"
 msgstr ""
@@ -8075,8 +8213,8 @@ msgstr ""
 msgid "internal IPs"
 msgstr ""
 
-#: src/billing/InvoicesList.tsx
-#: src/paypal/InvoicesList.tsx
+#: src/invoices/list/InvoicesList.tsx
+#: src/paypal/PayPalInvoicesList.tsx
 msgid "invoices"
 msgstr ""
 
@@ -8105,7 +8243,7 @@ msgstr ""
 msgid "owner"
 msgstr ""
 
-#: src/billing/PaymentProfileList.tsx
+#: src/customer/details/PaymentProfileList.tsx
 msgid "payment profiles"
 msgstr ""
 
@@ -8132,7 +8270,7 @@ msgstr ""
 msgid "projects"
 msgstr ""
 
-#: src/billing/BillingRecordsList.tsx
+#: src/invoices/list/BillingRecordsList.tsx
 msgid "records"
 msgstr ""
 

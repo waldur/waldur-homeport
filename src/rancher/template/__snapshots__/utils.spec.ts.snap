@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rancher application provision utils groupQuestions groups questions 1`] = `
+Array [
+  "Container Images",
+  "Cluster Agent",
+  "Agent Configuration",
+  "Datadog Tagging",
+  "Daemonset Configuration",
+  "Proxy Configuration",
+  "Optional Collection Agents",
+  "Kube-State-Metrics",
+]
+`;

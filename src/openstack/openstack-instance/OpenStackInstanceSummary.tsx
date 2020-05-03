@@ -3,6 +3,7 @@ import * as React from 'react';
 import { withTranslation } from '@waldur/i18n';
 import { OpenStackSecurityGroupsLink } from '@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsLink';
 import { ZabbixHostField } from '@waldur/resource/monitoring/ZabbixHostField';
+import { ResourceLink } from '@waldur/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
@@ -36,6 +37,18 @@ const PureOpenStackInstanceSummary = (
         label={translate('Availability zone')}
         value={props.resource.availability_zone_name}
       />
+      {props.resource.rancher_cluster && (
+        <Field
+          label={translate('Rancher cluster')}
+          value={
+            <ResourceLink
+              type="Rancher.Cluster"
+              uuid={props.resource.rancher_cluster.uuid}
+              label={props.resource.rancher_cluster.name}
+            />
+          }
+        />
+      )}
       <ZabbixHostField {...props} />
     </span>
   );

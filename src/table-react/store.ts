@@ -21,6 +21,16 @@ const INITIAL_STATE: TableState = {
   toggled: {},
 };
 
+const deleteEntity = (state, action) => {
+  const { [action.payload.uuid]: _, ...entities } = state.entities;
+  const index = state.order.indexOf(action.payload.uuid);
+  return {
+    ...state,
+    entities,
+    order: [...state.order.slice(0, index), ...state.order.slice(index + 1)],
+  };
+};
+
 const pagination = (state = INITIAL_STATE, action): TableState => {
   switch (action.type) {
     case actions.FETCH_LIST_START:
@@ -93,16 +103,7 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
       };
 
     case actions.ENTITY_DELETE:
-      const { [action.payload.uuid]: _, ...entities } = state.entities;
-      const index = state.order.indexOf(action.payload.uuid);
-      return {
-        ...state,
-        entities,
-        order: [
-          ...state.order.slice(0, index),
-          ...state.order.slice(index + 1),
-        ],
-      };
+      return deleteEntity(state, action);
 
     case actions.PAGE_SIZE_UPDATE:
       return {

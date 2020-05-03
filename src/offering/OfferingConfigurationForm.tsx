@@ -100,11 +100,12 @@ export class PureOfferingConfigurationForm extends React.Component<
 
                 case 'select_string':
                   OptionField = SelectField;
-                  const choices = options.choices.map(item => ({
-                    label: item,
-                    value: item,
-                  }));
-                  params = { options: choices };
+                  params = {
+                    options: options.choices.map(item => ({
+                      label: item,
+                      value: item,
+                    })),
+                  };
                   break;
 
                 case 'boolean':

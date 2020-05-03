@@ -7,46 +7,63 @@
 
 // Minimalize menu when screen is less than 768px
 function updateSidebar() {
-  if ($(document).width() < 769) {
-    $('body').addClass('body-small');
+  if (document.body.clientWidth < 769) {
+    document.body.classList.add('body-small');
   } else {
-    $('body').removeClass('body-small');
-    $('body').removeClass('mini-navbar');
+    document.body.classList.remove('body-small');
+    document.body.classList.remove('mini-navbar');
   }
 }
 
 // Full height of sidebar
 function fix_height() {
-  const heightWithoutNavbar = $('body > #wrapper').height() - 61;
-  $('.sidebard-panel').css('min-height', heightWithoutNavbar + 'px');
-
-  const navbarHeight = $('nav.navbar-default').height();
-  const wrapperHeight = $('#page-wrapper').height();
-
-  if (navbarHeight > wrapperHeight) {
-    $('#page-wrapper').css('min-height', navbarHeight + 'px');
+  const sidebarPanel = document.querySelector<HTMLElement>('.sidebard-panel');
+  if (sidebarPanel) {
+    const heightWithoutNavbar =
+      document.querySelector('body > #wrapper').clientHeight - 61;
+    sidebarPanel.style.minHeight = heightWithoutNavbar + 'px';
   }
 
-  if (navbarHeight < wrapperHeight) {
-    $('#page-wrapper').css('min-height', $(window).height() + 'px');
-  }
+  const pageWrapper = document.querySelector<HTMLElement>('#page-wrapper');
+  const navbar = document.querySelector('nav.navbar-default');
+  if (navbar) {
+    const navbarHeight = navbar.clientHeight;
+    const wrapperHeight = pageWrapper.clientHeight;
 
-  if ($('body').hasClass('fixed-nav')) {
     if (navbarHeight > wrapperHeight) {
-      $('#page-wrapper').css('min-height', navbarHeight - 60 + 'px');
-    } else {
-      $('#page-wrapper').css('min-height', $(window).height() - 60 + 'px');
+      pageWrapper.style.minHeight = navbarHeight + 'px';
+    }
+
+    if (navbarHeight < wrapperHeight) {
+      pageWrapper.style.minHeight = document.body.clientHeight + 'px';
+    }
+
+    if (document.body.classList.contains('fixed-nav')) {
+      if (navbarHeight > wrapperHeight) {
+        pageWrapper.style.minHeight = navbarHeight - 60 + 'px';
+      } else {
+        pageWrapper.style.minHeight = document.body.clientHeight - 60 + 'px';
+      }
     }
   }
 }
 
+const ready = callback => {
+  if (document.readyState != 'loading') callback();
+  else document.addEventListener('DOMContentLoaded', callback);
+};
+
+const callback = () => {
+  updateSidebar();
+  if (!document.body.classList.contains('body-small')) {
+    fix_height();
+  }
+};
+
 export default function loadInspinia() {
-  $(window).bind('load resize scroll', function() {
-    updateSidebar();
-    if (!$('body').hasClass('body-small')) {
-      fix_height();
-    }
-  });
+  ready(callback);
+  window.addEventListener('resize', callback);
+  window.addEventListener('scroll', callback);
 
   setTimeout(function() {
     fix_height();

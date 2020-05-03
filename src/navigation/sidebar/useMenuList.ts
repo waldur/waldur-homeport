@@ -15,20 +15,23 @@ export const useMenuList = (items: MenuItemType[]) => {
 
   const { state } = useCurrentStateAndParams();
 
-  const matches = (item: MenuItemType) =>
-    (item.key && state?.data?.activeKey === item.key) ||
-    (item.state && router.stateService.is(item.state, item.params));
+  const matchesSidebar = (item: MenuItemType) =>
+    item.key && state?.data?.sidebarKey === item.key;
+
+  const matchesState = (item: MenuItemType) =>
+    item.state && router.stateService.is(item.state, item.params);
 
   const updateItems = () => {
     for (const item of items) {
-      if (matches(item)) {
+      if (matchesSidebar(item) || matchesState(item)) {
         setActiveItem(item);
         if (item.children) {
           setExpandedItem(item);
         }
-      } else if (item.children) {
+      }
+      if (item.children) {
         for (const child of item.children) {
-          if (matches(child)) {
+          if (matchesState(child)) {
             setActiveItem(child);
             setExpandedItem(item);
             return;

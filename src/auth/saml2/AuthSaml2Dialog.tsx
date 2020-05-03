@@ -7,11 +7,10 @@ import { fetchIdentityProviderOptions } from '@waldur/auth/saml2/utils';
 import { $rootScope } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { loginSaml2 } from './store/actions';
 
-export class AuthSaml2Dialog extends React.Component<InjectedFormProps> {
+class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
   constructor(props) {
     super(props);
     $rootScope.$broadcast('enableRequests');
@@ -76,4 +75,4 @@ const enhance = compose(
   }),
 );
 
-export default connectAngularComponent(enhance(AuthSaml2Dialog));
+export const AuthSaml2Dialog = enhance(PureAuthSaml2Dialog);

@@ -1,3 +1,4 @@
+import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { checkPermission } from '@waldur/issues/utils';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
@@ -13,6 +14,7 @@ import { OfferingCreateContainer } from './offerings/create/OfferingCreateContai
 import { OfferingContainer } from './offerings/details/OfferingContainer';
 import { PublicOfferingDetails } from './offerings/details/PublicOfferingDetails';
 import { MyOfferingsListContainer } from './offerings/MyOfferingsListContainer';
+import { OfferingScreenshotsContainer } from './offerings/OfferingScreenshotsContainer';
 import { OfferingsListContainer } from './offerings/OfferingsListContainer';
 import { OfferingUpdateContainer } from './offerings/update/OfferingUpdateContainer';
 import { OrderItemDetailsContainer } from './orders/item/details/OrderItemDetailsContainer';
@@ -30,7 +32,7 @@ import { ResourceDetailsPage } from './resources/ResourceDetailsPage';
 import { SupportUsageContainer } from './resources/usage/SupportUsageContainer';
 import { ProviderDetails } from './service-providers/ProviderDetails';
 
-export const states = [
+export const states: StateDeclaration[] = [
   {
     name: 'marketplace-landing',
     url: 'marketplace/',
@@ -196,6 +198,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Public offerings'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -206,6 +209,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('My offerings'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -216,6 +220,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Add offering'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -226,6 +231,18 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Update offering'),
+      renderDocumentTitle: true,
+    },
+  },
+
+  {
+    name: 'marketplace-offering-screenshots',
+    url: 'marketplace-offering-screenshots/:offering_uuid/',
+    component: withStore(OfferingScreenshotsContainer),
+    parent: 'organization',
+    data: {
+      pageTitle: gettext('Screenshots'),
+      sidebarKey: 'marketplace-services',
       renderDocumentTitle: true,
     },
   },
@@ -279,6 +296,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Public orders'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -289,6 +307,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('My orders'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -299,6 +318,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('My resources'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -309,6 +329,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Public resources'),
+      sidebarKey: 'marketplace-services',
     },
   },
 
@@ -319,6 +340,7 @@ export const states = [
     parent: 'organization',
     data: {
       pageTitle: gettext('Public resources'),
+      sidebarKey: 'marketplace-services',
     },
   },
 

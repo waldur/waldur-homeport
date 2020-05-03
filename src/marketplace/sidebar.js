@@ -30,6 +30,7 @@ export default function registerSidebarExtension(
       return [
         ...items,
         {
+          key: 'marketplace-services',
           label: translate('My services'),
           icon: 'fa-shopping-cart',
           index: 310,
@@ -89,6 +90,7 @@ export default function registerSidebarExtension(
       return [
         ...items,
         {
+          key: 'marketplace-services',
           label: translate('My services'),
           icon: 'fa-shopping-cart',
           index: 310,
