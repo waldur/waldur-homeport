@@ -1,9 +1,14 @@
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import authValimoDialog from './auth-valimo-dialog';
 import AuthValimoService from './auth-valimo-service';
-import authValimoTrigger from './auth-valimo-trigger';
+import { AuthValimoTrigger } from './AuthValimoTrigger';
 
 export default module => {
   module.service('AuthValimoService', AuthValimoService);
   module.component('authValimoDialog', authValimoDialog);
-  module.component('authValimoTrigger', authValimoTrigger);
+  module.component(
+    'authValimoTrigger',
+    connectAngularComponent(AuthValimoTrigger, ['mode']),
+  );
 };
