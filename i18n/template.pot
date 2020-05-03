@@ -157,7 +157,6 @@ msgstr ""
 #: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
-#: src/resource/actions/action-button-resource.html
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
@@ -3071,7 +3070,6 @@ msgid "Loading"
 msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
-#: src/resource/actions/action-button-resource.html
 msgid "Loading actions"
 msgstr ""
 
@@ -6589,7 +6587,6 @@ msgid "There are no SSH public keys yet."
 msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
-#: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
 msgstr ""
 
