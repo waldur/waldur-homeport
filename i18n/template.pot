@@ -1276,7 +1276,7 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
-#: src/slurm/details/utils.js
+#: src/slurm/details/utils.ts
 msgid "Costs"
 msgstr ""
 

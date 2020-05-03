@@ -1,16 +1,18 @@
-export const chartSpec = [
+import { translate } from '@waldur/i18n';
+
+export const getChartSpec = () => [
   {
-    name: gettext('CPU usage'),
+    name: translate('CPU usage'),
     field: 'cpu_usage',
     factor: 60,
   },
   {
-    name: gettext('GPU usage'),
+    name: translate('GPU usage'),
     field: 'gpu_usage',
     factor: 60,
   },
   {
-    name: gettext('RAM usage'),
+    name: translate('RAM usage'),
     field: 'ram_usage',
     factor: 1024,
   },

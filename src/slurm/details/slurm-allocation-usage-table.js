@@ -1,7 +1,7 @@
 import template from './slurm-allocation-usage-table.html';
 import './slurm-allocation-usage-table.scss';
 import { formatCharts } from './utils';
-import { palette, chartSpec } from './constants';
+import { palette, getChartSpec } from './constants';
 
 class SlurmAllocationUsageTableController {
   // @ngInject
@@ -25,7 +25,7 @@ class SlurmAllocationUsageTableController {
         }).then(rows => {
           const { users, charts } = formatCharts(
             palette,
-            chartSpec,
+            getChartSpec(),
             rows,
             pricePackage,
           );
