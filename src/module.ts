@@ -5,7 +5,6 @@ import {
   featuresProviderConfig,
 } from './app';
 import loadInspinia from './inspinia';
-import { uibDropdownFix } from './shims/uibDropdownFix';
 import { ncUtilsFlash } from './utils';
 
 export default module => {
@@ -15,5 +14,4 @@ export default module => {
   module.config(extendEnv);
   module.config(featuresProviderConfig);
   module.factory('ncUtilsFlash', ncUtilsFlash);
-  module.directive('uibDropdownFix', uibDropdownFix);
 };
