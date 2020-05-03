@@ -1,9 +1,7 @@
 import { render } from 'enzyme';
 import * as React from 'react';
 
-import { translate } from '@waldur/i18n';
-
-import { PureCustomerDetails } from './CustomerDetails';
+import { CustomerDetails } from './CustomerDetails';
 
 const Customer = {
   name: 'OpenNode',
@@ -22,9 +20,7 @@ const Customer = {
 
 describe('CustomerDetails', () => {
   it('renders all rows', () => {
-    const wrapper = render(
-      <PureCustomerDetails customer={Customer} translate={translate} />,
-    );
+    const wrapper = render(<CustomerDetails customer={Customer} />);
     expect(wrapper.html()).toMatchSnapshot();
   });
 });

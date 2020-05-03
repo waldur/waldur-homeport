@@ -13,11 +13,12 @@ import { getCustomer } from '@waldur/marketplace/common/api';
 import { Layout } from '@waldur/navigation/Layout';
 import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 
+import { formatPeriod, getPageTitle } from '../utils';
+
 import { BillingRecordDetails } from './BillingRecordDetails';
 import { DownloadInvoiceButton } from './DownloadInvoiceButton';
 import { InvoiceDetails } from './InvoiceDetails';
 import { PrintInvoiceButton } from './PrintInvoiceButton';
-import { formatPeriod } from './utils';
 
 const refreshBreadcrumbs = invoice => {
   const currentStateService = ngInjector.get('currentStateService');
@@ -51,7 +52,6 @@ const loadData = async (invoiceId: string) => {
   const currentStateService = ngInjector.get('currentStateService');
   const usersService = ngInjector.get('usersService');
   const customersService = ngInjector.get('customersService');
-  const BillingUtils = ngInjector.get('BillingUtils');
   const titleService = ngInjector.get('titleService');
 
   let invoice;
@@ -75,7 +75,7 @@ const loadData = async (invoiceId: string) => {
   );
   currentStateService.setOwnerOrStaff(status);
   currentStateService.setCustomer(currentCustomer);
-  titleService.setTitle(BillingUtils.getPageTitle());
+  titleService.setTitle(getPageTitle());
   refreshBreadcrumbs(invoice);
   return invoice;
 };

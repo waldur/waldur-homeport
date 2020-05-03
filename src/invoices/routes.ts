@@ -2,8 +2,8 @@ import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { withStore } from '@waldur/store/connect';
 
-import { BillingDetails } from './BillingDetails';
-import { BillingTabs } from './BillingTabs';
+import { BillingDetails } from './details/BillingDetails';
+import { BillingTabs } from './list/BillingTabs';
 
 export const states: StateDeclaration[] = [
   {

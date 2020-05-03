@@ -1,6 +1,7 @@
 import { get } from '@waldur/core/api';
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { getTabTitle } from '@waldur/invoices/utils';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { Customer } from '@waldur/workspace/types';
 
@@ -63,7 +64,7 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
   },
   {
     key: 'billing',
-    label: ngInjector.get('BillingUtils').getTabTitle(),
+    label: getTabTitle(),
     icon: 'fa-file-text-o',
     state: 'organization.billing.tabs',
     params: {

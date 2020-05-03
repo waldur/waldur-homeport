@@ -3,9 +3,10 @@ import * as React from 'react';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
+import { Invoice, InvoiceItem } from '../types';
+
 import { CustomerDetails } from './CustomerDetails';
 import { InvoiceItemDetails } from './InvoiceItemDetails';
-import { Invoice, InvoiceItem } from './types';
 import { groupInvoiceItems } from './utils';
 
 export const InvoiceDetails = ({ invoice }: { invoice: Invoice }) => {

@@ -10,9 +10,10 @@ import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableOptionsType } from '@waldur/table-react/types';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { formatPeriod } from '../utils';
+
 import { InvoicesFilter } from './InvoicesFilter';
 import { SendNotificationButton } from './SendNotificationButton';
-import { formatPeriod } from './utils';
 
 const RecordPeriodField = ({ row }) => formatPeriod(row);
 
