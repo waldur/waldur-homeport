@@ -8,7 +8,7 @@ import { exportTable } from './export';
 import { getTableOptions } from './registry';
 import { getTableState } from './store';
 
-function* fetchList(action) {
+export function* fetchList(action) {
   const { table, extraFilter, pullInterval } = action.payload;
   try {
     const state = yield select(getTableState(table));
