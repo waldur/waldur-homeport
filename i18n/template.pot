@@ -118,7 +118,7 @@ msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -277,7 +277,8 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/routes.ts
 msgid "Add payment profile"
 msgstr ""
 
@@ -388,6 +389,8 @@ msgstr ""
 
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "Agreement number"
 msgstr ""
@@ -539,6 +542,10 @@ msgstr ""
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType}?"
+msgstr ""
+
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+msgid "Are you sure you want to delete the payment profile?"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
@@ -1214,6 +1221,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Confirmation"
@@ -1605,7 +1613,7 @@ msgid "Default value"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1761,7 +1769,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
 msgstr ""
@@ -1882,7 +1890,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
@@ -1943,7 +1951,7 @@ msgstr ""
 msgid "Enable profile"
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/hook-details.html
 msgid "Enabled"
 msgstr ""
@@ -1954,6 +1962,11 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "End"
+msgstr ""
+
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+msgid "End date"
 msgstr ""
 
 #: src/invoices/list/AgreementInfo.tsx
@@ -2249,6 +2262,10 @@ msgstr ""
 
 #: src/openstack/OpenStackPluginOptionsForm.tsx
 msgid "Fixed — use common storage quota"
+msgstr ""
+
+#: src/customer/payment-profiles/utils.ts
+msgid "Fixed-price contract"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
@@ -3350,6 +3367,10 @@ msgstr ""
 msgid "Monthly cost"
 msgstr ""
 
+#: src/customer/payment-profiles/utils.ts
+msgid "Monthly invoices"
+msgstr ""
+
 #: src/booking/components/calendar/defaultConfig.ts
 msgid "More"
 msgstr ""
@@ -3400,7 +3421,9 @@ msgstr ""
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/details/PaymentProfileDetails.tsx
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/jira/project/jira-project-config.js
@@ -4193,6 +4216,10 @@ msgstr ""
 msgid "Payment for {customer_link} has been cancelled."
 msgstr ""
 
+#: src/customer/payment-profiles/utils.ts
+msgid "Payment gateways (monthly)"
+msgstr ""
+
 #: src/paypal/PaymentApprove.tsx
 #: src/paypal/PaymentCancel.tsx
 msgid "Payment has been processed successfully."
@@ -4209,6 +4236,18 @@ msgstr ""
 
 #: src/customer/list/CustomerPaymentProfile.tsx
 msgid "Payment profile"
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Payment profile has been created."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Payment profile has been removed."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Payment profile has been updated."
 msgstr ""
 
 #: src/customer/details/customer-manage.html
@@ -6218,7 +6257,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
@@ -6269,6 +6308,7 @@ msgstr ""
 msgid "Storage type"
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
@@ -6850,7 +6890,9 @@ msgid "Try again"
 msgstr ""
 
 #: src/customer/details/PaymentProfileDetails.tsx
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -6966,6 +7008,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Unable to create payment profile."
 msgstr ""
 
 #: src/user/support/effects.ts
@@ -7285,6 +7331,10 @@ msgstr ""
 msgid "Unable to remove logo."
 msgstr ""
 
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Unable to remove payment profile."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to remove screenshot."
 msgstr ""
@@ -7339,6 +7389,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update offering."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Unable to update payment profile."
 msgstr ""
 
 #: src/providers/effects.tsx
@@ -7409,6 +7463,7 @@ msgstr ""
 
 #: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/details/customer-policies.html
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
@@ -7436,6 +7491,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 msgid "Update offering ({name})"
+msgstr ""
+
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+msgid "Update payment profile"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
@@ -8240,7 +8299,7 @@ msgstr ""
 msgid "owner"
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 msgid "payment profiles"
 msgstr ""
 

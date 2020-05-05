@@ -7,7 +7,6 @@ import customerThreshold from './customer-threshold';
 import customerDetails from './CustomerDetails';
 import customerEditDetails from './CustomerEditDetailsContainer';
 import { PaymentProfileDetails } from './PaymentProfileDetails';
-import { PaymentProfileList } from './PaymentProfileList';
 
 export default module => {
   module.component('customerDetails', customerDetails);
@@ -16,10 +15,6 @@ export default module => {
   module.component('customerPolicies', customerPolicies);
   module.component('customerReportError', customerReportError);
   module.component('customerThreshold', customerThreshold);
-  module.component(
-    'paymentProfileList',
-    connectAngularComponent(PaymentProfileList),
-  );
   module.component(
     'paymentProfileForOrganizationOwner',
     connectAngularComponent(PaymentProfileDetails),

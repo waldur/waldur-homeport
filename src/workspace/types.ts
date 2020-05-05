@@ -40,6 +40,7 @@ export interface PaymentProfile {
   organization_uuid: string;
   url: string;
   attributes: PaymentProfileAttributes;
+  uuid: string;
 }
 
 export interface Customer {
