@@ -55,7 +55,7 @@ export const formatCostChart = (invoices: InvoiceSummary[], count): Chart => {
   });
 
   return {
-    title: translate('Total cost'),
+    title: translate('Estimated monthly cost'),
     data,
     current: defaultCurrency(items[items.length - 1].value),
   };
