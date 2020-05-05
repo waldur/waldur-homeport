@@ -9,9 +9,9 @@ const invoiceEventsDialog = {
   },
   controller: class InvoiceEventsDialogController {
     // @ngInject
-    constructor(InvoiceEventsService, EventDialogsService) {
+    constructor(InvoiceEventsService, $uibModal) {
       this.InvoiceEventsService = InvoiceEventsService;
-      this.EventDialogsService = EventDialogsService;
+      this.$uibModal = $uibModal;
     }
 
     $onInit() {
@@ -25,7 +25,12 @@ const invoiceEventsDialog = {
 
     showEventDetails(event) {
       this.close();
-      this.EventDialogsService.eventDetails(event.original);
+      this.$uibModal.open({
+        component: 'eventDetailsDialog',
+        resolve: {
+          event: () => event.original,
+        },
+      });
     }
   },
 };

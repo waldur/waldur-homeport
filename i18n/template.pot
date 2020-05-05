@@ -2058,7 +2058,6 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
-#: src/events/help.js
 #: src/help/constants.js
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
