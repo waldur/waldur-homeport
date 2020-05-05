@@ -6387,7 +6387,7 @@ msgid "Support"
 msgstr ""
 
 #: src/issues/routes.ts
-#: src/issues/workspace/issues-workspace.html
+#: src/issues/workspace/SupportWorkspace.tsx
 msgid "Support dashboard"
 msgstr ""
 
