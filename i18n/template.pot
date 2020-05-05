@@ -2020,6 +2020,10 @@ msgstr ""
 msgid "Estimated cost for the current month: {cost}"
 msgstr ""
 
+#: src/customer/dashboard/api.ts
+msgid "Estimated monthly cost"
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr ""
@@ -6809,10 +6813,6 @@ msgstr ""
 
 #: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total CPU"
-msgstr ""
-
-#: src/customer/dashboard/api.ts
-msgid "Total cost"
 msgstr ""
 
 #: src/customer/list/TotalCostField.tsx
