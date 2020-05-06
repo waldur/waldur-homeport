@@ -14,7 +14,6 @@ export const defaultConfig = {
   eventLimit: false,
   slotEventOverlap: false,
   showNonCurrentDates: true,
-  //eventColor: '#1ab394',
   eventLimitText: translate('More'),
   header: {
     left: 'prev,next today',
