@@ -1,10 +1,10 @@
-import { formatDate } from '@fullcalendar/core';
 import * as React from 'react';
 import * as Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { formatDate } from '@waldur/core/dateUtils';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableOptionsType } from '@waldur/table-react/types';
 import { getCustomer } from '@waldur/workspace/selectors';
