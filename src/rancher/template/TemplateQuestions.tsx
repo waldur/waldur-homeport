@@ -6,9 +6,11 @@ import { ENV } from '@waldur/core/services';
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 
+import { RancherProject, Namespace } from '../types';
+
 import { ApplicationConfiguration } from './ApplicationConfiguration';
 import { QuestionGroup } from './QuestionGroup';
-import { Question, RancherProject, Namespace, FormData } from './types';
+import { Question, FormData } from './types';
 import { groupQuestions } from './utils';
 
 interface OwnProps {
