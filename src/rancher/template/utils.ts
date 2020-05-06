@@ -89,6 +89,9 @@ export const loadData = async (templateUuid: string, clusterUuid: string) => {
 
 // Taken from https://stackoverflow.com/questions/6842795/dynamic-deep-setting-for-a-javascript-object
 export function getValue(obj, path) {
+  if (!obj) {
+    return;
+  }
   const a = path.split('.');
   let o = obj;
   while (a.length) {
