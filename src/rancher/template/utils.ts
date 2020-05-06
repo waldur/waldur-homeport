@@ -102,18 +102,6 @@ export function getValue(obj, path) {
   return o;
 }
 
-export function setValue(obj, path, value) {
-  const a = path.split('.');
-  let o = obj;
-  while (a.length - 1) {
-    const n = a.shift();
-    if (!(n in o)) o[n] = {};
-    o = o[n];
-  }
-  o[a[0]] = value;
-  return obj;
-}
-
 const serializeAnswer = (question: Question, answers: object) => {
   const value = getValue(answers, question.variable);
   if (question.type === 'secret') {
@@ -140,11 +128,7 @@ export const serializeApplication = (
   answers: visibleQuestions.reduce(
     (result, question) => ({
       ...result,
-      ...setValue(
-        result,
-        question.variable,
-        serializeAnswer(question, formData.answers),
-      ),
+      [question.variable]: serializeAnswer(question, formData.answers),
     }),
     {},
   ),
