@@ -9,6 +9,7 @@ import '../svgfonts.font';
 
 import authModule from './auth/module';
 import azureModule from './azure/module';
+import './booking/marketplace';
 import configModule from './configs/module';
 import bootstrap from './core/bootstrap';
 import filtersModule from './core/filters';
