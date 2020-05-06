@@ -8107,6 +8107,10 @@ msgstr ""
 msgid "You must agree with terms of service."
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+msgid "You must be staff to modify payment profiles"
+msgstr ""
+
 #: src/marketplace/orders/OrderDetails.tsx
 msgid "You need approval to finish purchasing of services."
 msgstr ""
