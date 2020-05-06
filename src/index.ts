@@ -9,7 +9,6 @@ import '../svgfonts.font';
 
 import authModule from './auth/module';
 import azureModule from './azure/module';
-import './booking/marketplace';
 import configModule from './configs/module';
 import bootstrap from './core/bootstrap';
 import filtersModule from './core/filters';
@@ -48,6 +47,9 @@ import storeModule from './store/module';
 import userModule from './user/module';
 import vmwareModule from './vmware/module';
 import workspaceModule from './workspace/module';
+
+import './booking/marketplace';
+import './marketplace-script/marketplace';
 
 const appModule = angular.module('waldur', [
   'satellizer',
