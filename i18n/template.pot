@@ -544,7 +544,7 @@ msgstr ""
 msgid "Are you sure you want to delete a {resourceType}?"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 msgid "Are you sure you want to delete the payment profile?"
 msgstr ""
 
@@ -1221,7 +1221,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Confirmation"
@@ -1613,7 +1613,7 @@ msgid "Default value"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1890,7 +1890,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
-#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
@@ -1937,6 +1937,10 @@ msgstr ""
 
 #: src/user/support/useEmailChange.ts
 msgid "Email verification has been sent. Please check your inbox."
+msgstr ""
+
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
+msgid "Enable"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -4243,6 +4247,10 @@ msgstr ""
 
 #: src/customer/payment-profiles/store/effects.ts
 msgid "Payment profile has been created."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Payment profile has been enabled."
 msgstr ""
 
 #: src/customer/payment-profiles/store/effects.ts
@@ -7040,6 +7048,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to edit comment."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Unable to enable payment profile."
 msgstr ""
 
 #: src/issues/attachments/effects.ts

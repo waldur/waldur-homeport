@@ -30,3 +30,6 @@ export const updatePaymentProfile = data => {
 
 export const deletePaymentProfile = (uuid: string) =>
   deleteById('/payment-profiles/', uuid);
+
+export const enablePaymentProfile = (uuid: string) =>
+  post(`/payment-profiles/${uuid}/enable/`).then(response => response.data);
