@@ -76,8 +76,31 @@ function* removePaymentProfile(action: Action<any>) {
   }
 }
 
+function* enablePaymentProfile(action: Action<any>) {
+  try {
+    yield call(api.enablePaymentProfile, action.payload);
+    yield put(showSuccess(translate('Payment profile has been enabled.')));
+    const customer = yield select(getCustomer);
+    yield fetchList({
+      type: FETCH_LIST_START,
+      payload: {
+        table: PAYMENT_PROFILES_TABLE,
+        extraFilter: {
+          organization_uuid: customer.uuid,
+        },
+      },
+    });
+  } catch (error) {
+    const errorMessage = `${translate(
+      'Unable to enable payment profile.',
+    )} ${format(error)}`;
+    yield put(showError(errorMessage));
+  }
+}
+
 export default function*() {
   yield takeEvery(constants.ADD_PAYMENT_PROFILE, addPaymentProfile);
   yield takeEvery(constants.EDIT_PAYMENT_PROFILE, editPaymentProfile);
   yield takeEvery(constants.REMOVE_PAYMENT_PROFILE, removePaymentProfile);
+  yield takeEvery(constants.ENABLE_PAYMENT_PROFILE, enablePaymentProfile);
 }

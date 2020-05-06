@@ -19,3 +19,8 @@ export const removePaymentProfile = (uuid: string) => ({
   type: constants.REMOVE_PAYMENT_PROFILE,
   payload: uuid,
 });
+
+export const enablePaymentProfile = (uuid: string) => ({
+  type: constants.ENABLE_PAYMENT_PROFILE,
+  payload: uuid,
+});
