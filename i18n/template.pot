@@ -3505,6 +3505,10 @@ msgstr ""
 msgid "Name is too short, names should be at least two alphanumeric characters."
 msgstr ""
 
+#: src/rancher/template/ApplicationConfiguration.tsx
+msgid "Name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name', or '123-abc')"
+msgstr ""
+
 #: src/rancher/cluster/create/utils.ts
 msgid "Name must consist of lower case alphanumeric characters."
 msgstr ""

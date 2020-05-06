@@ -5,6 +5,7 @@ export interface FieldProps {
   description?: string;
   variable: string;
   required?: boolean;
+  validate?: any;
 }
 
 interface BaseQuestion extends FieldProps {
