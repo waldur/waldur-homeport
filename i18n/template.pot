@@ -6727,6 +6727,10 @@ msgstr ""
 msgid "There are no {verboseName} yet."
 msgstr ""
 
+#: src/rancher/ProjectExpandableRow.tsx
+msgid "There are not namespaces in this project yet."
+msgstr ""
+
 #: src/issues/workspace/IssuesActivityStream.tsx
 msgid "There is no activity yet."
 msgstr ""

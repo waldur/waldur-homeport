@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
+import { ProjectExpandableRow } from './ProjectExpandableRow';
+
 const TableComponent = props => {
   const { translate } = props;
   return (
@@ -22,6 +24,7 @@ const TableComponent = props => {
         },
       ]}
       verboseName={translate('projects')}
+      expandableRow={ProjectExpandableRow}
     />
   );
 };

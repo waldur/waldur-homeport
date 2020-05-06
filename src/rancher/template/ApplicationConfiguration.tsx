@@ -4,11 +4,12 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 
+import { RancherProject, Namespace } from '../types';
+
 import { EnumField } from './EnumField';
 import { GroupHeader } from './GroupHeader';
 import { NamespaceField } from './NamespaceField';
 import { StringField } from './StringField';
-import { RancherProject, Namespace } from './types';
 
 interface ApplicationConfigurationProps {
   versions: string[];

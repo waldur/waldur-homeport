@@ -7,9 +7,10 @@ import { required } from '@waldur/core/validators';
 import { FieldError } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 
+import { Namespace } from '../types';
+
 import { DecoratedField } from './DecoratedField';
 import { SelectControl } from './SelectControl';
-import { Namespace } from './types';
 
 const NamespaceSwitcher = () => (
   <Field

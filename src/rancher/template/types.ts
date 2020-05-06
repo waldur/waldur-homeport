@@ -1,3 +1,5 @@
+import { Namespace, RancherProject } from '../types';
+
 type QuestionType = 'boolean' | 'string' | 'enum' | 'secret';
 
 export interface FieldProps {
@@ -25,17 +27,6 @@ export interface TemplateVersion {
   questions: Question[];
 }
 
-export interface Namespace {
-  name: string;
-  uuid: string;
-}
-
-export interface RancherProject {
-  name: string;
-  uuid: string;
-  namespaces: Namespace[];
-}
-
 export interface Template {
   name: string;
   uuid: string;
@@ -60,4 +51,9 @@ export interface FormData {
   namespace: Namespace;
   project: RancherProject;
   answers: object;
+}
+
+export interface Secret {
+  name: string;
+  id: string;
 }
