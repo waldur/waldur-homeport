@@ -26,8 +26,14 @@
           <option value="" translate>Any</option>
         </select>
       </td>
-      <td>
+      <td
+        class="form-group"
+        ng-class="{'has-error': $ctrl.form['rule_{{
+          $index
+        }}_from_port'].$invalid}"
+      >
         <input
+          name="rule_{{ $index }}_from_port"
           ng-model="rule.from_port"
           type="number"
           min="{{ $ctrl.getPortMin(rule) }}"
@@ -36,8 +42,14 @@
           required
         />
       </td>
-      <td>
+      <td
+        class="form-group"
+        ng-class="{'has-error': $ctrl.form['rule_{{
+          $index
+        }}_to_port'].$invalid}"
+      >
         <input
+          name="rule_{{ $index }}_to_port"
           ng-model="rule.to_port"
           type="number"
           min="{{ $ctrl.getToPortMin(rule) }}"
@@ -46,8 +58,13 @@
           required
         />
       </td>
-      <td>
+      <td
+        class="form-group"
+        ng-class="{'has-error': $ctrl.form['rule_{{ $index }}_cidr'].$invalid}"
+      >
         <input
+          ng-attr-title="{{ 'The value is not valid IP v4' | translate }}"
+          name="rule_{{ $index }}_cidr"
           ng-model="rule.cidr"
           class="form-control"
           ng-pattern="$ctrl.cidrPattern"
@@ -56,7 +73,7 @@
       </td>
       <td>
         <button
-          class="btn btn-danger btn-xs"
+          class="btn btn-danger btn-sm"
           type="button"
           ng-click="$ctrl.deleteRule(rule)"
         >

@@ -6625,6 +6625,10 @@ msgstr ""
 msgid "The project will be changed for all items in cart."
 msgstr ""
 
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html
+msgid "The value is not valid IP v4"
+msgstr ""
+
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 msgid "Then download (if needed) and run kubectl"
 msgstr ""
