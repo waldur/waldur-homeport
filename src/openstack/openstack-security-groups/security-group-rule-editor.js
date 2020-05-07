@@ -11,7 +11,7 @@ const securityGroupRuleEditor = {
     field: '<',
     form: '<',
   },
-  controller: class securityGroupRuleEditorController {
+  controller: class SecurityGroupRuleEditorController {
     $onInit() {
       this.protocols = PROTOCOLS;
       if (!this.model[this.field.name]) {
@@ -56,6 +56,10 @@ const securityGroupRuleEditor = {
         this.target.splice(index, 1);
       }
       this.form.$setDirty();
+    }
+
+    isCidrInvalid(index) {
+      return this.form[`rule_${index}_cidr`].$invalid;
     }
   },
 };
