@@ -7,7 +7,7 @@ import { Table, createFetcher, connectTable } from '@waldur/table-react';
 import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { hooksListTable } from './constants';
+import { HOOK_LIST_ID } from './constants';
 import { HookCreateButton } from './HookCreateButton';
 import { HookRemoveButton } from './HookRemoveButton';
 import { HookUpdateButton } from './HookUpdateButton';
@@ -69,7 +69,7 @@ const TableComponent = props => {
 };
 
 const TableOptions = {
-  table: hooksListTable,
+  table: HOOK_LIST_ID,
   fetchData: createFetcher('hooks'),
   mapPropsToFilter: props => ({ author_uuid: props.user.uuid }),
   exportRow: row => [
