@@ -40,10 +40,10 @@ export class PureListFieldModal extends React.Component<
   }
 
   selectRow(index) {
-    this.setState({
-      ...this.state,
+    this.setState(prevState => ({
+      ...prevState,
       selectedRowIndex: index,
-    });
+    }));
   }
 
   render() {

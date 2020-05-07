@@ -34,7 +34,6 @@ interface DispatchProps {
 
 interface HookRemoveButtonState {
   removing: boolean;
-  removed: boolean;
 }
 
 class HookRemoveButtonComponent extends React.Component<
@@ -43,7 +42,6 @@ class HookRemoveButtonComponent extends React.Component<
 > {
   state = {
     removing: false,
-    removed: false,
   };
 
   async removeHook(uuid: string, url: string) {
