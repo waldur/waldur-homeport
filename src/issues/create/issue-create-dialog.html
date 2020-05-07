@@ -133,7 +133,11 @@
       <div>
         <ul class="list-unstyled">
           <li ng-repeat="attachment in $ctrl.issueTemplate.attachments">
-            <a ng-href="{{ attachment.file }}" target="_blank">
+            <a
+              ng-href="{{ attachment.file }}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i class="fa fa-cloud-download"></i>
               {{ attachment.name }}
             </a>
