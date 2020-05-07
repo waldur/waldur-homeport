@@ -1,11 +1,15 @@
-import hookDetails from './hook-details';
-import HookRemoveDialog from './HookRemoveDialog';
-import hooksService from './hooks-service';
-import { formatEventTitle } from './utils';
+import { connectAngularComponent } from '@waldur/store/connect';
+
+import { HookDetailsDialog } from './HookDetailsDialog';
+import { HookRemoveDialog } from './HookRemoveDialog';
 
 export default module => {
-  module.directive('hookDetails', hookDetails);
-  module.filter('formatEventTitle', () => formatEventTitle);
-  module.component('hookRemoveDialog', HookRemoveDialog);
-  module.service('hooksService', hooksService);
+  module.component(
+    'hookDetailsDialog',
+    connectAngularComponent(HookDetailsDialog, ['resolve']),
+  );
+  module.component(
+    'hookRemoveDialog',
+    connectAngularComponent(HookRemoveDialog, ['resolve']),
+  );
 };
