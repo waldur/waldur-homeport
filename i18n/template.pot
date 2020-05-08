@@ -6665,10 +6665,6 @@ msgstr ""
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
-#: src/marketplace/category/filters/AttributeFilterList.tsx
-msgid "There are no category sections yet."
-msgstr ""
-
 #: src/dashboard/CategoryResources.tsx
 msgid "There are no charts yet."
 msgstr ""
