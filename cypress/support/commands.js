@@ -1,5 +1,4 @@
 import '../integration/support/commands';
-import '../integration/user/commands';
 import '../integration/openstack/instance/commands';
 
 // Fill and sumbit login form
