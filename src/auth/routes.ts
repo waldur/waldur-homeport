@@ -3,6 +3,7 @@ import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
 
 import { AuthActivation } from './AuthActivation';
+import { AuthLogin } from './AuthLogin';
 
 function resolveCurrentUser(usersService) {
   return usersService.getCurrentUser();
@@ -20,7 +21,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'login',
     url: '/login/',
-    template: '<auth-login mode="\'login\'"></auth-login>',
+    component: withStore(AuthLogin),
     params: {
       toState: '',
       toParams: {},
@@ -34,7 +35,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'register',
     url: '/register/',
-    template: '<auth-login mode="\'register\'"></auth-login>',
+    component: withStore(AuthLogin),
     data: {
       bodyClass: 'old',
       anonymous: true,
