@@ -89,6 +89,9 @@ export const loadData = async (templateUuid: string, clusterUuid: string) => {
 
 // Taken from https://stackoverflow.com/questions/6842795/dynamic-deep-setting-for-a-javascript-object
 export function getValue(obj, path) {
+  if (!obj) {
+    return;
+  }
   const a = path.split('.');
   let o = obj;
   while (a.length) {
@@ -97,18 +100,6 @@ export function getValue(obj, path) {
     o = o[n];
   }
   return o;
-}
-
-export function setValue(obj, path, value) {
-  const a = path.split('.');
-  let o = obj;
-  while (a.length - 1) {
-    const n = a.shift();
-    if (!(n in o)) o[n] = {};
-    o = o[n];
-  }
-  o[a[0]] = value;
-  return obj;
 }
 
 const serializeAnswer = (question: Question, answers: object) => {
@@ -137,11 +128,7 @@ export const serializeApplication = (
   answers: visibleQuestions.reduce(
     (result, question) => ({
       ...result,
-      ...setValue(
-        result,
-        question.variable,
-        serializeAnswer(question, formData.answers),
-      ),
+      [question.variable]: serializeAnswer(question, formData.answers),
     }),
     {},
   ),

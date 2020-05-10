@@ -75,7 +75,11 @@
         <div class="m-b-xs" ng-if="$ctrl.showLink()">
           <dt><span translate>Link</span>:</dt>
           <dd>
-            <a href="{{ ::$ctrl.issue.link }}" target="_blank">
+            <a
+              href="{{ ::$ctrl.issue.link }}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i class="fa fa-external-link"></i>
               <span translate>Open in Service Desk</span>
             </a>

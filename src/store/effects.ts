@@ -1,8 +1,10 @@
 import formActionSaga from 'redux-form-saga';
 
 import authSaga from '@waldur/auth/store/effects';
+import bookingSaga from '@waldur/booking/store/effects';
 import downloadLinkSaga from '@waldur/core/DownloadLink/effects';
 import customerDetailsSaga from '@waldur/customer/details/store/effects';
+import paymentProfilesSaga from '@waldur/customer/payment-profiles/store/effects';
 import issueAttachmentsSaga from '@waldur/issues/attachments/effects';
 import issueCommentsSaga from '@waldur/issues/comments/effects';
 import jiraSaga from '@waldur/jira/issue/effects';
@@ -21,6 +23,7 @@ import coreSaga from './coreSaga';
 export default [
   coreSaga,
   authSaga,
+  bookingSaga,
   downloadLinkSaga,
   formActionSaga,
   jiraSaga,
@@ -36,4 +39,5 @@ export default [
   serviceUsageSaga,
   resourceSummarySaga,
   marketplaceSaga,
+  paymentProfilesSaga,
 ];

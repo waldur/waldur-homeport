@@ -48,6 +48,9 @@ import userModule from './user/module';
 import vmwareModule from './vmware/module';
 import workspaceModule from './workspace/module';
 
+import './booking/marketplace';
+import './marketplace-script/marketplace';
+
 const appModule = angular.module('waldur', [
   'satellizer',
   'ui.router',

@@ -1,6 +1,8 @@
 import { getById, get, getAll, post } from '@waldur/core/api';
 
-import { TemplateVersion, RancherProject, Template, Cluster } from './types';
+import { RancherProject } from '../types';
+
+import { TemplateVersion, Template, Cluster, Secret } from './types';
 
 export const getTemplate = (templateUuid: string) =>
   getById<Template>('/rancher-templates/', templateUuid);
@@ -21,6 +23,6 @@ export const getProjects = (clusterUuid: string) =>
 export const createApp = payload => post('/rancher-apps/', payload);
 
 export const getProjectSecrets = (projectUuid: string) =>
-  get<any[]>(`/rancher-projects/${projectUuid}/secrets/`).then(
+  get<Secret[]>(`/rancher-projects/${projectUuid}/secrets/`).then(
     response => response.data,
   );

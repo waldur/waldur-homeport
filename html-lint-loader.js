@@ -1,4 +1,4 @@
-const regexp = new RegExp('<([^> ]+)\s*[^>]*?/>', 'mg');
+const regexp = new RegExp('<([^> ]+)\\s*[^>]*?/>', 'mg');
 
 const selfClosingInlineTags = [
   'area',

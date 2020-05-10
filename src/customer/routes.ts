@@ -1,4 +1,5 @@
 import { StateDeclaration } from '@waldur/core/types';
+import { PaymentProfileCreateContainer } from '@waldur/customer/payment-profiles/PaymentProfileCreateContainer';
 import { gettext } from '@waldur/i18n';
 import { ProjectsList } from '@waldur/project/ProjectsList';
 import { withStore } from '@waldur/store/connect';
@@ -83,6 +84,16 @@ export const states: StateDeclaration[] = [
     data: {
       pageTitle: gettext('Manage organization'),
       hideBreadcrumbs: true,
+    },
+  },
+
+  {
+    name: 'payment-profile-create',
+    url: 'payment-profile-create/',
+    parent: 'organization',
+    component: withStore(PaymentProfileCreateContainer),
+    data: {
+      pageTitle: gettext('Add payment profile'),
     },
   },
 

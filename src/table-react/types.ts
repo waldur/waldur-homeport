@@ -13,22 +13,22 @@ export interface StateTables {
   tables: { [key: string]: TableState };
 }
 
-type Entity = any;
-
-interface TableResponse {
-  rows: Entity[];
+interface TableResponse<RowType = any> {
+  rows: RowType[];
   resultCount: number;
   nextPage: number;
 }
 
-export type Fetcher = (request: TableRequest) => Promise<TableResponse>;
+export type Fetcher = <RowType = any>(
+  request: TableRequest,
+) => Promise<TableResponse<RowType>>;
 
-export interface TableOptionsType {
+export interface TableOptionsType<RowType = any> {
   table: string;
   fetchData: any;
   queryField?: string;
   exportFields?: string[] | ((props: any) => string[]);
-  exportRow?: (Entity, props: any) => string[];
+  exportRow?: (row: RowType, props: any) => string[];
   exportAll?: boolean;
   getDefaultFilter?: (state: any) => any;
   mapPropsToFilter?: (props: any) => any;
@@ -36,7 +36,7 @@ export interface TableOptionsType {
   pullInterval?: number | (() => number);
 }
 
-export interface Column<RowType = Entity> {
+export interface Column<RowType = any> {
   title: string;
   render: React.ComponentType<{ row: RowType }>;
   className?: string;

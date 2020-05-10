@@ -33,7 +33,6 @@ interface DispatchProps {
 
 interface KeyRemoveButtonState {
   removing: boolean;
-  removed: boolean;
 }
 
 class KeyRemoveButtonComponent extends React.Component<
@@ -42,7 +41,6 @@ class KeyRemoveButtonComponent extends React.Component<
 > {
   state = {
     removing: false,
-    removed: false,
   };
 
   async removeKey(id: string) {

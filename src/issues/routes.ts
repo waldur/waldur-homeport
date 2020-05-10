@@ -10,16 +10,18 @@ import { UserListView } from '@waldur/user/support/UserListView';
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 import { checkPermission } from './utils';
+import { SupportWorkspace } from './workspace/SupportWorkspace';
 
 export const states: StateDeclaration[] = [
   {
     name: 'support',
     url: '/support/',
-    template: '<issues-workspace></issues-workspace>',
+    component: withStore(SupportWorkspace),
     abstract: true,
     data: {
       auth: true,
       workspace: WOKSPACE_NAMES.support,
+      pageClass: 'gray-bg',
     },
   },
 

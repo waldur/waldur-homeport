@@ -7604,12 +7604,11 @@ msgid "Total"
 msgstr "Kokku"
 
 #: src/customer/dashboard/api.ts
-msgid "Total cost"
-msgstr "Kulud kokku"
+msgid "Estimated monthly cost"
+msgstr "Hinnanguline kuu kulu"
 
 #: src/customer/TotalCostField.tsx
 #, fuzzy
-#| msgid "Total cost"
 msgid "Total cost:"
 msgstr "Kulud kokku"
 

@@ -1,4 +1,7 @@
-import moment from 'moment-timezone';
+import * as moment from 'moment-timezone';
+
+import { translate } from '@waldur/i18n';
+
 import { getEstimatedPrice } from '../utils';
 
 const uniqueArray = items => {
@@ -88,7 +91,7 @@ const getCostChart = (report, userMap, labels, pricePackage) => {
     backgroundColor: userMap[username].color,
   }));
   return {
-    name: gettext('Costs'),
+    name: translate('Costs'),
     labels,
     datasets,
   };
@@ -98,7 +101,7 @@ export function formatCharts(palette, chartSpec, rows, pricePackage) {
   const labels = getLabels(rows);
   const userMap = getUserMap(palette, rows);
   const report = getReport(rows);
-  let charts = getUsageCharts(chartSpec, report, userMap, labels);
+  const charts = getUsageCharts(chartSpec, report, userMap, labels);
   if (pricePackage) {
     const costChart = getCostChart(report, userMap, labels, pricePackage);
     charts.unshift(costChart);

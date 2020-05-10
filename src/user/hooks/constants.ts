@@ -1,1 +1,1 @@
-export const hooksListTable = 'hooksList';
+export const HOOK_LIST_ID = 'hooksList';

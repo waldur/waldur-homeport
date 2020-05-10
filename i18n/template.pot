@@ -118,7 +118,7 @@ msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -157,7 +157,6 @@ msgstr ""
 #: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
-#: src/resource/actions/action-button-resource.html
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/user/keys/KeysList.tsx
@@ -278,7 +277,8 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/routes.ts
 msgid "Add payment profile"
 msgstr ""
 
@@ -389,6 +389,8 @@ msgstr ""
 
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "Agreement number"
 msgstr ""
@@ -426,7 +428,7 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SigninButton.tsx
 msgid "Already have an account?"
 msgstr ""
 
@@ -540,6 +542,10 @@ msgstr ""
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType}?"
+msgstr ""
+
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
+msgid "Are you sure you want to delete the payment profile?"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
@@ -905,7 +911,6 @@ msgstr ""
 #: src/project/ProjectCreateForm.tsx
 #: src/project/team/add-project-member.html
 #: src/resource/actions/dialog/action-dialog.html
-#: src/user/hooks/hook-details.html
 #: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
@@ -1215,6 +1220,7 @@ msgstr ""
 msgid "Confirm deletion?"
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 msgid "Confirmation"
@@ -1277,7 +1283,7 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
-#: src/slurm/details/utils.js
+#: src/slurm/details/utils.ts
 msgid "Costs"
 msgstr ""
 
@@ -1304,7 +1310,7 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/rancher/catalog/CatalogCreateButton.tsx
-#: src/user/hooks/hook-details.html
+#: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create"
 msgstr ""
 
@@ -1320,7 +1326,8 @@ msgstr ""
 msgid "Create Zabbix host"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/AuthHeader.tsx
+#: src/auth/SignupButton.tsx
 msgid "Create an account"
 msgstr ""
 
@@ -1361,7 +1368,7 @@ msgstr ""
 msgid "Create node"
 msgstr ""
 
-#: src/user/hooks/hook-details.html
+#: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create notification"
 msgstr ""
 
@@ -1606,7 +1613,7 @@ msgid "Default value"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1686,7 +1693,7 @@ msgstr ""
 msgid "Destination"
 msgstr ""
 
-#: src/user/hooks/hook-details.html
+#: src/user/hooks/HookForm.tsx
 msgid "Destination URL"
 msgstr ""
 
@@ -1762,7 +1769,7 @@ msgstr ""
 msgid "Disable provisioning when threshold is reached."
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
 msgstr ""
@@ -1785,7 +1792,7 @@ msgstr ""
 msgid "Do not configure a gateway for this subnet"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/SignupButton.tsx
 msgid "Do not have an account?"
 msgstr ""
 
@@ -1867,7 +1874,7 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
-#: src/user/hooks/hook-details.html
+#: src/user/hooks/HookForm.tsx
 msgid "E-mail address"
 msgstr ""
 
@@ -1883,7 +1890,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
@@ -1910,6 +1917,7 @@ msgstr ""
 
 #: src/auth/SignupForm.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -1932,6 +1940,10 @@ msgstr ""
 msgid "Email verification has been sent. Please check your inbox."
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileActions.tsx
+msgid "Enable"
+msgstr ""
+
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "Enable DHCP"
 msgstr ""
@@ -1944,8 +1956,8 @@ msgstr ""
 msgid "Enable profile"
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
-#: src/user/hooks/hook-details.html
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/user/hooks/HookForm.tsx
 msgid "Enabled"
 msgstr ""
 
@@ -1955,6 +1967,11 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "End"
+msgstr ""
+
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+msgid "End date"
 msgstr ""
 
 #: src/invoices/list/AgreementInfo.tsx
@@ -2021,6 +2038,10 @@ msgstr ""
 msgid "Estimated cost for the current month: {cost}"
 msgstr ""
 
+#: src/customer/dashboard/api.ts
+msgid "Estimated monthly cost"
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr ""
@@ -2042,7 +2063,6 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
-#: src/events/help.js
 #: src/help/constants.js
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
@@ -2246,6 +2266,10 @@ msgstr ""
 
 #: src/openstack/OpenStackPluginOptionsForm.tsx
 msgid "Fixed — use common storage quota"
+msgstr ""
+
+#: src/customer/payment-profiles/utils.ts
+msgid "Fixed-price contract"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
@@ -2778,6 +2802,7 @@ msgid "Invitation rejection"
 msgstr ""
 
 #: src/auth/auth-login.js
+#: src/auth/useAuthFeatures.ts
 msgid "Invitation token is not found."
 msgstr ""
 
@@ -3071,7 +3096,6 @@ msgid "Loading"
 msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
-#: src/resource/actions/action-button-resource.html
 msgid "Loading actions"
 msgstr ""
 
@@ -3091,8 +3115,8 @@ msgstr ""
 msgid "Logging user in"
 msgstr ""
 
+#: src/auth/SigninButton.tsx
 #: src/auth/SigninForm.tsx
-#: src/auth/auth-login.html
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 msgid "Login"
 msgstr ""
@@ -3348,6 +3372,10 @@ msgstr ""
 msgid "Monthly cost"
 msgstr ""
 
+#: src/customer/payment-profiles/utils.ts
+msgid "Monthly invoices"
+msgstr ""
+
 #: src/booking/components/calendar/defaultConfig.ts
 msgid "More"
 msgstr ""
@@ -3398,7 +3426,9 @@ msgstr ""
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetails.tsx
 #: src/customer/details/PaymentProfileDetails.tsx
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/jira/project/JiraProjectSummary.tsx
 #: src/jira/project/jira-project-config.js
@@ -3479,6 +3509,10 @@ msgstr ""
 
 #: src/core/validators.ts
 msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr ""
+
+#: src/rancher/template/ApplicationConfiguration.tsx
+msgid "Name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name', or '123-abc')"
 msgstr ""
 
 #: src/rancher/cluster/create/utils.ts
@@ -3675,15 +3709,15 @@ msgstr ""
 msgid "Nothing to show here"
 msgstr ""
 
-#: src/user/hooks/hook-details.js
+#: src/user/hooks/utils.ts
 msgid "Notification has been created."
 msgstr ""
 
-#: src/user/hooks/hook-details.js
+#: src/user/hooks/utils.ts
 msgid "Notification has been updated."
 msgstr ""
 
-#: src/user/hooks/hook-details.html
+#: src/user/hooks/HookForm.tsx
 msgid "Notification method"
 msgstr ""
 
@@ -3929,7 +3963,7 @@ msgstr ""
 msgid "Options are invalid."
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/AuthLogin.tsx
 msgid "Or use social login"
 msgstr ""
 
@@ -4191,6 +4225,10 @@ msgstr ""
 msgid "Payment for {customer_link} has been cancelled."
 msgstr ""
 
+#: src/customer/payment-profiles/utils.ts
+msgid "Payment gateways (monthly)"
+msgstr ""
+
 #: src/paypal/PaymentApprove.tsx
 #: src/paypal/PaymentCancel.tsx
 msgid "Payment has been processed successfully."
@@ -4207,6 +4245,22 @@ msgstr ""
 
 #: src/customer/list/CustomerPaymentProfile.tsx
 msgid "Payment profile"
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Payment profile has been created."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Payment profile has been enabled."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Payment profile has been removed."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Payment profile has been updated."
 msgstr ""
 
 #: src/customer/details/customer-manage.html
@@ -4987,16 +5041,12 @@ msgstr ""
 msgid "Register as service provider"
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/AuthHeader.tsx
 msgid "Register to"
 msgstr ""
 
-#: src/auth/auth-button-text.js
+#: src/auth/AuthButton.tsx
 msgid "Register with"
-msgstr ""
-
-#: src/auth/auth-login.html
-msgid "Register with trusted identity"
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
@@ -6060,12 +6110,8 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: src/auth/auth-button-text.js
+#: src/auth/AuthButton.tsx
 msgid "Sign in with"
-msgstr ""
-
-#: src/auth/auth-login.html
-msgid "Sign in with trusted identity"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -6216,7 +6262,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
@@ -6267,6 +6313,7 @@ msgstr ""
 msgid "Storage type"
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/digitalocean/droplet-resize.html
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
@@ -6345,7 +6392,7 @@ msgid "Support"
 msgstr ""
 
 #: src/issues/routes.ts
-#: src/issues/workspace/issues-workspace.html
+#: src/issues/workspace/SupportWorkspace.tsx
 msgid "Support dashboard"
 msgstr ""
 
@@ -6572,6 +6619,10 @@ msgstr ""
 msgid "The project will be changed for all items in cart."
 msgstr ""
 
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html
+msgid "The value is not valid IP v4"
+msgstr ""
+
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 msgid "Then download (if needed) and run kubectl"
 msgstr ""
@@ -6589,7 +6640,6 @@ msgid "There are no SSH public keys yet."
 msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
-#: src/resource/actions/action-button-resource.html
 msgid "There are no actions."
 msgstr ""
 
@@ -6607,10 +6657,6 @@ msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
-msgstr ""
-
-#: src/marketplace/category/filters/AttributeFilterList.tsx
-msgid "There are no category sections yet."
 msgstr ""
 
 #: src/dashboard/CategoryResources.tsx
@@ -6681,6 +6727,10 @@ msgstr ""
 
 #: src/table-react/utils.tsx
 msgid "There are no {verboseName} yet."
+msgstr ""
+
+#: src/rancher/ProjectExpandableRow.tsx
+msgid "There are not namespaces in this project yet."
 msgstr ""
 
 #: src/issues/workspace/IssuesActivityStream.tsx
@@ -6814,10 +6864,6 @@ msgstr ""
 msgid "Total CPU"
 msgstr ""
 
-#: src/customer/dashboard/api.ts
-msgid "Total cost"
-msgstr ""
-
 #: src/customer/list/TotalCostField.tsx
 msgid "Total cost:"
 msgstr ""
@@ -6853,7 +6899,9 @@ msgid "Try again"
 msgstr ""
 
 #: src/customer/details/PaymentProfileDetails.tsx
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -6967,8 +7015,16 @@ msgstr ""
 msgid "Unable to create node."
 msgstr ""
 
+#: src/user/hooks/utils.ts
+msgid "Unable to create notification."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to create offering."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Unable to create payment profile."
 msgstr ""
 
 #: src/user/support/effects.ts
@@ -6994,6 +7050,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to edit comment."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Unable to enable payment profile."
 msgstr ""
 
 #: src/issues/attachments/effects.ts
@@ -7115,6 +7175,7 @@ msgstr ""
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/SecretField.tsx
+#: src/user/hooks/HookDetailsDialog.tsx
 msgid "Unable to load data."
 msgstr ""
 
@@ -7288,6 +7349,10 @@ msgstr ""
 msgid "Unable to remove logo."
 msgstr ""
 
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Unable to remove payment profile."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to remove screenshot."
 msgstr ""
@@ -7336,12 +7401,20 @@ msgstr ""
 msgid "Unable to submit usage report."
 msgstr ""
 
+#: src/user/hooks/utils.ts
+msgid "Unable to update notification."
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update offering state."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to update offering."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Unable to update payment profile."
 msgstr ""
 
 #: src/providers/effects.tsx
@@ -7361,6 +7434,7 @@ msgid "Unable to upload logo."
 msgstr ""
 
 #: src/auth/auth-login.js
+#: src/auth/useAuthFeatures.ts
 msgid "Unable to validate invitation token."
 msgstr ""
 
@@ -7412,12 +7486,13 @@ msgstr ""
 
 #: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/details/customer-policies.html
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/offering/actions/UpdateAction.ts
+#: src/user/hooks/HookDetailsDialog.tsx
 #: src/user/hooks/HookUpdateButton.tsx
-#: src/user/hooks/hook-details.html
 msgid "Update"
 msgstr ""
 
@@ -7429,7 +7504,7 @@ msgstr ""
 msgid "Update limits for an existing resource"
 msgstr ""
 
-#: src/user/hooks/hook-details.html
+#: src/user/hooks/HookDetailsDialog.tsx
 msgid "Update notification"
 msgstr ""
 
@@ -7439,6 +7514,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 msgid "Update offering ({name})"
+msgstr ""
+
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+msgid "Update payment profile"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
@@ -7896,6 +7975,10 @@ msgstr ""
 msgid "Volumes count"
 msgstr ""
 
+#: src/user/hooks/HookTypeField.tsx
+msgid "Webhook"
+msgstr ""
+
 #: src/customer/create/customer-create-config.js
 msgid "Website URL"
 msgstr ""
@@ -7904,6 +7987,7 @@ msgstr ""
 msgid "Week"
 msgstr ""
 
+#: src/auth/AuthHeader.tsx
 #: src/auth/auth-init.js
 #: src/auth/auth-login.js
 msgid "Welcome to {pageTitle}!"
@@ -8052,6 +8136,10 @@ msgstr ""
 msgid "You must agree with terms of service."
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileList.tsx
+msgid "You must be staff to modify payment profiles"
+msgstr ""
+
 #: src/marketplace/orders/OrderDetails.tsx
 msgid "You need approval to finish purchasing of services."
 msgstr ""
@@ -8092,7 +8180,7 @@ msgstr ""
 msgid "Your organization does not have any projects yet."
 msgstr ""
 
-#: src/auth/auth-login.html
+#: src/auth/AuthHeader.tsx
 msgid "Your single pane of control for all cloud services. Login in to see it in action."
 msgstr ""
 
@@ -8243,7 +8331,7 @@ msgstr ""
 msgid "owner"
 msgstr ""
 
-#: src/customer/details/PaymentProfileList.tsx
+#: src/customer/payment-profiles/PaymentProfileList.tsx
 msgid "payment profiles"
 msgstr ""
 

@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
   showConfirmDialog: (action: () => void) =>
     dispatch(showHookRemoveConfirmation(action)),
   removeEntity: (id: string) =>
-    dispatch(deleteEntity(constants.hooksListTable, id)),
+    dispatch(deleteEntity(constants.HOOK_LIST_ID, id)),
   showError: (message: string) => dispatch(showError(message)),
   showSuccess: (message: string) => dispatch(showSuccess(message)),
 });
@@ -34,7 +34,6 @@ interface DispatchProps {
 
 interface HookRemoveButtonState {
   removing: boolean;
-  removed: boolean;
 }
 
 class HookRemoveButtonComponent extends React.Component<
@@ -43,7 +42,6 @@ class HookRemoveButtonComponent extends React.Component<
 > {
   state = {
     removing: false,
-    removed: false,
   };
 
   async removeHook(uuid: string, url: string) {

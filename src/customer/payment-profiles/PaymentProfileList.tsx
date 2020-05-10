@@ -1,14 +1,28 @@
+import { useRouter } from '@uirouter/react';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
+import { PAYMENT_PROFILES_TABLE } from '@waldur/customer/details/constants';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { ActionButton } from '@waldur/table-react/ActionButton';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
+
+import { PaymentProfileActions } from './PaymentProfileActions';
 
 export const TableComponent = props => {
+  const router = useRouter();
+
+  const tooltipAndDisabledAttributes = {
+    disabled: props.isSupport && !props.isStaff,
+    tooltip:
+      props.isSupport && !props.isStaff
+        ? translate('You must be staff to modify payment profiles')
+        : null,
+  };
+
   const columns = [
     {
       title: translate('Type'),
@@ -29,19 +43,11 @@ export const TableComponent = props => {
     },
     {
       title: translate('Actions'),
-      render: () => (
-        <>
-          <ActionButton
-            title={translate('Edit')}
-            action={() => alert('Not implemented')}
-            icon="fa fa-edit"
-          />
-          <ActionButton
-            title={translate('Delete')}
-            action={() => alert('Not implemented')}
-            icon="fa fa-trash"
-          />
-        </>
+      render: ({ row }) => (
+        <PaymentProfileActions
+          profile={row}
+          tooltipAndDisabledAttributes={tooltipAndDisabledAttributes}
+        />
       ),
     },
   ];
@@ -55,8 +61,9 @@ export const TableComponent = props => {
       actions={
         <ActionButton
           title={translate('Add payment profile')}
-          action={() => alert('Not implemented')}
+          action={() => router.stateService.go('payment-profile-create')}
           icon="fa fa-plus"
+          {...tooltipAndDisabledAttributes}
         />
       }
     />
@@ -64,15 +71,20 @@ export const TableComponent = props => {
 };
 
 const TableOptions = {
-  table: 'paymentProfiles',
+  table: PAYMENT_PROFILES_TABLE,
   fetchData: createFetcher('payment-profiles'),
   mapPropsToFilter: props => ({ organization_uuid: props.customer.uuid }),
 };
 
 const mapStateToProps = state => ({
   customer: getCustomer(state),
+  isStaff: isStaff(state),
+  isSupport: isSupport(state),
 });
 
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
+const enhance = compose(
+  connect(mapStateToProps, null),
+  connectTable(TableOptions),
+);
 
 export const PaymentProfileList = enhance(TableComponent);

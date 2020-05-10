@@ -2,6 +2,7 @@ import { SubmissionError, change } from 'redux-form';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
+import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
@@ -9,6 +10,23 @@ import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import * as api from '../../common/api';
 
 import * as constants from './constants';
+
+function* redirectToDetailView(resource_type, resource_uuid) {
+  const state =
+    resource_type === 'Support.Offering'
+      ? 'offeringDetails'
+      : 'resources.details';
+  if ($state.current.name !== state) {
+    return;
+  }
+  yield put(
+    stateGo(state, {
+      uuid: resource_uuid,
+      resource_type,
+      tab: 'orderItems',
+    }),
+  );
+}
 
 function* handleSubmitUsage(action) {
   const { period, components } = action.payload;
@@ -53,13 +71,7 @@ function* handleSwitchPlan(action) {
     );
     yield put(constants.switchPlan.success());
     yield put(closeModalDialog());
-    yield put(
-      stateGo('resources.details', {
-        uuid: resource_uuid,
-        resource_type,
-        tab: 'orderItems',
-      }),
-    );
+    yield redirectToDetailView(resource_type, resource_uuid);
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to submit plan change request.',
@@ -85,13 +97,7 @@ function* handleChangeLimits(action) {
     );
     yield put(constants.changeLimits.success());
     yield put(closeModalDialog());
-    yield put(
-      stateGo('resources.details', {
-        uuid: resource_uuid,
-        resource_type,
-        tab: 'orderItems',
-      }),
-    );
+    yield redirectToDetailView(resource_type, resource_uuid);
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to submit limits change request.',
@@ -116,17 +122,7 @@ function* handleTerminateResource(action) {
     );
     yield put(constants.terminateResource.success());
     yield put(closeModalDialog());
-    const state =
-      resource_type === 'Support.Offering'
-        ? 'offeringDetails'
-        : 'resources.details';
-    yield put(
-      stateGo(state, {
-        uuid: resource_uuid,
-        resource_type,
-        tab: 'orderItems',
-      }),
-    );
+    yield redirectToDetailView(resource_type, resource_uuid);
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to submit resource termination request.',
