@@ -1,0 +1,46 @@
+[
+  {
+    "url": "http://localhost:8080/api/marketplace-categories/4588ff519260461893ab371b8fe83363/",
+    "uuid": "4588ff519260461893ab371b8fe83363",
+    "title": "HPC",
+    "description": "High Performance Computing",
+    "icon": "http://localhost:8080/media/marketplace_category_icons/hpc.svg",
+    "offering_count": 3,
+    "sections": [
+      {
+        "key": "hpc_Security",
+        "title": "Security",
+        "attributes": [
+          {
+            "key": "hpc_Security_certification",
+            "title": "Certification",
+            "type": "list",
+            "options": [
+              {
+                "key": "hpc_Security_certification_iskel",
+                "title": "ISKE L"
+              },
+              {
+                "key": "hpc_Security_certification_iskem",
+                "title": "ISKE M"
+              },
+              {
+                "key": "hpc_Security_certification_iskeh",
+                "title": "ISKE H"
+              },
+              {
+                "key": "hpc_Security_certification_iso27001",
+                "title": "ISO27001"
+              }
+            ],
+            "required": false,
+            "default": null
+          }
+        ],
+        "is_standalone": true
+      }
+    ],
+    "columns": [],
+    "components": []
+  }
+]

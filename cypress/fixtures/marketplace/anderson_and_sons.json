@@ -1,0 +1,115 @@
+{
+  "url": "http://localhost:8080/api/customers/10a05c2fcab44588a7aa2e16809504cf/",
+  "uuid": "10a05c2fcab44588a7aa2e16809504cf",
+  "created": "2017-09-04T18:01:14.491366Z",
+  "name": "Anderson and Sons",
+  "native_name": "",
+  "abbreviation": "And",
+  "division": null,
+  "contact_details": "34327 Kristine Avenue Suite 716\nDianeside, MA 75254",
+  "domain": "example.com",
+  "display_name": "And",
+  "agreement_number": null,
+  "email": "AndersonandSons@example.com",
+  "phone_number": "",
+  "access_subnets": "",
+  "projects": [
+    {
+      "url": "http://localhost:8080/api/projects/6009b5cd121d44988500ec3e07fc6045/",
+      "uuid": "6009b5cd121d44988500ec3e07fc6045",
+      "name": "Versatile fault-tolerant artificial intelligence"
+    },
+    {
+      "url": "http://localhost:8080/api/projects/f5660bcc494a4ecdbabf0755eb7bad42/",
+      "uuid": "f5660bcc494a4ecdbabf0755eb7bad42",
+      "name": "Re-contextualized global Graphic Interface"
+    }
+  ],
+  "owners": [
+    {
+      "url": "http://localhost:8080/api/users/c05d30a41453433d8fe4fb659270ea69/",
+      "uuid": "c05d30a41453433d8fe4fb659270ea69",
+      "username": "angelpeterson@gmail.com",
+      "full_name": "Angel Peterson",
+      "native_name": ""
+    },
+    {
+      "url": "http://localhost:8080/api/users/32e84a93f63c44698dbe543e0f1e8939/",
+      "uuid": "32e84a93f63c44698dbe543e0f1e8939",
+      "username": "patrickperez@gmail.com",
+      "full_name": "Patrick Perez",
+      "native_name": ""
+    },
+    {
+      "url": "http://localhost:8080/api/users/8500109fdaf844708ac4ec4eede1210a/",
+      "uuid": "8500109fdaf844708ac4ec4eede1210a",
+      "username": "targo.tennisberg@example.com",
+      "full_name": "Henry Mendoza",
+      "native_name": ""
+    },
+    {
+      "url": "http://localhost:8080/api/users/9c5066ba96004594a45f9d5c015e6faf/",
+      "uuid": "9c5066ba96004594a45f9d5c015e6faf",
+      "username": "jasonlozano@gmail.com",
+      "full_name": "Jason Lozano",
+      "native_name": ""
+    }
+  ],
+  "support_users": [],
+  "backend_id": "",
+  "registration_code": "838-20-2770",
+  "homepage": "",
+  "quotas": [
+    {
+      "url": "http://localhost:8080/api/quotas/919bd1808d764f658120b43e169270af/",
+      "uuid": "919bd1808d764f658120b43e169270af",
+      "name": "nc_cpu_usage",
+      "limit": -1,
+      "usage": 0
+    },
+    {
+      "url": "http://localhost:8080/api/quotas/672242327b0a4cb284d4123fc1431fa3/",
+      "uuid": "672242327b0a4cb284d4123fc1431fa3",
+      "name": "nc_ram_usage",
+      "limit": -1,
+      "usage": 0
+    }
+  ],
+  "image": null,
+  "country": "JO",
+  "country_name": "Jordan",
+  "vat_code": "",
+  "is_company": false,
+  "type": "",
+  "postal": "",
+  "address": "",
+  "bank_name": "",
+  "bank_account": "",
+  "latitude": null,
+  "longitude": null,
+  "default_tax_percent": "0.00",
+  "accounting_start_date": "2018-02-11T22:52:29.951974Z",
+  "payment_profiles": [
+    {
+      "uuid": "0f2984007bea42389798846ab19f0fa4",
+      "url": "http://localhost:8080/api/payment-profiles/0f2984007bea42389798846ab19f0fa4/",
+      "name": "test payment profile",
+      "organization_uuid": "10a05c2fcab44588a7aa2e16809504cf",
+      "organization": "http://localhost:8080/api/customers/10a05c2fcab44588a7aa2e16809504cf/",
+      "attributes": {},
+      "payment_type": "fixed_price",
+      "payment_type_display": "Fixed-price contract",
+      "is_active": true
+    }
+  ],
+  "is_service_provider": false,
+  "billing_price_estimate": {
+    "url": "http://localhost:8080/api/billing-price-estimates/7cbf6ff4313840f781e442028fb8c1d7/",
+    "threshold": 0,
+    "total": 49.7655896,
+    "current": 14.4480744,
+    "limit": -1,
+    "tax": 0,
+    "tax_current": 0
+  }
+}

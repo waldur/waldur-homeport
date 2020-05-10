@@ -1,0 +1,28 @@
+[
+  {
+    "uuid": "36b6c5ab2f854df1a87ffd39b9d767c6",
+    "name": "Another offering",
+    "category_title": "HPC",
+    "thumbnail": null,
+    "components": [],
+    "plans": [
+      {
+        "url": "http://localhost:8080/api/marketplace-plans/2415bf0d974f4d908b6fc8fb1aabd2d9/",
+        "uuid": "2415bf0d974f4d908b6fc8fb1aabd2d9",
+        "name": "new plan",
+        "description": "<ol>\n<li><strong>plan description</strong></li>\n</ol>\n<p><strong>😂</strong></p>\n<p></p>\n<p><strong>new one</strong></p>",
+        "article_code": "",
+        "product_code": "",
+        "prices": {},
+        "quotas": {},
+        "max_amount": null,
+        "archived": false,
+        "is_active": true,
+        "unit_price": "0.0000000",
+        "unit": "month",
+        "init_price": 0,
+        "switch_price": 0
+      }
+    ]
+  }
+]
