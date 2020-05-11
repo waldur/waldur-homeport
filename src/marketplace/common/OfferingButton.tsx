@@ -12,6 +12,7 @@ interface OfferingButtonProps {
   isActive?: boolean;
   flavor?: 'primary' | 'secondary' | 'ternary';
   disabled?: boolean;
+  isAddingItem?: boolean;
 }
 
 export const OfferingButton: React.FC<OfferingButtonProps> = (
@@ -26,6 +27,7 @@ export const OfferingButton: React.FC<OfferingButtonProps> = (
         })}
         onClick={props.onClick}
       >
+        {props.isAddingItem && <i className="fa fa-spinner fa-spin m-r-xs" />}
         <i className={props.icon} /> {props.title}
       </button>
     );

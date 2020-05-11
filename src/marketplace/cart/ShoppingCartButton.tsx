@@ -12,6 +12,7 @@ interface ShoppingCartButtonProps {
   disabled?: boolean;
   title?: string;
   icon?: string;
+  isAddingItem?: boolean;
 }
 
 export const ShoppingCartButton = (props: ShoppingCartButtonProps) => (
@@ -22,5 +23,6 @@ export const ShoppingCartButton = (props: ShoppingCartButtonProps) => (
     onClick={() => props.onBtnClick()}
     flavor={props.flavor}
     disabled={props.disabled}
+    isAddingItem={props.isAddingItem}
   />
 );
