@@ -1824,6 +1824,11 @@ msgstr ""
 msgid "Domain"
 msgstr ""
 
+#: src/openstack/OpenStackForm.tsx
+#: src/openstack/marketplace.ts
+msgid "Domain name"
+msgstr ""
+
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
