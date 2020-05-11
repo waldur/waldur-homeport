@@ -1,10 +1,12 @@
 import { getUUID } from '@waldur/core/utils';
+import { gettext } from '@waldur/i18n';
+import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/ResourceBreadcrumbsRegistry';
 
 import { getInstanceListState } from '../utils';
 
-// @ngInject
-export default function breadcrumbsConfig(ResourceBreadcrumbsService) {
-  ResourceBreadcrumbsService.register('OpenStackTenant.Backup', resource => {
+ResourceBreadcrumbsRegistry.register(
+  'OpenStackTenant.BackupSchedule',
+  resource => {
     const instance_uuid = getUUID(resource.instance);
     return [
       getInstanceListState(resource.project_uuid),
@@ -17,14 +19,14 @@ export default function breadcrumbsConfig(ResourceBreadcrumbsService) {
         },
       },
       {
-        label: gettext('Backups'),
+        label: gettext('Backup schedules'),
         state: 'resources.details',
         params: {
           uuid: instance_uuid,
           resource_type: 'OpenStackTenant.Instance',
-          tab: 'backups',
+          tab: 'backup_schedules',
         },
       },
     ];
-  });
-}
+  },
+);

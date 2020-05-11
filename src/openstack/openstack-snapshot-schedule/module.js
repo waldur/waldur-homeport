@@ -1,6 +1,6 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-import breadcrumbsConfig from './breadcrumbs';
+import './breadcrumbs';
 import { OpenStackSnapshotScheduleSummary } from './OpenStackSnapshotScheduleSummary';
 import './tabs';
 
@@ -41,6 +41,5 @@ export default module => {
     OpenStackSnapshotScheduleSummary,
   );
   module.config(actionConfig);
-  module.run(breadcrumbsConfig);
   module.config(stateConfig);
 };

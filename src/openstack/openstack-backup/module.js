@@ -1,7 +1,7 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
-import breadcrumbsConfig from './breadcrumbs';
+import './breadcrumbs';
 import openstackBackupRestoreSummary from './openstack-backup-restore-summary';
 import { OpenStackBackupSummary } from './OpenStackBackupSummary';
 import './tabs';
@@ -18,5 +18,4 @@ export default module => {
     openstackBackupRestoreSummary,
   );
   module.config(actionsConfig);
-  module.run(breadcrumbsConfig);
 };

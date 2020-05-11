@@ -5,7 +5,7 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { registerResourceTypeLabel } from '@waldur/resource/utils';
 
 import { actionsConfig } from './actions';
-import breadcrumbsConfig from './breadcrumbs';
+import './breadcrumbs';
 import { VMwareDiskSummary } from './VMwareDiskSummary';
 import { VMwarePortSummary } from './VMwarePortSummary';
 import { VMwareVirtualMachineSummary } from './VMwareVirtualMachineSummary';
@@ -22,5 +22,4 @@ export default module => {
   ResourceSummary.register('VMware.Disk', VMwareDiskSummary);
   ResourceSummary.register('VMware.Port', VMwarePortSummary);
   module.config(actionsConfig);
-  module.run(breadcrumbsConfig);
 };

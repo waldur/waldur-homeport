@@ -1,7 +1,7 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import nodeActions from './actions';
-import breadcrumbsConfig from './breadcrumbs';
+import './breadcrumbs';
 import { RancherNodeSummary } from './RancherNodeSummary';
 import './tabs';
 
@@ -13,5 +13,4 @@ function actionsConfig(ActionConfigurationProvider) {
 export default module => {
   ResourceSummary.register('Rancher.Node', RancherNodeSummary);
   module.config(actionsConfig);
-  module.run(breadcrumbsConfig);
 };
