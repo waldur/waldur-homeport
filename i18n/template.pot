@@ -3774,7 +3774,6 @@ msgid "Number of worker nodes"
 msgstr ""
 
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#: src/user/user-popover.html
 msgid "OK"
 msgstr ""
 
@@ -6898,7 +6897,7 @@ msgstr ""
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
 
-#: src/user/user-popover.html
+#: src/user/UserPopover.tsx
 msgid "Try again"
 msgstr ""
 
@@ -7291,7 +7290,7 @@ msgstr ""
 msgid "Unable to load tenant."
 msgstr ""
 
-#: src/user/user-popover.html
+#: src/user/UserPopover.tsx
 msgid "Unable to load user."
 msgstr ""
 
@@ -7656,8 +7655,8 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
+#: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsDialog.tsx
-#: src/user/user-popover.html
 msgid "User details"
 msgstr ""
 
