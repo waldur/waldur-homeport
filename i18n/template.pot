@@ -709,8 +709,8 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: src/auth/callbacks/auth-login-failed.html
-#: src/auth/callbacks/auth-logout-failed.html
+#: src/auth/callbacks/AuthLoginFailed.tsx
+#: src/auth/callbacks/AuthLogoutFailed.tsx
 msgid "Back to login"
 msgstr ""
 
@@ -3110,7 +3110,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: src/auth/callbacks/auth-login-completed.html
+#: src/auth/callbacks/AuthLoginCompleted.tsx
 msgid "Logging user in"
 msgstr ""
 
@@ -3124,7 +3124,7 @@ msgstr ""
 msgid "Login details"
 msgstr ""
 
-#: src/auth/callbacks/auth-login-failed.html
+#: src/auth/callbacks/AuthLoginFailed.tsx
 msgid "Login failed"
 msgstr ""
 
@@ -3140,7 +3140,7 @@ msgstr ""
 msgid "Logo has been uploaded."
 msgstr ""
 
-#: src/auth/callbacks/auth-logout-failed.html
+#: src/auth/callbacks/AuthLogoutFailed.tsx
 msgid "Logout failed"
 msgstr ""
 
@@ -7668,7 +7668,7 @@ msgstr ""
 msgid "User has been deactivated."
 msgstr ""
 
-#: src/auth/callbacks/auth-logout-completed.html
+#: src/auth/callbacks/AuthLogoutCompleted.tsx
 msgid "User has been logged out. You will be redirected to the login page soon."
 msgstr ""
 

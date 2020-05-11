@@ -1,10 +1,16 @@
 import { StateDeclaration } from '@waldur/core/types';
+import { withStore } from '@waldur/store/connect';
+
+import { AuthLoginCompleted } from './AuthLoginCompleted';
+import { AuthLoginFailed } from './AuthLoginFailed';
+import { AuthLogoutCompleted } from './AuthLogoutCompleted';
+import { AuthLogoutFailed } from './AuthLogoutFailed';
 
 export const states: StateDeclaration[] = [
   {
     name: 'home.login_completed',
     url: '/login_completed/:token/:method/',
-    template: '<auth-login-completed></auth-login-completed>',
+    component: withStore(AuthLoginCompleted),
     data: {
       anonymous: true,
       bodyClass: 'old',
@@ -14,7 +20,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'home.login_failed',
     url: '/login_failed/',
-    template: '<auth-login-failed></auth-login-failed>',
+    component: withStore(AuthLoginFailed),
     data: {
       bodyClass: 'old',
       erred: true,
@@ -24,7 +30,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'home.logout_completed',
     url: '/logout_completed/',
-    template: '<auth-logout-completed></auth-logout-completed>',
+    component: withStore(AuthLogoutCompleted),
     data: {
       bodyClass: 'old',
     },
@@ -33,7 +39,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'home.logout_failed',
     url: '/logout_failed/',
-    template: '<auth-logout-failed></auth-logout-failed>',
+    component: withStore(AuthLogoutFailed),
     data: {
       bodyClass: 'old',
       erred: true,
