@@ -1,6 +1,6 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-import breadcrumbsConfig from './breadcrumbs';
+import './breadcrumbs';
 import { formatAllocationPool } from './filters';
 import openstackAllocationPool from './openstack-allocation-pool';
 import { OpenStackNetworkSummary } from './OpenStackNetworkSummary';
@@ -51,5 +51,4 @@ export default module => {
   module.component('openstackAllocationPool', openstackAllocationPool);
   module.filter('formatAllocationPool', formatAllocationPool);
   module.config(actionConfig);
-  module.run(breadcrumbsConfig);
 };

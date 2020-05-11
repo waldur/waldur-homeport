@@ -1,5 +1,4 @@
 import actionsModule from './actions/module';
-import resourceBreadcrumbsModule from './breadcrumbs/module';
 import monitoringModule from './monitoring/module';
 import resourceHeader from './resource-header';
 import resourceDetails from './ResourceDetails';
@@ -16,7 +15,6 @@ export default module => {
   module.config(resourceRoutes);
   module.service('resourcesService', resourcesService);
   resourceSummaryModule(module);
-  resourceBreadcrumbsModule(module);
   resourceStateModule(module);
   monitoringModule(module);
   actionsModule(module);

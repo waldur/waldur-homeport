@@ -1,10 +1,7 @@
-export default class ResourceBreadcrumbsService {
-  // @ngInject
-  constructor(ENV, features) {
-    this.ENV = ENV;
-    this.features = features;
-    this.breadcrumbs = {};
-  }
+import { translate } from '@waldur/i18n';
+
+class ResourceBreadcrumbsRegistryClass {
+  private breadcrumbs = {};
 
   register(type, breadcrumbs) {
     this.breadcrumbs[type] = breadcrumbs;
@@ -13,7 +10,7 @@ export default class ResourceBreadcrumbsService {
   getItems(resource) {
     const items = [
       {
-        label: gettext('Project workspace'),
+        label: translate('Project workspace'),
         state: 'project.details',
         params: {
           uuid: resource.project_uuid,
@@ -26,9 +23,10 @@ export default class ResourceBreadcrumbsService {
       return items.concat(func(resource));
     }
 
-    return items.concat([
+    return [
+      ...items,
       {
-        label: gettext('Resources'),
+        label: translate('Resources'),
       },
       {
         params: {
@@ -38,6 +36,8 @@ export default class ResourceBreadcrumbsService {
         label: resource.marketplace_category_name,
         state: 'marketplace-project-resources',
       },
-    ]);
+    ];
   }
 }
+
+export const ResourceBreadcrumbsRegistry = new ResourceBreadcrumbsRegistryClass();

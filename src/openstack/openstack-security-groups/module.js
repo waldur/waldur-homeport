@@ -1,6 +1,6 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-import breadcrumbsConfig from './breadcrumbs';
+import './breadcrumbs';
 import filtersModule from './filters';
 import securityGroupsDialogReact from './OpenStackSecurityGroupsDialog';
 import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
@@ -57,5 +57,4 @@ export default module => {
   module.component('securityGroupsDialogReact', securityGroupsDialogReact);
   filtersModule(module);
   module.config(actionConfig);
-  module.run(breadcrumbsConfig);
 };

@@ -1,6 +1,7 @@
 import { blockingExecutor } from '@waldur/core/services';
 import { getCategoryLink } from '@waldur/marketplace/utils';
 
+import { ResourceBreadcrumbsRegistry } from './breadcrumbs/ResourceBreadcrumbsRegistry';
 import template from './resource-header.html';
 
 const resourceHeader = {
@@ -16,7 +17,6 @@ const resourceHeader = {
       ENV,
       features,
       resourcesService,
-      ResourceBreadcrumbsService,
       BreadcrumbsService,
       ncUtilsFlash,
     ) {
@@ -28,7 +28,6 @@ const resourceHeader = {
       this.ENV = ENV;
       this.features = features;
       this.resourcesService = resourcesService;
-      this.ResourceBreadcrumbsService = ResourceBreadcrumbsService;
       this.BreadcrumbsService = BreadcrumbsService;
       this.ncUtilsFlash = ncUtilsFlash;
 
@@ -66,7 +65,7 @@ const resourceHeader = {
       if (!this.model) {
         return;
       }
-      this.BreadcrumbsService.items = this.ResourceBreadcrumbsService.getItems(
+      this.BreadcrumbsService.items = ResourceBreadcrumbsRegistry.getItems(
         this.model,
       );
       this.BreadcrumbsService.activeItem = this.model.name;

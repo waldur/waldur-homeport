@@ -758,13 +758,13 @@ msgstr ""
 msgid "Backup schedule has been updated"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/breadcrumbs.js
+#: src/openstack/openstack-backup-schedule/breadcrumbs.ts
 #: src/openstack/openstack-instance/tabs.ts
 msgid "Backup schedules"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/tabs.ts
-#: src/openstack/openstack-backup/breadcrumbs.js
+#: src/openstack/openstack-backup/breadcrumbs.ts
 #: src/openstack/openstack-instance/tabs.ts
 msgid "Backups"
 msgstr ""
@@ -1774,7 +1774,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: src/vmware/breadcrumbs.js
+#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Disks"
 msgstr ""
@@ -2321,7 +2321,7 @@ msgstr ""
 msgid "Floating IP count"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/breadcrumbs.js
+#: src/openstack/openstack-floating-ips/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Floating IPs"
 msgstr ""
@@ -3570,7 +3570,7 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
-#: src/vmware/breadcrumbs.js
+#: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Network adapters"
 msgstr ""
@@ -3581,8 +3581,8 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-network/breadcrumbs.js
-#: src/openstack/openstack-subnet/breadcrumbs.js
+#: src/openstack/openstack-network/breadcrumbs.ts
+#: src/openstack/openstack-subnet/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
@@ -3675,7 +3675,7 @@ msgstr ""
 
 #: src/rancher/cluster/create/TenantGroup.tsx
 #: src/rancher/cluster/tabs.ts
-#: src/rancher/node/breadcrumbs.js
+#: src/rancher/node/breadcrumbs.ts
 msgid "Nodes"
 msgstr ""
 
@@ -4786,7 +4786,7 @@ msgstr ""
 #: src/offering/OfferingDetails.tsx
 #: src/project/ProjectWorkspace.tsx
 #: src/rancher/template/breadcrumbs.ts
-#: src/resource/breadcrumbs/resource-breadcrumbs-service.js
+#: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
 msgid "Project workspace"
 msgstr ""
 
@@ -5459,7 +5459,7 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectWorkspace.tsx
 #: src/rancher/template/breadcrumbs.ts
-#: src/resource/breadcrumbs/resource-breadcrumbs-service.js
+#: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Resources"
@@ -5719,7 +5719,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
-#: src/openstack/openstack-security-groups/breadcrumbs.js
+#: src/openstack/openstack-security-groups/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Security groups"
 msgstr ""
@@ -6170,7 +6170,7 @@ msgstr ""
 msgid "Snapshot schedule has been updated."
 msgstr ""
 
-#: src/openstack/openstack-snapshot-schedule/breadcrumbs.js
+#: src/openstack/openstack-snapshot-schedule/breadcrumbs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshot schedules"
 msgstr ""
@@ -6361,7 +6361,7 @@ msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
-#: src/openstack/openstack-subnet/breadcrumbs.js
+#: src/openstack/openstack-subnet/breadcrumbs.ts
 msgid "Subnets"
 msgstr ""
 

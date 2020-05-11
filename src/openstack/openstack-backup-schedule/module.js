@@ -2,7 +2,7 @@ import { translate } from '@waldur/i18n';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import openstackBackupScheduleWarning from './BackupScheduleWarning';
-import breadcrumbsConfig from './breadcrumbs';
+import './breadcrumbs';
 import { OpenStackBackupScheduleSummary } from './OpenStackBackupScheduleSummary';
 import './tabs';
 
@@ -51,5 +51,4 @@ export default module => {
   );
   module.config(actionConfig);
   module.config(stateConfig);
-  module.run(breadcrumbsConfig);
 };
