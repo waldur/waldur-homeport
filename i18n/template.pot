@@ -2801,7 +2801,6 @@ msgstr ""
 msgid "Invitation rejection"
 msgstr ""
 
-#: src/auth/auth-login.js
 #: src/auth/useAuthFeatures.ts
 msgid "Invitation token is not found."
 msgstr ""
@@ -7433,7 +7432,6 @@ msgstr ""
 msgid "Unable to upload logo."
 msgstr ""
 
-#: src/auth/auth-login.js
 #: src/auth/useAuthFeatures.ts
 msgid "Unable to validate invitation token."
 msgstr ""
@@ -7989,7 +7987,6 @@ msgstr ""
 
 #: src/auth/AuthHeader.tsx
 #: src/auth/auth-init.js
-#: src/auth/auth-login.js
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
