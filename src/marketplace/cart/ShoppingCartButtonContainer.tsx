@@ -19,6 +19,7 @@ interface DispatchProps {
 
 const mapStateToProps = (state: OuterState, ownProps: OwnProps) => ({
   disabled: ownProps.disabled || isAddingItem(state),
+  isAddingItem: isAddingItem(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
