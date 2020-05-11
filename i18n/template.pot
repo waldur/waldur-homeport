@@ -4556,7 +4556,7 @@ msgstr ""
 msgid "Postal code"
 msgstr ""
 
-#: src/auth/powered-by.html
+#: src/auth/PoweredBy.tsx
 msgid "Powered by"
 msgstr ""
 
