@@ -6,7 +6,6 @@ import { compose } from 'redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
-import { connectAngularComponent } from '@waldur/store/connect';
 import {
   formatRegistrationMethod,
   formatUserStatus,
@@ -97,4 +96,3 @@ const enhance = compose(
 );
 
 export const UserDetailsTable = enhance(PureUserDetailsTable);
-export default connectAngularComponent(UserDetailsTable, ['user']);
