@@ -14,6 +14,7 @@ export const OpenStackForm = ({ translate, container }) => (
         'Keystone auth URL (e.g. http://keystone.example.com:5000/v3)',
       )}
     />
+    <StringField name="domain" label={translate('Domain name')} />
     <StringField
       name="username"
       label={translate('Username')}
