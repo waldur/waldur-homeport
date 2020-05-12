@@ -14,13 +14,17 @@ interface ServiceProviderRegisterButtonProps extends TranslateProps {
   registerServiceProvider?(): void;
 }
 
-const renderButton = (props: ServiceProviderRegisterButtonProps) => {
+export const ServiceProviderRegisterButton = (
+  props: ServiceProviderRegisterButtonProps,
+) => {
   if (props.loading) {
     return <LoadingSpinner />;
   } else if (props.serviceProvider) {
-    return `${props.translate('Registered at:')} ${dateTime(
-      props.serviceProvider.created,
-    )}`;
+    return (
+      <>{`${props.translate('Registered at:')} ${dateTime(
+        props.serviceProvider.created,
+      )}`}</>
+    );
   } else if (props.canRegisterServiceProvider) {
     return (
       <ActionButton
@@ -31,10 +35,6 @@ const renderButton = (props: ServiceProviderRegisterButtonProps) => {
       />
     );
   } else {
-    return props.translate('Not a service provider.');
+    return <>{props.translate('Not a service provider.')}</>;
   }
 };
-
-export const ServiceProviderRegisterButton = (
-  props: ServiceProviderRegisterButtonProps,
-) => <>{renderButton(props)}</>;
