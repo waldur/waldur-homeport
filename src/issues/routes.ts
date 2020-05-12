@@ -10,6 +10,7 @@ import { UserListView } from '@waldur/user/support/UserListView';
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 import { checkPermission } from './utils';
+import { IssuesDashboard } from './workspace/IssuesDashboard';
 import { SupportWorkspace } from './workspace/SupportWorkspace';
 
 export const states: StateDeclaration[] = [
@@ -28,7 +29,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.dashboard',
     url: '',
-    template: '<issues-dashboard></issue-dashboard>',
+    component: withStore(IssuesDashboard),
     data: {
       pageTitle: gettext('Support dashboard'),
       hideBreadcrumbs: true,
