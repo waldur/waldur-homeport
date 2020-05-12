@@ -5,7 +5,6 @@ describe('User manage', () => {
       .login()
 
       .log('visit /profile/manage/')
-      .route('http://localhost:8080/api/support-templates/', [])
       .get('a')
       .contains('Manage')
       .click();
@@ -49,7 +48,7 @@ describe('User manage', () => {
       .click()
       // Close remove profile dialog
       .get('button')
-      .contains('Cancel')
+      .contains('Close')
       .click()
 
       // Ensure that Update profile button works
