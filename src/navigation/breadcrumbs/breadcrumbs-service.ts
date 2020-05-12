@@ -1,9 +1,7 @@
 export default class BreadcrumbsService {
-  constructor() {
-    this._handlers = [];
-    this._items = [];
-    this._activeItem = '';
-  }
+  private _handlers = [];
+  private _items = [];
+  private _activeItem = '';
 
   listen(handler) {
     this._handlers.push(handler);
