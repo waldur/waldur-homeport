@@ -1234,6 +1234,10 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
+#: src/openstack/openstack-subnet/actions.js
+msgid "Connect subnet to a default virtual router"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
 msgid "Connected subnets"
 msgstr ""
@@ -1760,6 +1764,10 @@ msgstr ""
 msgid "Disable data volume"
 msgstr ""
 
+#: src/openstack/openstack-subnet/actions.js
+msgid "Disable gateway IP advertising via DHCP"
+msgstr ""
+
 #: src/freeipa/freeipa-account-edit.html
 msgid "Disable profile"
 msgstr ""
@@ -1788,7 +1796,6 @@ msgid "Do not allow user to specify quotas when offering is provisioned."
 msgstr ""
 
 #: src/openstack/openstack-network/module.js
-#: src/openstack/openstack-subnet/actions.js
 msgid "Do not configure a gateway for this subnet"
 msgstr ""
 
@@ -1964,6 +1971,10 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HookForm.tsx
 msgid "Enabled"
+msgstr ""
+
+#: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
+msgid "Enabled default gateway"
 msgstr ""
 
 #: src/openstack/openstack-instance/utils.ts
