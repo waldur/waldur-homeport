@@ -9,6 +9,8 @@ import {
   PureResourceSummaryBase,
 } from '@waldur/resource/summary';
 
+import { NodeRoleField } from './NodeRoleField';
+
 const formatInstance = resource =>
   resource.instance ? (
     <ResourceLink
@@ -28,6 +30,10 @@ const PureRancherNodeSummary = (props: ResourceSummaryProps) => {
       <Field
         label={translate('Kubernetes version')}
         value={props.resource.k8s_version}
+      />
+      <Field
+        label={translate('Roles')}
+        value={<NodeRoleField node={props.resource} />}
       />
       <Field
         label={translate('Docker version')}
