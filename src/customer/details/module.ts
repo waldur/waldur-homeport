@@ -1,22 +1,16 @@
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import customerManage from './customer-manage';
-import customerPolicies from './customer-policies';
-import customerReportError from './customer-report-error';
+import customerPoliciesPanel from './customer-policies';
 import customerThreshold from './customer-threshold';
-import customerDetails from './CustomerDetails';
 import customerEditDetails from './CustomerEditDetailsContainer';
-import { PaymentProfileDetails } from './PaymentProfileDetails';
+import { CustomerErrorDialog } from './CustomerErrorDialog';
 
 export default module => {
-  module.component('customerDetails', customerDetails);
   module.component('customerEditDetails', customerEditDetails);
-  module.component('customerManage', customerManage);
-  module.component('customerPolicies', customerPolicies);
-  module.component('customerReportError', customerReportError);
-  module.component('customerThreshold', customerThreshold);
+  module.component('customerPoliciesPanel', customerPoliciesPanel);
   module.component(
-    'paymentProfileForOrganizationOwner',
-    connectAngularComponent(PaymentProfileDetails),
+    'customerErrorDialog',
+    connectAngularComponent(CustomerErrorDialog, ['resolve']),
   );
+  module.component('customerThreshold', customerThreshold);
 };

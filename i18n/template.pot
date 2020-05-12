@@ -38,7 +38,7 @@ msgstr ""
 msgid "API token lifetime"
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -108,7 +108,7 @@ msgstr ""
 msgid "Accounting records"
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Accounting start date"
 msgstr ""
 
@@ -352,7 +352,7 @@ msgid "Additionally service provider can charge for usage of the following compo
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr ""
@@ -387,7 +387,7 @@ msgstr ""
 msgid "Agree with ToS"
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -770,12 +770,12 @@ msgid "Backups"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Bank account"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Bank name"
 msgstr ""
 
@@ -1088,7 +1088,6 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
-#: src/customer/details/customer-report-error.html
 #: src/invoices/events/invoice-events-dialog.html
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.html
 #: src/openstack/openstack-tenant/actions/request-direct-access.html
@@ -1135,8 +1134,7 @@ msgstr ""
 msgid "Code should consist of latin symbols or numbers."
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerAccordion.tsx
 #: src/customer/details/customer-policies.html
 msgid "Collapse"
 msgstr ""
@@ -1216,7 +1214,7 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: src/customer/details/customer-manage.js
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Confirm deletion?"
 msgstr ""
 
@@ -1243,7 +1241,7 @@ msgid "Connection details"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Contact e-mail"
 msgstr ""
 
@@ -1252,7 +1250,7 @@ msgid "Contact email"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Contact phone"
 msgstr ""
@@ -1292,7 +1290,7 @@ msgid "Could not create organization"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Country"
 msgstr ""
 
@@ -2137,8 +2135,7 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerAccordion.tsx
 #: src/customer/details/customer-policies.html
 msgid "Expand"
 msgstr ""
@@ -2485,7 +2482,7 @@ msgid "Helpdesk dashboard"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Home organization domain name"
 msgstr ""
 
@@ -2634,8 +2631,7 @@ msgstr ""
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
-#: src/customer/details/customer-report-error.html
-#: src/customer/details/customer-report-error.js
+#: src/customer/details/CustomerErrorDialog.tsx
 msgid "Incorrect organization details"
 msgstr ""
 
@@ -3212,7 +3208,7 @@ msgstr ""
 msgid "Marketplace offerings"
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerMarketplacePanel.tsx
 msgid "Marketplace service provider"
 msgstr ""
 
@@ -3428,9 +3424,9 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/customer/create/customer-create-config.js
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/customer/details/CustomerDetails.tsx
-#: src/customer/details/PaymentProfileDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
@@ -3549,7 +3545,7 @@ msgid "Native description"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -3896,7 +3892,7 @@ msgstr ""
 msgid "Only staff can manage OpenStack tenant."
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Only staff can remove organization."
 msgstr ""
 
@@ -4037,19 +4033,19 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerActionsPanel.tsx
 msgid "Organization actions"
 msgstr ""
 
-#: src/customer/details/customer-delete.js
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Organization contains invoices. Please remove them first."
 msgstr ""
 
-#: src/customer/details/customer-delete.js
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Organization details"
 msgstr ""
 
@@ -4087,7 +4083,7 @@ msgstr ""
 msgid "Organization registration code"
 msgstr ""
 
-#: src/customer/details/customer-manage.js
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Organization removal"
 msgstr ""
 
@@ -4096,7 +4092,7 @@ msgid "Organization roles"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Organization type"
 msgstr ""
@@ -4250,6 +4246,10 @@ msgstr ""
 msgid "Payment profile"
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfilesPanel.tsx
+msgid "Payment profile defines how invoices are processed."
+msgstr ""
+
 #: src/customer/payment-profiles/store/effects.ts
 msgid "Payment profile has been created."
 msgstr ""
@@ -4266,7 +4266,7 @@ msgstr ""
 msgid "Payment profile has been updated."
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/payment-profiles/PaymentProfilesPanel.tsx
 msgid "Payment profiles"
 msgstr ""
 
@@ -4551,7 +4551,7 @@ msgid "Positive"
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Postal code"
 msgstr ""
 
@@ -4978,7 +4978,7 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: src/customer/details/customer-manage.js
+#: src/customer/details/CustomerRemovePanel.tsx
 #: src/user/support/actions.ts
 msgid "Reason"
 msgstr ""
@@ -5044,6 +5044,10 @@ msgstr ""
 msgid "Register as service provider"
 msgstr ""
 
+#: src/customer/details/CustomerActionsPanel.tsx
+msgid "Register organization as service provider and remove organization."
+msgstr ""
+
 #: src/auth/AuthHeader.tsx
 msgid "Register to"
 msgstr ""
@@ -5066,7 +5070,7 @@ msgstr ""
 msgid "Registration method"
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Registry code"
 msgstr ""
 
@@ -5139,7 +5143,7 @@ msgstr ""
 msgid "Remove logo"
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Remove organization"
 msgstr ""
 
@@ -5147,11 +5151,11 @@ msgstr ""
 msgid "Remove profile"
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Removed organizations cannot be restored!"
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Removing the organization will delete all related resources."
 msgstr ""
 
@@ -5167,7 +5171,7 @@ msgstr ""
 msgid "Report details"
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerErrorPanel.tsx
 msgid "Report incorrect data"
 msgstr ""
 
@@ -5249,7 +5253,7 @@ msgstr ""
 msgid "Request for a termination"
 msgstr ""
 
-#: src/customer/details/customer-manage.js
+#: src/customer/details/CustomerRemovePanel.tsx
 #: src/user/support/actions.ts
 msgid "Request removal"
 msgstr ""
@@ -6364,7 +6368,7 @@ msgstr ""
 msgid "Subnets"
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Subnets from where connection to self-service is allowed."
 msgstr ""
 
@@ -6817,7 +6821,7 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: src/customer/details/customer-report-error.js
+#: src/customer/details/CustomerErrorDialog.tsx
 msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
 msgstr ""
 
@@ -6901,8 +6905,8 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
-#: src/customer/details/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/jira/project/jira-project-config.js
@@ -7546,6 +7550,10 @@ msgstr ""
 msgid "Update service settings"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
+msgid "Update your organization name, logo, accounting and contact details."
+msgstr ""
+
 #: src/issues/list/IssuesShortListComponent.tsx
 msgid "Updated"
 msgstr ""
@@ -7820,7 +7828,7 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "VAT code"
 msgstr ""
 
@@ -7836,7 +7844,7 @@ msgstr ""
 msgid "VAT is not included."
 msgstr ""
 
-#: src/customer/details/CustomerDetails.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "VAT rate"
 msgstr ""
 
@@ -7999,7 +8007,7 @@ msgstr ""
 msgid "Welcome, {user}!"
 msgstr ""
 
-#: src/customer/details/customer-manage.js
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
@@ -8046,7 +8054,7 @@ msgstr ""
 msgid "You are about to delete:"
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerErrorPanel.tsx
 msgid "You can create issue by pressing the button below"
 msgstr ""
 
@@ -8054,11 +8062,11 @@ msgstr ""
 msgid "You can find offerings to order in the marketplace"
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerMarketplacePanel.tsx
 msgid "You can register organization as a marketplace service provider by pressing the button below"
 msgstr ""
 
-#: src/customer/details/customer-manage.html
+#: src/customer/details/CustomerRemovePanel.tsx
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 

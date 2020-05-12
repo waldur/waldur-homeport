@@ -10,7 +10,6 @@ import { ActionButton } from '@waldur/table-react/ActionButton';
 
 import './CustomerEditDetails.scss';
 
-// eslint-disable-next-line
 const DEFAULT_LOGO = require('./logo-placeholder.png');
 
 interface CustomerEditDetailsProps {
