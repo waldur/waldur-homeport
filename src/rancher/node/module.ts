@@ -1,16 +1,13 @@
+import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import nodeActions from './actions';
 import './breadcrumbs';
 import { RancherNodeSummary } from './RancherNodeSummary';
+
 import './tabs';
 
-// @ngInject
-function actionsConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('Rancher.Node', nodeActions);
-}
-
-export default module => {
+export default () => {
   ResourceSummary.register('Rancher.Node', RancherNodeSummary);
-  module.config(actionsConfig);
+  ActionConfigurationRegistry.register('Rancher.Node', nodeActions);
 };

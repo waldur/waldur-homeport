@@ -416,7 +416,7 @@ msgstr ""
 msgid "Allocation description"
 msgstr ""
 
-#: src/slurm/actions.js
+#: src/slurm/actions.ts
 msgid "Allocation has been updated."
 msgstr ""
 
@@ -754,7 +754,7 @@ msgstr ""
 msgid "Backup schedule caveats"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/module.js
+#: src/openstack/openstack-backup-schedule/actions.ts
 msgid "Backup schedule has been updated"
 msgstr ""
 
@@ -876,7 +876,7 @@ msgstr ""
 msgid "CPU"
 msgstr ""
 
-#: src/slurm/actions.js
+#: src/slurm/actions.ts
 msgid "CPU limit, minutes"
 msgstr ""
 
@@ -1399,7 +1399,7 @@ msgstr ""
 msgid "Create snapshot schedule for OpenStack volume"
 msgstr ""
 
-#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-network/module.ts
 msgid "Create subnet"
 msgstr ""
 
@@ -1699,7 +1699,7 @@ msgstr ""
 #: src/offering/actions/DestroyAction.ts
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
-#: src/openstack/openstack-security-groups/module.js
+#: src/openstack/openstack-security-groups/module.ts
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
 #: src/rancher/node/actions/DestroyAction.ts
 msgid "Destroy"
@@ -1731,7 +1731,7 @@ msgstr ""
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
-#: src/slurm/actions.js
+#: src/slurm/actions.ts
 #: src/user/UserDropdownMenu.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
@@ -1785,7 +1785,7 @@ msgstr ""
 msgid "Do not allow user to specify quotas when offering is provisioned."
 msgstr ""
 
-#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-network/module.ts
 #: src/openstack/openstack-subnet/actions.js
 msgid "Do not configure a gateway for this subnet"
 msgstr ""
@@ -1897,8 +1897,8 @@ msgstr ""
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
-#: src/openstack/openstack-backup-schedule/module.js
-#: src/openstack/openstack-snapshot-schedule/module.js
+#: src/openstack/openstack-backup-schedule/actions.ts
+#: src/openstack/openstack-snapshot-schedule/actions.ts
 #: src/project/team/AddMemberButton.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -2390,7 +2390,7 @@ msgstr ""
 msgid "GPU"
 msgstr ""
 
-#: src/slurm/actions.js
+#: src/slurm/actions.ts
 msgid "GPU limit, minutes"
 msgstr ""
 
@@ -2407,7 +2407,7 @@ msgstr ""
 msgid "Gateway IP"
 msgstr ""
 
-#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-network/module.ts
 #: src/openstack/openstack-subnet/actions.js
 msgid "Gateway IP of this subnet"
 msgstr ""
@@ -2446,7 +2446,7 @@ msgstr ""
 msgid "Guaranteed time of backup retention. If null - keep forever."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/module.js
+#: src/openstack/openstack-snapshot/actions.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
@@ -2731,13 +2731,13 @@ msgid "Internal network ID"
 msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-network/module.ts
 msgid "Internal network allocation pool"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-network/module.ts
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
@@ -2968,7 +2968,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions/EditAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
-#: src/openstack/openstack-snapshot/module.js
+#: src/openstack/openstack-snapshot/actions.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Kept until"
 msgstr ""
@@ -3571,7 +3571,7 @@ msgstr ""
 msgid "Network adapters"
 msgstr ""
 
-#: src/openstack/openstack-network/module.js
+#: src/openstack/openstack-network/module.ts
 msgid "Network has been updated."
 msgstr ""
 
@@ -4466,7 +4466,7 @@ msgstr ""
 msgid "Please provide a reason"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/module.js
+#: src/openstack/openstack-snapshot/actions.ts
 msgid "Please provide details of a new volume created from snapshot."
 msgstr ""
 
@@ -4944,7 +4944,7 @@ msgstr ""
 msgid "RAM"
 msgstr ""
 
-#: src/slurm/actions.js
+#: src/slurm/actions.ts
 msgid "RAM limit, MB"
 msgstr ""
 
@@ -5714,7 +5714,7 @@ msgstr ""
 msgid "Security group does not contain any rule yet."
 msgstr ""
 
-#: src/openstack/openstack-security-groups/module.js
+#: src/openstack/openstack-security-groups/module.ts
 msgid "Security group has been updated."
 msgstr ""
 
@@ -6017,7 +6017,7 @@ msgstr ""
 msgid "Set limit"
 msgstr ""
 
-#: src/openstack/openstack-security-groups/module.js
+#: src/openstack/openstack-security-groups/module.ts
 msgid "Set rules"
 msgstr ""
 
@@ -6161,7 +6161,7 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/module.js
+#: src/openstack/openstack-snapshot/actions.ts
 msgid "Snapshot has been updated."
 msgstr ""
 
@@ -6169,7 +6169,7 @@ msgstr ""
 msgid "Snapshot name"
 msgstr ""
 
-#: src/openstack/openstack-snapshot-schedule/module.js
+#: src/openstack/openstack-snapshot-schedule/actions.ts
 msgid "Snapshot schedule has been updated."
 msgstr ""
 
@@ -6425,15 +6425,15 @@ msgid "Sync profile"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/module.js
-#: src/openstack/openstack-network/module.js
-#: src/openstack/openstack-security-groups/module.js
-#: src/openstack/openstack-snapshot/module.js
+#: src/openstack/openstack-network/module.ts
+#: src/openstack/openstack-security-groups/module.ts
+#: src/openstack/openstack-snapshot/actions.ts
 #: src/openstack/openstack-subnet/actions.js
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
 #: src/openstack/openstack-volume/actions/PullAction.ts
 #: src/resource/actions/base.ts
-#: src/slurm/actions.js
+#: src/slurm/actions.ts
 #: src/vmware/actions.ts
 msgid "Synchronise"
 msgstr ""

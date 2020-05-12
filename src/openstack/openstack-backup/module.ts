@@ -1,15 +1,12 @@
+import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
 import './breadcrumbs';
 import openstackBackupRestoreSummary from './openstack-backup-restore-summary';
 import { OpenStackBackupSummary } from './OpenStackBackupSummary';
-import './tabs';
 
-// @ngInject
-function actionsConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('OpenStackTenant.Backup', actions);
-}
+import './tabs';
 
 export default module => {
   ResourceSummary.register('OpenStackTenant.Backup', OpenStackBackupSummary);
@@ -17,5 +14,5 @@ export default module => {
     'openstackBackupRestoreSummary',
     openstackBackupRestoreSummary,
   );
-  module.config(actionsConfig);
+  ActionConfigurationRegistry.register('OpenStackTenant.Backup', actions);
 };
