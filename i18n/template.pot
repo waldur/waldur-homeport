@@ -400,6 +400,7 @@ msgid "Alert"
 msgstr ""
 
 #: src/customer/list/AccountingRunningField.tsx
+#: src/rancher/node/NodeRoleField.tsx
 msgid "All"
 msgstr ""
 
@@ -5550,6 +5551,11 @@ msgstr ""
 msgid "Role management events"
 msgstr ""
 
+#: src/rancher/node/ClusterNodesList.tsx
+#: src/rancher/node/RancherNodeSummary.tsx
+msgid "Roles"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/tabs.ts
 msgid "Rules"
 msgstr ""
@@ -8253,6 +8259,10 @@ msgstr ""
 msgid "commented:"
 msgstr ""
 
+#: src/rancher/node/NodeRoleField.tsx
+msgid "control plane"
+msgstr ""
+
 #: src/resource/state/utils.ts
 msgid "current state on backend: {resourceState}."
 msgstr ""
@@ -8278,6 +8288,7 @@ msgid "error message: {errorMessage}"
 msgstr ""
 
 #: src/rancher/cluster/create/NodeRoleField.tsx
+#: src/rancher/node/NodeRoleField.tsx
 msgid "etcd"
 msgstr ""
 
@@ -8451,6 +8462,10 @@ msgstr ""
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 msgid "volumes"
+msgstr ""
+
+#: src/rancher/node/NodeRoleField.tsx
+msgid "worker"
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
