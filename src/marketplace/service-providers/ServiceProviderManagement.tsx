@@ -6,7 +6,6 @@ import { Customer } from '@waldur/customer/types';
 import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/types';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -109,5 +108,3 @@ const enhance = compose(
 );
 
 export const ServiceProviderManagement = enhance(ServiceProviderWrapper);
-
-export default connectAngularComponent(ServiceProviderManagement);

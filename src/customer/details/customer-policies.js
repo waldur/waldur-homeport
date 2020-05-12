@@ -2,10 +2,6 @@ import template from './customer-policies.html';
 
 const customerPolicies = {
   template: template,
-  bindings: {
-    customer: '<',
-    canUpdateQuota: '<',
-  },
   controller: class CustomerPoliciesController {
     // @ngInject
     constructor(
@@ -14,30 +10,39 @@ const customerPolicies = {
       ncUtilsFlash,
       priceEstimatesService,
       FreeIPAQuotaService,
+      usersService,
+      currentStateService,
     ) {
       this.$q = $q;
       this.ENV = ENV;
       this.ncUtilsFlash = ncUtilsFlash;
       this.priceEstimatesService = priceEstimatesService;
       this.FreeIPAQuotaService = FreeIPAQuotaService;
+      this.usersService = usersService;
+      this.currentStateService = currentStateService;
     }
 
     $onInit() {
-      this.originalCustomer = this.customer;
-      this.customer = angular.copy(this.customer);
-      this.thresholdModel = {
-        isHardLimit: this.priceEstimatesService.isHardLimit(
-          this.customer.billing_price_estimate,
-        ),
-        priceEstimate: this.customer.billing_price_estimate,
-      };
-      this.thresholdField = {
-        horizontal: true,
-      };
+      this.usersService.getCurrentUser().then(currentUser => {
+        this.currentStateService.getCustomer().then(currentCustomer => {
+          this.user = currentUser;
+          this.originalCustomer = currentCustomer;
+          this.customer = angular.copy(currentCustomer);
+          this.thresholdModel = {
+            isHardLimit: this.priceEstimatesService.isHardLimit(
+              this.customer.billing_price_estimate,
+            ),
+            priceEstimate: this.customer.billing_price_estimate,
+          };
+          this.thresholdField = {
+            horizontal: true,
+          };
 
-      this.currency = this.ENV.currency;
-      this.quota = this.FreeIPAQuotaService.loadQuota(this.customer);
-      this.actionsExpanded = false;
+          this.currency = this.ENV.currency;
+          this.quota = this.FreeIPAQuotaService.loadQuota(this.customer);
+          this.actionsExpanded = false;
+        });
+      });
     }
 
     updatePolicies() {

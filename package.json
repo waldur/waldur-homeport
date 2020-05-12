@@ -1,6 +1,6 @@
 {
   "name": "waldur-homeport",
-  "version": "4.7.0",
+  "version": "4.7.1",
   "description": "Web interface for Waldur MasterMind cloud orchestrator",
   "repository": "https://github.com/opennode/waldur-homeport",
   "license": "MIT",
@@ -38,6 +38,7 @@
     "@tweenjs/tween.js": "^17.2.0",
     "@types/angular": "^1.7.0",
     "@uirouter/react-hybrid": "^1.0.1",
+    "Leaflet.Canvas-Flowmap-Layer": "jwasilgeo/Leaflet.Canvas-Flowmap-Layer#a8570ac1277ee4c5dfcad806123839bd1f14e3c2",
     "angular": "^1.7.9",
     "angular-animate": "^1.7.9",
     "angular-bind-html-compile-ci-dev": "^1.2.2",

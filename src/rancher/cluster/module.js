@@ -1,3 +1,4 @@
+import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { connectAngularComponent } from '@waldur/store/connect';
 
@@ -7,12 +8,8 @@ import { ApplicationDetailsDialog } from './ApplicationDetailsDialog';
 import { CreateNodeDialog } from './create/CreateNodeDialog';
 import './create/marketplace';
 import { RancherClusterSummary } from './RancherClusterSummary';
-import './tabs';
 
-// @ngInject
-function actionsConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('Rancher.Cluster', clusterActions);
-}
+import './tabs';
 
 export default module => {
   ResourceSummary.register('Rancher.Cluster', RancherClusterSummary);
@@ -28,5 +25,5 @@ export default module => {
     'rancherApplicationDetailsDialog',
     connectAngularComponent(ApplicationDetailsDialog, ['resolve']),
   );
-  module.config(actionsConfig);
+  ActionConfigurationRegistry.register('Rancher.Cluster', clusterActions);
 };

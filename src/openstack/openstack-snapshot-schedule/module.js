@@ -1,29 +1,9 @@
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-import breadcrumbsConfig from './breadcrumbs';
+import './breadcrumbs';
 import { OpenStackSnapshotScheduleSummary } from './OpenStackSnapshotScheduleSummary';
 import './tabs';
-
-// @ngInject
-function actionConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('OpenStackTenant.SnapshotSchedule', {
-    order: ['update', 'activate', 'deactivate', 'destroy'],
-    options: {
-      update: {
-        title: gettext('Edit'),
-        successMessage: gettext('Snapshot schedule has been updated.'),
-        fields: {
-          schedule: {
-            type: 'crontab',
-          },
-          timezone: {
-            type: 'timezone',
-          },
-        },
-      },
-    },
-  });
-}
+import './actions';
 
 // @ngInject
 function stateConfig(ResourceStateConfigurationProvider) {
@@ -40,7 +20,5 @@ export default module => {
     'OpenStackTenant.SnapshotSchedule',
     OpenStackSnapshotScheduleSummary,
   );
-  module.config(actionConfig);
-  module.run(breadcrumbsConfig);
   module.config(stateConfig);
 };

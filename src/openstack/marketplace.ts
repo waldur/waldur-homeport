@@ -13,6 +13,11 @@ const ServiceSettingsAttributes = (): Attribute[] => [
     type: 'string',
   },
   {
+    key: 'domain',
+    title: translate('Domain name'),
+    type: 'string',
+  },
+  {
     key: 'username',
     title: translate('Username'),
     type: 'string',

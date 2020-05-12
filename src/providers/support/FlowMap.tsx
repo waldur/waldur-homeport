@@ -7,8 +7,14 @@ import './FlowMap.scss';
 
 const loadEsriLeaflet = () =>
   import(/* webpackChunkName: "esri-leaflet" */ 'esri-leaflet');
+
+const loadTween = () =>
+  import(/* webpackChunkName: "tween" */ '@tweenjs/tween.js/src/Tween');
+
 const loadFlowmapLayer = () =>
-  import(/* webpackChunkName: "CanvasFlowmapLayer" */ './CanvasFlowmapLayer');
+  import(
+    /* webpackChunkName: "CanvasFlowmapLayer" */ 'Leaflet.Canvas-Flowmap-Layer/src/CanvasFlowmapLayer'
+  );
 
 interface FlowMapProps {
   center?: number[];
@@ -37,7 +43,8 @@ export default class FlowMap extends React.Component<FlowMapProps> {
   async loadAll() {
     const { leaflet } = await loadLeafleat();
     this.leaflet = leaflet;
-
+    const tweenModule = await loadTween();
+    window['TWEEN'] = tweenModule.default;
     await loadFlowmapLayer();
 
     const { basemapLayer } = await loadEsriLeaflet();
