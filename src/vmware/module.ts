@@ -4,7 +4,7 @@ import './tabs';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { registerResourceTypeLabel } from '@waldur/resource/utils';
 
-import { actionsConfig } from './actions';
+import './actions';
 import './breadcrumbs';
 import { VMwareDiskSummary } from './VMwareDiskSummary';
 import { VMwarePortSummary } from './VMwarePortSummary';
@@ -14,12 +14,6 @@ registerResourceTypeLabel('VMware.VirtualMachine', 'vSphere Virtual Machine');
 registerResourceTypeLabel('VMware.Disk', 'VM Disk');
 registerResourceTypeLabel('VMware.Port', 'VM Network Adapter');
 
-export default module => {
-  ResourceSummary.register(
-    'VMware.VirtualMachine',
-    VMwareVirtualMachineSummary,
-  );
-  ResourceSummary.register('VMware.Disk', VMwareDiskSummary);
-  ResourceSummary.register('VMware.Port', VMwarePortSummary);
-  module.config(actionsConfig);
-};
+ResourceSummary.register('VMware.VirtualMachine', VMwareVirtualMachineSummary);
+ResourceSummary.register('VMware.Disk', VMwareDiskSummary);
+ResourceSummary.register('VMware.Port', VMwarePortSummary);

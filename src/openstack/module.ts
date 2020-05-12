@@ -1,7 +1,7 @@
 import routes from './analytics/routes';
 import openstackBackupScheduleModule from './openstack-backup-schedule/module';
 import openstackBackupModule from './openstack-backup/module';
-import openstackFloatingIpsModule from './openstack-floating-ips/module';
+import './openstack-floating-ips/module';
 import openstackInstanceModule from './openstack-instance/module';
 import openstackNetworkModule from './openstack-network/module';
 import openstackSecurityGroupsModule from './openstack-security-groups/module';
@@ -24,7 +24,6 @@ export default module => {
   openstackNetworkModule(module);
   openstackSubnetModule(module);
   openstackSecurityGroupsModule(module);
-  openstackFloatingIpsModule(module);
   openstackSnapshotModule(module);
   openstackSnapshotScheduleModule(module);
 };

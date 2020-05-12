@@ -12,7 +12,7 @@ export const defaultFieldOptions = {
   },
 };
 
-export const defaultEditAction = {
+export const DEFAULT_EDIT_ACTION = {
   title: gettext('Edit'),
   enabled: true,
   type: 'form',

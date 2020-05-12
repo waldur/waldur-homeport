@@ -8,7 +8,6 @@ import './sass/style.scss';
 import '../svgfonts.font';
 
 import authModule from './auth/module';
-import azureModule from './azure/module';
 import configModule from './configs/module';
 import bootstrap from './core/bootstrap';
 import filtersModule from './core/filters';
@@ -45,11 +44,12 @@ import servicesModule from './services/module';
 import slurmModule from './slurm/module';
 import storeModule from './store/module';
 import userModule from './user/module';
-import vmwareModule from './vmware/module';
 import workspaceModule from './workspace/module';
 
+import './azure/module';
 import './booking/marketplace';
 import './marketplace-script/marketplace';
+import './vmware/module';
 
 const appModule = angular.module('waldur', [
   'satellizer',
@@ -99,14 +99,12 @@ configModule(appModule);
 servicesModule(appModule);
 freeipaModule(appModule);
 introModule(appModule);
-azureModule(appModule);
 slurmModule(appModule);
 paypalModule(appModule);
 storeModule(appModule);
 jiraModule(appModule);
 workspaceModule(appModule);
 marketplaceModule(appModule);
-vmwareModule(appModule);
 rancherModule(appModule);
 marketplaceChecklistModule(appModule);
 

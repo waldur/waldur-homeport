@@ -1,13 +1,11 @@
-import actions from './index';
+import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
+
 import openstackTenantRequestDirectAccess from './request-direct-access';
 
-// @ngInject
-function actionConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('OpenStack.Tenant', actions);
-}
+import actions from './index';
 
 export default module => {
-  module.config(actionConfig);
+  ActionConfigurationRegistry.register('OpenStack.Tenant', actions);
   module.component(
     'openstackTenantRequestDirectAccess',
     openstackTenantRequestDirectAccess,
