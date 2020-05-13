@@ -71,6 +71,7 @@ export const useAuthFeatures = () => {
   const showSigninForm = methods.LOCAL_SIGNIN && state.name === 'login';
 
   const showSignupButton =
+    methods.LOCAL_SIGNUP &&
     state.name === 'login' &&
     (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED ||
       ENV.plugins.WALDUR_CORE.ALLOW_SIGNUP_WITHOUT_INVITATION);
