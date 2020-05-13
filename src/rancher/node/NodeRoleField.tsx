@@ -10,6 +10,8 @@ export const NodeRoleField = ({ node }) => (
           node.worker_role ? translate('worker') : '',
           node.etcd_role ? translate('etcd') : '',
           node.controlplane_role ? translate('control plane') : '',
-        ].join(', ')}
+        ]
+          .filter(Boolean)
+          .join(', ')}
   </>
 );
