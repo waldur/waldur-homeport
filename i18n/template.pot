@@ -877,11 +877,7 @@ msgstr ""
 msgid "CPU"
 msgstr ""
 
-#: src/slurm/actions.ts
-msgid "CPU limit, minutes"
-msgstr ""
-
-#: src/slurm/details/constants.js
+#: src/slurm/details/constants.ts
 msgid "CPU usage"
 msgstr ""
 
@@ -2391,11 +2387,7 @@ msgstr ""
 msgid "GPU"
 msgstr ""
 
-#: src/slurm/actions.ts
-msgid "GPU limit, minutes"
-msgstr ""
-
-#: src/slurm/details/constants.js
+#: src/slurm/details/constants.ts
 msgid "GPU usage"
 msgstr ""
 
@@ -2541,10 +2533,6 @@ msgstr ""
 #: src/form/appstore-field-tos.html
 #: src/freeipa/freeipa-account-create.html
 msgid "I accept the"
-msgstr ""
-
-#: src/issues/request-service-button.html
-msgid "I want another service"
 msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
@@ -3383,10 +3371,6 @@ msgstr ""
 
 #: src/invoices/events/invoice-events-dialog.html
 msgid "More info"
-msgstr ""
-
-#: src/issues/request-service-button.js
-msgid "Motivation"
 msgstr ""
 
 #: src/rancher/cluster/create/VolumeMountPointGroup.tsx
@@ -4413,10 +4397,6 @@ msgstr ""
 msgid "Please accept Terms of Services to proceed."
 msgstr ""
 
-#: src/issues/request-service-button.js
-msgid "Please clarify why do you need it"
-msgstr ""
-
 #: src/customer/create/CustomerCreatePrompt.tsx
 msgid "Please create a new one picking the profile that best matches your organization:"
 msgstr ""
@@ -4945,11 +4925,7 @@ msgstr ""
 msgid "RAM"
 msgstr ""
 
-#: src/slurm/actions.ts
-msgid "RAM limit, MB"
-msgstr ""
-
-#: src/slurm/details/constants.js
+#: src/slurm/details/constants.ts
 msgid "RAM usage"
 msgstr ""
 
@@ -5195,10 +5171,6 @@ msgstr ""
 #: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 msgid "Reporter"
-msgstr ""
-
-#: src/issues/request-service-button.js
-msgid "Request a new service"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -5961,10 +5933,6 @@ msgstr ""
 
 #: src/jira/project/jira-project-checkout-summary.html
 msgid "Service desk project type"
-msgstr ""
-
-#: src/issues/request-service-button.js
-msgid "Service name"
 msgstr ""
 
 #: src/invoices/details/InvoiceItemDetails.tsx
