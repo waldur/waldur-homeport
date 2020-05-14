@@ -1681,6 +1681,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -2568,6 +2569,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "IPv4 address"
+msgstr ""
+
+#: src/rancher/template/CatalogTemplateList.tsx
+msgid "Icon"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -3464,6 +3469,7 @@ msgstr ""
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -6630,10 +6636,6 @@ msgstr ""
 msgid "There are no actions."
 msgstr ""
 
-#: src/rancher/template/CatalogTemplateList.tsx
-msgid "There are no applications templates."
-msgstr ""
-
 #: src/customer/team/add-team-member.html
 msgid "There are no available projects."
 msgstr ""
@@ -7109,10 +7111,6 @@ msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to load application template details."
-msgstr ""
-
-#: src/rancher/template/CatalogTemplateList.tsx
-msgid "Unable to load applications templates."
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
@@ -8192,6 +8190,7 @@ msgstr ""
 msgid "Zabbix provider"
 msgstr ""
 
+#: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 msgid "application templates"
 msgstr ""

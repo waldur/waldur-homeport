@@ -1,53 +1,58 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Row from 'react-bootstrap/lib/Row';
-import useAsync from 'react-use/lib/useAsync';
 
-import { getAll } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { Link } from '@waldur/core/Link';
+import { $state } from '@waldur/core/services';
+import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
+import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { TableOptionsType } from '@waldur/table-react/types';
 
-import { TemplateCard } from './TemplateCard';
-
-export const CatalogTemplatesList = () => {
-  const {
-    params: { catalogUuid, clusterUuid },
-  } = useCurrentStateAndParams();
-
-  const loadData = React.useCallback(
-    () =>
-      getAll('/rancher-templates/', {
-        params: { catalog_uuid: catalogUuid },
-      }),
-    [catalogUuid],
-  );
-
-  const state = useAsync(loadData, []);
-
-  if (state.loading) {
-    return <LoadingSpinner />;
-  }
-
-  if (state.error) {
-    return <h3>{translate('Unable to load applications templates.')}</h3>;
-  }
-
-  if (!state.value?.length) {
-    return (
-      <h3 className="text-center">
-        {translate('There are no applications templates.')}
-      </h3>
-    );
-  }
-
+const TableComponent = props => {
+  const { translate } = props;
   return (
-    <Row>
-      {state.value.map((template, index) => (
-        <Col key={index} md={4} sm={6}>
-          <TemplateCard template={template} clusterUuid={clusterUuid} />
-        </Col>
-      ))}
-    </Row>
+    <Table
+      {...props}
+      columns={[
+        {
+          title: translate('Icon'),
+          className: 'col-sm-1',
+          render: ({ row }) => (
+            <OfferingLogo src={row.icon} className="img-xs m-r-xs" />
+          ),
+        },
+        {
+          title: translate('Name'),
+          render: ({ row }) => (
+            <Link
+              state="rancher-template-details"
+              params={{
+                uuid: $state.params.uuid,
+                clusterUuid: $state.params.clusterUuid,
+                templateUuid: row.uuid,
+              }}
+            >
+              {row.name}
+            </Link>
+          ),
+          orderField: 'name',
+        },
+        {
+          title: translate('Description'),
+          render: ({ row }) => <span>{row.description}</span>,
+        },
+      ]}
+      verboseName={translate('application templates')}
+      hasQuery={true}
+    />
   );
 };
+
+const TableOptions: TableOptionsType = {
+  table: 'rancher-catalog-templates',
+  fetchData: createFetcher('rancher-templates'),
+  getDefaultFilter: () => ({
+    catalog_uuid: $state.params.catalogUuid,
+  }),
+  queryField: 'name',
+};
+
+export const CatalogTemplatesList = connectTable(TableOptions)(TableComponent);
