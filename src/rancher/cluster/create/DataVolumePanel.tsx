@@ -3,6 +3,7 @@ import * as Panel from 'react-bootstrap/lib/Panel';
 import { Option } from 'react-select';
 import { FormSection, FormName } from 'redux-form';
 
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { RemoveButton } from '@waldur/marketplace/offerings/RemoveButton';
 
@@ -29,16 +30,18 @@ export const DataVolumePanel = (props: OwnProps) => (
     </Panel.Heading>
     <Panel.Body>
       <FormSection name={props.volumePath}>
-        <FormName>
-          {({ form }) => (
-            <VolumeMountPointGroup
-              form={form}
-              nodeIndex={props.nodeIndex}
-              volumeIndex={props.volumeIndex}
-              mountPoints={props.mountPoints}
-            />
-          )}
-        </FormName>
+        {isFeatureVisible('Rancher.VolumeMountPoint') && (
+          <FormName>
+            {({ form }) => (
+              <VolumeMountPointGroup
+                form={form}
+                nodeIndex={props.nodeIndex}
+                volumeIndex={props.volumeIndex}
+                mountPoints={props.mountPoints}
+              />
+            )}
+          </FormName>
+        )}
         <VolumeSizeGroup
           nodeIndex={props.nodeIndex}
           volumeIndex={props.volumeIndex}
