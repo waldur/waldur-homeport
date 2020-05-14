@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 
 import { getById } from '@waldur/core/api';
-import { formatRelative, formatShortDateTime } from '@waldur/core/dateUtils';
+import { formatRelative, formatDateTime } from '@waldur/core/dateUtils';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -136,7 +136,8 @@ export const IssueDetails = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <i className="fa fa-external-link" /> {translate('Open in Service Desk')}
+                      <i className="fa fa-external-link" />{' '}
+                      {translate('Open in Service Desk')}
                     </a>
                   </dd>
                 </div>
@@ -145,8 +146,8 @@ export const IssueDetails = () => {
               <div className="m-b-xs">
                 <dt>{translate('Created')}:</dt>
                 <dd>
-                  {formatRelative(issue.created)} ago,
-                  {formatShortDateTime(issue.created)}
+                  {formatRelative(issue.created)} ago,{' '}
+                  {formatDateTime(issue.created)}
                 </dd>
               </div>
             </dl>
