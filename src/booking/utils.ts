@@ -60,25 +60,6 @@ export const timelineLabels = (interval: number) => {
   return timeLabels;
 };
 
-type EventMap = (
-  events: BookingProps[],
-  showAvailability?: undefined | 'background' | 'none',
-) => EventInput[];
-
-export const mapBookingEvents: EventMap = (events, showAvailability) =>
-  events.map(event => {
-    if (event.extendedProps.type === 'Availability') {
-      event.rendering = showAvailability;
-      event.overlap = true;
-      event.classNames = 'booking booking-Availability';
-    } else if (event.extendedProps.type === 'Schedule') {
-      event.overlap = false;
-      event.constraint = ['availability', 'Availability', 'businessHours'];
-      event.classNames = 'booking booking-Schedule';
-    }
-    return event;
-  });
-
 export const handleTitle = ({ event, el }) => {
   if (!event.title) {
     return el.querySelector('.fc-title').prepend(event.extendedProps.type);
@@ -91,19 +72,6 @@ export const handleTime = ({ event, el }) => {
     return (content.innerHTML =
       '<i class="fa fa-clock-o"> All-day </i>' + content.innerHTML);
   }
-};
-
-export const handleSelect = (arg, type = 'Schedule'): BookingProps => {
-  const { allDay, startStr, start, endStr, end } = arg;
-  const event = {
-    start: allDay ? startStr : start,
-    end: allDay ? endStr : end,
-    allDay,
-    id: `${randomId()}-${arg.jsEvent.timeStamp}`,
-    title: '',
-    extendedProps: { type },
-  };
-  return event;
 };
 
 interface Updater {
@@ -133,3 +101,62 @@ export function filterObject<T>(
     return acc;
   }, {} as Partial<T>);
 }
+
+export const createBooking = (
+  {
+    id,
+    start,
+    end,
+    allDay,
+    title = '',
+    extendedProps,
+  }: EventApi | EventInput | BookingProps,
+  timeStamp?: string,
+): BookingProps => ({
+  id: id || `${randomId()}-${timeStamp!}`,
+  start,
+  end,
+  allDay,
+  title,
+  extendedProps,
+});
+
+export const transformBookingEvent = (event, showAvailability = false) => {
+  if (event === undefined) {
+    return false;
+  }
+
+  if (event.extendedProps && event.extendedProps.type === 'Availability') {
+    event.rendering = showAvailability ? undefined : 'background';
+    event.classNames = showAvailability ? 'booking booking-Availability' : '';
+    event.overlap = true;
+  } else if (
+    event.extendedProps &&
+    event.extendedProps.type === 'availableForBooking'
+  ) {
+    event.groupId = 'availableForBooking';
+    event.rendering = 'background';
+    event.overlap = true;
+    event.allDay = false;
+  } else {
+    event.constraint = 'availableForBooking';
+    event.classNames = event.state!
+      ? 'booking booking-' + event.state
+      : 'booking booking-Schedule';
+  }
+
+  return event;
+};
+
+export const eventRender = (arg, focused?) => {
+  if (arg.el && arg.el.classList.contains('fc-event')) {
+    if (focused === arg.event.id) {
+      arg.el.classList.add('isHovered');
+    }
+    if (arg.view.type === 'dayGridMonth') {
+      handleTime(arg);
+      handleTitle(arg);
+    }
+    return arg.el;
+  }
+};

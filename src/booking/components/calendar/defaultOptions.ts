@@ -17,7 +17,6 @@ export const defaultOptions: OptionsInput = {
     momentPlugin,
     listPlugin,
   ],
-  height: 'auto',
   themeSystem: 'bootstrap',
   handleWindowResize: true,
   aspectRatio: 1.25,
