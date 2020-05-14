@@ -9,7 +9,7 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { getAttachments } from '@waldur/issues/attachments/selectors';
 import { Attachment } from '@waldur/issues/attachments/types';
 import { openAttachmentModal } from '@waldur/issues/attachments/utils';
-import { LoadingOverlay } from '@waldur/issues/LoadingOverlay';
+import { LoadingOverlay } from '@waldur/issues/comments/LoadingOverlay';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import * as actions from './actions';
