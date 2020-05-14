@@ -3,6 +3,7 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
+import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
@@ -96,11 +97,11 @@ function* createOffering(action: Action<OfferingFormData>) {
     yield put(constants.createOffering.failure());
     return;
   }
-  yield put(constants.createOffering.success());
+  yield call(() => $state.go('marketplace-vendor-offerings'));
   yield put(reset(constants.FORM_ID));
   yield put(setStep('Overview'));
   yield put(showSuccess(translate('Offering has been created.')));
-  yield put(stateGo('marketplace-vendor-offerings'));
+  yield put(constants.createOffering.success());
 }
 
 function* updateOffering(action: Action<OfferingUpdateFormData>) {
