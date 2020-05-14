@@ -373,9 +373,9 @@ msgstr ""
 msgid "Admin username"
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 msgid "Affected resource"
 msgstr ""
 
@@ -585,8 +585,8 @@ msgstr ""
 msgid "Article code"
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "Assigned to"
@@ -889,8 +889,8 @@ msgstr ""
 msgid "CSV"
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
 msgstr ""
@@ -1412,7 +1412,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/offerings/OfferingScreenshotsList.tsx
@@ -1644,9 +1644,9 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortListComponent.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
@@ -3078,7 +3078,7 @@ msgstr ""
 msgid "Limits are invalid."
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Link"
 msgstr ""
@@ -3909,7 +3909,7 @@ msgstr ""
 msgid "Open console"
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/offering/OfferingHeader.tsx
 msgid "Open in Service Desk"
 msgstr ""
@@ -4015,10 +4015,10 @@ msgstr ""
 #: src/customer/list/CustomerList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/StatsTable.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -4646,8 +4646,8 @@ msgstr ""
 msgid "Print record"
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -4675,10 +4675,10 @@ msgstr ""
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
@@ -5180,7 +5180,7 @@ msgstr ""
 msgid "Reported value is reused every month until changed."
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Reporter"
 msgstr ""
@@ -5255,10 +5255,10 @@ msgstr ""
 msgid "Request to {action} has been accepted."
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/jira/issue/IssueCreateDialog.tsx
 msgid "Request type"
 msgstr ""
@@ -5313,7 +5313,7 @@ msgstr ""
 msgid "Resize droplet"
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 msgid "Resolution"
 msgstr ""
 
@@ -5994,7 +5994,7 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Service type"
 msgstr ""
@@ -6257,7 +6257,7 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -7149,6 +7149,7 @@ msgstr ""
 #: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
 #: src/invoices/details/BillingDetails.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx

@@ -1,13 +1,13 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { withStore } from '@waldur/store/connect';
 
-import { OfferingDetails } from './OfferingDetails';
+import { OfferingDetailsContainer } from './OfferingDetailsContainer';
 
 export const states: StateDeclaration[] = [
   {
     name: 'offeringDetails',
     url: '/offering/:uuid/',
-    component: withStore(OfferingDetails),
+    component: withStore(OfferingDetailsContainer),
   },
 ];
 
