@@ -6916,7 +6916,6 @@ msgstr ""
 msgid "Type to search"
 msgstr ""
 
-#: src/invitations/InvitationsList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "URL"
 msgstr ""
