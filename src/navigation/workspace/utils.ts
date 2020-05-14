@@ -41,7 +41,7 @@ const filterOrganization = (
 };
 
 export const useOrganizationFilter = (organizations: Customer[]) => {
-  const [filter, setFilter] = React.useState();
+  const [filter, setFilter] = React.useState('');
   const filteredOrganizations = React.useMemo(
     () =>
       organizations.filter(organization =>
