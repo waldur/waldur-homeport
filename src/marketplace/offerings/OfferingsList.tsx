@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -51,10 +52,10 @@ export const TableComponent = props => {
       title: translate('Actions'),
       render: ({ row }) => {
         return (
-          <React.Fragment>
+          <ButtonGroup>
             <OfferingActions row={row} />
             <PreviewOfferingButton offering={row} />
-          </React.Fragment>
+          </ButtonGroup>
         );
       },
     });
