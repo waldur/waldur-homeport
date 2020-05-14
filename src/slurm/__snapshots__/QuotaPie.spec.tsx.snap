@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quota pie renders SVG chart 1`] = `"<path d=\\"M 1 0 A 1 1 0 0 1 -0.48175367410171543 0.8763066800438635 L 0 0\\" fill=\\"Coral\\"></path><path d=\\"M -0.48175367410171543 0.8763066800438635 A 1 1 0 1 1 1 -2.4492935982947064e-16 L 0 0\\" fill=\\"#00ab6b\\"></path>"`;

@@ -2,6 +2,8 @@ import Axios from 'axios';
 
 import { translate } from '@waldur/i18n';
 
+import { ActionConfigurationRegistry } from './action-configuration';
+
 // @ngInject
 export default function actionUtilsService(
   ncUtilsFlash,
@@ -11,13 +13,14 @@ export default function actionUtilsService(
   $injector,
   features,
   resourcesService,
-  ActionConfiguration,
   usersService,
 ) {
   this.loadActions = function(model) {
     resourcesService.cleanOptionsCache(model.url);
     return usersService.getCurrentUser().then(user => {
-      const config = ActionConfiguration[model.resource_type];
+      const config = ActionConfigurationRegistry.getActions(
+        model.resource_type,
+      );
       if (Array.isArray(config)) {
         return this.parseActions(config, { resource: model, user });
       }
@@ -129,7 +132,7 @@ export default function actionUtilsService(
   };
 
   this.confirmAction = function(model, name) {
-    const custom = ActionConfiguration[model.resource_type];
+    const custom = ActionConfigurationRegistry.getActions(model.resource_type);
     const confirmTextSuffix = (custom && custom.delete_message) || '';
     if (name === 'destroy') {
       const context = { resourceType: model.resource_type || 'resource' };

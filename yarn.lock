@@ -1876,6 +1876,10 @@
   resolved "https://registry.yarnpkg.com/@zeit/schemas/-/schemas-2.6.0.tgz#004e8e553b4cd53d538bd38eac7bcbf58a867fe3"
   integrity sha512-uUrgZ8AxS+Lio0fZKAipJjAh415JyrOZowliZAzmnJSsf7piVL5w+G0+gFJ0KSu3QRhvui/7zuvpLz03YjXAhg==
 
+Leaflet.Canvas-Flowmap-Layer@jwasilgeo/Leaflet.Canvas-Flowmap-Layer#a8570ac1277ee4c5dfcad806123839bd1f14e3c2:
+  version "0.0.0"
+  resolved "https://codeload.github.com/jwasilgeo/Leaflet.Canvas-Flowmap-Layer/tar.gz/a8570ac1277ee4c5dfcad806123839bd1f14e3c2"
+
 abab@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.0.tgz#aba0ab4c5eee2d4c79d3487d85450fb2376ebb0f"

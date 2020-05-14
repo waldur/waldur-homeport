@@ -4,18 +4,16 @@ import { translate } from '@waldur/i18n';
 import { LanguageList } from '@waldur/i18n/LanguageList';
 import { AppFooter } from '@waldur/navigation/AppFooter';
 import { CookiesConsent } from '@waldur/navigation/cookies/CookiesConsent';
-import { angular2react } from '@waldur/shims/angular2react';
 
 import { getAuthProviders } from './auth-providers';
 import { AuthButton } from './AuthButton';
 import { AuthHeader } from './AuthHeader';
+import { PoweredBy } from './PoweredBy';
 import { SigninButton } from './SigninButton';
 import { SigninForm } from './SigninForm';
 import { SignupButton } from './SignupButton';
 import { SignupForm } from './SignupForm';
 import { useAuthFeatures } from './useAuthFeatures';
-
-const PoweredBy = angular2react('poweredBy');
 
 export const AuthLogin = () => {
   const features = useAuthFeatures();

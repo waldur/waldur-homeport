@@ -8,6 +8,7 @@ import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 import { ProjectCreateContainer } from '../project/ProjectCreateContainer';
 
 import { CustomerDashboardContainer } from './dashboard/CustomerDashboardContainer';
+import { CustomerManage } from './details/CustomerManage';
 import { CustomerTeam } from './team/CustomerTeam';
 import { loadCustomer, CustomerController } from './utils';
 import { CustomerEventsView } from './workspace/CustomerEventsList';
@@ -80,7 +81,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'organization.manage',
     url: 'manage/',
-    template: '<customer-manage></customer-manage>',
+    component: withStore(CustomerManage),
     data: {
       pageTitle: gettext('Manage organization'),
       hideBreadcrumbs: true,

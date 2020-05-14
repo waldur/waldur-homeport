@@ -7,10 +7,9 @@ import userEvents from './list/UserEvents';
 import userRoutes from './routes';
 import supportModule from './support/module';
 import userDetailsDialog from './support/UserDetailsDialog';
-import userPopoverTable from './support/UserDetailsTable';
 import userEdit from './support/UserEditContainer';
 import userDetails from './user-details';
-import { userPopover } from './user-popover';
+import { UserPopover } from './UserPopover';
 import usersService from './users-service';
 import { UserSidebar } from './UserSidebar';
 import { stateUtilsService, attachStateUtils } from './utils';
@@ -21,8 +20,10 @@ export default module => {
   module.component('userEvents', userEvents);
   module.directive('userDetails', userDetails);
   module.component('userEdit', userEdit);
-  module.component('userPopover', userPopover);
-  module.component('userPopoverTable', userPopoverTable);
+  module.component(
+    'userPopover',
+    connectAngularComponent(UserPopover, ['resolve']),
+  );
   module.component('userDetailsDialog', userDetailsDialog);
   module.service('stateUtilsService', stateUtilsService);
   module.service('usersService', usersService);

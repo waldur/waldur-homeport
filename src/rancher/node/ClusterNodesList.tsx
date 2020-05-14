@@ -7,6 +7,8 @@ import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
+import { NodeRoleField } from './NodeRoleField';
+
 const TableComponent = props => {
   const { translate } = props;
   return (
@@ -16,6 +18,10 @@ const TableComponent = props => {
         {
           title: translate('Node'),
           render: ({ row }) => <ResourceName resource={row} />,
+        },
+        {
+          title: translate('Roles'),
+          render: ({ row }) => <NodeRoleField node={row} />,
         },
         {
           title: translate('State'),

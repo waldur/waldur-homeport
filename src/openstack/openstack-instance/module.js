@@ -1,3 +1,4 @@
+import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
@@ -6,13 +7,9 @@ import openstackInstanceFloatingIps from './openstack-instance-floating-ips';
 import openstackInstanceNetworks from './openstack-instance-networks';
 import openstackInstanceSecurityGroupsField from './openstack-instance-security-groups-field';
 import { OpenStackInstanceSummary } from './OpenStackInstanceSummary';
+
 import './marketplace';
 import './tabs';
-
-// @ngInject
-function actionConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('OpenStackTenant.Instance', actions);
-}
 
 // @ngInject
 function stateConfig(ResourceStateConfigurationProvider) {
@@ -40,6 +37,6 @@ export default module => {
     'openstackInstanceFloatingIps',
     openstackInstanceFloatingIps,
   );
-  module.config(actionConfig);
+  ActionConfigurationRegistry.register('OpenStackTenant.Instance', actions);
   module.config(stateConfig);
 };

@@ -1,34 +1,10 @@
-import { translate } from '@waldur/i18n';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import openstackBackupScheduleWarning from './BackupScheduleWarning';
-import breadcrumbsConfig from './breadcrumbs';
+import './breadcrumbs';
 import { OpenStackBackupScheduleSummary } from './OpenStackBackupScheduleSummary';
 import './tabs';
-
-// @ngInject
-function actionConfig(ActionConfigurationProvider) {
-  ActionConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
-    order: ['update', 'activate', 'deactivate', 'destroy'],
-    options: {
-      update: {
-        title: translate('Edit'),
-        successMessage: translate('Backup schedule has been updated'),
-        fields: {
-          schedule: {
-            type: 'crontab',
-          },
-          timezone: {
-            type: 'timezone',
-          },
-          warning: {
-            component: 'openstackBackupScheduleWarning',
-          },
-        },
-      },
-    },
-  });
-}
+import './actions';
 
 // @ngInject
 function stateConfig(ResourceStateConfigurationProvider) {
@@ -49,7 +25,5 @@ export default module => {
     'openstackBackupScheduleWarning',
     openstackBackupScheduleWarning,
   );
-  module.config(actionConfig);
   module.config(stateConfig);
-  module.run(breadcrumbsConfig);
 };

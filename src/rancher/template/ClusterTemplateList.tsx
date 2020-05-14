@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { Link } from '@waldur/core/Link';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
 const TableComponent = props => {
@@ -10,7 +11,18 @@ const TableComponent = props => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => <span>{row.name}</span>,
+          render: ({ row }) => (
+            <Link
+              state="rancher-template-details"
+              params={{
+                uuid: props.resource.project_uuid,
+                clusterUuid: props.resource.uuid,
+                templateUuid: row.uuid,
+              }}
+            >
+              {row.name}
+            </Link>
+          ),
         },
         {
           title: translate('Description'),
