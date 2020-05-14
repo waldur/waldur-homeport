@@ -4,10 +4,15 @@ export function protectStates($rootScope, $state) {
 }
 
 // @ngInject
-export function urlRouterProvider($urlRouterProvider, $locationProvider) {
+export function urlRouterProvider(
+  $urlRouterProvider,
+  $locationProvider,
+  $qProvider,
+) {
   $locationProvider.hashPrefix('');
   $urlRouterProvider.when('', '/profile/');
   $urlRouterProvider.when('/', '/profile/');
+  $qProvider.errorOnUnhandledRejections(false);
 }
 
 // @ngInject

@@ -66,6 +66,7 @@ const TableComponent = props => {
         },
       ]}
       verboseName={translate('team members')}
+      hasQuery={true}
     />
   );
 };

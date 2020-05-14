@@ -50,10 +50,6 @@ const TableComponent = props => {
           render: ({ row }) => formatDate(row.expires),
         },
         {
-          title: translate('URL'),
-          render: ({ row }) => row.link_template.replace('{uuid}', row.uuid),
-        },
-        {
           title: translate('Actions'),
           visible: props.showActions,
           render: ({ row }) => (
@@ -66,6 +62,8 @@ const TableComponent = props => {
       ]}
       verboseName={translate('team invitations')}
       actions={<InvitationCreateButton />}
+      hasQuery={true}
+      expandableRow={({ row }) => row.link_template.replace('{uuid}', row.uuid)}
     />
   );
 };
@@ -79,6 +77,7 @@ const TableOptions: TableOptionsType = {
   table: 'user-invitations',
   fetchData: createFetcher('user-invitations'),
   mapPropsToFilter,
+  queryField: 'email',
 };
 
 const mapStateToProps = state => ({

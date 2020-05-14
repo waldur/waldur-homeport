@@ -373,9 +373,9 @@ msgstr ""
 msgid "Admin username"
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 msgid "Affected resource"
 msgstr ""
 
@@ -553,6 +553,10 @@ msgstr ""
 msgid "Are you sure you want to delete the screenshot?"
 msgstr ""
 
+#: src/rancher/cluster/ApplicationDeleteButton.tsx
+msgid "Are you sure you want to delete this application?"
+msgstr ""
+
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr ""
@@ -581,8 +585,8 @@ msgstr ""
 msgid "Article code"
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "Assigned to"
@@ -877,11 +881,7 @@ msgstr ""
 msgid "CPU"
 msgstr ""
 
-#: src/slurm/actions.ts
-msgid "CPU limit, minutes"
-msgstr ""
-
-#: src/slurm/details/constants.js
+#: src/slurm/details/constants.ts
 msgid "CPU usage"
 msgstr ""
 
@@ -889,8 +889,8 @@ msgstr ""
 msgid "CSV"
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
 msgstr ""
@@ -1222,6 +1222,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
+#: src/rancher/cluster/ApplicationDeleteButton.tsx
 msgid "Confirmation"
 msgstr ""
 
@@ -1411,7 +1412,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/offerings/OfferingScreenshotsList.tsx
@@ -1621,6 +1622,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/project/ProjectDeleteButton.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
+#: src/rancher/cluster/ApplicationDeleteButton.tsx
 msgid "Delete"
 msgstr ""
 
@@ -1642,9 +1644,9 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortListComponent.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
@@ -1679,6 +1681,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -2391,11 +2394,7 @@ msgstr ""
 msgid "GPU"
 msgstr ""
 
-#: src/slurm/actions.ts
-msgid "GPU limit, minutes"
-msgstr ""
-
-#: src/slurm/details/constants.js
+#: src/slurm/details/constants.ts
 msgid "GPU usage"
 msgstr ""
 
@@ -2543,10 +2542,6 @@ msgstr ""
 msgid "I accept the"
 msgstr ""
 
-#: src/issues/request-service-button.html
-msgid "I want another service"
-msgstr ""
-
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "ID"
 msgstr ""
@@ -2574,6 +2569,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "IPv4 address"
+msgstr ""
+
+#: src/rancher/template/CatalogTemplateList.tsx
+msgid "Icon"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -3079,7 +3078,7 @@ msgstr ""
 msgid "Limits are invalid."
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/rancher/cluster/ApplicationDetailsDialog.tsx
 msgid "Link"
 msgstr ""
@@ -3385,10 +3384,6 @@ msgstr ""
 msgid "More info"
 msgstr ""
 
-#: src/issues/request-service-button.js
-msgid "Motivation"
-msgstr ""
-
 #: src/rancher/cluster/create/VolumeMountPointGroup.tsx
 msgid "Mount point"
 msgstr ""
@@ -3474,6 +3469,7 @@ msgstr ""
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
@@ -3913,7 +3909,7 @@ msgstr ""
 msgid "Open console"
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/offering/OfferingHeader.tsx
 msgid "Open in Service Desk"
 msgstr ""
@@ -4019,10 +4015,10 @@ msgstr ""
 #: src/customer/list/CustomerList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/StatsTable.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -4413,10 +4409,6 @@ msgstr ""
 msgid "Please accept Terms of Services to proceed."
 msgstr ""
 
-#: src/issues/request-service-button.js
-msgid "Please clarify why do you need it"
-msgstr ""
-
 #: src/customer/create/CustomerCreatePrompt.tsx
 msgid "Please create a new one picking the profile that best matches your organization:"
 msgstr ""
@@ -4654,8 +4646,8 @@ msgstr ""
 msgid "Print record"
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -4683,10 +4675,10 @@ msgstr ""
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
@@ -4945,11 +4937,7 @@ msgstr ""
 msgid "RAM"
 msgstr ""
 
-#: src/slurm/actions.ts
-msgid "RAM limit, MB"
-msgstr ""
-
-#: src/slurm/details/constants.js
+#: src/slurm/details/constants.ts
 msgid "RAM usage"
 msgstr ""
 
@@ -5192,13 +5180,9 @@ msgstr ""
 msgid "Reported value is reused every month until changed."
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Reporter"
-msgstr ""
-
-#: src/issues/request-service-button.js
-msgid "Request a new service"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -5271,10 +5255,10 @@ msgstr ""
 msgid "Request to {action} has been accepted."
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
 #: src/issues/create/issue-create-dialog.html
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
-#: src/issues/issue-detail.html
 #: src/jira/issue/IssueCreateDialog.tsx
 msgid "Request type"
 msgstr ""
@@ -5329,7 +5313,7 @@ msgstr ""
 msgid "Resize droplet"
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 msgid "Resolution"
 msgstr ""
 
@@ -5963,10 +5947,6 @@ msgstr ""
 msgid "Service desk project type"
 msgstr ""
 
-#: src/issues/request-service-button.js
-msgid "Service name"
-msgstr ""
-
 #: src/invoices/details/InvoiceItemDetails.tsx
 #: src/marketplace/details/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
@@ -6014,7 +5994,7 @@ msgstr ""
 msgid "Service settings of this resource are in state erred."
 msgstr ""
 
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Service type"
 msgstr ""
@@ -6277,7 +6257,7 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
-#: src/issues/issue-detail.html
+#: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -6656,10 +6636,6 @@ msgstr ""
 msgid "There are no actions."
 msgstr ""
 
-#: src/rancher/template/CatalogTemplateList.tsx
-msgid "There are no applications templates."
-msgstr ""
-
 #: src/customer/team/add-team-member.html
 msgid "There are no available projects."
 msgstr ""
@@ -6942,7 +6918,6 @@ msgstr ""
 msgid "Type to search"
 msgstr ""
 
-#: src/invitations/InvitationsList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "URL"
 msgstr ""
@@ -7138,10 +7113,6 @@ msgstr ""
 msgid "Unable to load application template details."
 msgstr ""
 
-#: src/rancher/template/CatalogTemplateList.tsx
-msgid "Unable to load applications templates."
-msgstr ""
-
 #: src/marketplace/category/filters/AttributeFilterList.tsx
 msgid "Unable to load category sections."
 msgstr ""
@@ -7178,6 +7149,7 @@ msgstr ""
 #: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
 #: src/invoices/details/BillingDetails.tsx
+#: src/issues/IssueDetails.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
@@ -8219,6 +8191,7 @@ msgstr ""
 msgid "Zabbix provider"
 msgstr ""
 
+#: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 msgid "application templates"
 msgstr ""
