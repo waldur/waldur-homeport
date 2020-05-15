@@ -3648,10 +3648,6 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: src/customer/create/customer-create-prompt.html
-msgid "No, I will do it later"
-msgstr ""
-
 #: src/invitations/invitation-confirm-dialog.html
 msgid "No, continue using current email"
 msgstr ""
@@ -8002,10 +7998,6 @@ msgstr ""
 msgid "Worker"
 msgstr ""
 
-#: src/customer/create/customer-create-prompt.html
-msgid "Would you like to register your organization?"
-msgstr ""
-
 #: src/invitations/invitation-confirm-dialog.html
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
@@ -8023,10 +8015,6 @@ msgstr ""
 #: src/user/hooks/HookRemoveDialog.tsx
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"
-msgstr ""
-
-#: src/customer/create/customer-create-prompt.html
-msgid "Yes, I would"
 msgstr ""
 
 #: src/invitations/invitation-confirm-dialog.html
