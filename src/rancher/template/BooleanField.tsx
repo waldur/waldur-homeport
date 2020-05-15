@@ -5,8 +5,9 @@ import * as FormGroup from 'react-bootstrap/lib/FormGroup';
 import * as HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import { Field } from 'redux-form';
 
+import { FieldProps } from '../types';
+
 import { DecoratedLabel } from './DecoratedLabel';
-import { FieldProps } from './types';
 
 const renderControl = props => (
   <Checkbox

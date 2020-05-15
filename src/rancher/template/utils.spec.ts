@@ -1,5 +1,6 @@
+import { Question } from '../types';
+
 import { groupQuestions, parseQuestions, parseVisibleQuestions } from './utils';
-import { Question } from './types';
 
 const DataDog: Question[] = require('./DataDog.json');
 const MySQL: Question[] = require('./MySQL.json');

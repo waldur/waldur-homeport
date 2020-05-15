@@ -13,7 +13,8 @@ import { translate } from '@waldur/i18n';
 import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
-import { createApp } from './api';
+import { createApp } from '../api';
+
 import { FORM_ID } from './constants';
 import { TemplateHeader } from './TemplateHeader';
 import { FormData } from './types';

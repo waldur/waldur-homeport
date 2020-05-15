@@ -1,7 +1,7 @@
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
-import { Template, Cluster } from './types';
+import { Template, Cluster } from '../types';
 
 export const refreshBreadcrumbs = (cluster: Cluster, template: Template) => {
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');

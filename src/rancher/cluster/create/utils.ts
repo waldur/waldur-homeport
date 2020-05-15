@@ -1,13 +1,12 @@
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { getFlavors, getSubnets, getVolumeTypes } from '@waldur/openstack/api';
 import { Flavor, Subnet } from '@waldur/openstack/openstack-instance/types';
 import {
   formatVolumeTypeChoices,
   getDefaultVolumeType,
 } from '@waldur/openstack/openstack-instance/utils';
 import { formatFlavor } from '@waldur/resource/utils';
-
-import { getFlavors, getSubnets, getVolumeTypes } from './api';
 
 const CLUSTER_NAME_PATTERN = new RegExp('^[a-z0-9]([-a-z0-9])+[a-z0-9]$');
 

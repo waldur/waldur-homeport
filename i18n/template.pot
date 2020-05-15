@@ -479,6 +479,7 @@ msgstr ""
 msgid "Any"
 msgstr ""
 
+#: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/breadcrumbs.ts
 msgid "Application catalogues"
 msgstr ""
@@ -496,6 +497,7 @@ msgid "Application has been created."
 msgstr ""
 
 #: src/rancher/cluster/tabs.ts
+#: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/breadcrumbs.ts
 msgid "Application templates"
 msgstr ""
@@ -4777,6 +4779,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/offering/OfferingDetails.tsx
 #: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/breadcrumbs.ts
 #: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
 msgid "Project workspace"
@@ -5446,6 +5449,7 @@ msgstr ""
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectWorkspace.tsx
+#: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/breadcrumbs.ts
 #: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
 #: src/resource/support/ResourcesTreemap.tsx
@@ -7159,6 +7163,7 @@ msgstr ""
 #: src/offering/OfferingDetails.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
+#: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/SecretField.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Unable to load data."
