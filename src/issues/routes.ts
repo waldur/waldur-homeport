@@ -1,5 +1,5 @@
 import { StateDeclaration } from '@waldur/core/types';
-import { CustomerListContainer } from '@waldur/customer/list/CustomerListContainer';
+import { LazyCustomerList } from '@waldur/customer/list/LazyCustomerList';
 import { gettext } from '@waldur/i18n';
 import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
 import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';
@@ -72,7 +72,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.organizations',
     url: 'organizations/',
-    component: withStore(CustomerListContainer),
+    component: withStore(LazyCustomerList),
     data: {
       feature: 'support.organizations',
       pageTitle: gettext('Financial overview'),
