@@ -6,8 +6,9 @@ import { Field, WrappedFieldProps } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 
+import { FieldProps } from '../types';
+
 import { DecoratedLabel } from './DecoratedLabel';
-import { FieldProps } from './types';
 
 interface OwnProps extends FieldProps {
   component: React.ComponentType<WrappedFieldProps>;

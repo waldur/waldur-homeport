@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Option } from 'react-select';
 import { reduxForm } from 'redux-form';
 
-import { post } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { useQuery } from '@waldur/core/useQuery';
@@ -13,6 +12,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Flavor } from '@waldur/openstack/openstack-instance/types';
+import { createNode } from '@waldur/rancher/api';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
 import { NodeFlavorGroup } from './NodeFlavorGroup';
@@ -68,12 +68,9 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
 
   const dispatch = useDispatch();
 
-  const createNode = React.useCallback(async (formData: FormData) => {
+  const callback = React.useCallback(async (formData: FormData) => {
     try {
-      await post(
-        '/rancher-nodes/',
-        serializeNode(props.resolve.cluster, formData),
-      );
+      await createNode(serializeNode(props.resolve.cluster, formData));
     } catch (error) {
       const errorMessage = `${translate('Unable to create node.')} ${format(
         error,
@@ -86,7 +83,7 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   }, []);
 
   return (
-    <form className="form-horizontal" onSubmit={props.handleSubmit(createNode)}>
+    <form className="form-horizontal" onSubmit={props.handleSubmit(callback)}>
       <ModalDialog
         title={translate('Create node')}
         footer={

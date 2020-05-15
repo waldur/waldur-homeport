@@ -1,8 +1,9 @@
 import * as React from 'react';
 
+import { FieldProps } from '../types';
+
 import { DecoratedField } from './DecoratedField';
 import { SelectControl } from './SelectControl';
-import { FieldProps } from './types';
 
 interface EnumFieldProps extends FieldProps {
   getLabel?(option: any): string;

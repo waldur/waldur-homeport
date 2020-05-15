@@ -6,11 +6,12 @@ import { formValueSelector, clearFields } from 'redux-form';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
-import { getProjectSecrets } from './api';
+import { getProjectSecrets } from '../api';
+import { FieldProps } from '../types';
+
 import { FORM_ID } from './constants';
 import { DecoratedField } from './DecoratedField';
 import { SelectControl } from './SelectControl';
-import { FieldProps } from './types';
 
 export const SecretField: React.FC<FieldProps> = props => {
   const project = useSelector(state =>

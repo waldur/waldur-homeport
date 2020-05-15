@@ -1,14 +1,14 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { withStore } from '@waldur/store/connect';
 
-import { CatalogTemplatesList } from './template/CatalogTemplateList';
+import { CatalogTemplateContainer } from './template/CatalogTemplateContainer';
 import { TemplateDetail } from './template/TemplateDetail';
 
 export const states: StateDeclaration[] = [
   {
     name: 'rancher-catalog-details',
     url: 'rancher-catalog-details/:clusterUuid/:catalogUuid/',
-    component: withStore(CatalogTemplatesList),
+    component: withStore(CatalogTemplateContainer),
     parent: 'project',
   },
   {
