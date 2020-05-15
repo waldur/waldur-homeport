@@ -1650,7 +1650,7 @@ msgstr ""
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/list/IssuesList.tsx
-#: src/issues/list/IssuesShortListComponent.tsx
+#: src/issues/list/IssuesShortList.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -2918,7 +2918,7 @@ msgstr ""
 msgid "Issues"
 msgstr ""
 
-#: src/issues/list/IssuesListTablePlaceholder.tsx
+#: src/issues/list/IssuesListPlaceholder.tsx
 msgid "Issues are trackable requests to the operator."
 msgstr ""
 
@@ -2976,7 +2976,7 @@ msgid "Kept until"
 msgstr ""
 
 #: src/issues/list/IssuesList.tsx
-#: src/issues/list/IssuesShortListComponent.tsx
+#: src/issues/list/IssuesShortList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
@@ -4997,7 +4997,7 @@ msgstr ""
 msgid "Record period"
 msgstr ""
 
-#: src/issues/list/IssuesShortListComponent.tsx
+#: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/offering/OfferingActions.tsx
@@ -5171,7 +5171,7 @@ msgstr ""
 msgid "Report usage"
 msgstr ""
 
-#: src/issues/list/IssuesShortListComponent.tsx
+#: src/issues/list/IssuesShortList.tsx
 msgid "Reported by me"
 msgstr ""
 
@@ -5722,7 +5722,7 @@ msgstr ""
 msgid "Security groups details"
 msgstr ""
 
-#: src/issues/list/IssuesShortListComponent.tsx
+#: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 msgid "See all"
 msgstr ""
@@ -6694,7 +6694,7 @@ msgstr ""
 msgid "There are no projects yet for this organization."
 msgstr ""
 
-#: src/issues/list/IssuesShortListComponent.tsx
+#: src/issues/list/IssuesShortList.tsx
 msgid "There are no requests yet."
 msgstr ""
 
@@ -6769,7 +6769,7 @@ msgid "Thumbnail"
 msgstr ""
 
 #: src/issues/list/IssuesList.tsx
-#: src/issues/list/IssuesShortListComponent.tsx
+#: src/issues/list/IssuesShortList.tsx
 msgid "Time in progress"
 msgstr ""
 
@@ -7150,6 +7150,7 @@ msgstr ""
 #: src/customer/popover/CustomerPopover.tsx
 #: src/invoices/details/BillingDetails.tsx
 #: src/issues/IssueDetails.tsx
+#: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
@@ -7533,7 +7534,7 @@ msgstr ""
 msgid "Update your organization name, logo, accounting and contact details."
 msgstr ""
 
-#: src/issues/list/IssuesShortListComponent.tsx
+#: src/issues/list/IssuesShortList.tsx
 msgid "Updated"
 msgstr ""
 
@@ -8108,7 +8109,7 @@ msgstr ""
 msgid "You have the right to purchase service without additional approval."
 msgstr ""
 
-#: src/issues/list/IssuesListTablePlaceholder.tsx
+#: src/issues/list/IssuesListPlaceholder.tsx
 msgid "You haven't created any issues yet."
 msgstr ""
 
