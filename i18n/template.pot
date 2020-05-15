@@ -1557,6 +1557,10 @@ msgstr ""
 msgid "Databases"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingHeader.tsx
+msgid "Datacite DOI"
+msgstr ""
+
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Datastore"
@@ -1728,6 +1732,7 @@ msgstr ""
 #: src/issues/create/issue-registration.html
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/referral/ReferralDetailsButton.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/openstack-instance-security-groups-field.html
 #: src/project/ProjectActions.tsx
@@ -4152,6 +4157,10 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
+#: src/marketplace/referral/ReferralsList.tsx
+msgid "PID"
+msgstr ""
+
 #: src/error/routes.ts
 msgid "Page is not found."
 msgstr ""
@@ -4883,6 +4892,14 @@ msgstr ""
 msgid "Public resources"
 msgstr ""
 
+#: src/marketplace/referral/ReferralsList.tsx
+msgid "Published"
+msgstr ""
+
+#: src/marketplace/referral/ReferralsList.tsx
+msgid "Publisher"
+msgstr ""
+
 #: src/resource/state/constants.js
 msgid "Pulling"
 msgstr ""
@@ -4995,6 +5012,14 @@ msgstr ""
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/list/BillingRecordsList.tsx
 msgid "Record period"
+msgstr ""
+
+#: src/marketplace/referral/ReferralDetailsField.tsx
+msgid "Referral count"
+msgstr ""
+
+#: src/marketplace/referral/OfferingReferralsDialog.tsx
+msgid "Referrals for {name}"
 msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
@@ -6795,6 +6820,7 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
+#: src/marketplace/referral/ReferralsList.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Title"
 msgstr ""
@@ -8347,6 +8373,10 @@ msgstr ""
 
 #: src/invoices/list/BillingRecordsList.tsx
 msgid "records"
+msgstr ""
+
+#: src/marketplace/referral/ReferralsList.tsx
+msgid "referrals"
 msgstr ""
 
 #: src/jira/issue/JiraIssuesList.tsx
