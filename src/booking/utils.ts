@@ -125,11 +125,10 @@ export const transformBookingEvent = (event, showAvailability = false) => {
   if (event === undefined) {
     return false;
   }
-
   if (event.extendedProps && event.extendedProps.type === 'Availability') {
     event.rendering = showAvailability ? undefined : 'background';
     event.classNames = showAvailability ? 'booking booking-Availability' : '';
-    event.overlap = true;
+    //event.overlap = true;
   } else if (
     event.extendedProps &&
     event.extendedProps.type === 'availableForBooking'
@@ -139,6 +138,7 @@ export const transformBookingEvent = (event, showAvailability = false) => {
     event.overlap = true;
     event.allDay = false;
   } else {
+    //event.overlap = false;
     event.constraint = 'availableForBooking';
     event.classNames = event.state!
       ? 'booking booking-' + event.state
@@ -159,4 +159,116 @@ export const eventRender = (arg, focused?) => {
     }
     return arg.el;
   }
+};
+
+const getNextSlot = (slots, selectedValue) =>
+  slots
+    .map(slot => moment(slot.start))
+    .sort(time => time.valueOf())
+    .find(next => next.isAfter(moment(selectedValue)));
+
+export const handleSchedule = (arg, availabilitySlotsList, slotDuration?) => {
+  const diff = moment(arg.end).diff(moment(arg.start));
+  const { hours, minutes } = moment(slotDuration, 'HH:mm:ss').toObject();
+  const setDuration = moment.duration({ hours, minutes });
+
+  const eventData = createBooking(
+    {
+      start: '',
+      end: '',
+      allDay: false,
+      extendedProps: {
+        type: 'Schedule',
+      },
+    },
+    arg.jsEvent.timeStamp,
+  );
+
+  if (arg.view.type === 'dayGridMonth') {
+    if (diff > 86400000 /* one day in milliseconds */) {
+      eventData.start = getNextSlot(availabilitySlotsList, arg.start).format();
+      eventData.end = getNextSlot(
+        availabilitySlotsList,
+        moment(arg.end).subtract(1, 'd'),
+      ).format();
+    } else {
+      const nextStart = getNextSlot(availabilitySlotsList, arg.start);
+      eventData.start = nextStart.format();
+      eventData.end = nextStart.clone().add(setDuration).format;
+    }
+
+    return eventData;
+  } else {
+    return {
+      ...eventData,
+      start: arg.start,
+      end: arg.end,
+    };
+  }
+};
+
+const getHoursMinutes = (date, unit = 'HH:mm') => {
+  const { hours, minutes } = moment(date, unit).toObject();
+  return { hours, minutes };
+};
+
+export const createAvailabilityDates = (event: BookingProps) => {
+  const dates: EventInput[] = [];
+
+  const mStart = moment(event.start);
+  const mEnd = moment(event.end);
+  const { slotDuration, businessHours, weekends } = event.extendedProps.config;
+
+  while (mStart.diff(mEnd, 'd')) {
+    const curDay =
+      mStart.isoWeekday() === 7 ? mStart.isoWeekday() - 1 : mStart.isoWeekday();
+    const event: BookingProps = {
+      start: mStart
+        .clone()
+        .set(getHoursMinutes(businessHours.startTime))
+        .format(),
+      end: mStart
+        .clone()
+        .set(getHoursMinutes(businessHours.endTime))
+        .format(),
+      allDay: true,
+      rendering: 'background',
+      extendedProps: {
+        type: 'Availability',
+        config: {
+          slotDuration,
+          businessHours,
+          weekends,
+        },
+      },
+    };
+
+    if (businessHours.daysOfWeek.includes(curDay)) {
+      dates.push(event);
+    }
+
+    mStart.add(1, 'd');
+  }
+  return dates;
+};
+
+export const createAvailabilitySlots = (
+  availabilitiDates,
+  slotDurationMinutes,
+) => {
+  const slots = [];
+
+  availabilitiDates.map(availabilitiDayEvent => {
+    const currentDate = moment(availabilitiDayEvent.start);
+
+    while (currentDate < moment(availabilitiDayEvent.end)) {
+      const slot = {
+        start: currentDate.format(),
+        end: currentDate.add(slotDurationMinutes).format(),
+      };
+      slots.push(slot);
+    }
+  });
+
+  return slots;
 };

@@ -2,6 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
+import { setSettings } from '@waldur/booking/store/actions';
+import { createAvailabilityDates } from '@waldur/booking/utils';
 import { required, getLatinNameValidators } from '@waldur/core/validators';
 import {
   FormContainer,
@@ -47,7 +49,16 @@ export class PureOfferingConfigurationForm extends React.Component<
     }
     if (!attributes.schedules) {
       const { schedules } = this.props.offering.attributes;
-      this.setState({ availableDates: schedules });
+      const availableDates = [];
+      schedules.map(event => {
+        if (
+          event.extendedProps &&
+          event.extendedProps.type === 'Availability'
+        ) {
+          availableDates.push(...createAvailabilityDates(event));
+        }
+      });
+      this.setState({ availableDates });
       attributes.schedules = [];
     }
     const initialData: any = { attributes };
@@ -181,6 +192,8 @@ const mapStateToProps = state => ({
   customer: getCustomer(state),
 });
 
-const enhance = connect(mapStateToProps);
+const mapDispatchToProps = { setSettings };
+
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const OfferingConfigurationForm = enhance(PureOfferingConfigurationForm);

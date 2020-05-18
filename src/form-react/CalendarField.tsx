@@ -1,87 +1,80 @@
 import { EventInput } from '@fullcalendar/core';
+import moment from 'moment-timezone';
 import * as React from 'react';
 import { FieldArray, WrappedFieldArrayProps } from 'redux-form';
 
-import { Calendar } from '@waldur/booking/components/calendar/Calendar';
-import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
+import { CalendarComponent as Cal } from '@waldur/booking/components/calendar/CalendarComponent';
+import { BookingProps } from '@waldur/booking/types';
 import {
-  eventsMapper,
-  createCalendarBookingEvent,
   deleteCalendarBookingEvent,
+  createAvailabilitySlots,
 } from '@waldur/booking/utils';
-import { Event } from '@waldur/events/types';
-import { withModal } from '@waldur/modal/withModal';
 
 type CalendarComponentProps = WrappedFieldArrayProps<any> & {
-  excludedEvents?: Event[];
+  excludedEvents?: BookingProps[];
   setModalProps: (event) => void;
   openModal: (cb) => void;
   schedules: EventInput[];
 };
 
+function isStartInArr(array, value) {
+  return !!array.find(item => moment(item.start).isSame(moment(value)));
+}
 export class CalendarComponent extends React.Component<CalendarComponentProps> {
-  state = {
-    view: {
-      type: undefined,
-    },
-  };
-
-  deleteBooking = e => deleteCalendarBookingEvent(this.props.fields, e);
-
-  handleBooking = event => {
-    this.props.setModalProps({
-      event,
-      destroy: () => this.deleteBooking(event),
-    });
-    this.props.openModal(onSuccess => {
-      this.props.fields.push(
-        createCalendarBookingEvent({ ...event.extendedProps, ...onSuccess }),
-      );
-      this.deleteBooking(event);
-    });
-  };
-
   getValidRange = events => ({
-    start: Math.min(...events.map(event => Date.parse(event.start))),
-    end: Math.max(...events.map(event => Date.parse(event.end))),
+    start: Math.min(...events.map(event => moment(event.start).valueOf())),
+    end: Math.max(...events.map(event => moment(event.end).valueOf())),
   });
+
+  getCalendarConfig = () => {
+    const eventWithConfig = this.props.excludedEvents.find(
+      ({ extendedProps }) =>
+        extendedProps.type === 'Availability' && extendedProps.config,
+    );
+    const {
+      extendedProps: { config },
+    } = eventWithConfig;
+    return {
+      ...config,
+      defaultTimedEventDuration: config.slotDuration,
+      minTime: config.businessHours.startTime,
+      maxTime: config.businessHours.endTime,
+    };
+  };
+
+  getAvailabilitySlots = events => {
+    const { slotDuration } = this.getCalendarConfig();
+    const slots = createAvailabilitySlots(
+      this.props.excludedEvents,
+      moment.duration(slotDuration),
+    );
+    return slots.filter(slot => !isStartInArr(events, slot.start));
+  };
 
   render() {
     const { excludedEvents, fields } = this.props;
-    let events = fields.getAll();
+    const events = fields.getAll();
     if (!events) {
       return null;
     }
-    events = eventsMapper([...excludedEvents, ...events]);
+
     return (
-      <Calendar
-        editable={true}
-        defaultView={this.state.view.type}
-        selectable={true}
-        eventResizableFromStart={false}
-        events={events}
-        eventLimit={false}
-        validRange={this.getValidRange(events)}
-        viewSkeletonRender={({ view }) => {
-          if (view.type !== this.state.view.type) {
-            this.setState({ view });
+      <div>
+        <Cal
+          events={[...excludedEvents, ...events]}
+          options={this.getCalendarConfig()}
+          availabiltyEvents={this.getAvailabilitySlots(events)}
+          calendarType="edit"
+          addEventCb={fields.push}
+          removeEventCb={oldID =>
+            deleteCalendarBookingEvent(fields, { id: oldID })
           }
-        }}
-        select={event =>
-          fields.push(
-            createCalendarBookingEvent({ ...event, type: 'ScheduleBooking' }),
-          )
-        }
-        eventClick={e => this.handleBooking(e.event)}
-      />
+        />
+      </div>
     );
   }
 }
 
 export const CalendarField = props => (
-  <FieldArray
-    name={props.name}
-    component={withModal(CalendarEventModal)(CalendarComponent)}
-    {...props}
-  />
+  <FieldArray name={props.name} component={CalendarComponent} {...props} />
 );

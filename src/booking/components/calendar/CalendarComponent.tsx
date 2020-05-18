@@ -15,6 +15,7 @@ import {
   filterObject,
   eventRender,
   transformBookingEvent,
+  handleSchedule,
 } from '@waldur/booking/utils';
 
 import BookingModal from '../modal/BookingModal';
@@ -93,21 +94,44 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
         },
         arg.jsEvent.timeStamp,
       );
+
       return props.addEventCb(availabiltyBooking);
+    } else if (props.calendarType === 'edit') {
+      const calendarApi = getApi();
+      const checkEvents = calendarApi.getEvents();
+
+      checkEvents.forEach(function(event) {
+        if (
+          event.rendering !== 'background' &&
+          ((event.start >= arg.start && event.start <= arg.end) ||
+            (event.end >= arg.start && event.end <= arg.end) ||
+            (arg.start >= event.start && arg.start <= event.end) ||
+            (arg.end >= event.start && arg.end <= event.end))
+        ) {
+          return calendarApi.unselect();
+        }
+      });
+
+      const scheduledBooking = handleSchedule(
+        arg,
+        props.availabiltyEvents,
+        config.slotDuration,
+      );
+
+      return props.addEventCb(scheduledBooking);
     }
   };
 
   const calendarMountEffect = () => {
     const cal = new Calendar(elRef.current!, {
       ...defaultOptions,
+      ...props.options,
       eventClick,
       events: props.events,
       forceEventDuration: true,
       allDayMaintainDuration: true,
       editable: props.calendarType !== 'read',
       selectable: props.calendarType !== 'read',
-      selectConstraint:
-        props.calendarType !== 'create' ? 'availableForBooking' : null,
       eventDataTransform: event =>
         transformBookingEvent(event, props.calendarType === 'create'),
     });
@@ -125,15 +149,12 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     const newDate = getNewDate();
 
     const options: OptionsInput = {
-      ...config,
-      defaultTimedEventDuration: config.slotDuration,
-      scrollTime: config.businessHours.startTime,
+      ...props.options,
       slotEventOverlap: props.calendarType === 'create',
       select: handleSelect,
       events: props.events,
-      selectConstraint:
-        props.calendarType !== 'create' ? 'availableForBooking' : null,
-      eventConstraint: props.calendarType !== 'create' ? 'Availability' : null,
+      //selectConstraint: props.calendarType !== 'create' ? 'Availability' : null,
+      //eventConstraint: props.calendarType !== 'create' ? 'Availability' : null,
       eventClick,
       eventDrop: updateEvent,
       eventResize: updateEvent,

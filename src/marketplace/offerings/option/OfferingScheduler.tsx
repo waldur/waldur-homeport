@@ -7,11 +7,9 @@ import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
 
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
 import { CalendarSettings } from '@waldur/booking/components/CalendarSettings';
-import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
-import { BookingProps } from '@waldur/booking/types';
+import { BookingProps, State, ConfigProps } from '@waldur/booking/types';
 import { deleteCalendarBookingEvent } from '@waldur/booking/utils';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { withModal } from '@waldur/modal/withModal';
 
 import './OfferingScheduler.scss';
 
@@ -20,6 +18,7 @@ type OfferingSchedulerProps = TranslateProps &
     setModalProps: (event) => void;
     openModal: (cb) => void;
     schedules: BookingProps[];
+    config: ConfigProps;
   };
 
 export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
@@ -41,6 +40,10 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
         removeEventCb={oldID =>
           deleteCalendarBookingEvent(props.fields, { id: oldID })
         }
+        options={{
+          height: 'auto',
+          ...props.config,
+        }}
       />
     </Col>
   </div>
@@ -48,12 +51,9 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
 
 const mapStateToProps = state => ({
   schedules: formValueSelector('marketplaceOfferingCreate')(state, 'schedules'),
+  config: state.bookings.config as State,
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  withTranslation,
-  withModal(CalendarEventModal),
-);
+const enhance = compose(connect(mapStateToProps), withTranslation);
 
 export const OfferingScheduler = enhance(PureOfferingScheduler);
