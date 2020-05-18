@@ -29,7 +29,7 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = props => (
     )}
     <OfferingHeader offering={props.offering} />
     <Row>
-      <Col lg={12}>
+      <Col lg={12} style={{ overflow: 'auto' }}>
         <OfferingTabsComponent tabs={props.tabs} />
       </Col>
     </Row>
