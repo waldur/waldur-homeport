@@ -1,26 +1,16 @@
-import { EventInput } from '@fullcalendar/core';
+import { OptionsInput } from '@fullcalendar/core';
 import moment from 'moment-timezone';
 import * as React from 'react';
-import { FieldArray, WrappedFieldArrayProps } from 'redux-form';
+import { FieldArray } from 'redux-form';
 
-import { CalendarComponent as Cal } from '@waldur/booking/components/calendar/CalendarComponent';
-import { BookingProps } from '@waldur/booking/types';
+import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
+import { EditableCalendarProps } from '@waldur/booking/types';
 import {
   deleteCalendarBookingEvent,
   createAvailabilitySlots,
 } from '@waldur/booking/utils';
 
-type CalendarComponentProps = WrappedFieldArrayProps<any> & {
-  excludedEvents?: BookingProps[];
-  setModalProps: (event) => void;
-  openModal: (cb) => void;
-  schedules: EventInput[];
-};
-
-function isStartInArr(array, value) {
-  return !!array.find(item => moment(item.start).isSame(moment(value)));
-}
-export class CalendarComponent extends React.Component<CalendarComponentProps> {
+export class EditableCalendar extends React.Component<EditableCalendarProps> {
   getValidRange = events => ({
     start: Math.min(...events.map(event => moment(event.start).valueOf())),
     end: Math.max(...events.map(event => moment(event.end).valueOf())),
@@ -28,18 +18,43 @@ export class CalendarComponent extends React.Component<CalendarComponentProps> {
 
   getCalendarConfig = () => {
     const eventWithConfig = this.props.excludedEvents.find(
-      ({ extendedProps }) =>
-        extendedProps.type === 'Availability' && extendedProps.config,
+      ({ extendedProps: { type, config } }) =>
+        type === 'Availability' && config,
     );
+    const validRange = this.getValidRange(this.props.excludedEvents);
     const {
       extendedProps: { config },
     } = eventWithConfig;
+    const startTime = moment(config.businessHours.startTime, 'h:mm:ss');
+    const endTime = moment(config.businessHours.endTime, 'h:mm:ss');
     return {
       ...config,
+      height: 'auto',
       defaultTimedEventDuration: config.slotDuration,
       minTime: config.businessHours.startTime,
       maxTime: config.businessHours.endTime,
-    };
+      nextDayThreshold: moment
+        .duration(endTime.diff(startTime))
+        .asMilliseconds(),
+      validRange: {
+        start: moment(validRange.start)
+          .startOf('month')
+          .format(),
+        end: moment(validRange.end)
+          .endOf('month')
+          .format(),
+      },
+      dayRender: ({ date, el }) => {
+        if (
+          !moment(date).isBetween(
+            moment(validRange.start).format('YYYY-MM-DD'),
+            moment(validRange.end).format('YYYY-MM-DD'),
+          )
+        ) {
+          el.classList.add('fc-disabled-day');
+        }
+      },
+    } as OptionsInput;
   };
 
   getAvailabilitySlots = events => {
@@ -48,7 +63,23 @@ export class CalendarComponent extends React.Component<CalendarComponentProps> {
       this.props.excludedEvents,
       moment.duration(slotDuration),
     );
-    return slots.filter(slot => !isStartInArr(events, slot.start));
+
+    const filteredList = slots.filter(
+      slot =>
+        !events.find(item => {
+          const slotStart = moment(slot.start);
+          const slotEnd = moment(slot.end);
+          //debugger
+          const asd = slotStart.isBetween(item.start, item.end);
+          return (
+            moment(item.start).isSame(slotStart) ||
+            asd ||
+            slotEnd.isSame(item.end)
+          );
+        }),
+    );
+
+    return filteredList;
   };
 
   render() {
@@ -57,24 +88,21 @@ export class CalendarComponent extends React.Component<CalendarComponentProps> {
     if (!events) {
       return null;
     }
-
     return (
-      <div>
-        <Cal
-          events={[...excludedEvents, ...events]}
-          options={this.getCalendarConfig()}
-          availabiltyEvents={this.getAvailabilitySlots(events)}
-          calendarType="edit"
-          addEventCb={fields.push}
-          removeEventCb={oldID =>
-            deleteCalendarBookingEvent(fields, { id: oldID })
-          }
-        />
-      </div>
+      <CalendarComponent
+        calendarType="edit"
+        events={[...excludedEvents, ...events]}
+        options={this.getCalendarConfig()}
+        availabiltySlots={this.getAvailabilitySlots(events)}
+        addEventCb={fields.push}
+        removeEventCb={oldID =>
+          deleteCalendarBookingEvent(fields, { id: oldID })
+        }
+      />
     );
   }
 }
 
 export const CalendarField = props => (
-  <FieldArray name={props.name} component={CalendarComponent} {...props} />
+  <FieldArray name={props.name} component={EditableCalendar} {...props} />
 );

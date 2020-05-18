@@ -42,5 +42,6 @@ export const defaultOptions: OptionsInput = {
       eventLimit: 3,
     },
   },
+  fixedWeekCount: false,
   slotEventOverlap: false,
 };

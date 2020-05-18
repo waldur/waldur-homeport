@@ -1,4 +1,5 @@
 import { EventInput, EventApi } from '@fullcalendar/core';
+import classNames from 'classnames';
 import * as moment from 'moment';
 
 import { randomId } from '@waldur/core/fixtures';
@@ -121,14 +122,19 @@ export const createBooking = (
   extendedProps,
 });
 
-export const transformBookingEvent = (event, showAvailability = false) => {
+export const transformBookingEvent = (
+  event,
+  showAvailability = false,
+  isHovered?,
+) => {
   if (event === undefined) {
     return false;
   }
   if (event.extendedProps && event.extendedProps.type === 'Availability') {
     event.rendering = showAvailability ? undefined : 'background';
     event.classNames = showAvailability ? 'booking booking-Availability' : '';
-    //event.overlap = true;
+    event.groupId = 'Availability';
+    event.overlap = true;
   } else if (
     event.extendedProps &&
     event.extendedProps.type === 'availableForBooking'
@@ -139,10 +145,14 @@ export const transformBookingEvent = (event, showAvailability = false) => {
     event.allDay = false;
   } else {
     //event.overlap = false;
-    event.constraint = 'availableForBooking';
-    event.classNames = event.state!
-      ? 'booking booking-' + event.state
-      : 'booking booking-Schedule';
+    event.constraint = 'Availability'; // 'availableForBooking';
+    event.classNames = classNames(
+      'booking',
+      { isHovered: isHovered === event.id },
+      event.state
+        ? 'booking booking-' + event.state
+        : 'booking booking-Schedule',
+    );
   }
 
   return event;
@@ -167,6 +177,12 @@ const getNextSlot = (slots, selectedValue) =>
     .sort(time => time.valueOf())
     .find(next => next.isAfter(moment(selectedValue)));
 
+const getSlotEnd = (slots, selectedValue) =>
+  slots
+    .map(slot => moment(slot.end))
+    .sort(time => time.valueOf())
+    .find(next => moment(selectedValue).isSameOrBefore(next));
+
 export const handleSchedule = (arg, availabilitySlotsList, slotDuration?) => {
   const diff = moment(arg.end).diff(moment(arg.start));
   const { hours, minutes } = moment(slotDuration, 'HH:mm:ss').toObject();
@@ -187,14 +203,17 @@ export const handleSchedule = (arg, availabilitySlotsList, slotDuration?) => {
   if (arg.view.type === 'dayGridMonth') {
     if (diff > 86400000 /* one day in milliseconds */) {
       eventData.start = getNextSlot(availabilitySlotsList, arg.start).format();
-      eventData.end = getNextSlot(
+      eventData.end = getSlotEnd(
         availabilitySlotsList,
         moment(arg.end).subtract(1, 'd'),
       ).format();
     } else {
       const nextStart = getNextSlot(availabilitySlotsList, arg.start);
       eventData.start = nextStart.format();
-      eventData.end = nextStart.clone().add(setDuration).format;
+      eventData.end = nextStart
+        .clone()
+        .add(setDuration)
+        .format();
     }
 
     return eventData;

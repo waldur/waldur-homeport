@@ -1,14 +1,17 @@
-import { Calendar, OptionsInput, EventInput } from '@fullcalendar/core';
+import { Calendar, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment-timezone';
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/list/main.css';
 import '@fullcalendar/timegrid/main.css';
 
-import { BookingProps, State } from '@waldur/booking/types';
+import {
+  BookingProps,
+  State,
+  CalendarComponentProps,
+} from '@waldur/booking/types';
 import {
   createBooking,
   keysOf,
@@ -21,20 +24,9 @@ import {
 import BookingModal from '../modal/BookingModal';
 
 import { defaultOptions } from './defaultOptions';
-
 import './Calendar.scss';
 
 export const getCalendarState = (state): State => state.bookings;
-
-export interface CalendarComponentProps {
-  calendarType: 'create' | 'edit' | 'read';
-  events: BookingProps[];
-
-  availabiltyEvents?: EventInput[];
-  options?: OptionsInput;
-  addEventCb?: (event: BookingProps) => any;
-  removeEventCb?: (id: BookingProps['id']) => any;
-}
 
 export const CalendarComponent = (props: CalendarComponentProps) => {
   const elRef = React.useRef<HTMLDivElement>(null);
@@ -46,8 +38,6 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     el: null,
     event: null,
   });
-
-  const { config } = useSelector(getCalendarState);
 
   const getApi = (): Calendar => calendarRef.current!;
 
@@ -86,11 +76,15 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
 
   const handleSelect = arg => {
     if (props.calendarType === 'create') {
+      const { weekends, slotDuration, businessHours } = props.options;
       const availabiltyBooking = createBooking(
         {
           ...arg,
           allDay: arg.view.type === 'dayGridMonth',
-          extendedProps: { config, type: 'Availability' },
+          extendedProps: {
+            config: { weekends, slotDuration, businessHours },
+            type: 'Availability',
+          },
         },
         arg.jsEvent.timeStamp,
       );
@@ -114,8 +108,8 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
 
       const scheduledBooking = handleSchedule(
         arg,
-        props.availabiltyEvents,
-        config.slotDuration,
+        props.availabiltySlots,
+        props.options.slotDuration,
       );
 
       return props.addEventCb(scheduledBooking);
@@ -153,8 +147,12 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       slotEventOverlap: props.calendarType === 'create',
       select: handleSelect,
       events: props.events,
-      //selectConstraint: props.calendarType !== 'create' ? 'Availability' : null,
-      //eventConstraint: props.calendarType !== 'create' ? 'Availability' : null,
+      selectConstraint: props.calendarType !== 'create' ? 'Availability' : null,
+      eventConstraint:
+        props.calendarType !== 'create' ? props.availabiltySlots : null,
+      eventOverlap: event =>
+        event.rendering === 'background' &&
+        event.extendedProps.type === 'Availability',
       eventClick,
       eventDrop: updateEvent,
       eventResize: updateEvent,
@@ -195,8 +193,8 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
 
   React.useEffect(calendarUpdateEffect, [
     props.events,
+    props.options,
     calendarRef,
-    config,
     modal,
   ]);
 

@@ -1,5 +1,6 @@
-import { EventInput, EventApi } from '@fullcalendar/core';
+import { EventInput, EventApi, OptionsInput } from '@fullcalendar/core';
 import { ReactElement } from 'react';
+import { WrappedFieldArrayProps } from 'redux-form';
 
 export interface State {
   schedules: BookingProps[];
@@ -8,13 +9,13 @@ export interface State {
 }
 
 export interface ConfigProps {
-  weekends?: boolean;
-  businessHours?: {
+  weekends: boolean;
+  businessHours: {
     startTime: string;
     endTime: string;
     daysOfWeek: number[];
   };
-  slotDuration?: string;
+  slotDuration: string;
   minTime?: string;
   maxTime?: string;
   hiddenDays?: number[];
@@ -27,6 +28,27 @@ export interface BookingProps extends EventInput {
     config?: ConfigProps;
   };
 }
+
+export interface AvailabilitySlot {
+  start: Date | string;
+  end: Date | string;
+}
+export interface CalendarComponentProps {
+  calendarType: 'create' | 'edit' | 'read';
+  events: BookingProps[];
+
+  availabiltySlots?: AvailabilitySlot[];
+  options?: OptionsInput;
+  addEventCb?: (event: BookingProps) => any;
+  removeEventCb?: (id: BookingProps['id']) => any;
+}
+
+export type EditableCalendarProps = WrappedFieldArrayProps<any> & {
+  excludedEvents?: BookingProps[];
+  setModalProps: (event) => void;
+  openModal: (cb) => void;
+  schedules: EventInput[];
+};
 
 export interface TimeSelectProps {
   onChange: (value) => void;
