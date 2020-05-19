@@ -35,10 +35,13 @@ export class invitationUtilsService {
      - invitation token is set in invitation service;
      - user has filled all mandatory fields;
      */
-    this.$rootScope.$on('$stateChangeSuccess', () => {
-      if (this.$auth.isAuthenticated()) {
+    this.$rootScope.$on('$stateChangeSuccess', (_, toState) => {
+      if (
+        this.$auth.isAuthenticated() &&
+        toState.name !== 'marketplace-public-offering.details'
+      ) {
         this.usersService.getCurrentUser().then(user => {
-          let token = this.invitationService.getInvitationToken();
+          const token = this.invitationService.getInvitationToken();
           if (token && !this.usersService.mandatoryFieldsMissing(user)) {
             this.confirmInvitation(token)
               .then(replaceEmail => {
