@@ -612,7 +612,7 @@ msgid "Attaching"
 msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
-#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/IssueCreateForm.tsx
 msgid "Attachments"
 msgstr ""
 
@@ -906,7 +906,6 @@ msgstr ""
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/comments/IssueCommentsForm.tsx
-#: src/issues/create/issue-create-dialog.html
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/openstack/openstack-volume/snapshot-create.html
@@ -1301,7 +1300,7 @@ msgstr ""
 #: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/freeipa/freeipa-account-create.html
-#: src/issues/create/issue-create-dialog.js
+#: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
@@ -1382,7 +1381,7 @@ msgstr ""
 msgid "Create project"
 msgstr ""
 
-#: src/issues/create/issue-create-dialog.js
+#: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/jira/issue/IssueCreateDialog.tsx
@@ -4019,7 +4018,7 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/IssueDetails.tsx
-#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/IssueHeader.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/list/IssuesList.tsx
@@ -4683,7 +4682,7 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/IssueDetails.tsx
-#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/IssueHeader.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/jira/issue/JiraIssueSummary.tsx
@@ -5229,7 +5228,7 @@ msgstr ""
 msgid "Request demo"
 msgstr ""
 
-#: src/issues/create/issue-create-dialog.js
+#: src/issues/create/IssueCreateDialog.tsx
 msgid "Request description"
 msgstr ""
 
@@ -5267,7 +5266,7 @@ msgstr ""
 msgid "Request removal"
 msgstr ""
 
-#: src/issues/create/issue-create-dialog.js
+#: src/issues/create/IssueCreateDialog.tsx
 msgid "Request title"
 msgstr ""
 
@@ -5280,7 +5279,8 @@ msgid "Request to {action} has been accepted."
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
-#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/IssueCreateForm.tsx
+#: src/issues/create/IssueHeader.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/jira/issue/IssueCreateDialog.tsx
@@ -5291,8 +5291,8 @@ msgstr ""
 msgid "Request {key} has been created."
 msgstr ""
 
-#: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.js
+#: src/issues/create/utils.ts
 msgid "Request {requestId} has been created."
 msgstr ""
 
@@ -5346,7 +5346,7 @@ msgid "Resolution SLA"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
-#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/IssueHeader.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -5830,8 +5830,8 @@ msgstr ""
 msgid "Select instance..."
 msgstr ""
 
-#: src/issues/create/issue-create-dialog.html
-msgid "Select issue template"
+#: src/issues/create/IssueCreateForm.tsx
+msgid "Select issue template..."
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
@@ -5872,6 +5872,10 @@ msgstr ""
 msgid "Select request type"
 msgstr ""
 
+#: src/issues/create/IssueCreateForm.tsx
+msgid "Select request type..."
+msgstr ""
+
 #: src/user/support/UserFilter.tsx
 msgid "Select role"
 msgstr ""
@@ -5890,7 +5894,7 @@ msgstr ""
 msgid "Select size..."
 msgstr ""
 
-#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/FileField.tsx
 msgid "Select some files"
 msgstr ""
 
@@ -6522,7 +6526,7 @@ msgstr ""
 msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
 msgstr ""
 
-#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/IssueCreateForm.tsx
 #: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -6530,7 +6534,7 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: src/issues/create/issue-create-dialog.html
+#: src/issues/create/IssueCreateForm.tsx
 msgid "Template files"
 msgstr ""
 
@@ -6814,7 +6818,7 @@ msgid "Timezone"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/issues/create/issue-create-dialog.js
+#: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
 #: src/issues/list/IssuesList.tsx
@@ -7041,6 +7045,10 @@ msgstr ""
 msgid "Unable to create payment profile."
 msgstr ""
 
+#: src/issues/create/utils.ts
+msgid "Unable to create request."
+msgstr ""
+
 #: src/user/support/effects.ts
 msgid "Unable to deactivate user."
 msgstr ""
@@ -7176,6 +7184,7 @@ msgstr ""
 #: src/customer/popover/CustomerPopover.tsx
 #: src/invoices/details/BillingDetails.tsx
 #: src/issues/IssueDetails.tsx
+#: src/issues/create/IssueCreateForm.tsx
 #: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -8080,7 +8089,6 @@ msgstr ""
 msgid "You cannot manage other organization owner."
 msgstr ""
 
-#: src/issues/create/issue-create-dialog.js
 #: src/issues/create/issue-quick-create.js
 #: src/issues/create/issue-registration.js
 msgid "You did not enter a field."
@@ -8475,6 +8483,10 @@ msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "{name} ({questions_count} questions)"
+msgstr ""
+
+#: src/issues/create/FileField.tsx
+msgid "{name} ({size})"
 msgstr ""
 
 #: src/resource/utils.tsx

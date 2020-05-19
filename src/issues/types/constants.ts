@@ -28,20 +28,21 @@ export const ISSUE_TEXT_CLASSES = {
   SERVICE_REQUEST: 'text-info',
 };
 
-const ISSUE_DESCRIPTIONS = {
-  INCIDENT: translate(
-    'Incident - client issue with service usage or availability (interruptions, degradation of quality).',
-  ),
-  SERVICE_REQUEST: translate(
-    'Service Request - client’s request to modify, add, change or remove partially or completely a particular service.',
-  ),
-  INFORMATIONAL: translate(
-    'Informational - client’s request to get or provide additional information related to a service.',
-  ),
-  CHANGE_REQUEST: translate(
-    'Change request - client’s request to perform a generic modification of data or service.',
-  ),
-};
+const getIssueDescription = issueType =>
+  ({
+    INCIDENT: translate(
+      'Incident - client issue with service usage or availability (interruptions, degradation of quality).',
+    ),
+    SERVICE_REQUEST: translate(
+      'Service Request - client’s request to modify, add, change or remove partially or completely a particular service.',
+    ),
+    INFORMATIONAL: translate(
+      'Informational - client’s request to get or provide additional information related to a service.',
+    ),
+    CHANGE_REQUEST: translate(
+      'Change request - client’s request to perform a generic modification of data or service.',
+    ),
+  }[issueType]);
 
 export const ISSUE_STATUSES = ['Resolved', 'Unresolved', "Won't fix"];
 
@@ -50,7 +51,7 @@ export const ISSUE_TYPE_CHOICES = Object.keys(ISSUE_IDS).map(item => {
     iconClass: ISSUE_ICONS[item],
     textClass: ISSUE_TEXT_CLASSES[item],
     label: ISSUE_IDS[item],
-    description: ISSUE_DESCRIPTIONS[item],
+    description: getIssueDescription(item),
     id: ISSUE_IDS[item],
   };
 });
