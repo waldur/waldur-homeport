@@ -18,8 +18,16 @@ export const PublicOfferingDetails = () => {
     params: { uuid },
   } = useCurrentStateAndParams();
   const state = useAsync(async () => {
-    const offering = await getOffering(uuid);
-    const category = await getCategory(offering.category_uuid);
+    const config = {
+      transformRequest: [
+        (data, headers) => {
+          delete headers.common.Authorization;
+          return data;
+        },
+      ],
+    };
+    const offering = await getOffering(uuid, config);
+    const category = await getCategory(offering.category_uuid, config);
     const tabs = getTabs({ offering, sections: category.sections });
     return { offering, tabs };
   }, [uuid]);
