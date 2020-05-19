@@ -46,10 +46,10 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
       },
       dayRender: ({ date, el }) => {
         if (
-          !moment(date).isBetween(
+          moment(date).isBefore(
             moment(validRange.start).format('YYYY-MM-DD'),
-            moment(validRange.end).format('YYYY-MM-DD'),
-          )
+          ) ||
+          moment(date).isAfter(moment(validRange.end).format('YYYY-MM-DD'))
         ) {
           el.classList.add('fc-disabled-day');
         }

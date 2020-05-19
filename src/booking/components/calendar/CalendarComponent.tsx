@@ -33,6 +33,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
   const calendarRef = React.useRef<Calendar>();
   const oldDate = React.useRef<Date>();
   const oldOptionsRef = React.useRef<OptionsInput>(props.options);
+  const [hovered, setHovered] = React.useState('');
   const [modal, setModal] = React.useState({
     isOpen: false,
     el: null,
@@ -40,6 +41,9 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
   });
 
   const getApi = (): Calendar => calendarRef.current!;
+
+  const isCalType = (type: CalendarComponentProps['calendarType']) =>
+    props.calendarType === type;
 
   const getNewDate = () => {
     const calApi = getApi();
@@ -59,10 +63,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
   const toggleModal = () => setModal({ isOpen: false, el: null, event: null });
 
   const eventClick = ({ el, event }) => {
-    if (
-      props.calendarType !== 'create' &&
-      event.extendedProps.type !== 'Availability'
-    ) {
+    if (event.extendedProps.type !== 'Availability') {
       return setModal({ isOpen: true, el, event });
     }
   };
@@ -75,7 +76,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
   };
 
   const handleSelect = arg => {
-    if (props.calendarType === 'create') {
+    if (isCalType('create')) {
       const { weekends, slotDuration, businessHours } = props.options;
       const availabiltyBooking = createBooking(
         {
@@ -90,7 +91,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       );
 
       return props.addEventCb(availabiltyBooking);
-    } else if (props.calendarType === 'edit') {
+    } else if (isCalType('edit')) {
       const calendarApi = getApi();
       const checkEvents = calendarApi.getEvents();
 
@@ -122,12 +123,10 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       ...props.options,
       eventClick,
       events: props.events,
-      forceEventDuration: true,
-      allDayMaintainDuration: true,
-      editable: props.calendarType !== 'read',
-      selectable: props.calendarType !== 'read',
+      editable: !isCalType('read'),
+      selectable: !isCalType('read'),
       eventDataTransform: event =>
-        transformBookingEvent(event, props.calendarType === 'create'),
+        transformBookingEvent(event, isCalType('create')),
     });
 
     calendarRef.current = cal;
@@ -144,20 +143,22 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
 
     const options: OptionsInput = {
       ...props.options,
-      slotEventOverlap: props.calendarType === 'create',
-      select: handleSelect,
+      slotEventOverlap: isCalType('create'),
+      selectConstraint: !isCalType('create') ? 'Availability' : null,
+      eventConstraint: !isCalType('create') ? 'Availability' : null,
       events: props.events,
-      selectConstraint: props.calendarType !== 'create' ? 'Availability' : null,
-      eventConstraint:
-        props.calendarType !== 'create' ? props.availabiltySlots : null,
-      eventOverlap: event =>
-        event.rendering === 'background' &&
-        event.extendedProps.type === 'Availability',
       eventClick,
+      select: handleSelect,
       eventDrop: updateEvent,
       eventResize: updateEvent,
-      eventRender,
+      eventRender: e => eventRender(e, hovered),
     };
+
+    cal.on(
+      'eventMouseEnter',
+      ({ event: { id } }) => hovered !== id && setHovered(id),
+    );
+    cal.on('eventMouseLeave', () => setHovered(''));
 
     if (
       newDate != null &&
@@ -196,6 +197,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     props.options,
     calendarRef,
     modal,
+    hovered,
   ]);
 
   return (
