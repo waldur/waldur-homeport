@@ -15,8 +15,8 @@ jest.mock('@waldur/core/Link', () => {
 describe('SlurmAllocationSummary', () => {
   it('renders quota usage', () => {
     const wrapper = renderSummary({ resource });
-    expect(getField(wrapper, 'CPU')).toBe('2.00 H of 40.00 H');
-    expect(getField(wrapper, 'GPU')).toBe('0.00 H of ∞');
+    expect(getField(wrapper, 'CPU')).toBe('2.00h of 40.00h');
+    expect(getField(wrapper, 'GPU')).toBe('0.00h of ∞');
     expect(getField(wrapper, 'RAM')).toBe('10 GB of 20 GB');
   });
 
