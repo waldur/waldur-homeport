@@ -11,6 +11,33 @@ import {
   IssueResponse,
 } from './types';
 
+export const sendIssueCreateRequest = async (
+  payload: IssueRequestPayload,
+  dispatch,
+  files?: FileList,
+) => {
+  try {
+    const response = await post<IssueResponse>('/support-issues/', payload);
+    const issue = response.data;
+    if (files) {
+      await Promise.all(
+        Array.from(files).map(file => putAttachment(issue.url, file)),
+      );
+    }
+    dispatch(
+      showSuccess(
+        translate('Request {requestId} has been created.', {
+          requestId: issue.key,
+        }),
+      ),
+    );
+    dispatch(stateGo('support.detail', { uuid: issue.uuid }));
+    dispatch(closeModalDialog());
+  } catch (e) {
+    dispatch(showError(translate('Unable to create request.')));
+  }
+};
+
 export const createIssue = async (
   formData: IssueFormData,
   issue: CreateIssueProps,
@@ -38,22 +65,5 @@ export const createIssue = async (
   if (formData.issueTemplate) {
     payload.template = formData.issueTemplate.url;
   }
-  try {
-    const response = await post<IssueResponse>('/support-issues/', payload);
-    const issue = response.data;
-    await Promise.all(
-      Array.from(formData.files).map(file => putAttachment(issue.url, file)),
-    );
-    dispatch(
-      showSuccess(
-        translate('Request {requestId} has been created.', {
-          requestId: issue.key,
-        }),
-      ),
-    );
-    dispatch(stateGo('support.detail', { uuid: issue.uuid }));
-    dispatch(closeModalDialog());
-  } catch (e) {
-    dispatch(showError(translate('Unable to create request.')));
-  }
+  await sendIssueCreateRequest(payload, dispatch, formData.files);
 };
