@@ -6452,7 +6452,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
 #: src/openstack/openstack-volume/actions/PullAction.ts
 #: src/resource/actions/base.ts
-#: src/slurm/actions.ts
 #: src/vmware/actions.ts
 msgid "Synchronise"
 msgstr ""
