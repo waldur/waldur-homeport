@@ -3398,6 +3398,7 @@ msgstr ""
 msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/sidebar.js
@@ -4103,6 +4104,7 @@ msgstr ""
 #: src/customer/workspace/CustomerWorkspace.tsx
 #: src/invoices/details/BillingDetails.tsx
 #: src/marketplace/details/utils.ts
+#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
@@ -4873,6 +4875,7 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/routes.ts
@@ -5689,6 +5692,7 @@ msgid "Screenshot:"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/routes.ts
 msgid "Screenshots"

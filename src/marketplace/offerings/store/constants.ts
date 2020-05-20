@@ -18,6 +18,8 @@ export const ADD_OFFERING_SCREENSHOT =
   'waldur/marketplace/offering/ADD_OFFERING_SCREENSHOT';
 export const REMOVE_OFFERING_SCREENSHOT =
   'waldur/marketplace/offering/REMOVE_OFFERING_SCREENSHOT';
+export const IS_ADDING_OFFERING_SCREENSHOT =
+  'waldur/marketplace/offering/IS_ADDING_OFFERING_SCREENSHOT';
 
 export const LOAD_DATA_START = 'waldur/marketplace/offering/LOAD_DATA_START';
 export const LOAD_DATA_SUCCESS =
