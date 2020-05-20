@@ -13,12 +13,39 @@ import { OfferingHeader } from '@waldur/marketplace/offerings/details/OfferingHe
 import { OfferingScreenshotsList } from '@waldur/marketplace/offerings/OfferingScreenshotsList';
 import { loadOfferingStart } from '@waldur/marketplace/offerings/store/actions';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
+import { Offering } from '@waldur/marketplace/types';
 
-const setHeaderAndBreadcrumbsTitle = (name: string) => {
+const setHeaderAndBreadcrumbsTitle = (offering: Offering) => {
+  const $timeout = ngInjector.get('$timeout');
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  BreadcrumbsService.activeItem = name;
+  const titleService = ngInjector.get('titleService');
 
-  ngInjector.get('titleService').setTitle(name);
+  $timeout(() => {
+    BreadcrumbsService.activeItem = translate('Screenshots');
+    BreadcrumbsService.items = [
+      {
+        label: translate('Organization workspace'),
+        state: 'organization.details',
+      },
+      offering.shared
+        ? {
+            label: translate('Public offerings'),
+            state: 'marketplace-vendor-offerings',
+          }
+        : {
+            label: translate('My offerings'),
+            state: 'marketplace-my-offerings',
+          },
+      {
+        label: offering.name,
+      },
+    ];
+    titleService.setTitle(
+      translate('Offering screenshots ({name})', {
+        name: offering.name,
+      }),
+    );
+  });
 };
 
 let OfferingScreenshotsContainer = props => {
@@ -33,12 +60,8 @@ let OfferingScreenshotsContainer = props => {
   }, [offering_uuid]);
 
   useEffect(() => {
-    if (props.offering.name) {
-      setHeaderAndBreadcrumbsTitle(
-        translate(`Offering screenshots ({name})`, {
-          name: props.offering.name,
-        }),
-      );
+    if (props.offering) {
+      setHeaderAndBreadcrumbsTitle(props.offering);
     }
   }, [props.offering]);
 
