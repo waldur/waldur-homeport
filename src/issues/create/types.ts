@@ -4,6 +4,10 @@ import { Customer, Project } from '@waldur/workspace/types';
 
 import { IssueTemplate, IssueTemplateAttachment } from '../api';
 
+export interface Priority {
+  name: string;
+}
+
 export interface IssueOptions {
   title: string;
   hideTitle: boolean;
@@ -46,11 +50,14 @@ export interface IssueRequestPayload {
   type: string;
   summary: string;
   description: string;
-  is_reported_manually: boolean;
+  is_reported_manually?: boolean;
   customer?: string;
   project?: string;
   resource?: string;
   template?: string;
+  caller?: string;
+  assignee?: string;
+  priority?: string;
 }
 
 export interface IssueResponse {

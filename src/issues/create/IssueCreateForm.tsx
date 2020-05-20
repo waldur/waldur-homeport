@@ -1,12 +1,10 @@
 import * as React from 'react';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ModalBody from 'react-bootstrap/lib/ModalBody';
 import ModalFooter from 'react-bootstrap/lib/ModalFooter';
 import ModalHeader from 'react-bootstrap/lib/ModalHeader';
 import ModalTitle from 'react-bootstrap/lib/ModalTitle';
-import Select from 'react-select';
 import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
@@ -15,24 +13,16 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { AttachmentsList } from './AttachmentsList';
-import { FORM_ID } from './constants';
+import { ISSUE_CREATION_FORM_ID } from './constants';
 import { FileField } from './FileField';
+import { InputField } from './InputField';
 import { IssueHeader } from './IssueHeader';
-import { IssueTypeRenderer } from './IssueTypeRenderer';
+import { SelectField } from './SelectField';
+import { TypeField } from './TypeField';
 import { IssueFormData, OwnProps } from './types';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SelectField = ({ input: { value, onChange }, meta, ...props }) => (
-  <Select value={value} onChange={onChange} {...props} />
-);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const InputField = ({ input, meta, ...props }) => (
-  <FormControl {...input} {...props} />
-);
-
 export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
-  form: FORM_ID,
+  form: ISSUE_CREATION_FORM_ID,
 })(
   ({
     issue,
@@ -60,18 +50,7 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
             {!issue.type && (
               <FormGroup>
                 <ControlLabel>{translate('Request type')}</ControlLabel>
-                <Field
-                  name="type"
-                  component={SelectField}
-                  placeholder={translate('Select request type...')}
-                  options={issueTypes}
-                  disabled={submitting}
-                  valueKey="id"
-                  labelKey="label"
-                  optionRenderer={IssueTypeRenderer}
-                  valueRenderer={IssueTypeRenderer}
-                  clearable={false}
-                />
+                <TypeField issueTypes={issueTypes} disabled={submitting} />
               </FormGroup>
             )}
             {filteredTemplates.length > 0 && (

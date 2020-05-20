@@ -12,6 +12,7 @@ import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 import { IssueDetailsContainer } from './IssueDetailsContainer';
 import { checkPermission } from './utils';
 import { IssuesDashboard } from './workspace/IssuesDashboard';
+import { IssuesHelpdesk } from './workspace/IssuesHelpdesk';
 import { SupportWorkspace } from './workspace/SupportWorkspace';
 
 export const states: StateDeclaration[] = [
@@ -41,7 +42,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.helpdesk',
     url: 'helpdesk/',
-    template: '<issues-helpdesk></issues-helpdesk>',
+    component: withStore(IssuesHelpdesk),
     data: {
       pageTitle: gettext('Helpdesk dashboard'),
       feature: 'support',

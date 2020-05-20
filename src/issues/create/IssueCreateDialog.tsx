@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 import { formValueSelector, change } from 'redux-form';
 
-import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getTemplates, IssueTemplate } from '@waldur/issues/api';
-import { ISSUE_IDS, ISSUE_TYPE_CHOICES } from '@waldur/issues/types/constants';
+import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { FORM_ID } from './constants';
+import { getShowAllTypes, getIssueTypes } from '../types/utils';
+
+import { ISSUE_CREATION_FORM_ID } from './constants';
 import { IssueCreateForm } from './IssueCreateForm';
 import { IssueOptions, CreateIssueDialogProps, IssueTypeOption } from './types';
 import { createIssue } from './utils';
@@ -24,7 +25,7 @@ const getDefaultOptions = (): IssueOptions => ({
   submitTitle: translate('Create'),
 });
 
-const selector = formValueSelector(FORM_ID);
+const selector = formValueSelector(ISSUE_CREATION_FORM_ID);
 
 export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
   const options = React.useMemo(
@@ -32,14 +33,11 @@ export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
     [resolve.options],
   );
   const user = useSelector(getUser);
-  const showAllTypes =
-    !ENV.concealChangeRequest || user.is_staff || user.is_support;
+  const showAllTypes = getShowAllTypes(user);
   const defaultType = showAllTypes
     ? ISSUE_IDS.CHANGE_REQUEST
     : ISSUE_IDS.INFORMATIONAL;
-  const issueTypes = showAllTypes
-    ? ISSUE_TYPE_CHOICES
-    : ISSUE_TYPE_CHOICES.filter(x => x.id !== ISSUE_IDS.CHANGE_REQUEST);
+  const issueTypes = getIssueTypes(showAllTypes);
   const defaultTypeOption = resolve.issue.type
     ? issueTypes.find(t => t.id === resolve.issue.type)
     : issueTypes.find(t => t.id === defaultType);
@@ -71,16 +69,22 @@ export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
 
   React.useEffect(() => {
     if (issueTemplate) {
-      dispatch(change(FORM_ID, 'summary', issueTemplate.name));
-      dispatch(change(FORM_ID, 'description', issueTemplate.description));
+      dispatch(change(ISSUE_CREATION_FORM_ID, 'summary', issueTemplate.name));
+      dispatch(
+        change(
+          ISSUE_CREATION_FORM_ID,
+          'description',
+          issueTemplate.description,
+        ),
+      );
     }
   }, [issueTemplate, dispatch]);
 
   React.useEffect(() => {
     if (filteredTemplates.length == 0 && issueTemplate) {
-      dispatch(change(FORM_ID, 'template', undefined));
-      dispatch(change(FORM_ID, 'summary', ''));
-      dispatch(change(FORM_ID, 'description', ''));
+      dispatch(change(ISSUE_CREATION_FORM_ID, 'template', undefined));
+      dispatch(change(ISSUE_CREATION_FORM_ID, 'summary', ''));
+      dispatch(change(ISSUE_CREATION_FORM_ID, 'description', ''));
     }
   }, [filteredTemplates, issueTemplate, dispatch]);
 

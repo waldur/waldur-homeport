@@ -374,8 +374,8 @@ msgid "Admin username"
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
+#: src/issues/create/ResourceGroup.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 msgid "Affected resource"
 msgstr ""
 
@@ -588,7 +588,7 @@ msgid "Article code"
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
-#: src/issues/create/issue-registration.html
+#: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 msgid "Assigned to"
@@ -892,7 +892,7 @@ msgid "CSV"
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
-#: src/issues/create/issue-registration.html
+#: src/issues/create/CallerGroup.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Caller"
 msgstr ""
@@ -1382,8 +1382,8 @@ msgid "Create project"
 msgstr ""
 
 #: src/issues/create/IssueCreateDialog.tsx
+#: src/issues/create/IssueRegistration.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueCreateButton.tsx
 msgid "Create request"
@@ -1650,8 +1650,8 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/issues/IssueDetails.tsx
+#: src/issues/create/DescriptionGroup.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortList.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
@@ -1728,7 +1728,8 @@ msgstr ""
 
 #: src/customer/team/UserDetailsButton.tsx
 #: src/events/EventDetailsButton.tsx
-#: src/issues/create/issue-registration.html
+#: src/issues/create/CallerGroup.tsx
+#: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
@@ -2240,7 +2241,9 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: src/issues/create/issue-registration.html
+#: src/issues/create/CallerGroup.tsx
+#: src/issues/create/OrganizationGroup.tsx
+#: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/category/filters/MobileFilterActions.tsx
 msgid "Filter"
 msgstr ""
@@ -4020,8 +4023,8 @@ msgstr ""
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
+#: src/issues/create/OrganizationGroup.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/StatsTable.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -4655,7 +4658,7 @@ msgid "Print record"
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
-#: src/issues/create/issue-registration.html
+#: src/issues/create/PriorityGroup.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -4685,8 +4688,8 @@ msgstr ""
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
+#: src/issues/create/ProjectGroup.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
@@ -5284,14 +5287,10 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
 #: src/issues/create/IssueHeader.tsx
+#: src/issues/create/TypeGroup.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 #: src/jira/issue/IssueCreateDialog.tsx
 msgid "Request type"
-msgstr ""
-
-#: src/issues/create/issue-registration.js
-msgid "Request {key} has been created."
 msgstr ""
 
 #: src/issues/create/issue-quick-create.js
@@ -5718,7 +5717,7 @@ msgstr ""
 msgid "Script language"
 msgstr ""
 
-#: src/issues/create/issue-registration.html
+#: src/issues/create/SearchButton.tsx
 #: src/navigation/header/MainSearch.tsx
 #: src/table-react/TableQuery.tsx
 msgid "Search"
@@ -5792,8 +5791,8 @@ msgstr ""
 msgid "Select accounting period"
 msgstr ""
 
+#: src/issues/create/ResourceGroup.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 msgid "Select affected resource..."
 msgstr ""
 
@@ -5801,11 +5800,11 @@ msgstr ""
 msgid "Select an option..."
 msgstr ""
 
-#: src/issues/create/issue-registration.html
+#: src/issues/create/AssigneeGroup.tsx
 msgid "Select assignee..."
 msgstr ""
 
-#: src/issues/create/issue-registration.html
+#: src/issues/create/CallerGroup.tsx
 msgid "Select caller..."
 msgstr ""
 
@@ -5847,8 +5846,8 @@ msgid "Select one to go to a customer workspace"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/issues/create/OrganizationGroup.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 msgid "Select organization..."
 msgstr ""
@@ -5857,12 +5856,12 @@ msgstr ""
 msgid "Select plan"
 msgstr ""
 
-#: src/issues/create/issue-registration.html
-msgid "Select priority"
+#: src/issues/create/PriorityGroup.tsx
+msgid "Select priority..."
 msgstr ""
 
+#: src/issues/create/ProjectGroup.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 #: src/marketplace/resources/list/ProjectFilter.tsx
 msgid "Select project..."
 msgstr ""
@@ -5876,7 +5875,7 @@ msgstr ""
 msgid "Select request type"
 msgstr ""
 
-#: src/issues/create/IssueCreateForm.tsx
+#: src/issues/create/TypeField.tsx
 msgid "Select request type..."
 msgstr ""
 
@@ -6822,8 +6821,8 @@ msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/IssueCreateDialog.tsx
+#: src/issues/create/SummaryGroup.tsx
 #: src/issues/create/issue-quick-create.html
-#: src/issues/create/issue-registration.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -7188,6 +7187,7 @@ msgstr ""
 #: src/invoices/details/BillingDetails.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
+#: src/issues/create/IssueRegistration.tsx
 #: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/offerings/create/OfferingCreateDialog.tsx
@@ -8093,7 +8093,6 @@ msgid "You cannot manage other organization owner."
 msgstr ""
 
 #: src/issues/create/issue-quick-create.js
-#: src/issues/create/issue-registration.js
 msgid "You did not enter a field."
 msgstr ""
 
