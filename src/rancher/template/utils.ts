@@ -77,7 +77,7 @@ export const loadData = async (templateUuid: string, clusterUuid: string) => {
     namespace: namespaces ? namespaces[0] : undefined,
     useNewNamespace: namespaces.length === 0,
   };
-  const questions = parseQuestions(version.questions);
+  const questions = version.questions ? parseQuestions(version.questions) : [];
 
   return {
     template,

@@ -6,8 +6,8 @@ import { FormattedMarkdown } from '@waldur/core/FormattedMarkdown';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 
 export const TemplateHeader = props => (
-  <Row>
-    <Col md={3}>
+  <Row className="m-b-lg">
+    <Col md={1}>
       <OfferingLogo src={props.template.icon} />
     </Col>
     <Col md={9}>
