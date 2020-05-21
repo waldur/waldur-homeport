@@ -1,20 +1,21 @@
 import * as React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
 import { InputField } from './InputField';
+import { LayoutWrapper } from './LayoutWrapper';
 
-export const DescriptionGroup = ({ disabled }) => (
-  <FormGroup>
-    <Col sm={3} componentClass={ControlLabel}>
-      {translate('Description')}
-      <span className="text-danger">*</span>
-    </Col>
-    <Col sm={6}>
+export const DescriptionGroup = ({ layout, disabled }) => (
+  <LayoutWrapper
+    layout={layout}
+    header={
+      <>
+        {translate('Description')}
+        <span className="text-danger">*</span>
+      </>
+    }
+    body={
       <Field
         name="description"
         component={InputField}
@@ -22,6 +23,6 @@ export const DescriptionGroup = ({ disabled }) => (
         required={true}
         disabled={disabled}
       />
-    </Col>
-  </FormGroup>
+    }
+  />
 );

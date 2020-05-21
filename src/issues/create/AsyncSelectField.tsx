@@ -1,12 +1,27 @@
 import * as React from 'react';
-import { Async } from 'react-select';
+import Select from 'react-select';
+import useAsync from 'react-use/lib/useAsync';
 
 export const AsyncSelectField = ({
-  input: { value, onChange },
+  input: { value: selectedValue, onChange },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   meta,
-  componentRef,
+  loadOptions,
   ...props
-}: any) => (
-  <Async value={value} onChange={onChange} {...props} ref={componentRef} />
-);
+}: any) => {
+  const [inputValue, setInputValue] = React.useState('');
+  const { loading: isLoading, value: asyncValue } = useAsync(
+    () => loadOptions(inputValue),
+    [inputValue, loadOptions],
+  );
+  return (
+    <Select
+      value={selectedValue}
+      onChange={onChange}
+      options={asyncValue?.options}
+      onInputChange={setInputValue}
+      isLoading={isLoading}
+      {...props}
+    />
+  );
+};

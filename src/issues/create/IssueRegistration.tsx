@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 import { reduxForm } from 'redux-form';
 
@@ -8,10 +8,7 @@ import { getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { BaseResource } from '@waldur/resource/types';
-import { getUser } from '@waldur/workspace/selectors';
 import { User, Customer, Project } from '@waldur/workspace/types';
-
-import { getShowAllTypes, getIssueTypes } from '../types/utils';
 
 import { AssigneeGroup } from './AssigneeGroup';
 import { CallerGroup } from './CallerGroup';
@@ -47,11 +44,6 @@ export const IssueRegistration = reduxForm<IssueFormData, OwnProps>({
   form: ISSUE_REGISTRATION_FORM_ID,
 })(({ onSearch, handleSubmit, submitting }) => {
   const dispatch = useDispatch();
-  const user = useSelector(getUser);
-  const showAllTypes = getShowAllTypes(user);
-  const issueTypes = React.useMemo(() => getIssueTypes(showAllTypes), [
-    showAllTypes,
-  ]);
 
   const createIssue = React.useCallback(
     async (formData: IssueFormData) => {
@@ -97,10 +89,10 @@ export const IssueRegistration = reduxForm<IssueFormData, OwnProps>({
         <div className="form-horizontal">
           <CallerGroup onSearch={onSearch} />
           <OrganizationGroup onSearch={onSearch} />
-          <TypeGroup issueTypes={issueTypes} disabled={submitting} />
+          <TypeGroup layout="horizontal" disabled={submitting} />
           <PriorityGroup priorities={priorities} disabled={submitting} />
-          <SummaryGroup disabled={submitting} />
-          <DescriptionGroup disabled={submitting} />
+          <SummaryGroup layout="horizontal" disabled={submitting} />
+          <DescriptionGroup layout="horizontal" disabled={submitting} />
           <ProjectGroup disabled={submitting} onSearch={onSearch} />
           <ResourceGroup disabled={submitting} />
           <AssigneeGroup disabled={submitting} />

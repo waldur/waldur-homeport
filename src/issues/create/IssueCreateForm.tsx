@@ -5,12 +5,15 @@ import ModalBody from 'react-bootstrap/lib/ModalBody';
 import ModalFooter from 'react-bootstrap/lib/ModalFooter';
 import ModalHeader from 'react-bootstrap/lib/ModalHeader';
 import ModalTitle from 'react-bootstrap/lib/ModalTitle';
+import { AsyncState } from 'react-use/lib/useAsync';
 import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+
+import { IssueTemplate, IssueTemplateAttachment } from '../api';
 
 import { AttachmentsList } from './AttachmentsList';
 import { ISSUE_CREATION_FORM_ID } from './constants';
@@ -19,7 +22,17 @@ import { InputField } from './InputField';
 import { IssueHeader } from './IssueHeader';
 import { SelectField } from './SelectField';
 import { TypeField } from './TypeField';
-import { IssueFormData, OwnProps } from './types';
+import { IssueFormData, CreateIssueProps, IssueOptions } from './types';
+
+interface OwnProps {
+  issue: CreateIssueProps;
+  issueTypes: any;
+  options: IssueOptions;
+  onCreateIssue(formData: IssueFormData): void;
+  templateState: AsyncState<IssueTemplate[]>;
+  filteredTemplates: IssueTemplate[];
+  attachments: IssueTemplateAttachment[];
+}
 
 export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
   form: ISSUE_CREATION_FORM_ID,

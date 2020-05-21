@@ -1,18 +1,19 @@
+import { ISSUE_IDS } from '@waldur/issues/types/constants';
+
 import template from './request-direct-access.html';
 
 class DialogController {
   // @ngInject
-  constructor(features, $uibModal, ISSUE_IDS, ENV) {
+  constructor(features, $uibModal, ENV) {
     this.features = features;
     this.$uibModal = $uibModal;
-    this.ISSUE_IDS = ISSUE_IDS;
     this.ENV = ENV;
   }
 
   $onInit() {
     this.tenant = this.resolve.resource;
     this.supportEmail = this.ENV.supportEmail;
-    let supportEnabled = this.features.isVisible('support');
+    const supportEnabled = this.features.isVisible('support');
 
     if (supportEnabled) {
       this.close();
@@ -20,7 +21,7 @@ class DialogController {
         component: 'issueCreateDialog',
         resolve: {
           issue: () => ({
-            type: this.ISSUE_IDS.SERVICE_REQUEST,
+            type: ISSUE_IDS.SERVICE_REQUEST,
             summary: gettext('Request direct access to OpenStack Tenant'),
             resource: this.tenant,
           }),
