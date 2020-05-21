@@ -1,8 +1,4 @@
-import { AsyncState } from 'react-use/lib/useAsync';
-
 import { Customer, Project } from '@waldur/workspace/types';
-
-import { IssueTemplate, IssueTemplateAttachment } from '../api';
 
 export interface Priority {
   name: string;
@@ -25,16 +21,6 @@ export interface CreateIssueProps {
   project?: Project;
   resource?: any;
   options: Partial<IssueOptions>;
-}
-
-export interface OwnProps {
-  issue: CreateIssueProps;
-  issueTypes: any;
-  options: IssueOptions;
-  onCreateIssue(formData: IssueFormData): void;
-  templateState: AsyncState<IssueTemplate[]>;
-  filteredTemplates: IssueTemplate[];
-  attachments: IssueTemplateAttachment[];
 }
 
 export interface IssueFormData {
@@ -64,13 +50,6 @@ export interface IssueResponse {
   url: string;
   key: string;
   uuid: string;
-}
-
-export interface CreateIssueDialogProps {
-  resolve: {
-    issue: CreateIssueProps;
-    options: IssueOptions;
-  };
 }
 
 export interface IssueTypeOption {

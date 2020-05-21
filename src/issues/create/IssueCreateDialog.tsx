@@ -12,8 +12,21 @@ import { getShowAllTypes, getIssueTypes } from '../types/utils';
 
 import { ISSUE_CREATION_FORM_ID } from './constants';
 import { IssueCreateForm } from './IssueCreateForm';
-import { IssueOptions, CreateIssueDialogProps, IssueTypeOption } from './types';
-import { createIssue } from './utils';
+import {
+  IssueOptions,
+  IssueTypeOption,
+  CreateIssueProps,
+  IssueRequestPayload,
+  IssueFormData,
+} from './types';
+import { sendIssueCreateRequest } from './utils';
+
+interface CreateIssueDialogProps {
+  resolve: {
+    issue: CreateIssueProps;
+    options: IssueOptions;
+  };
+}
 
 const getDefaultOptions = (): IssueOptions => ({
   title: translate('Create request'),
@@ -26,6 +39,36 @@ const getDefaultOptions = (): IssueOptions => ({
 });
 
 const selector = formValueSelector(ISSUE_CREATION_FORM_ID);
+
+const createIssue = async (
+  formData: IssueFormData,
+  issue: CreateIssueProps,
+  dispatch,
+) => {
+  const description = issue.additionalDetails
+    ? `${formData.description}. \n\nRequest details: ${issue.additionalDetails}`
+    : formData.description;
+
+  const payload: IssueRequestPayload = {
+    type: formData.type.id,
+    summary: formData.summary,
+    description,
+    is_reported_manually: true,
+  };
+  if (issue.customer) {
+    payload.customer = issue.customer.url;
+  }
+  if (issue.project) {
+    payload.project = issue.project.url;
+  }
+  if (issue.resource) {
+    payload.resource = issue.resource.url;
+  }
+  if (formData.issueTemplate) {
+    payload.template = formData.issueTemplate.url;
+  }
+  await sendIssueCreateRequest(payload, dispatch, formData.files);
+};
 
 export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
   const options = React.useMemo(

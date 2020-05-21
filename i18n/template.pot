@@ -374,8 +374,8 @@ msgid "Admin username"
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
+#: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
-#: src/issues/create/issue-quick-create.html
 msgid "Affected resource"
 msgstr ""
 
@@ -1091,7 +1091,6 @@ msgid "Client secret"
 msgstr ""
 
 #: src/invoices/events/invoice-events-dialog.html
-#: src/openstack/openstack-tenant/actions/request-custom-flavour.html
 #: src/openstack/openstack-tenant/actions/request-direct-access.html
 #: src/slurm/details/slurm-allocation-details-dialog.html
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -1382,8 +1381,8 @@ msgid "Create project"
 msgstr ""
 
 #: src/issues/create/IssueCreateDialog.tsx
+#: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/IssueRegistration.tsx
-#: src/issues/create/issue-quick-create.html
 #: src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueCreateButton.tsx
 msgid "Create request"
@@ -1651,7 +1650,6 @@ msgstr ""
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/DescriptionGroup.tsx
-#: src/issues/create/issue-quick-create.html
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortList.tsx
 #: src/jira/issue/IssueCreateDialog.tsx
@@ -1675,7 +1673,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -4023,8 +4020,8 @@ msgstr ""
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
+#: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
-#: src/issues/create/issue-quick-create.html
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/StatsTable.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -4456,7 +4453,6 @@ msgstr ""
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/request-custom-flavour.html
 #: src/openstack/openstack-tenant/actions/request-direct-access.html
 msgid "Please note that request should specify tenant and provide a reason."
 msgstr ""
@@ -4465,7 +4461,6 @@ msgstr ""
 msgid "Please note that request should specify user name and provide a reason."
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 msgid "Please provide a reason"
 msgstr ""
@@ -4688,8 +4683,8 @@ msgstr ""
 #: src/invitations/actions/invitation-dialog.html
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
+#: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
-#: src/issues/create/issue-quick-create.html
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
@@ -5222,14 +5217,6 @@ msgstr ""
 msgid "Request an approval"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/request-custom-flavour.js
-msgid "Request custom flavour for OpenStack Tenant"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/request-custom-flavour.html
-msgid "Request custom flavour for {{ $ctrl.tenant.name }}"
-msgstr ""
-
 #: src/marketplace/details/OverviewTab.tsx
 msgid "Request demo"
 msgstr ""
@@ -5288,12 +5275,10 @@ msgstr ""
 #: src/issues/create/IssueCreateForm.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/TypeGroup.tsx
-#: src/issues/create/issue-quick-create.html
 #: src/jira/issue/IssueCreateDialog.tsx
 msgid "Request type"
 msgstr ""
 
-#: src/issues/create/issue-quick-create.js
 #: src/issues/create/utils.ts
 msgid "Request {requestId} has been created."
 msgstr ""
@@ -5791,8 +5776,8 @@ msgstr ""
 msgid "Select accounting period"
 msgstr ""
 
+#: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
-#: src/issues/create/issue-quick-create.html
 msgid "Select affected resource..."
 msgstr ""
 
@@ -5846,8 +5831,8 @@ msgid "Select one to go to a customer workspace"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
-#: src/issues/create/issue-quick-create.html
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 msgid "Select organization..."
 msgstr ""
@@ -5860,8 +5845,8 @@ msgstr ""
 msgid "Select priority..."
 msgstr ""
 
+#: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
-#: src/issues/create/issue-quick-create.html
 #: src/marketplace/resources/list/ProjectFilter.tsx
 msgid "Select project..."
 msgstr ""
@@ -5869,10 +5854,6 @@ msgstr ""
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
-msgstr ""
-
-#: src/issues/types/issue-type-select.html
-msgid "Select request type"
 msgstr ""
 
 #: src/issues/create/TypeField.tsx
@@ -6568,7 +6549,6 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/marketplace.ts
-#: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 msgid "Tenant name"
 msgstr ""
@@ -6822,7 +6802,6 @@ msgstr ""
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/SummaryGroup.tsx
-#: src/issues/create/issue-quick-create.html
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
@@ -6837,10 +6816,6 @@ msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/request-custom-flavour.html
-msgid "To create custom flavour, please send a request to {{ $ctrl.supportEmail }}."
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/request-direct-access.html
@@ -8090,10 +8065,6 @@ msgstr ""
 
 #: src/customer/team/add-team-member.js
 msgid "You cannot manage other organization owner."
-msgstr ""
-
-#: src/issues/create/issue-quick-create.js
-msgid "You did not enter a field."
 msgstr ""
 
 #: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx

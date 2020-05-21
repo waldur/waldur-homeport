@@ -18,5 +18,6 @@ export const TypeField = ({ issueTypes, disabled }) => (
     optionRenderer={IssueTypeRenderer}
     valueRenderer={IssueTypeRenderer}
     clearable={false}
+    required={true}
   />
 );

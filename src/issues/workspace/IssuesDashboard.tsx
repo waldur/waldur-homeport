@@ -3,13 +3,11 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import { isFeatureVisible } from '@waldur/features/connect';
-import { angular2react } from '@waldur/shims/angular2react';
 
+import { IssueQuickCreate } from '../create/IssueQuickCreate';
 import { IssuesShortList } from '../list/IssuesShortList';
 
 import { IssuesActivityStream } from './IssuesActivityStream';
-
-const IssueQuickCreate = angular2react('issueQuickCreate');
 
 export const IssuesDashboard = () => (
   <Row>
