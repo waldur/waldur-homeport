@@ -6,7 +6,6 @@ import useEffectOnce from 'react-use/lib/useEffectOnce';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getIssues } from '../api';
@@ -73,5 +72,3 @@ export const IssuesShortList = () => {
     </div>
   );
 };
-
-export default connectAngularComponent(IssuesShortList);
