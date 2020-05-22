@@ -24,8 +24,8 @@ import {
 } from '../openstack-instance/utils';
 
 const validateSize = (value: number) =>
-  value < 1024 || value > 1024 * 4096
-    ? translate('Size should be between 1 and 4096 GB.')
+  value < 1024 || value > 1024 * 10240
+    ? translate('Size should be between 1 and 10240 GB.')
     : undefined;
 
 const loadData = async settings => {
