@@ -93,7 +93,7 @@
 
 .booking {
   padding: 4px 4px 2px;
-  margin: 6px 3px;
+  margin: 3px 2px;
   border-style: solid;
 
   &.fc-day-grid-event {
@@ -146,17 +146,6 @@
 
   &.isHovered {
     color: #fff;
-  }
-
-  .fc-content {
-    display: flex;
-    flex-direction: column;
-    & .fc-time {
-      font-size: 12px;
-    }
-    & .fc-title {
-      font-size: 11px;
-    }
   }
 }
 
