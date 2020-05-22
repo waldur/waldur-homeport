@@ -1,5 +1,4 @@
 import { EventInput, EventApi } from '@fullcalendar/core';
-import classNames from 'classnames';
 import * as moment from 'moment';
 
 import { randomId } from '@waldur/core/fixtures';
@@ -122,37 +121,32 @@ export const createBooking = (
   extendedProps,
 });
 
-export const transformBookingEvent = (
-  event,
-  showAvailability = false,
-  isHovered?,
-) => {
+export const transformBookingEvent = (event, showAvailability = false) => {
   if (event === undefined) {
     return false;
   }
+
   if (event.extendedProps && event.extendedProps.type === 'Availability') {
     event.rendering = showAvailability ? undefined : 'background';
     event.classNames = showAvailability ? 'booking booking-Availability' : '';
     event.groupId = 'Availability';
     event.overlap = true;
+    event.start = moment(event.start).toDate();
+    event.end = moment(event.end).toDate();
   } else if (
-    event.extendedProps &&
-    event.extendedProps.type === 'availableForBooking'
+    (event.extendedProps &&
+      event.extendedProps.type === 'availableForBooking') ||
+    event.id === 'availableForBooking'
   ) {
     event.groupId = 'availableForBooking';
     event.rendering = 'background';
     event.overlap = true;
     event.allDay = false;
   } else {
-    //event.overlap = false;
-    event.constraint = 'Availability'; // 'availableForBooking';
-    event.classNames = classNames(
-      'booking',
-      { isHovered: isHovered === event.id },
-      event.state
-        ? 'booking booking-' + event.state
-        : 'booking booking-Schedule',
-    );
+    event.constraint = 'availableForBooking';
+    event.classNames = event.state!
+      ? 'booking booking-' + event.state
+      : 'booking booking-Schedule';
   }
 
   return event;
@@ -183,8 +177,12 @@ const getSlotEnd = (slots, selectedValue) =>
     .sort(time => time.valueOf())
     .find(next => moment(selectedValue).isSameOrBefore(next));
 
-export const handleSchedule = (arg, availabilitySlotsList, slotDuration?) => {
-  const diff = moment(arg.end).diff(moment(arg.start));
+export const handleSchedule = (
+  { start, end, view, jsEvent },
+  availabilitySlotsList,
+  slotDuration?,
+) => {
+  const diff = moment(end).diff(moment(start));
   const { hours, minutes } = moment(slotDuration, 'HH:mm:ss').toObject();
   const setDuration = moment.duration({ hours, minutes });
 
@@ -197,18 +195,18 @@ export const handleSchedule = (arg, availabilitySlotsList, slotDuration?) => {
         type: 'Schedule',
       },
     },
-    arg.jsEvent.timeStamp,
+    jsEvent.timeStamp,
   );
 
-  if (arg.view.type === 'dayGridMonth') {
+  if (view.type === 'dayGridMonth') {
     if (diff > 86400000 /* one day in milliseconds */) {
-      eventData.start = getNextSlot(availabilitySlotsList, arg.start).format();
+      eventData.start = getNextSlot(availabilitySlotsList, start).format();
       eventData.end = getSlotEnd(
         availabilitySlotsList,
-        moment(arg.end).subtract(1, 'd'),
+        moment(end).subtract(1, 'd'),
       ).format();
     } else {
-      const nextStart = getNextSlot(availabilitySlotsList, arg.start);
+      const nextStart = getNextSlot(availabilitySlotsList, start);
       eventData.start = nextStart.format();
       eventData.end = nextStart
         .clone()
@@ -220,8 +218,8 @@ export const handleSchedule = (arg, availabilitySlotsList, slotDuration?) => {
   } else {
     return {
       ...eventData,
-      start: arg.start,
-      end: arg.end,
+      start: start,
+      end: end,
     };
   }
 };
@@ -236,7 +234,7 @@ export const createAvailabilityDates = (event: BookingProps) => {
 
   const mStart = moment(event.start);
   const mEnd = moment(event.end);
-  const { slotDuration, businessHours, weekends } = event.extendedProps.config;
+  const { config } = event.extendedProps;
 
   while (mStart.diff(mEnd, 'd')) {
     const curDay =
@@ -244,25 +242,20 @@ export const createAvailabilityDates = (event: BookingProps) => {
     const event: BookingProps = {
       start: mStart
         .clone()
-        .set(getHoursMinutes(businessHours.startTime))
+        .set(getHoursMinutes(config.businessHours.startTime))
         .format(),
       end: mStart
         .clone()
-        .set(getHoursMinutes(businessHours.endTime))
+        .set(getHoursMinutes(config.businessHours.endTime))
         .format(),
       allDay: true,
-      rendering: 'background',
       extendedProps: {
         type: 'Availability',
-        config: {
-          slotDuration,
-          businessHours,
-          weekends,
-        },
+        config,
       },
     };
 
-    if (businessHours.daysOfWeek.includes(curDay)) {
+    if (config.businessHours.daysOfWeek.includes(curDay)) {
       dates.push(event);
     }
 
@@ -271,19 +264,20 @@ export const createAvailabilityDates = (event: BookingProps) => {
   return dates;
 };
 
-export const createAvailabilitySlots = (
-  availabilitiDates,
-  slotDurationMinutes,
-) => {
+export const createAvailabilitySlots = (availabilitiDates, slotDuration) => {
   const slots = [];
 
   availabilitiDates.map(availabilitiDayEvent => {
     const currentDate = moment(availabilitiDayEvent.start);
 
     while (currentDate < moment(availabilitiDayEvent.end)) {
-      const slot = {
+      const slot: EventInput = {
         start: currentDate.format(),
-        end: currentDate.add(slotDurationMinutes).format(),
+        end: currentDate.add(slotDuration).format(),
+        id: 'availableForBooking',
+        groupId: 'availableForBooking',
+        editable: false,
+        rendering: 'background',
       };
       slots.push(slot);
     }
@@ -291,3 +285,28 @@ export const createAvailabilitySlots = (
 
   return slots;
 };
+
+export const bookingMapper = (events, showAvailability = false) =>
+  events.map(event => {
+    if (event.extendedProps && event.extendedProps.type === 'Availability') {
+      event.rendering = showAvailability ? undefined : 'background';
+      event.classNames = showAvailability ? 'booking booking-Availability' : '';
+      event.overlap = true;
+      event.groupId = 'Availability';
+    } else if (
+      (event.extendedProps &&
+        event.extendedProps.type === 'availableForBooking') ||
+      event.id === 'availableForBooking'
+    ) {
+      event.groupId = 'availableForBooking';
+      event.rendering = 'background';
+      event.overlap = true;
+      event.allDay = false;
+    } else {
+      event.classNames = event.state!
+        ? 'booking booking-' + event.state
+        : 'booking booking-Schedule';
+    }
+
+    return event;
+  });
