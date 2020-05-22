@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios';
+
 import {
   get,
   getAll,
@@ -44,7 +46,7 @@ export const getCategoryUsages = (options?: {}) =>
     options,
   );
 
-export const getCategory = (id: string, options?: {}) =>
+export const getCategory = (id: string, options?: AxiosRequestConfig) =>
   getById<Category>('/marketplace-categories/', id, options);
 
 export const getOfferingsList = (params?: {}) =>
@@ -58,8 +60,8 @@ export const getProviderOfferings = (customerUuid: string) =>
 
 export const getPlan = (id: string) => getById<any>('/marketplace-plans/', id);
 
-export const getOffering = (id: string) =>
-  getById<Offering>('/marketplace-offerings/', id);
+export const getOffering = (id: string, options?: AxiosRequestConfig) =>
+  getById<Offering>('/marketplace-offerings/', id, options);
 
 export const createOffering = data =>
   post<Offering>('/marketplace-offerings/', data);

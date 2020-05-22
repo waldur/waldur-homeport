@@ -2,12 +2,12 @@ import { getAll, getList } from '@waldur/core/api';
 
 import { Issue } from './list/types';
 
-interface IssueTemplateAttachment {
+export interface IssueTemplateAttachment {
   name: string;
   field: string;
 }
 
-interface IssueTemplate {
+export interface IssueTemplate {
   name: string;
   description: string;
   issue_type: string;

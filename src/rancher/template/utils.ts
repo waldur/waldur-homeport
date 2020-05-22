@@ -3,9 +3,11 @@ import {
   getCluster,
   getTemplateVersion,
   getProjects,
-} from './api';
+} from '../api';
+import { Template, Question } from '../types';
+
 import { refreshBreadcrumbs } from './breadcrumbs';
-import { FormData, Template, Question } from './types';
+import { FormData } from './types';
 
 export const groupQuestions = (
   questions: Question[],

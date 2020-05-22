@@ -1,5 +1,5 @@
 import { StateDeclaration } from '@waldur/core/types';
-import { CustomerListContainer } from '@waldur/customer/list/CustomerListContainer';
+import { LazyCustomerList } from '@waldur/customer/list/LazyCustomerList';
 import { gettext } from '@waldur/i18n';
 import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
 import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';
@@ -9,8 +9,10 @@ import { UserListView } from '@waldur/user/support/UserListView';
 
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
+import { IssueDetailsContainer } from './IssueDetailsContainer';
 import { checkPermission } from './utils';
 import { IssuesDashboard } from './workspace/IssuesDashboard';
+import { IssuesHelpdesk } from './workspace/IssuesHelpdesk';
 import { SupportWorkspace } from './workspace/SupportWorkspace';
 
 export const states: StateDeclaration[] = [
@@ -40,7 +42,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.helpdesk',
     url: 'helpdesk/',
-    template: '<issues-helpdesk></issues-helpdesk>',
+    component: withStore(IssuesHelpdesk),
     data: {
       pageTitle: gettext('Helpdesk dashboard'),
       feature: 'support',
@@ -50,7 +52,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.detail',
     url: 'issue/:uuid/',
-    template: '<issue-detail></issue-detail>',
+    component: withStore(IssueDetailsContainer),
     data: {
       pageTitle: gettext('Request detail'),
       feature: 'support',
@@ -71,7 +73,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.organizations',
     url: 'organizations/',
-    component: withStore(CustomerListContainer),
+    component: withStore(LazyCustomerList),
     data: {
       feature: 'support.organizations',
       pageTitle: gettext('Financial overview'),

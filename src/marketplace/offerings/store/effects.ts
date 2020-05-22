@@ -3,6 +3,7 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
+import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
@@ -11,7 +12,12 @@ import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table-react/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { setStep, loadDataSuccess, loadDataError } from './actions';
+import {
+  setStep,
+  loadDataSuccess,
+  loadDataError,
+  isAddingOfferingScreenshot,
+} from './actions';
 import * as constants from './constants';
 import { getPlans, getAttributes, getOfferingComponents } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
@@ -96,11 +102,11 @@ function* createOffering(action: Action<OfferingFormData>) {
     yield put(constants.createOffering.failure());
     return;
   }
-  yield put(constants.createOffering.success());
+  yield call(() => $state.go('marketplace-vendor-offerings'));
   yield put(reset(constants.FORM_ID));
   yield put(setStep('Overview'));
   yield put(showSuccess(translate('Offering has been created.')));
-  yield put(stateGo('marketplace-vendor-offerings'));
+  yield put(constants.createOffering.success());
 }
 
 function* updateOffering(action: Action<OfferingUpdateFormData>) {
@@ -187,6 +193,7 @@ function* addOfferingScreenshot(action: Action<any>) {
     )}`;
     yield put(showError(errorMessage));
   }
+  yield put(isAddingOfferingScreenshot(false));
 }
 
 function* removeOfferingScreenshot(action: Action<any>) {

@@ -1,23 +1,14 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
+import useAsync from 'react-use/lib/useAsync';
 
-import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { useQuery } from '@waldur/core/useQuery';
 import { copyToClipboard } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { getKubeconfigFile } from '@waldur/rancher/api';
 import { showSuccess } from '@waldur/store/coreSaga';
-
-interface KubeconfigFile {
-  config: string;
-}
-
-const getKubeconfigFile = resourceId =>
-  get<KubeconfigFile>(`/rancher-clusters/${resourceId}/kubeconfig_file/`).then(
-    response => response.data.config,
-  );
 
 const KubeconfigFilePanel = props => {
   const dispatch = useDispatch();
@@ -49,23 +40,21 @@ const KubeconfigFilePanel = props => {
 };
 
 export const RancherClusterKubeconfigDialog = props => {
-  const { state: resourceProps, call: loadResource } = useQuery(
-    getKubeconfigFile,
-    props.resolve.resource.uuid,
+  const { loading, error, value } = useAsync(() =>
+    getKubeconfigFile(props.resolve.resource.uuid),
   );
-  React.useEffect(loadResource, []);
   return (
     <ModalDialog
       title={translate('Kubeconfig file')}
       footer={<CloseDialogButton />}
     >
-      {resourceProps.loading ? (
+      {loading ? (
         <LoadingSpinner />
-      ) : resourceProps.erred ? (
+      ) : error ? (
         <div>{translate('Unable to load data.')}</div>
-      ) : resourceProps.loaded ? (
-        <KubeconfigFilePanel config={resourceProps.data} />
-      ) : null}
+      ) : (
+        <KubeconfigFilePanel config={value} />
+      )}
     </ModalDialog>
   );
 };

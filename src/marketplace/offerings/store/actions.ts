@@ -47,6 +47,15 @@ export const removeOfferingScreenshot = (
   };
 };
 
+export const isAddingOfferingScreenshot = (isAdding: boolean) => {
+  return {
+    type: constants.IS_ADDING_OFFERING_SCREENSHOT,
+    payload: {
+      isAdding,
+    },
+  };
+};
+
 export const loadDataStart = () => ({
   type: constants.LOAD_DATA_START,
 });

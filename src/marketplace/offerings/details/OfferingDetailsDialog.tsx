@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Query } from '@waldur/core/Query';
 import { translate } from '@waldur/i18n';
@@ -49,7 +50,7 @@ const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => (
             <p>
               {data.offering.description && (
                 <div className="bs-callout bs-callout-success">
-                  {data.offering.description}
+                  <FormattedHtml html={data.offering.description} />
                 </div>
               )}
             </p>

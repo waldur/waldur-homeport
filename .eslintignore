@@ -2,3 +2,4 @@
 *.spec.tsx
 *.fixture.ts
 typings.d.ts
+.cache-loader

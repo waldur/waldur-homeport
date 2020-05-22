@@ -1,29 +1,74 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import useAsyncFn from 'react-use/lib/useAsyncFn';
+import useEffectOnce from 'react-use/lib/useEffectOnce';
 
-import { Query } from '@waldur/core/Query';
-import { connectAngularComponent } from '@waldur/store/connect';
+import { Link } from '@waldur/core/Link';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
-import { OuterState, User } from '@waldur/workspace/types';
 
 import { getIssues } from '../api';
 
-import { IssuesShortListComponent } from './IssuesShortListComponent';
+import { IssueRow } from './IssueRow';
 
-const loadUserIssues = (user: User) => getIssues({ caller: user.url });
-
-interface Props {
-  user: User;
-}
-
-const connector = connect((state: OuterState) => ({
-  user: getUser(state),
-}));
-
-export const IssuesShortList = connector((props: Props) => (
-  <Query loader={loadUserIssues} variables={props.user}>
-    {IssuesShortListComponent}
-  </Query>
-));
-
-export default connectAngularComponent(IssuesShortList);
+export const IssuesShortList = () => {
+  const user = useSelector(getUser);
+  const [{ loading, error, value }, loadData] = useAsyncFn(
+    () => getIssues({ caller: user.url }),
+    [user],
+  );
+  useEffectOnce(() => {
+    loadData();
+  });
+  return (
+    <div className="ibox float-e-margins">
+      <div className="ibox-title">
+        <span className="pull-right">
+          <Link className="btn btn-default btn-xs" state="support.list">
+            <small>
+              <i className="fa fa-list" />
+            </small>{' '}
+            {translate('See all')}
+          </Link>{' '}
+          <a className="btn btn-default btn-xs" onClick={loadData}>
+            <small>
+              <i className="fa fa-refresh" />
+            </small>{' '}
+            {translate('Refresh')}
+          </a>
+        </span>
+        <h5>{translate('Reported by me')}</h5>
+      </div>
+      <div className="ibox-content">
+        {loading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          <>{translate('Unable to load data.')}</>
+        ) : !value ? null : value.length === 0 ? (
+          translate('There are no requests yet.')
+        ) : (
+          <table className="table table-hover no-margins">
+            <thead>
+              <tr>
+                <th style={{ width: 80 }}>{translate('Key')}</th>
+                <th>{translate('Description')}</th>
+                <th style={{ width: 100 }} className="hidden-xs">
+                  {translate('Updated')}
+                </th>
+                <th style={{ width: 100 }} className="hidden-xs">
+                  {translate('Time in progress')}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {value.map((item, index) => (
+                <IssueRow item={item} key={index} />
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+};

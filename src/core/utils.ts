@@ -73,7 +73,7 @@ export const minutesToHours = input => {
   }
 
   const hours = input / 60;
-  return hours.toFixed(2) + ' H';
+  return hours.toFixed(2) + 'h';
 };
 
 export const pick = fields => source =>

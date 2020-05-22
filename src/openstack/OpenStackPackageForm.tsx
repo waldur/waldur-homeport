@@ -36,9 +36,6 @@ export class OpenStackPackageForm extends React.Component<
       project,
       plan,
     };
-    if (!plan && this.props.offering.plans.length === 1) {
-      initialData.plan = this.props.offering.plans[0];
-    }
     this.props.initialize(initialData);
   }
 

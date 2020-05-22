@@ -4,6 +4,7 @@ import marketplacePlanDetailsDialog from './details/plan/PlanDetailsDialog';
 import marketplaceOfferingsModule from './offerings/module';
 import marketplaceOrdersModule from './orders/module';
 import providersService from './providers-service';
+import marketplaceReferralModule from './referral/module';
 import marketplaceResourceModule from './resources/module';
 import routes from './routes';
 import marketplaceProvidersModule from './service-providers/module';
@@ -27,6 +28,7 @@ export default module => {
   module.run(registerSidebarExtension);
   marketplaceOfferingsModule(module);
   marketplaceOrdersModule(module);
+  marketplaceReferralModule(module);
   marketplaceProvidersModule(module);
   marketplaceResourceModule(module);
 };

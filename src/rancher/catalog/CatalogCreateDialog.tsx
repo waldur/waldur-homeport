@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { post } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { StringField, TextField, SecretField } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
@@ -12,6 +11,8 @@ import { Resource } from '@waldur/resource/types';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { createEntity } from '@waldur/table-react/actions';
+
+import { createCatalog } from '../api';
 
 interface FormData {
   name: string;
@@ -28,18 +29,14 @@ interface OwnProps {
   };
 }
 
-interface Catalog {
-  uuid: string;
-}
-
 const useCatalogCreateDialog = cluster => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
-  const createCatalog = React.useCallback(
+  const callback = React.useCallback(
     async formData => {
       try {
         setSubmitting(true);
-        const response = await post<Catalog>('/rancher-catalogs/', {
+        const response = await createCatalog({
           scope: cluster.url,
           ...formData,
         });
@@ -60,7 +57,7 @@ const useCatalogCreateDialog = cluster => {
   );
   return {
     submitting,
-    createCatalog,
+    createCatalog: callback,
   };
 };
 

@@ -2,6 +2,7 @@ export interface Issue {
   type: string;
   key: string;
   uuid: string;
+  url?: string;
   summary: string;
   caller_uuid: string;
   caller_full_name: string;

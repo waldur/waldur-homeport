@@ -3,6 +3,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 import { connect } from 'react-redux';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
@@ -28,7 +29,7 @@ const PureShoppingCartItemUpdate = (props: PureShoppingCartItemUpdateProps) => (
   <>
     {props.offering.description && (
       <div className="bs-callout bs-callout-success">
-        {props.offering.description}
+        <FormattedHtml html={props.offering.description} />
       </div>
     )}
     <Row>

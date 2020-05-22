@@ -2,9 +2,10 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
+import { Question } from '../types';
+
 import { FORM_ID, FIELD_MAP } from './constants';
 import { StringField } from './StringField';
-import { Question } from './types';
 
 const parseDefaultValue = (question: Question) => {
   if (question.type === 'boolean') {

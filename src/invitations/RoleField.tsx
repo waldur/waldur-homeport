@@ -8,6 +8,9 @@ export const RoleField = ({ invitation }) => {
   if (invitation.customer_role) {
     return <>{translate('owner')}</>;
   } else if (invitation.project_role) {
+    if (!invitation.project) {
+      return invitation.project_role;
+    }
     return (
       <Link
         state="project.details"

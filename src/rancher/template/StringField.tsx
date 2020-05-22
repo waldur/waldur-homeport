@@ -3,8 +3,9 @@ import * as FormControl from 'react-bootstrap/lib/FormControl';
 
 import { FieldError } from '@waldur/form-react';
 
+import { FieldProps } from '../types';
+
 import { DecoratedField } from './DecoratedField';
-import { FieldProps } from './types';
 
 const renderControl = props => (
   <>
