@@ -1,10 +1,11 @@
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
+import { connectAngularComponent } from '@waldur/store/connect';
 
 import actions from './actions';
 import { OpenStackVolumeSummary } from './OpenStackVolumeSummary';
-import snapshotCreateDialog from './snapshot-create';
-import volumeExtendDialog from './volume-extend';
+import { SnapshotCreateDialog } from './SnapshotCreateDialog';
+import { VolumeExtendDialog } from './VolumeExtendDialog';
 
 import './marketplace';
 import './tabs';
@@ -19,7 +20,13 @@ function stateConfig(ResourceStateConfigurationProvider) {
 export default module => {
   ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);
   ActionConfigurationRegistry.register('OpenStackTenant.Volume', actions);
-  module.directive('volumeExtendDialog', volumeExtendDialog);
-  module.directive('snapshotCreateDialog', snapshotCreateDialog);
+  module.component(
+    'volumeExtendDialog',
+    connectAngularComponent(VolumeExtendDialog, ['resolve']),
+  );
+  module.component(
+    'snapshotCreateDialog',
+    connectAngularComponent(SnapshotCreateDialog, ['resolve']),
+  );
   module.config(stateConfig);
 };

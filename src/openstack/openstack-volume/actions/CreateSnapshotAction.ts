@@ -15,6 +15,7 @@ export default function createAction(): ResourceAction {
     dialogTitle: translate('Create snapshot for OpenStack volume'),
     iconClass: 'fa fa-plus',
     component: 'snapshotCreateDialog',
+    useResolve: true,
     fields: [
       createLatinNameField(),
       createDescriptionField(),
