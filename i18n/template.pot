@@ -900,7 +900,6 @@ msgstr ""
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/add-team-member.html
-#: src/digitalocean/droplet-resize.html
 #: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
 #: src/invitations/actions/InvitationCancelButton.tsx
@@ -1517,7 +1516,7 @@ msgstr ""
 msgid "Current price per month"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/volume-extend.html
 msgid "Current size"
 msgstr ""
@@ -1864,6 +1863,10 @@ msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "Drop files to attach, or"
+msgstr ""
+
+#: src/digitalocean/DropletResizeDialog.tsx
+msgid "Droplet has been resized."
 msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
@@ -2316,7 +2319,7 @@ msgstr ""
 msgid "Flavors matching this regex expression will not be pulled from the backend."
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Flexible"
 msgstr ""
 
@@ -2641,11 +2644,11 @@ msgstr ""
 msgid "Incorrect organization details"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Increase a droplet's RAM and CPU only (not the storage)."
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr ""
 
@@ -3609,7 +3612,7 @@ msgstr ""
 msgid "New plan"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/volume-extend.html
 msgid "New size"
 msgstr ""
@@ -4321,7 +4324,7 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Permanent"
 msgstr ""
 
@@ -5320,7 +5323,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Resize droplet"
 msgstr ""
 
@@ -5874,7 +5877,7 @@ msgstr ""
 msgid "Select service provider"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Select size..."
 msgstr ""
 
@@ -6320,7 +6323,7 @@ msgid "Storage type"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
@@ -7159,6 +7162,7 @@ msgstr ""
 
 #: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
+#: src/digitalocean/DropletResizeDialog.tsx
 #: src/invoices/details/BillingDetails.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
@@ -7359,6 +7363,10 @@ msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Unable to resend invitation."
+msgstr ""
+
+#: src/digitalocean/DropletResizeDialog.tsx
+msgid "Unable to resize droplet."
 msgstr ""
 
 #: src/auth/auth-init.js

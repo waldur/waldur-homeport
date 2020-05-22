@@ -15,8 +15,8 @@ class Store {
   }
 
   get(resource) {
-    const config =
-      this.tabs[resource.resource_type]() || getDefaultResourceTabs();
+    const getter = this.tabs[resource.resource_type];
+    const config = getter ? getter() : getDefaultResourceTabs();
     return config
       .filter(tab => isFeatureVisible(tab.feature))
       .filter(tab => !tab.isVisible || tab.isVisible(resource));
