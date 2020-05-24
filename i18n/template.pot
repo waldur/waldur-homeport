@@ -1636,6 +1636,7 @@ msgid "Delete catalog"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
 msgid "Delete volumes"
 msgstr ""
 
@@ -2351,6 +2352,10 @@ msgstr ""
 msgid "For"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+msgid "Force destroy"
+msgstr ""
+
 #: src/jira/project/jira-project-checkout-summary.html
 msgid "Free"
 msgstr ""
@@ -2706,6 +2711,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+msgid "Instance should be OK, or erred. Please contact support."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
@@ -5108,6 +5117,7 @@ msgid "Related resource"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
 msgid "Release floating IPs"
 msgstr ""
 
