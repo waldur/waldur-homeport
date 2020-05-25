@@ -909,7 +909,6 @@ msgstr ""
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/add-team-member.html
-#: src/digitalocean/droplet-resize.html
 #: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
 #: src/invitations/actions/InvitationCancelButton.tsx
@@ -917,8 +916,6 @@ msgstr ""
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
-#: src/openstack/openstack-volume/snapshot-create.html
-#: src/openstack/openstack-volume/volume-extend.html
 #: src/project/ProjectCreateForm.tsx
 #: src/project/team/add-project-member.html
 #: src/resource/actions/dialog/action-dialog.html
@@ -1401,8 +1398,8 @@ msgstr ""
 msgid "Create security group for OpenStack tenant"
 msgstr ""
 
+#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
-#: src/openstack/openstack-volume/snapshot-create.html
 msgid "Create snapshot for OpenStack volume"
 msgstr ""
 
@@ -1526,8 +1523,8 @@ msgstr ""
 msgid "Current price per month"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
-#: src/openstack/openstack-volume/volume-extend.html
+#: src/digitalocean/DropletResizeDialog.tsx
+#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 msgid "Current size"
 msgstr ""
 
@@ -1653,6 +1650,7 @@ msgid "Delete catalog"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
 msgid "Delete volumes"
 msgstr ""
 
@@ -1689,8 +1687,8 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
+#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
-#: src/openstack/openstack-volume/snapshot-create.html
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -1878,6 +1876,10 @@ msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "Drop files to attach, or"
+msgstr ""
+
+#: src/digitalocean/DropletResizeDialog.tsx
+msgid "Droplet has been resized."
 msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
@@ -2192,7 +2194,7 @@ msgstr ""
 msgid "Extend"
 msgstr ""
 
-#: src/openstack/openstack-volume/volume-extend.html
+#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 msgid "Extend OpenStack volume"
 msgstr ""
 
@@ -2336,7 +2338,7 @@ msgstr ""
 msgid "Flavors matching this regex expression will not be pulled from the backend."
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Flexible"
 msgstr ""
 
@@ -2368,6 +2370,10 @@ msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "For"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+msgid "Force destroy"
 msgstr ""
 
 #: src/jira/project/jira-project-checkout-summary.html
@@ -2410,7 +2416,7 @@ msgid "Full name"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/volume-extend.html
+#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "GB"
@@ -2665,11 +2671,11 @@ msgstr ""
 msgid "Incorrect organization details"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Increase a droplet's RAM and CPU only (not the storage)."
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr ""
 
@@ -2729,6 +2735,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+msgid "Instance should be OK, or erred. Please contact support."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
@@ -3637,8 +3647,8 @@ msgstr ""
 msgid "New plan"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
-#: src/openstack/openstack-volume/volume-extend.html
+#: src/digitalocean/DropletResizeDialog.tsx
+#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 msgid "New size"
 msgstr ""
 
@@ -4349,7 +4359,7 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Permanent"
 msgstr ""
 
@@ -5135,6 +5145,7 @@ msgid "Related resource"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
 msgid "Release floating IPs"
 msgstr ""
 
@@ -5348,7 +5359,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Resize droplet"
 msgstr ""
 
@@ -5907,7 +5918,7 @@ msgstr ""
 msgid "Select service provider"
 msgstr ""
 
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 msgid "Select size..."
 msgstr ""
 
@@ -6193,11 +6204,15 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
+#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
+msgid "Snapshot has been created."
+msgstr ""
+
 #: src/openstack/openstack-snapshot/actions.ts
 msgid "Snapshot has been updated."
 msgstr ""
 
-#: src/openstack/openstack-volume/snapshot-create.html
+#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 msgid "Snapshot name"
 msgstr ""
 
@@ -6354,7 +6369,7 @@ msgid "Storage type"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
-#: src/digitalocean/droplet-resize.html
+#: src/digitalocean/DropletResizeDialog.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
@@ -6362,8 +6377,8 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
-#: src/openstack/openstack-volume/snapshot-create.html
-#: src/openstack/openstack-volume/volume-extend.html
+#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
+#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
@@ -6772,7 +6787,6 @@ msgid "There is no activity yet."
 msgstr ""
 
 #: src/form/appstore-field-string.html
-#: src/openstack/openstack-volume/snapshot-create.html
 msgid "This field contains invalid characters."
 msgstr ""
 
@@ -7069,6 +7083,10 @@ msgstr ""
 msgid "Unable to create request."
 msgstr ""
 
+#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
+msgid "Unable to create snapshot."
+msgstr ""
+
 #: src/user/support/effects.ts
 msgid "Unable to deactivate user."
 msgstr ""
@@ -7096,6 +7114,10 @@ msgstr ""
 
 #: src/customer/payment-profiles/store/effects.ts
 msgid "Unable to enable payment profile."
+msgstr ""
+
+#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+msgid "Unable to extend volume."
 msgstr ""
 
 #: src/issues/attachments/effects.ts
@@ -7202,6 +7224,7 @@ msgstr ""
 
 #: src/customer/list/TotalCostComponent.tsx
 #: src/customer/popover/CustomerPopover.tsx
+#: src/digitalocean/DropletResizeDialog.tsx
 #: src/invoices/details/BillingDetails.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueCreateForm.tsx
@@ -7402,6 +7425,10 @@ msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Unable to resend invitation."
+msgstr ""
+
+#: src/digitalocean/DropletResizeDialog.tsx
+msgid "Unable to resize droplet."
 msgstr ""
 
 #: src/auth/auth-init.js
@@ -7992,13 +8019,17 @@ msgstr ""
 msgid "Volume"
 msgstr ""
 
+#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+msgid "Volume has been extended."
+msgstr ""
+
 #: src/openstack/openstack-volume/actions/EditAction.ts
 msgid "Volume has been updated."
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/snapshot-create.html
-#: src/openstack/openstack-volume/volume-extend.html
+#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
+#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 msgid "Volume name"
 msgstr ""
 
