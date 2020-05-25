@@ -1,6 +1,9 @@
 import { translate } from '@waldur/i18n';
-import { $uibModal } from '@waldur/modal/services';
+import { openModalDialog } from '@waldur/modal/actions';
 import { ActionContext, ResourceAction } from '@waldur/resource/actions/types';
+import store from '@waldur/store/store';
+
+import { RancherClusterKubeconfigDialog } from './RancherClusterKubeconfigDialog';
 
 export function kubeconfigAction(ctx: ActionContext): ResourceAction {
   return {
@@ -8,12 +11,13 @@ export function kubeconfigAction(ctx: ActionContext): ResourceAction {
     title: translate('Generate Kubeconfig file'),
     type: 'callback',
     execute: () => {
-      $uibModal.open({
-        component: 'rancherClusterKubeconfigDialog',
-        resolve: {
-          resource: ctx.resource,
-        },
-      });
+      store.dispatch(
+        openModalDialog(RancherClusterKubeconfigDialog, {
+          resolve: {
+            resource: ctx.resource,
+          },
+        }),
+      );
     },
   };
 }

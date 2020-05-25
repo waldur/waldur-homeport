@@ -1,9 +1,11 @@
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { ServiceProviderSecretCodeGenerateConfirm } from '../ServiceProviderSecretCodeGenerateConfirm';
+
 import * as constants from './constants';
 
 export const showSecretCodeRegenerateConfirm = serviceProvider =>
-  openModalDialog('MarketplaceServiceProviderSecretCodeGenerateConfirm', {
+  openModalDialog(ServiceProviderSecretCodeGenerateConfirm, {
     resolve: { serviceProvider },
     size: 'md',
   });

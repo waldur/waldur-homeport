@@ -6,6 +6,8 @@ import { withTranslation } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { IssueCreateDialogContainer } from './IssueCreateContainer';
+
 const PureJiraIssueCreateButton = props => {
   const { translate, onClick } = props;
   return (
@@ -18,7 +20,7 @@ const PureJiraIssueCreateButton = props => {
 };
 
 const createRequestDialog = project =>
-  openModalDialog('jiraIssueCreateDialog', { resolve: { project } });
+  openModalDialog(IssueCreateDialogContainer, { resolve: { project } });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: () => dispatch(createRequestDialog(ownProps.project)),

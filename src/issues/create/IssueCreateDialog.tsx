@@ -25,6 +25,7 @@ interface CreateIssueDialogProps {
   resolve: {
     issue: CreateIssueProps;
     options: IssueOptions;
+    defer: { resolve(): void; reject(): void };
   };
 }
 

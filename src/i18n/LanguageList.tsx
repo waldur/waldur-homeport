@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Select from 'react-select';
 
-import { connectAngularComponent } from '@waldur/store/connect';
-
 import { translate } from './translate';
 import { useLanguageSelector } from './useLanguageSelector';
 import './LanguageList.scss';
@@ -48,5 +46,3 @@ export const LanguageList = () => {
     );
   }
 };
-
-export default connectAngularComponent(LanguageList);

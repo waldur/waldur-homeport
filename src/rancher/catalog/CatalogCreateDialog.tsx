@@ -8,7 +8,6 @@ import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { Resource } from '@waldur/resource/types';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { createEntity } from '@waldur/table-react/actions';
 
@@ -87,5 +86,3 @@ export const CatalogCreateDialog = reduxForm<FormData, OwnProps>({
     </ActionDialog>
   );
 });
-
-export default connectAngularComponent(CatalogCreateDialog, ['resolve']);

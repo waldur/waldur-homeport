@@ -3,12 +3,14 @@ import { marketplaceIsVisible } from '@waldur/marketplace/utils';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
+import { ChangePlanDialog } from './ChangePlanDialog';
+
 export default function createAction(ctx): ResourceAction {
   return {
     name: 'change_plan',
     type: 'form',
     method: 'POST',
-    component: 'marketplaceResourcePlanChangeDialog',
+    component: ChangePlanDialog,
     title: translate('Change plan'),
     useResolve: true,
     dialogSize: 'lg',

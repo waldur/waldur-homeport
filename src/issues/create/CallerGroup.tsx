@@ -9,6 +9,7 @@ import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { UserPopover } from '@waldur/user/UserPopover';
 
 import { refreshUsers } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
@@ -20,7 +21,7 @@ const CallerActions = ({ onSearch }) => {
   const dispatch = useDispatch();
   const caller = useSelector(callerSelector);
   const openUserDialog = () =>
-    dispatch(openModalDialog('userPopover', { resolve: { user: caller } }));
+    dispatch(openModalDialog(UserPopover, { resolve: { user: caller } }));
   const filterByCaller = () => onSearch({ caller });
   if (!caller) {
     return null;

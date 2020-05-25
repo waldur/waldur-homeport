@@ -1,7 +1,10 @@
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { $uibModal } from '@waldur/modal/services';
+import { openModalDialog } from '@waldur/modal/actions';
 import { ActionContext, ResourceAction } from '@waldur/resource/actions/types';
+import store from '@waldur/store/store';
+
+import { CreateNodeDialog } from '../create/CreateNodeDialog';
 
 export function createNodeAction(ctx: ActionContext): ResourceAction {
   return {
@@ -12,12 +15,13 @@ export function createNodeAction(ctx: ActionContext): ResourceAction {
     tab: 'nodes',
     isVisible: !ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE,
     execute: () => {
-      $uibModal.open({
-        component: 'rancherCreateNodeDialog',
-        resolve: {
-          cluster: ctx.resource,
-        },
-      });
+      store.dispatch(
+        openModalDialog(CreateNodeDialog, {
+          resolve: {
+            cluster: ctx.resource,
+          },
+        }),
+      );
     },
   };
 }

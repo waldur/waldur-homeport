@@ -9,6 +9,7 @@ import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { UserPopover } from '@waldur/user/UserPopover';
 
 interface Comment {
   user: {
@@ -28,7 +29,7 @@ export const IssuesActivityStream = () => {
   const dispatch = useDispatch();
   const callback = user =>
     dispatch(
-      openModalDialog('userPopover', {
+      openModalDialog(UserPopover, {
         resolve: {
           user,
         },

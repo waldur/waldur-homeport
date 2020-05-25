@@ -9,7 +9,6 @@ import issueAttachmentsSaga from '@waldur/issues/attachments/effects';
 import issueCommentsSaga from '@waldur/issues/comments/effects';
 import jiraSaga from '@waldur/jira/issue/effects';
 import marketplaceSaga from '@waldur/marketplace/store/effects';
-import modalSaga from '@waldur/modal/effects';
 import projectSaga from '@waldur/project/effects';
 import providerSaga from '@waldur/providers/effects';
 import serviceUsageSaga from '@waldur/providers/support/effects';
@@ -33,7 +32,6 @@ export default [
   customerDetailsSaga,
   issueAttachmentsSaga,
   issueCommentsSaga,
-  modalSaga,
   tableSaga,
   monitoringSaga,
   serviceUsageSaga,

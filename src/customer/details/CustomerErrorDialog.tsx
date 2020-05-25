@@ -9,6 +9,7 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { ENV } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
+import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog, closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -20,7 +21,7 @@ export const CustomerErrorDialog = ({ resolve }) => {
     if (isFeatureVisible('support')) {
       dispatch(closeModalDialog());
       dispatch(
-        openModalDialog('issueCreateDialog', {
+        openModalDialog(IssueCreateDialog, {
           resolve: {
             issue: {
               type: ISSUE_IDS.SERVICE_REQUEST,

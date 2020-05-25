@@ -10,6 +10,7 @@ import { updateOfferingState } from '../store/actions';
 import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
 
 import { ActionsDropdown } from './ActionsDropdown';
+import { PauseOfferingDialog } from './PauseOfferingDialog';
 
 const mapStateToProps = (state: OuterState) => ({
   user: getUser(state),
@@ -18,7 +19,7 @@ const mapStateToProps = (state: OuterState) => ({
 const mapDispatchToProps = {
   updateOfferingState,
   pauseOffering: offering =>
-    openModalDialog('marketplacePauseOfferingDialog', {
+    openModalDialog(PauseOfferingDialog, {
       resolve: { offering },
     }),
 };

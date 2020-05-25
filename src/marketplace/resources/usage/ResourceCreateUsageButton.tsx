@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { ResourceCreateUsageDialog } from './ResourceCreateUsageDialog';
 import { UsageReportContext } from './types';
 
 const openResourceUsageDialog = (
@@ -12,7 +13,7 @@ const openResourceUsageDialog = (
   resource_name: string,
   offering_uuid: string,
 ) =>
-  openModalDialog('marketplaceResourceCreateUsageDialog', {
+  openModalDialog(ResourceCreateUsageDialog, {
     resolve: { resource_uuid, resource_name, offering_uuid },
   });
 

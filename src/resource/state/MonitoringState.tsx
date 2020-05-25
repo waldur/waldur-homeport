@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 export type MonitoringStateType = 'Unregistered' | 'Erred' | 'Warning' | 'OK';
 
@@ -24,5 +23,3 @@ export const MonitoringState = (props: MonitoringStateIndicatorProps) => (
     variant={LABEL_CLASSES[props.resource.monitoring_state] || 'info'}
   />
 );
-
-export default connectAngularComponent(MonitoringState, ['resource']);

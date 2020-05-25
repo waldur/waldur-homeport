@@ -5,7 +5,6 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ServiceProvider } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
 import * as actions from './store/actions';
@@ -46,7 +45,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     ),
 });
 
-export default connectAngularComponent(
-  connect(null, mapDispatchToProps)(ServiceProviderSecretCodeRegenerateAlert),
-  ['resolve'],
-);
+export const ServiceProviderSecretCodeGenerateConfirm = connect(
+  null,
+  mapDispatchToProps,
+)(ServiceProviderSecretCodeRegenerateAlert);

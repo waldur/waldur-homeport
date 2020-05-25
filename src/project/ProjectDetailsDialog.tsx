@@ -7,7 +7,6 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { angular2react } from '@waldur/shims/angular2react';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Project } from '@waldur/workspace/types';
 
 import { ProjectUpdateContainer } from './ProjectUpdateContainer';
@@ -40,5 +39,3 @@ export const ProjectDetailsDialog = ({ resolve: { project } }) => (
     </Tabs>
   </ModalDialog>
 );
-
-export default connectAngularComponent(ProjectDetailsDialog, ['resolve']);

@@ -1,10 +1,12 @@
 import { Section, Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { AttributeFilterListDialog } from '../filters/AttributeFilterListDialog';
+
 import * as constants from './constants';
 
 export const showAttributeFilter = () =>
-  openModalDialog('marketplaceAttributeFilterListDialog', { size: 'sm' });
+  openModalDialog(AttributeFilterListDialog, { size: 'sm' });
 
 export const setFilterQuery = (filterQuery: string) => ({
   type: constants.SET_FILTER_QUERY,

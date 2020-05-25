@@ -5,7 +5,6 @@ import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import './breadcrumbs';
 import filtersModule from './filters';
-import securityGroupsDialogReact from './OpenStackSecurityGroupsDialog';
 import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
 import securityGroupRuleEditor from './security-group-rule-editor';
 import securityGroupRulesList from './security-group-rules-list';
@@ -56,6 +55,5 @@ export default module => {
   module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
   module.component('securityGroupsDialog', securityGroupsDialog);
-  module.component('securityGroupsDialogReact', securityGroupsDialogReact);
   filtersModule(module);
 };

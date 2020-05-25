@@ -6,8 +6,10 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { CatalogCreateDialog } from './CatalogCreateDialog';
+
 const createCatalogDialog = cluster =>
-  openModalDialog('rancherCatalogCreateDialog', { resolve: { cluster } });
+  openModalDialog(CatalogCreateDialog, { resolve: { cluster } });
 
 export const CatalogCreateButton = props => {
   const dispatch = useDispatch();

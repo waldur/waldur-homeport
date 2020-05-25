@@ -5,8 +5,10 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { OfferingDetailsDialog } from './OfferingDetailsDialog';
+
 const openOfferingDetailsDialog = (offeringUuid: string) =>
-  openModalDialog('marketplaceOfferingDetailsDialog', {
+  openModalDialog(OfferingDetailsDialog, {
     resolve: { offeringUuid },
     size: 'lg',
   });

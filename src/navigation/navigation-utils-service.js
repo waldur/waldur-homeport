@@ -1,9 +1,13 @@
+import { openModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
+
+import { SelectWorkspaceDialog } from './workspace/SelectWorkspaceDialog';
+
 export default class NavigationUtilsService {
   // @ngInject
-  constructor($state, $rootScope, $uibModal) {
+  constructor($state, $rootScope) {
     this.$state = $state;
     this.$rootScope = $rootScope;
-    this.$uibModal = $uibModal;
   }
 
   goBack() {
@@ -22,12 +26,10 @@ export default class NavigationUtilsService {
   }
 
   selectWorkspace() {
-    let dialog = this.$uibModal.open({
-      component: 'selectWorkspaceDialog',
-      size: 'lg',
-    });
-    dialog.result.catch(() => {
-      this.$rootScope.$emit('selectWorkspaceDialog.dismissed');
-    });
+    store.dispatch(
+      openModalDialog(SelectWorkspaceDialog, {
+        size: 'lg',
+      }),
+    );
   }
 }

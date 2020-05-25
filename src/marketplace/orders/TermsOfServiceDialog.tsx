@@ -4,7 +4,6 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 interface TermsOfServiceDialogProps {
   resolve: {
@@ -20,5 +19,3 @@ export const TermsOfServiceDialog = (props: TermsOfServiceDialogProps) => (
     <FormattedHtml html={props.resolve.content} />
   </ModalDialog>
 );
-
-export default connectAngularComponent(TermsOfServiceDialog, ['resolve']);

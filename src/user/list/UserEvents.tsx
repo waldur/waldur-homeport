@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { getEventsList } from '@waldur/events/BaseEventsList';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { User } from '@waldur/workspace/types';
 
 interface UserEventsProps {
@@ -23,5 +22,3 @@ export const UserEvents: React.FC<UserEventsProps> = outerProps =>
 UserEvents.defaultProps = {
   showActions: true,
 };
-
-export default connectAngularComponent(UserEvents, ['user']);

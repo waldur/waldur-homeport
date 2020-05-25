@@ -4,5 +4,5 @@ import './provider';
 
 export default module => {
   jiraProjectModule(module);
-  jiraIssueModule(module);
+  jiraIssueModule();
 };

@@ -1,7 +1,10 @@
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { HookDetailsDialog } from './HookDetailsDialog';
+import { HookRemoveDialog } from './HookRemoveDialog';
+
 export const showHookRemoveConfirmation = (action: () => void) =>
-  openModalDialog('hookRemoveDialog', { resolve: { action }, size: 'md' });
+  openModalDialog(HookRemoveDialog, { resolve: { action }, size: 'md' });
 
 export const showHookUpdateDialog = (row?) =>
-  openModalDialog('hookDetailsDialog', { resolve: { hook: row }, size: 'md' });
+  openModalDialog(HookDetailsDialog, { resolve: { hook: row }, size: 'md' });

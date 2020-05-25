@@ -3,7 +3,6 @@ import ErrorMessageFormatter from './ErrorMessageFormatter';
 import extensionPoint from './extension-point-directive';
 import extensionPointService from './extension-point-service';
 import loadingSpinner from './LoadingSpinner';
-import messageDialog from './MessageDialog';
 import sentryModule from './sentry';
 import injectServices from './services';
 import servicesService from './services-service';
@@ -58,7 +57,6 @@ export default module => {
   module.service('servicesService', servicesService);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
-  module.component('messageDialog', messageDialog);
   module.directive('extensionPoint', extensionPoint);
   module.service('extensionPointService', extensionPointService);
   module.run(redirectToState);

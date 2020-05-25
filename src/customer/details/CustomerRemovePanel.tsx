@@ -8,6 +8,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV, ngInjector } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
+import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError } from '@waldur/store/coreSaga';
@@ -54,7 +55,7 @@ export const CustomerRemovePanel = () => {
         return dispatch(showError(notification));
       }
       return dispatch(
-        openModalDialog('issueCreateDialog', {
+        openModalDialog(IssueCreateDialog, {
           resolve: {
             issue: {
               customer,

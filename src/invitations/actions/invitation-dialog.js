@@ -12,10 +12,11 @@ const invitationDialog = {
   controllerAs: 'DialogCtrl',
   controller: class InvitationDialogController {
     // @ngInject
-    constructor(InvitationDialogService, ncUtilsFlash, ENV) {
+    constructor(InvitationDialogService, ncUtilsFlash, ENV, $state) {
       this.service = InvitationDialogService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.ENV = ENV;
+      this.$state = $state;
     }
 
     $onInit() {
@@ -50,7 +51,10 @@ const invitationDialog = {
           this.userDetails,
           this.role,
         )
-        .then(() => this.close())
+        .then(() => {
+          this.close();
+          this.$state.go('organization.team');
+        })
         .catch(errors => (this.errors = errors))
         .finally(() => (this.submitting = false));
     }

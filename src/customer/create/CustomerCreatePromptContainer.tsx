@@ -5,7 +5,6 @@ import { reduxForm, SubmissionError } from 'redux-form';
 import { translate, withTranslation } from '@waldur/i18n';
 import { renderServiceProvider } from '@waldur/marketplace/service-providers/selectors';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as constants from './constants';
 import { CustomerCreatePrompt } from './CustomerCreatePrompt';
@@ -46,7 +45,3 @@ const enhance = compose(
 );
 
 export const CustomerCreatePromptContainer = enhance(CustomerCreatePrompt);
-
-export default connectAngularComponent(CustomerCreatePromptContainer, [
-  'resolve',
-]);

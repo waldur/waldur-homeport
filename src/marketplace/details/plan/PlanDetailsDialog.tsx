@@ -9,7 +9,6 @@ import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { PureDetailsTable } from './PlanDetailsTable';
 import { combinePrices } from './utils';
@@ -37,7 +36,7 @@ async function loadData(resourceId: string) {
   };
 }
 
-const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = props => (
+export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = props => (
   <ModalDialog title={translate('Plan details')} footer={<CloseDialogButton />}>
     <Query loader={loadData} variables={props.resolve.resourceId}>
       {({ loading, data, error }) => {
@@ -85,5 +84,3 @@ const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = props => (
     </Query>
   </ModalDialog>
 );
-
-export default connectAngularComponent(PlanDetailsDialog, ['resolve']);

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import eventRegistry from './registry';
 import { TypeListDialog } from './TypeListDialog';
@@ -13,6 +12,4 @@ const PureEventTypesDialog = ({ translate }: TranslateProps) => (
   />
 );
 
-const EventTypesDialog = withTranslation(PureEventTypesDialog);
-
-export default connectAngularComponent(EventTypesDialog);
+export const EventTypesDialog = withTranslation(PureEventTypesDialog);

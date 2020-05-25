@@ -5,8 +5,10 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { ApplicationDetailsDialog } from './ApplicationDetailsDialog';
+
 const applicationDetailsDialog = application =>
-  openModalDialog('rancherApplicationDetailsDialog', {
+  openModalDialog(ApplicationDetailsDialog, {
     resolve: { application },
   });
 

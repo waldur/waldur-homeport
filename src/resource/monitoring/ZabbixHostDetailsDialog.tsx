@@ -9,7 +9,6 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { fetchZabbixHost } from './actions';
 import { getMonitoringState } from './selectors';
@@ -60,7 +59,7 @@ export const DialogBody = props => {
   }
 };
 
-const ZabbixHostDetailsDialog: React.FC<ZabbixHostDetailsDialogProps> = props => {
+const PureZabbixHostDetailsDialog: React.FC<ZabbixHostDetailsDialogProps> = props => {
   useEffectOnce(props.onFetch);
   return (
     <ModalDialog
@@ -81,6 +80,4 @@ const enhance = compose(
   withTranslation,
 );
 
-export default connectAngularComponent(enhance(ZabbixHostDetailsDialog), [
-  'resolve',
-]);
+export const ZabbixHostDetailsDialog = enhance(PureZabbixHostDetailsDialog);
