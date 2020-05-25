@@ -3,7 +3,6 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import { orderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { terminateResource } from '../store/constants';
 
@@ -31,6 +30,4 @@ const connector = compose(
   connect(mapStateToProps, mapDispatchToProps),
 );
 
-const TerminateDialog = connector(PureTerminateDialog);
-
-export default connectAngularComponent(TerminateDialog, ['resolve']);
+export const TerminateDialog = connector(PureTerminateDialog);

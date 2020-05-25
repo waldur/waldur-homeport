@@ -2,6 +2,8 @@ import Axios from 'axios';
 import Qs from 'qs';
 
 import { ngInjector } from '@waldur/core/services';
+import { closeModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
 
 // @ngInject
 function initAuthToken($auth, $http) {
@@ -43,14 +45,7 @@ Axios.interceptors.response.use(
 );
 
 // @ngInject
-function requireAuth(
-  $transitions,
-  $auth,
-  $rootScope,
-  $uibModalStack,
-  features,
-  usersService,
-) {
+function requireAuth($transitions, $auth, $rootScope, features, usersService) {
   $transitions.onStart(
     {
       to: state => state.data && state.data.auth && $auth.isAuthenticated(),
@@ -116,7 +111,7 @@ function requireAuth(
   });
 
   $transitions.onSuccess({}, function() {
-    $uibModalStack.dismissAll();
+    store.dispatch(closeModalDialog());
   });
 }
 

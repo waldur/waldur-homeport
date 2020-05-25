@@ -6,8 +6,10 @@ import { connect } from 'react-redux';
 import { Screenshot } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { AddOfferingScreenshotDialogContainer } from '../offerings/AddOfferingScreenshotDialog';
+
 const openViewOfferingScreenshotDialog = (screenshot: Screenshot) =>
-  openModalDialog('marketplaceViewOfferingScreenshotDialog', {
+  openModalDialog(AddOfferingScreenshotDialogContainer, {
     resolve: screenshot,
   });
 

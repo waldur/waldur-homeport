@@ -6,8 +6,8 @@ import { ENV } from '@waldur/core/services';
 import eventsRegistry from '@waldur/events/registry';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 
-import EventDetailsButton from './EventDetailsButton';
-import EventTypesButton from './EventTypesButton';
+import { EventDetailsButton } from './EventDetailsButton';
+import { EventTypesButton } from './EventTypesButton';
 
 const EventMessageField = ({ row }) => (
   <FormattedHtml html={eventsRegistry.formatEvent(row)} />

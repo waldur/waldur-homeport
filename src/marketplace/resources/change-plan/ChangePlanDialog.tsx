@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Query } from '@waldur/core/Query';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { DialogBody } from './ChangePlanBody';
 import { loadData } from './utils';
@@ -32,5 +31,3 @@ export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = props => (
     )}
   </Query>
 );
-
-export default connectAngularComponent(ChangePlanDialog, ['resolve']);

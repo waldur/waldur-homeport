@@ -12,8 +12,10 @@ import { Offering, Screenshot } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { connectTable, createFetcher, Table } from '@waldur/table-react';
 
+import { ViewOfferingScreenshotDialog } from './ViewOfferingScreenshotDialog';
+
 const openViewOfferingScreenshotDialog = (screenshot: Screenshot) =>
-  openModalDialog('marketplaceViewOfferingScreenshotDialog', {
+  openModalDialog(ViewOfferingScreenshotDialog, {
     resolve: screenshot,
   });
 

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import * as ResourceSummaryRegistry from '@waldur/resource/summary/registry';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import './resource-summary.scss';
 import { ResourceSummaryBase } from './ResourceSummaryBase';
@@ -20,5 +19,3 @@ export const ResourceSummary = (props: ResourceSummaryProps) => {
     </dl>
   );
 };
-
-export default connectAngularComponent(ResourceSummary, ['resource']);

@@ -5,6 +5,8 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { IssueCreateDialog } from '../create/IssueCreateDialog';
+
 const PureIssueCreateButton = props => (
   <ActionButton
     title={translate('Create')}
@@ -14,7 +16,7 @@ const PureIssueCreateButton = props => (
 );
 
 const createRequestDialog = scope =>
-  openModalDialog('issueCreateDialog', { resolve: { issue: scope } });
+  openModalDialog(IssueCreateDialog, { resolve: { issue: scope } });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: () => dispatch(createRequestDialog(ownProps.scope)),

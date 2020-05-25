@@ -1,12 +1,15 @@
+import { translate } from '@waldur/i18n';
+import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
+import { openModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
 
 import template from './request-direct-access.html';
 
 class DialogController {
   // @ngInject
-  constructor(features, $uibModal, ENV) {
+  constructor(features, ENV) {
     this.features = features;
-    this.$uibModal = $uibModal;
     this.ENV = ENV;
   }
 
@@ -17,23 +20,24 @@ class DialogController {
 
     if (supportEnabled) {
       this.close();
-      this.$uibModal.open({
-        component: 'issueCreateDialog',
-        resolve: {
-          issue: () => ({
-            type: ISSUE_IDS.SERVICE_REQUEST,
-            summary: gettext('Request direct access to OpenStack Tenant'),
-            resource: this.tenant,
-          }),
-          options: {
-            title: gettext('Request direct access to OpenStack Tenant'),
-            descriptionPlaceholder: gettext('Please provide a reason'),
-            descriptionLabel: gettext('Description'),
-            summaryLabel: gettext('Tenant name'),
-            hideTitle: true,
+      store.dispatch(
+        openModalDialog(IssueCreateDialog, {
+          resolve: {
+            issue: () => ({
+              type: ISSUE_IDS.SERVICE_REQUEST,
+              summary: translate('Request direct access to OpenStack Tenant'),
+              resource: this.tenant,
+            }),
+            options: {
+              title: translate('Request direct access to OpenStack Tenant'),
+              descriptionPlaceholder: translate('Please provide a reason'),
+              descriptionLabel: translate('Description'),
+              summaryLabel: translate('Tenant name'),
+              hideTitle: true,
+            },
           },
-        },
-      });
+        }),
+      );
     }
   }
 }

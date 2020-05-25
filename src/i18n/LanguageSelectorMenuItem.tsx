@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { connectAngularComponent } from '@waldur/store/connect';
-
 import { useLanguageSelector } from './useLanguageSelector';
 import './LanguageSelectorMenuItem.scss';
 
@@ -31,5 +29,3 @@ export const LanguageSelectorMenuItem = () => {
     </li>
   );
 };
-
-export default connectAngularComponent(LanguageSelectorMenuItem);

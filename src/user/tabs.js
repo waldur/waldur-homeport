@@ -2,6 +2,7 @@ import { withStore } from '@waldur/store/connect';
 
 import { HooksList } from './hooks/HooksList';
 import { KeysList } from './keys/KeysList';
+import { CurrentUserEvents } from './list/CurrentUserEvents';
 import { UserDashboard } from './list/UserDashboard';
 import { UserManage } from './UserManage';
 
@@ -17,7 +18,7 @@ export const tabs = {
   },
   events: {
     url: 'events/',
-    template: '<user-events user="currentUser"></user-events>',
+    component: withStore(CurrentUserEvents),
     data: {
       pageTitle: gettext('Audit logs'),
     },

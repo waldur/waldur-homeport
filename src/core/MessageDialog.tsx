@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 interface MessageDialogProps {
   resolve: {
@@ -16,5 +15,3 @@ export const MessageDialog = (props: MessageDialogProps) => (
     {props.resolve.message}
   </ModalDialog>
 );
-
-export default connectAngularComponent(MessageDialog, ['resolve']);

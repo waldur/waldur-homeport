@@ -7,7 +7,6 @@ import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { updateOfferingState } from '../store/actions';
 
@@ -55,5 +54,3 @@ export const PauseOfferingDialog = connector(
     </form>
   ),
 );
-
-export default connectAngularComponent(PauseOfferingDialog, ['resolve']);

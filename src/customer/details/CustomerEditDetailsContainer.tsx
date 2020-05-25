@@ -3,7 +3,6 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { isStaff, isOwner } from '@waldur/workspace/selectors';
 
 import { canManageCustomer } from '../create/selectors';
@@ -31,7 +30,3 @@ const enhance = compose(
 );
 
 export const CustomerEditDetailsContainer = enhance(CustomerEditDetails);
-
-export default connectAngularComponent(CustomerEditDetailsContainer, [
-  'customer',
-]);

@@ -7,7 +7,6 @@ import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ImportButton } from './ImportButton';
 import { OfferingsList } from './OfferingsList';
@@ -100,5 +99,3 @@ export const ResourceImportDialog: React.FC<ImportDialogProps> = props => {
     </ModalDialog>
   );
 };
-
-export default connectAngularComponent(ResourceImportDialog, ['resolve']);

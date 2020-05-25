@@ -7,7 +7,6 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { BaseResource } from '@waldur/resource/types';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
 import { ResourceSummary } from './ResourceSummary';
@@ -59,5 +58,3 @@ const enhance = compose(
 );
 
 export const ResourceSummaryModal = enhance(PureResourceSummaryModal);
-
-export default connectAngularComponent(ResourceSummaryModal, ['resolve']);

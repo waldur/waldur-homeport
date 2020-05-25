@@ -5,7 +5,6 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
 interface KeyRemoveDialogProps extends TranslateProps {
@@ -39,6 +38,7 @@ const mapDispatchToProps = dispatch => ({
   dismiss: () => dispatch(closeModalDialog()),
 });
 
-const KeyRemoveDialog = connect(null, mapDispatchToProps)(PureKeyRemoveDialog);
-
-export default connectAngularComponent(KeyRemoveDialog, ['resolve']);
+export const KeyRemoveDialog = connect(
+  null,
+  mapDispatchToProps,
+)(PureKeyRemoveDialog);

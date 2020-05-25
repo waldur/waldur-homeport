@@ -6,12 +6,14 @@ import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { OfferingReferralsDialog } from './OfferingReferralsDialog';
+
 interface ReferralDetailsButtonProps {
   offering: Offering;
 }
 
 const openReferralsDialog = (offering: Offering) => {
-  return openModalDialog('marketplaceOfferingReferralsDialog', {
+  return openModalDialog(OfferingReferralsDialog, {
     resolve: offering,
     size: 'lg',
   });

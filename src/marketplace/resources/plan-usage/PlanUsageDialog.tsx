@@ -5,7 +5,6 @@ import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { PlanUsageRowProps } from './types';
 
@@ -60,5 +59,3 @@ export const PlanUsageDialog = (props: { resolve: PlanUsageRowProps }) => (
     <EChart options={getChartData(props.resolve)} height="300px" />
   </ModalDialog>
 );
-
-export default connectAngularComponent(PlanUsageDialog, ['resolve']);

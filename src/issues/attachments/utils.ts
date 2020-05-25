@@ -3,6 +3,8 @@ import accept from 'attr-accept';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { IssueAttachmentModal } from './IssueAttachmentModal';
+
 export const validateFiles = (
   files: File[] = [],
   excludedTypes: string | string[],
@@ -55,7 +57,7 @@ export const getErrorMessage = (files: File[]): string => {
 };
 
 export const openAttachmentModal = (url: string) =>
-  openModalDialog('IssueAttachmentModal', { resolve: { url } });
+  openModalDialog(IssueAttachmentModal, { resolve: { url } });
 
 export const getFileName = (url: string): string =>
   url.slice(url.lastIndexOf('/') + 1);

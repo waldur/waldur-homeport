@@ -14,7 +14,6 @@ import {
 } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { getProject } from '@waldur/workspace/selectors';
 import { OuterState, Project } from '@waldur/workspace/types';
 
@@ -55,6 +54,4 @@ const formConnector = reduxForm<
 
 const enhance = compose(storeConnector, formConnector);
 
-const PreviewOfferingDialog = enhance(PurePreviewOfferingDialog);
-
-export default connectAngularComponent(PreviewOfferingDialog, ['resolve']);
+export const PreviewOfferingDialog = enhance(PurePreviewOfferingDialog);

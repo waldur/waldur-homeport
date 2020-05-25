@@ -1,6 +1,9 @@
 import { openModalDialog } from '@waldur/modal/actions';
 
-export const showEventTypes = () => openModalDialog('eventTypesDialog');
+import { EventDetailsDialog } from './EventDetailsDialog';
+import { EventTypesDialog } from './EventTypesDialog';
+
+export const showEventTypes = () => openModalDialog(EventTypesDialog);
 
 export const showEventDetails = event =>
-  openModalDialog('eventDetailsDialog', { resolve: { event } });
+  openModalDialog(EventDetailsDialog, { resolve: { event } });

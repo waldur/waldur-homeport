@@ -20,7 +20,6 @@ import { OFFERING_SCREENSHOTS_FORM_ID } from '@waldur/marketplace/offerings/stor
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 const AddOfferingScreenshotDialog = props => (
   <form
@@ -97,10 +96,6 @@ const enhance = compose(
   }),
 );
 
-const AddOfferingScreenshotDialogContainer = enhance(
+export const AddOfferingScreenshotDialogContainer = enhance(
   AddOfferingScreenshotDialog,
 );
-
-export default connectAngularComponent(AddOfferingScreenshotDialogContainer, [
-  'resolve',
-]);

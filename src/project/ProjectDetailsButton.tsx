@@ -3,18 +3,19 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 import { Project } from '@waldur/workspace/types';
 
+import { ProjectDetailsDialog } from './ProjectDetailsDialog';
+
 const openProjectDialog = (project: Project) =>
-  openModalDialog('projectDialog', { resolve: { project }, size: 'lg' });
+  openModalDialog(ProjectDetailsDialog, { resolve: { project }, size: 'lg' });
 
 export const ProjectDetailsButton = ({ project }: { project: Project }) => {
   const dispatch = useDispatch();
   const callback = React.useCallback(
     () => dispatch(openProjectDialog(project)),
-    [project],
+    [dispatch, project],
   );
   return (
     <ActionButton
@@ -24,5 +25,3 @@ export const ProjectDetailsButton = ({ project }: { project: Project }) => {
     />
   );
 };
-
-export default connectAngularComponent(ProjectDetailsButton, ['project']);

@@ -6,7 +6,6 @@ import { compose } from 'redux';
 import { ENV } from '@waldur/core/services';
 import { translate, withTranslation } from '@waldur/i18n';
 import { getNativeNameVisible, getConfig } from '@waldur/store/config';
-import { connectAngularComponent } from '@waldur/store/connect';
 import {
   fieldIsVisible,
   isRequired,
@@ -137,9 +136,3 @@ const enhance = compose(
 );
 
 export const UserEditContainer = enhance(UserUpdateComponent);
-
-export default connectAngularComponent(UserEditContainer, [
-  'user',
-  'initial',
-  'onSave',
-]);

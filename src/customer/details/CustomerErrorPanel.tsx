@@ -5,11 +5,13 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { CustomerErrorDialog } from './CustomerErrorDialog';
+
 export const CustomerErrorPanel = () => {
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
   const reportError = () =>
-    dispatch(openModalDialog('customerErrorDialog', { resolve: { customer } }));
+    dispatch(openModalDialog(CustomerErrorDialog, { resolve: { customer } }));
 
   return (
     <div className="highlight">

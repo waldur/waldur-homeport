@@ -1,6 +1,8 @@
 import Axios from 'axios';
 
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
 
 import { ActionConfigurationRegistry } from './action-configuration';
 
@@ -208,9 +210,9 @@ export default function actionUtilsService(
     if (action.useResolve) {
       angular.extend(params, {
         resolve: {
-          action: () => action,
-          controller: () => controller,
-          resource: () => resource,
+          action,
+          controller,
+          resource,
         },
       });
     } else {
@@ -222,9 +224,13 @@ export default function actionUtilsService(
       });
       params.scope = dialogScope;
     }
-    $uibModal.open(params).result.then(function() {
-      $rootScope.$broadcast('actionApplied', name);
-    });
+    if (typeof component === 'string') {
+      $uibModal.open(params).result.then(function() {
+        $rootScope.$broadcast('actionApplied', name);
+      });
+    } else {
+      store.dispatch(openModalDialog(component, params));
+    }
   };
 
   this.loadNestedActions = function(controller, model, tab) {

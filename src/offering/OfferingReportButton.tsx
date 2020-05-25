@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { OfferingReportDialog } from './OfferingReportDialog';
 import { Offering } from './types';
 
 interface OfferingReportButtonProps {
@@ -11,7 +12,7 @@ interface OfferingReportButtonProps {
 }
 
 export const openReport = report =>
-  openModalDialog('offeringReportDialog', { resolve: { report }, size: 'lg' });
+  openModalDialog(OfferingReportDialog, { resolve: { report }, size: 'lg' });
 
 export const OfferingReportButton: React.FC<OfferingReportButtonProps> = ({
   offering,

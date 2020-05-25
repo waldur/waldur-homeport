@@ -23,7 +23,6 @@ import { DateField } from '@waldur/form-react/DateField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 const PaymentProfileUpdateDialog = props => {
   const [
@@ -115,8 +114,6 @@ const enhance = compose(
   }),
 );
 
-const PaymentProfileUpdateDialogContainer = enhance(PaymentProfileUpdateDialog);
-
-export default connectAngularComponent(PaymentProfileUpdateDialogContainer, [
-  'resolve',
-]);
+export const PaymentProfileUpdateDialogContainer = enhance(
+  PaymentProfileUpdateDialog,
+);

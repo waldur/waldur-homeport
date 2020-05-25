@@ -3,6 +3,7 @@ import { translate } from '@waldur/i18n';
 import { Attachment } from '@waldur/issues/attachments/types';
 import { getFileName } from '@waldur/issues/attachments/utils';
 import { openModalDialog } from '@waldur/modal/actions';
+import { UserPopover } from '@waldur/user/UserPopover';
 
 import { Comment } from './types';
 
@@ -128,4 +129,4 @@ export const formatJiraMarkup = (
     .replace(/\n/g, '<br/>');
 
 export const openUserModal = (uuid: string) =>
-  openModalDialog('userPopover', { resolve: { user_uuid: uuid } });
+  openModalDialog(UserPopover, { resolve: { user_uuid: uuid } });

@@ -6,13 +6,12 @@ import { reduxForm, formValues } from 'redux-form';
 import { SelectAsyncField } from '@waldur/form-react';
 import { withTranslation } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
 import { MonitoringGuide } from './MonitoringGuide';
 import { ZabbixTemplateRequest } from './types';
 
-const ZabbixHostCreateDialog = props => (
+const PureZabbixHostCreateDialog = props => (
   <ActionDialog
     title={props.translate('Create Zabbix host')}
     submitLabel={props.translate('Create Zabbix host')}
@@ -79,6 +78,4 @@ const enhance = compose(
   withTranslation,
 );
 
-export default connectAngularComponent(enhance(ZabbixHostCreateDialog), [
-  'resolve',
-]);
+export const ZabbixHostCreateDialog = enhance(PureZabbixHostCreateDialog);

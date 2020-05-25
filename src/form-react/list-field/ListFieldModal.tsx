@@ -6,7 +6,6 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { ListConfiguration } from '@waldur/form-react/list-field/types';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 interface PureListFieldModalProps extends InjectedFormProps, TranslateProps {
   closeModal(): void;
@@ -131,6 +130,4 @@ const enhance = compose(
   withTranslation,
 );
 
-const ListFieldModal = enhance(PureListFieldModal);
-
-export default connectAngularComponent(ListFieldModal, ['resolve']);
+export const ListFieldModal = enhance(PureListFieldModal);

@@ -9,7 +9,6 @@ import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 interface OfferingDetailsDialogProps {
   resolve: { offeringUuid: string };
@@ -26,7 +25,7 @@ async function loadData(offering_uuid: string) {
   };
 }
 
-const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => (
+export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => (
   <ModalDialog
     title={translate('Offering details')}
     footer={<CloseDialogButton />}
@@ -61,5 +60,3 @@ const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => (
     </Query>
   </ModalDialog>
 );
-
-export default connectAngularComponent(OfferingDetailsDialog, ['resolve']);

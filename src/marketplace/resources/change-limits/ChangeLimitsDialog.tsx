@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Query } from '@waldur/core/Query';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { DialogBody } from './ChangeLimitsBody';
 import { loadData } from './utils';
@@ -30,5 +29,3 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = props => (
     )}
   </Query>
 );
-
-export default connectAngularComponent(ChangeLimitsDialog, ['resolve']);

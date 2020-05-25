@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { Field, change } from 'redux-form';
 
+import { CustomerPopover } from '@waldur/customer/popover/CustomerPopover';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -24,7 +25,7 @@ export const OrganizationGroup = ({ onSearch }) => {
   const customer = useSelector(customerSelector);
   const openCustomerDialog = () =>
     dispatch(
-      openModalDialog('customerPopover', {
+      openModalDialog(CustomerPopover, {
         size: 'lg',
         resolve: { customer_uuid: customer.uuid },
       }),

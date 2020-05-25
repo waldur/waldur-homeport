@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { Tooltip } from '@waldur/core/Tooltip';
+import { CustomerPopover } from '@waldur/customer/popover/CustomerPopover';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { UserPopover } from '@waldur/user/UserPopover';
 
 import { Issue } from './types';
 
@@ -17,11 +19,11 @@ interface Props {
 
 const connector = connect(null, dispatch => ({
   openUserDialog: user_uuid =>
-    dispatch(openModalDialog('userPopover', { resolve: { user_uuid } })),
+    dispatch(openModalDialog(UserPopover, { resolve: { user_uuid } })),
 
   openCustomerDialog: customer_uuid =>
     dispatch(
-      openModalDialog('customerPopover', {
+      openModalDialog(CustomerPopover, {
         resolve: { customer_uuid },
         size: 'lg',
       }),

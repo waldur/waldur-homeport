@@ -4,13 +4,12 @@ import { translate } from '@waldur/i18n';
 import { Screenshot } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 interface ViewOfferingScreenshotDialogProps {
   resolve: Screenshot;
 }
 
-const ViewOfferingScreenshotDialog = (
+export const ViewOfferingScreenshotDialog = (
   props: ViewOfferingScreenshotDialogProps,
 ) => (
   <ModalDialog
@@ -29,7 +28,3 @@ const ViewOfferingScreenshotDialog = (
     </div>
   </ModalDialog>
 );
-
-export default connectAngularComponent(ViewOfferingScreenshotDialog, [
-  'resolve',
-]);

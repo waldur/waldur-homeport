@@ -6,13 +6,15 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { Offering } from '@waldur/offering/types';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { AddOfferingScreenshotDialogContainer } from '../AddOfferingScreenshotDialog';
+
 interface OfferingAddScreenshotButtonProps {
   offering: Offering;
   openDialog(): void;
 }
 
 const openPreviewOfferingDialog = (props: OfferingAddScreenshotButtonProps) => {
-  return openModalDialog('marketplaceAddOfferingScreenshotDialog', {
+  return openModalDialog(AddOfferingScreenshotDialogContainer, {
     resolve: props,
     size: 'lg',
   });

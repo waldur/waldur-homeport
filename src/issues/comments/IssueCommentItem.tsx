@@ -14,6 +14,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 
 import * as actions from './actions';
 import './IssueCommentItem.scss';
+import { IssueCommentDeleteDialog } from './IssueCommentDeleteDialog';
 import { IssueCommentsFormContainer } from './IssueCommentsFormContainer';
 import {
   getIsDeleting,
@@ -133,7 +134,7 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
 };
 
 const createDeleteDialog = uuid =>
-  openModalDialog('IssueCommentDeleteDialog', { resolve: { uuid } });
+  openModalDialog(IssueCommentDeleteDialog, { resolve: { uuid } });
 
 const mapStateToProps = (state, ownProps) => ({
   attachments: getAttachments(state),

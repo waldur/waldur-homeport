@@ -1,3 +1,7 @@
+import { EventDetailsDialog } from '@waldur/events/EventDetailsDialog';
+import { openModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
+
 import template from './invoice-events-dialog.html';
 
 const invoiceEventsDialog = {
@@ -9,9 +13,8 @@ const invoiceEventsDialog = {
   },
   controller: class InvoiceEventsDialogController {
     // @ngInject
-    constructor(InvoiceEventsService, $uibModal) {
+    constructor(InvoiceEventsService) {
       this.InvoiceEventsService = InvoiceEventsService;
-      this.$uibModal = $uibModal;
     }
 
     $onInit() {
@@ -25,12 +28,13 @@ const invoiceEventsDialog = {
 
     showEventDetails(event) {
       this.close();
-      this.$uibModal.open({
-        component: 'eventDetailsDialog',
-        resolve: {
-          event: () => event.original,
-        },
-      });
+      store.dispatch(
+        openModalDialog(EventDetailsDialog, {
+          resolve: {
+            event: event.original,
+          },
+        }),
+      );
     }
   },
 };

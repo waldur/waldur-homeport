@@ -1,21 +1,18 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { withTranslation } from '@waldur/i18n/translate';
-import { openModalDialog } from '@waldur/modal/actions';
+import { translate } from '@waldur/i18n/translate';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
-const EventDetailsButton = ({ row, onShowEventsDetails, translate }) => (
-  <ActionButton
-    title={translate('Details')}
-    action={() => onShowEventsDetails(row)}
-    icon="fa fa-eye"
-  />
-);
+import { showEventDetails } from './actions';
 
-const showEventsDetails = event =>
-  openModalDialog('eventDetailsDialog', { resolve: { event } });
-
-export default withTranslation(
-  connect(null, { onShowEventsDetails: showEventsDetails })(EventDetailsButton),
-);
+export const EventDetailsButton = ({ row }) => {
+  const dispatch = useDispatch();
+  return (
+    <ActionButton
+      title={translate('Details')}
+      action={() => dispatch(showEventDetails(row))}
+      icon="fa fa-eye"
+    />
+  );
+};

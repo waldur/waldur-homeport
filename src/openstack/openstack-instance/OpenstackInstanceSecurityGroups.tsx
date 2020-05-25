@@ -12,8 +12,10 @@ import {
   SecurityGroupOption,
 } from '@waldur/openstack/openstack-security-groups/types';
 
+import { OpenStackSecurityGroupsDialog } from '../openstack-security-groups/OpenStackSecurityGroupsDialog';
+
 const openSecurityGroupsDetailsDialog = (securityGroups: SecurityGroup[]) =>
-  openModalDialog('SecurityGroupsDialogReact', {
+  openModalDialog(OpenStackSecurityGroupsDialog, {
     resolve: { securityGroups },
     size: 'lg',
   });
