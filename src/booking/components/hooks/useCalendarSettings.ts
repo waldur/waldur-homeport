@@ -38,7 +38,15 @@ export const useCalendarSettings = () => {
         },
       }),
     );
-  }, [weekends, startTime, endTime, daysOfWeek, slotDuration, timeZone]);
+  }, [
+    weekends,
+    startTime,
+    endTime,
+    daysOfWeek,
+    slotDuration,
+    timeZone,
+    dispatch,
+  ]);
 
   return {
     weekends,
