@@ -171,7 +171,7 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Activating"
 msgstr ""
 
@@ -607,7 +607,7 @@ msgstr ""
 msgid "Attached to"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Attaching"
 msgstr ""
 
@@ -749,7 +749,7 @@ msgstr ""
 msgid "Backend URL"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Backing up"
 msgstr ""
 
@@ -1027,11 +1027,11 @@ msgstr ""
 msgid "Change user email"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Changing flavor"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Changing password"
 msgstr ""
 
@@ -1457,27 +1457,27 @@ msgstr ""
 msgid "Creating"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Creating a backup schedule"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Creating a floating IP"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Creating a new network"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Creating a security group"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Creating a subnet"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Creating snapshot schedule"
 msgstr ""
 
@@ -1583,7 +1583,7 @@ msgstr ""
 msgid "Deactivate"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Deactivating"
 msgstr ""
 
@@ -1709,7 +1709,7 @@ msgstr ""
 msgid "Destroy"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Destroying"
 msgstr ""
 
@@ -1717,7 +1717,7 @@ msgstr ""
 msgid "Detach"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Detaching"
 msgstr ""
 
@@ -1792,7 +1792,7 @@ msgid "Do not allow user to specify quotas when offering is provisioned."
 msgstr ""
 
 #: src/openstack/openstack-network/module.ts
-#: src/openstack/openstack-subnet/actions.js
+#: src/openstack/openstack-subnet/actions.ts
 msgid "Do not configure a gateway for this subnet"
 msgstr ""
 
@@ -2178,7 +2178,7 @@ msgstr ""
 msgid "Extend OpenStack volume"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Extending"
 msgstr ""
 
@@ -2420,7 +2420,7 @@ msgid "Gateway IP"
 msgstr ""
 
 #: src/openstack/openstack-network/module.ts
-#: src/openstack/openstack-subnet/actions.js
+#: src/openstack/openstack-subnet/actions.ts
 msgid "Gateway IP of this subnet"
 msgstr ""
 
@@ -2619,7 +2619,7 @@ msgstr ""
 msgid "Import resource"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Importing resources"
 msgstr ""
 
@@ -4910,11 +4910,11 @@ msgstr ""
 msgid "Publisher"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Pulling"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Pulling quotas"
 msgstr ""
 
@@ -5493,7 +5493,7 @@ msgstr ""
 msgid "Restart"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Restarting"
 msgstr ""
 
@@ -5509,7 +5509,7 @@ msgstr ""
 msgid "Restricted, because of type."
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Restroing"
 msgstr ""
 
@@ -6230,7 +6230,7 @@ msgstr ""
 msgid "Start time"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Starting"
 msgstr ""
 
@@ -6307,7 +6307,7 @@ msgstr ""
 msgid "Stop"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Stopping"
 msgstr ""
 
@@ -6372,7 +6372,7 @@ msgstr ""
 msgid "Subnet Name"
 msgstr ""
 
-#: src/openstack/openstack-subnet/actions.js
+#: src/openstack/openstack-subnet/actions.ts
 msgid "Subnet has been updated."
 msgstr ""
 
@@ -6442,7 +6442,7 @@ msgstr ""
 #: src/openstack/openstack-network/module.ts
 #: src/openstack/openstack-security-groups/module.ts
 #: src/openstack/openstack-snapshot/actions.ts
-#: src/openstack/openstack-subnet/actions.js
+#: src/openstack/openstack-subnet/actions.ts
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
 #: src/openstack/openstack-volume/actions/PullAction.ts
@@ -6482,7 +6482,7 @@ msgstr ""
 msgid "TOTAL"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Taking a snapshot"
 msgstr ""
 
@@ -7579,27 +7579,27 @@ msgid "Updated"
 msgstr ""
 
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Updating"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Updating floating IPs"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Updating internal IPs"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Updating quotas"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Updating rules"
 msgstr ""
 
-#: src/resource/state/constants.js
+#: src/resource/state/constants.ts
 msgid "Updating security groups"
 msgstr ""
 

@@ -1,20 +1,12 @@
+import { ResourceStateConfigurationProvider } from '@waldur/resource/state/ResourceStateConfiguration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import openstackBackupScheduleWarning from './BackupScheduleWarning';
 import './breadcrumbs';
 import { OpenStackBackupScheduleSummary } from './OpenStackBackupScheduleSummary';
+
 import './tabs';
 import './actions';
-
-// @ngInject
-function stateConfig(ResourceStateConfigurationProvider) {
-  ResourceStateConfigurationProvider.register(
-    'OpenStackTenant.BackupSchedule',
-    {
-      error_states: ['error'],
-    },
-  );
-}
 
 export default module => {
   ResourceSummary.register(
@@ -25,5 +17,10 @@ export default module => {
     'openstackBackupScheduleWarning',
     openstackBackupScheduleWarning,
   );
-  module.config(stateConfig);
+  ResourceStateConfigurationProvider.register(
+    'OpenStackTenant.BackupSchedule',
+    {
+      error_states: ['error'],
+    },
+  );
 };

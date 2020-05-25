@@ -1,3 +1,4 @@
+import { gettext } from '@waldur/i18n';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import { DEFAULT_EDIT_ACTION } from '@waldur/resource/actions/constants';
 
