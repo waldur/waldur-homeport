@@ -18,7 +18,13 @@ ActionConfigurationRegistry.register('OpenStack.SubNet', {
         disable_gateway: {
           type: 'boolean',
           required: false,
-          label: gettext('Do not configure a gateway for this subnet'),
+          label: gettext('Disable gateway IP advertising via DHCP'),
+        },
+        enable_default_gateway: {
+          type: 'boolean',
+          required: false,
+          resource_default_value: true,
+          label: gettext('Connect subnet to a default virtual router'),
         },
       },
     },
