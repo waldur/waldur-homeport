@@ -872,7 +872,7 @@ msgstr ""
 msgid "By submitting the form you are agreeing to the"
 msgstr ""
 
-#: src/openstack/openstack-security-groups/security-groups-dialog.html
+#: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "CIDR"
@@ -2569,9 +2569,9 @@ msgid "IP address"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/security-group-rules-list.html
-#: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "IP protocol"
 msgstr ""
 
@@ -2693,7 +2693,7 @@ msgid "Instance does not have any floating IPs yet."
 msgstr ""
 
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
-#: src/openstack/openstack-security-groups/security-groups-dialog.html
+#: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
 msgid "Instance does not have any security groups yet."
 msgstr ""
 
@@ -4550,8 +4550,8 @@ msgid "Port"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-group-rules-list.html
-#: src/openstack/openstack-security-groups/security-groups-dialog.html
 msgid "Port range"
 msgstr ""
 
@@ -5144,7 +5144,7 @@ msgid "Remote CIDR"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
-#: src/openstack/openstack-security-groups/security-groups-dialog.html
+#: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
 msgid "Remote network"
 msgstr ""
 
@@ -5742,7 +5742,7 @@ msgid "Security groups"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
-#: src/openstack/openstack-security-groups/security-groups-dialog.html
+#: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
 msgid "Security groups details"
 msgstr ""
 

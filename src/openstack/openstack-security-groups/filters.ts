@@ -1,12 +1,10 @@
 import {
-  formatSecurityGroupRulePort,
   formatSecurityGroupRulePortRange,
   formatSecurityGroupProtocol,
   formatSecurityGroupCIDR,
 } from './utils';
 
 export default module => {
-  module.filter('securityGroupRulePort', () => formatSecurityGroupRulePort);
   module.filter(
     'securityGroupRulePortRange',
     () => formatSecurityGroupRulePortRange,

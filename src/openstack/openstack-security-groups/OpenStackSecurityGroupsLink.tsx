@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { SecurityGroupsDialog } from './SecurityGroupsDialog';
+
 export const PureOpenStackSecurityGroupsLink = props =>
   props.items && props.items.length > 0 ? (
     <span className="cursor-pointer" onClick={props.openDetailsDialog}>
@@ -14,7 +16,7 @@ export const PureOpenStackSecurityGroupsLink = props =>
   );
 
 export const openDetailsDialog = securityGroups =>
-  openModalDialog('securityGroupsDialog', { resolve: { securityGroups } });
+  openModalDialog(SecurityGroupsDialog, { resolve: { securityGroups } });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   openDetailsDialog: () => dispatch(openDetailsDialog(ownProps.items)),
