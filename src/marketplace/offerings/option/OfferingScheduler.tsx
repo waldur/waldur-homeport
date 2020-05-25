@@ -8,7 +8,7 @@ import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
 import { CalendarSettings } from '@waldur/booking/components/CalendarSettings';
 import { BookingProps, State, ConfigProps } from '@waldur/booking/types';
-import { deleteCalendarBookingEvent } from '@waldur/booking/utils';
+import { deleteCalendarBooking } from '@waldur/booking/utils';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 import './OfferingScheduler.scss';
@@ -37,9 +37,7 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
         calendarType="create"
         events={props.fields.getAll() || []}
         addEventCb={props.fields.push}
-        removeEventCb={oldID =>
-          deleteCalendarBookingEvent(props.fields, { id: oldID })
-        }
+        removeEventCb={id => deleteCalendarBooking(props.fields, id)}
         options={{
           height: 'auto',
           ...props.config,
