@@ -8,7 +8,6 @@ import filtersModule from './filters';
 import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
 import securityGroupRuleEditor from './security-group-rule-editor';
 import securityGroupRulesList from './security-group-rules-list';
-import securityGroupsDialog from './security-groups-dialog';
 
 import './tabs';
 
@@ -54,6 +53,5 @@ export default module => {
   );
   module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
-  module.component('securityGroupsDialog', securityGroupsDialog);
   filtersModule(module);
 };
