@@ -1,7 +1,7 @@
 import { Calendar, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment-timezone';
 import * as React from 'react';
-
+import { useDispatch } from 'react-redux';
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/list/main.css';
@@ -20,6 +20,7 @@ import {
   transformBookingEvent,
   handleSchedule,
 } from '@waldur/booking/utils';
+import { showSuccess, showError } from '@waldur/store/coreSaga';
 
 import BookingModal from '../modal/BookingModal';
 
@@ -39,6 +40,8 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     el: null,
     event: null,
   });
+
+  const dispatch = useDispatch();
 
   const getApi = (): Calendar => calendarRef.current!;
 
@@ -67,12 +70,16 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       return setModal({ isOpen: true, el, event });
     }
   };
+  const addBooking = (event: BookingProps) => {
+    dispatch(showSuccess('Booking scheduled.'));
+    return props.addEventCb(event);
+  };
 
   const updateEvent = arg => {
     const oldID: BookingProps['id'] =
       (arg.prevEvent && arg.prevEvent.id) || (arg.oldEvent && arg.oldEvent.id);
     props.removeEventCb(oldID);
-    props.addEventCb(createBooking(arg.event));
+    addBooking(createBooking(arg.event));
   };
 
   const handleSelect = arg => {
@@ -90,7 +97,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
         arg.jsEvent.timeStamp,
       );
 
-      return props.addEventCb(availabiltyBooking);
+      return addBooking(availabiltyBooking);
     } else if (isCalType('edit')) {
       const calendarApi = getApi();
       const checkEvents = calendarApi.getEvents();
@@ -103,6 +110,9 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
             (arg.start >= event.start && arg.start <= event.end) ||
             (arg.end >= event.start && arg.end <= event.end))
         ) {
+          dispatch(
+            showError('Booking is not allowed to overlap other bookings.'),
+          );
           return calendarApi.unselect();
         }
       });
@@ -113,7 +123,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
         props.options.slotDuration,
       );
 
-      return props.addEventCb(scheduledBooking);
+      return addBooking(scheduledBooking);
     }
   };
 
@@ -122,9 +132,9 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       ...defaultOptions,
       ...props.options,
       eventClick,
-      events: props.events,
       editable: !isCalType('read'),
       selectable: !isCalType('read'),
+      slotEventOverlap: isCalType('create'),
       eventDataTransform: event =>
         transformBookingEvent(event, isCalType('create')),
     });
@@ -146,7 +156,6 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       slotEventOverlap: isCalType('create'),
       selectConstraint: !isCalType('create') ? 'Availability' : null,
       eventConstraint: !isCalType('create') ? 'Availability' : null,
-      events: props.events,
       eventClick,
       select: handleSelect,
       eventDrop: updateEvent,
@@ -156,8 +165,12 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
 
     cal.on(
       'eventMouseEnter',
-      ({ event: { id } }) => hovered !== id && setHovered(id),
+      ({ event }) =>
+        event.rendering !== 'background' &&
+        hovered !== event.id &&
+        setHovered(event.id),
     );
+
     cal.on('eventMouseLeave', () => setHovered(''));
 
     if (
