@@ -1088,7 +1088,6 @@ msgid "Client secret"
 msgstr ""
 
 #: src/invoices/events/invoice-events-dialog.html
-#: src/openstack/openstack-tenant/actions/request-direct-access.html
 #: src/slurm/details/slurm-allocation-details-dialog.html
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
@@ -1675,7 +1674,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
-#: src/openstack/openstack-tenant/actions/request-direct-access.js
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -4474,7 +4473,7 @@ msgstr ""
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/request-direct-access.html
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 msgid "Please note that request should specify tenant and provide a reason."
 msgstr ""
 
@@ -4482,7 +4481,7 @@ msgstr ""
 msgid "Please note that request should specify user name and provide a reason."
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/request-direct-access.js
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 msgid "Please provide a reason"
 msgstr ""
 
@@ -5259,12 +5258,12 @@ msgstr ""
 msgid "Request direct access"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/request-direct-access.js
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 msgid "Request direct access to OpenStack Tenant"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/request-direct-access.html
-msgid "Request direct access to {{ $ctrl.tenant.name }}"
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
+msgid "Request direct access to {name}"
 msgstr ""
 
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -6449,7 +6448,7 @@ msgstr ""
 msgid "Sync profile"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/module.js
+#: src/openstack/openstack-floating-ips/module.ts
 #: src/openstack/openstack-network/module.ts
 #: src/openstack/openstack-security-groups/module.ts
 #: src/openstack/openstack-snapshot/actions.ts
@@ -6575,7 +6574,6 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/marketplace.ts
-#: src/openstack/openstack-tenant/actions/request-direct-access.js
 msgid "Tenant name"
 msgstr ""
 
@@ -6843,8 +6841,8 @@ msgstr ""
 msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/request-direct-access.html
-msgid "To get access, please send a request to {{ $ctrl.supportEmail }}."
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
+msgid "To get access, please send a request to {supportEmail}."
 msgstr ""
 
 #: src/auth/auth-init.html

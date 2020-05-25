@@ -65,6 +65,9 @@ const createIssue = async (
   if (issue.resource) {
     payload.resource = issue.resource.url;
   }
+  if (issue.summary) {
+    payload.summary = issue.summary;
+  }
   if (formData.issueTemplate) {
     payload.template = formData.issueTemplate.url;
   }

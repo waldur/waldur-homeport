@@ -20,6 +20,7 @@ export interface CreateIssueProps {
   customer?: Customer;
   project?: Project;
   resource?: any;
+  summary?: string;
   options: Partial<IssueOptions>;
 }
 

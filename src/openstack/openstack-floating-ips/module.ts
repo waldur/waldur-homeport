@@ -1,3 +1,4 @@
+import { gettext } from '@waldur/i18n';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 

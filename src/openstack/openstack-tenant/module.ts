@@ -13,5 +13,5 @@ export default module => {
     'appstoreFieldSelectOpenstackTenant',
     appstoreFieldSelectOpenstackTenant,
   );
-  actionsModule(module);
+  actionsModule();
 };
