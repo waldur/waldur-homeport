@@ -23,7 +23,7 @@ export const createCalendarBookingEvent = ({
   title,
 });
 
-export const deleteCalendarBookingEvent = (events, booking) => {
+export const deleteCalendarBooking = (events, booking) => {
   events.getAll().map((field, index) => {
     if (field.id === booking.id) {
       events.remove(index);
@@ -129,10 +129,10 @@ export const transformBookingEvent = (event, showAvailability = false) => {
   if (event.extendedProps && event.extendedProps.type === 'Availability') {
     event.rendering = showAvailability ? undefined : 'background';
     event.classNames = showAvailability ? 'booking booking-Availability' : '';
-    event.groupId = 'Availability';
     event.overlap = true;
-    event.start = moment(event.start).toDate();
-    event.end = moment(event.end).toDate();
+    if (!showAvailability) {
+      event.groupId = 'Availability';
+    }
   } else if (
     (event.extendedProps &&
       event.extendedProps.type === 'availableForBooking') ||
@@ -143,7 +143,6 @@ export const transformBookingEvent = (event, showAvailability = false) => {
     event.overlap = true;
     event.allDay = false;
   } else {
-    event.constraint = 'availableForBooking';
     event.classNames = event.state!
       ? 'booking booking-' + event.state
       : 'booking booking-Schedule';
