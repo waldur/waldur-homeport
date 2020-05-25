@@ -45,7 +45,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
 
   const getApi = (): Calendar => calendarRef.current!;
 
-  const isCalType = (type: CalendarComponentProps['calendarType']) =>
+  const isCalType = (type: CalendarComponentProps['calendarType']): boolean =>
     props.calendarType === type;
 
   const getNewDate = () => {
