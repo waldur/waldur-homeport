@@ -60,7 +60,7 @@ export const CalendarSettings: React.FC = () => {
         setDaysOfWeek(daysOfWeek.filter(day => !(day === 0 || day === 6)));
       }
     }
-  }, [weekends]);
+  }, [weekends, daysOfWeek]);
 
   return (
     <>
