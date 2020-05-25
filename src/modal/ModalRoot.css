@@ -1,6 +1,7 @@
 .modal-container {
   position: relative;
 }
-.modal-container .modal, .modal-container .modal-backdrop {
+.modal-container .modal,
+.modal-container .modal-backdrop {
   position: absolute;
 }
