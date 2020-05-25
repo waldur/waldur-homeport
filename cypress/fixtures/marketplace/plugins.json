@@ -1,0 +1,43 @@
+[
+  {
+    "offering_type": "Marketplace.Booking",
+    "components": [
+      {
+        "type": "node",
+        "name": "K8S node",
+        "measured_unit": "",
+        "billing_type": "usage"
+      }
+    ],
+    "available_limits": []
+  },
+  {
+    "offering_type": "VMware.VirtualMachine",
+    "components": [
+      {
+        "type": "disk",
+        "name": "Disk",
+        "measured_unit": "GB",
+        "billing_type": "usage"
+      }
+    ],
+    "available_limits": []
+  },
+  {
+    "offering_type": "SlurmInvoices.SlurmPackage",
+    "components": [
+      {
+        "type": "cpu",
+        "name": "CPU",
+        "measured_unit": "hours",
+        "billing_type": "usage"
+      }
+    ],
+    "available_limits": []
+  },
+  {
+    "offering_type": "Support.OfferingTemplate",
+    "components": [],
+    "available_limits": []
+  }
+]

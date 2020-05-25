@@ -60,6 +60,29 @@ Cypress.Commands.add('waitForSpinner', () => {
   cy.get('.fa-spinner.fa-spin').should('not.be.visible');
 });
 
+Cypress.Commands.add('openDropdownByLabel', label => {
+  cy.get('label')
+    .contains(label)
+    .next()
+    .find('.Select-placeholder')
+    .click({ force: true });
+});
+
+Cypress.Commands.add('openDropdownByLabelForce', label => {
+  cy.get('label')
+    .contains(label)
+    .next()
+    .find('.Select-input input')
+    .type(' ', { force: true })
+    .openDropdownByLabel(label);
+});
+
+Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
+  cy.get('.Select-option')
+    .first()
+    .click();
+});
+
 Cypress.Commands.add('openWorkspaceSelector', () => {
   cy
     // Workspace selector indicates user workspace
