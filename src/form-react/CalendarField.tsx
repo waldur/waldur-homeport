@@ -1,87 +1,112 @@
-import { EventInput } from '@fullcalendar/core';
+import { OptionsInput } from '@fullcalendar/core';
+import moment from 'moment';
 import * as React from 'react';
-import { FieldArray, WrappedFieldArrayProps } from 'redux-form';
+import { FieldArray } from 'redux-form';
 
-import { Calendar } from '@waldur/booking/components/calendar/Calendar';
-import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
+import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
+import { EditableCalendarProps } from '@waldur/booking/types';
 import {
-  eventsMapper,
-  createCalendarBookingEvent,
-  deleteCalendarBookingEvent,
+  deleteCalendarBooking,
+  createAvailabilitySlots,
+  createAvailabilityDates,
 } from '@waldur/booking/utils';
-import { Event } from '@waldur/events/types';
-import { withModal } from '@waldur/modal/withModal';
 
-type CalendarComponentProps = WrappedFieldArrayProps<any> & {
-  excludedEvents?: Event[];
-  setModalProps: (event) => void;
-  openModal: (cb) => void;
-  schedules: EventInput[];
-};
-
-export class CalendarComponent extends React.Component<CalendarComponentProps> {
-  state = {
-    view: {
-      type: undefined,
-    },
-  };
-
-  deleteBooking = e => deleteCalendarBookingEvent(this.props.fields, e);
-
-  handleBooking = event => {
-    this.props.setModalProps({
-      event,
-      destroy: () => this.deleteBooking(event),
-    });
-    this.props.openModal(onSuccess => {
-      this.props.fields.push(
-        createCalendarBookingEvent({ ...event.extendedProps, ...onSuccess }),
-      );
-      this.deleteBooking(event);
-    });
-  };
-
+export class EditableCalendar extends React.Component<EditableCalendarProps> {
   getValidRange = events => ({
-    start: Math.min(...events.map(event => Date.parse(event.start))),
-    end: Math.max(...events.map(event => Date.parse(event.end))),
+    start: Math.min(...events.map(event => moment(event.start).valueOf())),
+    end: Math.max(...events.map(event => moment(event.end).valueOf())),
   });
+
+  getCalendarConfig = () => {
+    const configWithEvent = this.props.excludedEvents.find(
+      ({ extendedProps }) => {
+        if (extendedProps.type === 'Availability' && extendedProps.config) {
+          return extendedProps.config;
+        }
+      },
+    );
+    const validRange = this.getValidRange(this.props.excludedEvents);
+    const { config } = configWithEvent.extendedProps!;
+
+    return (
+      config! &&
+      ({
+        ...config,
+        height: 'auto',
+        displayEventEnd: true,
+        nowIndicator: true,
+        defaultTimedEventDuration: config.slotDuration,
+        scrollTime: config.businessHours.startTime,
+        minTime: config.businessHours.startTime,
+        maxTime: config.businessHours.endTime,
+        validRange: {
+          start: moment(validRange.start)
+            .startOf('month')
+            .format(),
+          end: moment(validRange.end)
+            .endOf('month')
+            .format(),
+        },
+        dayRender: ({ date, el }) => {
+          const curDate = moment(date);
+          if (
+            curDate.isBefore(moment(validRange.start).format('YYYY-MM-DD')) ||
+            curDate.isAfter(moment(validRange.end).format('YYYY-MM-DD'))
+          ) {
+            el.classList.add('fc-nonbusiness');
+          }
+        },
+      } as OptionsInput)
+    );
+  };
+
+  getAvailabilitySlots = events => {
+    const { slotDuration } = this.getCalendarConfig();
+    const availability = [];
+
+    this.props.excludedEvents.map(event =>
+      availability.push(...createAvailabilityDates(event)),
+    );
+
+    const slots = createAvailabilitySlots(
+      availability,
+      moment.duration(slotDuration),
+    );
+
+    return slots.filter(
+      slot =>
+        !events.find(item => {
+          const slotStart = moment(slot.start);
+          const slotEnd = moment(slot.end);
+
+          return (
+            moment(item.start).isSame(slotStart) ||
+            slotStart.isBetween(item.start, item.end) ||
+            slotEnd.isSame(item.end)
+          );
+        }),
+    );
+  };
 
   render() {
     const { excludedEvents, fields } = this.props;
     let events = fields.getAll();
     if (!events) {
-      return null;
+      events = [];
     }
-    events = eventsMapper([...excludedEvents, ...events]);
     return (
-      <Calendar
-        editable={true}
-        defaultView={this.state.view.type}
-        selectable={true}
-        eventResizableFromStart={false}
-        events={events}
-        eventLimit={false}
-        validRange={this.getValidRange(events)}
-        viewSkeletonRender={({ view }) => {
-          if (view.type !== this.state.view.type) {
-            this.setState({ view });
-          }
-        }}
-        select={event =>
-          fields.push(
-            createCalendarBookingEvent({ ...event, type: 'ScheduleBooking' }),
-          )
-        }
-        eventClick={e => this.handleBooking(e.event)}
+      <CalendarComponent
+        calendarType="edit"
+        events={[...excludedEvents, ...events]}
+        options={this.getCalendarConfig()}
+        availabiltySlots={this.getAvailabilitySlots(events)}
+        addEventCb={fields.push}
+        removeEventCb={oldID => deleteCalendarBooking(fields, { id: oldID })}
       />
     );
   }
 }
 
 export const CalendarField = props => (
-  <FieldArray
-    name={props.name}
-    component={withModal(CalendarEventModal)(CalendarComponent)}
-    {...props}
-  />
+  <FieldArray name={props.name} component={EditableCalendar} {...props} />
 );

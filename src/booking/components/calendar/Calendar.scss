@@ -91,79 +91,71 @@
   }
 }
 
-.fc-event {
-  &.booking {
-    padding: 4px 4px 2px;
-    margin: 6px 3px;
-    border-style: solid;
+.booking {
+  padding: 4px 4px 2px;
+  margin: 3px 2px;
+  border-style: solid;
 
-    &.fc-day-grid-event {
-      border-width: 0 3px;
-    }
-    &.fc-time-grid-event {
-      border-width: 3px 0;
-    }
+  &.fc-day-grid-event {
+    border-width: 0 3px;
+  }
+  &.fc-time-grid-event {
+    border-width: 3px 0;
+  }
 
-    &-Creating {
-      border-color: #fdb44e;
-      background: hsl(36, 95%, 93%);
-      color: darken(#fdb44d, 12%);
-      &.isHovered {
-        background: #fdb44e;
-        box-shadow: 0 10px 14px rgba(#fdb44e, 0.4);
-      }
-    }
-
-    &-Availability,
-    &-OK {
-      border-color: #19b394;
-      background: #b5f2e6;
-      color: darken(#1ab394, 12%);
-      &.isHovered {
-        background: #19b394;
-        box-shadow: 0 10px 14px rgba(#19b394, 0.4);
-      }
-    }
-
-    &-Terminated {
-      border-color: #fa607e;
-      background: rgba(#fdc5d0, 0.7);
-      color: darken(#fa607e, 12%);
-      &.isHovered {
-        background: #fa607e;
-        box-shadow: 0 10px 14px rgba(#fa607e, 0.4);
-      }
-    }
-
-    &-Schedule {
-      border-color: #4786ff;
-      background: rgba(rgb(218, 231, 255), 0.7);
-      color: darken(#4788ff, 12%);
-      &.isHovered {
-        background: #4786ff;
-        box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-      }
-    }
-
+  &-Creating {
+    border-color: #fdb44e;
+    background: hsl(36, 95%, 93%);
+    color: darken(#fdb44d, 12%);
     &.isHovered {
-      color: #fff;
+      background: #fdb44e;
+      box-shadow: 0 10px 14px rgba(#fdb44e, 0.4);
     }
+  }
 
-    .fc-content {
-      display: flex;
-      flex-direction: column;
-      & .fc-time {
-        font-size: 12px;
-      }
-      & .fc-title {
-        font-size: 11px;
-      }
+  &-Availability,
+  &-OK {
+    border-color: #19b394;
+    background: #b5f2e6;
+    color: darken(#1ab394, 12%);
+    &.isHovered {
+      background: #19b394;
+      box-shadow: 0 10px 14px rgba(#19b394, 0.4);
     }
+  }
+
+  &-Terminated {
+    border-color: #fa607e;
+    background: rgba(#fdc5d0, 0.7);
+    color: darken(#fa607e, 12%);
+    &.isHovered {
+      background: #fa607e;
+      box-shadow: 0 10px 14px rgba(#fa607e, 0.4);
+    }
+  }
+
+  &-Schedule {
+    border-color: #4786ff;
+    background: rgba(rgb(218, 231, 255), 0.7);
+    color: darken(#4788ff, 12%);
+    &.isHovered {
+      background: #4786ff;
+      box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
+    }
+  }
+
+  &.isHovered {
+    color: #fff;
   }
 }
 
 .fc-day-number {
   padding: 3px 6px;
+}
+
+.fc-time-grid .fc-slats td {
+  min-height: 46px;
+  height: 46px;
 }
 
 .fc-head {
@@ -183,7 +175,7 @@
     text-align: center;
     border: 0;
     border-bottom: 1px solid rgba(166, 168, 179, 0.12);
-    line-height: 50px;
+    line-height: 34px;
     font-weight: 500;
   }
 }
