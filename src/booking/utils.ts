@@ -23,7 +23,7 @@ export const createCalendarBookingEvent = ({
   title,
 });
 
-export const deleteCalendarBookingEvent = (events, booking) => {
+export const deleteCalendarBooking = (events, booking) => {
   events.getAll().map((field, index) => {
     if (field.id === booking.id) {
       events.remove(index);
@@ -60,25 +60,6 @@ export const timelineLabels = (interval: number) => {
   return timeLabels;
 };
 
-type EventMap = (
-  events: BookingProps[],
-  showAvailability?: undefined | 'background' | 'none',
-) => EventInput[];
-
-export const mapBookingEvents: EventMap = (events, showAvailability) =>
-  events.map(event => {
-    if (event.extendedProps.type === 'Availability') {
-      event.rendering = showAvailability;
-      event.overlap = true;
-      event.classNames = 'booking booking-Availability';
-    } else if (event.extendedProps.type === 'Schedule') {
-      event.overlap = false;
-      event.constraint = ['availability', 'Availability', 'businessHours'];
-      event.classNames = 'booking booking-Schedule';
-    }
-    return event;
-  });
-
 export const handleTitle = ({ event, el }) => {
   if (!event.title) {
     return el.querySelector('.fc-title').prepend(event.extendedProps.type);
@@ -91,19 +72,6 @@ export const handleTime = ({ event, el }) => {
     return (content.innerHTML =
       '<i class="fa fa-clock-o"> All-day </i>' + content.innerHTML);
   }
-};
-
-export const handleSelect = (arg, type = 'Schedule'): BookingProps => {
-  const { allDay, startStr, start, endStr, end } = arg;
-  const event = {
-    start: allDay ? startStr : start,
-    end: allDay ? endStr : end,
-    allDay,
-    id: `${randomId()}-${arg.jsEvent.timeStamp}`,
-    title: '',
-    extendedProps: { type },
-  };
-  return event;
 };
 
 interface Updater {
@@ -133,3 +101,211 @@ export function filterObject<T>(
     return acc;
   }, {} as Partial<T>);
 }
+
+export const createBooking = (
+  {
+    id,
+    start,
+    end,
+    allDay,
+    title = '',
+    extendedProps,
+  }: EventApi | EventInput | BookingProps,
+  timeStamp?: string,
+): BookingProps => ({
+  id: id || `${randomId()}-${timeStamp!}`,
+  start,
+  end,
+  allDay,
+  title,
+  extendedProps,
+});
+
+export const transformBookingEvent = (event, showAvailability = false) => {
+  if (event === undefined) {
+    return false;
+  }
+
+  if (event.extendedProps && event.extendedProps.type === 'Availability') {
+    event.rendering = showAvailability ? undefined : 'background';
+    event.classNames = showAvailability ? 'booking booking-Availability' : '';
+    event.overlap = true;
+    if (!showAvailability) {
+      event.groupId = 'Availability';
+    }
+  } else if (
+    (event.extendedProps &&
+      event.extendedProps.type === 'availableForBooking') ||
+    event.id === 'availableForBooking'
+  ) {
+    event.groupId = 'availableForBooking';
+    event.rendering = 'background';
+    event.overlap = true;
+    event.allDay = false;
+  } else {
+    event.classNames = event.state!
+      ? 'booking booking-' + event.state
+      : 'booking booking-Schedule';
+  }
+
+  return event;
+};
+
+export const eventRender = (arg, focused?) => {
+  if (arg.el && arg.el.classList.contains('fc-event')) {
+    if (focused === arg.event.id) {
+      arg.el.classList.add('isHovered');
+    }
+    if (arg.view.type === 'dayGridMonth') {
+      handleTime(arg);
+      handleTitle(arg);
+    }
+    return arg.el;
+  }
+};
+
+const getNextSlot = (slots, selectedValue) =>
+  slots
+    .map(slot => moment(slot.start))
+    .sort(time => time.valueOf())
+    .find(next => next.isAfter(moment(selectedValue)));
+
+const getSlotEnd = (slots, selectedValue) =>
+  slots
+    .map(slot => moment(slot.end))
+    .sort(time => time.valueOf())
+    .find(next => moment(selectedValue).isSameOrBefore(next));
+
+export const handleSchedule = (
+  { start, end, view, jsEvent },
+  availabilitySlotsList,
+  slotDuration?,
+) => {
+  const diff = moment(end).diff(moment(start));
+  const { hours, minutes } = moment(slotDuration, 'HH:mm:ss').toObject();
+  const setDuration = moment.duration({ hours, minutes });
+
+  const eventData = createBooking(
+    {
+      start: '',
+      end: '',
+      allDay: false,
+      extendedProps: {
+        type: 'Schedule',
+      },
+    },
+    jsEvent.timeStamp,
+  );
+
+  if (view.type === 'dayGridMonth') {
+    if (diff > 86400000 /* one day in milliseconds */) {
+      eventData.start = getNextSlot(availabilitySlotsList, start).format();
+      eventData.end = getSlotEnd(
+        availabilitySlotsList,
+        moment(end).subtract(1, 'd'),
+      ).format();
+    } else {
+      const nextStart = getNextSlot(availabilitySlotsList, start);
+      eventData.start = nextStart.format();
+      eventData.end = nextStart
+        .clone()
+        .add(setDuration)
+        .format();
+    }
+
+    return eventData;
+  } else {
+    return {
+      ...eventData,
+      start: start,
+      end: end,
+    };
+  }
+};
+
+const getHoursMinutes = (date, unit = 'HH:mm') => {
+  const { hours, minutes } = moment(date, unit).toObject();
+  return { hours, minutes };
+};
+
+export const createAvailabilityDates = (event: BookingProps) => {
+  const dates: EventInput[] = [];
+
+  const mStart = moment(event.start);
+  const mEnd = moment(event.end);
+  const { config } = event.extendedProps;
+
+  while (mStart.diff(mEnd, 'd')) {
+    const curDay =
+      mStart.isoWeekday() === 7 ? mStart.isoWeekday() - 1 : mStart.isoWeekday();
+    const event: BookingProps = {
+      start: mStart
+        .clone()
+        .set(getHoursMinutes(config.businessHours.startTime))
+        .format(),
+      end: mStart
+        .clone()
+        .set(getHoursMinutes(config.businessHours.endTime))
+        .format(),
+      allDay: true,
+      extendedProps: {
+        type: 'Availability',
+        config,
+      },
+    };
+
+    if (config.businessHours.daysOfWeek.includes(curDay)) {
+      dates.push(event);
+    }
+
+    mStart.add(1, 'd');
+  }
+  return dates;
+};
+
+export const createAvailabilitySlots = (availabilitiDates, slotDuration) => {
+  const slots = [];
+
+  availabilitiDates.map(availabilitiDayEvent => {
+    const currentDate = moment(availabilitiDayEvent.start);
+
+    while (currentDate < moment(availabilitiDayEvent.end)) {
+      const slot: EventInput = {
+        start: currentDate.format(),
+        end: currentDate.add(slotDuration).format(),
+        id: 'availableForBooking',
+        groupId: 'availableForBooking',
+        editable: false,
+        rendering: 'background',
+      };
+      slots.push(slot);
+    }
+  });
+
+  return slots;
+};
+
+export const bookingMapper = (events, showAvailability = false) =>
+  events.map(event => {
+    if (event.extendedProps && event.extendedProps.type === 'Availability') {
+      event.rendering = showAvailability ? undefined : 'background';
+      event.classNames = showAvailability ? 'booking booking-Availability' : '';
+      event.overlap = true;
+      event.groupId = 'Availability';
+    } else if (
+      (event.extendedProps &&
+        event.extendedProps.type === 'availableForBooking') ||
+      event.id === 'availableForBooking'
+    ) {
+      event.groupId = 'availableForBooking';
+      event.rendering = 'background';
+      event.overlap = true;
+      event.allDay = false;
+    } else {
+      event.classNames = event.state!
+        ? 'booking booking-' + event.state
+        : 'booking booking-Schedule';
+    }
+
+    return event;
+  });
