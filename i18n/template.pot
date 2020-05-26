@@ -5818,10 +5818,6 @@ msgstr ""
 msgid "Select OpenStack tenant..."
 msgstr ""
 
-#: src/user/keys/appstore-field-select-ssh-key.html
-msgid "Select SSH public key..."
-msgstr ""
-
 #: src/customer/list/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
@@ -6697,10 +6693,6 @@ msgstr ""
 msgid "There are no SSH keys yet."
 msgstr ""
 
-#: src/user/keys/appstore-field-select-ssh-key.html
-msgid "There are no SSH public keys yet."
-msgstr ""
-
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "There are no actions."
 msgstr ""
@@ -7168,10 +7160,6 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.js
 msgid "Unable to get list of OpenStack tenants."
-msgstr ""
-
-#: src/user/keys/appstore-field-select-ssh-key.js
-msgid "Unable to get list of SSH public keys."
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
