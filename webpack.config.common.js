@@ -64,9 +64,6 @@ module.exports = {
               minimize: utils.isProd,
             },
           },
-          {
-            loader: path.resolve('./html-lint-loader'),
-          },
         ],
       },
       {
