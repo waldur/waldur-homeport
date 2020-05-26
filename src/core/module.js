@@ -5,7 +5,6 @@ import extensionPointService from './extension-point-service';
 import loadingSpinner from './LoadingSpinner';
 import sentryModule from './sentry';
 import injectServices from './services';
-import servicesService from './services-service';
 import submitButton from './submit-button';
 
 // @ngInject
@@ -54,7 +53,6 @@ export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
   module.service('baseServiceClass', baseServiceClass);
   module.factory('listCache', listCache);
-  module.service('servicesService', servicesService);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
   module.directive('extensionPoint', extensionPoint);
