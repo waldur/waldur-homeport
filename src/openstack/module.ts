@@ -16,7 +16,7 @@ import './marketplace';
 
 export default module => {
   module.config(routes);
-  openstackTenantModule(module);
+  openstackTenantModule();
   openstackInstanceModule(module);
   openstackVolumeModule();
   openstackBackupModule(module);

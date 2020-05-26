@@ -5817,10 +5817,6 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
-msgid "Select OpenStack tenant..."
-msgstr ""
-
 #: src/customer/list/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
@@ -6688,10 +6684,6 @@ msgstr ""
 msgid "Then download (if needed) and run kubectl"
 msgstr ""
 
-#: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.html
-msgid "There are no OpenStack tenants yet."
-msgstr ""
-
 #: src/user/keys/KeysListTablePlaceholder.tsx
 msgid "There are no SSH keys yet."
 msgstr ""
@@ -7159,10 +7151,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Unable to get form's data."
-msgstr ""
-
-#: src/openstack/openstack-tenant/appstore-field-select-openstack-tenant.js
-msgid "Unable to get list of OpenStack tenants."
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
