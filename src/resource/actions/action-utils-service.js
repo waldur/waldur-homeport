@@ -14,11 +14,9 @@ export default function actionUtilsService(
   $uibModal,
   $injector,
   features,
-  resourcesService,
   usersService,
 ) {
   this.loadActions = function(model) {
-    resourcesService.cleanOptionsCache(model.url);
     return usersService.getCurrentUser().then(user => {
       const config = ActionConfigurationRegistry.getActions(
         model.resource_type,
@@ -26,26 +24,29 @@ export default function actionUtilsService(
       if (Array.isArray(config)) {
         return this.parseActions(config, { resource: model, user });
       }
-      return resourcesService.getOption(model.url).then(response => {
-        const order = (config && config.order) || Object.keys(response.actions);
-        const options = (config && config.options) || {};
-        return order.reduce((result, name) => {
-          const action = angular.merge(
-            {},
-            response.actions[name],
-            options[name],
-          );
-          if (this.actionHasToBeAdded(action, model, user)) {
-            result[name] = action;
-          }
-          if (action.fields) {
-            angular.forEach(action.fields, (action, name) => {
-              action.name = name;
-            });
-          }
-          return result;
-        }, {});
-      });
+      return Axios.request({ url: model.url, method: 'OPTIONS' }).then(
+        response => {
+          const order =
+            (config && config.order) || Object.keys(response.data.actions);
+          const options = (config && config.options) || {};
+          return order.reduce((result, name) => {
+            const action = angular.merge(
+              {},
+              response.data.actions[name],
+              options[name],
+            );
+            if (this.actionHasToBeAdded(action, model, user)) {
+              result[name] = action;
+            }
+            if (action.fields) {
+              angular.forEach(action.fields, (action, name) => {
+                action.name = name;
+              });
+            }
+            return result;
+          }, {});
+        },
+      );
     });
   };
 
