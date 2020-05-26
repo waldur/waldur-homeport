@@ -3,6 +3,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 
 import template from './invoice-events-dialog.html';
+import { loadEvents } from './utils';
 
 const invoiceEventsDialog = {
   template,
@@ -12,15 +13,10 @@ const invoiceEventsDialog = {
     resolve: '<',
   },
   controller: class InvoiceEventsDialogController {
-    // @ngInject
-    constructor(InvoiceEventsService) {
-      this.InvoiceEventsService = InvoiceEventsService;
-    }
-
     $onInit() {
       this.loading = true;
       this.erred = false;
-      this.InvoiceEventsService.loadEvents(this.resolve.item)
+      loadEvents(this.resolve.item)
         .then(events => (this.events = events))
         .catch(() => (this.erred = true))
         .finally(() => (this.loading = false));
