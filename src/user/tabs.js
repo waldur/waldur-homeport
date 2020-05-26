@@ -1,3 +1,4 @@
+import { FreeIpaAccount } from '@waldur/freeipa/FreeIPAAccount';
 import { withStore } from '@waldur/store/connect';
 
 import { HooksList } from './hooks/HooksList';
@@ -46,7 +47,7 @@ export const tabs = {
   },
   freeipa: {
     url: 'freeipa-account/',
-    template: '<freeipa-account></freeipa-account>',
+    component: withStore(FreeIpaAccount),
     data: {
       pageTitle: gettext('FreeIPA account'),
       feature: 'freeipa',

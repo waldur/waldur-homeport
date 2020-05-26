@@ -13,12 +13,8 @@ export default class FreeIPAService {
     });
   }
 
-  getProfile(user) {
-    return Axios.get(this.endpoint, { params: { user: user.uuid } });
-  }
-
   resourceAction(uuid, action) {
-    let url = `${this.endpoint}${uuid}/${action}/`;
+    const url = `${this.endpoint}${uuid}/${action}/`;
     return Axios.post(url);
   }
 
