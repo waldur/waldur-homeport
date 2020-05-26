@@ -1,4 +1,4 @@
-import { loadCertifications } from './api';
+import { loadCertifications, updateCertifications } from './api';
 import template from './project-policies.html';
 
 const projectPolicies = {
@@ -10,7 +10,6 @@ const projectPolicies = {
     // @ngInject
     constructor(
       ENV,
-      projectsService,
       ncUtilsFlash,
       customersService,
       priceEstimatesService,
@@ -19,7 +18,6 @@ const projectPolicies = {
       $q,
     ) {
       this.ENV = ENV;
-      this.projectsService = projectsService;
       this.priceEstimatesService = priceEstimatesService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.customersService = customersService;
@@ -101,12 +99,9 @@ const projectPolicies = {
       if (angular.equals(oldItems, newItems)) {
         return this.$q.resolve();
       } else {
-        return this.projectsService
-          .updateCertifications(this.project.url, newItems)
-          .then(() => {
-            this.projectsService.clearAllCacheForCurrentEndpoint();
-            this.$rootScope.$broadcast('refreshProjectList');
-          });
+        return updateCertifications(this.project.uuid, newItems).then(() => {
+          this.$rootScope.$broadcast('refreshProjectList');
+        });
       }
     }
 

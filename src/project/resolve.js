@@ -1,3 +1,4 @@
+import { getById } from '@waldur/core/api';
 import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 
 // @ngInject
@@ -5,7 +6,6 @@ export function loadProject(
   $state,
   $stateParams,
   currentStateService,
-  projectsService,
   projectPermissionsService,
   customersService,
   WorkspaceService,
@@ -18,7 +18,7 @@ export function loadProject(
   async function loadData() {
     try {
       const user = await usersService.getCurrentUser();
-      const project = await projectsService.$get($stateParams.uuid);
+      const project = await getById('/projects/', $stateParams.uuid);
       const customer = await customersService.$get(project.customer_uuid);
       const permissions = await projectPermissionsService.getList({
         user: user.uuid,

@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-import { deleteById, getAll } from '@waldur/core/api';
+import { deleteById, getAll, post } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 
 export const createProject = project =>
@@ -23,6 +23,11 @@ export const updateProject = project =>
 export const deleteProject = projectId => deleteById('/projects/', projectId);
 
 export const loadCertifications = () => getAll('/service-certifications/');
+
+export const updateCertifications = (projectId, certifications) =>
+  post(`/projects/${projectId}/update_certifications/`, {
+    certifications,
+  });
 
 export const loadProjectTypes = () =>
   Axios.get(`${ENV.apiEndpoint}api/project-types/`).then(
