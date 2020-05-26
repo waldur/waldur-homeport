@@ -52,7 +52,7 @@ const serializeNode = subnet => ({
 
 const serializer = ({ subnet, nodes, ssh_public_key, ...clusterRest }) => ({
   ...clusterRest,
-  nodes: nodes.map(serializeNode(subnet)),
+  nodes: nodes ? nodes.map(serializeNode(subnet)) : undefined,
   ssh_public_key: ssh_public_key ? ssh_public_key.url : undefined,
 });
 
