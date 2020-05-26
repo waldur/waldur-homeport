@@ -1,3 +1,5 @@
+import { get } from '@waldur/core/api';
+
 const openstackBackupRestoreSummary = {
   template:
     '<openstack-instance-checkout-summary ng-if="$ctrl.resource" model="$ctrl.summaryModel"></openstack-instance-checkout-summary>',
@@ -8,9 +10,8 @@ const openstackBackupRestoreSummary = {
   },
   controller: class ComponentController {
     // @ngInject
-    constructor($scope, resourcesService) {
+    constructor($scope) {
       this.$scope = $scope;
-      this.resourcesService = resourcesService;
       this.summaryModel = {};
     }
 
@@ -21,9 +22,9 @@ const openstackBackupRestoreSummary = {
 
     loadResource() {
       if (!this.context.resource.metadata) {
-        this.resourcesService
-          .$get(null, null, this.context.resource.url)
-          .then(resource => (this.resource = resource));
+        get(this.context.resource.url).then(
+          resource => (this.resource = resource),
+        );
       } else {
         this.resource = this.context.resource;
       }

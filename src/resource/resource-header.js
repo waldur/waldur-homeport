@@ -3,6 +3,7 @@ import { getCategoryLink } from '@waldur/marketplace/utils';
 
 import { ResourceBreadcrumbsRegistry } from './breadcrumbs/ResourceBreadcrumbsRegistry';
 import template from './resource-header.html';
+import { ResourcesService } from './ResourcesService';
 
 const resourceHeader = {
   template: template,
@@ -16,7 +17,6 @@ const resourceHeader = {
       $interval,
       ENV,
       features,
-      resourcesService,
       BreadcrumbsService,
       ncUtilsFlash,
     ) {
@@ -27,7 +27,6 @@ const resourceHeader = {
       this.$interval = $interval;
       this.ENV = ENV;
       this.features = features;
-      this.resourcesService = resourcesService;
       this.BreadcrumbsService = BreadcrumbsService;
       this.ncUtilsFlash = ncUtilsFlash;
 
@@ -80,7 +79,7 @@ const resourceHeader = {
     }
 
     getModel() {
-      return this.resourcesService.$get(
+      return ResourcesService.get(
         this.$stateParams.resource_type,
         this.$stateParams.uuid,
       );

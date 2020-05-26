@@ -1,13 +1,14 @@
 import { getById } from '@waldur/core/api';
 import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 
+import { ResourcesService } from './ResourcesService';
+
 // @ngInject
 export function loadResource(
   $stateParams,
   $q,
   $state,
   currentStateService,
-  resourcesService,
   customersService,
   WorkspaceService,
 ) {
@@ -15,8 +16,7 @@ export function loadResource(
     return $q.reject();
   }
 
-  return resourcesService
-    .$get($stateParams.resource_type, $stateParams.uuid)
+  return ResourcesService.get($stateParams.resource_type, $stateParams.uuid)
     .then(resource => {
       return getById('/projects/', resource.project_uuid).then(project => {
         return { project };
