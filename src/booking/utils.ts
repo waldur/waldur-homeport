@@ -309,3 +309,20 @@ export const bookingMapper = (events, showAvailability = false) =>
 
     return event;
   });
+
+export const handleWeekDays = (weekdayNumbers, dayNumber): number[] => {
+  const intVal = parseInt(dayNumber);
+  if (weekdayNumbers.includes(intVal)) {
+    return weekdayNumbers.filter(item => item !== intVal);
+  } else {
+    return weekdayNumbers.concat(intVal);
+  }
+};
+
+export const getDurationOptions = (minuteArray: number[], units = 'minutes') =>
+  minuteArray.map(timeUnit => ({
+    value: moment
+      .utc(moment.duration({ [units]: timeUnit }).asMilliseconds())
+      .format('HH:mm:ss'),
+    label: moment.duration({ [units]: timeUnit }).humanize(),
+  }));
