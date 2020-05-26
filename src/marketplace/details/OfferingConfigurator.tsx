@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm, InjectedFormProps } from 'redux-form';
@@ -27,19 +26,6 @@ export const PureOfferingConfigurator = (
   if (!FormComponent) {
     return null;
   }
-  useEffect(() => {
-    const initializePlanField = () => {
-      const initialData: any = {};
-      if (props.plan) {
-        initialData.plan = props.plan;
-      } else if (props.offering.plans.length === 1) {
-        initialData.plan = props.offering.plans[0];
-      }
-      props.initialize(initialData);
-    };
-
-    initializePlanField();
-  }, []);
   return <FormComponent {...props} />;
 };
 

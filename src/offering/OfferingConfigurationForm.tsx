@@ -51,6 +51,11 @@ export class PureOfferingConfigurationForm extends React.Component<
       attributes.schedules = [];
     }
     const initialData: any = { attributes };
+    if (this.props.plan) {
+      initialData.plan = this.props.plan;
+    } else if (this.props.offering.plans.length === 1) {
+      initialData.plan = this.props.offering.plans[0];
+    }
     initialData.project = this.props.project;
     this.props.initialize(initialData);
   }

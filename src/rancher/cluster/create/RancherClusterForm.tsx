@@ -36,6 +36,9 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
         node: 0,
       },
     };
+    if (!plan && props.offering.plans.length === 1) {
+      initialData.plan = props.offering.plans[0];
+    }
     props.initialize(initialData);
   }, []);
 
