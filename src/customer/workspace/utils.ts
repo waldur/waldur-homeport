@@ -1,7 +1,7 @@
 import { get } from '@waldur/core/api';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getTabTitle } from '@waldur/invoices/utils';
+import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { Customer } from '@waldur/workspace/types';
 
@@ -91,6 +91,5 @@ export const getCustomerCounters = (customer: Customer, fields: string[]) =>
   );
 
 export const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
-  const SidebarExtensionService = ngInjector.get('SidebarExtensionService');
   return SidebarExtensionService.getItems('customer');
 };
