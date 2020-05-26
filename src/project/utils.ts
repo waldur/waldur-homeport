@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
 import { get } from '@waldur/core/api';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import {
   getUser,
@@ -98,6 +98,5 @@ export const getProjectCounters = (project: Project, fields: string[]) =>
   );
 
 export const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
-  const SidebarExtensionService = ngInjector.get('SidebarExtensionService');
   return SidebarExtensionService.getItems('project');
 };

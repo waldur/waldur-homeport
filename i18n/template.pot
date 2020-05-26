@@ -3241,7 +3241,7 @@ msgstr ""
 
 #: src/marketplace/details/utils.ts
 #: src/marketplace/routes.ts
-#: src/marketplace/sidebar.js
+#: src/marketplace/sidebar.ts
 msgid "Marketplace"
 msgstr ""
 
@@ -3448,24 +3448,24 @@ msgstr ""
 #: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/routes.ts
-#: src/marketplace/sidebar.js
+#: src/marketplace/sidebar.ts
 msgid "My offerings"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/routes.ts
-#: src/marketplace/sidebar.js
+#: src/marketplace/sidebar.ts
 msgid "My orders"
 msgstr ""
 
 #: src/marketplace/routes.ts
-#: src/marketplace/sidebar.js
+#: src/marketplace/sidebar.ts
 msgid "My resources"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-#: src/marketplace/sidebar.js
+#: src/marketplace/sidebar.ts
 msgid "My services"
 msgstr ""
 
@@ -4924,18 +4924,18 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/routes.ts
-#: src/marketplace/sidebar.js
+#: src/marketplace/sidebar.ts
 msgid "Public offerings"
 msgstr ""
 
 #: src/marketplace/routes.ts
-#: src/marketplace/sidebar.js
+#: src/marketplace/sidebar.ts
 msgid "Public orders"
 msgstr ""
 
 #: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
-#: src/marketplace/sidebar.js
+#: src/marketplace/sidebar.ts
 msgid "Public resources"
 msgstr ""
 
@@ -5500,7 +5500,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/routes.ts
-#: src/marketplace/sidebar.js
+#: src/marketplace/sidebar.ts
 #: src/offering/OfferingDetails.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
