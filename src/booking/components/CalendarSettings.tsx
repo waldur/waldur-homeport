@@ -7,6 +7,8 @@ import { getOptions } from '@waldur/form-react/TimeSelectField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
+import { handleWeekDays, getDurationOptions } from '../utils';
+
 import { useCalendarSettings } from './hooks/useCalendarSettings';
 
 const timeZoneArray = moment.tz
@@ -16,23 +18,6 @@ const daysArray = [1, 2, 3, 4, 5, 6, 0];
 const timeHours = [1, 2, 3, 4, 5, 6, 6, 8, 24];
 
 const getDayLabel = (day: number): string => moment.weekdays(day);
-
-const handleWeekDays = (weekdayNumbers, dayNumber): number[] => {
-  const intVal = parseInt(dayNumber, null);
-  if (weekdayNumbers.includes(intVal)) {
-    return weekdayNumbers.filter(item => item !== intVal);
-  } else {
-    return weekdayNumbers.concat(intVal);
-  }
-};
-
-export const getDurationOptions = (minuteArray: number[], units = 'minutes') =>
-  minuteArray.map(timeUnit => ({
-    value: moment
-      .utc(moment.duration({ [units]: timeUnit }).asMilliseconds())
-      .format('HH:mm:ss'),
-    label: moment.duration({ [units]: timeUnit }).humanize(),
-  }));
 
 export const CalendarSettings: React.FC = () => {
   const {
