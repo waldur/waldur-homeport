@@ -23,6 +23,7 @@ const TableComponent = props => {
               {row.name}
             </Link>
           ),
+          orderField: 'name',
         },
         {
           title: translate('Description'),
@@ -31,6 +32,7 @@ const TableComponent = props => {
         {
           title: translate('Catalog'),
           render: ({ row }) => <span>{row.catalog_name}</span>,
+          orderField: 'catalog_name',
         },
         {
           title: translate('State'),
@@ -38,6 +40,7 @@ const TableComponent = props => {
         },
       ]}
       verboseName={translate('application templates')}
+      hasQuery={true}
     />
   );
 };
@@ -50,6 +53,7 @@ const TableOptions = {
   mapPropsToFilter: props => ({
     cluster_uuid: props.resource.uuid,
   }),
+  queryField: 'name',
 };
 
 export const ClusterTemplatesList = connectTable(TableOptions)(TableComponent);
