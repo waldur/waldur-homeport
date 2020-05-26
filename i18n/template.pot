@@ -2754,6 +2754,10 @@ msgstr ""
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
+#: src/rancher/cluster/actions/KubeconfigFileAction.ts
+msgid "Instance should not be Creating, or Creation Scheduled. Please contact support."
+msgstr ""
+
 #: src/quotas/constants.ts
 msgid "Instances count"
 msgstr ""
