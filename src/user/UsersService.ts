@@ -1,8 +1,16 @@
-import { getFirst } from '@waldur/core/api';
+import { getFirst, getById, patch } from '@waldur/core/api';
 import { $rootScope, ENV, $q } from '@waldur/core/services';
 
 class UsersServiceClass {
   public currentUser;
+
+  get(userId) {
+    return $q.when(getById('/users/', userId));
+  }
+
+  update(user) {
+    return $q.when(patch(`/users/${user.uuid}/`, user));
+  }
 
   setCurrentUser(user) {
     // TODO: Migrate to Redux and make code DRY
