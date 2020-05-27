@@ -53,23 +53,23 @@ export default class InvitationDialogService {
     user_details,
     role,
   ) {
-    const invite = this.invitationService.$create();
-    invite.link_template = this.getTemplateUrl();
-    invite.email = email;
-    invite.civil_number = civil_number;
-    invite.tax_number = tax_number;
+    const payload = {};
+    payload.link_template = this.getTemplateUrl();
+    payload.email = email;
+    payload.civil_number = civil_number;
+    payload.tax_number = tax_number;
     if (role.field === 'customer_role') {
-      invite.customer_role = role.value;
-      invite.customer = customer.url;
+      payload.customer_role = role.value;
+      payload.customer = customer.url;
     } else if (role.field === 'project_role') {
-      invite.project_role = role.value;
-      invite.project = project.url;
+      payload.project_role = role.value;
+      payload.project = project.url;
     }
     if (user_details) {
-      angular.merge(invite, user_details);
+      angular.merge(payload, user_details);
     }
-    return invite
-      .$save()
+    return this.invitationService
+      .createInvitation(payload)
       .then(response => {
         this.ncUtilsFlash.success(translate('Invitation has been created.'));
         return response;
