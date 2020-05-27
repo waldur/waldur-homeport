@@ -134,9 +134,7 @@ export const formatOfferingRequest = (
 ) => {
   const result: OfferingRequest = {
     name: request.name,
-    native_name: request.native_name,
     description: request.description,
-    native_description: request.native_description,
     full_description: request.full_description,
     terms_of_service: request.terms_of_service,
     category: request.category.url,
