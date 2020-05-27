@@ -37,11 +37,8 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
         calendarType="create"
         events={props.fields.getAll() || []}
         addEventCb={props.fields.push}
-        removeEventCb={id => deleteCalendarBooking(props.fields, id)}
-        options={{
-          height: 'auto',
-          ...props.config,
-        }}
+        removeEventCb={id => deleteCalendarBooking(props.fields, { id })}
+        options={props.config}
       />
     </Col>
   </div>

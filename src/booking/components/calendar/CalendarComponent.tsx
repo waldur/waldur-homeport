@@ -1,7 +1,7 @@
 import { Calendar, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment-timezone';
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/list/main.css';
@@ -19,6 +19,7 @@ import {
   eventRender,
   transformBookingEvent,
   handleSchedule,
+  getLocale,
 } from '@waldur/booking/utils';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 
@@ -40,7 +41,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     el: null,
     event: null,
   });
-
+  const lang = useSelector(getLocale);
   const dispatch = useDispatch();
 
   const getApi = (): Calendar => calendarRef.current!;
@@ -106,8 +107,8 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
         if (
           event.rendering !== 'background' &&
           ((event.start >= arg.start && event.start <= arg.end) ||
-            (event.end >= arg.start && event.end <= arg.end) ||
-            (arg.start >= event.start && arg.start <= event.end) ||
+            (event.end > arg.start && event.end <= arg.end) ||
+            (arg.start >= event.start && arg.start < event.end) ||
             (arg.end >= event.start && arg.end <= event.end))
         ) {
           dispatch(
@@ -156,6 +157,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       slotEventOverlap: isCalType('create'),
       selectConstraint: !isCalType('create') ? 'Availability' : null,
       eventConstraint: !isCalType('create') ? 'Availability' : null,
+      locale: lang,
       eventClick,
       select: handleSelect,
       eventDrop: updateEvent,
@@ -209,8 +211,9 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     props.events,
     props.options,
     calendarRef,
-    modal,
     hovered,
+    modal,
+    lang,
   ]);
 
   return (

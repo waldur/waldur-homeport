@@ -8308,6 +8308,10 @@ msgstr ""
 msgid "databases"
 msgstr ""
 
+#: src/booking/components/calendar/defaultOptions.ts
+msgid "day"
+msgstr ""
+
 #: src/vmware/DisksList.tsx
 msgid "disks"
 msgstr ""
@@ -8365,6 +8369,10 @@ msgstr ""
 
 #: src/table-react/utils.tsx
 msgid "items"
+msgstr ""
+
+#: src/booking/components/calendar/defaultOptions.ts
+msgid "month"
 msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
@@ -8478,6 +8486,10 @@ msgstr ""
 msgid "till"
 msgstr ""
 
+#: src/booking/components/calendar/defaultOptions.ts
+msgid "today"
+msgstr ""
+
 #: src/user/support/utils.ts
 msgid "token will not timeout"
 msgstr ""
@@ -8507,6 +8519,10 @@ msgstr ""
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 msgid "volumes"
+msgstr ""
+
+#: src/booking/components/calendar/defaultOptions.ts
+msgid "week"
 msgstr ""
 
 #: src/rancher/node/NodeRoleField.tsx
