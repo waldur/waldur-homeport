@@ -16,7 +16,7 @@ moment.locale('en-gb');
 
 window['moment'] = moment;
 
-import './shims';
+import 'leaflet/dist/leaflet.css';
 
 import 'font-awesome/css/font-awesome.css';
 import 'world-flags-sprite/stylesheets/flags16.css';

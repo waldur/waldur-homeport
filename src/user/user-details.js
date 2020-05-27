@@ -27,7 +27,7 @@ function UserDetailsController(
         });
       } else {
         usersService
-          .$get($stateParams.uuid)
+          .get($stateParams.uuid)
           .then(function(user) {
             $scope.currentUser = user;
             $scope.isPrivate = false;

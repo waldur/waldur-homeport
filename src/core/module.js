@@ -1,4 +1,3 @@
-import { baseServiceClass, listCache } from './base-service';
 import ErrorMessageFormatter from './ErrorMessageFormatter';
 import extensionPoint from './extension-point-directive';
 import extensionPointService from './extension-point-service';
@@ -51,8 +50,6 @@ function defaultErrorHandler($state) {
 
 export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
-  module.service('baseServiceClass', baseServiceClass);
-  module.factory('listCache', listCache);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
   module.directive('extensionPoint', extensionPoint);
