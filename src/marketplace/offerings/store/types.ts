@@ -40,9 +40,7 @@ export type OfferingLimits = Record<string, { min: number; max: number }>;
 
 export interface OfferingFormData {
   name: string;
-  native_name?: string;
   description?: string;
-  native_description?: string;
   full_description?: string;
   terms_of_service?: string;
   category: Category;
@@ -79,9 +77,7 @@ export interface PlanRequest {
 
 export interface OfferingRequest {
   name: string;
-  native_name?: string;
   description?: string;
-  native_description?: string;
   full_description?: string;
   terms_of_service?: string;
   type: string;

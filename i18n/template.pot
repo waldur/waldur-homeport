@@ -3594,16 +3594,9 @@ msgstr ""
 msgid "Namespace should be unique."
 msgstr ""
 
-#: src/marketplace/offerings/create/OverviewStep.tsx
-#: src/marketplace/offerings/create/OverviewSummary.tsx
-msgid "Native description"
-msgstr ""
-
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/invitations/actions/invitation-dialog.html
-#: src/marketplace/offerings/create/OverviewStep.tsx
-#: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx

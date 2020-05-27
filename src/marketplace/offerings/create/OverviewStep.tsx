@@ -31,15 +31,6 @@ export const OverviewStep = withTranslation((props: TranslateProps) => (
       name="full_description"
       label={props.translate('Full description')}
     />
-    <StringField
-      name="native_name"
-      label={props.translate('Native name')}
-      maxLength={150}
-    />
-    <WysiwygEditor
-      name="native_description"
-      label={props.translate('Native description')}
-    />
     <WysiwygEditor
       name="terms_of_service"
       label={props.translate('Terms of Service')}

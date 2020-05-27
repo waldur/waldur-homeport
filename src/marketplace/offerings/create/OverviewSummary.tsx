@@ -30,16 +30,6 @@ const PureOverviewSummary = props => {
         type: 'html',
       },
       {
-        key: 'native_name',
-        title: translate('Native name'),
-        type: 'string',
-      },
-      {
-        key: 'native_description',
-        title: translate('Native description'),
-        type: 'string',
-      },
-      {
         key: 'terms_of_service',
         title: translate('Terms of Service'),
         type: 'string',

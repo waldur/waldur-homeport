@@ -96,12 +96,11 @@ export const TableOptions = {
   mapPropsToFilter,
   exportRow: (row: Offering) => [
     row.name,
-    row.native_name,
     formatDateTime(row.created),
     row.category_title,
     row.state,
   ],
-  exportFields: ['Name', 'Native name', 'Created', 'Category', 'State'],
+  exportFields: ['Name', 'Created', 'Category', 'State'],
 };
 
 const showOfferingCreateButton = createSelector(

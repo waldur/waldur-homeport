@@ -89,8 +89,6 @@ export interface Offering {
   url?: string;
   thumbnail: string;
   name: string;
-  native_name?: string;
-  native_description?: string;
   terms_of_service?: string;
   rating: number;
   order_item_count: number;
