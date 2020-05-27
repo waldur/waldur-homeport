@@ -1,5 +1,6 @@
 import * as moment from 'moment-timezone';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { Tooltip } from '@waldur/core/Tooltip';
@@ -7,7 +8,7 @@ import { getOptions } from '@waldur/form-react/TimeSelectField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-import { handleWeekDays, getDurationOptions } from '../utils';
+import { handleWeekDays, getDurationOptions, getLocale } from '../utils';
 
 import { useCalendarSettings } from './hooks/useCalendarSettings';
 
@@ -15,9 +16,8 @@ const timeZoneArray = moment.tz
   .names()
   .map(zone => ({ value: zone, label: zone }));
 const daysArray = [1, 2, 3, 4, 5, 6, 0];
-const timeHours = [1, 2, 3, 4, 5, 6, 6, 8, 24];
-
-const getDayLabel = (day: number): string => moment.weekdays(day);
+const getDayLabel = (day: number, lang): string =>
+  moment.locale(lang) && moment.weekdays(day);
 
 export const CalendarSettings: React.FC = () => {
   const {
@@ -34,6 +34,8 @@ export const CalendarSettings: React.FC = () => {
     setEndTime,
     setTimeZone,
   } = useCalendarSettings();
+
+  const lang = useSelector(getLocale);
 
   React.useEffect(() => {
     if (weekends) {
@@ -69,7 +71,7 @@ export const CalendarSettings: React.FC = () => {
           searchable={false}
           clearable={false}
           multi={false}
-          options={getOptions(30)}
+          options={getOptions(60)}
           value={startTime}
           onChange={setStartTime}
         />
@@ -87,7 +89,7 @@ export const CalendarSettings: React.FC = () => {
           searchable={false}
           clearable={false}
           multi={false}
-          options={[...getOptions(30), { value: '24:00', label: '24:00' }]}
+          options={[...getOptions(60), { value: '24:00', label: '24:00' }]}
           value={endTime}
           onChange={setEndTime}
         />
@@ -100,7 +102,11 @@ export const CalendarSettings: React.FC = () => {
       >
         <div className="weekDays-selector">
           {daysArray.map((day, index) => (
-            <Tooltip key={index} label={getDayLabel(day)} id={`weekday-${day}`}>
+            <Tooltip
+              key={index}
+              label={getDayLabel(day, lang)}
+              id={`weekday-${day}`}
+            >
               <input
                 type="checkbox"
                 id={`weekday-${day}`}
@@ -110,7 +116,9 @@ export const CalendarSettings: React.FC = () => {
                   setDaysOfWeek(handleWeekDays(daysOfWeek, e.target.value))
                 }
               />
-              <label htmlFor={`weekday-${day}`}>{getDayLabel(day)[0]}</label>
+              <label htmlFor={`weekday-${day}`}>
+                {getDayLabel(day, lang)[0].toUpperCase()}
+              </label>
             </Tooltip>
           ))}
         </div>
@@ -144,7 +152,7 @@ export const CalendarSettings: React.FC = () => {
           searchable={false}
           clearable={false}
           multi={false}
-          options={getDurationOptions(timeHours, 'hours')}
+          options={getDurationOptions(lang)}
           value={slotDuration}
           onChange={setSlotDuration}
         />

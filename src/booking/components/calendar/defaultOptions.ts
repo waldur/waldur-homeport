@@ -7,6 +7,8 @@ import momentPlugin from '@fullcalendar/moment';
 import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
+import { translate } from '@waldur/i18n';
+
 export const defaultOptions: OptionsInput = {
   plugins: [
     dayGridPlugin,
@@ -19,7 +21,12 @@ export const defaultOptions: OptionsInput = {
   ],
   themeSystem: 'bootstrap',
   handleWindowResize: true,
-  aspectRatio: 1.25,
+  buttonText: {
+    today: translate('today'),
+    month: translate('month'),
+    week: translate('week'),
+    day: translate('day'),
+  },
   header: {
     left: 'prev,today,next',
     center: 'title',
