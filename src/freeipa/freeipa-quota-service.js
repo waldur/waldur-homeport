@@ -1,7 +1,8 @@
+import { patch } from '@waldur/core/api';
+
 export default class FreeIPAQuotaService {
   // @ngInject
-  constructor(quotasService, features) {
-    this.quotasService = quotasService;
+  constructor(features) {
     this.features = features;
   }
 
@@ -25,13 +26,10 @@ export default class FreeIPAQuotaService {
     if (quota.unlimited) {
       quota.limit = -1;
     }
-    return this.quotasService
-      .update({
-        url: quota.url,
-        limit: quota.limit,
-      })
-      .then(() => {
-        this.findQuota(scope).limit = quota.limit;
-      });
+    return patch(`/quotas/${quota.uuid}/`, {
+      limit: quota.limit,
+    }).then(() => {
+      this.findQuota(scope).limit = quota.limit;
+    });
   }
 }
