@@ -1,12 +1,18 @@
 import Axios from 'axios';
 
-import { getById } from '@waldur/core/api';
+import { get, getById } from '@waldur/core/api';
 import { $q, ngInjector, ENV } from '@waldur/core/services';
 import { UsersService } from '@waldur/user/UsersService';
 
 class CustomersServiceClass {
   public filterByCustomer = false;
   public countryChoices = [];
+
+  getUsers(customerUuid) {
+    return $q.when(
+      get(`/customers/${customerUuid}/users/`).then(response => response.data),
+    );
+  }
 
   get(customerUuid) {
     return $q.when(getById('/customers/', customerUuid));

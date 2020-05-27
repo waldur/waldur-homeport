@@ -70,10 +70,7 @@ const addProjectMember = {
         return this.$q.resolve();
       } else {
         return this.customersService
-          .getAll({
-            operation: 'users',
-            UUID: this.resolve.currentCustomer.uuid,
-          })
+          .getUsers(this.resolve.currentCustomer.uuid)
           .then(users => {
             this.users = users.filter(user => {
               return this.resolve.addedUsers.indexOf(user.uuid) === -1;
