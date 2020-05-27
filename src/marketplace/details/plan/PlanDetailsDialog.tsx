@@ -1,7 +1,7 @@
 import * as React from 'react';
+import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Query } from '@waldur/core/Query';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getResource, getOffering } from '@waldur/marketplace/common/api';
@@ -36,51 +36,53 @@ async function loadData(resourceId: string) {
   };
 }
 
-export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = props => (
-  <ModalDialog title={translate('Plan details')} footer={<CloseDialogButton />}>
-    <Query loader={loadData} variables={props.resolve.resourceId}>
-      {({ loading, data, error }) => {
-        if (loading) {
-          return <LoadingSpinner />;
-        }
-        if (error) {
-          return <p>{translate('Unable to load plan details.')}</p>;
-        }
-        if (!data.plan) {
-          return <p>{translate('Resource does not have plan.')}</p>;
-        }
-        return (
-          <>
+export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = props => {
+  const { loading, error, value: data } = useAsync(
+    () => loadData(props.resolve.resourceId),
+    [props.resolve.resourceId],
+  );
+  return (
+    <ModalDialog
+      title={translate('Plan details')}
+      footer={<CloseDialogButton />}
+    >
+      {loading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <p>{translate('Unable to load plan details.')}</p>
+      ) : !data.plan ? (
+        <p>{translate('Resource does not have plan.')}</p>
+      ) : (
+        <>
+          <p>
+            <strong>{translate('Plan name')}</strong>: {data.plan.name}
+          </p>
+          {data.plan.description && (
             <p>
-              <strong>{translate('Plan name')}</strong>: {data.plan.name}
+              <strong>{translate('Plan description')}</strong>:{' '}
+              {data.plan.description}
             </p>
-            {data.plan.description && (
+          )}
+          {data.plan.unit_price > 0 && (
+            <>
               <p>
-                <strong>{translate('Plan description')}</strong>:{' '}
-                {data.plan.description}
+                <strong>{translate('Plan price')}</strong>:{' '}
+                {defaultCurrency(data.plan.unit_price)}
               </p>
-            )}
-            {data.plan.unit_price > 0 && (
-              <>
-                <p>
-                  <strong>{translate('Plan price')}</strong>:{' '}
-                  {defaultCurrency(data.plan.unit_price)}
-                </p>
-                <p>
-                  <strong>{translate('Billing period')}</strong>:{' '}
-                  <BillingPeriod unit={data.plan.unit} />
-                </p>
-              </>
-            )}
-            <PureDetailsTable
-              {...data}
-              formGroupClassName=""
-              columnClassName=""
-              viewMode={true}
-            />
-          </>
-        );
-      }}
-    </Query>
-  </ModalDialog>
-);
+              <p>
+                <strong>{translate('Billing period')}</strong>:{' '}
+                <BillingPeriod unit={data.plan.unit} />
+              </p>
+            </>
+          )}
+          <PureDetailsTable
+            {...data}
+            formGroupClassName=""
+            columnClassName=""
+            viewMode={true}
+          />
+        </>
+      )}
+    </ModalDialog>
+  );
+};

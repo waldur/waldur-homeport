@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
+import { AsyncState } from 'react-use/lib/useAsync';
 import { compose } from 'redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 
-import { QueryChildProps } from '@waldur/core/Query';
 import {
   Limits,
   filterOfferingComponents,
@@ -18,7 +18,9 @@ const FORM_ID = 'marketplaceChangeLimits';
 
 export const formSelector = formValueSelector(FORM_ID);
 
-export type OwnProps = QueryChildProps<FetchedData>;
+export interface OwnProps {
+  asyncState: AsyncState<FetchedData>;
+}
 
 export interface ComponentRowType {
   type: string;
@@ -38,9 +40,14 @@ export interface StateProps {
 
 const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
   const orderCanBeApproved = getOrderCanBeApproved(state);
-  if (ownProps.data) {
+  if (ownProps.asyncState.value) {
     const newLimits = formSelector(state, 'limits');
-    const { offering, plan, usages, limits: currentLimits } = ownProps.data;
+    const {
+      offering,
+      plan,
+      usages,
+      limits: currentLimits,
+    } = ownProps.asyncState.value;
     const { periods, multipliers } = getBillingPeriods(plan.unit);
     const offeringComponents = filterOfferingComponents(offering);
     const components = offeringComponents.map(component => {
@@ -81,10 +88,10 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
   submitRequest: data =>
     changeLimits(
       {
-        marketplace_resource_uuid: ownProps.data.resource.uuid,
-        resource_uuid: ownProps.data.resource.resource_uuid,
-        resource_type: ownProps.data.resource.resource_type,
-        limits: ownProps.data.limitSerializer(data.limits),
+        marketplace_resource_uuid: ownProps.asyncState.value.resource.uuid,
+        resource_uuid: ownProps.asyncState.value.resource.resource_uuid,
+        resource_type: ownProps.asyncState.value.resource.resource_type,
+        limits: ownProps.asyncState.value.limitSerializer(data.limits),
       },
       dispatch,
     ),

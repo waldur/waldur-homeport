@@ -1,8 +1,8 @@
 import * as React from 'react';
+import useAsync from 'react-use/lib/useAsync';
 import { formValues, Field } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Query } from '@waldur/core/Query';
 import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
 import {
@@ -267,16 +267,16 @@ const FormComponent = (props: any) => {
   );
 };
 
-export const VMwareVirtualMachineForm = connector((props: Props) => (
-  <Query variables={props.variable} loader={loadFormOptions}>
-    {({ loading, error, data }) => {
-      if (loading) {
-        return <LoadingSpinner />;
-      }
-      if (error) {
-        return <span>{translate('Unable to load form options.')}</span>;
-      }
-      return <FormComponent {...props} data={data} />;
-    }}
-  </Query>
-));
+export const VMwareVirtualMachineForm = connector((props: Props) => {
+  const { loading, error, value } = useAsync(
+    () => loadFormOptions(props.variable),
+    [props.variable],
+  );
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  if (error) {
+    return <>{translate('Unable to load form options.')}</>;
+  }
+  return <FormComponent {...props} data={value} />;
+});

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { AsyncState } from 'react-use/lib/useAsync';
 import { compose } from 'redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { QueryChildProps } from '@waldur/core/Query';
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { orderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
@@ -22,16 +22,13 @@ const mapStateToProps = state => ({
   orderCanBeApproved: orderCanBeApproved(state),
 });
 
-const mapDispatchToProps = (
-  dispatch,
-  ownProps: QueryChildProps<FetchedData>,
-) => ({
+const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
   submitRequest: data =>
     switchPlan(
       {
-        marketplace_resource_uuid: ownProps.data.resource.uuid,
-        resource_uuid: ownProps.data.resource.resource_uuid,
-        resource_type: ownProps.data.resource.resource_type,
+        marketplace_resource_uuid: ownProps.asyncState.value.resource.uuid,
+        resource_uuid: ownProps.asyncState.value.resource.resource_uuid,
+        resource_type: ownProps.asyncState.value.resource.resource_type,
         plan_url: data.plan.url,
       },
       dispatch,
@@ -39,14 +36,15 @@ const mapDispatchToProps = (
 });
 
 const connector = compose(
-  reduxForm<{ plan: any }, QueryChildProps<FetchedData>>({ form: FORM_ID }),
+  reduxForm<{ plan: any }, OwnProps>({ form: FORM_ID }),
   connect(mapStateToProps, mapDispatchToProps),
 );
 
-interface DialogBodyProps
-  extends QueryChildProps<FetchedData>,
-    InjectedFormProps {
-  error: any;
+interface OwnProps {
+  asyncState: AsyncState<FetchedData>;
+}
+
+interface DialogBodyProps extends OwnProps, InjectedFormProps {
   submitRequest(data: any): void;
   orderCanBeApproved: boolean;
 }
@@ -58,10 +56,10 @@ export const DialogBody = connector((props: DialogBodyProps) => (
       footer={
         <>
           <CloseDialogButton />
-          {!props.loading && (
+          {!props.asyncState.loading && (
             <SubmitButton
               submitting={props.submitting}
-              disabled={!props.data.initialValues}
+              disabled={!props.asyncState.value.initialValues}
               label={
                 props.orderCanBeApproved
                   ? translate('Submit')
@@ -72,12 +70,12 @@ export const DialogBody = connector((props: DialogBodyProps) => (
         </>
       }
     >
-      {props.loading ? (
+      {props.asyncState.loading ? (
         <LoadingSpinner />
-      ) : props.error ? (
+      ) : props.asyncState.error ? (
         <h3>{translate('Unable to load data.')}</h3>
       ) : (
-        <ChangePlanComponent {...props.data} />
+        <ChangePlanComponent {...props.asyncState.value} />
       )}
     </ModalDialog>
   </form>
