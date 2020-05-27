@@ -3,8 +3,8 @@ import { connectAngularComponent } from '@waldur/store/connect';
 import userRoutes from './routes';
 import { UserEditContainer } from './support/UserEditContainer';
 import userDetails from './user-details';
-import usersService from './users-service';
 import { UserSidebar } from './UserSidebar';
+import { UsersService } from './UsersService';
 import { stateUtilsService, attachStateUtils } from './utils';
 import './events';
 
@@ -16,7 +16,7 @@ export default module => {
     connectAngularComponent(UserEditContainer, ['user', 'initial', 'onSave']),
   );
   module.service('stateUtilsService', stateUtilsService);
-  module.service('usersService', usersService);
+  module.constant('usersService', UsersService);
   module.run(attachStateUtils);
   module.config(userRoutes);
 };

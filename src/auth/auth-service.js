@@ -127,7 +127,6 @@ export class AuthService {
     delete Axios.defaults.headers.common['Authorization'];
     this.user = { isAuthenticated: false };
     this.usersService.currentUser = null;
-    this.usersService.cleanAllCache();
     this.$auth.logout();
     this.$rootScope.$broadcast('abortRequests');
     this.$state.go('login', params);
