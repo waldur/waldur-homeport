@@ -18,7 +18,10 @@ const CustomerCreateButton = ({ isVisible, onClick, translate }) =>
   ) : null;
 
 const customerCreateDialog = () =>
-  openModalDialog('customerCreateDialog', { size: 'lg', role: 'CUSTOMER' });
+  openModalDialog('customerCreateDialog', {
+    size: 'lg',
+    resolve: { role: 'CUSTOMER' },
+  });
 
 const enhance = compose(
   connect(

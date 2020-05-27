@@ -17,7 +17,10 @@ export const useCreateOrganization = () => {
   const createOrganization = () => {
     dispatch(closeModalDialog());
     dispatch(
-      openModalDialog('customerCreateDialog', { size: 'lg', role: 'CUSTOMER' }),
+      openModalDialog('customerCreateDialog', {
+        size: 'lg',
+        resolve: { role: 'CUSTOMER' },
+      }),
     );
   };
   return [canCreateOrganization, createOrganization];
