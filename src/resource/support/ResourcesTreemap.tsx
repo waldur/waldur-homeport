@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import useAsync from 'react-use/lib/useAsync';
 import { compose } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Query } from '@waldur/core/Query';
 import { $filter } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
@@ -102,36 +102,32 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
     tooltipValueFormatter = quota.tooltipValueFormatter;
   }
 
+  const { loading, error, value: data } = useAsync(
+    () => loadData(props.accounting_is_running),
+    [props.accounting_is_running],
+  );
+  const chartData = data ? parseProjects(data, keys) : {};
+  let total = 0;
+  if (props.quota && data) {
+    total = calculateTotal(chartData[props.quota.key]);
+  }
   return (
-    <Query loader={loadData} variables={props.accounting_is_running}>
-      {({ loading, error, data }) => {
-        const chartData = data ? parseProjects(data, keys) : {};
-        let total = 0;
-        if (props.quota && data) {
-          total = calculateTotal(chartData[props.quota.key]);
-        }
-        return (
-          <>
-            <TreemapChartFilter
-              quotas={quotas}
-              loading={loading}
-              total={total}
-            />
-            {loading && <LoadingSpinner />}
-            {error && <span>{translate('Unable to load locations.')}</span>}
-            {data && !loading && !error && (
-              <TreemapChart
-                title={props.translate('Resource usage')}
-                width="100%"
-                height={500}
-                data={chartData[props.quota.key]}
-                tooltipValueFormatter={tooltipValueFormatter}
-              />
-            )}
-          </>
-        );
-      }}
-    </Query>
+    <>
+      <TreemapChartFilter quotas={quotas} loading={loading} total={total} />
+      {loading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <>{translate('Unable to load locations.')}</>
+      ) : (
+        <TreemapChart
+          title={props.translate('Resource usage')}
+          width="100%"
+          height={500}
+          data={chartData[props.quota.key]}
+          tooltipValueFormatter={tooltipValueFormatter}
+        />
+      )}
+    </>
   );
 };
 

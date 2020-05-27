@@ -78,7 +78,7 @@ const getChoices = (
       : undefined,
   }));
 
-export async function loadData({ resource_uuid }): Promise<FetchedData> {
+export async function loadData(resource_uuid): Promise<FetchedData> {
   const resource = await getResource(resource_uuid);
   const offering = await getOffering(resource.offering_uuid);
   const columns = getColumns(offering);

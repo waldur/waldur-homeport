@@ -1,8 +1,8 @@
 import * as React from 'react';
+import useAsync from 'react-use/lib/useAsync';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Query } from '@waldur/core/Query';
 import { translate } from '@waldur/i18n';
 import { getOffering, getCategory } from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
@@ -25,38 +25,38 @@ async function loadData(offering_uuid: string) {
   };
 }
 
-export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => (
-  <ModalDialog
-    title={translate('Offering details')}
-    footer={<CloseDialogButton />}
-  >
-    <Query loader={loadData} variables={props.resolve.offeringUuid}>
-      {({ loading, data, error }) => {
-        if (loading) {
-          return <LoadingSpinner />;
-        }
-        if (error) {
-          return <h3>{translate('Unable to load offering details.')}</h3>;
-        }
-        return (
-          <>
-            <h3>{data.offering.name}</h3>
-            <p>
-              <strong>{translate('Service provider:')}</strong>{' '}
-              {data.offering.customer_name}
-            </p>
+export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => {
+  const { loading, error, value } = useAsync(
+    () => loadData(props.resolve.offeringUuid),
+    [props.resolve.offeringUuid],
+  );
+  return (
+    <ModalDialog
+      title={translate('Offering details')}
+      footer={<CloseDialogButton />}
+    >
+      {loading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <h3>{translate('Unable to load offering details.')}</h3>
+      ) : (
+        <>
+          <h3>{value.offering.name}</h3>
+          <p>
+            <strong>{translate('Service provider:')}</strong>{' '}
+            {value.offering.customer_name}
+          </p>
 
-            <p>
-              {data.offering.description && (
-                <div className="bs-callout bs-callout-success">
-                  <FormattedHtml html={data.offering.description} />
-                </div>
-              )}
-            </p>
-            <OfferingTabsComponent tabs={data.tabs} />
-          </>
-        );
-      }}
-    </Query>
-  </ModalDialog>
-);
+          <p>
+            {value.offering.description && (
+              <div className="bs-callout bs-callout-success">
+                <FormattedHtml html={value.offering.description} />
+              </div>
+            )}
+          </p>
+          <OfferingTabsComponent tabs={value.tabs} />
+        </>
+      )}
+    </ModalDialog>
+  );
+};

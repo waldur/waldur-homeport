@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-import { Query } from '@waldur/core/Query';
+import useAsync from 'react-use/lib/useAsync';
 
 import { DialogBody } from './ChangePlanBody';
 import { loadData } from './utils';
@@ -14,20 +13,17 @@ interface ChangePlanDialogProps {
   submitting: boolean;
 }
 
-export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = props => (
-  <Query
-    variables={{
-      resource_uuid: props.resolve.resource.marketplace_resource_uuid,
-    }}
-    loader={loadData}
-  >
-    {queryProps => (
-      <DialogBody
-        {...queryProps}
-        initialValues={
-          queryProps.data ? queryProps.data.initialValues : undefined
-        }
-      />
-    )}
-  </Query>
-);
+export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = props => {
+  const asyncState = useAsync(
+    () => loadData(props.resolve.resource.marketplace_resource_uuid),
+    [props.resolve.resource.marketplace_resource_uuid],
+  );
+  return (
+    <DialogBody
+      asyncState={asyncState}
+      initialValues={
+        asyncState.value ? asyncState.value.initialValues : undefined
+      }
+    />
+  );
+};
