@@ -2,7 +2,5 @@ import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExten
 
 import { getMenuForProject, getMenuForSupport } from './utils';
 
-export default function registerSidebarExtension() {
-  SidebarExtensionService.register('project', getMenuForProject);
-  SidebarExtensionService.register('support', getMenuForSupport);
-}
+SidebarExtensionService.register('project', getMenuForProject);
+SidebarExtensionService.register('support', getMenuForSupport);
