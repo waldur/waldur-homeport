@@ -15,10 +15,13 @@ const ModalRoot = ({ modalComponent, modalProps, onHide }) => (
   >
     {modalComponent
       ? typeof modalComponent === 'string'
-        ? React.createElement(angular2react(modalComponent, ['resolve']), {
-            ...modalProps,
-            close: onHide,
-          })
+        ? React.createElement(
+            angular2react(modalComponent, ['resolve', 'close']),
+            {
+              ...modalProps,
+              close: onHide,
+            },
+          )
         : React.createElement(modalComponent, { ...modalProps, close: onHide })
       : null}
   </Modal>

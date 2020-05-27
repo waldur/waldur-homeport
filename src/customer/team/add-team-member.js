@@ -104,7 +104,7 @@ const addTeamMember = {
       this.projects = angular
         .copy(this.resolve.currentCustomer.projects)
         .map(project => {
-          let displayProject = {
+          const displayProject = {
             role: null,
             permission: null,
             expiration_time: null,
@@ -146,15 +146,11 @@ const addTeamMember = {
     }
 
     saveCustomerPermission() {
-      let model = {};
-      model.url = this.resolve.editUser.permission;
-      model.expiration_time = this.userModel.expiration_time;
-
       if (
         this.userModel.role !== this.resolve.editUser.role &&
         !this.userModel.role
       ) {
-        return this.customerPermissionsService.deletePermission(
+        return this.customerPermissionsService.delete(
           this.resolve.editUser.permission,
         );
       } else if (!this.resolve.editUser.role && this.userModel.role) {
@@ -162,21 +158,24 @@ const addTeamMember = {
       } else if (
         this.userModel.expiration_time !== this.resolve.editUser.expiration_time
       ) {
-        return this.customerPermissionsService.update(model);
+        return this.customerPermissionsService.update(
+          this.resolve.editUser.permission,
+          { expiration_time: this.userModel.expiration_time },
+        );
       }
     }
 
     createCustomerPermission() {
-      let instance = this.customerPermissionsService.$create();
-      instance.user = this.resolve.editUser.url;
-      instance.role = this.userModel.role;
-      instance.customer = this.resolve.currentCustomer.url;
-      instance.expiration_time = this.userModel.expiration_time;
-      return instance.$save();
+      return this.customerPermissionsService.create({
+        user: this.resolve.editUser.url,
+        role: this.userModel.role,
+        customer: this.resolve.currentCustomer.url,
+        expiration_time: this.userModel.expiration_time,
+      });
     }
 
     saveProjectPermissions() {
-      let updatePermissions = [],
+      const updatePermissions = [],
         createdPermissions = [],
         permissionsToDelete = [];
 
@@ -212,26 +211,25 @@ const addTeamMember = {
         }
       });
 
-      let removalPromises = permissionsToDelete.map(permission => {
-        return this.projectPermissionsService.deletePermission(permission);
+      const removalPromises = permissionsToDelete.map(permission => {
+        return this.projectPermissionsService.delete(permission);
       });
 
-      let renewalPromises = updatePermissions.map(permission => {
-        let model = {};
-        model.role = permission.role;
-        model.expiration_time = permission.expiration_time;
-        model.url = permission.permission;
-        return this.projectPermissionsService.update(model);
+      const renewalPromises = updatePermissions.map(permission => {
+        return this.projectPermissionsService.update(permission.permission, {
+          role: permission.role,
+          expiration_time: permission.expiration_time,
+        });
       });
 
       return this.$q.all(removalPromises).then(() => {
-        let creationPromises = createdPermissions.map(permission => {
-          let instance = this.projectPermissionsService.$create();
-          instance.user = this.resolve.editUser.url;
-          instance.role = permission.role;
-          instance.project = permission.url;
-          instance.expiration_time = permission.expiration_time;
-          return instance.$save();
+        const creationPromises = createdPermissions.map(permission => {
+          return this.projectPermissionsService.create({
+            user: this.resolve.editUser.url,
+            role: permission.role,
+            project: permission.url,
+            expiration_time: permission.expiration_time,
+          });
         });
         return this.$q.all(renewalPromises.concat(creationPromises));
       });

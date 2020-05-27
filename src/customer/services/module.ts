@@ -1,9 +1,11 @@
-import customerPermissionsService from './customer-permissions-service';
-import customersService from './customers-service';
+import { CustomerPermissionsService } from './CustomerPermissionsService';
+import { CustomersService } from './CustomersService';
 import PriceEstimatesService from './price-estimates-service';
+import { ProjectPermissionsService } from './ProjectPermissionsService';
 
 export default module => {
-  module.service('customerPermissionsService', customerPermissionsService);
-  module.service('customersService', customersService);
+  module.constant('customerPermissionsService', CustomerPermissionsService);
+  module.constant('projectPermissionsService', ProjectPermissionsService);
+  module.constant('customersService', CustomersService);
   module.service('priceEstimatesService', PriceEstimatesService);
 };

@@ -23,7 +23,7 @@ export function loadResource(
       });
     })
     .then(({ project }) => {
-      return customersService.$get(project.customer_uuid).then(customer => {
+      return customersService.get(project.customer_uuid).then(customer => {
         currentStateService.setCustomer(customer);
         currentStateService.setProject(project);
         return { customer, project };

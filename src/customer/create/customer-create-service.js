@@ -37,11 +37,11 @@ export default class CustomerCreateService {
 
   createCustomerPermission(customer) {
     return this.usersService.getCurrentUser().then(user => {
-      const instance = this.customerPermissionsService.$create();
-      instance.role = 'owner';
-      instance.customer = customer.url;
-      instance.user = user.url;
-      return instance.$save();
+      return this.customerPermissionsService.create({
+        role: 'owner',
+        customer: customer.url,
+        user: user.url,
+      });
     });
   }
 

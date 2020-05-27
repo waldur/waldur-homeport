@@ -19,7 +19,7 @@ export function loadProject(
     try {
       const user = await usersService.getCurrentUser();
       const project = await getById('/projects/', $stateParams.uuid);
-      const customer = await customersService.$get(project.customer_uuid);
+      const customer = await customersService.get(project.customer_uuid);
       const permissions = await projectPermissionsService.getList({
         user: user.uuid,
         project: project.uuid,

@@ -23,7 +23,7 @@ const addProjectMember = {
     }
 
     $onInit() {
-      let roles = this.ENV.roles;
+      const roles = this.ENV.roles;
       this.addText = gettext('Add');
       this.addTitle = gettext('Add project member');
       this.projectModel = {
@@ -136,22 +136,21 @@ const addProjectMember = {
     }
 
     updatePermission(permission) {
-      let model = {};
-      model.user = this.projectModel.user.url;
-      model.role = this.projectModel.role;
-      model.expiration_time = this.projectModel.expiration_time;
-      model.project = this.resolve.currentProject.url;
-      model.url = permission;
-      return this.projectPermissionsService.update(model);
+      return this.projectPermissionsService.update(permission, {
+        user: this.projectModel.user.url,
+        role: this.projectModel.role,
+        expiration_time: this.projectModel.expiration_time,
+        project: this.resolve.currentProject.url,
+      });
     }
 
     createPermission(role) {
-      let instance = this.projectPermissionsService.$create();
-      instance.user = this.projectModel.user.url;
-      instance.project = this.resolve.currentProject.url;
-      instance.expiration_time = this.projectModel.expiration_time;
-      instance.role = role;
-      return instance.$save();
+      return this.projectPermissionsService.create({
+        user: this.projectModel.user.url,
+        project: this.resolve.currentProject.url,
+        expiration_time: this.projectModel.expiration_time,
+        role: role,
+      });
     }
   },
 };
