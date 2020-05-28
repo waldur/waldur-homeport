@@ -11,7 +11,7 @@ const ModalRoot = ({ modalComponent, modalProps, onHide }) => (
   <Modal
     show={modalComponent ? true : false}
     onHide={onHide}
-    bsSize={modalProps.size}
+    bsSize={modalProps?.size}
   >
     {modalComponent
       ? typeof modalComponent === 'string'
