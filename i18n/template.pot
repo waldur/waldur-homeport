@@ -1070,6 +1070,7 @@ msgid "Choose option"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
+#: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/invitation-dialog.js
 #: src/project/team/user-selector.html
 msgid "Civil number"
@@ -2849,6 +2850,10 @@ msgstr ""
 
 #: src/invitations/utils.js
 msgid "Invitation is not valid."
+msgstr ""
+
+#: src/invitations/InvitationExpandableRow.tsx
+msgid "Invitation link"
 msgstr ""
 
 #: src/invitations/InvitationReject.tsx
