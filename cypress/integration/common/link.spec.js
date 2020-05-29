@@ -3,7 +3,7 @@ describe('Link persistance after login', () => {
     cy.server()
       .mockUser()
       .route(
-        'http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/?uuid=bf6d515c9e6e445f9c339021b30fc96b',
+        'http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/',
         'fixture:customers/alice.json',
       )
       .route(
@@ -13,8 +13,7 @@ describe('Link persistance after login', () => {
       .route(
         'http://localhost:8080/api/projects/**',
         'fixture:projects/alice_azure.json',
-      )
-      .route('http://localhost:8080/api/quotas/**/history/**', []);
+      );
   });
 
   it('should redirect to attempted url after login', () => {

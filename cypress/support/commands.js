@@ -134,7 +134,7 @@ Cypress.Commands.add('mockCustomer', () => {
     {},
   )
     .route(
-      'http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/?uuid=bf6d515c9e6e445f9c339021b30fc96b',
+      'http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/',
       'fixture:customers/alice.json',
     )
     .route('http://localhost:8080/api/invoices/**', [])
