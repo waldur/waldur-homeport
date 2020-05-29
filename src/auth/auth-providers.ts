@@ -31,6 +31,12 @@ export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
     iconClass: 'fa-id-card-o',
   },
   {
+    providerKey: 'keycloak',
+    label: ENV.plugins.WALDUR_AUTH_SOCIAL.KEYCLOAK_LABEL,
+    btnClass: 'btn-smartid',
+    iconClass: 'fa-id-card-o',
+  },
+  {
     providerKey: 'saml2',
     label: ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_LABEL,
     btnClass: 'btn-saml2',

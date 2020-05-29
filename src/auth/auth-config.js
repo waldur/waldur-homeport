@@ -1,5 +1,12 @@
 import { ngInjector } from '@waldur/core/services';
 
+const getStateId = () =>
+  encodeURIComponent(
+    Math.random()
+      .toString(36)
+      .substr(2),
+  );
+
 // @ngInject
 export default function initAuthProvider(ENV, $authProvider) {
   $authProvider.httpInterceptor = false;
@@ -44,12 +51,23 @@ export default function initAuthProvider(ENV, $authProvider) {
       scopePrefix: '',
       scopeDelimiter: ' ',
       ui_locales: () => ngInjector.get('LanguageUtilsService').current.code,
-      state: () =>
-        encodeURIComponent(
-          Math.random()
-            .toString(36)
-            .substr(2),
-        ),
+      state: getStateId,
+      requiredUrlParams: ['scope', 'state', 'ui_locales'],
+    });
+  }
+
+  if (ENV.plugins.WALDUR_AUTH_SOCIAL.KEYCLOAK_CLIENT_ID) {
+    $authProvider.oauth2({
+      name: 'keycloak',
+      clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.KEYCLOAK_CLIENT_ID,
+      url: ENV.apiEndpoint + 'api-auth/keycloak/',
+      authorizationEndpoint: ENV.plugins.WALDUR_AUTH_SOCIAL.KEYCLOAK_AUTH_URL,
+      redirectUri: window.location.origin + '/login_completed/',
+      scope: ['openid'],
+      scopePrefix: '',
+      scopeDelimiter: ' ',
+      ui_locales: () => ngInjector.get('LanguageUtilsService').current.code,
+      state: getStateId,
       requiredUrlParams: ['scope', 'state', 'ui_locales'],
     });
   }
