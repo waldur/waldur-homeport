@@ -13,7 +13,7 @@ export default function createAction(): ResourceAction {
     method: 'POST',
     tab: 'backups',
     title: translate('Create'),
-    dialogTitle: translate('Create backup for OpenStack instance'),
+    dialogTitle: translate('Create VM snapshot for OpenStack instance'),
     iconClass: 'fa fa-plus',
     validators: [validateState('OK')],
     fields: [
@@ -25,7 +25,7 @@ export default function createAction(): ResourceAction {
         required: false,
         label: translate('Kept until'),
         help_text: translate(
-          'Guaranteed time of backup retention. If null - keep forever.',
+          'Guaranteed time of VM snapshot retention. If null - keep forever.',
         ),
       },
     ],

@@ -11,7 +11,9 @@ export default function createAction(): ResourceAction {
   return {
     name: 'create_backup_schedule',
     title: translate('Create'),
-    dialogTitle: translate('Create backup schedule for OpenStack instance'),
+    dialogTitle: translate(
+      'Create VM snapshot schedule for OpenStack instance',
+    ),
     tab: 'backup_schedules',
     iconClass: 'fa fa-plus',
     type: 'form',

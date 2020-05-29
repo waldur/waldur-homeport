@@ -758,29 +758,6 @@ msgstr ""
 msgid "Backing up"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions/EditAction.ts
-msgid "Backup has been updated."
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/BackupScheduleWarning.tsx
-msgid "Backup schedule caveats"
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/actions.ts
-msgid "Backup schedule has been updated"
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/breadcrumbs.ts
-#: src/openstack/openstack-instance/tabs.ts
-msgid "Backup schedules"
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/tabs.ts
-#: src/openstack/openstack-backup/breadcrumbs.ts
-#: src/openstack/openstack-instance/tabs.ts
-msgid "Backups"
-msgstr ""
-
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Bank account"
@@ -1332,6 +1309,14 @@ msgstr ""
 msgid "Create SQL database in PostgreSQL server"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
+msgid "Create VM snapshot for OpenStack instance"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Create VM snapshot schedule for OpenStack instance"
+msgstr ""
+
 #: src/resource/monitoring/ZabbixHostCreateDialog.tsx
 msgid "Create Zabbix host"
 msgstr ""
@@ -1347,14 +1332,6 @@ msgstr ""
 
 #: src/rancher/template/TemplateQuestions.tsx
 msgid "Create application"
-msgstr ""
-
-#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
-msgid "Create backup for OpenStack instance"
-msgstr ""
-
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-msgid "Create backup schedule for OpenStack instance"
 msgstr ""
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
@@ -2485,7 +2462,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions/EditAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
-msgid "Guaranteed time of backup retention. If null - keep forever."
+msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
 msgstr ""
 
 #: src/openstack/openstack-snapshot/actions.ts
@@ -3271,7 +3248,7 @@ msgid "Marketplace service provider"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
-msgid "Max # of backups"
+msgid "Max # of VM snapshots"
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
@@ -3284,7 +3261,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
-msgid "Max number of backups"
+msgid "Max number of VM snapshots"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -6233,7 +6210,6 @@ msgid "Snapshot size limit"
 msgstr ""
 
 #: src/offering/OfferingTabs.tsx
-#: src/openstack/openstack-backup/tabs.ts
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
 msgid "Snapshots"
@@ -7905,6 +7881,31 @@ msgstr ""
 msgid "VM name"
 msgstr ""
 
+#: src/openstack/openstack-backup/actions/EditAction.ts
+msgid "VM snapshot has been updated."
+msgstr ""
+
+#: src/openstack/openstack-backup-schedule/BackupScheduleWarning.tsx
+msgid "VM snapshot schedule caveats"
+msgstr ""
+
+#: src/openstack/openstack-backup-schedule/actions.ts
+msgid "VM snapshot schedule has been updated"
+msgstr ""
+
+#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
+#: src/openstack/openstack-backup-schedule/breadcrumbs.ts
+#: src/openstack/openstack-instance/tabs.ts
+msgid "VM snapshot schedules"
+msgstr ""
+
+#: src/openstack/openstack-backup-schedule/tabs.ts
+#: src/openstack/openstack-backup/BackupsList.tsx
+#: src/openstack/openstack-backup/breadcrumbs.ts
+#: src/openstack/openstack-instance/tabs.ts
+msgid "VM snapshots"
+msgstr ""
+
 #: src/issues/workspace/issue-navigation-service.js
 #: src/openstack/analytics/routes.ts
 msgid "VM type overview"
@@ -8022,6 +8023,10 @@ msgstr ""
 
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "Volume size"
+msgstr ""
+
+#: src/openstack/openstack-backup/tabs.ts
+msgid "Volume snapshots"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
@@ -8262,14 +8267,6 @@ msgstr ""
 msgid "applications"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
-msgid "backup schedules"
-msgstr ""
-
-#: src/openstack/openstack-backup/BackupsList.tsx
-msgid "backups"
-msgstr ""
-
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
 msgstr ""
@@ -8449,7 +8446,6 @@ msgstr ""
 msgid "snapshot schedules"
 msgstr ""
 
-#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 msgid "snapshots"
@@ -8513,6 +8509,10 @@ msgstr ""
 
 #: src/vmware/marketplace.ts
 msgid "vSphere Virtual Machine"
+msgstr ""
+
+#: src/openstack/openstack-backup/BackupSnapshotsList.tsx
+msgid "volume snapshots"
 msgstr ""
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
