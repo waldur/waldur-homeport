@@ -19,7 +19,7 @@ ResourceBreadcrumbsRegistry.register(
         },
       },
       {
-        label: gettext('Backup schedules'),
+        label: gettext('VM snapshot schedules'),
         state: 'resources.details',
         params: {
           uuid: instance_uuid,

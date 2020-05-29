@@ -7,7 +7,7 @@ import { BackupsList } from '../openstack-backup/BackupsList';
 ResourceTabsConfiguration.register('OpenStackTenant.BackupSchedule', () => [
   {
     key: 'backups',
-    title: translate('Backups'),
+    title: translate('VM snapshots'),
     component: BackupsList,
   },
   getEventsTab(),

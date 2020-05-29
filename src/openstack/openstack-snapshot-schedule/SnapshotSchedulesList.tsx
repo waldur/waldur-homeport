@@ -20,7 +20,7 @@ const TableComponent = props => {
           orderField: 'name',
         },
         {
-          title: translate('Max number of backups'),
+          title: translate('Max number of VM snapshots'),
           render: ({ row }) => row.maximal_number_of_resources || 'N/A',
         },
         {

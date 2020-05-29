@@ -13,7 +13,7 @@ const PureOpenStackBackupScheduleSummary = (
     <>
       <PureScheduleSummary {...props} />
       <Field
-        label={translate('Max # of backups')}
+        label={translate('Max # of VM snapshots')}
         value={resource.maximal_number_of_resources}
       />
     </>
