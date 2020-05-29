@@ -1,12 +1,12 @@
 import { translate } from '@waldur/i18n';
+import { closeModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
 
 import template from './invitation-dialog.html';
 
 const invitationDialog = {
   template,
   bindings: {
-    dismiss: '&',
-    close: '&',
     resolve: '<',
   },
   controllerAs: 'DialogCtrl',
@@ -17,6 +17,14 @@ const invitationDialog = {
       this.ncUtilsFlash = ncUtilsFlash;
       this.ENV = ENV;
       this.$state = $state;
+    }
+
+    close() {
+      store.dispatch(closeModalDialog());
+    }
+
+    dismiss() {
+      store.dispatch(closeModalDialog());
     }
 
     $onInit() {

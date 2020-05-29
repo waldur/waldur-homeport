@@ -1,9 +1,11 @@
+import { closeModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
+
 import template from './add-project-member.html';
 
 const addProjectMember = {
   template,
   bindings: {
-    close: '&',
     resolve: '<',
   },
   controller: class AddProjectMemberDialogController {
@@ -20,6 +22,10 @@ const addProjectMember = {
       this.customersService = customersService;
       this.ENV = ENV;
       this.ErrorMessageFormatter = ErrorMessageFormatter;
+    }
+
+    close() {
+      store.dispatch(closeModalDialog());
     }
 
     $onInit() {

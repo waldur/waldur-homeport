@@ -1,10 +1,12 @@
+import { closeModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
+
 import template from './add-team-member.html';
 import './add-team-member.scss';
 
 const addTeamMember = {
   template,
   bindings: {
-    close: '&',
     resolve: '<',
   },
   controller: class AddTeamMemberDialogController {
@@ -25,6 +27,10 @@ const addTeamMember = {
       this.ENV = ENV;
       this.ErrorMessageFormatter = ErrorMessageFormatter;
       this.$filter = $filter;
+    }
+
+    close() {
+      store.dispatch(closeModalDialog());
     }
 
     $onInit() {
