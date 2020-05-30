@@ -3,6 +3,8 @@ import { change } from 'redux-form';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { TermsOfServiceDialog } from '../TermsOfServiceDialog';
+
 import * as constants from './constants';
 
 export const approveOrder = (orderUuid: string) => ({
@@ -44,7 +46,7 @@ export const setOrderStateFilter = (formName, filterOption) =>
   change(formName, 'state', filterOption);
 
 export const showTermsOfServiceDialog = (content: string) =>
-  openModalDialog('marketplaceTermsOfServiceDialog', {
+  openModalDialog(TermsOfServiceDialog, {
     resolve: { content },
     size: 'md',
   });

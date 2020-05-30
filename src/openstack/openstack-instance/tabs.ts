@@ -16,12 +16,12 @@ ResourceTabsConfiguration.register('OpenStackTenant.Instance', () => [
   },
   {
     key: 'backups',
-    title: translate('Backups'),
+    title: translate('VM snapshots'),
     component: BackupsList,
   },
   {
     key: 'backup_schedules',
-    title: translate('Backup schedules'),
+    title: translate('VM snapshot schedules'),
     component: BackupsSchedulesList,
   },
   {

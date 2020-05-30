@@ -5,8 +5,11 @@ import { ActionList } from '@waldur/dashboard/ActionList';
 import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';
 import { getSupportPortalAction } from '@waldur/dashboard/SupportPortalAction';
 import { translate } from '@waldur/i18n';
-import { $uibModal } from '@waldur/modal/services';
+import { openModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
 import { Project, User } from '@waldur/workspace/types';
+
+import { ProjectDetailsDialog } from './ProjectDetailsDialog';
 
 interface ProjectActionsProps {
   user: User;
@@ -17,13 +20,14 @@ interface ProjectActionsProps {
 const getDetailsAction = project => ({
   title: translate('Details'),
   onClick() {
-    $uibModal.open({
-      component: 'projectDialog',
-      size: 'lg',
-      resolve: {
-        project: () => project,
-      },
-    });
+    store.dispatch(
+      openModalDialog(ProjectDetailsDialog, {
+        size: 'lg',
+        resolve: {
+          project,
+        },
+      }),
+    );
   },
 });
 

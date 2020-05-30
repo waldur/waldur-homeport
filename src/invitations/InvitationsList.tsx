@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableOptionsType } from '@waldur/table-react/types';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -63,7 +64,7 @@ const TableComponent = props => {
       verboseName={translate('team invitations')}
       actions={<InvitationCreateButton />}
       hasQuery={true}
-      expandableRow={({ row }) => row.link_template.replace('{uuid}', row.uuid)}
+      expandableRow={InvitationExpandableRow}
     />
   );
 };

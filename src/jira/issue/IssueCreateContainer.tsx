@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import * as actions from './actions';
 import { IssueCreateDialog } from './IssueCreateDialog';
@@ -60,5 +59,3 @@ export const IssueCreateDialogContainer = (
     }}
   />
 );
-
-export default connectAngularComponent(IssueCreateDialogContainer, ['resolve']);

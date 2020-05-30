@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import {
@@ -12,11 +12,14 @@ import {
 } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { ImageUploadField } from '@waldur/marketplace/offerings/create/ImageUploadField';
-import { addOfferingScreenshot } from '@waldur/marketplace/offerings/store/actions';
+import {
+  addOfferingScreenshot,
+  isAddingOfferingScreenshot,
+} from '@waldur/marketplace/offerings/store/actions';
 import { OFFERING_SCREENSHOTS_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
+import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 const AddOfferingScreenshotDialog = props => (
   <form
@@ -29,8 +32,8 @@ const AddOfferingScreenshotDialog = props => (
         <>
           <CloseDialogButton />
           <SubmitButton
-            disabled={props.invalid}
-            submitting={props.submitting}
+            disabled={props.invalid || !props.screenshotsField}
+            submitting={props.isSubmittingScreenshot}
             label={translate('Submit')}
           />
         </>
@@ -48,6 +51,7 @@ const AddOfferingScreenshotDialog = props => (
           accept={'image/*'}
           buttonLabel={translate('Browse')}
           className="btn btn-default"
+          required={true}
         />
         <StringField
           name="name"
@@ -68,14 +72,22 @@ const AddOfferingScreenshotDialog = props => (
   </form>
 );
 
+const selector = formValueSelector(OFFERING_SCREENSHOTS_FORM_ID);
+const mapStateToProps = state => ({
+  isSubmittingScreenshot: getOffering(state).isAddingScreenshot,
+  screenshotsField: selector(state, 'screenshots'),
+});
+
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    submitRequest: formData =>
-      dispatch(addOfferingScreenshot(formData, ownProps.resolve.offering)),
+    submitRequest: formData => {
+      dispatch(isAddingOfferingScreenshot(true));
+      dispatch(addOfferingScreenshot(formData, ownProps.resolve.offering));
+    },
   };
 };
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const enhance = compose(
   connector,
@@ -84,10 +96,6 @@ const enhance = compose(
   }),
 );
 
-const AddOfferingScreenshotDialogContainer = enhance(
+export const AddOfferingScreenshotDialogContainer = enhance(
   AddOfferingScreenshotDialog,
 );
-
-export default connectAngularComponent(AddOfferingScreenshotDialogContainer, [
-  'resolve',
-]);

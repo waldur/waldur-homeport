@@ -92,8 +92,6 @@ export const getInitialValues = state => {
     name: offering.name,
     description: offering.description,
     full_description: offering.full_description,
-    native_name: offering.native_name,
-    native_description: offering.native_description,
     terms_of_service: offering.terms_of_service,
     thumbnail: offering.thumbnail,
     type: offeringTypes.find(option => option.value === offering.type),

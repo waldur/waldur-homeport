@@ -7,13 +7,15 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { Offering } from '@waldur/offering/types';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { PreviewOfferingDialog } from './PreviewOfferingDialog';
+
 interface PreviewOfferingButtonProps {
   offering: Offering;
   openDialog(): void;
 }
 
 const openPreviewOfferingDialog = (props: PreviewOfferingButtonProps) => {
-  return openModalDialog('marketplacePreviewOfferingDialog', {
+  return openModalDialog(PreviewOfferingDialog, {
     resolve: props,
     size: 'lg',
   });

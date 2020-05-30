@@ -1,11 +1,8 @@
 import { translate } from '@waldur/i18n';
 import { getEventsTab } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
-import { angular2react } from '@waldur/shims/angular2react';
 
-const SecurityGroupRulesList = angular2react('securityGroupRulesList', [
-  'resource',
-]);
+import { SecurityGroupRulesList } from './SecurityGroupRulesList';
 
 ResourceTabsConfiguration.register('OpenStack.SecurityGroup', () => [
   {

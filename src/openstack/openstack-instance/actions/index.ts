@@ -7,6 +7,7 @@ import createBackupAction from './CreateBackupAction';
 import createBackupScheduleAction from './CreateBackupScheduleAction';
 import destroyAction from './DestroyAction';
 import editAction from './EditAction';
+import forceDestroyAction from './ForceDestroyAction';
 import restartAction from './RestartAction';
 import startAction from './StartAction';
 import stopAction from './StopAction';
@@ -29,4 +30,5 @@ export default [
   updateInternalIpsSet,
   updateFloatingIpsAction,
   destroyAction,
+  forceDestroyAction,
 ];

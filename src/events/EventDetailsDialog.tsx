@@ -5,15 +5,17 @@ import { compose } from 'redux';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { EventDetailsTable } from './EventDetailsTable';
 import { Event } from './types';
 
-interface Props extends TranslateProps {
-  resolve: { event: Event };
+interface StateProps {
   isStaffOrSupport: boolean;
+}
+
+interface Props extends TranslateProps, StateProps {
+  resolve: { event: Event };
 }
 
 const PureEventDetailsDialog = (props: Props) => (
@@ -33,8 +35,8 @@ const mapStateToProps = state => ({
   isStaffOrSupport: isStaffOrSupport(state),
 });
 
-const enhance = compose(connect(mapStateToProps), withTranslation);
+const enhance = compose(connect<StateProps>(mapStateToProps), withTranslation);
 
-export const EventDetailsDialog = enhance(PureEventDetailsDialog);
-
-export default connectAngularComponent(EventDetailsDialog, ['resolve']);
+export const EventDetailsDialog = enhance(
+  PureEventDetailsDialog,
+) as React.ComponentType<{}>;

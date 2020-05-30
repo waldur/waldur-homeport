@@ -1,21 +1,30 @@
 import { translate } from '@waldur/i18n';
+import { closeModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
 
 import template from './invitation-dialog.html';
 
 const invitationDialog = {
   template,
   bindings: {
-    dismiss: '&',
-    close: '&',
     resolve: '<',
   },
   controllerAs: 'DialogCtrl',
   controller: class InvitationDialogController {
     // @ngInject
-    constructor(InvitationDialogService, ncUtilsFlash, ENV) {
+    constructor(InvitationDialogService, ncUtilsFlash, ENV, $state) {
       this.service = InvitationDialogService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.ENV = ENV;
+      this.$state = $state;
+    }
+
+    close() {
+      store.dispatch(closeModalDialog());
+    }
+
+    dismiss() {
+      store.dispatch(closeModalDialog());
     }
 
     $onInit() {
@@ -50,7 +59,10 @@ const invitationDialog = {
           this.userDetails,
           this.role,
         )
-        .then(() => this.close())
+        .then(() => {
+          this.close();
+          this.$state.go('organization.team');
+        })
         .catch(errors => (this.errors = errors))
         .finally(() => (this.submitting = false));
     }

@@ -40,7 +40,7 @@ const TableComponent = props => {
           render: ({ row }) => <ResourceRowActions resource={row} />,
         },
       ]}
-      verboseName={translate('snapshots')}
+      verboseName={translate('volume snapshots')}
       hasQuery={false}
     />
   );

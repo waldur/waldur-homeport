@@ -13,7 +13,7 @@ export function loadCustomer(
     return $q.reject();
   }
   return customersService
-    .$get($stateParams.uuid)
+    .get($stateParams.uuid)
     .then(customer => {
       currentStateService.setCustomer(customer);
       return customer;

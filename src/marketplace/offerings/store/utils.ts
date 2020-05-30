@@ -134,9 +134,7 @@ export const formatOfferingRequest = (
 ) => {
   const result: OfferingRequest = {
     name: request.name,
-    native_name: request.native_name,
     description: request.description,
-    native_description: request.native_description,
     full_description: request.full_description,
     terms_of_service: request.terms_of_service,
     category: request.category.url,
@@ -157,7 +155,7 @@ export const formatOfferingRequest = (
     result.attributes = {
       ...result.attributes,
       schedules: request.schedules.map(
-        pick(['start', 'end', 'title', 'type', 'id']),
+        pick(['start', 'end', 'title', 'allDay', 'extendedProps', 'id']),
       ),
     };
   }

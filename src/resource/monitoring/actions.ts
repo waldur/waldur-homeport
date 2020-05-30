@@ -9,6 +9,8 @@ import {
   DELETE_REQUEST,
   DELETE_FAILURE,
 } from './constants';
+import { ZabbixHostCreateDialog } from './ZabbixHostCreateDialog';
+import { ZabbixHostDetailsDialog } from './ZabbixHostDetailsDialog';
 
 export const fetchZabbixHost = uuid => ({
   type: FETCH_REQUEST,
@@ -40,13 +42,13 @@ export const deleteFailure = () => ({
 });
 
 export const openDetailsDialog = resource =>
-  openModalDialog('monitoringDetailsDialog', {
+  openModalDialog(ZabbixHostDetailsDialog, {
     resolve: { resource },
     size: 'lg',
   });
 
 export const openCreateDialog = resource =>
-  openModalDialog('monitoringCreateDialog', { resolve: { resource } });
+  openModalDialog(ZabbixHostCreateDialog, { resolve: { resource } });
 
 export const loadLinks = createFormAction('waldur/monitoring/LOAD_LINKS');
 

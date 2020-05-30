@@ -10,7 +10,6 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import * as actions from '@waldur/providers/actions';
 import { ProviderUpdateForm } from '@waldur/providers/ProviderUpdateForm';
 import { findProvider } from '@waldur/providers/registry';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { getOffering } from '../store/selectors';
 
@@ -60,5 +59,3 @@ export const ServiceSettingsDetailsDialog = () => {
     </ModalDialog>
   );
 };
-
-export default connectAngularComponent(ServiceSettingsDetailsDialog);

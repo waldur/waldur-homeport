@@ -7,7 +7,6 @@ import {
   formatSecurityGroupProtocol,
   formatSecurityGroupRulePortRange,
 } from '@waldur/openstack/openstack-security-groups/utils';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { SecurityGroup } from './types';
 
@@ -56,7 +55,3 @@ export const OpenStackSecurityGroupsDialog = withTranslation(
     </ModalDialog>
   ),
 );
-
-export default connectAngularComponent(OpenStackSecurityGroupsDialog, [
-  'resolve',
-]);

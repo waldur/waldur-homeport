@@ -1,15 +1,23 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { $state } from '@waldur/core/services';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { TableProps } from '@waldur/table-react/Table';
 import { TableOptionsType } from '@waldur/table-react/types';
 
-const TableComponent = props => {
+import { Catalog } from '../types';
+
+interface OwnProps {
+  clusterUuid: string;
+  projectUuid: string;
+  catalogUuid: string;
+}
+
+const TableComponent = (props: TableProps<Catalog> & OwnProps) => {
   const { translate } = props;
   return (
-    <Table
+    <Table<Catalog>
       {...props}
       columns={[
         {
@@ -25,8 +33,8 @@ const TableComponent = props => {
             <Link
               state="rancher-template-details"
               params={{
-                uuid: $state.params.uuid,
-                clusterUuid: $state.params.clusterUuid,
+                uuid: props.projectUuid,
+                clusterUuid: props.clusterUuid,
                 templateUuid: row.uuid,
               }}
             >
@@ -49,10 +57,12 @@ const TableComponent = props => {
 const TableOptions: TableOptionsType = {
   table: 'rancher-catalog-templates',
   fetchData: createFetcher('rancher-templates'),
-  getDefaultFilter: () => ({
-    catalog_uuid: $state.params.catalogUuid,
+  mapPropsToFilter: (props: OwnProps) => ({
+    catalog_uuid: props.catalogUuid,
   }),
   queryField: 'name',
 };
 
-export const CatalogTemplatesList = connectTable(TableOptions)(TableComponent);
+export const CatalogTemplatesList = connectTable(TableOptions)(
+  TableComponent,
+) as React.ComponentType<OwnProps>;

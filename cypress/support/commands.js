@@ -60,6 +60,29 @@ Cypress.Commands.add('waitForSpinner', () => {
   cy.get('.fa-spinner.fa-spin').should('not.be.visible');
 });
 
+Cypress.Commands.add('openDropdownByLabel', label => {
+  cy.get('label')
+    .contains(label)
+    .next()
+    .find('.Select-placeholder')
+    .click({ force: true });
+});
+
+Cypress.Commands.add('openDropdownByLabelForce', label => {
+  cy.get('label')
+    .contains(label)
+    .next()
+    .find('.Select-input input')
+    .type(' ', { force: true })
+    .openDropdownByLabel(label);
+});
+
+Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
+  cy.get('.Select-option')
+    .first()
+    .click();
+});
+
 Cypress.Commands.add('openWorkspaceSelector', () => {
   cy
     // Workspace selector indicates user workspace
@@ -111,7 +134,7 @@ Cypress.Commands.add('mockCustomer', () => {
     {},
   )
     .route(
-      'http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/?uuid=bf6d515c9e6e445f9c339021b30fc96b',
+      'http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/',
       'fixture:customers/alice.json',
     )
     .route('http://localhost:8080/api/invoices/**', [])

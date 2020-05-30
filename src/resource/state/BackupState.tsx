@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 export type BackupStateType = 'Unsupported' | 'Unset' | 'Warning' | 'OK';
 
@@ -26,5 +25,3 @@ export const BackupState = (props: BackupStateIndicatorProps) => (
     tooltip={props.resource.last_backup}
   />
 );
-
-export default connectAngularComponent(BackupState, ['resource']);

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import useAsync from 'react-use/lib/useAsync';
 import { getFormValues } from 'redux-form';
 
-import { Query } from '@waldur/core/Query';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
@@ -47,19 +47,19 @@ const loadData = async (filter: CustomerFilterData) => {
   }
 };
 
-const TotalCostComponent: React.FC<CustomerListComponentProps> = props => (
-  <Query variables={props.customerListFilter} loader={loadData}>
-    {({ loading, error, data }) => {
-      if (loading) {
-        return <span>{translate('Loading')}</span>;
-      }
-      if (error) {
-        return <span>{translate('Unable to load data.')}</span>;
-      }
-      return <TotalCostField total={data.total} />;
-    }}
-  </Query>
-);
+const TotalCostComponent: React.FC<CustomerListComponentProps> = props => {
+  const { loading, error, value } = useAsync(
+    () => loadData(props.customerListFilter),
+    [props.customerListFilter],
+  );
+  if (loading) {
+    return <>{translate('Loading')}</>;
+  }
+  if (error) {
+    return <>{translate('Unable to load data.')}</>;
+  }
+  return <TotalCostField total={value.total} />;
+};
 
 const mapStateToProps = state => ({
   customerListFilter: getFormValues('customerListFilter')(state),

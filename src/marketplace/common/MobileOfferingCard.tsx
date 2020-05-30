@@ -1,6 +1,7 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 import { wrapTooltip } from '@waldur/table-react/ActionButton';
@@ -27,7 +28,7 @@ export const MobileOfferingCard = (props: MobileOfferingCardProps) => (
           {props.offering.name}
         </OfferingLink>
       </h3>
-      {props.offering.description}
+      <FormattedHtml html={props.offering.description} />
     </td>
   </tr>
 );

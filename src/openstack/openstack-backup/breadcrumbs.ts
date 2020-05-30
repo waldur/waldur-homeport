@@ -17,7 +17,7 @@ ResourceBreadcrumbsRegistry.register('OpenStackTenant.Backup', resource => {
       },
     },
     {
-      label: gettext('Backups'),
+      label: gettext('VM snapshots'),
       state: 'resources.details',
       params: {
         uuid: instance_uuid,

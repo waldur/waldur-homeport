@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { PlanUsageDialog } from './PlanUsageDialog';
 import { PlanUsageRowProps } from './types';
 
 interface DispatchProps {
@@ -27,7 +28,7 @@ const PurePlanUsageButton = (props: Props) => (
 const mapDispatchToProps = (dispatch, ownProps) => ({
   openDialog: () =>
     dispatch(
-      openModalDialog('marketplacePlanUsageDialog', {
+      openModalDialog(PlanUsageDialog, {
         resolve: { row: ownProps.row },
       }),
     ),

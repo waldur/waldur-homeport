@@ -74,14 +74,21 @@ interface Quota {
   usage: number;
 }
 
+interface ReferredPids {
+  resource_type: string;
+  title: string;
+  published: string;
+  publisher: string;
+  pid: string;
+  relation_type: string;
+}
+
 export interface Offering {
   quotas?: Quota[];
   uuid?: string;
   url?: string;
   thumbnail: string;
   name: string;
-  native_name?: string;
-  native_description?: string;
   terms_of_service?: string;
   rating: number;
   order_item_count: number;
@@ -110,6 +117,9 @@ export interface Offering {
   shared?: boolean;
   billable?: boolean;
   paused_reason?: string;
+  datacite_doi?: string;
+  citation_count?: number;
+  referred_pids: ReferredPids[];
 }
 
 export interface Screenshot {

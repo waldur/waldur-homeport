@@ -3,12 +3,14 @@ import { marketplaceIsVisible } from '@waldur/marketplace/utils';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
+import { ChangeLimitsDialog } from './ChangeLimitsDialog';
+
 export default function createAction(ctx): ResourceAction {
   return {
     name: 'update_limits',
     type: 'form',
     method: 'POST',
-    component: 'marketplaceResourceChangeLimitsDialog',
+    component: ChangeLimitsDialog,
     title: translate('Change limits'),
     useResolve: true,
     dialogSize: 'lg',

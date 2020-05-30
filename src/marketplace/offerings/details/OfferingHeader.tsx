@@ -4,6 +4,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
+import { ReferralDetailsField } from '@waldur/marketplace/referral/ReferralDetailsField';
 import { Offering } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
 import { BooleanField } from '@waldur/table-react/BooleanField';
@@ -56,5 +57,12 @@ export const OfferingHeader: React.FC<OfferingHeaderProps> = props => (
       label={translate('Created')}
       value={formatDateTime(props.offering.created)}
     />
+
+    <Field
+      label={translate('Datacite DOI')}
+      value={props.offering.datacite_doi}
+    />
+
+    <ReferralDetailsField offering={props.offering} />
   </dl>
 );

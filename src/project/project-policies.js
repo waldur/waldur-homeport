@@ -1,3 +1,4 @@
+import { loadCertifications, updateCertifications } from './api';
 import template from './project-policies.html';
 
 const projectPolicies = {
@@ -9,8 +10,6 @@ const projectPolicies = {
     // @ngInject
     constructor(
       ENV,
-      projectsService,
-      certificationsService,
       ncUtilsFlash,
       customersService,
       priceEstimatesService,
@@ -19,9 +18,7 @@ const projectPolicies = {
       $q,
     ) {
       this.ENV = ENV;
-      this.projectsService = projectsService;
       this.priceEstimatesService = priceEstimatesService;
-      this.certificationsService = certificationsService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.customersService = customersService;
       this.FreeIPAQuotaService = FreeIPAQuotaService;
@@ -44,7 +41,7 @@ const projectPolicies = {
       this.loading = true;
       this.$q
         .all([
-          this.certificationsService.getAll().then(certifications => {
+          loadCertifications().then(certifications => {
             this.certifications = certifications;
           }),
 
@@ -56,7 +53,7 @@ const projectPolicies = {
     }
 
     updatePolicies() {
-      let promises = [this.updatePriceEstimate(), this.saveCertifications()];
+      const promises = [this.updatePriceEstimate(), this.saveCertifications()];
 
       if (this.quota) {
         promises.push(
@@ -73,8 +70,8 @@ const projectPolicies = {
         })
         .catch(response => {
           if (response.status === 400) {
-            for (let name in response.data) {
-              let error = response.data[name];
+            for (const name in response.data) {
+              const error = response.data[name];
               this.ncUtilsFlash.error(error);
             }
           } else {
@@ -102,12 +99,9 @@ const projectPolicies = {
       if (angular.equals(oldItems, newItems)) {
         return this.$q.resolve();
       } else {
-        return this.projectsService
-          .updateCertifications(this.project.url, newItems)
-          .then(() => {
-            this.projectsService.clearAllCacheForCurrentEndpoint();
-            this.$rootScope.$broadcast('refreshProjectList');
-          });
+        return updateCertifications(this.project.uuid, newItems).then(() => {
+          this.$rootScope.$broadcast('refreshProjectList');
+        });
       }
     }
 

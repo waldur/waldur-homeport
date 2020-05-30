@@ -1,18 +1,21 @@
 import { $q } from '@waldur/core/services';
 
+import { ConfirmationDialog } from './ConfirmationDialog';
+
 export const OPEN = 'waldur/modal/OPEN';
 export const CLOSE = 'waldur/modal/CLOSE';
 
-export const openModalDialog = (component: string, params?: any) => ({
-  type: OPEN,
-  payload: {
-    component,
-    params,
-  },
+export const openModalDialog = (
+  modalComponent: React.ComponentType<any> | string,
+  modalProps?: any,
+) => ({
+  type: 'SHOW_MODAL',
+  modalComponent,
+  modalProps,
 });
 
 export const closeModalDialog = () => ({
-  type: CLOSE,
+  type: 'HIDE_MODAL',
 });
 
 export const waitForConfirmation = (dispatch, title, body) => {
@@ -25,6 +28,6 @@ export const waitForConfirmation = (dispatch, title, body) => {
     },
     size: 'md',
   };
-  dispatch(openModalDialog('ConfirmationDialog', params));
+  dispatch(openModalDialog(ConfirmationDialog, params));
   return deferred.promise;
 };

@@ -6,7 +6,7 @@ ActionConfigurationRegistry.register('OpenStackTenant.BackupSchedule', {
   options: {
     update: {
       title: gettext('Edit'),
-      successMessage: gettext('Backup schedule has been updated'),
+      successMessage: gettext('VM snapshot schedule has been updated'),
       fields: {
         schedule: {
           type: 'crontab',

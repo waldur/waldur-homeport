@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { filterItems } from '@waldur/navigation/sidebar/utils';
 
 const getHelpdeskItems = () => [
@@ -104,18 +105,11 @@ const getReportItems = () => [
 // This service checks users status and returns different sidebar items and router state
 export default class IssueNavigationService {
   // @ngInject
-  constructor(
-    $state,
-    usersService,
-    currentStateService,
-    features,
-    SidebarExtensionService,
-  ) {
+  constructor($state, usersService, currentStateService, features) {
     this.$state = $state;
     this.usersService = usersService;
     this.currentStateService = currentStateService;
     this.features = features;
-    this.sidebarExtensionService = SidebarExtensionService;
   }
 
   get isVisible() {
@@ -169,9 +163,10 @@ export default class IssueNavigationService {
         return items;
       })
       .then(items =>
-        this.sidebarExtensionService
-          .getItems('support')
-          .then(extra => [...items, ...extra]),
+        SidebarExtensionService.getItems('support').then(extra => [
+          ...items,
+          ...extra,
+        ]),
       )
       .then(items => {
         if (this.currentUser.is_support || this.currentUser.is_staff) {

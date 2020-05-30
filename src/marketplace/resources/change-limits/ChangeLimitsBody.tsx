@@ -12,7 +12,6 @@ import { ChangeLimitsComponent } from './ChangeLimitsComponent';
 import { OwnProps, connector, StateProps } from './connector';
 
 interface DialogBodyProps extends OwnProps, InjectedFormProps, StateProps {
-  error: any;
   submitRequest(data: any): void;
   orderCanBeApproved: boolean;
   initialValues: { limits: Limits };
@@ -25,7 +24,7 @@ export const DialogBody = connector((props: DialogBodyProps) => (
       footer={
         <>
           <CloseDialogButton />
-          {!props.loading && (
+          {!props.asyncState.loading && (
             <SubmitButton
               submitting={props.submitting}
               label={
@@ -38,18 +37,18 @@ export const DialogBody = connector((props: DialogBodyProps) => (
         </>
       }
     >
-      {props.loading ? (
+      {props.asyncState.loading ? (
         <LoadingSpinner />
-      ) : props.error ? (
+      ) : props.asyncState.error ? (
         <h3>{translate('Unable to load data.')}</h3>
       ) : (
         <ChangeLimitsComponent
-          plan={props.data.plan}
+          plan={props.asyncState.value.plan}
           periods={props.periods}
           components={props.components}
           orderCanBeApproved={props.orderCanBeApproved}
           totalPeriods={props.totalPeriods}
-          offeringLimits={props.data.offeringLimits}
+          offeringLimits={props.asyncState.value.offeringLimits}
         />
       )}
     </ModalDialog>

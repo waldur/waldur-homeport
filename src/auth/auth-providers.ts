@@ -2,6 +2,7 @@ import { ENV } from '@waldur/core/services';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { AuthButtonProps } from './AuthButton';
+import { AuthSaml2Dialog } from './saml2/AuthSaml2Dialog';
 import { loginSaml2 } from './saml2/store/actions';
 
 export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
@@ -30,6 +31,12 @@ export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
     iconClass: 'fa-id-card-o',
   },
   {
+    providerKey: 'keycloak',
+    label: ENV.plugins.WALDUR_AUTH_SOCIAL.KEYCLOAK_LABEL,
+    btnClass: 'btn-smartid',
+    iconClass: 'fa-id-card-o',
+  },
+  {
     providerKey: 'saml2',
     label: ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_LABEL,
     btnClass: 'btn-saml2',
@@ -50,7 +57,7 @@ export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
     btnClass: 'btn-saml2-edu',
     iconClass: 'fa-globe',
     label: 'eduGAIN',
-    onClick: dispatch => dispatch(openModalDialog('authSaml2Dialog')),
+    onClick: dispatch => dispatch(openModalDialog(AuthSaml2Dialog)),
   },
   {
     providerKey: 'valimo',

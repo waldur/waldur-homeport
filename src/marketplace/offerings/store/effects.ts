@@ -12,7 +12,12 @@ import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table-react/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { setStep, loadDataSuccess, loadDataError } from './actions';
+import {
+  setStep,
+  loadDataSuccess,
+  loadDataError,
+  isAddingOfferingScreenshot,
+} from './actions';
 import * as constants from './constants';
 import { getPlans, getAttributes, getOfferingComponents } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
@@ -188,6 +193,7 @@ function* addOfferingScreenshot(action: Action<any>) {
     )}`;
     yield put(showError(errorMessage));
   }
+  yield put(isAddingOfferingScreenshot(false));
 }
 
 function* removeOfferingScreenshot(action: Action<any>) {

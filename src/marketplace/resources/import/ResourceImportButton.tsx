@@ -5,6 +5,8 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { ResourceImportDialog } from './ResourceImportDialog';
+
 interface Props {
   category_uuid: string;
   project_uuid: string;
@@ -22,7 +24,7 @@ const PureResourceImportButton: React.FC<Props> = props => (
 const mapDispatchToProps = (dispatch, ownProps) => ({
   openDialog: () =>
     dispatch(
-      openModalDialog('marketplaceResourceImportDialog', {
+      openModalDialog(ResourceImportDialog, {
         resolve: ownProps,
         size: 'lg',
       }),

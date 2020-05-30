@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 interface ConfirmationDialogProps {
   resolve: {
@@ -18,7 +17,7 @@ interface ConfirmationDialogProps {
   };
 }
 
-const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
+export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   resolve: { title, body, deferred },
 }) => {
   const dispatch = useDispatch();
@@ -48,5 +47,3 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
     </ModalDialog>
   );
 };
-
-export default connectAngularComponent(ConfirmationDialog, ['resolve']);

@@ -18,6 +18,8 @@ body.full-height-layout #page-wrapper {
 
 #page-wrapper {
   min-height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 body.boxed-layout {

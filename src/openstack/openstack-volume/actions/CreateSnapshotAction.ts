@@ -5,6 +5,8 @@ import {
 } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
+import { SnapshotCreateDialog } from '../SnapshotCreateDialog';
+
 export default function createAction(): ResourceAction {
   return {
     name: 'snapshot',
@@ -14,7 +16,8 @@ export default function createAction(): ResourceAction {
     title: translate('Create'),
     dialogTitle: translate('Create snapshot for OpenStack volume'),
     iconClass: 'fa fa-plus',
-    component: 'snapshotCreateDialog',
+    component: SnapshotCreateDialog,
+    useResolve: true,
     fields: [
       createLatinNameField(),
       createDescriptionField(),

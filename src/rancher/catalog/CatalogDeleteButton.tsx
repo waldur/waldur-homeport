@@ -6,8 +6,10 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 
+import { CatalogDeleteDialog } from './CatalogDeleteDialog';
+
 const deleteCatalogDialog = catalog =>
-  openModalDialog('rancherCatalogDeleteDialog', { resolve: { catalog } });
+  openModalDialog(CatalogDeleteDialog, { resolve: { catalog } });
 
 export const CatalogDeleteButton = props => {
   const dispatch = useDispatch();

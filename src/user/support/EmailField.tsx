@@ -10,17 +10,18 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
 import { RequestedEmail } from './RequestedEmail';
+import { UserEmailChangeDialog } from './UserEmailChangeDialog';
 
 export const EmailField = props => {
   const [waiting, setWaiting] = useState(false);
   const dispatch = useDispatch();
   const openChangeDialog = React.useCallback(() => {
     dispatch(
-      openModalDialog('userEmailChangeDialog', {
+      openModalDialog(UserEmailChangeDialog, {
         resolve: { user: props.user },
       }),
     );
-  }, []);
+  }, [dispatch, props.user]);
   const cancelRequest = React.useCallback(async () => {
     try {
       setWaiting(true);

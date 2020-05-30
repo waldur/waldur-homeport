@@ -20,7 +20,6 @@ describe('Workspace selector', () => {
         'http://localhost:8080/api/projects/**',
         'fixture:projects/alice_azure.json',
       )
-      .route('http://localhost:8080/api/quotas/**/history/**', [])
       .login()
       .openWorkspaceSelector();
   });

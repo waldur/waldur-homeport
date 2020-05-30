@@ -16,14 +16,14 @@ import './marketplace';
 
 export default module => {
   module.config(routes);
-  openstackTenantModule(module);
+  openstackTenantModule();
   openstackInstanceModule(module);
-  openstackVolumeModule(module);
+  openstackVolumeModule();
   openstackBackupModule(module);
   openstackBackupScheduleModule(module);
   openstackNetworkModule(module);
   openstackSubnetModule(module);
   openstackSecurityGroupsModule(module);
-  openstackSnapshotModule(module);
-  openstackSnapshotScheduleModule(module);
+  openstackSnapshotModule();
+  openstackSnapshotScheduleModule();
 };

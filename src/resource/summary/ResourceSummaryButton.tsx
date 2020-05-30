@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { ResourceSummaryModal } from './ResourceSummaryModal';
+
 interface ResourceSummaryButtonProps {
   url: string;
   disabled?: boolean;
@@ -17,7 +19,7 @@ export const ResourceSummaryButton: React.FC<ResourceSummaryButtonProps> = ({
   const dispatch = useDispatch();
   const showDetailsModal = () => {
     dispatch(
-      openModalDialog('resource-summary-modal', {
+      openModalDialog(ResourceSummaryModal, {
         resolve: { url },
       }),
     );

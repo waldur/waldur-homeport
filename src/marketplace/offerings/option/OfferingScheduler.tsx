@@ -1,4 +1,3 @@
-import { EventInput } from '@fullcalendar/core';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Panel from 'react-bootstrap/lib/Panel';
@@ -6,14 +5,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
 
-import { EditableCalendar } from '@waldur/booking/components/calendar/EditableCalendar';
-import { CalendarEventModal } from '@waldur/booking/components/modal/CalendarEventModal';
-import {
-  createCalendarBookingEvent,
-  deleteCalendarBookingEvent,
-} from '@waldur/booking/utils';
+import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
+import { CalendarSettings } from '@waldur/booking/components/CalendarSettings';
+import { BookingProps, State, ConfigProps } from '@waldur/booking/types';
+import { deleteCalendarBooking } from '@waldur/booking/utils';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { withModal } from '@waldur/modal/withModal';
 
 import './OfferingScheduler.scss';
 
@@ -21,7 +17,8 @@ type OfferingSchedulerProps = TranslateProps &
   WrappedFieldArrayProps<any> & {
     setModalProps: (event) => void;
     openModal: (cb) => void;
-    schedules: EventInput[];
+    schedules: BookingProps[];
+    config: ConfigProps;
   };
 
 export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
@@ -32,53 +29,26 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
           <h4>{props.translate('Availability')}</h4>
         </Panel.Heading>
         <Panel.Body>
-          <EditableCalendar
-            events={props.schedules}
-            onSelectDate={event =>
-              props.fields.push(
-                createCalendarBookingEvent({ ...event, type: 'availability' }),
-              )
-            }
-            onSelectEvent={prevEvent => {
-              props.setModalProps({
-                event: prevEvent.event,
-                destroy: () =>
-                  deleteCalendarBookingEvent(props.fields, prevEvent.event),
-              });
-              props.openModal(event => {
-                const field = createCalendarBookingEvent({
-                  ...prevEvent.event.extendedProps,
-                  event,
-                });
-                deleteCalendarBookingEvent(props.fields, prevEvent.event);
-                props.fields.push(field);
-              });
-            }}
-            eventResize={slot => {
-              const field = createCalendarBookingEvent(slot.event);
-              deleteCalendarBookingEvent(props.fields, slot.prevEvent);
-              props.fields.push(field);
-            }}
-            eventDrop={slot => {
-              const field = createCalendarBookingEvent(slot.event);
-              deleteCalendarBookingEvent(props.fields, slot.oldEvent);
-              props.fields.push(field);
-            }}
-          />
+          <CalendarSettings />
         </Panel.Body>
       </Panel>
+
+      <CalendarComponent
+        calendarType="create"
+        events={props.fields.getAll() || []}
+        addEventCb={props.fields.push}
+        removeEventCb={id => deleteCalendarBooking(props.fields, { id })}
+        options={props.config}
+      />
     </Col>
   </div>
 );
 
 const mapStateToProps = state => ({
   schedules: formValueSelector('marketplaceOfferingCreate')(state, 'schedules'),
+  config: state.bookings.config as State,
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  withTranslation,
-  withModal(CalendarEventModal),
-);
+const enhance = compose(connect(mapStateToProps), withTranslation);
 
 export const OfferingScheduler = enhance(PureOfferingScheduler);

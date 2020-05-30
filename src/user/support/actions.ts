@@ -1,11 +1,15 @@
 import { createFormAction } from 'redux-form-saga';
 
 import { translate } from '@waldur/i18n';
+import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { UserDetailsDialog } from './UserDetailsDialog';
+import { UserRemovalMessageDialog } from './UserRemovalMessageDialog';
+
 export const showUserDetails = user =>
-  openModalDialog('UserDetailsDialog', { resolve: { user }, size: 'lg' });
+  openModalDialog(UserDetailsDialog, { resolve: { user }, size: 'lg' });
 
 export const showUserRemoval = () => {
   const resolve = {
@@ -23,11 +27,11 @@ export const showUserRemoval = () => {
       submitTitle: translate('Request removal'),
     },
   };
-  return openModalDialog('issueCreateDialog', { resolve });
+  return openModalDialog(IssueCreateDialog, { resolve });
 };
 
 export const showUserRemovalMessage = resolve => {
-  return openModalDialog('UserRemovalMessageDialog', { resolve });
+  return openModalDialog(UserRemovalMessageDialog, { resolve });
 };
 
 export const updateUser = createFormAction('waldur/user/UPDATE');

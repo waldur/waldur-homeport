@@ -4,7 +4,6 @@ import { ResetFormButton } from '@waldur/form-react/ResetFormButton';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { MARKETPLACE_FILTER_FORM } from '../store/constants';
 
@@ -30,5 +29,3 @@ const PureAttributeFilterListDialog = (props: TranslateProps) => (
 export const AttributeFilterListDialog = withTranslation(
   PureAttributeFilterListDialog,
 );
-
-export default connectAngularComponent(AttributeFilterListDialog);

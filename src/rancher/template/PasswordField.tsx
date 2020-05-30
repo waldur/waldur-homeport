@@ -8,9 +8,10 @@ import { change } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
+import { FieldProps } from '../types';
+
 import { FORM_ID } from './constants';
 import { DecoratedField } from './DecoratedField';
-import { FieldProps } from './types';
 
 export const PasswordField: React.FC<FieldProps> = props => {
   const dispatch = useDispatch();

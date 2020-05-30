@@ -1,8 +1,8 @@
 import * as React from 'react';
+import useAsync from 'react-use/lib/useAsync';
 
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Query } from '@waldur/core/Query';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
@@ -43,16 +43,15 @@ async function loadData(props): Promise<ExpandableRow[]> {
 
 export const ProjectExpandableRowContainer: React.FC<{
   row: Project;
-}> = props => (
-  <Query loader={loadData} variables={props.row}>
-    {({ loading, error, data }) => {
-      if (loading) {
-        return <LoadingSpinner />;
-      } else if (error) {
-        return <span>{translate('Unable to load project resources.')}</span>;
-      } else {
-        return <ResourceExpandableRow rows={data} />;
-      }
-    }}
-  </Query>
-);
+}> = props => {
+  const { loading, error, value } = useAsync(() => loadData(props.row), [
+    props.row,
+  ]);
+  if (loading) {
+    return <LoadingSpinner />;
+  } else if (error) {
+    return <>{translate('Unable to load project resources.')}</>;
+  } else {
+    return <ResourceExpandableRow rows={value} />;
+  }
+};

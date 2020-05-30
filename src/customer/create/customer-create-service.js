@@ -1,14 +1,14 @@
-import wizardStepsConfig from './customer-create-config';
-import * as constants from './constants';
-
 import { sendForm } from '@waldur/core/api';
+import { createServiceProvider } from '@waldur/marketplace/common/api';
+
+import * as constants from './constants';
+import wizardStepsConfig from './customer-create-config';
 
 export default class CustomerCreateService {
   // @ngInject
-  constructor(customerPermissionsService, usersService, providersService, ENV) {
+  constructor(customerPermissionsService, usersService, ENV) {
     this.customerPermissionsService = customerPermissionsService;
     this.usersService = usersService;
-    this.providersService = providersService;
     this.ENV = ENV;
   }
 
@@ -25,7 +25,10 @@ export default class CustomerCreateService {
       .then(response => response.data)
       .then(customer => {
         if (model.role === constants.ROLES.provider) {
-          return this.providersService.register(customer).then(() => customer);
+          return createServiceProvider({
+            customer: customer.url,
+            enable_notifications: false,
+          }).then(() => customer);
         }
 
         return customer;
@@ -34,11 +37,11 @@ export default class CustomerCreateService {
 
   createCustomerPermission(customer) {
     return this.usersService.getCurrentUser().then(user => {
-      let instance = this.customerPermissionsService.$create();
-      instance.role = 'owner';
-      instance.customer = customer.url;
-      instance.user = user.url;
-      return instance.$save();
+      return this.customerPermissionsService.create({
+        role: 'owner',
+        customer: customer.url,
+        user: user.url,
+      });
     });
   }
 
@@ -60,7 +63,7 @@ export default class CustomerCreateService {
       'image',
     ];
 
-    let model = {};
+    const model = {};
     this.copyFields(formModel, model, fields);
     if (formModel.vat_code) {
       model.is_company = true;

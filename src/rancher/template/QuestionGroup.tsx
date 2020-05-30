@@ -3,9 +3,10 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { translate } from '@waldur/i18n';
 
+import { Question } from '../types';
+
 import { GroupHeader } from './GroupHeader';
 import { QuestionItem } from './QuestionItem';
-import { Question } from './types';
 import { groupByN } from './utils';
 
 export const QuestionGroup: React.FC<{

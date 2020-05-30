@@ -2,12 +2,13 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 
-import { remove } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 import { ActionButton } from '@waldur/table-react/ActionButton';
+
+import { removeApp } from '../api';
 
 export const ApplicationDeleteButton = props => {
   const dispatch = useDispatch();
@@ -22,12 +23,7 @@ export const ApplicationDeleteButton = props => {
       return;
     }
     try {
-      await remove(`/rancher-apps/`, {
-        data: {
-          project_uuid: props.application.project_uuid,
-          app_id: props.application.id,
-        },
-      });
+      await removeApp(props.application.project_uuid, props.application.id);
       dispatch(showSuccess('Application has been deleted.'));
     } catch (response) {
       dispatch(showError('Unable to delete application. ' + format(response)));

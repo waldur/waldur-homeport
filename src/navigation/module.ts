@@ -6,7 +6,6 @@ import cookiesModule from './cookies/module';
 import headerModule from './header/module';
 import NavigationUtilsService from './navigation-utils-service';
 import setTitleFromState from './set-title-from-state';
-import sidebarModule from './sidebar/module';
 import titleService from './title-service';
 import workspaceModule from './workspace/module';
 
@@ -18,6 +17,5 @@ export default module => {
   breadcrumbsModule(module);
   cookiesModule(module);
   headerModule(module);
-  sidebarModule(module);
   workspaceModule(module);
 };

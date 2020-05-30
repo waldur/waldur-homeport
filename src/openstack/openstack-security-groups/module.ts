@@ -4,12 +4,8 @@ import { DEFAULT_EDIT_ACTION } from '@waldur/resource/actions/constants';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import './breadcrumbs';
-import filtersModule from './filters';
-import securityGroupsDialogReact from './OpenStackSecurityGroupsDialog';
 import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
 import securityGroupRuleEditor from './security-group-rule-editor';
-import securityGroupRulesList from './security-group-rules-list';
-import securityGroupsDialog from './security-groups-dialog';
 
 import './tabs';
 
@@ -53,9 +49,5 @@ export default module => {
     'OpenStack.SecurityGroup',
     OpenStackSecurityGroupSummary,
   );
-  module.component('securityGroupRulesList', securityGroupRulesList);
   module.component('securityGroupRuleEditor', securityGroupRuleEditor);
-  module.component('securityGroupsDialog', securityGroupsDialog);
-  module.component('securityGroupsDialogReact', securityGroupsDialogReact);
-  filtersModule(module);
 };

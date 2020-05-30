@@ -1,24 +1,29 @@
-import { gettext } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
+import terminateAction from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
-import { DEFAULT_EDIT_ACTION } from '@waldur/resource/actions/constants';
+import {
+  createPullAction,
+  createDefaultEditAction,
+} from '@waldur/resource/actions/base';
+import { ResourceAction } from '@waldur/resource/actions/types';
 
-ActionConfigurationRegistry.register('SLURM.Allocation', {
-  order: ['details', 'pull', 'edit', 'cancel', 'destroy'],
-  options: {
-    pull: {
-      title: gettext('Synchronise'),
-    },
-    details: {
-      title: gettext('Details'),
-      component: 'slurmAllocationDetailsDialog',
-      enabled: true,
-      useResolve: true,
-      type: 'form',
-      dialogSize: 'lg',
-    },
-    edit: {
-      ...DEFAULT_EDIT_ACTION,
-      successMessage: gettext('Allocation has been updated.'),
-    },
-  },
+const createDetailsAction = (): ResourceAction => ({
+  name: 'details',
+  title: translate('Details'),
+  component: 'slurmAllocationDetailsDialog',
+  useResolve: true,
+  type: 'form',
+  dialogSize: 'lg',
 });
+
+const createEditAction = () => ({
+  ...createDefaultEditAction(),
+  successMessage: translate('Allocation has been updated.'),
+});
+
+ActionConfigurationRegistry.register('SLURM.Allocation', [
+  createDetailsAction,
+  createPullAction,
+  createEditAction,
+  terminateAction,
+]);

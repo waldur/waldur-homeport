@@ -1,11 +1,11 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
+import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useInterval from 'react-use/lib/useInterval';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Query } from '@waldur/core/Query';
-import { $state } from '@waldur/core/services';
 import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getOrderDetails } from '@waldur/marketplace/common/api';
@@ -15,7 +15,7 @@ import { ApproveButton } from './ApproveButton';
 import { Order } from './Order';
 import { OrderSteps } from './OrderSteps';
 import { RejectButton } from './RejectButton';
-import { StatusChange } from './types';
+import { StatusChange, OrderStep } from './types';
 
 interface OrderDetailsProps {
   approveOrder: (orderUuid: string) => void;
@@ -24,8 +24,8 @@ interface OrderDetailsProps {
   orderCanBeApproved?: boolean;
 }
 
-async function loadOrder() {
-  const order = await getOrderDetails($state.params.order_uuid);
+async function loadOrder(order_uuid) {
+  const order = await getOrderDetails(order_uuid);
   return {
     order,
     step: order.state === 'requested for approval' ? 'Approve' : 'Review',
@@ -46,66 +46,79 @@ const OrderRefreshButton = props => (
   </button>
 );
 
-const OrderDetailsComponent = props => {
-  // Refresh order details each 5 seconds until it is switched from pending state to terminal state
-  useInterval(
-    props.loadData,
-    props.data.order.state === 'executing' ? 5000 : null,
-  );
-  return (
-    <Row>
-      <Col lg={8}>
-        <OrderSteps step={props.data.step} />
-        <Order
-          items={props.data.items}
-          project_uuid={props.data.project_uuid}
-          editable={false}
-        />
-        <div className="text-right">
-          <OrderRefreshButton loadData={props.loadData} />
-          {props.orderCanBeApproved && props.data.step === 'Approve' && (
-            <>
-              <ApproveButton
-                submitting={props.stateChangeStatus.approving}
-                onClick={() => props.approveOrder($state.params.order_uuid)}
-                tooltip={translate(
-                  'You need approval to finish purchasing of services.',
-                )}
-                className="btn btn-primary btn-sm m-r-xs"
-              />
-              <RejectButton
-                submitting={props.stateChangeStatus.rejecting}
-                onClick={() => props.rejectOrder($state.params.order_uuid)}
-              />
-            </>
-          )}
-        </div>
-      </Col>
-      <Col lg={4}>
-        <OrderSummary total={props.data.total_cost} file={props.data.file} />
-      </Col>
-    </Row>
-  );
-};
+export const OrderDetails: React.FC<OrderDetailsProps> = props => {
+  const {
+    params: { order_uuid },
+  } = useCurrentStateAndParams();
 
-export const OrderDetails: React.FC<OrderDetailsProps> = props => (
-  <Query variables={props.stateChangeStatus} loader={loadOrder}>
-    {({ loading, loaded, error, data, loadData }) => {
-      // Don't render loading indicator if order item is refreshing
-      // since if it is in pending state it is refreshed via periodic polling
-      if (loading && !loaded) {
-        return <LoadingSpinner />;
-      }
-      if (error) {
-        return (
-          <h3 className="text-center">
-            {translate('Unable to load order details.')}
-          </h3>
-        );
-      }
-      return (
-        <OrderDetailsComponent {...props} data={data} loadData={loadData} />
-      );
-    }}
-  </Query>
-);
+  const [{ loading, error, value }, loadData] = useAsyncFn(
+    () => loadOrder(order_uuid),
+    [props.stateChangeStatus, order_uuid],
+  );
+
+  const oldValue = React.useRef<any>();
+
+  React.useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  React.useEffect(() => {
+    oldValue.current = value;
+  }, [value]);
+
+  // Refresh order details each 5 seconds until it is switched from pending state to terminal state
+  useInterval(loadData, value?.order?.state === 'executing' ? 5000 : null);
+
+  // Don't render loading indicator if order item is refreshing
+  // since if it is in pending state it is refreshed via periodic polling
+  if (loading && !oldValue.current) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return (
+      <h3 className="text-center">
+        {translate('Unable to load order details.')}
+      </h3>
+    );
+  }
+
+  const data = value || oldValue.current;
+  if (data) {
+    return (
+      <Row>
+        <Col lg={8}>
+          <OrderSteps step={data.step as OrderStep} />
+          <Order
+            items={data.items}
+            project_uuid={data.project_uuid}
+            editable={false}
+          />
+          <div className="text-right">
+            <OrderRefreshButton loadData={loadData} />
+            {props.orderCanBeApproved && data.step === 'Approve' && (
+              <>
+                <ApproveButton
+                  submitting={props.stateChangeStatus.approving}
+                  onClick={() => props.approveOrder(order_uuid)}
+                  tooltip={translate(
+                    'You need approval to finish purchasing of services.',
+                  )}
+                  className="btn btn-primary btn-sm m-r-xs"
+                />
+                <RejectButton
+                  submitting={props.stateChangeStatus.rejecting}
+                  onClick={() => props.rejectOrder(order_uuid)}
+                />
+              </>
+            )}
+          </div>
+        </Col>
+        <Col lg={4}>
+          <OrderSummary total={data.total_cost} file={data.file} />
+        </Col>
+      </Row>
+    );
+  }
+  return null;
+};

@@ -37,7 +37,7 @@ export interface TableProps<RowType = any> extends TranslateProps, TableState {
   placeholderComponent?: React.ReactNode;
 }
 
-class Table extends React.Component<TableProps> {
+class Table<RowType = any> extends React.Component<TableProps<RowType>> {
   static defaultProps = {
     rows: [],
     columns: [],

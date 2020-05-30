@@ -35,7 +35,7 @@ const TableComponent = props => {
           render: ({ row }) => <ResourceRowActions resource={row} />,
         },
       ]}
-      verboseName={translate('backups')}
+      verboseName={translate('VM snapshots')}
       hasQuery={false}
       actions={<NestedListActions resource={props.resource} tab="backups" />}
     />

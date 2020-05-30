@@ -16,7 +16,12 @@ export const useCreateOrganization = () => {
   const canCreateOrganization = user.is_staff || ownerCanManage;
   const createOrganization = () => {
     dispatch(closeModalDialog());
-    dispatch(openModalDialog('customerCreateDialog', { size: 'lg' }));
+    dispatch(
+      openModalDialog('customerCreateDialog', {
+        size: 'lg',
+        resolve: { role: 'CUSTOMER' },
+      }),
+    );
   };
   return [canCreateOrganization, createOrganization];
 };
