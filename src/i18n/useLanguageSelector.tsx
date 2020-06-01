@@ -22,6 +22,7 @@ export const useLanguageSelector = () => {
   const setLanguage = React.useCallback((language: Language) => {
     setCurrentLanguage(language);
     service.setCurrentLanguage(language);
+    location.reload();
   }, []);
 
   return { currentLanguage, languageChoices, setLanguage };
