@@ -6856,7 +6856,7 @@ msgstr ""
 msgid "To get access, please send a request to {supportEmail}."
 msgstr ""
 
-#: src/auth/auth-init.html
+#: src/auth/AuthInit.tsx
 msgid "To get your clouds under control, please fill in your data."
 msgstr ""
 
@@ -7323,6 +7323,7 @@ msgstr ""
 msgid "Unable to load tenant."
 msgstr ""
 
+#: src/auth/AuthInit.tsx
 #: src/user/UserPopover.tsx
 msgid "Unable to load user."
 msgstr ""
@@ -7401,7 +7402,7 @@ msgstr ""
 msgid "Unable to resize droplet."
 msgstr ""
 
-#: src/auth/auth-init.js
+#: src/auth/AuthInit.tsx
 msgid "Unable to save user."
 msgstr ""
 
@@ -7719,6 +7720,10 @@ msgstr ""
 
 #: src/user/support/effects.ts
 msgid "User has been updated"
+msgstr ""
+
+#: src/auth/AuthInit.tsx
+msgid "User has been updated."
 msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
@@ -8064,7 +8069,7 @@ msgid "Week"
 msgstr ""
 
 #: src/auth/AuthHeader.tsx
-#: src/auth/auth-init.js
+#: src/auth/AuthInit.tsx
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 

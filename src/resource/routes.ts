@@ -1,3 +1,5 @@
+import { UIView } from '@uirouter/react';
+
 import { StateDeclaration } from '@waldur/core/types';
 
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
@@ -9,7 +11,7 @@ export const states: StateDeclaration[] = [
     name: 'resources',
     url: '/resources/',
     abstract: true,
-    template: '<ui-view></ui-view>',
+    component: UIView,
     data: {
       auth: true,
       workspace: WOKSPACE_NAMES.project,

@@ -1,3 +1,5 @@
+import { UIView } from '@uirouter/react';
+
 import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { checkPermission } from '@waldur/issues/utils';
@@ -188,7 +190,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-services',
     url: '',
     abstract: true,
-    template: '<ui-view></ui-view>',
+    component: UIView,
   },
 
   {
@@ -400,7 +402,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-resources',
     url: '',
     abstract: true,
-    template: '<ui-view></ui-view>',
+    component: UIView,
   },
 
   {
