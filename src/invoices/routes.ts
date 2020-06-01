@@ -1,3 +1,5 @@
+import { UIView } from '@uirouter/react';
+
 import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { withStore } from '@waldur/store/connect';
@@ -9,7 +11,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'organization.billing',
     url: 'billing/',
-    template: '<ui-view></ui-view>',
+    component: UIView,
     abstract: true,
     data: {
       pageTitle: gettext('Accounting'),

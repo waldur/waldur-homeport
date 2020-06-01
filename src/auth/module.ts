@@ -1,5 +1,4 @@
 import initAuthProvider from './auth-config';
-import { authInit } from './auth-init';
 import { AuthService } from './auth-service';
 import callbacksModule from './callbacks/module';
 import interceptorModule from './interceptor';
@@ -11,7 +10,6 @@ import './events';
 
 export default module => {
   module.service('authService', AuthService);
-  module.component('authInit', authInit);
   module.config(authRoutes);
   module.config(initAuthProvider);
   interceptorModule(module);

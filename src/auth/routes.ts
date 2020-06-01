@@ -1,14 +1,13 @@
+import { UIView } from '@uirouter/react';
+
 import { StateDeclaration } from '@waldur/core/types';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { withStore } from '@waldur/store/connect';
+import { UsersService } from '@waldur/user/UsersService';
 
 import { AuthActivation } from './AuthActivation';
+import { AuthInit } from './AuthInit';
 import { AuthLogin } from './AuthLogin';
-
-function resolveCurrentUser(usersService) {
-  return usersService.getCurrentUser();
-}
-resolveCurrentUser.$inject = ['usersService'];
 
 export const states: StateDeclaration[] = [
   {
@@ -56,20 +55,20 @@ export const states: StateDeclaration[] = [
     name: 'initialdata',
     parent: 'home',
     url: '/initial-data/',
-    template: '<ui-view></ui-view>',
+    component: UIView,
     abstract: true,
   },
 
   {
     name: 'initialdata.view',
     url: '',
-    template: '<auth-init></auth-init>',
+    component: withStore(AuthInit),
     data: {
       auth: true,
       bodyClass: 'old',
     },
     resolve: {
-      currentUser: resolveCurrentUser,
+      currentUser: () => UsersService.getCurrentUser(),
     },
   },
 ];
