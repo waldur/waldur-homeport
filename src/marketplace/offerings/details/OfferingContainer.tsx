@@ -7,6 +7,8 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getOffering, getCategory } from '@waldur/marketplace/common/api';
+import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
+import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { Offering } from '@waldur/marketplace/types';
 
@@ -59,6 +61,16 @@ async function loadData(offering_uuid: string) {
       title: translate('Bookings'),
       component: () => <OfferingBookingTab offering={offering} />,
       visible: offering.type === OFFERING_TYPE_BOOKING,
+    },
+    {
+      visible: true,
+      title: translate('Resources'),
+      component: () => (
+        <>
+          <OfferingResourcesFilter />
+          <OfferingResourcesList offering={offering} />
+        </>
+      ),
     },
   ].filter(tab => tab.visible);
   updateBreadcrumbs(offering);
