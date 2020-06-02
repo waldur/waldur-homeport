@@ -890,7 +890,6 @@ msgstr ""
 #: src/form-react/AppstoreListDialog.tsx
 #: src/form/appstore-form-wizard.html
 #: src/invitations/actions/InvitationCancelButton.tsx
-#: src/invitations/actions/invitation-dialog.html
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
@@ -1049,7 +1048,7 @@ msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/invitations/actions/invitation-dialog.js
+#: src/invitations/actions/CivilNumberGroup.tsx
 #: src/project/team/user-selector.html
 msgid "Civil number"
 msgstr ""
@@ -1880,7 +1879,7 @@ msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/customer/team/CustomerUsersList.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/EmailGroup.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/user-selector.html
 #: src/user/support/UserDetailsTable.tsx
@@ -2397,7 +2396,7 @@ msgid "Full description"
 msgstr ""
 
 #: src/auth/SignupForm.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/UserDetailsGroup.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -2808,10 +2807,6 @@ msgstr ""
 msgid "Invitation has been canceled."
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog-service.js
-msgid "Invitation has been created."
-msgstr ""
-
 #: src/invitations/InvitationReject.tsx
 msgid "Invitation has been rejected."
 msgstr ""
@@ -2853,7 +2848,7 @@ msgid "Invite team member"
 msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/InvitationCreateDialog.tsx
 msgid "Invite user"
 msgstr ""
 
@@ -2992,7 +2987,7 @@ msgstr ""
 msgid "Job position"
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/UserDetailsGroup.tsx
 msgid "Job title"
 msgstr ""
 
@@ -3582,7 +3577,7 @@ msgstr ""
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/UserDetailsGroup.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
@@ -4047,7 +4042,7 @@ msgstr ""
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/UserDetailsGroup.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
@@ -4711,7 +4706,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/ProjectGroup.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
@@ -5560,7 +5555,7 @@ msgstr ""
 
 #: src/customer/team/add-team-member.html
 #: src/invitations/InvitationsList.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/add-project-member.html
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/list/ProjectPermissions.tsx
@@ -5875,6 +5870,10 @@ msgstr ""
 msgid "Select priority..."
 msgstr ""
 
+#: src/invitations/actions/ProjectGroup.tsx
+msgid "Select project"
+msgstr ""
+
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
@@ -6129,7 +6128,7 @@ msgstr ""
 msgid "Show usage"
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/LoadUserDetailsButton.tsx
 msgid "Show user details"
 msgstr ""
 
@@ -6512,7 +6511,7 @@ msgstr ""
 msgid "Tax"
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog.js
+#: src/invitations/actions/TaxNumberGroup.tsx
 msgid "Tax number"
 msgstr ""
 
@@ -7032,10 +7031,6 @@ msgstr ""
 msgid "Unable to create catalog."
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog-service.js
-msgid "Unable to create invitation."
-msgstr ""
-
 #: src/user/keys/KeyCreateForm.tsx
 msgid "Unable to create key."
 msgstr ""
@@ -7116,10 +7111,6 @@ msgstr ""
 
 #: src/booking/store/effects.ts
 msgid "Unable to fetch offering bookings."
-msgstr ""
-
-#: src/invitations/actions/invitation-dialog.js
-msgid "Unable to fetch user details."
 msgstr ""
 
 #: src/issues/comments/utils.ts
@@ -7700,10 +7691,6 @@ msgstr ""
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsDialog.tsx
 msgid "User details"
-msgstr ""
-
-#: src/invitations/actions/invitation-dialog.js
-msgid "User details have been fetched successfully."
 msgstr ""
 
 #: src/user/support/effects.ts

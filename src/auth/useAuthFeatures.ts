@@ -3,8 +3,9 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 
-import { ENV, ngInjector } from '@waldur/core/services';
+import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { InvitationService } from '@waldur/invitations/InvitationService';
 import { showError } from '@waldur/store/coreSaga';
 
 const checkRegistrationMethods = async (mode, router, dispatch) => {
@@ -28,8 +29,7 @@ const checkRegistrationMethods = async (mode, router, dispatch) => {
     return;
   }
 
-  const invitationService = ngInjector.get('invitationService');
-  const token = invitationService.getInvitationToken();
+  const token = InvitationService.getInvitationToken();
   if (!token) {
     dispatch(showError(translate('Invitation token is not found.')));
     router.stateService.go('errorPage.notFound');
@@ -37,7 +37,7 @@ const checkRegistrationMethods = async (mode, router, dispatch) => {
   }
 
   try {
-    const result = await invitationService.check(token);
+    const result: any = await InvitationService.check(token);
     if (result.data.civil_number_required) {
       return true;
     }
