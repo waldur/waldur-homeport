@@ -10,6 +10,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { InputField } from '@waldur/form-react/InputField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
@@ -18,7 +19,6 @@ import { IssueTemplate, IssueTemplateAttachment } from '../api';
 import { AttachmentsList } from './AttachmentsList';
 import { ISSUE_CREATION_FORM_ID } from './constants';
 import { FileField } from './FileField';
-import { InputField } from './InputField';
 import { IssueHeader } from './IssueHeader';
 import { SelectField } from './SelectField';
 import { TypeField } from './TypeField';

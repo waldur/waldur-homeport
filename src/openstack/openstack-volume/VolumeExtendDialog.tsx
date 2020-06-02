@@ -13,8 +13,8 @@ import { Field, reduxForm, change } from 'redux-form';
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { post } from '@waldur/core/api';
 import { formatFilesize } from '@waldur/core/utils';
+import { InputField } from '@waldur/form-react/InputField';
 import { translate } from '@waldur/i18n';
-import { InputField } from '@waldur/issues/create/InputField';
 import {
   parseIntField,
   formatIntField,

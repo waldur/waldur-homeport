@@ -10,6 +10,8 @@ import {
   getCustomer,
 } from '@waldur/workspace/selectors';
 
+import { InvitationCreateDialog } from './InvitationCreateDialog';
+
 export const InvitationCreateButton = () => {
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
@@ -17,7 +19,7 @@ export const InvitationCreateButton = () => {
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
-      openModalDialog('invitationDialog', {
+      openModalDialog(InvitationCreateDialog, {
         resolve: {
           context: {
             customer,
