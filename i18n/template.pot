@@ -5480,7 +5480,7 @@ msgstr ""
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
