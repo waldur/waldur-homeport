@@ -1,10 +1,10 @@
 import invitationConfirmDialog from './invitation-confirm-dialog';
 import invitationRoutes from './routes';
-import { invitationUtilsService, attachInvitationUtils } from './utils';
+import { InvitationUtilsService, attachInvitationUtils } from './utils';
 
 export default module => {
   module.component('invitationConfirmDialog', invitationConfirmDialog);
-  module.service('invitationUtilsService', invitationUtilsService);
+  module.service('invitationUtilsService', InvitationUtilsService);
   module.run(attachInvitationUtils);
   module.config(invitationRoutes);
 };

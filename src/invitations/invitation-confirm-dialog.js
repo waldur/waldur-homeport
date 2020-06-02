@@ -1,4 +1,5 @@
 import template from './invitation-confirm-dialog.html';
+import { InvitationService } from './InvitationService';
 
 const invitationConfirmDialog = {
   template,
@@ -9,8 +10,7 @@ const invitationConfirmDialog = {
   },
   controller: class InvitationConfirmController {
     // @ngInject
-    constructor(invitationService, usersService, $timeout, ENV) {
-      this.invitationService = invitationService;
+    constructor(usersService, $timeout, ENV) {
       this.usersService = usersService;
       this.$timeout = $timeout;
       this.invitationCheckInterval = ENV.invitationCheckInterval;
@@ -19,16 +19,15 @@ const invitationConfirmDialog = {
     }
 
     $onInit() {
-      let token = this.resolve.token;
+      const token = this.resolve.token;
       this.invitationCheck(token);
     }
 
     invitationCheck(token) {
-      this.invitationService
-        .check(token)
+      InvitationService.check(token)
         .then(response => {
           this.usersService.getCurrentUser().then(user => {
-            let invitation = response.data;
+            const invitation = response.data;
             if (!user.email || user.email === invitation.email) {
               this.closeDecliningNewEmail();
             }
