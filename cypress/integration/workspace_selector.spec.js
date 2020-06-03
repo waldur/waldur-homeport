@@ -10,12 +10,12 @@ const getTextList = $p =>
 describe('Workspace selector', () => {
   beforeEach(() => {
     cy.server()
-      .mockUser()
-      .mockCustomer()
       .route(
         'http://localhost:8080/api/customers/?**',
         'fixture:customers/alice_bob_web.json',
       )
+      .mockUser()
+      .mockCustomer()
       .route(
         'http://localhost:8080/api/projects/**',
         'fixture:projects/alice_azure.json',

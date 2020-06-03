@@ -1,14 +1,11 @@
 describe('Offering creation', () => {
   beforeEach(() => {
     cy.server()
+      .mockCustomer()
       .mockUser()
       .login()
 
       .log('Visit Marketplace Offering Create')
-      .route(
-        'http://localhost:8080/api/customers/**',
-        'fixture:customers/alice_bob_web.json',
-      )
       .route(
         'http://localhost:8080/api/marketplace-categories/',
         'fixture:marketplace/categories.json',
@@ -23,7 +20,7 @@ describe('Offering creation', () => {
         response: {},
       })
       .visit(
-        '/#/organizations/4dd32642c41e47ebad702e5f1e1c340b/marketplace-offering-create/',
+        '/#/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering-create/',
       )
       .waitForSpinner();
   });
@@ -33,9 +30,6 @@ describe('Offering creation', () => {
       // Overview step
       .get('input[name="name"]')
       .type('My offering')
-
-      .get('input[name="native_name"]')
-      .type('Native name')
 
       .get('button[type="button"]')
       .contains('Browse')
@@ -128,9 +122,6 @@ describe('Offering creation', () => {
       .get('td')
       .contains('My offering')
 
-      .get('td')
-      .contains('Native name')
-
       .get('p')
       .contains('Request-based item')
 
@@ -154,7 +145,7 @@ describe('Offering creation', () => {
       .location()
       .should(loc => {
         expect(loc.href).to.eq(
-          'http://localhost:8001/#/organizations/4dd32642c41e47ebad702e5f1e1c340b/marketplace-offerings/',
+          'http://localhost:8001/#/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offerings/',
         );
       });
   });
