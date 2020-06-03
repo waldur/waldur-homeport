@@ -23,7 +23,7 @@ export const CreateSecurityGroupButton = ({ tenantUUID }) => {
     } catch {
       return;
     }
-    router.stateService.go('resources.details', {
+    router.stateService.go('resource-details', {
       resource_type: 'OpenStack.Tenant',
       uuid: tenantUUID,
       tab: 'security_groups',

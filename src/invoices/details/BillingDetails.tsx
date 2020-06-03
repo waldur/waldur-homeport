@@ -39,7 +39,7 @@ const refreshBreadcrumbs = invoice => {
         ENV.accountingMode === 'accounting'
           ? translate('Accounting records')
           : translate('Invoices list'),
-      state: 'organization.billing.tabs',
+      state: 'organization.billing',
       params: {
         uuid: customerUUID,
       },

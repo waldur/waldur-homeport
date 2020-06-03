@@ -27,5 +27,5 @@ export const showProjectRemoveDialog = (
 ) =>
   openModalDialog(ProjectRemoveDialog, {
     resolve: { action, projectName },
-    size: 'md',
+    size: 'lg',
   });

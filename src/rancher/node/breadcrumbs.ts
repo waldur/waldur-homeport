@@ -5,7 +5,7 @@ ResourceBreadcrumbsRegistry.register('Rancher.Node', resource => {
   return [
     {
       label: resource.cluster_name,
-      state: 'resources.details',
+      state: 'resource-details',
       params: {
         uuid: resource.cluster_uuid,
         resource_type: 'Rancher.Cluster',
@@ -13,7 +13,7 @@ ResourceBreadcrumbsRegistry.register('Rancher.Node', resource => {
     },
     {
       label: gettext('Nodes'),
-      state: 'resources.details',
+      state: 'resource-details',
       params: {
         uuid: resource.cluster_uuid,
         resource_type: 'Rancher.Cluster',

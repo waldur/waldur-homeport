@@ -48,5 +48,5 @@ export const setOrderStateFilter = (formName, filterOption) =>
 export const showTermsOfServiceDialog = (content: string) =>
   openModalDialog(TermsOfServiceDialog, {
     resolve: { content },
-    size: 'md',
+    size: 'lg',
   });

@@ -10,7 +10,7 @@ interface ResourceLinkProps {
 
 export const ResourceLink = (props: ResourceLinkProps) => (
   <Link
-    state="resources.details"
+    state="resource-details"
     params={{
       resource_type: props.type,
       uuid: props.uuid,

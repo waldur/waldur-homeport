@@ -45,7 +45,7 @@ msgstr ""
 msgid "Abbreviation"
 msgstr ""
 
-#: src/routes/about.ts
+#: src/about.ts
 #: src/views/about/index.html
 msgid "About"
 msgstr ""
@@ -4686,8 +4686,8 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
+#: src/about.ts
 #: src/navigation/AppFooter.tsx
-#: src/routes/about.ts
 msgid "Privacy policy"
 msgstr ""
 
@@ -6631,8 +6631,8 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
+#: src/about.ts
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/routes/about.ts
 msgid "Terms of service"
 msgstr ""
 

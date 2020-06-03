@@ -19,7 +19,7 @@ export const refreshBreadcrumbs = (cluster: Cluster, template: Template) => {
     },
     {
       label: cluster.name,
-      state: 'resources.details',
+      state: 'resource-details',
       params: {
         resource_type: 'Rancher.Cluster',
         uuid: cluster.uuid,

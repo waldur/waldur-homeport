@@ -1,5 +1,4 @@
 import { StateDeclaration } from '@waldur/core/types';
-import { withStore } from '@waldur/store/connect';
 
 import { InvitationAccept } from './InvitationAccept';
 import { InvitationApprove } from './InvitationApprove';
@@ -12,13 +11,13 @@ export const states: StateDeclaration[] = [
     data: {
       bodyClass: 'old',
     },
-    component: withStore(InvitationAccept),
+    component: InvitationAccept,
   },
 
   {
     name: 'invitation-approve',
     url: '/invitation_approve/:token/',
-    component: withStore(InvitationApprove),
+    component: InvitationApprove,
     data: {
       bodyClass: 'old',
     },
@@ -27,14 +26,9 @@ export const states: StateDeclaration[] = [
   {
     name: 'invitation-reject',
     url: '/invitation_reject/:token/',
-    component: withStore(InvitationReject),
+    component: InvitationReject,
     data: {
       bodyClass: 'old',
     },
   },
 ];
-
-export default function registerRoutes($stateProvider) {
-  states.forEach(({ name, ...rest }) => $stateProvider.state(name, rest));
-}
-registerRoutes.$inject = ['$stateProvider'];

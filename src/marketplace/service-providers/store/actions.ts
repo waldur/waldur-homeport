@@ -7,7 +7,7 @@ import * as constants from './constants';
 export const showSecretCodeRegenerateConfirm = serviceProvider =>
   openModalDialog(ServiceProviderSecretCodeGenerateConfirm, {
     resolve: { serviceProvider },
-    size: 'md',
+    size: 'lg',
   });
 
 export const secretCodeRegenerateStart = serviceProvider => ({

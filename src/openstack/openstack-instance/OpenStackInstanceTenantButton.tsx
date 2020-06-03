@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 
 const ManageSecurityGroupsButton = props => (
   <Link
-    state="resources.details"
+    state="resource-details"
     params={{
       resource_type: 'OpenStack.Tenant',
       uuid: props.resource.tenant_uuid,
@@ -19,7 +19,7 @@ const ManageSecurityGroupsButton = props => (
 
 const ManageNetworksButton = props => (
   <Link
-    state="resources.details"
+    state="resource-details"
     params={{
       resource_type: 'OpenStack.Tenant',
       uuid: props.resource.tenant_uuid,
