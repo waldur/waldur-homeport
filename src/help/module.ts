@@ -4,10 +4,8 @@ import helpDetails from './help-details';
 import helpList from './help-list';
 import helpLink from './HelpLink';
 import imageBox from './image-box';
-import helpRoutes from './routes';
 
 export default module => {
-  module.config(helpRoutes);
   module.component('helpList', helpList);
   module.component('helpDetails', helpDetails);
   module.component('helpLink', helpLink);

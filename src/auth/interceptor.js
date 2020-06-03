@@ -53,15 +53,15 @@ function requireAuth($transitions, $auth, $rootScope, features, usersService) {
     transition =>
       usersService.isCurrentUserValid().then(result => {
         if (result) {
-          if (transition.to().name == 'initialdata.view') {
+          if (transition.to().name == 'initialdata') {
             return transition.router.stateService.target('profile.details');
           }
           return;
         }
-        if (transition.to().name == 'initialdata.view') {
+        if (transition.to().name == 'initialdata') {
           return;
         }
-        return transition.router.stateService.target('initialdata.view');
+        return transition.router.stateService.target('initialdata');
       }),
   );
 

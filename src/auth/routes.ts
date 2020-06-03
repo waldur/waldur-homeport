@@ -1,8 +1,5 @@
-import { UIView } from '@uirouter/react';
-
 import { StateDeclaration } from '@waldur/core/types';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
-import { withStore } from '@waldur/store/connect';
 import { UsersService } from '@waldur/user/UsersService';
 
 import { AuthActivation } from './AuthActivation';
@@ -14,13 +11,13 @@ export const states: StateDeclaration[] = [
     name: 'home',
     url: '',
     abstract: true,
-    component: withStore(AnonymousLayout),
+    component: AnonymousLayout,
   },
 
   {
     name: 'login',
     url: '/login/',
-    component: withStore(AuthLogin),
+    component: AuthLogin,
     params: {
       toState: '',
       toParams: {},
@@ -34,7 +31,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'register',
     url: '/register/',
-    component: withStore(AuthLogin),
+    component: AuthLogin,
     data: {
       bodyClass: 'old',
       anonymous: true,
@@ -44,7 +41,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'home.activate',
     url: '/activate/:user_uuid/:token/',
-    component: withStore(AuthActivation),
+    component: AuthActivation,
     data: {
       anonymous: true,
       bodyClass: 'old',
@@ -55,14 +52,7 @@ export const states: StateDeclaration[] = [
     name: 'initialdata',
     parent: 'home',
     url: '/initial-data/',
-    component: UIView,
-    abstract: true,
-  },
-
-  {
-    name: 'initialdata.view',
-    url: '',
-    component: withStore(AuthInit),
+    component: AuthInit,
     data: {
       auth: true,
       bodyClass: 'old',
@@ -72,8 +62,3 @@ export const states: StateDeclaration[] = [
     },
   },
 ];
-
-export default function registerRoutes($stateProvider) {
-  states.forEach(({ name, ...rest }) => $stateProvider.state(name, rest));
-}
-registerRoutes.$inject = ['$stateProvider'];

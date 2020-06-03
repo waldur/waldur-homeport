@@ -60,7 +60,7 @@ export const EventDetailsTable = ({
       <EventField
         label={translate('Resource')}
         value={event.context.resource_full_name}
-        state="resources.details"
+        state="resource-details"
         params={{
           uuid: event.context.resource_uuid,
           resource_type: event.context.resource_type,

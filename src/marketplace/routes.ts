@@ -1,10 +1,7 @@
-import { UIView } from '@uirouter/react';
-
 import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { checkPermission } from '@waldur/issues/utils';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
-import { withStore } from '@waldur/store/connect';
 
 import { CheckoutPage } from './cart/CheckoutPage';
 import { ShoppingCartItemUpdate } from './cart/ShoppingCartItemUpdate';
@@ -38,7 +35,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-landing',
     url: 'marketplace/',
-    component: withStore(MarketplaceLanding),
+    component: MarketplaceLanding,
     parent: 'project',
     data: {
       pageTitle: gettext('Marketplace'),
@@ -49,7 +46,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-landing-customer',
     url: 'marketplace/',
-    component: withStore(MarketplaceLanding),
+    component: MarketplaceLanding,
     parent: 'organization',
     data: {
       pageTitle: gettext('Marketplace'),
@@ -60,7 +57,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-compare',
     url: 'marketplace-compare/',
-    component: withStore(MarketplaceComparison),
+    component: MarketplaceComparison,
     parent: 'project',
     data: {
       pageTitle: gettext('Compare items'),
@@ -70,7 +67,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-compare-customer',
     url: 'marketplace-compare/',
-    component: withStore(MarketplaceComparison),
+    component: MarketplaceComparison,
     parent: 'organization',
     data: {
       pageTitle: gettext('Compare items'),
@@ -80,7 +77,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-checkout',
     url: 'marketplace-checkout/',
-    component: withStore(CheckoutPage),
+    component: CheckoutPage,
     parent: 'project',
     data: {
       pageTitle: gettext('Marketplace checkout'),
@@ -90,7 +87,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-offering',
     url: 'marketplace-offering/:offering_uuid/',
-    component: withStore(OfferingDetailsPage),
+    component: OfferingDetailsPage,
     parent: 'project',
     data: {
       pageTitle: gettext('Offering details'),
@@ -100,7 +97,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-offering-customer',
     url: 'marketplace-offering/:offering_uuid/',
-    component: withStore(OfferingDetailsPage),
+    component: OfferingDetailsPage,
     parent: 'organization',
     data: {
       pageTitle: gettext('Offering details'),
@@ -110,7 +107,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-offering-details',
     url: 'marketplace-offering-details/:offering_uuid/',
-    component: withStore(OfferingContainer),
+    component: OfferingContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('Offering details'),
@@ -121,7 +118,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-public-offering',
     url: '/marketplace-public-offering/',
     abstract: true,
-    component: withStore(AnonymousLayout),
+    component: AnonymousLayout,
     data: {
       hideHeader: true,
     },
@@ -130,7 +127,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-public-offering.details',
     url: ':uuid/',
-    component: withStore(PublicOfferingDetails),
+    component: PublicOfferingDetails,
     data: {
       pageTitle: gettext('Offering details'),
     },
@@ -139,7 +136,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-category',
     url: 'marketplace-category/:category_uuid/',
-    component: withStore(CategoryPage),
+    component: CategoryPage,
     parent: 'project',
     data: {
       pageTitle: gettext('Marketplace offerings'),
@@ -149,7 +146,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-category-customer',
     url: 'marketplace-category/:category_uuid/',
-    component: withStore(CategoryPage),
+    component: CategoryPage,
     parent: 'organization',
     data: {
       pageTitle: gettext('Marketplace offerings'),
@@ -159,7 +156,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-order-list',
     url: 'marketplace-order-list/',
-    component: withStore(OrdersList),
+    component: OrdersList,
     parent: 'project',
     data: {
       pageTitle: gettext('My orders'),
@@ -169,7 +166,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-provider-details',
     url: 'marketplace-provider-details/:customer_uuid/',
-    component: withStore(ProviderDetails),
+    component: ProviderDetails,
     parent: 'project',
     data: {
       pageTitle: gettext('Provider details'),
@@ -179,7 +176,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-provider-details-customer',
     url: 'marketplace-provider-details/:customer_uuid/',
-    component: withStore(ProviderDetails),
+    component: ProviderDetails,
     parent: 'organization',
     data: {
       pageTitle: gettext('Provider details'),
@@ -187,16 +184,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-services',
-    url: '',
-    abstract: true,
-    component: UIView,
-  },
-
-  {
     name: 'marketplace-vendor-offerings',
     url: 'marketplace-offerings/',
-    component: withStore(OfferingsListContainer),
+    component: OfferingsListContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('Public offerings'),
@@ -207,7 +197,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-my-offerings',
     url: 'marketplace-my-offerings/',
-    component: withStore(MyOfferingsListContainer),
+    component: MyOfferingsListContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('My offerings'),
@@ -218,7 +208,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-offering-create',
     url: 'marketplace-offering-create/',
-    component: withStore(OfferingCreateContainer),
+    component: OfferingCreateContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('Add offering'),
@@ -229,7 +219,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-offering-update',
     url: 'marketplace-offering-update/:offering_uuid/',
-    component: withStore(OfferingUpdateContainer),
+    component: OfferingUpdateContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('Update offering'),
@@ -240,7 +230,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-offering-screenshots',
     url: 'marketplace-offering-screenshots/:offering_uuid/',
-    component: withStore(OfferingScreenshotsContainer),
+    component: OfferingScreenshotsContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('Screenshots'),
@@ -252,7 +242,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-order-details',
     url: 'marketplace-order-details/:order_uuid/',
-    component: withStore(OrderDetailsContainer),
+    component: OrderDetailsContainer,
     parent: 'project',
     data: {
       pageTitle: gettext('Order details'),
@@ -262,7 +252,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-order-item-details',
     url: 'marketplace-order-item-details/:order_item_uuid/',
-    component: withStore(OrderItemDetailsContainer),
+    component: OrderItemDetailsContainer,
     parent: 'project',
     data: {
       pageTitle: gettext('Order item details'),
@@ -273,7 +263,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-order-item-details-customer',
     url: 'marketplace-order-item-details/:order_item_uuid/',
-    component: withStore(OrderItemDetailsContainer),
+    component: OrderItemDetailsContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('Order item details'),
@@ -284,7 +274,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-order-details-customer',
     url: 'marketplace-order-details/:order_uuid/',
-    component: withStore(OrderDetailsContainer),
+    component: OrderDetailsContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('Order details'),
@@ -294,7 +284,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-order-items',
     url: 'marketplace-order-items/',
-    component: withStore(OrderItemsContainer),
+    component: OrderItemsContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('Public orders'),
@@ -305,7 +295,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-my-order-items',
     url: 'marketplace-my-order-items/?filterState',
-    component: withStore(MyOrderItemsContainer),
+    component: MyOrderItemsContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('My orders'),
@@ -316,7 +306,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-customer-resources',
     url: 'marketplace-customer-resources/',
-    component: withStore(CustomerResourcesContainer),
+    component: CustomerResourcesContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('My resources'),
@@ -327,7 +317,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-public-resources',
     url: 'marketplace-public-resources/',
-    component: withStore(PublicResourcesContainer),
+    component: PublicResourcesContainer,
     parent: 'organization',
     data: {
       pageTitle: gettext('Public resources'),
@@ -338,7 +328,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-public-resource-details',
     url: 'marketplace-public-resource-details/:resource_uuid/',
-    component: withStore(ResourceDetailsPage),
+    component: ResourceDetailsPage,
     parent: 'organization',
     data: {
       pageTitle: gettext('Public resources'),
@@ -349,7 +339,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-support-resources',
     url: 'marketplace-support-resources/',
-    component: withStore(SupportResourcesContainer),
+    component: SupportResourcesContainer,
     parent: 'support',
     data: {
       pageTitle: gettext('Resources'),
@@ -362,7 +352,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-support-order-items',
     url: 'order-items/',
-    component: withStore(SupportOrderItemsContainer),
+    component: SupportOrderItemsContainer,
     parent: 'support',
     data: {
       pageTitle: gettext('Orders'),
@@ -375,7 +365,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-support-plan-usages',
     url: 'plan-usages/',
-    component: withStore(PlanUsageContainer),
+    component: PlanUsageContainer,
     parent: 'support',
     data: {
       pageTitle: gettext('Plan capacity'),
@@ -388,7 +378,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-support-usage-reports',
     url: 'usage-reports/',
-    component: withStore(SupportUsageContainer),
+    component: SupportUsageContainer,
     parent: 'support',
     data: {
       pageTitle: gettext('Usage reports'),
@@ -399,16 +389,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-resources',
-    url: '',
-    abstract: true,
-    component: UIView,
-  },
-
-  {
     name: 'marketplace-project-resources',
     url: 'marketplace-resources/:category_uuid/',
-    component: withStore(ProjectResourcesContainer),
+    component: ProjectResourcesContainer,
     parent: 'project',
     data: {
       pageTitle: gettext('Resources'),
@@ -418,7 +401,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-shopping-cart-item-update',
     url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
-    component: withStore(ShoppingCartItemUpdate),
+    component: ShoppingCartItemUpdate,
     parent: 'project',
     data: {
       pageTitle: gettext('Shopping cart item update'),
@@ -428,15 +411,10 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-shopping-cart-item-update-customer',
     url: 'marketplace-shopping-cart-item-update/:order_item_uuid/',
-    component: withStore(ShoppingCartItemUpdate),
+    component: ShoppingCartItemUpdate,
     parent: 'organization',
     data: {
       pageTitle: gettext('Shopping cart item update'),
     },
   },
 ];
-
-export default function registerRoutes($stateProvider) {
-  states.forEach(({ name, ...rest }) => $stateProvider.state(name, rest));
-}
-registerRoutes.$inject = ['$stateProvider'];

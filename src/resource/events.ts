@@ -9,7 +9,7 @@ const getResourceContext = event => {
   };
   return {
     ...getUserContext(event),
-    resource_link: getLink('resources.details', ctx, event.resource_name),
+    resource_link: getLink('resource-details', ctx, event.resource_name),
   };
 };
 

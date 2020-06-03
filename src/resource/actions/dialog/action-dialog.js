@@ -126,7 +126,7 @@ function ActionDialogController(
 
           if (response.status === 201 && $scope.action.followRedirect) {
             const resource = response.data;
-            return $state.go('resources.details', {
+            return $state.go('resource-details', {
               resource_type: resource.resource_type,
               uuid: resource.uuid,
             });

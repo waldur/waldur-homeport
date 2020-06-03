@@ -61,7 +61,7 @@ export const TemplateDetail = () => {
             visibleQuestions,
           ),
         );
-        router.stateService.go('resources.details', {
+        router.stateService.go('resource-details', {
           uuid: clusterUuid,
           resource_type: 'Rancher.Cluster',
           tab: 'applications',

@@ -15,7 +15,7 @@ function* redirectToDetailView(resource_type, resource_uuid) {
   const state =
     resource_type === 'Support.Offering'
       ? 'offeringDetails'
-      : 'resources.details';
+      : 'resource-details';
   if ($state.current.name !== state) {
     return;
   }

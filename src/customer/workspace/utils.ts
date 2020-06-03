@@ -66,7 +66,7 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
     key: 'billing',
     label: getTabTitle(),
     icon: 'fa-file-text-o',
-    state: 'organization.billing.tabs',
+    state: 'organization.billing',
     params: {
       uuid: customer.uuid,
     },

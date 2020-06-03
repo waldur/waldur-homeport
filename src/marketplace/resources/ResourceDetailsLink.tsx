@@ -25,7 +25,7 @@ export const ResourceDetailsLink = (props: ResourceDetailsLinkProps) => {
   } else {
     return (
       <Link
-        state="resources.details"
+        state="resource-details"
         params={{
           resource_type: props.item.resource_type,
           uuid: props.item.resource_uuid,

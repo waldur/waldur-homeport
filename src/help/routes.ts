@@ -1,13 +1,12 @@
 import { gettext } from '@waldur/i18n';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
-import { withStore } from '@waldur/store/connect';
 
 export const states = [
   {
     name: 'help',
     url: '/help/',
     abstract: true,
-    component: withStore(AnonymousLayout),
+    component: AnonymousLayout,
     data: {
       pageTitle: gettext('Help'),
       bodyClass: 'old',
@@ -24,8 +23,3 @@ export const states = [
     template: '<help-details></help-details>',
   },
 ];
-
-export default function registerRoutes($stateProvider) {
-  states.forEach(({ name, ...rest }) => $stateProvider.state(name, rest));
-}
-registerRoutes.$inject = ['$stateProvider'];

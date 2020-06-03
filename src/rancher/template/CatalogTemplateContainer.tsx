@@ -27,7 +27,7 @@ const refreshBreadcrumbs = (cluster: Cluster, catalog: Catalog) => {
     },
     {
       label: cluster.name,
-      state: 'resources.details',
+      state: 'resource-details',
       params: {
         resource_type: 'Rancher.Cluster',
         uuid: cluster.uuid,

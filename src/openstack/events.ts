@@ -8,7 +8,7 @@ const getOpenStackContext = event => {
     uuid: event.tenant_uuid,
   };
   return {
-    tenant_link: getLink('resources.details', ctx, event.tenant_name),
+    tenant_link: getLink('resource-details', ctx, event.tenant_name),
   };
 };
 
