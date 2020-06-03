@@ -7,5 +7,8 @@ export const states: StateDeclaration[] = [
     name: 'offeringDetails',
     url: '/offering/:uuid/',
     component: OfferingDetailsContainer,
+    data: {
+      sidebarKey: 'marketplace-project-resources',
+    },
   },
 ];
