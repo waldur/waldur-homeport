@@ -86,6 +86,7 @@ export const TableComponent = props => {
 
 const TableOptions = {
   table: 'ProjectResourcesList',
+  mapPropsToTableId: props => [props.project.uuid, props.category_uuid],
   fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter: props =>
     props.project

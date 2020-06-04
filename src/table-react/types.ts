@@ -24,6 +24,7 @@ export type Fetcher = <RowType = any>(
 ) => Promise<TableResponse<RowType>>;
 
 export interface TableOptionsType<RowType = any> {
+  mapPropsToTableId?(props: any): string[];
   table: string;
   fetchData: any;
   queryField?: string;
