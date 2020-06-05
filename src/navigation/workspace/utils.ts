@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getAll } from '@waldur/core/api';
+import { CustomerCreateDialog } from '@waldur/customer/create/CustomerCreateDialog';
 import { openModalDialog, closeModalDialog } from '@waldur/modal/actions';
 import { getConfig } from '@waldur/store/config';
 import { getUser } from '@waldur/workspace/selectors';
@@ -17,7 +18,7 @@ export const useCreateOrganization = () => {
   const createOrganization = () => {
     dispatch(closeModalDialog());
     dispatch(
-      openModalDialog('customerCreateDialog', {
+      openModalDialog(CustomerCreateDialog, {
         size: 'lg',
         resolve: { role: 'CUSTOMER' },
       }),

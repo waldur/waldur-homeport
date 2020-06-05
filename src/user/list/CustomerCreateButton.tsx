@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import { CustomerCreateDialog } from '@waldur/customer/create/CustomerCreateDialog';
 import { canCreateOrganization } from '@waldur/customer/create/selectors';
 import { withTranslation } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -18,7 +19,7 @@ const CustomerCreateButton = ({ isVisible, onClick, translate }) =>
   ) : null;
 
 const customerCreateDialog = () =>
-  openModalDialog('customerCreateDialog', {
+  openModalDialog(CustomerCreateDialog, {
     size: 'lg',
     resolve: { role: 'CUSTOMER' },
   });
