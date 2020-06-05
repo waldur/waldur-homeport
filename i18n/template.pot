@@ -352,7 +352,7 @@ msgstr ""
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
@@ -759,12 +759,12 @@ msgstr ""
 msgid "Backing up"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Bank account"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Bank name"
 msgstr ""
@@ -799,12 +799,11 @@ msgstr ""
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
 #: src/invoices/utils.ts
 msgid "Billing"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/CustomerCreateForm.tsx
 msgid "Billing details"
 msgstr ""
 
@@ -845,6 +844,10 @@ msgstr ""
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Browse"
+msgstr ""
+
+#: src/customer/create/ImageFileField.tsx
+msgid "Browse image"
 msgstr ""
 
 #: src/booking/components/CalendarSettings.tsx
@@ -888,7 +891,6 @@ msgstr ""
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/add-team-member.html
 #: src/form-react/AppstoreListDialog.tsx
-#: src/form/appstore-form-wizard.html
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
@@ -1230,7 +1232,7 @@ msgstr ""
 msgid "Connection details"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Contact e-mail"
 msgstr ""
@@ -1239,7 +1241,7 @@ msgstr ""
 msgid "Contact email"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Contact phone"
@@ -1275,11 +1277,11 @@ msgstr ""
 msgid "Costs"
 msgstr ""
 
-#: src/customer/create/customer-create-dialog.js
+#: src/customer/create/CustomerCreateDialog.tsx
 msgid "Could not create organization"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/CountryGroup.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Country"
 msgstr ""
@@ -1360,7 +1362,8 @@ msgstr ""
 msgid "Create notification"
 msgstr ""
 
-#: src/customer/create/customer-create-dialog.html
+#: src/customer/create/CustomerCreateForm.tsx
+#: src/customer/create/WizardForm.tsx
 msgid "Create organization"
 msgstr ""
 
@@ -1890,7 +1893,7 @@ msgstr ""
 msgid "E-mail address"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 msgid "EU VAT ID"
 msgstr ""
 
@@ -2279,10 +2282,6 @@ msgstr ""
 msgid "Fingerprint"
 msgstr ""
 
-#: src/form/appstore-form-wizard.html
-msgid "Finish"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Fixed price"
 msgstr ""
@@ -2351,10 +2350,6 @@ msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Folder"
-msgstr ""
-
-#: src/form/appstore-form-wizard.html
-msgid "Following fields contain errors"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -2433,12 +2428,11 @@ msgstr ""
 msgid "Gateway IP of this subnet"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
 #: src/project/ProjectDetailsDialog.tsx
 msgid "General"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/CustomerCreateForm.tsx
 msgid "General information"
 msgstr ""
 
@@ -2502,7 +2496,7 @@ msgstr ""
 msgid "Helpdesk dashboard"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/DomainGroup.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Home organization domain name"
 msgstr ""
@@ -3162,7 +3156,7 @@ msgstr ""
 msgid "Login failed"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 msgid "Logo"
 msgstr ""
 
@@ -3456,7 +3450,7 @@ msgstr ""
 #: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
@@ -3555,7 +3549,7 @@ msgstr ""
 msgid "Name must consist of lower case alphanumeric characters."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 msgid "Name of your organization."
 msgstr ""
 
@@ -3575,7 +3569,7 @@ msgstr ""
 msgid "Namespace should be unique."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
@@ -3639,7 +3633,7 @@ msgstr ""
 msgid "New size"
 msgstr ""
 
-#: src/form/appstore-form-wizard.html
+#: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/table-react/TablePagination.tsx
 msgid "Next"
@@ -4079,7 +4073,7 @@ msgstr ""
 msgid "Organization events"
 msgstr ""
 
-#: src/customer/create/customer-create-dialog.js
+#: src/customer/create/CustomerCreateDialog.tsx
 msgid "Organization has been created."
 msgstr ""
 
@@ -4104,7 +4098,7 @@ msgstr ""
 msgid "Organization policies have been updated."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 msgid "Organization registration code"
 msgstr ""
 
@@ -4116,7 +4110,7 @@ msgstr ""
 msgid "Organization roles"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Organization type"
@@ -4495,7 +4489,7 @@ msgstr ""
 msgid "Please provide details of a new volume created from snapshot."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 msgid "Please provide registration code of your company."
 msgstr ""
 
@@ -4503,7 +4497,7 @@ msgstr ""
 msgid "Please provide visual material describing the Offering"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
@@ -4575,7 +4569,7 @@ msgstr ""
 msgid "Positive"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Postal code"
 msgstr ""
@@ -4597,7 +4591,7 @@ msgstr ""
 msgid "Preview offering"
 msgstr ""
 
-#: src/form/appstore-form-wizard.html
+#: src/customer/create/WizardForm.tsx
 #: src/table-react/TablePagination.tsx
 msgid "Previous"
 msgstr ""
@@ -5831,7 +5825,7 @@ msgstr ""
 msgid "Select connected subnet"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/CountryGroup.tsx
 msgid "Select country..."
 msgstr ""
 
@@ -8047,7 +8041,7 @@ msgstr ""
 msgid "Webhook"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 msgid "Website URL"
 msgstr ""
 

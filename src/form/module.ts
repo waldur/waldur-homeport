@@ -16,8 +16,6 @@ import appstoreFieldString from './appstore-field-string';
 import appstoreFieldTel from './appstore-field-tel';
 import appstoreFieldText from './appstore-field-text';
 import appstoreFieldTos from './appstore-field-tos';
-import appstoreFormFieldset from './appstore-form-fieldset';
-import appstoreFormWizard from './appstore-form-wizard';
 import appstoreListDialog from './appstore-list-dialog';
 import choicesTable from './choices-table';
 import fieldLabel from './field-label';
@@ -28,7 +26,6 @@ import multiplyBy from './multiply-by';
 export default module => {
   module.service('formUtils', FormUtils);
   module.directive('appstoreField', appstoreField);
-  module.component('appstoreFormFieldset', appstoreFormFieldset);
   module.component('appstoreFieldString', appstoreFieldString);
   module.component('appstoreFieldEmail', appstoreFieldEmail);
   module.component('appstoreFieldFile', appstoreFieldFile);
@@ -36,7 +33,6 @@ export default module => {
   module.component('appstoreFieldTos', appstoreFieldTos);
   module.directive('appstoreFieldPassword', appstoreFieldPassword);
   module.directive('appstoreFieldText', appstoreFieldText);
-  module.component('appstoreFormWizard', appstoreFormWizard);
   module.component('appstoreFieldInteger', appstoreFieldInteger);
   module.component('appstoreFieldMoney', appstoreFieldMoney);
   module.component('appstoreFieldBoolean', appstoreFieldBoolean);

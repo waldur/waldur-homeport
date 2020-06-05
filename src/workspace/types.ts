@@ -7,6 +7,7 @@ export interface User {
   full_name?: string;
   email?: string;
   job_title?: string;
+  organization?: string;
 }
 
 export interface UserDetails extends User {
