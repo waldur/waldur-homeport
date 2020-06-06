@@ -1,18 +1,24 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { Invoice, InvoiceItem } from '../types';
 
 import { CustomerDetails } from './CustomerDetails';
 import { InvoiceItemDetails } from './InvoiceItemDetails';
-import { groupInvoiceItems } from './utils';
+import { getActiveFixedPricePaymentProfile, groupInvoiceItems } from './utils';
 
 export const InvoiceDetails = ({ invoice }: { invoice: Invoice }) => {
   const projects = React.useMemo(() => groupInvoiceItems(invoice.items), [
     invoice.items,
   ]);
+  const customer = useSelector(getCustomer);
+  const activeFixedPriceProfile = getActiveFixedPricePaymentProfile(
+    customer.payment_profiles,
+  );
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -49,11 +55,15 @@ export const InvoiceDetails = ({ invoice }: { invoice: Invoice }) => {
                 <tr>
                   <th>{translate('Item')}</th>
                   <th>{translate('Quantity')}</th>
-                  <th>{translate('Unit price')}</th>
-                  {invoice.issuer_details.vat_code && (
-                    <th>{translate('Tax')}</th>
+                  {!activeFixedPriceProfile && (
+                    <>
+                      <th>{translate('Unit price')}</th>
+                      {invoice.issuer_details.vat_code && (
+                        <th>{translate('Tax')}</th>
+                      )}
+                      <th>{translate('Total price')}</th>
+                    </>
                   )}
-                  <th>{translate('Total price')}</th>
                 </tr>
               </thead>
               {projects.map((project, projectIndex) => (
@@ -74,11 +84,15 @@ export const InvoiceDetails = ({ invoice }: { invoice: Invoice }) => {
                         />
                       </td>
                       <td>{item.factor || item.quantity}</td>
-                      <td>{defaultCurrency(item.unit_price)}</td>
-                      {invoice.issuer_details.vat_code && (
-                        <td>{defaultCurrency(item.tax)}</td>
+                      {!activeFixedPriceProfile && (
+                        <>
+                          <td>{defaultCurrency(item.unit_price)}</td>
+                          {invoice.issuer_details.vat_code && (
+                            <td>{defaultCurrency(item.tax)}</td>
+                          )}
+                          <td>{defaultCurrency(item.total || item.price)}</td>
+                        </>
                       )}
-                      <td>{defaultCurrency(item.total || item.price)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -86,28 +100,30 @@ export const InvoiceDetails = ({ invoice }: { invoice: Invoice }) => {
             </table>
           </div>
 
-          <table className="table invoice-total">
-            <tbody>
-              <tr>
-                <td>
-                  <strong>{translate('Subtotal')}</strong>{' '}
-                </td>
-                <td>{defaultCurrency(invoice.price)}</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>{translate('TAX')}</strong>{' '}
-                </td>
-                <td>{defaultCurrency(invoice.tax)}</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>{translate('TOTAL')}</strong>{' '}
-                </td>
-                <td>{defaultCurrency(invoice.total)}</td>
-              </tr>
-            </tbody>
-          </table>
+          {!activeFixedPriceProfile && (
+            <table className="table invoice-total">
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>{translate('Subtotal')}</strong>{' '}
+                  </td>
+                  <td>{defaultCurrency(invoice.price)}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>{translate('TAX')}</strong>{' '}
+                  </td>
+                  <td>{defaultCurrency(invoice.tax)}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>{translate('TOTAL')}</strong>{' '}
+                  </td>
+                  <td>{defaultCurrency(invoice.total)}</td>
+                </tr>
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>

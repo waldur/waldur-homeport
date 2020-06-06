@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 export const EstimatedCost = () => {
@@ -10,11 +11,11 @@ export const EstimatedCost = () => {
   if (!customer) {
     return null;
   }
-  return (
+  return !getActiveFixedPricePaymentProfile(customer.payment_profiles) ? (
     <p>
       {translate('Estimated cost for the current month: {cost}', {
         cost: defaultCurrency(customer.billing_price_estimate.total),
       })}
     </p>
-  );
+  ) : null;
 };
