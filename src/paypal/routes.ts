@@ -1,7 +1,6 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
-import { withStore } from '@waldur/store/connect';
 
 import { PaymentApprove } from './PaymentApprove';
 import { PaymentCancel } from './PaymentCancel';
@@ -11,7 +10,7 @@ export const states: StateDeclaration[] = [
     name: 'payment',
     url: '/payment/',
     abstract: true,
-    component: withStore(AnonymousLayout),
+    component: AnonymousLayout,
     data: {
       bodyClass: 'old',
       auth: true,
@@ -21,7 +20,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'payment.approve',
     url: 'approve/',
-    component: withStore(PaymentApprove),
+    component: PaymentApprove,
     data: {
       pageTitle: gettext('Approve payment'),
     },
@@ -30,14 +29,9 @@ export const states: StateDeclaration[] = [
   {
     name: 'payment.cancel',
     url: 'cancel/',
-    component: withStore(PaymentCancel),
+    component: PaymentCancel,
     data: {
       pageTitle: gettext('Cancel payment'),
     },
   },
 ];
-
-export default function registerRoutes($stateProvider) {
-  states.forEach(({ name, ...rest }) => $stateProvider.state(name, rest));
-}
-registerRoutes.$inject = ['$stateProvider'];

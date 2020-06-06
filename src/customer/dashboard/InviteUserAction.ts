@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { InvitationCreateDialog } from '@waldur/invitations/actions/InvitationCreateDialog';
 import { openModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 
@@ -13,7 +14,7 @@ export const getInviteAction = (props: CustomerActionsProps) => {
     title: translate('Invite team member'),
     onClick() {
       store.dispatch(
-        openModalDialog('invitationDialog', {
+        openModalDialog(InvitationCreateDialog, {
           resolve: { context: props },
         }),
       );

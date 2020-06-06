@@ -49,6 +49,7 @@ class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
                   labelKey="name"
                   value={fieldProps.input.value}
                   onChange={fieldProps.input.onChange}
+                  ignoreAccents={false}
                 />
               )}
             />

@@ -13,7 +13,11 @@ export class AllocationForm extends React.Component<
 > {
   componentDidMount() {
     const { project, plan } = this.props;
-    this.props.initialize({ ...this.props.initialAttributes, project, plan });
+    const initialData = { ...this.props.initialAttributes, project, plan };
+    if (!plan && this.props.offering.plans.length === 1) {
+      initialData.plan = this.props.offering.plans[0];
+    }
+    this.props.initialize(initialData);
   }
 
   render() {

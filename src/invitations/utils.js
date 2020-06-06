@@ -1,7 +1,8 @@
-export class invitationUtilsService {
+import { InvitationService } from './InvitationService';
+
+export class InvitationUtilsService {
   // @ngInject
   constructor(
-    invitationService,
     usersService,
     ncUtilsFlash,
     $q,
@@ -12,7 +13,6 @@ export class invitationUtilsService {
     $uibModal,
     ENV,
   ) {
-    this.invitationService = invitationService;
     this.usersService = usersService;
     this.ncUtilsFlash = ncUtilsFlash;
     this.$q = $q;
@@ -41,14 +41,14 @@ export class invitationUtilsService {
         toState.name !== 'marketplace-public-offering.details'
       ) {
         this.usersService.getCurrentUser().then(user => {
-          const token = this.invitationService.getInvitationToken();
+          const token = InvitationService.getInvitationToken();
           if (token && !this.usersService.mandatoryFieldsMissing(user)) {
             this.confirmInvitation(token)
               .then(replaceEmail => {
                 this.acceptInvitation(token, replaceEmail);
               })
               .catch(() => {
-                this.invitationService.clearInvitationToken();
+                InvitationService.clearInvitationToken();
                 this.ncUtilsFlash.error(
                   gettext('Invitation could not be accepted'),
                 );
@@ -73,22 +73,21 @@ export class invitationUtilsService {
           });
         })
         .catch(() => {
-          this.invitationService.clearInvitationToken();
+          InvitationService.clearInvitationToken();
           this.ncUtilsFlash.error(gettext('Invitation is not valid anymore.'));
           this.$state.go('profile.details');
         });
     } else {
-      this.invitationService.setInvitationToken(token);
+      InvitationService.setInvitationToken(token);
       this.$state.go('register');
     }
   }
 
   acceptInvitation(token, replaceEmail) {
-    return this.invitationService
-      .accept(token, replaceEmail)
+    return InvitationService.accept(token, replaceEmail)
       .then(() => {
         this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
-        this.invitationService.clearInvitationToken();
+        InvitationService.clearInvitationToken();
         this.$rootScope.$broadcast('refreshCustomerList', {
           updateSignal: true,
         });
@@ -115,7 +114,7 @@ export class invitationUtilsService {
     if (response.status === 404) {
       this.ncUtilsFlash.error(gettext('Invitation is not found.'));
     } else if (response.status === 400) {
-      this.invitationService.clearInvitationToken();
+      InvitationService.clearInvitationToken();
       this.ncUtilsFlash.error(gettext('Invitation is not valid.'));
     } else if (response.status === 500) {
       this.ncUtilsFlash.error(

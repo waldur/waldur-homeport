@@ -7,6 +7,7 @@ import { renderServiceProvider } from '@waldur/marketplace/service-providers/sel
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 
 import * as constants from './constants';
+import { CustomerCreateDialog } from './CustomerCreateDialog';
 import { CustomerCreatePrompt } from './CustomerCreatePrompt';
 
 const mapStateToProps = state => ({
@@ -23,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
     }
 
     dispatch(
-      openModalDialog('customer-create-dialog', {
+      openModalDialog(CustomerCreateDialog, {
         resolve: {
           role: data[constants.FIELD_NAMES.role],
         },

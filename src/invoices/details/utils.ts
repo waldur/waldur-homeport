@@ -1,3 +1,5 @@
+import { PaymentProfile } from '@waldur/workspace/types';
+
 import { InvoiceItem } from '../types';
 
 export function getItemName(item: InvoiceItem) {
@@ -76,3 +78,8 @@ export function formatPhone(value) {
 
   return `(+${value.country_code})-${nationalNumber}`;
 }
+
+export const getActiveFixedPricePaymentProfile = (profiles: PaymentProfile[]) =>
+  profiles.find(
+    profile => profile.is_active && profile.payment_type === 'fixed_price',
+  );

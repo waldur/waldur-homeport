@@ -29,7 +29,7 @@ const TableComponent = props => {
             }
             return (
               <Link
-                state="resources.details"
+                state="resource-details"
                 params={{
                   uuid: row.instance_uuid,
                   resource_type: 'OpenStackTenant.Instance',

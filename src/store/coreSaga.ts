@@ -1,5 +1,7 @@
+import { AxiosResponse } from 'axios';
 import { takeEvery } from 'redux-saga/effects';
 
+import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $rootScope, ngInjector, $state } from '@waldur/core/services';
 
 export const EMIT_SIGNAL = 'waldur/core/EMIT_SIGNAL';
@@ -23,6 +25,15 @@ const showNotification = (type, message) => ({
 export const showSuccess = message => showNotification('success', message);
 
 export const showError = message => showNotification('danger', message);
+
+export const showErrorResponse = (
+  response: AxiosResponse,
+  message?: string,
+) => {
+  const details = format(response);
+  const errorMessage = `${message}. ${details}`;
+  showError(errorMessage);
+};
 
 export const stateGo = (to, params?: object, options?: object) => ({
   type: STATE_GO,

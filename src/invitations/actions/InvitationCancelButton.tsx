@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 import { ActionButton } from '@waldur/table-react/ActionButton';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
+
+import { InvitationService } from '../InvitationService';
+
+import { InvitationPolicyService } from './InvitationPolicyService';
 
 export const InvitationCancelButton = ({ invitation }) => {
   const dispatch = useDispatch();
@@ -14,7 +17,7 @@ export const InvitationCancelButton = ({ invitation }) => {
 
   const callback = async () => {
     try {
-      await ngInjector.get('invitationService').cancel(invitation.uuid);
+      await InvitationService.cancel(invitation.uuid);
       dispatch(showSuccess(translate('Invitation has been canceled.')));
     } catch (e) {
       dispatch(showError(translate('Unable to cancel invitation.')));
@@ -23,9 +26,10 @@ export const InvitationCancelButton = ({ invitation }) => {
 
   const isDisabled = React.useMemo(() => {
     if (
-      !ngInjector
-        .get('InvitationPolicyService')
-        .canManageInvitation({ user, customer }, invitation)
+      !InvitationPolicyService.canManageInvitation(
+        { user, customer },
+        invitation,
+      )
     ) {
       return true;
     }
@@ -37,9 +41,10 @@ export const InvitationCancelButton = ({ invitation }) => {
 
   const tooltip = React.useMemo(() => {
     if (
-      !ngInjector
-        .get('InvitationPolicyService')
-        .canManageInvitation({ user, customer }, invitation)
+      !InvitationPolicyService.canManageInvitation(
+        { user, customer },
+        invitation,
+      )
     ) {
       return translate("You don't have permission to cancel this invitation.");
     }

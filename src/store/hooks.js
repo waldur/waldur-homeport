@@ -1,6 +1,6 @@
-import store from './store';
-import { localeUpdated } from './locale';
 import { initConfig } from './config';
+import { localeUpdated } from './locale';
+import store from './store';
 
 // @ngInject
 export function attachHooks($rootScope, authService, ENV) {

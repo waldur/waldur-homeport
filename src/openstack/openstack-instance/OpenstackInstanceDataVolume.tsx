@@ -20,6 +20,7 @@ export class OpenstackInstanceDataVolume extends React.Component<
   OpenstackInstanceDataVolumeProps
 > {
   toggleField = () => {
+    this.props.input.onChange(undefined);
     this.props.setActive(!this.props.isActive);
   };
 

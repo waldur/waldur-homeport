@@ -29,7 +29,7 @@ export const ResourceTabs = ({ resource }: { resource: Resource }) => {
   }, [tabs, selectedTabName]);
 
   const onSelect = eventKey => {
-    router.stateService.go('resources.details', { params: { tab: eventKey } });
+    router.stateService.go('resource-details', { params: { tab: eventKey } });
     setActiveKey(eventKey);
   };
 

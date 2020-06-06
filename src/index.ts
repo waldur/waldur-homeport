@@ -14,7 +14,6 @@ import filtersModule from './core/filters';
 import coreModule from './core/module';
 import customerModule from './customer/module';
 import digitaloceanModule from './digitalocean/module';
-import errorModule from './error/module';
 import featuresModule from './features/module';
 import formModule from './form/module';
 import freeipaModule from './freeipa/module';
@@ -25,18 +24,15 @@ import invitationsModule from './invitations/module';
 import invoicesModule from './invoices/module';
 import issuesModule from './issues/module';
 import jiraModule from './jira/module';
-import marketplaceChecklistModule from './marketplace-checklist/module';
-import marketplaceModule from './marketplace/module';
 import rootModule from './module';
 import navigationModule from './navigation/module';
 import offeringsModule from './offering/module';
 import openstackModule from './openstack/module';
-import paypalModule from './paypal/module';
 import priceModule from './price/module';
 import projectModule from './project/module';
 import rancherModule from './rancher/module';
 import resourceModule from './resource/module';
-import routesModule from './routes/module';
+import registerRoutes from './routes';
 import servicesModule from './services/module';
 import slurmModule from './slurm/module';
 import storeModule from './store/module';
@@ -45,7 +41,10 @@ import workspaceModule from './workspace/module';
 
 import './azure/module';
 import './booking/marketplace';
+import './marketplace/sidebar';
 import './marketplace-script/marketplace';
+import './marketplace-checklist/sidebar-extension';
+import './paypal/events';
 import './vmware/module';
 
 const appModule = angular.module('waldur', [
@@ -83,8 +82,7 @@ priceModule(appModule);
 openstackModule(appModule);
 digitaloceanModule();
 customerModule(appModule);
-routesModule(appModule);
-offeringsModule(appModule);
+offeringsModule();
 helpModule(appModule);
 coreModule(appModule);
 filtersModule(appModule);
@@ -94,13 +92,10 @@ servicesModule(appModule);
 freeipaModule(appModule);
 introModule(appModule);
 slurmModule(appModule);
-paypalModule(appModule);
 storeModule(appModule);
 jiraModule(appModule);
 workspaceModule(appModule);
-marketplaceModule(appModule);
-rancherModule(appModule);
-marketplaceChecklistModule(appModule);
+rancherModule();
 
 function requirePlugins(module) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -114,8 +109,6 @@ function requirePlugins(module) {
 
 requirePlugins(appModule);
 
-// Errors module should be the last, because it contains special route.
-// Route with url='*path' allows to display error page without redirect.
-errorModule(appModule);
+registerRoutes(appModule);
 
 bootstrap('waldur');

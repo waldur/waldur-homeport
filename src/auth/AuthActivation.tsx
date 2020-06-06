@@ -22,7 +22,7 @@ export const AuthActivation = () => {
         token,
       });
       dispatch(showSuccess(translate('Account has been activated.')));
-      router.stateService.go('initialdata.view');
+      router.stateService.go('initialdata');
     } catch (e) {
       dispatch(showError(translate('Unable to activate account.')));
     }

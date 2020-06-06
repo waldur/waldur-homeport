@@ -21,7 +21,7 @@ export const InvoiceItemDetails = ({ item, itemId }) => (
     </Tooltip>{' '}
     <small>
       {translate('Start time')}: {item.start ? formatDateTime(item.start) : '-'}
-      .{translate('End time')}: {item.end ? formatDateTime(item.end) : '-'}.
+      . {translate('End time')}: {item.end ? formatDateTime(item.end) : '-'}.
     </small>
     {item.details.service_provider_name && (
       <div>

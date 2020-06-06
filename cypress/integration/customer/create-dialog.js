@@ -4,11 +4,6 @@ describe('Customer creation dialog', () => {
       .mockUser()
       .mockCustomer()
       .route({
-        url: 'http://localhost:8080/api/customers/?**',
-        method: 'GET',
-        response: 'fixture:customers/alice_bob_web.json',
-      })
-      .route({
         url: 'http://localhost:8080/api/customers/',
         method: 'OPTIONS',
         response: 'fixture:customers/countries.json',

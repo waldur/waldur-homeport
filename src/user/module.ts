@@ -1,6 +1,5 @@
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import userRoutes from './routes';
 import { UserEditContainer } from './support/UserEditContainer';
 import userDetails from './user-details';
 import { UserSidebar } from './UserSidebar';
@@ -18,5 +17,4 @@ export default module => {
   module.service('stateUtilsService', stateUtilsService);
   module.constant('usersService', UsersService);
   module.run(attachStateUtils);
-  module.config(userRoutes);
 };

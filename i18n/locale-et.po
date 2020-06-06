@@ -113,31 +113,31 @@ msgstr "Konto eemaldamine"
 #: src/billing/billing-utils.js src/billing/routes.js
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Accounting"
-msgstr "Raamatupidamine"
+msgstr "Arveldus"
 
 #: src/customer/AccountingPeriodFilter.tsx
 msgid "Accounting period"
-msgstr "Raamatupidamise periood"
+msgstr "Arvelduse periood"
 
 #: src/marketplace/offerings/plan/PlansList.tsx
 msgid "Accounting plans"
-msgstr "Raamatupidamise plaanid"
+msgstr "Arvelduse plaanid"
 
 #: src/billing/billing-record-header.html
 msgid "Accounting record"
-msgstr "Raamatupidamise sissekanne"
+msgstr "Arvelduskirje"
 
 #: src/billing/billing-record-header.js src/billing/billing-tabs.html
 msgid "Accounting records"
-msgstr "Raamatupidamise sissekanded"
+msgstr "Arvelduskirjed"
 
 #: src/customer/details/CustomerDetails.tsx
 msgid "Accounting start date"
-msgstr "Arvestuse alguskuupäev"
+msgstr "Arvelduse alguskuupäev"
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Accounting type"
-msgstr "Raamatupidamise tüüp"
+msgstr "Arvelduse tüüp"
 
 #: src/cost-planning/cost-plan-items.html
 #: src/cost-planning/cost-plan-optimizer.html src/events/BaseEventsList.tsx

@@ -6,20 +6,8 @@ import { loadResource } from './resolve';
 
 export const states: StateDeclaration[] = [
   {
-    name: 'resources',
-    url: '/resources/',
-    abstract: true,
-    template: '<ui-view></ui-view>',
-    data: {
-      auth: true,
-      workspace: WOKSPACE_NAMES.project,
-      pageClass: 'gray-bg',
-    },
-  },
-
-  {
-    name: 'resources.details',
-    url: ':resource_type/:uuid/:tab',
+    name: 'resource-details',
+    url: '/resources/:resource_type/:uuid/:tab',
     template: '<resource-header></resource-header>',
     params: {
       tab: {
@@ -31,12 +19,10 @@ export const states: StateDeclaration[] = [
       resource: loadResource,
     },
     data: {
+      auth: true,
+      workspace: WOKSPACE_NAMES.project,
+      pageClass: 'gray-bg',
       sidebarKey: 'marketplace-project-resources',
     },
   },
 ];
-
-export default function registerRoutes($stateProvider) {
-  states.forEach(({ name, ...rest }) => $stateProvider.state(name, rest));
-}
-registerRoutes.$inject = ['$stateProvider'];

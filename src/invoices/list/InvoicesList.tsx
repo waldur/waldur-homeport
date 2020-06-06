@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
+import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableOptionsType } from '@waldur/table-react/types';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -14,49 +15,53 @@ import { SendNotificationButton } from './SendNotificationButton';
 
 const TableComponent = props => {
   const { translate } = props;
+  const columns = [
+    {
+      title: translate('Invoice number'),
+      render: ({ row }) => (
+        <Link state="billingDetails" params={{ uuid: row.uuid }}>
+          {row.number}
+        </Link>
+      ),
+    },
+    {
+      title: translate('State'),
+      render: ({ row }) => row.state,
+    },
+    {
+      title: translate('Invoice date'),
+      render: ({ row }) => row.invoice_date || 'N/A',
+    },
+    {
+      title: translate('Due date'),
+      render: ({ row }) => row.due_date || 'N/A',
+    },
+  ];
+  const activeFixedPriceProfile = getActiveFixedPricePaymentProfile(
+    props.customer.payment_profiles,
+  );
+  if (!activeFixedPriceProfile) {
+    columns.push(
+      {
+        title: translate('Price'),
+        render: ({ row }) => defaultCurrency(row.price),
+      },
+      {
+        title: translate('Tax'),
+        render: ({ row }) => defaultCurrency(row.tax),
+      },
+      {
+        title: translate('Total'),
+        render: ({ row }) => defaultCurrency(row.total),
+      },
+      {
+        title: translate('Actions'),
+        render: SendNotificationButton,
+      },
+    );
+  }
   return (
-    <Table
-      {...props}
-      columns={[
-        {
-          title: translate('Invoice number'),
-          render: ({ row }) => (
-            <Link state="billingDetails" params={{ uuid: row.uuid }}>
-              {row.number}
-            </Link>
-          ),
-        },
-        {
-          title: translate('State'),
-          render: ({ row }) => row.state,
-        },
-        {
-          title: translate('Price'),
-          render: ({ row }) => defaultCurrency(row.price),
-        },
-        {
-          title: translate('Tax'),
-          render: ({ row }) => defaultCurrency(row.tax),
-        },
-        {
-          title: translate('Total'),
-          render: ({ row }) => defaultCurrency(row.total),
-        },
-        {
-          title: translate('Invoice date'),
-          render: ({ row }) => row.invoice_date || 'N/A',
-        },
-        {
-          title: translate('Due date'),
-          render: ({ row }) => row.due_date || 'N/A',
-        },
-        {
-          title: translate('Actions'),
-          render: SendNotificationButton,
-        },
-      ]}
-      verboseName={translate('invoices')}
-    />
+    <Table {...props} columns={columns} verboseName={translate('invoices')} />
   );
 };
 

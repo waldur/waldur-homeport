@@ -45,7 +45,7 @@ msgstr ""
 msgid "Abbreviation"
 msgstr ""
 
-#: src/routes/about.ts
+#: src/about.ts
 #: src/views/about/index.html
 msgid "About"
 msgstr ""
@@ -352,7 +352,7 @@ msgstr ""
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
@@ -759,12 +759,12 @@ msgstr ""
 msgid "Backing up"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Bank account"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Bank name"
 msgstr ""
@@ -799,12 +799,11 @@ msgstr ""
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
 #: src/invoices/utils.ts
 msgid "Billing"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/CustomerCreateForm.tsx
 msgid "Billing details"
 msgstr ""
 
@@ -845,6 +844,10 @@ msgstr ""
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Browse"
+msgstr ""
+
+#: src/customer/create/ImageFileField.tsx
+msgid "Browse image"
 msgstr ""
 
 #: src/booking/components/CalendarSettings.tsx
@@ -888,9 +891,7 @@ msgstr ""
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/add-team-member.html
 #: src/form-react/AppstoreListDialog.tsx
-#: src/form/appstore-form-wizard.html
 #: src/invitations/actions/InvitationCancelButton.tsx
-#: src/invitations/actions/invitation-dialog.html
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
@@ -1049,7 +1050,7 @@ msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
-#: src/invitations/actions/invitation-dialog.js
+#: src/invitations/actions/CivilNumberGroup.tsx
 #: src/project/team/user-selector.html
 msgid "Civil number"
 msgstr ""
@@ -1231,7 +1232,7 @@ msgstr ""
 msgid "Connection details"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Contact e-mail"
 msgstr ""
@@ -1240,7 +1241,7 @@ msgstr ""
 msgid "Contact email"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Contact phone"
@@ -1276,11 +1277,11 @@ msgstr ""
 msgid "Costs"
 msgstr ""
 
-#: src/customer/create/customer-create-dialog.js
+#: src/customer/create/CustomerCreateDialog.tsx
 msgid "Could not create organization"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/CountryGroup.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Country"
 msgstr ""
@@ -1361,7 +1362,8 @@ msgstr ""
 msgid "Create notification"
 msgstr ""
 
-#: src/customer/create/customer-create-dialog.html
+#: src/customer/create/CustomerCreateForm.tsx
+#: src/customer/create/WizardForm.tsx
 msgid "Create organization"
 msgstr ""
 
@@ -1880,7 +1882,7 @@ msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/customer/team/CustomerUsersList.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/EmailGroup.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/user-selector.html
 #: src/user/support/UserDetailsTable.tsx
@@ -1891,7 +1893,7 @@ msgstr ""
 msgid "E-mail address"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 msgid "EU VAT ID"
 msgstr ""
 
@@ -2280,10 +2282,6 @@ msgstr ""
 msgid "Fingerprint"
 msgstr ""
 
-#: src/form/appstore-form-wizard.html
-msgid "Finish"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "Fixed price"
 msgstr ""
@@ -2354,10 +2352,6 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: src/form/appstore-form-wizard.html
-msgid "Following fields contain errors"
-msgstr ""
-
 #: src/invoices/details/BillingRecordDetails.tsx
 msgid "For"
 msgstr ""
@@ -2397,7 +2391,7 @@ msgid "Full description"
 msgstr ""
 
 #: src/auth/SignupForm.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/UserDetailsGroup.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -2434,12 +2428,11 @@ msgstr ""
 msgid "Gateway IP of this subnet"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
 #: src/project/ProjectDetailsDialog.tsx
 msgid "General"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/CustomerCreateForm.tsx
 msgid "General information"
 msgstr ""
 
@@ -2503,7 +2496,7 @@ msgstr ""
 msgid "Helpdesk dashboard"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/DomainGroup.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Home organization domain name"
 msgstr ""
@@ -2808,10 +2801,6 @@ msgstr ""
 msgid "Invitation has been canceled."
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog-service.js
-msgid "Invitation has been created."
-msgstr ""
-
 #: src/invitations/InvitationReject.tsx
 msgid "Invitation has been rejected."
 msgstr ""
@@ -2853,7 +2842,7 @@ msgid "Invite team member"
 msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/InvitationCreateDialog.tsx
 msgid "Invite user"
 msgstr ""
 
@@ -2992,7 +2981,7 @@ msgstr ""
 msgid "Job position"
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/UserDetailsGroup.tsx
 msgid "Job title"
 msgstr ""
 
@@ -3167,7 +3156,7 @@ msgstr ""
 msgid "Login failed"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 msgid "Logo"
 msgstr ""
 
@@ -3461,7 +3450,7 @@ msgstr ""
 #: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
@@ -3560,7 +3549,7 @@ msgstr ""
 msgid "Name must consist of lower case alphanumeric characters."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 msgid "Name of your organization."
 msgstr ""
 
@@ -3580,9 +3569,9 @@ msgstr ""
 msgid "Namespace should be unique."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/UserDetailsGroup.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
@@ -3644,7 +3633,7 @@ msgstr ""
 msgid "New size"
 msgstr ""
 
-#: src/form/appstore-form-wizard.html
+#: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/table-react/TablePagination.tsx
 msgid "Next"
@@ -4047,7 +4036,7 @@ msgstr ""
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/UserDetailsGroup.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
@@ -4084,7 +4073,7 @@ msgstr ""
 msgid "Organization events"
 msgstr ""
 
-#: src/customer/create/customer-create-dialog.js
+#: src/customer/create/CustomerCreateDialog.tsx
 msgid "Organization has been created."
 msgstr ""
 
@@ -4109,7 +4098,7 @@ msgstr ""
 msgid "Organization policies have been updated."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 msgid "Organization registration code"
 msgstr ""
 
@@ -4121,7 +4110,7 @@ msgstr ""
 msgid "Organization roles"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Organization type"
@@ -4500,7 +4489,7 @@ msgstr ""
 msgid "Please provide details of a new volume created from snapshot."
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 msgid "Please provide registration code of your company."
 msgstr ""
 
@@ -4508,7 +4497,7 @@ msgstr ""
 msgid "Please provide visual material describing the Offering"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
@@ -4580,7 +4569,7 @@ msgstr ""
 msgid "Positive"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Postal code"
 msgstr ""
@@ -4602,7 +4591,7 @@ msgstr ""
 msgid "Preview offering"
 msgstr ""
 
-#: src/form/appstore-form-wizard.html
+#: src/customer/create/WizardForm.tsx
 #: src/table-react/TablePagination.tsx
 msgid "Previous"
 msgstr ""
@@ -4691,8 +4680,8 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
+#: src/about.ts
 #: src/navigation/AppFooter.tsx
-#: src/routes/about.ts
 msgid "Privacy policy"
 msgstr ""
 
@@ -4711,7 +4700,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/ProjectGroup.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
@@ -5480,7 +5469,7 @@ msgstr ""
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -5560,7 +5549,7 @@ msgstr ""
 
 #: src/customer/team/add-team-member.html
 #: src/invitations/InvitationsList.tsx
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/add-project-member.html
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/list/ProjectPermissions.tsx
@@ -5836,7 +5825,7 @@ msgstr ""
 msgid "Select connected subnet"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/CountryGroup.tsx
 msgid "Select country..."
 msgstr ""
 
@@ -5873,6 +5862,10 @@ msgstr ""
 
 #: src/issues/create/PriorityGroup.tsx
 msgid "Select priority..."
+msgstr ""
+
+#: src/invitations/actions/ProjectGroup.tsx
+msgid "Select project"
 msgstr ""
 
 #: src/issues/create/IssueQuickCreate.tsx
@@ -6129,7 +6122,7 @@ msgstr ""
 msgid "Show usage"
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog.html
+#: src/invitations/actions/LoadUserDetailsButton.tsx
 msgid "Show user details"
 msgstr ""
 
@@ -6512,7 +6505,7 @@ msgstr ""
 msgid "Tax"
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog.js
+#: src/invitations/actions/TaxNumberGroup.tsx
 msgid "Tax number"
 msgstr ""
 
@@ -6632,8 +6625,8 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
+#: src/about.ts
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/routes/about.ts
 msgid "Terms of service"
 msgstr ""
 
@@ -6856,7 +6849,7 @@ msgstr ""
 msgid "To get access, please send a request to {supportEmail}."
 msgstr ""
 
-#: src/auth/auth-init.html
+#: src/auth/AuthInit.tsx
 msgid "To get your clouds under control, please fill in your data."
 msgstr ""
 
@@ -7032,10 +7025,6 @@ msgstr ""
 msgid "Unable to create catalog."
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog-service.js
-msgid "Unable to create invitation."
-msgstr ""
-
 #: src/user/keys/KeyCreateForm.tsx
 msgid "Unable to create key."
 msgstr ""
@@ -7116,10 +7105,6 @@ msgstr ""
 
 #: src/booking/store/effects.ts
 msgid "Unable to fetch offering bookings."
-msgstr ""
-
-#: src/invitations/actions/invitation-dialog.js
-msgid "Unable to fetch user details."
 msgstr ""
 
 #: src/issues/comments/utils.ts
@@ -7323,6 +7308,7 @@ msgstr ""
 msgid "Unable to load tenant."
 msgstr ""
 
+#: src/auth/AuthInit.tsx
 #: src/user/UserPopover.tsx
 msgid "Unable to load user."
 msgstr ""
@@ -7401,7 +7387,7 @@ msgstr ""
 msgid "Unable to resize droplet."
 msgstr ""
 
-#: src/auth/auth-init.js
+#: src/auth/AuthInit.tsx
 msgid "Unable to save user."
 msgstr ""
 
@@ -7701,10 +7687,6 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-#: src/invitations/actions/invitation-dialog.js
-msgid "User details have been fetched successfully."
-msgstr ""
-
 #: src/user/support/effects.ts
 msgid "User has been activated."
 msgstr ""
@@ -7719,6 +7701,10 @@ msgstr ""
 
 #: src/user/support/effects.ts
 msgid "User has been updated"
+msgstr ""
+
+#: src/auth/AuthInit.tsx
+msgid "User has been updated."
 msgstr ""
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
@@ -8055,7 +8041,7 @@ msgstr ""
 msgid "Webhook"
 msgstr ""
 
-#: src/customer/create/customer-create-config.js
+#: src/customer/create/WizardFormFirstPage.tsx
 msgid "Website URL"
 msgstr ""
 
@@ -8064,7 +8050,7 @@ msgid "Week"
 msgstr ""
 
 #: src/auth/AuthHeader.tsx
-#: src/auth/auth-init.js
+#: src/auth/AuthInit.tsx
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 

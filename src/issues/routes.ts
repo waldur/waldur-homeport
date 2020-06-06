@@ -4,7 +4,6 @@ import { gettext } from '@waldur/i18n';
 import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
 import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';
 import { SankeyDiagramContainer } from '@waldur/providers/support/SankeyDiagramContainer';
-import { withStore } from '@waldur/store/connect';
 import { UserListView } from '@waldur/user/support/UserListView';
 
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
@@ -19,7 +18,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support',
     url: '/support/',
-    component: withStore(SupportWorkspace),
+    component: SupportWorkspace,
     abstract: true,
     data: {
       auth: true,
@@ -31,7 +30,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.dashboard',
     url: '',
-    component: withStore(IssuesDashboard),
+    component: IssuesDashboard,
     data: {
       pageTitle: gettext('Support dashboard'),
       hideBreadcrumbs: true,
@@ -42,7 +41,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.helpdesk',
     url: 'helpdesk/',
-    component: withStore(IssuesHelpdesk),
+    component: IssuesHelpdesk,
     data: {
       pageTitle: gettext('Helpdesk dashboard'),
       feature: 'support',
@@ -52,7 +51,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.detail',
     url: 'issue/:uuid/',
-    component: withStore(IssueDetailsContainer),
+    component: IssueDetailsContainer,
     data: {
       pageTitle: gettext('Request detail'),
       feature: 'support',
@@ -73,7 +72,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.organizations',
     url: 'organizations/',
-    component: withStore(LazyCustomerList),
+    component: LazyCustomerList,
     data: {
       feature: 'support.organizations',
       pageTitle: gettext('Financial overview'),
@@ -86,7 +85,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.users',
     url: 'users/',
-    component: withStore(UserListView),
+    component: UserListView,
     data: {
       pageTitle: gettext('Users'),
       feature: 'support.users',
@@ -99,7 +98,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.flowmap',
     url: 'flowmap/',
-    component: withStore(FlowMapViewContainer),
+    component: FlowMapViewContainer,
     data: {
       pageTitle: gettext('Flowmap'),
       feature: 'support.flowmap',
@@ -112,7 +111,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.heatmap',
     url: 'heatmap/',
-    component: withStore(HeatMapContainer),
+    component: HeatMapContainer,
     data: {
       pageTitle: gettext('Heatmap'),
       feature: 'support.heatmap',
@@ -125,7 +124,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.sankey-diagram',
     url: 'sankey-diagram/',
-    component: withStore(SankeyDiagramContainer),
+    component: SankeyDiagramContainer,
     data: {
       pageTitle: gettext('Sankey diagram'),
       feature: 'support.sankey-diagram',
@@ -135,8 +134,3 @@ export const states: StateDeclaration[] = [
     },
   },
 ];
-
-export default function registerRoutes($stateProvider) {
-  states.forEach(({ name, ...rest }) => $stateProvider.state(name, rest));
-}
-registerRoutes.$inject = ['$stateProvider'];

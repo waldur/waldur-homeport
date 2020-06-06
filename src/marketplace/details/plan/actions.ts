@@ -6,7 +6,7 @@ import { PlanDetailsDialog } from './PlanDetailsDialog';
 export const showOfferingPlanDescription = planDescription =>
   openModalDialog(PlanDescription, {
     resolve: { plan_description: planDescription },
-    size: 'md',
+    size: 'lg',
   });
 
 export const showPlanDetailsDialog = resourceId =>

@@ -2,11 +2,9 @@ import * as React from 'react';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
-import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
 import { Section, Offering } from '@waldur/marketplace/types';
 
 import { AttributesTable } from './attributes/AttributesTable';
-import { OfferingResourcesFilter } from './OfferingResourcesFilter';
 import { OfferingTab } from './OfferingTabsComponent';
 import { OverviewTab } from './OverviewTab';
 import { ScreenshotsTab } from './ScreenshotsTab';
@@ -50,16 +48,6 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
       title: translate('Screenshots'),
       component: () => (
         <ScreenshotsTab screenshots={props.offering.screenshots} />
-      ),
-    },
-    {
-      visible: true,
-      title: translate('Resources'),
-      component: () => (
-        <>
-          <OfferingResourcesFilter />
-          <OfferingResourcesList offering={props.offering} />
-        </>
       ),
     },
   ];

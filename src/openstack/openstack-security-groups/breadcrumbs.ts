@@ -8,7 +8,7 @@ ResourceBreadcrumbsRegistry.register('OpenStack.SecurityGroup', resource => {
     getTenantListState(resource.project_uuid),
     {
       label: resource.tenant_name,
-      state: 'resources.details',
+      state: 'resource-details',
       params: {
         uuid: resource.tenant_uuid,
         resource_type: 'OpenStack.Tenant',
@@ -16,7 +16,7 @@ ResourceBreadcrumbsRegistry.register('OpenStack.SecurityGroup', resource => {
     },
     {
       label: gettext('Security groups'),
-      state: 'resources.details',
+      state: 'resource-details',
       params: {
         uuid: resource.tenant_uuid,
         resource_type: 'OpenStack.Tenant',

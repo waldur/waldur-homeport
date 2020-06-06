@@ -12,7 +12,7 @@ ResourceBreadcrumbsRegistry.register(
       getInstanceListState(resource.project_uuid),
       {
         label: resource.instance_name,
-        state: 'resources.details',
+        state: 'resource-details',
         params: {
           uuid: instance_uuid,
           resource_type: 'OpenStackTenant.Instance',
@@ -20,7 +20,7 @@ ResourceBreadcrumbsRegistry.register(
       },
       {
         label: gettext('VM snapshot schedules'),
-        state: 'resources.details',
+        state: 'resource-details',
         params: {
           uuid: instance_uuid,
           resource_type: 'OpenStackTenant.Instance',

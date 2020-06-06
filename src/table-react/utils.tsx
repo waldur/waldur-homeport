@@ -24,8 +24,12 @@ const getId = (row, index) => {
 export function connectTable(options: TableOptionsType) {
   return function wrapper<P = {}>(Component: React.ComponentType<P>) {
     const Wrapper: React.ComponentType<P> = props => {
-      const { table } = options;
-      registerTable(options);
+      const { table: rawTableId } = options;
+      const extraId = options.mapPropsToTableId
+        ? options.mapPropsToTableId(props)
+        : [];
+      const table = `${rawTableId}${extraId ? '-' + extraId.join('-') : ''}`;
+      registerTable({ ...options, table });
 
       const mapDispatchToProps = dispatch => ({
         fetch: () => {
