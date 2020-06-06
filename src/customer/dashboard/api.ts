@@ -11,6 +11,7 @@ import {
 import { getScopeChartOptions } from '@waldur/dashboard/chart';
 import { Scope, Chart } from '@waldur/dashboard/types';
 import { translate } from '@waldur/i18n';
+import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 
 interface InvoiceSummary {
   year: number;
@@ -69,6 +70,12 @@ const getInvoiceSummary = (customer: string) =>
   });
 
 async function getCustomerCharts(customer: Scope): Promise<Chart[]> {
+  const charts: Chart[] = [];
+  if (!getActiveFixedPricePaymentProfile(customer.payment_profiles)) {
+    const invoices = await getInvoiceSummary(customer.url);
+    const costChart = formatCostChart(invoices, 12);
+    charts.push(costChart);
+  }
   const quotas = [
     {
       quota: 'nc_user_count',
@@ -76,9 +83,10 @@ async function getCustomerCharts(customer: Scope): Promise<Chart[]> {
     },
   ];
   const quotaCharts = await getDailyQuotaCharts(quotas, customer);
-  const invoices = await getInvoiceSummary(customer.url);
-  const costChart = formatCostChart(invoices, 12);
-  return [costChart, ...quotaCharts];
+  if (quotaCharts.length) {
+    charts.push(...quotaCharts);
+  }
+  return charts;
 }
 
 export const loadSummary = async customer => {

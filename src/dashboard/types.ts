@@ -1,3 +1,5 @@
+import { PaymentProfile } from '@waldur/workspace/types';
+
 export type ChartData = Array<{
   label: string;
   value: number | string;
@@ -12,6 +14,7 @@ export interface Chart {
 
 export interface Scope {
   url: string;
+  payment_profiles?: PaymentProfile[];
 }
 
 export interface Quota {
