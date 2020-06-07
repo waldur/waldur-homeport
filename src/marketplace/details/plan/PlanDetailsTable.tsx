@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ComponentEditRow } from './ComponentEditRow';
 import { ComponentRow } from './ComponentRow';
@@ -57,6 +59,11 @@ export const PureDetailsTable: React.FC<PlanDetailsTableProps> = (
     return null;
   }
 
+  const customer = useSelector(getCustomer);
+  const activeFixedPriceProfile = getActiveFixedPricePaymentProfile(
+    customer.payment_profiles,
+  );
+
   const fixedRows = props.components.filter(
     component => component.billing_type === 'fixed',
   );
@@ -90,7 +97,9 @@ export const PureDetailsTable: React.FC<PlanDetailsTableProps> = (
         {hasExtraRows && (
           <table className="table table-bordered">
             <thead>
-              <HeaderRow periods={props.periods} />
+              <HeaderRow
+                periods={!activeFixedPriceProfile ? props.periods : []}
+              />
             </thead>
             <tbody>
               {fixedWithoutLimits.length > 0 && (
@@ -114,12 +123,14 @@ export const PureDetailsTable: React.FC<PlanDetailsTableProps> = (
                   viewMode={props.viewMode}
                 />
               )}
-              <tr>
-                <td colSpan={3}>{translate('Total')}</td>
-                {props.totalPeriods.map((price, index) => (
-                  <td key={index}>{defaultCurrency(price)}</td>
-                ))}
-              </tr>
+              {!activeFixedPriceProfile ? (
+                <tr>
+                  <td colSpan={3}>{translate('Total')}</td>
+                  {props.totalPeriods.map((price, index) => (
+                    <td key={index}>{defaultCurrency(price)}</td>
+                  ))}
+                </tr>
+              ) : null}
             </tbody>
           </table>
         )}
