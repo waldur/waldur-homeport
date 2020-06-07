@@ -4,6 +4,7 @@ import { ngInjector } from '@waldur/core/services';
 
 interface Language {
   code: string;
+  display_code: string;
   label: string;
 }
 
@@ -22,7 +23,7 @@ export const useLanguageSelector = () => {
   const setLanguage = React.useCallback((language: Language) => {
     setCurrentLanguage(language);
     service.setCurrentLanguage(language);
-    location.reload();
+    // location.reload(); // fixme
   }, []);
 
   return { currentLanguage, languageChoices, setLanguage };

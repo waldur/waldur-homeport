@@ -85,26 +85,32 @@ const ENV = {
   languageChoices: [
     {
       code: 'az',
+      display_code: 'az',
       label: gettext('Azerbaijani'),
     },
     {
       code: 'en',
+      display_code: 'en',
       label: gettext('English'),
     },
     {
       code: 'et',
+      display_code: 'et',
       label: gettext('Estonian'),
     },
     {
       code: 'lv',
+      display_code: 'lv',
       label: gettext('Latvian'),
     },
     {
       code: 'lt',
+      display_code: 'lt',
       label: gettext('Lithuanian'),
     },
     {
       code: 'ru',
+      display_code: 'ru',
       label: gettext('Russian'),
     },
   ],
