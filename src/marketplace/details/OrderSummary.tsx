@@ -4,6 +4,7 @@ import { isValid, getFormValues } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { ShoppingCartUpdateButtonContainer } from '@waldur/marketplace/cart/ShoppingCartUpdateButtonContainer';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
@@ -65,14 +66,16 @@ export const SummaryTable = (props: OrderSummaryProps) => (
       {props.extraComponent
         ? React.createElement(props.extraComponent, props)
         : null}
-      {props.formData && props.formData.plan && (
-        <tr>
-          <td className="text-lg">
-            <BillingPeriod unit={props.formData.plan.unit} />
-          </td>
-          <td className="text-lg">{defaultCurrency(props.total)}</td>
-        </tr>
-      )}
+      {!getActiveFixedPricePaymentProfile(props.customer.payment_profiles) &&
+        props.formData &&
+        props.formData.plan && (
+          <tr>
+            <td className="text-lg">
+              <BillingPeriod unit={props.formData.plan.unit} />
+            </td>
+            <td className="text-lg">{defaultCurrency(props.total)}</td>
+          </tr>
+        )}
     </tbody>
   </table>
 );
