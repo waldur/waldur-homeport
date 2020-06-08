@@ -89,6 +89,7 @@ const ENV = {
     },
     {
       code: 'en',
+      display_code: 'en',
       label: gettext('English'),
     },
     {
