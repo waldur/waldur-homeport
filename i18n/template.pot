@@ -4973,6 +4973,10 @@ msgstr ""
 msgid "RAM"
 msgstr ""
 
+#: src/openstack/openstack-instance/marketplace.ts
+msgid "RAM limit is exceeded"
+msgstr ""
+
 #: src/slurm/details/constants.ts
 msgid "RAM usage"
 msgstr ""
@@ -6909,6 +6913,10 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
+#: src/openstack/openstack-instance/marketplace.ts
+msgid "Total storage limit is exceeded"
+msgstr ""
+
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Total: {total}"
 msgstr ""
@@ -8029,6 +8037,10 @@ msgstr ""
 msgid "Volume type"
 msgstr ""
 
+#: src/openstack/openstack-instance/marketplace.ts
+msgid "Volume type storage limit is exceeded"
+msgstr ""
+
 #: src/openstack/openstack-instance/tabs.ts
 msgid "Volumes"
 msgstr ""
@@ -8498,6 +8510,10 @@ msgstr ""
 
 #: src/quotas/constants.ts
 msgid "vCPU count"
+msgstr ""
+
+#: src/openstack/openstack-instance/marketplace.ts
+msgid "vCPU limit is exceeded"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerSummary.tsx

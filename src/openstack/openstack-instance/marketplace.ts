@@ -1,8 +1,11 @@
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { OpenstackInstanceCheckoutSummary } from '@waldur/openstack/openstack-instance/OpenstackInstanceCheckoutSummary';
+import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 
 import { OpenstackInstanceCreateForm } from './OpenstackInstanceCreateForm';
+import { getVolumeTypeRequirements } from './utils';
 
 const serializeFloatingIPs = networks => {
   if (!networks) {
@@ -74,6 +77,58 @@ const serializer = ({
   availability_zone,
 });
 
+const formValidator = props => {
+  const {
+    offering,
+    values: { attributes },
+  } = props;
+  if (!attributes) {
+    return;
+  }
+  if (!offering.quotas) {
+    return;
+  }
+  // TODO: Use memoization to avoid unnecessary quotas parsing
+  const limits: Record<string, number> = parseQuotas(offering.quotas);
+  const usages: Record<string, number> = parseQuotasUsage(offering.quotas);
+  const errors: Record<string, string> = {};
+  if (attributes.flavor) {
+    if (
+      limits.cores !== -1 &&
+      attributes.flavor.cores + usages.cores > limits.cores
+    ) {
+      errors.flavor = translate('vCPU limit is exceeded');
+    }
+    if (limits.ram !== -1 && attributes.flavor.ram + usages.ram > limits.ram) {
+      errors.flavor = translate('RAM limit is exceeded');
+    }
+  }
+  if (
+    limits.disk !== -1 &&
+    usages.disk +
+      attributes.system_volume_size +
+      (attributes.data_volume_size || 0) >
+      limits.disk
+  ) {
+    errors.system_volume_size = errors.data_volume_size = translate(
+      'Total storage limit is exceeded',
+    );
+  }
+  if (isFeatureVisible('openstack.volume-types')) {
+    const required = getVolumeTypeRequirements(attributes);
+    for (const name in required) {
+      if (limits[name] !== -1 && required[name] + usages[name] > limits[name]) {
+        errors.system_volume_size = errors.data_volume_size = translate(
+          'Volume type storage limit is exceeded',
+        );
+      }
+    }
+  }
+  if (errors) {
+    return { attributes: errors };
+  }
+};
+
 registerOfferingType({
   type: 'OpenStackTenant.Instance',
   get label() {
@@ -82,5 +137,6 @@ registerOfferingType({
   component: OpenstackInstanceCreateForm,
   checkoutSummaryComponent: OpenstackInstanceCheckoutSummary,
   serializer,
+  formValidator,
   disableOfferingCreation: true,
 });
