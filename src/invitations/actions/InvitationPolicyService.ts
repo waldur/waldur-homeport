@@ -16,10 +16,10 @@ export const InvitationPolicyService = {
     if (!CustomersService.isOwner(context.customer, context.user)) {
       return false;
     }
-    if (role.field === 'project_role') {
+    if (role.value === 'manager' || role.value === 'admin') {
       return true;
     }
-    if (role.field === 'customer_role') {
+    if (role.value === 'owner') {
       return ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS;
     }
   },
