@@ -28,6 +28,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   ) => RequestPaylodType;
   limitSerializer?: LimitParser;
   limitParser?: LimitParser;
+  formValidator?(values: any): any;
   label: string;
   showOptions?: boolean;
   showComponents?: boolean;
@@ -87,6 +88,13 @@ export function getFormLimitParser(offeringType: string) {
     (REGISTRY.hasOwnProperty(offeringType) &&
       REGISTRY[offeringType].limitParser) ||
     (x => x)
+  );
+}
+
+export function getFormValidator(offeringType: string) {
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].formValidator
   );
 }
 

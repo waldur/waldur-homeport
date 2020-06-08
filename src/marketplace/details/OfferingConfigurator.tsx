@@ -4,7 +4,10 @@ import { compose } from 'redux';
 import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { getFormComponent } from '@waldur/marketplace/common/registry';
+import {
+  getFormComponent,
+  getFormValidator,
+} from '@waldur/marketplace/common/registry';
 import { Offering, Plan } from '@waldur/marketplace/types';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project, OuterState } from '@waldur/workspace/types';
@@ -43,6 +46,10 @@ export const validate = (_, props) => {
   }
   if (props.values.plan && !props.values.plan.is_active) {
     errors.plan = translate('Plan capacity is full.');
+  }
+  const formValidator = getFormValidator(props.offering.type);
+  if (formValidator) {
+    Object.assign(errors, formValidator(props));
   }
   return errors;
 };

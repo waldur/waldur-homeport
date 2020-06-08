@@ -23,6 +23,7 @@ import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { Flavor } from './types';
+import { getVolumeTypeRequirements } from './utils';
 
 interface FormData {
   name?: string;
@@ -80,16 +81,7 @@ const getMonthlyPrice = (formData, components) =>
 function extendVolumeTypeQuotas(formData, usages, limits) {
   const quotas = [];
   if (isFeatureVisible('openstack.volume-types')) {
-    const required = {};
-    if (formData.data_volume_type) {
-      const key = `gigabytes_${formData.data_volume_type.name}`;
-      required[key] = (required[key] || 0) + formData.data_volume_size / 1024.0;
-    }
-    if (formData.system_volume_type) {
-      const key = `gigabytes_${formData.system_volume_type.name}`;
-      required[key] =
-        (required[key] || 0) + formData.system_volume_size / 1024.0;
-    }
+    const required = getVolumeTypeRequirements(formData);
     Object.keys(limits)
       .filter(key => key.startsWith('gigabytes_'))
       .forEach(key => {

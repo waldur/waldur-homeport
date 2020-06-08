@@ -93,3 +93,16 @@ export const validateOpenstackInstanceName = (name: string) => {
     return translate('TLD "{tld}" must not be all numeric', { tld });
   }
 };
+
+export const getVolumeTypeRequirements = formData => {
+  const required = {};
+  if (formData.data_volume_type) {
+    const key = `gigabytes_${formData.data_volume_type.name}`;
+    required[key] = (required[key] || 0) + formData.data_volume_size / 1024.0;
+  }
+  if (formData.system_volume_type) {
+    const key = `gigabytes_${formData.system_volume_type.name}`;
+    required[key] = (required[key] || 0) + formData.system_volume_size / 1024.0;
+  }
+  return required;
+};
