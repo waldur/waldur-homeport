@@ -3,12 +3,13 @@ import { useSelector } from 'react-redux';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 export const AgreementInfo = () => {
   const customer = useSelector(getCustomer);
-  const activeFixedPricePaymentProfile = customer.payment_profiles.find(
-    profile => profile.is_active && profile.payment_type === 'fixed_price',
+  const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
+    customer.payment_profiles,
   );
   return (
     <React.Fragment>

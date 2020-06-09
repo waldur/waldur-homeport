@@ -8,6 +8,7 @@ import { formatRelative, formatDateTime } from '@waldur/core/dateUtils';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
@@ -23,6 +24,8 @@ const loadIssue = id => getById<any>('/support-issues/', id);
 
 export const IssueDetails = () => {
   const currentUser = useSelector(getUser);
+
+  useTitle(translate('Request detail'));
 
   const {
     params: { uuid },

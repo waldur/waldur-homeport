@@ -59,7 +59,7 @@ export default function actionUtilsService(
       }
       const reason = this.parseValidators(validators, context);
       const url =
-        rest.method === 'DELETE'
+        rest.method === 'DELETE' && name !== 'force_destroy'
           ? context.resource.url
           : context.resource.url + name + '/';
       result[name] = {

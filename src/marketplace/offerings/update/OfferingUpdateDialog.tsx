@@ -1,11 +1,12 @@
+import { useRouter, useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 
 import { TABS } from '../create/OfferingCreateDialog';
 import { Wizard } from '../create/Wizard';
@@ -27,64 +28,58 @@ interface OfferingUpdateDialogProps
   loadOffering(offeringUuid: string): void;
 }
 
-export class OfferingUpdateDialog extends React.Component<
-  OfferingUpdateDialogProps
-> {
-  constructor(props) {
-    super(props);
+export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = props => {
+  useTitle(
+    translate('Update offering ({name})', {
+      name: props.initialValues.name,
+    }),
+  );
+
+  const {
+    params: { offering_uuid },
+  } = useCurrentStateAndParams();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (props.disabled) {
+      router.stateService.go('errorPage.notFound');
+      return;
+    }
+    props.loadOffering(offering_uuid);
+    props.setStep(STEPS[0]);
     setStateBreadcrumbs();
-  }
+  }, [offering_uuid, router]);
 
-  componentDidMount() {
-    if (this.props.disabled) {
-      return $state.go('errorPage.notFound');
-    }
-    this.props.loadOffering($state.params.offering_uuid);
-    this.props.setStep(STEPS[0]);
-  }
+  const {
+    loading,
+    loaded,
+    erred,
+    handleSubmit,
+    updateOffering,
+    ...rest
+  } = props;
 
-  componentDidUpdate(prevProps) {
-    if (this.props.initialValues.name !== prevProps.initialValues.name) {
-      ngInjector.get('titleService').setTitle(
-        translate('Update offering ({name})', {
-          name: this.props.initialValues.name,
-        }),
-      );
-    }
+  if (loading) {
+    return <LoadingSpinner />;
+  } else if (erred) {
+    return <p>{translate('Unable to load data.')}</p>;
+  } else if (loaded) {
+    return (
+      <Row>
+        <Col lg={10} lgOffset={1}>
+          <form
+            onSubmit={handleSubmit(updateOffering)}
+            className="form-horizontal"
+          >
+            <Wizard
+              steps={STEPS}
+              tabs={TABS}
+              {...rest}
+              submitLabel={translate('Update')}
+            />
+          </form>
+        </Col>
+      </Row>
+    );
   }
-
-  render() {
-    const {
-      loading,
-      loaded,
-      erred,
-      handleSubmit,
-      updateOffering,
-      ...rest
-    } = this.props;
-
-    if (loading) {
-      return <LoadingSpinner />;
-    } else if (erred) {
-      return <p>{translate('Unable to load data.')}</p>;
-    } else if (loaded) {
-      return (
-        <Row>
-          <Col lg={10} lgOffset={1}>
-            <form
-              onSubmit={handleSubmit(updateOffering)}
-              className="form-horizontal"
-            >
-              <Wizard
-                steps={STEPS}
-                tabs={TABS}
-                {...rest}
-                submitLabel={translate('Update')}
-              />
-            </form>
-          </Col>
-        </Row>
-      );
-    }
-  }
-}
+};

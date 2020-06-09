@@ -10,6 +10,7 @@ import { getOffering, getCategory } from '@waldur/marketplace/common/api';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
+import { useTitle } from '@waldur/navigation/title';
 
 import { OfferingHeader } from './OfferingHeader';
 
@@ -31,6 +32,9 @@ export const PublicOfferingDetails = () => {
     const tabs = getTabs({ offering, sections: category.sections });
     return { offering, tabs };
   }, [uuid]);
+  useTitle(
+    state.value ? state.value.offering.name : translate('Offering details'),
+  );
 
   if (state.loading) {
     return <LoadingSpinner />;

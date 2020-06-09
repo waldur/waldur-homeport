@@ -25,7 +25,7 @@ export const AuthLogin = () => {
         <AuthHeader />
         {features.SigninForm && <SigninForm />}
         {features.SignupForm && <SignupForm />}
-        {features.SocialSignup && (
+        {features.SigninForm && features.SocialSignup && (
           <p>
             <small>{translate('Or use social login')}</small>
           </p>

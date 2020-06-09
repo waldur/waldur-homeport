@@ -6,6 +6,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { Layout } from '@waldur/navigation/Layout';
+import { useTitle } from '@waldur/navigation/title';
 import { ProjectSidebar } from '@waldur/project/ProjectSidebar';
 
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
@@ -69,6 +70,8 @@ const loadOffering = async offeringUuid => {
 };
 
 export const OfferingDetails = () => {
+  useTitle(translate('Request details'));
+
   const {
     params: { uuid: offeringUuid },
   } = useCurrentStateAndParams();
@@ -97,7 +100,6 @@ export const OfferingDetails = () => {
   return (
     <Layout
       sidebar={<ProjectSidebar />}
-      pageTitle={translate('Request details')}
       pageClass="gray-bg"
       actions={
         value?.offering ? (

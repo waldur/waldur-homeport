@@ -1,6 +1,5 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { LazyCustomerList } from '@waldur/customer/list/LazyCustomerList';
-import { gettext } from '@waldur/i18n';
 import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
 import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';
 import { SankeyDiagramContainer } from '@waldur/providers/support/SankeyDiagramContainer';
@@ -32,7 +31,6 @@ export const states: StateDeclaration[] = [
     url: '',
     component: IssuesDashboard,
     data: {
-      pageTitle: gettext('Support dashboard'),
       hideBreadcrumbs: true,
       feature: 'support',
     },
@@ -43,7 +41,6 @@ export const states: StateDeclaration[] = [
     url: 'helpdesk/',
     component: IssuesHelpdesk,
     data: {
-      pageTitle: gettext('Helpdesk dashboard'),
       feature: 'support',
     },
   },
@@ -53,7 +50,6 @@ export const states: StateDeclaration[] = [
     url: 'issue/:uuid/',
     component: IssueDetailsContainer,
     data: {
-      pageTitle: gettext('Request detail'),
       feature: 'support',
     },
   },
@@ -64,7 +60,6 @@ export const states: StateDeclaration[] = [
     template:
       '<div class="ibox"><div class="ibox-content"><issues-list filter="{}"></issues-list></div></div>',
     data: {
-      pageTitle: gettext('Support requests'),
       feature: 'support',
     },
   },
@@ -75,7 +70,6 @@ export const states: StateDeclaration[] = [
     component: LazyCustomerList,
     data: {
       feature: 'support.organizations',
-      pageTitle: gettext('Financial overview'),
     },
     resolve: {
       permission: checkPermission,
@@ -87,7 +81,6 @@ export const states: StateDeclaration[] = [
     url: 'users/',
     component: UserListView,
     data: {
-      pageTitle: gettext('Users'),
       feature: 'support.users',
     },
     resolve: {
@@ -100,7 +93,6 @@ export const states: StateDeclaration[] = [
     url: 'flowmap/',
     component: FlowMapViewContainer,
     data: {
-      pageTitle: gettext('Flowmap'),
       feature: 'support.flowmap',
     },
     resolve: {
@@ -113,7 +105,6 @@ export const states: StateDeclaration[] = [
     url: 'heatmap/',
     component: HeatMapContainer,
     data: {
-      pageTitle: gettext('Heatmap'),
       feature: 'support.heatmap',
     },
     resolve: {
@@ -126,7 +117,6 @@ export const states: StateDeclaration[] = [
     url: 'sankey-diagram/',
     component: SankeyDiagramContainer,
     data: {
-      pageTitle: gettext('Sankey diagram'),
       feature: 'support.sankey-diagram',
     },
     resolve: {

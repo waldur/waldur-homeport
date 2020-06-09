@@ -1,5 +1,4 @@
 import { StateDeclaration } from '@waldur/core/types';
-import { gettext } from '@waldur/i18n';
 
 import { ChecklistOverview } from './ChecklistOverview';
 import { FEATURE } from './constants';
@@ -12,7 +11,6 @@ export const states: StateDeclaration[] = [
     component: ProjectChecklist,
     parent: 'project',
     data: {
-      pageTitle: gettext('Compliance'),
       feature: FEATURE,
     },
   },
@@ -23,7 +21,6 @@ export const states: StateDeclaration[] = [
     component: ChecklistOverview,
     parent: 'support',
     data: {
-      pageTitle: gettext('Compliance'),
       feature: FEATURE,
     },
   },

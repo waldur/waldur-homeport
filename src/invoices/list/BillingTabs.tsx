@@ -4,9 +4,10 @@ import useEffectOnce from 'react-use/lib/useEffectOnce';
 
 import { ngInjector, ENV } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { useTitle } from '@waldur/navigation/title';
 import { PayPalInvoicesList } from '@waldur/paypal/PayPalInvoicesList';
 
-import { getTabTitle, getPageTitle } from '../utils';
+import { getTabTitle } from '../utils';
 
 import { AgreementInfo } from './AgreementInfo';
 import { BillingRecordsList } from './BillingRecordsList';
@@ -17,13 +18,12 @@ const updateBreadcrumbs = () => {
   if (!ngInjector) {
     return;
   }
-  const titleService = ngInjector.get('titleService');
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  titleService.setTitle(getPageTitle());
   BreadcrumbsService.activeItem = getTabTitle();
 };
 
 export const BillingTabs = () => {
+  useTitle(getTabTitle());
   useEffectOnce(updateBreadcrumbs);
   return ENV.accountingMode === 'accounting' ? (
     <PanelBody>
@@ -32,6 +32,7 @@ export const BillingTabs = () => {
     </PanelBody>
   ) : (
     <PanelBody>
+      <AgreementInfo />
       <EstimatedCost />
       {isFeatureVisible('paypal') ? <PayPalInvoicesList /> : <InvoicesList />}
     </PanelBody>

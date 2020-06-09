@@ -5,7 +5,8 @@ import { compose } from 'redux';
 import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { getConfig } from '@waldur/store/config';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -29,6 +30,8 @@ const loadData = async () => {
 };
 
 const ProjectCreateComponent: React.FC<ProjectCreateProps> = props => {
+  useTitle(translate('Create project'));
+
   const { loading, error, value } = useAsync(loadData);
 
   if (loading) {

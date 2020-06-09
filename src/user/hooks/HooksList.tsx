@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { titleCase } from '@waldur/core/utils';
+import { useTitle } from '@waldur/navigation/title';
 import { Table, createFetcher, connectTable } from '@waldur/table-react';
 import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
@@ -24,6 +25,7 @@ const getEventsField = row => row.event_groups.map(formatEventTitle).join(', ');
 
 const TableComponent = props => {
   const { translate } = props;
+  useTitle(translate('Notifications'));
   return (
     <Table
       {...props}

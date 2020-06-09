@@ -33,6 +33,7 @@ interface OfferingCreateDialogProps extends InjectedFormProps {
   loaded: boolean;
   erred: boolean;
   setStep(step: string): void;
+  setTitle(title: string): void;
   disabled: boolean;
   isLastStep: boolean;
   goBack(): void;
@@ -48,6 +49,7 @@ export class OfferingCreateDialog extends React.Component<
   }
 
   componentDidMount() {
+    this.props.setTitle(translate('Add offering'));
     if (this.props.disabled) {
       return $state.go('errorPage.notFound');
     }

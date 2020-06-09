@@ -11,6 +11,7 @@ import { SubmitButton } from '@waldur/form-react/SubmitButton';
 import { TextField } from '@waldur/form-react/TextField';
 import { HelpLink } from '@waldur/help/HelpLink';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { showSuccess } from '@waldur/store/coreSaga';
 
 import { createKey } from './api';
@@ -31,6 +32,7 @@ const extractNameFromKey = (publicKey: string) => {
 };
 
 const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = props => {
+  useTitle(translate('Add SSH key'));
   const dispatch = useDispatch();
   const router = useRouter();
 

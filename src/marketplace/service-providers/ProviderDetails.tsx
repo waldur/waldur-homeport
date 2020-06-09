@@ -8,6 +8,7 @@ import {
   getServiceProviderByCustomer,
   getProviderOfferings,
 } from '@waldur/marketplace/common/api';
+import { useTitle } from '@waldur/navigation/title';
 
 import { ProviderDetailsBody } from './ProviderDetailsBody';
 
@@ -27,6 +28,8 @@ export const ProviderDetails = () => {
   const { loading, value, error } = useAsync(() => loadData(customer_uuid), [
     customer_uuid,
   ]);
+
+  useTitle(value ? value.provider.name : translate('Provider details'));
 
   if (loading) {
     return <LoadingSpinner />;

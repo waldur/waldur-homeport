@@ -5,6 +5,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { formatLongText } from '@waldur/table-react/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -33,6 +34,7 @@ const ProjectActionsField = ({ row }) => (
 
 export const TableComponent = props => {
   const { translate, filterColumns } = props;
+  useTitle(translate('Projects'));
   const columns = filterColumns([
     {
       title: translate('Name'),

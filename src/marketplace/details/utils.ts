@@ -52,7 +52,6 @@ export function updateBreadcrumbs(offering: Offering) {
   const $timeout = ngInjector.get('$timeout');
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
   const WorkspaceService = ngInjector.get('WorkspaceService');
-  const titleService = ngInjector.get('titleService');
 
   $timeout(() => {
     BreadcrumbsService.activeItem = offering.name;
@@ -94,6 +93,5 @@ export function updateBreadcrumbs(offering: Offering) {
         },
       ];
     }
-    titleService.setTitle(offering.name);
   });
 }

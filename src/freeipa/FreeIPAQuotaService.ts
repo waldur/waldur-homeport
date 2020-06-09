@@ -1,26 +1,19 @@
 import { patch } from '@waldur/core/api';
+import { isFeatureVisible } from '@waldur/features/connect';
 
-export default class FreeIPAQuotaService {
-  // @ngInject
-  constructor(features) {
-    this.features = features;
-  }
-
+export const FreeIPAQuotaService = {
   findQuota(scope) {
     return scope.quotas.filter(quota => quota.name === 'freeipa_quota')[0];
-  }
+  },
 
   loadQuota(scope) {
-    if (this.features.isVisible('freeipa')) {
+    if (isFeatureVisible('freeipa')) {
       const quota = this.findQuota(scope);
       if (quota) {
-        const context = {
-          unlimited: quota.limit === -1,
-        };
-        return angular.extend({}, quota, context);
+        return { ...quota, unlimited: quota.limit === -1 };
       }
     }
-  }
+  },
 
   saveQuota(scope, quota) {
     if (quota.unlimited) {
@@ -31,5 +24,5 @@ export default class FreeIPAQuotaService {
     }).then(() => {
       this.findQuota(scope).limit = quota.limit;
     });
-  }
-}
+  },
+};

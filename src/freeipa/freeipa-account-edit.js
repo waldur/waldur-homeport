@@ -1,4 +1,5 @@
 import template from './freeipa-account-edit.html';
+import { FreeIPAService } from './FreeIPAService';
 
 const freeipaAccountEdit = {
   template: template,
@@ -8,15 +9,13 @@ const freeipaAccountEdit = {
   },
   controller: class FreeIPAAccountEditController {
     // @ngInject
-    constructor(freeipaService, ncUtilsFlash) {
-      this.freeipaService = freeipaService;
+    constructor(ncUtilsFlash) {
       this.ncUtilsFlash = ncUtilsFlash;
     }
 
     enableProfile() {
       this.loading = true;
-      this.freeipaService
-        .enableProfile(this.profile.uuid)
+      FreeIPAService.enableProfile(this.profile.uuid)
         .then(() => {
           this.profile.is_active = true;
           this.ncUtilsFlash.success(gettext('Your FreeIPA has been enabled.'));
@@ -28,8 +27,7 @@ const freeipaAccountEdit = {
 
     disableProfile() {
       this.loading = true;
-      this.freeipaService
-        .disableProfile(this.profile.uuid)
+      FreeIPAService.disableProfile(this.profile.uuid)
         .then(() => {
           this.profile.is_active = false;
           this.ncUtilsFlash.success(
@@ -43,8 +41,7 @@ const freeipaAccountEdit = {
 
     syncProfile() {
       this.loading = true;
-      this.freeipaService
-        .syncProfile(this.profile.uuid)
+      FreeIPAService.syncProfile(this.profile.uuid)
         .then(response => {
           if (response.status === 204) {
             this.ncUtilsFlash.success(

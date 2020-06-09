@@ -6,11 +6,13 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getProject } from '@waldur/workspace/selectors';
 
 export const TableComponent = props => {
   const { translate } = props;
+  useTitle(translate('My orders'));
   const columns = [
     {
       title: translate('Created at'),

@@ -1,3 +1,6 @@
+import { getTitle } from '@waldur/navigation/title';
+import store from '@waldur/store/store';
+
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
 import template from './user-details.html';
@@ -12,6 +15,9 @@ function UserDetailsController(
   currentStateService,
   WorkspaceService,
 ) {
+  $scope.getPageTitle = () => {
+    return getTitle(store.getState());
+  };
   function updateSidebar() {
     usersService.getCurrentUser().then(function(user) {
       if (

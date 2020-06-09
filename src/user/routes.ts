@@ -1,5 +1,4 @@
 import { StateDeclaration } from '@waldur/core/types';
-import { gettext } from '@waldur/i18n';
 
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
@@ -62,7 +61,6 @@ export const states: StateDeclaration[] = [
     template: '<user-details></user-details>',
     data: {
       auth: true,
-      pageTitle: gettext('Add SSH key'),
       workspace: WOKSPACE_NAMES.user,
     },
   },

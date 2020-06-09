@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import {
   CategoriesListType,
   OfferingsListType,
 } from '@waldur/marketplace/types';
-import { withStore } from '@waldur/store/connect';
+import { useTitle } from '@waldur/navigation/title';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -23,28 +24,27 @@ interface LandingPageContainerProps {
   customer: Customer;
 }
 
-export class LandingPageContainer extends React.Component<
-  LandingPageContainerProps
-> {
-  componentDidMount() {
-    this.props.getCategories();
-    this.props.getOfferings();
-  }
+export const LandingPageContainer: React.FC<LandingPageContainerProps> = props => {
+  useTitle(translate('Marketplace'));
+  const { getCategories, getOfferings } = props;
 
-  render() {
-    return (
-      <LandingPage
-        {...this.props}
-        loadOfferings={query =>
-          offeringsAutocomplete({
-            name: query,
-            allowed_customer_uuid: this.props.customer.uuid,
-          })
-        }
-      />
-    );
-  }
-}
+  React.useEffect(() => {
+    getCategories();
+    getOfferings();
+  }, [getCategories, getOfferings]);
+
+  return (
+    <LandingPage
+      {...props}
+      loadOfferings={query =>
+        offeringsAutocomplete({
+          name: query,
+          allowed_customer_uuid: props.customer.uuid,
+        })
+      }
+    />
+  );
+};
 
 const mapDispatchToProps = {
   getCategories: actions.categoriesFetchStart,
@@ -60,4 +60,4 @@ const mapStateToProps = state => ({
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);
 
-export const MarketplaceLanding = withStore(enhance(LandingPageContainer));
+export const MarketplaceLanding = enhance(LandingPageContainer);

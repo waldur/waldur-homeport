@@ -7,19 +7,16 @@ import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getCategory } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
+import { useTitle } from '@waldur/navigation/title';
 
 import { ProjectResourcesList } from './ProjectResourcesList';
 
 function updateBreadcrumbs(category: Category) {
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  const titleService = ngInjector.get('titleService');
   const $timeout = ngInjector.get('$timeout');
 
   $timeout(() => {
     BreadcrumbsService.activeItem = category.title;
-    titleService.setTitle(
-      translate('{category} resources', { category: category.title }),
-    );
   });
 }
 
@@ -28,7 +25,7 @@ async function loadData(category_uuid) {
     params: { field: ['columns', 'title'] },
   });
   updateBreadcrumbs(category);
-  return { columns: category.columns };
+  return { columns: category.columns, title: category.title };
 }
 
 export const ProjectResourcesContainer: React.FC<{}> = () => {
@@ -39,6 +36,12 @@ export const ProjectResourcesContainer: React.FC<{}> = () => {
   const { loading, value, error } = useAsync(() => loadData(category_uuid), [
     category_uuid,
   ]);
+
+  useTitle(
+    value
+      ? translate('{category} resources', { category: value.title })
+      : translate('Project resources'),
+  );
 
   if (loading) {
     return <LoadingSpinner />;
