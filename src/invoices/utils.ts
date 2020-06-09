@@ -9,5 +9,3 @@ export const getTabTitle = () =>
     accounting: translate('Accounting'),
     billing: translate('Billing'),
   }[ENV.accountingMode]);
-
-export const getPageTitle = () => `${ENV.shortPageTitle} | ${getTabTitle()}`;

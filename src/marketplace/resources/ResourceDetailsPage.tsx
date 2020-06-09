@@ -7,6 +7,7 @@ import useAsync from 'react-use/lib/useAsync';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 
 import { getResource } from '../common/api';
 
@@ -38,6 +39,8 @@ export const ResourceDetailsPage = () => {
   } = useCurrentStateAndParams();
 
   const state = useAsync(() => fetchResource(resource_uuid), [resource_uuid]);
+
+  useTitle(state.value ? state.value.name : translate('Resource details'));
 
   const router = useRouter();
 

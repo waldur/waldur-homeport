@@ -14,11 +14,11 @@ import { OfferingScreenshotsList } from '@waldur/marketplace/offerings/OfferingS
 import { loadOfferingStart } from '@waldur/marketplace/offerings/store/actions';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering } from '@waldur/marketplace/types';
+import { useTitle } from '@waldur/navigation/title';
 
 const setHeaderAndBreadcrumbsTitle = (offering: Offering) => {
   const $timeout = ngInjector.get('$timeout');
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  const titleService = ngInjector.get('titleService');
 
   $timeout(() => {
     BreadcrumbsService.activeItem = translate('Screenshots');
@@ -40,11 +40,6 @@ const setHeaderAndBreadcrumbsTitle = (offering: Offering) => {
         label: offering.name,
       },
     ];
-    titleService.setTitle(
-      translate('Offering screenshots ({name})', {
-        name: offering.name,
-      }),
-    );
   });
 };
 
@@ -64,6 +59,14 @@ let OfferingScreenshotsContainer = props => {
       setHeaderAndBreadcrumbsTitle(props.offering);
     }
   }, [props.offering]);
+
+  useTitle(
+    props.offering
+      ? translate('Offering screenshots ({name})', {
+          name: props.offering.name,
+        })
+      : translate('Offering screenshots'),
+  );
 
   if (!(props.offering.name && offering_uuid)) {
     return <LoadingSpinner />;

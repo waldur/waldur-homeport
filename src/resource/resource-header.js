@@ -1,5 +1,7 @@
 import { blockingExecutor } from '@waldur/core/services';
 import { getCategoryLink } from '@waldur/marketplace/utils';
+import { setTitle } from '@waldur/navigation/title';
+import store from '@waldur/store/store';
 
 import { ResourceBreadcrumbsRegistry } from './breadcrumbs/ResourceBreadcrumbsRegistry';
 import template from './resource-header.html';
@@ -68,6 +70,7 @@ const resourceHeader = {
         this.model,
       );
       this.BreadcrumbsService.activeItem = this.model.name;
+      store.dispatch(setTitle(this.model.name));
     }
 
     afterActivate() {

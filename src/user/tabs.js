@@ -12,7 +12,6 @@ export const tabs = {
     url: '',
     component: withStore(UserDashboard),
     data: {
-      pageTitle: gettext('User dashboard'),
       pageClass: 'gray-bg',
       hideBreadcrumbs: true,
     },
@@ -20,36 +19,23 @@ export const tabs = {
   events: {
     url: 'events/',
     component: withStore(CurrentUserEvents),
-    data: {
-      pageTitle: gettext('Audit logs'),
-    },
   },
   keys: {
     url: 'keys/',
     component: withStore(KeysList),
-    data: {
-      pageTitle: gettext('SSH keys'),
-    },
   },
   notifications: {
     url: 'notifications/',
     component: withStore(HooksList),
-    data: {
-      pageTitle: gettext('Notifications'),
-    },
   },
   manage: {
     url: 'manage/',
     component: withStore(UserManage),
-    data: {
-      pageTitle: gettext('Manage'),
-    },
   },
   freeipa: {
     url: 'freeipa-account/',
     component: withStore(FreeIpaAccount),
     data: {
-      pageTitle: gettext('FreeIPA account'),
       feature: 'freeipa',
     },
   },

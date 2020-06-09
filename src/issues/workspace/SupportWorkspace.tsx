@@ -8,10 +8,9 @@ import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 
 import { SupportSidebar } from './SupportSidebar';
 
-function refreshBreadcrumbs(pageTitle) {
+function refreshBreadcrumbs() {
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
   const IssueNavigationService = ngInjector.get('IssueNavigationService');
-  BreadcrumbsService.activeItem = translate(pageTitle);
   BreadcrumbsService.items = [
     {
       label: translate('Support dashboard'),
@@ -21,17 +20,15 @@ function refreshBreadcrumbs(pageTitle) {
 }
 
 export const SupportWorkspace = () => {
-  const [pageTitle, setPageTitle] = React.useState<string>();
   const [pageClass, setPageClass] = React.useState<string>();
   const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState<boolean>();
   const { state, params } = useCurrentStateAndParams();
 
   function refreshState() {
     const data = state?.data;
-    setPageTitle(data?.pageTitle);
     setPageClass(data?.pageClass);
     setHideBreadcrumbs(data?.hideBreadcrumbs);
-    refreshBreadcrumbs(data?.pageTitle);
+    refreshBreadcrumbs();
   }
 
   React.useEffect(() => {
@@ -46,7 +43,6 @@ export const SupportWorkspace = () => {
   return (
     <Layout
       sidebar={<SupportSidebar />}
-      pageTitle={pageTitle}
       pageClass={pageClass}
       hideBreadcrumbs={hideBreadcrumbs}
     />

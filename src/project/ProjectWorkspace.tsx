@@ -9,13 +9,9 @@ import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectSidebar } from './ProjectSidebar';
 
-function refreshBreadcrumbs(currentProject, state, pageTitle) {
+function refreshBreadcrumbs(currentProject, state) {
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  BreadcrumbsService.activeItem = pageTitle;
   if (currentProject) {
-    if (!BreadcrumbsService.activeItem) {
-      BreadcrumbsService.activeItem = currentProject.name;
-    }
     const items: any[] = [
       {
         label: translate('Project workspace'),
@@ -35,7 +31,6 @@ function refreshBreadcrumbs(currentProject, state, pageTitle) {
 }
 
 export const ProjectWorkspace = () => {
-  const [pageTitle, setPageTitle] = React.useState<string>();
   const [pageClass, setPageClass] = React.useState<string>();
   const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState<boolean>();
   const project = useSelector(getProject);
@@ -43,10 +38,9 @@ export const ProjectWorkspace = () => {
 
   function refreshState() {
     const data = state?.data;
-    setPageTitle(translate(data?.pageTitle));
     setPageClass(data?.pageClass);
     setHideBreadcrumbs(data?.hideBreadcrumbs);
-    refreshBreadcrumbs(project, state, translate(data?.pageTitle));
+    refreshBreadcrumbs(project, state);
   }
 
   React.useEffect(refreshState, [state, params]);
@@ -54,7 +48,6 @@ export const ProjectWorkspace = () => {
   return (
     <Layout
       sidebar={<ProjectSidebar />}
-      pageTitle={pageTitle}
       pageClass={pageClass}
       hideBreadcrumbs={hideBreadcrumbs}
     />

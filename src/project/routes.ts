@@ -1,5 +1,4 @@
 import { StateDeclaration } from '@waldur/core/types';
-import { gettext } from '@waldur/i18n';
 
 import { ProjectDashboardContainer } from './ProjectDashboardContainer';
 import { ProjectEventsView } from './ProjectEventsList';
@@ -28,7 +27,6 @@ export const states: StateDeclaration[] = [
     url: '',
     component: ProjectDashboardContainer,
     data: {
-      pageTitle: gettext('Dashboard'),
       pageClass: 'gray-bg',
       hideBreadcrumbs: true,
     },
@@ -40,7 +38,6 @@ export const states: StateDeclaration[] = [
     component: ProjectIssuesList,
     data: {
       feature: 'support',
-      pageTitle: gettext('Issues'),
       pageClass: 'gray-bg',
     },
   },
@@ -49,17 +46,11 @@ export const states: StateDeclaration[] = [
     name: 'project.events',
     url: 'events/',
     component: ProjectEventsView,
-    data: {
-      pageTitle: gettext('Audit logs'),
-    },
   },
 
   {
     name: 'project.team',
     url: 'team/',
     component: ProjectTeam,
-    data: {
-      pageTitle: gettext('Team'),
-    },
   },
 ];

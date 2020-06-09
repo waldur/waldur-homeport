@@ -7,6 +7,7 @@ import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { translate } from '@waldur/i18n';
 import { ComplianceChecklists } from '@waldur/marketplace-checklist/ComplianceChecklists';
+import { useTitle } from '@waldur/navigation/title';
 import { User, Project } from '@waldur/workspace/types';
 
 import { ProjectActions } from './ProjectActions';
@@ -20,8 +21,12 @@ interface ProjectDashboardProps {
   marketplaceChecklistEnabled: boolean;
 }
 
-export const ProjectDashboard = (props: ProjectDashboardProps) =>
-  props.project ? (
+export const ProjectDashboard = (props: ProjectDashboardProps) => {
+  useTitle(translate('Dashboard'));
+  if (!props.project) {
+    return null;
+  }
+  return (
     <>
       <DashboardHeader
         title={translate('Welcome, {user}!', { user: props.user.full_name })}
@@ -49,4 +54,5 @@ export const ProjectDashboard = (props: ProjectDashboardProps) =>
         <CategoryResourcesList scopeType="project" scope={props.project} />
       </div>
     </>
-  ) : null;
+  );
+};

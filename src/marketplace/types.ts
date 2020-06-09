@@ -200,6 +200,7 @@ export interface OfferingsListType {
 }
 
 export interface ServiceProvider {
+  name: string;
   uuid: string;
   image?: string;
   description?: string;

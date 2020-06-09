@@ -2,8 +2,10 @@ import * as React from 'react';
 
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 
 export const InvalidObjectPage = () => {
+  useTitle(translate('Page is not found.'));
   const goBack = () => {
     ngInjector.get('NavigationUtilsService').goBack();
   };

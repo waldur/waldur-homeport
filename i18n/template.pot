@@ -86,7 +86,6 @@ msgstr ""
 msgid "Account removal"
 msgstr ""
 
-#: src/invoices/routes.ts
 #: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
 msgid "Accounting"
@@ -206,7 +205,7 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: src/user/routes.ts
+#: src/user/keys/KeyCreateForm.tsx
 msgid "Add SSH key"
 msgstr ""
 
@@ -270,7 +269,7 @@ msgid "Add notification"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingCreateButton.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 msgid "Add offering"
 msgstr ""
 
@@ -278,8 +277,8 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
-#: src/customer/routes.ts
 msgid "Add payment profile"
 msgstr ""
 
@@ -521,7 +520,7 @@ msgstr ""
 msgid "Approve"
 msgstr ""
 
-#: src/paypal/routes.ts
+#: src/paypal/PaymentApprove.tsx
 msgid "Approve payment"
 msgstr ""
 
@@ -640,13 +639,12 @@ msgstr ""
 msgid "Audit log"
 msgstr ""
 
-#: src/customer/routes.ts
+#: src/customer/workspace/CustomerEventsList.tsx
 #: src/customer/workspace/utils.ts
-#: src/project/routes.ts
+#: src/events/BaseEventsList.tsx
 #: src/project/utils.ts
 #: src/user/constants.ts
 #: src/user/list/UserDashboard.tsx
-#: src/user/tabs.js
 msgid "Audit logs"
 msgstr ""
 
@@ -907,7 +905,7 @@ msgstr ""
 msgid "Cancel invitation"
 msgstr ""
 
-#: src/paypal/routes.ts
+#: src/paypal/PaymentCancel.tsx
 msgid "Cancel payment"
 msgstr ""
 
@@ -1146,7 +1144,7 @@ msgstr ""
 msgid "Company data"
 msgstr ""
 
-#: src/marketplace/routes.ts
+#: src/marketplace/compare/ComparisonTable.tsx
 msgid "Compare items"
 msgstr ""
 
@@ -1159,7 +1157,8 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-#: src/marketplace-checklist/routes.ts
+#: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace-checklist/ProjectChecklist.tsx
 msgid "Compliance"
 msgstr ""
 
@@ -1367,7 +1366,7 @@ msgstr ""
 msgid "Create organization"
 msgstr ""
 
-#: src/customer/routes.ts
+#: src/project/ProjectCreateContainer.tsx
 msgid "Create project"
 msgstr ""
 
@@ -1522,10 +1521,10 @@ msgstr ""
 msgid "Daily available booking time range"
 msgstr ""
 
-#: src/customer/routes.ts
+#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/workspace/utils.ts
 #: src/issues/workspace/issue-navigation-service.js
-#: src/project/routes.ts
+#: src/project/ProjectDashboard.tsx
 #: src/project/utils.ts
 #: src/user/constants.ts
 msgid "Dashboard"
@@ -2267,7 +2266,7 @@ msgstr ""
 msgid "Filter projects"
 msgstr ""
 
-#: src/issues/routes.ts
+#: src/customer/list/CustomerListContainer.tsx
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Financial overview"
 msgstr ""
@@ -2343,8 +2342,8 @@ msgstr ""
 msgid "Floating IPs"
 msgstr ""
 
-#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
+#: src/providers/support/FlowMapViewContainer.tsx
 msgid "Flowmap"
 msgstr ""
 
@@ -2364,8 +2363,8 @@ msgstr ""
 msgid "Free"
 msgstr ""
 
+#: src/freeipa/FreeIPAAccount.tsx
 #: src/user/constants.ts
-#: src/user/tabs.js
 msgid "FreeIPA account"
 msgstr ""
 
@@ -2475,8 +2474,8 @@ msgstr ""
 msgid "Guide me"
 msgstr ""
 
-#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
+#: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
 msgstr ""
 
@@ -2492,7 +2491,7 @@ msgstr ""
 msgid "Helpdesk"
 msgstr ""
 
-#: src/issues/routes.ts
+#: src/issues/workspace/IssuesHelpdesk.tsx
 msgid "Helpdesk dashboard"
 msgstr ""
 
@@ -2933,11 +2932,10 @@ msgstr ""
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
-#: src/customer/routes.ts
 #: src/customer/workspace/utils.ts
+#: src/issues/list/IssuesList.tsx
 #: src/jira/project/tabs.ts
 #: src/marketplace/resources/ResourceTabs.tsx
-#: src/project/routes.ts
 #: src/project/utils.ts
 #: src/resource/tabs/constants.ts
 msgid "Issues"
@@ -3183,9 +3181,9 @@ msgid "MOAB allocation"
 msgstr ""
 
 #: src/customer/workspace/utils.ts
+#: src/user/UserManage.tsx
 #: src/user/constants.ts
 #: src/user/support/UserDetailsView.tsx
-#: src/user/tabs.js
 msgid "Manage"
 msgstr ""
 
@@ -3197,7 +3195,7 @@ msgstr ""
 msgid "Manage networks"
 msgstr ""
 
-#: src/customer/routes.ts
+#: src/customer/details/CustomerManage.tsx
 msgid "Manage organization"
 msgstr ""
 
@@ -3218,12 +3216,12 @@ msgid "Manager in:"
 msgstr ""
 
 #: src/marketplace/details/utils.ts
-#: src/marketplace/routes.ts
+#: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "Marketplace"
 msgstr ""
 
-#: src/marketplace/routes.ts
+#: src/marketplace/cart/CheckoutPage.tsx
 msgid "Marketplace checkout"
 msgstr ""
 
@@ -3231,7 +3229,7 @@ msgstr ""
 msgid "Marketplace offering does not have any usage-based components."
 msgstr ""
 
-#: src/marketplace/routes.ts
+#: src/marketplace/category/CategoryPage.tsx
 msgid "Marketplace offerings"
 msgstr ""
 
@@ -3423,20 +3421,21 @@ msgstr ""
 msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
 
+#: src/marketplace/offerings/MyOfferingsListContainer.tsx
 #: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.ts
 msgid "My offerings"
 msgstr ""
 
+#: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/orders/item/list/MyOrderItemsContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "My orders"
 msgstr ""
 
-#: src/marketplace/routes.ts
+#: src/marketplace/resources/list/CustomerResourcesContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "My resources"
 msgstr ""
@@ -3746,7 +3745,6 @@ msgstr ""
 
 #: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
-#: src/user/tabs.js
 msgid "Notifications"
 msgstr ""
 
@@ -3792,7 +3790,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: src/error/routes.ts
+#: src/error/InvalidRoutePage.tsx
 msgid "Object is not found."
 msgstr ""
 
@@ -3813,10 +3811,12 @@ msgstr ""
 msgid "Offering components"
 msgstr ""
 
+#: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/details/OverviewTab.tsx
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsButton.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Offering details"
 msgstr ""
 
@@ -3842,6 +3842,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Offering logo"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
+msgid "Offering screenshots"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
@@ -3989,8 +3993,8 @@ msgstr ""
 msgid "Order Summary"
 msgstr ""
 
+#: src/marketplace/orders/OrderDetails.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
-#: src/marketplace/routes.ts
 msgid "Order details"
 msgstr ""
 
@@ -4006,7 +4010,7 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
-#: src/marketplace/routes.ts
+#: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 msgid "Order item details"
 msgstr ""
 
@@ -4029,7 +4033,7 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/orders/item/list/SupportOrderItemsContainer.tsx
 msgid "Orders"
 msgstr ""
 
@@ -4181,7 +4185,7 @@ msgstr ""
 msgid "PID"
 msgstr ""
 
-#: src/error/routes.ts
+#: src/error/InvalidObjectPage.tsx
 msgid "Page is not found."
 msgstr ""
 
@@ -4384,8 +4388,8 @@ msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/plan-usage/PlanUsageContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/routes.ts
 msgid "Plan capacity"
 msgstr ""
 
@@ -4789,6 +4793,10 @@ msgstr ""
 msgid "Project removal"
 msgstr ""
 
+#: src/marketplace/resources/list/ProjectResourcesContainer.tsx
+msgid "Project resources"
+msgstr ""
+
 #: src/user/support/UserList.tsx
 msgid "Project roles"
 msgstr ""
@@ -4821,8 +4829,8 @@ msgstr ""
 msgid "Project {project_name} has been deleted."
 msgstr ""
 
-#: src/customer/routes.ts
 #: src/customer/workspace/utils.ts
+#: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Projects"
 msgstr ""
@@ -4857,7 +4865,7 @@ msgid "Provider certification required by this project."
 msgstr ""
 
 #: src/marketplace/offerings/create/ServiceSettingsDetailsDialog.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/ProviderDetails.tsx
 msgid "Provider details"
 msgstr ""
 
@@ -4894,20 +4902,20 @@ msgid "Public key"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
+#: src/marketplace/offerings/OfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/utils.ts
-#: src/marketplace/routes.ts
 #: src/marketplace/sidebar.ts
 msgid "Public offerings"
 msgstr ""
 
-#: src/marketplace/routes.ts
+#: src/marketplace/orders/item/list/OrderItemsContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "Public orders"
 msgstr ""
 
 #: src/marketplace/resources/ResourceDetailsPage.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/resources/list/PublicResourcesContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "Public resources"
 msgstr ""
@@ -4952,7 +4960,7 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
-#: src/error/routes.ts
+#: src/error/InvalidQuotaPage.tsx
 #: src/project/ProjectCreateButton.tsx
 msgid "Quota has been reached."
 msgstr ""
@@ -5250,7 +5258,7 @@ msgstr ""
 msgid "Request description"
 msgstr ""
 
-#: src/issues/routes.ts
+#: src/issues/IssueDetails.tsx
 msgid "Request detail"
 msgstr ""
 
@@ -5386,6 +5394,10 @@ msgstr ""
 msgid "Resource description"
 msgstr ""
 
+#: src/marketplace/resources/ResourceDetailsPage.tsx
+msgid "Resource details"
+msgstr ""
+
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
 msgid "Resource does not have any plan."
@@ -5477,7 +5489,7 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/routes.ts
+#: src/marketplace/resources/list/SupportResourcesContainer.tsx
 #: src/marketplace/sidebar.ts
 #: src/offering/OfferingDetails.tsx
 #: src/project/ProjectDashboard.tsx
@@ -5500,7 +5512,7 @@ msgid "Resources represent the services you are using."
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/resource/support/routes.ts
+#: src/resource/support/ResourcesTreemap.tsx
 msgid "Resources usage"
 msgstr ""
 
@@ -5641,7 +5653,6 @@ msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr ""
 
 #: src/user/keys/KeysList.tsx
-#: src/user/tabs.js
 msgid "SSH keys"
 msgstr ""
 
@@ -5651,8 +5662,8 @@ msgstr ""
 msgid "SSH public key"
 msgstr ""
 
-#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
+#: src/providers/support/SankeyDiagramContainer.tsx
 msgid "Sankey diagram"
 msgstr ""
 
@@ -5705,7 +5716,6 @@ msgstr ""
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
-#: src/marketplace/routes.ts
 msgid "Screenshots"
 msgstr ""
 
@@ -6056,7 +6066,7 @@ msgid "Shared"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/resource/support/routes.ts
+#: src/resource/support/SharedProviderContainer.tsx
 msgid "Shared providers"
 msgstr ""
 
@@ -6069,7 +6079,6 @@ msgid "Shopping cart item has been updated."
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartItemUpdate.tsx
-#: src/marketplace/routes.ts
 msgid "Shopping cart item update"
 msgstr ""
 
@@ -6429,7 +6438,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: src/issues/routes.ts
+#: src/issues/workspace/IssuesDashboard.tsx
 #: src/issues/workspace/SupportWorkspace.tsx
 msgid "Support dashboard"
 msgstr ""
@@ -6438,7 +6447,6 @@ msgstr ""
 msgid "Support request events"
 msgstr ""
 
-#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Support requests"
 msgstr ""
@@ -6513,9 +6521,9 @@ msgstr ""
 msgid "Tax number"
 msgstr ""
 
-#: src/customer/routes.ts
+#: src/customer/team/CustomerTeam.tsx
 #: src/customer/workspace/utils.ts
-#: src/project/routes.ts
+#: src/project/team/ProjectTeam.tsx
 #: src/project/utils.ts
 msgid "Team"
 msgstr ""
@@ -7541,10 +7549,6 @@ msgstr ""
 msgid "Update notification"
 msgstr ""
 
-#: src/marketplace/routes.ts
-msgid "Update offering"
-msgstr ""
-
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 msgid "Update offering ({name})"
 msgstr ""
@@ -7643,7 +7647,7 @@ msgid "Usage report has been submitted."
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace/routes.ts
+#: src/marketplace/resources/usage/SupportUsageContainer.tsx
 msgid "Usage reports"
 msgstr ""
 
@@ -7679,7 +7683,7 @@ msgstr ""
 msgid "User could not been updated"
 msgstr ""
 
-#: src/user/tabs.js
+#: src/user/list/UserDashboard.tsx
 #: src/user/user-details.html
 msgid "User dashboard"
 msgstr ""
@@ -7845,9 +7849,9 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
-#: src/issues/routes.ts
 #: src/issues/workspace/issue-navigation-service.js
 #: src/project/team/ProjectTeam.tsx
+#: src/user/support/UserListView.tsx
 msgid "Users"
 msgstr ""
 
@@ -7908,7 +7912,7 @@ msgid "VM snapshots"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
-#: src/openstack/analytics/routes.ts
+#: src/openstack/analytics/VmTypeOverviewContainer.tsx
 msgid "VM type overview"
 msgstr ""
 

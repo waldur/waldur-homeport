@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { setTitle } from '@waldur/navigation/title';
 
 import { loadDataStart, setStep } from '../store/actions';
 import { FORM_ID, createOffering } from '../store/constants';
@@ -30,6 +31,7 @@ const mapDispatchToProps = dispatch => ({
   createOffering: data => createOffering(data, dispatch),
   loadData: () => dispatch(loadDataStart()),
   setStep: (step: OfferingStep) => dispatch(setStep(step)),
+  setTitle: value => dispatch(setTitle(value)),
 });
 
 export const mergeProps = (stateProps, dispatchProps, ownProps) => ({
