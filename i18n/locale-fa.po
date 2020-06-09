@@ -13,17 +13,17 @@ msgstr ""
 "Language: fa\n"
 
 #: src/openstack/openstack-instance/utils.ts
-#, fuzzy
+
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "در واقع شخصیت است"
 
 #: src/invoices/details/BillingRecordDetails.tsx
-#, fuzzy
+
 msgid "(VAT is not included)"
 msgstr "مالیات بر ارزش افزوده گنجانده نشده است"
 
 #: src/marketplace-checklist/AnswerGroup.tsx
-#, fuzzy
+
 msgid "?"
 msgstr "؟"
 
@@ -32,23 +32,23 @@ msgid "A one-time fee applied on activation."
 msgstr ""
 
 #: src/freeipa/freeipa-account-create.js
-#, fuzzy
+
 msgid "A profile has been created."
 msgstr "پروفایل ایجاد شده است."
 
 #: src/openstack/OpenStackForm.tsx src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
-#, fuzzy
+
 msgid "API URL"
 msgstr "API URL"
 
 #: src/marketplace/service-providers/ServiceProviderSecretCode.tsx
-#, fuzzy
+
 msgid "API secret code:"
 msgstr "کد مخفی API:"
 
 #: src/user/support/TokenLifetimeField.tsx
-#, fuzzy
+
 msgid "API token lifetime"
 msgstr "نشانه زمان زندگی API"
 
@@ -56,22 +56,22 @@ msgstr "نشانه زمان زندگی API"
 #: src/customer/list/CustomerList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#, fuzzy
+
 msgid "Abbreviation"
 msgstr "اختصار"
 
 #: src/routes/about.ts src/views/about/index.html
-#, fuzzy
+
 msgid "About"
 msgstr "درباره"
 
 #: src/booking/BookingActions.tsx
-#, fuzzy
+
 msgid "Accept"
 msgstr "پذیرفتن"
 
 #: src/booking/BookingStateFilter.tsx src/invitations/InvitationsFilter.tsx
-#, fuzzy
+
 msgid "Accepted"
 msgstr "پذیرفته شده"
 
@@ -79,68 +79,68 @@ msgstr "پذیرفته شده"
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/RancherClusterSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
-#, fuzzy
+
 msgid "Access"
 msgstr "دسترسی"
 
 #: src/digitalocean/DigitalOceanForm.tsx
-#, fuzzy
+
 msgid "Access token"
 msgstr "نشانه دسترسی"
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#, fuzzy
+
 msgid "Accessible to all customers."
 msgstr "قابل دسترسی برای همه مشتریان."
 
 #: src/auth/AuthActivation.tsx
-#, fuzzy
+
 msgid "Account activation"
 msgstr "فعال سازی حساب"
 
 #: src/auth/AuthActivation.tsx
-#, fuzzy
+
 msgid "Account has been activated."
 msgstr "حساب ایجاد شده است."
 
 #: src/user/support/actions.ts
-#, fuzzy
+
 msgid "Account removal"
 msgstr "حذف حساب"
 
 #: src/invoices/routes.ts src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
-#, fuzzy
+
 msgid "Accounting"
 msgstr "حسابداری"
 
 #: src/customer/list/AccountingPeriodFilter.tsx
-#, fuzzy
+
 msgid "Accounting period"
 msgstr "دوره حسابداری"
 
 #: src/marketplace/offerings/plan/PlansList.tsx
-#, fuzzy
+
 msgid "Accounting plans"
 msgstr "برنامه های حسابداری"
 
 #: src/invoices/details/BillingDetails.tsx
-#, fuzzy
+
 msgid "Accounting record"
 msgstr "سابقه حسابداری"
 
 #: src/invoices/details/BillingDetails.tsx
-#, fuzzy
+
 msgid "Accounting records"
 msgstr "سوابق حسابداری"
 
 #: src/customer/details/CustomerDetailsPanel.tsx
-#, fuzzy
+
 msgid "Accounting start date"
 msgstr "تاریخ شروع حسابداری"
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
-#, fuzzy
+
 msgid "Accounting type"
 msgstr "نوع حسابداری"
 
@@ -184,45 +184,45 @@ msgstr "نوع حسابداری"
 #: src/user/hooks/HooksList.tsx src/user/keys/KeysList.tsx
 #: src/user/support/UserList.tsx src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
-#, fuzzy
+
 msgid "Actions"
 msgstr "عمل"
 
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/user/support/UserActivateButton.tsx
-#, fuzzy
+
 msgid "Activate"
 msgstr "فعال کردن"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Activating"
 msgstr "فعال کردن"
 
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/user/support/UserFilter.tsx
-#, fuzzy
+
 msgid "Active"
 msgstr "فعال"
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#, fuzzy
+
 msgid "Active count"
 msgstr "حساب فعال"
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
-#, fuzzy
+
 msgid "Active plans"
 msgstr "برنامه های فعال"
 
 #: src/user/support/UserActivateButton.tsx
-#, fuzzy
+
 msgid "Active user will be able to login into the portal."
 msgstr "کاربر فعال قادر خواهد بود به پرتال وارد شود."
 
 #: src/issues/workspace/IssuesActivityStream.tsx
-#, fuzzy
+
 msgid "Activity stream"
 msgstr "جریان فعالیت"
 
@@ -231,186 +231,186 @@ msgstr "جریان فعالیت"
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
 #: src/project/team/add-project-member.js
-#, fuzzy
+
 msgid "Add"
 msgstr "اضافه کردن"
 
 #: src/user/routes.ts
-#, fuzzy
+
 msgid "Add SSH key"
 msgstr "اضافه کردن کلید SSH"
 
 #: src/freeipa/freeipa-account-edit.html
-#, fuzzy
+
 msgid "Add Waldur user ssh keys to the FreeIPA profile"
 msgstr "اضافه کردن کلید های ssh کاربر به پروفایل FreeIPA"
 
 #: src/intro/base-intro.js
-#, fuzzy
+
 msgid "Add a new organization"
 msgstr "اضافه کردن یک سازمان جدید"
 
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
-#, fuzzy
+
 msgid "Add comment"
 msgstr "اضافه کردن نظر"
 
 #: src/marketplace/offerings/create/ComponentAddButton.tsx
-#, fuzzy
+
 msgid "Add component"
 msgstr "افزودن اجزا"
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
 #: src/rancher/cluster/create/DataVolumeAddButton.tsx
-#, fuzzy
+
 msgid "Add data volume"
 msgstr "افزودن حجم داده"
 
 #: src/marketplace-script/EnvironmentVariableAddButton.tsx
-#, fuzzy
+
 msgid "Add environment variable"
 msgstr "متغیر محیط را اضافه کنید"
 
 #: src/marketplace/compare/ComparisonItemPlaceholder.tsx
-#, fuzzy
+
 msgid "Add item"
 msgstr "اضافه کردن مورد"
 
 #: src/user/keys/KeyCreateButton.tsx src/user/keys/KeyCreateForm.tsx
-#, fuzzy
+
 msgid "Add key"
 msgstr "اضافه کردن کلید"
 
 #: src/project/team/AddMemberButton.tsx
-#, fuzzy
+
 msgid "Add member"
 msgstr "اضافه کردن عضو"
 
 #: src/navigation/workspace/OrganizationsPanel.tsx
-#, fuzzy
+
 msgid "Add new"
 msgstr "جدید اضافه کنید"
 
 #: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
-#, fuzzy
+
 msgid "Add new offering"
 msgstr "پیشنهاد جدید اضافه کنید"
 
 #: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
-#, fuzzy
+
 msgid "Add new organization"
 msgstr "سازمان جدید ایجاد کنید"
 
 #: src/navigation/workspace/ProjectsPanel.tsx
-#, fuzzy
+
 msgid "Add new project"
 msgstr "پروژه جدید ایجاد کنید"
 
 #: src/user/hooks/HookCreateButton.tsx
-#, fuzzy
+
 msgid "Add notification"
 msgstr "اعلان را اضافه کنید"
 
 #: src/marketplace/offerings/actions/OfferingCreateButton.tsx
 #: src/marketplace/routes.ts
-#, fuzzy
+
 msgid "Add offering"
 msgstr "پیشنهاد را اضافه کنید"
 
 #: src/user/list/CustomerCreateButton.tsx
-#, fuzzy
+
 msgid "Add organization"
 msgstr "سازمان را اضافه کنید"
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx src/customer/routes.ts
-#, fuzzy
+
 msgid "Add payment profile"
 msgstr "پروفایل پرداخت را اضافه کنید"
 
 #: src/marketplace/offerings/plan/PlanAddButton.tsx
-#, fuzzy
+
 msgid "Add plan"
 msgstr "اضافه کردن برنامه"
 
 #: src/customer/dashboard/CreateProjectAction.ts
 #: src/project/ProjectCreateButton.tsx src/project/ProjectCreateForm.tsx
-#, fuzzy
+
 msgid "Add project"
 msgstr "اضافه کردن پروژه"
 
 #: src/project/team/add-project-member.js
-#, fuzzy
+
 msgid "Add project member"
 msgstr "عضو پروژه را اضافه کنید"
 
 #: src/dashboard/marketplace.ts
 #: src/marketplace/resources/list/CreateResourceButton.tsx
-#, fuzzy
+
 msgid "Add resource"
 msgstr "اضافه کردن منبع"
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
-#, fuzzy
+
 msgid "Add rule"
 msgstr "اضافه کردن قانون"
 
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/actions/OfferingAddScreenshotButton.tsx
-#, fuzzy
+
 msgid "Add screenshot"
 msgstr "اضافه کردن اسکرین شات"
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
-#, fuzzy
+
 msgid "Add security group"
 msgstr "گروه امنیتی اضافه کنید"
 
 #: src/project/ProjectActions.tsx
-#, fuzzy
+
 msgid "Add team member"
 msgstr "عضو گروه را اضافه کنید"
 
 #: src/rancher/template/NamespaceField.tsx
-#, fuzzy
+
 msgid "Add to a new namespace"
 msgstr "یک فضای نام جدید اضافه کنید"
 
 #: src/marketplace/cart/ShoppingCartButton.tsx
-#, fuzzy
+
 msgid "Add to cart"
 msgstr "افزودن به کارت"
 
 #: src/marketplace/compare/OfferingCompareButton.tsx
-#, fuzzy
+
 msgid "Add to comparison"
 msgstr "به مقایسه اضافه کنید"
 
 #: src/marketplace/offerings/option/OfferingOptions.tsx
-#, fuzzy
+
 msgid "Add user input field"
 msgstr "قسمت ورودی کاربر را اضافه کنید"
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#, fuzzy
+
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "داده های اضافی که در صورت تهیه به عنوان instance اضافه میشوند."
 
 #: src/azure/vm/azure-virtual-machine-config.js
-#, fuzzy
+
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr "داده های اضافی که به ماشین مجازی در تامین اضافه میشوند."
 
 #: src/openstack/OpenStackPluginOptionsForm.tsx
-#, fuzzy
+
 msgid "Additional space to apply to storage quota to be used by snapshots."
 msgstr ""
 "فضای اضافی برای اعمال به سهمیه ذخیره سازی به توسط عکس های فوری مورد استفاده "
 "قرار گیرد."
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#, fuzzy
+
 msgid ""
 "Additionally service provider can charge for usage of the following "
 "components"
@@ -419,37 +419,37 @@ msgstr "علاوه بر این ارائه دهنده خدمات می تواند 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
-#, fuzzy
+
 msgid "Address"
 msgstr "آدرس"
 
 #: src/customer/team/CustomerUsersList.tsx
-#, fuzzy
+
 msgid "Admin in:"
 msgstr "مدیر در:"
 
 #: src/azure/sql/AzureSQLServerDetails.tsx
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#, fuzzy
+
 msgid "Admin password"
 msgstr "گذرواژه مدیریت"
 
 #: src/azure/sql/AzureSQLServerDetails.tsx
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#, fuzzy
+
 msgid "Admin username"
 msgstr "نام کاربری ادمین"
 
 #: src/issues/IssueDetails.tsx src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ResourceGroup.tsx
-#, fuzzy
+
 msgid "Affected resource"
 msgstr "منابع آسیب دیده"
 
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
-#, fuzzy
+
 msgid ""
 "After secret API code has been regenerated, it will not be possible to "
 "submit usage with the old key."
@@ -458,7 +458,7 @@ msgstr ""
 "استفاده با کلید های قدیمی."
 
 #: src/marketplace/cart/ShoppingCart.tsx
-#, fuzzy
+
 msgid "Agree with ToS"
 msgstr "موافق با ToS"
 
@@ -467,60 +467,60 @@ msgstr "موافق با ToS"
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
-#, fuzzy
+
 msgid "Agreement number"
 msgstr "شماره توافق نامه"
 
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
-#, fuzzy
+
 msgid "Alert"
 msgstr "هشدار"
 
 #: src/customer/list/AccountingRunningField.tsx
 #: src/rancher/node/NodeRoleField.tsx
-#, fuzzy
+
 msgid "All"
 msgstr "همه"
 
 #: src/booking/components/calendar/defaultConfig.ts
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
-#, fuzzy
+
 msgid "All day"
 msgstr "تمام روز"
 
 #: src/marketplace/resources/import/useImportDialog.tsx
-#, fuzzy
+
 msgid "All resources have been imported."
 msgstr "تمام منابع وارد شده اند."
 
 #: src/slurm/AllocationForm.tsx
-#, fuzzy
+
 msgid "Allocation description"
 msgstr "شرح تخصیص"
 
 #: src/slurm/actions.ts
-#, fuzzy
+
 msgid "Allocation has been updated."
 msgstr "تخصیص به روز شده است."
 
 #: src/slurm/AllocationForm.tsx
-#, fuzzy
+
 msgid "Allocation name"
 msgstr "نام تخصیص"
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#, fuzzy
+
 msgid "Allocation pools"
 msgstr "استخر های تخصیص"
 
 #: src/booking/components/CalendarSettings.tsx
-#, fuzzy
+
 msgid "Allow bookings to be scheduled at weekends"
 msgstr "اجازه رزرو در تعطیلات آخر هفته برنامه ریزی شود"
 
 #: src/auth/SigninButton.tsx
-#, fuzzy
+
 msgid "Already have an account?"
 msgstr "در حال حاضر حساب کاربری دارید؟"
 
@@ -528,134 +528,134 @@ msgstr "در حال حاضر حساب کاربری دارید؟"
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/paypal/PaymentsList.tsx
-#, fuzzy
+
 msgid "Amount"
 msgstr "مقدار"
 
 #: src/project/project-policies.js
-#, fuzzy
+
 msgid "An error occurred during policy update."
 msgstr "خطایی در حین بروز رسانی Policy رخ داده است."
 
 #: src/customer/details/customer-policies.js
-#, fuzzy
+
 msgid "An error occurred on policies update."
 msgstr "خطایی در هنگام بروز رسانی policies رخ داده است."
 
 #: src/project/effects.ts
-#, fuzzy
+
 msgid "An error occurred on project removal."
 msgstr "خطایی در حذف پروژه رخ داد."
 
 #: src/rancher/node/RancherNodeSummary.tsx
-#, fuzzy
+
 msgid "Annotations"
 msgstr "حاشیه نویسی"
 
 #: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
-#, fuzzy
+
 msgid "Annotations & labels"
 msgstr "حاشیه نویسی و برچسب ها"
 
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/rancher/cluster/ApplicationDetailsDialog.tsx
-#, fuzzy
+
 msgid "Answer"
 msgstr "پاسخ"
 
 #: src/rancher/cluster/ApplicationDetailsDialog.tsx
-#, fuzzy
+
 msgid "Answers"
 msgstr "پاسخ ها"
 
 #: src/marketplace-checklist/useChecklist.tsx
-#, fuzzy
+
 msgid "Answers have been submitted"
 msgstr "پاسخ ها را مشاهده کنید"
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/openstack/openstack-security-groups/utils.ts
 #: src/user/support/UserFilter.tsx
-#, fuzzy
+
 msgid "Any"
 msgstr "هیچ"
 
 #: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/breadcrumbs.ts
-#, fuzzy
+
 msgid "Application catalogues"
 msgstr "کاتالوگ برنامه ها"
 
 #: src/rancher/template/ApplicationConfiguration.tsx
-#, fuzzy
+
 msgid "Application configuration"
 msgstr "پیکر بندی برنامه ها"
 
 #: src/rancher/cluster/ApplicationDetailsDialog.tsx
-#, fuzzy
+
 msgid "Application details"
 msgstr "جزییات برنامه ها"
 
 #: src/rancher/template/TemplateDetail.tsx
-#, fuzzy
+
 msgid "Application has been created."
 msgstr "برنامه ها ایجاد شده اند."
 
 #: src/rancher/cluster/tabs.ts
 #: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/breadcrumbs.ts
-#, fuzzy
+
 msgid "Application templates"
 msgstr "قالب های برنامه ها"
 
 #: src/rancher/cluster/tabs.ts
-#, fuzzy
+
 msgid "Applications"
 msgstr "برنامه ها"
 
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
-#, fuzzy
+
 msgid "Apply"
 msgstr "درخواست دادن"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/marketplace/orders/ApproveButton.tsx
-#, fuzzy
+
 msgid "Approve"
 msgstr "تایید"
 
 #: src/paypal/routes.ts
-#, fuzzy
+
 msgid "Approve payment"
 msgstr "تایید هزینه"
 
 #: src/marketplace/orders/OrdersList.tsx
-#, fuzzy
+
 msgid "Approved at"
 msgstr "تایید شده در"
 
 #: src/marketplace/orders/OrdersList.tsx
-#, fuzzy
+
 msgid "Approved by"
 msgstr "تایید شده توسط"
 
 #: src/marketplace/offerings/actions/OfferingActions.tsx
-#, fuzzy
+
 msgid "Archive"
 msgstr "بایگانی"
 
 #: src/marketplace/offerings/OfferingStateFilter.tsx
-#, fuzzy
+
 msgid "Archived"
 msgstr "بایگانی شده"
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
-#, fuzzy
+
 msgid "Archived plans"
 msgstr "برنامه های بایگانی شده"
 
 #: src/resource/actions/action-utils-service.js
-#, fuzzy
+
 msgid ""
 "Are you sure you want to delete a {resourceType} in an Erred state? A "
 "cleanup attempt will be performed if you choose so."
@@ -663,133 +663,133 @@ msgstr ""
 "آیا مطمئن هستید که می خواهید یک {نوع منبع} رادر Erred state حذف کنید ؟ "
 
 #: src/resource/actions/action-utils-service.js
-#, fuzzy
+
 msgid "Are you sure you want to delete a {resourceType}?"
 msgstr "آیا مطمئن هستید که می خواهید یک {نوع منبع} را حذف کنید ؟"
 
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
-#, fuzzy
+
 msgid "Are you sure you want to delete the payment profile?"
 msgstr "آیا مطمئن هستید که می خواهید نمایه پرداخت را حذف کنید ؟"
 
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
-#, fuzzy
+
 msgid "Are you sure you want to delete the screenshot?"
 msgstr "آیا مطمئن هستید که می خواهید تصویر را حذف کنید ؟"
 
 #: src/rancher/cluster/ApplicationDeleteButton.tsx
-#, fuzzy
+
 msgid "Are you sure you want to delete this application?"
 msgstr "آیا مطمئن هستید که می خواهید این برنامه کاربردی را حذف کنید ؟"
 
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
-#, fuzzy
+
 msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
 msgstr "آیا مطمئن هستید که می خواهید کاتالوگ Rancherرا حذف کنید {کاتالوگ} ؟"
 
 #: src/project/ProjectRemoveDialog.tsx
-#, fuzzy
+
 msgid "Are you sure you would like to delete project {projectName}?"
 msgstr "آیا مطمئن هستید که می خواهید پروژه {projectName} را حذف کنید ؟"
 
 #: src/user/hooks/HookRemoveDialog.tsx
-#, fuzzy
+
 msgid "Are you sure you would like to delete the hook?"
 msgstr "آیا مطمئن هستید که می خواهید hook را حذف کنید ؟"
 
 #: src/user/keys/KeyRemoveDialog.tsx
-#, fuzzy
+
 msgid "Are you sure you would like to delete the key?"
 msgstr "آیا شما مطمئن هستید که میخواهید key را پاک کنید؟"
 
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
-#, fuzzy
+
 msgid "Are you sure you would like to terminate resource {resourceName}?"
 msgstr "آیا مطمئن هستید که می خواهید منابع را خاتمه دهید؟"
 
 #: src/resource/actions/action-utils-service.js
-#, fuzzy
+
 msgid "Are you sure? This action cannot be undone."
 msgstr "مطمئن هستید؟این عمل قابل بازگشت نیست."
 
 #: src/marketplace/offerings/ArticleCodeField.tsx
-#, fuzzy
+
 msgid "Article code"
 msgstr "کد مقاله"
 
 #: src/issues/IssueDetails.tsx src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx src/jira/issue/JiraIssuesList.tsx
-#, fuzzy
+
 msgid "Assigned to"
 msgstr "اختصاص یافته به"
 
 #: src/marketplace/offerings/create/OfferingCreateContainer.tsx
-#, fuzzy
+
 msgid "At least one plan must be entered"
 msgstr "حداقل یک برنامه باید وارد شود"
 
 #: src/openstack/openstack-volume/actions/AttachAction.ts
-#, fuzzy
+
 msgid "Attach"
 msgstr "پیوستن"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#, fuzzy
+
 msgid "Attached to"
 msgstr "پیوستن به"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Attaching"
 msgstr "پیوستن"
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 #: src/issues/create/IssueCreateForm.tsx
-#, fuzzy
+
 msgid "Attachments"
 msgstr "ضمیمه"
 
 #: src/marketplace/resources/ResourceSummary.tsx
-#, fuzzy
+
 msgid "Attributes"
 msgstr "ویژگی ها"
 
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
-#, fuzzy
+
 msgid "Attributes are invalid."
 msgstr "صفات نا معتبر است."
 
 #: src/marketplace/category/filters/AttributeFilterListDialog.tsx
-#, fuzzy
+
 msgid "Attributes filter"
 msgstr "ویژگی های فیلتر"
 
 #: src/offering/OfferingTabs.tsx src/resource/tabs/constants.ts
 #: src/user/support/UserDetailsView.tsx
-#, fuzzy
+
 msgid "Audit log"
 msgstr "گزارش حسابرسی"
 
 #: src/customer/routes.ts src/customer/workspace/utils.ts src/project/routes.ts
 #: src/project/utils.ts src/user/constants.ts src/user/list/UserDashboard.tsx
 #: src/user/tabs.js
-#, fuzzy
+
 msgid "Audit logs"
 msgstr "گزارش های حسابرسی"
 
 #: src/auth/valimo/auth-valimo-dialog.html
-#, fuzzy
+
 msgid "Authenticate using Mobile ID"
 msgstr "تأیید اعتبار با استفاده از شناسه تلفن همراه"
 
 #: src/auth/events.ts
-#, fuzzy
+
 msgid "Authentication events"
 msgstr "رویدادهای تأیید اعتبار"
 
 #: src/auth/valimo/auth-valimo-dialog.js
-#, fuzzy
+
 msgid ""
 "Authentication with Mobile ID has been canceled by user or timed out. "
 "Details:"
@@ -798,24 +798,24 @@ msgstr ""
 "جزئیات:"
 
 #: src/customer/popover/CustomerPopover.tsx
-#, fuzzy
+
 msgid "Authorized personnel"
 msgstr "پرسنل مجاز"
 
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.js
 #: src/openstack/openstack-instance/openstack-instance-networks.js
-#, fuzzy
+
 msgid "Auto-assign floating IP"
 msgstr "اختصاص دادن خودکار IP شناور"
 
 #: src/openstack/OpenStackPackageDetails.tsx
-#, fuzzy
+
 msgid "Auto-generated"
 msgstr "تولید خودکار"
 
 #: src/marketplace/offerings/option/OfferingScheduler.tsx
-#, fuzzy
+
 msgid "Availability"
 msgstr "دسترسی"
 
@@ -825,135 +825,135 @@ msgstr "دسترسی"
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#, fuzzy
+
 msgid "Availability zone"
 msgstr "دسترسی zone"
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#, fuzzy
+
 msgid "Available quota usage: {usage}"
 msgstr "استفاده از سهم موجود"
 
 #: src/configs/base-config.js
-#, fuzzy
+
 msgid "Azerbaijani"
 msgstr "آذربایجانی"
 
 #: src/azure/provider/AzureForm.tsx
-#, fuzzy
+
 msgid "Azure Active Directory Application Secret"
 msgstr "راز برنامه Azure Active Directory"
 
 #: src/azure/sql/marketplace.ts
-#, fuzzy
+
 msgid "Azure PostgreSQL database server"
 msgstr "سرور پایگاه داده Azure PostgreSQL"
 
 #: src/azure/vm/marketplace.ts
-#, fuzzy
+
 msgid "Azure Virtual Machine"
 msgstr "ماشین مجازی Azure"
 
 #: src/azure/provider/help.js
-#, fuzzy
+
 msgid "Azure provider"
 msgstr "ارائه دهنده Azure"
 
 #: src/error/InvalidObjectPage.tsx src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx src/marketplace/offerings/create/Wizard.tsx
 #: src/navigation/header/site-header.html
-#, fuzzy
+
 msgid "Back"
 msgstr "بازگشت"
 
 #: src/auth/callbacks/AuthLoginFailed.tsx
 #: src/auth/callbacks/AuthLogoutFailed.tsx
-#, fuzzy
+
 msgid "Back to login"
 msgstr "بازگشت به ورود"
 
 #: src/issues/workspace/issue-navigation-service.js src/project/utils.ts
 #: src/user/UserSidebar.tsx
-#, fuzzy
+
 msgid "Back to organization"
 msgstr "بازگشت به سازمان"
 
 #: src/issues/workspace/issue-navigation-service.js
-#, fuzzy
+
 msgid "Back to personal dashboard"
 msgstr "بازگشت به داشبورد شخصی"
 
 #: src/issues/workspace/issue-navigation-service.js src/user/UserSidebar.tsx
-#, fuzzy
+
 msgid "Back to project"
 msgstr "بازگشت به پروژه"
 
 #: src/marketplace/cart/BackButton.tsx
-#, fuzzy
+
 msgid "Back to shopping"
 msgstr "بازگشت به خرید"
 
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
-#, fuzzy
+
 msgid "Backend ID"
 msgstr "Backend ID"
 
 #: src/jira/JiraForm.tsx
-#, fuzzy
+
 msgid "Backend URL"
 msgstr "Backend URL"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Backing up"
 msgstr "پشتیبان گیری"
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
-#, fuzzy
+
 msgid "Bank account"
 msgstr "حساب بانکی"
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
-#, fuzzy
+
 msgid "Bank name"
 msgstr "نام بانک"
 
 #: src/rancher/RancherProviderForm.tsx
 #: src/rancher/cluster/create/marketplace.ts
-#, fuzzy
+
 msgid "Base image name"
 msgstr "نام تصویر پایه"
 
 #: src/resource/support/ResourcesTreemap.tsx
-#, fuzzy
+
 msgid "Batch RAM"
 msgstr "RAM دسته ای"
 
 #: src/resource/support/ResourcesTreemap.tsx
-#, fuzzy
+
 msgid "Batch block storage size"
 msgstr "حجم ذخیره سازی دسته ای بلوک"
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#, fuzzy
+
 msgid "Batch processing documentation"
 msgstr "اسناد پردازش دسته ای"
 
 #: src/slurm/SlurmForm.tsx src/slurm/marketplace.ts
-#, fuzzy
+
 msgid "Batch service"
 msgstr "سرویس دسته ای"
 
 #: src/resource/support/ResourcesTreemap.tsx
-#, fuzzy
+
 msgid "Batch vCPU"
 msgstr "دسته vCPU"
 
 #: src/customer/create/CustomerCreatePrompt.tsx
-#, fuzzy
+
 msgid ""
 "Become a customer of our portal. Provision IT services from the Marketplace "
 "and manage your team from one place."
@@ -962,65 +962,65 @@ msgstr ""
 "جا مدیریت کنید."
 
 #: src/customer/create/customer-create-config.js src/invoices/utils.ts
-#, fuzzy
+
 msgid "Billing"
 msgstr "صورتحساب"
 
 #: src/customer/create/customer-create-config.js
-#, fuzzy
+
 msgid "Billing details"
 msgstr "جزئیات صورت حساب"
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#, fuzzy
+
 msgid "Billing enabled"
 msgstr "صورتحساب فعال شد"
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#, fuzzy
+
 msgid "Billing period"
 msgstr "دوره صورتحساب"
 
 #: src/booking/marketplace.ts
-#, fuzzy
+
 msgid "Booking"
 msgstr "رزرو"
 
 #: src/booking/store/effects.ts
-#, fuzzy
+
 msgid "Booking has been accepted."
 msgstr "رزرو تایید شده است."
 
 #: src/booking/store/effects.ts
-#, fuzzy
+
 msgid "Booking has been rejected."
 msgstr "رزرو رد شده است."
 
 #: src/booking/BookingsList.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#, fuzzy
+
 msgid "Bookings"
 msgstr "رزرو"
 
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
-#, fuzzy
+
 msgid "Bootable"
 msgstr "بوت کردن"
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
-#, fuzzy
+
 msgid "Branch"
 msgstr "شعبه"
 
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
-#, fuzzy
+
 msgid "Browse"
 msgstr "مرور کردن"
 
 #: src/booking/components/CalendarSettings.tsx
-#, fuzzy
+
 msgid "Business hours"
 msgstr "ساعات کاری"
 
@@ -1031,36 +1031,36 @@ msgid ""
 msgstr ""
 
 #: src/user/support/TermsOfService.tsx
-#, fuzzy
+
 msgid "By submitting the form you are agreeing to the"
 msgstr "با ارسال فرم مورد نظر شما با آن موافقت می کنید"
 
 #: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#, fuzzy
+
 msgid "CIDR"
 msgstr "CIDR"
 
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#, fuzzy
+
 msgid "CPU"
 msgstr "CPU"
 
 #: src/slurm/details/constants.ts
-#, fuzzy
+
 msgid "CPU usage"
 msgstr "استفاده CPU"
 
 #: src/table-react/TableExportButton.tsx
-#, fuzzy
+
 msgid "CSV"
 msgstr "CSV"
 
 #: src/issues/IssueDetails.tsx src/issues/create/CallerGroup.tsx
 #: src/issues/list/IssuesList.tsx
-#, fuzzy
+
 msgid "Caller"
 msgstr "تماس گیرنده"
 
@@ -1076,69 +1076,69 @@ msgstr "تماس گیرنده"
 #: src/project/team/add-project-member.html
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/keys/KeyCreateForm.tsx src/user/support/UserEmailChangeDialog.tsx
-#, fuzzy
+
 msgid "Cancel"
 msgstr "لغو"
 
 #: src/invitations/invitation-confirm-dialog.html
-#, fuzzy
+
 msgid "Cancel invitation"
 msgstr "لغو دعوت"
 
 #: src/paypal/routes.ts
-#, fuzzy
+
 msgid "Cancel payment"
 msgstr "لغو صورتحساب"
 
 #: src/user/support/RequestedEmail.tsx
-#, fuzzy
+
 msgid "Cancel request"
 msgstr "لغو درخواست"
 
 #: src/invitations/InvitationsFilter.tsx src/invoices/list/InvoicesFilter.tsx
-#, fuzzy
+
 msgid "Canceled"
 msgstr "لغو شده"
 
 #: src/paypal/InvoicesFilter.tsx
-#, fuzzy
+
 msgid "Cancelled"
 msgstr "لغو شده"
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
-#, fuzzy
+
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr "اگر شبکه خارجی tenant تعریف نشده باشد نمیتوانید IP شناور ایجاد کنید."
 
 #: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
-#, fuzzy
+
 msgid "Catalog"
 msgstr "کاتالوگ"
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
-#, fuzzy
+
 msgid "Catalog URL"
 msgstr "کاتالوگ URL"
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
-#, fuzzy
+
 msgid "Catalog has been created."
 msgstr "کاتالوگ ایجاد شده است."
 
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
-#, fuzzy
+
 msgid "Catalog has been deleted."
 msgstr "کاتالوگ حذف شده است."
 
 #: src/rancher/cluster/tabs.ts
-#, fuzzy
+
 msgid "Catalogues"
 msgstr "کاتالوگ ها"
 
 #: src/marketplace/category/ShopCategories.tsx
-#, fuzzy
+
 msgid "Categories"
 msgstr "دسته بندی ها"
 
@@ -1152,52 +1152,52 @@ msgstr "دسته بندی ها"
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
-#, fuzzy
+
 msgid "Category"
 msgstr "دسته بندی"
 
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
-#, fuzzy
+
 msgid "Category is invalid."
 msgstr "دسته بندی نامعتبر است."
 
 #: src/project/ProjectCreateForm.tsx
-#, fuzzy
+
 msgid "Certifications"
 msgstr "گواهینامه ها"
 
 #: src/auth/valimo/auth-valimo-dialog.html
-#, fuzzy
+
 msgid "Challenge code"
 msgstr "کد چالش"
 
 #: src/issues/types/constants.ts
-#, fuzzy
+
 msgid "Change Request"
 msgstr "درخواست تغییر"
 
 #: src/user/support/EmailField.tsx
-#, fuzzy
+
 msgid "Change email"
 msgstr "تغییر ایمیل"
 
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
-#, fuzzy
+
 msgid "Change flavor"
 msgstr "تغییر flavor"
 
 #: src/marketplace/resources/change-limits/ChangeLimitsAction.ts
-#, fuzzy
+
 msgid "Change limits"
 msgstr "محدودیت ها را تغییر دهید"
 
 #: src/marketplace/resources/change-plan/ChangePlanAction.ts
-#, fuzzy
+
 msgid "Change plan"
 msgstr "تغییر برنامه"
 
 #: src/issues/types/constants.ts
-#, fuzzy
+
 msgid ""
 "Change request - client’s request to perform a generic modification of data "
 "or service."
@@ -1205,57 +1205,57 @@ msgstr ""
 "تغییر درخواست-درخواست client’s برای انجام اصلاح عمومی داده ها یا خدمات."
 
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
-#, fuzzy
+
 msgid "Change resource limits"
 msgstr "منابع محدودیت ها را تغییر دهید"
 
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
-#, fuzzy
+
 msgid "Change resource plan"
 msgstr "منابع برنامه ها را تغییر دهید"
 
 #: src/user/support/UserEmailChangeDialog.tsx
-#, fuzzy
+
 msgid "Change user email"
 msgstr "ایمیل کاربر را تغییر دهید"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Changing flavor"
 msgstr "تغییر دادن flavor"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Changing password"
 msgstr "تغییر دادن رمز"
 
 #: src/marketplace/offerings/create/ComponentUseLimitForBillingField.tsx
-#, fuzzy
+
 msgid "Charge for usage-based component is based on user-requested limit."
 msgstr "هزینه برای استفاده component براساس محدودیت ایجاد شده توسط کاربر است."
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx src/azure/sql/DatabasesList.tsx
-#, fuzzy
+
 msgid "Charset"
 msgstr "Charset"
 
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
-#, fuzzy
+
 msgid "Charts"
 msgstr "نمودارها"
 
 #: src/jira/project/jira-project-checkout-summary.html
-#, fuzzy
+
 msgid "Checkout summary"
 msgstr "وارسی خلاصه"
 
 #: src/marketplace/offerings/option/OptionForm.tsx
-#, fuzzy
+
 msgid "Choices as comma-separated list"
 msgstr "گزینه هایی به عنوان کاما -لیست جدا"
 
 #: src/form-react/list-field/ListFieldInternal.tsx
-#, fuzzy
+
 msgid "Choose option"
 msgstr "گزینه را انتخاب کنید"
 
@@ -1267,7 +1267,7 @@ msgid "Civil number"
 msgstr ""
 
 #: src/azure/provider/AzureForm.tsx
-#, fuzzy
+
 msgid "Client ID"
 msgstr "شناسه Client"
 
@@ -1277,13 +1277,13 @@ msgstr "شناسه Client"
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#, fuzzy
+
 msgid "Client organization"
 msgstr "سازماندهی Client"
 
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#, fuzzy
+
 msgid "Client project"
 msgstr "پروژه Client"
 
@@ -1294,12 +1294,12 @@ msgstr ""
 #: src/invoices/events/invoice-events-dialog.html
 #: src/slurm/details/slurm-allocation-details-dialog.html
 #: src/user/support/UserRemovalMessageDialog.tsx
-#, fuzzy
+
 msgid "Close"
 msgstr "بستن"
 
 #: src/resource/support/ResourcesTreemap.tsx
-#, fuzzy
+
 msgid "Cloud RAM"
 msgstr "ابر RAM"
 
@@ -1309,49 +1309,49 @@ msgstr ""
 
 #: src/rancher/RancherProviderForm.tsx
 #: src/rancher/cluster/create/marketplace.ts
-#, fuzzy
+
 msgid "Cloud init template"
 msgstr "قالب اولیه ابر"
 
 #: src/resource/support/ResourcesTreemap.tsx
-#, fuzzy
+
 msgid "Cloud vCPU"
 msgstr "ابر vCPU"
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
-#, fuzzy
+
 msgid "Cluster"
 msgstr "Cluster"
 
 #: src/rancher/cluster/create/RancherClusterForm.tsx
-#, fuzzy
+
 msgid "Cluster description"
 msgstr "توضیحات Cluster"
 
 #: src/rancher/cluster/create/RancherClusterForm.tsx
-#, fuzzy
+
 msgid "Cluster name"
 msgstr "نام Cluster"
 
 #: src/marketplace/offerings/utils.ts
-#, fuzzy
+
 msgid "Code is too short."
 msgstr "کد خیلی کوتاه است."
 
 #: src/marketplace/offerings/utils.ts
-#, fuzzy
+
 msgid "Code should consist of latin symbols or numbers."
 msgstr "کد باید شامل علامت های لاتین و یا عدد باشد."
 
 #: src/customer/details/CustomerAccordion.tsx
 #: src/customer/details/customer-policies.html
-#, fuzzy
+
 msgid "Collapse"
 msgstr "فروپاشی"
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
-#, fuzzy
+
 msgid "Collation"
 msgstr "جمع بندی"
 
@@ -1359,90 +1359,90 @@ msgstr "جمع بندی"
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#, fuzzy
+
 msgid "Comment"
 msgstr "یادداشت"
 
 #: src/issues/comments/IssueCommentsContainer.tsx src/offering/OfferingTabs.tsx
-#, fuzzy
+
 msgid "Comments"
 msgstr "یادداشت ها"
 
 #: src/customer/popover/CustomerPopover.tsx
-#, fuzzy
+
 msgid "Company data"
 msgstr "اطلاعات شرکت"
 
 #: src/marketplace/routes.ts
-#, fuzzy
+
 msgid "Compare items"
 msgstr "موارد را مقایسه کنید"
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
-#, fuzzy
+
 msgid "Competence"
 msgstr "صلاحیت"
 
 #: src/offering/actions/CompleteAction.ts
-#, fuzzy
+
 msgid "Complete"
 msgstr "کامل"
 
 #: src/marketplace-checklist/routes.ts
-#, fuzzy
+
 msgid "Compliance"
 msgstr "انطباق"
 
 #: src/project/ProjectDashboard.tsx
-#, fuzzy
+
 msgid "Compliance checklists"
 msgstr "انطباق checklists"
 
 #: src/marketplace/offerings/create/ComponentsList.tsx
-#, fuzzy
+
 msgid "Component #{index}"
 msgstr "مولفه {فهرست}"
 
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#, fuzzy
+
 msgid "Component name"
 msgstr "اسم مولفه"
 
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
-#, fuzzy
+
 msgid "Components"
 msgstr "Components"
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
-#, fuzzy
+
 msgid "Components are invalid."
 msgstr "در دسترس نبودن Components"
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
-#, fuzzy
+
 msgid "Compute generation"
 msgstr "محاسبه نسل"
 
 #: src/rancher/template/TemplateDetail.tsx
-#, fuzzy
+
 msgid "Configuration"
 msgstr "پیکربندی"
 
 #: src/rancher/template/QuestionGroup.tsx
-#, fuzzy
+
 msgid "Configuration options"
 msgstr "گزینه های پیکر بندی"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
-#, fuzzy
+
 msgid "Configure"
 msgstr "پیکر بندی کنید"
 
 #: src/customer/details/CustomerRemovePanel.tsx
-#, fuzzy
+
 msgid "Confirm deletion?"
 msgstr "حذف را تایید میکنید؟"
 
@@ -1450,73 +1450,73 @@ msgstr "حذف را تایید میکنید؟"
 #: src/marketplace/offerings/OfferingScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ApplicationDeleteButton.tsx
-#, fuzzy
+
 msgid "Confirmation"
 msgstr "تاییدیه"
 
 #: src/auth/SignupForm.tsx
-#, fuzzy
+
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "ایمیل تاییدیه ارسال شده است.لطفا صندوق ورودی خودرا چک نمایید."
 
 #: src/resource/summary/ResourceAccessInfo.tsx
-#, fuzzy
+
 msgid "Connect"
 msgstr "اتصال"
 
 #: src/openstack/openstack-subnet/actions.ts
-#, fuzzy
+
 msgid "Connect subnet to a default virtual router"
 msgstr "subnet را به یک router مجازی پیش فرض متصل کنید"
 
 #: src/openstack/openstack-instance/actions/UpdateInternalIpsSet.ts
-#, fuzzy
+
 msgid "Connected subnets"
 msgstr "subnet ها متصل شدند"
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
-#, fuzzy
+
 msgid "Connection details"
 msgstr "جزئیات اتصال"
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
-#, fuzzy
+
 msgid "Contact e-mail"
 msgstr "تماس با-ایمیل"
 
 #: src/customer/popover/CustomerSummary.tsx
-#, fuzzy
+
 msgid "Contact email"
 msgstr "تماس با ایمیل"
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#, fuzzy
+
 msgid "Contact phone"
 msgstr "شماره تماس"
 
 #: src/rancher/cluster/create/NodeRoleField.tsx
-#, fuzzy
+
 msgid "Control plane"
 msgstr "کنترل برنامه"
 
 #: src/offering/OracleSnapshots.tsx
-#, fuzzy
+
 msgid "Copy of"
 msgstr "رونوشت"
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/table-react/TableExportButton.tsx
-#, fuzzy
+
 msgid "Copy to clipboard"
 msgstr "در clipboard کپی کنید"
 
 #: src/customer/list/CustomerList.tsx src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
-#, fuzzy
+
 msgid "Cost"
 msgstr "هزینه"
 
@@ -1526,18 +1526,18 @@ msgid "Cost threshold"
 msgstr ""
 
 #: src/slurm/details/utils.ts
-#, fuzzy
+
 msgid "Costs"
 msgstr "هزینه ها"
 
 #: src/customer/create/customer-create-dialog.js
-#, fuzzy
+
 msgid "Could not create organization"
 msgstr "سازماندهی نشد"
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
-#, fuzzy
+
 msgid "Country"
 msgstr "کشور"
 
@@ -1556,88 +1556,88 @@ msgstr "کشور"
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
-#, fuzzy
+
 msgid "Create"
 msgstr "ایجاد کردن"
 
 #: src/vmware/actions.ts
-#, fuzzy
+
 msgid "Create Network adapter"
 msgstr "ایجاد کردن Network adapter"
 
 #: src/azure/sql/CreateDatabaseAction.ts
-#, fuzzy
+
 msgid "Create SQL database in PostgreSQL server"
 msgstr "ایجاد کردن پایگاه داده SQL در سرور PostgreSQL"
 
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
-#, fuzzy
+
 msgid "Create VM snapshot for OpenStack instance"
 msgstr "ایجاد کردن تصویر VM برای OpenStack instance"
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#, fuzzy
+
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr "ایجاد کردن تصویر برنامه VM برای OpenStack instance"
 
 #: src/resource/monitoring/ZabbixHostCreateDialog.tsx
-#, fuzzy
+
 msgid "Create Zabbix host"
 msgstr "ایجاد کردن Zabbix host"
 
 #: src/auth/AuthHeader.tsx src/auth/SignupButton.tsx
-#, fuzzy
+
 msgid "Create an account"
 msgstr "یک حساب ایجاد کنید."
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#, fuzzy
+
 msgid "Create an availability"
 msgstr "یک دسترسی ایجاد کنید."
 
 #: src/rancher/template/TemplateQuestions.tsx
-#, fuzzy
+
 msgid "Create application"
 msgstr "برنامه ایجاد کنید."
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
-#, fuzzy
+
 msgid "Create catalog"
 msgstr "کاتالوگ ایجاد کنید."
 
 #: src/vmware/actions.ts
-#, fuzzy
+
 msgid "Create disk"
 msgstr "دیسک ایجاد کنید"
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
-#, fuzzy
+
 msgid "Create floating IP for OpenStack tenant"
 msgstr "ایجاد کردن IP شناور برای OpenStack tenant"
 
 #: src/openstack/openstack-tenant/actions/CreateNetworkAction.ts
-#, fuzzy
+
 msgid "Create network for OpenStack tenant"
 msgstr "برای OpenStack tenant، شبکه ایجاد کنید"
 
 #: src/rancher/cluster/actions/CreateNodeAction.ts
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
-#, fuzzy
+
 msgid "Create node"
 msgstr "ایجاد node"
 
 #: src/user/hooks/HookDetailsDialog.tsx
-#, fuzzy
+
 msgid "Create notification"
 msgstr "ایجاد اعلان"
 
 #: src/customer/create/customer-create-dialog.html
-#, fuzzy
+
 msgid "Create organization"
 msgstr "ایجاد سازمان"
 
 #: src/customer/routes.ts
-#, fuzzy
+
 msgid "Create project"
 msgstr "ایجاد پروژه"
 
@@ -1645,33 +1645,33 @@ msgstr "ایجاد پروژه"
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/IssueRegistration.tsx src/jira/issue/IssueCreateDialog.tsx
 #: src/jira/issue/JiraIssueCreateButton.tsx
-#, fuzzy
+
 msgid "Create request"
 msgstr "ایجاد درخواست"
 
 #: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
-#, fuzzy
+
 msgid "Create security group for OpenStack tenant"
 msgstr "ایجاد کردن یک گروه امنیت برای OpenStack tenant"
 
 #: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
-#, fuzzy
+
 msgid "Create snapshot for OpenStack volume"
 msgstr "ایجاد کردن تصویر برای OpenStack volume"
 
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
-#, fuzzy
+
 msgid "Create snapshot schedule for OpenStack volume"
 msgstr "برای OpenStack volume، عکس فوری ایجاد کنید"
 
 #: src/openstack/openstack-network/module.ts
-#, fuzzy
+
 msgid "Create subnet"
 msgstr "ایجاد subnet"
 
 #: src/project/ProjectTablePlaceholder.tsx
-#, fuzzy
+
 msgid "Create your first project"
 msgstr "اولین پروژه را ایجاد کنید"
 
@@ -1691,12 +1691,12 @@ msgstr "اولین پروژه را ایجاد کنید"
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
-#, fuzzy
+
 msgid "Created"
 msgstr "ایجاد شده"
 
 #: src/paypal/events.ts
-#, fuzzy
+
 msgid "Created a new payment for {customer_link}."
 msgstr "ایجاد پرداخت جدید برای {customer_link}"
 
@@ -1713,208 +1713,208 @@ msgstr "ایجاد پرداخت جدید برای {customer_link}"
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/resource/support/SharedProviderResources.tsx
-#, fuzzy
+
 msgid "Created at"
 msgstr "ایجاد شده در"
 
 #: src/marketplace/orders/OrdersList.tsx
-#, fuzzy
+
 msgid "Created by"
 msgstr "ایجاد شده به وسیله"
 
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#, fuzzy
+
 msgid "Creating"
 msgstr "ایجاد کردن"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Creating a backup schedule"
 msgstr "ایجاد کردن یک برنامه پشتیبان"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Creating a floating IP"
 msgstr "ایجاد کردن IP شناور"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Creating a new network"
 msgstr "ایجاد کردن یک شیکه جدید"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Creating a security group"
 msgstr "ایجاد کردن یک گروه امنیت"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Creating a subnet"
 msgstr "ایجاد کردن یک subnet"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Creating snapshot schedule"
 msgstr "ایجاد کردن برنامه عکس فوری"
 
 #: src/offering/OracleSnapshots.tsx
-#, fuzzy
+
 msgid "Creation time"
 msgstr "زمان ایجاد"
 
 #: src/user/support/UserEditForm.tsx
-#, fuzzy
+
 msgid "Current API token"
 msgstr "نشانه API فعلی"
 
 #: src/customer/list/CustomerList.tsx
-#, fuzzy
+
 msgid "Current cost"
 msgstr "هزینه فعلی"
 
 #: src/user/support/UserEmailChangeDialog.tsx
-#, fuzzy
+
 msgid "Current email"
 msgstr "ایمیل فعلی"
 
 #: src/openstack/openstack-instance/openstack-instance-current-flavor.tsx
-#, fuzzy
+
 msgid "Current flavor"
 msgstr "flavor فعلی"
 
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#, fuzzy
+
 msgid "Current limit"
 msgstr "محدودیت فعلی"
 
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
-#, fuzzy
+
 msgid "Current plan"
 msgstr "برنامه فعلی"
 
 #: src/resource/support/ResourcesTreemap.tsx
-#, fuzzy
+
 msgid "Current price per month"
 msgstr "قیمت فعلی برای هر ماه"
 
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
-#, fuzzy
+
 msgid "Current size"
 msgstr "اندازه فعلی"
 
 #: src/marketplace/offerings/details/OfferingBookingTab.tsx
-#, fuzzy
+
 msgid "Currently there are no booking requests."
 msgstr "در حال حاضر درخواست رزروی وجود ندارد."
 
 #: src/booking/components/CalendarSettings.tsx
-#, fuzzy
+
 msgid "Daily available booking time range"
 msgstr "محدوده زمان رزرو روزانه موجود"
 
 #: src/customer/routes.ts src/customer/workspace/utils.ts
 #: src/issues/workspace/issue-navigation-service.js src/project/routes.ts
 #: src/project/utils.ts src/user/constants.ts
-#, fuzzy
+
 msgid "Dashboard"
 msgstr "داشبورد"
 
 #: src/rancher/cluster/create/DataVolumePanel.tsx
-#, fuzzy
+
 msgid "Data volume #{index}"
 msgstr "Data volume"
 
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
-#, fuzzy
+
 msgid "Data volume should have at least {size} GB."
 msgstr "حجم داده باید حداقل{سایز}GB باشد."
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-#, fuzzy
+
 msgid "Data volume size:"
 msgstr "سایز Data volume:"
 
 #: src/openstack/openstack-instance/DataVolumeTypeGroup.tsx
-#, fuzzy
+
 msgid "Data volume type"
 msgstr "نوع Data volume"
 
 #: src/azure/sql/tabs.ts
-#, fuzzy
+
 msgid "Databases"
 msgstr "پایگاه داده"
 
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#, fuzzy
+
 msgid "Datacite DOI"
 msgstr "Datacite DOI"
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
-#, fuzzy
+
 msgid "Datastore"
 msgstr "Datastore"
 
 #: src/dashboard/chart.ts src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/paypal/PaymentsList.tsx
-#, fuzzy
+
 msgid "Date"
 msgstr "تاریخ"
 
 #: src/user/support/UserDetailsTable.tsx
-#, fuzzy
+
 msgid "Date joined"
 msgstr "تاریخ پیوستن"
 
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#, fuzzy
+
 msgid "Date of reporting"
 msgstr "تاریخ گزارش"
 
 #: src/booking/components/calendar/defaultConfig.ts
-#, fuzzy
+
 msgid "Day"
 msgstr "روز"
 
 #: src/user/support/UserActivateButton.tsx
-#, fuzzy
+
 msgid "Deactivate"
 msgstr "غیرفعال"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Deactivating"
 msgstr "غیرفعال کردن"
 
 #: src/user/support/utils.ts
-#, fuzzy
+
 msgid "Default"
 msgstr "پیش فرض"
 
 #: src/slurm/SlurmForm.tsx
-#, fuzzy
+
 msgid "Default SLURM account for user"
 msgstr "حساب پیش فرض SLURM برای کاربر"
 
 #: src/slurm/SlurmForm.tsx src/slurm/marketplace.ts
-#, fuzzy
+
 msgid "Default account"
 msgstr "حساب پیش فرض"
 
 #: src/openstack/OpenStackForm.tsx src/openstack/OpenStackTenantForm.tsx
-#, fuzzy
+
 msgid "Default availability zone for provisioned instances."
 msgstr "منطقه دسترسی پیش فرض تهیه شده برای instance."
 
 #: src/vmware/VMwareForm.tsx
-#, fuzzy
+
 msgid "Default cluster label"
 msgstr "لیبل cluster پیش فرض"
 
 #: src/marketplace/offerings/option/OptionForm.tsx
-#, fuzzy
+
 msgid "Default value"
 msgstr "مقدار پیش فرض"
 
@@ -1930,28 +1930,28 @@ msgstr "مقدار پیش فرض"
 #: src/project/ProjectDeleteButton.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
 #: src/rancher/cluster/ApplicationDeleteButton.tsx
-#, fuzzy
+
 msgid "Delete"
 msgstr "حذف"
 
 #: src/resource/monitoring/ZabbixHostDeleteButton.tsx
-#, fuzzy
+
 msgid "Delete Zabbix host"
 msgstr "حذف Zabbix host"
 
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
-#, fuzzy
+
 msgid "Delete catalog"
 msgstr "حذف کاتالوگ"
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
-#, fuzzy
+
 msgid "Delete volumes"
 msgstr "حذف volumes"
 
 #: src/azure/sql/DestroyServerAction.ts
-#, fuzzy
+
 msgid ""
 "Deleting PostgreSQL server will cause deletion of all databases created "
 "within server."
@@ -1996,17 +1996,17 @@ msgstr ""
 #: src/resource/actions/constants.js
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/user/support/UserEditForm.tsx src/vmware/VMwareVirtualMachineForm.tsx
-#, fuzzy
+
 msgid "Description"
 msgstr "توضیحات"
 
 #: src/user/hooks/HooksList.tsx
-#, fuzzy
+
 msgid "Destination"
 msgstr "مقصد"
 
 #: src/user/hooks/HookForm.tsx
-#, fuzzy
+
 msgid "Destination URL"
 msgstr "مقصد URL"
 
@@ -2016,22 +2016,22 @@ msgstr "مقصد URL"
 #: src/openstack/openstack-security-groups/module.ts
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
 #: src/rancher/node/actions/DestroyAction.ts
-#, fuzzy
+
 msgid "Destroy"
 msgstr "از بین رفتن"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Destroying"
 msgstr "از بین میبرد"
 
 #: src/openstack/openstack-volume/actions/DetachAction.ts
-#, fuzzy
+
 msgid "Detach"
 msgstr "جدا"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Detaching"
 msgstr "جدا کردن"
 
@@ -2049,22 +2049,22 @@ msgstr "جدا کردن"
 #: src/resource/summary/ResourceSummaryModal.tsx src/slurm/actions.ts
 #: src/user/UserDropdownMenu.tsx src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
-#, fuzzy
+
 msgid "Details"
 msgstr "جزئیات"
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
-#, fuzzy
+
 msgid "Device"
 msgstr "دستگاه"
 
 #: src/marketplace-script/marketplace.ts
-#, fuzzy
+
 msgid "Devops-friendly offering"
 msgstr "پشنهاد دوستانه-Devops"
 
 #: src/digitalocean/help.js
-#, fuzzy
+
 msgid "DigitalOcean provider"
 msgstr "ارائه دهنده DigitalOcean"
 
@@ -2075,142 +2075,142 @@ msgid ""
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDataVolume.tsx
-#, fuzzy
+
 msgid "Disable data volume"
 msgstr "غیر فعال کردن data volume"
 
 #: src/openstack/openstack-subnet/actions.ts
-#, fuzzy
+
 msgid "Disable gateway IP advertising via DHCP"
 msgstr "غیر فعال کردن تبلیغات gateway IP از طریق DHCP"
 
 #: src/freeipa/freeipa-account-edit.html
-#, fuzzy
+
 msgid "Disable profile"
 msgstr "غیرفعال کردن پروفایل"
 
 #: src/customer/details/customer-threshold.html
 #: src/project/project-policies.html
-#, fuzzy
+
 msgid "Disable provisioning when threshold is reached."
 msgstr "غیر فعال کردن تأمین کننده زمانی که آستانه رسیده است."
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/support/UserFilter.tsx
-#, fuzzy
+
 msgid "Disabled"
 msgstr "غیرفعال شده"
 
 #: src/vmware/breadcrumbs.ts src/vmware/tabs.ts
-#, fuzzy
+
 msgid "Disks"
 msgstr "Disks"
 
 #: src/marketplace/offerings/DisplayNameField.tsx
-#, fuzzy
+
 msgid "Display name"
 msgstr "نمایش نام"
 
 #: src/marketplace/offerings/create/ComponentDisableQuotaField.tsx
-#, fuzzy
+
 msgid "Do not allow user to specify quotas when offering is provisioned."
 msgstr "به کاربر اجازه ندهید هنگامی که quotas مشخص شده است پیشنهادی ارائه دهد."
 
 #: src/openstack/openstack-network/module.ts
-#, fuzzy
+
 msgid "Do not configure a gateway for this subnet"
 msgstr "gateway را برای این subnet پیکربندی نکنید"
 
 #: src/auth/SignupButton.tsx
-#, fuzzy
+
 msgid "Do not have an account?"
 msgstr "حساب کاربری ندارید؟"
 
 #: src/resource/monitoring/ZabbixHostDeleteButton.tsx
-#, fuzzy
+
 msgid "Do you really want to delete Zabbix host?"
 msgstr "آیا واقعا میخواهید Zabbix host را حذف کنید؟"
 
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
-#, fuzzy
+
 msgid "Do you really want to delete comment?"
 msgstr "آیا واقعا میخواهید یادداشت ها را حذف کنید؟"
 
 #: src/rancher/node/actions/UnlinkAction.ts
-#, fuzzy
+
 msgid "Do you want to unlink instance {name}?"
 msgstr "آیا واقعا میخواهید{اسم} instance را جدا کنید؟"
 
 #: src/rancher/node/RancherNodeSummary.tsx
-#, fuzzy
+
 msgid "Docker version"
 msgstr "نسخه Docker"
 
 #: src/navigation/header/DocsLink.tsx
-#, fuzzy
+
 msgid "Documentation"
 msgstr "مستندات"
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
-#, fuzzy
+
 msgid "Documents"
 msgstr "اسناد"
 
 #: src/openstack/OpenStackTenantForm.tsx
-#, fuzzy
+
 msgid "Domain"
 msgstr "Domain"
 
 #: src/openstack/OpenStackForm.tsx src/openstack/marketplace.ts
-#, fuzzy
+
 msgid "Domain name"
 msgstr "نام Domain"
 
 #: src/openstack/OpenStackTenantForm.tsx
-#, fuzzy
+
 msgid "Domain name. If not defined default domain will be used."
 msgstr "اگر نام Domain تعریف نشده باشد،از Domain پیش فرض استفاده میشود."
 
 #: src/marketplace/orders/store/reducer.ts
-#, fuzzy
+
 msgid "Done"
 msgstr "انجام شده"
 
 #: src/invoices/details/DownloadInvoiceButton.tsx src/paypal/InvoiceActions.tsx
-#, fuzzy
+
 msgid "Download invoice"
 msgstr "بارگیری فاکتور"
 
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#, fuzzy
+
 msgid "Download order PDF file"
 msgstr "سفارش بارگیری فایل PDF"
 
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
-#, fuzzy
+
 msgid "Draft"
 msgstr "پیش نویس"
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 #: src/issues/comments/IssueCommentsContainer.tsx
-#, fuzzy
+
 msgid "Drop files to attach them to the issue."
 msgstr "فایل ها را رها کنید تا به موضوع متصل شوند."
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
-#, fuzzy
+
 msgid "Drop files to attach, or"
 msgstr "فایل ها را برای متصل شدن رها کنید، یا"
 
 #: src/digitalocean/DropletResizeDialog.tsx
-#, fuzzy
+
 msgid "Droplet has been resized."
 msgstr "Droplet تغییر سایز داده است."
 
 #: src/invoices/details/InvoiceDetails.tsx src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
-#, fuzzy
+
 msgid "Due date"
 msgstr "موعد مقرر"
 
@@ -2223,27 +2223,27 @@ msgstr ""
 #: src/invitations/actions/invitation-dialog.html
 #: src/project/team/ProjectUsersList.tsx src/project/team/user-selector.html
 #: src/user/support/UserDetailsTable.tsx
-#, fuzzy
+
 msgid "E-mail"
 msgstr "ایمیل"
 
 #: src/user/hooks/HookForm.tsx
-#, fuzzy
+
 msgid "E-mail address"
 msgstr "آدس ایمیل"
 
 #: src/customer/create/customer-create-config.js
-#, fuzzy
+
 msgid "EU VAT ID"
 msgstr "شناسه EU VAT"
 
 #: src/rancher/cluster/create/VolumeMountPointGroup.tsx
-#, fuzzy
+
 msgid "Each mount point should be used once at most."
 msgstr "هر mount point باید حداکثر یکبار استفاده شود."
 
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#, fuzzy
+
 msgid ""
 "Each usage report must be connected with a billing plan to assure correct "
 "calculation of accounting data."
@@ -2259,70 +2259,70 @@ msgstr ""
 #: src/openstack/openstack-snapshot-schedule/actions.ts
 #: src/project/team/AddMemberButton.tsx src/resource/actions/base.ts
 #: src/resource/actions/constants.js src/vmware/actions.ts
-#, fuzzy
+
 msgid "Edit"
 msgstr "ویرایش"
 
 #: src/booking/components/modal/BookingModal.tsx
-#, fuzzy
+
 msgid "Edit an availability"
 msgstr "ویرایش دسترسی"
 
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
-#, fuzzy
+
 msgid "Edit booking event"
 msgstr "ویرایش رویداد رزرو"
 
 #: src/project/team/add-project-member.js
-#, fuzzy
+
 msgid "Edit project member"
 msgstr "ویرایش اعضا پروژه"
 
 #: src/customer/team/add-team-member.js
-#, fuzzy
+
 msgid "Edit team member"
 msgstr "ویرایش اعضا گروه"
 
 #: src/auth/SignupForm.tsx src/invitations/InvitationsList.tsx
 #: src/user/hooks/HookTypeField.tsx src/user/support/EmailField.tsx
 #: src/user/support/UserFilter.tsx src/user/support/UserList.tsx
-#, fuzzy
+
 msgid "Email"
 msgstr "ایمیل"
 
 #: src/user/support/EmailField.tsx
-#, fuzzy
+
 msgid "Email change request has been cancelled."
 msgstr "درخواست تغییر ایمیل لغو شده است."
 
 #: src/user/support/UserEmailChangeCallback.tsx
-#, fuzzy
+
 msgid "Email has been updated."
 msgstr "ایمیل بروز رسانی شده است."
 
 #: src/invitations/invitation-confirm-dialog.html
-#, fuzzy
+
 msgid "Email update"
 msgstr "بروز رسانی ایمیل"
 
 #: src/user/support/useEmailChange.ts
-#, fuzzy
+
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "تایید ایمیل ارسال شده است.لطفا صندوق ورودی خودرا چک کنید."
 
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
-#, fuzzy
+
 msgid "Enable"
 msgstr "فعال کردن"
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#, fuzzy
+
 msgid "Enable DHCP"
 msgstr "فعال کردن DHCP"
 
 #: src/freeipa/freeipa-account-edit.html
-#, fuzzy
+
 msgid ""
 "Enable a profile in FreeIPA. Only enabled profiles are allowed for login "
 "into the Linux systems"
@@ -2331,115 +2331,115 @@ msgstr ""
 "به سیستم Linux را دارند."
 
 #: src/freeipa/freeipa-account-edit.html
-#, fuzzy
+
 msgid "Enable profile"
 msgstr "فعال کردن پروفایل"
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HookForm.tsx
-#, fuzzy
+
 msgid "Enabled"
 msgstr "فعال شده"
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#, fuzzy
+
 msgid "Enabled default gateway"
 msgstr "فعال کردن پیش فرض gateway"
 
 #: src/openstack/openstack-instance/utils.ts
-#, fuzzy
+
 msgid "Encountered an empty component"
 msgstr "مواجه شدن با یک component خالی"
 
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
-#, fuzzy
+
 msgid "End"
 msgstr "پایان"
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
-#, fuzzy
+
 msgid "End date"
 msgstr "تاریخ پایان"
 
 #: src/invoices/list/AgreementInfo.tsx
-#, fuzzy
+
 msgid "End date of the agreement is"
 msgstr "تاریخ پایان توافق نامه"
 
 #: src/invoices/details/InvoiceItemDetails.tsx
-#, fuzzy
+
 msgid "End time"
 msgstr "زمان پایان"
 
 #: src/configs/base-config.js
-#, fuzzy
+
 msgid "English"
 msgstr "انگلیسی"
 
 #: src/resource/actions/dialog/action-field-datetime.html
-#, fuzzy
+
 msgid "Enter date"
 msgstr "تاریخ ورود"
 
 #: src/openstack/openstack-subnet/openstack-subnet.html src/openstack/utils.ts
-#, fuzzy
+
 msgid "Enter private IPv4 CIDR."
 msgstr "IPv4 CID خصوصی وارد کنید."
 
 #: src/marketplace-script/EnvironmentVariablesList.tsx
-#, fuzzy
+
 msgid "Environment variables"
 msgstr "متغیرهای محیطی"
 
 #: src/marketplace/orders/store/reducer.ts
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#, fuzzy
+
 msgid "Erred"
 msgstr "خراب"
 
 #: src/events/EventDetailsTable.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingHeader.tsx src/resource/summary/ResourceSummaryBase.tsx
-#, fuzzy
+
 msgid "Error message"
 msgstr "پیغام خطا"
 
 #: src/resource/support/ResourcesTreemap.tsx
-#, fuzzy
+
 msgid "Esimated price per month"
 msgstr "قیمت تخمین زده شده برای هر ماه"
 
 #: src/customer/list/CustomerList.tsx src/project/ProjectCounters.tsx
 #: src/project/ProjectsList.tsx
-#, fuzzy
+
 msgid "Estimated cost"
 msgstr "هزینه تخمین زده شده"
 
 #: src/customer/details/customer-threshold.html
-#, fuzzy
+
 msgid "Estimated cost exceeds threshold"
 msgstr "هزینه تخمین زده شده بیشتر از threshold است"
 
 #: src/project/project-policies.html
-#, fuzzy
+
 msgid "Estimated cost exceeds threshold."
 msgstr "هزینه تخمین زده شده بیشتر از threshold است."
 
 #: src/customer/details/customer-threshold.html
 #: src/project/project-policies.html
-#, fuzzy
+
 msgid "Estimated cost for current month"
 msgstr "هزینه تخمین زده شده برای این ماه"
 
 #: src/invoices/list/EstimatedCost.tsx
-#, fuzzy
+
 msgid "Estimated cost for the current month: {cost}"
 msgstr "هزینه تخمین زده شده برای این ماه:{هزینه}"
 
 #: src/customer/dashboard/api.ts
-#, fuzzy
+
 msgid "Estimated monthly cost"
 msgstr "هزینه تخمین زده شده ماهانه"
 
@@ -2452,130 +2452,130 @@ msgstr ""
 "مالیات بر ارزش افزوده را شامل نمیشود"
 
 #: src/configs/base-config.js
-#, fuzzy
+
 msgid "Estonian"
 msgstr "Estonian"
 
 #: src/events/EventDetailsDialog.tsx
-#, fuzzy
+
 msgid "Event details"
 msgstr "جزئیات رویداد"
 
 #: src/events/EventDetailsTable.tsx
-#, fuzzy
+
 msgid "Event type"
 msgstr "نوع رویداد"
 
 #: src/events/EventTypesButton.tsx src/events/EventTypesDialog.tsx
-#, fuzzy
+
 msgid "Event types"
 msgstr "انواع رویداد"
 
 #: src/help/constants.js src/user/hooks/HooksList.tsx
-#, fuzzy
+
 msgid "Events"
 msgstr "رویدادها"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every day"
 msgstr "هرروز"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every day at"
 msgstr "هر روز در"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every hour"
 msgstr "هر ساعت"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every hour at {minuteValues} past the hour"
 msgstr "هرساعت در {minuteValues} ساعت را پشت سر میگذارید"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every minute"
 msgstr "هر دقیقه"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every month"
 msgstr "هرماه"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every month on the {days} at {time}"
 msgstr "هرماه در {روز} در {ساعت}"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every month on the {days} of {months} at {time}"
 msgstr "هر ماه در {روزها }از {ماه ها } در {ساعت }"
 
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
-#, fuzzy
+
 msgid ""
 "Every month service provider can report up to the amount requested by user."
 msgstr ""
 "ارائه دهنده خدمات هرماه میتواند میزان درخواست شده توسط کاربر را گزارش کند."
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every week"
 msgstr "هر هفته"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every week on {day} at {time}"
 msgstr "هر هفته در {روز} در{ساعت}"
 
 #: src/resource/crontab.ts
-#, fuzzy
+
 msgid "Every year"
 msgstr "هر سال"
 
 #: src/offering/actions/UpdateAction.ts
-#, fuzzy
+
 msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr "مثال[{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 
 #: src/table-react/TableExportButton.tsx
-#, fuzzy
+
 msgid "Excel"
 msgstr "اکسل"
 
 #: src/marketplace/orders/store/reducer.ts
-#, fuzzy
+
 msgid "Executing"
 msgstr "اجرای"
 
 #: src/quotas/QuotaUsageBarChart.tsx
-#, fuzzy
+
 msgid "Existing quota usage: {usage}"
 msgstr "استفاده از quota موجود{usage}"
 
 #: src/customer/details/CustomerAccordion.tsx
 #: src/customer/details/customer-policies.html
-#, fuzzy
+
 msgid "Expand"
 msgstr "توسعه دادن"
 
 #: src/customer/team/add-team-member.html
-#, fuzzy
+
 msgid "Expiration time"
 msgstr "زمان انقضا"
 
 #: src/invitations/InvitationsFilter.tsx
-#, fuzzy
+
 msgid "Expired"
 msgstr "انقضا"
 
 #: src/invitations/InvitationsList.tsx
-#, fuzzy
+
 msgid "Expires at"
 msgstr "منقضی میشود"
 
@@ -2584,145 +2584,145 @@ msgid "Explore {deployment} Marketplace"
 msgstr ""
 
 #: src/table-react/TableExportButton.tsx
-#, fuzzy
+
 msgid "Export as"
 msgstr "صادرات به عنوان"
 
 #: src/openstack/openstack-volume/actions/ExtendAction.ts
-#, fuzzy
+
 msgid "Extend"
 msgstr "گسترش"
 
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
-#, fuzzy
+
 msgid "Extend OpenStack volume"
 msgstr "گسترش OpenStack volume"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Extending"
 msgstr "درحال گسترش"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
-#, fuzzy
+
 msgid "External IP"
 msgstr "IP خارجی"
 
 #: src/navigation/header/ExternalLinks.tsx
-#, fuzzy
+
 msgid "External links"
 msgstr "لینک های خارجی"
 
 #: src/openstack/OpenStackForm.tsx src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#, fuzzy
+
 msgid "External network ID"
 msgstr "network ID خارجی"
 
 #: src/resource/state/utils.ts
-#, fuzzy
+
 msgid "Failed to operate with backend."
 msgstr "عملکرد با backend انجام نشد."
 
 #: src/marketplace/details/OfferingTabs.tsx
-#, fuzzy
+
 msgid "Features"
 msgstr "امکانات"
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#, fuzzy
+
 msgid "Fee applied each time this plan is activated."
 msgstr "هر بار که این طرح فعال می شود هزینه اعمال می شود."
 
 #: src/form/appstore-field-email.js src/form/appstore-field-string.js
 #: src/form/appstore-field-tel.js
-#, fuzzy
+
 msgid "Field length must be less than {maxlength} symbols"
 msgstr "طول فیلد باید کمتر از {maxlength} نمادها باشد"
 
 #: src/issues/attachments/utils.ts
-#, fuzzy
+
 msgid "File"
 msgstr "پرونده"
 
 #: src/core/DownloadLink/effects.tsx
-#, fuzzy
+
 msgid "File download has been started."
 msgstr "دانلود پرونده شروع شده است."
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
-#, fuzzy
+
 msgid "File has been copied"
 msgstr "پرونده کپی شده است"
 
 #: src/core/DownloadLink/effects.tsx
-#, fuzzy
+
 msgid "File has been downloaded."
 msgstr "پرونده دانلود شده است."
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
-#, fuzzy
+
 msgid "Filename"
 msgstr "نام پرونده"
 
 #: src/issues/attachments/utils.ts
-#, fuzzy
+
 msgid "Files"
 msgstr "پرونده ها"
 
 #: src/issues/create/CallerGroup.tsx src/issues/create/OrganizationGroup.tsx
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/category/filters/MobileFilterActions.tsx
-#, fuzzy
+
 msgid "Filter"
 msgstr "فیلتر"
 
 #: src/navigation/workspace/OrganizationsPanel.tsx
-#, fuzzy
+
 msgid "Filter organizations"
 msgstr "سازماندهی Filter"
 
 #: src/navigation/workspace/ProjectsPanel.tsx
-#, fuzzy
+
 msgid "Filter projects"
 msgstr "پروژه های Filter"
 
 #: src/issues/routes.ts src/issues/workspace/issue-navigation-service.js
-#, fuzzy
+
 msgid "Financial overview"
 msgstr "بازنگری مالی"
 
 #: src/marketplace-checklist/AnswersTable.tsx
-#, fuzzy
+
 msgid "Find solution"
 msgstr "پیدا کردن راه حل"
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/user/keys/KeysList.tsx
-#, fuzzy
+
 msgid "Fingerprint"
 msgstr "اثر انگشت"
 
 #: src/form/appstore-form-wizard.html
-#, fuzzy
+
 msgid "Finish"
 msgstr "پایان"
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
-#, fuzzy
+
 msgid "Fixed price"
 msgstr "قیمت ثابت"
 
 #: src/openstack/OpenStackPluginOptionsForm.tsx
-#, fuzzy
+
 msgid "Fixed — use common storage quota"
 msgstr "ثابت- از حافظه مشترک quota استفاده کنید"
 
 #: src/customer/payment-profiles/utils.ts
-#, fuzzy
+
 msgid "Fixed-price contract"
 msgstr "ثابت-قرارداد قیمت"
 
@@ -2730,7 +2730,7 @@ msgstr "ثابت-قرارداد قیمت"
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/cluster/create/NodeFlavorGroup.tsx
-#, fuzzy
+
 msgid "Flavor"
 msgstr "Flavor"
 
@@ -2740,22 +2740,22 @@ msgstr ""
 
 #: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
-#, fuzzy
+
 msgid "Flavor name"
 msgstr "نام Flavor"
 
 #: src/resource/summary/VirtualMachineSummary.tsx
-#, fuzzy
+
 msgid "Flavor name: {flavor_name}"
 msgstr "نام Flavor:"
 
 #: src/openstack/analytics/VmTypeOverview.tsx
-#, fuzzy
+
 msgid "Flavors"
 msgstr "Flavors"
 
 #: src/openstack/analytics/FlavorsList.tsx
-#, fuzzy
+
 msgid "Flavors List"
 msgstr "لیست Flavors"
 
@@ -2765,63 +2765,63 @@ msgid ""
 msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
-#, fuzzy
+
 msgid "Flexible"
 msgstr "منعطف"
 
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
-#, fuzzy
+
 msgid "Floating IP"
 msgstr "IP شناور"
 
 #: src/quotas/constants.ts
-#, fuzzy
+
 msgid "Floating IP count"
 msgstr "تعداد IP شناور"
 
 #: src/openstack/openstack-floating-ips/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
-#, fuzzy
+
 msgid "Floating IPs"
 msgstr "IPs شناور"
 
 #: src/issues/routes.ts src/issues/workspace/issue-navigation-service.js
-#, fuzzy
+
 msgid "Flowmap"
 msgstr "Flowmap"
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#, fuzzy
+
 msgid "Folder"
 msgstr "پوشه"
 
 #: src/form/appstore-form-wizard.html
-#, fuzzy
+
 msgid "Following fields contain errors"
 msgstr "موارد زیر دارای خطا هستند"
 
 #: src/invoices/details/BillingRecordDetails.tsx
-#, fuzzy
+
 msgid "For"
 msgstr "برای"
 
 #: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
-#, fuzzy
+
 msgid "Force destroy"
 msgstr "نابود کردن"
 
 #: src/jira/project/jira-project-checkout-summary.html
-#, fuzzy
+
 msgid "Free"
 msgstr "رایگان"
 
 #: src/user/constants.ts src/user/tabs.js
-#, fuzzy
+
 msgid "FreeIPA account"
 msgstr "حساب FreeIPA"
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#, fuzzy
+
 msgid "FreeIPA account needs to be set up."
 msgstr "حساب FreeIPA باید تنظیم شود."
 
@@ -2830,25 +2830,25 @@ msgid "FreeIPA group quota"
 msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
-#, fuzzy
+
 msgid "From"
 msgstr "از"
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
-#, fuzzy
+
 msgid "From port"
 msgstr "از پورت"
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#, fuzzy
+
 msgid "Full description"
 msgstr "توضیحات کامل"
 
 #: src/auth/SignupForm.tsx src/invitations/actions/invitation-dialog.html
 #: src/user/support/UserDetailsTable.tsx src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx src/user/support/UserList.tsx
-#, fuzzy
+
 msgid "Full name"
 msgstr "نام کامل"
 
@@ -2856,81 +2856,81 @@ msgstr "نام کامل"
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
-#, fuzzy
+
 msgid "GB"
 msgstr "GB"
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#, fuzzy
+
 msgid "GPU"
 msgstr "GPU"
 
 #: src/slurm/details/constants.ts
-#, fuzzy
+
 msgid "GPU usage"
 msgstr "GPU usage"
 
 #: src/slurm/SlurmForm.tsx src/slurm/marketplace.ts
-#, fuzzy
+
 msgid "Gateway"
 msgstr "Gateway"
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#, fuzzy
+
 msgid "Gateway IP"
 msgstr "Gateway IP"
 
 #: src/openstack/openstack-network/module.ts
 #: src/openstack/openstack-subnet/actions.ts
-#, fuzzy
+
 msgid "Gateway IP of this subnet"
 msgstr "Gateway IP برای این subnet"
 
 #: src/customer/create/customer-create-config.js
 #: src/project/ProjectDetailsDialog.tsx
-#, fuzzy
+
 msgid "General"
 msgstr "عمومی"
 
 #: src/customer/create/customer-create-config.js
-#, fuzzy
+
 msgid "General information"
 msgstr "اطلاعات عمومی"
 
 #: src/rancher/cluster/actions/KubeconfigFileAction.ts
-#, fuzzy
+
 msgid "Generate Kubeconfig file"
 msgstr "فایل Kubeconfig را تولید کنید"
 
 #: src/rancher/template/PasswordField.tsx
-#, fuzzy
+
 msgid "Generate password"
 msgstr "رمز تولید کنید"
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
-#, fuzzy
+
 msgid "Go to marketplace"
 msgstr "به marketplace بروید"
 
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
-#, fuzzy
+
 msgid "Go to my profile"
 msgstr "به پروفایل من بروید"
 
 #: src/navigation/cookies/CookiesConsent.tsx
-#, fuzzy
+
 msgid "Got it!"
 msgstr "فهمیدم!"
 
 #: src/openstack/openstack-backup/actions/EditAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
-#, fuzzy
+
 msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
 msgstr "تضمین نگه داری زمان عکس فوری VM. اگر خالی باشد. برای همیشه نگه دارید."
 
 #: src/openstack/openstack-snapshot/actions.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
-#, fuzzy
+
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr "تضمین نگه داری زمان عکس فوری. اگر خالی باشد. برای همیشه نگه دارید."
 
@@ -2940,7 +2940,7 @@ msgid "Guest OS"
 msgstr ""
 
 #: src/navigation/header/IntroButton.tsx
-#, fuzzy
+
 msgid "Guide me"
 msgstr "من را راهنمایی کنید"
 
@@ -2949,22 +2949,22 @@ msgid "Heatmap"
 msgstr ""
 
 #: src/help/routes.ts
-#, fuzzy
+
 msgid "Help"
 msgstr "کمک"
 
 #: src/help/help-list.html
-#, fuzzy
+
 msgid "Help topics"
 msgstr "موضوع های کمک کننده"
 
 #: src/issues/workspace/issue-navigation-service.js
-#, fuzzy
+
 msgid "Helpdesk"
 msgstr "Helpdesk"
 
 #: src/issues/routes.ts
-#, fuzzy
+
 msgid "Helpdesk dashboard"
 msgstr "داشبورد Helpdesk"
 
@@ -2974,37 +2974,37 @@ msgid "Home organization domain name"
 msgstr ""
 
 #: src/user/hooks/HookRemoveButton.tsx
-#, fuzzy
+
 msgid "Hook has been removed."
 msgstr "Hook، حذف شده است."
 
 #: src/user/hooks/HookRemoveDialog.tsx
-#, fuzzy
+
 msgid "Hook removal"
 msgstr "حذف Hook."
 
 #: src/resource/monitoring/ZabbixHostSummary.tsx
-#, fuzzy
+
 msgid "Host IP address"
 msgstr "Host IP address"
 
 #: src/resource/monitoring/ZabbixHostSummary.tsx
-#, fuzzy
+
 msgid "Host group name"
 msgstr "اسم گروه Host"
 
 #: src/resource/monitoring/ZabbixHostSummary.tsx
-#, fuzzy
+
 msgid "Host name"
 msgstr "نام Host"
 
 #: src/resource/monitoring/ZabbixHostSummary.tsx
-#, fuzzy
+
 msgid "Host status"
 msgstr "وضعیت Host"
 
 #: src/slurm/SlurmForm.tsx src/slurm/marketplace.ts src/vmware/VMwareForm.tsx
-#, fuzzy
+
 msgid "Hostname"
 msgstr "نام Host"
 
@@ -3017,38 +3017,38 @@ msgid "Hostname or IP address of master node"
 msgstr ""
 
 #: src/help/constants.js src/user/keys/help.js
-#, fuzzy
+
 msgid "How to generate SSH key"
 msgstr "نحوه تولید SSH key"
 
 #: src/azure/provider/help.js
-#, fuzzy
+
 msgid "How to obtain credentials for Azure provider"
 msgstr "نحوه دریافت مدارک معتبر برای تهیه کننده Azure"
 
 #: src/digitalocean/help.js
-#, fuzzy
+
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr "نحوه دریافت مدارک معتبر برای تهیه کننده DigitalOcean"
 
 #: src/form/appstore-field-tos.html src/freeipa/freeipa-account-create.html
-#, fuzzy
+
 msgid "I accept the"
 msgstr "من قبول میکنم"
 
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
-#, fuzzy
+
 msgid "ID"
 msgstr "ID"
 
 #: src/user/support/UserDetailsTable.tsx src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
-#, fuzzy
+
 msgid "ID code"
 msgstr "ID code"
 
 #: src/events/EventDetailsTable.tsx
-#, fuzzy
+
 msgid "IP address"
 msgstr "IP address"
 
@@ -3056,22 +3056,22 @@ msgstr "IP address"
 #: src/openstack/openstack-security-groups/SecurityGroupRulesList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
-#, fuzzy
+
 msgid "IP protocol"
 msgstr "IP protocol"
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
-#, fuzzy
+
 msgid "IP version"
 msgstr "IP version"
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
-#, fuzzy
+
 msgid "IPv4 address"
 msgstr "آدرسIPv4"
 
 #: src/rancher/template/CatalogTemplateList.tsx
-#, fuzzy
+
 msgid "Icon"
 msgstr "آیکون"
 
@@ -3080,12 +3080,12 @@ msgstr "آیکون"
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#, fuzzy
+
 msgid "Image"
 msgstr "تصویر"
 
 #: src/marketplace/offerings/create/ImageUploadField.tsx
-#, fuzzy
+
 msgid "Image here"
 msgstr "تصویر در اینجا"
 
@@ -3093,33 +3093,33 @@ msgstr "تصویر در اینجا"
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/analytics/ImagesList.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
-#, fuzzy
+
 msgid "Image name"
 msgstr "نام تصویر"
 
 #: src/openstack/analytics/VmTypeOverview.tsx
-#, fuzzy
+
 msgid "Images"
 msgstr "تصویرها"
 
 #: src/marketplace/resources/import/ImportButton.tsx
-#, fuzzy
+
 msgid "Import"
 msgstr "وارد کردن"
 
 #: src/marketplace/resources/import/ResourceImportButton.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
-#, fuzzy
+
 msgid "Import resource"
 msgstr "وارد کردن منبع"
 
 #: src/resource/state/constants.ts
-#, fuzzy
+
 msgid "Importing resources"
 msgstr "وارد کردن منابع"
 
 #: src/resource/monitoring/MonitoringGuide.tsx
-#, fuzzy
+
 msgid ""
 "In order to enable monitoring you should install and configure Zabbix agent "
 "on monitored virtual machine."
@@ -3128,22 +3128,22 @@ msgstr ""
 "نصب و پیکر بندی کنید."
 
 #: src/azure/provider/AzureForm.tsx
-#, fuzzy
+
 msgid "In the format of GUID"
 msgstr "در قالب GUID"
 
 #: src/user/support/UserActivateButton.tsx
-#, fuzzy
+
 msgid "Inactive user will not be able to login into the portal."
 msgstr "کاربر غیرفعال قادر به ورود به پرتال نخواهد بود."
 
 #: src/issues/types/constants.ts
-#, fuzzy
+
 msgid "Incident"
 msgstr "حادثه"
 
 #: src/issues/types/constants.ts
-#, fuzzy
+
 msgid ""
 "Incident - client issue with service usage or availability (interruptions, "
 "degradation of quality)."
@@ -3151,32 +3151,32 @@ msgstr ""
 "حادثه-client issue بااستفاده از خدمات یادر دسترس بودن(وقفه، تخریب کیفیت )"
 
 #: src/booking/components/CalendarSettings.tsx
-#, fuzzy
+
 msgid "Include weekends"
 msgstr "آخر هفته ها را شامل میشود"
 
 #: src/customer/details/CustomerErrorDialog.tsx
-#, fuzzy
+
 msgid "Incorrect organization details"
 msgstr "اطلاعات نادرست سازمان"
 
 #: src/digitalocean/DropletResizeDialog.tsx
-#, fuzzy
+
 msgid "Increase a droplet's RAM and CPU only (not the storage)."
 msgstr "فقط droplet's RAM و CPU را افزایش دهید (نه حافظه )"
 
 #: src/digitalocean/DropletResizeDialog.tsx
-#, fuzzy
+
 msgid "Increase a droplet's RAM, CPU and SSD disk."
 msgstr "droplet's RAM, CPU و SSD را افزایش دهید."
 
 #: src/issues/types/constants.ts
-#, fuzzy
+
 msgid "Informational"
 msgstr "اطلاعاتی"
 
 #: src/issues/types/constants.ts
-#, fuzzy
+
 msgid ""
 "Informational - client’s request to get or provide additional information "
 "related to a service."
@@ -3184,23 +3184,23 @@ msgstr "client’sبرای گرفتن یا تهیه اطلاعات اضافی م
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
-#, fuzzy
+
 msgid "Initial admin password"
 msgstr "رمز اولیه ادمین"
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
-#, fuzzy
+
 msgid "Initial admin username"
 msgstr "نام کاربری اولیه ادمین"
 
 #: src/azure/vm/azure-virtual-machine-config.js
-#, fuzzy
+
 msgid "Initial password"
 msgstr "رمز اولیه"
 
 #: src/azure/vm/azure-virtual-machine-config.js
-#, fuzzy
+
 msgid "Initial username"
 msgstr "نام کاربری اولیه"
 
@@ -3208,38 +3208,38 @@ msgstr "نام کاربری اولیه"
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-volume/actions/AttachAction.ts
 #: src/rancher/node/ClusterNodesList.tsx
-#, fuzzy
+
 msgid "Instance"
 msgstr "Instance"
 
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
-#, fuzzy
+
 msgid "Instance does not have any floating IPs yet."
 msgstr "Instance هنوز هیچ IPs شناوری ندارد."
 
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
-#, fuzzy
+
 msgid "Instance does not have any security groups yet."
 msgstr "Instance هنوز هیچ security groups ندارد."
 
 #: src/openstack/openstack-instance/actions/EditAction.ts
-#, fuzzy
+
 msgid "Instance has been updated."
 msgstr "Instance بروز رسانی شد."
 
 #: src/openstack/openstack-instance/actions/StartAction.ts
-#, fuzzy
+
 msgid "Instance is already active."
 msgstr "درحال حاضر Instance فعال است."
 
 #: src/openstack/openstack-instance/actions/StopAction.ts
-#, fuzzy
+
 msgid "Instance is already stopped."
 msgstr "Instance قبلا متوقف شده است."
 
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
-#, fuzzy
+
 msgid ""
 "Instance is not connected to any internal subnets yet. Please connect it to "
 "internal subnet first."
@@ -3248,18 +3248,18 @@ msgstr ""
 "وصل شوید."
 
 #: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
-#, fuzzy
+
 msgid "Instance should be OK, or erred. Please contact support."
 msgstr "Instance یا باید درست باشد یا خطا بدهد.لطفا با پشتیبانی تماس بگیرید."
 
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
-#, fuzzy
+
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 "Instance باید غیر فعال و درست باشد یا خطا بدهد.لطفا با پشتیبانی تماس بگیرید."
 
 #: src/rancher/cluster/actions/KubeconfigFileAction.ts
-#, fuzzy
+
 msgid ""
 "Instance should not be Creating, or Creation Scheduled. Please contact "
 "support."
@@ -3268,106 +3268,106 @@ msgstr ""
 "بگیرید."
 
 #: src/quotas/constants.ts
-#, fuzzy
+
 msgid "Instances count"
 msgstr "شمردن Instance"
 
 #: src/issues/comments/IssueCommentItem.tsx
-#, fuzzy
+
 msgid "Internal"
 msgstr "داخلی"
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
-#, fuzzy
+
 msgid "Internal IP"
 msgstr "IP داخلی"
 
 #: src/openstack/openstack-instance/tabs.ts
-#, fuzzy
+
 msgid "Internal IPs"
 msgstr "IPs داخلی"
 
 #: src/marketplace/offerings/InternalNameField.tsx
-#, fuzzy
+
 msgid "Internal name"
 msgstr "نام داخلی"
 
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#, fuzzy
+
 msgid "Internal network ID"
 msgstr "network ID داخلی"
 
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-network/module.ts
-#, fuzzy
+
 msgid "Internal network allocation pool"
 msgstr "اختصاص شبکه داخلی"
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-network/module.ts
-#, fuzzy
+
 msgid "Internal network mask (CIDR)"
 msgstr "network mask (CIDR) داخلی"
 
 #: src/invitations/utils.js
-#, fuzzy
+
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr "خطا سرور داخلی رخ داده است. لطفا با پشتیبانی تماس بگیرید."
 
 #: src/paypal/PaymentApprove.tsx src/paypal/PaymentCancel.tsx
-#, fuzzy
+
 msgid "Invalid URL. Unable to parse payment details."
 msgstr "URL نامعتبر.تجزیه و تحلیل جزیئات پرداخت امکان پذیر نیست."
 
 #: src/invitations/InvitationApprove.tsx
-#, fuzzy
+
 msgid "Invitation approval"
 msgstr "تایید دعوت"
 
 #: src/invitations/invitation-confirm-dialog.html
-#, fuzzy
+
 msgid "Invitation check"
 msgstr "دعوت چک شد"
 
 #: src/invitations/utils.js
-#, fuzzy
+
 msgid "Invitation could not be accepted"
 msgstr "دعوت مورد تایید نیست"
 
 #: src/invitations/invitation-confirm-dialog.html
-#, fuzzy
+
 msgid "Invitation email is:"
 msgstr "ایمیل دعوت:"
 
 #: src/invitations/InvitationApprove.tsx
-#, fuzzy
+
 msgid "Invitation has been approved."
 msgstr "دعوت تایید شده است."
 
 #: src/invitations/actions/InvitationCancelButton.tsx
-#, fuzzy
+
 msgid "Invitation has been canceled."
 msgstr "دعوت لغو شده است."
 
 #: src/invitations/actions/invitation-dialog-service.js
-#, fuzzy
+
 msgid "Invitation has been created."
 msgstr "دعوت ایجاد شده است."
 
 #: src/invitations/InvitationReject.tsx
-#, fuzzy
+
 msgid "Invitation has been rejected."
 msgstr "دعوت رد شده است."
 
 #: src/invitations/actions/InvitationSendButton.tsx
-#, fuzzy
+
 msgid "Invitation has been sent again."
 msgstr "دعوت مجدد ارسال شده است."
 
 #: src/invitations/utils.js
-#, fuzzy
+
 msgid "Invitation is not found."
 msgstr "دعوت پیدا نشد."
 
@@ -3376,95 +3376,95 @@ msgid "Invitation is not valid anymore."
 msgstr "دعوت دیگر معتبر نیست."
 
 #: src/invitations/utils.js
-#, fuzzy
+
 msgid "Invitation is not valid."
 msgstr "دعوت معتبر نیست."
 
 #: src/invitations/InvitationExpandableRow.tsx
-#, fuzzy
+
 msgid "Invitation link"
 msgstr "لینک دعوت"
 
 #: src/invitations/InvitationReject.tsx
-#, fuzzy
+
 msgid "Invitation rejection"
 msgstr "رد دعوت"
 
 #: src/auth/useAuthFeatures.ts
-#, fuzzy
+
 msgid "Invitation token is not found."
 msgstr "نشانه دعوت یافت نشد."
 
 #: src/customer/team/CustomerTeam.tsx
-#, fuzzy
+
 msgid "Invitations"
 msgstr "دعوت ها"
 
 #: src/customer/dashboard/InviteUserAction.ts
-#, fuzzy
+
 msgid "Invite team member"
 msgstr "از اعضای تیم دعوت کنید"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
 #: src/invitations/actions/invitation-dialog.html
-#, fuzzy
+
 msgid "Invite user"
 msgstr "کاربر را دعوت کنید"
 
 #: src/invoices/details/BillingDetails.tsx
-#, fuzzy
+
 msgid "Invoice"
 msgstr "فاکتور"
 
 #: src/invoices/details/InvoiceDetails.tsx
-#, fuzzy
+
 msgid "Invoice No."
 msgstr "شماره فاکتور."
 
 #: src/invoices/details/InvoiceDetails.tsx src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
-#, fuzzy
+
 msgid "Invoice date"
 msgstr "تاریخ فاکتور"
 
 #: src/invoices/events.ts
-#, fuzzy
+
 msgid "Invoice events"
 msgstr "رویدادهای فاکتور"
 
 #: src/invoices/events/invoice-events-dialog.html
-#, fuzzy
+
 msgid "Invoice events timeline"
 msgstr "جدول زمانی رویدادهای فاکتور"
 
 #: src/invoices/events.ts
-#, fuzzy
+
 msgid ""
 "Invoice for organization {customer_link} for the period of {period} has been "
 "created."
 msgstr "فاکتور برای سازمان { لینک مشتری} برای مدت{مدت}ایجاد شده است."
 
 #: src/invoices/events.ts
-#, fuzzy
+
 msgid ""
 "Invoice for organization {customer_link} for the period of {period} has been "
 "updated."
 msgstr "فاکتور برای سازمان { لینک مشتری} برای مدت{مدت} بروز رسانی شده است."
 
 #: src/invoices/events.ts
-#, fuzzy
+
 msgid ""
 "Invoice for organization {customer_name} for the period of {period} has been "
 "deleted."
 msgstr "فاکتور برای سازمان { لینک مشتری} برای مدت{مدت}ا حذف شده است."
 
 #: src/paypal/InvoiceActions.tsx
-#, fuzzy
+
 msgid "Invoice has not been sent to PayPal yet"
 msgstr "فاکتور هنوز به PayPal ارسال نشده است"
 
 #: src/invoices/list/InvoicesList.tsx src/paypal/PayPalInvoicesList.tsx
-#, fuzzy
+
 msgid "Invoice number"
 msgstr "شماره فاکتور"
 
@@ -3473,30 +3473,30 @@ msgstr "شماره فاکتور"
 #: src/marketplace/details/OrderSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#, fuzzy
+
 msgid "Invoiced to"
 msgstr "صورتحساب به"
 
 #: src/invoices/details/BillingDetails.tsx
-#, fuzzy
+
 msgid "Invoices list"
 msgstr "لیست صورتحساب"
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
-#, fuzzy
+
 msgid "Is active"
 msgstr "فعال است"
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
-#, fuzzy
+
 msgid "Is external"
 msgstr "خارجی است"
 
 #: src/digitalocean/digitalocean-droplet-config.js
-#, fuzzy
+
 msgid "Is official"
 msgstr "رسمی است"
 
@@ -3509,7 +3509,7 @@ msgid "Issue link"
 msgstr ""
 
 #: src/offering/OfferingHeader.tsx
-#, fuzzy
+
 msgid "Issue status"
 msgstr "وضعیت صدور"
 
@@ -3528,24 +3528,24 @@ msgid "Issues are trackable requests to the operator."
 msgstr ""
 
 #: src/openstack/OpenStackForm.tsx src/openstack/OpenStackTenantForm.tsx
-#, fuzzy
+
 msgid "It is used to automatically assign floating IP to your virtual machine."
 msgstr "به صورت خودکار برای اختصاص به IPشناور در ماشین مجازی استفاده میشود."
 
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/cart/ShoppingCart.tsx src/marketplace/orders/Order.tsx
-#, fuzzy
+
 msgid "Item"
 msgstr "مورد"
 
 #: src/marketplace/cart/store/effects.ts
-#, fuzzy
+
 msgid "Item has been added to shopping cart."
 msgstr "مورد به سبد خرید اضافه شده است."
 
 #: src/marketplace/cart/store/effects.ts
-#, fuzzy
+
 msgid "Item has been removed from shopping cart."
 msgstr "مورد از سبد خرید حذف شده است."
 
@@ -3554,28 +3554,28 @@ msgid "JIRA host (e.g. https://jira.example.com/)"
 msgstr ""
 
 #: src/jira/JiraForm.tsx
-#, fuzzy
+
 msgid "JIRA user with excessive privileges"
 msgstr "کاربر JIRA با امتیازات بالا"
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx src/user/support/UserEditForm.tsx
-#, fuzzy
+
 msgid "Job position"
 msgstr "موقعیت شغلی"
 
 #: src/invitations/actions/invitation-dialog.html
-#, fuzzy
+
 msgid "Job title"
 msgstr "عنوان شغلی"
 
 #: src/resource/utils.tsx
-#, fuzzy
+
 msgid "Keep forever"
 msgstr "برای همیشه نگه دارید"
 
 #: src/openstack/openstack-backup/BackupsList.tsx
-#, fuzzy
+
 msgid "Keep until"
 msgstr "نگه دارید تا"
 
@@ -3583,7 +3583,7 @@ msgstr "نگه دارید تا"
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: src/openstack/openstack-snapshot/actions.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
-#, fuzzy
+
 msgid "Kept until"
 msgstr "نگه داشته شده تا"
 
@@ -3615,7 +3615,7 @@ msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr ""
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
-#, fuzzy
+
 msgid "Kubeconfig file"
 msgstr "فایل Kubeconfig"
 
@@ -3628,17 +3628,17 @@ msgid "Kubernetes nodes"
 msgstr ""
 
 #: src/rancher/node/RancherNodeSummary.tsx
-#, fuzzy
+
 msgid "Kubernetes version"
 msgstr "ورژن Kubernetes"
 
 #: src/marketplace/offerings/DisplayNameField.tsx
-#, fuzzy
+
 msgid "Label that is visible to users in Marketplace."
 msgstr "برچسب قابل مشاهده برای کاربران در Marketplace."
 
 #: src/rancher/node/RancherNodeSummary.tsx
-#, fuzzy
+
 msgid "Labels"
 msgstr "برچسب ها"
 
@@ -3647,69 +3647,69 @@ msgid "Latvian"
 msgstr ""
 
 #: src/navigation/cookies/CookiesConsent.tsx
-#, fuzzy
+
 msgid "Learn more"
 msgstr "بیشتر بدانید"
 
 #: src/openstack/OpenStackPackageForm.tsx
-#, fuzzy
+
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr "اگر میخواهید رمز مدیر به صورت خودکار تولید شود، خالی بگذارید."
 
 #: src/openstack/OpenStackPackageForm.tsx
-#, fuzzy
+
 msgid "Leave blank if you want admin username to be auto-generated."
 msgstr "اگر میخواهید نام کاربری مدیر به صورت خودکار تولید شود، خالی بگذارید."
 
 #: src/customer/popover/CustomerSummary.tsx
-#, fuzzy
+
 msgid "Legal address"
 msgstr "آدرس قانونی"
 
 #: src/user/support/UserEditForm.tsx
-#, fuzzy
+
 msgid "Let’s get started"
 msgstr "بیا شروع کنیم"
 
 #: src/user/support/TokenLifetimeField.tsx
-#, fuzzy
+
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "پس از ذخیره فرم، طول عمر بروزرسانی و تنظیم مجدد میشود."
 
 #: src/dashboard/chart.ts src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#, fuzzy
+
 msgid "Limit"
 msgstr "محدود"
 
 #: src/marketplace/offerings/create/ComponentLimitAmountField.tsx
-#, fuzzy
+
 msgid "Limit amount"
 msgstr "مقدار محدود"
 
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
-#, fuzzy
+
 msgid "Limit period"
 msgstr "دوره محدود"
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#, fuzzy
+
 msgid "Limits"
 msgstr "محدودیت ها"
 
 #: src/marketplace/offerings/create/AccountingSummary.tsx
-#, fuzzy
+
 msgid "Limits are invalid."
 msgstr "محدودیت نا معتبر است."
 
 #: src/issues/IssueDetails.tsx src/rancher/cluster/ApplicationDetailsDialog.tsx
-#, fuzzy
+
 msgid "Link"
 msgstr "لینک"
 
 #: src/rancher/node/actions/LinkAction.ts
-#, fuzzy
+
 msgid "Link OpenStack Instance"
 msgstr "لینک  OpenStack Instance"
 
@@ -3718,362 +3718,361 @@ msgid "Lithuanian"
 msgstr ""
 
 #: src/customer/list/TotalCostComponent.tsx
-#, fuzzy
+
 msgid "Loading"
 msgstr "بارگذاری"
 
 #: src/resource/actions/ResourceActionComponent.tsx
-#, fuzzy
+
 msgid "Loading actions"
 msgstr "اعمال بارگیری"
 
 #: src/azure/AzureResourceSummary.tsx src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#, fuzzy
+
 msgid "Location"
 msgstr "مکان"
 
 #: src/navigation/header/LogoutLink.tsx src/navigation/header/site-header.html
 #: src/user/UserDropdownMenu.tsx
-#, fuzzy
 msgid "Log out"
 msgstr "خروج"
 
 #: src/auth/callbacks/AuthLoginCompleted.tsx
-#, fuzzy
+
 msgid "Logging user in"
 msgstr "ورود کاربر"
 
 #: src/auth/SigninButton.tsx src/auth/SigninForm.tsx
 #: src/auth/saml2/AuthSaml2Dialog.tsx
-#, fuzzy
+
 msgid "Login"
 msgstr "ورود"
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
-#, fuzzy
+
 msgid "Login details"
 msgstr "جزییات ورود"
 
 #: src/auth/callbacks/AuthLoginFailed.tsx
-#, fuzzy
+
 msgid "Login failed"
 msgstr "ورود ناموفق"
 
 #: src/customer/create/customer-create-config.js
-#, fuzzy
+
 msgid "Logo"
 msgstr "آرم"
 
 #: src/customer/details/store/effects.ts
-#, fuzzy
+
 msgid "Logo has been removed."
 msgstr "آرم حذف شده است."
 
 #: src/customer/details/store/effects.ts
-#, fuzzy
+
 msgid "Logo has been uploaded."
 msgstr "آرم بارگذاری شده است."
 
 #: src/auth/callbacks/AuthLogoutFailed.tsx
-#, fuzzy
+
 msgid "Logout failed"
 msgstr "خروج نا موفق"
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/vmware/PortsList.tsx src/vmware/VMwarePortSummary.tsx
-#, fuzzy
+
 msgid "MAC address"
 msgstr "آدرس MAC"
 
 #: src/slurm/register-header.ts
-#, fuzzy
+
 msgid "MOAB allocation"
 msgstr "تخصیص MOAB"
 
 #: src/customer/workspace/utils.ts src/user/constants.ts
 #: src/user/support/UserDetailsView.tsx src/user/tabs.js
-#, fuzzy
+
 msgid "Manage"
 msgstr "مدیریت کنید"
 
 #: src/user/support/UserEditContainer.tsx
-#, fuzzy
+
 msgid "Manage at"
 msgstr "مدیریت در"
 
 #: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
-#, fuzzy
+
 msgid "Manage networks"
 msgstr "مدیریت شبکه"
 
 #: src/customer/routes.ts
-#, fuzzy
+
 msgid "Manage organization"
 msgstr "مدیریت سازمان"
 
 #: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
-#, fuzzy
+
 msgid "Manage security groups"
 msgstr "مدیریت security groups"
 
 #: src/user/list/UserDashboard.tsx
-#, fuzzy
+
 msgid "Managed projects"
 msgstr "پروژه های مدیریت شده"
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
-#, fuzzy
+
 msgid "Management"
 msgstr "مدیریت"
 
 #: src/customer/team/CustomerUsersList.tsx
-#, fuzzy
+
 msgid "Manager in:"
 msgstr "مدیر در:"
 
 #: src/marketplace/details/utils.ts src/marketplace/routes.ts
 #: src/marketplace/sidebar.ts
-#, fuzzy
+
 msgid "Marketplace"
 msgstr "Marketplace"
 
 #: src/marketplace/routes.ts
-#, fuzzy
+
 msgid "Marketplace checkout"
 msgstr "وارسی Marketplace"
 
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
-#, fuzzy
+
 msgid "Marketplace offering does not have any usage-based components."
 msgstr "پیشنهاد Marketplace هیچ استفاده ای ندارد-براساس components."
 
 #: src/marketplace/routes.ts
-#, fuzzy
+
 msgid "Marketplace offerings"
 msgstr "پیشنهادMarketplace"
 
 #: src/customer/details/CustomerMarketplacePanel.tsx
-#, fuzzy
+
 msgid "Marketplace service provider"
 msgstr "ارائه دهنده سرویس Marketplace"
 
 #: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
-#, fuzzy
+
 msgid "Max # of VM snapshots"
 msgstr "حداکثر # از VM snapshots"
 
 #: src/openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx
-#, fuzzy
+
 msgid "Max # of snapshots"
 msgstr "حداکثر # از عکس فوری"
 
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
-#, fuzzy
+
 msgid "Max amount"
 msgstr "حداکثر مقدار"
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
-#, fuzzy
+
 msgid "Max number of VM snapshots"
 msgstr "حداکثر تعداد از VM snapshots"
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
-#, fuzzy
+
 msgid "Maximal number of resources"
 msgstr "حداکثر تعداد از منابع"
 
 #: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
-#, fuzzy
+
 msgid "Maximal valid value is"
 msgstr "حداکثر مقدار معتبر"
 
 #: src/marketplace/offerings/option/OptionForm.tsx
-#, fuzzy
+
 msgid "Maximal value"
 msgstr "حداکثر مقدار"
 
 #: src/vmware/VMwareForm.tsx
-#, fuzzy
+
 msgid "Maximum RAM for each VM"
 msgstr "حداکثر RAM برای هر VM"
 
 #: src/marketplace/offerings/create/ComponentMaxValueField.tsx
-#, fuzzy
+
 msgid "Maximum allowed value"
 msgstr "حداکثر مقدار مجاز"
 
 #: src/vmware/VMwareForm.tsx
-#, fuzzy
+
 msgid "Maximum capacity for each disk"
 msgstr "حداکثر ظرفیت برای هر disk"
 
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
-#, fuzzy
+
 msgid "Maximum monthly"
 msgstr "حداکثر ماهانه"
 
 #: src/marketplace/offerings/create/ComponentLimitPeriodField.tsx
-#, fuzzy
+
 msgid "Maximum total"
 msgstr "حداکثر کل"
 
 #: src/vmware/VMwareForm.tsx
-#, fuzzy
+
 msgid "Maximum total size of the disk space per VM"
 msgstr "حداکثر اندازه کل از فضای دیسک هر VM"
 
 #: src/freeipa/freeipa-account-create.html
-#, fuzzy
+
 msgid ""
 "Maximum username length with mandatory username prefix is 32 characters."
 msgstr ""
 "حداکثر طول نام کاربری با پیشوند نام کاربری prefix،باید 32 کاراکتر باشد."
 
 #: src/vmware/VMwareForm.tsx
-#, fuzzy
+
 msgid "Maximum vCPU for each VM"
 msgstr "حداکثر vCPU برای هر"
 
 #: src/marketplace/offerings/create/ComponentMeasuredUnitField.tsx
-#, fuzzy
+
 msgid "Measured unit"
 msgstr "واحد اندازه گیری"
 
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#, fuzzy
+
 msgid "Member"
 msgstr "عضو"
 
 #: src/azure/sql/AzureSQLServerSummary.tsx
-#, fuzzy
+
 msgid "Memory per vCore"
 msgstr "حافظه برای هر vCore"
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#, fuzzy
+
 msgid "Memory size in GiB"
 msgstr "اندازه حافظه در GiB"
 
 #: src/events/BaseEventsList.tsx src/events/EventDetailsTable.tsx
-#, fuzzy
+
 msgid "Message"
 msgstr "پیغام"
 
 #: src/user/hooks/HooksList.tsx
-#, fuzzy
+
 msgid "Method"
 msgstr "روش"
 
 #: src/providers/support/FlowMapFilter.tsx
-#, fuzzy
+
 msgid "Metric"
 msgstr "Metric"
 
 #: src/openstack/openstack-instance/ImageGroup.tsx
-#, fuzzy
+
 msgid "Min RAM"
 msgstr "حداقل RAM"
 
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
-#, fuzzy
+
 msgid "Min amount"
 msgstr "مقدار حداقل"
 
 #: src/openstack/openstack-instance/ImageGroup.tsx
-#, fuzzy
+
 msgid "Min storage"
 msgstr "حداقل storage"
 
 #: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
-#, fuzzy
+
 msgid "Minimal valid value is"
 msgstr "حداقل مقدار معتبر"
 
 #: src/customer/details/customer-threshold.html
-#, fuzzy
+
 msgid "Minimal valid value is 0"
 msgstr "حداقل مقدار معتبر 0 است"
 
 #: src/marketplace/offerings/option/OptionForm.tsx
-#, fuzzy
+
 msgid "Minimal value"
 msgstr "حداقل مقدار"
 
 #: src/marketplace/offerings/create/ComponentMinValueField.tsx
-#, fuzzy
+
 msgid "Minimum allowed value"
 msgstr "حداقل مقدار مجاز"
 
 #: src/booking/components/CalendarSettings.tsx
-#, fuzzy
+
 msgid "Minimum booking time slot duration."
 msgstr "حداقل مدت زمان رزرو slot."
 
 #: src/auth/valimo/auth-valimo-dialog.html
-#, fuzzy
+
 msgid "Mobile phone number"
 msgstr "شماره تلفن همراه"
 
 #: src/resource/monitoring/ZabbixHostField.tsx
-#, fuzzy
+
 msgid "Monitoring"
 msgstr "نظارت"
 
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
-#, fuzzy
+
 msgid "Monitoring details"
 msgstr "نظارت بر جزییات"
 
 #: src/resource/monitoring/ZabbixHostStateButton.tsx
-#, fuzzy
+
 msgid "Monitoring system has failed."
 msgstr "نظارت بر سیستم نا موفق است."
 
 #: src/resource/monitoring/ZabbixHostStateButton.tsx
-#, fuzzy
+
 msgid "Monitoring system is being deleted."
 msgstr "سیستم نظارت در حال حذف است."
 
 #: src/resource/monitoring/ZabbixHostStateButton.tsx
-#, fuzzy
+
 msgid "Monitoring system is being provisioned."
 msgstr "سیستم نظارت در حال تهیه است."
 
 #: src/resource/monitoring/ZabbixHostStateButton.tsx
-#, fuzzy
+
 msgid "Monitoring system is being updated."
 msgstr "سیستم نظارت در حال بروز رسانی است."
 
 #: src/booking/components/calendar/defaultConfig.ts
 #: src/providers/support/FlowMapFilter.tsx
-#, fuzzy
+
 msgid "Month"
 msgstr "ماه"
 
 #: src/quotas/constants.ts
-#, fuzzy
+
 msgid "Monthly cost"
 msgstr "هزینه ماهانه"
 
 #: src/customer/payment-profiles/utils.ts
-#, fuzzy
+
 msgid "Monthly invoices"
 msgstr "صورتحساب ماهانه"
 
 #: src/booking/components/calendar/defaultConfig.ts
-#, fuzzy
+
 msgid "More"
 msgstr "بیشتر"
 
 #: src/invoices/events/invoice-events-dialog.html
-#, fuzzy
+
 msgid "More info"
 msgstr "اطلاعات بیشتر"
 
@@ -4082,32 +4081,32 @@ msgid "Mount point"
 msgstr ""
 
 #: src/configs/base-config.js
-#, fuzzy
+
 msgid "Must start with a country prefix ie EE34501234215"
 msgstr "باید با کشور prefix شروع شود مثل EE34501234215"
 
 #: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/routes.ts src/marketplace/sidebar.ts
-#, fuzzy
+
 msgid "My offerings"
 msgstr "پیشنهادات من"
 
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/routes.ts src/marketplace/sidebar.ts
-#, fuzzy
+
 msgid "My orders"
 msgstr "دستورات من"
 
 #: src/marketplace/routes.ts src/marketplace/sidebar.ts
-#, fuzzy
+
 msgid "My resources"
 msgstr "منابع من"
 
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/sidebar.ts
-#, fuzzy
+
 msgid "My services"
 msgstr "سرویس های من"
 
@@ -4166,7 +4165,7 @@ msgstr "سرویس های من"
 #: src/resource/actions/constants.js
 #: src/resource/support/SharedProviderResources.tsx src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx src/vmware/VMwareVirtualMachineForm.tsx
-#, fuzzy
+
 msgid "Name"
 msgstr "نام"
 
@@ -4181,17 +4180,17 @@ msgid "Name \"{label}\" must not start or end with a hyphen"
 msgstr ""
 
 #: src/project/ProjectNameField.tsx
-#, fuzzy
+
 msgid "Name contains invalid symbols."
 msgstr "نام شامل علائم نا معتبر است."
 
 #: src/project/ProjectNameField.tsx
-#, fuzzy
+
 msgid "Name is duplicated. Choose other name."
 msgstr "نام تکراری است .اسم دیگری انتخاب کنید."
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#, fuzzy
+
 msgid "Name is not valid."
 msgstr "نام معتبر نیست."
 
@@ -4200,7 +4199,7 @@ msgid "Name is required field."
 msgstr ""
 
 #: src/core/validators.ts
-#, fuzzy
+
 msgid ""
 "Name is too short, names should be at least two alphanumeric characters."
 msgstr "نام بسیار کوتاه است، اسم ها باید حداقل دو حرف الفبا داشته باشند."
@@ -4216,27 +4215,27 @@ msgid "Name must consist of lower case alphanumeric characters."
 msgstr ""
 
 #: src/customer/create/customer-create-config.js
-#, fuzzy
+
 msgid "Name of your organization."
 msgstr "اسم سازمان شما."
 
 #: src/core/validators.ts
-#, fuzzy
+
 msgid "Name should consist of latin symbols and numbers."
 msgstr "نام باید شامل اعداد و نماد ها باشد."
 
 #: src/project/ProjectNameField.tsx
-#, fuzzy
+
 msgid "Name should contain at least 3 symbols."
 msgstr "نام باید حداقل شامل 3 نماد باشد."
 
 #: src/rancher/template/NamespaceField.tsx
-#, fuzzy
+
 msgid "Namespace"
 msgstr "فضای نام"
 
 #: src/rancher/template/NamespaceField.tsx
-#, fuzzy
+
 msgid "Namespace should be unique."
 msgstr "فضای نام باید منحصر به فرد باشد."
 
@@ -4246,18 +4245,18 @@ msgstr "فضای نام باید منحصر به فرد باشد."
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/user/support/UserDetailsTable.tsx src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
-#, fuzzy
+
 msgid "Native name"
 msgstr "اسم بومی"
 
 #: src/marketplace-checklist/PieChart.tsx
-#, fuzzy
+
 msgid "Negative"
 msgstr "منفی"
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/vmware/PortsList.tsx src/vmware/VMwarePortSummary.tsx
-#, fuzzy
+
 msgid "Network"
 msgstr "شبکه"
 
@@ -4266,7 +4265,7 @@ msgid "Network adapters"
 msgstr ""
 
 #: src/openstack/openstack-network/module.ts
-#, fuzzy
+
 msgid "Network has been updated."
 msgstr "شبکه بروز رسانی شده است."
 
@@ -4276,46 +4275,46 @@ msgstr "شبکه بروز رسانی شده است."
 #: src/openstack/openstack-subnet/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#, fuzzy
+
 msgid "Networks"
 msgstr "شبکه ها"
 
 #: src/user/support/EmailChangeForm.tsx
-#, fuzzy
+
 msgid "New e-mail address"
 msgstr "آدرس ایمیل جدید"
 
 #: src/user/support/UserEmailChangeDialog.tsx
-#, fuzzy
+
 msgid "New email"
 msgstr "ایمیل جدید"
 
 #: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
-#, fuzzy
+
 msgid "New flavor"
 msgstr "flavor جدید"
 
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#, fuzzy
+
 msgid "New limit"
 msgstr "محدودیت جدید"
 
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/change-plan/ChangePlanComponent.tsx
-#, fuzzy
+
 msgid "New plan"
 msgstr "برنامه جدید"
 
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
-#, fuzzy
+
 msgid "New size"
 msgstr "اندازه جدید"
 
 #: src/form/appstore-form-wizard.html
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/table-react/TablePagination.tsx
-#, fuzzy
+
 msgid "Next"
 msgstr "بعدی"
 
@@ -4327,85 +4326,85 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/resource/summary/ScheduleSummary.tsx
-#, fuzzy
+
 msgid "No"
 msgstr "خیر"
 
 #: src/resource/summary/ResourceAccessInfo.tsx
-#, fuzzy
+
 msgid "No access info"
 msgstr "دسترسی اطلاعات ندارد"
 
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#, fuzzy
+
 msgid "No access info."
 msgstr "دسترسی اطلاعات ندارد."
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
-#, fuzzy
+
 msgid "No entries to show here"
 msgstr "اینجا هیچ ورودی جهت نمایش وجود ندارد"
 
 #: src/customer/team/ProjectRolesList.tsx
-#, fuzzy
+
 msgid "No projects are assigned to this role."
 msgstr "هیچ پروژه ای برای این الگو اختصاص نگرفته است."
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx src/form-react/AsyncSelectField.tsx
-#, fuzzy
+
 msgid "No results found"
 msgstr "نتیجه ای یافت نشد"
 
 #: src/invitations/invitation-confirm-dialog.html
-#, fuzzy
+
 msgid "No, continue using current email"
 msgstr "خیر،به استفاده از ایمیل فعلی ادامه دهید"
 
 #: src/rancher/node/ClusterNodesList.tsx
-#, fuzzy
+
 msgid "Node"
 msgstr "Node"
 
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
-#, fuzzy
+
 msgid "Node has been created."
 msgstr "Node ایجاد شده است."
 
 #: src/rancher/cluster/create/NodeAddButton.tsx
-#, fuzzy
+
 msgid "Node plan"
 msgstr "برنامه Node"
 
 #: src/rancher/cluster/create/TenantGroup.tsx src/rancher/cluster/tabs.ts
 #: src/rancher/node/breadcrumbs.ts
-#, fuzzy
+
 msgid "Nodes"
 msgstr "Nodes"
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
-#, fuzzy
+
 msgid "Not a service provider."
 msgstr "یک ارائه دهنده خدمات نیست."
 
 #: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
-#, fuzzy
+
 msgid "Not a valid value"
 msgstr "یک مقدار معتبر نیست"
 
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
-#, fuzzy
+
 msgid "Not assigned"
 msgstr "اختصاص داده نشده"
 
 #: src/customer/list/AccountingRunningField.tsx
-#, fuzzy
+
 msgid "Not running accounting"
 msgstr "عدم اجرای حسابداری"
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
-#, fuzzy
+
 msgid ""
 "Note that this virtual machine will not be charged separately for "
 "{organization}."
@@ -4414,54 +4413,54 @@ msgstr ""
 "نخواهد شد."
 
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#, fuzzy
+
 msgid ""
 "Note that this volume will not be charged separately for {organization}."
 msgstr ""
 "توجه داشته باشید این volume به صورت جداگانه برای { سازمان } شارژ نخواهد شد."
 
 #: src/marketplace/offerings/OfferingsListTablePlaceholder.tsx
-#, fuzzy
+
 msgid "Nothing to see here"
 msgstr "اینجا چیزی جهت مشاهده نیست"
 
 #: src/marketplace/resources/list/CustomerResourcesListPlaceholder.tsx
-#, fuzzy
+
 msgid "Nothing to show here"
 msgstr "اینجا چیزی جهت نمایش نیست"
 
 #: src/user/hooks/utils.ts
-#, fuzzy
+
 msgid "Notification has been created."
 msgstr "اعلان ایجاد شده است."
 
 #: src/user/hooks/utils.ts
-#, fuzzy
+
 msgid "Notification has been updated."
 msgstr "اعلان به روز شده است."
 
 #: src/user/hooks/HookForm.tsx
-#, fuzzy
+
 msgid "Notification method"
 msgstr "روش اطلاع رسانی"
 
 #: src/invoices/list/SendNotificationButton.tsx
-#, fuzzy
+
 msgid "Notification only for the created invoice can be sent."
 msgstr "اعلان فقط برای فاکتور ایجاد شده می تواند ارسال شود."
 
 #: src/user/constants.ts src/user/hooks/HooksList.tsx src/user/tabs.js
-#, fuzzy
+
 msgid "Notifications"
 msgstr "اعلان ها"
 
 #: src/user/hooks/HookListTablePlaceholder.tsx
-#, fuzzy
+
 msgid "Notifications allow to be informed when a certain event has occurred."
 msgstr "زمانی که رویداد مشخصی رخ دهد اعلان ها مجاز به اطلاع رسانی هستند."
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#, fuzzy
+
 msgid "Number of CPU cores per socket"
 msgstr "تعدادی از هسته های CPU برای هر socket"
 
@@ -4474,13 +4473,13 @@ msgid "Number of control plane nodes"
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
-#, fuzzy
+
 msgid "Number of cores in a VM"
 msgstr "تعدادی از هسته ها در VM"
 
 #: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/ImagesList.tsx
-#, fuzzy
+
 msgid "Number of created instances"
 msgstr "تعدادی از instance های ایجاد شده"
 
@@ -4490,7 +4489,7 @@ msgstr ""
 
 #: src/openstack/analytics/FlavorsList.tsx
 #: src/openstack/analytics/ImagesList.tsx
-#, fuzzy
+
 msgid "Number of running instances"
 msgstr "تعدادی از instance های دز حال اجرا"
 
@@ -4499,12 +4498,12 @@ msgid "Number of worker nodes"
 msgstr ""
 
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#, fuzzy
+
 msgid "OK"
 msgstr "باشه"
 
 #: src/error/routes.ts
-#, fuzzy
+
 msgid "Object is not found."
 msgstr "شیء یافت نشد."
 
@@ -4518,12 +4517,12 @@ msgstr "شیء یافت نشد."
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/project/ProjectResourcesList.tsx
-#, fuzzy
+
 msgid "Offering"
 msgstr "پیشنهاد"
 
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
-#, fuzzy
+
 msgid "Offering components"
 msgstr "ارائه components"
 
@@ -4531,75 +4530,75 @@ msgstr "ارائه components"
 #: src/marketplace/offerings/details/OfferingDetailsButton.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/routes.ts
-#, fuzzy
+
 msgid "Offering details"
 msgstr "ارائه جزییات"
 
 #: src/marketplace/offerings/OfferingScreenshotsListTablePlaceholder.tsx
-#, fuzzy
+
 msgid "Offering doesn't have screenshots."
 msgstr "پیشنهاد عکس فوری ندارد."
 
 #: src/offering/events.ts
-#, fuzzy
+
 msgid "Offering events"
 msgstr "پیشنهاد رویداد"
 
 #: src/marketplace/offerings/store/effects.ts
-#, fuzzy
+
 msgid "Offering has been created."
 msgstr "پیشنهاد ایجاد شده است."
 
 #: src/marketplace/offerings/store/effects.ts
-#, fuzzy
+
 msgid "Offering has been updated."
 msgstr "پیشنهاد بروز رسانی شده است."
 
 #: src/marketplace/offerings/create/ReviewStep.tsx
-#, fuzzy
+
 msgid "Offering is not configured yet."
 msgstr "پیشنهاد هنوز پیکر بندی نشده است."
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
-#, fuzzy
+
 msgid "Offering logo"
 msgstr "آرم پیشنهادی"
 
 #: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
-#, fuzzy
+
 msgid "Offering screenshots ({name})"
 msgstr "ارائه عکس فوری"
 
 #: src/marketplace/offerings/store/effects.ts
-#, fuzzy
+
 msgid "Offering state has been updated."
 msgstr "حالت پیشنهادی بروز رسانی شده است."
 
 #: src/offering/events.ts
-#, fuzzy
+
 msgid "Offering state has changed to {offering_state}."
 msgstr "حالت پیشنهادی تغییر پیدا کرده به {{offering_state}."
 
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#, fuzzy
+
 msgid "Offering type"
 msgstr "نوع پیشنهاد"
 
 #: src/offering/events.ts
-#, fuzzy
+
 msgid "Offering {offering_link} has been created."
 msgstr "پیشنهاد { لینک _پیشنهادی } ایجاد شده است."
 
 #: src/offering/events.ts
-#, fuzzy
+
 msgid "Offering {offering_name} has been deleted."
 msgstr "پیشنهاد { لینک _پیشنهادی } حذف شده است."
 
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
-#, fuzzy
+
 msgid "Offerings"
 msgstr "پیشنهادات"
 
@@ -4608,47 +4607,47 @@ msgid "Offerings screenshots"
 msgstr ""
 
 #: src/intro/base-intro.js
-#, fuzzy
+
 msgid "Ok, what's next?"
 msgstr "باشه، بعدی چیست؟"
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
-#, fuzzy
+
 msgid "One-time"
 msgstr "یکبار"
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
-#, fuzzy
+
 msgid "One-time on plan switch"
 msgstr "یکبار در  plan switch"
 
 #: src/invitations/actions/InvitationCreateButton.tsx
-#, fuzzy
+
 msgid "Only customer owner or staff can invite users."
 msgstr "فقط صاحب مشتری یا کارمند میتواند کاربر دعوت کند."
 
 #: src/invitations/actions/InvitationSendButton.tsx
-#, fuzzy
+
 msgid "Only pending and expired invitations can be sent again."
 msgstr "فقط دعوت های تاریخ گذشته یا منتظر ارسال میتوانند مجدد ارسال شوند."
 
 #: src/invitations/actions/InvitationCancelButton.tsx
-#, fuzzy
+
 msgid "Only pending invitation can be canceled."
 msgstr "فقط دعوت های منتظر ارسال را میتوان لغو کرد."
 
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
-#, fuzzy
+
 msgid "Only staff and organization users are allowed to open console."
 msgstr "فقط کارمندان و کاربران سازمان، مجاز به باز کردن console هستند."
 
 #: src/openstack/openstack-tenant/actions/utils.ts
-#, fuzzy
+
 msgid "Only staff can manage OpenStack tenant."
 msgstr "فقط کارمندان میتوانند OpenStack tenant را مدیریت کنند."
 
 #: src/customer/details/CustomerRemovePanel.tsx
-#, fuzzy
+
 msgid "Only staff can remove organization."
 msgstr "فقط کارمندان میتوانند سازمان را حذف کنند."
 
@@ -4660,13 +4659,13 @@ msgstr ""
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/ApplicationDetailsDialog.tsx
 #: src/resource/summary/ResourceAccessInfo.tsx
-#, fuzzy
+
 msgid "Open"
 msgstr "باز"
 
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
 #: src/vmware/actions.ts
-#, fuzzy
+
 msgid "Open console"
 msgstr "console را باز کنید"
 
@@ -4675,58 +4674,58 @@ msgid "Open in Service Desk"
 msgstr ""
 
 #: src/dashboard/SupportPortalAction.ts
-#, fuzzy
+
 msgid "Open support portal"
 msgstr "پشیتبانی پرتال را بازکنید"
 
 #: src/openstack/analytics/ImagesList.tsx
-#, fuzzy
+
 msgid "OpenStack Images"
 msgstr "تصویر های OpenStack"
 
 #: src/rancher/node/RancherNodeSummary.tsx
-#, fuzzy
+
 msgid "OpenStack Instance"
 msgstr "OpenStack Instance"
 
 #: src/openstack/events.ts
-#, fuzzy
+
 msgid "OpenStack events"
 msgstr "رویدادهای OpenStack"
 
 #: src/openstack/openstack-instance/marketplace.ts
 #: src/rancher/node/actions/LinkAction.ts
-#, fuzzy
+
 msgid "OpenStack instance"
 msgstr "OpenStack instance"
 
 #: src/openstack/marketplace.ts
-#, fuzzy
+
 msgid "OpenStack package"
 msgstr "بسته OpenStack"
 
 #: src/openstack/events.ts
-#, fuzzy
+
 msgid "OpenStack package {tenant_link} has been created."
 msgstr "بسته OpenStack ایجاد شده است."
 
 #: src/openstack/events.ts
-#, fuzzy
+
 msgid "OpenStack package {tenant_name} has been deleted."
 msgstr "بسته OpenStack حذف شده است."
 
 #: src/openstack/openstack-volume/marketplace.ts
-#, fuzzy
+
 msgid "OpenStack volume"
 msgstr "OpenStack volume"
 
 #: src/issues/list/IssueRow.tsx
-#, fuzzy
+
 msgid "Opened by"
 msgstr "باز شده توسط"
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
-#, fuzzy
+
 msgid "Options are invalid."
 msgstr "گزینه ها نا معتبر است."
 
@@ -4735,28 +4734,28 @@ msgid "Or use social login"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
-#, fuzzy
+
 msgid "Order Summary"
 msgstr "خلاصه سفارش"
 
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/routes.ts
-#, fuzzy
+
 msgid "Order details"
 msgstr "جزییات سفارش"
 
 #: src/marketplace/orders/store/effects.ts
-#, fuzzy
+
 msgid "Order has been approved."
 msgstr "سفارش تایید شده است."
 
 #: src/marketplace/orders/store/effects.ts
-#, fuzzy
+
 msgid "Order has been rejected."
 msgstr "سفارش رد شده است."
 
 #: src/marketplace/cart/store/effects.ts
-#, fuzzy
+
 msgid "Order has been submitted."
 msgstr "سفارش ارسال شده است."
 
@@ -4772,19 +4771,19 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/ResourceTabs.tsx src/offering/OfferingTabs.tsx
 #: src/resource/tabs/constants.ts
-#, fuzzy
+
 msgid "Order items"
 msgstr "سفارش مورد"
 
 #: src/marketplace/cart/ShoppingCartItemUpdate.tsx
 #: src/marketplace/details/OfferingDetails.tsx
-#, fuzzy
+
 msgid "Order summary"
 msgstr "خلاصه سفارش"
 
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/orders/OrdersList.tsx src/marketplace/routes.ts
-#, fuzzy
+
 msgid "Orders"
 msgstr "سفارش ها"
 
@@ -4798,89 +4797,89 @@ msgstr "سفارش ها"
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/list/ProjectPermissions.tsx src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx src/user/support/UserList.tsx
-#, fuzzy
+
 msgid "Organization"
 msgstr "سازمان"
 
 #: src/customer/details/CustomerActionsPanel.tsx
-#, fuzzy
+
 msgid "Organization actions"
 msgstr "فعالیت سازمان"
 
 #: src/customer/details/CustomerRemovePanel.tsx
-#, fuzzy
+
 msgid "Organization contains invoices. Please remove them first."
 msgstr "سازمان شامل صورتحساب ها است.لطفا ابتدا آنها را حذف کنید."
 
 #: src/customer/details/CustomerRemovePanel.tsx
-#, fuzzy
+
 msgid "Organization contains projects. Please remove them first."
 msgstr "سازمان شامل پروژه ها است.لطفا ابتدا آنها را حذف کنید."
 
 #: src/customer/details/CustomerDetailsPanel.tsx
-#, fuzzy
+
 msgid "Organization details"
 msgstr "جزییات سازمان"
 
 #: src/customer/events.ts src/customer/workspace/CustomerEventsFilter.tsx
-#, fuzzy
+
 msgid "Organization events"
 msgstr "رویدادهای سازمان"
 
 #: src/customer/create/customer-create-dialog.js
-#, fuzzy
+
 msgid "Organization has been created."
 msgstr "سازمان ایجاد شده است."
 
 #: src/invoices/list/AgreementInfo.tsx
-#, fuzzy
+
 msgid "Organization has signed a fixed price agreement"
 msgstr "سازمان توافق نامه قیمت ثابت را امضا کرده است"
 
 #: src/user/list/CustomerPermissions.tsx src/user/support/UserEditForm.tsx
-#, fuzzy
+
 msgid "Organization name"
 msgstr "نام سازمان"
 
 #: src/configs/base-config.js
-#, fuzzy
+
 msgid "Organization owner"
 msgstr "صاحب سازمان"
 
 #: src/customer/team/add-team-member.html
-#, fuzzy
+
 msgid "Organization owner role expires on"
 msgstr "نقش صاحب سازمان منقضی شده است در"
 
 #: src/customer/details/customer-policies.js
-#, fuzzy
+
 msgid "Organization policies have been updated."
 msgstr "قوانین سازمان بروز رسانی شده است."
 
 #: src/customer/create/customer-create-config.js
-#, fuzzy
+
 msgid "Organization registration code"
 msgstr "کد ثبت نام سازمان"
 
 #: src/customer/details/CustomerRemovePanel.tsx
-#, fuzzy
+
 msgid "Organization removal"
 msgstr "حذف سازمان"
 
 #: src/user/support/UserList.tsx
-#, fuzzy
+
 msgid "Organization roles"
 msgstr "نقش سازمان"
 
 #: src/customer/create/customer-create-config.js
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/popover/CustomerSummary.tsx
-#, fuzzy
+
 msgid "Organization type"
 msgstr "نوع سازمان"
 
 #: src/customer/popover/CustomerPopover.tsx
-#, fuzzy
+
 msgid "Organization users list"
 msgstr "لیست کاربران سازمان"
 
@@ -4891,59 +4890,59 @@ msgstr "لیست کاربران سازمان"
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
-#, fuzzy
+
 msgid "Organization workspace"
 msgstr "فضای کار سازمان"
 
 #: src/customer/events.ts
-#, fuzzy
+
 msgid "Organization {customer_link} has been created."
 msgstr "سازمان {customer_name} ایجاد شده است."
 
 #: src/customer/events.ts
-#, fuzzy
+
 msgid "Organization {customer_link} has been updated."
 msgstr "سازمان {customer_name} بروزرسانی شده است."
 
 #: src/customer/events.ts
-#, fuzzy
+
 msgid "Organization {customer_name} has been deleted."
 msgstr "سازمان {customer_name} حذف شده است."
 
 #: src/customer/list/CustomerList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
-#, fuzzy
+
 msgid "Organizations"
 msgstr "سازمان ها"
 
 #: src/navigation/workspace/OrganizationsPanel.tsx
-#, fuzzy
+
 msgid "Organizations ({count})"
 msgstr "سازمان ها(مقدار)"
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
-#, fuzzy
+
 msgid "Overview"
 msgstr "بررسی اجمالی"
 
 #: src/customer/dashboard/CustomerDashboard.tsx
-#, fuzzy
+
 msgid "Overview of {organization} organization"
 msgstr "بررسی اجمالی سازمان"
 
 #: src/project/ProjectDashboard.tsx
-#, fuzzy
+
 msgid "Overview of {project} project"
 msgstr "بررسی اجمالی پروژه"
 
 #: src/user/list/UserDashboard.tsx
-#, fuzzy
+
 msgid "Owned organizations"
 msgstr "سازمان های متعلق به"
 
 #: src/customer/team/CustomerUsersList.tsx
 #: src/user/list/CustomerPermissions.tsx
-#, fuzzy
+
 msgid "Owner"
 msgstr "صاحب"
 
