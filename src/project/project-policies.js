@@ -1,3 +1,5 @@
+import { FreeIPAQuotaService } from '@waldur/freeipa/FreeIPAQuotaService';
+
 import { loadCertifications, updateCertifications } from './api';
 import template from './project-policies.html';
 
@@ -13,7 +15,6 @@ const projectPolicies = {
       ncUtilsFlash,
       customersService,
       priceEstimatesService,
-      FreeIPAQuotaService,
       $rootScope,
       $q,
     ) {
@@ -21,7 +22,6 @@ const projectPolicies = {
       this.priceEstimatesService = priceEstimatesService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.customersService = customersService;
-      this.FreeIPAQuotaService = FreeIPAQuotaService;
       this.$rootScope = $rootScope;
       this.$q = $q;
     }
@@ -36,7 +36,7 @@ const projectPolicies = {
 
       this.estimate = angular.copy(this.project.billing_price_estimate);
       this.isHardLimit = this.checkIsHardLimit(this.estimate);
-      this.quota = this.FreeIPAQuotaService.loadQuota(this.project);
+      this.quota = FreeIPAQuotaService.loadQuota(this.project);
 
       this.loading = true;
       this.$q
@@ -56,9 +56,7 @@ const projectPolicies = {
       const promises = [this.updatePriceEstimate(), this.saveCertifications()];
 
       if (this.quota) {
-        promises.push(
-          this.FreeIPAQuotaService.saveQuota(this.project, this.quota),
-        );
+        promises.push(FreeIPAQuotaService.saveQuota(this.project, this.quota));
       }
 
       return this.$q

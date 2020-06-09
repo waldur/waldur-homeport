@@ -1,3 +1,5 @@
+import { FreeIPAQuotaService } from '@waldur/freeipa/FreeIPAQuotaService';
+
 import template from './customer-policies.html';
 
 const customerPolicies = {
@@ -9,7 +11,6 @@ const customerPolicies = {
       ENV,
       ncUtilsFlash,
       priceEstimatesService,
-      FreeIPAQuotaService,
       usersService,
       currentStateService,
     ) {
@@ -17,7 +18,6 @@ const customerPolicies = {
       this.ENV = ENV;
       this.ncUtilsFlash = ncUtilsFlash;
       this.priceEstimatesService = priceEstimatesService;
-      this.FreeIPAQuotaService = FreeIPAQuotaService;
       this.usersService = usersService;
       this.currentStateService = currentStateService;
     }
@@ -39,7 +39,7 @@ const customerPolicies = {
           };
 
           this.currency = this.ENV.currency;
-          this.quota = this.FreeIPAQuotaService.loadQuota(this.customer);
+          this.quota = FreeIPAQuotaService.loadQuota(this.customer);
           this.actionsExpanded = false;
         });
       });
@@ -57,7 +57,7 @@ const customerPolicies = {
 
       if (this.quota) {
         promises.push(
-          this.FreeIPAQuotaService.saveQuota(this.originalCustomer, this.quota),
+          FreeIPAQuotaService.saveQuota(this.originalCustomer, this.quota),
         );
       }
 

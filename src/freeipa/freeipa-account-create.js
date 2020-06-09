@@ -1,4 +1,5 @@
 import template from './freeipa-account-create.html';
+import { FreeIPAService } from './FreeIPAService';
 
 // These limitations are imposed by underlying operating system
 const MAXIMUM_USERNAME_LENGTH = 32;
@@ -11,8 +12,7 @@ const freeipaAccountCreate = {
   },
   controller: class FreeIPAAccountCreateController {
     // @ngInject
-    constructor(freeipaService, ncUtilsFlash, ENV, usersService, $scope) {
-      this.freeipaService = freeipaService;
+    constructor(ncUtilsFlash, ENV, usersService, $scope) {
       this.ncUtilsFlash = ncUtilsFlash;
       this.usersService = usersService;
       this.prefix = ENV.FREEIPA_USERNAME_PREFIX;
@@ -45,8 +45,10 @@ const freeipaAccountCreate = {
         return;
       }
       this.submitting = true;
-      return this.freeipaService
-        .createProfile(this.profile.username, this.profile.agree_with_policy)
+      return FreeIPAService.createProfile(
+        this.profile.username,
+        this.profile.agree_with_policy,
+      )
         .then(() => {
           this.ncUtilsFlash.success(gettext('A profile has been created.'));
           this.onProfileAdded();
