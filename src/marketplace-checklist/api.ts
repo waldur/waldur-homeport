@@ -1,9 +1,12 @@
-import { getAll, post } from '@waldur/core/api';
+import { getAll, getById, post } from '@waldur/core/api';
 
 import { Category, Checklist, Question, Answer, ChecklistStats } from './types';
 
 export const getCategories = () =>
   getAll<Category>('/marketplace-checklists-categories/');
+
+export const getCategory = (category_uuid: string) =>
+  getById<Category>('/marketplace-checklists-categories/', category_uuid);
 
 export const getChecklists = (categoryId?: string) =>
   getAll<Checklist>(

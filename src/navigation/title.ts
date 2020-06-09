@@ -43,6 +43,9 @@ export const getTitle = state => state.title;
 export const useTitle = title => {
   const dispatch = useDispatch();
   React.useEffect(() => {
+    if (!title) {
+      return;
+    }
     dispatch(setTitle(title));
   }, [dispatch, title]);
 };
