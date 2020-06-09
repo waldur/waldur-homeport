@@ -25,7 +25,6 @@ const SubmitButton = ({ submitting, submit }) => (
 );
 
 export const ProjectChecklist = () => {
-  useTitle(translate('Compliance'));
   const project = useSelector(getProject);
   if (!project) {
     return null;
@@ -36,6 +35,7 @@ export const ProjectChecklist = () => {
   } = useCurrentStateAndParams();
 
   const state = useProjectChecklist(project, category);
+  useTitle(state.categoryInfo?.name);
 
   if (state.checklistLoading) {
     return <LoadingSpinner />;

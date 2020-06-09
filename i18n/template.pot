@@ -1158,7 +1158,6 @@ msgid "Complete"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistOverview.tsx
-#: src/marketplace-checklist/ProjectChecklist.tsx
 msgid "Compliance"
 msgstr ""
 
