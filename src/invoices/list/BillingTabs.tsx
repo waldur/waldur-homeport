@@ -32,6 +32,7 @@ export const BillingTabs = () => {
     </PanelBody>
   ) : (
     <PanelBody>
+      <AgreementInfo />
       <EstimatedCost />
       {isFeatureVisible('paypal') ? <PayPalInvoicesList /> : <InvoicesList />}
     </PanelBody>
