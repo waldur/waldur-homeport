@@ -11,6 +11,7 @@ import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingRes
 import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { Offering } from '@waldur/marketplace/types';
+import { useTitle } from '@waldur/navigation/title';
 
 import { OfferingBookingTab } from './OfferingBookingTab';
 import { OfferingDetails } from './OfferingDetails';
@@ -19,7 +20,6 @@ import { PlanUsageList } from './PlanUsageList';
 function updateBreadcrumbs(offering: Offering) {
   const $timeout = ngInjector.get('$timeout');
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  const titleService = ngInjector.get('titleService');
 
   $timeout(() => {
     BreadcrumbsService.activeItem = offering.name;
@@ -41,7 +41,6 @@ function updateBreadcrumbs(offering: Offering) {
             state: 'marketplace-my-offerings',
           },
     ];
-    titleService.setTitle(offering.name);
   });
 }
 
@@ -85,6 +84,8 @@ export const OfferingContainer = () => {
   const { loading, value, error } = useAsync(() => loadData(offering_uuid), [
     offering_uuid,
   ]);
+
+  useTitle(value ? value.offering.name : translate('Offering details'));
 
   if (loading) {
     return <LoadingSpinner />;

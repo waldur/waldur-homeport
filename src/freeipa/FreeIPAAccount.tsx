@@ -5,6 +5,7 @@ import useEffectOnce from 'react-use/lib/useEffectOnce';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { angular2react } from '@waldur/shims/angular2react';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -20,6 +21,7 @@ const FreeipaAccountCreate = angular2react<{
 }>('FreeipaAccountCreate', ['onProfileAdded']);
 
 export const FreeIpaAccount = () => {
+  useTitle(translate('FreeIPA account'));
   const user = useSelector(getUser);
 
   const [{ loading, error, value: profile }, refreshProfile] = useAsyncFn(

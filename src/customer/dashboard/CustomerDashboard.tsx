@@ -11,6 +11,7 @@ import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { User, Customer } from '@waldur/workspace/types';
 
 import { loadSummary } from './api';
@@ -26,6 +27,8 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => {
   const { loading, value } = useAsync(() => loadSummary(props.customer), [
     props.customer,
   ]);
+
+  useTitle(translate('Dashboard'));
 
   return (
     <>

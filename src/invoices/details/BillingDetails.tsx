@@ -6,14 +6,17 @@ import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV, ngInjector } from '@waldur/core/services';
 import { getUUID } from '@waldur/core/utils';
+import { CustomersService } from '@waldur/customer/services/CustomersService';
 import { CustomerSidebar } from '@waldur/customer/workspace/CustomerSidebar';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { getCustomer } from '@waldur/marketplace/common/api';
 import { Layout } from '@waldur/navigation/Layout';
+import { useTitle } from '@waldur/navigation/title';
 import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
+import { UsersService } from '@waldur/user/UsersService';
 
-import { formatPeriod, getPageTitle } from '../utils';
+import { formatPeriod } from '../utils';
 
 import { BillingRecordDetails } from './BillingRecordDetails';
 import { DownloadInvoiceButton } from './DownloadInvoiceButton';
@@ -50,9 +53,6 @@ const refreshBreadcrumbs = invoice => {
 const loadData = async (invoiceId: string) => {
   const WorkspaceService = ngInjector.get('WorkspaceService');
   const currentStateService = ngInjector.get('currentStateService');
-  const usersService = ngInjector.get('usersService');
-  const customersService = ngInjector.get('customersService');
-  const titleService = ngInjector.get('titleService');
 
   let invoice;
   if (isFeatureVisible('paypal')) {
@@ -68,19 +68,24 @@ const loadData = async (invoiceId: string) => {
     hasCustomer: true,
     workspace: WOKSPACE_NAMES.organization,
   });
-  const currentUser = await usersService.getCurrentUser();
-  const status = customersService.checkCustomerUser(
+  const currentUser = await UsersService.getCurrentUser();
+  const status = CustomersService.checkCustomerUser(
     currentCustomer,
     currentUser,
   );
   currentStateService.setOwnerOrStaff(status);
   currentStateService.setCustomer(currentCustomer);
-  titleService.setTitle(getPageTitle());
   refreshBreadcrumbs(invoice);
   return invoice;
 };
 
 export const BillingDetails = () => {
+  useTitle(
+    ENV.accountingMode === 'accounting'
+      ? translate('Accounting record')
+      : translate('Invoice'),
+  );
+
   const router = useRouter();
   const {
     params: { uuid: invoiceId },
@@ -114,11 +119,6 @@ export const BillingDetails = () => {
         ) : (
           <PrintInvoiceButton />
         )
-      }
-      pageTitle={
-        ENV.accountingMode === 'accounting'
-          ? translate('Accounting record')
-          : translate('Invoice')
       }
       sidebarClass="hidden-print"
     >

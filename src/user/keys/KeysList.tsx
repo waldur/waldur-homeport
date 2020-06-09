@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { $state } from '@waldur/core/services';
+import { useTitle } from '@waldur/navigation/title';
 import { Table, createFetcher, connectTable } from '@waldur/table-react';
 import { KeysListTablePlaceholder } from '@waldur/user/keys/KeysListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
@@ -13,6 +14,7 @@ import { isStaffOrSelfSelectorCreator } from './selectors';
 
 const TableComponent = props => {
   const { translate } = props;
+  useTitle(translate('SSH keys'));
   return (
     <Table
       {...props}

@@ -10,6 +10,7 @@ import * as api from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
+import { useTitle } from '@waldur/navigation/title';
 
 import { OrderItemDetails } from './OrderItemDetails';
 
@@ -17,10 +18,8 @@ function updateBreadcrumbs(orderItem: OrderItemDetailsType) {
   const $timeout = ngInjector.get('$timeout');
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
   const WorkspaceService = ngInjector.get('WorkspaceService');
-  const titleService = ngInjector.get('titleService');
 
   $timeout(() => {
-    titleService.setTitle(orderItem.offering_name);
     BreadcrumbsService.activeItem = orderItem.attributes.name;
     const data = WorkspaceService.getWorkspace();
     if (data.workspace === 'organization') {
@@ -95,6 +94,10 @@ export const OrderItemDetailsContainer: React.FC<{}> = () => {
   const [{ loading, value, error }, loadData] = useAsyncFn(
     () => loadOrderItem(order_item_uuid),
     [order_item_uuid],
+  );
+
+  useTitle(
+    value ? value.orderItem.offering_name : translate('Order item details'),
   );
 
   useEffectOnce(() => {

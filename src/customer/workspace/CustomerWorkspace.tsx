@@ -9,9 +9,8 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerSidebar } from './CustomerSidebar';
 
-function refreshBreadcrumbs(currentCustomer, pageTitle) {
+function refreshBreadcrumbs(currentCustomer) {
   const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  BreadcrumbsService.activeItem = pageTitle;
   if (currentCustomer) {
     BreadcrumbsService.items = [
       {
@@ -26,7 +25,6 @@ function refreshBreadcrumbs(currentCustomer, pageTitle) {
 }
 
 export const CustomerWorkspace = () => {
-  const [pageTitle, setPageTitle] = React.useState<string>();
   const [pageClass, setPageClass] = React.useState<string>();
   const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState<boolean>();
   const customer = useSelector(getCustomer);
@@ -34,10 +32,9 @@ export const CustomerWorkspace = () => {
 
   function refreshState() {
     const data = state?.data;
-    setPageTitle(translate(data?.pageTitle));
     setPageClass(data?.pageClass);
     setHideBreadcrumbs(data?.hideBreadcrumbs);
-    refreshBreadcrumbs(customer, translate(data?.pageTitle));
+    refreshBreadcrumbs(customer);
   }
 
   React.useEffect(refreshState, [state, params]);
@@ -45,7 +42,6 @@ export const CustomerWorkspace = () => {
   return (
     <Layout
       sidebar={<CustomerSidebar />}
-      pageTitle={pageTitle}
       pageClass={pageClass}
       hideBreadcrumbs={hideBreadcrumbs}
     />

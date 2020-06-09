@@ -18,8 +18,11 @@ import {
 } from '@waldur/form-react';
 import { DateField } from '@waldur/form-react/DateField';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 
 const PaymentProfileCreate = props => {
+  useTitle(translate('Add payment profile'));
+
   const [
     showAgreementNumberAndEndDate,
     setShowAgreementNumberAndEndDate,

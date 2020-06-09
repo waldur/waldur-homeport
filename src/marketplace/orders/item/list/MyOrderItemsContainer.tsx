@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { Panel } from '@waldur/core/Panel';
 import { $state } from '@waldur/core/services';
+import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 
 import { setOrderStateFilter } from '../../store/actions';
 
@@ -23,6 +25,7 @@ const filterOptionsSelector = state =>
   state.marketplace.orders.tableFilter.stateOptions;
 
 export const MyOrderItemsContainer: React.FC<Props> = () => {
+  useTitle(translate('My orders'));
   const dispatch = useDispatch();
   const filterOptions = useSelector(filterOptionsSelector);
   React.useEffect(() => {

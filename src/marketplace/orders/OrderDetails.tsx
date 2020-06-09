@@ -10,6 +10,7 @@ import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getOrderDetails } from '@waldur/marketplace/common/api';
 import { OrderSummary } from '@waldur/marketplace/orders/OrderSummary';
+import { useTitle } from '@waldur/navigation/title';
 
 import { ApproveButton } from './ApproveButton';
 import { Order } from './Order';
@@ -47,6 +48,7 @@ const OrderRefreshButton = props => (
 );
 
 export const OrderDetails: React.FC<OrderDetailsProps> = props => {
+  useTitle(translate('Order details'));
   const {
     params: { order_uuid },
   } = useCurrentStateAndParams();

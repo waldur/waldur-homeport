@@ -9,6 +9,7 @@ import issueAttachmentsSaga from '@waldur/issues/attachments/effects';
 import issueCommentsSaga from '@waldur/issues/comments/effects';
 import jiraSaga from '@waldur/jira/issue/effects';
 import marketplaceSaga from '@waldur/marketplace/store/effects';
+import { effects as titleEffects } from '@waldur/navigation/title';
 import projectSaga from '@waldur/project/effects';
 import providerSaga from '@waldur/providers/effects';
 import serviceUsageSaga from '@waldur/providers/support/effects';
@@ -38,4 +39,5 @@ export default [
   resourceSummarySaga,
   marketplaceSaga,
   paymentProfilesSaga,
+  titleEffects,
 ];

@@ -6,6 +6,7 @@ import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { AnswersSummary } from './AnswersSummary';
@@ -24,6 +25,7 @@ const SubmitButton = ({ submitting, submit }) => (
 );
 
 export const ProjectChecklist = () => {
+  useTitle(translate('Compliance'));
   const project = useSelector(getProject);
   if (!project) {
     return null;

@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { translate } from '@waldur/i18n';
+import { setTitle } from '@waldur/navigation/title';
+
 import { fetchServiceUsageStart } from './actions';
 import { FlowMapFilter } from './FlowMapFilter';
 import SankeyDiagram from './SankeyDiagram';
@@ -13,6 +16,7 @@ interface SankeyDiagramComponentProps {
   data: any;
   organizationNames: any[];
   countryNames: any[];
+  setTitle: typeof setTitle;
 }
 
 class SankeyDiagramComponent extends React.Component<
@@ -22,6 +26,7 @@ class SankeyDiagramComponent extends React.Component<
 
   componentDidMount() {
     this.props.fetchServiceUsageStart();
+    this.props.setTitle(translate('Sankey diagram'));
   }
 
   formatData() {
@@ -91,11 +96,12 @@ const mapStateToProps = state => ({
   countryNames: propertySelectorFactory('country')(state),
 });
 
-const matchDispatchToProps = dispatch => ({
-  fetchServiceUsageStart: () => dispatch(fetchServiceUsageStart()),
-});
+const matchDispatchToProps = {
+  fetchServiceUsageStart,
+  setTitle,
+};
 
 export const SankeyDiagramContainer = connect(
   mapStateToProps,
   matchDispatchToProps,
-)(SankeyDiagramComponent);
+)(SankeyDiagramComponent) as React.ComponentType<{}>;

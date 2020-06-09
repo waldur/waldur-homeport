@@ -1,14 +1,12 @@
 import { StateDeclaration as BaseStateDeclaration } from '@uirouter/core';
 
 interface DataDeclaration {
-  /** Page title is rendered as page header component and as document head */
+  /** @deprecated in favor of useTitle */
   pageTitle: string;
   /** State is disabled as long as its feature is disabled */
   feature: string;
   /** Related sidebar item is expanded if its key matches current state sidebarKey */
   sidebarKey: string;
-  /** Page header component is concealed as long as this parameter is set to false */
-  renderDocumentTitle: boolean;
   /** Body class name is applied to body element automatically */
   bodyClass: string;
   /** Authenticated view is protected from anonymous user.

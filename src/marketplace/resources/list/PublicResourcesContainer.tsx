@@ -1,11 +1,18 @@
 import * as React from 'react';
 
+import { Panel } from '@waldur/core/Panel';
+import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
+
 import { PublicResourcesFilter } from './PublicResourcesFilter';
 import { PublicResourcesList } from './PublicResourcesList';
 
-export const PublicResourcesContainer = () => (
-  <div className="ibox-content">
-    <PublicResourcesFilter />
-    <PublicResourcesList />
-  </div>
-);
+export const PublicResourcesContainer = () => {
+  useTitle(translate('Public resources'));
+  return (
+    <Panel>
+      <PublicResourcesFilter />
+      <PublicResourcesList />
+    </Panel>
+  );
+};

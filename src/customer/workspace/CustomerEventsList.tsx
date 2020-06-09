@@ -4,6 +4,8 @@ import { getFormValues } from 'redux-form';
 
 import { isEmpty } from '@waldur/core/utils';
 import { getEventsList } from '@waldur/events/BaseEventsList';
+import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerEventsFilter } from './CustomerEventsFilter';
@@ -28,9 +30,12 @@ const mapStateToProps = state => ({
 
 const CustomerEvents = connect(mapStateToProps)(PureCustomerEvents);
 
-export const CustomerEventsView = props => (
-  <>
-    <CustomerEventsFilter />
-    <CustomerEvents {...props} />
-  </>
-);
+export const CustomerEventsView = props => {
+  useTitle(translate('Audit logs'));
+  return (
+    <>
+      <CustomerEventsFilter />
+      <CustomerEvents {...props} />
+    </>
+  );
+};

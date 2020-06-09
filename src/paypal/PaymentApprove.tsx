@@ -6,11 +6,13 @@ import useEffectOnce from 'react-use/lib/useEffectOnce';
 import { post } from '@waldur/core/api';
 import { parseQueryString, getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
 const approvePayment = payload => post('/paypal-payments/approve/', payload);
 
 export const PaymentApprove = () => {
+  useTitle(translate('Approve payment'));
   const dispatch = useDispatch();
   const router = useRouter();
   useEffectOnce(() => {

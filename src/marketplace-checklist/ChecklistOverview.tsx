@@ -1,17 +1,22 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import * as Panel from 'react-bootstrap/lib/Panel';
 import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 
 import { CustomerMap } from './CustomerMap';
 import { StatsTable } from './StatsTable';
 import { useChecklistOverview } from './useChecklist';
 
 export const ChecklistOverview = () => {
-  const state = useChecklistOverview($state.params.category);
+  useTitle(translate('Compliance'));
+  const {
+    params: { category },
+  } = useCurrentStateAndParams();
+  const state = useChecklistOverview(category);
 
   if (state.checklistLoading) {
     return <LoadingSpinner />;

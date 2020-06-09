@@ -4,6 +4,7 @@ import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 
 import { getOffering, getCategory, getPlugins } from '../common/api';
 
@@ -31,6 +32,8 @@ export const OfferingDetailsPage: React.FC<{}> = () => {
   const { loading, value, error } = useAsync(() => loadData(offering_uuid), [
     offering_uuid,
   ]);
+
+  useTitle(value ? value.offering.name : translate('Offering details'));
 
   if (loading) {
     return <LoadingSpinner />;

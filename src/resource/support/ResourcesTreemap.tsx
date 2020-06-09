@@ -7,6 +7,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $filter } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 
 import { loadData, parseProjects } from './api';
 import { treemapFilterSelector } from './selectors';
@@ -93,6 +94,8 @@ interface StateProps {
 }
 
 const TreemapContainer = (props: StateProps & TranslateProps) => {
+  useTitle(translate('Resources usage'));
+
   const quotas = getQuotas();
   const keys = quotas.map(q => q.key);
   let tooltipValueFormatter;
