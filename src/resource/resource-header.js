@@ -1,5 +1,6 @@
 import { blockingExecutor } from '@waldur/core/services';
 import { getCategoryLink } from '@waldur/marketplace/utils';
+import { setBreadcrumbs } from '@waldur/navigation/breadcrumbs/store';
 import { setTitle } from '@waldur/navigation/title';
 import store from '@waldur/store/store';
 
@@ -19,7 +20,6 @@ const resourceHeader = {
       $interval,
       ENV,
       features,
-      BreadcrumbsService,
       ncUtilsFlash,
     ) {
       this.$rootScope = $rootScope;
@@ -29,7 +29,6 @@ const resourceHeader = {
       this.$interval = $interval;
       this.ENV = ENV;
       this.features = features;
-      this.BreadcrumbsService = BreadcrumbsService;
       this.ncUtilsFlash = ncUtilsFlash;
 
       this.model = null;
@@ -66,10 +65,9 @@ const resourceHeader = {
       if (!this.model) {
         return;
       }
-      this.BreadcrumbsService.items = ResourceBreadcrumbsRegistry.getItems(
-        this.model,
+      store.dispatch(
+        setBreadcrumbs(ResourceBreadcrumbsRegistry.getItems(this.model)),
       );
-      this.BreadcrumbsService.activeItem = this.model.name;
       store.dispatch(setTitle(this.model.name));
     }
 

@@ -3,28 +3,16 @@ import * as React from 'react';
 import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getCategory } from '@waldur/marketplace/common/api';
-import { Category } from '@waldur/marketplace/types';
 import { useTitle } from '@waldur/navigation/title';
 
 import { ProjectResourcesList } from './ProjectResourcesList';
-
-function updateBreadcrumbs(category: Category) {
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  const $timeout = ngInjector.get('$timeout');
-
-  $timeout(() => {
-    BreadcrumbsService.activeItem = category.title;
-  });
-}
 
 async function loadData(category_uuid) {
   const category = await getCategory(category_uuid, {
     params: { field: ['columns', 'title'] },
   });
-  updateBreadcrumbs(category);
   return { columns: category.columns, title: category.title };
 }
 
@@ -46,9 +34,7 @@ export const ProjectResourcesContainer: React.FC<{}> = () => {
   if (loading) {
     return <LoadingSpinner />;
   } else if (error) {
-    return (
-      <span>{translate('Unable to load marketplace category details')}</span>
-    );
+    return <>{translate('Unable to load marketplace category details')}</>;
   } else {
     return (
       <ProjectResourcesList

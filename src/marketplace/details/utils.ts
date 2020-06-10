@@ -5,6 +5,7 @@ import {
   getFormSerializer,
   getFormLimitSerializer,
 } from '@waldur/marketplace/common/registry';
+import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 
 import { Offering } from '../types';
 
@@ -48,50 +49,45 @@ export const formatOrderItemForUpdate = (props: OrderSummaryProps) => {
   return formatOrderItem(props, request);
 };
 
-export function updateBreadcrumbs(offering: Offering) {
-  const $timeout = ngInjector.get('$timeout');
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
+export function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
   const WorkspaceService = ngInjector.get('WorkspaceService');
 
-  $timeout(() => {
-    BreadcrumbsService.activeItem = offering.name;
-    const data = WorkspaceService.getWorkspace();
-    if (data.workspace === 'organization') {
-      BreadcrumbsService.items = [
-        {
-          label: translate('Organization workspace'),
-          state: 'organization.details',
+  const data = WorkspaceService.getWorkspace();
+  if (data.workspace === 'organization') {
+    return [
+      {
+        label: translate('Organization workspace'),
+        state: 'organization.details',
+      },
+      {
+        label: translate('Marketplace'),
+        state: 'marketplace-landing-customer',
+      },
+      {
+        label: offering.category_title,
+        state: 'marketplace-category-customer',
+        params: {
+          category_uuid: offering.category_uuid,
         },
-        {
-          label: translate('Marketplace'),
-          state: 'marketplace-landing-customer',
+      },
+    ];
+  } else {
+    return [
+      {
+        label: translate('Project workspace'),
+        state: 'project.details',
+      },
+      {
+        label: translate('Marketplace'),
+        state: 'marketplace-landing',
+      },
+      {
+        label: offering.category_title,
+        state: 'marketplace-category',
+        params: {
+          category_uuid: offering.category_uuid,
         },
-        {
-          label: offering.category_title,
-          state: 'marketplace-category-customer',
-          params: {
-            category_uuid: offering.category_uuid,
-          },
-        },
-      ];
-    } else {
-      BreadcrumbsService.items = [
-        {
-          label: translate('Project workspace'),
-          state: 'project.details',
-        },
-        {
-          label: translate('Marketplace'),
-          state: 'marketplace-landing',
-        },
-        {
-          label: offering.category_title,
-          state: 'marketplace-category',
-          params: {
-            category_uuid: offering.category_uuid,
-          },
-        },
-      ];
-    }
-  });
+      },
+    ];
+  }
 }

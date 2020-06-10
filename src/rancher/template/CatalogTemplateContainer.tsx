@@ -3,17 +3,21 @@ import * as React from 'react';
 import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
+import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
+import { useTitle } from '@waldur/navigation/title';
 
 import { getCluster, getCatalog } from '../api';
 import { Cluster, Catalog } from '../types';
 
 import { CatalogTemplatesList } from './CatalogTemplateList';
 
-const refreshBreadcrumbs = (cluster: Cluster, catalog: Catalog) => {
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  BreadcrumbsService.items = [
+const getBreadcrumbs = (
+  cluster: Cluster,
+  catalog: Catalog,
+): BreadcrumbItem[] => {
+  return [
     {
       label: translate('Project workspace'),
       state: 'project.details',
@@ -46,16 +50,17 @@ const refreshBreadcrumbs = (cluster: Cluster, catalog: Catalog) => {
       },
     },
   ];
-  BreadcrumbsService.activeItem = translate('Application templates');
 };
 
 const loadData = async (clusterUuid: string, catalogUuid: string) => {
   const cluster = await getCluster(clusterUuid);
   const catalog = await getCatalog(catalogUuid);
-  refreshBreadcrumbs(cluster, catalog);
+  return { cluster, catalog };
 };
 
 export const CatalogTemplateContainer = () => {
+  useTitle(translate('Application templates'));
+
   const {
     params: { uuid: projectUuid, catalogUuid, clusterUuid },
   } = useCurrentStateAndParams();
@@ -64,6 +69,14 @@ export const CatalogTemplateContainer = () => {
     clusterUuid,
     catalogUuid,
   ]);
+
+  useBreadcrumbsFn(
+    () =>
+      state.value
+        ? getBreadcrumbs(state.value.cluster, state.value.catalog)
+        : [],
+    [state.value],
+  );
 
   if (state.loading) {
     return <LoadingSpinner />;

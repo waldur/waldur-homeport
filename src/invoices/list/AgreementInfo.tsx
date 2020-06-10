@@ -12,7 +12,7 @@ export const AgreementInfo = () => {
     customer.payment_profiles,
   );
   return (
-    <React.Fragment>
+    <>
       {activeFixedPricePaymentProfile ? (
         <div style={{ marginBottom: '20px' }}>
           {activeFixedPricePaymentProfile.attributes.agreement_number ? (
@@ -32,6 +32,6 @@ export const AgreementInfo = () => {
           ) : null}
         </div>
       ) : null}
-    </React.Fragment>
+    </>
   );
 };

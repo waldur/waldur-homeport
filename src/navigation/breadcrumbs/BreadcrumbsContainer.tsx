@@ -1,25 +1,16 @@
 import * as React from 'react';
-import useEffectOnce from 'react-use/lib/useEffectOnce';
+import { useSelector } from 'react-redux';
 
-import { ngInjector } from '@waldur/core/services';
+import { getTitle } from '../title';
 
 import { Breadcrumbs } from './Breadcrumbs';
-import { Item } from './types';
+import { getBreadcrumbs } from './store';
 
 export const BreadcrumbsContainer = () => {
-  const [items, setItems] = React.useState<Item[]>([]);
-  const [activeItem, setActiveItem] = React.useState<string>();
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-
-  function refresh() {
-    setItems(BreadcrumbsService.items);
-    setActiveItem(BreadcrumbsService.activeItem);
+  const items = useSelector(getBreadcrumbs);
+  const activeItem = useSelector(getTitle);
+  if (!items) {
+    return null;
   }
-
-  useEffectOnce(() => {
-    refresh();
-    return BreadcrumbsService.listen(refresh);
-  });
-
   return <Breadcrumbs items={items} activeItem={activeItem} />;
 };
