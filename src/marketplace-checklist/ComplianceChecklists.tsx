@@ -2,10 +2,10 @@ import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 import { useSelector } from 'react-redux';
+import useAsync from 'react-use/lib/useAsync';
 
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { getProject } from '@waldur/workspace/selectors';
 
@@ -26,17 +26,8 @@ const getChecklists = (projectId: string) =>
     response => response.data,
   );
 
-export const ComplianceChecklists = () => {
-  const project = useSelector(getProject);
-  const { call, state } = useQuery(
-    project && (() => getChecklists(project.uuid)),
-    [project],
-  );
-  React.useEffect(call, []);
-
-  if (!project) {
-    return null;
-  }
+const ProjectChecklist = ({ project }) => {
+  const state = useAsync(() => getChecklists(project.uuid), [project]);
 
   if (state.loading) {
     return <LoadingSpinner />;
@@ -46,13 +37,13 @@ export const ComplianceChecklists = () => {
     return <h3>{translate('Unable to load checklists.')}</h3>;
   }
 
-  if (!state.loaded) {
+  if (!state.value) {
     return null;
   }
 
   return (
     <Row>
-      {state.data.map(checklist => (
+      {state.value.map(checklist => (
         <Col key={checklist.uuid} md={3}>
           <ChartHeader label={`${checklist.score} %`} value={checklist.name} />
           <PieChart
@@ -64,4 +55,12 @@ export const ComplianceChecklists = () => {
       ))}
     </Row>
   );
+};
+
+export const ComplianceChecklists = () => {
+  const project = useSelector(getProject);
+  if (!project) {
+    return null;
+  }
+  return <ProjectChecklist project={project} />;
 };
