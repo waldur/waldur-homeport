@@ -14,6 +14,7 @@ import {
 } from '@waldur/customer/payment-profiles/utils';
 import {
   FormContainer,
+  NumberField,
   SelectField,
   StringField,
   SubmitButton,
@@ -25,10 +26,9 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 const PaymentProfileUpdateDialog = props => {
-  const [
-    showAgreementNumberAndEndDate,
-    setShowAgreementNumberAndEndDate,
-  ] = useState(props.resolve.payment_type === 'fixed_price');
+  const [isFixedPrice, setIsFixedPrice] = useState(
+    props.resolve.payment_type === 'fixed_price',
+  );
 
   const paymentProfileTypeOptions = React.useMemo(
     () => getPaymentProfileTypeOptions(),
@@ -75,19 +75,26 @@ const PaymentProfileUpdateDialog = props => {
             clearable={false}
             validate={required}
             onChange={(value: Option<any>) =>
-              setShowAgreementNumberAndEndDate(value.value === 'fixed_price')
+              setIsFixedPrice(value.value === 'fixed_price')
             }
           />
 
-          {showAgreementNumberAndEndDate ? (
+          {isFixedPrice ? (
             <DateField name="end_date" label={translate('End date')} />
           ) : null}
 
-          {showAgreementNumberAndEndDate && (
+          {isFixedPrice && (
             <TextField
               name="agreement_number"
               label={translate('Agreement number')}
               maxLength={150}
+            />
+          )}
+
+          {isFixedPrice && (
+            <NumberField
+              name="contract_sum"
+              label={translate('Contract sum')}
             />
           )}
         </FormContainer>

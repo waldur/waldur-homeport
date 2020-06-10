@@ -31,6 +31,7 @@ export interface UserDetails extends User {
 interface PaymentProfileAttributes {
   end_date: string;
   agreement_number: string;
+  contract_sum: number;
 }
 
 export interface PaymentProfile {

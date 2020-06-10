@@ -1245,6 +1245,15 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+msgid "Contract sum"
+msgstr ""
+
+#: src/invoices/list/AgreementInfo.tsx
+msgid "Contract sum is"
+msgstr ""
+
 #: src/rancher/cluster/create/NodeRoleField.tsx
 msgid "Control plane"
 msgstr ""
