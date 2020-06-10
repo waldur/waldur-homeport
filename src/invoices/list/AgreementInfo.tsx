@@ -26,6 +26,14 @@ export const AgreementInfo = () => {
                   {formatDate(
                     activeFixedPricePaymentProfile.attributes.end_date,
                   )}
+                  .
+                </span>
+              ) : null}
+              {activeFixedPricePaymentProfile.attributes.contract_sum ? (
+                <span>
+                  {' '}
+                  {translate('Contract sum is')}{' '}
+                  {activeFixedPricePaymentProfile.attributes.contract_sum}.
                 </span>
               ) : null}
             </span>

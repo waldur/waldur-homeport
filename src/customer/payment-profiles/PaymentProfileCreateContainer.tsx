@@ -11,6 +11,7 @@ import { addPaymentProfile } from '@waldur/customer/payment-profiles/store/actio
 import { getPaymentProfileTypeOptions } from '@waldur/customer/payment-profiles/utils';
 import {
   FormContainer,
+  NumberField,
   SelectField,
   StringField,
   SubmitButton,
@@ -23,10 +24,7 @@ import { useTitle } from '@waldur/navigation/title';
 const PaymentProfileCreate = props => {
   useTitle(translate('Add payment profile'));
 
-  const [
-    showAgreementNumberAndEndDate,
-    setShowAgreementNumberAndEndDate,
-  ] = useState(false);
+  const [isFixedPrice, setIsFixedPrice] = useState(false);
 
   const paymentProfileTypeOptions = React.useMemo(
     () => getPaymentProfileTypeOptions(),
@@ -60,20 +58,24 @@ const PaymentProfileCreate = props => {
           clearable={false}
           validate={required}
           onChange={(value: Option<any>) =>
-            setShowAgreementNumberAndEndDate(value.value === 'fixed_price')
+            setIsFixedPrice(value.value === 'fixed_price')
           }
         />
 
-        {showAgreementNumberAndEndDate ? (
+        {isFixedPrice ? (
           <DateField name="end_date" label={translate('End date')} />
         ) : null}
 
-        {showAgreementNumberAndEndDate && (
+        {isFixedPrice && (
           <TextField
             name="agreement_number"
             label={translate('Agreement number')}
             maxLength={150}
           />
+        )}
+
+        {isFixedPrice && (
+          <NumberField name="contract_sum" label={translate('Contract sum')} />
         )}
 
         <div className="form-group">
