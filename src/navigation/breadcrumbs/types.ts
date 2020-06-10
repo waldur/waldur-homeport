@@ -1,4 +1,4 @@
-export interface Item {
+export interface BreadcrumbItem {
   action?(): void;
   state?: string;
   params?: Record<string, string>;

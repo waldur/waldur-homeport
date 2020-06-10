@@ -5713,7 +5713,6 @@ msgid "Screenshot:"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 msgid "Screenshots"
 msgstr ""
@@ -6554,6 +6553,10 @@ msgstr ""
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Template"
+msgstr ""
+
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Template details"
 msgstr ""
 
 #: src/issues/create/IssueCreateForm.tsx

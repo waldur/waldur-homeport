@@ -3,18 +3,18 @@ import * as React from 'react';
 
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
+import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
 import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 
 import { SupportSidebar } from './SupportSidebar';
 
-function refreshBreadcrumbs() {
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  const IssueNavigationService = ngInjector.get('IssueNavigationService');
-  BreadcrumbsService.items = [
+function getBreadcrumbs(): BreadcrumbItem[] {
+  return [
     {
       label: translate('Support dashboard'),
-      onClick: () => IssueNavigationService.gotoDashboard(),
+      action: () => ngInjector.get('IssueNavigationService').gotoDashboard(),
     },
   ];
 }
@@ -28,8 +28,9 @@ export const SupportWorkspace = () => {
     const data = state?.data;
     setPageClass(data?.pageClass);
     setHideBreadcrumbs(data?.hideBreadcrumbs);
-    refreshBreadcrumbs();
   }
+
+  useBreadcrumbsFn(getBreadcrumbs, []);
 
   React.useEffect(() => {
     ngInjector.get('WorkspaceService').setWorkspace({

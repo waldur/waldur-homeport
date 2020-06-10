@@ -1,5 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 
 import { getById } from '@waldur/core/api';
@@ -11,10 +12,13 @@ import { CustomerSidebar } from '@waldur/customer/workspace/CustomerSidebar';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { getCustomer } from '@waldur/marketplace/common/api';
+import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
+import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
 import { useTitle } from '@waldur/navigation/title';
 import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 import { UsersService } from '@waldur/user/UsersService';
+import { getCustomer as getCustomerSelector } from '@waldur/workspace/selectors';
 
 import { formatPeriod } from '../utils';
 
@@ -23,18 +27,13 @@ import { DownloadInvoiceButton } from './DownloadInvoiceButton';
 import { InvoiceDetails } from './InvoiceDetails';
 import { PrintInvoiceButton } from './PrintInvoiceButton';
 
-const refreshBreadcrumbs = invoice => {
-  const currentStateService = ngInjector.get('currentStateService');
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-
-  const customerUUID = currentStateService.getCustomerUuid();
-  BreadcrumbsService.activeItem = formatPeriod(invoice);
-  BreadcrumbsService.items = [
+const getBreadcrumbs = (customer, invoice): BreadcrumbItem[] => {
+  return [
     {
       label: translate('Organization workspace'),
       state: 'organization.details',
       params: {
-        uuid: customerUUID,
+        uuid: customer.uuid,
       },
     },
     {
@@ -44,8 +43,11 @@ const refreshBreadcrumbs = invoice => {
           : translate('Invoices list'),
       state: 'organization.billing',
       params: {
-        uuid: customerUUID,
+        uuid: customer.uuid,
       },
+    },
+    {
+      label: formatPeriod(invoice),
     },
   ];
 };
@@ -75,7 +77,6 @@ const loadData = async (invoiceId: string) => {
   );
   currentStateService.setOwnerOrStaff(status);
   currentStateService.setCustomer(currentCustomer);
-  refreshBreadcrumbs(invoice);
   return invoice;
 };
 
@@ -109,6 +110,12 @@ export const BillingDetails = () => {
       router.stateService.go('errorPage.notFound');
     }
   }, [error, router.stateService]);
+
+  const customer = useSelector(getCustomerSelector);
+  useBreadcrumbsFn(
+    () => (customer && invoice ? getBreadcrumbs(customer, invoice) : []),
+    [customer, invoice],
+  );
 
   return (
     <Layout

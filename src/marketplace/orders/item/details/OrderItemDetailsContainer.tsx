@@ -10,67 +10,63 @@ import * as api from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
+import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
+import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
 
 import { OrderItemDetails } from './OrderItemDetails';
 
-function updateBreadcrumbs(orderItem: OrderItemDetailsType) {
-  const $timeout = ngInjector.get('$timeout');
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
+function getBreadcrumbs(orderItem: OrderItemDetailsType): BreadcrumbItem[] {
   const WorkspaceService = ngInjector.get('WorkspaceService');
 
-  $timeout(() => {
-    BreadcrumbsService.activeItem = orderItem.attributes.name;
-    const data = WorkspaceService.getWorkspace();
-    if (data.workspace === 'organization') {
-      BreadcrumbsService.items = [
-        {
-          label: translate('Organization workspace'),
-          state: 'organization.details',
+  const data = WorkspaceService.getWorkspace();
+  if (data.workspace === 'organization') {
+    return [
+      {
+        label: translate('Organization workspace'),
+        state: 'organization.details',
+      },
+      {
+        label: translate('My services'),
+      },
+      {
+        label: translate('My orders'),
+        state: 'marketplace-my-order-items',
+        params: {
+          uuid: orderItem.customer_uuid,
         },
-        {
-          label: translate('My services'),
+      },
+      {
+        label: translate('Order details'),
+        state: 'marketplace-order-details-customer',
+        params: {
+          order_uuid: orderItem.order_uuid,
         },
-        {
-          label: translate('My orders'),
-          state: 'marketplace-my-order-items',
-          params: {
-            uuid: orderItem.customer_uuid,
-          },
+      },
+    ];
+  } else {
+    return [
+      {
+        label: translate('Project workspace'),
+        state: 'project.details',
+      },
+      {
+        label: translate('My orders'),
+        state: 'marketplace-order-list',
+      },
+      {
+        label: translate('Order details'),
+        state: 'marketplace-order-details',
+        params: {
+          order_uuid: orderItem.order_uuid,
         },
-        {
-          label: translate('Order details'),
-          state: 'marketplace-order-details-customer',
-          params: {
-            order_uuid: orderItem.order_uuid,
-          },
-        },
-      ];
-    } else {
-      BreadcrumbsService.items = [
-        {
-          label: translate('Project workspace'),
-          state: 'project.details',
-        },
-        {
-          label: translate('My orders'),
-          state: 'marketplace-order-list',
-        },
-        {
-          label: translate('Order details'),
-          state: 'marketplace-order-details',
-          params: {
-            order_uuid: orderItem.order_uuid,
-          },
-        },
-      ];
-    }
-  });
+      },
+    ];
+  }
 }
 
 async function loadOrderItem(order_item_uuid) {
   const orderItem = await api.getOrderItem(order_item_uuid);
-  updateBreadcrumbs(orderItem);
   const offering = await api.getOffering(orderItem.offering_uuid);
   const plugins = await api.getPlugins();
   const limits = plugins.find(plugin => plugin.offering_type === offering.type)
@@ -95,6 +91,10 @@ export const OrderItemDetailsContainer: React.FC<{}> = () => {
     () => loadOrderItem(order_item_uuid),
     [order_item_uuid],
   );
+
+  useBreadcrumbsFn(() => (value ? getBreadcrumbs(value.orderItem) : []), [
+    value,
+  ]);
 
   useTitle(
     value ? value.orderItem.offering_name : translate('Order item details'),

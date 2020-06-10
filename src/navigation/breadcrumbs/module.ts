@@ -1,6 +1,5 @@
 import { connectAngularComponent } from '@waldur/store/connect';
 
-import BreadcrumbsService from './breadcrumbs-service';
 import { BreadcrumbsContainer } from './BreadcrumbsContainer';
 
 export default module => {
@@ -8,5 +7,4 @@ export default module => {
     'breadcrumbsContainer',
     connectAngularComponent(BreadcrumbsContainer),
   );
-  module.service('BreadcrumbsService', BreadcrumbsService);
 };

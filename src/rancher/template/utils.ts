@@ -6,7 +6,6 @@ import {
 } from '../api';
 import { Template, Question } from '../types';
 
-import { refreshBreadcrumbs } from './breadcrumbs';
 import { FormData } from './types';
 
 export const groupQuestions = (
@@ -64,7 +63,6 @@ export const parseQuestions = (questions: Question[]) => {
 export const loadData = async (templateUuid: string, clusterUuid: string) => {
   const template = await getTemplate(templateUuid);
   const cluster = await getCluster(clusterUuid);
-  refreshBreadcrumbs(cluster, template);
   const version = await getTemplateVersion(
     template.uuid,
     template.default_version,
@@ -80,6 +78,7 @@ export const loadData = async (templateUuid: string, clusterUuid: string) => {
   const questions = parseQuestions(version.questions);
 
   return {
+    cluster,
     template,
     version,
     projects,
