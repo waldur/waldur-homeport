@@ -4,7 +4,6 @@ import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsB
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { OpenStackInstanceTenantButton } from '@waldur/openstack/openstack-instance/OpenStackInstanceTenantButton';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { ActionButtonResource } from './actions/ActionButtonResource';
 import * as registry from './resource-configuration';
@@ -13,15 +12,13 @@ import { ResourceSummary } from './summary/ResourceSummary';
 import { ResourceTabs } from './tabs/ResourceTabs';
 import { formatResourceType } from './utils';
 
-export const ResourceDetails = ({ resource }) => {
-  const [header, setHeader] = React.useState();
-
-  React.useEffect(() => {
+export const ResourceDetails = ({ resource, refreshResource }) => {
+  const header = React.useMemo(() => {
     const config = registry.get(resource.resource_type);
     if (config) {
-      setHeader(config.getHeader(resource));
+      return config.getHeader(resource);
     } else {
-      setHeader(formatResourceType(resource));
+      return formatResourceType(resource);
     }
   }, [resource]);
 
@@ -36,7 +33,7 @@ export const ResourceDetails = ({ resource }) => {
           <div className="col-lg-12">
             <div className="pull-right">
               <ActionButtonResource url={resource.url} />
-              <ResourceRefreshButton />
+              <ResourceRefreshButton refreshResource={refreshResource} />
               <OpenStackInstanceTenantButton resource={resource} />
               {resource.marketplace_offering_uuid && (
                 <OfferingDetailsButton
@@ -69,8 +66,3 @@ export const ResourceDetails = ({ resource }) => {
     </div>
   );
 };
-
-export default connectAngularComponent(ResourceDetails, [
-  'resource',
-  'controller',
-]);

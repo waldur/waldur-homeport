@@ -36,7 +36,9 @@ export const getBreadcrumbs = state => state.breadcrumbs as BreadcrumbItem[];
 export const useBreadcrumbs = (items: BreadcrumbItem[]) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(setBreadcrumbs(items));
+    if (items) {
+      dispatch(setBreadcrumbs(items));
+    }
   }, [dispatch, items]);
 };
 
