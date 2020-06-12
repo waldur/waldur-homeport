@@ -5,6 +5,7 @@ import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 import { KeyCreateForm } from './keys/KeyCreateForm';
 import { UserEmailChangeCallback } from './support/UserEmailChangeCallback';
 import { tabs, requireIdParam } from './tabs';
+import { UserDetails } from './UserDetails';
 
 export const states: StateDeclaration[] = [
   {
@@ -15,7 +16,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: WOKSPACE_NAMES.user,
     },
-    template: '<user-details></user-details>',
+    component: UserDetails,
   },
 
   { name: 'profile.details', ...tabs.dashboard },
@@ -33,7 +34,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: WOKSPACE_NAMES.user,
     },
-    template: '<user-details></user-details>',
+    component: UserDetails,
     resolve: {
       requireIdParam,
     },
@@ -58,7 +59,7 @@ export const states: StateDeclaration[] = [
     name: 'keys',
     url: '/keys/',
     abstract: true,
-    template: '<user-details></user-details>',
+    component: UserDetails,
     data: {
       auth: true,
       workspace: WOKSPACE_NAMES.user,
