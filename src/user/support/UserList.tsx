@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { BooleanField } from '@waldur/table-react/BooleanField';
+import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
 import { Table, connectTable, createFetcher } from '@waldur/table-react/index';
 
 import { UserActivateButton } from './UserActivateButton';
@@ -19,7 +20,7 @@ const UserActionsButton = props => (
 );
 
 const renderFieldOrDash = field => {
-  return field ? field : '\u2014';
+  return field ? field : DASH_ESCAPE_CODE;
 };
 
 const PhoneNumberField = ({ row }) => (
@@ -57,7 +58,7 @@ const OrganizationRolesField = ({ row }) => {
       );
     });
   } else {
-    return '\u2014';
+    return DASH_ESCAPE_CODE;
   }
 };
 
@@ -78,7 +79,7 @@ const ProjectRolesField = ({ row }) => {
       );
     });
   } else {
-    return '\u2014';
+    return DASH_ESCAPE_CODE;
   }
 };
 

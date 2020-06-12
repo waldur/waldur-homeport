@@ -8,6 +8,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
 import { getProject } from '@waldur/workspace/selectors';
 
 export const TableComponent = props => {
@@ -37,12 +38,14 @@ export const TableComponent = props => {
     {
       title: translate('Approved at'),
       render: ({ row }) =>
-        row.approved_at ? formatDateTime(row.approved_at) : '\u2014',
+        row.approved_at ? formatDateTime(row.approved_at) : DASH_ESCAPE_CODE,
     },
     {
       title: translate('Approved by'),
       render: ({ row }) =>
-        row.approved_by_full_name || row.approved_by_username || '\u2014',
+        row.approved_by_full_name ||
+        row.approved_by_username ||
+        DASH_ESCAPE_CODE,
     },
     {
       title: translate('Cost'),
@@ -73,8 +76,10 @@ const TableOptions = {
     formatDateTime(row.created),
     row.created_by_full_name || row.created_by_username,
     row.state,
-    row.approved_at ? formatDateTime(row.approved_at) : '\u2014',
-    row.row.approved_by_full_name || row.approved_by_username || '\u2014',
+    row.approved_at ? formatDateTime(row.approved_at) : DASH_ESCAPE_CODE,
+    row.row.approved_by_full_name ||
+      row.approved_by_username ||
+      DASH_ESCAPE_CODE,
     row.total_cost,
   ],
   exportFields: [
