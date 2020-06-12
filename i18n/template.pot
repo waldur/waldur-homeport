@@ -5595,6 +5595,10 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+msgid "Rule count"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/tabs.ts
 msgid "Rules"
 msgstr ""
