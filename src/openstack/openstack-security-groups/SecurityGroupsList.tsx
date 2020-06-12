@@ -4,7 +4,20 @@ import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
+import { Resource } from '@waldur/resource/types';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
+
+interface ResourceRules extends Resource {
+  rules: {
+    id: number;
+    protocol: string;
+    cidr: string;
+    from_port: number;
+    to_port: number;
+  }[];
+}
+
+const ResourceRuleCount = (resource: ResourceRules) => resource.rules.length;
 
 const TableComponent = props => {
   const { translate } = props;
@@ -15,6 +28,10 @@ const TableComponent = props => {
         {
           title: translate('Name'),
           render: ({ row }) => <ResourceName resource={row} />,
+        },
+        {
+          title: translate('Rule count'),
+          render: ({ row }) => ResourceRuleCount(row),
         },
         {
           title: translate('State'),
