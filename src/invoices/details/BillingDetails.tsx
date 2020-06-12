@@ -7,7 +7,6 @@ import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV, ngInjector } from '@waldur/core/services';
 import { getUUID } from '@waldur/core/utils';
-import { CustomersService } from '@waldur/customer/services/CustomersService';
 import { CustomerSidebar } from '@waldur/customer/workspace/CustomerSidebar';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
@@ -17,7 +16,8 @@ import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
 import { useTitle } from '@waldur/navigation/title';
 import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
-import { UsersService } from '@waldur/user/UsersService';
+import store from '@waldur/store/store';
+import { setCurrentCustomer } from '@waldur/workspace/actions';
 import { getCustomer as getCustomerSelector } from '@waldur/workspace/selectors';
 
 import { formatPeriod } from '../utils';
@@ -54,7 +54,6 @@ const getBreadcrumbs = (customer, invoice): BreadcrumbItem[] => {
 
 const loadData = async (invoiceId: string) => {
   const WorkspaceService = ngInjector.get('WorkspaceService');
-  const currentStateService = ngInjector.get('currentStateService');
 
   let invoice;
   if (isFeatureVisible('paypal')) {
@@ -70,13 +69,7 @@ const loadData = async (invoiceId: string) => {
     hasCustomer: true,
     workspace: WOKSPACE_NAMES.organization,
   });
-  const currentUser = await UsersService.getCurrentUser();
-  const status = CustomersService.checkCustomerUser(
-    currentCustomer,
-    currentUser,
-  );
-  currentStateService.setOwnerOrStaff(status);
-  currentStateService.setCustomer(currentCustomer);
+  store.dispatch(setCurrentCustomer(currentCustomer));
   return invoice;
 };
 

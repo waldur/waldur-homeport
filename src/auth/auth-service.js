@@ -21,6 +21,7 @@
 import Axios from 'axios';
 
 import { translate } from '@waldur/i18n';
+import { UsersService } from '@waldur/user/UsersService';
 
 export class AuthService {
   // @ngInject
@@ -31,8 +32,6 @@ export class AuthService {
     $window,
     $state,
     $uiRouterGlobals,
-    usersService,
-    currentStateService,
     ncUtilsFlash,
     ENV,
   ) {
@@ -42,8 +41,6 @@ export class AuthService {
     this.$window = $window;
     this.$state = $state;
     this.$uiRouterGlobals = $uiRouterGlobals;
-    this.usersService = usersService;
-    this.currentStateService = currentStateService;
     this.ncUtilsFlash = ncUtilsFlash;
     this.ENV = ENV;
   }
@@ -126,7 +123,7 @@ export class AuthService {
     delete this.$http.defaults.headers.common['Authorization'];
     delete Axios.defaults.headers.common['Authorization'];
     this.user = { isAuthenticated: false };
-    this.usersService.currentUser = null;
+    UsersService.currentUser = null;
     this.$auth.logout();
     this.$rootScope.$broadcast('abortRequests');
     this.$state.go('login', params);

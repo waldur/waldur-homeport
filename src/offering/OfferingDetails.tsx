@@ -10,6 +10,11 @@ import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
 import { useTitle } from '@waldur/navigation/title';
 import { ProjectSidebar } from '@waldur/project/ProjectSidebar';
+import store from '@waldur/store/store';
+import {
+  setCurrentCustomer,
+  setCurrentProject,
+} from '@waldur/workspace/actions';
 
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
@@ -56,8 +61,8 @@ const loadOffering = async offeringUuid => {
   const offeringConfig = template.config;
   const project = await getProject(offering.project_uuid);
   const customer = await getCustomer(project.customer_uuid);
-  ngInjector.get('currentStateService').setCustomer(customer);
-  ngInjector.get('currentStateService').setProject(project);
+  store.dispatch(setCurrentCustomer(customer));
+  store.dispatch(setCurrentProject(project));
   ngInjector.get('WorkspaceService').setWorkspace({
     customer,
     project,

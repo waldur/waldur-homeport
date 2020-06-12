@@ -12,6 +12,8 @@ import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError } from '@waldur/store/coreSaga';
+import store from '@waldur/store/store';
+import { setCurrentCustomer } from '@waldur/workspace/actions';
 import {
   getUser,
   isOwner as isOwnerSelector,
@@ -78,17 +80,15 @@ export const CustomerRemovePanel = () => {
 
     const confirmDelete = confirm(translate('Confirm deletion?'));
     if (confirmDelete) {
-      const currentStateService = ngInjector.get('currentStateService');
       const stateUtilsService = ngInjector.get('stateUtilsService');
-      currentStateService.setCustomer(null);
+      store.dispatch(setCurrentCustomer(null));
       deleteById('/customers/', customer.uuid).then(
         () => {
           router.stateService.go('profile.details').then(() => {
             stateUtilsService.clear();
-            currentStateService.setHasCustomer(false);
           });
         },
-        () => currentStateService.setCustomer(customer),
+        () => store.dispatch(setCurrentCustomer(customer)),
       );
     }
   };

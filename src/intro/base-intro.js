@@ -1,3 +1,6 @@
+import { CustomersService } from '@waldur/customer/services/CustomersService';
+import { UsersService } from '@waldur/user/UsersService';
+
 export default class BaseIntro {
   // @ngInject
   constructor(
@@ -6,9 +9,7 @@ export default class BaseIntro {
     ncIntroUtils,
     WorkspaceService,
     NavigationUtilsService,
-    usersService,
     ENV,
-    customersService,
     features,
   ) {
     this.$rootScope = $rootScope;
@@ -19,9 +20,7 @@ export default class BaseIntro {
     this.features = features;
     this.workspace = {};
     this.hasPermissions = false;
-    this.usersService = usersService;
     this.ENV = ENV;
-    this.customersService = customersService;
   }
 
   setup() {
@@ -56,10 +55,10 @@ export default class BaseIntro {
 
   refreshWorkspace() {
     this.cleanUp();
-    let newWorkspace = this.WorkspaceService.getWorkspace();
+    const newWorkspace = this.WorkspaceService.getWorkspace();
     if (!angular.equals(this.workspace, newWorkspace)) {
       this.workspace = newWorkspace;
-      let newHasPermission =
+      const newHasPermission =
         this.workspace.hasCustomer && this.features.isVisible('intro');
       if (newHasPermission !== this.hasPermissions) {
         this.hasPermissions = newHasPermission;
@@ -109,7 +108,7 @@ export default class BaseIntro {
         }),
       ])
       .then(() => {
-        let options = {
+        const options = {
           steps: [],
         };
 
@@ -137,13 +136,13 @@ export default class BaseIntro {
   }
 
   customersAvailable() {
-    return this.customersService.countCustomers().then(count => {
+    return CustomersService.countCustomers().then(count => {
       return count > 0;
     });
   }
 
   userCanCreateOrganization() {
-    return this.usersService.getCurrentUser().then(user => {
+    return UsersService.getCurrentUser().then(user => {
       return (
         user.is_staff || this.ENV.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER
       );
@@ -155,7 +154,7 @@ export default class BaseIntro {
       return;
     }
 
-    let workspace = this.WorkspaceService.getWorkspace();
+    const workspace = this.WorkspaceService.getWorkspace();
     if (!workspace.customer && workspace.hasCustomer) {
       this.workspaceToggleIntro(this.$rootScope);
     } else if (

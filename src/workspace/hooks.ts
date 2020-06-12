@@ -4,11 +4,8 @@ import {
   userLoggedIn,
   userUpdated,
   userLoggedOut,
-  setCurrentCustomer,
-  setCurrentProject,
   setCurrentWorkspace,
 } from './actions';
-import { Customer } from './types';
 
 export function attachHooks($rootScope, authService, WorkspaceService) {
   $rootScope.$on('authService:signin', () => {
@@ -21,17 +18,6 @@ export function attachHooks($rootScope, authService, WorkspaceService) {
 
   $rootScope.$on('logoutStart', () => {
     store.dispatch(userLoggedOut());
-  });
-
-  $rootScope.$on(
-    'setCurrentCustomer',
-    (_, { customer }: { customer: Customer }) => {
-      store.dispatch(setCurrentCustomer(customer));
-    },
-  );
-
-  $rootScope.$on('setCurrentProject', (_, { project }) => {
-    store.dispatch(setCurrentProject(project));
   });
 
   $rootScope.$on('WORKSPACE_CHANGED', () => {

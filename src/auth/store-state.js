@@ -1,14 +1,15 @@
+import { UsersService } from '@waldur/user/UsersService';
+
 // @ngInject
 export default function storeLastState(
   $rootScope,
   $state,
   $injector,
-  usersService,
   UserSettings,
 ) {
   $rootScope.$on('logoutStart', function() {
-    if (usersService.currentUser) {
-      const user_uuid = usersService.currentUser.uuid;
+    if (UsersService.currentUser) {
+      const user_uuid = UsersService.currentUser.uuid;
       const $stateParams = $injector.get('$stateParams');
       UserSettings.setSettings(user_uuid, {
         name: $state.current.name,

@@ -1,3 +1,5 @@
+import { UsersService } from '@waldur/user/UsersService';
+
 import template from './site-header.html';
 import './site-header.scss';
 
@@ -5,16 +7,9 @@ export default {
   template: template,
   controller: class SiteHeader {
     // @ngInject
-    constructor(
-      authService,
-      usersService,
-      ENV,
-      NavigationUtilsService,
-      $scope,
-    ) {
+    constructor(authService, ENV, NavigationUtilsService, $scope) {
       this.authService = authService;
       this.headerLogo = ENV.loginLogo;
-      this.usersService = usersService;
       this.NavigationUtilsService = NavigationUtilsService;
       this.$scope = $scope;
     }
@@ -31,9 +26,9 @@ export default {
     checkUser() {
       this.isAuthenticated = this.authService.isAuthenticated();
       if (this.isAuthenticated) {
-        this.usersService
-          .isCurrentUserValid()
-          .then(result => (this.isValidUser = result));
+        UsersService.isCurrentUserValid().then(
+          result => (this.isValidUser = result),
+        );
       }
     }
 

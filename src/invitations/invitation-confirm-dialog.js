@@ -1,3 +1,5 @@
+import { UsersService } from '@waldur/user/UsersService';
+
 import template from './invitation-confirm-dialog.html';
 import { InvitationService } from './InvitationService';
 
@@ -10,8 +12,7 @@ const invitationConfirmDialog = {
   },
   controller: class InvitationConfirmController {
     // @ngInject
-    constructor(usersService, $timeout, ENV) {
-      this.usersService = usersService;
+    constructor($timeout, ENV) {
       this.$timeout = $timeout;
       this.invitationCheckInterval = ENV.invitationCheckInterval;
       this.validateInvitationEmail =
@@ -26,7 +27,7 @@ const invitationConfirmDialog = {
     invitationCheck(token) {
       InvitationService.check(token)
         .then(response => {
-          this.usersService.getCurrentUser().then(user => {
+          UsersService.getCurrentUser().then(user => {
             const invitation = response.data;
             if (!user.email || user.email === invitation.email) {
               this.closeDecliningNewEmail();

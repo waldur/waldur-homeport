@@ -1,6 +1,9 @@
 import { translate } from '@waldur/i18n';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { filterItems } from '@waldur/navigation/sidebar/utils';
+import store from '@waldur/store/store';
+import { UsersService } from '@waldur/user/UsersService';
+import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 const getHelpdeskItems = () => [
   {
@@ -105,10 +108,8 @@ const getReportItems = () => [
 // This service checks users status and returns different sidebar items and router state
 export default class IssueNavigationService {
   // @ngInject
-  constructor($state, usersService, currentStateService, features) {
+  constructor($state, features) {
     this.$state = $state;
-    this.usersService = usersService;
-    this.currentStateService = currentStateService;
     this.features = features;
   }
 
@@ -116,7 +117,7 @@ export default class IssueNavigationService {
     if (this.features.isVisible('support')) {
       return true;
     }
-    const user = this.usersService.currentUser;
+    const user = UsersService.currentUser;
     return user && (user.is_staff || user.is_support);
   }
 
@@ -128,7 +129,7 @@ export default class IssueNavigationService {
         return this.$state.go('support.resources');
       }
     }
-    return this.usersService.getCurrentUser().then(user => {
+    return UsersService.getCurrentUser().then(user => {
       if (user.is_staff || user.is_support) {
         this.$state.go('support.helpdesk');
       } else {
@@ -138,8 +139,7 @@ export default class IssueNavigationService {
   }
 
   getSidebarItems() {
-    return this.usersService
-      .getCurrentUser()
+    return UsersService.getCurrentUser()
       .then(user => {
         this.currentUser = user;
         if (!this.features.isVisible('support')) {
@@ -202,8 +202,7 @@ export default class IssueNavigationService {
       return translate('Back to project');
     } else if (
       prevWorkspace === 'organization' &&
-      (this.currentStateService.getOwnerOrStaff() ||
-        this.currentUser.is_support)
+      (isOwnerOrStaff(store.getState()) || this.currentUser.is_support)
     ) {
       return translate('Back to organization');
     } else if (prevWorkspace === 'user') {

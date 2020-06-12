@@ -1,21 +1,20 @@
+import store from '@waldur/store/store';
+import { UsersService } from '@waldur/user/UsersService';
+import { setCurrentCustomer } from '@waldur/workspace/actions';
+import { getCustomer } from '@waldur/workspace/selectors';
+
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
+import { CustomersService } from './services/CustomersService';
+
 // @ngInject
-export function loadCustomer(
-  $q,
-  $stateParams,
-  $state,
-  customersService,
-  currentStateService,
-  WorkspaceService,
-) {
+export function loadCustomer($q, $stateParams, $state, WorkspaceService) {
   if (!$stateParams.uuid) {
     return $q.reject();
   }
-  return customersService
-    .get($stateParams.uuid)
+  return CustomersService.get($stateParams.uuid)
     .then(customer => {
-      currentStateService.setCustomer(customer);
+      store.dispatch(setCurrentCustomer(customer));
       return customer;
     })
     .then(customer => {
@@ -35,27 +34,17 @@ export function loadCustomer(
 }
 
 // @ngInject
-export function CustomerController(
-  $scope,
-  $state,
-  usersService,
-  currentStateService,
-  customersService,
-) {
-  usersService.getCurrentUser().then(currentUser => {
-    currentStateService.getCustomer().then(currentCustomer => {
-      $scope.currentCustomer = currentCustomer;
-      $scope.currentUser = currentUser;
+export function CustomerController($scope, $state) {
+  UsersService.getCurrentUser().then(currentUser => {
+    const currentCustomer = getCustomer(store.getState());
+    $scope.currentCustomer = currentCustomer;
+    $scope.currentUser = currentUser;
 
-      if (
-        customersService.checkCustomerUser(currentCustomer, currentUser) ||
-        currentUser.is_support
-      ) {
-        currentStateService.setOwnerOrStaff(true);
-      } else {
-        currentStateService.setOwnerOrStaff(false);
-        $state.go('profile.details');
-      }
-    });
+    if (
+      !CustomersService.checkCustomerUser(currentCustomer, currentUser) &&
+      !currentUser.is_support
+    ) {
+      $state.go('profile.details');
+    }
   });
 }

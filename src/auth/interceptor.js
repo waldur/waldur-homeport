@@ -4,6 +4,7 @@ import Qs from 'qs';
 import { ngInjector } from '@waldur/core/services';
 import { closeModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
+import { UsersService } from '@waldur/user/UsersService';
 
 // @ngInject
 function initAuthToken($auth, $http) {
@@ -45,13 +46,13 @@ Axios.interceptors.response.use(
 );
 
 // @ngInject
-function requireAuth($transitions, $auth, $rootScope, features, usersService) {
+function requireAuth($transitions, $auth, $rootScope, features) {
   $transitions.onStart(
     {
       to: state => state.data && state.data.auth && $auth.isAuthenticated(),
     },
     transition =>
-      usersService.isCurrentUserValid().then(result => {
+      UsersService.isCurrentUserValid().then(result => {
         if (result) {
           if (transition.to().name == 'initialdata') {
             return transition.router.stateService.target('profile.details');
