@@ -1,12 +1,13 @@
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
+import store from '@waldur/store/store';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { getCategoryLink } from './utils';
 
-SidebarExtensionService.register('customer', async () => {
-  const customer = await ngInjector.get('currentStateService').getCustomer();
+SidebarExtensionService.register('customer', () => {
+  const customer = getCustomer(store.getState());
   if (!customer) {
     return [];
   }
@@ -125,7 +126,7 @@ SidebarExtensionService.register('customer', async () => {
 });
 
 SidebarExtensionService.register('project', async () => {
-  const project = await ngInjector.get('currentStateService').getProject();
+  const project = getProject(store.getState());
   const categories = await getCategories({
     params: { field: ['uuid', 'title'] },
   });

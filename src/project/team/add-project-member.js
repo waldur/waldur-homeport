@@ -1,3 +1,5 @@
+import { CustomersService } from '@waldur/customer/services/CustomersService';
+import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
 import { closeModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 
@@ -10,16 +12,8 @@ const addProjectMember = {
   },
   controller: class AddProjectMemberDialogController {
     // @ngInject
-    constructor(
-      projectPermissionsService,
-      customersService,
-      $q,
-      ENV,
-      ErrorMessageFormatter,
-    ) {
+    constructor($q, ENV, ErrorMessageFormatter) {
       this.$q = $q;
-      this.projectPermissionsService = projectPermissionsService;
-      this.customersService = customersService;
       this.ENV = ENV;
       this.ErrorMessageFormatter = ErrorMessageFormatter;
     }
@@ -75,13 +69,13 @@ const addProjectMember = {
           : null;
         return this.$q.resolve();
       } else {
-        return this.customersService
-          .getUsers(this.resolve.currentCustomer.uuid)
-          .then(users => {
-            this.users = users.filter(user => {
-              return this.resolve.addedUsers.indexOf(user.uuid) === -1;
-            });
+        return CustomersService.getUsers(
+          this.resolve.currentCustomer.uuid,
+        ).then(users => {
+          this.users = users.filter(user => {
+            return this.resolve.addedUsers.indexOf(user.uuid) === -1;
           });
+        });
       }
     }
 
@@ -131,15 +125,15 @@ const addProjectMember = {
       ) {
         return this.updatePermission(this.resolve.editUser.permission);
       }
-      return this.projectPermissionsService
-        .deletePermission(this.resolve.editUser.permission)
-        .then(() => {
-          return this.createPermission(this.projectModel.role);
-        });
+      return ProjectPermissionsService.deletePermission(
+        this.resolve.editUser.permission,
+      ).then(() => {
+        return this.createPermission(this.projectModel.role);
+      });
     }
 
     updatePermission(permission) {
-      return this.projectPermissionsService.update(permission, {
+      return ProjectPermissionsService.update(permission, {
         user: this.projectModel.user.url,
         role: this.projectModel.role,
         expiration_time: this.projectModel.expiration_time,
@@ -148,7 +142,7 @@ const addProjectMember = {
     }
 
     createPermission(role) {
-      return this.projectPermissionsService.create({
+      return ProjectPermissionsService.create({
         user: this.projectModel.user.url,
         project: this.resolve.currentProject.url,
         expiration_time: this.projectModel.expiration_time,

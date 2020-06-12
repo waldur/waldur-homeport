@@ -1,9 +1,10 @@
+import { UsersService } from '@waldur/user/UsersService';
+
 import { InvitationService } from './InvitationService';
 
 export class InvitationUtilsService {
   // @ngInject
   constructor(
-    usersService,
     ncUtilsFlash,
     $q,
     $auth,
@@ -13,7 +14,6 @@ export class InvitationUtilsService {
     $uibModal,
     ENV,
   ) {
-    this.usersService = usersService;
     this.ncUtilsFlash = ncUtilsFlash;
     this.$q = $q;
     this.$auth = $auth;
@@ -40,9 +40,9 @@ export class InvitationUtilsService {
         this.$auth.isAuthenticated() &&
         toState.name !== 'marketplace-public-offering.details'
       ) {
-        this.usersService.getCurrentUser().then(user => {
+        UsersService.getCurrentUser().then(user => {
           const token = InvitationService.getInvitationToken();
-          if (token && !this.usersService.mandatoryFieldsMissing(user)) {
+          if (token && !UsersService.mandatoryFieldsMissing(user)) {
             this.confirmInvitation(token)
               .then(replaceEmail => {
                 this.acceptInvitation(token, replaceEmail);

@@ -1,6 +1,10 @@
 import { closeModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 
+import { CustomerPermissionsService } from '../services/CustomerPermissionsService';
+import { CustomersService } from '../services/CustomersService';
+import { ProjectPermissionsService } from '../services/ProjectPermissionsService';
+
 import template from './add-team-member.html';
 import './add-team-member.scss';
 
@@ -11,19 +15,8 @@ const addTeamMember = {
   },
   controller: class AddTeamMemberDialogController {
     // @ngInject
-    constructor(
-      $q,
-      customersService,
-      customerPermissionsService,
-      projectPermissionsService,
-      ENV,
-      ErrorMessageFormatter,
-      $filter,
-    ) {
+    constructor($q, ENV, ErrorMessageFormatter, $filter) {
       this.$q = $q;
-      this.customersService = customersService;
-      this.customerPermissionsService = customerPermissionsService;
-      this.projectPermissionsService = projectPermissionsService;
       this.ENV = ENV;
       this.ErrorMessageFormatter = ErrorMessageFormatter;
       this.$filter = $filter;
@@ -41,18 +34,18 @@ const addTeamMember = {
         expiration_time: null,
       };
 
-      this.canChangeRole = this.customersService.checkCustomerUser(
+      this.canChangeRole = CustomersService.checkCustomerUser(
         this.resolve.currentCustomer,
         this.resolve.currentUser,
       );
 
       this.canManageOwner =
         this.resolve.currentUser.is_staff ||
-        (this.customersService.isOwner(
+        (CustomersService.isOwner(
           this.resolve.currentCustomer,
           this.resolve.editUser,
         ) &&
-          this.customersService.isOwner(
+          CustomersService.isOwner(
             this.resolve.currentCustomer,
             this.resolve.currentUser,
           ) &&
@@ -156,7 +149,7 @@ const addTeamMember = {
         this.userModel.role !== this.resolve.editUser.role &&
         !this.userModel.role
       ) {
-        return this.customerPermissionsService.delete(
+        return CustomerPermissionsService.delete(
           this.resolve.editUser.permission,
         );
       } else if (!this.resolve.editUser.role && this.userModel.role) {
@@ -164,7 +157,7 @@ const addTeamMember = {
       } else if (
         this.userModel.expiration_time !== this.resolve.editUser.expiration_time
       ) {
-        return this.customerPermissionsService.update(
+        return CustomerPermissionsService.update(
           this.resolve.editUser.permission,
           { expiration_time: this.userModel.expiration_time },
         );
@@ -172,7 +165,7 @@ const addTeamMember = {
     }
 
     createCustomerPermission() {
-      return this.customerPermissionsService.create({
+      return CustomerPermissionsService.create({
         user: this.resolve.editUser.url,
         role: this.userModel.role,
         customer: this.resolve.currentCustomer.url,
@@ -218,11 +211,11 @@ const addTeamMember = {
       });
 
       const removalPromises = permissionsToDelete.map(permission => {
-        return this.projectPermissionsService.delete(permission);
+        return ProjectPermissionsService.delete(permission);
       });
 
       const renewalPromises = updatePermissions.map(permission => {
-        return this.projectPermissionsService.update(permission.permission, {
+        return ProjectPermissionsService.update(permission.permission, {
           role: permission.role,
           expiration_time: permission.expiration_time,
         });
@@ -230,7 +223,7 @@ const addTeamMember = {
 
       return this.$q.all(removalPromises).then(() => {
         const creationPromises = createdPermissions.map(permission => {
-          return this.projectPermissionsService.create({
+          return ProjectPermissionsService.create({
             user: this.resolve.editUser.url,
             role: permission.role,
             project: permission.url,

@@ -6,14 +6,14 @@ import { translate } from '@waldur/i18n';
 import { Sidebar } from '@waldur/navigation/sidebar/Sidebar';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { filterItems } from '@waldur/navigation/sidebar/utils';
-import { getUser } from '@waldur/workspace/selectors';
+import store from '@waldur/store/store';
+import { getUser, isOwnerOrStaff } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
 import { getPrivateUserTabs, getPublicUserTabs } from './constants';
 
 function getNavItems(user) {
   const stateUtilsService = ngInjector.get('stateUtilsService');
-  const currentStateService = ngInjector.get('currentStateService');
 
   const prevWorkspace = stateUtilsService.getPrevWorkspace();
   if (prevWorkspace === 'project') {
@@ -27,7 +27,7 @@ function getNavItems(user) {
     ];
   } else if (
     prevWorkspace === 'organization' &&
-    (currentStateService.getOwnerOrStaff() || user.is_support)
+    (isOwnerOrStaff(store.getState()) || user.is_support)
   ) {
     return [
       {

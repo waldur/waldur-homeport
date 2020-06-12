@@ -1,8 +1,12 @@
 import Axios from 'axios';
 
 import { get, getById } from '@waldur/core/api';
-import { $q, ngInjector, ENV } from '@waldur/core/services';
+import { $q, ENV } from '@waldur/core/services';
+import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
+import { setCurrentCustomer } from '@waldur/workspace/actions';
+import { getCustomer } from '@waldur/workspace/selectors';
+import { Customer } from '@waldur/workspace/types';
 
 class CustomersServiceClass {
   public filterByCustomer = false;
@@ -15,19 +19,14 @@ class CustomersServiceClass {
   }
 
   get(customerUuid) {
-    return $q.when(getById('/customers/', customerUuid));
+    return getById<Customer>('/customers/', customerUuid);
   }
 
   isOwnerOrStaff() {
-    return $q
-      .all([
-        ngInjector.get('currentStateService').getCustomer(),
-        UsersService.getCurrentUser(),
-      ])
-      .then(result => {
-        // eslint-disable-next-line prefer-spread
-        return this.checkCustomerUser.apply(this, result);
-      });
+    const customer = getCustomer(store.getState());
+    UsersService.getCurrentUser().then(user => {
+      return this.checkCustomerUser(customer, user);
+    });
   }
 
   checkCustomerUser(customer, user) {
@@ -68,7 +67,7 @@ class CustomersServiceClass {
 
   refreshCurrentCustomer(customerUuid) {
     return this.get(customerUuid).then(customer => {
-      ngInjector.get('currentStateService').setCustomer(customer);
+      store.dispatch(setCurrentCustomer(customer));
       return customer;
     });
   }

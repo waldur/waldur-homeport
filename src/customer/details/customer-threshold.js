@@ -1,3 +1,5 @@
+import { PriceEstimatesService } from '../services/price-estimates-service';
+
 import template from './customer-threshold.html';
 
 const customerThreshold = {
@@ -9,13 +11,12 @@ const customerThreshold = {
   },
   controller: class CustomerThresholdController {
     // @ngInject
-    constructor(ENV, priceEstimatesService) {
+    constructor(ENV) {
       this.currency = ENV.currency;
-      this.priceEstimatesService = priceEstimatesService;
     }
 
     $onInit() {
-      this.model.isHardLimit = this.priceEstimatesService.isHardLimit(
+      this.model.isHardLimit = PriceEstimatesService.isHardLimit(
         this.model.priceEstimate,
       );
       this.updateLimit();
@@ -33,7 +34,7 @@ const customerThreshold = {
     }
 
     validateThreshold() {
-      let isValid =
+      const isValid =
         this.model.priceEstimate.threshold >= this.model.priceEstimate.total;
       this.thresholdForm.threshold.$setValidity('exceedsThreshold', isValid);
     }
