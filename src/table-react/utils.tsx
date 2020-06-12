@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate, withTranslation } from '@waldur/i18n/translate';
 import { isVisible } from '@waldur/store/config';
+import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
 import { selectTableRows } from '@waldur/table-react/selectors';
 
 import * as actions from './actions';
@@ -103,7 +104,7 @@ export const transformRows = (rows: any[]) => {
   return { entities, order };
 };
 
-export const renderFieldOrDash = field => (field ? field : '\u2014');
+export const renderFieldOrDash = field => (field ? field : DASH_ESCAPE_CODE);
 
 export function getMessage({ query, verboseName }) {
   const context = { verboseName: verboseName || translate('items') };

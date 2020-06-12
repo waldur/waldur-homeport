@@ -80,6 +80,6 @@ export function formatPhone(value) {
 }
 
 export const getActiveFixedPricePaymentProfile = (profiles: PaymentProfile[]) =>
-  profiles.find(
+  profiles?.find(
     profile => profile.is_active && profile.payment_type === 'fixed_price',
   );
