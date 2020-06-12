@@ -1,5 +1,4 @@
 import { FreeIpaAccount } from '@waldur/freeipa/FreeIPAAccount';
-import { withStore } from '@waldur/store/connect';
 
 import { HooksList } from './hooks/HooksList';
 import { KeysList } from './keys/KeysList';
@@ -10,7 +9,7 @@ import { UserManage } from './UserManage';
 export const tabs = {
   dashboard: {
     url: '',
-    component: withStore(UserDashboard),
+    component: UserDashboard,
     data: {
       pageClass: 'gray-bg',
       hideBreadcrumbs: true,
@@ -18,23 +17,23 @@ export const tabs = {
   },
   events: {
     url: 'events/',
-    component: withStore(CurrentUserEvents),
+    component: CurrentUserEvents,
   },
   keys: {
     url: 'keys/',
-    component: withStore(KeysList),
+    component: KeysList,
   },
   notifications: {
     url: 'notifications/',
-    component: withStore(HooksList),
+    component: HooksList,
   },
   manage: {
     url: 'manage/',
-    component: withStore(UserManage),
+    component: UserManage,
   },
   freeipa: {
     url: 'freeipa-account/',
-    component: withStore(FreeIpaAccount),
+    component: FreeIpaAccount,
     data: {
       feature: 'freeipa',
     },
