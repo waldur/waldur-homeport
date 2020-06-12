@@ -5,11 +5,16 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
+import { PaymentProfile } from '@waldur/workspace/types';
 
-export const AgreementInfo = () => {
+interface AgreementInfoProps {
+  paymentProfiles?: PaymentProfile[];
+}
+
+export const AgreementInfo = (props: AgreementInfoProps) => {
   const customer = useSelector(getCustomer);
   const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
-    customer.payment_profiles,
+    customer ? customer.payment_profiles : props.paymentProfiles,
   );
   return (
     <>

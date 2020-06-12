@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { DownloadLink } from '@waldur/core/DownloadLink';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -39,10 +40,14 @@ export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) =>
               <td>{props.project.name}</td>
             </tr>
           )}
-          <tr>
-            <td className="text-lg">{translate('Total')}</td>
-            <td className="text-lg">{defaultCurrency(props.total)}</td>
-          </tr>
+          {!getActiveFixedPricePaymentProfile(
+            props.customer.payment_profiles,
+          ) ? (
+            <tr>
+              <td className="text-lg">{translate('Total')}</td>
+              <td className="text-lg">{defaultCurrency(props.total)}</td>
+            </tr>
+          ) : null}
         </tbody>
       </table>
 
