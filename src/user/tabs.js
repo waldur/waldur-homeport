@@ -12,7 +12,6 @@ export const tabs = {
     component: UserDashboard,
     data: {
       pageClass: 'gray-bg',
-      hideBreadcrumbs: true,
     },
   },
   events: {
