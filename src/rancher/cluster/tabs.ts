@@ -8,6 +8,7 @@ import { ClusterNodesList } from '../node/ClusterNodesList';
 import { ClusterTemplatesList } from '../template/ClusterTemplateList';
 
 import { ClusterApplicationsList } from './ClusterApplicationsList';
+import { ClusterWorkloadsList } from './ClusterWorkloadsList';
 
 ResourceTabsConfiguration.register('Rancher.Cluster', () => [
   {
@@ -34,6 +35,11 @@ ResourceTabsConfiguration.register('Rancher.Cluster', () => [
     key: 'applications',
     title: translate('Applications'),
     component: ClusterApplicationsList,
+  },
+  {
+    key: 'workloads',
+    title: translate('Workloads'),
+    component: ClusterWorkloadsList,
   },
   ...getDefaultResourceTabs(),
 ]);
