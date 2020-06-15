@@ -6,7 +6,10 @@ export function get<T = {}>(
   endpoint: string,
   options?: AxiosRequestConfig,
 ): AxiosPromise<T> {
-  return Axios.get(`${ENV.apiEndpoint}api${endpoint}`, options);
+  return Axios.get(
+    endpoint.startsWith('http') ? endpoint : `${ENV.apiEndpoint}api${endpoint}`,
+    options,
+  );
 }
 
 export function getList<T = {}>(endpoint: string, params?: {}): Promise<T[]> {

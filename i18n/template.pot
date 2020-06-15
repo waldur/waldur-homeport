@@ -1692,7 +1692,7 @@ msgstr ""
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
-#: src/resource/actions/constants.js
+#: src/resource/actions/constants.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -1921,7 +1921,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot-schedule/actions.ts
 #: src/project/team/AddMemberButton.tsx
 #: src/resource/actions/base.ts
-#: src/resource/actions/constants.js
+#: src/resource/actions/constants.ts
 #: src/vmware/actions.ts
 msgid "Edit"
 msgstr ""
@@ -3514,7 +3514,7 @@ msgstr ""
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
-#: src/resource/actions/constants.js
+#: src/resource/actions/constants.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -5440,7 +5440,7 @@ msgid "Resource has been deleted."
 msgstr ""
 
 #: src/resource/actions/base.ts
-#: src/resource/actions/constants.js
+#: src/resource/actions/constants.ts
 msgid "Resource has been updated."
 msgstr ""
 
