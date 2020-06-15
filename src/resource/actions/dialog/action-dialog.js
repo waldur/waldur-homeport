@@ -2,6 +2,8 @@ import Axios from 'axios';
 
 import { toKeyValue } from '@waldur/core/utils';
 
+import { defaultFieldOptions } from '../constants';
+
 import template from './action-dialog.html';
 
 // @ngInject
@@ -13,7 +15,6 @@ function ActionDialogController(
   actionUtilsService,
   ncUtilsFlash,
   ActionResourceLoader,
-  DEFAULT_FIELD_OPTIONS,
 ) {
   angular.extend($scope, {
     init: function() {
@@ -60,8 +61,8 @@ function ActionDialogController(
                 $scope.form[name] = new Date($scope.resource[name]);
               }
             }
-            if (DEFAULT_FIELD_OPTIONS[field.type]) {
-              field.options = DEFAULT_FIELD_OPTIONS[field.type];
+            if (defaultFieldOptions[field.type]) {
+              field.options = defaultFieldOptions[field.type];
             }
           });
           if ($scope.action.order) {

@@ -1,5 +1,6 @@
 import { ENV } from '@waldur/core/services';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
+import { gettext } from '@waldur/i18n';
 
 export const defaultFieldOptions = {
   datetime: {
