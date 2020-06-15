@@ -6,13 +6,12 @@ import {
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
-export default function createAction(): ResourceAction {
+export function consoleAction(): ResourceAction {
   return {
     name: 'console',
     title: translate('Open console'),
     type: 'callback',
-    execute: resource =>
-      executeConsoleAction(resource, 'openstacktenant-instances'),
+    execute: resource => executeConsoleAction(resource, 'rancher-nodes'),
     validators: [validateState('OK'), validatePermissionsForConsoleAction],
   };
 }

@@ -1,7 +1,14 @@
+import { get } from '@waldur/core/api';
+import { format } from '@waldur/core/ErrorMessageFormatter';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { ActionContext } from '@waldur/resource/actions/types';
 
 import { listToDict } from '../core/utils';
+
+interface ConsoleResponse {
+  url: string;
+}
 
 const quotaNames = {
   storage: 'disk',
@@ -57,3 +64,63 @@ export const getInstanceListState = projectId => ({
     uuid: projectId,
   },
 });
+
+const getConsoleURL = (moduleName: string, id: string) =>
+  get<ConsoleResponse>(`/${moduleName}/${id}/console/`);
+
+export const executeConsoleAction = (resource, moduleName: string) => {
+  getConsoleURL(moduleName, resource.uuid)
+    .then(response => {
+      window.open(response.data.url);
+    })
+    .catch(error => {
+      const ctx = { message: format(error) };
+      const message = translate(
+        'Unable to open console. Error message: {message}',
+        ctx,
+      );
+      alert(message);
+    });
+};
+
+const getConsoleOutput = (moduleName: string, id: string) =>
+  get(`/${moduleName}/${id}/console_log/`);
+
+export const executeConsoleLogAction = (resource, moduleName: string) => {
+  getConsoleOutput(moduleName, resource.uuid)
+    .then(response => {
+      const win = window.open();
+      if (win == null) {
+        alert(translate('Unable to open console log'));
+        return;
+      }
+      const doc = win.document;
+      doc.open();
+      doc.write(`<pre>${response.data}</pre>`);
+      doc.close();
+    })
+    .catch(error => {
+      const ctx = { message: format(error) };
+      const message = translate(
+        'Unable to show console log. Error message: {message}',
+        ctx,
+      );
+      alert(message);
+    });
+};
+
+export const validatePermissionsForConsoleAction = (ctx: ActionContext) => {
+  if (ctx.user.is_staff) {
+    return;
+  }
+  if (
+    !ctx.user.is_support &&
+    ENV.plugins.WALDUR_OPENSTACK_TENANT
+      .ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS
+  ) {
+    return;
+  }
+  return translate(
+    'Only staff and organization users are allowed to open console.',
+  );
+};

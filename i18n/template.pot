@@ -3918,7 +3918,7 @@ msgstr ""
 msgid "Only pending invitation can be canceled."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleAction.ts
+#: src/openstack/utils.ts
 msgid "Only staff and organization users are allowed to open console."
 msgstr ""
 
@@ -3942,6 +3942,7 @@ msgid "Open"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
+#: src/rancher/node/actions/ConsoleAction.ts
 #: src/vmware/actions.ts
 msgid "Open console"
 msgstr ""
@@ -6115,6 +6116,7 @@ msgid "Show choices"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+#: src/rancher/node/actions/ConsoleLogAction.ts
 msgid "Show console log"
 msgstr ""
 
@@ -7358,12 +7360,11 @@ msgstr ""
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+#: src/openstack/utils.ts
 msgid "Unable to open console log"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleAction.ts
-#: src/vmware/actions.ts
+#: src/openstack/utils.ts
 msgid "Unable to open console. Error message: {message}"
 msgstr ""
 
@@ -7436,7 +7437,7 @@ msgstr ""
 msgid "Unable to send record notification."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+#: src/openstack/utils.ts
 msgid "Unable to show console log. Error message: {message}"
 msgstr ""
 
