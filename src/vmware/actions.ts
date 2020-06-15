@@ -1,16 +1,8 @@
-import { get } from '@waldur/core/api';
-import { format } from '@waldur/core/ErrorMessageFormatter';
 import { $rootScope } from '@waldur/core/services';
 import { translate, gettext } from '@waldur/i18n';
+import { executeConsoleAction } from '@waldur/openstack/utils';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import { validateState } from '@waldur/resource/actions/base';
-
-interface ConsleResponse {
-  url: string;
-}
-
-const getConsoleURL = (id: string) =>
-  get<ConsleResponse>(`/vmware-virtual-machine/${id}/console/`);
 
 ActionConfigurationRegistry.register('VMware.VirtualMachine', {
   order: [
@@ -65,20 +57,8 @@ ActionConfigurationRegistry.register('VMware.VirtualMachine', {
       title: translate('Open console'),
       type: 'callback',
       enabled: true,
-      execute: resource => {
-        getConsoleURL(resource.uuid)
-          .then(response => {
-            window.open(response.data.url);
-          })
-          .catch(error => {
-            const ctx = { message: format(error) };
-            const message = translate(
-              'Unable to open console. Error message: {message}',
-              ctx,
-            );
-            alert(message);
-          });
-      },
+      execute: resource =>
+        executeConsoleAction(resource, 'vmware-virtual-machine'),
       validators: [validateState('OK')],
     },
   },
