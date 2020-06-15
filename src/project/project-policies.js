@@ -1,5 +1,6 @@
 import { CustomersService } from '@waldur/customer/services/CustomersService';
 import { PriceEstimatesService } from '@waldur/customer/services/price-estimates-service';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { FreeIPAQuotaService } from '@waldur/freeipa/FreeIPAQuotaService';
 
 import { loadCertifications, updateCertifications } from './api';
@@ -20,6 +21,7 @@ const projectPolicies = {
     }
 
     $onInit() {
+      this.projectCostDetailsVisible = isFeatureVisible('projectCostDetails');
       this.currency = this.ENV.currency;
       this.canManage = false;
       this.projectCertifications = angular.copy(this.project.certifications);

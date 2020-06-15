@@ -1,3 +1,4 @@
+import { isFeatureVisible } from '@waldur/features/connect';
 import { FreeIPAQuotaService } from '@waldur/freeipa/FreeIPAQuotaService';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
@@ -18,6 +19,7 @@ const customerPolicies = {
     }
 
     $onInit() {
+      this.freeipaVisible = isFeatureVisible('freeipa');
       UsersService.getCurrentUser().then(currentUser => {
         const currentCustomer = getCustomer(store.getState());
         this.user = currentUser;

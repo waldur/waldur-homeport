@@ -13,7 +13,7 @@
     <form
       name="$ctrl.policiesForm"
       class="form-horizontal"
-      visible-if="'freeipa'"
+      ng-if="$ctrl.freeipaVisible"
     >
       <freeipa-quota
         quota="$ctrl.quota"
