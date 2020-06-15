@@ -1424,6 +1424,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/vmware/DisksList.tsx
@@ -3508,6 +3509,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -3568,6 +3570,7 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/template/NamespaceField.tsx
 msgid "Namespace"
 msgstr ""
@@ -4728,6 +4731,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Project"
 msgstr ""
@@ -5684,6 +5688,10 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+msgid "Scale"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
@@ -6307,6 +6315,7 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -8103,6 +8112,10 @@ msgstr ""
 msgid "Worker"
 msgstr ""
 
+#: src/rancher/cluster/tabs.ts
+msgid "Workloads"
+msgstr ""
+
 #: src/invitations/invitation-confirm-dialog.html
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
@@ -8558,6 +8571,10 @@ msgstr ""
 
 #: src/rancher/node/NodeRoleField.tsx
 msgid "worker"
+msgstr ""
+
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+msgid "workloads"
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
