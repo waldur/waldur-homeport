@@ -1,4 +1,5 @@
-import { ngInjector } from '@waldur/core/services';
+import store from '@waldur/store/store';
+import { getProject } from '@waldur/workspace/selectors';
 
 import { getCategories } from './api';
 import { FEATURE, ICON_CLASS } from './constants';
@@ -17,8 +18,7 @@ const getMenuItems = linkFunction => () => {
 };
 
 export const getMenuForProject = async () => {
-  const currentStateService = ngInjector.get('currentStateService');
-  const project = await currentStateService.getProject();
+  const project = getProject(store.getState());
   const items = await getMenuItems((category: Category) => ({
     state: 'marketplace-checklist-project',
     params: {

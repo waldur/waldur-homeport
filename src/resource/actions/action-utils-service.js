@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
+import { UsersService } from '@waldur/user/UsersService';
 
 import { ActionConfigurationRegistry } from './action-configuration';
 
@@ -14,10 +15,9 @@ export default function actionUtilsService(
   $uibModal,
   $injector,
   features,
-  usersService,
 ) {
   this.loadActions = function(model) {
-    return usersService.getCurrentUser().then(user => {
+    return UsersService.getCurrentUser().then(user => {
       const config = ActionConfigurationRegistry.getActions(
         model.resource_type,
       );
@@ -109,7 +109,7 @@ export default function actionUtilsService(
       function() {
         return true;
       };
-    if (!action.isVisible(model, usersService.currentUser)) {
+    if (!action.isVisible(model, UsersService.currentUser)) {
       return false;
     }
 

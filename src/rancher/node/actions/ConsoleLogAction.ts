@@ -3,13 +3,12 @@ import { executeConsoleLogAction } from '@waldur/openstack/utils';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
-export default function createAction(): ResourceAction {
+export function consoleLogAction(): ResourceAction {
   return {
     name: 'console_log',
     title: translate('Show console log'),
     type: 'callback',
-    execute: resource =>
-      executeConsoleLogAction(resource, 'openstacktenant-instances'),
+    execute: resource => executeConsoleLogAction(resource, 'rancher-nodes'),
     validators: [validateState('OK')],
   };
 }

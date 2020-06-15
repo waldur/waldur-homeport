@@ -15,7 +15,7 @@ export const QuestionGroup: React.FC<{
 }> = ({ title, questions }) => {
   const groups = React.useMemo(() => groupByN(2, questions), [questions]);
   return (
-    <React.Fragment>
+    <>
       <GroupHeader title={title || translate('Configuration options')} />
       {groups.map((group, groupIndex) => (
         <Row key={groupIndex}>
@@ -24,6 +24,6 @@ export const QuestionGroup: React.FC<{
           ))}
         </Row>
       ))}
-    </React.Fragment>
+    </>
   );
 };

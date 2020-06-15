@@ -11,6 +11,7 @@ import {
   getAnswers,
   postAnswers,
   getStats,
+  getCategory,
 } from './api';
 import { Checklist, Answer, ChecklistStats } from './types';
 
@@ -63,6 +64,7 @@ export const useProjectChecklist = (project, categoryId) => {
   const [questionsList, setQuestionsList] = useState([]);
   const [questionsLoading, setQuestionsLoading] = useState(true);
   const [questionsErred, setQuestionsErred] = useState(true);
+  const [categoryInfo, setCategoryInfo] = useState(null);
 
   const [answers, setAnswers] = useState<{}>();
   const [submitting, setSubmitting] = useState(false);
@@ -76,6 +78,8 @@ export const useProjectChecklist = (project, categoryId) => {
       try {
         const questions = await getQuestions(checklist.uuid);
         const answersList = await getAnswers(checklist.uuid, project.uuid);
+        const category = await getCategory(categoryId);
+
         setQuestionsList(questions);
         setAnswers(
           answersList.reduce(
@@ -86,6 +90,7 @@ export const useProjectChecklist = (project, categoryId) => {
             {},
           ),
         );
+        setCategoryInfo(category);
         setQuestionsLoading(false);
       } catch (error) {
         setQuestionsLoading(false);
@@ -128,6 +133,7 @@ export const useProjectChecklist = (project, categoryId) => {
     questionsLoading,
     questionsErred,
     questionsList,
+    categoryInfo,
     answers,
     setAnswers,
     submit,

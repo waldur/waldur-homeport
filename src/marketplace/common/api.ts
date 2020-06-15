@@ -27,6 +27,7 @@ import {
   PluginMetadata,
   ImportableResource,
 } from '@waldur/marketplace/types';
+import { Project } from '@waldur/workspace/types';
 
 import { OfferingDocument } from '../offerings/store/types';
 import { Resource } from '../resources/types';
@@ -137,7 +138,7 @@ export const getCustomerList = (params?: {}) =>
   getList<Customer>('/customers/', params);
 
 export const getProjectList = (params?: {}) =>
-  getList<Customer>('/projects/', params);
+  getList<Project>('/projects/', params);
 
 export const getCustomer = (id: string) => getById<Customer>('/customers/', id);
 

@@ -1,6 +1,9 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OrderItem } from './item/details/OrderItem';
 import './Order.scss';
@@ -13,29 +16,37 @@ interface OrderProps {
   project_uuid: string;
 }
 
-export const Order = (props: OrderProps) => (
-  <>
-    <div className="table-responsive order">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>{translate('Item')}</th>
-            <th className="text-center">{translate('Price')}</th>
-            <th className="text-center">{translate('State')}</th>
-            <th>{/* Actions column */}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.items.map((item, index) => (
-            <OrderItem
-              key={index}
-              item={item}
-              editable={props.editable}
-              project_uuid={props.project_uuid}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </>
-);
+export const Order = (props: OrderProps) => {
+  const customer = useSelector(getCustomer);
+  const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
+    customer.payment_profiles,
+  );
+  return (
+    <>
+      <div className="table-responsive order">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>{translate('Item')}</th>
+              {!activeFixedPricePaymentProfile ? (
+                <th className="text-center">{translate('Price')}</th>
+              ) : null}
+              <th className="text-center">{translate('State')}</th>
+              <th>{/* Actions column */}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {props.items.map((item, index) => (
+              <OrderItem
+                key={index}
+                item={item}
+                editable={props.editable}
+                project_uuid={props.project_uuid}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+};

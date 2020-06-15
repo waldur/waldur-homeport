@@ -1,3 +1,5 @@
+import { CustomersService } from '@waldur/customer/services/CustomersService';
+import { PriceEstimatesService } from '@waldur/customer/services/price-estimates-service';
 import { FreeIPAQuotaService } from '@waldur/freeipa/FreeIPAQuotaService';
 
 import { loadCertifications, updateCertifications } from './api';
@@ -10,18 +12,9 @@ const projectPolicies = {
   },
   controller: class ProjectPoliciesController {
     // @ngInject
-    constructor(
-      ENV,
-      ncUtilsFlash,
-      customersService,
-      priceEstimatesService,
-      $rootScope,
-      $q,
-    ) {
+    constructor(ENV, ncUtilsFlash, $rootScope, $q) {
       this.ENV = ENV;
-      this.priceEstimatesService = priceEstimatesService;
       this.ncUtilsFlash = ncUtilsFlash;
-      this.customersService = customersService;
       this.$rootScope = $rootScope;
       this.$q = $q;
     }
@@ -45,7 +38,7 @@ const projectPolicies = {
             this.certifications = certifications;
           }),
 
-          this.customersService.isOwnerOrStaff().then(canManage => {
+          CustomersService.isOwnerOrStaff().then(canManage => {
             this.canManage = canManage;
           }),
         ])
@@ -82,7 +75,7 @@ const projectPolicies = {
 
     updatePriceEstimate() {
       const limit = this.isHardLimit ? this.estimate.threshold : -1;
-      return this.priceEstimatesService.update(this.estimate).then(() => {
+      return PriceEstimatesService.update(this.estimate).then(() => {
         this.project.billing_price_estimate.threshold = this.estimate.threshold;
         this.project.billing_price_estimate.limit = limit;
       });

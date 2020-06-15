@@ -1,4 +1,4 @@
-describe('User Marketplace', () => {
+describe('Marketplace landing view', () => {
   beforeEach(() => {
     cy.server()
       .mockUser()
@@ -26,7 +26,7 @@ describe('User Marketplace', () => {
       .waitForSpinner();
   });
 
-  it('Checks Marketplace landing view', () => {
+  it('shows list of offerings', () => {
     cy
       // Ensure that categories are displayed
       .get('.category-card')

@@ -6,7 +6,6 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { connect } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OfferingAddScreenshotButton } from '@waldur/marketplace/offerings/actions/OfferingAddScreenshotButton';
 import { OfferingHeader } from '@waldur/marketplace/offerings/details/OfferingHeader';
@@ -14,33 +13,29 @@ import { OfferingScreenshotsList } from '@waldur/marketplace/offerings/OfferingS
 import { loadOfferingStart } from '@waldur/marketplace/offerings/store/actions';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering } from '@waldur/marketplace/types';
+import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
+import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
 
-const setHeaderAndBreadcrumbsTitle = (offering: Offering) => {
-  const $timeout = ngInjector.get('$timeout');
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-
-  $timeout(() => {
-    BreadcrumbsService.activeItem = translate('Screenshots');
-    BreadcrumbsService.items = [
-      {
-        label: translate('Organization workspace'),
-        state: 'organization.details',
-      },
-      offering.shared
-        ? {
-            label: translate('Public offerings'),
-            state: 'marketplace-vendor-offerings',
-          }
-        : {
-            label: translate('My offerings'),
-            state: 'marketplace-my-offerings',
-          },
-      {
-        label: offering.name,
-      },
-    ];
-  });
+const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
+  return [
+    {
+      label: translate('Organization workspace'),
+      state: 'organization.details',
+    },
+    offering.shared
+      ? {
+          label: translate('Public offerings'),
+          state: 'marketplace-vendor-offerings',
+        }
+      : {
+          label: translate('My offerings'),
+          state: 'marketplace-my-offerings',
+        },
+    {
+      label: offering.name,
+    },
+  ];
 };
 
 let OfferingScreenshotsContainer = props => {
@@ -54,11 +49,10 @@ let OfferingScreenshotsContainer = props => {
     }
   }, [offering_uuid]);
 
-  useEffect(() => {
-    if (props.offering) {
-      setHeaderAndBreadcrumbsTitle(props.offering);
-    }
-  }, [props.offering]);
+  useBreadcrumbsFn(
+    () => (props.offering ? getBreadcrumbs(props.offering) : []),
+    [props.offering],
+  );
 
   useTitle(
     props.offering
@@ -73,7 +67,7 @@ let OfferingScreenshotsContainer = props => {
   } else if (props.offering.name) {
     const offering = props.offering;
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Col lg={12}>
             <OfferingHeader offering={offering} hideName={false} />
@@ -83,7 +77,7 @@ let OfferingScreenshotsContainer = props => {
         <OfferingAddScreenshotButton offering={offering} />
 
         <OfferingScreenshotsList />
-      </React.Fragment>
+      </>
     );
   }
   return null;

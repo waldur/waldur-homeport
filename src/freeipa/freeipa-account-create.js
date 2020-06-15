@@ -1,3 +1,5 @@
+import { UsersService } from '@waldur/user/UsersService';
+
 import template from './freeipa-account-create.html';
 import { FreeIPAService } from './FreeIPAService';
 
@@ -12,9 +14,8 @@ const freeipaAccountCreate = {
   },
   controller: class FreeIPAAccountCreateController {
     // @ngInject
-    constructor(ncUtilsFlash, ENV, usersService, $scope) {
+    constructor(ncUtilsFlash, ENV, $scope) {
       this.ncUtilsFlash = ncUtilsFlash;
-      this.usersService = usersService;
       this.prefix = ENV.FREEIPA_USERNAME_PREFIX;
       this.$scope = $scope;
     }
@@ -23,8 +24,7 @@ const freeipaAccountCreate = {
       this.maxUsernameLength = MAXIMUM_USERNAME_LENGTH - this.prefix.length;
       this.usernamePattern = USERNAME_PATTERN;
       this.loading = true;
-      this.usersService
-        .getCurrentUser()
+      UsersService.getCurrentUser()
         .then(user => {
           this.profile = {
             username: user.username,

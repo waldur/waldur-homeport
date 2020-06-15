@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { Option } from 'react-select';
+import useAsync from 'react-use/lib/useAsync';
 import { reduxForm } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { useQuery } from '@waldur/core/useQuery';
 import { SubmitButton } from '@waldur/form-react';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -60,27 +60,27 @@ const serializeNode = (cluster, formData) => ({
 export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   form: 'RancherNodeCreate',
 })(props => {
-  const { call, state } = useQuery(
-    loadData,
-    props.resolve.cluster.tenant_settings,
-  );
-  React.useEffect(call, []);
+  const cluster = props.resolve.cluster;
+  const state = useAsync(() => loadData(cluster.tenant_settings), [cluster]);
 
   const dispatch = useDispatch();
 
-  const callback = React.useCallback(async (formData: FormData) => {
-    try {
-      await createNode(serializeNode(props.resolve.cluster, formData));
-    } catch (error) {
-      const errorMessage = `${translate('Unable to create node.')} ${format(
-        error,
-      )}`;
-      dispatch(showError(errorMessage));
-      return;
-    }
-    dispatch(showSuccess(translate('Node has been created.')));
-    dispatch(closeModalDialog());
-  }, []);
+  const callback = React.useCallback(
+    async (formData: FormData) => {
+      try {
+        await createNode(serializeNode(cluster, formData));
+      } catch (error) {
+        const errorMessage = `${translate('Unable to create node.')} ${format(
+          error,
+        )}`;
+        dispatch(showError(errorMessage));
+        return;
+      }
+      dispatch(showSuccess(translate('Node has been created.')));
+      dispatch(closeModalDialog());
+    },
+    [dispatch, cluster],
+  );
 
   return (
     <form className="form-horizontal" onSubmit={props.handleSubmit(callback)}>
@@ -97,19 +97,19 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
           </>
         }
       >
-        {state.loading || !state.loaded ? (
+        {state.loading ? (
           <LoadingSpinner />
         ) : state.error ? (
           <p>{translate('Unable to load data.')}</p>
         ) : (
           <>
             <NodeRoleGroup {...defaultProps} />
-            <NodeFlavorGroup options={state.data.flavors} {...defaultProps} />
-            <SubnetGroup options={state.data.subnets} {...defaultProps} />
+            <NodeFlavorGroup options={state.value.flavors} {...defaultProps} />
+            <SubnetGroup options={state.value.subnets} {...defaultProps} />
             <NodeStorageGroup
-              volumeTypes={state.data.volumeTypes}
-              mountPoints={state.data.mountPoints}
-              defaultVolumeType={state.data.defaultVolumeType}
+              volumeTypes={state.value.volumeTypes}
+              mountPoints={state.value.mountPoints}
+              defaultVolumeType={state.value.defaultVolumeType}
               smOffset={3}
               sm={9}
               {...defaultProps}

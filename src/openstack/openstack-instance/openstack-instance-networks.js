@@ -22,12 +22,12 @@ const openstackInstanceNetworks = {
   controller: class ComponentController {
     // @ngInject
     constructor($scope) {
-      this.items = [];
-      this.addItem();
       this.$scope = $scope;
     }
 
     $onInit() {
+      this.items = [];
+      this.addItem();
       this.initSubnetChoices();
       this.initFloatingIpChoices();
       this.initSubnetFromModel();

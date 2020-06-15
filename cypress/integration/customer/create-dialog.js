@@ -40,26 +40,23 @@ describe('Customer creation dialog', () => {
   it('Validates required fields', () => {
     cy
       // Try to switch to next step
-      .get('button span')
+      .get('button')
       .contains('Next')
       .click()
 
       // Error message should be displayed
-      .get('p.text-danger')
-      .should('have.length', 2)
+      .get('[name="name"]')
+      .then($input => {
+        expect($input[0].validationMessage).to.exist;
+      })
 
       // Enter organization name
       .get('input[name="name"]')
       .type('Alice Lebowski')
 
       // Open dropdown for organization type selector
-      .get('.ui-select-container')
-      .click()
-
-      // Select first organization type
-      .get('.ui-select-choices-row')
-      .first()
-      .click()
+      .openDropdownByLabel('Organization type')
+      .selectTheFirstOptionOfDropdown()
 
       // Enter organization email
       .get('input[name="email"]')
@@ -70,7 +67,7 @@ describe('Customer creation dialog', () => {
       .type('+1234567890')
 
       // Go to the next step
-      .get('button span')
+      .get('button')
       .contains('Next')
       .click()
 
@@ -92,8 +89,8 @@ describe('Customer creation dialog', () => {
       .type('1234567')
 
       // Submit form
-      .get('button span')
-      .contains('Finish')
+      .get('button')
+      .contains('Create organization')
       .click()
 
       // Notification should be shown

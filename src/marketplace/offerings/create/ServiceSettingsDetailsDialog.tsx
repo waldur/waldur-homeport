@@ -1,9 +1,9 @@
 import Axios from 'axios';
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { useQuery } from '@waldur/core/useQuery';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -19,10 +19,10 @@ interface ProviderData {
 }
 
 export const ServiceSettingsDetailsDialog = () => {
-  const offering = useSelector(getOffering);
-  const { state, call } = useQuery(async () => {
-    const provider = (await Axios.get(offering.offering.scope))
-      .data as ProviderData;
+  const offeringData = useSelector(getOffering);
+  const offeringScope = offeringData.offering.scope;
+  const state = useAsync(async () => {
+    const provider = (await Axios.get(offeringScope)).data as ProviderData;
     return {
       initialValues: {
         name: provider.name,
@@ -31,13 +31,12 @@ export const ServiceSettingsDetailsDialog = () => {
       },
       type: findProvider(provider.type),
     };
-  });
-  React.useEffect(call, []);
+  }, [offeringScope]);
 
   const dispatch = useDispatch();
   const updateProvider = React.useCallback(
     data => actions.updateProvider(data, dispatch),
-    [],
+    [dispatch],
   );
 
   return (
@@ -49,9 +48,9 @@ export const ServiceSettingsDetailsDialog = () => {
         <LoadingSpinner />
       ) : state.error ? (
         <h3>{translate('Unable to load provider details.')}</h3>
-      ) : !state.loaded ? null : (
+      ) : !state.value ? null : (
         <ProviderUpdateForm
-          {...state.data}
+          {...state.value}
           updateProvider={updateProvider}
           translate={translate}
         />

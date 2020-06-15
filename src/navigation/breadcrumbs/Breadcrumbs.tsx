@@ -3,10 +3,10 @@ import * as React from 'react';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
-import { Item } from './types';
+import { BreadcrumbItem } from './types';
 
 interface BreadcrumbsProps {
-  items: Item[];
+  items: BreadcrumbItem[];
   activeItem: string;
 }
 

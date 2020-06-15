@@ -5,9 +5,16 @@ import useAsyncFn from 'react-use/lib/useAsyncFn';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
+import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
 import { useTitle } from '@waldur/navigation/title';
 import { ProjectSidebar } from '@waldur/project/ProjectSidebar';
+import store from '@waldur/store/store';
+import {
+  setCurrentCustomer,
+  setCurrentProject,
+} from '@waldur/workspace/actions';
 
 import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 
@@ -21,9 +28,8 @@ import { OfferingActions } from './OfferingActions';
 import { OfferingSummary } from './OfferingSummary';
 import { Offering } from './types';
 
-const refreshBreadcrumbs = (offering: Offering) => {
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  BreadcrumbsService.items = [
+const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
+  const items = [
     {
       label: translate('Project workspace'),
       state: 'project.details',
@@ -36,16 +42,17 @@ const refreshBreadcrumbs = (offering: Offering) => {
     },
   ];
   if (offering.marketplace_category_name) {
-    BreadcrumbsService.items.push({
+    const params = {
+      category_uuid: offering.marketplace_category_uuid,
+      uuid: offering.project_uuid,
+    };
+    items.push({
       label: offering.marketplace_category_name,
       state: 'marketplace-project-resources',
-      params: {
-        category_uuid: offering.marketplace_category_uuid,
-        uuid: offering.project_uuid,
-      },
+      params,
     });
   }
-  BreadcrumbsService.activeItem = offering.name;
+  return items;
 };
 
 const loadOffering = async offeringUuid => {
@@ -54,15 +61,14 @@ const loadOffering = async offeringUuid => {
   const offeringConfig = template.config;
   const project = await getProject(offering.project_uuid);
   const customer = await getCustomer(project.customer_uuid);
-  ngInjector.get('currentStateService').setCustomer(customer);
-  ngInjector.get('currentStateService').setProject(project);
+  store.dispatch(setCurrentCustomer(customer));
+  store.dispatch(setCurrentProject(project));
   ngInjector.get('WorkspaceService').setWorkspace({
     customer,
     project,
     hasCustomer: true,
     workspace: WOKSPACE_NAMES.project,
   });
-  refreshBreadcrumbs(offering);
   return {
     offering,
     offeringConfig,
@@ -70,8 +76,6 @@ const loadOffering = async offeringUuid => {
 };
 
 export const OfferingDetails = () => {
-  useTitle(translate('Request details'));
-
   const {
     params: { uuid: offeringUuid },
   } = useCurrentStateAndParams();
@@ -80,6 +84,12 @@ export const OfferingDetails = () => {
     () => loadOffering(offeringUuid),
     [offeringUuid],
   );
+
+  useTitle(value ? value.offering.name : translate('Request details'));
+
+  useBreadcrumbsFn(() => (value ? getBreadcrumbs(value.offering) : []), [
+    value,
+  ]);
 
   const router = useRouter();
 

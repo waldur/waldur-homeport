@@ -25,7 +25,7 @@ describe('Offering creation', () => {
       .waitForSpinner();
   });
 
-  it('Checks Marketplace Offering Create View', () => {
+  it('allows to create new offering', () => {
     cy
       // Overview step
       .get('input[name="name"]')

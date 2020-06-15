@@ -1,11 +1,13 @@
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 
 import { Template, Cluster } from '../types';
 
-export const refreshBreadcrumbs = (cluster: Cluster, template: Template) => {
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  BreadcrumbsService.items = [
+export const getBreadcrumbs = (
+  cluster: Cluster,
+  template: Template,
+): BreadcrumbItem[] => {
+  return [
     {
       label: translate('Project workspace'),
       state: 'project.details',
@@ -41,5 +43,4 @@ export const refreshBreadcrumbs = (cluster: Cluster, template: Template) => {
       label: translate('Application templates'),
     },
   ];
-  BreadcrumbsService.activeItem = template.name;
 };

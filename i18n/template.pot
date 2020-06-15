@@ -1158,7 +1158,6 @@ msgid "Complete"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistOverview.tsx
-#: src/marketplace-checklist/ProjectChecklist.tsx
 msgid "Compliance"
 msgstr ""
 
@@ -1244,6 +1243,15 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Contact phone"
+msgstr ""
+
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+msgid "Contract sum"
+msgstr ""
+
+#: src/invoices/list/AgreementInfo.tsx
+msgid "Contract sum is"
 msgstr ""
 
 #: src/rancher/cluster/create/NodeRoleField.tsx
@@ -1416,6 +1424,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/vmware/DisksList.tsx
@@ -3500,6 +3509,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -3560,6 +3570,7 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/template/NamespaceField.tsx
 msgid "Namespace"
 msgstr ""
@@ -3907,7 +3918,7 @@ msgstr ""
 msgid "Only pending invitation can be canceled."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleAction.ts
+#: src/openstack/utils.ts
 msgid "Only staff and organization users are allowed to open console."
 msgstr ""
 
@@ -3931,6 +3942,7 @@ msgid "Open"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleAction.ts
+#: src/rancher/node/actions/ConsoleAction.ts
 #: src/vmware/actions.ts
 msgid "Open console"
 msgstr ""
@@ -4720,6 +4732,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Project"
 msgstr ""
@@ -5395,6 +5408,7 @@ msgid "Resource description"
 msgstr ""
 
 #: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/resource/ResourceDetailsContainer.tsx
 msgid "Resource details"
 msgstr ""
 
@@ -5428,10 +5442,6 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.js
 msgid "Resource has been updated."
-msgstr ""
-
-#: src/resource/resource-header.js
-msgid "Resource is gone."
 msgstr ""
 
 #: src/resource/state/utils.ts
@@ -5590,6 +5600,10 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
+msgid "Rule count"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/tabs.ts
 msgid "Rules"
 msgstr ""
@@ -5675,6 +5689,10 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+msgid "Scale"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
@@ -5714,7 +5732,6 @@ msgid "Screenshot:"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 msgid "Screenshots"
 msgstr ""
@@ -6099,6 +6116,7 @@ msgid "Show choices"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+#: src/rancher/node/actions/ConsoleLogAction.ts
 msgid "Show console log"
 msgstr ""
 
@@ -6299,6 +6317,7 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -6555,6 +6574,10 @@ msgstr ""
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Template"
+msgstr ""
+
+#: src/rancher/template/TemplateDetail.tsx
+msgid "Template details"
 msgstr ""
 
 #: src/issues/create/IssueCreateForm.tsx
@@ -7303,6 +7326,10 @@ msgstr ""
 msgid "Unable to load questions and answers."
 msgstr ""
 
+#: src/resource/ResourceDetailsContainer.tsx
+msgid "Unable to load resource."
+msgstr ""
+
 #: src/marketplace/compare/ComparisonSections.tsx
 msgid "Unable to load sections for comparison."
 msgstr ""
@@ -7333,12 +7360,11 @@ msgstr ""
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+#: src/openstack/utils.ts
 msgid "Unable to open console log"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleAction.ts
-#: src/vmware/actions.ts
+#: src/openstack/utils.ts
 msgid "Unable to open console. Error message: {message}"
 msgstr ""
 
@@ -7411,7 +7437,7 @@ msgstr ""
 msgid "Unable to send record notification."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
+#: src/openstack/utils.ts
 msgid "Unable to show console log. Error message: {message}"
 msgstr ""
 
@@ -7683,8 +7709,8 @@ msgstr ""
 msgid "User could not been updated"
 msgstr ""
 
+#: src/user/UserDetails.tsx
 #: src/user/list/UserDashboard.tsx
-#: src/user/user-details.html
 msgid "User dashboard"
 msgstr ""
 
@@ -8085,6 +8111,10 @@ msgstr ""
 
 #: src/rancher/cluster/create/NodeRoleField.tsx
 msgid "Worker"
+msgstr ""
+
+#: src/rancher/cluster/tabs.ts
+msgid "Workloads"
 msgstr ""
 
 #: src/invitations/invitation-confirm-dialog.html
@@ -8542,6 +8572,10 @@ msgstr ""
 
 #: src/rancher/node/NodeRoleField.tsx
 msgid "worker"
+msgstr ""
+
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
+msgid "workloads"
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx

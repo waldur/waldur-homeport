@@ -1,8 +1,8 @@
 import * as React from 'react';
+import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
-import { useQuery } from '@waldur/core/useQuery';
 import { getLatinNameValidators, required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import {
@@ -49,22 +49,22 @@ const loadData = async settings => {
 };
 
 export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps> = props => {
-  const { call, state } = useQuery(loadData, props.offering.scope_uuid);
-
-  React.useEffect(call, []);
+  const state = useAsync(() => loadData(props.offering.scope_uuid), [
+    props.offering.scope_uuid,
+  ]);
 
   React.useEffect(() => {
-    if (!state.loaded) {
+    if (!state.value) {
       return;
     }
     props.initialize({
       attributes: {
         size: 1024,
-        type: state.data.defaultVolumeType,
+        type: state.value.defaultVolumeType,
         ...props.initialAttributes,
       },
     });
-  }, [state.loaded]);
+  }, [state.value]);
 
   if (state.loading) {
     return <LoadingSpinner />;
@@ -74,7 +74,7 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
     return <h3>{translate('Unable to load offering details.')}</h3>;
   }
 
-  if (!state.loaded) {
+  if (!state.value) {
     return null;
   }
 
@@ -103,11 +103,11 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
           unit={translate('GB')}
           validate={validateSize}
         />
-        {state.data.zones.length > 0 && (
+        {state.value.zones.length > 0 && (
           <SelectField
             label={translate('Availability zone')}
             name="attributes.availability_zone"
-            options={state.data.zones}
+            options={state.value.zones}
             labelKey="name"
             valueKey="url"
             simpleValue={true}
@@ -121,11 +121,11 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
             }
           />
         )}
-        {state.data.volumeTypes.length > 0 && (
+        {state.value.volumeTypes.length > 0 && (
           <SelectField
             label={translate('Volume type')}
             name="attributes.type"
-            options={state.data.volumeTypes}
+            options={state.value.volumeTypes}
             required={true}
           />
         )}

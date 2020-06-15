@@ -1,17 +1,16 @@
 import { getById } from '@waldur/core/api';
+import { CustomersService } from '@waldur/customer/services/CustomersService';
 import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
+import store from '@waldur/store/store';
+import {
+  setCurrentCustomer,
+  setCurrentProject,
+} from '@waldur/workspace/actions';
 
 import { ResourcesService } from './ResourcesService';
 
 // @ngInject
-export function loadResource(
-  $stateParams,
-  $q,
-  $state,
-  currentStateService,
-  customersService,
-  WorkspaceService,
-) {
+export function loadResource($stateParams, $q, $state, WorkspaceService) {
   if (!$stateParams.uuid) {
     return $q.reject();
   }
@@ -23,9 +22,9 @@ export function loadResource(
       });
     })
     .then(({ project }) => {
-      return customersService.get(project.customer_uuid).then(customer => {
-        currentStateService.setCustomer(customer);
-        currentStateService.setProject(project);
+      return CustomersService.get(project.customer_uuid).then(customer => {
+        store.dispatch(setCurrentCustomer(customer));
+        store.dispatch(setCurrentProject(project));
         return { customer, project };
       });
     })
@@ -42,22 +41,4 @@ export function loadResource(
         $state.go('errorPage.notFound');
       }
     });
-}
-
-// @ngInject
-export function ResourceController(
-  $scope,
-  usersService,
-  currentStateService,
-  customersService,
-) {
-  usersService.getCurrentUser().then(currentUser => {
-    currentStateService.getCustomer().then(currentCustomer => {
-      const status = customersService.checkCustomerUser(
-        currentCustomer,
-        currentUser,
-      );
-      currentStateService.setOwnerOrStaff(status);
-    });
-  });
 }

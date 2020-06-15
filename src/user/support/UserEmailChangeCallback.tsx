@@ -8,6 +8,8 @@ import { $state, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 
+import { UsersService } from '../UsersService';
+
 function delay(ms) {
   return new Promise(resolve => {
     setTimeout(resolve, ms);
@@ -45,7 +47,7 @@ export const UserEmailChangeCallback = () => {
       }
 
       if (currentUser) {
-        ngInjector.get('usersService').setCurrentUser(currentUser);
+        UsersService.setCurrentUser(currentUser);
         await delay(1000);
       }
       dispatch(stateGo('profile.manage'));

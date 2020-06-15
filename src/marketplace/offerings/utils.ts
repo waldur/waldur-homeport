@@ -1,9 +1,8 @@
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 
-export function setStateBreadcrumbs(): void {
-  const BreadcrumbsService = ngInjector.get('BreadcrumbsService');
-  BreadcrumbsService.items = [
+export function getBreadcrumbs(): BreadcrumbItem[] {
+  return [
     {
       label: translate('Organization workspace'),
       state: 'organization.details',
