@@ -8,6 +8,7 @@ import { ClusterNodesList } from '../node/ClusterNodesList';
 import { ClusterTemplatesList } from '../template/ClusterTemplateList';
 
 import { ClusterApplicationsList } from './ClusterApplicationsList';
+import { ClusterHPAList } from './ClusterHPAList';
 import { ClusterWorkloadsList } from './ClusterWorkloadsList';
 
 ResourceTabsConfiguration.register('Rancher.Cluster', () => [
@@ -40,6 +41,11 @@ ResourceTabsConfiguration.register('Rancher.Cluster', () => [
     key: 'workloads',
     title: translate('Workloads'),
     component: ClusterWorkloadsList,
+  },
+  {
+    key: 'hpas',
+    title: translate('Horizontal pod autoscalers'),
+    component: ClusterHPAList,
   },
   ...getDefaultResourceTabs(),
 ]);

@@ -1424,6 +1424,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -1515,6 +1516,10 @@ msgstr ""
 
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Current price per month"
+msgstr ""
+
+#: src/rancher/cluster/ClusterHPAList.tsx
+msgid "Current replicas"
 msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -1697,6 +1702,10 @@ msgstr ""
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
+msgstr ""
+
+#: src/rancher/cluster/ClusterHPAList.tsx
+msgid "Desired replicas"
 msgstr ""
 
 #: src/user/hooks/HooksList.tsx
@@ -2517,6 +2526,10 @@ msgstr ""
 msgid "Hook removal"
 msgstr ""
 
+#: src/rancher/cluster/tabs.ts
+msgid "Horizontal pod autoscalers"
+msgstr ""
+
 #: src/resource/monitoring/ZabbixHostSummary.tsx
 msgid "Host IP address"
 msgstr ""
@@ -3263,6 +3276,10 @@ msgstr ""
 msgid "Max number of VM snapshots"
 msgstr ""
 
+#: src/rancher/cluster/ClusterHPAList.tsx
+msgid "Max replicas"
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 msgid "Maximal number of resources"
@@ -3346,6 +3363,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 msgid "Min amount"
+msgstr ""
+
+#: src/rancher/cluster/ClusterHPAList.tsx
+msgid "Min replicas"
 msgstr ""
 
 #: src/openstack/openstack-instance/ImageGroup.tsx
@@ -3509,6 +3530,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
@@ -3570,6 +3592,7 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
+#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/template/NamespaceField.tsx
 msgid "Namespace"
@@ -4732,6 +4755,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Project"
@@ -6317,6 +6341,7 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -8113,6 +8138,10 @@ msgstr ""
 msgid "Worker"
 msgstr ""
 
+#: src/rancher/cluster/ClusterHPAList.tsx
+msgid "Workload"
+msgstr ""
+
 #: src/rancher/cluster/tabs.ts
 msgid "Workloads"
 msgstr ""
@@ -8386,6 +8415,10 @@ msgstr ""
 #: src/freeipa/freeipa-account-edit.html
 #: src/user/support/TermsOfService.tsx
 msgid "have been accepted on"
+msgstr ""
+
+#: src/rancher/cluster/ClusterHPAList.tsx
+msgid "horizontal pod autoscalers"
 msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
