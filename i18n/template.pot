@@ -156,6 +156,7 @@ msgstr ""
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/ClusterUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -1112,6 +1113,11 @@ msgstr ""
 msgid "Cluster name"
 msgstr ""
 
+#: src/rancher/cluster/ClusterUsersList.tsx
+#: src/rancher/cluster/UserDetailsTable.tsx
+msgid "Cluster roles"
+msgstr ""
+
 #: src/marketplace/offerings/utils.ts
 msgid "Code is too short."
 msgstr ""
@@ -1751,6 +1757,7 @@ msgstr ""
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/team/UserDetailsButton.tsx
 #: src/rancher/cluster/ApplicationDetailsButton.tsx
+#: src/rancher/cluster/UserDetailsButton.tsx
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -2410,6 +2417,8 @@ msgstr ""
 
 #: src/auth/SignupForm.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
+#: src/rancher/cluster/ClusterUsersList.tsx
+#: src/rancher/cluster/UserDetailsTable.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -2925,6 +2934,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
+#: src/rancher/cluster/UserDetailsTable.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr ""
@@ -4835,6 +4845,8 @@ msgstr ""
 msgid "Project resources"
 msgstr ""
 
+#: src/rancher/cluster/ClusterUsersList.tsx
+#: src/rancher/cluster/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
 msgid "Project roles"
 msgstr ""
@@ -7750,6 +7762,7 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
+#: src/rancher/cluster/UserDetailsDialog.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsDialog.tsx
 msgid "User details"
@@ -7886,6 +7899,8 @@ msgstr ""
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/project/team/user-selector.html
 #: src/rancher/catalog/CatalogCreateDialog.tsx
+#: src/rancher/cluster/ClusterUsersList.tsx
+#: src/rancher/cluster/UserDetailsTable.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 #: src/vmware/VMwareForm.tsx
@@ -7907,6 +7922,7 @@ msgstr ""
 #: src/customer/team/CustomerTeam.tsx
 #: src/issues/workspace/issue-navigation-service.js
 #: src/project/team/ProjectTeam.tsx
+#: src/rancher/cluster/tabs.ts
 #: src/user/support/UserListView.tsx
 msgid "Users"
 msgstr ""
@@ -8578,6 +8594,7 @@ msgid "token will not timeout"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
+#: src/rancher/cluster/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"
 msgstr ""
