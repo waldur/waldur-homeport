@@ -63,3 +63,5 @@ export const removeApp = (projectUuid, appId) =>
   });
 
 export const createNode = payload => post('/rancher-nodes/', payload);
+
+export const deleteHPA = hpaUuid => deleteById('/rancher-hpas/', hpaUuid);

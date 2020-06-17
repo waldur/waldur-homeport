@@ -23,22 +23,24 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   const dispatch = useDispatch();
   const closeDialog = () => dispatch(closeModalDialog());
 
-  const handleSubmit = React.useCallback(() => {
+  const handleSubmit = () => {
     deferred.resolve();
     closeDialog();
-  }, []);
+  };
 
-  const handleCancel = React.useCallback(() => {
+  const handleCancel = () => {
     deferred.reject();
     closeDialog();
-  }, []);
+  };
 
   return (
     <ModalDialog
       title={title}
       footer={
         <>
-          <Button onClick={handleSubmit}>{translate('Yes')}</Button>
+          <Button bsStyle="danger" onClick={handleSubmit}>
+            {translate('Yes')}
+          </Button>
           <Button onClick={handleCancel}>{translate('No')}</Button>
         </>
       }
