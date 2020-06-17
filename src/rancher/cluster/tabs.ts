@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { ClusterUsersList } from '@waldur/rancher/cluster/ClusterUsersList';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
@@ -41,6 +42,11 @@ ResourceTabsConfiguration.register('Rancher.Cluster', () => [
     key: 'workloads',
     title: translate('Workloads'),
     component: ClusterWorkloadsList,
+  },
+  {
+    key: 'users',
+    title: translate('Users'),
+    component: ClusterUsersList,
   },
   {
     key: 'hpas',
