@@ -10,7 +10,7 @@ class ResourcesServiceClass {
 
   async getInternal(resource_type, uuid) {
     const url = await this.getUrlByType(resource_type);
-    const response = await get(url + uuid);
+    const response = await get(url + uuid + '/');
     return response.data;
   }
 
