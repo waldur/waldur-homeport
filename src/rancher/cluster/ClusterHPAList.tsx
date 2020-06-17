@@ -4,6 +4,8 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { TableOptionsType } from '@waldur/table-react/types';
 
+import { HPADeleteButton } from './HPADeleteButton';
+
 const TableComponent = props => {
   const { translate } = props;
   return (
@@ -49,6 +51,10 @@ const TableComponent = props => {
         {
           title: translate('State'),
           render: ({ row }) => <span>{row.runtime_state}</span>,
+        },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <HPADeleteButton hpa={row} />,
         },
       ]}
       verboseName={translate('horizontal pod autoscalers')}

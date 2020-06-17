@@ -32,7 +32,7 @@ export const showErrorResponse = (
 ) => {
   const details = format(response);
   const errorMessage = `${message}. ${details}`;
-  showError(errorMessage);
+  return showError(errorMessage);
 };
 
 export const stateGo = (to, params?: object, options?: object) => ({

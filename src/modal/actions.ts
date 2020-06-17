@@ -26,7 +26,6 @@ export const waitForConfirmation = (dispatch, title, body) => {
       title,
       body,
     },
-    size: 'lg',
   };
   dispatch(openModalDialog(ConfirmationDialog, params));
   return deferred.promise;
