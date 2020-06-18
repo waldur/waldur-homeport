@@ -30,7 +30,7 @@ interface OfferingUpdateDialogProps
 
 export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = props => {
   useTitle(
-    translate('Update offering ({name})', {
+    translate('Updating offering {name}', {
       name: props.initialValues.name,
     }),
   );

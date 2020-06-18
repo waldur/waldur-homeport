@@ -9,6 +9,7 @@ import {
   StringField,
   TextField,
 } from '@waldur/form-react';
+import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
@@ -31,7 +32,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
     const initialData = {
       project,
       plan,
-      attributes: { nodes: [] },
+      attributes: { nodes: [], install_longhorn: true },
       limits: {
         node: 0,
       },
@@ -84,6 +85,13 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
           labelKey="name"
           valueKey="url"
           loadOptions={loadSshKeyOptions}
+        />
+        <AwesomeCheckboxField
+          name="attributes.install_longhorn"
+          label={translate(
+            'Deploy Longhorn block storage after cluster is deployed',
+          )}
+          hideLabel={true}
         />
         {props.project && <TenantSelector project={props.project} />}
         {tenant && <TenantGroup tenant={tenant} />}

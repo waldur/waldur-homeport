@@ -1665,6 +1665,10 @@ msgstr ""
 msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
 msgstr ""
 
+#: src/rancher/cluster/create/RancherClusterForm.tsx
+msgid "Deploy Longhorn block storage after cluster is deployed"
+msgstr ""
+
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/issues/IssueDetails.tsx
@@ -7620,10 +7624,6 @@ msgstr ""
 msgid "Update notification"
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
-msgid "Update offering ({name})"
-msgstr ""
-
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 msgid "Update payment profile"
 msgstr ""
@@ -7671,6 +7671,10 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Updating internal IPs"
+msgstr ""
+
+#: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
+msgid "Updating offering {name}"
 msgstr ""
 
 #: src/resource/state/constants.ts
