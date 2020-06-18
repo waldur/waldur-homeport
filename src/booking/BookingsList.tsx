@@ -5,12 +5,12 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { BookingActions } from '@waldur/booking/BookingActions';
+import { BookingStateField } from '@waldur/booking/BookingStateField';
 import { bookingDataTemplate } from '@waldur/booking/components/utils';
 import { TABLE_NAME } from '@waldur/booking/constants';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
 import { withTranslation, translate } from '@waldur/i18n';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
@@ -75,7 +75,7 @@ const TableComponent = props => {
     },
     {
       title: translate('State'),
-      render: ResourceStateField,
+      render: BookingStateField,
     },
   ];
 
@@ -103,9 +103,6 @@ const mapPropsToFilter = props => {
   const filter: Record<string, string | boolean> = {
     offering_uuid: props.offeringUuid,
   };
-  if (props.customer) {
-    filter.customer_uuid = props.customer.uuid;
-  }
   if (props.filter) {
     if (props.filter.state) {
       filter.state = props.filter.state.map(option => option.value);
