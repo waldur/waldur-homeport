@@ -54,6 +54,7 @@ msgstr ""
 msgid "Accept"
 msgstr ""
 
+#: src/booking/BookingStateField.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/invitations/InvitationsFilter.tsx
 msgid "Accepted"
@@ -5178,6 +5179,7 @@ msgstr ""
 msgid "Reject"
 msgstr ""
 
+#: src/booking/BookingStateField.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/invitations/InvitationsFilter.tsx
 msgid "Rejected"
@@ -7547,6 +7549,7 @@ msgstr ""
 msgid "Unable to validate invitation token."
 msgstr ""
 
+#: src/booking/BookingStateField.tsx
 #: src/booking/BookingStateFilter.tsx
 msgid "Unconfirmed"
 msgstr ""
