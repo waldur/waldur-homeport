@@ -2,6 +2,7 @@ import Axios from 'axios';
 
 import { toKeyValue } from '@waldur/core/utils';
 
+import { getSelectList, formatChoices } from '../action-resource-loader';
 import { defaultFieldOptions } from '../constants';
 
 import template from './action-dialog.html';
@@ -14,7 +15,6 @@ function ActionDialogController(
   $rootScope,
   actionUtilsService,
   ncUtilsFlash,
-  ActionResourceLoader,
 ) {
   angular.extend($scope, {
     init: function() {
@@ -29,7 +29,7 @@ function ActionDialogController(
           $scope.action,
         );
       } else {
-        promise = ActionResourceLoader.getSelectList($scope.action.fields);
+        promise = getSelectList($scope.action.fields);
       }
       promise
         .then(function() {
@@ -50,10 +50,7 @@ function ActionDialogController(
               $scope.form[name] = field.modelParser(field, $scope.form[name]);
             }
             if (field.type === 'multiselect' && !$scope.action.init) {
-              $scope.form[name] = ActionResourceLoader.formatChoices(
-                field,
-                $scope.form[name],
-              );
+              $scope.form[name] = formatChoices(field, $scope.form[name]);
             }
             if ($scope.action.name === 'edit') {
               $scope.form[name] = $scope.resource[name];
