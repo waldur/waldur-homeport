@@ -155,9 +155,9 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
-#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/cluster/ClusterHPAList.tsx
-#: src/rancher/cluster/ClusterUsersList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -469,11 +469,11 @@ msgid "Annotations & labels"
 msgstr ""
 
 #: src/marketplace-checklist/AnswersTable.tsx
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Answer"
 msgstr ""
 
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Answers"
 msgstr ""
 
@@ -496,7 +496,7 @@ msgstr ""
 msgid "Application configuration"
 msgstr ""
 
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Application details"
 msgstr ""
 
@@ -929,8 +929,8 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
-#: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 msgid "Catalog"
 msgstr ""
@@ -1114,8 +1114,8 @@ msgstr ""
 msgid "Cluster name"
 msgstr ""
 
-#: src/rancher/cluster/ClusterUsersList.tsx
-#: src/rancher/cluster/UserDetailsTable.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 msgid "Cluster roles"
 msgstr ""
 
@@ -1431,9 +1431,9 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
-#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/vmware/DisksList.tsx
@@ -1757,8 +1757,8 @@ msgstr ""
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/project/team/UserDetailsButton.tsx
-#: src/rancher/cluster/ApplicationDetailsButton.tsx
-#: src/rancher/cluster/UserDetailsButton.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
+#: src/rancher/cluster/users/UserDetailsButton.tsx
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -2418,8 +2418,8 @@ msgstr ""
 
 #: src/auth/SignupForm.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
-#: src/rancher/cluster/ClusterUsersList.tsx
-#: src/rancher/cluster/UserDetailsTable.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserFilter.tsx
@@ -2935,7 +2935,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
-#: src/rancher/cluster/UserDetailsTable.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Is active"
 msgstr ""
@@ -3037,7 +3037,7 @@ msgstr ""
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Key"
 msgstr ""
 
@@ -3138,7 +3138,7 @@ msgid "Limits are invalid."
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Link"
 msgstr ""
 
@@ -3541,9 +3541,9 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
-#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -3971,7 +3971,7 @@ msgstr ""
 
 #: src/events/EventDetailsTable.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "Open"
 msgstr ""
@@ -4766,9 +4766,9 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Project"
 msgstr ""
@@ -4846,8 +4846,8 @@ msgstr ""
 msgid "Project resources"
 msgstr ""
 
-#: src/rancher/cluster/ClusterUsersList.tsx
-#: src/rancher/cluster/UserDetailsTable.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
 msgid "Project roles"
 msgstr ""
@@ -5007,7 +5007,7 @@ msgid "Quantity"
 msgstr ""
 
 #: src/marketplace-checklist/AnswersTable.tsx
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Question"
 msgstr ""
 
@@ -6355,9 +6355,9 @@ msgstr ""
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/rancher/cluster/ClusterApplicationsList.tsx
 #: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -6484,7 +6484,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
@@ -6609,8 +6609,8 @@ msgid "Technical name intended for integration and automated reporting. Please u
 msgstr ""
 
 #: src/issues/create/IssueCreateForm.tsx
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
-#: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Template"
@@ -7765,7 +7765,7 @@ msgstr ""
 msgid "User data"
 msgstr ""
 
-#: src/rancher/cluster/UserDetailsDialog.tsx
+#: src/rancher/cluster/users/UserDetailsDialog.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsDialog.tsx
 msgid "User details"
@@ -7902,8 +7902,8 @@ msgstr ""
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/project/team/user-selector.html
 #: src/rancher/catalog/CatalogCreateDialog.tsx
-#: src/rancher/cluster/ClusterUsersList.tsx
-#: src/rancher/cluster/UserDetailsTable.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
+#: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 #: src/vmware/VMwareForm.tsx
@@ -8033,7 +8033,7 @@ msgstr ""
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr ""
 
@@ -8066,7 +8066,7 @@ msgid "Verifying email change"
 msgstr ""
 
 #: src/navigation/AppFooter.tsx
-#: src/rancher/cluster/ApplicationDetailsDialog.tsx
+#: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
 msgstr ""
@@ -8350,7 +8350,7 @@ msgstr ""
 msgid "Zabbix provider"
 msgstr ""
 
-#: src/rancher/cluster/ApplicationDeleteButton.tsx
+#: src/rancher/cluster/apps/ApplicationDeleteButton.tsx
 msgid "application"
 msgstr ""
 
@@ -8359,7 +8359,7 @@ msgstr ""
 msgid "application templates"
 msgstr ""
 
-#: src/rancher/cluster/ClusterApplicationsList.tsx
+#: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 msgid "applications"
 msgstr ""
 
@@ -8597,7 +8597,7 @@ msgid "token will not timeout"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
-#: src/rancher/cluster/ClusterUsersList.tsx
+#: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"
 msgstr ""

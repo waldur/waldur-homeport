@@ -6,7 +6,8 @@ import ModalTitle from 'react-bootstrap/lib/ModalTitle';
 
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { UserDetailsTable } from '@waldur/rancher/cluster/UserDetailsTable';
+
+import { UserDetailsTable } from './UserDetailsTable';
 
 export const UserDetailsDialog = ({ resolve }) => {
   return (

@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { UserDetailsDialog } from '@waldur/rancher/cluster/UserDetailsDialog';
 import { ActionButton } from '@waldur/table-react/ActionButton';
+
+import { UserDetailsDialog } from './UserDetailsDialog';
 
 export const UserDetailsButton = ({ user }) => {
   const dispatch = useDispatch();

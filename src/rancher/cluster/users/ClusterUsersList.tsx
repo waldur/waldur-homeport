@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import { RolesRenderer } from '@waldur/rancher/cluster/RolesRenderer';
-import { UserDetailsButton } from '@waldur/rancher/cluster/UserDetailsButton';
 import { Table, connectTable, createFetcher } from '@waldur/table-react';
 import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
+
+import { RolesRenderer } from './RolesRenderer';
+import { UserDetailsButton } from './UserDetailsButton';
 
 const TableComponent = props => {
   const { translate } = props;

@@ -2,8 +2,9 @@ import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
 
 import { translate } from '@waldur/i18n';
-import { RolesRenderer } from '@waldur/rancher/cluster/RolesRenderer';
 import { Row } from '@waldur/user/support/Row';
+
+import { RolesRenderer } from './RolesRenderer';
 
 export const UserDetailsTable = props => (
   <Table responsive={true} bordered={true}>
