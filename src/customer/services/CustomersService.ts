@@ -24,7 +24,7 @@ class CustomersServiceClass {
 
   isOwnerOrStaff() {
     const customer = getCustomer(store.getState());
-    UsersService.getCurrentUser().then(user => {
+    return UsersService.getCurrentUser().then(user => {
       return this.checkCustomerUser(customer, user);
     });
   }
