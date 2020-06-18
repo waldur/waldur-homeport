@@ -51,6 +51,9 @@ const TableComponent = props => {
 const TableOptions = {
   table: 'rancher-cluster-users',
   fetchData: createFetcher('rancher-users'),
+  mapPropsToFilter: props => ({
+    cluster_uuid: props.resource.uuid,
+  }),
   exportFields: ['Full name', 'Username'],
   exportRow: row => [row.full_name, row.user_name],
   queryField: 'user_username',
