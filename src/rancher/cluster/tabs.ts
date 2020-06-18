@@ -1,5 +1,5 @@
 import { translate } from '@waldur/i18n';
-import { ClusterUsersList } from '@waldur/rancher/cluster/ClusterUsersList';
+import { ClusterUsersList } from '@waldur/rancher/cluster/users/ClusterUsersList';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
@@ -8,7 +8,7 @@ import { ClusterProjectList } from '../ClusterProjectList';
 import { ClusterNodesList } from '../node/ClusterNodesList';
 import { ClusterTemplatesList } from '../template/ClusterTemplateList';
 
-import { ClusterApplicationsList } from './ClusterApplicationsList';
+import { ClusterApplicationsList } from './apps/ClusterApplicationsList';
 import { ClusterHPAList } from './ClusterHPAList';
 import { ClusterWorkloadsList } from './ClusterWorkloadsList';
 
