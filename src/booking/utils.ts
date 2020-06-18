@@ -243,7 +243,7 @@ export const createAvailabilityDates = (event: BookingProps) => {
         .clone()
         .set(getHoursMinutes(config.businessHours.startTime))
         .format(),
-      end: mStart
+      end: mEnd
         .clone()
         .set(getHoursMinutes(config.businessHours.endTime))
         .format(),
