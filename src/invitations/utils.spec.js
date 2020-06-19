@@ -1,4 +1,4 @@
-import { attachInvitationUtils, invitationUtilsService } from './utils.js';
+import { attachInvitationUtils, InvitationUtilsService } from './utils.js';
 import coreModule from '../core/module';
 
 describe('invitationUtilsService', () => {
@@ -11,7 +11,7 @@ describe('invitationUtilsService', () => {
         },
       },
     });
-    module.service('invitationUtilsService', invitationUtilsService);
+    module.service('invitationUtilsService', InvitationUtilsService);
     module.run(attachInvitationUtils);
     coreModule(module);
   }
