@@ -3276,6 +3276,10 @@ msgstr ""
 msgid "Manager in:"
 msgstr ""
 
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Mark as paid"
+msgstr ""
+
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
@@ -3985,6 +3989,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "One-time on plan switch"
+msgstr ""
+
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Only a created invoice can be marked as paid."
 msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
@@ -6759,6 +6767,10 @@ msgstr ""
 msgid "Terms of service"
 msgstr ""
 
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "The invoice has been marked as paid."
+msgstr ""
+
 #: src/user/keys/KeyCreateForm.tsx
 msgid "The key has been created."
 msgstr ""
@@ -7460,6 +7472,10 @@ msgstr ""
 
 #: src/auth/saml2/store/effects.ts
 msgid "Unable to login via SAML2 protocol."
+msgstr ""
+
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Unable to mark the invoice as paid."
 msgstr ""
 
 #: src/openstack/utils.ts
