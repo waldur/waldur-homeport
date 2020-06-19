@@ -4,7 +4,7 @@ import { compose } from 'redux';
 
 import { titleCase } from '@waldur/core/utils';
 import { useTitle } from '@waldur/navigation/title';
-import { Table, createFetcher, connectTable } from '@waldur/table-react';
+import { Table, createFetcher, connectTable } from '@waldur/table';
 import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
 

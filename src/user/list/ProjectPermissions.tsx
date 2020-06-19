@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { ProjectLink } from '@waldur/project/ProjectLink';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { filterByUser } from '@waldur/workspace/selectors';
 
 const TableComponent = props => {

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { translate } from '@waldur/i18n';
-import { Table, connectTable } from '@waldur/table-react';
-import { BooleanField } from '@waldur/table-react/BooleanField';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable } from '@waldur/table';
+import { BooleanField } from '@waldur/table/BooleanField';
+import { TableOptionsType } from '@waldur/table/types';
 import {
   getProject,
   getUser,

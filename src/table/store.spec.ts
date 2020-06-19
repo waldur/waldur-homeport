@@ -1,4 +1,4 @@
-import { initialState } from '@waldur/table-react/store.fixture';
+import { initialState } from '@waldur/table/store.fixture';
 
 import * as actions from './actions';
 import { reducer, getTableState } from './store';

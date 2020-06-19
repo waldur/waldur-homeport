@@ -887,7 +887,7 @@ msgstr ""
 msgid "CPU usage"
 msgstr ""
 
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "CSV"
 msgstr ""
 
@@ -1280,7 +1280,7 @@ msgid "Copy of"
 msgstr ""
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -2190,7 +2190,7 @@ msgstr ""
 msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr ""
 
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "Excel"
 msgstr ""
 
@@ -2223,7 +2223,7 @@ msgstr ""
 msgid "Explore {deployment} Marketplace"
 msgstr ""
 
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "Export as"
 msgstr ""
 
@@ -3276,6 +3276,10 @@ msgstr ""
 msgid "Manager in:"
 msgstr ""
 
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Mark as paid"
+msgstr ""
+
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
@@ -3722,7 +3726,7 @@ msgstr ""
 
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
-#: src/table-react/TablePagination.tsx
+#: src/table/TablePagination.tsx
 msgid "Next"
 msgstr ""
 
@@ -3985,6 +3989,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "One-time on plan switch"
+msgstr ""
+
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Only a created invoice can be marked as paid."
 msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
@@ -4270,7 +4278,7 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "PDF"
 msgstr ""
 
@@ -4690,7 +4698,7 @@ msgid "Preview offering"
 msgstr ""
 
 #: src/customer/create/WizardForm.tsx
-#: src/table-react/TablePagination.tsx
+#: src/table/TablePagination.tsx
 msgid "Previous"
 msgstr ""
 
@@ -5158,7 +5166,7 @@ msgstr ""
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/offering/OfferingActions.tsx
 #: src/resource/ResourceRefreshButton.tsx
-#: src/table-react/TableRefreshButton.tsx
+#: src/table/TableRefreshButton.tsx
 msgid "Refresh"
 msgstr ""
 
@@ -5846,7 +5854,7 @@ msgstr ""
 
 #: src/issues/create/SearchButton.tsx
 #: src/navigation/header/MainSearch.tsx
-#: src/table-react/TableQuery.tsx
+#: src/table/TableQuery.tsx
 msgid "Search"
 msgstr ""
 
@@ -6187,7 +6195,7 @@ msgstr ""
 msgid "Shopping cart item update"
 msgstr ""
 
-#: src/table-react/TablePageSize.tsx
+#: src/table/TablePageSize.tsx
 msgid "Show"
 msgstr ""
 
@@ -6250,7 +6258,7 @@ msgstr ""
 msgid "Show with running accounting"
 msgstr ""
 
-#: src/table-react/TableInfo.tsx
+#: src/table/TableInfo.tsx
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr ""
 
@@ -6759,6 +6767,10 @@ msgstr ""
 msgid "Terms of service"
 msgstr ""
 
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "The invoice has been marked as paid."
+msgstr ""
+
 #: src/user/keys/KeyCreateForm.tsx
 msgid "The key has been created."
 msgstr ""
@@ -6869,11 +6881,11 @@ msgstr ""
 msgid "There are no sections for comparison yet."
 msgstr ""
 
-#: src/table-react/utils.tsx
+#: src/table/utils.tsx
 msgid "There are no {verboseName} found matching the filter."
 msgstr ""
 
-#: src/table-react/utils.tsx
+#: src/table/utils.tsx
 msgid "There are no {verboseName} yet."
 msgstr ""
 
@@ -7240,7 +7252,7 @@ msgstr ""
 msgid "Unable to fetch current user."
 msgstr ""
 
-#: src/table-react/Table.tsx
+#: src/table/Table.tsx
 msgid "Unable to fetch data."
 msgstr ""
 
@@ -7460,6 +7472,10 @@ msgstr ""
 
 #: src/auth/saml2/store/effects.ts
 msgid "Unable to login via SAML2 protocol."
+msgstr ""
+
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Unable to mark the invoice as paid."
 msgstr ""
 
 #: src/openstack/utils.ts
@@ -8470,7 +8486,7 @@ msgstr ""
 msgid "e.g. MyApp"
 msgstr ""
 
-#: src/table-react/TablePageSize.tsx
+#: src/table/TablePageSize.tsx
 msgid "entries"
 msgstr ""
 
@@ -8525,7 +8541,7 @@ msgstr ""
 msgid "invoices"
 msgstr ""
 
-#: src/table-react/utils.tsx
+#: src/table/utils.tsx
 msgid "items"
 msgstr ""
 

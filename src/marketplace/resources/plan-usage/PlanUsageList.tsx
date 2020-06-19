@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { PlanUsageButton } from './PlanUsageButton';
 import { PlanUsageRowProps } from './types';

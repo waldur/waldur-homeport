@@ -10,7 +10,7 @@ import { SCREENSHOTS_TABLE_NAME } from '@waldur/marketplace/offerings/store/cons
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering, Screenshot } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
-import { connectTable, createFetcher, Table } from '@waldur/table-react';
+import { connectTable, createFetcher, Table } from '@waldur/table';
 
 import { ViewOfferingScreenshotDialog } from './ViewOfferingScreenshotDialog';
 

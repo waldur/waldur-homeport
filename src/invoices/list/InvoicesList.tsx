@@ -6,8 +6,9 @@ import { getFormValues } from 'redux-form';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { MarkAsPaidButton } from '@waldur/invoices/list/MarkAsPaidButton';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { InvoicesFilter } from './InvoicesFilter';
@@ -56,7 +57,12 @@ const TableComponent = props => {
       },
       {
         title: translate('Actions'),
-        render: SendNotificationButton,
+        render: ({ row }) => (
+          <>
+            <SendNotificationButton row={row} />
+            <MarkAsPaidButton row={row} />
+          </>
+        ),
       },
     );
   }

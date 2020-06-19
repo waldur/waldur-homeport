@@ -1,4 +1,4 @@
-import { transformRows } from '@waldur/table-react/utils';
+import { transformRows } from '@waldur/table/utils';
 
 describe('transformRows', () => {
   it('should return object with entities and order properties by UUID', () => {

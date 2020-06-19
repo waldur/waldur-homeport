@@ -11,7 +11,7 @@ import { TABLE_NAME } from '@waldur/booking/constants';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
 import { withTranslation, translate } from '@waldur/i18n';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 interface BookingsList {

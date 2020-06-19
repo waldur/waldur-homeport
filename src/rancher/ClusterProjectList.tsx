@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 

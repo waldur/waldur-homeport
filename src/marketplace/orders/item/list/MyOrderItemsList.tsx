@@ -6,8 +6,8 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { connectTable, createFetcher, Table } from '@waldur/table-react';
-import { renderFieldOrDash } from '@waldur/table-react/utils';
+import { connectTable, createFetcher, Table } from '@waldur/table';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { TABLE_MY_ORDERS } from './constants';

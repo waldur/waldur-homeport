@@ -6,7 +6,7 @@ import { CustomerEditDetailsForm } from '@waldur/customer/details/CustomerEditDe
 import { CustomerDetailsEditFormData } from '@waldur/customer/details/types';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import './CustomerEditDetails.scss';
 

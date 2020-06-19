@@ -5,7 +5,7 @@ import { put, call, select } from 'redux-saga/effects';
 import { ENV } from '@waldur/core/services';
 import { copyToClipboard } from '@waldur/core/utils';
 import { loadPdfMake } from '@waldur/shims/pdfmake';
-import { fetchAll } from '@waldur/table-react/api';
+import { fetchAll } from '@waldur/table/api';
 
 import { blockStart, blockStop } from './actions';
 import exportExcel from './excel';

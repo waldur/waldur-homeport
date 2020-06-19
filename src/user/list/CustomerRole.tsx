@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { BooleanField } from '@waldur/table-react/BooleanField';
+import { BooleanField } from '@waldur/table/BooleanField';
 
 interface Props {
   row: {

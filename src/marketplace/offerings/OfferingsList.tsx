@@ -9,7 +9,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
 import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
 import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { Offering } from '../types';

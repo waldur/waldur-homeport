@@ -9,8 +9,8 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { Category } from '@waldur/marketplace/types';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { wrapTooltip } from '@waldur/table-react/ActionButton';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 

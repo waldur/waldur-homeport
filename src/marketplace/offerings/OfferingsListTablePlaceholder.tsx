@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { ImageTablePlaceholder } from '@waldur/table-react/ImageTablePlaceholder';
+import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, OuterState } from '@waldur/workspace/types';
 

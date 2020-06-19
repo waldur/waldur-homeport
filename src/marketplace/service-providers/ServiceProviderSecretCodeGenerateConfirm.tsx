@@ -5,7 +5,7 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ServiceProvider } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import * as actions from './store/actions';
 

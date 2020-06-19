@@ -7,8 +7,8 @@ import * as api from '@waldur/customer/payment-profiles/api';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
-import { FETCH_LIST_START } from '@waldur/table-react/actions';
-import { fetchList } from '@waldur/table-react/effects';
+import { FETCH_LIST_START } from '@waldur/table/actions';
+import { fetchList } from '@waldur/table/effects';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as constants from '../constants';

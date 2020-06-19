@@ -4,8 +4,8 @@ import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { BooleanField } from '@waldur/table-react/BooleanField';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { BooleanField } from '@waldur/table/BooleanField';
 
 const TableComponent = props => {
   const { translate } = props;

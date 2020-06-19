@@ -5,7 +5,7 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { ENV } from '@waldur/core/services';
 import eventsRegistry from '@waldur/events/registry';
 import { useTitle } from '@waldur/navigation/title';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { EventDetailsButton } from './EventDetailsButton';
 import { EventTypesButton } from './EventTypesButton';

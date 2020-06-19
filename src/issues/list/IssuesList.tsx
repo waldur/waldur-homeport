@@ -7,9 +7,9 @@ import { translate } from '@waldur/i18n';
 import { IssuesListPlaceholder } from '@waldur/issues/list/IssuesListPlaceholder';
 import { useTitle } from '@waldur/navigation/title';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableProps } from '@waldur/table-react/Table';
-import { Column } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableProps } from '@waldur/table/Table';
+import { Column } from '@waldur/table/types';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueTypeIcon } from '../types/IssueTypeIcon';

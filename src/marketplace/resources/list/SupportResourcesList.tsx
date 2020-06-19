@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { connectTable } from '@waldur/table-react';
+import { connectTable } from '@waldur/table';
 
 import { TableOptions, TableComponent } from './PublicResourcesList';
 

@@ -4,7 +4,7 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { REFERRALS_TABLE } from '@waldur/marketplace/referral/constants';
 import { ReferralTypeIcon } from '@waldur/marketplace/referral/ReferralTypeIcon';
-import { connectTable, createFetcher, Table } from '@waldur/table-react';
+import { connectTable, createFetcher, Table } from '@waldur/table';
 
 const TableComponent = props => {
   const columns = [

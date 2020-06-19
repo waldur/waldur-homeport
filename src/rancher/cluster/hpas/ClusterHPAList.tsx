@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { HPA } from '@waldur/rancher/types';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 
 import { HPACreateButton } from './HPACreateButton';
 import { HPADeleteButton } from './HPADeleteButton';

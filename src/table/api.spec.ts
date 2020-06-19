@@ -1,4 +1,4 @@
-import { getNextPageNumber } from '@waldur/table-react/api';
+import { getNextPageNumber } from '@waldur/table/api';
 
 describe('getNextPageNumber', () => {
   const link =

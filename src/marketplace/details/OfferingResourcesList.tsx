@@ -16,7 +16,7 @@ import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceS
 import { ResourceState } from '@waldur/marketplace/resources/types';
 import { ResourceUsageButton } from '@waldur/marketplace/resources/usage/ResourceUsageButton';
 import { Offering } from '@waldur/marketplace/types';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 interface OfferingResourceFilter {
   state?: Option<ResourceState>;

@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
-import { connectTable } from '@waldur/table-react';
+import { connectTable } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 

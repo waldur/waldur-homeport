@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 
 import { formatDate } from '@waldur/core/dateUtils';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 
 import { ApplicationDeleteButton } from './ApplicationDeleteButton';
 import { ApplicationDetailsButton } from './ApplicationDetailsButton';

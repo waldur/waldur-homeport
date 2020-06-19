@@ -5,7 +5,7 @@ import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
-import { updateEntity, createEntity } from '@waldur/table-react/actions';
+import { updateEntity, createEntity } from '@waldur/table/actions';
 
 import { getEventGroups, updateHook, createHook } from './api';
 import { HOOK_LIST_ID } from './constants';

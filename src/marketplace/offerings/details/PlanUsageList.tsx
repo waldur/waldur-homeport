@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withTranslation, translate } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
 import { PlanUsageButton } from '@waldur/marketplace/resources/plan-usage/PlanUsageButton';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 interface PlanUsageListProps {
   offering_uuid: string;

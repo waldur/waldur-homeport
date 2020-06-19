@@ -1,7 +1,7 @@
 import { delay } from 'redux-saga';
 import { call, put, select, takeEvery, take, race } from 'redux-saga/effects';
 
-import { transformRows } from '@waldur/table-react/utils';
+import { transformRows } from '@waldur/table/utils';
 
 import * as actions from './actions';
 import { exportTable } from './export';

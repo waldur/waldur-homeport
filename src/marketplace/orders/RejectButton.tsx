@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
-import { wrapTooltip } from '@waldur/table-react/ActionButton';
+import { wrapTooltip } from '@waldur/table/ActionButton';
 
 interface RejectButtonProps {
   onClick: () => void;

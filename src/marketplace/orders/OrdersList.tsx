@@ -7,8 +7,8 @@ import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { getProject } from '@waldur/workspace/selectors';
 
 export const TableComponent = props => {

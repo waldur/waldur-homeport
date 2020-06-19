@@ -6,8 +6,8 @@ import useAsync from 'react-use/lib/useAsync';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 import {
   getProject,
   getUser,
