@@ -74,7 +74,6 @@ module.exports = {
       'angular-flash-alert',
       'angulartics',
       'angulartics-google-analytics',
-      'angular-resource',
       'ui-select',
       'satellizer',
       'angular-translate',

@@ -32,7 +32,6 @@ import 'angular-flash-alert';
 import 'angular-flash-alert/dist/angular-flash.css';
 import 'angulartics';
 import 'angulartics-google-analytics';
-import 'angular-resource';
 import 'ui-select';
 import 'ui-select/dist/select.css';
 import 'satellizer';

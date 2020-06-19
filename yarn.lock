@@ -2016,11 +2016,6 @@ angular-loader@^1.8.0:
   resolved "https://registry.yarnpkg.com/angular-loader/-/angular-loader-1.8.0.tgz#63bbe97b44ca141fbc4fbde899904a81ed648c65"
   integrity sha512-NCvLLFWCkxLR3/zBaVGM+7q9IJzobx2PVXMnPoKjtAITpM6AhnH5SYFkFzcK1oQ6P6c2v0oLef6oij7mSEj0Mw==
 
-angular-resource@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.8.0.tgz#578ef122e7cb7bcc6c0ad6c2451dc3d27fd570ba"
-  integrity sha512-9woUq3kDwoT7R6SjKX8vaJMhOplYBm9sqRAxKgDhDIdPyA8iBowqQIusf9+8Q+z/HlXb8ZXvKspJyKXrxmKdvg==
-
 angular-sanitize@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/angular-sanitize/-/angular-sanitize-1.8.0.tgz#9f80782d3afeec3bcc0bb92b3ca6f1f421cfbca6"
