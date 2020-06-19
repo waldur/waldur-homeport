@@ -31,10 +31,6 @@ import { fetchTenantOptions, fetchInstanceOptions } from './api';
 export class PureOfferingConfigurationForm extends React.Component<
   OfferingConfigurationFormProps
 > {
-  state = {
-    availableDates: [],
-  };
-
   componentDidMount() {
     const attributes = { ...this.props.initialAttributes };
     if (this.props.offering.options.order) {
@@ -46,8 +42,6 @@ export class PureOfferingConfigurationForm extends React.Component<
       });
     }
     if (!attributes.schedules) {
-      const { schedules } = this.props.offering.attributes;
-      this.setState({ availableDates: schedules });
       attributes.schedules = [];
     }
     const initialData: any = { attributes };
