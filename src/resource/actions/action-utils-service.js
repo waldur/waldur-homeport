@@ -209,7 +209,7 @@ export default function actionUtilsService(
     const component = action.component || 'actionDialog';
     const params = { component, size: action.dialogSize };
     if (action.useResolve) {
-      angular.extend(params, {
+      Object.assign(params, {
         resolve: {
           action,
           controller,
@@ -218,7 +218,7 @@ export default function actionUtilsService(
       });
     } else {
       const dialogScope = $rootScope.$new();
-      angular.extend(dialogScope, {
+      Object.assign(dialogScope, {
         action,
         controller,
         resource,

@@ -81,13 +81,10 @@ const addTeamMember = {
         },
       };
 
-      this.ownerExpirationTimeField = angular.extend(
-        {},
-        this.projectExpirationTimeField,
-        {
-          disableInput: !this.canChangeRole || !this.canManageOwner,
-        },
-      );
+      this.ownerExpirationTimeField = {
+        ...this.projectExpirationTimeField,
+        disableInput: !this.canChangeRole || !this.canManageOwner,
+      };
 
       this.formatData();
     }

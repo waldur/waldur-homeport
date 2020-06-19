@@ -10,11 +10,11 @@ const appstoreFieldMultiselect = {
     $onInit() {
       if (this.field.parser) {
         const choices = this.field.choices.map(this.field.parser);
-        this.field = angular.extend({}, this.field, { choices });
+        this.field = { ...this.field, choices };
       }
 
       if (this.field.default) {
-        let defaultValue = this.field.choices.filter(item => {
+        const defaultValue = this.field.choices.filter(item => {
           return item.object.name === this.field.default;
         })[0];
         if (defaultValue) {

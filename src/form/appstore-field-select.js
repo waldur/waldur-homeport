@@ -10,7 +10,7 @@ const appstoreFieldSelect = {
     $onInit() {
       if (this.field.parser) {
         const choices = this.field.choices.map(this.field.parser);
-        this.field = angular.extend({}, this.field, { choices });
+        this.field = { ...this.field, choices };
       }
     }
   },

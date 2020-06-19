@@ -17,11 +17,11 @@ export function urlRouterProvider(
 
 // @ngInject
 export function extendEnv(ENV) {
-  angular.extend(ENV, window.$$CUSTOMENV);
+  Object.assign(ENV, window.$$CUSTOMENV);
   if (ENV.enableExperimental) {
-    angular.extend(ENV, window.$$MODES.experimentalMode);
+    Object.assign(ENV, window.$$MODES.experimentalMode);
   } else {
-    angular.extend(ENV, window.$$MODES.stableMode);
+    Object.assign(ENV, window.$$MODES.stableMode);
   }
 }
 
