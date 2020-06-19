@@ -7,8 +7,8 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { ENV } from '@waldur/core/services';
 import { withTranslation, translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { renderFieldOrDash } from '@waldur/table-react/utils';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CurrentCostField } from './CurrentCostField';
 import { CustomerExpandableRow } from './CustomerExpandableRow';

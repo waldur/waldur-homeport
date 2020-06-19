@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 import { RolesRenderer } from './RolesRenderer';
 import { UserDetailsButton } from './UserDetailsButton';

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { connectTable, createFetcher } from '@waldur/table-react';
+import { connectTable, createFetcher } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { TABLE_SUPPORT_ORDERS } from './constants';

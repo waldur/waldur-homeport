@@ -15,7 +15,7 @@ import providerSaga from '@waldur/providers/effects';
 import serviceUsageSaga from '@waldur/providers/support/effects';
 import monitoringSaga from '@waldur/resource/monitoring/effects';
 import resourceSummarySaga from '@waldur/resource/summary/effects';
-import tableSaga from '@waldur/table-react/effects';
+import tableSaga from '@waldur/table/effects';
 import userSaga from '@waldur/user/support/effects';
 
 import coreSaga from './coreSaga';

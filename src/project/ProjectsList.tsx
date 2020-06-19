@@ -6,8 +6,8 @@ import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { formatLongText } from '@waldur/table-react/utils';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { formatLongText } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ProjectCreateButton } from './ProjectCreateButton';

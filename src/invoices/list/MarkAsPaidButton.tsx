@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { post } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 export const MarkAsPaidButton = ({ row }) => {

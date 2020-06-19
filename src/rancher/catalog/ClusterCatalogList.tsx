@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { CatalogCreateButton } from './CatalogCreateButton';
 import { CatalogDeleteButton } from './CatalogDeleteButton';

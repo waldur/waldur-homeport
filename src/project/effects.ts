@@ -9,7 +9,7 @@ import {
   emitSignal,
   showError,
 } from '@waldur/store/coreSaga';
-import { deleteEntity } from '@waldur/table-react/actions';
+import { deleteEntity } from '@waldur/table/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import {

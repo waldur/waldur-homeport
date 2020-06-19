@@ -4,7 +4,7 @@ import * as React from 'react';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
-import { wrapTooltip } from '@waldur/table-react/ActionButton';
+import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import { Offering } from '../types';
 

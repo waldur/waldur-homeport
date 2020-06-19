@@ -6,8 +6,8 @@ import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { InvitationCancelButton } from './actions/InvitationCancelButton';

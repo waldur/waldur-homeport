@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { createFetcher } from '@waldur/table-react/api';
-import { Table, connectTable } from '@waldur/table-react/index';
+import { createFetcher } from '@waldur/table/api';
+import { Table, connectTable } from '@waldur/table/index';
 
 import { formatFilter } from './utils';
 

@@ -4,10 +4,10 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
-import { createFetcher, Table, connectTable } from '@waldur/table-react';
-import { TableProps } from '@waldur/table-react/Table';
-import { Column, TableOptionsType } from '@waldur/table-react/types';
-import { renderFieldOrDash } from '@waldur/table-react/utils';
+import { createFetcher, Table, connectTable } from '@waldur/table';
+import { TableProps } from '@waldur/table/Table';
+import { Column, TableOptionsType } from '@waldur/table/types';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 const AbbreviationField = ({ row }) => (
   <span>{renderFieldOrDash(row.abbreviation)}</span>

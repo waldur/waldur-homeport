@@ -3,7 +3,7 @@ import * as React from 'react';
 import { getById } from '@waldur/core/api';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { VirtualMachine } from '@waldur/resource/types';
-import { Table, connectTable } from '@waldur/table-react';
+import { Table, connectTable } from '@waldur/table';
 
 const TableComponent = props => {
   const { translate } = props;

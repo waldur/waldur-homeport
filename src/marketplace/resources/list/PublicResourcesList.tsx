@@ -7,7 +7,7 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Category, Offering } from '@waldur/marketplace/types';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 

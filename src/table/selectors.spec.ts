@@ -1,4 +1,4 @@
-import { selectTableRows } from '@waldur/table-react/selectors';
+import { selectTableRows } from '@waldur/table/selectors';
 
 describe('SelectTableRows', () => {
   it('should return rows composed from entities by order', () => {

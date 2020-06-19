@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 const TableComponent = props => {
   const { translate } = props;

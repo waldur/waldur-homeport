@@ -5,8 +5,8 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { JiraIssue } from '@waldur/jira/issue/types';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { formatLongText } from '@waldur/table-react/utils';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { formatLongText } from '@waldur/table/utils';
 
 import { JiraIssueCreateButton } from './JiraIssueCreateButton';
 import { JiraIssuePriorityField } from './JiraIssuePriorityField';

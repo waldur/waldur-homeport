@@ -5,7 +5,7 @@ import useAsyncFn from 'react-use/lib/useAsyncFn';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 export const ResourceDeleteButton = ({ apiFunction, resourceType }) => {
   const dispatch = useDispatch();

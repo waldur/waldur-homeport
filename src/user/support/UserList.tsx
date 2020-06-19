@@ -5,9 +5,9 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { BooleanField } from '@waldur/table-react/BooleanField';
-import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
-import { Table, connectTable, createFetcher } from '@waldur/table-react/index';
+import { BooleanField } from '@waldur/table/BooleanField';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Table, connectTable, createFetcher } from '@waldur/table/index';
 
 import { UserActivateButton } from './UserActivateButton';
 import { UserDetailsButton } from './UserDetailsButton';

@@ -7,7 +7,7 @@ import { getLabel } from '@waldur/marketplace/common/registry';
 import { ReferralDetailsField } from '@waldur/marketplace/referral/ReferralDetailsField';
 import { Offering } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
-import { BooleanField } from '@waldur/table-react/BooleanField';
+import { BooleanField } from '@waldur/table/BooleanField';
 
 interface OfferingHeaderProps {
   offering: Offering;

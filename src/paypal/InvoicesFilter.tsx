@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { ToogleButtonFilter } from '@waldur/table-react/ToggleButtonFilter';
+import { ToogleButtonFilter } from '@waldur/table/ToggleButtonFilter';
 
 const PureInvoicesFilter = () => {
   const choices = React.useMemo(

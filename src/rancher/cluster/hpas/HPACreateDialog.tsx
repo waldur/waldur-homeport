@@ -16,7 +16,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { createHPA, listWorkloads } from '@waldur/rancher/api';
 import { Resource } from '@waldur/resource/types';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { createEntity } from '@waldur/table-react/actions';
+import { createEntity } from '@waldur/table/actions';
 
 interface OwnProps {
   resolve: {

@@ -6,9 +6,9 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableProps } from '@waldur/table-react/Table';
-import { Column } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableProps } from '@waldur/table/Table';
+import { Column } from '@waldur/table/types';
 
 import { FORM_ID } from './SupportUsageFilter';
 import { UsageReport, UsageReportRequest } from './types';

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 const TableComponent = props => {
   const { translate } = props;

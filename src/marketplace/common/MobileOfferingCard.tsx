@@ -4,7 +4,7 @@ import * as React from 'react';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
-import { wrapTooltip } from '@waldur/table-react/ActionButton';
+import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import { Offering } from '../types';
 

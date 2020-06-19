@@ -8,7 +8,7 @@ import {
 } from '@waldur/customer/payment-profiles/store/actions';
 import { translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { PaymentProfile } from '@waldur/workspace/types';
 
 import { PaymentProfileUpdateDialogContainer } from './PaymentProfileUpdateDialog';

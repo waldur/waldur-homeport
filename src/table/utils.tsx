@@ -5,8 +5,8 @@ import { compose } from 'redux';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate, withTranslation } from '@waldur/i18n/translate';
 import { isVisible } from '@waldur/store/config';
-import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
-import { selectTableRows } from '@waldur/table-react/selectors';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { selectTableRows } from '@waldur/table/selectors';
 
 import * as actions from './actions';
 import { registerTable } from './registry';
