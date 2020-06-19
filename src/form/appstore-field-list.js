@@ -12,12 +12,12 @@ class FieldController {
   $onInit() {
     if (this.field.parser) {
       const choices = this.field.choices.map(this.field.parser);
-      this.field = angular.extend({}, this.field, { choices });
+      this.field = { ...this.field, choices };
     }
 
     if (this.field.comparator) {
       const choices = this.field.choices.sort(this.field.comparator);
-      this.field = angular.extend({}, this.field, { choices });
+      this.field = { ...this.field, choices };
     }
 
     if (this.field.preselectFirst && this.field.choices.length > 0) {

@@ -17,7 +17,7 @@ export default class UserSettings {
     } else {
       currentValue = {};
     }
-    currentValue = angular.extend(currentValue, {
+    currentValue = Object.assign(currentValue, {
       [user_uuid]: value,
     });
     this.$window.localStorage[KEY] = JSON.stringify(currentValue);

@@ -16,7 +16,7 @@ function ActionDialogController(
   actionUtilsService,
   ncUtilsFlash,
 ) {
-  angular.extend($scope, {
+  Object.assign($scope, {
     init: function() {
       $scope.errors = {};
       $scope.form = {};
