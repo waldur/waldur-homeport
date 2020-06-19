@@ -155,8 +155,8 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
@@ -695,6 +695,14 @@ msgstr ""
 msgid "Available quota usage: {usage}"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Average utilization"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Average value"
+msgstr ""
+
 #: src/configs/base-config.js
 msgid "Azerbaijani"
 msgstr ""
@@ -869,6 +877,7 @@ msgstr ""
 msgid "CIDR"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "CPU"
@@ -1315,6 +1324,7 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/rancher/catalog/CatalogCreateButton.tsx
+#: src/rancher/cluster/hpas/HPACreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create"
 msgstr ""
@@ -1362,6 +1372,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
 msgid "Create floating IP for OpenStack tenant"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Create horizontal pod autoscaler"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateNetworkAction.ts
@@ -1431,9 +1445,9 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/vmware/DisksList.tsx
@@ -1526,7 +1540,7 @@ msgstr ""
 msgid "Current price per month"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 msgid "Current replicas"
 msgstr ""
 
@@ -1705,6 +1719,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -1716,7 +1731,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 msgid "Desired replicas"
 msgstr ""
 
@@ -2224,6 +2239,10 @@ msgstr ""
 msgid "Extending"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "External"
+msgstr ""
+
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "External IP"
@@ -2507,6 +2526,10 @@ msgstr ""
 msgid "Guide me"
 msgstr ""
 
+#: src/rancher/cluster/tabs.ts
+msgid "HPA"
+msgstr ""
+
 #: src/issues/workspace/issue-navigation-service.js
 #: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
@@ -2541,8 +2564,8 @@ msgstr ""
 msgid "Hook removal"
 msgstr ""
 
-#: src/rancher/cluster/tabs.ts
-msgid "Horizontal pod autoscalers"
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Horizontal pod autoscaler has been created."
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostSummary.tsx
@@ -3292,7 +3315,8 @@ msgstr ""
 msgid "Max number of VM snapshots"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Max replicas"
 msgstr ""
 
@@ -3352,6 +3376,10 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Memory"
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Memory per vCore"
 msgstr ""
@@ -3373,6 +3401,14 @@ msgstr ""
 msgid "Metric"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Metric name"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Metric type"
+msgstr ""
+
 #: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Min RAM"
 msgstr ""
@@ -3381,7 +3417,8 @@ msgstr ""
 msgid "Min amount"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Min replicas"
 msgstr ""
 
@@ -3545,9 +3582,10 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -3608,8 +3646,8 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/NamespaceField.tsx
 msgid "Namespace"
 msgstr ""
@@ -3838,6 +3876,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "OK"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Object"
 msgstr ""
 
 #: src/error/InvalidRoutePage.tsx
@@ -4600,6 +4642,7 @@ msgstr ""
 msgid "Plugin options are invalid."
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Pods"
 msgstr ""
@@ -4770,9 +4813,9 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Project"
 msgstr ""
@@ -5007,6 +5050,7 @@ msgstr ""
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Quantity"
 msgstr ""
 
@@ -5427,6 +5471,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Resource"
 msgstr ""
 
@@ -6359,9 +6404,9 @@ msgstr ""
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -6436,6 +6481,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
@@ -6572,6 +6618,10 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Taking a snapshot"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Target type"
 msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
@@ -7106,6 +7156,10 @@ msgstr ""
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Unable to create catalog."
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Unable to create horizontal pod autoscaler."
 msgstr ""
 
 #: src/user/keys/KeyCreateForm.tsx
@@ -8166,7 +8220,8 @@ msgstr ""
 msgid "Worker"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Workload"
 msgstr ""
 
@@ -8449,11 +8504,11 @@ msgstr ""
 msgid "have been accepted on"
 msgstr ""
 
-#: src/rancher/cluster/HPADeleteButton.tsx
+#: src/rancher/cluster/hpas/HPADeleteButton.tsx
 msgid "horizontal pod autoscaler"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 msgid "horizontal pod autoscalers"
 msgstr ""
 

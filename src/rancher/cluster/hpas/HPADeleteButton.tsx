@@ -1,10 +1,9 @@
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
+import { deleteHPA } from '@waldur/rancher/api';
 
-import { deleteHPA } from '../api';
-
-import { ResourceDeleteButton } from './ResourceDeleteButton';
+import { ResourceDeleteButton } from '../ResourceDeleteButton';
 
 export const HPADeleteButton = props => (
   <ResourceDeleteButton

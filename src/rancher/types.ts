@@ -66,3 +66,32 @@ export interface Catalog {
 export interface KubeconfigFile {
   config: string;
 }
+
+export interface HPA {
+  uuid: string;
+  name: string;
+  project_name: string;
+  namespace_name: string;
+  workload_name: string;
+  min_replicas: number;
+  max_replicas: number;
+  current_replicas: number;
+  desired_replicas: number;
+  created: string;
+  runtime_state: string;
+}
+
+interface Metric {
+  name: string;
+  type: string;
+  target: any;
+}
+
+export interface HPACreateType {
+  name: string;
+  description?: string;
+  workload: string;
+  min_replicas: number;
+  max_replicas: number;
+  metrics: Metric[];
+}
