@@ -46,7 +46,6 @@
     "angular-cron-jobs": "^3.2.0",
     "angular-flash-alert": "~1.1.0",
     "angular-loader": "^1.8.0",
-    "angular-resource": "^1.8.0",
     "angular-sanitize": "^1.8.0",
     "angular-translate": "^2.18.2",
     "angular-translate-loader-static-files": "^2.18.2",
