@@ -100,6 +100,27 @@ Cypress.Commands.add('openWorkspaceSelector', () => {
     .waitForSpinner();
 });
 
+Cypress.Commands.add(
+  'selectFirstProjectOfFirstOrganizationFromWorkspaceSelector',
+  () => {
+    cy
+      // Select first available organization
+      .get('.list-group-item')
+      .first()
+      .click()
+
+      // Click on first available project
+      .get('.list-group')
+      .last()
+      .find('.list-group-item a')
+      .contains('Select')
+      .click()
+
+      // Workspace selector indicates project workspace
+      .get('.select-workspace-toggle.btn-success');
+  },
+);
+
 Cypress.Commands.add('openCustomerCreateDialog', () => {
   cy
     // Click on "Add organization" button

@@ -19,25 +19,16 @@ describe('Browse menus', () => {
         'http://localhost:8080/api/marketplace-checklists-categories/**',
         'fixture:marketplace/checklists_categories.json',
       )
+      .route(
+        'http://localhost:8080/api/marketplace-category-component-usages/**',
+        [],
+      )
+      .route('http://localhost:8080/api/marketplace-resources/**', [])
+      .route('http://localhost:8080/api/marketplace-cart-items/**', [])
       .login()
-      .openWorkspaceSelector();
+      .openWorkspaceSelector()
+      .selectFirstProjectOfFirstOrganizationFromWorkspaceSelector();
   });
 
-  it('select the first project of the first available organization', () => {
-    cy
-      // Select first available organization
-      .get('.list-group-item')
-      .first()
-      .click()
-
-      // Click on first available project
-      .get('.list-group')
-      .last()
-      .find('.list-group-item a')
-      .contains('Select')
-      .click()
-
-      // Workspace selector indicates project workspace
-      .get('.select-workspace-toggle.btn-success');
-  });
+  it('select the first project of the first available organization', () => {});
 });
