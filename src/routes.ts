@@ -2,7 +2,6 @@ import { states as authCallbackRoutes } from '@waldur/auth/callbacks/routes';
 import { states as authRoutes } from '@waldur/auth/routes';
 import { states as customerRoutes } from '@waldur/customer/routes';
 import { states as errorRoutes } from '@waldur/error/routes';
-import { states as helpRoutes } from '@waldur/help/routes';
 import { states as invitationsRoutes } from '@waldur/invitations/routes';
 import { states as invoicesRoutes } from '@waldur/invoices/routes';
 import { states as issuesRoutes } from '@waldur/issues/routes';
@@ -28,7 +27,6 @@ const states = [
   ...customerRoutes,
   ...projectRoutes,
   ...userRoutes,
-  ...helpRoutes,
   ...invitationsRoutes,
   ...invoicesRoutes,
   ...issuesRoutes,

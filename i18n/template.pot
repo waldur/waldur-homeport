@@ -2133,7 +2133,6 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
-#: src/help/constants.js
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
@@ -2535,14 +2534,6 @@ msgstr ""
 msgid "Heatmap"
 msgstr ""
 
-#: src/help/routes.ts
-msgid "Help"
-msgstr ""
-
-#: src/help/help-list.html
-msgid "Help topics"
-msgstr ""
-
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Helpdesk"
 msgstr ""
@@ -2598,7 +2589,6 @@ msgstr ""
 msgid "Hostname or IP address of master node"
 msgstr ""
 
-#: src/help/constants.js
 #: src/user/keys/help.js
 msgid "How to generate SSH key"
 msgstr ""
@@ -4989,10 +4979,6 @@ msgstr ""
 
 #: src/providers/ProviderNameField.tsx
 msgid "Provider name"
-msgstr ""
-
-#: src/help/constants.js
-msgid "Providers"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
