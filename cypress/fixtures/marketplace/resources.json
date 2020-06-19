@@ -1,0 +1,55 @@
+[
+  {
+    "offering": "http://localhost:8080/api/marketplace-offerings/ddc0a078f39b4836a87db7ecc3537e69/",
+    "offering_name": "my test offering name",
+    "offering_uuid": "ddc0a078f39b4836a87db7ecc3537e69",
+    "offering_description": "",
+    "offering_thumbnail": null,
+    "offering_type": "Marketplace.Booking",
+    "offering_terms_of_service": "",
+    "offering_shared": true,
+    "offering_billable": true,
+    "provider_name": "Sampson-Chung",
+    "provider_uuid": "0ebadfd79b17488e8469413de5464900",
+    "category_title": "Measurements",
+    "category_uuid": "4d3a131dc20347e4abd1bdd3a16e73d1",
+    "plan": "http://localhost:8080/api/marketplace-plans/bd5c789b1aae499d916b4ed1c305faa0/",
+    "plan_unit": "month",
+    "plan_name": "Academic Usage",
+    "plan_uuid": "bd5c789b1aae499d916b4ed1c305faa0",
+    "plan_description": "<p>This is a plan for academic usage.</p>",
+    "attributes": {
+      "name": "testbokking",
+      "schedules": [
+        {
+          "id": "1242019-146941.15500000044",
+          "end": "2020-06-11T12:00:00.000Z",
+          "start": "2020-06-11T11:00:00.000Z",
+          "title": "",
+          "allDay": false,
+          "classNames": "booking booking-Schedule",
+          "extendedProps": {
+            "type": "Schedule"
+          }
+        }
+      ]
+    },
+    "limits": {},
+    "uuid": "eb0e98a1c85a463fb4b5dedba2a6da26",
+    "created": "2020-06-11T10:26:02.541327Z",
+    "scope": null,
+    "state": "Creating",
+    "resource_uuid": null,
+    "resource_type": null,
+    "project": "http://localhost:8080/api/projects/8a370c32299441169280665602ceab10/",
+    "project_uuid": "8a370c32299441169280665602ceab10",
+    "project_name": "Vision-oriented disintermediate implementation",
+    "customer_uuid": "0d5e3e83da724893814cead5de1a641d",
+    "customer_name": "Adams-Hogan",
+    "backend_metadata": {},
+    "is_usage_based": false,
+    "name": "testbokking",
+    "current_usages": {},
+    "can_terminate": false
+  }
+]

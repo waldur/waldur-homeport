@@ -103,7 +103,8 @@ Cypress.Commands.add('openWorkspaceSelector', () => {
 Cypress.Commands.add(
   'selectFirstProjectOfFirstOrganizationFromWorkspaceSelector',
   () => {
-    cy
+    cy.log('select the first project of the first available organization')
+
       // Select first available organization
       .get('.list-group-item')
       .first()

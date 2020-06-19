@@ -23,12 +23,49 @@ describe('Browse menus', () => {
         'http://localhost:8080/api/marketplace-category-component-usages/**',
         [],
       )
-      .route('http://localhost:8080/api/marketplace-resources/**', [])
+      .route(
+        'http://localhost:8080/api/marketplace-resources/**',
+        'fixture:marketplace/resources.json',
+      )
       .route('http://localhost:8080/api/marketplace-cart-items/**', [])
       .login()
       .openWorkspaceSelector()
       .selectFirstProjectOfFirstOrganizationFromWorkspaceSelector();
   });
 
-  it('select the first project of the first available organization', () => {});
+  it('Dashboard', () => {
+    cy.get('.nav-label')
+      .contains('Dashboard')
+      .click()
+
+      .get('h2')
+      .contains('Welcome')
+      .should('be.visible');
+  });
+
+  it('My orders', () => {
+    cy.get('.nav-label')
+      .contains('My orders')
+      .click()
+
+      .wait(500)
+      .get('h2')
+      .contains('My orders')
+      .should('be.visible');
+  });
+
+  it('Resources', () => {
+    cy.get('.nav-label')
+      .contains('Resources')
+      .click()
+
+      .get('a .nav-label')
+      .contains('HPC')
+      .click()
+
+      .wait(500)
+      .get('h2')
+      .contains('HPC resources')
+      .should('be.visible');
+  });
 });
