@@ -37,7 +37,6 @@ module.exports = {
       'react-dropzone',
       'react-gravatar',
       'attr-accept',
-      'intro.js',
 
       'angular',
       'angular-cron-jobs',
@@ -57,7 +56,6 @@ module.exports = {
       'angular-sanitize',
       'angular-ui-bootstrap',
       'angular-bind-html-compile-ci-dev',
-      'angular-intro.js',
     ],
   },
   output: {
