@@ -1,0 +1,9 @@
+[
+  {
+    "uuid": "2f02a2c4b7d94e049058e01bec6e77e0",
+    "url": "http://localhost:8080/api/marketplace-checklists-categories/2f02a2c4b7d94e049058e01bec6e77e0/",
+    "name": "Test category",
+    "description": "",
+    "checklists_count": 1
+  }
+]
