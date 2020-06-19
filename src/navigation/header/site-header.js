@@ -1,5 +1,7 @@
 import { UsersService } from '@waldur/user/UsersService';
 
+import { goBack } from '../utils';
+
 import template from './site-header.html';
 import './site-header.scss';
 
@@ -7,10 +9,9 @@ export default {
   template: template,
   controller: class SiteHeader {
     // @ngInject
-    constructor(authService, ENV, NavigationUtilsService, $scope) {
+    constructor(authService, ENV, $scope) {
       this.authService = authService;
       this.headerLogo = ENV.loginLogo;
-      this.NavigationUtilsService = NavigationUtilsService;
       this.$scope = $scope;
     }
 
@@ -20,7 +21,7 @@ export default {
     }
 
     goBack() {
-      this.NavigationUtilsService.goBack();
+      goBack();
     }
 
     checkUser() {
