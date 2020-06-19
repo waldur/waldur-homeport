@@ -124,9 +124,7 @@ const formValidator = props => {
       }
     }
   }
-  if (errors) {
-    return { attributes: errors };
-  }
+  return { attributes: errors };
 };
 
 registerOfferingType({
