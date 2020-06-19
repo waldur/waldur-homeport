@@ -15,6 +15,8 @@ import {
   Secret,
   Catalog,
   KubeconfigFile,
+  HPA,
+  HPACreateType,
 } from './types';
 
 export const getCatalog = catalogUuid =>
@@ -64,4 +66,9 @@ export const removeApp = (projectUuid, appId) =>
 
 export const createNode = payload => post('/rancher-nodes/', payload);
 
+export const listWorkloads = params => getAll('/rancher-workloads/', params);
+
 export const deleteHPA = hpaUuid => deleteById('/rancher-hpas/', hpaUuid);
+
+export const createHPA = (payload: HPACreateType) =>
+  post<HPA>('/rancher-hpas/', payload);
