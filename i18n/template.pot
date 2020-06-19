@@ -216,10 +216,6 @@ msgstr ""
 msgid "Add Waldur user ssh keys to the FreeIPA profile"
 msgstr ""
 
-#: src/intro/base-intro.js
-msgid "Add a new organization"
-msgstr ""
-
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
 msgid "Add comment"
@@ -2133,7 +2129,6 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
-#: src/help/constants.js
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
@@ -2522,10 +2517,6 @@ msgstr ""
 msgid "Guest OS"
 msgstr ""
 
-#: src/navigation/header/IntroButton.tsx
-msgid "Guide me"
-msgstr ""
-
 #: src/rancher/cluster/tabs.ts
 msgid "HPA"
 msgstr ""
@@ -2533,14 +2524,6 @@ msgstr ""
 #: src/issues/workspace/issue-navigation-service.js
 #: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
-msgstr ""
-
-#: src/help/routes.ts
-msgid "Help"
-msgstr ""
-
-#: src/help/help-list.html
-msgid "Help topics"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
@@ -2598,7 +2581,6 @@ msgstr ""
 msgid "Hostname or IP address of master node"
 msgstr ""
 
-#: src/help/constants.js
 #: src/user/keys/help.js
 msgid "How to generate SSH key"
 msgstr ""
@@ -3979,10 +3961,6 @@ msgstr ""
 msgid "Offerings screenshots"
 msgstr ""
 
-#: src/intro/base-intro.js
-msgid "Ok, what's next?"
-msgstr ""
-
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "One-time"
 msgstr ""
@@ -4991,10 +4969,6 @@ msgstr ""
 msgid "Provider name"
 msgstr ""
 
-#: src/help/constants.js
-msgid "Providers"
-msgstr ""
-
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Provision new resource"
 msgstr ""
@@ -5970,10 +5944,6 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "Select offering..."
-msgstr ""
-
-#: src/intro/base-intro.js
-msgid "Select one to go to a customer workspace"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
@@ -7004,10 +6974,6 @@ msgstr ""
 
 #: src/dashboard/ReportIssueAction.tsx
 msgid "To report an issue, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a>."
-msgstr ""
-
-#: src/intro/base-intro.js
-msgid "To start please select a workspace"
 msgstr ""
 
 #: src/booking/components/calendar/defaultConfig.ts

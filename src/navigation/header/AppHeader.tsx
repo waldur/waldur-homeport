@@ -11,7 +11,6 @@ import { angular2react } from '@waldur/shims/angular2react';
 
 import { DocsLink } from './DocsLink';
 import { ExternalLinks } from './ExternalLinks';
-import { IntroButton } from './IntroButton';
 import { LogoutLink } from './LogoutLink';
 import { MainSearch } from './MainSearch';
 import { SupportLink } from './SupportLink';
@@ -27,7 +26,6 @@ export const AppHeader = () => (
         <MainSearch />
       </Navbar.Header>
       <ul className="nav navbar-top-links navbar-right hidden-xs-stable">
-        <IntroButton />
         <ExternalLinks />
         <SupportLink />
         <DocsLink />

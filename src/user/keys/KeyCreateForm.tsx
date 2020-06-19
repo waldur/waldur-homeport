@@ -9,7 +9,6 @@ import { FormContainer } from '@waldur/form-react/FormContainer';
 import { StringField } from '@waldur/form-react/StringField';
 import { SubmitButton } from '@waldur/form-react/SubmitButton';
 import { TextField } from '@waldur/form-react/TextField';
-import { HelpLink } from '@waldur/help/HelpLink';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { showSuccess } from '@waldur/store/coreSaga';
@@ -75,14 +74,7 @@ const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = props => {
       >
         <StringField label={translate('Key name')} name="name" />
         <TextField
-          label={
-            <>
-              <HelpLink type="keys" name="ssh">
-                <i className="fa fa-question-circle" />
-              </HelpLink>{' '}
-              {translate('Public key')}
-            </>
-          }
+          label={translate('Public key')}
           name="public_key"
           required={true}
         />
