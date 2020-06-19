@@ -64,9 +64,6 @@ const ENV = {
   resourcePollingEnabled: true,
   singleResourcePollingTimeout: 1000 * 2,
 
-  // delay in milliseconds before starting intro js hints. It is recommended to set it bigger than 500.
-  introJsDelay: 1000,
-
   roles: {
     owner: gettext('Organization owner'),
     manager: gettext('Project manager'),
@@ -135,10 +132,6 @@ const ENV = {
 
   // Conceal "Change request" from a selection of issue types for non-staff/non-support users
   // concealChangeRequest: false
-
-  // Start intro.js implicitly. If false, intro.js is started
-  // only when user clicks on "Guide Me" button
-  introJsAutostart: false,
 
   // Provide exclude file types for issue attachments uploading
   // Based on https://github.com/okonet/attr-accept

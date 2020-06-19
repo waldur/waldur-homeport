@@ -18,7 +18,6 @@ import featuresModule from './features/module';
 import formModule from './form/module';
 import freeipaModule from './freeipa/module';
 import i18nModule from './i18n/module';
-import introModule from './intro/module';
 import invitationsModule from './invitations/module';
 import invoicesModule from './invoices/module';
 import issuesModule from './issues/module';
@@ -62,7 +61,6 @@ const appModule = angular.module('waldur', [
   'angular-cron-jobs',
   'ui.bootstrap',
   'angular-bind-html-compile',
-  'angular-intro',
 ]);
 
 rootModule(appModule);
@@ -86,7 +84,6 @@ filtersModule(appModule);
 i18nModule(appModule);
 configModule(appModule);
 freeipaModule(appModule);
-introModule(appModule);
 slurmModule(appModule);
 storeModule(appModule);
 jiraModule(appModule);

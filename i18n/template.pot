@@ -216,10 +216,6 @@ msgstr ""
 msgid "Add Waldur user ssh keys to the FreeIPA profile"
 msgstr ""
 
-#: src/intro/base-intro.js
-msgid "Add a new organization"
-msgstr ""
-
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
 msgid "Add comment"
@@ -2521,10 +2517,6 @@ msgstr ""
 msgid "Guest OS"
 msgstr ""
 
-#: src/navigation/header/IntroButton.tsx
-msgid "Guide me"
-msgstr ""
-
 #: src/rancher/cluster/tabs.ts
 msgid "HPA"
 msgstr ""
@@ -3967,10 +3959,6 @@ msgstr ""
 
 #: src/marketplace/offerings/OfferingScreenshotsList.tsx
 msgid "Offerings screenshots"
-msgstr ""
-
-#: src/intro/base-intro.js
-msgid "Ok, what's next?"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
@@ -5958,10 +5946,6 @@ msgstr ""
 msgid "Select offering..."
 msgstr ""
 
-#: src/intro/base-intro.js
-msgid "Select one to go to a customer workspace"
-msgstr ""
-
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
@@ -6990,10 +6974,6 @@ msgstr ""
 
 #: src/dashboard/ReportIssueAction.tsx
 msgid "To report an issue, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a>."
-msgstr ""
-
-#: src/intro/base-intro.js
-msgid "To start please select a workspace"
 msgstr ""
 
 #: src/booking/components/calendar/defaultConfig.ts
