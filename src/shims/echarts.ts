@@ -1,4 +1,3 @@
-// include ECharts main module
 import echarts from 'echarts/lib/echarts';
 
 import 'echarts/lib/component/legend';
