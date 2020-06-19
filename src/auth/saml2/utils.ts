@@ -1,7 +1,7 @@
 import { getSaml2IdentityProviders } from '@waldur/auth/saml2/api';
 
 export const fetchIdentityProviderOptions = (query: string) =>
-  getSaml2IdentityProviders(query).then(options => ({ options }));
+  getSaml2IdentityProviders(query).then((options) => ({ options }));
 
 export const redirectPost = (url: string, data: object) => {
   const form = document.createElement('form');

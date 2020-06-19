@@ -12,7 +12,7 @@ export const useCreateOrganization = () => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const ownerCanManage = useSelector(
-    state => getConfig(state).plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER,
+    (state) => getConfig(state).plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER,
   );
   const canCreateOrganization = user.is_staff || ownerCanManage;
   const createOrganization = () => {
@@ -50,7 +50,7 @@ export const useOrganizationFilter = (organizations: Customer[]) => {
   const [filter, setFilter] = React.useState('');
   const filteredOrganizations = React.useMemo(
     () =>
-      organizations.filter(organization =>
+      organizations.filter((organization) =>
         filterOrganization(organization, filter),
       ),
     [filter, organizations],
@@ -89,7 +89,7 @@ export const useProjectFilter = (projects: Project[]) => {
   const filteredProjects = React.useMemo(
     () =>
       projects
-        ? projects.filter(project => filterProject(project, filter))
+        ? projects.filter((project) => filterProject(project, filter))
         : [],
     [filter, projects],
   );

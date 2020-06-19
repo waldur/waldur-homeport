@@ -22,11 +22,11 @@ const IssueSlaField = withTranslation(
   ),
 );
 
-const formatIssueKey = props => (
+const formatIssueKey = (props) => (
   <ResourceLink type="JIRA.Issue" uuid={props.row.uuid} label={props.row.key} />
 );
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   const columns = [
     {
@@ -90,7 +90,7 @@ const TableOptions = {
     'sla',
     'created',
   ],
-  exportRow: row => [
+  exportRow: (row) => [
     row.key,
     row.type_name,
     row.status,

@@ -35,8 +35,8 @@ const ScreenshotsTabContainer = (props: ScreenshotsTabProps) => (
   </Row>
 );
 
-const mapDispatchToProps = dispatch => ({
-  openViewScreenshotDialog: image =>
+const mapDispatchToProps = (dispatch) => ({
+  openViewScreenshotDialog: (image) =>
     dispatch(openViewOfferingScreenshotDialog(image)),
 });
 

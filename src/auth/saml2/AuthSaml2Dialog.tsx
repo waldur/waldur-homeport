@@ -37,9 +37,9 @@ class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
           <div className="saml-auth-form">
             <Field
               name="identity-provider"
-              component={fieldProps => (
+              component={(fieldProps) => (
                 <Async
-                  loadOptions={input =>
+                  loadOptions={(input) =>
                     this.identityProviderAutocomplete(input)
                   }
                   placeholder={translate('Select organization...')}

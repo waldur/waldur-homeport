@@ -25,7 +25,7 @@ export const SelectAsyncField = (props: SelectAsyncFieldProps) => {
     ...rest,
     name: input.name,
     value: input.value,
-    onChange: value => input.onChange(value),
+    onChange: (value) => input.onChange(value),
     onBlur: () => input.onBlur(input.value),
   });
 };

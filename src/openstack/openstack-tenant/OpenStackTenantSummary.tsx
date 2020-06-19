@@ -75,7 +75,7 @@ export const PureOpenStackTenantSummary = (
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   tenantCredentialsVisible:
     state.config.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
 });

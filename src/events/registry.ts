@@ -9,7 +9,7 @@ export class EventRegistry {
   registerGroup(group: EventGroup) {
     this.groups.push(group);
     for (const type of group.events) {
-      const defaultFormatter = event => {
+      const defaultFormatter = (event) => {
         let context = event;
         if (group.context) {
           context = { ...context, ...group.context(event) };

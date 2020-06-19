@@ -81,7 +81,7 @@ export default async function bootstrap(modulename) {
   window['$$MODES'] = modes;
   attachTracking(window['$$CUSTOMENV']);
 
-  angular.element(document).ready(function() {
+  angular.element(document).ready(function () {
     angular.bootstrap(document, [modulename], { strictDi: true });
     renderModalContainer();
   });

@@ -14,13 +14,13 @@ export function get<T = {}>(
 
 export function getList<T = {}>(endpoint: string, params?: {}): Promise<T[]> {
   const options = params ? { params } : undefined;
-  return get<T>(endpoint, options).then(response =>
+  return get<T>(endpoint, options).then((response) =>
     Array.isArray(response.data) ? response.data : [],
   );
 }
 
 export function getFirst<T = {}>(endpoint, params?) {
-  return getList<T>(endpoint, params).then(data => data[0]);
+  return getList<T>(endpoint, params).then((data) => data[0]);
 }
 
 export function getById<T = {}>(
@@ -28,7 +28,7 @@ export function getById<T = {}>(
   id: string,
   options?: AxiosRequestConfig,
 ): Promise<T> {
-  return get<T>(`${endpoint}${id}/`, options).then(response => response.data);
+  return get<T>(`${endpoint}${id}/`, options).then((response) => response.data);
 }
 
 export function remove<T = {}>(
@@ -40,7 +40,7 @@ export function remove<T = {}>(
 
 export function deleteById<T = {}>(endpoint, id, options?: AxiosRequestConfig) {
   return remove<T>(`${endpoint}${id}/`, options).then(
-    response => response.data,
+    (response) => response.data,
   );
 }
 
@@ -67,12 +67,12 @@ export function sendForm<T = {}>(
     method,
     url,
     data,
-    transformRequest: x => x,
+    transformRequest: (x) => x,
     headers: { 'Content-Type': undefined },
   });
 }
 
-export const getNextPageUrl = response => {
+export const getNextPageUrl = (response) => {
   // Extract next page URL from header links
   const link = response.headers['link'];
   if (!link) {
@@ -81,7 +81,7 @@ export const getNextPageUrl = response => {
 
   const nextLink = link
     .split(', ')
-    .filter(s => s.indexOf('rel="next"') > -1)[0];
+    .filter((s) => s.indexOf('rel="next"') > -1)[0];
   if (!nextLink) {
     return null;
   }

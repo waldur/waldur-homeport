@@ -19,12 +19,12 @@ function saveAsPdf(table, data) {
 
 async function exportAsPdf(table, data) {
   const pdfmake = await loadPdfMake();
-  const header = data.fields.map(field => ({
+  const header = data.fields.map((field) => ({
     text: field + '',
     style: 'tableHeader',
   }));
-  const rows = data.data.map(row =>
-    row.map(cell => ({
+  const rows = data.data.map((row) =>
+    row.map((cell) => ({
       text: cell + '',
     })),
   );
@@ -61,7 +61,7 @@ async function exportAsPdf(table, data) {
     };
   }
   const pdf = pdfmake.createPdf(doc);
-  pdf.getBuffer(buffer => saveAsPdf(table, buffer));
+  pdf.getBuffer((buffer) => saveAsPdf(table, buffer));
 }
 
 function saveAsCsv(table, data) {
@@ -84,7 +84,7 @@ const exporters = {
 
 export function* exportTable(action) {
   const { table, format, props } = action.payload;
-  let rows = yield select(state => selectTableRows(state, table));
+  let rows = yield select((state) => selectTableRows(state, table));
   const {
     exportFields,
     exportRow,
@@ -108,7 +108,7 @@ export function* exportTable(action) {
 
   const data = {
     fields,
-    data: rows.map(row => exportRow(row, props)),
+    data: rows.map((row) => exportRow(row, props)),
   };
   exporters[format](table, data);
 }

@@ -8,10 +8,7 @@ export const SupportSidebar = () => {
   const [items, setItems] = React.useState<MenuItemType[]>([]);
 
   React.useEffect(() => {
-    ngInjector
-      .get('IssueNavigationService')
-      .getSidebarItems()
-      .then(setItems);
+    ngInjector.get('IssueNavigationService').getSidebarItems().then(setItems);
   }, []);
 
   return <Sidebar items={items} />;

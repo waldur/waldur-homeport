@@ -24,7 +24,7 @@ interface FieldProps {
   row: Resource;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -86,9 +86,9 @@ export const TableComponent = props => {
 
 const TableOptions = {
   table: 'ProjectResourcesList',
-  mapPropsToTableId: props => [props.project.uuid, props.category_uuid],
+  mapPropsToTableId: (props) => [props.project.uuid, props.category_uuid],
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: props =>
+  mapPropsToFilter: (props) =>
     props.project
       ? {
           project_uuid: props.project.uuid,
@@ -99,7 +99,7 @@ const TableOptions = {
   queryField: 'name',
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   project: getProject(state),
   importVisible: isVisible(state, 'import'),
 });

@@ -4,7 +4,7 @@ class ActionConfiguration {
   register(type, config) {
     this.resources[type] = config;
     if (config.options) {
-      Object.keys(config.options).forEach(name => {
+      Object.keys(config.options).forEach((name) => {
         config.options[name].name = name;
       });
     }

@@ -9,10 +9,10 @@ interface SlurmPackage {
   ram_price: string;
 }
 
-export const getAllocationUsages = params =>
+export const getAllocationUsages = (params) =>
   getAll('/slurm-allocation-usage/', { params });
 
-export const loadPackage = async serviceSettingsUrl => {
+export const loadPackage = async (serviceSettingsUrl) => {
   const packages = await getAll<SlurmPackage>('/slurm-packages/', {
     params: { service_settings: serviceSettingsUrl },
   });

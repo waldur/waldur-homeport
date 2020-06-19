@@ -14,7 +14,7 @@ import { ResourcesList } from './ResourcesList';
 import { ImportDialogProps } from './types';
 import { useImportDialog } from './useImportDialog';
 
-export const ResourceImportDialog: React.FC<ImportDialogProps> = props => {
+export const ResourceImportDialog: React.FC<ImportDialogProps> = (props) => {
   const {
     offering,
     selectOffering,

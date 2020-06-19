@@ -11,7 +11,7 @@ import { FormGroup } from '../offerings/FormGroup';
 import { ProjectSelectField } from './ProjectSelectField';
 
 const connector = connect<{ projects?: Project[] }, {}, {}, OuterState>(
-  state => {
+  (state) => {
     const workspace = getWorkspace(state);
     const customer = getCustomer(state);
     if (workspace === 'organization') {
@@ -24,7 +24,7 @@ const connector = connect<{ projects?: Project[] }, {}, {}, OuterState>(
   },
 );
 
-const PureProjectField = props =>
+const PureProjectField = (props) =>
   props.projects ? (
     <FormGroup
       labelClassName="control-label col-sm-3"

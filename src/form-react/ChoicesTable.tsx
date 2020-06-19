@@ -40,10 +40,10 @@ export const PureChoicesTable: React.FC<PureChoicesTableProps> = (
         </tr>
       </thead>
       <tbody>
-        {props.choices.map(choice => (
+        {props.choices.map((choice) => (
           <tr
             key={choice.uuid}
-            onKeyUp={e => {
+            onKeyUp={(e) => {
               if (e.nativeEvent.keyCode === 13) {
                 return props.input.onChange(choice);
               }
@@ -100,14 +100,14 @@ export class ChoicesTable extends React.Component<ChoicesTableProps> {
     filter: undefined,
   };
 
-  setFilter = filter => {
+  setFilter = (filter) => {
     this.setState({ filter });
   };
 
-  getChoices = choices => {
+  getChoices = (choices) => {
     if (this.props.filterOptions && this.state.filter) {
       return choices.filter(
-        choice => choice[this.props.filterOptions.name] === this.state.filter,
+        (choice) => choice[this.props.filterOptions.name] === this.state.filter,
       );
     }
     return choices;

@@ -11,7 +11,7 @@ import { DescriptionSummary } from './DescriptionSummary';
 import { ManagementSummary } from './ManagementSummary';
 import { OverviewSummary } from './OverviewSummary';
 
-const PureReviewStep = props =>
+const PureReviewStep = (props) =>
   !props.hasData ? (
     <p className="text-center">
       {translate('Offering is not configured yet.')}
@@ -25,7 +25,7 @@ const PureReviewStep = props =>
     </>
   );
 
-const connector = connect(state => {
+const connector = connect((state) => {
   const formData = getFormValues(FORM_ID)(state) as any;
   const hasData = formData && !!formData.type;
   return { hasData };

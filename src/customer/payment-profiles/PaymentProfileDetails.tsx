@@ -10,7 +10,7 @@ export const PaymentProfileDetails = () => {
     return null;
   }
 
-  const profile = customer.payment_profiles.find(p => p.is_active);
+  const profile = customer.payment_profiles.find((p) => p.is_active);
   return profile ? (
     <div style={{ marginBottom: '20px' }}>
       <p>

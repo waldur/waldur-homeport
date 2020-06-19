@@ -13,7 +13,7 @@ import actionFieldString from './action-field-string';
 import actionFieldText from './action-field-text';
 import actionFieldTimezone from './action-field-timezone';
 
-export default module => {
+export default (module) => {
   module.directive('actionDialog', actionDialog);
   module.directive('actionField', actionField);
   module.component('actionFieldBoolean', actionFieldBoolean);

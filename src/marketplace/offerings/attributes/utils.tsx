@@ -26,7 +26,7 @@ function validateInt(value) {
   return value < 0 ? translate('Value should be positive integer') : undefined;
 }
 
-export const configAttrField = attribute => {
+export const configAttrField = (attribute) => {
   let attr: AttrConfig = {};
   switch (attribute.type) {
     case 'integer':
@@ -46,36 +46,36 @@ export const configAttrField = attribute => {
       break;
     case 'list':
       attr = {
-        component: componentProp => (
+        component: (componentProp) => (
           <Select
             value={componentProp.input.value}
-            onChange={value => componentProp.input.onChange(value)}
+            onChange={(value) => componentProp.input.onChange(value)}
             options={attribute.options}
             valueKey="key"
             labelKey="title"
             multi={true}
           />
         ),
-        normalize: v => (v ? v : ''),
+        normalize: (v) => (v ? v : ''),
       };
       break;
     case 'choice':
       attr = {
-        component: componentProp => (
+        component: (componentProp) => (
           <Select
             value={componentProp.input.value}
-            onChange={value => componentProp.input.onChange(value)}
+            onChange={(value) => componentProp.input.onChange(value)}
             options={attribute.options}
             valueKey="key"
             labelKey="title"
           />
         ),
-        normalize: v => (v ? v : ''),
+        normalize: (v) => (v ? v : ''),
       };
       break;
     case 'boolean':
       attr = {
-        component: componentProp => {
+        component: (componentProp) => {
           const choices = [
             { value: '', label: 'All' },
             { value: 'true', label: 'Yes' },

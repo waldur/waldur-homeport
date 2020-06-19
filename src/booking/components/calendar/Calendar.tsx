@@ -10,7 +10,7 @@ const LazyCalendar = React.lazy(() =>
   ),
 );
 
-export const Calendar = props => (
+export const Calendar = (props) => (
   <React.Suspense fallback={<LoadingSpinner />}>
     <LazyCalendar {...props} />
   </React.Suspense>

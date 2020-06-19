@@ -13,7 +13,7 @@ import { UserSidebar } from './UserSidebar';
 import { UsersService } from './UsersService';
 
 function loadUser() {
-  UsersService.getCurrentUser().then(function(user) {
+  UsersService.getCurrentUser().then(function (user) {
     if ($state.params.uuid === undefined || $state.params.uuid === user.uuid) {
       ngInjector.get('WorkspaceService').setWorkspace({
         hasCustomer: true,
@@ -23,7 +23,7 @@ function loadUser() {
       store.dispatch(setBreadcrumbs([{ label: translate('User dashboard') }]));
     } else {
       UsersService.get($state.params.uuid)
-        .then(function(user) {
+        .then(function (user) {
           ngInjector.get('WorkspaceService').setWorkspace({
             hasCustomer: true,
             workspace: WOKSPACE_NAMES.user,
@@ -31,7 +31,7 @@ function loadUser() {
           });
           store.dispatch(setBreadcrumbs([{ label: user.full_name }]));
         })
-        .catch(function(response) {
+        .catch(function (response) {
           if (response.status === 404) {
             $state.go('errorPage.notFound');
           }

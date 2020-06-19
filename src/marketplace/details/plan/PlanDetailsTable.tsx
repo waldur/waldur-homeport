@@ -65,28 +65,28 @@ export const PureDetailsTable: React.FC<PlanDetailsTableProps> = (
   );
 
   const fixedRows = props.components.filter(
-    component => component.billing_type === 'fixed',
+    (component) => component.billing_type === 'fixed',
   );
-  const fixedWithLimits = fixedRows.filter(component =>
+  const fixedWithLimits = fixedRows.filter((component) =>
     props.limits.includes(component.type),
   );
   const fixedWithoutLimits = fixedRows.filter(
-    component => !props.limits.includes(component.type),
+    (component) => !props.limits.includes(component.type),
   );
   const usageRows = props.components.filter(
-    component => component.billing_type === 'usage',
+    (component) => component.billing_type === 'usage',
   );
   const initialRows = props.components.filter(
-    component => component.billing_type === 'one',
+    (component) => component.billing_type === 'one',
   );
   const switchRows = props.components.filter(
-    component => component.billing_type === 'few',
+    (component) => component.billing_type === 'few',
   );
   const usageWithLimits = usageRows.filter(
-    component => component.disable_quotas === false,
+    (component) => component.disable_quotas === false,
   );
   const usageWithoutLimits = usageRows.filter(
-    component => component.disable_quotas === true,
+    (component) => component.disable_quotas === true,
   );
   const hasExtraRows = fixedRows.length > 0 || usageWithLimits.length > 0;
   const limitedRows = [...fixedWithLimits, ...usageWithLimits];

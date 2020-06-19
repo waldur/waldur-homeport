@@ -9,7 +9,7 @@ import { loadServiceProviders } from './api';
 import { formatServiceProviders } from './utils';
 import { VmOverviewFilter } from './VmOverviewFilter';
 
-const VmOverviewFilterComponent = props => {
+const VmOverviewFilterComponent = (props) => {
   const { error, value, loading } = useAsync(async () => {
     const serviceProviders = await loadServiceProviders();
     return formatServiceProviders(serviceProviders);

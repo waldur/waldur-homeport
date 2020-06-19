@@ -54,7 +54,7 @@ export class OpenstackInstanceNetworks extends React.Component<
       getDefaultFloatingIps().length !== 0 ? getDefaultFloatingIps()[0] : {},
   });
 
-  removeItem = index => {
+  removeItem = (index) => {
     const valueCopy = [
       ...this.props.input.value.slice(0, index),
       ...this.props.input.value.slice(index + 1),
@@ -86,16 +86,16 @@ export class OpenstackInstanceNetworks extends React.Component<
     this.props.input.onChange(valueCopy);
   };
 
-  getAvailableNetworkItems = itemType => item =>
+  getAvailableNetworkItems = (itemType) => (item) =>
     this.props.input.value
-      ? this.props.input.value.filter(val => val[itemType].uuid === item.uuid)
+      ? this.props.input.value.filter((val) => val[itemType].uuid === item.uuid)
           .length === 0
       : true;
 
   getFreeSubnets = () =>
     this.props.subnets
       .filter(this.getAvailableNetworkItems('subnet'))
-      .map(subnet => ({
+      .map((subnet) => ({
         ...subnet,
         label: internalIpFormatter(subnet),
       }));
@@ -107,7 +107,7 @@ export class OpenstackInstanceNetworks extends React.Component<
     ),
   ];
 
-  getSelectValue = selectType => index => {
+  getSelectValue = (selectType) => (index) => {
     if (this.props.input.value[index]) {
       return this.props.input.value[index][selectType];
     }
@@ -116,7 +116,7 @@ export class OpenstackInstanceNetworks extends React.Component<
 
   hasFreeSubnets = () => this.getFreeSubnets().length !== 0;
 
-  disableFloatingIpSelect = index =>
+  disableFloatingIpSelect = (index) =>
     this.props.input.value[index].subnet.uuid === undefined;
 
   render() {
@@ -131,7 +131,7 @@ export class OpenstackInstanceNetworks extends React.Component<
                     <Select
                       name="subnets"
                       value={this.getSelectValue('subnet')(index)}
-                      onChange={value => this.onSubnetChange(value, index)}
+                      onChange={(value) => this.onSubnetChange(value, index)}
                       placeholder={translate('Select subnet')}
                       onBlur={() => {
                         /* Noop */
@@ -145,7 +145,9 @@ export class OpenstackInstanceNetworks extends React.Component<
                     <Select
                       name="floatingIps"
                       value={this.getSelectValue('floatingIp')(index)}
-                      onChange={value => this.onFloatingIpChange(value, index)}
+                      onChange={(value) =>
+                        this.onFloatingIpChange(value, index)
+                      }
                       onBlur={() => {
                         /* Noop */
                       }}

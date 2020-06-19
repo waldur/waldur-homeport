@@ -4,7 +4,7 @@ import { FieldError } from '@waldur/form-react';
 
 import { FormGroup } from './FormGroup';
 
-export const FormGroupWithError = inputProps => (
+export const FormGroupWithError = (inputProps) => (
   <FormGroup
     label={inputProps.label}
     description={inputProps.description}

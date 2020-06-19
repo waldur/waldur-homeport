@@ -17,8 +17,10 @@ export interface DateValuePair {
   value: number;
 }
 
-const getDailyQuotas = params =>
-  get<DailyQuota>('/daily-quotas/', { params }).then(response => response.data);
+const getDailyQuotas = (params) =>
+  get<DailyQuota>('/daily-quotas/', { params }).then(
+    (response) => response.data,
+  );
 
 export type ChartLoader = (scope: Scope) => Promise<Chart[]>;
 
@@ -26,21 +28,21 @@ export const getFormatterUnits = (
   chartType: 'filesize' | 'hours',
   value: number,
 ) => {
-  let formatter = x => x;
+  let formatter = (x) => x;
   let units;
 
   if (chartType === 'filesize') {
     if (value > 1024 * 1024) {
-      formatter = x => (x / 1024 / 1024).toFixed(1);
+      formatter = (x) => (x / 1024 / 1024).toFixed(1);
       units = 'TB';
     } else if (value > 1024) {
-      formatter = x => (x / 1024).toFixed(1);
+      formatter = (x) => (x / 1024).toFixed(1);
       units = 'GB';
     } else {
       units = 'MB';
     }
   } else if (chartType === 'hours') {
-    formatter = x => Math.round(x / 60);
+    formatter = (x) => Math.round(x / 60);
     units = 'hours';
   }
   return { formatter, units };
@@ -74,16 +76,14 @@ export async function getDailyQuotaCharts(
   quotas: Quota[],
   scope: Scope,
 ): Promise<Chart[]> {
-  const names = quotas.map(chart => chart.quota);
-  const start = moment()
-    .subtract(30, 'days')
-    .format('YYYY-MM-DD');
+  const names = quotas.map((chart) => chart.quota);
+  const start = moment().subtract(30, 'days').format('YYYY-MM-DD');
   const values = await getDailyQuotas({
     scope: scope.url,
     quota_names: names,
     start,
   });
-  return quotas.map(quota => formatQuotaChart(quota, values[quota.quota]));
+  return quotas.map((quota) => formatQuotaChart(quota, values[quota.quota]));
 }
 
 export async function loadCategories(

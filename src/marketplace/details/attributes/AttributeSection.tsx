@@ -19,7 +19,7 @@ export const AttributeSection = (props: AttributeSectionProps) => (
       </tr>
     )}
     {props.section.attributes
-      .filter(attr => props.attributes.hasOwnProperty(attr.key))
+      .filter((attr) => props.attributes.hasOwnProperty(attr.key))
       .map((attr, index) => (
         <AttributeRow
           key={index}

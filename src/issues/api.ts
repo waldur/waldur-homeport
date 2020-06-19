@@ -16,4 +16,4 @@ export interface IssueTemplate {
 
 export const getTemplates = () => getAll<IssueTemplate>('/support-templates/');
 
-export const getIssues = params => getList<Issue>('/support-issues/', params);
+export const getIssues = (params) => getList<Issue>('/support-issues/', params);

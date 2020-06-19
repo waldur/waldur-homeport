@@ -1,7 +1,7 @@
 export const countryInfo = ({ data }) => {
   let providers = '';
   let consumers = '';
-  data.providers.map(provider => {
+  data.providers.map((provider) => {
     providers += `<div class="ibox-content text-center">
                   <div class="m-b-sm">
                     <img alt="image" class="img-responsive img-circle img-center" src=${provider.logo}>
@@ -12,7 +12,7 @@ export const countryInfo = ({ data }) => {
                   </div>
                 </div>`;
   });
-  data.consumers.map(consumer => {
+  data.consumers.map((consumer) => {
     consumers += `<div class="ibox-content text-center">
                   <div class="m-b-sm">
                     <img alt="image" class="img-responsive img-circle img-center" src=${consumer.logo}>
@@ -35,8 +35,7 @@ export const countryInfo = ({ data }) => {
                                                     <h5>Consumers</h5>
                                                   </div>`
       : '';
-  return `<div id="country-info" class="ibox">${providersHeader +
-    providers +
-    consumersHeader +
-    consumers}</div>`;
+  return `<div id="country-info" class="ibox">${
+    providersHeader + providers + consumersHeader + consumers
+  }</div>`;
 };

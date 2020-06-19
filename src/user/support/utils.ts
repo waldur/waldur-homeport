@@ -3,7 +3,7 @@ import { duration } from 'moment-timezone';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-export const formatUserStatus = user => {
+export const formatUserStatus = (user) => {
   if (user.is_staff && !user.is_support) {
     return translate('Staff');
   } else if (user.is_staff && user.is_support) {
@@ -15,7 +15,7 @@ export const formatUserStatus = user => {
   }
 };
 
-export const formatRegistrationMethod = user => {
+export const formatRegistrationMethod = (user) => {
   if (!user.registration_method) {
     return translate('Default');
   } else if (user.registration_method === 'saml2') {
@@ -25,7 +25,7 @@ export const formatRegistrationMethod = user => {
   }
 };
 
-export const formatLifetime = input => {
+export const formatLifetime = (input) => {
   const time = duration(input, 'seconds');
   const hours = time.hours();
   const minutes = time.minutes();

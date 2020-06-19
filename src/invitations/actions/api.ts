@@ -11,6 +11,6 @@ export const fetchUserDetails = (civil_number: string, tax_number: string) => {
   };
   const url = `${ENV.apiEndpoint}api-auth/bcc/user-details/`;
   return Axios.get<UserDetails>(url, { params }).then(
-    response => response.data,
+    (response) => response.data,
   );
 };

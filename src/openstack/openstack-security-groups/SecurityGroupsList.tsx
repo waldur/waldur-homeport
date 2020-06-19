@@ -19,7 +19,7 @@ interface ResourceRules extends Resource {
 
 const ResourceRuleCount = (resource: ResourceRules) => resource.rules.length;
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -55,7 +55,7 @@ const TableComponent = props => {
 const TableOptions = {
   table: 'openstack-security-groups',
   fetchData: createFetcher('openstack-security-groups'),
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     tenant_uuid: props.resource.uuid,
   }),
 };

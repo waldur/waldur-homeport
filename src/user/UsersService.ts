@@ -26,14 +26,14 @@ class UsersServiceClass {
     if (this.currentUser) {
       return $q.when(this.currentUser);
     }
-    return $q.when(getFirst('/users/', { current: '' })).then(user => {
+    return $q.when(getFirst('/users/', { current: '' })).then((user) => {
       this.setCurrentUser(user);
       return user;
     });
   }
 
   isCurrentUserValid() {
-    return this.getCurrentUser().then(user => {
+    return this.getCurrentUser().then((user) => {
       return !this.mandatoryFieldsMissing(user) && user.agreement_date;
     });
   }

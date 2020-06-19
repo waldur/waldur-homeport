@@ -3,21 +3,21 @@ import * as Table from 'react-bootstrap/lib/Table';
 
 import { translate } from '@waldur/i18n';
 
-export const parseTable = raw =>
+export const parseTable = (raw) =>
   // Skip first and last line: header and teaser
   raw
     .split('\n')
     .slice(1, -1)
-    .map(line => {
+    .map((line) => {
       // Split each line by space
       const [name, source, date, time, tz] = line.split(/ +/);
       const dt = [date, time, tz].join(' ');
       return { name, source, dt };
     });
 
-export const OracleSnapshots = props => {
+export const OracleSnapshots = (props) => {
   let snapshots = props.report.find(
-    section => section.header.toLowerCase() === 'snapshots',
+    (section) => section.header.toLowerCase() === 'snapshots',
   );
   if (!snapshots) {
     return null;

@@ -9,7 +9,7 @@ interface ResourceOrderItemsProps {
   resource_uuid: string;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('ID'),
@@ -63,7 +63,7 @@ export const ResourceOrderItems = enhance(
   TableComponent,
 ) as React.ComponentType<ResourceOrderItemsProps>;
 
-export const ResourceOrderItemsTab = props =>
+export const ResourceOrderItemsTab = (props) =>
   props.resource.marketplace_resource_uuid ? (
     <ResourceOrderItems
       resource_uuid={props.resource.marketplace_resource_uuid}

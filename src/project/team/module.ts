@@ -3,7 +3,7 @@ import userSelector from './user-selector';
 
 import './events';
 
-export default module => {
+export default (module) => {
   module.directive('userSelector', userSelector);
   module.component('addProjectMember', addProjectMember);
 };

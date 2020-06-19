@@ -9,7 +9,7 @@ const authenticate = (provider: string) => {
   const authService = ngInjector.get('authService');
   return authService
     .authenticate(provider)
-    .then(response => authService.redirectOnSuccess(response));
+    .then((response) => authService.redirectOnSuccess(response));
 };
 
 export interface AuthButtonProps {

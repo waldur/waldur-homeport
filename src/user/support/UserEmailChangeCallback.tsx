@@ -11,7 +11,7 @@ import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { UsersService } from '../UsersService';
 
 function delay(ms) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
 }

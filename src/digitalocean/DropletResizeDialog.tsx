@@ -59,7 +59,7 @@ const isValidFlavor = (currentFlavor: Flavor, newFlavor: Flavor) => {
 const getFlavors = async (currentFlavor: Flavor) => {
   const flavors = await getAll<Flavor>('/digitalocean-sizes/');
   return flavors
-    .map(newFlavor => ({
+    .map((newFlavor) => ({
       label: formatFlavor(newFlavor),
       value: newFlavor.url,
       disabled: isValidFlavor(newFlavor, currentFlavor),

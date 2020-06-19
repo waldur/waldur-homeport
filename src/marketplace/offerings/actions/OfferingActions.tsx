@@ -18,7 +18,7 @@ const mapStateToProps = (state: OuterState) => ({
 
 const mapDispatchToProps = {
   updateOfferingState,
-  pauseOffering: offering =>
+  pauseOffering: (offering) =>
     openModalDialog(PauseOfferingDialog, {
       resolve: { offering },
     }),
@@ -67,7 +67,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
         ownProps.row.state !== ARCHIVED &&
         (ownProps.row.state === DRAFT || stateProps.user.is_staff),
     },
-  ].filter(row => row.visible),
+  ].filter((row) => row.visible),
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);

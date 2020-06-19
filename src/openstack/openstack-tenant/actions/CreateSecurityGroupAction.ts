@@ -24,11 +24,11 @@ export default function createAction(): ResourceAction {
         component: 'securityGroupRuleEditor',
       },
     ],
-    serializer: form => {
+    serializer: (form) => {
       return {
         name: form.name,
         description: form.description,
-        rules: form.rules.map(rule => ({
+        rules: form.rules.map((rule) => ({
           ...rule,
           protocol: rule.protocol === null ? '' : rule.protocol,
         })),

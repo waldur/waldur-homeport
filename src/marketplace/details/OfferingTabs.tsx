@@ -17,13 +17,13 @@ interface OfferingTabsProps {
 export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
   const attributes = props.offering.attributes;
   const filterSection = (section: Section) =>
-    section.attributes.some(attr =>
+    section.attributes.some((attr) =>
       props.offering.attributes.hasOwnProperty(attr.key),
     );
   const sections = props.sections.filter(filterSection);
 
-  const basicSections = sections.filter(s => s.is_standalone === false);
-  const standaloneSections = sections.filter(s => s.is_standalone === true);
+  const basicSections = sections.filter((s) => s.is_standalone === false);
+  const standaloneSections = sections.filter((s) => s.is_standalone === true);
 
   let tabs = [
     {
@@ -52,7 +52,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     },
   ];
 
-  standaloneSections.forEach(section => {
+  standaloneSections.forEach((section) => {
     tabs.push({
       visible: true,
       title: section.title,
@@ -61,6 +61,6 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
       ),
     });
   });
-  tabs = tabs.filter(tab => tab.visible);
+  tabs = tabs.filter((tab) => tab.visible);
   return tabs;
 };

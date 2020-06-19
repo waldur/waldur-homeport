@@ -17,7 +17,7 @@ function configureAce(ace) {
   );
 }
 
-export const AceField = props => {
+export const AceField = (props) => {
   const [loaded, setLoaded] = React.useState(false);
   const [erred, setErred] = React.useState(false);
   const EditorRef = React.useRef(null);

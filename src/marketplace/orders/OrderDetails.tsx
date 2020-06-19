@@ -37,7 +37,7 @@ async function loadOrder(order_uuid) {
   };
 }
 
-const OrderRefreshButton = props => (
+const OrderRefreshButton = (props) => (
   <button
     type="button"
     className="btn btn-default btn-sm m-r-sm"
@@ -47,7 +47,7 @@ const OrderRefreshButton = props => (
   </button>
 );
 
-export const OrderDetails: React.FC<OrderDetailsProps> = props => {
+export const OrderDetails: React.FC<OrderDetailsProps> = (props) => {
   useTitle(translate('Order details'));
   const {
     params: { order_uuid },

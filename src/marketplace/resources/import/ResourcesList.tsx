@@ -15,7 +15,7 @@ export const ResourcesList = ({
   <table className="table">
     <thead>
       <tr>
-        {resources.some(r => r.extra && r.extra.length > 0) && (
+        {resources.some((r) => r.extra && r.extra.length > 0) && (
           <th>{/* Column for expand button */}</th>
         )}
         <th>{translate('Name')}</th>

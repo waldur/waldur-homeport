@@ -12,7 +12,7 @@ interface OwnProps {
   project: Project;
 }
 
-const PureProjectDeleteButton = props => (
+const PureProjectDeleteButton = (props) => (
   <ActionButton
     title={translate('Delete')}
     action={props.showProjectRemoveDialog}
@@ -22,7 +22,7 @@ const PureProjectDeleteButton = props => (
   />
 );
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const ownerOrStaff = isOwnerOrStaff(state);
 
   if (!ownerOrStaff) {

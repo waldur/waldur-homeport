@@ -12,7 +12,7 @@ import { KeyCreateButton } from './KeyCreateButton';
 import { KeyRemoveButton } from './KeyRemoveButton';
 import { isStaffOrSelfSelectorCreator } from './selectors';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   useTitle(translate('SSH keys'));
   return (
@@ -47,16 +47,16 @@ const TableComponent = props => {
 const TableOptions = {
   table: 'keysList',
   fetchData: createFetcher('keys'),
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     user_uuid: $state.params.uuid || props.user.uuid,
   }),
-  exportRow: row => [row.name, row.fingerprint],
+  exportRow: (row) => [row.name, row.fingerprint],
   exportAll: true,
   exportFields: ['Title', 'Fingerprint'],
   queryField: 'name',
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: getUser(state),
   isStaffOrSelf: isStaffOrSelfSelectorCreator($state.params)(state),
 });

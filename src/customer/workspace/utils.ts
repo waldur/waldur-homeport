@@ -87,7 +87,7 @@ export const getSidebarItems = (customer: Customer): MenuItemType[] => [
 
 export const getCustomerCounters = (customer: Customer, fields: string[]) =>
   get(`/customers/${customer.uuid}/counters/`, { params: { fields } }).then(
-    response => response.data,
+    (response) => response.data,
   );
 
 export const getExtraSidebarItems = (): Promise<MenuItemType[]> => {

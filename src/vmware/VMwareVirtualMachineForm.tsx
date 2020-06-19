@@ -37,7 +37,7 @@ interface Template {
 
 const GuestOSField = formValues<any>({
   template: 'attributes.template',
-})(props =>
+})((props) =>
   props.template ? (
     <StaticField
       label={translate('Guest OS')}
@@ -53,12 +53,12 @@ interface Props extends OfferingConfigurationFormProps {
   };
 }
 
-const initAttributes = props => {
+const initAttributes = (props) => {
   React.useEffect(() => {
     const attributes = { ...props.initialAttributes };
     const initialData: Record<string, any> = { attributes };
     const activePlans = props.offering.plans.filter(
-      plan => plan.archived === false,
+      (plan) => plan.archived === false,
     );
     if (props.plan) {
       initialData.plan = props.plan;
@@ -79,7 +79,7 @@ const initAttributes = props => {
   }, []);
 };
 
-const StaticDiskField = props => {
+const StaticDiskField = (props) => {
   const diskValidator = React.useMemo(() => {
     const validators = [];
     if (props.limits.max_disk) {
@@ -95,7 +95,7 @@ const StaticDiskField = props => {
     <Field
       name="limits.disk"
       validate={diskValidator}
-      component={fieldProps =>
+      component={(fieldProps) =>
         fieldProps.input.value ? (
           <>
             <StaticField

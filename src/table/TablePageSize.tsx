@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 
 import './TablePageSize.scss';
 
-const options = [10, 25, 50, 100].map(v => ({ name: v, value: v }));
+const options = [10, 25, 50, 100].map((v) => ({ name: v, value: v }));
 
 interface TablePageSizeProps {
   pageSize: number;
@@ -24,7 +24,7 @@ export const TablePageSize = (props: TablePageSizeProps) => {
         valueKey="value"
         options={options}
         clearable={false}
-        onChange={value => props.updatePageSize(value)}
+        onChange={(value) => props.updatePageSize(value)}
       />
       <span className="m-l-sm">{translate('entries')}</span>
     </div>

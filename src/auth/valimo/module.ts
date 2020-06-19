@@ -1,5 +1,5 @@
 import authValimoDialog from './auth-valimo-dialog';
 
-export default module => {
+export default (module) => {
   module.component('authValimoDialog', authValimoDialog);
 };

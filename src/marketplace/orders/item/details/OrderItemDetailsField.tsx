@@ -6,7 +6,9 @@ interface OrderItemDetailsFieldProps {
   label?: string;
 }
 
-export const OrderItemDetailsField: React.FC<OrderItemDetailsFieldProps> = props => (
+export const OrderItemDetailsField: React.FC<OrderItemDetailsFieldProps> = (
+  props,
+) => (
   <FormGroup
     className="form-group row"
     labelClassName="control-label col-sm-3 text-right"

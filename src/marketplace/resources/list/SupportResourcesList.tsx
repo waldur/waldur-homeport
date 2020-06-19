@@ -7,7 +7,7 @@ import { connectTable } from '@waldur/table';
 
 import { TableOptions, TableComponent } from './PublicResourcesList';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filter: getFormValues('SupportResourcesFilter')(state),
 });
 

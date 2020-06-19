@@ -31,8 +31,8 @@ export const deleteCalendarBooking = (events, booking) => {
   });
 };
 
-export const eventsMapper = events =>
-  events.map(event => {
+export const eventsMapper = (events) =>
+  events.map((event) => {
     if (event.type === 'Availability') {
       event.rendering = 'inverse-background';
       event.groupId = 'availableForBooking';
@@ -166,15 +166,15 @@ export const eventRender = (arg, focused?) => {
 
 const getNextSlot = (slots, selectedValue) =>
   slots
-    .map(slot => moment(slot.start))
-    .sort(time => time.valueOf())
-    .find(next => next.isAfter(moment(selectedValue)));
+    .map((slot) => moment(slot.start))
+    .sort((time) => time.valueOf())
+    .find((next) => next.isAfter(moment(selectedValue)));
 
 const getSlotEnd = (slots, selectedValue) =>
   slots
-    .map(slot => moment(slot.end))
-    .sort(time => time.valueOf())
-    .find(next => moment(selectedValue).isSameOrBefore(next));
+    .map((slot) => moment(slot.end))
+    .sort((time) => time.valueOf())
+    .find((next) => moment(selectedValue).isSameOrBefore(next));
 
 export const handleSchedule = (
   { start, end, view, jsEvent },
@@ -207,10 +207,7 @@ export const handleSchedule = (
     } else {
       const nextStart = getNextSlot(availabilitySlotsList, start);
       eventData.start = nextStart.format();
-      eventData.end = nextStart
-        .clone()
-        .add(setDuration)
-        .format();
+      eventData.end = nextStart.clone().add(setDuration).format();
     }
 
     return eventData;
@@ -266,7 +263,7 @@ export const createAvailabilityDates = (event: BookingProps) => {
 export const createAvailabilitySlots = (availabilitiDates, slotDuration) => {
   const slots = [];
 
-  availabilitiDates.map(availabilitiDayEvent => {
+  availabilitiDates.map((availabilitiDayEvent) => {
     const currentDate = moment(availabilitiDayEvent.start);
 
     while (currentDate < moment(availabilitiDayEvent.end)) {
@@ -286,7 +283,7 @@ export const createAvailabilitySlots = (availabilitiDates, slotDuration) => {
 };
 
 export const bookingMapper = (events, showAvailability = false) =>
-  events.map(event => {
+  events.map((event) => {
     if (event.extendedProps && event.extendedProps.type === 'Availability') {
       event.rendering = showAvailability ? undefined : 'background';
       event.classNames = showAvailability ? 'booking booking-Availability' : '';
@@ -313,7 +310,7 @@ export const bookingMapper = (events, showAvailability = false) =>
 export const handleWeekDays = (weekdayNumbers, dayNumber): number[] => {
   const intVal = parseInt(dayNumber);
   if (weekdayNumbers.includes(intVal)) {
-    return weekdayNumbers.filter(item => item !== intVal);
+    return weekdayNumbers.filter((item) => item !== intVal);
   } else {
     return weekdayNumbers.concat(intVal);
   }
@@ -324,7 +321,7 @@ export const getDurationOptions = (
   minuteArray: number[] = [1, 2, 3, 4, 5, 6, 6, 8, 24],
   units = 'hours',
 ) =>
-  minuteArray.map(timeUnit => {
+  minuteArray.map((timeUnit) => {
     moment.locale(lang);
     return {
       value: moment

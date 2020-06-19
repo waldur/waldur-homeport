@@ -8,7 +8,7 @@ import {
   PureResourceSummaryBase,
 } from '@waldur/resource/summary';
 
-const formatProjectType = resource =>
+const formatProjectType = (resource) =>
   resource.template_name ? (
     <Tooltip label={resource.template_description} id="projectType">
       <i className="fa fa-question-circle" /> {resource.template_name}

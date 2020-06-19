@@ -110,7 +110,7 @@ export const openstackTemplateFilters = {
       value: '',
       label: 'All categories',
     },
-    ...TEMPLATE_CATEGORIES.map(category => ({
+    ...TEMPLATE_CATEGORIES.map((category) => ({
       value: category.toLowerCase(),
       label: category,
     })),

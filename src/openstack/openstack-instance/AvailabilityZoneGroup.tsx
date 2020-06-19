@@ -8,7 +8,7 @@ import { translate } from '@waldur/i18n';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-export const AvailabilityZoneGroup = props =>
+export const AvailabilityZoneGroup = (props) =>
   props.availabilityZones.length > 0 ? (
     <CreateResourceFormGroup
       label={translate('Availability zone')}
@@ -21,7 +21,7 @@ export const AvailabilityZoneGroup = props =>
             ? required
             : undefined
         }
-        component={fieldProps => (
+        component={(fieldProps) => (
           <Select
             value={fieldProps.input.value}
             onChange={fieldProps.input.onChange}

@@ -1,5 +1,5 @@
 import addTeamMember from './add-team-member';
 
-export default module => {
+export default (module) => {
   module.component('addTeamMember', addTeamMember);
 };

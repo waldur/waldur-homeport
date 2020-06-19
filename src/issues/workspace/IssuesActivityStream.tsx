@@ -27,7 +27,7 @@ export const IssuesActivityStream = () => {
     [],
   );
   const dispatch = useDispatch();
-  const callback = user =>
+  const callback = (user) =>
     dispatch(
       openModalDialog(UserPopover, {
         resolve: {

@@ -62,7 +62,7 @@ const exportFields = () => [
   translate('Created'),
 ];
 
-const mapPropsToFilter = props => ({
+const mapPropsToFilter = (props) => ({
   service_settings_uuid: props.provider_uuid,
 });
 

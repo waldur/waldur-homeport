@@ -3,7 +3,7 @@ import Select from 'react-select';
 
 import { FieldError } from '@waldur/form-react';
 
-export const SimpleSelectField = props => (
+export const SimpleSelectField = (props) => (
   <>
     <Select
       value={props.input.value}

@@ -8,7 +8,7 @@ interface SecretFieldProps extends FormField {
   placeholder?: string;
 }
 
-export const SecretField: React.FC<SecretFieldProps> = props => {
+export const SecretField: React.FC<SecretFieldProps> = (props) => {
   const [showSecret, onToggle] = useToggle(false);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

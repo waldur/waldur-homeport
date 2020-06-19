@@ -10,7 +10,7 @@ import { getMinSize } from './getMinSize';
 import { SimpleSelectField } from './SimpleSelectField';
 import { getDataVolumes } from './utils';
 
-const createMountPointValidator = nodeIndex => (value, allValues) => {
+const createMountPointValidator = (nodeIndex) => (value, allValues) => {
   if (!value) {
     return;
   }
@@ -39,11 +39,11 @@ const getSizeField = (nodeIndex, volumeIndex) => {
 const useMinimalSize = (form, nodeIndex, volumeIndex) => {
   const sizeField = getSizeField(nodeIndex, volumeIndex);
   const dispatch = useDispatch();
-  const getSize = state => formValueSelector(form)(state, sizeField);
+  const getSize = (state) => formValueSelector(form)(state, sizeField);
 
   const volumeSize = useSelector(getSize);
 
-  return mountPoint => {
+  return (mountPoint) => {
     const minSize = getMinSize(mountPoint);
     if (!minSize) {
       return;
@@ -54,7 +54,7 @@ const useMinimalSize = (form, nodeIndex, volumeIndex) => {
   };
 };
 
-export const VolumeMountPointGroup = props => {
+export const VolumeMountPointGroup = (props) => {
   const setValidVolumeSize = useMinimalSize(
     props.form,
     props.nodeIndex,

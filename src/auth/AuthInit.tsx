@@ -17,7 +17,7 @@ export const AuthInit = () => {
     UsersService.getCurrentUser(),
   );
   const onSave = React.useCallback(
-    async user => {
+    async (user) => {
       try {
         const response = await UsersService.update(user);
         UsersService.setCurrentUser(response.data);

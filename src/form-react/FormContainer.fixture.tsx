@@ -7,7 +7,7 @@ import { StringField } from './StringField';
 import { mountTestForm } from './testUtils';
 import { TextField } from './TextField';
 
-export const Component = options => props => {
+export const Component = (options) => (props) => {
   const {
     submitting,
     required,
@@ -48,9 +48,9 @@ export const submitForm = (wrapper: ReactWrapper) =>
 export const getErrors = (wrapper: ReactWrapper) => wrapper.find('.help-block');
 export const getDescriptions = (wrapper: ReactWrapper) =>
   wrapper.find('.text-muted');
-export const renderTestForm = options => mountTestForm(Component(options));
+export const renderTestForm = (options) => mountTestForm(Component(options));
 
-export const OptionalFieldForm = formValues('type')(props => (
+export const OptionalFieldForm = formValues('type')((props) => (
   <FormContainer submitting={false}>
     <StringField name="type" label="Type" />
     {(props as any).type === 'subtask' && (

@@ -34,7 +34,7 @@ interface Invoice {
   month: number;
 }
 
-const getInvoices = params => getList<Invoice>('/invoices/', params);
+const getInvoices = (params) => getList<Invoice>('/invoices/', params);
 
 async function oldestInvoice() {
   const params = {

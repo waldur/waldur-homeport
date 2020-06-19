@@ -1,6 +1,6 @@
 import { translate } from '@waldur/i18n';
 
-export const getInitialValues = props => ({
+export const getInitialValues = (props) => ({
   name: props.resolve.name,
   payment_type: props.resolve.payment_type,
   end_date: props.resolve.attributes.end_date,

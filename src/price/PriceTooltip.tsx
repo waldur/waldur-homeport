@@ -48,7 +48,7 @@ class PurePriceTooltip extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   accountingMode: state.config.accountingMode,
 });
 

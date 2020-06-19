@@ -1,4 +1,4 @@
-export const createByKey = (predicate, mapActionToKey) => reducer => {
+export const createByKey = (predicate, mapActionToKey) => (reducer) => {
   return (state = {}, action) => {
     if (predicate(action)) {
       const key = mapActionToKey(action);

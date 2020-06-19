@@ -20,10 +20,11 @@ const StateField = ({ row }) => {
   return <a className={`status-circle ${cls}`} title={title} />;
 };
 
-const getDestinationField = row => row.destination_url || row.email || 'N/A';
-const getEventsField = row => row.event_groups.map(formatEventTitle).join(', ');
+const getDestinationField = (row) => row.destination_url || row.email || 'N/A';
+const getEventsField = (row) =>
+  row.event_groups.map(formatEventTitle).join(', ');
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   useTitle(translate('Notifications'));
   return (
@@ -73,8 +74,8 @@ const TableComponent = props => {
 const TableOptions = {
   table: HOOK_LIST_ID,
   fetchData: createFetcher('hooks'),
-  mapPropsToFilter: props => ({ author_uuid: props.user.uuid }),
-  exportRow: row => [
+  mapPropsToFilter: (props) => ({ author_uuid: props.user.uuid }),
+  exportRow: (row) => [
     titleCase(row.hook_type),
     getDestinationField(row),
     getEventsField(row),
@@ -83,7 +84,7 @@ const TableOptions = {
   exportFields: ['Method', 'Destination', 'Events'],
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: getUser(state),
 });
 

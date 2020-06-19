@@ -8,7 +8,7 @@ export default function createAction(): ResourceAction {
     name: 'console_log',
     title: translate('Show console log'),
     type: 'callback',
-    execute: resource =>
+    execute: (resource) =>
       executeConsoleLogAction(resource, 'openstacktenant-instances'),
     validators: [validateState('OK')],
   };

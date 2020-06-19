@@ -8,7 +8,7 @@ import { formatCrontab } from '@waldur/resource/crontab';
 import { ResourceSummaryProps } from '@waldur/resource/summary';
 import { Schedule } from '@waldur/resource/types';
 
-export const getResourceIcon = type => getServiceIcon(type.split('.')[0]);
+export const getResourceIcon = (type) => getServiceIcon(type.split('.')[0]);
 
 const RESOURCE_TYPE_LABELS = {};
 
@@ -16,7 +16,7 @@ export function registerResourceTypeLabel(resourceType: string, label: string) {
   RESOURCE_TYPE_LABELS[resourceType] = label;
 }
 
-export const formatResourceType = resource => {
+export const formatResourceType = (resource) => {
   if (RESOURCE_TYPE_LABELS[resource.resource_type]) {
     return RESOURCE_TYPE_LABELS[resource.resource_type];
   }
@@ -25,14 +25,14 @@ export const formatResourceType = resource => {
   return service + ' ' + parts[1];
 };
 
-const formatStorage = limits => {
+const formatStorage = (limits) => {
   const parts = [];
   const volumeTypes = Object.keys(limits).filter(
-    key => key.startsWith('gigabytes_') && limits[key] > 0,
+    (key) => key.startsWith('gigabytes_') && limits[key] > 0,
   );
   const hasVolumeTypes = volumeTypes.length > 0;
   if (hasVolumeTypes) {
-    volumeTypes.forEach(key => {
+    volumeTypes.forEach((key) => {
       const label = key.split('gigabytes_', 2)[1].toLocaleUpperCase();
       parts.push({
         label,
@@ -49,7 +49,7 @@ const formatStorage = limits => {
   return parts;
 };
 
-export const formatFlavor = limits => {
+export const formatFlavor = (limits) => {
   const parts = [
     {
       label: translate('vCPU'),
@@ -63,12 +63,12 @@ export const formatFlavor = limits => {
   ];
 
   return parts
-    .filter(part => part.value)
-    .map(part => `${part.value} ${part.label}`)
+    .filter((part) => part.value)
+    .map((part) => `${part.value} ${part.label}`)
     .join(', ');
 };
 
-export const formatSummary = resource => {
+export const formatSummary = (resource) => {
   const parts = [];
   if (resource.image_name) {
     parts.push(resource.image_name);
@@ -81,7 +81,7 @@ export const formatSummary = resource => {
   return summary;
 };
 
-export const formatDefault = value => value || <span>&mdash;</span>;
+export const formatDefault = (value) => value || <span>&mdash;</span>;
 
 export const formatCommaList = (items: string[]) =>
   items.length === 0 ? <span>&ndash;</span> : items.join(', ');

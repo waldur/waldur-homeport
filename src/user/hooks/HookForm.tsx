@@ -21,7 +21,7 @@ interface OwnProps {
 const selector = formValueSelector('HookForm');
 
 export const HookForm: React.FC<OwnProps> = ({ isNew, eventGroups }) => {
-  const hookType = useSelector(state => selector(state, 'hook_type'));
+  const hookType = useSelector((state) => selector(state, 'hook_type'));
   return (
     <>
       {isNew ? (

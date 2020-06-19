@@ -8,7 +8,7 @@ import { react2angular } from '@waldur/shims/react2angular';
 import store from './store';
 
 export function withStore<P>(Component: React.ComponentType<P>) {
-  const Wrapper: React.ComponentType<P> = props => (
+  const Wrapper: React.ComponentType<P> = (props) => (
     <Provider store={store}>
       <UIRouterContextComponent>
         <Component {...props} />

@@ -30,7 +30,7 @@ export const AddMemberButton: React.FC<AddMemberButtonProps> = ({
           currentCustomer: customer,
           editUser: user,
           isProjectManager: isProjectManager,
-          addedUsers: users.map(user => user.uuid),
+          addedUsers: users.map((user) => user.uuid),
         },
       }),
     );

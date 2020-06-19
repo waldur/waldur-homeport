@@ -14,7 +14,7 @@ interface DispatchProps {
   onOpenCreateDialog(): void;
 }
 
-const PureZabbixHostCreateButton = props => (
+const PureZabbixHostCreateButton = (props) => (
   <a onClick={props.onOpenCreateDialog} className="btn btn-default btn-xs">
     <i className="text-info fa fa-line-chart" />{' '}
     {props.translate('Resource is not monitored yet.')}

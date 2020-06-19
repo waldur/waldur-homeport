@@ -19,7 +19,7 @@ import { OfferingStep } from '../types';
 import { OfferingUpdateDialog } from './OfferingUpdateDialog';
 import { getInitialValues } from './utils';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   step: getStep(state),
   disabled: isOfferingManagementDisabled(state),
   initialValues: getInitialValues(state),
@@ -28,8 +28,8 @@ const mapStateToProps = state => ({
   erred: isErred(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateOffering: data =>
+const mapDispatchToProps = (dispatch) => ({
+  updateOffering: (data) =>
     updateOffering(
       {
         ...data,
@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => ({
       },
       dispatch,
     ),
-  loadOffering: offeringUuid =>
+  loadOffering: (offeringUuid) =>
     dispatch(actions.loadOfferingStart(offeringUuid)),
   setStep: (step: OfferingStep) => dispatch(actions.setStep(step)),
 });

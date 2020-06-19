@@ -1,9 +1,9 @@
 export function formatAllocationPool() {
-  return pools => {
+  return (pools) => {
     if (pools.length === 0) {
       return '―';
     } else {
-      return pools.map(pool => `${pool.start} ― ${pool.end}`).join('<br />');
+      return pools.map((pool) => `${pool.start} ― ${pool.end}`).join('<br />');
     }
   };
 }

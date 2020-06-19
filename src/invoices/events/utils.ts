@@ -1,7 +1,7 @@
 import { getAll } from '@waldur/core/api';
 import eventsRegistry from '@waldur/events/registry';
 
-const getEventColor = event => {
+const getEventColor = (event) => {
   const classes = {
     openstack_package_created: 'bg-success',
     openstack_package_deleted: 'bg-success',
@@ -15,7 +15,7 @@ const getEventColor = event => {
   return classes[event.event_type] || 'lazur-bg';
 };
 
-const getEventIcon = event => {
+const getEventIcon = (event) => {
   const classes = {
     openstack_package_created: 'fa-plus-circle',
     openstack_package_deleted: 'fa-trash-o',
@@ -29,8 +29,8 @@ const getEventIcon = event => {
   return classes[event.event_type];
 };
 
-const parseEvents = events => {
-  return events.map(event => ({
+const parseEvents = (events) => {
+  return events.map((event) => ({
     date: event.created,
     message: eventsRegistry.formatEvent(event),
     color: getEventColor(event),
@@ -39,7 +39,7 @@ const parseEvents = events => {
   }));
 };
 
-export const loadEvents = async item => {
+export const loadEvents = async (item) => {
   // TODO: Remove extra check after https://opennode.atlassian.net/browse/WAL-1211
   if (item.scope_type && item.scope_uuid) {
     const events = await getAll('/events/', {

@@ -11,7 +11,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { IntegerUnitField } from './IntegerUnitField';
 
-export const SystemVolumeSizeGroup = props => (
+export const SystemVolumeSizeGroup = (props) => (
   <FormGroup
     label={translate('System volume size')}
     required={true}

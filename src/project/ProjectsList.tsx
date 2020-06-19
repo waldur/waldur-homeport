@@ -32,7 +32,7 @@ const ProjectActionsField = ({ row }) => (
   </div>
 );
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const { translate, filterColumns } = props;
   useTitle(translate('Projects'));
   const columns = filterColumns([
@@ -80,11 +80,11 @@ const TableOptions = {
   table: 'ProjectsList',
   fetchData: createFetcher('projects'),
   queryField: 'query',
-  getDefaultFilter: state => ({
+  getDefaultFilter: (state) => ({
     customer: getCustomer(state).uuid,
     o: 'name',
   }),
-  exportRow: row => [row.name, row.description, formatDateTime(row.created)],
+  exportRow: (row) => [row.name, row.description, formatDateTime(row.created)],
   exportFields: ['Name', 'Description', 'Created'],
 };
 

@@ -96,7 +96,7 @@ export class PurePendingOrderIndicator extends React.Component<
           </li>
         </Dropdown.Toggle>
         <Dropdown.Menu className="dropdown-orders dropdown-menu-right">
-          {limitedOrders.map(order => (
+          {limitedOrders.map((order) => (
             <PendingOrderDropdownItem
               key={order.uuid}
               order={order}
@@ -132,7 +132,7 @@ const getNamePrefix = (type: OrderItemType) => {
   }
 };
 
-const PendingOrderDropdownItem = props => (
+const PendingOrderDropdownItem = (props) => (
   <>
     <li>
       <OrderDetailsLink
@@ -143,7 +143,7 @@ const PendingOrderDropdownItem = props => (
         onClick={props.onClick}
       >
         <div>
-          {props.order.items.map(item => (
+          {props.order.items.map((item) => (
             <div key={item.uuid}>
               <p>
                 <span>{getNamePrefix(item.type)} </span>
@@ -171,7 +171,7 @@ const PendingOrderDropdownItem = props => (
   </>
 );
 
-const ShowAllLink = props => {
+const ShowAllLink = (props) => {
   const { workspace, handleToggleOpen } = props;
   switch (workspace) {
     case 'organization':
@@ -199,7 +199,7 @@ const ShowAllLink = props => {
   }
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { pendingOrders } = state.marketplace.orders;
   return {
     customer: getCustomer(state),
@@ -209,8 +209,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  fetchPendingOrders: params => dispatch(actions.fetchPendingOrders(params)),
+const mapDispatchToProps = (dispatch) => ({
+  fetchPendingOrders: (params) => dispatch(actions.fetchPendingOrders(params)),
 });
 
 const enhance = compose(

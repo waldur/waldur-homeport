@@ -48,7 +48,7 @@ export class CalendarEventModal extends React.Component<
   }
 
   handleChange(name, value) {
-    this.setState(prevState => ({ ...prevState, [name]: value }));
+    this.setState((prevState) => ({ ...prevState, [name]: value }));
   }
 
   render() {
@@ -82,7 +82,7 @@ export class CalendarEventModal extends React.Component<
                   type="text"
                   className="form-control"
                   value={title}
-                  onChange={e =>
+                  onChange={(e) =>
                     this.handleChange(e.target.name, e.target.value)
                   }
                 />
@@ -100,7 +100,7 @@ export class CalendarEventModal extends React.Component<
                     type="checkbox"
                     checked={allDay}
                     onChange={() =>
-                      this.setState(prevState => ({
+                      this.setState((prevState) => ({
                         allDay: !prevState.allDay,
                       }))
                     }
@@ -116,7 +116,7 @@ export class CalendarEventModal extends React.Component<
               label={translate('Start')}
               isDisabled={allDay}
               currentTime={moment.utc(start, 'DD/MM/YYYY HH:mm', true)}
-              onChange={newDateValue =>
+              onChange={(newDateValue) =>
                 this.handleChange('start', newDateValue)
               }
             />
@@ -127,7 +127,9 @@ export class CalendarEventModal extends React.Component<
               minuteStep={30}
               isDisabled={allDay}
               currentTime={moment.utc(end, 'DD/MM/YYYY HH:mm', true)}
-              onChange={newDateValue => this.handleChange('end', newDateValue)}
+              onChange={(newDateValue) =>
+                this.handleChange('end', newDateValue)
+              }
             />
 
             <div className="row" style={{ marginTop: 30 }}>

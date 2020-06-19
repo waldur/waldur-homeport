@@ -18,7 +18,7 @@ export const PureHookCreateButton = (props: HookCreateButtonProps) => (
   />
 );
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   showHookUpdateDialog: () => dispatch(showHookUpdateDialog()),
 });
 

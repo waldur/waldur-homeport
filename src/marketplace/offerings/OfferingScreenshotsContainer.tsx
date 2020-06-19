@@ -38,7 +38,7 @@ const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
   ];
 };
 
-let OfferingScreenshotsContainer = props => {
+let OfferingScreenshotsContainer = (props) => {
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
@@ -83,12 +83,12 @@ let OfferingScreenshotsContainer = props => {
   return null;
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   offering: getOffering(state).offering,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadOffering: offeringUuid => dispatch(loadOfferingStart(offeringUuid)),
+const mapDispatchToProps = (dispatch) => ({
+  loadOffering: (offeringUuid) => dispatch(loadOfferingStart(offeringUuid)),
 });
 
 OfferingScreenshotsContainer = connect(

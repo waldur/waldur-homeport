@@ -5,7 +5,7 @@ import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { VirtualMachine } from '@waldur/resource/types';
 import { Table, connectTable } from '@waldur/table';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -36,11 +36,11 @@ const TableComponent = props => {
   );
 };
 
-const getInternalIps = request =>
+const getInternalIps = (request) =>
   getById<VirtualMachine>(
     '/openstacktenant-instances/',
     request.filter.uuid,
-  ).then(vm => ({
+  ).then((vm) => ({
     rows: vm.internal_ips_set,
     resultCount: vm.internal_ips_set.length,
   }));
@@ -48,7 +48,7 @@ const getInternalIps = request =>
 const TableOptions = {
   table: 'openstack-internal-ips',
   fetchData: getInternalIps,
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     uuid: props.resource.uuid,
   }),
 };

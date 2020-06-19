@@ -49,7 +49,7 @@ ActionConfigurationRegistry.register('OpenStack.Network', {
   },
 });
 
-export default module => {
+export default (module) => {
   ResourceSummary.register('OpenStack.Network', OpenStackNetworkSummary);
   module.component('openstackAllocationPool', openstackAllocationPool);
   module.filter('formatAllocationPool', formatAllocationPool);

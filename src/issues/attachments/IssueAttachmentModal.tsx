@@ -54,7 +54,7 @@ export class PureIssueAttachmentModal extends React.Component<
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   closeModal: (): void => dispatch(closeModalDialog()),
 });
 

@@ -14,7 +14,7 @@ class SidebarExtensionRegistry {
     if (!this.registry[sidebar]) {
       return Promise.resolve([]);
     }
-    const promise = this.registry[sidebar].map(callable => callable());
+    const promise = this.registry[sidebar].map((callable) => callable());
     return Promise.all(promise).then(flatten);
   }
 }

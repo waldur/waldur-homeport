@@ -52,7 +52,7 @@ export class EChart extends React.Component<ChartProps> {
     this.setState({
       loading: true,
     });
-    loadEcharts().then(module => {
+    loadEcharts().then((module) => {
       this.setState({
         loading: false,
       });
@@ -81,7 +81,7 @@ export class EChart extends React.Component<ChartProps> {
         <div
           className={classNames({ hidden: loading })}
           style={style}
-          ref={container => (this.container = container)}
+          ref={(container) => (this.container = container)}
         />
       </div>
     );

@@ -28,6 +28,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 const store = createStore(rootReducer, enhancedMiddlewares);
 
-sagas.forEach(saga => sagaMiddleware.run(saga));
+sagas.forEach((saga) => sagaMiddleware.run(saga));
 
 export default store;

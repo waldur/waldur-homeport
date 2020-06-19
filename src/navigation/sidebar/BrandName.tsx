@@ -7,7 +7,7 @@ import { WOKSPACE_NAMES } from '../workspace/constants';
 
 export const BrandName = () => {
   const router = useRouter();
-  const onLogoClick = event => {
+  const onLogoClick = (event) => {
     const WorkspaceService = ngInjector.get('WorkspaceService');
     const workspaceData = WorkspaceService.getWorkspace();
     const { workspace } = workspaceData;

@@ -49,7 +49,7 @@ export const PureUserDetailsView = (props: UserDetailsViewProps) => (
   </Tabs>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   userManageIsVisible: userManageIsVisible(state),
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
 });

@@ -11,7 +11,7 @@ import {
 
 import { NodeRoleField } from './NodeRoleField';
 
-const formatInstance = resource =>
+const formatInstance = (resource) =>
   resource.instance ? (
     <ResourceLink
       type="OpenStackTenant.Instance"

@@ -9,7 +9,7 @@ interface OwnProps {
   className?: string;
 }
 
-const stateSelector = state => {
+const stateSelector = (state) => {
   const workspace = getWorkspace(state);
   if (workspace === 'organization') {
     return 'marketplace-shopping-cart-item-update-customer';
@@ -18,7 +18,7 @@ const stateSelector = state => {
   }
 };
 
-export const ShoppingCartItemUpdateLink: React.FC<OwnProps> = props => {
+export const ShoppingCartItemUpdateLink: React.FC<OwnProps> = (props) => {
   const state = useSelector(stateSelector);
   return (
     <Link

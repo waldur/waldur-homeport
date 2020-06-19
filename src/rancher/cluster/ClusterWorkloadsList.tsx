@@ -4,7 +4,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -43,7 +43,7 @@ const TableComponent = props => {
 const TableOptions: TableOptionsType = {
   table: 'rancher-workloads',
   fetchData: createFetcher('rancher-workloads'),
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     cluster_uuid: props.resource.uuid,
   }),
 };

@@ -13,7 +13,9 @@ interface ChangeLimitsDialogProps {
   submitting: boolean;
 }
 
-export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = props => {
+export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
+  props,
+) => {
   const asyncState = useAsync(
     () => loadData(props.resolve.resource.marketplace_resource_uuid),
     [props.resolve.resource.marketplace_resource_uuid],

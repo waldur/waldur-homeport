@@ -6,7 +6,7 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { RolesRenderer } from './RolesRenderer';
 import { UserDetailsButton } from './UserDetailsButton';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -52,11 +52,11 @@ const TableComponent = props => {
 const TableOptions = {
   table: 'rancher-cluster-users',
   fetchData: createFetcher('rancher-users'),
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     cluster_uuid: props.resource.uuid,
   }),
   exportFields: ['Full name', 'Username'],
-  exportRow: row => [row.full_name, row.user_name],
+  exportRow: (row) => [row.full_name, row.user_name],
   queryField: 'user_username',
 };
 

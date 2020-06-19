@@ -7,7 +7,7 @@ import { OrderDetails } from './OrderDetails';
 import * as actions from './store/actions';
 import * as selectors from './store/selectors';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   stateChangeStatus: selectors.getStateChangeStatus(state),
   orderCanBeApproved: selectors.orderCanBeApproved(state),
 });

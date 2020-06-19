@@ -33,7 +33,7 @@ export const parseQuestions = (questions: Question[]) => {
     ...result,
     [question.variable]: question,
   }));
-  return questions.map(question => ({
+  return questions.map((question) => ({
     ...question,
     showSubquestionIf:
       question.showSubquestionIf === 'true'
@@ -42,7 +42,7 @@ export const parseQuestions = (questions: Question[]) => {
         ? false
         : undefined,
     subquestions: question.subquestions
-      ? question.subquestions.map(subQuestion => ({
+      ? question.subquestions.map((subQuestion) => ({
           ...subQuestion,
           group: question.group,
         }))
@@ -143,7 +143,7 @@ export const parseVisibleQuestions = (
     return [];
   }
   const result = [];
-  const questionIsVisible = question => {
+  const questionIsVisible = (question) => {
     if (typeof question.showIf !== 'object') {
       return true;
     }
@@ -158,13 +158,13 @@ export const parseVisibleQuestions = (
     }
     return true;
   };
-  questions.forEach(question => {
+  questions.forEach((question) => {
     if (questionIsVisible(question)) {
       result.push(question);
       if (answers && question.subquestions) {
         const answer = getValue(answers, question.variable);
         if (answer === question.showSubquestionIf) {
-          question.subquestions.forEach(subQuestion => {
+          question.subquestions.forEach((subQuestion) => {
             result.push(subQuestion);
           });
         }

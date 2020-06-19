@@ -34,7 +34,7 @@ const createVolumeSizeValidator = (nodeIndex, volumeIndex) => (
   }
 };
 
-export const VolumeSizeGroup = props => {
+export const VolumeSizeGroup = (props) => {
   const validateVolumeSize = React.useMemo(
     () => [
       required,

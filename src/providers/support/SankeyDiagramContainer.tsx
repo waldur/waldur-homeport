@@ -42,9 +42,9 @@ class SankeyDiagramComponent extends React.Component<
   formatProvidersToConsumersLink() {
     const links = [];
     Object.keys(this.props.serviceUsage.service_providers).forEach(
-      providerUuid => {
+      (providerUuid) => {
         this.props.serviceUsage.service_providers[providerUuid].map(
-          consumerUuid => {
+          (consumerUuid) => {
             links.push({
               source: this.props.serviceUsage.organizations[consumerUuid].name,
               target: this.props.serviceUsage.organizations[providerUuid].name,
@@ -64,7 +64,7 @@ class SankeyDiagramComponent extends React.Component<
   formatCountriesToProvidersLink() {
     const links = [];
     Object.keys(this.props.serviceUsage.service_providers).forEach(
-      providerUuid => {
+      (providerUuid) => {
         const provider = this.props.serviceUsage.organizations[providerUuid];
         links.push({
           source: provider.name,
@@ -90,7 +90,7 @@ class SankeyDiagramComponent extends React.Component<
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   serviceUsage: selectServiceUsage(state),
   organizationNames: propertySelectorFactory('name')(state),
   countryNames: propertySelectorFactory('country')(state),

@@ -31,7 +31,7 @@ const PureEventDetailsDialog = (props: Props) => (
   </ModalDialog>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isStaffOrSupport: isStaffOrSupport(state),
 });
 

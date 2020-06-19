@@ -11,7 +11,7 @@ export const EmailChangeForm = ({ user }: { user: UserDetails }) => {
 
   return (
     <form
-      onSubmit={event => {
+      onSubmit={(event) => {
         event.preventDefault();
         handleSubmit();
       }}
@@ -29,7 +29,7 @@ export const EmailChangeForm = ({ user }: { user: UserDetails }) => {
           id="emailAddress"
           className="form-control"
           value={email}
-          onChange={event => setEmail(event.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
         />
       </div>
       <SubmitButton

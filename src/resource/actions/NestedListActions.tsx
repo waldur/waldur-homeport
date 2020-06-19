@@ -30,7 +30,7 @@ export const NestedListActions = ({ resource, tab }) => {
 
   return (
     <>
-      {Object.keys(actions).map(key => (
+      {Object.keys(actions).map((key) => (
         <Button
           bsSize="sm"
           disabled={actions[key].disabled}

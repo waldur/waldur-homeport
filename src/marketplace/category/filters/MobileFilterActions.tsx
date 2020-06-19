@@ -14,7 +14,9 @@ interface MobileFilterActionsProps extends TranslateProps {
   filterValues?: any;
 }
 
-export const PureMobileFilterActions: React.FC<MobileFilterActionsProps> = props => (
+export const PureMobileFilterActions: React.FC<MobileFilterActionsProps> = (
+  props,
+) => (
   <button
     type="button"
     className="btn btn-primary btn-info"
@@ -25,11 +27,11 @@ export const PureMobileFilterActions: React.FC<MobileFilterActionsProps> = props
   </button>
 );
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   showAttributeFilterDialog: () => dispatch(actions.showAttributeFilter()),
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filterValues: getFormValues(MARKETPLACE_FILTER_FORM)(state),
 });
 

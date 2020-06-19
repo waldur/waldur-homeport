@@ -15,7 +15,7 @@ interface FieldProps {
   row: Resource;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -58,7 +58,7 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'CustomerResourcesList',
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: props =>
+  mapPropsToFilter: (props) =>
     props.customer
       ? {
           customer_uuid: props.customer.uuid,
@@ -67,7 +67,7 @@ const TableOptions = {
       : {},
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
 });
 

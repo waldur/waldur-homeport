@@ -49,7 +49,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
     }
   };
 
-  const renderRadioButtons = field => (
+  const renderRadioButtons = (field) => (
     <RadioButtonField
       {...field}
       required={true}

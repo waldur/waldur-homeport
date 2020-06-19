@@ -31,7 +31,7 @@ export const OpenStackSecurityGroupsDialog = withTranslation(
               <th>{props.translate('Remote network')}</th>
             </tr>
           </thead>
-          {props.resolve.securityGroups.map(securityGroup => (
+          {props.resolve.securityGroups.map((securityGroup) => (
             <tbody key={securityGroup.uuid}>
               {securityGroup.rules.map((rule, index) => (
                 <tr key={index}>

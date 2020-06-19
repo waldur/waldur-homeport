@@ -9,14 +9,14 @@ import {
   PureResourceSummaryBase,
 } from '@waldur/resource/summary';
 
-const formatSize = props => {
+const formatSize = (props) => {
   const filesize = formatFilesize(props.resource.size);
   return props.resource.bootable
     ? `${props.translate('bootable')} ${filesize}`
     : filesize;
 };
 
-const formatInstance = props =>
+const formatInstance = (props) =>
   props.resource.instance ? (
     <ResourceLink
       type="OpenStackTenant.Instance"

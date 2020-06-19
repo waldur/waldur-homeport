@@ -81,12 +81,12 @@ class ShoppingCartItemUpdateComponent extends React.Component<
       );
       const plugins = await api.getPlugins();
       const limits = plugins.find(
-        plugin => plugin.offering_type === offering.type,
+        (plugin) => plugin.offering_type === offering.type,
       ).available_limits;
       let plan = {};
       if (offering && this.props.shoppingCartItem.plan_uuid) {
         plan = offering.plans.find(
-          offeringPlan =>
+          (offeringPlan) =>
             offeringPlan.uuid === this.props.shoppingCartItem.plan_uuid,
         );
       }
@@ -119,7 +119,7 @@ class ShoppingCartItemUpdateComponent extends React.Component<
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   shoppingCartItem: getItemSelectorFactory($state.params.order_item_uuid)(
     state,
   ),

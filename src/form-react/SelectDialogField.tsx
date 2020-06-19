@@ -40,7 +40,7 @@ export class SelectDialogFieldComponent extends React.Component<
     value: null,
   };
 
-  openSelectDialog = e => {
+  openSelectDialog = (e) => {
     e.preventDefault();
     this.setState({ showListDialog: true });
   };
@@ -49,7 +49,7 @@ export class SelectDialogFieldComponent extends React.Component<
     this.setState({ showListDialog: false });
   };
 
-  onChange = value => {
+  onChange = (value) => {
     this.setState({ value });
   };
 

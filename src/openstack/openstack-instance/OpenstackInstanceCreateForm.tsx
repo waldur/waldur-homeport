@@ -132,28 +132,28 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
       });
       const initial = this.props.initialAttributes;
       if (initial) {
-        const flavor = flavors.find(s => s.url === initial.flavor);
-        const image = images.find(s => s.url === initial.image);
-        const security_groups = initial.security_groups.map(s =>
-          securityGroups.find(g => g.url === s.url),
+        const flavor = flavors.find((s) => s.url === initial.flavor);
+        const image = images.find((s) => s.url === initial.image);
+        const security_groups = initial.security_groups.map((s) =>
+          securityGroups.find((g) => g.url === s.url),
         );
         const availability_zone =
           initial.availability_zone &&
-          availabilityZones.find(s => s.url === initial.availability_zone);
+          availabilityZones.find((s) => s.url === initial.availability_zone);
         const networksMap = {};
-        initial.internal_ips_set.map(item => {
+        initial.internal_ips_set.map((item) => {
           networksMap[item.subnet] = 'false';
         });
-        initial.floating_ips.map(item => {
+        initial.floating_ips.map((item) => {
           networksMap[item.subnet] = item.url || 'true';
         });
         const defaults = getDefaultFloatingIps();
-        const networks = Object.keys(networksMap).map(key => {
-          const subnet = subnets.find(s => s.url === key);
+        const networks = Object.keys(networksMap).map((key) => {
+          const subnet = subnets.find((s) => s.url === key);
           const value = networksMap[key];
           const floatingIp =
-            defaults.find(s => s.url === value) ||
-            floatingIps.find(s => s.url === value);
+            defaults.find((s) => s.url === value) ||
+            floatingIps.find((s) => s.url === value);
           return {
             subnet: {
               ...subnet,
@@ -216,7 +216,7 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
       flavorComparator,
     );
 
-  validateFlavor = value => {
+  validateFlavor = (value) => {
     if (
       this.props.flavor &&
       flavorValidator({ image: value }, this.props.flavor)
@@ -225,7 +225,7 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
     }
   };
 
-  setDataVolumeActive = value => this.setState({ isDataVolumeActive: value });
+  setDataVolumeActive = (value) => this.setState({ isDataVolumeActive: value });
 
   shouldComponentUpdate(prevProps) {
     if (
@@ -281,7 +281,7 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
         <CreateResourceFormGroup label={translate('Security groups')}>
           <Field
             name="attributes.security_groups"
-            component={fieldProps => (
+            component={(fieldProps) => (
               <OpenstackInstanceSecurityGroups
                 securityGroups={this.state.securityGroups}
                 input={fieldProps.input}
@@ -292,7 +292,7 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
         <CreateResourceFormGroup label={translate('Networks')}>
           <Field
             name="attributes.networks"
-            component={fieldProps => (
+            component={(fieldProps) => (
               <OpenstackInstanceNetworks
                 input={fieldProps.input}
                 subnets={this.state.subnets}
@@ -304,7 +304,7 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
         <CreateResourceFormGroup label={translate('Description')}>
           <Field
             name="attributes.description"
-            component={fieldProps => (
+            component={(fieldProps) => (
               <TextField maxLength={500} {...fieldProps.input} />
             )}
           />
@@ -322,7 +322,7 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentUser: getUser(state),
   image: offeringSelector(state, 'attributes.image'),
   flavor: offeringSelector(state, 'attributes.flavor'),

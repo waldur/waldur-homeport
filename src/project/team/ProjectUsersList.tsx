@@ -20,7 +20,7 @@ import { fetchProjectUsers, fetchProjectManagers } from './api';
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserRemoveButton } from './UserRemoveButton';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -86,7 +86,7 @@ const TableOptions: TableOptionsType = {
   table: 'project-users',
   fetchData: fetchProjectUsers,
   queryField: 'full_name',
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     project_uuid: props.project.uuid,
     o: 'concatenated_name',
   }),

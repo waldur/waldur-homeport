@@ -10,14 +10,14 @@ export const CategoryFilter: React.FC<{}> = () => (
     <label className="control-label">{translate('Category')}</label>
     <Field
       name="category"
-      component={fieldProps => (
+      component={(fieldProps) => (
         <Async
           placeholder={translate('Select category...')}
           loadOptions={categoryAutocomplete}
           valueKey="uuid"
           labelKey="title"
           value={fieldProps.input.value}
-          onChange={value => fieldProps.input.onChange(value)}
+          onChange={(value) => fieldProps.input.onChange(value)}
         />
       )}
     />

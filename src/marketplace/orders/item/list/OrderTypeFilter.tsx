@@ -9,7 +9,7 @@ export const OrderTypeFilter = () => (
     <label className="control-label">{translate('Type')}</label>
     <Field
       name="type"
-      component={fieldProps => (
+      component={(fieldProps) => (
         <Select
           placeholder={translate('Select type...')}
           options={[
@@ -18,7 +18,7 @@ export const OrderTypeFilter = () => (
             { value: 'Terminate', label: translate('Terminate') },
           ]}
           value={fieldProps.input.value}
-          onChange={value => fieldProps.input.onChange(value)}
+          onChange={(value) => fieldProps.input.onChange(value)}
         />
       )}
     />

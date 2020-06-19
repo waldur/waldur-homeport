@@ -13,8 +13,8 @@ import { getPrivateUserTabs } from './constants';
 
 const getSidebarItems = () =>
   getPrivateUserTabs()
-    .filter(item => isFeatureVisible(item.feature))
-    .map(item => ({ ...item, href: $state.href(item.state) }));
+    .filter((item) => isFeatureVisible(item.feature))
+    .map((item) => ({ ...item, href: $state.href(item.state) }));
 
 export const UserDropdownMenu = () => {
   const user = useSelector(getUser);

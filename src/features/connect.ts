@@ -4,8 +4,8 @@ import { isVisible } from '@waldur/store/config';
 import store from '@waldur/store/store';
 
 export function withFeature(Component) {
-  const mapStateToProps = state => ({
-    isVisible: feature => isVisible(state, feature),
+  const mapStateToProps = (state) => ({
+    isVisible: (feature) => isVisible(state, feature),
   });
 
   return connect(mapStateToProps)(Component);

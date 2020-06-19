@@ -8,10 +8,10 @@ import { ActionButton } from '@waldur/table/ActionButton';
 
 import { CatalogCreateDialog } from './CatalogCreateDialog';
 
-const createCatalogDialog = cluster =>
+const createCatalogDialog = (cluster) =>
   openModalDialog(CatalogCreateDialog, { resolve: { cluster } });
 
-export const CatalogCreateButton = props => {
+export const CatalogCreateButton = (props) => {
   const dispatch = useDispatch();
   const callback = React.useCallback(
     () => dispatch(createCatalogDialog(props.cluster)),

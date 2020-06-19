@@ -47,13 +47,13 @@ export const TemplateDetail = () => {
     state.value ? state.value.template.name : translate('Template details'),
   );
 
-  const project = useSelector(state =>
+  const project = useSelector((state) =>
     formValueSelector(FORM_ID)(state, 'project'),
   );
 
   const namespaces = React.useMemo(() => project?.namespaces || [], [project]);
 
-  const answers = useSelector(state =>
+  const answers = useSelector((state) =>
     formValueSelector(FORM_ID)(state, 'answers'),
   );
 

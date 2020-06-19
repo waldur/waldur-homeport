@@ -21,7 +21,7 @@ export const PlanField = (props: PlanFieldProps) =>
           <div style={{ flexGrow: 1 }}>
             <PlanSelectField
               plans={props.offering.plans.filter(
-                plan => plan.archived === false,
+                (plan) => plan.archived === false,
               )}
             />
           </div>

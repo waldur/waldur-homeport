@@ -9,7 +9,7 @@ interface OwnProps {
   className?: string;
 }
 
-const stateSelector = state => {
+const stateSelector = (state) => {
   const workspace = getWorkspace(state);
   if (workspace === 'organization') {
     return 'marketplace-offering-customer';
@@ -18,7 +18,7 @@ const stateSelector = state => {
   }
 };
 
-export const OfferingLink: React.FC<OwnProps> = props => {
+export const OfferingLink: React.FC<OwnProps> = (props) => {
   const state = useSelector(stateSelector);
   return (
     <Link

@@ -9,7 +9,7 @@ export const AnswerGroup = ({ answers, question, setAnswers }) => (
     value={
       { true: 'true', false: 'false', null: 'null' }[answers[question.uuid]]
     }
-    onChange={value =>
+    onChange={(value) =>
       setAnswers({
         ...answers,
         [question.uuid]: { true: true, false: false, null: null }[value],

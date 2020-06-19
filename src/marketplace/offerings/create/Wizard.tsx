@@ -29,7 +29,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
       disabled={props.submitting}
     />
     {/* Render all tabs so that all validators would be processed */}
-    {props.steps.map(step => (
+    {props.steps.map((step) => (
       <div key={step} className={step === props.step ? undefined : 'hidden'}>
         {React.createElement(props.tabs[step], {
           isVisible: step === props.step,

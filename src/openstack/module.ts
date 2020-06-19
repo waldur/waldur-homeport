@@ -13,7 +13,7 @@ import './provider';
 import './events';
 import './marketplace';
 
-export default module => {
+export default (module) => {
   openstackTenantModule();
   openstackInstanceModule(module);
   openstackVolumeModule();

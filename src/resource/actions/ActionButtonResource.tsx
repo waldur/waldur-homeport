@@ -28,7 +28,9 @@ async function loadActions(url) {
   return { resource, actions };
 }
 
-export const ActionButtonResource: React.FC<ActionButtonResourceProps> = props => {
+export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
+  props,
+) => {
   const { url } = props;
 
   const [{ loading, error, value }, getActions] = useAsyncFn(

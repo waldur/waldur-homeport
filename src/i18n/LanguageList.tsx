@@ -19,7 +19,7 @@ export const LanguageList = () => {
   } else if (len <= 3) {
     return (
       <ul className="list-inline language-list m-t-md text-center">
-        {languageChoices.map(language => (
+        {languageChoices.map((language) => (
           <li
             key={language.code}
             onClick={() => setLanguage(language)}

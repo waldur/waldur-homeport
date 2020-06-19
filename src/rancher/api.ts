@@ -19,13 +19,13 @@ import {
   HPACreateType,
 } from './types';
 
-export const getCatalog = catalogUuid =>
+export const getCatalog = (catalogUuid) =>
   getById<Catalog>('/rancher-catalogs/', catalogUuid);
 
-export const createCatalog = payload =>
+export const createCatalog = (payload) =>
   post<Catalog>('/rancher-catalogs/', payload);
 
-export const deleteCatalog = catalogUuid =>
+export const deleteCatalog = (catalogUuid) =>
   deleteById('/rancher-catalogs/', catalogUuid);
 
 export const getTemplate = (templateUuid: string) =>
@@ -34,14 +34,14 @@ export const getTemplate = (templateUuid: string) =>
 export const getTemplateVersion = (templateUuid: string, versionUuid: string) =>
   get<TemplateVersion>(
     `/rancher-template-versions/${templateUuid}/${versionUuid}/`,
-  ).then(response => response.data);
+  ).then((response) => response.data);
 
-export const getCluster = clusterUuid =>
+export const getCluster = (clusterUuid) =>
   getById<Cluster>('/rancher-clusters/', clusterUuid);
 
-export const getKubeconfigFile = resourceId =>
+export const getKubeconfigFile = (resourceId) =>
   get<KubeconfigFile>(`/rancher-clusters/${resourceId}/kubeconfig_file/`).then(
-    response => response.data.config,
+    (response) => response.data.config,
   );
 
 export const getProjects = (clusterUuid: string) =>
@@ -51,10 +51,10 @@ export const getProjects = (clusterUuid: string) =>
 
 export const getProjectSecrets = (projectUuid: string) =>
   get<Secret[]>(`/rancher-projects/${projectUuid}/secrets/`).then(
-    response => response.data,
+    (response) => response.data,
   );
 
-export const createApp = payload => post('/rancher-apps/', payload);
+export const createApp = (payload) => post('/rancher-apps/', payload);
 
 export const removeApp = (projectUuid, appId) =>
   remove(`/rancher-apps/`, {
@@ -64,11 +64,11 @@ export const removeApp = (projectUuid, appId) =>
     },
   });
 
-export const createNode = payload => post('/rancher-nodes/', payload);
+export const createNode = (payload) => post('/rancher-nodes/', payload);
 
-export const listWorkloads = params => getAll('/rancher-workloads/', params);
+export const listWorkloads = (params) => getAll('/rancher-workloads/', params);
 
-export const deleteHPA = hpaUuid => deleteById('/rancher-hpas/', hpaUuid);
+export const deleteHPA = (hpaUuid) => deleteById('/rancher-hpas/', hpaUuid);
 
 export const createHPA = (payload: HPACreateType) =>
   post<HPA>('/rancher-hpas/', payload);

@@ -1,7 +1,7 @@
 import { gettext } from '@waldur/i18n';
 import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/ResourceBreadcrumbsRegistry';
 
-ResourceBreadcrumbsRegistry.register('Rancher.Node', resource => {
+ResourceBreadcrumbsRegistry.register('Rancher.Node', (resource) => {
   return [
     {
       label: resource.cluster_name,

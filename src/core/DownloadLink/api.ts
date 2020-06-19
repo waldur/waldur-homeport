@@ -6,6 +6,6 @@ export const downloadFile = (url: string, filename: string): Promise<void> =>
     url,
     method: 'GET',
     responseType: 'blob',
-  }).then(response => {
+  }).then((response) => {
     FileSaver.saveAs(response.data, filename);
   });

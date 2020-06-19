@@ -10,7 +10,7 @@ import { OpenStackInstanceSummary } from './OpenStackInstanceSummary';
 import './marketplace';
 import './tabs';
 
-export default module => {
+export default (module) => {
   ResourceSummary.register(
     'OpenStackTenant.Instance',
     OpenStackInstanceSummary,

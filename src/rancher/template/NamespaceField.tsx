@@ -15,7 +15,7 @@ import { SelectControl } from './SelectControl';
 const NamespaceSwitcher = () => (
   <Field
     name="useNewNamespace"
-    component={fieldProps => (
+    component={(fieldProps) => (
       <a
         role="button"
         onClick={() => fieldProps.input.onChange(!fieldProps.input.value)}
@@ -33,12 +33,12 @@ interface NamespaceFieldProps {
 }
 
 export const NamespaceField: React.FC<NamespaceFieldProps> = ({ options }) => {
-  const useNew = useSelector(state =>
+  const useNew = useSelector((state) =>
     formValueSelector('RancherTemplateQuestions')(state, 'useNewNamespace'),
   );
 
   const renderControl = React.useCallback(
-    fieldProps =>
+    (fieldProps) =>
       useNew ? (
         <>
           <FormControl
@@ -61,7 +61,7 @@ export const NamespaceField: React.FC<NamespaceFieldProps> = ({ options }) => {
   );
 
   const namespaceNames = React.useMemo(
-    () => options.map(option => option.name),
+    () => options.map((option) => option.name),
     [options],
   );
 

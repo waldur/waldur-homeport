@@ -8,7 +8,7 @@ import { OpenStackBackupSummary } from './OpenStackBackupSummary';
 
 import './tabs';
 
-export default module => {
+export default (module) => {
   ResourceSummary.register('OpenStackTenant.Backup', OpenStackBackupSummary);
   module.component(
     'openstackBackupRestoreSummary',

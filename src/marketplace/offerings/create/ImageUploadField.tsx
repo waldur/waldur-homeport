@@ -7,7 +7,7 @@ import { FileUploadFieldProps } from '@waldur/form-react/FileUploadField';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-const getImageUrl = image => {
+const getImageUrl = (image) => {
   if (image instanceof File) {
     return URL.createObjectURL(image);
   }

@@ -19,7 +19,7 @@ export default function createAction(ctx): ResourceAction {
         o: 'name',
       });
 
-      action.fields.instance.choices = instances.map(choice => ({
+      action.fields.instance.choices = instances.map((choice) => ({
         value: choice.url,
         display_name: choice.name,
       }));

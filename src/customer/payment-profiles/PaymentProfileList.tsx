@@ -12,7 +12,7 @@ import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
 
 import { PaymentProfileActions } from './PaymentProfileActions';
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const router = useRouter();
 
   const tooltipAndDisabledAttributes = {
@@ -73,10 +73,10 @@ export const TableComponent = props => {
 const TableOptions = {
   table: PAYMENT_PROFILES_TABLE,
   fetchData: createFetcher('payment-profiles'),
-  mapPropsToFilter: props => ({ organization_uuid: props.customer.uuid }),
+  mapPropsToFilter: (props) => ({ organization_uuid: props.customer.uuid }),
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   isStaff: isStaff(state),
   isSupport: isSupport(state),

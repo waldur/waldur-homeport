@@ -25,7 +25,7 @@ const renderIcon = (src, imgStyle) => (
   />
 );
 
-export const optionRenderer = (config: RendererConfig) => option => {
+export const optionRenderer = (config: RendererConfig) => (option) => {
   const { iconKey, labelKey, tooltipKey, imgStyle } = config;
   let src;
   if (typeof iconKey === 'function') {

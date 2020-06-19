@@ -32,7 +32,7 @@ const openPaymentProfileUpdateDialog = (profile: PaymentProfile) =>
     size: 'lg',
   });
 
-const Actions = props => (
+const Actions = (props) => (
   <ButtonGroup>
     {!props.profile.is_active ? (
       <ActionButton
@@ -57,7 +57,7 @@ const Actions = props => (
   </ButtonGroup>
 );
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   openConfirmationDialog: (profile: PaymentProfile) =>
     openDialog(dispatch, profile),
   openUpdateDialog: (profile: PaymentProfile) =>

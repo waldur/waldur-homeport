@@ -8,7 +8,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { userUpdated } from '@waldur/workspace/actions';
 
-export const useEmailChange = user => {
+export const useEmailChange = (user) => {
   const [email, setEmail] = React.useState('');
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();

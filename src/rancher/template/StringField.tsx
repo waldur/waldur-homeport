@@ -7,7 +7,7 @@ import { FieldProps } from '../types';
 
 import { DecoratedField } from './DecoratedField';
 
-const renderControl = props => (
+const renderControl = (props) => (
   <>
     <FormControl {...props.input} />
     {props.meta.error && props.meta.touched && (
@@ -16,6 +16,6 @@ const renderControl = props => (
   </>
 );
 
-export const StringField: React.FC<FieldProps> = props => (
+export const StringField: React.FC<FieldProps> = (props) => (
   <DecoratedField {...props} component={renderControl} />
 );

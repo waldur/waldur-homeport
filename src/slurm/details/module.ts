@@ -5,7 +5,7 @@ import slurmAllocationUsageChart from './slurm-allocation-usage-chart';
 import slurmAllocationUsageTable from './slurm-allocation-usage-table';
 import { SlurmAllocationSummary } from './SlurmAllocationSummary';
 
-export default module => {
+export default (module) => {
   ResourceSummary.register('SLURM.Allocation', SlurmAllocationSummary);
   module.component(
     'slurmAllocationDetailsDialog',

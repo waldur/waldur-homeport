@@ -11,7 +11,7 @@ export default function createAction(): ResourceAction {
     name: 'console',
     title: translate('Open console'),
     type: 'callback',
-    execute: resource =>
+    execute: (resource) =>
       executeConsoleAction(resource, 'openstacktenant-instances'),
     validators: [validateState('OK'), validatePermissionsForConsoleAction],
   };

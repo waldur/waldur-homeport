@@ -17,7 +17,7 @@ interface IssueCreateDialogContainerProps {
 
 const FORM_ID = 'issueCreate';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const selector = formValueSelector(FORM_ID);
   const issueType = selector(state, 'type');
   const showParentField = issueType && issueType.subtask;
@@ -25,16 +25,16 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadProjectIssues: query =>
+  loadProjectIssues: (query) =>
     actions.loadProjectIssues({ query, project: ownProps.project }, dispatch),
 
-  loadProjectResources: query =>
+  loadProjectResources: (query) =>
     actions.loadProjectResources(
       { query, project: ownProps.project },
       dispatch,
     ),
 
-  createIssue: data =>
+  createIssue: (data) =>
     actions.createIssue({ ...data, project: ownProps.project }, dispatch),
 });
 

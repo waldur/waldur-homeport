@@ -14,7 +14,7 @@ interface OfferingGridProps extends OfferingsListType {
   width?: number;
 }
 
-export const OfferingGrid: React.FC<OfferingGridProps> = props => {
+export const OfferingGrid: React.FC<OfferingGridProps> = (props) => {
   if (props.loading) {
     return <LoadingSpinner />;
   }

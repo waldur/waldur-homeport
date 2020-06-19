@@ -19,7 +19,7 @@ const openViewOfferingScreenshotDialog = (screenshot: Screenshot) =>
     resolve: screenshot,
   });
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const { translate } = props;
 
   const columns = [
@@ -66,7 +66,7 @@ export const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => {
+const mapPropsToFilter = (props) => {
   const filter: Record<string, string | boolean> = {};
   if (props.offering) {
     filter.offering_uuid = props.offering.uuid;
@@ -86,12 +86,12 @@ const TableOptions = {
   exportFields: ['Name', 'Description', 'Created'],
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   offering: getOffering(state).offering,
 });
 
-const mapDispatchToProps = dispatch => ({
-  openViewScreenshotDialog: image =>
+const mapDispatchToProps = (dispatch) => ({
+  openViewScreenshotDialog: (image) =>
     dispatch(openViewOfferingScreenshotDialog(image)),
 });
 

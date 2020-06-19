@@ -5,7 +5,7 @@ import { removeApp } from '@waldur/rancher/api';
 
 import { ResourceDeleteButton } from '../ResourceDeleteButton';
 
-export const ApplicationDeleteButton = props => (
+export const ApplicationDeleteButton = (props) => (
   <ResourceDeleteButton
     apiFunction={() =>
       removeApp(props.application.project_uuid, props.application.id)

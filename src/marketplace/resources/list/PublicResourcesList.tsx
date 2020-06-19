@@ -31,7 +31,7 @@ interface StateProps {
   filter: ResourceFilter;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -109,7 +109,7 @@ const mapPropsToFilter = (props: StateProps) => {
   return filter;
 };
 
-const exportRow = row => [
+const exportRow = (row) => [
   row.name,
   row.uuid,
   row.offering_name,
@@ -138,7 +138,7 @@ export const TableOptions = {
   queryField: 'query',
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   filter: getFormValues('PublicResourcesFilter')(state),
 });

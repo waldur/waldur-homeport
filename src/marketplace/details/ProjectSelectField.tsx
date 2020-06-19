@@ -6,13 +6,13 @@ import { Field, change, FormAction } from 'redux-form';
 import { setCurrentProject } from '@waldur/workspace/actions';
 import { Project } from '@waldur/workspace/types';
 
-const PureProjectSelectField = props => (
+const PureProjectSelectField = (props) => (
   <Field
     name="project"
-    component={fieldProps => (
+    component={(fieldProps) => (
       <Select
         value={fieldProps.input.value}
-        onChange={value => {
+        onChange={(value) => {
           fieldProps.input.onChange(value);
           props.setCurrentProject(value);
         }}

@@ -85,7 +85,7 @@ const exportFields = () => [
   translate('Comment'),
 ];
 
-const mapPropsToFilter = props => {
+const mapPropsToFilter = (props) => {
   const filter: UsageReportRequest = {};
   if (props.usageFilter) {
     if (props.usageFilter.accounting_period) {
@@ -115,7 +115,7 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   usageFilter: getFormValues(FORM_ID)(state),
 });
 

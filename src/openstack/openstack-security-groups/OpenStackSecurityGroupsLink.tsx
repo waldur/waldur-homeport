@@ -5,17 +5,17 @@ import { openModalDialog } from '@waldur/modal/actions';
 
 import { SecurityGroupsDialog } from './SecurityGroupsDialog';
 
-export const PureOpenStackSecurityGroupsLink = props =>
+export const PureOpenStackSecurityGroupsLink = (props) =>
   props.items && props.items.length > 0 ? (
     <span className="cursor-pointer" onClick={props.openDetailsDialog}>
-      {props.items.map(item => item.name).join(', ')}
+      {props.items.map((item) => item.name).join(', ')}
       <i className="fa fa-info-circle m-l-xs" aria-hidden="true" />
     </span>
   ) : (
     <span>&mdash;</span>
   );
 
-export const openDetailsDialog = securityGroups =>
+export const openDetailsDialog = (securityGroups) =>
   openModalDialog(SecurityGroupsDialog, { resolve: { securityGroups } });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

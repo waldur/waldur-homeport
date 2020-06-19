@@ -39,12 +39,12 @@ const PureUserActivateButton = (props: UserActivateButtonProps) =>
     </Tooltip>
   ) : null;
 
-const mapStatToProps = state => ({
+const mapStatToProps = (state) => ({
   user: getUser(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: e => {
+  onClick: (e) => {
     e.target.blur();
     if (ownProps.row.is_active) {
       return actions.deactivateUser(ownProps.row, dispatch);

@@ -6,7 +6,7 @@ import { Row } from '@waldur/user/support/Row';
 
 import { RolesRenderer } from './RolesRenderer';
 
-export const UserDetailsTable = props => (
+export const UserDetailsTable = (props) => (
   <Table responsive={true} bordered={true}>
     <tbody>
       <Row label={translate('Full name')} value={props.user.full_name} />

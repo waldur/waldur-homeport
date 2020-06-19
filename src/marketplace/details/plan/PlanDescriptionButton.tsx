@@ -41,12 +41,12 @@ export const PurePlanDescriptionButton = withTranslation(
   },
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formData: getFormValues(FORM_ID)(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  showOfferingPlanDescription: planDescription =>
+const mapDispatchToProps = (dispatch) => ({
+  showOfferingPlanDescription: (planDescription) =>
     dispatch(showOfferingPlanDescription(planDescription)),
 });
 

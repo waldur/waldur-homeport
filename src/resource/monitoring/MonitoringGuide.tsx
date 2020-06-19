@@ -15,7 +15,7 @@ interface MonitoringGuideProps extends TranslateProps {
 }
 
 export const MonitoringGuide = (props: MonitoringGuideProps) => {
-  const formatGuide = template =>
+  const formatGuide = (template) =>
     formatTemplate(template, {
       ZABBIX_CLIENT_ID: props.resource.uuid,
       ZABBIX_SERVER_IP: props.link.internal_ip,

@@ -8,7 +8,7 @@ import { ToogleButtonFilter } from '@waldur/table/ToggleButtonFilter';
 const PureCustomerEventsFilter = () => (
   <Field
     name="feature"
-    component={props => (
+    component={(props) => (
       <ToogleButtonFilter
         choices={[
           {

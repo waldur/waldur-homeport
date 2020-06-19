@@ -56,6 +56,6 @@ function registerRoutes($stateProvider) {
 }
 registerRoutes.$inject = ['$stateProvider'];
 
-export default appModule => {
+export default (appModule) => {
   appModule.config(registerRoutes);
 };

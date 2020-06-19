@@ -31,7 +31,7 @@ export const AuthLogin = () => {
           </p>
         )}
         {providers.map(
-          provider =>
+          (provider) =>
             features[provider.providerKey] && (
               <AuthButton
                 key={provider.providerKey}

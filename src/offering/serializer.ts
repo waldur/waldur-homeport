@@ -5,7 +5,7 @@ export const serializer = (attributes, offering) => {
     payload.description = attributes.description;
   }
   if (offering.options.order) {
-    offering.options.order.forEach(key => {
+    offering.options.order.forEach((key) => {
       const options = offering.options.options[key];
       if (!options) {
         return;

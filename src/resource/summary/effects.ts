@@ -28,6 +28,6 @@ export function* summarySourceFetch(action) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.SUMMARY_RESOURCE_FETCH, summarySourceFetch);
 }

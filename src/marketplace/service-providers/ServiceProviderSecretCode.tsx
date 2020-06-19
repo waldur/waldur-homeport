@@ -61,7 +61,7 @@ class PureServiceProviderSecretCode extends React.Component<
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   secretCode: selectors.getServiceProviderSecretCode(state),
 });
 

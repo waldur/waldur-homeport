@@ -41,7 +41,7 @@ const AnswersSection = ({ questions }: { questions: Question[] }) => {
   );
 };
 
-export const TemplateQuestions = connector(props => (
+export const TemplateQuestions = connector((props) => (
   <Form onSubmit={props.handleSubmit(props.createApplication)}>
     <ApplicationConfiguration {...props} />
     {props.questions && <AnswersSection questions={props.questions} />}

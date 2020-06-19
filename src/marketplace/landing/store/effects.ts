@@ -75,7 +75,7 @@ function* gotoOffering(action) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.CATEGORIES_FETCH_START, getCategories);
   yield takeEvery(constants.OFFERINGS_FETCH_START, getOfferings);
   yield takeEvery(constants.GOTO_OFFERING, gotoOffering);

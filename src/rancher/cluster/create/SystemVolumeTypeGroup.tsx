@@ -7,7 +7,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { SimpleSelectField } from './SimpleSelectField';
 
-export const SystemVolumeTypeGroup = props =>
+export const SystemVolumeTypeGroup = (props) =>
   props.volumeTypes.length > 0 ? (
     <FormGroup
       label={translate('System volume type')}

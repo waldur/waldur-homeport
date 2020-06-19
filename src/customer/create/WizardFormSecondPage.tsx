@@ -8,7 +8,7 @@ import { CountryGroup } from './CountryGroup';
 import { InputGroup } from './InputGroup';
 import { WizardForm } from './WizardForm';
 
-export const WizardFormSecondPage = props => (
+export const WizardFormSecondPage = (props) => (
   <WizardForm {...props}>
     <PanelBody>
       <InputGroup

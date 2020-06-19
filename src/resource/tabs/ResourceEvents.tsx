@@ -1,7 +1,7 @@
 import { getEventsList } from '@waldur/events/BaseEventsList';
 
 export const ResourceEvents = getEventsList({
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     scope: props.resource.url,
   }),
 });

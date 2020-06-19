@@ -7,7 +7,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { SimpleSelectField } from './SimpleSelectField';
 
-export const SubnetGroup = props => (
+export const SubnetGroup = (props) => (
   <FormGroup
     label={translate('Subnet')}
     required={true}

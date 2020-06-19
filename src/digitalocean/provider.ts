@@ -8,5 +8,5 @@ ProvidersRegistry.register({
   icon: 'icon-digitalocean.png',
   endpoint: 'digitalocean',
   component: DigitalOceanForm,
-  serializer: data => ({ token: data.token }),
+  serializer: (data) => ({ token: data.token }),
 });

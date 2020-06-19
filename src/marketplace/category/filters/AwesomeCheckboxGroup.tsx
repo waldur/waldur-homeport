@@ -23,14 +23,14 @@ export const AwesomeCheckBoxGroup: React.FC<AwesomeCheckBoxGroupProps> = (
       <div key={index} className="m-l-sm">
         <Field
           name={`${props.groupType}-${props.fieldName}-${index}`}
-          component={prop => (
+          component={(prop) => (
             <AwesomeCheckbox
               id={`${option.key}-${props.outerIndex}`}
               label={option.title}
               {...prop.input}
             />
           )}
-          normalize={v => (v ? option.key : '')}
+          normalize={(v) => (v ? option.key : '')}
         />
       </div>
     ))}

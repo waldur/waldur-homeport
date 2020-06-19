@@ -15,7 +15,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({ user }) => {
   const callback = async () => {
     try {
       await Promise.all(
-        user.projects.map(project => Axios.delete(project.permission)),
+        user.projects.map((project) => Axios.delete(project.permission)),
       );
       if (user.permission) {
         await Axios.delete(user.permission);

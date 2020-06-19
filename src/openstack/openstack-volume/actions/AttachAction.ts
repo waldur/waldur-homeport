@@ -20,7 +20,7 @@ export default function createAction(): ResourceAction {
         '/openstacktenant-instances/',
         { params },
       );
-      action.fields.instance.choices = instances.map(choice => ({
+      action.fields.instance.choices = instances.map((choice) => ({
         value: choice.url,
         display_name: choice.name,
       }));

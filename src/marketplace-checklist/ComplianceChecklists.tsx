@@ -23,7 +23,7 @@ interface Checklist {
 
 const getChecklists = (projectId: string) =>
   get<Checklist[]>(`/projects/${projectId}/marketplace-checklists/`).then(
-    response => response.data,
+    (response) => response.data,
   );
 
 const ProjectChecklist = ({ project }) => {
@@ -43,7 +43,7 @@ const ProjectChecklist = ({ project }) => {
 
   return (
     <Row>
-      {state.value.map(checklist => (
+      {state.value.map((checklist) => (
         <Col key={checklist.uuid} md={3}>
           <ChartHeader label={`${checklist.score} %`} value={checklist.name} />
           <PieChart

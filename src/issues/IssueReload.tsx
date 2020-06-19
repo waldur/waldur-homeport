@@ -29,7 +29,7 @@ export const PureIssueReload = (props: PureIssueReloadProps) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   loading: getAttachmentsIsLoading(state) || getCommentsIsLoading(state),
 });
 

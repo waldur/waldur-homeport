@@ -8,7 +8,7 @@ import { TableOptionsType } from '@waldur/table/types';
 import { HPACreateButton } from './HPACreateButton';
 import { HPADeleteButton } from './HPADeleteButton';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table<HPA>
@@ -68,7 +68,7 @@ const TableComponent = props => {
 const TableOptions: TableOptionsType = {
   table: 'rancher-hpas',
   fetchData: createFetcher('rancher-hpas'),
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     cluster_uuid: props.resource.uuid,
   }),
 };
