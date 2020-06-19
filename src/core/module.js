@@ -1,6 +1,4 @@
 import ErrorMessageFormatter from './ErrorMessageFormatter';
-import extensionPoint from './extension-point-directive';
-import extensionPointService from './extension-point-service';
 import loadingSpinner from './LoadingSpinner';
 import sentryModule from './sentry';
 import injectServices from './services';
@@ -52,8 +50,6 @@ export default module => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
-  module.directive('extensionPoint', extensionPoint);
-  module.service('extensionPointService', extensionPointService);
   module.run(redirectToState);
   module.run(scrollToTop);
   module.run(injectServices);
