@@ -1,3 +1,6 @@
+import { translate } from '@waldur/i18n';
+
+import { getAuthResult, login } from './api';
 import template from './auth-valimo-dialog.html';
 import delay from './delay';
 
@@ -9,20 +12,11 @@ const authValimoDialog = {
   },
   controller: class AuthValimoDialogController {
     // @ngInject
-    constructor(
-      $scope,
-      $rootScope,
-      $state,
-      authService,
-      AuthValimoService,
-      ncUtilsFlash,
-      ENV,
-    ) {
+    constructor($scope, $rootScope, $state, authService, ncUtilsFlash, ENV) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$state = $state;
       this.authService = authService;
-      this.AuthValimoService = AuthValimoService;
       this.ncUtilsFlash = ncUtilsFlash;
       this.ENV = ENV;
     }
@@ -39,9 +33,7 @@ const authValimoDialog = {
 
     submit() {
       this.isAuthenticating = true;
-      return this.AuthValimoService.login(
-        this.mobilePrefix.concat(this.phoneNumber),
-      )
+      return login(this.mobilePrefix.concat(this.phoneNumber))
         .then(result => {
           this.challengeCode = result.message;
           this.authResultId = result.uuid;
@@ -54,7 +46,7 @@ const authValimoDialog = {
         .catch(response => {
           this.ncUtilsFlash.errorFromResponse(
             response,
-            gettext('Unable to authenticate using Mobile ID.'),
+            translate('Unable to authenticate using Mobile ID.'),
           );
         })
         .finally(() => {
@@ -65,7 +57,7 @@ const authValimoDialog = {
     async pollAuthResult() {
       let result;
       do {
-        result = await this.AuthValimoService.getAuthResult(this.authResultId);
+        result = await getAuthResult(this.authResultId);
         await delay(2000);
       } while (
         this.isAlive &&
@@ -89,13 +81,13 @@ const authValimoDialog = {
           this.ncUtilsFlash.error(result.details);
           return;
         }
-        const message = gettext(
+        const message = translate(
           'Authentication with Mobile ID has been canceled by user or timed out. Details:',
         );
         this.ncUtilsFlash.error(message + result.details);
       } else {
         this.ncUtilsFlash.error(
-          gettext('Unexpected exception happened during login process.'),
+          translate('Unexpected exception happened during login process.'),
         );
       }
     }
