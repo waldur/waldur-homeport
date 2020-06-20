@@ -28,7 +28,7 @@ const useChecklistSelector = (categoryId: string) => {
       setChecklistLoading(true);
       setChecklistErred(false);
       try {
-        const checklists = (await getChecklists(categoryId)).map(item => ({
+        const checklists = (await getChecklists(categoryId)).map((item) => ({
           ...item,
           name: translate('{name} ({questions_count} questions)', item),
         }));
@@ -110,7 +110,7 @@ export const useProjectChecklist = (project, categoryId) => {
   const submit = useCallback(async () => {
     setSubmitting(true);
     try {
-      const payload = Object.keys(answers).map(question_uuid => ({
+      const payload = Object.keys(answers).map((question_uuid) => ({
         question_uuid,
         value: answers[question_uuid],
       }));

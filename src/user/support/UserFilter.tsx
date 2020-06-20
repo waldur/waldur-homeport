@@ -93,7 +93,7 @@ const PureUserFilter = (props: UserFilterProps) => (
   </form>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   nativeNameVisible: getNativeNameVisible(state),
 });
 

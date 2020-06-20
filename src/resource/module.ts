@@ -1,6 +1,6 @@
 import actionsModule from './actions/module';
 import './events';
 
-export default module => {
+export default (module) => {
   actionsModule(module);
 };

@@ -13,13 +13,13 @@ const initialProps = {
 const renderWrapper = (props?) =>
   shallow(<PureIssueCommentsFormMainContainer {...initialProps} {...props} />);
 
-const clickTogglerButton = container =>
+const clickTogglerButton = (container) =>
   container.find('.btn.btn-default').simulate('click');
-const hasOpenedContent = container =>
+const hasOpenedContent = (container) =>
   container.contains(
     <span className="text-muted">{translate('Comment')}</span>,
   );
-const hasClosedContent = container =>
+const hasClosedContent = (container) =>
   container.contains(
     <button className="btn btn-default">
       <i className="fa fa-comment-o" />

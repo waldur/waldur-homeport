@@ -15,7 +15,7 @@ import { OrderItemslistTablePlaceholder } from './OrderItemsListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Offering'),
@@ -66,7 +66,7 @@ export const TableComponent = props => {
 const OrderItemsListTableOptions = {
   table: TABLE_PUBLIC_ORDERS,
   fetchData: createFetcher('marketplace-order-items'),
-  mapPropsToFilter: props => {
+  mapPropsToFilter: (props) => {
     const filter: Record<string, string> = {
       provider_uuid: props.customer.uuid,
     };
@@ -91,7 +91,7 @@ const OrderItemsListTableOptions = {
   },
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filter: getFormValues('OrderItemFilter')(state),
   customer: getCustomer(state),
 });

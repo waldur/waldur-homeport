@@ -12,9 +12,9 @@ import {
 } from '@waldur/booking/utils';
 
 export class EditableCalendar extends React.Component<EditableCalendarProps> {
-  getValidRange = events => ({
-    start: Math.min(...events.map(event => moment(event.start).valueOf())),
-    end: Math.max(...events.map(event => moment(event.end).valueOf())),
+  getValidRange = (events) => ({
+    start: Math.min(...events.map((event) => moment(event.start).valueOf())),
+    end: Math.max(...events.map((event) => moment(event.end).valueOf())),
   });
 
   getCalendarConfig = () => {
@@ -40,12 +40,8 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
         minTime: config.businessHours.startTime,
         maxTime: config.businessHours.endTime,
         validRange: {
-          start: moment(validRange.start)
-            .startOf('month')
-            .format(),
-          end: moment(validRange.end)
-            .endOf('month')
-            .format(),
+          start: moment(validRange.start).startOf('month').format(),
+          end: moment(validRange.end).endOf('month').format(),
         },
         dayRender: ({ date, el }) => {
           const curDate = moment(date);
@@ -60,11 +56,11 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
     );
   };
 
-  getAvailabilitySlots = events => {
+  getAvailabilitySlots = (events) => {
     const { slotDuration } = this.getCalendarConfig();
     const availability = [];
 
-    this.props.excludedEvents.map(event =>
+    this.props.excludedEvents.map((event) =>
       availability.push(...createAvailabilityDates(event)),
     );
 
@@ -74,8 +70,8 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
     );
 
     return slots.filter(
-      slot =>
-        !events.find(item => {
+      (slot) =>
+        !events.find((item) => {
           const slotStart = moment(slot.start);
           const slotEnd = moment(slot.end);
 
@@ -101,12 +97,12 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
         options={this.getCalendarConfig()}
         availabiltySlots={this.getAvailabilitySlots(events)}
         addEventCb={fields.push}
-        removeEventCb={oldID => deleteCalendarBooking(fields, { id: oldID })}
+        removeEventCb={(oldID) => deleteCalendarBooking(fields, { id: oldID })}
       />
     );
   }
 }
 
-export const CalendarField = props => (
+export const CalendarField = (props) => (
   <FieldArray name={props.name} component={EditableCalendar} {...props} />
 );

@@ -74,7 +74,7 @@ const exportFields = () => [
   translate('State'),
 ];
 
-const mapPropsToFilter = props => ({
+const mapPropsToFilter = (props) => ({
   service_settings_uuid: props.provider_uuid,
 });
 

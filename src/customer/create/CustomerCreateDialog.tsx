@@ -43,9 +43,9 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
   const router = useRouter();
 
   const createOrganization = React.useCallback(
-    async formData => {
+    async (formData) => {
       const payload: Record<string, string | boolean> = {};
-      CUSTOMER_FIELDS.forEach(field => {
+      CUSTOMER_FIELDS.forEach((field) => {
         if (formData[field]) {
           payload[field] = formData[field];
         }

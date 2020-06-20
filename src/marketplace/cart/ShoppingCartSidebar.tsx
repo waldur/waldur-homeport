@@ -62,7 +62,7 @@ export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) =>
     </aside>
   ) : null;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   project: getProject(state),
   total: getTotal(state),

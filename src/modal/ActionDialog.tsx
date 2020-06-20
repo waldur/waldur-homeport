@@ -13,7 +13,7 @@ interface ActionDialogProps {
   error?: string;
 }
 
-export const ActionDialog: React.FC<ActionDialogProps> = props => (
+export const ActionDialog: React.FC<ActionDialogProps> = (props) => (
   <form onSubmit={props.onSubmit}>
     <ModalDialog
       title={props.title}

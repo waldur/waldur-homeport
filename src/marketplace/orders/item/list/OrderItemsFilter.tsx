@@ -45,7 +45,7 @@ const filterSelector = createSelector(
   },
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   offeringFilter: filterSelector(state),
 });
 

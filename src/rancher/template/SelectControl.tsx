@@ -9,7 +9,7 @@ export const SelectControl = ({ input, options, getLabel, getValue }) => (
     value={getValue(input.value)}
     onChange={(e: any) =>
       input.onChange(
-        options.find(option => getValue(option) === e.target.value),
+        options.find((option) => getValue(option) === e.target.value),
       )
     }
   >

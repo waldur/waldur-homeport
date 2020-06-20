@@ -11,7 +11,7 @@ import { showHookRemoveConfirmation } from './actions';
 import { removeHook } from './api';
 import * as constants from './constants';
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   showConfirmDialog: (action: () => void) =>
     dispatch(showHookRemoveConfirmation(action)),
   removeEntity: (id: string) =>

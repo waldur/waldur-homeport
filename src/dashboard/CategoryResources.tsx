@@ -32,7 +32,7 @@ export class CategoryResources extends React.Component<CategoryResourcesProps> {
       <Panel title={this.props.category.title} className="m-t-md">
         <ToggleButtonGroup
           value={this.state.choice}
-          onChange={value => this.setState({ choice: value })}
+          onChange={(value) => this.setState({ choice: value })}
           type="radio"
           name="metrics"
           defaultValue={0}

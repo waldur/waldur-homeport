@@ -21,7 +21,7 @@ export const wrapTooltip = (label, children) =>
     children
   );
 
-export const ActionButton: React.FC<ActionButtonProps> = props =>
+export const ActionButton: React.FC<ActionButtonProps> = (props) =>
   wrapTooltip(
     props.tooltip,
     <button

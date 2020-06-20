@@ -22,7 +22,7 @@ class PaginationButton extends React.Component<PaginationButtonProps> {
     disabled: false,
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     const { disabled, onSelect, eventKey } = this.props;
 
     if (disabled) {

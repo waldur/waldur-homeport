@@ -12,7 +12,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { CategoryFilter } from './CategoryFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
 
-const PurePublicResourcesFilter = props => (
+const PurePublicResourcesFilter = (props) => (
   <Row>
     <OfferingAutocomplete offeringFilter={props.offeringFilter} />
     <OrganizationAutocomplete />
@@ -21,11 +21,11 @@ const PurePublicResourcesFilter = props => (
   </Row>
 );
 
-const filterSelector = createSelector(getCustomer, customer => ({
+const filterSelector = createSelector(getCustomer, (customer) => ({
   customer_uuid: customer.uuid,
 }));
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   offeringFilter: filterSelector(state),
 });
 

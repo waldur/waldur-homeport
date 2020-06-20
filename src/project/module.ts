@@ -3,7 +3,7 @@ import teamModule from './team/module';
 
 import './events';
 
-export default module => {
+export default (module) => {
   module.component('projectPolicies', projectPolicies);
   teamModule(module);
 };

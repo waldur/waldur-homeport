@@ -38,8 +38,10 @@ const PureInvoicesFilter = () => {
   return (
     <Field
       name="state"
-      normalize={value => (Array.isArray(value) ? value.filter(x => x) : value)}
-      component={props => (
+      normalize={(value) =>
+        Array.isArray(value) ? value.filter((x) => x) : value
+      }
+      component={(props) => (
         <ToogleButtonFilter choices={choices} {...props.input} />
       )}
     />

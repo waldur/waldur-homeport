@@ -12,7 +12,7 @@ export function angular2react<Props extends object>(
   componentName: string,
   componentBindings?: string[],
 ): React.FC<Props> {
-  const Wrapper: React.FC<Props> = props => {
+  const Wrapper: React.FC<Props> = (props) => {
     const [didInitialCompile, setDidInitialCompile] = React.useState(false);
 
     // Initialize AngularJS component scope when ReactJS component is mounted

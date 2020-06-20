@@ -1,5 +1,5 @@
-import template from './openstack-instance-networks.html';
 import { internalIpFormatter } from './openstack-instance-config';
+import template from './openstack-instance-networks.html';
 
 const FLOATING_IP_CHOICES = [
   {
@@ -42,7 +42,7 @@ const openstackInstanceNetworks = {
     }
 
     initSubnetChoices() {
-      this.subnets = this.field.choices.subnets.map(subnet => ({
+      this.subnets = this.field.choices.subnets.map((subnet) => ({
         display_name: internalIpFormatter(subnet),
         value: subnet.url,
       }));
@@ -54,24 +54,26 @@ const openstackInstanceNetworks = {
 
     serializeSubnets() {
       const items = this.getValidItems();
-      this.model.internal_ips_set = items.map(item => ({
+      this.model.internal_ips_set = items.map((item) => ({
         subnet: item.subnet,
       }));
     }
 
     initFloatingIpChoices() {
-      const floating_ips = this.field.choices.floating_ips.map(floating_ip => ({
-        display_name: floating_ip.address,
-        value: floating_ip.url,
-      }));
+      const floating_ips = this.field.choices.floating_ips.map(
+        (floating_ip) => ({
+          display_name: floating_ip.address,
+          value: floating_ip.url,
+        }),
+      );
       this.floating_ips = FLOATING_IP_CHOICES.concat(floating_ips);
     }
 
     serializeFloatingIps() {
       const items = this.getValidItems();
       this.model.floating_ips = items
-        .filter(item => item.floating_ip !== '')
-        .map(item => {
+        .filter((item) => item.floating_ip !== '')
+        .map((item) => {
           // Auto-assign floating IP
           if (item.floating_ip === true) {
             return {
@@ -87,12 +89,12 @@ const openstackInstanceNetworks = {
     }
 
     getValidItems() {
-      return this.items.filter(item => item.subnet);
+      return this.items.filter((item) => item.subnet);
     }
 
     initSubnetFromModel() {
       if (this.model.internal_ips_set) {
-        this.items = this.model.internal_ips_set.map(item => ({
+        this.items = this.model.internal_ips_set.map((item) => ({
           floating_ip: '',
           subnet: item.subnet,
         }));
@@ -100,13 +102,13 @@ const openstackInstanceNetworks = {
     }
 
     getFreeSubnets(current_choice) {
-      let used_choices = {};
-      angular.forEach(this.items, item => {
+      const used_choices = {};
+      angular.forEach(this.items, (item) => {
         if (item.subnet && item.subnet !== current_choice) {
           used_choices[item.subnet] = true;
         }
       });
-      return this.subnets.filter(choice => !used_choices[choice.value]);
+      return this.subnets.filter((choice) => !used_choices[choice.value]);
     }
 
     hasFreeSubnets() {
@@ -114,8 +116,8 @@ const openstackInstanceNetworks = {
     }
 
     getFreeFloatingIps(current_choice) {
-      let used_choices = {};
-      angular.forEach(this.items, item => {
+      const used_choices = {};
+      angular.forEach(this.items, (item) => {
         if (
           item.floating_ip &&
           item.floating_ip !== true &&
@@ -124,7 +126,7 @@ const openstackInstanceNetworks = {
           used_choices[item.floating_ip] = true;
         }
       });
-      return this.floating_ips.filter(choice => !used_choices[choice.value]);
+      return this.floating_ips.filter((choice) => !used_choices[choice.value]);
     }
 
     addItem() {

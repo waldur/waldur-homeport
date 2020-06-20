@@ -5,10 +5,11 @@ import {
   isStaff,
 } from '@waldur/workspace/selectors';
 
-const getOrders = state => state.marketplace.orders;
-export const getStateChangeStatus = state => getOrders(state).stateChangeStatus;
+const getOrders = (state) => state.marketplace.orders;
+export const getStateChangeStatus = (state) =>
+  getOrders(state).stateChangeStatus;
 
-export const orderCanBeApproved = state => {
+export const orderCanBeApproved = (state) => {
   if (isStaff(state)) {
     return true;
   }

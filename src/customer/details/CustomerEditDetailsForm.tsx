@@ -21,7 +21,7 @@ const PureCustomerEditDetailsForm = (props: ConnectedProps) => (
       <Field
         name="image"
         validate={required}
-        component={fieldProps => (
+        component={(fieldProps) => (
           <FileUploadField
             {...fieldProps}
             accept=".jpg, .jpeg, .png, .svg"

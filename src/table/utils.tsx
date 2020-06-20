@@ -24,7 +24,7 @@ const getId = (row, index) => {
 
 export function connectTable(options: TableOptionsType) {
   return function wrapper<P = {}>(Component: React.ComponentType<P>) {
-    const Wrapper: React.ComponentType<P> = props => {
+    const Wrapper: React.ComponentType<P> = (props) => {
       const { table: rawTableId } = options;
       const extraId = options.mapPropsToTableId
         ? options.mapPropsToTableId(props)
@@ -32,7 +32,7 @@ export function connectTable(options: TableOptionsType) {
       const table = `${rawTableId}${extraId ? '-' + extraId.join('-') : ''}`;
       registerTable({ ...options, table });
 
-      const mapDispatchToProps = dispatch => ({
+      const mapDispatchToProps = (dispatch) => ({
         fetch: () => {
           let propFilter;
           if (options.mapPropsToFilter) {
@@ -42,29 +42,29 @@ export function connectTable(options: TableOptionsType) {
             actions.fetchListStart(table, propFilter, options.pullInterval),
           );
         },
-        gotoPage: page => dispatch(actions.fetchListGotoPage(table, page)),
-        exportAs: format =>
+        gotoPage: (page) => dispatch(actions.fetchListGotoPage(table, page)),
+        exportAs: (format) =>
           dispatch(actions.exportTableAs(table, format, props)),
-        setQuery: query => dispatch(actions.setFilterQuery(table, query)),
-        updatePageSize: size => dispatch(actions.updatePageSize(table, size)),
+        setQuery: (query) => dispatch(actions.setFilterQuery(table, query)),
+        updatePageSize: (size) => dispatch(actions.updatePageSize(table, size)),
         resetPagination: () => dispatch(actions.resetPagination(table)),
         sortList: (sorting: Sorting) =>
           dispatch(actions.sortListStart(table, sorting)),
         toggleRow: (row: any) => dispatch(actions.toggleRow(table, row)),
       });
 
-      const filterByFeature = state => columns =>
+      const filterByFeature = (state) => (columns) =>
         columns.filter(
-          column => !column.feature || isVisible(state, column.feature),
+          (column) => !column.feature || isVisible(state, column.feature),
         );
 
-      const filterColumns = state => columns => {
+      const filterColumns = (state) => (columns) => {
         return filterByFeature(state)(columns).filter(
-          column => column.visible === undefined || column.visible === true,
+          (column) => column.visible === undefined || column.visible === true,
         );
       };
 
-      const mapStateToProps = state => ({
+      const mapStateToProps = (state) => ({
         filterColumns: filterColumns(state),
         ...getTableState(table)(state),
         rows: selectTableRows(state, table),
@@ -83,7 +83,7 @@ export function connectTable(options: TableOptionsType) {
   };
 }
 
-export const formatLongText = value =>
+export const formatLongText = (value) =>
   value.length > 100 ? (
     <Tooltip label={value} id="longText">
       <span className="ellipsis" style={{ width: 150 }}>
@@ -104,7 +104,7 @@ export const transformRows = (rows: any[]) => {
   return { entities, order };
 };
 
-export const renderFieldOrDash = field => (field ? field : DASH_ESCAPE_CODE);
+export const renderFieldOrDash = (field) => (field ? field : DASH_ESCAPE_CODE);
 
 export function getMessage({ query, verboseName }) {
   const context = { verboseName: verboseName || translate('items') };

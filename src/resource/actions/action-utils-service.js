@@ -16,8 +16,8 @@ export default function actionUtilsService(
   $injector,
   features,
 ) {
-  this.loadActions = function(model) {
-    return UsersService.getCurrentUser().then(user => {
+  this.loadActions = function (model) {
+    return UsersService.getCurrentUser().then((user) => {
       const config = ActionConfigurationRegistry.getActions(
         model.resource_type,
       );
@@ -25,7 +25,7 @@ export default function actionUtilsService(
         return this.parseActions(config, { resource: model, user });
       }
       return Axios.request({ url: model.url, method: 'OPTIONS' }).then(
-        response => {
+        (response) => {
           const order =
             (config && config.order) || Object.keys(response.data.actions);
           const options = (config && config.options) || {};
@@ -50,7 +50,7 @@ export default function actionUtilsService(
     });
   };
 
-  this.parseActions = function(actions, context) {
+  this.parseActions = function (actions, context) {
     const result = {};
     for (const func of actions) {
       const { name, fields, validators, isVisible, ...rest } = func(context);
@@ -74,7 +74,7 @@ export default function actionUtilsService(
     return result;
   };
 
-  this.parseValidators = function(validators, context) {
+  this.parseValidators = function (validators, context) {
     let reason = '';
     if (validators) {
       for (const validator of validators) {
@@ -86,7 +86,7 @@ export default function actionUtilsService(
     }
   };
 
-  this.parseFields = function(fields) {
+  this.parseFields = function (fields) {
     if (fields) {
       const options = {};
       for (const field of fields) {
@@ -96,7 +96,7 @@ export default function actionUtilsService(
     }
   };
 
-  this.actionHasToBeAdded = function(action, model, user) {
+  this.actionHasToBeAdded = function (action, model, user) {
     if (action.staffOnly && !user.is_staff) {
       return false;
     }
@@ -106,7 +106,7 @@ export default function actionUtilsService(
     }
     action.isVisible =
       action.isVisible ||
-      function() {
+      function () {
         return true;
       };
     if (!action.isVisible(model, UsersService.currentUser)) {
@@ -120,7 +120,7 @@ export default function actionUtilsService(
     return action.hasOwnProperty('enabled');
   };
 
-  this.buttonClick = function(controller, model, name, action) {
+  this.buttonClick = function (controller, model, name, action) {
     if (action.type === 'button') {
       if (!action.destructive || this.confirmAction(model, name)) {
         return this.applyAction(controller, model, action);
@@ -134,7 +134,7 @@ export default function actionUtilsService(
     return $q.reject();
   };
 
-  this.confirmAction = function(model, name) {
+  this.confirmAction = function (model, name) {
     const custom = ActionConfigurationRegistry.getActions(model.resource_type);
     const confirmTextSuffix = (custom && custom.delete_message) || '';
     if (name === 'destroy') {
@@ -158,7 +158,7 @@ export default function actionUtilsService(
     }
   };
 
-  this.applyAction = function(controller, resource, action) {
+  this.applyAction = function (controller, resource, action) {
     const vm = this;
     const promise =
       action.method === 'DELETE'
@@ -191,7 +191,7 @@ export default function actionUtilsService(
     );
   };
 
-  this.handleActionSuccess = function(action) {
+  this.handleActionSuccess = function (action) {
     const template =
       action.successMessage ||
       translate('Request to {action} has been accepted.', {
@@ -205,7 +205,7 @@ export default function actionUtilsService(
     }
   };
 
-  this.openActionDialog = function(controller, resource, name, action) {
+  this.openActionDialog = function (controller, resource, name, action) {
     const component = action.component || 'actionDialog';
     const params = { component, size: action.dialogSize };
     if (action.useResolve) {
@@ -226,7 +226,7 @@ export default function actionUtilsService(
       params.scope = dialogScope;
     }
     if (typeof component === 'string') {
-      $uibModal.open(params).result.then(function() {
+      $uibModal.open(params).result.then(function () {
         $rootScope.$broadcast('actionApplied', name);
       });
     } else {
@@ -234,8 +234,8 @@ export default function actionUtilsService(
     }
   };
 
-  this.loadNestedActions = function(controller, model, tab) {
-    return this.loadActions(model).then(actions => {
+  this.loadNestedActions = function (controller, model, tab) {
+    return this.loadActions(model).then((actions) => {
       const nestedActions = [];
       angular.forEach(actions, (action, key) => {
         if (action.tab && action.tab === tab) {

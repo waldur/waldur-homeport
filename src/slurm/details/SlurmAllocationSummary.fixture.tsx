@@ -8,7 +8,7 @@ import '@waldur/slurm/provider';
 
 import { SlurmAllocationSummary } from './SlurmAllocationSummary';
 
-export const renderSummary = props => {
+export const renderSummary = (props) => {
   const mockStore = configureStore();
   const store = mockStore();
   return mount(
@@ -19,10 +19,7 @@ export const renderSummary = props => {
 };
 
 export const getField = (wrapper: ReactWrapper, label: string): string =>
-  wrapper
-    .find({ label })
-    .find('dd')
-    .text();
+  wrapper.find({ label }).find('dd').text();
 
 export const resource = {
   resource_type: 'SLURM.Allocation',

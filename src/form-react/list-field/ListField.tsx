@@ -11,11 +11,13 @@ export const ListField = (params: ListFieldParameters) => {
       <div className="col-sm-5 same-padding-as-control-label">
         <Field
           name={params.formFieldName}
-          component={fieldProps => (
+          component={(fieldProps) => (
             <InternalListField
               configuration={params.configuration}
               selectedOption={fieldProps.input.value}
-              onOptionSelected={newValue => fieldProps.input.onChange(newValue)}
+              onOptionSelected={(newValue) =>
+                fieldProps.input.onChange(newValue)
+              }
             />
           )}
         />

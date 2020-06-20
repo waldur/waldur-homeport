@@ -8,14 +8,14 @@ import {
 } from './utils';
 
 function replace() {
-  return function(input, search, replacement) {
+  return function (input, search, replacement) {
     return input.replace(new RegExp(search, 'g'), replacement);
   };
 }
 
 // @ngInject
 function defaultCurrency(ENV, $filter) {
-  return function(value) {
+  return function (value) {
     if (
       value === undefined ||
       value === null ||
@@ -35,14 +35,14 @@ function defaultCurrency(ENV, $filter) {
 }
 
 function shortDate() {
-  return function(input) {
+  return function (input) {
     if (input) {
       return formatDate(input);
     }
   };
 }
 
-export default module => {
+export default (module) => {
   module.filter('filesize', () => formatFilesize);
   module.filter('titleCase', () => titleCase);
   module.filter('snakeCase', () => formatSnakeCase);

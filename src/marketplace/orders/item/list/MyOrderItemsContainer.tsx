@@ -21,7 +21,7 @@ interface Props {
   setOrderStateFilter: (arg: StateOptions) => void;
 }
 
-const filterOptionsSelector = state =>
+const filterOptionsSelector = (state) =>
   state.marketplace.orders.tableFilter.stateOptions;
 
 export const MyOrderItemsContainer: React.FC<Props> = () => {
@@ -31,7 +31,7 @@ export const MyOrderItemsContainer: React.FC<Props> = () => {
   React.useEffect(() => {
     const { filterState } = $state.params;
     if (filterState) {
-      const filterOption = filterOptions.find(op => op.value === filterState);
+      const filterOption = filterOptions.find((op) => op.value === filterState);
       if (filterOption) {
         dispatch(setOrderStateFilter('MyOrderItemsFilter', filterOption));
       }

@@ -23,7 +23,7 @@ const PureMyOrderItemsFilter = (props: StateProps) => (
   </Row>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
 });
 

@@ -41,9 +41,7 @@ const addProjectMember = {
           format: 'dd.MM.yyyy',
           altInputFormats: ['M!/d!/yyyy'],
           dateOptions: {
-            minDate: moment()
-              .add(1, 'days')
-              .toDate(),
+            minDate: moment().add(1, 'days').toDate(),
             startingDay: 1,
           },
         },
@@ -71,8 +69,8 @@ const addProjectMember = {
       } else {
         return CustomersService.getUsers(
           this.resolve.currentCustomer.uuid,
-        ).then(users => {
-          this.users = users.filter(user => {
+        ).then((users) => {
+          this.users = users.filter((user) => {
             return this.resolve.addedUsers.indexOf(user.uuid) === -1;
           });
         });
@@ -87,7 +85,7 @@ const addProjectMember = {
           this.close();
           this.saving = false;
         },
-        error => {
+        (error) => {
           this.saving = false;
           this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
         },

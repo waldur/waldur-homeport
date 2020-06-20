@@ -16,7 +16,7 @@ import { InvitationSendButton } from './actions/InvitationSendButton';
 import { InvitationsFilter } from './InvitationsFilter';
 import { RoleField } from './RoleField';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -69,7 +69,7 @@ const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => ({
+const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
   customer: props.customer.uuid,
 });
@@ -81,7 +81,7 @@ const TableOptions: TableOptionsType = {
   queryField: 'email',
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   stateFilter: getFormValues('InvitationsFilter')(state),
 });

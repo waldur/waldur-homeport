@@ -8,10 +8,10 @@ import { ActionButton } from '@waldur/table/ActionButton';
 
 import { CatalogDeleteDialog } from './CatalogDeleteDialog';
 
-const deleteCatalogDialog = catalog =>
+const deleteCatalogDialog = (catalog) =>
   openModalDialog(CatalogDeleteDialog, { resolve: { catalog } });
 
-export const CatalogDeleteButton = props => {
+export const CatalogDeleteButton = (props) => {
   const dispatch = useDispatch();
   const callback = React.useCallback(
     () => dispatch(deleteCatalogDialog(props.catalog)),

@@ -3,19 +3,20 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { OfferingAddScreenshotButton } from '@waldur/marketplace/offerings/actions/OfferingAddScreenshotButton';
 import { OfferingHeader } from '@waldur/marketplace/offerings/details/OfferingHeader';
-import { OfferingScreenshotsList } from '@waldur/marketplace/offerings/OfferingScreenshotsList';
 import { loadOfferingStart } from '@waldur/marketplace/offerings/store/actions';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering } from '@waldur/marketplace/types';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
+
+import { CreateScreenshotButton } from './CreateScreenshotButton';
+import { OfferingScreenshotsList } from './OfferingScreenshotsList';
 
 const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
   return [
@@ -38,34 +39,36 @@ const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
   ];
 };
 
-let OfferingScreenshotsContainer = props => {
+export const ScreenshotsContainer = () => {
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (offering_uuid) {
-      props.loadOffering(offering_uuid);
+      dispatch(loadOfferingStart(offering_uuid));
     }
-  }, [offering_uuid]);
+  }, [dispatch, offering_uuid]);
 
-  useBreadcrumbsFn(
-    () => (props.offering ? getBreadcrumbs(props.offering) : []),
-    [props.offering],
-  );
+  const offering = useSelector((state) => getOffering(state).offering);
+
+  useBreadcrumbsFn(() => (offering ? getBreadcrumbs(offering) : []), [
+    offering,
+  ]);
 
   useTitle(
-    props.offering
+    offering
       ? translate('Offering screenshots ({name})', {
-          name: props.offering.name,
+          name: offering.name,
         })
       : translate('Offering screenshots'),
   );
 
-  if (!(props.offering.name && offering_uuid)) {
+  if (!offering) {
     return <LoadingSpinner />;
-  } else if (props.offering.name) {
-    const offering = props.offering;
+  } else if (offering.name) {
     return (
       <>
         <Row>
@@ -74,7 +77,7 @@ let OfferingScreenshotsContainer = props => {
           </Col>
         </Row>
 
-        <OfferingAddScreenshotButton offering={offering} />
+        <CreateScreenshotButton offering={offering} />
 
         <OfferingScreenshotsList />
       </>
@@ -82,18 +85,3 @@ let OfferingScreenshotsContainer = props => {
   }
   return null;
 };
-
-const mapStateToProps = state => ({
-  offering: getOffering(state).offering,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadOffering: offeringUuid => dispatch(loadOfferingStart(offeringUuid)),
-});
-
-OfferingScreenshotsContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(OfferingScreenshotsContainer);
-
-export { OfferingScreenshotsContainer };

@@ -28,7 +28,7 @@ export const AwesomeCheckbox: React.FC<AwesomeCheckboxProps> = (
       type="checkbox"
       id={props.id}
       checked={props.value}
-      onChange={event => props.onChange(event.target.checked)}
+      onChange={(event) => props.onChange(event.target.checked)}
       disabled={props.disabled}
     />
     <label htmlFor={props.id}>{props.label}</label>

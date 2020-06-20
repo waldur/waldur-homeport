@@ -14,7 +14,7 @@ const appstoreFieldMultiselect = {
       }
 
       if (this.field.default) {
-        const defaultValue = this.field.choices.filter(item => {
+        const defaultValue = this.field.choices.filter((item) => {
           return item.object.name === this.field.default;
         })[0];
         if (defaultValue) {

@@ -1,12 +1,12 @@
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
-const formatErrorObject = error =>
+const formatErrorObject = (error) =>
   Object.keys(error)
-    .map(key => `${key}: ${error[key]}`)
+    .map((key) => `${key}: ${error[key]}`)
     .join(', ');
 
-export const format = response => {
+export const format = (response) => {
   /*
   Status code -1 denotes network error.
   Usually it is caused by one of the following reasons:
@@ -43,7 +43,7 @@ export const format = response => {
       message +=
         ' ' +
         response.data
-          .map(item => {
+          .map((item) => {
             if (typeof item === 'object') {
               return formatErrorObject(item);
             } else {

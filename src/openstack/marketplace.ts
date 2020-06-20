@@ -44,9 +44,9 @@ const ServiceSettingsAttributes = (): Attribute[] => [
   },
 ];
 
-const serializeVolumeTypeLimits = limits =>
+const serializeVolumeTypeLimits = (limits) =>
   Object.keys(limits)
-    .filter(key => key.startsWith('gigabytes_') && limits[key])
+    .filter((key) => key.startsWith('gigabytes_') && limits[key])
     .reduce(
       (r, i) => ({
         ...r,
@@ -55,7 +55,7 @@ const serializeVolumeTypeLimits = limits =>
       {},
     );
 
-const limitSerializer = limits =>
+const limitSerializer = (limits) =>
   limits && {
     cores: limits.cores,
     ram: limits.ram && limits.ram * 1024,
@@ -63,7 +63,7 @@ const limitSerializer = limits =>
     ...serializeVolumeTypeLimits(limits),
   };
 
-const limitParser = limits =>
+const limitParser = (limits) =>
   limits && {
     cores: limits.cores,
     ram: limits.ram && limits.ram / 1024,
@@ -74,9 +74,11 @@ const limitParser = limits =>
 const offeringComponentsFilter = (formData, components) => {
   const storageMode = (formData.plugin_options || {}).storage_mode || 'fixed';
   if (storageMode == 'fixed') {
-    return components.filter(c => ['ram', 'cores', 'storage'].includes(c.type));
+    return components.filter((c) =>
+      ['ram', 'cores', 'storage'].includes(c.type),
+    );
   } else {
-    return components.filter(c => c.type !== 'storage');
+    return components.filter((c) => c.type !== 'storage');
   }
 };
 

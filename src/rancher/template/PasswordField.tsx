@@ -13,7 +13,7 @@ import { FieldProps } from '../types';
 import { FORM_ID } from './constants';
 import { DecoratedField } from './DecoratedField';
 
-export const PasswordField: React.FC<FieldProps> = props => {
+export const PasswordField: React.FC<FieldProps> = (props) => {
   const dispatch = useDispatch();
 
   const setGeneratedPassword = React.useCallback(() => {
@@ -26,7 +26,7 @@ export const PasswordField: React.FC<FieldProps> = props => {
   }, [dispatch, props.variable]);
 
   const renderControl = React.useCallback(
-    props => (
+    (props) => (
       <InputGroup>
         <FormControl {...props.input} />
         <InputGroup.Button>

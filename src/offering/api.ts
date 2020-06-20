@@ -17,7 +17,7 @@ export const fetchTenantOptions = (query, customerId) =>
       name: query,
       o: ['project_name', 'name'],
     },
-  }).then(options => ({
+  }).then((options) => ({
     options: options.map(tenantSerializer),
   }));
 
@@ -34,16 +34,16 @@ export const fetchInstanceOptions = (query, customerId) =>
       name: query,
       o: ['project_name', 'name'],
     },
-  }).then(options => ({
+  }).then((options) => ({
     options: options.map(instanceSerializer),
   }));
 
-export const getOffering = uuid =>
+export const getOffering = (uuid) =>
   getById<Offering>('/support-offerings/', uuid);
 
-export const getOfferingTemplate = uuid =>
+export const getOfferingTemplate = (uuid) =>
   getById<OfferingTemplate>('/support-offering-templates/', uuid);
 
-export const getProject = uuid => getById<Project>('/projects/', uuid);
+export const getProject = (uuid) => getById<Project>('/projects/', uuid);
 
-export const getCustomer = uuid => getById<Customer>('/customers/', uuid);
+export const getCustomer = (uuid) => getById<Customer>('/customers/', uuid);

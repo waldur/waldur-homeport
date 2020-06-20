@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withTranslation } from '@waldur/i18n';
 import { Field, PureResourceSummaryBase } from '@waldur/resource/summary';
 
-const PureVMwarePortSummary = props => {
+const PureVMwarePortSummary = (props) => {
   const { translate, resource } = props;
   return (
     <>

@@ -44,7 +44,7 @@ function* getServiceProviderSecretCode(action) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(
     constants.SERVICE_PROVIDER_CODE_REGENERATE_START,
     generateServiceProviderSecretCode,

@@ -21,7 +21,7 @@ function getMomentDayRange(interval = 5) {
 export const getOptions = (interval: number) =>
   getMomentDayRange(interval)
     .map(formatTime)
-    .map(formattedOption => ({
+    .map((formattedOption) => ({
       label: formattedOption,
       value: formattedOption,
     }));

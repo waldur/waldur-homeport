@@ -13,7 +13,7 @@ interface Props {
   openDialog(): void;
 }
 
-const PureResourceImportButton: React.FC<Props> = props => (
+const PureResourceImportButton: React.FC<Props> = (props) => (
   <ActionButton
     title={translate('Import resource')}
     action={props.openDialog}

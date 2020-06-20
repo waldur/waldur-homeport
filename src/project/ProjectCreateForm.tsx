@@ -10,7 +10,7 @@ import {
 
 import { ProjectNameField } from './ProjectNameField';
 
-export const ProjectCreateForm = props => (
+export const ProjectCreateForm = (props) => (
   <form
     onSubmit={props.handleSubmit(props.createProject)}
     className="form-horizontal"

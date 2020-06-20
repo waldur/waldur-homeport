@@ -9,7 +9,7 @@ import { getProject } from '@waldur/workspace/selectors';
 import { ProjectEventsFilter } from './ProjectEventsFilter';
 
 export const PureProjectEvents = getEventsList({
-  mapPropsToFilter: props => {
+  mapPropsToFilter: (props) => {
     const filter = {
       ...props.userFilter,
     };
@@ -23,14 +23,14 @@ export const PureProjectEvents = getEventsList({
   },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   userFilter: getFormValues('projectEventsFilter')(state),
   project: getProject(state),
 });
 
 const ProjectEvents = connect(mapStateToProps)(PureProjectEvents);
 
-export const ProjectEventsView = props => (
+export const ProjectEventsView = (props) => (
   <>
     <ProjectEventsFilter />
     <ProjectEvents {...props} />

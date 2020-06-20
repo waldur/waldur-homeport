@@ -23,7 +23,7 @@ export const InternalNameField = (props: InternalNameFieldProps) => (
   <Field
     name={props.name}
     validate={validators}
-    parse={v => v.replace('.', '')}
+    parse={(v) => v.replace('.', '')}
     label={translate('Internal name')}
     required={true}
     description={translate(

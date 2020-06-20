@@ -98,7 +98,7 @@ function* enablePaymentProfile(action: Action<any>) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.ADD_PAYMENT_PROFILE, addPaymentProfile);
   yield takeEvery(constants.EDIT_PAYMENT_PROFILE, editPaymentProfile);
   yield takeEvery(constants.REMOVE_PAYMENT_PROFILE, removePaymentProfile);

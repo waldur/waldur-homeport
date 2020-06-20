@@ -6,23 +6,21 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { Offering } from '@waldur/offering/types';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { AddOfferingScreenshotDialogContainer } from '../AddOfferingScreenshotDialog';
+import { CreateScreenshotDialog } from './CreateScreenshotDialog';
 
-interface OfferingAddScreenshotButtonProps {
+interface CreateScreenshotButtonProps {
   offering: Offering;
   openDialog(): void;
 }
 
-const openPreviewOfferingDialog = (props: OfferingAddScreenshotButtonProps) => {
-  return openModalDialog(AddOfferingScreenshotDialogContainer, {
+const openScreenshotDialog = (props: CreateScreenshotButtonProps) => {
+  return openModalDialog(CreateScreenshotDialog, {
     resolve: props,
     size: 'lg',
   });
 };
 
-const PureOfferingAddScreenshotButton = (
-  props: OfferingAddScreenshotButtonProps,
-) => {
+const PureCreateScreenshotButton = (props: CreateScreenshotButtonProps) => {
   return (
     <div
       style={{
@@ -41,10 +39,10 @@ const PureOfferingAddScreenshotButton = (
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  openDialog: () => dispatch(openPreviewOfferingDialog(ownProps)),
+  openDialog: () => dispatch(openScreenshotDialog(ownProps)),
 });
 
-export const OfferingAddScreenshotButton = connect(
+export const CreateScreenshotButton = connect(
   null,
   mapDispatchToProps,
-)(PureOfferingAddScreenshotButton);
+)(PureCreateScreenshotButton);

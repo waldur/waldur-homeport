@@ -8,7 +8,7 @@ export default function appstoreFieldText() {
       field: '=',
       model: '=',
     },
-    controller: function() {},
+    controller: function () {},
     controllerAs: '$ctrl',
     bindToController: true,
   };

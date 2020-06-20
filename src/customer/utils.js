@@ -13,11 +13,11 @@ export function loadCustomer($q, $stateParams, $state, WorkspaceService) {
     return $q.reject();
   }
   return CustomersService.get($stateParams.uuid)
-    .then(customer => {
+    .then((customer) => {
       store.dispatch(setCurrentCustomer(customer));
       return customer;
     })
-    .then(customer => {
+    .then((customer) => {
       WorkspaceService.setWorkspace({
         customer: customer,
         project: null,
@@ -26,7 +26,7 @@ export function loadCustomer($q, $stateParams, $state, WorkspaceService) {
       });
       return customer;
     })
-    .catch(error => {
+    .catch((error) => {
       if (error.status === 404) {
         $state.go('errorPage.notFound');
       }
@@ -35,7 +35,7 @@ export function loadCustomer($q, $stateParams, $state, WorkspaceService) {
 
 // @ngInject
 export function CustomerController($scope, $state) {
-  UsersService.getCurrentUser().then(currentUser => {
+  UsersService.getCurrentUser().then((currentUser) => {
     const currentCustomer = getCustomer(store.getState());
     $scope.currentCustomer = currentCustomer;
     $scope.currentUser = currentUser;

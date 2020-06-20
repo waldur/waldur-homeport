@@ -58,7 +58,7 @@ export const reducer = (
     case constants.ISSUE_COMMENTS_UPDATE_SUCCESS:
       return {
         ...state,
-        items: state.items.map(item =>
+        items: state.items.map((item) =>
           item.uuid === payload.item.uuid ? payload.item : item,
         ),
       };
@@ -79,7 +79,7 @@ export const reducer = (
       return {
         ...state,
         deleting: omit(state.deleting, payload.commentId),
-        items: state.items.filter(item => item.uuid !== payload.commentId),
+        items: state.items.filter((item) => item.uuid !== payload.commentId),
       };
     case constants.ISSUE_COMMENTS_DELETE_ERROR:
       return {
@@ -96,7 +96,7 @@ export const reducer = (
       return {
         ...state,
         pendingAttachments: state.pendingAttachments.filter(
-          attachment => attachment.uuid !== payload.uuid,
+          (attachment) => attachment.uuid !== payload.uuid,
         ),
       };
     case constants.ISSUE_COMMENTS_PENDING_ATTACHMENTS_RESET:

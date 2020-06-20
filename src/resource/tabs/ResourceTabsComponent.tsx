@@ -24,7 +24,7 @@ export const ResourceTabsComponent = ({
     unmountOnExit
     animation={false}
   >
-    {tabs.map(tab => (
+    {tabs.map((tab) => (
       <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
         <PanelBody>
           <tab.component resource={resource} />

@@ -3,7 +3,7 @@ import freeipaAccountEdit from './freeipa-account-edit';
 import freeipaQuota from './freeipa-quota';
 import requireTrue from './require-true';
 
-export default module => {
+export default (module) => {
   module.directive('requireTrue', requireTrue);
   module.component('freeipaAccountEdit', freeipaAccountEdit);
   module.component('freeipaAccountCreate', freeipaAccountCreate);

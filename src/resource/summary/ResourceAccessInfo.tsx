@@ -15,7 +15,7 @@ export const ResourceAccessInfo = (props: ResourceAccessInfoProps) => {
   }
 
   if (Array.isArray(resource.access_url)) {
-    const parts = resource.access_url.filter(p => p !== null);
+    const parts = resource.access_url.filter((p) => p !== null);
     if (parts.length === 0) {
       return translate('No access info');
     }

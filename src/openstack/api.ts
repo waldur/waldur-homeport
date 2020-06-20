@@ -55,21 +55,21 @@ export const loadSshKeys = (user_uuid: string) =>
   getAll<SshKey>('/keys/', { params: { user_uuid } });
 
 export const loadServiceSettings = (scope: string) =>
-  Axios.get(scope).then(response => response.data);
+  Axios.get(scope).then((response) => response.data);
 
 export const loadInstances = () =>
   getAll<OpenStackInstance>('/openstacktenant-instances/');
 
-export const getFlavors = params =>
+export const getFlavors = (params) =>
   getAll<Flavor>('/openstacktenant-flavors/', { params });
 
-export const getSubnets = params =>
+export const getSubnets = (params) =>
   getAll<Subnet>('/openstacktenant-subnets/', { params });
 
-export const getVolumeTypes = params =>
+export const getVolumeTypes = (params) =>
   getAll<VolumeType>('/openstacktenant-volume-types/', { params });
 
-export const getInstances = params =>
+export const getInstances = (params) =>
   getAll<OpenStackInstance>('/openstacktenant-instances/', {
     params,
   });

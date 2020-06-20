@@ -3,23 +3,23 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { OfferingScreenshotsActions } from '@waldur/marketplace/offerings/OfferingScreenshotsActions';
-import { OfferingScreenshotsListTablePlaceholder } from '@waldur/marketplace/offerings/OfferingScreenshotsListTablePlaceholder';
-import { ScreenshotThumbnail } from '@waldur/marketplace/offerings/ScreenshotThumbnail';
 import { SCREENSHOTS_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering, Screenshot } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 
-import { ViewOfferingScreenshotDialog } from './ViewOfferingScreenshotDialog';
+import { ScreenshotDetailsDialog } from './ScreenshotDetailsDialog';
+import { ScreenshotsActions } from './ScreenshotsActions';
+import { ScreenshotsListPlaceholder } from './ScreenshotsListPlaceholder';
+import { ScreenshotThumbnail } from './ScreenshotThumbnail';
 
-const openViewOfferingScreenshotDialog = (screenshot: Screenshot) =>
-  openModalDialog(ViewOfferingScreenshotDialog, {
+const openScreenshotDetailsDialog = (screenshot: Screenshot) =>
+  openModalDialog(ScreenshotDetailsDialog, {
     resolve: screenshot,
   });
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const { translate } = props;
 
   const columns = [
@@ -49,7 +49,7 @@ export const TableComponent = props => {
     {
       title: translate('Actions'),
       render: ({ row }) => {
-        return <OfferingScreenshotsActions row={row} />;
+        return <ScreenshotsActions row={row} />;
       },
     },
   ];
@@ -58,7 +58,7 @@ export const TableComponent = props => {
     <Table
       {...props}
       columns={columns}
-      placeholderComponent={<OfferingScreenshotsListTablePlaceholder />}
+      placeholderComponent={<ScreenshotsListPlaceholder />}
       verboseName={translate('Offerings screenshots')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
@@ -66,7 +66,7 @@ export const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => {
+const mapPropsToFilter = (props) => {
   const filter: Record<string, string | boolean> = {};
   if (props.offering) {
     filter.offering_uuid = props.offering.uuid;
@@ -86,13 +86,13 @@ const TableOptions = {
   exportFields: ['Name', 'Description', 'Created'],
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   offering: getOffering(state).offering,
 });
 
-const mapDispatchToProps = dispatch => ({
-  openViewScreenshotDialog: image =>
-    dispatch(openViewOfferingScreenshotDialog(image)),
+const mapDispatchToProps = (dispatch) => ({
+  openViewScreenshotDialog: (image) =>
+    dispatch(openScreenshotDetailsDialog(image)),
 });
 
 const enhance = compose(

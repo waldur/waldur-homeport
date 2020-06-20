@@ -11,7 +11,7 @@ import * as actions from './actions';
 import { MonitoringGuide } from './MonitoringGuide';
 import { ZabbixTemplateRequest } from './types';
 
-const PureZabbixHostCreateDialog = props => (
+const PureZabbixHostCreateDialog = (props) => (
   <ActionDialog
     title={props.translate('Create Zabbix host')}
     submitLabel={props.translate('Create Zabbix host')}
@@ -54,7 +54,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   loadLinks: () =>
     actions.loadLinks({ resource: ownProps.resolve.resource.url }, dispatch),
 
-  loadTemplates: query => {
+  loadTemplates: (query) => {
     const request: ZabbixTemplateRequest = {
       settings_uuid: ownProps.link.service_settings_uuid,
     };
@@ -64,7 +64,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     return actions.loadTemplates(request, dispatch);
   },
 
-  createHost: data =>
+  createHost: (data) =>
     actions.createHost(
       { ...data, resource: ownProps.resolve.resource },
       dispatch,

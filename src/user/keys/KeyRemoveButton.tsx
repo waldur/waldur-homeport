@@ -11,7 +11,7 @@ import { showKeyRemoveConfirmation } from './actions';
 import { removeKey } from './api';
 import * as constants from './constants';
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   showConfirmDialog: (action: () => void) =>
     dispatch(showKeyRemoveConfirmation(action)),
   removeEntity: (id: string) =>

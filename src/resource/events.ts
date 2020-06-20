@@ -2,7 +2,7 @@ import eventsRegistry from '@waldur/events/registry';
 import { getLink, getUserContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
-const getResourceContext = event => {
+const getResourceContext = (event) => {
   const ctx = {
     resource_type: event.resource_type,
     uuid: event.resource_uuid,

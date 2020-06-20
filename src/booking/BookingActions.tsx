@@ -34,7 +34,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
         ownProps.row.state === constants.BOOKING_CREATED &&
         stateProps.user.is_staff,
     },
-  ].filter(row => row.visible),
+  ].filter((row) => row.visible),
 });
 
 const Actions = ({ actions }) => (

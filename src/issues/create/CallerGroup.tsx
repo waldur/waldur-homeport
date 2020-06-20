@@ -15,7 +15,7 @@ import { refreshUsers } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
 import { callerSelector } from './selectors';
 
-const renderer = option => option.full_name || option.username;
+const renderer = (option) => option.full_name || option.username;
 
 const CallerActions = ({ onSearch }) => {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const CallerActions = ({ onSearch }) => {
   );
 };
 
-const filterOptions = options => options;
+const filterOptions = (options) => options;
 
 export const CallerGroup = ({ onSearch }) => (
   <FormGroup>

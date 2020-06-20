@@ -26,7 +26,7 @@ const projectPolicies = {
       this.canManage = false;
       this.projectCertifications = angular.copy(this.project.certifications);
       this.certificationsList = this.project.certifications
-        .map(x => x.name)
+        .map((x) => x.name)
         .join(', ');
 
       this.estimate = angular.copy(this.project.billing_price_estimate);
@@ -36,11 +36,11 @@ const projectPolicies = {
       this.loading = true;
       this.$q
         .all([
-          loadCertifications().then(certifications => {
+          loadCertifications().then((certifications) => {
             this.certifications = certifications;
           }),
 
-          CustomersService.isOwnerOrStaff().then(canManage => {
+          CustomersService.isOwnerOrStaff().then((canManage) => {
             this.canManage = canManage;
           }),
         ])
@@ -61,7 +61,7 @@ const projectPolicies = {
             gettext('Project policies have been updated.'),
           );
         })
-        .catch(response => {
+        .catch((response) => {
           if (response.status === 400) {
             for (const name in response.data) {
               const error = response.data[name];
@@ -85,7 +85,7 @@ const projectPolicies = {
 
     saveCertifications() {
       function mapItems(items) {
-        return items.map(item => ({ url: item.url }));
+        return items.map((item) => ({ url: item.url }));
       }
       const oldItems = mapItems(this.project.certifications);
       const newItems = mapItems(this.projectCertifications);

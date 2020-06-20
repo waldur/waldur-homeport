@@ -12,7 +12,7 @@ import {
 
 import { OpenStackInstance } from './types';
 
-const formatSecurityGroups = props => {
+const formatSecurityGroups = (props) => {
   if (props.resource.security_groups) {
     return (
       <OpenStackSecurityGroupsLink items={props.resource.security_groups} />

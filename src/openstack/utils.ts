@@ -15,16 +15,16 @@ const quotaNames = {
   vcpu: 'cores',
 };
 
-const parseQuotaName = name => quotaNames[name] || name;
+const parseQuotaName = (name) => quotaNames[name] || name;
 
 export const parseQuotas = listToDict(
-  item => parseQuotaName(item.name),
-  item => item.limit,
+  (item) => parseQuotaName(item.name),
+  (item) => item.limit,
 );
 
 export const parseQuotasUsage = listToDict(
-  item => parseQuotaName(item.name),
-  item => item.usage,
+  (item) => parseQuotaName(item.name),
+  (item) => item.usage,
 );
 
 export const PRIVATE_CIDR_PATTERN = new RegExp(
@@ -36,7 +36,7 @@ export const PRIVATE_CIDR_PATTERN = new RegExp(
     '|(^(192).(168)(.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])).0/24$)',
 );
 
-export const validatePrivateSubnetCIDR = value => {
+export const validatePrivateSubnetCIDR = (value) => {
   if (!value) {
     return;
   }
@@ -45,7 +45,7 @@ export const validatePrivateSubnetCIDR = value => {
   }
 };
 
-export const getTenantListState = projectId => ({
+export const getTenantListState = (projectId) => ({
   label: translate('Private clouds'),
   state: 'marketplace-project-resources',
   params: {
@@ -55,7 +55,7 @@ export const getTenantListState = projectId => ({
   },
 });
 
-export const getInstanceListState = projectId => ({
+export const getInstanceListState = (projectId) => ({
   label: translate('Virtual machines'),
   state: 'marketplace-project-resources',
   params: {
@@ -70,10 +70,10 @@ const getConsoleURL = (moduleName: string, id: string) =>
 
 export const executeConsoleAction = (resource, moduleName: string) => {
   getConsoleURL(moduleName, resource.uuid)
-    .then(response => {
+    .then((response) => {
       window.open(response.data.url);
     })
-    .catch(error => {
+    .catch((error) => {
       const ctx = { message: format(error) };
       const message = translate(
         'Unable to open console. Error message: {message}',
@@ -88,7 +88,7 @@ const getConsoleOutput = (moduleName: string, id: string) =>
 
 export const executeConsoleLogAction = (resource, moduleName: string) => {
   getConsoleOutput(moduleName, resource.uuid)
-    .then(response => {
+    .then((response) => {
       const win = window.open();
       if (win == null) {
         alert(translate('Unable to open console log'));
@@ -99,7 +99,7 @@ export const executeConsoleLogAction = (resource, moduleName: string) => {
       doc.write(`<pre>${response.data}</pre>`);
       doc.close();
     })
-    .catch(error => {
+    .catch((error) => {
       const ctx = { message: format(error) };
       const message = translate(
         'Unable to show console log. Error message: {message}',

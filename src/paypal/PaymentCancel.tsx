@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
-const cancelPayment = payload => post('/paypal-payments/cancel/', payload);
+const cancelPayment = (payload) => post('/paypal-payments/cancel/', payload);
 
 export const PaymentCancel = () => {
   useTitle(translate('Cancel payment'));

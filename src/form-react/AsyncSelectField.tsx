@@ -4,13 +4,13 @@ import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
-export const AsyncSelectField = props => {
+export const AsyncSelectField = (props) => {
   const { name, placeholder, ...rest } = props;
   return (
     <Field
       name={name}
       {...rest}
-      component={fieldProps => (
+      component={(fieldProps) => (
         <Async
           placeholder={placeholder}
           loadOptions={props.loadOptions}

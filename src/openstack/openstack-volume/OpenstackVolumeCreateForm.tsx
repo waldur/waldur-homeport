@@ -28,7 +28,7 @@ const validateSize = (value: number) =>
     ? translate('Size should be between 1 and 4096 GB.')
     : undefined;
 
-const loadData = async settings => {
+const loadData = async (settings) => {
   const zones = await loadVolumeAvailabilityZones(settings);
   if (isFeatureVisible('openstack.volume-types')) {
     const volumeTypes = await loadVolumeTypes(settings);
@@ -48,7 +48,9 @@ const loadData = async settings => {
   }
 };
 
-export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps> = props => {
+export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps> = (
+  props,
+) => {
   const state = useAsync(() => loadData(props.offering.scope_uuid), [
     props.offering.scope_uuid,
   ]);
@@ -98,8 +100,8 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
           parse={parseIntField}
           min={1}
           max={4096}
-          format={v => (v ? v / 1024 : '')}
-          normalize={v => Number(v) * 1024}
+          format={(v) => (v ? v / 1024 : '')}
+          normalize={(v) => Number(v) * 1024}
           unit={translate('GB')}
           validate={validateSize}
         />

@@ -44,7 +44,7 @@ export default class SankeyDiagram extends React.Component<
   }
 
   drawChart = () => {
-    loadEcharts().then(module => {
+    loadEcharts().then((module) => {
       const echarts = module.default;
       let chart;
       if (this.container) {
@@ -80,7 +80,7 @@ export default class SankeyDiagram extends React.Component<
     return (
       <div
         id="sankey-diagram"
-        ref={container => (this.container = container)}
+        ref={(container) => (this.container = container)}
       />
     );
   }

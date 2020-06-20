@@ -1,6 +1,4 @@
 import ErrorMessageFormatter from './ErrorMessageFormatter';
-import extensionPoint from './extension-point-directive';
-import extensionPointService from './extension-point-service';
 import loadingSpinner from './LoadingSpinner';
 import sentryModule from './sentry';
 import injectServices from './services';
@@ -8,7 +6,7 @@ import submitButton from './submit-button';
 
 // @ngInject
 function redirectToState($rootScope, $state, $injector) {
-  $rootScope.$on('$stateChangeError', function(
+  $rootScope.$on('$stateChangeError', function (
     event,
     toState,
     toParams,
@@ -34,7 +32,7 @@ function redirectToState($rootScope, $state, $injector) {
 
 // @ngInject
 function scrollToTop($rootScope) {
-  $rootScope.$on('$stateChangeSuccess', function() {
+  $rootScope.$on('$stateChangeSuccess', function () {
     document.scrollTop = 0;
     document.querySelector('#wrapper').scrollTop = 0;
   });
@@ -43,17 +41,15 @@ function scrollToTop($rootScope) {
 // @ngInject
 function defaultErrorHandler($state) {
   // eslint-disable-next-line
-  $state.defaultErrorHandler(function(error) {
+  $state.defaultErrorHandler(function (error) {
     // Do not log transitionTo errors
   });
 }
 
-export default module => {
+export default (module) => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
-  module.directive('extensionPoint', extensionPoint);
-  module.service('extensionPointService', extensionPointService);
   module.run(redirectToState);
   module.run(scrollToTop);
   module.run(injectServices);

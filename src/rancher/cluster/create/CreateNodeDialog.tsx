@@ -49,7 +49,7 @@ const serializeDataVolume = ({ size, ...volumeRest }) => ({
 
 const serializeNode = (cluster, formData) => ({
   cluster: cluster.url,
-  roles: formData.roles.filter(role => role),
+  roles: formData.roles.filter((role) => role),
   subnet: formData.attributes.subnet,
   flavor: formData.flavor.url,
   system_volume_size: formData.system_volume_size * 1024,
@@ -59,7 +59,7 @@ const serializeNode = (cluster, formData) => ({
 
 export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   form: 'RancherNodeCreate',
-})(props => {
+})((props) => {
   const cluster = props.resolve.cluster;
   const state = useAsync(() => loadData(cluster.tenant_settings), [cluster]);
 

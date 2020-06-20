@@ -30,7 +30,7 @@ const extractNameFromKey = (publicKey: string) => {
   return '';
 };
 
-const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = props => {
+const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = (props) => {
   useTitle(translate('Add SSH key'));
   const dispatch = useDispatch();
   const router = useRouter();

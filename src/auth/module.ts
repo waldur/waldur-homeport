@@ -6,7 +6,7 @@ import UserSettings from './user-settings';
 import valimoModule from './valimo/module';
 import './events';
 
-export default module => {
+export default (module) => {
   module.service('authService', AuthService);
   module.config(initAuthProvider);
   interceptorModule(module);

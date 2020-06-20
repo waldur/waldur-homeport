@@ -17,7 +17,7 @@ interface ProjectActionsProps {
   canAddUser: boolean;
 }
 
-const getDetailsAction = project => ({
+const getDetailsAction = (project) => ({
   title: translate('Details'),
   onClick() {
     store.dispatch(
@@ -52,6 +52,6 @@ export const ProjectActions = (props: ProjectActionsProps) => {
       state: 'project.issues',
     }),
     getSupportPortalAction(),
-  ].filter(action => action !== undefined);
+  ].filter((action) => action !== undefined);
   return <ActionList actions={actions} />;
 };

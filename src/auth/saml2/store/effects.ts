@@ -37,6 +37,6 @@ export function* handleSaml2LoginSaga(action) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(actions.loginSaml2.REQUEST, handleSaml2LoginSaga);
 }

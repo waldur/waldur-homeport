@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Label from 'react-bootstrap/lib/Label';
 
-const getColor = value =>
+const getColor = (value) =>
   value === null
     ? 'primary'
     : value < 0.6

@@ -17,18 +17,8 @@ describe('optionRenderer', () => {
       labelKey: 'name',
     });
     const wrapper = shallow(renderer(option));
-    expect(
-      wrapper
-        .find('img')
-        .first()
-        .prop('src'),
-    ).toBe(option.icon_url);
-    expect(
-      wrapper
-        .find('div')
-        .first()
-        .text(),
-    ).toBe(option.name);
+    expect(wrapper.find('img').first().prop('src')).toBe(option.icon_url);
+    expect(wrapper.find('div').first().text()).toBe(option.name);
   });
 
   it('renders tooltip', () => {
@@ -38,26 +28,20 @@ describe('optionRenderer', () => {
       tooltipKey: 'description',
     });
     const wrapper = shallow(renderer(option));
-    expect(
-      wrapper
-        .find(Tooltip)
-        .first()
-        .prop('label'),
-    ).toBe(option.description);
+    expect(wrapper.find(Tooltip).first().prop('label')).toBe(
+      option.description,
+    );
   });
 
   it('renders image specified as function', () => {
     const renderer = optionRenderer({
-      iconKey: resource => `http://example.com/${resource.icon_url}`,
+      iconKey: (resource) => `http://example.com/${resource.icon_url}`,
       labelKey: 'name',
       tooltipKey: 'description',
     });
     const wrapper = shallow(renderer(option));
-    expect(
-      wrapper
-        .find('img')
-        .first()
-        .prop('src'),
-    ).toBe('http://example.com/icon.png');
+    expect(wrapper.find('img').first().prop('src')).toBe(
+      'http://example.com/icon.png',
+    );
   });
 });

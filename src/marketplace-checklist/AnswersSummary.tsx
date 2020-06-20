@@ -7,7 +7,7 @@ const countStats = (answers: Answers, questions: Question[]) => {
   let positive = 0;
   let negative = 0;
   let unknown = 0;
-  questions.forEach(question => {
+  questions.forEach((question) => {
     if (answers[question.uuid] === undefined) {
       unknown += 1;
     } else if (answers[question.uuid] === question.correct_answer) {

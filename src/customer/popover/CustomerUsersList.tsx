@@ -4,7 +4,7 @@ import * as Gravatar from 'react-gravatar';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -55,7 +55,7 @@ const TableOptions: TableOptionsType = {
   table: 'customer-users',
   fetchData: createFetcher('users'),
   queryField: 'full_name',
-  mapPropsToFilter: props => ({ customer_uuid: props.customer.uuid }),
+  mapPropsToFilter: (props) => ({ customer_uuid: props.customer.uuid }),
 };
 
 export const CustomerUsersList = connectTable(TableOptions)(TableComponent);

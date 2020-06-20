@@ -8,7 +8,7 @@ export const FilterGroup = ({ value, onChange, placeholder, groupId }) => (
         type="text"
         className="form-control"
         value={value}
-        onChange={event => onChange(event.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
       />
       <label htmlFor={groupId}>

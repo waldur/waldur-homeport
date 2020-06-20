@@ -17,7 +17,7 @@ export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
       <form className="form-inline" id="vm-overview-filter">
         <Field
           name="shared"
-          component={prop => (
+          component={(prop) => (
             <AwesomeCheckbox
               id="show-shared"
               label={translate('Show shared')}
@@ -28,7 +28,7 @@ export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
         <div className="form-group">
           <Field
             name="service_provider"
-            component={prop => (
+            component={(prop) => (
               <Select
                 className="service-provider-selector"
                 placeholder={translate('Select service provider')}

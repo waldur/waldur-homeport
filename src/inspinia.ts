@@ -48,7 +48,7 @@ function fix_height() {
   }
 }
 
-const ready = callback => {
+const ready = (callback) => {
   if (document.readyState != 'loading') callback();
   else document.addEventListener('DOMContentLoaded', callback);
 };
@@ -65,7 +65,7 @@ export default function loadInspinia() {
   window.addEventListener('resize', callback);
   window.addEventListener('scroll', callback);
 
-  setTimeout(function() {
+  setTimeout(function () {
     fix_height();
     updateSidebar();
   });

@@ -8,7 +8,7 @@ export default function appstoreFieldPassword() {
       field: '=',
       model: '=',
     },
-    controller: function() {},
+    controller: function () {},
     controllerAs: '$ctrl',
     bindToController: true,
   };

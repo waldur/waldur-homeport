@@ -11,7 +11,7 @@ import { TableComponent } from './OrderItemsList';
 const TableOptions = {
   table: TABLE_SUPPORT_ORDERS,
   fetchData: createFetcher('marketplace-order-items'),
-  mapPropsToFilter: props => {
+  mapPropsToFilter: (props) => {
     const filter: any = {};
     if (props.filter) {
       if (props.filter.offering) {
@@ -34,7 +34,7 @@ const TableOptions = {
   },
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filter: getFormValues('OrderItemFilter')(state),
   customer: getCustomer(state),
 });

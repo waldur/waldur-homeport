@@ -22,7 +22,7 @@ const PureUserDetailsButton = (props: UserDetailsButtonProps) => (
 );
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: e => {
+  onClick: (e) => {
     e.target.blur();
     return dispatch(actions.showUserDetails(ownProps.row));
   },

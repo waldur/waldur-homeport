@@ -28,13 +28,13 @@ const formatFlavorOption = (flavor: Flavor) => ({
 
 const getMountPointChoices = () => {
   const mountPoints = ENV.plugins.WALDUR_RANCHER.MOUNT_POINT_CHOICES;
-  return mountPoints.map(choice => ({
+  return mountPoints.map((choice) => ({
     label: choice,
     value: choice,
   }));
 };
 
-export const loadData = async settings => {
+export const loadData = async (settings) => {
   const params = { settings };
   const flavors = await getFlavors(params);
   const subnets = await getSubnets(params);

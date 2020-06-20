@@ -6,7 +6,7 @@ import { DEFAULT_NODE_CONFIGURATION } from './constants';
 import { NodeAddButton } from './NodeAddButton';
 import { NodePanel } from './NodePanel';
 
-export const NodeList = props => {
+export const NodeList = (props) => {
   const onAdd = () => {
     props.fields.push({
       ...DEFAULT_NODE_CONFIGURATION,
@@ -17,7 +17,7 @@ export const NodeList = props => {
     props.onChange(props.fields.length + 1);
   };
 
-  const onRemove = index => {
+  const onRemove = (index) => {
     props.fields.remove(index);
     props.onChange(props.fields.length - 1);
   };

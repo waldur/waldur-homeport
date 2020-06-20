@@ -1,3 +1,83 @@
+function imageFormatter($filter, value) {
+  if (value.is_official) {
+    return value.name + ' distribution';
+  } else {
+    return (
+      value.name +
+      ' snapshot created at ' +
+      $filter('shortDate')(value.created_at)
+    );
+  }
+}
+
+function imageValidator(model, choice) {
+  if (!model.region) {
+    return true;
+  }
+  const region = model.region.url;
+  let found = false;
+  const regions = choice.regions || [choice.region];
+  for (let j = 0; j < regions.length; j++) {
+    const choice_region = regions[j];
+    if (choice_region.url === region) {
+      found = true;
+      break;
+    }
+  }
+  return !found;
+}
+
+function imageComparator(a, b) {
+  if (a.disabled < b.disabled) return -1;
+  if (a.disabled > b.disabled) return 1;
+
+  if (a.name > b.name) return 1;
+  if (a.name < b.name) return -1;
+
+  return 0;
+}
+
+function sizeComparator(a, b) {
+  if (a.disabled < b.disabled) return -1;
+  if (a.disabled > b.disabled) return 1;
+
+  if (a.cores > b.cores) return 1;
+  if (a.cores < b.cores) return -1;
+
+  if (a.ram > b.ram) return 1;
+  if (a.ram < b.ram) return -1;
+
+  if (a.disk > b.disk) return 1;
+  if (a.disk < b.disk) return -1;
+
+  return 0;
+}
+
+const sizeValidator = imageValidator;
+
+function sizeFormatter($filter, value) {
+  const ram = $filter('filesize')(value.ram);
+  const storage = $filter('filesize')(value.disk);
+  const props = `${value.cores} vCPU, ${ram} RAM, ${storage} storage`;
+  return `${value.name} (${props})`;
+}
+
+function validateAndSort(model, options, validator, comparator, name) {
+  const choices = options[name].choices;
+  angular.forEach(choices, (choice) => {
+    choice.disabled = validator(model, choice);
+  });
+  choices.sort(comparator);
+  if (model[name] && model[name].disabled) {
+    model[name] = null;
+  }
+}
+
+function regionWatcher(model, options) {
+  validateAndSort(model, options, imageValidator, imageComparator, 'image');
+  validateAndSort(model, options, sizeValidator, sizeComparator, 'size');
+}
+
 export default {
   order: ['name', 'region', 'image', 'size', 'ssh_public_key', 'user_data'],
   options: {
@@ -88,83 +168,3 @@ export default {
     region: regionWatcher,
   },
 };
-
-function validateAndSort(model, options, validator, comparator, name) {
-  const choices = options[name].choices;
-  angular.forEach(choices, choice => {
-    choice.disabled = validator(model, choice);
-  });
-  choices.sort(comparator);
-  if (model[name] && model[name].disabled) {
-    model[name] = null;
-  }
-}
-
-function regionWatcher(model, options) {
-  validateAndSort(model, options, imageValidator, imageComparator, 'image');
-  validateAndSort(model, options, sizeValidator, sizeComparator, 'size');
-}
-
-function imageFormatter($filter, value) {
-  if (value.is_official) {
-    return value.name + ' distribution';
-  } else {
-    return (
-      value.name +
-      ' snapshot created at ' +
-      $filter('shortDate')(value.created_at)
-    );
-  }
-}
-
-function imageValidator(model, choice) {
-  if (!model.region) {
-    return true;
-  }
-  let region = model.region.url;
-  let found = false;
-  let regions = choice.regions || [choice.region];
-  for (let j = 0; j < regions.length; j++) {
-    let choice_region = regions[j];
-    if (choice_region.url === region) {
-      found = true;
-      break;
-    }
-  }
-  return !found;
-}
-
-function imageComparator(a, b) {
-  if (a.disabled < b.disabled) return -1;
-  if (a.disabled > b.disabled) return 1;
-
-  if (a.name > b.name) return 1;
-  if (a.name < b.name) return -1;
-
-  return 0;
-}
-
-function sizeComparator(a, b) {
-  if (a.disabled < b.disabled) return -1;
-  if (a.disabled > b.disabled) return 1;
-
-  if (a.cores > b.cores) return 1;
-  if (a.cores < b.cores) return -1;
-
-  if (a.ram > b.ram) return 1;
-  if (a.ram < b.ram) return -1;
-
-  if (a.disk > b.disk) return 1;
-  if (a.disk < b.disk) return -1;
-
-  return 0;
-}
-
-const sizeValidator = imageValidator;
-
-function sizeFormatter($filter, value) {
-  const ram = $filter('filesize')(value.ram);
-  const storage = $filter('filesize')(value.disk);
-  const props = `${value.cores} vCPU, ${ram} RAM, ${storage} storage`;
-  return `${value.name} (${props})`;
-}

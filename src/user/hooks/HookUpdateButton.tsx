@@ -20,8 +20,8 @@ export const PureHookUpdateButton = (props: HookUpdateButtonProps) => (
   />
 );
 
-const mapDispatchToProps = dispatch => ({
-  showHookUpdateDialog: row => dispatch(showHookUpdateDialog(row)),
+const mapDispatchToProps = (dispatch) => ({
+  showHookUpdateDialog: (row) => dispatch(showHookUpdateDialog(row)),
 });
 
 export const HookUpdateButton = connect(

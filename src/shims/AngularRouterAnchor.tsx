@@ -21,7 +21,7 @@ class SafeAnchor extends React.Component<any> {
     componentClass: 'a',
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     const { disabled, onClick } = this.props;
 
     if (disabled) {
@@ -35,7 +35,7 @@ class SafeAnchor extends React.Component<any> {
     }
   };
 
-  handleKeyDown = event => {
+  handleKeyDown = (event) => {
     if (event.key === ' ') {
       event.preventDefault();
       this.handleClick(event);

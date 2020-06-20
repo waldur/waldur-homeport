@@ -50,7 +50,6 @@ const appModule = angular.module('waldur', [
   UI_ROUTER_REACT_HYBRID,
   'ui.router.state.events',
   'ngCookies',
-  'ngResource',
   'ui.select',
   'ngAnimate',
   'pascalprecht.translate',
@@ -94,7 +93,7 @@ function requirePlugins(module) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   const context = require.context('./plugins', true, /module\.js$/);
-  context.keys().forEach(key => {
+  context.keys().forEach((key) => {
     const plugin = context(key).default;
     plugin(module);
   });

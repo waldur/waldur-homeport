@@ -42,7 +42,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
     case constants.REMOVE_ITEM_SUCCESS:
       return {
         ...state,
-        items: state.items.filter(item => item.uuid !== payload.uuid),
+        items: state.items.filter((item) => item.uuid !== payload.uuid),
         removingItem: false,
       };
     case constants.UPDATE_ITEM_REQUEST:

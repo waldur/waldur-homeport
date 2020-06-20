@@ -6,11 +6,11 @@ import { isVisible } from '@waldur/store/config';
 
 import { OfferingButton } from '../common/OfferingButton';
 
-const connector = connect(state => ({
+const connector = connect((state) => ({
   isVisible: isVisible(state, 'marketplace.review'),
 }));
 
-const PureReviewButton = props =>
+const PureReviewButton = (props) =>
   props.isVisible ? (
     <OfferingButton icon="fa fa-comments" title={translate('Write review')} />
   ) : null;

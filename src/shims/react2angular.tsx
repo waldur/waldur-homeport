@@ -27,7 +27,7 @@ export function react2angular<Props>(
     [];
 
   return {
-    bindings: fromPairs(names.map(_ => [_, '<'])),
+    bindings: fromPairs(names.map((_) => [_, '<'])),
     controller: [
       '$element',
       ...injectNames,
@@ -50,7 +50,7 @@ export function react2angular<Props>(
         render() {
           if (
             names.length > 0 &&
-            names.every(k => this.props[k] === undefined)
+            names.every((k) => this.props[k] === undefined)
           ) {
             return null;
           }

@@ -7,9 +7,9 @@ export let ngInjector = null;
 export let $q = null;
 // Init with identity function for testing only.
 // When application is initialized, it is replaced with actual service.
-export let $sanitize = x => x;
+export let $sanitize = (x) => x;
 
-export const defaultCurrency = value =>
+export const defaultCurrency = (value) =>
   $filter ? $filter('defaultCurrency')(value) : value;
 
 export default function injectServices($injector) {
@@ -41,5 +41,5 @@ export const blockingExecutor = (callback: () => Promise<any>) => {
   };
 };
 
-export const cacheInvalidationFactory = service => () =>
+export const cacheInvalidationFactory = (service) => () =>
   ngInjector.get(service).clearAllCacheForCurrentEndpoint();

@@ -45,8 +45,8 @@ const mapStateToProps = (_, ownProps: Props) =>
       }
     : {};
 
-const mapDispatchToProps = dispatch => ({
-  submitReport: data => submitUsage(data, dispatch),
+const mapDispatchToProps = (dispatch) => ({
+  submitReport: (data) => submitUsage(data, dispatch),
   onPeriodChange: (option: Option<ResourcePlanPeriod>) =>
     dispatch(periodChanged(option.value)),
 });

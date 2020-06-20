@@ -29,7 +29,7 @@ interface StateProps {
 
 type OfferingTabsProps = OwnProps & TranslateProps & StateProps;
 
-export const PureOfferingTabs: React.FC<OfferingTabsProps> = props => {
+export const PureOfferingTabs: React.FC<OfferingTabsProps> = (props) => {
   const issue = {
     uuid: props.offering.issue_uuid,
     url: props.offering.issue,

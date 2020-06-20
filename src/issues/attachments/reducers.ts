@@ -68,7 +68,7 @@ export const reducer = (
     case constants.ISSUE_ATTACHMENTS_DELETE_SUCCESS:
       return {
         ...state,
-        items: state.items.filter(item => item.uuid !== payload.uuid),
+        items: state.items.filter((item) => item.uuid !== payload.uuid),
         deleting: {
           ...state.deleting,
           [payload.uuid]: null,

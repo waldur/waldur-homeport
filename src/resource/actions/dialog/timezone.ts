@@ -17,6 +17,6 @@ export function getTimezoneItems() {
   const timestamp = date.getTime();
   return moment.tz
     .names()
-    .map(timezone => getTimezoneMetadata(timezone, timestamp))
+    .map((timezone) => getTimezoneMetadata(timezone, timestamp))
     .sort((a, b) => a.offset - b.offset);
 }

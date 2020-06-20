@@ -18,12 +18,12 @@ import { FetchedData } from './utils';
 
 const FORM_ID = 'marketplaceChangePlan';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   orderCanBeApproved: orderCanBeApproved(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
-  submitRequest: data =>
+  submitRequest: (data) =>
     switchPlan(
       {
         marketplace_resource_uuid: ownProps.asyncState.value.resource.uuid,

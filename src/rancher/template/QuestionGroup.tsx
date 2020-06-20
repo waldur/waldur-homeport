@@ -19,7 +19,7 @@ export const QuestionGroup: React.FC<{
       <GroupHeader title={title || translate('Configuration options')} />
       {groups.map((group, groupIndex) => (
         <Row key={groupIndex}>
-          {group.map(question => (
+          {group.map((question) => (
             <QuestionItem key={question.variable} question={question} />
           ))}
         </Row>

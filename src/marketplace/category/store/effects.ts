@@ -32,7 +32,7 @@ function* loadOfferings() {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.LOAD_DATA_START, loadData);
   yield takeLatest(constants.LOAD_OFFERINGS_START, loadOfferings);
 }

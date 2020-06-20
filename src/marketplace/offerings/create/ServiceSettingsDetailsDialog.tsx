@@ -35,7 +35,7 @@ export const ServiceSettingsDetailsDialog = () => {
 
   const dispatch = useDispatch();
   const updateProvider = React.useCallback(
-    data => actions.updateProvider(data, dispatch),
+    (data) => actions.updateProvider(data, dispatch),
     [dispatch],
   );
 

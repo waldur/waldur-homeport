@@ -7,7 +7,7 @@ import { TableOptionsType } from '@waldur/table/types';
 
 import { PaymentStateIndicator } from './PaymentStateIndicator';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table

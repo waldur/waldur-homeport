@@ -38,7 +38,7 @@ const serializeDataVolume = ({ size, ...volumeRest }) => ({
   size: size * 1024,
 });
 
-const serializeNode = subnet => ({
+const serializeNode = (subnet) => ({
   system_volume_size,
   flavor,
   ...nodeRest

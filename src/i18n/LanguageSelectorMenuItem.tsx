@@ -10,9 +10,9 @@ export const LanguageSelectorMenuItem = () => {
     setLanguage,
   } = useLanguageSelector();
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setLanguage(
-      languageChoices.find(language => language.code === event.target.value),
+      languageChoices.find((language) => language.code === event.target.value),
     );
   };
 

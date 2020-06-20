@@ -106,7 +106,7 @@ const BookingModal = ({
             label={translate('Start')}
             isDisabled={newEvent.allDay}
             currentTime={moment(newEvent.start, 'DD/MM/YYYY HH:mm', true)}
-            onChange={newDateValue => handleChange('start', newDateValue)}
+            onChange={(newDateValue) => handleChange('start', newDateValue)}
           />
 
           <DateAndTimeSelectField
@@ -115,7 +115,7 @@ const BookingModal = ({
             minuteStep={30}
             isDisabled={newEvent.allDay}
             currentTime={moment(newEvent.end, 'DD/MM/YYYY HH:mm', true)}
-            onChange={newDateValue => handleChange('end', newDateValue)}
+            onChange={(newDateValue) => handleChange('end', newDateValue)}
           />
 
           <ButtonGroup

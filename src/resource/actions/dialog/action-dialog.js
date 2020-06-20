@@ -17,7 +17,7 @@ function ActionDialogController(
   ncUtilsFlash,
 ) {
   Object.assign($scope, {
-    init: function() {
+    init: function () {
       $scope.errors = {};
       $scope.form = {};
       $scope.loading = true;
@@ -32,8 +32,8 @@ function ActionDialogController(
         promise = getSelectList($scope.action.fields);
       }
       promise
-        .then(function() {
-          angular.forEach($scope.action.fields, function(field, name) {
+        .then(function () {
+          angular.forEach($scope.action.fields, function (field, name) {
             if (field.init) {
               field.init(field, $scope.resource, $scope.form, $scope.action);
             }
@@ -71,20 +71,20 @@ function ActionDialogController(
             $scope.fields = $scope.action.fields;
           }
         })
-        .finally(function() {
+        .finally(function () {
           $scope.loading = false;
           // Trigger digest for async/await
           $rootScope.$applyAsync();
         });
     },
-    submitActive: function() {
+    submitActive: function () {
       return (
         $scope.ActionForm.$dirty ||
         $scope.action.method === 'DELETE' ||
         !$scope.action.fields
       );
     },
-    submitForm: function() {
+    submitForm: function () {
       if ($scope.ActionForm.$invalid) {
         return $q.reject();
       }
@@ -118,7 +118,7 @@ function ActionDialogController(
       }
 
       return promise.then(
-        function(response) {
+        function (response) {
           $scope.errors = {};
           actionUtilsService.handleActionSuccess($scope.action);
 
@@ -133,7 +133,7 @@ function ActionDialogController(
           $scope.controller.reInitResource($scope.resource);
           $scope.$close();
         },
-        function(response) {
+        function (response) {
           $scope.errors = response.data;
           ncUtilsFlash.errorFromResponse(
             response,
@@ -142,7 +142,7 @@ function ActionDialogController(
         },
       );
     },
-    cancel: function() {
+    cancel: function () {
       $scope.$dismiss();
     },
   });

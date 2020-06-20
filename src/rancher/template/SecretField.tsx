@@ -13,8 +13,8 @@ import { FORM_ID } from './constants';
 import { DecoratedField } from './DecoratedField';
 import { SelectControl } from './SelectControl';
 
-export const SecretField: React.FC<FieldProps> = props => {
-  const project = useSelector(state =>
+export const SecretField: React.FC<FieldProps> = (props) => {
+  const project = useSelector((state) =>
     formValueSelector(FORM_ID)(state, 'project'),
   );
   const { loading, error, value: options } = useAsync(
@@ -33,7 +33,7 @@ export const SecretField: React.FC<FieldProps> = props => {
   React.useEffect(() => resetSecret, [project, resetSecret]);
 
   const renderField = React.useCallback(
-    fieldProps =>
+    (fieldProps) =>
       loading ? (
         <LoadingSpinner />
       ) : error ? (

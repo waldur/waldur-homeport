@@ -40,7 +40,7 @@ export const latinName = {
   maxlength: 150,
   required: true,
   type: 'string',
-  init: field => {
+  init: (field) => {
     field.pattern = ENV.enforceLatinName && LATIN_NAME_PATTERN;
   },
 };

@@ -13,7 +13,7 @@ interface DispatchProps {
   onOpenDetailsDialog(): void;
 }
 
-const PureZabbixHostDetailsButton = props => (
+const PureZabbixHostDetailsButton = (props) => (
   <a className="btn btn-default btn-xs" onClick={props.onOpenDetailsDialog}>
     <i className={`${props.textClass} fa fa-line-chart`} /> {props.label}
   </a>

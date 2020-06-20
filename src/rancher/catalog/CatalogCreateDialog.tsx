@@ -28,11 +28,11 @@ interface OwnProps {
   };
 }
 
-const useCatalogCreateDialog = cluster => {
+const useCatalogCreateDialog = (cluster) => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const callback = React.useCallback(
-    async formData => {
+    async (formData) => {
       try {
         setSubmitting(true);
         const response = await createCatalog({
@@ -62,7 +62,7 @@ const useCatalogCreateDialog = cluster => {
 
 export const CatalogCreateDialog = reduxForm<FormData, OwnProps>({
   form: 'RancherCatalogCreate',
-})(props => {
+})((props) => {
   const { submitting, createCatalog } = useCatalogCreateDialog(
     props.resolve.cluster,
   );

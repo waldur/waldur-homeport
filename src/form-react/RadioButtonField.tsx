@@ -18,7 +18,7 @@ export class RadioButtonChoice {
   ) {}
 }
 
-export const RadioButtonField: React.FC<RadioButtonFieldProps> = props => {
+export const RadioButtonField: React.FC<RadioButtonFieldProps> = (props) => {
   const {
     input,
     choices,

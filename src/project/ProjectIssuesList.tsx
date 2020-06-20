@@ -8,7 +8,7 @@ import { Panel } from '@waldur/core/Panel';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
 import { getProject } from '@waldur/workspace/selectors';
 
-const mapStateToProps = createSelector(getProject, project => ({
+const mapStateToProps = createSelector(getProject, (project) => ({
   scope: { project },
   filter: { project: project && project.url },
 }));

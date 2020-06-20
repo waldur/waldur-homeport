@@ -34,7 +34,7 @@ const PureHookRemoveDialog = withTranslation((props: HookRemoveDialogProps) => (
   </ModalDialog>
 ));
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dismiss: () => dispatch(closeModalDialog()),
 });
 

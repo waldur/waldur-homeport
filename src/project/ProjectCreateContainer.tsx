@@ -29,7 +29,7 @@ const loadData = async () => {
   };
 };
 
-const ProjectCreateComponent: React.FC<ProjectCreateProps> = props => {
+const ProjectCreateComponent: React.FC<ProjectCreateProps> = (props) => {
   useTitle(translate('Create project'));
 
   const { loading, error, value } = useAsync(loadData);
@@ -55,13 +55,13 @@ const ProjectCreateComponent: React.FC<ProjectCreateProps> = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   enforceLatinName: getConfig(state).enforceLatinName,
 });
 
-const mapDispatchToProps = dispatch => ({
-  createProject: data => actions.createProject(data, dispatch),
+const mapDispatchToProps = (dispatch) => ({
+  createProject: (data) => actions.createProject(data, dispatch),
   gotoProjectList: () => actions.gotoProjectList(null, dispatch),
 });
 

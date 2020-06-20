@@ -4,7 +4,7 @@ import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/Resour
 
 import { getTenantListState } from '../utils';
 
-ResourceBreadcrumbsRegistry.register('OpenStack.Network', resource => {
+ResourceBreadcrumbsRegistry.register('OpenStack.Network', (resource) => {
   const tenant_uuid = getUUID(resource.tenant);
   return [
     getTenantListState(resource.project_uuid),

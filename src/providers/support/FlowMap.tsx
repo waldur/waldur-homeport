@@ -82,7 +82,7 @@ export default class FlowMap extends React.Component<FlowMapProps> {
     return false;
   }
 
-  composeFeatureCollection = data => ({
+  composeFeatureCollection = (data) => ({
     type: 'FeatureCollection',
     features: data.usage.reduce((features, entry) => {
       const provider_uuid = entry.provider_to_consumer.provider_uuid;
@@ -133,7 +133,7 @@ export default class FlowMap extends React.Component<FlowMapProps> {
     }
   }
 
-  flowmapLaterClickHandler = e => {
+  flowmapLaterClickHandler = (e) => {
     if (e.sharedOriginFeatures.length) {
       this.props.selectServiceProvider(
         e.layer.feature.properties.provider_uuid,
@@ -181,6 +181,6 @@ export default class FlowMap extends React.Component<FlowMapProps> {
     if (!this.leaflet) {
       return <LoadingSpinner />;
     }
-    return <div ref={node => (this.mapNode = node)} id="flow-map" />;
+    return <div ref={(node) => (this.mapNode = node)} id="flow-map" />;
   }
 }

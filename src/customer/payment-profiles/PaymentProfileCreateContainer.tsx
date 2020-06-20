@@ -21,7 +21,7 @@ import { DateField } from '@waldur/form-react/DateField';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
-const PaymentProfileCreate = props => {
+const PaymentProfileCreate = (props) => {
   useTitle(translate('Add payment profile'));
 
   const [isFixedPrice, setIsFixedPrice] = useState(false);
@@ -95,8 +95,8 @@ const PaymentProfileCreate = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  submitRequest: formData => dispatch(addPaymentProfile(formData)),
+const mapDispatchToProps = (dispatch) => ({
+  submitRequest: (formData) => dispatch(addPaymentProfile(formData)),
 });
 
 const connector = connect(null, mapDispatchToProps);

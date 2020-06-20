@@ -23,7 +23,7 @@ import FormUtils from './form-utils';
 import helpicon from './help-icon';
 import multiplyBy from './multiply-by';
 
-export default module => {
+export default (module) => {
   module.service('formUtils', FormUtils);
   module.directive('appstoreField', appstoreField);
   module.component('appstoreFieldString', appstoreFieldString);

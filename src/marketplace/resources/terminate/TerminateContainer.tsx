@@ -8,7 +8,7 @@ import { terminateResource } from '../store/constants';
 
 import { PureTerminateDialog } from './TerminateDialog';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   orderCanBeApproved: orderCanBeApproved(state),
 });
 

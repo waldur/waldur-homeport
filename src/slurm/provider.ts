@@ -2,7 +2,7 @@ import * as ProvidersRegistry from '@waldur/providers/registry';
 
 import { SlurmForm } from './SlurmForm';
 
-const serializer = fields => ({
+const serializer = (fields) => ({
   batch_service: fields.batch_service.value,
   hostname: fields.hostname,
   username: fields.username,

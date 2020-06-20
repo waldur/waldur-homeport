@@ -9,7 +9,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { NodeRoleField } from './NodeRoleField';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -59,7 +59,7 @@ const TableComponent = props => {
 const TableOptions = {
   table: 'rancher-nodes',
   fetchData: createFetcher('rancher-nodes'),
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     cluster_uuid: props.resource.uuid,
   }),
 };

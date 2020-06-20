@@ -10,7 +10,7 @@ interface PlanUsageListProps {
   offering_uuid: string;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -52,10 +52,10 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'OfferingPlans',
   fetchData: createFetcher('marketplace-plans/usage_stats'),
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     offering_uuid: props.offering_uuid,
   }),
-  exportRow: row => [row.plan_name, row.limit, row.usage],
+  exportRow: (row) => [row.plan_name, row.limit, row.usage],
   exportFields: ['Plan', 'Limit', 'Active plan count'],
 };
 

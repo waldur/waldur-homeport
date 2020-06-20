@@ -39,7 +39,7 @@ export class PureIssueAttachmentsContainer extends React.Component<
 
   onDragLeave = () => this.setState({ dropzoneActive: false });
 
-  onDrop = files => {
+  onDrop = (files) => {
     this.setState({ dropzoneActive: false });
     this.props.putAttachments(files);
   };
@@ -57,7 +57,7 @@ export class PureIssueAttachmentsContainer extends React.Component<
         onDrop={this.onDrop}
         onDragEnter={this.onDragEnter}
         onDragLeave={this.onDragLeave}
-        ref={node => (this.dropzoneNode = node)}
+        ref={(node) => (this.dropzoneNode = node)}
       >
         {dropzoneActive && (
           <div className="dropzone__overlay">
@@ -100,7 +100,7 @@ export class PureIssueAttachmentsContainer extends React.Component<
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   attachments: getAttachments(state),
   loading: getIsLoading(state),
   uploading: getUploading(state),

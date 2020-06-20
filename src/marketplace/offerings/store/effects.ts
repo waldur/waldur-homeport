@@ -48,7 +48,7 @@ function* loadData() {
 
 function* removeOfferingComponent(action) {
   const plans = yield select(getPlans);
-  const newPlans = plans.map(plan =>
+  const newPlans = plans.map((plan) =>
     planWithoutComponent(plan, action.payload.component),
   );
   yield put(change(constants.FORM_ID, 'plans', newPlans));
@@ -56,7 +56,7 @@ function* removeOfferingComponent(action) {
 
 function* removeOfferingQuotas(action) {
   const plans = yield select(getPlans);
-  const newPlans = plans.map(plan =>
+  const newPlans = plans.map((plan) =>
     planWithoutQuotas(plan, action.payload.component),
   );
   yield put(change(constants.FORM_ID, 'plans', newPlans));
@@ -215,7 +215,7 @@ function* removeOfferingScreenshot(action: Action<any>) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
   yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
   yield takeEvery(constants.CATEGORY_CHANGED, handleCategoryChange);

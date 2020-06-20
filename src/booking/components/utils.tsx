@@ -7,13 +7,13 @@ import * as ReactDOM from 'react-dom';
 
 import { formatShortDateTime, formatTime } from '@waldur/core/dateUtils';
 
-export const bookingDataTemplate = event => {
+export const bookingDataTemplate = (event) => {
   const getLabels = Object.keys(event);
-  const getLabelValues = getLabels.map(label => ({
+  const getLabelValues = getLabels.map((label) => ({
     label,
     value: event[label],
   }));
-  return getLabelValues.map(item => (
+  return getLabelValues.map((item) => (
     <>
       <div className="form-group">
         <label className="control-label col-xs-4">{item.label}</label>

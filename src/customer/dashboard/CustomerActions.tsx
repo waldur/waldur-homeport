@@ -18,6 +18,6 @@ export const CustomerActions = (props: CustomerActionsProps) => (
         state: 'organization.issues',
       }),
       getSupportPortalAction(),
-    ].filter(action => action !== undefined)}
+    ].filter((action) => action !== undefined)}
   />
 );

@@ -7,7 +7,7 @@ export const getUser = (state: OuterState): User => state.workspace.user;
 export const getCustomer = (state: OuterState): Customer =>
   state.workspace.customer;
 
-export const getUserCustomerPermissions = createSelector(getUser, user => {
+export const getUserCustomerPermissions = createSelector(getUser, (user) => {
   if (user) {
     return user.customer_permissions;
   }
@@ -53,12 +53,12 @@ export const getOwner = createSelector(
       return undefined;
     }
     if (customer) {
-      return customer.owners.find(owner => owner.uuid === user.uuid);
+      return customer.owners.find((owner) => owner.uuid === user.uuid);
     }
   },
 );
 
-export const isOwner = createSelector(getOwner, owner => {
+export const isOwner = createSelector(getOwner, (owner) => {
   return !!owner;
 });
 
@@ -81,7 +81,7 @@ const checkRole = (project, user, role) => {
     return false;
   }
   const projectUser = project.permissions.find(
-    perm => perm.user_uuid === user.uuid,
+    (perm) => perm.user_uuid === user.uuid,
   );
   if (projectUser) {
     return projectUser.role === role;

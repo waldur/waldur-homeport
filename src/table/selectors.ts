@@ -16,7 +16,7 @@ const selectTableEntitiesOrder = (state, table) => {
 
 export const getTableEntityCount = createSelector(
   selectTableEntities,
-  entities => Object.keys(entities).length,
+  (entities) => Object.keys(entities).length,
 );
 
 export const selectTableRows = createSelector(
@@ -25,7 +25,7 @@ export const selectTableRows = createSelector(
   (entities, order) => {
     const rows = [];
 
-    order.forEach(uuid => {
+    order.forEach((uuid) => {
       rows.push(entities[uuid]);
     });
     return rows;

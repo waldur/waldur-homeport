@@ -12,7 +12,7 @@ import { formatDefault } from '@waldur/resource/utils';
 
 import { Network } from './types';
 
-const formatTenant = props => (
+const formatTenant = (props) => (
   <ResourceLink
     type="OpenStack.Tenant"
     uuid={getUUID(props.tenant)}

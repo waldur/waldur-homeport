@@ -47,7 +47,7 @@ const loadData = async (filter: CustomerFilterData) => {
   }
 };
 
-const TotalCostComponent: React.FC<CustomerListComponentProps> = props => {
+const TotalCostComponent: React.FC<CustomerListComponentProps> = (props) => {
   const { loading, error, value } = useAsync(
     () => loadData(props.customerListFilter),
     [props.customerListFilter],
@@ -61,7 +61,7 @@ const TotalCostComponent: React.FC<CustomerListComponentProps> = props => {
   return <TotalCostField total={value.total} />;
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customerListFilter: getFormValues('customerListFilter')(state),
 });
 

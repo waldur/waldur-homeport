@@ -26,7 +26,7 @@ export interface ResourceUsageFormProps extends InjectedFormProps {
 const StaticPlanField = () => (
   <Field
     name="period"
-    component={fieldProps => (
+    component={(fieldProps) => (
       <p>
         <strong>{translate('Period')}</strong>: {fieldProps.input.value.label}
       </p>

@@ -14,7 +14,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { InvoicesFilter } from './InvoicesFilter';
 import { SendNotificationButton } from './SendNotificationButton';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   const columns = [
     {
@@ -71,7 +71,7 @@ const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => ({
+const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
   customer: props.customer.url,
 });
@@ -83,7 +83,7 @@ const TableOptions: TableOptionsType = {
   queryField: 'number',
 };
 
-const mapsStateToProps = state => ({
+const mapsStateToProps = (state) => ({
   customer: getCustomer(state),
   stateFilter: getFormValues('InvoicesFilter')(state),
 });

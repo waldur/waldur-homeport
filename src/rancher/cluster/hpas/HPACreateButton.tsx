@@ -7,7 +7,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 
 import { HPACreateDialog } from './HPACreateDialog';
 
-const createHPADialog = cluster =>
+const createHPADialog = (cluster) =>
   openModalDialog(HPACreateDialog, { resolve: { cluster } });
 
 export const HPACreateButton = ({ cluster }) => {

@@ -8,7 +8,7 @@ interface UserPasswordProps {
   password: string;
 }
 
-export const UserPassword: React.FC<UserPasswordProps> = props => {
+export const UserPassword: React.FC<UserPasswordProps> = (props) => {
   const [showPassword, toggle] = useToggle(false);
   return (
     <>

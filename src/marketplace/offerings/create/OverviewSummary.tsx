@@ -10,7 +10,7 @@ import { FORM_ID } from '../store/constants';
 
 import { hasError } from './utils';
 
-const PureOverviewSummary = props => {
+const PureOverviewSummary = (props) => {
   const schema: Section = {
     title: translate('Overview'),
     attributes: [
@@ -49,7 +49,7 @@ const PureOverviewSummary = props => {
   );
 };
 
-const connector = connect(state => ({
+const connector = connect((state) => ({
   formData: getFormValues(FORM_ID)(state),
   nameInvalid: hasError('name')(state),
 }));

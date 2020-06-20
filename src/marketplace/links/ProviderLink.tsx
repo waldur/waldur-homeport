@@ -12,7 +12,7 @@ interface ProviderLinkProps {
   children?: React.ReactNode;
 }
 
-const PureProviderLink: React.FC<ProviderLinkProps> = props => (
+const PureProviderLink: React.FC<ProviderLinkProps> = (props) => (
   <Link
     state={
       props.workspace === 'organization'
@@ -26,7 +26,7 @@ const PureProviderLink: React.FC<ProviderLinkProps> = props => (
   </Link>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   workspace: getWorkspace(state),
 });
 

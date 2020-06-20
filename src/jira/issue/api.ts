@@ -13,7 +13,7 @@ export const createIssue = (issue: JiraIssue) =>
     description: issue.description,
   });
 
-export const loadIssues = request =>
+export const loadIssues = (request) =>
   get('/jira-issues/', {
     params: {
       name: request.query,
@@ -22,7 +22,7 @@ export const loadIssues = request =>
     },
   });
 
-export const loadResources = request =>
+export const loadResources = (request) =>
   get('/resources/', {
     params: {
       name: request.query,

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 
-export const JiraIssuePriorityField = props => (
+export const JiraIssuePriorityField = (props) => (
   <Tooltip label={props.priority_description} id="issueType">
     <img
       src={props.priority_icon_url}

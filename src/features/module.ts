@@ -1,5 +1,5 @@
 import featuresProvider from './provider';
 
-export default module => {
+export default (module) => {
   module.provider('features', featuresProvider);
 };

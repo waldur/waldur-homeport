@@ -15,11 +15,11 @@ ActionConfigurationRegistry.register('OpenStack.SecurityGroup', {
     edit: {
       ...DEFAULT_EDIT_ACTION,
       successMessage: gettext('Security group has been updated.'),
-      isVisible: model => model.name !== 'default',
+      isVisible: (model) => model.name !== 'default',
     },
     destroy: {
       title: gettext('Destroy'),
-      isVisible: model => model.name !== 'default',
+      isVisible: (model) => model.name !== 'default',
     },
     pull: {
       title: gettext('Synchronise'),
@@ -35,8 +35,8 @@ ActionConfigurationRegistry.register('OpenStack.SecurityGroup', {
         },
       },
       dialogSize: 'lg',
-      serializer: model =>
-        model.rules.map(rule => ({
+      serializer: (model) =>
+        model.rules.map((rule) => ({
           ...rule,
           protocol: rule.protocol === null ? '' : rule.protocol,
         })),
@@ -44,7 +44,7 @@ ActionConfigurationRegistry.register('OpenStack.SecurityGroup', {
   },
 });
 
-export default module => {
+export default (module) => {
   ResourceSummary.register(
     'OpenStack.SecurityGroup',
     OpenStackSecurityGroupSummary,

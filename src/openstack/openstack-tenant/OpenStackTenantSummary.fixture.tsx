@@ -9,7 +9,7 @@ import '@waldur/openstack/provider';
 
 import { OpenStackTenantSummary } from './OpenStackTenantSummary';
 
-export const renderSummary = props => {
+export const renderSummary = (props) => {
   const { tenantCredentialsVisible, ...rest } = props;
   const mockStore = configureStore();
   const store = mockStore({

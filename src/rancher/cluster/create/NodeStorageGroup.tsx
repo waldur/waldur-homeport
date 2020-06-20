@@ -5,7 +5,7 @@ import { DataVolumesList } from './DataVolumesList';
 import { SystemVolumeSizeGroup } from './SystemVolumeSizeGroup';
 import { SystemVolumeTypeGroup } from './SystemVolumeTypeGroup';
 
-export const NodeStorageGroup = props => (
+export const NodeStorageGroup = (props) => (
   <>
     <SystemVolumeSizeGroup
       labelClassName={props.labelClassName}

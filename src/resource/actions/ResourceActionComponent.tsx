@@ -57,7 +57,7 @@ export const ResourceActionComponent = (
         Object.keys(props.actions).length === 0 ? (
           <MenuItem eventKey="2">{translate('There are no actions.')}</MenuItem>
         ) : (
-          Object.keys(props.actions).map(key => (
+          Object.keys(props.actions).map((key) => (
             <ActionItem
               key={key}
               action={props.actions[key]}

@@ -7,7 +7,7 @@ import {
 import loadInspinia from './inspinia';
 import { ncUtilsFlash } from './utils';
 
-export default module => {
+export default (module) => {
   module.run(loadInspinia);
   module.run(protectStates);
   module.config(urlRouterProvider);

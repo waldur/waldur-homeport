@@ -31,17 +31,19 @@ export default function createAction(): ResourceAction<OpenStackBackup> {
         loadSubnets(resource.service_settings_uuid),
       ]);
 
-      form.security_groups = resource.instance_security_groups.map(choice => ({
+      form.security_groups = resource.instance_security_groups.map(
+        (choice) => ({
+          value: choice.url,
+          display_name: choice.name,
+        }),
+      );
+
+      action.fields.security_groups.choices = securityGroups.map((choice) => ({
         value: choice.url,
         display_name: choice.name,
       }));
 
-      action.fields.security_groups.choices = securityGroups.map(choice => ({
-        value: choice.url,
-        display_name: choice.name,
-      }));
-
-      action.fields.flavor.choices = flavors.map(flavor => ({
+      action.fields.flavor.choices = flavors.map((flavor) => ({
         display_name: formatFlavor(flavor),
         value: flavor,
       }));
@@ -53,12 +55,12 @@ export default function createAction(): ResourceAction<OpenStackBackup> {
 
       form.internal_ips_set = resource.instance_internal_ips_set;
     },
-    serializer: form => {
+    serializer: (form) => {
       return {
         flavor: form.flavor.url,
         internal_ips_set: form.internal_ips_set,
         floating_ips: form.floating_ips,
-        security_groups: form.security_groups.map(item => ({
+        security_groups: form.security_groups.map((item) => ({
           url: item.value,
         })),
       };

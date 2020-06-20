@@ -11,7 +11,7 @@ interface CollapsibleItemProps {
   counter?: number;
 }
 
-export const CollapsibleItem: React.FC<CollapsibleItemProps> = props => {
+export const CollapsibleItem: React.FC<CollapsibleItemProps> = (props) => {
   const [collapsed, onClick] = useBoolean(false);
   return (
     <div className="collapsible-item">

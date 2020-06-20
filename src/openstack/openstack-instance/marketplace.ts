@@ -7,13 +7,13 @@ import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { OpenstackInstanceCreateForm } from './OpenstackInstanceCreateForm';
 import { getVolumeTypeRequirements } from './utils';
 
-const serializeFloatingIPs = networks => {
+const serializeFloatingIPs = (networks) => {
   if (!networks) {
     return undefined;
   }
   return networks
-    .filter(item => item.floatingIp.url !== 'false')
-    .map(item => {
+    .filter((item) => item.floatingIp.url !== 'false')
+    .map((item) => {
       // Auto-assign floating IP
       if (item.floatingIp.url === 'true') {
         return {
@@ -28,20 +28,20 @@ const serializeFloatingIPs = networks => {
     });
 };
 
-const serializeInternalIps = networks => {
+const serializeInternalIps = (networks) => {
   if (!networks) {
     return undefined;
   }
-  return networks.map(network => ({
+  return networks.map((network) => ({
     subnet: network.subnet.url,
   }));
 };
 
-const serializeSecurityGroups = groups => {
+const serializeSecurityGroups = (groups) => {
   if (!groups) {
     return undefined;
   }
-  return groups.map(group => ({
+  return groups.map((group) => ({
     url: group.url,
   }));
 };
@@ -77,7 +77,7 @@ const serializer = ({
   availability_zone,
 });
 
-const formValidator = props => {
+const formValidator = (props) => {
   const {
     offering,
     values: { attributes },

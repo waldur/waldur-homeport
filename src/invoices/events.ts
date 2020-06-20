@@ -2,7 +2,7 @@ import eventsRegistry from '@waldur/events/registry';
 import { getCustomerContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
-const getInvoiceContext = event => ({
+const getInvoiceContext = (event) => ({
   ...getCustomerContext(event),
   period: event.invoice_date,
 });

@@ -54,7 +54,7 @@ export class SharedStrings {
 
   formatStrings() {
     return this.strings
-      .map(value => `<si><t>${this.escapeValue(value)}</t></si>`)
+      .map((value) => `<si><t>${this.escapeValue(value)}</t></si>`)
       .join('');
   }
 
@@ -69,7 +69,7 @@ export class SharedStrings {
   }
 }
 
-const getColumnLetter = col => {
+const getColumnLetter = (col) => {
   if (col <= 0) {
     throw Error('col must be more than 0');
   }
@@ -157,7 +157,7 @@ export default async function exportExcel(table, data) {
       mimeType:
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     })
-    .then(blob => {
+    .then((blob) => {
       FileSaver.saveAs(blob, `${table}.xlsx`);
     });
 }

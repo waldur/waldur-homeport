@@ -8,7 +8,7 @@ import { translate } from '@waldur/i18n';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-const IntegerField = renderValidationWrapper(fieldProps => (
+const IntegerField = renderValidationWrapper((fieldProps) => (
   <>
     <div className="input-group" style={{ maxWidth: 200 }}>
       <NumberField min={1} max={1 * 4096} {...fieldProps.input} />
@@ -26,8 +26,8 @@ export const SystemVolumeSizeGroup = () => (
       name="attributes.system_volume_size"
       validate={required}
       component={IntegerField}
-      format={v => (v ? v / 1024 : '')}
-      normalize={v => Number(v) * 1024}
+      format={(v) => (v ? v / 1024 : '')}
+      normalize={(v) => Number(v) * 1024}
     />
   </CreateResourceFormGroup>
 );

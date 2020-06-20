@@ -16,7 +16,7 @@ export const sendIssueCreateRequest = async (
     const issue = response.data;
     if (files) {
       await Promise.all(
-        Array.from(files).map(file => putAttachment(issue.url, file)),
+        Array.from(files).map((file) => putAttachment(issue.url, file)),
       );
     }
     dispatch(

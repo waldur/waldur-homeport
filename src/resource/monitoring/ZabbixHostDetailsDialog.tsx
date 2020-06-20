@@ -32,7 +32,7 @@ const DialogFooter = ({ host }) => (
   </>
 );
 
-export const DialogBody = props => {
+export const DialogBody = (props) => {
   if (props.loading) {
     return <LoadingSpinner />;
   } else if (props.host) {
@@ -59,7 +59,9 @@ export const DialogBody = props => {
   }
 };
 
-const PureZabbixHostDetailsDialog: React.FC<ZabbixHostDetailsDialogProps> = props => {
+const PureZabbixHostDetailsDialog: React.FC<ZabbixHostDetailsDialogProps> = (
+  props,
+) => {
   useEffectOnce(props.onFetch);
   return (
     <ModalDialog

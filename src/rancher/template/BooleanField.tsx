@@ -9,7 +9,7 @@ import { FieldProps } from '../types';
 
 import { DecoratedLabel } from './DecoratedLabel';
 
-const renderControl = props => (
+const renderControl = (props) => (
   <Checkbox
     checked={props.input.value}
     onChange={(e: React.ChangeEvent<any>) =>
@@ -20,7 +20,7 @@ const renderControl = props => (
   </Checkbox>
 );
 
-export const BooleanField: React.FC<FieldProps> = props => (
+export const BooleanField: React.FC<FieldProps> = (props) => (
   <Col sm={6}>
     <FormGroup>
       <Field

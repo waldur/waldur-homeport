@@ -4,7 +4,7 @@ import * as api from './api';
 import { Quota } from './types';
 
 jest.mock('@waldur/core/services', () => ({
-  defaultCurrency: val => `EUR${val}`,
+  defaultCurrency: (val) => `EUR${val}`,
 }));
 
 describe('Dashboard chart API', () => {

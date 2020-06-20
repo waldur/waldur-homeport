@@ -1,7 +1,7 @@
 import { getAll, getById } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 
-const getLimits = settingsId => getById('/vmware-limits/', settingsId);
+const getLimits = (settingsId) => getById('/vmware-limits/', settingsId);
 
 export const loadFormOptions = async (props: {
   settings_uuid: string;

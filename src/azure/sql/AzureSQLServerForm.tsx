@@ -12,9 +12,11 @@ import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 const loadData = (settings_uuid: string) =>
-  getLocations(settings_uuid).then(locations => ({ locations }));
+  getLocations(settings_uuid).then((locations) => ({ locations }));
 
-export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = props => {
+export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = (
+  props,
+) => {
   const { loading, error, value } = useAsync(
     () => loadData(props.offering.scope_uuid),
     [props.offering.scope_uuid],

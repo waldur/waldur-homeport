@@ -16,7 +16,7 @@ const EventMessageField = ({ row }) => (
 
 const EventDateField = ({ row }) => <span>{formatDateTime(row.created)}</span>;
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   useTitle(translate('Audit logs'));
   return (
@@ -53,7 +53,7 @@ export const getEventsList = (extraOptions?) => {
     fetchData: createFetcher('events'),
     queryField: 'message',
     exportFields: ['message', 'created'],
-    exportRow: row => [row.message, row.created],
+    exportRow: (row) => [row.message, row.created],
     ...extraOptions,
     pullInterval: () => ENV.countersTimerInterval * 1000,
   };

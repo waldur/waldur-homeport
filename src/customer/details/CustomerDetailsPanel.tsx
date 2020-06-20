@@ -116,7 +116,7 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   organizationSubnetsVisible: getConfig(state).organizationSubnetsVisible,
   organizationDomainVisible: getConfig(state).organizationDomainVisible,

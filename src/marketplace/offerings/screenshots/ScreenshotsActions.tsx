@@ -31,7 +31,7 @@ const mapStateToProps = (state: OuterState) => ({
   offering: getOffering(state).offering,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   openConfirmationDialog: (screenshot: Screenshot, offering: Offering) =>
     openDialog(dispatch, screenshot, offering),
 });
@@ -44,9 +44,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
         dispatchProps.openConfirmationDialog(ownProps.row, stateProps.offering),
       visible: stateProps.user.is_staff,
     },
-  ].filter(row => row.visible),
+  ].filter((row) => row.visible),
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);
 
-export const OfferingScreenshotsActions = enhance(ActionsDropdown);
+export const ScreenshotsActions = enhance(ActionsDropdown);

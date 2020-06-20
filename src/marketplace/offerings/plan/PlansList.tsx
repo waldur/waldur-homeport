@@ -8,7 +8,7 @@ import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
 import { PlanAddButton } from './PlanAddButton';
 import { PlanPanel } from './PlanPanel';
 
-const PlansListComponent = props => (
+const PlansListComponent = (props) => (
   <div className="form-group">
     <Col smOffset={2} sm={8} className="m-b-sm">
       <p className="form-control-static">
@@ -33,7 +33,7 @@ const PlansListComponent = props => (
   </div>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   selectedProvider: state.form.marketplaceOfferingCreate.values.type,
 });
 

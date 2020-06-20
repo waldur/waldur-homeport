@@ -23,10 +23,12 @@ import { TenantGroup } from './TenantGroup';
 import { TenantSelector } from './TenantSelector';
 import { rancherClusterName } from './utils';
 
-const getTenant = state =>
+const getTenant = (state) =>
   formValueSelector(FORM_ID)(state, 'attributes.tenant_settings');
 
-export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = props => {
+export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
+  props,
+) => {
   React.useEffect(() => {
     const { project, plan } = props;
     const initialData = {
@@ -48,7 +50,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
   const user = useSelector(getUser);
 
   const loadSshKeyOptions = React.useCallback(
-    () => loadSshKeys(user.uuid).then(options => ({ options })),
+    () => loadSshKeys(user.uuid).then((options) => ({ options })),
     [user.uuid],
   );
 

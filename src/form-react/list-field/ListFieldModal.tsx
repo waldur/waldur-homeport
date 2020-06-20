@@ -39,7 +39,7 @@ export class PureListFieldModal extends React.Component<
   }
 
   selectRow(index) {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
       selectedRowIndex: index,
     }));
@@ -53,7 +53,7 @@ export class PureListFieldModal extends React.Component<
       },
     } = this.props;
 
-    const radioButton = props => (
+    const radioButton = (props) => (
       <input
         {...props.input}
         name="optionRadioButton"
@@ -120,7 +120,7 @@ export class PureListFieldModal extends React.Component<
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   closeModal: (): void => dispatch(closeModalDialog()),
 });
 

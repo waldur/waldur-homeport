@@ -7,7 +7,7 @@ import { OuterState } from '@waldur/workspace/types';
 const EVENT_TYPES = ['role_granted', 'role_revoked', 'role_updated'];
 
 export const PureProjectPermissionsLogList = getEventsList({
-  mapPropsToFilter: props =>
+  mapPropsToFilter: (props) =>
     props.project
       ? {
           scope: props.project.url,

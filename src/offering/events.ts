@@ -2,7 +2,7 @@ import eventsRegistry from '@waldur/events/registry';
 import { getLink } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
-const getOfferingContext = event => ({
+const getOfferingContext = (event) => ({
   offering_link: getLink(
     'offeringDetails',
     { uuid: event.offering_uuid },

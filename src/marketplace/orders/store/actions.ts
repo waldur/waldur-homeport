@@ -14,7 +14,7 @@ export const approveOrder = (orderUuid: string) => ({
   },
 });
 
-export const fetchPendingOrders = params => ({
+export const fetchPendingOrders = (params) => ({
   type: constants.PENDING_ORDERS_FETCH,
   payload: {
     params,
@@ -35,7 +35,7 @@ export const rejectOrder = (orderUuid: string) => ({
   },
 });
 
-export const setOrderStateChangeStatus = status => ({
+export const setOrderStateChangeStatus = (status) => ({
   type: constants.SET_ORDER_STATE_CHANGE_STATUS,
   payload: {
     status,

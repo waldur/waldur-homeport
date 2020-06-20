@@ -40,7 +40,7 @@ const PureProjectRemoveDialog = withTranslation(
   ),
 );
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dismiss: () => dispatch(closeModalDialog()),
 });
 

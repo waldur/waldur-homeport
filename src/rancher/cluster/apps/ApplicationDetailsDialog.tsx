@@ -48,7 +48,7 @@ const ApplicationAnswersTable = ({ application }) => (
       </tr>
     </thead>
     <tbody>
-      {Object.keys(application.answers).map(key => {
+      {Object.keys(application.answers).map((key) => {
         const value = application.answers[key];
         return (
           <tr key={key}>

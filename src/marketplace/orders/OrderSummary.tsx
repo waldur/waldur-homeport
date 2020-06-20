@@ -17,7 +17,7 @@ interface OwnProps {
   file?: string;
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   project: getProject(state),
 });

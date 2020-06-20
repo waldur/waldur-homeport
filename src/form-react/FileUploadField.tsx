@@ -25,7 +25,7 @@ export class FileUploadField extends React.Component<FileUploadFieldProps> {
     this.fileInput.click();
   };
 
-  handleFile = event => {
+  handleFile = (event) => {
     const files = event.target.files;
     if (files.length === 1) {
       const file = files[0];
@@ -63,7 +63,7 @@ export class FileUploadField extends React.Component<FileUploadFieldProps> {
         <input
           type="file"
           style={{ display: 'none' }}
-          ref={input => (this.fileInput = input)}
+          ref={(input) => (this.fileInput = input)}
           accept={this.props.accept}
           onChange={this.handleFile}
           disabled={this.props.disabled}

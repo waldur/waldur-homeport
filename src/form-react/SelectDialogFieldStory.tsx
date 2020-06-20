@@ -10,7 +10,7 @@ class SelectDialogFieldStory extends React.Component {
     selectedValue: null,
   };
 
-  onSelectValue = selectedValue => {
+  onSelectValue = (selectedValue) => {
     this.setState({ selectedValue });
   };
 

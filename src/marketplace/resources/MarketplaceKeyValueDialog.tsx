@@ -6,7 +6,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import { KeyValueTable } from './KeyValueTable';
 
-export const MarketplaceKeyValueDialog = props => {
+export const MarketplaceKeyValueDialog = (props) => {
   return (
     <ModalDialog
       title={translate('Annotations & labels')}

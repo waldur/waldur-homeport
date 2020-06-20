@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSettings } from '../../store/actions';
 import { ConfigProps } from '../../types';
 
-const getSettings = state => state.bookings.config;
+const getSettings = (state) => state.bookings.config;
 
 export const useCalendarSettings = () => {
   const curState: ConfigProps = useSelector(getSettings);

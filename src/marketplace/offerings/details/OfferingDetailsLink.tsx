@@ -6,7 +6,9 @@ interface OfferingDetailsLinkProps {
   offering_uuid: string;
 }
 
-export const OfferingDetailsLink: React.FC<OfferingDetailsLinkProps> = props => (
+export const OfferingDetailsLink: React.FC<OfferingDetailsLinkProps> = (
+  props,
+) => (
   <Link
     state="marketplace-offering-details"
     params={{ offering_uuid: props.offering_uuid }}

@@ -34,7 +34,7 @@ const PureKeyRemoveDialog = withTranslation((props: KeyRemoveDialogProps) => (
   </ModalDialog>
 ));
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dismiss: () => dispatch(closeModalDialog()),
 });
 

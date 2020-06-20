@@ -11,7 +11,7 @@ class TableController {
     if (this.filterOptions) {
       this.$scope.$watch(
         () => this.filterValue,
-        filterValue =>
+        (filterValue) =>
           (this.filter = {
             [this.filterOptions.name]: filterValue,
           }),

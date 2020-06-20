@@ -17,7 +17,7 @@ interface OwnProps {
   };
 }
 
-const useCatalogDeleteDialog = catalog => {
+const useCatalogDeleteDialog = (catalog) => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const callback = React.useCallback(async () => {

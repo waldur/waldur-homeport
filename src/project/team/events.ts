@@ -7,22 +7,22 @@ import {
 } from '@waldur/events/utils';
 import { translate, gettext } from '@waldur/i18n';
 
-const getRoleContext = event => ({
+const getRoleContext = (event) => ({
   ...getUserContext(event),
   ...getAffectedUserContext(event),
 });
 
-const getCustomerRoleContext = event => ({
+const getCustomerRoleContext = (event) => ({
   ...getRoleContext(event),
   ...getCustomerContext(event),
 });
 
-const getProjectRoleContext = event => ({
+const getProjectRoleContext = (event) => ({
   ...getRoleContext(event),
   ...getProjectContext(event),
 });
 
-const formatRoleGrantedEvent = event => {
+const formatRoleGrantedEvent = (event) => {
   if (event.structure_type === 'customer') {
     const context = getCustomerRoleContext(event);
     if (event.role_name === 'Owner') {
@@ -52,7 +52,7 @@ const formatRoleGrantedEvent = event => {
   }
 };
 
-const formatRoleRevokedEvent = event => {
+const formatRoleRevokedEvent = (event) => {
   if (event.structure_type === 'customer') {
     const context = getCustomerRoleContext(event);
     if (event.role_name === 'Owner') {

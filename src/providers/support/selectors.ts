@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
-export const selectServiceUsage = state => state.serviceUsage.data;
-export const selectServiceProviderUuid = state =>
+export const selectServiceUsage = (state) => state.serviceUsage.data;
+export const selectServiceProviderUuid = (state) =>
   state.serviceUsage.selectedServiceProviderUuid;
-export const selectInfoPanelStatus = state =>
+export const selectInfoPanelStatus = (state) =>
   state.serviceUsage.infoPanelIsVisible;
 
 export const selectServiceProvider = createSelector(
@@ -34,7 +34,7 @@ export const selectServiceProviderConsumers = createSelector(
 
 export const selectCountriesToRender = createSelector(
   selectServiceUsage,
-  serviceUsage => {
+  (serviceUsage) => {
     return Object.keys(serviceUsage.service_providers).reduce(
       (acc, providerUuid) => {
         const countryOfProvider =
@@ -44,7 +44,7 @@ export const selectCountriesToRender = createSelector(
         }
         const countriesOfConsumers =
           serviceUsage.service_providers[providerUuid];
-        countriesOfConsumers.map(consumerUuid => {
+        countriesOfConsumers.map((consumerUuid) => {
           const countryOfConsumer =
             serviceUsage.organizations[consumerUuid].country;
           if (acc.indexOf(countryOfConsumer) === -1) {
@@ -58,11 +58,11 @@ export const selectCountriesToRender = createSelector(
   },
 );
 
-export const propertySelectorFactory = target =>
-  createSelector(selectServiceUsage, serviceUsage => {
+export const propertySelectorFactory = (target) =>
+  createSelector(selectServiceUsage, (serviceUsage) => {
     const names = [];
     const namesObjects = [];
-    Object.keys(serviceUsage.service_providers).forEach(providerUuid => {
+    Object.keys(serviceUsage.service_providers).forEach((providerUuid) => {
       const name = serviceUsage.organizations[providerUuid][target];
       if (names.indexOf(name) === -1) {
         namesObjects.push({
@@ -70,7 +70,7 @@ export const propertySelectorFactory = target =>
         });
         names.push(name);
       }
-      serviceUsage.service_providers[providerUuid].forEach(consumerUuid => {
+      serviceUsage.service_providers[providerUuid].forEach((consumerUuid) => {
         const consumerName = serviceUsage.organizations[consumerUuid][target];
         if (names.indexOf(consumerName) === -1) {
           namesObjects.push({

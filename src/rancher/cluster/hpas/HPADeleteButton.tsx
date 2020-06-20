@@ -5,7 +5,7 @@ import { deleteHPA } from '@waldur/rancher/api';
 
 import { ResourceDeleteButton } from '../ResourceDeleteButton';
 
-export const HPADeleteButton = props => (
+export const HPADeleteButton = (props) => (
   <ResourceDeleteButton
     apiFunction={() => deleteHPA(props.hpa.uuid)}
     resourceType={translate('horizontal pod autoscaler')}

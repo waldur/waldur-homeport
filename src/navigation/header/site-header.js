@@ -28,7 +28,7 @@ export default {
       this.isAuthenticated = this.authService.isAuthenticated();
       if (this.isAuthenticated) {
         UsersService.isCurrentUserValid().then(
-          result => (this.isValidUser = result),
+          (result) => (this.isValidUser = result),
         );
       }
     }

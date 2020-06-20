@@ -35,7 +35,7 @@ import { ResourcePlanPeriod } from '../resources/usage/types';
 
 export const getPlugins = () =>
   get<PluginMetadata[]>('/marketplace-plugins/').then(
-    response => response.data,
+    (response) => response.data,
   );
 
 export const getCategories = (options?: {}) =>
@@ -64,7 +64,7 @@ export const getPlan = (id: string) => getById<any>('/marketplace-plans/', id);
 export const getOffering = (id: string, options?: AxiosRequestConfig) =>
   getById<Offering>('/marketplace-offerings/', id, options);
 
-export const createOffering = data =>
+export const createOffering = (data) =>
   post<Offering>('/marketplace-offerings/', data);
 
 export const updateOffering = (offeringId, data) =>
@@ -96,17 +96,19 @@ export const getCartItems = (projectUrl: string) =>
   getAll('/marketplace-cart-items/', { params: { project: projectUrl } });
 
 export const addCartItem = (data: object) =>
-  post('/marketplace-cart-items/', data).then(response => response.data);
+  post('/marketplace-cart-items/', data).then((response) => response.data);
 
 export const removeCartItem = (id: string) =>
   deleteById('/marketplace-cart-items/', id);
 
 export const updateCartItem = (id: string, data: object) =>
-  patch(`/marketplace-cart-items/${id}/`, data).then(response => response.data);
+  patch(`/marketplace-cart-items/${id}/`, data).then(
+    (response) => response.data,
+  );
 
 export const submitCart = (data: object) =>
   post<SubmitCartRequest>('/marketplace-cart-items/submit/', data).then(
-    response => response.data,
+    (response) => response.data,
   );
 
 export const getOrdersList = (params?: {}) =>
@@ -118,20 +120,20 @@ export const getOrderItemList = (params?: {}) =>
 export const getOrderDetails = (id: string) =>
   getById<Order>('/marketplace-orders/', id);
 
-export const getOrderItem = id =>
+export const getOrderItem = (id) =>
   getById<OrderItemDetailsType>('/marketplace-order-items/', id);
 
-export const terminateOrderItem = id =>
+export const terminateOrderItem = (id) =>
   post(`/marketplace-order-items/${id}/terminate/`);
 
 export const approveOrder = (orderUuid: string) =>
   post(`/marketplace-orders/${orderUuid}/approve/`).then(
-    response => response.data,
+    (response) => response.data,
   );
 
 export const rejectOrder = (orderUuid: string) =>
   post(`/marketplace-orders/${orderUuid}/reject/`).then(
-    response => response.data,
+    (response) => response.data,
   );
 
 export const getCustomerList = (params?: {}) =>
@@ -146,7 +148,7 @@ export const updateOfferingState = (offeringUuid, action, reason) =>
   post(
     `/marketplace-offerings/${offeringUuid}/${action}/`,
     reason && { paused_reason: reason },
-  ).then(response => response.data);
+  ).then((response) => response.data);
 
 export const uploadOfferingScreenshot = (formData, offering) => {
   const reqData = {
@@ -168,27 +170,27 @@ export const deleteOfferingScreenshot = (screenshotUuid: string) =>
 export const getServiceProviderList = (params?: {}) =>
   getList<ServiceProvider>('/marketplace-service-providers/', params);
 
-export const createServiceProvider = params =>
+export const createServiceProvider = (params) =>
   post<ServiceProvider>('/marketplace-service-providers/', params).then(
-    response => response.data,
+    (response) => response.data,
   );
 
-export const getServiceProviderByCustomer = params =>
+export const getServiceProviderByCustomer = (params) =>
   getFirst<ServiceProvider>('/marketplace-service-providers/', params);
 
-export const getServiceProviderSecretCode = id =>
+export const getServiceProviderSecretCode = (id) =>
   get(`/marketplace-service-providers/${id}/api_secret_code/`).then(
-    response => response.data,
+    (response) => response.data,
   );
 
-export const generateServiceProviderSecretCode = id =>
+export const generateServiceProviderSecretCode = (id) =>
   post(`/marketplace-service-providers/${id}/api_secret_code/`).then(
-    response => response.data,
+    (response) => response.data,
   );
 
-export const submitUsageReport = payload =>
+export const submitUsageReport = (payload) =>
   post(`/marketplace-component-usages/set_usage/`, payload).then(
-    response => response.data,
+    (response) => response.data,
   );
 
 export const getResource = (id: string) =>
@@ -197,11 +199,11 @@ export const getResource = (id: string) =>
 export const switchPlan = (resource_uuid: string, plan_url: string) =>
   post(`/marketplace-resources/${resource_uuid}/switch_plan/`, {
     plan: plan_url,
-  }).then(response => response.data);
+  }).then((response) => response.data);
 
 export const terminateResource = (resource_uuid: string) =>
   post(`/marketplace-resources/${resource_uuid}/terminate/`).then(
-    response => response.data,
+    (response) => response.data,
   );
 
 export const changeLimits = (
@@ -210,7 +212,7 @@ export const changeLimits = (
 ) =>
   post(`/marketplace-resources/${resource_uuid}/update_limits/`, {
     limits,
-  }).then(response => response.data);
+  }).then((response) => response.data);
 
 export const getImportableResources = (offering_uuid: string) =>
   getAll<ImportableResource>(
@@ -221,4 +223,4 @@ export const importResource = ({ offering_uuid, ...payload }) =>
   post<Resource>(
     `/marketplace-offerings/${offering_uuid}/import_resource/`,
     payload,
-  ).then(response => response.data);
+  ).then((response) => response.data);

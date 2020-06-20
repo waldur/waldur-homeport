@@ -28,7 +28,7 @@ export const HookTypeField = ({ input, defaultValue }) => {
       value={input.value}
       onChange={input.onChange}
     >
-      {options.map(option => (
+      {options.map((option) => (
         <ToggleButton key={option.key} value={option.key}>
           <i className={option.iconClass} /> {option.label}
         </ToggleButton>

@@ -33,7 +33,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
   return (
     <ItemList
       items={items}
-      render={item =>
+      render={(item) =>
         expandedItem === item &&
         item.children && (
           <ul className="nav nav-second-level">

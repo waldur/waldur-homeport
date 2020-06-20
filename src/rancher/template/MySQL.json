@@ -112,10 +112,7 @@
     "required": true,
     "default": "ClusterIP",
     "group": "Services and Load Balancing",
-    "options": [
-      "ClusterIP",
-      "NodePort"
-    ],
+    "options": ["ClusterIP", "NodePort"],
     "subquestions": [
       {
         "variable": "service.nodePort",

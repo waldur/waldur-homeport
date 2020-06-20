@@ -160,13 +160,13 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
 };
 
 export const reducer = createByKey(
-  action => action.payload && action.payload.table,
-  action => action.payload.table,
+  (action) => action.payload && action.payload.table,
+  (action) => action.payload.table,
 )(pagination);
 
 type TableSelector = (table: string) => (state: StateTables) => TableState;
 
-export const getTableState: TableSelector = table => state => {
+export const getTableState: TableSelector = (table) => (state) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table];
   } else {

@@ -12,13 +12,13 @@ import { InputGroup } from './InputGroup';
 import { SelectField } from './SelectField';
 import { WizardForm } from './WizardForm';
 
-const formatCompanyTypes = ENV =>
-  (ENV.plugins.WALDUR_CORE.COMPANY_TYPES || []).map(item => ({
+const formatCompanyTypes = (ENV) =>
+  (ENV.plugins.WALDUR_CORE.COMPANY_TYPES || []).map((item) => ({
     value: item,
     label: item,
   }));
 
-export const WizardFormFirstPage = props => (
+export const WizardFormFirstPage = (props) => (
   <WizardForm {...props}>
     <PanelBody>
       <InputGroup

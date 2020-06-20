@@ -23,12 +23,12 @@ class PureOrderStateFilter extends React.Component<Props> {
         <label className="control-label">{translate('State')}</label>
         <Field
           name="state"
-          component={fieldProps => (
+          component={(fieldProps) => (
             <Select
               placeholder={translate('Select state...')}
               options={this.props.orderFilterStateOptions}
               value={fieldProps.input.value}
-              onChange={value => fieldProps.input.onChange(value)}
+              onChange={(value) => fieldProps.input.onChange(value)}
             />
           )}
         />
@@ -37,7 +37,7 @@ class PureOrderStateFilter extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     orderFilterStateOptions: state.marketplace.orders.tableFilter.stateOptions,
   };

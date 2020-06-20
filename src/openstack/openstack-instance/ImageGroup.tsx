@@ -10,12 +10,12 @@ import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-export const ImageGroup = props => (
+export const ImageGroup = (props) => (
   <CreateResourceFormGroup label={translate('Image')} required={true}>
     <Field
       name="attributes.image"
       validate={required}
-      component={renderValidationWrapper(fieldProps => (
+      component={renderValidationWrapper((fieldProps) => (
         <SelectDialogField
           id="image"
           columns={[
@@ -42,7 +42,7 @@ export const ImageGroup = props => (
           input={{
             name: fieldProps.input.name,
             value: fieldProps.input.value,
-            onChange: value => {
+            onChange: (value) => {
               fieldProps.input.onChange(value);
               props.validateFlavor(value);
             },

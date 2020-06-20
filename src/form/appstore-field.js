@@ -2,7 +2,7 @@
 export default function appstoreField($filter, $compile, $parse) {
   return {
     restrict: 'E',
-    link: function(scope, element, attributes) {
+    link: function (scope, element, attributes) {
       const field = $parse(attributes.field)(scope);
       let fieldType;
       if (field.type) {

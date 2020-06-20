@@ -16,7 +16,7 @@ const NumOfCreatedInstancesField = ({ row }) => (
   <span>{row.created_instances_count}</span>
 );
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -43,10 +43,10 @@ const TableComponent = props => {
 const TableOptions = {
   table: 'flavorsList',
   fetchData: createFetcher('openstacktenant-flavors/usage_stats'),
-  mapPropsToFilter: props => formatFilter(props.vmOverviewFilter),
+  mapPropsToFilter: (props) => formatFilter(props.vmOverviewFilter),
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   vmOverviewFilter: getFormValues('vmOverviewFilter')(state),
 });
 

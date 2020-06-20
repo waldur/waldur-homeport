@@ -13,12 +13,12 @@ describe('Appstore field list', () => {
   beforeEach(angular.mock.module('appstoreFieldListModule'));
 
   beforeEach(
-    angular.mock.module(function($provide) {
-      $provide.factory('$uibModal', function() {
+    angular.mock.module(function ($provide) {
+      $provide.factory('$uibModal', function () {
         return {};
       });
-      $provide.service('$uibModalStack', function() {});
-      $provide.factory('coreUtils', function() {
+      $provide.service('$uibModalStack', function () {});
+      $provide.factory('coreUtils', function () {
         return {
           templateFormatter: jasmine.createSpy('templateFormatter'),
         };
@@ -26,7 +26,7 @@ describe('Appstore field list', () => {
     }),
   );
 
-  let field = {
+  const field = {
     choices: [
       {
         fingerprint: 'e3:77:8f:90:cd:3f:6f:61:61:f2:f8:4b:cc:f8:1f:44',
@@ -55,7 +55,7 @@ describe('Appstore field list', () => {
     preselectFirst: true,
     type: 'list',
   };
-  let model = {};
+  const model = {};
   let $rootScope, $compile;
   beforeEach(inject((_$rootScope_, _$compile_) => {
     $rootScope = _$rootScope_;
@@ -63,14 +63,14 @@ describe('Appstore field list', () => {
   }));
 
   function compileElement(field) {
-    let scope = $rootScope.$new();
+    const scope = $rootScope.$new();
     scope.field = field;
     scope.model = model;
-    let html =
+    const html =
       '<appstore-field-list field="field" model="model"></appstore-field-list>';
     let element = angular.element(html);
     element = $compile(element)(scope);
-    let controller = element.controller('appstoreFieldList');
+    const controller = element.controller('appstoreFieldList');
     scope.$apply();
     return {
       controller: controller,
@@ -79,9 +79,9 @@ describe('Appstore field list', () => {
   }
 
   it('preselects SSH key if exactly one key is configured', () => {
-    let compiled = compileElement(field);
-    let controller = compiled.controller;
-    let element = compiled.element;
+    const compiled = compileElement(field);
+    const controller = compiled.controller;
+    const element = compiled.element;
 
     expect(controller.model[field.name]).toBe(field.choices[0]);
     expect(controller.renderEmpty).toBeFalsy();
@@ -92,7 +92,7 @@ describe('Appstore field list', () => {
 
   it('sets renderEmpty to True if field has no choices', () => {
     field.choices = [];
-    let controller = compileElement(field).controller;
+    const controller = compileElement(field).controller;
 
     expect(controller.emptyMessage).toBe(field.emptyMessage);
     expect(controller.renderEmpty).toBeTruthy();
@@ -102,7 +102,7 @@ describe('Appstore field list', () => {
   it('sets renderWarning to True if field has is required and has no choices', () => {
     field.choices = [];
     field.required = true;
-    let controller = compileElement(field).controller;
+    const controller = compileElement(field).controller;
 
     expect(controller.warningMessage).toBe(field.warningMessage);
     expect(controller.renderWarning).toBeTruthy();

@@ -45,7 +45,7 @@ export function* fetchList(action) {
     if (pullInterval) {
       const { execute } = yield race({
         skip: take(
-          action =>
+          (action) =>
             [actions.FETCH_LIST_START, actions.RESET_PAGINATION].includes(
               action.type,
             ) && action.payload.table === table,

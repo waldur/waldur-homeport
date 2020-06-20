@@ -7,11 +7,11 @@ import { translate } from '@waldur/i18n';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-export const PublicKeyGroup = props => (
+export const PublicKeyGroup = (props) => (
   <CreateResourceFormGroup label={translate('SSH public key')}>
     <Field
       name="attributes.ssh_public_key"
-      component={fieldProps => (
+      component={(fieldProps) => (
         <SelectDialogField
           columns={[
             {

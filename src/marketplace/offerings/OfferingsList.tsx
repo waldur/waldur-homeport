@@ -19,7 +19,7 @@ import { OfferingCreateButton } from './actions/OfferingCreateButton';
 import { OfferingDetailsLink } from './details/OfferingDetailsLink';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const { translate } = props;
 
   const columns = [
@@ -74,7 +74,7 @@ export const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => {
+const mapPropsToFilter = (props) => {
   const filter: Record<string, string | boolean> = {
     billable: true,
     shared: true,
@@ -84,7 +84,7 @@ const mapPropsToFilter = props => {
   }
   if (props.filter) {
     if (props.filter.state) {
-      filter.state = props.filter.state.map(option => option.value);
+      filter.state = props.filter.state.map((option) => option.value);
     }
   }
   return filter;
@@ -110,7 +110,7 @@ const showOfferingCreateButton = createSelector(
     customer && customer.is_service_provider && ownerOrStaff,
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   actionsDisabled: !isOwnerOrStaff(state),
   showOfferingCreateButton: showOfferingCreateButton(state),

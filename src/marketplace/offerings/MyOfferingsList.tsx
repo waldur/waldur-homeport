@@ -9,7 +9,7 @@ import { OuterState } from '@waldur/workspace/types';
 
 import { TableComponent, TableOptions } from './OfferingsList';
 
-const mapPropsToFilter = props => {
+const mapPropsToFilter = (props) => {
   const filter: Record<string, string | boolean> = {
     billable: false,
   };
@@ -18,7 +18,7 @@ const mapPropsToFilter = props => {
   }
   if (props.filter) {
     if (props.filter.state) {
-      filter.state = props.filter.state.map(option => option.value);
+      filter.state = props.filter.state.map((option) => option.value);
     }
   }
   return filter;

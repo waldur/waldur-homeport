@@ -69,8 +69,9 @@ async function loadOrderItem(order_item_uuid) {
   const orderItem = await api.getOrderItem(order_item_uuid);
   const offering = await api.getOffering(orderItem.offering_uuid);
   const plugins = await api.getPlugins();
-  const limits = plugins.find(plugin => plugin.offering_type === offering.type)
-    .available_limits;
+  const limits = plugins.find(
+    (plugin) => plugin.offering_type === offering.type,
+  ).available_limits;
   const category = await api.getCategory(offering.category_uuid);
   const sections = category.sections;
   const tabs = getTabs({ offering, sections });

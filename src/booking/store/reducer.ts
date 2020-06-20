@@ -46,7 +46,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         schedules: [
-          ...state.schedules.filter(item => item.id !== payload.oldID),
+          ...state.schedules.filter((item) => item.id !== payload.oldID),
           payload.event,
         ],
       };
@@ -55,7 +55,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         schedules: state.schedules.filter(
-          item => item.id !== payload.bookingID,
+          (item) => item.id !== payload.bookingID,
         ),
       };
 

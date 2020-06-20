@@ -17,11 +17,11 @@ interface Props {
   openCustomerDialog(id: string): void;
 }
 
-const connector = connect(null, dispatch => ({
-  openUserDialog: user_uuid =>
+const connector = connect(null, (dispatch) => ({
+  openUserDialog: (user_uuid) =>
     dispatch(openModalDialog(UserPopover, { resolve: { user_uuid } })),
 
-  openCustomerDialog: customer_uuid =>
+  openCustomerDialog: (customer_uuid) =>
     dispatch(
       openModalDialog(CustomerPopover, {
         resolve: { customer_uuid },

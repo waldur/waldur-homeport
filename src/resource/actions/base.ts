@@ -60,7 +60,7 @@ export function createPullAction(ctx: ActionContext): ResourceAction {
 export function validateState(
   ...validStates: ResourceState[]
 ): (ctx: ActionContext) => string {
-  return ctx => {
+  return (ctx) => {
     if (!validStates.includes(ctx.resource.state)) {
       return translate('Valid states for operation: {validStates}.', {
         validStates: validStates.join(', '),
@@ -72,7 +72,7 @@ export function validateState(
 export function validateRuntimeState(
   ...validStates: string[]
 ): (ctx: ActionContext) => string {
-  return ctx => {
+  return (ctx) => {
     if (!validStates.includes(ctx.resource.runtime_state)) {
       return translate('Valid runtime states for operation: {validStates}.', {
         validStates: validStates.join(', '),

@@ -19,7 +19,7 @@ export class SecretField extends React.Component<
   }
 
   toggle = () => {
-    this.setState(state => ({
+    this.setState((state) => ({
       showSecret: !state.showSecret,
     }));
   };

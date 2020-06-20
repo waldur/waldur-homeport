@@ -5,7 +5,7 @@ import { optionRenderer } from '@waldur/form-react/optionRenderer';
 
 const renderer = optionRenderer({
   iconKey: 'thumbnail',
-  labelKey: option => `${option.category_title} / ${option.name}`,
+  labelKey: (option) => `${option.category_title} / ${option.name}`,
   imgStyle: { width: 19 },
 });
 

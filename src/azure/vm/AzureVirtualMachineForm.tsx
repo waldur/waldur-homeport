@@ -12,7 +12,9 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { loadData } from './utils';
 
-export const AzureVirtualMachineForm: React.FC<OfferingConfigurationFormProps> = props => {
+export const AzureVirtualMachineForm: React.FC<OfferingConfigurationFormProps> = (
+  props,
+) => {
   const { loading, error, value } = useAsync(
     () => loadData(props.offering.scope_uuid),
     [props.offering.scope_uuid],

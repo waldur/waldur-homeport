@@ -13,7 +13,7 @@ export const validatePermissions = (ctx: ActionContext<Offering>) => {
 export function validateOfferingState(
   ...validStates: OfferingState[]
 ): (ctx: ActionContext<Offering>) => string {
-  return ctx => {
+  return (ctx) => {
     if (!validStates.includes(ctx.resource.state)) {
       return translate('Valid states for operation: {validStates}.', {
         validStates: validStates.join(', '),

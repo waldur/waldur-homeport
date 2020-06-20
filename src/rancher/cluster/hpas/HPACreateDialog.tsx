@@ -24,11 +24,11 @@ interface OwnProps {
   };
 }
 
-const useHPACreateDialog = cluster => {
+const useHPACreateDialog = (cluster) => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const callback = React.useCallback(
-    async formData => {
+    async (formData) => {
       try {
         setSubmitting(true);
         const response = await createHPA({
@@ -77,13 +77,13 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
     min_replicas: 1,
     max_replicas: 10,
   },
-})(props => {
+})((props) => {
   const { submitting, createHPA } = useHPACreateDialog(props.resolve.cluster);
   const loadWorkloads = React.useCallback(
     () =>
       listWorkloads({
         params: { cluster_uuid: props.resolve.cluster.uuid },
-      }).then(options => ({ options })),
+      }).then((options) => ({ options })),
     [props.resolve.cluster.uuid],
   );
 

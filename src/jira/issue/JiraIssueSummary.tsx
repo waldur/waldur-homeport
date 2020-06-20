@@ -12,7 +12,7 @@ import { JiraIssuePriorityField } from './JiraIssuePriorityField';
 import { JiraIssueResourceField } from './JiraIssueResourceField';
 import { JiraIssueStatusField } from './JiraIssueStatusField';
 
-const formatProject = resource => (
+const formatProject = (resource) => (
   <ResourceLink
     type="JIRA.Project"
     uuid={resource.jira_project_uuid}
@@ -20,7 +20,7 @@ const formatProject = resource => (
   />
 );
 
-const formatParent = resource =>
+const formatParent = (resource) =>
   resource.parent ? (
     <ResourceLink
       type="JIRA.Issue"

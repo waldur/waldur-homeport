@@ -37,7 +37,7 @@ class HeatMapComponent extends React.Component<HeatMapComponentProps> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   serviceUsage: selectServiceUsage(state),
   countriesToRender: selectCountriesToRender(state),
 });

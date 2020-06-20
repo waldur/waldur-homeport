@@ -76,14 +76,14 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     return props.addEventCb(event);
   };
 
-  const updateEvent = arg => {
+  const updateEvent = (arg) => {
     const oldID: BookingProps['id'] =
       (arg.prevEvent && arg.prevEvent.id) || (arg.oldEvent && arg.oldEvent.id);
     props.removeEventCb(oldID);
     addBooking(createBooking(arg.event));
   };
 
-  const handleSelect = arg => {
+  const handleSelect = (arg) => {
     if (isCalType('create')) {
       const { weekends, slotDuration, businessHours } = props.options;
       const availabiltyBooking = createBooking(
@@ -103,7 +103,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       const calendarApi = getApi();
       const checkEvents = calendarApi.getEvents();
 
-      checkEvents.forEach(function(event) {
+      checkEvents.forEach(function (event) {
         if (
           event.rendering !== 'background' &&
           ((event.start >= arg.start && event.start <= arg.end) ||
@@ -136,7 +136,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       editable: !isCalType('read'),
       selectable: !isCalType('read'),
       slotEventOverlap: isCalType('create'),
-      eventDataTransform: event =>
+      eventDataTransform: (event) =>
         transformBookingEvent(event, isCalType('create')),
     });
 
@@ -162,7 +162,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
       select: handleSelect,
       eventDrop: updateEvent,
       eventResize: updateEvent,
-      eventRender: e => eventRender(e, hovered),
+      eventRender: (e) => eventRender(e, hovered),
     };
 
     cal.on(
@@ -187,13 +187,13 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
     const oldOptions = oldOptionsRef.current;
     if (oldOptions !== options) {
       const removes = oldOptions
-        ? keysOf(oldOptions).filter(optionName => !(optionName in options))
+        ? keysOf(oldOptions).filter((optionName) => !(optionName in options))
         : [];
 
       const updates: Partial<OptionsInput> = oldOptions
         ? filterObject(
             options,
-            propName => options[propName] != oldOptions[propName],
+            (propName) => options[propName] != oldOptions[propName],
           )
         : options;
 
@@ -225,7 +225,7 @@ export const CalendarComponent = (props: CalendarComponentProps) => {
           toggle={toggleModal}
           event={modal.event}
           onDelete={() => props.removeEventCb(modal.event.id)}
-          onSuccess={cb => {
+          onSuccess={(cb) => {
             props.removeEventCb(modal.event.id);
             props.addEventCb(cb.event);
           }}

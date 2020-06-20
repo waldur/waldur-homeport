@@ -20,7 +20,7 @@ export class TableQuery extends React.Component<Props, State> {
     this.state = { query: props.query || '' };
   }
 
-  setQuery = event => {
+  setQuery = (event) => {
     this.setState({
       query: event.target.value,
     });

@@ -8,7 +8,7 @@ import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -49,7 +49,7 @@ const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => ({
+const mapPropsToFilter = (props) => ({
   instance: props.resource.url,
 });
 

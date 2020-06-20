@@ -14,7 +14,7 @@ interface OfferingHeaderProps {
   hideName?: boolean;
 }
 
-export const OfferingHeader: React.FC<OfferingHeaderProps> = props => (
+export const OfferingHeader: React.FC<OfferingHeaderProps> = (props) => (
   <dl className="dl-horizontal resource-details-table col-sm-12">
     {!props.hideName && (
       <Field label={translate('Name')} value={props.offering.name} />
