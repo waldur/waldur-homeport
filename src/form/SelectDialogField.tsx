@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import {
-  CustomComponentInputProps,
-  FilterOptions,
-} from '@waldur/form/types';
+import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { AppstoreListDialog } from './AppstoreListDialog';

@@ -3,10 +3,7 @@ import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import {
-  CustomComponentInputProps,
-  FilterOptions,
-} from '@waldur/form/types';
+import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
 
 import './ChoicesTable.scss';
 
