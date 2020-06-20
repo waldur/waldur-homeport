@@ -36,7 +36,7 @@ eventsRegistry.registerGroup({
     },
     {
       key: 'auth_logged_out_with_saml2',
-      title: gettext('User {user_link} logged out  successfully with SAML2.'),
+      title: gettext('User {user_link} logged out successfully with SAML2.'),
     },
   ],
 });

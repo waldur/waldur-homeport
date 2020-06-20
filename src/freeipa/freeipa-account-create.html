@@ -28,24 +28,21 @@
           />
         </div>
         <p class="form-text text-muted" translate>
-          Please select a username that you will use for login into the Linux
-          systems.
+          Please select a username that you will use for login into the Linux systems.
         </p>
         <p
           class="text-danger"
           ng-if="$ctrl.profileForm.username.$error.pattern"
           translate
         >
-          Usernames can contain letters (a-z), numbers (0-9), dashes (-),
-          underscores (_) and periods (.).
+          Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.).
         </p>
         <p
           class="text-danger"
           ng-if="$ctrl.profileForm.username.$error.maxlength"
           translate
         >
-          Maximum username length with mandatory username prefix is 32
-          characters.
+          Maximum username length with mandatory username prefix is 32 characters.
         </p>
         <p
           class="text-danger"
