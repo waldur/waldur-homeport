@@ -12,7 +12,6 @@ describe('FreeIPA account edit', () => {
   }
   initModule(
     angular.module('freeipaAccountEditModule', [
-      'ngResource',
       'ui.router',
       'pascalprecht.translate',
     ]),

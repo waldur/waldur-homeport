@@ -543,11 +543,11 @@ msgstr ""
 msgid "Archived plans"
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Are you sure you want to delete a {resourceType}?"
 msgstr ""
 
@@ -583,7 +583,7 @@ msgstr ""
 msgid "Are you sure you would like to terminate resource {resourceName}?"
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
@@ -5371,7 +5371,7 @@ msgstr ""
 msgid "Request to update has been accepted."
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Request to {action} has been accepted."
 msgstr ""
 
@@ -5494,7 +5494,7 @@ msgstr ""
 msgid "Resource group"
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Resource has been deleted."
 msgstr ""
 

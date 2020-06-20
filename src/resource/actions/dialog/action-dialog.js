@@ -3,19 +3,13 @@ import Axios from 'axios';
 import { toKeyValue } from '@waldur/core/utils';
 
 import { getSelectList, formatChoices } from '../action-resource-loader';
+import { handleActionSuccess } from '../action-utils-service';
 import { defaultFieldOptions } from '../constants';
 
 import template from './action-dialog.html';
 
 // @ngInject
-function ActionDialogController(
-  $scope,
-  $q,
-  $state,
-  $rootScope,
-  actionUtilsService,
-  ncUtilsFlash,
-) {
+function ActionDialogController($scope, $q, $state, $rootScope, ncUtilsFlash) {
   Object.assign($scope, {
     init: function () {
       $scope.errors = {};
@@ -120,7 +114,7 @@ function ActionDialogController(
       return promise.then(
         function (response) {
           $scope.errors = {};
-          actionUtilsService.handleActionSuccess($scope.action);
+          handleActionSuccess($scope.action);
 
           if (response.status === 201 && $scope.action.followRedirect) {
             const resource = response.data;
