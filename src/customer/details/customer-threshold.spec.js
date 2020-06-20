@@ -12,7 +12,6 @@ describe('customerThreshold', () => {
   }
   initModule(
     angular.module('customerThresholdModule', [
-      'ngResource',
       'ui.router',
       'pascalprecht.translate',
     ]),

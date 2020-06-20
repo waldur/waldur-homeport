@@ -1,3 +1,5 @@
+import { gettext } from '@waldur/i18n';
+
 const ENV = {
   // general config
   name: '',

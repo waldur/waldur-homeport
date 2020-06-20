@@ -1,5 +1,5 @@
 import { CustomersService } from '@waldur/customer/services/CustomersService';
-import { PriceEstimatesService } from '@waldur/customer/services/price-estimates-service';
+import { PriceEstimatesService } from '@waldur/customer/services/PriceEstimatesService';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { FreeIPAQuotaService } from '@waldur/freeipa/FreeIPAQuotaService';
 

@@ -3,8 +3,7 @@ import * as React from 'react';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useBoolean from 'react-use/lib/useBoolean';
 
-import { ngInjector } from '@waldur/core/services';
-
+import { loadActions, buttonClick } from './action-utils-service';
 import './ActionButtonResource.scss';
 import { ResourceActionComponent } from './ResourceActionComponent';
 
@@ -14,11 +13,10 @@ interface ActionButtonResourceProps {
   controller?: any;
 }
 
-async function loadActions(url) {
+async function loadData(url) {
   const response = await Axios.get(url);
   const resource = response.data;
-  const actionUtilsService = ngInjector.get('actionUtilsService');
-  const rawActions = await actionUtilsService.loadActions(resource);
+  const rawActions = await loadActions(resource);
   const actions = {};
   for (const key in rawActions) {
     if (!rawActions[key].tab) {
@@ -34,7 +32,7 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
   const { url } = props;
 
   const [{ loading, error, value }, getActions] = useAsyncFn(
-    () => loadActions(url),
+    () => loadData(url),
     [url],
   );
 
@@ -51,9 +49,7 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
       handleActionException: () => undefined,
       reInitResource: () => undefined,
     };
-    return ngInjector
-      .get('actionUtilsService')
-      .buttonClick(controller, value.resource, name, action);
+    return buttonClick(controller, value.resource, name, action);
   };
 
   return (
