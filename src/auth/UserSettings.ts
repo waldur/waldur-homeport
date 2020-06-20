@@ -1,13 +1,8 @@
 const KEY = 'USER_SETTINGS';
 
-export default class UserSettings {
-  // @ngInject
-  constructor($window) {
-    this.$window = $window;
-  }
-
+export const UserSettings = {
   setSettings(user_uuid, value) {
-    let currentValue = this.$window.localStorage[KEY];
+    let currentValue = localStorage[KEY];
     if (currentValue) {
       try {
         currentValue = JSON.parse(currentValue);
@@ -20,11 +15,11 @@ export default class UserSettings {
     currentValue = Object.assign(currentValue, {
       [user_uuid]: value,
     });
-    this.$window.localStorage[KEY] = JSON.stringify(currentValue);
-  }
+    localStorage[KEY] = JSON.stringify(currentValue);
+  },
 
   getSettings(user_uuid) {
-    let data = this.$window.localStorage[KEY];
+    let data = localStorage[KEY];
     if (!data) {
       return;
     }
@@ -34,5 +29,5 @@ export default class UserSettings {
       return;
     }
     return data[user_uuid];
-  }
-}
+  },
+};

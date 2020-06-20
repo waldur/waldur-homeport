@@ -4,7 +4,7 @@ import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { PriceEstimatesService } from '../services/price-estimates-service';
+import { PriceEstimatesService } from '../services/PriceEstimatesService';
 
 import template from './customer-policies.html';
 
