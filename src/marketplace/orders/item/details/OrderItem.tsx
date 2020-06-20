@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -50,8 +51,9 @@ export const OrderItem = (props: OrderItemProps) => {
               </OrderItemDetailsLink>
             </h5>
             <p>
-              {props.item.attributes.description ||
-                props.item.offering_description}
+              {props.item.attributes.description || (
+                <FormattedHtml html={props.item.offering_description} />
+              )}
             </p>
             {props.item.resource_uuid && (
               <p>
