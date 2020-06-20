@@ -1,4 +1,4 @@
-export default class featuresProvider {
+export default class FeaturesProvider {
   constructor() {
     this.disabledFeatures = {};
     this.enabledFeatures = {};

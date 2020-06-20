@@ -1,10 +1,3 @@
-// @ngInject
-export default function attachTracking(ENV) {
-  if (ENV.GoogleAnalyticsID) {
-    attachGoogleAnalytics(ENV.GoogleAnalyticsID);
-  }
-}
-
 function attachGoogleAnalytics(trackingID) {
   /* eslint-disable */
   (function(i, s, o, g, r, a, m) {
@@ -28,4 +21,11 @@ function attachGoogleAnalytics(trackingID) {
   );
   ga('create', trackingID, 'auto');
   /* eslint-enable */
+}
+
+// @ngInject
+export default function attachTracking(ENV) {
+  if (ENV.GoogleAnalyticsID) {
+    attachGoogleAnalytics(ENV.GoogleAnalyticsID);
+  }
 }

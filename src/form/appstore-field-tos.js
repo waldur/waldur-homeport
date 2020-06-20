@@ -7,7 +7,7 @@ const appstoreFieldTos = {
     model: '=',
     form: '=',
   },
-  controller: class appstoreFieldTosController {
+  controller: class AppstoreFieldTosController {
     invalid() {
       return (
         this.form[this.field.name].$dirty && this.form[this.field.name].$invalid
