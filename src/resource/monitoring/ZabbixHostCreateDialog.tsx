@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm, formValues } from 'redux-form';
 
-import { SelectAsyncField } from '@waldur/form-react';
+import { SelectAsyncField } from '@waldur/form';
 import { withTranslation } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 

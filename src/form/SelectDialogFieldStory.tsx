@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
+import { SelectDialogField } from '@waldur/form/SelectDialogField';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 import { columns, choices, openstackTemplateFilters } from './storyFixtures';

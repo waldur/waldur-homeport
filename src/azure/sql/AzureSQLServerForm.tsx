@@ -6,7 +6,7 @@ import { CreateSelectField } from '@waldur/azure/common/CreateSelectField';
 import { sqlServerName } from '@waldur/azure/common/validators';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, TextField } from '@waldur/form-react';
+import { FormContainer, StringField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';

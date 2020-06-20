@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
-import { InternalListField } from '@waldur/form-react/list-field/ListFieldInternal';
-import { ListFieldParameters } from '@waldur/form-react/list-field/types';
+import { InternalListField } from '@waldur/form/list-field/ListFieldInternal';
+import { ListFieldParameters } from '@waldur/form/list-field/types';
 
 export const ListField = (params: ListFieldParameters) => {
   return (

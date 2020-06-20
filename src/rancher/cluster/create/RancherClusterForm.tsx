@@ -8,8 +8,8 @@ import {
   SelectAsyncField,
   StringField,
   TextField,
-} from '@waldur/form-react';
-import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
+} from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';

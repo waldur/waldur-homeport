@@ -3,7 +3,7 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { Field } from 'redux-form';
 
-import { InputField } from '@waldur/form-react/InputField';
+import { InputField } from '@waldur/form/InputField';
 
 interface InputGroupProps {
   name: string;

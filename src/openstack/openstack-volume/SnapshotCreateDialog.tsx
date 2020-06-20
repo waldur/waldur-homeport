@@ -12,7 +12,7 @@ import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { post } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
-import { InputField } from '@waldur/form-react/InputField';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';

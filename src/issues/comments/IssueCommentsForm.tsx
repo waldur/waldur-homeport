@@ -6,7 +6,7 @@ import {
   CancelButton,
   FormContainer,
   TextField,
-} from '@waldur/form-react';
+} from '@waldur/form';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import * as constants from './constants';

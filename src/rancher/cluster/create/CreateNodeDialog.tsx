@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form-react';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';

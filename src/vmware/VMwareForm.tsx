@@ -6,7 +6,7 @@ import {
   StringField,
   NumberField,
   SecretField,
-} from '@waldur/form-react';
+} from '@waldur/form';
 
 export const VMwareForm = ({ translate, container }) => (
   <FormContainer {...container}>

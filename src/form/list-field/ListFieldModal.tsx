@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
-import { ListConfiguration } from '@waldur/form-react/list-field/types';
+import { ListConfiguration } from '@waldur/form/list-field/types';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 

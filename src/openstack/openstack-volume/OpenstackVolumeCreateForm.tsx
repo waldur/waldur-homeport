@@ -11,7 +11,7 @@ import {
   StringField,
   FormContainer,
   SelectField,
-} from '@waldur/form-react';
+} from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { parseIntField } from '@waldur/marketplace/common/utils';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';

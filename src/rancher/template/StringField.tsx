@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as FormControl from 'react-bootstrap/lib/FormControl';
 
-import { FieldError } from '@waldur/form-react';
+import { FieldError } from '@waldur/form';
 
 import { FieldProps } from '../types';
 

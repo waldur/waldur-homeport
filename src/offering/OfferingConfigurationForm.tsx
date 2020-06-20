@@ -9,12 +9,12 @@ import {
   StringField,
   SelectField,
   NumberField,
-} from '@waldur/form-react';
-import { AsyncSelectField } from '@waldur/form-react/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
-import { CalendarField } from '@waldur/form-react/CalendarField';
-import { DateField } from '@waldur/form-react/DateField';
-import { TimeSelectField } from '@waldur/form-react/TimeSelectField';
+} from '@waldur/form';
+import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { CalendarField } from '@waldur/form/CalendarField';
+import { DateField } from '@waldur/form/DateField';
+import { TimeSelectField } from '@waldur/form/TimeSelectField';
 import { translate } from '@waldur/i18n';
 import {
   parseIntField,

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { FieldError } from '@waldur/form-react';
+import { FieldError } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 import { Namespace } from '../types';

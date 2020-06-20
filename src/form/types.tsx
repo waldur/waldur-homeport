@@ -26,3 +26,15 @@ export interface FormField {
   // See also: https://github.com/erikras/redux-form/issues/2768#issuecomment-292770517
   noUpdateOnBlur?: boolean;
 }
+
+export interface CustomComponentInputProps<T> {
+  name: string;
+  value: T;
+  onChange(value?: T): void;
+}
+
+export interface FilterOptions {
+  name: string;
+  choices: Array<{ value: string; label: string }>;
+  defaultValue: string;
+}

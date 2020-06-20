@@ -13,7 +13,7 @@ import { Field, reduxForm, change } from 'redux-form';
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { post } from '@waldur/core/api';
 import { formatFilesize } from '@waldur/core/utils';
-import { InputField } from '@waldur/form-react/InputField';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import {
   parseIntField,

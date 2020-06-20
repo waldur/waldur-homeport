@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SubmitButton, FormContainer, FieldError } from '@waldur/form-react';
+import { SubmitButton, FormContainer, FieldError } from '@waldur/form';
 
 import { CloseDialogButton } from './CloseDialogButton';
 import { ModalDialog } from './ModalDialog';
