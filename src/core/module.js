@@ -6,7 +6,7 @@ import submitButton from './submit-button';
 
 // @ngInject
 function redirectToState($rootScope, $state, $injector) {
-  $rootScope.$on('$stateChangeError', function(
+  $rootScope.$on('$stateChangeError', function (
     event,
     toState,
     toParams,
@@ -32,7 +32,7 @@ function redirectToState($rootScope, $state, $injector) {
 
 // @ngInject
 function scrollToTop($rootScope) {
-  $rootScope.$on('$stateChangeSuccess', function() {
+  $rootScope.$on('$stateChangeSuccess', function () {
     document.scrollTop = 0;
     document.querySelector('#wrapper').scrollTop = 0;
   });
@@ -46,7 +46,7 @@ function defaultErrorHandler($state) {
   });
 }
 
-export default module => {
+export default (module) => {
   module.service('ErrorMessageFormatter', ErrorMessageFormatter);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);

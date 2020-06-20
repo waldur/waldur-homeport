@@ -34,16 +34,16 @@ const authValimoDialog = {
     submit() {
       this.isAuthenticating = true;
       return login(this.mobilePrefix.concat(this.phoneNumber))
-        .then(result => {
+        .then((result) => {
           this.challengeCode = result.message;
           this.authResultId = result.uuid;
         })
         .then(() => {
-          return this.pollAuthResult(this.authResultId).then(result =>
+          return this.pollAuthResult(this.authResultId).then((result) =>
             this.parseAuthResult(result),
           );
         })
-        .catch(response => {
+        .catch((response) => {
           this.ncUtilsFlash.errorFromResponse(
             response,
             translate('Unable to authenticate using Mobile ID.'),

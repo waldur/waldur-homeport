@@ -24,7 +24,7 @@ export default class featuresProvider {
   }
 
   $get() {
-    const isVisible = feature => {
+    const isVisible = (feature) => {
       if (!feature) {
         return true;
       }

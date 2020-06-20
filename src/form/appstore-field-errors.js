@@ -8,7 +8,7 @@ export default function appstoreFieldErrors() {
       errors: '=',
       field: '=',
     },
-    controller: function() {},
+    controller: function () {},
     controllerAs: '$ctrl',
     bindToController: true,
   };

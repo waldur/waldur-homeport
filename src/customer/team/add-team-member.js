@@ -73,9 +73,7 @@ const addTeamMember = {
           format: 'dd.MM.yyyy',
           altInputFormats: ['M!/d!/yyyy'],
           dateOptions: {
-            minDate: moment()
-              .add(1, 'days')
-              .toDate(),
+            minDate: moment().add(1, 'days').toDate(),
             startingDay: 1,
           },
         },
@@ -99,7 +97,7 @@ const addTeamMember = {
 
       this.projects = angular
         .copy(this.resolve.currentCustomer.projects)
-        .map(project => {
+        .map((project) => {
           const displayProject = {
             role: null,
             permission: null,
@@ -108,7 +106,7 @@ const addTeamMember = {
             name: project.name,
             url: project.url,
           };
-          this.resolve.editUser.projects.some(permissionProject => {
+          this.resolve.editUser.projects.some((permissionProject) => {
             if (permissionProject.uuid === project.uuid) {
               displayProject.role = permissionProject.role;
               displayProject.permission = permissionProject.permission;
@@ -134,7 +132,7 @@ const addTeamMember = {
             this.close();
             this.saving = false;
           },
-          error => {
+          (error) => {
             this.errors = this.ErrorMessageFormatter.formatErrorFields(error);
             this.saving = false;
           },
@@ -175,10 +173,10 @@ const addTeamMember = {
         createdPermissions = [],
         permissionsToDelete = [];
 
-      this.projects.forEach(project => {
+      this.projects.forEach((project) => {
         let exists = false,
           update = false;
-        this.resolve.editUser.projects.forEach(existingPermission => {
+        this.resolve.editUser.projects.forEach((existingPermission) => {
           if (project.permission === existingPermission.permission) {
             exists = true;
             if (
@@ -207,11 +205,11 @@ const addTeamMember = {
         }
       });
 
-      const removalPromises = permissionsToDelete.map(permission => {
+      const removalPromises = permissionsToDelete.map((permission) => {
         return ProjectPermissionsService.delete(permission);
       });
 
-      const renewalPromises = updatePermissions.map(permission => {
+      const renewalPromises = updatePermissions.map((permission) => {
         return ProjectPermissionsService.update(permission.permission, {
           role: permission.role,
           expiration_time: permission.expiration_time,
@@ -219,7 +217,7 @@ const addTeamMember = {
       });
 
       return this.$q.all(removalPromises).then(() => {
-        const creationPromises = createdPermissions.map(permission => {
+        const creationPromises = createdPermissions.map((permission) => {
           return ProjectPermissionsService.create({
             user: this.resolve.editUser.url,
             role: permission.role,

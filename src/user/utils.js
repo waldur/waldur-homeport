@@ -1,8 +1,8 @@
 // @ngInject
 export function stateUtilsService($state) {
-  let vm = this;
+  const vm = this;
 
-  vm.setPrevState = function(state, params) {
+  vm.setPrevState = function (state, params) {
     if (state.data && state.data.workspace && state.data.workspace !== 'user') {
       vm.prevState = state;
       vm.prevParams = params;
@@ -10,17 +10,17 @@ export function stateUtilsService($state) {
     }
   };
 
-  vm.getPrevWorkspace = function() {
+  vm.getPrevWorkspace = function () {
     return vm.prevWorkspace;
   };
 
-  vm.goBack = function() {
+  vm.goBack = function () {
     if (vm.prevState) {
       $state.go(vm.prevState, vm.prevParams);
     }
   };
 
-  vm.clear = function() {
+  vm.clear = function () {
     vm.prevState = undefined;
     vm.prevParams = undefined;
     vm.prevWorkspace = undefined;
@@ -29,7 +29,7 @@ export function stateUtilsService($state) {
 
 // @ngInject
 export function attachStateUtils($rootScope, stateUtilsService) {
-  $rootScope.$on('$stateChangeSuccess', function(
+  $rootScope.$on('$stateChangeSuccess', function (
     event,
     toState,
     toParams,

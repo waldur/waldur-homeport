@@ -40,11 +40,11 @@ export class InvitationUtilsService {
         this.$auth.isAuthenticated() &&
         toState.name !== 'marketplace-public-offering.details'
       ) {
-        UsersService.getCurrentUser().then(user => {
+        UsersService.getCurrentUser().then((user) => {
           const token = InvitationService.getInvitationToken();
           if (token && !UsersService.mandatoryFieldsMissing(user)) {
             this.confirmInvitation(token)
-              .then(replaceEmail => {
+              .then((replaceEmail) => {
                 this.acceptInvitation(token, replaceEmail);
               })
               .catch(() => {
@@ -67,7 +67,7 @@ export class InvitationUtilsService {
      */
     if (this.$auth.isAuthenticated()) {
       return this.confirmInvitation(token)
-        .then(replaceEmail => {
+        .then((replaceEmail) => {
           this.acceptInvitation(token, replaceEmail).then(() => {
             this.$state.go('profile.details');
           });
@@ -105,7 +105,7 @@ export class InvitationUtilsService {
       },
     });
     const deferred = this.$q.defer();
-    dialog.result.then(result => deferred.resolve(result));
+    dialog.result.then((result) => deferred.resolve(result));
     dialog.closed.then(() => deferred.reject());
     return deferred.promise;
   }

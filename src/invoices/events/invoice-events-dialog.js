@@ -17,7 +17,7 @@ const invoiceEventsDialog = {
       this.loading = true;
       this.erred = false;
       loadEvents(this.resolve.item)
-        .then(events => (this.events = events))
+        .then((events) => (this.events = events))
         .catch(() => (this.erred = true))
         .finally(() => (this.loading = false));
     }

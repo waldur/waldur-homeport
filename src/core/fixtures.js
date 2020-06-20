@@ -35,7 +35,7 @@ export function randomId() {
 }
 
 export function getRandomDataset(n, start, end) {
-  let points = [];
+  const points = [];
   for (let i = 0; i < n; i++) {
     points.push(randomInteger(start, end));
   }

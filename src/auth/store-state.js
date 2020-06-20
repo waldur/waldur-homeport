@@ -7,7 +7,7 @@ export default function storeLastState(
   $injector,
   UserSettings,
 ) {
-  $rootScope.$on('logoutStart', function() {
+  $rootScope.$on('logoutStart', function () {
     if (UsersService.currentUser) {
       const user_uuid = UsersService.currentUser.uuid;
       const $stateParams = $injector.get('$stateParams');

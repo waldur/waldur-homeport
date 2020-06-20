@@ -91,7 +91,7 @@ export default {
 
 function validateAndSort(model, options, validator, comparator, name) {
   const choices = options[name].choices;
-  angular.forEach(choices, choice => {
+  angular.forEach(choices, (choice) => {
     choice.disabled = validator(model, choice);
   });
   choices.sort(comparator);
@@ -121,11 +121,11 @@ function imageValidator(model, choice) {
   if (!model.region) {
     return true;
   }
-  let region = model.region.url;
+  const region = model.region.url;
   let found = false;
-  let regions = choice.regions || [choice.region];
+  const regions = choice.regions || [choice.region];
   for (let j = 0; j < regions.length; j++) {
-    let choice_region = regions[j];
+    const choice_region = regions[j];
     if (choice_region.url === region) {
       found = true;
       break;

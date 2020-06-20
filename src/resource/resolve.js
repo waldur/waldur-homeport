@@ -16,13 +16,13 @@ export function loadResource($stateParams, $q, $state, WorkspaceService) {
   }
 
   return ResourcesService.get($stateParams.resource_type, $stateParams.uuid)
-    .then(resource => {
-      return getById('/projects/', resource.project_uuid).then(project => {
+    .then((resource) => {
+      return getById('/projects/', resource.project_uuid).then((project) => {
         return { project };
       });
     })
     .then(({ project }) => {
-      return CustomersService.get(project.customer_uuid).then(customer => {
+      return CustomersService.get(project.customer_uuid).then((customer) => {
         store.dispatch(setCurrentCustomer(customer));
         store.dispatch(setCurrentProject(project));
         return { customer, project };
@@ -36,7 +36,7 @@ export function loadResource($stateParams, $q, $state, WorkspaceService) {
         workspace: WOKSPACE_NAMES.project,
       });
     })
-    .catch(response => {
+    .catch((response) => {
       if (response.status === 404) {
         $state.go('errorPage.notFound');
       }

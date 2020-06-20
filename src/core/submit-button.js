@@ -5,10 +5,10 @@ export default function submitButton($q) {
     scope: {
       submit: '&submitButton',
     },
-    link: function(scope, element) {
-      element.bind('click', function() {
+    link: function (scope, element) {
+      element.bind('click', function () {
         element.addClass('disabled').addClass('button-spinner');
-        $q.when(scope.submit()).finally(function() {
+        $q.when(scope.submit()).finally(function () {
           element.removeClass('disabled').removeClass('button-spinner');
         });
       });

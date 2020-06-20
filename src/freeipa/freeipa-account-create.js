@@ -25,7 +25,7 @@ const freeipaAccountCreate = {
       this.usernamePattern = USERNAME_PATTERN;
       this.loading = true;
       UsersService.getCurrentUser()
-        .then(user => {
+        .then((user) => {
           this.profile = {
             username: user.username,
             agree_with_policy: false,
@@ -53,7 +53,7 @@ const freeipaAccountCreate = {
           this.ncUtilsFlash.success(gettext('A profile has been created.'));
           this.onProfileAdded();
         })
-        .catch(response => {
+        .catch((response) => {
           if (response.data && response.data.username) {
             return this.ncUtilsFlash.error(response.data.username);
           }

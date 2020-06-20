@@ -26,8 +26,8 @@ const invitationConfirmDialog = {
 
     invitationCheck(token) {
       InvitationService.check(token)
-        .then(response => {
-          UsersService.getCurrentUser().then(user => {
+        .then((response) => {
+          UsersService.getCurrentUser().then((user) => {
             const invitation = response.data;
             if (!user.email || user.email === invitation.email) {
               this.closeDecliningNewEmail();
@@ -45,7 +45,7 @@ const invitationConfirmDialog = {
             this.user = user;
           });
         })
-        .catch(response => {
+        .catch((response) => {
           if (response.status === -1 || response.status >= 500) {
             this.$timeout(
               this.invitationCheck.bind(this),
