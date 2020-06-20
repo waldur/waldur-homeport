@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form-react';
+import { SelectField } from '@waldur/form';
 
 export const CreateSelectField = (label, name, options) => (
   <SelectField

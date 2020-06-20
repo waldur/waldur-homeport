@@ -1,7 +1,7 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 
-import { FormField } from '@waldur/form-react/types';
+import { FormField } from '@waldur/form/types';
 
 interface RadioButtonFieldProps extends FormField {
   isHiddenInput?: boolean;

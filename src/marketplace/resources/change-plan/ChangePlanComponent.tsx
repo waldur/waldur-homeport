@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
-import { ChoicesTable } from '@waldur/form-react/ChoicesTable';
+import { ChoicesTable } from '@waldur/form/ChoicesTable';
 import { translate } from '@waldur/i18n';
 
 import { FetchedData } from './utils';

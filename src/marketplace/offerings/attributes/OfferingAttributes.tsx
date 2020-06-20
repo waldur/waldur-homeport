@@ -3,7 +3,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { FieldError } from '@waldur/form-react';
+import { FieldError } from '@waldur/form';
 import { Section } from '@waldur/marketplace/types';
 
 import { configAttrField } from './utils';

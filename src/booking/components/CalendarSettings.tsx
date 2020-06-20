@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { getOptions } from '@waldur/form-react/TimeSelectField';
+import { getOptions } from '@waldur/form/TimeSelectField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 

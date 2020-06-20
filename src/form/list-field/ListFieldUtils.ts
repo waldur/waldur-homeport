@@ -1,4 +1,4 @@
-import { ListConfiguration } from '@waldur/form-react/list-field/types';
+import { ListConfiguration } from '@waldur/form/list-field/types';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { ListFieldModal } from './ListFieldModal';

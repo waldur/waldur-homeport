@@ -19,8 +19,8 @@ import {
   StringField,
   SubmitButton,
   TextField,
-} from '@waldur/form-react';
-import { DateField } from '@waldur/form-react/DateField';
+} from '@waldur/form';
+import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';

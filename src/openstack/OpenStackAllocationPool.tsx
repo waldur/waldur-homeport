@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { formValues } from 'redux-form';
 
-import { FormField } from '@waldur/form-react/types';
+import { FormField } from '@waldur/form/types';
 
 const enhance = formValues<any, any, FormField>('attributes.subnet_cidr');
 

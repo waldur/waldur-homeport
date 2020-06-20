@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField } from '@waldur/form-react';
+import { FormContainer, StringField } from '@waldur/form';
 
 export const AzureForm = ({ translate, container }) => (
   <FormContainer {...container}>

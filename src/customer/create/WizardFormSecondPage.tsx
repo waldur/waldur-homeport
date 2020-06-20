@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PanelBody from 'react-bootstrap/lib/PanelBody';
 
-import { InputField } from '@waldur/form-react/InputField';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
 import { CountryGroup } from './CountryGroup';

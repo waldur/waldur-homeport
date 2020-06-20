@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { StringField, SelectField, FormContainer } from '@waldur/form-react';
+import { StringField, SelectField, FormContainer } from '@waldur/form';
 
 export const SlurmForm = ({ translate, container }) => (
   <FormContainer {...container}>

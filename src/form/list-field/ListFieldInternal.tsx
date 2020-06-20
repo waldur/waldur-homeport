@@ -2,8 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
 
-import { openListFieldModal } from '@waldur/form-react/list-field/ListFieldUtils';
-import { ListConfiguration } from '@waldur/form-react/list-field/types';
+import { openListFieldModal } from '@waldur/form/list-field/ListFieldUtils';
+import { ListConfiguration } from '@waldur/form/list-field/types';
 import { translate, TranslateProps } from '@waldur/i18n';
 
 export interface InternalListFieldProps

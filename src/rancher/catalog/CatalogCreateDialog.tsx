@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { StringField, TextField, SecretField } from '@waldur/form-react';
+import { StringField, TextField, SecretField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';

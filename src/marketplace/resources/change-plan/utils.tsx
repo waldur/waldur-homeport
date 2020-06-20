@@ -2,7 +2,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import {
   SelectDialogFieldColumn,
   SelectDialogFieldChoice,
-} from '@waldur/form-react/SelectDialogField';
+} from '@waldur/form/SelectDialogField';
 import { translate } from '@waldur/i18n';
 import { getOffering, getResource } from '@waldur/marketplace/common/api';
 import { filterOfferingComponents } from '@waldur/marketplace/common/registry';

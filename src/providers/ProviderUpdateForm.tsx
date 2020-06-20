@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { reduxForm } from 'redux-form';
 
-import { FormContainer, FieldError, SubmitButton } from '@waldur/form-react';
+import { FormContainer, FieldError, SubmitButton } from '@waldur/form';
 import { TranslateProps } from '@waldur/i18n';
 
 import { ProviderFormBody } from './ProviderFormBody';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Select from 'react-select';
 
-import { FieldError } from '@waldur/form-react';
+import { FieldError } from '@waldur/form';
 
 export const SimpleSelectField = (props) => (
   <>
