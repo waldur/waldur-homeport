@@ -49,4 +49,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
 
 const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);
 
-export const OfferingScreenshotsActions = enhance(ActionsDropdown);
+export const ScreenshotsActions = enhance(ActionsDropdown);

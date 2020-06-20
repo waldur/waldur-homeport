@@ -5,12 +5,12 @@ import { Screenshot } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-interface ViewOfferingScreenshotDialogProps {
+interface ScreenshotDetailsDialogProps {
   resolve: Screenshot;
 }
 
-export const ViewOfferingScreenshotDialog = (
-  props: ViewOfferingScreenshotDialogProps,
+export const ScreenshotDetailsDialog = (
+  props: ScreenshotDetailsDialogProps,
 ) => (
   <ModalDialog
     title={translate('Viewing screenshot')}

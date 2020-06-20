@@ -126,10 +126,10 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -304,8 +304,8 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
-#: src/marketplace/offerings/actions/OfferingAddScreenshotButton.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotButton.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 msgid "Add screenshot"
 msgstr ""
 
@@ -555,7 +555,7 @@ msgstr ""
 msgid "Are you sure you want to delete the payment profile?"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 msgid "Are you sure you want to delete the screenshot?"
 msgstr ""
 
@@ -846,8 +846,8 @@ msgstr ""
 msgid "Branch"
 msgstr ""
 
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 msgid "Browse"
 msgstr ""
 
@@ -1217,7 +1217,7 @@ msgid "Confirm deletion?"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
-#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 msgid "Confirmation"
@@ -1431,9 +1431,9 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -1647,7 +1647,7 @@ msgstr ""
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
-#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
@@ -1691,13 +1691,13 @@ msgstr ""
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
@@ -3491,8 +3491,8 @@ msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
 
 #: src/marketplace/offerings/MyOfferingsListContainer.tsx
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "My offerings"
 msgstr ""
@@ -3531,8 +3531,6 @@ msgstr ""
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -3540,6 +3538,8 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -3898,7 +3898,7 @@ msgstr ""
 msgid "Offering details"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsListTablePlaceholder.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsListPlaceholder.tsx
 msgid "Offering doesn't have screenshots."
 msgstr ""
 
@@ -3922,11 +3922,11 @@ msgstr ""
 msgid "Offering logo"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 msgid "Offering screenshots"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 msgid "Offering screenshots ({name})"
 msgstr ""
 
@@ -3957,7 +3957,7 @@ msgstr ""
 msgid "Offerings"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 msgid "Offerings screenshots"
 msgstr ""
 
@@ -4206,8 +4206,8 @@ msgstr ""
 #: src/customer/workspace/CustomerWorkspace.tsx
 #: src/invoices/details/BillingDetails.tsx
 #: src/marketplace/details/utils.ts
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
@@ -4576,7 +4576,7 @@ msgstr ""
 msgid "Please provide registration code of your company."
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsListTablePlaceholder.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsListPlaceholder.tsx
 msgid "Please provide visual material describing the Offering"
 msgstr ""
 
@@ -4981,9 +4981,9 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/OfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/sidebar.ts
 msgid "Public offerings"
@@ -5792,12 +5792,12 @@ msgstr ""
 msgid "Screenshot has been removed."
 msgstr ""
 
-#: src/marketplace/offerings/ScreenshotThumbnail.tsx
-#: src/marketplace/offerings/ViewOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotDetailsDialog.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotThumbnail.tsx
 msgid "Screenshot here"
 msgstr ""
 
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 msgid "Screenshot:"
 msgstr ""
 
@@ -6449,9 +6449,9 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
@@ -6904,7 +6904,7 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 msgid "Thumbnail"
 msgstr ""
 
@@ -8111,7 +8111,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/marketplace/offerings/ViewOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotDetailsDialog.tsx
 msgid "Viewing screenshot"
 msgstr ""
 

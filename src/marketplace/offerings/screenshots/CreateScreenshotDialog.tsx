@@ -96,6 +96,4 @@ const enhance = compose(
   }),
 );
 
-export const AddOfferingScreenshotDialogContainer = enhance(
-  AddOfferingScreenshotDialog,
-);
+export const CreateScreenshotDialog = enhance(AddOfferingScreenshotDialog);
