@@ -1083,7 +1083,6 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
 #: src/slurm/details/slurm-allocation-details-dialog.html
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
@@ -2902,7 +2901,7 @@ msgstr ""
 msgid "Invoice events"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "Invoice events timeline"
 msgstr ""
 
@@ -3473,7 +3472,7 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventItem.tsx
 msgid "More info"
 msgstr ""
 
@@ -5621,7 +5620,7 @@ msgstr ""
 msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "Retry"
 msgstr ""
 
@@ -6176,7 +6175,7 @@ msgstr ""
 msgid "Show details"
 msgstr ""
 
-#: src/invoices/events/invoice-events-toggle.html
+#: src/invoices/events/InvoiceEventsToggle.tsx
 msgid "Show events"
 msgstr ""
 
@@ -6788,7 +6787,7 @@ msgstr ""
 msgid "There are no comments yet."
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "There are no events for this resource."
 msgstr ""
 
@@ -7301,7 +7300,7 @@ msgstr ""
 msgid "Unable to load editor"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "Unable to load events for this resource."
 msgstr ""
 
