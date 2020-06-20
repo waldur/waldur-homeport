@@ -1,12 +1,10 @@
+import { formatDate } from '@waldur/core/dateUtils';
+
 function imageFormatter($filter, value) {
   if (value.is_official) {
     return value.name + ' distribution';
   } else {
-    return (
-      value.name +
-      ' snapshot created at ' +
-      $filter('shortDate')(value.created_at)
-    );
+    return value.name + ' snapshot created at ' + formatDate(value.created_at);
   }
 }
 

@@ -1,17 +1,4 @@
-import { formatDate, formatRelative } from './dateUtils';
-import {
-  formatFilesize,
-  formatSnakeCase,
-  minutesToHours,
-  titleCase,
-  dateTime,
-} from './utils';
-
-function replace() {
-  return function (input, search, replacement) {
-    return input.replace(new RegExp(search, 'g'), replacement);
-  };
-}
+import { formatFilesize, dateTime } from './utils';
 
 // @ngInject
 function defaultCurrency(ENV, $filter) {
@@ -34,22 +21,8 @@ function defaultCurrency(ENV, $filter) {
   };
 }
 
-function shortDate() {
-  return function (input) {
-    if (input) {
-      return formatDate(input);
-    }
-  };
-}
-
 export default (module) => {
   module.filter('filesize', () => formatFilesize);
-  module.filter('titleCase', () => titleCase);
-  module.filter('snakeCase', () => formatSnakeCase);
-  module.filter('replace', replace);
   module.filter('defaultCurrency', defaultCurrency);
-  module.filter('shortDate', shortDate);
   module.filter('dateTime', () => dateTime);
-  module.filter('minutesToHours', () => minutesToHours);
-  module.filter('formatRelative', () => formatRelative);
 };
