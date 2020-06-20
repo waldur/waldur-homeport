@@ -17,9 +17,7 @@ describe('invitationUtilsService', () => {
     coreModule(module);
   }
 
-  initModule(
-    angular.module('invitationUtilsModule', ['ngResource', 'ui.router']),
-  );
+  initModule(angular.module('invitationUtilsModule', ['ui.router']));
   beforeEach(angular.mock.module('invitationUtilsModule'));
 
   const emailConfirmedDialogResult = {
