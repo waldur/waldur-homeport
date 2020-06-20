@@ -4,6 +4,8 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
+import { InvoiceEventsToggle } from '../events/InvoiceEventsToggle';
+
 import { getItemName } from './utils';
 
 export const InvoiceItemDetails = ({ item, itemId }) => (
@@ -30,5 +32,6 @@ export const InvoiceItemDetails = ({ item, itemId }) => (
         </small>
       </div>
     )}
+    <InvoiceEventsToggle item={item} />
   </>
 );
