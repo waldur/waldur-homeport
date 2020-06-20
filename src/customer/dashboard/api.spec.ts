@@ -3,7 +3,7 @@ import { advanceTo, clear } from 'jest-date-mock';
 import { formatCostChart } from './api';
 
 jest.mock('@waldur/core/services', () => ({
-  defaultCurrency: val => `EUR${val}`,
+  defaultCurrency: (val) => `EUR${val}`,
 }));
 
 describe('Customer dashboard chart API', () => {

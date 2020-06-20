@@ -30,7 +30,7 @@
             ng-if="!item.address"
             ng-options="choice.value as choice.display_name for choice in $ctrl.floating_ips"
             ng-model="item.floating_ip"
-            ng-class="{disabled: !item.subnet}"
+            ng-class="{ disabled: !item.subnet }"
             class="form-control"
           >
           </select>

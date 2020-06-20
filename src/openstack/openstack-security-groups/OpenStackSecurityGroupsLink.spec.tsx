@@ -11,7 +11,7 @@ import {
 const mockStore = configureStore();
 const store = mockStore();
 
-export const renderLink = props => {
+export const renderLink = (props) => {
   return mount(
     <Provider store={store}>
       <OpenStackSecurityGroupsLink {...props} />

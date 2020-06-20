@@ -17,7 +17,7 @@ describe('Rancher application provision utils', () => {
       const parsed = parseQuestions(MySQL);
       const visible = parseVisibleQuestions(parsed, { defaultImage: false });
       expect(
-        visible.find(question => question.variable === 'image'),
+        visible.find((question) => question.variable === 'image'),
       ).toBeTruthy();
     });
 
@@ -25,7 +25,7 @@ describe('Rancher application provision utils', () => {
       const parsed = parseQuestions(MySQL);
       const visible = parseVisibleQuestions(parsed, { defaultImage: true });
       expect(
-        visible.find(question => question.variable === 'image'),
+        visible.find((question) => question.variable === 'image'),
       ).toBeFalsy();
     });
   });

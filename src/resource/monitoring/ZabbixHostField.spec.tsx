@@ -7,7 +7,7 @@ import { ZabbixHostCreateButton } from './ZabbixHostCreateButton';
 import { ZabbixHostField } from './ZabbixHostField';
 import { ZabbixHostStateButton } from './ZabbixHostStateButton';
 
-const renderField = props => {
+const renderField = (props) => {
   const mockStore = configureStore();
   const store = mockStore({ config: { featuresVisible: true } });
   return mount(

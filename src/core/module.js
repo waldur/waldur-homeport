@@ -41,7 +41,7 @@ function scrollToTop($rootScope) {
 // @ngInject
 function defaultErrorHandler($state) {
   // eslint-disable-next-line
-  $state.defaultErrorHandler(function(error) {
+  $state.defaultErrorHandler(function (error) {
     // Do not log transitionTo errors
   });
 }

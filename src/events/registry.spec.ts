@@ -19,7 +19,7 @@ describe('Event registry', () => {
         {
           key: event.event_type,
           title: 'User {user} authenticated successfully.',
-          formatter: e =>
+          formatter: (e) =>
             `User ${e.user_full_name} authenticated successfully.`,
         },
       ],
@@ -32,7 +32,7 @@ describe('Event registry', () => {
   it('uses custom context if possible', () => {
     registry.registerGroup({
       title: 'User events',
-      context: e => ({
+      context: (e) => ({
         user_link: `<a href="${e.user_uuid}">${e.user_full_name}</a>`,
       }),
       events: [

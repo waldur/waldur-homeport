@@ -37,8 +37,8 @@ describe('formatSnakeCase', () => {
 describe('listToDict', () => {
   it('converts list to dict', () => {
     const fn = listToDict(
-      item => item.name,
-      item => item.usage,
+      (item) => item.name,
+      (item) => item.usage,
     );
     const list = [
       {

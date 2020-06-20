@@ -6,7 +6,7 @@ import {
 
 import { userManageIsVisible, isVisibleForSupportOrStaff } from './selectors';
 
-const createState = user => ({
+const createState = (user) => ({
   workspace: {
     user,
   },

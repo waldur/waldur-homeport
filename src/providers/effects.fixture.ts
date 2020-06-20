@@ -9,13 +9,13 @@ export const setupFixture = ({ state, action }) => {
 
   const dispatched = [];
   const store = {
-    dispatch: a => dispatched.push(a),
+    dispatch: (a) => dispatched.push(a),
     getState: () => state,
   };
   const updateProvider = () =>
     runSaga(store, effects.handleUpdateProvider, action).done;
-  const hasActionWithType = type =>
-    dispatched.find(a => a.type === type) !== undefined;
+  const hasActionWithType = (type) =>
+    dispatched.find((a) => a.type === type) !== undefined;
 
   return {
     dispatched,

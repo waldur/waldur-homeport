@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { OracleSnapshots, parseTable } from './OracleSnapshots';
 
-const renderComponent = report => {
+const renderComponent = (report) => {
   const wrapper = render(<OracleSnapshots report={report} />);
   return wrapper.html();
 };

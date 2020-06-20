@@ -66,11 +66,7 @@
     "required": true,
     "default": "datadoghq.com",
     "group": "Agent Configuration",
-    "options": [
-      "datadoghq.com",
-      "datadoghq.eu",
-      "custom"
-    ]
+    "options": ["datadoghq.com", "datadoghq.eu", "custom"]
   },
   {
     "variable": "datadog.dd_url",
@@ -88,15 +84,7 @@
     "type": "enum",
     "default": "warn",
     "group": "Agent Configuration",
-    "options": [
-      "trace",
-      "debug",
-      "info",
-      "warn",
-      "error",
-      "critical",
-      "off"
-    ]
+    "options": ["trace", "debug", "info", "warn", "error", "critical", "off"]
   },
   {
     "variable": "datadog.tags",

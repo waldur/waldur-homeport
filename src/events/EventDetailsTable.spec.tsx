@@ -23,19 +23,10 @@ const renderTable = (props?) =>
   );
 
 const getRowLabels = (wrapper: ReactWrapper) =>
-  wrapper.find('tr').map(tr =>
-    tr
-      .find('td')
-      .first()
-      .text(),
-  );
+  wrapper.find('tr').map((tr) => tr.find('td').first().text());
 
 const getEventMessage = (wrapper: ReactWrapper) =>
-  wrapper
-    .find({ label: 'Message' })
-    .find('td')
-    .last()
-    .text();
+  wrapper.find({ label: 'Message' }).find('td').last().text();
 
 describe('EventDetailsDialog', () => {
   it('renders table row for each field', () => {
