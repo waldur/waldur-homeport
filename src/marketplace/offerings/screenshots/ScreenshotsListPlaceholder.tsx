@@ -5,7 +5,7 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 const Illustration = require('@waldur/images/table-placeholders/undraw_empty_xct9.svg');
 
-export const OfferingScreenshotsListTablePlaceholder = () => (
+export const ScreenshotsListPlaceholder = () => (
   <ImageTablePlaceholder
     illustration={Illustration}
     title={translate("Offering doesn't have screenshots.")}

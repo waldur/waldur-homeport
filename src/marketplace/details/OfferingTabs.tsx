@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
+import { ScreenshotsTab } from '@waldur/marketplace/offerings/screenshots/ScreenshotsTab';
 import { Section, Offering } from '@waldur/marketplace/types';
 
 import { AttributesTable } from './attributes/AttributesTable';
 import { OfferingTab } from './OfferingTabsComponent';
 import { OverviewTab } from './OverviewTab';
-import { ScreenshotsTab } from './ScreenshotsTab';
 
 interface OfferingTabsProps {
   sections: Section[];

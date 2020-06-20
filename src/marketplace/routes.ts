@@ -12,8 +12,8 @@ import { OfferingCreateContainer } from './offerings/create/OfferingCreateContai
 import { OfferingContainer } from './offerings/details/OfferingContainer';
 import { PublicOfferingDetails } from './offerings/details/PublicOfferingDetails';
 import { MyOfferingsListContainer } from './offerings/MyOfferingsListContainer';
-import { OfferingScreenshotsContainer } from './offerings/OfferingScreenshotsContainer';
 import { OfferingsListContainer } from './offerings/OfferingsListContainer';
+import { ScreenshotsContainer } from './offerings/screenshots/ScreenshotsContainer';
 import { OfferingUpdateContainer } from './offerings/update/OfferingUpdateContainer';
 import { OrderItemDetailsContainer } from './orders/item/details/OrderItemDetailsContainer';
 import { MyOrderItemsContainer } from './orders/item/list/MyOrderItemsContainer';
@@ -184,7 +184,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-offering-screenshots',
     url: 'marketplace-offering-screenshots/:offering_uuid/',
-    component: OfferingScreenshotsContainer,
+    component: ScreenshotsContainer,
     parent: 'organization',
     data: {
       sidebarKey: 'marketplace-services',
