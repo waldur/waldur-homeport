@@ -4,7 +4,7 @@ import * as React from 'react';
 import { translate } from '@waldur/i18n';
 
 import { OfferingReportButton } from './OfferingReportButton';
-import { withReduxForm } from '@waldur/form-react/testUtils';
+import { withReduxForm } from '@waldur/form/testUtils';
 
 const renderButton = (props?) => {
   const Component = () => (

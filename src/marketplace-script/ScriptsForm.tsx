@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { FieldArray } from 'redux-form';
 
-import { FormContainer, SelectField } from '@waldur/form-react';
+import { FormContainer, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { getForm } from '@waldur/marketplace/offerings/store/selectors';
 

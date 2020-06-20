@@ -12,8 +12,8 @@ import {
   SelectField,
   NumberField,
   FieldError,
-} from '@waldur/form-react';
-import { StaticField } from '@waldur/form-react/StaticField';
+} from '@waldur/form';
+import { StaticField } from '@waldur/form/StaticField';
 import { translate } from '@waldur/i18n';
 import {
   maxAmount,

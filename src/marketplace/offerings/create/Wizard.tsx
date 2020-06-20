@@ -2,7 +2,7 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 
-import { SubmitButton } from '@waldur/form-react';
+import { SubmitButton } from '@waldur/form';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 import { ActionButton } from '@waldur/table/ActionButton';

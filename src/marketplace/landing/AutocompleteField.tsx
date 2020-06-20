@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Async, Option } from 'react-select';
 
-import { optionRenderer } from '@waldur/form-react/optionRenderer';
+import { optionRenderer } from '@waldur/form/optionRenderer';
 
 const renderer = optionRenderer({
   iconKey: 'thumbnail',

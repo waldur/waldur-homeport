@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { FieldError } from '@waldur/form-react';
+import { FieldError } from '@waldur/form';
 import { Plan } from '@waldur/marketplace/types';
 
 interface PlanSelectFieldProps {

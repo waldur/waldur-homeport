@@ -8,8 +8,8 @@ import {
   NumberField,
   TextField,
   SelectField,
-} from '@waldur/form-react';
-import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
+} from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 

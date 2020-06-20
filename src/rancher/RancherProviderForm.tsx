@@ -6,7 +6,7 @@ import {
   StringField,
   SecretField,
   TextField,
-} from '@waldur/form-react';
+} from '@waldur/form';
 
 export const RancherProviderForm = ({ translate, container }) => (
   <FormContainer {...container}>

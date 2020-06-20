@@ -6,7 +6,7 @@ import {
   StringField,
   FormContainer,
   FileUploadField,
-} from '@waldur/form-react';
+} from '@waldur/form';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { ImageUploadField } from './ImageUploadField';

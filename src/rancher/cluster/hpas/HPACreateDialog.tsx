@@ -9,7 +9,7 @@ import {
   SelectAsyncField,
   NumberField,
   TextField,
-} from '@waldur/form-react';
+} from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';

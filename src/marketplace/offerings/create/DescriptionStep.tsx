@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { FormContainer, SelectField } from '@waldur/form-react';
+import { FormContainer, SelectField } from '@waldur/form';
 import { TranslateProps } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
 

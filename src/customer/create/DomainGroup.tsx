@@ -5,7 +5,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/core/services';
-import { InputField } from '@waldur/form-react/InputField';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 
 import { formatFilesize } from '@waldur/core/utils';
-import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
+import { SelectDialogField } from '@waldur/form/SelectDialogField';
 import { translate } from '@waldur/i18n';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';

@@ -5,8 +5,8 @@ import { Field, formValueSelector } from 'redux-form';
 
 import { titleCase } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
-import { StringField } from '@waldur/form-react';
-import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
+import { StringField } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 
 import { HookTypeField } from './HookTypeField';

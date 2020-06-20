@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StringField } from '@waldur/form-react';
+import { StringField } from '@waldur/form';
 
 export const ProviderNameField = (props) => (
   <StringField

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
-import { StringField, SecretField, FormContainer } from '@waldur/form-react';
+import { StringField, SecretField, FormContainer } from '@waldur/form';
 
 export const OpenStackForm = ({ translate, container }) => (
   <FormContainer {...container}>

@@ -6,8 +6,8 @@ import {
   TextField,
   SelectIconField,
   SelectAsyncField,
-} from '@waldur/form-react';
-import { optionRenderer } from '@waldur/form-react/optionRenderer';
+} from '@waldur/form';
+import { optionRenderer } from '@waldur/form/optionRenderer';
 import { TranslateProps } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { getResourceIcon } from '@waldur/resource/utils';

@@ -6,7 +6,7 @@ import {
   FormContainer,
   FieldError,
   SubmitButton,
-} from '@waldur/form-react';
+} from '@waldur/form';
 
 import { ProjectNameField } from './ProjectNameField';
 

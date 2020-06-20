@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { NumberField } from '@waldur/form-react';
-import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
+import { NumberField } from '@waldur/form';
+import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { translate } from '@waldur/i18n';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';

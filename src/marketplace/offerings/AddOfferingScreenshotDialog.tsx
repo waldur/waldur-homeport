@@ -9,7 +9,7 @@ import {
   StringField,
   SubmitButton,
   TextField,
-} from '@waldur/form-react';
+} from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ImageUploadField } from '@waldur/marketplace/offerings/create/ImageUploadField';
 import {

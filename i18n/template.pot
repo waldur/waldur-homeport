@@ -896,7 +896,7 @@ msgstr ""
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/add-team-member.html
-#: src/form-react/AppstoreListDialog.tsx
+#: src/form/AppstoreListDialog.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
@@ -1050,7 +1050,7 @@ msgstr ""
 msgid "Choices as comma-separated list"
 msgstr ""
 
-#: src/form-react/list-field/ListFieldInternal.tsx
+#: src/form/list-field/ListFieldInternal.tsx
 msgid "Choose option"
 msgstr ""
 
@@ -2266,9 +2266,7 @@ msgstr ""
 msgid "Fee applied each time this plan is activated."
 msgstr ""
 
-#: src/form/appstore-field-email.js
-#: src/form/appstore-field-string.js
-#: src/form/appstore-field-tel.js
+#: src/resource/actions/dialog/appstore-field-string.js
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
 
@@ -2593,7 +2591,6 @@ msgstr ""
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
-#: src/form/appstore-field-tos.html
 #: src/freeipa/freeipa-account-create.html
 msgid "I accept the"
 msgstr ""
@@ -3311,7 +3308,6 @@ msgstr ""
 msgid "Maximal number of resources"
 msgstr ""
 
-#: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
 msgid "Maximal valid value is"
 msgstr ""
@@ -3412,7 +3408,6 @@ msgstr ""
 msgid "Min storage"
 msgstr ""
 
-#: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
 msgid "Minimal valid value is"
 msgstr ""
@@ -3741,7 +3736,7 @@ msgid "No projects are assigned to this role."
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
-#: src/form-react/AsyncSelectField.tsx
+#: src/form/AsyncSelectField.tsx
 msgid "No results found"
 msgstr ""
 
@@ -3771,7 +3766,6 @@ msgstr ""
 msgid "Not a service provider."
 msgstr ""
 
-#: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
 msgid "Not a valid value"
 msgstr ""
@@ -4516,10 +4510,6 @@ msgstr ""
 msgid "Plans are invalid."
 msgstr ""
 
-#: src/form/appstore-field-tos.html
-msgid "Please accept Terms of Services to proceed."
-msgstr ""
-
 #: src/customer/create/CustomerCreatePrompt.tsx
 msgid "Please create a new one picking the profile that best matches your organization:"
 msgstr ""
@@ -4596,7 +4586,7 @@ msgstr ""
 msgid "Please select flavor to see price estimate."
 msgstr ""
 
-#: src/form-react/list-field/ListFieldModal.tsx
+#: src/form/list-field/ListFieldModal.tsx
 msgid "Please select one"
 msgstr ""
 
@@ -5430,8 +5420,8 @@ msgstr ""
 msgid "Resend"
 msgstr ""
 
-#: src/form-react/AppstoreListDialog.tsx
-#: src/form-react/ResetFormButton.tsx
+#: src/form/AppstoreListDialog.tsx
+#: src/form/ResetFormButton.tsx
 msgid "Reset"
 msgstr ""
 
@@ -5880,7 +5870,7 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: src/form-react/AppstoreListDialog.tsx
+#: src/form/AppstoreListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 #: src/navigation/workspace/OrganizationsPanel.tsx
@@ -6039,10 +6029,6 @@ msgstr ""
 msgid "Select workspace"
 msgstr ""
 
-#: src/form/appstore-list-dialog.js
-msgid "Select {fieldLabel}"
-msgstr ""
-
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 msgid "Selected"
@@ -6177,7 +6163,7 @@ msgstr ""
 msgid "Show chart"
 msgstr ""
 
-#: src/form-react/SelectDialogField.tsx
+#: src/form/SelectDialogField.tsx
 msgid "Show choices"
 msgstr ""
 
@@ -6720,7 +6706,6 @@ msgstr ""
 msgid "Terminating"
 msgstr ""
 
-#: src/form/appstore-field-tos.html
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -6807,10 +6792,6 @@ msgstr ""
 msgid "There are no events for this resource."
 msgstr ""
 
-#: src/form/appstore-field-list.js
-msgid "There are no items yet."
-msgstr ""
-
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "There are no offerings available."
 msgstr ""
@@ -6867,20 +6848,17 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
-#: src/form/appstore-field-string.html
+#: src/resource/actions/dialog/appstore-field-string.html
 msgid "This field contains invalid characters."
 msgstr ""
 
-#: src/form/appstore-field-email.html
-#: src/form/appstore-field-file.html
-#: src/form/appstore-field-tel.html
 #: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
 #: src/marketplace/details/OfferingConfigurator.tsx
 msgid "This field is required"
 msgstr ""
 
 #: src/core/validators.ts
-#: src/form/appstore-field-string.html
+#: src/resource/actions/dialog/appstore-field-string.html
 msgid "This field is required."
 msgstr ""
 
@@ -8687,10 +8665,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
-msgstr ""
-
-#: src/form/appstore-field-list.js
-msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx

@@ -3,8 +3,8 @@ import { Field } from 'redux-form';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
-import { renderValidationWrapper } from '@waldur/form-react/FieldValidationWrapper';
-import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
+import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
+import { SelectDialogField } from '@waldur/form/SelectDialogField';
 import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 

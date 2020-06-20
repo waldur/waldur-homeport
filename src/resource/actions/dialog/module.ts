@@ -12,6 +12,12 @@ import actionFieldSelect from './action-field-select';
 import actionFieldString from './action-field-string';
 import actionFieldText from './action-field-text';
 import actionFieldTimezone from './action-field-timezone';
+import appstoreFieldMultiselect from './appstore-field-multiselect';
+import appstoreFieldString from './appstore-field-string';
+import fieldLabel from './field-label';
+import FormUtils from './form-utils';
+import helpicon from './help-icon';
+import multiplyBy from './multiply-by';
 
 export default (module) => {
   module.directive('actionDialog', actionDialog);
@@ -28,4 +34,10 @@ export default (module) => {
   module.component('actionFieldChoice', actionFieldChoice);
   module.component('actionFieldTimezone', actionFieldTimezone);
   module.component('actionFieldJson', actionFieldJson);
+  module.service('formUtils', FormUtils);
+  module.component('appstoreFieldString', appstoreFieldString);
+  module.component('appstoreFieldMultiselect', appstoreFieldMultiselect);
+  module.directive('helpicon', helpicon);
+  module.directive('multiplyBy', multiplyBy);
+  module.directive('fieldLabel', fieldLabel);
 };
