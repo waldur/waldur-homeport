@@ -699,7 +699,7 @@ msgstr ""
 msgid "Average value"
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "Azerbaijani"
 msgstr ""
 
@@ -2047,7 +2047,7 @@ msgstr ""
 msgid "End time"
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "English"
 msgstr ""
 
@@ -2111,7 +2111,7 @@ msgstr ""
 msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "Estonian"
 msgstr ""
 
@@ -3091,7 +3091,7 @@ msgstr ""
 msgid "Labels"
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "Latvian"
 msgstr ""
 
@@ -3151,7 +3151,7 @@ msgstr ""
 msgid "Link OpenStack Instance"
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "Lithuanian"
 msgstr ""
 
@@ -3480,7 +3480,7 @@ msgstr ""
 msgid "Mount point"
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
 
@@ -4162,7 +4162,7 @@ msgstr ""
 msgid "Organization name"
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "Organization owner"
 msgstr ""
 
@@ -4842,7 +4842,7 @@ msgstr ""
 msgid "Project is not selected."
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "Project manager"
 msgstr ""
 
@@ -5090,7 +5090,7 @@ msgstr ""
 msgid "Reason"
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Reason unknown, please contact support."
 msgstr ""
@@ -5676,7 +5676,7 @@ msgstr ""
 msgid "Runtime state"
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "Russian"
 msgstr ""
 
@@ -6548,7 +6548,7 @@ msgstr ""
 msgid "Synchronise"
 msgstr ""
 
-#: src/configs/base-config.js
+#: src/configs/base-config.ts
 msgid "System administrator"
 msgstr ""
 
