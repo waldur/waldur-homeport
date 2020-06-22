@@ -32,6 +32,10 @@ describe('Browse menus', () => {
         'http://localhost:8080/api/marketplace-offerings/**',
         'fixture:marketplace/offerings.json',
       )
+      .route(
+        'http://localhost:8080/api/customers/0d5e3e83da724893814cead5de1a641d/',
+        'fixture:customers/alice.json',
+      )
       .login()
       .openWorkspaceSelector()
       .selectFirstProjectOfFirstOrganizationFromWorkspaceSelector();
@@ -79,6 +83,12 @@ describe('Browse menus', () => {
 
       .get('h5')
       .contains('Resources')
-      .should('be.visible');
+      .should('be.visible')
+
+      .get('table tbody tr')
+      .first()
+      .children()
+      .first()
+      .click();
   });
 });
