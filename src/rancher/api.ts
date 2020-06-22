@@ -3,6 +3,7 @@ import {
   get,
   getAll,
   post,
+  put,
   remove,
   deleteById,
 } from '@waldur/core/api';
@@ -72,3 +73,8 @@ export const deleteHPA = (hpaUuid) => deleteById('/rancher-hpas/', hpaUuid);
 
 export const createHPA = (payload: HPACreateType) =>
   post<HPA>('/rancher-hpas/', payload);
+
+export const updateHPA = (
+  hpaId: string,
+  payload: Omit<HPACreateType, 'workload'>,
+) => put<HPA>(`/rancher-hpas/${hpaId}/`, payload);
