@@ -1,40 +1,34 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
+import useEffectOnce from 'react-use/lib/useEffectOnce';
 import { reduxForm } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import {
-  StringField,
-  SelectField,
-  SelectAsyncField,
-  NumberField,
-  TextField,
-} from '@waldur/form';
+import { StringField, SelectField, NumberField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { createHPA, listWorkloads } from '@waldur/rancher/api';
-import { Resource } from '@waldur/resource/types';
+import { updateHPA } from '@waldur/rancher/api';
+import { HPA } from '@waldur/rancher/types';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { createEntity } from '@waldur/table/actions';
+import { updateEntity } from '@waldur/table/actions';
 
 interface OwnProps {
   resolve: {
-    cluster: Resource;
+    hpa: HPA;
   };
 }
 
-const useHPACreateDialog = (cluster) => {
+const useHPAUpdateDialog = (originalHPA) => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const callback = React.useCallback(
     async (formData) => {
       try {
         setSubmitting(true);
-        const response = await createHPA({
+        const response = await updateHPA(originalHPA.uuid, {
           name: formData.name,
           description: formData.description,
-          workload: formData.workload.url,
           min_replicas: formData.min_replicas,
           max_replicas: formData.max_replicas,
           metrics: [
@@ -56,43 +50,33 @@ const useHPACreateDialog = (cluster) => {
           ],
         });
         const hpa = response.data;
-        dispatch(createEntity('rancher-hpas', hpa.uuid, hpa));
+        dispatch(updateEntity('rancher-hpas', hpa.uuid, hpa));
       } catch (error) {
         const errorMessage = `${translate(
-          'Unable to create horizontal pod autoscaler.',
+          'Unable to update horizontal pod autoscaler.',
         )} ${format(error)}`;
         dispatch(showError(errorMessage));
         setSubmitting(false);
         return;
       }
       dispatch(
-        showSuccess(translate('Horizontal pod autoscaler has been created.')),
+        showSuccess(translate('Horizontal pod autoscaler has been updated.')),
       );
       dispatch(closeModalDialog());
     },
-    [dispatch, cluster],
+    [dispatch],
   );
   return {
     submitting,
-    createHPA: callback,
+    callback,
   };
 };
 
-export const HPACreateDialog = reduxForm<{}, OwnProps>({
-  form: 'RancherHPACreate',
-  initialValues: {
-    min_replicas: 1,
-    max_replicas: 10,
-  },
+export const HPAUpdateDialog = reduxForm<{}, OwnProps>({
+  form: 'RancherHPAupdate',
 })((props) => {
-  const { submitting, createHPA } = useHPACreateDialog(props.resolve.cluster);
-  const loadWorkloads = React.useCallback(
-    () =>
-      listWorkloads({
-        params: { cluster_uuid: props.resolve.cluster.uuid },
-      }).then((options) => ({ options })),
-    [props.resolve.cluster.uuid],
-  );
+  const { hpa } = props.resolve;
+  const { submitting, callback } = useHPAUpdateDialog(hpa);
 
   const metricNameOptions = React.useMemo(
     () => [
@@ -110,11 +94,30 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
     [],
   );
 
+  useEffectOnce(() => {
+    const metric = hpa.metrics[0];
+    props.initialize({
+      name: hpa.name,
+      description: hpa.description,
+      min_replicas: hpa.min_replicas,
+      max_replicas: hpa.max_replicas,
+      metric_name: metricNameOptions.find(
+        (option) => option.value === metric.name,
+      ),
+      target_type: targetTypeOptions.find(
+        (option) =>
+          option.value.toLocaleLowerCase() ===
+          metric.target.type.toLocaleLowerCase(),
+      ),
+      quantity: metric.target.utilization || metric.target.value,
+    });
+  });
+
   return (
     <ActionDialog
-      title={translate('Create horizontal pod autoscaler')}
+      title={translate('update horizontal pod autoscaler')}
       submitLabel={translate('Submit')}
-      onSubmit={props.handleSubmit(createHPA)}
+      onSubmit={props.handleSubmit(callback)}
       submitting={submitting}
     >
       <StringField name="name" label={translate('Name')} required={true} />
@@ -122,14 +125,6 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         name="description"
         label={translate('Description')}
         required={false}
-      />
-      <SelectAsyncField
-        name="workload"
-        label={translate('Workload')}
-        required={true}
-        loadOptions={loadWorkloads}
-        labelKey="name"
-        valueKey="url"
       />
       <NumberField
         name="min_replicas"

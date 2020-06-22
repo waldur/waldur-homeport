@@ -52,6 +52,10 @@ export function patch<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
   return Axios.patch(`${ENV.apiEndpoint}api${endpoint}`, data);
 }
 
+export function put<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
+  return Axios.put(`${ENV.apiEndpoint}api${endpoint}`, data);
+}
+
 export function sendForm<T = {}>(
   method: Method,
   url: string,

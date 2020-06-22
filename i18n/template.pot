@@ -692,10 +692,12 @@ msgid "Available quota usage: {usage}"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Average utilization"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Average value"
 msgstr ""
 
@@ -874,6 +876,7 @@ msgid "CIDR"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "CPU"
@@ -1715,6 +1718,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -1952,6 +1956,7 @@ msgstr ""
 #: src/openstack/openstack-backup-schedule/actions.ts
 #: src/openstack/openstack-snapshot-schedule/actions.ts
 #: src/project/team/AddMemberButton.tsx
+#: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/resource/actions/base.ts
 #: src/resource/actions/constants.ts
 #: src/vmware/actions.ts
@@ -2231,10 +2236,6 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Extending"
-msgstr ""
-
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
-msgid "External"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
@@ -2546,6 +2547,10 @@ msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Horizontal pod autoscaler has been created."
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+msgid "Horizontal pod autoscaler has been updated."
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostSummary.tsx
@@ -3299,6 +3304,7 @@ msgstr ""
 
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Max replicas"
 msgstr ""
 
@@ -3358,6 +3364,7 @@ msgid "Member"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Memory"
 msgstr ""
 
@@ -3383,11 +3390,8 @@ msgid "Metric"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Metric name"
-msgstr ""
-
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
-msgid "Metric type"
 msgstr ""
 
 #: src/openstack/openstack-instance/ImageGroup.tsx
@@ -3400,6 +3404,7 @@ msgstr ""
 
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Min replicas"
 msgstr ""
 
@@ -3566,6 +3571,7 @@ msgstr ""
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -3855,10 +3861,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "OK"
-msgstr ""
-
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
-msgid "Object"
 msgstr ""
 
 #: src/error/InvalidRoutePage.tsx
@@ -4617,7 +4619,6 @@ msgstr ""
 msgid "Plugin options are invalid."
 msgstr ""
 
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Pods"
 msgstr ""
@@ -5022,6 +5023,7 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Quantity"
 msgstr ""
 
@@ -5442,7 +5444,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Resource"
 msgstr ""
 
@@ -6445,6 +6446,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
@@ -6584,6 +6586,7 @@ msgid "Taking a snapshot"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Target type"
 msgstr ""
 
@@ -7528,6 +7531,10 @@ msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
 msgid "Unable to submit usage report."
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+msgid "Unable to update horizontal pod autoscaler."
 msgstr ""
 
 #: src/user/hooks/utils.ts
@@ -8612,6 +8619,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "token will not timeout"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+msgid "update horizontal pod autoscaler"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
