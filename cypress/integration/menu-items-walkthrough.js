@@ -28,6 +28,10 @@ describe('Browse menus', () => {
         'fixture:marketplace/resources.json',
       )
       .route('http://localhost:8080/api/marketplace-cart-items/**', [])
+      .route(
+        'http://localhost:8080/api/marketplace-offerings/**',
+        'fixture:marketplace/offerings.json',
+      )
       .login()
       .openWorkspaceSelector()
       .selectFirstProjectOfFirstOrganizationFromWorkspaceSelector();
@@ -40,6 +44,16 @@ describe('Browse menus', () => {
 
       .get('h2')
       .contains('Welcome')
+      .should('be.visible');
+  });
+
+  it('Marketplace', () => {
+    cy.get('.nav-label')
+      .contains('Marketplace')
+      .click()
+      .wait(500)
+      .get('h1')
+      .contains('Explore Waldur Marketplace')
       .should('be.visible');
   });
 
