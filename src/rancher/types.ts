@@ -71,6 +71,7 @@ export interface HPA {
   uuid: string;
   name: string;
   project_name: string;
+  description: string;
   namespace_name: string;
   workload_name: string;
   min_replicas: number;
@@ -79,6 +80,7 @@ export interface HPA {
   desired_replicas: number;
   created: string;
   runtime_state: string;
+  metrics: Metric[];
 }
 
 interface Metric {
