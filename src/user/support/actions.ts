@@ -8,7 +8,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { UserDetailsDialog } from './UserDetailsDialog';
 import { UserRemovalMessageDialog } from './UserRemovalMessageDialog';
 
-export const showUserDetails = user =>
+export const showUserDetails = (user) =>
   openModalDialog(UserDetailsDialog, { resolve: { user }, size: 'lg' });
 
 export const showUserRemoval = () => {
@@ -30,7 +30,7 @@ export const showUserRemoval = () => {
   return openModalDialog(IssueCreateDialog, { resolve });
 };
 
-export const showUserRemovalMessage = resolve => {
+export const showUserRemovalMessage = (resolve) => {
   return openModalDialog(UserRemovalMessageDialog, { resolve });
 };
 

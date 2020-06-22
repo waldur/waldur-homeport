@@ -6,7 +6,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
@@ -24,7 +24,7 @@ interface FieldProps {
   row: Resource;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -86,9 +86,9 @@ export const TableComponent = props => {
 
 const TableOptions = {
   table: 'ProjectResourcesList',
-  mapPropsToTableId: props => [props.project.uuid, props.category_uuid],
+  mapPropsToTableId: (props) => [props.project.uuid, props.category_uuid],
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: props =>
+  mapPropsToFilter: (props) =>
     props.project
       ? {
           project_uuid: props.project.uuid,
@@ -99,7 +99,7 @@ const TableOptions = {
   queryField: 'name',
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   project: getProject(state),
   importVisible: isVisible(state, 'import'),
 });

@@ -10,7 +10,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { InputField } from '@waldur/form-react/InputField';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 

@@ -156,7 +156,7 @@ SidebarExtensionService.register('project', async () => {
       label: translate('Resources'),
       icon: 'fa-files-o',
       index: 300,
-      children: categories.map(category => ({
+      children: categories.map((category) => ({
         label: category.title,
         icon: 'fa-cloud',
         ...getCategoryLink(project.uuid, category.uuid),

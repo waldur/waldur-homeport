@@ -8,7 +8,7 @@ import { OpenStackBackupScheduleSummary } from './OpenStackBackupScheduleSummary
 import './tabs';
 import './actions';
 
-export default module => {
+export default (module) => {
   ResourceSummary.register(
     'OpenStackTenant.BackupSchedule',
     OpenStackBackupScheduleSummary,

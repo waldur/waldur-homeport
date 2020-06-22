@@ -14,7 +14,9 @@ class CustomersServiceClass {
 
   getUsers(customerUuid) {
     return $q.when(
-      get(`/customers/${customerUuid}/users/`).then(response => response.data),
+      get(`/customers/${customerUuid}/users/`).then(
+        (response) => response.data,
+      ),
     );
   }
 
@@ -24,7 +26,7 @@ class CustomersServiceClass {
 
   isOwnerOrStaff() {
     const customer = getCustomer(store.getState());
-    return UsersService.getCurrentUser().then(user => {
+    return UsersService.getCurrentUser().then((user) => {
       return this.checkCustomerUser(customer, user);
     });
   }
@@ -52,7 +54,7 @@ class CustomersServiceClass {
       return Axios.request({
         method: 'OPTIONS',
         url: ENV.apiEndpoint + 'api/customers/',
-      }).then(response => {
+      }).then((response) => {
         this.countryChoices = response.data.actions.POST.country.choices;
         return this.countryChoices;
       });
@@ -60,13 +62,13 @@ class CustomersServiceClass {
   }
 
   countCustomers() {
-    return Axios.head(ENV.apiEndpoint + 'api/customers/').then(response => {
+    return Axios.head(ENV.apiEndpoint + 'api/customers/').then((response) => {
       return parseInt(response.headers['x-result-count']);
     });
   }
 
   refreshCurrentCustomer(customerUuid) {
-    return this.get(customerUuid).then(customer => {
+    return this.get(customerUuid).then((customer) => {
       store.dispatch(setCurrentCustomer(customer));
       return customer;
     });

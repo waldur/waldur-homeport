@@ -42,7 +42,7 @@ const freeipaAccountEdit = {
     syncProfile() {
       this.loading = true;
       FreeIPAService.syncProfile(this.profile.uuid)
-        .then(response => {
+        .then((response) => {
           if (response.status === 204) {
             this.ncUtilsFlash.success(
               gettext('Your FreeIPA has been removed in FreeIPA server.'),

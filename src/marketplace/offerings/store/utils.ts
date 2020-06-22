@@ -65,7 +65,7 @@ const formatPlan = (
 };
 
 const formatOptions = (options: OptionFormData[]) => ({
-  order: options.map(option => option.name),
+  order: options.map((option) => option.name),
   options: options.reduce((result, option) => {
     const { name, type, choices, ...rest } = option;
     const item: OptionField = {
@@ -76,8 +76,8 @@ const formatOptions = (options: OptionFormData[]) => ({
     if (choices) {
       item.choices = choices
         .split(',')
-        .map(s => s.trim())
-        .filter(s => s.length > 0)
+        .map((s) => s.trim())
+        .filter((s) => s.length > 0)
         .sort();
     }
     return {
@@ -101,7 +101,7 @@ export const formatAttributes = (category: Category, attributes) => {
       if (value.length === 0) {
         value = undefined;
       } else {
-        value = value.map(item => item.key);
+        value = value.map((item) => item.key);
       }
     } else if (meta.type === 'choice' && typeof value !== 'undefined') {
       if (value === '') {
@@ -117,11 +117,11 @@ export const formatAttributes = (category: Category, attributes) => {
   }, {});
 };
 
-const getBillingTypeValue = option =>
+const getBillingTypeValue = (option) =>
   typeof option === 'object' ? option.value : option;
 
-export const formatComponents = components =>
-  components.map(component => ({
+export const formatComponents = (components) =>
+  components.map((component) => ({
     ...component,
     billing_type: getBillingTypeValue(component.billing_type),
     limit_period: component.limit_period ? component.limit_period.value : null,
@@ -169,9 +169,11 @@ export const formatOfferingRequest = (
       ? components
       : request.components || []
     )
-      .filter(c => getBillingTypeValue(c.billing_type) === 'fixed')
-      .map(c => c.type);
-    result.plans = request.plans.map(plan => formatPlan(plan, fixedComponents));
+      .filter((c) => getBillingTypeValue(c.billing_type) === 'fixed')
+      .map((c) => c.type);
+    result.plans = request.plans.map((plan) =>
+      formatPlan(plan, fixedComponents),
+    );
   }
   if (request.options) {
     result.options = formatOptions(request.options);

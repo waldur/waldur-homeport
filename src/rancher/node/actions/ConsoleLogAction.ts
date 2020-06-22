@@ -8,7 +8,7 @@ export function consoleLogAction(): ResourceAction {
     name: 'console_log',
     title: translate('Show console log'),
     type: 'callback',
-    execute: resource => executeConsoleLogAction(resource, 'rancher-nodes'),
+    execute: (resource) => executeConsoleLogAction(resource, 'rancher-nodes'),
     validators: [validateState('OK')],
   };
 }

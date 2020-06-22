@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { showEventTypes } from '@waldur/events/actions';
 import { translate } from '@waldur/i18n/translate';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 export const EventTypesButton = () => {
   const dispatch = useDispatch();

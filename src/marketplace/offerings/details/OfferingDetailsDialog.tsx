@@ -25,7 +25,9 @@ async function loadData(offering_uuid: string) {
   };
 }
 
-export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props => {
+export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
+  props,
+) => {
   const { loading, error, value } = useAsync(
     () => loadData(props.resolve.offeringUuid),
     [props.resolve.offeringUuid],
@@ -47,13 +49,11 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = props
             {value.offering.customer_name}
           </p>
 
-          <p>
-            {value.offering.description && (
-              <div className="bs-callout bs-callout-success">
-                <FormattedHtml html={value.offering.description} />
-              </div>
-            )}
-          </p>
+          {value.offering.description && (
+            <p className="bs-callout bs-callout-success">
+              <FormattedHtml html={value.offering.description} />
+            </p>
+          )}
           <OfferingTabsComponent tabs={value.tabs} />
         </>
       )}

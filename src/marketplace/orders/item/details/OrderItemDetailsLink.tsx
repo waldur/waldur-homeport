@@ -5,7 +5,7 @@ import { Link } from '@waldur/core/Link';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
-const PureOrderItemDetailsLink = props => (
+const PureOrderItemDetailsLink = (props) => (
   <Link
     state={props.state}
     params={{ ...props.params, order_item_uuid: props.order_item_uuid }}

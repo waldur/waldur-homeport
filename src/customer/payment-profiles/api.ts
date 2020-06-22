@@ -1,6 +1,6 @@
 import { deleteById, post, patch } from '@waldur/core/api';
 
-export const createPaymentProfile = data => {
+export const createPaymentProfile = (data) => {
   const reqData = {
     is_active: false,
     name: data.name,
@@ -12,10 +12,10 @@ export const createPaymentProfile = data => {
       contract_sum: data.contract_sum,
     },
   };
-  return post('/payment-profiles/', reqData).then(response => response.data);
+  return post('/payment-profiles/', reqData).then((response) => response.data);
 };
 
-export const updatePaymentProfile = data => {
+export const updatePaymentProfile = (data) => {
   const reqData = {
     name: data.formData.name,
     payment_type: data.formData.payment_type.value,
@@ -26,7 +26,7 @@ export const updatePaymentProfile = data => {
     },
   };
   return patch(`/payment-profiles/${data.uuid}/`, reqData).then(
-    response => response.data,
+    (response) => response.data,
   );
 };
 
@@ -34,4 +34,4 @@ export const deletePaymentProfile = (uuid: string) =>
   deleteById('/payment-profiles/', uuid);
 
 export const enablePaymentProfile = (uuid: string) =>
-  post(`/payment-profiles/${uuid}/enable/`).then(response => response.data);
+  post(`/payment-profiles/${uuid}/enable/`).then((response) => response.data);

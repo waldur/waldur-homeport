@@ -1,6 +1,6 @@
 import { ENV, defaultCurrency } from '@waldur/core/services';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 export const CurrentCostField = ({ row }) => {
   if (getActiveFixedPricePaymentProfile(row.payment_profiles)) {

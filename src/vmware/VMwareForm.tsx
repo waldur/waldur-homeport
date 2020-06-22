@@ -6,7 +6,7 @@ import {
   StringField,
   NumberField,
   SecretField,
-} from '@waldur/form-react';
+} from '@waldur/form';
 
 export const VMwareForm = ({ translate, container }) => (
   <FormContainer {...container}>
@@ -39,22 +39,22 @@ export const VMwareForm = ({ translate, container }) => (
       name="max_ram"
       label={translate('Maximum RAM for each VM')}
       unit="GB"
-      format={v => (v ? v / 1024 : '')}
-      normalize={v => Number(v) * 1024}
+      format={(v) => (v ? v / 1024 : '')}
+      normalize={(v) => Number(v) * 1024}
     />
     <NumberField
       name="max_disk"
       label={translate('Maximum capacity for each disk')}
       unit="GB"
-      format={v => (v ? v / 1024 : '')}
-      normalize={v => Number(v) * 1024}
+      format={(v) => (v ? v / 1024 : '')}
+      normalize={(v) => Number(v) * 1024}
     />
     <NumberField
       name="max_disk_total"
       label={translate('Maximum total size of the disk space per VM')}
       unit="GB"
-      format={v => (v ? v / 1024 : '')}
-      normalize={v => Number(v) * 1024}
+      format={(v) => (v ? v / 1024 : '')}
+      normalize={(v) => Number(v) * 1024}
     />
   </FormContainer>
 );

@@ -10,7 +10,7 @@ import * as actions from './actions';
 import { ProjectDetails } from './ProjectDetails';
 import { ProjectUpdateForm } from './ProjectUpdateForm';
 
-const ProjectUpdateComponent = props =>
+const ProjectUpdateComponent = (props) =>
   props.canManage ? (
     <ProjectUpdateForm {...props} />
   ) : (
@@ -34,7 +34,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  updateProject: data =>
+  updateProject: (data) =>
     actions.updateProject(
       {
         ...data,

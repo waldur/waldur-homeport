@@ -20,7 +20,7 @@ import {
   getCustomer,
 } from '@waldur/workspace/selectors';
 
-const loadInvoices = customer =>
+const loadInvoices = (customer) =>
   getAll<{ state: string; price: string }>('/invoices/', {
     params: { field: ['state', 'price'], customer_uuid: customer.uuid },
   });
@@ -38,7 +38,7 @@ export const CustomerRemovePanel = () => {
 
   const removeCustomer = () => {
     const hasActiveInvoices = invoices.some(
-      invoice => invoice.state !== 'pending' || parseFloat(invoice.price) > 0,
+      (invoice) => invoice.state !== 'pending' || parseFloat(invoice.price) > 0,
     );
     const hasProjects = customer.projects.length > 0;
     const needsSupport = hasProjects || hasActiveInvoices;

@@ -3,12 +3,12 @@ import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { translate, withTranslation } from '@waldur/i18n';
-import { ToogleButtonFilter } from '@waldur/table-react/ToggleButtonFilter';
+import { ToogleButtonFilter } from '@waldur/table/ToggleButtonFilter';
 
 const PureCustomerEventsFilter = () => (
   <Field
     name="feature"
-    component={props => (
+    component={(props) => (
       <ToogleButtonFilter
         choices={[
           {

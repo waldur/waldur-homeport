@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n/translate';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
@@ -12,7 +12,7 @@ interface OwnProps {
   project: Project;
 }
 
-const PureProjectDeleteButton = props => (
+const PureProjectDeleteButton = (props) => (
   <ActionButton
     title={translate('Delete')}
     action={props.showProjectRemoveDialog}
@@ -22,7 +22,7 @@ const PureProjectDeleteButton = props => (
   />
 );
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const ownerOrStaff = isOwnerOrStaff(state);
 
   if (!ownerOrStaff) {

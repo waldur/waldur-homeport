@@ -12,7 +12,7 @@ export const ImageFileField = ({ input, disabled }) => {
         type="file"
         ref={fileInput}
         style={{ display: 'none' }}
-        onChange={event => input.onChange(event.target.files[0])}
+        onChange={(event) => input.onChange(event.target.files[0])}
         accept=".jpg, .jpeg, .png, .svg"
       />
       <Button

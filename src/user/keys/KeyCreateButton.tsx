@@ -2,7 +2,7 @@ import { useRouter } from '@uirouter/react';
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n/translate';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 export const KeyCreateButton = () => {
   const router = useRouter();

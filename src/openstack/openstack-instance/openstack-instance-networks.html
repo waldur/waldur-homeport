@@ -14,7 +14,7 @@
         <select
           ng-options="choice.value as choice.display_name for choice in $ctrl.getFreeFloatingIps(item.floating_ip)"
           ng-model="item.floating_ip"
-          ng-class="{disabled: !item.subnet}"
+          ng-class="{ disabled: !item.subnet }"
           class="form-control"
         >
         </select>
@@ -37,7 +37,7 @@
   type="button"
   class="btn btn-default"
   ng-click="$ctrl.addItem()"
-  ng-class="{disabled: !$ctrl.hasFreeSubnets()}"
+  ng-class="{ disabled: !$ctrl.hasFreeSubnets() }"
 >
   <i class="fa fa-plus"></i>
   <span translate>Add</span>

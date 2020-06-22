@@ -5,12 +5,12 @@ import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { PlanUsageButton } from './PlanUsageButton';
 import { PlanUsageRowProps } from './types';
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const { translate } = props;
   const columns = [
     {
@@ -61,7 +61,7 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'PlanUsages',
   fetchData: createFetcher('marketplace-plans/usage_stats'),
-  mapPropsToFilter: props => {
+  mapPropsToFilter: (props) => {
     const filter: Record<string, string> = {};
     if (props.filter) {
       if (props.filter.provider) {
@@ -74,7 +74,7 @@ const TableOptions = {
     return filter;
   },
 
-  exportRow: row => [
+  exportRow: (row) => [
     row.customer_provider_name,
     row.offering_name,
     row.plan_name,
@@ -90,7 +90,7 @@ const TableOptions = {
   ],
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filter: getFormValues('PlanUsageFilter')(state),
 });
 

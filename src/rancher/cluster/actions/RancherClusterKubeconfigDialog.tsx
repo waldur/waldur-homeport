@@ -10,7 +10,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { getKubeconfigFile } from '@waldur/rancher/api';
 import { showSuccess } from '@waldur/store/coreSaga';
 
-const KubeconfigFilePanel = props => {
+const KubeconfigFilePanel = (props) => {
   const dispatch = useDispatch();
   const onClick = React.useCallback(() => {
     copyToClipboard(props.config);
@@ -39,7 +39,7 @@ const KubeconfigFilePanel = props => {
   );
 };
 
-export const RancherClusterKubeconfigDialog = props => {
+export const RancherClusterKubeconfigDialog = (props) => {
   const { loading, error, value } = useAsync(() =>
     getKubeconfigFile(props.resolve.resource.uuid),
   );

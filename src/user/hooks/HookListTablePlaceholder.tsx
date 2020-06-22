@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { translate } from '@waldur/i18n';
-import { ImageTablePlaceholder } from '@waldur/table-react/ImageTablePlaceholder';
+import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 const Illustration = require('@waldur/images/table-placeholders/undraw_empty_xct9.svg');
 

@@ -9,8 +9,8 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { Category } from '@waldur/marketplace/types';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { wrapTooltip } from '@waldur/table-react/ActionButton';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -31,7 +31,7 @@ interface StateProps {
   filter: ResourceFilter;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -114,7 +114,7 @@ const mapPropsToFilter = (props: StateProps) => {
   return filter;
 };
 
-const exportRow = row => [
+const exportRow = (row) => [
   row.name,
   row.project_name,
   row.category_title,
@@ -133,7 +133,7 @@ const TableOptions = {
   queryField: 'name',
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   filter: getFormValues('CustomerResourcesFilter')(state),
 });

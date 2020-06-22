@@ -34,7 +34,7 @@ export const BaseList = ({
             <EmptyPlaceholder />
           </ListGroupItem>
         ) : (
-          items.map(item => (
+          items.map((item) => (
             <ListGroupItem
               data-uuid={item.uuid}
               className={classNames({

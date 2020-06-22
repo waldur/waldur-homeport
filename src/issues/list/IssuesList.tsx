@@ -7,9 +7,9 @@ import { translate } from '@waldur/i18n';
 import { IssuesListPlaceholder } from '@waldur/issues/list/IssuesListPlaceholder';
 import { useTitle } from '@waldur/navigation/title';
 import { connectAngularComponent } from '@waldur/store/connect';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableProps } from '@waldur/table-react/Table';
-import { Column } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableProps } from '@waldur/table/Table';
+import { Column } from '@waldur/table/types';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueTypeIcon } from '../types/IssueTypeIcon';
@@ -27,7 +27,7 @@ interface IssueTableProps extends TableProps, OwnProps {
   filterColumns(cols: Column[]): Column[];
 }
 
-export const TableComponent: React.FC<IssueTableProps> = props => {
+export const TableComponent: React.FC<IssueTableProps> = (props) => {
   useTitle(translate('Issues'));
   const { filterColumns, supportOrStaff, hiddenColumns, ...rest } = props;
   const columns = filterColumns([
@@ -152,7 +152,7 @@ const exportRow = (row, props) => {
   return result;
 };
 
-const exportFields = props => {
+const exportFields = (props) => {
   const { supportOrStaff, hiddenColumns = [] } = props;
   return [
     translate('Key'),
@@ -168,19 +168,19 @@ const exportFields = props => {
     supportOrStaff && translate('Assigned to'),
     translate('Created'),
     supportOrStaff && translate('Time in progress'),
-  ].filter(label => label);
+  ].filter((label) => label);
 };
 
 const TableOptions = {
   table: 'issuesList',
   fetchData: createFetcher('support-issues'),
   queryField: 'summary',
-  mapPropsToFilter: props => props.filter,
+  mapPropsToFilter: (props) => props.filter,
   exportRow,
   exportFields,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   supportOrStaff: getUser(state).is_staff || getUser(state).is_support,
 });
 

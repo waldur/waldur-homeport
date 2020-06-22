@@ -49,7 +49,7 @@ function* rejectBookingItem(action) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.BOOKINGS_FETCH, fetchBookings);
   yield takeEvery(constants.BOOKING_ACCEPT, acceptBookingItem);
   yield takeEvery(constants.BOOKING_REJECT, rejectBookingItem);

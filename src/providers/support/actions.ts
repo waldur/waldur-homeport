@@ -17,7 +17,7 @@ export const fetchServiceUsageStart = () => ({
   type: SERVICE_USAGE_FETCH_START,
 });
 
-export const fetchServiceUsageDone = data => {
+export const fetchServiceUsageDone = (data) => {
   return {
     type: SERVICE_USAGE_FETCH_DONE,
     payload: { data },

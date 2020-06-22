@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { User, Project, Customer } from '@waldur/workspace/types';
 
 interface AddMemberButtonProps {
@@ -30,7 +30,7 @@ export const AddMemberButton: React.FC<AddMemberButtonProps> = ({
           currentCustomer: customer,
           editUser: user,
           isProjectManager: isProjectManager,
-          addedUsers: users.map(user => user.uuid),
+          addedUsers: users.map((user) => user.uuid),
         },
       }),
     );

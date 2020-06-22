@@ -11,10 +11,8 @@
     <p>
       <loading-spinner></loading-spinner>
     </p>
-    <p class="text-center">
-      <span translate
-        >Please give us a moment to validate your invitation.</span
-      >
+    <p class="text-center" translate>
+      Please give us a moment to validate your invitation.
     </p>
   </div>
   <div ng-if="$ctrl.invitationChecked()">
@@ -26,11 +24,8 @@
       <span translate>Invitation email is:</span>
       <strong>{{ $ctrl.invitation.email }}</strong>
     </p>
-    <p>
-      <span translate
-        >Would you like to update your current email with the one from the
-        invitation?</span
-      >
+    <p translate>
+      Would you like to update your current email with the one from the invitation?
     </p>
   </div>
 </div>

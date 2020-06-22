@@ -6,7 +6,7 @@ import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-const SelectFlavorField = props => (
+const SelectFlavorField = (props) => (
   <Select
     value={props.input.value}
     onChange={props.input.onChange}
@@ -14,7 +14,7 @@ const SelectFlavorField = props => (
   />
 );
 
-export const NodeFlavorGroup = props => (
+export const NodeFlavorGroup = (props) => (
   <FormGroup
     label={translate('Flavor')}
     required={true}

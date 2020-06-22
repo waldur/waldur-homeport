@@ -13,7 +13,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { UserDetailsTable } from './support/UserDetailsTable';
 
-const getUser = userId => getById('/users/', userId);
+const getUser = (userId) => getById('/users/', userId);
 
 export const UserPopover = ({ resolve }) => {
   const [{ loading, value: user }, callback] = useAsyncFn(async () => {

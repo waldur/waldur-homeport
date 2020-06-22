@@ -9,10 +9,7 @@ const openstackAllocationPool = {
   controller: class {
     get allocationPool() {
       const subnetCidr = this.model[this.field.parentField];
-      const prefix = subnetCidr
-        .split('.')
-        .slice(0, 3)
-        .join('.');
+      const prefix = subnetCidr.split('.').slice(0, 3).join('.');
       return `${prefix}.10 - ${prefix}.200`;
     }
   },

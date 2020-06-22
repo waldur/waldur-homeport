@@ -11,7 +11,7 @@ export const ProjectExpandableRow: React.FC<{
     <p>{translate('There are not namespaces in this project yet.')}</p>
   ) : (
     <ul>
-      {project.namespaces.map(namespace => (
+      {project.namespaces.map((namespace) => (
         <li key={namespace.uuid}>{namespace.name}</li>
       ))}
     </ul>

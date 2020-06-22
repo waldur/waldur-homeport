@@ -8,7 +8,7 @@ import './provider';
 import './register-header';
 import './marketplace';
 
-export default module => {
+export default (module) => {
   module.component('quotaPie', connectAngularComponent(QuotaPie, ['value']));
   detailsModule(module);
 };

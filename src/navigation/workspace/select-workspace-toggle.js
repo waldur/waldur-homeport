@@ -1,6 +1,10 @@
 import { truncate } from '@waldur/core/utils';
+import { openModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
 
 import template from './select-workspace-toggle.html';
+import { SelectWorkspaceDialog } from './SelectWorkspaceDialog';
+
 import './select-workspace-toggle.scss';
 
 const workspaceIconClasses = {
@@ -19,11 +23,10 @@ const workspaceButtonClasses = {
 
 class SelectWorkspaceToggleController {
   // @ngInject
-  constructor(WorkspaceService, $scope, $rootScope, NavigationUtilsService) {
+  constructor(WorkspaceService, $scope, $rootScope) {
     this.WorkspaceService = WorkspaceService;
     this.$scope = $scope;
     this.$rootScope = $rootScope;
-    this.NavigationUtilsService = NavigationUtilsService;
   }
 
   $onInit() {
@@ -102,7 +105,11 @@ class SelectWorkspaceToggleController {
       return;
     }
 
-    this.NavigationUtilsService.selectWorkspace();
+    store.dispatch(
+      openModalDialog(SelectWorkspaceDialog, {
+        size: 'lg',
+      }),
+    );
   }
 }
 

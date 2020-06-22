@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-const mapStateToProps = createSelector(getCustomer, customer => ({
+const mapStateToProps = createSelector(getCustomer, (customer) => ({
   scope: { customer },
   filter: { customer: customer && customer.url },
 }));

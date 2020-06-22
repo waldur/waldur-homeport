@@ -19,7 +19,7 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
         <th key={index}>{item.name}</th>
       ))}
       {props.items.length < COMPARISON_COLUMNS &&
-        range(COMPARISON_COLUMNS - props.items.length).map(index => (
+        range(COMPARISON_COLUMNS - props.items.length).map((index) => (
           <td key={index} />
         ))}
     </tr>
@@ -35,7 +35,7 @@ export const ComparisonSection = (props: ComparisonSectionProps) => (
           </td>
         ))}
         {props.items.length < COMPARISON_COLUMNS &&
-          range(COMPARISON_COLUMNS - props.items.length).map(index => (
+          range(COMPARISON_COLUMNS - props.items.length).map((index) => (
             <td key={index} />
           ))}
       </tr>

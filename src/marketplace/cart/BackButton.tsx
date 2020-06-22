@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getWorkspace } from '@waldur/workspace/selectors';
 
 export const BackButton: React.FC = () => {

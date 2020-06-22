@@ -19,7 +19,7 @@ import {
   getFilterName,
 } from './store/selectors';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   items: getOfferings(state),
   loading: isOfferingsLoading(state),
   loaded: isOfferingsLoaded(state),
@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
   filterName: getFilterName(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   loadCategories: () => dispatch(loadDataStart()),
   getCategories: () => dispatch(actions.categoriesFetchStart()),
   resetForm: () => dispatch(reset(MARKETPLACE_FILTER_FORM)),

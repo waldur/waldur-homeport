@@ -20,10 +20,10 @@ export const RatingStars: React.FC<RatingStarsProps> = (
       'rating-stars-medium': props.size === 'medium',
     })}
   >
-    {range(props.rating).map(key => (
+    {range(props.rating).map((key) => (
       <i className="fa fa-star filled" key={key} />
     ))}
-    {range(props.max - props.rating).map(key => (
+    {range(props.max - props.rating).map((key) => (
       <i className="fa fa-star" key={key} />
     ))}
   </div>

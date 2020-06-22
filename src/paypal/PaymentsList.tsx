@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 
 import { PaymentStateIndicator } from './PaymentStateIndicator';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table

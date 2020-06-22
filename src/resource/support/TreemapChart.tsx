@@ -19,7 +19,7 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
   chart = undefined;
 
   static defaultProps = {
-    tooltipValueFormatter: value => `${value} resources`,
+    tooltipValueFormatter: (value) => `${value} resources`,
   };
 
   componentDidMount() {
@@ -38,7 +38,7 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
   }
 
   drawChart() {
-    loadEcharts().then(module => {
+    loadEcharts().then((module) => {
       const echarts = module.default;
       const chart = echarts.getInstanceByDom(this.container);
       if (!chart) {
@@ -61,8 +61,8 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
       },
 
       tooltip: {
-        formatter: info => {
-          const treePath = info.treePathInfo.map(part => part.name);
+        formatter: (info) => {
+          const treePath = info.treePathInfo.map((part) => part.name);
           const path = treePath.join('/');
           const value = this.props.tooltipValueFormatter(info.value);
           return `<div class="tooltip-title">${path}</div>${value}`;
@@ -101,7 +101,7 @@ export class TreemapChart extends React.Component<TreemapChartProps> {
     const style = { width, height };
     return (
       <>
-        <div style={style} ref={container => (this.container = container)} />
+        <div style={style} ref={(container) => (this.container = container)} />
       </>
     );
   }

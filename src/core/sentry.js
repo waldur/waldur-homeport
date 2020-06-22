@@ -9,7 +9,7 @@ import * as Sentry from '@sentry/browser';
 
 // @ngInject
 function exceptionHandlerFactory($log, ENV) {
-  return function(exception, cause) {
+  return function (exception, cause) {
     if (ENV.SENTRY_DSN) {
       if (cause) {
         Sentry.setExtra('cause', cause);
@@ -58,7 +58,7 @@ function attachSentry(ENV) {
   }
 }
 
-export default module => {
+export default (module) => {
   module.factory('$exceptionHandler', exceptionHandlerFactory);
   module.run(attachSentry);
 };

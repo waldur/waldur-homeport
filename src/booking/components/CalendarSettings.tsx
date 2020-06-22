@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { getOptions } from '@waldur/form-react/TimeSelectField';
+import { getOptions } from '@waldur/form/TimeSelectField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
@@ -14,7 +14,7 @@ import { useCalendarSettings } from './hooks/useCalendarSettings';
 
 const timeZoneArray = moment.tz
   .names()
-  .map(zone => ({ value: zone, label: zone }));
+  .map((zone) => ({ value: zone, label: zone }));
 const daysArray = [1, 2, 3, 4, 5, 6, 0];
 const getDayLabel = (day: number, lang): string =>
   moment.locale(lang) && moment.weekdays(day);
@@ -44,7 +44,7 @@ export const CalendarSettings: React.FC = () => {
       }
     } else {
       if (daysOfWeek.includes(0 || 6)) {
-        setDaysOfWeek(daysOfWeek.filter(day => !(day === 0 || day === 6)));
+        setDaysOfWeek(daysOfWeek.filter((day) => !(day === 0 || day === 6)));
       }
     }
   }, [weekends, daysOfWeek]);
@@ -112,7 +112,7 @@ export const CalendarSettings: React.FC = () => {
                 id={`weekday-${day}`}
                 value={day}
                 checked={daysOfWeek.includes(day)}
-                onChange={e =>
+                onChange={(e) =>
                   setDaysOfWeek(handleWeekDays(daysOfWeek, e.target.value))
                 }
               />

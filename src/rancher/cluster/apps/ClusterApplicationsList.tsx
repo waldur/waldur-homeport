@@ -2,13 +2,13 @@ import * as React from 'react';
 import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 
 import { formatDate } from '@waldur/core/dateUtils';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 
 import { ApplicationDeleteButton } from './ApplicationDeleteButton';
 import { ApplicationDetailsButton } from './ApplicationDetailsButton';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -56,7 +56,7 @@ const TableComponent = props => {
 const TableOptions: TableOptionsType = {
   table: 'rancher-apps',
   fetchData: createFetcher('rancher-apps'),
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     cluster_uuid: props.resource.uuid,
   }),
 };

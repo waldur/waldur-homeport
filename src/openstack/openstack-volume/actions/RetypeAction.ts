@@ -26,13 +26,13 @@ export default function createAction(): ResourceAction<Volume> {
         params,
       });
       action.fields.type.choices = types
-        .map(volumeType => ({
+        .map((volumeType) => ({
           value: volumeType.url,
           display_name: volumeType.description
             ? `${volumeType.name} (${volumeType.description})`
             : volumeType.name,
         }))
-        .filter(choice => choice.value !== resource.type);
+        .filter((choice) => choice.value !== resource.type);
     },
     fields: [
       {

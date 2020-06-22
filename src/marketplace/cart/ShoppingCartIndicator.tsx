@@ -23,7 +23,7 @@ const PureCartIndicator = (props: CartIndicatorProps) =>
     />
   ) : null;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   count: getCount(state),
   project: getProject(state),
 });

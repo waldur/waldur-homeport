@@ -9,12 +9,12 @@ import {
   StringField,
   SelectField,
   NumberField,
-} from '@waldur/form-react';
-import { AsyncSelectField } from '@waldur/form-react/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form-react/AwesomeCheckboxField';
-import { CalendarField } from '@waldur/form-react/CalendarField';
-import { DateField } from '@waldur/form-react/DateField';
-import { TimeSelectField } from '@waldur/form-react/TimeSelectField';
+} from '@waldur/form';
+import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { CalendarField } from '@waldur/form/CalendarField';
+import { DateField } from '@waldur/form/DateField';
+import { TimeSelectField } from '@waldur/form/TimeSelectField';
 import { translate } from '@waldur/i18n';
 import {
   parseIntField,
@@ -31,14 +31,10 @@ import { fetchTenantOptions, fetchInstanceOptions } from './api';
 export class PureOfferingConfigurationForm extends React.Component<
   OfferingConfigurationFormProps
 > {
-  state = {
-    availableDates: [],
-  };
-
   componentDidMount() {
     const attributes = { ...this.props.initialAttributes };
     if (this.props.offering.options.order) {
-      this.props.offering.options.order.forEach(key => {
+      this.props.offering.options.order.forEach((key) => {
         const options = this.props.offering.options.options[key];
         if (options && options.default !== undefined) {
           attributes[key] = options.default;
@@ -46,8 +42,6 @@ export class PureOfferingConfigurationForm extends React.Component<
       });
     }
     if (!attributes.schedules) {
-      const { schedules } = this.props.offering.attributes;
-      this.setState({ availableDates: schedules });
       attributes.schedules = [];
     }
     const initialData: any = { attributes };
@@ -87,7 +81,7 @@ export class PureOfferingConfigurationForm extends React.Component<
             label={translate('Description')}
           />
           {props.offering.options.order &&
-            props.offering.options.order.map(key => {
+            props.offering.options.order.map((key) => {
               const options = props.offering.options.options[key];
               if (!options) {
                 return null;
@@ -102,7 +96,7 @@ export class PureOfferingConfigurationForm extends React.Component<
                 case 'select_string':
                   OptionField = SelectField;
                   params = {
-                    options: options.choices.map(item => ({
+                    options: options.choices.map((item) => ({
                       label: item,
                       value: item,
                     })),
@@ -130,7 +124,7 @@ export class PureOfferingConfigurationForm extends React.Component<
                 case 'select_openstack_tenant':
                   OptionField = AsyncSelectField;
                   params = {
-                    loadOptions: query =>
+                    loadOptions: (query) =>
                       fetchTenantOptions(query, props.customer.uuid),
                     placeholder: translate('Select tenant...'),
                   };
@@ -138,7 +132,7 @@ export class PureOfferingConfigurationForm extends React.Component<
                 case 'select_openstack_instance':
                   OptionField = AsyncSelectField;
                   params = {
-                    loadOptions: query =>
+                    loadOptions: (query) =>
                       fetchInstanceOptions(query, props.customer.uuid),
                     placeholder: translate('Select instance...'),
                   };
@@ -146,7 +140,7 @@ export class PureOfferingConfigurationForm extends React.Component<
                 case 'select_multiple_openstack_instances':
                   OptionField = AsyncSelectField;
                   params = {
-                    loadOptions: query =>
+                    loadOptions: (query) =>
                       fetchInstanceOptions(query, props.customer.uuid),
                     placeholder: translate('Select instance...'),
                     multi: true,
@@ -178,7 +172,7 @@ export class PureOfferingConfigurationForm extends React.Component<
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
 });
 

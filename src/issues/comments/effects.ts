@@ -117,7 +117,7 @@ export function* issueCommentsFormSubmit(action) {
     return;
   }
   yield race({
-    sync: call(function*() {
+    sync: call(function* () {
       if (utils.commentExist(comments, formId)) {
         yield call(issueCommentsUpdate, message, formId);
       } else {
@@ -180,7 +180,7 @@ export function* issueCommentsPendingAttachmentsDelete() {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.ISSUE_COMMENTS_GET, issueCommentsGet);
   yield takeEvery(constants.ISSUE_COMMENTS_DELETE, issueCommentsDelete);
   yield takeEvery(

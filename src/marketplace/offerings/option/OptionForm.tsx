@@ -28,7 +28,7 @@ const connector = connect<{ type?: string }, {}, { option: string }>(
   },
 );
 
-const StringField = props => (
+const StringField = (props) => (
   <Field
     name={`${props.option}.${props.name}`}
     type="text"
@@ -42,7 +42,7 @@ const RequiredField = withTranslation(
   (props: TranslateProps & { option: string }) => (
     <Field
       name={`${props.option}.required`}
-      component={fieldProps => (
+      component={(fieldProps) => (
         <AwesomeCheckbox
           id={`${props.option}.required`}
           label={props.translate('Required')}
@@ -53,14 +53,14 @@ const RequiredField = withTranslation(
   ),
 );
 
-const OptionTypeField = props => (
+const OptionTypeField = (props) => (
   <Field
     name={`${props.option}.type`}
     validate={props.validate}
-    component={fieldProps => (
+    component={(fieldProps) => (
       <Select
         value={fieldProps.input.value}
-        onChange={value => fieldProps.input.onChange(value)}
+        onChange={(value) => fieldProps.input.onChange(value)}
         options={FIELD_TYPES}
         clearable={false}
       />

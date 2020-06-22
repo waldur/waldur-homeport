@@ -5,7 +5,7 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { ENV } from '@waldur/core/services';
 import eventsRegistry from '@waldur/events/registry';
 import { useTitle } from '@waldur/navigation/title';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { EventDetailsButton } from './EventDetailsButton';
 import { EventTypesButton } from './EventTypesButton';
@@ -16,7 +16,7 @@ const EventMessageField = ({ row }) => (
 
 const EventDateField = ({ row }) => <span>{formatDateTime(row.created)}</span>;
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   useTitle(translate('Audit logs'));
   return (
@@ -53,7 +53,7 @@ export const getEventsList = (extraOptions?) => {
     fetchData: createFetcher('events'),
     queryField: 'message',
     exportFields: ['message', 'created'],
-    exportRow: row => [row.message, row.created],
+    exportRow: (row) => [row.message, row.created],
     ...extraOptions,
     pullInterval: () => ENV.countersTimerInterval * 1000,
   };

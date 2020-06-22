@@ -39,7 +39,7 @@ class FlowMapViewComponent extends React.Component<FlowMapViewComponentProps> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   serviceUsage: selectServiceUsage(state),
   selectedServiceProvider: {
     ...selectServiceProvider(state),

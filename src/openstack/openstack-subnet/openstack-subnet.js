@@ -1,5 +1,6 @@
-import template from './openstack-subnet.html';
 import { PRIVATE_CIDR_PATTERN } from '../utils';
+
+import template from './openstack-subnet.html';
 
 const openstackSubnet = {
   template: template,

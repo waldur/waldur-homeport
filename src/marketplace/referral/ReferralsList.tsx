@@ -4,9 +4,9 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { REFERRALS_TABLE } from '@waldur/marketplace/referral/constants';
 import { ReferralTypeIcon } from '@waldur/marketplace/referral/ReferralTypeIcon';
-import { connectTable, createFetcher, Table } from '@waldur/table-react';
+import { connectTable, createFetcher, Table } from '@waldur/table';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Title'),
@@ -51,7 +51,7 @@ const TableComponent = props => {
 const TableOptions = {
   table: REFERRALS_TABLE,
   fetchData: createFetcher('marketplace-offering-referrals'),
-  mapPropsToFilter: props => ({ scope: props.offering.url }),
+  mapPropsToFilter: (props) => ({ scope: props.offering.url }),
 };
 
 const enhance = connectTable(TableOptions);

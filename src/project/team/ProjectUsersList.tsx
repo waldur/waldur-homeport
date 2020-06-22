@@ -6,8 +6,8 @@ import useAsync from 'react-use/lib/useAsync';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 import {
   getProject,
   getUser,
@@ -20,7 +20,7 @@ import { fetchProjectUsers, fetchProjectManagers } from './api';
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserRemoveButton } from './UserRemoveButton';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -86,7 +86,7 @@ const TableOptions: TableOptionsType = {
   table: 'project-users',
   fetchData: fetchProjectUsers,
   queryField: 'full_name',
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     project_uuid: props.project.uuid,
     o: 'concatenated_name',
   }),

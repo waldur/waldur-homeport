@@ -5,21 +5,21 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-import { BooleanField } from '@waldur/table-react/BooleanField';
-import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
-import { Table, connectTable, createFetcher } from '@waldur/table-react/index';
+import { BooleanField } from '@waldur/table/BooleanField';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Table, connectTable, createFetcher } from '@waldur/table/index';
 
 import { UserActivateButton } from './UserActivateButton';
 import { UserDetailsButton } from './UserDetailsButton';
 
-const UserActionsButton = props => (
+const UserActionsButton = (props) => (
   <ButtonGroup>
     <UserDetailsButton {...props} />
     <UserActivateButton {...props} />
   </ButtonGroup>
 );
 
-const renderFieldOrDash = field => {
+const renderFieldOrDash = (field) => {
   return field ? field : DASH_ESCAPE_CODE;
 };
 
@@ -87,7 +87,7 @@ const SupportStatusField = ({ row }) => {
   return <BooleanField value={row.is_support} />;
 };
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -147,10 +147,10 @@ const TableComponent = props => {
   );
 };
 
-export const formatRoleFilter = filter => {
+export const formatRoleFilter = (filter) => {
   if (filter && filter.role) {
     const formattedRole = {};
-    filter.role.map(item => {
+    filter.role.map((item) => {
       formattedRole[item.value] = true;
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -163,7 +163,7 @@ export const formatRoleFilter = filter => {
   return filter;
 };
 
-export const formatStatusFilter = filter => {
+export const formatStatusFilter = (filter) => {
   if (filter && filter.status) {
     if (filter.status.value === true) {
       return {
@@ -183,9 +183,9 @@ export const formatStatusFilter = filter => {
 
 const formatFilter = compose(formatStatusFilter, formatRoleFilter);
 
-export const getOrganizationsWhereOwner = permissions => {
+export const getOrganizationsWhereOwner = (permissions) => {
   const customerNames = [];
-  permissions.map(perm => {
+  permissions.map((perm) => {
     if (perm.role === 'owner') {
       customerNames.push(perm.customer_name);
     }
@@ -196,7 +196,7 @@ export const getOrganizationsWhereOwner = permissions => {
 const TableOptions = {
   table: 'userList',
   fetchData: createFetcher('users'),
-  mapPropsToFilter: props => formatFilter(props.userFilter),
+  mapPropsToFilter: (props) => formatFilter(props.userFilter),
   exportFields: [
     'Full name',
     'Username',
@@ -206,7 +206,7 @@ const TableOptions = {
     'Organizations owner',
   ],
   exportAll: true,
-  exportRow: row => [
+  exportRow: (row) => [
     row.full_name,
     row.username,
     row.email,
@@ -216,7 +216,7 @@ const TableOptions = {
   ],
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   userFilter: getFormValues('userFilter')(state),
 });
 

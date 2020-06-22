@@ -2,7 +2,7 @@ import eventsRegistry from '@waldur/events/registry';
 import { getLink, getCallerContext } from '@waldur/events/utils';
 import { gettext } from '@waldur/i18n';
 
-const getIssueContext = event => ({
+const getIssueContext = (event) => ({
   ...getCallerContext(event),
   issue_link: getLink(
     'support.detail',

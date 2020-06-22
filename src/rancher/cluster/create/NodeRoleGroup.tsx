@@ -7,7 +7,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { NodeRoleField } from './NodeRoleField';
 
-export const NodeRoleGroup = props => (
+export const NodeRoleGroup = (props) => (
   <FormGroup
     label={translate('Role')}
     required={true}

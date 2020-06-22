@@ -2,7 +2,7 @@ import * as ProvidersRegistry from '@waldur/providers/registry';
 
 import { JiraForm } from './JiraForm';
 
-const serializer = data => ({
+const serializer = (data) => ({
   username: data.username,
   password: data.password,
 });

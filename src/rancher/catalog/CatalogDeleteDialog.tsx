@@ -7,7 +7,7 @@ import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { Resource } from '@waldur/resource/types';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { deleteEntity } from '@waldur/table-react/actions';
+import { deleteEntity } from '@waldur/table/actions';
 
 import { deleteCatalog } from '../api';
 
@@ -17,7 +17,7 @@ interface OwnProps {
   };
 }
 
-const useCatalogDeleteDialog = catalog => {
+const useCatalogDeleteDialog = (catalog) => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const callback = React.useCallback(async () => {

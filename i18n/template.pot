@@ -126,10 +126,10 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -155,8 +155,8 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
@@ -214,10 +214,6 @@ msgstr ""
 
 #: src/freeipa/freeipa-account-edit.html
 msgid "Add Waldur user ssh keys to the FreeIPA profile"
-msgstr ""
-
-#: src/intro/base-intro.js
-msgid "Add a new organization"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
@@ -308,8 +304,8 @@ msgstr ""
 msgid "Add rule"
 msgstr ""
 
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
-#: src/marketplace/offerings/actions/OfferingAddScreenshotButton.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotButton.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 msgid "Add screenshot"
 msgstr ""
 
@@ -547,11 +543,11 @@ msgstr ""
 msgid "Archived plans"
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Are you sure you want to delete a {resourceType}?"
 msgstr ""
 
@@ -559,7 +555,7 @@ msgstr ""
 msgid "Are you sure you want to delete the payment profile?"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 msgid "Are you sure you want to delete the screenshot?"
 msgstr ""
 
@@ -587,7 +583,7 @@ msgstr ""
 msgid "Are you sure you would like to terminate resource {resourceName}?"
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Are you sure? This action cannot be undone."
 msgstr ""
 
@@ -693,6 +689,14 @@ msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
 msgid "Available quota usage: {usage}"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Average utilization"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Average value"
 msgstr ""
 
 #: src/configs/base-config.js
@@ -842,8 +846,8 @@ msgstr ""
 msgid "Branch"
 msgstr ""
 
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 msgid "Browse"
 msgstr ""
 
@@ -869,6 +873,7 @@ msgstr ""
 msgid "CIDR"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "CPU"
@@ -878,7 +883,7 @@ msgstr ""
 msgid "CPU usage"
 msgstr ""
 
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "CSV"
 msgstr ""
 
@@ -891,7 +896,7 @@ msgstr ""
 #: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/add-team-member.html
-#: src/form-react/AppstoreListDialog.tsx
+#: src/form/AppstoreListDialog.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
@@ -1045,7 +1050,7 @@ msgstr ""
 msgid "Choices as comma-separated list"
 msgstr ""
 
-#: src/form-react/list-field/ListFieldInternal.tsx
+#: src/form/list-field/ListFieldInternal.tsx
 msgid "Choose option"
 msgstr ""
 
@@ -1078,7 +1083,6 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
 #: src/slurm/details/slurm-allocation-details-dialog.html
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
@@ -1212,7 +1216,7 @@ msgid "Confirm deletion?"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
-#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 msgid "Confirmation"
@@ -1271,7 +1275,7 @@ msgid "Copy of"
 msgstr ""
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1315,6 +1319,7 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/rancher/catalog/CatalogCreateButton.tsx
+#: src/rancher/cluster/hpas/HPACreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create"
 msgstr ""
@@ -1362,6 +1367,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
 msgid "Create floating IP for OpenStack tenant"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Create horizontal pod autoscaler"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateNetworkAction.ts
@@ -1421,9 +1430,9 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/jira/issue/JiraIssuesList.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -1431,9 +1440,9 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/vmware/DisksList.tsx
@@ -1526,7 +1535,7 @@ msgstr ""
 msgid "Current price per month"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 msgid "Current replicas"
 msgstr ""
 
@@ -1637,7 +1646,7 @@ msgstr ""
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
-#: src/marketplace/offerings/OfferingScreenshotsActions.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
@@ -1681,13 +1690,13 @@ msgstr ""
 #: src/jira/project/jira-project-config.js
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
@@ -1705,6 +1714,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -1716,7 +1726,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 msgid "Desired replicas"
 msgstr ""
 
@@ -2118,7 +2128,6 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
-#: src/help/constants.js
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
@@ -2175,7 +2184,7 @@ msgstr ""
 msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr ""
 
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "Excel"
 msgstr ""
 
@@ -2208,7 +2217,7 @@ msgstr ""
 msgid "Explore {deployment} Marketplace"
 msgstr ""
 
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "Export as"
 msgstr ""
 
@@ -2222,6 +2231,10 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Extending"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "External"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
@@ -2252,9 +2265,7 @@ msgstr ""
 msgid "Fee applied each time this plan is activated."
 msgstr ""
 
-#: src/form/appstore-field-email.js
-#: src/form/appstore-field-string.js
-#: src/form/appstore-field-tel.js
+#: src/resource/actions/dialog/appstore-field-string.js
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
 
@@ -2503,21 +2514,13 @@ msgstr ""
 msgid "Guest OS"
 msgstr ""
 
-#: src/navigation/header/IntroButton.tsx
-msgid "Guide me"
+#: src/rancher/cluster/tabs.ts
+msgid "HPA"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
 #: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
-msgstr ""
-
-#: src/help/routes.ts
-msgid "Help"
-msgstr ""
-
-#: src/help/help-list.html
-msgid "Help topics"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
@@ -2541,8 +2544,8 @@ msgstr ""
 msgid "Hook removal"
 msgstr ""
 
-#: src/rancher/cluster/tabs.ts
-msgid "Horizontal pod autoscalers"
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Horizontal pod autoscaler has been created."
 msgstr ""
 
 #: src/resource/monitoring/ZabbixHostSummary.tsx
@@ -2575,7 +2578,6 @@ msgstr ""
 msgid "Hostname or IP address of master node"
 msgstr ""
 
-#: src/help/constants.js
 #: src/user/keys/help.js
 msgid "How to generate SSH key"
 msgstr ""
@@ -2588,7 +2590,6 @@ msgstr ""
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
-#: src/form/appstore-field-tos.html
 #: src/freeipa/freeipa-account-create.html
 msgid "I accept the"
 msgstr ""
@@ -2900,7 +2901,7 @@ msgstr ""
 msgid "Invoice events"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "Invoice events timeline"
 msgstr ""
 
@@ -3253,6 +3254,10 @@ msgstr ""
 msgid "Manager in:"
 msgstr ""
 
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Mark as paid"
+msgstr ""
+
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
@@ -3292,7 +3297,8 @@ msgstr ""
 msgid "Max number of VM snapshots"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Max replicas"
 msgstr ""
 
@@ -3301,7 +3307,6 @@ msgstr ""
 msgid "Maximal number of resources"
 msgstr ""
 
-#: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
 msgid "Maximal valid value is"
 msgstr ""
@@ -3352,6 +3357,10 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Memory"
+msgstr ""
+
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "Memory per vCore"
 msgstr ""
@@ -3373,6 +3382,14 @@ msgstr ""
 msgid "Metric"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Metric name"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Metric type"
+msgstr ""
+
 #: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Min RAM"
 msgstr ""
@@ -3381,7 +3398,8 @@ msgstr ""
 msgid "Min amount"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Min replicas"
 msgstr ""
 
@@ -3389,7 +3407,6 @@ msgstr ""
 msgid "Min storage"
 msgstr ""
 
-#: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
 msgid "Minimal valid value is"
 msgstr ""
@@ -3455,7 +3472,7 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventItem.tsx
 msgid "More info"
 msgstr ""
 
@@ -3468,8 +3485,8 @@ msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
 
 #: src/marketplace/offerings/MyOfferingsListContainer.tsx
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "My offerings"
 msgstr ""
@@ -3508,8 +3525,6 @@ msgstr ""
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -3517,6 +3532,8 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -3545,9 +3562,10 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -3608,8 +3626,8 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/NamespaceField.tsx
 msgid "Namespace"
 msgstr ""
@@ -3684,7 +3702,7 @@ msgstr ""
 
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
-#: src/table-react/TablePagination.tsx
+#: src/table/TablePagination.tsx
 msgid "Next"
 msgstr ""
 
@@ -3717,7 +3735,7 @@ msgid "No projects are assigned to this role."
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
-#: src/form-react/AsyncSelectField.tsx
+#: src/form/AsyncSelectField.tsx
 msgid "No results found"
 msgstr ""
 
@@ -3747,7 +3765,6 @@ msgstr ""
 msgid "Not a service provider."
 msgstr ""
 
-#: src/form/appstore-field-integer.html
 #: src/resource/actions/dialog/action-field-integer.html
 msgid "Not a valid value"
 msgstr ""
@@ -3840,6 +3857,10 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Object"
+msgstr ""
+
 #: src/error/InvalidRoutePage.tsx
 msgid "Object is not found."
 msgstr ""
@@ -3870,7 +3891,7 @@ msgstr ""
 msgid "Offering details"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsListTablePlaceholder.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsListPlaceholder.tsx
 msgid "Offering doesn't have screenshots."
 msgstr ""
 
@@ -3894,11 +3915,11 @@ msgstr ""
 msgid "Offering logo"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 msgid "Offering screenshots"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 msgid "Offering screenshots ({name})"
 msgstr ""
 
@@ -3929,12 +3950,8 @@ msgstr ""
 msgid "Offerings"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 msgid "Offerings screenshots"
-msgstr ""
-
-#: src/intro/base-intro.js
-msgid "Ok, what's next?"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
@@ -3943,6 +3960,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
 msgid "One-time on plan switch"
+msgstr ""
+
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Only a created invoice can be marked as paid."
 msgstr ""
 
 #: src/invitations/actions/InvitationCreateButton.tsx
@@ -4178,8 +4199,8 @@ msgstr ""
 #: src/customer/workspace/CustomerWorkspace.tsx
 #: src/invoices/details/BillingDetails.tsx
 #: src/marketplace/details/utils.ts
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
@@ -4228,7 +4249,7 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: src/table-react/TableExportButton.tsx
+#: src/table/TableExportButton.tsx
 msgid "PDF"
 msgstr ""
 
@@ -4488,10 +4509,6 @@ msgstr ""
 msgid "Plans are invalid."
 msgstr ""
 
-#: src/form/appstore-field-tos.html
-msgid "Please accept Terms of Services to proceed."
-msgstr ""
-
 #: src/customer/create/CustomerCreatePrompt.tsx
 msgid "Please create a new one picking the profile that best matches your organization:"
 msgstr ""
@@ -4548,7 +4565,7 @@ msgstr ""
 msgid "Please provide registration code of your company."
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsListTablePlaceholder.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsListPlaceholder.tsx
 msgid "Please provide visual material describing the Offering"
 msgstr ""
 
@@ -4568,7 +4585,7 @@ msgstr ""
 msgid "Please select flavor to see price estimate."
 msgstr ""
 
-#: src/form-react/list-field/ListFieldModal.tsx
+#: src/form/list-field/ListFieldModal.tsx
 msgid "Please select one"
 msgstr ""
 
@@ -4600,6 +4617,7 @@ msgstr ""
 msgid "Plugin options are invalid."
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Pods"
 msgstr ""
@@ -4647,7 +4665,7 @@ msgid "Preview offering"
 msgstr ""
 
 #: src/customer/create/WizardForm.tsx
-#: src/table-react/TablePagination.tsx
+#: src/table/TablePagination.tsx
 msgid "Previous"
 msgstr ""
 
@@ -4770,9 +4788,9 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Project"
 msgstr ""
@@ -4940,10 +4958,6 @@ msgstr ""
 msgid "Provider name"
 msgstr ""
 
-#: src/help/constants.js
-msgid "Providers"
-msgstr ""
-
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Provision new resource"
 msgstr ""
@@ -4956,9 +4970,9 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsContainer.tsx
 #: src/marketplace/offerings/OfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/sidebar.ts
 msgid "Public offerings"
@@ -5007,6 +5021,7 @@ msgstr ""
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Quantity"
 msgstr ""
 
@@ -5114,7 +5129,7 @@ msgstr ""
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/offering/OfferingActions.tsx
 #: src/resource/ResourceRefreshButton.tsx
-#: src/table-react/TableRefreshButton.tsx
+#: src/table/TableRefreshButton.tsx
 msgid "Refresh"
 msgstr ""
 
@@ -5356,7 +5371,7 @@ msgstr ""
 msgid "Request to update has been accepted."
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Request to {action} has been accepted."
 msgstr ""
 
@@ -5404,8 +5419,8 @@ msgstr ""
 msgid "Resend"
 msgstr ""
 
-#: src/form-react/AppstoreListDialog.tsx
-#: src/form-react/ResetFormButton.tsx
+#: src/form/AppstoreListDialog.tsx
+#: src/form/ResetFormButton.tsx
 msgid "Reset"
 msgstr ""
 
@@ -5427,6 +5442,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Resource"
 msgstr ""
 
@@ -5478,7 +5494,7 @@ msgstr ""
 msgid "Resource group"
 msgstr ""
 
-#: src/resource/actions/action-utils-service.js
+#: src/resource/actions/action-utils-service.ts
 msgid "Resource has been deleted."
 msgstr ""
 
@@ -5604,7 +5620,7 @@ msgstr ""
 msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "Retry"
 msgstr ""
 
@@ -5765,12 +5781,12 @@ msgstr ""
 msgid "Screenshot has been removed."
 msgstr ""
 
-#: src/marketplace/offerings/ScreenshotThumbnail.tsx
-#: src/marketplace/offerings/ViewOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotDetailsDialog.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotThumbnail.tsx
 msgid "Screenshot here"
 msgstr ""
 
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 msgid "Screenshot:"
 msgstr ""
 
@@ -5801,7 +5817,7 @@ msgstr ""
 
 #: src/issues/create/SearchButton.tsx
 #: src/navigation/header/MainSearch.tsx
-#: src/table-react/TableQuery.tsx
+#: src/table/TableQuery.tsx
 msgid "Search"
 msgstr ""
 
@@ -5853,7 +5869,7 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: src/form-react/AppstoreListDialog.tsx
+#: src/form/AppstoreListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 #: src/navigation/workspace/OrganizationsPanel.tsx
@@ -5917,10 +5933,6 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "Select offering..."
-msgstr ""
-
-#: src/intro/base-intro.js
-msgid "Select one to go to a customer workspace"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
@@ -6014,10 +6026,6 @@ msgstr ""
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/navigation/workspace/select-workspace-toggle.html
 msgid "Select workspace"
-msgstr ""
-
-#: src/form/appstore-list-dialog.js
-msgid "Select {fieldLabel}"
 msgstr ""
 
 #: src/marketplace/resources/import/OfferingsList.tsx
@@ -6142,7 +6150,7 @@ msgstr ""
 msgid "Shopping cart item update"
 msgstr ""
 
-#: src/table-react/TablePageSize.tsx
+#: src/table/TablePageSize.tsx
 msgid "Show"
 msgstr ""
 
@@ -6154,7 +6162,7 @@ msgstr ""
 msgid "Show chart"
 msgstr ""
 
-#: src/form-react/SelectDialogField.tsx
+#: src/form/SelectDialogField.tsx
 msgid "Show choices"
 msgstr ""
 
@@ -6167,7 +6175,7 @@ msgstr ""
 msgid "Show details"
 msgstr ""
 
-#: src/invoices/events/invoice-events-toggle.html
+#: src/invoices/events/InvoiceEventsToggle.tsx
 msgid "Show events"
 msgstr ""
 
@@ -6205,7 +6213,7 @@ msgstr ""
 msgid "Show with running accounting"
 msgstr ""
 
-#: src/table-react/TableInfo.tsx
+#: src/table/TableInfo.tsx
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr ""
 
@@ -6359,9 +6367,9 @@ msgstr ""
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/rancher/cluster/ClusterHPAList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -6426,9 +6434,9 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
-#: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
+#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
@@ -6436,6 +6444,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
@@ -6574,6 +6583,10 @@ msgstr ""
 msgid "Taking a snapshot"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Target type"
+msgstr ""
+
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -6692,7 +6705,6 @@ msgstr ""
 msgid "Terminating"
 msgstr ""
 
-#: src/form/appstore-field-tos.html
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -6707,6 +6719,10 @@ msgstr ""
 #: src/about.ts
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Terms of service"
+msgstr ""
+
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "The invoice has been marked as paid."
 msgstr ""
 
 #: src/user/keys/KeyCreateForm.tsx
@@ -6771,12 +6787,8 @@ msgstr ""
 msgid "There are no comments yet."
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "There are no events for this resource."
-msgstr ""
-
-#: src/form/appstore-field-list.js
-msgid "There are no items yet."
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
@@ -6819,11 +6831,11 @@ msgstr ""
 msgid "There are no sections for comparison yet."
 msgstr ""
 
-#: src/table-react/utils.tsx
+#: src/table/utils.tsx
 msgid "There are no {verboseName} found matching the filter."
 msgstr ""
 
-#: src/table-react/utils.tsx
+#: src/table/utils.tsx
 msgid "There are no {verboseName} yet."
 msgstr ""
 
@@ -6835,20 +6847,17 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
-#: src/form/appstore-field-string.html
+#: src/resource/actions/dialog/appstore-field-string.html
 msgid "This field contains invalid characters."
 msgstr ""
 
-#: src/form/appstore-field-email.html
-#: src/form/appstore-field-file.html
-#: src/form/appstore-field-tel.html
 #: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
 #: src/marketplace/details/OfferingConfigurator.tsx
 msgid "This field is required"
 msgstr ""
 
 #: src/core/validators.ts
-#: src/form/appstore-field-string.html
+#: src/resource/actions/dialog/appstore-field-string.html
 msgid "This field is required."
 msgstr ""
 
@@ -6872,7 +6881,7 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 msgid "Thumbnail"
 msgstr ""
 
@@ -6942,10 +6951,6 @@ msgstr ""
 
 #: src/dashboard/ReportIssueAction.tsx
 msgid "To report an issue, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a>."
-msgstr ""
-
-#: src/intro/base-intro.js
-msgid "To start please select a workspace"
 msgstr ""
 
 #: src/booking/components/calendar/defaultConfig.ts
@@ -7108,6 +7113,10 @@ msgstr ""
 msgid "Unable to create catalog."
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "Unable to create horizontal pod autoscaler."
+msgstr ""
+
 #: src/user/keys/KeyCreateForm.tsx
 msgid "Unable to create key."
 msgstr ""
@@ -7186,7 +7195,7 @@ msgstr ""
 msgid "Unable to fetch current user."
 msgstr ""
 
-#: src/table-react/Table.tsx
+#: src/table/Table.tsx
 msgid "Unable to fetch data."
 msgstr ""
 
@@ -7291,7 +7300,7 @@ msgstr ""
 msgid "Unable to load editor"
 msgstr ""
 
-#: src/invoices/events/invoice-events-dialog.html
+#: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "Unable to load events for this resource."
 msgstr ""
 
@@ -7406,6 +7415,10 @@ msgstr ""
 
 #: src/auth/saml2/store/effects.ts
 msgid "Unable to login via SAML2 protocol."
+msgstr ""
+
+#: src/invoices/list/MarkAsPaidButton.tsx
+msgid "Unable to mark the invoice as paid."
 msgstr ""
 
 #: src/openstack/utils.ts
@@ -8075,7 +8088,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/marketplace/offerings/ViewOfferingScreenshotDialog.tsx
+#: src/marketplace/offerings/screenshots/ScreenshotDetailsDialog.tsx
 msgid "Viewing screenshot"
 msgstr ""
 
@@ -8166,7 +8179,8 @@ msgstr ""
 msgid "Worker"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Workload"
 msgstr ""
 
@@ -8415,7 +8429,7 @@ msgstr ""
 msgid "e.g. MyApp"
 msgstr ""
 
-#: src/table-react/TablePageSize.tsx
+#: src/table/TablePageSize.tsx
 msgid "entries"
 msgstr ""
 
@@ -8449,11 +8463,11 @@ msgstr ""
 msgid "have been accepted on"
 msgstr ""
 
-#: src/rancher/cluster/HPADeleteButton.tsx
+#: src/rancher/cluster/hpas/HPADeleteButton.tsx
 msgid "horizontal pod autoscaler"
 msgstr ""
 
-#: src/rancher/cluster/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/ClusterHPAList.tsx
 msgid "horizontal pod autoscalers"
 msgstr ""
 
@@ -8470,7 +8484,7 @@ msgstr ""
 msgid "invoices"
 msgstr ""
 
-#: src/table-react/utils.tsx
+#: src/table/utils.tsx
 msgid "items"
 msgstr ""
 
@@ -8650,10 +8664,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
-msgstr ""
-
-#: src/form/appstore-field-list.js
-msgid "{fieldLabel} is required for provisioning resource."
 msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx

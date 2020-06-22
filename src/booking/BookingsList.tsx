@@ -11,7 +11,7 @@ import { TABLE_NAME } from '@waldur/booking/constants';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
 import { withTranslation, translate } from '@waldur/i18n';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 interface BookingsList {
@@ -50,7 +50,7 @@ const ExpandableRow = ({ row }: DetailedInfo) => (
   </div>
 );
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -99,13 +99,13 @@ const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => {
+const mapPropsToFilter = (props) => {
   const filter: Record<string, string | boolean> = {
     offering_uuid: props.offeringUuid,
   };
   if (props.filter) {
     if (props.filter.state) {
-      filter.state = props.filter.state.map(option => option.value);
+      filter.state = props.filter.state.map((option) => option.value);
     }
   }
   return filter;
@@ -117,7 +117,7 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   actionsDisabled: !isOwnerOrStaff(state),
   filter: getFormValues('BookingsFilter')(state),

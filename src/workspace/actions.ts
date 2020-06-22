@@ -8,12 +8,12 @@ import {
 } from './constants';
 import { WorkspaceType, Project } from './types';
 
-export const userLoggedIn = user => ({
+export const userLoggedIn = (user) => ({
   type: USER_LOGGED_IN,
   payload: { user },
 });
 
-export const userUpdated = user => ({
+export const userUpdated = (user) => ({
   type: USER_UPDATED,
   payload: { user },
 });
@@ -22,7 +22,7 @@ export const userLoggedOut = () => ({
   type: USER_LOGGED_OUT,
 });
 
-export const setCurrentCustomer = customer => ({
+export const setCurrentCustomer = (customer) => ({
   type: SET_CURRENT_CUSTOMER,
   payload: {
     customer,

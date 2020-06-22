@@ -8,12 +8,12 @@ import { getFilterName } from '../store/selectors';
 
 import { FilterBar } from './FilterBar';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filterQuery: getFilterName(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  setFilterQuery: query => dispatch(setFilterQuery(query)),
+const mapDispatchToProps = (dispatch) => ({
+  setFilterQuery: (query) => dispatch(setFilterQuery(query)),
 });
 
 const enhance = compose(

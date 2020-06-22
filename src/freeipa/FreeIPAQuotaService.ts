@@ -3,7 +3,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 
 export const FreeIPAQuotaService = {
   findQuota(scope) {
-    return scope.quotas.filter(quota => quota.name === 'freeipa_quota')[0];
+    return scope.quotas.filter((quota) => quota.name === 'freeipa_quota')[0];
   },
 
   loadQuota(scope) {

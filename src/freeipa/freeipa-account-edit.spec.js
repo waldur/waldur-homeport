@@ -1,5 +1,6 @@
-import freeipaAccountEdit from './freeipa-account-edit';
 import filtersModule from '../core/filters';
+
+import freeipaAccountEdit from './freeipa-account-edit';
 
 describe('FreeIPA account edit', () => {
   function initModule(module) {
@@ -11,7 +12,6 @@ describe('FreeIPA account edit', () => {
   }
   initModule(
     angular.module('freeipaAccountEditModule', [
-      'ngResource',
       'ui.router',
       'pascalprecht.translate',
     ]),
@@ -19,8 +19,8 @@ describe('FreeIPA account edit', () => {
   beforeEach(angular.mock.module('freeipaAccountEditModule'));
 
   beforeEach(
-    angular.mock.module(function($provide) {
-      $provide.factory('freeipaService', function($q) {
+    angular.mock.module(function ($provide) {
+      $provide.factory('freeipaService', function ($q) {
         return {
           enableProfile: jasmine
             .createSpy('enableProfile')
@@ -33,7 +33,7 @@ describe('FreeIPA account edit', () => {
             .and.returnValue($q.when([])),
         };
       });
-      $provide.factory('ncUtilsFlash', function() {
+      $provide.factory('ncUtilsFlash', function () {
         return {
           success: jasmine.createSpy('success'),
         };
@@ -44,7 +44,7 @@ describe('FreeIPA account edit', () => {
   let freeipaService;
   let $rootScope;
   let controller, scope, element;
-  let profile = {
+  const profile = {
     uuid: 123,
     username: 'johndoe',
     is_active: false,
@@ -53,7 +53,7 @@ describe('FreeIPA account edit', () => {
     freeipaService = _freeipaService_;
     $rootScope = _$rootScope_;
     scope = $rootScope.$new();
-    let html =
+    const html =
       '<freeipa-account-edit profile="profile"></freeipa-account-edit>';
     element = angular.element(html);
     scope.profile = profile;

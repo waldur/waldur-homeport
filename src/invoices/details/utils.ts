@@ -24,7 +24,7 @@ export function getItemName(item: InvoiceItem) {
 }
 
 const groupInvoiceSubItems = (items: InvoiceItem[], projects) => {
-  items.forEach(item => {
+  items.forEach((item) => {
     if (!item.project_uuid) {
       projects.default.items.push(item);
     } else {
@@ -48,7 +48,7 @@ export const groupInvoiceItems = (items: InvoiceItem[]) => {
   };
   groupInvoiceSubItems(items, projects);
   return Object.keys(projects)
-    .map(key => projects[key])
+    .map((key) => projects[key])
     .sort((a, b) => a.name.localeCompare(b.name));
 };
 
@@ -81,5 +81,5 @@ export function formatPhone(value) {
 
 export const getActiveFixedPricePaymentProfile = (profiles: PaymentProfile[]) =>
   profiles?.find(
-    profile => profile.is_active && profile.payment_type === 'fixed_price',
+    (profile) => profile.is_active && profile.payment_type === 'fixed_price',
   );

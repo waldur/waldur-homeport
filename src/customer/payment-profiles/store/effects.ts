@@ -7,8 +7,8 @@ import * as api from '@waldur/customer/payment-profiles/api';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
-import { FETCH_LIST_START } from '@waldur/table-react/actions';
-import { fetchList } from '@waldur/table-react/effects';
+import { FETCH_LIST_START } from '@waldur/table/actions';
+import { fetchList } from '@waldur/table/effects';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as constants from '../constants';
@@ -98,7 +98,7 @@ function* enablePaymentProfile(action: Action<any>) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.ADD_PAYMENT_PROFILE, addPaymentProfile);
   yield takeEvery(constants.EDIT_PAYMENT_PROFILE, editPaymentProfile);
   yield takeEvery(constants.REMOVE_PAYMENT_PROFILE, removePaymentProfile);

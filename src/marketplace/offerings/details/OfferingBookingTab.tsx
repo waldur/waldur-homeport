@@ -60,7 +60,7 @@ export class PureOfferingBookingTab extends React.Component<
     const bookedEvents = items
       .reduce((acc, item) => {
         const { schedules } = item.attributes;
-        schedules.forEach(event => {
+        schedules.forEach((event) => {
           event.state = item.state;
           event.className = classNames({
             progress: item.state === 'Creating',
@@ -99,7 +99,7 @@ export class PureOfferingBookingTab extends React.Component<
             height="auto"
             eventLimit={false}
             events={this.getCalendarEvents()}
-            eventRender={info => eventRender({ ...info, withTooltip: true })}
+            eventRender={(info) => eventRender({ ...info, withTooltip: true })}
           />
         </Col>
         <Col md={6}>
@@ -111,10 +111,11 @@ export class PureOfferingBookingTab extends React.Component<
   }
 }
 
-const mapStateToProps = state => ({ bookingOrderItems: state.bookings });
+const mapStateToProps = (state) => ({ bookingOrderItems: state.bookings });
 
-const mapDispatchToProps = dispatch => ({
-  offeringBookingFetch: payload => dispatch(actions.fetchBookingItems(payload)),
+const mapDispatchToProps = (dispatch) => ({
+  offeringBookingFetch: (payload) =>
+    dispatch(actions.fetchBookingItems(payload)),
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);

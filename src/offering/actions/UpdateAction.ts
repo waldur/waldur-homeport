@@ -6,7 +6,7 @@ import { Offering } from '../types';
 
 import { validatePermissions, validateOfferingState } from './utils';
 
-const formatReport = resource =>
+const formatReport = (resource) =>
   resource.report ? JSON.stringify(resource.report) : '';
 
 export default function createAction(): ResourceAction<Offering> {

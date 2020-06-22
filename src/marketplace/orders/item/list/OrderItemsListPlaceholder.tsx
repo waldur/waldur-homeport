@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { ImageTablePlaceholder } from '@waldur/table-react/ImageTablePlaceholder';
+import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 const DocumentSearchIllustration = require('@waldur/images/table-placeholders/undraw_file_searching_duff.svg');
 

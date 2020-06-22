@@ -94,7 +94,7 @@ class ServiceProviderWrapper extends React.Component<
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   canRegisterServiceProvider: canRegisterServiceProviderForCustomer(state),
 });

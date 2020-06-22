@@ -10,14 +10,14 @@ import { getOffering, getCategories } from '../store/selectors';
 const parseOptions = (options: OfferingOptions) =>
   options && options.order
     ? options.order
-        .filter(name => options.options[name] !== undefined)
+        .filter((name) => options.options[name] !== undefined)
         .map((name: string) => {
           const option = options.options[name];
           return {
             ...option,
             name,
             type: FIELD_TYPES.find(
-              fieldType => fieldType.value === option.type,
+              (fieldType) => fieldType.value === option.type,
             ),
             choices: Array.isArray(option.choices)
               ? option.choices.join(', ')
@@ -41,11 +41,11 @@ const parseAttributes = (category: Category, attributes) => {
     }
     if (Array.isArray(meta.options)) {
       if (meta.type === 'choice') {
-        attr = meta.options.find(opt => opt.key === attr);
+        attr = meta.options.find((opt) => opt.key === attr);
       } else if (meta.type === 'list' && Array.isArray(attr)) {
         attr = attr
-          .map(choice => meta.options.find(opt => opt.key === choice))
-          .filter(x => x !== undefined);
+          .map((choice) => meta.options.find((opt) => opt.key === choice))
+          .filter((x) => x !== undefined);
       }
     }
     return {
@@ -55,21 +55,21 @@ const parseAttributes = (category: Category, attributes) => {
   }, {});
 };
 
-const parseComponents = components => {
+const parseComponents = (components) => {
   const options = getAccountingTypeOptions();
   const limitPeriods = getLimitPeriods();
-  return components.map(component => ({
+  return components.map((component) => ({
     ...component,
     billing_type: options.find(
-      option => option.value === component.billing_type,
+      (option) => option.value === component.billing_type,
     ),
     limit_period: limitPeriods.find(
-      option => option.value === component.limit_period,
+      (option) => option.value === component.limit_period,
     ),
   }));
 };
 
-export const getInitialValues = state => {
+export const getInitialValues = (state) => {
   const offering: Offering = getOffering(state).offering;
   if (!offering) {
     return {};
@@ -77,7 +77,7 @@ export const getInitialValues = state => {
   const categories = getCategories(state);
   const offeringTypes = getOfferingTypes();
   const category = categories.find(
-    option => option.uuid === offering.category_uuid,
+    (option) => option.uuid === offering.category_uuid,
   );
   const options = parseOptions(offering.options);
   let schedules;
@@ -94,7 +94,7 @@ export const getInitialValues = state => {
     full_description: offering.full_description,
     terms_of_service: offering.terms_of_service,
     thumbnail: offering.thumbnail,
-    type: offeringTypes.find(option => option.value === offering.type),
+    type: offeringTypes.find((option) => option.value === offering.type),
     category,
     attributes,
     schedules,

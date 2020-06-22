@@ -24,7 +24,9 @@ interface LandingPageContainerProps {
   customer: Customer;
 }
 
-export const LandingPageContainer: React.FC<LandingPageContainerProps> = props => {
+export const LandingPageContainer: React.FC<LandingPageContainerProps> = (
+  props,
+) => {
   useTitle(translate('Marketplace'));
   const { getCategories, getOfferings } = props;
 
@@ -36,7 +38,7 @@ export const LandingPageContainer: React.FC<LandingPageContainerProps> = props =
   return (
     <LandingPage
       {...props}
-      loadOfferings={query =>
+      loadOfferings={(query) =>
         offeringsAutocomplete({
           name: query,
           allowed_customer_uuid: props.customer.uuid,
@@ -52,7 +54,7 @@ const mapDispatchToProps = {
   gotoOffering: actions.gotoOffering,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   categories: selectors.getCategories(state),
   offerings: selectors.getOfferings(state),

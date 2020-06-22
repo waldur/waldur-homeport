@@ -2,16 +2,16 @@ const INITIAL_STATE = null;
 
 export const INIT_CONFIG = 'waldur/core/INIT_CONFIG';
 
-export const initConfig = config => ({
+export const initConfig = (config) => ({
   type: INIT_CONFIG,
   payload: {
     config,
   },
 });
 
-const getFeaturesMap = features => {
+const getFeaturesMap = (features) => {
   const map = {};
-  features.forEach(feature => {
+  features.forEach((feature) => {
     map[feature] = true;
   });
   return map;
@@ -37,7 +37,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export const getConfig = state => state.config;
+export const getConfig = (state) => state.config;
 
 export const isVisible = (state, feature) => {
   const {
@@ -57,5 +57,5 @@ export const isVisible = (state, feature) => {
   return featuresVisible;
 };
 
-export const getNativeNameVisible = state =>
+export const getNativeNameVisible = (state) =>
   state.config.plugins.WALDUR_CORE.NATIVE_NAME_ENABLED === true;

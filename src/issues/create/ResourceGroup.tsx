@@ -13,14 +13,15 @@ import { AsyncSelectField } from './AsyncSelectField';
 import { ISSUE_REGISTRATION_FORM_ID } from './constants';
 import { projectSelector } from './selectors';
 
-const filterOptions = options => options;
+const filterOptions = (options) => options;
 
 export const ResourceGroup = ({ disabled }) => {
   const dispatch = useDispatch();
   const project = useSelector(projectSelector);
-  const loadData = React.useCallback(name => refreshResources(name, project), [
-    project,
-  ]);
+  const loadData = React.useCallback(
+    (name) => refreshResources(name, project),
+    [project],
+  );
 
   React.useEffect(() => {
     dispatch(change(ISSUE_REGISTRATION_FORM_ID, 'resource', undefined));

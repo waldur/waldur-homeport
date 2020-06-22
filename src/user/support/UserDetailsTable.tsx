@@ -83,7 +83,7 @@ const PureUserDetailsTable = (props: UserDetailsTableProps) => (
   </Table>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   userLanguageIsVisible: userLanguageIsVisible(state),
   userCompetenceIsVisible: userCompetenceIsVisible(state),
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { CatalogCreateButton } from './CatalogCreateButton';
 import { CatalogDeleteButton } from './CatalogDeleteButton';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   const columns = React.useMemo(
     () => [
@@ -58,8 +58,8 @@ const TableOptions = {
   table: 'rancher-catalogs',
   fetchData: createFetcher('rancher-catalogs'),
   exportFields: ['name', 'description', 'catalog_url'],
-  exportRow: row => [row.name, row.description, row.catalog_url],
-  mapPropsToFilter: props => ({
+  exportRow: (row) => [row.name, row.description, row.catalog_url],
+  mapPropsToFilter: (props) => ({
     cluster_uuid: props.resource.uuid,
   }),
 };

@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { ZabbixHostDetailsButton } from './ZabbixHostDetailsButton';
 import { PureZabbixHostStateButton } from './ZabbixHostStateButton';
 
-const renderButton = host =>
+const renderButton = (host) =>
   shallow(<PureZabbixHostStateButton translate={translate} host={host} />);
 
 describe('ZabbixHostStateButton', () => {

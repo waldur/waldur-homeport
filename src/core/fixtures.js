@@ -18,14 +18,14 @@ function shuffle(a) {
   return a;
 }
 
+export function randomInteger(start, end) {
+  return start + Math.round(Math.random() * (end - 1));
+}
+
 export function randomChoiceList(items) {
   const len = randomInteger(1, items.length + 1);
   const choices = shuffle([...items]);
   return choices.slice(0, len);
-}
-
-export function randomInteger(start, end) {
-  return start + Math.round(Math.random() * (end - 1));
 }
 
 export function randomId() {
@@ -35,7 +35,7 @@ export function randomId() {
 }
 
 export function getRandomDataset(n, start, end) {
-  let points = [];
+  const points = [];
   for (let i = 0; i < n; i++) {
     points.push(randomInteger(start, end));
   }

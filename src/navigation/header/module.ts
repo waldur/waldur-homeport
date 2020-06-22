@@ -1,5 +1,5 @@
 import siteHeader from './site-header';
 
-export default module => {
+export default (module) => {
   module.component('siteHeader', siteHeader);
 };

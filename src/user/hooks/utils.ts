@@ -5,7 +5,7 @@ import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
-import { updateEntity, createEntity } from '@waldur/table-react/actions';
+import { updateEntity, createEntity } from '@waldur/table/actions';
 
 import { getEventGroups, updateHook, createHook } from './api';
 import { HOOK_LIST_ID } from './constants';
@@ -16,7 +16,7 @@ import {
   HookFormData,
 } from './types';
 
-export const formatEventTitle = choice => {
+export const formatEventTitle = (choice) => {
   const map = {
     ssh: 'SSH',
     jira: 'JIRA',
@@ -36,7 +36,7 @@ export const loadEventGroupsOptions: () => Promise<
 > = async () => {
   const groups = await getEventGroups();
   const options = Object.keys(groups)
-    .map(key => ({
+    .map((key) => ({
       key,
       title: formatEventTitle(key),
       help_text: groups[key].join(', '),
@@ -45,7 +45,7 @@ export const loadEventGroupsOptions: () => Promise<
   return options;
 };
 
-export const getInitialValue = hook =>
+export const getInitialValue = (hook) =>
   hook
     ? {
         is_active: hook.is_active,

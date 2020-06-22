@@ -19,8 +19,8 @@ function flavorFormatter(flavor) {
 
 function formatFlavorChoices(choices, resource) {
   return choices
-    .filter(choice => choice.name !== resource.flavor_name)
-    .map(flavor => ({
+    .filter((choice) => choice.name !== resource.flavor_name)
+    .map((flavor) => ({
       display_name: flavorFormatter(flavor),
       value: flavor.url,
     }));

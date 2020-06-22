@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { FileUploadField, SubmitButton } from '@waldur/form-react';
+import { FileUploadField, SubmitButton } from '@waldur/form';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { CustomerDetailsEditFormData } from './types';
@@ -21,7 +21,7 @@ const PureCustomerEditDetailsForm = (props: ConnectedProps) => (
       <Field
         name="image"
         validate={required}
-        component={fieldProps => (
+        component={(fieldProps) => (
           <FileUploadField
             {...fieldProps}
             accept=".jpg, .jpeg, .png, .svg"

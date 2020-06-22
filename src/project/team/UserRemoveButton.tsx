@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface UserRemoveButtonProps {
   user: any;

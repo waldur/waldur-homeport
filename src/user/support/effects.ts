@@ -4,7 +4,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { updateEntity } from '@waldur/table-react/actions';
+import { updateEntity } from '@waldur/table/actions';
 import {
   updateUser,
   activateUser,

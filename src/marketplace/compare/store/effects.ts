@@ -28,7 +28,7 @@ function* restoreItems() {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery([constants.ADD_ITEM, constants.REMOVE_ITEM], syncItems);
   yield takeEvery(USER_UPDATED, restoreItems);
 }

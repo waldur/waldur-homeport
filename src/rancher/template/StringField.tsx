@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as FormControl from 'react-bootstrap/lib/FormControl';
 
-import { FieldError } from '@waldur/form-react';
+import { FieldError } from '@waldur/form';
 
 import { FieldProps } from '../types';
 
 import { DecoratedField } from './DecoratedField';
 
-const renderControl = props => (
+const renderControl = (props) => (
   <>
     <FormControl {...props.input} />
     {props.meta.error && props.meta.touched && (
@@ -16,6 +16,6 @@ const renderControl = props => (
   </>
 );
 
-export const StringField: React.FC<FieldProps> = props => (
+export const StringField: React.FC<FieldProps> = (props) => (
   <DecoratedField {...props} component={renderControl} />
 );

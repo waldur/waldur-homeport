@@ -11,7 +11,7 @@ interface OfferingReportButtonProps {
   offering: Pick<Partial<Offering>, 'report'>;
 }
 
-export const openReport = report =>
+export const openReport = (report) =>
   openModalDialog(OfferingReportDialog, { resolve: { report }, size: 'lg' });
 
 export const OfferingReportButton: React.FC<OfferingReportButtonProps> = ({

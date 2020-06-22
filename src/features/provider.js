@@ -1,4 +1,4 @@
-export default class featuresProvider {
+export default class FeaturesProvider {
   constructor() {
     this.disabledFeatures = {};
     this.enabledFeatures = {};
@@ -24,7 +24,7 @@ export default class featuresProvider {
   }
 
   $get() {
-    const isVisible = feature => {
+    const isVisible = (feature) => {
       if (!feature) {
         return true;
       }

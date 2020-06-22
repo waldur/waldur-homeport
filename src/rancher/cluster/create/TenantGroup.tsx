@@ -12,12 +12,12 @@ import { NodeList } from './NodeList';
 import { SubnetGroup } from './SubnetGroup';
 import { loadData } from './utils';
 
-export const TenantGroup = props => {
+export const TenantGroup = (props) => {
   const resourceProps = useAsync(() => loadData(props.tenant), [props.tenant]);
 
   const dispatch = useDispatch();
   const updateNodesCount = React.useCallback(
-    nodes => {
+    (nodes) => {
       dispatch(change(FORM_ID, 'limits.node', nodes));
     },
     [dispatch],

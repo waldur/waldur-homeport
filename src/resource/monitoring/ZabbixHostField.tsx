@@ -30,7 +30,7 @@ export const PureZabbixHostField = (props: ZabbixHostFieldProps) => {
   return <Field label={props.translate('Monitoring')} value={value} />;
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isVisible: monitoringIsVisible(state),
 });
 

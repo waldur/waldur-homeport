@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 
 import { ProjectCreateForm } from './ProjectCreateForm';
 
-const renderForm = props =>
+const renderForm = (props) =>
   shallow(
     <ProjectCreateForm
       translate={translate}

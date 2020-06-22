@@ -2,11 +2,7 @@ import * as React from 'react';
 
 import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
-import {
-  StringField,
-  FormContainer,
-  FileUploadField,
-} from '@waldur/form-react';
+import { StringField, FormContainer, FileUploadField } from '@waldur/form';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { ImageUploadField } from './ImageUploadField';

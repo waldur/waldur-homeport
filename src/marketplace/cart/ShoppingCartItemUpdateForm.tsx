@@ -25,7 +25,7 @@ const storeConnector = connect<
     initialAttributes: AttributesType;
   },
   OuterState
->(state => ({
+>((state) => ({
   project: getProject(state),
 }));
 

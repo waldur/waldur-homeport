@@ -7,10 +7,10 @@ export default function slurmAllocationUsageChart() {
       chart: '=',
     },
     template: `<loading-spinner ng-show="loading"></loading-spinner><div style="width: 100%" ng-show="!loading"><canvas></canvas></div>`,
-    link: function(scope, element) {
+    link: function (scope, element) {
       // @ngInject
       scope.loading = true;
-      loadChartjs().then(Chart => {
+      loadChartjs().then((Chart) => {
         scope.loading = false;
         const ctx = element[0].querySelector('canvas').getContext('2d');
         const options = {

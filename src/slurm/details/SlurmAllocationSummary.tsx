@@ -9,7 +9,7 @@ import {
   PureResourceSummaryBase,
 } from '@waldur/resource/summary';
 
-const formatLoginDetails = props =>
+const formatLoginDetails = (props) =>
   !props.resource.username ? (
     <Link
       state="profile.freeipa"
@@ -19,7 +19,7 @@ const formatLoginDetails = props =>
     `${props.resource.username}@${props.resource.gateway}`
   );
 
-const formatSubmitDetails = props => (
+const formatSubmitDetails = (props) => (
   <span className="html-description">
     {props.resource.batch_service === 'MOAB' ? 'qsub' : 'sbatch'} -A{' '}
     {props.resource.backend_id}
@@ -40,19 +40,19 @@ const formatSubmitDetails = props => (
 const formatQuota = (translate, usage, limit) =>
   translate('{usage} of {limit}', { usage, limit });
 
-const formatCPU = props => {
+const formatCPU = (props) => {
   const usage = minutesToHours(props.resource.cpu_usage);
   const limit = minutesToHours(props.resource.cpu_limit);
   return formatQuota(props.translate, usage, limit);
 };
 
-const formatGPU = props => {
+const formatGPU = (props) => {
   const usage = minutesToHours(props.resource.gpu_usage);
   const limit = minutesToHours(props.resource.gpu_limit);
   return formatQuota(props.translate, usage, limit);
 };
 
-const formatRAM = props => {
+const formatRAM = (props) => {
   const usage = formatFilesize(props.resource.ram_usage);
   const limit = formatFilesize(props.resource.ram_limit);
   return formatQuota(props.translate, usage, limit);

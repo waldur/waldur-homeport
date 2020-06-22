@@ -4,11 +4,11 @@ import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { IssueCreateDialogContainer } from './IssueCreateContainer';
 
-const PureJiraIssueCreateButton = props => {
+const PureJiraIssueCreateButton = (props) => {
   const { translate, onClick } = props;
   return (
     <ActionButton
@@ -19,7 +19,7 @@ const PureJiraIssueCreateButton = props => {
   );
 };
 
-const createRequestDialog = project =>
+const createRequestDialog = (project) =>
   openModalDialog(IssueCreateDialogContainer, { resolve: { project } });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

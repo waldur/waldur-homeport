@@ -4,7 +4,7 @@ import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/Resour
 
 import { getInstanceListState } from '../utils';
 
-ResourceBreadcrumbsRegistry.register('OpenStackTenant.Backup', resource => {
+ResourceBreadcrumbsRegistry.register('OpenStackTenant.Backup', (resource) => {
   const instance_uuid = getUUID(resource.instance);
   return [
     getInstanceListState(resource.project_uuid),

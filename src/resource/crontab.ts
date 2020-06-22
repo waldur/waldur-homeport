@@ -110,7 +110,7 @@ export const parseCrontab = (value, allowMultiple) => {
   return frequency;
 };
 
-const cronDayName = input => {
+const cronDayName = (input) => {
   const days = {
     0: 'Sunday',
     1: 'Monday',
@@ -127,7 +127,7 @@ const cronDayName = input => {
   }
 };
 
-const cronMonthName = input => {
+const cronMonthName = (input) => {
   const months = {
     1: 'January',
     2: 'February',
@@ -149,7 +149,7 @@ const cronMonthName = input => {
   }
 };
 
-const cronNumeral = input => {
+const cronNumeral = (input) => {
   switch (input) {
     case 1:
       return '1st';
@@ -172,7 +172,7 @@ const cronNumeral = input => {
   }
 };
 
-export const formatCrontab = crontab => {
+export const formatCrontab = (crontab) => {
   const schedule = parseCrontab(crontab, false);
   const {
     base,
@@ -182,7 +182,7 @@ export const formatCrontab = crontab => {
     dayValues,
     monthValues,
   } = schedule;
-  const zeroPad = value => (value < 10 ? '0' + value : String(value));
+  const zeroPad = (value) => (value < 10 ? '0' + value : String(value));
 
   const formatTime = () => `${zeroPad(hourValues)}:${zeroPad(minuteValues)}`;
   const formatDay = () => cronDayName(dayValues);

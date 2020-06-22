@@ -4,20 +4,20 @@ import { ServiceProviderSecretCodeGenerateConfirm } from '../ServiceProviderSecr
 
 import * as constants from './constants';
 
-export const showSecretCodeRegenerateConfirm = serviceProvider =>
+export const showSecretCodeRegenerateConfirm = (serviceProvider) =>
   openModalDialog(ServiceProviderSecretCodeGenerateConfirm, {
     resolve: { serviceProvider },
     size: 'lg',
   });
 
-export const secretCodeRegenerateStart = serviceProvider => ({
+export const secretCodeRegenerateStart = (serviceProvider) => ({
   type: constants.SERVICE_PROVIDER_CODE_REGENERATE_START,
   payload: {
     serviceProvider,
   },
 });
 
-export const secretCodeRegenerateSuccess = code => ({
+export const secretCodeRegenerateSuccess = (code) => ({
   type: constants.SERVICE_PROVIDER_CODE_REGENERATE_SUCCESS,
   payload: {
     code,
@@ -28,14 +28,14 @@ export const secretCodeRegenerateError = () => ({
   type: constants.SERVICE_PROVIDER_CODE_REGENERATE_ERROR,
 });
 
-export const secretCodeFetchStart = serviceProvider => ({
+export const secretCodeFetchStart = (serviceProvider) => ({
   type: constants.SERVICE_PROVIDER_CODE_FETCH_START,
   payload: {
     serviceProvider,
   },
 });
 
-export const secretCodeFetchSuccess = code => ({
+export const secretCodeFetchSuccess = (code) => ({
   type: constants.SERVICE_PROVIDER_CODE_FETCH_SUCCESS,
   payload: {
     code,

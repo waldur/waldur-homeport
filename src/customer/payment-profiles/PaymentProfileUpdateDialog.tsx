@@ -19,13 +19,13 @@ import {
   StringField,
   SubmitButton,
   TextField,
-} from '@waldur/form-react';
-import { DateField } from '@waldur/form-react/DateField';
+} from '@waldur/form';
+import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-const PaymentProfileUpdateDialog = props => {
+const PaymentProfileUpdateDialog = (props) => {
   const [isFixedPrice, setIsFixedPrice] = useState(
     props.resolve.payment_type === 'fixed_price',
   );
@@ -108,7 +108,7 @@ const mapStateToProps = (_state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  submitRequest: formData =>
+  submitRequest: (formData) =>
     dispatch(editPaymentProfile(ownProps.resolve.uuid, formData)),
 });
 

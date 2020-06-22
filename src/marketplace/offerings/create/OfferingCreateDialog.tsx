@@ -42,7 +42,9 @@ interface OfferingCreateDialogProps extends InjectedFormProps {
   goNext(): void;
 }
 
-export const OfferingCreateDialog: React.FC<OfferingCreateDialogProps> = props => {
+export const OfferingCreateDialog: React.FC<OfferingCreateDialogProps> = (
+  props,
+) => {
   useTitle(translate('Add offering'));
 
   useBreadcrumbsFn(getBreadcrumbs, []);

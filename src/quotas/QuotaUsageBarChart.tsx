@@ -10,25 +10,25 @@ interface QuotaUsageBarChartProps {
   quotas: Quota[];
 }
 
-export const exceeds = quota => quota.usage + quota.required > quota.limit;
+export const exceeds = (quota) => quota.usage + quota.required > quota.limit;
 
-export const getSummary = quota =>
+export const getSummary = (quota) =>
   translate('{usage} of {limit} used', {
     usage: formatQuotaValue(quota.usage, quota.name),
     limit: formatQuotaValue(quota.limit, quota.name),
   });
 
-export const getExisting = quota =>
+export const getExisting = (quota) =>
   translate('Existing quota usage: {usage}', {
     usage: formatQuotaValue(quota.usage, quota.name),
   });
 
-export const getPlanned = quota =>
+export const getPlanned = (quota) =>
   translate('Planned quota usage: {usage}', {
     usage: formatQuotaValue(quota.required, quota.name),
   });
 
-export const getAvailable = quota => {
+export const getAvailable = (quota) => {
   const availableQuota = quota.limit - quota.usage;
   return translate('Available quota usage: {usage}', {
     usage: formatQuotaValue(availableQuota, quota.name),

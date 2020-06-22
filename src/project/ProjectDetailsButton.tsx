@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { Project } from '@waldur/workspace/types';
 
 import { ProjectDetailsDialog } from './ProjectDetailsDialog';

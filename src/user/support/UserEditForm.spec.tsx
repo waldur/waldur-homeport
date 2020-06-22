@@ -6,7 +6,7 @@ import { ordinaryUser, staffUser } from '@waldur/user/support/fixtures';
 import { TermsOfService } from '@waldur/user/support/TermsOfService';
 import { PureUserEditForm } from '@waldur/user/support/UserEditForm';
 
-const renderForm = props =>
+const renderForm = (props) =>
   shallow(
     <PureUserEditForm
       translate={translate}

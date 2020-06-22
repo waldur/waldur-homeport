@@ -16,7 +16,7 @@ interface Props {
   limits: Limits;
 }
 
-const CellWrapper = props => (
+const CellWrapper = (props) => (
   <td className={props.meta.error ? 'form-group has-error' : 'form-group'}>
     <div className="input-group">
       <input

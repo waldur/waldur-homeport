@@ -51,7 +51,7 @@ function* rejectOrder(action) {
   yield put(actions.setOrderStateChangeStatus({ rejecting: false }));
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.APPROVE_ORDER, approveOrder);
   yield takeEvery(constants.REJECT_ORDER, rejectOrder);
   yield takeEvery(constants.PENDING_ORDERS_FETCH, fetchPendingOrders);

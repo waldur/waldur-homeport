@@ -1,5 +1,5 @@
-import template from './openstack-instance-floating-ips.html';
 import { internalIpFormatter } from './openstack-instance-config';
+import template from './openstack-instance-floating-ips.html';
 
 const FLOATING_IP_CHOICES = [
   {
@@ -22,13 +22,13 @@ const openstackInstanceFloatingIps = {
     }
 
     $onInit() {
-      this.items = this.model.floating_ips.map(floating_ip => ({
+      this.items = this.model.floating_ips.map((floating_ip) => ({
         address: floating_ip.address,
         floating_ip: floating_ip.url,
         subnet: floating_ip.subnet,
         subnet_name: floating_ip.subnet_name,
       }));
-      this.subnets = this.field.internal_ips_set.map(internal_ip => ({
+      this.subnets = this.field.internal_ips_set.map((internal_ip) => ({
         display_name: internalIpFormatter({
           name: internal_ip.subnet_name,
           cidr: internal_ip.subnet_cidr,
@@ -39,8 +39,8 @@ const openstackInstanceFloatingIps = {
       this.$scope.$watch(
         () => this.items,
         () => {
-          const items = this.items.filter(item => item.subnet);
-          this.model.floating_ips = items.map(item => {
+          const items = this.items.filter((item) => item.subnet);
+          this.model.floating_ips = items.map((item) => {
             if (item.floating_ip === true) {
               return {
                 subnet: item.subnet,

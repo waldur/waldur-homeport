@@ -4,7 +4,7 @@ import { translate } from '@waldur/i18n';
 
 import { getEstimatedPrice } from '../utils';
 
-const uniqueArray = items => {
+const uniqueArray = (items) => {
   return items.filter((elem, pos) => {
     return items.indexOf(elem) === pos;
   });
@@ -13,13 +13,13 @@ const uniqueArray = items => {
 const getValue = (path, source) =>
   path.reduce((part, item) => part && part[item], source);
 
-const sortDates = dates => dates.sort((left, right) => left.diff(right));
+const sortDates = (dates) => dates.sort((left, right) => left.diff(right));
 
-const parseDate = row => moment({ year: row.year, month: row.month - 1 });
+const parseDate = (row) => moment({ year: row.year, month: row.month - 1 });
 
-const formatDate = date => date.format('MMMM, Y');
+const formatDate = (date) => date.format('MMMM, Y');
 
-const getLabels = rows =>
+const getLabels = (rows) =>
   uniqueArray(sortDates(rows.map(parseDate)).map(formatDate));
 
 const getUserMap = (palette, rows) =>
@@ -35,10 +35,10 @@ const getUserMap = (palette, rows) =>
     {},
   );
 
-const getUsers = userMap =>
-  Object.keys(userMap).map(username => userMap[username]);
+const getUsers = (userMap) =>
+  Object.keys(userMap).map((username) => userMap[username]);
 
-const getReport = rows =>
+const getReport = (rows) =>
   rows.reduce((report, row) => {
     if (!report[row.username]) {
       report[row.username] = {};
@@ -47,7 +47,7 @@ const getReport = rows =>
     return report;
   }, {});
 
-const round = value => Math.round(value * 100) / 100;
+const round = (value) => Math.round(value * 100) / 100;
 
 const getChartValue = (report, chart, username, label) => {
   const value = getValue([username, label, chart.field], report) || 0;
@@ -59,10 +59,12 @@ const getChartValue = (report, chart, username, label) => {
 };
 
 const getUsageCharts = (chartSpec, report, userMap, labels) =>
-  chartSpec.map(chart => {
-    const datasets = Object.keys(report).map(username => ({
+  chartSpec.map((chart) => {
+    const datasets = Object.keys(report).map((username) => ({
       label: userMap[username].full_name || userMap[username].freeipa_name,
-      data: labels.map(label => getChartValue(report, chart, username, label)),
+      data: labels.map((label) =>
+        getChartValue(report, chart, username, label),
+      ),
       backgroundColor: userMap[username].color,
     }));
     return {
@@ -83,9 +85,9 @@ const getUserCost = (report, username, label, pricePackage) =>
   );
 
 const getCostChart = (report, userMap, labels, pricePackage) => {
-  const datasets = Object.keys(report).map(username => ({
+  const datasets = Object.keys(report).map((username) => ({
     label: userMap[username].full_name || userMap[username].freeipa_name,
-    data: labels.map(label =>
+    data: labels.map((label) =>
       getUserCost(report, username, label, pricePackage),
     ),
     backgroundColor: userMap[username].color,

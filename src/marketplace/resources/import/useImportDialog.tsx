@@ -12,16 +12,16 @@ import {
 import { Offering, Plan, ImportableResource } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
-import { createEntity } from '@waldur/table-react/actions';
+import { createEntity } from '@waldur/table/actions';
 
 import { ImportDialogProps } from './types';
 
-const getOfferingsForImport = resolve =>
+const getOfferingsForImport = (resolve) =>
   getAllOfferings({ params: { ...resolve, importable: true } });
 
 const toggleElement = (element, list) =>
   list.includes(element)
-    ? list.filter(item => item !== element)
+    ? list.filter((item) => item !== element)
     : [...list, element];
 
 export const useImportDialog = (props: ImportDialogProps) => {
@@ -34,7 +34,9 @@ export const useImportDialog = (props: ImportDialogProps) => {
     () =>
       resources.length > 0 &&
       (!offering.billable ||
-        resources.every(resource => plans[resource.backend_id] !== undefined)),
+        resources.every(
+          (resource) => plans[resource.backend_id] !== undefined,
+        )),
     [resources, plans, offering],
   );
 

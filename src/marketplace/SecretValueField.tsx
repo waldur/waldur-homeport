@@ -7,7 +7,7 @@ interface SecretValueFieldProps {
   className?: string;
 }
 
-export const SecretValueField: React.FC<SecretValueFieldProps> = props => {
+export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
   const [showSecret, onToggle] = useToggle(false);
 
   const iconClass = classNames('fa password-icon', {

@@ -19,14 +19,16 @@ interface ApplicationConfigurationProps {
 
 const NAME_REGEXP = new RegExp('^[a-z0-9]([-a-z0-9]*[a-z0-9])?$');
 
-const validateName = value =>
+const validateName = (value) =>
   !value.match(NAME_REGEXP)
     ? translate(
-        "Name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc')",
+        "Name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name', or '123-abc')",
       )
     : undefined;
 
-export const ApplicationConfiguration: React.FC<ApplicationConfigurationProps> = props => (
+export const ApplicationConfiguration: React.FC<ApplicationConfigurationProps> = (
+  props,
+) => (
   <>
     <GroupHeader title={translate('Application configuration')} />
     <Row>

@@ -5,7 +5,7 @@ export interface ToggleOpenProps {
   handleToggleOpen(): void;
 }
 
-export const toggleOpen = OriginalComponent =>
+export const toggleOpen = (OriginalComponent) =>
   class ToggleOpen extends React.Component<any> {
     state = { isOpen: false };
 

@@ -12,7 +12,7 @@ function createField(ctx) {
     label: translate('Security groups'),
     placeholder: translate('Select security groups...'),
     resource_default_value: true,
-    serializer: items => items.map(item => ({ url: item.value })),
+    serializer: (items) => items.map((item) => ({ url: item.value })),
     url: `${ENV.apiEndpoint}api/openstacktenant-security-groups/?settings_uuid=${ctx.resource.service_settings_uuid}`,
     value_field: 'url',
     display_name_field: 'name',

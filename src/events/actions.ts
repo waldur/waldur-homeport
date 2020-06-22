@@ -5,5 +5,5 @@ import { EventTypesDialog } from './EventTypesDialog';
 
 export const showEventTypes = () => openModalDialog(EventTypesDialog);
 
-export const showEventDetails = event =>
+export const showEventDetails = (event) =>
   openModalDialog(EventDetailsDialog, { resolve: { event } });

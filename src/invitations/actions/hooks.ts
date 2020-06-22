@@ -18,7 +18,7 @@ import {
   roleSelector,
 } from './selectors';
 
-const getRoles = context => {
+const getRoles = (context) => {
   const roles = [
     {
       title: ENV.roles.owner,
@@ -36,12 +36,12 @@ const getRoles = context => {
       icon: 'fa-server',
     },
   ];
-  return roles.filter(role =>
+  return roles.filter((role) =>
     InvitationPolicyService.canManageRole(context, role),
   );
 };
 
-export const useInvitationCreateDialog = context => {
+export const useInvitationCreateDialog = (context) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -65,7 +65,7 @@ export const useInvitationCreateDialog = context => {
   const projectEnabled = ['admin', 'manager'].includes(role) && !roleDisabled;
 
   const createInvitation = React.useCallback(
-    async formData => {
+    async (formData) => {
       try {
         const payload: Record<string, any> = {};
         const path = router.stateService.href('invitation', {

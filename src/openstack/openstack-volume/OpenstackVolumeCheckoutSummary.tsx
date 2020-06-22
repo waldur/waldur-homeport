@@ -58,8 +58,8 @@ const getQuotas = ({ formData, usages, limits, project, components }) => {
       required[key] = (required[key] || 0) + formData.size / 1024.0;
     }
     Object.keys(limits)
-      .filter(key => key.startsWith('gigabytes_'))
-      .forEach(key => {
+      .filter((key) => key.startsWith('gigabytes_'))
+      .forEach((key) => {
         quotas.push({
           name: key,
           usage: usages[key] || 0,
@@ -83,12 +83,12 @@ interface OwnProps {
   offering: Offering;
 }
 
-const formDataSelector = state =>
+const formDataSelector = (state) =>
   (getFormValues('marketplaceOffering')(state) || {}) as any;
 
-const formIsValidSelector = state => isValid('marketplaceOffering')(state);
+const formIsValidSelector = (state) => isValid('marketplaceOffering')(state);
 
-const formAttributesSelector = state => {
+const formAttributesSelector = (state) => {
   const formData = formDataSelector(state);
   return formData.attributes || {};
 };
@@ -100,7 +100,8 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({
   const project = useSelector(getProject);
   const formData = useSelector(formAttributesSelector);
   const formIsValid = useSelector(formIsValidSelector);
-  const total = useSelector(state => pricesSelector(state, { offering })).total;
+  const total = useSelector((state) => pricesSelector(state, { offering }))
+    .total;
   const components = React.useMemo(
     () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
     [offering],

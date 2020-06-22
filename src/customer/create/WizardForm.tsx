@@ -25,7 +25,7 @@ export const WizardForm = reduxForm<{}, WizardFormProps>({
   form: 'CustomerCreateDialog',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-})(props => (
+})((props) => (
   <form onSubmit={props.handleSubmit(props.onSubmit)}>
     <ModalHeader>
       <ModalTitle>{translate('Create organization')}</ModalTitle>

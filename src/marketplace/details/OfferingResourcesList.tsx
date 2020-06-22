@@ -16,7 +16,7 @@ import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceS
 import { ResourceState } from '@waldur/marketplace/resources/types';
 import { ResourceUsageButton } from '@waldur/marketplace/resources/usage/ResourceUsageButton';
 import { Offering } from '@waldur/marketplace/types';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 interface OfferingResourceFilter {
   state?: Option<ResourceState>;
@@ -30,7 +30,7 @@ interface OwnProps {
   offering: Offering;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -74,7 +74,7 @@ export const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => {
+const mapPropsToFilter = (props) => {
   const filter: Record<string, string> = {};
   if (props.filter && props.filter.state) {
     filter.state = props.filter.state.value;
@@ -85,7 +85,7 @@ const mapPropsToFilter = props => {
   };
 };
 
-const exportRow = row => [
+const exportRow = (row) => [
   row.name,
   row.uuid,
   row.customer_name,
@@ -110,7 +110,7 @@ export const TableOptions = {
   queryField: 'query',
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filter: getFormValues(FILTER_OFFERING_RESOURCE)(state),
 });
 

@@ -1,7 +1,7 @@
 import { gettext } from '@waldur/i18n';
 import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/ResourceBreadcrumbsRegistry';
 
-ResourceBreadcrumbsRegistry.register('VMware.Disk', resource => {
+ResourceBreadcrumbsRegistry.register('VMware.Disk', (resource) => {
   return [
     {
       label: resource.vm_name,
@@ -23,7 +23,7 @@ ResourceBreadcrumbsRegistry.register('VMware.Disk', resource => {
   ];
 });
 
-ResourceBreadcrumbsRegistry.register('VMware.Port', resource => {
+ResourceBreadcrumbsRegistry.register('VMware.Port', (resource) => {
   return [
     {
       label: resource.vm_name,

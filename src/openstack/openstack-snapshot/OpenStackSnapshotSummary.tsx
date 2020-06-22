@@ -9,7 +9,7 @@ import {
   PureResourceSummaryBase,
 } from '@waldur/resource/summary';
 
-const formatVolume = props => (
+const formatVolume = (props) => (
   <ResourceLink
     type="OpenStackTenant.Volume"
     uuid={getUUID(props.source_volume)}

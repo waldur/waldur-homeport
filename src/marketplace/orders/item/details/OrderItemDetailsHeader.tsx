@@ -18,7 +18,9 @@ export const OrderItemDetailsHeader = (props: OrderItemDetailsProps) => (
     </OrderItemDetailsField>
     {props.offering.components.length > 0 && (
       <OrderItemDetailsField label={translate('Components')}>
-        {props.offering.components.map(component => component.type).join(', ')}
+        {props.offering.components
+          .map((component) => component.type)
+          .join(', ')}
       </OrderItemDetailsField>
     )}
     {props.orderItem.attributes.name && (

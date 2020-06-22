@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
-import { FileUploadField } from '@waldur/form-react';
-import { FileUploadFieldProps } from '@waldur/form-react/FileUploadField';
+import { FileUploadField } from '@waldur/form';
+import { FileUploadFieldProps } from '@waldur/form/FileUploadField';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
-const getImageUrl = image => {
+const getImageUrl = (image) => {
   if (image instanceof File) {
     return URL.createObjectURL(image);
   }

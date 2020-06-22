@@ -15,13 +15,10 @@ import coreModule from './core/module';
 import customerModule from './customer/module';
 import digitaloceanModule from './digitalocean/module';
 import featuresModule from './features/module';
-import formModule from './form/module';
 import freeipaModule from './freeipa/module';
-import helpModule from './help/module';
 import i18nModule from './i18n/module';
-import introModule from './intro/module';
 import invitationsModule from './invitations/module';
-import invoicesModule from './invoices/module';
+import './invoices/module';
 import issuesModule from './issues/module';
 import jiraModule from './jira/module';
 import rootModule from './module';
@@ -52,7 +49,6 @@ const appModule = angular.module('waldur', [
   UI_ROUTER_REACT_HYBRID,
   'ui.router.state.events',
   'ngCookies',
-  'ngResource',
   'ui.select',
   'ngAnimate',
   'pascalprecht.translate',
@@ -63,7 +59,6 @@ const appModule = angular.module('waldur', [
   'angular-cron-jobs',
   'ui.bootstrap',
   'angular-bind-html-compile',
-  'angular-intro',
 ]);
 
 rootModule(appModule);
@@ -73,22 +68,18 @@ userModule(appModule);
 projectModule(appModule);
 navigationModule(appModule);
 resourceModule(appModule);
-invoicesModule(appModule);
 authModule(appModule);
 invitationsModule(appModule);
-formModule(appModule);
 priceModule(appModule);
 openstackModule(appModule);
 digitaloceanModule();
 customerModule(appModule);
 offeringsModule();
-helpModule(appModule);
 coreModule(appModule);
 filtersModule(appModule);
 i18nModule(appModule);
 configModule(appModule);
 freeipaModule(appModule);
-introModule(appModule);
 slurmModule(appModule);
 storeModule(appModule);
 jiraModule(appModule);
@@ -99,7 +90,7 @@ function requirePlugins(module) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   const context = require.context('./plugins', true, /module\.js$/);
-  context.keys().forEach(key => {
+  context.keys().forEach((key) => {
     const plugin = context(key).default;
     plugin(module);
   });

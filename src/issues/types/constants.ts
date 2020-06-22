@@ -28,7 +28,7 @@ export const ISSUE_TEXT_CLASSES = {
   SERVICE_REQUEST: 'text-info',
 };
 
-const getIssueDescription = issueType =>
+const getIssueDescription = (issueType) =>
   ({
     INCIDENT: translate(
       'Incident - client issue with service usage or availability (interruptions, degradation of quality).',
@@ -46,7 +46,7 @@ const getIssueDescription = issueType =>
 
 export const ISSUE_STATUSES = ['Resolved', 'Unresolved', "Won't fix"];
 
-export const ISSUE_TYPE_CHOICES = Object.keys(ISSUE_IDS).map(item => {
+export const ISSUE_TYPE_CHOICES = Object.keys(ISSUE_IDS).map((item) => {
   return {
     iconClass: ISSUE_ICONS[item],
     textClass: ISSUE_TEXT_CLASSES[item],

@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 import { CustomerLink } from '@waldur/customer/CustomerLink';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { filterByUser } from '@waldur/workspace/selectors';
 
 import CustomerCreateButton from './CustomerCreateButton';
 import CustomerRole from './CustomerRole';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate, filterColumns } = props;
   return (
     <Table
@@ -35,7 +35,7 @@ const TableOptions = {
   fetchData: createFetcher('customer-permissions'),
   getDefaultFilter: filterByUser,
   exportFields: ['customer', 'role'],
-  exportRow: row => [row.customer_name, row.role],
+  exportRow: (row) => [row.customer_name, row.role],
 };
 
 export const CustomerPermissions = connectTable(TableOptions)(TableComponent);

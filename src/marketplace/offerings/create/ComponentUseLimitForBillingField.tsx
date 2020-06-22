@@ -9,7 +9,7 @@ export const ComponentUseLimitForBillingField: React.FC<{}> = () => (
   <FormGroup>
     <Field
       name="use_limit_for_billing"
-      component={prop => (
+      component={(prop) => (
         <AwesomeCheckbox
           id="use_limit_for_billing"
           label={translate(

@@ -3,7 +3,7 @@ import { titleCase, formatFilesize } from '@waldur/core/utils';
 
 import { QUOTA_NAMES, QUOTA_FILTERS } from './constants';
 
-export const formatQuotaName = name => {
+export const formatQuotaName = (name) => {
   if (QUOTA_NAMES[name]) {
     return QUOTA_NAMES[name];
   }

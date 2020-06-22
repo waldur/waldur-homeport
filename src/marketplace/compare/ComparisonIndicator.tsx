@@ -25,7 +25,7 @@ const PureComparisonIndicator = (props: ComparisonIndicatorProps) =>
     />
   ) : null;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   count: getCount(state),
   workspace: getWorkspace(state),
 });

@@ -1,6 +1,6 @@
 export default function createChainedFunction(...funcs) {
   return funcs
-    .filter(f => f != null)
+    .filter((f) => f != null)
     .reduce((acc, f) => {
       if (typeof f !== 'function') {
         throw new Error(

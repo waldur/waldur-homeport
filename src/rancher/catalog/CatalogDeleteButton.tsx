@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { CatalogDeleteDialog } from './CatalogDeleteDialog';
 
-const deleteCatalogDialog = catalog =>
+const deleteCatalogDialog = (catalog) =>
   openModalDialog(CatalogDeleteDialog, { resolve: { catalog } });
 
-export const CatalogDeleteButton = props => {
+export const CatalogDeleteButton = (props) => {
   const dispatch = useDispatch();
   const callback = React.useCallback(
     () => dispatch(deleteCatalogDialog(props.catalog)),

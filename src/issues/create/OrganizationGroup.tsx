@@ -17,7 +17,7 @@ import { AsyncSelectField } from './AsyncSelectField';
 import { ISSUE_REGISTRATION_FORM_ID } from './constants';
 import { callerSelector, customerSelector } from './selectors';
 
-const filterOptions = options => options;
+const filterOptions = (options) => options;
 
 export const OrganizationGroup = ({ onSearch }) => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export const OrganizationGroup = ({ onSearch }) => {
     );
   const filterByCustomer = () => onSearch({ customer });
   const loadOptions = React.useCallback(
-    name => refreshCustomers(name, caller),
+    (name) => refreshCustomers(name, caller),
     [caller],
   );
 

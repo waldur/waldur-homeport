@@ -19,8 +19,9 @@ async function loadData(offering_uuid: string) {
   const sections = category.sections;
   const tabs = getTabs({ offering, sections });
   const plugins = await getPlugins();
-  const limits = plugins.find(plugin => plugin.offering_type === offering.type)
-    .available_limits;
+  const limits = plugins.find(
+    (plugin) => plugin.offering_type === offering.type,
+  ).available_limits;
   return { offering, tabs, limits };
 }
 

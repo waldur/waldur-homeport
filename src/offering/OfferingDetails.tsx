@@ -55,7 +55,7 @@ const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
   return items;
 };
 
-const loadOffering = async offeringUuid => {
+const loadOffering = async (offeringUuid) => {
   const offering = await getOffering(offeringUuid);
   const template = await getOfferingTemplate(offering.template_uuid);
   const offeringConfig = template.config;

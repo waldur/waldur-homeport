@@ -50,8 +50,8 @@ export const FORM_ID = 'SupportUsageFilter';
 const selector = formValueSelector(FORM_ID);
 
 const mapStateToProps = createSelector(
-  state => selector(state, 'organization'),
-  customer => ({
+  (state) => selector(state, 'organization'),
+  (customer) => ({
     customer,
     options: makeAccountingPeriods(),
   }),

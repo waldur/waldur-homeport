@@ -10,7 +10,7 @@ const CustomerListContainer = React.lazy(() =>
   })),
 );
 
-export const LazyCustomerList = props => (
+export const LazyCustomerList = (props) => (
   <React.Suspense fallback={<LoadingSpinner />}>
     <CustomerListContainer {...props} />
   </React.Suspense>

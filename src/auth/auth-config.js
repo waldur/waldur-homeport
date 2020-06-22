@@ -1,11 +1,7 @@
 import { ngInjector } from '@waldur/core/services';
 
 const getStateId = () =>
-  encodeURIComponent(
-    Math.random()
-      .toString(36)
-      .substr(2),
-  );
+  encodeURIComponent(Math.random().toString(36).substr(2));
 
 // @ngInject
 export default function initAuthProvider(ENV, $authProvider) {

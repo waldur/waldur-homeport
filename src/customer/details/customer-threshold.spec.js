@@ -1,5 +1,6 @@
-import customerThreshold from './customer-threshold';
 import filtersModule from '../../core/filters';
+
+import customerThreshold from './customer-threshold';
 
 describe('customerThreshold', () => {
   function initModule(module) {
@@ -11,7 +12,6 @@ describe('customerThreshold', () => {
   }
   initModule(
     angular.module('customerThresholdModule', [
-      'ngResource',
       'ui.router',
       'pascalprecht.translate',
     ]),
@@ -19,8 +19,8 @@ describe('customerThreshold', () => {
   beforeEach(angular.mock.module('customerThresholdModule'));
 
   beforeEach(
-    angular.mock.module(function($provide) {
-      $provide.factory('priceEstimatesService', function($q) {
+    angular.mock.module(function ($provide) {
+      $provide.factory('priceEstimatesService', function ($q) {
         return {
           isHardLimit: jasmine.createSpy('isHardLimit').and.returnValue(false),
           update: jasmine.createSpy('update').and.returnValue($q.when([])),
@@ -29,7 +29,7 @@ describe('customerThreshold', () => {
     }),
   );
 
-  let thresholdModel = {
+  const thresholdModel = {
     isHardLimit: false,
     priceEstimate: {
       limit: -1,
@@ -43,10 +43,10 @@ describe('customerThreshold', () => {
     $rootScope = _$rootScope_;
   }));
 
-  let compileElement = function(thresholdModel) {
+  const compileElement = function (thresholdModel) {
     scope = $rootScope.$new();
     scope.thresholdModel = thresholdModel;
-    let html =
+    const html =
       '<customer-threshold model="thresholdModel"></customer-threshold>';
     element = angular.element(html);
     element = $compile(element)(scope);
@@ -55,7 +55,7 @@ describe('customerThreshold', () => {
   };
 
   it('does not show price estimate if total is not provided', () => {
-    let model = angular.copy(thresholdModel);
+    const model = angular.copy(thresholdModel);
     model.priceEstimate.total = null;
     compileElement(model);
     expect(element[0].querySelector('#priceEstimate')).toBeNull();
@@ -63,14 +63,14 @@ describe('customerThreshold', () => {
 
   it('should display total price-estimate', () => {
     compileElement(thresholdModel);
-    let priceEstimateElement = angular.element(
+    const priceEstimateElement = angular.element(
       element[0].querySelector('#priceEstimate'),
     );
     expect(priceEstimateElement.text()).toBe('EUR9.00');
   });
 
   it('sets min error if threshold is less than 0', () => {
-    let model = angular.copy(thresholdModel);
+    const model = angular.copy(thresholdModel);
     model.priceEstimate.threshold = -1;
     compileElement(model);
     expect(controller.thresholdForm.threshold.$error.min).toBeTruthy();

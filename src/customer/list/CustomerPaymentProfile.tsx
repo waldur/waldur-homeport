@@ -13,7 +13,7 @@ export const CustomerPaymentProfile = (props: CustomerPaymentProfileProps) => {
     return null;
   }
   const activePaymentProfile = props.paymentProfiles.find(
-    element => element.is_active,
+    (element) => element.is_active,
   );
   return activePaymentProfile ? (
     <dl className="dl-horizontal m-t-sm resource-details-table">

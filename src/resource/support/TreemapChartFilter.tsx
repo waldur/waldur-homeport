@@ -43,7 +43,7 @@ export const PureTreemapChartFilter = (props: TreemapChartFilterProps) => {
                 <div className="col-sm-9">
                   <Field
                     name="accounting_is_running"
-                    component={fieldProps => (
+                    component={(fieldProps) => (
                       <AwesomeCheckbox
                         label={translate('Show with running accounting')}
                         id="accounting-is-running"
@@ -56,7 +56,7 @@ export const PureTreemapChartFilter = (props: TreemapChartFilterProps) => {
                 <div className="col-sm-3">
                   <Field
                     name="quota"
-                    component={fieldProps => (
+                    component={(fieldProps) => (
                       <QuotaSelector
                         quotas={props.quotas}
                         value={fieldProps.input.value}

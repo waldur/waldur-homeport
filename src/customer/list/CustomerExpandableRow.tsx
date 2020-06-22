@@ -8,7 +8,7 @@ import { ResourceExpandableRow } from '@waldur/resource/ResourceExpandableRow';
 
 import { loadCustomerResources } from './api';
 
-export const CustomerExpandableRow = props => {
+export const CustomerExpandableRow = (props) => {
   const { loading, error, value } = useAsync(
     () => loadCustomerResources(props.row),
     [props.row],

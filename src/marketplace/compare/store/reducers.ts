@@ -15,7 +15,7 @@ export const comparisonReducer = (state = INITIAL_STATE, action) => {
     case constants.REMOVE_ITEM:
       return {
         ...state,
-        items: state.items.filter(item => item.uuid !== payload.item.uuid),
+        items: state.items.filter((item) => item.uuid !== payload.item.uuid),
       };
     case constants.SET_ITEMS:
       return {

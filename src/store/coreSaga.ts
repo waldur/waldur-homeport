@@ -22,9 +22,9 @@ const showNotification = (type, message) => ({
   },
 });
 
-export const showSuccess = message => showNotification('success', message);
+export const showSuccess = (message) => showNotification('success', message);
 
-export const showError = message => showNotification('danger', message);
+export const showError = (message) => showNotification('danger', message);
 
 export const showErrorResponse = (
   response: AxiosResponse,
@@ -45,7 +45,7 @@ export const stateGo = (to, params?: object, options?: object) => ({
 });
 
 export default function* watchEmit() {
-  yield takeEvery<any>(EMIT_SIGNAL, action =>
+  yield takeEvery<any>(EMIT_SIGNAL, (action) =>
     $rootScope.$broadcast(action.signal, action.params),
   );
 
@@ -53,7 +53,7 @@ export default function* watchEmit() {
     ngInjector.get('Flash').create(type, message),
   );
 
-  yield takeEvery<any>(STATE_GO, action => {
+  yield takeEvery<any>(STATE_GO, (action) => {
     $state.go(action.payload.to, action.payload.params, action.payload.options);
   });
 }

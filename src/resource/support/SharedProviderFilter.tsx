@@ -13,7 +13,7 @@ const providerAutocomplete = (query: string) => {
     field: ['name', 'uuid'],
     o: 'name',
   };
-  return getList('/service-settings/', params).then(options => ({ options }));
+  return getList('/service-settings/', params).then((options) => ({ options }));
 };
 
 export const SharedProviderFilter = () => (
@@ -24,14 +24,14 @@ export const SharedProviderFilter = () => (
           <label className="control-label">{translate('Provider')}</label>
           <Field
             name="provider"
-            component={fieldProps => (
+            component={(fieldProps) => (
               <Async
                 placeholder={translate('Select provider...')}
                 loadOptions={providerAutocomplete}
                 valueKey="uuid"
                 labelKey="name"
                 value={fieldProps.input.value}
-                onChange={value => fieldProps.input.onChange(value)}
+                onChange={(value) => fieldProps.input.onChange(value)}
               />
             )}
           />
@@ -43,7 +43,7 @@ export const SharedProviderFilter = () => (
 
 const FORM_ID = 'SharedProviderFilter';
 
-export const providerSelector = state =>
+export const providerSelector = (state) =>
   formValueSelector(FORM_ID)(state, 'provider');
 
 const enhance = reduxForm({ form: FORM_ID });

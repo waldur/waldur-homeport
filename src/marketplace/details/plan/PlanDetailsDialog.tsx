@@ -21,7 +21,7 @@ async function loadData(resourceId: string) {
   const resource = await getResource(resourceId);
   const offering = await getOffering(resource.offering_uuid);
   const plan =
-    resource.plan && offering.plans.find(item => item.url === resource.plan);
+    resource.plan && offering.plans.find((item) => item.url === resource.plan);
   const limitParser = getFormLimitParser(offering.type);
   return {
     offering,
@@ -36,7 +36,7 @@ async function loadData(resourceId: string) {
   };
 }
 
-export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = props => {
+export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
   const { loading, error, value: data } = useAsync(
     () => loadData(props.resolve.resourceId),
     [props.resolve.resourceId],

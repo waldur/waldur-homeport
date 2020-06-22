@@ -2,8 +2,8 @@ import * as React from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import { StringField, FormContainer, SelectField } from '@waldur/form-react';
-import { CheckboxField } from '@waldur/form-react/CheckboxField';
+import { StringField, FormContainer, SelectField } from '@waldur/form';
+import { CheckboxField } from '@waldur/form/CheckboxField';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 interface FlowMapFilterProps extends TranslateProps {

@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
-const approvePayment = payload => post('/paypal-payments/approve/', payload);
+const approvePayment = (payload) => post('/paypal-payments/approve/', payload);
 
 export const PaymentApprove = () => {
   useTitle(translate('Approve payment'));

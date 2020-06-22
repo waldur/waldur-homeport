@@ -2,10 +2,10 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 
-import { SubmitButton } from '@waldur/form-react';
+import { SubmitButton } from '@waldur/form';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface WizardProps extends TranslateProps {
   steps: string[];
@@ -29,7 +29,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
       disabled={props.submitting}
     />
     {/* Render all tabs so that all validators would be processed */}
-    {props.steps.map(step => (
+    {props.steps.map((step) => (
       <div key={step} className={step === props.step ? undefined : 'hidden'}>
         {React.createElement(props.tabs[step], {
           isVisible: step === props.step,

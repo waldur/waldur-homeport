@@ -18,7 +18,7 @@ export const getTotal = (
 export const getDiff = (usage: UsageData, country: string) =>
   getTotal(usage, country, 'provider') - getTotal(usage, country, 'consumer');
 
-export const getColor = diff => {
+export const getColor = (diff) => {
   if (diff > 0) {
     return '#1BBBE3';
   } else {
@@ -41,7 +41,7 @@ export const getDataForCountry = (usage: UsageData, country: string) => {
       if (usage.organizations[uuid].country === country) {
         acc.providers.push(usage.organizations[uuid]);
       }
-      usage.service_providers[uuid].map(consumerUuid => {
+      usage.service_providers[uuid].map((consumerUuid) => {
         if (
           usage.organizations[consumerUuid].country === country &&
           acc.consumers.indexOf(usage.organizations[consumerUuid]) === -1
@@ -61,8 +61,8 @@ export const getChartData = (
   features: Feature[],
 ) => {
   const chartData = [];
-  countries.forEach(country => {
-    features.forEach(feature => {
+  countries.forEach((country) => {
+    features.forEach((feature) => {
       if (feature.properties.name === country) {
         chartData.push({
           ...feature,

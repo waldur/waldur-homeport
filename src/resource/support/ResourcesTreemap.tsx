@@ -23,12 +23,12 @@ const getQuotas = (): QuotaList => [
   {
     key: 'current_price',
     title: translate('Current price per month'),
-    tooltipValueFormatter: value => $filter('defaultCurrency')(value),
+    tooltipValueFormatter: (value) => $filter('defaultCurrency')(value),
   },
   {
     key: 'estimated_price',
     title: translate('Esimated price per month'),
-    tooltipValueFormatter: value => $filter('defaultCurrency')(value),
+    tooltipValueFormatter: (value) => $filter('defaultCurrency')(value),
   },
   {
     key: 'vpc_cpu_count',
@@ -82,7 +82,7 @@ const getQuotas = (): QuotaList => [
   },
 ];
 
-const calculateTotal = data =>
+const calculateTotal = (data) =>
   parseInt(
     data.reduce((t, entry) => t + (isNaN(entry.value) ? 0 : entry.value), 0),
     10,
@@ -97,11 +97,11 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
   useTitle(translate('Resources usage'));
 
   const quotas = getQuotas();
-  const keys = quotas.map(q => q.key);
+  const keys = quotas.map((q) => q.key);
   let tooltipValueFormatter;
 
   if (props.quota) {
-    const quota = quotas.find(item => item.key === props.quota.key);
+    const quota = quotas.find((item) => item.key === props.quota.key);
     tooltipValueFormatter = quota.tooltipValueFormatter;
   }
 
@@ -134,7 +134,7 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   accounting_is_running: treemapFilterSelector(state, 'accounting_is_running'),
   quota: treemapFilterSelector(state, 'quota'),
 });

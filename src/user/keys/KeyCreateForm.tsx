@@ -3,13 +3,12 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { InjectedFormProps, reduxForm, SubmissionError } from 'redux-form';
 
-import { CancelButton } from '@waldur/form-react/CancelButton';
-import { FieldError } from '@waldur/form-react/FieldError';
-import { FormContainer } from '@waldur/form-react/FormContainer';
-import { StringField } from '@waldur/form-react/StringField';
-import { SubmitButton } from '@waldur/form-react/SubmitButton';
-import { TextField } from '@waldur/form-react/TextField';
-import { HelpLink } from '@waldur/help/HelpLink';
+import { CancelButton } from '@waldur/form/CancelButton';
+import { FieldError } from '@waldur/form/FieldError';
+import { FormContainer } from '@waldur/form/FormContainer';
+import { StringField } from '@waldur/form/StringField';
+import { SubmitButton } from '@waldur/form/SubmitButton';
+import { TextField } from '@waldur/form/TextField';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { showSuccess } from '@waldur/store/coreSaga';
@@ -31,7 +30,7 @@ const extractNameFromKey = (publicKey: string) => {
   return '';
 };
 
-const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = props => {
+const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = (props) => {
   useTitle(translate('Add SSH key'));
   const dispatch = useDispatch();
   const router = useRouter();
@@ -75,14 +74,7 @@ const PureKeyCreateForm: React.FC<InjectedFormProps<FormData>> = props => {
       >
         <StringField label={translate('Key name')} name="name" />
         <TextField
-          label={
-            <>
-              <HelpLink type="keys" name="ssh">
-                <i className="fa fa-question-circle" />
-              </HelpLink>{' '}
-              {translate('Public key')}
-            </>
-          }
+          label={translate('Public key')}
           name="public_key"
           required={true}
         />

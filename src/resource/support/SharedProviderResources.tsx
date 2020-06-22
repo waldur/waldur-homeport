@@ -3,9 +3,9 @@ import * as React from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableProps } from '@waldur/table-react/Table';
-import { Column, TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableProps } from '@waldur/table/Table';
+import { Column, TableOptionsType } from '@waldur/table/types';
 
 import { ResourceRowActions } from '../actions/ResourceRowActions';
 import { ResourceName } from '../ResourceName';
@@ -74,7 +74,7 @@ const exportFields = () => [
   translate('State'),
 ];
 
-const mapPropsToFilter = props => ({
+const mapPropsToFilter = (props) => ({
   service_settings_uuid: props.provider_uuid,
 });
 

@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { CatalogCreateDialog } from './CatalogCreateDialog';
 
-const createCatalogDialog = cluster =>
+const createCatalogDialog = (cluster) =>
   openModalDialog(CatalogCreateDialog, { resolve: { cluster } });
 
-export const CatalogCreateButton = props => {
+export const CatalogCreateButton = (props) => {
   const dispatch = useDispatch();
   const callback = React.useCallback(
     () => dispatch(createCatalogDialog(props.cluster)),

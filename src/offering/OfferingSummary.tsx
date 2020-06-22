@@ -11,7 +11,7 @@ interface OfferingSummaryProps {
   summary?: string;
 }
 
-export const OfferingSummary: React.FC<OfferingSummaryProps> = props => (
+export const OfferingSummary: React.FC<OfferingSummaryProps> = (props) => (
   <div className="wrapper wrapper-content">
     <div className="ibox-content">
       <Row>

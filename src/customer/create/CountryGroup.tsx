@@ -8,7 +8,7 @@ import { translate } from '@waldur/i18n';
 import { InputGroup } from './InputGroup';
 import { SelectField } from './SelectField';
 
-const CountryRenderer = option => (
+const CountryRenderer = (option) => (
   <>
     <i className="f16">
       <i className={`flag ${option.value.toLowerCase()}`}></i>

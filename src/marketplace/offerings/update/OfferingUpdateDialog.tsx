@@ -28,7 +28,9 @@ interface OfferingUpdateDialogProps
   loadOffering(offeringUuid: string): void;
 }
 
-export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = props => {
+export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
+  props,
+) => {
   useTitle(
     translate('Updating offering {name}', {
       name: props.initialValues.name,

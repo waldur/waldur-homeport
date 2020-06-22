@@ -28,11 +28,11 @@ export const getUsageComponents = async (params: UsageReportContext) => {
   const offering = await getOffering(params.offering_uuid);
   const periods = await getResourcePlanPeriods(params.resource_uuid);
   const components = offering.components.filter(
-    component => component.billing_type === 'usage',
+    (component) => component.billing_type === 'usage',
   );
   const options =
     periods.length > 0
-      ? periods.map(period => ({
+      ? periods.map((period) => ({
           label: getPeriodLabel(period),
           value: period,
         }))

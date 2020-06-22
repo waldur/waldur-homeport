@@ -4,7 +4,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import { DataVolumeAddButton } from './DataVolumeAddButton';
 import { DataVolumePanel } from './DataVolumePanel';
 
-export const DataVolumesList = props => (
+export const DataVolumesList = (props) => (
   <div className="form-group">
     <Col smOffset={props.smOffset} sm={props.sm}>
       {props.fields.map((volume, index) => (

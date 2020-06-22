@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 
 import { ResourceAccessInfo } from './ResourceAccessInfo';
 
-const renderComponent = resource =>
+const renderComponent = (resource) =>
   shallow(<ResourceAccessInfo resource={resource} translate={translate} />);
 
 describe('ResourceAccessInfo', () => {

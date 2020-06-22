@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { post } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 export const SendNotificationButton = ({ row }) => {

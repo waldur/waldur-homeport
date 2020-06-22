@@ -35,7 +35,7 @@ const formatCostChartLabel = (
 };
 
 export const formatCostChart = (invoices: InvoiceSummary[], count): Chart => {
-  let items: DateValuePair[] = invoices.map(invoice => ({
+  let items: DateValuePair[] = invoices.map((invoice) => ({
     value: invoice.price,
     date: new Date(invoice.year, invoice.month - 1, 1),
   }));
@@ -44,11 +44,7 @@ export const formatCostChart = (invoices: InvoiceSummary[], count): Chart => {
   items = padMissingValues(items, count);
   const data = items.map((item, index) => {
     const isEstimate = index === items.length - 1;
-    const date = isEstimate
-      ? moment()
-          .endOf('month')
-          .toDate()
-      : item.date;
+    const date = isEstimate ? moment().endOf('month').toDate() : item.date;
     return {
       label: formatCostChartLabel(item.value, date, isEstimate),
       value: item.value,
@@ -89,13 +85,13 @@ async function getCustomerCharts(customer: Scope): Promise<Chart[]> {
   return charts;
 }
 
-export const loadSummary = async customer => {
+export const loadSummary = async (customer) => {
   const charts: Chart[] = await getCustomerCharts(customer);
-  return charts.map(chart => ({
+  return charts.map((chart) => ({
     chart,
     options: getScopeChartOptions(
-      chart.data.map(item => item.label),
-      chart.data.map(item => item.value),
+      chart.data.map((item) => item.label),
+      chart.data.map((item) => item.value),
     ),
   }));
 };

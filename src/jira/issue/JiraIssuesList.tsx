@@ -5,8 +5,8 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { JiraIssue } from '@waldur/jira/issue/types';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { formatLongText } from '@waldur/table-react/utils';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { formatLongText } from '@waldur/table/utils';
 
 import { JiraIssueCreateButton } from './JiraIssueCreateButton';
 import { JiraIssuePriorityField } from './JiraIssuePriorityField';
@@ -22,11 +22,11 @@ const IssueSlaField = withTranslation(
   ),
 );
 
-const formatIssueKey = props => (
+const formatIssueKey = (props) => (
   <ResourceLink type="JIRA.Issue" uuid={props.row.uuid} label={props.row.key} />
 );
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   const columns = [
     {
@@ -90,7 +90,7 @@ const TableOptions = {
     'sla',
     'created',
   ],
-  exportRow: row => [
+  exportRow: (row) => [
     row.key,
     row.type_name,
     row.status,

@@ -10,7 +10,7 @@ import { reducer as breadcrumbs } from '@waldur/navigation/breadcrumbs/store';
 import { reducer as title } from '@waldur/navigation/title';
 import { reducer as serviceUsage } from '@waldur/providers/support/reducers';
 import { reducer as resource } from '@waldur/resource/reducers';
-import { reducer as tables } from '@waldur/table-react/store';
+import { reducer as tables } from '@waldur/table/store';
 import { reducer as workspace } from '@waldur/workspace/reducers';
 
 import { reducer as config } from './config';

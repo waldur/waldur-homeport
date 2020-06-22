@@ -16,7 +16,7 @@ import { FORM_ID } from '../store/constants';
 
 import { hasError } from './utils';
 
-const PureManagementSummary = props => {
+const PureManagementSummary = (props) => {
   const type = props.formData?.type;
 
   if (!type || props.tabHasError) {
@@ -63,7 +63,7 @@ const PureManagementSummary = props => {
   );
 };
 
-const connector = connect(state => {
+const connector = connect((state) => {
   const formData = getFormValues(FORM_ID)(state);
   const typeInvalid = hasError('type')(state);
   const optionsInvalid = hasError('options')(state);

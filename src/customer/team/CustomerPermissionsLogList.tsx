@@ -5,7 +5,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
 export const PureCustomerPermissionsLogList = getEventsList({
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     scope: props.customer.url,
     event_type: ['role_granted', 'role_revoked', 'role_updated'],
   }),

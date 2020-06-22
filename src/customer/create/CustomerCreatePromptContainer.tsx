@@ -10,13 +10,13 @@ import * as constants from './constants';
 import { CustomerCreateDialog } from './CustomerCreateDialog';
 import { CustomerCreatePrompt } from './CustomerCreatePrompt';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   renderServiceProvider: renderServiceProvider(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   closeModal: (): void => dispatch(closeModalDialog()),
-  onSubmit: data => {
+  onSubmit: (data) => {
     if (!data[constants.FIELD_NAMES.role]) {
       throw new SubmissionError({
         _error: translate('Сhoose the role please'),

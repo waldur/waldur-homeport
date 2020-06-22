@@ -6,8 +6,8 @@ import { getFormValues } from 'redux-form';
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { formatPeriod } from '../utils';
@@ -17,7 +17,7 @@ import { SendNotificationButton } from './SendNotificationButton';
 
 const RecordPeriodField = ({ row }) => formatPeriod(row);
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -57,7 +57,7 @@ const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => ({
+const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
   customer: props.customer.url,
 });
@@ -69,7 +69,7 @@ const TableOptions: TableOptionsType = {
   queryField: 'number',
 };
 
-const mapsStateToProps = state => ({
+const mapsStateToProps = (state) => ({
   customer: getCustomer(state),
   stateFilter: getFormValues('InvoicesFilter')(state),
 });

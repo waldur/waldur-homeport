@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { createFetcher } from '@waldur/table-react/api';
-import { Table, connectTable } from '@waldur/table-react/index';
+import { createFetcher } from '@waldur/table/api';
+import { Table, connectTable } from '@waldur/table/index';
 
 import { formatFilter } from './utils';
 
@@ -16,7 +16,7 @@ const NumOfCreatedInstancesField = ({ row }) => (
   <span>{row.created_instances_count}</span>
 );
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -43,10 +43,10 @@ const TableComponent = props => {
 const TableOptions = {
   table: 'flavorsList',
   fetchData: createFetcher('openstacktenant-flavors/usage_stats'),
-  mapPropsToFilter: props => formatFilter(props.vmOverviewFilter),
+  mapPropsToFilter: (props) => formatFilter(props.vmOverviewFilter),
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   vmOverviewFilter: getFormValues('vmOverviewFilter')(state),
 });
 

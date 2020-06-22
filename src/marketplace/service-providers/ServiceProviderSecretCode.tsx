@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { TranslateProps } from '@waldur/i18n';
 import { SecretValueField } from '@waldur/marketplace/SecretValueField';
 import { ServiceProvider } from '@waldur/marketplace/types';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import './ServiceProviderSecretCode.scss';
 
@@ -61,7 +61,7 @@ class PureServiceProviderSecretCode extends React.Component<
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   secretCode: selectors.getServiceProviderSecretCode(state),
 });
 

@@ -7,31 +7,31 @@ import { VolumeType } from '../types';
 
 export const validateAndSort = (formData, choices, validator, comparator) =>
   choices
-    .map(choice => ({
+    .map((choice) => ({
       ...choice,
       disabled: validator(formData, choice),
     }))
     .sort(comparator);
 
-export const formatFlavorTitle = flavor => {
+export const formatFlavorTitle = (flavor) => {
   const props = formatFlavor(flavor);
   return `${flavor.name} (${props})`;
 };
 
-export const getMinSystemVolumeSize = formData => {
+export const getMinSystemVolumeSize = (formData) => {
   const imageMinValue = formData.image ? formData.image.min_disk : 0;
   const flavorMinValue = formData.flavor ? formData.flavor.disk : 0;
   return Math.max(imageMinValue, flavorMinValue);
 };
 
-export const calculateSystemVolumeSize = formData => {
+export const calculateSystemVolumeSize = (formData) => {
   const minValue = getMinSystemVolumeSize(formData);
   const currentValue = formData.system_volume_size || 0;
   return Math.max(currentValue, minValue);
 };
 
 export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): Option[] =>
-  volumeTypes.map(volumeType => ({
+  volumeTypes.map((volumeType) => ({
     label: volumeType.description
       ? `${volumeType.name} (${volumeType.description})`
       : volumeType.name,
@@ -40,8 +40,8 @@ export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): Option[] =>
     is_default: volumeType.is_default,
   }));
 
-export const getDefaultVolumeType = volumeTypes =>
-  volumeTypes.find(volumeType => volumeType.is_default);
+export const getDefaultVolumeType = (volumeTypes) =>
+  volumeTypes.find((volumeType) => volumeType.is_default);
 
 const DNS_LABEL_REGEX = new RegExp('^([a-zA-Z0-9-]{1,63})$');
 
@@ -94,7 +94,7 @@ export const validateOpenstackInstanceName = (name: string) => {
   }
 };
 
-export const getVolumeTypeRequirements = formData => {
+export const getVolumeTypeRequirements = (formData) => {
   const required = {};
   if (formData.data_volume_type) {
     const key = `gigabytes_${formData.data_volume_type.name}`;

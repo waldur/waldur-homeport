@@ -57,13 +57,13 @@ const formatComponent = (
     limits[key] / (componentMap[key]?.factor || 1),
     componentMap[key]?.measured_unit,
   ]
-    .filter(x => x)
+    .filter((x) => x)
     .join(' ');
 
 const formatLimits = (limits: Limits, componentMap: ComponentMap) =>
   Object.keys(limits)
     .sort()
-    .map(key => formatComponent(limits, componentMap, key))
+    .map((key) => formatComponent(limits, componentMap, key))
     .join(', ');
 
 const getComponentMap = (components: OfferingComponent[]): ComponentMap =>
@@ -160,7 +160,7 @@ const getMessage = (
   }
 };
 
-export const OrderItemSummary: React.FC<OrderItemSummaryProps> = props => {
+export const OrderItemSummary: React.FC<OrderItemSummaryProps> = (props) => {
   const message = React.useMemo(
     () => getMessage(props.orderItem, props.offering),
     [props.orderItem, props.offering],

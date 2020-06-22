@@ -8,24 +8,24 @@ interface TotalStats {
   total: number;
 }
 
-export const getTotal = params =>
+export const getTotal = (params) =>
   get<TotalStats>('/billing-total-cost/', params).then(
-    response => response.data,
+    (response) => response.data,
   );
 
 const getCustomerCounters = (customerId: string) =>
-  get(`/customers/${customerId}/counters/`).then(response => response.data);
+  get(`/customers/${customerId}/counters/`).then((response) => response.data);
 
 const parseCategories = (
   categories: Category[],
   counters: object,
 ): ExpandableRow[] => {
   return categories
-    .map(category => ({
+    .map((category) => ({
       label: category.title,
       value: counters[`marketplace_category_${category.uuid}`],
     }))
-    .filter(row => row.value)
+    .filter((row) => row.value)
     .sort((a, b) => a.label.localeCompare(b.label));
 };
 

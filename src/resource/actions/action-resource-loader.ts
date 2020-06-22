@@ -30,14 +30,14 @@ const displayFormatter = (field: LegacyActionField, item) => {
 };
 
 export const formatChoices = (field: LegacyActionField, items) => {
-  return items.map(item => ({
+  return items.map((item) => ({
     value: valueFormatter(field, item),
     display_name: displayFormatter(field, item),
   }));
 };
 
 const loadChoices = (field: LegacyActionField) => {
-  return getAll(field.url).then(items => {
+  return getAll(field.url).then((items) => {
     const choices = formatChoices(field, items);
     if (field.emptyLabel && !field.required) {
       choices.unshift({
@@ -52,7 +52,7 @@ const loadChoices = (field: LegacyActionField) => {
 export const getSelectList = (fields: Record<string, LegacyActionField>) => {
   return $q.all(
     Object.keys(fields)
-      .filter(key => fields[key].url)
-      .map(key => loadChoices(fields[key])),
+      .filter((key) => fields[key].url)
+      .map((key) => loadChoices(fields[key])),
   );
 };

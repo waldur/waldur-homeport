@@ -15,7 +15,9 @@ interface CustomerResourcesFilterProps {
   customer: Customer;
 }
 
-const PureCustomerResourcesFilter: React.FC<CustomerResourcesFilterProps> = props => (
+const PureCustomerResourcesFilter: React.FC<CustomerResourcesFilterProps> = (
+  props,
+) => (
   <Row>
     <ProjectFilter customer_uuid={props.customer.uuid} />
     <CategoryFilter />
@@ -23,7 +25,7 @@ const PureCustomerResourcesFilter: React.FC<CustomerResourcesFilterProps> = prop
   </Row>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
 });
 

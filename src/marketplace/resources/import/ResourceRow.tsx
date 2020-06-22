@@ -17,7 +17,7 @@ const SelectResourceButton = ({ value, onChange }) => (
   </a>
 );
 
-const serializeResource = resource => ({
+const serializeResource = (resource) => ({
   name: resource.name,
   uuid: resource.backend_id,
   resource_type: resource.type,
@@ -95,7 +95,7 @@ export const ResourceRow = ({
               valueKey="uuid"
               options={offering.plans}
               value={plans[resource.backend_id]}
-              onChange={plan => assignPlan(resource, plan)}
+              onChange={(plan) => assignPlan(resource, plan)}
               clearable={false}
             />
           </td>

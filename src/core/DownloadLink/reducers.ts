@@ -42,4 +42,4 @@ export function reducer(state = INITIAL_STATE, action) {
   }
 }
 
-export const getDownloadLinkState = state => state.downloadLink;
+export const getDownloadLinkState = (state) => state.downloadLink;

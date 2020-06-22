@@ -1,4 +1,4 @@
-export const getStateMessages = translate => ({
+export const getStateMessages = (translate) => ({
   attach: translate('Attaching'),
   create_snapshot_schedule: translate('Creating snapshot schedule'),
   update: translate('Updating'),

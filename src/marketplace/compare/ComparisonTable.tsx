@@ -31,7 +31,7 @@ export const ComparisonTable: React.FC<{}> = () => {
               </td>
             ))}
             {items.length < 4 &&
-              range(COMPARISON_COLUMNS - items.length).map(index => (
+              range(COMPARISON_COLUMNS - items.length).map((index) => (
                 <ComparisonItemPlaceholder key={index} />
               ))}
           </tr>

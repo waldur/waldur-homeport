@@ -1,5 +1,5 @@
 import priceTooltip from './PriceTooltip';
 
-export default module => {
+export default (module) => {
   module.component('priceTooltip', priceTooltip);
 };

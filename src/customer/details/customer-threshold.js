@@ -1,4 +1,4 @@
-import { PriceEstimatesService } from '../services/price-estimates-service';
+import { PriceEstimatesService } from '../services/PriceEstimatesService';
 
 import template from './customer-threshold.html';
 

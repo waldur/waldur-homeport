@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
 import { SecretValueField } from '@waldur/marketplace/SecretValueField';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
-import { BooleanField } from '@waldur/table-react/BooleanField';
+import { BooleanField } from '@waldur/table/BooleanField';
 
 export const OpenStackPackageDetails = ({
   orderItem: { attributes },

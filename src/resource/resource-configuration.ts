@@ -8,6 +8,6 @@ export const register = (type: string, config: ResourceConfiguration) => {
   registry[type] = config;
 };
 
-export const get = type => {
+export const get = (type) => {
   return registry[type];
 };

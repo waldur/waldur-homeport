@@ -129,7 +129,7 @@ export default class IssueNavigationService {
         return this.$state.go('support.resources');
       }
     }
-    return UsersService.getCurrentUser().then(user => {
+    return UsersService.getCurrentUser().then((user) => {
       if (user.is_staff || user.is_support) {
         this.$state.go('support.helpdesk');
       } else {
@@ -140,7 +140,7 @@ export default class IssueNavigationService {
 
   getSidebarItems() {
     return UsersService.getCurrentUser()
-      .then(user => {
+      .then((user) => {
         this.currentUser = user;
         if (!this.features.isVisible('support')) {
           return [];
@@ -155,20 +155,20 @@ export default class IssueNavigationService {
           return dashboardItems;
         }
       })
-      .then(items => {
+      .then((items) => {
         items = angular.copy(items);
         if (this.getBackItemLabel()) {
           items.unshift(this.getBackItem());
         }
         return items;
       })
-      .then(items =>
-        SidebarExtensionService.getItems('support').then(extra => [
+      .then((items) =>
+        SidebarExtensionService.getItems('support').then((extra) => [
           ...items,
           ...extra,
         ]),
       )
-      .then(items => {
+      .then((items) => {
         if (this.currentUser.is_support || this.currentUser.is_staff) {
           return [...items, ...filterItems(getReportItems())];
         }
@@ -213,7 +213,7 @@ export default class IssueNavigationService {
 
 // @ngInject
 export function attachStateUtils($rootScope, IssueNavigationService) {
-  $rootScope.$on('$stateChangeSuccess', function(
+  $rootScope.$on('$stateChangeSuccess', function (
     event,
     toState,
     toParams,

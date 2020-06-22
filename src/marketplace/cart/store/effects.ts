@@ -16,19 +16,19 @@ import { WorkspaceType } from '@waldur/workspace/types';
 import * as actions from './actions';
 import * as constants from './constants';
 
-const formatItem = item => ({
+const formatItem = (item) => ({
   plan: item.plan ? item.plan.url : undefined,
   project: item.project,
   attributes: item.attributes,
   limits: item.limits,
 });
 
-const formatItemToCreate = item => ({
+const formatItemToCreate = (item) => ({
   offering: item.offering.url,
   ...formatItem(item),
 });
 
-const formatItemToUpdate = item => ({
+const formatItemToUpdate = (item) => ({
   uuid: item.shoppingCartItemUuid,
   ...formatItem(item),
 });
@@ -155,7 +155,7 @@ function* createOrder() {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeLatest([SET_CURRENT_PROJECT, SET_CURRENT_CUSTOMER], initCart);
   yield takeEvery(constants.ADD_ITEM_REQUEST, addItem);
   yield takeEvery(constants.UPDATE_ITEM_REQUEST, updateItem);

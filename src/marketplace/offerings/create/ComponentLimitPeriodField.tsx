@@ -38,10 +38,10 @@ export const ComponentLimitPeriodField = (props: Props) => (
   <FormGroup label={translate('Limit period')}>
     <Field
       name="limit_period"
-      component={fieldProps => (
+      component={(fieldProps) => (
         <Select
           value={fieldProps.input.value}
-          onChange={value => fieldProps.input.onChange(value)}
+          onChange={(value) => fieldProps.input.onChange(value)}
           options={getLimitPeriods()}
           clearable={false}
         />

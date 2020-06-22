@@ -39,7 +39,7 @@ const PureTokenLifetimeWarning = (props: { token_lifetime: number | null }) =>
     </div>
   ) : null;
 
-const connector = connect(state => {
+const connector = connect((state) => {
   const option = formValueSelector('userEdit')(state, 'token_lifetime');
   return { token_lifetime: option ? option.value : undefined };
 });

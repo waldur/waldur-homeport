@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -49,8 +49,8 @@ const TableOptions = {
   table: 'rancher-cluster-templates',
   fetchData: createFetcher('rancher-templates'),
   exportFields: ['name', 'description', 'catalog'],
-  exportRow: row => [row.name, row.description, row.catalog_name],
-  mapPropsToFilter: props => ({
+  exportRow: (row) => [row.name, row.description, row.catalog_name],
+  mapPropsToFilter: (props) => ({
     cluster_uuid: props.resource.uuid,
   }),
   queryField: 'name',

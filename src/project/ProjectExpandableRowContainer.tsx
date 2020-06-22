@@ -17,19 +17,19 @@ const parseCounters = (
   counters: object,
 ): ExpandableRow[] => {
   return categories
-    .map(category => ({
+    .map((category) => ({
       label: category.title,
       value: counters[`marketplace_category_${category.uuid}`],
     }))
-    .filter(row => row.value);
+    .filter((row) => row.value);
 };
 
 const getProjectCounters = (projectId: string) =>
-  get(`/projects/${projectId}/counters/`).then(response => response.data);
+  get(`/projects/${projectId}/counters/`).then((response) => response.data);
 
 const combineRows = (rows: ExpandableRow[]): ExpandableRow[] =>
   rows
-    .filter(item => item.value)
+    .filter((item) => item.value)
     .sort((a, b) => a.label.localeCompare(b.label));
 
 async function loadData(props): Promise<ExpandableRow[]> {
@@ -43,7 +43,7 @@ async function loadData(props): Promise<ExpandableRow[]> {
 
 export const ProjectExpandableRowContainer: React.FC<{
   row: Project;
-}> = props => {
+}> = (props) => {
   const { loading, error, value } = useAsync(() => loadData(props.row), [
     props.row,
   ]);

@@ -13,7 +13,7 @@ interface ChangePlanDialogProps {
   submitting: boolean;
 }
 
-export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = props => {
+export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = (props) => {
   const asyncState = useAsync(
     () => loadData(props.resolve.resource.marketplace_resource_uuid),
     [props.resolve.resource.marketplace_resource_uuid],

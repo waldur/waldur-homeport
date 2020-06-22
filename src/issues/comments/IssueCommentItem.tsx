@@ -60,7 +60,7 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
     users[comment.author_uuid].map((currentUser, index) => (
       <React.Fragment key={index}>{currentUser.toUpperCase()}</React.Fragment>
     ));
-  const onCommentClick = evt => {
+  const onCommentClick = (evt) => {
     const target = evt.target as HTMLElement;
     if (!target.matches('img')) {
       return;
@@ -133,7 +133,7 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
   );
 };
 
-const createDeleteDialog = uuid =>
+const createDeleteDialog = (uuid) =>
   openModalDialog(IssueCommentDeleteDialog, { resolve: { uuid } });
 
 const mapStateToProps = (state, ownProps) => ({

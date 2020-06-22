@@ -9,7 +9,7 @@ import { IssuesList } from '../list/IssuesList';
 export const IssuesHelpdesk = () => {
   useTitle(translate('Helpdesk dashboard'));
   const [filter, setFilter] = React.useState({});
-  const onSearch = React.useCallback(issue => {
+  const onSearch = React.useCallback((issue) => {
     if (!issue) {
       setFilter({});
       return;

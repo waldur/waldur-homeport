@@ -4,7 +4,7 @@ import { compose } from 'redux';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails, User } from '@waldur/workspace/types';
 
@@ -39,12 +39,12 @@ const PureUserActivateButton = (props: UserActivateButtonProps) =>
     </Tooltip>
   ) : null;
 
-const mapStatToProps = state => ({
+const mapStatToProps = (state) => ({
   user: getUser(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: e => {
+  onClick: (e) => {
     e.target.blur();
     if (ownProps.row.is_active) {
       return actions.deactivateUser(ownProps.row, dispatch);

@@ -14,7 +14,7 @@ interface ZabbixHostDeleteButtonProps extends TranslateProps {
   host: ZabbixHost;
 }
 
-const canDeleteHost = host =>
+const canDeleteHost = (host) =>
   host && (host.state === 'OK' || host.state === 'Erred');
 
 export const PureZabbixHostDeleteButton = (

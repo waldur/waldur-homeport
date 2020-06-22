@@ -14,7 +14,7 @@ interface Props {
   component: Component;
 }
 
-const RowWrapper = props => (
+const RowWrapper = (props) => (
   <ComponentRow
     offeringComponent={props.offeringComponent}
     className={props.meta.error ? 'form-group has-error' : 'form-group'}
@@ -29,7 +29,7 @@ const RowWrapper = props => (
   </ComponentRow>
 );
 
-export const ComponentEditRow: React.FC<Props> = props => (
+export const ComponentEditRow: React.FC<Props> = (props) => (
   <Field
     name={`limits.${props.component.type}`}
     parse={parseIntField}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
-import { StringField } from '@waldur/form-react';
+import { StringField } from '@waldur/form';
 import { TranslateProps } from '@waldur/i18n';
 
 const checkPattern = (value: string, props) => {
@@ -22,7 +22,7 @@ const checkPattern = (value: string, props) => {
 
 const checkDuplicate = (value, props) =>
   props.customer.projects.find(
-    project => project.name === value && project.uuid !== props.project_uuid,
+    (project) => project.name === value && project.uuid !== props.project_uuid,
   )
     ? props.translate('Name is duplicated. Choose other name.')
     : undefined;

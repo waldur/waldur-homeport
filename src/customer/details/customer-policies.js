@@ -4,7 +4,7 @@ import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { PriceEstimatesService } from '../services/price-estimates-service';
+import { PriceEstimatesService } from '../services/PriceEstimatesService';
 
 import template from './customer-policies.html';
 
@@ -20,7 +20,7 @@ const customerPolicies = {
 
     $onInit() {
       this.freeipaVisible = isFeatureVisible('freeipa');
-      UsersService.getCurrentUser().then(currentUser => {
+      UsersService.getCurrentUser().then((currentUser) => {
         const currentCustomer = getCustomer(store.getState());
         this.user = currentUser;
         this.originalCustomer = currentCustomer;
@@ -64,7 +64,7 @@ const customerPolicies = {
             gettext('Organization policies have been updated.'),
           );
         })
-        .catch(response => {
+        .catch((response) => {
           if (response.status === 400) {
             for (const name in response.data) {
               const message = response.data[name];
