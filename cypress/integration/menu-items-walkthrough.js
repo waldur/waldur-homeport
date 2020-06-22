@@ -77,9 +77,8 @@ describe('Browse menus', () => {
       .contains('HPC')
       .click()
 
-      .wait(500)
-      .get('h2')
-      .contains('HPC resources')
+      .get('h5')
+      .contains('Resources')
       .should('be.visible');
   });
 });
