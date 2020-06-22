@@ -43,7 +43,14 @@ const useHPACreateDialog = (cluster) => {
               type: formData.metric_type.value,
               target: {
                 type: formData.target_type.value,
-                [formData.target_type.value]: formData.quantity,
+                utilization:
+                  formData.target_type.value === 'Utilization'
+                    ? formData.quantity
+                    : null,
+                value:
+                  formData.target_type.value === 'Value'
+                    ? formData.quantity
+                    : null,
               },
             },
           ],
@@ -107,8 +114,8 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
 
   const targetTypeOptions = React.useMemo(
     () => [
-      { label: translate('Average value'), value: 'value' },
-      { label: translate('Average utilization'), value: 'utilization' },
+      { label: translate('Average value'), value: 'Value' },
+      { label: translate('Average utilization'), value: 'Utilization' },
     ],
     [],
   );
