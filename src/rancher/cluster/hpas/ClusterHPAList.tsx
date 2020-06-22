@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { HPA } from '@waldur/rancher/types';
@@ -7,6 +8,7 @@ import { TableOptionsType } from '@waldur/table/types';
 
 import { HPACreateButton } from './HPACreateButton';
 import { HPADeleteButton } from './HPADeleteButton';
+import { HPAUpdateButton } from './HPAUpdateButton';
 
 const TableComponent = (props) => {
   const { translate } = props;
@@ -56,7 +58,12 @@ const TableComponent = (props) => {
         },
         {
           title: translate('Actions'),
-          render: ({ row }) => <HPADeleteButton hpa={row} />,
+          render: ({ row }) => (
+            <ButtonGroup>
+              <HPAUpdateButton hpa={row} />
+              <HPADeleteButton hpa={row} />
+            </ButtonGroup>
+          ),
         },
       ]}
       verboseName={translate('horizontal pod autoscalers')}
