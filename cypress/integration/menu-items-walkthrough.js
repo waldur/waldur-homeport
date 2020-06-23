@@ -33,6 +33,10 @@ describe('Browse menus', () => {
         'fixture:marketplace/offerings.json',
       )
       .route(
+        'http://localhost:8080/api/customers/bf6d515c9e6e445f9c339021b30fc96b/counters/',
+        'fixture:customers/counters.json',
+      )
+      .route(
         'http://localhost:8080/api/customers/0d5e3e83da724893814cead5de1a641d/',
         'fixture:customers/alice.json',
       )
