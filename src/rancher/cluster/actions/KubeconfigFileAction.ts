@@ -7,13 +7,8 @@ import store from '@waldur/store/store';
 import { RancherClusterKubeconfigDialog } from './RancherClusterKubeconfigDialog';
 
 function validate(ctx: ActionContext<OpenStackInstance>): string {
-  if (
-    ctx.resource.state === 'Creating' ||
-    ctx.resource.state === 'Creation Scheduled'
-  ) {
-    return translate(
-      'Instance should not be Creating, or Creation Scheduled. Please contact support.',
-    );
+  if (ctx.resource.state !== 'OK') {
+    return translate('Instance should be OK. Please contact support.');
   }
 }
 
