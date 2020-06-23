@@ -2766,12 +2766,12 @@ msgstr ""
 msgid "Instance should be OK, or erred. Please contact support."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/DestroyAction.ts
-msgid "Instance should be shutoff and OK or erred. Please contact support."
+#: src/rancher/cluster/actions/KubeconfigFileAction.ts
+msgid "Instance should be OK. Please contact support."
 msgstr ""
 
-#: src/rancher/cluster/actions/KubeconfigFileAction.ts
-msgid "Instance should not be Creating, or Creation Scheduled. Please contact support."
+#: src/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
 #: src/quotas/constants.ts
