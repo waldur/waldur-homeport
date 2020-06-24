@@ -4414,8 +4414,13 @@ msgstr ""
 msgid "Per month"
 msgstr ""
 
+#: src/booking/BookingCheckoutSummary.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Period"
+msgstr ""
+
+#: src/booking/BookingCheckoutSummary.tsx
+msgid "Periods"
 msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
