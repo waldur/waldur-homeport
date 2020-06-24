@@ -1,3 +1,4 @@
+import { BookingCheckoutSummary } from '@waldur/booking/BookingCheckoutSummary';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { OfferingConfigurationDetails } from '@waldur/offering/OfferingConfigurationDetails';
@@ -10,6 +11,7 @@ registerOfferingType({
   get label() {
     return translate('Booking');
   },
+  checkoutSummaryComponent: BookingCheckoutSummary,
   component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
   showOptions: true,
