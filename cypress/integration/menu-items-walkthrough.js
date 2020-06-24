@@ -55,6 +55,15 @@ describe('Browse menus', () => {
       .should('be.visible');
   });
 
+  it('Back to organization', () => {
+    cy.get('.nav-label')
+      .contains('Back to organization')
+      .click()
+
+      .url()
+      .should('include', '/organizations/');
+  });
+
   it('Marketplace', () => {
     cy.get('.nav-label')
       .contains('Marketplace')
