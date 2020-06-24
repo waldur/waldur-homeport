@@ -1,0 +1,11 @@
+[
+  {
+    "uuid": "62c142ced2984382868aa1861efa753a",
+    "url": "http://localhost:8080/api/slurm-packages/62c142ced2984382868aa1861efa753a/",
+    "service_settings": "http://localhost:8080/api/service-settings/40d8b87ec73544968a5a9492a0996cf3/",
+    "name": "nicpb",
+    "cpu_price": "0.0150000000",
+    "gpu_price": "0.0000000000",
+    "ram_price": "0.0000000000"
+  }
+]

@@ -1,6 +1,7 @@
 [
   {
     "url": "http://localhost:8080/api/marketplace-categories/4588ff519260461893ab371b8fe83363/",
+    "uuid": "4588ff519260461893ab371b8fe83363",
     "title": "HPC",
     "description": "High Performance Computing",
     "icon": "http://localhost:8080/media/marketplace_category_icons/hpc.svg",
@@ -39,6 +40,36 @@
         "is_standalone": true
       }
     ],
+    "columns": [],
+    "components": []
+  },
+  {
+    "uuid": "4d3a131dc20347e4abd1bdd3a16e73d1",
+    "title": "Measurements",
+    "columns": [],
+    "components": []
+  },
+  {
+    "uuid": "041b4463dd1c45d4bf5c3f22fe53d7cd",
+    "title": "Platform",
+    "columns": [],
+    "components": []
+  },
+  {
+    "uuid": "06e45986252244218bd062149fc3b5b5",
+    "title": "Private clouds",
+    "columns": [],
+    "components": []
+  },
+  {
+    "uuid": "6dfcdbe3c18241dc87526ef411bf6064",
+    "title": "Storage",
+    "columns": [],
+    "components": []
+  },
+  {
+    "uuid": "e5a5e7651f394d10958328bbc3e967eb",
+    "title": "VMs",
     "columns": [],
     "components": []
   }

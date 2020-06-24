@@ -40,6 +40,14 @@ describe('Browse menus', () => {
         'http://localhost:8080/api/customers/0d5e3e83da724893814cead5de1a641d/',
         'fixture:customers/alice.json',
       )
+      .route(
+        'http://localhost:8080/api/slurm-allocation/**',
+        'fixture:slurm/allocation.json',
+      )
+      .route(
+        'http://localhost:8080/api/slurm-packages/**',
+        'fixture:slurm/packages.json',
+      )
       .login()
       .openWorkspaceSelector()
       .selectFirstProjectOfFirstOrganizationFromWorkspaceSelector();
