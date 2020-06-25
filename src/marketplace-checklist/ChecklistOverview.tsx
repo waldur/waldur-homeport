@@ -44,7 +44,10 @@ export const ChecklistOverview = () => {
         ) : (
           <Panel className="m-t-md">
             <CustomerMap customers={state.statsList} />
-            <StatsTable stats={state.statsList} />
+            <StatsTable
+              stats={state.statsList}
+              scopeTitle={translate('Organization')}
+            />
           </Panel>
         )}
       </>

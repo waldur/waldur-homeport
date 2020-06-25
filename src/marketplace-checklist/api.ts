@@ -35,3 +35,8 @@ export const postAnswers = (
 
 export const getStats = (checklistId: string) =>
   getAll<ChecklistStats>(`/marketplace-checklists/${checklistId}/stats/`);
+
+export const getCustomerStats = (customerId: string, checklistId: string) =>
+  getAll<ChecklistStats>(
+    `/customers/${customerId}/marketplace-checklists/${checklistId}/`,
+  );

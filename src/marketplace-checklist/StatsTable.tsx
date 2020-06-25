@@ -6,12 +6,18 @@ import { translate } from '@waldur/i18n';
 
 import { ChecklistStats } from './types';
 
-export const StatsTable = ({ stats }: { stats: ChecklistStats[] }) => (
+export const StatsTable = ({
+  stats,
+  scopeTitle,
+}: {
+  stats: ChecklistStats[];
+  scopeTitle: string;
+}) => (
   <Table responsive={true} bordered={true} striped={true} className="m-t-md">
     <thead>
       <tr>
         <th className="col-sm-1">#</th>
-        <th>{translate('Organization')}</th>
+        <th>{scopeTitle}</th>
         <th>{translate('Score')}</th>
       </tr>
     </thead>
