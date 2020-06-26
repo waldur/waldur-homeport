@@ -18,6 +18,7 @@ export interface Checklist {
   description: string;
   uuid: string;
   questions_count: number;
+  category_uuid: string;
 }
 
 export interface Answer {
