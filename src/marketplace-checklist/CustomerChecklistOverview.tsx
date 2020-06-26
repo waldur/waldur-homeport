@@ -3,14 +3,32 @@ import Select from 'react-select';
 import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 
-import { getChecklists, getCustomerStats } from './api';
+import { getChecklists, getCustomerStats, getCategories } from './api';
 import { StatsTable } from './StatsTable';
 import { Checklist } from './types';
 
-export const CustomerChecklistOverview = ({ customer }) => {
-  const optionsState = useAsync(getChecklists, []);
+const loadData = async () => {
+  const categories = await getCategories();
+  const checklists = await getChecklists();
+  return {
+    categories,
+    checklists: checklists.reduce(
+      (result, checklist) => ({
+        ...result,
+        [checklist.category_uuid]: [
+          ...(result[checklist.category_uuid] || []),
+          checklist,
+        ],
+      }),
+      {},
+    ),
+  };
+};
+
+const CategoryPanel = ({ category, checklists, customer }) => {
   const [checklist, setChecklist] = React.useState<Checklist>();
   const statsState = useAsync(
     () =>
@@ -21,14 +39,13 @@ export const CustomerChecklistOverview = ({ customer }) => {
   );
 
   return (
-    <>
+    <Panel title={category.name}>
       <Select
-        isLoading={optionsState.loading}
         labelKey="name"
         valueKey="uuid"
         value={checklist}
         onChange={setChecklist}
-        options={optionsState.value}
+        options={checklists}
         clearable={false}
       />
       {statsState.loading ? (
@@ -41,6 +58,34 @@ export const CustomerChecklistOverview = ({ customer }) => {
       ) : checklist ? (
         translate('There are no matching checklists.')
       ) : null}
+    </Panel>
+  );
+};
+
+export const CustomerChecklistOverview = ({ customer }) => {
+  const asyncState = useAsync(loadData, []);
+
+  if (asyncState.loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (
+    asyncState.error ||
+    !asyncState.value.categories.length ||
+    !Object.keys(asyncState.value.checklists).length
+  ) {
+    return null;
+  }
+  return (
+    <>
+      {asyncState.value.categories.map((category) => (
+        <CategoryPanel
+          key={category.uuid}
+          checklists={asyncState.value.checklists[category.uuid]}
+          category={category}
+          customer={customer}
+        />
+      ))}
     </>
   );
 };

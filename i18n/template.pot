@@ -1172,7 +1172,6 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-#: src/customer/dashboard/CustomerDashboard.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
 msgid "Compliance"
 msgstr ""
