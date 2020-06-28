@@ -123,7 +123,7 @@ const addProjectMember = {
       ) {
         return this.updatePermission(this.resolve.editUser.permission);
       }
-      return ProjectPermissionsService.deletePermission(
+      return ProjectPermissionsService.delete(
         this.resolve.editUser.permission,
       ).then(() => {
         return this.createPermission(this.projectModel.role);
