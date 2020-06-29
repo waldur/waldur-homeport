@@ -36,8 +36,8 @@ const ExpandableRow = ({ row }: DetailedInfo) => (
         {bookingDataTemplate({
           Title: title,
           'All day': allDay ? 'Yes' : 'No',
-          End: formatShortDateTime(end),
           Start: formatShortDateTime(start),
+          End: formatShortDateTime(end),
           State:
             row.state === 'Creating'
               ? 'Waiting for confirmation...'
