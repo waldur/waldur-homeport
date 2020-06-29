@@ -1,7 +1,6 @@
 [
   {
     "url": "http://localhost:8080/api/marketplace-categories/4588ff519260461893ab371b8fe83363/",
-    "uuid": "4588ff519260461893ab371b8fe83363",
     "title": "HPC",
     "description": "High Performance Computing",
     "icon": "http://localhost:8080/media/marketplace_category_icons/hpc.svg",

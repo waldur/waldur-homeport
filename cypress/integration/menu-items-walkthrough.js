@@ -53,6 +53,15 @@ describe('Browse menus', () => {
       .selectFirstProjectOfFirstOrganizationFromWorkspaceSelector();
   });
 
+  it('Back to organization', () => {
+    cy.get('.nav-label')
+      .contains('Back to organization')
+      .click()
+
+      .url()
+      .should('include', '/organizations/');
+  });
+
   it('Dashboard', () => {
     cy.get('.nav-label')
       .contains('Dashboard')
@@ -61,15 +70,6 @@ describe('Browse menus', () => {
       .get('h2')
       .contains('Welcome')
       .should('be.visible');
-  });
-
-  it('Back to organization', () => {
-    cy.get('.nav-label')
-      .contains('Back to organization')
-      .click()
-
-      .url()
-      .should('include', '/organizations/');
   });
 
   it('Marketplace', () => {
@@ -99,10 +99,11 @@ describe('Browse menus', () => {
       .click()
 
       .get('a .nav-label')
-      .contains('HPC')
-      .click()
+      // .contains('HPC')
+      .contains('Measurements')
+      .click();
 
-      .get('h5')
+    /*.get('h5')
       .contains('Resources')
       .should('be.visible')
 
@@ -110,6 +111,6 @@ describe('Browse menus', () => {
       .first()
       .children()
       .first()
-      .click();
+      .click({ force: true });*/
   });
 });
