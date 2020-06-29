@@ -16,7 +16,9 @@ export const bookingDataTemplate = (event) => {
   return getLabelValues.map((item) => (
     <>
       <div className="form-group">
-        <label className="control-label col-xs-4">{item.label}</label>
+        <label className="control-label col-xs-4" style={{ marginTop: '-7px' }}>
+          {item.label}
+        </label>
         <span>{item.value === ('' || undefined) ? 'N/A' : item.value}</span>
       </div>
     </>
