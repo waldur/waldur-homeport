@@ -150,7 +150,9 @@ const addTeamMember = {
       } else if (!this.resolve.editUser.role && this.userModel.role) {
         return this.createCustomerPermission();
       } else if (
-        this.userModel.expiration_time !== this.resolve.editUser.expiration_time
+        this.userModel.expiration_time !==
+          this.resolve.editUser.expiration_time &&
+        this.resolve.editUser.permission
       ) {
         return CustomerPermissionsService.update(
           this.resolve.editUser.permission,
