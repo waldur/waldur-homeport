@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { PaymentsPanel } from '@waldur/customer/payments/PaymentsPanel';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { angular2react } from '@waldur/shims/angular2react';
@@ -18,6 +19,7 @@ export const CustomerManage = () => {
       <CustomerDetailsPanel />
       <CustomerPoliciesPanel />
       <PaymentProfilesPanel />
+      <PaymentsPanel />
       <CustomerActionsPanel />
     </div>
   );

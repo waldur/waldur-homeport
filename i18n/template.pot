@@ -119,6 +119,7 @@ msgstr ""
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/customer/payments/PaymentsList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -274,6 +275,11 @@ msgstr ""
 
 #: src/user/list/CustomerCreateButton.tsx
 msgid "Add organization"
+msgstr ""
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+msgid "Add payment"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
@@ -553,6 +559,10 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 msgid "Are you sure you want to delete the payment profile?"
+msgstr ""
+
+#: src/customer/payments/PaymentActions.tsx
+msgid "Are you sure you want to delete the payment?"
 msgstr ""
 
 #: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
@@ -848,6 +858,8 @@ msgstr ""
 msgid "Branch"
 msgstr ""
 
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 msgid "Browse"
@@ -1219,6 +1231,7 @@ msgid "Confirm deletion?"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payments/PaymentActions.tsx
 #: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
@@ -1593,6 +1606,9 @@ msgstr ""
 msgid "Datastore"
 msgstr ""
 
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/paypal/PaymentsList.tsx
@@ -1648,6 +1664,7 @@ msgstr ""
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
@@ -1950,6 +1967,7 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
+#: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
@@ -4330,9 +4348,21 @@ msgstr ""
 msgid "Payment gateways (monthly)"
 msgstr ""
 
+#: src/customer/payments/store/effects.ts
+msgid "Payment has been created."
+msgstr ""
+
+#: src/customer/payments/store/effects.ts
+msgid "Payment has been deleted."
+msgstr ""
+
 #: src/paypal/PaymentApprove.tsx
 #: src/paypal/PaymentCancel.tsx
 msgid "Payment has been processed successfully."
+msgstr ""
+
+#: src/customer/payments/store/effects.ts
+msgid "Payment has been updated."
 msgstr ""
 
 #: src/paypal/PaymentApprove.tsx
@@ -4374,6 +4404,14 @@ msgstr ""
 
 #: src/customer/list/CustomerPaymentProfile.tsx
 msgid "Payment type {type}"
+msgstr ""
+
+#: src/customer/payments/PaymentsPanel.tsx
+msgid "Payments connected with an active payment profile."
+msgstr ""
+
+#: src/customer/payments/PaymentsPanel.tsx
+msgid "Payments list"
 msgstr ""
 
 #: src/invitations/InvitationsFilter.tsx
@@ -4618,6 +4656,10 @@ msgstr ""
 
 #: src/marketplace/offerings/InternalNameField.tsx
 msgid "Please use Latin letters without spaces only."
+msgstr ""
+
+#: src/customer/payments/PaymentsList.tsx
+msgid "Please, create and enable a payment profile to be able to manage payments."
 msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -4921,6 +4963,16 @@ msgstr ""
 
 #: src/customer/team/add-team-member.html
 msgid "Projects list"
+msgstr ""
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+msgid "Proof"
+msgstr ""
+
+#: src/customer/payments/PaymentProofRenderer.tsx
+msgid "Proof document"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
@@ -6439,6 +6491,7 @@ msgid "Storage type"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+#: src/customer/payments/PaymentCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
@@ -6498,6 +6551,12 @@ msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
 msgid "Subtotal"
+msgstr ""
+
+#: src/customer/payments/PaymentCreateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/customer/payments/PaymentsList.tsx
+msgid "Sum"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
@@ -7150,6 +7209,10 @@ msgstr ""
 msgid "Unable to create payment profile."
 msgstr ""
 
+#: src/customer/payments/store/effects.ts
+msgid "Unable to create payment."
+msgstr ""
+
 #: src/issues/create/utils.ts
 msgid "Unable to create request."
 msgstr ""
@@ -7172,6 +7235,10 @@ msgstr ""
 
 #: src/issues/comments/effects.ts
 msgid "Unable to delete comment."
+msgstr ""
+
+#: src/customer/payments/store/effects.ts
+msgid "Unable to delete payment."
 msgstr ""
 
 #: src/customer/team/UserRemoveButton.tsx
@@ -7563,6 +7630,10 @@ msgstr ""
 msgid "Unable to update payment profile."
 msgstr ""
 
+#: src/customer/payments/store/effects.ts
+msgid "Unable to update payment."
+msgstr ""
+
 #: src/providers/effects.tsx
 msgid "Unable to update provider."
 msgstr ""
@@ -7633,6 +7704,7 @@ msgstr ""
 #: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/details/customer-policies.html
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
+#: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
@@ -7652,6 +7724,10 @@ msgstr ""
 
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Update notification"
+msgstr ""
+
+#: src/customer/payments/PaymentUpdateDialog.tsx
+msgid "Update payment"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -8321,6 +8397,10 @@ msgstr ""
 msgid "You must be staff to modify payment profiles"
 msgstr ""
 
+#: src/customer/payments/PaymentsList.tsx
+msgid "You must be staff to modify payments"
+msgstr ""
+
 #: src/marketplace/orders/OrderDetails.tsx
 msgid "You need approval to finish purchasing of services."
 msgstr ""
@@ -8538,6 +8618,7 @@ msgstr ""
 msgid "payment profiles"
 msgstr ""
 
+#: src/customer/payments/PaymentsList.tsx
 #: src/paypal/PaymentsList.tsx
 msgid "payments"
 msgstr ""

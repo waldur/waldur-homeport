@@ -45,6 +45,13 @@ export interface PaymentProfile {
   uuid: string;
 }
 
+export interface Payment {
+  date_of_payment: string;
+  sum: string;
+  proof: string;
+  uuid: string;
+}
+
 export interface Customer {
   billing_price_estimate?: {
     total: string;

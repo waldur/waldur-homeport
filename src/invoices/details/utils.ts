@@ -83,3 +83,6 @@ export const getActiveFixedPricePaymentProfile = (profiles: PaymentProfile[]) =>
   profiles?.find(
     (profile) => profile.is_active && profile.payment_type === 'fixed_price',
   );
+
+export const getActivePaymentProfile = (profiles: PaymentProfile[]) =>
+  profiles?.find((profile) => profile.is_active);
