@@ -4120,7 +4120,7 @@ msgstr ""
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/issues/list/IssuesList.tsx
-#: src/marketplace-checklist/StatsTable.tsx
+#: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/list/ProjectPermissions.tsx
@@ -4414,8 +4414,13 @@ msgstr ""
 msgid "Per month"
 msgstr ""
 
+#: src/booking/BookingCheckoutSummary.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Period"
+msgstr ""
+
+#: src/booking/BookingCheckoutSummary.tsx
+msgid "Periods"
 msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -4781,6 +4786,7 @@ msgstr ""
 #: src/issues/create/ProjectGroup.tsx
 #: src/jira/issue/JiraIssueSummary.tsx
 #: src/jira/project/jira-project-checkout-summary.html
+#: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
@@ -6792,6 +6798,10 @@ msgstr ""
 
 #: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "There are no events for this resource."
+msgstr ""
+
+#: src/marketplace-checklist/CustomerChecklistOverview.tsx
+msgid "There are no matching checklists."
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx

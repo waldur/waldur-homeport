@@ -11,6 +11,8 @@ import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
+import { FEATURE } from '@waldur/marketplace-checklist/constants';
+import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
 import { useTitle } from '@waldur/navigation/title';
 import { User, Customer } from '@waldur/workspace/types';
 
@@ -59,6 +61,9 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => {
         </div>
       ) : null}
       <>
+        {isFeatureVisible(FEATURE) && (
+          <CustomerChecklistOverview customer={props.customer} />
+        )}
         <Panel title={translate('Resources')}>
           <CustomerResourcesList />
         </Panel>
