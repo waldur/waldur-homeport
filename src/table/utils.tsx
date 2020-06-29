@@ -29,7 +29,9 @@ export function connectTable(options: TableOptionsType) {
       const extraId = options.mapPropsToTableId
         ? options.mapPropsToTableId(props)
         : [];
-      const table = `${rawTableId}${extraId ? '-' + extraId.join('-') : ''}`;
+      const table = `${rawTableId}${
+        extraId.length ? '-' + extraId.join('-') : ''
+      }`;
       registerTable({ ...options, table });
 
       const mapDispatchToProps = (dispatch) => ({
