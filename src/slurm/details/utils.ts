@@ -2,8 +2,6 @@ import * as moment from 'moment-timezone';
 
 import { translate } from '@waldur/i18n';
 
-import { getEstimatedPrice } from '../utils';
-
 const uniqueArray = (items) => {
   return items.filter((elem, pos) => {
     return items.indexOf(elem) === pos;
@@ -73,6 +71,13 @@ const getUsageCharts = (chartSpec, report, userMap, labels) =>
       datasets,
     };
   });
+
+function getEstimatedPrice(quotas, pricePackage) {
+  const cpu_price = pricePackage.cpu_price * Math.round(quotas.cpu / 60);
+  const gpu_price = pricePackage.gpu_price * Math.round(quotas.gpu / 60);
+  const ram_price = pricePackage.ram_price * Math.round(quotas.ram / 1024);
+  return cpu_price + gpu_price + ram_price;
+}
 
 const getUserCost = (report, username, label, pricePackage) =>
   getEstimatedPrice(
