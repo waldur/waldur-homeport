@@ -44,7 +44,7 @@ export const AllocationUsageChart = ({ chart }) => {
         },
       },
     };
-    new moduleValue.default.default(ctx, options);
+    new moduleValue.default(ctx, options);
   }, [moduleValue, containerRef, chart]);
 
   if (loading) {
@@ -55,11 +55,9 @@ export const AllocationUsageChart = ({ chart }) => {
     return <>{translate('Unable to load module')}</>;
   }
 
-  if (moduleValue) {
-    return (
-      <div style={{ width: '100%' }}>
-        <canvas ref={containerRef} />
-      </div>
-    );
-  }
+  return (
+    <div style={{ width: '100%' }}>
+      <canvas ref={containerRef} />
+    </div>
+  );
 };
