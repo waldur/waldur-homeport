@@ -735,7 +735,7 @@ msgstr ""
 #: src/error/InvalidQuotaPage.tsx
 #: src/error/InvalidRoutePage.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
-#: src/navigation/header/site-header.html
+#: src/navigation/header/SiteHeader.tsx
 msgid "Back"
 msgstr ""
 
@@ -1098,7 +1098,6 @@ msgstr ""
 msgid "Client secret"
 msgstr ""
 
-#: src/slurm/details/slurm-allocation-details-dialog.html
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Close"
 msgstr ""
@@ -3193,7 +3192,7 @@ msgid "Location"
 msgstr ""
 
 #: src/navigation/header/LogoutLink.tsx
-#: src/navigation/header/site-header.html
+#: src/navigation/header/SiteHeader.tsx
 #: src/user/UserDropdownMenu.tsx
 msgid "Log out"
 msgstr ""
@@ -5748,7 +5747,7 @@ msgstr ""
 msgid "SLURM allocation"
 msgstr ""
 
-#: src/slurm/details/slurm-allocation-details-dialog.html
+#: src/slurm/details/AllocationDetailsDialog.tsx
 msgid "SLURM allocation usage"
 msgstr ""
 
@@ -7349,6 +7348,7 @@ msgstr ""
 
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/project/team/ProjectUsersList.tsx
+#: src/slurm/details/AllocationUsageTable.tsx
 msgid "Unable to load data"
 msgstr ""
 
@@ -7416,6 +7416,10 @@ msgstr ""
 
 #: src/marketplace/common/OfferingGrid.tsx
 msgid "Unable to load marketplace offerings."
+msgstr ""
+
+#: src/slurm/details/AllocationUsageChart.tsx
+msgid "Unable to load module"
 msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx
