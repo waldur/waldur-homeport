@@ -7,10 +7,12 @@ import {
 } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
+import { AllocationDetailsDialog } from './details/AllocationDetailsDialog';
+
 const createDetailsAction = (): ResourceAction => ({
   name: 'details',
   title: translate('Details'),
-  component: 'slurmAllocationDetailsDialog',
+  component: AllocationDetailsDialog,
   useResolve: true,
   type: 'form',
   dialogSize: 'lg',

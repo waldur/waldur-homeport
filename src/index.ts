@@ -80,7 +80,7 @@ filtersModule(appModule);
 i18nModule(appModule);
 configModule(appModule);
 freeipaModule(appModule);
-slurmModule(appModule);
+slurmModule();
 storeModule(appModule);
 jiraModule(appModule);
 workspaceModule(appModule);
