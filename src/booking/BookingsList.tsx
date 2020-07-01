@@ -10,7 +10,7 @@ import { bookingDataTemplate } from '@waldur/booking/components/utils';
 import { TABLE_NAME } from '@waldur/booking/constants';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
 import { withTranslation, translate } from '@waldur/i18n';
-import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
+import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
@@ -54,14 +54,7 @@ const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => (
-        <OrderItemDetailsLink
-          order_item_uuid={row.uuid}
-          project_uuid={row.project_uuid}
-        >
-          {row.attributes.name || row.offering_name}
-        </OrderItemDetailsLink>
-      ),
+      render: PublicResourceLink,
       orderField: 'name',
     },
     {
