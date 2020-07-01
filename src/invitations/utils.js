@@ -1,5 +1,8 @@
+import { openModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 
+import { InvitationConfirmDialog } from './InvitationConfirmDialog';
 import { InvitationService } from './InvitationService';
 
 export class InvitationUtilsService {
@@ -96,17 +99,15 @@ export class InvitationUtilsService {
   }
 
   confirmInvitation(token) {
-    const dialog = this.$uibModal.open({
-      component: 'invitationConfirmDialog',
-      resolve: {
-        token: () => token,
-        acceptNewEmail: () => true,
-        rejectNewEmail: () => false,
-      },
-    });
     const deferred = this.$q.defer();
-    dialog.result.then((result) => deferred.resolve(result));
-    dialog.closed.then(() => deferred.reject());
+    store.dispatch(
+      openModalDialog(InvitationConfirmDialog, {
+        resolve: {
+          token,
+          deferred,
+        },
+      }),
+    );
     return deferred.promise;
   }
 

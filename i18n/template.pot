@@ -924,7 +924,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/invitations/invitation-confirm-dialog.html
+#: src/invitations/InvitationConfirmDialog.tsx
 msgid "Cancel invitation"
 msgstr ""
 
@@ -2014,7 +2014,7 @@ msgstr ""
 msgid "Email has been updated."
 msgstr ""
 
-#: src/invitations/invitation-confirm-dialog.html
+#: src/invitations/InvitationConfirmDialog.tsx
 msgid "Email update"
 msgstr ""
 
@@ -2840,7 +2840,7 @@ msgstr ""
 msgid "Invitation approval"
 msgstr ""
 
-#: src/invitations/invitation-confirm-dialog.html
+#: src/invitations/InvitationConfirmDialog.tsx
 msgid "Invitation check"
 msgstr ""
 
@@ -2848,7 +2848,7 @@ msgstr ""
 msgid "Invitation could not be accepted"
 msgstr ""
 
-#: src/invitations/invitation-confirm-dialog.html
+#: src/invitations/InvitationConfirmDialog.tsx
 msgid "Invitation email is:"
 msgstr ""
 
@@ -3762,7 +3762,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: src/invitations/invitation-confirm-dialog.html
+#: src/invitations/InvitationConfirmDialog.tsx
 msgid "No, continue using current email"
 msgstr ""
 
@@ -4581,7 +4581,7 @@ msgstr ""
 msgid "Please enter volume size to see price estimate."
 msgstr ""
 
-#: src/invitations/invitation-confirm-dialog.html
+#: src/invitations/InvitationConfirmDialog.tsx
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
@@ -8285,7 +8285,7 @@ msgstr ""
 msgid "Workloads"
 msgstr ""
 
-#: src/invitations/invitation-confirm-dialog.html
+#: src/invitations/InvitationConfirmDialog.tsx
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
 
@@ -8304,7 +8304,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/invitations/invitation-confirm-dialog.html
+#: src/invitations/InvitationConfirmDialog.tsx
 msgid "Yes, use invitation email"
 msgstr ""
 
@@ -8429,7 +8429,7 @@ msgstr ""
 msgid "Your FreeIPA profile has been disabled."
 msgstr ""
 
-#: src/invitations/invitation-confirm-dialog.html
+#: src/invitations/InvitationConfirmDialog.tsx
 msgid "Your current email is:"
 msgstr ""
 
