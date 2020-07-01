@@ -604,7 +604,6 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/AssigneeGroup.tsx
 #: src/issues/list/IssuesList.tsx
-#: src/jira/issue/JiraIssuesList.tsx
 msgid "Assigned to"
 msgstr ""
 
@@ -766,10 +765,6 @@ msgstr ""
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Backend ID"
-msgstr ""
-
-#: src/jira/JiraForm.tsx
-msgid "Backend URL"
 msgstr ""
 
 #: src/resource/state/constants.ts
@@ -1055,10 +1050,6 @@ msgstr ""
 
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Charts"
-msgstr ""
-
-#: src/jira/project/jira-project-checkout-summary.html
-msgid "Checkout summary"
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -1413,8 +1404,6 @@ msgstr ""
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/IssueRegistration.tsx
-#: src/jira/issue/IssueCreateDialog.tsx
-#: src/jira/issue/JiraIssueCreateButton.tsx
 msgid "Create request"
 msgstr ""
 
@@ -1444,7 +1433,6 @@ msgstr ""
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
-#: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
@@ -1703,10 +1691,6 @@ msgstr ""
 #: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortList.tsx
-#: src/jira/issue/IssueCreateDialog.tsx
-#: src/jira/issue/JiraIssueSummary.tsx
-#: src/jira/issue/JiraIssuesList.tsx
-#: src/jira/project/jira-project-config.js
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
@@ -2419,10 +2403,6 @@ msgstr ""
 msgid "Force destroy"
 msgstr ""
 
-#: src/jira/project/jira-project-checkout-summary.html
-msgid "Free"
-msgstr ""
-
 #: src/freeipa/FreeIPAAccount.tsx
 #: src/user/constants.ts
 msgid "FreeIPA account"
@@ -2948,7 +2928,6 @@ msgstr ""
 msgid "Invoice number"
 msgstr ""
 
-#: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -2995,7 +2974,6 @@ msgstr ""
 
 #: src/customer/workspace/utils.ts
 #: src/issues/list/IssuesList.tsx
-#: src/jira/project/tabs.ts
 #: src/marketplace/resources/ResourceTabs.tsx
 #: src/project/utils.ts
 #: src/resource/tabs/constants.ts
@@ -3026,14 +3004,6 @@ msgstr ""
 msgid "Item has been removed from shopping cart."
 msgstr ""
 
-#: src/jira/JiraForm.tsx
-msgid "JIRA host (e.g. https://jira.example.com/)"
-msgstr ""
-
-#: src/jira/JiraForm.tsx
-msgid "JIRA user with excessive privileges"
-msgstr ""
-
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
@@ -3061,8 +3031,6 @@ msgstr ""
 
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesShortList.tsx
-#: src/jira/issue/JiraIssueSummary.tsx
-#: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Key"
@@ -3074,10 +3042,6 @@ msgstr ""
 
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Key removal"
-msgstr ""
-
-#: src/jira/project/jira-project-config.js
-msgid "Key should consist of uppercase letters."
 msgstr ""
 
 #: src/user/keys/help.js
@@ -3542,8 +3506,6 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/jira/project/JiraProjectSummary.tsx
-#: src/jira/project/jira-project-config.js
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
@@ -4293,15 +4255,9 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: src/jira/issue/IssueCreateDialog.tsx
-#: src/jira/issue/JiraIssueSummary.tsx
-msgid "Parent request"
-msgstr ""
-
 #: src/auth/SigninForm.tsx
 #: src/auth/SignupForm.tsx
 #: src/azure/sql/AzureSQLServerSummary.tsx
-#: src/jira/JiraForm.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -4717,7 +4673,6 @@ msgid "Previous"
 msgstr ""
 
 #: src/invoices/list/InvoicesList.tsx
-#: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
@@ -4794,9 +4749,6 @@ msgstr ""
 
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/PriorityGroup.tsx
-#: src/jira/issue/IssueCreateDialog.tsx
-#: src/jira/issue/JiraIssueSummary.tsx
-#: src/jira/issue/JiraIssuesList.tsx
 msgid "Priority"
 msgstr ""
 
@@ -4825,8 +4777,6 @@ msgstr ""
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
-#: src/jira/issue/JiraIssueSummary.tsx
-#: src/jira/project/jira-project-checkout-summary.html
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
@@ -4922,7 +4872,6 @@ msgstr ""
 msgid "Project roles"
 msgstr ""
 
-#: src/jira/project/JiraProjectSummary.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "Project type"
@@ -5263,11 +5212,6 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
-#: src/jira/issue/IssueCreateDialog.tsx
-#: src/jira/issue/JiraIssueSummary.tsx
-msgid "Related resource"
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
 msgid "Release floating IPs"
@@ -5438,7 +5382,6 @@ msgstr ""
 #: src/issues/create/IssueCreateForm.tsx
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/create/TypeGroup.tsx
-#: src/jira/issue/IssueCreateDialog.tsx
 msgid "Request type"
 msgstr ""
 
@@ -5489,10 +5432,6 @@ msgstr ""
 
 #: src/issues/IssueDetails.tsx
 msgid "Resolution"
-msgstr ""
-
-#: src/jira/issue/JiraIssuesList.tsx
-msgid "Resolution SLA"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
@@ -6115,14 +6054,6 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
-#: src/jira/project/jira-project-checkout-summary.html
-msgid "Service desk project name"
-msgstr ""
-
-#: src/jira/project/jira-project-checkout-summary.html
-msgid "Service desk project type"
-msgstr ""
-
 #: src/invoices/details/InvoiceItemDetails.tsx
 #: src/marketplace/details/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
@@ -6442,8 +6373,6 @@ msgstr ""
 #: src/invitations/InvitationsList.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
-#: src/jira/issue/JiraIssueSummary.tsx
-#: src/jira/issue/JiraIssuesList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -6559,7 +6488,6 @@ msgid "Sum"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
-#: src/jira/issue/IssueCreateDialog.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingTabs.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
@@ -6934,7 +6862,6 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/jira/project/jira-project-config.js
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/project/ProjectNameField.tsx
@@ -6965,10 +6892,6 @@ msgstr ""
 msgid "Time slot"
 msgstr ""
 
-#: src/jira/issue/JiraIssuesList.tsx
-msgid "Time to resolution"
-msgstr ""
-
 #: src/booking/components/CalendarSettings.tsx
 msgid "Time zone"
 msgstr ""
@@ -6989,8 +6912,6 @@ msgstr ""
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/SummaryGroup.tsx
 #: src/issues/list/IssuesList.tsx
-#: src/jira/issue/JiraIssueSummary.tsx
-#: src/jira/issue/JiraIssuesList.tsx
 #: src/marketplace/referral/ReferralsList.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Title"
@@ -7084,7 +7005,6 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
-#: src/jira/project/jira-project-config.js
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -8009,7 +7929,6 @@ msgstr ""
 #: src/auth/SignupForm.tsx
 #: src/freeipa/freeipa-account-create.html
 #: src/freeipa/freeipa-account-edit.html
-#: src/jira/JiraForm.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -8652,10 +8571,6 @@ msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "referrals"
-msgstr ""
-
-#: src/jira/issue/JiraIssuesList.tsx
-msgid "requests"
 msgstr ""
 
 #: src/resource/support/SharedProviderResources.tsx
