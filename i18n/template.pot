@@ -656,7 +656,7 @@ msgstr ""
 msgid "Audit logs"
 msgstr ""
 
-#: src/auth/valimo/auth-valimo-dialog.html
+#: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Authenticate using Mobile ID"
 msgstr ""
 
@@ -664,7 +664,7 @@ msgstr ""
 msgid "Authentication events"
 msgstr ""
 
-#: src/auth/valimo/auth-valimo-dialog.js
+#: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
@@ -903,7 +903,6 @@ msgstr ""
 msgid "Caller"
 msgstr ""
 
-#: src/auth/valimo/auth-valimo-dialog.html
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/add-team-member.html
 #: src/form/AppstoreListDialog.tsx
@@ -991,7 +990,7 @@ msgstr ""
 msgid "Certifications"
 msgstr ""
 
-#: src/auth/valimo/auth-valimo-dialog.html
+#: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Challenge code"
 msgstr ""
 
@@ -3413,7 +3412,7 @@ msgstr ""
 msgid "Minimum booking time slot duration."
 msgstr ""
 
-#: src/auth/valimo/auth-valimo-dialog.html
+#: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Mobile phone number"
 msgstr ""
 
@@ -6206,7 +6205,7 @@ msgstr ""
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr ""
 
-#: src/auth/valimo/auth-valimo-dialog.html
+#: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Sign in"
 msgstr ""
 
@@ -7068,7 +7067,7 @@ msgstr ""
 msgid "Unable to approve order."
 msgstr ""
 
-#: src/auth/valimo/auth-valimo-dialog.js
+#: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Unable to authenticate using Mobile ID."
 msgstr ""
 
@@ -7583,7 +7582,7 @@ msgstr ""
 msgid "Unconfirmed"
 msgstr ""
 
-#: src/auth/valimo/auth-valimo-dialog.js
+#: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Unexpected exception happened during login process."
 msgstr ""
 
