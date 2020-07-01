@@ -1,11 +1,10 @@
 import { post } from '@waldur/core/api';
-import { $q } from '@waldur/core/services';
 
 const invitationStorageToken = 'ncInvitationToken';
 
 class InvitationServiceClass {
   createInvitation(payload) {
-    return $q.when(post('/user-invitations/', payload));
+    return post('/user-invitations/', payload);
   }
 
   check(invitation_uuid) {
