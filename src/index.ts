@@ -20,7 +20,6 @@ import i18nModule from './i18n/module';
 import invitationsModule from './invitations/module';
 import './invoices/module';
 import issuesModule from './issues/module';
-import jiraModule from './jira/module';
 import rootModule from './module';
 import navigationModule from './navigation/module';
 import offeringsModule from './offering/module';
@@ -82,7 +81,6 @@ configModule(appModule);
 freeipaModule(appModule);
 slurmModule();
 storeModule(appModule);
-jiraModule(appModule);
 workspaceModule(appModule);
 rancherModule();
 
