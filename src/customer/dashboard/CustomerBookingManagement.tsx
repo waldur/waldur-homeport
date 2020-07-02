@@ -19,7 +19,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 const getCalendarEvents = (offerings: Offering[]) => {
   const bookedEvents = [];
-  offerings.map((item) => {
+  offerings.forEach((item) => {
     const schedules = [];
     item.attributes?.schedules.forEach((event) => {
       schedules.push({
