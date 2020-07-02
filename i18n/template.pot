@@ -450,14 +450,6 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: src/project/project-policies.js
-msgid "An error occurred during policy update."
-msgstr ""
-
-#: src/customer/details/customer-policies.js
-msgid "An error occurred on policies update."
-msgstr ""
-
 #: src/project/effects.ts
 msgid "An error occurred on project removal."
 msgstr ""
@@ -1140,7 +1132,6 @@ msgid "Code should consist of latin symbols or numbers."
 msgstr ""
 
 #: src/customer/details/CustomerAccordion.tsx
-#: src/customer/details/customer-policies.html
 msgid "Collapse"
 msgstr ""
 
@@ -1295,9 +1286,7 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: src/customer/details/customer-threshold.html
 #: src/project/ProjectCounters.tsx
-#: src/project/project-policies.html
 msgid "Cost threshold"
 msgstr ""
 
@@ -1818,11 +1807,6 @@ msgstr ""
 msgid "Disable profile"
 msgstr ""
 
-#: src/customer/details/customer-threshold.html
-#: src/project/project-policies.html
-msgid "Disable provisioning when threshold is reached."
-msgstr ""
-
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
@@ -2095,19 +2079,6 @@ msgstr ""
 msgid "Estimated cost"
 msgstr ""
 
-#: src/customer/details/customer-threshold.html
-msgid "Estimated cost exceeds threshold"
-msgstr ""
-
-#: src/project/project-policies.html
-msgid "Estimated cost exceeds threshold."
-msgstr ""
-
-#: src/customer/details/customer-threshold.html
-#: src/project/project-policies.html
-msgid "Estimated cost for current month"
-msgstr ""
-
 #: src/invoices/list/EstimatedCost.tsx
 msgid "Estimated cost for the current month: {cost}"
 msgstr ""
@@ -2206,7 +2177,6 @@ msgid "Existing quota usage: {usage}"
 msgstr ""
 
 #: src/customer/details/CustomerAccordion.tsx
-#: src/customer/details/customer-policies.html
 msgid "Expand"
 msgstr ""
 
@@ -2413,10 +2383,6 @@ msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "FreeIPA account needs to be set up."
-msgstr ""
-
-#: src/freeipa/freeipa-quota.html
-msgid "FreeIPA group quota"
 msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
@@ -3400,10 +3366,6 @@ msgstr ""
 msgid "Minimal valid value is"
 msgstr ""
 
-#: src/customer/details/customer-threshold.html
-msgid "Minimal valid value is 0"
-msgstr ""
-
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Minimal value"
 msgstr ""
@@ -4154,10 +4116,6 @@ msgstr ""
 msgid "Organization owner role expires on"
 msgstr ""
 
-#: src/customer/details/customer-policies.js
-msgid "Organization policies have been updated."
-msgstr ""
-
 #: src/customer/create/WizardFormSecondPage.tsx
 msgid "Organization registration code"
 msgstr ""
@@ -4628,11 +4586,6 @@ msgstr ""
 msgid "Pods"
 msgstr ""
 
-#: src/customer/details/customer-policies.html
-#: src/project/ProjectDetailsDialog.tsx
-msgid "Policies"
-msgstr ""
-
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 msgid "Port"
@@ -4857,10 +4810,6 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
-#: src/project/project-policies.js
-msgid "Project policies have been updated."
-msgstr ""
-
 #: src/project/ProjectRemoveDialog.tsx
 msgid "Project removal"
 msgstr ""
@@ -4937,10 +4886,6 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
-msgstr ""
-
-#: src/project/project-policies.html
-msgid "Provider certification required by this project"
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
@@ -5414,10 +5359,6 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Required"
-msgstr ""
-
-#: src/project/project-policies.html
-msgid "Required certifications"
 msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
@@ -5907,7 +5848,6 @@ msgid "Select category..."
 msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
-#: src/project/project-policies.html
 msgid "Select certifications"
 msgstr ""
 
@@ -6107,10 +6047,6 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
 msgid "Service type"
-msgstr ""
-
-#: src/freeipa/freeipa-quota.html
-msgid "Set limit"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/module.ts
@@ -7624,10 +7560,6 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: src/freeipa/freeipa-quota.html
-msgid "Unlimited"
-msgstr ""
-
 #: src/rancher/node/actions/UnlinkAction.ts
 msgid "Unlink instance"
 msgstr ""
@@ -7637,7 +7569,6 @@ msgid "Unpaid"
 msgstr ""
 
 #: src/customer/details/CustomerEditDetailsForm.tsx
-#: src/customer/details/customer-policies.html
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
@@ -7671,10 +7602,6 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Update plan for an existing resource"
-msgstr ""
-
-#: src/project/project-policies.html
-msgid "Update policies"
 msgstr ""
 
 #: src/user/support/UserEditForm.tsx
@@ -7732,11 +7659,6 @@ msgstr ""
 
 #: src/customer/details/CustomerEditDetailsForm.tsx
 msgid "Upload new"
-msgstr ""
-
-#: src/customer/details/customer-threshold.html
-#: src/project/project-policies.html
-msgid "Upper bound of monthly resource cost provisioned from shared providers."
 msgstr ""
 
 #: src/resource/summary/VirtualMachineSummary.tsx
