@@ -6,6 +6,7 @@ import useAsync from 'react-use/lib/useAsync';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
+import { CustomerBookingManagement } from '@waldur/customer/dashboard/CustomerBookingManagement';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
@@ -64,6 +65,7 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => {
         {isFeatureVisible(FEATURE) && (
           <CustomerChecklistOverview customer={props.customer} />
         )}
+        <CustomerBookingManagement />
         <Panel title={translate('Resources')}>
           <CustomerResourcesList />
         </Panel>

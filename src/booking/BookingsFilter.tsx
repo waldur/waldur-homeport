@@ -8,7 +8,7 @@ import {
 } from '@waldur/booking/BookingStateFilter';
 
 const PureBookingsFilter = () => (
-  <Row>
+  <Row style={{ margin: '0' }}>
     <BookingStateFilter />
   </Row>
 );

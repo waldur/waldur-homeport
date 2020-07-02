@@ -15,7 +15,8 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 interface BookingsList {
-  offeringUuid: string;
+  offeringUuid?: string;
+  providerUuid?: string;
 }
 
 interface DetailedInfo {
@@ -94,8 +95,14 @@ const TableComponent = (props) => {
 
 const mapPropsToFilter = (props) => {
   const filter: Record<string, string | boolean> = {
-    offering_uuid: props.offeringUuid,
+    offering_type: 'Marketplace.Booking',
   };
+  if (props.offeringUuid) {
+    filter.offering_uuid = props.offeringUuid;
+  }
+  if (props.providerUuid) {
+    filter.provider_uuid = props.providerUuid;
+  }
   if (props.filter) {
     if (props.filter.state) {
       filter.state = props.filter.state.map((option) => option.value);
