@@ -6020,7 +6020,7 @@ msgid "Select user..."
 msgstr ""
 
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
-#: src/navigation/workspace/select-workspace-toggle.html
+#: src/navigation/workspace/SelectWorkspaceToggle.tsx
 msgid "Select workspace"
 msgstr ""
 
@@ -8268,10 +8268,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
 msgid "You do not have any resources yet."
-msgstr ""
-
-#: src/navigation/workspace/select-workspace-toggle.js
-msgid "You don't have any organization yet."
 msgstr ""
 
 #: src/project/ProjectCreateButton.tsx

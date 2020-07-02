@@ -12,9 +12,9 @@ interface ActionButtonProps {
   tooltip?: string;
 }
 
-export const wrapTooltip = (label, children) =>
+export const wrapTooltip = (label, children, rest?) =>
   label ? (
-    <Tooltip label={label} id="button-tooltip">
+    <Tooltip label={label} id="button-tooltip" {...rest}>
       {children}
     </Tooltip>
   ) : (
