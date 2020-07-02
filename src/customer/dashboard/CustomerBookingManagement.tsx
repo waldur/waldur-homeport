@@ -21,7 +21,7 @@ const getCalendarEvents = (offerings: Offering[]) => {
   const bookedEvents = [];
   offerings.map((item) => {
     const schedules = [];
-    item.attributes.schedules.forEach((event) => {
+    item.attributes?.schedules.forEach((event) => {
       schedules.push({
         ...event,
         state: item.state,
@@ -44,6 +44,7 @@ async function loadBookingOfferings(customerUuid: string) {
     params: {
       provider_uuid: customerUuid,
       type: 'Marketplace.Booking',
+      state: 'Active',
     },
   });
   const calendarEvents = getCalendarEvents(offerings);
