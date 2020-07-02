@@ -1585,6 +1585,7 @@ msgstr ""
 msgid "Datastore"
 msgstr ""
 
+#: src/booking/BookingsList.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx

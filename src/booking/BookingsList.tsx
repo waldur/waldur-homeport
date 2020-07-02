@@ -6,9 +6,9 @@ import { getFormValues } from 'redux-form';
 
 import { BookingActions } from '@waldur/booking/BookingActions';
 import { BookingStateField } from '@waldur/booking/BookingStateField';
-import { bookingDataTemplate } from '@waldur/booking/components/utils';
 import { TABLE_NAME } from '@waldur/booking/constants';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
+import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, translate } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -29,24 +29,32 @@ interface DetailedInfo {
   };
 }
 
+const wrapScheduleTitleTooltip = (label, children) =>
+  label ? (
+    <Tooltip label={label} id="schedule-title-label">
+      {children}
+    </Tooltip>
+  ) : (
+    children
+  );
+
 const ExpandableRow = ({ row }: DetailedInfo) => (
   <div className="container-fluid">
     <h3>{translate('Schedules')}:</h3>
-    {row.attributes.schedules.map(({ end, start, title, allDay }, index) => (
-      <div className="form-horizontal" key={index}>
-        {bookingDataTemplate({
-          Title: title,
-          'All day': allDay ? 'Yes' : 'No',
-          Start: formatShortDateTime(start),
-          End: formatShortDateTime(end),
-          State:
-            row.state === 'Creating'
-              ? 'Waiting for confirmation...'
-              : row.state,
-        })}
+    <label>{translate('Date')}</label>{' '}
+    {row.attributes.schedules.map((schedule, index) => (
+      <React.Fragment key={index}>
+        {wrapScheduleTitleTooltip(
+          schedule.title,
+          <>
+            {formatShortDateTime(schedule.start)}
+            {' - '}
+            {formatShortDateTime(schedule.end)}
+          </>,
+        )}
         {row.attributes.schedules.length > 1 &&
-          row.attributes.schedules.length !== index + 1 && <hr />}
-      </div>
+          row.attributes.schedules.length !== index + 1 && <>{'; '}</>}
+      </React.Fragment>
     ))}
   </div>
 );
