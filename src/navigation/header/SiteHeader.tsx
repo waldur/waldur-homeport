@@ -20,7 +20,7 @@ export const SiteHeader = () => {
           </div>
         )}
         <ul className="nav navbar-top-links pull-right">
-          {UsersService.isCurrentUserValid() && (
+          {authService.isAuthenticated() && UsersService.isCurrentUserValid() && (
             <li>
               <a onClick={goBack}>
                 <i className="fa fa-arrow-left" /> {translate('Back')}
