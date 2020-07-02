@@ -840,6 +840,10 @@ msgstr ""
 msgid "Booking has been rejected."
 msgstr ""
 
+#: src/customer/dashboard/CustomerBookingManagement.tsx
+msgid "Booking management"
+msgstr ""
+
 #: src/booking/BookingsList.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 msgid "Bookings"
@@ -6785,6 +6789,10 @@ msgstr ""
 msgid "There are no events for this resource."
 msgstr ""
 
+#: src/customer/dashboard/CustomerBookingManagement.tsx
+msgid "There are no events."
+msgstr ""
+
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 msgid "There are no matching checklists."
 msgstr ""
@@ -7235,6 +7243,10 @@ msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to load application template details."
+msgstr ""
+
+#: src/customer/dashboard/CustomerBookingManagement.tsx
+msgid "Unable to load booking offerings."
 msgstr ""
 
 #: src/marketplace/category/filters/AttributeFilterList.tsx
