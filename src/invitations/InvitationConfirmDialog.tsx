@@ -41,7 +41,7 @@ export const InvitationConfirmDialog = ({ resolve: { token, deferred } }) => {
   const asyncResult = useAsync<{ email?: string }>(() =>
     InvitationService.check(token).then((response) => response.data),
   );
-  const invitation = asyncResult?.value;
+  const invitation = asyncResult.value;
 
   React.useEffect(() => {
     if (asyncResult.error) {

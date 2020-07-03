@@ -78,7 +78,7 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(
         );
         setChallengeCode(message);
         const authResult = await pollAuthResult(uuid);
-        await parseAuthResult(authResult);
+        parseAuthResult(authResult);
       } catch (error) {
         dispatch(
           showErrorResponse(
