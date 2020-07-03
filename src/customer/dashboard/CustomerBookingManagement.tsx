@@ -42,7 +42,7 @@ const getCalendarEvents = (offerings: Offering[]) => {
 async function loadBookingOfferings(customerUuid: string) {
   const offerings: Offering[] = await getAllOfferings({
     params: {
-      provider_uuid: customerUuid,
+      customer_uuid: customerUuid,
       type: 'Marketplace.Booking',
       state: 'Active',
     },
@@ -67,7 +67,7 @@ export const CustomerBookingManagement = () => {
     return <h3>{translate('Unable to load booking offerings.')}</h3>;
   }
 
-  return value.offerings.length ? (
+  return customer.is_service_provider && value.offerings.length ? (
     <Panel title={translate('Booking management')}>
       {value.calendarEvents.length ? (
         <Row style={{ marginBottom: '30px' }}>
