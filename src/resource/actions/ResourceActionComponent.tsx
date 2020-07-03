@@ -22,7 +22,9 @@ const ActionItem = ({ action, actionKey, onSelect }) => (
     className={classNames({
       remove: action.destructive,
     })}
-    disabled={!action.enabled || action.pending}
+    // Workaround for rendering tooltips for disabled dropdown menu items.
+    // See also: https://stackoverflow.com/questions/57349166/
+    style={(!action.enabled || action.pending) && { opacity: 0.3 }}
     onSelect={() => onSelect(actionKey, action)}
   >
     {action.reason ? (

@@ -44,7 +44,10 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
 
   React.useEffect(loadActionsIfOpen, [open]);
 
-  const triggerAction = (name: string, action: object) => {
+  const triggerAction = (name: string, action: any) => {
+    if (!action.enabled || action.pending) {
+      return;
+    }
     const controller = props.controller || {
       handleActionException: () => undefined,
       reInitResource: () => undefined,

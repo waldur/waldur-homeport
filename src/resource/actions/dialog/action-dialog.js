@@ -22,8 +22,10 @@ function ActionDialogController($scope, $q, $state, $rootScope, ncUtilsFlash) {
           $scope.form,
           $scope.action,
         );
-      } else {
+      } else if ($scope.action.fields) {
         promise = getSelectList($scope.action.fields);
+      } else {
+        promise = $q.when(true);
       }
       promise
         .then(function () {
