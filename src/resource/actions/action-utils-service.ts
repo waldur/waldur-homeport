@@ -6,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { ActionConfigurationRegistry } from './action-configuration';
 
@@ -68,7 +69,7 @@ const actionHasToBeAdded = (action, model, user) => {
     function () {
       return true;
     };
-  if (!action.isVisible(model, UsersService.currentUser)) {
+  if (!action.isVisible(model, getUser(store.getState()))) {
     return false;
   }
 

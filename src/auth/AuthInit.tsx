@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
 import { UsersService } from '@waldur/user/UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
 
 export const AuthInit = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ export const AuthInit = () => {
     async (user) => {
       try {
         const response = await UsersService.update(user);
-        UsersService.setCurrentUser(response.data);
+        dispatch(setCurrentUser(response.data));
         router.stateService.go('profile.details');
         dispatch(showSuccess(translate('User has been updated.')));
       } catch (error) {

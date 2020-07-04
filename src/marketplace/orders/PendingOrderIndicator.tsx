@@ -16,7 +16,11 @@ import {
   isOwnerOrStaff,
   getWorkspace,
 } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import {
+  Customer,
+  ORGANIZATION_WORKSPACE,
+  PROJECT_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { OrderDetailsLink } from './OrderDetailsLink';
 import './PendingOrderIndicator.scss';
@@ -39,14 +43,19 @@ export class PurePendingOrderIndicator extends React.Component<
     if (!customer) {
       return;
     }
-    if (workspace === 'organization' || workspace === 'project') {
+    if (
+      workspace === ORGANIZATION_WORKSPACE ||
+      workspace === PROJECT_WORKSPACE
+    ) {
       this.fetchData();
     }
   }
 
   shouldComponentUpdate(props) {
     const { workspace } = props;
-    return workspace === 'organization' || workspace === 'project';
+    return (
+      workspace === ORGANIZATION_WORKSPACE || workspace === PROJECT_WORKSPACE
+    );
   }
 
   componentDidUpdate(prevProps) {
@@ -174,7 +183,7 @@ const PendingOrderDropdownItem = (props) => (
 const ShowAllLink = (props) => {
   const { workspace, handleToggleOpen } = props;
   switch (workspace) {
-    case 'organization':
+    case ORGANIZATION_WORKSPACE:
       return (
         <Link
           state="marketplace-my-order-items"
@@ -184,7 +193,7 @@ const ShowAllLink = (props) => {
           <strong>{translate('Show all')}</strong>
         </Link>
       );
-    case 'project':
+    case PROJECT_WORKSPACE:
       return (
         <Link
           state="marketplace-order-list"

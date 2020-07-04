@@ -21,7 +21,8 @@
 import Axios from 'axios';
 
 import { translate } from '@waldur/i18n';
-import { UsersService } from '@waldur/user/UsersService';
+import store from '@waldur/store/store';
+import { setCurrentUser } from '@waldur/workspace/actions';
 
 export class AuthService {
   // @ngInject
@@ -77,7 +78,7 @@ export class AuthService {
     this.setAuthHeader(this.user.token);
     this.$auth.setToken(this.user.token);
     this.user.isAuthenticated = true;
-    this.$rootScope.$broadcast('authService:signin');
+    store.dispatch(setCurrentUser(this.user));
   }
 
   redirectOnSuccess() {
@@ -119,11 +120,10 @@ export class AuthService {
   }
 
   localLogout(params) {
-    this.$rootScope.$broadcast('logoutStart');
+    store.dispatch(setCurrentUser(undefined));
     delete this.$http.defaults.headers.common['Authorization'];
     delete Axios.defaults.headers.common['Authorization'];
     this.user = { isAuthenticated: false };
-    UsersService.currentUser = null;
     this.$auth.logout();
     this.$rootScope.$broadcast('abortRequests');
     this.$state.go('login', params);

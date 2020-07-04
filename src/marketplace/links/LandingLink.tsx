@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { getWorkspace } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
+import { OuterState, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 const PureLandingLink = (props) => (
   <Link state={props.state}>{props.children}</Link>
@@ -11,7 +11,7 @@ const PureLandingLink = (props) => (
 
 const connector = connect<{ state: string }, {}, {}, OuterState>((state) => {
   const workspace = getWorkspace(state);
-  if (workspace === 'organization') {
+  if (workspace === ORGANIZATION_WORKSPACE) {
     return {
       state: 'marketplace-landing-customer',
     };

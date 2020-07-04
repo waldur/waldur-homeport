@@ -1,16 +1,17 @@
 import { getById } from '@waldur/core/api';
+import { $q, $state } from '@waldur/core/services';
 import { CustomersService } from '@waldur/customer/services/CustomersService';
-import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 import store from '@waldur/store/store';
 import {
   setCurrentCustomer,
   setCurrentProject,
+  setCurrentWorkspace,
 } from '@waldur/workspace/actions';
+import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 import { ResourcesService } from './ResourcesService';
 
-// @ngInject
-export function loadResource($stateParams, $q, $state, WorkspaceService) {
+export function loadResource($stateParams) {
   if (!$stateParams.uuid) {
     return $q.reject();
   }
@@ -25,15 +26,8 @@ export function loadResource($stateParams, $q, $state, WorkspaceService) {
       return CustomersService.get(project.customer_uuid).then((customer) => {
         store.dispatch(setCurrentCustomer(customer));
         store.dispatch(setCurrentProject(project));
+        store.dispatch(setCurrentWorkspace(PROJECT_WORKSPACE));
         return { customer, project };
-      });
-    })
-    .then(({ customer, project }) => {
-      WorkspaceService.setWorkspace({
-        customer: customer,
-        project: project,
-        hasCustomer: true,
-        workspace: WOKSPACE_NAMES.project,
       });
     })
     .catch((response) => {
@@ -42,3 +36,5 @@ export function loadResource($stateParams, $q, $state, WorkspaceService) {
       }
     });
 }
+
+loadResource.$inject = ['$stateParams'];

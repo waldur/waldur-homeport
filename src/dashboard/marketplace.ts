@@ -2,7 +2,7 @@ import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getCategoryUsages } from '@waldur/marketplace/common/api';
 import { CategoryComponentUsage } from '@waldur/marketplace/types';
-import { WorkspaceType } from '@waldur/workspace/types';
+import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { Category } from './CategoryResources';
 import { getResourceChartOptions } from './chart';
@@ -158,7 +158,7 @@ const formatData = (
             title: translate('Add resource'),
             onClick: () => {
               const state =
-                workspace === 'organization'
+                workspace === ORGANIZATION_WORKSPACE
                   ? 'marketplace-category-customer'
                   : 'marketplace-category';
               $state.go(state, { category_uuid: category.uuid });

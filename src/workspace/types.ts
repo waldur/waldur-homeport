@@ -94,7 +94,19 @@ export interface Project {
   customer_uuid?: string;
 }
 
-export type WorkspaceType = 'user' | 'project' | 'organization' | 'support';
+export const ORGANIZATION_WORKSPACE = 'WORKSPACE/ORGANIZATION';
+
+export const SUPPORT_WORKSPACE = 'WORKSPACE/SUPPORT';
+
+export const PROJECT_WORKSPACE = 'WORKSPACE/PROJECT';
+
+export const USER_WORKSPACE = 'WORKSPACE/USER';
+
+export type WorkspaceType =
+  | typeof ORGANIZATION_WORKSPACE
+  | typeof SUPPORT_WORKSPACE
+  | typeof PROJECT_WORKSPACE
+  | typeof USER_WORKSPACE;
 
 export interface Workspace {
   user: User;

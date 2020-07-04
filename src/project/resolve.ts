@@ -1,16 +1,17 @@
 import { getById } from '@waldur/core/api';
+import { $state } from '@waldur/core/services';
 import { CustomersService } from '@waldur/customer/services/CustomersService';
 import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
-import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import {
   setCurrentCustomer,
   setCurrentProject,
+  setCurrentWorkspace,
 } from '@waldur/workspace/actions';
+import { PROJECT_WORKSPACE, Project } from '@waldur/workspace/types';
 
-// @ngInject
-export function loadProject($state, $stateParams, WorkspaceService) {
+export function loadProject($stateParams) {
   if (!$stateParams.uuid) {
     return $state.go('errorPage.notFound');
   }
@@ -18,7 +19,7 @@ export function loadProject($state, $stateParams, WorkspaceService) {
   async function loadData() {
     try {
       const user = await UsersService.getCurrentUser();
-      const project = await getById('/projects/', $stateParams.uuid);
+      const project = await getById<Project>('/projects/', $stateParams.uuid);
       const customer = await CustomersService.get(project.customer_uuid);
       const permissions = await ProjectPermissionsService.getList({
         user: user.uuid,
@@ -27,12 +28,7 @@ export function loadProject($state, $stateParams, WorkspaceService) {
       project.permissions = permissions;
       store.dispatch(setCurrentCustomer(customer));
       store.dispatch(setCurrentProject(project));
-      WorkspaceService.setWorkspace({
-        customer,
-        project,
-        hasCustomer: true,
-        workspace: WOKSPACE_NAMES.project,
-      });
+      store.dispatch(setCurrentWorkspace(PROJECT_WORKSPACE));
     } catch (response) {
       if (response.status === 404) {
         $state.go('errorPage.notFound');
@@ -41,3 +37,5 @@ export function loadProject($state, $stateParams, WorkspaceService) {
   }
   return loadData();
 }
+
+loadProject.$inject = ['$stateParams'];

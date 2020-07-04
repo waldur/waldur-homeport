@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
 import { getWorkspace, getCustomer } from '@waldur/workspace/selectors';
-import { Project, OuterState } from '@waldur/workspace/types';
+import {
+  Project,
+  OuterState,
+  ORGANIZATION_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { FormGroup } from '../offerings/FormGroup';
 
@@ -14,7 +18,7 @@ const connector = connect<{ projects?: Project[] }, {}, {}, OuterState>(
   (state) => {
     const workspace = getWorkspace(state);
     const customer = getCustomer(state);
-    if (workspace === 'organization') {
+    if (workspace === ORGANIZATION_WORKSPACE) {
       return {
         projects: customer.projects,
       };

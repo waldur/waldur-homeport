@@ -1,4 +1,5 @@
 import { StateDeclaration } from '@waldur/core/types';
+import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 import { ProjectDashboardContainer } from './ProjectDashboardContainer';
 import { ProjectEventsView } from './ProjectEventsList';
@@ -15,7 +16,7 @@ export const states: StateDeclaration[] = [
     component: ProjectWorkspace,
     data: {
       auth: true,
-      workspace: 'project',
+      workspace: PROJECT_WORKSPACE,
     },
     resolve: {
       project: loadProject,

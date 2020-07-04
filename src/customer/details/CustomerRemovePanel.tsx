@@ -80,12 +80,12 @@ export const CustomerRemovePanel = () => {
 
     const confirmDelete = confirm(translate('Confirm deletion?'));
     if (confirmDelete) {
-      const stateUtilsService = ngInjector.get('stateUtilsService');
+      const StateUtilsService = ngInjector.get('StateUtilsService');
       store.dispatch(setCurrentCustomer(null));
       deleteById('/customers/', customer.uuid).then(
         () => {
           router.stateService.go('profile.details').then(() => {
-            stateUtilsService.clear();
+            StateUtilsService.clear();
           });
         },
         () => store.dispatch(setCurrentCustomer(customer)),

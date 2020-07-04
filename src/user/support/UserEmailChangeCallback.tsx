@@ -7,8 +7,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
-
-import { UsersService } from '../UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
 
 function delay(ms) {
   return new Promise((resolve) => {
@@ -47,13 +46,13 @@ export const UserEmailChangeCallback = () => {
       }
 
       if (currentUser) {
-        UsersService.setCurrentUser(currentUser);
+        dispatch(setCurrentUser(currentUser));
         await delay(1000);
       }
       dispatch(stateGo('profile.manage'));
     }
     load();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="middle-box text-center">

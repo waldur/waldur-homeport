@@ -4,8 +4,7 @@ import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewConta
 import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';
 import { SankeyDiagramContainer } from '@waldur/providers/support/SankeyDiagramContainer';
 import { UserListView } from '@waldur/user/support/UserListView';
-
-import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
 import { IssueDetailsContainer } from './IssueDetailsContainer';
 import { checkPermission } from './utils';
@@ -21,7 +20,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     data: {
       auth: true,
-      workspace: WOKSPACE_NAMES.support,
+      workspace: SUPPORT_WORKSPACE,
       pageClass: 'gray-bg',
     },
   },

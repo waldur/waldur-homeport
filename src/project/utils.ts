@@ -10,7 +10,13 @@ import {
   isOwnerOrStaff,
   getProject,
 } from '@waldur/workspace/selectors';
-import { Project, OuterState, Customer, User } from '@waldur/workspace/types';
+import {
+  Project,
+  OuterState,
+  Customer,
+  User,
+  PROJECT_WORKSPACE,
+} from '@waldur/workspace/types';
 
 const getDefaultItems = (project) => [
   {
@@ -98,5 +104,5 @@ export const getProjectCounters = (project: Project, fields: string[]) =>
   );
 
 export const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
-  return SidebarExtensionService.getItems('project');
+  return SidebarExtensionService.getItems(PROJECT_WORKSPACE);
 };
