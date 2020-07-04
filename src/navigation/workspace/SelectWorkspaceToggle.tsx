@@ -13,22 +13,30 @@ import {
   getCustomer,
   getProject,
 } from '@waldur/workspace/selectors';
+import {
+  PROJECT_WORKSPACE,
+  ORGANIZATION_WORKSPACE,
+  WorkspaceType,
+  USER_WORKSPACE,
+  SUPPORT_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import './SelectWorkspaceToggle.scss';
+
 import { SelectWorkspaceDialog } from './SelectWorkspaceDialog';
 
-const workspaceIconClasses = {
-  organization: 'fa-sitemap',
-  project: 'fa-bookmark',
-  user: 'fa-user',
-  support: 'fa-question-circle',
+const workspaceIconClasses: Record<WorkspaceType, string> = {
+  [ORGANIZATION_WORKSPACE]: 'fa-sitemap',
+  [PROJECT_WORKSPACE]: 'fa-bookmark',
+  [USER_WORKSPACE]: 'fa-user',
+  [SUPPORT_WORKSPACE]: 'fa-question-circle',
 };
 
-const workspaceButtonClasses = {
-  organization: 'primary',
-  project: 'success',
-  user: 'info',
-  support: 'warning',
+const workspaceButtonClasses: Record<WorkspaceType, string> = {
+  [ORGANIZATION_WORKSPACE]: 'primary',
+  [PROJECT_WORKSPACE]: 'success',
+  [USER_WORKSPACE]: 'info',
+  [SUPPORT_WORKSPACE]: 'warning',
 };
 
 const getIconClass = (workspace) => workspaceIconClasses[workspace];
@@ -44,9 +52,9 @@ const getOrganizationDisplayName = (isWide, organization) => {
 
 const getTitle = (isWide, workspace, customer, project) => {
   const customerName = customer && getOrganizationDisplayName(isWide, customer);
-  if (customer && workspace === 'organization') {
+  if (customer && workspace === ORGANIZATION_WORKSPACE) {
     return truncate(customerName);
-  } else if (project && workspace === 'project') {
+  } else if (project && workspace === PROJECT_WORKSPACE) {
     return `${truncate(customerName)} > ${truncate(project.name)}`;
   }
 };
@@ -56,9 +64,9 @@ const getTitleTooltip = (isWide, workspace, customer, project) => {
     return;
   }
   const customerName = customer && getOrganizationDisplayName(isWide, customer);
-  if (customer && workspace === 'organization') {
+  if (customer && workspace === ORGANIZATION_WORKSPACE) {
     return customerName;
-  } else if (project && workspace === 'project') {
+  } else if (project && workspace === PROJECT_WORKSPACE) {
     return `${customerName} > ${project.name}`;
   }
 };

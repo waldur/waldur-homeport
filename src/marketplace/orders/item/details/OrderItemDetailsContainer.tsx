@@ -4,7 +4,6 @@ import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useEffectOnce from 'react-use/lib/useEffectOnce';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
@@ -13,14 +12,15 @@ import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
+import store from '@waldur/store/store';
+import { getWorkspace } from '@waldur/workspace/selectors';
+import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { OrderItemDetails } from './OrderItemDetails';
 
 function getBreadcrumbs(orderItem: OrderItemDetailsType): BreadcrumbItem[] {
-  const WorkspaceService = ngInjector.get('WorkspaceService');
-
-  const data = WorkspaceService.getWorkspace();
-  if (data.workspace === 'organization') {
+  const workspace = getWorkspace(store.getState());
+  if (workspace === ORGANIZATION_WORKSPACE) {
     return [
       {
         label: translate('Organization workspace'),

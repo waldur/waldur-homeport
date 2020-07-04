@@ -4,6 +4,12 @@ import { filterItems } from '@waldur/navigation/sidebar/utils';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { isOwnerOrStaff } from '@waldur/workspace/selectors';
+import {
+  ORGANIZATION_WORKSPACE,
+  PROJECT_WORKSPACE,
+  SUPPORT_WORKSPACE,
+  USER_WORKSPACE,
+} from '@waldur/workspace/types';
 
 const getHelpdeskItems = () => [
   {
@@ -117,8 +123,7 @@ export default class IssueNavigationService {
     if (this.features.isVisible('support')) {
       return true;
     }
-    const user = UsersService.currentUser;
-    return user && (user.is_staff || user.is_support);
+    return isOwnerOrStaff(store.getState());
   }
 
   gotoDashboard() {
@@ -163,7 +168,7 @@ export default class IssueNavigationService {
         return items;
       })
       .then((items) =>
-        SidebarExtensionService.getItems('support').then((extra) => [
+        SidebarExtensionService.getItems(SUPPORT_WORKSPACE).then((extra) => [
           ...items,
           ...extra,
         ]),
@@ -198,14 +203,14 @@ export default class IssueNavigationService {
 
   getBackItemLabel() {
     const prevWorkspace = this.prevWorkspace;
-    if (prevWorkspace === 'project') {
+    if (prevWorkspace === PROJECT_WORKSPACE) {
       return translate('Back to project');
     } else if (
-      prevWorkspace === 'organization' &&
+      prevWorkspace === ORGANIZATION_WORKSPACE &&
       (isOwnerOrStaff(store.getState()) || this.currentUser.is_support)
     ) {
       return translate('Back to organization');
-    } else if (prevWorkspace === 'user') {
+    } else if (prevWorkspace === USER_WORKSPACE) {
       return translate('Back to personal dashboard');
     }
   }

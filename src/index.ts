@@ -21,7 +21,6 @@ import invitationsModule from './invitations/module';
 import './invoices/module';
 import issuesModule from './issues/module';
 import rootModule from './module';
-import navigationModule from './navigation/module';
 import offeringsModule from './offering/module';
 import openstackModule from './openstack/module';
 import priceModule from './price/module';
@@ -32,7 +31,6 @@ import registerRoutes from './routes';
 import slurmModule from './slurm/module';
 import storeModule from './store/module';
 import userModule from './user/module';
-import workspaceModule from './workspace/module';
 
 import './azure/module';
 import './booking/marketplace';
@@ -65,7 +63,6 @@ featuresModule(appModule);
 issuesModule(appModule);
 userModule(appModule);
 projectModule(appModule);
-navigationModule(appModule);
 resourceModule(appModule);
 authModule(appModule);
 invitationsModule(appModule);
@@ -81,7 +78,6 @@ configModule(appModule);
 freeipaModule(appModule);
 slurmModule();
 storeModule(appModule);
-workspaceModule(appModule);
 rancherModule();
 
 function requirePlugins(module) {

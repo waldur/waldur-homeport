@@ -1,6 +1,5 @@
 import { StateDeclaration } from '@waldur/core/types';
-
-import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+import { USER_WORKSPACE } from '@waldur/workspace/types';
 
 import { KeyCreateForm } from './keys/KeyCreateForm';
 import { UserEmailChangeCallback } from './support/UserEmailChangeCallback';
@@ -14,7 +13,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     data: {
       auth: true,
-      workspace: WOKSPACE_NAMES.user,
+      workspace: USER_WORKSPACE,
     },
     component: UserDetails,
   },
@@ -32,7 +31,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     data: {
       auth: true,
-      workspace: WOKSPACE_NAMES.user,
+      workspace: USER_WORKSPACE,
     },
     component: UserDetails,
     resolve: {
@@ -62,7 +61,7 @@ export const states: StateDeclaration[] = [
     component: UserDetails,
     data: {
       auth: true,
-      workspace: WOKSPACE_NAMES.user,
+      workspace: USER_WORKSPACE,
     },
   },
 

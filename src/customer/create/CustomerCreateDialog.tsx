@@ -8,6 +8,7 @@ import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 import { UsersService } from '@waldur/user/UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -76,7 +77,7 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
           });
         }
         dispatch(showSuccess(translate('Organization has been created.')));
-        UsersService.resetCurrentUser();
+        dispatch(setCurrentUser(undefined));
         await UsersService.getCurrentUser();
         router.stateService.go('organization.dashboard', {
           uuid: customer.uuid,

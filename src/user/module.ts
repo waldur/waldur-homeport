@@ -1,7 +1,7 @@
-import { stateUtilsService, attachStateUtils } from './utils';
+import { StateUtilsService, attachStateUtils } from './utils';
 import './events';
 
 export default (module) => {
-  module.service('stateUtilsService', stateUtilsService);
+  module.service('StateUtilsService', StateUtilsService);
   module.run(attachStateUtils);
 };

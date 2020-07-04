@@ -1,6 +1,5 @@
 import { StateDeclaration } from '@waldur/core/types';
-
-import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 import { loadResource } from './resolve';
 import { ResourceDetailsContainer } from './ResourceDetailsContainer';
@@ -21,7 +20,7 @@ export const states: StateDeclaration[] = [
     },
     data: {
       auth: true,
-      workspace: WOKSPACE_NAMES.project,
+      workspace: PROJECT_WORKSPACE,
       sidebarKey: 'marketplace-project-resources',
     },
   },

@@ -8,25 +8,29 @@ import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { filterItems } from '@waldur/navigation/sidebar/utils';
 import store from '@waldur/store/store';
 import { getUser, isOwnerOrStaff } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
+import {
+  OuterState,
+  ORGANIZATION_WORKSPACE,
+  PROJECT_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { getPrivateUserTabs, getPublicUserTabs } from './constants';
 
 function getNavItems(user) {
-  const stateUtilsService = ngInjector.get('stateUtilsService');
+  const StateUtilsService = ngInjector.get('StateUtilsService');
 
-  const prevWorkspace = stateUtilsService.getPrevWorkspace();
-  if (prevWorkspace === 'project') {
+  const prevWorkspace = StateUtilsService.getPrevWorkspace();
+  if (prevWorkspace === PROJECT_WORKSPACE) {
     return [
       {
         key: 'back',
         label: translate('Back to project'),
         icon: 'fa-arrow-left',
-        action: stateUtilsService.goBack,
+        action: StateUtilsService.goBack,
       },
     ];
   } else if (
-    prevWorkspace === 'organization' &&
+    prevWorkspace === ORGANIZATION_WORKSPACE &&
     (isOwnerOrStaff(store.getState()) || user.is_support)
   ) {
     return [
@@ -34,7 +38,7 @@ function getNavItems(user) {
         key: 'back',
         label: translate('Back to organization'),
         icon: 'fa-arrow-left',
-        action: stateUtilsService.goBack,
+        action: StateUtilsService.goBack,
       },
     ];
   }

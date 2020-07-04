@@ -1,29 +1,25 @@
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
+import {
+  setCurrentCustomer,
+  setCurrentProject,
+  setCurrentWorkspace,
+} from '@waldur/workspace/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
-
-import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
+import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { CustomersService } from './services/CustomersService';
 
 // @ngInject
-export function loadCustomer($q, $stateParams, $state, WorkspaceService) {
+export function loadCustomer($q, $stateParams, $state) {
   if (!$stateParams.uuid) {
     return $q.reject();
   }
   return CustomersService.get($stateParams.uuid)
     .then((customer) => {
       store.dispatch(setCurrentCustomer(customer));
-      return customer;
-    })
-    .then((customer) => {
-      WorkspaceService.setWorkspace({
-        customer: customer,
-        project: null,
-        hasCustomer: true,
-        workspace: WOKSPACE_NAMES.organization,
-      });
+      store.dispatch(setCurrentProject(null));
+      store.dispatch(setCurrentWorkspace(ORGANIZATION_WORKSPACE));
       return customer;
     })
     .catch((error) => {

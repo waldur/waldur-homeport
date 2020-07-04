@@ -6,7 +6,7 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { userUpdated } from '@waldur/workspace/actions';
+import { setCurrentUser } from '@waldur/workspace/actions';
 
 export const useEmailChange = (user) => {
   const [email, setEmail] = React.useState('');
@@ -30,8 +30,8 @@ export const useEmailChange = (user) => {
       ),
     );
     dispatch(closeModalDialog());
-    dispatch(userUpdated({ ...user, requested_email: email }));
-  }, [email]);
+    dispatch(setCurrentUser({ ...user, requested_email: email }));
+  }, [email, dispatch]);
 
   return { handleSubmit, submitting, email, setEmail };
 };

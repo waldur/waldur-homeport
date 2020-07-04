@@ -1,8 +1,8 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { PaymentProfileCreateContainer } from '@waldur/customer/payment-profiles/PaymentProfileCreateContainer';
 import { ProjectsList } from '@waldur/project/ProjectsList';
+import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-import { WOKSPACE_NAMES } from '../navigation/workspace/constants';
 import { ProjectCreateContainer } from '../project/ProjectCreateContainer';
 
 import { CustomerDashboardContainer } from './dashboard/CustomerDashboardContainer';
@@ -19,7 +19,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     data: {
       auth: true,
-      workspace: WOKSPACE_NAMES.organization,
+      workspace: ORGANIZATION_WORKSPACE,
     },
     template: '<customer-workspace></customer-workspace>',
     resolve: {
