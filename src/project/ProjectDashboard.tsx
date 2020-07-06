@@ -26,6 +26,9 @@ export const ProjectDashboard = (props: ProjectDashboardProps) => {
   if (!props.project) {
     return null;
   }
+  if (!props.user) {
+    return null;
+  }
   return (
     <>
       <DashboardHeader
