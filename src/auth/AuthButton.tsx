@@ -2,14 +2,14 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
+import { AuthService } from './AuthService';
+
 const authenticate = (provider: string) => {
-  const authService = ngInjector.get('authService');
-  return authService
-    .authenticate(provider)
-    .then((response) => authService.redirectOnSuccess(response));
+  return AuthService.authenticate(provider).then(() =>
+    AuthService.redirectOnSuccess(),
+  );
 };
 
 export interface AuthButtonProps {

@@ -2,9 +2,9 @@ import * as React from 'react';
 import { reduxForm, SubmissionError } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
+import { AuthService } from './AuthService';
 import { InputGroup } from './InputGroup';
 import { SubmitButton } from './SubmitButton';
 
@@ -14,7 +14,6 @@ interface FormData {
 }
 
 const signin = async (values: FormData) => {
-  const service = ngInjector.get('authService');
   // See also: https://github.com/facebook/react/issues/1159#issuecomment-506584346
   if (!values.password || !values.username) {
     throw new SubmissionError({
@@ -22,8 +21,8 @@ const signin = async (values: FormData) => {
     });
   }
   try {
-    await service.signin(values.username, values.password);
-    await service.redirectOnSuccess();
+    await AuthService.signin(values.username, values.password);
+    await AuthService.redirectOnSuccess();
   } catch (error) {
     throw new SubmissionError({ _error: format(error) });
   }

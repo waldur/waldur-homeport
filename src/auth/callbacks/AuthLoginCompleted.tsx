@@ -2,14 +2,15 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+
+import { AuthService } from '../AuthService';
 
 export const AuthLoginCompleted = () => {
   const router = useRouter();
   const { params } = useCurrentStateAndParams();
   React.useEffect(() => {
-    ngInjector.get('authService').loginSuccess({
+    AuthService.loginSuccess({
       data: { token: params.token, method: params.method },
     });
     router.stateService.go('profile.details');

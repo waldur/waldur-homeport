@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, SubmissionError } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/coreSaga';
 
+import { AuthService } from './AuthService';
 import { InputGroup } from './InputGroup';
 import { SubmitButton } from './SubmitButton';
 
@@ -24,7 +24,6 @@ export const SignupForm = reduxForm<FormData>({ form: 'SignupForm' })(
     const router = useRouter();
     const signup = React.useCallback(
       async (values: FormData) => {
-        const service = ngInjector.get('authService');
         // See also: https://github.com/facebook/react/issues/1159#issuecomment-506584346
         if (!values.password || !values.username || !values.email) {
           throw new SubmissionError({
@@ -32,7 +31,7 @@ export const SignupForm = reduxForm<FormData>({ form: 'SignupForm' })(
           });
         }
         try {
-          await service.signup(values);
+          await AuthService.signup(values);
           dispatch(
             showSuccess(
               translate(

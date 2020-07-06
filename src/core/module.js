@@ -1,3 +1,5 @@
+import { AuthService } from '@waldur/auth/AuthService';
+
 import ErrorMessageFormatter from './ErrorMessageFormatter';
 import loadingSpinner from './LoadingSpinner';
 import sentryModule from './sentry';
@@ -5,7 +7,7 @@ import injectServices from './services';
 import submitButton from './submit-button';
 
 // @ngInject
-function redirectToState($rootScope, $state, $injector) {
+function redirectToState($rootScope, $state) {
   $rootScope.$on('$stateChangeError', function (
     event,
     toState,
@@ -17,7 +19,7 @@ function redirectToState($rootScope, $state, $injector) {
     // Erred state is terminal, user should not be redirected from erred state to login
     // so that he would be able to read error message details
     if (error && error.detail && error.detail.status === 401) {
-      return $injector.get('authService').localLogout({
+      return AuthService.localLogout({
         toState: toState.name,
         toParams: JSON.parse(JSON.stringify(toParams)),
       });

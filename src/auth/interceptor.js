@@ -6,6 +6,8 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 
+import { AuthService } from './AuthService';
+
 // @ngInject
 function initAuthToken($auth, $http) {
   // When application starts up, we need to inject auth token if it exists
@@ -26,11 +28,10 @@ Axios.interceptors.response.use(
   },
   function invalidTokenInterceptor(error) {
     if (error.response && error.response.status === 401 && ngInjector) {
-      const authService = ngInjector.get('authService');
       const $state = ngInjector.get('$state');
       const $stateParams = ngInjector.get('$stateParams');
 
-      authService.localLogout(
+      AuthService.localLogout(
         $state.current.name
           ? {
               toState: $state.current.name,

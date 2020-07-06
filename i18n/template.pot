@@ -5622,7 +5622,7 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-#: src/auth/auth-service.js
+#: src/auth/AuthService.ts
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr ""
 
