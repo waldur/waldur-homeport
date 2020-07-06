@@ -33,6 +33,11 @@ describe('Customer creation dialog', () => {
         method: 'GET',
         response: [],
       })
+      .route({
+        url: 'http://localhost:8080/api/marketplace-offerings/?**',
+        method: 'GET',
+        response: [],
+      })
       .login()
       .openCustomerCreateDialog();
   });
@@ -46,7 +51,7 @@ describe('Customer creation dialog', () => {
 
       // Error message should be displayed
       .get('[name="name"]')
-      .then($input => {
+      .then(($input) => {
         expect($input[0].validationMessage).to.exist;
       })
 
@@ -96,6 +101,10 @@ describe('Customer creation dialog', () => {
       // Notification should be shown
       .get('.alert.alert-success')
       .contains('Organization has been created.')
+
+      // Wait for modal to hide
+      .get('.modal-content')
+      .should('not.be.visible')
 
       // Workspace selector indicates organization workspace
       .get('.select-workspace-toggle.btn-primary')
