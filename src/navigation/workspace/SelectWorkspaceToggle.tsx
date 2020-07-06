@@ -47,7 +47,7 @@ const getButtonClass = (workspace) =>
 const getOrganizationDisplayName = (isWide, organization) => {
   return !isWide && organization.abbreviation
     ? organization.abbreviation
-    : organization.display_name;
+    : organization.display_name || '';
 };
 
 const getTitle = (isWide, workspace, customer, project) => {
@@ -60,7 +60,7 @@ const getTitle = (isWide, workspace, customer, project) => {
 };
 
 const getTitleTooltip = (isWide, workspace, customer, project) => {
-  if (customer && customer.display_name.length < 30) {
+  if (customer && customer.display_name && customer.display_name.length < 30) {
     return;
   }
   const customerName = customer && getOrganizationDisplayName(isWide, customer);

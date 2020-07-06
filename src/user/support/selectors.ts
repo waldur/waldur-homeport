@@ -12,6 +12,9 @@ export const userManageIsVisible = (state) => {
 
 export const userTokenIsVisible = (state, ownProps) => {
   const currentUser = getUser(state);
+  if (!currentUser) {
+    return false;
+  }
   if (currentUser.uuid !== ownProps.user.uuid) {
     return false;
   }
@@ -32,7 +35,7 @@ export const isRequired = (field: string) => {
 
 export const isVisibleForSupportOrStaff = (state) => {
   const user = getUser(state);
-  return user.is_support || user.is_staff;
+  return user && (user.is_support || user.is_staff);
 };
 
 export const userLanguageIsVisible = (state) =>
