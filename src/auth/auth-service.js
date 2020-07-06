@@ -22,6 +22,7 @@ import Axios from 'axios';
 
 import { translate } from '@waldur/i18n';
 import store from '@waldur/store/store';
+import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 
 export class AuthService {
@@ -52,7 +53,9 @@ export class AuthService {
       username,
       password,
     });
-    this.loginSuccess(response);
+    this.setAuthHeader(response.data.token);
+    const user = await UsersService.getCurrentUser();
+    this.loginSuccess({ data: { ...user, method: 'local' } });
   }
 
   async authenticate(provider) {
@@ -73,12 +76,10 @@ export class AuthService {
   }
 
   loginSuccess(response) {
-    this.user = response.data;
     this.setAuthenticationMethod(response.data.method);
-    this.setAuthHeader(this.user.token);
-    this.$auth.setToken(this.user.token);
-    this.user.isAuthenticated = true;
-    store.dispatch(setCurrentUser(this.user));
+    this.setAuthHeader(response.data.token);
+    this.$auth.setToken(response.data.token);
+    store.dispatch(setCurrentUser(response.data));
   }
 
   redirectOnSuccess() {
@@ -123,7 +124,6 @@ export class AuthService {
     store.dispatch(setCurrentUser(undefined));
     delete this.$http.defaults.headers.common['Authorization'];
     delete Axios.defaults.headers.common['Authorization'];
-    this.user = { isAuthenticated: false };
     this.$auth.logout();
     this.$rootScope.$broadcast('abortRequests');
     this.$state.go('login', params);
