@@ -54,8 +54,8 @@ describe('User manage', () => {
       .contains('Remove profile')
       .click()
       // Close remove profile dialog
-      .get('button')
-      .contains('Cancel')
+      .get('span:contains(Close)')
+      .last()
       .click()
 
       // Ensure that Update profile button works
