@@ -12,12 +12,13 @@ import { useDispatch } from 'react-redux';
 import useMountedState from 'react-use/lib/useMountedState';
 import { reduxForm, Field } from 'redux-form';
 
-import { ENV, ngInjector } from '@waldur/core/services';
+import { ENV } from '@waldur/core/services';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showError } from '@waldur/store/coreSaga';
 
+import { AuthService } from '../AuthService';
 import { SubmitButton } from '../SubmitButton';
 
 import { getAuthResult, login } from './api';
@@ -47,7 +48,7 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(
         return;
       }
       if (result.state === 'OK') {
-        ngInjector.get('authService').loginSuccess({
+        AuthService.loginSuccess({
           data: { token: result.token, method: 'valimo' },
         });
         router.stateService.go('profile.details');

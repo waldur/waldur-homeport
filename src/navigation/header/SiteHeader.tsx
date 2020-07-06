@@ -1,14 +1,15 @@
 import * as React from 'react';
 
-import { ngInjector, ENV } from '@waldur/core/services';
+import { AuthService } from '@waldur/auth/AuthService';
+import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { UsersService } from '@waldur/user/UsersService';
 
 import { goBack } from '../utils';
+
 import './SiteHeader.scss';
 
 export const SiteHeader = () => {
-  const authService = ngInjector.get('authService');
   return (
     <div className="border-bottom">
       <nav className="navbar navbar-static-top white-bg m-b-none">
@@ -20,16 +21,16 @@ export const SiteHeader = () => {
           </div>
         )}
         <ul className="nav navbar-top-links pull-right">
-          {authService.isAuthenticated() && UsersService.isCurrentUserValid() && (
+          {AuthService.isAuthenticated() && UsersService.isCurrentUserValid() && (
             <li>
               <a onClick={goBack}>
                 <i className="fa fa-arrow-left" /> {translate('Back')}
               </a>
             </li>
           )}
-          {authService.isAuthenticated() && (
+          {AuthService.isAuthenticated() && (
             <li>
-              <a onClick={() => authService.logout()}>
+              <a onClick={() => AuthService.logout()}>
                 <i className="fa fa-sign-out" /> {translate('Log out')}
               </a>
             </li>
