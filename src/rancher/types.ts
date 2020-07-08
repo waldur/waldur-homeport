@@ -97,3 +97,20 @@ export interface HPACreateType {
   max_replicas: number;
   metrics: Metric[];
 }
+
+interface ClusterTemplateNode {
+  min_vcpu: number;
+  min_ram: number;
+  system_volume_size: number;
+  preferred_volume_type: string;
+  roles: string[];
+}
+
+export interface ClusterTemplate {
+  uuid: string;
+  name: string;
+  description: string;
+  created: string;
+  modified: string;
+  nodes: ClusterTemplateNode[];
+}

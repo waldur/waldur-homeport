@@ -6,6 +6,7 @@ import {
   formatVolumeTypeChoices,
   getDefaultVolumeType,
 } from '@waldur/openstack/openstack-instance/utils';
+import { listClusterTemplates } from '@waldur/rancher/api';
 import { formatFlavor } from '@waldur/resource/utils';
 
 const CLUSTER_NAME_PATTERN = new RegExp('^[a-z0-9]([-a-z0-9])+[a-z0-9]$');
@@ -39,6 +40,7 @@ export const loadData = async (settings) => {
   const flavors = await getFlavors(params);
   const subnets = await getSubnets(params);
   const volumeTypes = await getVolumeTypes(params);
+  const templates = await listClusterTemplates();
   const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
   const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
   return {
@@ -47,6 +49,7 @@ export const loadData = async (settings) => {
     volumeTypes: volumeTypeChoices,
     defaultVolumeType: defaultVolumeType && defaultVolumeType.url,
     mountPoints: getMountPointChoices(),
+    templates,
   };
 };
 
