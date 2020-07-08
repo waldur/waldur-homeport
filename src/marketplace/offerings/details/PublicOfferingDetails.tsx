@@ -11,6 +11,7 @@ import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
 import { useTitle } from '@waldur/navigation/title';
+import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
 import { OfferingHeader } from './OfferingHeader';
 
@@ -19,16 +20,11 @@ export const PublicOfferingDetails = () => {
     params: { uuid },
   } = useCurrentStateAndParams();
   const state = useAsync(async () => {
-    const config = {
-      transformRequest: [
-        (data, headers) => {
-          delete headers.common.Authorization;
-          return data;
-        },
-      ],
-    };
-    const offering = await getOffering(uuid, config);
-    const category = await getCategory(offering.category_uuid, config);
+    const offering = await getOffering(uuid, ANONYMOUS_CONFIG);
+    const category = await getCategory(
+      offering.category_uuid,
+      ANONYMOUS_CONFIG,
+    );
     const tabs = getTabs({ offering, sections: category.sections });
     return { offering, tabs };
   }, [uuid]);

@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from 'axios';
+import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 import { getNextPageUrl } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
@@ -17,11 +17,12 @@ export function getNextPageNumber(link: string): number {
   }
 }
 
-export const parseResponse = (url, params) =>
+export const parseResponse = (url, params, options?: AxiosRequestConfig) =>
   Axios.request({
     method: 'GET',
     url,
     params,
+    ...options,
   }).then((response: AxiosResponse<any>) => {
     const resultCount = parseInt(response.headers['x-result-count'], 10);
     return {
@@ -31,7 +32,10 @@ export const parseResponse = (url, params) =>
     };
   });
 
-export function createFetcher(endpoint: string): Fetcher {
+export function createFetcher(
+  endpoint: string,
+  options?: AxiosRequestConfig,
+): Fetcher {
   return (request: TableRequest) => {
     const url = `${ENV.apiEndpoint}api/${endpoint}/`;
     const params = {
@@ -39,7 +43,7 @@ export function createFetcher(endpoint: string): Fetcher {
       page_size: request.pageSize,
       ...request.filter,
     };
-    return parseResponse(url, params);
+    return parseResponse(url, params, options);
   };
 }
 
@@ -68,3 +72,12 @@ export async function fetchAll(
   }
   return result;
 }
+
+export const ANONYMOUS_CONFIG = {
+  transformRequest: [
+    (data, headers) => {
+      delete headers.common.Authorization;
+      return data;
+    },
+  ],
+};
