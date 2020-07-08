@@ -541,6 +541,10 @@ msgstr ""
 msgid "Archived plans"
 msgstr ""
 
+#: src/rancher/cluster/create/TenantGroup.tsx
+msgid "Are you sure you want to cluster template? Note this will reset the node plan."
+msgstr ""
+
 #: src/resource/actions/action-utils-service.ts
 msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr ""
@@ -1219,6 +1223,7 @@ msgstr ""
 #: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
+#: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Confirmation"
 msgstr ""
 
@@ -6563,6 +6568,7 @@ msgstr ""
 #: src/issues/create/IssueCreateForm.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
+#: src/rancher/cluster/create/TenantGroup.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Template"

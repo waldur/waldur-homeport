@@ -18,6 +18,7 @@ import {
   KubeconfigFile,
   HPA,
   HPACreateType,
+  ClusterTemplate,
 } from './types';
 
 export const getCatalog = (catalogUuid) =>
@@ -78,3 +79,6 @@ export const updateHPA = (
   hpaId: string,
   payload: Omit<HPACreateType, 'workload'>,
 ) => put<HPA>(`/rancher-hpas/${hpaId}/`, payload);
+
+export const listClusterTemplates = (options?) =>
+  getAll<ClusterTemplate>('/rancher-cluster-templates/', options);
