@@ -6,6 +6,8 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { User, Project, Customer } from '@waldur/workspace/types';
 
+import { AddProjectMemberDialog } from './AddProjectMemberDialog';
+
 interface AddMemberButtonProps {
   users: User[];
   user?: User;
@@ -24,7 +26,7 @@ export const AddMemberButton: React.FC<AddMemberButtonProps> = ({
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
-      openModalDialog('addProjectMember', {
+      openModalDialog(AddProjectMemberDialog, {
         resolve: {
           currentProject: project,
           currentCustomer: customer,

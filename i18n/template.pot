@@ -205,7 +205,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.html
 #: src/openstack/openstack-instance/openstack-instance-networks.html
-#: src/project/team/add-project-member.js
+#: src/project/team/AddProjectMemberDialog.tsx
 msgid "Add"
 msgstr ""
 
@@ -297,7 +297,7 @@ msgstr ""
 msgid "Add project"
 msgstr ""
 
-#: src/project/team/add-project-member.js
+#: src/project/team/AddProjectMemberDialog.tsx
 msgid "Add project member"
 msgstr ""
 
@@ -911,7 +911,6 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/project/ProjectCreateForm.tsx
-#: src/project/team/add-project-member.html
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -1062,7 +1061,7 @@ msgstr ""
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
-#: src/project/team/user-selector.html
+#: src/project/team/UserGroup.tsx
 msgid "Civil number"
 msgstr ""
 
@@ -1921,7 +1920,7 @@ msgstr ""
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/actions/EmailGroup.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/project/team/user-selector.html
+#: src/project/team/UserGroup.tsx
 #: src/user/support/UserDetailsTable.tsx
 msgid "E-mail"
 msgstr ""
@@ -1966,7 +1965,7 @@ msgstr ""
 msgid "Edit booking event"
 msgstr ""
 
-#: src/project/team/add-project-member.js
+#: src/project/team/AddProjectMemberDialog.tsx
 msgid "Edit project member"
 msgstr ""
 
@@ -5582,14 +5581,14 @@ msgstr ""
 #: src/customer/team/add-team-member.html
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
-#: src/project/team/add-project-member.html
+#: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/list/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
 msgstr ""
 
-#: src/project/team/add-project-member.html
+#: src/project/team/ExpirationTimeGroup.tsx
 msgid "Role expires on"
 msgstr ""
 
@@ -5690,7 +5689,7 @@ msgstr ""
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/add-team-member.js
-#: src/project/team/add-project-member.js
+#: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
 msgstr ""
@@ -5965,7 +5964,7 @@ msgstr ""
 msgid "Select type..."
 msgstr ""
 
-#: src/project/team/user-selector.html
+#: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr ""
 
@@ -6706,7 +6705,7 @@ msgstr ""
 msgid "There are no available projects."
 msgstr ""
 
-#: src/project/team/add-project-member.html
+#: src/project/team/UserGroup.tsx
 msgid "There are no available users."
 msgstr ""
 
@@ -7520,6 +7519,10 @@ msgstr ""
 msgid "Unable to update shopping cart item."
 msgstr ""
 
+#: src/project/team/AddProjectMemberDialog.tsx
+msgid "Unable to update user."
+msgstr ""
+
 #: src/issues/attachments/effects.ts
 msgid "Unable to upload attachment."
 msgstr ""
@@ -7720,7 +7723,7 @@ msgstr ""
 
 #: src/customer/team/add-team-member.html
 #: src/events/EventDetailsTable.tsx
-#: src/project/team/add-project-member.html
+#: src/project/team/UserGroup.tsx
 msgid "User"
 msgstr ""
 
@@ -7873,7 +7876,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/project/team/user-selector.html
+#: src/project/team/UserGroup.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/cluster/users/UserDetailsTable.tsx
