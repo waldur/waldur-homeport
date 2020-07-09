@@ -40,13 +40,15 @@ export const ResourceSummary = ({ resource }) => (
         )
       }
     />
-    <Field
-      label={translate('Resource')}
-      value={
-        <ResourceDetailsLink item={resource}>
-          {translate('Resource link')}
-        </ResourceDetailsLink>
-      }
-    />
+    {resource.offering_type !== 'Marketplace.Booking' ? (
+      <Field
+        label={translate('Resource')}
+        value={
+          <ResourceDetailsLink item={resource}>
+            {translate('Resource link')}
+          </ResourceDetailsLink>
+        }
+      />
+    ) : null}
   </dl>
 );
