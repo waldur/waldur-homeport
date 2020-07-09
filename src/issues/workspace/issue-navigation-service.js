@@ -185,7 +185,7 @@ export default class IssueNavigationService {
     if (
       state.data &&
       state.data.workspace &&
-      state.data.workspace !== 'support'
+      state.data.workspace !== SUPPORT_WORKSPACE
     ) {
       this.prevState = state;
       this.prevParams = params;
