@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 export default {
   order: [
     'name',
@@ -12,52 +14,52 @@ export default {
     name: {
       type: 'string',
       required: true,
-      label: gettext('VM name'),
+      label: translate('VM name'),
       maxlength: 150,
     },
     description: {
       type: 'string',
-      label: gettext('Description'),
+      label: translate('Description'),
       maxlength: 150,
     },
     image: {
       type: 'list',
       required: true,
-      label: gettext('Image'),
+      label: translate('Image'),
       columns: [
         {
           name: 'name',
-          label: gettext('Image name'),
+          label: translate('Image name'),
         },
       ],
     },
     size: {
       type: 'list',
       required: true,
-      label: gettext('Size'),
+      label: translate('Size'),
       columns: [
         {
           name: 'name',
-          label: gettext('Size name'),
+          label: translate('Size name'),
         },
       ],
     },
     user_username: {
       type: 'string',
       required: true,
-      label: gettext('Initial username'),
+      label: translate('Initial username'),
       maxlength: 150,
     },
     user_password: {
       type: 'password',
       required: true,
-      label: gettext('Initial password'),
+      label: translate('Initial password'),
       maxlength: 150,
     },
     user_data: {
       type: 'text',
-      label: gettext('User data'),
-      help_text: gettext(
+      label: translate('User data'),
+      help_text: translate(
         'Additional data that will be added to virtual machine on provisioning.',
       ),
     },
