@@ -339,7 +339,7 @@ msgstr ""
 msgid "Add user input field"
 msgstr ""
 
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
@@ -1792,7 +1792,7 @@ msgstr ""
 msgid "Devops-friendly offering"
 msgstr ""
 
-#: src/digitalocean/help.js
+#: src/digitalocean/help.ts
 msgid "DigitalOcean provider"
 msgstr ""
 
@@ -2297,7 +2297,7 @@ msgstr ""
 msgid "Find solution"
 msgstr ""
 
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
@@ -2562,7 +2562,7 @@ msgstr ""
 msgid "How to obtain credentials for Azure provider"
 msgstr ""
 
-#: src/digitalocean/help.js
+#: src/digitalocean/help.ts
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
@@ -2605,7 +2605,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/ImageGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 msgid "Image"
@@ -2616,7 +2616,7 @@ msgid "Image here"
 msgstr ""
 
 #: src/azure/vm/azure-virtual-machine-config.js
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/analytics/ImagesList.tsx
 #: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Image name"
@@ -2925,7 +2925,7 @@ msgstr ""
 msgid "Is external"
 msgstr ""
 
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 msgid "Is official"
 msgstr ""
 
@@ -3475,7 +3475,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/marketplace-script/EnvironmentVariablePanel.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
@@ -5004,7 +5004,7 @@ msgstr ""
 msgid "Quotas"
 msgstr ""
 
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
@@ -5100,11 +5100,11 @@ msgid "Regenerate"
 msgstr ""
 
 #: src/digitalocean/DigitalOceanDropletSummary.tsx
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 msgid "Region"
 msgstr ""
 
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 msgid "Region name"
 msgstr ""
 
@@ -5675,7 +5675,7 @@ msgstr ""
 msgid "SSH keys"
 msgstr ""
 
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 #: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "SSH public key"
@@ -6161,7 +6161,7 @@ msgstr ""
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/azure/vm/azure-virtual-machine-config.js
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
@@ -6180,7 +6180,7 @@ msgid "Size in GiB"
 msgstr ""
 
 #: src/azure/vm/azure-virtual-machine-config.js
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 msgid "Size name"
 msgstr ""
 
@@ -6339,7 +6339,7 @@ msgstr ""
 msgid "Stopping"
 msgstr ""
 
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/quotas/constants.ts
@@ -7737,7 +7737,7 @@ msgid "User dashboard"
 msgstr ""
 
 #: src/azure/vm/azure-virtual-machine-config.js
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "User data"
 msgstr ""
@@ -7931,7 +7931,7 @@ msgid "VAT rate"
 msgstr ""
 
 #: src/azure/vm/azure-virtual-machine-config.js
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 msgid "VM name"
@@ -8584,7 +8584,7 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: src/digitalocean/digitalocean-droplet-config.js
+#: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/resource/utils.tsx
 msgid "vCPU"

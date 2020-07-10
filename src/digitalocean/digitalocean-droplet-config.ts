@@ -1,6 +1,8 @@
 import { formatDate } from '@waldur/core/dateUtils';
+import { formatFilesize } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
 
-function imageFormatter($filter, value) {
+function imageFormatter(value) {
   if (value.is_official) {
     return value.name + ' distribution';
   } else {
@@ -53,16 +55,16 @@ function sizeComparator(a, b) {
 
 const sizeValidator = imageValidator;
 
-function sizeFormatter($filter, value) {
-  const ram = $filter('filesize')(value.ram);
-  const storage = $filter('filesize')(value.disk);
+function sizeFormatter(value) {
+  const ram = formatFilesize(value.ram);
+  const storage = formatFilesize(value.disk);
   const props = `${value.cores} vCPU, ${ram} RAM, ${storage} storage`;
   return `${value.name} (${props})`;
 }
 
 function validateAndSort(model, options, validator, comparator, name) {
   const choices = options[name].choices;
-  angular.forEach(choices, (choice) => {
+  choices.forEach((choice) => {
     choice.disabled = validator(model, choice);
   });
   choices.sort(comparator);
@@ -82,32 +84,32 @@ export default {
     name: {
       type: 'string',
       required: true,
-      label: gettext('VM name'),
+      label: translate('VM name'),
       maxlength: 150,
     },
     region: {
       type: 'list',
       required: true,
-      label: gettext('Region'),
+      label: translate('Region'),
       columns: [
         {
           name: 'name',
-          label: gettext('Region name'),
+          label: translate('Region name'),
         },
       ],
     },
     image: {
       type: 'list',
       required: true,
-      label: gettext('Image'),
+      label: translate('Image'),
       columns: [
         {
           name: 'name',
-          label: gettext('Image name'),
+          label: translate('Image name'),
         },
         {
           name: 'is_official',
-          label: gettext('Is official'),
+          label: translate('Is official'),
         },
       ],
       formatter: imageFormatter,
@@ -115,24 +117,24 @@ export default {
     size: {
       type: 'list',
       required: true,
-      label: gettext('Size'),
+      label: translate('Size'),
       columns: [
         {
           name: 'name',
-          label: gettext('Size name'),
+          label: translate('Size name'),
         },
         {
           name: 'cores',
-          label: gettext('vCPU'),
+          label: translate('vCPU'),
         },
         {
           name: 'ram',
-          label: gettext('RAM'),
+          label: translate('RAM'),
           filter: 'filesize',
         },
         {
           name: 'disk',
-          label: gettext('Storage'),
+          label: translate('Storage'),
           filter: 'filesize',
         },
       ],
@@ -140,15 +142,15 @@ export default {
     },
     ssh_public_key: {
       type: 'list',
-      label: gettext('SSH public key'),
+      label: translate('SSH public key'),
       columns: [
         {
           name: 'name',
-          label: gettext('Name'),
+          label: translate('Name'),
         },
         {
           name: 'fingerprint',
-          label: gettext('Fingerprint'),
+          label: translate('Fingerprint'),
         },
       ],
       warningMessage:
@@ -156,8 +158,8 @@ export default {
     },
     user_data: {
       type: 'text',
-      label: gettext('User data'),
-      help_text: gettext(
+      label: translate('User data'),
+      help_text: translate(
         'Additional data that will be added to instance on provisioning.',
       ),
     },
