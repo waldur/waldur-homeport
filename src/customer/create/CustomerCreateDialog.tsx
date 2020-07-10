@@ -1,7 +1,7 @@
 import { useRouter } from '@uirouter/react';
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { reset } from 'redux-form';
+import { reset, SubmissionError } from 'redux-form';
 
 import { sendForm } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
@@ -85,6 +85,9 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
         dispatch(reset('CustomerCreateDialog'));
       } catch (e) {
         showErrorResponse(e, translate('Could not create organization'));
+        if (e.status === 400) {
+          throw new SubmissionError(e.data);
+        }
       }
     },
     [dispatch, router, user, resolve.role],
