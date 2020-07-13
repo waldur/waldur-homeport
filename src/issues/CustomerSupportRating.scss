@@ -1,0 +1,19 @@
+.customer-support-rating-container {
+  margin-top: 25px;
+
+  .feedback-info {
+    display: flex;
+    align-self: center;
+
+    .total-reviews {
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+
+      span {
+        font-weight: 600;
+        font-size: 15px;
+      }
+    }
+  }
+}

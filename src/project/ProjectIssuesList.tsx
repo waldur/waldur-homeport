@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { Panel } from '@waldur/core/Panel';
+import { translate } from '@waldur/i18n';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
+import { useTitle } from '@waldur/navigation/title';
 import { getProject } from '@waldur/workspace/selectors';
 
 const mapStateToProps = createSelector(getProject, (project) => ({
@@ -15,14 +17,17 @@ const mapStateToProps = createSelector(getProject, (project) => ({
 
 const ProjectIssuesListComponent = connect(mapStateToProps)(IssuesList);
 
-export const ProjectIssuesList = () => (
-  <div className="wrapper wrapper-content">
-    <Row>
-      <Col md={12}>
-        <Panel>
-          <ProjectIssuesListComponent hiddenColumns={['customer']} />
-        </Panel>
-      </Col>
-    </Row>
-  </div>
-);
+export const ProjectIssuesList = () => {
+  useTitle(translate('Issues'));
+  return (
+    <div className="wrapper wrapper-content">
+      <Row>
+        <Col md={12}>
+          <Panel>
+            <ProjectIssuesListComponent hiddenColumns={['customer']} />
+          </Panel>
+        </Col>
+      </Row>
+    </div>
+  );
+};

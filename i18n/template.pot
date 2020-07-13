@@ -1547,6 +1547,10 @@ msgstr ""
 msgid "Currently there are no booking requests."
 msgstr ""
 
+#: src/issues/CustomerSupportRating.tsx
+msgid "Customer support satisfaction overall rating"
+msgstr ""
+
 #: src/booking/components/CalendarSettings.tsx
 msgid "Daily available booking time range"
 msgstr ""
@@ -2946,9 +2950,11 @@ msgstr ""
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr ""
 
+#: src/customer/workspace/CustomerIssuesList.tsx
 #: src/customer/workspace/utils.ts
-#: src/issues/list/IssuesList.tsx
+#: src/issues/SupportIssues.tsx
 #: src/marketplace/resources/ResourceTabs.tsx
+#: src/project/ProjectIssuesList.tsx
 #: src/project/utils.ts
 #: src/resource/tabs/constants.ts
 msgid "Issues"
@@ -7219,6 +7225,10 @@ msgstr ""
 msgid "Unable to load compliance overview."
 msgstr ""
 
+#: src/issues/CustomerSupportRating.tsx
+msgid "Unable to load customer support satisfaction overall rating."
+msgstr ""
+
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/slurm/details/AllocationUsageTable.tsx
@@ -8522,6 +8532,10 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 msgid "restored volumes"
+msgstr ""
+
+#: src/issues/CustomerSupportRating.tsx
+msgid "reviews"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
