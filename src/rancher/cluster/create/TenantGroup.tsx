@@ -72,14 +72,17 @@ export const TenantGroup = (props) => {
           filterFlavor(node, flavor),
         );
         const flavor = flavors.length > 0 ? flavors[0] : undefined;
+        const preferredVolumeType = node.preferred_volume_type
+          ? resourceProps.value.volumeTypes.find(
+              (option) => option.name === node.preferred_volume_type,
+            )
+          : undefined;
         dispatch(
           arrayPush(FORM_ID, NODES_FIELD_ARRAY, {
             roles: node.roles,
             system_volume_size: node.system_volume_size,
-            system_volume_type: node.preferred_volume_type
-              ? resourceProps.value.volumeTypes.find(
-                  (option) => option.name === node.preferred_volume_type,
-                )
+            system_volume_type: preferredVolumeType
+              ? preferredVolumeType.value
               : undefined,
             flavor,
           }),
