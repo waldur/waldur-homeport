@@ -1,5 +1,6 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { LazyCustomerList } from '@waldur/customer/list/LazyCustomerList';
+import { SupportIssues } from '@waldur/issues/SupportIssues';
 import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
 import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';
 import { SankeyDiagramContainer } from '@waldur/providers/support/SankeyDiagramContainer';
@@ -56,8 +57,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.list',
     url: 'list/',
-    template:
-      '<div class="ibox"><div class="ibox-content"><issues-list filter="{}"></issues-list></div></div>',
+    component: SupportIssues,
     data: {
       feature: 'support',
     },

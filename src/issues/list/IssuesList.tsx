@@ -5,7 +5,6 @@ import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { IssuesListPlaceholder } from '@waldur/issues/list/IssuesListPlaceholder';
-import { useTitle } from '@waldur/navigation/title';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
@@ -28,7 +27,6 @@ interface IssueTableProps extends TableProps, OwnProps {
 }
 
 export const TableComponent: React.FC<IssueTableProps> = (props) => {
-  useTitle(translate('Issues'));
   const { filterColumns, supportOrStaff, hiddenColumns, ...rest } = props;
   const columns = filterColumns([
     {
