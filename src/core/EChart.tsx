@@ -2,6 +2,7 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import resizeObserver from '@waldur/core/resizeObserver';
 import loadEcharts from '@waldur/shims/load-echarts';
 
 interface ChartProps {
@@ -65,11 +66,17 @@ export class EChart extends React.Component<ChartProps> {
         this.chart = echarts.init(this.container);
       }
       this.renderChart();
+      this.resizeObserver();
     });
   }
 
   renderChart() {
     this.chart.setOption(this.props.options, this.props.theme);
+  }
+  resizeObserver() {
+    if (resizeObserver) {
+      resizeObserver.observe(this.container);
+    }
   }
   render() {
     const { width, height } = this.props;

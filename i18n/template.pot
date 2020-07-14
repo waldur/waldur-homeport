@@ -1294,10 +1294,6 @@ msgstr ""
 msgid "Cost threshold"
 msgstr ""
 
-#: src/slurm/details/utils.ts
-msgid "Costs"
-msgstr ""
-
 #: src/customer/create/CustomerCreateDialog.tsx
 msgid "Could not create organization"
 msgstr ""
@@ -7304,10 +7300,6 @@ msgstr ""
 msgid "Unable to load marketplace offerings."
 msgstr ""
 
-#: src/slurm/details/AllocationUsageChart.tsx
-msgid "Unable to load module"
-msgstr ""
-
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
@@ -7691,6 +7683,7 @@ msgstr ""
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/slurm/details/utils.ts
 #: src/slurm/tabs.ts
 msgid "Usage"
 msgstr ""

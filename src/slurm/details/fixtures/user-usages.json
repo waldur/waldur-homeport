@@ -1,0 +1,62 @@
+[
+  {
+    "allocation_usage": "http://localhost:8080/api/slurm-allocation-usage/08b6b6f77fe24a5f9b422c68a18d751f/",
+    "user": "http://localhost:8080/api/users/8d1abb21f33446d09cbce9dd84c156ed/",
+    "username": "douglas",
+    "full_name": "Douglas Griffin",
+    "cpu_usage": 10,
+    "deposit_usage": "2.00",
+    "month": 6,
+    "year": 2020
+  },
+  {
+    "allocation_usage": "http://localhost:8080/api/slurm-allocation-usage/08b6b6f77fe24a5f9b422c68a18d751f/",
+    "user": "http://localhost:8080/api/users/b89c546e7c0a460f9d46338af7cd58a9/",
+    "username": "steven",
+    "full_name": "Steven Mann",
+    "cpu_usage": 10,
+    "deposit_usage": "2.00",
+    "month": 6,
+    "year": 2020
+  },
+  {
+    "allocation_usage": "http://localhost:8080/api/slurm-allocation-usage/08b6b6f77fe24a5f9b422c68a18d751f/",
+    "user": "http://localhost:8080/api/users/1e9d343f75864991b96e89e797b8dff1/",
+    "username": "steven",
+    "full_name": "Steven Mann",
+    "cpu_usage": 10,
+    "deposit_usage": "9.00",
+    "month": 3,
+    "year": 2020
+  },
+  {
+    "allocation_usage": "http://localhost:8080/api/slurm-allocation-usage/08b6b6f77fe24a5f9b422c68a18d751f/",
+    "user": "http://localhost:8080/api/users/c8e5ff5d3ba84bcbbaef99642457c979/",
+    "username": "corey",
+    "full_name": "Corey Jones",
+    "cpu_usage": 5,
+    "deposit_usage": "2.00",
+    "month": 4,
+    "year": 2020
+  },
+  {
+    "allocation_usage": "http://localhost:8080/api/slurm-allocation-usage/08b6b6f77fe24a5f9b422c68a18d751f/",
+    "user": "http://localhost:8080/api/users/57223602e47648b0bef2da4c1d430f5f/",
+    "username": "douglas",
+    "full_name": "Douglas Griffin",
+    "cpu_usage": 15,
+    "deposit_usage": "2.00",
+    "month": 4,
+    "year": 2020
+  },
+  {
+    "allocation_usage": "http://localhost:8080/api/slurm-allocation-usage/800894f1903e4b5ca5939b691a917eda/",
+    "user": "http://localhost:8080/api/users/27d47185361b4249ade010451dd482be/",
+    "username": "steven",
+    "full_name": "Steven Mann",
+    "cpu_usage": 40,
+    "deposit_usage": "1.00",
+    "month": 5,
+    "year": 2020
+  }
+]
