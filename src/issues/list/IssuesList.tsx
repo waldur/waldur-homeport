@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { IssuesListExpandableRow } from '@waldur/issues/list/IssuesListExpandableRow';
 import { IssuesListPlaceholder } from '@waldur/issues/list/IssuesListPlaceholder';
+import { StatusColumn } from '@waldur/issues/list/StatusColumn';
+import { TitleColumn } from '@waldur/issues/list/TitleColumn';
 import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { getUser } from '@waldur/workspace/selectors';
-
-import { IssueTypeIcon } from '../types/IssueTypeIcon';
 
 import { IssueCreateButton } from './IssueCreateButton';
 
@@ -42,34 +43,13 @@ export const TableComponent: React.FC<IssueTableProps> = (props) => {
     },
     {
       title: translate('Status'),
-      render: ({ row }) => (
-        <>
-          <IssueTypeIcon type={row.type} /> {row.status || 'N/A'}
-        </>
-      ),
+      render: StatusColumn,
       orderField: 'status',
     },
     {
       title: translate('Title'),
-      render: ({ row }) => (
-        <span className="ellipsis" style={{ width: 150 }}>
-          {row.summary}
-        </span>
-      ),
+      render: TitleColumn,
       orderField: 'summary',
-    },
-    {
-      title: translate('Description'),
-      render: ({ row }) => (
-        <span className="ellipsis" style={{ width: 150 }}>
-          {row.description}
-        </span>
-      ),
-    },
-    {
-      title: translate('Service type'),
-      render: ({ row }) => row.resource_type || 'N/A',
-      visible: supportOrStaff && !hiddenColumns.includes('resource_type'),
     },
     {
       title: translate('Organization'),
@@ -83,12 +63,6 @@ export const TableComponent: React.FC<IssueTableProps> = (props) => {
       render: ({ row }) => row.caller_full_name || 'N/A',
     },
     {
-      title: translate('Reporter'),
-      orderField: 'reporter_name',
-      render: ({ row }) => row.reporter_name || 'N/A',
-      visible: supportOrStaff,
-    },
-    {
       title: translate('Assigned to'),
       orderField: 'assignee_name',
       render: ({ row }) => row.assignee_name || 'N/A',
@@ -97,11 +71,11 @@ export const TableComponent: React.FC<IssueTableProps> = (props) => {
     {
       title: translate('Created'),
       orderField: 'created',
-      render: ({ row }) => formatDate(row.created),
+      render: ({ row }) => <>{formatDate(row.created)}</>,
     },
     {
       title: translate('Time in progress'),
-      render: ({ row }) => formatRelative(row.created),
+      render: ({ row }) => <>{formatRelative(row.created)}</>,
       visible: supportOrStaff,
     },
   ]);
@@ -116,6 +90,7 @@ export const TableComponent: React.FC<IssueTableProps> = (props) => {
       placeholderComponent={<IssuesListPlaceholder />}
       enableExport={true}
       actions={props.scope && <IssueCreateButton scope={props.scope} />}
+      expandableRow={IssuesListExpandableRow}
     />
   );
 };
