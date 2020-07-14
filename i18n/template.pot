@@ -1691,6 +1691,7 @@ msgstr ""
 #: src/issues/IssueDetails.tsx
 #: src/issues/create/DescriptionGroup.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
 #: src/issues/list/IssuesShortList.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
@@ -5272,6 +5273,7 @@ msgstr ""
 
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Reporter"
 msgstr ""
 
@@ -6057,6 +6059,7 @@ msgstr ""
 
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Service type"
 msgstr ""
 
