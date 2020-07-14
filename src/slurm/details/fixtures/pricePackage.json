@@ -1,9 +1,0 @@
-{
-  "uuid": "069bf9ccda3b4836be0fabe89cce4bb4",
-  "url": "http://localhost:8080/api/slurm-packages/069bf9ccda3b4836be0fabe89cce4bb4/",
-  "service_settings": "http://localhost:8080/api/service-settings/f12c181fa27d4f27828566b913c3ddda/",
-  "name": "",
-  "cpu_price": 11.0,
-  "gpu_price": 22.0,
-  "ram_price": 33.0
-}

@@ -1,0 +1,5 @@
+{
+  "name": "CPU usage",
+  "field": "cpu_usage",
+  "factor": 60
+}

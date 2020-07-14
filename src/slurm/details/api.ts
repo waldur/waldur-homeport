@@ -1,37 +1,20 @@
 import { getAll } from '@waldur/core/api';
 
-import { palette, getChartSpec } from './constants';
-import { formatCharts } from './utils';
-
-interface SlurmPackage {
-  cpu_price: string;
-  gpu_price: string;
-  ram_price: string;
-}
+import { getChartSpec } from './constants';
 
 export const getAllocationUsages = (params) =>
   getAll('/slurm-allocation-usage/', { params });
 
-export const loadPackage = async (serviceSettingsUrl) => {
-  const packages = await getAll<SlurmPackage>('/slurm-packages/', {
-    params: { service_settings: serviceSettingsUrl },
-  });
-  if (packages.length !== 1) {
-    return;
-  }
-  const result = packages[0];
-  return {
-    ...result,
-    cpu_price: parseFloat(result.cpu_price),
-    gpu_price: parseFloat(result.gpu_price),
-    ram_price: parseFloat(result.ram_price),
-  };
-};
+export const getAllocationUserUsages = (params) =>
+  getAll('/slurm-allocation-user-usage/', { params });
 
-export const loadCharts = async (serviceSettingsUrl, allocationUrl) => {
-  const pricePackage = await loadPackage(serviceSettingsUrl);
-  const rows = await getAllocationUsages({
+export const loadCharts = async (allocationUrl) => {
+  const usages = await getAllocationUsages({
     allocation: allocationUrl,
   });
-  return formatCharts(palette, getChartSpec(), rows, pricePackage);
+  const userUsages = await getAllocationUserUsages({
+    allocation: allocationUrl,
+  });
+  const charts = getChartSpec();
+  return { charts, usages, userUsages };
 };

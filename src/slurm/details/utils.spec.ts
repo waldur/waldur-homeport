@@ -1,14 +1,16 @@
-import { formatCharts } from './utils';
-import { palette, getChartSpec } from './constants';
+import { getEChartOptions } from './utils';
+import { palette } from '@waldur/slurm/details/constants';
 
 const usages = require('./fixtures/usages.json');
-const pricePackage = require('./fixtures/pricePackage.json');
-const charts = require('./fixtures/charts.json');
+const userUsages = require('./fixtures/user-usages.json');
+const chartSpec = require('./fixtures/chart-spec.json');
+const eChartOption = require('./fixtures/echart-option.json');
 
 describe('SLURM allocation usage chart formatter', () => {
-  it('parses and formats charts correctly', () => {
-    expect(formatCharts(palette, getChartSpec(), usages, pricePackage)).toEqual(
-      charts,
-    );
+  it('parses data and returns eChart option correctly', () => {
+    expect(getEChartOptions(chartSpec, usages, userUsages)).toEqual({
+      ...eChartOption,
+      color: palette,
+    });
   });
 });
