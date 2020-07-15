@@ -16,6 +16,11 @@ export interface StatusChange {
 
 export type OrderItemType = 'Create' | 'Update' | 'Terminate';
 
+interface IssueReference {
+  key: string;
+  uuid: string;
+}
+
 export interface OrderItemResponse {
   name?: string;
   uuid: string;
@@ -54,6 +59,7 @@ export interface OrderItemResponse {
   limits: Record<string, number>;
   current_usages?: Record<string, number>;
   scope?: string;
+  issue?: IssueReference;
 }
 
 export interface OrderItemDetailsType extends OrderItemResponse {

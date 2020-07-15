@@ -3,6 +3,7 @@ import * as React from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
+import { IssueLinkRenderer } from '@waldur/marketplace/orders/item/list/IssueLinkRenderer';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 interface ResourceOrderItemsProps {
@@ -22,6 +23,10 @@ export const TableComponent = (props) => {
           {row.uuid}
         </OrderItemDetailsLink>
       ),
+    },
+    {
+      title: translate('Issue link'),
+      render: IssueLinkRenderer,
     },
     {
       title: translate('Type'),

@@ -2936,11 +2936,16 @@ msgstr ""
 msgid "Is official"
 msgstr ""
 
+#: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
+msgid "Issue"
+msgstr ""
+
 #: src/offering/OfferingHeader.tsx
 msgid "Issue key"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #: src/offering/OfferingHeader.tsx
 msgid "Issue link"
 msgstr ""
