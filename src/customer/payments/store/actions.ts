@@ -22,3 +22,11 @@ export const deletePayment = (uuid: string) => ({
   type: constants.DELETE_PAYMENT,
   payload: uuid,
 });
+
+export const linkInvoice = (paymentUuid: string, invoiceUrl: string) => ({
+  type: constants.LINK_INVOICE,
+  payload: {
+    paymentUuid: paymentUuid,
+    invoiceUrl: invoiceUrl,
+  },
+});

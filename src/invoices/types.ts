@@ -28,4 +28,5 @@ export interface Invoice {
   items: InvoiceItem[];
   year: number;
   month: number;
+  url: string;
 }

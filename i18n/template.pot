@@ -2894,6 +2894,10 @@ msgstr ""
 msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
 msgstr ""
 
+#: src/customer/payments/store/effects.ts
+msgid "Invoice has been successfully linked to payment."
+msgstr ""
+
 #: src/paypal/InvoiceActions.tsx
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
@@ -3114,6 +3118,10 @@ msgstr ""
 msgid "Link OpenStack Instance"
 msgstr ""
 
+#: src/customer/payments/InvoicesDropdown.tsx
+msgid "Link invoice"
+msgstr ""
+
 #: src/configs/base-config.ts
 msgid "Lithuanian"
 msgstr ""
@@ -3124,6 +3132,10 @@ msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "Loading actions"
+msgstr ""
+
+#: src/customer/payments/InvoicesDropdown.tsx
+msgid "Loading invoices"
 msgstr ""
 
 #: src/azure/AzureResourceSummary.tsx
@@ -6740,6 +6752,10 @@ msgstr ""
 msgid "There are no events."
 msgstr ""
 
+#: src/customer/payments/InvoicesDropdown.tsx
+msgid "There are no invoices."
+msgstr ""
+
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 msgid "There are no matching checklists."
 msgstr ""
@@ -7180,6 +7196,10 @@ msgstr ""
 msgid "Unable to initialize shopping cart."
 msgstr ""
 
+#: src/customer/payments/store/effects.ts
+msgid "Unable to link invoice to the payment."
+msgstr ""
+
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 msgid "Unable to load Zabbix host details."
 msgstr ""
@@ -7276,6 +7296,10 @@ msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Unable to load form options."
+msgstr ""
+
+#: src/customer/payments/InvoicesDropdown.tsx
+msgid "Unable to load invoices"
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerForm.tsx

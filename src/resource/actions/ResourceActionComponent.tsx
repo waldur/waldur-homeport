@@ -46,6 +46,7 @@ export const ResourceActionComponent = (
   <DropdownButton
     title={translate('Actions')}
     id="actions-dropdown-btn"
+    className="dropdown-btn"
     onToggle={props.onToggle}
     open={props.open}
     disabled={props.disabled}
