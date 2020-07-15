@@ -7,6 +7,8 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser, getCustomer } from '@waldur/workspace/selectors';
 import { User } from '@waldur/workspace/types';
 
+import { EditTeamMemberDialog } from './EditTeamMemberDialog';
+
 interface UserEditButtonProps {
   editUser: User;
 }
@@ -17,7 +19,7 @@ export const UserEditButton: React.FC<UserEditButtonProps> = ({ editUser }) => {
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
-      openModalDialog('addTeamMember', {
+      openModalDialog(EditTeamMemberDialog, {
         resolve: {
           currentCustomer,
           currentUser,
