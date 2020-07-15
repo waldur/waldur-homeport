@@ -3764,6 +3764,10 @@ msgstr ""
 msgid "Nothing to show here"
 msgstr ""
 
+#: src/invoices/list/SendNotificationButton.tsx
+msgid "Notification can be sent only for created invoice."
+msgstr ""
+
 #: src/user/hooks/utils.ts
 msgid "Notification has been created."
 msgstr ""
@@ -3774,10 +3778,6 @@ msgstr ""
 
 #: src/user/hooks/HookForm.tsx
 msgid "Notification method"
-msgstr ""
-
-#: src/invoices/list/SendNotificationButton.tsx
-msgid "Notification only for the created invoice can be sent."
 msgstr ""
 
 #: src/user/constants.ts

@@ -36,7 +36,7 @@ export const SendNotificationButton = ({ row }) => {
       icon="fa fa-envelope-o"
       tooltip={
         row.state !== 'created'
-          ? translate('Notification only for the created invoice can be sent.')
+          ? translate('Notification can be sent only for created invoice.')
           : ''
       }
       action={onClick}
