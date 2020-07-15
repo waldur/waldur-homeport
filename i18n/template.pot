@@ -904,7 +904,6 @@ msgid "Caller"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/customer/team/add-team-member.html
 #: src/form/AppstoreListDialog.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
@@ -1970,7 +1969,7 @@ msgstr ""
 msgid "Edit project member"
 msgstr ""
 
-#: src/customer/team/add-team-member.js
+#: src/customer/team/EditTeamMemberDialog.tsx
 msgid "Edit team member"
 msgstr ""
 
@@ -2186,7 +2185,7 @@ msgstr ""
 msgid "Expand"
 msgstr ""
 
-#: src/customer/team/add-team-member.html
+#: src/customer/team/ProjectsListGroup.tsx
 msgid "Expiration time"
 msgstr ""
 
@@ -4139,7 +4138,7 @@ msgstr ""
 msgid "Organization owner"
 msgstr ""
 
-#: src/customer/team/add-team-member.html
+#: src/customer/team/OwnerExpirationTimeGroup.tsx
 msgid "Organization owner role expires on"
 msgstr ""
 
@@ -4831,7 +4830,7 @@ msgstr ""
 msgid "Project manager cannot edit users with same role."
 msgstr ""
 
-#: src/customer/team/add-team-member.html
+#: src/customer/team/ProjectsListGroup.tsx
 #: src/project/ProjectNameField.tsx
 #: src/user/list/ProjectPermissions.tsx
 msgid "Project name"
@@ -4888,7 +4887,7 @@ msgstr ""
 msgid "Projects ({count})"
 msgstr ""
 
-#: src/customer/team/add-team-member.html
+#: src/customer/team/ProjectsListGroup.tsx
 msgid "Projects list"
 msgstr ""
 
@@ -5601,7 +5600,7 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
-#: src/customer/team/add-team-member.html
+#: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/RoleGroup.tsx
@@ -5711,7 +5710,7 @@ msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/customer/team/add-team-member.js
+#: src/customer/team/EditTeamMemberDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
@@ -6725,7 +6724,7 @@ msgstr ""
 msgid "There are no actions."
 msgstr ""
 
-#: src/customer/team/add-team-member.html
+#: src/customer/team/ProjectsListGroup.tsx
 msgid "There are no available projects."
 msgstr ""
 
@@ -7555,6 +7554,7 @@ msgstr ""
 msgid "Unable to update shopping cart item."
 msgstr ""
 
+#: src/customer/team/EditTeamMemberDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Unable to update user."
 msgstr ""
@@ -7758,7 +7758,7 @@ msgstr ""
 msgid "Used in the period"
 msgstr ""
 
-#: src/customer/team/add-team-member.html
+#: src/customer/team/UserGroup.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/project/team/UserGroup.tsx
 msgid "User"
@@ -8235,11 +8235,11 @@ msgstr ""
 msgid "You can start filling this table by creating your first offering."
 msgstr ""
 
-#: src/customer/team/add-team-member.js
+#: src/customer/team/OwnerGroup.tsx
 msgid "You cannot change your own role."
 msgstr ""
 
-#: src/customer/team/add-team-member.js
+#: src/customer/team/OwnerGroup.tsx
 msgid "You cannot manage other organization owner."
 msgstr ""
 
