@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { PAYMENTS_TABLE } from '@waldur/customer/details/constants';
 import { PaymentCreateDialogContainer } from '@waldur/customer/payments/PaymentCreateDialog';
+import { PaymentInvoiceRenderer } from '@waldur/customer/payments/PaymentInvoiceRenderer';
 import { PaymentProofRenderer } from '@waldur/customer/payments/PaymentProofRenderer';
 import { translate } from '@waldur/i18n';
 import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
@@ -57,7 +58,11 @@ export const TableComponent = (props) => {
     },
     {
       title: translate('Proof'),
-      render: ({ row }) => <PaymentProofRenderer row={row} />,
+      render: PaymentProofRenderer,
+    },
+    {
+      title: translate('Invoice'),
+      render: PaymentInvoiceRenderer,
     },
     {
       title: translate('Actions'),

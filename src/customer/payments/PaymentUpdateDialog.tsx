@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
+import { Link } from '@waldur/core/Link';
 import { EDIT_PAYMENT_FORM_ID } from '@waldur/customer/payments/constants';
 import { PaymentProofRenderer } from '@waldur/customer/payments/PaymentProofRenderer';
 import { updatePayment } from '@waldur/customer/payments/store/actions';
@@ -56,6 +57,23 @@ const PaymentUpdateDialog = (props) => (
           <span style={{ marginLeft: '145px' }}>
             <PaymentProofRenderer row={props.resolve} />
           </span>
+        ) : null}
+
+        {props.resolve.invoice_uuid && props.resolve.invoice_period ? (
+          <div className="form-group">
+            <label className="control-label col-sm-2">
+              {translate('Invoice')}
+            </label>
+            <div className="col-sm-8" style={{ marginTop: '8px' }}>
+              <Link
+                state="billingDetails"
+                params={{ uuid: props.resolve.invoice_uuid }}
+                target="_blank"
+              >
+                {props.resolve.invoice_period}
+              </Link>
+            </div>
+          </div>
         ) : null}
       </FormContainer>
     </ModalDialog>

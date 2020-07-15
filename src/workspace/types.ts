@@ -50,6 +50,8 @@ export interface Payment {
   sum: string;
   proof: string;
   uuid: string;
+  invoice_uuid?: string;
+  invoice_period?: string;
 }
 
 export interface Customer {
