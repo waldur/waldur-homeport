@@ -2,9 +2,14 @@ import * as React from 'react';
 import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import { connect } from 'react-redux';
 
+import { LinkInvoiceAction } from '@waldur/customer/payments/LinkInvoiceAction';
 import { PaymentUpdateDialogContainer } from '@waldur/customer/payments/PaymentUpdateDialog';
-import { deletePayment } from '@waldur/customer/payments/store/actions';
+import {
+  deletePayment,
+  linkInvoice,
+} from '@waldur/customer/payments/store/actions';
 import { translate } from '@waldur/i18n';
+import { Invoice } from '@waldur/invoices/types';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { Payment } from '@waldur/workspace/types';
@@ -42,6 +47,12 @@ const Actions = (props) => (
       icon="fa fa-trash"
       {...props.tooltipAndDisabledAttributes}
     />
+    {!props.payment.invoice ? (
+      <LinkInvoiceAction
+        onInvoiceSelect={(invoice) => props.linkInvoice(props.payment, invoice)}
+        {...props.tooltipAndDisabledAttributes}
+      />
+    ) : null}
   </ButtonGroup>
 );
 
@@ -49,6 +60,8 @@ const mapDispatchToProps = (dispatch) => ({
   openConfirmationDialog: (payment: Payment) => openDialog(dispatch, payment),
   openUpdateDialog: (payment: Payment) =>
     dispatch(openPaymentUpdateDialog(payment)),
+  linkInvoice: (payment: Payment, invoice: Invoice) =>
+    dispatch(linkInvoice(payment.uuid, invoice.url)),
 });
 
 const enhance = connect(null, mapDispatchToProps);

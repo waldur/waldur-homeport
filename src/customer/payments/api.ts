@@ -1,4 +1,4 @@
-import { deleteById, sendForm } from '@waldur/core/api';
+import { deleteById, post, sendForm } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { ENV } from '@waldur/core/services';
 
@@ -26,3 +26,11 @@ export const updatePayment = (data) => {
 };
 
 export const deletePayment = (uuid: string) => deleteById('/payments/', uuid);
+
+export const linkInvoice = (payload: {
+  paymentUuid: string;
+  invoiceUrl: string;
+}) =>
+  post(`/payments/${payload.paymentUuid}/link_to_invoice/`, {
+    invoice: payload.invoiceUrl,
+  });

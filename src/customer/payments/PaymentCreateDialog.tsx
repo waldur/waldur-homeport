@@ -34,23 +34,29 @@ const PaymentCreateDialog = (props) => (
         </>
       }
     >
-      <FormContainer
-        submitting={false}
-        labelClass="col-sm-2"
-        controlClass="col-sm-8"
-        clearOnUnmount={false}
-      >
-        <DateField name="date_of_payment" label={translate('Date')} required />
+      <div style={{ paddingBottom: '50px' }}>
+        <FormContainer
+          submitting={false}
+          labelClass="col-sm-2"
+          controlClass="col-sm-8"
+          clearOnUnmount={false}
+        >
+          <DateField
+            name="date_of_payment"
+            label={translate('Date')}
+            required
+          />
 
-        <NumberField name="sum" label={translate('Sum')} required />
+          <NumberField name="sum" label={translate('Sum')} required />
 
-        <FileUploadField
-          name="proof"
-          label={translate('Proof')}
-          showFileName={true}
-          buttonLabel={translate('Browse')}
-        />
-      </FormContainer>
+          <FileUploadField
+            name="proof"
+            label={translate('Proof')}
+            showFileName={true}
+            buttonLabel={translate('Browse')}
+          />
+        </FormContainer>
+      </div>
     </ModalDialog>
   </form>
 );
