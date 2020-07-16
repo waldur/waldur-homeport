@@ -20,7 +20,7 @@ msgstr ""
 msgid "A one-time fee applied on activation."
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.js
+#: src/freeipa/FreeIPAAccountCreate.tsx
 msgid "A profile has been created."
 msgstr ""
 
@@ -213,8 +213,8 @@ msgstr ""
 msgid "Add SSH key"
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.html
-msgid "Add Waldur user ssh keys to the FreeIPA profile"
+#: src/freeipa/SyncProfile.tsx
+msgid "Add Waldur user SSH keys to the FreeIPA profile"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
@@ -1304,7 +1304,7 @@ msgstr ""
 
 #: src/azure/sql/CreateDatabaseAction.ts
 #: src/customer/create/CustomerCreatePrompt.tsx
-#: src/freeipa/freeipa-account-create.html
+#: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
@@ -1796,7 +1796,7 @@ msgstr ""
 msgid "DigitalOcean provider"
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.html
+#: src/freeipa/DisableProfile.tsx
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr ""
 
@@ -1808,7 +1808,7 @@ msgstr ""
 msgid "Disable gateway IP advertising via DHCP"
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.html
+#: src/freeipa/DisableProfile.tsx
 msgid "Disable profile"
 msgstr ""
 
@@ -2006,11 +2006,11 @@ msgstr ""
 msgid "Enable DHCP"
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.html
+#: src/freeipa/EnableProfile.tsx
 msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.html
+#: src/freeipa/EnableProfile.tsx
 msgid "Enable profile"
 msgstr ""
 
@@ -2566,7 +2566,7 @@ msgstr ""
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.html
+#: src/freeipa/TosGroup.tsx
 msgid "I accept the"
 msgstr ""
 
@@ -3325,7 +3325,7 @@ msgstr ""
 msgid "Maximum total size of the disk space per VM"
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.html
+#: src/freeipa/UsernameGroup.tsx
 msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr ""
 
@@ -3406,6 +3406,10 @@ msgstr ""
 
 #: src/booking/components/CalendarSettings.tsx
 msgid "Minimum booking time slot duration."
+msgstr ""
+
+#: src/freeipa/UsernameGroup.tsx
+msgid "Minimum username length is 3 characters."
 msgstr ""
 
 #: src/auth/valimo/AuthValimoDialog.tsx
@@ -4568,7 +4572,7 @@ msgstr ""
 msgid "Please search for your organization"
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.html
+#: src/freeipa/UsernameGroup.tsx
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
 
@@ -6496,7 +6500,7 @@ msgstr ""
 msgid "Sure? Form data would be lost"
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.html
+#: src/freeipa/SyncProfile.tsx
 msgid "Sync profile"
 msgstr ""
 
@@ -6672,8 +6676,8 @@ msgstr ""
 msgid "Terminating"
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.html
-#: src/freeipa/freeipa-account-edit.html
+#: src/freeipa/FreeIPAAccountEdit.tsx
+#: src/freeipa/TosGroup.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
@@ -7072,7 +7076,7 @@ msgstr ""
 msgid "Unable to confirm email."
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.js
+#: src/freeipa/FreeIPAAccountCreate.tsx
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
 
@@ -7149,8 +7153,16 @@ msgstr ""
 msgid "Unable to delete {resourceType}."
 msgstr ""
 
+#: src/freeipa/DisableProfile.tsx
+msgid "Unable to disable FreeIPA profile."
+msgstr ""
+
 #: src/issues/comments/effects.ts
 msgid "Unable to edit comment."
+msgstr ""
+
+#: src/freeipa/EnableProfile.tsx
+msgid "Unable to enable FreeIPA profile."
 msgstr ""
 
 #: src/customer/payment-profiles/store/effects.ts
@@ -7524,6 +7536,10 @@ msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
 msgid "Unable to submit usage report."
+msgstr ""
+
+#: src/freeipa/SyncProfile.tsx
+msgid "Unable to sync FreeIPA profile."
 msgstr ""
 
 #: src/customer/payments/store/effects.ts
@@ -7919,8 +7935,8 @@ msgstr ""
 
 #: src/auth/SigninForm.tsx
 #: src/auth/SignupForm.tsx
-#: src/freeipa/freeipa-account-create.html
-#: src/freeipa/freeipa-account-edit.html
+#: src/freeipa/FreeIPAAccountEdit.tsx
+#: src/freeipa/UsernameGroup.tsx
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
@@ -7935,15 +7951,15 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.html
+#: src/freeipa/UsernameGroup.tsx
 msgid "Username is required."
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.html
+#: src/freeipa/UsernameGroup.tsx
 msgid "Username prefix"
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.html
+#: src/freeipa/UsernameGroup.tsx
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
@@ -8304,7 +8320,7 @@ msgstr ""
 msgid "You haven't created any issues yet."
 msgstr ""
 
-#: src/freeipa/freeipa-account-create.js
+#: src/freeipa/TosGroup.tsx
 msgid "You must agree with terms of service."
 msgstr ""
 
@@ -8324,20 +8340,20 @@ msgstr ""
 msgid "You will be redirected in a moment."
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.js
-msgid "Your FreeIPA has been enabled."
-msgstr ""
-
-#: src/freeipa/freeipa-account-edit.js
+#: src/freeipa/SyncProfile.tsx
 msgid "Your FreeIPA has been removed in FreeIPA server."
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.js
+#: src/freeipa/SyncProfile.tsx
 msgid "Your FreeIPA has been synced successfully."
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.js
+#: src/freeipa/DisableProfile.tsx
 msgid "Your FreeIPA profile has been disabled."
+msgstr ""
+
+#: src/freeipa/EnableProfile.tsx
+msgid "Your FreeIPA profile has been enabled."
 msgstr ""
 
 #: src/invitations/InvitationConfirmDialog.tsx
@@ -8470,7 +8486,7 @@ msgstr ""
 msgid "generate automatically"
 msgstr ""
 
-#: src/freeipa/freeipa-account-edit.html
+#: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/user/support/TermsOfService.tsx
 msgid "have been accepted on"
 msgstr ""
