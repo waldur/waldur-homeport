@@ -30,3 +30,10 @@ export const linkInvoice = (paymentUuid: string, invoiceUrl: string) => ({
     invoiceUrl: invoiceUrl,
   },
 });
+
+export const unlinkInvoice = (paymentUuid: string) => ({
+  type: constants.UNLINK_INVOICE,
+  payload: {
+    paymentUuid: paymentUuid,
+  },
+});

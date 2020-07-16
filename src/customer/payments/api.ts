@@ -34,3 +34,6 @@ export const linkInvoice = (payload: {
   post(`/payments/${payload.paymentUuid}/link_to_invoice/`, {
     invoice: payload.invoiceUrl,
   });
+
+export const unlinkInvoice = (payload: { paymentUuid: string }) =>
+  post(`/payments/${payload.paymentUuid}/unlink_from_invoice/`);
