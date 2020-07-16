@@ -4765,11 +4765,13 @@ msgstr ""
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
+#: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
+#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx

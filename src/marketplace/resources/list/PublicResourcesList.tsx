@@ -47,6 +47,10 @@ export const TableComponent = (props) => {
       render: ({ row }) => <span>{row.customer_name}</span>,
     },
     {
+      title: translate('Project'),
+      render: ({ row }) => <span>{row.project_name}</span>,
+    },
+    {
       title: translate('Category'),
       render: ({ row }) => <span>{row.category_title}</span>,
     },
