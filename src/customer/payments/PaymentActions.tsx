@@ -7,6 +7,7 @@ import { PaymentUpdateDialogContainer } from '@waldur/customer/payments/PaymentU
 import {
   deletePayment,
   linkInvoice,
+  unlinkInvoice,
 } from '@waldur/customer/payments/store/actions';
 import { translate } from '@waldur/i18n';
 import { Invoice } from '@waldur/invoices/types';
@@ -52,7 +53,14 @@ const Actions = (props) => (
         onInvoiceSelect={(invoice) => props.linkInvoice(props.payment, invoice)}
         {...props.tooltipAndDisabledAttributes}
       />
-    ) : null}
+    ) : (
+      <ActionButton
+        title={translate('Unlink invoice')}
+        action={() => props.unlinkInvoice(props.payment)}
+        icon="fa fa-file-text-o"
+        {...props.tooltipAndDisabledAttributes}
+      />
+    )}
   </ButtonGroup>
 );
 
@@ -62,6 +70,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(openPaymentUpdateDialog(payment)),
   linkInvoice: (payment: Payment, invoice: Invoice) =>
     dispatch(linkInvoice(payment.uuid, invoice.url)),
+  unlinkInvoice: (payment: Payment) => dispatch(unlinkInvoice(payment.uuid)),
 });
 
 const enhance = connect(null, mapDispatchToProps);

@@ -94,9 +94,32 @@ function* linkInvoice(action: Action<any>) {
   }
 }
 
+function* unlinkInvoice(action: Action<any>) {
+  try {
+    yield call(api.unlinkInvoice, action.payload);
+    yield put(
+      showSuccess(
+        translate('Invoice has been successfully unlinked from payment.'),
+      ),
+    );
+    const customer = yield select(getCustomer);
+    yield put(
+      fetchListStart(PAYMENTS_TABLE, {
+        profile_uuid: getActivePaymentProfile(customer.payment_profiles).uuid,
+      }),
+    );
+  } catch (error) {
+    const errorMessage = `${translate(
+      'Unable to unlink invoice from the payment.',
+    )} ${format(error)}`;
+    yield put(showError(errorMessage));
+  }
+}
+
 export default function* () {
   yield takeEvery(constants.CREATE_PAYMENT, createPayment);
   yield takeEvery(constants.UPDATE_PAYMENT, updatePayment);
   yield takeEvery(constants.DELETE_PAYMENT, deletePayment);
   yield takeEvery(constants.LINK_INVOICE, linkInvoice);
+  yield takeEvery(constants.UNLINK_INVOICE, unlinkInvoice);
 }

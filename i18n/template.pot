@@ -2899,6 +2899,10 @@ msgstr ""
 msgid "Invoice has been successfully linked to payment."
 msgstr ""
 
+#: src/customer/payments/store/effects.ts
+msgid "Invoice has been successfully unlinked from payment."
+msgstr ""
+
 #: src/paypal/InvoiceActions.tsx
 msgid "Invoice has not been sent to PayPal yet"
 msgstr ""
@@ -7522,6 +7526,10 @@ msgstr ""
 msgid "Unable to submit usage report."
 msgstr ""
 
+#: src/customer/payments/store/effects.ts
+msgid "Unable to unlink invoice from the payment."
+msgstr ""
+
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Unable to update horizontal pod autoscaler."
 msgstr ""
@@ -7608,6 +7616,10 @@ msgstr ""
 
 #: src/rancher/node/actions/UnlinkAction.ts
 msgid "Unlink instance"
+msgstr ""
+
+#: src/customer/payments/PaymentActions.tsx
+msgid "Unlink invoice"
 msgstr ""
 
 #: src/paypal/InvoicesFilter.tsx
