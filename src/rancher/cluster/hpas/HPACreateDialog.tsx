@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { reduxForm, formValueSelector } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import {
@@ -47,9 +47,9 @@ const useHPACreateDialog = (cluster) => {
                   formData.target_type.value === 'Utilization'
                     ? formData.quantity
                     : null,
-                value:
-                  formData.target_type.value === 'Value'
-                    ? formData.quantity
+                averageValue:
+                  formData.target_type.value === 'AverageValue'
+                    ? `${formData.quantity}${formData.metric_name.unit}`
                     : null,
               },
             },
@@ -78,8 +78,20 @@ const useHPACreateDialog = (cluster) => {
   };
 };
 
+const FORM_ID = 'RancherHPACreate';
+
+const metricSelector = (state) =>
+  formValueSelector(FORM_ID)(state, 'metric_name');
+
+interface MetricOption {
+  label: string;
+  value: string;
+  unit: string;
+  unitDisplay: string;
+}
+
 export const HPACreateDialog = reduxForm<{}, OwnProps>({
-  form: 'RancherHPACreate',
+  form: FORM_ID,
   initialValues: {
     min_replicas: 1,
     max_replicas: 10,
@@ -94,21 +106,33 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
     [props.resolve.cluster.uuid],
   );
 
-  const metricNameOptions = React.useMemo(
+  const metricNameOptions = React.useMemo<MetricOption[]>(
     () => [
-      { label: translate('CPU'), value: 'cpu' },
-      { label: translate('Memory'), value: 'memory' },
+      {
+        label: translate('CPU'),
+        value: 'cpu',
+        unit: 'm',
+        unitDisplay: translate('milli CPUs'),
+      },
+      {
+        label: translate('Memory'),
+        value: 'memory',
+        unit: 'Mi',
+        unitDisplay: translate('MiB'),
+      },
     ],
     [],
   );
 
   const targetTypeOptions = React.useMemo(
     () => [
-      { label: translate('Average value'), value: 'Value' },
+      { label: translate('Average value'), value: 'AverageValue' },
       { label: translate('Average utilization'), value: 'Utilization' },
     ],
     [],
   );
+
+  const metric: MetricOption = useSelector(metricSelector);
 
   return (
     <ActionDialog
@@ -161,6 +185,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         name="quantity"
         label={translate('Quantity')}
         required={true}
+        unit={metric ? metric.unitDisplay : undefined}
       />
     </ActionDialog>
   );
