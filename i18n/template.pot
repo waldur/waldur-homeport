@@ -3374,6 +3374,10 @@ msgstr ""
 msgid "Metric name"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "MiB"
+msgstr ""
+
 #: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Min RAM"
 msgstr ""
@@ -8516,6 +8520,10 @@ msgstr ""
 
 #: src/table/utils.tsx
 msgid "items"
+msgstr ""
+
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+msgid "milli CPUs"
 msgstr ""
 
 #: src/booking/components/calendar/defaultOptions.ts
