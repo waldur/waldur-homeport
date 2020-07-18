@@ -1,6 +1,8 @@
 import { gettext } from '@waldur/i18n';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 
+import { BackupScheduleWarning } from './BackupScheduleWarning';
+
 ActionConfigurationRegistry.register('OpenStackTenant.BackupSchedule', {
   order: ['update', 'activate', 'deactivate', 'destroy'],
   options: {
@@ -15,7 +17,7 @@ ActionConfigurationRegistry.register('OpenStackTenant.BackupSchedule', {
           type: 'timezone',
         },
         warning: {
-          component: 'openstackBackupScheduleWarning',
+          component: BackupScheduleWarning,
         },
       },
     },

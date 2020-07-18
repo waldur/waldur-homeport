@@ -1512,7 +1512,7 @@ msgstr ""
 msgid "Current email"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-current-flavor.tsx
+#: src/openstack/openstack-instance/OpenStackInstanceCurrentFlavor.tsx
 msgid "Current flavor"
 msgstr ""
 

@@ -18,8 +18,8 @@ export default (module) => {
   openstackInstanceModule(module);
   openstackVolumeModule();
   openstackBackupModule(module);
-  openstackBackupScheduleModule(module);
-  openstackNetworkModule(module);
+  openstackBackupScheduleModule();
+  openstackNetworkModule();
   openstackSubnetModule(module);
   openstackSecurityGroupsModule(module);
   openstackSnapshotModule();

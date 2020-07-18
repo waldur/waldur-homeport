@@ -4,11 +4,9 @@ import { DEFAULT_EDIT_ACTION } from '@waldur/resource/actions/constants';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import './breadcrumbs';
-import { formatAllocationPool } from './filters';
-import openstackAllocationPool from './openstack-allocation-pool';
-import { OpenStackNetworkSummary } from './OpenStackNetworkSummary';
-
 import './tabs';
+import { OpenstackAllocationPool } from './OpenstackAllocationPool';
+import { OpenStackNetworkSummary } from './OpenStackNetworkSummary';
 
 ActionConfigurationRegistry.register('OpenStack.Network', {
   order: ['edit', 'pull', 'create_subnet', 'destroy'],
@@ -30,7 +28,7 @@ ActionConfigurationRegistry.register('OpenStack.Network', {
           default_value: '192.168.42.0/24',
         },
         allocation_pool: {
-          component: 'openstackAllocationPool',
+          component: OpenstackAllocationPool,
           label: gettext('Internal network allocation pool'),
           parentField: 'cidr',
         },
@@ -49,8 +47,6 @@ ActionConfigurationRegistry.register('OpenStack.Network', {
   },
 });
 
-export default (module) => {
+export default () => {
   ResourceSummary.register('OpenStack.Network', OpenStackNetworkSummary);
-  module.component('openstackAllocationPool', openstackAllocationPool);
-  module.filter('formatAllocationPool', formatAllocationPool);
 };
