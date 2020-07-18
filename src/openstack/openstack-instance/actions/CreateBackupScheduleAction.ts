@@ -1,5 +1,6 @@
 import { $rootScope } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { BackupScheduleWarning } from '@waldur/openstack/openstack-backup-schedule/BackupScheduleWarning';
 import {
   validateState,
   createNameField,
@@ -55,7 +56,7 @@ export default function createAction(): ResourceAction {
       },
       {
         name: 'warning',
-        component: 'openstackBackupScheduleWarning',
+        component: BackupScheduleWarning,
       },
     ],
     onSuccess() {

@@ -8,7 +8,6 @@ interface BaseField<Resource> {
   label?: string;
   type?: string;
   required?: boolean;
-  component?: string;
   placeholder?: string;
   init?: (field, resource: Resource, form?: any, action?: any) => void;
   default_value?: any;
@@ -45,7 +44,7 @@ interface IntegerField<Resource> extends BaseField<Resource> {
 }
 
 interface ComponentField<Resource> extends Omit<BaseField<Resource>, 'type'> {
-  component: string;
+  component: string | React.ComponentType<any>;
 }
 
 export type ActionField<Resource = BaseResource> =

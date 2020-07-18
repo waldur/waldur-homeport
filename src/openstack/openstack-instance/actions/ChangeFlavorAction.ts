@@ -12,6 +12,8 @@ import {
 } from '@waldur/resource/actions/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
+import { OpenStackInstanceCurrentFlavor } from '../OpenStackInstanceCurrentFlavor';
+
 function flavorFormatter(flavor) {
   const props = formatFlavor(flavor);
   return `${flavor.name} (${props})`;
@@ -64,7 +66,7 @@ export default function createAction(
     fields: [
       {
         name: 'currentFlavor',
-        component: 'openstackInstanceCurrentFlavor',
+        component: OpenStackInstanceCurrentFlavor,
       },
       createNewFlavorField(ctx),
     ],

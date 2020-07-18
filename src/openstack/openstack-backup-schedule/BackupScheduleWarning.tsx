@@ -3,9 +3,8 @@ import * as Panel from 'react-bootstrap/lib/Panel';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
-const BackupScheduleWarning = () => (
+export const BackupScheduleWarning = () => (
   <Panel id="backup-schedule-message">
     <Panel.Heading>
       <Panel.Title toggle={true}>
@@ -20,5 +19,3 @@ const BackupScheduleWarning = () => (
     </Panel.Collapse>
   </Panel>
 );
-
-export default connectAngularComponent(BackupScheduleWarning);
