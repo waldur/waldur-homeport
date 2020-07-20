@@ -58,38 +58,3 @@ export const format = (response) => {
 
   return message;
 };
-
-export default class ErrorMessageFormatter {
-  format = format;
-
-  formatErrorFields(error) {
-    let errors = [];
-    if (!(error.data instanceof Object)) {
-      return [error.data];
-    }
-
-    for (const i in error.data) {
-      if (error.data.hasOwnProperty(i)) {
-        errors = errors.concat(i + ': ' + error.data[i]);
-      }
-    }
-    return errors;
-  }
-
-  parseError(error) {
-    const errors: any = {};
-    if (error.data && typeof error.data === 'object') {
-      for (const key of Object.keys(error.data)) {
-        const errorValue = error.data[key];
-        if (Array.isArray(errorValue)) {
-          errors[key] = errorValue;
-        } else {
-          errors[key] = [errorValue];
-        }
-      }
-    } else if (error.data) {
-      errors.nonFieldErrors = [].concat(error.data);
-    }
-    return errors;
-  }
-}

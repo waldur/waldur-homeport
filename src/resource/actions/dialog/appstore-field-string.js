@@ -1,6 +1,7 @@
 import { translate } from '@waldur/i18n';
 
 import template from './appstore-field-string.html';
+import { formFieldInvalid } from './utils';
 
 const appstoreFieldString = {
   template: template,
@@ -10,13 +11,8 @@ const appstoreFieldString = {
     form: '=',
   },
   controller: class AppstoreFieldStringController {
-    // @ngInject
-    constructor(formUtils) {
-      this.formUtils = formUtils;
-    }
-
     invalid() {
-      return this.formUtils.formFieldInvalid(this.form, this.field.name);
+      return formFieldInvalid(this.form, this.field.name);
     }
 
     showRequiredError() {

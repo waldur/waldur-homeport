@@ -1,6 +1,5 @@
 import { AuthService } from '@waldur/auth/AuthService';
 
-import ErrorMessageFormatter from './ErrorMessageFormatter';
 import loadingSpinner from './LoadingSpinner';
 import sentryModule from './sentry';
 import injectServices from './services';
@@ -49,7 +48,6 @@ function defaultErrorHandler($state) {
 }
 
 export default (module) => {
-  module.service('ErrorMessageFormatter', ErrorMessageFormatter);
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
   module.run(redirectToState);

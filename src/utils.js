@@ -1,5 +1,7 @@
+import { format } from './core/ErrorMessageFormatter';
+
 // @ngInject
-export function ncUtilsFlash(Flash, $rootScope, ErrorMessageFormatter) {
+export function ncUtilsFlash(Flash, $rootScope) {
   const dismiss = Flash.dismiss;
   Flash.dismiss = function () {
     // for hasFlash variable change emit for ng-show directive in flash block
@@ -25,7 +27,7 @@ export function ncUtilsFlash(Flash, $rootScope, ErrorMessageFormatter) {
       }
     },
     errorFromResponse: function (response, message) {
-      const details = ErrorMessageFormatter.format(response);
+      const details = format(response);
       const errorMessage = `${message}. ${details}`;
       this.error(errorMessage);
     },

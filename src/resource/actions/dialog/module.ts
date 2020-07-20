@@ -15,7 +15,6 @@ import actionField from './ActionField';
 import appstoreFieldMultiselect from './appstore-field-multiselect';
 import appstoreFieldString from './appstore-field-string';
 import fieldLabel from './field-label';
-import FormUtils from './form-utils';
 import helpicon from './help-icon';
 import multiplyBy from './multiply-by';
 
@@ -34,7 +33,6 @@ export default (module) => {
   module.component('actionFieldChoice', actionFieldChoice);
   module.component('actionFieldTimezone', actionFieldTimezone);
   module.component('actionFieldJson', actionFieldJson);
-  module.service('formUtils', FormUtils);
   module.component('appstoreFieldString', appstoreFieldString);
   module.component('appstoreFieldMultiselect', appstoreFieldMultiselect);
   module.directive('helpicon', helpicon);
