@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useEffectOnce from 'react-use/lib/useEffectOnce';
 import { reduxForm } from 'redux-form';
 
@@ -13,6 +13,15 @@ import { HPA } from '@waldur/rancher/types';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { updateEntity } from '@waldur/table/actions';
 
+import { MetricOption, HPAUpdateFormData } from './types';
+import {
+  getMetricNameOptions,
+  getTargetTypeOptions,
+  serializeMetrics,
+  metricSelector,
+  FORM_ID,
+} from './utils';
+
 interface OwnProps {
   resolve: {
     hpa: HPA;
@@ -23,7 +32,7 @@ const useHPAUpdateDialog = (originalHPA) => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const callback = React.useCallback(
-    async (formData) => {
+    async (formData: HPAUpdateFormData) => {
       try {
         setSubmitting(true);
         const response = await updateHPA(originalHPA.uuid, {
@@ -31,23 +40,7 @@ const useHPAUpdateDialog = (originalHPA) => {
           description: formData.description,
           min_replicas: formData.min_replicas,
           max_replicas: formData.max_replicas,
-          metrics: [
-            {
-              name: formData.metric_name.value,
-              type: 'Resource',
-              target: {
-                type: formData.target_type.value,
-                utilization:
-                  formData.target_type.value === 'Utilization'
-                    ? formData.quantity
-                    : null,
-                value:
-                  formData.target_type.value === 'Value'
-                    ? formData.quantity
-                    : null,
-              },
-            },
-          ],
+          metrics: serializeMetrics(formData),
         });
         const hpa = response.data;
         dispatch(updateEntity('rancher-hpas', hpa.uuid, hpa));
@@ -72,27 +65,18 @@ const useHPAUpdateDialog = (originalHPA) => {
   };
 };
 
-export const HPAUpdateDialog = reduxForm<{}, OwnProps>({
-  form: 'RancherHPAupdate',
+export const HPAUpdateDialog = reduxForm<HPAUpdateFormData, OwnProps>({
+  form: FORM_ID,
 })((props) => {
   const { hpa } = props.resolve;
   const { submitting, callback } = useHPAUpdateDialog(hpa);
 
-  const metricNameOptions = React.useMemo(
-    () => [
-      { label: translate('CPU'), value: 'cpu' },
-      { label: translate('Memory'), value: 'memory' },
-    ],
+  const metricNameOptions = React.useMemo<MetricOption[]>(
+    getMetricNameOptions,
     [],
   );
 
-  const targetTypeOptions = React.useMemo(
-    () => [
-      { label: translate('Average value'), value: 'Value' },
-      { label: translate('Average utilization'), value: 'Utilization' },
-    ],
-    [],
-  );
+  const targetTypeOptions = React.useMemo(getTargetTypeOptions, []);
 
   useEffectOnce(() => {
     const metric = hpa.metrics[0];
@@ -109,13 +93,15 @@ export const HPAUpdateDialog = reduxForm<{}, OwnProps>({
           option.value.toLocaleLowerCase() ===
           metric.target.type.toLocaleLowerCase(),
       ),
-      quantity: metric.target.utilization || metric.target.value,
+      quantity: metric.target.utilization || metric.target.averageValue,
     });
   });
 
+  const metric: MetricOption = useSelector(metricSelector);
+
   return (
     <ActionDialog
-      title={translate('update horizontal pod autoscaler')}
+      title={translate('Update horizontal pod autoscaler')}
       submitLabel={translate('Submit')}
       onSubmit={props.handleSubmit(callback)}
       submitting={submitting}
@@ -156,6 +142,7 @@ export const HPAUpdateDialog = reduxForm<{}, OwnProps>({
         name="quantity"
         label={translate('Quantity')}
         required={true}
+        unit={metric ? metric.unitDisplay : undefined}
       />
     </ActionDialog>
   );

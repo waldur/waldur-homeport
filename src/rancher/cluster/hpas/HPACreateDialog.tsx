@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import {
@@ -18,6 +18,15 @@ import { Resource } from '@waldur/resource/types';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { createEntity } from '@waldur/table/actions';
 
+import { MetricOption, HPACreateFormData } from './types';
+import {
+  getMetricNameOptions,
+  getTargetTypeOptions,
+  serializeMetrics,
+  FORM_ID,
+  metricSelector,
+} from './utils';
+
 interface OwnProps {
   resolve: {
     cluster: Resource;
@@ -28,7 +37,7 @@ const useHPACreateDialog = (cluster) => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const callback = React.useCallback(
-    async (formData) => {
+    async (formData: HPACreateFormData) => {
       try {
         setSubmitting(true);
         const response = await createHPA({
@@ -37,23 +46,7 @@ const useHPACreateDialog = (cluster) => {
           workload: formData.workload.url,
           min_replicas: formData.min_replicas,
           max_replicas: formData.max_replicas,
-          metrics: [
-            {
-              name: formData.metric_name.value,
-              type: 'Resource',
-              target: {
-                type: formData.target_type.value,
-                utilization:
-                  formData.target_type.value === 'Utilization'
-                    ? formData.quantity
-                    : null,
-                averageValue:
-                  formData.target_type.value === 'AverageValue'
-                    ? `${formData.quantity}${formData.metric_name.unit}`
-                    : null,
-              },
-            },
-          ],
+          metrics: serializeMetrics(formData),
         });
         const hpa = response.data;
         dispatch(createEntity('rancher-hpas', hpa.uuid, hpa));
@@ -78,18 +71,6 @@ const useHPACreateDialog = (cluster) => {
   };
 };
 
-const FORM_ID = 'RancherHPACreate';
-
-const metricSelector = (state) =>
-  formValueSelector(FORM_ID)(state, 'metric_name');
-
-interface MetricOption {
-  label: string;
-  value: string;
-  unit: string;
-  unitDisplay: string;
-}
-
 export const HPACreateDialog = reduxForm<{}, OwnProps>({
   form: FORM_ID,
   initialValues: {
@@ -107,30 +88,11 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
   );
 
   const metricNameOptions = React.useMemo<MetricOption[]>(
-    () => [
-      {
-        label: translate('CPU'),
-        value: 'cpu',
-        unit: 'm',
-        unitDisplay: translate('milli CPUs'),
-      },
-      {
-        label: translate('Memory'),
-        value: 'memory',
-        unit: 'Mi',
-        unitDisplay: translate('MiB'),
-      },
-    ],
+    getMetricNameOptions,
     [],
   );
 
-  const targetTypeOptions = React.useMemo(
-    () => [
-      { label: translate('Average value'), value: 'AverageValue' },
-      { label: translate('Average utilization'), value: 'Utilization' },
-    ],
-    [],
-  );
+  const targetTypeOptions = React.useMemo(getTargetTypeOptions, []);
 
   const metric: MetricOption = useSelector(metricSelector);
 

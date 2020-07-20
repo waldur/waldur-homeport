@@ -696,13 +696,11 @@ msgstr ""
 msgid "Available quota usage: {usage}"
 msgstr ""
 
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
-#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/rancher/cluster/hpas/utils.ts
 msgid "Average utilization"
 msgstr ""
 
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
-#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/rancher/cluster/hpas/utils.ts
 msgid "Average value"
 msgstr ""
 
@@ -882,8 +880,7 @@ msgstr ""
 msgid "CIDR"
 msgstr ""
 
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
-#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/rancher/cluster/hpas/utils.ts
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "CPU"
@@ -3343,8 +3340,7 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
-#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/rancher/cluster/hpas/utils.ts
 msgid "Memory"
 msgstr ""
 
@@ -3374,7 +3370,7 @@ msgstr ""
 msgid "Metric name"
 msgstr ""
 
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/utils.ts
 msgid "MiB"
 msgstr ""
 
@@ -7664,6 +7660,10 @@ msgstr ""
 msgid "Update floating IPs"
 msgstr ""
 
+#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+msgid "Update horizontal pod autoscaler"
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Update limits for an existing resource"
 msgstr ""
@@ -8522,7 +8522,7 @@ msgstr ""
 msgid "items"
 msgstr ""
 
-#: src/rancher/cluster/hpas/HPACreateDialog.tsx
+#: src/rancher/cluster/hpas/utils.ts
 msgid "milli CPUs"
 msgstr ""
 
@@ -8651,10 +8651,6 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "token will not timeout"
-msgstr ""
-
-#: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
-msgid "update horizontal pod autoscaler"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
