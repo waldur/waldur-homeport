@@ -2014,6 +2014,10 @@ msgstr ""
 msgid "Enable profile"
 msgstr ""
 
+#: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
+msgid "Enable profile after creation"
+msgstr ""
+
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HookForm.tsx
 msgid "Enabled"
@@ -4334,6 +4338,10 @@ msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfilesPanel.tsx
 msgid "Payment profile defines how invoices are processed."
+msgstr ""
+
+#: src/customer/payment-profiles/store/effects.ts
+msgid "Payment profile has been created and enabled."
 msgstr ""
 
 #: src/customer/payment-profiles/store/effects.ts

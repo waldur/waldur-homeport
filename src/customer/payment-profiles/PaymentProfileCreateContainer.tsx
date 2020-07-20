@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Option } from 'react-select';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { required } from '@waldur/core/validators';
 import { ADD_PAYMENT_PROFILE_FORM_ID } from '@waldur/customer/payment-profiles/constants';
 import { addPaymentProfile } from '@waldur/customer/payment-profiles/store/actions';
@@ -77,6 +78,17 @@ const PaymentProfileCreate = (props) => {
         {isFixedPrice && (
           <NumberField name="contract_sum" label={translate('Contract sum')} />
         )}
+
+        <Field
+          name="enabled"
+          component={(prop) => (
+            <AwesomeCheckbox
+              id="enable_after_creation"
+              label={translate('Enable profile after creation')}
+              {...prop.input}
+            />
+          )}
+        />
 
         <div className="form-group">
           <div

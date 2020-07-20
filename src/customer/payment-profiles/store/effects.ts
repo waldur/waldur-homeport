@@ -16,11 +16,26 @@ import * as constants from '../constants';
 function* addPaymentProfile(action) {
   try {
     const customer = yield select(getCustomer);
-    yield call(api.createPaymentProfile, {
+    const paymentProfile = yield call(api.createPaymentProfile, {
       ...action.payload,
       customer,
     });
-    yield put(showSuccess(translate('Payment profile has been created.')));
+    if (paymentProfile?.uuid && action.payload.enabled) {
+      yield call(api.enablePaymentProfile, paymentProfile.uuid);
+    }
+    const successMessageForCreation = translate(
+      'Payment profile has been created.',
+    );
+    const successMessageForCreationAndEnabling = translate(
+      'Payment profile has been created and enabled.',
+    );
+    yield put(
+      showSuccess(
+        action.payload.enabled
+          ? successMessageForCreationAndEnabling
+          : successMessageForCreation,
+      ),
+    );
     yield put(stateGo('organization.manage'));
   } catch (error) {
     const errorMessage = `${translate(
