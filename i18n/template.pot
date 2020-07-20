@@ -855,6 +855,7 @@ msgstr ""
 
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 msgid "Browse"
@@ -1593,6 +1594,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/dashboard/chart.ts
+#: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/paypal/PaymentsList.tsx
 msgid "Date"
@@ -3243,6 +3245,10 @@ msgstr ""
 msgid "Mark as paid"
 msgstr ""
 
+#: src/invoices/list/MarkAsPaidDialog.tsx
+msgid "Mark invoice as paid"
+msgstr ""
+
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
@@ -4616,6 +4622,10 @@ msgstr ""
 msgid "Please, create and enable a payment profile to be able to manage payments."
 msgstr ""
 
+#: src/invoices/list/MarkAsPaidDialog.tsx
+msgid "Please, select a date."
+msgstr ""
+
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Plugin options are invalid."
 msgstr ""
@@ -4908,6 +4918,7 @@ msgstr ""
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/customer/payments/PaymentsList.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
 msgid "Proof"
 msgstr ""
 
@@ -6402,6 +6413,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
@@ -6698,7 +6710,7 @@ msgstr ""
 msgid "Terms of service"
 msgstr ""
 
-#: src/invoices/list/MarkAsPaidButton.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
 msgid "The invoice has been marked as paid."
 msgstr ""
 
@@ -7431,7 +7443,7 @@ msgstr ""
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
-#: src/invoices/list/MarkAsPaidButton.tsx
+#: src/invoices/list/MarkAsPaidDialog.tsx
 msgid "Unable to mark the invoice as paid."
 msgstr ""
 

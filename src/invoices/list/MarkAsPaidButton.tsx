@@ -1,28 +1,25 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { post } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { MarkAsPaidDialog } from '@waldur/invoices/list/MarkAsPaidDialog';
+import { Invoice } from '@waldur/invoices/types';
+import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
+const openMarkAsPaidDialog = (invoice: Invoice) =>
+  openModalDialog(MarkAsPaidDialog, {
+    resolve: invoice,
+    size: 'lg',
+  });
+
 export const MarkAsPaidButton = ({ row }) => {
-  const user = useSelector(getUser);
   const dispatch = useDispatch();
+  const user = useSelector(getUser);
   if (!user.is_staff) {
     return null;
   }
-
-  const onClick = async () => {
-    try {
-      await post(`/invoices/${row.uuid}/paid/`);
-      dispatch(showSuccess(translate('The invoice has been marked as paid.')));
-    } catch (e) {
-      dispatch(showError(translate('Unable to mark the invoice as paid.')));
-    }
-  };
-
   return (
     <ActionButton
       title={translate('Mark as paid')}
@@ -33,7 +30,7 @@ export const MarkAsPaidButton = ({ row }) => {
           ? translate('Only a created invoice can be marked as paid.')
           : ''
       }
-      action={onClick}
+      action={() => dispatch(openMarkAsPaidDialog(row))}
     />
   );
 };
