@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
+import { INVOICES_TABLE } from '@waldur/invoices/constants';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { MarkAsPaidButton } from '@waldur/invoices/list/MarkAsPaidButton';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -77,7 +78,7 @@ const mapPropsToFilter = (props) => ({
 });
 
 const TableOptions: TableOptionsType = {
-  table: 'invoices',
+  table: INVOICES_TABLE,
   fetchData: createFetcher('invoices'),
   mapPropsToFilter,
   queryField: 'number',
