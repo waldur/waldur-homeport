@@ -2,10 +2,6 @@
   <label>
     <input type="checkbox" ng-model="$ctrl.model[$ctrl.field.name]" />
     <field-label field="$ctrl.field"></field-label>
-    <helpicon
-      help-text="{{ ::$ctrl.field.help_text }}"
-      ng-if="::$ctrl.field.help_text"
-    >
-    </helpicon>
+    <helpicon help-text="$ctrl.field.help_text"></helpicon>
   </label>
 </div>
