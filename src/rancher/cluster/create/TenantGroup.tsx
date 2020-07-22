@@ -103,19 +103,21 @@ export const TenantGroup = (props) => {
     return (
       <>
         <SubnetGroup options={resourceProps.value.subnets} />
-        <FormGroup
-          labelClassName="control-label col-sm-3"
-          valueClassName="col-sm-9"
-          label={translate('Template')}
-        >
-          <Field
-            name="attributes.template"
-            component={SelectField}
-            options={resourceProps.value.templates}
-            labelKey="name"
-            valueKey="uuid"
-          />
-        </FormGroup>
+        {resourceProps.value.templates.length > 0 ? (
+          <FormGroup
+            labelClassName="control-label col-sm-3"
+            valueClassName="col-sm-9"
+            label={translate('Template')}
+          >
+            <Field
+              name="attributes.template"
+              component={SelectField}
+              options={resourceProps.value.templates}
+              labelKey="name"
+              valueKey="uuid"
+            />
+          </FormGroup>
+        ) : null}
         <FormGroup
           labelClassName="control-label col-sm-3"
           valueClassName="col-sm-9"

@@ -16,6 +16,10 @@ msgstr ""
 msgid "?"
 msgstr ""
 
+#: src/rancher/cluster/create/LonghornWorkerWarning.tsx
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr ""
+
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "A one-time fee applied on activation."
 msgstr ""
@@ -3195,6 +3199,10 @@ msgstr ""
 
 #: src/auth/callbacks/AuthLogoutFailed.tsx
 msgid "Logout failed"
+msgstr ""
+
+#: src/rancher/cluster/create/RancherClusterForm.tsx
+msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
 msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
@@ -6740,6 +6748,10 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 msgid "The value is not valid IP v4"
+msgstr ""
+
+#: src/rancher/cluster/create/LonghornWorkerWarning.tsx
+msgid "The worker node is expected to have at least 4 vCPU and 4 GB RAM to run Longhorn."
 msgstr ""
 
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
