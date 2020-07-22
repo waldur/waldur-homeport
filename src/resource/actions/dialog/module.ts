@@ -1,3 +1,5 @@
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import actionDialog from './action-dialog';
 import actionFieldBoolean from './action-field-boolean';
 import actionFieldChoice from './action-field-choice';
@@ -14,8 +16,8 @@ import actionFieldTimezone from './action-field-timezone';
 import actionField from './ActionField';
 import appstoreFieldMultiselect from './appstore-field-multiselect';
 import appstoreFieldString from './appstore-field-string';
-import fieldLabel from './field-label';
-import helpicon from './help-icon';
+import { FieldLabel } from './FieldLabel';
+import { HelpIcon } from './HelpIcon';
 import multiplyBy from './multiply-by';
 
 export default (module) => {
@@ -35,7 +37,10 @@ export default (module) => {
   module.component('actionFieldJson', actionFieldJson);
   module.component('appstoreFieldString', appstoreFieldString);
   module.component('appstoreFieldMultiselect', appstoreFieldMultiselect);
-  module.directive('helpicon', helpicon);
+  module.component('helpicon', connectAngularComponent(HelpIcon, ['helpText']));
   module.directive('multiplyBy', multiplyBy);
-  module.directive('fieldLabel', fieldLabel);
+  module.component(
+    'fieldLabel',
+    connectAngularComponent(FieldLabel, ['field']),
+  );
 };
