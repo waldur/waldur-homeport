@@ -6,8 +6,9 @@ import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
+import { NodeRole } from '@waldur/rancher/types';
 
-const countNodesByRole = (role, nodes) =>
+const countNodesByRole = (role: NodeRole, nodes) =>
   nodes.filter((node) => (node.roles || []).includes(role)).length;
 
 const sum = (values) => values.reduce((total, value) => total + value, 0);

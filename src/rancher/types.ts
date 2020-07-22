@@ -114,3 +114,5 @@ export interface ClusterTemplate {
   modified: string;
   nodes: ClusterTemplateNode[];
 }
+
+export type NodeRole = 'worker' | 'etcd' | 'controlplane';

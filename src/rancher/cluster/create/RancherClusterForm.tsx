@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
+import { ExternalLink } from '@waldur/core/ExternalLink';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,
@@ -94,6 +95,14 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
             'Deploy Longhorn block storage after cluster is deployed',
           )}
           hideLabel={true}
+          description={
+            <ExternalLink
+              label={translate(
+                'Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes.',
+              )}
+              url="https://longhorn.io/docs/"
+            />
+          }
         />
         {props.project && <TenantSelector project={props.project} />}
         {tenant && <TenantGroup tenant={tenant} />}
