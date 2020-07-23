@@ -27,10 +27,12 @@ export const TableComponent = (props) => {
     {
       title: translate('Type'),
       render: ({ row }) => row.payment_type_display,
+      orderField: 'payment_type',
     },
     {
       title: translate('Name'),
       render: ({ row }) => row.name,
+      orderField: 'name',
     },
     {
       title: translate('Status'),
@@ -40,6 +42,7 @@ export const TableComponent = (props) => {
           variant={row.is_active ? 'success' : 'plain'}
         />
       ),
+      orderField: 'is_active',
     },
     {
       title: translate('Actions'),
@@ -73,7 +76,10 @@ export const TableComponent = (props) => {
 const TableOptions = {
   table: PAYMENT_PROFILES_TABLE,
   fetchData: createFetcher('payment-profiles'),
-  mapPropsToFilter: (props) => ({ organization_uuid: props.customer.uuid }),
+  mapPropsToFilter: (props) => ({
+    organization_uuid: props.customer.uuid,
+    o: 'is_active',
+  }),
 };
 
 const mapStateToProps = (state) => ({
