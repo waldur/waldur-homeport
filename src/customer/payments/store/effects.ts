@@ -2,13 +2,11 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
-import { PAYMENTS_TABLE } from '@waldur/customer/details/constants';
 import * as api from '@waldur/customer/payments/api';
+import { updatePaymentsList } from '@waldur/customer/payments/utils';
 import { translate } from '@waldur/i18n';
-import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { fetchListStart } from '@waldur/table/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as constants from '../constants';
@@ -21,11 +19,7 @@ function* createPayment(action) {
     yield put(showSuccess(translate('Payment has been created.')));
     yield put(closeModalDialog());
     const customer = yield select(getCustomer);
-    yield put(
-      fetchListStart(PAYMENTS_TABLE, {
-        profile_uuid: getActivePaymentProfile(customer.payment_profiles).uuid,
-      }),
-    );
+    yield put(updatePaymentsList(customer));
   } catch (error) {
     const errorMessage = `${translate('Unable to create payment.')} ${format(
       error,
@@ -40,11 +34,7 @@ function* updatePayment(action) {
     yield put(showSuccess(translate('Payment has been updated.')));
     yield put(closeModalDialog());
     const customer = yield select(getCustomer);
-    yield put(
-      fetchListStart(PAYMENTS_TABLE, {
-        profile_uuid: getActivePaymentProfile(customer.payment_profiles).uuid,
-      }),
-    );
+    yield put(updatePaymentsList(customer));
   } catch (error) {
     const errorMessage = `${translate('Unable to update payment.')} ${format(
       error,
@@ -59,11 +49,7 @@ function* deletePayment(action: Action<any>) {
     yield put(showSuccess(translate('Payment has been deleted.')));
     yield put(closeModalDialog());
     const customer = yield select(getCustomer);
-    yield put(
-      fetchListStart(PAYMENTS_TABLE, {
-        profile_uuid: getActivePaymentProfile(customer.payment_profiles).uuid,
-      }),
-    );
+    yield put(updatePaymentsList(customer));
   } catch (error) {
     const errorMessage = `${translate('Unable to delete payment.')} ${format(
       error,
@@ -81,11 +67,7 @@ function* linkInvoice(action: Action<any>) {
       ),
     );
     const customer = yield select(getCustomer);
-    yield put(
-      fetchListStart(PAYMENTS_TABLE, {
-        profile_uuid: getActivePaymentProfile(customer.payment_profiles).uuid,
-      }),
-    );
+    yield put(updatePaymentsList(customer));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to link invoice to the payment.',
@@ -103,11 +85,7 @@ function* unlinkInvoice(action: Action<any>) {
       ),
     );
     const customer = yield select(getCustomer);
-    yield put(
-      fetchListStart(PAYMENTS_TABLE, {
-        profile_uuid: getActivePaymentProfile(customer.payment_profiles).uuid,
-      }),
-    );
+    yield put(updatePaymentsList(customer));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to unlink invoice from the payment.',
