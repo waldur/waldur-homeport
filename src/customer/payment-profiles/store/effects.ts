@@ -4,11 +4,14 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
 import { PAYMENT_PROFILES_TABLE } from '@waldur/customer/details/constants';
 import * as api from '@waldur/customer/payment-profiles/api';
+import { updatePaymentsList } from '@waldur/customer/payments/utils';
 import { translate } from '@waldur/i18n';
+import { getCustomer as getCustomerApi } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { FETCH_LIST_START } from '@waldur/table/actions';
 import { fetchList } from '@waldur/table/effects';
+import { setCurrentCustomer } from '@waldur/workspace/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as constants from '../constants';
@@ -36,6 +39,8 @@ function* addPaymentProfile(action) {
           : successMessageForCreation,
       ),
     );
+    const updatedCustomer = yield call(getCustomerApi, customer.uuid);
+    yield put(setCurrentCustomer(updatedCustomer));
     yield put(stateGo('organization.manage'));
   } catch (error) {
     const errorMessage = `${translate(
@@ -60,6 +65,7 @@ function* editPaymentProfile(action) {
         },
       },
     });
+    yield put(updatePaymentsList(customer));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to update payment profile.',
@@ -83,6 +89,9 @@ function* removePaymentProfile(action: Action<any>) {
         },
       },
     });
+    const updatedCustomer = yield call(getCustomerApi, customer.uuid);
+    yield put(setCurrentCustomer(updatedCustomer));
+    yield put(updatePaymentsList(updatedCustomer));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to remove payment profile.',
@@ -105,6 +114,9 @@ function* enablePaymentProfile(action: Action<any>) {
         },
       },
     });
+    const updatedCustomer = yield call(getCustomerApi, customer.uuid);
+    yield put(setCurrentCustomer(updatedCustomer));
+    yield put(updatePaymentsList(updatedCustomer));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to enable payment profile.',
