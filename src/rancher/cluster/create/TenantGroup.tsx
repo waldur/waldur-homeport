@@ -88,6 +88,7 @@ export const TenantGroup = (props) => {
           }),
         );
       }
+      dispatch(change(FORM_ID, 'limits.node', template.nodes.length));
     });
   }, [dispatch, template]);
 
