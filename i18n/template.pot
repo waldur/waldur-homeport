@@ -5845,6 +5845,7 @@ msgstr ""
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 #: src/openstack/openstack-security-groups/breadcrumbs.ts
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Security groups"
 msgstr ""
 
