@@ -119,6 +119,22 @@ export const TenantGroup = (props) => {
             />
           </FormGroup>
         ) : null}
+        {resourceProps.value.securityGroups.length > 0 ? (
+          <FormGroup
+            labelClassName="control-label col-sm-3"
+            valueClassName="col-sm-9"
+            label={translate('Security groups')}
+          >
+            <Field
+              name="attributes.security_groups"
+              component={SelectField}
+              options={resourceProps.value.securityGroups}
+              labelKey="name"
+              valueKey="url"
+              multi={true}
+            />
+          </FormGroup>
+        ) : null}
         <FormGroup
           labelClassName="control-label col-sm-3"
           valueClassName="col-sm-9"

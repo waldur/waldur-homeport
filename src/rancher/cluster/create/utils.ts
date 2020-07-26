@@ -1,6 +1,12 @@
 import { ENV } from '@waldur/core/services';
+import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { getFlavors, getSubnets, getVolumeTypes } from '@waldur/openstack/api';
+import {
+  loadSecurityGroups,
+  getFlavors,
+  getSubnets,
+  getVolumeTypes,
+} from '@waldur/openstack/api';
 import { Flavor, Subnet } from '@waldur/openstack/openstack-instance/types';
 import {
   formatVolumeTypeChoices,
@@ -43,6 +49,7 @@ export const loadData = async (settings) => {
   const templates = await listClusterTemplates();
   const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
   const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
+  const securityGroups = await loadSecurityGroups(getUUID(settings));
   return {
     subnets: subnets.map(formatSubnetOption),
     flavors: flavors.map(formatFlavorOption),
@@ -50,6 +57,7 @@ export const loadData = async (settings) => {
     defaultVolumeType: defaultVolumeType && defaultVolumeType.url,
     mountPoints: getMountPointChoices(),
     templates,
+    securityGroups,
   };
 };
 
