@@ -1,5 +1,6 @@
 import * as moment from 'moment-timezone';
 import * as React from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
@@ -19,6 +20,14 @@ const daysArray = [1, 2, 3, 4, 5, 6, 0];
 const getDayLabel = (day: number, lang): string =>
   moment.locale(lang) && moment.weekdays(day);
 
+const usePreviousWeekendsValue = (value) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
+
 export const CalendarSettings: React.FC = () => {
   const {
     weekends,
@@ -35,19 +44,28 @@ export const CalendarSettings: React.FC = () => {
     setTimeZone,
   } = useCalendarSettings();
 
+  const prevWeekends = usePreviousWeekendsValue(weekends);
+
   const lang = useSelector(getLocale);
 
-  React.useEffect(() => {
+  const updateWeekends = useCallback(() => {
+    if (prevWeekends === weekends) {
+      return;
+    }
     if (weekends) {
-      if (!daysOfWeek.includes(0 || 6)) {
+      if (!daysOfWeek.includes(0) || !daysOfWeek.includes(6)) {
         setDaysOfWeek(daysOfWeek.concat([6, 0]));
       }
     } else {
-      if (daysOfWeek.includes(0 || 6)) {
+      if (daysOfWeek.includes(0) || daysOfWeek.includes(6)) {
         setDaysOfWeek(daysOfWeek.filter((day) => !(day === 0 || day === 6)));
       }
     }
-  }, [weekends, daysOfWeek]);
+  }, [weekends, daysOfWeek, setDaysOfWeek, prevWeekends]);
+
+  useEffect(() => {
+    updateWeekends();
+  }, [updateWeekends, weekends]);
 
   return (
     <>
