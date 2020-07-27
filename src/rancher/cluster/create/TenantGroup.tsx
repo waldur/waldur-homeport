@@ -15,6 +15,7 @@ import { SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { Offering } from '@waldur/marketplace/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ClusterTemplate } from '@waldur/rancher/types';
 
@@ -41,8 +42,16 @@ const filterFlavor = (node, flavor) => {
   return true;
 };
 
-export const TenantGroup = (props) => {
-  const resourceProps = useAsync(() => loadData(props.tenant), [props.tenant]);
+interface TenantGroupProps {
+  tenant: string;
+  offering: Offering;
+}
+
+export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
+  const resourceProps = useAsync(() => loadData(props.tenant, props.offering), [
+    props.tenant,
+    props.offering,
+  ]);
 
   const dispatch = useDispatch();
   const updateNodesCount = React.useCallback(

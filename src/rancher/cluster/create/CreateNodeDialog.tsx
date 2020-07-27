@@ -8,6 +8,7 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { getOffering } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -57,11 +58,16 @@ const serializeNode = (cluster, formData) => ({
   data_volumes: (formData.data_volumes || []).map(serializeDataVolume),
 });
 
+const loadNodeCreateData = async (cluster) => {
+  const offering = await getOffering(cluster.marketplace_offering_uuid);
+  return await loadData(cluster.tenant_settings, offering);
+};
+
 export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   form: 'RancherNodeCreate',
 })((props) => {
   const cluster = props.resolve.cluster;
-  const state = useAsync(() => loadData(cluster.tenant_settings), [cluster]);
+  const state = useAsync(() => loadNodeCreateData(cluster), [cluster]);
 
   const dispatch = useDispatch();
 

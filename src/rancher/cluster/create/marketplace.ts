@@ -4,6 +4,7 @@ import { Attribute } from '@waldur/marketplace/types';
 
 import { RancherClusterCheckoutSummary } from './RancherClusterCheckoutSummary';
 import { RancherClusterForm } from './RancherClusterForm';
+import { RancherPluginOptionsForm } from './RancherPluginOptionsForm';
 
 const ServiceSettingsAttributes = (): Attribute[] => [
   {
@@ -72,6 +73,7 @@ registerOfferingType({
   },
   component: RancherClusterForm,
   checkoutSummaryComponent: RancherClusterCheckoutSummary,
+  pluginOptionsForm: RancherPluginOptionsForm,
   providerType: 'Rancher',
   attributes: ServiceSettingsAttributes,
   serializer,
