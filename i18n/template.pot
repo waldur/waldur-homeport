@@ -2354,6 +2354,10 @@ msgstr ""
 msgid "Flavors matching this regex expression will not be pulled from the backend."
 msgstr ""
 
+#: src/rancher/cluster/create/RancherPluginOptionsForm.tsx
+msgid "Flavors regex"
+msgstr ""
+
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Flexible"
 msgstr ""
@@ -5206,6 +5210,10 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Registry code"
+msgstr ""
+
+#: src/rancher/cluster/create/RancherPluginOptionsForm.tsx
+msgid "Regular expression to limit flavors list"
 msgstr ""
 
 #: src/user/support/utils.ts

@@ -1,6 +1,7 @@
 import { ENV } from '@waldur/core/services';
 import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { Offering } from '@waldur/marketplace/types';
 import {
   loadSecurityGroups,
   getFlavors,
@@ -41,9 +42,12 @@ const getMountPointChoices = () => {
   }));
 };
 
-export const loadData = async (settings) => {
+export const loadData = async (settings: string, offering: Offering) => {
   const params = { settings };
-  const flavors = await getFlavors(params);
+  const flavors = await getFlavors({
+    ...params,
+    name_iregex: offering.plugin_options.flavors_regex,
+  });
   const subnets = await getSubnets(params);
   const volumeTypes = await getVolumeTypes(params);
   const templates = await listClusterTemplates();
