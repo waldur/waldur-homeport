@@ -31,7 +31,7 @@ export const useEmailChange = (user) => {
     );
     dispatch(closeModalDialog());
     dispatch(setCurrentUser({ ...user, requested_email: email }));
-  }, [email, dispatch]);
+  }, [user, email, dispatch]);
 
   return { handleSubmit, submitting, email, setEmail };
 };
