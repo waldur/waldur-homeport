@@ -6,19 +6,11 @@ import useEffectOnce from 'react-use/lib/useEffectOnce';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { angular2react } from '@waldur/shims/angular2react';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getProfile } from './api';
-
-const FreeipaAccountEdit = angular2react<{
-  profile: any;
-  onProfileRemoved(): void;
-}>('freeipaAccountEdit', ['profile', 'onProfileRemoved']);
-
-const FreeipaAccountCreate = angular2react<{
-  onProfileAdded(): void;
-}>('FreeipaAccountCreate', ['onProfileAdded']);
+import { FreeIPAAccountCreate } from './FreeIPAAccountCreate';
+import { FreeIPAAccountEdit } from './FreeIPAAccountEdit';
 
 export const FreeIpaAccount = () => {
   useTitle(translate('FreeIPA account'));
@@ -40,12 +32,9 @@ export const FreeIpaAccount = () => {
   return (
     <div className="wrapper wrapper-content">
       {profile ? (
-        <FreeipaAccountEdit
-          profile={profile}
-          onProfileRemoved={refreshProfile}
-        />
+        <FreeIPAAccountEdit profile={profile} refreshProfile={refreshProfile} />
       ) : (
-        <FreeipaAccountCreate onProfileAdded={refreshProfile} />
+        <FreeIPAAccountCreate onProfileAdded={refreshProfile} />
       )}
     </div>
   );

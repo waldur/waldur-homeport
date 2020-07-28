@@ -57,7 +57,7 @@ ActionConfigurationRegistry.register('VMware.VirtualMachine', {
       title: translate('Open console'),
       type: 'callback',
       enabled: true,
-      execute: resource =>
+      execute: (resource) =>
         executeConsoleAction(resource, 'vmware-virtual-machine'),
       validators: [validateState('OK')],
     },

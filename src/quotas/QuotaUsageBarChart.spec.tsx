@@ -54,7 +54,8 @@ describe('getAvailable', () => {
 });
 
 describe('ProgressTooltipMessage', () => {
-  const renderWrapper = props => shallow(<ProgressTooltipMessage {...props} />);
+  const renderWrapper = (props) =>
+    shallow(<ProgressTooltipMessage {...props} />);
 
   it("should render danger message if quota's usage exceeds limit", () => {
     const wrapper = renderWrapper({ quota: quotas[1] });
@@ -69,7 +70,7 @@ describe('ProgressTooltipMessage', () => {
 });
 
 describe('QuotaUsageBarChartDescription', () => {
-  const renderWrapper = props =>
+  const renderWrapper = (props) =>
     shallow(<QuotaUsageBarChartDescription {...props} />);
 
   it("should render danger message if quota's usage exceeds limit", () => {

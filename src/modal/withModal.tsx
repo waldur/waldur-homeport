@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const withModal = Modal => Component => {
+export const withModal = (Modal) => (Component) => {
   return class WithModal extends React.Component {
     state = {
       isOpen: false,
@@ -30,8 +30,8 @@ export const withModal = Modal => Component => {
           <Component
             {...this.props}
             {...this.state}
-            setModalProps={props => this.setModalProps(props)}
-            openModal={onSuccess => this.handleOpenModal(onSuccess)}
+            setModalProps={(props) => this.setModalProps(props)}
+            openModal={(onSuccess) => this.handleOpenModal(onSuccess)}
           />
           {this.state.isOpen && (
             <Modal {...this.state} closeModal={() => this.handleCloseModal()} />

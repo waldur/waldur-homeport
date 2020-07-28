@@ -4,7 +4,7 @@ import * as ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
 
 import { translate } from '@waldur/i18n';
 
-export const NodeRoleField = props => (
+export const NodeRoleField = (props) => (
   <ToggleButtonGroup
     value={props.input.value}
     onChange={props.input.onChange}

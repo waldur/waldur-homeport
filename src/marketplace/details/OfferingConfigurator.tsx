@@ -37,7 +37,7 @@ const storeConnector = connect<
   {},
   { offering: Offering; limits: string[] },
   OuterState
->(state => ({ project: getProject(state) }));
+>((state) => ({ project: getProject(state) }));
 
 export const validate = (_, props) => {
   const errors: any = {};

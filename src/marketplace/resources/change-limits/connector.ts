@@ -50,10 +50,10 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
     } = ownProps.asyncState.value;
     const { periods, multipliers } = getBillingPeriods(plan.unit);
     const offeringComponents = filterOfferingComponents(offering);
-    const components = offeringComponents.map(component => {
+    const components = offeringComponents.map((component) => {
       const price = plan.prices[component.type] || 0;
       const subTotal = price * newLimits[component.type] || 0;
-      const prices = multipliers.map(mult => mult * subTotal);
+      const prices = multipliers.map((mult) => mult * subTotal);
       return {
         type: component.type,
         name: component.name,
@@ -68,7 +68,7 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
       (result, item) => result + item.subTotal,
       0,
     );
-    const totalPeriods = multipliers.map(mult => mult * total || 0);
+    const totalPeriods = multipliers.map((mult) => mult * total || 0);
     return {
       periods,
       components,
@@ -85,7 +85,7 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
-  submitRequest: data =>
+  submitRequest: (data) =>
     changeLimits(
       {
         marketplace_resource_uuid: ownProps.asyncState.value.resource.uuid,

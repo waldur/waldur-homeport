@@ -28,8 +28,8 @@ export const isCreatingOrder = (state: OuterState) =>
 export const getMaxUnit = (state: OuterState): BillingPeriod => {
   const items = getItems(state);
   const units: string[] = items
-    .filter(item => item.plan)
-    .map(item => item.plan_unit);
+    .filter((item) => item.plan)
+    .map((item) => item.plan_unit);
   if (units.indexOf('month') !== -1) {
     return 'month';
   }
@@ -42,25 +42,25 @@ export const getMaxUnit = (state: OuterState): BillingPeriod => {
   return 'hour';
 };
 
-export const getTotal = createSelector(getItems, items => {
+export const getTotal = createSelector(getItems, (items) => {
   return items.reduce((total, item) => total + item.estimate, 0);
 });
 
-export const getItemSelectorFactory = orderItemUuid =>
-  createSelector(getItems, items =>
-    items.find(item => item.uuid === orderItemUuid),
+export const getItemSelectorFactory = (orderItemUuid) =>
+  createSelector(getItems, (items) =>
+    items.find((item) => item.uuid === orderItemUuid),
   );
 
-const getFormState = state => state.form;
-const getNamedFormState = formName =>
+const getFormState = (state) => state.form;
+const getNamedFormState = (formName) =>
   createSelector(getFormState, (formState = {}) => formState[formName]);
-const getRegisteredFields = formName =>
+const getRegisteredFields = (formName) =>
   createSelector(
     getNamedFormState(formName),
     (namedFormState = {}) => namedFormState.registeredFields,
   );
 
-export const getTermsOfServiceIsVisible = state =>
+export const getTermsOfServiceIsVisible = (state) =>
   isVisible(state, 'marketplace.termsOfService');
 
 export const allTermsOfServiceAgreed = createSelector(
@@ -76,11 +76,11 @@ export const allTermsOfServiceAgreed = createSelector(
     }
     return (
       formValues &&
-      Object.keys(registeredFields).every(key => formValues[key] === true)
+      Object.keys(registeredFields).every((key) => formValues[key] === true)
     );
   },
 );
 
-export const allOfferingsPrivate = createSelector(getItems, items =>
-  items.every(item => !item.offering_shared && !item.offering_billable),
+export const allOfferingsPrivate = createSelector(getItems, (items) =>
+  items.every((item) => !item.offering_shared && !item.offering_billable),
 );

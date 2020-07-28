@@ -1,57 +1,38 @@
 [
   {
-    "allocation": "http://localhost:8080/api/slurm-allocation/4574434367574abf98e792f4f32ff7fc/",
-    "year": 2017,
-    "month": 10,
-    "username": "hpc_ilja",
-    "user": "http://localhost:8080/api/users/3a836bc76e1b40349ec1a0d8220f374f/",
-    "full_name": "Tomy Branko",
-    "cpu_usage": 6,
-    "ram_usage": 12500,
-    "gpu_usage": 0
+    "url": "http://localhost:8080/api/slurm-allocation-usage/08b6b6f77fe24a5f9b422c68a18d751f/",
+    "uuid": "08b6b6f77fe24a5f9b422c68a18d751f",
+    "allocation": "http://localhost:8080/api/slurm-allocation/cd1f3fce2f6146aeb933407d1567a8f5/",
+    "cpu_usage": 20,
+    "deposit_usage": "10.00",
+    "month": 6,
+    "year": 2020
   },
   {
-    "allocation": "http://localhost:8080/api/slurm-allocation/4574434367574abf98e792f4f32ff7fc/",
-    "year": 2017,
-    "month": 9,
-    "username": "hpc_ilja",
-    "user": null,
-    "full_name": null,
-    "cpu_usage": 100,
-    "ram_usage": 10240,
-    "gpu_usage": 100
+    "url": "http://localhost:8080/api/slurm-allocation-usage/800894f1903e4b5ca5939b691a917eda/",
+    "uuid": "800894f1903e4b5ca5939b691a917eda",
+    "allocation": "http://localhost:8080/api/slurm-allocation/cd1f3fce2f6146aeb933407d1567a8f5/",
+    "cpu_usage": 10,
+    "deposit_usage": "10.00",
+    "month": 3,
+    "year": 2020
   },
   {
-    "allocation": "http://localhost:8080/api/slurm-allocation/4574434367574abf98e792f4f32ff7fc/",
-    "year": 2017,
-    "month": 8,
-    "username": "hpc_ilja",
-    "user": null,
-    "full_name": null,
-    "cpu_usage": 200,
-    "ram_usage": 8192,
-    "gpu_usage": 200
+    "url": "http://localhost:8080/api/slurm-allocation-usage/70e055b1fb814692998c66cb792e37b7/",
+    "uuid": "70e055b1fb814692998c66cb792e37b7",
+    "allocation": "http://localhost:8080/api/slurm-allocation/cd1f3fce2f6146aeb933407d1567a8f5/",
+    "cpu_usage": 20,
+    "deposit_usage": "1.00",
+    "month": 4,
+    "year": 2020
   },
   {
-    "allocation": "http://localhost:8080/api/slurm-allocation/4574434367574abf98e792f4f32ff7fc/",
-    "year": 2017,
-    "month": 10,
-    "username": "hpc_victor",
-    "user": null,
-    "full_name": null,
-    "cpu_usage": 200,
-    "ram_usage": 8192,
-    "gpu_usage": 200
-  },
-  {
-    "allocation": "http://localhost:8080/api/slurm-allocation/4574434367574abf98e792f4f32ff7fc/",
-    "year": 2017,
-    "month": 8,
-    "username": "hpc_victor",
-    "user": null,
-    "full_name": null,
-    "cpu_usage": 100,
-    "ram_usage": 10240,
-    "gpu_usage": 100
+    "url": "http://localhost:8080/api/slurm-allocation-usage/53646542eba04927a388be47c87b0217/",
+    "uuid": "53646542eba04927a388be47c87b0217",
+    "allocation": "http://localhost:8080/api/slurm-allocation/cd1f3fce2f6146aeb933407d1567a8f5/",
+    "cpu_usage": 40,
+    "deposit_usage": "2.00",
+    "month": 5,
+    "year": 2020
   }
 ]

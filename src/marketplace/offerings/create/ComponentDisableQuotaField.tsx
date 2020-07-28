@@ -9,7 +9,7 @@ export const ComponentDisableQuotaField: React.FC<{}> = () => (
   <FormGroup>
     <Field
       name="disable_quotas"
-      component={prop => (
+      component={(prop) => (
         <AwesomeCheckbox
           id="disable_quotas"
           label={translate(

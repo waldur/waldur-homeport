@@ -14,7 +14,7 @@ import { AsyncSelectField } from './AsyncSelectField';
 import { ISSUE_REGISTRATION_FORM_ID } from './constants';
 import { projectSelector, customerSelector } from './selectors';
 
-const filterOptions = options => options;
+const filterOptions = (options) => options;
 
 export const ProjectGroup = ({ onSearch, disabled }) => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export const ProjectGroup = ({ onSearch, disabled }) => {
   ]);
 
   const loadOptions = React.useCallback(
-    name => refreshProjects(name, customer),
+    (name) => refreshProjects(name, customer),
     [customer],
   );
 

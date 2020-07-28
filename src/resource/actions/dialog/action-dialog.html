@@ -30,10 +30,7 @@
           ng-if="field.type != 'boolean'"
         >
           <field-label field="field"></field-label>
-          <helpicon
-            help-text="{{ ::field.help_text }}"
-            ng-if="::field.help_text"
-          ></helpicon>
+          <helpicon help-text="field.help_text"></helpicon>
         </label>
         <div>
           <action-field

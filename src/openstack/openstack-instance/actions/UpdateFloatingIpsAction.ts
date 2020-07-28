@@ -20,7 +20,7 @@ export default function createAction(): ResourceAction<OpenStackInstance> {
     init: async (resource: OpenStackInstance, form, action) => {
       const floatingIps = await loadFloatingIps(resource.service_settings_uuid);
 
-      action.fields.floating_ips.choices = floatingIps.map(item => ({
+      action.fields.floating_ips.choices = floatingIps.map((item) => ({
         display_name: item.address,
         value: item.url,
       }));

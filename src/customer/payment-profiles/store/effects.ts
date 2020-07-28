@@ -4,11 +4,14 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
 import { PAYMENT_PROFILES_TABLE } from '@waldur/customer/details/constants';
 import * as api from '@waldur/customer/payment-profiles/api';
+import { updatePaymentsList } from '@waldur/customer/payments/utils';
 import { translate } from '@waldur/i18n';
+import { getCustomer as getCustomerApi } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
-import { FETCH_LIST_START } from '@waldur/table-react/actions';
-import { fetchList } from '@waldur/table-react/effects';
+import { FETCH_LIST_START } from '@waldur/table/actions';
+import { fetchList } from '@waldur/table/effects';
+import { setCurrentCustomer } from '@waldur/workspace/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as constants from '../constants';
@@ -16,11 +19,28 @@ import * as constants from '../constants';
 function* addPaymentProfile(action) {
   try {
     const customer = yield select(getCustomer);
-    yield call(api.createPaymentProfile, {
+    const paymentProfile = yield call(api.createPaymentProfile, {
       ...action.payload,
       customer,
     });
-    yield put(showSuccess(translate('Payment profile has been created.')));
+    if (paymentProfile?.uuid && action.payload.enabled) {
+      yield call(api.enablePaymentProfile, paymentProfile.uuid);
+    }
+    const successMessageForCreation = translate(
+      'Payment profile has been created.',
+    );
+    const successMessageForCreationAndEnabling = translate(
+      'Payment profile has been created and enabled.',
+    );
+    yield put(
+      showSuccess(
+        action.payload.enabled
+          ? successMessageForCreationAndEnabling
+          : successMessageForCreation,
+      ),
+    );
+    const updatedCustomer = yield call(getCustomerApi, customer.uuid);
+    yield put(setCurrentCustomer(updatedCustomer));
     yield put(stateGo('organization.manage'));
   } catch (error) {
     const errorMessage = `${translate(
@@ -45,6 +65,7 @@ function* editPaymentProfile(action) {
         },
       },
     });
+    yield put(updatePaymentsList(customer));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to update payment profile.',
@@ -68,6 +89,9 @@ function* removePaymentProfile(action: Action<any>) {
         },
       },
     });
+    const updatedCustomer = yield call(getCustomerApi, customer.uuid);
+    yield put(setCurrentCustomer(updatedCustomer));
+    yield put(updatePaymentsList(updatedCustomer));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to remove payment profile.',
@@ -90,6 +114,9 @@ function* enablePaymentProfile(action: Action<any>) {
         },
       },
     });
+    const updatedCustomer = yield call(getCustomerApi, customer.uuid);
+    yield put(setCurrentCustomer(updatedCustomer));
+    yield put(updatePaymentsList(updatedCustomer));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to enable payment profile.',
@@ -98,7 +125,7 @@ function* enablePaymentProfile(action: Action<any>) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.ADD_PAYMENT_PROFILE, addPaymentProfile);
   yield takeEvery(constants.EDIT_PAYMENT_PROFILE, editPaymentProfile);
   yield takeEvery(constants.REMOVE_PAYMENT_PROFILE, removePaymentProfile);

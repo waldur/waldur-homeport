@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { createSelector } from 'reselect';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { isStaff } from '@waldur/workspace/selectors';
 
 import { orderCanBeApproved } from '../orders/store/selectors';

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { InjectedFormProps, Field } from 'redux-form';
 
-import { SubmitButton, FieldError } from '@waldur/form-react';
+import { SubmitButton, FieldError } from '@waldur/form';
 import {
   RadioButtonChoice,
   RadioButtonField,
-} from '@waldur/form-react/RadioButtonField';
+} from '@waldur/form/RadioButtonField';
 import { TranslateProps } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -49,7 +49,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
     }
   };
 
-  const renderRadioButtons = field => (
+  const renderRadioButtons = (field) => (
     <RadioButtonField
       {...field}
       required={true}

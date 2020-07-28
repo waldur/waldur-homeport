@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { ClusterUsersList } from '@waldur/rancher/cluster/users/ClusterUsersList';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
@@ -7,8 +8,9 @@ import { ClusterProjectList } from '../ClusterProjectList';
 import { ClusterNodesList } from '../node/ClusterNodesList';
 import { ClusterTemplatesList } from '../template/ClusterTemplateList';
 
-import { ClusterApplicationsList } from './ClusterApplicationsList';
+import { ClusterApplicationsList } from './apps/ClusterApplicationsList';
 import { ClusterWorkloadsList } from './ClusterWorkloadsList';
+import { ClusterHPAList } from './hpas/ClusterHPAList';
 
 ResourceTabsConfiguration.register('Rancher.Cluster', () => [
   {
@@ -40,6 +42,16 @@ ResourceTabsConfiguration.register('Rancher.Cluster', () => [
     key: 'workloads',
     title: translate('Workloads'),
     component: ClusterWorkloadsList,
+  },
+  {
+    key: 'users',
+    title: translate('Users'),
+    component: ClusterUsersList,
+  },
+  {
+    key: 'hpas',
+    title: translate('HPA'),
+    component: ClusterHPAList,
   },
   ...getDefaultResourceTabs(),
 ]);

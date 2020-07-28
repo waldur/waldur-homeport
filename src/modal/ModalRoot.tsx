@@ -34,5 +34,5 @@ export default connect<
   }
 >(
   (state: any) => state.modal,
-  dispatch => ({ onHide: () => dispatch(closeModalDialog()) }),
+  (dispatch) => ({ onHide: () => dispatch(closeModalDialog()) }),
 )(ModalRoot);

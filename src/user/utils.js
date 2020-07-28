@@ -1,41 +1,45 @@
-// @ngInject
-export function stateUtilsService($state) {
-  let vm = this;
+import { $state } from '@waldur/core/services';
+import { USER_WORKSPACE } from '@waldur/workspace/types';
 
-  vm.setPrevState = function(state, params) {
-    if (state.data && state.data.workspace && state.data.workspace !== 'user') {
-      vm.prevState = state;
-      vm.prevParams = params;
-      vm.prevWorkspace = state.data.workspace;
+export class StateUtilsService {
+  setPrevState(state, params) {
+    if (
+      state.data &&
+      state.data.workspace &&
+      state.data.workspace !== USER_WORKSPACE
+    ) {
+      this.prevState = state;
+      this.prevParams = params;
+      this.prevWorkspace = state.data.workspace;
     }
-  };
+  }
 
-  vm.getPrevWorkspace = function() {
-    return vm.prevWorkspace;
-  };
+  getPrevWorkspace() {
+    return this.prevWorkspace;
+  }
 
-  vm.goBack = function() {
-    if (vm.prevState) {
-      $state.go(vm.prevState, vm.prevParams);
+  goBack() {
+    if (this.prevState) {
+      $state.go(this.prevState, this.prevParams);
     }
-  };
+  }
 
-  vm.clear = function() {
-    vm.prevState = undefined;
-    vm.prevParams = undefined;
-    vm.prevWorkspace = undefined;
-  };
+  clear() {
+    this.prevState = undefined;
+    this.prevParams = undefined;
+    this.prevWorkspace = undefined;
+  }
 }
 
 // @ngInject
-export function attachStateUtils($rootScope, stateUtilsService) {
-  $rootScope.$on('$stateChangeSuccess', function(
+export function attachStateUtils($rootScope, StateUtilsService) {
+  $rootScope.$on('$stateChangeSuccess', function (
     event,
     toState,
     toParams,
     fromState,
     fromParams,
   ) {
-    stateUtilsService.setPrevState(fromState, fromParams);
+    StateUtilsService.setPrevState(fromState, fromParams);
   });
 }

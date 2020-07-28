@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Option } from 'react-select';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { required } from '@waldur/core/validators';
 import { ADD_PAYMENT_PROFILE_FORM_ID } from '@waldur/customer/payment-profiles/constants';
 import { addPaymentProfile } from '@waldur/customer/payment-profiles/store/actions';
@@ -16,12 +17,12 @@ import {
   StringField,
   SubmitButton,
   TextField,
-} from '@waldur/form-react';
-import { DateField } from '@waldur/form-react/DateField';
+} from '@waldur/form';
+import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
-const PaymentProfileCreate = props => {
+const PaymentProfileCreate = (props) => {
   useTitle(translate('Add payment profile'));
 
   const [isFixedPrice, setIsFixedPrice] = useState(false);
@@ -78,6 +79,17 @@ const PaymentProfileCreate = props => {
           <NumberField name="contract_sum" label={translate('Contract sum')} />
         )}
 
+        <Field
+          name="enabled"
+          component={(prop) => (
+            <AwesomeCheckbox
+              id="enable_after_creation"
+              label={translate('Enable profile after creation')}
+              {...prop.input}
+            />
+          )}
+        />
+
         <div className="form-group">
           <div
             className="col-sm-8 col-sm-offset-2"
@@ -95,8 +107,8 @@ const PaymentProfileCreate = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  submitRequest: formData => dispatch(addPaymentProfile(formData)),
+const mapDispatchToProps = (dispatch) => ({
+  submitRequest: (formData) => dispatch(addPaymentProfile(formData)),
 });
 
 const connector = connect(null, mapDispatchToProps);

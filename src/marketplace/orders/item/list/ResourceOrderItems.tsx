@@ -3,13 +3,14 @@ import * as React from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { IssueLinkRenderer } from '@waldur/marketplace/orders/item/list/IssueLinkRenderer';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 interface ResourceOrderItemsProps {
   resource_uuid: string;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('ID'),
@@ -22,6 +23,10 @@ export const TableComponent = props => {
           {row.uuid}
         </OrderItemDetailsLink>
       ),
+    },
+    {
+      title: translate('Issue link'),
+      render: IssueLinkRenderer,
     },
     {
       title: translate('Type'),
@@ -63,7 +68,7 @@ export const ResourceOrderItems = enhance(
   TableComponent,
 ) as React.ComponentType<ResourceOrderItemsProps>;
 
-export const ResourceOrderItemsTab = props =>
+export const ResourceOrderItemsTab = (props) =>
   props.resource.marketplace_resource_uuid ? (
     <ResourceOrderItems
       resource_uuid={props.resource.marketplace_resource_uuid}

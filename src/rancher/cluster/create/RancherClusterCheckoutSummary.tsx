@@ -6,30 +6,32 @@ import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
+import { NodeRole } from '@waldur/rancher/types';
 
-const countNodesByRole = (role, nodes) =>
-  nodes.filter(node => (node.roles || []).includes(role)).length;
+const countNodesByRole = (role: NodeRole, nodes) =>
+  nodes.filter((node) => (node.roles || []).includes(role)).length;
 
-const sum = values => values.reduce((total, value) => total + value, 0);
+const sum = (values) => values.reduce((total, value) => total + value, 0);
 
-const getTotalVolumesSize = volumes => sum(volumes.map(volume => volume.size));
+const getTotalVolumesSize = (volumes) =>
+  sum(volumes.map((volume) => volume.size));
 
-const getTotalStorage = nodes =>
+const getTotalStorage = (nodes) =>
   sum(
     nodes.map(
-      node =>
+      (node) =>
         node.system_volume_size + getTotalVolumesSize(node.data_volumes || []),
     ),
   );
 
 const getFlavorField = (field, nodes) =>
-  nodes.map(node => (node.flavor ? node.flavor[field] : 0));
+  nodes.map((node) => (node.flavor ? node.flavor[field] : 0));
 
-const getTotalCores = nodes => sum(getFlavorField('cores', nodes));
+const getTotalCores = (nodes) => sum(getFlavorField('cores', nodes));
 
-const getTotalRam = nodes => sum(getFlavorField('ram', nodes));
+const getTotalRam = (nodes) => sum(getFlavorField('ram', nodes));
 
-const getStats = state => {
+const getStats = (state) => {
   const formData: any = getFormValues(FORM_ID)(state);
   if (!formData || !formData.attributes) {
     return {};
@@ -55,7 +57,7 @@ const getStats = state => {
 
 const connector = connect(getStats);
 
-const PureRancherExtraComponent = props =>
+const PureRancherExtraComponent = (props) =>
   props.nodeCount ? (
     <>
       <tr>
@@ -105,6 +107,6 @@ const PureRancherExtraComponent = props =>
 
 const RancherExtraComponent = connector(PureRancherExtraComponent);
 
-export const RancherClusterCheckoutSummary = props => (
+export const RancherClusterCheckoutSummary = (props) => (
   <OrderSummary {...props} extraComponent={RancherExtraComponent} />
 );

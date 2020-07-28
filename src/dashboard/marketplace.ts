@@ -2,7 +2,7 @@ import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getCategoryUsages } from '@waldur/marketplace/common/api';
 import { CategoryComponentUsage } from '@waldur/marketplace/types';
-import { WorkspaceType } from '@waldur/workspace/types';
+import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { Category } from './CategoryResources';
 import { getResourceChartOptions } from './chart';
@@ -69,15 +69,17 @@ const collectData = (rows: CategoryComponentUsage[]): CollectedData => {
 };
 
 const filterData = (collector: CollectedData): FilteredData[] => {
-  return Object.keys(collector).map(categoryUuid => {
+  return Object.keys(collector).map((categoryUuid) => {
     const category = collector[categoryUuid];
-    const components = Object.keys(category.components).map(type => {
+    const components = Object.keys(category.components).map((type) => {
       const component = category.components[type];
-      const reportedUsage = Object.keys(component.reported_usage).map(date => ({
-        date,
-        value: component.reported_usage[date],
-      }));
-      const fixedUsage = Object.keys(component.fixed_usage).map(date => ({
+      const reportedUsage = Object.keys(component.reported_usage).map(
+        (date) => ({
+          date,
+          value: component.reported_usage[date],
+        }),
+      );
+      const fixedUsage = Object.keys(component.fixed_usage).map((date) => ({
         date,
         value: component.fixed_usage[date],
       }));
@@ -101,9 +103,11 @@ const formatMetrics = (
   variant: 'reportedUsage' | 'fixedUsage',
 ): string[] => {
   return category.components
-    .filter(component => component[variant].filter(row => row.value).length > 0)
+    .filter(
+      (component) => component[variant].filter((row) => row.value).length > 0,
+    )
     .map(
-      component =>
+      (component) =>
         `${component.name} (${
           variant === 'reportedUsage' ? 'usage' : 'fixed'
         })`,
@@ -115,13 +119,15 @@ const formatChart = (
   variant: 'reportedUsage' | 'fixedUsage',
 ): object[] => {
   return category.components
-    .filter(component => component[variant].filter(row => row.value).length > 0)
-    .map(component => {
+    .filter(
+      (component) => component[variant].filter((row) => row.value).length > 0,
+    )
+    .map((component) => {
       const sorted = component[variant].sort((a, b) =>
         a.date.localeCompare(b.date),
       );
-      const dates = sorted.map(row => row.date);
-      const values = sorted.map(row => row.value);
+      const dates = sorted.map((row) => row.date);
+      const values = sorted.map((row) => row.value);
       return getResourceChartOptions(
         dates,
         values,
@@ -136,7 +142,7 @@ const formatData = (
   workspace: WorkspaceType,
 ): Category[] => {
   return list
-    .map(category => {
+    .map((category) => {
       return {
         title: category.title,
         metrics: [
@@ -152,7 +158,7 @@ const formatData = (
             title: translate('Add resource'),
             onClick: () => {
               const state =
-                workspace === 'organization'
+                workspace === ORGANIZATION_WORKSPACE
                   ? 'marketplace-category-customer'
                   : 'marketplace-category';
               $state.go(state, { category_uuid: category.uuid });
@@ -161,7 +167,7 @@ const formatData = (
         ],
       };
     })
-    .filter(category => category.charts.length > 0)
+    .filter((category) => category.charts.length > 0)
     .sort((a, b) => a.title.localeCompare(b.title));
 };
 

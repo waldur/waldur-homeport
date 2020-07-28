@@ -1,5 +1,6 @@
+import { connectAngularComponent } from '@waldur/store/connect';
+
 import actionDialog from './action-dialog';
-import actionField from './action-field';
 import actionFieldBoolean from './action-field-boolean';
 import actionFieldChoice from './action-field-choice';
 import actionFieldCrontab from './action-field-crontab';
@@ -12,10 +13,16 @@ import actionFieldSelect from './action-field-select';
 import actionFieldString from './action-field-string';
 import actionFieldText from './action-field-text';
 import actionFieldTimezone from './action-field-timezone';
+import actionField from './ActionField';
+import appstoreFieldMultiselect from './appstore-field-multiselect';
+import appstoreFieldString from './appstore-field-string';
+import { FieldLabel } from './FieldLabel';
+import { HelpIcon } from './HelpIcon';
+import multiplyBy from './multiply-by';
 
-export default module => {
+export default (module) => {
   module.directive('actionDialog', actionDialog);
-  module.directive('actionField', actionField);
+  module.component('actionField', actionField);
   module.component('actionFieldBoolean', actionFieldBoolean);
   module.component('actionFieldCrontab', actionFieldCrontab);
   module.component('actionFieldDatetime', actionFieldDatetime);
@@ -28,4 +35,12 @@ export default module => {
   module.component('actionFieldChoice', actionFieldChoice);
   module.component('actionFieldTimezone', actionFieldTimezone);
   module.component('actionFieldJson', actionFieldJson);
+  module.component('appstoreFieldString', appstoreFieldString);
+  module.component('appstoreFieldMultiselect', appstoreFieldMultiselect);
+  module.component('helpicon', connectAngularComponent(HelpIcon, ['helpText']));
+  module.directive('multiplyBy', multiplyBy);
+  module.component(
+    'fieldLabel',
+    connectAngularComponent(FieldLabel, ['field']),
+  );
 };

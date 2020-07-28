@@ -11,7 +11,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { CustomerEventsFilter } from './CustomerEventsFilter';
 
 export const PureCustomerEvents = getEventsList({
-  mapPropsToFilter: props => {
+  mapPropsToFilter: (props) => {
     const filter = {
       ...props.userFilter,
       scope: props.customer.url,
@@ -23,14 +23,14 @@ export const PureCustomerEvents = getEventsList({
   },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   userFilter: getFormValues('customerEventsFilter')(state),
 });
 
 const CustomerEvents = connect(mapStateToProps)(PureCustomerEvents);
 
-export const CustomerEventsView = props => {
+export const CustomerEventsView = (props) => {
   useTitle(translate('Audit logs'));
   return (
     <>

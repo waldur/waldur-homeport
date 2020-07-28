@@ -18,4 +18,4 @@ export const updateHook = (hookId, hookType, payload) =>
   patch<HookResponse>(`${HOOK_ENDPOINTS[hookType]}${hookId}/`, payload);
 
 export const getEventGroups = () =>
-  get('/events/event_groups/').then(response => response.data);
+  get('/events/event_groups/').then((response) => response.data);

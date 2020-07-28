@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { Resource } from '@waldur/marketplace/resources/types';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
@@ -15,7 +15,7 @@ interface FieldProps {
   row: Resource;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -55,7 +55,7 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ProjectResourcesList',
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: props =>
+  mapPropsToFilter: (props) =>
     props.project
       ? {
           project_uuid: props.project.uuid,
@@ -64,7 +64,7 @@ const TableOptions = {
       : {},
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   project: getProject(state),
 });
 

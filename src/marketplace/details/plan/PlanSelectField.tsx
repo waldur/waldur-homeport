@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { FieldError } from '@waldur/form-react';
+import { FieldError } from '@waldur/form';
 import { Plan } from '@waldur/marketplace/types';
 
 interface PlanSelectFieldProps {
@@ -14,11 +14,11 @@ export const PlanSelectField = (props: PlanSelectFieldProps) => (
   <Field
     name="plan"
     validate={[required]}
-    component={fieldProps => (
+    component={(fieldProps) => (
       <>
         <Select
           value={fieldProps.input.value}
-          onChange={value => fieldProps.input.onChange(value)}
+          onChange={(value) => fieldProps.input.onChange(value)}
           labelKey="name"
           valueKey="url"
           options={props.plans}

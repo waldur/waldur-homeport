@@ -10,22 +10,22 @@ interface Props {
   className?: string;
 }
 
-export const OfferingAutocomplete: React.FC<Props> = props => (
+export const OfferingAutocomplete: React.FC<Props> = (props) => (
   <div className={`form-group ${props.className}`}>
     <label className="control-label">{translate('Offering')}</label>
     <Field
       name="offering"
-      component={fieldProps => (
+      component={(fieldProps) => (
         <AutocompleteField
           placeholder={translate('Select offering...')}
-          loadOfferings={query =>
+          loadOfferings={(query) =>
             offeringsAutocomplete({
               name: query,
               ...props.offeringFilter,
             })
           }
           value={fieldProps.input.value}
-          onChange={value => fieldProps.input.onChange(value)}
+          onChange={(value) => fieldProps.input.onChange(value)}
         />
       )}
     />

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
-import { ChoicesTable } from '@waldur/form-react/ChoicesTable';
+import { ChoicesTable } from '@waldur/form/ChoicesTable';
 import { translate } from '@waldur/i18n';
 
 import { FetchedData } from './utils';
@@ -20,10 +20,10 @@ export const ChangePlanComponent = (props: FetchedData) => (
         <strong>{translate('New plan')}</strong>
         <Field
           name="plan"
-          component={fieldProps => (
+          component={(fieldProps) => (
             <ChoicesTable
               columns={props.columns}
-              choices={props.choices.filter(plan => plan.archived === false)}
+              choices={props.choices.filter((plan) => plan.archived === false)}
               input={fieldProps.input}
             />
           )}

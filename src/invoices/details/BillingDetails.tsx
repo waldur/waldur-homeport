@@ -5,7 +5,7 @@ import useAsyncFn from 'react-use/lib/useAsyncFn';
 
 import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV, ngInjector } from '@waldur/core/services';
+import { ENV } from '@waldur/core/services';
 import { getUUID } from '@waldur/core/utils';
 import { CustomerSidebar } from '@waldur/customer/workspace/CustomerSidebar';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -15,10 +15,13 @@ import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
 import { useTitle } from '@waldur/navigation/title';
-import { WOKSPACE_NAMES } from '@waldur/navigation/workspace/constants';
 import store from '@waldur/store/store';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
+import {
+  setCurrentCustomer,
+  setCurrentWorkspace,
+} from '@waldur/workspace/actions';
 import { getCustomer as getCustomerSelector } from '@waldur/workspace/selectors';
+import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { formatPeriod } from '../utils';
 
@@ -53,8 +56,6 @@ const getBreadcrumbs = (customer, invoice): BreadcrumbItem[] => {
 };
 
 const loadData = async (invoiceId: string) => {
-  const WorkspaceService = ngInjector.get('WorkspaceService');
-
   let invoice;
   if (isFeatureVisible('paypal')) {
     invoice = await getById('/paypal-invoices/', invoiceId);
@@ -63,12 +64,7 @@ const loadData = async (invoiceId: string) => {
   }
 
   const currentCustomer = await getCustomer(getUUID(invoice.customer));
-  WorkspaceService.setWorkspace({
-    customer: currentCustomer,
-    project: null,
-    hasCustomer: true,
-    workspace: WOKSPACE_NAMES.organization,
-  });
+  store.dispatch(setCurrentWorkspace(ORGANIZATION_WORKSPACE));
   store.dispatch(setCurrentCustomer(currentCustomer));
   return invoice;
 };

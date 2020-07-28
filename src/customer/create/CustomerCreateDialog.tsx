@@ -1,13 +1,14 @@
 import { useRouter } from '@uirouter/react';
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { reset } from 'redux-form';
+import { reset, SubmissionError } from 'redux-form';
 
 import { sendForm } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 import { UsersService } from '@waldur/user/UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -43,9 +44,9 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
   const router = useRouter();
 
   const createOrganization = React.useCallback(
-    async formData => {
+    async (formData) => {
       const payload: Record<string, string | boolean> = {};
-      CUSTOMER_FIELDS.forEach(field => {
+      CUSTOMER_FIELDS.forEach((field) => {
         if (formData[field]) {
           payload[field] = formData[field];
         }
@@ -76,7 +77,7 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
           });
         }
         dispatch(showSuccess(translate('Organization has been created.')));
-        UsersService.resetCurrentUser();
+        dispatch(setCurrentUser(undefined));
         await UsersService.getCurrentUser();
         router.stateService.go('organization.dashboard', {
           uuid: customer.uuid,
@@ -84,6 +85,9 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
         dispatch(reset('CustomerCreateDialog'));
       } catch (e) {
         showErrorResponse(e, translate('Could not create organization'));
+        if (e.status === 400) {
+          throw new SubmissionError(e.data);
+        }
       }
     },
     [dispatch, router, user, resolve.role],

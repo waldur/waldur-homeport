@@ -1,13 +1,13 @@
 // This directive is based on code from https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
 import * as React from 'react';
 
-const getCoordinatesForPercent = percent => {
+const getCoordinatesForPercent = (percent) => {
   const x = Math.cos(2 * Math.PI * percent);
   const y = Math.sin(2 * Math.PI * percent);
   return [x, y];
 };
 
-const getSlices = value => [
+const getSlices = (value) => [
   {
     percent: value,
     color: 'Coral',

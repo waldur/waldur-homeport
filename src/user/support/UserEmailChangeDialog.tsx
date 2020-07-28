@@ -50,7 +50,7 @@ export const UserEmailChangeDialog = ({ resolve: { user } }) => {
         type="email"
         className="form-control"
         value={email}
-        onChange={event => setEmail(event.target.value)}
+        onChange={(event) => setEmail(event.target.value)}
       />
     </ModalDialog>
   );

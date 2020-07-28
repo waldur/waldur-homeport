@@ -9,19 +9,19 @@ interface ProjectFilterProps {
   customer_uuid: string;
 }
 
-export const ProjectFilter: React.FC<ProjectFilterProps> = props => (
+export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
   <div className="form-group col-sm-3">
     <label className="control-label">{translate('Project')}</label>
     <Field
       name="project"
-      component={fieldProps => (
+      component={(fieldProps) => (
         <Async
           placeholder={translate('Select project...')}
           loadOptions={projectAutocomplete(props.customer_uuid)}
           valueKey="uuid"
           labelKey="name"
           value={fieldProps.input.value}
-          onChange={value => fieldProps.input.onChange(value)}
+          onChange={(value) => fieldProps.input.onChange(value)}
         />
       )}
     />

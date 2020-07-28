@@ -5,22 +5,23 @@ import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { MARKETPLACE_FILTER_FORM } from './constants';
 
-const getCategory = state => state.marketplace.category;
-export const getFilterName = state => getCategory(state).filterQuery;
-export const isLoading = state => getCategory(state).loading;
-export const isLoaded = state => getCategory(state).loaded;
-export const isErred = state => getCategory(state).erred;
-export const getSections = state => getCategory(state).sections;
+const getCategory = (state) => state.marketplace.category;
+export const getFilterName = (state) => getCategory(state).filterQuery;
+export const isLoading = (state) => getCategory(state).loading;
+export const isLoaded = (state) => getCategory(state).loaded;
+export const isErred = (state) => getCategory(state).erred;
+export const getSections = (state) => getCategory(state).sections;
 
-const getCategoryOfferings = state => state.marketplace.categoryOfferings;
-export const getOfferings = state => getCategoryOfferings(state).items;
-export const isOfferingsLoading = state => getCategoryOfferings(state).loading;
-export const isOfferingsLoaded = state => getCategoryOfferings(state).loaded;
+const getCategoryOfferings = (state) => state.marketplace.categoryOfferings;
+export const getOfferings = (state) => getCategoryOfferings(state).items;
+export const isOfferingsLoading = (state) =>
+  getCategoryOfferings(state).loading;
+export const isOfferingsLoaded = (state) => getCategoryOfferings(state).loaded;
 
-export const formatAttributesFilter = query => {
+export const formatAttributesFilter = (query) => {
   if (query) {
     const formattedQuery = {};
-    Object.keys(query).forEach(key => {
+    Object.keys(query).forEach((key) => {
       const attributeType = key.split('-')[0];
       const attributeKey = key.split('-')[1];
       const queryKey = query[key];

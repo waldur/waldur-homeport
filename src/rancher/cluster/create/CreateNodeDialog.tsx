@@ -6,8 +6,9 @@ import { reduxForm } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form-react';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { getOffering } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -49,7 +50,7 @@ const serializeDataVolume = ({ size, ...volumeRest }) => ({
 
 const serializeNode = (cluster, formData) => ({
   cluster: cluster.url,
-  roles: formData.roles.filter(role => role),
+  roles: formData.roles.filter((role) => role),
   subnet: formData.attributes.subnet,
   flavor: formData.flavor.url,
   system_volume_size: formData.system_volume_size * 1024,
@@ -57,11 +58,16 @@ const serializeNode = (cluster, formData) => ({
   data_volumes: (formData.data_volumes || []).map(serializeDataVolume),
 });
 
+const loadNodeCreateData = async (cluster) => {
+  const offering = await getOffering(cluster.marketplace_offering_uuid);
+  return await loadData(cluster.tenant_settings, offering);
+};
+
 export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   form: 'RancherNodeCreate',
-})(props => {
+})((props) => {
   const cluster = props.resolve.cluster;
-  const state = useAsync(() => loadData(cluster.tenant_settings), [cluster]);
+  const state = useAsync(() => loadNodeCreateData(cluster), [cluster]);
 
   const dispatch = useDispatch();
 

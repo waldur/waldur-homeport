@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { reduxForm } from 'redux-form';
 
-import { FormContainer, FieldError, SubmitButton } from '@waldur/form-react';
+import { FormContainer, FieldError, SubmitButton } from '@waldur/form';
 import { TranslateProps } from '@waldur/i18n';
 
 import { ProviderFormBody } from './ProviderFormBody';
 import { ProviderNameField } from './ProviderNameField';
 
-export const PureProviderUpdateForm = props => {
+export const PureProviderUpdateForm = (props) => {
   const container = {
     submitting: props.submitting,
     labelClass: 'col-sm-3',

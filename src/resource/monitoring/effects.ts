@@ -73,7 +73,7 @@ function* handleLoadTemplates(action) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(FETCH_REQUEST, handleFetchHost);
   yield takeEvery(DELETE_REQUEST, handleDeleteHost);
   yield takeEvery(actions.createHost.REQUEST, handleCreateHost);

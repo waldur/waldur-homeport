@@ -1,14 +1,13 @@
-import ErrorMessageFormatter from './ErrorMessageFormatter';
-import extensionPoint from './extension-point-directive';
-import extensionPointService from './extension-point-service';
+import { AuthService } from '@waldur/auth/AuthService';
+
 import loadingSpinner from './LoadingSpinner';
 import sentryModule from './sentry';
 import injectServices from './services';
 import submitButton from './submit-button';
 
 // @ngInject
-function redirectToState($rootScope, $state, $injector) {
-  $rootScope.$on('$stateChangeError', function(
+function redirectToState($rootScope, $state) {
+  $rootScope.$on('$stateChangeError', function (
     event,
     toState,
     toParams,
@@ -19,7 +18,7 @@ function redirectToState($rootScope, $state, $injector) {
     // Erred state is terminal, user should not be redirected from erred state to login
     // so that he would be able to read error message details
     if (error && error.detail && error.detail.status === 401) {
-      return $injector.get('authService').localLogout({
+      return AuthService.localLogout({
         toState: toState.name,
         toParams: JSON.parse(JSON.stringify(toParams)),
       });
@@ -34,7 +33,7 @@ function redirectToState($rootScope, $state, $injector) {
 
 // @ngInject
 function scrollToTop($rootScope) {
-  $rootScope.$on('$stateChangeSuccess', function() {
+  $rootScope.$on('$stateChangeSuccess', function () {
     document.scrollTop = 0;
     document.querySelector('#wrapper').scrollTop = 0;
   });
@@ -43,17 +42,14 @@ function scrollToTop($rootScope) {
 // @ngInject
 function defaultErrorHandler($state) {
   // eslint-disable-next-line
-  $state.defaultErrorHandler(function(error) {
+  $state.defaultErrorHandler(function (error) {
     // Do not log transitionTo errors
   });
 }
 
-export default module => {
-  module.service('ErrorMessageFormatter', ErrorMessageFormatter);
+export default (module) => {
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
-  module.directive('extensionPoint', extensionPoint);
-  module.service('extensionPointService', extensionPointService);
   module.run(redirectToState);
   module.run(scrollToTop);
   module.run(injectServices);

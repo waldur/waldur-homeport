@@ -12,7 +12,7 @@ interface Props {
   className?: string;
 }
 
-export const ComponentRow: React.FC<Props> = props => {
+export const ComponentRow: React.FC<Props> = (props) => {
   const customer = useSelector(getCustomer);
   const activeFixedPriceProfile = getActiveFixedPricePaymentProfile(
     customer.payment_profiles,

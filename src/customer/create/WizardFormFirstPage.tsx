@@ -3,7 +3,7 @@ import PanelBody from 'react-bootstrap/lib/PanelBody';
 
 import { ENV } from '@waldur/core/services';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
-import { InputField } from '@waldur/form-react/InputField';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
 import { DomainGroup } from './DomainGroup';
@@ -12,13 +12,13 @@ import { InputGroup } from './InputGroup';
 import { SelectField } from './SelectField';
 import { WizardForm } from './WizardForm';
 
-const formatCompanyTypes = ENV =>
-  (ENV.plugins.WALDUR_CORE.COMPANY_TYPES || []).map(item => ({
+const formatCompanyTypes = (ENV) =>
+  (ENV.plugins.WALDUR_CORE.COMPANY_TYPES || []).map((item) => ({
     value: item,
     label: item,
   }));
 
-export const WizardFormFirstPage = props => (
+export const WizardFormFirstPage = (props) => (
   <WizardForm {...props}>
     <PanelBody>
       <InputGroup

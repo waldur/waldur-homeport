@@ -9,5 +9,5 @@ export function getShowAllTypes(user: User) {
 export function getIssueTypes(showAllTypes: boolean) {
   return showAllTypes
     ? ISSUE_TYPE_CHOICES
-    : ISSUE_TYPE_CHOICES.filter(x => x.id !== ISSUE_IDS.CHANGE_REQUEST);
+    : ISSUE_TYPE_CHOICES.filter((x) => x.id !== ISSUE_IDS.CHANGE_REQUEST);
 }

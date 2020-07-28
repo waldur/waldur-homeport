@@ -4,7 +4,7 @@ import { formatFilesize } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';
 import { Field, PureResourceSummaryBase } from '@waldur/resource/summary';
 
-const PureVMwareDiskSummary = props => {
+const PureVMwareDiskSummary = (props) => {
   const { translate, resource } = props;
   return (
     <>

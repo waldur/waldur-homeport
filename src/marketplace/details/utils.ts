@@ -1,4 +1,3 @@
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OrderItemRequest } from '@waldur/marketplace/cart/types';
 import {
@@ -6,6 +5,9 @@ import {
   getFormLimitSerializer,
 } from '@waldur/marketplace/common/registry';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
+import store from '@waldur/store/store';
+import { getWorkspace } from '@waldur/workspace/selectors';
+import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { Offering } from '../types';
 
@@ -50,10 +52,8 @@ export const formatOrderItemForUpdate = (props: OrderSummaryProps) => {
 };
 
 export function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
-  const WorkspaceService = ngInjector.get('WorkspaceService');
-
-  const data = WorkspaceService.getWorkspace();
-  if (data.workspace === 'organization') {
+  const workspace = getWorkspace(store.getState());
+  if (workspace === ORGANIZATION_WORKSPACE) {
     return [
       {
         label: translate('Organization workspace'),

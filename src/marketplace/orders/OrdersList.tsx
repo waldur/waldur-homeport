@@ -7,11 +7,11 @@ import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { withTranslation } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { DASH_ESCAPE_CODE } from '@waldur/table-react/constants';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { getProject } from '@waldur/workspace/selectors';
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const { translate } = props;
   useTitle(translate('My orders'));
   const columns = [
@@ -70,9 +70,9 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ordersList',
   fetchData: createFetcher('marketplace-orders'),
-  mapPropsToFilter: props =>
+  mapPropsToFilter: (props) =>
     props.project ? { project_uuid: props.project.uuid } : {},
-  exportRow: row => [
+  exportRow: (row) => [
     formatDateTime(row.created),
     row.created_by_full_name || row.created_by_username,
     row.state,
@@ -92,7 +92,7 @@ const TableOptions = {
   ],
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   project: getProject(state),
 });
 

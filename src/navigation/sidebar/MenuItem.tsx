@@ -2,7 +2,7 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 import * as Label from 'react-bootstrap/lib/Label';
 
-import { translate } from '@waldur/i18n';
+import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import { MenuItemType } from './types';
 
@@ -19,7 +19,10 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 }) => (
   <a onClick={() => onClick(item)}>
     <i className={classNames('fa', item.icon, 'fixed-width-icon')}></i>
-    <span className="nav-label">{translate(item.label)}</span>
+    {wrapTooltip(
+      item.label.length > 20 ? item.label : null,
+      <span className="nav-label">{item.label}</span>,
+    )}
     {Number.isInteger(counter) ? (
       <Label className="pull-right">{counter}</Label>
     ) : null}

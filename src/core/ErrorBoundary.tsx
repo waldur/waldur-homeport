@@ -13,7 +13,7 @@ export class ErrorBoundary extends React.Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error });
-    Sentry.withScope(scope => {
+    Sentry.withScope((scope) => {
       scope.setExtras(errorInfo);
       const eventId = Sentry.captureException(error);
       this.setState({ eventId });
@@ -43,7 +43,7 @@ export function withError<P>(Component: React.ComponentType<P>) {
   if (ENV && !ENV.SENTRY_DSN) {
     return Component;
   }
-  const Wrapper: React.ComponentType<P> = props => (
+  const Wrapper: React.ComponentType<P> = (props) => (
     <ErrorBoundary>
       <Component {...props} />
     </ErrorBoundary>

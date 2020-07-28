@@ -31,7 +31,7 @@ export const reducer = (state = [], action) => {
   }
 };
 
-export const getBreadcrumbs = state => state.breadcrumbs as BreadcrumbItem[];
+export const getBreadcrumbs = (state) => state.breadcrumbs as BreadcrumbItem[];
 
 export const useBreadcrumbs = (items: BreadcrumbItem[]) => {
   const dispatch = useDispatch();

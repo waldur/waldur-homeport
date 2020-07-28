@@ -14,13 +14,13 @@ import { getUser } from '@waldur/workspace/selectors';
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
 import { IssueCommentsContainer } from './comments/IssueCommentsContainer';
 
-const linkify = s =>
+const linkify = (s) =>
   s.replace(
     /\[(.+?)\|(.+)\]/g,
     (_, name, href) => `<a href="${href}">${name}</a>`,
   );
 
-const loadIssue = id => getById<any>('/support-issues/', id);
+const loadIssue = (id) => getById<any>('/support-issues/', id);
 
 export const IssueDetails = () => {
   const currentUser = useSelector(getUser);

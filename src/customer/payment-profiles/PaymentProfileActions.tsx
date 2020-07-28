@@ -8,7 +8,7 @@ import {
 } from '@waldur/customer/payment-profiles/store/actions';
 import { translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { PaymentProfile } from '@waldur/workspace/types';
 
 import { PaymentProfileUpdateDialogContainer } from './PaymentProfileUpdateDialog';
@@ -32,7 +32,7 @@ const openPaymentProfileUpdateDialog = (profile: PaymentProfile) =>
     size: 'lg',
   });
 
-const Actions = props => (
+const Actions = (props) => (
   <ButtonGroup>
     {!props.profile.is_active ? (
       <ActionButton
@@ -57,7 +57,7 @@ const Actions = props => (
   </ButtonGroup>
 );
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   openConfirmationDialog: (profile: PaymentProfile) =>
     openDialog(dispatch, profile),
   openUpdateDialog: (profile: PaymentProfile) =>

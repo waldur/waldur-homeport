@@ -6,8 +6,8 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { connectTable, createFetcher, Table } from '@waldur/table-react';
-import { renderFieldOrDash } from '@waldur/table-react/utils';
+import { connectTable, createFetcher, Table } from '@waldur/table';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { TABLE_MY_ORDERS } from './constants';
@@ -16,7 +16,7 @@ import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
 import { ShowRequestButton } from './ShowRequestButton';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Offering'),
@@ -69,7 +69,7 @@ const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => {
+const mapPropsToFilter = (props) => {
   const filter: Record<string, string> = { o: '-created' };
   if (props.customer) {
     filter.customer_uuid = props.customer.uuid;
@@ -88,7 +88,7 @@ const mapPropsToFilter = props => {
   return filter;
 };
 
-const exportRow = row => [
+const exportRow = (row) => [
   row.offering_name,
   row.project_name,
   formatDateTime(row.created),
@@ -116,7 +116,7 @@ const TableOptions = {
   exportFields,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filter: getFormValues('MyOrderItemsFilter')(state),
   customer: getCustomer(state),
 });

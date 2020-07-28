@@ -16,7 +16,7 @@ interface PureTermsOfServiceProps {
 const PureTermsOfService = (props: PureTermsOfServiceProps) => (
   <Field
     name={props.name}
-    component={prop => (
+    component={(prop) => (
       <AwesomeCheckbox
         id={props.name}
         label={
@@ -33,7 +33,7 @@ const PureTermsOfService = (props: PureTermsOfServiceProps) => (
 );
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: e => {
+  onClick: (e) => {
     e.preventDefault();
     return dispatch(
       showTermsOfServiceDialog(ownProps.offering_terms_of_service),

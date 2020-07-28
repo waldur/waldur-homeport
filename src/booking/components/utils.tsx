@@ -7,19 +7,21 @@ import * as ReactDOM from 'react-dom';
 
 import { formatShortDateTime, formatTime } from '@waldur/core/dateUtils';
 
-export const bookingDataTemplate = event => {
+export const bookingDataTemplate = (event) => {
   const getLabels = Object.keys(event);
-  const getLabelValues = getLabels.map(label => ({
+  const getLabelValues = getLabels.map((label) => ({
     label,
     value: event[label],
   }));
-  return getLabelValues.map(item => (
-    <>
+  return getLabelValues.map((item, index) => (
+    <div key={index}>
       <div className="form-group">
-        <label className="control-label col-xs-4">{item.label}</label>
-        <span>{item.value === ('' || undefined) ? 'N/A' : item.value}</span>
+        <label className="control-label col-xs-4" style={{ marginTop: '-7px' }}>
+          {item.label}
+        </label>
+        <span>{item.value ? item.value : 'N/A'}</span>
       </div>
-    </>
+    </div>
   ));
 };
 
@@ -38,7 +40,6 @@ const renderEventWithTooltip = ({
           <div className="container-fluid form-horizontal">
             <h4 className="fc-title">{event.title}</h4>
             {bookingDataTemplate({
-              'All day': event.allDay ? 'Yes' : 'No',
               Start: formatShortDateTime(event.start),
               End: formatShortDateTime(event.end),
               State: event.extendedProps.state,

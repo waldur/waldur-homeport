@@ -31,7 +31,7 @@ const PureCloseDialogButton = ({
   </button>
 );
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dismiss: () => dispatch(closeModalDialog()),
 });
 

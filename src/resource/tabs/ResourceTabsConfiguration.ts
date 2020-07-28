@@ -18,8 +18,8 @@ class Store {
     const getter = this.tabs[resource.resource_type];
     const config = getter ? getter() : getDefaultResourceTabs();
     return config
-      .filter(tab => isFeatureVisible(tab.feature))
-      .filter(tab => !tab.isVisible || tab.isVisible(resource));
+      .filter((tab) => isFeatureVisible(tab.feature))
+      .filter((tab) => !tab.isVisible || tab.isVisible(resource));
   }
 }
 

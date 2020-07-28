@@ -11,7 +11,7 @@ interface OfferingLogoProps
   className?: string;
 }
 
-export const OfferingLogo: React.FC<OfferingLogoProps> = props => (
+export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => (
   <img
     src={props.src || DefaultLogo}
     className={

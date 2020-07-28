@@ -16,7 +16,11 @@ import {
   isOwnerOrStaff,
   getWorkspace,
 } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import {
+  Customer,
+  ORGANIZATION_WORKSPACE,
+  PROJECT_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { OrderDetailsLink } from './OrderDetailsLink';
 import './PendingOrderIndicator.scss';
@@ -39,14 +43,19 @@ export class PurePendingOrderIndicator extends React.Component<
     if (!customer) {
       return;
     }
-    if (workspace === 'organization' || workspace === 'project') {
+    if (
+      workspace === ORGANIZATION_WORKSPACE ||
+      workspace === PROJECT_WORKSPACE
+    ) {
       this.fetchData();
     }
   }
 
   shouldComponentUpdate(props) {
     const { workspace } = props;
-    return workspace === 'organization' || workspace === 'project';
+    return (
+      workspace === ORGANIZATION_WORKSPACE || workspace === PROJECT_WORKSPACE
+    );
   }
 
   componentDidUpdate(prevProps) {
@@ -96,7 +105,7 @@ export class PurePendingOrderIndicator extends React.Component<
           </li>
         </Dropdown.Toggle>
         <Dropdown.Menu className="dropdown-orders dropdown-menu-right">
-          {limitedOrders.map(order => (
+          {limitedOrders.map((order) => (
             <PendingOrderDropdownItem
               key={order.uuid}
               order={order}
@@ -132,7 +141,7 @@ const getNamePrefix = (type: OrderItemType) => {
   }
 };
 
-const PendingOrderDropdownItem = props => (
+const PendingOrderDropdownItem = (props) => (
   <>
     <li>
       <OrderDetailsLink
@@ -143,7 +152,7 @@ const PendingOrderDropdownItem = props => (
         onClick={props.onClick}
       >
         <div>
-          {props.order.items.map(item => (
+          {props.order.items.map((item) => (
             <div key={item.uuid}>
               <p>
                 <span>{getNamePrefix(item.type)} </span>
@@ -171,10 +180,10 @@ const PendingOrderDropdownItem = props => (
   </>
 );
 
-const ShowAllLink = props => {
+const ShowAllLink = (props) => {
   const { workspace, handleToggleOpen } = props;
   switch (workspace) {
-    case 'organization':
+    case ORGANIZATION_WORKSPACE:
       return (
         <Link
           state="marketplace-my-order-items"
@@ -184,7 +193,7 @@ const ShowAllLink = props => {
           <strong>{translate('Show all')}</strong>
         </Link>
       );
-    case 'project':
+    case PROJECT_WORKSPACE:
       return (
         <Link
           state="marketplace-order-list"
@@ -199,7 +208,7 @@ const ShowAllLink = props => {
   }
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { pendingOrders } = state.marketplace.orders;
   return {
     customer: getCustomer(state),
@@ -209,8 +218,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  fetchPendingOrders: params => dispatch(actions.fetchPendingOrders(params)),
+const mapDispatchToProps = (dispatch) => ({
+  fetchPendingOrders: (params) => dispatch(actions.fetchPendingOrders(params)),
 });
 
 const enhance = compose(

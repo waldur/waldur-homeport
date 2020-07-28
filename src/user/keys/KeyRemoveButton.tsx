@@ -4,14 +4,14 @@ import { compose } from 'redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { ActionButton } from '@waldur/table-react/ActionButton';
-import { deleteEntity } from '@waldur/table-react/actions';
+import { ActionButton } from '@waldur/table/ActionButton';
+import { deleteEntity } from '@waldur/table/actions';
 
 import { showKeyRemoveConfirmation } from './actions';
 import { removeKey } from './api';
 import * as constants from './constants';
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   showConfirmDialog: (action: () => void) =>
     dispatch(showKeyRemoveConfirmation(action)),
   removeEntity: (id: string) =>

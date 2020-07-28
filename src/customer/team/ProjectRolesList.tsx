@@ -4,7 +4,9 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
 export const ProjectRolesList = ({ roleName, row }) => {
-  const filteredProjects = row.projects.filter(item => item.role === roleName);
+  const filteredProjects = row.projects.filter(
+    (item) => item.role === roleName,
+  );
   if (filteredProjects.length === 0) {
     return <>{translate('No projects are assigned to this role.')}</>;
   }

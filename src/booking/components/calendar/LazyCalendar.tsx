@@ -16,7 +16,7 @@ import '@fullcalendar/timegrid/main.css';
 import './Calendar.scss';
 import { defaultConfig } from './defaultConfig';
 
-export const LazyCalendar = props => (
+export const LazyCalendar = (props) => (
   <FullCalendar
     plugins={[
       dayGridPlugin,

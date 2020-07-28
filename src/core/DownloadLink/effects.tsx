@@ -24,6 +24,6 @@ export function* handleDownloadFile(action) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(DOWNLOAD_REQUEST, handleDownloadFile);
 }

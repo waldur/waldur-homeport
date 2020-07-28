@@ -3,7 +3,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { FieldError } from '@waldur/form-react';
+import { FieldError } from '@waldur/form';
 import { Section } from '@waldur/marketplace/types';
 
 import { configAttrField } from './utils';
@@ -14,7 +14,9 @@ interface OfferingAttributesProps {
   controlCols?: number;
 }
 
-export const OfferingAttributes: React.FC<OfferingAttributesProps> = props => (
+export const OfferingAttributes: React.FC<OfferingAttributesProps> = (
+  props,
+) => (
   <>
     {props.sections.map((section, sectionIndex) => (
       <div key={sectionIndex}>
@@ -32,7 +34,7 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = props => (
                 <Col smOffset={props.labelCols} sm={props.controlCols}>
                   <Field
                     name={`attributes.${attribute.key}`}
-                    component={prop => (
+                    component={(prop) => (
                       <AwesomeCheckbox
                         id={`attributes.${attribute.key}`}
                         label={attribute.title}
@@ -65,7 +67,7 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = props => (
                 <Field
                   name={`attributes.${attribute.key}`}
                   {...attr}
-                  component={fieldProps => (
+                  component={(fieldProps) => (
                     <FieldError error={fieldProps.meta.error} />
                   )}
                 />

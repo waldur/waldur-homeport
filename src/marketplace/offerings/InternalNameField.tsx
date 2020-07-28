@@ -10,7 +10,7 @@ interface InternalNameFieldProps {
   name: string;
 }
 
-const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_]+$');
+const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_-]+$');
 
 export const validateInternalName = (value: string) =>
   !value.match(INTERNAL_NAME_PATTERN)
@@ -23,7 +23,7 @@ export const InternalNameField = (props: InternalNameFieldProps) => (
   <Field
     name={props.name}
     validate={validators}
-    parse={v => v.replace('.', '')}
+    parse={(v) => v.replace('.', '')}
     label={translate('Internal name')}
     required={true}
     description={translate(

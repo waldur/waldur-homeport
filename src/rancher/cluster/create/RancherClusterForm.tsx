@@ -2,13 +2,15 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
+import { ExternalLink } from '@waldur/core/ExternalLink';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,
   SelectAsyncField,
   StringField,
   TextField,
-} from '@waldur/form-react';
+} from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
@@ -22,16 +24,18 @@ import { TenantGroup } from './TenantGroup';
 import { TenantSelector } from './TenantSelector';
 import { rancherClusterName } from './utils';
 
-const getTenant = state =>
+const getTenant = (state) =>
   formValueSelector(FORM_ID)(state, 'attributes.tenant_settings');
 
-export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = props => {
+export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
+  props,
+) => {
   React.useEffect(() => {
     const { project, plan } = props;
     const initialData = {
       project,
       plan,
-      attributes: { nodes: [] },
+      attributes: { nodes: [], install_longhorn: true },
       limits: {
         node: 0,
       },
@@ -47,7 +51,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
   const user = useSelector(getUser);
 
   const loadSshKeyOptions = React.useCallback(
-    () => loadSshKeys(user.uuid).then(options => ({ options })),
+    () => loadSshKeys(user.uuid).then((options) => ({ options })),
     [user.uuid],
   );
 
@@ -85,8 +89,23 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = prop
           valueKey="url"
           loadOptions={loadSshKeyOptions}
         />
+        <AwesomeCheckboxField
+          name="attributes.install_longhorn"
+          label={translate(
+            'Deploy Longhorn block storage after cluster is deployed',
+          )}
+          hideLabel={true}
+          description={
+            <ExternalLink
+              label={translate(
+                'Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes.',
+              )}
+              url="https://longhorn.io/docs/"
+            />
+          }
+        />
         {props.project && <TenantSelector project={props.project} />}
-        {tenant && <TenantGroup tenant={tenant} />}
+        {tenant && <TenantGroup tenant={tenant} offering={props.offering} />}
       </FormContainer>
     </form>
   );

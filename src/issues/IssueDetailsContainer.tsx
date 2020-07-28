@@ -10,7 +10,7 @@ const LazyIssueDetails = React.lazy(() =>
   ),
 );
 
-export const IssueDetailsContainer = props => (
+export const IssueDetailsContainer = (props) => (
   <React.Suspense fallback={<LoadingSpinner />}>
     <LazyIssueDetails {...props} />
   </React.Suspense>

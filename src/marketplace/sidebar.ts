@@ -3,10 +3,14 @@ import { getCategories } from '@waldur/marketplace/common/api';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import store from '@waldur/store/store';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
+import {
+  PROJECT_WORKSPACE,
+  ORGANIZATION_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { getCategoryLink } from './utils';
 
-SidebarExtensionService.register('customer', () => {
+SidebarExtensionService.register(ORGANIZATION_WORKSPACE, () => {
   const customer = getCustomer(store.getState());
   if (!customer) {
     return [];
@@ -125,7 +129,7 @@ SidebarExtensionService.register('customer', () => {
   }
 });
 
-SidebarExtensionService.register('project', async () => {
+SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
   const project = getProject(store.getState());
   const categories = await getCategories({
     params: { field: ['uuid', 'title'] },
@@ -156,7 +160,7 @@ SidebarExtensionService.register('project', async () => {
       label: translate('Resources'),
       icon: 'fa-files-o',
       index: 300,
-      children: categories.map(category => ({
+      children: categories.map((category) => ({
         label: category.title,
         icon: 'fa-cloud',
         ...getCategoryLink(project.uuid, category.uuid),

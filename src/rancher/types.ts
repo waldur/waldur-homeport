@@ -66,3 +66,53 @@ export interface Catalog {
 export interface KubeconfigFile {
   config: string;
 }
+
+export interface HPA {
+  uuid: string;
+  name: string;
+  project_name: string;
+  description: string;
+  namespace_name: string;
+  workload_name: string;
+  min_replicas: number;
+  max_replicas: number;
+  current_replicas: number;
+  desired_replicas: number;
+  created: string;
+  runtime_state: string;
+  metrics: Metric[];
+}
+
+interface Metric {
+  name: string;
+  type: string;
+  target: any;
+}
+
+export interface HPACreateType {
+  name: string;
+  description?: string;
+  workload: string;
+  min_replicas: number;
+  max_replicas: number;
+  metrics: Metric[];
+}
+
+interface ClusterTemplateNode {
+  min_vcpu: number;
+  min_ram: number;
+  system_volume_size: number;
+  preferred_volume_type: string;
+  roles: string[];
+}
+
+export interface ClusterTemplate {
+  uuid: string;
+  name: string;
+  description: string;
+  created: string;
+  modified: string;
+  nodes: ClusterTemplateNode[];
+}
+
+export type NodeRole = 'worker' | 'etcd' | 'controlplane';

@@ -24,7 +24,7 @@ export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => {
     async function loadAll() {
       try {
         const { leaflet } = await loadLeafleat();
-        const createIcon = iconUrl =>
+        const createIcon = (iconUrl) =>
           new leaflet.Icon({
             iconUrl,
             iconSize: [25, 41],
@@ -51,7 +51,7 @@ export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => {
         layerRef.current = leafletRef.current
           .layerGroup()
           .addTo(mapRef.current);
-        customers.forEach(customer => {
+        customers.forEach((customer) => {
           if (!customer.longitude || !customer.latitude) {
             return;
           }

@@ -6,6 +6,8 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 
+import { AuthService } from './AuthService';
+
 // @ngInject
 function initAuthToken($auth, $http) {
   // When application starts up, we need to inject auth token if it exists
@@ -16,21 +18,20 @@ function initAuthToken($auth, $http) {
   }
 }
 
-Axios.defaults.paramsSerializer = params =>
+Axios.defaults.paramsSerializer = (params) =>
   Qs.stringify(params, { arrayFormat: 'repeat' });
 
 // On 401 error received, user session has expired and he should logged out
 Axios.interceptors.response.use(
-  function(response) {
+  function (response) {
     return response;
   },
   function invalidTokenInterceptor(error) {
     if (error.response && error.response.status === 401 && ngInjector) {
-      const authService = ngInjector.get('authService');
       const $state = ngInjector.get('$state');
       const $stateParams = ngInjector.get('$stateParams');
 
-      authService.localLogout(
+      AuthService.localLogout(
         $state.current.name
           ? {
               toState: $state.current.name,
@@ -49,10 +50,10 @@ Axios.interceptors.response.use(
 function requireAuth($transitions, $auth, $rootScope, features) {
   $transitions.onStart(
     {
-      to: state => state.data && state.data.auth && $auth.isAuthenticated(),
+      to: (state) => state.data && state.data.auth && $auth.isAuthenticated(),
     },
-    transition =>
-      UsersService.isCurrentUserValid().then(result => {
+    (transition) =>
+      UsersService.isCurrentUserValid().then((result) => {
         if (result) {
           if (transition.to().name == 'initialdata') {
             return transition.router.stateService.target('profile.details');
@@ -70,9 +71,9 @@ function requireAuth($transitions, $auth, $rootScope, features) {
   // he should be redirected to login page.
   $transitions.onStart(
     {
-      to: state => state.data && state.data.auth && !$auth.isAuthenticated(),
+      to: (state) => state.data && state.data.auth && !$auth.isAuthenticated(),
     },
-    transition =>
+    (transition) =>
       transition.router.stateService.target('login', {
         toState: transition.to().name,
         toParams: JSON.parse(JSON.stringify(transition.params())),
@@ -83,25 +84,25 @@ function requireAuth($transitions, $auth, $rootScope, features) {
   // he is redirected to dashboard.
   $transitions.onStart(
     {
-      to: state =>
+      to: (state) =>
         state.data && state.data.anonymous && $auth.isAuthenticated(),
     },
-    transition => transition.router.stateService.target('profile.details'),
+    (transition) => transition.router.stateService.target('profile.details'),
   );
 
   // If state data has `feature` field and this feature is disabled,
   // user is redirected to 404 error page.
   $transitions.onStart(
     {
-      to: state =>
+      to: (state) =>
         state.data &&
         state.data.feature &&
         !features.isVisible(state.data.feature),
     },
-    transition => transition.router.stateService.target('errorPage.notFound'),
+    (transition) => transition.router.stateService.target('errorPage.notFound'),
   );
 
-  $transitions.onStart({}, transition => {
+  $transitions.onStart({}, (transition) => {
     const fromName = transition.from().name;
     if (fromName) {
       $rootScope.prevPreviousState = fromName;
@@ -111,12 +112,12 @@ function requireAuth($transitions, $auth, $rootScope, features) {
     }
   });
 
-  $transitions.onSuccess({}, function() {
+  $transitions.onSuccess({}, function () {
     store.dispatch(closeModalDialog());
   });
 }
 
-export default module => {
+export default (module) => {
   module.run(requireAuth);
   module.run(initAuthToken);
 };

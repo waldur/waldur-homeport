@@ -1,17 +1,10 @@
-// @ngInject
-export default function attachTracking(ENV) {
-  if (ENV.GoogleAnalyticsID) {
-    attachGoogleAnalytics(ENV.GoogleAnalyticsID);
-  }
-}
-
 function attachGoogleAnalytics(trackingID) {
   /* eslint-disable */
-  (function(i, s, o, g, r, a, m) {
+  (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
     (i[r] =
       i[r] ||
-      function() {
+      function () {
         (i[r].q = i[r].q || []).push(arguments);
       }),
       (i[r].l = 1 * new Date());
@@ -28,4 +21,11 @@ function attachGoogleAnalytics(trackingID) {
   );
   ga('create', trackingID, 'auto');
   /* eslint-enable */
+}
+
+// @ngInject
+export default function attachTracking(ENV) {
+  if (ENV.GoogleAnalyticsID) {
+    attachGoogleAnalytics(ENV.GoogleAnalyticsID);
+  }
 }

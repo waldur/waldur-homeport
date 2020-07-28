@@ -5,15 +5,15 @@ import { getFormValues } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { InvoiceActions } from './InvoiceActions';
 import { InvoicesFilter } from './InvoicesFilter';
 import { InvoiceStateIndicator } from './InvoiceStateIndicator';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -63,7 +63,7 @@ const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => ({
+const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
   customer: props.customer.url,
 });
@@ -74,7 +74,7 @@ const TableOptions: TableOptionsType = {
   mapPropsToFilter,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   showActions: isOwnerOrStaff(state),
   stateFilter: getFormValues('PayPalInvoicesFilter')(state),

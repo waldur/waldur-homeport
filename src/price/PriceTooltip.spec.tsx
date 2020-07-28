@@ -16,8 +16,8 @@ describe('PriceTooltip', () => {
       </Provider>,
     );
 
-  const getLabel = wrapper => wrapper.find(Tooltip).props().label;
-  const hasIcon = wrapper => wrapper.find('i').length === 1;
+  const getLabel = (wrapper) => wrapper.find(Tooltip).props().label;
+  const hasIcon = (wrapper) => wrapper.find('i').length === 1;
 
   it('does not render icon if billing mode is activated', () => {
     const wrapper = renderTooltip({ config: { accountingMode: 'billing' } });

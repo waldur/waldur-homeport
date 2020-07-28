@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { refreshSupportUsers } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
 
-const filterOptions = options => options;
+const filterOptions = (options) => options;
 
 export const AssigneeGroup = ({ disabled }) => (
   <FormGroup>

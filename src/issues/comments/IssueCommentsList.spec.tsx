@@ -14,10 +14,10 @@ const initialProps = {
 const renderWrapper = (props?) =>
   shallow(<PureIssueCommentsList {...initialProps} {...props} />);
 
-const getIssueComment = container => container.find(IssueCommentItem);
-const hasNoCommentsMessage = container =>
+const getIssueComment = (container) => container.find(IssueCommentItem);
+const hasNoCommentsMessage = (container) =>
   container.contains(<div>{translate('There are no comments yet.')}</div>);
-const hasErrorMessage = container =>
+const hasErrorMessage = (container) =>
   container.contains(<div>{translate('Unable to load comments.')}</div>);
 
 describe('IssueCommentsForm', () => {

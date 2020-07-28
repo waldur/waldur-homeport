@@ -9,7 +9,7 @@ import { NodeRemoveButton } from './NodeRemoveButton';
 import { NodeRoleGroup } from './NodeRoleGroup';
 import { NodeStorageGroup } from './NodeStorageGroup';
 
-export const NodePanel = props => (
+export const NodePanel = (props) => (
   <Panel>
     <Panel.Heading>
       <NodeRemoveButton onClick={() => props.onRemove(props.index)} />
@@ -20,7 +20,7 @@ export const NodePanel = props => (
     <Panel.Body>
       <FormSection name={props.node}>
         <NodeRoleGroup />
-        <NodeFlavorGroup options={props.flavors} />
+        <NodeFlavorGroup options={props.flavors} nodeIndex={props.index} />
         <NodeStorageGroup
           nodeIndex={props.index}
           volumeTypes={props.volumeTypes}

@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { TableProps } from '@waldur/table-react/Table';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { TableProps } from '@waldur/table/Table';
+import { TableOptionsType } from '@waldur/table/types';
 
 import { Catalog } from '../types';
 

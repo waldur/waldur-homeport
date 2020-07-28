@@ -17,7 +17,7 @@ interface OfferingDetailsProps {
   tabs: OfferingTab[];
 }
 
-export const OfferingDetails: React.FC<OfferingDetailsProps> = props => (
+export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => (
   <div className="wrapper wrapper-content">
     {props.offering.shared && (
       <div

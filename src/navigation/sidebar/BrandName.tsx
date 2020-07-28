@@ -1,36 +1,46 @@
 import { useRouter } from '@uirouter/react';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
-import { ENV, ngInjector } from '@waldur/core/services';
-
-import { WOKSPACE_NAMES } from '../workspace/constants';
+import { ENV } from '@waldur/core/services';
+import {
+  getWorkspace,
+  getCustomer,
+  getProject,
+} from '@waldur/workspace/selectors';
+import {
+  ORGANIZATION_WORKSPACE,
+  SUPPORT_WORKSPACE,
+  PROJECT_WORKSPACE,
+  USER_WORKSPACE,
+} from '@waldur/workspace/types';
 
 export const BrandName = () => {
   const router = useRouter();
-  const onLogoClick = event => {
-    const WorkspaceService = ngInjector.get('WorkspaceService');
-    const workspaceData = WorkspaceService.getWorkspace();
-    const { workspace } = workspaceData;
+  const workspace = useSelector(getWorkspace);
+  const customer = useSelector(getCustomer);
+  const project = useSelector(getProject);
+  const onLogoClick = (event) => {
     event.preventDefault();
     switch (workspace) {
-      case WOKSPACE_NAMES.organization:
+      case ORGANIZATION_WORKSPACE:
         router.stateService.go(
           'organization.dashboard',
-          { uuid: workspaceData.customer.uuid },
+          { uuid: customer.uuid },
           { reload: true },
         );
         break;
-      case WOKSPACE_NAMES.support:
+      case SUPPORT_WORKSPACE:
         router.stateService.go('support.dashboard', { reload: true });
         break;
-      case WOKSPACE_NAMES.project:
+      case PROJECT_WORKSPACE:
         router.stateService.go(
           'project.details',
-          { uuid: workspaceData.project.uuid },
+          { uuid: project.uuid },
           { reload: true },
         );
         break;
-      case WOKSPACE_NAMES.user:
+      case USER_WORKSPACE:
         router.stateService.go('profile.details', { reload: true });
         break;
       default:

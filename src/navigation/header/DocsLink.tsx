@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
 
 export const DocsLink = () => {
-  const link = useSelector(state => getConfig(state).docsLink);
+  const link = useSelector((state) => getConfig(state).docsLink);
   if (!link) {
     return null;
   }

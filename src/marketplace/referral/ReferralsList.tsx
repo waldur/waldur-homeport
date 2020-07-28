@@ -1,12 +1,14 @@
 import * as React from 'react';
 
+import { ENV } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { REFERRALS_TABLE } from '@waldur/marketplace/referral/constants';
 import { ReferralTypeIcon } from '@waldur/marketplace/referral/ReferralTypeIcon';
-import { connectTable, createFetcher, Table } from '@waldur/table-react';
+import { connectTable, createFetcher, Table } from '@waldur/table';
+import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Title'),
@@ -50,8 +52,14 @@ const TableComponent = props => {
 
 const TableOptions = {
   table: REFERRALS_TABLE,
-  fetchData: createFetcher('marketplace-offering-referrals'),
-  mapPropsToFilter: props => ({ scope: props.offering.url }),
+  fetchData: (request) =>
+    createFetcher(
+      'marketplace-offering-referrals',
+      ENV.plugins.WALDUR_MARKETPLACE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS
+        ? ANONYMOUS_CONFIG
+        : undefined,
+    )(request),
+  mapPropsToFilter: (props) => ({ scope: props.offering.url }),
 };
 
 const enhance = connectTable(TableOptions);

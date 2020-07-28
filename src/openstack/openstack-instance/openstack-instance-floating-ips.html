@@ -1,6 +1,5 @@
 <div ng-if="$ctrl.subnets.length === 0" translate>
-  Instance is not connected to any internal subnets yet. Please connect it to
-  internal subnet first.
+  Instance is not connected to any internal subnets yet. Please connect it to internal subnet first.
 </div>
 <div ng-if="$ctrl.subnets.length > 0">
   <div ng-if="$ctrl.items.length === 0" translate>
@@ -30,7 +29,7 @@
             ng-if="!item.address"
             ng-options="choice.value as choice.display_name for choice in $ctrl.floating_ips"
             ng-model="item.floating_ip"
-            ng-class="{disabled: !item.subnet}"
+            ng-class="{ disabled: !item.subnet }"
             class="form-control"
           >
           </select>

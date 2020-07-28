@@ -6,13 +6,20 @@ import useAsync from 'react-use/lib/useAsync';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
+import { CustomerBookingManagement } from '@waldur/customer/dashboard/CustomerBookingManagement';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';
 import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
+import { FEATURE } from '@waldur/marketplace-checklist/constants';
+import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
 import { useTitle } from '@waldur/navigation/title';
-import { User, Customer } from '@waldur/workspace/types';
+import {
+  User,
+  Customer,
+  ORGANIZATION_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { loadSummary } from './api';
 import { CustomerActions } from './CustomerActions';
@@ -59,12 +66,16 @@ export const CustomerDashboard = (props: CustomerDashboardProps) => {
         </div>
       ) : null}
       <>
+        {isFeatureVisible(FEATURE) && (
+          <CustomerChecklistOverview customer={props.customer} />
+        )}
+        <CustomerBookingManagement />
         <Panel title={translate('Resources')}>
           <CustomerResourcesList />
         </Panel>
         {isFeatureVisible('customer.dashboard.category-resources-list') && (
           <CategoryResourcesList
-            scopeType="organization"
+            scopeType={ORGANIZATION_WORKSPACE}
             scope={props.customer}
           />
         )}

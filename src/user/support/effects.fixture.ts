@@ -5,14 +5,14 @@ import * as effects from './effects';
 
 export const setupFixture = (state = {}) => {
   const mockUpdateUser = jest.spyOn(api, 'updateUser');
-  const updateUser = action =>
+  const updateUser = (action) =>
     runSaga(store, effects.handleUpdateUser, action).done;
-  const hasActionWithType = type =>
-    dispatched.find(a => a.type === type) !== undefined;
+  const hasActionWithType = (type) =>
+    dispatched.find((a) => a.type === type) !== undefined;
 
   const dispatched = [];
   const store = {
-    dispatch: a => dispatched.push(a),
+    dispatch: (a) => dispatched.push(a),
     getState: () => state,
   };
 

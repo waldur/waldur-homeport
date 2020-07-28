@@ -66,7 +66,7 @@ async function loadData(offering_uuid: string) {
         </>
       ),
     },
-  ].filter(tab => tab.visible);
+  ].filter((tab) => tab.visible);
   return { offering, tabs };
 }
 

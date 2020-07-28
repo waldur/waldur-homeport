@@ -4,6 +4,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { AuthButtonProps } from './AuthButton';
 import { AuthSaml2Dialog } from './saml2/AuthSaml2Dialog';
 import { loginSaml2 } from './saml2/store/actions';
+import { AuthValimoDialog } from './valimo/AuthValimoDialog';
 
 export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
   {
@@ -41,7 +42,7 @@ export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
     label: ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_LABEL,
     btnClass: 'btn-saml2',
     iconClass: 'fa-university',
-    onClick: dispatch => {
+    onClick: (dispatch) => {
       dispatch({
         type: loginSaml2.REQUEST,
         payload: {
@@ -57,13 +58,13 @@ export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
     btnClass: 'btn-saml2-edu',
     iconClass: 'fa-globe',
     label: 'eduGAIN',
-    onClick: dispatch => dispatch(openModalDialog(AuthSaml2Dialog)),
+    onClick: (dispatch) => dispatch(openModalDialog(AuthSaml2Dialog)),
   },
   {
     providerKey: 'valimo',
     btnClass: 'btn-mid',
     iconClass: 'fa-phone-square',
     label: ENV.plugins.WALDUR_AUTH_VALIMO.LABEL,
-    onClick: dispatch => dispatch(openModalDialog('authValimoDialog')),
+    onClick: (dispatch) => dispatch(openModalDialog(AuthValimoDialog)),
   },
 ];

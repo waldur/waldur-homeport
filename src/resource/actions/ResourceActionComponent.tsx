@@ -22,7 +22,9 @@ const ActionItem = ({ action, actionKey, onSelect }) => (
     className={classNames({
       remove: action.destructive,
     })}
-    disabled={!action.enabled || action.pending}
+    // Workaround for rendering tooltips for disabled dropdown menu items.
+    // See also: https://stackoverflow.com/questions/57349166/
+    style={(!action.enabled || action.pending) && { opacity: 0.3 }}
     onSelect={() => onSelect(actionKey, action)}
   >
     {action.reason ? (
@@ -44,6 +46,7 @@ export const ResourceActionComponent = (
   <DropdownButton
     title={translate('Actions')}
     id="actions-dropdown-btn"
+    className="dropdown-btn"
     onToggle={props.onToggle}
     open={props.open}
     disabled={props.disabled}
@@ -57,7 +60,7 @@ export const ResourceActionComponent = (
         Object.keys(props.actions).length === 0 ? (
           <MenuItem eventKey="2">{translate('There are no actions.')}</MenuItem>
         ) : (
-          Object.keys(props.actions).map(key => (
+          Object.keys(props.actions).map((key) => (
             <ActionItem
               key={key}
               action={props.actions[key]}

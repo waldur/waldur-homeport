@@ -10,7 +10,7 @@ import { getType, getComponents } from '../store/selectors';
 import { PlanList } from './PlanList';
 import { hasError } from './utils';
 
-const PureAccountingSummary = props => {
+const PureAccountingSummary = (props) => {
   return (
     <>
       <h3>{translate('Accounting')}</h3>
@@ -38,15 +38,15 @@ const PureAccountingSummary = props => {
   );
 };
 
-const connector = connect(state => {
+const connector = connect((state) => {
   const formData: any = getFormValues(FORM_ID)(state);
   const type = getType(state);
   const components = type && getComponents(state, type);
   const activePlans = formData.plans
-    ? formData.plans.filter(plan => !plan.archived)
+    ? formData.plans.filter((plan) => !plan.archived)
     : [];
   const archivedPlans = formData.plans
-    ? formData.plans.filter(plan => plan.archived)
+    ? formData.plans.filter((plan) => plan.archived)
     : [];
   return {
     formData,

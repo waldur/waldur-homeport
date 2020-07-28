@@ -14,7 +14,7 @@ interface Props extends StateProps {
   offeringLimits: OfferingLimits;
 }
 
-export const ChangeLimitsComponent: React.FC<Props> = props => (
+export const ChangeLimitsComponent: React.FC<Props> = (props) => (
   <div>
     {props.plan ? (
       <p>

@@ -12,7 +12,7 @@ export class OpenstackInstanceNetworksStory extends React.Component {
     selectedValue: [],
   };
 
-  selectValue = value => {
+  selectValue = (value) => {
     this.setState({ selectedValue: value });
   };
 

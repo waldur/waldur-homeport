@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import * as constants from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
@@ -34,7 +34,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
         ownProps.row.state === constants.BOOKING_CREATED &&
         stateProps.user.is_staff,
     },
-  ].filter(row => row.visible),
+  ].filter((row) => row.visible),
 });
 
 const Actions = ({ actions }) => (

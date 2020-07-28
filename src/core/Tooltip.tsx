@@ -15,10 +15,12 @@ export const Tooltip: React.FC<TooltipProps> = ({
   id,
   className,
   onClick,
+  ...rest
 }) => (
   <OverlayTrigger
     placement="top"
     overlay={<BootstrapTooltip id={id}>{label}</BootstrapTooltip>}
+    {...rest}
   >
     <span className={className} onClick={onClick}>
       {children}

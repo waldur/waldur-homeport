@@ -14,14 +14,14 @@ const initialProps = {
   translate,
   issue,
   fetchComments: () => null,
-  setIssue: x => x,
+  setIssue: (x) => x,
 };
 const renderWrapper = (props?) =>
   shallow(<PureIssueCommentsContainer {...initialProps} {...props} />);
 
-const getLoadingSpinner = container => container.find(LoadingSpinner);
-const getIssueCommentsList = container => container.find(IssueCommentsList);
-const getLoadingOverlay = container => container.find(LoadingOverlay);
+const getLoadingSpinner = (container) => container.find(LoadingSpinner);
+const getIssueCommentsList = (container) => container.find(IssueCommentsList);
+const getLoadingOverlay = (container) => container.find(LoadingOverlay);
 
 describe('IssueCommentsContainer', () => {
   it('renders LoadingOverlay', () => {

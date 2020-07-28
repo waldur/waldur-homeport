@@ -7,8 +7,8 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { ENV } from '@waldur/core/services';
 import { withTranslation, translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { renderFieldOrDash } from '@waldur/table-react/utils';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CurrentCostField } from './CurrentCostField';
 import { CustomerExpandableRow } from './CustomerExpandableRow';
@@ -35,13 +35,13 @@ const AgreementNumberField = ({ row }) => (
   <span>{renderFieldOrDash(row.agreement_number)}</span>
 );
 
-const renderTitleWithPriceTooltip = title => (
+const renderTitleWithPriceTooltip = (title) => (
   <>
     <PriceTooltip /> {title}
   </>
 );
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const { filterColumns, customerListFilter } = props;
   const accountingPeriodIsCurrent =
     customerListFilter.accounting_period &&
@@ -124,7 +124,7 @@ const exportRow = (row, props) => {
     : base;
 };
 
-const exportFields = props => {
+const exportFields = (props) => {
   const base = [
     translate('Organization'),
     translate('Abbreviation'),
@@ -147,7 +147,7 @@ const exportFields = props => {
     : [...base, `${translate('Cost')} (${vatMessage})`];
 };
 
-const formatFilter = filter => {
+const formatFilter = (filter) => {
   if (filter) {
     if (filter.accounting_period) {
       return {
@@ -166,12 +166,12 @@ const TableOptions = {
   table: 'customerList',
   fetchData: createFetcher('customers'),
   queryField: 'query',
-  mapPropsToFilter: props => formatFilter(props.customerListFilter),
+  mapPropsToFilter: (props) => formatFilter(props.customerListFilter),
   exportRow,
   exportFields,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customerListFilter: getFormValues('customerListFilter')(state),
 });
 

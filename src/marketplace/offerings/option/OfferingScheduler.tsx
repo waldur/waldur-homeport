@@ -37,14 +37,14 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
         calendarType="create"
         events={props.fields.getAll() || []}
         addEventCb={props.fields.push}
-        removeEventCb={id => deleteCalendarBooking(props.fields, { id })}
+        removeEventCb={(id) => deleteCalendarBooking(props.fields, { id })}
         options={props.config}
       />
     </Col>
   </div>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   schedules: formValueSelector('marketplaceOfferingCreate')(state, 'schedules'),
   config: state.bookings.config as State,
 });

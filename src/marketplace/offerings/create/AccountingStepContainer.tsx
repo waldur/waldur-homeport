@@ -15,7 +15,7 @@ import { getType, getComponents } from '../store/selectors';
 
 import { AccountingStep } from './AccountingStep';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const type = getType(state);
   const showComponents = type && showComponentsList(type);
   const showLimits = type && showOfferingLimits(type);

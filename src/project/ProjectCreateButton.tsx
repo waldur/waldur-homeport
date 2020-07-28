@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import { isCustomerQuotaReached } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n/translate';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { gotoProjectCreate } from './actions';
 
-const PureProjectCreateButton = props => (
+const PureProjectCreateButton = (props) => (
   <ActionButton
     title={translate('Add project')}
     action={props.gotoProjectCreate}
@@ -18,7 +18,7 @@ const PureProjectCreateButton = props => (
   />
 );
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const ownerOrStaff = isOwnerOrStaff(state);
   const customer = getCustomer(state);
 

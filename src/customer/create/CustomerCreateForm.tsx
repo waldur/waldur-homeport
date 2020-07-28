@@ -8,7 +8,7 @@ import { WizardFormSecondPage } from './WizardFormSecondPage';
 
 const WizardForms = [WizardFormFirstPage, WizardFormSecondPage];
 
-export const CustomerCreateForm = props => {
+export const CustomerCreateForm = (props) => {
   const [step, setStep] = React.useState(1);
   const steps = [translate('General information')];
   if (!ENV.hideOrganizationBillingStep) {

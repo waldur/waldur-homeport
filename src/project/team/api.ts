@@ -1,7 +1,7 @@
 import { getList } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
-import { parseResponse } from '@waldur/table-react/api';
-import { Fetcher, TableRequest } from '@waldur/table-react/types';
+import { parseResponse } from '@waldur/table/api';
+import { Fetcher, TableRequest } from '@waldur/table/types';
 
 export const fetchProjectUsers: Fetcher = (request: TableRequest) => {
   const { project_uuid, ...rest } = request.filter;

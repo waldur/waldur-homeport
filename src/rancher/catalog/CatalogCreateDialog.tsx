@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { StringField, TextField, SecretField } from '@waldur/form-react';
+import { StringField, TextField, SecretField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { Resource } from '@waldur/resource/types';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
-import { createEntity } from '@waldur/table-react/actions';
+import { createEntity } from '@waldur/table/actions';
 
 import { createCatalog } from '../api';
 
@@ -28,11 +28,11 @@ interface OwnProps {
   };
 }
 
-const useCatalogCreateDialog = cluster => {
+const useCatalogCreateDialog = (cluster) => {
   const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const callback = React.useCallback(
-    async formData => {
+    async (formData) => {
       try {
         setSubmitting(true);
         const response = await createCatalog({
@@ -62,7 +62,7 @@ const useCatalogCreateDialog = cluster => {
 
 export const CatalogCreateDialog = reduxForm<FormData, OwnProps>({
   form: 'RancherCatalogCreate',
-})(props => {
+})((props) => {
   const { submitting, createCatalog } = useCatalogCreateDialog(
     props.resolve.cluster,
   );

@@ -2,16 +2,16 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 
 import { formatFilesize } from '@waldur/core/utils';
-import { SelectDialogField } from '@waldur/form-react/SelectDialogField';
+import { SelectDialogField } from '@waldur/form/SelectDialogField';
 import { translate } from '@waldur/i18n';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-export const FlavorGroup = props => (
+export const FlavorGroup = (props) => (
   <CreateResourceFormGroup label={translate('Flavor')} required={true}>
     <Field
       name="attributes.flavor"
-      component={fieldProps => (
+      component={(fieldProps) => (
         <SelectDialogField
           id="flavor"
           columns={[

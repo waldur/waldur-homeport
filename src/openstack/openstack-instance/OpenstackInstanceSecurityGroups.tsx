@@ -35,13 +35,13 @@ interface DispatchProps {
 class OpenstackInstanceSecurityGroupsComponent extends React.Component<
   OwnProps & DispatchProps & TranslateProps
 > {
-  openDetailsDialog = e => {
+  openDetailsDialog = (e) => {
     e.preventDefault();
     const selectedSecurityGroupsUuids = this.props.input.value.map(
-      selectedSecurityGroup => selectedSecurityGroup.uuid,
+      (selectedSecurityGroup) => selectedSecurityGroup.uuid,
     );
     const selectedSecurityGroups = this.props.securityGroups.filter(
-      selectedSecurityGroup =>
+      (selectedSecurityGroup) =>
         selectedSecurityGroupsUuids.indexOf(selectedSecurityGroup.uuid) !== -1,
     );
     this.props.openSecurityGroupsDetailsDialog(selectedSecurityGroups);
@@ -49,7 +49,7 @@ class OpenstackInstanceSecurityGroupsComponent extends React.Component<
 
   componentDidMount() {
     const defaultSecurityGroup = this.props.securityGroups.find(
-      securityGroup => securityGroup.name === 'default',
+      (securityGroup) => securityGroup.name === 'default',
     );
     if (defaultSecurityGroup && !this.props.input.value) {
       this.props.input.onChange([
@@ -94,8 +94,8 @@ class OpenstackInstanceSecurityGroupsComponent extends React.Component<
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  openSecurityGroupsDetailsDialog: securityGroups =>
+const mapDispatchToProps = (dispatch) => ({
+  openSecurityGroupsDetailsDialog: (securityGroups) =>
     dispatch(openSecurityGroupsDetailsDialog(securityGroups)),
 });
 

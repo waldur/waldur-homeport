@@ -9,6 +9,7 @@ import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/Offe
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocomplete';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
+import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { OrderStateFilter } from './OrderStateFilter';
 import { OrderTypeFilter } from './OrderTypeFilter';
@@ -39,13 +40,13 @@ const filterSelector = createSelector(
   getCustomer,
   getWorkspace,
   (customer, workspace) => {
-    if (workspace === 'organization') {
+    if (workspace === ORGANIZATION_WORKSPACE) {
       return { customer_uuid: customer.uuid };
     }
   },
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   offeringFilter: filterSelector(state),
 });
 

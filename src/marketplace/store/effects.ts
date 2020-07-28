@@ -9,7 +9,7 @@ import ordersEffects from '../orders/store/effects';
 import resourcesEffects from '../resources/store/effects';
 import serviceProviderEffects from '../service-providers/store/effects';
 
-export default function*() {
+export default function* () {
   yield all([
     fork(cartEffects),
     fork(categoryEffects),

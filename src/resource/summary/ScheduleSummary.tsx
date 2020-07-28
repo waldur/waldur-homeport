@@ -10,9 +10,9 @@ import {
 import { Schedule } from '@waldur/resource/types';
 import { formatRetentionTime, formatSchedule } from '@waldur/resource/utils';
 
-export const PureScheduleSummary: React.FC<ResourceSummaryProps<
-  Schedule
->> = props => {
+export const PureScheduleSummary: React.FC<ResourceSummaryProps<Schedule>> = (
+  props,
+) => {
   const { translate, resource } = props;
   return (
     <>

@@ -1,5 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
+import ResizeObserver from 'resize-observer-polyfill';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import loadEcharts from '@waldur/shims/load-echarts';
@@ -52,7 +53,7 @@ export class EChart extends React.Component<ChartProps> {
     this.setState({
       loading: true,
     });
-    loadEcharts().then(module => {
+    loadEcharts().then((module) => {
       this.setState({
         loading: false,
       });
@@ -65,12 +66,22 @@ export class EChart extends React.Component<ChartProps> {
         this.chart = echarts.init(this.container);
       }
       this.renderChart();
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.map(({ target }) => {
+          const instance = echarts.getInstanceByDom(target);
+          if (instance) {
+            instance.resize();
+          }
+        });
+      });
+      resizeObserver.observe(this.container);
     });
   }
 
   renderChart() {
     this.chart.setOption(this.props.options, this.props.theme);
   }
+
   render() {
     const { width, height } = this.props;
     const { loading } = this.state;
@@ -81,7 +92,7 @@ export class EChart extends React.Component<ChartProps> {
         <div
           className={classNames({ hidden: loading })}
           style={style}
-          ref={container => (this.container = container)}
+          ref={(container) => (this.container = container)}
         />
       </div>
     );

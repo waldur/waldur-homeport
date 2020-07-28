@@ -5,7 +5,7 @@ function checkLanguage(LanguageUtilsService) {
 }
 checkLanguage.$inject = ['LanguageUtilsService'];
 
-export default module => {
+export default (module) => {
   module.service('LanguageUtilsService', LanguageUtilsService);
   module.run(checkLanguage);
 };

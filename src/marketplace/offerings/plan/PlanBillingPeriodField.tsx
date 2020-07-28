@@ -10,10 +10,10 @@ export const PlanBillingPeriodField = () => (
   <Field
     name="unit"
     validate={required}
-    component={fieldProps => (
+    component={(fieldProps) => (
       <Select
         value={fieldProps.input.value}
-        onChange={value => fieldProps.input.onChange(value)}
+        onChange={(value) => fieldProps.input.onChange(value)}
         options={getBillingPeriods()}
         clearable={false}
       />

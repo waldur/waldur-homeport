@@ -8,7 +8,7 @@ import { getCategory, getCategories } from '../store/selectors';
 
 import { DescriptionStep } from './DescriptionStep';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   category: getCategory(state),
   categories: getCategories(state),
 });

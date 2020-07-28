@@ -2,7 +2,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import {
   SelectDialogFieldColumn,
   SelectDialogFieldChoice,
-} from '@waldur/form-react/SelectDialogField';
+} from '@waldur/form/SelectDialogField';
 import { translate } from '@waldur/i18n';
 import { getOffering, getResource } from '@waldur/marketplace/common/api';
 import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
@@ -26,7 +26,7 @@ const getColumns = (offering: Offering): SelectDialogFieldColumn[] => [
   },
   ...filterOfferingComponents(offering)
     .sort((a, b) => a.name.localeCompare(b.name))
-    .map(component => ({
+    .map((component) => ({
       name: component.type,
       label: component.name,
     })),
@@ -38,7 +38,7 @@ const getColumns = (offering: Offering): SelectDialogFieldColumn[] => [
 
 const sortPlans = (plans: Plan[]) =>
   plans
-    .map(plan => ({
+    .map((plan) => ({
       ...plan,
       unit_price:
         typeof plan.unit_price === 'string'
@@ -63,7 +63,7 @@ const getChoices = (
   offering: Offering,
   resource: OrderItemResponse,
 ): SelectDialogFieldChoice[] =>
-  sortPlans(offering.plans).map(plan => ({
+  sortPlans(offering.plans).map((plan) => ({
     url: plan.url,
     uuid: plan.uuid,
     name: plan.name,
@@ -83,7 +83,7 @@ export async function loadData(resource_uuid): Promise<FetchedData> {
   const offering = await getOffering(resource.offering_uuid);
   const columns = getColumns(offering);
   const choices = getChoices(offering, resource);
-  const validPlan = choices.find(choice => !choice.disabled);
+  const validPlan = choices.find((choice) => !choice.disabled);
   const initialValues = validPlan ? { plan: validPlan } : undefined;
   return { offering, resource, columns, choices, initialValues };
 }

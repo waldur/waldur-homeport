@@ -4,6 +4,12 @@ import { filterItems } from '@waldur/navigation/sidebar/utils';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { isOwnerOrStaff } from '@waldur/workspace/selectors';
+import {
+  ORGANIZATION_WORKSPACE,
+  PROJECT_WORKSPACE,
+  SUPPORT_WORKSPACE,
+  USER_WORKSPACE,
+} from '@waldur/workspace/types';
 
 const getHelpdeskItems = () => [
   {
@@ -117,8 +123,7 @@ export default class IssueNavigationService {
     if (this.features.isVisible('support')) {
       return true;
     }
-    const user = UsersService.currentUser;
-    return user && (user.is_staff || user.is_support);
+    return isOwnerOrStaff(store.getState());
   }
 
   gotoDashboard() {
@@ -129,7 +134,7 @@ export default class IssueNavigationService {
         return this.$state.go('support.resources');
       }
     }
-    return UsersService.getCurrentUser().then(user => {
+    return UsersService.getCurrentUser().then((user) => {
       if (user.is_staff || user.is_support) {
         this.$state.go('support.helpdesk');
       } else {
@@ -140,7 +145,7 @@ export default class IssueNavigationService {
 
   getSidebarItems() {
     return UsersService.getCurrentUser()
-      .then(user => {
+      .then((user) => {
         this.currentUser = user;
         if (!this.features.isVisible('support')) {
           return [];
@@ -155,20 +160,20 @@ export default class IssueNavigationService {
           return dashboardItems;
         }
       })
-      .then(items => {
+      .then((items) => {
         items = angular.copy(items);
         if (this.getBackItemLabel()) {
           items.unshift(this.getBackItem());
         }
         return items;
       })
-      .then(items =>
-        SidebarExtensionService.getItems('support').then(extra => [
+      .then((items) =>
+        SidebarExtensionService.getItems(SUPPORT_WORKSPACE).then((extra) => [
           ...items,
           ...extra,
         ]),
       )
-      .then(items => {
+      .then((items) => {
         if (this.currentUser.is_support || this.currentUser.is_staff) {
           return [...items, ...filterItems(getReportItems())];
         }
@@ -180,7 +185,7 @@ export default class IssueNavigationService {
     if (
       state.data &&
       state.data.workspace &&
-      state.data.workspace !== 'support'
+      state.data.workspace !== SUPPORT_WORKSPACE
     ) {
       this.prevState = state;
       this.prevParams = params;
@@ -198,14 +203,14 @@ export default class IssueNavigationService {
 
   getBackItemLabel() {
     const prevWorkspace = this.prevWorkspace;
-    if (prevWorkspace === 'project') {
+    if (prevWorkspace === PROJECT_WORKSPACE) {
       return translate('Back to project');
     } else if (
-      prevWorkspace === 'organization' &&
+      prevWorkspace === ORGANIZATION_WORKSPACE &&
       (isOwnerOrStaff(store.getState()) || this.currentUser.is_support)
     ) {
       return translate('Back to organization');
-    } else if (prevWorkspace === 'user') {
+    } else if (prevWorkspace === USER_WORKSPACE) {
       return translate('Back to personal dashboard');
     }
   }
@@ -213,7 +218,7 @@ export default class IssueNavigationService {
 
 // @ngInject
 export function attachStateUtils($rootScope, IssueNavigationService) {
-  $rootScope.$on('$stateChangeSuccess', function(
+  $rootScope.$on('$stateChangeSuccess', function (
     event,
     toState,
     toParams,

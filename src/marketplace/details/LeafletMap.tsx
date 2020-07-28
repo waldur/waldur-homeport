@@ -72,7 +72,7 @@ export class LeafletMap extends React.Component<LeafletMapProps> {
     if (this.state.loaded) {
       return (
         <div
-          ref={node => (this.mapNode = node)}
+          ref={(node) => (this.mapNode = node)}
           style={{ width: '100%', height: 300 }}
         />
       );

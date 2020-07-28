@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
-const ManageSecurityGroupsButton = props => (
+const ManageSecurityGroupsButton = (props) => (
   <Link
     state="resource-details"
     params={{
@@ -17,7 +17,7 @@ const ManageSecurityGroupsButton = props => (
   </Link>
 );
 
-const ManageNetworksButton = props => (
+const ManageNetworksButton = (props) => (
   <Link
     state="resource-details"
     params={{
@@ -31,7 +31,7 @@ const ManageNetworksButton = props => (
   </Link>
 );
 
-export const OpenStackInstanceTenantButton = props =>
+export const OpenStackInstanceTenantButton = (props) =>
   props.resource.tenant_uuid ? (
     <>
       <ManageSecurityGroupsButton resource={props.resource} />{' '}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { getWorkspace } from '@waldur/workspace/selectors';
-import { WorkspaceType } from '@waldur/workspace/types';
+import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 interface ProviderLinkProps {
   workspace: WorkspaceType;
@@ -12,10 +12,10 @@ interface ProviderLinkProps {
   children?: React.ReactNode;
 }
 
-const PureProviderLink: React.FC<ProviderLinkProps> = props => (
+const PureProviderLink: React.FC<ProviderLinkProps> = (props) => (
   <Link
     state={
-      props.workspace === 'organization'
+      props.workspace === ORGANIZATION_WORKSPACE
         ? 'marketplace-provider-details-customer'
         : 'marketplace-provider-details'
     }
@@ -26,7 +26,7 @@ const PureProviderLink: React.FC<ProviderLinkProps> = props => (
   </Link>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   workspace: getWorkspace(state),
 });
 

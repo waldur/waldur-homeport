@@ -4,7 +4,7 @@ import { ngInjector } from '@waldur/core/services';
 
 export const SidebarToggle = () => {
   React.useEffect(() => {
-    return ngInjector.get('$transitions').onStart({}, function() {
+    return ngInjector.get('$transitions').onStart({}, function () {
       const bodyClasses = document.body.classList;
       if (
         bodyClasses.contains('mini-navbar') &&

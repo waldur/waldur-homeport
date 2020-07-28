@@ -32,7 +32,7 @@ const ExternalLinksComponent = (props: Props) =>
     </DropdownButton>
   );
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const externalLinks = getConfig(state).externalLinks;
   return {
     externalLinks,

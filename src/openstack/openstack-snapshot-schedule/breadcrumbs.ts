@@ -6,7 +6,7 @@ import { getInstanceListState } from '../utils';
 
 ResourceBreadcrumbsRegistry.register(
   'OpenStackTenant.SnapshotSchedule',
-  resource => {
+  (resource) => {
     const volume_uuid = getUUID(resource.source_volume);
     return [
       getInstanceListState(resource.project_uuid),

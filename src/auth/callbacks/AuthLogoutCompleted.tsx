@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+
+import { AuthService } from '../AuthService';
 
 export const AuthLogoutCompleted = () => {
   React.useEffect(() => {
-    ngInjector.get('authService').localLogout();
+    AuthService.localLogout();
   }, []);
   return (
     <div className="middle-box text-center">

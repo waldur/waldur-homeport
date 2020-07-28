@@ -5,7 +5,7 @@ import configureStore from 'redux-mock-store';
 
 import { OfferingState } from './OfferingState';
 
-const renderState = state => {
+const renderState = (state) => {
   const mockStore = configureStore();
   const store = mockStore({});
   return mount(

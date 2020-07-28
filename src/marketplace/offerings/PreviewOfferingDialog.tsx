@@ -45,7 +45,7 @@ const storeConnector = connect<
   {},
   { offering: Offering },
   OuterState
->(state => ({ project: getProject(state) }));
+>((state) => ({ project: getProject(state) }));
 
 const formConnector = reduxForm<
   OfferingFormData,

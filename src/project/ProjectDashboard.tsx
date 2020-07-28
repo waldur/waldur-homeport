@@ -8,7 +8,7 @@ import { DashboardHeader } from '@waldur/dashboard/DashboardHeader';
 import { translate } from '@waldur/i18n';
 import { ComplianceChecklists } from '@waldur/marketplace-checklist/ComplianceChecklists';
 import { useTitle } from '@waldur/navigation/title';
-import { User, Project } from '@waldur/workspace/types';
+import { User, Project, PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 import { ProjectActions } from './ProjectActions';
 import { ProjectCounters } from './ProjectCounters';
@@ -24,6 +24,9 @@ interface ProjectDashboardProps {
 export const ProjectDashboard = (props: ProjectDashboardProps) => {
   useTitle(translate('Dashboard'));
   if (!props.project) {
+    return null;
+  }
+  if (!props.user) {
     return null;
   }
   return (
@@ -51,7 +54,10 @@ export const ProjectDashboard = (props: ProjectDashboardProps) => {
         <Panel title={translate('Resources')}>
           <ProjectResourcesList />
         </Panel>
-        <CategoryResourcesList scopeType="project" scope={props.project} />
+        <CategoryResourcesList
+          scopeType={PROJECT_WORKSPACE}
+          scope={props.project}
+        />
       </div>
     </>
   );

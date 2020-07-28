@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form-react';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { orderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -18,12 +18,12 @@ import { FetchedData } from './utils';
 
 const FORM_ID = 'marketplaceChangePlan';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   orderCanBeApproved: orderCanBeApproved(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
-  submitRequest: data =>
+  submitRequest: (data) =>
     switchPlan(
       {
         marketplace_resource_uuid: ownProps.asyncState.value.resource.uuid,

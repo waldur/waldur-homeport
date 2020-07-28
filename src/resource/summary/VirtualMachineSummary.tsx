@@ -10,7 +10,7 @@ import { ResourceAccessInfo } from './ResourceAccessInfo';
 import { PureResourceSummaryBase } from './ResourceSummaryBase';
 import { ResourceSummaryProps } from './types';
 
-const formatUptime = props =>
+const formatUptime = (props) =>
   props.resource.start_time ? formatRelative(props.resource.start_time) : null;
 
 const ResourceSummaryField = ({ translate, resource }) => (
@@ -30,9 +30,9 @@ const ResourceSummaryField = ({ translate, resource }) => (
   </>
 );
 
-export const formatIpList = value => {
+export const formatIpList = (value) => {
   if (Array.isArray(value)) {
-    const list = value.filter(p => p);
+    const list = value.filter((p) => p);
     if (list.length > 0) {
       return formatCommaList(list);
     }

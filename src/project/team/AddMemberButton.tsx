@@ -3,8 +3,10 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { User, Project, Customer } from '@waldur/workspace/types';
+
+import { AddProjectMemberDialog } from './AddProjectMemberDialog';
 
 interface AddMemberButtonProps {
   users: User[];
@@ -24,13 +26,13 @@ export const AddMemberButton: React.FC<AddMemberButtonProps> = ({
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(
-      openModalDialog('addProjectMember', {
+      openModalDialog(AddProjectMemberDialog, {
         resolve: {
           currentProject: project,
           currentCustomer: customer,
           editUser: user,
           isProjectManager: isProjectManager,
-          addedUsers: users.map(user => user.uuid),
+          addedUsers: users.map((user) => user.uuid),
         },
       }),
     );

@@ -5,7 +5,7 @@ import { QuotasTable } from './QuotasTable';
 
 const quotas = require('./QuotasTable.fixture.json');
 
-const renderComponent = resource => {
+const renderComponent = (resource) => {
   const wrapper = render(<QuotasTable resource={resource} />);
   return wrapper.html();
 };

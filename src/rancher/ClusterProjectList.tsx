@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const { translate } = props;
   return (
     <Table
@@ -33,8 +33,8 @@ const TableOptions = {
   table: 'rancher-projects',
   fetchData: createFetcher('rancher-projects'),
   exportFields: ['name', 'description', 'state'],
-  exportRow: row => [row.name, row.description, row.runtime_state],
-  mapPropsToFilter: props => ({
+  exportRow: (row) => [row.name, row.description, row.runtime_state],
+  mapPropsToFilter: (props) => ({
     cluster_uuid: props.resource.uuid,
   }),
 };

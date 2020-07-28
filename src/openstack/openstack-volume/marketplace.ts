@@ -4,7 +4,7 @@ import { OpenstackVolumeCheckoutSummary } from '@waldur/openstack/openstack-volu
 
 import { OpenstackVolumeCreateForm } from './OpenstackVolumeCreateForm';
 
-const serializer = attrs => ({
+const serializer = (attrs) => ({
   ...attrs,
   type: attrs.type && attrs.type.value,
 });

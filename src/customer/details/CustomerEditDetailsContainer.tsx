@@ -10,13 +10,13 @@ import { canManageCustomer } from '../create/selectors';
 import { CustomerEditDetails } from './CustomerEditDetails';
 import * as actions from './store/actions';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formData: getFormValues('customerLogo')(state),
   canEdit: isStaff(state) || (isOwner(state) && canManageCustomer(state)),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  uploadLogo: formData =>
+  uploadLogo: (formData) =>
     actions.uploadLogo(
       { customerUuid: props.customer.uuid, image: formData.image },
       dispatch,

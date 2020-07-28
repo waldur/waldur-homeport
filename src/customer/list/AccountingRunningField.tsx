@@ -13,11 +13,11 @@ export const getOptions = () => [
 export const AccountingRunningField = () => (
   <Field
     name="accounting_is_running"
-    component={prop => (
+    component={(prop) => (
       <Select
         placeholder={translate('Show with running accounting')}
         value={prop.input.value}
-        onChange={value => prop.input.onChange(value)}
+        onChange={(value) => prop.input.onChange(value)}
         options={getOptions()}
         clearable={false}
       />

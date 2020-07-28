@@ -12,6 +12,8 @@ import {
 } from '@waldur/resource/actions/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
+import { OpenStackInstanceCurrentFlavor } from '../OpenStackInstanceCurrentFlavor';
+
 function flavorFormatter(flavor) {
   const props = formatFlavor(flavor);
   return `${flavor.name} (${props})`;
@@ -19,8 +21,8 @@ function flavorFormatter(flavor) {
 
 function formatFlavorChoices(choices, resource) {
   return choices
-    .filter(choice => choice.name !== resource.flavor_name)
-    .map(flavor => ({
+    .filter((choice) => choice.name !== resource.flavor_name)
+    .map((flavor) => ({
       display_name: flavorFormatter(flavor),
       value: flavor.url,
     }));
@@ -64,7 +66,7 @@ export default function createAction(
     fields: [
       {
         name: 'currentFlavor',
-        component: 'openstackInstanceCurrentFlavor',
+        component: OpenStackInstanceCurrentFlavor,
       },
       createNewFlavorField(ctx),
     ],

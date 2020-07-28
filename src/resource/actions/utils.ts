@@ -13,8 +13,8 @@ function mergeFields(xs: ActionField[], ys: ActionField[]): ActionField[] {
   const ymap = createMap(ys);
 
   return [
-    ...xs.map(item => ymap[item.name] || item),
-    ...ys.filter(item => !xmap[item.name]),
+    ...xs.map((item) => ymap[item.name] || item),
+    ...ys.filter((item) => !xmap[item.name]),
   ];
 }
 

@@ -6,8 +6,8 @@ import {
   FormContainer,
   FieldError,
   SubmitButton,
-} from '@waldur/form-react';
-import { StaticField } from '@waldur/form-react/StaticField';
+} from '@waldur/form';
+import { StaticField } from '@waldur/form/StaticField';
 import { TranslateProps } from '@waldur/i18n';
 
 import { ProjectNameField } from './ProjectNameField';

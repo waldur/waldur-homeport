@@ -34,23 +34,23 @@ export const formatFilesize = (input, fromUnit = 'MB', toUnit = 'B') => {
 
 const SNAKE_CASE_REGEXP = /[A-Z]/g;
 
-export const formatSnakeCase = input =>
+export const formatSnakeCase = (input) =>
   input.replace(
     SNAKE_CASE_REGEXP,
     (letter, pos) => (pos ? '-' : '') + letter.toLowerCase(),
   );
 
-export const flatten = lists => Array.prototype.concat.apply([], lists);
+export const flatten = (lists) => Array.prototype.concat.apply([], lists);
 
-export const listToDict = (key, value) => list => {
+export const listToDict = (key, value) => (list) => {
   const dict = {};
-  list.forEach(item => {
+  list.forEach((item) => {
     dict[key(item)] = value(item);
   });
   return dict;
 };
 
-export const dictToList = dict => {
+export const dictToList = (dict) => {
   const list = [];
   for (const key in dict) {
     if (!dict.hasOwnProperty(key)) {
@@ -61,9 +61,9 @@ export const dictToList = dict => {
   return list;
 };
 
-export const getUUID = url => url.split('/').splice(-2)[0];
+export const getUUID = (url) => url.split('/').splice(-2)[0];
 
-export const minutesToHours = input => {
+export const minutesToHours = (input) => {
   if (isNaN(parseInt(input, 10)) || !isFinite(input)) {
     return '?';
   }
@@ -76,16 +76,16 @@ export const minutesToHours = input => {
   return hours.toFixed(2) + 'h';
 };
 
-export const pick = fields => source =>
+export const pick = (fields) => (source) =>
   fields.reduce((target, field) => ({ ...target, [field]: source[field] }), {});
 
-export const titleCase = input => {
+export const titleCase = (input) => {
   if (input) {
     return input.charAt(0).toUpperCase() + input.slice(1);
   }
 };
 
-export const dateTime = input => {
+export const dateTime = (input) => {
   if (input) {
     return formatDateTime(input);
   }
@@ -100,14 +100,14 @@ export const omit = (object, prop) => {
   }
 };
 
-export const toKeyValue = obj =>
+export const toKeyValue = (obj) =>
   Object.keys(obj)
-    .map(key => `${key}=${encodeURIComponent(obj[key])}`)
+    .map((key) => `${key}=${encodeURIComponent(obj[key])}`)
     .join('&');
 
 export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');
 
-export const range = n => Array.from(Array(n).keys());
+export const range = (n) => Array.from(Array(n).keys());
 
 export function getQueryString() {
   // Example input: http://example.com/#/approve/?foo=123&bar=456
@@ -136,7 +136,7 @@ export function parseQueryString(qs) {
   }, {});
 }
 
-export const isEmpty = obj => Object.keys(obj).length === 0;
+export const isEmpty = (obj) => Object.keys(obj).length === 0;
 
 const entityMap = {
   '<': '&lt;',
@@ -212,7 +212,7 @@ export function mergeLists(list1, list2, fieldIdentifier) {
   list2 = list2 || [];
   fieldIdentifier = fieldIdentifier || 'uuid';
   const itemByUuid = {};
-  const newListUuids = list2.map(item => {
+  const newListUuids = list2.map((item) => {
     return item[fieldIdentifier];
   });
   for (const item of list1) {
@@ -220,7 +220,7 @@ export function mergeLists(list1, list2, fieldIdentifier) {
   }
 
   // Remove stale items
-  list1 = list1.filter(item => {
+  list1 = list1.filter((item) => {
     return newListUuids.indexOf(item[fieldIdentifier]) !== -1;
   });
 

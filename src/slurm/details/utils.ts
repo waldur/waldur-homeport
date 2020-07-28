@@ -1,111 +1,222 @@
 import * as moment from 'moment-timezone';
 
 import { translate } from '@waldur/i18n';
+import { palette } from '@waldur/slurm/details/constants';
 
-import { getEstimatedPrice } from '../utils';
-
-const uniqueArray = items => {
-  return items.filter((elem, pos) => {
-    return items.indexOf(elem) === pos;
-  });
-};
-
-const getValue = (path, source) =>
-  path.reduce((part, item) => part && part[item], source);
-
-const sortDates = dates => dates.sort((left, right) => left.diff(right));
-
-const parseDate = row => moment({ year: row.year, month: row.month - 1 });
-
-const formatDate = date => date.format('MMMM, Y');
-
-const getLabels = rows =>
-  uniqueArray(sortDates(rows.map(parseDate)).map(formatDate));
-
-const getUserMap = (palette, rows) =>
-  rows.reduce(
-    (map, row) => ({
-      ...map,
-      [row.username]: {
-        full_name: row.full_name,
-        color: palette[Object.keys(map).length % palette.length],
-        freeipa_name: row.username,
-      },
-    }),
-    {},
-  );
-
-const getUsers = userMap =>
-  Object.keys(userMap).map(username => userMap[username]);
-
-const getReport = rows =>
-  rows.reduce((report, row) => {
-    if (!report[row.username]) {
-      report[row.username] = {};
-    }
-    report[row.username][formatDate(parseDate(row))] = row;
-    return report;
-  }, {});
-
-const round = value => Math.round(value * 100) / 100;
-
-const getChartValue = (report, chart, username, label) => {
-  const value = getValue([username, label, chart.field], report) || 0;
-  if (chart.factor) {
-    return round(value / chart.factor);
-  } else {
-    return value;
-  }
-};
-
-const getUsageCharts = (chartSpec, report, userMap, labels) =>
-  chartSpec.map(chart => {
-    const datasets = Object.keys(report).map(username => ({
-      label: userMap[username].full_name || userMap[username].freeipa_name,
-      data: labels.map(label => getChartValue(report, chart, username, label)),
-      backgroundColor: userMap[username].color,
-    }));
-    return {
-      name: chart.name,
-      labels,
-      datasets,
-    };
-  });
-
-const getUserCost = (report, username, label, pricePackage) =>
-  getEstimatedPrice(
-    {
-      cpu: getValue([username, label, 'cpu_usage'], report) || 0,
-      gpu: getValue([username, label, 'gpu_usage'], report) || 0,
-      ram: getValue([username, label, 'ram_usage'], report) || 0,
-    },
-    pricePackage,
-  );
-
-const getCostChart = (report, userMap, labels, pricePackage) => {
-  const datasets = Object.keys(report).map(username => ({
-    label: userMap[username].full_name || userMap[username].freeipa_name,
-    data: labels.map(label =>
-      getUserCost(report, username, label, pricePackage),
-    ),
-    backgroundColor: userMap[username].color,
-  }));
-  return {
-    name: translate('Costs'),
-    labels,
-    datasets,
-  };
-};
-
-export function formatCharts(palette, chartSpec, rows, pricePackage) {
-  const labels = getLabels(rows);
-  const userMap = getUserMap(palette, rows);
-  const report = getReport(rows);
-  const charts = getUsageCharts(chartSpec, report, userMap, labels);
-  if (pricePackage) {
-    const costChart = getCostChart(report, userMap, labels, pricePackage);
-    charts.unshift(costChart);
-  }
-  const users = getUsers(userMap);
-  return { users, charts };
+interface Period {
+  month: number;
+  year: number;
 }
+
+interface Usage extends Period {
+  username: string;
+  full_name: string;
+  cpu_usage: number;
+  gpu_usage: number;
+  ram_usage: number;
+}
+
+const eChartInitialOption = () => ({
+  color: palette,
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      crossStyle: {
+        color: '#999',
+      },
+    },
+  },
+  legend: {
+    data: [translate('Usage')],
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: [],
+      axisPointer: {
+        type: 'shadow',
+      },
+    },
+  ],
+  yAxis: [
+    {
+      type: 'value',
+      name: translate('Usage'),
+      min: 0,
+      max: null,
+      interval: null,
+      axisLabel: {
+        formatter: '{value} h',
+      },
+    },
+    {
+      type: 'value',
+      name: '',
+      min: 0,
+      max: null,
+      interval: null,
+      axisLabel: {
+        formatter: '{value} h',
+      },
+    },
+  ],
+  series: [
+    {
+      name: translate('Usage'),
+      type: 'line',
+      yAxisIndex: 1,
+      data: [],
+    },
+  ],
+});
+
+const getDistinctUsers = (userUsages: Usage[]): Usage[] => {
+  const distinctUsers: Usage[] = [];
+  const map = new Map();
+  for (const item of userUsages) {
+    if (!map.has(item.username)) {
+      map.set(item.username, true);
+      distinctUsers.push(item);
+    }
+  }
+  return distinctUsers;
+};
+
+const getLastSixMonths = (): string[] => {
+  const lastSixMonths: string[] = [];
+  for (let i = 5; i >= 0; i--) {
+    const date = moment().subtract(i, 'months');
+    const month = date.month() + 1;
+    const year = date.year();
+    lastSixMonths.push(`${month} - ${year}`);
+  }
+  return lastSixMonths;
+};
+
+const getPeriods = (xAxisPeriods: string[]): Period[] => {
+  const periods: Period[] = [];
+  xAxisPeriods.forEach((period) => {
+    periods.push({
+      month: parseInt(period.split(' - ')[0]),
+      year: parseInt(period.split(' - ')[1]),
+    });
+  });
+  return periods;
+};
+
+const convertMBToGB = (mb: number): number =>
+  parseFloat((mb / 1000).toFixed(2));
+
+const setMaxAndAverageUsages = (option, usages, chart) => {
+  let maxUsage = Math.max(...usages.map((usage) => usage[chart.field]));
+  let averageUsage =
+    usages.reduce((total, next) => total + next[chart.field], 0) /
+    usages.length;
+
+  if (chart.field === 'ram_usage') {
+    maxUsage = convertMBToGB(maxUsage);
+    averageUsage = convertMBToGB(averageUsage);
+  }
+
+  option.yAxis[0].max = option.yAxis[1].max = Math.floor(
+    maxUsage + Math.round(averageUsage / 3),
+  );
+  option.yAxis[0].interval = option.yAxis[1].interval = Math.round(
+    averageUsage,
+  );
+};
+
+const setUnitForRamUsage = (option, chart) => {
+  if (chart.field === 'ram_usage') {
+    option.yAxis[0].axisLabel.formatter = option.yAxis[1].axisLabel.formatter =
+      '{value} GB';
+  }
+};
+
+const fillUsages = (option, periods, usages, chart) => {
+  // filling data of line chart (general usages)
+  for (let i = 0; i < periods.length; i++) {
+    for (let j = 0; j < usages.length; j++) {
+      if (
+        periods[i].month === usages[j].month &&
+        periods[i].year === usages[j].year
+      ) {
+        let usageValue = usages[j][chart.field];
+        if (chart.field === 'ram_usage') {
+          usageValue = convertMBToGB(usageValue);
+        }
+        option.series[0].data.push(usageValue);
+        break;
+      }
+      if (j === usages.length - 1) {
+        option.series[0].data.push(0);
+      }
+    }
+  }
+};
+
+const fillUserUsages = (option, periods, userUsages, chart) => {
+  // filling data arrays of specific users
+  for (let i = 1; i < option.series.length; i++) {
+    for (let j = 0; j < periods.length; j++) {
+      for (let k = 0; k < userUsages.length; k++) {
+        if (
+          option.series[i].name === userUsages[k].username &&
+          periods[j].month === userUsages[k].month &&
+          periods[j].year === userUsages[k].year
+        ) {
+          let usageValue = userUsages[k][chart.field];
+          if (chart.field === 'ram_usage') {
+            usageValue = convertMBToGB(usageValue);
+          }
+          option.series[i].data.push(usageValue);
+          break;
+        }
+        if (k === userUsages.length - 1) {
+          option.series[i].data.push(0);
+        }
+      }
+    }
+  }
+};
+
+const filterUsagesBySixMonthsPeriod = (usages: Usage[]): Usage[] =>
+  usages.filter((usage) => {
+    const sixMonthsAgo = moment().subtract(6, 'months');
+    const usageDate = moment()
+      .date(1)
+      .month(usage.month - 1)
+      .year(usage.year);
+    return sixMonthsAgo <= usageDate && usageDate <= moment();
+  });
+
+const fillSeriesAndLegendWithDistinctUsers = (option, userUsages) => {
+  const distinctUsers: any = getDistinctUsers(userUsages);
+  distinctUsers.forEach((user) => {
+    option.series.push({
+      name: user.username,
+      type: 'bar',
+      data: [],
+      yAxisIndex: 0,
+    });
+    option.legend.data.push(user.username);
+  });
+};
+
+export const getEChartOptions = (chart, usages, userUsages) => {
+  const option = eChartInitialOption();
+
+  // filling periods
+  option.xAxis[0].data = getLastSixMonths();
+  const periods = getPeriods(option.xAxis[0].data);
+
+  usages = filterUsagesBySixMonthsPeriod(usages);
+  setMaxAndAverageUsages(option, usages, chart);
+  setUnitForRamUsage(option, chart);
+  fillUsages(option, periods, usages, chart);
+  fillSeriesAndLegendWithDistinctUsers(option, userUsages);
+  fillUserUsages(option, periods, userUsages, chart);
+
+  return option;
+};

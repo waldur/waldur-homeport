@@ -9,7 +9,7 @@ import {
   SelectField,
   StringField,
   SubmitButton,
-} from '@waldur/form-react';
+} from '@waldur/form';
 import { translate, TranslateProps } from '@waldur/i18n';
 import { StaticField } from '@waldur/user/support/StaticField';
 import {

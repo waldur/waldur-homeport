@@ -4,7 +4,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { dateTime } from '@waldur/core/utils';
 import { TranslateProps } from '@waldur/i18n';
 import { ServiceProvider } from '@waldur/marketplace/types';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface ServiceProviderRegisterButtonProps extends TranslateProps {
   registering: boolean;

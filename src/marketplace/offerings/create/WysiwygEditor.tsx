@@ -34,7 +34,7 @@ interface DraftModule {
 const loadModule = () =>
   import(/* webpackChunkName: "draft-js" */ './draftjs-module');
 
-export const WysiwygEditor = props => {
+export const WysiwygEditor = (props) => {
   const [editorState, setEditorState] = React.useState();
 
   const contentRef = React.useRef();
@@ -60,7 +60,7 @@ export const WysiwygEditor = props => {
   }, [moduleValue]);
 
   const onEditorStateChange = React.useCallback(
-    editorState => {
+    (editorState) => {
       const htmlValue = moduleValue.draftToHtml(
         moduleValue.convertToRaw(editorState.getCurrentContent()),
       );

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { post } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 export const SendNotificationButton = ({ row }) => {
@@ -36,7 +36,7 @@ export const SendNotificationButton = ({ row }) => {
       icon="fa fa-envelope-o"
       tooltip={
         row.state !== 'created'
-          ? translate('Notification only for the created invoice can be sent.')
+          ? translate('Notification can be sent only for created invoice.')
           : ''
       }
       action={onClick}

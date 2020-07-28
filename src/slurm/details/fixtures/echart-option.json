@@ -1,0 +1,78 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "cross",
+      "crossStyle": {
+        "color": "#999"
+      }
+    }
+  },
+  "legend": {
+    "data": ["Usage", "douglas", "steven", "corey"]
+  },
+  "xAxis": [
+    {
+      "type": "category",
+      "data": [
+        "2 - 2020",
+        "3 - 2020",
+        "4 - 2020",
+        "5 - 2020",
+        "6 - 2020",
+        "7 - 2020"
+      ],
+      "axisPointer": {
+        "type": "shadow"
+      }
+    }
+  ],
+  "yAxis": [
+    {
+      "type": "value",
+      "name": "Usage",
+      "min": 0,
+      "max": 48,
+      "interval": 23,
+      "axisLabel": {
+        "formatter": "{value} h"
+      }
+    },
+    {
+      "type": "value",
+      "name": "",
+      "min": 0,
+      "max": 48,
+      "interval": 23,
+      "axisLabel": {
+        "formatter": "{value} h"
+      }
+    }
+  ],
+  "series": [
+    {
+      "name": "Usage",
+      "type": "line",
+      "yAxisIndex": 1,
+      "data": [0, 10, 20, 40, 20, 0]
+    },
+    {
+      "name": "douglas",
+      "type": "bar",
+      "yAxisIndex": 0,
+      "data": [0, 0, 15, 0, 10, 0]
+    },
+    {
+      "name": "steven",
+      "type": "bar",
+      "yAxisIndex": 0,
+      "data": [0, 10, 0, 40, 10, 0]
+    },
+    {
+      "name": "corey",
+      "type": "bar",
+      "yAxisIndex": 0,
+      "data": [0, 0, 5, 0, 0, 0]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import { getNextPageUrl } from './api';
 
 describe('getNextPageUrl', () => {
-  const fakeResponse = link => ({
+  const fakeResponse = (link) => ({
     headers: { link },
   });
   it('parses links header and returns next URL', () => {

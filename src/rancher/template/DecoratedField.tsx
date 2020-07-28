@@ -16,7 +16,7 @@ interface OwnProps extends FieldProps {
   validate?: any;
 }
 
-export const DecoratedField: React.FC<OwnProps> = props => (
+export const DecoratedField: React.FC<OwnProps> = (props) => (
   <Col sm={6}>
     <FormGroup>
       {props.action ? (

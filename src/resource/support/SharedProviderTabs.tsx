@@ -33,7 +33,7 @@ const SharedProviderTabs = ({ provider }) =>
     </div>
   ) : null;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   provider: providerSelector(state),
 });
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { showHookUpdateDialog } from './actions';
 
@@ -20,8 +20,8 @@ export const PureHookUpdateButton = (props: HookUpdateButtonProps) => (
   />
 );
 
-const mapDispatchToProps = dispatch => ({
-  showHookUpdateDialog: row => dispatch(showHookUpdateDialog(row)),
+const mapDispatchToProps = (dispatch) => ({
+  showHookUpdateDialog: (row) => dispatch(showHookUpdateDialog(row)),
 });
 
 export const HookUpdateButton = connect(

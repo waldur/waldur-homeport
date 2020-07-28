@@ -36,7 +36,7 @@ export function* issueAttachmentsGet(action) {
 export function* issueAttachmentUpload(action) {
   const { issueUrl, file } = action;
   const { cancel } = yield race({
-    sync: call(function*() {
+    sync: call(function* () {
       try {
         const response = yield call(api.putAttachment, issueUrl, file);
         yield put(actions.issueAttachmentsPutSuccess(response.data));
@@ -93,7 +93,7 @@ export function* issueAttachmentsDelete(action) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(constants.ISSUE_ATTACHMENTS_GET, issueAttachmentsGet);
   yield takeEvery(constants.ISSUE_ATTACHMENTS_PUT, issueAttachmentsPut);
   yield takeEvery(constants.ISSUE_ATTACHMENTS_DELETE, issueAttachmentsDelete);

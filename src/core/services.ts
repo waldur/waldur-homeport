@@ -3,13 +3,16 @@ export let $rootScope = null;
 export let $compile = null;
 export let $state = null;
 export let $filter = null;
+export let $auth = null;
+export let $http = null;
+export let $uiRouterGlobals = null;
 export let ngInjector = null;
 export let $q = null;
 // Init with identity function for testing only.
 // When application is initialized, it is replaced with actual service.
-export let $sanitize = x => x;
+export let $sanitize = (x) => x;
 
-export const defaultCurrency = value =>
+export const defaultCurrency = (value) =>
   $filter ? $filter('defaultCurrency')(value) : value;
 
 export default function injectServices($injector) {
@@ -18,6 +21,9 @@ export default function injectServices($injector) {
   $compile = $injector.get('$compile');
   $state = $injector.get('$state');
   $filter = $injector.get('$filter');
+  $auth = $injector.get('$auth');
+  $http = $injector.get('$http');
+  $uiRouterGlobals = $injector.get('$uiRouterGlobals');
   $q = $injector.get('$q');
   $sanitize = $injector.get('$sanitize');
   ngInjector = $injector;
@@ -41,5 +47,5 @@ export const blockingExecutor = (callback: () => Promise<any>) => {
   };
 };
 
-export const cacheInvalidationFactory = service => () =>
+export const cacheInvalidationFactory = (service) => () =>
   ngInjector.get(service).clearAllCacheForCurrentEndpoint();

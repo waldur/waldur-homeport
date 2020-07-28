@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const { translate } = props;
   const columns = [
     {
@@ -42,8 +42,8 @@ export const TableComponent = props => {
 const TableOptions = {
   table: 'ResourceUsages',
   fetchData: createFetcher('marketplace-component-usages'),
-  mapPropsToFilter: props => ({ resource_uuid: props.resource_uuid }),
-  exportRow: row => [
+  mapPropsToFilter: (props) => ({ resource_uuid: props.resource_uuid }),
+  exportRow: (row) => [
     row.date,
     row.usage,
     row.measured_unit,

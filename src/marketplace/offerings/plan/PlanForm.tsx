@@ -57,7 +57,7 @@ export const PlanForm = enhance((props: PlanFormProps) => (
     <ProductCodeField />
     {props.components && props.components.length > 0 && (
       <PlanComponents
-        components={props.components.filter(component => component.type)}
+        components={props.components.filter((component) => component.type)}
         limits={props.limits}
         archived={props.archived}
       />

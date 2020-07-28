@@ -12,7 +12,7 @@ interface FormGroupProps {
   classNameWithoutLabel?: string;
 }
 
-export const FormGroup: React.FC<FormGroupProps> = props => (
+export const FormGroup: React.FC<FormGroupProps> = (props) => (
   <div className={props.className}>
     {props.label ? (
       <>

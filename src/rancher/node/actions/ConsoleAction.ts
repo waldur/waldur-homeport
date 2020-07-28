@@ -11,7 +11,7 @@ export function consoleAction(): ResourceAction {
     name: 'console',
     title: translate('Open console'),
     type: 'callback',
-    execute: resource => executeConsoleAction(resource, 'rancher-nodes'),
+    execute: (resource) => executeConsoleAction(resource, 'rancher-nodes'),
     validators: [validateState('OK'), validatePermissionsForConsoleAction],
   };
 }

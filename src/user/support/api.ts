@@ -1,6 +1,6 @@
 import { patch } from '@waldur/core/api';
 
-export const updateUser = user =>
+export const updateUser = (user) =>
   patch(`/users/${user.uuid}/`, {
     full_name: user.full_name,
     native_name: user.native_name,
@@ -13,8 +13,8 @@ export const updateUser = user =>
     token_lifetime: user.token_lifetime.value,
   });
 
-export const activateUser = userUuid =>
+export const activateUser = (userUuid) =>
   patch(`/users/${userUuid}/`, { is_active: true });
 
-export const deactivateUser = userUuid =>
+export const deactivateUser = (userUuid) =>
   patch(`/users/${userUuid}/`, { is_active: false });

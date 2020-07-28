@@ -25,7 +25,7 @@ export const QuotasTable = ({ resource }: { resource: Resource }) =>
     <div className="provider-quotas">
       {resource.quotas
         .sort((q1, q2) => q1.name.localeCompare(q2.name))
-        .map(quota => (
+        .map((quota) => (
           <div key={quota.name} className="details-table__row">
             <div className="details-table__key">
               {formatQuotaName(quota.name)}:

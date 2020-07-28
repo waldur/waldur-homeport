@@ -4,17 +4,21 @@ import { connect } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
 import { getWorkspace, getCustomer } from '@waldur/workspace/selectors';
-import { Project, OuterState } from '@waldur/workspace/types';
+import {
+  Project,
+  OuterState,
+  ORGANIZATION_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { FormGroup } from '../offerings/FormGroup';
 
 import { ProjectSelectField } from './ProjectSelectField';
 
 const connector = connect<{ projects?: Project[] }, {}, {}, OuterState>(
-  state => {
+  (state) => {
     const workspace = getWorkspace(state);
     const customer = getCustomer(state);
-    if (workspace === 'organization') {
+    if (workspace === ORGANIZATION_WORKSPACE) {
       return {
         projects: customer.projects,
       };
@@ -24,7 +28,7 @@ const connector = connect<{ projects?: Project[] }, {}, {}, OuterState>(
   },
 );
 
-const PureProjectField = props =>
+const PureProjectField = (props) =>
   props.projects ? (
     <FormGroup
       labelClassName="control-label col-sm-3"

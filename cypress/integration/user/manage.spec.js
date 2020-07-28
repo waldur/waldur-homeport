@@ -2,6 +2,13 @@ describe('User manage', () => {
   beforeEach(() => {
     cy.server()
       .mockUser()
+      .route('http://localhost:8080/api/support-templates/', [])
+      .route({
+        url:
+          'http://localhost:8080/api/users/3a836bc76e1b40349ec1a0d8220f374f/',
+        method: 'PATCH',
+        response: 'fixture:users/alice.json',
+      })
       .login()
 
       .log('visit /profile/manage/')

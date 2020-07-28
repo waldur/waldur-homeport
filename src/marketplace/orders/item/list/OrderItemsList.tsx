@@ -6,8 +6,8 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
-import { renderFieldOrDash } from '@waldur/table-react/utils';
+import { Table, connectTable, createFetcher } from '@waldur/table';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { TABLE_PUBLIC_ORDERS } from './constants';
@@ -15,7 +15,7 @@ import { OrderItemslistTablePlaceholder } from './OrderItemsListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Offering'),
@@ -66,7 +66,7 @@ export const TableComponent = props => {
 const OrderItemsListTableOptions = {
   table: TABLE_PUBLIC_ORDERS,
   fetchData: createFetcher('marketplace-order-items'),
-  mapPropsToFilter: props => {
+  mapPropsToFilter: (props) => {
     const filter: Record<string, string> = {
       provider_uuid: props.customer.uuid,
     };
@@ -91,7 +91,7 @@ const OrderItemsListTableOptions = {
   },
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   filter: getFormValues('OrderItemFilter')(state),
   customer: getCustomer(state),
 });

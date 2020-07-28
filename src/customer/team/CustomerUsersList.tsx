@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { translate } from '@waldur/i18n';
-import { Table, connectTable } from '@waldur/table-react';
-import { BooleanField } from '@waldur/table-react/BooleanField';
-import { TableOptionsType } from '@waldur/table-react/types';
+import { Table, connectTable } from '@waldur/table';
+import { BooleanField } from '@waldur/table/BooleanField';
+import { TableOptionsType } from '@waldur/table/types';
 import {
   getProject,
   getUser,
@@ -20,7 +20,7 @@ import { UserDetailsButton } from './UserDetailsButton';
 import { UserEditButton } from './UserEditButton';
 import { UserRemoveButton } from './UserRemoveButton';
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   return (
     <Table
       {...props}
@@ -75,13 +75,13 @@ const TableOptions: TableOptionsType = {
   table: 'customer-users',
   fetchData: fetchCustomerUsers,
   queryField: 'full_name',
-  mapPropsToFilter: props => ({
+  mapPropsToFilter: (props) => ({
     customer_uuid: props.customer.uuid,
     o: 'concatenated_name',
   }),
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   project: getProject(state),
   user: getUser(state),
   isOwnerOrStaff: isOwnerOrStaffSelector(state),

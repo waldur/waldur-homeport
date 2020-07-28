@@ -3,7 +3,7 @@ import * as Form from 'react-bootstrap/lib/Form';
 import { reduxForm, FormSection } from 'redux-form';
 
 import { ENV } from '@waldur/core/services';
-import { SubmitButton } from '@waldur/form-react';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 import { Question, RancherProject, Namespace } from '../types';
@@ -41,7 +41,7 @@ const AnswersSection = ({ questions }: { questions: Question[] }) => {
   );
 };
 
-export const TemplateQuestions = connector(props => (
+export const TemplateQuestions = connector((props) => (
   <Form onSubmit={props.handleSubmit(props.createApplication)}>
     <ApplicationConfiguration {...props} />
     {props.questions && <AnswersSection questions={props.questions} />}

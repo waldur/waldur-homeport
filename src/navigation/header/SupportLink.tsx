@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { isVisible } from '@waldur/store/config';
 import { getUser } from '@waldur/workspace/selectors';
 
-const showLink = state => {
+const showLink = (state) => {
   if (isVisible(state, 'support')) {
     return true;
   }

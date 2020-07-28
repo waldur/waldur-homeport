@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 
@@ -18,7 +19,9 @@ export const OrderItemDetailsHeader = (props: OrderItemDetailsProps) => (
     </OrderItemDetailsField>
     {props.offering.components.length > 0 && (
       <OrderItemDetailsField label={translate('Components')}>
-        {props.offering.components.map(component => component.type).join(', ')}
+        {props.offering.components
+          .map((component) => component.type)
+          .join(', ')}
       </OrderItemDetailsField>
     )}
     {props.orderItem.attributes.name && (
@@ -29,6 +32,15 @@ export const OrderItemDetailsHeader = (props: OrderItemDetailsProps) => (
     {props.orderItem.attributes.description && (
       <OrderItemDetailsField label={translate('Resource description')}>
         {props.orderItem.attributes.description}
+      </OrderItemDetailsField>
+    )}
+    {props.orderItem.issue && (
+      <OrderItemDetailsField label={translate('Issue')}>
+        <Link
+          state="support.detail"
+          params={{ uuid: props.orderItem.issue.uuid }}
+          label={props.orderItem.issue.key || 'N/A'}
+        />
       </OrderItemDetailsField>
     )}
   </>

@@ -5,17 +5,18 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { BookingActions } from '@waldur/booking/BookingActions';
-import { bookingDataTemplate } from '@waldur/booking/components/utils';
+import { BookingStateField } from '@waldur/booking/BookingStateField';
 import { TABLE_NAME } from '@waldur/booking/constants';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
+import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, translate } from '@waldur/i18n';
-import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 interface BookingsList {
-  offeringUuid: string;
+  offeringUuid?: string;
+  providerUuid?: string;
 }
 
 interface DetailedInfo {
@@ -28,40 +29,41 @@ interface DetailedInfo {
   };
 }
 
+const wrapScheduleTitleTooltip = (label, children) =>
+  label ? (
+    <Tooltip label={label} id="schedule-title-label">
+      {children}
+    </Tooltip>
+  ) : (
+    children
+  );
+
 const ExpandableRow = ({ row }: DetailedInfo) => (
   <div className="container-fluid">
     <h3>{translate('Schedules')}:</h3>
-    {row.attributes.schedules.map(({ end, start, title, allDay }, index) => (
-      <div className="form-horizontal" key={index}>
-        {bookingDataTemplate({
-          Title: title,
-          'All day': allDay ? 'Yes' : 'No',
-          End: formatShortDateTime(end),
-          Start: formatShortDateTime(start),
-          State:
-            row.state === 'Creating'
-              ? 'Waiting for confirmation...'
-              : row.state,
-        })}
+    <label>{translate('Date')}</label>{' '}
+    {row.attributes.schedules.map((schedule, index) => (
+      <React.Fragment key={index}>
+        {wrapScheduleTitleTooltip(
+          schedule.title,
+          <>
+            {formatShortDateTime(schedule.start)}
+            {' - '}
+            {formatShortDateTime(schedule.end)}
+          </>,
+        )}
         {row.attributes.schedules.length > 1 &&
-          row.attributes.schedules.length !== index + 1 && <hr />}
-      </div>
+          row.attributes.schedules.length !== index + 1 && <>{'; '}</>}
+      </React.Fragment>
     ))}
   </div>
 );
 
-const TableComponent = props => {
+const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => (
-        <OrderItemDetailsLink
-          order_item_uuid={row.uuid}
-          project_uuid={row.project_uuid}
-        >
-          {row.attributes.name || row.offering_name}
-        </OrderItemDetailsLink>
-      ),
+      render: PublicResourceLink,
       orderField: 'name',
     },
     {
@@ -75,7 +77,7 @@ const TableComponent = props => {
     },
     {
       title: translate('State'),
-      render: ResourceStateField,
+      render: BookingStateField,
     },
   ];
 
@@ -99,16 +101,19 @@ const TableComponent = props => {
   );
 };
 
-const mapPropsToFilter = props => {
+const mapPropsToFilter = (props) => {
   const filter: Record<string, string | boolean> = {
-    offering_uuid: props.offeringUuid,
+    offering_type: 'Marketplace.Booking',
   };
-  if (props.customer) {
-    filter.customer_uuid = props.customer.uuid;
+  if (props.offeringUuid) {
+    filter.offering_uuid = props.offeringUuid;
+  }
+  if (props.providerUuid) {
+    filter.provider_uuid = props.providerUuid;
   }
   if (props.filter) {
     if (props.filter.state) {
-      filter.state = props.filter.state.map(option => option.value);
+      filter.state = props.filter.state.map((option) => option.value);
     }
   }
   return filter;
@@ -120,7 +125,7 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   actionsDisabled: !isOwnerOrStaff(state),
   filter: getFormValues('BookingsFilter')(state),

@@ -4,6 +4,7 @@ import { Attribute } from '@waldur/marketplace/types';
 
 import { RancherClusterCheckoutSummary } from './RancherClusterCheckoutSummary';
 import { RancherClusterForm } from './RancherClusterForm';
+import { RancherPluginOptionsForm } from './RancherPluginOptionsForm';
 
 const ServiceSettingsAttributes = (): Attribute[] => [
   {
@@ -38,7 +39,7 @@ const serializeDataVolume = ({ size, ...volumeRest }) => ({
   size: size * 1024,
 });
 
-const serializeNode = subnet => ({
+const serializeNode = (subnet) => ({
   system_volume_size,
   flavor,
   ...nodeRest
@@ -50,10 +51,19 @@ const serializeNode = subnet => ({
   data_volumes: (nodeRest.data_volumes || []).map(serializeDataVolume),
 });
 
-const serializer = ({ subnet, nodes, ssh_public_key, ...clusterRest }) => ({
+const serializer = ({
+  subnet,
+  nodes,
+  ssh_public_key,
+  security_groups,
+  ...clusterRest
+}) => ({
   ...clusterRest,
   nodes: nodes ? nodes.map(serializeNode(subnet)) : undefined,
   ssh_public_key: ssh_public_key ? ssh_public_key.url : undefined,
+  security_groups: security_groups
+    ? security_groups.map((group) => ({ url: group.url }))
+    : undefined,
 });
 
 registerOfferingType({
@@ -63,6 +73,7 @@ registerOfferingType({
   },
   component: RancherClusterForm,
   checkoutSummaryComponent: RancherClusterCheckoutSummary,
+  pluginOptionsForm: RancherPluginOptionsForm,
   providerType: 'Rancher',
   attributes: ServiceSettingsAttributes,
   serializer,

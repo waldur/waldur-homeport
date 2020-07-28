@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { FlavorsList } from './FlavorsList';
 import { ImagesList } from './ImagesList';
 
-export const VmTypeOverview = connect(state =>
+export const VmTypeOverview = connect((state) =>
   getFormValues('vmOverviewFilter')(state),
 )((formValues: { service_provider: any[] }) => {
   if (

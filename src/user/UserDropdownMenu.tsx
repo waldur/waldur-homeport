@@ -4,7 +4,8 @@ import * as MenuItem from 'react-bootstrap/lib/MenuItem';
 import * as Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 
-import { ngInjector, $state } from '@waldur/core/services';
+import { AuthService } from '@waldur/auth/AuthService';
+import { $state } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
@@ -13,12 +14,11 @@ import { getPrivateUserTabs } from './constants';
 
 const getSidebarItems = () =>
   getPrivateUserTabs()
-    .filter(item => isFeatureVisible(item.feature))
-    .map(item => ({ ...item, href: $state.href(item.state) }));
+    .filter((item) => isFeatureVisible(item.feature))
+    .map((item) => ({ ...item, href: $state.href(item.state) }));
 
 export const UserDropdownMenu = () => {
   const user = useSelector(getUser);
-  const logout = () => ngInjector.get('authService').logout();
   const menuItems = React.useMemo(getSidebarItems, []);
   if (!user) {
     return null;
@@ -43,7 +43,9 @@ export const UserDropdownMenu = () => {
             </MenuItem>
           ))}
           <MenuItem divider />
-          <MenuItem onClick={logout}>{translate('Log out')}</MenuItem>
+          <MenuItem onClick={AuthService.logout}>
+            {translate('Log out')}
+          </MenuItem>
         </Dropdown.Menu>
       </Dropdown>
     </li>

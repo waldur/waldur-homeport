@@ -7,7 +7,7 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Category, Offering } from '@waldur/marketplace/types';
-import { Table, connectTable, createFetcher } from '@waldur/table-react';
+import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -31,7 +31,7 @@ interface StateProps {
   filter: ResourceFilter;
 }
 
-export const TableComponent = props => {
+export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -45,6 +45,10 @@ export const TableComponent = props => {
     {
       title: translate('Client organization'),
       render: ({ row }) => <span>{row.customer_name}</span>,
+    },
+    {
+      title: translate('Project'),
+      render: ({ row }) => <span>{row.project_name}</span>,
     },
     {
       title: translate('Category'),
@@ -109,7 +113,7 @@ const mapPropsToFilter = (props: StateProps) => {
   return filter;
 };
 
-const exportRow = row => [
+const exportRow = (row) => [
   row.name,
   row.uuid,
   row.offering_name,
@@ -138,7 +142,7 @@ export const TableOptions = {
   queryField: 'query',
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   filter: getFormValues('PublicResourcesFilter')(state),
 });

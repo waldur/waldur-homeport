@@ -1,5 +1,8 @@
+import { openModalDialog } from '@waldur/modal/actions';
+import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 
+import { InvitationConfirmDialog } from './InvitationConfirmDialog';
 import { InvitationService } from './InvitationService';
 
 export class InvitationUtilsService {
@@ -40,11 +43,11 @@ export class InvitationUtilsService {
         this.$auth.isAuthenticated() &&
         toState.name !== 'marketplace-public-offering.details'
       ) {
-        UsersService.getCurrentUser().then(user => {
+        UsersService.getCurrentUser().then((user) => {
           const token = InvitationService.getInvitationToken();
           if (token && !UsersService.mandatoryFieldsMissing(user)) {
             this.confirmInvitation(token)
-              .then(replaceEmail => {
+              .then((replaceEmail) => {
                 this.acceptInvitation(token, replaceEmail);
               })
               .catch(() => {
@@ -67,7 +70,7 @@ export class InvitationUtilsService {
      */
     if (this.$auth.isAuthenticated()) {
       return this.confirmInvitation(token)
-        .then(replaceEmail => {
+        .then((replaceEmail) => {
           this.acceptInvitation(token, replaceEmail).then(() => {
             this.$state.go('profile.details');
           });
@@ -96,17 +99,15 @@ export class InvitationUtilsService {
   }
 
   confirmInvitation(token) {
-    const dialog = this.$uibModal.open({
-      component: 'invitationConfirmDialog',
-      resolve: {
-        token: () => token,
-        acceptNewEmail: () => true,
-        rejectNewEmail: () => false,
-      },
-    });
     const deferred = this.$q.defer();
-    dialog.result.then(result => deferred.resolve(result));
-    dialog.closed.then(() => deferred.reject());
+    store.dispatch(
+      openModalDialog(InvitationConfirmDialog, {
+        resolve: {
+          token,
+          deferred,
+        },
+      }),
+    );
     return deferred.promise;
   }
 

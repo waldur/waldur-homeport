@@ -8,11 +8,11 @@ export const registrationFormValuesSelector = getFormValues(
   ISSUE_REGISTRATION_FORM_ID,
 );
 
-export const projectSelector = state =>
+export const projectSelector = (state) =>
   registrationFormSelector(state, 'project');
 
-export const customerSelector = state =>
+export const customerSelector = (state) =>
   registrationFormSelector(state, 'customer');
 
-export const callerSelector = state =>
+export const callerSelector = (state) =>
   registrationFormSelector(state, 'caller');

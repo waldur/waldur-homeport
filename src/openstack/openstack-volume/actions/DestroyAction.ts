@@ -1,10 +1,23 @@
 import { translate } from '@waldur/i18n';
-import {
-  validateState,
-  validateRuntimeState,
-} from '@waldur/resource/actions/base';
-import { ResourceAction } from '@waldur/resource/actions/types';
+import { validateRuntimeState } from '@waldur/resource/actions/base';
+import { ResourceAction, ActionContext } from '@waldur/resource/actions/types';
 import { Volume } from '@waldur/resource/types';
+
+function validate(ctx: ActionContext<Volume>): string {
+  if (ctx.resource.state === 'Erred') {
+    return;
+  }
+  if (ctx.resource.state !== 'OK') {
+    return translate('Volume should be in OK state.');
+  }
+  return validateRuntimeState(
+    'available',
+    'error',
+    'error_restoring',
+    'error_extending',
+    '',
+  )(ctx);
+}
 
 export default function createAction(): ResourceAction<Volume> {
   return {
@@ -13,15 +26,6 @@ export default function createAction(): ResourceAction<Volume> {
     method: 'DELETE',
     destructive: true,
     title: translate('Destroy'),
-    validators: [
-      validateState('OK', 'Erred'),
-      validateRuntimeState(
-        'available',
-        'error',
-        'error_restoring',
-        'error_extending',
-        '',
-      ),
-    ],
+    validators: [validate],
   };
 }

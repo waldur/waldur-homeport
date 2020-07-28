@@ -1,6 +1,6 @@
 const LOCALE_UPDATED = 'waldur/core/LOCALE_UPDATED';
 
-export const localeUpdated = locale => ({
+export const localeUpdated = (locale) => ({
   type: LOCALE_UPDATED,
   payload: {
     locale,

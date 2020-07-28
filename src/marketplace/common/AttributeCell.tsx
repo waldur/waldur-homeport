@@ -19,8 +19,8 @@ export const AttributeCell: React.FC<AttributeCellProps> = ({
     case 'list': {
       const titles = [];
       if (Array.isArray(value)) {
-        value.forEach(key => {
-          const option = attr.options.find(item => item.key === key);
+        value.forEach((key) => {
+          const option = attr.options.find((item) => item.key === key);
           if (option) {
             titles.push(option.title);
           }
@@ -46,7 +46,7 @@ export const AttributeCell: React.FC<AttributeCellProps> = ({
     }
 
     case 'choice': {
-      const option = attr.options.find(item => item.key === value);
+      const option = attr.options.find((item) => item.key === value);
       return <>{option ? option.title : 'N/A'}</>;
     }
 

@@ -6,7 +6,7 @@ import { CustomerEditDetailsForm } from '@waldur/customer/details/CustomerEditDe
 import { CustomerDetailsEditFormData } from '@waldur/customer/details/types';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table-react/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import './CustomerEditDetails.scss';
 
@@ -22,7 +22,7 @@ interface CustomerEditDetailsProps {
 
 const hasChosenImage = ({ formData }) => formData && formData.image;
 
-const renderRemoveButton = props => {
+const renderRemoveButton = (props) => {
   if (hasChosenImage(props)) {
     return true;
   } else if (props.customer.image) {
@@ -31,7 +31,7 @@ const renderRemoveButton = props => {
   return false;
 };
 
-const renderLogo = props => {
+const renderLogo = (props) => {
   if (hasChosenImage(props)) {
     return URL.createObjectURL(props.formData.image);
   } else if (props.customer.image) {
@@ -41,7 +41,9 @@ const renderLogo = props => {
   }
 };
 
-export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = props => {
+export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = (
+  props,
+) => {
   const { canEdit } = props;
   return (
     <div className="customer-edit-details">

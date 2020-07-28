@@ -4,9 +4,10 @@ import { useDispatch } from 'react-redux';
 import useEffectOnce from 'react-use/lib/useEffectOnce';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
+
+import { AuthService } from './AuthService';
 
 export const AuthActivation = () => {
   const {
@@ -17,7 +18,7 @@ export const AuthActivation = () => {
 
   const activateAccount = React.useCallback(async () => {
     try {
-      await ngInjector.get('authService').activate({
+      await AuthService.activate({
         user_uuid,
         token,
       });

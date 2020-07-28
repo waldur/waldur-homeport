@@ -6,18 +6,21 @@ export function get<T = {}>(
   endpoint: string,
   options?: AxiosRequestConfig,
 ): AxiosPromise<T> {
-  return Axios.get(`${ENV.apiEndpoint}api${endpoint}`, options);
+  return Axios.get(
+    endpoint.startsWith('http') ? endpoint : `${ENV.apiEndpoint}api${endpoint}`,
+    options,
+  );
 }
 
 export function getList<T = {}>(endpoint: string, params?: {}): Promise<T[]> {
   const options = params ? { params } : undefined;
-  return get<T>(endpoint, options).then(response =>
+  return get<T>(endpoint, options).then((response) =>
     Array.isArray(response.data) ? response.data : [],
   );
 }
 
 export function getFirst<T = {}>(endpoint, params?) {
-  return getList<T>(endpoint, params).then(data => data[0]);
+  return getList<T>(endpoint, params).then((data) => data[0]);
 }
 
 export function getById<T = {}>(
@@ -25,7 +28,7 @@ export function getById<T = {}>(
   id: string,
   options?: AxiosRequestConfig,
 ): Promise<T> {
-  return get<T>(`${endpoint}${id}/`, options).then(response => response.data);
+  return get<T>(`${endpoint}${id}/`, options).then((response) => response.data);
 }
 
 export function remove<T = {}>(
@@ -37,7 +40,7 @@ export function remove<T = {}>(
 
 export function deleteById<T = {}>(endpoint, id, options?: AxiosRequestConfig) {
   return remove<T>(`${endpoint}${id}/`, options).then(
-    response => response.data,
+    (response) => response.data,
   );
 }
 
@@ -47,6 +50,10 @@ export function post<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
 
 export function patch<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
   return Axios.patch(`${ENV.apiEndpoint}api${endpoint}`, data);
+}
+
+export function put<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
+  return Axios.put(`${ENV.apiEndpoint}api${endpoint}`, data);
 }
 
 export function sendForm<T = {}>(
@@ -64,12 +71,12 @@ export function sendForm<T = {}>(
     method,
     url,
     data,
-    transformRequest: x => x,
+    transformRequest: (x) => x,
     headers: { 'Content-Type': undefined },
   });
 }
 
-export const getNextPageUrl = response => {
+export const getNextPageUrl = (response) => {
   // Extract next page URL from header links
   const link = response.headers['link'];
   if (!link) {
@@ -78,7 +85,7 @@ export const getNextPageUrl = response => {
 
   const nextLink = link
     .split(', ')
-    .filter(s => s.indexOf('rel="next"') > -1)[0];
+    .filter((s) => s.indexOf('rel="next"') > -1)[0];
   if (!nextLink) {
     return null;
   }

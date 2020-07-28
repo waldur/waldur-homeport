@@ -7,7 +7,7 @@ import * as selectors from '../store/selectors';
 
 import { AttributeFilterList } from './AttributeFilterList';
 
-const connector = connect(state => ({
+const connector = connect((state) => ({
   loading: selectors.isLoading(state),
   loaded: selectors.isLoaded(state),
   erred: selectors.isErred(state),

@@ -36,7 +36,7 @@ export default class LanguageUtilsService {
     if (!code) {
       return;
     }
-    return this.getChoices().filter(language => language.code === code)[0];
+    return this.getChoices().filter((language) => language.code === code)[0];
   }
 
   getChoices() {

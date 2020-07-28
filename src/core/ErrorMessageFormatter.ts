@@ -1,12 +1,12 @@
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
-const formatErrorObject = error =>
+const formatErrorObject = (error) =>
   Object.keys(error)
-    .map(key => `${key}: ${error[key]}`)
+    .map((key) => `${key}: ${error[key]}`)
     .join(', ');
 
-export const format = response => {
+export const format = (response) => {
   /*
   Status code -1 denotes network error.
   Usually it is caused by one of the following reasons:
@@ -43,7 +43,7 @@ export const format = response => {
       message +=
         ' ' +
         response.data
-          .map(item => {
+          .map((item) => {
             if (typeof item === 'object') {
               return formatErrorObject(item);
             } else {
@@ -58,38 +58,3 @@ export const format = response => {
 
   return message;
 };
-
-export default class ErrorMessageFormatter {
-  format = format;
-
-  formatErrorFields(error) {
-    let errors = [];
-    if (!(error.data instanceof Object)) {
-      return [error.data];
-    }
-
-    for (const i in error.data) {
-      if (error.data.hasOwnProperty(i)) {
-        errors = errors.concat(i + ': ' + error.data[i]);
-      }
-    }
-    return errors;
-  }
-
-  parseError(error) {
-    const errors: any = {};
-    if (error.data && typeof error.data === 'object') {
-      for (const key of Object.keys(error.data)) {
-        const errorValue = error.data[key];
-        if (Array.isArray(errorValue)) {
-          errors[key] = errorValue;
-        } else {
-          errors[key] = [errorValue];
-        }
-      }
-    } else if (error.data) {
-      errors.nonFieldErrors = [].concat(error.data);
-    }
-    return errors;
-  }
-}

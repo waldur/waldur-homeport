@@ -1,13 +1,12 @@
 import * as React from 'react';
 
-import { ngInjector } from '@waldur/core/services';
+import { AuthService } from '@waldur/auth/AuthService';
 import { translate } from '@waldur/i18n';
 
 export const LogoutLink = () => {
-  const logout = () => ngInjector.get('authService').logout();
   return (
     <li>
-      <a onClick={logout}>
+      <a onClick={AuthService.logout}>
         <i className="fa fa-sign-out"></i> {translate('Log out')}
       </a>
     </li>

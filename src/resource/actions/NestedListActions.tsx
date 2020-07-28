@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
 import useAsync from 'react-use/lib/useAsync';
 
-import { ngInjector } from '@waldur/core/services';
+import { loadNestedActions } from './action-utils-service';
 
 export const NestedListActions = ({ resource, tab }) => {
   const controller = {
@@ -17,10 +17,7 @@ export const NestedListActions = ({ resource, tab }) => {
   };
 
   const { value: actions } = useAsync(
-    () =>
-      ngInjector
-        .get('actionUtilsService')
-        .loadNestedActions(controller, resource, tab),
+    () => loadNestedActions(controller, resource, tab),
     [],
   );
 
@@ -30,7 +27,7 @@ export const NestedListActions = ({ resource, tab }) => {
 
   return (
     <>
-      {Object.keys(actions).map(key => (
+      {Object.keys(actions).map((key) => (
         <Button
           bsSize="sm"
           disabled={actions[key].disabled}

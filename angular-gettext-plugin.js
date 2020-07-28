@@ -3,7 +3,7 @@
 'use strict';
 
 const Compiler = require('./angular-gettext-compiler');
-const Extractor = require('./angular-gettext-extractor');
+const Extractor = require('angular-gettext-tools/lib/extract');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');

@@ -11,7 +11,7 @@ import { formatAttributes } from '../store/utils';
 
 import { hasError } from './utils';
 
-const PureDescriptionSummary = props => (
+const PureDescriptionSummary = (props) => (
   <>
     <h3>{translate('Description')}</h3>
     {props.categoryInvalid ? (
@@ -34,7 +34,7 @@ const PureDescriptionSummary = props => (
   </>
 );
 
-const connector = connect(state => {
+const connector = connect((state) => {
   const categoryInvalid = hasError('category')(state);
   const attributesInvalid = hasError('attributes')(state);
 
@@ -48,8 +48,8 @@ const connector = connect(state => {
   }
 
   const attributes = formatAttributes(category, formData.attributes || {});
-  const filterSection = section =>
-    section.attributes.some(attr => attributes.hasOwnProperty(attr.key));
+  const filterSection = (section) =>
+    section.attributes.some((attr) => attributes.hasOwnProperty(attr.key));
   const sections = category.sections.filter(filterSection);
 
   return {

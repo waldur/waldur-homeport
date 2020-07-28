@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 
 import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
 import { getWorkspace } from '@waldur/workspace/selectors';
-import { WorkspaceType } from '@waldur/workspace/types';
+import {
+  WorkspaceType,
+  PROJECT_WORKSPACE,
+  ORGANIZATION_WORKSPACE,
+} from '@waldur/workspace/types';
 
 import { getCount } from './store/selectors';
 
@@ -13,10 +17,11 @@ interface ComparisonIndicatorProps {
 }
 
 const PureComparisonIndicator = (props: ComparisonIndicatorProps) =>
-  ['organization', 'project'].indexOf(props.workspace) !== -1 ? (
+  [ORGANIZATION_WORKSPACE, PROJECT_WORKSPACE].indexOf(props.workspace) !==
+  -1 ? (
     <NavbarIndicator
       state={
-        props.workspace === 'organization'
+        props.workspace === ORGANIZATION_WORKSPACE
           ? 'marketplace-compare-customer'
           : 'marketplace-compare'
       }
@@ -25,7 +30,7 @@ const PureComparisonIndicator = (props: ComparisonIndicatorProps) =>
     />
   ) : null;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   count: getCount(state),
   workspace: getWorkspace(state),
 });

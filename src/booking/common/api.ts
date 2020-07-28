@@ -1,7 +1,7 @@
 import { get, getList, post } from '@waldur/core/api';
 
 export const getAllBookings = () =>
-  get(`/booking-resources/`).then(response => response.data);
+  get(`/booking-resources/`).then((response) => response.data);
 
 export const getBookingsList = (params?: {}) =>
   getList(`/booking-resources/`, params);

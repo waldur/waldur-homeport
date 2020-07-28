@@ -28,7 +28,7 @@ export const LanguageSelector = () => {
           : currentLanguage.code.toUpperCase()}
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        {languageChoices.map(language => (
+        {languageChoices.map((language) => (
           <MenuItem
             key={language.code}
             onClick={() => setLanguage(language)}
