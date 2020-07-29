@@ -3634,6 +3634,7 @@ msgstr ""
 
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/template/NamespaceField.tsx
 msgid "Namespace"
 msgstr ""

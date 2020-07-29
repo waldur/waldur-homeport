@@ -116,3 +116,7 @@ export interface ClusterTemplate {
 }
 
 export type NodeRole = 'worker' | 'etcd' | 'controlplane';
+
+export interface Workload {
+  namespace_uuid: string;
+}

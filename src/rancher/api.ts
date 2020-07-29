@@ -19,6 +19,7 @@ import {
   HPA,
   HPACreateType,
   ClusterTemplate,
+  Workload,
 } from './types';
 
 export const getCatalog = (catalogUuid) =>
@@ -68,7 +69,11 @@ export const removeApp = (projectUuid, appId) =>
 
 export const createNode = (payload) => post('/rancher-nodes/', payload);
 
-export const listWorkloads = (params) => getAll('/rancher-workloads/', params);
+export const listWorkloads = (params) =>
+  getAll<Workload>('/rancher-workloads/', params);
+
+export const listNamespaces = (params) =>
+  getAll('/rancher-namespaces/', params);
 
 export const deleteHPA = (hpaUuid) => deleteById('/rancher-hpas/', hpaUuid);
 
