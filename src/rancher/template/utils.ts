@@ -4,7 +4,7 @@ import {
   getTemplateVersion,
   getProjects,
 } from '../api';
-import { Template, Question } from '../types';
+import { Template, Question, QuestionType } from '../types';
 
 import { FormData } from './types';
 
@@ -28,11 +28,37 @@ export const groupByN = (n: number, data: any[]) => {
   return result;
 };
 
+export const buildQuestionTypeMap = (
+  questions: Question[],
+): Record<string, QuestionType> => {
+  const questionTypeMap = {};
+  questions.forEach((question) => {
+    questionTypeMap[question.variable] = question.type;
+    if (Array.isArray(question.subquestions)) {
+      question.subquestions.forEach((subQuestion) => {
+        questionTypeMap[subQuestion.variable] = subQuestion.type;
+      });
+    }
+  });
+  return questionTypeMap;
+};
+
+const parseShowIf = (
+  question: Question,
+  questionTypeMap: Record<string, QuestionType>,
+): Record<string, string | boolean> =>
+  question.showIf && typeof question.showIf === 'string'
+    ? question.showIf.split('&&').reduce((result, part) => {
+        const [variable, value] = part.split('=');
+        const variableType = questionTypeMap[variable];
+        const parsedValue =
+          variableType === 'boolean' ? value === 'true' : value;
+        return { ...result, [variable]: parsedValue };
+      }, {})
+    : undefined;
+
 export const parseQuestions = (questions: Question[]) => {
-  const questionsMap = questions.reduce((result, question) => ({
-    ...result,
-    [question.variable]: question,
-  }));
+  const questionTypeMap = buildQuestionTypeMap(questions);
   return questions.map((question) => ({
     ...question,
     showSubquestionIf:
@@ -45,18 +71,10 @@ export const parseQuestions = (questions: Question[]) => {
       ? question.subquestions.map((subQuestion) => ({
           ...subQuestion,
           group: question.group,
+          showIf: parseShowIf(subQuestion, questionTypeMap),
         }))
       : undefined,
-    showIf:
-      question.showIf && typeof question.showIf === 'string'
-        ? question.showIf.split('&&').reduce((result, part) => {
-            const [variable, value] = part.split('=');
-            const variableType = questionsMap[variable].type;
-            const parsedValue =
-              variableType === 'boolean' ? value === 'true' : value;
-            return { ...result, [variable]: parsedValue };
-          }, {})
-        : undefined,
+    showIf: parseShowIf(question, questionTypeMap),
   }));
 };
 

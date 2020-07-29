@@ -9,7 +9,7 @@ export interface RancherProject {
   namespaces: Namespace[];
 }
 
-type QuestionType = 'boolean' | 'string' | 'enum' | 'secret';
+export type QuestionType = 'boolean' | 'string' | 'enum' | 'secret';
 
 export interface FieldProps {
   label: string;
