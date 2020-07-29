@@ -1,0 +1,581 @@
+[
+  {
+    "variable": "defaultImage",
+    "label": "Use Default Image",
+    "description": "Use default Docker image",
+    "type": "boolean",
+    "default": "true",
+    "group": "Container Images",
+    "subquestions": [
+      {
+        "variable": "initContainerImage",
+        "label": "Init image name",
+        "description": "Init image name",
+        "type": "string",
+        "default": "alpine:3.10"
+      },
+      {
+        "variable": "artifactory.image.repository",
+        "label": "Artifactory Image Name",
+        "description": "Artifactory image name",
+        "type": "string",
+        "default": "docker.bintray.io/jfrog/artifactory-pro"
+      },
+      {
+        "variable": "artifactory.image.version",
+        "label": "Artifactory Image Tag",
+        "description": "Artifactory image tag",
+        "type": "string",
+        "default": "6.13.1"
+      },
+      {
+        "variable": "nginx.image.repository",
+        "label": "Nginx Image Name",
+        "description": "Nginx image name",
+        "type": "string",
+        "default": "docker.bintray.io/jfrog/nginx-artifactory-pro"
+      },
+      {
+        "variable": "nginx.image.version",
+        "label": "Nginx Image Tag",
+        "description": "Nginx image tag",
+        "type": "string",
+        "default": "6.13.1"
+      },
+      {
+        "variable": "imagePullSecrets",
+        "label": "Image Pull Secret",
+        "description": "Image Pull Secret",
+        "type": "string"
+      }
+    ],
+    "showSubquestionIf": "false"
+  },
+  {
+    "variable": "ingress.enabled",
+    "label": "Expose app using Layer 7 Load Balancer",
+    "description": "Expose app using Layer 7 Load Balancer - ingress",
+    "type": "boolean",
+    "required": true,
+    "default": "true",
+    "group": "Services and Load Balancing",
+    "subquestions": [
+      {
+        "variable": "ingress.hosts[0]",
+        "label": "Hostname",
+        "description": "Hostname to your artifactory installation",
+        "type": "hostname",
+        "required": true,
+        "default": "xip.io"
+      }
+    ],
+    "showSubquestionIf": "true"
+  },
+  {
+    "variable": "nginx.enabled",
+    "label": "Enable Nginx Server",
+    "description": "Enable nginx server",
+    "type": "boolean",
+    "required": true,
+    "default": "false",
+    "group": "Services and Load Balancing",
+    "showIf": "ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.service.type",
+    "label": "Nginx Service Type",
+    "description": "Nginx service type",
+    "type": "enum",
+    "required": true,
+    "default": "LoadBalancer",
+    "group": "Services and Load Balancing",
+    "options": [
+      "ClusterIP",
+      "NodePort",
+      "LoadBalancer"
+    ],
+    "showIf": "nginx.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.service.loadBalancerIP",
+    "label": "Config Nginx LoadBalancer IP",
+    "description": "Provide Static IP to configure with Nginx",
+    "type": "string",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&nginx.service.type=LoadBalancer&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.tlsSecretName",
+    "label": "Config Nginx SSL Secret",
+    "description": "Provide SSL Secret name to configure with Nginx",
+    "type": "string",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.customArtifactoryConfigMap",
+    "label": "ConfigMap for Nginx Artifactory Config",
+    "description": "Provide configMap name to configure Nginx with custom `artifactory.conf`",
+    "type": "string",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.env.skipAutoConfigUpdate",
+    "label": "Skip Nginx Auto Configuration Update",
+    "description": "Skip Nginx Auto Configuration Update",
+    "type": "string",
+    "default": "false",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.persistence.enabled",
+    "label": "Enable Persistent Storage for Nginx Service",
+    "description": "enable persistence storage for nginx server",
+    "type": "boolean",
+    "default": "false",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.persistence.size",
+    "label": "Nginx Persistent Volume Size",
+    "description": "Nginx persistent volume size",
+    "type": "string",
+    "default": "5Gi",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&nginx.persistence.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.persistence.storageClass",
+    "label": "Default StorageClass for Nginx",
+    "description": "If undefined or null, uses the default StorageClass. Default to null",
+    "type": "storageclass",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&nginx.persistence.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.resources.requests.cpu",
+    "label": "Nginx Initial CPU Request",
+    "description": "Nginx initial cpu request",
+    "type": "string",
+    "default": "200m",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.resources.requests.memory",
+    "label": "Nginx Initial Memory Request",
+    "description": "Nginx initial memory request",
+    "type": "string",
+    "default": "500Mi",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.resources.limits.cpu",
+    "label": "Nginx CPU Limit",
+    "description": "Nginx cpu limit",
+    "type": "string",
+    "default": "1",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "nginx.resources.limits.memory",
+    "label": "Nginx Memory Limit",
+    "description": "Nginx memory limit",
+    "type": "string",
+    "default": "1Gi",
+    "group": "Services and Load Balancing",
+    "showIf": "nginx.enabled=true&&ingress.enabled=false"
+  },
+  {
+    "variable": "artifactory.persistence.enabled",
+    "label": "Enable Persistent Storage for Artifactory",
+    "description": "enable persistence storage for Artifactory",
+    "type": "boolean",
+    "required": true,
+    "default": "true",
+    "group": "Artifactory Storage",
+    "subquestions": [
+      {
+        "variable": "artifactory.persistence.size",
+        "label": "Artifactory Persistent Volume Size",
+        "description": "Artifactory persistent volume size",
+        "type": "string",
+        "required": true,
+        "default": "50Gi"
+      },
+      {
+        "variable": "artifactory.persistence.type",
+        "label": "Artifactory Persistent Storage Type",
+        "description": "Artifactory persistent volume size",
+        "type": "enum",
+        "required": true,
+        "default": "file-system",
+        "options": [
+          "file-system",
+          "nfs",
+          "google-storage",
+          "aws-s3"
+        ]
+      }
+    ],
+    "showSubquestionIf": "true"
+  },
+  {
+    "variable": "artifactory.persistence.nfs.ip",
+    "label": "NFS Server IP",
+    "description": "NFS server IP",
+    "type": "string",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=nfs"
+  },
+  {
+    "variable": "artifactory.persistence.nfs.haDataMount",
+    "label": "NFS Data Directory",
+    "description": "NFS data directory",
+    "type": "string",
+    "default": "/data",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=nfs"
+  },
+  {
+    "variable": "artifactory.persistence.nfs.haBackupMount",
+    "label": "NFS Backup Directory",
+    "description": "NFS backup directory",
+    "type": "string",
+    "default": "/backup",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=nfs"
+  },
+  {
+    "variable": "artifactory.persistence.nfs.dataDir",
+    "label": "HA Data Directory",
+    "description": "HA data directory",
+    "type": "string",
+    "default": "/var/opt/jfrog/artifactory-ha",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=nfs"
+  },
+  {
+    "variable": "artifactory.persistence.nfs.backupDir",
+    "label": "HA Backup Directory",
+    "description": "HA backup directory\t",
+    "type": "string",
+    "default": "/var/opt/jfrog/artifactory-backup",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=nfs"
+  },
+  {
+    "variable": "artifactory.persistence.nfs.capacity",
+    "label": "NFS PVC Size",
+    "description": "NFS PVC size\t",
+    "type": "string",
+    "default": "200Gi",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=nfs"
+  },
+  {
+    "variable": "artifactory.persistence.googleStorage.bucketName",
+    "label": "Google Storage Bucket Name",
+    "description": "Google storage bucket name",
+    "type": "string",
+    "default": "artifactory-ha-gcp",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=google-storage"
+  },
+  {
+    "variable": "artifactory.persistence.googleStorage.identity",
+    "label": "Google Storage Service Account ID",
+    "description": "Google Storage service account id",
+    "type": "string",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=google-storage"
+  },
+  {
+    "variable": "artifactory.persistence.googleStorage.credential",
+    "label": "Google Storage Service Account Key",
+    "description": "Google Storage service account key",
+    "type": "string",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=google-storage"
+  },
+  {
+    "variable": "artifactory.persistence.googleStorage.path",
+    "label": "Google Storage Path In Bucket",
+    "description": "Google Storage path in bucket",
+    "type": "string",
+    "default": "artifactory-ha/filestore",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=google-storage"
+  },
+  {
+    "variable": "artifactory.persistence.awsS3.bucketName",
+    "label": "AWS S3 Bucket Name",
+    "description": "AWS S3 bucket name",
+    "type": "string",
+    "default": "artifactory-ha-aws",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=aws-s3"
+  },
+  {
+    "variable": "artifactory.persistence.awsS3.region",
+    "label": "AWS S3 Bucket Region",
+    "description": "AWS S3 bucket region",
+    "type": "string",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=aws-s3"
+  },
+  {
+    "variable": "artifactory.persistence.awsS3.identity",
+    "label": "AWS S3 AWS_ACCESS_KEY_ID",
+    "description": "AWS S3 AWS_ACCESS_KEY_ID",
+    "type": "string",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=aws-s3"
+  },
+  {
+    "variable": "artifactory.persistence.awsS3.credential",
+    "label": "AWS S3 AWS_SECRET_ACCESS_KEY",
+    "description": "AWS S3 AWS_SECRET_ACCESS_KEY",
+    "type": "string",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=aws-s3"
+  },
+  {
+    "variable": "artifactory.persistence.awsS3.path",
+    "label": "AWS S3 Path In Bucket",
+    "description": "AWS S3 path in bucket",
+    "type": "string",
+    "default": "artifactory-ha/filestore",
+    "group": "Artifactory Storage",
+    "showIf": "artifactory.persistence.enabled=true&&artifactory.persistence.type=aws-s3"
+  },
+  {
+    "variable": "postgresql.enabled",
+    "label": "Enable PostgreSQL",
+    "description": "Enable PostgreSQL",
+    "type": "boolean",
+    "required": true,
+    "default": "true",
+    "group": "Database Settings",
+    "subquestions": [
+      {
+        "variable": "postgresql.persistence.enabled",
+        "label": "Enable Persistent Storage for PostgreSQL",
+        "description": "enable persistence storage for PostgreSQL",
+        "type": "boolean",
+        "default": "false"
+      },
+      {
+        "variable": "postgresql.persistence.size",
+        "label": "PostgreSQL Persistent Volume Size",
+        "description": "PostgreSQL persistent volume size",
+        "type": "string",
+        "default": "20Gi",
+        "showIf": "postgresql.enabled=true&&postgresql.persistence.enabled=true"
+      },
+      {
+        "variable": "postgresql.persistence.storageClass",
+        "label": "Default StorageClass for PostgreSQL",
+        "description": "If undefined or null, uses the default StorageClass. Default to null",
+        "type": "storageclass",
+        "showIf": "postgresql.enabled=true&&postgresql.persistence.enabled=true"
+      },
+      {
+        "variable": "postgresql.resources.requests.cpu",
+        "label": "PostgreSQL Initial CPU Request",
+        "description": "PostgreSQL initial cpu request",
+        "type": "string",
+        "default": "200m",
+        "showIf": "postgresql.enabled=true"
+      },
+      {
+        "variable": "postgresql.resources.requests.memory",
+        "label": "PostgreSQL Initial Memory Request",
+        "description": "PostgreSQL initial memory request",
+        "type": "string",
+        "default": "500Mi",
+        "showIf": "postgresql.enabled=true"
+      },
+      {
+        "variable": "postgresql.resources.limits.cpu",
+        "label": "PostgreSQL CPU Limit",
+        "description": "PostgreSQL cpu limit",
+        "type": "string",
+        "default": "1",
+        "showIf": "postgresql.enabled=true"
+      },
+      {
+        "variable": "postgresql.resources.limits.memory",
+        "label": "PostgreSQL Memory Limit",
+        "description": "PostgreSQL memory limit",
+        "type": "string",
+        "default": "1Gi",
+        "showIf": "postgresql.enabled=true"
+      }
+    ],
+    "showSubquestionIf": "true"
+  },
+  {
+    "variable": "database.type",
+    "label": "External Database Type",
+    "description": "xternal database type (postgresql, mysql, oracle or mssql)",
+    "type": "enum",
+    "required": true,
+    "default": "postgresql",
+    "group": "Database Settings",
+    "options": [
+      "postgresql",
+      "mysql",
+      "oracle",
+      "mssql"
+    ],
+    "showIf": "postgresql.enabled=false"
+  },
+  {
+    "variable": "database.url",
+    "label": "External Database URL",
+    "description": "External database URL. If you set the url, leave host and port empty",
+    "type": "string",
+    "group": "Database Settings",
+    "showIf": "postgresql.enabled=false"
+  },
+  {
+    "variable": "database.host",
+    "label": "External Database Hostname",
+    "description": "External database hostname",
+    "type": "string",
+    "group": "Database Settings",
+    "showIf": "postgresql.enabled=false"
+  },
+  {
+    "variable": "database.port",
+    "label": "External Database Port",
+    "description": "External database port",
+    "type": "string",
+    "group": "Database Settings",
+    "showIf": "postgresql.enabled=false"
+  },
+  {
+    "variable": "database.user",
+    "label": "External Database Username",
+    "description": "External database username",
+    "type": "string",
+    "group": "Database Settings",
+    "showIf": "postgresql.enabled=false"
+  },
+  {
+    "variable": "database.password",
+    "label": "External Database Password",
+    "description": "External database password",
+    "type": "string",
+    "group": "Database Settings",
+    "showIf": "postgresql.enabled=false"
+  },
+  {
+    "variable": "advancedOptions",
+    "label": "Show Advanced Configurations",
+    "description": "Show advanced configurations",
+    "type": "boolean",
+    "default": "false",
+    "group": "Advanced Options",
+    "subquestions": [
+      {
+        "variable": "artifactory.masterKey",
+        "label": "Artifactory master key",
+        "description": "Artifactory master key",
+        "type": "string",
+        "default": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+      },
+      {
+        "variable": "artifactory.primary.resources.requests.cpu",
+        "label": "Artifactory Primary Node Initial CPU Request",
+        "description": "Artifactory primary node initial cpu request",
+        "type": "string",
+        "default": "500m"
+      },
+      {
+        "variable": "artifactory.primary.resources.requests.memory",
+        "label": "Artifactory Primary Node Initial Memory Request",
+        "description": "Artifactory primary node initial memory request",
+        "type": "string",
+        "default": "1Gi"
+      },
+      {
+        "variable": "artifactory.primary.javaOpts.xms",
+        "label": "Artifactory Primary Node Java Xms Size",
+        "description": "Artifactory primary node java Xms size",
+        "type": "string",
+        "default": "1g"
+      },
+      {
+        "variable": "artifactory.primary.resources.limits.cpu",
+        "label": "Artifactory Primary Node CPU Limit",
+        "description": "Artifactory primary node cpu limit",
+        "type": "string",
+        "default": "2"
+      },
+      {
+        "variable": "artifactory.primary.resources.limits.memory",
+        "label": "Artifactory Primary Node Memory Limit",
+        "description": "Artifactory primary node memory limit",
+        "type": "string",
+        "default": "4Gi"
+      },
+      {
+        "variable": "artifactory.primary.javaOpts.xmx",
+        "label": "Artifactory Primary Node Java Xmx Size",
+        "description": "Artifactory primary node java Xmx size",
+        "type": "string",
+        "default": "4g"
+      },
+      {
+        "variable": "artifactory.node.resources.requests.cpu",
+        "label": "Artifactory Member Node Initial CPU Request",
+        "description": "Artifactory member node initial cpu request",
+        "type": "string",
+        "default": "500m"
+      },
+      {
+        "variable": "artifactory.node.resources.requests.memory",
+        "label": "Artifactory Member Node Initial Memory Request",
+        "description": "Artifactory member node initial memory request",
+        "type": "string",
+        "default": "2Gi"
+      },
+      {
+        "variable": "artifactory.node.javaOpts.xms",
+        "label": "Artifactory Member Node Java Xms Size",
+        "description": "Artifactory member node java Xms size",
+        "type": "string",
+        "default": "1g"
+      },
+      {
+        "variable": "artifactory.node.resources.limits.cpu",
+        "label": "Artifactory Member Node CPU Limit",
+        "description": "Artifactory member node cpu limit",
+        "type": "string",
+        "default": "2"
+      },
+      {
+        "variable": "artifactory.node.resources.limits.memory",
+        "label": "Artifactory Member Node Memory Limit",
+        "description": "Artifactory member node memory limit",
+        "type": "string",
+        "default": "4Gi"
+      },
+      {
+        "variable": "artifactory.node.javaOpts.xmx",
+        "label": "Artifactory Member Node Java Xmx Size",
+        "description": "Artifactory member node java Xmx size",
+        "type": "string",
+        "default": "4g"
+      }
+    ],
+    "showSubquestionIf": "true"
+  }
+]
