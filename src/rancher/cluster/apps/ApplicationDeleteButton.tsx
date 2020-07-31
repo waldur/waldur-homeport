@@ -7,9 +7,7 @@ import { ResourceDeleteButton } from '../ResourceDeleteButton';
 
 export const ApplicationDeleteButton = (props) => (
   <ResourceDeleteButton
-    apiFunction={() =>
-      removeApp(props.application.project_uuid, props.application.id)
-    }
+    apiFunction={() => removeApp(props.application.uuid)}
     resourceType={translate('application')}
   />
 );
