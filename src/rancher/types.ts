@@ -1,9 +1,11 @@
 export interface Namespace {
+  url: string;
   name: string;
   uuid: string;
 }
 
 export interface RancherProject {
+  url: string;
   name: string;
   uuid: string;
   namespaces: Namespace[];
@@ -37,6 +39,7 @@ export interface TemplateVersion {
 }
 
 export interface Template {
+  url: string;
   name: string;
   uuid: string;
   default_version: string;
@@ -49,6 +52,7 @@ export interface Cluster {
   name: string;
   uuid: string;
   marketplace_category_uuid: string;
+  service_project_link: string;
 }
 
 export interface Secret {

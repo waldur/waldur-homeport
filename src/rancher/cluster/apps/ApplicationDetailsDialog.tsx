@@ -23,16 +23,19 @@ const ApplicationDetailsTable = ({ application }) => (
       </tr>
       <tr>
         <td>{translate('Template')}</td>
-        <td>{application.template}</td>
+        <td>{application.template_name}</td>
       </tr>
       <tr>
         <td>{translate('Catalog')}</td>
-        <td>{application.catalog}</td>
+        <td>{application.catalog_name}</td>
       </tr>
       <tr>
         <td>{translate('Link')}</td>
         <td>
-          <ExternalLink url={application.url} label={translate('Open')} />
+          <ExternalLink
+            url={application.external_url}
+            label={translate('Open')}
+          />
         </td>
       </tr>
     </tbody>

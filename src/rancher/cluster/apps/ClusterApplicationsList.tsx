@@ -20,15 +20,15 @@ const TableComponent = (props) => {
         },
         {
           title: translate('Project'),
-          render: ({ row }) => <span>{row.project}</span>,
+          render: ({ row }) => <span>{row.project_name}</span>,
         },
         {
           title: translate('Catalog'),
-          render: ({ row }) => <span>{row.catalog}</span>,
+          render: ({ row }) => <span>{row.catalog_name}</span>,
         },
         {
           title: translate('Template'),
-          render: ({ row }) => <span>{row.template}</span>,
+          render: ({ row }) => <span>{row.template_name}</span>,
         },
         {
           title: translate('Created'),
@@ -36,7 +36,7 @@ const TableComponent = (props) => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <span>{row.state}</span>,
+          render: ({ row }) => <span>{row.runtime_state}</span>,
         },
         {
           title: translate('Actions'),

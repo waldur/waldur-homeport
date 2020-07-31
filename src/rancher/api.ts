@@ -1,12 +1,4 @@
-import {
-  getById,
-  get,
-  getAll,
-  post,
-  put,
-  remove,
-  deleteById,
-} from '@waldur/core/api';
+import { getById, get, getAll, post, put, deleteById } from '@waldur/core/api';
 
 import {
   RancherProject,
@@ -59,13 +51,7 @@ export const getProjectSecrets = (projectUuid: string) =>
 
 export const createApp = (payload) => post('/rancher-apps/', payload);
 
-export const removeApp = (projectUuid, appId) =>
-  remove(`/rancher-apps/`, {
-    data: {
-      project_uuid: projectUuid,
-      app_id: appId,
-    },
-  });
+export const removeApp = (uuid) => deleteById(`/rancher-apps/`, uuid);
 
 export const createNode = (payload) => post('/rancher-nodes/', payload);
 

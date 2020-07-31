@@ -123,7 +123,7 @@ export function getValue(obj, path) {
 
 const serializeAnswer = (question: Question, answers: object) => {
   const value = getValue(answers, question.variable);
-  if (question.type === 'secret') {
+  if (value && question.type === 'secret') {
     return value.id;
   } else {
     return value;
@@ -133,17 +133,17 @@ const serializeAnswer = (question: Question, answers: object) => {
 export const serializeApplication = (
   formData: FormData,
   template: Template,
+  service_project_link: string,
   visibleQuestions: Question[],
 ) => ({
   name: formData.name,
   description: formData.description,
   version: formData.version,
-  template_uuid: template.uuid,
-  project_uuid: formData.project.uuid,
+  template: template.url,
+  service_project_link,
+  rancher_project: formData.project.url,
   namespace_name: formData.useNewNamespace ? formData.newNamespace : undefined,
-  namespace_uuid: formData.useNewNamespace
-    ? undefined
-    : formData.namespace.uuid,
+  namespace: formData.useNewNamespace ? undefined : formData.namespace.url,
   answers: visibleQuestions.reduce(
     (result, question) => ({
       ...result,
