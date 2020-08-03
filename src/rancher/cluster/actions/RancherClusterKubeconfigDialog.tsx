@@ -1,9 +1,9 @@
+import copy from 'copy-to-clipboard';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { copyToClipboard } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -13,7 +13,7 @@ import { showSuccess } from '@waldur/store/coreSaga';
 const KubeconfigFilePanel = (props) => {
   const dispatch = useDispatch();
   const onClick = React.useCallback(() => {
-    copyToClipboard(props.config);
+    copy(props.config);
     dispatch(showSuccess(translate('File has been copied')));
   }, []);
 
