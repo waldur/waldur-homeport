@@ -22,7 +22,7 @@ describe('SlurmAllocationSummary', () => {
 
   it('renders login details', () => {
     const wrapper = renderSummary({ resource });
-    expect(getField(wrapper, 'Login details')).toBe('admin@example.com');
+    expect(getField(wrapper, 'Login details')).toBe('ssh admin@example.com');
   });
 
   it('renders placeholder if login details are absent', () => {
