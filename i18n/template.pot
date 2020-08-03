@@ -1145,6 +1145,7 @@ msgstr ""
 
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
+#: src/issues/feedback/SupportFeedback.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Comment"
@@ -2107,6 +2108,10 @@ msgstr ""
 msgid "Estonian"
 msgstr ""
 
+#: src/issues/feedback/SupportFeedback.tsx
+msgid "Evaluation"
+msgstr ""
+
 #: src/events/EventDetailsDialog.tsx
 msgid "Event details"
 msgstr ""
@@ -2250,6 +2255,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Fee applied each time this plan is activated."
+msgstr ""
+
+#: src/issues/feedback/SupportFeedback.tsx
+msgid "Feedback"
 msgstr ""
 
 #: src/resource/actions/dialog/appstore-field-string.js
@@ -6436,6 +6445,7 @@ msgstr ""
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/issues/feedback/SupportFeedback.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
@@ -6730,6 +6740,10 @@ msgstr ""
 #: src/about.ts
 #: src/marketplace/details/OfferingTabs.tsx
 msgid "Terms of service"
+msgstr ""
+
+#: src/issues/feedback/SupportFeedback.tsx
+msgid "Thank you for your response!"
 msgstr ""
 
 #: src/invoices/store/effects.ts
@@ -7544,6 +7558,10 @@ msgstr ""
 
 #: src/auth/AuthInit.tsx
 msgid "Unable to save user."
+msgstr ""
+
+#: src/issues/feedback/SupportFeedback.tsx
+msgid "Unable to send feedback."
 msgstr ""
 
 #: src/invoices/list/SendNotificationButton.tsx

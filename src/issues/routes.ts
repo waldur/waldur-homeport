@@ -1,5 +1,6 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { LazyCustomerList } from '@waldur/customer/list/LazyCustomerList';
+import { SupportFeedback } from '@waldur/issues/feedback/SupportFeedback';
 import { SupportIssues } from '@waldur/issues/SupportIssues';
 import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
 import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';
@@ -60,6 +61,17 @@ export const states: StateDeclaration[] = [
     component: SupportIssues,
     data: {
       feature: 'support',
+    },
+  },
+
+  {
+    name: 'supportFeedback',
+    url: '/support/feedback/?token&evaluation',
+    component: SupportFeedback,
+    data: {
+      feature: 'support',
+      bodyClass: 'old',
+      anonymous: true,
     },
   },
 
