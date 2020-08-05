@@ -4,6 +4,8 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
+import { WorkloadActions } from './WorkloadActions';
+
 const TableComponent = (props) => {
   const { translate } = props;
   return (
@@ -33,6 +35,10 @@ const TableComponent = (props) => {
         {
           title: translate('State'),
           render: ({ row }) => <span>{row.runtime_state}</span>,
+        },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <WorkloadActions workload={row} />,
         },
       ]}
       verboseName={translate('workloads')}

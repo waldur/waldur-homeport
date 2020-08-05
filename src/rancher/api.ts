@@ -58,6 +58,12 @@ export const createNode = (payload) => post('/rancher-nodes/', payload);
 export const listWorkloads = (params) =>
   getAll<Workload>('/rancher-workloads/', params);
 
+export const redeployWorkload = (id: string) =>
+  post(`/rancher-workloads/${id}/redeploy/`);
+
+export const deleteWorkload = (id: string) =>
+  deleteById('/rancher-workloads/', id);
+
 export const listNamespaces = (params) =>
   getAll('/rancher-namespaces/', params);
 
