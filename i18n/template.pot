@@ -160,6 +160,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
@@ -1665,6 +1666,7 @@ msgstr ""
 #: src/project/ProjectDeleteButton.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
+#: src/rancher/cluster/WorkloadActions.tsx
 msgid "Delete"
 msgstr ""
 
@@ -5156,6 +5158,10 @@ msgstr ""
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/list/BillingRecordsList.tsx
 msgid "Record period"
+msgstr ""
+
+#: src/rancher/cluster/WorkloadActions.tsx
+msgid "Redeploy"
 msgstr ""
 
 #: src/marketplace/referral/ReferralDetailsField.tsx
