@@ -943,6 +943,10 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
+msgid "Capacity"
+msgstr ""
+
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -2304,8 +2308,11 @@ msgstr ""
 msgid "Filter projects"
 msgstr ""
 
-#: src/customer/list/CustomerListContainer.tsx
 #: src/issues/workspace/issue-navigation-service.js
+msgid "Financial"
+msgstr ""
+
+#: src/customer/list/CustomerListContainer.tsx
 msgid "Financial overview"
 msgstr ""
 
@@ -4116,6 +4123,9 @@ msgid "Order summary"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
+msgid "Ordering"
+msgstr ""
+
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsContainer.tsx
 msgid "Orders"
@@ -4489,7 +4499,6 @@ msgstr ""
 msgid "Plan #{index}"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
@@ -5344,6 +5353,10 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Reporter"
+msgstr ""
+
+#: src/issues/workspace/issue-navigation-service.js
+msgid "Reporting"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
