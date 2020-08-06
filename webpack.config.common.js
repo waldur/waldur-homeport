@@ -1,11 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const AngularGetTextPlugin = require('./angular-gettext-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const utils = require('./webpack.utils');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
+const AngularGetTextPlugin = require('./angular-gettext-plugin');
+const utils = require('./webpack.utils');
 const scssPath = path.resolve('./src/');
 const imagesPath = path.resolve('./src/images');
 
@@ -154,6 +155,11 @@ module.exports = {
     ],
   },
   plugins: [
+    new MonacoWebpackPlugin({
+      // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+      languages: ['json', 'yaml', 'shell', 'python']
+    }),
+
     // Ignore all locale files of moment.js
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
