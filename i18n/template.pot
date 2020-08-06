@@ -7036,6 +7036,10 @@ msgstr ""
 msgid "Total number of nodes"
 msgstr ""
 
+#: src/invoices/list/AgreementInfo.tsx
+msgid "Total paid"
+msgstr ""
+
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/InvoiceDetails.tsx
 msgid "Total price"
