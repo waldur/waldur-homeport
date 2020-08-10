@@ -20,7 +20,7 @@ const CreatedDateField = ({ row }) => (
 const TableComponent = (
   props: TableProps<Customer> & { provider_uuid: string },
 ) => {
-  const columns: Array<Column<Customer & { vm_count: number }>> = [
+  const columns: Array<Column<Customer & { vm_count: string }>> = [
     {
       title: translate('Organization'),
       render: OrganizationLink,
@@ -50,16 +50,18 @@ const TableComponent = (
   );
 };
 
-const exportRow = (row: Customer) => [
+const exportRow = (row: Customer & { vm_count: string }) => [
   row.name,
   row.abbreviation,
   formatDate(row.created),
+  row.vm_count.toString(),
 ];
 
 const exportFields = () => [
   translate('Organization'),
   translate('Abbreviation'),
   translate('Created'),
+  translate('VMs'),
 ];
 
 const mapPropsToFilter = (props) => ({
