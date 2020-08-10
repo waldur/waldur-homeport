@@ -6,6 +6,8 @@ import { HPA } from '@waldur/rancher/types';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
+import { ViewYAMLButton } from '../ViewYAMLButton';
+
 import { HPACreateButton } from './HPACreateButton';
 import { HPADeleteButton } from './HPADeleteButton';
 import { HPAUpdateButton } from './HPAUpdateButton';
@@ -60,6 +62,7 @@ const TableComponent = (props) => {
           title: translate('Actions'),
           render: ({ row }) => (
             <ButtonGroup>
+              <ViewYAMLButton resource={row} />
               <HPAUpdateButton hpa={row} />
               <HPADeleteButton hpa={row} />
             </ButtonGroup>

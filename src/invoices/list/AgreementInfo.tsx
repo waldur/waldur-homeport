@@ -1,7 +1,11 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import useEffectOnce from 'react-use/lib/useEffectOnce';
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { defaultCurrency } from '@waldur/core/services';
+import { getTotalOfSumPaid } from '@waldur/customer/payments/api';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -16,6 +20,16 @@ export const AgreementInfo = (props: AgreementInfoProps) => {
   const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
     customer ? customer.payment_profiles : props.paymentProfiles,
   );
+  const [totalOfSumPaid, setTotalOfSumPaid] = useState();
+  useEffectOnce(() => {
+    if (activeFixedPricePaymentProfile) {
+      (async () => {
+        setTotalOfSumPaid(
+          await getTotalOfSumPaid(activeFixedPricePaymentProfile.uuid),
+        );
+      })();
+    }
+  });
   return (
     <>
       {activeFixedPricePaymentProfile ? (
@@ -41,6 +55,24 @@ export const AgreementInfo = (props: AgreementInfoProps) => {
                   {activeFixedPricePaymentProfile.attributes.contract_sum}.
                 </span>
               ) : null}
+              <span>
+                {' '}
+                {translate('Total paid')}{' '}
+                <span
+                  style={
+                    activeFixedPricePaymentProfile.attributes.contract_sum !==
+                    totalOfSumPaid
+                      ? {
+                          color: 'red',
+                          fontWeight: 'bold',
+                        }
+                      : null
+                  }
+                >
+                  {defaultCurrency(totalOfSumPaid)}
+                </span>
+                .
+              </span>
             </span>
           ) : null}
         </div>

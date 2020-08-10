@@ -85,7 +85,10 @@ async function signin(username, password) {
 
 async function authenticate(provider) {
   const response = await $auth.authenticate(provider);
-  loginSuccess(response);
+
+  setAuthHeader(response.data.token);
+  const user = await UsersService.getCurrentUser();
+  loginSuccess({ data: { ...user, method: provider } });
 }
 
 function signup(user) {

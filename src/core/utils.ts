@@ -150,28 +150,6 @@ export function escapeHtml(str) {
   });
 }
 
-export function copyToClipboard(text) {
-  const hiddenDiv = document.createElement('div');
-  const style = hiddenDiv.style;
-  style.height = '1px';
-  style.width = '1px';
-  style.overflow = 'hidden';
-  style.position = 'fixed';
-  style.top = '0px';
-  style.left = '0px';
-
-  const textarea = document.createElement('textarea');
-  textarea.readOnly = true;
-  textarea.value = text;
-
-  hiddenDiv.appendChild(textarea);
-  document.body.appendChild(hiddenDiv);
-
-  textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(hiddenDiv);
-}
-
 // Taken from https://stackoverflow.com/questions/5723154
 export const truncate = (fullStr: string, strLen = 30, separator = '...') => {
   if (fullStr.length <= strLen) return fullStr;

@@ -73,6 +73,7 @@ export const TemplateDetail = () => {
           serializeApplication(
             formData,
             state.value.template,
+            state.value.cluster.service_project_link,
             visibleQuestions,
           ),
         );

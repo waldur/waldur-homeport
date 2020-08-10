@@ -20,7 +20,7 @@ export const LonghornWorkerWarning = ({ nodeIndex }) => {
   if (
     !roles.includes('worker') ||
     !flavor ||
-    (flavor.cores > 4 && flavor.ram > 4 * 1024)
+    (flavor.cores >= 4 && flavor.ram >= 4 * 1024)
   ) {
     return null;
   }

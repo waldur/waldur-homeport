@@ -160,6 +160,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
@@ -943,6 +944,10 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
+msgid "Capacity"
+msgstr ""
+
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
@@ -1145,6 +1150,7 @@ msgstr ""
 
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
+#: src/issues/feedback/SupportFeedback.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Comment"
@@ -1279,7 +1285,7 @@ msgstr ""
 msgid "Copy of"
 msgstr ""
 
-#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
+#: src/core/CopyToClipboard.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
@@ -1660,6 +1666,7 @@ msgstr ""
 #: src/project/ProjectDeleteButton.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
+#: src/rancher/cluster/WorkloadActions.tsx
 msgid "Delete"
 msgstr ""
 
@@ -2107,6 +2114,10 @@ msgstr ""
 msgid "Estonian"
 msgstr ""
 
+#: src/issues/feedback/SupportFeedback.tsx
+msgid "Evaluation"
+msgstr ""
+
 #: src/events/EventDetailsDialog.tsx
 msgid "Event details"
 msgstr ""
@@ -2252,6 +2263,10 @@ msgstr ""
 msgid "Fee applied each time this plan is activated."
 msgstr ""
 
+#: src/issues/feedback/SupportFeedback.tsx
+msgid "Feedback"
+msgstr ""
+
 #: src/resource/actions/dialog/appstore-field-string.js
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
@@ -2264,7 +2279,7 @@ msgstr ""
 msgid "File download has been started."
 msgstr ""
 
-#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
+#: src/core/CopyToClipboard.tsx
 msgid "File has been copied"
 msgstr ""
 
@@ -2295,8 +2310,11 @@ msgstr ""
 msgid "Filter projects"
 msgstr ""
 
-#: src/customer/list/CustomerListContainer.tsx
 #: src/issues/workspace/issue-navigation-service.js
+msgid "Financial"
+msgstr ""
+
+#: src/customer/list/CustomerListContainer.tsx
 msgid "Financial overview"
 msgstr ""
 
@@ -3634,6 +3652,7 @@ msgstr ""
 
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
+#: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/template/NamespaceField.tsx
 msgid "Namespace"
 msgstr ""
@@ -3884,6 +3903,10 @@ msgstr ""
 msgid "Offering components"
 msgstr ""
 
+#: src/marketplace/details/OfferingDetails.tsx
+msgid "Offering configuration"
+msgstr ""
+
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/details/OverviewTab.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
@@ -4106,6 +4129,9 @@ msgid "Order summary"
 msgstr ""
 
 #: src/issues/workspace/issue-navigation-service.js
+msgid "Ordering"
+msgstr ""
+
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/SupportOrderItemsContainer.tsx
 msgid "Orders"
@@ -4479,7 +4505,6 @@ msgstr ""
 msgid "Plan #{index}"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageContainer.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
@@ -4783,10 +4808,6 @@ msgstr ""
 
 #: src/marketplace/offerings/ProductCodeField.tsx
 msgid "Product code"
-msgstr ""
-
-#: src/marketplace/details/OfferingDetails.tsx
-msgid "Product configuration"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
@@ -5139,6 +5160,10 @@ msgstr ""
 msgid "Record period"
 msgstr ""
 
+#: src/rancher/cluster/WorkloadActions.tsx
+msgid "Redeploy"
+msgstr ""
+
 #: src/marketplace/referral/ReferralDetailsField.tsx
 msgid "Referral count"
 msgstr ""
@@ -5334,6 +5359,10 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Reporter"
+msgstr ""
+
+#: src/issues/workspace/issue-navigation-service.js
+msgid "Reporting"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
@@ -6435,6 +6464,7 @@ msgstr ""
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
+#: src/issues/feedback/SupportFeedback.tsx
 #: src/marketplace-checklist/ProjectChecklist.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
@@ -6731,6 +6761,10 @@ msgstr ""
 msgid "Terms of service"
 msgstr ""
 
+#: src/issues/feedback/SupportFeedback.tsx
+msgid "Thank you for your response!"
+msgstr ""
+
 #: src/invoices/store/effects.ts
 msgid "The invoice has been marked as paid."
 msgstr ""
@@ -7000,6 +7034,10 @@ msgstr ""
 
 #: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
 msgid "Total number of nodes"
+msgstr ""
+
+#: src/invoices/list/AgreementInfo.tsx
+msgid "Total paid"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -7335,6 +7373,7 @@ msgstr ""
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/offering/OfferingDetails.tsx
+#: src/rancher/cluster/ViewYAMLDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -7543,6 +7582,10 @@ msgstr ""
 
 #: src/auth/AuthInit.tsx
 msgid "Unable to save user."
+msgstr ""
+
+#: src/issues/feedback/SupportFeedback.tsx
+msgid "Unable to send feedback."
 msgstr ""
 
 #: src/invoices/list/SendNotificationButton.tsx
@@ -8157,6 +8200,14 @@ msgstr ""
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
+msgstr ""
+
+#: src/rancher/cluster/ViewYAMLButton.tsx
+msgid "View / edit YAML"
+msgstr ""
+
+#: src/rancher/cluster/ViewYAMLDialog.tsx
+msgid "View/edit YAML"
 msgstr ""
 
 #: src/marketplace/offerings/screenshots/ScreenshotDetailsDialog.tsx

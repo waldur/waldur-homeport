@@ -1,9 +1,9 @@
+import copy from 'copy-to-clipboard';
 import FileSaver from 'file-saver';
 import Papa from 'papaparse';
 import { put, call, select } from 'redux-saga/effects';
 
 import { ENV } from '@waldur/core/services';
-import { copyToClipboard } from '@waldur/core/utils';
 import { loadPdfMake } from '@waldur/shims/pdfmake';
 import { fetchAll } from '@waldur/table/api';
 
@@ -72,7 +72,7 @@ function saveAsCsv(table, data) {
 
 function exportToClipboard(_, data) {
   const text = Papa.unparse(data);
-  copyToClipboard(text);
+  copy(text);
 }
 
 const exporters = {

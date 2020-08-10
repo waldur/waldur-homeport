@@ -16,7 +16,7 @@ const formatLoginDetails = (props) =>
       label={props.translate('FreeIPA account needs to be set up.')}
     />
   ) : (
-    `${props.resource.username}@${props.resource.gateway}`
+    `ssh ${props.resource.username}@${props.resource.gateway}`
   );
 
 const formatSubmitDetails = (props) => (

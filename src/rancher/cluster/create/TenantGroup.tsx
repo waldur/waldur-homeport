@@ -28,6 +28,8 @@ const getTemplate = (state) =>
 
 const NODES_FIELD_ARRAY = 'attributes.nodes';
 
+const SECURITY_GROUPS_FIELD = 'attributes.security_groups';
+
 const filterFlavor = (node, flavor) => {
   if (node.min_ram) {
     if (flavor.ram < node.min_ram * 1024) {
@@ -101,6 +103,21 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
     });
   }, [dispatch, template]);
 
+  // Select default security group initially
+  React.useEffect(() => {
+    const defaultSecurityGroup = resourceProps.value?.securityGroups.find(
+      (group) => group.name === 'default',
+    );
+
+    if (defaultSecurityGroup) {
+      dispatch(
+        change(FORM_ID, SECURITY_GROUPS_FIELD, [
+          { ...defaultSecurityGroup, clearableValue: false },
+        ]),
+      );
+    }
+  }, [dispatch, resourceProps.value]);
+
   if (resourceProps.loading) {
     return <LoadingSpinner />;
   }
@@ -135,7 +152,7 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
             label={translate('Security groups')}
           >
             <Field
-              name="attributes.security_groups"
+              name={SECURITY_GROUPS_FIELD}
               component={SelectField}
               options={resourceProps.value.securityGroups}
               labelKey="name"

@@ -40,36 +40,54 @@ const getReportItems = () => [
     feature: 'support.users',
   },
   {
-    label: translate('Financial overview'),
-    icon: 'fa-university',
-    state: 'support.organizations',
-    feature: 'support.organizations',
-  },
-  {
-    label: translate('Orders'),
+    label: translate('Reporting'),
     icon: 'fa-files-o',
-    state: 'marketplace-support-order-items',
+    children: [
+      {
+        label: translate('Capacity'),
+        icon: 'fa-puzzle-piece',
+        state: 'marketplace-support-plan-usages',
+      },
+      {
+        label: translate('Financial'),
+        icon: 'fa-university',
+        state: 'support.organizations',
+        feature: 'support.organizations',
+      },
+      /*{
+        label: translate('Growth'),
+        icon: 'fa-line-chart',
+      },*/
+      /*{
+        label: translate('Offerings'),
+        icon: 'fa-files-o',
+      },*/
+      {
+        label: translate('Ordering'),
+        icon: 'fa-files-o',
+        state: 'marketplace-support-order-items',
+      },
+      /*{
+        label: translate('Organizations'),
+        icon: 'fa-building',
+      },*/
+      {
+        label: translate('Resources usage'),
+        icon: 'fa-map',
+        state: 'support.resources-treemap',
+        feature: 'support.resources-treemap',
+      },
+      {
+        label: translate('Usage reports'),
+        icon: 'fa-puzzle-piece',
+        state: 'marketplace-support-usage-reports',
+      },
+    ],
   },
   {
     label: translate('Resources'),
     icon: 'fa-files-o',
     state: 'marketplace-support-resources',
-  },
-  {
-    label: translate('Plan capacity'),
-    icon: 'fa-puzzle-piece',
-    state: 'marketplace-support-plan-usages',
-  },
-  {
-    label: translate('Usage reports'),
-    icon: 'fa-puzzle-piece',
-    state: 'marketplace-support-usage-reports',
-  },
-  {
-    label: translate('Resources usage'),
-    icon: 'fa-map',
-    state: 'support.resources-treemap',
-    feature: 'support.resources-treemap',
   },
   {
     label: translate('Shared providers'),

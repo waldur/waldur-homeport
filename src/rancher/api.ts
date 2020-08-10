@@ -1,12 +1,4 @@
-import {
-  getById,
-  get,
-  getAll,
-  post,
-  put,
-  remove,
-  deleteById,
-} from '@waldur/core/api';
+import { getById, get, getAll, post, put, deleteById } from '@waldur/core/api';
 
 import {
   RancherProject,
@@ -19,6 +11,7 @@ import {
   HPA,
   HPACreateType,
   ClusterTemplate,
+  Workload,
 } from './types';
 
 export const getCatalog = (catalogUuid) =>
@@ -58,17 +51,21 @@ export const getProjectSecrets = (projectUuid: string) =>
 
 export const createApp = (payload) => post('/rancher-apps/', payload);
 
-export const removeApp = (projectUuid, appId) =>
-  remove(`/rancher-apps/`, {
-    data: {
-      project_uuid: projectUuid,
-      app_id: appId,
-    },
-  });
+export const removeApp = (uuid) => deleteById(`/rancher-apps/`, uuid);
 
 export const createNode = (payload) => post('/rancher-nodes/', payload);
 
-export const listWorkloads = (params) => getAll('/rancher-workloads/', params);
+export const listWorkloads = (params) =>
+  getAll<Workload>('/rancher-workloads/', params);
+
+export const redeployWorkload = (id: string) =>
+  post(`/rancher-workloads/${id}/redeploy/`);
+
+export const deleteWorkload = (id: string) =>
+  deleteById('/rancher-workloads/', id);
+
+export const listNamespaces = (params) =>
+  getAll('/rancher-namespaces/', params);
 
 export const deleteHPA = (hpaUuid) => deleteById('/rancher-hpas/', hpaUuid);
 
@@ -82,3 +79,9 @@ export const updateHPA = (
 
 export const listClusterTemplates = (options?) =>
   getAll<ClusterTemplate>('/rancher-cluster-templates/', options);
+
+export const getYAML = (url: string) =>
+  get<{ yaml: string }>(`${url}yaml`).then((response) => response.data);
+
+export const putYAML = (url: string, yaml: string) =>
+  put(`${url}yaml`, { yaml });

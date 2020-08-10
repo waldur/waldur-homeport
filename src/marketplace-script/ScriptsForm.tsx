@@ -6,8 +6,8 @@ import { FormContainer, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { getForm } from '@waldur/marketplace/offerings/store/selectors';
 
-import { AceField } from './AceField';
 import { EnvironmentVariablesList } from './EnvironmentVariablesList';
+import { MonacoField } from './MonacoField';
 
 const PROGRAMMING_LANGUAGE_CHOICES = [
   {
@@ -16,7 +16,7 @@ const PROGRAMMING_LANGUAGE_CHOICES = [
   },
   {
     label: 'Bash',
-    value: 'sh',
+    value: 'shell',
   },
 ];
 
@@ -35,25 +35,25 @@ export const ScriptsForm = ({ container }) => {
           simpleValue={true}
           required={true}
         />
-        <AceField
+        <MonacoField
           name="create"
           label={translate('Script for creation of a resource')}
           required={true}
           mode={language}
         />
-        <AceField
+        <MonacoField
           name="delete"
           label={translate('Script for termination of a resource')}
           required={true}
           mode={language}
         />
-        <AceField
+        <MonacoField
           name="update"
           label={translate('Script for updating a resource on plan change')}
           required={true}
           mode={language}
         />
-        <AceField
+        <MonacoField
           name="pull"
           label={translate(
             'Script for regular update of resource and its accounting',

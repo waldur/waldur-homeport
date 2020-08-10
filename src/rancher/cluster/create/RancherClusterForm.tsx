@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
+import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,
@@ -82,13 +83,15 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
           label={translate('Cluster description')}
           name="attributes.description"
         />
-        <SelectAsyncField
-          name="attributes.ssh_public_key"
-          label={translate('SSH public key')}
-          labelKey="name"
-          valueKey="url"
-          loadOptions={loadSshKeyOptions}
-        />
+        {!ENV.plugins.WALDUR_RANCHER.DISABLE_SSH_KEY_INJECTION && (
+          <SelectAsyncField
+            name="attributes.ssh_public_key"
+            label={translate('SSH public key')}
+            labelKey="name"
+            valueKey="url"
+            loadOptions={loadSshKeyOptions}
+          />
+        )}
         <AwesomeCheckboxField
           name="attributes.install_longhorn"
           label={translate(

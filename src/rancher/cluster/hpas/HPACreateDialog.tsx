@@ -1,19 +1,14 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { useAsync } from 'react-use';
+import { reduxForm, formValueSelector, change } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import {
-  StringField,
-  SelectField,
-  SelectAsyncField,
-  NumberField,
-  TextField,
-} from '@waldur/form';
+import { StringField, SelectField, NumberField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { createHPA, listWorkloads } from '@waldur/rancher/api';
+import { createHPA, listWorkloads, listNamespaces } from '@waldur/rancher/api';
 import { Resource } from '@waldur/resource/types';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { createEntity } from '@waldur/table/actions';
@@ -71,6 +66,8 @@ const useHPACreateDialog = (cluster) => {
   };
 };
 
+const getNamespace = (state) => formValueSelector(FORM_ID)(state, 'namespace');
+
 export const HPACreateDialog = reduxForm<{}, OwnProps>({
   form: FORM_ID,
   initialValues: {
@@ -79,12 +76,32 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
   },
 })((props) => {
   const { submitting, createHPA } = useHPACreateDialog(props.resolve.cluster);
-  const loadWorkloads = React.useCallback(
+
+  const { loading, value } = useAsync(async () => {
+    const params = { cluster_uuid: props.resolve.cluster.uuid, o: 'name' };
+    const namespaces = await listNamespaces({ params });
+    const workloads = await listWorkloads({ params });
+    return { namespaces, workloads };
+  }, [props.resolve.cluster.uuid]);
+
+  const namespace = useSelector(getNamespace);
+
+  const dispatch = useDispatch();
+
+  // Clear workload selection after namespace selection has been changed
+  React.useEffect(() => {
+    if (namespace) {
+      dispatch(change(FORM_ID, 'workload', null));
+    }
+  }, [dispatch, namespace]);
+
+  const validWorkloads = React.useMemo(
     () =>
-      listWorkloads({
-        params: { cluster_uuid: props.resolve.cluster.uuid },
-      }).then((options) => ({ options })),
-    [props.resolve.cluster.uuid],
+      namespace &&
+      value?.workloads.filter(
+        (workload) => workload.namespace_uuid === namespace.uuid,
+      ),
+    [value, namespace],
   );
 
   const metricNameOptions = React.useMemo<MetricOption[]>(
@@ -109,13 +126,24 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         label={translate('Description')}
         required={false}
       />
-      <SelectAsyncField
+      <SelectField
+        name="namespace"
+        label={translate('Namespace')}
+        required={true}
+        labelKey="name"
+        valueKey="url"
+        options={value?.namespaces}
+        isLoading={loading}
+      />
+      <SelectField
         name="workload"
         label={translate('Workload')}
         required={true}
-        loadOptions={loadWorkloads}
         labelKey="name"
         valueKey="url"
+        options={validWorkloads}
+        isLoading={loading}
+        disabled={!namespace}
       />
       <NumberField
         name="min_replicas"

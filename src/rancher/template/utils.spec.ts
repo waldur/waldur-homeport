@@ -4,6 +4,7 @@ import { groupQuestions, parseQuestions, parseVisibleQuestions } from './utils';
 
 const DataDog: Question[] = require('./DataDog.json');
 const MySQL: Question[] = require('./MySQL.json');
+const JFrog: Question[] = require('./JFrog.json');
 
 describe('Rancher application provision utils', () => {
   describe('groupQuestions', () => {
@@ -27,6 +28,11 @@ describe('Rancher application provision utils', () => {
       expect(
         visible.find((question) => question.variable === 'image'),
       ).toBeFalsy();
+    });
+
+    it('parses subquestion types', () => {
+      const parsed = parseQuestions(JFrog);
+      expect(parsed).toMatchSnapshot();
     });
   });
 });
