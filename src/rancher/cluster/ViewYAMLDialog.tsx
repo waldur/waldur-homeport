@@ -1,31 +1,70 @@
 import * as React from 'react';
+import * as Button from 'react-bootstrap/lib/Button';
+import { useDispatch } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
+import useToggle from 'react-use/lib/useToggle';
+import { reduxForm, change } from 'redux-form';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
 import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { MonacoField } from '@waldur/marketplace-script/MonacoField';
+import { ActionDialog } from '@waldur/modal/ActionDialog';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 
-import { getYAML } from '../api';
+import { getYAML, putYAML } from '../api';
 
-import { ViewYAMLPanel } from './ViewYAMLPanel';
+export const ViewYAMLDialog = reduxForm<
+  { yaml: string },
+  { resolve: { resource: { url: string } } }
+>({ form: 'ViewYAMLDialog' })(({ resolve, handleSubmit, submitting }) => {
+  const dispatch = useDispatch();
 
-export const ViewYAMLDialog = ({ resolve }) => {
-  const { loading, error, value } = useAsync(() =>
-    getYAML(resolve.resource.url),
+  const { loading, value } = useAsync(() => getYAML(resolve.resource.url));
+
+  React.useEffect(() => {
+    if (value) {
+      dispatch(change('ViewYAMLDialog', 'yaml', value.yaml));
+    }
+  }, [dispatch, value]);
+
+  const updateYAML = React.useCallback(
+    async (formData) => {
+      try {
+        await putYAML(resolve.resource.url, formData.yaml);
+        dispatch(showSuccess(translate('YAML has been updated.')));
+        dispatch(closeModalDialog());
+      } catch (e) {
+        dispatch(showErrorResponse(e, translate('Unable to update YAML.')));
+      }
+    },
+    [dispatch, resolve.resource.url],
   );
+
+  const [showDiff, toggleShowDiff] = useToggle(false);
+
   return (
-    <ModalDialog
-      title={translate('View/edit YAML')}
-      footer={<CloseDialogButton />}
+    <ActionDialog
+      title={translate('Edit YAML')}
+      submitLabel={translate('Submit')}
+      onSubmit={handleSubmit(updateYAML)}
+      submitting={submitting}
+      loading={loading}
     >
-      {loading ? (
-        <LoadingSpinner />
-      ) : error ? (
-        <div>{translate('Unable to load data.')}</div>
-      ) : (
-        <ViewYAMLPanel yaml={value.yaml} />
+      <MonacoField
+        name="yaml"
+        mode="yaml"
+        original={value?.yaml}
+        diff={showDiff}
+      />
+      {value?.yaml && (
+        <>
+          <CopyToClipboard value={value.yaml} />{' '}
+          <Button onClick={toggleShowDiff}>
+            {showDiff ? translate('Hide diff') : translate('Show diff')}
+          </Button>
+        </>
       )}
-    </ModalDialog>
+    </ActionDialog>
   );
-};
+});
