@@ -1285,7 +1285,7 @@ msgstr ""
 msgid "Copy of"
 msgstr ""
 
-#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
+#: src/core/CopyToClipboard.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
@@ -2279,7 +2279,7 @@ msgstr ""
 msgid "File download has been started."
 msgstr ""
 
-#: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
+#: src/core/CopyToClipboard.tsx
 msgid "File has been copied"
 msgstr ""
 
@@ -7373,6 +7373,7 @@ msgstr ""
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/offering/OfferingDetails.tsx
+#: src/rancher/cluster/ViewYAMLDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -8199,6 +8200,14 @@ msgstr ""
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
+msgstr ""
+
+#: src/rancher/cluster/ViewYAMLButton.tsx
+msgid "View / edit YAML"
+msgstr ""
+
+#: src/rancher/cluster/ViewYAMLDialog.tsx
+msgid "View/edit YAML"
 msgstr ""
 
 #: src/marketplace/offerings/screenshots/ScreenshotDetailsDialog.tsx
