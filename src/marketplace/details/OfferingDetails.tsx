@@ -32,7 +32,7 @@ export const OfferingDetails = (props: OfferingDetailsProps) => {
       <Row>
         <Col md={9}>
           <h3 className="header-bottom-border">
-            {translate('Product configuration')}
+            {translate('Offering configuration')}
           </h3>
           <OfferingConfigurator
             offering={props.offering}
