@@ -81,7 +81,7 @@ export const listClusterTemplates = (options?) =>
   getAll<ClusterTemplate>('/rancher-cluster-templates/', options);
 
 export const getYAML = (url: string) =>
-  get<{ yaml: string }>(`${url}yaml`).then((response) => response.data);
+  get<{ yaml: string }>(`${url}yaml/`).then((response) => response.data);
 
 export const putYAML = (url: string, yaml: string) =>
-  put(`${url}yaml`, { yaml });
+  put(`${url}yaml/`, { yaml });

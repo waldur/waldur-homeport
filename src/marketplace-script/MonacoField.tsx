@@ -35,13 +35,18 @@ export const MonacoField = (props) => {
       />
     );
   }
+  const Editor = props.diff
+    ? EditorRef.current.MonacoDiffEditor
+    : EditorRef.current.default;
 
   return (
-    <EditorRef.current.default
+    <Editor
       height="600"
       language={props.mode}
       value={props.input.value}
       onChange={props.input.onChange}
+      original={props.original}
+      options={props.options}
     />
   );
 };
