@@ -1,31 +1,19 @@
-import copy from 'copy-to-clipboard';
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 
+import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { getKubeconfigFile } from '@waldur/rancher/api';
-import { showSuccess } from '@waldur/store/coreSaga';
 
 const KubeconfigFilePanel = (props) => {
-  const dispatch = useDispatch();
-  const onClick = React.useCallback(() => {
-    copy(props.config);
-    dispatch(showSuccess(translate('File has been copied')));
-  }, []);
-
   return (
     <>
       <p>{translate('Put this into ~/.kube/config:')}</p>
       <pre style={{ height: 200 }}>{props.config}</pre>
-      <p className="m-b-sm m-t-sm">
-        <a onClick={onClick}>
-          <i className="fa fa-copy" /> {translate('Copy to clipboard')}
-        </a>
-      </p>
+      <CopyToClipboard value={props.config} />
       <p>
         <a
           href="http://kubernetes.io/docs/user-guide/prereqs/"

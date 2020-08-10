@@ -10,6 +10,8 @@ import { deleteEntity } from '@waldur/table/actions';
 
 import { redeployWorkload, deleteWorkload } from '../api';
 
+import { ViewYAMLButton } from './ViewYAMLButton';
+
 export const WorkloadActions = ({ workload }) => {
   const dispatch = useDispatch();
   const [redeployResult, redeployCallback] = useAsyncFn(async () => {
@@ -35,6 +37,7 @@ export const WorkloadActions = ({ workload }) => {
 
   return (
     <ButtonGroup>
+      <ViewYAMLButton resource={workload} disabled={disabled} />
       <ActionButton
         title={translate('Redeploy')}
         action={redeployCallback}
