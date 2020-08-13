@@ -3,7 +3,7 @@ import * as moment from 'moment-timezone';
 import { translate } from '@waldur/i18n';
 import { palette } from '@waldur/slurm/details/constants';
 
-interface Period {
+export interface Period {
   month: number;
   year: number;
 }
@@ -94,7 +94,7 @@ const getLastSixMonths = (): string[] => {
   return lastSixMonths;
 };
 
-const getPeriods = (xAxisPeriods: string[]): Period[] => {
+export const getPeriods = (xAxisPeriods: string[]): Period[] => {
   const periods: Period[] = [];
   xAxisPeriods.forEach((period) => {
     periods.push({
