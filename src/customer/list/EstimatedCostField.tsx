@@ -19,3 +19,19 @@ export const EstimatedCostField = ({ row }) => {
     );
   }
 };
+
+export const ExportEstimatedCostField = ({ row }) => {
+  if (getActiveFixedPricePaymentProfile(row.payment_profiles)) {
+    return DASH_ESCAPE_CODE;
+  }
+  const estimate = row.billing_price_estimate;
+  if (!estimate) {
+    return 0;
+  }
+  // VAT is not included only when accounting mode is activated
+  if (ENV.accountingMode === 'accounting') {
+    return parseFloat(estimate.total);
+  } else {
+    return parseFloat(estimate.total) + parseFloat(estimate.tax);
+  }
+};

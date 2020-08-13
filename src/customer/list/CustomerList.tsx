@@ -10,9 +10,12 @@ import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { CurrentCostField } from './CurrentCostField';
+import { CurrentCostField, ExportCurrentCostField } from './CurrentCostField';
 import { CustomerExpandableRow } from './CustomerExpandableRow';
-import { EstimatedCostField } from './EstimatedCostField';
+import {
+  EstimatedCostField,
+  ExportEstimatedCostField,
+} from './EstimatedCostField';
 import { OrganizationLink } from './OrganizationLink';
 
 const AbbreviationField = ({ row }) => (
@@ -116,11 +119,12 @@ const exportRow = (row, props) => {
     row.abbreviation,
     formatDate(row.created),
     formatDate(row.accounting_start_date),
-    CurrentCostField({ row }),
+    renderFieldOrDash(row.agreement_number),
+    ExportCurrentCostField({ row }),
   ];
   return props.customerListFilter.accounting_period &&
     props.customerListFilter.accounting_period.value.current
-    ? [...base, EstimatedCostField({ row })]
+    ? [...base, ExportEstimatedCostField({ row })]
     : base;
 };
 
@@ -130,6 +134,7 @@ const exportFields = (props) => {
     translate('Abbreviation'),
     translate('Created'),
     translate('Start day of accounting'),
+    translate('Agreement number'),
   ];
   const accountingPeriodIsCurrent =
     props.customerListFilter.accounting_period &&
