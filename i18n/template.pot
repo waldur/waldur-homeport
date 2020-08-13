@@ -6491,6 +6491,7 @@ msgstr ""
 #: src/rancher/cluster/ViewYAMLDialog.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/resource/actions/ResourceActionDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
