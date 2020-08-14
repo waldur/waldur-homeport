@@ -71,7 +71,6 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support',
       bodyClass: 'old',
-      anonymous: true,
     },
   },
 
