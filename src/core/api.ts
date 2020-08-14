@@ -2,14 +2,14 @@ import Axios, { AxiosPromise, Method, AxiosRequestConfig } from 'axios';
 
 import { ENV } from './services';
 
+const fixURL = (endpoint: string) =>
+  endpoint.startsWith('http') ? endpoint : `${ENV.apiEndpoint}api${endpoint}`;
+
 export function get<T = {}>(
   endpoint: string,
   options?: AxiosRequestConfig,
 ): AxiosPromise<T> {
-  return Axios.get(
-    endpoint.startsWith('http') ? endpoint : `${ENV.apiEndpoint}api${endpoint}`,
-    options,
-  );
+  return Axios.get(fixURL(endpoint), options);
 }
 
 export function getList<T = {}>(endpoint: string, params?: {}): Promise<T[]> {
@@ -35,7 +35,7 @@ export function remove<T = {}>(
   endpoint: string,
   options?: AxiosRequestConfig,
 ): AxiosPromise<T> {
-  return Axios.delete(`${ENV.apiEndpoint}api${endpoint}`, options);
+  return Axios.delete(fixURL(endpoint), options);
 }
 
 export function deleteById<T = {}>(endpoint, id, options?: AxiosRequestConfig) {
@@ -45,15 +45,15 @@ export function deleteById<T = {}>(endpoint, id, options?: AxiosRequestConfig) {
 }
 
 export function post<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
-  return Axios.post(`${ENV.apiEndpoint}api${endpoint}`, data);
+  return Axios.post(fixURL(endpoint), data);
 }
 
 export function patch<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
-  return Axios.patch(`${ENV.apiEndpoint}api${endpoint}`, data);
+  return Axios.patch(fixURL(endpoint), data);
 }
 
 export function put<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
-  return Axios.put(`${ENV.apiEndpoint}api${endpoint}`, data);
+  return Axios.put(fixURL(endpoint), data);
 }
 
 export function sendForm<T = {}>(

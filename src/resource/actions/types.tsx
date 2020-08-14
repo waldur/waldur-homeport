@@ -1,4 +1,5 @@
 import { Omit } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { BaseResource } from '@waldur/resource/types';
 import { User } from '@waldur/workspace/types';
@@ -81,6 +82,8 @@ export interface ResourceAction<Resource = BaseResource> {
   init?(resource, form, action): void;
   serializer?(form): object;
   execute?(resource): void;
+  getInitialValues?(): any;
+  submitForm?(dispatch: Dispatch<any>, formData: any);
 }
 
 export interface ActionContext<Resource = BaseResource> {

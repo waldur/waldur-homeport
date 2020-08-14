@@ -54,10 +54,11 @@ const getReportItems = () => [
         state: 'support.organizations',
         feature: 'support.organizations',
       },
-      /*{
+      {
         label: translate('Growth'),
         icon: 'fa-line-chart',
-      },*/
+        state: 'invoicesGrowth',
+      },
       /*{
         label: translate('Offerings'),
         icon: 'fa-files-o',

@@ -1966,6 +1966,10 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#: src/rancher/cluster/ViewYAMLDialog.tsx
+msgid "Edit YAML"
+msgstr ""
+
 #: src/booking/components/modal/BookingModal.tsx
 msgid "Edit an availability"
 msgstr ""
@@ -2500,6 +2504,11 @@ msgstr ""
 msgid "Got it!"
 msgstr ""
 
+#: src/invoices/growth/GrowthContainer.tsx
+#: src/issues/workspace/issue-navigation-service.js
+msgid "Growth"
+msgstr ""
+
 #: src/openstack/openstack-backup/actions/EditAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
@@ -2530,6 +2539,10 @@ msgstr ""
 
 #: src/issues/workspace/IssuesHelpdesk.tsx
 msgid "Helpdesk dashboard"
+msgstr ""
+
+#: src/rancher/cluster/ViewYAMLDialog.tsx
+msgid "Hide diff"
 msgstr ""
 
 #: src/customer/create/DomainGroup.tsx
@@ -4252,6 +4265,10 @@ msgstr ""
 msgid "Organizations ({count})"
 msgstr ""
 
+#: src/invoices/growth/utils.ts
+msgid "Others"
+msgstr ""
+
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 msgid "Overview"
 msgstr ""
@@ -4293,6 +4310,7 @@ msgstr ""
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr ""
 
+#: src/invoices/growth/utils.ts
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Paid"
@@ -5361,6 +5379,7 @@ msgstr ""
 msgid "Reporter"
 msgstr ""
 
+#: src/invoices/growth/GrowthContainer.tsx
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Reporting"
 msgstr ""
@@ -5785,6 +5804,7 @@ msgstr ""
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
+#: src/invoices/growth/utils.ts
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
@@ -6206,6 +6226,10 @@ msgstr ""
 msgid "Show details"
 msgstr ""
 
+#: src/rancher/cluster/ViewYAMLDialog.tsx
+msgid "Show diff"
+msgstr ""
+
 #: src/invoices/events/InvoiceEventsToggle.tsx
 msgid "Show events"
 msgstr ""
@@ -6476,8 +6500,10 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
+#: src/rancher/cluster/ViewYAMLDialog.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
+#: src/resource/actions/ResourceActionDialog.tsx
 #: src/resource/actions/dialog/action-dialog.html
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
@@ -6548,6 +6574,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
+#: src/invoices/growth/GrowthContainer.tsx
 #: src/issues/workspace/IssuesDashboard.tsx
 #: src/issues/workspace/SupportWorkspace.tsx
 msgid "Support dashboard"
@@ -7011,6 +7038,7 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
+#: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
@@ -7373,7 +7401,6 @@ msgstr ""
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/offering/OfferingDetails.tsx
-#: src/rancher/cluster/ViewYAMLDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -7400,6 +7427,10 @@ msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Unable to load form options."
+msgstr ""
+
+#: src/invoices/growth/GrowthChart.tsx
+msgid "Unable to load growth chart."
 msgstr ""
 
 #: src/customer/payments/InvoicesDropdown.tsx
@@ -7630,6 +7661,10 @@ msgstr ""
 
 #: src/customer/payments/store/effects.ts
 msgid "Unable to unlink invoice from the payment."
+msgstr ""
+
+#: src/rancher/cluster/ViewYAMLDialog.tsx
+msgid "Unable to update YAML."
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
@@ -8203,11 +8238,7 @@ msgid "Version"
 msgstr ""
 
 #: src/rancher/cluster/ViewYAMLButton.tsx
-msgid "View / edit YAML"
-msgstr ""
-
-#: src/rancher/cluster/ViewYAMLDialog.tsx
-msgid "View/edit YAML"
+msgid "View YAML"
 msgstr ""
 
 #: src/marketplace/offerings/screenshots/ScreenshotDetailsDialog.tsx
@@ -8320,6 +8351,10 @@ msgstr ""
 
 #: src/marketplace/common/ReviewButton.tsx
 msgid "Write review"
+msgstr ""
+
+#: src/rancher/cluster/ViewYAMLDialog.tsx
+msgid "YAML has been updated."
 msgstr ""
 
 #: src/marketplace-checklist/AnswerGroup.tsx
@@ -8561,6 +8596,10 @@ msgstr ""
 
 #: src/resource/state/utils.ts
 msgid "error message: {errorMessage}"
+msgstr ""
+
+#: src/invoices/growth/utils.ts
+msgid "estimated"
 msgstr ""
 
 #: src/rancher/cluster/create/NodeRoleField.tsx
