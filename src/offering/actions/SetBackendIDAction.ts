@@ -13,7 +13,7 @@ export default function setBackendIDAction({
 }): ResourceAction<Offering> {
   return {
     name: 'set_backend_id',
-    title: translate('Set Backend ID'),
+    title: translate('Set backend ID'),
     type: 'form',
     method: 'POST',
     component: ResourceActionDialog,
