@@ -762,8 +762,14 @@ msgid "Back to shopping"
 msgstr ""
 
 #: src/marketplace/resources/import/ResourcesList.tsx
+#: src/offering/OfferingHeader.tsx
+#: src/offering/actions/SetBackendIDAction.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Backend ID"
+msgstr ""
+
+#: src/offering/actions/SetBackendIDAction.ts
+msgid "Backend ID has been successfully set."
 msgstr ""
 
 #: src/resource/state/constants.ts
@@ -6172,6 +6178,10 @@ msgstr ""
 msgid "Service type"
 msgstr ""
 
+#: src/offering/actions/SetBackendIDAction.ts
+msgid "Set Backend ID"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/module.ts
 msgid "Set rules"
 msgstr ""
@@ -7621,6 +7631,10 @@ msgstr ""
 
 #: src/invoices/list/SendNotificationButton.tsx
 msgid "Unable to send record notification."
+msgstr ""
+
+#: src/offering/actions/SetBackendIDAction.ts
+msgid "Unable to set backend ID."
 msgstr ""
 
 #: src/openstack/utils.ts
