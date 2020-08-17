@@ -3,6 +3,7 @@ import terminateResourceAction from '@waldur/marketplace/resources/terminate/Ter
 
 import completeAction from './CompleteAction';
 import destroyAction from './DestroyAction';
+import setBackendIDAction from './SetBackendIDAction';
 import terminateAction from './TerminateAction';
 import editAction from './UpdateAction';
 
@@ -13,4 +14,5 @@ export default [
   terminateAction,
   terminateResourceAction,
   destroyAction,
+  setBackendIDAction,
 ];

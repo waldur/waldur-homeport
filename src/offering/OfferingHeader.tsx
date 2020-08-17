@@ -83,6 +83,12 @@ export const PureOfferingHeader = (props: OfferingHeaderProps) => (
         </a>
       </Field>
     )}
+
+    {props.offering.backend_id && (
+      <Field label={props.translate('Backend ID')}>
+        {props.offering.backend_id}
+      </Field>
+    )}
   </dl>
 );
 
