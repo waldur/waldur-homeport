@@ -6179,7 +6179,7 @@ msgid "Service type"
 msgstr ""
 
 #: src/offering/actions/SetBackendIDAction.ts
-msgid "Set Backend ID"
+msgid "Set backend ID"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/module.ts
