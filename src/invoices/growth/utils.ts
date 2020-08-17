@@ -22,7 +22,11 @@ const eChartInitialOption = () => ({
   },
   toolbox: {
     feature: {
-      saveAsImage: { title: translate('Save'), show: true },
+      saveAsImage: {
+        title: translate('Save'),
+        name: `growth-chart-${moment().format('DD-MM-YYYY')}`,
+        show: true,
+      },
     },
   },
   tooltip: {
