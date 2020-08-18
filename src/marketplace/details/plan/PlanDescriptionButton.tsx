@@ -22,10 +22,10 @@ export const PurePlanDescriptionButton = withTranslation(
       props.formData.plan &&
       props.formData.plan.description
     ) {
-      planDescription = props.formData.plan.description;
+      planDescription = (props.formData.plan.description as string).trim();
     }
     if (props.planDescription) {
-      planDescription = props.planDescription;
+      planDescription = props.planDescription.trim();
     }
     if (!planDescription) {
       return null;
