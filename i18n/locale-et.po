@@ -1829,7 +1829,7 @@ msgstr "Lase vabaks"
 
 #: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Display name"
-msgstr "Plaani nimi"
+msgstr "Kuvatav nimi"
 
 #: src/marketplace/offerings/create/ComponentDisableQuotaField.tsx
 msgid "Do not allow user to specify quotas when offering is provisioned."
