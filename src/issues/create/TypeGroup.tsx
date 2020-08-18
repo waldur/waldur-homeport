@@ -24,7 +24,7 @@ export const TypeGroup = ({ disabled, layout }) => {
           <span className="text-danger">*</span>
         </>
       }
-      body={<TypeField issueTypes={issueTypes} disabled={disabled} />}
+      body={<TypeField issueTypes={issueTypes} isDisabled={disabled} />}
     />
   );
 };

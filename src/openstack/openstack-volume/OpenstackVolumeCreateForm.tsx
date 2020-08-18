@@ -110,8 +110,8 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
             label={translate('Availability zone')}
             name="attributes.availability_zone"
             options={state.value.zones}
-            labelKey="name"
-            valueKey="url"
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
             simpleValue={true}
             required={
               ENV.plugins.WALDUR_OPENSTACK_TENANT.REQUIRE_AVAILABILITY_ZONE

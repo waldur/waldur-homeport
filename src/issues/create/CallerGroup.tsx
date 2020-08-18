@@ -40,7 +40,7 @@ const CallerActions = ({ onSearch }) => {
   );
 };
 
-const filterOptions = (options) => options;
+const filterOption = (options) => options;
 
 export const CallerGroup = ({ onSearch }) => (
   <FormGroup>
@@ -54,13 +54,12 @@ export const CallerGroup = ({ onSearch }) => (
         component={AsyncSelectField}
         required={true}
         placeholder={translate('Select caller...')}
-        clearable={true}
-        labelKey="username"
-        valueKey="uuid"
-        valueRenderer={renderer}
-        optionRenderer={renderer}
+        isClearable={true}
+        getOptionValue={(option) => option.uuid}
+        getOptionLabel={renderer}
+        defaultOptions
         loadOptions={refreshUsers}
-        filterOptions={filterOptions}
+        filterOption={filterOption}
       />
     </Col>
     <CallerActions onSearch={onSearch} />

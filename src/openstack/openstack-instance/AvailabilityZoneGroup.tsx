@@ -23,12 +23,13 @@ export const AvailabilityZoneGroup = (props) =>
         }
         component={(fieldProps) => (
           <Select
-            value={fieldProps.input.value}
-            onChange={fieldProps.input.onChange}
+            value={props.availabilityZones.filter(
+              (zone) => zone.url === fieldProps.input.value,
+            )}
+            onChange={(newValue) => fieldProps.input.onChange(newValue.url)}
             options={props.availabilityZones}
-            labelKey="name"
-            valueKey="url"
-            simpleValue={true}
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
           />
         )}
       />

@@ -11,7 +11,7 @@ export interface RendererConfig {
   imgStyle?: {};
 }
 
-const renderIcon = (src, imgStyle) => (
+export const renderIcon = (src, imgStyle) => (
   <img
     src={src}
     style={{

@@ -13,7 +13,7 @@ export const organizationAutocomplete = (query: string) => {
     field: ['name', 'uuid'],
     o: 'name',
   };
-  return getCustomerList(params).then((options) => ({ options }));
+  return getCustomerList(params);
 };
 
 export const projectAutocomplete = (customer: string) => (query: string) => {
@@ -23,7 +23,7 @@ export const projectAutocomplete = (customer: string) => (query: string) => {
     field: ['name', 'uuid'],
     o: 'name',
   };
-  return getProjectList(params).then((options) => ({ options }));
+  return getProjectList(params);
 };
 
 export const providerAutocomplete = (query: string) => {
@@ -32,7 +32,7 @@ export const providerAutocomplete = (query: string) => {
     field: ['customer_name', 'customer_uuid'],
     o: 'customer_name',
   };
-  return getServiceProviderList(params).then((options) => ({ options }));
+  return getServiceProviderList(params);
 };
 
 export const categoryAutocomplete = (query: string) => {
@@ -41,7 +41,7 @@ export const categoryAutocomplete = (query: string) => {
     field: ['title', 'uuid'],
     o: 'title',
   };
-  return getCategories(params).then((options) => ({ options }));
+  return getCategories(params);
 };
 
 export const offeringsAutocomplete = (query: object) => {
@@ -51,5 +51,5 @@ export const offeringsAutocomplete = (query: object) => {
     state: 'Active',
     ...query,
   };
-  return getOfferingsList(params).then((options) => ({ options }));
+  return getOfferingsList(params);
 };

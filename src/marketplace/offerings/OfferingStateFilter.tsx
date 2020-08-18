@@ -22,7 +22,7 @@ export const OfferingStateFilter = () => (
           options={getStates()}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          multi={true}
+          isMulti={true}
         />
       )}
     />

@@ -10,7 +10,7 @@ import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
 const IntegerField = renderValidationWrapper((fieldProps) => (
   <>
-    <div className="input-group" style={{ maxWidth: 200 }}>
+    <div className="input-group" style={{ maxWidth: 200, zIndex: 0 }}>
       <NumberField min={1} max={1 * 4096} {...fieldProps.input} />
       <span className="input-group-addon">GB</span>
     </div>

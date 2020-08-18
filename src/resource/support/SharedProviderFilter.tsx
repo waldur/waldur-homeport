@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Async } from 'react-select';
+import AsyncSelect from 'react-select/async';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 import { getList } from '@waldur/core/api';
@@ -13,7 +13,7 @@ const providerAutocomplete = (query: string) => {
     field: ['name', 'uuid'],
     o: 'name',
   };
-  return getList('/service-settings/', params).then((options) => ({ options }));
+  return getList('/service-settings/', params);
 };
 
 export const SharedProviderFilter = () => (
@@ -25,13 +25,16 @@ export const SharedProviderFilter = () => (
           <Field
             name="provider"
             component={(fieldProps) => (
-              <Async
+              <AsyncSelect
                 placeholder={translate('Select provider...')}
+                defaultOptions
                 loadOptions={providerAutocomplete}
-                valueKey="uuid"
-                labelKey="name"
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={(option) => option.name}
                 value={fieldProps.input.value}
                 onChange={(value) => fieldProps.input.onChange(value)}
+                noOptionsMessage={() => translate('No providers')}
+                isClearable={true}
               />
             )}
           />

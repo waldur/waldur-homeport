@@ -2,7 +2,7 @@ import * as classNames from 'classnames';
 import * as moment from 'moment';
 import * as React from 'react';
 import * as DatePicker from 'react-16-bootstrap-date-picker';
-import Select, { Option } from 'react-select';
+import Select from 'react-select';
 
 import { timelineLabels } from '@waldur/booking/utils';
 import { translate } from '@waldur/i18n';
@@ -16,7 +16,7 @@ interface DateAndTimeSelectField {
   isDisabled?: boolean;
 }
 
-interface TimeSelect extends Option {
+interface TimeSelect {
   hour: number;
   minute: number;
 }
@@ -49,8 +49,8 @@ export const DateAndTimeSelectField = (props: DateAndTimeSelectField) => (
     <Select
       name={name}
       className="col-sm-3"
-      clearable={false}
-      searchable={false}
+      isClearable={false}
+      isSearchable={false}
       value={props.currentTime.format('HH:mm')}
       onChange={(selectOpt: TimeSelect) =>
         props.onChange(
@@ -60,7 +60,7 @@ export const DateAndTimeSelectField = (props: DateAndTimeSelectField) => (
         )
       }
       options={timelineLabels(props.minuteStep)}
-      disabled={props.isDisabled}
+      isDisabled={props.isDisabled}
     />
   </div>
 );

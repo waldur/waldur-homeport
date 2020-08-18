@@ -30,8 +30,8 @@ export const ProjectCreateForm = (props) => (
           label={props.translate('Project type')}
           name="type"
           options={props.projectTypes}
-          labelKey="name"
-          valueKey="url"
+          getOptionValue={(option) => option.url}
+          getOptionLabel={(option) => option.name}
         />
       )}
       {props.certifications.length >= 1 && (
@@ -43,9 +43,9 @@ export const ProjectCreateForm = (props) => (
           )}
           placeholder={props.translate('Select certifications')}
           options={props.certifications}
-          labelKey="name"
-          valueKey="url"
-          multi={true}
+          getOptionValue={(option) => option.url}
+          getOptionLabel={(option) => option.name}
+          isMulti={true}
         />
       )}
     </FormContainer>

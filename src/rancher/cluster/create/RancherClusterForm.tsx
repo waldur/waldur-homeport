@@ -87,8 +87,9 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
           <SelectAsyncField
             name="attributes.ssh_public_key"
             label={translate('SSH public key')}
-            labelKey="name"
-            valueKey="url"
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
+            defaultOptions
             loadOptions={loadSshKeyOptions}
           />
         )}

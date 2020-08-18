@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Option, OptionValues } from 'react-select';
 
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
 import { connectAngularComponent } from '@waldur/store/connect';
@@ -11,7 +10,7 @@ export class OpenstackInstanceSecurityGroupsStory extends React.Component {
     selectedSecurityGroups: [],
   };
 
-  setSelectedSecurityGroups = (values: Array<Option<OptionValues>>) => {
+  setSelectedSecurityGroups = (values) => {
     this.setState({ selectedSecurityGroups: values });
   };
 

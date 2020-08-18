@@ -29,13 +29,18 @@ export const ChecklistOverview = () => {
     return (
       <>
         <Select
-          labelKey="name"
-          valueKey="uuid"
+          getOptionValue={(option) => option.uuid}
+          getOptionLabel={(option) => option.name}
           value={state.checklist}
           onChange={state.setChecklist}
           options={state.checklistOptions}
-          clearable={false}
-          wrapperStyle={{ zIndex: 2000 }} /* Because leaflet z-index is 1000 */
+          isClearable={false}
+          styles={{
+            control: (base) => ({
+              ...base,
+              zIndex: 2000,
+            }) /* Because leaflet z-index is 1000 */,
+          }}
         />
         {state.statsLoading ? (
           <LoadingSpinner />

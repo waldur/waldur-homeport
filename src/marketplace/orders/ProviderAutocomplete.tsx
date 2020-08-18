@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Async } from 'react-select';
+import AsyncSelect from 'react-select/async';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -15,13 +15,15 @@ export const ProviderAutocomplete: React.FC<Props> = (props) => (
     <Field
       name="provider"
       component={(fieldProps) => (
-        <Async
+        <AsyncSelect
           placeholder={translate('Select provider...')}
           loadOptions={providerAutocomplete}
-          valueKey="customer_uuid"
-          labelKey="customer_name"
+          defaultOptions
+          getOptionValue={(option) => option.customer_uuid}
+          getOptionLabel={(option) => option.customer_name}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
+          noOptionsMessage={() => translate('No providers')}
         />
       )}
     />

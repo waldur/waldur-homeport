@@ -49,45 +49,44 @@ const PureUserFilter = (props: UserFilterProps) => (
         noUpdateOnBlur={true}
       />
       <SelectField
+        className="Select"
         label={props.translate('Role')}
         name="role"
         placeholder={props.translate('Select role')}
         options={[
           {
-            name: translate('Staff'),
+            label: translate('Staff'),
             value: 'is_staff',
           },
           {
-            name: translate('Support'),
+            label: translate('Support'),
             value: 'is_support',
           },
         ]}
-        labelKey="name"
-        valueKey="value"
-        multi={true}
+        isMulti={true}
         noUpdateOnBlur={true}
       />
       <SelectField
+        className="Select"
         label={props.translate('Status')}
         name="status"
         placeholder={props.translate('Select status')}
         options={[
           {
-            name: translate('Any'),
+            label: translate('Any'),
             value: undefined,
           },
           {
-            name: translate('Active'),
+            label: translate('Active'),
             value: true,
           },
           {
-            name: translate('Disabled'),
+            label: translate('Disabled'),
             value: false,
           },
         ]}
-        labelKey="name"
-        valueKey="value"
         noUpdateOnBlur={true}
+        simpleValue={true}
       />
     </FormContainer>
   </form>

@@ -41,12 +41,12 @@ const CategoryPanel = ({ category, checklists, customer }) => {
   return (
     <Panel title={category.name}>
       <Select
-        labelKey="name"
-        valueKey="uuid"
+        getOptionValue={(option) => option.uuid}
+        getOptionLabel={(option) => option.name}
         value={checklist}
-        onChange={setChecklist}
+        onChange={(value: Checklist) => setChecklist(value)}
         options={checklists}
-        clearable={false}
+        isClearable={false}
       />
       {statsState.loading ? (
         <LoadingSpinner />

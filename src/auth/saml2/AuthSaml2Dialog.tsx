@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Async } from 'react-select';
+import AsyncSelect from 'react-select/async';
+import { createFilter } from 'react-select/dist/react-select.cjs.dev';
 import { compose } from 'redux';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 
@@ -38,18 +39,20 @@ class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
             <Field
               name="identity-provider"
               component={(fieldProps) => (
-                <Async
+                <AsyncSelect
                   loadOptions={(input) =>
                     this.identityProviderAutocomplete(input)
                   }
                   placeholder={translate('Select organization...')}
-                  searchPromptText={translate('Type to search')}
-                  noResultsText={translate('No results found')}
-                  valueKey="url"
-                  labelKey="name"
+                  noOptionsMessage={() => translate('No results found')}
+                  defaultOptions
+                  getOptionValue={(option) => option.url}
+                  getOptionLabel={(option) => option.name}
                   value={fieldProps.input.value}
                   onChange={fieldProps.input.onChange}
-                  ignoreAccents={false}
+                  filterOptions={createFilter({
+                    ignoreAccents: false,
+                  })}
                 />
               )}
             />

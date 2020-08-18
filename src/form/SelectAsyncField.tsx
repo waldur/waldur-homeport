@@ -1,14 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
-import { Async, ReactAsyncSelectProps } from 'react-select';
+import AsyncSelect from 'react-select/async';
 
-import { FormField } from './types';
-
-interface SelectAsyncFieldProps extends ReactAsyncSelectProps, FormField {
-  name: string;
-}
-
-export const SelectAsyncField = (props: SelectAsyncFieldProps) => {
+export const SelectAsyncField = (props) => {
   const {
     input,
     label,
@@ -21,7 +15,7 @@ export const SelectAsyncField = (props: SelectAsyncFieldProps) => {
     normalize,
     ...rest
   } = props;
-  return React.createElement(Async, {
+  return React.createElement(AsyncSelect, {
     ...rest,
     name: input.name,
     value: input.value,

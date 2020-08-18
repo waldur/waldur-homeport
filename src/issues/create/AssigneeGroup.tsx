@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { refreshSupportUsers } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
 
-const filterOptions = (options) => options;
+const filterOption = (options) => options;
 
 export const AssigneeGroup = ({ disabled }) => (
   <FormGroup>
@@ -21,12 +21,13 @@ export const AssigneeGroup = ({ disabled }) => (
         name="assignee"
         component={AsyncSelectField}
         placeholder={translate('Select assignee...')}
-        clearable={true}
+        isClearable={true}
+        defaultOptions
         loadOptions={refreshSupportUsers}
-        valueKey="name"
-        labelKey="name"
-        disabled={disabled}
-        filterOptions={filterOptions}
+        getOptionValue={(option) => option.name}
+        getOptionLabel={(option) => option.name}
+        isDisabled={disabled}
+        filterOption={filterOption}
       />
     </Col>
   </FormGroup>

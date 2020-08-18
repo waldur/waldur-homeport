@@ -23,9 +23,10 @@ const PureZabbixHostCreateDialog = (props) => (
       name="service_project_link"
       label={props.translate('Zabbix provider')}
       required={true}
-      clearable={false}
-      labelKey="service_name"
-      valueKey="url"
+      isClearable={false}
+      getOptionValue={(option) => option.url}
+      getOptionLabel={(option) => option.service_name}
+      defaultOptions
       loadOptions={props.loadLinks}
     />
     {props.link && (
@@ -33,10 +34,11 @@ const PureZabbixHostCreateDialog = (props) => (
         name="templates"
         label={props.translate('Templates')}
         required={true}
-        clearable={false}
-        multi={true}
-        labelKey="name"
-        valueKey="url"
+        isClearable={false}
+        isMulti={true}
+        getOptionValue={(option) => option.url}
+        getOptionLabel={(option) => option.name}
+        defaultOptions
         loadOptions={props.loadTemplates}
       />
     )}

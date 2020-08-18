@@ -1,5 +1,3 @@
-import { Option } from 'react-select';
-
 import { translate } from '@waldur/i18n';
 import { formatFlavor } from '@waldur/resource/utils';
 
@@ -30,7 +28,7 @@ export const calculateSystemVolumeSize = (formData) => {
   return Math.max(currentValue, minValue);
 };
 
-export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): Option[] =>
+export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): any[] =>
   volumeTypes.map((volumeType) => ({
     label: volumeType.description
       ? `${volumeType.name} (${volumeType.description})`

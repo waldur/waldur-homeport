@@ -162,8 +162,7 @@ export const PureUserEditForm = (props: UserEditFormProps) => (
           options={tokenOptions}
           name="token_lifetime"
           label={tokenLifetimeTooltip}
-          labelKey="name"
-          valueKey="value"
+          getOptionLabel={(option) => option.name}
         />
       )}
       {props.userTokenIsVisible && <TokenLifetimeWarning />}
