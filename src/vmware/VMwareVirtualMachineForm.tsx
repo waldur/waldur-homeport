@@ -179,11 +179,11 @@ const FormComponent = (props: any) => {
             label={translate('Template')}
             name="attributes.template"
             required={true}
-            clearable={false}
+            isClearable={false}
             validate={required}
             options={props.data.templates}
-            labelKey="name"
-            valueKey="url"
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
             onChange={(value: Template) => {
               props.change('limits.cpu', value.cores);
               props.change('limits.ram', value.ram / 1024);
@@ -226,8 +226,8 @@ const FormComponent = (props: any) => {
             label={translate('Cluster')}
             name="attributes.cluster"
             options={props.data.clusters}
-            labelKey="name"
-            valueKey="url"
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
           />
         )}
         {advancedMode && props.data.datastores.length > 0 && (
@@ -235,8 +235,8 @@ const FormComponent = (props: any) => {
             label={translate('Datastore')}
             name="attributes.datastore"
             options={props.data.datastores}
-            labelKey="name"
-            valueKey="url"
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
           />
         )}
         {advancedMode && props.data.folders.length > 0 && (
@@ -244,8 +244,8 @@ const FormComponent = (props: any) => {
             label={translate('Folder')}
             name="attributes.folder"
             options={props.data.folders}
-            labelKey="name"
-            valueKey="url"
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
           />
         )}
         {advancedMode && props.data.networks.length > 0 && (
@@ -253,9 +253,9 @@ const FormComponent = (props: any) => {
             label={translate('Networks')}
             name="attributes.networks"
             options={props.data.networks}
-            labelKey="name"
-            valueKey="url"
-            multi={true}
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
+            isMulti={true}
           />
         )}
         <TextField

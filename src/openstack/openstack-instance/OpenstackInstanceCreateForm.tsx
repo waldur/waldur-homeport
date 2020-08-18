@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Option } from 'react-select';
 import { Field } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -63,7 +62,7 @@ interface OpenstackInstanceCreateFormState {
   flavors: Flavor[];
   sshKeys: SshKey[];
   availabilityZones: AvailabilityZone[];
-  volumeTypes: Option[];
+  volumeTypes: any[];
   isDataVolumeActive: boolean;
 }
 

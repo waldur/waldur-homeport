@@ -1,17 +1,16 @@
 import * as React from 'react';
-import Select, { Options, Option } from 'react-select';
+import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { BillingType } from '@waldur/marketplace/types';
 
 interface Props {
   removeOfferingQuotas(): void;
 }
 
-export const getAccountingTypeOptions: () => Options<BillingType> = () => [
+export const getAccountingTypeOptions = () => [
   { label: translate('Usage-based'), value: 'usage' },
   { label: translate('Fixed price'), value: 'fixed' },
   { label: translate('One-time'), value: 'one' },
@@ -23,11 +22,7 @@ export const ComponentAccountingTypeField: React.FC<Props> = (props) => (
     <Field
       name="billing_type"
       validate={required}
-      onChange={(
-        _,
-        newOption: Option<BillingType>,
-        prevOption: Option<BillingType>,
-      ) => {
+      onChange={(_, newOption, prevOption) => {
         if (
           newOption &&
           prevOption &&
@@ -42,7 +37,7 @@ export const ComponentAccountingTypeField: React.FC<Props> = (props) => (
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           options={getAccountingTypeOptions()}
-          clearable={false}
+          isClearable={false}
         />
       )}
     />

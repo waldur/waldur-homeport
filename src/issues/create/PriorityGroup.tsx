@@ -26,9 +26,9 @@ export const PriorityGroup = ({ priorities, disabled }) => {
           component={SelectField}
           placeholder={translate('Select priority...')}
           options={priorities}
-          disabled={disabled}
-          valueKey="name"
-          labelKey="name"
+          isDisabled={disabled}
+          getOptionValue={(option) => option.name}
+          getOptionLabel={(option) => option.name}
         />
       </Col>
     </FormGroup>

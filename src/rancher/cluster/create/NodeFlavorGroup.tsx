@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Select, { Option } from 'react-select';
+import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -20,7 +20,7 @@ interface NodeFlavorGroupProps {
   labelClassName?: string;
   valueClassName?: string;
   nodeIndex?: number;
-  options: Option[];
+  options: any[];
 }
 
 export const NodeFlavorGroup: React.FC<NodeFlavorGroupProps> = (props) => {

@@ -3770,12 +3770,38 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
+#: src/marketplace/landing/LandingPage.tsx
+msgid "No apps and services"
+msgstr ""
+
+#: src/marketplace/resources/list/CategoryFilter.tsx
+msgid "No categories"
+msgstr ""
+
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
 msgid "No entries to show here"
 msgstr ""
 
+#: src/marketplace/offerings/details/OfferingAutocomplete.tsx
+msgid "No offerings"
+msgstr ""
+
+#: src/marketplace/orders/OrganizationAutocomplete.tsx
+msgid "No organizations"
+msgstr ""
+
+#: src/issues/create/ProjectGroup.tsx
+#: src/marketplace/resources/list/ProjectFilter.tsx
+msgid "No projects"
+msgstr ""
+
 #: src/customer/team/ProjectRolesList.tsx
 msgid "No projects are assigned to this role."
+msgstr ""
+
+#: src/marketplace/orders/ProviderAutocomplete.tsx
+#: src/resource/support/SharedProviderFilter.tsx
+msgid "No providers"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
@@ -7128,10 +7154,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Type is invalid."
-msgstr ""
-
-#: src/auth/saml2/AuthSaml2Dialog.tsx
-msgid "Type to search"
 msgstr ""
 
 #: src/rancher/catalog/ClusterCatalogList.tsx

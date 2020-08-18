@@ -17,7 +17,7 @@ import { AsyncSelectField } from './AsyncSelectField';
 import { ISSUE_REGISTRATION_FORM_ID } from './constants';
 import { callerSelector, customerSelector } from './selectors';
 
-const filterOptions = (options) => options;
+const filterOption = (options) => options;
 
 export const OrganizationGroup = ({ onSearch }) => {
   const dispatch = useDispatch();
@@ -53,16 +53,17 @@ export const OrganizationGroup = ({ onSearch }) => {
             component={AsyncSelectField}
             required
             placeholder={translate('Select organization...')}
-            clearable={true}
+            isClearable={true}
+            defaultOptions
             loadOptions={loadOptions}
-            labelKey="name"
-            valueKey="name"
-            filterOptions={filterOptions}
+            getOptionValue={(option) => option.name}
+            getOptionLabel={(option) => option.name}
+            filterOption={filterOption}
           />
         ) : (
           <Select
             options={[]}
-            disabled={true}
+            isDisabled={true}
             placeholder={translate('Select organization...')}
           />
         )}

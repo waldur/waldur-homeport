@@ -43,7 +43,7 @@ export const ComponentLimitPeriodField = (props: Props) => (
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           options={getLimitPeriods()}
-          clearable={false}
+          isClearable={false}
         />
       )}
     />

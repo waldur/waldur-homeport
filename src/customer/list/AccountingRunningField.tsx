@@ -19,7 +19,7 @@ export const AccountingRunningField = () => (
         value={prop.input.value}
         onChange={(value) => prop.input.onChange(value)}
         options={getOptions()}
-        clearable={false}
+        isClearable={false}
       />
     )}
   />

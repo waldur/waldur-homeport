@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as Panel from 'react-bootstrap/lib/Panel';
-import { Option } from 'react-select';
 import { FormSection, FormName } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -16,8 +15,8 @@ interface OwnProps {
   volumePath: string;
   nodeIndex: number;
   onRemove(index: number): void;
-  volumeTypes: Option[];
-  mountPoints: Option[];
+  volumeTypes: any[];
+  mountPoints: any[];
 }
 
 export const DataVolumePanel = (props: OwnProps) => (

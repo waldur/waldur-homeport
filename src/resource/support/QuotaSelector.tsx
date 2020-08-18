@@ -15,9 +15,9 @@ export const QuotaSelector = (props: QuotaSelectorProps) => (
     value={props.value}
     onChange={props.handleChange}
     options={props.quotas}
-    labelKey="title"
-    valueKey="key"
-    disabled={props.disabled}
-    clearable={false}
+    getOptionValue={(option) => option.key}
+    getOptionLabel={(option) => option.title}
+    isDisabled={props.disabled}
+    isClearable={false}
   />
 );

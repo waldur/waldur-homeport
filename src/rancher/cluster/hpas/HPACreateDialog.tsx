@@ -130,8 +130,8 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         name="namespace"
         label={translate('Namespace')}
         required={true}
-        labelKey="name"
-        valueKey="url"
+        getOptionValue={(option) => option.url}
+        getOptionLabel={(option) => option.name}
         options={value?.namespaces}
         isLoading={loading}
       />
@@ -139,11 +139,11 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         name="workload"
         label={translate('Workload')}
         required={true}
-        labelKey="name"
-        valueKey="url"
+        getOptionValue={(option) => option.url}
+        getOptionLabel={(option) => option.name}
         options={validWorkloads}
         isLoading={loading}
-        disabled={!namespace}
+        isDisabled={!namespace}
       />
       <NumberField
         name="min_replicas"

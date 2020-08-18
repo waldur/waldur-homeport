@@ -157,7 +157,7 @@ module.exports = {
   plugins: [
     new MonacoWebpackPlugin({
       // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
-      languages: ['json', 'yaml', 'shell', 'python']
+      languages: ['json', 'yaml', 'shell', 'python'],
     }),
 
     // Ignore all locale files of moment.js
@@ -169,7 +169,7 @@ module.exports = {
       inject: 'body',
       chunks: ['index'],
       alwaysWriteToDisk: true,
-      chunksSortMode: function(a, b) {
+      chunksSortMode: function (a, b) {
         return a.names[0] < b.names[0] ? 1 : -1;
       },
     }),

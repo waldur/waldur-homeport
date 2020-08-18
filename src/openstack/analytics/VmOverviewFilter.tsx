@@ -32,14 +32,14 @@ export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
               <Select
                 className="service-provider-selector"
                 placeholder={translate('Select service provider')}
-                labelKey="name"
-                valueKey="value"
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.name}
                 value={prop.input.value}
                 onChange={prop.input.onChange}
                 onBlur={() => prop.input.onBlur(prop.input.value)}
                 options={props.serviceProviders}
-                multi={true}
-                disabled={props.serviceProviders.length === 0}
+                isMulti={true}
+                isDisabled={props.serviceProviders.length === 0}
               />
             )}
           />

@@ -44,8 +44,6 @@ import 'angular-ui-bootstrap';
 import 'angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
 import 'angular-bind-html-compile-ci-dev';
 
-import 'react-select/dist/react-select.css';
-
 // if (process.env.NODE_ENV === 'production') {
 //   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 // }

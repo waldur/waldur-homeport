@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { Option } from 'react-select';
 import useAsync from 'react-use/lib/useAsync';
 import { reduxForm } from 'redux-form';
 
@@ -24,8 +23,8 @@ import { loadData } from './utils';
 
 interface OwnProps {
   resolve: { cluster: any };
-  flavors: Option[];
-  subnets: Option[];
+  flavors: any[];
+  subnets: any[];
 }
 
 interface FormData {

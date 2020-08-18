@@ -26,9 +26,9 @@ export const DescriptionStep = (props: DescriptionStepProps) => (
         label={props.translate('Category')}
         options={props.categories}
         required={true}
-        labelKey="title"
-        valueKey="url"
-        clearable={false}
+        getOptionValue={(option) => option.url}
+        getOptionLabel={(option) => option.title}
+        isClearable={false}
         validate={required}
         onChange={props.onCategoryChange}
       />

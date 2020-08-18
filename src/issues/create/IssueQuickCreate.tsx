@@ -21,7 +21,7 @@ import { TypeGroup } from './TypeGroup';
 import { IssueRequestPayload, IssueTypeOption } from './types';
 import { sendIssueCreateRequest } from './utils';
 
-const filterOptions = (options) => options;
+const filterOption = (options) => options;
 
 const ISSUE_QUICK_CREATE_FORM_ID = 'IssueQuickCreate';
 
@@ -47,12 +47,13 @@ const OrganizationGroup = ({ disabled }) => (
       name="customer"
       component={AsyncSelectField}
       placeholder={translate('Select organization...')}
-      clearable={true}
+      isClearable={true}
+      defaultOptions
       loadOptions={refreshCustomers}
-      labelKey="name"
-      valueKey="name"
-      filterOptions={filterOptions}
-      disabled={disabled}
+      getOptionValue={(option) => option.name}
+      getOptionLabel={(option) => option.name}
+      filterOption={filterOption}
+      isDisabled={disabled}
     />
   </FormGroup>
 );
@@ -103,18 +104,19 @@ const ProjectGroup = ({ disabled }) => {
           name="project"
           component={AsyncSelectField}
           placeholder={translate('Select project...')}
-          clearable={true}
+          isClearable={true}
+          defaultOptions
           loadOptions={loadOptions}
-          labelKey="name"
-          valueKey="name"
-          filterOptions={filterOptions}
-          disabled={disabled}
+          getOptionValue={(option) => option.name}
+          getOptionLabel={(option) => option.name}
+          filterOption={filterOption}
+          isDisabled={disabled}
           required={projectRequired}
         />
       ) : (
         <Select
           options={[]}
-          disabled={true}
+          isDisabled={true}
           placeholder={translate('Select project...')}
         />
       )}
@@ -142,17 +144,18 @@ const ResourceGroup = ({ disabled }) => {
           name="resource"
           component={AsyncSelectField}
           placeholder={translate('Select affected resource...')}
-          clearable={true}
+          isClearable={true}
+          defaultOptions
           loadOptions={loadData}
-          labelKey="name"
-          valueKey="name"
-          filterOptions={filterOptions}
-          disabled={disabled}
+          getOptionValue={(option) => option.name}
+          getOptionLabel={(option) => option.name}
+          filterOption={filterOption}
+          isDisabled={disabled}
         />
       ) : (
         <Select
           options={[]}
-          disabled={true}
+          isDisabled={true}
           placeholder={translate('Select affected resource...')}
         />
       )}

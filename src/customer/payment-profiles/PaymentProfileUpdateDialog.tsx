@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Option } from 'react-select';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
@@ -74,7 +73,7 @@ const PaymentProfileUpdateDialog = (props) => {
             options={paymentProfileTypeOptions}
             clearable={false}
             validate={required}
-            onChange={(value: Option<any>) =>
+            onChange={(value: any) =>
               setIsFixedPrice(value.value === 'fixed_price')
             }
           />

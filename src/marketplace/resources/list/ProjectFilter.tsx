@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Async } from 'react-select';
+import AsyncSelect from 'react-select/async';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -15,13 +15,15 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
     <Field
       name="project"
       component={(fieldProps) => (
-        <Async
+        <AsyncSelect
           placeholder={translate('Select project...')}
           loadOptions={projectAutocomplete(props.customer_uuid)}
-          valueKey="uuid"
-          labelKey="name"
+          defaultOptions
+          getOptionValue={(option) => option.uuid}
+          getOptionLabel={(option) => option.name}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
+          noOptionsMessage={() => translate('No projects')}
         />
       )}
     />

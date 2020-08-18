@@ -14,7 +14,7 @@ import { AsyncSelectField } from './AsyncSelectField';
 import { ISSUE_REGISTRATION_FORM_ID } from './constants';
 import { projectSelector, customerSelector } from './selectors';
 
-const filterOptions = (options) => options;
+const filterOption = (options) => options;
 
 export const ProjectGroup = ({ onSearch, disabled }) => {
   const dispatch = useDispatch();
@@ -46,18 +46,20 @@ export const ProjectGroup = ({ onSearch, disabled }) => {
             name="project"
             component={AsyncSelectField}
             placeholder={translate('Select project...')}
-            clearable={true}
+            isClearable={true}
+            defaultOptions
             loadOptions={loadOptions}
             minimalInput={0}
-            valueKey="uuid"
-            labelKey="name"
-            disabled={disabled}
-            filterOptions={filterOptions}
+            getOptionValue={(option) => option.uuid}
+            getOptionLabel={(option) => option.name}
+            isDisabled={disabled}
+            filterOption={filterOption}
+            noOptionsMessage={() => translate('No projects')}
           />
         ) : (
           <Select
             options={[]}
-            disabled={true}
+            isDisabled={true}
             placeholder={translate('Select project...')}
           />
         )}

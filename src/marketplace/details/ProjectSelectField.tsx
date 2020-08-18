@@ -16,10 +16,10 @@ const PureProjectSelectField = (props) => (
           fieldProps.input.onChange(value);
           props.setCurrentProject(value);
         }}
-        labelKey="name"
-        valueKey="url"
+        getOptionValue={(option) => option.url}
+        getOptionLabel={(option) => option.name}
         options={props.projects}
-        clearable={false}
+        isClearable={false}
       />
     )}
   />

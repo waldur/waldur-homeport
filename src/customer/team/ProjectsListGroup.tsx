@@ -34,7 +34,7 @@ export const ProjectsListGroup = ({ canChangeRole, projects }) => {
                   <Field
                     name={`projects[${index}].role`}
                     component={SelectField}
-                    disabled={!canChangeRole}
+                    isDisabled={!canChangeRole}
                     simpleValue={true}
                     options={[
                       { value: 'admin', label: translate(ENV.roles.admin) },

@@ -17,10 +17,10 @@ export const ProjectGroup = ({ customer, disabled }) => (
       component={SelectField}
       options={customer.projects}
       required={true}
-      disabled={disabled}
+      isDisabled={disabled}
       placeholder={translate('Select project')}
-      valueKey="uuid"
-      labelKey="name"
+      getOptionValue={(option) => option.uuid}
+      getOptionLabel={(option) => option.name}
     />
   </FormGroup>
 );

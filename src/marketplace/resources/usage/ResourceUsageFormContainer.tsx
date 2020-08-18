@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { Options, Option } from 'react-select';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
@@ -9,15 +8,11 @@ import { periodChanged } from '../store/actions';
 import { submitUsage, FORM_ID } from '../store/constants';
 
 import { ResourceUsageForm } from './ResourceUsageForm';
-import {
-  UsageReportContext,
-  ResourcePlanPeriod,
-  ComponentUsage,
-} from './types';
+import { UsageReportContext, ComponentUsage } from './types';
 
 interface Props {
   components: OfferingComponent[];
-  periods: Options<ResourcePlanPeriod>;
+  periods: any;
   params: UsageReportContext;
 }
 
@@ -47,8 +42,7 @@ const mapStateToProps = (_, ownProps: Props) =>
 
 const mapDispatchToProps = (dispatch) => ({
   submitReport: (data) => submitUsage(data, dispatch),
-  onPeriodChange: (option: Option<ResourcePlanPeriod>) =>
-    dispatch(periodChanged(option.value)),
+  onPeriodChange: (option) => dispatch(periodChanged(option.value)),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
