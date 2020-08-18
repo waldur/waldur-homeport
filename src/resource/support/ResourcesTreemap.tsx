@@ -4,7 +4,7 @@ import useAsync from 'react-use/lib/useAsync';
 import { compose } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $filter } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -23,12 +23,12 @@ const getQuotas = (): QuotaList => [
   {
     key: 'current_price',
     title: translate('Current price per month'),
-    tooltipValueFormatter: (value) => $filter('defaultCurrency')(value),
+    tooltipValueFormatter: (value) => defaultCurrency(value),
   },
   {
     key: 'estimated_price',
     title: translate('Esimated price per month'),
-    tooltipValueFormatter: (value) => $filter('defaultCurrency')(value),
+    tooltipValueFormatter: (value) => defaultCurrency(value),
   },
   {
     key: 'vpc_cpu_count',

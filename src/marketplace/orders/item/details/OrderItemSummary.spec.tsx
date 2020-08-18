@@ -2,6 +2,10 @@ import { BillingType } from '@waldur/marketplace/types';
 
 import { getUpdateSummary } from './OrderItemSummary';
 
+jest.mock('@waldur/core/services', () => ({
+  defaultCurrency: (val) => val,
+}));
+
 const COMPONENTS = [
   {
     billing_type: 'usage' as BillingType,
