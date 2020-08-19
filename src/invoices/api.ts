@@ -15,11 +15,12 @@ export const markAsPaid = (data) => {
   );
 };
 
-export const getAllInvoices = (startDate: string) =>
+export const getAllInvoices = (startDate: string, accountStatus: boolean) =>
   getAll<Invoice>('/invoices/', {
     params: {
       page_size: 200,
       field: ['month', 'year', 'total', 'customer_details'],
       start_date: `${startDate}-01`,
+      accounting_is_running: accountStatus,
     },
   });

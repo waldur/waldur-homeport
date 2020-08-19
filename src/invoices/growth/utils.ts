@@ -206,6 +206,10 @@ export const getEChartOptions = (invoices: Invoice[]) => {
       : `${period.monthName}, ${period.year}`,
   );
 
+  if (!invoices.length) {
+    return option;
+  }
+
   const invoicesData: InvoiceData[] = [];
   const customerNames = getCustomerNames(invoices);
   fillInvoicesData(lastTwelveMonths, invoices, customerNames, invoicesData);
