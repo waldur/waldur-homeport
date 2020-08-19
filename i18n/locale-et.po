@@ -8634,7 +8634,7 @@ msgstr "Teenusepakkuja"
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Service provider can charge for usage of the following components"
-msgstr "Teenusepakkuja võib kosida tasu järgmiste komponentide kasutamise eest"
+msgstr "Teenusepakkuja võib küsida tasu järgmiste komponentide kasutamise eest"
 
 #: src/marketplace/details/OverviewTab.tsx
 msgid "Service provider details"
