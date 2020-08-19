@@ -24,6 +24,7 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No projects')}
+          isClearable={true}
         />
       )}
     />

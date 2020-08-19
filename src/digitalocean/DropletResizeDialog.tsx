@@ -120,7 +120,7 @@ const FlavorGroup = ({ resource, flavors, submitting }) => (
         placeholder={translate('Select size...')}
         options={flavors}
         disabled={submitting}
-        clearable={false}
+        isClearable={false}
         required={true}
       />
     </FormGroup>

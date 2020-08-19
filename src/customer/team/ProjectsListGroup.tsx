@@ -40,6 +40,7 @@ export const ProjectsListGroup = ({ canChangeRole, projects }) => {
                       { value: 'admin', label: translate(ENV.roles.admin) },
                       { value: 'manager', label: translate(ENV.roles.manager) },
                     ]}
+                    isClearable={true}
                   />
                 </td>
                 <td>

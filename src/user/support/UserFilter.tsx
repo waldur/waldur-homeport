@@ -65,6 +65,7 @@ const PureUserFilter = (props: UserFilterProps) => (
         ]}
         isMulti={true}
         noUpdateOnBlur={true}
+        isClearable={true}
       />
       <SelectField
         className="Select"
@@ -87,6 +88,7 @@ const PureUserFilter = (props: UserFilterProps) => (
         ]}
         noUpdateOnBlur={true}
         simpleValue={true}
+        isClearable={true}
       />
     </FormContainer>
   </form>

@@ -54,6 +54,7 @@ export const configAttrField = (attribute) => {
             getOptionValue={(option) => option.key}
             getOptionLabel={(option) => option.title}
             isMulti={true}
+            isClearable={true}
           />
         ),
         normalize: (v) => (v ? v : ''),
@@ -68,6 +69,7 @@ export const configAttrField = (attribute) => {
             options={attribute.options}
             getOptionValue={(option) => option.key}
             getOptionLabel={(option) => option.title}
+            isClearable={true}
           />
         ),
         normalize: (v) => (v ? v : ''),

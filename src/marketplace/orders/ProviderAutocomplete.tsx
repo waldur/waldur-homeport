@@ -24,6 +24,7 @@ export const ProviderAutocomplete: React.FC<Props> = (props) => (
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No providers')}
+          isClearable={true}
         />
       )}
     />

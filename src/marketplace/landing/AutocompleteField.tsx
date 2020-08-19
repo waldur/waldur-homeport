@@ -43,5 +43,6 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => (
     value={props.value}
     onChange={(value: any) => props.onChange(value)}
     noOptionsMessage={props.noOptionsMessage}
+    isClearable={true}
   />
 );

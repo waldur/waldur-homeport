@@ -30,6 +30,7 @@ export const AvailabilityZoneGroup = (props) =>
             options={props.availabilityZones}
             getOptionValue={(option) => option.url}
             getOptionLabel={(option) => option.name}
+            isClearable={true}
           />
         )}
       />

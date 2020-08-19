@@ -29,6 +29,7 @@ class PureOrderStateFilter extends React.Component<Props> {
               options={this.props.orderFilterStateOptions}
               value={fieldProps.input.value}
               onChange={(value) => fieldProps.input.onChange(value)}
+              isClearable={true}
             />
           )}
         />

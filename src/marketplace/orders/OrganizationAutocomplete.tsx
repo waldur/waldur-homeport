@@ -20,6 +20,7 @@ export const OrganizationAutocomplete = () => (
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No organizations')}
+          isClearable={true}
         />
       )}
     />

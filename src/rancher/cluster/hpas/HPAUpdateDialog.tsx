@@ -131,12 +131,14 @@ export const HPAUpdateDialog = reduxForm<HPAUpdateFormData, OwnProps>({
         label={translate('Metric name')}
         required={true}
         options={metricNameOptions}
+        isClearable={true}
       />
       <SelectField
         name="target_type"
         label={translate('Target type')}
         required={true}
         options={targetTypeOptions}
+        isClearable={true}
       />
       <NumberField
         name="quantity"

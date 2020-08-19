@@ -91,6 +91,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
             getOptionLabel={(option) => option.name}
             defaultOptions
             loadOptions={loadSshKeyOptions}
+            isClearable={true}
           />
         )}
         <AwesomeCheckboxField

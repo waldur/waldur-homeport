@@ -36,6 +36,7 @@ export const OpenStackPluginOptionsForm = ({ container }) => {
         options={STORAGE_MODE_OPTIONS}
         simpleValue={true}
         required={true}
+        isClearable={false}
       />
       {pluginOptions && pluginOptions.storage_mode == 'dynamic' && (
         <NumberField

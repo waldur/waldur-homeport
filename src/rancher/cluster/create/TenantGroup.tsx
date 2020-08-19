@@ -142,6 +142,7 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
               options={resourceProps.value.templates}
               getOptionValue={(option) => option.uuid}
               getOptionLabel={(option) => option.name}
+              isClearable={true}
             />
           </FormGroup>
         ) : null}
@@ -158,6 +159,7 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
               getOptionValue={(option) => option.url}
               getOptionLabel={(option) => option.name}
               isMulti={true}
+              isClearable={true}
             />
           </FormGroup>
         ) : null}

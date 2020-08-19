@@ -32,6 +32,7 @@ export const ProjectCreateForm = (props) => (
           options={props.projectTypes}
           getOptionValue={(option) => option.url}
           getOptionLabel={(option) => option.name}
+          isClearable={true}
         />
       )}
       {props.certifications.length >= 1 && (
@@ -46,6 +47,7 @@ export const ProjectCreateForm = (props) => (
           getOptionValue={(option) => option.url}
           getOptionLabel={(option) => option.name}
           isMulti={true}
+          isClearable={true}
         />
       )}
     </FormContainer>

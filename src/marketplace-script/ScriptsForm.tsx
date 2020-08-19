@@ -34,6 +34,7 @@ export const ScriptsForm = ({ container }) => {
           options={PROGRAMMING_LANGUAGE_CHOICES}
           simpleValue={true}
           required={true}
+          isClearable={false}
         />
         <MonacoField
           name="create"

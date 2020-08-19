@@ -22,6 +22,7 @@ export const BookingStateFilter = () => (
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           isMulti={true}
+          isClearable={true}
         />
       )}
     />

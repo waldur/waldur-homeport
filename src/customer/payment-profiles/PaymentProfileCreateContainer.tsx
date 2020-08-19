@@ -55,7 +55,7 @@ const PaymentProfileCreate = (props) => {
           label={translate('Type')}
           required={true}
           options={paymentProfileTypeOptions}
-          clearable={false}
+          isClearable={false}
           validate={required}
           onChange={(value: any) =>
             setIsFixedPrice(value.value === 'fixed_price')
