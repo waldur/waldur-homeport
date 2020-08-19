@@ -134,6 +134,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         getOptionLabel={(option) => option.name}
         options={value?.namespaces}
         isLoading={loading}
+        isClearable={true}
       />
       <SelectField
         name="workload"
@@ -144,6 +145,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         options={validWorkloads}
         isLoading={loading}
         isDisabled={!namespace}
+        isClearable={true}
       />
       <NumberField
         name="min_replicas"
@@ -164,12 +166,14 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         label={translate('Metric name')}
         required={true}
         options={metricNameOptions}
+        isClearable={true}
       />
       <SelectField
         name="target_type"
         label={translate('Target type')}
         required={true}
         options={targetTypeOptions}
+        isClearable={true}
       />
       <NumberField
         name="quantity"

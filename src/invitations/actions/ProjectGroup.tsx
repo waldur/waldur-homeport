@@ -21,6 +21,7 @@ export const ProjectGroup = ({ customer, disabled }) => (
       placeholder={translate('Select project')}
       getOptionValue={(option) => option.uuid}
       getOptionLabel={(option) => option.name}
+      isClearable={true}
     />
   </FormGroup>
 );

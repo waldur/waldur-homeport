@@ -50,6 +50,7 @@ export const CountryGroup = () => {
       getOptionLabel={(option) => option.display_name}
       options={value || []}
       isLoading={loading}
+      isClearable={true}
     />
   );
 };

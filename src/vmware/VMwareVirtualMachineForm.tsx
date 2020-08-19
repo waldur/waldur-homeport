@@ -228,6 +228,7 @@ const FormComponent = (props: any) => {
             options={props.data.clusters}
             getOptionValue={(option) => option.url}
             getOptionLabel={(option) => option.name}
+            isClearable={true}
           />
         )}
         {advancedMode && props.data.datastores.length > 0 && (
@@ -237,6 +238,7 @@ const FormComponent = (props: any) => {
             options={props.data.datastores}
             getOptionValue={(option) => option.url}
             getOptionLabel={(option) => option.name}
+            isClearable={true}
           />
         )}
         {advancedMode && props.data.folders.length > 0 && (
@@ -246,6 +248,7 @@ const FormComponent = (props: any) => {
             options={props.data.folders}
             getOptionValue={(option) => option.url}
             getOptionLabel={(option) => option.name}
+            isClearable={true}
           />
         )}
         {advancedMode && props.data.networks.length > 0 && (
@@ -256,6 +259,7 @@ const FormComponent = (props: any) => {
             getOptionValue={(option) => option.url}
             getOptionLabel={(option) => option.name}
             isMulti={true}
+            isClearable={true}
           />
         )}
         <TextField

@@ -20,6 +20,7 @@ export const CategoryFilter: React.FC<{}> = () => (
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No categories')}
+          isClearable={true}
         />
       )}
     />

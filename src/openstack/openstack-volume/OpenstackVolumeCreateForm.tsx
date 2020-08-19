@@ -121,6 +121,7 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
                 ? required
                 : undefined
             }
+            isClearable={true}
           />
         )}
         {state.value.volumeTypes.length > 0 && (
@@ -129,6 +130,7 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
             name="attributes.type"
             options={state.value.volumeTypes}
             required={true}
+            isClearable={true}
           />
         )}
         <TextField

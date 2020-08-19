@@ -13,6 +13,7 @@ const SelectFlavorField = (props) => (
     value={props.input.value}
     onChange={props.input.onChange}
     options={props.options}
+    isClearable={true}
   />
 );
 
@@ -36,6 +37,7 @@ export const NodeFlavorGroup: React.FC<NodeFlavorGroupProps> = (props) => {
         component={SelectFlavorField}
         options={props.options}
         validate={required}
+        isClearable={true}
       />
       <LonghornWorkerWarning nodeIndex={props.nodeIndex} />
     </FormGroup>

@@ -29,6 +29,7 @@ export const PriorityGroup = ({ priorities, disabled }) => {
           isDisabled={disabled}
           getOptionValue={(option) => option.name}
           getOptionLabel={(option) => option.name}
+          isClearable={true}
         />
       </Col>
     </FormGroup>

@@ -55,6 +55,7 @@ const PureFlowMapFilter = (props: FlowMapFilterProps) => (
             label={props.translate('Metric')}
             name="metric"
             options={metricOptions}
+            isClearable={true}
           />
           <CheckboxField
             checked={false}
@@ -71,6 +72,7 @@ const PureFlowMapFilter = (props: FlowMapFilterProps) => (
             label={props.translate('Service provider type')}
             name="service_provider_type"
             options={serviceProviderTypeOptions}
+            isClearable={true}
           />
         </FormContainer>
       </form>

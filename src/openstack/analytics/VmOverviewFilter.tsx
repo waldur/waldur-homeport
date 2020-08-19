@@ -40,6 +40,7 @@ export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
                 options={props.serviceProviders}
                 isMulti={true}
                 isDisabled={props.serviceProviders.length === 0}
+                isClearable={true}
               />
             )}
           />

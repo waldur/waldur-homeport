@@ -77,6 +77,7 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
                   isDisabled={submitting}
                   getOptionValue={(option) => option.uuid}
                   getOptionLabel={(option) => option.name}
+                  isClearable={true}
                 />
               </FormGroup>
             )}

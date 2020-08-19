@@ -18,6 +18,7 @@ const SelectTenantField = (props) => (
     options={props.options}
     getOptionValue={(option) => option.settings}
     getOptionLabel={(option) => option.name}
+    isClearable={true}
   />
 );
 

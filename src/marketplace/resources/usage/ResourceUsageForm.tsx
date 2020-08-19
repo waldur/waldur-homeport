@@ -79,7 +79,7 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
             )}
             options={props.periods}
             onChange={props.onPeriodChange}
-            clearable={false}
+            isClearable={false}
           />
         ) : (
           <StaticPlanField />
