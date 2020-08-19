@@ -52,7 +52,9 @@ export interface Cluster {
   name: string;
   uuid: string;
   marketplace_category_uuid: string;
+  marketplace_offering_uuid: string;
   service_project_link: string;
+  tenant_settings?: string;
 }
 
 export interface Secret {
