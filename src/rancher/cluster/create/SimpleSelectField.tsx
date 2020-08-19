@@ -1,11 +1,11 @@
 import * as React from 'react';
-import Select from 'react-select';
 
 import { FieldError } from '@waldur/form';
+import { SelectControl } from '@waldur/form/SelectControl';
 
 export const SimpleSelectField = (props) => (
   <>
-    <Select
+    <SelectControl
       value={props.options.filter(({ value }) => value === props.input.value)}
       onChange={({ value }) => props.input.onChange(value)}
       options={props.options}
