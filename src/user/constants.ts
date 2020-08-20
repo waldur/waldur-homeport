@@ -63,3 +63,5 @@ export const getPublicUserTabs = (user) => [
     feature: 'user.ssh-keys',
   },
 ];
+
+export const SELECT_ORGANIZATION_FORM_ID = 'SelectOrganization';
