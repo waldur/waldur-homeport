@@ -8,7 +8,11 @@ import { CategoriesListType } from '@waldur/marketplace/types';
 
 import { CategoryCard } from './CategoryCard';
 
-interface CategoriesListProps extends TranslateProps, CategoriesListType {}
+interface CategoriesListProps extends TranslateProps, CategoriesListType {
+  hideCounter?: boolean;
+  hideCategoryWithNoOfferings?: boolean;
+  userDashboardView?: boolean;
+}
 
 export const CategoriesList = withTranslation((props: CategoriesListProps) => {
   if (props.loading) {
@@ -35,7 +39,12 @@ export const CategoriesList = withTranslation((props: CategoriesListProps) => {
     <Row>
       {props.items.map((category, index) => (
         <Col key={index} md={2} sm={6}>
-          <CategoryCard category={category} />
+          <CategoryCard
+            category={category}
+            hideCounter={props.hideCounter}
+            hideCategoryWithNoOfferings={props.hideCategoryWithNoOfferings}
+            userDashboardView={props.userDashboardView}
+          />
         </Col>
       ))}
     </Row>
