@@ -30,6 +30,9 @@ interface StateProps {
 }
 
 export const TableComponent = (props) => {
+  React.useEffect(() => {
+    props.resetPagination();
+  }, [props.filter]);
   const columns = [
     {
       title: translate('Name'),
