@@ -6,6 +6,7 @@ interface StringFieldProps extends FormField {
   placeholder?: string;
   style?: any;
   maxLength?: number;
+  pattern?: string;
 }
 
 export const StringField = (props: StringFieldProps) => {

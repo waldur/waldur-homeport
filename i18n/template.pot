@@ -428,10 +428,6 @@ msgstr ""
 msgid "Allocation description"
 msgstr ""
 
-#: src/slurm/actions.ts
-msgid "Allocation has been updated."
-msgstr ""
-
 #: src/slurm/AllocationForm.tsx
 msgid "Allocation name"
 msgstr ""
@@ -2765,10 +2761,6 @@ msgstr ""
 msgid "Instance does not have any security groups yet."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/EditAction.ts
-msgid "Instance has been updated."
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/StartAction.ts
 msgid "Instance is already active."
 msgstr ""
@@ -4098,6 +4090,7 @@ msgstr ""
 msgid "OpenStack events"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/EditAction.ts
 #: src/openstack/openstack-instance/marketplace.ts
 #: src/rancher/node/actions/LinkAction.ts
 msgid "OpenStack instance"
@@ -4115,6 +4108,11 @@ msgstr ""
 msgid "OpenStack package {tenant_name} has been deleted."
 msgstr ""
 
+#: src/openstack/openstack-tenant/actions/EditAction.ts
+msgid "OpenStack tenant"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/EditAction.ts
 #: src/openstack/openstack-volume/marketplace.ts
 msgid "OpenStack volume"
 msgstr ""
@@ -5591,7 +5589,6 @@ msgstr ""
 msgid "Resource has been deleted."
 msgstr ""
 
-#: src/resource/actions/base.ts
 #: src/resource/actions/constants.ts
 msgid "Resource has been updated."
 msgstr ""
@@ -5777,6 +5774,7 @@ msgstr ""
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr ""
 
+#: src/slurm/actions.ts
 #: src/slurm/marketplace.ts
 #: src/slurm/register-header.ts
 msgid "SLURM allocation"
@@ -6765,10 +6763,6 @@ msgstr ""
 msgid "Tenant description"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/EditAction.ts
-msgid "Tenant has been updated."
-msgstr ""
-
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/marketplace.ts
@@ -7740,6 +7734,10 @@ msgstr ""
 msgid "Unable to update user."
 msgstr ""
 
+#: src/resource/actions/base.ts
+msgid "Unable to update {verboseName}."
+msgstr ""
+
 #: src/issues/attachments/effects.ts
 msgid "Unable to upload attachment."
 msgstr ""
@@ -8164,7 +8162,7 @@ msgid "VM name"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/EditAction.ts
-msgid "VM snapshot has been updated."
+msgid "VM snapshot"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupScheduleWarning.tsx
@@ -8295,10 +8293,6 @@ msgstr ""
 
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 msgid "Volume has been extended."
-msgstr ""
-
-#: src/openstack/openstack-volume/actions/EditAction.ts
-msgid "Volume has been updated."
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
@@ -9003,6 +8997,10 @@ msgstr ""
 
 #: src/customer/dashboard/api.ts
 msgid "{value} at {date}, estimated"
+msgstr ""
+
+#: src/resource/actions/base.ts
+msgid "{verboseName} has been updated."
 msgstr ""
 
 #: src/customer/create/CustomerCreatePromptContainer.tsx

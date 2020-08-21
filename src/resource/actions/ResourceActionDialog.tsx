@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, initialize } from 'redux-form';
 
 import { StringField, TextField } from '@waldur/form';
+import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 
@@ -44,6 +45,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
               label={field.label}
               required={field.required}
               maxLength={field.maxlength}
+              pattern={field?.pattern?.source}
             />
           );
         } else if (field.type === 'text') {
@@ -54,6 +56,16 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
               label={field.label}
               required={field.required}
               maxLength={field.maxlength}
+            />
+          );
+        } else if (field.type === 'datetime') {
+          return (
+            <DateField
+              key={key}
+              name={key}
+              label={field.label}
+              required={field.required}
+              description={field.help_text}
             />
           );
         }
