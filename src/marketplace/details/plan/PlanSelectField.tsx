@@ -19,10 +19,10 @@ export const PlanSelectField = (props: PlanSelectFieldProps) => (
         <Select
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          labelKey="name"
-          valueKey="url"
+          getOptionValue={(option) => option.url}
+          getOptionLabel={(option) => option.name}
           options={props.plans}
-          clearable={false}
+          isClearable={false}
         />
         {fieldProps.meta.touched && (
           <FieldError error={fieldProps.meta.error} />

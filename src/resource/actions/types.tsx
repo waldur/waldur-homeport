@@ -59,7 +59,9 @@ type ActionType = 'button' | 'form' | 'callback';
 
 type ActionMethod = 'POST' | 'PUT' | 'DELETE';
 
-type ActionValidator<Resource> = (ctx: ActionContext<Resource>) => string;
+export type ActionValidator<Resource> = (
+  ctx: ActionContext<Resource>,
+) => string;
 
 export interface ResourceAction<Resource = BaseResource> {
   name: string;

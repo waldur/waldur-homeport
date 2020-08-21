@@ -45,6 +45,7 @@ export const WizardFormFirstPage = (props) => (
           component={SelectField}
           label={translate('Organization type')}
           options={formatCompanyTypes(ENV)}
+          isClearable={true}
         />
       )}
       <InputGroup

@@ -1,9 +1,17 @@
 import { ENV } from '@waldur/core/services';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { ResourceState } from '@waldur/resource/types';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { ResourceState, BaseResource } from '@waldur/resource/types';
+import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 
-import { ResourceAction, ActionField, ActionContext } from './types';
+import { ResourceActionDialog } from './ResourceActionDialog';
+import {
+  ResourceAction,
+  ActionField,
+  ActionContext,
+  ActionValidator,
+} from './types';
 
 export function createLatinNameField(): ActionField {
   return {
@@ -36,14 +44,55 @@ export function createDescriptionField(): ActionField {
   };
 }
 
-export function createDefaultEditAction(): ResourceAction {
+export function createEditAction<Resource extends BaseResource>({
+  fields,
+  validators,
+  updateResource,
+  verboseName,
+  resource,
+  getInitialValues,
+}: {
+  fields?: ActionField<Resource>[];
+  validators?: ActionValidator<Resource>[];
+  updateResource(id: string, formData: any): Promise<any>;
+  verboseName: string;
+  resource: Resource;
+  getInitialValues?(): any;
+}): ResourceAction<Resource> {
   return {
     name: 'update',
     title: translate('Edit'),
     type: 'form',
-    method: 'PUT',
-    successMessage: translate('Resource has been updated.'),
-    fields: [createNameField(), createDescriptionField()],
+    fields,
+    validators,
+    component: ResourceActionDialog,
+    useResolve: true,
+    getInitialValues:
+      getInitialValues ||
+      (() => ({
+        name: resource.name,
+        description: resource.description,
+      })),
+    submitForm: async (dispatch, formData) => {
+      try {
+        await updateResource(resource.uuid, formData);
+        dispatch(
+          showSuccess(
+            translate('{verboseName} has been updated.', { verboseName }),
+          ),
+        );
+        dispatch(closeModalDialog());
+      } catch (e) {
+        dispatch(
+          showErrorResponse(
+            e,
+            translate('Unable to update {verboseName}.', {
+              verboseName,
+            }),
+          ),
+        );
+      }
+    },
   };
 }
 

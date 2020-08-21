@@ -85,13 +85,12 @@ export const CalendarSettings: React.FC = () => {
           instanceId="startTime"
           className="col-xs-4"
           name="startTime"
-          simpleValue={true}
-          searchable={false}
-          clearable={false}
-          multi={false}
+          isSearchable={false}
+          isClearable={false}
+          isMulti={false}
           options={getOptions(60)}
-          value={startTime}
-          onChange={setStartTime}
+          value={getOptions(60).filter(({ value }) => value === startTime)}
+          onChange={(newValue: any) => setStartTime(newValue.value)}
         />
         <label
           className="col-xs-2 control-label"
@@ -103,13 +102,14 @@ export const CalendarSettings: React.FC = () => {
           instanceId="endTime"
           name="endTime"
           className="col-xs-4"
-          simpleValue={true}
-          searchable={false}
-          clearable={false}
-          multi={false}
+          isSearchable={false}
+          isClearable={false}
+          isMulti={false}
           options={[...getOptions(60), { value: '24:00', label: '24:00' }]}
-          value={endTime}
-          onChange={setEndTime}
+          value={[...getOptions(60), { value: '24:00', label: '24:00' }].filter(
+            ({ value }) => value === endTime,
+          )}
+          onChange={(newValue: any) => newValue.value === setEndTime}
         />
       </FormGroup>
 
@@ -166,13 +166,14 @@ export const CalendarSettings: React.FC = () => {
       >
         <Select
           name="timeSlotSelect"
-          simpleValue={true}
-          searchable={false}
-          clearable={false}
-          multi={false}
+          isSearchable={false}
+          isClearable={false}
+          isMulti={false}
           options={getDurationOptions(lang)}
-          value={slotDuration}
-          onChange={setSlotDuration}
+          value={getDurationOptions(lang).filter(
+            ({ value }) => value === slotDuration,
+          )}
+          onChange={(newValue: any) => setSlotDuration(newValue.value)}
         />
       </FormGroup>
 
@@ -183,12 +184,11 @@ export const CalendarSettings: React.FC = () => {
       >
         <Select
           name="timeZone"
-          simpleValue={true}
-          searchable={true}
-          clearable={false}
+          isSearchable={true}
+          isClearable={false}
           options={timeZoneArray}
-          value={timeZone}
-          onChange={setTimeZone}
+          value={timeZoneArray.filter(({ value }) => value === timeZone)}
+          onChange={(newValue: any) => setTimeZone(newValue.value)}
         />
       </FormGroup>
     </>

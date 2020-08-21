@@ -12,8 +12,28 @@ export let $q = null;
 // When application is initialized, it is replaced with actual service.
 export let $sanitize = (x) => x;
 
-export const defaultCurrency = (value) =>
-  $filter ? $filter('defaultCurrency')(value) : value;
+export const formatCurrency = (
+  value: string | number,
+  currency: string,
+  fractionSize: number,
+) => {
+  if (typeof value === 'string') value = parseFloat(value);
+  return `${currency}${value.toFixed(fractionSize)}`;
+};
+
+export const defaultCurrency = (value) => {
+  if (value === undefined || value === null) {
+    return value;
+  }
+  let fractionSize = 2;
+  if (value !== 0 && Math.abs(value) < 0.01) {
+    fractionSize = 3;
+  }
+  if (value !== 0 && Math.abs(value) < 0.001) {
+    fractionSize = 4;
+  }
+  return formatCurrency(value, ENV.currency, fractionSize);
+};
 
 export default function injectServices($injector) {
   ENV = $injector.get('ENV');
@@ -29,23 +49,3 @@ export default function injectServices($injector) {
   ngInjector = $injector;
 }
 injectServices.$inject = ['$injector'];
-
-/*
-  Previously we have scheduled multiple concurrent REST API
-  requests even if previous task has not been completed yet.
-  It happens if either network or backend server is slow.
-  Instead new task should be scheduled if previous have been completed.
-  */
-export const blockingExecutor = (callback: () => Promise<any>) => {
-  let isExecuting = false;
-  return () => {
-    if (isExecuting) {
-      return;
-    }
-    isExecuting = true;
-    return $q.when(callback()).finally(() => (isExecuting = false));
-  };
-};
-
-export const cacheInvalidationFactory = (service) => () =>
-  ngInjector.get(service).clearAllCacheForCurrentEndpoint();

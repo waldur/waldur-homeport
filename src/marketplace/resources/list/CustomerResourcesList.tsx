@@ -1,7 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Option } from 'react-select';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
@@ -14,14 +13,12 @@ import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
-import { ResourceState } from '../types';
-
 import { CustomerResourcesListPlaceholder } from './CustomerResourcesListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 
 interface ResourceFilter {
-  state?: Option<ResourceState>;
+  state?: any;
   project?: Project;
   category?: Category;
 }

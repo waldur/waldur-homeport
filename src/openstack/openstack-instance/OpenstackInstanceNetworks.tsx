@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Table from 'react-bootstrap/lib/Table';
-import Select, { Option, OptionValues } from 'react-select';
+import Select from 'react-select';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -8,8 +8,8 @@ import { internalIpFormatter } from '@waldur/openstack/openstack-instance/openst
 import { Subnet, FloatingIp } from '@waldur/openstack/openstack-instance/types';
 
 interface NetworkItem {
-  subnet?: Option<OptionValues>;
-  floatingIp?: Option<OptionValues>;
+  subnet?;
+  floatingIp;
 }
 
 interface OpenstackInstanceNetworksComponentProps {
@@ -137,8 +137,8 @@ export class OpenstackInstanceNetworks extends React.Component<
                         /* Noop */
                       }}
                       options={this.getFreeSubnets()}
-                      clearable={false}
-                      valueKey="url"
+                      isClearable={false}
+                      getOptionValue={(option) => option.url}
                     />
                   </td>
                   <td className="col-md-5">
@@ -152,10 +152,10 @@ export class OpenstackInstanceNetworks extends React.Component<
                         /* Noop */
                       }}
                       options={this.getFreeFloatingIps()}
-                      disabled={this.disableFloatingIpSelect(index)}
-                      clearable={false}
-                      labelKey="address"
-                      valueKey="url"
+                      isDisabled={this.disableFloatingIpSelect(index)}
+                      isClearable={false}
+                      getOptionValue={(option) => option.url}
+                      getOptionLabel={(option) => option.address}
                     />
                   </td>
                   <td className="p-r-n">

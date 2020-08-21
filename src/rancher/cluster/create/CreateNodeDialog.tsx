@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { Option } from 'react-select';
 import useAsync from 'react-use/lib/useAsync';
 import { reduxForm } from 'redux-form';
 
@@ -14,6 +13,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Flavor } from '@waldur/openstack/openstack-instance/types';
 import { createNode } from '@waldur/rancher/api';
+import { Cluster } from '@waldur/rancher/types';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
 import { NodeFlavorGroup } from './NodeFlavorGroup';
@@ -24,8 +24,8 @@ import { loadData } from './utils';
 
 interface OwnProps {
   resolve: { cluster: any };
-  flavors: Option[];
-  subnets: Option[];
+  flavors: any[];
+  subnets: any[];
 }
 
 interface FormData {
@@ -58,7 +58,7 @@ const serializeNode = (cluster, formData) => ({
   data_volumes: (formData.data_volumes || []).map(serializeDataVolume),
 });
 
-const loadNodeCreateData = async (cluster) => {
+const loadNodeCreateData = async (cluster: Cluster) => {
   const offering = await getOffering(cluster.marketplace_offering_uuid);
   return await loadData(cluster.tenant_settings, offering);
 };

@@ -40,7 +40,7 @@ export const ManagementStep = (props: ManagementStepProps) => (
           label={props.translate('Type')}
           required={true}
           options={props.offeringTypes}
-          clearable={false}
+          isClearable={false}
           validate={required}
         />
       ) : (

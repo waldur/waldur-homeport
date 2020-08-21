@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Option } from 'react-select';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
@@ -56,9 +55,9 @@ const PaymentProfileCreate = (props) => {
           label={translate('Type')}
           required={true}
           options={paymentProfileTypeOptions}
-          clearable={false}
+          isClearable={false}
           validate={required}
-          onChange={(value: Option<any>) =>
+          onChange={(value: any) =>
             setIsFixedPrice(value.value === 'fixed_price')
           }
         />

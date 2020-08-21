@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { FieldArray } from 'redux-form';
 
 import { FormContainer, SelectField } from '@waldur/form';
+import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
 import { getForm } from '@waldur/marketplace/offerings/store/selectors';
 
 import { EnvironmentVariablesList } from './EnvironmentVariablesList';
-import { MonacoField } from './MonacoField';
 
 const PROGRAMMING_LANGUAGE_CHOICES = [
   {
@@ -34,6 +34,7 @@ export const ScriptsForm = ({ container }) => {
           options={PROGRAMMING_LANGUAGE_CHOICES}
           simpleValue={true}
           required={true}
+          isClearable={false}
         />
         <MonacoField
           name="create"

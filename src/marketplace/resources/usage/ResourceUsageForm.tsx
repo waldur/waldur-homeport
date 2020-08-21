@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Options } from 'react-select';
 import { InjectedFormProps, Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -17,7 +16,7 @@ import { UsageReportContext } from './types';
 
 export interface ResourceUsageFormProps extends InjectedFormProps {
   components: OfferingComponent[];
-  periods: Options;
+  periods: any;
   params: UsageReportContext;
   submitReport(): void;
   onPeriodChange(): void;
@@ -80,7 +79,7 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
             )}
             options={props.periods}
             onChange={props.onPeriodChange}
-            clearable={false}
+            isClearable={false}
           />
         ) : (
           <StaticPlanField />

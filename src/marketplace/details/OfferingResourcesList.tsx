@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Option } from 'react-select';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
@@ -19,7 +18,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 interface OfferingResourceFilter {
-  state?: Option<ResourceState>;
+  state?: ResourceState;
 }
 
 interface StateProps {

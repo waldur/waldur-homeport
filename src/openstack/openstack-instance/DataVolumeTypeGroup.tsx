@@ -17,6 +17,7 @@ export const DataVolumeTypeGroup = (props) =>
         options={props.volumeTypes}
         component={SimpleSelectField}
         validate={required}
+        isClearable={true}
       />
     </CreateResourceFormGroup>
   ) : null;

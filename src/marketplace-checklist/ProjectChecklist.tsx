@@ -48,12 +48,12 @@ export const ProjectChecklist = () => {
     return (
       <>
         <Select
-          labelKey="name"
-          valueKey="uuid"
+          getOptionValue={(option) => option.uuid}
+          getOptionLabel={(option) => option.name}
           value={state.checklist}
           onChange={state.setChecklist}
           options={state.checklistOptions}
-          clearable={false}
+          isClearable={false}
         />
         {state.questionsLoading ? (
           <LoadingSpinner />

@@ -1,18 +1,19 @@
 import * as React from 'react';
-import Select, { Option } from 'react-select';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
+import { SelectControl } from '@waldur/form/SelectControl';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { LonghornWorkerWarning } from './LonghornWorkerWarning';
 
 const SelectFlavorField = (props) => (
-  <Select
+  <SelectControl
     value={props.input.value}
     onChange={props.input.onChange}
     options={props.options}
+    isClearable={true}
   />
 );
 
@@ -20,7 +21,7 @@ interface NodeFlavorGroupProps {
   labelClassName?: string;
   valueClassName?: string;
   nodeIndex?: number;
-  options: Option[];
+  options: any[];
 }
 
 export const NodeFlavorGroup: React.FC<NodeFlavorGroupProps> = (props) => {
@@ -36,8 +37,9 @@ export const NodeFlavorGroup: React.FC<NodeFlavorGroupProps> = (props) => {
         component={SelectFlavorField}
         options={props.options}
         validate={required}
+        isClearable={true}
       />
-      <LonghornWorkerWarning nodeIndex={props.nodeIndex} />
+      {props.nodeIndex && <LonghornWorkerWarning nodeIndex={props.nodeIndex} />}
     </FormGroup>
   );
 };

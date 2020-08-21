@@ -61,6 +61,7 @@ const TableOptions: TableOptionsType = {
     catalog_uuid: props.catalogUuid,
   }),
   queryField: 'name',
+  mapPropsToTableId: (props) => [props.catalogUuid],
 };
 
 export const CatalogTemplatesList = connectTable(TableOptions)(

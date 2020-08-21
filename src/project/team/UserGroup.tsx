@@ -23,6 +23,7 @@ export const UserGroup = ({ editUser, users, disabled }) =>
         component={SelectField}
         disabled={disabled}
         options={users}
+        isClearable={true}
         placeholder={translate('Select user...')}
         valueRenderer={(option) => option.full_name || option.username}
         optionRenderer={(option) => (

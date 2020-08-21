@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { defaultCurrency } from '@waldur/core/services';
+import { formatCurrency, ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
@@ -32,7 +32,7 @@ export const LimitlessComponentsTable = ({
             <p>{component.measured_unit}</p>
           </td>
           <td>
-            <p>{defaultCurrency(component.price)}</p>
+            <p>{formatCurrency(component.price, ENV.currency, 4)}</p>
           </td>
         </tr>
       ))}

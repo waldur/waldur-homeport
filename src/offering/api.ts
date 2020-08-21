@@ -1,4 +1,4 @@
-import { getAll, getById, post } from '@waldur/core/api';
+import { getAll, getById, post, put } from '@waldur/core/api';
 import { Customer } from '@waldur/customer/types';
 import { Project } from '@waldur/workspace/types';
 
@@ -52,3 +52,6 @@ export const setBackendID = (
   resourceUuid: string,
   formData: { backend_id: string },
 ) => post(`/support-offerings/${resourceUuid}/set_backend_id/`, formData);
+
+export const updateOffering = (id, data) =>
+  put(`/support-offerings/${id}/`, data);

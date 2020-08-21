@@ -7,7 +7,6 @@ import actionFieldCrontab from './action-field-crontab';
 import actionFieldDatetime from './action-field-datetime';
 import actionFieldDecimal from './action-field-decimal';
 import actionFieldInteger from './action-field-integer';
-import actionFieldJson from './action-field-json';
 import actionFieldMultiselect from './action-field-multiselect';
 import actionFieldSelect from './action-field-select';
 import actionFieldString from './action-field-string';
@@ -34,7 +33,6 @@ export default (module) => {
   module.component('actionFieldText', actionFieldText);
   module.component('actionFieldChoice', actionFieldChoice);
   module.component('actionFieldTimezone', actionFieldTimezone);
-  module.component('actionFieldJson', actionFieldJson);
   module.component('appstoreFieldString', appstoreFieldString);
   module.component('appstoreFieldMultiselect', appstoreFieldMultiselect);
   module.component('helpicon', connectAngularComponent(HelpIcon, ['helpText']));

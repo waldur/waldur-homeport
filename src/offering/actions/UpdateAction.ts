@@ -1,21 +1,28 @@
 import { translate } from '@waldur/i18n';
-import { createNameField } from '@waldur/resource/actions/base';
+import { updateOffering } from '@waldur/offering/api';
+import {
+  createNameField,
+  createEditAction,
+} from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
 import { Offering } from '../types';
 
 import { validatePermissions, validateOfferingState } from './utils';
 
-const formatReport = (resource) =>
-  resource.report ? JSON.stringify(resource.report) : '';
-
-export default function createAction(): ResourceAction<Offering> {
-  return {
-    name: 'update',
-    title: translate('Update'),
-    type: 'form',
-    method: 'PUT',
-    successMessage: translate('Request to update has been accepted.'),
+export default function createAction({ resource }): ResourceAction<Offering> {
+  return createEditAction({
+    resource,
+    updateResource: (id, formData) =>
+      updateOffering(id, {
+        name: formData.name,
+        report: formData.report ? JSON.parse(formData.report) : undefined,
+      }),
+    verboseName: translate('offering'),
+    getInitialValues: () => ({
+      name: resource.name,
+      report: resource.report ? JSON.stringify(resource.report) : '',
+    }),
     fields: [
       createNameField<Offering>(),
       {
@@ -24,15 +31,10 @@ export default function createAction(): ResourceAction<Offering> {
         help_text: translate(
           'Example: [{"header": "Database instance info", "body": "data"}]',
         ),
-        serializer: (value: any) => (value ? JSON.parse(value) : undefined),
-        init: (_, resource, form) => {
-          form.report = formatReport(resource);
-        },
-        default_value: undefined,
         required: false,
         type: 'json',
       },
     ],
     validators: [validateOfferingState('OK', 'Erred'), validatePermissions],
-  };
+  });
 }

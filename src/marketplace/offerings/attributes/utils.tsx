@@ -51,9 +51,10 @@ export const configAttrField = (attribute) => {
             value={componentProp.input.value}
             onChange={(value) => componentProp.input.onChange(value)}
             options={attribute.options}
-            valueKey="key"
-            labelKey="title"
-            multi={true}
+            getOptionValue={(option) => option.key}
+            getOptionLabel={(option) => option.title}
+            isMulti={true}
+            isClearable={true}
           />
         ),
         normalize: (v) => (v ? v : ''),
@@ -66,8 +67,9 @@ export const configAttrField = (attribute) => {
             value={componentProp.input.value}
             onChange={(value) => componentProp.input.onChange(value)}
             options={attribute.options}
-            valueKey="key"
-            labelKey="title"
+            getOptionValue={(option) => option.key}
+            getOptionLabel={(option) => option.title}
+            isClearable={true}
           />
         ),
         normalize: (v) => (v ? v : ''),

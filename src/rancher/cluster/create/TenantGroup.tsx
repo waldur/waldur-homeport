@@ -140,8 +140,9 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
               name="attributes.template"
               component={SelectField}
               options={resourceProps.value.templates}
-              labelKey="name"
-              valueKey="uuid"
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
+              isClearable={true}
             />
           </FormGroup>
         ) : null}
@@ -155,9 +156,10 @@ export const TenantGroup: React.FC<TenantGroupProps> = (props) => {
               name={SECURITY_GROUPS_FIELD}
               component={SelectField}
               options={resourceProps.value.securityGroups}
-              labelKey="name"
-              valueKey="url"
-              multi={true}
+              getOptionValue={(option) => option.url}
+              getOptionLabel={(option) => option.name}
+              isMulti={true}
+              isClearable={true}
             />
           </FormGroup>
         ) : null}

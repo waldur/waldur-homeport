@@ -1,19 +1,19 @@
 import * as React from 'react';
+import { components } from 'react-select';
 
-import { optionRenderer, RendererConfig } from './optionRenderer';
-import { SelectField, SelectFieldProps } from './SelectField';
+import { optionRenderer } from './optionRenderer';
+import { SelectField } from './SelectField';
 
-interface SelectIconFieldProps extends SelectFieldProps, RendererConfig {
-  labelKey: string;
-}
+const Option = (props) => (
+  <components.Option {...props}>{optionRenderer(props.data)}</components.Option>
+);
 
-export const SelectIconField = (props: SelectIconFieldProps) => {
-  const renderer = optionRenderer(props);
-  return (
-    <SelectField
-      optionRenderer={renderer}
-      valueRenderer={renderer}
-      {...props}
-    />
-  );
-};
+const SingleValue = (props) => (
+  <components.SingleValue {...props}>
+    {optionRenderer(props.data)}
+  </components.SingleValue>
+);
+
+export const SelectIconField = (props) => (
+  <SelectField components={{ Option, SingleValue }} {...props} />
+);

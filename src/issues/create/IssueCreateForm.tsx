@@ -63,7 +63,7 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
             {!issue.type && (
               <FormGroup>
                 <ControlLabel>{translate('Request type')}</ControlLabel>
-                <TypeField issueTypes={issueTypes} disabled={submitting} />
+                <TypeField issueTypes={issueTypes} isDisabled={submitting} />
               </FormGroup>
             )}
             {filteredTemplates.length > 0 && (
@@ -74,9 +74,10 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
                   component={SelectField}
                   placeholder={translate('Select issue template...')}
                   options={filteredTemplates}
-                  disabled={submitting}
-                  valueKey="uuid"
-                  labelKey="name"
+                  isDisabled={submitting}
+                  getOptionValue={(option) => option.uuid}
+                  getOptionLabel={(option) => option.name}
+                  isClearable={true}
                 />
               </FormGroup>
             )}

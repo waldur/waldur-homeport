@@ -1,5 +1,3 @@
-import { Option } from 'react-select';
-
 export interface MetricOption {
   label: string;
   value: string;
@@ -9,7 +7,7 @@ export interface MetricOption {
 
 export interface MetricsFormData {
   metric_name: MetricOption;
-  target_type: Option;
+  target_type: any;
   quantity: number;
 }
 

@@ -62,7 +62,7 @@ const OptionTypeField = (props) => (
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
         options={FIELD_TYPES}
-        clearable={false}
+        isClearable={false}
       />
     )}
   />

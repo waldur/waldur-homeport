@@ -70,14 +70,14 @@ class OpenstackInstanceSecurityGroupsComponent extends React.Component<
             placeholder={this.props.translate('Select security groups...')}
             value={this.props.input.value}
             options={this.props.securityGroups}
-            labelKey="name"
-            valueKey="uuid"
+            getOptionValue={(option) => option.uuid}
+            getOptionLabel={(option) => option.name}
             onChange={this.props.input.onChange}
             onBlur={() => {
               /* Noop */
             }}
-            multi={true}
-            clearable={false}
+            isMulti={true}
+            isClearable={false}
           />
         </Col>
         <Col md={3}>

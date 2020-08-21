@@ -11,6 +11,7 @@ interface ActionDialogProps {
   submitLabel: string;
   submitting?: boolean;
   loading?: boolean;
+  invalid?: boolean;
   onSubmit: any;
   error?: string;
 }
@@ -22,6 +23,7 @@ export const ActionDialog: React.FC<ActionDialogProps> = (props) => (
       footer={
         <div>
           <SubmitButton
+            disabled={props.invalid}
             submitting={props.submitting}
             label={props.submitLabel}
           />

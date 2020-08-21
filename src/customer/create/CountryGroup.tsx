@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import * as React from 'react';
+import { components } from 'react-select';
 import useAsync from 'react-use/lib/useAsync';
 
 import { ENV } from '@waldur/core/services';
@@ -15,6 +16,18 @@ const CountryRenderer = (option) => (
     </i>{' '}
     {option.display_name}
   </>
+);
+
+const Option = (props) => (
+  <components.Option {...props}>
+    <CountryRenderer {...props.data} />
+  </components.Option>
+);
+
+const SingleValue = (props) => (
+  <components.SingleValue {...props}>
+    <CountryRenderer {...props.data} />
+  </components.SingleValue>
 );
 
 const loadCountries = async () => {
@@ -33,11 +46,11 @@ export const CountryGroup = () => {
       label={translate('Country')}
       component={SelectField}
       placeholder={translate('Select country...')}
-      optionRenderer={CountryRenderer}
-      valueRenderer={CountryRenderer}
-      labelKey="display_name"
+      components={{ Option, SingleValue }}
+      getOptionLabel={(option) => option.display_name}
       options={value || []}
       isLoading={loading}
+      isClearable={true}
     />
   );
 };

@@ -11,12 +11,14 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 const SelectTenantField = (props) => (
   <Select
-    value={props.input.value}
-    onChange={props.input.onChange}
+    value={props.options.filter(
+      ({ settings }) => settings === props.input.value,
+    )}
+    onChange={({ settings }) => props.input.onChange(settings)}
     options={props.options}
-    labelKey="name"
-    valueKey="settings"
-    simpleValue={true}
+    getOptionValue={(option) => option.settings}
+    getOptionLabel={(option) => option.name}
+    isClearable={true}
   />
 );
 

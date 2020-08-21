@@ -12,30 +12,30 @@ interface FlowMapFilterProps extends TranslateProps {
 
 const metricOptions = [
   {
-    name: 'CPU',
+    label: 'CPU',
     value: 'cpu',
   },
   {
-    name: 'GPU',
+    label: 'GPU',
     value: 'gpu',
   },
   {
-    name: 'RAM',
+    label: 'RAM',
     value: 'ram',
   },
   {
-    name: 'Disk',
+    label: 'Disk',
     value: 'disk',
   },
 ];
 
 const serviceProviderTypeOptions = [
   {
-    name: 'Batch',
+    label: 'Batch',
     value: 'batch',
   },
   {
-    name: 'VPC',
+    label: 'VPC',
     value: 'vpc',
   },
 ];
@@ -55,8 +55,7 @@ const PureFlowMapFilter = (props: FlowMapFilterProps) => (
             label={props.translate('Metric')}
             name="metric"
             options={metricOptions}
-            labelKey="name"
-            valueKey="value"
+            isClearable={true}
           />
           <CheckboxField
             checked={false}
@@ -73,8 +72,7 @@ const PureFlowMapFilter = (props: FlowMapFilterProps) => (
             label={props.translate('Service provider type')}
             name="service_provider_type"
             options={serviceProviderTypeOptions}
-            labelKey="name"
-            valueKey="value"
+            isClearable={true}
           />
         </FormContainer>
       </form>

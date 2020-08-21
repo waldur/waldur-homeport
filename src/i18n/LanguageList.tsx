@@ -39,9 +39,9 @@ export const LanguageList = () => {
         options={languageChoices}
         value={currentLanguage}
         onChange={setLanguage}
-        clearable={false}
-        labelKey="label"
-        valueKey="code"
+        isClearable={false}
+        getOptionValue={(option) => option.code}
+        getOptionLabel={(option) => option.label}
       />
     );
   }

@@ -91,12 +91,12 @@ export const ResourceRow = ({
           <td>
             <Select
               placeholder={translate('Select plan')}
-              labelKey="name"
-              valueKey="uuid"
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
               options={offering.plans}
               value={plans[resource.backend_id]}
               onChange={(plan) => assignPlan(resource, plan)}
-              clearable={false}
+              isClearable={false}
             />
           </td>
         )}

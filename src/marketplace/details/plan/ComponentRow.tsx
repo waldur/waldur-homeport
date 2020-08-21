@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 
-import { $filter, ENV } from '@waldur/core/services';
+import { ENV, formatCurrency } from '@waldur/core/services';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -33,7 +33,7 @@ export const ComponentRow: React.FC<Props> = (props) => {
         ? props.offeringComponent.prices.map((price, innerIndex) => (
             <td key={innerIndex}>
               <p className="form-control-static">
-                {$filter('currency')(price, ENV.currency, 3)}
+                {formatCurrency(price, ENV.currency, 3)}
               </p>
             </td>
           ))
