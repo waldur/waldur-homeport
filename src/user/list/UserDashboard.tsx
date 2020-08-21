@@ -24,12 +24,14 @@ const UserDashboardContainer: React.FC = (props: any) => {
   const renderPrompt = useSelector(renderCustomerCreatePrompt);
   return (
     <div className="wrapper wrapper-content">
-      <CategoriesList
-        {...props.categories}
-        hideCounter={true}
-        hideCategoryWithNoOfferings={true}
-        userDashboardView={true}
-      />
+      <Panel title={translate('Marketplace')}>
+        <CategoriesList
+          {...props.categories}
+          hideCounter={true}
+          hideCategoryWithNoOfferings={true}
+          userDashboardView={true}
+        />
+      </Panel>
       {renderPrompt && (
         <div className="row">
           <div className="col-md-12">

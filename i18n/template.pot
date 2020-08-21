@@ -3306,6 +3306,7 @@ msgstr ""
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
+#: src/user/list/UserDashboard.tsx
 msgid "Marketplace"
 msgstr ""
 
