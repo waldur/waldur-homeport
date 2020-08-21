@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-import { getAll } from '@waldur/core/api';
+import { getAll, put } from '@waldur/core/api';
 import {
   Flavor,
   FloatingIp,
@@ -73,3 +73,18 @@ export const getInstances = (params) =>
   getAll<OpenStackInstance>('/openstacktenant-instances/', {
     params,
   });
+
+export const updateTenant = (id, data) =>
+  put(`/openstack-tenants/${id}/`, data);
+
+export const updateInstance = (id, data) =>
+  put(`/openstacktenant-instances/${id}/`, data);
+
+export const updateVolume = (id, data) =>
+  put(`/openstacktenant-volumes/${id}/`, data);
+
+export const updateSnapshot = (id, data) =>
+  put(`/openstacktenant-snapshots/${id}/`, data);
+
+export const updateBackup = (id, data) =>
+  put(`/openstacktenant-backups/${id}/`, data);

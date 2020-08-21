@@ -1,16 +1,16 @@
 import { translate } from '@waldur/i18n';
+import { updateBackup } from '@waldur/openstack/api';
 import {
-  createDefaultEditAction,
   createNameField,
   validateState,
   createDescriptionField,
+  createEditAction,
 } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
-import { mergeActions } from '@waldur/resource/actions/utils';
 
-export default function createAction(): ResourceAction {
-  return mergeActions(createDefaultEditAction(), {
-    successMessage: translate('VM snapshot has been updated.'),
+export default function createAction({ resource }): ResourceAction {
+  return createEditAction({
+    resource,
     fields: [
       createNameField(),
       createDescriptionField(),
@@ -25,5 +25,12 @@ export default function createAction(): ResourceAction {
       },
     ],
     validators: [validateState('OK')],
+    updateResource: updateBackup,
+    getInitialValues: () => ({
+      name: resource.name,
+      description: resource.description,
+      kept_until: resource.kept_until,
+    }),
+    verboseName: translate('VM snapshot'),
   });
 }

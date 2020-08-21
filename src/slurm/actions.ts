@@ -3,10 +3,11 @@ import terminateAction from '@waldur/marketplace/resources/terminate/TerminateAc
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import {
   createPullAction,
-  createDefaultEditAction,
+  createEditAction,
 } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
+import { updateAllocation } from './api';
 import { AllocationDetailsDialog } from './details/AllocationDetailsDialog';
 
 const createDetailsAction = (): ResourceAction => ({
@@ -18,14 +19,16 @@ const createDetailsAction = (): ResourceAction => ({
   dialogSize: 'lg',
 });
 
-const createEditAction = () => ({
-  ...createDefaultEditAction(),
-  successMessage: translate('Allocation has been updated.'),
-});
+const createAllocationEditAction = ({ resource }) =>
+  createEditAction({
+    resource,
+    verboseName: translate('SLURM allocation'),
+    updateResource: updateAllocation,
+  });
 
 ActionConfigurationRegistry.register('SLURM.Allocation', [
   createDetailsAction,
   createPullAction,
-  createEditAction,
+  createAllocationEditAction,
   terminateAction,
 ]);

@@ -1,18 +1,20 @@
 import { translate } from '@waldur/i18n';
+import { updateTenant } from '@waldur/openstack/api';
 import {
-  createDefaultEditAction,
   createLatinNameField,
   createDescriptionField,
+  createEditAction,
 } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
-import { mergeActions } from '@waldur/resource/actions/utils';
 
 import { userCanModifyTenant } from './utils';
 
-export default function createAction(): ResourceAction {
-  return mergeActions(createDefaultEditAction(), {
-    successMessage: translate('Tenant has been updated.'),
+export default function createAction({ resource }): ResourceAction {
+  return createEditAction({
+    resource,
     fields: [createLatinNameField(), createDescriptionField()],
     validators: [userCanModifyTenant],
+    updateResource: updateTenant,
+    verboseName: translate('OpenStack tenant'),
   });
 }
