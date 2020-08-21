@@ -1,8 +1,23 @@
 import * as React from 'react';
+import { Validator } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 
-export const MonacoField = (props) => {
+interface MonacoFieldProps {
+  name?: string;
+  label?: string;
+  required?: boolean;
+  description?: string;
+  validate?: Validator;
+  input?: { value; onChange };
+  diff?: boolean;
+  mode?: string;
+  height?: number;
+  original?: string;
+  options?: any;
+}
+
+export const MonacoField: React.FC<MonacoFieldProps> = (props) => {
   const [loaded, setLoaded] = React.useState(false);
   const [erred, setErred] = React.useState(false);
   const EditorRef = React.useRef(null);
@@ -41,7 +56,7 @@ export const MonacoField = (props) => {
 
   return (
     <Editor
-      height="600"
+      height={props.height}
       language={props.mode}
       value={props.input.value}
       onChange={props.input.onChange}
@@ -49,4 +64,8 @@ export const MonacoField = (props) => {
       options={props.options}
     />
   );
+};
+
+MonacoField.defaultProps = {
+  height: 600,
 };

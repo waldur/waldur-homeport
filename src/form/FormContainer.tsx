@@ -23,6 +23,7 @@ export const FormContainer: React.FC<FormContainerProps> = (props) => (
           controlClass={props.controlClass}
           clearOnUnmount={props.clearOnUnmount}
           layout={props.layout}
+          validate={input.props.validate}
         >
           {input}
         </Field>

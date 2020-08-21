@@ -4,6 +4,8 @@ import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-con
 import {
   createPullAction,
   createEditAction,
+  createNameField,
+  createDescriptionField,
 } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
@@ -24,6 +26,7 @@ const createAllocationEditAction = ({ resource }) =>
     resource,
     verboseName: translate('SLURM allocation'),
     updateResource: updateAllocation,
+    fields: [createNameField(), createDescriptionField()],
   });
 
 ActionConfigurationRegistry.register('SLURM.Allocation', [

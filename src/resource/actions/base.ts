@@ -12,7 +12,6 @@ import {
   ActionContext,
   ActionValidator,
 } from './types';
-import { mergeFields } from './utils';
 
 export function createLatinNameField(): ActionField {
   return {
@@ -64,7 +63,7 @@ export function createEditAction<Resource extends BaseResource>({
     name: 'update',
     title: translate('Edit'),
     type: 'form',
-    fields: mergeFields([createNameField(), createDescriptionField()], fields),
+    fields,
     validators,
     component: ResourceActionDialog,
     useResolve: true,

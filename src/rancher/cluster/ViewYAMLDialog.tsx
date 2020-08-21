@@ -6,8 +6,8 @@ import useToggle from 'react-use/lib/useToggle';
 import { reduxForm, change } from 'redux-form';
 
 import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
+import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
-import { MonacoField } from '@waldur/marketplace-script/MonacoField';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
