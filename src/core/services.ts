@@ -12,8 +12,14 @@ export let $q = null;
 // When application is initialized, it is replaced with actual service.
 export let $sanitize = (x) => x;
 
-export const formatCurrency = (value, currency, fractionSize) =>
-  `${currency}${value.toFixed(fractionSize)}`;
+export const formatCurrency = (
+  value: string | number,
+  currency: string,
+  fractionSize: number,
+) => {
+  if (typeof value === 'string') value = parseFloat(value);
+  return `${currency}${value.toFixed(fractionSize)}`;
+};
 
 export const defaultCurrency = (value) => {
   if (value === undefined || value === null) {
