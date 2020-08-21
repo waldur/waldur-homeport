@@ -1274,10 +1274,6 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
-#: src/user/SelectOrganizationDialog.tsx
-msgid "Continue"
-msgstr ""
-
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 msgid "Contract sum"
@@ -4198,7 +4194,6 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
-#: src/user/SelectOrganizationDialog.tsx
 #: src/user/list/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -6034,15 +6029,10 @@ msgstr ""
 msgid "Select offering..."
 msgstr ""
 
-#: src/user/SelectOrganizationDialog.tsx
-msgid "Select organization"
-msgstr ""
-
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
-#: src/user/SelectOrganizationDialog.tsx
 msgid "Select organization..."
 msgstr ""
 

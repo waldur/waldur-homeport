@@ -9,7 +9,6 @@ interface OfferingLogoProps
   src?: string;
   size?: string;
   className?: string;
-  onClick?: () => void;
 }
 
 export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => (
@@ -21,7 +20,6 @@ export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => (
         : props.className
     }
     style={props.style}
-    onClick={props.onClick}
   />
 );
 

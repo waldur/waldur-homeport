@@ -19,7 +19,7 @@ function* getCategories() {
   const project = yield select(getProject);
   const options = {
     params: {
-      allowed_customer_uuid: customer?.uuid,
+      allowed_customer_uuid: customer.uuid,
       project_uuid: project && project.uuid,
     },
   };
