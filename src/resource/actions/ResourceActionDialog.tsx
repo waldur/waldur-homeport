@@ -4,6 +4,7 @@ import { reduxForm, initialize } from 'redux-form';
 
 import { StringField, TextField } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
+import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 
@@ -15,9 +16,17 @@ interface ResourceActionDialogOwnProps {
 
 const FORM_ID = 'ResourceActionDialog';
 
+const validateJSON = (value: string) => {
+  try {
+    JSON.parse(value);
+  } catch (e) {
+    return translate('This value is invalid JSON.');
+  }
+};
+
 export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
   { form: FORM_ID },
-)(({ resolve: { action, resource }, handleSubmit, submitting }) => {
+)(({ resolve: { action, resource }, handleSubmit, submitting, invalid }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -34,6 +43,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
       submitLabel={translate('Submit')}
       onSubmit={handleSubmit(callback)}
       submitting={submitting}
+      invalid={invalid}
     >
       {Object.keys(action.fields).map((key) => {
         const field = action.fields[key];
@@ -56,6 +66,19 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
               label={field.label}
               required={field.required}
               maxLength={field.maxlength}
+            />
+          );
+        } else if (field.type === 'json') {
+          return (
+            <MonacoField
+              key={key}
+              name={key}
+              label={field.label}
+              required={field.required}
+              description={field.help_text}
+              mode="json"
+              validate={validateJSON}
+              height={300}
             />
           );
         } else if (field.type === 'datetime') {

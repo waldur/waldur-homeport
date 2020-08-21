@@ -5468,10 +5468,6 @@ msgstr ""
 msgid "Request title"
 msgstr ""
 
-#: src/offering/actions/UpdateAction.ts
-msgid "Request to update has been accepted."
-msgstr ""
-
 #: src/resource/actions/action-utils-service.ts
 msgid "Request to {action} has been accepted."
 msgstr ""
@@ -6989,8 +6985,8 @@ msgstr ""
 msgid "This name will be visible in accounting data."
 msgstr ""
 
-#: src/resource/actions/dialog/action-field-json.html
-msgid "This value is invalid."
+#: src/resource/actions/ResourceActionDialog.tsx
+msgid "This value is invalid JSON."
 msgstr ""
 
 #: src/navigation/cookies/CookiesConsent.tsx
@@ -7803,7 +7799,6 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
-#: src/offering/actions/UpdateAction.ts
 #: src/user/hooks/HookDetailsDialog.tsx
 #: src/user/hooks/HookUpdateButton.tsx
 msgid "Update"
@@ -8693,6 +8688,10 @@ msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 msgid "networks"
+msgstr ""
+
+#: src/offering/actions/UpdateAction.ts
+msgid "offering"
 msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx
