@@ -1270,6 +1270,10 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
+#: src/user/SelectAffiliationDialog.tsx
+msgid "Continue"
+msgstr ""
+
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 msgid "Contract sum"
@@ -3292,6 +3296,7 @@ msgstr ""
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
+#: src/user/list/UserDashboard.tsx
 msgid "Marketplace"
 msgstr ""
 
@@ -3309,6 +3314,10 @@ msgstr ""
 
 #: src/customer/details/CustomerMarketplacePanel.tsx
 msgid "Marketplace service provider"
+msgstr ""
+
+#: src/user/SelectAffiliationDialog.tsx
+msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
@@ -4190,6 +4199,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
+#: src/user/SelectAffiliationDialog.tsx
 #: src/user/list/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -4875,6 +4885,7 @@ msgstr ""
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/user/SelectAffiliationDialog.tsx
 msgid "Project"
 msgstr ""
 
@@ -5974,6 +5985,10 @@ msgstr ""
 msgid "Select affected resource..."
 msgstr ""
 
+#: src/user/SelectAffiliationDialog.tsx
+msgid "Select affiliation"
+msgstr ""
+
 #: src/rancher/template/SelectControl.tsx
 msgid "Select an option..."
 msgstr ""
@@ -6026,6 +6041,7 @@ msgstr ""
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/user/SelectAffiliationDialog.tsx
 msgid "Select organization..."
 msgstr ""
 
@@ -6044,6 +6060,7 @@ msgstr ""
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
+#: src/user/SelectAffiliationDialog.tsx
 msgid "Select project..."
 msgstr ""
 
@@ -6856,6 +6873,7 @@ msgid "There are no available users."
 msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
+#: src/user/list/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
@@ -7455,6 +7473,7 @@ msgid "Unable to load locations."
 msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
+#: src/user/list/CategoriesList.tsx
 msgid "Unable to load marketplace categories."
 msgstr ""
 
