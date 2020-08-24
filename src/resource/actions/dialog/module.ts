@@ -4,7 +4,6 @@ import actionDialog from './action-dialog';
 import actionFieldBoolean from './action-field-boolean';
 import actionFieldChoice from './action-field-choice';
 import actionFieldCrontab from './action-field-crontab';
-import actionFieldDatetime from './action-field-datetime';
 import actionFieldDecimal from './action-field-decimal';
 import actionFieldInteger from './action-field-integer';
 import actionFieldMultiselect from './action-field-multiselect';
@@ -24,7 +23,6 @@ export default (module) => {
   module.component('actionField', actionField);
   module.component('actionFieldBoolean', actionFieldBoolean);
   module.component('actionFieldCrontab', actionFieldCrontab);
-  module.component('actionFieldDatetime', actionFieldDatetime);
   module.component('actionFieldInteger', actionFieldInteger);
   module.component('actionFieldDecimal', actionFieldDecimal);
   module.component('actionFieldMultiselect', actionFieldMultiselect);

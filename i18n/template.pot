@@ -1412,7 +1412,6 @@ msgstr ""
 msgid "Create security group for OpenStack tenant"
 msgstr ""
 
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Create snapshot for OpenStack volume"
 msgstr ""
@@ -1719,7 +1718,6 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
@@ -1756,6 +1754,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.ts
+#: src/openstack/openstack-snapshot/DestroyAction.ts
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
 #: src/rancher/node/actions/DestroyAction.ts
 msgid "Destroy"
@@ -2067,10 +2066,6 @@ msgstr ""
 
 #: src/configs/base-config.ts
 msgid "English"
-msgstr ""
-
-#: src/resource/actions/dialog/action-field-datetime.html
-msgid "Enter date"
 msgstr ""
 
 #: src/openstack/openstack-subnet/openstack-subnet.html
@@ -2516,9 +2511,12 @@ msgstr ""
 msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/actions.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
+msgstr ""
+
+#: src/openstack/openstack-snapshot/EditAction.ts
+msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -3055,7 +3053,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions/EditAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
-#: src/openstack/openstack-snapshot/actions.ts
+#: src/openstack/openstack-snapshot/EditAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Kept until"
 msgstr ""
@@ -4651,10 +4649,6 @@ msgstr ""
 msgid "Please provide a reason"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/actions.ts
-msgid "Please provide details of a new volume created from snapshot."
-msgstr ""
-
 #: src/customer/create/WizardFormSecondPage.tsx
 msgid "Please provide registration code of your company."
 msgstr ""
@@ -5680,7 +5674,12 @@ msgid "Restarting"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
 msgid "Restore"
+msgstr ""
+
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+msgid "Restore volume snapshot"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/tabs.ts
@@ -6350,18 +6349,6 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
-msgid "Snapshot has been created."
-msgstr ""
-
-#: src/openstack/openstack-snapshot/actions.ts
-msgid "Snapshot has been updated."
-msgstr ""
-
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
-msgid "Snapshot name"
-msgstr ""
-
 #: src/openstack/openstack-snapshot-schedule/actions.ts
 msgid "Snapshot schedule has been updated."
 msgstr ""
@@ -6526,7 +6513,6 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
@@ -6633,7 +6619,6 @@ msgstr ""
 #: src/openstack/openstack-floating-ips/module.ts
 #: src/openstack/openstack-network/module.ts
 #: src/openstack/openstack-security-groups/module.ts
-#: src/openstack/openstack-snapshot/actions.ts
 #: src/openstack/openstack-subnet/actions.ts
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
@@ -7207,6 +7192,10 @@ msgstr ""
 msgid "Unable to confirm email."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
+msgid "Unable to create VM snapshot."
+msgstr ""
+
 #: src/freeipa/FreeIPAAccountCreate.tsx
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
@@ -7251,8 +7240,8 @@ msgstr ""
 msgid "Unable to create request."
 msgstr ""
 
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
-msgid "Unable to create snapshot."
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+msgid "Unable to create volume snapshot."
 msgstr ""
 
 #: src/user/support/effects.ts
@@ -7631,6 +7620,10 @@ msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Unable to resize droplet."
+msgstr ""
+
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+msgid "Unable to restore volume snapshot."
 msgstr ""
 
 #: src/auth/AuthInit.tsx
@@ -8160,6 +8153,10 @@ msgstr ""
 msgid "VM snapshot"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
+msgid "VM snapshot has been created."
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/BackupScheduleWarning.tsx
 msgid "VM snapshot schedule caveats"
 msgstr ""
@@ -8291,7 +8288,6 @@ msgid "Volume has been extended."
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 msgid "Volume name"
 msgstr ""
@@ -8302,6 +8298,18 @@ msgstr ""
 
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "Volume size"
+msgstr ""
+
+#: src/openstack/openstack-snapshot/EditAction.ts
+msgid "Volume snapshot"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+msgid "Volume snapshot has been created."
+msgstr ""
+
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+msgid "Volume snapshot has been restored."
 msgstr ""
 
 #: src/openstack/openstack-backup/tabs.ts

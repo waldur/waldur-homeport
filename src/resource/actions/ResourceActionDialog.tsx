@@ -39,7 +39,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
   const callback = (formData) => action.submitForm(dispatch, formData);
   return (
     <ActionDialog
-      title={action.title}
+      title={action.dialogTitle || action.title}
       submitLabel={translate('Submit')}
       onSubmit={handleSubmit(callback)}
       submitting={submitting}
