@@ -7,7 +7,12 @@ import { Sidebar } from '@waldur/navigation/sidebar/Sidebar';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { filterItems } from '@waldur/navigation/sidebar/utils';
 import store from '@waldur/store/store';
-import { getUser, isOwnerOrStaff } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  getProject,
+  getUser,
+  isOwnerOrStaff,
+} from '@waldur/workspace/selectors';
 import {
   OuterState,
   ORGANIZATION_WORKSPACE,
@@ -16,7 +21,7 @@ import {
 
 import { getPrivateUserTabs, getPublicUserTabs } from './constants';
 
-function getNavItems(user) {
+function getNavItems(user, customer, project) {
   const StateUtilsService = ngInjector.get('StateUtilsService');
 
   const prevWorkspace = StateUtilsService.getPrevWorkspace();
@@ -26,7 +31,8 @@ function getNavItems(user) {
         key: 'back',
         label: translate('Back to project'),
         icon: 'fa-arrow-left',
-        action: StateUtilsService.goBack,
+        state: 'project.details',
+        params: { uuid: project.uuid },
       },
     ];
   } else if (
@@ -38,7 +44,8 @@ function getNavItems(user) {
         key: 'back',
         label: translate('Back to organization'),
         icon: 'fa-arrow-left',
-        action: StateUtilsService.goBack,
+        state: 'organization.dashboard',
+        params: { uuid: customer.uuid },
       },
     ];
   }
@@ -51,6 +58,8 @@ export const UserSidebar = () => {
     (state: OuterState) => state.workspace?.user,
   );
   const currentUser = useSelector(getUser);
+  const currentCustomer = useSelector(getCustomer);
+  const currentProject = useSelector(getProject);
 
   React.useEffect(() => {
     if (!currentUser || !workspaceUser) {
@@ -58,12 +67,15 @@ export const UserSidebar = () => {
     }
     if (currentUser.uuid === workspaceUser.uuid) {
       setItems(
-        filterItems([...getNavItems(currentUser), ...getPrivateUserTabs()]),
+        filterItems([
+          ...getNavItems(currentUser, currentCustomer, currentProject),
+          ...getPrivateUserTabs(),
+        ]),
       );
     } else {
       setItems(
         filterItems([
-          ...getNavItems(currentUser),
+          ...getNavItems(currentUser, currentCustomer, currentProject),
           ...getPublicUserTabs(workspaceUser),
         ]),
       );
