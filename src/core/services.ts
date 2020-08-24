@@ -18,7 +18,9 @@ export const formatCurrency = (
   fractionSize: number,
 ) => {
   if (typeof value === 'string') value = parseFloat(value);
-  return `${currency}${value.toFixed(fractionSize)}`;
+  return `${currency}${new Intl.NumberFormat('en-US', {
+    maximumFractionDigits: fractionSize,
+  }).format(value)}`;
 };
 
 export const defaultCurrency = (value) => {
