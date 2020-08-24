@@ -19,6 +19,7 @@ export const formatCurrency = (
 ) => {
   if (typeof value === 'string') value = parseFloat(value);
   return `${currency}${new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
     maximumFractionDigits: fractionSize,
   }).format(value)}`;
 };
