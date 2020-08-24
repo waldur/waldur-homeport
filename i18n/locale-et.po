@@ -9877,3 +9877,7 @@ msgstr "Vali palun roll"
 
 #~ msgid "You have no SLAs yet."
 #~ msgstr "Sul ei ole veel SLA-sid."
+
+#: src/marketplace/offerings/create/ComponentUseLimitForBillingField.tsx
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr "Kasutuspõhise komponendi tasu põhineb kasutaja taotletud limiidil."
