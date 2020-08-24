@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/billing/billing-record-details.html
 msgid "(VAT is not included)"
-msgstr "(ei sisalda KM)"
+msgstr "(ei sisalda käibemaksu)"
 
 #: src/openstack/openstack-tenant/openstack-template.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
@@ -618,7 +618,7 @@ msgstr "Kas oled kindel? Seda toimingut ei saa tagasi võtta."
 
 #: src/marketplace/offerings/ArticleCodeField.tsx
 msgid "Article code"
-msgstr "KM kood"
+msgstr "Artikli kood"
 
 #: src/openstack/openstack-tenant/actions/assign-package-dialog.html
 msgid "Assign"
@@ -1833,7 +1833,7 @@ msgstr "Kuvatav nimi"
 
 #: src/marketplace/offerings/create/ComponentDisableQuotaField.tsx
 msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Ära lase kasutajal määrata kvooti hetkel mil pakkumine on täitmisel"
+msgstr "Ära lase kasutajal määrata limiiti Teenust tellides"
 
 #: src/openstack/openstack-network/module.js
 #: src/openstack/openstack-subnet/actions.js
@@ -2230,11 +2230,11 @@ msgstr "Fail"
 
 #: src/core/DownloadLink/effects.tsx
 msgid "File download has been started."
-msgstr "Faili tõmbamine on alanud"
+msgstr "Faili allalaadimine on alanud"
 
 #: src/core/DownloadLink/effects.tsx
 msgid "File has been downloaded."
-msgstr "Fail on tõmmatud"
+msgstr "Fail on allalaaditud"
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Filename"
@@ -2458,7 +2458,7 @@ msgstr "Globaalne päring"
 
 #: src/marketplace/orders/item/list/OrderItemsListPlaceholder.tsx
 msgid "Go to marketplace"
-msgstr "Mine turuplatsile"
+msgstr "Mine teenusekataloogi"
 
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "Go to my profile"
@@ -3410,24 +3410,24 @@ msgstr "Haldus"
 #: src/marketplace/details/utils.ts src/marketplace/routes.js
 #: src/marketplace/sidebar.js
 msgid "Marketplace"
-msgstr "Turuplats"
+msgstr "Teenusekataloog"
 
 #: src/marketplace/routes.js
 msgid "Marketplace checkout"
-msgstr "Turuplatsi kassa"
+msgstr "Teenusekataloogi kassa"
 
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 msgid "Marketplace offering does not have any usage-based components."
-msgstr "Turuplatsi pakkumisel pole ühtegi kasutusel baseeruvat komponenti"
+msgstr "Teenusekataloogi pakkumisel pole ühtegi kasutusel baseeruvat komponenti"
 
 #: src/marketplace/routes.js
 msgid "Marketplace offerings"
-msgstr "Turuplatsi pakkumised"
+msgstr "Teenusekataloogi pakkumised"
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 #, fuzzy
 msgid "Marketplace service provider"
-msgstr "Tennusepakkujat ei õnnestunud salvestada."
+msgstr "Teenusekataloogi tennusepakkuja"
 
 #: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
 msgid "Max # of backups"
@@ -4877,7 +4877,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Please provide a reason"
 msgid "Please create a new one:"
-msgstr "Palun põhjendada"
+msgstr "Palun looge uus:"
 
 #: src/marketplace/details/plan/ComponentEditRow.tsx
 msgid "Please enter estimated maximum usage in the rows below:"
@@ -4893,7 +4893,7 @@ msgstr ""
 
 #: src/invitations/invitation-confirm-dialog.html
 msgid "Please give us a moment to validate your invitation."
-msgstr "Palun anna meile hetkel kutse kinnitamiseks."
+msgstr "Palun anna meile hetk kutse kinnitamiseks."
 
 #: src/user/support/TokenLifetimeField.tsx
 msgid ""
@@ -5054,7 +5054,7 @@ msgstr "Hind"
 
 #: src/billing/PriceEstimateDialog.tsx
 msgid "Price estimate details"
-msgstr "Hind on arvestuslikud üksikasjad"
+msgstr "Hinna arvestuslikud üksikasjad"
 
 #: src/openstack/openstack-tenant/openstack-tenant-prices.html
 msgid "Price for 1 GB of RAM per day"
@@ -5502,17 +5502,17 @@ msgstr "Pythoni versioon"
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts
 msgid "Quantity"
-msgstr "Hulk"
+msgstr "Kogus"
 
 #: src/error/routes.js src/project/ProjectCreateButton.tsx
 #: src/providers/provider-list.js src/resource-import/utils.js
 #: src/resource/resource-provision-policy.js
 msgid "Quota has been reached."
-msgstr "Kvoot on täis."
+msgstr "Limiit on täis."
 
 #: src/providers/details/provider-project-link-quota.html
 msgid "Quota usage exceeds limit."
-msgstr "Kvootide kasutamine ületab limiidi."
+msgstr "Kvootide kasutamine ületab limiiti."
 
 #: src/openstack/openstack-tenant/tabs.js src/providers/details/dialog.html
 msgid "Quotas"
@@ -6390,7 +6390,7 @@ msgstr "Valige komponent"
 
 #: src/customer/AccountingPeriodField.tsx
 msgid "Select accounting period"
-msgstr "Vali raamatupidamise periood"
+msgstr "Vali arveldamise periood"
 
 #: src/issues/create/issue-quick-create.html
 #: src/issues/create/issue-registration.html
@@ -6515,11 +6515,11 @@ msgstr "Vali suurus..."
 #, fuzzy
 #| msgid "Select size..."
 msgid "Select some files"
-msgstr "Vali suurus..."
+msgstr "Vali mõni fail"
 
 #: src/resource/list/resource-global-list-filtered.html
 msgid "Select state"
-msgstr "Vali okej"
+msgstr "Vali olek"
 
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
@@ -7238,7 +7238,7 @@ msgstr "Tenanti kirjeldus"
 
 #: src/openstack/openstack-tenant/actions/assign-package-dialog.js
 msgid "Tenant has been assigned to the package."
-msgstr ""
+msgstr "Tenant on paketile määratud"
 
 #: src/openstack/openstack-tenant/actions/EditAction.ts
 msgid "Tenant has been updated."
@@ -7840,7 +7840,7 @@ msgstr "Tellotid objekti ei õnnestunud hankida"
 
 #: src/marketplace/service-providers/store/effects.ts
 msgid "Unable to get service provider API secret code."
-msgstr "Unable to get service provider API secret code."
+msgstr "Teenusepakkuja API salakoodi ei õnnestu hankida."
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to initialize shopping cart."
@@ -7906,19 +7906,19 @@ msgstr "Asukohti ei õnnestunud laadida"
 
 #: src/marketplace/landing/CategoriesList.tsx
 msgid "Unable to load marketplace categories."
-msgstr "Turuplatsi kategooriaid ei õnnestunud laadida"
+msgstr "Teenusekataloogi kategooriaid ei õnnestunud laadida"
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "Unable to load marketplace category details"
-msgstr "Ei ole võimalik laadida turuplatsi kategooria detaile"
+msgstr "Ei ole võimalik laadida teenusekataloogi kategooria detaile"
 
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 msgid "Unable to load marketplace offering details."
-msgstr "Ei ole võimalik laadida turuplatsi pakkumise detaile"
+msgstr "Ei ole võimalik laadida teenusekataloogi pakkumise detaile"
 
 #: src/marketplace/common/OfferingGrid.tsx
 msgid "Unable to load marketplace offerings."
-msgstr "Ei ole võimalik laadida turuplatsi pakkumisi"
+msgstr "Ei ole võimalik laadida teenusekataloogi pakkumisi"
 
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
@@ -8517,7 +8517,7 @@ msgstr "KM kood"
 #, fuzzy
 #| msgid "VAT is not included."
 msgid "VAT is included"
-msgstr "Käibemaksu ei sisalda."
+msgstr "sisaldab käibemaksu."
 
 #: src/customer/CustomerList.tsx
 #, fuzzy
