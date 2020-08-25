@@ -51,10 +51,9 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
 
   const user = useSelector(getUser);
 
-  const loadSshKeyOptions = React.useCallback(
-    () => loadSshKeys(user.uuid).then((options) => ({ options })),
-    [user.uuid],
-  );
+  const loadSshKeyOptions = React.useCallback(() => loadSshKeys(user.uuid), [
+    user.uuid,
+  ]);
 
   return (
     <form className="form-horizontal">
