@@ -5085,6 +5085,10 @@ msgstr ""
 msgid "Public resources"
 msgstr ""
 
+#: src/marketplace/sidebar.ts
+msgid "Public services"
+msgstr ""
+
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "Published"
 msgstr ""
