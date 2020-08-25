@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import {
   getAttributes,
   getProviderType,
+  isOfferingTypeSchedulable,
 } from '@waldur/marketplace/common/registry';
 import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
 import { Section } from '@waldur/marketplace/types';
@@ -47,6 +48,7 @@ const PureManagementSummary = (props) => {
     props.formData.service_settings &&
     serializer(props.formData.service_settings);
   const schedules = props.formData.schedules;
+  const isSchedulable = isOfferingTypeSchedulable(type.value);
 
   return (
     <>
@@ -58,7 +60,9 @@ const PureManagementSummary = (props) => {
         <AttributesTable attributes={attributes} sections={[section]} />
       )}
       {/* Full calendar component is rendered as collapsed if it is not visible */}
-      {schedules && props.isVisible && <Calendar events={schedules} />}
+      {schedules && isSchedulable && props.isVisible && (
+        <Calendar events={schedules} />
+      )}
     </>
   );
 };
