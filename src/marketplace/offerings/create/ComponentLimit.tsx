@@ -39,7 +39,7 @@ export const ComponentLimit = enhance((props: Values) =>
           <ComponentMaxValueField />
         </>
       )}
-      <ComponentUseLimitForBillingField />
+      {!props.disableQuotas && <ComponentUseLimitForBillingField />}
     </>
   ) : null,
 ) as React.ComponentType<{}>;
