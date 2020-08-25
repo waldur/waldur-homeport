@@ -9,6 +9,7 @@ import { ClusterNodesList } from '../node/ClusterNodesList';
 import { ClusterTemplatesList } from '../template/ClusterTemplateList';
 
 import { ClusterApplicationsList } from './apps/ClusterApplicationsList';
+import { ClusterIngressesList } from './ClusterIngressesList';
 import { ClusterWorkloadsList } from './ClusterWorkloadsList';
 import { ClusterHPAList } from './hpas/ClusterHPAList';
 
@@ -52,6 +53,11 @@ ResourceTabsConfiguration.register('Rancher.Cluster', () => [
     key: 'hpas',
     title: translate('HPA'),
     component: ClusterHPAList,
+  },
+  {
+    key: 'ingresses',
+    title: translate('Ingress'),
+    component: ClusterIngressesList,
   },
   ...getDefaultResourceTabs(),
 ]);
