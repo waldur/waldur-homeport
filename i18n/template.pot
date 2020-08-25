@@ -1447,6 +1447,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -2729,6 +2730,10 @@ msgstr ""
 msgid "Informational - client’s request to get or provide additional information related to a service."
 msgstr ""
 
+#: src/rancher/cluster/tabs.ts
+msgid "Ingress"
+msgstr ""
+
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "Initial admin password"
@@ -3603,6 +3608,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -3668,6 +3674,7 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
@@ -4881,6 +4888,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -6460,6 +6468,7 @@ msgstr ""
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -6687,6 +6696,10 @@ msgstr ""
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Target type"
+msgstr ""
+
+#: src/rancher/cluster/ClusterIngressesList.tsx
+msgid "Targets"
 msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
@@ -8694,6 +8707,10 @@ msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
 msgid "hours"
+msgstr ""
+
+#: src/rancher/cluster/ClusterIngressesList.tsx
+msgid "ingresses"
 msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
