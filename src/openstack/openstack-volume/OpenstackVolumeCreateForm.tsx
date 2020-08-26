@@ -3,7 +3,7 @@ import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
-import { getLatinNameValidators, required } from '@waldur/core/validators';
+import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import {
   NumberField,
@@ -16,6 +16,7 @@ import { translate } from '@waldur/i18n';
 import { parseIntField } from '@waldur/marketplace/common/utils';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
+import { getVolumeNameValidators } from '@waldur/openstack/utils';
 
 import { loadVolumeAvailabilityZones, loadVolumeTypes } from '../api';
 import {
@@ -92,7 +93,7 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
           label={translate('Volume name')}
           required={true}
           name="attributes.name"
-          validate={getLatinNameValidators()}
+          validate={getVolumeNameValidators()}
         />
         <NumberField
           label={translate('Size')}
