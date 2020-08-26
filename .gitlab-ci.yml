@@ -35,6 +35,16 @@ lint:
     variables:
       - $SKIP_TESTS == 'yes'
 
+jest_tests:
+  stage: test
+  script:
+    - npm install -g jest
+    - jest --verbose --runInBand --coverage
+  coverage: /All\sfiles.*?\s+(\d+.\d+)/
+  except:
+    variables:
+      - $SKIP_TESTS == 'yes'
+
 e2e:
   stage: test
   image:
