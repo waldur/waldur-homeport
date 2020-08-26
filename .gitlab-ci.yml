@@ -1,0 +1,64 @@
+stages:
+  - test
+  - build
+  - publish
+
+variables:
+  COMPONENT_VERSION: "latest"
+  
+image: node:lts-alpine
+
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  policy: pull
+  paths:
+    - .yarn
+    - node_modules/
+
+before_script:
+  - yarn config set cache-folder .yarn
+  - yarn install --frozen-lockfile
+
+format_checker:
+  stage: test
+  script:
+      - yarn format:check
+  except:
+    variables:
+      - $SKIP_TESTS == 'yes'
+
+lint:
+  stage: test
+  script:
+    - yarn lint:check 
+  except:
+    variables:
+      - $SKIP_TESTS == 'yes'
+
+e2e:
+  stage: test
+  image:
+    name: cypress/included:4.8.0
+    entrypoint: [""]
+  script:
+    - npm install -g yarn
+    - yarn config set cache-folder .yarn
+    - yarn install --frozen-lockfile
+    - NO_COLOR=1 yarn ci:test
+  except:
+    variables:
+      - $SKIP_TESTS == 'yes'
+
+build:
+  stage: build
+  script:
+    - yarn build
+  artifacts:
+    paths:
+     - dist/
+  only:
+    - branches
+    - master
+  except:
+    variables:
+      - $SKIP_BUILD == 'yes'
