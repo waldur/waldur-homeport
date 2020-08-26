@@ -73,7 +73,13 @@ describe('Offering creation', () => {
       .get('label:contains(Type)') // yields 2 fields: ype for 1. management and 2. "user input field" section
       .last() // access Type field for "user input field" section
       .next()
-      .find('.Select-placeholder')
+      .find('div[class$="placeholder"]')
+      .click({ force: true })
+      // do the same like in force mode
+      .get('label:contains(Type)')
+      .last()
+      .next()
+      .find('div[class$="placeholder"]')
       .click({ force: true })
       .selectTheFirstOptionOfDropdown()
 
@@ -143,7 +149,7 @@ describe('Offering creation', () => {
 
       // Ensure that a user is redirected to offerings list page after successfully submitting the form
       .location()
-      .should(loc => {
+      .should((loc) => {
         expect(loc.href).to.eq(
           'http://localhost:8001/#/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offerings/',
         );

@@ -1,8 +1,6 @@
 describe('Financial overview', () => {
   beforeEach(() => {
-    cy.server()
-      .mockUser()
-      .login();
+    cy.server().mockUser().login();
   });
 
   it('should render current cost and estimated cost columns if current month is selected', () => {
@@ -18,10 +16,10 @@ describe('Financial overview', () => {
 
   it('should render cost column if previous month is selected', () => {
     cy.visitOrganizations()
-      .get('div.Select-control input')
+      .get('div[class$="singleValue"]')
       .first()
       .click({ force: true })
-      .get('.Select-option')
+      .get('*div[id^="react-select"]')
       .last()
       .click()
       .get('table th')
@@ -35,8 +33,6 @@ describe('Financial overview', () => {
   });
 
   it('should render total cost of €138.00', () => {
-    cy.visitOrganizations()
-      .get('.text-right')
-      .should('contain', '€138.00');
+    cy.visitOrganizations().get('.text-right').should('contain', '€138.00');
   });
 });
