@@ -45,10 +45,10 @@ describe('Marketplace landing view', () => {
       .contains('Marketplace')
 
       // Ensure that search works
-      .get('div.Select-control input')
+      .get('div[class$="placeholder"]')
       .first()
       .click({ force: true })
-      .get('.Select-option')
+      .get('*div[id^="react-select"]')
       .first()
       .click();
   });
