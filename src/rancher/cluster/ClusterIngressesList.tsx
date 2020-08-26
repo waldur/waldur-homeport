@@ -4,6 +4,8 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
+import { ViewYAMLButton } from './ViewYAMLButton';
+
 const TableComponent = (props) => {
   const { translate } = props;
   return (
@@ -35,6 +37,10 @@ const TableComponent = (props) => {
         {
           title: translate('State'),
           render: ({ row }) => <>{row.runtime_state}</>,
+        },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => <ViewYAMLButton resource={row} />,
         },
       ]}
       verboseName={translate('ingresses')}
