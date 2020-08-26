@@ -3652,6 +3652,7 @@ msgid "Name is required field."
 msgstr ""
 
 #: src/core/validators.ts
+#: src/openstack/utils.ts
 msgid "Name is too short, names should be at least two alphanumeric characters."
 msgstr ""
 
@@ -3668,6 +3669,7 @@ msgid "Name of your organization."
 msgstr ""
 
 #: src/core/validators.ts
+#: src/openstack/utils.ts
 msgid "Name should consist of latin symbols and numbers."
 msgstr ""
 

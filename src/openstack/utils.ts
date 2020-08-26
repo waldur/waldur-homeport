@@ -1,6 +1,7 @@
 import { get } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { ENV } from '@waldur/core/services';
+import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { ActionContext } from '@waldur/resource/actions/types';
 
@@ -35,6 +36,8 @@ export const PRIVATE_CIDR_PATTERN = new RegExp(
     // Class C
     '|(^(192).(168)(.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])).0/24$)',
 );
+
+export const VOLUME_NAME_PATTERN = new RegExp('^[A-Za-z0-9]+$');
 
 export const validatePrivateSubnetCIDR = (value) => {
   if (!value) {
@@ -123,4 +126,26 @@ export const validatePermissionsForConsoleAction = (ctx: ActionContext) => {
   return translate(
     'Only staff and organization users are allowed to open console.',
   );
+};
+
+const volumeName = (value: string) => {
+  if (!value) {
+    return undefined;
+  }
+  if (value.length < 2) {
+    return translate(
+      'Name is too short, names should be at least two alphanumeric characters.',
+    );
+  }
+  if (!value.match(VOLUME_NAME_PATTERN)) {
+    return translate('Name should consist of latin symbols and numbers.');
+  }
+};
+
+export const getVolumeNameValidators = () => {
+  const validators = [required];
+  if (ENV.enforceLatinName) {
+    validators.push(volumeName);
+  }
+  return validators;
 };
