@@ -160,6 +160,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
