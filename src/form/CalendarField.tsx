@@ -85,7 +85,7 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
   };
 
   render() {
-    const { excludedEvents = [], fields } = this.props;
+    const { excludedEvents, fields } = this.props;
     let events = fields.getAll();
     if (!events) {
       events = [];
