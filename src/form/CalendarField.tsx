@@ -25,6 +25,9 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
         }
       },
     );
+    if (!configWithEvent) {
+      return null;
+    }
     const validRange = this.getValidRange(this.props.excludedEvents);
     const { config } = configWithEvent.extendedProps!;
 
@@ -57,7 +60,10 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
   };
 
   getAvailabilitySlots = (events) => {
-    const { slotDuration } = this.getCalendarConfig();
+    const config = this.getCalendarConfig();
+    if (!config) {
+      return [];
+    }
     const availability = [];
 
     this.props.excludedEvents.map((event) =>
@@ -66,7 +72,7 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
 
     const slots = createAvailabilitySlots(
       availability,
-      moment.duration(slotDuration),
+      moment.duration(config.slotDuration),
     );
 
     return slots.filter(
