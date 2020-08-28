@@ -18,7 +18,7 @@ export const AsyncSelectField = (props) => {
           loadOptions={(query) => {
             const optionsPromise = props.loadOptions(query);
             optionsPromise.then((res) => {
-              setOptions(res);
+              setOptions(res.options);
             });
             return optionsPromise;
           }}
