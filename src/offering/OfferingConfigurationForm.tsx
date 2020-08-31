@@ -56,7 +56,6 @@ export class PureOfferingConfigurationForm extends React.Component<
 
   render() {
     const props = this.props;
-    const { schedules } = this.props.offering.attributes;
     return (
       <form className="form-horizontal">
         <FormContainer
@@ -162,7 +161,7 @@ export class PureOfferingConfigurationForm extends React.Component<
           {props.offering.type === OFFERING_TYPE_BOOKING && (
             <CalendarField
               name="attributes.schedules"
-              excludedEvents={schedules}
+              excludedEvents={this.props.offering.attributes.schedules || []}
               label={translate('Select dates')}
             />
           )}

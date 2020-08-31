@@ -4,9 +4,8 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ToggleButton from 'react-bootstrap/lib/ToggleButton';
 import { Field } from 'redux-form';
 
+import { ToggleButtonGroupInput } from '@waldur/form/ToggleButtonGroupInput';
 import { translate } from '@waldur/i18n';
-
-import { ToggleButtonGroupInput } from './ToggleButtonGroupInput';
 
 export const RoleGroup = ({ roles }) => (
   <FormGroup>

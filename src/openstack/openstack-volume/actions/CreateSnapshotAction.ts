@@ -1,13 +1,15 @@
 import { translate } from '@waldur/i18n';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { createSnapshot } from '@waldur/openstack/api';
 import {
   createLatinNameField,
   createDescriptionField,
 } from '@waldur/resource/actions/base';
+import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
+import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 
-import { SnapshotCreateDialog } from '../SnapshotCreateDialog';
-
-export default function createAction(): ResourceAction {
+export default function createAction({ resource }): ResourceAction {
   return {
     name: 'snapshot',
     type: 'form',
@@ -16,8 +18,6 @@ export default function createAction(): ResourceAction {
     title: translate('Create'),
     dialogTitle: translate('Create snapshot for OpenStack volume'),
     iconClass: 'fa fa-plus',
-    component: SnapshotCreateDialog,
-    useResolve: true,
     fields: [
       createLatinNameField(),
       createDescriptionField(),
@@ -31,5 +31,21 @@ export default function createAction(): ResourceAction {
         ),
       },
     ],
+    component: ResourceActionDialog,
+    useResolve: true,
+    getInitialValues: () => ({
+      name: resource.name + '-snapshot',
+    }),
+    submitForm: async (dispatch, formData) => {
+      try {
+        await createSnapshot(resource.uuid, formData);
+        dispatch(showSuccess(translate('Volume snapshot has been created.')));
+        dispatch(closeModalDialog());
+      } catch (e) {
+        dispatch(
+          showErrorResponse(e, translate('Unable to create volume snapshot.')),
+        );
+      }
+    },
   };
 }

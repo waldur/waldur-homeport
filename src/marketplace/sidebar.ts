@@ -63,6 +63,14 @@ SidebarExtensionService.register(ORGANIZATION_WORKSPACE, () => {
               uuid: customer.uuid,
             },
           },
+        ],
+      },
+      {
+        key: 'marketplace-services',
+        label: translate('Public services'),
+        icon: 'fa-money',
+        index: 310,
+        children: [
           {
             label: translate('Public offerings'),
             icon: 'fa-money',

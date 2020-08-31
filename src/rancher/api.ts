@@ -64,6 +64,9 @@ export const redeployWorkload = (id: string) =>
 export const deleteWorkload = (id: string) =>
   deleteById('/rancher-workloads/', id);
 
+export const deleteIngress = (id: string) =>
+  deleteById('/rancher-ingresses/', id);
+
 export const listNamespaces = (params) =>
   getAll('/rancher-namespaces/', params);
 

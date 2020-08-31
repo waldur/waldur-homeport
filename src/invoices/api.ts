@@ -1,7 +1,6 @@
-import { getAll, sendForm } from '@waldur/core/api';
+import { get, sendForm } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { ENV } from '@waldur/core/services';
-import { Invoice } from '@waldur/invoices/types';
 
 export const markAsPaid = (data) => {
   const reqData = {
@@ -15,12 +14,9 @@ export const markAsPaid = (data) => {
   );
 };
 
-export const getAllInvoices = (startDate: string, accountStatus: boolean) =>
-  getAll<Invoice>('/invoices/', {
+export const getGrowthChartData = (accounting_is_running: boolean) =>
+  get('/invoices/growth/', {
     params: {
-      page_size: 200,
-      field: ['month', 'year', 'total', 'customer_details'],
-      start_date: `${startDate}-01`,
-      accounting_is_running: accountStatus,
+      accounting_is_running,
     },
-  });
+  }).then((response) => response.data);

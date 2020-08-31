@@ -9,7 +9,7 @@ export const refreshSupportUsers = async (name: string) => {
 
 export const refreshUsers = (name: string) => {
   const params = name && { full_name: name };
-  return getList('/users/', params).then((options) => ({ options }));
+  return getList('/users/', params);
 };
 
 export const refreshCustomers = async (name: string, caller?: User) => {

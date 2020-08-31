@@ -7,23 +7,13 @@ import { InvitationService } from './InvitationService';
 
 export class InvitationUtilsService {
   // @ngInject
-  constructor(
-    ncUtilsFlash,
-    $q,
-    $auth,
-    $state,
-    $rootScope,
-    $timeout,
-    $uibModal,
-    ENV,
-  ) {
+  constructor(ncUtilsFlash, $q, $auth, $state, $rootScope, $timeout, ENV) {
     this.ncUtilsFlash = ncUtilsFlash;
     this.$q = $q;
     this.$auth = $auth;
     this.$state = $state;
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
-    this.$uibModal = $uibModal;
     this.validateInvitationEmail =
       ENV.plugins.WALDUR_CORE.VALIDATE_INVITATION_EMAIL;
   }

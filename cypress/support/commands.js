@@ -24,7 +24,7 @@ Cypress.Commands.add('fillAndSubmitLoginForm', (username, password) => {
 });
 
 // Login using UI
-Cypress.Commands.add('login', function(username, password) {
+Cypress.Commands.add('login', function (username, password) {
   const log = Cypress.log({
     name: 'login',
     message: [username, password],
@@ -51,7 +51,7 @@ Cypress.Commands.add('login', function(username, password) {
     .should('match', /profile/, { log: false })
 
     // Make DOM snapshot
-    .then(function() {
+    .then(function () {
       log.snapshot().end();
     });
 });
@@ -60,27 +60,20 @@ Cypress.Commands.add('waitForSpinner', () => {
   cy.get('.fa-spinner.fa-spin').should('not.be.visible');
 });
 
-Cypress.Commands.add('openDropdownByLabel', label => {
+Cypress.Commands.add('openDropdownByLabel', (label) => {
   cy.get('label')
     .contains(label)
     .next()
-    .find('.Select-placeholder')
+    .find('div[class$="placeholder"]') // select classnames which end with "placeholder"
     .click({ force: true });
 });
 
-Cypress.Commands.add('openDropdownByLabelForce', label => {
-  cy.get('label')
-    .contains(label)
-    .next()
-    .find('.Select-input input')
-    .type(' ', { force: true })
-    .openDropdownByLabel(label);
+Cypress.Commands.add('openDropdownByLabelForce', (label) => {
+  cy.openDropdownByLabel(label).openDropdownByLabel(label);
 });
 
 Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
-  cy.get('.Select-option')
-    .first()
-    .click();
+  cy.get('*div[id^="react-select"]').first().click(); // get ids which start with "react-select"
 });
 
 Cypress.Commands.add('openWorkspaceSelector', () => {

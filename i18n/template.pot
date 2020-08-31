@@ -160,6 +160,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -1270,6 +1271,10 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
+#: src/user/SelectAffiliationDialog.tsx
+msgid "Continue"
+msgstr ""
+
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 msgid "Contract sum"
@@ -1412,7 +1417,6 @@ msgstr ""
 msgid "Create security group for OpenStack tenant"
 msgstr ""
 
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Create snapshot for OpenStack volume"
 msgstr ""
@@ -1444,6 +1448,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -1667,6 +1672,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/project/ProjectDeleteButton.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
+#: src/rancher/cluster/IngressActions.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 #: src/rancher/cluster/WorkloadActions.tsx
 msgid "Delete"
@@ -1719,7 +1725,6 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
@@ -1756,6 +1761,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.ts
+#: src/openstack/openstack-snapshot/DestroyAction.ts
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
 #: src/rancher/node/actions/DestroyAction.ts
 msgid "Destroy"
@@ -2067,10 +2073,6 @@ msgstr ""
 
 #: src/configs/base-config.ts
 msgid "English"
-msgstr ""
-
-#: src/resource/actions/dialog/action-field-datetime.html
-msgid "Enter date"
 msgstr ""
 
 #: src/openstack/openstack-subnet/openstack-subnet.html
@@ -2516,9 +2518,12 @@ msgstr ""
 msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/actions.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
+msgstr ""
+
+#: src/openstack/openstack-snapshot/EditAction.ts
+msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -2725,6 +2730,10 @@ msgstr ""
 
 #: src/issues/types/constants.ts
 msgid "Informational - client’s request to get or provide additional information related to a service."
+msgstr ""
+
+#: src/rancher/cluster/tabs.ts
+msgid "Ingress"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
@@ -3055,7 +3064,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions/EditAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
-#: src/openstack/openstack-snapshot/actions.ts
+#: src/openstack/openstack-snapshot/EditAction.ts
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Kept until"
 msgstr ""
@@ -3294,6 +3303,7 @@ msgstr ""
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
+#: src/user/list/UserDashboard.tsx
 msgid "Marketplace"
 msgstr ""
 
@@ -3311,6 +3321,10 @@ msgstr ""
 
 #: src/customer/details/CustomerMarketplacePanel.tsx
 msgid "Marketplace service provider"
+msgstr ""
+
+#: src/user/SelectAffiliationDialog.tsx
+msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx
@@ -3596,6 +3610,7 @@ msgstr ""
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -3638,6 +3653,7 @@ msgid "Name is required field."
 msgstr ""
 
 #: src/core/validators.ts
+#: src/openstack/utils.ts
 msgid "Name is too short, names should be at least two alphanumeric characters."
 msgstr ""
 
@@ -3654,6 +3670,7 @@ msgid "Name of your organization."
 msgstr ""
 
 #: src/core/validators.ts
+#: src/openstack/utils.ts
 msgid "Name should consist of latin symbols and numbers."
 msgstr ""
 
@@ -3661,6 +3678,7 @@ msgstr ""
 msgid "Name should contain at least 3 symbols."
 msgstr ""
 
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
@@ -4192,6 +4210,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
+#: src/user/SelectAffiliationDialog.tsx
 #: src/user/list/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -4651,10 +4670,6 @@ msgstr ""
 msgid "Please provide a reason"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/actions.ts
-msgid "Please provide details of a new volume created from snapshot."
-msgstr ""
-
 #: src/customer/create/WizardFormSecondPage.tsx
 msgid "Please provide registration code of your company."
 msgstr ""
@@ -4877,10 +4892,12 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/user/SelectAffiliationDialog.tsx
 msgid "Project"
 msgstr ""
 
@@ -5078,6 +5095,10 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "Public resources"
+msgstr ""
+
+#: src/marketplace/sidebar.ts
+msgid "Public services"
 msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
@@ -5680,7 +5701,12 @@ msgid "Restarting"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
 msgid "Restore"
+msgstr ""
+
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+msgid "Restore volume snapshot"
 msgstr ""
 
 #: src/openstack/openstack-snapshot/tabs.ts
@@ -5975,6 +6001,10 @@ msgstr ""
 msgid "Select affected resource..."
 msgstr ""
 
+#: src/user/SelectAffiliationDialog.tsx
+msgid "Select affiliation"
+msgstr ""
+
 #: src/rancher/template/SelectControl.tsx
 msgid "Select an option..."
 msgstr ""
@@ -6027,6 +6057,7 @@ msgstr ""
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
+#: src/user/SelectAffiliationDialog.tsx
 msgid "Select organization..."
 msgstr ""
 
@@ -6045,6 +6076,7 @@ msgstr ""
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/ProjectGroup.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
+#: src/user/SelectAffiliationDialog.tsx
 msgid "Select project..."
 msgstr ""
 
@@ -6350,18 +6382,6 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
-msgid "Snapshot has been created."
-msgstr ""
-
-#: src/openstack/openstack-snapshot/actions.ts
-msgid "Snapshot has been updated."
-msgstr ""
-
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
-msgid "Snapshot name"
-msgstr ""
-
 #: src/openstack/openstack-snapshot-schedule/actions.ts
 msgid "Snapshot schedule has been updated."
 msgstr ""
@@ -6452,6 +6472,7 @@ msgstr ""
 #: src/paypal/PaymentsList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
+#: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -6526,7 +6547,6 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
@@ -6633,7 +6653,6 @@ msgstr ""
 #: src/openstack/openstack-floating-ips/module.ts
 #: src/openstack/openstack-network/module.ts
 #: src/openstack/openstack-security-groups/module.ts
-#: src/openstack/openstack-snapshot/actions.ts
 #: src/openstack/openstack-subnet/actions.ts
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
@@ -6681,6 +6700,10 @@ msgstr ""
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Target type"
+msgstr ""
+
+#: src/rancher/cluster/ClusterIngressesList.tsx
+msgid "Targets"
 msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
@@ -6871,6 +6894,7 @@ msgid "There are no available users."
 msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
+#: src/user/list/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
@@ -7207,6 +7231,10 @@ msgstr ""
 msgid "Unable to confirm email."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
+msgid "Unable to create VM snapshot."
+msgstr ""
+
 #: src/freeipa/FreeIPAAccountCreate.tsx
 msgid "Unable to create a FreeIPA profile."
 msgstr ""
@@ -7251,8 +7279,8 @@ msgstr ""
 msgid "Unable to create request."
 msgstr ""
 
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
-msgid "Unable to create snapshot."
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+msgid "Unable to create volume snapshot."
 msgstr ""
 
 #: src/user/support/effects.ts
@@ -7466,6 +7494,7 @@ msgid "Unable to load locations."
 msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
+#: src/user/list/CategoriesList.tsx
 msgid "Unable to load marketplace categories."
 msgstr ""
 
@@ -7631,6 +7660,10 @@ msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Unable to resize droplet."
+msgstr ""
+
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+msgid "Unable to restore volume snapshot."
 msgstr ""
 
 #: src/auth/AuthInit.tsx
@@ -8160,6 +8193,10 @@ msgstr ""
 msgid "VM snapshot"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
+msgid "VM snapshot has been created."
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/BackupScheduleWarning.tsx
 msgid "VM snapshot schedule caveats"
 msgstr ""
@@ -8291,7 +8328,6 @@ msgid "Volume has been extended."
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/SnapshotCreateDialog.tsx
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 msgid "Volume name"
 msgstr ""
@@ -8302,6 +8338,18 @@ msgstr ""
 
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "Volume size"
+msgstr ""
+
+#: src/openstack/openstack-snapshot/EditAction.ts
+msgid "Volume snapshot"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+msgid "Volume snapshot has been created."
+msgstr ""
+
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+msgid "Volume snapshot has been restored."
 msgstr ""
 
 #: src/openstack/openstack-backup/tabs.ts
@@ -8663,6 +8711,10 @@ msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
 msgid "hours"
+msgstr ""
+
+#: src/rancher/cluster/ClusterIngressesList.tsx
+msgid "ingresses"
 msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx

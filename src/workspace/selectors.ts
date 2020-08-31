@@ -14,6 +14,13 @@ export const getUserCustomerPermissions = createSelector(getUser, (user) => {
   return [];
 });
 
+export const getUserProjectPermissions = createSelector(getUser, (user) => {
+  if (user) {
+    return user.project_permissions;
+  }
+  return [];
+});
+
 export const getProject = (state: OuterState): Project =>
   state.workspace.project;
 

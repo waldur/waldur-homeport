@@ -5,6 +5,7 @@ export interface User {
   uuid: string;
   username?: string;
   customer_permissions?: Permission[];
+  project_permissions?: Permission[];
   full_name?: string;
   email?: string;
   job_title?: string;

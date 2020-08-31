@@ -24,12 +24,12 @@ describe('OpenStackInstanceCreateForm', () => {
       .openSelectDialog('flavor', 'm1.little')
 
       // Open dropdown for project selector
-      .get('.Select-placeholder')
+      .get('div[class$="placeholder"]')
       .first()
       .click()
 
       // Select first project
-      .get('.Select-option')
+      .get('*div[id^="react-select"]')
       .first()
       .click()
 
@@ -45,12 +45,12 @@ describe('OpenStackInstanceCreateForm', () => {
       .type('openstack-instance')
 
       // Open dropdown for project selector
-      .get('.Select-placeholder')
+      .get('div[class$="placeholder"]')
       .first()
       .click()
 
       // Select first project
-      .get('.Select-option')
+      .get('*div[id^="react-select"]')
       .first()
       .click()
       .get('.table-bordered')
@@ -75,12 +75,12 @@ describe('OpenStackInstanceCreateForm', () => {
       .openSelectDialog('flavor', 'm1.little')
 
       // Open dropdown for project selector
-      .get('.Select-placeholder')
+      .get('div[class$="placeholder"]')
       .first()
       .click()
 
       // Select first project
-      .get('.Select-option')
+      .get('*div[id^="react-select"]')
       .first()
       .click()
 
