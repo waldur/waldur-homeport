@@ -1672,6 +1672,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
 #: src/project/ProjectDeleteButton.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
+#: src/rancher/cluster/IngressActions.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 #: src/rancher/cluster/WorkloadActions.tsx
 msgid "Delete"
