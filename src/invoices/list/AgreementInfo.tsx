@@ -52,7 +52,10 @@ export const AgreementInfo = (props: AgreementInfoProps) => {
                 <span>
                   {' '}
                   {translate('Contract sum is')}{' '}
-                  {activeFixedPricePaymentProfile.attributes.contract_sum}.
+                  {defaultCurrency(
+                    activeFixedPricePaymentProfile.attributes.contract_sum,
+                  )}
+                  .
                 </span>
               ) : null}
               <span>
