@@ -20,6 +20,7 @@ export const getGrowthChartData = (accounting_is_running: boolean) =>
   get('/invoices/growth/', {
     params: {
       accounting_is_running,
+      accounting_mode: ENV.accountingMode,
     },
   }).then((response) => response.data);
 
