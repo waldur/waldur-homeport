@@ -994,6 +994,10 @@ msgstr ""
 msgid "Category is invalid."
 msgstr ""
 
+#: src/invoices/list/InvoicesStatsList.tsx
+msgid "Category name"
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 msgid "Certifications"
 msgstr ""
@@ -1298,6 +1302,7 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: src/customer/list/CustomerList.tsx
+#: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -2961,6 +2966,10 @@ msgstr ""
 msgid "Invoice number"
 msgstr ""
 
+#: src/invoices/list/InvoicesStatsList.tsx
+msgid "Invoice statistics"
+msgstr ""
+
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -3993,6 +4002,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Offering logo"
+msgstr ""
+
+#: src/invoices/list/InvoicesStatsList.tsx
+msgid "Offering name"
 msgstr ""
 
 #: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
@@ -6178,6 +6191,7 @@ msgid "Service Request - client’s request to modify, add, change or remove par
 msgstr ""
 
 #: src/invoices/details/InvoiceItemDetails.tsx
+#: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/details/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx

@@ -16,6 +16,11 @@ export const getTotal = (params) =>
 const getCustomerCounters = (customerId: string) =>
   get(`/customers/${customerId}/counters/`).then((response) => response.data);
 
+export const getInvoice = (customer, date) =>
+  get('/invoices/', {
+    params: { customer: customer.url, year: date.year, month: date.month },
+  }).then((response) => response.data[0]);
+
 const parseCategories = (
   categories: Category[],
   counters: object,
