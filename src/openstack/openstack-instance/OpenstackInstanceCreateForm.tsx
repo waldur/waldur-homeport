@@ -304,7 +304,7 @@ export class OpenstackInstanceCreateFormComponent extends React.Component<
           <Field
             name="attributes.description"
             component={(fieldProps) => (
-              <TextField maxLength={500} {...fieldProps.input} />
+              <TextField maxLength={2000} {...fieldProps.input} />
             )}
           />
         </CreateResourceFormGroup>

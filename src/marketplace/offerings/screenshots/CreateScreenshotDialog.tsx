@@ -65,7 +65,7 @@ const AddOfferingScreenshotDialog = (props) => (
           label={translate('Description')}
           required={true}
           validate={required}
-          maxLength={500}
+          maxLength={2000}
         />
       </FormContainer>
     </ModalDialog>
