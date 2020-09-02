@@ -23,6 +23,10 @@ format_checker:
   stage: test
   script:
       - yarn format:check
+  only:
+    - merge_requests
+    - master
+    - develop
   except:
     variables:
       - $SKIP_TESTS == 'yes'
@@ -30,7 +34,11 @@ format_checker:
 lint:
   stage: test
   script:
-    - yarn lint:check 
+    - yarn lint:check
+  only:
+    - merge_requests
+    - master
+    - develop
   except:
     variables:
       - $SKIP_TESTS == 'yes'
@@ -41,6 +49,10 @@ jest_tests:
     - npm install -g jest
     - jest --verbose --runInBand --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
+  only:
+    - merge_requests
+    - master
+    - develop
   except:
     variables:
       - $SKIP_TESTS == 'yes'
@@ -55,6 +67,14 @@ e2e:
     - yarn config set cache-folder .yarn
     - yarn install --frozen-lockfile
     - NO_COLOR=1 yarn ci:test
+  artifacts:
+    paths:
+      - builds/waldur/waldur-homeport/cypress/
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - master
+    - develop
   except:
     variables:
       - $SKIP_TESTS == 'yes'
@@ -66,9 +86,11 @@ build:
   artifacts:
     paths:
      - dist/
+    expire_in: 1 week
   only:
-    - branches
+    - merge_requests
     - master
+    - develop
   except:
     variables:
       - $SKIP_BUILD == 'yes'
