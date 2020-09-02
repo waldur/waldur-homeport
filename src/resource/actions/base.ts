@@ -38,7 +38,7 @@ export function createDescriptionField(): ActionField {
   return {
     name: 'description',
     label: translate('Description'),
-    maxlength: 500,
+    maxlength: 2000,
     required: false,
     type: 'text',
   };

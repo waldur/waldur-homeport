@@ -28,7 +28,7 @@ export const DEFAULT_EDIT_ACTION = {
     },
     description: {
       label: gettext('Description'),
-      maxlength: 500,
+      maxlength: 2000,
       required: false,
       type: 'text',
     },
