@@ -827,6 +827,7 @@ msgid "Billing enabled"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
+#: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
 msgstr ""
