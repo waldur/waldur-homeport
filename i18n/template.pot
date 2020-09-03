@@ -2691,6 +2691,11 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
+#: src/rancher/cluster/ImportYAMLButton.tsx
+#: src/rancher/cluster/ImportYAMLDialog.tsx
+msgid "Import YAML"
+msgstr ""
+
 #: src/marketplace/resources/import/ResourceImportButton.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "Import resource"
@@ -6582,6 +6587,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
+#: src/rancher/cluster/ImportYAMLDialog.tsx
 #: src/rancher/cluster/ViewYAMLDialog.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
@@ -7407,6 +7413,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/store/effects.ts
 msgid "Unable to get service provider API secret code."
+msgstr ""
+
+#: src/rancher/cluster/ImportYAMLDialog.tsx
+msgid "Unable to import YAML."
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
@@ -8460,6 +8470,10 @@ msgstr ""
 
 #: src/marketplace/common/ReviewButton.tsx
 msgid "Write review"
+msgstr ""
+
+#: src/rancher/cluster/ImportYAMLDialog.tsx
+msgid "YAML has been imported."
 msgstr ""
 
 #: src/rancher/cluster/ViewYAMLDialog.tsx

@@ -4,6 +4,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
+import { ImportYAMLButton } from './ImportYAMLButton';
 import { ServiceActions } from './ServiceActions';
 
 const TableComponent = (props) => {
@@ -60,6 +61,7 @@ const TableComponent = (props) => {
         },
       ]}
       verboseName={translate('services')}
+      actions={<ImportYAMLButton cluster_id={props.resource.uuid} />}
     />
   );
 };
