@@ -161,6 +161,7 @@ msgstr ""
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -1126,6 +1127,10 @@ msgstr ""
 msgid "Cluster"
 msgstr ""
 
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "Cluster IP"
+msgstr ""
+
 #: src/rancher/cluster/create/RancherClusterForm.tsx
 msgid "Cluster description"
 msgstr ""
@@ -1454,6 +1459,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -1679,6 +1685,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogDeleteButton.tsx
 #: src/rancher/cluster/IngressActions.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
+#: src/rancher/cluster/ServiceActions.tsx
 #: src/rancher/cluster/WorkloadActions.tsx
 msgid "Delete"
 msgstr ""
@@ -3620,6 +3627,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -3688,6 +3696,7 @@ msgid "Name should contain at least 3 symbols."
 msgstr ""
 
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
@@ -6166,6 +6175,10 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "Selector"
+msgstr ""
+
 #: src/invoices/list/SendNotificationButton.tsx
 msgid "Send notification"
 msgstr ""
@@ -6242,6 +6255,10 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Service type"
+msgstr ""
+
+#: src/rancher/cluster/tabs.ts
+msgid "Services"
 msgstr ""
 
 #: src/offering/actions/SetBackendIDAction.ts
@@ -6487,6 +6504,7 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -6709,6 +6727,10 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Taking a snapshot"
+msgstr ""
+
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "Target"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
@@ -8831,6 +8853,10 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 msgid "security groups"
+msgstr ""
+
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "services"
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx

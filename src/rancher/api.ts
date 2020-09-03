@@ -88,3 +88,6 @@ export const getYAML = (url: string) =>
 
 export const putYAML = (url: string, yaml: string) =>
   put(`${url}yaml/`, { yaml });
+
+export const deleteService = (id: string) =>
+  deleteById('/rancher-services/', id);
