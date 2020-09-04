@@ -27,10 +27,10 @@ export const LandingPage = withTranslation((props: LandingPageProps) => (
       })}
     >
       <AutocompleteField
-        placeholder={props.translate('Search for apps and services...')}
+        placeholder={props.translate('Search for offerings...')}
         loadOfferings={props.loadOfferings}
         onChange={(offering: any) => props.gotoOffering(offering.uuid)}
-        noOptionsMessage={() => translate('No apps and services')}
+        noOptionsMessage={() => translate('No offerings')}
       />
     </HeroSection>
     <CategoriesList {...props.categories} />
