@@ -3804,10 +3804,6 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/marketplace/landing/LandingPage.tsx
-msgid "No apps and services"
-msgstr ""
-
 #: src/marketplace/resources/list/CategoryFilter.tsx
 msgid "No categories"
 msgstr ""
@@ -3816,6 +3812,7 @@ msgstr ""
 msgid "No entries to show here"
 msgstr ""
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "No offerings"
 msgstr ""
@@ -5965,7 +5962,7 @@ msgstr ""
 
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
-msgid "Search for apps and services..."
+msgid "Search for offerings..."
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
