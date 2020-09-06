@@ -2,9 +2,8 @@ import { data } from './api';
 import SankeyDiagramCalculator from './SankeyDiagramCalculator';
 
 describe('SankeyDiagramCalculator', () => {
-
   it('should return total number of resources provided by particular organization', () => {
-    const totalResourcesSum = (new SankeyDiagramCalculator()).getResourcesSum(
+    const totalResourcesSum = new SankeyDiagramCalculator().getResourcesSum(
       data,
       'uni_of_tartu',
     );
@@ -12,7 +11,7 @@ describe('SankeyDiagramCalculator', () => {
   });
 
   it('should return total number of provided resources in specific country', () => {
-    const totalResourcesSumForCountry = (new SankeyDiagramCalculator()).getResourcesSumForCountry(
+    const totalResourcesSumForCountry = new SankeyDiagramCalculator().getResourcesSumForCountry(
       data,
       'Estonia',
     );
@@ -20,7 +19,7 @@ describe('SankeyDiagramCalculator', () => {
   });
 
   it('should calculate portion of provided resources against total sum', () => {
-    const portionOfResources = (new SankeyDiagramCalculator()).calculateValue(
+    const portionOfResources = new SankeyDiagramCalculator().calculateValue(
       data,
       'uni_of_tartu',
       'tampere',
@@ -29,7 +28,7 @@ describe('SankeyDiagramCalculator', () => {
   });
 
   it('should calculate total resources for a country', () => {
-    const totalResourcesForCountry = (new SankeyDiagramCalculator()).calculateValueForCountry(
+    const totalResourcesForCountry = new SankeyDiagramCalculator().calculateValueForCountry(
       data,
       'uni_of_tartu',
     );
