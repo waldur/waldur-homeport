@@ -213,6 +213,10 @@ export const loadActions = (model) => {
           const action = {
             ...response.data.actions[name],
             ...options[name],
+            fields: {
+              ...response.data.actions[name]?.fields,
+              ...options[name]?.fields,
+            },
           };
           if (actionHasToBeAdded(action, model, user)) {
             result[name] = action;
