@@ -55,7 +55,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
               label={field.label}
               required={field.required}
               maxLength={field.maxlength}
-              pattern={field?.pattern?.source}
+              pattern={field.pattern?.source}
             />
           );
         } else if (field.type === 'text') {
