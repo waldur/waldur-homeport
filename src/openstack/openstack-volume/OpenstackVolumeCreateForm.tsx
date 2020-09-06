@@ -137,7 +137,7 @@ export const OpenstackVolumeCreateForm: React.FC<OfferingConfigurationFormProps>
         <TextField
           label={translate('Description')}
           name="attributes.description"
-          maxLength={500}
+          maxLength={2000}
         />
       </FormContainer>
     </form>

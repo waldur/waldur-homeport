@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
@@ -13,6 +14,11 @@ export const PlanSummary = (props: PlanProps) => (
     <p>
       <strong>{translate('Plan name')}:</strong> {props.plan.name}
     </p>
+    {props.plan.unit && (
+      <p>
+        <strong>{translate('Billing period')}:</strong> {props.plan.unit.label}
+      </p>
+    )}
     {(props.plan.quotas || props.plan.prices) && (
       <table className="table table-bordered">
         <thead>
@@ -36,7 +42,7 @@ export const PlanSummary = (props: PlanProps) => (
                 {props.plan.prices &&
                 (props.plan.prices[component.type] ||
                   props.plan.prices[component.type] === 0)
-                  ? props.plan.prices[component.type]
+                  ? defaultCurrency(props.plan.prices[component.type])
                   : 'N/A'}
               </td>
               <td>{component.measured_unit}</td>

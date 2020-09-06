@@ -5,7 +5,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 
 import { ImportYAMLButton } from './ImportYAMLButton';
-import { IngressActions } from './IngressActions';
+import { ServiceActions } from './ServiceActions';
 
 const TableComponent = (props) => {
   const { translate } = props;
@@ -18,17 +18,33 @@ const TableComponent = (props) => {
           render: ({ row }) => <>{row.name}</>,
         },
         {
-          title: translate('Project'),
-          render: ({ row }) => <>{row.rancher_project_name}</>,
-        },
-        {
           title: translate('Namespace'),
           render: ({ row }) => <>{row.namespace_name}</>,
         },
         {
-          title: translate('Targets'),
+          title: translate('Cluster IP'),
+          render: ({ row }) => <>{row.cluster_ip || 'N/A'}</>,
+        },
+        {
+          title: translate('Target'),
           render: ({ row }) => (
-            <>{row.rules.map((rule) => rule.host).join(', ')}</>
+            <>
+              {row.target_workloads
+                .map((workload) => workload.name)
+                .join(', ') || 'N/A'}
+            </>
+          ),
+        },
+        {
+          title: translate('Selector'),
+          render: ({ row }) => (
+            <>
+              {row.selector
+                ? Object.entries(row.selector)
+                    .map(([key, value]) => `${key}=${value}`)
+                    .join(', ')
+                : 'N/A'}
+            </>
           ),
         },
         {
@@ -41,21 +57,21 @@ const TableComponent = (props) => {
         },
         {
           title: translate('Actions'),
-          render: ({ row }) => <IngressActions ingress={row} />,
+          render: ({ row }) => <ServiceActions service={row} />,
         },
       ]}
-      verboseName={translate('ingresses')}
+      verboseName={translate('services')}
       actions={<ImportYAMLButton cluster_id={props.resource.uuid} />}
     />
   );
 };
 
 const TableOptions: TableOptionsType = {
-  table: 'rancher-ingresses',
-  fetchData: createFetcher('rancher-ingresses'),
+  table: 'rancher-services',
+  fetchData: createFetcher('rancher-services'),
   mapPropsToFilter: (props) => ({
     cluster_uuid: props.resource.uuid,
   }),
 };
 
-export const ClusterIngressesList = connectTable(TableOptions)(TableComponent);
+export const ClusterServicesList = connectTable(TableOptions)(TableComponent);

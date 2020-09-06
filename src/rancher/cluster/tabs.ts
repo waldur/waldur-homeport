@@ -10,6 +10,7 @@ import { ClusterTemplatesList } from '../template/ClusterTemplateList';
 
 import { ClusterApplicationsList } from './apps/ClusterApplicationsList';
 import { ClusterIngressesList } from './ClusterIngressesList';
+import { ClusterServicesList } from './ClusterServicesList';
 import { ClusterWorkloadsList } from './ClusterWorkloadsList';
 import { ClusterHPAList } from './hpas/ClusterHPAList';
 
@@ -58,6 +59,11 @@ ResourceTabsConfiguration.register('Rancher.Cluster', () => [
     key: 'ingresses',
     title: translate('Ingress'),
     component: ClusterIngressesList,
+  },
+  {
+    key: 'services',
+    title: translate('Services'),
+    component: ClusterServicesList,
   },
   ...getDefaultResourceTabs(),
 ]);

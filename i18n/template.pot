@@ -161,6 +161,7 @@ msgstr ""
 #: src/project/team/ProjectUsersList.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -826,6 +827,7 @@ msgid "Billing enabled"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
+#: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 msgid "Billing period"
 msgstr ""
@@ -994,6 +996,10 @@ msgstr ""
 msgid "Category is invalid."
 msgstr ""
 
+#: src/invoices/list/InvoicesStatsList.tsx
+msgid "Category name"
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 msgid "Certifications"
 msgstr ""
@@ -1120,6 +1126,10 @@ msgstr ""
 #: src/vmware/VMwareVirtualMachineForm.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Cluster"
+msgstr ""
+
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "Cluster IP"
 msgstr ""
 
 #: src/rancher/cluster/create/RancherClusterForm.tsx
@@ -1298,6 +1308,7 @@ msgid "Copy to clipboard"
 msgstr ""
 
 #: src/customer/list/CustomerList.tsx
+#: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -1449,6 +1460,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -1674,6 +1686,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogDeleteButton.tsx
 #: src/rancher/cluster/IngressActions.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
+#: src/rancher/cluster/ServiceActions.tsx
 #: src/rancher/cluster/WorkloadActions.tsx
 msgid "Delete"
 msgstr ""
@@ -2679,6 +2692,11 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
+#: src/rancher/cluster/ImportYAMLButton.tsx
+#: src/rancher/cluster/ImportYAMLDialog.tsx
+msgid "Import YAML"
+msgstr ""
+
 #: src/marketplace/resources/import/ResourceImportButton.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "Import resource"
@@ -2959,6 +2977,10 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Invoice number"
+msgstr ""
+
+#: src/invoices/list/InvoicesStatsList.tsx
+msgid "Invoice statistics"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
@@ -3611,6 +3633,7 @@ msgstr ""
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/ClusterCatalogList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -3679,6 +3702,7 @@ msgid "Name should contain at least 3 symbols."
 msgstr ""
 
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
@@ -3780,10 +3804,6 @@ msgstr ""
 msgid "No access info."
 msgstr ""
 
-#: src/marketplace/landing/LandingPage.tsx
-msgid "No apps and services"
-msgstr ""
-
 #: src/marketplace/resources/list/CategoryFilter.tsx
 msgid "No categories"
 msgstr ""
@@ -3792,6 +3812,7 @@ msgstr ""
 msgid "No entries to show here"
 msgstr ""
 
+#: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "No offerings"
 msgstr ""
@@ -3993,6 +4014,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/OverviewStep.tsx
 msgid "Offering logo"
+msgstr ""
+
+#: src/invoices/list/InvoicesStatsList.tsx
+msgid "Offering name"
 msgstr ""
 
 #: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
@@ -5937,7 +5962,7 @@ msgstr ""
 
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
-msgid "Search for apps and services..."
+msgid "Search for offerings..."
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -6153,6 +6178,10 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "Selector"
+msgstr ""
+
 #: src/invoices/list/SendNotificationButton.tsx
 msgid "Send notification"
 msgstr ""
@@ -6178,6 +6207,7 @@ msgid "Service Request - client’s request to modify, add, change or remove par
 msgstr ""
 
 #: src/invoices/details/InvoiceItemDetails.tsx
+#: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/details/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
@@ -6228,6 +6258,10 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 msgid "Service type"
+msgstr ""
+
+#: src/rancher/cluster/tabs.ts
+msgid "Services"
 msgstr ""
 
 #: src/offering/actions/SetBackendIDAction.ts
@@ -6473,6 +6507,7 @@ msgstr ""
 #: src/project/ProjectResourcesList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
+#: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -6550,6 +6585,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
+#: src/rancher/cluster/ImportYAMLDialog.tsx
 #: src/rancher/cluster/ViewYAMLDialog.tsx
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
@@ -6695,6 +6731,10 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Taking a snapshot"
+msgstr ""
+
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "Target"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
@@ -7371,6 +7411,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/store/effects.ts
 msgid "Unable to get service provider API secret code."
+msgstr ""
+
+#: src/rancher/cluster/ImportYAMLDialog.tsx
+msgid "Unable to import YAML."
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
@@ -8426,6 +8470,10 @@ msgstr ""
 msgid "Write review"
 msgstr ""
 
+#: src/rancher/cluster/ImportYAMLDialog.tsx
+msgid "YAML has been imported."
+msgstr ""
+
 #: src/rancher/cluster/ViewYAMLDialog.tsx
 msgid "YAML has been updated."
 msgstr ""
@@ -8817,6 +8865,10 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 msgid "security groups"
+msgstr ""
+
+#: src/rancher/cluster/ClusterServicesList.tsx
+msgid "services"
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx

@@ -109,6 +109,10 @@ const SelectAffiliationDialogContainer = (props) => {
                 options={organizationOptions}
                 simpleValue={true}
                 validate={required}
+                menuPortalTarget={document.body}
+                styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+                menuPosition={'fixed'}
+                menuPlacement={'bottom'}
               />
             ) : (
               <SelectField
@@ -119,6 +123,10 @@ const SelectAffiliationDialogContainer = (props) => {
                 options={projectOptions}
                 simpleValue={true}
                 validate={required}
+                menuPortalTarget={document.body}
+                styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+                menuPosition={'fixed'}
+                menuPlacement={'bottom'}
               />
             )}
           </FormContainer>

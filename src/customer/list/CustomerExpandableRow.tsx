@@ -1,17 +1,22 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
+import { formValueSelector } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { AgreementInfo } from '@waldur/invoices/list/AgreementInfo';
-import { ResourceExpandableRow } from '@waldur/resource/ResourceExpandableRow';
+import { InvoicesStatsList } from '@waldur/invoices/list/InvoicesStatsList';
 
-import { loadCustomerResources } from './api';
+import { getInvoice } from './api';
 
-export const CustomerExpandableRow = (props) => {
+export const CustomerExpandableRow = React.memo((props: any) => {
+  const accountingPeriod = useSelector((state) =>
+    formValueSelector('customerListFilter')(state, 'accounting_period'),
+  );
   const { loading, error, value } = useAsync(
-    () => loadCustomerResources(props.row),
-    [props.row],
+    () => getInvoice(props.row, accountingPeriod.value),
+    [props.row, accountingPeriod],
   );
   if (loading) {
     return <LoadingSpinner />;
@@ -29,8 +34,8 @@ export const CustomerExpandableRow = (props) => {
         >
           <AgreementInfo paymentProfiles={props.row.payment_profiles} />
         </div>
-        <ResourceExpandableRow rows={value} />
+        <InvoicesStatsList organization={props.row} invoiceUuid={value.uuid} />
       </>
     );
   }
-};
+});
