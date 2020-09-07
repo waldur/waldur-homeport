@@ -5,11 +5,21 @@ import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
+import { pick } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { UserEditContainer } from '@waldur/user/support/UserEditContainer';
 import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
+
+const formatInitialData = pick([
+  'full_name',
+  'native_name',
+  'organization',
+  'job_title',
+  'description',
+  'phone_number',
+]);
 
 export const AuthInit = () => {
   const router = useRouter();
@@ -20,7 +30,7 @@ export const AuthInit = () => {
   const onSave = React.useCallback(
     async (user) => {
       try {
-        const response = await UsersService.update(user);
+        const response = await UsersService.update(formatInitialData(user));
         dispatch(setCurrentUser(response.data));
         router.stateService.go('profile.details');
         dispatch(showSuccess(translate('User has been updated.')));
