@@ -13,6 +13,7 @@ import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 
 const formatInitialData = pick([
+  'uuid',
   'full_name',
   'native_name',
   'organization',
