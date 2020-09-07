@@ -6,6 +6,7 @@ import { Field } from 'redux-form';
 
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
+import './ExpirationTimeGroup.scss';
 
 export const ExpirationTimeGroup = ({ disabled }) => (
   <FormGroup>

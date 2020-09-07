@@ -56,6 +56,8 @@ export const ViewYAMLDialog = reduxForm<
         mode="yaml"
         original={value?.yaml}
         diff={showDiff}
+        height={400}
+        options={{ scrollBeyondLastLine: false }}
       />
       {value?.yaml && (
         <>
