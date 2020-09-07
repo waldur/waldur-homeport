@@ -14,6 +14,7 @@ import { setCurrentUser } from '@waldur/workspace/actions';
 
 const formatInitialData = pick([
   'uuid',
+  'agree_with_policy',
   'full_name',
   'native_name',
   'organization',
