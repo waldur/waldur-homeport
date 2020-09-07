@@ -16,10 +16,21 @@ import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 import * as actions from './actions';
 import * as constants from './constants';
 
+const flattenAttributes = (attributes) => {
+  let newAttributes = {};
+  for (const [key, value] of Object.entries(attributes)) {
+    newAttributes = {
+      ...newAttributes,
+      [key]: typeof value === 'object' ? value['value'] : value,
+    };
+  }
+  return newAttributes;
+};
+
 const formatItem = (item) => ({
   plan: item.plan ? item.plan.url : undefined,
   project: item.project,
-  attributes: item.attributes,
+  attributes: flattenAttributes(item.attributes),
   limits: item.limits,
 });
 
