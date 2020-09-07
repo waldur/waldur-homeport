@@ -17,9 +17,7 @@ export const fetchTenantOptions = (query, customerId) =>
       name: query,
       o: ['project_name', 'name'],
     },
-  }).then((options) => ({
-    options: options.map(tenantSerializer),
-  }));
+  }).then((options) => options.map(tenantSerializer));
 
 const instanceSerializer = ({ name, backend_id, project_name }) => ({
   name: `${project_name} / ${name}`,
@@ -34,9 +32,7 @@ export const fetchInstanceOptions = (query, customerId) =>
       name: query,
       o: ['project_name', 'name'],
     },
-  }).then((options) => ({
-    options: options.map(instanceSerializer),
-  }));
+  }).then((options) => options.map(instanceSerializer));
 
 export const getOffering = (uuid) =>
   getById<Offering>('/support-offerings/', uuid);
