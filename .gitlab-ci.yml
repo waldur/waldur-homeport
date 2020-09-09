@@ -68,9 +68,14 @@ e2e:
     - yarn install --frozen-lockfile
     - NO_COLOR=1 yarn ci:test
   artifacts:
-    paths:
-      - builds/waldur/waldur-homeport/cypress/
     expire_in: 1 week
+    when: always
+    paths:
+    - cypress/screenshots
+    - cypress/videos
+    reports:
+      junit:
+        - results/TEST-*.xml
   only:
     - merge_requests
     - master
