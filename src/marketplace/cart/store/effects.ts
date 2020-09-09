@@ -21,7 +21,10 @@ const flattenAttributes = (attributes) => {
   for (const [key, value] of Object.entries(attributes)) {
     newAttributes = {
       ...newAttributes,
-      [key]: typeof value === 'object' ? value['value'] : value,
+      [key]:
+        typeof value === 'object' && !Array.isArray(value)
+          ? value['value']
+          : value,
     };
   }
   return newAttributes;
