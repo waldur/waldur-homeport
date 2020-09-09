@@ -3812,6 +3812,10 @@ msgstr ""
 msgid "No entries to show here"
 msgstr ""
 
+#: src/customer/list/CustomerExpandableRow.tsx
+msgid "No invoice data available."
+msgstr ""
+
 #: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 msgid "No offerings"
