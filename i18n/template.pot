@@ -3329,6 +3329,10 @@ msgstr ""
 msgid "Marketplace"
 msgstr ""
 
+#: src/resource/summary/ResourceSummaryBase.tsx
+msgid "Marketplace UUID"
+msgstr ""
+
 #: src/marketplace/cart/CheckoutPage.tsx
 msgid "Marketplace checkout"
 msgstr ""
@@ -7838,6 +7842,18 @@ msgstr ""
 
 #: src/core/ErrorMessageFormatter.ts
 msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
+msgstr ""
+
+#: src/resource/summary/ResourceSummaryBase.tsx
+msgid "Unique ID of a resource created via Marketplace"
+msgstr ""
+
+#: src/resource/summary/ResourceSummaryBase.tsx
+msgid "Unique ID of a resource in a backend system"
+msgstr ""
+
+#: src/resource/summary/ResourceSummaryBase.tsx
+msgid "Unique ID of a resource within management plugin"
 msgstr ""
 
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
