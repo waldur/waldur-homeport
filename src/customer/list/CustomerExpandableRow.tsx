@@ -34,7 +34,16 @@ export const CustomerExpandableRow = React.memo((props: any) => {
         >
           <AgreementInfo paymentProfiles={props.row.payment_profiles} />
         </div>
-        <InvoicesStatsList organization={props.row} invoiceUuid={value.uuid} />
+        {value ? (
+          <InvoicesStatsList
+            organization={props.row}
+            invoiceUuid={value.uuid}
+          />
+        ) : (
+          <p className="text-center">
+            {translate('No invoice data available.')}
+          </p>
+        )}
       </>
     );
   }
