@@ -9,7 +9,7 @@ describe('Customer creation toggle', () => {
       .login();
   });
 
-  it('Allows to create customer from user dashoard', () => {
+  it('Allows to create customer from user dashboard', () => {
     cy.openCustomerCreateDialog();
   });
 
