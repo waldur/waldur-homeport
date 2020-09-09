@@ -44,12 +44,24 @@ export function PureResourceSummaryBase<T extends Resource = any>(
         label={translate('UUID')}
         value={resource.uuid}
         valueClass="ellipsis"
+        helpText={translate('Unique ID of a resource within management plugin')}
       />
+      {resource.marketplace_resource_uuid && (
+        <Field
+          label={translate('Marketplace UUID')}
+          value={resource.marketplace_resource_uuid}
+          valueClass="ellipsis"
+          helpText={translate(
+            'Unique ID of a resource created via Marketplace',
+          )}
+        />
+      )}
       {!props.hideBackendId && (
         <Field
           label={translate('Backend ID')}
           value={resource.backend_id}
           valueClass="ellipsis"
+          helpText={translate('Unique ID of a resource in a backend system')}
         />
       )}
     </>

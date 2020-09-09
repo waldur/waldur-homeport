@@ -22,6 +22,7 @@ export interface BaseResource {
   created?: string;
   modified?: string;
   marketplace_offering_uuid?: boolean;
+  marketplace_resource_uuid?: string;
   marketplace_category_uuid?: string;
   project_uuid?: string;
 }

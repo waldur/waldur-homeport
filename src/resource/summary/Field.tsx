@@ -4,6 +4,7 @@ import { Tooltip } from '@waldur/core/Tooltip';
 
 export interface FieldProps {
   label: string;
+  helpText?: string;
   value?: React.ReactNode;
   children?: React.ReactNode;
   valueClass?: string;
@@ -21,6 +22,14 @@ export const Field: React.FC<FieldProps> = (props: FieldProps) =>
           props.label
         )}
       </dt>
-      <dd className={props.valueClass}>{props.value || props.children}</dd>
+      <dd className={props.valueClass}>
+        {props.value || props.children}
+        {props.helpText && (
+          <Tooltip label={props.helpText} id="fieldHelpText">
+            {' '}
+            <i className="fa fa-question-circle" />
+          </Tooltip>
+        )}
+      </dd>
     </div>
   ) : null;
