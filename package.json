@@ -157,7 +157,7 @@
     "markdown-loader": "^5.1.0",
     "marked": "^0.8.0",
     "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "offline-plugin": "^4.8.1",
     "pofile": "^1.0.9",
     "postcss-import": "^12.0.1",
