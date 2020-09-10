@@ -1,11 +1,17 @@
+include:
+  - project: "waldur/waldur-pipelines"
+    file: "/templates/release/publish.yml"
+  - project: "waldur/waldur-pipelines"
+    file: "/templates/test/docker-compose-trigger.yml"
+
 stages:
   - test
   - build
-  - publish
+  - release
 
 variables:
   COMPONENT_VERSION: "latest"
-  
+
 image: node:lts-alpine
 
 cache:
@@ -19,49 +25,48 @@ before_script:
   - yarn config set cache-folder .yarn
   - yarn install --frozen-lockfile
 
-format_checker:
+Run linters:
   stage: test
+  interruptible: true
+  rules:
+    - if: '$SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+    # If event is related to a created merge request
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
-      - yarn format:check
-  only:
-    - merge_requests
-    - master
-    - develop
-  except:
-    variables:
-      - $SKIP_TESTS == 'yes'
-
-lint:
-  stage: test
-  script:
+    - yarn format:check
     - yarn lint:check
-  only:
-    - merge_requests
-    - master
-    - develop
-  except:
-    variables:
-      - $SKIP_TESTS == 'yes'
 
-jest_tests:
+Run jest tests:
   stage: test
+  interruptible: true
+  rules:
+    - if: '$SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+    # If event is related to a created merge request
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - npm install -g jest
     - jest --verbose --runInBand --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
-  only:
-    - merge_requests
-    - master
-    - develop
-  except:
-    variables:
-      - $SKIP_TESTS == 'yes'
 
-e2e:
-  stage: test
+Run E2E tests:
   image:
     name: cypress/included:4.8.0
     entrypoint: [""]
+  stage: test
+  interruptible: true
+  rules:
+    - if: '$SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+    # If event is related to a created merge request
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - npm install -g yarn
     - yarn config set cache-folder .yarn
@@ -71,31 +76,25 @@ e2e:
     expire_in: 1 week
     when: always
     paths:
-    - cypress/screenshots
-    - cypress/videos
+      - cypress/screenshots
+      - cypress/videos
     reports:
       junit:
         - results/TEST-*.xml
-  only:
-    - merge_requests
-    - master
-    - develop
-  except:
-    variables:
-      - $SKIP_TESTS == 'yes'
 
-build:
+Build artifact:
   stage: build
+  interruptible: true
+  rules:
+    - if: '$SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+    # If event is related to a created merge request
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - yarn build
   artifacts:
     paths:
-     - dist/
+      - dist/
     expire_in: 1 week
-  only:
-    - merge_requests
-    - master
-    - develop
-  except:
-    variables:
-      - $SKIP_BUILD == 'yes'
