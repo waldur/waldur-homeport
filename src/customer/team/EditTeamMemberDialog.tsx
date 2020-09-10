@@ -21,6 +21,7 @@ import { OwnerExpirationTimeGroup } from './OwnerExpirationTimeGroup';
 import { OwnerGroup } from './OwnerGroup';
 import { ProjectsListGroup } from './ProjectsListGroup';
 import { UserGroup } from './UserGroup';
+import './EditTeamMemberDialog.scss';
 
 const FORM_ID = 'EditTeamMemberDialog';
 
@@ -208,7 +209,7 @@ export const EditTeamMemberDialog = reduxForm<
   );
 
   return (
-    <form onSubmit={handleSubmit(saveUser)}>
+    <form onSubmit={handleSubmit(saveUser)} id="edit-team-member-dialog">
       <ModalHeader>
         <ModalTitle>{translate('Edit team member')}</ModalTitle>
       </ModalHeader>

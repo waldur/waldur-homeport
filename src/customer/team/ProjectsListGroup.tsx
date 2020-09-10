@@ -8,6 +8,7 @@ import { ENV } from '@waldur/core/services';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { SelectField } from '@waldur/issues/create/SelectField';
+import './ProjectsListGroup.scss';
 
 export const ProjectsListGroup = ({ canChangeRole, projects }) => {
   return projects.length === 0 ? (
@@ -15,22 +16,24 @@ export const ProjectsListGroup = ({ canChangeRole, projects }) => {
       {translate('There are no available projects.')}
     </p>
   ) : (
-    <FormGroup>
+    <FormGroup id="projects-list-group">
       <ControlLabel>{translate('Projects list')}</ControlLabel>
-      <div style={{ height: 300, overflowY: 'auto' }}>
+      <div style={{ height: 300, overflow: 'visible', marginBottom: '33px' }}>
         <table className="table">
           <thead>
             <tr>
               <td>{translate('Project name')}</td>
-              <td>{translate('Role')}</td>
-              <td className="col-xs-4">{translate('Expiration time')}</td>
+              <td className="role-column">{translate('Role')}</td>
+              <td className="expiration-time-column">
+                {translate('Expiration time')}
+              </td>
             </tr>
           </thead>
           <tbody>
             {projects.map((project, index) => (
               <tr key={project.uuid}>
                 <td className="align-middle">{project.name}</td>
-                <td>
+                <td className="role-column">
                   <Field
                     name={`projects[${index}].role`}
                     component={SelectField}
@@ -43,7 +46,7 @@ export const ProjectsListGroup = ({ canChangeRole, projects }) => {
                     isClearable={true}
                   />
                 </td>
-                <td>
+                <td className="expiration-time-column">
                   <Field
                     name={`projects[${index}].expiration_time`}
                     component={DateField}
