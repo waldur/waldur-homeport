@@ -32,7 +32,12 @@ async function loadData(resourceId: string) {
           ? parseFloat(plan.unit_price)
           : plan.unit_price,
     },
-    ...combinePrices(plan, limitParser(resource.limits), offering),
+    ...combinePrices(
+      plan,
+      limitParser(resource.limits),
+      limitParser(resource.current_usages),
+      offering,
+    ),
   };
 }
 
