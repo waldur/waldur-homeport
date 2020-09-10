@@ -13,6 +13,7 @@ import { Component, PricesData } from './types';
 export const combinePrices = (
   plan: Plan,
   limits: Limits,
+  usages: Limits,
   offering: Offering,
 ): PricesData => {
   if (plan && offering) {
@@ -21,7 +22,9 @@ export const combinePrices = (
     const offeringComponents = filterOfferingComponents(offering);
     const components: Component[] = offeringComponents.map((component) => {
       let amount = 0;
-      if (limits && limits[component.type]) {
+      if (component.billing_type === 'usage') {
+        amount = usages[component.type] || 0;
+      } else if (limits && limits[component.type]) {
         amount = limits[component.type] || 0;
       } else if (component.billing_type === 'fixed') {
         amount = plan.quotas[component.type] || 0;
@@ -102,5 +105,5 @@ const getLimits = (state, props) => {
 export const pricesSelector = (state, props): PricesData => {
   const plan: Plan = getPlan(state, props);
   const limits: Limits = getLimits(state, props);
-  return combinePrices(plan, limits, props.offering);
+  return combinePrices(plan, limits, {}, props.offering);
 };
