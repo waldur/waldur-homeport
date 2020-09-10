@@ -25,6 +25,7 @@ export const UserEditButton: React.FC<UserEditButtonProps> = ({ editUser }) => {
           currentUser,
           editUser,
         },
+        size: 'lg',
       }),
     );
   return (
