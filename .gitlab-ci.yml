@@ -13,6 +13,7 @@ stages:
 
 variables:
   COMPONENT_VERSION: "latest"
+  GITHUB_REPO_URL: "git@github.com:opennode/waldur-homeport.git"
 
 image: node:lts-alpine
 
