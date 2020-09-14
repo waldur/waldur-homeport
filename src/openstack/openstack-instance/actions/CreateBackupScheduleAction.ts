@@ -27,7 +27,9 @@ export default function createAction({ resource }): ResourceAction {
     useResolve: true,
     getInitialValues: () => ({
       timezone: getDefaultTimezone(),
-      schedule: '* * * * *',
+      schedule: '0 * * * *',
+      retention_time: 0,
+      maximal_number_of_resources: 0,
     }),
     submitForm: async (dispatch, formData) => {
       try {

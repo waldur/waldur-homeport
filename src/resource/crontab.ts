@@ -206,8 +206,7 @@ export const serializeCron = (input) => {
       Frequency.YEAR,
     ].includes(input.base)
   ) {
-    cron[0] =
-      typeof input.minuteValues !== 'undefined' ? input.minuteValues : '*';
+    cron[0] = input.minuteValues || 0;
   }
 
   if (
@@ -215,7 +214,7 @@ export const serializeCron = (input) => {
       input.base,
     )
   ) {
-    cron[1] = typeof input.hourValues !== 'undefined' ? input.hourValues : '*';
+    cron[1] = input.hourValues || 0;
   }
 
   if (input && input.base && input.base === Frequency.WEEK) {

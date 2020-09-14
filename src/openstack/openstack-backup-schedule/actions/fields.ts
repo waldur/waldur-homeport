@@ -37,7 +37,6 @@ export const getFields = () => [
     type: 'crontab',
     required: true,
     label: translate('Schedule'),
-    maxlength: 15,
   },
   {
     name: 'warning',

@@ -195,20 +195,20 @@ export const CronField = (props) => {
 
   return (
     <div className="cron-wrap">
-      {translate('Every')}:{' '}
+      {translate('Every')}:&nbsp;
       <BaseFrequencyField value={baseValue} onChange={setBaseValue} />
       <div className="select-options">
         {baseValue == Frequency.WEEK && (
           <>
-            {' '}
-            {translate('on')}{' '}
+            &nbsp;
+            {translate('on')}&nbsp;
             <DayField value={dayValues} onChange={setDayValues} />
           </>
         )}
         {[Frequency.MONTH, Frequency.YEAR].includes(baseValue) && (
           <>
-            {' '}
-            {translate('on the')}{' '}
+            &nbsp;
+            {translate('on the')}&nbsp;
             <DayOfMonthField
               value={dayOfMonthValues}
               onChange={setDayOfMonthValues}
@@ -217,12 +217,13 @@ export const CronField = (props) => {
         )}
         {baseValue == Frequency.YEAR && (
           <>
-            {' '}
-            {translate('of')}{' '}
+            &nbsp;
+            {translate('of')}&nbsp;
             <MonthField value={monthValues} onChange={setMonthValues} />
           </>
-        )}{' '}
-        {baseValue != Frequency.MINUTE && translate('at')}{' '}
+        )}
+        &nbsp;
+        {baseValue != Frequency.MINUTE && translate('at')}&nbsp;
         {[
           Frequency.DAY,
           Frequency.WEEK,
@@ -236,7 +237,8 @@ export const CronField = (props) => {
         )}
         {baseValue != Frequency.MINUTE && (
           <MinuteField value={minuteValues} onChange={setMinuteValues} />
-        )}{' '}
+        )}
+        &nbsp;
         {baseValue == Frequency.HOUR && translate('past the hour')}
       </div>
     </div>
