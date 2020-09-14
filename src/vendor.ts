@@ -23,8 +23,6 @@ import 'world-flags-sprite/stylesheets/flags16.css';
 import 'npm-font-open-sans';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import 'angular-cron-jobs';
-import 'angular-cron-jobs/dist/angular-cron-jobs.css';
 import 'angular-animate';
 import 'angular-cookies';
 import 'angular-loader';

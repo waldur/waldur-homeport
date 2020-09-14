@@ -51,7 +51,6 @@ const appModule = angular.module('waldur', [
   'angulartics',
   'angulartics.google.analytics',
   'ngSanitize',
-  'angular-cron-jobs',
   'ui.bootstrap',
   'angular-bind-html-compile',
 ]);

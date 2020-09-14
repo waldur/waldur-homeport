@@ -2245,11 +2245,6 @@ angular-cookies@^1.8.0:
   resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.8.0.tgz#c981c843652e716c1cf993451c2509f00a4b0169"
   integrity sha512-gWO3RKF0WMmXhseiN3Aw9aEmQ3mB53wSdAxpeKKHbiDwU7vmK+MBuebyOX9qbwZYubn5nM8LByZVmg7T6jOV1w==
 
-angular-cron-jobs@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/angular-cron-jobs/-/angular-cron-jobs-3.2.0.tgz#26827168dac10dff3a993456de4f2f9558ec10ce"
-  integrity sha1-JoJxaNrBDf86mTRW3k8vlVjsEM4=
-
 angular-flash-alert@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/angular-flash-alert/-/angular-flash-alert-1.1.1.tgz#01445de81bc394b8b9dee80cd7697923d944a5e6"

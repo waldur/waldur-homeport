@@ -44,7 +44,6 @@
     "angular-animate": "^1.8.0",
     "angular-bind-html-compile-ci-dev": "^1.2.2",
     "angular-cookies": "^1.8.0",
-    "angular-cron-jobs": "^3.2.0",
     "angular-flash-alert": "~1.1.0",
     "angular-loader": "^1.8.0",
     "angular-sanitize": "^1.8.0",

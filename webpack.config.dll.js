@@ -67,7 +67,6 @@ module.exports = {
       'attr-accept',
 
       'angular',
-      'angular-cron-jobs',
       'angular-animate',
       'angular-cookies',
       'angular-loader',

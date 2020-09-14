@@ -10,7 +10,6 @@ import actionFieldMultiselect from './action-field-multiselect';
 import actionFieldSelect from './action-field-select';
 import actionFieldString from './action-field-string';
 import actionFieldText from './action-field-text';
-import actionFieldTimezone from './action-field-timezone';
 import actionField from './ActionField';
 import appstoreFieldMultiselect from './appstore-field-multiselect';
 import appstoreFieldString from './appstore-field-string';
@@ -30,7 +29,6 @@ export default (module) => {
   module.component('actionFieldString', actionFieldString);
   module.component('actionFieldText', actionFieldText);
   module.component('actionFieldChoice', actionFieldChoice);
-  module.component('actionFieldTimezone', actionFieldTimezone);
   module.component('appstoreFieldString', appstoreFieldString);
   module.component('appstoreFieldMultiselect', appstoreFieldMultiselect);
   module.component('helpicon', connectAngularComponent(HelpIcon, ['helpText']));
