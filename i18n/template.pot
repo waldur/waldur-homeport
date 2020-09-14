@@ -2293,7 +2293,7 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
-#: src/resource/actions/dialog/appstore-field-string.js
+#: src/resource/actions/dialog/action-field-string.js
 msgid "Field length must be less than {maxlength} symbols"
 msgstr ""
 
@@ -7041,7 +7041,7 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
-#: src/resource/actions/dialog/appstore-field-string.html
+#: src/resource/actions/dialog/action-field-string.html
 msgid "This field contains invalid characters."
 msgstr ""
 
@@ -7051,7 +7051,7 @@ msgid "This field is required"
 msgstr ""
 
 #: src/core/validators.ts
-#: src/resource/actions/dialog/appstore-field-string.html
+#: src/resource/actions/dialog/action-field-string.html
 msgid "This field is required."
 msgstr ""
 
