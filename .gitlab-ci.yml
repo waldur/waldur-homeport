@@ -1,15 +1,12 @@
 include:
   - project: "waldur/waldur-pipelines"
+    file: "/templates/stages.yml"
+  - project: "waldur/waldur-pipelines"
     file: "/templates/release/publish.yml"
   - project: "waldur/waldur-pipelines"
     file: "/templates/release/sync-to-github.yml"
   - project: "waldur/waldur-pipelines"
-    file: "/templates/test/docker-compose-trigger.yml"
-
-stages:
-  - test
-  - build
-  - release
+    file: "/templates/validate/docker-compose-trigger.yml"
 
 variables:
   COMPONENT_VERSION: "latest"
