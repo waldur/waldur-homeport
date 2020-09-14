@@ -178,6 +178,7 @@ msgid "Actions"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingActions.tsx
+#: src/openstack/openstack-backup-schedule/actions/ActivateAction.ts
 #: src/user/support/UserActivateButton.tsx
 msgid "Activate"
 msgstr ""
@@ -1638,6 +1639,7 @@ msgstr ""
 msgid "Day"
 msgstr ""
 
+#: src/openstack/openstack-backup-schedule/actions/DeactivateAction.ts
 #: src/user/support/UserActivateButton.tsx
 msgid "Deactivate"
 msgstr ""
@@ -1771,6 +1773,7 @@ msgstr ""
 
 #: src/azure/sql/DestroyServerAction.ts
 #: src/offering/actions/DestroyAction.ts
+#: src/openstack/openstack-backup-schedule/actions/DestroyAction.ts
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.ts
@@ -1977,8 +1980,6 @@ msgstr ""
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
-#: src/openstack/openstack-backup-schedule/actions.ts
-#: src/openstack/openstack-snapshot-schedule/actions.ts
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/resource/actions/base.ts
@@ -2154,6 +2155,10 @@ msgstr ""
 
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
+msgstr ""
+
+#: src/form/CronField.tsx
+msgid "Every"
 msgstr ""
 
 #: src/resource/crontab.ts
@@ -3376,8 +3381,7 @@ msgstr ""
 msgid "Max replicas"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/openstack/openstack-backup-schedule/actions/fields.ts
 msgid "Maximal number of resources"
 msgstr ""
 
@@ -5678,6 +5682,14 @@ msgstr ""
 msgid "Resource plan change request has been submitted."
 msgstr ""
 
+#: src/openstack/openstack-backup-schedule/actions/ActivateAction.ts
+msgid "Resource schedule is already activated."
+msgstr ""
+
+#: src/openstack/openstack-backup-schedule/actions/DeactivateAction.ts
+msgid "Resource schedule is already deactivated."
+msgstr ""
+
 #: src/marketplace/resources/store/effects.ts
 msgid "Resource termination request has been submitted."
 msgstr ""
@@ -5754,14 +5766,12 @@ msgstr ""
 msgid "Restroing"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/openstack/openstack-backup-schedule/actions/fields.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Retention time"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/openstack/openstack-backup-schedule/actions/fields.ts
 msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr ""
 
@@ -5900,9 +5910,8 @@ msgid "Scale"
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: src/openstack/openstack-backup-schedule/actions/fields.ts
 #: src/openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx
-#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Schedule"
 msgstr ""
@@ -6424,8 +6433,8 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
-#: src/openstack/openstack-snapshot-schedule/actions.ts
-msgid "Snapshot schedule has been updated."
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+msgid "Snapshot schedule for volume has been created."
 msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/breadcrumbs.ts
@@ -7087,8 +7096,7 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/openstack/openstack-backup-schedule/actions/fields.ts
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Timezone"
 msgstr ""
@@ -7279,6 +7287,10 @@ msgstr ""
 msgid "Unable to confirm email."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "Unable to create VM snapshot schedule."
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 msgid "Unable to create VM snapshot."
 msgstr ""
@@ -7325,6 +7337,10 @@ msgstr ""
 
 #: src/issues/create/utils.ts
 msgid "Unable to create request."
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+msgid "Unable to create snapshot schedule."
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
@@ -8261,12 +8277,16 @@ msgstr ""
 msgid "VM snapshot has been created."
 msgstr ""
 
+#: src/openstack/openstack-backup-schedule/actions/EditAction.ts
+msgid "VM snapshot schedule"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/BackupScheduleWarning.tsx
 msgid "VM snapshot schedule caveats"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/actions.ts
-msgid "VM snapshot schedule has been updated"
+#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+msgid "VM snapshot schedule has been created."
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -8683,6 +8703,10 @@ msgstr ""
 msgid "applications"
 msgstr ""
 
+#: src/form/CronField.tsx
+msgid "at"
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "bootable"
 msgstr ""
@@ -8720,6 +8744,7 @@ msgid "databases"
 msgstr ""
 
 #: src/booking/components/calendar/defaultOptions.ts
+#: src/form/CronField.tsx
 msgid "day"
 msgstr ""
 
@@ -8777,6 +8802,10 @@ msgstr ""
 msgid "horizontal pod autoscalers"
 msgstr ""
 
+#: src/form/CronField.tsx
+msgid "hour"
+msgstr ""
+
 #: src/providers/support/MapInfoPanel.tsx
 msgid "hours"
 msgstr ""
@@ -8802,12 +8831,21 @@ msgstr ""
 msgid "milli CPUs"
 msgstr ""
 
+#: src/form/CronField.tsx
+msgid "minute"
+msgstr ""
+
 #: src/booking/components/calendar/defaultOptions.ts
+#: src/form/CronField.tsx
 msgid "month"
 msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 msgid "networks"
+msgstr ""
+
+#: src/form/CronField.tsx
+msgid "of"
 msgstr ""
 
 #: src/offering/actions/UpdateAction.ts
@@ -8816,6 +8854,14 @@ msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx
 msgid "offering resources"
+msgstr ""
+
+#: src/form/CronField.tsx
+msgid "on"
+msgstr ""
+
+#: src/form/CronField.tsx
+msgid "on the"
 msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
@@ -8833,6 +8879,10 @@ msgstr ""
 
 #: src/invitations/RoleField.tsx
 msgid "owner"
+msgstr ""
+
+#: src/form/CronField.tsx
+msgid "past the hour"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -8965,6 +9015,10 @@ msgstr ""
 msgid "vSphere Virtual Machine"
 msgstr ""
 
+#: src/openstack/openstack-snapshot-schedule/actions/EditAction.ts
+msgid "volume snapshot schedule"
+msgstr ""
+
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 msgid "volume snapshots"
 msgstr ""
@@ -8974,6 +9028,7 @@ msgid "volumes"
 msgstr ""
 
 #: src/booking/components/calendar/defaultOptions.ts
+#: src/form/CronField.tsx
 msgid "week"
 msgstr ""
 
@@ -8983,6 +9038,10 @@ msgstr ""
 
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 msgid "workloads"
+msgstr ""
+
+#: src/form/CronField.tsx
+msgid "year"
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx

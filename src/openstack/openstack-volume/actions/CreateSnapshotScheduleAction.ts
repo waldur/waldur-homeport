@@ -1,12 +1,14 @@
+import { getDefaultTimezone } from '@waldur/form/TimezoneField';
 import { translate } from '@waldur/i18n';
-import {
-  validateState,
-  createNameField,
-  createDescriptionField,
-} from '@waldur/resource/actions/base';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { createSnapshotSchedule } from '@waldur/openstack/api';
+import { getFields } from '@waldur/openstack/openstack-backup-schedule/actions/fields';
+import { validateState } from '@waldur/resource/actions/base';
+import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
+import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
 
-export default function createAction(): ResourceAction {
+export default function createAction({ resource }): ResourceAction {
   return {
     name: 'create_snapshot_schedule',
     title: translate('Create'),
@@ -16,41 +18,29 @@ export default function createAction(): ResourceAction {
     type: 'form',
     method: 'POST',
     validators: [validateState('OK')],
-    fields: [
-      createNameField(),
-      createDescriptionField(),
-      {
-        name: 'retention_time',
-        type: 'integer',
-        required: true,
-        label: translate('Retention time'),
-        help_text: translate(
-          'Retention time in days, if 0 - resource will be kept forever',
-        ),
-        min_value: 0,
-        max_value: 2147483647,
-      },
-      {
-        name: 'timezone',
-        label: translate('Timezone'),
-        default_value: 'UTC',
-        type: 'timezone',
-      },
-      {
-        name: 'maximal_number_of_resources',
-        type: 'integer',
-        required: true,
-        label: translate('Maximal number of resources'),
-        min_value: 0,
-        max_value: 32767,
-      },
-      {
-        name: 'schedule',
-        type: 'crontab',
-        required: true,
-        label: translate('Schedule'),
-        maxlength: 15,
-      },
-    ],
+    fields: getFields(),
+    component: ResourceActionDialog,
+    useResolve: true,
+    getInitialValues: () => ({
+      timezone: getDefaultTimezone(),
+    }),
+    submitForm: async (dispatch, formData) => {
+      try {
+        await createSnapshotSchedule(resource.uuid, formData);
+        dispatch(
+          showSuccess(
+            translate('Snapshot schedule for volume has been created.'),
+          ),
+        );
+        dispatch(closeModalDialog());
+      } catch (e) {
+        dispatch(
+          showErrorResponse(
+            e,
+            translate('Unable to create snapshot schedule.'),
+          ),
+        );
+      }
+    },
   };
 }

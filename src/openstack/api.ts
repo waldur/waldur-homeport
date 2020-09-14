@@ -97,3 +97,15 @@ export const createBackup = (id, data) =>
 
 export const createSnapshot = (id, data) =>
   post(`/openstacktenant-volumes/${id}/snapshot/`, data);
+
+export const createBackupSchedule = (id, data) =>
+  post(`/openstacktenant-instances/${id}/create_backup_schedule/`, data);
+
+export const createSnapshotSchedule = (id, data) =>
+  post(`/openstacktenant-volumes/${id}/create_snapshot_schedule/`, data);
+
+export const updateBackupSchedule = (id, data) =>
+  put(`/openstacktenant-backup-schedules/${id}/`, data);
+
+export const updateSnapshotSchedule = (id, data) =>
+  put(`/openstacktenant-snapshot-schedules/${id}/`, data);
