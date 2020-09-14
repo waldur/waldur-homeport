@@ -8,7 +8,6 @@ import { IssuesListExpandableRow } from '@waldur/issues/list/IssuesListExpandabl
 import { IssuesListPlaceholder } from '@waldur/issues/list/IssuesListPlaceholder';
 import { StatusColumn } from '@waldur/issues/list/StatusColumn';
 import { TitleColumn } from '@waldur/issues/list/TitleColumn';
-import { connectAngularComponent } from '@waldur/store/connect';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
@@ -162,5 +161,3 @@ const connector = connect(mapStateToProps);
 export const IssuesList = connector(
   connectTable(TableOptions)(TableComponent),
 ) as React.ComponentType<OwnProps>;
-
-export default connectAngularComponent(IssuesList, ['filter']);
