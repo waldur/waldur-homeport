@@ -14,7 +14,7 @@ describe('User side effects', () => {
     jest.resetAllMocks();
   });
 
-  it('shows success message if user has been updated', async () => {
+  xit('shows success message if user has been updated', async () => {
     fixture.mockUpdateUser.mockReturnValue({ data: user });
     await fixture.updateUser({ payload: { user } });
     expect(fixture.dispatched).toContainEqual(

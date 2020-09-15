@@ -26,8 +26,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'angular-animate';
 import 'angular-cookies';
 import 'angular-loader';
-import 'angular-flash-alert';
-import 'angular-flash-alert/dist/angular-flash.css';
 import 'angulartics';
 import 'angulartics-google-analytics';
 import 'ui-select';

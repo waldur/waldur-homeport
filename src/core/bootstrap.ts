@@ -4,6 +4,7 @@ import Axios from 'axios';
 import experimentalMode from '@waldur/configs/modes/experimental.json';
 import stableMode from '@waldur/configs/modes/stable.json';
 import { renderModalContainer } from '@waldur/modal/ModalContainer';
+import { renderNotificationsContainer } from '@waldur/modal/NotificationContainer';
 
 import attachTracking from './tracking';
 
@@ -84,5 +85,6 @@ export default async function bootstrap(modulename) {
   angular.element(document).ready(function () {
     angular.bootstrap(document, [modulename], { strictDi: true });
     renderModalContainer();
+    renderNotificationsContainer();
   });
 }

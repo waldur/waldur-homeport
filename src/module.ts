@@ -5,7 +5,6 @@ import {
   featuresProviderConfig,
 } from './app';
 import loadInspinia from './inspinia';
-import { ncUtilsFlash } from './utils';
 
 export default (module) => {
   module.run(loadInspinia);
@@ -13,5 +12,4 @@ export default (module) => {
   module.config(urlRouterProvider);
   module.config(extendEnv);
   module.config(featuresProviderConfig);
-  module.factory('ncUtilsFlash', ncUtilsFlash);
 };

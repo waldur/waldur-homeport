@@ -100,6 +100,21 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !utils.isProd,
+              importLoaders: 1,
+              modules: true,
+            },
+          },
+        ],
+        include: /\.module\.css$/,
+      },
+      {
+        test: /\.css$/,
+        use: [
           utils.isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
@@ -108,6 +123,7 @@ module.exports = {
             },
           },
         ],
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.font\.js/,

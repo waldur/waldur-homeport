@@ -4,6 +4,7 @@ import { $rootScope, $q, ngInjector } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { showSuccess } from '@waldur/store/coreSaga';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { getUser } from '@waldur/workspace/selectors';
@@ -110,7 +111,7 @@ export const handleActionSuccess = (action) => {
     translate('Request to {action} has been accepted.', {
       action: action.title.toLowerCase(),
     });
-  ngInjector.get('ncUtilsFlash').success(template);
+  store.dispatch(showSuccess(template));
   if (action.onSuccess) {
     action.onSuccess(ngInjector);
   } else {
@@ -131,9 +132,7 @@ const applyAction = (controller, resource, action) => {
       }
       handleActionSuccess(action);
     } else if (response.status === 204) {
-      ngInjector
-        .get('ncUtilsFlash')
-        .success(translate('Resource has been deleted.'));
+      store.dispatch(showSuccess(translate('Resource has been deleted.')));
       controller.afterInstanceRemove(resource);
     } else {
       handleActionSuccess(action);

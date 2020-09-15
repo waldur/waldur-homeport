@@ -16,6 +16,7 @@
     id="page-top"
     ng-csp="no-unsafe-eval"
   >
+    <div id="notifications-root"></div>
     <div class="loading-screen" ng-if="::false">
       <style>
         .loading-screen {
@@ -189,7 +190,6 @@
         </div>
       </div>
     </noscript>
-    <div class="flash-message-fixed" flash-message="5000"></div>
     <div id="react-root"></div>
     <ui-view id="wrapper"></ui-view>
   </body>

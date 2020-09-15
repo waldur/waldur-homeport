@@ -1,4 +1,6 @@
+import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { showError, showSuccess } from '@waldur/store/coreSaga';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 
@@ -7,8 +9,7 @@ import { InvitationService } from './InvitationService';
 
 export class InvitationUtilsService {
   // @ngInject
-  constructor(ncUtilsFlash, $q, $auth, $state, $rootScope, $timeout, ENV) {
-    this.ncUtilsFlash = ncUtilsFlash;
+  constructor($q, $auth, $state, $rootScope, $timeout, ENV) {
     this.$q = $q;
     this.$auth = $auth;
     this.$state = $state;
@@ -42,8 +43,8 @@ export class InvitationUtilsService {
               })
               .catch(() => {
                 InvitationService.clearInvitationToken();
-                this.ncUtilsFlash.error(
-                  gettext('Invitation could not be accepted'),
+                store.dispatch(
+                  showError(translate('Invitation could not be accepted')),
                 );
               });
           }
@@ -67,7 +68,9 @@ export class InvitationUtilsService {
         })
         .catch(() => {
           InvitationService.clearInvitationToken();
-          this.ncUtilsFlash.error(gettext('Invitation is not valid anymore.'));
+          store.dispatch(
+            showError(translate('Invitation is not valid anymore.')),
+          );
           this.$state.go('profile.details');
         });
     } else {
@@ -79,7 +82,7 @@ export class InvitationUtilsService {
   acceptInvitation(token, replaceEmail) {
     return InvitationService.accept(token, replaceEmail)
       .then(() => {
-        this.ncUtilsFlash.success(gettext('Your invitation was accepted.'));
+        store.dispatch(showSuccess(translate('Your invitation was accepted.')));
         InvitationService.clearInvitationToken();
         this.$rootScope.$broadcast('refreshCustomerList', {
           updateSignal: true,
@@ -103,14 +106,16 @@ export class InvitationUtilsService {
 
   showError(response) {
     if (response.status === 404) {
-      this.ncUtilsFlash.error(gettext('Invitation is not found.'));
+      store.dispatch(showError(translate('Invitation is not found.')));
     } else if (response.status === 400) {
       InvitationService.clearInvitationToken();
-      this.ncUtilsFlash.error(gettext('Invitation is not valid.'));
+      store.dispatch(showError(translate('Invitation is not valid.')));
     } else if (response.status === 500) {
-      this.ncUtilsFlash.error(
-        gettext(
-          'Internal server error occurred. Please try again or contact support.',
+      store.dispatch(
+        showError(
+          translate(
+            'Internal server error occurred. Please try again or contact support.',
+          ),
         ),
       );
     }

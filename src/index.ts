@@ -47,7 +47,6 @@ const appModule = angular.module('waldur', [
   'ui.select',
   'ngAnimate',
   'pascalprecht.translate',
-  'flash',
   'angulartics',
   'angulartics.google.analytics',
   'ngSanitize',
