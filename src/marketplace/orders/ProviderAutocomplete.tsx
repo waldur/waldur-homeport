@@ -1,5 +1,5 @@
 import * as React from 'react';
-import AsyncSelect from 'react-select/async';
+import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -15,7 +15,7 @@ export const ProviderAutocomplete: React.FC<Props> = (props) => (
     <Field
       name="provider"
       component={(fieldProps) => (
-        <AsyncSelect
+        <AsyncPaginate
           placeholder={translate('Select provider...')}
           loadOptions={providerAutocomplete}
           defaultOptions
@@ -25,6 +25,9 @@ export const ProviderAutocomplete: React.FC<Props> = (props) => (
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No providers')}
           isClearable={true}
+          additional={{
+            page: 1,
+          }}
         />
       )}
     />

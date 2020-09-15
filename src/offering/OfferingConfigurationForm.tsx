@@ -123,24 +123,39 @@ export class PureOfferingConfigurationForm extends React.Component<
                 case 'select_openstack_tenant':
                   OptionField = AsyncSelectField;
                   params = {
-                    loadOptions: (query) =>
-                      fetchTenantOptions(query, props.customer.uuid),
+                    loadOptions: (query, prevOptions, currentPage) =>
+                      fetchTenantOptions(
+                        query,
+                        prevOptions,
+                        currentPage,
+                        props.customer.uuid,
+                      ),
                     placeholder: translate('Select tenant...'),
                   };
                   break;
                 case 'select_openstack_instance':
                   OptionField = AsyncSelectField;
                   params = {
-                    loadOptions: (query) =>
-                      fetchInstanceOptions(query, props.customer.uuid),
+                    loadOptions: (query, prevOptions, currentPage) =>
+                      fetchInstanceOptions(
+                        query,
+                        prevOptions,
+                        currentPage,
+                        props.customer.uuid,
+                      ),
                     placeholder: translate('Select instance...'),
                   };
                   break;
                 case 'select_multiple_openstack_instances':
                   OptionField = AsyncSelectField;
                   params = {
-                    loadOptions: (query) =>
-                      fetchInstanceOptions(query, props.customer.uuid),
+                    loadOptions: (query, prevOptions, currentPage) =>
+                      fetchInstanceOptions(
+                        query,
+                        prevOptions,
+                        currentPage,
+                        props.customer.uuid,
+                      ),
                     placeholder: translate('Select instance...'),
                     multi: true,
                   };

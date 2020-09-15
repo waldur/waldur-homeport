@@ -1,4 +1,5 @@
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { ENV } from '@waldur/core/services';
 
 export const FILESIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
@@ -217,3 +218,15 @@ export function mergeLists(list1, list2, fieldIdentifier) {
   }
   return list1;
 }
+
+export const returnReactSelectAsyncPaginateObject = (
+  response,
+  prevOptions,
+  currentPage: number,
+) => ({
+  options: response.options,
+  hasMore: response.totalItems > prevOptions.length + ENV.pageSize,
+  additional: {
+    page: currentPage + 1,
+  },
+});

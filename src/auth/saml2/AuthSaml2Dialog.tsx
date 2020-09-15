@@ -1,5 +1,5 @@
 import * as React from 'react';
-import AsyncSelect from 'react-select/async';
+import { AsyncPaginate } from 'react-select-async-paginate';
 import { createFilter } from 'react-select/dist/react-select.cjs.dev';
 import { compose } from 'redux';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
@@ -17,11 +17,13 @@ class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
     $rootScope.$broadcast('enableRequests');
   }
 
-  identityProviderAutocomplete(input: string) {
+  identityProviderAutocomplete(
+    input: string,
+    prevOptions,
+    currentPage: number,
+  ) {
     if (input && input.length > 0) {
-      return fetchIdentityProviderOptions(input);
-    } else {
-      return Promise.resolve();
+      return fetchIdentityProviderOptions(input, prevOptions, currentPage);
     }
   }
 
@@ -39,9 +41,9 @@ class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
             <Field
               name="identity-provider"
               component={(fieldProps) => (
-                <AsyncSelect
-                  loadOptions={(input) =>
-                    this.identityProviderAutocomplete(input)
+                <AsyncPaginate
+                  loadOptions={(query, prevOptions, { page }) =>
+                    this.identityProviderAutocomplete(query, prevOptions, page)
                   }
                   placeholder={translate('Select organization...')}
                   noOptionsMessage={() => translate('No results found')}
@@ -53,6 +55,9 @@ class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
                   filterOptions={createFilter({
                     ignoreAccents: false,
                   })}
+                  additional={{
+                    page: 1,
+                  }}
                 />
               )}
             />

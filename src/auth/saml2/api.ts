@@ -1,16 +1,26 @@
 import Axios from 'axios';
 
 import { redirectPost } from '@waldur/auth/saml2/utils';
+import { getSelectData } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 
-export const getSaml2IdentityProviders = (name: string) => {
+export const getSaml2IdentityProviders = async (
+  name: string,
+  prevOptions,
+  currentPage: number,
+) => {
   const params = {
     params: { name: name || '' },
+    page: currentPage,
+    page_size: ENV.pageSize,
   };
-  return Axios.get(
-    `${ENV.apiEndpoint}api-auth/saml2/providers`,
-    params,
-  ).then(({ data }) => (Array.isArray(data) ? data : []));
+  const response = await getSelectData('/api-auth/saml2/providers', params);
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
 };
 
 export const loginSaml2 = (provider: string) =>

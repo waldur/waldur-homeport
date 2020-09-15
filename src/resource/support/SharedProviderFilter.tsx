@@ -1,19 +1,32 @@
 import * as React from 'react';
-import AsyncSelect from 'react-select/async';
+import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
-import { getList } from '@waldur/core/api';
+import { getSelectData } from '@waldur/core/api';
+import { ENV } from '@waldur/core/services';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-const providerAutocomplete = (query: string) => {
+const providerAutocomplete = async (
+  query: string,
+  prevOptions,
+  currentPage: number,
+) => {
   const params = {
     name: query,
     type: 'OpenStack',
     shared: true,
     field: ['name', 'uuid'],
     o: 'name',
+    page: currentPage,
+    page_size: ENV.pageSize,
   };
-  return getList('/service-settings/', params);
+  const response = await getSelectData('/service-settings/', params);
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
 };
 
 export const SharedProviderFilter = () => (
@@ -25,16 +38,21 @@ export const SharedProviderFilter = () => (
           <Field
             name="provider"
             component={(fieldProps) => (
-              <AsyncSelect
+              <AsyncPaginate
                 placeholder={translate('Select provider...')}
                 defaultOptions
-                loadOptions={providerAutocomplete}
+                loadOptions={(query, prevOptions, { page }) =>
+                  providerAutocomplete(query, prevOptions, page)
+                }
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={(option) => option.name}
                 value={fieldProps.input.value}
                 onChange={(value) => fieldProps.input.onChange(value)}
                 noOptionsMessage={() => translate('No providers')}
                 isClearable={true}
+                additional={{
+                  page: 1,
+                }}
               />
             )}
           />

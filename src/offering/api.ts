@@ -1,4 +1,6 @@
-import { getAll, getById, post, put } from '@waldur/core/api';
+import { getById, getSelectData, post, put } from '@waldur/core/api';
+import { ENV } from '@waldur/core/services';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { Customer } from '@waldur/customer/types';
 import { Project } from '@waldur/workspace/types';
 
@@ -9,30 +11,64 @@ const tenantSerializer = ({ name, backend_id, project_name }) => ({
   value: `Tenant UUID: ${backend_id}. Name: ${name}`,
 });
 
-export const fetchTenantOptions = (query, customerId) =>
-  getAll('/openstack-tenants/', {
+export const fetchTenantOptions = async (
+  query,
+  prevOptions,
+  currentPage: number,
+  customerId,
+) => {
+  let response = await getSelectData('/openstack-tenants/', {
     params: {
       field: ['name', 'backend_id', 'project_name'],
       customer_uuid: customerId,
       name: query,
       o: ['project_name', 'name'],
+      page: currentPage,
+      page_size: ENV.pageSize,
     },
-  }).then((options) => options.map(tenantSerializer));
+  });
+  response = {
+    ...response,
+    options: response.options.map(tenantSerializer),
+  };
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
+};
 
 const instanceSerializer = ({ name, backend_id, project_name }) => ({
   name: `${project_name} / ${name}`,
   value: `Instance UUID: ${backend_id}. Name: ${name}`,
 });
 
-export const fetchInstanceOptions = (query, customerId) =>
-  getAll('/openstacktenant-instances/', {
+export const fetchInstanceOptions = async (
+  query,
+  prevOptions,
+  currentPage: number,
+  customerId,
+) => {
+  let response = await getSelectData('/openstacktenant-instances/', {
     params: {
       field: ['name', 'backend_id', 'project_name'],
       customer_uuid: customerId,
       name: query,
       o: ['project_name', 'name'],
+      page: currentPage,
+      page_size: ENV.pageSize,
     },
-  }).then((options) => options.map(instanceSerializer));
+  });
+  response = {
+    ...response,
+    options: response.options.map(instanceSerializer),
+  };
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
+};
 
 export const getOffering = (uuid) =>
   getById<Offering>('/support-offerings/', uuid);
