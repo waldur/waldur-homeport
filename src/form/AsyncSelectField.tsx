@@ -1,14 +1,16 @@
 import * as React from 'react';
-import AsyncSelect from 'react-select/async';
+import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
 const Select = ({ input, loadOptions, ...rest }) => (
-  <AsyncSelect
+  <AsyncPaginate
     value={input.value}
     onChange={input.onChange}
-    loadOptions={loadOptions}
+    loadOptions={(query, prevOptions, { page }) =>
+      loadOptions(query, prevOptions, page)
+    }
     {...rest}
   />
 );
@@ -25,6 +27,9 @@ export const AsyncSelectField = (props) => {
       loadOptions={props.loadOptions}
       noOptionsMessage={() => translate('No results found')}
       getOptionLabel={(option) => option.name}
+      additional={{
+        page: 1,
+      }}
     />
   );
 };

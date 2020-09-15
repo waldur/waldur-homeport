@@ -10,6 +10,7 @@ import {
   getFirst,
   patch,
   deleteById,
+  getSelectData,
 } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { Customer } from '@waldur/customer/types';
@@ -41,6 +42,9 @@ export const getPlugins = () =>
 export const getCategories = (options?: {}) =>
   getAll<Category>('/marketplace-categories/', options);
 
+export const getCategoryOptions = (options?: {}) =>
+  getSelectData<Category>('/marketplace-categories/', options);
+
 export const getCategoryUsages = (options?: {}) =>
   getAll<CategoryComponentUsage>(
     '/marketplace-category-component-usages/',
@@ -52,6 +56,9 @@ export const getCategory = (id: string, options?: AxiosRequestConfig) =>
 
 export const getOfferingsList = (params?: {}) =>
   getList<Offering>('/marketplace-offerings/', params);
+
+export const getOfferingsOptions = (params?: {}) =>
+  getSelectData<Offering>('/marketplace-offerings/', params);
 
 export const getAllOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-offerings/', options);
@@ -137,10 +144,10 @@ export const rejectOrder = (orderUuid: string) =>
   );
 
 export const getCustomerList = (params?: {}) =>
-  getList<Customer>('/customers/', params);
+  getSelectData<Customer>('/customers/', params);
 
 export const getProjectList = (params?: {}) =>
-  getList<Project>('/projects/', params);
+  getSelectData<Project>('/projects/', params);
 
 export const getCustomer = (id: string) => getById<Customer>('/customers/', id);
 
@@ -168,7 +175,7 @@ export const deleteOfferingScreenshot = (screenshotUuid: string) =>
   deleteById('/marketplace-screenshots/', screenshotUuid);
 
 export const getServiceProviderList = (params?: {}) =>
-  getList<ServiceProvider>('/marketplace-service-providers/', params);
+  getSelectData<ServiceProvider>('/marketplace-service-providers/', params);
 
 export const createServiceProvider = (params) =>
   post<ServiceProvider>('/marketplace-service-providers/', params).then(

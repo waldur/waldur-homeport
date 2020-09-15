@@ -18,7 +18,7 @@ import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTa
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
-import { loadSshKeys } from '@waldur/openstack/api';
+import { loadSshKeysOptions } from '@waldur/openstack/api';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { TenantGroup } from './TenantGroup';
@@ -51,9 +51,11 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
 
   const user = useSelector(getUser);
 
-  const loadSshKeyOptions = React.useCallback(() => loadSshKeys(user.uuid), [
-    user.uuid,
-  ]);
+  const loadSshKeyOptions = React.useCallback(
+    (query, prevOptions, currentPage) =>
+      loadSshKeysOptions(user.uuid, query, prevOptions, currentPage),
+    [user.uuid],
+  );
 
   return (
     <form className="form-horizontal">
@@ -89,8 +91,13 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
             getOptionValue={(option) => option.url}
             getOptionLabel={(option) => option.name}
             defaultOptions
-            loadOptions={loadSshKeyOptions}
+            loadOptions={(query, prevOptions, { page }) =>
+              loadSshKeyOptions(query, prevOptions, page)
+            }
             isClearable={true}
+            additional={{
+              page: 1,
+            }}
           />
         )}
         <AwesomeCheckboxField

@@ -15,7 +15,11 @@ import { HeroSection } from './HeroSection';
 interface LandingPageProps extends TranslateProps {
   categories: CategoriesListType;
   offerings: OfferingsListType;
-  loadOfferings: (query: string) => any;
+  loadOfferings: (
+    query: string,
+    prevOptions,
+    additional: { page: number },
+  ) => any;
   gotoOffering: (offeringId: string) => void;
 }
 

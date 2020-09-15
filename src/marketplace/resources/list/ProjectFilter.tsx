@@ -1,5 +1,5 @@
 import * as React from 'react';
-import AsyncSelect from 'react-select/async';
+import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -15,9 +15,11 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
     <Field
       name="project"
       component={(fieldProps) => (
-        <AsyncSelect
+        <AsyncPaginate
           placeholder={translate('Select project...')}
-          loadOptions={projectAutocomplete(props.customer_uuid)}
+          loadOptions={(query, prevOptions, { page }) =>
+            projectAutocomplete(props.customer_uuid, query, prevOptions, page)
+          }
           defaultOptions
           getOptionValue={(option) => option.uuid}
           getOptionLabel={(option) => option.name}
@@ -25,6 +27,9 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No projects')}
           isClearable={true}
+          additional={{
+            page: 1,
+          }}
         />
       )}
     />

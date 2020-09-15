@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { components } from 'react-select';
-import AsyncSelect from 'react-select/async';
+import { AsyncPaginate } from 'react-select-async-paginate';
 
 import { renderIcon } from '@waldur/form/optionRenderer';
 
@@ -26,14 +26,18 @@ const SingleValue = (props) => {
 
 interface AutocompleteFieldProps {
   placeholder: string;
-  loadOfferings: (query: string) => any;
+  loadOfferings: (
+    query: string,
+    prevOptions,
+    additional: { page: number },
+  ) => any;
   onChange: (offeringId: string) => void;
   value?: any;
   noOptionsMessage?: (message) => string;
 }
 
 export const AutocompleteField = (props: AutocompleteFieldProps) => (
-  <AsyncSelect
+  <AsyncPaginate
     placeholder={props.placeholder}
     loadOptions={props.loadOfferings}
     components={{ Option, SingleValue }}
@@ -44,5 +48,8 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => (
     onChange={(value: any) => props.onChange(value)}
     noOptionsMessage={props.noOptionsMessage}
     isClearable={true}
+    additional={{
+      page: 1,
+    }}
   />
 );

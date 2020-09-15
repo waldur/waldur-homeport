@@ -38,11 +38,15 @@ export const LandingPageContainer: React.FC<LandingPageContainerProps> = (
   return (
     <LandingPage
       {...props}
-      loadOfferings={(query) =>
-        offeringsAutocomplete({
-          name: query,
-          allowed_customer_uuid: props.customer.uuid,
-        })
+      loadOfferings={(query, prevOptions, { page }) =>
+        offeringsAutocomplete(
+          {
+            name: query,
+            allowed_customer_uuid: props.customer.uuid,
+          },
+          prevOptions,
+          page,
+        )
       }
     />
   );

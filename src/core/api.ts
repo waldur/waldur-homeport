@@ -19,6 +19,14 @@ export function getList<T = {}>(endpoint: string, params?: {}): Promise<T[]> {
   );
 }
 
+export function getSelectData<T = {}>(endpoint: string, params?: {}): any {
+  const options = params ? { params } : undefined;
+  return get<T>(endpoint, options).then((response) => ({
+    options: Array.isArray(response.data) ? response.data : [],
+    totalItems: parseInt(response.headers['x-result-count'], 10),
+  }));
+}
+
 export function getFirst<T = {}>(endpoint, params?) {
   return getList<T>(endpoint, params).then((data) => data[0]);
 }

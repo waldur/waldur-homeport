@@ -1,6 +1,8 @@
 import Axios from 'axios';
 
-import { getAll, put, post } from '@waldur/core/api';
+import { getAll, put, post, getSelectData } from '@waldur/core/api';
+import { ENV } from '@waldur/core/services';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
   Flavor,
   FloatingIp,
@@ -53,6 +55,27 @@ export const loadFloatingIps = (settings_uuid: string) =>
 
 export const loadSshKeys = (user_uuid: string) =>
   getAll<SshKey>('/keys/', { params: { user_uuid } });
+
+export const loadSshKeysOptions = async (
+  user_uuid: string,
+  query: string,
+  prevOptions,
+  currentPage: number,
+) => {
+  const response = await getSelectData<SshKey>('/keys/', {
+    params: {
+      user_uuid,
+      name: query,
+      page: currentPage,
+      page_size: ENV.pageSize,
+    },
+  });
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
+};
 
 export const loadServiceSettings = (scope: string) =>
   Axios.get(scope).then((response) => response.data);

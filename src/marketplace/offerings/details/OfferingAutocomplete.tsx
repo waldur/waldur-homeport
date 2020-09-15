@@ -18,11 +18,15 @@ export const OfferingAutocomplete: React.FC<Props> = (props) => (
       component={(fieldProps) => (
         <AutocompleteField
           placeholder={translate('Select offering...')}
-          loadOfferings={(query) =>
-            offeringsAutocomplete({
-              name: query,
-              ...props.offeringFilter,
-            })
+          loadOfferings={(query, prevOptions, { page }) =>
+            offeringsAutocomplete(
+              {
+                name: query,
+                ...props.offeringFilter,
+              },
+              prevOptions,
+              page,
+            )
           }
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}

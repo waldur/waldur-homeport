@@ -1,55 +1,101 @@
+import { ENV } from '@waldur/core/services';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
   getCustomerList,
   getServiceProviderList,
-  getOfferingsList,
+  getOfferingsOptions,
   getProjectList,
-  getCategories,
+  getCategoryOptions,
 } from '@waldur/marketplace/common/api';
 
-export const organizationAutocomplete = (query: string) => {
+export const organizationAutocomplete = async (
+  query: string,
+  prevOptions,
+  { page },
+) => {
   const params = {
     name: query,
+    page: page,
+    page_size: ENV.pageSize,
     has_resources: true,
     field: ['name', 'uuid'],
     o: 'name',
   };
-  return getCustomerList(params);
+  const response = await getCustomerList(params);
+  return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };
 
-export const projectAutocomplete = (customer: string) => (query: string) => {
+export const projectAutocomplete = async (
+  customer: string,
+  query: string,
+  prevOptions,
+  currentPage: number,
+) => {
   const params = {
     name: query,
     customer,
     field: ['name', 'uuid'],
     o: 'name',
+    page: currentPage,
+    page_size: ENV.pageSize,
   };
-  return getProjectList(params);
+  const response = await getProjectList(params);
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
 };
 
-export const providerAutocomplete = (query: string) => {
+export const providerAutocomplete = async (
+  query: string,
+  prevOptions,
+  { page },
+) => {
   const params = {
     name: query,
     field: ['customer_name', 'customer_uuid'],
     o: 'customer_name',
+    page: page,
+    page_size: ENV.pageSize,
   };
-  return getServiceProviderList(params);
+  const response = await getServiceProviderList(params);
+  return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };
 
-export const categoryAutocomplete = (query: string) => {
+export const categoryAutocomplete = async (
+  query: string,
+  prevOptions,
+  { page },
+) => {
   const params = {
     name: query,
     field: ['title', 'uuid'],
     o: 'title',
+    page: page,
+    page_size: ENV.pageSize,
   };
-  return getCategories(params);
+  const response = await getCategoryOptions(params);
+  return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };
 
-export const offeringsAutocomplete = (query: object) => {
+export const offeringsAutocomplete = async (
+  query: object,
+  prevOptions,
+  currentPage: number,
+) => {
   const params = {
     field: ['name', 'uuid', 'category_title', 'thumbnail'],
     o: 'name',
     state: 'Active',
     ...query,
+    page: currentPage,
+    page_size: ENV.pageSize,
   };
-  return getOfferingsList(params);
+  const response = await getOfferingsOptions(params);
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
 };
