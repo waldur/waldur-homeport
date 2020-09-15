@@ -84,7 +84,9 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
         });
         dispatch(reset('CustomerCreateDialog'));
       } catch (e) {
-        showErrorResponse(e, translate('Could not create organization'));
+        dispatch(
+          showErrorResponse(e, translate('Could not create organization')),
+        );
         if (e.status === 400) {
           throw new SubmissionError(e.data);
         }

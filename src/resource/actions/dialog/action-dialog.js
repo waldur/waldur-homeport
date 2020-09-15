@@ -1,6 +1,9 @@
 import Axios from 'axios';
 
 import { toKeyValue } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
+import { showErrorResponse } from '@waldur/store/coreSaga';
+import store from '@waldur/store/store';
 
 import { getSelectList, formatChoices } from '../action-resource-loader';
 import { handleActionSuccess } from '../action-utils-service';
@@ -9,7 +12,7 @@ import { defaultFieldOptions } from '../constants';
 import template from './action-dialog.html';
 
 // @ngInject
-function ActionDialogController($scope, $q, $state, $rootScope, ncUtilsFlash) {
+function ActionDialogController($scope, $q, $state, $rootScope) {
   Object.assign($scope, {
     init: function () {
       $scope.errors = {};
@@ -131,9 +134,8 @@ function ActionDialogController($scope, $q, $state, $rootScope, ncUtilsFlash) {
         },
         function (response) {
           $scope.errors = response.data;
-          ncUtilsFlash.errorFromResponse(
-            response,
-            gettext('Unable to perform action'),
+          store.dispatch(
+            showErrorResponse(response, translate('Unable to perform action')),
           );
         },
       );

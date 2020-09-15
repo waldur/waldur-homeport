@@ -2257,11 +2257,6 @@ angular-cookies@^1.8.0:
   resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.8.0.tgz#c981c843652e716c1cf993451c2509f00a4b0169"
   integrity sha512-gWO3RKF0WMmXhseiN3Aw9aEmQ3mB53wSdAxpeKKHbiDwU7vmK+MBuebyOX9qbwZYubn5nM8LByZVmg7T6jOV1w==
 
-angular-flash-alert@~1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/angular-flash-alert/-/angular-flash-alert-1.1.1.tgz#01445de81bc394b8b9dee80cd7697923d944a5e6"
-  integrity sha1-AURd6BvDlLi53ugM12l5I9lEpeY=
-
 angular-gettext-tools@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/angular-gettext-tools/-/angular-gettext-tools-2.5.3.tgz#3aaafa75aa96708b1a172e3a387ba0b9f38e852a"
@@ -11681,6 +11676,19 @@ readdirp@^2.2.1:
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
 
+reapop-theme-bootstrap@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/reapop-theme-bootstrap/-/reapop-theme-bootstrap-1.0.2.tgz#7ae52f413bb4afde04d94415f5190adbcb0b5112"
+  integrity sha512-EbCqT/SFJvjUWMpwfIVPFtL/XReA48+i/sk7iJQO/zwMU1Xzz08rEsM5VN07YFBcD+ar9TmzCLgAWk+7st/qQw==
+
+reapop@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/reapop/-/reapop-2.1.0.tgz#b445437355c69072d7934b4b6fa862a4beea8ec5"
+  integrity sha512-1+0dJ0I8O4NAfI6gA8b68EK/NKFyMJQsnpgtwC6qQRZKfyBJJPZ9IAeuDyBXuiGE0mqu49Vprm+XmMLIsD397g==
+  dependencies:
+    prop-types "^15.6.0"
+    react-transition-group "^2.2.1"
+
 recast@~0.11.12:
   version "0.11.23"
   resolved "https://registry.yarnpkg.com/recast/-/recast-0.11.23.tgz#451fd3004ab1e4df9b4e4b66376b2a21912462d3"
@@ -11735,6 +11743,11 @@ redux-saga@^0.15.6:
   version "0.15.6"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.15.6.tgz#8638dc522de6c6c0a496fe8b2b5466287ac2dc4d"
   integrity sha1-hjjcUi3mxsCklv6LK1RmKHrC3E0=
+
+redux-thunk@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+  integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
 
 "redux@^3.6.0 || ^4.0.0":
   version "4.0.5"

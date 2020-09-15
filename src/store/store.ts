@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
 
 import sagas from './effects';
 import rootReducer from './reducers';
@@ -16,7 +17,7 @@ const composeEnhancers =
   compose;
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = [sagaMiddleware];
+const middlewares = [sagaMiddleware, thunk];
 let enhancedMiddlewares;
 
 if (process.env.NODE_ENV !== 'production') {

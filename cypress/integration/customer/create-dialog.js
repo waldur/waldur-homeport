@@ -99,7 +99,7 @@ describe('Customer creation dialog', () => {
       .click()
 
       // Notification should be shown
-      .get('.alert.alert-success')
+      .get('p')
       .contains('Organization has been created.')
 
       // Wait for modal to hide
