@@ -10,7 +10,8 @@ include:
 
 variables:
   COMPONENT_VERSION: "latest"
-  GITHUB_REPO_URL: "git@github.com:opennode/waldur-homeport.git"
+  GITHUB_OPENNODE_REPO_URL: "git@github.com:opennode/waldur-homeport.git"
+  GITHUB_WALDUR_REPO_URL: "git@github.com:waldur/waldur-homeport.git"
 
 image: node:lts-alpine
 
