@@ -3830,6 +3830,7 @@ msgstr ""
 msgid "No offerings"
 msgstr ""
 
+#: src/issues/create/CallerGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 msgid "No organizations"
 msgstr ""
