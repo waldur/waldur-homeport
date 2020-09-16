@@ -1,5 +1,6 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { checkPermission } from '@waldur/issues/utils';
+import { SupportOfferings } from '@waldur/marketplace/offerings/customers/SupportOfferings';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 
 import { CheckoutPage } from './cart/CheckoutPage';
@@ -273,6 +274,16 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-support-resources',
     url: 'marketplace-support-resources/',
     component: SupportResourcesContainer,
+    parent: 'support',
+    resolve: {
+      permission: checkPermission,
+    },
+  },
+
+  {
+    name: 'marketplace-support-offerings',
+    url: 'offerings/',
+    component: SupportOfferings,
     parent: 'support',
     resolve: {
       permission: checkPermission,

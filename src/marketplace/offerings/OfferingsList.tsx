@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
+import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/customers/OfferingsListExpandableRow';
 import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
 import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -70,6 +71,7 @@ export const TableComponent = (props) => {
       actions={props.showOfferingCreateButton && <OfferingCreateButton />}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
+      expandableRow={OfferingsListExpandableRow}
     />
   );
 };

@@ -44,6 +44,7 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/marketplace/offerings/customers/CustomersList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 msgid "Abbreviation"
@@ -4062,7 +4063,9 @@ msgstr ""
 msgid "Offering {offering_name} has been deleted."
 msgstr ""
 
+#: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/customers/SupportOfferings.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 msgid "Offerings"
 msgstr ""
@@ -4245,6 +4248,7 @@ msgstr ""
 #: src/issues/create/OrganizationGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace/offerings/customers/CustomersList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
@@ -4343,6 +4347,7 @@ msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
 #: src/customer/list/CustomerList.tsx
+#: src/marketplace/offerings/customers/CustomersList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"
 msgstr ""
@@ -4819,6 +4824,7 @@ msgstr ""
 
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/offerings/create/PlanSummary.tsx
+#: src/marketplace/offerings/customers/utils.ts
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/Order.tsx
@@ -5900,6 +5906,7 @@ msgstr ""
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
+#: src/marketplace/offerings/customers/utils.ts
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
@@ -7149,6 +7156,7 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
+#: src/marketplace/offerings/customers/utils.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Total"
@@ -7576,6 +7584,10 @@ msgstr ""
 
 #: src/marketplace/common/OfferingGrid.tsx
 msgid "Unable to load marketplace offerings."
+msgstr ""
+
+#: src/marketplace/offerings/customers/OfferingCostsChart.tsx
+msgid "Unable to load offering cost chart."
 msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx
