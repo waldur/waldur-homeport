@@ -1,6 +1,6 @@
 import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
-import { getNextPageUrl } from '@waldur/core/api';
+import { getNextPageUrl, parseResultCount } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { parseQueryString } from '@waldur/core/utils';
 
@@ -24,7 +24,7 @@ export const parseResponse = (url, params, options?: AxiosRequestConfig) =>
     params,
     ...options,
   }).then((response: AxiosResponse<any>) => {
-    const resultCount = parseInt(response.headers['x-result-count'], 10);
+    const resultCount = parseResultCount(response);
     return {
       rows: Array.isArray(response.data) ? response.data : [],
       resultCount,

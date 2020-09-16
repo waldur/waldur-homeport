@@ -1,0 +1,39 @@
+[
+  {
+    "uuid": "bf6d515c9e6e445f9c339021b30fc96b",
+    "name": "Alice Lebowski",
+    "abbreviation": "",
+    "projects": [
+      {
+        "url": "http://localhost:8080/api/projects/6f3ae6f43d284ca196afeb467880b3b9/",
+        "uuid": "6f3ae6f43d284ca196afeb467880b3b9",
+        "name": "OpenStack Alice project"
+      },
+      {
+        "url": "http://localhost:8080/api/projects/df4193e2bee24a4c8e339474d74c5f8c/",
+        "uuid": "df4193e2bee24a4c8e339474d74c5f8c",
+        "name": "Azure Alice project"
+      }
+    ],
+    "owners": [],
+    "is_expert_provider": false,
+    "quotas": []
+  },
+  {
+    "uuid": "8f2f80601d82422ea4124559da92dddb",
+    "name": "Bob Lebowski",
+    "abbreviation": "",
+    "projects": [],
+    "owners": [
+      {
+        "url": "http://localhost:8080/api/users/4a5ef3a10e604ccfa16c9d1c9254e51c/",
+        "uuid": "4a5ef3a10e604ccfa16c9d1c9254e51c",
+        "username": "Bob",
+        "full_name": "Bob Lebowski",
+        "native_name": "Bob Leböwski"
+      }
+    ],
+    "is_expert_provider": true,
+    "quotas": []
+  }
+]

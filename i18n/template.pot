@@ -257,7 +257,7 @@ msgstr ""
 msgid "Add member"
 msgstr ""
 
-#: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "Add new"
 msgstr ""
 
@@ -6037,8 +6037,8 @@ msgstr ""
 #: src/form/AppstoreListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/navigation/workspace/OrganizationsPanel.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx
+#: src/navigation/workspace/SelectOrganizationButton.tsx
 msgid "Select"
 msgstr ""
 
@@ -6237,7 +6237,7 @@ msgstr ""
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Service provider"
@@ -8790,6 +8790,14 @@ msgstr ""
 msgid "events"
 msgstr ""
 
+#: src/navigation/workspace/OrganizationListItem.tsx
+msgid "failed"
+msgstr ""
+
+#: src/navigation/workspace/OrganizationListItem.tsx
+msgid "fetching"
+msgstr ""
+
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "floating IPs"
 msgstr ""
@@ -8881,7 +8889,7 @@ msgstr ""
 msgid "order items"
 msgstr ""
 
-#: src/navigation/workspace/OrganizationsPanel.tsx
+#: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "organization"
 msgstr ""
 
