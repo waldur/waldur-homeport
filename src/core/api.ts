@@ -1,9 +1,17 @@
-import Axios, { AxiosPromise, Method, AxiosRequestConfig } from 'axios';
+import Axios, {
+  AxiosPromise,
+  Method,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from 'axios';
 
 import { ENV } from './services';
 
 const fixURL = (endpoint: string) =>
   endpoint.startsWith('http') ? endpoint : `${ENV.apiEndpoint}api${endpoint}`;
+
+export const parseResultCount = (response: AxiosResponse): number =>
+  parseInt(response.headers['x-result-count'], 10);
 
 export function get<T = {}>(
   endpoint: string,
@@ -23,7 +31,7 @@ export function getSelectData<T = {}>(endpoint: string, params?: {}): any {
   const options = params ? { params } : undefined;
   return get<T>(endpoint, options).then((response) => ({
     options: Array.isArray(response.data) ? response.data : [],
-    totalItems: parseInt(response.headers['x-result-count'], 10),
+    totalItems: parseResultCount(response),
   }));
 }
 

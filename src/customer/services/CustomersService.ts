@@ -61,12 +61,6 @@ class CustomersServiceClass {
     }
   }
 
-  countCustomers() {
-    return Axios.head(ENV.apiEndpoint + 'api/customers/').then((response) => {
-      return parseInt(response.headers['x-result-count']);
-    });
-  }
-
   refreshCurrentCustomer(customerUuid) {
     return this.get(customerUuid).then((customer) => {
       store.dispatch(setCurrentCustomer(customer));
