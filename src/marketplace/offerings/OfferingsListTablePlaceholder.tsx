@@ -18,14 +18,14 @@ const PureOfferingsListTablePlaceholder = ({
     illustration={TwoDocumentsIllustration}
     title={translate('Nothing to see here')}
     description={
-      customer.is_service_provider
+      customer?.is_service_provider
         ? translate(
             'You can start filling this table by creating your first offering.',
           )
         : null
     }
     action={
-      customer.is_service_provider && (
+      customer?.is_service_provider && (
         <Link
           state="marketplace-offering-create"
           className="btn btn-success btn-md"

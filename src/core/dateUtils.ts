@@ -5,6 +5,9 @@ type DateFormatter = (date?: moment.MomentInput) => string;
 export const formatDate: DateFormatter = (date) =>
   moment(date).format('YYYY-MM-DD');
 
+export const formatDateToYearMonth: DateFormatter = (date) =>
+  moment(date).format('YYYY-MM');
+
 export const formatDateTime: DateFormatter = (date) =>
   moment(date).format('YYYY-MM-DD HH:mm');
 

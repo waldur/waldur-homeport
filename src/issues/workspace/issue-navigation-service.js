@@ -59,10 +59,11 @@ const getReportItems = () => [
         icon: 'fa-line-chart',
         state: 'invoicesGrowth',
       },
-      /*{
+      {
         label: translate('Offerings'),
         icon: 'fa-files-o',
-      },*/
+        state: 'marketplace-support-offerings',
+      },
       {
         label: translate('Ordering'),
         icon: 'fa-files-o',
