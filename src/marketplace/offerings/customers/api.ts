@@ -24,7 +24,7 @@ export const getOfferingCostChartData = (
   getAll(`/marketplace-offerings/${offeringUuid}/costs/`, {
     params: {
       accounting_is_running,
-      start_date: formatDateToYearMonth(moment().subtract(11, 'months')),
-      end_date: formatDateToYearMonth(moment()),
+      start: formatDateToYearMonth(moment().subtract(11, 'months')),
+      end: formatDateToYearMonth(moment()),
     },
   }).then((response) => response);
