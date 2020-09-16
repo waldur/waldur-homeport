@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { useDispatch, useSelector } from 'react-redux';
+import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -12,7 +13,6 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { UserPopover } from '@waldur/user/UserPopover';
 
 import { refreshUsers } from './api';
-import { AsyncSelectField } from './AsyncSelectField';
 import { callerSelector } from './selectors';
 
 const renderer = (option) => option.full_name || option.username;
@@ -51,15 +51,24 @@ export const CallerGroup = ({ onSearch }) => (
     <Col sm={6}>
       <Field
         name="caller"
-        component={AsyncSelectField}
-        required={true}
-        placeholder={translate('Select caller...')}
-        isClearable={true}
-        getOptionValue={(option) => option.uuid}
-        getOptionLabel={renderer}
-        defaultOptions
-        loadOptions={refreshUsers}
-        filterOption={filterOption}
+        component={(fieldProps) => (
+          <AsyncPaginate
+            placeholder={translate('Select caller...')}
+            loadOptions={refreshUsers}
+            defaultOptions
+            getOptionValue={(option) => option.uuid}
+            getOptionLabel={renderer}
+            value={fieldProps.input.value}
+            required={true}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            filterOption={filterOption}
+            noOptionsMessage={() => translate('No organizations')}
+            isClearable={true}
+            additional={{
+              page: 1,
+            }}
+          />
+        )}
       />
     </Col>
     <CallerActions onSearch={onSearch} />

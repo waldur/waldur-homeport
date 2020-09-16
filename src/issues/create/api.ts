@@ -1,4 +1,6 @@
-import { getList } from '@waldur/core/api';
+import { getList, getSelectData } from '@waldur/core/api';
+import { ENV } from '@waldur/core/services';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { Project, Customer, User } from '@waldur/workspace/types';
 
 export const refreshSupportUsers = async (name: string) => {
@@ -7,9 +9,10 @@ export const refreshSupportUsers = async (name: string) => {
   return { options: users };
 };
 
-export const refreshUsers = (name: string) => {
-  const params = name && { full_name: name };
-  return getList('/users/', params);
+export const refreshUsers = async (query: string, prevOptions, { page }) => {
+  const params = { full_name: query, page: page, page_size: ENV.pageSize };
+  const response = await getSelectData('/users/', params);
+  return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };
 
 export const refreshCustomers = async (name: string, caller?: User) => {
