@@ -1,7 +1,6 @@
 import * as moment from 'moment-timezone';
 import * as React from 'react';
 import { useCallback, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { Tooltip } from '@waldur/core/Tooltip';
@@ -9,7 +8,7 @@ import { getOptions } from '@waldur/form/TimeSelectField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-import { handleWeekDays, getDurationOptions, getLocale } from '../utils';
+import { handleWeekDays, getDurationOptions } from '../utils';
 
 import { useCalendarSettings } from './hooks/useCalendarSettings';
 
@@ -17,8 +16,7 @@ const timeZoneArray = moment.tz
   .names()
   .map((zone) => ({ value: zone, label: zone }));
 const daysArray = [1, 2, 3, 4, 5, 6, 0];
-const getDayLabel = (day: number, lang): string =>
-  moment.locale(lang) && moment.weekdays(day);
+const getDayLabel = (day: number): string => moment.weekdays(day);
 
 const usePreviousWeekendsValue = (value) => {
   const ref = useRef();
@@ -45,8 +43,6 @@ export const CalendarSettings: React.FC = () => {
   } = useCalendarSettings();
 
   const prevWeekends = usePreviousWeekendsValue(weekends);
-
-  const lang = useSelector(getLocale);
 
   const updateWeekends = useCallback(() => {
     if (prevWeekends === weekends) {
@@ -120,11 +116,7 @@ export const CalendarSettings: React.FC = () => {
       >
         <div className="weekDays-selector">
           {daysArray.map((day, index) => (
-            <Tooltip
-              key={index}
-              label={getDayLabel(day, lang)}
-              id={`weekday-${day}`}
-            >
+            <Tooltip key={index} label={getDayLabel(day)} id={`weekday-${day}`}>
               <input
                 type="checkbox"
                 id={`weekday-${day}`}
@@ -135,7 +127,7 @@ export const CalendarSettings: React.FC = () => {
                 }
               />
               <label htmlFor={`weekday-${day}`}>
-                {getDayLabel(day, lang)[0].toUpperCase()}
+                {getDayLabel(day)[0].toUpperCase()}
               </label>
             </Tooltip>
           ))}
@@ -169,8 +161,8 @@ export const CalendarSettings: React.FC = () => {
           isSearchable={false}
           isClearable={false}
           isMulti={false}
-          options={getDurationOptions(lang)}
-          value={getDurationOptions(lang).filter(
+          options={getDurationOptions()}
+          value={getDurationOptions().filter(
             ({ value }) => value === slotDuration,
           )}
           onChange={(newValue: any) => setSlotDuration(newValue.value)}

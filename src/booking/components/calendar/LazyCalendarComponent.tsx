@@ -1,7 +1,7 @@
 import { Calendar, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment-timezone';
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/list/main.css';
@@ -19,7 +19,6 @@ import {
   eventRender,
   transformBookingEvent,
   handleSchedule,
-  getLocale,
 } from '@waldur/booking/utils';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 
@@ -41,16 +40,13 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
     el: null,
     event: null,
   });
-  const lang = useSelector(getLocale);
   const dispatch = useDispatch();
-
-  const getApi = (): Calendar => calendarRef.current!;
 
   const isCalType = (type: CalendarComponentProps['calendarType']): boolean =>
     props.calendarType === type;
 
   const getNewDate = () => {
-    const calApi = getApi();
+    const calApi = calendarRef.current;
     const datetime = calApi.dateEnv.createMarker(
       props.options && props.options.defaultDate
         ? props.options.defaultDate
@@ -100,7 +96,7 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
 
       return addBooking(availabiltyBooking);
     } else if (isCalType('edit')) {
-      const calendarApi = getApi();
+      const calendarApi = calendarRef.current;
       const checkEvents = calendarApi.getEvents();
 
       checkEvents.forEach(function (event) {
@@ -129,7 +125,7 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
   };
 
   const calendarMountEffect = () => {
-    const cal = new Calendar(elRef.current!, {
+    const cal = new Calendar(elRef.current, {
       ...defaultOptions,
       ...props.options,
       eventClick,
@@ -149,7 +145,6 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
   };
 
   const calendarUpdateEffect = () => {
-    const cal = calendarRef.current!;
     const newDate = getNewDate();
 
     const options: OptionsInput = {
@@ -157,7 +152,6 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
       slotEventOverlap: isCalType('create'),
       selectConstraint: !isCalType('create') ? 'Availability' : null,
       eventConstraint: !isCalType('create') ? 'Availability' : null,
-      locale: lang,
       eventClick,
       select: handleSelect,
       eventDrop: updateEvent,
@@ -165,7 +159,7 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
       eventRender: (e) => eventRender(e, hovered),
     };
 
-    cal.on(
+    calendarRef.current.on(
       'eventMouseEnter',
       ({ event }) =>
         event.rendering !== 'background' &&
@@ -173,14 +167,14 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
         setHovered(event.id),
     );
 
-    cal.on('eventMouseLeave', () => setHovered(''));
+    calendarRef.current.on('eventMouseLeave', () => setHovered(''));
 
     if (
       newDate != null &&
       (oldDate.current == null ||
         oldDate.current.getTime() !== newDate.getTime())
     ) {
-      cal.gotoDate(newDate);
+      calendarRef.current.gotoDate(newDate);
       oldDate.current = newDate;
     }
 
@@ -197,12 +191,12 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
           )
         : options;
 
-      cal.mutateOptions(updates, removes, true);
+      calendarRef.current.mutateOptions(updates, removes, true);
       oldOptionsRef.current = options;
     }
 
-    cal.removeAllEventSources();
-    cal.addEventSource(props.events);
+    calendarRef.current.removeAllEventSources();
+    calendarRef.current.addEventSource(props.events);
   };
 
   React.useEffect(calendarMountEffect, []);
@@ -213,7 +207,6 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
     calendarRef,
     hovered,
     modal,
-    lang,
   ]);
 
   return (

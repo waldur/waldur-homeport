@@ -3,8 +3,8 @@ import { Question } from '../types';
 import { groupQuestions, parseQuestions, parseVisibleQuestions } from './utils';
 
 const DataDog: Question[] = require('./DataDog.json');
-const MySQL: Question[] = require('./MySQL.json');
 const JFrog: Question[] = require('./JFrog.json');
+const MySQL: Question[] = require('./MySQL.json');
 
 describe('Rancher application provision utils', () => {
   describe('groupQuestions', () => {
