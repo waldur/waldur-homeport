@@ -22,7 +22,7 @@ export const ResourceTabs = ({ resource }) => (
         <ResourceOrderItems resource_uuid={resource.uuid} />
       </PanelBody>
     </Tab>
-    {isFeatureVisible('support') && (
+    {isFeatureVisible('support') && resource.scope && (
       <Tab eventKey="issues" title={translate('Issues')}>
         <PanelBody>
           <IssuesList filter={{ resource: resource.scope }} />

@@ -40,7 +40,7 @@ export const ResourceSummary = ({ resource }) => (
         )
       }
     />
-    {resource.offering_type !== 'Marketplace.Booking' ? (
+    {resource.resource_uuid ? (
       <Field
         label={translate('Resource')}
         value={
