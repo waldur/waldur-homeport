@@ -5,6 +5,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { components } from 'react-select';
 import { Field } from 'redux-form';
 
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { SelectField } from '@waldur/issues/create/SelectField';
 
@@ -54,10 +55,7 @@ export const UserGroup = ({ editUser, users, disabled }) =>
         placeholder={translate('Select user...')}
         getOptionValue={(option) => option.full_name || option.username}
         getOptionLabel={(option) => option.full_name || option.username}
-        menuPortalTarget={document.body}
-        styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-        menuPosition={'fixed'}
-        menuPlacement={'bottom'}
+        {...reactSelectMenuPortaling()}
       />
     </FormGroup>
   ) : (

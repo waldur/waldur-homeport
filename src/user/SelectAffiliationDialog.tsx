@@ -16,6 +16,7 @@ import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField, SubmitButton } from '@waldur/form';
 import { ToggleButtonGroupInput } from '@waldur/form/ToggleButtonGroupInput';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -109,10 +110,7 @@ const SelectAffiliationDialogContainer = (props) => {
                 options={organizationOptions}
                 simpleValue={true}
                 validate={required}
-                menuPortalTarget={document.body}
-                styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-                menuPosition={'fixed'}
-                menuPlacement={'bottom'}
+                {...reactSelectMenuPortaling()}
               />
             ) : (
               <SelectField
@@ -123,10 +121,7 @@ const SelectAffiliationDialogContainer = (props) => {
                 options={projectOptions}
                 simpleValue={true}
                 validate={required}
-                menuPortalTarget={document.body}
-                styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-                menuPosition={'fixed'}
-                menuPlacement={'bottom'}
+                {...reactSelectMenuPortaling()}
               />
             )}
           </FormContainer>
