@@ -51,7 +51,7 @@ export const CategoryCard = (props: CategoryCardProps) => {
       );
     }
   };
-  return props.category.offering_count !== 0 ? (
+  return (
     <div className="category-card" style={{ height: '110px' }}>
       <CategoryLink
         className="category-thumb"
@@ -73,5 +73,5 @@ export const CategoryCard = (props: CategoryCardProps) => {
         </h3>
       </div>
     </div>
-  ) : null;
+  );
 };
