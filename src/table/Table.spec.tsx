@@ -7,7 +7,7 @@ import { formatTemplate } from '@waldur/i18n/translate';
 import Table from './Table';
 
 describe('Table', () => {
-  const fetch = jasmine.createSpy('fetch');
+  const fetch = jest.fn();
   const defaultProps = {
     translate: formatTemplate,
     loading: false,
