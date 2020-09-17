@@ -4,7 +4,6 @@ import { compose } from 'redux';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 type AccountingMode = 'billing' | 'accounting';
 
@@ -55,5 +54,3 @@ const mapStateToProps = (state) => ({
 const enhance = compose(connect(mapStateToProps), withTranslation);
 
 export const PriceTooltip = enhance(PurePriceTooltip);
-
-export default connectAngularComponent(PriceTooltip, ['estimated']);
