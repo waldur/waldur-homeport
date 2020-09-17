@@ -1,4 +1,4 @@
-import { EventInput, EventApi, OptionsInput } from '@fullcalendar/core';
+import type { EventInput, EventApi, OptionsInput } from '@fullcalendar/core';
 import { ReactElement } from 'react';
 import { WrappedFieldArrayProps } from 'redux-form';
 

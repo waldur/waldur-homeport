@@ -1,4 +1,4 @@
-import { OptionsInput } from '@fullcalendar/core';
+import type { OptionsInput } from '@fullcalendar/core';
 import moment from 'moment';
 import * as React from 'react';
 import { FieldArray } from 'redux-form';

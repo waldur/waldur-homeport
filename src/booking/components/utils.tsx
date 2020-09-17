@@ -1,4 +1,4 @@
-import { EventApi } from '@fullcalendar/core';
+import type { EventApi } from '@fullcalendar/core';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import * as OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';

@@ -1,4 +1,4 @@
-import { EventInput, EventApi } from '@fullcalendar/core';
+import type { EventInput, EventApi } from '@fullcalendar/core';
 import * as moment from 'moment';
 
 import { randomId } from '@waldur/core/fixtures';

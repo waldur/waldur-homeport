@@ -1,4 +1,4 @@
-import { EventInput } from '@fullcalendar/core';
+import type { EventInput } from '@fullcalendar/core';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';

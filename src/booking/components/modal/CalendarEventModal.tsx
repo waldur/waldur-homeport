@@ -1,4 +1,4 @@
-import { EventInput } from '@fullcalendar/core';
+import type { EventInput } from '@fullcalendar/core';
 import * as moment from 'moment';
 import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
