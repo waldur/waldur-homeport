@@ -63,8 +63,9 @@ describe('Workspace selector', () => {
   it('Allows to filter projects by name', () => {
     cy
       // Select first available organization
-      .get('.list-group-item')
-      .first()
+      .get('.list-group-item a')
+      .contains('Select')
+      .parent()
       .click({ force: true })
 
       // Filter projects by name
