@@ -1,6 +1,8 @@
 /* eslint-disable */
 import { IChangesObject } from 'angular';
-import { assign, mapValues, some } from 'lodash';
+import assign from 'lodash.assign';
+import mapValues from 'lodash.mapvalues';
+import some from 'lodash.some';
 
 type OnChanges<T> = {
   [K in keyof T]: IChangesObject<T[K]>;

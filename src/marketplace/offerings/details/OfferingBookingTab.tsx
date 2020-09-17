@@ -1,5 +1,5 @@
 import * as classNames from 'classnames';
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash.clonedeep';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
