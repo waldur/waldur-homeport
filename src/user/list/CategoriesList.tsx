@@ -33,11 +33,13 @@ export const CategoriesList = withTranslation((props: CategoriesListProps) => {
 
   return (
     <Row>
-      {props.items.map((category, index) => (
-        <Col key={index} md={2} sm={6}>
-          <CategoryCard category={category} />
-        </Col>
-      ))}
+      {props.items.map((category, index) =>
+        category.offering_count !== 0 ? (
+          <Col key={index} md={2} sm={6}>
+            <CategoryCard category={category} />
+          </Col>
+        ) : null,
+      )}
     </Row>
   );
 });
