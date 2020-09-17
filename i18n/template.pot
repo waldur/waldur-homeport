@@ -1311,6 +1311,7 @@ msgstr ""
 
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
+#: src/marketplace/offerings/customers/utils.ts
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -4825,7 +4826,6 @@ msgstr ""
 
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/offerings/create/PlanSummary.tsx
-#: src/marketplace/offerings/customers/utils.ts
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/orders/Order.tsx
@@ -7157,7 +7157,6 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/marketplace/offerings/customers/utils.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Total"

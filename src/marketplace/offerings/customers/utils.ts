@@ -5,10 +5,7 @@ import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
 export const formatOfferingCostsChart = (offeringCostsChartData) => {
-  const name =
-    ENV.accountingMode === 'accounting'
-      ? translate('Price')
-      : translate('Total');
+  const name = translate('Cost');
   return {
     toolbox: {
       feature: {
@@ -40,7 +37,7 @@ export const formatOfferingCostsChart = (offeringCostsChartData) => {
     yAxis: [
       {
         type: 'value',
-        name: name,
+        name,
         min: 0,
         max: null,
         interval: null,
@@ -54,7 +51,7 @@ export const formatOfferingCostsChart = (offeringCostsChartData) => {
     },
     series: [
       {
-        name: name,
+        name,
         type: 'line',
         data: offeringCostsChartData.map((row) =>
           ENV.accountingMode === 'accounting' ? row.price : row.total,
