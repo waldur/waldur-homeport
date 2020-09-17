@@ -11,11 +11,14 @@ export const getSaml2IdentityProviders = async (
   currentPage: number,
 ) => {
   const params = {
-    params: { name: name || '' },
+    name,
     page: currentPage,
     page_size: ENV.pageSize,
   };
-  const response = await getSelectData('/api-auth/saml2/providers', params);
+  const response = await getSelectData(
+    `${ENV.apiEndpoint}api-auth/saml2/providers`,
+    params,
+  );
   return returnReactSelectAsyncPaginateObject(
     response,
     prevOptions,

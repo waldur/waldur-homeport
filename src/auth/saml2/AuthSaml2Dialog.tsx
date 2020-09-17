@@ -6,6 +6,7 @@ import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 
 import { fetchIdentityProviderOptions } from '@waldur/auth/saml2/utils';
 import { $rootScope } from '@waldur/core/services';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
@@ -22,9 +23,7 @@ class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
     prevOptions,
     currentPage: number,
   ) {
-    if (input && input.length > 0) {
-      return fetchIdentityProviderOptions(input, prevOptions, currentPage);
-    }
+    return fetchIdentityProviderOptions(input, prevOptions, currentPage);
   }
 
   render() {
@@ -58,6 +57,7 @@ class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
                   additional={{
                     page: 1,
                   }}
+                  {...reactSelectMenuPortaling()}
                 />
               )}
             />

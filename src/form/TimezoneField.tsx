@@ -2,6 +2,8 @@ import * as moment from 'moment-timezone';
 import * as React from 'react';
 import Select from 'react-select';
 
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
+
 function getTimezoneMetadata(timezone: string, timestamp: number) {
   const zonedDate = moment.tz(timestamp, timezone);
   const offset = zonedDate.utcOffset();
@@ -32,10 +34,7 @@ export const TimezoneField = (props) => {
   const options = React.useMemo(getTimezoneItems, []);
   return (
     <Select
-      menuPortalTarget={document.body}
-      styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-      menuPosition={'fixed'}
-      menuPlacement={'bottom'}
+      {...reactSelectMenuPortaling()}
       options={options}
       value={options.find((option) => option.value === input.value)}
       onChange={(option: any) => input.onChange(option.value)}
