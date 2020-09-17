@@ -1,5 +1,4 @@
 import { IAugmentedJQuery, IComponentOptions } from 'angular';
-import fromPairs from 'lodash.frompairs';
 import * as React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 
@@ -27,7 +26,7 @@ export function react2angular<Props>(
     [];
 
   return {
-    bindings: fromPairs(names.map((_) => [_, '<'])),
+    bindings: names.reduce((map, name) => ({ ...map, [name]: '<' }), {}),
     controller: [
       '$element',
       ...injectNames,
