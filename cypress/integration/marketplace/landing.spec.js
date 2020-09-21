@@ -45,11 +45,11 @@ describe('Marketplace landing view', () => {
       .contains('Marketplace')
 
       // Ensure that search works
-      .get('div[class$="placeholder"]')
-      .first()
-      .click({ force: true })
+      .get('div[class$="control"]')
+      .parent()
+      .click()
       .get('*div[id^="react-select"]')
       .first()
-      .click();
+      .contains('HPC / Another offering');
   });
 });
