@@ -1,6 +1,13 @@
-import { getAll, getById, post } from '@waldur/core/api';
+import { get, getAll, getById, post } from '@waldur/core/api';
 
-import { Category, Checklist, Question, Answer, ChecklistStats } from './types';
+import {
+  Category,
+  Checklist,
+  Question,
+  Answer,
+  ChecklistStats,
+  ProjectStats,
+} from './types';
 
 export const getCategories = () =>
   getAll<Category>('/marketplace-checklists-categories/');
@@ -18,20 +25,11 @@ export const getChecklists = (categoryId?: string) =>
 export const getQuestions = (checklistId: string) =>
   getAll<Question>(`/marketplace-checklists/${checklistId}/questions/`);
 
-export const getAnswers = (checklistId: string, projectId: string) =>
-  getAll<Answer>(
-    `/marketplace-checklists/${checklistId}/answers/${projectId}/`,
-  );
+export const getAnswers = (checklistId: string) =>
+  getAll<Answer>(`/marketplace-checklists/${checklistId}/answers/`);
 
-export const postAnswers = (
-  checklistId: string,
-  projectId: string,
-  answers: Answer[],
-) =>
-  post(
-    `/marketplace-checklists/${checklistId}/answers/${projectId}/submit/`,
-    answers,
-  );
+export const postAnswers = (checklistId: string, answers: Answer[]) =>
+  post(`/marketplace-checklists/${checklistId}/answers/submit/`, answers);
 
 export const getStats = (checklistId: string) =>
   getAll<ChecklistStats>(`/marketplace-checklists/${checklistId}/stats/`);
@@ -39,4 +37,9 @@ export const getStats = (checklistId: string) =>
 export const getCustomerStats = (customerId: string, checklistId: string) =>
   getAll<ChecklistStats>(
     `/customers/${customerId}/marketplace-checklists/${checklistId}/`,
+  );
+
+export const getProjectStats = (projectId: string) =>
+  get<ProjectStats[]>(`/projects/${projectId}/marketplace-checklists/`).then(
+    (response) => response.data,
   );

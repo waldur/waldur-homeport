@@ -1,6 +1,3 @@
-import store from '@waldur/store/store';
-import { getProject } from '@waldur/workspace/selectors';
-
 import { getCategories } from './api';
 import { FEATURE, ICON_CLASS } from './constants';
 import { Category } from './types';
@@ -17,12 +14,10 @@ const getMenuItems = (linkFunction) => () => {
   });
 };
 
-export const getMenuForProject = async () => {
-  const project = getProject(store.getState());
+export const getMenuForUser = async () => {
   const items = await getMenuItems((category: Category) => ({
-    state: 'marketplace-checklist-project',
+    state: 'marketplace-checklist-user',
     params: {
-      uuid: project.uuid,
       category: category.uuid,
     },
   }))();

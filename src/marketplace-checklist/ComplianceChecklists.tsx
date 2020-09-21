@@ -4,30 +4,16 @@ import * as Row from 'react-bootstrap/lib/Row';
 import { useSelector } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 
-import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getProject } from '@waldur/workspace/selectors';
 
+import { getProjectStats } from './api';
 import { ChartHeader } from './ChartHeader';
 import { PieChart } from './PieChart';
 
-interface Checklist {
-  uuid: string;
-  name: string;
-  score: number;
-  positive_count: number;
-  negative_count: number;
-  unknown_count: number;
-}
-
-const getChecklists = (projectId: string) =>
-  get<Checklist[]>(`/projects/${projectId}/marketplace-checklists/`).then(
-    (response) => response.data,
-  );
-
 const ProjectChecklist = ({ project }) => {
-  const state = useAsync(() => getChecklists(project.uuid), [project]);
+  const state = useAsync(() => getProjectStats(project.uuid), [project]);
 
   if (state.loading) {
     return <LoadingSpinner />;

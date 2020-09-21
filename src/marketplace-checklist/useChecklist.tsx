@@ -58,7 +58,7 @@ const useChecklistSelector = (categoryId: string) => {
   };
 };
 
-export const useProjectChecklist = (project, categoryId) => {
+export const useUserChecklist = (categoryId) => {
   const { checklist, ...checklistLoader } = useChecklistSelector(categoryId);
 
   const [questionsList, setQuestionsList] = useState([]);
@@ -77,7 +77,7 @@ export const useProjectChecklist = (project, categoryId) => {
       setQuestionsErred(false);
       try {
         const questions = await getQuestions(checklist.uuid);
-        const answersList = await getAnswers(checklist.uuid, project.uuid);
+        const answersList = await getAnswers(checklist.uuid);
         const category = await getCategory(categoryId);
 
         setQuestionsList(questions);
@@ -114,7 +114,7 @@ export const useProjectChecklist = (project, categoryId) => {
         question_uuid,
         value: answers[question_uuid],
       }));
-      await postAnswers(checklist.uuid, project.uuid, payload);
+      await postAnswers(checklist.uuid, payload);
     } catch (error) {
       setSubmitting(false);
       const errorMessage = `${translate('Unable to submit answers.')} ${format(

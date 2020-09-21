@@ -1,11 +1,16 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
+import { useAsync } from 'react-use';
 
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { Sidebar } from '@waldur/navigation/sidebar/Sidebar';
-import { MenuItemType } from '@waldur/navigation/sidebar/types';
-import { filterItems } from '@waldur/navigation/sidebar/utils';
+import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
+import {
+  MenuItemType,
+  SidebarMenuProps,
+} from '@waldur/navigation/sidebar/types';
+import { filterItems, mergeItems } from '@waldur/navigation/sidebar/utils';
 import store from '@waldur/store/store';
 import {
   getCustomer,
@@ -17,9 +22,14 @@ import {
   OuterState,
   ORGANIZATION_WORKSPACE,
   PROJECT_WORKSPACE,
+  USER_WORKSPACE,
 } from '@waldur/workspace/types';
 
 import { getPrivateUserTabs, getPublicUserTabs } from './constants';
+
+const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
+  return SidebarExtensionService.getItems(USER_WORKSPACE);
+};
 
 function getNavItems(user, customer, project) {
   const StateUtilsService = ngInjector.get('StateUtilsService');
@@ -53,7 +63,6 @@ function getNavItems(user, customer, project) {
 }
 
 export const UserSidebar = () => {
-  const [items, setItems] = React.useState<MenuItemType[]>([]);
   const workspaceUser = useSelector(
     (state: OuterState) => state.workspace?.user,
   );
@@ -61,26 +70,24 @@ export const UserSidebar = () => {
   const currentCustomer = useSelector(getCustomer);
   const currentProject = useSelector(getProject);
 
-  React.useEffect(() => {
+  const { value } = useAsync<SidebarMenuProps>(async () => {
     if (!currentUser || !workspaceUser) {
-      return;
+      return { items: [] };
     }
-    if (currentUser.uuid === workspaceUser.uuid) {
-      setItems(
-        filterItems([
-          ...getNavItems(currentUser, currentCustomer, currentProject),
-          ...getPrivateUserTabs(),
-        ]),
-      );
-    } else {
-      setItems(
-        filterItems([
-          ...getNavItems(currentUser, currentCustomer, currentProject),
-          ...getPublicUserTabs(workspaceUser),
-        ]),
-      );
-    }
+    const sidebarItems =
+      currentUser.uuid === workspaceUser.uuid
+        ? filterItems([
+            ...getNavItems(currentUser, currentCustomer, currentProject),
+            ...getPrivateUserTabs(),
+          ])
+        : filterItems([
+            ...getNavItems(currentUser, currentCustomer, currentProject),
+            ...getPublicUserTabs(workspaceUser),
+          ]);
+    const extraItems = await getExtraSidebarItems();
+    const items = mergeItems(sidebarItems, extraItems);
+    return { items };
   }, [currentUser, workspaceUser]);
 
-  return <Sidebar items={items} />;
+  return <Sidebar items={value?.items} />;
 };

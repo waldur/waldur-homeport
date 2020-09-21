@@ -1,17 +1,15 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
-import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { getProject } from '@waldur/workspace/selectors';
 
 import { AnswersSummary } from './AnswersSummary';
 import { AnswersTable } from './AnswersTable';
-import { useProjectChecklist } from './useChecklist';
+import { useUserChecklist } from './useChecklist';
 
 const SubmitButton = ({ submitting, submit }) => (
   <Button onClick={() => submit()} bsStyle="primary" disabled={submitting}>
@@ -24,17 +22,12 @@ const SubmitButton = ({ submitting, submit }) => (
   </Button>
 );
 
-export const ProjectChecklist = () => {
-  const project = useSelector(getProject);
-  if (!project) {
-    return null;
-  }
-
+export const UserChecklist = () => {
   const {
     params: { category },
   } = useCurrentStateAndParams();
 
-  const state = useProjectChecklist(project, category);
+  const state = useUserChecklist(category);
   useTitle(state.categoryInfo?.name);
 
   if (state.checklistLoading) {
