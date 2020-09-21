@@ -193,7 +193,8 @@ body.landing {
 }
 
 .state-indicator {
-  display: inline-block;
+  display: block;
+  width: fit-content;
 }
 
 .white-panel-heading .panel-heading {
