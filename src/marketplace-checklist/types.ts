@@ -33,3 +33,12 @@ export interface ChecklistStats extends GeolocationPoint {
   name: string;
   score: number;
 }
+
+export interface ProjectStats {
+  uuid: string;
+  name: string;
+  score: number;
+  positive_count: number;
+  negative_count: number;
+  unknown_count: number;
+}

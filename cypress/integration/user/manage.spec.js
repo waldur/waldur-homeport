@@ -9,6 +9,7 @@ describe('User manage', () => {
         method: 'PATCH',
         response: 'fixture:users/alice.json',
       })
+      .route('http://localhost:8080/api/marketplace-checklists-categories/', [])
       .login()
 
       .log('visit /profile/manage/')

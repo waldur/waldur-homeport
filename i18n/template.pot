@@ -6600,7 +6600,7 @@ msgstr ""
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/issues/feedback/SupportFeedback.tsx
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/UserChecklist.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
@@ -6968,7 +6968,7 @@ msgid "There are no charts yet."
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistOverview.tsx
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/UserChecklist.tsx
 msgid "There are no checklist yet."
 msgstr ""
 
@@ -7483,7 +7483,7 @@ msgstr ""
 
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-checklist/ComplianceChecklists.tsx
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/UserChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load checklists."
 msgstr ""
@@ -7630,7 +7630,7 @@ msgstr ""
 msgid "Unable to load provider details."
 msgstr ""
 
-#: src/marketplace-checklist/ProjectChecklist.tsx
+#: src/marketplace-checklist/UserChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load questions and answers."
 msgstr ""

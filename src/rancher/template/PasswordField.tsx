@@ -16,8 +16,7 @@ import { DecoratedField } from './DecoratedField';
 export function generatePassword(length) {
   const chars =
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const getChar = () =>
-    chars.charAt(Math.floor(Math.random() * chars.length + 1));
+  const getChar = () => chars.charAt(Math.floor(Math.random() * chars.length));
   return range(length).map(getChar).join('');
 }
 

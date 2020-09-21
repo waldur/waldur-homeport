@@ -2,14 +2,14 @@ import { StateDeclaration } from '@waldur/core/types';
 
 import { ChecklistOverview } from './ChecklistOverview';
 import { FEATURE } from './constants';
-import { ProjectChecklist } from './ProjectChecklist';
+import { UserChecklist } from './UserChecklist';
 
 export const states: StateDeclaration[] = [
   {
-    name: 'marketplace-checklist-project',
-    url: 'marketplace-checklist-project/:category/',
-    component: ProjectChecklist,
-    parent: 'project',
+    name: 'marketplace-checklist-user',
+    url: 'marketplace-checklist-user/:category/',
+    component: UserChecklist,
+    parent: 'profile',
     data: {
       feature: FEATURE,
     },
