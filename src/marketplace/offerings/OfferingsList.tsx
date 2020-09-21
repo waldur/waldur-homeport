@@ -20,16 +20,23 @@ import { OfferingCreateButton } from './actions/OfferingCreateButton';
 import { OfferingDetailsLink } from './details/OfferingDetailsLink';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 
+const OfferingNameColumn = ({ isReporting, row }) =>
+  !isReporting ? (
+    <OfferingDetailsLink offering_uuid={row.uuid}>
+      {row.name}
+    </OfferingDetailsLink>
+  ) : (
+    <>{row.name}</>
+  );
+
 export const TableComponent = (props) => {
-  const { translate } = props;
+  const { translate, isReporting } = props;
 
   const columns = [
     {
       title: translate('Name'),
       render: ({ row }) => (
-        <OfferingDetailsLink offering_uuid={row.uuid}>
-          {row.name}
-        </OfferingDetailsLink>
+        <OfferingNameColumn isReporting={isReporting} row={row} />
       ),
       orderField: 'name',
     },
@@ -112,9 +119,9 @@ const showOfferingCreateButton = createSelector(
     customer && customer.is_service_provider && ownerOrStaff,
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   customer: getCustomer(state),
-  actionsDisabled: !isOwnerOrStaff(state),
+  actionsDisabled: !isOwnerOrStaff(state) || ownProps.isReporting,
   showOfferingCreateButton: showOfferingCreateButton(state),
   filter: getFormValues('OfferingsFilter')(state),
 });

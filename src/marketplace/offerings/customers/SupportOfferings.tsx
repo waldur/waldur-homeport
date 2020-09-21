@@ -12,7 +12,7 @@ export const SupportOfferings = () => {
   return (
     <Panel>
       <OfferingsFilter />
-      <OfferingsList />
+      <OfferingsList isReporting={true} />
     </Panel>
   );
 };
