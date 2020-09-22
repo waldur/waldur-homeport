@@ -15,7 +15,7 @@ import {
 } from './api';
 import { Checklist, Answer, ChecklistStats } from './types';
 
-const useChecklistSelector = (categoryId: string) => {
+const useChecklistSelector = (categoryId?: string) => {
   const [checklistOptions, setChecklistOptions] = useState([]);
   const [checklistLoading, setChecklistLoading] = useState(true);
   const [checklistErred, setChecklistErred] = useState(false);
@@ -58,7 +58,7 @@ const useChecklistSelector = (categoryId: string) => {
   };
 };
 
-export const useUserChecklist = (categoryId) => {
+export const useUserChecklist = (userId, categoryId?) => {
   const { checklist, ...checklistLoader } = useChecklistSelector(categoryId);
 
   const [questionsList, setQuestionsList] = useState([]);
@@ -77,8 +77,11 @@ export const useUserChecklist = (categoryId) => {
       setQuestionsErred(false);
       try {
         const questions = await getQuestions(checklist.uuid);
-        const answersList = await getAnswers(checklist.uuid);
-        const category = await getCategory(categoryId);
+        const answersList = await getAnswers(userId, checklist.uuid);
+        if (categoryId) {
+          const category = await getCategory(categoryId);
+          setCategoryInfo(category);
+        }
 
         setQuestionsList(questions);
         setAnswers(
@@ -90,7 +93,6 @@ export const useUserChecklist = (categoryId) => {
             {},
           ),
         );
-        setCategoryInfo(category);
         setQuestionsLoading(false);
       } catch (error) {
         setQuestionsLoading(false);

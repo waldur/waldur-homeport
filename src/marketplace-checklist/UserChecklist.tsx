@@ -1,11 +1,13 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
+import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { AnswersSummary } from './AnswersSummary';
 import { AnswersTable } from './AnswersTable';
@@ -22,12 +24,18 @@ const SubmitButton = ({ submitting, submit }) => (
   </Button>
 );
 
-export const UserChecklist = () => {
+interface UserChecklistProps {
+  userId?: string;
+  readonly?: boolean;
+}
+
+export const UserChecklist: React.FC<UserChecklistProps> = (props) => {
   const {
     params: { category },
   } = useCurrentStateAndParams();
 
-  const state = useUserChecklist(category);
+  const user = useSelector(getUser);
+  const state = useUserChecklist(props.userId || user.uuid, category);
   useTitle(state.categoryInfo?.name);
 
   if (state.checklistLoading) {
@@ -63,12 +71,14 @@ export const UserChecklist = () => {
               answers={state.answers}
               setAnswers={state.setAnswers}
             />
-            <p>
-              <SubmitButton
-                submit={state.submit}
-                submitting={state.submitting}
-              />
-            </p>
+            {!props.readonly && (
+              <p>
+                <SubmitButton
+                  submit={state.submit}
+                  submitting={state.submitting}
+                />
+              </p>
+            )}
           </>
         )}
       </>

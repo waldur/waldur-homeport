@@ -25,8 +25,10 @@ export const getChecklists = (categoryId?: string) =>
 export const getQuestions = (checklistId: string) =>
   getAll<Question>(`/marketplace-checklists/${checklistId}/questions/`);
 
-export const getAnswers = (checklistId: string) =>
-  getAll<Answer>(`/marketplace-checklists/${checklistId}/answers/`);
+export const getAnswers = (userId: string, checklistId: string) =>
+  getAll<Answer>(
+    `/marketplace-checklists/${checklistId}/user/${userId}/answers/`,
+  );
 
 export const postAnswers = (checklistId: string, answers: Answer[]) =>
   post(`/marketplace-checklists/${checklistId}/answers/submit/`, answers);
