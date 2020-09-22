@@ -1067,6 +1067,10 @@ msgstr ""
 msgid "Charts"
 msgstr ""
 
+#: src/user/UserPopover.tsx
+msgid "Checklists"
+msgstr ""
+
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Choices as comma-separated list"
 msgstr ""
@@ -1815,6 +1819,7 @@ msgstr ""
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/slurm/actions.ts
 #: src/user/UserDropdownMenu.tsx
+#: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Details"

@@ -3,7 +3,10 @@ describe('User workspace', function () {
     cy.server()
       .mockUser()
       .route('http://localhost:8080/api/marketplace-checklists-categories/', [])
-      .login();
+      .as('checklist-categories')
+      .login()
+      .wait('@checklist-categories')
+      .wait(500);
   });
 
   it('Should go to audit log', () => {
