@@ -11,7 +11,17 @@ import {
   createAvailabilityDates,
 } from '@waldur/booking/utils';
 
-export class EditableCalendar extends React.Component<EditableCalendarProps> {
+export class EditableCalendar extends React.Component<
+  EditableCalendarProps,
+  { availabilitySlots }
+> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      availabilitySlots: this.getAvailabilitySlots(props.fields.getAll() || []),
+    };
+  }
+
   getValidRange = (events) => ({
     start: Math.min(...events.map((event) => moment(event.start).valueOf())),
     end: Math.max(...events.map((event) => moment(event.end).valueOf())),
@@ -59,6 +69,29 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
     );
   };
 
+  updateAvailabilitySlotsAfterEventWasAdded = (addedEvent) => {
+    this.setState({
+      ...this.state,
+      availabilitySlots: this.state.availabilitySlots.filter(
+        (slot) =>
+          moment(slot.start).isBefore(moment(addedEvent.start)) ||
+          moment(slot.end).isAfter(moment(addedEvent.end)),
+      ),
+    });
+  };
+
+  updateAvailabilitySlotsAfterEventWasRemoved = (removedEvent) => {
+    const config = this.getCalendarConfig();
+    const removedSlot = createAvailabilitySlots(
+      [removedEvent],
+      moment.duration(config.slotDuration),
+    );
+    this.setState({
+      ...this.state,
+      availabilitySlots: [...this.state.availabilitySlots, ...removedSlot],
+    });
+  };
+
   getAvailabilitySlots = (events) => {
     const config = this.getCalendarConfig();
     if (!config) {
@@ -101,9 +134,15 @@ export class EditableCalendar extends React.Component<EditableCalendarProps> {
         calendarType="edit"
         events={[...excludedEvents, ...events]}
         options={this.getCalendarConfig()}
-        availabiltySlots={this.getAvailabilitySlots(events)}
-        addEventCb={fields.push}
-        removeEventCb={(oldID) => deleteCalendarBooking(fields, { id: oldID })}
+        availabiltySlots={this.state.availabilitySlots}
+        addEventCb={(addedEvent) => {
+          this.updateAvailabilitySlotsAfterEventWasAdded(addedEvent);
+          return fields.push(addedEvent);
+        }}
+        removeEventCb={(oldID) => {
+          const removedEvent = deleteCalendarBooking(fields, { id: oldID });
+          this.updateAvailabilitySlotsAfterEventWasRemoved(removedEvent);
+        }}
       />
     );
   }
