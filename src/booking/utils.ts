@@ -24,11 +24,14 @@ export const createCalendarBookingEvent = ({
 });
 
 export const deleteCalendarBooking = (events, booking) => {
+  let removedEvent = null;
   events.getAll().map((field, index) => {
     if (field.id === booking.id) {
+      removedEvent = events.get(index);
       events.remove(index);
     }
   });
+  return removedEvent;
 };
 
 export const eventsMapper = (events) =>
