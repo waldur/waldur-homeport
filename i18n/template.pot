@@ -3596,6 +3596,10 @@ msgstr ""
 msgid "My services"
 msgstr ""
 
+#: src/marketplace-checklist/AnswersTable.tsx
+msgid "N/A"
+msgstr ""
+
 #: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
@@ -3804,6 +3808,7 @@ msgid "Next trigger at"
 msgstr ""
 
 #: src/marketplace-checklist/AnswerGroup.tsx
+#: src/marketplace-checklist/AnswersTable.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -8536,6 +8541,7 @@ msgid "YAML has been updated."
 msgstr ""
 
 #: src/marketplace-checklist/AnswerGroup.tsx
+#: src/marketplace-checklist/AnswersTable.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx

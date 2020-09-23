@@ -69,7 +69,7 @@ export const UserPopover = ({ resolve }) => {
             {canSeeChecklist && (
               <Tab eventKey={2} title={translate('Checklists')}>
                 <div className="m-t-sm">
-                  <UserChecklist userId={user.uuid} readonly={true} />
+                  <UserChecklist userId={user.uuid} readOnly={true} />
                 </div>
               </Tab>
             )}

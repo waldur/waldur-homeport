@@ -11,6 +11,7 @@ interface TableProps {
   answers: Answers;
   questions: Question[];
   setAnswers(answers: Answers): void;
+  readOnly: boolean;
 }
 
 const QuestionGroup = ({
@@ -47,7 +48,21 @@ const TableHeader = () => (
   </thead>
 );
 
-const TableBody = ({ questions, answers, setAnswers }: TableProps) => (
+const RenderAnswer: React.FC<{ value: boolean | null }> = ({ value }) =>
+  value === true ? (
+    <>{translate('Yes')}</>
+  ) : value === false ? (
+    <>{translate('No')}</>
+  ) : (
+    <>{translate('N/A')}</>
+  );
+
+const TableBody = ({
+  questions,
+  answers,
+  setAnswers,
+  readOnly,
+}: TableProps) => (
   <tbody>
     {questions.map((question, index) => (
       <tr key={question.uuid}>
@@ -56,11 +71,15 @@ const TableBody = ({ questions, answers, setAnswers }: TableProps) => (
           <QuestionGroup question={question} answers={answers} />
         </td>
         <td className="text-center">
-          <AnswerGroup
-            question={question}
-            answers={answers}
-            setAnswers={setAnswers}
-          />
+          {readOnly ? (
+            <RenderAnswer value={answers[question.uuid]} />
+          ) : (
+            <AnswerGroup
+              question={question}
+              answers={answers}
+              setAnswers={setAnswers}
+            />
+          )}
         </td>
       </tr>
     ))}
@@ -71,6 +90,7 @@ export const AnswersTable = ({
   questions,
   answers,
   setAnswers,
+  readOnly,
 }: TableProps) => (
   <Table responsive={true} bordered={true} striped={true} className="m-t-md">
     <TableHeader />
@@ -78,6 +98,7 @@ export const AnswersTable = ({
       questions={questions}
       answers={answers}
       setAnswers={setAnswers}
+      readOnly={readOnly}
     />
   </Table>
 );
