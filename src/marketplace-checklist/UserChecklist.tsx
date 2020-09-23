@@ -26,7 +26,7 @@ const SubmitButton = ({ submitting, submit }) => (
 
 interface UserChecklistProps {
   userId?: string;
-  readonly?: boolean;
+  readOnly?: boolean;
 }
 
 export const UserChecklist: React.FC<UserChecklistProps> = (props) => {
@@ -70,8 +70,9 @@ export const UserChecklist: React.FC<UserChecklistProps> = (props) => {
               questions={state.questionsList}
               answers={state.answers}
               setAnswers={state.setAnswers}
+              readOnly={props.readOnly}
             />
-            {!props.readonly && (
+            {!props.readOnly && (
               <p>
                 <SubmitButton
                   submit={state.submit}
