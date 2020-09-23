@@ -34,6 +34,7 @@ export const planWithoutQuotas = (plan: PlanFormData, component: string) => ({
 const formatPlan = (
   plan: PlanFormData,
   fixedComponents: string[],
+  validComponents: string[],
 ): PlanRequest => {
   const result: PlanRequest = {
     name: plan.name,
@@ -43,7 +44,14 @@ const formatPlan = (
     product_code: plan.product_code,
   };
   if (plan.prices) {
-    result.prices = plan.prices;
+    // Skip prices for invalid components
+    result.prices = Object.keys(plan.prices).reduce(
+      (acc, key) =>
+        validComponents.includes(key)
+          ? { ...acc, [key]: plan.prices[key] }
+          : acc,
+      {},
+    );
   }
   if (plan.quotas) {
     // Skip quotas for usage-based components
@@ -164,15 +172,15 @@ export const formatOfferingRequest = (
   result.secret_options = request.secret_options;
 
   if (request.plans) {
+    const allComponents =
+      components.length > 0 ? components : request.components || [];
     // Pick either built-in or custom fixed components.
-    const fixedComponents = (components.length > 0
-      ? components
-      : request.components || []
-    )
+    const fixedComponents = allComponents
       .filter((c) => getBillingTypeValue(c.billing_type) === 'fixed')
       .map((c) => c.type);
+    const validComponents = allComponents.map((c) => c.type);
     result.plans = request.plans.map((plan) =>
-      formatPlan(plan, fixedComponents),
+      formatPlan(plan, fixedComponents, validComponents),
     );
   }
   if (request.options) {
