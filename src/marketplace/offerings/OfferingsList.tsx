@@ -122,7 +122,8 @@ const showOfferingCreateButton = createSelector(
 const mapStateToProps = (state, ownProps) => ({
   customer: getCustomer(state),
   actionsDisabled: !isOwnerOrStaff(state) || ownProps.isReporting,
-  showOfferingCreateButton: showOfferingCreateButton(state),
+  showOfferingCreateButton:
+    showOfferingCreateButton(state) && !ownProps.isReporting,
   filter: getFormValues('OfferingsFilter')(state),
 });
 
