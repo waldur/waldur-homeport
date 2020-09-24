@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 
 import { ENV, formatCurrency } from '@waldur/core/services';
+import { Tooltip } from '@waldur/core/Tooltip';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -21,7 +22,16 @@ export const ComponentRow: React.FC<Props> = (props) => {
   return (
     <tr>
       <td>
-        <p className="form-control-static">{props.offeringComponent.name}</p>
+        <p className="form-control-static">
+          {props.offeringComponent.name}
+          <Tooltip
+            label={props.offeringComponent.type}
+            id="componentTypeTooltip"
+          >
+            {' '}
+            <i className="fa fa-question-circle" />
+          </Tooltip>
+        </p>
       </td>
       <td className={props.className}>{props.children}</td>
       <td>
