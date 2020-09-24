@@ -49,7 +49,7 @@ describe('SlurmAllocationSummary', () => {
     const homepage = 'https://example.com/';
     const moab = { ...resource, homepage };
     const wrapper = renderSummary({ resource: moab });
-    const link = wrapper.find({ label: 'Submit with' }).find('a');
+    const link = wrapper.find({ label: 'Submit with' }).find('a').first();
     expect(link.prop('href')).toBe(homepage);
   });
 });
