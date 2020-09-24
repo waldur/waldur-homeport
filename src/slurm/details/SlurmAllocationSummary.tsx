@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { Link } from '@waldur/core/Link';
 import { formatFilesize, minutesToHours } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';
 import {
@@ -8,34 +7,7 @@ import {
   ResourceSummaryProps,
   PureResourceSummaryBase,
 } from '@waldur/resource/summary';
-
-const formatLoginDetails = (props) =>
-  !props.resource.username ? (
-    <Link
-      state="profile.freeipa"
-      label={props.translate('FreeIPA account needs to be set up.')}
-    />
-  ) : (
-    `ssh ${props.resource.username}@${props.resource.gateway}`
-  );
-
-const formatSubmitDetails = (props) => (
-  <span className="html-description">
-    {props.resource.batch_service === 'MOAB' ? 'qsub' : 'sbatch'} -A{' '}
-    {props.resource.backend_id}
-    {props.resource.homepage && (
-      <a
-        href={props.resource.homepage}
-        target="_blank"
-        rel="noopener noreferrer"
-        title={props.translate('Batch processing documentation')}
-      >
-        &nbsp;
-        <i className="fa fa-info-circle" />
-      </a>
-    )}
-  </span>
-);
+import { SlurmAllocationSummaryExtraDetails } from '@waldur/slurm/details/SlurmAllocationSummaryExtraDetails';
 
 const formatQuota = (translate, usage, limit) =>
   translate('{usage} of {limit}', { usage, limit });
@@ -61,20 +33,15 @@ const formatRAM = (props) => {
 const PureSlurmAllocationSummary = (props: ResourceSummaryProps) => {
   const { translate } = props;
   return (
-    <span>
-      <PureResourceSummaryBase {...props} />
-      <Field
-        label={translate('Login details')}
-        value={formatLoginDetails(props)}
-      />
-      <Field
-        label={translate('Submit with')}
-        value={formatSubmitDetails(props)}
-      />
-      <Field label={translate('CPU')} value={formatCPU(props)} />
-      <Field label={translate('GPU')} value={formatGPU(props)} />
-      <Field label={translate('RAM')} value={formatRAM(props)} />
-    </span>
+    <>
+      <div className="resource-details-table">
+        <PureResourceSummaryBase {...props} />
+        <Field label={translate('CPU')} value={formatCPU(props)} />
+        <Field label={translate('GPU')} value={formatGPU(props)} />
+        <Field label={translate('RAM')} value={formatRAM(props)} />
+      </div>
+      <SlurmAllocationSummaryExtraDetails resource={props.resource} />
+    </>
   );
 };
 
