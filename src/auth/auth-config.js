@@ -8,8 +8,6 @@ export default function initAuthProvider(ENV, $authProvider) {
   $authProvider.httpInterceptor = false;
   $authProvider.storageType = ENV.authStorage;
 
-  $authProvider.loginUrl = ENV.apiEndpoint + 'api-auth/password/';
-
   if (ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID) {
     $authProvider.facebook({
       clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID,

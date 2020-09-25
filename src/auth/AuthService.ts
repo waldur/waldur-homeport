@@ -20,6 +20,7 @@
  */
 import Axios from 'axios';
 
+import { post } from '@waldur/core/api';
 import {
   $state,
   $auth,
@@ -74,10 +75,13 @@ function getLink(href) {
 }
 
 async function signin(username, password) {
-  const response = await $auth.login({
-    username,
-    password,
-  });
+  const response = await post<{ token: string }>(
+    ENV.apiEndpoint + 'api-auth/password/',
+    {
+      username,
+      password,
+    },
+  );
   setAuthHeader(response.data.token);
   const user = await UsersService.getCurrentUser();
   loginSuccess({ data: { ...user, method: 'local' } });
