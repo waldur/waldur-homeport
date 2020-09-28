@@ -5,7 +5,9 @@ import ModalBody from 'react-bootstrap/lib/ModalBody';
 import ModalFooter from 'react-bootstrap/lib/ModalFooter';
 import ModalHeader from 'react-bootstrap/lib/ModalHeader';
 import ModalTitle from 'react-bootstrap/lib/ModalTitle';
+import { connect } from 'react-redux';
 import { AsyncState } from 'react-use/lib/useAsync';
+import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
@@ -32,11 +34,29 @@ interface OwnProps {
   templateState: AsyncState<IssueTemplate[]>;
   filteredTemplates: IssueTemplate[];
   attachments: IssueTemplateAttachment[];
+  initialValues: any;
 }
 
-export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
-  form: ISSUE_CREATION_FORM_ID,
-})(
+const mapStateToProps = (_, ownProps: OwnProps) => {
+  if (ownProps.issue.description) {
+    return {
+      initialValues: {
+        description: ownProps.issue.description,
+        type: ownProps.issue.type,
+      },
+    };
+  }
+  return {};
+};
+
+const enhance = compose(
+  connect<{}, {}, OwnProps>(mapStateToProps),
+  reduxForm<IssueFormData, OwnProps>({
+    form: ISSUE_CREATION_FORM_ID,
+  }),
+);
+
+export const IssueCreateForm = enhance(
   ({
     issue,
     issueTypes,

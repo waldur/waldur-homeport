@@ -21,6 +21,7 @@ export interface CreateIssueProps {
   project?: Project;
   resource?: any;
   summary?: string;
+  description?: string;
   options: Partial<IssueOptions>;
 }
 
