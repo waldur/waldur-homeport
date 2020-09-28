@@ -20,7 +20,6 @@
  */
 import Axios from 'axios';
 
-import { post } from '@waldur/core/api';
 import {
   $state,
   $auth,
@@ -75,7 +74,7 @@ function getLink(href) {
 }
 
 async function signin(username, password) {
-  const response = await post<{ token: string }>(
+  const response = await Axios.post<{ token: string }>(
     ENV.apiEndpoint + 'api-auth/password/',
     {
       username,
