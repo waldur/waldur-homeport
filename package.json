@@ -78,6 +78,7 @@
     "moment-timezone": "^0.5.25",
     "monaco-editor-webpack-plugin": "^1.9.0",
     "npm-font-open-sans": "^1.0.3",
+    "oidc-client": "^1.10.1",
     "papaparse": "^5.2.0",
     "pdfmake": "^0.1.65",
     "prop-types": "^15.6.2",

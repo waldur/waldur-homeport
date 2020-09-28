@@ -2,6 +2,7 @@ import { ENV } from '@waldur/core/services';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { AuthButtonProps } from './AuthButton';
+import { ReactAuthService } from './ReactAuthService';
 import { AuthSaml2Dialog } from './saml2/AuthSaml2Dialog';
 import { loginSaml2 } from './saml2/store/actions';
 import { AuthValimoDialog } from './valimo/AuthValimoDialog';
@@ -18,6 +19,19 @@ export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
     label: 'Facebook',
     btnClass: 'btn-facebook',
     iconClass: 'fa-facebook-square',
+    onClick: () => {
+      const service = new ReactAuthService();
+      service.init({
+        client_id: ENV.plugins.WALDUR_AUTH_SOCIAL.FACEBOOK_CLIENT_ID,
+        authority: ENV.apiEndpoint + 'api-auth/facebook/',
+        metadata: {
+          authorization_endpoint: 'https://www.facebook.com/v2.5/dialog/oauth',
+        },
+        redirect_uri: window.location.origin + '/',
+        scope: 'email',
+      });
+      service.signinRedirect();
+    },
   },
   {
     providerKey: 'smartid',
