@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { RequestActionDialog } from '@waldur/marketplace/offerings/actions/RequestActionDialog';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
@@ -21,6 +22,14 @@ const mapDispatchToProps = {
   pauseOffering: (offering) =>
     openModalDialog(PauseOfferingDialog, {
       resolve: { offering },
+    }),
+  requestPublishing: (offering) =>
+    openModalDialog(RequestActionDialog, {
+      resolve: { offering, offeringRequestMode: 'publishing' },
+    }),
+  requestEditing: (offering) =>
+    openModalDialog(RequestActionDialog, {
+      resolve: { offering, offeringRequestMode: 'editing' },
     }),
 };
 
@@ -66,6 +75,20 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
       visible:
         ownProps.row.state !== ARCHIVED &&
         (ownProps.row.state === DRAFT || stateProps.user.is_staff),
+    },
+    {
+      label: translate('Request publishing'),
+      handler: () => dispatchProps.requestPublishing(ownProps.row),
+      visible:
+        [DRAFT].includes(ownProps.row.state) &&
+        (!stateProps.user.is_staff || stateProps.user.is_owner),
+    },
+    {
+      label: translate('Request editing'),
+      handler: () => dispatchProps.requestEditing(ownProps.row),
+      visible:
+        [ACTIVE, PAUSED].includes(ownProps.row.state) &&
+        (!stateProps.user.is_staff || stateProps.user.is_owner),
     },
   ].filter((row) => row.visible),
 });
