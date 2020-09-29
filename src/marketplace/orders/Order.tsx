@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
+import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OrderItem } from './item/details/OrderItem';
@@ -29,7 +30,9 @@ export const Order = (props: OrderProps) => {
             <tr>
               <th>{translate('Item')}</th>
               {!activeFixedPricePaymentProfile ? (
-                <th className="text-center">{translate('Price')}</th>
+                <th className="text-center">
+                  <BillingPeriod unit={props.items[0].plan_unit} />
+                </th>
               ) : null}
               <th className="text-center">{translate('State')}</th>
               <th>{/* Actions column */}</th>

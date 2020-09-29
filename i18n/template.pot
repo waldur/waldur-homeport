@@ -4853,7 +4853,6 @@ msgstr ""
 #: src/marketplace/offerings/create/PlanSummary.tsx
 #: src/marketplace/offerings/plan/PlanComponents.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/marketplace/orders/Order.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/paypal/PayPalInvoicesList.tsx
