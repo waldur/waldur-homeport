@@ -45,3 +45,11 @@ export const getProjectStats = (projectId: string) =>
   get<ProjectStats[]>(`/projects/${projectId}/marketplace-checklists/`).then(
     (response) => response.data,
   );
+
+export const getCustomerChecklists = (customerId: string) =>
+  get<string[]>(`/customers/${customerId}/marketplace-checklists/`);
+
+export const updateCustomerChecklists = (
+  customerId: string,
+  checkliststs: string[],
+) => post(`/customers/${customerId}/marketplace-checklists/`, checkliststs);

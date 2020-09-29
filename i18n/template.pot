@@ -982,6 +982,7 @@ msgid "Categories"
 msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
@@ -1067,6 +1068,8 @@ msgstr ""
 msgid "Charts"
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace-checklist/utils.ts
 #: src/user/UserPopover.tsx
 msgid "Checklists"
 msgstr ""
@@ -2064,8 +2067,13 @@ msgid "Enable profile after creation"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/hooks/HookForm.tsx
 msgid "Enabled"
+msgstr ""
+
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+msgid "Enabled checklists have been updated."
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -3811,6 +3819,7 @@ msgstr ""
 
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -5947,6 +5956,7 @@ msgstr ""
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
+#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/customers/utils.ts
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
@@ -7007,6 +7017,10 @@ msgstr ""
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+msgid "There are no categories."
+msgstr ""
+
 #: src/dashboard/CategoryResources.tsx
 msgid "There are no charts yet."
 msgstr ""
@@ -7014,6 +7028,10 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-checklist/UserChecklist.tsx
 msgid "There are no checklist yet."
+msgstr ""
+
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+msgid "There are no checklists."
 msgstr ""
 
 #: src/issues/comments/IssueCommentsList.spec.tsx
@@ -7517,6 +7535,10 @@ msgstr ""
 msgid "Unable to load booking offerings."
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+msgid "Unable to load categories."
+msgstr ""
+
 #: src/marketplace/category/filters/AttributeFilterList.tsx
 msgid "Unable to load category sections."
 msgstr ""
@@ -7525,6 +7547,7 @@ msgstr ""
 msgid "Unable to load charts."
 msgstr ""
 
+#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-checklist/ComplianceChecklists.tsx
 #: src/marketplace-checklist/UserChecklist.tsx
@@ -7848,6 +7871,10 @@ msgstr ""
 
 #: src/rancher/cluster/ViewYAMLDialog.tsx
 msgid "Unable to update YAML."
+msgstr ""
+
+#: src/marketplace-checklist/ChecklistCustomer.tsx
+msgid "Unable to update enabled checklists."
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
@@ -8576,6 +8603,7 @@ msgstr ""
 
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx

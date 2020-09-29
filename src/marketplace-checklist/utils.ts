@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import { getCategories } from './api';
 import { FEATURE, ICON_CLASS } from './constants';
 import { Category } from './types';
@@ -28,3 +30,10 @@ export const getMenuForSupport = getMenuItems((category: Category) => ({
   state: 'marketplace-checklist-overview',
   params: { category: category.uuid },
 }));
+
+export const getMenuForOrganization = () => ({
+  label: translate('Checklists'),
+  state: 'marketplace-checklist-customer',
+  icon: ICON_CLASS,
+  feature: FEATURE,
+});

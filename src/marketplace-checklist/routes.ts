@@ -1,5 +1,6 @@
 import { StateDeclaration } from '@waldur/core/types';
 
+import { ChecklistCustomer } from './ChecklistCustomer';
 import { ChecklistOverview } from './ChecklistOverview';
 import { FEATURE } from './constants';
 import { UserChecklist } from './UserChecklist';
@@ -20,6 +21,16 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-checklist-overview/:category/',
     component: ChecklistOverview,
     parent: 'support',
+    data: {
+      feature: FEATURE,
+    },
+  },
+
+  {
+    name: 'marketplace-checklist-customer',
+    url: 'marketplace-checklist-customer/',
+    component: ChecklistCustomer,
+    parent: 'organization',
     data: {
       feature: FEATURE,
     },
