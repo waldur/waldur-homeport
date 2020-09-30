@@ -6,10 +6,9 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
+import { showPriceSelector } from '@waldur/invoices/details/utils';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { TermsOfService } from '../orders/TermsOfService';
 
@@ -40,10 +39,7 @@ const TosCell = (props: ShoppingCartItemProps) => (
 );
 
 export const ShoppingCartItem = (props: ShoppingCartItemProps) => {
-  const customer = useSelector(getCustomer);
-  const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
-    customer.payment_profiles,
-  );
+  const showPrice = useSelector(showPriceSelector);
   return (
     <tr>
       <td>
@@ -69,11 +65,16 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => {
           </div>
         </div>
       </td>
-      {!activeFixedPricePaymentProfile ? (
-        <td className="text-center text-lg">
-          {defaultCurrency(props.item.estimate || 0)}
-        </td>
-      ) : null}
+      {showPrice && (
+        <>
+          <td className="text-center text-lg">
+            {defaultCurrency(props.item.fixed_price)}
+          </td>
+          <td className="text-center text-lg">
+            {defaultCurrency(props.item.activation_price)}
+          </td>
+        </>
+      )}
       <td className="text-center">
         <span className="btn-group">
           <a

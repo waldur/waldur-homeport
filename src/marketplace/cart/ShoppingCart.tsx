@@ -4,10 +4,9 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
+import { showPriceSelector } from '@waldur/invoices/details/utils';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { BillingPeriod as BillingPeriodType } from '../types';
 
@@ -32,21 +31,21 @@ interface ShoppingCartProps {
 }
 
 const PureShoppingCart = (props: ShoppingCartProps) => {
-  const customer = useSelector(getCustomer);
-  const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
-    customer.payment_profiles,
-  );
+  const showPrice = useSelector(showPriceSelector);
   return props.items.length > 0 ? (
     <div className="table-responsive shopping-cart">
       <table className="table">
         <thead>
           <tr>
             <th>{translate('Item')}</th>
-            {!activeFixedPricePaymentProfile ? (
-              <th className="text-center">
-                <BillingPeriod unit={props.maxUnit} />
-              </th>
-            ) : null}
+            {showPrice && (
+              <>
+                <th className="text-center">
+                  <BillingPeriod unit={props.maxUnit} />
+                </th>
+                <th className="text-center">{translate('Activation price')}</th>
+              </>
+            )}
             <th className="text-center">{translate('Actions')}</th>
             {props.termsOfServiceIsVisible && (
               <th className="text-center">{translate('Agree with ToS')}</th>
