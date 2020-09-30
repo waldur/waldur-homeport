@@ -1068,8 +1068,11 @@ msgstr ""
 msgid "Charts"
 msgstr ""
 
-#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace-checklist/utils.ts
+msgid "Checklist setup"
+msgstr ""
+
+#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/UserPopover.tsx
 msgid "Checklists"
 msgstr ""

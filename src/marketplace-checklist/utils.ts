@@ -32,7 +32,7 @@ export const getMenuForSupport = getMenuItems((category: Category) => ({
 }));
 
 export const getMenuForOrganization = () => ({
-  label: translate('Checklists'),
+  label: translate('Checklist setup'),
   state: 'marketplace-checklist-customer',
   icon: ICON_CLASS,
   feature: FEATURE,
