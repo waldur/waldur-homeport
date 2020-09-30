@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { ResourceDetailsLink } from '@waldur/marketplace/resources/ResourceDetailsLink';
 import { ResourceReference } from '@waldur/marketplace/resources/types';
 import './OrderItem.scss';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OrderItemDetailsLink } from './OrderItemDetailsLink';
 
@@ -20,13 +17,10 @@ interface OrderItemProps {
   item: OrderItemResponse;
   editable: boolean;
   onRemove?(): void;
+  showPrice: boolean;
 }
 
 export const OrderItem = (props: OrderItemProps) => {
-  const customer = useSelector(getCustomer);
-  const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
-    customer.payment_profiles,
-  );
   return (
     <tr>
       <td>
@@ -65,11 +59,16 @@ export const OrderItem = (props: OrderItemProps) => {
           </div>
         </div>
       </td>
-      {!activeFixedPricePaymentProfile ? (
-        <td className="text-center text-lg">
-          {defaultCurrency(props.item.cost || 0)}
-        </td>
-      ) : null}
+      {props.showPrice && (
+        <>
+          <td className="text-center text-lg">
+            {defaultCurrency(props.item.fixed_price)}
+          </td>
+          <td className="text-center text-lg">
+            {defaultCurrency(props.item.activation_price)}
+          </td>
+        </>
+      )}
       <td className="text-center">{props.item.state}</td>
       <td className="text-center">
         <span className="btn-group">

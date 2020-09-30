@@ -2,9 +2,8 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
+import { showPriceSelector } from '@waldur/invoices/details/utils';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OrderItem } from './item/details/OrderItem';
 import './Order.scss';
@@ -18,10 +17,7 @@ interface OrderProps {
 }
 
 export const Order = (props: OrderProps) => {
-  const customer = useSelector(getCustomer);
-  const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
-    customer.payment_profiles,
-  );
+  const showPrice = useSelector(showPriceSelector);
   return (
     <>
       <div className="table-responsive order">
@@ -29,11 +25,16 @@ export const Order = (props: OrderProps) => {
           <thead>
             <tr>
               <th>{translate('Item')}</th>
-              {!activeFixedPricePaymentProfile ? (
-                <th className="text-center">
-                  <BillingPeriod unit={props.items[0].plan_unit} />
-                </th>
-              ) : null}
+              {showPrice && (
+                <>
+                  <th className="text-center">
+                    <BillingPeriod unit={props.items[0].plan_unit} />
+                  </th>
+                  <th className="text-center">
+                    {translate('Activation price')}
+                  </th>
+                </>
+              )}
               <th className="text-center">{translate('State')}</th>
               <th>{/* Actions column */}</th>
             </tr>
@@ -45,6 +46,7 @@ export const Order = (props: OrderProps) => {
                 item={item}
                 editable={props.editable}
                 project_uuid={props.project_uuid}
+                showPrice={showPrice}
               />
             ))}
           </tbody>

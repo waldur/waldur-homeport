@@ -22,6 +22,8 @@ interface IssueReference {
 }
 
 export interface OrderItemResponse {
+  fixed_price?: number;
+  activation_price?: number;
   name?: string;
   uuid: string;
   type: OrderItemType;
