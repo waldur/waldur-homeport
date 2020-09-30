@@ -1,3 +1,6 @@
+import { createSelector } from 'reselect';
+
+import { getCustomer } from '@waldur/workspace/selectors';
 import { PaymentProfile } from '@waldur/workspace/types';
 
 import { InvoiceItem } from '../types';
@@ -86,3 +89,8 @@ export const getActiveFixedPricePaymentProfile = (profiles: PaymentProfile[]) =>
 
 export const getActivePaymentProfile = (profiles: PaymentProfile[]) =>
   profiles?.find((profile) => profile.is_active);
+
+export const showPriceSelector = createSelector(
+  getCustomer,
+  (customer) => !getActiveFixedPricePaymentProfile(customer.payment_profiles),
+);

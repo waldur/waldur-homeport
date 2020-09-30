@@ -188,6 +188,10 @@ msgstr ""
 msgid "Activating"
 msgstr ""
 
+#: src/marketplace/orders/Order.tsx
+msgid "Activation price"
+msgstr ""
+
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
