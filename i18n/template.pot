@@ -1073,6 +1073,7 @@ msgid "Checklist setup"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/project/ProjectDashboard.tsx
 #: src/user/UserPopover.tsx
 msgid "Checklists"
 msgstr ""
@@ -1205,10 +1206,6 @@ msgstr ""
 
 #: src/marketplace-checklist/ChecklistOverview.tsx
 msgid "Compliance"
-msgstr ""
-
-#: src/project/ProjectDashboard.tsx
-msgid "Compliance checklists"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentsList.tsx

@@ -47,7 +47,7 @@ export const ProjectDashboard = (props: ProjectDashboardProps) => {
           </Col>
         </Row>
         {props.marketplaceChecklistEnabled && (
-          <Panel title={translate('Compliance checklists')}>
+          <Panel title={translate('Checklists')}>
             <ComplianceChecklists />
           </Panel>
         )}
