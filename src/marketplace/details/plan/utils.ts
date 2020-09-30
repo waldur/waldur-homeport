@@ -60,7 +60,7 @@ export const combinePrices = (
     );
 
     const subscriptionSubTotal = usageSubTotal + fixedSubTotal;
-    const subscriptionSubTotalPeriods = multipliers.map(
+    const totalPeriods = multipliers.map(
       (mult) => mult * subscriptionSubTotal || 0,
     );
 
@@ -69,9 +69,6 @@ export const combinePrices = (
         ? parseFloat(plan.init_price)
         : plan.init_price;
     const total = subscriptionSubTotal + initPrice;
-    const totalPeriods = subscriptionSubTotalPeriods.map(
-      (val) => val + initPrice,
-    );
 
     return { components, periods, total, totalPeriods };
   } else {
