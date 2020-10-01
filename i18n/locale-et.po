@@ -6302,8 +6302,8 @@ msgstr "Otsi nime järgi"
 
 #: src/marketplace/category/filters/FilterBar.tsx
 #: src/marketplace/landing/LandingPage.tsx
-msgid "Search for apps and services..."
-msgstr "Otsi rakendustest ja teenustest"
+msgid "Search for offerings..."
+msgstr "Otsi teenust"
 
 #: src/ansible/python-management/effects.ts
 msgid ""
