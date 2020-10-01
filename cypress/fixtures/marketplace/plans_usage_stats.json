@@ -1,0 +1,13 @@
+[
+  {
+    "plan_uuid": "c092afb394924d7d86f14bb5d6fb984c",
+    "plan_name": "Default",
+    "limit": null,
+    "usage": 190,
+    "remaining": null,
+    "offering_uuid": "4ce883470b7242beb7368becf614d1ec",
+    "offering_name": "Face-to-face national help-desk",
+    "customer_provider_uuid": "1fb1f539aa6a4b38a33a5f121f4ac5b8",
+    "customer_provider_name": "Santiago-Martinez"
+  }
+]

@@ -1,11 +1,46 @@
 [
   {
+    "url": "http://localhost:8080/api/marketplace-offerings/36b6c5ab2f854df1a87ffd39b9d767c6/",
     "uuid": "36b6c5ab2f854df1a87ffd39b9d767c6",
+    "created": "2020-09-06T22:03:23.204257Z",
     "name": "Another offering",
+    "description": "description",
+    "full_description": "full_description",
+    "terms_of_service": "terms_of_service",
+    "customer": "http://localhost:8080/api/customers/6983ac22f2bb469189311ab21e493359/",
+    "customer_uuid": "6983ac22f2bb469189311ab21e493359",
+    "customer_name": "Alexander, Ford and Moore",
+    "category": "http://localhost:8080/api/marketplace-categories/06e45986252244218bd062149fc3b5b5/",
     "category_title": "HPC",
     "category_uuid": "06e45986252244218bd062149fc3b5b5",
     "thumbnail": null,
-    "components": [],
+    "rating": null,
+    "attributes": {},
+    "components": [
+      {
+        "billing_type": "usage",
+        "type": "a",
+        "name": "a",
+        "description": "",
+        "measured_unit": "",
+        "limit_period": null,
+        "limit_amount": null,
+        "disable_quotas": false,
+        "use_limit_for_billing": false,
+        "product_code": "",
+        "article_code": "",
+        "max_value": null,
+        "min_value": null,
+        "factor": null
+      }
+    ],
+    "geolocations": [],
+    "plugin_options": {},
+    "state": "Active",
+    "native_name": "",
+    "native_description": "",
+    "vendor_details": "",
+    "order_item_count": 0,
     "plans": [
       {
         "url": "http://localhost:8080/api/marketplace-plans/2415bf0d974f4d908b6fc8fb1aabd2d9/",
@@ -24,6 +59,17 @@
         "init_price": 0,
         "switch_price": 0
       }
-    ]
+    ],
+    "screenshots": [],
+    "type": "Support.OfferingTemplate",
+    "shared": true,
+    "billable": true,
+    "scope": "http://localhost:8080/api/support-offering-templates/0f4c4f4c478a44dab01e99195c2d8054/",
+    "scope_uuid": "0f4c4f4c478a44dab01e99195c2d8054",
+    "files": [],
+    "quotas": null,
+    "paused_reason": "",
+    "datacite_doi": "",
+    "citation_count": -1
   }
 ]

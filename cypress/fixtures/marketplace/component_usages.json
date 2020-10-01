@@ -1,0 +1,21 @@
+[
+  {
+    "uuid": "0933e1407e3d4dcf96ec66a3bd5924f1",
+    "created": "2020-07-09T09:39:46.452698Z",
+    "description": "",
+    "type": "cpu",
+    "name": "CPU",
+    "measured_unit": "hours",
+    "usage": 70,
+    "date": "2023-02-01T00:00:00Z",
+    "resource_name": "morphholistice-business",
+    "resource_uuid": "2f82477a803e41b79c14354e0b8367d1",
+    "offering_name": "Ergonomic intermediate framework",
+    "offering_uuid": "08f5dce57d784ee88499109ca9653f02",
+    "project_name": "Adaptive solution-oriented moderator",
+    "project_uuid": "3a68b1b4112d49099d889d705555585a",
+    "customer_name": "Griffin and Sons",
+    "customer_uuid": "56a5865304e244289b6f4f0d7d558055",
+    "recurring": false
+  }
+]

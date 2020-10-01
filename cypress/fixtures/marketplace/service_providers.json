@@ -1,0 +1,15 @@
+[
+  {
+    "url": "http://localhost:8080/api/marketplace-service-providers/356127ee03024d1caad7e254fc386f22/",
+    "uuid": "356127ee03024d1caad7e254fc386f22",
+    "created": "2019-12-17T05:17:44.266521Z",
+    "description": "",
+    "enable_notifications": true,
+    "customer": "http://localhost:8080/api/customers/6983ac22f2bb469189311ab21e493359/",
+    "customer_name": "Alexander, Ford and Moore",
+    "customer_uuid": "6983ac22f2bb469189311ab21e493359",
+    "customer_image": null,
+    "customer_abbreviation": "Ale",
+    "customer_native_name": ""
+  }
+]
