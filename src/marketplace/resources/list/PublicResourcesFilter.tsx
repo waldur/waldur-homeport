@@ -10,7 +10,7 @@ import { OrganizationAutocomplete } from '@waldur/marketplace/orders/Organizatio
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
-import { ResourceStateFilter } from './ResourceStateFilter';
+import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
 const PurePublicResourcesFilter = (props) => (
   <Row>
@@ -30,7 +30,12 @@ const mapStateToProps = (state) => ({
 });
 
 const enhance = compose(
-  reduxForm({ form: 'PublicResourcesFilter' }),
+  reduxForm({
+    form: 'PublicResourcesFilter',
+    initialValues: {
+      state: [getStates()[1]],
+    },
+  }),
   connect(mapStateToProps),
 );
 

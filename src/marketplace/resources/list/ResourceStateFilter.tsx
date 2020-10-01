@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
-const getStates = () => [
+export const getStates = () => [
   { value: 'Creating', label: translate('Creating') },
   { value: 'OK', label: translate('OK') },
   { value: 'Erred', label: translate('Erred') },

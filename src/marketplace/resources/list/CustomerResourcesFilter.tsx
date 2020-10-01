@@ -9,7 +9,7 @@ import { Customer } from '@waldur/workspace/types';
 
 import { CategoryFilter } from './CategoryFilter';
 import { ProjectFilter } from './ProjectFilter';
-import { ResourceStateFilter } from './ResourceStateFilter';
+import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
 interface CustomerResourcesFilterProps {
   customer: Customer;
@@ -30,7 +30,12 @@ const mapStateToProps = (state) => ({
 });
 
 const enhance = compose(
-  reduxForm({ form: 'CustomerResourcesFilter' }),
+  reduxForm({
+    form: 'CustomerResourcesFilter',
+    initialValues: {
+      state: [getStates()[1]],
+    },
+  }),
   connect(mapStateToProps),
 );
 
