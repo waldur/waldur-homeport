@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { connect, useSelector } from 'react-redux';
+import useAsync from 'react-use/lib/useAsync';
 
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { CustomerCreatePromptContainer } from '@waldur/customer/create/CustomerCreatePromptContainer';
 import { renderCustomerCreatePrompt } from '@waldur/customer/create/selectors';
 import { translate } from '@waldur/i18n';
+import { countChecklists } from '@waldur/marketplace-checklist/api';
 import * as actions from '@waldur/marketplace/landing/store/actions';
 import * as selectors from '@waldur/marketplace/landing/store/selectors';
 import { useTitle } from '@waldur/navigation/title';
@@ -21,12 +24,20 @@ const UserDashboardContainer: React.FC = (props: any) => {
     getCategories();
   }, [getCategories]);
 
+  const asyncState = useAsync(countChecklists);
+
   const renderPrompt = useSelector(renderCustomerCreatePrompt);
-  return (
+  return asyncState.loading ? (
+    <LoadingSpinner />
+  ) : asyncState.error ? (
+    <>{translate('Unable to load data.')}</>
+  ) : (
     <div className="wrapper wrapper-content">
-      <Panel title={translate('Marketplace')}>
-        <CategoriesList {...props.categories} />
-      </Panel>
+      {asyncState.value > 0 && (
+        <Panel title={translate('Marketplace')}>
+          <CategoriesList {...props.categories} />
+        </Panel>
+      )}
       {renderPrompt && (
         <div className="row">
           <div className="col-md-12">

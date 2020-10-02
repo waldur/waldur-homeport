@@ -22,6 +22,15 @@ describe('Marketplace landing view', () => {
         'fixture:marketplace/categories.json',
       )
       .route('http://localhost:8080/api/marketplace-orders/?**', [])
+      .route({
+        url: 'http://localhost:8080/api/marketplace-checklists/',
+        method: 'HEAD',
+        response: {
+          headers: {
+            'x-result-count': 0,
+          },
+        },
+      })
       .visit('/#/organizations/10a05c2fcab44588a7aa2e16809504cf/marketplace/')
       .waitForSpinner();
   });

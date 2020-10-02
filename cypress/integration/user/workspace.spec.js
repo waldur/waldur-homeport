@@ -3,6 +3,15 @@ describe('User workspace', function () {
     cy.server()
       .mockUser()
       .route('http://localhost:8080/api/marketplace-checklists-categories/', [])
+      .route({
+        url: 'http://localhost:8080/api/marketplace-checklists/',
+        method: 'HEAD',
+        response: {
+          headers: {
+            'x-result-count': 0,
+          },
+        },
+      })
       .as('checklist-categories')
       .login()
       .wait('@checklist-categories')

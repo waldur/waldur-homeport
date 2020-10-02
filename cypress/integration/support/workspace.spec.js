@@ -54,6 +54,15 @@ describe('Financial overview', () => {
         'http://localhost:8080/api/projects/**',
         'fixture:projects/certifications.json',
       )
+      .route({
+        url: 'http://localhost:8080/api/marketplace-checklists/',
+        method: 'HEAD',
+        response: {
+          headers: {
+            'x-result-count': 0,
+          },
+        },
+      })
       .login();
   });
 

@@ -1,4 +1,7 @@
-import { get, getAll, getById, post } from '@waldur/core/api';
+import Axios from 'axios';
+
+import { get, getAll, getById, parseResultCount, post } from '@waldur/core/api';
+import { ENV } from '@waldur/core/services';
 
 import {
   Category,
@@ -53,3 +56,9 @@ export const updateCustomerChecklists = (
   customerId: string,
   checkliststs: string[],
 ) => post(`/customers/${customerId}/marketplace-checklists/`, checkliststs);
+
+export const countChecklists = () =>
+  Axios.request({
+    method: 'HEAD',
+    url: ENV.apiEndpoint + 'api/marketplace-checklists/',
+  }).then(parseResultCount);

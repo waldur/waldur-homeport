@@ -18,7 +18,6 @@ interface ProjectDashboardProps {
   user: User;
   project: Project;
   canAddUser: boolean;
-  marketplaceChecklistEnabled: boolean;
 }
 
 export const ProjectDashboard = (props: ProjectDashboardProps) => {
@@ -46,11 +45,7 @@ export const ProjectDashboard = (props: ProjectDashboardProps) => {
             <ProjectActions {...props} />
           </Col>
         </Row>
-        {props.marketplaceChecklistEnabled && (
-          <Panel title={translate('Checklists')}>
-            <ComplianceChecklists />
-          </Panel>
-        )}
+        <ComplianceChecklists />
         <Panel title={translate('Resources')}>
           <ProjectResourcesList />
         </Panel>

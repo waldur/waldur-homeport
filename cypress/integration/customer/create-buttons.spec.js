@@ -6,11 +6,21 @@ describe('Customer creation toggle', () => {
         'http://localhost:8080/api/customers/?**',
         'fixture:customers/alice_bob_web.json',
       )
+      .route({
+        url: 'http://localhost:8080/api/marketplace-checklists/',
+        method: 'HEAD',
+        response: {
+          headers: {
+            'x-result-count': 0,
+          },
+        },
+      })
+      .route('http://localhost:8080/api/marketplace-categories/', [])
       .login();
   });
 
   it('Allows to create customer from user dashboard', () => {
-    cy.openCustomerCreateDialog();
+    cy.waitForSpinner().openCustomerCreateDialog();
   });
 
   it('Allows to create customer from workspace selector', () => {

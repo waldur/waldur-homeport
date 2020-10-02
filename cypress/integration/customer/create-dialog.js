@@ -38,7 +38,17 @@ describe('Customer creation dialog', () => {
         method: 'GET',
         response: [],
       })
+      .route({
+        url: 'http://localhost:8080/api/marketplace-checklists/',
+        method: 'HEAD',
+        response: {
+          headers: {
+            'x-result-count': 0,
+          },
+        },
+      })
       .login()
+      .waitForSpinner()
       .openCustomerCreateDialog();
   });
 

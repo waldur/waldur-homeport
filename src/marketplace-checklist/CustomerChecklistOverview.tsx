@@ -6,11 +6,21 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 
-import { getChecklists, getCustomerStats, getCategories } from './api';
+import {
+  getChecklists,
+  getCustomerStats,
+  getCategories,
+  countChecklists,
+} from './api';
 import { StatsTable } from './StatsTable';
 import { Checklist } from './types';
 
 const loadData = async () => {
+  const checklistCount = await countChecklists();
+  if (checklistCount === 0) {
+    return { categories: [], checklists: [] };
+  }
+
   const categories = await getCategories();
   const checklists = await getChecklists();
   return {

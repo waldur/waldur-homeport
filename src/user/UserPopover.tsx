@@ -13,35 +13,32 @@ import { createSelector } from 'reselect';
 import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { FEATURE as CHECKLIST_FEATURE } from '@waldur/marketplace-checklist/constants';
+import { countChecklists } from '@waldur/marketplace-checklist/api';
 import { UserChecklist } from '@waldur/marketplace-checklist/UserChecklist';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { isVisible } from '@waldur/store/config';
 import { isSupport, isStaff, isOwner } from '@waldur/workspace/selectors';
 
 import { UserDetailsTable } from './support/UserDetailsTable';
 
 const getUser = (userId) => getById('/users/', userId);
 
-const canSeeChecklist = (state) => isVisible(state, CHECKLIST_FEATURE);
-
 const getCanSeeChecklist = createSelector(
   isSupport,
   isStaff,
   isOwner,
-  canSeeChecklist,
-  (support, staff, owner, checklist) =>
-    checklist && (support || staff || owner),
+  (support, staff, owner) => support || staff || owner,
 );
 
 export const UserPopover = ({ resolve }) => {
-  const [{ loading, value: user }, callback] = useAsyncFn(async () => {
+  const [{ loading, value }, callback] = useAsyncFn(async () => {
+    let user;
     if (resolve.user_uuid) {
-      const user = await getUser(resolve.user_uuid);
-      return user;
+      user = await getUser(resolve.user_uuid);
     } else {
-      return resolve.user;
+      user = resolve.user;
     }
+    const checklistCount = await countChecklists();
+    return { user, checklistCount };
   }, [resolve]);
 
   useEffectOnce(() => {
@@ -58,21 +55,21 @@ export const UserPopover = ({ resolve }) => {
       <ModalBody>
         {loading ? (
           <LoadingSpinner />
-        ) : user ? (
+        ) : value?.user ? (
           <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
             <Tab eventKey={1} title={translate('Details')}>
               <div className="m-t-sm">
-                <UserDetailsTable user={user} />
+                <UserDetailsTable user={value.user} />
               </div>
             </Tab>
 
-            {canSeeChecklist && (
+            {canSeeChecklist && value.checklistCount ? (
               <Tab eventKey={2} title={translate('Checklists')}>
                 <div className="m-t-sm">
-                  <UserChecklist userId={user.uuid} readOnly={true} />
+                  <UserChecklist userId={value.user.uuid} readOnly={true} />
                 </div>
               </Tab>
-            )}
+            ) : null}
           </Tabs>
         ) : (
           <>
