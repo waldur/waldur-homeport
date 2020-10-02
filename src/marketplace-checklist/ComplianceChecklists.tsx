@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 import { getProject } from '@waldur/workspace/selectors';
 
-import { getProjectStats } from './api';
+import { countChecklists, getProjectStats } from './api';
 import { ChartHeader } from './ChartHeader';
 import { PieChart } from './PieChart';
 
@@ -48,5 +49,24 @@ export const ComplianceChecklists = () => {
   if (!project) {
     return null;
   }
-  return <ProjectChecklist project={project} />;
+
+  const statsState = useAsync(countChecklists);
+
+  if (statsState.loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (statsState.error) {
+    return null;
+  }
+
+  if (!statsState.value) {
+    return null;
+  }
+
+  return (
+    <Panel title={translate('Checklists')}>
+      <ProjectChecklist project={project} />
+    </Panel>
+  );
 };

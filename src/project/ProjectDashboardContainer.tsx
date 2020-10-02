@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import { isVisible } from '@waldur/store/config';
 import {
   getUser,
   getProject,
@@ -22,7 +21,6 @@ const mapStateToProps = (state: OuterState) => ({
   user: getUser(state),
   project: getProject(state),
   canAddUser: canAddUser(state),
-  marketplaceChecklistEnabled: isVisible(state, 'marketplace.checklist'),
 });
 
 export const ProjectDashboardContainer = connect(mapStateToProps)(

@@ -97,7 +97,7 @@ Cypress.Commands.add('openCustomerCreateDialog', () => {
   cy
     // Click on "Add organization" button
     .get('button')
-    .contains('Add organization')
+    .contains('Create')
     .click({ force: true })
 
     // Modal dialog should be displayed

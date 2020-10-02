@@ -1078,7 +1078,7 @@ msgid "Checklist setup"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/project/ProjectDashboard.tsx
+#: src/marketplace-checklist/ComplianceChecklists.tsx
 #: src/user/UserPopover.tsx
 msgid "Checklists"
 msgstr ""
@@ -7604,6 +7604,7 @@ msgstr ""
 #: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/SecretField.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
+#: src/user/list/UserDashboard.tsx
 msgid "Unable to load data."
 msgstr ""
 
