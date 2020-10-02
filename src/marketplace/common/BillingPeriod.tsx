@@ -8,5 +8,5 @@ export const BillingPeriod = (props) => {
     hour: translate('Price per hour'),
     quantity: translate('Price per unit'),
   };
-  return labels[props.unit];
+  return labels[props.unit] ? labels[props.unit] : null;
 };
