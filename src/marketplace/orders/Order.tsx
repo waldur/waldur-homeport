@@ -5,6 +5,8 @@ import { translate } from '@waldur/i18n';
 import { showPriceSelector } from '@waldur/invoices/details/utils';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 
+import { getMaxUnit } from '../common/utils';
+
 import { OrderItem } from './item/details/OrderItem';
 import './Order.scss';
 import { OrderItemResponse } from './types';
@@ -18,6 +20,7 @@ interface OrderProps {
 
 export const Order = (props: OrderProps) => {
   const showPrice = useSelector(showPriceSelector);
+  const maxUnit = React.useMemo(() => getMaxUnit(props.items), [props.items]);
   return (
     <>
       <div className="table-responsive order">
@@ -27,9 +30,11 @@ export const Order = (props: OrderProps) => {
               <th>{translate('Item')}</th>
               {showPrice && (
                 <>
-                  <th className="text-center">
-                    <BillingPeriod unit={props.items[0].plan_unit} />
-                  </th>
+                  {maxUnit ? (
+                    <th className="text-center">
+                      <BillingPeriod unit={maxUnit} />
+                    </th>
+                  ) : null}
                   <th className="text-center">
                     {translate('Activation price')}
                   </th>
@@ -47,6 +52,7 @@ export const Order = (props: OrderProps) => {
                 editable={props.editable}
                 project_uuid={props.project_uuid}
                 showPrice={showPrice}
+                maxUnit={maxUnit}
               />
             ))}
           </tbody>

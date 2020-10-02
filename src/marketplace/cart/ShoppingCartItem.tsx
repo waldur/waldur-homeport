@@ -11,9 +11,9 @@ import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import { TermsOfService } from '../orders/TermsOfService';
+import { BillingPeriod } from '../types';
 
 import './ShoppingCartItem.scss';
-
 import { ShoppingCartItemUpdateLink } from './ShoppingCartItemUpdateLink';
 
 interface ShoppingCartItemProps {
@@ -21,6 +21,7 @@ interface ShoppingCartItemProps {
   onRemove(): void;
   isRemovingItem: boolean;
   termsOfServiceIsVisible?: boolean;
+  maxUnit: BillingPeriod;
 }
 
 const TosCell = (props: ShoppingCartItemProps) => (
@@ -67,11 +68,13 @@ export const ShoppingCartItem = (props: ShoppingCartItemProps) => {
       </td>
       {showPrice && (
         <>
+          {props.maxUnit ? (
+            <td className="text-center text-lg">
+              {defaultCurrency(props.item.fixed_price || 0)}
+            </td>
+          ) : null}
           <td className="text-center text-lg">
-            {defaultCurrency(props.item.fixed_price)}
-          </td>
-          <td className="text-center text-lg">
-            {defaultCurrency(props.item.activation_price)}
+            {defaultCurrency(props.item.activation_price || 0)}
           </td>
         </>
       )}

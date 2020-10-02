@@ -1,6 +1,7 @@
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { getMaxUnit } from '@waldur/marketplace/common/utils';
 import { BillingPeriod } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
 
@@ -25,21 +26,9 @@ export const isUpdatingItem = (state: OuterState) =>
 export const isCreatingOrder = (state: OuterState) =>
   getCart(state).creatingOrder;
 
-export const getMaxUnit = (state: OuterState): BillingPeriod => {
+export const getMaxUnitSelector = (state: OuterState): BillingPeriod => {
   const items = getItems(state);
-  const units: string[] = items
-    .filter((item) => item.plan)
-    .map((item) => item.plan_unit);
-  if (units.indexOf('month') !== -1) {
-    return 'month';
-  }
-  if (units.indexOf('half_month') !== -1) {
-    return 'month';
-  }
-  if (units.indexOf('day') !== -1) {
-    return 'day';
-  }
-  return 'hour';
+  return getMaxUnit(items);
 };
 
 export const getTotal = createSelector(getItems, (items) => {

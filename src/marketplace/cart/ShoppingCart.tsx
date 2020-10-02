@@ -15,7 +15,7 @@ import { ShoppingCartItem } from './ShoppingCartItem';
 import * as actions from './store/actions';
 import { ToSForm } from './store/constants';
 import {
-  getMaxUnit,
+  getMaxUnitSelector,
   getItems,
   isRemovingItem,
   getTermsOfServiceIsVisible,
@@ -40,9 +40,11 @@ const PureShoppingCart = (props: ShoppingCartProps) => {
             <th>{translate('Item')}</th>
             {showPrice && (
               <>
-                <th className="text-center">
-                  <BillingPeriod unit={props.maxUnit} />
-                </th>
+                {props.maxUnit ? (
+                  <th className="text-center">
+                    <BillingPeriod unit={props.maxUnit} />
+                  </th>
+                ) : null}
                 <th className="text-center">{translate('Activation price')}</th>
               </>
             )}
@@ -60,6 +62,7 @@ const PureShoppingCart = (props: ShoppingCartProps) => {
               onRemove={() => props.removeItem(item.uuid, item.project)}
               isRemovingItem={props.isRemovingItem}
               termsOfServiceIsVisible={props.termsOfServiceIsVisible}
+              maxUnit={props.maxUnit}
             />
           ))}
         </tbody>
@@ -74,7 +77,7 @@ const PureShoppingCart = (props: ShoppingCartProps) => {
 
 const mapStateToProps = (state: OuterState) => ({
   items: getItems(state),
-  maxUnit: getMaxUnit(state),
+  maxUnit: getMaxUnitSelector(state),
   isRemovingItem: isRemovingItem(state),
   termsOfServiceIsVisible: getTermsOfServiceIsVisible(state),
 });
