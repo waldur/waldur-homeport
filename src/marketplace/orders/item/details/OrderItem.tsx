@@ -8,8 +8,9 @@ import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { ResourceDetailsLink } from '@waldur/marketplace/resources/ResourceDetailsLink';
 import { ResourceReference } from '@waldur/marketplace/resources/types';
-import './OrderItem.scss';
+import { BillingPeriod } from '@waldur/marketplace/types';
 
+import './OrderItem.scss';
 import { OrderItemDetailsLink } from './OrderItemDetailsLink';
 
 interface OrderItemProps {
@@ -18,6 +19,7 @@ interface OrderItemProps {
   editable: boolean;
   onRemove?(): void;
   showPrice: boolean;
+  maxUnit: BillingPeriod;
 }
 
 export const OrderItem = (props: OrderItemProps) => {
@@ -61,11 +63,13 @@ export const OrderItem = (props: OrderItemProps) => {
       </td>
       {props.showPrice && (
         <>
+          {props.maxUnit ? (
+            <td className="text-center text-lg">
+              {defaultCurrency(props.item.fixed_price || 0)}
+            </td>
+          ) : null}
           <td className="text-center text-lg">
-            {defaultCurrency(props.item.fixed_price)}
-          </td>
-          <td className="text-center text-lg">
-            {defaultCurrency(props.item.activation_price)}
+            {defaultCurrency(props.item.activation_price || 0)}
           </td>
         </>
       )}
