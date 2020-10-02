@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
+import { Tooltip } from '@waldur/core/Tooltip';
 
 import { Resource } from '../types';
 
@@ -8,16 +9,29 @@ interface PublicResourceLinkProps {
   row: Resource;
 }
 
+const BackendIdTooltip = ({ backendId }) =>
+  backendId && (
+    <>
+      {' '}
+      <Tooltip id="backend-id" label={backendId}>
+        <i className="fa fa-question-circle" />
+      </Tooltip>
+    </>
+  );
+
 export const PublicResourceLink = ({ row }: PublicResourceLinkProps) => {
   const label = row.name || row.offering_name;
   return (
-    <Link
-      state="marketplace-public-resource-details"
-      params={{
-        uuid: row.customer_uuid,
-        resource_uuid: row.uuid,
-      }}
-      label={label}
-    />
+    <>
+      <Link
+        state="marketplace-public-resource-details"
+        params={{
+          uuid: row.customer_uuid,
+          resource_uuid: row.uuid,
+        }}
+        label={label}
+      />
+      <BackendIdTooltip backendId={row.backend_id} />
+    </>
   );
 };
