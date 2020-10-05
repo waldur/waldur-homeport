@@ -39,6 +39,7 @@ const PureOpenStackNetworkSummary = (props: ResourceSummaryProps<Network>) => {
         label={translate('Is external')}
         value={resource.is_external ? translate('Yes') : translate('No')}
       />
+      <Field label={translate('MTU')} value={formatDefault(resource.mtu)} />
     </span>
   );
 };

@@ -3306,6 +3306,11 @@ msgstr ""
 msgid "MOAB allocation"
 msgstr ""
 
+#: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
+#: src/openstack/openstack-network/module.ts
+msgid "MTU"
+msgstr ""
+
 #: src/customer/workspace/utils.ts
 #: src/user/UserManage.tsx
 #: src/user/constants.ts
@@ -6342,6 +6347,10 @@ msgstr ""
 
 #: src/rancher/cluster/tabs.ts
 msgid "Services"
+msgstr ""
+
+#: src/openstack/openstack-network/module.ts
+msgid "Set MTU"
 msgstr ""
 
 #: src/offering/actions/SetBackendIDAction.ts
