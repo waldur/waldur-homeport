@@ -9,7 +9,7 @@ import { OpenstackAllocationPool } from './OpenstackAllocationPool';
 import { OpenStackNetworkSummary } from './OpenStackNetworkSummary';
 
 ActionConfigurationRegistry.register('OpenStack.Network', {
-  order: ['edit', 'pull', 'create_subnet', 'destroy'],
+  order: ['edit', 'pull', 'create_subnet', 'set_mtu', 'destroy'],
   options: {
     edit: {
       ...DEFAULT_EDIT_ACTION,
@@ -17,6 +17,16 @@ ActionConfigurationRegistry.register('OpenStack.Network', {
     },
     pull: {
       title: gettext('Synchronise'),
+    },
+    set_mtu: {
+      title: gettext('Set MTU'),
+      fields: {
+        mtu: {
+          type: 'integer',
+          label: gettext('MTU'),
+          resource_default_value: true,
+        },
+      },
     },
     create_subnet: {
       title: gettext('Create subnet'),
