@@ -1,5 +1,6 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { LazyCustomerList } from '@waldur/customer/list/LazyCustomerList';
+import { SupportCustomersContainer } from '@waldur/customer/list/SupportCustomersContainer';
 import { SupportFeedback } from '@waldur/issues/feedback/SupportFeedback';
 import { SupportIssues } from '@waldur/issues/SupportIssues';
 import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
@@ -92,6 +93,18 @@ export const states: StateDeclaration[] = [
     component: UserListView,
     data: {
       feature: 'support.users',
+    },
+    resolve: {
+      permission: checkPermission,
+    },
+  },
+
+  {
+    name: 'support.customers',
+    url: 'customers/',
+    component: SupportCustomersContainer,
+    data: {
+      feature: 'support.organizations',
     },
     resolve: {
       permission: checkPermission,

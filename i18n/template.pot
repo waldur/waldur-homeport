@@ -44,6 +44,7 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/customers/CustomersList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -123,6 +124,7 @@ msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
+#: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/customer/team/CustomerUsersList.tsx
@@ -1285,12 +1287,14 @@ msgstr ""
 msgid "Contact e-mail"
 msgstr ""
 
+#: src/customer/list/SupportCustomerList.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Contact email"
 msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/SupportCustomerList.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Contact phone"
 msgstr ""
@@ -1811,6 +1815,7 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
+#: src/customer/list/OrganizationDetailsButton.tsx
 #: src/customer/team/UserDetailsButton.tsx
 #: src/events/EventDetailsButton.tsx
 #: src/issues/create/CallerGroup.tsx
@@ -1992,6 +1997,7 @@ msgstr ""
 msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
 msgstr ""
 
+#: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/UserEditButton.tsx
@@ -3621,6 +3627,7 @@ msgstr ""
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -4375,6 +4382,9 @@ msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/SupportCustomerList.tsx
+#: src/customer/list/SupportCustomersContainer.tsx
+#: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/customers/CustomersList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"

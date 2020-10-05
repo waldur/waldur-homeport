@@ -40,6 +40,12 @@ const getReportItems = () => [
     feature: 'support.users',
   },
   {
+    label: translate('Organizations'),
+    icon: 'fa-university',
+    state: 'support.customers',
+    feature: 'support.organizations',
+  },
+  {
     label: translate('Reporting'),
     icon: 'fa-files-o',
     children: [
