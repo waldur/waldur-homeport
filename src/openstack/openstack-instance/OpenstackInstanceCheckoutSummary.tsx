@@ -52,7 +52,7 @@ const getStoragePrice = (formData, components) => {
     ? `gigabytes_${formData.data_volume_type.name}`
     : 'storage';
   const dataVolumePrice =
-    (formData.data_volume_size / 1024.0) *
+    ((formData.data_volume_size || 0) / 1024.0) *
     (components[dataVolumeComponent] || 0);
 
   return systemVolumePrice + dataVolumePrice;
