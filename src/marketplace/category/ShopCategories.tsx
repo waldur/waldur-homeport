@@ -11,17 +11,25 @@ interface ShopCategoriesProps {
   currentCategoryUuid?: string;
 }
 
-export const ShopCategories = (props: ShopCategoriesProps) => (
-  <section>
-    <h3 className="shopping-cart-sidebar-title">{translate('Categories')}</h3>
-    <ul className="list-unstyled">
-      {props.categories.map((category, index) => (
-        <CategoryItem
-          category={category}
-          key={index}
-          active={props.currentCategoryUuid === category.uuid}
-        />
-      ))}
-    </ul>
-  </section>
-);
+const getSortedCategoriesByTitle = (categories: Category[]): Category[] =>
+  categories.sort((a, b) =>
+    a.title > b.title ? 1 : b.title > a.title ? -1 : 0,
+  );
+
+export const ShopCategories = (props: ShopCategoriesProps) => {
+  const sortedCategories = getSortedCategoriesByTitle(props.categories);
+  return (
+    <section>
+      <h3 className="shopping-cart-sidebar-title">{translate('Categories')}</h3>
+      <ul className="list-unstyled">
+        {sortedCategories.map((category, index) => (
+          <CategoryItem
+            category={category}
+            key={index}
+            active={props.currentCategoryUuid === category.uuid}
+          />
+        ))}
+      </ul>
+    </section>
+  );
+};
