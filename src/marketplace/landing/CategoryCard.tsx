@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
 import { Category } from '@waldur/marketplace/types';
@@ -24,7 +25,10 @@ export const CategoryCard = (props: CategoryCardProps) => (
           {props.category.title}
         </CategoryLink>
       </h3>
-      {props.category.offering_count} items
+      {props.category.offering_count}{' '}
+      {props.category.offering_count === 1
+        ? translate('item')
+        : translate('items')}
     </div>
   </div>
 );

@@ -8964,6 +8964,11 @@ msgstr ""
 msgid "invoices"
 msgstr ""
 
+#: src/marketplace/landing/CategoryCard.tsx
+msgid "item"
+msgstr ""
+
+#: src/marketplace/landing/CategoryCard.tsx
 #: src/table/utils.tsx
 msgid "items"
 msgstr ""
