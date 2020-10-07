@@ -2134,7 +2134,7 @@ msgstr ""
 #: src/events/EventDetailsTable.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr ""
 
@@ -5301,7 +5301,7 @@ msgid "Reason"
 msgstr ""
 
 #: src/configs/base-config.ts
-#: src/resource/summary/ResourceSummaryBase.tsx
+#: src/resource/summary/ErrorMessageField.tsx
 msgid "Reason unknown, please contact support."
 msgstr ""
 
