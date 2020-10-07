@@ -5,6 +5,8 @@ import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { VirtualMachine } from '@waldur/resource/types';
 import { Table, connectTable } from '@waldur/table';
 
+import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';
+
 const TableComponent = (props) => {
   const { translate } = props;
   return (
@@ -26,6 +28,15 @@ const TableComponent = (props) => {
         {
           title: translate('Subnet CIDR'),
           render: ({ row }) => row.subnet_cidr,
+        },
+        {
+          title: translate('Actions'),
+          render: ({ row }) => (
+            <SetAllowedAddressPairsButton
+              instance={props.resource}
+              internalIp={row}
+            />
+          ),
         },
       ]}
       verboseName={translate('internal IPs')}

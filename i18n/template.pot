@@ -149,6 +149,8 @@ msgstr ""
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -291,6 +293,10 @@ msgstr ""
 
 #: src/user/list/CustomerCreateButton.tsx
 msgid "Add organization"
+msgstr ""
+
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+msgid "Add pair"
 msgstr ""
 
 #: src/customer/payments/PaymentCreateDialog.tsx
@@ -449,6 +455,10 @@ msgstr ""
 
 #: src/booking/components/CalendarSettings.tsx
 msgid "Allow bookings to be scheduled at weekends"
+msgstr ""
+
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+msgid "Allowed address pairs update was scheduled."
 msgstr ""
 
 #: src/auth/SigninButton.tsx
@@ -2877,6 +2887,7 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-network/module.ts
 msgid "Internal network mask (CIDR)"
 msgstr ""
@@ -3303,6 +3314,7 @@ msgid "Longhorn is a lightweight, reliable, and powerful distributed block stora
 msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 msgid "MAC address"
@@ -5458,6 +5470,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/NodeRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
@@ -6361,6 +6374,11 @@ msgstr ""
 
 #: src/openstack/openstack-network/module.ts
 msgid "Set MTU"
+msgstr ""
+
+#: src/openstack/openstack-instance/SetAllowedAddressPairsButton.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+msgid "Set allowed address pairs"
 msgstr ""
 
 #: src/offering/actions/SetBackendIDAction.ts
@@ -7898,6 +7916,10 @@ msgstr ""
 msgid "Unable to update YAML."
 msgstr ""
 
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+msgid "Unable to update allowed address pairs."
+msgstr ""
+
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 msgid "Unable to update enabled checklists."
 msgstr ""
@@ -8020,6 +8042,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 #: src/user/hooks/HookUpdateButton.tsx
 msgid "Update"
