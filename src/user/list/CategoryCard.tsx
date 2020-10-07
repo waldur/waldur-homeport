@@ -52,7 +52,7 @@ export const CategoryCard = (props: CategoryCardProps) => {
     }
   };
   return (
-    <div className="category-card" style={{ height: '110px' }}>
+    <div className="category-card" style={{ height: '122px' }}>
       <CategoryLink
         className="category-thumb"
         category_uuid={props.category.uuid}
