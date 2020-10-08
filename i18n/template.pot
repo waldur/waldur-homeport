@@ -457,6 +457,10 @@ msgstr ""
 msgid "Allow bookings to be scheduled at weekends"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentBooleanLimitField.tsx
+msgid "Allow to enable/disable component only"
+msgstr ""
+
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "Allowed address pairs update was scheduled."
 msgstr ""
