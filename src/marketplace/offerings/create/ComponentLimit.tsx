@@ -3,6 +3,7 @@ import { formValues } from 'redux-form';
 
 import { BillingType } from '@waldur/marketplace/types';
 
+import { ComponentBooleanLimitField } from './ComponentBooleanLimitField';
 import { ComponentDisableQuotaField } from './ComponentDisableQuotaField';
 import { ComponentLimitAmountField } from './ComponentLimitAmountField';
 import {
@@ -19,17 +20,28 @@ interface Values {
   };
   limitPeriod: LimitPeriodOption;
   disableQuotas: boolean;
+  isBoolean: boolean;
 }
 
 const enhance = formValues(() => ({
   billingType: 'billing_type',
   limitPeriod: 'limit_period',
   disableQuotas: 'disable_quotas',
+  isBoolean: 'is_boolean',
 }));
 
-export const ComponentLimit = enhance((props: Values) =>
-  props.billingType && props.billingType.value === 'usage' ? (
+export const ComponentLimit = enhance((props: Values) => {
+  if (props.billingType?.value !== 'usage') {
+    return null;
+  }
+
+  if (props.isBoolean) {
+    return <ComponentBooleanLimitField />;
+  }
+
+  return (
     <>
+      <ComponentBooleanLimitField />
       <ComponentLimitPeriodField limitPeriod={props.limitPeriod} />
       <ComponentLimitAmountField />
       <ComponentDisableQuotaField />
@@ -41,5 +53,5 @@ export const ComponentLimit = enhance((props: Values) =>
       )}
       {!props.disableQuotas && <ComponentUseLimitForBillingField />}
     </>
-  ) : null,
-) as React.ComponentType<{}>;
+  );
+}) as React.ComponentType<{}>;

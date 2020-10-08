@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
 
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import {
   parseIntField,
   formatIntField,
@@ -19,13 +20,22 @@ const RowWrapper = (props) => (
     offeringComponent={props.offeringComponent}
     className={props.meta.error ? 'form-group has-error' : 'form-group'}
   >
-    <input
-      className="form-control"
-      type="number"
-      min={props.offeringComponent.min_value || 0}
-      max={props.offeringComponent.max_value}
-      {...props.input}
-    />
+    {props.offeringComponent.is_boolean ? (
+      <AwesomeCheckbox
+        id="boolean-component"
+        label=""
+        value={parseInt(props.input.value) === 1}
+        onChange={(value) => props.input.onChange(value ? 1 : 0)}
+      />
+    ) : (
+      <input
+        className="form-control"
+        type="number"
+        min={props.offeringComponent.min_value || 0}
+        max={props.offeringComponent.max_value}
+        {...props.input}
+      />
+    )}
   </ComponentRow>
 );
 
