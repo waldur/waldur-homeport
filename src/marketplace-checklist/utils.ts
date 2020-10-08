@@ -1,7 +1,7 @@
 import { translate } from '@waldur/i18n';
 
 import { countChecklists, getCategories } from './api';
-import { FEATURE, ICON_CLASS } from './constants';
+import { ICON_CLASS } from './constants';
 import { Category } from './types';
 
 const getMenuItems = (linkFunction) => async () => {
@@ -14,7 +14,6 @@ const getMenuItems = (linkFunction) => async () => {
     label: category.name,
     icon: ICON_CLASS,
     ...linkFunction(category),
-    feature: FEATURE,
     index: 220 + index,
   }));
 };
@@ -44,6 +43,5 @@ export const getMenuForOrganization = async () => {
     label: translate('Checklist setup'),
     state: 'marketplace-checklist-customer',
     icon: ICON_CLASS,
-    feature: FEATURE,
   };
 };
