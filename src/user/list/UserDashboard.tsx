@@ -12,6 +12,7 @@ import * as actions from '@waldur/marketplace/landing/store/actions';
 import * as selectors from '@waldur/marketplace/landing/store/selectors';
 import { useTitle } from '@waldur/navigation/title';
 import { CategoriesList } from '@waldur/user/list/CategoriesList';
+import { ChecklistsList } from '@waldur/user/list/ChecklistsList';
 
 import { CurrentUserEvents } from './CurrentUserEvents';
 import { CustomerPermissions } from './CustomerPermissions';
@@ -34,9 +35,14 @@ const UserDashboardContainer: React.FC = (props: any) => {
   ) : (
     <div className="wrapper wrapper-content">
       {asyncState.value > 0 && (
-        <Panel title={translate('Marketplace')}>
-          <CategoriesList {...props.categories} />
-        </Panel>
+        <>
+          <Panel title={translate('Checklists')}>
+            <ChecklistsList />
+          </Panel>
+          <Panel title={translate('Marketplace')}>
+            <CategoriesList {...props.categories} />
+          </Panel>
+        </>
       )}
       {renderPrompt && (
         <div className="row">
