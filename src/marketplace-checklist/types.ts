@@ -15,10 +15,12 @@ export interface Question {
 
 export interface Checklist {
   name: string;
+  icon: string;
   description: string;
   uuid: string;
   questions_count: number;
   category_uuid: string;
+  checklists_count: number;
 }
 
 export interface Answer {

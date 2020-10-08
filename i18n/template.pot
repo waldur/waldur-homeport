@@ -1096,6 +1096,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace-checklist/ComplianceChecklists.tsx
 #: src/user/UserPopover.tsx
+#: src/user/list/UserDashboard.tsx
 msgid "Checklists"
 msgstr ""
 
@@ -7690,6 +7691,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "Unable to load marketplace category details"
+msgstr ""
+
+#: src/user/list/ChecklistsList.tsx
+msgid "Unable to load marketplace checklists."
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
