@@ -110,7 +110,8 @@ export const OptionForm = connector(
       {(props.type === 'integer' || props.type === 'money') && (
         <MinMaxFields option={props.option} />
       )}
-      {props.type === 'select_string' && (
+      {(props.type === 'select_string' ||
+        props.type === 'select_string_multi') && (
         <FormGroup
           label={props.translate('Choices as comma-separated list')}
           required={true}

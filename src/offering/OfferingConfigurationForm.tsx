@@ -24,6 +24,7 @@ import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTa
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
+import { SelectMultiCheckboxGroup } from '@waldur/offering/SelectMultiCheckboxGroup';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { fetchTenantOptions, fetchInstanceOptions } from './api';
@@ -99,6 +100,13 @@ export class PureOfferingConfigurationForm extends React.Component<
                       label: item,
                       value: item,
                     })),
+                  };
+                  break;
+
+                case 'select_string_multi':
+                  OptionField = SelectMultiCheckboxGroup;
+                  params = {
+                    options: options.choices,
                   };
                   break;
 
