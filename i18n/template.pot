@@ -671,10 +671,10 @@ msgstr ""
 
 #: src/customer/workspace/CustomerEventsList.tsx
 #: src/customer/workspace/utils.ts
-#: src/events/BaseEventsList.tsx
 #: src/project/utils.ts
 #: src/user/constants.ts
 #: src/user/list/UserDashboard.tsx
+#: src/user/list/UserEventsWrapper.tsx
 msgid "Audit logs"
 msgstr ""
 
