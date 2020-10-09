@@ -2,8 +2,8 @@ import { FreeIpaAccount } from '@waldur/freeipa/FreeIPAAccount';
 
 import { HooksList } from './hooks/HooksList';
 import { KeysList } from './keys/KeysList';
-import { CurrentUserEvents } from './list/CurrentUserEvents';
 import { UserDashboard } from './list/UserDashboard';
+import { UserEventsWrapper } from './list/UserEventsWrapper';
 import { UserManage } from './UserManage';
 
 export const tabs = {
@@ -16,7 +16,7 @@ export const tabs = {
   },
   events: {
     url: 'events/',
-    component: CurrentUserEvents,
+    component: UserEventsWrapper,
   },
   keys: {
     url: 'keys/',
