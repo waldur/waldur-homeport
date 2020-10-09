@@ -30,6 +30,10 @@ export const FIELD_TYPES: Array<{ value: FieldType; label: string }> = [
     label: 'Select',
   },
   {
+    value: 'select_string_multi',
+    label: 'Select multiple options',
+  },
+  {
     value: 'select_openstack_tenant',
     label: 'Select OpenStack tenant',
   },
