@@ -7,7 +7,14 @@ import { FloatingIpsList } from '../openstack-floating-ips/FloatingIpsList';
 import { TenantNetworksList } from '../openstack-network/TenantNetworksList';
 import { SecurityGroupsList } from '../openstack-security-groups/SecurityGroupsList';
 
+import { TenantRoutersList } from './TenantRoutersList';
+
 ResourceTabsConfiguration.register('OpenStack.Tenant', () => [
+  {
+    key: 'routers',
+    title: translate('Routers'),
+    component: TenantRoutersList,
+  },
   {
     key: 'networks',
     title: translate('Networks'),
