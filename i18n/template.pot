@@ -158,6 +158,8 @@ msgstr ""
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/InvoiceActions.tsx
@@ -326,6 +328,10 @@ msgstr ""
 #: src/dashboard/marketplace.ts
 #: src/marketplace/resources/list/CreateResourceButton.tsx
 msgid "Add resource"
+msgstr ""
+
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+msgid "Add route"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/security-group-rule-editor.html
@@ -1800,6 +1806,10 @@ msgstr ""
 
 #: src/user/hooks/HooksList.tsx
 msgid "Destination"
+msgstr ""
+
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+msgid "Destination (CIDR)"
 msgstr ""
 
 #: src/user/hooks/HookForm.tsx
@@ -3687,6 +3697,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
@@ -3845,6 +3856,10 @@ msgstr ""
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/table/TablePagination.tsx
 msgid "Next"
+msgstr ""
+
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+msgid "Next hop (IP)"
 msgstr ""
 
 #: src/resource/summary/ScheduleSummary.tsx
@@ -5476,6 +5491,7 @@ msgstr ""
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/NodeRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
@@ -5906,6 +5922,10 @@ msgstr ""
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Roles"
+msgstr ""
+
+#: src/openstack/openstack-tenant/tabs.ts
+msgid "Routers"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
@@ -6394,6 +6414,10 @@ msgstr ""
 msgid "Set rules"
 msgstr ""
 
+#: src/openstack/openstack-tenant/SetRoutersButton.tsx
+msgid "Set static routes"
+msgstr ""
+
 #: src/slurm/SlurmForm.tsx
 msgid "Set to true to activate privilege escalation"
 msgstr ""
@@ -6622,6 +6646,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -6641,6 +6666,10 @@ msgstr ""
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "State"
+msgstr ""
+
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+msgid "Static routes update was scheduled."
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -7965,6 +7994,10 @@ msgstr ""
 msgid "Unable to update shopping cart item."
 msgstr ""
 
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+msgid "Unable to update static routes."
+msgstr ""
+
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Unable to update user."
@@ -8052,6 +8085,7 @@ msgstr ""
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 #: src/user/hooks/HookUpdateButton.tsx
 msgid "Update"
@@ -8099,6 +8133,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementStep.tsx
 msgid "Update service settings"
+msgstr ""
+
+#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+msgid "Update static routes"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
@@ -9086,6 +9124,10 @@ msgstr ""
 
 #: src/issues/CustomerSupportRating.tsx
 msgid "reviews"
+msgstr ""
+
+#: src/openstack/openstack-tenant/TenantRoutersList.tsx
+msgid "routers"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
