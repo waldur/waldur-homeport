@@ -12,6 +12,7 @@ import {
 
 import { post } from '@waldur/core/api';
 import { SubmitButton } from '@waldur/form';
+import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -41,17 +42,19 @@ interface FormData {
   pairs: AllowedAddressPair[];
 }
 
+const ValidatedInputField = renderValidationWrapper(InputField);
+
 const PairRow = ({ pair, onRemove }) => (
   <tr>
     <td>
       <Field
         name={`${pair}.ip_address`}
-        component={InputField}
+        component={ValidatedInputField}
         validate={validatePrivateSubnetCIDR}
       />
     </td>
     <td>
-      <Field name={`${pair}.mac_address`} component={InputField} />
+      <Field name={`${pair}.mac_address`} component={ValidatedInputField} />
     </td>
     <td>
       <Button bsStyle="default" onClick={onRemove}>
@@ -67,30 +70,38 @@ const PairAddButton = ({ onClick }) => (
   </Button>
 );
 
-const PairsTable: React.FC<WrappedFieldArrayProps> = ({ fields }) => (
-  <>
-    <Table responsive={true} bordered={true} striped={true} className="m-t-md">
-      <thead>
-        <tr>
-          <th>{translate('Internal network mask (CIDR)')}</th>
-          <th>{translate('MAC address')}</th>
-          <th>{translate('Actions')}</th>
-        </tr>
-      </thead>
+const PairsTable: React.FC<WrappedFieldArrayProps> = ({ fields }) =>
+  fields.length > 0 ? (
+    <>
+      <Table
+        responsive={true}
+        bordered={true}
+        striped={true}
+        className="m-t-md"
+      >
+        <thead>
+          <tr>
+            <th>{translate('Internal network mask (CIDR)')}</th>
+            <th>{translate('MAC address')}</th>
+            <th>{translate('Actions')}</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {fields.map((pair, index) => (
-          <PairRow
-            key={pair}
-            pair={pair}
-            onRemove={() => fields.remove(index)}
-          />
-        ))}
-      </tbody>
-    </Table>
+        <tbody>
+          {fields.map((pair, index) => (
+            <PairRow
+              key={pair}
+              pair={pair}
+              onRemove={() => fields.remove(index)}
+            />
+          ))}
+        </tbody>
+      </Table>
+      <PairAddButton onClick={() => fields.push({})} />
+    </>
+  ) : (
     <PairAddButton onClick={() => fields.push({})} />
-  </>
-);
+  );
 
 const enhance = compose(
   reduxForm<FormData, OwnProps>({
@@ -110,7 +121,7 @@ export const SetAllowedAddressPairsDialog = enhance(
           `/openstacktenant-instances/${resolve.instance.uuid}/update_allowed_address_pairs/`,
           {
             subnet: resolve.internalIp.subnet,
-            allowed_address_pairs: formData.pairs,
+            allowed_address_pairs: formData.pairs || [],
           },
         );
         dispatch(
