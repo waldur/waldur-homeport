@@ -104,12 +104,12 @@ const PairsTable: React.FC<WrappedFieldArrayProps> = ({ fields }) =>
   );
 
 const enhance = compose(
-  reduxForm<FormData, OwnProps>({
-    form: 'SetAllowedAddressPairsDialog',
-  }),
   connect<{}, {}, OwnProps>((_, ownProps) => ({
     initialValues: { pairs: ownProps.resolve.internalIp.allowed_address_pairs },
   })),
+  reduxForm<FormData, OwnProps>({
+    form: 'SetAllowedAddressPairsDialog',
+  }),
 );
 
 export const SetAllowedAddressPairsDialog = enhance(
