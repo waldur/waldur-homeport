@@ -65,4 +65,20 @@ export default function initAuthProvider(ENV, $authProvider) {
       requiredUrlParams: ['scope', 'state', 'ui_locales'],
     });
   }
+
+  if (ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_CLIENT_ID) {
+    $authProvider.oauth2({
+      name: 'eduteams',
+      clientId: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_CLIENT_ID,
+      url: ENV.apiEndpoint + 'api-auth/eduteams/',
+      authorizationEndpoint: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_AUTH_URL,
+      redirectUri: window.location.origin + '/login_completed/',
+      scope: ['openid profile email eduperson_assurance'],
+      scopePrefix: '',
+      scopeDelimiter: ' ',
+      ui_locales: () => ngInjector.get('LanguageUtilsService').current.code,
+      state: getStateId,
+      requiredUrlParams: ['scope', 'state', 'ui_locales'],
+    });
+  }
 }

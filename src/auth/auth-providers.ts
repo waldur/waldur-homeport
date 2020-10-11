@@ -38,6 +38,12 @@ export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
     iconClass: 'fa-id-card-o',
   },
   {
+    providerKey: 'eduteams',
+    label: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_LABEL,
+    btnClass: 'btn-smartid',
+    iconClass: 'fa-id-card-o',
+  },
+  {
     providerKey: 'saml2',
     label: ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_LABEL,
     btnClass: 'btn-saml2',
