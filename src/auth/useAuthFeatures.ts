@@ -96,6 +96,9 @@ export const useAuthFeatures = () => {
   const showKeycloak =
     showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.KEYCLOAK_CLIENT_ID;
 
+  const showEduteams =
+    showSocialSignup && !!ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_CLIENT_ID;
+
   const showValimo = methods.VALIMO && state.name === 'login';
 
   const showSaml2 =
@@ -121,5 +124,6 @@ export const useAuthFeatures = () => {
     saml2: showSaml2,
     saml2providers: showSaml2Providers,
     keycloak: showKeycloak,
+    eduteams: showEduteams,
   };
 };
