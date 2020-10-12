@@ -39,6 +39,19 @@ export const PRIVATE_CIDR_PATTERN = new RegExp(
 
 export const VOLUME_NAME_PATTERN = new RegExp('^[A-Za-z0-9]+$');
 
+const IP_ADDRESS_PATTERN = new RegExp(
+  '^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
+);
+
+export const validateIpAddress = (value) => {
+  if (!value) {
+    return;
+  }
+  if (!value.match(IP_ADDRESS_PATTERN)) {
+    return translate('Enter IPv4 address.');
+  }
+};
+
 export const validatePrivateSubnetCIDR = (value) => {
   if (!value) {
     return;

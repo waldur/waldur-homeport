@@ -158,7 +158,8 @@ msgstr ""
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
-#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+#: src/openstack/openstack-tenant/IpAddressList.tsx
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -235,6 +236,10 @@ msgstr ""
 
 #: src/freeipa/SyncProfile.tsx
 msgid "Add Waldur user SSH keys to the FreeIPA profile"
+msgstr ""
+
+#: src/openstack/openstack-tenant/IpAddressList.tsx
+msgid "Add address"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
@@ -330,7 +335,7 @@ msgstr ""
 msgid "Add resource"
 msgstr ""
 
-#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 msgid "Add route"
 msgstr ""
 
@@ -1291,7 +1296,7 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: src/openstack/openstack-subnet/actions.ts
+#: src/openstack/openstack-subnet/EditAction.tsx
 msgid "Connect subnet to a default virtual router"
 msgstr ""
 
@@ -1614,6 +1619,10 @@ msgstr ""
 msgid "Customer support satisfaction overall rating"
 msgstr ""
 
+#: src/openstack/openstack-subnet/EditAction.tsx
+msgid "DNS name servers"
+msgstr ""
+
 #: src/booking/components/CalendarSettings.tsx
 msgid "Daily available booking time range"
 msgstr ""
@@ -1808,7 +1817,7 @@ msgstr ""
 msgid "Destination"
 msgstr ""
 
-#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 msgid "Destination (CIDR)"
 msgstr ""
 
@@ -1823,6 +1832,7 @@ msgstr ""
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.ts
 #: src/openstack/openstack-snapshot/DestroyAction.ts
+#: src/openstack/openstack-subnet/DestroyAction.ts
 #: src/openstack/openstack-volume/actions/DestroyAction.ts
 #: src/rancher/node/actions/DestroyAction.ts
 msgid "Destroy"
@@ -1885,7 +1895,7 @@ msgstr ""
 msgid "Disable data volume"
 msgstr ""
 
-#: src/openstack/openstack-subnet/actions.ts
+#: src/openstack/openstack-subnet/EditAction.tsx
 msgid "Disable gateway IP advertising via DHCP"
 msgstr ""
 
@@ -2140,6 +2150,10 @@ msgstr ""
 
 #: src/configs/base-config.ts
 msgid "English"
+msgstr ""
+
+#: src/openstack/utils.ts
+msgid "Enter IPv4 address."
 msgstr ""
 
 #: src/openstack/openstack-subnet/openstack-subnet.html
@@ -2547,7 +2561,7 @@ msgid "Gateway IP"
 msgstr ""
 
 #: src/openstack/openstack-network/module.ts
-#: src/openstack/openstack-subnet/actions.ts
+#: src/openstack/openstack-subnet/EditAction.tsx
 msgid "Gateway IP of this subnet"
 msgstr ""
 
@@ -2656,6 +2670,10 @@ msgstr ""
 msgid "Host name"
 msgstr ""
 
+#: src/openstack/openstack-subnet/EditAction.tsx
+msgid "Host routes"
+msgstr ""
+
 #: src/resource/monitoring/ZabbixHostSummary.tsx
 msgid "Host status"
 msgstr ""
@@ -2701,6 +2719,7 @@ msgid "ID code"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/openstack/openstack-tenant/IpAddressList.tsx
 msgid "IP address"
 msgstr ""
 
@@ -3858,7 +3877,7 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 msgid "Next hop (IP)"
 msgstr ""
 
@@ -4236,6 +4255,10 @@ msgstr ""
 
 #: src/openstack/events.ts
 msgid "OpenStack package {tenant_name} has been deleted."
+msgstr ""
+
+#: src/openstack/openstack-subnet/EditAction.tsx
+msgid "OpenStack subnet"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/EditAction.ts
@@ -5491,7 +5514,8 @@ msgstr ""
 #: src/marketplace/offerings/RemoveButton.tsx
 #: src/marketplace/offerings/create/ImageUploadField.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
-#: src/openstack/openstack-tenant/SetRoutesDialog.tsx
+#: src/openstack/openstack-tenant/IpAddressList.tsx
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/rancher/cluster/create/NodeRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
@@ -6766,10 +6790,6 @@ msgstr ""
 msgid "Subnet Name"
 msgstr ""
 
-#: src/openstack/openstack-subnet/actions.ts
-msgid "Subnet has been updated."
-msgstr ""
-
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
 #: src/openstack/openstack-subnet/breadcrumbs.ts
@@ -6840,7 +6860,6 @@ msgstr ""
 #: src/openstack/openstack-floating-ips/module.ts
 #: src/openstack/openstack-network/module.ts
 #: src/openstack/openstack-security-groups/module.ts
-#: src/openstack/openstack-subnet/actions.ts
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
 #: src/openstack/openstack-volume/actions/PullAction.ts
