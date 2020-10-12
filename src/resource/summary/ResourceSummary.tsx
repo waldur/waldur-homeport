@@ -10,10 +10,8 @@ interface ResourceSummaryProps {
 }
 
 export const ResourceSummary = (props: ResourceSummaryProps) => {
-  const {
-    component: SummaryComponent = ResourceSummaryBase,
-    className,
-  } = ResourceSummaryRegistry.get(props.resource.resource_type);
+  const { component: SummaryComponent = ResourceSummaryBase, className } =
+    ResourceSummaryRegistry.get(props.resource.resource_type) || {};
   return (
     <dl className={`dl-horizontal col-sm-12 ${className}`}>
       <SummaryComponent resource={props.resource} />
