@@ -73,7 +73,7 @@ export default function initAuthProvider(ENV, $authProvider) {
       url: ENV.apiEndpoint + 'api-auth/eduteams/',
       authorizationEndpoint: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_AUTH_URL,
       redirectUri: window.location.origin + '/login_completed/',
-      scope: ['openid profile email eduperson_assurance'],
+      scope: ['openid profile email eduperson_assurance ssh_public_key'],
       scopePrefix: '',
       scopeDelimiter: ' ',
       ui_locales: () => ngInjector.get('LanguageUtilsService').current.code,
