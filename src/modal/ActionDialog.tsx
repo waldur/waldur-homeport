@@ -14,6 +14,7 @@ interface ActionDialogProps {
   invalid?: boolean;
   onSubmit: any;
   error?: string;
+  layout?: 'horizontal' | 'vertical';
 }
 
 export const ActionDialog: React.FC<ActionDialogProps> = (props) => (
@@ -34,7 +35,7 @@ export const ActionDialog: React.FC<ActionDialogProps> = (props) => (
       {props.loading ? (
         <LoadingSpinner />
       ) : (
-        <FormContainer submitting={props.submitting}>
+        <FormContainer submitting={props.submitting} layout={props.layout}>
           {props.children}
         </FormContainer>
       )}

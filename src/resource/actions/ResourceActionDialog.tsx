@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, initialize } from 'redux-form';
 
 import { StringField, TextField } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CronField } from '@waldur/form/CronField';
 import { DateField } from '@waldur/form/DateField';
 import { MonacoField } from '@waldur/form/MonacoField';
@@ -47,6 +48,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
       onSubmit={handleSubmit(callback)}
       submitting={submitting}
       invalid={invalid}
+      layout="vertical"
     >
       {Object.keys(action.fields).map((key) => {
         const field = action.fields[key];
@@ -57,7 +59,9 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
           required: field.required,
           description: field.help_text,
         };
-        if (field.type === 'string') {
+        if (field.component) {
+          return <field.component />;
+        } else if (field.type === 'string') {
           return (
             <StringField
               {...props}
@@ -84,6 +88,8 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
           return <CronField {...props} />;
         } else if (field.type === 'integer') {
           return <NumberField {...props} />;
+        } else if (field.type === 'boolean') {
+          return <AwesomeCheckboxField id={key} hideLabel={true} {...props} />;
         }
       })}
     </ActionDialog>
