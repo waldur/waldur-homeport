@@ -16,7 +16,7 @@ const translateFilter = (template) =>
 export const translate: Translate = (template, context) =>
   formatTemplate(translateFilter(template), context);
 
-const getLocale = (state) => ({
+export const getLocale = (state) => ({
   locale: state.locale,
   translate,
 });

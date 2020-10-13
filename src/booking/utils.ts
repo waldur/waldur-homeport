@@ -320,10 +320,12 @@ export const handleWeekDays = (weekdayNumbers, dayNumber): number[] => {
 };
 
 export const getDurationOptions = (
+  locale: string,
   minuteArray: number[] = [1, 2, 3, 4, 5, 6, 6, 8, 24],
   units = 'hours',
-) =>
-  minuteArray.map((timeUnit) => {
+) => {
+  moment.locale(locale);
+  return minuteArray.map((timeUnit) => {
     return {
       value: moment
         .utc(moment.duration({ [units]: timeUnit }).asMilliseconds())
@@ -331,3 +333,4 @@ export const getDurationOptions = (
       label: moment.duration({ [units]: timeUnit }).humanize(),
     };
   });
+};
