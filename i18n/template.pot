@@ -7325,6 +7325,18 @@ msgstr ""
 msgid "Total CPU"
 msgstr ""
 
+#: src/slurm/details/SlurmAllocationSummary.tsx
+msgid "Total CPU hours consumed this month"
+msgstr ""
+
+#: src/slurm/details/SlurmAllocationSummary.tsx
+msgid "Total GPU hours consumed this month"
+msgstr ""
+
+#: src/slurm/details/SlurmAllocationSummary.tsx
+msgid "Total RAM GB-hours consumed this month"
+msgstr ""
+
 #: src/customer/list/TotalCostField.tsx
 msgid "Total cost:"
 msgstr ""
