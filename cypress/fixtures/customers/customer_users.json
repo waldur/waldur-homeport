@@ -1,0 +1,40 @@
+[
+  {
+    "url": "http://localhost:8080/api/users/a37feb500aa0445b8dd45ae43a48b6e5/",
+    "uuid": "a37feb500aa0445b8dd45ae43a48b6e5",
+    "username": "johndoe@example.com",
+    "full_name": "John Doe",
+    "email": "johndoe@example.com",
+    "role": "owner",
+    "permission": "http://localhost:8080/api/customer-permissions/200/",
+    "projects": [
+      {
+        "url": "http://localhost:8080/api/projects/db97ad5d6f5744988c0397fef0bea9c1/",
+        "uuid": "db97ad5d6f5744988c0397fef0bea9c1",
+        "name": "Progressive mission-critical standardization",
+        "role": "manager",
+        "permission": "http://localhost:8080/api/project-permissions/700/",
+        "expiration_time": null
+      }
+    ],
+    "expiration_time": null
+  },
+  {
+    "url": "http://localhost:8080/api/users/fc66348f7c9849d4b079c7db43ec12eb/",
+    "uuid": "fc66348f7c9849d4b079c7db43ec12eb",
+    "username": "janny.doe@example.com",
+    "full_name": "Janny Doe",
+    "email": "janny.doe@example.com",
+    "role": null,
+    "projects": [
+      {
+        "url": "http://localhost:8080/api/projects/22d7e03a0d654f98bd45cafd592ce8a2/",
+        "uuid": "22d7e03a0d654f98bd45cafd592ce8a2",
+        "name": "Function-based well-modulated Internet solution",
+        "role": "manager",
+        "permission": "http://localhost:8080/api/project-permissions/865/",
+        "expiration_time": null
+      }
+    ]
+  }
+]
