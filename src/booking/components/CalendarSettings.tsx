@@ -1,11 +1,13 @@
 import * as moment from 'moment-timezone';
 import * as React from 'react';
 import { useCallback, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { getOptions } from '@waldur/form/TimeSelectField';
 import { translate } from '@waldur/i18n';
+import { getLocale } from '@waldur/i18n/translate';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { handleWeekDays, getDurationOptions } from '../utils';
@@ -62,6 +64,13 @@ export const CalendarSettings: React.FC = () => {
   useEffect(() => {
     updateWeekends();
   }, [updateWeekends, weekends]);
+
+  const locale = useSelector(getLocale);
+
+  const durationOptions = React.useMemo(
+    () => getDurationOptions(locale.locale),
+    [locale],
+  );
 
   return (
     <>
@@ -161,10 +170,8 @@ export const CalendarSettings: React.FC = () => {
           isSearchable={false}
           isClearable={false}
           isMulti={false}
-          options={getDurationOptions()}
-          value={getDurationOptions().filter(
-            ({ value }) => value === slotDuration,
-          )}
+          options={durationOptions}
+          value={durationOptions.filter(({ value }) => value === slotDuration)}
           onChange={(newValue: any) => setSlotDuration(newValue.value)}
         />
       </FormGroup>
