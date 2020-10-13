@@ -19,7 +19,7 @@ import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { OpenStackAllocationPool } from './OpenStackAllocationPool';
 import { OpenStackSubnetField } from './OpenStackSubnetField';
-import { validatePrivateSubnetCIDR } from './utils';
+import { validateSubnetPrivateCIDR } from './utils';
 
 export class OpenStackPackageForm extends React.Component<
   OfferingConfigurationFormProps
@@ -93,7 +93,7 @@ export class OpenStackPackageForm extends React.Component<
           <OpenStackSubnetField
             label={translate('Internal network mask (CIDR)')}
             name="attributes.subnet_cidr"
-            validate={validatePrivateSubnetCIDR}
+            validate={validateSubnetPrivateCIDR}
           />
           <OpenStackAllocationPool
             label={translate('Internal network allocation pool')}

@@ -100,8 +100,14 @@ export const getInstances = (params) =>
 export const updateTenant = (id, data) =>
   put(`/openstack-tenants/${id}/`, data);
 
+export const updateNetwork = (id, data) =>
+  put(`/openstack-networks/${id}/`, data);
+
 export const updateSubnet = (id, data) =>
   put(`/openstack-subnets/${id}/`, data);
+
+export const createSubnet = (id, data) =>
+  post(`/openstack-networks/${id}/create_subnet/`, data);
 
 export const updateInstance = (id, data) =>
   put(`/openstacktenant-instances/${id}/`, data);

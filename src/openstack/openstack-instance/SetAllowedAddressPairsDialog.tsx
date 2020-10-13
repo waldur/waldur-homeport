@@ -20,7 +20,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
-import { validatePrivateSubnetCIDR } from '../utils';
+import { validateSubnetPrivateCIDR } from '../utils';
 
 interface AllowedAddressPair {
   ip_address: string;
@@ -50,7 +50,7 @@ const PairRow = ({ pair, onRemove }) => (
       <Field
         name={`${pair}.ip_address`}
         component={ValidatedInputField}
-        validate={validatePrivateSubnetCIDR}
+        validate={validateSubnetPrivateCIDR}
       />
     </td>
     <td>

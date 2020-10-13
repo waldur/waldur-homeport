@@ -20,7 +20,7 @@ export default (module) => {
   openstackBackupModule(module);
   openstackBackupScheduleModule();
   openstackNetworkModule();
-  openstackSubnetModule(module);
+  openstackSubnetModule();
   openstackSecurityGroupsModule(module);
   openstackSnapshotModule();
   openstackSnapshotScheduleModule();

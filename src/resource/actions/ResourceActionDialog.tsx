@@ -18,7 +18,7 @@ interface ResourceActionDialogOwnProps {
   resolve: { action: ResourceAction; resource: any };
 }
 
-const FORM_ID = 'ResourceActionDialog';
+export const RESOURCE_ACTION_FORM = 'ResourceActionDialog';
 
 const validateJSON = (value: string) => {
   try {
@@ -29,14 +29,14 @@ const validateJSON = (value: string) => {
 };
 
 export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
-  { form: FORM_ID },
+  { form: RESOURCE_ACTION_FORM },
 )(({ resolve: { action, resource }, handleSubmit, submitting, invalid }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (action.getInitialValues) {
       const initialValues = action.getInitialValues();
-      dispatch(initialize(FORM_ID, initialValues));
+      dispatch(initialize(RESOURCE_ACTION_FORM, initialValues));
     }
   }, [dispatch, action, resource]);
 

@@ -1296,7 +1296,7 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: src/openstack/openstack-subnet/EditAction.tsx
+#: src/openstack/openstack-subnet/fields.tsx
 msgid "Connect subnet to a default virtual router"
 msgstr ""
 
@@ -1482,7 +1482,7 @@ msgstr ""
 msgid "Create snapshot schedule for OpenStack volume"
 msgstr ""
 
-#: src/openstack/openstack-network/module.ts
+#: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
 msgid "Create subnet"
 msgstr ""
 
@@ -1619,7 +1619,7 @@ msgstr ""
 msgid "Customer support satisfaction overall rating"
 msgstr ""
 
-#: src/openstack/openstack-subnet/EditAction.tsx
+#: src/openstack/openstack-subnet/fields.tsx
 msgid "DNS name servers"
 msgstr ""
 
@@ -1830,6 +1830,7 @@ msgstr ""
 #: src/openstack/openstack-backup-schedule/actions/DestroyAction.ts
 #: src/openstack/openstack-backup/actions/DestroyAction.ts
 #: src/openstack/openstack-instance/actions/DestroyAction.ts
+#: src/openstack/openstack-network/actions/DestroyAction.ts
 #: src/openstack/openstack-security-groups/module.ts
 #: src/openstack/openstack-snapshot/DestroyAction.ts
 #: src/openstack/openstack-subnet/DestroyAction.ts
@@ -1895,7 +1896,7 @@ msgstr ""
 msgid "Disable data volume"
 msgstr ""
 
-#: src/openstack/openstack-subnet/EditAction.tsx
+#: src/openstack/openstack-subnet/fields.tsx
 msgid "Disable gateway IP advertising via DHCP"
 msgstr ""
 
@@ -1921,7 +1922,7 @@ msgstr ""
 msgid "Do not allow user to specify quotas when offering is provisioned."
 msgstr ""
 
-#: src/openstack/openstack-network/module.ts
+#: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
 msgid "Do not configure a gateway for this subnet"
 msgstr ""
 
@@ -2156,7 +2157,6 @@ msgstr ""
 msgid "Enter IPv4 address."
 msgstr ""
 
-#: src/openstack/openstack-subnet/openstack-subnet.html
 #: src/openstack/utils.ts
 msgid "Enter private IPv4 CIDR."
 msgstr ""
@@ -2560,8 +2560,7 @@ msgstr ""
 msgid "Gateway IP"
 msgstr ""
 
-#: src/openstack/openstack-network/module.ts
-#: src/openstack/openstack-subnet/EditAction.tsx
+#: src/openstack/openstack-subnet/fields.tsx
 msgid "Gateway IP of this subnet"
 msgstr ""
 
@@ -2670,7 +2669,7 @@ msgstr ""
 msgid "Host name"
 msgstr ""
 
-#: src/openstack/openstack-subnet/EditAction.tsx
+#: src/openstack/openstack-subnet/fields.tsx
 msgid "Host routes"
 msgstr ""
 
@@ -2915,14 +2914,14 @@ msgid "Internal network ID"
 msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
-#: src/openstack/openstack-network/module.ts
+#: src/openstack/openstack-network/InternalNetworkAllocationPool.tsx
 msgid "Internal network allocation pool"
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
-#: src/openstack/openstack-network/module.ts
+#: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
@@ -3359,7 +3358,7 @@ msgid "MOAB allocation"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-network/module.ts
+#: src/openstack/openstack-network/actions/SetMtuAction.ts
 msgid "MTU"
 msgstr ""
 
@@ -3832,10 +3831,6 @@ msgstr ""
 msgid "Network adapters"
 msgstr ""
 
-#: src/openstack/openstack-network/module.ts
-msgid "Network has been updated."
-msgstr ""
-
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-network/breadcrumbs.ts
@@ -4257,7 +4252,7 @@ msgstr ""
 msgid "OpenStack package {tenant_name} has been deleted."
 msgstr ""
 
-#: src/openstack/openstack-subnet/EditAction.tsx
+#: src/openstack/openstack-subnet/EditAction.ts
 msgid "OpenStack subnet"
 msgstr ""
 
@@ -6421,7 +6416,7 @@ msgstr ""
 msgid "Services"
 msgstr ""
 
-#: src/openstack/openstack-network/module.ts
+#: src/openstack/openstack-network/actions/SetMtuAction.ts
 msgid "Set MTU"
 msgstr ""
 
@@ -6790,6 +6785,14 @@ msgstr ""
 msgid "Subnet Name"
 msgstr ""
 
+#: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
+msgid "Subnet has been created."
+msgstr ""
+
+#: src/openstack/openstack-network/actions/SetMtuAction.ts
+msgid "Subnet has been updated."
+msgstr ""
+
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 #: src/openstack/openstack-network/tabs.ts
 #: src/openstack/openstack-subnet/breadcrumbs.ts
@@ -6858,7 +6861,6 @@ msgid "Sync profile"
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/module.ts
-#: src/openstack/openstack-network/module.ts
 #: src/openstack/openstack-security-groups/module.ts
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
@@ -7508,6 +7510,10 @@ msgstr ""
 msgid "Unable to create snapshot schedule."
 msgstr ""
 
+#: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
+msgid "Unable to create subnet."
+msgstr ""
+
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
 msgid "Unable to create volume snapshot."
 msgstr ""
@@ -8015,6 +8021,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Unable to update static routes."
+msgstr ""
+
+#: src/openstack/openstack-network/actions/SetMtuAction.ts
+msgid "Unable to update subnet."
 msgstr ""
 
 #: src/customer/team/EditTeamMemberDialog.tsx
@@ -9050,6 +9060,10 @@ msgstr ""
 #: src/booking/components/calendar/defaultOptions.ts
 #: src/form/CronField.tsx
 msgid "month"
+msgstr ""
+
+#: src/openstack/openstack-network/actions/EditAction.ts
+msgid "network"
 msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
