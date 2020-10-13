@@ -28,7 +28,7 @@ export const parseQuotasUsage = listToDict(
   (item) => item.usage,
 );
 
-export const PRIVATE_CIDR_PATTERN = new RegExp(
+export const SUBNET_PRIVATE_CIDR_PATTERN = new RegExp(
   // Class A
   '(^(10)(.([2]([0-5][0-5]|[01234][6-9])|[1][0-9][0-9]|[1-9][0-9]|[0-9])){2}.0/24$)' +
     // Class B
@@ -52,11 +52,11 @@ export const validateIpAddress = (value) => {
   }
 };
 
-export const validatePrivateSubnetCIDR = (value) => {
+export const validateSubnetPrivateCIDR = (value) => {
   if (!value) {
     return;
   }
-  if (!value.match(PRIVATE_CIDR_PATTERN)) {
+  if (!value.match(SUBNET_PRIVATE_CIDR_PATTERN)) {
     return translate('Enter private IPv4 CIDR.');
   }
 };
