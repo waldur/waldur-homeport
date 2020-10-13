@@ -109,10 +109,12 @@ const convertMBToGB = (mb: number): number =>
   parseFloat((mb / 1000).toFixed(2));
 
 const setMaxAndAverageUsages = (option, usages, chart) => {
-  let maxUsage = Math.max(...usages.map((usage) => usage[chart.field]));
+  // calculate max/average and convert to hours
+  let maxUsage = Math.max(...usages.map((usage) => usage[chart.field])) / 60;
   let averageUsage =
     usages.reduce((total, next) => total + next[chart.field], 0) /
-    usages.length;
+    usages.length /
+    60;
 
   if (chart.field === 'ram_usage') {
     maxUsage = convertMBToGB(maxUsage);
@@ -130,7 +132,7 @@ const setMaxAndAverageUsages = (option, usages, chart) => {
 const setUnitForRamUsage = (option, chart) => {
   if (chart.field === 'ram_usage') {
     option.yAxis[0].axisLabel.formatter = option.yAxis[1].axisLabel.formatter =
-      '{value} GB';
+      '{value} GB-hours';
   }
 };
 
@@ -146,7 +148,8 @@ const fillUsages = (option, periods, usages, chart) => {
         if (chart.field === 'ram_usage') {
           usageValue = convertMBToGB(usageValue);
         }
-        option.series[0].data.push(usageValue);
+        // convert usageValue to hourly consumption
+        option.series[0].data.push(usageValue / 60);
         break;
       }
       if (j === usages.length - 1) {
@@ -170,7 +173,8 @@ const fillUserUsages = (option, periods, userUsages, chart) => {
           if (chart.field === 'ram_usage') {
             usageValue = convertMBToGB(usageValue);
           }
-          option.series[i].data.push(usageValue);
+          // convert usageValue to hourly consumption
+          option.series[i].data.push(usageValue / 60);
           break;
         }
         if (k === userUsages.length - 1) {
