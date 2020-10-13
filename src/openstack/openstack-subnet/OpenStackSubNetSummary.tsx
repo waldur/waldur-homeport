@@ -53,9 +53,7 @@ const PureOpenStackSubNetSummary = (props: ResourceSummaryProps) => {
       />
       <Field
         label={translate('Enabled default gateway')}
-        value={
-          resource.enable_default_gateway ? translate('Yes') : translate('No')
-        }
+        value={resource.is_connected ? translate('Yes') : translate('No')}
       />
       <Field
         label={translate('IP version')}
