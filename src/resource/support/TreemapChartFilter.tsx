@@ -3,7 +3,7 @@ import { useState } from 'react';
 import * as Panel from 'react-bootstrap/lib/Panel';
 import { reduxForm, Field } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n/translate';
 
 import { QuotaSelector } from './QuotaSelector';
@@ -43,14 +43,9 @@ export const PureTreemapChartFilter = (props: TreemapChartFilterProps) => {
                 <div className="col-sm-9">
                   <Field
                     name="accounting_is_running"
-                    component={(fieldProps) => (
-                      <AwesomeCheckbox
-                        label={translate('Show with running accounting')}
-                        id="accounting-is-running"
-                        disabled={props.loading}
-                        {...fieldProps.input}
-                      />
-                    )}
+                    component={AwesomeCheckboxField}
+                    label={translate('Show with running accounting')}
+                    disabled={props.loading}
                   />
                 </div>
                 <div className="col-sm-3">

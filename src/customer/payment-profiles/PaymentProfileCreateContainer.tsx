@@ -82,7 +82,6 @@ const PaymentProfileCreate = (props) => {
           name="enabled"
           component={(prop) => (
             <AwesomeCheckbox
-              id="enable_after_creation"
               label={translate('Enable profile after creation')}
               {...prop.input}
             />

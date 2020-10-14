@@ -89,7 +89,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
         } else if (field.type === 'integer') {
           return <NumberField {...props} />;
         } else if (field.type === 'boolean') {
-          return <AwesomeCheckboxField id={key} hideLabel={true} {...props} />;
+          return <AwesomeCheckboxField hideLabel={true} {...props} />;
         }
       })}
     </ActionDialog>

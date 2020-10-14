@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Field } from 'redux-form';
+import { Field, WrappedFieldProps } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import {
@@ -15,14 +15,15 @@ interface Props {
   component: Component;
 }
 
-const RowWrapper = (props) => (
+const RowWrapper = (
+  props: WrappedFieldProps & { offeringComponent: Component },
+) => (
   <ComponentRow
     offeringComponent={props.offeringComponent}
     className={props.meta.error ? 'form-group has-error' : 'form-group'}
   >
     {props.offeringComponent.is_boolean ? (
       <AwesomeCheckbox
-        id="boolean-component"
         label=""
         value={parseInt(props.input.value) === 1}
         onChange={(value) => props.input.onChange(value ? 1 : 0)}

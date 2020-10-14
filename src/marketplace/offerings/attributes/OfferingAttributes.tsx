@@ -36,7 +36,6 @@ export const OfferingAttributes: React.FC<OfferingAttributesProps> = (
                     name={`attributes.${attribute.key}`}
                     component={(prop) => (
                       <AwesomeCheckbox
-                        id={`attributes.${attribute.key}`}
                         label={attribute.title}
                         {...prop.input}
                       />
