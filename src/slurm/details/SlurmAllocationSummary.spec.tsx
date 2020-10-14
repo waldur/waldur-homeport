@@ -17,7 +17,7 @@ describe('SlurmAllocationSummary', () => {
     const wrapper = renderSummary({ resource });
     expect(getField(wrapper, 'CPU')).toBe('2.00h of 40.00h');
     expect(getField(wrapper, 'GPU')).toBe('0.00h of ∞');
-    expect(getField(wrapper, 'RAM')).toBe('10 GB of 20 GB');
+    expect(getField(wrapper, 'RAM')).toBe('170.6 MB-h of 20 GB-h');
   });
 
   it('renders login details', () => {

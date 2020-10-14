@@ -19,7 +19,7 @@ export const renderSummary = (props) => {
 };
 
 export const getField = (wrapper: ReactWrapper, label: string): string =>
-  wrapper.find({ label }).find('dd').text();
+  wrapper.find({ label }).find('dd').text().trim();
 
 export const resource = {
   resource_type: 'SLURM.Allocation',
