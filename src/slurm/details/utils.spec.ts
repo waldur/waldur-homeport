@@ -1,5 +1,3 @@
-import { palette } from '@waldur/slurm/details/constants';
-
 import { getEChartOptions } from './utils';
 
 const chartSpec = require('./fixtures/chart-spec.json');
@@ -13,9 +11,8 @@ jest.mock('moment-timezone', () => {
 
 describe('SLURM allocation usage chart formatter', () => {
   it('parses data and returns eChart option correctly', () => {
-    expect(getEChartOptions(chartSpec, usages, userUsages)).toEqual({
-      ...eChartOption,
-      color: palette,
-    });
+    expect(getEChartOptions(chartSpec, usages, userUsages)).toEqual(
+      eChartOption,
+    );
   });
 });
