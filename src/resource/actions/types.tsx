@@ -86,6 +86,7 @@ export interface ResourceAction<Resource = BaseResource> {
   execute?(resource): void;
   getInitialValues?(): any;
   submitForm?(dispatch: Dispatch<any>, formData: any);
+  formId?: string;
 }
 
 export interface ActionContext<Resource = BaseResource> {

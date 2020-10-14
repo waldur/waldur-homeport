@@ -8811,6 +8811,10 @@ msgstr ""
 msgid "You don't have permission to send this invitation."
 msgstr ""
 
+#: src/modal/ModalRoot.tsx
+msgid "You have entered data in form. When dialog is closed form data would be lost."
+msgstr ""
+
 #: src/error/InvalidQuotaPage.tsx
 msgid "You have exceeded maximum number of quotas."
 msgstr ""
