@@ -1,4 +1,18 @@
 {
+  "color": [
+    "#003366",
+    "#006699",
+    "#23c6c8",
+    "#eee8d5",
+    "#1c84c6",
+    "green",
+    "red",
+    "orange",
+    "yellow",
+    "purple",
+    "aqua",
+    "pink"
+  ],
   "tooltip": {
     "trigger": "axis",
     "axisPointer": {
@@ -32,8 +46,8 @@
       "type": "value",
       "name": "Usage",
       "min": 0,
-      "max": 48,
-      "interval": 23,
+      "max": 1,
+      "interval": 0.38,
       "axisLabel": {
         "formatter": "{value} h"
       }
@@ -42,8 +56,8 @@
       "type": "value",
       "name": "",
       "min": 0,
-      "max": 48,
-      "interval": 23,
+      "max": 1,
+      "interval": 0.38,
       "axisLabel": {
         "formatter": "{value} h"
       }
@@ -54,25 +68,25 @@
       "name": "Usage",
       "type": "line",
       "yAxisIndex": 1,
-      "data": [0, 10, 20, 40, 20, 0]
+      "data": [0, 0.17, 0.33, 0.67, 0.33, 0]
     },
     {
       "name": "douglas",
       "type": "bar",
-      "yAxisIndex": 0,
-      "data": [0, 0, 15, 0, 10, 0]
+      "data": [0, 0, 0.25, 0, 0.17, 0],
+      "yAxisIndex": 0
     },
     {
       "name": "steven",
       "type": "bar",
-      "yAxisIndex": 0,
-      "data": [0, 10, 0, 40, 10, 0]
+      "data": [0, 0.17, 0, 0.67, 0.17, 0],
+      "yAxisIndex": 0
     },
     {
       "name": "corey",
       "type": "bar",
-      "yAxisIndex": 0,
-      "data": [0, 0, 5, 0, 0, 0]
+      "data": [0, 0, 0.08, 0, 0, 0],
+      "yAxisIndex": 0
     }
   ]
 }
