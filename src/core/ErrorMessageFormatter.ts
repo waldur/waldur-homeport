@@ -8,7 +8,7 @@ const formatErrorObject = (error) =>
 
 export const format = (response) => {
   /*
-  Status code -1 denotes network error.
+  Empty response or status code -1 denotes network error.
   Usually it is caused by one of the following reasons:
 
   - client is not connected to the internet;
@@ -21,15 +21,15 @@ export const format = (response) => {
   See also: https://fetch.spec.whatwg.org/#concept-filtered-response
   */
 
-  if (!response.hasOwnProperty('status')) {
-    return response;
-  }
-
-  if (response.status === -1) {
+  if (!response || response.status === -1) {
     return translate(
       'Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.',
       { apiEndpoint: ENV.apiEndpoint },
     );
+  }
+
+  if (!response.hasOwnProperty('status')) {
+    return response;
   }
 
   let message = `${response.status}: ${response.statusText}.`;
