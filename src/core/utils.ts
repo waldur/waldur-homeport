@@ -3,7 +3,12 @@ import { ENV } from '@waldur/core/services';
 
 export const FILESIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
-export const formatFilesize = (input, fromUnit = 'MB', toUnit = 'B') => {
+export const formatFilesize = (
+  input,
+  fromUnit = 'MB',
+  toUnit = 'B',
+  customSuffix = '',
+) => {
   if (isNaN(parseFloat(input)) || !isFinite(input)) {
     return '?';
   }
@@ -30,7 +35,9 @@ export const formatFilesize = (input, fromUnit = 'MB', toUnit = 'B') => {
     startUnit++;
   }
 
-  return Math.floor(input * 10) / 10 + ' ' + FILESIZE_UNITS[startUnit];
+  return (
+    Math.floor(input * 10) / 10 + ' ' + FILESIZE_UNITS[startUnit] + customSuffix
+  );
 };
 
 const SNAKE_CASE_REGEXP = /[A-Z]/g;

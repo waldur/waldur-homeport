@@ -25,8 +25,8 @@ const formatGPU = (props) => {
 };
 
 const formatRAM = (props) => {
-  const usage = formatFilesize(props.resource.ram_usage);
-  const limit = formatFilesize(props.resource.ram_limit);
+  const usage = formatFilesize(props.resource.ram_usage / 60, 'MB', 'B', '-h');
+  const limit = formatFilesize(props.resource.ram_limit, 'MB', 'B', '-h');
   return formatQuota(props.translate, usage, limit);
 };
 
@@ -36,9 +36,21 @@ const PureSlurmAllocationSummary = (props: ResourceSummaryProps) => {
     <>
       <div className="resource-details-table">
         <PureResourceSummaryBase {...props} />
-        <Field label={translate('CPU')} value={formatCPU(props)} />
-        <Field label={translate('GPU')} value={formatGPU(props)} />
-        <Field label={translate('RAM')} value={formatRAM(props)} />
+        <Field
+          label={translate('CPU')}
+          value={formatCPU(props)}
+          helpText={translate('Total CPU hours consumed this month')}
+        />
+        <Field
+          label={translate('GPU')}
+          value={formatGPU(props)}
+          helpText={translate('Total GPU hours consumed this month')}
+        />
+        <Field
+          label={translate('RAM')}
+          value={formatRAM(props)}
+          helpText={translate('Total RAM GB-hours consumed this month')}
+        />
       </div>
       <SlurmAllocationSummaryExtraDetails resource={props.resource} />
     </>
