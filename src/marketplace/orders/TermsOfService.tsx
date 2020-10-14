@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 
 import { showTermsOfServiceDialog } from './store/actions';
@@ -16,19 +16,13 @@ interface PureTermsOfServiceProps {
 const PureTermsOfService = (props: PureTermsOfServiceProps) => (
   <Field
     name={props.name}
-    component={(prop) => (
-      <AwesomeCheckbox
-        id={props.name}
-        label={
-          <a onClick={props.onClick}>
-            <i className="fa fa-external-link" />{' '}
-            {translate('Terms of Service')}
-          </a>
-        }
-        {...prop.input}
-        marginRight={false}
-      />
-    )}
+    component={AwesomeCheckboxField}
+    label={
+      <a onClick={props.onClick}>
+        <i className="fa fa-external-link" /> {translate('Terms of Service')}
+      </a>
+    }
+    marginRight={false}
   />
 );
 

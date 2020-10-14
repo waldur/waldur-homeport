@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 import { Field, formValueSelector } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { required } from '@waldur/core/validators';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 
@@ -42,13 +42,8 @@ const RequiredField = withTranslation(
   (props: TranslateProps & { option: string }) => (
     <Field
       name={`${props.option}.required`}
-      component={(fieldProps) => (
-        <AwesomeCheckbox
-          id={`${props.option}.required`}
-          label={props.translate('Required')}
-          {...fieldProps.input}
-        />
-      )}
+      component={AwesomeCheckboxField}
+      label={props.translate('Required')}
     />
   ),
 );

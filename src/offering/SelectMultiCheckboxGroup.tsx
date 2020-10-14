@@ -6,7 +6,6 @@ export const SelectMultiCheckboxGroup = (props) => (
   <>
     {props.options.map((value, index) => (
       <AwesomeCheckbox
-        id={value}
         label={value}
         key={index}
         value={

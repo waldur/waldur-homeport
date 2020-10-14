@@ -74,6 +74,7 @@
     "lodash.kebabcase": "^4.1.1",
     "lodash.mapvalues": "^4.6.0",
     "lodash.some": "^4.6.0",
+    "lodash.uniqueid": "^4.0.1",
     "moment": "~2.24.0",
     "moment-timezone": "^0.5.25",
     "monaco-editor-webpack-plugin": "^1.9.0",

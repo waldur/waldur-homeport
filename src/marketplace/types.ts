@@ -30,6 +30,7 @@ export interface OfferingComponent extends BaseComponent {
   max_value?: number;
   min_value?: number;
   factor?: number;
+  is_boolean?: boolean;
 }
 
 export interface Plan {
