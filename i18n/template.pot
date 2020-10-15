@@ -3940,6 +3940,10 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
+#: src/marketplace/offerings/customers/SupportOfferingsFilter.tsx
+msgid "No service providers"
+msgstr ""
+
 #: src/invitations/InvitationConfirmDialog.tsx
 msgid "No, continue using current email"
 msgstr ""
@@ -6281,6 +6285,10 @@ msgstr ""
 msgid "Select service provider"
 msgstr ""
 
+#: src/marketplace/offerings/customers/SupportOfferingsFilter.tsx
+msgid "Select service provider..."
+msgstr ""
+
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Select size..."
 msgstr ""
@@ -6363,6 +6371,8 @@ msgstr ""
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/details/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
+#: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/customers/SupportOfferingsFilter.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx

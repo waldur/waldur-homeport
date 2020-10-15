@@ -7,10 +7,12 @@ import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
+import { SUPPORT_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/customers/constants';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/customers/OfferingsListExpandableRow';
 import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
 import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { Offering } from '../types';
@@ -55,6 +57,13 @@ export const TableComponent = (props) => {
     },
   ];
 
+  if (isReporting) {
+    columns.splice(1, 0, {
+      title: translate('Service provider'),
+      render: ({ row }) => renderFieldOrDash(row.customer_name),
+    });
+  }
+
   if (!props.actionsDisabled) {
     columns.push({
       title: translate('Actions'),
@@ -88,12 +97,15 @@ const mapPropsToFilter = (props) => {
     billable: true,
     shared: true,
   };
-  if (props.customer) {
+  if (props.customer && !props.isReporting) {
     filter.customer_uuid = props.customer.uuid;
   }
   if (props.filter) {
     if (props.filter.state) {
       filter.state = props.filter.state.map((option) => option.value);
+    }
+    if (props.filter.organization) {
+      filter.customer_uuid = props.filter.organization.uuid;
     }
   }
   return filter;
@@ -124,7 +136,9 @@ const mapStateToProps = (state, ownProps) => ({
   actionsDisabled: !isOwnerOrStaff(state) || ownProps.isReporting,
   showOfferingCreateButton:
     showOfferingCreateButton(state) && !ownProps.isReporting,
-  filter: getFormValues('OfferingsFilter')(state),
+  filter: getFormValues(
+    ownProps.isReporting ? SUPPORT_OFFERINGS_FILTER_FORM_ID : 'OfferingsFilter',
+  )(state),
 });
 
 const enhance = compose(
