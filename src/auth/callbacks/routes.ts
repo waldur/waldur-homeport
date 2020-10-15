@@ -4,12 +4,23 @@ import { AuthLoginCompleted } from './AuthLoginCompleted';
 import { AuthLoginFailed } from './AuthLoginFailed';
 import { AuthLogoutCompleted } from './AuthLogoutCompleted';
 import { AuthLogoutFailed } from './AuthLogoutFailed';
+import { OauthLoginCompleted } from './OauthLoginCompleted';
 
 export const states: StateDeclaration[] = [
   {
     name: 'home.login_completed',
     url: '/login_completed/:token/:method/',
     component: AuthLoginCompleted,
+    data: {
+      anonymous: true,
+      bodyClass: 'old',
+    },
+  },
+
+  {
+    name: 'home.oauth_login_completed',
+    url: '/oauth_login_completed/',
+    component: OauthLoginCompleted,
     data: {
       anonymous: true,
       bodyClass: 'old',

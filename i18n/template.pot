@@ -3309,6 +3309,7 @@ msgid "Log out"
 msgstr ""
 
 #: src/auth/callbacks/AuthLoginCompleted.tsx
+#: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Logging user in"
 msgstr ""
 
