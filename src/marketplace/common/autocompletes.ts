@@ -12,12 +12,14 @@ export const organizationAutocomplete = async (
   query: string,
   prevOptions,
   { page },
+  isServiceProvider?: boolean,
 ) => {
   const params = {
     name: query,
     page: page,
     page_size: ENV.pageSize,
     has_resources: true,
+    is_service_provider: isServiceProvider,
     field: ['name', 'uuid'],
     o: 'name',
   };
