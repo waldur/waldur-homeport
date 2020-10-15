@@ -8,7 +8,7 @@ export const ProjectRolesList = ({ roleName, row }) => {
     (item) => item.role === roleName,
   );
   if (filteredProjects.length === 0) {
-    return <>{translate('No projects are assigned to this role.')}</>;
+    return <>{translate('No projects are assigned to this user.')}</>;
   }
   return (
     <>
