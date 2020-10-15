@@ -1,38 +1,61 @@
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { isDirty } from 'redux-form';
 
+import { translate } from '@waldur/i18n';
 import { angular2react } from '@waldur/shims/angular2react';
 
 import { closeModalDialog } from './actions';
+
 import './ModalRoot.css';
 
-const ModalRoot = ({ modalComponent, modalProps, onHide }) => (
-  <Modal
-    show={modalComponent ? true : false}
-    onHide={onHide}
-    bsSize={modalProps?.size}
-  >
-    {modalComponent
-      ? typeof modalComponent === 'string'
-        ? React.createElement(angular2react(modalComponent, ['resolve']), {
-            ...modalProps,
-            close: onHide,
-          })
-        : React.createElement(modalComponent, { ...modalProps, close: onHide })
-      : null}
-  </Modal>
-);
+interface TState {
+  modalComponent: React.ComponentType | string;
+  modalProps: any;
+}
 
-export default connect<
-  {
-    modalComponent: React.ComponentType;
-    modalProps: any;
-  },
-  {
-    onHide(): void;
-  }
->(
-  (state: any) => state.modal,
-  (dispatch) => ({ onHide: () => dispatch(closeModalDialog()) }),
-)(ModalRoot);
+export default () => {
+  const { modalComponent, modalProps } = useSelector<
+    {
+      modal: TState;
+    },
+    TState
+  >((state) => state.modal);
+  const dispatch = useDispatch();
+  const isDirtyForm = useSelector((state) =>
+    modalProps.formId ? isDirty(modalProps.formId)(state) : false,
+  );
+  const onHide = () => {
+    if (
+      isDirtyForm &&
+      !confirm(
+        translate(
+          'You have entered data in form. When dialog is closed form data would be lost.',
+        ),
+      )
+    ) {
+      return;
+    }
+    dispatch(closeModalDialog());
+  };
+  return (
+    <Modal
+      show={modalComponent ? true : false}
+      onHide={onHide}
+      bsSize={modalProps?.size}
+    >
+      {modalComponent
+        ? typeof modalComponent === 'string'
+          ? React.createElement(angular2react(modalComponent, ['resolve']), {
+              ...modalProps,
+              close: onHide,
+            })
+          : React.createElement(modalComponent, {
+              ...modalProps,
+              close: onHide,
+            })
+        : null}
+    </Modal>
+  );
+};

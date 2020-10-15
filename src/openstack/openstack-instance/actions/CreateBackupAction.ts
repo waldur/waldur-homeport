@@ -6,7 +6,10 @@ import {
   createLatinNameField,
   createDescriptionField,
 } from '@waldur/resource/actions/base';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import {
+  ResourceActionDialog,
+  RESOURCE_ACTION_FORM,
+} from '@waldur/resource/actions/ResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 
@@ -34,6 +37,7 @@ export default function createAction({ resource }): ResourceAction {
       },
     ],
     component: ResourceActionDialog,
+    formId: RESOURCE_ACTION_FORM,
     useResolve: true,
     getInitialValues: () => ({
       name: resource.name + '-snapshot',

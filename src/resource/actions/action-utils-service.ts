@@ -161,6 +161,7 @@ const openActionDialog = (controller, resource, name, action) => {
         controller,
         resource,
       },
+      formId: action.formId,
     });
   } else {
     const dialogScope = $rootScope.$new();
