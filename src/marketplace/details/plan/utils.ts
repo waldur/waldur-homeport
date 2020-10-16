@@ -22,7 +22,9 @@ export const combinePrices = (
     const offeringComponents = filterOfferingComponents(offering);
     const components: Component[] = offeringComponents.map((component) => {
       let amount = 0;
-      if (component.billing_type === 'usage') {
+      if (component.is_boolean && limits && limits[component.type]) {
+        amount = limits[component.type];
+      } else if (component.billing_type === 'usage') {
         amount = usages[component.type] || 0;
       } else if (limits && limits[component.type]) {
         amount = limits[component.type] || 0;
