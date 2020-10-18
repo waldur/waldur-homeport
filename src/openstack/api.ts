@@ -109,6 +109,9 @@ export const updateSubnet = (id, data) =>
 export const createSubnet = (id, data) =>
   post(`/openstack-networks/${id}/create_subnet/`, data);
 
+export const setNetworkMtu = (id, mtu) =>
+  post(`/openstack-networks/${id}/set_mtu/`, { mtu });
+
 export const updateInstance = (id, data) =>
   put(`/openstacktenant-instances/${id}/`, data);
 

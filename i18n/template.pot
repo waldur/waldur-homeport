@@ -3359,7 +3359,7 @@ msgid "MOAB allocation"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-network/actions/SetMtuAction.ts
+#: src/openstack/openstack-network/actions/SetMtuAction.tsx
 msgid "MTU"
 msgstr ""
 
@@ -3639,6 +3639,14 @@ msgstr ""
 msgid "Mount point"
 msgstr ""
 
+#: src/core/validators.ts
+msgid "Must be at least {min}"
+msgstr ""
+
+#: src/core/validators.ts
+msgid "Must be at most {max}"
+msgstr ""
+
 #: src/configs/base-config.ts
 msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
@@ -3825,6 +3833,10 @@ msgstr ""
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 msgid "Network"
+msgstr ""
+
+#: src/openstack/openstack-network/actions/SetMtuAction.tsx
+msgid "Network MTU has been updated."
 msgstr ""
 
 #: src/vmware/breadcrumbs.ts
@@ -6427,7 +6439,7 @@ msgstr ""
 msgid "Services"
 msgstr ""
 
-#: src/openstack/openstack-network/actions/SetMtuAction.ts
+#: src/openstack/openstack-network/actions/SetMtuAction.tsx
 msgid "Set MTU"
 msgstr ""
 
@@ -6798,10 +6810,6 @@ msgstr ""
 
 #: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
 msgid "Subnet has been created."
-msgstr ""
-
-#: src/openstack/openstack-network/actions/SetMtuAction.ts
-msgid "Subnet has been updated."
 msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
@@ -8014,6 +8022,10 @@ msgstr ""
 msgid "Unable to update horizontal pod autoscaler."
 msgstr ""
 
+#: src/openstack/openstack-network/actions/SetMtuAction.tsx
+msgid "Unable to update network MTU."
+msgstr ""
+
 #: src/user/hooks/utils.ts
 msgid "Unable to update notification."
 msgstr ""
@@ -8044,10 +8056,6 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Unable to update static routes."
-msgstr ""
-
-#: src/openstack/openstack-network/actions/SetMtuAction.ts
-msgid "Unable to update subnet."
 msgstr ""
 
 #: src/customer/team/EditTeamMemberDialog.tsx

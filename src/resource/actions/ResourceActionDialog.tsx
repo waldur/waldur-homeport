@@ -87,7 +87,9 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
         } else if (field.type === 'crontab') {
           return <CronField {...props} />;
         } else if (field.type === 'integer') {
-          return <NumberField {...props} />;
+          return (
+            <NumberField {...props} min={field.minValue} max={field.maxValue} />
+          );
         } else if (field.type === 'boolean') {
           return <AwesomeCheckboxField hideLabel={true} {...props} />;
         }

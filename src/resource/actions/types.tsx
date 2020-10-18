@@ -40,8 +40,8 @@ interface TextField<Resource> extends BaseField<Resource> {
 
 interface IntegerField<Resource> extends BaseField<Resource> {
   type: 'integer';
-  min_value?: number;
-  max_value?: number;
+  minValue?: number;
+  maxValue?: number;
 }
 
 interface ComponentField<Resource> extends Omit<BaseField<Resource>, 'type'> {

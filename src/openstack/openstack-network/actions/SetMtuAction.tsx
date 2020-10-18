@@ -1,6 +1,6 @@
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { updateSubnet } from '@waldur/openstack/api';
+import { setNetworkMtu } from '@waldur/openstack/api';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
@@ -17,6 +17,8 @@ export default function createAction({ resource }): ResourceAction {
         name: 'mtu',
         type: 'integer',
         label: translate('MTU'),
+        minValue: 68,
+        maxValue: 65536,
       },
     ],
     getInitialValues: () => ({
@@ -26,11 +28,13 @@ export default function createAction({ resource }): ResourceAction {
     useResolve: true,
     submitForm: async (dispatch, formData) => {
       try {
-        await updateSubnet(resource.uuid, formData);
-        dispatch(showSuccess(translate('Subnet has been updated.')));
+        await setNetworkMtu(resource.uuid, formData.mtu);
+        dispatch(showSuccess(translate('Network MTU has been updated.')));
         dispatch(closeModalDialog());
       } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to update subnet.')));
+        dispatch(
+          showErrorResponse(e, translate('Unable to update network MTU.')),
+        );
       }
     },
   };
