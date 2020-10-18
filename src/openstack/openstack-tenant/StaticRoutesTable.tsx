@@ -8,7 +8,7 @@ import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
-import { validateIpAddress, validateSubnetPrivateCIDR } from '../utils';
+import { validateIpAddress, validatePrivateCIDR } from '../utils';
 
 export interface StaticRoute {
   destination: string;
@@ -17,7 +17,7 @@ export interface StaticRoute {
 
 const ValidatedInputField = renderValidationWrapper(InputField);
 
-const destinationValidator = [required, validateSubnetPrivateCIDR];
+const destinationValidator = [required, validatePrivateCIDR];
 
 const nexthopValidator = [required, validateIpAddress];
 
