@@ -12,6 +12,7 @@ import openstackVolumeModule from './openstack-volume/module';
 import './provider';
 import './events';
 import './marketplace';
+import './router-breadcrumbs';
 
 export default (module) => {
   openstackTenantModule();
