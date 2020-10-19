@@ -3348,10 +3348,13 @@ msgid "Longhorn is a lightweight, reliable, and powerful distributed block stora
 msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
-#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 msgid "MAC address"
+msgstr ""
+
+#: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
+msgid "MAC address (optional)"
 msgstr ""
 
 #: src/slurm/register-header.ts

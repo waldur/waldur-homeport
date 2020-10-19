@@ -82,7 +82,7 @@ const PairsTable: React.FC<WrappedFieldArrayProps> = ({ fields }) =>
         <thead>
           <tr>
             <th>{translate('Internal network mask (CIDR)')}</th>
-            <th>{translate('MAC address')}</th>
+            <th>{translate('MAC address (optional)')}</th>
             <th>{translate('Actions')}</th>
           </tr>
         </thead>
