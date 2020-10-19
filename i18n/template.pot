@@ -2722,6 +2722,10 @@ msgstr ""
 msgid "IP address"
 msgstr ""
 
+#: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+msgid "IP address is already used by router."
+msgstr ""
+
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupRulesList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx

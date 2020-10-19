@@ -65,7 +65,11 @@ export const SetRoutesDialog = enhance(
             </>
           }
         >
-          <FieldArray name="routes" component={StaticRoutesTable} />
+          <FieldArray
+            name="routes"
+            component={StaticRoutesTable}
+            fixedIps={resolve.router.fixed_ips}
+          />
         </ModalDialog>
       </form>
     );

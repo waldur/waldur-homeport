@@ -15,13 +15,17 @@ export interface StaticRoute {
   nexthop: string;
 }
 
+const validateFixedIPs = (fixedIps) => (value) => {
+  if (fixedIps.includes(value)) {
+    return translate('IP address is already used by router.');
+  }
+};
+
 const ValidatedInputField = renderValidationWrapper(InputField);
 
 const destinationValidator = [required, validatePrivateCIDR];
 
-const nexthopValidator = [required, validateIpAddress];
-
-const StaticRouteRow = ({ route, onRemove }) => (
+const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
   <tr>
     <td>
       <Field
@@ -51,40 +55,52 @@ const StaticRouteAddButton = ({ onClick }) => (
   </Button>
 );
 
-export const StaticRoutesTable: React.FC<WrappedFieldArrayProps> = ({
-  fields,
-}) => (
-  <>
-    {fields.length > 0 ? (
-      <>
-        <Table
-          responsive={true}
-          bordered={true}
-          striped={true}
-          className="m-t-md"
-        >
-          <thead>
-            <tr>
-              <th>{translate('Destination (CIDR)')}</th>
-              <th>{translate('Next hop (IP)')}</th>
-              <th>{translate('Actions')}</th>
-            </tr>
-          </thead>
+export const StaticRoutesTable: React.FC<
+  WrappedFieldArrayProps & { fixedIps?: string[] }
+> = ({ fields, fixedIps }) => {
+  const nexthopValidator = React.useMemo(
+    () => [required, validateIpAddress, validateFixedIPs(fixedIps)],
+    [fixedIps],
+  );
 
-          <tbody>
-            {fields.map((route, index) => (
-              <StaticRouteRow
-                key={route}
-                route={route}
-                onRemove={() => fields.remove(index)}
-              />
-            ))}
-          </tbody>
-        </Table>
+  return (
+    <>
+      {fields.length > 0 ? (
+        <>
+          <Table
+            responsive={true}
+            bordered={true}
+            striped={true}
+            className="m-t-md"
+          >
+            <thead>
+              <tr>
+                <th>{translate('Destination (CIDR)')}</th>
+                <th>{translate('Next hop (IP)')}</th>
+                <th>{translate('Actions')}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {fields.map((route, index) => (
+                <StaticRouteRow
+                  key={route}
+                  route={route}
+                  nexthopValidator={nexthopValidator}
+                  onRemove={() => fields.remove(index)}
+                />
+              ))}
+            </tbody>
+          </Table>
+          <StaticRouteAddButton onClick={() => fields.push({})} />
+        </>
+      ) : (
         <StaticRouteAddButton onClick={() => fields.push({})} />
-      </>
-    ) : (
-      <StaticRouteAddButton onClick={() => fields.push({})} />
-    )}
-  </>
-);
+      )}
+    </>
+  );
+};
+
+StaticRoutesTable.defaultProps = {
+  fixedIps: [],
+};
