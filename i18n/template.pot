@@ -5961,6 +5961,7 @@ msgid "Roles"
 msgstr ""
 
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/openstack/router-breadcrumbs.ts
 msgid "Routers"
 msgstr ""
 
