@@ -24,7 +24,7 @@ export default () => {
   >((state) => state.modal);
   const dispatch = useDispatch();
   const isDirtyForm = useSelector((state) =>
-    modalProps.formId ? isDirty(modalProps.formId)(state) : false,
+    modalProps?.formId ? isDirty(modalProps.formId)(state) : false,
   );
   const onHide = () => {
     if (
