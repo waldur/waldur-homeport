@@ -31,6 +31,7 @@ export interface OfferingComponent extends BaseComponent {
   min_value?: number;
   factor?: number;
   is_boolean?: boolean;
+  default_limit?: number;
 }
 
 export interface Plan {

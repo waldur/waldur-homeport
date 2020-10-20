@@ -2105,6 +2105,10 @@ msgstr ""
 msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentBooleanDefaultLimitField.tsx
+msgid "Enable by default"
+msgstr ""
+
 #: src/freeipa/EnableProfile.tsx
 msgid "Enable profile"
 msgstr ""

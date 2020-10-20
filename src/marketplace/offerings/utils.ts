@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { Offering } from '@waldur/marketplace/types';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 
 export function getBreadcrumbs(): BreadcrumbItem[] {
@@ -29,3 +30,12 @@ export const articleCodeValidator = (value: string) => {
     return translate('Code should consist of latin symbols or numbers.');
   }
 };
+
+export const getDefaultLimits = (offering: Offering): Record<string, number> =>
+  offering.components.reduce(
+    (acc, component) => ({
+      ...acc,
+      [component.name]: component.default_limit,
+    }),
+    {},
+  );

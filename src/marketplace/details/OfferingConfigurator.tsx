@@ -12,6 +12,8 @@ import { Offering, Plan } from '@waldur/marketplace/types';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project, OuterState } from '@waldur/workspace/types';
 
+import { getDefaultLimits } from '../offerings/utils';
+
 import { FORM_ID } from './constants';
 import { OfferingFormData } from './types';
 
@@ -37,7 +39,12 @@ const storeConnector = connect<
   {},
   { offering: Offering; limits: string[] },
   OuterState
->((state) => ({ project: getProject(state) }));
+>((state, ownProps) => ({
+  project: getProject(state),
+  initialValues: {
+    limits: { ...getDefaultLimits(ownProps.offering), ...ownProps.limits },
+  },
+}));
 
 export const validate = (_, props) => {
   const errors: any = {};
