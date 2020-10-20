@@ -3,6 +3,7 @@ import { formValues } from 'redux-form';
 
 import { BillingType } from '@waldur/marketplace/types';
 
+import { ComponentBooleanDefaultLimitField } from './ComponentBooleanDefaultLimitField';
 import { ComponentBooleanLimitField } from './ComponentBooleanLimitField';
 import { ComponentDisableQuotaField } from './ComponentDisableQuotaField';
 import { ComponentLimitAmountField } from './ComponentLimitAmountField';
@@ -36,7 +37,12 @@ export const ComponentLimit = enhance((props: Values) => {
   }
 
   if (props.isBoolean) {
-    return <ComponentBooleanLimitField />;
+    return (
+      <>
+        <ComponentBooleanLimitField />
+        <ComponentBooleanDefaultLimitField />
+      </>
+    );
   }
 
   return (

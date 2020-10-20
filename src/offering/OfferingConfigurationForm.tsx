@@ -23,6 +23,7 @@ import {
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
+import { getDefaultLimits } from '@waldur/marketplace/offerings/utils';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { SelectMultiCheckboxGroup } from '@waldur/offering/SelectMultiCheckboxGroup';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -52,6 +53,7 @@ export class PureOfferingConfigurationForm extends React.Component<
       initialData.plan = this.props.offering.plans[0];
     }
     initialData.project = this.props.project;
+    initialData.limits = getDefaultLimits(this.props.offering);
     this.props.initialize(initialData);
   }
 
