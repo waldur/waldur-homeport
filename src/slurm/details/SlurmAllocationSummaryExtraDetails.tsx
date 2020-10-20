@@ -36,23 +36,34 @@ const formatSubmitDetails = (props) => {
   );
 };
 
-const formatLoginDetails = (props) =>
-  !props.resource.username ? (
+const formatLoginDetails = (props) => {
+  const value = `ssh ${props.resource.username}@${props.resource.gateway}`;
+  return !props.resource.username ? (
     <Link
       state="profile.freeipa"
       label={translate('FreeIPA account needs to be set up.')}
     />
   ) : (
-    `ssh ${props.resource.username}@${props.resource.gateway}`
+    <div className="pre-container">
+      <pre>
+        <div className="m-b-sm m-t-sm copyable-content">{value}</div>
+        <span className="m-l-xs copy-to-clipboard-container">
+          <CopyToClipboardButton value={value} />
+        </span>
+      </pre>
+    </div>
   );
+};
 
 export const SlurmAllocationSummaryExtraDetails = (props) => (
   <div className="slurm-allocation-summary-extra-details-container">
-    <Field
-      label={translate('Login details')}
-      value={formatLoginDetails(props)}
-    />
-    <div className="submit-with-container">
+    <div className={props.resource.username ? 'field-container' : ''}>
+      <Field
+        label={translate('Login with')}
+        value={formatLoginDetails(props)}
+      />
+    </div>
+    <div className="field-container">
       <Field
         label={translate('Submit with')}
         value={formatSubmitDetails(props)}

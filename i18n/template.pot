@@ -3323,12 +3323,12 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
-msgid "Login details"
-msgstr ""
-
 #: src/auth/callbacks/AuthLoginFailed.tsx
 msgid "Login failed"
+msgstr ""
+
+#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
+msgid "Login with"
 msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
