@@ -84,6 +84,7 @@ module.exports = {
     moment: true,
     jest: true,
     describe: true,
+    xdescribe: true,
     expect: true,
     it: true,
     xit: true,

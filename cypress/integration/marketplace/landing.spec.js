@@ -1,4 +1,4 @@
-describe('Marketplace landing view', () => {
+xdescribe('Marketplace landing view', () => {
   beforeEach(() => {
     cy.server()
       .mockUser()
