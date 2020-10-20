@@ -22,14 +22,14 @@ describe('SlurmAllocationSummary', () => {
 
   it('renders login details', () => {
     const wrapper = renderSummary({ resource });
-    expect(getField(wrapper, 'Login details')).toBe('ssh admin@example.com');
+    expect(getField(wrapper, 'Login with')).toBe('ssh admin@example.com');
   });
 
   it('renders placeholder if login details are absent', () => {
     const wrapper = renderSummary({
       resource: { ...resource, username: undefined },
     });
-    expect(getField(wrapper, 'Login details')).toBe(
+    expect(getField(wrapper, 'Login with')).toBe(
       'FreeIPA account needs to be set up.',
     );
   });
