@@ -35,6 +35,7 @@ export default function createAction({ resource }): ResourceAction {
       },
     ],
     getInitialValues: () => ({
+      enable_default_gateway: true,
       cidr: '192.168.42.0/24',
     }),
     component: ResourceActionDialog,
