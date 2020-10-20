@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import Qs from 'qs';
 
-import { ngInjector } from '@waldur/core/services';
+import { ENV, ngInjector } from '@waldur/core/services';
 import { closeModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
@@ -27,7 +27,12 @@ Axios.interceptors.response.use(
     return response;
   },
   function invalidTokenInterceptor(error) {
-    if (error.response && error.response.status === 401 && ngInjector) {
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      ngInjector &&
+      error.config.url !== ENV.apiEndpoint + 'api-auth/password/'
+    ) {
       const $state = ngInjector.get('$state');
       const $stateParams = ngInjector.get('$stateParams');
 
@@ -39,10 +44,8 @@ Axios.interceptors.response.use(
             }
           : undefined,
       );
-    } else {
-      // See also: https://github.com/axios/axios/issues/960
-      return Promise.reject(error.response);
     }
+    return Promise.reject(error.response);
   },
 );
 
