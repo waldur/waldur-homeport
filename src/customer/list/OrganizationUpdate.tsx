@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import { EMAIL_LABEL } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { ORGANIZATION_UPDATE_FORM_ID } from '@waldur/customer/list/constants';
 import { SelectCountryField } from '@waldur/customer/list/SelectCountryField';
@@ -74,7 +73,7 @@ const PureOrganizationUpdate = (props) => (
 
       <NumberField name="sponsor_number" label={translate('Sponsor number')} />
 
-      <EmailField name="email" label={translate(EMAIL_LABEL)} />
+      <EmailField name="email" label={translate('E-mail')} />
 
       <StringField name="phone_number" label={translate('Phone number')} />
 

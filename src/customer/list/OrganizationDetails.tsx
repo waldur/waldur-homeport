@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { EMAIL_LABEL } from '@waldur/core/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
@@ -18,7 +17,7 @@ export const OrganizationDetails = (props: OrganizationDetailsProps) => (
       label={translate('Abbreviation')}
       value={props.customer.abbreviation}
     />
-    <Field label={translate(EMAIL_LABEL)} value={props.customer.email} />
+    <Field label={translate('E-mail')} value={props.customer.email} />
     <Field
       label={translate('Agreement number')}
       value={props.customer.agreement_number}
