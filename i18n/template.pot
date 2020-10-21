@@ -7494,7 +7494,6 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
-#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx

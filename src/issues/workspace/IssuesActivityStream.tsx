@@ -5,6 +5,7 @@ import useAsync from 'react-use/lib/useAsync';
 
 import { getList } from '@waldur/core/api';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { FormattedJira } from '@waldur/core/FormattedJira';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -12,12 +13,11 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { UserPopover } from '@waldur/user/UserPopover';
 
 interface Comment {
-  user: {
-    email: string;
-    username: string;
-  };
-  key: string;
-  text: string;
+  issue_key: string;
+  author_name: string;
+  author_email: string;
+  author_uuid: string;
+  description: string;
   created: string;
 }
 
@@ -27,11 +27,11 @@ export const IssuesActivityStream = () => {
     [],
   );
   const dispatch = useDispatch();
-  const callback = (user) =>
+  const callback = (user_uuid) =>
     dispatch(
       openModalDialog(UserPopover, {
         resolve: {
-          user,
+          user_uuid,
         },
       }),
     );
@@ -71,23 +71,32 @@ export const IssuesActivityStream = () => {
             {value.map((item, index) => (
               <div className="vertical-timeline-block" key={index}>
                 <div className="vertical-timeline-icon">
-                  <Gravatar
-                    email={item.user.email}
-                    className="b-r-xl img-sm"
-                    size={32}
-                  />
+                  {item.author_email ? (
+                    <Gravatar
+                      email={item.author_email}
+                      className="b-r-xl img-sm"
+                      size={32}
+                    />
+                  ) : null}
                 </div>
                 <div className="vertical-timeline-content">
                   <p className="m-n">
-                    <a onClick={() => callback(item.user)}>
-                      {item.user.username}
-                    </a>
+                    {item.author_uuid ? (
+                      <a onClick={() => callback(item.author_uuid)}>
+                        {item.author_name}
+                      </a>
+                    ) : (
+                      item.author_name
+                    )}{' '}
                     <span>{translate('commented on')}</span>{' '}
-                    <Link state="issue.details" params={{ key: item.key }}>
-                      {item.key}
+                    <Link
+                      state="issue.details"
+                      params={{ key: item.issue_key }}
+                    >
+                      {item.issue_key}
                     </Link>{' '}
-                    {item.text}
                   </p>
+                  <FormattedJira text={item.description} />
                   <span className="vertical-date small text-muted">
                     {formatDateTime(item.created)}
                   </span>
