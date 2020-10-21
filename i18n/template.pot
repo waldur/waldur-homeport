@@ -44,6 +44,8 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/customers/CustomersList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
@@ -71,6 +73,11 @@ msgstr ""
 #: src/rancher/cluster/RancherClusterSummary.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 msgid "Access"
+msgstr ""
+
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+msgid "Access subnets"
 msgstr ""
 
 #: src/digitalocean/DigitalOceanForm.tsx
@@ -115,6 +122,7 @@ msgid "Accounting records"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
 msgid "Accounting start date"
 msgstr ""
 
@@ -391,6 +399,7 @@ msgstr ""
 
 #: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Address"
 msgstr ""
@@ -427,6 +436,8 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -810,11 +821,13 @@ msgstr ""
 
 #: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
 msgid "Bank account"
 msgstr ""
 
 #: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
 msgid "Bank name"
 msgstr ""
 
@@ -1308,6 +1321,11 @@ msgstr ""
 msgid "Connection details"
 msgstr ""
 
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
+msgid "Contact details"
+msgstr ""
+
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Contact e-mail"
@@ -1371,6 +1389,8 @@ msgstr ""
 
 #: src/customer/create/CountryGroup.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr ""
 
@@ -1492,6 +1512,7 @@ msgstr ""
 
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationDetails.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
@@ -1719,6 +1740,10 @@ msgstr ""
 msgid "Default cluster label"
 msgstr ""
 
+#: src/customer/list/OrganizationDetails.tsx
+msgid "Default tax percent"
+msgstr ""
+
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Default value"
 msgstr ""
@@ -1918,6 +1943,10 @@ msgstr ""
 msgid "Display name"
 msgstr ""
 
+#: src/customer/list/SelectOrganizationDivisionField.tsx
+msgid "Division"
+msgstr ""
+
 #: src/marketplace/offerings/create/ComponentDisableQuotaField.tsx
 msgid "Do not allow user to specify quotas when offering is provisioned."
 msgstr ""
@@ -1954,6 +1983,7 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
+#: src/customer/list/OrganizationDetails.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Domain"
 msgstr ""
@@ -2008,6 +2038,7 @@ msgstr ""
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr ""
 
+#: src/core/constants.ts
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/actions/EmailGroup.tsx
@@ -2645,6 +2676,10 @@ msgstr ""
 msgid "Home organization domain name"
 msgstr ""
 
+#: src/customer/list/OrganizationUpdate.tsx
+msgid "Homepage"
+msgstr ""
+
 #: src/user/hooks/HookRemoveButton.tsx
 msgid "Hook has been removed."
 msgstr ""
@@ -3093,6 +3128,10 @@ msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.ts
 msgid "Is official"
+msgstr ""
+
+#: src/customer/list/OrganizationDetails.tsx
+msgid "Is service provider"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
@@ -3697,6 +3736,8 @@ msgstr ""
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
@@ -3904,6 +3945,7 @@ msgstr ""
 msgid "Next trigger at"
 msgstr ""
 
+#: src/customer/list/OrganizationDetails.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -3924,6 +3966,14 @@ msgstr ""
 
 #: src/marketplace/resources/list/CategoryFilter.tsx
 msgid "No categories"
+msgstr ""
+
+#: src/customer/list/SelectCountryField.tsx
+msgid "No countries"
+msgstr ""
+
+#: src/customer/list/SelectOrganizationDivisionField.tsx
+msgid "No divisions"
 msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
@@ -4390,6 +4440,7 @@ msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetailsDialog.tsx
 msgid "Organization details"
 msgstr ""
 
@@ -4400,6 +4451,10 @@ msgstr ""
 
 #: src/customer/create/CustomerCreateDialog.tsx
 msgid "Organization has been created."
+msgstr ""
+
+#: src/customer/list/store/effects.ts
+msgid "Organization has been updated successfully."
 msgstr ""
 
 #: src/invoices/list/AgreementInfo.tsx
@@ -4435,6 +4490,14 @@ msgstr ""
 msgid "Organization type"
 msgstr ""
 
+#: src/customer/list/OrganizationUpdateContainer.tsx
+msgid "Organization update"
+msgstr ""
+
+#: src/customer/list/OrganizationUpdateContainer.tsx
+msgid "Organization update ({name})"
+msgstr ""
+
 #: src/customer/popover/CustomerPopover.tsx
 msgid "Organization users list"
 msgstr ""
@@ -4463,6 +4526,7 @@ msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationUpdateContainer.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/list/SupportCustomersContainer.tsx
 #: src/issues/workspace/issue-navigation-service.js
@@ -4704,6 +4768,8 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
@@ -4925,6 +4991,10 @@ msgstr ""
 
 #: src/marketplace-checklist/PieChart.tsx
 msgid "Positive"
+msgstr ""
+
+#: src/customer/list/OrganizationDetails.tsx
+msgid "Postal"
 msgstr ""
 
 #: src/customer/create/WizardFormSecondPage.tsx
@@ -5466,6 +5536,8 @@ msgid "Registered at:"
 msgstr ""
 
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/popover/CustomerSummary.tsx
 msgid "Registration code"
 msgstr ""
@@ -5548,7 +5620,7 @@ msgstr ""
 msgid "Remove from comparison"
 msgstr ""
 
-#: src/customer/details/CustomerEditDetails.tsx
+#: src/customer/details/CustomerLogoUpdate.tsx
 msgid "Remove logo"
 msgstr ""
 
@@ -6238,11 +6310,16 @@ msgid "Select connected subnet"
 msgstr ""
 
 #: src/customer/create/CountryGroup.tsx
+#: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr ""
 
 #: src/offering/OfferingConfigurationForm.tsx
 msgid "Select dates"
+msgstr ""
+
+#: src/customer/list/SelectOrganizationDivisionField.tsx
+msgid "Select division..."
 msgstr ""
 
 #: src/offering/OfferingConfigurationForm.tsx
@@ -6637,6 +6714,10 @@ msgstr ""
 msgid "Snapshots count"
 msgstr ""
 
+#: src/customer/list/OrganizationUpdate.tsx
+msgid "Sponsor number"
+msgstr ""
+
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 #: src/user/support/utils.ts
@@ -6863,6 +6944,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
+#: src/customer/list/OrganizationUpdateContainer.tsx
 #: src/invoices/growth/GrowthContainer.tsx
 #: src/issues/workspace/IssuesDashboard.tsx
 #: src/issues/workspace/SupportWorkspace.tsx
@@ -6955,6 +7037,10 @@ msgstr ""
 
 #: src/invitations/actions/TaxNumberGroup.tsx
 msgid "Tax number"
+msgstr ""
+
+#: src/customer/list/OrganizationUpdate.tsx
+msgid "Tax percent"
 msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
@@ -7408,6 +7494,7 @@ msgstr ""
 msgid "Try again"
 msgstr ""
 
+#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -7438,6 +7525,8 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "UUID"
@@ -7712,6 +7801,10 @@ msgstr ""
 
 #: src/issues/CustomerSupportRating.tsx
 msgid "Unable to load customer support satisfaction overall rating."
+msgstr ""
+
+#: src/customer/list/OrganizationUpdateContainer.tsx
+msgid "Unable to load customer."
 msgstr ""
 
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
@@ -8048,6 +8141,10 @@ msgstr ""
 msgid "Unable to update offering."
 msgstr ""
 
+#: src/customer/list/store/effects.ts
+msgid "Unable to update organization."
+msgstr ""
+
 #: src/customer/payment-profiles/store/effects.ts
 msgid "Unable to update payment profile."
 msgstr ""
@@ -8149,6 +8246,7 @@ msgid "Unpaid"
 msgstr ""
 
 #: src/customer/details/CustomerEditDetailsForm.tsx
+#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
@@ -8491,6 +8589,8 @@ msgid "VAT"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationUpdate.tsx
 msgid "VAT code"
 msgstr ""
 
@@ -8766,6 +8866,7 @@ msgstr ""
 msgid "YAML has been updated."
 msgstr ""
 
+#: src/customer/list/OrganizationDetails.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx

@@ -18,19 +18,19 @@ const CountryRenderer = (option) => (
   </>
 );
 
-const Option = (props) => (
+export const Option = (props) => (
   <components.Option {...props}>
     <CountryRenderer {...props.data} />
   </components.Option>
 );
 
-const SingleValue = (props) => (
+export const SingleValue = (props) => (
   <components.SingleValue {...props}>
     <CountryRenderer {...props.data} />
   </components.SingleValue>
 );
 
-const loadCountries = async () => {
+export const loadCountries = async () => {
   const response = await Axios.request({
     method: 'OPTIONS',
     url: ENV.apiEndpoint + 'api/customers/',
