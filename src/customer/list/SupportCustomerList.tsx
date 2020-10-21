@@ -1,11 +1,14 @@
 import * as React from 'react';
 import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { OrganizationDetailsButton } from '@waldur/customer/list/OrganizationDetailsButton';
 import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
 import { translate } from '@waldur/i18n';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
+import { isStaff } from '@waldur/workspace/selectors';
 
 import { OrganizationLink } from './OrganizationLink';
 
@@ -33,7 +36,7 @@ export const TableComponent = (props) => {
       render: ({ row }) => {
         return (
           <ButtonGroup>
-            <OrganizationEditButton customer={row} />
+            {props.isStaff && <OrganizationEditButton customer={row} />}
             <OrganizationDetailsButton customer={row} />
           </ButtonGroup>
         );
@@ -58,6 +61,10 @@ const TableOptions = {
   queryField: 'query',
 };
 
-const enhance = connectTable(TableOptions);
+const mapStateToProps = (state) => ({
+  isStaff: isStaff(state),
+});
+
+const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 export const SupportCustomerList = enhance(TableComponent);

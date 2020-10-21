@@ -7,7 +7,7 @@ import { isStaff, isOwner } from '@waldur/workspace/selectors';
 
 import { canManageCustomer } from '../create/selectors';
 
-import { CustomerEditDetails } from './CustomerEditDetails';
+import { CustomerLogoUpdate } from './CustomerLogoUpdate';
 import * as actions from './store/actions';
 
 const mapStateToProps = (state) => ({
@@ -29,4 +29,4 @@ const enhance = compose(
   withTranslation,
 );
 
-export const CustomerEditDetailsContainer = enhance(CustomerEditDetails);
+export const CustomerLogoUpdateContainer = enhance(CustomerLogoUpdate);

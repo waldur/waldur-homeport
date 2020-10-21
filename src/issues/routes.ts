@@ -1,5 +1,6 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { LazyCustomerList } from '@waldur/customer/list/LazyCustomerList';
+import { OrganizationUpdateContainer } from '@waldur/customer/list/OrganizationUpdateContainer';
 import { SupportCustomersContainer } from '@waldur/customer/list/SupportCustomersContainer';
 import { SupportFeedback } from '@waldur/issues/feedback/SupportFeedback';
 import { SupportIssues } from '@waldur/issues/SupportIssues';
@@ -105,6 +106,19 @@ export const states: StateDeclaration[] = [
     component: SupportCustomersContainer,
     data: {
       feature: 'support.organizations',
+    },
+    resolve: {
+      permission: checkPermission,
+    },
+  },
+
+  {
+    name: 'support.customer-update',
+    url: 'customer-update/:customer_uuid/',
+    component: OrganizationUpdateContainer,
+    data: {
+      feature: 'support.organizations',
+      pageClass: 'white-bg',
     },
     resolve: {
       permission: checkPermission,

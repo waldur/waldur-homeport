@@ -1,3 +1,3 @@
-export interface CustomerDetailsEditFormData {
+export interface CustomerLogoUpdateFormData {
   image: HTMLImageElement;
 }

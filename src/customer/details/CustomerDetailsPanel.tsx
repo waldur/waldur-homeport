@@ -9,7 +9,7 @@ import { getConfig, getNativeNameVisible } from '@waldur/store/config';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerAccordion } from './CustomerAccordion';
-import { CustomerEditDetailsContainer } from './CustomerEditDetailsContainer';
+import { CustomerLogoUpdateContainer } from './CustomerLogoUpdateContainer';
 
 interface CustomerDetailsProps {
   customer: Partial<Customer>;
@@ -111,7 +111,7 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
         />
       </dl>
 
-      <CustomerEditDetailsContainer customer={customer} />
+      <CustomerLogoUpdateContainer customer={customer} />
     </CustomerAccordion>
   );
 };

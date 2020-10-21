@@ -1,5 +1,10 @@
-import { get } from '@waldur/core/api';
-import { getCategories } from '@waldur/marketplace/common/api';
+import { get, sendForm } from '@waldur/core/api';
+import { ENV } from '@waldur/core/services';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
+import {
+  getCategories,
+  getOrganizationDivisionList,
+} from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 import { ExpandableRow } from '@waldur/resource/ResourceExpandableRow';
 
@@ -41,3 +46,31 @@ export async function loadCustomerResources(props): Promise<ExpandableRow[]> {
   const counters = await getCustomerCounters(props.uuid);
   return parseCategories(categories, counters);
 }
+
+export const updateOrganization = (formData) => {
+  const reqData = {
+    ...formData,
+    division: formData.division?.url,
+    country: formData.country?.value,
+  };
+  return sendForm(
+    'PATCH',
+    `${ENV.apiEndpoint}api/customers/${formData.uuid}/`,
+    reqData,
+  );
+};
+
+export const organizationDivisionAutocomplete = async (
+  query: string,
+  prevOptions,
+  { page },
+) => {
+  const params = {
+    name: query,
+    page: page,
+    page_size: ENV.pageSize,
+    o: 'name',
+  };
+  const response = await getOrganizationDivisionList(params);
+  return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
+};

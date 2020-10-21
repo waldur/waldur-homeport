@@ -3,20 +3,20 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
 
 import { CustomerEditDetailsForm } from '@waldur/customer/details/CustomerEditDetailsForm';
-import { CustomerDetailsEditFormData } from '@waldur/customer/details/types';
+import { CustomerLogoUpdateFormData } from '@waldur/customer/details/types';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import './CustomerEditDetails.scss';
+import './CustomerLogoUpdate.scss';
 
 const DEFAULT_LOGO = require('./logo-placeholder.png');
 
-interface CustomerEditDetailsProps {
+interface CustomerLogoUpdateProps {
   customer: Customer;
   uploadLogo?(): void;
   removeLogo?(): void;
-  formData: CustomerDetailsEditFormData;
+  formData: CustomerLogoUpdateFormData;
   canEdit: boolean;
 }
 
@@ -41,7 +41,7 @@ const renderLogo = (props) => {
   }
 };
 
-export const CustomerEditDetails: React.FC<CustomerEditDetailsProps> = (
+export const CustomerLogoUpdate: React.FC<CustomerLogoUpdateProps> = (
   props,
 ) => {
   const { canEdit } = props;

@@ -4,6 +4,7 @@ import authSaga from '@waldur/auth/store/effects';
 import bookingSaga from '@waldur/booking/store/effects';
 import downloadLinkSaga from '@waldur/core/DownloadLink/effects';
 import customerDetailsSaga from '@waldur/customer/details/store/effects';
+import organizationsSaga from '@waldur/customer/list/store/effects';
 import paymentProfilesSaga from '@waldur/customer/payment-profiles/store/effects';
 import paymentsSaga from '@waldur/customer/payments/store/effects';
 import invoicesSaga from '@waldur/invoices/store/effects';
@@ -39,6 +40,7 @@ export default [
   resourceSummarySaga,
   marketplaceSaga,
   paymentProfilesSaga,
+  organizationsSaga,
   invoicesSaga,
   paymentsSaga,
   titleEffects,

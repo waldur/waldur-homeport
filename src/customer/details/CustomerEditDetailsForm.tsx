@@ -6,10 +6,10 @@ import { required } from '@waldur/core/validators';
 import { FileUploadField, SubmitButton } from '@waldur/form';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
 
-import { CustomerDetailsEditFormData } from './types';
+import { CustomerLogoUpdateFormData } from './types';
 
 interface OwnProps {
-  onSubmit?(formData: CustomerDetailsEditFormData): void;
+  onSubmit?(formData: CustomerLogoUpdateFormData): void;
   hasChosenImage: boolean;
 }
 
@@ -41,7 +41,7 @@ const PureCustomerEditDetailsForm = (props: ConnectedProps) => (
 );
 
 const enhance = compose(
-  reduxForm<CustomerDetailsEditFormData, OwnProps>({ form: 'customerLogo' }),
+  reduxForm<CustomerLogoUpdateFormData, OwnProps>({ form: 'customerLogo' }),
   withTranslation,
 );
 

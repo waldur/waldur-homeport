@@ -149,6 +149,9 @@ export const getCustomerList = (params?: {}) =>
 export const getProjectList = (params?: {}) =>
   getSelectData<Project>('/projects/', params);
 
+export const getOrganizationDivisionList = (params?: {}) =>
+  getSelectData('/divisions/', params);
+
 export const getCustomer = (id: string) => getById<Customer>('/customers/', id);
 
 export const updateOfferingState = (offeringUuid, action, reason) =>
