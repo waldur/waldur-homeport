@@ -55,6 +55,8 @@ const createIssue = async (
     summary: formData.summary,
     description,
     is_reported_manually: true,
+    project: formData.project?.url,
+    resource: formData.resource?.url,
   };
   if (issue.customer) {
     payload.customer = issue.customer.url;
