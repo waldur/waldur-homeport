@@ -29,7 +29,6 @@ export interface Customer {
   registration_code?: string;
   domain?: string;
   homepage?: string;
-  type?: string;
   vat_code?: string;
   image?: string;
   is_service_provider?: boolean;
