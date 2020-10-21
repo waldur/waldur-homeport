@@ -4432,8 +4432,6 @@ msgid "Organization roles"
 msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
-#: src/customer/popover/CustomerSummary.tsx
 msgid "Organization type"
 msgstr ""
 
