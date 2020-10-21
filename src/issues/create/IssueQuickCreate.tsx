@@ -79,9 +79,8 @@ const projectRequiredSelector = createSelector(
   },
 );
 
-const ProjectGroup = ({ disabled }) => {
+export const ProjectGroup = ({ disabled, customer }) => {
   const dispatch = useDispatch();
-  const customer = useSelector(customerSelector);
   const projectRequired = useSelector(projectRequiredSelector);
 
   const loadOptions = React.useCallback(
@@ -124,9 +123,8 @@ const ProjectGroup = ({ disabled }) => {
   );
 };
 
-const ResourceGroup = ({ disabled }) => {
+export const ResourceGroup = ({ disabled, project }) => {
   const dispatch = useDispatch();
-  const project = useSelector(projectSelector);
   const loadData = React.useCallback(
     (name) => refreshResources(name, project),
     [project],
@@ -208,8 +206,14 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
         <SummaryGroup layout="vertical" disabled={submitting} />
         <DescriptionGroup layout="vertical" disabled={submitting} />
         <OrganizationGroup disabled={submitting} />
-        <ProjectGroup disabled={submitting} />
-        <ResourceGroup disabled={submitting} />
+        <ProjectGroup
+          disabled={submitting}
+          customer={useSelector(customerSelector)}
+        />
+        <ResourceGroup
+          disabled={submitting}
+          project={useSelector(projectSelector)}
+        />
         <div className="text-right">
           <SubmitButton submitting={submitting} block={false}>
             {translate('Create request')}

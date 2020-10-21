@@ -32,6 +32,8 @@ export interface IssueFormData {
   template: any;
   files: FileList;
   issueTemplate?: any;
+  project?: Project;
+  resource?: any;
 }
 
 export interface IssueRequestPayload {

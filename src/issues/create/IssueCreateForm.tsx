@@ -5,16 +5,21 @@ import ModalBody from 'react-bootstrap/lib/ModalBody';
 import ModalFooter from 'react-bootstrap/lib/ModalFooter';
 import ModalHeader from 'react-bootstrap/lib/ModalHeader';
 import ModalTitle from 'react-bootstrap/lib/ModalTitle';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { AsyncState } from 'react-use/lib/useAsync';
 import { compose } from 'redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, formValueSelector, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
+import {
+  ProjectGroup,
+  ResourceGroup,
+} from '@waldur/issues/create/IssueQuickCreate';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { IssueTemplate, IssueTemplateAttachment } from '../api';
 
@@ -36,6 +41,9 @@ interface OwnProps {
   attachments: IssueTemplateAttachment[];
   initialValues: any;
 }
+
+export const issueCreateProjectSelector = (state) =>
+  formValueSelector(ISSUE_CREATION_FORM_ID)(state, 'project');
 
 const mapStateToProps = (_, ownProps: OwnProps) => {
   if (ownProps.issue.description) {
@@ -126,6 +134,14 @@ export const IssueCreateForm = enhance(
                 disabled={submitting}
               />
             </FormGroup>
+            <ProjectGroup
+              disabled={submitting}
+              customer={useSelector(getCustomer)}
+            />
+            <ResourceGroup
+              disabled={submitting}
+              project={useSelector(issueCreateProjectSelector)}
+            />
             {attachments.length > 0 && (
               <FormGroup>
                 <ControlLabel>{translate('Template files')}</ControlLabel>
