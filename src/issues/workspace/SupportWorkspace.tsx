@@ -4,7 +4,10 @@ import { useDispatch } from 'react-redux';
 
 import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
+import {
+  setBreadcrumbs,
+  useBreadcrumbsFn,
+} from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
 import { setCurrentWorkspace } from '@waldur/workspace/actions';
@@ -19,6 +22,23 @@ function getBreadcrumbs(): BreadcrumbItem[] {
       action: () => ngInjector.get('IssueNavigationService').gotoDashboard(),
     },
   ];
+}
+
+export function useReportingBreadcrumbs() {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(
+      setBreadcrumbs([
+        ...getBreadcrumbs(),
+        {
+          label: translate('Reporting'),
+        },
+      ]),
+    );
+    return () => {
+      dispatch(setBreadcrumbs(getBreadcrumbs()));
+    };
+  });
 }
 
 export const SupportWorkspace = () => {

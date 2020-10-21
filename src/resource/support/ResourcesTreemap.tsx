@@ -7,6 +7,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { defaultCurrency } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
+import { useReportingBreadcrumbs } from '@waldur/issues/workspace/SupportWorkspace';
 import { useTitle } from '@waldur/navigation/title';
 
 import { loadData, parseProjects } from './api';
@@ -95,6 +96,7 @@ interface StateProps {
 
 const TreemapContainer = (props: StateProps & TranslateProps) => {
   useTitle(translate('Resources usage'));
+  useReportingBreadcrumbs();
 
   const quotas = getQuotas();
   const keys = quotas.map((q) => q.key);

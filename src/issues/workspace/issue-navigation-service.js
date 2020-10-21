@@ -41,7 +41,7 @@ const getReportItems = () => [
   },
   {
     label: translate('Organizations'),
-    icon: 'fa-university',
+    icon: 'fa-building',
     state: 'support.customers',
     feature: 'support.organizations',
   },
@@ -75,10 +75,6 @@ const getReportItems = () => [
         icon: 'fa-files-o',
         state: 'marketplace-support-order-items',
       },
-      /*{
-        label: translate('Organizations'),
-        icon: 'fa-building',
-      },*/
       {
         label: translate('Resources usage'),
         icon: 'fa-map',

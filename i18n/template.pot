@@ -5678,7 +5678,7 @@ msgstr ""
 msgid "Reporter"
 msgstr ""
 
-#: src/invoices/growth/GrowthContainer.tsx
+#: src/issues/workspace/SupportWorkspace.tsx
 #: src/issues/workspace/issue-navigation-service.js
 msgid "Reporting"
 msgstr ""
@@ -6945,7 +6945,6 @@ msgid "Support"
 msgstr ""
 
 #: src/customer/list/OrganizationUpdateContainer.tsx
-#: src/invoices/growth/GrowthContainer.tsx
 #: src/issues/workspace/IssuesDashboard.tsx
 #: src/issues/workspace/SupportWorkspace.tsx
 msgid "Support dashboard"
