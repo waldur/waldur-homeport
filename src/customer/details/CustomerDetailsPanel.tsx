@@ -34,8 +34,6 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
       <dl className="dl-horizontal resource-details-table">
         <Field label={translate('Name')} value={customer.display_name} />
 
-        <Field label={translate('Organization type')} value={customer.type} />
-
         {nativeNameVisible && (
           <Field
             label={translate('Native name')}

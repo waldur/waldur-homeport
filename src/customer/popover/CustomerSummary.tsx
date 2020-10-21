@@ -21,7 +21,6 @@ const Row = ({ label, value }) =>
 export const CustomerSummary = ({ customer }: CustomerSummaryProps) => (
   <Table responsive bordered>
     <tbody>
-      <Row label={translate('Organization type')} value={customer.type} />
       <Row
         label={translate('Registration code')}
         value={customer.registration_code}
