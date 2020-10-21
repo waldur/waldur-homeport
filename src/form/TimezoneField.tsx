@@ -1,6 +1,6 @@
 import * as moment from 'moment-timezone';
 import * as React from 'react';
-import Select from 'react-select';
+import WindowedSelect from 'react-windowed-select';
 
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 
@@ -12,7 +12,7 @@ function getTimezoneMetadata(timezone: string, timestamp: number) {
   return {
     offset,
     value: timezone,
-    label: `${timezone} (UTC${offsetAsString})`,
+    label: `${timezone.replace(/_/g, ' ')} (UTC${offsetAsString})`,
   };
 }
 
@@ -33,7 +33,7 @@ export const TimezoneField = (props) => {
   const { input, ...rest } = props;
   const options = React.useMemo(getTimezoneItems, []);
   return (
-    <Select
+    <WindowedSelect
       {...reactSelectMenuPortaling()}
       options={options}
       value={options.find((option) => option.value === input.value)}

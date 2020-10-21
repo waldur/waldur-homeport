@@ -100,6 +100,7 @@
     "react-use": "^14.1.1",
     "react-window": "^1.8.5",
     "react-window-paginated": "^1.0.0",
+    "react-windowed-select": "^2.0.3",
     "reapop": "^2.1.0",
     "reapop-theme-bootstrap": "^1.0.2",
     "redux": "^4.0.1",
