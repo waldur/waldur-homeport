@@ -11490,7 +11490,7 @@ react-select-async-paginate@^0.4.0:
     react-is-mounted-hook "^1.0.3"
     sleep-promise "^8.0.1"
 
-react-select@^3.1.0:
+react-select@3.1.0, react-select@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/react-select/-/react-select-3.1.0.tgz#ab098720b2e9fe275047c993f0d0caf5ded17c27"
   integrity sha512-wBFVblBH1iuCBprtpyGtd1dGMadsG36W5/t2Aj8OE6WbByDg5jIFyT7X5gT+l0qmT5TqWhxX+VsKJvCEl2uL9g==
@@ -11570,13 +11570,21 @@ react-window-paginated@^1.0.0:
     react "^16.5.2"
     react-dom "^16.5.2"
 
-react-window@^1.8.5:
+react-window@1.8.5, react-window@^1.8.5:
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.8.5.tgz#a56b39307e79979721021f5d06a67742ecca52d1"
   integrity sha512-HeTwlNa37AFa8MDZFZOKcNEkuF2YflA0hpGPiTT9vR7OawEt+GZbfM6wqkBahD3D3pUjIabQYzsnY/BSJbgq6Q==
   dependencies:
     "@babel/runtime" "^7.0.0"
     memoize-one ">=3.1.1 <6"
+
+react-windowed-select@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-windowed-select/-/react-windowed-select-2.0.3.tgz#f54c803813323c22ce6e3fc047d56e2cb7efeb40"
+  integrity sha512-mQ13X2gKBW6uqWCPN4bN2LNLpBe3QXCwfOPi0GdHjD4wk8zjKskh1rSklurG/sMslvCymnG0fLQjeTvofj30gw==
+  dependencies:
+    react-select "3.1.0"
+    react-window "1.8.5"
 
 react@^16.13.1, react@^16.5.2:
   version "16.13.1"
