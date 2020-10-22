@@ -1,4 +1,4 @@
-import { get, sendForm } from '@waldur/core/api';
+import { get, put } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
@@ -53,11 +53,7 @@ export const updateOrganization = (formData) => {
     division: formData.division?.url,
     country: formData.country?.value,
   };
-  return sendForm(
-    'PATCH',
-    `${ENV.apiEndpoint}api/customers/${formData.uuid}/`,
-    reqData,
-  );
+  return put(`/customers/${formData.uuid}/`, reqData);
 };
 
 export const organizationDivisionAutocomplete = async (
