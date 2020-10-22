@@ -68,7 +68,6 @@ const PureOrganizationUpdate = (props) => (
       <NumberField
         name="agreement_number"
         label={translate('Agreement number')}
-        required
       />
 
       <NumberField name="sponsor_number" label={translate('Sponsor number')} />
