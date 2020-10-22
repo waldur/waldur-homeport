@@ -49,7 +49,7 @@ const PureOrganizationUpdate = (props) => (
       <StringField
         name="abbreviation"
         label={translate('Abbreviation')}
-        maxLength={20}
+        maxLength={12}
       />
 
       <SelectOrganizationDivisionField />
@@ -72,13 +72,21 @@ const PureOrganizationUpdate = (props) => (
 
       <NumberField name="sponsor_number" label={translate('Sponsor number')} />
 
-      <EmailField name="email" label={translate('E-mail')} />
+      <EmailField name="email" label={translate('E-mail')} maxLength={75} />
 
-      <StringField name="phone_number" label={translate('Phone number')} />
+      <StringField
+        name="phone_number"
+        label={translate('Phone number')}
+        maxLength={255}
+      />
 
       <TextField name="access_subnets" label={translate('Access subnets')} />
 
-      <StringField name="homepage" label={translate('Homepage')} />
+      <StringField
+        name="homepage"
+        label={translate('Homepage')}
+        maxLength={255}
+      />
 
       <SelectCountryField />
 

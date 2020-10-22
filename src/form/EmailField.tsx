@@ -2,7 +2,11 @@ import * as React from 'react';
 
 import { FormField } from './types';
 
-export const EmailField = (props: FormField) => {
+interface EmailFieldProps extends FormField {
+  maxLength?: number;
+}
+
+export const EmailField = (props: EmailFieldProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
   return (
