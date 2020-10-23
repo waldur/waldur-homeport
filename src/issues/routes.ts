@@ -11,6 +11,7 @@ import { UserListView } from '@waldur/user/support/UserListView';
 import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
 import { IssueDetailsContainer } from './IssueDetailsContainer';
+import { NotificationsList } from './notifications/NotificationsList';
 import { checkPermission } from './utils';
 import { IssuesDashboard } from './workspace/IssuesDashboard';
 import { IssuesHelpdesk } from './workspace/IssuesHelpdesk';
@@ -156,6 +157,15 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support.sankey-diagram',
     },
+    resolve: {
+      permission: checkPermission,
+    },
+  },
+
+  {
+    name: 'support.notifications',
+    url: 'notifications/',
+    component: NotificationsList,
     resolve: {
       permission: checkPermission,
     },

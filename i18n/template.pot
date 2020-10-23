@@ -712,6 +712,10 @@ msgstr ""
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr ""
 
+#: src/issues/notifications/NotificationsList.tsx
+msgid "Author"
+msgstr ""
+
 #: src/customer/popover/CustomerPopover.tsx
 msgid "Authorized personnel"
 msgstr ""
@@ -1399,6 +1403,8 @@ msgstr ""
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
+#: src/issues/notifications/NotificationCreateButton.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
@@ -1471,6 +1477,7 @@ msgstr ""
 msgid "Create node"
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create notification"
 msgstr ""
@@ -1544,6 +1551,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/invitations/InvitationsList.tsx
+#: src/issues/notifications/NotificationsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
@@ -3579,6 +3587,8 @@ msgstr ""
 
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
 msgid "Message"
 msgstr ""
 
@@ -4089,6 +4099,8 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
+#: src/issues/notifications/NotificationsList.tsx
+#: src/issues/workspace/issue-navigation-service.js
 #: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
 msgid "Notifications"
@@ -4096,6 +4108,10 @@ msgstr ""
 
 #: src/user/hooks/HookListTablePlaceholder.tsx
 msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr ""
+
+#: src/issues/notifications/NotificationCreateDialog.tsx
+msgid "Notifications has been sent to {count} users."
 msgstr ""
 
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -4228,6 +4244,8 @@ msgstr ""
 msgid "Offering {offering_name} has been deleted."
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/customers/SupportOfferings.tsx
@@ -4483,6 +4501,8 @@ msgstr ""
 msgid "Organization removal"
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/user/support/UserList.tsx
 msgid "Organization roles"
 msgstr ""
@@ -4530,6 +4550,8 @@ msgstr ""
 #: src/customer/list/OrganizationUpdateContainer.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/list/SupportCustomersContainer.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/customers/CustomersList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
@@ -4561,6 +4583,7 @@ msgid "Owned organizations"
 msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx
+#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/user/list/CustomerPermissions.tsx
 msgid "Owner"
 msgstr ""
@@ -5214,6 +5237,8 @@ msgstr ""
 msgid "Project resources"
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
@@ -5248,6 +5273,8 @@ msgid "Project {project_name} has been deleted."
 msgstr ""
 
 #: src/customer/workspace/utils.ts
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Projects"
@@ -5454,6 +5481,10 @@ msgstr ""
 
 #: src/marketplace/landing/LandingPage.tsx
 msgid "Recent additions"
+msgstr ""
+
+#: src/issues/notifications/NotificationExpandableRow.tsx
+msgid "Recipients"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -6335,12 +6366,20 @@ msgstr ""
 msgid "Select offering..."
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
+msgid "Select offerings..."
+msgstr ""
+
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/user/SelectAffiliationDialog.tsx
 msgid "Select organization..."
+msgstr ""
+
+#: src/issues/notifications/NotificationCreateDialog.tsx
+msgid "Select organizations..."
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceRow.tsx
@@ -6362,6 +6401,10 @@ msgstr ""
 msgid "Select project..."
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
+msgid "Select projects..."
+msgstr ""
+
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Select provider..."
@@ -6371,6 +6414,7 @@ msgstr ""
 msgid "Select request type..."
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Select role"
 msgstr ""
@@ -6855,6 +6899,11 @@ msgstr ""
 msgid "Storage type"
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/issues/notifications/NotificationsList.tsx
+msgid "Subject"
+msgstr ""
+
 #: src/customer/payment-profiles/PaymentProfileCreateContainer.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
 #: src/digitalocean/DropletResizeDialog.tsx
@@ -6939,6 +6988,7 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/navigation/header/SupportLink.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -7617,6 +7667,10 @@ msgstr ""
 
 #: src/user/hooks/utils.ts
 msgid "Unable to create notification."
+msgstr ""
+
+#: src/issues/notifications/NotificationCreateDialog.tsx
+msgid "Unable to create notifications."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -9213,6 +9267,10 @@ msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx
 msgid "networks"
+msgstr ""
+
+#: src/issues/notifications/NotificationsList.tsx
+msgid "notifications"
 msgstr ""
 
 #: src/form/CronField.tsx

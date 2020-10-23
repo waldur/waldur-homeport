@@ -46,6 +46,11 @@ const getReportItems = () => [
     feature: 'support.organizations',
   },
   {
+    label: translate('Notifications'),
+    icon: 'fa-bell',
+    state: 'support.notifications',
+  },
+  {
     label: translate('Reporting'),
     icon: 'fa-files-o',
     children: [
