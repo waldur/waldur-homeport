@@ -14,7 +14,7 @@ const OptionsList = ({ label, list }) =>
 const RolesList = ({ label, list }) => (
   <OptionsList
     label={label}
-    list={list.map((role) =>
+    list={list?.map((role) =>
       ENV.roles[role] ? translate(ENV.roles[role]) : role,
     )}
   />
