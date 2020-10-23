@@ -10,7 +10,7 @@ interface TextFieldProps extends FormField {
 
 export const TextField = (props: TextFieldProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { input, label, rows, hideLabel, ...rest } = props;
+  const { input, label, rows, hideLabel, validate, ...rest } = props;
   return (
     <textarea
       {...props.input}

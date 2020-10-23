@@ -20,16 +20,17 @@ export const AsyncSelectField = (props) => {
   return (
     <Field
       name={name}
-      {...rest}
       component={Select}
       defaultOptions
       placeholder={placeholder}
       loadOptions={props.loadOptions}
       noOptionsMessage={() => translate('No results found')}
       getOptionLabel={(option) => option.name}
+      getOptionValue={(option) => option.uuid}
       additional={{
         page: 1,
       }}
+      {...rest}
     />
   );
 };
