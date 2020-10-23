@@ -36,4 +36,5 @@ export interface Customer {
   created?: string;
   division?: string;
   division_name?: string;
+  division_parent_name?: string;
 }

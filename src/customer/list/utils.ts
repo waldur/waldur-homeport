@@ -1,5 +1,7 @@
 import { Customer } from '@waldur/customer/types';
 
+const RIGHT_ARROW_STRING = '\u2192';
+
 export const getInitialValuesOfOrganizationUpdateForm = (
   customer: Customer,
 ) => ({
@@ -8,7 +10,7 @@ export const getInitialValuesOfOrganizationUpdateForm = (
   abbreviation: customer.abbreviation,
   division: {
     url: customer.division,
-    name: customer.division_name,
+    name: `${customer.division_parent_name} ${RIGHT_ARROW_STRING} ${customer.division_name}`,
   },
   contact_details: customer.contact_details,
   registration_code: customer.registration_code,
