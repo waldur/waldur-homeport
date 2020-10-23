@@ -38,7 +38,7 @@ export const TableComponent = (props) => {
 };
 
 const mapPropsToFilter = ({ customerListFilter, offeringUuid }) => ({
-  accounting_is_running: customerListFilter.accounting_is_running
+  accounting_is_running: customerListFilter?.accounting_is_running
     ? customerListFilter.accounting_is_running.value
     : undefined,
   offering_uuid: offeringUuid,
