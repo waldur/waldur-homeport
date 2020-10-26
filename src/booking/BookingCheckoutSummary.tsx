@@ -7,6 +7,7 @@ import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 const BookingExtraComponent = (props) => (
   <>
     {props.formData &&
+    props.formData.attributes &&
     Array.isArray(props.formData.attributes.schedules) &&
     props.formData.attributes.schedules.length ? (
       <tr>
