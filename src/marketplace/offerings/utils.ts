@@ -33,9 +33,12 @@ export const articleCodeValidator = (value: string) => {
 
 export const getDefaultLimits = (offering: Offering): Record<string, number> =>
   offering.components.reduce(
-    (acc, component) => ({
-      ...acc,
-      [component.name]: component.default_limit,
-    }),
+    (acc, component) =>
+      component.default_limit
+        ? {
+            ...acc,
+            [component.type]: component.default_limit,
+          }
+        : acc,
     {},
   );
