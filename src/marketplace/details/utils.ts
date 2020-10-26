@@ -25,8 +25,21 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
       );
     }
     if (props.formData.limits) {
-      if (props.formData.plan) {
-        request.limits = { ...props.formData.plan.quotas };
+      if (props.formData.plan && props.formData.plan.quotas) {
+        const planQuotas = props.formData.plan.quotas;
+        const invalidComponents = props.offering.components
+          .filter((c) => c.disable_quotas)
+          .map((c) => c.type);
+        // Filter out disabled plan quotas
+        request.limits = {
+          ...Object.keys(planQuotas).reduce(
+            (acc, key) =>
+              invalidComponents.includes(key)
+                ? acc
+                : { ...acc, [key]: planQuotas[key] },
+            {},
+          ),
+        };
       }
       request.limits = {
         ...request.limits,
