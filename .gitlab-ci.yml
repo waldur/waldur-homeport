@@ -30,7 +30,7 @@ Run linters:
   stage: test
   interruptible: true
   rules:
-    - if: '$SKIP_TESTS == "yes"'
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
     - if: '$CI_COMMIT_BRANCH == "master"'
@@ -44,7 +44,7 @@ Run jest tests:
   stage: test
   interruptible: true
   rules:
-    - if: '$SKIP_TESTS == "yes"'
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
     - if: '$CI_COMMIT_BRANCH == "master"'
@@ -62,7 +62,7 @@ Run E2E tests:
   stage: test
   interruptible: true
   rules:
-    - if: '$SKIP_TESTS == "yes"'
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
     - if: '$CI_COMMIT_BRANCH == "master"'
@@ -87,7 +87,7 @@ Build artifact:
   stage: build
   interruptible: true
   rules:
-    - if: '$SKIP_TESTS == "yes"'
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
     - if: '$CI_COMMIT_BRANCH == "master"'
