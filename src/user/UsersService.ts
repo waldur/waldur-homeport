@@ -4,6 +4,8 @@ import store from '@waldur/store/store';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
+export const getCurrentUser = () => getFirst('/users/', { current: '' });
+
 class UsersServiceClass {
   get(userId) {
     return $q.when(getById('/users/', userId));
@@ -17,7 +19,7 @@ class UsersServiceClass {
     if (getUser(store.getState())) {
       return $q.when(getUser(store.getState()));
     }
-    return $q.when(getFirst('/users/', { current: '' })).then((user) => {
+    return $q.when(getCurrentUser()).then((user) => {
       store.dispatch(setCurrentUser(user));
       return user;
     });
