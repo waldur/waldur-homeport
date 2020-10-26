@@ -47,7 +47,7 @@ export const PRIVATE_CIDR_PATTERN = new RegExp(
     '|(^(192).(168)(.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])).([0-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/(1[6-9]|2[0-9]|3[0-2])$)',
 );
 
-export const VOLUME_NAME_PATTERN = new RegExp('^[A-Za-z0-9]+$');
+export const VOLUME_NAME_PATTERN = new RegExp('^[A-Za-z0-9\\-]+$');
 
 const IP_ADDRESS_PATTERN = new RegExp(
   '^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
@@ -170,7 +170,9 @@ const volumeName = (value: string) => {
     );
   }
   if (!value.match(VOLUME_NAME_PATTERN)) {
-    return translate('Name should consist of latin symbols and numbers.');
+    return translate(
+      'Name should consist of latin symbols, numbers and dashes.',
+    );
   }
 };
 
