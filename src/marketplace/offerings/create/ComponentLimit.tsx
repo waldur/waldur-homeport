@@ -35,10 +35,6 @@ const enhance = formValues(() => ({
 }));
 
 export const ComponentLimit = enhance((props: Values) => {
-  if (props.billingType?.value !== 'usage') {
-    return null;
-  }
-
   if (props.isBoolean) {
     return (
       <>
