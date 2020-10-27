@@ -5,10 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { fetchOfferingCustomers } from '@waldur/marketplace/offerings/customers/api';
-import {
-  CUSTOMERS_LIST_FILTER,
-  CUSTOMERS_LIST_TABLE_ID,
-} from '@waldur/marketplace/offerings/customers/constants';
+import { CUSTOMERS_LIST_TABLE_ID } from '@waldur/marketplace/offerings/customers/constants';
 import { Table, connectTable } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
@@ -52,8 +49,8 @@ const TableOptions = {
   mapPropsToTableId: (props) => [props.offeringUuid],
 };
 
-const mapStateToProps = (state) => ({
-  customerListFilter: getFormValues(CUSTOMERS_LIST_FILTER)(state),
+const mapStateToProps = (state, ownProps) => ({
+  customerListFilter: getFormValues(ownProps.uniqueFormId)(state),
 });
 
 const enhance = compose<any>(

@@ -7,20 +7,20 @@ import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getOfferingCostChartData } from '@waldur/marketplace/offerings/customers/api';
-import { CUSTOMERS_LIST_FILTER } from '@waldur/marketplace/offerings/customers/constants';
 import { formatOfferingCostsChart } from '@waldur/marketplace/offerings/customers/utils';
 
-const growthFilterFormSelector = formValueSelector(CUSTOMERS_LIST_FILTER);
-
-const getAccountingRunningFieldValue = (state) =>
-  growthFilterFormSelector(state, 'accounting_is_running');
+const getAccountingRunningFieldValue = (state, formId) =>
+  formValueSelector(formId)(state, 'accounting_is_running');
 
 interface OfferingCostChartProps {
   offeringUuid: string;
+  uniqueFormId: string;
 }
 
 export const OfferingCostsChart = (props: OfferingCostChartProps) => {
-  const accountRunningState = useSelector(getAccountingRunningFieldValue);
+  const accountRunningState = useSelector((state) =>
+    getAccountingRunningFieldValue(state, props.uniqueFormId),
+  );
   const { loading, error, value: option } = useAsync(
     () =>
       getOfferingCostChartData(
