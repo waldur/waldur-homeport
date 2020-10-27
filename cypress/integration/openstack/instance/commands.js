@@ -57,10 +57,10 @@ Cypress.Commands.add('visitInstanceCreateForm', () => {
     )
     .route('http://localhost:8080/api/openstacktenant-volume-types/**', [])
     .visit(
-      '/#/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering/3bcdcdb0987545f0b50e6eed26bb49d6/',
+      '/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering/3bcdcdb0987545f0b50e6eed26bb49d6/',
     );
 });
 
-Cypress.Commands.add('buttonShouldBeDisabled', btnClass =>
+Cypress.Commands.add('buttonShouldBeDisabled', (btnClass) =>
   cy.get(btnClass).should('have.class', 'disabled'),
 );

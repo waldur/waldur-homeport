@@ -13,12 +13,6 @@ eventsRegistry.registerGroup({
       ),
     },
     {
-      key: 'auth_logged_in_with_google',
-      title: gettext(
-        'User {user_link} authenticated successfully with Google.',
-      ),
-    },
-    {
       key: 'auth_logged_in_with_facebook',
       title: gettext(
         'User {user_link} authenticated successfully with Facebook.',

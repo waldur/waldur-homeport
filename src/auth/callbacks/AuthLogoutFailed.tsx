@@ -1,12 +1,13 @@
+import Qs from 'qs';
 import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { parseQueryString, getQueryString } from '@waldur/core/utils';
+import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 export const AuthLogoutFailed = () => {
-  const qs = parseQueryString(getQueryString());
-  const message = qs && qs.message ? decodeURIComponent(qs.message) : undefined;
+  const qs = Qs.parse(getQueryString());
+  const message = qs?.message;
 
   return (
     <div className="middle-box text-center">

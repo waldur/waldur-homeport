@@ -1,3 +1,4 @@
+import { AuthService } from '@waldur/auth/AuthService';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
@@ -9,9 +10,8 @@ import { InvitationService } from './InvitationService';
 
 export class InvitationUtilsService {
   // @ngInject
-  constructor($q, $auth, $state, $rootScope, $timeout, ENV) {
+  constructor($q, $state, $rootScope, $timeout, ENV) {
     this.$q = $q;
-    this.$auth = $auth;
     this.$state = $state;
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
@@ -31,7 +31,7 @@ export class InvitationUtilsService {
      */
     this.$rootScope.$on('$stateChangeSuccess', (_, toState) => {
       if (
-        this.$auth.isAuthenticated() &&
+        AuthService.isAuthenticated() &&
         toState.name !== 'marketplace-public-offering.details'
       ) {
         UsersService.getCurrentUser().then((user) => {
@@ -59,7 +59,7 @@ export class InvitationUtilsService {
      If user is not logged in - set token and redirect user to registration.
      If user is logged in and token is not valid - clear the token and redirect to user profile with the error message.
      */
-    if (this.$auth.isAuthenticated()) {
+    if (AuthService.isAuthenticated()) {
       return this.confirmInvitation(token)
         .then((replaceEmail) => {
           this.acceptInvitation(token, replaceEmail).then(() => {

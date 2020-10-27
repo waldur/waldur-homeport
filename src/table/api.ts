@@ -1,15 +1,15 @@
 import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+import * as Qs from 'qs';
 
 import { getNextPageUrl, parseResultCount } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
-import { parseQueryString } from '@waldur/core/utils';
 
 import { Fetcher, TableRequest } from './types';
 
 export function getNextPageNumber(link: string): number {
   if (link) {
-    const parts = parseQueryString(link.split('/?')[1]);
-    if (parts && parts.page) {
+    const parts = Qs.parse(link.split('/?')[1]);
+    if (parts && typeof parts.page === 'string') {
       return parseInt(parts.page, 10);
     }
   } else {
