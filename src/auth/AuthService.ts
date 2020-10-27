@@ -103,7 +103,7 @@ function redirectOnSuccess() {
 function localLogout(params?) {
   store.dispatch(setCurrentUser(undefined));
   delete Axios.defaults.headers.common['Authorization'];
-  localStorage['AUTH_TOKEN'] = undefined;
+  localStorage.removeItem('AUTH_TOKEN');
   $state.go('login', params);
   resetAuthenticationMethod();
 }
