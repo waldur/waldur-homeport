@@ -17,16 +17,16 @@ describe('Link persistance after login', () => {
   });
 
   it('should redirect to attempted url after login', () => {
-    cy.visit('/#/profile/keys/')
+    cy.visit('/profile/keys/')
       .fillAndSubmitLoginForm()
-      .hash()
+      .location('pathname')
       .should('match', /profile\/keys\//);
   });
 
   it('should redirect to attempted url with params after login', () => {
-    cy.visit('/#/projects/df4193e2bee24a4c8e339474d74c5f8c/')
+    cy.visit('/projects/df4193e2bee24a4c8e339474d74c5f8c/')
       .fillAndSubmitLoginForm()
-      .hash()
+      .location('pathname')
       .should('match', /projects\/df4193e2bee24a4c8e339474d74c5f8c\//);
   });
 });

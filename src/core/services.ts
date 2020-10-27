@@ -3,8 +3,6 @@ export let $rootScope = null;
 export let $compile = null;
 export let $state = null;
 export let $filter = null;
-export let $auth = null;
-export let $http = null;
 export let $uiRouterGlobals = null;
 export let ngInjector = null;
 export let $q = null;
@@ -44,8 +42,6 @@ export default function injectServices($injector) {
   $compile = $injector.get('$compile');
   $state = $injector.get('$state');
   $filter = $injector.get('$filter');
-  $auth = $injector.get('$auth');
-  $http = $injector.get('$http');
   $uiRouterGlobals = $injector.get('$uiRouterGlobals');
   $q = $injector.get('$q');
   $sanitize = $injector.get('$sanitize');

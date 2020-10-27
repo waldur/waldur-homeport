@@ -47,7 +47,7 @@ Cypress.Commands.add('login', function (username, password) {
     // We should be on the dashboard now
     .get('h2', { log: false })
     .contains('User dashboard', { log: false })
-    .hash({ log: false })
+    .location('pathname')
     .should('match', /profile/, { log: false })
 
     // Make DOM snapshot

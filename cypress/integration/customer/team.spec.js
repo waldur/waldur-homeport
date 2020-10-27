@@ -43,7 +43,7 @@ describe('Team', () => {
       })
 
       .log('Visit Team')
-      .visit('/#/organizations/6983ac22f2bb469189311ab21e493359/team/')
+      .visit('/organizations/6983ac22f2bb469189311ab21e493359/team/')
       .waitForSpinner();
   });
 

@@ -1,6 +1,6 @@
 import Axios from 'axios';
+import Qs from 'qs';
 
-import { toKeyValue } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse } from '@waldur/store/coreSaga';
 import store from '@waldur/store/store';
@@ -107,7 +107,7 @@ function ActionDialogController($scope, $q, $state, $rootScope) {
       let promise;
       let url;
       if ($scope.action.method === 'DELETE') {
-        url = $scope.action.url + '?' + toKeyValue($scope.form);
+        url = $scope.action.url + '?' + Qs.stringify($scope.form);
         promise = Axios.delete(url);
       } else if ($scope.action.method === 'PUT') {
         url = $scope.resource.url;
