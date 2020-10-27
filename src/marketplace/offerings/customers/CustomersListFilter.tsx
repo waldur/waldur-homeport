@@ -1,13 +1,14 @@
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
 import * as Row from 'react-bootstrap/lib/Row';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import {
   AccountingRunningField,
   getOptions,
 } from '@waldur/customer/list/AccountingRunningField';
-import { CUSTOMERS_LIST_FILTER } from '@waldur/marketplace/offerings/customers/constants';
 
 export const PureCustomersListFilter = () => (
   <div className="ibox">
@@ -23,9 +24,16 @@ export const PureCustomersListFilter = () => (
   </div>
 );
 
-export const CustomersListFilter = reduxForm<{}, any>({
-  form: CUSTOMERS_LIST_FILTER,
-  initialValues: {
-    accounting_is_running: getOptions()[0],
-  },
-})(PureCustomersListFilter);
+const mapStateToProps = (_state, ownProps) => {
+  return {
+    form: ownProps.uniqueFormId,
+    initialValues: {
+      accounting_is_running: getOptions()[0],
+    },
+  };
+};
+
+export const CustomersListFilter = compose(
+  connect(mapStateToProps),
+  reduxForm<{}, any>({}),
+)(PureCustomersListFilter);
