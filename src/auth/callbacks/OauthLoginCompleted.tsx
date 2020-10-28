@@ -55,7 +55,7 @@ export const OauthLoginCompleted = () => {
   return error ? (
     <div className="middle-box text-center">
       <h3 className="app-title centered">{translate('Login failed')}</h3>
-      {error && <p className="m-t-md">{error}</p>}
+      {typeof error === 'string' && <p className="m-t-md">{error}</p>}
       <p className="m-t-md">
         <Link state="login"> &lt; {translate('Back to login')} </Link>
       </p>

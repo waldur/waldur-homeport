@@ -69,7 +69,7 @@ export const ChecklistCustomer = () => {
     return <h3>{translate('Unable to load categories.')}</h3>;
   }
 
-  if (!categoriesState?.value?.length) {
+  if (!categoriesState.value?.length) {
     return <h3>{translate('There are no categories.')}</h3>;
   }
 
