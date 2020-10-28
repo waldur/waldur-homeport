@@ -61,12 +61,12 @@ describe('Team', () => {
       .log('Remove button')
       .get('tbody tr:first-child td:last-child button:last-child')
       .contains('Remove')
-      .click()
+      .click({ force: true })
 
       .log('Edit button')
       .get('tbody tr:first-child td:last-child button:nth-child(2)')
       .contains('Edit')
-      .click()
+      .click({ force: true })
       .get('.modal-title')
       .contains('Edit team member')
 
