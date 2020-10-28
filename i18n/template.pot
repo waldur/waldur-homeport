@@ -2150,6 +2150,10 @@ msgstr ""
 msgid "Enable by default"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentLimitEnableField.tsx
+msgid "Enable limit"
+msgstr ""
+
 #: src/freeipa/EnableProfile.tsx
 msgid "Enable profile"
 msgstr ""

@@ -56,6 +56,7 @@ describe('Team', () => {
       .get('.modal-footer span')
       .contains('Cancel')
       .click()
+      .wait(500)
 
       .log('Remove button')
       .get('tbody tr:first-child td:last-child button:last-child')
