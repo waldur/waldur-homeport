@@ -47,7 +47,9 @@ describe('Customer creation dialog', () => {
           },
         },
       })
+      .as('create-dialog-fixtures')
       .login()
+      .wait('@create-dialog-fixtures', { timeout: 1000 })
       .waitForSpinner()
       .openCustomerCreateDialog();
   });
