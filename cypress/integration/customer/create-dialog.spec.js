@@ -109,6 +109,7 @@ describe('Customer creation dialog', () => {
       .get('button')
       .contains('Create organization')
       .click()
+      .wait(500)
 
       // Notification should be shown
       .get('p')

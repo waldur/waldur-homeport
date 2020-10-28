@@ -7,6 +7,7 @@ import { ComponentBooleanDefaultLimitField } from './ComponentBooleanDefaultLimi
 import { ComponentBooleanLimitField } from './ComponentBooleanLimitField';
 import { ComponentDisableQuotaField } from './ComponentDisableQuotaField';
 import { ComponentLimitAmountField } from './ComponentLimitAmountField';
+import { ComponentLimitEnableField } from './ComponentLimitEnableField';
 import {
   ComponentLimitPeriodField,
   LimitPeriodOption,
@@ -22,6 +23,7 @@ interface Values {
   limitPeriod: LimitPeriodOption;
   disableQuotas: boolean;
   isBoolean: boolean;
+  limitAmount?: number;
 }
 
 const enhance = formValues(() => ({
@@ -29,6 +31,7 @@ const enhance = formValues(() => ({
   limitPeriod: 'limit_period',
   disableQuotas: 'disable_quotas',
   isBoolean: 'is_boolean',
+  limitAmount: 'limit_amount',
 }));
 
 export const ComponentLimit = enhance((props: Values) => {
@@ -48,16 +51,21 @@ export const ComponentLimit = enhance((props: Values) => {
   return (
     <>
       <ComponentBooleanLimitField />
-      <ComponentLimitPeriodField limitPeriod={props.limitPeriod} />
-      <ComponentLimitAmountField />
+      <ComponentLimitEnableField />
+      {props.limitAmount !== null && (
+        <>
+          <ComponentLimitPeriodField limitPeriod={props.limitPeriod} />
+          <ComponentLimitAmountField />
+        </>
+      )}
       <ComponentDisableQuotaField />
       {!props.disableQuotas && (
         <>
           <ComponentMinValueField />
           <ComponentMaxValueField />
+          <ComponentUseLimitForBillingField />
         </>
       )}
-      {!props.disableQuotas && <ComponentUseLimitForBillingField />}
     </>
   );
 }) as React.ComponentType<{}>;
