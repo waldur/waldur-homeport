@@ -57,6 +57,14 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
       visible: ownProps.row.state !== ARCHIVED,
     },
     {
+      label: translate('Set to draft'),
+      handler: () => {
+        dispatchProps.updateOfferingState(ownProps.row, 'draft');
+      },
+      visible:
+        ![DRAFT].includes(ownProps.row.state) && stateProps.user.is_staff,
+    },
+    {
       label: translate('Edit'),
       handler: () =>
         $state.go('marketplace-offering-update', {

@@ -6601,6 +6601,10 @@ msgstr ""
 msgid "Set static routes"
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingActions.tsx
+msgid "Set to draft"
+msgstr ""
+
 #: src/slurm/SlurmForm.tsx
 msgid "Set to true to activate privilege escalation"
 msgstr ""
