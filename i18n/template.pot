@@ -5238,6 +5238,10 @@ msgstr ""
 msgid "Project manager cannot edit users with same role."
 msgstr ""
 
+#: src/configs/base-config.ts
+msgid "Project member"
+msgstr ""
+
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/project/ProjectNameField.tsx
 #: src/user/list/ProjectPermissions.tsx
