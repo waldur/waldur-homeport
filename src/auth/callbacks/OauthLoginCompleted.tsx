@@ -44,7 +44,7 @@ export const OauthLoginCompleted = () => {
         AuthService.loginSuccess({
           data: { ...user, method: provider },
         });
-        window.location.replace('/profile/');
+        AuthService.redirectOnSuccess();
       } catch (e) {
         setError(e.data.detail);
       }
