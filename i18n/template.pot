@@ -4931,7 +4931,10 @@ msgid "Please note that request should specify user name and provide a reason."
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
-msgid "Please open offering {name} ({uuid}) for editing"
+msgid ""
+"Please open offering {offeringName} ({offeringUuid}) for editing. \n"
+"Requestor: {userName} / {userUuid}. \n"
+"Service provider: {customerName} / {customerUuid}"
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
@@ -4952,7 +4955,10 @@ msgid "Please provide your EU VAT ID if you are registered in the European Union
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
-msgid "Please review and activate offering {name} ({uuid})"
+msgid ""
+"Please review and activate offering {offeringName} ({offeringUuid}). \n"
+"Requestor: {userName} / {userUuid}. \n"
+"Service provider: {customerName} / {customerUuid}"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
