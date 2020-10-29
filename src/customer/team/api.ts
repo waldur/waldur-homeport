@@ -1,3 +1,4 @@
+import { post } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
@@ -12,3 +13,6 @@ export const fetchCustomerUsers: Fetcher = (request: TableRequest) => {
   };
   return parseResponse(url, params);
 };
+
+export const closeReview = (reviewId: string) =>
+  post(`/customer-permissions-reviews/${reviewId}/close/`);

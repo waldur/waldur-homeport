@@ -1,8 +1,11 @@
 import { SubmissionError, reset } from 'redux-form';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
+import { PendingReviewDialog } from '@waldur/customer/team/PendingReviewDialog';
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showError, emitSignal } from '@waldur/store/coreSaga';
+import { SET_CURRENT_CUSTOMER } from '@waldur/workspace/constants';
 
 import * as actions from './actions';
 import * as api from './api';
@@ -43,7 +46,25 @@ export function* removeLogo(action) {
   }
 }
 
+function* checkPendingReview(action) {
+  const { customer } = action.payload;
+  try {
+    const review = yield call(api.getPendingReview, customer.uuid);
+    if (review) {
+      yield put(
+        openModalDialog(PendingReviewDialog, {
+          resolve: { reviewId: review.uuid },
+          size: 'lg',
+        }),
+      );
+    }
+  } catch (error) {
+    // Silently swallow error
+  }
+}
+
 export default function* customerDetailsSaga() {
   yield takeEvery(actions.uploadLogo.REQUEST, uploadLogo);
   yield takeEvery(actions.removeLogo.REQUEST, removeLogo);
+  yield takeLatest([SET_CURRENT_CUSTOMER], checkPendingReview);
 }
