@@ -135,6 +135,7 @@ msgstr ""
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payments/PaymentsList.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -1310,6 +1311,10 @@ msgstr ""
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Confirming that data is correct"
+msgstr ""
+
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "Connect"
 msgstr ""
@@ -1521,6 +1526,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
@@ -2099,6 +2105,10 @@ msgstr ""
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
+msgstr ""
+
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Edit permissions"
 msgstr ""
 
 #: src/project/team/AddProjectMemberDialog.tsx
@@ -4742,6 +4752,7 @@ msgstr ""
 msgid "Payments list"
 msgstr ""
 
+#: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace/orders/store/reducer.ts
@@ -4778,6 +4789,18 @@ msgstr ""
 #: src/marketplace/offerings/plan/constants.ts
 #: src/offering/actions/CompleteAction.ts
 msgid "Per month"
+msgstr ""
+
+#: src/customer/team/ReviewCloseButton.tsx
+msgid "Perform review"
+msgstr ""
+
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+msgid "Performed"
+msgstr ""
+
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+msgid "Performed by"
 msgstr ""
 
 #: src/booking/BookingCheckoutSummary.tsx
@@ -4964,6 +4987,10 @@ msgid ""
 "Please review and activate offering {offeringName} ({offeringUuid}). \n"
 "Requestor: {userName} / {userUuid}. \n"
 "Service provider: {customerName} / {customerUuid}"
+msgstr ""
+
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Please review organization permissions"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
@@ -6071,6 +6098,18 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Review has been closed."
+msgstr ""
+
+#: src/customer/team/ReviewCloseButton.tsx
+msgid "Review has been performed."
+msgstr ""
+
+#: src/customer/team/CustomerTeam.tsx
+msgid "Reviews"
+msgstr ""
+
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
@@ -6824,6 +6863,7 @@ msgstr ""
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
@@ -7662,6 +7702,10 @@ msgstr ""
 msgid "Unable to change email."
 msgstr ""
 
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Unable to close review."
+msgstr ""
+
 #: src/user/support/UserEmailChangeCallback.tsx
 msgid "Unable to confirm email."
 msgstr ""
@@ -8076,6 +8120,10 @@ msgstr ""
 
 #: src/resource/actions/dialog/action-dialog.js
 msgid "Unable to perform action"
+msgstr ""
+
+#: src/customer/team/ReviewCloseButton.tsx
+msgid "Unable to perform review."
 msgstr ""
 
 #: src/issues/comments/effects.ts
@@ -9350,6 +9398,10 @@ msgstr ""
 #: src/customer/payments/PaymentsList.tsx
 #: src/paypal/PaymentsList.tsx
 msgid "payments"
+msgstr ""
+
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+msgid "permission reviews"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx

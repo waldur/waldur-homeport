@@ -8,6 +8,7 @@ import { InvitationsList } from '@waldur/invitations/InvitationsList';
 import { useTitle } from '@waldur/navigation/title';
 
 import { CustomerPermissionsLogList } from './CustomerPermissionsLogList';
+import { CustomerPermissionsReviewList } from './CustomerPermissionsReviewList';
 import { CustomerUsersList } from './CustomerUsersList';
 
 export const CustomerTeam = () => {
@@ -34,6 +35,11 @@ export const CustomerTeam = () => {
         <Tab title={translate('Permissions log')} eventKey="permissions">
           <PanelBody>
             <CustomerPermissionsLogList />
+          </PanelBody>
+        </Tab>
+        <Tab title={translate('Reviews')} eventKey="reviews">
+          <PanelBody>
+            <CustomerPermissionsReviewList />
           </PanelBody>
         </Tab>
       </Tabs>
