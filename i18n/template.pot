@@ -4540,6 +4540,7 @@ msgstr ""
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/navigation/workspace/WorkspaceLabel.tsx
 msgid "Organization workspace"
 msgstr ""
 
@@ -4795,6 +4796,10 @@ msgstr ""
 #: src/customer/team/CustomerTeam.tsx
 #: src/project/team/ProjectTeam.tsx
 msgid "Permissions log"
+msgstr ""
+
+#: src/navigation/workspace/WorkspaceLabel.tsx
+msgid "Personal workspace"
 msgstr ""
 
 #: src/invoices/details/CustomerDetails.tsx
@@ -5271,6 +5276,7 @@ msgstr ""
 
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
+#: src/navigation/workspace/WorkspaceLabel.tsx
 #: src/offering/OfferingDetails.tsx
 #: src/project/ProjectWorkspace.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -7034,6 +7040,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Support user"
+msgstr ""
+
+#: src/navigation/workspace/WorkspaceLabel.tsx
+msgid "Support workspace"
 msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
