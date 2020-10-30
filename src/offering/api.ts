@@ -18,14 +18,12 @@ export const fetchTenantOptions = async (
   customerId,
 ) => {
   let response = await getSelectData('/openstack-tenants/', {
-    params: {
-      field: ['name', 'backend_id', 'project_name'],
-      customer_uuid: customerId,
-      name: query,
-      o: ['project_name', 'name'],
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
+    field: ['name', 'backend_id', 'project_name'],
+    customer_uuid: customerId,
+    name: query,
+    o: ['project_name', 'name'],
+    page: currentPage,
+    page_size: ENV.pageSize,
   });
   response = {
     ...response,
@@ -50,14 +48,12 @@ export const fetchInstanceOptions = async (
   customerId,
 ) => {
   let response = await getSelectData('/openstacktenant-instances/', {
-    params: {
-      field: ['name', 'backend_id', 'project_name'],
-      customer_uuid: customerId,
-      name: query,
-      o: ['project_name', 'name'],
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
+    field: ['name', 'backend_id', 'project_name'],
+    customer_uuid: customerId,
+    name: query,
+    o: ['project_name', 'name'],
+    page: currentPage,
+    page_size: ENV.pageSize,
   });
   response = {
     ...response,

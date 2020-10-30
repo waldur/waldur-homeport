@@ -63,12 +63,10 @@ export const loadSshKeysOptions = async (
   currentPage: number,
 ) => {
   const response = await getSelectData<SshKey>('/keys/', {
-    params: {
-      user_uuid,
-      name: query,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
+    user_uuid,
+    name: query,
+    page: currentPage,
+    page_size: ENV.pageSize,
   });
   return returnReactSelectAsyncPaginateObject(
     response,
