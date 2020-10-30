@@ -135,6 +135,7 @@ msgstr ""
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payments/PaymentsList.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -1310,6 +1311,10 @@ msgstr ""
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Confirming that data is correct"
+msgstr ""
+
 #: src/resource/summary/ResourceAccessInfo.tsx
 msgid "Connect"
 msgstr ""
@@ -1521,6 +1526,7 @@ msgstr ""
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx
@@ -2099,6 +2105,10 @@ msgstr ""
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
+msgstr ""
+
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Edit permissions"
 msgstr ""
 
 #: src/project/team/AddProjectMemberDialog.tsx
@@ -4540,6 +4550,7 @@ msgstr ""
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/navigation/workspace/WorkspaceLabel.tsx
 msgid "Organization workspace"
 msgstr ""
 
@@ -4741,6 +4752,7 @@ msgstr ""
 msgid "Payments list"
 msgstr ""
 
+#: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace/orders/store/reducer.ts
@@ -4779,6 +4791,18 @@ msgstr ""
 msgid "Per month"
 msgstr ""
 
+#: src/customer/team/ReviewCloseButton.tsx
+msgid "Perform review"
+msgstr ""
+
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+msgid "Performed"
+msgstr ""
+
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+msgid "Performed by"
+msgstr ""
+
 #: src/booking/BookingCheckoutSummary.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Period"
@@ -4795,6 +4819,10 @@ msgstr ""
 #: src/customer/team/CustomerTeam.tsx
 #: src/project/team/ProjectTeam.tsx
 msgid "Permissions log"
+msgstr ""
+
+#: src/navigation/workspace/WorkspaceLabel.tsx
+msgid "Personal workspace"
 msgstr ""
 
 #: src/invoices/details/CustomerDetails.tsx
@@ -4931,7 +4959,10 @@ msgid "Please note that request should specify user name and provide a reason."
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
-msgid "Please open offering {name} ({uuid}) for editing"
+msgid ""
+"Please open offering {offeringName} ({offeringUuid}) for editing. \n"
+"Requestor: {userName} / {userUuid}. \n"
+"Service provider: {customerName} / {customerUuid}"
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
@@ -4952,7 +4983,14 @@ msgid "Please provide your EU VAT ID if you are registered in the European Union
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
-msgid "Please review and activate offering {name} ({uuid})"
+msgid ""
+"Please review and activate offering {offeringName} ({offeringUuid}). \n"
+"Requestor: {userName} / {userUuid}. \n"
+"Service provider: {customerName} / {customerUuid}"
+msgstr ""
+
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Please review organization permissions"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
@@ -5232,6 +5270,10 @@ msgstr ""
 msgid "Project manager cannot edit users with same role."
 msgstr ""
 
+#: src/configs/base-config.ts
+msgid "Project member"
+msgstr ""
+
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/project/ProjectNameField.tsx
 #: src/user/list/ProjectPermissions.tsx
@@ -5261,6 +5303,7 @@ msgstr ""
 
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
+#: src/navigation/workspace/WorkspaceLabel.tsx
 #: src/offering/OfferingDetails.tsx
 #: src/project/ProjectWorkspace.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -6055,6 +6098,18 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Review has been closed."
+msgstr ""
+
+#: src/customer/team/ReviewCloseButton.tsx
+msgid "Review has been performed."
+msgstr ""
+
+#: src/customer/team/CustomerTeam.tsx
+msgid "Reviews"
+msgstr ""
+
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
@@ -6601,6 +6656,10 @@ msgstr ""
 msgid "Set static routes"
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingActions.tsx
+msgid "Set to draft"
+msgstr ""
+
 #: src/slurm/SlurmForm.tsx
 msgid "Set to true to activate privilege escalation"
 msgstr ""
@@ -6804,6 +6863,7 @@ msgstr ""
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
+#: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
@@ -7020,6 +7080,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Support user"
+msgstr ""
+
+#: src/navigation/workspace/WorkspaceLabel.tsx
+msgid "Support workspace"
 msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
@@ -7638,6 +7702,10 @@ msgstr ""
 msgid "Unable to change email."
 msgstr ""
 
+#: src/customer/team/PendingReviewDialog.tsx
+msgid "Unable to close review."
+msgstr ""
+
 #: src/user/support/UserEmailChangeCallback.tsx
 msgid "Unable to confirm email."
 msgstr ""
@@ -8052,6 +8120,10 @@ msgstr ""
 
 #: src/resource/actions/dialog/action-dialog.js
 msgid "Unable to perform action"
+msgstr ""
+
+#: src/customer/team/ReviewCloseButton.tsx
+msgid "Unable to perform review."
 msgstr ""
 
 #: src/issues/comments/effects.ts
@@ -9326,6 +9398,10 @@ msgstr ""
 #: src/customer/payments/PaymentsList.tsx
 #: src/paypal/PaymentsList.tsx
 msgid "payments"
+msgstr ""
+
+#: src/customer/team/CustomerPermissionsReviewList.tsx
+msgid "permission reviews"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx

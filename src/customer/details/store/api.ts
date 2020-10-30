@@ -1,4 +1,4 @@
-import { sendForm } from '@waldur/core/api';
+import { getFirst, sendForm } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 
 interface UpdateLogoParams {
@@ -18,4 +18,10 @@ export const uploadLogo = (params: UpdateLogoParams) =>
 export const removeLogo = (params: RemoveLogoParams) =>
   sendForm('PATCH', `${ENV.apiEndpoint}api/customers/${params.customerUuid}/`, {
     image: '',
+  });
+
+export const getPendingReview = (customerId: string) =>
+  getFirst('/customer-permissions-reviews/', {
+    customer_uuid: customerId,
+    is_pending: true,
   });

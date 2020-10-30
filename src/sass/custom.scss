@@ -179,6 +179,12 @@ body.landing {
   }
 }
 
+@media (max-width: 1010px) {
+  .hidden-md-stable {
+    display: none !important;
+  }
+}
+
 @media (max-width: 992px) {
   .btn-block-md {
     display: block;

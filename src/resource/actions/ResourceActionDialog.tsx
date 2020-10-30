@@ -60,7 +60,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
           description: field.help_text,
         };
         if (field.component) {
-          return <field.component />;
+          return <field.component key={key} />;
         } else if (field.type === 'string') {
           return (
             <StringField

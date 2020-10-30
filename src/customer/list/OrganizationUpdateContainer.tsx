@@ -36,7 +36,7 @@ export const OrganizationUpdateContainer = () => {
   useTitle(
     customer
       ? translate('Organization update ({name})', {
-          name: customer?.name,
+          name: customer.name,
         })
       : translate('Organization update'),
   );

@@ -4,6 +4,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/core/services';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 
 export const RoleGroup = ({ isProjectManager }) =>
@@ -27,5 +28,13 @@ export const RoleGroup = ({ isProjectManager }) =>
           {translate(ENV.roles.admin)}
         </label>
       </FormGroup>
+      {isFeatureVisible('project.support') && (
+        <FormGroup>
+          <label>
+            <Field name="role" component="input" type="radio" value="support" />{' '}
+            {translate(ENV.roles.support)}
+          </label>
+        </FormGroup>
+      )}
     </>
   );

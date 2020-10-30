@@ -3,7 +3,7 @@ import ModalBody from 'react-bootstrap/lib/ModalBody';
 import ModalFooter from 'react-bootstrap/lib/ModalFooter';
 import ModalHeader from 'react-bootstrap/lib/ModalHeader';
 import ModalTitle from 'react-bootstrap/lib/ModalTitle';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
@@ -11,12 +11,15 @@ import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 export const RequestActionDialog = ({
   resolve: { offering, offeringRequestMode },
   close,
 }) => {
   const dispatch = useDispatch();
+  const customer = useSelector(getCustomer);
+  const user = useSelector(getUser);
   React.useEffect(() => {
     if (isFeatureVisible('support')) {
       close();
@@ -31,17 +34,29 @@ export const RequestActionDialog = ({
               description:
                 offeringRequestMode === 'publishing'
                   ? translate(
-                      'Please review and activate offering {name} ({uuid})',
+                      'Please review and activate offering {offeringName} ({offeringUuid}). \n' +
+                        'Requestor: {userName} / {userUuid}. \n' +
+                        'Service provider: {customerName} / {customerUuid}',
                       {
-                        name: offering.name,
-                        uuid: offering.uuid,
+                        offeringName: offering.name,
+                        offeringUuid: offering.uuid,
+                        userName: user.full_name,
+                        userUuid: user.uuid,
+                        customerName: customer.name,
+                        customerUuid: customer.uuid,
                       },
                     )
                   : translate(
-                      'Please open offering {name} ({uuid}) for editing',
+                      'Please open offering {offeringName} ({offeringUuid}) for editing. \n' +
+                        'Requestor: {userName} / {userUuid}. \n' +
+                        'Service provider: {customerName} / {customerUuid}',
                       {
-                        name: offering.name,
-                        uuid: offering.uuid,
+                        offeringName: offering.name,
+                        offeringUuid: offering.uuid,
+                        userName: user.full_name,
+                        userUuid: user.uuid,
+                        customerName: customer.name,
+                        customerUuid: customer.uuid,
                       },
                     ),
               resource: {
