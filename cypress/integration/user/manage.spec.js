@@ -11,7 +11,7 @@ describe('User manage', () => {
       })
       .route('http://localhost:8080/api/marketplace-checklists-categories/', [])
       .login()
-      .visit('/profile/manage/');
+      .visit('/#/profile/manage/');
   });
 
   it('allows to update user details', () => {

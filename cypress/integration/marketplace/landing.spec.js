@@ -31,7 +31,7 @@ xdescribe('Marketplace landing view', () => {
           },
         },
       })
-      .visit('/organizations/10a05c2fcab44588a7aa2e16809504cf/marketplace/')
+      .visit('/#/organizations/10a05c2fcab44588a7aa2e16809504cf/marketplace/')
       .waitForSpinner();
   });
 

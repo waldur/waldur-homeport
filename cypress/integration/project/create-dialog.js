@@ -24,7 +24,7 @@ describe('Project creation dialog', () => {
       .as('createProject')
 
       // Go to projects list in organization workspace
-      .visit('/organizations/bf6d515c9e6e445f9c339021b30fc96b/createProject/')
+      .visit('/#/organizations/bf6d515c9e6e445f9c339021b30fc96b/createProject/')
 
       .wait(['@getCerts', '@getTypes'])
       .then(() => {

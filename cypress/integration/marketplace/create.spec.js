@@ -20,7 +20,7 @@ describe('Offering creation', () => {
         response: {},
       })
       .visit(
-        '/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering-create/',
+        '/#/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering-create/',
       )
       .waitForSpinner();
   });
@@ -151,7 +151,7 @@ describe('Offering creation', () => {
       .location()
       .should((loc) => {
         expect(loc.href).to.eq(
-          'http://localhost:8001/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offerings/',
+          'http://localhost:8001/#/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offerings/',
         );
       });
   });

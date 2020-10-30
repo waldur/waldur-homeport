@@ -30,6 +30,7 @@ import 'angulartics';
 import 'angulartics-google-analytics';
 import 'ui-select';
 import 'ui-select/dist/select.css';
+import 'satellizer';
 import 'angular-translate';
 import 'angular-translate-storage-cookie';
 import 'angular-translate-storage-local';

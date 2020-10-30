@@ -20,7 +20,13 @@
  */
 import Axios from 'axios';
 
-import { $state, $uiRouterGlobals, ENV } from '@waldur/core/services';
+import {
+  $state,
+  $auth,
+  $http,
+  $uiRouterGlobals,
+  ENV,
+} from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/coreSaga';
 import store from '@waldur/store/store';
@@ -40,31 +46,30 @@ function getAuthenticationMethod() {
 }
 
 function setAuthHeader(token) {
-  localStorage['AUTH_TOKEN'] = token;
+  $http.defaults.headers.common['Authorization'] = 'Token ' + token;
   Axios.defaults.headers.common['Authorization'] = 'Token ' + token;
 }
 
 function loginSuccess(response) {
   setAuthenticationMethod(response.data.method);
   setAuthHeader(response.data.token);
+  $auth.setToken(response.data.token);
   store.dispatch(setCurrentUser(response.data));
 }
 
 function isAuthenticated() {
-  return !!localStorage['AUTH_TOKEN'];
+  return $auth.isAuthenticated();
 }
 
 function getDownloadLink(href) {
   if (href) {
-    return (
-      href + '?x-auth-token=' + localStorage['AUTH_TOKEN'] + '&download=true'
-    );
+    return href + '?x-auth-token=' + $auth.getToken() + '&download=true';
   }
 }
 
 function getLink(href) {
   if (href) {
-    return href + '?x-auth-token=' + localStorage['AUTH_TOKEN'];
+    return href + '?x-auth-token=' + $auth.getToken();
   }
 }
 
@@ -79,6 +84,14 @@ async function signin(username, password) {
   setAuthHeader(response.data.token);
   const user = await UsersService.getCurrentUser();
   loginSuccess({ data: { ...user, method: 'local' } });
+}
+
+async function authenticate(provider) {
+  const response = await $auth.authenticate(provider);
+
+  setAuthHeader(response.data.token);
+  const user = await UsersService.getCurrentUser();
+  loginSuccess({ data: { ...user, method: provider } });
 }
 
 function signup(user) {
@@ -102,8 +115,9 @@ function redirectOnSuccess() {
 
 function localLogout(params?) {
   store.dispatch(setCurrentUser(undefined));
+  delete $http.defaults.headers.common['Authorization'];
   delete Axios.defaults.headers.common['Authorization'];
-  localStorage.removeItem('AUTH_TOKEN');
+  $auth.logout();
   $state.go('login', params);
   resetAuthenticationMethod();
 }
@@ -137,6 +151,7 @@ export const AuthService = {
   getDownloadLink,
   getLink,
   signin,
+  authenticate,
   signup,
   activate,
   redirectOnSuccess,

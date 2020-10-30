@@ -38,6 +38,7 @@ import './paypal/events';
 import './vmware/module';
 
 const appModule = angular.module('waldur', [
+  'satellizer',
   'ui.router',
   UI_ROUTER_REACT_HYBRID,
   'ui.router.state.events',

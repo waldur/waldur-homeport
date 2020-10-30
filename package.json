@@ -20,7 +20,7 @@
     "lint:fix": "yarn eslint --fix --ext ts,tsx src",
     "test": "yarn format:check && yarn lint:check && jest --verbose --runInBand && npm run build",
     "ci:conf": "mkdirp build/scripts/configs/ && cp src/configs/test-config.json build/scripts/configs/config.json",
-    "ci:start": "yarn build && yarn ci:conf && yarn serve build --single --listen 8001",
+    "ci:start": "yarn build && yarn ci:conf && yarn serve build -l 8001",
     "ci:run": "cypress run",
     "ci:test": "start-server-and-test ci:start http://localhost:8001/ ci:run"
   },
@@ -110,6 +110,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
     "resize-observer-polyfill": "^1.5.1",
+    "satellizer": "^0.15.5",
     "ui-select": "^0.18.1",
     "world-flags-sprite": "^0.0.2"
   },
@@ -127,7 +128,6 @@
     "@types/lodash.mapvalues": "^4.6.6",
     "@types/lodash.some": "^4.6.6",
     "@types/moment-timezone": "^0.5.9",
-    "@types/qs": "^6.9.5",
     "@types/react": "^16.8.8",
     "@types/react-bootstrap": "^0.32.14",
     "@types/react-dom": "^16.8.3",

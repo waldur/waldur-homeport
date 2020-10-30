@@ -4,16 +4,25 @@ import { Dispatch } from 'redux';
 
 import { translate } from '@waldur/i18n';
 
+import { AuthService } from './AuthService';
+
+const authenticate = (provider: string) => {
+  return AuthService.authenticate(provider).then(() =>
+    AuthService.redirectOnSuccess(),
+  );
+};
+
 export interface AuthButtonProps {
   providerKey: string;
   btnClass: string;
   iconClass: string;
   label: string;
   mode: string;
-  onClick(dispatch: Dispatch): void;
+  onClick?(dispatch: Dispatch): void;
 }
 
 export const AuthButton: React.FC<AuthButtonProps> = ({
+  providerKey,
   btnClass,
   iconClass,
   label,
@@ -28,7 +37,9 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
   return (
     <div className="m-b-sm">
       <button
-        onClick={() => onClick(dispatch)}
+        onClick={
+          onClick ? () => onClick(dispatch) : () => authenticate(providerKey)
+        }
         className={`btn ${btnClass} btn-block`}
       >
         <i className={`fa ${iconClass}`} aria-hidden="true" />{' '}
