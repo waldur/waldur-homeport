@@ -9,11 +9,12 @@ import { UsersService } from '@waldur/user/UsersService';
 import { AuthService } from './AuthService';
 
 // @ngInject
-function initAuthToken() {
+function initAuthToken($auth, $http) {
   // When application starts up, we need to inject auth token if it exists
-  const token = localStorage['AUTH_TOKEN'];
+  const token = $auth.getToken();
   if (token) {
     Axios.defaults.headers.common['Authorization'] = 'Token ' + token;
+    $http.defaults.headers.common['Authorization'] = 'Token ' + token;
   }
 }
 
@@ -49,11 +50,10 @@ Axios.interceptors.response.use(
 );
 
 // @ngInject
-function requireAuth($transitions, $rootScope, features) {
+function requireAuth($transitions, $auth, $rootScope, features) {
   $transitions.onStart(
     {
-      to: (state) =>
-        state.data && state.data.auth && AuthService.isAuthenticated(),
+      to: (state) => state.data && state.data.auth && $auth.isAuthenticated(),
     },
     (transition) =>
       UsersService.isCurrentUserValid().then((result) => {
@@ -74,8 +74,7 @@ function requireAuth($transitions, $rootScope, features) {
   // he should be redirected to login page.
   $transitions.onStart(
     {
-      to: (state) =>
-        state.data && state.data.auth && !AuthService.isAuthenticated(),
+      to: (state) => state.data && state.data.auth && !$auth.isAuthenticated(),
     },
     (transition) =>
       transition.router.stateService.target('login', {
@@ -89,7 +88,7 @@ function requireAuth($transitions, $rootScope, features) {
   $transitions.onStart(
     {
       to: (state) =>
-        state.data && state.data.anonymous && AuthService.isAuthenticated(),
+        state.data && state.data.anonymous && $auth.isAuthenticated(),
     },
     (transition) => transition.router.stateService.target('profile.details'),
   );

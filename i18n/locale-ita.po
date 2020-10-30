@@ -6680,6 +6680,10 @@ msgid "User {user_link} authenticated successfully with Facebook."
 msgstr ""
 
 #: src/auth/events.ts
+msgid "User {user_link} authenticated successfully with Google."
+msgstr ""
+
+#: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with OpenID."
 msgstr ""
 

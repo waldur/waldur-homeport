@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { AuthService } from '@waldur/auth/AuthService';
 import { post, getFirst } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state } from '@waldur/core/services';
+import { $state, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { setCurrentUser } from '@waldur/workspace/actions';
@@ -31,7 +30,7 @@ export const UserEmailChangeCallback = () => {
         dispatch(showError(errorMessage));
       }
 
-      if (!AuthService.isAuthenticated()) {
+      if (!ngInjector.get('$auth').isAuthenticated()) {
         dispatch(stateGo('login'));
         return;
       }

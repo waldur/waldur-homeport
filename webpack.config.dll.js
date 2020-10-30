@@ -73,6 +73,7 @@ module.exports = {
       'angulartics',
       'angulartics-google-analytics',
       'ui-select',
+      'satellizer',
       'angular-translate',
       'angular-translate-storage-cookie',
       'angular-translate-storage-local',

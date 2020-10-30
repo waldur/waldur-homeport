@@ -108,19 +108,40 @@ export const omit = (object, prop) => {
   }
 };
 
+export const toKeyValue = (obj) =>
+  Object.keys(obj)
+    .map((key) => `${key}=${encodeURIComponent(obj[key])}`)
+    .join('&');
+
 export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');
 
 export const range = (n) => Array.from(Array(n).keys());
 
 export function getQueryString() {
-  // Example input: http://example.com/approve/?foo=123&bar=456
+  // Example input: http://example.com/#/approve/?foo=123&bar=456
   // Example output: foo=123&bar=456
 
-  const parts = document.location.search.split('?');
+  const hash = document.location.hash;
+  const parts = hash.split('?');
   if (parts.length > 1) {
     return parts[1];
   }
   return '';
+}
+
+export function parseQueryString(qs) {
+  // Example input: foo=123&bar=456
+  // Example output: {foo: "123", bar: "456"}
+
+  return qs.split('&').reduce((result, part) => {
+    const tokens = part.split('=');
+    if (tokens.length > 1) {
+      const key = tokens[0];
+      const value = tokens[1];
+      result[key] = value;
+    }
+    return result;
+  }, {});
 }
 
 export const isEmpty = (obj) => Object.keys(obj).length === 0;
