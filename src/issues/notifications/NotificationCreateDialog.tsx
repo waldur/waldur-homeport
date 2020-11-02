@@ -139,7 +139,11 @@ export const NotificationCreateDialog = reduxForm({
             label={translate('Offerings')}
             placeholder={translate('Select offerings...')}
             loadOptions={(query, prevOptions, { page }) =>
-              offeringsAutocomplete({ name: query }, prevOptions, page)
+              offeringsAutocomplete(
+                { name: query, shared: true },
+                prevOptions,
+                page,
+              )
             }
             isMulti={true}
             {...reactSelectMenuPortaling()}
