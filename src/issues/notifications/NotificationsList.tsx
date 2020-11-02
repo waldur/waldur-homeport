@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -27,7 +27,7 @@ const TableComponent = (props) => {
         },
         {
           title: translate('Created at'),
-          render: ({ row }) => formatDate(row.created),
+          render: ({ row }) => formatDateTime(row.created),
           orderField: 'created',
         },
       ]}
