@@ -81,7 +81,7 @@ export const CustomerChecklistOverview = ({ customer }) => {
 
   if (
     asyncState.error ||
-    !asyncState.value.categories.length ||
+    !asyncState.value?.categories?.length ||
     !Object.keys(asyncState.value.checklists).length
   ) {
     return null;

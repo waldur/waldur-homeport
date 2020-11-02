@@ -8374,16 +8374,8 @@ msgid "User {user_link} authenticated successfully with Facebook."
 msgstr "Kasutaja {user_link} edukalt autentinud ennast Facebook kaudu."
 
 #: src/auth/events.ts
-msgid "User {user_link} authenticated successfully with Google."
-msgstr "Kasutaja {user_link} on edukalt autentinud ennast Google kaudu."
-
-#: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with OpenID."
 msgstr "Kasutaja {user_link} on edukalt autentinud ennast OpenID kaudu."
-
-#: src/auth/events.ts
-msgid "User {user_link} authenticated successfully with SAML2."
-msgstr "Kasutaja {user_link} on edukalt autentinud ennast Google kaudu."
 
 #: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with Smart ID EE."

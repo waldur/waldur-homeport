@@ -14,5 +14,5 @@ Cypress.Commands.add('visitOrganizations', () => {
     )
     .route('http://localhost:8080/api/marketplace-checklists/**', [])
     .route('http://localhost:8080/api/marketplace-checklists-categories/**', [])
-    .visit('/#/support/organizations/', { log: false });
+    .visit('/support/organizations/', { log: false });
 });

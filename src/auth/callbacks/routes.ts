@@ -19,7 +19,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'home.oauth_login_completed',
-    url: '/oauth_login_completed/',
+    url: '/oauth_login_completed/:provider/',
     component: OauthLoginCompleted,
     data: {
       anonymous: true,

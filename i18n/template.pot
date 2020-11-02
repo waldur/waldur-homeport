@@ -787,6 +787,7 @@ msgstr ""
 
 #: src/auth/callbacks/AuthLoginFailed.tsx
 #: src/auth/callbacks/AuthLogoutFailed.tsx
+#: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Back to login"
 msgstr ""
 
@@ -3390,6 +3391,7 @@ msgid "Login"
 msgstr ""
 
 #: src/auth/callbacks/AuthLoginFailed.tsx
+#: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Login failed"
 msgstr ""
 
@@ -8616,10 +8618,6 @@ msgstr ""
 
 #: src/auth/events.ts
 msgid "User {user_link} authenticated successfully with Facebook."
-msgstr ""
-
-#: src/auth/events.ts
-msgid "User {user_link} authenticated successfully with Google."
 msgstr ""
 
 #: src/auth/events.ts

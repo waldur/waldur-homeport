@@ -1730,6 +1730,11 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
+"@types/qs@^6.9.5":
+  version "6.9.5"
+  resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.5.tgz#434711bdd49eb5ee69d90c1d67c354a9a8ecb18b"
+  integrity sha512-/JHkVHtx/REVG0VVToGRGH2+23hsYLHdyG+GrvoUGlGAd0ErauXDyvHtRI/7H7mzLm+tBCKA7pfcpkQ1lf58iQ==
+
 "@types/react-bootstrap@^0.32.14":
   version "0.32.14"
   resolved "https://registry.yarnpkg.com/@types/react-bootstrap/-/react-bootstrap-0.32.14.tgz#371d12b0a360ffee1db960b06dc18fbcea6cada7"
@@ -12426,11 +12431,6 @@ sass-loader@^8.0.2:
     neo-async "^2.6.1"
     schema-utils "^2.6.1"
     semver "^6.3.0"
-
-satellizer@^0.15.5:
-  version "0.15.5"
-  resolved "https://registry.yarnpkg.com/satellizer/-/satellizer-0.15.5.tgz#43c93d2d361c4b6b6cf9d06d23b8881302b557a4"
-  integrity sha1-Q8k9LTYcS2ts+dBtI7iIEwK1V6Q=
 
 sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
