@@ -9,7 +9,7 @@ export function urlRouterProvider(
   $locationProvider,
   $qProvider,
 ) {
-  $locationProvider.hashPrefix('');
+  $locationProvider.html5Mode(true);
   $urlRouterProvider.when('', '/profile/');
   $urlRouterProvider.when('/', '/profile/');
   $qProvider.errorOnUnhandledRejections(false);

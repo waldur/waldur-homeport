@@ -55,5 +55,8 @@ module.exports = merge(baseConfig, {
     port: 8001,
     publicPath: '/',
     stats: 'errors-only',
+    historyApiFallback: {
+      index: 'index.html',
+    },
   },
 });
