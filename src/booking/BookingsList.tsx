@@ -12,6 +12,7 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, translate } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 interface BookingsList {
@@ -26,6 +27,8 @@ interface DetailedInfo {
     attributes: {
       schedules: EventInput[];
     };
+    project_description: string;
+    description: string;
   };
 }
 
@@ -40,8 +43,7 @@ const wrapScheduleTitleTooltip = (label, children) =>
 
 const ExpandableRow = ({ row }: DetailedInfo) => (
   <div className="container-fluid">
-    <h3>{translate('Schedules')}:</h3>
-    <label>{translate('Date')}</label>{' '}
+    <h3 className="m-t-sm">{translate('Schedules')}</h3>
     {row.attributes.schedules.map((schedule, index) => (
       <React.Fragment key={index}>
         {wrapScheduleTitleTooltip(
@@ -56,6 +58,10 @@ const ExpandableRow = ({ row }: DetailedInfo) => (
           row.attributes.schedules.length !== index + 1 && <>{'; '}</>}
       </React.Fragment>
     ))}
+    <h3 className="m-t-sm">{translate('Project description')}</h3>
+    <span>{renderFieldOrDash(row.project_description)}</span>
+    <h3 className="m-t-sm">{translate('Booking description')}</h3>
+    <span>{renderFieldOrDash(row.description)}</span>
   </div>
 );
 
@@ -69,6 +75,18 @@ const TableComponent = (props) => {
     {
       title: translate('Project'),
       render: ({ row }) => row.project_name,
+    },
+    {
+      title: translate('Organization'),
+      render: ({ row }) => row.customer_name,
+    },
+    {
+      title: translate('Created by'),
+      render: ({ row }) => row.created_by_full_name,
+    },
+    {
+      title: translate('Approved by'),
+      render: ({ row }) => row.approved_by_full_name,
     },
     {
       title: translate('Created'),
