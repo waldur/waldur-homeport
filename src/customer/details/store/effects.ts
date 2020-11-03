@@ -1,11 +1,12 @@
 import { SubmissionError, reset } from 'redux-form';
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import { PendingReviewDialog } from '@waldur/customer/team/PendingReviewDialog';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showError, emitSignal } from '@waldur/store/coreSaga';
 import { SET_CURRENT_CUSTOMER } from '@waldur/workspace/constants';
+import { checkIsOwner, getUser } from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
 import * as api from './api';
@@ -47,7 +48,12 @@ export function* removeLogo(action) {
 }
 
 function* checkPendingReview(action) {
+  const user = yield select(getUser);
   const { customer } = action.payload;
+  // Skip review if user is not customer owner
+  if (!checkIsOwner(customer, user)) {
+    return;
+  }
   try {
     const review = yield call(api.getPendingReview, customer.uuid);
     if (review) {
