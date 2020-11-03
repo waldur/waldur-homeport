@@ -4448,7 +4448,7 @@ msgstr "Tellimuse objekti  tühistamine on planeeritud."
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/offering/OfferingTabs.tsx src/resource/tabs/constants.js
 msgid "Order items"
-msgstr "Telli objektid"
+msgstr "Tellimused"
 
 #: src/marketplace/cart/ShoppingCartItemUpdate.tsx
 #: src/marketplace/details/OfferingDetails.tsx
