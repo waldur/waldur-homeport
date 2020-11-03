@@ -8,5 +8,6 @@ import 'echarts/lib/chart/line';
 import 'echarts/lib/chart/pie';
 import 'echarts/lib/chart/sankey';
 import 'echarts/lib/chart/treemap';
+import 'echarts/lib/chart/sunburst';
 
 export default echarts;

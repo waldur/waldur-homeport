@@ -76,6 +76,12 @@ const getReportItems = () => [
         state: 'marketplace-support-offerings',
       },
       {
+        label: translate('Organizations'),
+        icon: 'fa-building',
+        state: 'support.organizations-divisions',
+        feature: 'support.organizations',
+      },
+      {
         label: translate('Ordering'),
         icon: 'fa-files-o',
         state: 'marketplace-support-order-items',

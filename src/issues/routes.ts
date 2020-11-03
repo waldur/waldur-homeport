@@ -1,4 +1,5 @@
 import { StateDeclaration } from '@waldur/core/types';
+import { CustomersDivisionsContainer } from '@waldur/customer/divisions/CustomersDivisionsContainer';
 import { LazyCustomerList } from '@waldur/customer/list/LazyCustomerList';
 import { OrganizationUpdateContainer } from '@waldur/customer/list/OrganizationUpdateContainer';
 import { SupportCustomersContainer } from '@waldur/customer/list/SupportCustomersContainer';
@@ -81,6 +82,18 @@ export const states: StateDeclaration[] = [
     name: 'support.organizations',
     url: 'organizations/',
     component: LazyCustomerList,
+    data: {
+      feature: 'support.organizations',
+    },
+    resolve: {
+      permission: checkPermission,
+    },
+  },
+
+  {
+    name: 'support.organizations-divisions',
+    url: 'organizations-divisions/',
+    component: CustomersDivisionsContainer,
     data: {
       feature: 'support.organizations',
     },

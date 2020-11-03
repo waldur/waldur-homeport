@@ -1,0 +1,104 @@
+{
+  "toolbox": {
+    "feature": {
+      "saveAsImage": {
+        "title": "Save",
+        "name": "Organizations-by-divisions-chart-01-07-2020",
+        "show": true
+      }
+    }
+  },
+  "series": {
+    "type": "sunburst",
+    "highlightPolicy": "ancestor",
+    "data": [
+      {
+        "uuid": "83f8bf94e7b148d9bce03755ab692e1f",
+        "url": "http://localhost:8080/api/divisions/83f8bf94e7b148d9bce03755ab692e1f/",
+        "name": "Citizen-scientists",
+        "type": "Researcher",
+        "parent": null,
+        "value": 0,
+        "itemStyle": {
+          "color": "#420a68"
+        },
+        "children": [
+          {
+            "uuid": "5a9e75a5a5ef473eb61a44e920a1130f",
+            "url": "http://localhost:8080/api/divisions/5a9e75a5a5ef473eb61a44e920a1130f/",
+            "name": "Group of citizen-scientists",
+            "type": "Department",
+            "parent_uuid": "83f8bf94e7b148d9bce03755ab692e1f",
+            "parent_name": "Researcher",
+            "parent": "http://localhost:8080/api/divisions/83f8bf94e7b148d9bce03755ab692e1f/",
+            "value": 1,
+            "itemStyle": {
+              "color": "#932667"
+            }
+          }
+        ]
+      },
+      {
+        "uuid": "83ff0d812c444d4f92dbf647cca01aeb",
+        "url": "http://localhost:8080/api/divisions/83ff0d812c444d4f92dbf647cca01aeb/",
+        "name": "Private sector",
+        "type": "Department",
+        "parent": null,
+        "value": 2,
+        "itemStyle": {
+          "color": "#dd513a"
+        },
+        "children": [
+          {
+            "uuid": "d7f4b9d471c54817a792d78c3a280c4d",
+            "url": "http://localhost:8080/api/divisions/d7f4b9d471c54817a792d78c3a280c4d/",
+            "name": "FIE",
+            "type": "Researcher",
+            "parent_uuid": "83ff0d812c444d4f92dbf647cca01aeb",
+            "parent_name": "Department",
+            "parent": "http://localhost:8080/api/divisions/83ff0d812c444d4f92dbf647cca01aeb/",
+            "value": 1,
+            "itemStyle": {
+              "color": "#6a176e"
+            }
+          },
+          {
+            "uuid": "81e881b35b8c4f62b68759cd01a65a3a",
+            "url": "http://localhost:8080/api/divisions/81e881b35b8c4f62b68759cd01a65a3a/",
+            "name": "Non-profit",
+            "type": "Department",
+            "parent_uuid": "83ff0d812c444d4f92dbf647cca01aeb",
+            "parent_name": "Department",
+            "parent": "http://localhost:8080/api/divisions/83ff0d812c444d4f92dbf647cca01aeb/",
+            "value": 2,
+            "itemStyle": {
+              "color": "#bc3754"
+            }
+          }
+        ]
+      },
+      {
+        "uuid": "fa6e9b6148454a04b16f783f348ef589",
+        "url": "http://localhost:8080/api/divisions/fa6e9b6148454a04b16f783f348ef589/",
+        "name": "Public sector",
+        "type": "Department",
+        "parent": null,
+        "value": 0,
+        "itemStyle": {
+          "color": "#f37819"
+        }
+      },
+      {
+        "name": "Uncategorized",
+        "value": 4,
+        "itemStyle": {
+          "color": "#C0C0C0"
+        }
+      }
+    ],
+    "radius": [0, "90%"],
+    "label": {
+      "rotate": "radial"
+    }
+  }
+}
