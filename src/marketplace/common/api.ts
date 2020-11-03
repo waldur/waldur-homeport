@@ -152,7 +152,14 @@ export const getProjectList = (params?: {}) =>
 export const getOrganizationDivisionList = (params?: {}) =>
   getSelectData('/divisions/', params);
 
+export const getAllOrganizationDivisions = () => getAll('/divisions/', {});
+
 export const getCustomer = (id: string) => getById<Customer>('/customers/', id);
+
+export const getCustomersDivisionUuids = (accounting_is_running: boolean) =>
+  getAll('/customers/', {
+    params: { accounting_is_running, size: 200, field: ['division_uuid'] },
+  });
 
 export const updateOfferingState = (offeringUuid, action, reason) =>
   post(

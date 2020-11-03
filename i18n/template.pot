@@ -4588,6 +4588,14 @@ msgstr ""
 msgid "Organizations ({count})"
 msgstr ""
 
+#: src/customer/divisions/CustomersDivisionsChart.tsx
+msgid "Organizations by divisions"
+msgstr ""
+
+#: src/customer/divisions/CustomersDivisionsContainer.tsx
+msgid "Organizations divisions"
+msgstr ""
+
 #: src/invoices/growth/utils.ts
 msgid "Others"
 msgstr ""
@@ -6233,6 +6241,7 @@ msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
+#: src/customer/divisions/utils.ts
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -7944,6 +7953,7 @@ msgstr ""
 msgid "Unable to load customer."
 msgstr ""
 
+#: src/customer/divisions/CustomersDivisionsChart.tsx
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/slurm/details/AllocationUsageTable.tsx
