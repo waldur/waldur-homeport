@@ -8164,7 +8164,7 @@ msgstr "Uuenda"
 
 #: src/openstack/openstack-instance/actions/UpdateFloatingIpsAction.ts
 msgid "Update floating IPs"
-msgstr "Uuenda ´liikuvaid IP aadresse"
+msgstr "Uuenda liikuvaid IP aadresse"
 
 #: src/user/hooks/hook-details.html
 msgid "Update notification"
