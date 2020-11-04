@@ -12,7 +12,7 @@ import { SelectField } from './SelectField';
 
 export const PriorityGroup = ({ priorities, disabled }) => {
   const user = useSelector(getUser);
-  if (!user.is_staff && !user.is_support) {
+  if (!user || (!user.is_staff && !user.is_support)) {
     return null;
   }
   return (
