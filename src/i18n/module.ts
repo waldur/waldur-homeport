@@ -1,12 +1,9 @@
 import LanguageUtilsService from './language-utils-service';
 
-function checkLanguage(LanguageUtilsService, $rootScope) {
+function checkLanguage(LanguageUtilsService) {
   LanguageUtilsService.checkLanguage();
-  $rootScope.$on('$translateRefreshEnd', () => {
-    location.reload();
-  });
 }
-checkLanguage.$inject = ['LanguageUtilsService', '$rootScope'];
+checkLanguage.$inject = ['LanguageUtilsService'];
 
 export default (module) => {
   module.service('LanguageUtilsService', LanguageUtilsService);
