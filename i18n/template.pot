@@ -5627,7 +5627,7 @@ msgid "Register to"
 msgstr ""
 
 #: src/auth/AuthButton.tsx
-msgid "Register with"
+msgid "Register with {label}"
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
@@ -6777,7 +6777,7 @@ msgid "Sign in"
 msgstr ""
 
 #: src/auth/AuthButton.tsx
-msgid "Sign in with"
+msgid "Sign in with {label}"
 msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx

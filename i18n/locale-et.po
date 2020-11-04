@@ -5637,7 +5637,7 @@ msgid "Register to"
 msgstr "Registreeru"
 
 #: src/auth/auth-button-text.js
-msgid "Register with"
+msgid "Register with {label}"
 msgstr "Registreeru koos"
 
 #: src/auth/auth-login.html
@@ -6820,7 +6820,7 @@ msgid "Sign in"
 msgstr "Logi sisse"
 
 #: src/auth/auth-button-text.js
-msgid "Sign in with"
+msgid "Sign in with {label}"
 msgstr "Logi sisse koos"
 
 #: src/auth/auth-login.html

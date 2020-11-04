@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { LanguageList } from '@waldur/i18n/LanguageList';
@@ -17,7 +18,8 @@ import { useAuthFeatures } from './useAuthFeatures';
 
 export const AuthLogin = () => {
   const features = useAuthFeatures();
-  const providers = React.useMemo(getAuthProviders, []);
+  const locale = useSelector((state: { locale: string }) => state.locale);
+  const providers = React.useMemo(getAuthProviders, [locale]);
   return (
     <>
       <CookiesConsent />

@@ -21,18 +21,17 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
   onClick,
 }) => {
   const dispatch = useDispatch();
-  const prefix =
+  const caption =
     mode === 'register'
-      ? translate('Register with')
-      : translate('Sign in with');
+      ? translate('Register with {label}', { label })
+      : translate('Sign in with {label}', { label });
   return (
     <div className="m-b-sm">
       <button
         onClick={() => onClick(dispatch)}
         className={`btn ${btnClass} btn-block`}
       >
-        <i className={`fa ${iconClass}`} aria-hidden="true" />{' '}
-        {`${prefix} ${label}`}
+        <i className={`fa ${iconClass}`} aria-hidden="true" /> {caption}
       </button>
     </div>
   );

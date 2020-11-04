@@ -4493,7 +4493,7 @@ msgid "Register to"
 msgstr "---- qeydiyyatdan keçin"
 
 #: src/auth/auth-button-text.js
-msgid "Register with"
+msgid "Register with {label}"
 msgstr "ilə qeydiyyatdan keçin"
 
 #: src/auth/auth-login.html
@@ -5290,8 +5290,8 @@ msgid "Sign in"
 msgstr "Daxil ol"
 
 #: src/auth/auth-button-text.js
-msgid "Sign in with"
-msgstr "__ilə daxil ol"
+msgid "Sign in with {label}"
+msgstr "{label} ilə daxil ol"
 
 #: src/auth/auth-login.html
 msgid "Sign in with trusted identity"
