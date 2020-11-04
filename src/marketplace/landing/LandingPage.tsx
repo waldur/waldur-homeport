@@ -26,9 +26,12 @@ interface LandingPageProps extends TranslateProps {
 export const LandingPage = withTranslation((props: LandingPageProps) => (
   <div>
     <HeroSection
-      title={props.translate('Explore {deployment} Marketplace', {
-        deployment: ENV.shortPageTitle,
-      })}
+      title={
+        ENV.marketplaceLandingPageTitle ||
+        props.translate('Explore {deployment} Marketplace', {
+          deployment: ENV.shortPageTitle,
+        })
+      }
     >
       <AutocompleteField
         placeholder={props.translate('Search for offerings...')}
