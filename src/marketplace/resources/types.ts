@@ -26,6 +26,7 @@ export interface Resource extends ResourceReference {
   scope?: string;
   created?: string;
   category_title?: string;
+  customer_name?: string;
   project_name?: string;
   customer_uuid?: string;
   is_usage_based?: boolean;

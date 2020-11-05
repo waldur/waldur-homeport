@@ -33,6 +33,12 @@ const StaticPlanField = () => (
   />
 );
 
+const SummaryField = ({ label, value }) => (
+  <p>
+    <strong>{label}</strong>: {value}
+  </p>
+);
+
 export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
   const components = [];
   props.components.forEach((component: OfferingComponent, index) => {
@@ -70,6 +76,20 @@ export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
   return (
     <form onSubmit={props.handleSubmit(props.submitReport)}>
       <FormContainer submitting={props.submitting} layout="vertical">
+        <SummaryField
+          label={translate('Client organization')}
+          value={props.params.customer_name}
+        />
+        <SummaryField
+          label={translate('Client project')}
+          value={props.params.project_name}
+        />
+        {props.params.backend_id && (
+          <SummaryField
+            label={translate('Backend ID')}
+            value={props.params.backend_id}
+          />
+        )}
         {props.periods.length > 1 ? (
           <SelectField
             name="period"

@@ -9,7 +9,15 @@ import { ResourceShowUsageButton } from './ResourceShowUsageButton';
 interface Props {
   row: Pick<
     Resource,
-    'state' | 'plan' | 'is_usage_based' | 'uuid' | 'offering_uuid' | 'name'
+    | 'state'
+    | 'plan'
+    | 'is_usage_based'
+    | 'uuid'
+    | 'offering_uuid'
+    | 'name'
+    | 'customer_name'
+    | 'project_name'
+    | 'backend_id'
   >;
 }
 
@@ -26,6 +34,9 @@ export const ResourceUsageButton = ({ row }: Props) => {
           offering_uuid={row.offering_uuid}
           resource_uuid={row.uuid}
           resource_name={row.name}
+          customer_name={row.customer_name}
+          project_name={row.project_name}
+          backend_id={row.backend_id}
         />
       )}
     </div>
