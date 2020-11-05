@@ -45,7 +45,7 @@ export const ChecklistOverview = () => {
         {state.statsLoading ? (
           <LoadingSpinner />
         ) : state.statsErred ? (
-          <>{translate('Unable to load compiance overview.')}</>
+          <>{translate('Unable to load compliance overview.')}</>
         ) : (
           <Panel className="m-t-md">
             <CustomerMap customers={state.statsList} />
