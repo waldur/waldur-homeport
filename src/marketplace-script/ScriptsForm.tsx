@@ -5,7 +5,7 @@ import { FieldArray } from 'redux-form';
 import { FormContainer, SelectField } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
-import { getForm } from '@waldur/marketplace/offerings/store/selectors';
+import { offeringFormValueSelector } from '@waldur/marketplace/offerings/store/selectors';
 
 import { EnvironmentVariablesList } from './EnvironmentVariablesList';
 
@@ -21,7 +21,7 @@ const PROGRAMMING_LANGUAGE_CHOICES = [
 ];
 
 const getLanguage = (state) =>
-  (getForm(state, 'secret_options') || {}).language;
+  (offeringFormValueSelector(state, 'secret_options') || {}).language;
 
 export const ScriptsForm = ({ container }) => {
   const language = useSelector(getLanguage);

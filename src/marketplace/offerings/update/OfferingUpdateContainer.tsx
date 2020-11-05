@@ -6,7 +6,7 @@ import { $state } from '@waldur/core/services';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
 
 import { mergeProps } from '../create/OfferingCreateContainer';
-import { updateOffering, FORM_ID } from '../store/constants';
+import { updateOffering, OFFERING_FORM_ID } from '../store/constants';
 import {
   getStep,
   isOfferingManagementDisabled,
@@ -47,7 +47,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps, mergeProps);
 const enhance = compose(
   connector,
   reduxForm({
-    form: FORM_ID,
+    form: OFFERING_FORM_ID,
     enableReinitialize: true,
   }),
 );

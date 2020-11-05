@@ -9,7 +9,7 @@ import {
   getUser,
 } from '@waldur/workspace/selectors';
 
-import { FORM_ID, DRAFT } from './constants';
+import { OFFERING_FORM_ID, DRAFT } from './constants';
 import { PlanFormData } from './types';
 import { formatComponents } from './utils';
 
@@ -24,13 +24,15 @@ export const getOfferingComponents = (state, type) =>
 export const getOfferingLimits = (state, type) =>
   getOffering(state).plugins[type].available_limits;
 
-export const getForm = formValueSelector(FORM_ID);
+export const getOfferingFormValues = getFormValues(OFFERING_FORM_ID);
+
+export const offeringFormValueSelector = formValueSelector(OFFERING_FORM_ID);
 
 export const getComponents = (state, type): OfferingComponent[] => {
   const builtinComponents = getOfferingComponents(state, type);
   const builtinTypes: string[] = builtinComponents.map((c) => c.type);
   const formComponents: OfferingComponent[] = formatComponents(
-    getForm(state, 'components') || [],
+    offeringFormValueSelector(state, 'components') || [],
   );
   let components = [
     ...builtinComponents,
@@ -38,34 +40,37 @@ export const getComponents = (state, type): OfferingComponent[] => {
   ];
   const offeringComponentsFilter = getOfferingComponentsFilter(type);
   if (offeringComponentsFilter) {
-    const formData = getFormValues(FORM_ID)(state);
+    const formData = getOfferingFormValues(state);
     components = offeringComponentsFilter(formData, components);
   }
   return components;
 };
 
 export const getTypeLabel = (state: any): string => {
-  const option = getForm(state, 'type');
+  const option = offeringFormValueSelector(state, 'type');
   if (option) {
     return option.label;
   }
 };
 
 export const getType = (state: any): string => {
-  const option = getForm(state, 'type');
+  const option = offeringFormValueSelector(state, 'type');
   if (option) {
     return option.value;
   }
 };
 
-export const getCategory = (state) => getForm(state, 'category');
+export const getCategory = (state) =>
+  offeringFormValueSelector(state, 'category');
 
-export const getAttributes = (state) => getForm(state, 'attributes');
+export const getAttributes = (state) =>
+  offeringFormValueSelector(state, 'attributes');
 
-export const getPlans = (state): PlanFormData[] => getForm(state, 'plans');
+export const getPlans = (state): PlanFormData[] =>
+  offeringFormValueSelector(state, 'plans');
 
 export const getPlanData = (state, planPath: string): PlanFormData =>
-  getForm(state, planPath);
+  offeringFormValueSelector(state, planPath);
 
 export const getPlanPrice = (state, planPath) => {
   const planData = getPlanData(state, planPath);

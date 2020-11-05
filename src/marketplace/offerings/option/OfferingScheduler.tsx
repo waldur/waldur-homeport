@@ -3,7 +3,7 @@ import * as Col from 'react-bootstrap/lib/Col';
 import * as Panel from 'react-bootstrap/lib/Panel';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
+import { WrappedFieldArrayProps } from 'redux-form';
 
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
 import { CalendarSettings } from '@waldur/booking/components/CalendarSettings';
@@ -12,6 +12,7 @@ import { deleteCalendarBooking } from '@waldur/booking/utils';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 import './OfferingScheduler.scss';
+import { offeringFormValueSelector } from '../store/selectors';
 
 type OfferingSchedulerProps = TranslateProps &
   WrappedFieldArrayProps<any> & {
@@ -45,7 +46,7 @@ export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
 );
 
 const mapStateToProps = (state) => ({
-  schedules: formValueSelector('marketplaceOfferingCreate')(state, 'schedules'),
+  schedules: offeringFormValueSelector(state, 'schedules'),
   config: state.bookings.config as State,
 });
 

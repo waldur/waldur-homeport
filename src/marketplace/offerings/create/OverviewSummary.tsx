@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
 import { Section } from '@waldur/marketplace/types';
 
-import { FORM_ID } from '../store/constants';
+import { getOfferingFormValues } from '../store/selectors';
 
 import { hasError } from './utils';
 
@@ -42,15 +41,15 @@ const PureOverviewSummary = (props) => {
       <h3>{translate('Overview')}</h3>
       {props.nameInvalid ? (
         <p>{translate('Name is not valid.')}</p>
-      ) : (
+      ) : props.formData ? (
         <AttributesTable attributes={props.formData} sections={[schema]} />
-      )}
+      ) : null}
     </>
   );
 };
 
 const connector = connect((state) => ({
-  formData: getFormValues(FORM_ID)(state),
+  formData: getOfferingFormValues(state),
   nameInvalid: hasError('name')(state),
 }));
 

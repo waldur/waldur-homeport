@@ -1,25 +1,23 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
-import { Field, formValueSelector } from 'redux-form';
+import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
-import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 
 import { DisplayNameField } from '../DisplayNameField';
 import { FormGroup } from '../FormGroup';
 import { InternalNameField } from '../InternalNameField';
+import { offeringFormValueSelector } from '../store/selectors';
 
 import { FIELD_TYPES } from './constants';
 import { FieldType } from './types';
 
-const selector = formValueSelector(FORM_ID);
-
 const connector = connect<{ type?: string }, {}, { option: string }>(
   (state, ownProps) => {
-    const option = selector(state, ownProps.option);
+    const option = offeringFormValueSelector(state, ownProps.option);
     if (option.type) {
       return { type: option.type.value };
     } else {

@@ -41,6 +41,6 @@ export const TABLE_NAME = 'marketplace-offerings';
 
 export const SCREENSHOTS_TABLE_NAME = 'marketplace-offering-screenshots';
 
-export const FORM_ID = 'marketplaceOfferingCreate';
+export const OFFERING_FORM_ID = 'marketplaceOfferingCreate';
 
 export const OFFERING_SCREENSHOTS_FORM_ID = 'marketplaceOfferingScreenshots';

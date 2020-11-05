@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
 
-import { FORM_ID } from '../store/constants';
-import { getCategory } from '../store/selectors';
+import { getCategory, getOfferingFormValues } from '../store/selectors';
 import { formatAttributes } from '../store/utils';
 
 import { hasError } from './utils';
@@ -38,7 +36,7 @@ const connector = connect((state) => {
   const categoryInvalid = hasError('category')(state);
   const attributesInvalid = hasError('attributes')(state);
 
-  const formData: any = getFormValues(FORM_ID)(state);
+  const formData: any = getOfferingFormValues(state);
   const category = getCategory(state);
   if (!category) {
     return {

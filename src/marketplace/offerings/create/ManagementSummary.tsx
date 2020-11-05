@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { translate } from '@waldur/i18n';
@@ -13,7 +12,7 @@ import { AttributesTable } from '@waldur/marketplace/details/attributes/Attribut
 import { Section } from '@waldur/marketplace/types';
 import { getSerializer } from '@waldur/providers/registry';
 
-import { FORM_ID } from '../store/constants';
+import { getOfferingFormValues } from '../store/selectors';
 
 import { hasError } from './utils';
 
@@ -68,7 +67,7 @@ const PureManagementSummary = (props) => {
 };
 
 const connector = connect((state) => {
-  const formData = getFormValues(FORM_ID)(state);
+  const formData = getOfferingFormValues(state);
   const typeInvalid = hasError('type')(state);
   const optionsInvalid = hasError('options')(state);
   const settingsInvalid = hasError('service_settings')(state);

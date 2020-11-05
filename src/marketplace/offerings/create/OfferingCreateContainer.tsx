@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { setTitle } from '@waldur/navigation/title';
 
 import { loadDataStart, setStep } from '../store/actions';
-import { FORM_ID, createOffering } from '../store/constants';
+import { OFFERING_FORM_ID, createOffering } from '../store/constants';
 import {
   getStep,
   isLoading,
@@ -64,7 +64,7 @@ const validate = (values) => {
 const enhance = compose(
   connector,
   reduxForm({
-    form: FORM_ID,
+    form: OFFERING_FORM_ID,
     validate,
   }),
 );

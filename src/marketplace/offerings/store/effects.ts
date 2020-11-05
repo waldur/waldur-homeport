@@ -51,7 +51,7 @@ function* removeOfferingComponent(action) {
   const newPlans = plans.map((plan) =>
     planWithoutComponent(plan, action.payload.component),
   );
-  yield put(change(constants.FORM_ID, 'plans', newPlans));
+  yield put(change(constants.OFFERING_FORM_ID, 'plans', newPlans));
 }
 
 function* removeOfferingQuotas(action) {
@@ -59,7 +59,7 @@ function* removeOfferingQuotas(action) {
   const newPlans = plans.map((plan) =>
     planWithoutQuotas(plan, action.payload.component),
   );
-  yield put(change(constants.FORM_ID, 'plans', newPlans));
+  yield put(change(constants.OFFERING_FORM_ID, 'plans', newPlans));
 }
 
 function* handleCategoryChange(action) {
@@ -76,15 +76,17 @@ function* handleCategoryChange(action) {
       }
     }
   }
-  yield put(change(constants.FORM_ID, 'category', category));
-  yield put(change(constants.FORM_ID, 'attributes', attributes));
+  yield put(change(constants.OFFERING_FORM_ID, 'category', category));
+  yield put(change(constants.OFFERING_FORM_ID, 'attributes', attributes));
 }
 
 function* createOffering(action: Action<OfferingFormData>) {
   const { thumbnail, document, ...rest } = action.payload;
   const customer = yield select(getCustomer);
   try {
-    const components = yield select(getOfferingComponents, rest.type.value);
+    const components = rest.type
+      ? yield select(getOfferingComponents, rest.type.value)
+      : [];
     const offeringRequest = formatOfferingRequest(rest, components, customer);
     const response = yield call(api.createOffering, offeringRequest);
     if (thumbnail) {
@@ -103,7 +105,7 @@ function* createOffering(action: Action<OfferingFormData>) {
     return;
   }
   yield call(() => $state.go('marketplace-vendor-offerings'));
-  yield put(reset(constants.FORM_ID));
+  yield put(reset(constants.OFFERING_FORM_ID));
   yield put(setStep('Overview'));
   yield put(showSuccess(translate('Offering has been created.')));
   yield put(constants.createOffering.success());
@@ -111,7 +113,9 @@ function* createOffering(action: Action<OfferingFormData>) {
 
 function* updateOffering(action: Action<OfferingUpdateFormData>) {
   const { offeringUuid, thumbnail, ...rest } = action.payload;
-  const components = yield select(getOfferingComponents, rest.type.value);
+  const components = rest.type
+    ? yield select(getOfferingComponents, rest.type.value)
+    : [];
   try {
     const offeringRequest = formatOfferingRequest(rest, components);
     yield call(api.updateOffering, offeringUuid, offeringRequest);
@@ -127,7 +131,7 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
     return;
   }
   yield put(constants.updateOffering.success());
-  yield put(reset(constants.FORM_ID));
+  yield put(reset(constants.OFFERING_FORM_ID));
   yield put(showSuccess(translate('Offering has been updated.')));
   yield put(stateGo('marketplace-vendor-offerings'));
 }
