@@ -722,6 +722,10 @@ msgstr ""
 msgid "Authorized personnel"
 msgstr ""
 
+#: src/offering/OfferingPluginOptionsForm.tsx
+msgid "Auto approve in service provider projects"
+msgstr ""
+
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/openstack-instance-floating-ips.js
 #: src/openstack/openstack-instance/openstack-instance-networks.js
