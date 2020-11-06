@@ -3,6 +3,7 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { OfferingConfigurationDetails } from '@waldur/offering/OfferingConfigurationDetails';
 import { OfferingConfigurationForm } from '@waldur/offering/OfferingConfigurationForm';
 
+import { OfferingPluginOptionsForm } from './OfferingPluginOptionsForm';
 import { serializer } from './serializer';
 
 registerOfferingType({
@@ -12,6 +13,7 @@ registerOfferingType({
   },
   component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
+  pluginOptionsForm: OfferingPluginOptionsForm,
   serializer,
   showOptions: true,
   showComponents: true,

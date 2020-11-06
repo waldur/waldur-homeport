@@ -2,7 +2,9 @@ import * as React from 'react';
 import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
+import { SUPPORT_CUSTOMERS_FORM_ID } from '@waldur/customer/list/constants';
 import { OrganizationDetailsButton } from '@waldur/customer/list/OrganizationDetailsButton';
 import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
 import { translate } from '@waldur/i18n';
@@ -59,9 +61,30 @@ const TableOptions = {
   table: 'supportCustomerList',
   fetchData: createFetcher('customers'),
   queryField: 'query',
+  mapPropsToFilter: (props) => {
+    const filter: Record<string, string> = {};
+    if (props.filter) {
+      if (props.filter.accounting_is_running) {
+        filter.accounting_is_running = props.filter.accounting_is_running.value;
+      }
+      if (props.filter.service_provider) {
+        filter.service_provider = props.filter.service_provider.value;
+      }
+      if (props.filter.division_type) {
+        filter.division_type_uuid = props.filter.division_type.map(
+          (option) => option.uuid,
+        );
+      }
+      if (props.filter.division) {
+        filter.division_uuid = props.filter.division.uuid;
+      }
+    }
+    return filter;
+  },
 };
 
 const mapStateToProps = (state) => ({
+  filter: getFormValues(SUPPORT_CUSTOMERS_FORM_ID)(state),
   isStaff: isStaff(state),
 });
 
