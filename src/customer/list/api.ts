@@ -3,6 +3,7 @@ import { ENV } from '@waldur/core/services';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
   getCategories,
+  getDivisionTypesList,
   getOrganizationDivisionList,
 } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
@@ -68,5 +69,20 @@ export const organizationDivisionAutocomplete = async (
     o: 'name',
   };
   const response = await getOrganizationDivisionList(params);
+  return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
+};
+
+export const divisionTypeAutocomplete = async (
+  query: string,
+  prevOptions,
+  { page },
+) => {
+  const params = {
+    name: query,
+    page: page,
+    page_size: ENV.pageSize,
+    o: 'name',
+  };
+  const response = await getDivisionTypesList(params);
   return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };

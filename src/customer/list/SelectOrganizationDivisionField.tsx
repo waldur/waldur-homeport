@@ -6,6 +6,10 @@ import { Field } from 'redux-form';
 import { organizationDivisionAutocomplete } from '@waldur/customer/list/api';
 import { translate } from '@waldur/i18n';
 
+interface SelectOrganizationDivisionFieldProps {
+  isFilterForm?: boolean;
+}
+
 const RIGHT_ARROW_HTML = <>&rarr;</>;
 
 const Option = (props) => (
@@ -30,10 +34,14 @@ const SingleValue = (props) => (
   </components.SingleValue>
 );
 
-export const SelectOrganizationDivisionField = () => (
-  <div className="form-group">
-    <label className="control-label col-sm-2">{translate('Division')}</label>
-    <div className="col-sm-8">
+export const SelectOrganizationDivisionField = (
+  props: SelectOrganizationDivisionFieldProps,
+) => (
+  <div className={`form-group${props.isFilterForm ? ' col-sm-3' : ''}`}>
+    <label className={`control-label${props.isFilterForm ? '' : ' col-sm-2'}`}>
+      {translate('Division')}
+    </label>
+    <div className={props.isFilterForm ? '' : 'col-sm-8'}>
       <Field
         name="division"
         component={(fieldProps) => (

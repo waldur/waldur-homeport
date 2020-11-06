@@ -152,6 +152,9 @@ export const getProjectList = (params?: {}) =>
 export const getOrganizationDivisionList = (params?: {}) =>
   getSelectData('/divisions/', params);
 
+export const getDivisionTypesList = (params?: {}) =>
+  getSelectData('/division-types/', params);
+
 export const getAllOrganizationDivisions = () => getAll('/divisions/', {});
 
 export const getCustomer = (id: string) => getById<Customer>('/customers/', id);
