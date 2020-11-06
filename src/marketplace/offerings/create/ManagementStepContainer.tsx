@@ -21,12 +21,13 @@ import { ServiceSettingsDetailsDialog } from './ServiceSettingsDetailsDialog';
 
 const mapStateToProps = (state) => {
   const offering: Offering = getOffering(state).offering;
+  const type = getType(state);
   const props: Partial<ManagementStepProps> = {
     offeringTypes: getOfferingTypes(),
     editable: !offering,
     typeLabel: getTypeLabel(state),
+    type,
   };
-  const type = getType(state);
   if (type) {
     props.showOptions = showOfferingOptions(type);
     props.schedulable = isOfferingTypeSchedulable(type);

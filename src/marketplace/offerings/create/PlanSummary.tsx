@@ -19,7 +19,7 @@ export const PlanSummary = (props: PlanProps) => (
         <strong>{translate('Billing period')}:</strong> {props.plan.unit.label}
       </p>
     )}
-    {(props.plan.quotas || props.plan.prices) && (
+    {props.components && (props.plan.quotas || props.plan.prices) && (
       <table className="table table-bordered">
         <thead>
           <tr>

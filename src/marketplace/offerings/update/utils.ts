@@ -72,9 +72,6 @@ const parseComponents = (components) => {
 
 export const getInitialValues = (state) => {
   const offering: Offering = getOffering(state).offering;
-  if (!offering?.type) {
-    return {};
-  }
   const categories = getCategories(state);
   const offeringTypes = getOfferingTypes();
   const category = categories.find(
@@ -102,7 +99,7 @@ export const getInitialValues = (state) => {
     options,
     plugin_options: offering.plugin_options,
     secret_options: offering.secret_options,
-    plans: offering.plans.map((plan) => ({
+    plans: offering.plans?.map((plan) => ({
       ...plan,
       unit: getBillingPeriods().find(({ value }) => value === plan.unit),
     })),

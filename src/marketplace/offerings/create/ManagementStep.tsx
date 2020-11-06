@@ -21,6 +21,7 @@ export interface ManagementStepProps extends TranslateProps {
   offeringTypes: Option[];
   editable: boolean;
   typeLabel?: string;
+  type?: string;
   openServiceSettingsDetails(): void;
 }
 
@@ -58,7 +59,7 @@ export const ManagementStep = (props: ManagementStepProps) => (
           container: ContainerProps,
         })}
       </FormSection>
-    ) : !props.showOptions && props.typeLabel ? (
+    ) : !props.showOptions && props.type ? (
       <div className="form-group">
         <div className="col-sm-8 col-sm-offset-2">
           <Button onClick={props.openServiceSettingsDetails}>
