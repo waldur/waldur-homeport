@@ -71,7 +71,8 @@ export const ManagementStep = (props: ManagementStepProps) => (
     {props.schedulable && (
       <FieldArray name="schedules" component={OfferingScheduler} />
     )}
-    {props.showOptions && (
+    /* Render options form for basic offering type */
+    {(props.showOptions || props.type === '') && (
       <FieldArray name="options" component={OfferingOptions} />
     )}
     {props.pluginOptionsForm && (
