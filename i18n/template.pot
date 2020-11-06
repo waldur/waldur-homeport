@@ -121,6 +121,10 @@ msgstr ""
 msgid "Accounting records"
 msgstr ""
 
+#: src/customer/list/SupportCustomerFilter.tsx
+msgid "Accounting running"
+msgstr ""
+
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Accounting start date"
@@ -450,6 +454,7 @@ msgid "Alert"
 msgstr ""
 
 #: src/customer/list/AccountingRunningField.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
 #: src/rancher/node/NodeRoleField.tsx
 msgid "All"
 msgstr ""
@@ -1965,6 +1970,10 @@ msgstr ""
 
 #: src/customer/list/SelectOrganizationDivisionField.tsx
 msgid "Division"
+msgstr ""
+
+#: src/customer/list/DivisionTypeFilter.tsx
+msgid "Division type"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentDisableQuotaField.tsx
@@ -3981,6 +3990,7 @@ msgid "Next trigger at"
 msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -4005,6 +4015,10 @@ msgstr ""
 
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
+msgstr ""
+
+#: src/customer/list/DivisionTypeFilter.tsx
+msgid "No division types"
 msgstr ""
 
 #: src/customer/list/SelectOrganizationDivisionField.tsx
@@ -6430,6 +6444,10 @@ msgstr ""
 msgid "Select dates"
 msgstr ""
 
+#: src/customer/list/DivisionTypeFilter.tsx
+msgid "Select division type..."
+msgstr ""
+
 #: src/customer/list/SelectOrganizationDivisionField.tsx
 msgid "Select division..."
 msgstr ""
@@ -6509,6 +6527,7 @@ msgstr ""
 msgid "Select service provider"
 msgstr ""
 
+#: src/customer/list/ServiceProviderFilter.tsx
 #: src/marketplace/offerings/customers/SupportOfferingsFilter.tsx
 msgid "Select service provider..."
 msgstr ""
@@ -6591,6 +6610,7 @@ msgstr ""
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr ""
 
+#: src/customer/list/ServiceProviderFilter.tsx
 #: src/invoices/details/InvoiceItemDetails.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/details/LeafletMap.tsx
@@ -9014,6 +9034,7 @@ msgid "YAML has been updated."
 msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/ServiceProviderFilter.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx

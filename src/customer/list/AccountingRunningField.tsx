@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 export const getOptions = () => [
   { value: true, label: translate('Running accounting') },
   { value: false, label: translate('Not running accounting') },
-  { value: null, label: translate('All') },
+  { value: undefined, label: translate('All') },
 ];
 
 export const AccountingRunningField = () => (
