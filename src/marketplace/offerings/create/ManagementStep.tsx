@@ -72,7 +72,7 @@ export const ManagementStep = (props: ManagementStepProps) => (
       <FieldArray name="schedules" component={OfferingScheduler} />
     )}
     {/* Render options form for basic offering type */}
-    {(props.showOptions || props.type.value === '') && (
+    {(props.showOptions || props.type?.value === '') && (
       <FieldArray name="options" component={OfferingOptions} />
     )}
     {props.pluginOptionsForm && (
