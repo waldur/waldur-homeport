@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as Button from 'react-bootstrap/lib/Button';
 import { FieldArray, FormSection } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField } from '@waldur/form';
 import { StaticField } from '@waldur/form/StaticField';
 import { TranslateProps, translate } from '@waldur/i18n';
@@ -37,13 +38,15 @@ export const ManagementStep = (props: ManagementStepProps) => (
         <SelectField
           name="type"
           label={props.translate('Type')}
+          required={true}
           options={props.offeringTypes}
-          isClearable={true}
+          isClearable={false}
+          validate={required}
         />
       ) : (
         <StaticField
           label={props.translate('Type')}
-          value={props.typeLabel}
+          value={props.typeLabel || translate('Basic')}
           {...ContainerProps}
         />
       )}

@@ -844,6 +844,11 @@ msgstr ""
 msgid "Base image name"
 msgstr ""
 
+#: src/marketplace/common/registry.ts
+#: src/marketplace/offerings/create/ManagementStep.tsx
+msgid "Basic"
+msgstr ""
+
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Batch RAM"
 msgstr ""

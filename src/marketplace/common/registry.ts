@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Omit } from 'react-redux';
 
+import { translate } from '@waldur/i18n';
 import {
   Offering,
   Attribute,
@@ -109,10 +110,17 @@ export function getOfferingTypes(): Option[] {
   const keys = Object.keys(REGISTRY).filter(
     (key) => !REGISTRY[key].disableOfferingCreation,
   );
-  return keys.map((key) => ({
+  const items = keys.map((key) => ({
     value: key,
     label: REGISTRY[key].label,
   }));
+  return [
+    {
+      value: '',
+      label: translate('Basic'),
+    },
+    ...items,
+  ];
 }
 
 export function showOfferingOptions(offeringType: string) {
