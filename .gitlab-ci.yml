@@ -106,3 +106,4 @@ Lint docker image:
   extends: .Lint docker image template
   variables:
     IMAGE: opennode/waldur-homeport:latest
+  before_script: []
