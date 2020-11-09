@@ -16,6 +16,7 @@ export const SecurityGroupRulesList = ({ resource }) => (
           <th>{translate('IP protocol')}</th>
           <th>{translate('Port range')}</th>
           <th>{translate('Remote CIDR')}</th>
+          <th>{translate('Description')}</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +25,7 @@ export const SecurityGroupRulesList = ({ resource }) => (
             <td>{formatSecurityGroupProtocol(rule)}</td>
             <td>{formatSecurityGroupRulePortRange(rule)}</td>
             <td>{formatSecurityGroupCIDR(rule)}</td>
+            <td>{rule.description || 'N/A'}</td>
           </tr>
         ))}
       </tbody>

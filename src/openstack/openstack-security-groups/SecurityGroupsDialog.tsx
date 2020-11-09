@@ -26,6 +26,7 @@ export const SecurityGroupsDialog = ({ resolve: { securityGroups } }) => (
               <th>{translate('IP protocol')}</th>
               <th>{translate('Port range')}</th>
               <th>{translate('Remote network')}</th>
+              <th>{translate('Description')}</th>
             </tr>
           </thead>
           {securityGroups.map((securityGroup, securityGroupIndex) => (
@@ -46,6 +47,7 @@ export const SecurityGroupsDialog = ({ resolve: { securityGroups } }) => (
                   <td>
                     {rule.cidr} ({translate('CIDR')})
                   </td>
+                  <td>{rule.description || 'N/A'}</td>
                 </tr>
               ))}
             </tbody>

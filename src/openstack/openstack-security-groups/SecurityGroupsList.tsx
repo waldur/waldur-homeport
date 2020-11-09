@@ -7,14 +7,10 @@ import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource } from '@waldur/resource/types';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
+import { SecurityGroupRule } from '../types';
+
 interface ResourceRules extends Resource {
-  rules: {
-    id: number;
-    protocol: string;
-    cidr: string;
-    from_port: number;
-    to_port: number;
-  }[];
+  rules: SecurityGroupRule[];
 }
 
 const ResourceRuleCount = (resource: ResourceRules) => resource.rules.length;

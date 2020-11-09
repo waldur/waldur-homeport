@@ -1,5 +1,7 @@
 import { Resource } from '@waldur/resource/types';
 
+import { SecurityGroupRule } from '../types';
+
 interface NestedInternalIp {
   ip4_address: string;
   mac_address: string;
@@ -10,19 +12,11 @@ interface NestedInternalIp {
   subnet_cidr: string;
 }
 
-interface SecurityGroupRule {
-  id: number;
-  protocol: string;
-  from_port: number;
-  to_port: number;
-  cidr: string;
-}
-
 interface NestedSecurityGroup {
   url: string;
   name: string;
   description: string;
-  rukes: SecurityGroupRule[];
+  rules: SecurityGroupRule[];
 }
 
 export interface OpenStackBackup extends Resource {
