@@ -7,6 +7,8 @@ include:
     file: "/templates/release/sync-to-github.yml"
   - project: "waldur/waldur-pipelines"
     file: "/templates/validate/docker-compose-trigger.yml"
+  - project: "waldur/waldur-pipelines"
+    file: "/templates/test/lint-docker-image.yaml"
 
 variables:
   COMPONENT_VERSION: "latest"
@@ -99,3 +101,8 @@ Build artifact:
     paths:
       - build/
     expire_in: 1 week
+
+Lint docker image:
+  extends: .Lint docker image template
+  variables:
+    IMAGE: opennode/waldur-homeport:latest
