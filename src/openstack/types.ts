@@ -17,3 +17,12 @@ export interface VolumeType {
   description: string;
   is_default: boolean;
 }
+
+export interface SecurityGroupRule {
+  id: number;
+  protocol: string;
+  from_port: number;
+  to_port: number;
+  cidr: string;
+  description?: string;
+}

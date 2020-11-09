@@ -12,6 +12,7 @@
       <th translate>From port</th>
       <th translate>To port</th>
       <th translate>Remote CIDR</th>
+      <th translate>Description</th>
       <th translate>Actions</th>
     </tr>
   </thead>
@@ -69,6 +70,13 @@
           class="form-control"
           ng-pattern="$ctrl.cidrPattern"
           placeholder="0.0.0.0/0"
+        />
+      </td>
+      <td class="form-group">
+        <input
+          name="rule_{{ $index }}_description"
+          ng-model="rule.description"
+          class="form-control"
         />
       </td>
       <td>
