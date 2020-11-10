@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -21,7 +22,20 @@ import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 
 interface FieldProps {
-  row: Resource;
+  row: Resource & {
+    provider_name: string;
+  };
+}
+
+interface StateProps {
+  project: Project;
+  importVisible: boolean;
+  filter: any;
+}
+
+interface OwnProps {
+  category_uuid: string;
+  columns: CategoryColumn[];
 }
 
 export const TableComponent = (props) => {
@@ -33,7 +47,7 @@ export const TableComponent = (props) => {
     },
     {
       title: translate('Provider'),
-      render: ({ row }: FieldProps) => row.offering_name,
+      render: ({ row }: FieldProps) => row.provider_name,
     },
     {
       title: translate('Created at'),
@@ -84,35 +98,36 @@ export const TableComponent = (props) => {
   );
 };
 
+const mapPropsToFilter = (props: StateProps & OwnProps) => {
+  const filter: Record<string, string | boolean> = {};
+  if (props.project) {
+    filter.project_uuid = props.project.uuid;
+  }
+  if (props.category_uuid) {
+    filter.category_uuid = props.category_uuid;
+  }
+  if (props.filter?.state) {
+    filter.state = props.filter.state.value;
+  }
+  if (props.filter?.provider) {
+    filter.provider_uuid = props.filter.provider.customer_uuid;
+  }
+  return filter;
+};
+
 const TableOptions = {
   table: 'ProjectResourcesList',
   mapPropsToTableId: (props) => [props.project.uuid, props.category_uuid],
   fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter: (props) =>
-    props.project
-      ? {
-          project_uuid: props.project.uuid,
-          category_uuid: props.category_uuid,
-          state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
-        }
-      : {},
+  mapPropsToFilter,
   queryField: 'name',
 };
 
 const mapStateToProps = (state) => ({
   project: getProject(state),
   importVisible: isVisible(state, 'import'),
+  filter: getFormValues('ProjectResourcesFilter')(state),
 });
-
-interface StateProps {
-  project: Project;
-  importVisible: boolean;
-}
-
-interface OwnProps {
-  category_uuid: string;
-  columns: CategoryColumn[];
-}
 
 const enhance = compose(
   connect<StateProps, {}, OwnProps>(mapStateToProps),
