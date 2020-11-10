@@ -1,3 +1,5 @@
+import { translate } from '@waldur/i18n';
+
 import template from './security-group-rule-editor.html';
 
 const CIDR_RE = '^(\\d{1,3}\\.){0,3}\\d{1,3}/\\d{1,2}$';
@@ -14,6 +16,10 @@ const securityGroupRuleEditor = {
   controller: class SecurityGroupRuleEditorController {
     $onInit() {
       this.protocols = PROTOCOLS;
+      this.directions = [
+        { label: translate('Ingress'), value: 'ingress' },
+        { label: translate('Egress'), value: 'egress' },
+      ];
       if (!this.model[this.field.name]) {
         this.model[this.field.name] = [];
       }
@@ -46,6 +52,7 @@ const securityGroupRuleEditor = {
     addRule() {
       this.target.push({
         protocol: PROTOCOLS[0],
+        direction: 'ingress',
       });
       this.form.$setDirty();
     }

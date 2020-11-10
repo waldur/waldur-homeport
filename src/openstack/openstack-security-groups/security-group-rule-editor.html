@@ -8,6 +8,7 @@
   </tbody>
   <thead ng-if="$ctrl.target.length > 0">
     <tr>
+      <th translate>Direction</th>
       <th translate>IP protocol</th>
       <th translate>From port</th>
       <th translate>To port</th>
@@ -18,6 +19,15 @@
   </thead>
   <tbody ng-if="$ctrl.target.length > 0">
     <tr ng-repeat="rule in $ctrl.target">
+      <td>
+        <select
+          ng-options="direction.value as direction.label for direction in $ctrl.directions"
+          ng-model="rule.direction"
+          class="form-control"
+          required
+        >
+        </select>
+      </td>
       <td>
         <select
           ng-options="protocol.toUpperCase() for protocol in $ctrl.protocols"

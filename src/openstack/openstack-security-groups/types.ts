@@ -1,10 +1,12 @@
+import { SecurityGroupRule } from '../types';
+
 export interface SecurityGroup {
   url: string;
   uuid: string;
   name: string;
   settings: string;
   description: string;
-  rules: Array<{ [key: string]: string | number }>;
+  rules: SecurityGroupRule[];
 }
 
 export interface SecurityGroupOption extends SecurityGroup {

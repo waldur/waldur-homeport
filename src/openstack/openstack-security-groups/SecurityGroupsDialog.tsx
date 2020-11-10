@@ -5,12 +5,22 @@ import ModalTitle from 'react-bootstrap/lib/ModalTitle';
 
 import { translate } from '@waldur/i18n';
 
+import { SecurityGroup } from './types';
 import {
   formatSecurityGroupProtocol,
+  formatSecurityGroupRuleDirection,
   formatSecurityGroupRulePortRange,
 } from './utils';
 
-export const SecurityGroupsDialog = ({ resolve: { securityGroups } }) => (
+interface SecurityGroupsDialogProps {
+  resolve: {
+    securityGroups: SecurityGroup[];
+  };
+}
+
+export const SecurityGroupsDialog: React.FC<SecurityGroupsDialogProps> = ({
+  resolve: { securityGroups },
+}) => (
   <>
     <ModalHeader>
       <ModalTitle>{translate('Security groups details')}</ModalTitle>
@@ -23,6 +33,7 @@ export const SecurityGroupsDialog = ({ resolve: { securityGroups } }) => (
           <thead>
             <tr>
               <th></th>
+              <th>{translate('Direction')}</th>
               <th>{translate('IP protocol')}</th>
               <th>{translate('Port range')}</th>
               <th>{translate('Remote network')}</th>
@@ -42,6 +53,7 @@ export const SecurityGroupsDialog = ({ resolve: { securityGroups } }) => (
                     </td>
                   )}
 
+                  <td>{formatSecurityGroupRuleDirection(rule)}</td>
                   <td>{formatSecurityGroupProtocol(rule)}</td>
                   <td>{formatSecurityGroupRulePortRange(rule)}</td>
                   <td>
