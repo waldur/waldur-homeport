@@ -5,6 +5,7 @@ import * as DatePicker from 'react-16-bootstrap-date-picker';
 import Select from 'react-select';
 
 import { timelineLabels } from '@waldur/booking/utils';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 
 interface DateAndTimeSelectField {
@@ -51,7 +52,10 @@ export const DateAndTimeSelectField = (props: DateAndTimeSelectField) => (
       className="col-sm-3"
       isClearable={false}
       isSearchable={false}
-      value={props.currentTime.format('HH:mm')}
+      value={{
+        value: props.currentTime.format('HH:mm'),
+        label: props.currentTime.format('HH:mm'),
+      }}
       onChange={(selectOpt: TimeSelect) =>
         props.onChange(
           props.currentTime
@@ -61,6 +65,7 @@ export const DateAndTimeSelectField = (props: DateAndTimeSelectField) => (
       }
       options={timelineLabels(props.minuteStep)}
       isDisabled={props.isDisabled}
+      {...reactSelectMenuPortaling()}
     />
   </div>
 );
