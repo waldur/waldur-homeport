@@ -5,6 +5,7 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import {
   formatSecurityGroupProtocol,
+  formatSecurityGroupRuleDirection,
   formatSecurityGroupRulePortRange,
 } from '@waldur/openstack/openstack-security-groups/utils';
 
@@ -26,9 +27,11 @@ export const OpenStackSecurityGroupsDialog = withTranslation(
           <thead>
             <tr>
               <th />
+              <th>{props.translate('Direction')}</th>
               <th>{props.translate('IP protocol')}</th>
               <th>{props.translate('Port range')}</th>
-              <th>{props.translate('Remote network')}</th>
+              <th>{props.translate('Remote CIDR')}</th>
+              <th>{props.translate('Description')}</th>
             </tr>
           </thead>
           {props.resolve.securityGroups.map((securityGroup) => (
@@ -43,9 +46,11 @@ export const OpenStackSecurityGroupsDialog = withTranslation(
                       )}
                     </td>
                   )}
+                  <td>{formatSecurityGroupRuleDirection(rule)}</td>
                   <td>{formatSecurityGroupProtocol(rule)}</td>
                   <td>{formatSecurityGroupRulePortRange(rule)}</td>
-                  <td>{`${rule.cidr} (CIDR)`}</td>
+                  <td>{rule.cidr}</td>
+                  <td>{rule.description || 'N/A'}</td>
                 </tr>
               ))}
             </tbody>

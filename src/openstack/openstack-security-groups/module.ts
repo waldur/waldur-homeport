@@ -34,7 +34,7 @@ ActionConfigurationRegistry.register('OpenStack.SecurityGroup', {
           resource_default_value: true,
         },
       },
-      dialogSize: 'lg',
+      dialogSize: 'xl',
       serializer: (model) =>
         model.rules.map((rule) => ({
           ...rule,

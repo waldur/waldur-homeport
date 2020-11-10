@@ -19,6 +19,7 @@ export interface VolumeType {
 }
 
 export interface SecurityGroupRule {
+  direction: 'ingress' | 'egress';
   id: number;
   protocol: string;
   from_port: number;
