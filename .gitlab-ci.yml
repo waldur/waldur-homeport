@@ -123,9 +123,7 @@ Install dependencies:
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "schedule"'
   script:
-    - pwd
-    - ls .yarn
-    - ls node_modules/
+    - ls -la
   artifacts:
     paths:
       - .yarn
