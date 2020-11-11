@@ -18,3 +18,16 @@ registerOfferingType({
   showOptions: true,
   showComponents: true,
 });
+
+registerOfferingType({
+  type: 'Marketplace.Basic',
+  get label() {
+    return translate('Request-based item (without Service Desk)');
+  },
+  component: OfferingConfigurationForm,
+  detailsComponent: OfferingConfigurationDetails,
+  pluginOptionsForm: OfferingPluginOptionsForm,
+  serializer,
+  showOptions: true,
+  showComponents: true,
+});
