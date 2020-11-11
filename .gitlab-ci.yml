@@ -10,19 +10,21 @@ include:
   - project: "waldur/waldur-pipelines"
     file: "/templates/test/lint-docker-image.yaml"
 
+# To be removed after update of `waldur/waldur-pipelines/templates/stages.yml`
+stages:
+  - pre-test
+  - test
+  - build
+  - release
+  - validate
+  - deploy
+
 variables:
   COMPONENT_VERSION: "latest"
   GITHUB_OPENNODE_REPO_URL: "git@github.com:opennode/waldur-homeport.git"
   GITHUB_WALDUR_REPO_URL: "git@github.com:waldur/waldur-homeport.git"
 
 image: $CI_REGISTRY/waldur/waldur-pipelines/node:lts-alpine
-
-cache:
-  key: "$CI_COMMIT_REF_NAME"
-  policy: pull
-  paths:
-    - .yarn
-    - node_modules/
 
 before_script:
   - yarn config set cache-folder .yarn
@@ -31,6 +33,8 @@ before_script:
 Run linters:
   stage: test
   interruptible: true
+  dependencies:
+    - Install dependencies
   rules:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
@@ -45,6 +49,8 @@ Run linters:
 Run jest tests:
   stage: test
   interruptible: true
+  dependencies:
+    - Install dependencies
   rules:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
@@ -63,6 +69,8 @@ Run E2E tests:
     entrypoint: [""]
   stage: test
   interruptible: true
+  dependencies:
+    - Install dependencies
   rules:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
@@ -88,6 +96,8 @@ Run E2E tests:
 Build artifact:
   stage: build
   interruptible: true
+  dependencies:
+    - Install dependencies
   rules:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
@@ -107,3 +117,19 @@ Lint docker image:
   variables:
     IMAGE: opennode/waldur-homeport:latest
   before_script: []
+
+Install dependencies:
+  stage: pre-test
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+  script:
+    - pwd
+    - ls .yarn
+    - ls node_modules/
+  artifacts:
+    paths:
+      - .yarn
+      - node_modules/
+    expire_in: 1 week
