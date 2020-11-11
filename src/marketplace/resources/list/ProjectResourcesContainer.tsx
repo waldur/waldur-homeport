@@ -9,7 +9,6 @@ import { getCategory } from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
 import { getProject } from '@waldur/workspace/selectors';
 
-import { ProjectResourcesFilter } from './ProjectResourcesFilter';
 import { ProjectResourcesList } from './ProjectResourcesList';
 
 async function loadData(category_uuid) {
@@ -45,13 +44,10 @@ export const ProjectResourcesContainer: React.FC<{}> = () => {
     return <>{translate('Unable to load marketplace category details')}</>;
   } else {
     return (
-      <>
-        <ProjectResourcesFilter />
-        <ProjectResourcesList
-          columns={value.columns}
-          category_uuid={category_uuid}
-        />
-      </>
+      <ProjectResourcesList
+        columns={value.columns}
+        category_uuid={category_uuid}
+      />
     );
   }
 };
