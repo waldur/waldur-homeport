@@ -124,8 +124,9 @@ Install dependencies:
     - if: '$CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "schedule"'
   script:
     - ls -la
+    - ls -la ~/
   artifacts:
     paths:
-      - .yarn
+      - ~/.yarn
       - node_modules/
     expire_in: 1 week
