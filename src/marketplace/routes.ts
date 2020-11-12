@@ -1,6 +1,8 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { checkPermission } from '@waldur/issues/utils';
 import { SupportOfferings } from '@waldur/marketplace/offerings/customers/SupportOfferings';
+import { ResourceDetailsPageForCustomer } from '@waldur/marketplace/resources/ResourceDetailsPageForCustomer';
+import { ResourceDetailsPageForServiceProvider } from '@waldur/marketplace/resources/ResourceDetailsPageForServiceProvider';
 import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 
 import { CheckoutPage } from './cart/CheckoutPage';
@@ -27,7 +29,6 @@ import { ProjectResourcesContainer } from './resources/list/ProjectResourcesCont
 import { PublicResourcesContainer } from './resources/list/PublicResourcesContainer';
 import { SupportResourcesContainer } from './resources/list/SupportResourcesContainer';
 import { PlanUsageContainer } from './resources/plan-usage/PlanUsageContainer';
-import { ResourceDetailsPage } from './resources/ResourceDetailsPage';
 import { SupportUsageContainer } from './resources/usage/SupportUsageContainer';
 import { ProviderDetails } from './service-providers/ProviderDetails';
 
@@ -263,7 +264,17 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-public-resource-details',
     url: 'marketplace-public-resource-details/:resource_uuid/',
-    component: ResourceDetailsPage,
+    component: ResourceDetailsPageForCustomer,
+    parent: 'organization',
+    data: {
+      sidebarKey: 'marketplace-services',
+    },
+  },
+
+  {
+    name: 'marketplace-service-provider-public-resource-details',
+    url: 'marketplace-service-provider-public-resource-details/:resource_uuid/',
+    component: ResourceDetailsPageForServiceProvider,
     parent: 'organization',
     data: {
       sidebarKey: 'marketplace-services',

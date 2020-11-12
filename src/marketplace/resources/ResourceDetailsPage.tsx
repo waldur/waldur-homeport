@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
+import { Customer } from '@waldur/workspace/types';
 
 import { getResource } from '../common/api';
 import { OrderItemResponse } from '../orders/types';
@@ -16,12 +17,20 @@ import { OrderItemResponse } from '../orders/types';
 import { ResourceSummary } from './ResourceSummary';
 import { ResourceTabs } from './ResourceTabs';
 
-const getBreacrumbs = (resource: OrderItemResponse): BreadcrumbItem[] => [
+interface GetBreadcrumbsProps {
+  customer: Customer;
+  resource: OrderItemResponse;
+}
+
+const getBreadcrumbs = ({
+  customer,
+  resource,
+}: GetBreadcrumbsProps): BreadcrumbItem[] => [
   {
     label: translate('Organization workspace'),
     state: 'organization.details',
     params: {
-      uuid: resource.customer_uuid,
+      uuid: customer ? customer.uuid : resource.customer_uuid,
     },
   },
   {
@@ -29,7 +38,11 @@ const getBreacrumbs = (resource: OrderItemResponse): BreadcrumbItem[] => [
   },
 ];
 
-export const ResourceDetailsPage = () => {
+interface ResourceDetailsPageProps {
+  customer?: Customer;
+}
+
+export const ResourceDetailsPage = ({ customer }: ResourceDetailsPageProps) => {
   const {
     params: { resource_uuid },
   } = useCurrentStateAndParams();
@@ -38,9 +51,11 @@ export const ResourceDetailsPage = () => {
 
   useTitle(state.value ? state.value.name : translate('Resource details'));
 
-  useBreadcrumbsFn(() => (state.value ? getBreacrumbs(state.value) : []), [
-    state.value,
-  ]);
+  useBreadcrumbsFn(
+    () =>
+      state.value ? getBreadcrumbs({ customer, resource: state.value }) : [],
+    [state.value, customer],
+  );
 
   const router = useRouter();
 
