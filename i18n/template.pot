@@ -5910,6 +5910,10 @@ msgstr ""
 msgid "Request-based item"
 msgstr ""
 
+#: src/offering/marketplace.ts
+msgid "Request-based item (without Service Desk)"
+msgstr ""
+
 #: src/invitations/InvitationsFilter.tsx
 msgid "Requested"
 msgstr ""
