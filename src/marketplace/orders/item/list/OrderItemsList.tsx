@@ -11,6 +11,8 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { TABLE_PUBLIC_ORDERS } from './constants';
+import { OrderItemApproveButton } from './OrderItemApproveButton';
+import { OrderItemRejectButton } from './OrderItemRejectButton';
 import { OrderItemslistTablePlaceholder } from './OrderItemsListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
@@ -49,6 +51,20 @@ export const TableComponent = (props) => {
     {
       title: translate('Cost'),
       render: ({ row }) => defaultCurrency(row.cost),
+    },
+    {
+      title: translate('Actions'),
+      render: ({ row }) =>
+        row.state === 'done' ? null : (
+          <>
+            {row.state === 'executing' && (
+              <OrderItemApproveButton uuid={row.uuid} />
+            )}
+            {row.state !== 'terminated' && row.state !== 'terminating' && (
+              <OrderItemRejectButton uuid={row.uuid} />
+            )}
+          </>
+        ),
     },
   ];
 

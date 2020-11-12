@@ -133,6 +133,12 @@ export const getOrderItem = (id) =>
 export const terminateOrderItem = (id) =>
   post(`/marketplace-order-items/${id}/terminate/`);
 
+export const approveOrderItem = (id) =>
+  post(`/marketplace-order-items/${id}/approve/`);
+
+export const rejectOrderItem = (id) =>
+  post(`/marketplace-order-items/${id}/reject/`);
+
 export const approveOrder = (orderUuid: string) =>
   post(`/marketplace-orders/${orderUuid}/approve/`).then(
     (response) => response.data,
