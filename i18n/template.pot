@@ -153,6 +153,7 @@ msgstr ""
 #: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
+#: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -568,6 +569,7 @@ msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/marketplace/orders/ApproveButton.tsx
+#: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
 msgid "Approve"
 msgstr ""
 
@@ -4462,6 +4464,14 @@ msgstr ""
 msgid "Order item details"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
+msgid "Order item has been approved."
+msgstr ""
+
+#: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
+msgid "Order item has been rejected."
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 msgid "Order item has cancel has been scheduled."
 msgstr ""
@@ -5699,6 +5709,7 @@ msgstr ""
 
 #: src/booking/BookingActions.tsx
 #: src/marketplace/orders/RejectButton.tsx
+#: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
 msgid "Reject"
 msgstr ""
 
@@ -7743,6 +7754,10 @@ msgstr ""
 msgid "Unable to approve invitation."
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
+msgid "Unable to approve order item."
+msgstr ""
+
 #: src/marketplace/orders/store/effects.ts
 msgid "Unable to approve order."
 msgstr ""
@@ -8208,6 +8223,10 @@ msgstr ""
 
 #: src/invitations/InvitationReject.tsx
 msgid "Unable to reject invitation."
+msgstr ""
+
+#: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
+msgid "Unable to reject order item."
 msgstr ""
 
 #: src/marketplace/orders/store/effects.ts
