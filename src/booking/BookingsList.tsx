@@ -69,7 +69,9 @@ const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
-      render: PublicResourceLink,
+      render: ({ row }) => (
+        <PublicResourceLink row={row} customer={props.customer} />
+      ),
       orderField: 'name',
     },
     {

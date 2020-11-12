@@ -2,11 +2,13 @@ import * as React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { Tooltip } from '@waldur/core/Tooltip';
+import { Customer } from '@waldur/workspace/types';
 
 import { Resource } from '../types';
 
 interface PublicResourceLinkProps {
   row: Resource;
+  customer?: Customer;
 }
 
 const BackendIdTooltip = ({ backendId }) =>
@@ -19,14 +21,21 @@ const BackendIdTooltip = ({ backendId }) =>
     </>
   );
 
-export const PublicResourceLink = ({ row }: PublicResourceLinkProps) => {
+export const PublicResourceLink = ({
+  row,
+  customer,
+}: PublicResourceLinkProps) => {
   const label = row.name || row.offering_name;
   return (
     <>
       <Link
-        state="marketplace-public-resource-details"
+        state={
+          customer
+            ? 'marketplace-service-provider-public-resource-details'
+            : 'marketplace-public-resource-details'
+        }
         params={{
-          uuid: row.customer_uuid,
+          uuid: customer ? customer.uuid : row.customer_uuid,
           resource_uuid: row.uuid,
         }}
         label={label}

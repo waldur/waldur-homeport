@@ -19,7 +19,9 @@ export const TableComponent = (props) => {
   const columns = [
     {
       title: translate('Name'),
-      render: ResourceNameField,
+      render: ({ row }) => (
+        <ResourceNameField row={row} customer={props.customer} />
+      ),
       orderField: 'name',
     },
     {
