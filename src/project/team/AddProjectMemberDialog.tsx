@@ -8,6 +8,7 @@ import useAsyncFn from 'react-use/lib/useAsyncFn';
 import { reduxForm, change } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { PROJECT_ADMIN_ROLE } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { CustomersService } from '@waldur/customer/services/CustomersService';
 import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
@@ -114,7 +115,7 @@ export const AddProjectMemberDialog = reduxForm<
 
   React.useEffect(() => {
     if (users) {
-      dispatch(change(FORM_ID, 'role', 'admin'));
+      dispatch(change(FORM_ID, 'role', PROJECT_ADMIN_ROLE));
     }
   }, [dispatch, users]);
 

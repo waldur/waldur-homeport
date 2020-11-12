@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { ProjectLink } from '@waldur/project/ProjectLink';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { filterByUser } from '@waldur/workspace/selectors';
@@ -34,7 +35,7 @@ const TableOptions = {
   fetchData: createFetcher('project-permissions'),
   getDefaultFilter: filterByUser,
   exportFields: ['customer', 'is_owner'],
-  exportRow: (row) => [row.customer_name, row.role === 'owner'],
+  exportRow: (row) => [row.customer_name, row.role === CUSTOMER_OWNER_ROLE],
 };
 
 export const ProjectPermissions = connectTable(TableOptions)(TableComponent);

@@ -1,3 +1,4 @@
+import { CUSTOMER_OWNER_ROLE, PROJECT_ROLES } from '@waldur/core/constants';
 import { ENV } from '@waldur/core/services';
 import { CustomersService } from '@waldur/customer/services/CustomersService';
 
@@ -16,10 +17,10 @@ export const InvitationPolicyService = {
     if (!CustomersService.isOwner(context.customer, context.user)) {
       return false;
     }
-    if (role.value === 'manager' || role.value === 'admin') {
+    if (PROJECT_ROLES.includes(role.value)) {
       return true;
     }
-    if (role.value === 'owner') {
+    if (role.value === CUSTOMER_OWNER_ROLE) {
       return ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS;
     }
   },

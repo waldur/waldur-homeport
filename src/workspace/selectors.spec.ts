@@ -1,3 +1,8 @@
+import {
+  PROJECT_ADMIN_ROLE,
+  PROJECT_MANAGER_ROLE,
+} from '@waldur/core/constants';
+
 import { isOwnerOrStaff, isManager, isAdmin } from './selectors';
 
 describe('isOwnerOrStaff selector', () => {
@@ -60,7 +65,7 @@ describe('isManager selector', () => {
     };
     const manager = {
       user_uuid: 'manager_uuid',
-      role: 'manager',
+      role: PROJECT_MANAGER_ROLE,
     };
     const workspace = {
       user,
@@ -87,7 +92,7 @@ describe('isAdmin selector', () => {
     };
     const admin = {
       user_uuid: 'admin_uuid',
-      role: 'admin',
+      role: PROJECT_ADMIN_ROLE,
     };
     const workspace = {
       user,

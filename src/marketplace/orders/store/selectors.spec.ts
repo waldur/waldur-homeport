@@ -1,3 +1,8 @@
+import {
+  PROJECT_ADMIN_ROLE,
+  PROJECT_MANAGER_ROLE,
+} from '@waldur/core/constants';
+
 import { orderCanBeApproved } from './selectors';
 
 const staff = {
@@ -14,12 +19,12 @@ const user = {
 
 const admin = {
   user_uuid: 'user_uuid',
-  role: 'admin',
+  role: PROJECT_ADMIN_ROLE,
 };
 
 const manager = {
   user_uuid: 'user_uuid',
-  role: 'manager',
+  role: PROJECT_MANAGER_ROLE,
 };
 
 describe('orderCanBeApproved utility function', () => {

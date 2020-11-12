@@ -2,6 +2,7 @@ import Axios from 'axios';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
+import { PROJECT_MANAGER_ROLE } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -26,9 +27,9 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   };
   return (
     <ActionButton
-      disabled={isProjectManager && user.role === 'manager'}
+      disabled={isProjectManager && user.role === PROJECT_MANAGER_ROLE}
       tooltip={
-        isProjectManager && user.role === 'manager'
+        isProjectManager && user.role === PROJECT_MANAGER_ROLE
           ? translate('Project manager cannot edit users with same role.')
           : ''
       }

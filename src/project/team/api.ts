@@ -1,4 +1,5 @@
 import { getList } from '@waldur/core/api';
+import { PROJECT_MANAGER_ROLE } from '@waldur/core/constants';
 import { ENV } from '@waldur/core/services';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
@@ -18,5 +19,5 @@ export const fetchProjectManagers = (user, project) =>
   getList('/project-permissions/', {
     user_url: user.url,
     project: project.uuid,
-    role: 'manager',
+    role: PROJECT_MANAGER_ROLE,
   });
