@@ -18,8 +18,8 @@ export const organizationAutocomplete = async (
     name: query,
     page: page,
     page_size: ENV.pageSize,
-    has_resources: true,
     is_service_provider: isServiceProvider,
+    has_resources: isServiceProvider ? undefined : true,
     field: ['name', 'uuid'],
     o: 'name',
   };
