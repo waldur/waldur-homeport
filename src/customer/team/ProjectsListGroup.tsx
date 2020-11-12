@@ -4,11 +4,11 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/services';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
-import { SelectField } from '@waldur/issues/create/SelectField';
+
 import './ProjectsListGroup.scss';
+import { ProjectRoleField } from './ProjectRoleField';
 
 export const ProjectsListGroup = ({ canChangeRole, projects }) => {
   return projects.length === 0 ? (
@@ -34,16 +34,9 @@ export const ProjectsListGroup = ({ canChangeRole, projects }) => {
               <tr key={project.uuid}>
                 <td className="align-middle">{project.name}</td>
                 <td className="role-column">
-                  <Field
-                    name={`projects[${index}].role`}
-                    component={SelectField}
-                    isDisabled={!canChangeRole}
-                    simpleValue={true}
-                    options={[
-                      { value: 'admin', label: translate(ENV.roles.admin) },
-                      { value: 'manager', label: translate(ENV.roles.manager) },
-                    ]}
-                    isClearable={true}
+                  <ProjectRoleField
+                    index={index}
+                    canChangeRole={canChangeRole}
                   />
                 </td>
                 <td className="expiration-time-column">

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -186,7 +187,7 @@ const formatFilter = compose(formatStatusFilter, formatRoleFilter);
 export const getOrganizationsWhereOwner = (permissions) => {
   const customerNames = [];
   permissions.map((perm) => {
-    if (perm.role === 'owner') {
+    if (perm.role === CUSTOMER_OWNER_ROLE) {
       customerNames.push(perm.customer_name);
     }
   });

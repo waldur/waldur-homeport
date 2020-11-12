@@ -5,7 +5,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { filterByUser } from '@waldur/workspace/selectors';
 
 import CustomerCreateButton from './CustomerCreateButton';
-import CustomerRole from './CustomerRole';
+import { CustomerRole } from './CustomerRole';
 
 const TableComponent = (props) => {
   const { translate, filterColumns } = props;

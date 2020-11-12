@@ -1,5 +1,10 @@
 import { createSelector } from 'reselect';
 
+import {
+  PROJECT_ADMIN_ROLE,
+  PROJECT_MANAGER_ROLE,
+} from '@waldur/core/constants';
+
 import { User, Customer, Project, OuterState, WorkspaceType } from './types';
 
 export const getUser = (state: OuterState): User => state.workspace.user;
@@ -99,12 +104,12 @@ export const isManager = createSelector(
   getUser,
   getProject,
   (user, project) => {
-    return project && checkRole(project, user, 'manager');
+    return project && checkRole(project, user, PROJECT_MANAGER_ROLE);
   },
 );
 
 export const isAdmin = createSelector(getUser, getProject, (user, project) => {
-  return checkRole(project, user, 'admin');
+  return checkRole(project, user, PROJECT_ADMIN_ROLE);
 });
 
 export const filterByUser = (state: OuterState) => ({

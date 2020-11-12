@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, change, arrayPush } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { ENV } from '@waldur/core/services';
 import { CustomerPermissionsService } from '@waldur/customer/services/CustomerPermissionsService';
 import { CustomersService } from '@waldur/customer/services/CustomersService';
@@ -59,7 +60,7 @@ const savePermissions = async (
   } else if (!resolve.editUser.role && formData.is_owner) {
     await CustomerPermissionsService.create({
       user: resolve.editUser.url,
-      role: 'owner',
+      role: CUSTOMER_OWNER_ROLE,
       customer: resolve.currentCustomer.url,
       expiration_time: formData.expiration_time,
     });
@@ -138,7 +139,13 @@ export const EditTeamMemberDialog = reduxForm<
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(change(FORM_ID, 'is_owner', resolve.editUser.role === 'owner'));
+    dispatch(
+      change(
+        FORM_ID,
+        'is_owner',
+        resolve.editUser.role === CUSTOMER_OWNER_ROLE,
+      ),
+    );
     dispatch(
       change(FORM_ID, 'expiration_time', resolve.editUser.expiration_time),
     );

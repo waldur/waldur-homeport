@@ -5,8 +5,8 @@ import { compose } from 'redux';
 
 import { translate } from '@waldur/i18n';
 import { Table, connectTable } from '@waldur/table';
-import { BooleanField } from '@waldur/table/BooleanField';
 import { TableOptionsType } from '@waldur/table/types';
+import { CustomerRole } from '@waldur/user/list/CustomerRole';
 import {
   getProject,
   getUser,
@@ -40,7 +40,7 @@ const TableComponent = (props) => {
         },
         {
           title: translate('Owner'),
-          render: ({ row }) => <BooleanField value={row.role === 'owner'} />,
+          render: CustomerRole,
         },
         {
           title: translate('Manager in:'),

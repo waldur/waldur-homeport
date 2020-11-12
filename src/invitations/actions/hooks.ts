@@ -4,7 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import { change } from 'redux-form';
 
+import {
+  CUSTOMER_OWNER_ROLE,
+  PROJECT_ADMIN_ROLE,
+  PROJECT_MANAGER_ROLE,
+  PROJECT_MEMBER_ROLE,
+  PROJECT_ROLES,
+} from '@waldur/core/constants';
 import { ENV } from '@waldur/core/services';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
@@ -22,20 +30,27 @@ const getRoles = (context) => {
   const roles = [
     {
       title: ENV.roles.owner,
-      value: 'owner',
+      value: CUSTOMER_OWNER_ROLE,
       icon: 'fa-sitemap',
     },
     {
       title: ENV.roles.manager,
-      value: 'manager',
+      value: PROJECT_MANAGER_ROLE,
       icon: 'fa-users',
     },
     {
       title: ENV.roles.admin,
-      value: 'admin',
+      value: PROJECT_ADMIN_ROLE,
       icon: 'fa-server',
     },
   ];
+  if (isFeatureVisible('project.support')) {
+    roles.push({
+      title: ENV.roles.support,
+      value: PROJECT_MEMBER_ROLE,
+      icon: 'fa-user-o',
+    });
+  }
   return roles.filter((role) =>
     InvitationPolicyService.canManageRole(context, role),
   );
@@ -62,7 +77,7 @@ export const useInvitationCreateDialog = (context) => {
   }, [dispatch, roles]);
 
   const roleDisabled = ENV.invitationRequireUserDetails && !userDetails;
-  const projectEnabled = ['admin', 'manager'].includes(role) && !roleDisabled;
+  const projectEnabled = PROJECT_ROLES.includes(role) && !roleDisabled;
 
   const createInvitation = React.useCallback(
     async (formData) => {
@@ -76,7 +91,7 @@ export const useInvitationCreateDialog = (context) => {
         payload.email = formData.email;
         payload.civil_number = formData.civil_number;
         payload.tax_number = formData.tax_number;
-        if (['admin', 'manager'].includes(role)) {
+        if (PROJECT_ROLES.includes(role)) {
           payload.project_role = role;
           payload.project = formData.project.url;
         } else {

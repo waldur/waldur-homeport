@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { reset, SubmissionError } from 'redux-form';
 
 import { sendForm } from '@waldur/core/api';
+import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
@@ -70,7 +71,7 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
         const customer = response.data;
         if (resolve.role === constants.ROLES.provider) {
           await CustomerPermissionsService.create({
-            role: 'owner',
+            role: CUSTOMER_OWNER_ROLE,
             customer: customer.url,
             user: user.url,
             enable_notifications: false,

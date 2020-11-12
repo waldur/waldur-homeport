@@ -1,3 +1,8 @@
+import {
+  CUSTOMER_OWNER_ROLE,
+  PROJECT_ADMIN_ROLE,
+} from '@waldur/core/constants';
+
 import { formatRoleFilter, getOrganizationsWhereOwner } from './UserList';
 
 const filterMock = {
@@ -17,17 +22,17 @@ const customerPermissionsMock = [
   {
     customer_uuid: 'f80e006b36b542578fc216d83f2031fa',
     customer_name: 'Blackberry',
-    role: 'owner',
+    role: CUSTOMER_OWNER_ROLE,
   },
   {
     customer_uuid: 'gh0e006b36b5425bhfc216d83f2031nh',
     customer_name: 'Tomson',
-    role: 'owner',
+    role: CUSTOMER_OWNER_ROLE,
   },
   {
     customer_uuid: '560e006b36b542578fc216d83f2031bn',
     customer_name: 'Beeline',
-    role: 'admin',
+    role: PROJECT_ADMIN_ROLE,
   },
 ];
 

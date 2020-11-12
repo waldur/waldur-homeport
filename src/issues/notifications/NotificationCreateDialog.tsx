@@ -8,6 +8,11 @@ import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { post } from '@waldur/core/api';
+import {
+  CUSTOMER_OWNER_ROLE,
+  PROJECT_ADMIN_ROLE,
+  PROJECT_MANAGER_ROLE,
+} from '@waldur/core/constants';
 import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
 import {
@@ -99,7 +104,7 @@ export const NotificationCreateDialog = reduxForm({
             options={[
               {
                 label: translate('Owner'),
-                value: 'owner',
+                value: CUSTOMER_OWNER_ROLE,
               },
               {
                 label: translate('Support'),
@@ -125,11 +130,11 @@ export const NotificationCreateDialog = reduxForm({
             options={[
               {
                 label: translate(ENV.roles.manager),
-                value: 'manager',
+                value: PROJECT_MANAGER_ROLE,
               },
               {
                 label: translate(ENV.roles.admin),
-                value: 'admin',
+                value: PROJECT_ADMIN_ROLE,
               },
             ]}
             isMulti={true}
