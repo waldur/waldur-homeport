@@ -83,12 +83,12 @@
         ng-class="{'has-error': $ctrl.form['rule_{{ $index }}_cidr'].$invalid}"
       >
         <input
-          ng-attr-title="{{ $ctrl.getPatternTitle(rule) }}"
+          ng-attr-title="{{ $ctrl.getPatternTitle(index, rule) }}"
+          ng-attr-placeholder="{{ $ctrl.getCIDRPlaceholder(rule) }}"
           name="rule_{{ $index }}_cidr"
           ng-model="rule.cidr"
           class="form-control"
           ng-pattern="$ctrl.getPattern(rule)"
-          placeholder="0.0.0.0/0"
         />
       </td>
       <td class="form-group">
