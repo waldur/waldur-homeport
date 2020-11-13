@@ -2,11 +2,11 @@ import { GeoSearchControl } from 'leaflet-geosearch';
 import { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 
-export const SearchControl = (props) => {
+export const GeoSearchControlElement = (props) => {
   const map = useMap();
 
   useEffect(() => {
-    const searchControl = GeoSearchControl({
+    const searchControl = new GeoSearchControl({
       provider: props.provider,
       ...props,
     });

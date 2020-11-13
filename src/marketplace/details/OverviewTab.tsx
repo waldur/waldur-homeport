@@ -4,9 +4,8 @@ import * as Row from 'react-bootstrap/lib/Row';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
+import { LeafletMap } from '@waldur/map/LeafletMap';
 import { Offering } from '@waldur/marketplace/types';
-
-import { LeafletMap } from './LeafletMap';
 
 const DemoButton = () => (
   <button className="btn btn-outline btn-success btn-sm">

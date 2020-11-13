@@ -1,4 +1,4 @@
-import { GeolocationPoint } from '@waldur/marketplace/types';
+import { GeolocationPoint } from '@waldur/map/types';
 
 export interface Category {
   name: string;

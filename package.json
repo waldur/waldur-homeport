@@ -127,6 +127,7 @@
     "@types/enzyme": "^3.1.14",
     "@types/jest": "^26.0.13",
     "@types/leaflet": "^1.5.19",
+    "@types/leaflet-geosearch": "^2.7.1",
     "@types/lodash": "^4.14.117",
     "@types/lodash.assign": "^4.2.6",
     "@types/lodash.debounce": "^4.0.6",

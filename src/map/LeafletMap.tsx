@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { Geolocations } from '@waldur/marketplace/types';
-import loadLeafleat from '@waldur/shims/load-leaflet';
+
 import './LeafletMap.scss';
+import loadLeafleat from './load-leaflet';
+import { Geolocations } from './types';
 
 interface LeafletMapProps {
   positions: Geolocations;

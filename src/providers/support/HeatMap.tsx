@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import loadLeafleat from '@waldur/shims/load-leaflet';
+import loadLeafleat from '@waldur/map/load-leaflet';
 
 import { countryInfo } from './countryInfo';
 import './HeatMap.scss';
