@@ -2255,7 +2255,7 @@ msgstr ""
 msgid "Enter IPv4 address."
 msgstr ""
 
-#: src/marketplace/offerings/actions/SetLocationDialog.tsx
+#: src/map/SetLocationDialog.tsx
 msgid "Enter address..."
 msgstr ""
 
@@ -6314,8 +6314,8 @@ msgstr ""
 #: src/customer/divisions/utils.ts
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
+#: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/offerings/actions/SetLocationDialog.tsx
 #: src/marketplace/offerings/customers/utils.ts
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
@@ -6670,7 +6670,7 @@ msgstr ""
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/invoices/details/InvoiceItemDetails.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/details/LeafletMap.tsx
+#: src/map/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/customers/SupportOfferingsFilter.tsx
@@ -6742,8 +6742,8 @@ msgid "Set backend ID"
 msgstr ""
 
 #: src/customer/list/SetLocationButton.tsx
+#: src/map/SetLocationDialog.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
-#: src/marketplace/offerings/actions/SetLocationDialog.tsx
 msgid "Set location"
 msgstr ""
 
@@ -8519,7 +8519,7 @@ msgstr ""
 msgid "Update limits for an existing resource"
 msgstr ""
 
-#: src/marketplace/offerings/actions/SetLocationDialog.tsx
+#: src/map/SetLocationDialog.tsx
 msgid "Update location"
 msgstr ""
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { setOrganizationLocation } from '@waldur/customer/list/store/actions';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
-import { SetLocationDialog } from '@waldur/marketplace/offerings/actions/SetLocationDialog';
+import { SetLocationDialog } from '@waldur/map/SetLocationDialog';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 

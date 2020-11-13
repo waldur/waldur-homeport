@@ -1,36 +1,32 @@
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import * as React from 'react';
-import { useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
-import { SearchControl } from '@waldur/core/react-leaflet-geosearch/GeoSearchControl';
-import OpenStreetMapProvider from '@waldur/core/react-leaflet-geosearch/openStreetMapProvider.js';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+
 import './SetLocationDialog.scss';
+import { GeoSearchControlElement } from './GeoSearchControlElement';
+import { GeolocationPoint } from './types';
 
-interface Coordinates {
-  latitude: number;
-  longitude: number;
-}
-
-interface Data extends Coordinates {
+interface Data extends GeolocationPoint {
   uuid: string;
   name: string;
 }
 
 interface SetLocationDialogProps {
-  resolve: { data: Data; setLocationFn: (data) => void };
+  resolve: { data: Data; setLocationFn: (data: Data) => void };
 }
 
+const provider = new OpenStreetMapProvider();
+
 export const SetLocationDialog = (props: SetLocationDialogProps) => {
-  const [coordinates, setCoordinates] = useState<Coordinates>({
+  const [coordinates, setCoordinates] = React.useState<GeolocationPoint>({
     latitude: props.resolve.data.latitude,
     longitude: props.resolve.data.longitude,
   });
-  const prov = OpenStreetMapProvider();
-  const GeoSearchControlElement = SearchControl;
 
   return (
     <ModalDialog
@@ -72,7 +68,7 @@ export const SetLocationDialog = (props: SetLocationDialogProps) => {
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
         />
         <GeoSearchControlElement
-          provider={prov}
+          provider={provider}
           showMarker={true}
           showPopup={false}
           popupFormat={({ result }) => result.label}

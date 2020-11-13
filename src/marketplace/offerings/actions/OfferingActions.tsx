@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { SetLocationDialog } from '@waldur/map/SetLocationDialog';
 import { RequestActionDialog } from '@waldur/marketplace/offerings/actions/RequestActionDialog';
-import { SetLocationDialog } from '@waldur/marketplace/offerings/actions/SetLocationDialog';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
