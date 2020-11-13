@@ -48,14 +48,8 @@ export async function loadCustomerResources(props): Promise<ExpandableRow[]> {
   return parseCategories(categories, counters);
 }
 
-export const updateOrganization = (formData) => {
-  const reqData = {
-    ...formData,
-    division: formData.division?.url,
-    country: formData.country?.value,
-  };
-  return put(`/customers/${formData.uuid}/`, reqData);
-};
+export const updateOrganization = (data) =>
+  put(`/customers/${data.uuid}/`, data);
 
 export const organizationDivisionAutocomplete = async (
   query: string,

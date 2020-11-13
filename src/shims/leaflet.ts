@@ -4,7 +4,7 @@
 // https://github.com/Leaflet/Leaflet/issues/4968
 import L from 'leaflet';
 // remove to avoid 414 error.
-delete L.Icon.Default.prototype._getIconUrl;
+// delete L.Icon.Default.prototype._getIconUrl;
 // load missing images
 import 'leaflet/dist/images/marker-icon-2x.png';
 import 'leaflet/dist/images/marker-shadow.png';

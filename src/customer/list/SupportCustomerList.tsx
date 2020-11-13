@@ -4,9 +4,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
-import { SUPPORT_CUSTOMERS_FORM_ID } from '@waldur/customer/list/constants';
+import {
+  SUPPORT_CUSTOMERS_FORM_ID,
+  SUPPORT_CUSTOMER_LIST,
+} from '@waldur/customer/list/constants';
 import { OrganizationDetailsButton } from '@waldur/customer/list/OrganizationDetailsButton';
 import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
+import { SetLocationButton } from '@waldur/customer/list/SetLocationButton';
 import { translate } from '@waldur/i18n';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -39,6 +43,7 @@ export const TableComponent = (props) => {
         return (
           <ButtonGroup>
             {props.isStaff && <OrganizationEditButton customer={row} />}
+            {props.isStaff && <SetLocationButton customer={row} />}
             <OrganizationDetailsButton customer={row} />
           </ButtonGroup>
         );
@@ -58,7 +63,7 @@ export const TableComponent = (props) => {
 };
 
 const TableOptions = {
-  table: 'supportCustomerList',
+  table: SUPPORT_CUSTOMER_LIST,
   fetchData: createFetcher('customers'),
   queryField: 'query',
   mapPropsToFilter: (props) => {

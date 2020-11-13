@@ -47,6 +47,13 @@ export const removeOfferingScreenshot = (
   };
 };
 
+export const addOfferingLocation = (offering: Offering) => ({
+  type: constants.ADD_OFFERING_LOCATION,
+  payload: {
+    offering,
+  },
+});
+
 export const isAddingOfferingScreenshot = (isAdding: boolean) => {
   return {
     type: constants.IS_ADDING_OFFERING_SCREENSHOT,

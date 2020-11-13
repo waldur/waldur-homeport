@@ -122,6 +122,8 @@ export interface Offering {
   datacite_doi?: string;
   citation_count?: number;
   referred_pids: ReferredPids[];
+  latitude: number;
+  longitude: number;
 }
 
 export interface Screenshot {
