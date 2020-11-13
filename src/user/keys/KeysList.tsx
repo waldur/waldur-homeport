@@ -48,7 +48,7 @@ const TableOptions = {
   table: 'keysList',
   fetchData: createFetcher('keys'),
   mapPropsToFilter: (props) => ({
-    user_uuid: $state.params.uuid || props.user.uuid,
+    user_uuid: $state.params.uuid || props.user?.uuid,
   }),
   exportRow: (row) => [row.name, row.fingerprint],
   exportAll: true,
