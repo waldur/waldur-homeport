@@ -530,7 +530,7 @@ msgstr ""
 msgid "Answers have been submitted"
 msgstr ""
 
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html
+#: src/openstack/openstack-security-groups/security-group-rule-editor.js
 #: src/openstack/openstack-security-groups/utils.ts
 #: src/user/support/UserFilter.tsx
 msgid "Any"
@@ -2299,6 +2299,13 @@ msgstr ""
 
 #: src/configs/base-config.ts
 msgid "Estonian"
+msgstr ""
+
+#: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupRulesList.tsx
+#: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html
+msgid "Ethernet type"
 msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
@@ -7395,8 +7402,12 @@ msgstr ""
 msgid "The project will be changed for all items in cart."
 msgstr ""
 
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html
+#: src/openstack/openstack-security-groups/security-group-rule-editor.js
 msgid "The value is not valid IP v4"
+msgstr ""
+
+#: src/openstack/openstack-security-groups/security-group-rule-editor.js
+msgid "The value is not valid IP v6"
 msgstr ""
 
 #: src/rancher/cluster/create/LonghornWorkerWarning.tsx

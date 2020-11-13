@@ -1,10 +1,12 @@
+import cidrRegex from 'cidr-regex';
+
 import { translate } from '@waldur/i18n';
 
 import template from './security-group-rule-editor.html';
 
-const CIDR_RE = '^(\\d{1,3}\\.){0,3}\\d{1,3}/\\d{1,2}$';
+const IPv4_CIDR_PATTERN = cidrRegex.v4({ exact: true });
 
-const PROTOCOLS = ['tcp', 'udp', 'icmp'];
+const IPv6_CIDR_PATTERN = cidrRegex.v6({ exact: true });
 
 const securityGroupRuleEditor = {
   template,
@@ -15,7 +17,28 @@ const securityGroupRuleEditor = {
   },
   controller: class SecurityGroupRuleEditorController {
     $onInit() {
-      this.protocols = PROTOCOLS;
+      this.ethertypes = [
+        { label: 'IPv4', value: 'IPv4' },
+        { label: 'IPv6', value: 'IPv6' },
+      ];
+      this.protocols = [
+        {
+          label: translate('Any'),
+          value: '',
+        },
+        {
+          label: 'TCP',
+          value: 'tcp',
+        },
+        {
+          label: 'UDP',
+          value: 'udp',
+        },
+        {
+          label: 'ICMP',
+          value: 'icmp',
+        },
+      ];
       this.directions = [
         { label: translate('Ingress'), value: 'ingress' },
         { label: translate('Egress'), value: 'egress' },
@@ -24,11 +47,10 @@ const securityGroupRuleEditor = {
         this.model[this.field.name] = [];
       }
       this.target = this.model[this.field.name];
-      this.cidrPattern = CIDR_RE;
     }
 
     getPortMin(rule) {
-      if (rule.protocol === 'icmp' || rule.protocol === null) {
+      if (rule.protocol === 'icmp' || !rule.protocol) {
         return -1;
       } else {
         return 1;
@@ -36,7 +58,7 @@ const securityGroupRuleEditor = {
     }
 
     getPortMax(rule) {
-      if (rule.protocol === null) {
+      if (!rule.protocol) {
         return -1;
       } else if (rule.protocol === 'icmp') {
         return 255;
@@ -51,8 +73,11 @@ const securityGroupRuleEditor = {
 
     addRule() {
       this.target.push({
-        protocol: PROTOCOLS[0],
-        direction: 'ingress',
+        ethertype: this.ethertypes[0].value,
+        protocol: this.protocols[0].value,
+        direction: this.directions[0].value,
+        from_port: -1,
+        to_port: -1,
       });
       this.form.$setDirty();
     }
@@ -67,6 +92,22 @@ const securityGroupRuleEditor = {
 
     isCidrInvalid(index) {
       return this.form[`rule_${index}_cidr`].$invalid;
+    }
+
+    getPattern(rule) {
+      if (rule.ethertype === 'IPv4') {
+        return IPv4_CIDR_PATTERN;
+      } else if (rule.ethertype === 'IPv6') {
+        return IPv6_CIDR_PATTERN;
+      }
+    }
+
+    getPatternTitle(rule) {
+      if (rule.ethertype === 'IPv4') {
+        return translate('The value is not valid IP v4');
+      } else if (rule.ethertype === 'IPv6') {
+        return translate('The value is not valid IP v6');
+      }
     }
   },
 };

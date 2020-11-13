@@ -33,6 +33,7 @@ export const SecurityGroupsDialog: React.FC<SecurityGroupsDialogProps> = ({
           <thead>
             <tr>
               <th></th>
+              <th>{translate('Ethernet type')}</th>
               <th>{translate('Direction')}</th>
               <th>{translate('IP protocol')}</th>
               <th>{translate('Port range')}</th>
@@ -53,6 +54,7 @@ export const SecurityGroupsDialog: React.FC<SecurityGroupsDialogProps> = ({
                     </td>
                   )}
 
+                  <td>{rule.ethertype}</td>
                   <td>{formatSecurityGroupRuleDirection(rule)}</td>
                   <td>{formatSecurityGroupProtocol(rule)}</td>
                   <td>{formatSecurityGroupRulePortRange(rule)}</td>
