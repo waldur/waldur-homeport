@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { RequestActionDialog } from '@waldur/marketplace/offerings/actions/RequestActionDialog';
+import { SetLocationDialog } from '@waldur/marketplace/offerings/actions/SetLocationDialog';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
-import { updateOfferingState } from '../store/actions';
+import { addOfferingLocation, updateOfferingState } from '../store/actions';
 import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
 
 import { ActionsDropdown } from './ActionsDropdown';
@@ -17,21 +18,38 @@ const mapStateToProps = (state: OuterState) => ({
   user: getUser(state),
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps = (dispatch) => ({
   updateOfferingState,
   pauseOffering: (offering) =>
-    openModalDialog(PauseOfferingDialog, {
-      resolve: { offering },
-    }),
+    dispatch(
+      openModalDialog(PauseOfferingDialog, {
+        resolve: { offering },
+      }),
+    ),
   requestPublishing: (offering) =>
-    openModalDialog(RequestActionDialog, {
-      resolve: { offering, offeringRequestMode: 'publishing' },
-    }),
+    dispatch(
+      openModalDialog(RequestActionDialog, {
+        resolve: { offering, offeringRequestMode: 'publishing' },
+      }),
+    ),
   requestEditing: (offering) =>
-    openModalDialog(RequestActionDialog, {
-      resolve: { offering, offeringRequestMode: 'editing' },
-    }),
-};
+    dispatch(
+      openModalDialog(RequestActionDialog, {
+        resolve: { offering, offeringRequestMode: 'editing' },
+      }),
+    ),
+  setLocation: (offering) =>
+    dispatch(
+      openModalDialog(SetLocationDialog, {
+        resolve: {
+          data: offering,
+          setLocationFn: (offeringData) =>
+            dispatch(addOfferingLocation(offeringData)),
+        },
+        size: 'lg',
+      }),
+    ),
+});
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   actions: [
@@ -97,6 +115,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
       visible:
         [ACTIVE, PAUSED].includes(ownProps.row.state) &&
         (!stateProps.user.is_staff || stateProps.user.is_owner),
+    },
+    {
+      label: translate('Set location'),
+      handler: () => dispatchProps.setLocation(ownProps.row),
+      visible: false,
+      // ![DRAFT].includes(ownProps.row.state) && stateProps.user.is_staff,
     },
   ].filter((row) => row.visible),
 });

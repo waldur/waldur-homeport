@@ -37,4 +37,6 @@ export interface Customer {
   division?: string;
   division_name?: string;
   division_parent_name?: string;
+  latitude?: number;
+  longitude?: number;
 }

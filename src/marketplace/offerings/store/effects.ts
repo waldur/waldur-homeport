@@ -215,6 +215,22 @@ function* removeOfferingScreenshot(action: Action<any>) {
   }
 }
 
+function* addOfferingLocation(action: Action<any>) {
+  try {
+    const { offering } = action.payload;
+    const response = yield call(api.updateOffering, offering.uuid, offering);
+    yield put(showSuccess(translate('Location has been saved successfully.')));
+    if (response.status === 201) {
+      yield put(closeModalDialog());
+    }
+  } catch (error) {
+    const errorMessage = `${translate('Unable to save location.')} ${format(
+      error,
+    )}`;
+    yield put(showError(errorMessage));
+  }
+}
+
 export default function* () {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
   yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
@@ -229,4 +245,5 @@ export default function* () {
     constants.REMOVE_OFFERING_SCREENSHOT,
     removeOfferingScreenshot,
   );
+  yield takeEvery(constants.ADD_OFFERING_LOCATION, addOfferingLocation);
 }

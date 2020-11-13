@@ -2255,6 +2255,10 @@ msgstr ""
 msgid "Enter IPv4 address."
 msgstr ""
 
+#: src/marketplace/offerings/actions/SetLocationDialog.tsx
+msgid "Enter address..."
+msgstr ""
+
 #: src/openstack/utils.ts
 msgid "Enter private IPv4 CIDR."
 msgstr ""
@@ -3412,6 +3416,11 @@ msgstr ""
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Location"
+msgstr ""
+
+#: src/customer/list/store/effects.ts
+#: src/marketplace/offerings/store/effects.ts
+msgid "Location has been saved successfully."
 msgstr ""
 
 #: src/navigation/header/LogoutLink.tsx
@@ -6299,6 +6308,7 @@ msgstr ""
 #: src/customer/team/EditTeamMemberDialog.tsx
 #: src/invoices/growth/utils.ts
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/actions/SetLocationDialog.tsx
 #: src/marketplace/offerings/customers/utils.ts
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
@@ -6722,6 +6732,12 @@ msgstr ""
 
 #: src/offering/actions/SetBackendIDAction.ts
 msgid "Set backend ID"
+msgstr ""
+
+#: src/customer/list/SetLocationButton.tsx
+#: src/marketplace/offerings/actions/OfferingActions.tsx
+#: src/marketplace/offerings/actions/SetLocationDialog.tsx
+msgid "Set location"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/module.ts
@@ -8269,6 +8285,11 @@ msgstr ""
 msgid "Unable to restore volume snapshot."
 msgstr ""
 
+#: src/customer/list/store/effects.ts
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to save location."
+msgstr ""
+
 #: src/auth/AuthInit.tsx
 msgid "Unable to save user."
 msgstr ""
@@ -8485,6 +8506,10 @@ msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemTypeIndicator.tsx
 msgid "Update limits for an existing resource"
+msgstr ""
+
+#: src/marketplace/offerings/actions/SetLocationDialog.tsx
+msgid "Update location"
 msgstr ""
 
 #: src/user/hooks/HookDetailsDialog.tsx
