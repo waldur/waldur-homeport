@@ -8,7 +8,7 @@ import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
-import { validateIpAddress, validatePrivateCIDR } from '../utils';
+import { validateIPv4, validatePrivateCIDR } from '../utils';
 
 export interface StaticRoute {
   destination: string;
@@ -59,7 +59,7 @@ export const StaticRoutesTable: React.FC<
   WrappedFieldArrayProps & { fixedIps?: string[] }
 > = ({ fields, fixedIps }) => {
   const nexthopValidator = React.useMemo(
-    () => [required, validateIpAddress, validateFixedIPs(fixedIps)],
+    () => [required, validateIPv4, validateFixedIPs(fixedIps)],
     [fixedIps],
   );
 

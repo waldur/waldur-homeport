@@ -19,6 +19,7 @@ export interface VolumeType {
 }
 
 export interface SecurityGroupRule {
+  ethertype: 'IPv4' | 'IPv6';
   direction: 'ingress' | 'egress';
   id: number;
   protocol: string;

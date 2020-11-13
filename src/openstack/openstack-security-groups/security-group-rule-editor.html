@@ -8,6 +8,7 @@
   </tbody>
   <thead ng-if="$ctrl.target.length > 0">
     <tr>
+      <th translate>Ethernet type</th>
       <th translate>Direction</th>
       <th translate>IP protocol</th>
       <th translate>From port</th>
@@ -21,6 +22,15 @@
     <tr ng-repeat="rule in $ctrl.target">
       <td>
         <select
+          ng-options="ethertype.value as ethertype.label for ethertype in $ctrl.ethertypes"
+          ng-model="rule.ethertype"
+          class="form-control"
+          required
+        >
+        </select>
+      </td>
+      <td>
+        <select
           ng-options="direction.value as direction.label for direction in $ctrl.directions"
           ng-model="rule.direction"
           class="form-control"
@@ -30,11 +40,10 @@
       </td>
       <td>
         <select
-          ng-options="protocol.toUpperCase() for protocol in $ctrl.protocols"
+          ng-options="protocol.value as protocol.label for protocol in $ctrl.protocols"
           ng-model="rule.protocol"
           class="form-control"
         >
-          <option value="" translate>Any</option>
         </select>
       </td>
       <td
@@ -74,11 +83,11 @@
         ng-class="{'has-error': $ctrl.form['rule_{{ $index }}_cidr'].$invalid}"
       >
         <input
-          ng-attr-title="{{ 'The value is not valid IP v4' | translate }}"
+          ng-attr-title="{{ $ctrl.getPatternTitle(rule) }}"
           name="rule_{{ $index }}_cidr"
           ng-model="rule.cidr"
           class="form-control"
-          ng-pattern="$ctrl.cidrPattern"
+          ng-pattern="$ctrl.getPattern(rule)"
           placeholder="0.0.0.0/0"
         />
       </td>

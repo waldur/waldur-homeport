@@ -27,6 +27,7 @@ export const OpenStackSecurityGroupsDialog = withTranslation(
           <thead>
             <tr>
               <th />
+              <th>{props.translate('Ethernet type')}</th>
               <th>{props.translate('Direction')}</th>
               <th>{props.translate('IP protocol')}</th>
               <th>{props.translate('Port range')}</th>
@@ -46,6 +47,7 @@ export const OpenStackSecurityGroupsDialog = withTranslation(
                       )}
                     </td>
                   )}
+                  <td>{rule.ethertype}</td>
                   <td>{formatSecurityGroupRuleDirection(rule)}</td>
                   <td>{formatSecurityGroupProtocol(rule)}</td>
                   <td>{formatSecurityGroupRulePortRange(rule)}</td>

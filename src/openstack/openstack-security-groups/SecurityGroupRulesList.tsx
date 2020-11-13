@@ -24,6 +24,7 @@ export const SecurityGroupRulesList: React.FC<SecurityGroupRulesListProps> = ({
     <table className="table table-bordered">
       <thead>
         <tr>
+          <th>{translate('Ethernet type')}</th>
           <th>{translate('Direction')}</th>
           <th>{translate('IP protocol')}</th>
           <th>{translate('Port range')}</th>
@@ -34,6 +35,7 @@ export const SecurityGroupRulesList: React.FC<SecurityGroupRulesListProps> = ({
       <tbody>
         {resource.rules.map((rule, index) => (
           <tr key={index}>
+            <td>{rule.ethertype}</td>
             <td>{formatSecurityGroupRuleDirection(rule)}</td>
             <td>{formatSecurityGroupProtocol(rule)}</td>
             <td>{formatSecurityGroupRulePortRange(rule)}</td>

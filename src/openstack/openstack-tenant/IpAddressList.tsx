@@ -7,7 +7,7 @@ import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
-import { validateIpAddress } from '../utils';
+import { validateIPv4 } from '../utils';
 
 const ValidatedInputField = renderValidationWrapper(InputField);
 
@@ -17,7 +17,7 @@ const IPAddressRow = ({ address, onRemove }) => (
       <Field
         name={address}
         component={ValidatedInputField}
-        validate={validateIpAddress}
+        validate={validateIPv4}
       />
     </td>
     <td>

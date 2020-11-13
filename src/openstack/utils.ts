@@ -7,6 +7,8 @@ import { ActionContext } from '@waldur/resource/actions/types';
 
 import { listToDict } from '../core/utils';
 
+const ipRegex = require('ip-regex');
+
 interface ConsoleResponse {
   url: string;
 }
@@ -49,15 +51,13 @@ export const PRIVATE_CIDR_PATTERN = new RegExp(
 
 export const VOLUME_NAME_PATTERN = new RegExp('^[A-Za-z0-9\\-]+$');
 
-const IP_ADDRESS_PATTERN = new RegExp(
-  '^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
-);
+const IPv4_ADDRESS_PATTERN = ipRegex.v4({ exact: true });
 
-export const validateIpAddress = (value) => {
+export const validateIPv4 = (value) => {
   if (!value) {
     return;
   }
-  if (!value.match(IP_ADDRESS_PATTERN)) {
+  if (!value.match(IPv4_ADDRESS_PATTERN)) {
     return translate('Enter IPv4 address.');
   }
 };
