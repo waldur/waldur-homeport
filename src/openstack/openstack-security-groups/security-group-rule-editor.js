@@ -102,11 +102,22 @@ const securityGroupRuleEditor = {
       }
     }
 
-    getPatternTitle(rule) {
+    getPatternTitle(index, rule) {
+      if (!this.isCidrInvalid(index)) {
+        return;
+      }
       if (rule.ethertype === 'IPv4') {
         return translate('The value is not valid IP v4');
       } else if (rule.ethertype === 'IPv6') {
         return translate('The value is not valid IP v6');
+      }
+    }
+
+    getCIDRPlaceholder(rule) {
+      if (rule.ethertype === 'IPv4') {
+        return '0.0.0.0/0';
+      } else if (rule.ethertype === 'IPv6') {
+        return '::/0';
       }
     }
   },
