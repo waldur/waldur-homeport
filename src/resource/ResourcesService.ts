@@ -1,16 +1,13 @@
 import { get } from '@waldur/core/api';
-import { ngInjector } from '@waldur/core/services';
+
+import { Resource } from './types';
 
 class ResourcesServiceClass {
   private services;
 
-  get(resource_type, uuid) {
-    return ngInjector.get('$q').when(this.getInternal(resource_type, uuid));
-  }
-
-  async getInternal(resource_type, uuid) {
+  async get(resource_type, uuid) {
     const url = await this.getUrlByType(resource_type);
-    const response = await get(url + uuid + '/');
+    const response = await get<Resource>(url + uuid + '/');
     return response.data;
   }
 

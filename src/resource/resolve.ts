@@ -7,7 +7,7 @@ import {
   setCurrentProject,
   setCurrentWorkspace,
 } from '@waldur/workspace/actions';
-import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
+import { Project, PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 import { ResourcesService } from './ResourcesService';
 
@@ -18,9 +18,11 @@ export function loadResource($stateParams) {
 
   return ResourcesService.get($stateParams.resource_type, $stateParams.uuid)
     .then((resource) => {
-      return getById('/projects/', resource.project_uuid).then((project) => {
-        return { project };
-      });
+      return getById<Project>('/projects/', resource.project_uuid).then(
+        (project) => {
+          return { project };
+        },
+      );
     })
     .then(({ project }) => {
       return CustomersService.get(project.customer_uuid).then((customer) => {
