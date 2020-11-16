@@ -47,6 +47,11 @@ function defaultErrorHandler($state) {
   });
 }
 
+// @ngInject
+function initTitle(ENV) {
+  document.title = ENV.modePageTitle;
+}
+
 export default (module) => {
   module.directive('submitButton', submitButton);
   module.component('loadingSpinner', loadingSpinner);
@@ -54,5 +59,6 @@ export default (module) => {
   module.run(scrollToTop);
   module.run(injectServices);
   module.run(defaultErrorHandler);
+  module.run(initTitle);
   sentryModule(module);
 };
