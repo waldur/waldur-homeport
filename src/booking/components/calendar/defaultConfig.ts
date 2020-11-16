@@ -9,6 +9,11 @@ export const defaultConfig = {
     year: 'numeric',
     day: 'numeric',
   },
+  views: {
+    week: {
+      columnHeaderFormat: 'ddd D/M',
+    },
+  },
   timeZone: 'local', //'UTC',
   firstDay: 1,
   editable: false,
