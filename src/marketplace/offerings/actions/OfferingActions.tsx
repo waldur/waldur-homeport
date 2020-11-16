@@ -19,7 +19,9 @@ const mapStateToProps = (state: OuterState) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateOfferingState,
+  updateOfferingState: (offering, stateAction, reason?) => {
+    dispatch(updateOfferingState(offering, stateAction, reason));
+  },
   pauseOffering: (offering) =>
     dispatch(
       openModalDialog(PauseOfferingDialog, {
