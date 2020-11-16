@@ -7481,7 +7481,7 @@ msgstr ""
 msgid "There are no events for this resource."
 msgstr ""
 
-#: src/customer/dashboard/CustomerBookingManagement.tsx
+#: src/customer/dashboard/BookingsCalendar.tsx
 msgid "There are no events."
 msgstr ""
 
@@ -7999,7 +7999,7 @@ msgstr ""
 msgid "Unable to load application template details."
 msgstr ""
 
-#: src/customer/dashboard/CustomerBookingManagement.tsx
+#: src/customer/dashboard/BookingsCalendar.tsx
 msgid "Unable to load booking offerings."
 msgstr ""
 
