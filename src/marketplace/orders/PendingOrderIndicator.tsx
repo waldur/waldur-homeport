@@ -52,6 +52,10 @@ export class PurePendingOrderIndicator extends React.Component<
   }
 
   shouldComponentUpdate(props) {
+    return this.isValidWorkspace(props);
+  }
+
+  isValidWorkspace(props) {
     const { workspace } = props;
     return (
       workspace === ORGANIZATION_WORKSPACE || workspace === PROJECT_WORKSPACE
@@ -78,6 +82,9 @@ export class PurePendingOrderIndicator extends React.Component<
   }
 
   render() {
+    if (!this.isValidWorkspace(this.props)) {
+      return null;
+    }
     const { isOpen, handleToggleOpen, workspace, pendingOrders } = this.props;
     const count = pendingOrders.length;
     const limitedOrders = pendingOrders.slice(0, 5);
