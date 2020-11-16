@@ -19,6 +19,21 @@ import { ProjectRolesList } from './ProjectRolesList';
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserEditButton } from './UserEditButton';
 import { UserRemoveButton } from './UserRemoveButton';
+import { getRoles } from './utils';
+
+const UserProjectRolesList = ({ row }) => {
+  const roles = React.useMemo(getRoles, []);
+  return (
+    <>
+      {roles.map((role) => (
+        <p key={role.value}>
+          <b>{translate('{label} in:', role)}</b>{' '}
+          <ProjectRolesList roleName={role.value} row={row} />
+        </p>
+      ))}
+    </>
+  );
+};
 
 const TableComponent = (props) => {
   return (
@@ -43,16 +58,6 @@ const TableComponent = (props) => {
           render: CustomerRole,
         },
         {
-          title: translate('Manager in:'),
-          render: ({ row }) => (
-            <ProjectRolesList roleName="manager" row={row} />
-          ),
-        },
-        {
-          title: translate('Admin in:'),
-          render: ({ row }) => <ProjectRolesList roleName="admin" row={row} />,
-        },
-        {
           title: translate('Actions'),
           render: ({ row }) => (
             <>
@@ -67,6 +72,7 @@ const TableComponent = (props) => {
       ]}
       verboseName={translate('team members')}
       hasQuery={true}
+      expandableRow={UserProjectRolesList}
     />
   );
 };
