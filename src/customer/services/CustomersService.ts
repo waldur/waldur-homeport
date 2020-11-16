@@ -1,7 +1,4 @@
-import Axios from 'axios';
-
 import { get, getById } from '@waldur/core/api';
-import { $q, ENV } from '@waldur/core/services';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
@@ -9,14 +6,9 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 class CustomersServiceClass {
-  public filterByCustomer = false;
-  public countryChoices = [];
-
   getUsers(customerUuid) {
-    return $q.when(
-      get(`/customers/${customerUuid}/users/`).then(
-        (response) => response.data,
-      ),
+    return get(`/customers/${customerUuid}/users/`).then(
+      (response) => response.data,
     );
   }
 
@@ -45,20 +37,6 @@ class CustomersServiceClass {
       }
     }
     return false;
-  }
-
-  loadCountries() {
-    if (this.countryChoices.length !== 0) {
-      return $q.when(this.countryChoices);
-    } else {
-      return Axios.request({
-        method: 'OPTIONS',
-        url: ENV.apiEndpoint + 'api/customers/',
-      }).then((response) => {
-        this.countryChoices = response.data.actions.POST.country.choices;
-        return this.countryChoices;
-      });
-    }
   }
 
   refreshCurrentCustomer(customerUuid) {
