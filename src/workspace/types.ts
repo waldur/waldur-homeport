@@ -71,7 +71,7 @@ export interface Customer {
   agreement_number?: string;
 }
 
-interface Permission {
+export interface Permission {
   user_uuid: string;
   role: string;
 }

@@ -1,24 +1,22 @@
 import Axios from 'axios';
 
 import { post, getList } from '@waldur/core/api';
-import { $q } from '@waldur/core/services';
+import { Permission } from '@waldur/workspace/types';
 
-class ProjectPermissionsServiceClass {
+export const ProjectPermissionsService = {
   getList(params) {
-    return $q.when(getList('/project-permissions/', params));
-  }
+    return getList<Permission>('/project-permissions/', params);
+  },
 
   create(payload) {
-    return $q.when(post('/project-permissions/', payload));
-  }
+    return post('/project-permissions/', payload);
+  },
 
   delete(url) {
-    return $q.when(Axios.delete(url));
-  }
+    return Axios.delete(url);
+  },
 
   update(url, payload) {
-    return $q.when(Axios.patch(url, payload));
-  }
-}
-
-export const ProjectPermissionsService = new ProjectPermissionsServiceClass();
+    return Axios.patch(url, payload);
+  },
+};
