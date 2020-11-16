@@ -61,6 +61,7 @@ export const OrderItem = (props: OrderItemProps) => {
           </div>
         </div>
       </td>
+      <td>{translate(props.item.type)}</td>
       {props.showPrice && (
         <>
           {props.maxUnit ? (

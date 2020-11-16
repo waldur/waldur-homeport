@@ -28,6 +28,7 @@ export const Order = (props: OrderProps) => {
           <thead>
             <tr>
               <th>{translate('Item')}</th>
+              <th>{translate('Item type')}</th>
               {showPrice && (
                 <>
                   {maxUnit ? (

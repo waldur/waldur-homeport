@@ -3262,6 +3262,10 @@ msgstr ""
 msgid "Item has been removed from shopping cart."
 msgstr ""
 
+#: src/marketplace/orders/Order.tsx
+msgid "Item type"
+msgstr ""
+
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
