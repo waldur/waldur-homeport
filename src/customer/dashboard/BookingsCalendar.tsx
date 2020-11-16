@@ -11,6 +11,7 @@ import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { eventRender } from '@waldur/booking/components/utils';
 import { TABLE_NAME } from '@waldur/booking/constants';
 import { eventsMapper } from '@waldur/booking/utils';
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { BOOKINGS_FILTER_FORM_ID } from '@waldur/customer/dashboard/contants';
 import { translate } from '@waldur/i18n';
@@ -22,22 +23,36 @@ const bookingsFilterFormSelector = (state) =>
 const bookingsFilterStateSelector = (state) =>
   bookingsFilterFormSelector(state).state;
 
+export const getCalendarEvent = (
+  bookingItem,
+  event,
+  activeBookingId?: string,
+) => ({
+  ...event,
+  className: classNames({
+    progress: bookingItem.state === 'Creating',
+    'event-terminated': bookingItem.state === 'Terminated',
+    'event-isFocused': bookingItem.uuid === activeBookingId,
+  }),
+  color: classNames({
+    '#f8ac59': bookingItem.state === 'Terminated',
+    '#18a689': bookingItem.uuid === activeBookingId,
+  }),
+  name: bookingItem.name || bookingItem.offering_name,
+  project_name: bookingItem.project_name,
+  customer_name: bookingItem.customer_name,
+  created_by_full_name: bookingItem.created_by_full_name,
+  approved_by_full_name: bookingItem.approved_by_full_name,
+  created: formatDateTime(bookingItem.created),
+  state: bookingItem.state,
+});
+
 const getCalendarEvents = (bookings) => {
   const bookedEvents = [];
   bookings.forEach((item) => {
     const schedules = [];
     item.attributes?.schedules.forEach((event) => {
-      schedules.push({
-        ...event,
-        state: item.state,
-        className: classNames({
-          progress: item.state === 'Creating',
-          'event-terminated': item.state === 'Terminated',
-        }),
-        color: classNames({
-          '#f8ac59': item.state === 'Terminated',
-        }),
-      });
+      schedules.push(getCalendarEvent(item, event));
     });
     bookedEvents.push(...schedules);
   });

@@ -6,6 +6,7 @@ import * as BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
 import * as ReactDOM from 'react-dom';
 
 import { formatShortDateTime, formatTime } from '@waldur/core/dateUtils';
+import { translate } from '@waldur/i18n';
 
 export const bookingDataTemplate = (event) => {
   const getLabels = Object.keys(event);
@@ -14,7 +15,7 @@ export const bookingDataTemplate = (event) => {
     value: event[label],
   }));
   return getLabelValues.map((item, index) => (
-    <div key={index}>
+    <div key={index} style={{ width: '280px' }}>
       <div className="form-group">
         <label className="control-label col-xs-4" style={{ marginTop: '-7px' }}>
           {item.label}
@@ -24,6 +25,18 @@ export const bookingDataTemplate = (event) => {
     </div>
   ));
 };
+
+const getTooltipInformation = (event) => ({
+  [translate('Start')]: formatShortDateTime(event.start),
+  [translate('End')]: formatShortDateTime(event.end),
+  [translate('Name')]: event.extendedProps.name,
+  [translate('Project')]: event.extendedProps.project_name,
+  [translate('Organization')]: event.extendedProps.customer_name,
+  [translate('Created by')]: event.extendedProps.created_by_full_name,
+  [translate('Approved by')]: event.extendedProps.approved_by_full_name,
+  [translate('Created')]: event.extendedProps.created,
+  [translate('State')]: event.extendedProps.state,
+});
 
 const renderEventWithTooltip = ({
   event,
@@ -39,11 +52,7 @@ const renderEventWithTooltip = ({
         <BootstrapTooltip id={event.id}>
           <div className="container-fluid form-horizontal">
             <h4 className="fc-title">{event.title}</h4>
-            {bookingDataTemplate({
-              Start: formatShortDateTime(event.start),
-              End: formatShortDateTime(event.end),
-              State: event.extendedProps.state,
-            })}
+            {bookingDataTemplate(getTooltipInformation(event))}
           </div>
         </BootstrapTooltip>
       }
