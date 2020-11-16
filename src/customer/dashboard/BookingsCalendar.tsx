@@ -52,8 +52,7 @@ async function loadBookingOfferings(providerUuid: string, state, pagination) {
     page: pagination.currentPage,
     page_size: pagination.pageSize,
   });
-  const calendarEvents = getCalendarEvents(bookings);
-  return { bookings, calendarEvents };
+  return getCalendarEvents(bookings);
 }
 
 interface BookingsCalendarProps {
@@ -66,7 +65,7 @@ export const BookingsCalendar = ({ providerUuid }: BookingsCalendarProps) => {
     selectTablePagination(state, TABLE_NAME),
   );
 
-  const { loading, value, error } = useAsync(
+  const { loading, value: calendarEvents, error } = useAsync(
     () =>
       loadBookingOfferings(
         providerUuid,
@@ -84,13 +83,13 @@ export const BookingsCalendar = ({ providerUuid }: BookingsCalendarProps) => {
     return <h3>{translate('Unable to load booking offerings.')}</h3>;
   }
 
-  return value?.calendarEvents.length ? (
+  return calendarEvents.length ? (
     <Row style={{ marginBottom: '30px' }}>
       <Col md={8} mdOffset={2}>
         <Calendar
           height="auto"
           eventLimit={false}
-          events={value.calendarEvents}
+          events={calendarEvents}
           eventRender={(info) => eventRender({ ...info, withTooltip: true })}
         />
       </Col>
