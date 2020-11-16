@@ -410,10 +410,6 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: src/customer/team/CustomerUsersList.tsx
-msgid "Admin in:"
-msgstr ""
-
 #: src/azure/sql/AzureSQLServerDetails.tsx
 #: src/azure/vm/AzureVirtualMachineDetails.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
@@ -3524,10 +3520,6 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Management"
-msgstr ""
-
-#: src/customer/team/CustomerUsersList.tsx
-msgid "Manager in:"
 msgstr ""
 
 #: src/invoices/list/MarkAsPaidButton.tsx
@@ -9679,6 +9671,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
+msgstr ""
+
+#: src/customer/team/CustomerUsersList.tsx
+msgid "{label} in:"
 msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx
