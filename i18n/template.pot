@@ -578,6 +578,7 @@ msgid "Approved at"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
+#: src/booking/components/utils.tsx
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Approved by"
 msgstr ""
@@ -1539,6 +1540,7 @@ msgid "Create your first project"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
+#: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
@@ -1589,6 +1591,7 @@ msgid "Created at"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
+#: src/booking/components/utils.tsx
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Created by"
 msgstr ""
@@ -2227,6 +2230,7 @@ msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
+#: src/booking/components/utils.tsx
 msgid "End"
 msgstr ""
 
@@ -3813,6 +3817,7 @@ msgstr ""
 #: src/azure/sql/DatabasesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/booking/BookingsList.tsx
+#: src/booking/components/utils.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
@@ -4511,6 +4516,7 @@ msgid "Orders"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
+#: src/booking/components/utils.tsx
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/events/EventDetailsTable.tsx
@@ -5263,6 +5269,7 @@ msgid "Product code"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
+#: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
@@ -6938,6 +6945,7 @@ msgstr ""
 
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
+#: src/booking/components/utils.tsx
 #: src/openstack/openstack-instance/actions/StartAction.ts
 msgid "Start"
 msgstr ""
@@ -6957,6 +6965,7 @@ msgstr ""
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/booking/BookingsList.tsx
+#: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/BillingRecordsList.tsx

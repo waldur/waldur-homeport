@@ -1,4 +1,3 @@
-import * as classNames from 'classnames';
 import cloneDeep from 'lodash.clonedeep';
 import * as React from 'react';
 import * as Col from 'react-bootstrap/lib/Col';
@@ -12,6 +11,7 @@ import { eventRender } from '@waldur/booking/components/utils';
 import * as actions from '@waldur/booking/store/actions';
 import { eventsMapper } from '@waldur/booking/utils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { getCalendarEvent } from '@waldur/customer/dashboard/BookingsCalendar';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
@@ -61,18 +61,13 @@ export class PureOfferingBookingTab extends React.Component<
       .reduce((acc, item) => {
         const { schedules } = item.attributes;
         schedules.forEach((event) => {
-          event.state = item.state;
-          event.className = classNames({
-            progress: item.state === 'Creating',
-            'event-terminated': item.state === 'Terminated',
-            'event-isFocused': item.uuid === this.state.activeBookingId,
-          });
-          event.color = classNames({
-            '#f8ac59': item.state === 'Terminated',
-            '#18a689': item.uuid === this.state.activeBookingId,
-          });
+          const schedule = getCalendarEvent(
+            item,
+            event,
+            this.state.activeBookingId,
+          );
+          acc.push(schedule);
         });
-        acc.push(...schedules);
         return acc;
       }, [])
       .map(cloneDeep);

@@ -254,3 +254,7 @@ body.landing {
 .modal-xl {
   width: 1100px;
 }
+
+div[role='tooltip'] > .tooltip-inner {
+  max-width: 100%;
+}
