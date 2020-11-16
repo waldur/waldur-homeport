@@ -3,11 +3,11 @@ import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { Customer, User } from '@waldur/workspace/types';
 
 class CustomersServiceClass {
   getUsers(customerUuid) {
-    return get(`/customers/${customerUuid}/users/`).then(
+    return get<User[]>(`/customers/${customerUuid}/users/`).then(
       (response) => response.data,
     );
   }
