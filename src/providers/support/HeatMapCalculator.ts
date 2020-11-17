@@ -1,4 +1,7 @@
-import { Feature, UsageData } from './types';
+import * as geojson from 'geojson';
+import { StyleFunction } from 'leaflet';
+
+import { UsageData } from './types';
 
 export const getTotal = (
   usageData: UsageData,
@@ -26,7 +29,7 @@ export const getColor = (diff) => {
   }
 };
 
-export const getStyle = (feature: Feature) => ({
+export const getStyle: StyleFunction = (feature) => ({
   fillColor: getColor(feature.properties.diff),
   weight: 2,
   opacity: 1,
@@ -58,8 +61,8 @@ export const getDataForCountry = (usage: UsageData, country: string) => {
 export const getChartData = (
   serviceUsage: UsageData,
   countries: string[],
-  features: Feature[],
-) => {
+  features: geojson.Feature[],
+): geojson.GeoJsonObject[] => {
   const chartData = [];
   countries.forEach((country) => {
     features.forEach((feature) => {

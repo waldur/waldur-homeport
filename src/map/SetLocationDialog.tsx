@@ -1,6 +1,6 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import * as React from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer } from 'react-leaflet';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -9,6 +9,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import './SetLocationDialog.scss';
 import { GeoSearchControlElement } from './GeoSearchControlElement';
+import { OpenStreeMapTileLayer } from './OpenStreeMapTileLayer';
 import { GeolocationPoint } from './types';
 
 interface Data extends GeolocationPoint {
@@ -63,10 +64,7 @@ export const SetLocationDialog = (props: SetLocationDialogProps) => {
         zoomControl={true}
         worldCopyJump={true}
       >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-        />
+        <OpenStreeMapTileLayer />
         <GeoSearchControlElement
           provider={provider}
           showMarker={true}

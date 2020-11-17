@@ -37,15 +37,6 @@ export interface Usage {
   };
 }
 
-export interface Feature {
-  id: string;
-  properties: {
-    name: string;
-    diff?: number;
-  };
-  geometry: any;
-}
-
 export interface UsageData {
   service_providers: ServiceProviders;
   usage: Usage[];

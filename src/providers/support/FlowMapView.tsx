@@ -1,11 +1,12 @@
 import * as React from 'react';
 
-import FlowMap from './FlowMap';
+import { FlowMap } from './FlowMap';
 import { FlowMapFilter } from './FlowMapFilter';
 import { MapInfoPanel } from './MapInfoPanel';
+import { UsageData } from './types';
 
 export interface FlowMapViewProps {
-  serviceUsage: any;
+  serviceUsage: UsageData;
   selectedServiceProvider: any;
   infoPanelIsVisible: boolean;
   serviceProviderSelect(uuid: string): void;
@@ -13,11 +14,11 @@ export interface FlowMapViewProps {
   hideInfoPanel: () => void;
 }
 
-export const FlowMapView = (props: FlowMapViewProps) => (
+export const FlowMapView: React.FC<FlowMapViewProps> = (props) => (
   <>
     <FlowMapFilter />
     <FlowMap
-      center={[0, 0]}
+      center={[58.5975, 24.9873]}
       zoom={5}
       data={props.serviceUsage}
       selectServiceProvider={props.serviceProviderSelect}
