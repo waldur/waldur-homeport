@@ -72,8 +72,8 @@ const TableOptions = {
       if (props.filter.accounting_is_running) {
         filter.accounting_is_running = props.filter.accounting_is_running.value;
       }
-      if (props.filter.service_provider) {
-        filter.service_provider = props.filter.service_provider.value;
+      if (props.filter.is_service_provider) {
+        filter.is_service_provider = props.filter.is_service_provider.value;
       }
       if (props.filter.division_type) {
         filter.division_type_uuid = props.filter.division_type.map(
