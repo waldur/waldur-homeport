@@ -33,7 +33,7 @@ const enhance = compose(
   reduxForm({
     form: 'PublicResourcesFilter',
     initialValues: {
-      state: [getStates()[1]],
+      state: getStates()[1],
     },
   }),
   connect(mapStateToProps),
