@@ -5,27 +5,24 @@ import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getCategory } from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
 import { getProject } from '@waldur/workspace/selectors';
 
+import { ProjectResourcesFilter } from './ProjectResourcesFilter';
 import { ProjectResourcesList } from './ProjectResourcesList';
-
-async function loadData(category_uuid) {
-  const category = await getCategory(category_uuid, {
-    params: { field: ['columns', 'title'] },
-  });
-  return { columns: category.columns, title: category.title };
-}
+import { loadData } from './utils';
 
 export const ProjectResourcesContainer: React.FC<{}> = () => {
   const {
     params: { category_uuid },
   } = useCurrentStateAndParams();
 
-  const { loading, value, error } = useAsync(() => loadData(category_uuid), [
-    category_uuid,
-  ]);
+  const project = useSelector(getProject);
+
+  const { loading, value, error } = useAsync(
+    () => loadData(category_uuid, project.uuid),
+    [category_uuid],
+  );
 
   useTitle(
     value
@@ -33,7 +30,6 @@ export const ProjectResourcesContainer: React.FC<{}> = () => {
       : translate('Project resources'),
   );
 
-  const project = useSelector(getProject);
   if (!project) {
     return null;
   }
@@ -44,10 +40,13 @@ export const ProjectResourcesContainer: React.FC<{}> = () => {
     return <>{translate('Unable to load marketplace category details')}</>;
   } else {
     return (
-      <ProjectResourcesList
-        columns={value.columns}
-        category_uuid={category_uuid}
-      />
+      <>
+        <ProjectResourcesFilter offerings={value.offerings} />
+        <ProjectResourcesList
+          columns={value.columns}
+          category_uuid={category_uuid}
+        />
+      </>
     );
   }
 };
