@@ -16,9 +16,11 @@ export const KeyValueTable = (props) => (
         <tr key={key}>
           <td>{key}</td>
           <td>
-            {typeof props.items[key] === 'object'
-              ? JSON.stringify(props.items[key])
-              : props.items[key]}
+            {typeof props.items[key] === 'object' ? (
+              <pre>{JSON.stringify(props.items[key], null, 2)}</pre>
+            ) : (
+              props.items[key]
+            )}
           </td>
         </tr>
       ))}

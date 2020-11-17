@@ -509,10 +509,6 @@ msgstr ""
 msgid "Annotations"
 msgstr ""
 
-#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
-msgid "Annotations & labels"
-msgstr ""
-
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Answer"
@@ -5871,6 +5867,7 @@ msgstr ""
 msgid "Request detail"
 msgstr ""
 
+#: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
 #: src/offering/OfferingDetails.tsx
 msgid "Request details"
 msgstr ""

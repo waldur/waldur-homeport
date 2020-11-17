@@ -9,7 +9,7 @@ import { KeyValueTable } from './KeyValueTable';
 export const MarketplaceKeyValueDialog = (props) => {
   return (
     <ModalDialog
-      title={translate('Annotations & labels')}
+      title={translate('Request details')}
       footer={<CloseDialogButton />}
     >
       <KeyValueTable items={props.resolve.items} />
