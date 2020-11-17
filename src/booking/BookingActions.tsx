@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import * as constants from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { getUser } from '@waldur/workspace/selectors';
+import { getUser, isOwner } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
 import { acceptBookingItem, rejectBookingItem } from './store/actions';
 
 const mapStateToProps = (state: OuterState) => ({
   user: getUser(state),
+  isOwner: isOwner(state),
 });
 
 const mapDispatchToProps = { acceptBookingItem, rejectBookingItem };
@@ -24,7 +25,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
         dispatchProps.acceptBookingItem(ownProps.row) && ownProps.refresh(),
       visible:
         ownProps.row.state === constants.BOOKING_CREATED &&
-        stateProps.user.is_staff,
+        (stateProps.user.is_staff || stateProps.isOwner),
     },
     {
       label: translate('Reject'),
@@ -32,7 +33,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
         dispatchProps.rejectBookingItem(ownProps.row) && ownProps.refresh(),
       visible:
         ownProps.row.state === constants.BOOKING_CREATED &&
-        stateProps.user.is_staff,
+        (stateProps.user.is_staff || stateProps.isOwner),
     },
   ].filter((row) => row.visible),
 });
