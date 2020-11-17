@@ -14,7 +14,7 @@ export const ServiceProviderFilter = () => (
   <div className="form-group col-sm-3">
     <label className="control-label">{translate('Service provider')}</label>
     <Field
-      name="service_provider"
+      name="is_service_provider"
       component={(fieldProps) => (
         <Select
           placeholder={translate('Select service provider...')}

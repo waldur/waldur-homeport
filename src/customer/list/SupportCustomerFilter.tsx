@@ -31,6 +31,6 @@ export const SupportCustomerFilter = reduxForm<{}, any>({
   form: SUPPORT_CUSTOMERS_FORM_ID,
   initialValues: {
     accounting_is_running: AccountingRunningFieldOptions()[0],
-    service_provider: ServiceProviderFilterOptions()[0],
+    is_service_provider: ServiceProviderFilterOptions()[0],
   },
 })(PureSupportCustomerFilter);
