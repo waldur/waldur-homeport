@@ -1158,11 +1158,6 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@esri/arcgis-to-geojson-utils@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@esri/arcgis-to-geojson-utils/-/arcgis-to-geojson-utils-1.1.1.tgz#0f0b42e725586147f2131f2236649fd7511811f0"
-  integrity sha512-utfhzjeS3kU57PmEUHrysRKnGf5/YJpXE0p55bg4N9yF5d26z9V+xzpFXBEeo9OMeUx3COI2p6XCF65ikmtOOA==
-
 "@fullcalendar/bootstrap@~4.2.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@fullcalendar/bootstrap/-/bootstrap-4.2.0.tgz#8ddf310e3247502ff49a1ec852eb84d443cc942b"
@@ -1505,10 +1500,22 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@tweenjs/tween.js@^17.2.0":
-  version "17.2.0"
-  resolved "https://registry.yarnpkg.com/@tweenjs/tween.js/-/tween.js-17.2.0.tgz#21f89b709bafc4b303adae7a83b4f35a0d9e4796"
-  integrity sha1-IfibcJuvxLMDra56g7TzWg2eR5Y=
+"@terraformer/arcgis@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@terraformer/arcgis/-/arcgis-2.0.7.tgz#617e6056a64b7328d4827702d64d0ccfc2e96d17"
+  integrity sha512-7jIQcnd8RnKsDt1IxmEjq9t7l5fnf0e5c+c1+1GjG4NR+TY0XkJcWtrBv0DWd65uAlDiQYMlEG8ls5dz1GQiuA==
+  dependencies:
+    "@terraformer/common" "^2.0.7"
+
+"@terraformer/common@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@terraformer/common/-/common-2.0.7.tgz#bec626f331b9f0cc3aefb16f9f88e2d3684107ff"
+  integrity sha512-8bl+/JT0Rw6FYe2H3FfJS8uQwgzGl+UHs+8JX0TQLHgA4sMDEwObbMwo0iP3FVONwPXrPHEpC5YH7Grve0cl9A==
+
+"@tweenjs/tween.js@^18.6.4":
+  version "18.6.4"
+  resolved "https://registry.yarnpkg.com/@tweenjs/tween.js/-/tween.js-18.6.4.tgz#40a3d0a93647124872dec8e0fd1bd5926695b6ca"
+  integrity sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ==
 
 "@types/angular@^1.7.0":
   version "1.7.0"
@@ -2126,10 +2133,6 @@
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@zeit/schemas/-/schemas-2.6.0.tgz#004e8e553b4cd53d538bd38eac7bcbf58a867fe3"
   integrity sha512-uUrgZ8AxS+Lio0fZKAipJjAh415JyrOZowliZAzmnJSsf7piVL5w+G0+gFJ0KSu3QRhvui/7zuvpLz03YjXAhg==
-
-Leaflet.Canvas-Flowmap-Layer@jwasilgeo/Leaflet.Canvas-Flowmap-Layer#a8570ac1277ee4c5dfcad806123839bd1f14e3c2:
-  version "0.0.0"
-  resolved "https://codeload.github.com/jwasilgeo/Leaflet.Canvas-Flowmap-Layer/tar.gz/a8570ac1277ee4c5dfcad806123839bd1f14e3c2"
 
 abab@^2.0.3:
   version "2.0.4"
@@ -5599,14 +5602,13 @@ esrecurse@^4.1.0:
     estraverse "^4.1.0"
     object-assign "^4.0.1"
 
-esri-leaflet@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/esri-leaflet/-/esri-leaflet-2.1.4.tgz#57d81cee72e8d51c8009b7682e3c38c8412879e1"
-  integrity sha512-cwHnvwMoQRcamUPsbmTRTgLFmZfK8pUdj3ozETXEwWZGdS8dH+gi/Wn63H/fYBaKTDl+iWQTJTab9036FlsM6A==
+esri-leaflet@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/esri-leaflet/-/esri-leaflet-2.5.1.tgz#b473785d0459960a91934c4f8ea8e5512dd9145e"
+  integrity sha512-AW20oUuH4Co5qv+4rRtueHLczeqgYnJblv1KY1PLQgJrzeusT9ZgDXPi/esMeb3yN2PC2JL5BZIhlfzRegVDXA==
   dependencies:
-    "@esri/arcgis-to-geojson-utils" "^1.1.1"
-    leaflet-virtual-grid "^1.0.5"
-    tiny-binary-search "^1.0.2"
+    "@terraformer/arcgis" "^2.0.7"
+    tiny-binary-search "^1.0.3"
 
 estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.2.0"
@@ -6452,6 +6454,11 @@ gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
   integrity sha512-r8EC6NO1sngH/zdD9fiRDLdcgnbayXah+mLgManTaIZJqEC1MZstmnox8KpnI2/fxQwrp5OpCOYWLp4rBl4Jcg==
+
+geojson@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/geojson/-/geojson-0.5.0.tgz#3cd6c96399be65b56ee55596116fe9191ce701c0"
+  integrity sha1-PNbJY5m+ZbVu5VWWEW/pGRznAcA=
 
 geometry-interfaces@^1.1.4:
   version "1.1.4"
@@ -8581,24 +8588,7 @@ leaflet-geosearch@^3.0.6:
   optionalDependencies:
     leaflet "^1.6.0"
 
-leaflet-virtual-grid@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/leaflet-virtual-grid/-/leaflet-virtual-grid-1.0.5.tgz#4842c148152f96c056e8c68184bbefe44b2e57ac"
-  integrity sha512-S4lcMOTGYjDUinAAM5xz65miEWHWI+WQo7V/vOVlos4Jn2jAZiQomMGu/MIZS7KrFGx33GDVaOYAx0wnV92NBA==
-  dependencies:
-    leaflet "^1.0.0"
-
-leaflet@^1.0.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.3.1.tgz#86f336d2fb0e2d0ff446677049a5dc34cf0ea60e"
-  integrity sha512-adQOIzh+bfdridLM1xIgJ9VnJbAUY3wqs/ueF+ITla+PLQ1z47USdBKUf+iD9FuUA8RtlT6j6hZBfZoA6mW+XQ==
-
-leaflet@^1.0.3:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.1.0.tgz#63246715cfc783dca6798b843a250e8e6fd84918"
-  integrity sha512-JK2bT5tZnLQlNuLa8pjOvUC/c/t4MfXBPZyrNK3C1BBxfX1rMHxFC2DvVCNd8esRjDtEddnwSTlv54sC5gvtMQ==
-
-leaflet@^1.6.0:
+leaflet@^1.6.0, leaflet@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.7.1.tgz#10d684916edfe1bf41d688a3b97127c0322a2a19"
   integrity sha512-/xwPEBidtg69Q3HlqPdU3DnrXQOvQU/CCHA1tcDQVzOwm91YMYaILjNp7L4Eaw5Z4sOYdbBz6koWyibppd8Zqw==
@@ -13777,10 +13767,10 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
-tiny-binary-search@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/tiny-binary-search/-/tiny-binary-search-1.0.2.tgz#d4c5ccce5aba0b4caee21909193e4b94bab58f45"
-  integrity sha1-1MXMzlq6C0yu4hkJGT5LlLq1j0U=
+tiny-binary-search@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tiny-binary-search/-/tiny-binary-search-1.0.3.tgz#9d52e3d16dd1171eb74486caf704ba08c0c62186"
+  integrity sha512-STSHX/L5nI9WTLv6wrzJbAPbO7OIISX83KFBh2GVbX1Uz/vgZOU/ANn/8iV6t35yMTpoPzzO+3OQid3mifE0CA==
 
 tiny-inflate@^1.0.0, tiny-inflate@^1.0.2:
   version "1.0.2"

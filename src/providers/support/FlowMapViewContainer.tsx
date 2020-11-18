@@ -17,9 +17,10 @@ import {
   selectInfoPanelStatus,
   selectServiceProviderConsumers,
 } from './selectors';
+import { UsageData } from './types';
 
 interface FlowMapViewComponentProps {
-  serviceUsage: any;
+  serviceUsage: UsageData;
   selectedServiceProvider: any;
   infoPanelIsVisible: boolean;
   fetchServiceUsageStart: () => void;

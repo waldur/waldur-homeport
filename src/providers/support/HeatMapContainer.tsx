@@ -27,7 +27,7 @@ class HeatMapComponent extends React.Component<HeatMapComponentProps> {
       <>
         <FlowMapFilter />
         <HeatMap
-          center={[0, 0]}
+          center={[58.5975, 24.9873]}
           zoom={3}
           serviceUsage={serviceUsage}
           countriesToRender={countriesToRender}

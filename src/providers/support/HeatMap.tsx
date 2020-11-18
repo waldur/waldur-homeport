@@ -1,12 +1,16 @@
+import * as geojson from 'geojson';
+import { LatLngTuple, Layer } from 'leaflet';
 import * as React from 'react';
+import { MapContainer, GeoJSON } from 'react-leaflet';
+import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import loadLeafleat from '@waldur/map/load-leaflet';
+import { OpenStreeMapTileLayer } from '@waldur/map/OpenStreeMapTileLayer';
 
 import { countryInfo } from './countryInfo';
 import './HeatMap.scss';
 import { getStyle, getChartData } from './HeatMapCalculator';
-import { UsageData, Feature } from './types';
+import { UsageData } from './types';
 
 /*Source: https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json */
 
@@ -14,106 +18,43 @@ const loadCountries = () =>
   import(/* webpackChunkName: "countries" */ './countries.geo.json');
 
 interface HeatMapProps {
-  center?: number[];
+  center?: LatLngTuple;
   zoom?: number;
   serviceUsage: UsageData;
   countriesToRender: string[];
 }
 
-export class HeatMap extends React.Component<HeatMapProps> {
-  map = undefined;
-  mapNode: HTMLDivElement;
-  features: Feature[];
-  leaflet = null;
+const onEachFeature = (feature: geojson.Feature, layer: Layer) => {
+  layer.bindPopup(countryInfo({ data: feature.properties.data }));
+};
 
-  state = {
-    loading: true,
-    loaded: false,
-  };
-
-  componentDidMount() {
-    this.loadAll().then(() => {
-      this.initMap();
-    });
-  }
-
-  componentDidUpdate() {
-    if (this.leaflet) {
-      if (!this.map) {
-        this.initMap();
-      } else {
-        this.updateMap();
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.map) {
-      this.map.remove();
-    }
-  }
-
-  async loadAll() {
-    try {
-      const {
-        default: { features },
-      } = await loadCountries();
-      const { leaflet } = await loadLeafleat();
-      this.setState({
-        loading: false,
-        loaded: true,
-      });
-      this.features = features;
-      this.leaflet = leaflet;
-    } catch {
-      this.setState({
-        loading: false,
-        loaded: false,
-      });
-    }
-  }
-
-  initMap() {
-    const { center, zoom } = this.props;
-    this.map = this.leaflet.map(this.mapNode).setView(center, zoom);
-    const layerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    const layerAttrib =
-      'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-
-    this.leaflet
-      .tileLayer(layerUrl, { attribution: layerAttrib })
-      .addTo(this.map);
-    this.updateMap();
-  }
-
-  updateMap() {
-    const chartData = getChartData(
-      this.props.serviceUsage,
-      this.props.countriesToRender,
-      this.features,
+export const HeatMap: React.FC<HeatMapProps> = (props) => {
+  const { loading, value } = useAsync(async () => {
+    const module = await loadCountries();
+    return getChartData(
+      props.serviceUsage,
+      props.countriesToRender,
+      module.default.features as geojson.Feature[],
     );
-    if (chartData.length > 0) {
-      const layer = this.leaflet.geoJson(chartData, {
-        style: getStyle,
-        onEachFeature: this.onEachFeature,
-      });
-      this.map.fitBounds(layer.getBounds());
-      layer.addTo(this.map);
-    }
-  }
+  }, [props.serviceUsage, props.countriesToRender]);
 
-  onEachFeature(feature, layer) {
-    const content = countryInfo({ data: feature.properties.data });
-    layer.bindPopup(content);
+  if (loading) {
+    return <LoadingSpinner />;
+  } else if (value) {
+    return (
+      <MapContainer id="heat-map" center={props.center} zoom={props.zoom}>
+        <OpenStreeMapTileLayer />
+        {value.map((data, index) => (
+          <GeoJSON
+            key={index}
+            data={data}
+            style={getStyle}
+            onEachFeature={onEachFeature}
+          />
+        ))}
+      </MapContainer>
+    );
+  } else {
+    return null;
   }
-
-  render() {
-    if (this.state.loading) {
-      return <LoadingSpinner />;
-    } else if (this.state.loaded) {
-      return <div ref={(node) => (this.mapNode = node)} id="heat-map" />;
-    } else {
-      return null;
-    }
-  }
-}
+};
