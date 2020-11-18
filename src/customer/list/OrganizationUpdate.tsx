@@ -118,7 +118,14 @@ const mapStateToProps = (_state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  submitRequest: (formData) => dispatch(updateOrganization(formData)),
+  submitRequest: (formData) =>
+    dispatch(
+      updateOrganization({
+        ...formData,
+        country: formData.country?.value,
+        division: formData.division?.url,
+      }),
+    ),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
