@@ -2851,6 +2851,7 @@ msgid "IP version"
 msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
+#: src/openstack/openstack-tenant/TenantPortsList.tsx
 msgid "IPv4 address"
 msgstr ""
 
@@ -3481,6 +3482,7 @@ msgid "Longhorn is a lightweight, reliable, and powerful distributed block stora
 msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
+#: src/openstack/openstack-tenant/TenantPortsList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
 msgid "MAC address"
@@ -3982,6 +3984,10 @@ msgstr ""
 #: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Network adapters"
+msgstr ""
+
+#: src/openstack/openstack-tenant/TenantPortsList.tsx
+msgid "Network name"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
@@ -5141,6 +5147,10 @@ msgstr ""
 #: src/openstack/openstack-security-groups/SecurityGroupRulesList.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupsDialog.tsx
 msgid "Port range"
+msgstr ""
+
+#: src/openstack/openstack-tenant/tabs.ts
+msgid "Ports"
 msgstr ""
 
 #: src/marketplace-checklist/PieChart.tsx
@@ -9536,6 +9546,7 @@ msgstr ""
 msgid "plans"
 msgstr ""
 
+#: src/openstack/openstack-tenant/TenantPortsList.tsx
 #: src/vmware/PortsList.tsx
 msgid "ports"
 msgstr ""
