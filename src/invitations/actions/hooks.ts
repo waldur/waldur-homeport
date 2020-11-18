@@ -46,7 +46,7 @@ const getRoles = (context) => {
   ];
   if (isFeatureVisible('project.support')) {
     roles.push({
-      title: ENV.roles.support,
+      title: ENV.roles.member,
       value: PROJECT_MEMBER_ROLE,
       icon: 'fa-user-o',
     });

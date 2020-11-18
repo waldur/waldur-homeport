@@ -21,7 +21,7 @@ export const getRoles = () => {
   if (isFeatureVisible('project.support')) {
     roles.push({
       value: PROJECT_MEMBER_ROLE,
-      label: translate(ENV.roles.support),
+      label: translate(ENV.roles.member),
     });
   }
   return roles.sort((a, b) => a.label.localeCompare(b.label));

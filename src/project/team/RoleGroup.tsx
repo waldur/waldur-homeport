@@ -31,8 +31,8 @@ export const RoleGroup = ({ isProjectManager }) =>
       {isFeatureVisible('project.support') && (
         <FormGroup>
           <label>
-            <Field name="role" component="input" type="radio" value="support" />{' '}
-            {translate(ENV.roles.support)}
+            <Field name="role" component="input" type="radio" value="member" />{' '}
+            {translate(ENV.roles.member)}
           </label>
         </FormGroup>
       )}

@@ -71,7 +71,7 @@ const ENV = {
     owner: gettext('Organization owner'),
     manager: gettext('Project manager'),
     admin: gettext('System administrator'),
-    support: gettext('Project member'),
+    member: gettext('Project member'),
   },
   invitationRedirectTime: 5000,
   userMandatoryFields: ['full_name', 'email'],
