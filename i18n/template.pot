@@ -5690,7 +5690,7 @@ msgid "Register"
 msgstr ""
 
 #: src/customer/create/CustomerCreatePrompt.tsx
-msgid "Register as a customer of our portal and provider your cloud services through Waldur's Marketplace."
+msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx

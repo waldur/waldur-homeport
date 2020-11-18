@@ -80,7 +80,7 @@ export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
                 title={translate('Service Provider')}
               >
                 {translate(
-                  "Register as a customer of our portal and provider your cloud services through Waldur's Marketplace.",
+                  'Register as a customer of our portal and provider your cloud services through the Marketplace.',
                 )}
               </MessageButton>
             ),
