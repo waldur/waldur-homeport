@@ -68,7 +68,7 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
     }
   };
   const addBooking = (event: BookingProps) => {
-    dispatch(showSuccess('Booking scheduled.'));
+    dispatch(showSuccess('Time slot has been added.'));
     return props.addEventCb(event);
   };
 
