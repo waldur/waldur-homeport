@@ -8,7 +8,7 @@ export const SelectField = (props) => {
       {...rest}
       name={input.name}
       value={
-        simpleValue || typeof input.value !== 'object'
+        (simpleValue || typeof input.value !== 'object') && options
           ? options.filter((option) => option.value === input.value)
           : input.value
       }
