@@ -2235,6 +2235,10 @@ msgstr ""
 msgid "End date"
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
+msgid "End date must be after start date."
+msgstr ""
+
 #: src/invoices/list/AgreementInfo.tsx
 msgid "End date of the agreement is"
 msgstr ""

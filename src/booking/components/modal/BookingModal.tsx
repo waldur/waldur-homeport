@@ -3,9 +3,11 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import * as Modal from 'react-bootstrap/lib/Modal';
+import { useDispatch } from 'react-redux';
 
 import { BookingModalProps, BookingProps } from '@waldur/booking/types';
 import { translate } from '@waldur/i18n';
+import { showError } from '@waldur/store/coreSaga';
 
 import { DateAndTimeSelectField } from './DateAndTimeSelect';
 
@@ -16,6 +18,7 @@ const BookingModal = ({
   onDelete,
   event,
 }: BookingModalProps) => {
+  const dispatch = useDispatch();
   const [newEvent, setNewEvent] = React.useState({
     title: event.title,
     start: event.start,
@@ -28,17 +31,21 @@ const BookingModal = ({
     toggle();
   };
   const handleSubmit = () => {
-    const { id, extendedProps } = event;
-    const payload = {
-      oldID: id as BookingProps['id'],
-      event: {
-        id,
-        extendedProps,
-        ...newEvent,
-      },
-    };
-    onSuccess(payload);
-    toggle();
+    if (moment(newEvent.start).isBefore(newEvent.end)) {
+      const { id, extendedProps } = event;
+      const payload = {
+        oldID: id as BookingProps['id'],
+        event: {
+          id,
+          extendedProps,
+          ...newEvent,
+        },
+      };
+      onSuccess(payload);
+      toggle();
+    } else {
+      dispatch(showError(translate('End date must be after start date.')));
+    }
   };
   const handleChange = (name, value) =>
     setNewEvent({ ...newEvent, [name]: value });
