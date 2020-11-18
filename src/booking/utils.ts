@@ -321,7 +321,7 @@ export const handleWeekDays = (weekdayNumbers, dayNumber): number[] => {
 
 export const getDurationOptions = (
   locale: string,
-  minuteArray: number[] = [1, 2, 3, 4, 5, 6, 6, 8, 24],
+  minuteArray: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 24],
   units = 'hours',
 ) => {
   moment.locale(locale);

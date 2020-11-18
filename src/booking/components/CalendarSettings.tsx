@@ -6,6 +6,7 @@ import Select from 'react-select';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { getOptions } from '@waldur/form/TimeSelectField';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { getLocale } from '@waldur/i18n/translate';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -173,6 +174,7 @@ export const CalendarSettings: React.FC = () => {
           options={durationOptions}
           value={durationOptions.filter(({ value }) => value === slotDuration)}
           onChange={(newValue: any) => setSlotDuration(newValue.value)}
+          {...reactSelectMenuPortaling()}
         />
       </FormGroup>
 
