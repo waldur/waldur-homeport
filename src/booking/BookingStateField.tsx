@@ -3,7 +3,7 @@ import * as React from 'react';
 import { translate } from '@waldur/i18n';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 
-const bookingStateAliases = (state: string): string => {
+export const bookingStateAliases = (state: string): string => {
   switch (state) {
     case 'Creating': {
       return translate('Unconfirmed');

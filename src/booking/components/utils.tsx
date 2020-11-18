@@ -5,6 +5,7 @@ import * as OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import * as BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
 import * as ReactDOM from 'react-dom';
 
+import { bookingStateAliases } from '@waldur/booking/BookingStateField';
 import { formatShortDateTime, formatTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
@@ -35,7 +36,7 @@ const getTooltipInformation = (event) => ({
   [translate('Created by')]: event.extendedProps.created_by_full_name,
   [translate('Approved by')]: event.extendedProps.approved_by_full_name,
   [translate('Created')]: event.extendedProps.created,
-  [translate('State')]: event.extendedProps.state,
+  [translate('State')]: bookingStateAliases(event.extendedProps.state),
 });
 
 const renderEventWithTooltip = ({
