@@ -170,13 +170,13 @@ export const eventRender = (arg, focused?) => {
 const getNextSlot = (slots, selectedValue) =>
   slots
     .map((slot) => moment(slot.start))
-    .sort((time) => time.valueOf())
+    .sort((a, b) => a.valueOf() - b.valueOf())
     .find((next) => next.isAfter(moment(selectedValue)));
 
 const getSlotEnd = (slots, selectedValue) =>
   slots
     .map((slot) => moment(slot.end))
-    .sort((time) => time.valueOf())
+    .sort((a, b) => a.valueOf() - b.valueOf())
     .find((next) => moment(selectedValue).isSameOrBefore(next));
 
 export const handleSchedule = (
