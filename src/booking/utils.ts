@@ -115,14 +115,18 @@ export const createBooking = (
     extendedProps,
   }: EventApi | EventInput | BookingProps,
   timeStamp?: string,
-): BookingProps => ({
-  id: id || `${randomId()}-${timeStamp!}`,
-  start,
-  end,
-  allDay,
-  title,
-  extendedProps,
-});
+): BookingProps => {
+  // eslint-disable-next-line no-console
+  console.log('start, end', start, end);
+  return {
+    id: id || `${randomId()}-${timeStamp!}`,
+    start,
+    end,
+    allDay,
+    title,
+    extendedProps,
+  };
+};
 
 export const transformBookingEvent = (event, showAvailability = false) => {
   if (event === undefined) {

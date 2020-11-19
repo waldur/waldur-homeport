@@ -68,7 +68,9 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
     }
   };
   const addBooking = (event: BookingProps) => {
-    dispatch(showSuccess('Time slot has been added.'));
+    // eslint-disable-next-line no-console
+    console.log('event', event);
+    dispatch(showSuccess('Time slot has been added.')); //
     return props.addEventCb(event);
   };
 

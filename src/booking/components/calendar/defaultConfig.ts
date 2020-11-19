@@ -37,10 +37,12 @@ export const defaultConfig = {
     '': 'H(:mm)( - H:mm)',
   },
   eventTimeFormat: {
-    hour: 'numeric',
+    hour: '2-digit',
+    day: '2-digit',
+    month: '2-digit',
     minute: '2-digit',
     meridiem: 'short',
-    hour12: false,
+    hour12: true,
     omitZeroMinute: true,
   },
   buttonText: {

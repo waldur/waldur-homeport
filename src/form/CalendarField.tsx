@@ -136,6 +136,8 @@ export class EditableCalendar extends React.Component<
         options={this.getCalendarConfig()}
         availabiltySlots={this.state.availabilitySlots}
         addEventCb={(addedEvent) => {
+          // eslint-disable-next-line no-console
+          console.log('addedEvent', addedEvent);
           this.updateAvailabilitySlotsAfterEventWasAdded(addedEvent);
           return fields.push(addedEvent);
         }}
