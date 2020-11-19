@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { timelineLabels } from '@waldur/booking/utils';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
+import './DateAndTimeSelect.scss';
 
 interface DateAndTimeSelectField {
   name: string;
@@ -38,6 +39,7 @@ export const DateAndTimeSelectField = (props: DateAndTimeSelectField) => (
             moment.utc(formattedValue, 'DD-MM-YYYY', true).toDate(),
           )
         }
+        calendarContainer={document.getElementsByClassName('modal')[0]}
       />
     </div>
     <label
