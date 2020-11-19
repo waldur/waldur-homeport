@@ -3,5 +3,5 @@ import { isStaff } from '@waldur/workspace/selectors';
 
 export const isStaffOrSelfSelectorCreator = (stateParams) => (state) =>
   stateParams.uuid === undefined ||
-  stateParams.uuid === getUser(state).uuid ||
+  stateParams.uuid === getUser(state)?.uuid ||
   isStaff(state);

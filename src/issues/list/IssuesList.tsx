@@ -153,7 +153,7 @@ const TableOptions = {
 };
 
 const mapStateToProps = (state) => ({
-  supportOrStaff: getUser(state).is_staff || getUser(state).is_support,
+  supportOrStaff: getUser(state)?.is_staff || getUser(state)?.is_support,
 });
 
 const connector = connect(mapStateToProps);

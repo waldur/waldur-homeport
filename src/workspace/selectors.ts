@@ -113,7 +113,7 @@ export const isAdmin = createSelector(getUser, getProject, (user, project) => {
 });
 
 export const filterByUser = (state: OuterState) => ({
-  user_url: getUser(state).url,
+  user_url: getUser(state)?.url,
 });
 
 export const selectTablePagination = (state, table) => {
