@@ -3,12 +3,9 @@ import * as Table from 'react-bootstrap/lib/Table';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import {
-  formatSecurityGroupProtocol,
-  formatSecurityGroupRuleDirection,
-  formatSecurityGroupRulePortRange,
-} from '@waldur/openstack/openstack-security-groups/utils';
 
+import { SecurityGroupRuleCell } from './SecurityGroupRuleCell';
+import { SecurityGroupRuleHeader } from './SecurityGroupRuleHeader';
 import { SecurityGroup } from './types';
 
 interface OpenStackSecurityGroupsDialogProps extends TranslateProps {
@@ -27,12 +24,7 @@ export const OpenStackSecurityGroupsDialog = withTranslation(
           <thead>
             <tr>
               <th />
-              <th>{props.translate('Ethernet type')}</th>
-              <th>{props.translate('Direction')}</th>
-              <th>{props.translate('IP protocol')}</th>
-              <th>{props.translate('Port range')}</th>
-              <th>{props.translate('Remote CIDR')}</th>
-              <th>{props.translate('Description')}</th>
+              <SecurityGroupRuleHeader />
             </tr>
           </thead>
           {props.resolve.securityGroups.map((securityGroup) => (
@@ -47,12 +39,7 @@ export const OpenStackSecurityGroupsDialog = withTranslation(
                       )}
                     </td>
                   )}
-                  <td>{rule.ethertype}</td>
-                  <td>{formatSecurityGroupRuleDirection(rule)}</td>
-                  <td>{formatSecurityGroupProtocol(rule)}</td>
-                  <td>{formatSecurityGroupRulePortRange(rule)}</td>
-                  <td>{rule.cidr}</td>
-                  <td>{rule.description || 'N/A'}</td>
+                  <SecurityGroupRuleCell rule={rule} />
                 </tr>
               ))}
             </tbody>

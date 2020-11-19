@@ -26,5 +26,7 @@ export interface SecurityGroupRule {
   from_port: number;
   to_port: number;
   cidr: string;
+  remote_group_name?: string;
+  remote_group_uuid?: string;
   description?: string;
 }

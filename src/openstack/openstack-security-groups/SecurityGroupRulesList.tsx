@@ -1,15 +1,9 @@
 import * as React from 'react';
 
-import { translate } from '@waldur/i18n';
-
 import { SecurityGroupRule } from '../types';
 
-import {
-  formatSecurityGroupProtocol,
-  formatSecurityGroupRulePortRange,
-  formatSecurityGroupCIDR,
-  formatSecurityGroupRuleDirection,
-} from './utils';
+import { SecurityGroupRuleCell } from './SecurityGroupRuleCell';
+import { SecurityGroupRuleHeader } from './SecurityGroupRuleHeader';
 
 interface SecurityGroupRulesListProps {
   resource: {
@@ -24,23 +18,13 @@ export const SecurityGroupRulesList: React.FC<SecurityGroupRulesListProps> = ({
     <table className="table table-bordered">
       <thead>
         <tr>
-          <th>{translate('Ethernet type')}</th>
-          <th>{translate('Direction')}</th>
-          <th>{translate('IP protocol')}</th>
-          <th>{translate('Port range')}</th>
-          <th>{translate('Remote CIDR')}</th>
-          <th>{translate('Description')}</th>
+          <SecurityGroupRuleHeader />
         </tr>
       </thead>
       <tbody>
         {resource.rules.map((rule, index) => (
           <tr key={index}>
-            <td>{rule.ethertype}</td>
-            <td>{formatSecurityGroupRuleDirection(rule)}</td>
-            <td>{formatSecurityGroupProtocol(rule)}</td>
-            <td>{formatSecurityGroupRulePortRange(rule)}</td>
-            <td>{formatSecurityGroupCIDR(rule)}</td>
-            <td>{rule.description || 'N/A'}</td>
+            <SecurityGroupRuleCell rule={rule} />
           </tr>
         ))}
       </tbody>
