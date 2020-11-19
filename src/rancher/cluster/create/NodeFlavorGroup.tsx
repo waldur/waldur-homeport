@@ -39,7 +39,9 @@ export const NodeFlavorGroup: React.FC<NodeFlavorGroupProps> = (props) => {
         validate={required}
         isClearable={true}
       />
-      {props.nodeIndex && <LonghornWorkerWarning nodeIndex={props.nodeIndex} />}
+      {typeof props.nodeIndex === 'number' ? (
+        <LonghornWorkerWarning nodeIndex={props.nodeIndex} />
+      ) : null}
     </FormGroup>
   );
 };
