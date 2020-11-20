@@ -1,7 +1,5 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Row from 'react-bootstrap/lib/Row';
 import { useSelector } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 import { getFormValues } from 'redux-form';
@@ -23,20 +21,14 @@ const bookingsFilterFormSelector = (state) =>
 const bookingsFilterStateSelector = (state) =>
   bookingsFilterFormSelector(state).state;
 
-export const getCalendarEvent = (
-  bookingItem,
-  event,
-  activeBookingId?: string,
-) => ({
+export const getCalendarEvent = (bookingItem, event) => ({
   ...event,
   className: classNames({
     progress: bookingItem.state === 'Creating',
     'event-terminated': bookingItem.state === 'Terminated',
-    'event-isFocused': bookingItem.uuid === activeBookingId,
   }),
   color: classNames({
     '#f8ac59': bookingItem.state === 'Terminated',
-    '#18a689': bookingItem.uuid === activeBookingId,
   }),
   name: bookingItem.name || bookingItem.offering_name,
   project_name: bookingItem.project_name,
@@ -59,35 +51,57 @@ const getCalendarEvents = (bookings) => {
   return eventsMapper(bookedEvents);
 };
 
-async function loadBookingOfferings(providerUuid: string, state, pagination) {
+async function loadBookingOfferings(
+  providerUuid: string,
+  offeringUuid: string,
+  state,
+  page,
+  page_size,
+) {
   const bookings = await getBookingsList({
     provider_uuid: providerUuid,
+    offering_uuid: offeringUuid,
     offering_type: 'Marketplace.Booking',
     state: state?.map(({ value }) => value),
-    page: pagination.currentPage,
-    page_size: pagination.pageSize,
+    page,
+    page_size,
   });
   return getCalendarEvents(bookings);
 }
 
 interface BookingsCalendarProps {
-  providerUuid: string;
+  providerUuid?: string;
+  offeringUuid?: string;
 }
 
-export const BookingsCalendar = ({ providerUuid }: BookingsCalendarProps) => {
+export const BookingsCalendar = ({
+  providerUuid,
+  offeringUuid,
+}: BookingsCalendarProps) => {
   const bookingsFilterState = useSelector(bookingsFilterStateSelector);
-  const bookingsListPagination = useSelector((state) =>
-    selectTablePagination(state, TABLE_NAME),
+  const bookingsListCurrentPage = useSelector(
+    (state) => selectTablePagination(state, TABLE_NAME)?.currentPage,
+  );
+  const bookingsListPageSize = useSelector(
+    (state) => selectTablePagination(state, TABLE_NAME)?.pageSize,
   );
 
   const { loading, value: calendarEvents, error } = useAsync(
     () =>
       loadBookingOfferings(
         providerUuid,
+        offeringUuid,
         bookingsFilterState,
-        bookingsListPagination,
+        bookingsListCurrentPage,
+        bookingsListPageSize,
       ),
-    [providerUuid, bookingsFilterState],
+    [
+      providerUuid,
+      offeringUuid,
+      bookingsFilterState,
+      bookingsListCurrentPage,
+      bookingsListPageSize,
+    ],
   );
 
   if (loading) {
@@ -99,16 +113,12 @@ export const BookingsCalendar = ({ providerUuid }: BookingsCalendarProps) => {
   }
 
   return calendarEvents.length ? (
-    <Row style={{ marginBottom: '30px' }}>
-      <Col md={8} mdOffset={2}>
-        <Calendar
-          height="auto"
-          eventLimit={false}
-          events={calendarEvents}
-          eventRender={(info) => eventRender({ ...info, withTooltip: true })}
-        />
-      </Col>
-    </Row>
+    <Calendar
+      height="auto"
+      eventLimit={false}
+      events={calendarEvents}
+      eventRender={(info) => eventRender({ ...info, withTooltip: true })}
+    />
   ) : (
     <p>{translate('There are no events.')}</p>
   );

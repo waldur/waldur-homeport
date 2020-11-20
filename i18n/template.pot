@@ -1661,10 +1661,6 @@ msgstr ""
 msgid "Current size"
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingBookingTab.tsx
-msgid "Currently there are no booking requests."
-msgstr ""
-
 #: src/issues/CustomerSupportRating.tsx
 msgid "Customer support satisfaction overall rating"
 msgstr ""

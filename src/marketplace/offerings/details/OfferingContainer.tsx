@@ -53,7 +53,7 @@ async function loadData(offering_uuid: string) {
     },
     {
       title: translate('Bookings'),
-      component: () => <OfferingBookingTab offering={offering} />,
+      component: () => <OfferingBookingTab offeringUuid={offering.uuid} />,
       visible: offering.type === OFFERING_TYPE_BOOKING,
     },
     {
