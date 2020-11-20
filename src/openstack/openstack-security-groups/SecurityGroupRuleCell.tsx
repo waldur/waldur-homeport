@@ -16,8 +16,8 @@ export const SecurityGroupRuleCell: React.FC<{ rule: SecurityGroupRule }> = ({
     <td>{formatSecurityGroupRuleDirection(rule)}</td>
     <td>{formatSecurityGroupProtocol(rule)}</td>
     <td>{formatSecurityGroupRulePortRange(rule)}</td>
-    <td>{rule.cidr}</td>
-    <td>{rule.remote_group_name || 'N/A'}</td>
-    <td>{rule.description || 'N/A'}</td>
+    <td>{rule.cidr || <>&mdash;</>}</td>
+    <td>{rule.remote_group_name || <>&mdash;</>}</td>
+    <td>{rule.description || <>&mdash;</>}</td>
   </>
 );
