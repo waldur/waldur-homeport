@@ -4124,6 +4124,10 @@ msgstr ""
 msgid "Nodes"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html
+msgid "None"
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Not a service provider."
 msgstr ""
@@ -5761,6 +5765,7 @@ msgid "Remote CIDR"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
+#: src/openstack/openstack-security-groups/security-group-rule-editor.html
 msgid "Remote security group"
 msgstr ""
 

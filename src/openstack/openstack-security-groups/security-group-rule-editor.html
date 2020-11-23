@@ -14,6 +14,7 @@
       <th translate>From port</th>
       <th translate>To port</th>
       <th translate>Remote CIDR</th>
+      <th translate>Remote security group</th>
       <th translate>Description</th>
       <th translate>Actions</th>
     </tr>
@@ -90,6 +91,16 @@
           class="form-control"
           ng-pattern="$ctrl.getPattern(rule)"
         />
+      </td>
+      <td class="form-group">
+        <select
+          ng-options="remote_group.url as remote_group.name for remote_group in $ctrl.remote_groups"
+          ng-model="rule.remote_group"
+          class="form-control"
+          ng-if="!$ctrl.loading"
+        >
+        <option value="" translate>None</option>
+        </select>
       </td>
       <td class="form-group">
         <input
