@@ -27,9 +27,16 @@ export const formatOrderItem = (props: OrderSummaryProps, request) => {
     if (props.formData.limits) {
       if (props.formData.plan && props.formData.plan.quotas) {
         const planQuotas = props.formData.plan.quotas;
-        const invalidComponents = props.offering.components
+        const disabledComponents = props.offering.components
           .filter((c) => c.disable_quotas)
           .map((c) => c.type);
+        const nonUsageComponents = props.offering.components
+          .filter((c) => c.billing_type !== 'usage')
+          .map((c) => c.type);
+        const invalidComponents = [
+          ...nonUsageComponents,
+          ...disabledComponents,
+        ];
         // Filter out disabled plan quotas
         request.limits = {
           ...Object.keys(planQuotas).reduce(
