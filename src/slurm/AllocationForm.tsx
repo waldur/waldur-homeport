@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { getLatinNameValidators } from '@waldur/core/validators';
+import { getNameFieldValidators } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
@@ -36,7 +36,7 @@ export class AllocationForm extends React.Component<
             description={translate(
               'This name will be visible in accounting data.',
             )}
-            validate={getLatinNameValidators()}
+            validate={getNameFieldValidators()}
             required={true}
           />
           <PlanField offering={props.offering} />

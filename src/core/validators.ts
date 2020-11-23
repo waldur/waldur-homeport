@@ -18,7 +18,7 @@ const nameField = (value: string) => {
   }
 };
 
-export const getLatinNameValidators = () => [required, nameField];
+export const getNameFieldValidators = () => [required, nameField];
 
 export const minValue = (min: number) => (value: number) =>
   value && value < min
