@@ -471,7 +471,7 @@ msgid "Allocation description"
 msgstr ""
 
 #: src/slurm/AllocationForm.tsx
-msgid "Allocation name===="
+msgid "Allocation name"
 msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -3836,6 +3836,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
+#: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/offering/OracleSnapshots.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -3927,10 +3928,6 @@ msgstr ""
 
 #: src/core/validators.ts
 msgid "Name should not includes an invalid unicode character."
-msgstr ""
-
-#: src/offering/OfferingConfigurationForm.tsx
-msgid "Name===="
 msgstr ""
 
 #: src/rancher/cluster/ClusterIngressesList.tsx

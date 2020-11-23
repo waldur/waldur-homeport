@@ -69,7 +69,7 @@ export class PureOfferingConfigurationForm extends React.Component<
           <ProjectField previewMode={props.previewMode} />
           <StringField
             name="attributes.name"
-            label={translate('Name====')}
+            label={translate('Name')}
             required={true}
             description={translate(
               'This name will be visible in accounting data.',
