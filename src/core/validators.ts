@@ -14,7 +14,7 @@ const nameField = (value: string) => {
     );
   }
   if (!value.match(ANY_VISIBLE_UNICODE_CHARACTERS)) {
-    return translate('Name should not includes an invalid unicode character.');
+    return translate('Name should not include invisible unicode characters.');
   }
 };
 

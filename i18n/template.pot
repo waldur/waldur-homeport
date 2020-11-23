@@ -3927,7 +3927,7 @@ msgid "Name should contain at least 3 symbols."
 msgstr ""
 
 #: src/core/validators.ts
-msgid "Name should not includes an invalid unicode character."
+msgid "Name should not include invisible unicode characters."
 msgstr ""
 
 #: src/rancher/cluster/ClusterIngressesList.tsx
