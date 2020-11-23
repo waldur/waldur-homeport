@@ -13,7 +13,7 @@ const nameField = (value: string) => {
       'Name is too short, names should be at least two alphanumeric characters.',
     );
   }
-  if (!value.match(ANY_VISIBLE_UNICODE_CHARACTERS)) {
+  if (value.match(ANY_VISIBLE_UNICODE_CHARACTERS)) {
     return translate('Name should not includes an invalid unicode character.');
   }
 };
