@@ -35,7 +35,7 @@ export default function createAction(): ResourceAction {
       };
     },
     onSuccess: () => $rootScope.$broadcast('refreshSecurityGroupsList'),
-    dialogSize: 'lg',
+    dialogSize: 'xl',
     validators: [validateState('OK')],
   };
 }

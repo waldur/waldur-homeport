@@ -1,6 +1,7 @@
 import cidrRegex from 'cidr-regex';
 
 import { translate } from '@waldur/i18n';
+import { loadSecurityGroupsResources } from '@waldur/openstack/api';
 
 import template from './security-group-rule-editor.html';
 
@@ -14,6 +15,7 @@ const securityGroupRuleEditor = {
     model: '<',
     field: '<',
     form: '<',
+    context: '<',
   },
   controller: class SecurityGroupRuleEditorController {
     $onInit() {
@@ -47,6 +49,20 @@ const securityGroupRuleEditor = {
         this.model[this.field.name] = [];
       }
       this.target = this.model[this.field.name];
+      this.remote_groups = [];
+      this.loading = true;
+      const tenant =
+        this.context.resource.resource_type === 'OpenStack.Tenant'
+          ? this.context.resource.url
+          : this.context.resource.tenant;
+      loadSecurityGroupsResources({
+        tenant,
+        field: ['name', 'url'],
+        o: 'name',
+      }).then((remote_groups) => {
+        this.remote_groups = remote_groups;
+        this.loading = false;
+      });
     }
 
     getPortMin(rule) {
@@ -91,7 +107,8 @@ const securityGroupRuleEditor = {
     }
 
     isCidrInvalid(index) {
-      return this.form[`rule_${index}_cidr`].$invalid;
+      const field = this.form[`rule_${index}_cidr`];
+      return field && field.$invalid;
     }
 
     getPattern(rule) {
