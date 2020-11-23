@@ -31,7 +31,7 @@ export class AllocationForm extends React.Component<
         >
           <ProjectField />
           <StringField
-            label={translate('Allocation name')}
+            label={translate('Allocation name====')}
             name="attributes.name"
             description={translate(
               'This name will be visible in accounting data.',

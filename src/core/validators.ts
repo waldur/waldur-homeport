@@ -1,11 +1,10 @@
-import { ENV } from '@waldur/core/services';
-import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
+import { ANY_VISIBLE_UNICODE_CHARACTERS } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 export const required = (value) =>
   value || value === 0 ? undefined : translate('This field is required.');
 
-export const latinName = (value: string) => {
+const nameField = (value: string) => {
   if (!value) {
     return undefined;
   }
@@ -14,18 +13,12 @@ export const latinName = (value: string) => {
       'Name is too short, names should be at least two alphanumeric characters.',
     );
   }
-  if (!value.match(LATIN_NAME_PATTERN)) {
-    return translate('Name should consist of latin symbols and numbers.');
+  if (!value.match(ANY_VISIBLE_UNICODE_CHARACTERS)) {
+    return translate('Name should not includes an invalid unicode character.');
   }
 };
 
-export const getLatinNameValidators = () => {
-  const validators = [required];
-  if (ENV.enforceLatinName) {
-    validators.push(latinName);
-  }
-  return validators;
-};
+export const getLatinNameValidators = () => [required, nameField];
 
 export const minValue = (min: number) => (value: number) =>
   value && value < min

@@ -110,6 +110,8 @@ export const omit = (object, prop) => {
 
 export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');
 
+export const ANY_VISIBLE_UNICODE_CHARACTERS = new RegExp('^[0-9\\\\p{L} _.]+$');
+
 export const range = (n) => Array.from(Array(n).keys());
 
 export function getQueryString() {
