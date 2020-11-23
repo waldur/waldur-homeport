@@ -24,7 +24,7 @@ const TableComponent = (props) => {
         },
         {
           title: translate('Keep until'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => formatDateTime(row.kept_until),
         },
         {
           title: translate('State'),
