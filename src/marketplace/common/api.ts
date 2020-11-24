@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from 'axios';
+import Axios, { AxiosRequestConfig } from 'axios';
 
 import {
   get,
@@ -11,6 +11,7 @@ import {
   patch,
   deleteById,
   getSelectData,
+  parseResultCount,
 } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';
 import { Customer } from '@waldur/customer/types';
@@ -62,6 +63,12 @@ export const getOfferingsOptions = (params?: {}) =>
 
 export const getAllOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-offerings/', options);
+
+export const getOfferingsCount = (options?: {}) =>
+  Axios.head(
+    `${ENV.apiEndpoint}api/marketplace-offerings/`,
+    options,
+  ).then((response) => parseResultCount(response));
 
 export const getProviderOfferings = (customerUuid: string) =>
   getAllOfferings({ params: { customer_uuid: customerUuid } });
