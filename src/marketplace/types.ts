@@ -1,6 +1,6 @@
 import { InjectedFormProps } from 'redux-form';
 
-import { Geolocations } from '@waldur/map/types';
+import { GeolocationPoint } from '@waldur/map/types';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { Project, Customer } from '@waldur/workspace/types';
 
@@ -79,7 +79,7 @@ interface ReferredPids {
   relation_type: string;
 }
 
-export interface Offering {
+export interface Offering extends GeolocationPoint {
   quotas?: Quota[];
   uuid?: string;
   url?: string;
@@ -96,7 +96,6 @@ export interface Offering {
   screenshots?: Screenshot[];
   description?: string;
   full_description: string;
-  geolocations?: Geolocations;
   customer_uuid?: string;
   customer_name?: string;
   attributes: AttributesType;

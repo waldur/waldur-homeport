@@ -6,17 +6,10 @@ import { translate } from '@waldur/i18n';
 
 import './LeafletMap.scss';
 import { OpenStreeMapTileLayer } from './OpenStreeMapTileLayer';
-import { Geolocations } from './types';
+import { GeolocationPoint } from './types';
 
-interface LeafletMapProps {
-  positions: Geolocations;
-}
-
-export const LeafletMap: React.FC<LeafletMapProps> = (props) => {
-  const position: LatLngTuple = [
-    props.positions[0].latitude,
-    props.positions[0].longitude,
-  ];
+export const LeafletMap: React.FC<GeolocationPoint> = (props) => {
+  const position: LatLngTuple = [props.latitude, props.longitude];
   return (
     <MapContainer
       center={position}
