@@ -8005,6 +8005,7 @@ msgid "Unable to load application template details."
 msgstr ""
 
 #: src/customer/dashboard/BookingsCalendar.tsx
+#: src/customer/dashboard/CustomerBookingManagement.tsx
 msgid "Unable to load booking offerings."
 msgstr ""
 
