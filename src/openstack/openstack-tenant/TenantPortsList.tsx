@@ -10,7 +10,7 @@ const TableComponent = (props) => {
       columns={[
         {
           title: translate('IPv4 address'),
-          render: ({ row }) => row.ip4_address,
+          render: ({ row }) => row.ip4_address || 'N/A',
         },
         {
           title: translate('MAC address'),
