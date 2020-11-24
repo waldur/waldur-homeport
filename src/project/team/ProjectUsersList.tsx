@@ -41,7 +41,7 @@ const TableComponent = (props) => {
         },
         {
           title: translate('Role in project'),
-          render: ({ row }) => ENV.roles[row.role],
+          render: ({ row }) => ENV.roles[row.role] || 'N/A',
         },
         {
           title: translate('Actions'),
