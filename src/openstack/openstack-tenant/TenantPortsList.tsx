@@ -14,11 +14,11 @@ const TableComponent = (props) => {
         },
         {
           title: translate('MAC address'),
-          render: ({ row }) => row.mac_address,
+          render: ({ row }) => row.mac_address || 'N/A',
         },
         {
           title: translate('Network name'),
-          render: ({ row }) => row.network_name,
+          render: ({ row }) => row.network_name || 'N/A',
         },
       ]}
       verboseName={translate('ports')}
