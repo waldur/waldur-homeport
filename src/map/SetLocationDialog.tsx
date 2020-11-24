@@ -32,7 +32,7 @@ export const SetLocationDialog = (props: SetLocationDialogProps) => {
   return (
     <ModalDialog
       title={
-        props.resolve.data.latitude && props.resolve.data.latitude
+        props.resolve.data.latitude && props.resolve.data.longitude
           ? translate('Update location')
           : translate('Set location')
       }
