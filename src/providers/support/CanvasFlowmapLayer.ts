@@ -586,15 +586,9 @@ export const CanvasFlowmapLayer = L.GeoJSON.extend({
       ._multiplyBy(-scale)
       .subtract(this._map._getMapPanePos());
 
-    if (L.DomUtil && L.DomUtil.setTransform) {
-      this._customCanvases.forEach(function (canvas) {
-        L.DomUtil.setTransform(canvas, offset, scale);
-      });
-    } else {
-      this._customCanvases.forEach(function (canvas) {
-        L.DomUtil.setTransform(canvas, offset, scale);
-      });
-    }
+    this._customCanvases.forEach(function (canvas) {
+      L.DomUtil.setTransform(canvas, offset, scale);
+    });
   },
 
   _resizeCanvas: function () {
