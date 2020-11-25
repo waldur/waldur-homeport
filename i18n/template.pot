@@ -4234,6 +4234,8 @@ msgstr ""
 msgid "Object is not found."
 msgstr ""
 
+#: src/booking/BookingsList.tsx
+#: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace/details/OrderSummary.tsx
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx

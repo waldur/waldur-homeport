@@ -30,7 +30,8 @@ export const getCalendarEvent = (bookingItem, event) => ({
   color: classNames({
     '#f8ac59': bookingItem.state === 'Terminated',
   }),
-  name: bookingItem.name || bookingItem.offering_name,
+  name: bookingItem.name,
+  offering_name: bookingItem.offering_name,
   project_name: bookingItem.project_name,
   customer_name: bookingItem.customer_name,
   created_by_full_name: bookingItem.created_by_full_name,
