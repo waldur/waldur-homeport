@@ -5,9 +5,9 @@ import {
   loadFloatingIps,
   loadSubnets,
 } from '@waldur/openstack/api';
+import { formatFlavorTitle } from '@waldur/openstack/openstack-instance/utils';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
-import { formatFlavor } from '@waldur/resource/utils';
 
 import { OpenStackBackup } from '../types';
 
@@ -44,7 +44,7 @@ export default function createAction(): ResourceAction<OpenStackBackup> {
       }));
 
       action.fields.flavor.choices = flavors.map((flavor) => ({
-        display_name: formatFlavor(flavor),
+        display_name: formatFlavorTitle(flavor),
         value: flavor,
       }));
 
