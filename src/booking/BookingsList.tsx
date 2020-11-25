@@ -75,6 +75,10 @@ const TableComponent = (props) => {
       orderField: 'name',
     },
     {
+      title: translate('Offering'),
+      render: ({ row }) => row.offering_name,
+    },
+    {
       title: translate('Project'),
       render: ({ row }) => row.project_name,
     },

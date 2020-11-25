@@ -31,6 +31,7 @@ const getTooltipInformation = (event) => ({
   [translate('Start')]: formatShortDateTime(event.start),
   [translate('End')]: formatShortDateTime(event.end),
   [translate('Name')]: event.extendedProps.name,
+  [translate('Offering')]: event.extendedProps.offering_name,
   [translate('Project')]: event.extendedProps.project_name,
   [translate('Organization')]: event.extendedProps.customer_name,
   [translate('Created by')]: event.extendedProps.created_by_full_name,
