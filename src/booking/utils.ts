@@ -1,7 +1,9 @@
 import type { EventInput, EventApi } from '@fullcalendar/core';
 import * as moment from 'moment';
 
+import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
 import { randomId } from '@waldur/core/fixtures';
+import { fetchListStart } from '@waldur/table/actions';
 
 import { BookingProps } from './types';
 
@@ -334,3 +336,17 @@ export const getDurationOptions = (
     };
   });
 };
+
+export const updateBookingsList = (
+  filterState,
+  offering_uuid,
+  provider_uuid,
+  sorting,
+) =>
+  fetchListStart(BOOKING_RESOURCES_TABLE, {
+    offering_type: 'Marketplace.Booking',
+    o: `${sorting.mode === 'desc' ? '-' : ''}${sorting.field}`,
+    state: filterState.map(({ value }) => value),
+    offering_uuid,
+    provider_uuid,
+  });

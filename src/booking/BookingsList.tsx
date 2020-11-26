@@ -6,9 +6,10 @@ import { getFormValues } from 'redux-form';
 
 import { BookingActions } from '@waldur/booking/BookingActions';
 import { BookingStateField } from '@waldur/booking/BookingStateField';
-import { TABLE_NAME } from '@waldur/booking/constants';
+import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
+import { BOOKINGS_FILTER_FORM_ID } from '@waldur/customer/dashboard/contants';
 import { withTranslation, translate } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -109,7 +110,11 @@ const TableComponent = (props) => {
     columns.push({
       title: translate('Actions'),
       render: ({ row }) => (
-        <BookingActions row={row} refresh={() => props.fetch()} />
+        <BookingActions
+          row={row}
+          offeringUuid={props.offeringUuid}
+          providerUuid={props.providerUuid}
+        />
       ),
     });
   }
@@ -144,7 +149,7 @@ const mapPropsToFilter = (props) => {
 };
 
 const TableOptions = {
-  table: TABLE_NAME,
+  table: BOOKING_RESOURCES_TABLE,
   fetchData: createFetcher('booking-resources'),
   mapPropsToFilter,
 };
@@ -152,7 +157,7 @@ const TableOptions = {
 const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   actionsDisabled: !isOwnerOrStaff(state),
-  filter: getFormValues('BookingsFilter')(state),
+  filter: getFormValues(BOOKINGS_FILTER_FORM_ID)(state),
 });
 
 const enhance = compose(
