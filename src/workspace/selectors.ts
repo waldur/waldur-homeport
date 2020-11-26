@@ -121,3 +121,9 @@ export const selectTablePagination = (state, table) => {
     return state.tables[table].pagination;
   }
 };
+
+export const selectTableSorting = (state, table) => {
+  if (state.tables && state.tables[table]) {
+    return state.tables[table].sorting;
+  }
+};

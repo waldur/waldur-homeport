@@ -7,7 +7,7 @@ import { getFormValues } from 'redux-form';
 import { getBookingsList } from '@waldur/booking/common/api';
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { eventRender } from '@waldur/booking/components/utils';
-import { TABLE_NAME } from '@waldur/booking/constants';
+import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
 import { eventsMapper } from '@waldur/booking/utils';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -81,10 +81,11 @@ export const BookingsCalendar = ({
 }: BookingsCalendarProps) => {
   const bookingsFilterState = useSelector(bookingsFilterStateSelector);
   const bookingsListCurrentPage = useSelector(
-    (state) => selectTablePagination(state, TABLE_NAME)?.currentPage,
+    (state) =>
+      selectTablePagination(state, BOOKING_RESOURCES_TABLE)?.currentPage,
   );
   const bookingsListPageSize = useSelector(
-    (state) => selectTablePagination(state, TABLE_NAME)?.pageSize,
+    (state) => selectTablePagination(state, BOOKING_RESOURCES_TABLE)?.pageSize,
   );
 
   const { loading, value: calendarEvents, error } = useAsync(

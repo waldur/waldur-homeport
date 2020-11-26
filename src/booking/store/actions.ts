@@ -23,6 +23,9 @@ export const acceptBookingItem = (payload) => ({
     offering_type: constants.OFFERING_TYPE_BOOKING,
     offering_uuid: payload.offering_uuid,
     uuid: payload.uuid,
+    filterState: payload.filterState,
+    offeringUuid: payload.offeringUuid,
+    providerUuid: payload.providerUuid,
   },
 });
 
@@ -32,6 +35,9 @@ export const rejectBookingItem = (payload) => ({
     offering_type: constants.OFFERING_TYPE_BOOKING,
     offering_uuid: payload.offering_uuid,
     uuid: payload.uuid,
+    filterState: payload.filterState,
+    offeringUuid: payload.offeringUuid,
+    providerUuid: payload.providerUuid,
   },
 });
 

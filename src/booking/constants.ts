@@ -1,5 +1,5 @@
 export const OFFERING_TYPE_BOOKING = 'Marketplace.Booking';
-export const TABLE_NAME = 'booking-resources';
+export const BOOKING_RESOURCES_TABLE = 'booking-resources';
 
 export const BOOKINGS_FETCH = 'waldur/booking/FETCH';
 export const BOOKINGS_SET = 'waldur/booking/SET';
