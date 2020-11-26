@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { required, getLatinNameValidators } from '@waldur/core/validators';
+import { required, getNameFieldValidators } from '@waldur/core/validators';
 import {
   FormContainer,
   TextField,
@@ -74,7 +74,7 @@ export class PureOfferingConfigurationForm extends React.Component<
             description={translate(
               'This name will be visible in accounting data.',
             )}
-            validate={getLatinNameValidators()}
+            validate={getNameFieldValidators()}
           />
           <PlanField offering={props.offering} />
           <PlanDetailsTable offering={props.offering} />

@@ -3918,10 +3918,6 @@ msgstr ""
 msgid "Name of your organization."
 msgstr ""
 
-#: src/core/validators.ts
-msgid "Name should consist of latin symbols and numbers."
-msgstr ""
-
 #: src/openstack/utils.ts
 msgid "Name should consist of latin symbols, numbers and dashes."
 msgstr ""

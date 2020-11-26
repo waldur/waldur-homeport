@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { ENV } from '@waldur/core/services';
-import { getLatinNameValidators } from '@waldur/core/validators';
+import { getNameFieldValidators } from '@waldur/core/validators';
 import {
   FormContainer,
   StringField,
@@ -58,7 +58,7 @@ export class OpenStackPackageForm extends React.Component<
             description={translate(
               'This name will be visible in accounting data.',
             )}
-            validate={getLatinNameValidators()}
+            validate={getNameFieldValidators()}
             required={true}
           />
           <PlanField offering={props.offering} />
