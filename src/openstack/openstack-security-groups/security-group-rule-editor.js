@@ -1,5 +1,6 @@
 import cidrRegex from 'cidr-regex';
 
+import { $q } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { loadSecurityGroupsResources } from '@waldur/openstack/api';
 
@@ -55,11 +56,13 @@ const securityGroupRuleEditor = {
         this.context.resource.resource_type === 'OpenStack.Tenant'
           ? this.context.resource.url
           : this.context.resource.tenant;
-      loadSecurityGroupsResources({
-        tenant,
-        field: ['name', 'url'],
-        o: 'name',
-      }).then((remote_groups) => {
+      $q.when(
+        loadSecurityGroupsResources({
+          tenant,
+          field: ['name', 'url'],
+          o: 'name',
+        }),
+      ).then((remote_groups) => {
         this.remote_groups = remote_groups;
         this.loading = false;
       });
