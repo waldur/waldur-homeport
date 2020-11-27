@@ -24,9 +24,9 @@ export const OrderItemDetails = (
   props: OrderItemDetailsProps & { loadData(): void },
 ) => {
   const DetailsComponent = getDetailsComponent(props.orderItem.offering_type);
-  // Refresh order item details each 5 seconds until it is switched from pending state to terminal state
+  // Refresh order item details each 20 seconds until it is switched from pending state to terminal state
   const pollingDelay = ['pending', 'executing'].includes(props.orderItem.state)
-    ? 5000
+    ? 20000
     : null;
   useInterval(props.loadData, pollingDelay);
   return (
