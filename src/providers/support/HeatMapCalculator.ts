@@ -1,4 +1,4 @@
-import * as geojson from 'geojson';
+import geojson from 'geojson';
 import { StyleFunction } from 'leaflet';
 
 import { UsageData } from './types';

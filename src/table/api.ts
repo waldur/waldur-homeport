@@ -1,5 +1,5 @@
 import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
-import * as Qs from 'qs';
+import Qs from 'qs';
 
 import { getNextPageUrl, parseResultCount } from '@waldur/core/api';
 import { ENV } from '@waldur/core/services';

@@ -1,7 +1,7 @@
-import * as React from 'react';
-import * as Table from 'react-bootstrap/lib/Table';
-import * as ToggleButton from 'react-bootstrap/lib/ToggleButton';
-import * as ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
+import React from 'react';
+import Table from 'react-bootstrap/lib/Table';
+import ToggleButton from 'react-bootstrap/lib/ToggleButton';
+import ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import useAsync from 'react-use/lib/useAsync';

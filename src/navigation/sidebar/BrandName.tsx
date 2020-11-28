@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import * as React from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/core/services';

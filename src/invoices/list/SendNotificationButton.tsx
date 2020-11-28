@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';

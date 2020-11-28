@@ -1,5 +1,5 @@
 import { LatLngTuple } from 'leaflet';
-import * as React from 'react';
+import React from 'react';
 import { MapContainer, useMap } from 'react-leaflet';
 
 import { EsriLayer } from '@waldur/map/EsriLayer';

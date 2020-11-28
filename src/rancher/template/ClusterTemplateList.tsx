@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { Table, connectTable, createFetcher } from '@waldur/table';

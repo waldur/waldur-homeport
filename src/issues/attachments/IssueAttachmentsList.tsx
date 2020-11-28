@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { IssueAttachment } from './IssueAttachment';
 import { IssueAttachmentLoading } from './IssueAttachmentLoading';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { AuthService } from '@waldur/auth/AuthService';
 import { ENV } from '@waldur/core/services';

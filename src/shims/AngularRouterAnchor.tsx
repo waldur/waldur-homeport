@@ -7,7 +7,7 @@
  * https://github.com/react-bootstrap/react-bootstrap/issues/2205
  */
 
-import * as React from 'react';
+import React from 'react';
 
 /**
  * There are situations due to browser quirks or Bootstrap CSS where

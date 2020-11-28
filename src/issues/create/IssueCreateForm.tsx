@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ModalBody from 'react-bootstrap/lib/ModalBody';

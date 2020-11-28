@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as Gravatar from 'react-gravatar';
+import React from 'react';
+import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 

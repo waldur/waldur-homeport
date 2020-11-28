@@ -1,7 +1,9 @@
-import * as React from 'react';
-import * as Dropdown from 'react-bootstrap/lib/Dropdown';
-import * as MenuItem from 'react-bootstrap/lib/MenuItem';
-import * as Gravatar from 'react-gravatar';
+import React from 'react';
+import Dropdown from 'react-bootstrap/lib/Dropdown';
+import DropdownMenu from 'react-bootstrap/lib/DropdownMenu';
+import DropdownToggle from 'react-bootstrap/lib/DropdownToggle';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
+import Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
@@ -27,7 +29,7 @@ export const UserDropdownMenu = () => {
     <li className="nav-header">
       <Dropdown id="user-sidebar" className="profile-element">
         <Gravatar email={user.email} className="img-circle" size={48} />
-        <Dropdown.Toggle useAnchor noCaret>
+        <DropdownToggle useAnchor noCaret>
           <span className="block m-t-xs">
             {user.full_name || translate('User profile')}
           </span>
@@ -35,8 +37,8 @@ export const UserDropdownMenu = () => {
             {user.job_title || translate('Details')}
             <b className="caret"></b>
           </span>
-        </Dropdown.Toggle>
-        <Dropdown.Menu className="m-t-xs">
+        </DropdownToggle>
+        <DropdownMenu className="m-t-xs">
           {menuItems.map((item, index) => (
             <MenuItem key={index} href={item.href}>
               {item.label}
@@ -46,7 +48,7 @@ export const UserDropdownMenu = () => {
           <MenuItem onClick={AuthService.logout}>
             {translate('Log out')}
           </MenuItem>
-        </Dropdown.Menu>
+        </DropdownMenu>
       </Dropdown>
     </li>
   );

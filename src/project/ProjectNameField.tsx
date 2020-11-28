@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { StringField } from '@waldur/form';

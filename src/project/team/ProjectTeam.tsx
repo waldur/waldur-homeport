@@ -1,7 +1,7 @@
-import * as React from 'react';
-import * as PanelBody from 'react-bootstrap/lib/PanelBody';
-import * as Tab from 'react-bootstrap/lib/Tab';
-import * as Tabs from 'react-bootstrap/lib/Tabs';
+import React from 'react';
+import PanelBody from 'react-bootstrap/lib/PanelBody';
+import Tab from 'react-bootstrap/lib/Tab';
+import Tabs from 'react-bootstrap/lib/Tabs';
 
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as Button from 'react-bootstrap/lib/Button';
+import React from 'react';
+import Button from 'react-bootstrap/lib/Button';
 import { useDispatch } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 import useToggle from 'react-use/lib/useToggle';

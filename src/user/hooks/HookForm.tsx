@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { useSelector } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';

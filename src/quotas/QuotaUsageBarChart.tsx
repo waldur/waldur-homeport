@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as ProgressBar from 'react-bootstrap/lib/ProgressBar';
+import React from 'react';
+import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';

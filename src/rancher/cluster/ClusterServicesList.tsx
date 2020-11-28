@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { Table, connectTable, createFetcher } from '@waldur/table';

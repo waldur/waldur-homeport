@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { AzureSQLDatabase } from '@waldur/azure/common/types';
 import { withTranslation } from '@waldur/i18n';

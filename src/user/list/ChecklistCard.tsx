@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import '@waldur/marketplace/landing/CategoryCard.scss';
 import { Checklist } from '@waldur/marketplace-checklist/types';

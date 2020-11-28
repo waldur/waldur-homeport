@@ -1,7 +1,9 @@
-import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Dropdown from 'react-bootstrap/lib/Dropdown';
-import * as Row from 'react-bootstrap/lib/Row';
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import Dropdown from 'react-bootstrap/lib/Dropdown';
+import DropdownMenu from 'react-bootstrap/lib/DropdownMenu';
+import DropdownToggle from 'react-bootstrap/lib/DropdownToggle';
+import Row from 'react-bootstrap/lib/Row';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -98,10 +100,7 @@ export class PurePendingOrderIndicator extends React.Component<
         className="PendingOrderDropdown"
         id="pending-dropdown"
       >
-        <Dropdown.Toggle
-          noCaret={true}
-          className="PendingOrderDropdown__Toggle"
-        >
+        <DropdownToggle noCaret={true} className="PendingOrderDropdown__Toggle">
           <li className="navbar-indicator">
             <a onClick={handleToggleOpen}>
               <i className={'fa fa-bell'} />
@@ -110,8 +109,8 @@ export class PurePendingOrderIndicator extends React.Component<
               )}
             </a>
           </li>
-        </Dropdown.Toggle>
-        <Dropdown.Menu className="dropdown-orders dropdown-menu-right">
+        </DropdownToggle>
+        <DropdownMenu className="dropdown-orders dropdown-menu-right">
           {limitedOrders.map((order) => (
             <PendingOrderDropdownItem
               key={order.uuid}
@@ -129,7 +128,7 @@ export class PurePendingOrderIndicator extends React.Component<
               />
             </div>
           </li>
-        </Dropdown.Menu>
+        </DropdownMenu>
       </Dropdown>
     );
   }

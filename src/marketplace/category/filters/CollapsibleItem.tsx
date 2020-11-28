@@ -1,6 +1,5 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
-import { ReactNode } from 'react';
+import classNames from 'classnames';
+import React, { ReactNode } from 'react';
 import useBoolean from 'react-use/lib/useBoolean';
 
 import './CollapsibleItem.scss';

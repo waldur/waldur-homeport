@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { pick } from '@waldur/core/utils';
 import { ResourceState } from '@waldur/resource/state/ResourceState';

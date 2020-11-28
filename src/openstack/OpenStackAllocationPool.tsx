@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { formValues } from 'redux-form';
 
 import { FormField } from '@waldur/form/types';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 
 import { translate } from '@waldur/i18n';

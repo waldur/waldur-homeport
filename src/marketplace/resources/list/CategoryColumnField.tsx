@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { CategoryColumn } from '@waldur/marketplace/types';

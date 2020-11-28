@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { createFilter } from 'react-select/dist/react-select.cjs.dev';
 import { compose } from 'redux';

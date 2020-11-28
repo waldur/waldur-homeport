@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { ngInjector } from '@waldur/core/services';
 import { Sidebar } from '@waldur/navigation/sidebar/Sidebar';

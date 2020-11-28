@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Col from 'react-bootstrap/lib/Col';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { useSelector, useDispatch } from 'react-redux';

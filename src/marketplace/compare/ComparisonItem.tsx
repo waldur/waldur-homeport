@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';

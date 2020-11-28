@@ -1,5 +1,5 @@
 import { UI_ROUTER_REACT_HYBRID } from '@uirouter/react-hybrid';
-import * as angular from 'angular';
+import angular from 'angular';
 import '@uirouter/angularjs/release/stateEvents';
 
 import './vendor';

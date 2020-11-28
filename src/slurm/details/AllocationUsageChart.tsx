@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { EChart } from '@waldur/core/EChart';
 import { getEChartOptions } from '@waldur/slurm/details/utils';

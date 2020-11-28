@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { OrganizationDetails } from '@waldur/customer/list/OrganizationDetails';
 import { Customer } from '@waldur/customer/types';

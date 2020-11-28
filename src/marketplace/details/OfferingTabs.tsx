@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';

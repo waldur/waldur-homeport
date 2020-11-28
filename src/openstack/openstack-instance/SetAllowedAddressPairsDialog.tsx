@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as Button from 'react-bootstrap/lib/Button';
-import * as Table from 'react-bootstrap/lib/Table';
+import React from 'react';
+import Button from 'react-bootstrap/lib/Button';
+import Table from 'react-bootstrap/lib/Table';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import {

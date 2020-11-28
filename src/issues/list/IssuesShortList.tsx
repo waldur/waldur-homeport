@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useEffectOnce from 'react-use/lib/useEffectOnce';

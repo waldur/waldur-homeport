@@ -1,5 +1,5 @@
 import { UIRouterContextComponent } from '@uirouter/react-hybrid';
-import * as React from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 
 import { withError } from '@waldur/core/ErrorBoundary';

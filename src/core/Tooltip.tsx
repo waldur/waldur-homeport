@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import * as BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
+import React from 'react';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
 
 interface TooltipProps {
   label: React.ReactNode;

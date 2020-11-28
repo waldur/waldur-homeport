@@ -1,5 +1,5 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
+import classNames from 'classnames';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 import { getFormValues } from 'redux-form';

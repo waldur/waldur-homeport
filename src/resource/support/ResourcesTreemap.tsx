@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 import { compose } from 'redux';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';

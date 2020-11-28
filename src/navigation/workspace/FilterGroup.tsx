@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 export const FilterGroup = ({ value, onChange, placeholder, groupId }) => (
   <div className="form-group">

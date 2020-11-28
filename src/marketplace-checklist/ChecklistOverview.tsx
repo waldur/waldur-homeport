@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import * as React from 'react';
-import * as Panel from 'react-bootstrap/lib/Panel';
+import React from 'react';
+import Panel from 'react-bootstrap/lib/Panel';
 import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

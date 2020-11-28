@@ -1,8 +1,8 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
-import * as Label from 'react-bootstrap/lib/Label';
-import * as ListGroup from 'react-bootstrap/lib/ListGroup';
-import * as ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
+import classNames from 'classnames';
+import React from 'react';
+import Label from 'react-bootstrap/lib/Label';
+import ListGroup from 'react-bootstrap/lib/ListGroup';
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
 
 import { Action } from './types';
 

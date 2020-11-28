@@ -1,5 +1,5 @@
 import { render } from 'enzyme';
-import * as React from 'react';
+import React from 'react';
 
 import { withReduxForm } from '@waldur/form/testUtils';
 import { translate } from '@waldur/i18n';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { range } from '@waldur/core/utils';
 import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';

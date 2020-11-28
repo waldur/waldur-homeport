@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import * as React from 'react';
+import React from 'react';
 import useEffectOnce from 'react-use/lib/useEffectOnce';
 
 import { $state } from '@waldur/core/services';

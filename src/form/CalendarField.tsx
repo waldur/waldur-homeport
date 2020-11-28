@@ -1,6 +1,6 @@
 import type { OptionsInput } from '@fullcalendar/core';
 import moment from 'moment';
-import * as React from 'react';
+import React from 'react';
 import { FieldArray } from 'redux-form';
 
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';

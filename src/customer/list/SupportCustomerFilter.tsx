@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as Row from 'react-bootstrap/lib/Row';
+import React from 'react';
+import Row from 'react-bootstrap/lib/Row';
 import { reduxForm } from 'redux-form';
 
 import {

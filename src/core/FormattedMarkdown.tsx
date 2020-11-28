@@ -1,5 +1,5 @@
 import marked from 'marked';
-import * as React from 'react';
+import React from 'react';
 
 import { $sanitize } from '@waldur/core/services';
 

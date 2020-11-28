@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import * as React from 'react';
+import React from 'react';
 import { components } from 'react-select';
 import useAsync from 'react-use/lib/useAsync';
 

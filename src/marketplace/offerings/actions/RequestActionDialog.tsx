@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import ModalBody from 'react-bootstrap/lib/ModalBody';
 import ModalFooter from 'react-bootstrap/lib/ModalFooter';
 import ModalHeader from 'react-bootstrap/lib/ModalHeader';

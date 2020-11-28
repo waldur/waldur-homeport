@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton, FormContainer, FieldError } from '@waldur/form';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { FixedSizeList as List } from 'react-window';
 import paginate from 'react-window-paginated';

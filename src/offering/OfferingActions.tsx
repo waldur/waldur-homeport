@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { translate } from '@waldur/i18n';
 import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsButton';

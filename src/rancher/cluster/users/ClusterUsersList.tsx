@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';

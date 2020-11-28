@@ -1,6 +1,6 @@
 import { Calendar, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment-timezone';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';

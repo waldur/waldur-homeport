@@ -1,6 +1,8 @@
-import * as React from 'react';
-import * as Dropdown from 'react-bootstrap/lib/Dropdown';
-import * as MenuItem from 'react-bootstrap/lib/MenuItem';
+import React from 'react';
+import Dropdown from 'react-bootstrap/lib/Dropdown';
+import DropdownMenu from 'react-bootstrap/lib/DropdownMenu';
+import DropdownToggle from 'react-bootstrap/lib/DropdownToggle';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -8,10 +10,8 @@ import { translate } from '@waldur/i18n';
 export const InvoiceActions = ({ invoice }) =>
   invoice.backend_id ? (
     <Dropdown id="InvoiceActions">
-      <Dropdown.Toggle className="btn-sm">
-        {translate('Actions')}
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
+      <DropdownToggle className="btn-sm">{translate('Actions')}</DropdownToggle>
+      <DropdownMenu>
         {invoice.pdf ? (
           <MenuItem>
             <a
@@ -32,7 +32,7 @@ export const InvoiceActions = ({ invoice }) =>
             <i className="fa fa-paypal"></i> {translate('Pay invoice')}
           </a>
         </MenuItem>
-      </Dropdown.Menu>
+      </DropdownMenu>
     </Dropdown>
   ) : (
     <Tooltip

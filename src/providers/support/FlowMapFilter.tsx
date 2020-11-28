@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 

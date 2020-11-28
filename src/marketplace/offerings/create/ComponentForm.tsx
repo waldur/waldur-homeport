@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { ArticleCodeField } from '../ArticleCodeField';
 import { DisplayNameField } from '../DisplayNameField';

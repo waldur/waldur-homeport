@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { getEventsList } from '@waldur/events/BaseEventsList';
 import { User } from '@waldur/workspace/types';

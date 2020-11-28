@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as Panel from 'react-bootstrap/lib/Panel';
+import React from 'react';
+import Panel from 'react-bootstrap/lib/Panel';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { FormattedJira } from '@waldur/core/FormattedJira';

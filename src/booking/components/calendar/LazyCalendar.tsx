@@ -6,7 +6,7 @@ import momentPlugin from '@fullcalendar/moment';
 import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import * as React from 'react';
+import React from 'react';
 
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';

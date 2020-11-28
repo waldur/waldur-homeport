@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Radio from 'react-bootstrap/lib/Radio';
 
 export const RadioField = ({

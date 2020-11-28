@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Row from 'react-bootstrap/lib/Row';
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
 
 import { CustomerEditDetailsForm } from '@waldur/customer/details/CustomerEditDetailsForm';
 import { CustomerLogoUpdateFormData } from '@waldur/customer/details/types';

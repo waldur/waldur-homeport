@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { ActionList } from '@waldur/dashboard/ActionList';
 import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';

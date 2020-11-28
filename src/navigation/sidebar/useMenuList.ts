@@ -3,8 +3,8 @@ import {
   useOnStateChanged,
   useCurrentStateAndParams,
 } from '@uirouter/react';
-import * as classNames from 'classnames';
-import * as React from 'react';
+import classNames from 'classnames';
+import React from 'react';
 
 import { MenuItemType } from './types';
 

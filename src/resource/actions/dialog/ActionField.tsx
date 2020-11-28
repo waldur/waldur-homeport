@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { formatSnakeCase } from '@waldur/core/utils';
 import { angular2react } from '@waldur/shims/angular2react';

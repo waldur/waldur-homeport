@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';

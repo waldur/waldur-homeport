@@ -1,5 +1,5 @@
 import type { EventInput, EventApi } from '@fullcalendar/core';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
 import { randomId } from '@waldur/core/fixtures';
