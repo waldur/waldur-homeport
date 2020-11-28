@@ -11,7 +11,7 @@ export const DataVolumeSizeGroup = (props) => (
       name="attributes.data_volume_size"
       component={OpenstackInstanceDataVolume as any}
       min={1}
-      max={1 * 4096}
+      max={1 * 10240}
       units="GB"
       isActive={props.isActive}
       setActive={props.setActive}

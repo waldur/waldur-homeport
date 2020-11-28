@@ -6895,7 +6895,7 @@ msgid "Size name"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-msgid "Size should be between 1 and 4096 GB."
+msgid "Size should be between 1 and 10240 GB."
 msgstr ""
 
 #: src/openstack/OpenStackPackageDetails.tsx
