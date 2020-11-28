@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as Navbar from 'react-bootstrap/lib/Navbar';
-import * as Row from 'react-bootstrap/lib/Row';
+import React from 'react';
+import Navbar from 'react-bootstrap/lib/Navbar';
+import Row from 'react-bootstrap/lib/Row';
 
 import { LanguageSelector } from '@waldur/i18n/LanguageSelector';
 import { ShoppingCartIndicator } from '@waldur/marketplace/cart/ShoppingCartIndicator';

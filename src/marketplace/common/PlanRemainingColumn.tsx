@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as Label from 'react-bootstrap/lib/Label';
+import React from 'react';
+import Label from 'react-bootstrap/lib/Label';
 
 const getColor = (value) =>
   value === null

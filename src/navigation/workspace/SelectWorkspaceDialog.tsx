@@ -1,8 +1,8 @@
 import { useRouter } from '@uirouter/react';
-import * as React from 'react';
-import * as Button from 'react-bootstrap/lib/Button';
-import * as Modal from 'react-bootstrap/lib/Modal';
-import * as Row from 'react-bootstrap/lib/Row';
+import React from 'react';
+import Button from 'react-bootstrap/lib/Button';
+import Modal from 'react-bootstrap/lib/Modal';
+import Row from 'react-bootstrap/lib/Row';
 import { useSelector } from 'react-redux';
 import useAsync from 'react-use/lib/useAsync';
 

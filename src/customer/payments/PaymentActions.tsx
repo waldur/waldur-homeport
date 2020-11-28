@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
+import React from 'react';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import { connect } from 'react-redux';
 
 import { LinkInvoiceAction } from '@waldur/customer/payments/LinkInvoiceAction';

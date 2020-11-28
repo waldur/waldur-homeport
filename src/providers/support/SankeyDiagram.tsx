@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import loadEcharts from '@waldur/shims/load-echarts';

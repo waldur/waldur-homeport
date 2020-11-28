@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { ENV } from '@waldur/core/services';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';

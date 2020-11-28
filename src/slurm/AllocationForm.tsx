@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { getLatinNameValidators } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';

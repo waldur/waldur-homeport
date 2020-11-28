@@ -1,5 +1,5 @@
 import Leaflet from 'leaflet';
-import * as React from 'react';
+import React from 'react';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 
 import { FitWorld } from '@waldur/map/FitWorld';

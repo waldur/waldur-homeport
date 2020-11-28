@@ -1,7 +1,7 @@
 import { useRouter, useCurrentStateAndParams } from '@uirouter/react';
 import Axios from 'axios';
 import Qs from 'qs';
-import * as React from 'react';
+import React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

@@ -1,6 +1,5 @@
-import * as moment from 'moment-timezone';
-import * as React from 'react';
-import { useCallback, useEffect, useRef } from 'react';
+import moment from 'moment-timezone';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
 

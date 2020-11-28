@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';

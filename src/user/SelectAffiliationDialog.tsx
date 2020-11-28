@@ -5,10 +5,9 @@
  * that the user is authorized to see.
  */
 
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
-import * as ToggleButton from 'react-bootstrap/lib/ToggleButton';
+import ToggleButton from 'react-bootstrap/lib/ToggleButton';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';

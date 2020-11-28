@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { getById } from '@waldur/core/api';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';

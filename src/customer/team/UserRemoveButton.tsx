@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';

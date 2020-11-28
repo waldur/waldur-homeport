@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { components } from 'react-select';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';

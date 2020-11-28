@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { StringField, SecretField, FormContainer } from '@waldur/form';
 

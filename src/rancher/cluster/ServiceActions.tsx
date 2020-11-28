@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';

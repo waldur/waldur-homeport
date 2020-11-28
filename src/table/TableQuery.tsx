@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce';
-import * as React from 'react';
+import React from 'react';
 
 import { translate } from '@waldur/i18n';
 

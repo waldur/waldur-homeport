@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as Gravatar from 'react-gravatar';
+import React from 'react';
+import Gravatar from 'react-gravatar';
 
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';

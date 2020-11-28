@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';

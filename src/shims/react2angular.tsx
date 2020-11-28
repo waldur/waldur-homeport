@@ -1,5 +1,5 @@
 import { IAugmentedJQuery, IComponentOptions } from 'angular';
-import * as React from 'react';
+import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 
 import NgComponent from './ngcomponent';

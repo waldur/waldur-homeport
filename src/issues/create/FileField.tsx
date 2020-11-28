@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 
 import { formatFilesize } from '@waldur/core/utils';

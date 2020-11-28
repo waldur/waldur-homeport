@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Field } from 'redux-form';
 
 import { InternalListField } from '@waldur/form/list-field/ListFieldInternal';

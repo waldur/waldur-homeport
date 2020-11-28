@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { ProjectLink } from '@waldur/project/ProjectLink';

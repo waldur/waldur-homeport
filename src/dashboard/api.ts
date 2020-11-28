@@ -1,4 +1,4 @@
-import * as moment from 'moment-timezone';
+import moment from 'moment-timezone';
 
 import { get } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';

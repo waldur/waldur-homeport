@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
+import React from 'react';
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
 
 import { translate } from '@waldur/i18n';
 

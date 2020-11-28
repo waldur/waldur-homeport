@@ -1,5 +1,5 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
+import classNames from 'classnames';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';

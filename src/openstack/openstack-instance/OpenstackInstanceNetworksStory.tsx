@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { OpenstackInstanceNetworks } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import {

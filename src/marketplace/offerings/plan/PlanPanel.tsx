@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { useState } from 'react';
-import * as Panel from 'react-bootstrap/lib/Panel';
+import React, { useState } from 'react';
+import Panel from 'react-bootstrap/lib/Panel';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm, formValueSelector, change } from 'redux-form';

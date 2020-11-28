@@ -1,6 +1,6 @@
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import _uniqueId from 'lodash.uniqueid';
-import * as React from 'react';
+import React from 'react';
 
 type BootstrapStyle = 'primary' | 'success' | 'info' | 'warning' | 'danger';
 

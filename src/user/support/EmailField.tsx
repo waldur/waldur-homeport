@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { useState } from 'react';
-import * as Button from 'react-bootstrap/lib/Button';
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/lib/Button';
 import { useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';

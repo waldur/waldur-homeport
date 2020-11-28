@@ -1,5 +1,5 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import * as React from 'react';
+import React from 'react';
 import { MapContainer } from 'react-leaflet';
 
 import { SubmitButton } from '@waldur/form';

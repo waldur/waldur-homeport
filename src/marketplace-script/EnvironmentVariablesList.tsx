@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
 
 import { translate } from '@waldur/i18n';
 

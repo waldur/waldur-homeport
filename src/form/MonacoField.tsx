@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Validator } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

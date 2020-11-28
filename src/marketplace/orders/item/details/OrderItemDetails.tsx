@@ -1,8 +1,8 @@
-import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Panel from 'react-bootstrap/lib/Panel';
-import * as PanelGroup from 'react-bootstrap/lib/PanelGroup';
-import * as Row from 'react-bootstrap/lib/Row';
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import Panel from 'react-bootstrap/lib/Panel';
+import PanelGroup from 'react-bootstrap/lib/PanelGroup';
+import Row from 'react-bootstrap/lib/Row';
 import useInterval from 'react-use/lib/useInterval';
 
 import { titleCase } from '@waldur/core/utils';

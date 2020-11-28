@@ -1,6 +1,6 @@
 import { IScope } from 'angular';
 import kebabCase from 'lodash.kebabcase';
-import * as React from 'react';
+import React from 'react';
 
 import { $rootScope, $compile } from '@waldur/core/services';
 

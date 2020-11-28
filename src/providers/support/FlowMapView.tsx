@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { FlowMap } from './FlowMap';
 import { FlowMapFilter } from './FlowMapFilter';

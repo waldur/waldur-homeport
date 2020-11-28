@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { CUSTOMERS_LIST_FILTER } from '@waldur/marketplace/offerings/customers/constants';
 import { CustomersList } from '@waldur/marketplace/offerings/customers/CustomersList';

@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import * as React from 'react';
+import React from 'react';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useBoolean from 'react-use/lib/useBoolean';
 

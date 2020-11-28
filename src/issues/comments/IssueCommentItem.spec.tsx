@@ -1,5 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme';
-import * as React from 'react';
+import React from 'react';
 
 import { translate } from '@waldur/i18n';
 import { attachment } from '@waldur/issues/attachments/fixture';

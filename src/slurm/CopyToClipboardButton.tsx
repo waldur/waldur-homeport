@@ -1,5 +1,5 @@
 import copy from 'copy-to-clipboard';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Tooltip } from '@waldur/core/Tooltip';

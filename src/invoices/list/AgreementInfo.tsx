@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import useEffectOnce from 'react-use/lib/useEffectOnce';
 

@@ -1,5 +1,5 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
+import classNames from 'classnames';
+import React from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

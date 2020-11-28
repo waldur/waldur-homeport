@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';

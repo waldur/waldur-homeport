@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { SelectDialogField } from '@waldur/form/SelectDialogField';
 import { connectAngularComponent } from '@waldur/store/connect';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
 

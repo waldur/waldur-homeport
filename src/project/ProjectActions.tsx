@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { $state } from '@waldur/core/services';
 import { ActionList } from '@waldur/dashboard/ActionList';

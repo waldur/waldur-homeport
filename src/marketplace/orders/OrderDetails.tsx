@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Row from 'react-bootstrap/lib/Row';
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useInterval from 'react-use/lib/useInterval';
 

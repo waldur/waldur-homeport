@@ -1,5 +1,7 @@
-import * as React from 'react';
-import * as Dropdown from 'react-bootstrap/lib/Dropdown';
+import React from 'react';
+import Dropdown from 'react-bootstrap/lib/Dropdown';
+import DropdownMenu from 'react-bootstrap/lib/DropdownMenu';
+import DropdownToggle from 'react-bootstrap/lib/DropdownToggle';
 
 import { translate } from '@waldur/i18n';
 
@@ -14,8 +16,8 @@ export const ActionsDropdown = ({ actions }: ActionsDropdownProps) => (
     id="offering-actions"
     className={actions.length === 0 ? 'disabled' : undefined}
   >
-    <Dropdown.Toggle className="btn-sm">{translate('Actions')}</Dropdown.Toggle>
-    <Dropdown.Menu>
+    <DropdownToggle className="btn-sm">{translate('Actions')}</DropdownToggle>
+    <DropdownMenu>
       {actions.map((action, index) => (
         <li key={index} className="cursor-pointer" role="presentation">
           <a onClick={action.handler} role="menuitem" tabIndex={-1}>
@@ -23,6 +25,6 @@ export const ActionsDropdown = ({ actions }: ActionsDropdownProps) => (
           </a>
         </li>
       ))}
-    </Dropdown.Menu>
+    </DropdownMenu>
   </Dropdown>
 );

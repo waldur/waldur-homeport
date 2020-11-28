@@ -1,7 +1,7 @@
-import * as classNames from 'classnames';
-import * as moment from 'moment';
-import * as React from 'react';
-import * as DatePicker from 'react-16-bootstrap-date-picker';
+import classNames from 'classnames';
+import moment from 'moment';
+import React from 'react';
+import DatePicker from 'react-16-bootstrap-date-picker';
 import Select from 'react-select';
 
 import { timelineLabels } from '@waldur/booking/utils';

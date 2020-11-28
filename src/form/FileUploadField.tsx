@@ -1,5 +1,5 @@
 import accepts from 'attr-accept';
-import * as React from 'react';
+import React from 'react';
 
 import { FormField } from './types';
 

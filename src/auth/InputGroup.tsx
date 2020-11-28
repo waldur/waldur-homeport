@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as FormControl from 'react-bootstrap/lib/FormControl';
-import * as FormGroup from 'react-bootstrap/lib/FormGroup';
+import React from 'react';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
 import { Field } from 'redux-form';
 
 export const InputGroup = ({ fieldName, placeholder, type }) => {

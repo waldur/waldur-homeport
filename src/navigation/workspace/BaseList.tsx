@@ -1,7 +1,7 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
-import * as ListGroup from 'react-bootstrap/lib/ListGroup';
-import * as ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
+import classNames from 'classnames';
+import React from 'react';
+import ListGroup from 'react-bootstrap/lib/ListGroup';
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 export const BaseList = ({

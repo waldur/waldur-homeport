@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { CustomersDivisionsChart } from '@waldur/customer/divisions/CustomersDivisionsChart';
 import { CustomersDivisionsFilter } from '@waldur/customer/divisions/CustomersDivisionsFilter';

@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as Panel from 'react-bootstrap/lib/Panel';
-import * as PanelGroup from 'react-bootstrap/lib/PanelGroup';
+import React from 'react';
+import Panel from 'react-bootstrap/lib/Panel';
+import PanelGroup from 'react-bootstrap/lib/PanelGroup';
 
 import { translate } from '@waldur/i18n';
 

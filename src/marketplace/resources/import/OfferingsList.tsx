@@ -1,7 +1,7 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Row from 'react-bootstrap/lib/Row';
+import classNames from 'classnames';
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
 
 import { Panel } from '@waldur/core/Panel';
 import { Tooltip } from '@waldur/core/Tooltip';

@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Row from 'react-bootstrap/lib/Row';
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
 import useAsync from 'react-use/lib/useAsync';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

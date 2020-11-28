@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import { LanguageSelectorMenuItem } from '@waldur/i18n/LanguageSelectorMenuItem';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { withTranslation } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';

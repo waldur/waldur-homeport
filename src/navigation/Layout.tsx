@@ -1,8 +1,8 @@
 import { UIView } from '@uirouter/react';
-import * as classNames from 'classnames';
-import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Row from 'react-bootstrap/lib/Row';
+import classNames from 'classnames';
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
 import { useSelector } from 'react-redux';
 
 import { AppFooter } from './AppFooter';

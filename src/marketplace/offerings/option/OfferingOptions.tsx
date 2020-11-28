@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Panel from 'react-bootstrap/lib/Panel';
+import React from 'react';
+import Col from 'react-bootstrap/lib/Col';
+import Panel from 'react-bootstrap/lib/Panel';
 import { WrappedFieldArrayProps } from 'redux-form';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';

@@ -1,6 +1,6 @@
-import * as geojson from 'geojson';
+import geojson from 'geojson';
 import { LatLngTuple, Layer } from 'leaflet';
-import * as React from 'react';
+import React from 'react';
 import { MapContainer, GeoJSON } from 'react-leaflet';
 import useAsync from 'react-use/lib/useAsync';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import PanelBody from 'react-bootstrap/lib/PanelBody';
 
 import { InputField } from '@waldur/form/InputField';

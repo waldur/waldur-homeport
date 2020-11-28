@@ -1,5 +1,5 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
+import classNames from 'classnames';
+import React from 'react';
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
 import { Tooltip } from '@waldur/core/Tooltip';

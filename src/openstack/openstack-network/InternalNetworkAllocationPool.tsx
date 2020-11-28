@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as FormControlStatic from 'react-bootstrap/lib/FormControlStatic';
+import React from 'react';
+import FormControlStatic from 'react-bootstrap/lib/FormControlStatic';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 

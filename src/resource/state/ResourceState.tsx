@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { Resource } from '@waldur/resource/types';

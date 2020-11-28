@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import InputGroup from 'react-bootstrap/lib/InputGroup';

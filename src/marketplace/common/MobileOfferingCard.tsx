@@ -1,5 +1,5 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
+import classNames from 'classnames';
+import React from 'react';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';

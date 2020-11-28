@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { FormSection } from 'redux-form';
 
 export const ProviderFormBody = (props) => (

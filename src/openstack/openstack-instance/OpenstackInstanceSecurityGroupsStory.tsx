@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
 import { connectAngularComponent } from '@waldur/store/connect';

@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ngInjector } from '@waldur/core/services';

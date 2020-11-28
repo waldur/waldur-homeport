@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import * as React from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reset, SubmissionError } from 'redux-form';
 

@@ -10,7 +10,7 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {

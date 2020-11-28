@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import useAsync from 'react-use/lib/useAsync';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
