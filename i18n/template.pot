@@ -4591,6 +4591,10 @@ msgstr ""
 msgid "Organization removal"
 msgstr ""
 
+#: src/customer/team/OrganizationRoleSelectField.tsx
+msgid "Organization role"
+msgstr ""
+
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/user/support/UserList.tsx
@@ -5369,6 +5373,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "Project resources"
+msgstr ""
+
+#: src/marketplace/orders/ProjectRoleSelectField.tsx
+msgid "Project role"
 msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
@@ -6528,6 +6536,10 @@ msgstr ""
 msgid "Select offerings..."
 msgstr ""
 
+#: src/customer/team/OrganizationRoleSelectField.tsx
+msgid "Select organization roles"
+msgstr ""
+
 #: src/auth/saml2/AuthSaml2Dialog.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/create/OrganizationGroup.tsx
@@ -6550,6 +6562,10 @@ msgstr ""
 
 #: src/invitations/actions/ProjectGroup.tsx
 msgid "Select project"
+msgstr ""
+
+#: src/marketplace/orders/ProjectRoleSelectField.tsx
+msgid "Select project roles"
 msgstr ""
 
 #: src/issues/create/IssueQuickCreate.tsx
