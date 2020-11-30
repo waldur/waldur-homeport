@@ -2,7 +2,7 @@ import React from 'react';
 import PanelBody from 'react-bootstrap/lib/PanelBody';
 
 import { ENV } from '@waldur/core/services';
-import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
+import { getNameFieldValidators } from '@waldur/core/validators';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
@@ -28,7 +28,7 @@ export const WizardFormFirstPage = (props) => (
         label={translate('Name')}
         maxLength={150}
         helpText={translate('Name of your organization.')}
-        pattern={ENV.enforceLatinName && LATIN_NAME_PATTERN.source}
+        validate={getNameFieldValidators()}
       />
       {ENV.plugins.WALDUR_CORE.NATIVE_NAME_ENABLED === true && (
         <InputGroup
