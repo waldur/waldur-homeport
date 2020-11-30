@@ -27,8 +27,8 @@ export const CategoryCard = (props: CategoryCardProps) => (
       </h3>
       {props.category.offering_count}{' '}
       {props.category.offering_count === 1
-        ? translate('item')
-        : translate('items')}
+        ? translate('offering')
+        : translate('offerings')}
     </div>
   </div>
 );

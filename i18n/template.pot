@@ -5373,7 +5373,7 @@ msgstr ""
 msgid "Project resources"
 msgstr ""
 
-#: src/marketplace/orders/ProjectRoleSelectField.tsx
+#: src/customer/team/ProjectRoleSelectField.tsx
 msgid "Project role"
 msgstr ""
 
@@ -6562,7 +6562,7 @@ msgstr ""
 msgid "Select project"
 msgstr ""
 
-#: src/marketplace/orders/ProjectRoleSelectField.tsx
+#: src/customer/team/ProjectRoleSelectField.tsx
 msgid "Select project roles"
 msgstr ""
 
@@ -9455,11 +9455,6 @@ msgstr ""
 msgid "invoices"
 msgstr ""
 
-#: src/marketplace/landing/CategoryCard.tsx
-msgid "item"
-msgstr ""
-
-#: src/marketplace/landing/CategoryCard.tsx
 #: src/table/utils.tsx
 msgid "items"
 msgstr ""
@@ -9493,12 +9488,17 @@ msgstr ""
 msgid "of"
 msgstr ""
 
+#: src/marketplace/landing/CategoryCard.tsx
 #: src/offering/actions/UpdateAction.ts
 msgid "offering"
 msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx
 msgid "offering resources"
+msgstr ""
+
+#: src/marketplace/landing/CategoryCard.tsx
+msgid "offerings"
 msgstr ""
 
 #: src/form/CronField.tsx

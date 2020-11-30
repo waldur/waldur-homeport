@@ -9143,17 +9143,10 @@ msgstr "Lisa element"
 msgid "of"
 msgstr ""
 
-#: src/marketplace/offerings/details/PlanUsageList.tsx
-#, fuzzy
-#| msgid "Offerings"
-msgid "offerings"
-msgstr "Pakkumised"
-
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 #, fuzzy
-#| msgid "Add item"
 msgid "order items"
-msgstr "Lisa element"
+msgstr "tellimused"
 
 #: src/navigation/workspace/select-workspace-dialog.html
 msgid "organization"
@@ -9169,7 +9162,6 @@ msgstr "asutus"
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #, fuzzy
-#| msgid "Plans"
 msgid "plans"
 msgstr "Plaanid"
 
@@ -9876,6 +9868,15 @@ msgstr "Vali palun roll"
 #: src/marketplace/offerings/create/ComponentUseLimitForBillingField.tsx
 msgid "Charge for usage-based component is based on user-requested limit."
 msgstr "Kasutuspõhise komponendi tasu põhineb kasutaja taotletud limiidil."
+
+#: src/marketplace/landing/CategoryCard.tsx
+msgid "offerings"
+msgstr "toodet"
+
+#: src/marketplace/landing/CategoryCard.tsx
+#: src/offering/actions/UpdateAction.ts
+msgid "offering"
+msgstr "toode"
 
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 msgid "Please enter desired values in the rows below:"
