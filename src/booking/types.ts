@@ -37,7 +37,7 @@ export interface CalendarComponentProps {
   calendarType: 'create' | 'edit' | 'read';
   events: BookingProps[];
 
-  availabiltySlots?: AvailabilitySlot[];
+  availabilitySlots?: AvailabilitySlot[];
   options?: OptionsInput;
   addEventCb?: (event: BookingProps) => any;
   removeEventCb?: (id: BookingProps['id']) => any;

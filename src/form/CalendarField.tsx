@@ -134,7 +134,7 @@ export class EditableCalendar extends React.Component<
         calendarType="edit"
         events={[...excludedEvents, ...events]}
         options={this.getCalendarConfig()}
-        availabiltySlots={this.state.availabilitySlots}
+        availabilitySlots={this.state.availabilitySlots}
         addEventCb={(addedEvent) => {
           this.updateAvailabilitySlotsAfterEventWasAdded(addedEvent);
           return fields.push(addedEvent);
