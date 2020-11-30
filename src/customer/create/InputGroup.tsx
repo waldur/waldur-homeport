@@ -6,7 +6,7 @@ import { Field } from 'redux-form';
 
 import { FieldError } from '@waldur/form';
 
-export const InputGroup = ({ label, helpText, ...props }: any) => (
+export const InputGroup = ({ label, helpText, validate, ...props }: any) => (
   <FormGroup>
     <ControlLabel>
       {label} {props.required && <span className="text-danger"> *</span>}
@@ -17,6 +17,7 @@ export const InputGroup = ({ label, helpText, ...props }: any) => (
       component={({ meta }) =>
         meta.touched && <FieldError error={meta.error} />
       }
+      validate={validate}
     />
     {helpText && (
       <HelpBlock>

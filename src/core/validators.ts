@@ -5,7 +5,13 @@ import { translate } from '@waldur/i18n';
 export const required = (value) =>
   value || value === 0 ? undefined : translate('This field is required.');
 
-export const latinName = (value: string) => {
+const latinName = (value: string) => {
+  if (!value.match(LATIN_NAME_PATTERN)) {
+    return translate('Name should consist of latin symbols and numbers.');
+  }
+};
+
+const nameField = (value: string) => {
   if (!value) {
     return undefined;
   }
@@ -14,13 +20,12 @@ export const latinName = (value: string) => {
       'Name is too short, names should be at least two alphanumeric characters.',
     );
   }
-  if (!value.match(LATIN_NAME_PATTERN)) {
-    return translate('Name should consist of latin symbols and numbers.');
-  }
 };
 
+export const getNameFieldValidators = () => [required, nameField];
+
 export const getLatinNameValidators = () => {
-  const validators = [required];
+  const validators = [...getNameFieldValidators()];
   if (ENV.enforceLatinName) {
     validators.push(latinName);
   }

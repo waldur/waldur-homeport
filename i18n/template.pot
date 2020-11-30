@@ -3886,10 +3886,6 @@ msgid "Name \"{label}\" must not start or end with a hyphen"
 msgstr ""
 
 #: src/project/ProjectNameField.tsx
-msgid "Name contains invalid symbols."
-msgstr ""
-
-#: src/project/ProjectNameField.tsx
 msgid "Name is duplicated. Choose other name."
 msgstr ""
 
