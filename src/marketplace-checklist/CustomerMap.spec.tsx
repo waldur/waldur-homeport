@@ -3,6 +3,7 @@ import React from 'react';
 import { Marker, Popup } from 'react-leaflet';
 
 import { CustomerMap } from './CustomerMap';
+import { initCustomer } from './fixtures';
 
 jest.mock('@waldur/images/marker-icon-red.png', () => 'marker-icon-red.png');
 jest.mock(
@@ -13,17 +14,6 @@ jest.mock(
   '@waldur/images/marker-icon-green.png',
   () => 'marker-icon-green.png',
 );
-
-const initCustomer = (props = {}) => {
-  return {
-    uuid: '1',
-    name: 'Alex',
-    score: 0,
-    latitude: 49.601984,
-    longitude: 95.63666172955419,
-    ...props,
-  };
-};
 
 const getSrcFromCustomerMap = (props = {}) => {
   const customers = [initCustomer(props)];
