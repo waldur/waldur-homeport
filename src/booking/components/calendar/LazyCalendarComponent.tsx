@@ -86,7 +86,7 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
   const handleSelect = (arg) => {
     if (isCalType('create')) {
       const { weekends, slotDuration, businessHours } = props.options;
-      const availabiltyBooking = createBooking(
+      const availabilityBooking = createBooking(
         {
           ...arg,
           allDay: arg.view.type === 'dayGridMonth',
@@ -98,7 +98,7 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
         arg.jsEvent.timeStamp,
       );
 
-      return addBooking(availabiltyBooking);
+      return addBooking(availabilityBooking);
     } else if (isCalType('edit')) {
       const calendarApi = calendarRef.current;
       const checkEvents = calendarApi.getEvents();
@@ -120,7 +120,7 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
 
       const scheduledBooking = handleSchedule(
         arg,
-        props.availabiltySlots,
+        props.availabilitySlots,
         props.options.slotDuration,
       );
 
