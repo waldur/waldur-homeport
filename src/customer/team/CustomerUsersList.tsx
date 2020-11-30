@@ -2,7 +2,9 @@ import React from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
+import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -77,14 +79,29 @@ const TableComponent = (props) => {
   );
 };
 
+const mapPropsToFilter = (props) => {
+  const filter: Record<string, string | boolean> = {
+    customer_uuid: props.customer.uuid,
+    o: 'concatenated_name',
+  };
+  if (props.filter) {
+    if (props.filter.project_role) {
+      filter.project_role = props.filter.project_role.map(({ value }) => value);
+    }
+    if (props.filter.organization_role) {
+      filter.organization_role = props.filter.organization_role.map(
+        ({ value }) => value,
+      );
+    }
+  }
+  return filter;
+};
+
 const TableOptions: TableOptionsType = {
   table: 'customer-users',
   fetchData: fetchCustomerUsers,
   queryField: 'full_name',
-  mapPropsToFilter: (props) => ({
-    customer_uuid: props.customer.uuid,
-    o: 'concatenated_name',
-  }),
+  mapPropsToFilter,
 };
 
 const mapStateToProps = (state) => ({
@@ -92,6 +109,7 @@ const mapStateToProps = (state) => ({
   user: getUser(state),
   isOwnerOrStaff: isOwnerOrStaffSelector(state),
   customer: getCustomer(state),
+  filter: getFormValues(CUSTOMER_USERS_LIST_FILTER_FORM_ID)(state),
 });
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));

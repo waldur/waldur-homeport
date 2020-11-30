@@ -1,4 +1,5 @@
 import {
+  CUSTOMER_OWNER_ROLE,
   PROJECT_ADMIN_ROLE,
   PROJECT_MANAGER_ROLE,
   PROJECT_MEMBER_ROLE,
@@ -26,3 +27,10 @@ export const getRoles = () => {
   }
   return roles.sort((a, b) => a.label.localeCompare(b.label));
 };
+
+export const getOrganizationRoles = () => [
+  {
+    value: CUSTOMER_OWNER_ROLE,
+    label: translate(ENV.roles.owner),
+  },
+];

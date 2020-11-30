@@ -3,6 +3,7 @@ import PanelBody from 'react-bootstrap/lib/PanelBody';
 import Tab from 'react-bootstrap/lib/Tab';
 import Tabs from 'react-bootstrap/lib/Tabs';
 
+import { CustomerUsersListFilter } from '@waldur/customer/team/CustomerUsersListFilter';
 import { translate } from '@waldur/i18n';
 import { InvitationsList } from '@waldur/invitations/InvitationsList';
 import { useTitle } from '@waldur/navigation/title';
@@ -24,6 +25,7 @@ export const CustomerTeam = () => {
       >
         <Tab title={translate('Users')} eventKey="users">
           <PanelBody>
+            <CustomerUsersListFilter />
             <CustomerUsersList />
           </PanelBody>
         </Tab>

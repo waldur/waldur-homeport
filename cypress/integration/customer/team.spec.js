@@ -76,11 +76,11 @@ describe('Team', () => {
       // Open Role dropdown
       .get('div[class$="placeholder"]')
       .first()
-      .click()
+      .click({ force: true })
       // Select the first option
       .get('*div[id^="react-select"]')
       .first()
-      .click()
+      .click({ force: true })
       .get('button')
       .contains('Save')
       .click();
