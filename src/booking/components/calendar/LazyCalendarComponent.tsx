@@ -63,9 +63,13 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
   const toggleModal = () => setModal({ isOpen: false, el: null, event: null });
 
   const eventClick = ({ el, event }) => {
-    if (event.extendedProps.type !== 'Availability') {
-      return setModal({ isOpen: true, el, event });
+    if (
+      props.calendarType === 'edit' &&
+      event.extendedProps.type === 'Availability'
+    ) {
+      return;
     }
+    return setModal({ isOpen: true, el, event });
   };
   const addBooking = (event: BookingProps) => {
     dispatch(showSuccess('Time slot has been added.'));
