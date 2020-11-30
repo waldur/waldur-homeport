@@ -25,36 +25,34 @@ const initCustomer = (props = {}) => {
   };
 };
 
+const getSrcFromCustomerMap = (props = {}) => {
+  const customers = [initCustomer(props)];
+
+  const component = shallow(<CustomerMap customers={customers} />);
+  const icon = component.find(Marker);
+  const src = icon.prop('icon');
+
+  return src.options.iconUrl;
+};
+
 describe('CustomerMap', () => {
   describe('Marker', () => {
     it('should render a red marker', () => {
-      const customers = [initCustomer()];
+      const src = getSrcFromCustomerMap();
 
-      const component = shallow(<CustomerMap customers={customers} />);
-      const icon = component.find(Marker);
-      const src = icon.prop('icon');
-
-      expect(src.options.iconUrl).toEqual('marker-icon-red.png');
+      expect(src).toEqual('marker-icon-red.png');
     });
 
     it('should render a yellow marker', () => {
-      const customers = [initCustomer({ score: 50 })];
+      const src = getSrcFromCustomerMap({ score: 50 });
 
-      const component = shallow(<CustomerMap customers={customers} />);
-      const icon = component.find(Marker);
-      const src = icon.prop('icon');
-
-      expect(src.options.iconUrl).toEqual('marker-icon-yellow.png');
+      expect(src).toEqual('marker-icon-yellow.png');
     });
 
     it('should render a green marker', () => {
-      const customers = [initCustomer({ score: 80 })];
+      const src = getSrcFromCustomerMap({ score: 80 });
 
-      const component = shallow(<CustomerMap customers={customers} />);
-      const icon = component.find(Marker);
-      const src = icon.prop('icon');
-
-      expect(src.options.iconUrl).toEqual('marker-icon-green.png');
+      expect(src).toEqual('marker-icon-green.png');
     });
 
     it("should't render any markers", () => {
