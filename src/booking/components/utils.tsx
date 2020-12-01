@@ -48,7 +48,7 @@ const renderEventWithTooltip = ({
   el: HTMLElement;
 }) => {
   ReactDOM.render(
-    <OverlayTrigger
+    <OverlayTrigger //
       placement="top"
       overlay={
         <BootstrapTooltip id={event.id}>
