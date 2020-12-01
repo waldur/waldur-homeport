@@ -87,7 +87,7 @@ export const offeringsAutocomplete = async (
   currentPage: number,
 ) => {
   const params = {
-    field: ['name', 'uuid', 'category_title', 'thumbnail'],
+    field: ['name', 'uuid', 'url', 'category_title', 'thumbnail'],
     o: 'name',
     state: 'Active',
     ...query,
