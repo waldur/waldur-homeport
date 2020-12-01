@@ -2,18 +2,22 @@ import React from 'react';
 import PanelBody from 'react-bootstrap/lib/PanelBody';
 import Tab from 'react-bootstrap/lib/Tab';
 import Tabs from 'react-bootstrap/lib/Tabs';
+import { useSelector } from 'react-redux';
 
 import { CustomerUsersListFilter } from '@waldur/customer/team/CustomerUsersListFilter';
 import { translate } from '@waldur/i18n';
 import { InvitationsList } from '@waldur/invitations/InvitationsList';
 import { useTitle } from '@waldur/navigation/title';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerPermissionsLogList } from './CustomerPermissionsLogList';
 import { CustomerPermissionsReviewList } from './CustomerPermissionsReviewList';
 import { CustomerUsersList } from './CustomerUsersList';
+import { OfferingPermissionsList } from './OfferingPermissionsList';
 
 export const CustomerTeam = () => {
   useTitle(translate('Team'));
+  const customer = useSelector(getCustomer);
   return (
     <div className="tabs-container m-l-sm">
       <Tabs
@@ -44,6 +48,13 @@ export const CustomerTeam = () => {
             <CustomerPermissionsReviewList />
           </PanelBody>
         </Tab>
+        {customer.is_service_provider && (
+          <Tab title={translate('Offering permissions')} eventKey="offerings">
+            <PanelBody>
+              <OfferingPermissionsList />
+            </PanelBody>
+          </Tab>
+        )}
       </Tabs>
     </div>
   );
