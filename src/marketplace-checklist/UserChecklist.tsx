@@ -68,8 +68,8 @@ export const UserChecklist: React.FC<UserChecklistProps> = (props) => {
             />
             <AnswersTable
               questions={state.questionsList}
-              answers={state.answers}
-              setAnswers={state.setAnswers}
+              answers={state.answersTable}
+              setAnswers={state.setAnswersTable}
               readOnly={props.readOnly}
             />
             {!props.readOnly && (
