@@ -33,7 +33,7 @@ export const DateAndTimeSelectField = (props: DateAndTimeSelectField) => (
         showTodayButton={true}
         todayButtonLabel={translate('Today')}
         dateFormat="DD-MM-YYYY"
-        value={props.currentTime.toISOString()}
+        value={props.currentTime.format()}
         onChange={(_, formattedValue) =>
           props.onChange(
             moment.utc(formattedValue, 'DD-MM-YYYY', true).toDate(),
