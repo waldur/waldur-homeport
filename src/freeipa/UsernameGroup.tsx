@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import InputGroup from 'react-bootstrap/lib/InputGroup';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
+import {
+  Col,
+  ControlLabel,
+  FormGroup,
+  InputGroup,
+  OverlayTrigger,
+  Tooltip as BootstrapTooltip,
+} from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/core/services';

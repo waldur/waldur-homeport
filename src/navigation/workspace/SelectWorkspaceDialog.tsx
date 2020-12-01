@@ -1,10 +1,8 @@
 import { useRouter } from '@uirouter/react';
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import Modal from 'react-bootstrap/lib/Modal';
-import Row from 'react-bootstrap/lib/Row';
+import { Button, Modal, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';

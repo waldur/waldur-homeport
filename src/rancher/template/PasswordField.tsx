@@ -1,7 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import InputGroup from 'react-bootstrap/lib/InputGroup';
+import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 

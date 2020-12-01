@@ -1,6 +1,5 @@
 import React from 'react';
-import useAsyncFn from 'react-use/lib/useAsyncFn';
-import useEffectOnce from 'react-use/lib/useEffectOnce';
+import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { loadCategories } from '@waldur/dashboard/api';

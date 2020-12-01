@@ -1,5 +1,5 @@
 import React from 'react';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { defaultCurrency } from '@waldur/core/services';

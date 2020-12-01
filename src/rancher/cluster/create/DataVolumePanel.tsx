@@ -1,5 +1,5 @@
 import React from 'react';
-import Panel from 'react-bootstrap/lib/Panel';
+import { Panel } from 'react-bootstrap';
 import { FormSection, FormName } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';

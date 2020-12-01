@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import useEffectOnce from 'react-use/lib/useEffectOnce';
+import { useEffectOnce } from 'react-use';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';

@@ -1,6 +1,5 @@
 import React from 'react';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import Row from 'react-bootstrap/lib/Row';
+import { Navbar, Row } from 'react-bootstrap';
 
 import { LanguageSelector } from '@waldur/i18n/LanguageSelector';
 import { ShoppingCartIndicator } from '@waldur/marketplace/cart/ShoppingCartIndicator';

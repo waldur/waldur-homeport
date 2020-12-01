@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
+import { ButtonGroup } from 'react-bootstrap';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { Table, connectTable, createFetcher } from '@waldur/table';

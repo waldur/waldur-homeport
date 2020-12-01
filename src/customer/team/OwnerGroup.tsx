@@ -1,5 +1,5 @@
 import React from 'react';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
+import { FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/core/services';

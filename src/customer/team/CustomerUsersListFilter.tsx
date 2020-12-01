@@ -1,5 +1,5 @@
 import React from 'react';
-import Row from 'react-bootstrap/lib/Row';
+import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';

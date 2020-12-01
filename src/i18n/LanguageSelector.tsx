@@ -1,8 +1,10 @@
 import React from 'react';
-import Dropdown from 'react-bootstrap/lib/Dropdown';
-import DropdownMenu from 'react-bootstrap/lib/DropdownMenu';
-import DropdownToggle from 'react-bootstrap/lib/DropdownToggle';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
+import {
+  Dropdown,
+  DropdownMenu,
+  DropdownToggle,
+  MenuItem,
+} from 'react-bootstrap';
 
 import { translate } from './translate';
 import { useLanguageSelector } from './useLanguageSelector';

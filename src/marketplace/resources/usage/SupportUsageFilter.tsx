@@ -1,6 +1,6 @@
 import moment from 'moment-timezone';
 import React from 'react';
-import Row from 'react-bootstrap/lib/Row';
+import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm, formValueSelector } from 'redux-form';

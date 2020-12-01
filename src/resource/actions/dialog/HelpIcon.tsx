@@ -1,6 +1,5 @@
 import React from 'react';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import BootstrapTooltip from 'react-bootstrap/lib/Tooltip';
+import { OverlayTrigger, Tooltip as BootstrapTooltip } from 'react-bootstrap';
 
 export const HelpIcon = ({ helpText }) =>
   helpText ? (

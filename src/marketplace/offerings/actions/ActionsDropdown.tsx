@@ -1,7 +1,5 @@
 import React from 'react';
-import Dropdown from 'react-bootstrap/lib/Dropdown';
-import DropdownMenu from 'react-bootstrap/lib/DropdownMenu';
-import DropdownToggle from 'react-bootstrap/lib/DropdownToggle';
+import { Dropdown, DropdownMenu, DropdownToggle } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 

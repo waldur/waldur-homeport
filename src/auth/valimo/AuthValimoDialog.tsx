@@ -1,15 +1,17 @@
 import { useRouter } from '@uirouter/react';
 import React from 'react';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import InputGroup from 'react-bootstrap/lib/InputGroup';
-import ModalBody from 'react-bootstrap/lib/ModalBody';
-import ModalFooter from 'react-bootstrap/lib/ModalFooter';
-import ModalHeader from 'react-bootstrap/lib/ModalHeader';
-import ModalTitle from 'react-bootstrap/lib/ModalTitle';
+import {
+  ControlLabel,
+  FormControl,
+  FormGroup,
+  InputGroup,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+} from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import useMountedState from 'react-use/lib/useMountedState';
+import { useMountedState } from 'react-use';
 import { reduxForm, Field } from 'redux-form';
 
 import { ENV } from '@waldur/core/services';

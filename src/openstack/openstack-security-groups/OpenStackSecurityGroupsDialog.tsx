@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from 'react-bootstrap/lib/Table';
+import { Table } from 'react-bootstrap';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';

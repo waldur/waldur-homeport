@@ -1,7 +1,5 @@
 import React from 'react';
-import PanelBody from 'react-bootstrap/lib/PanelBody';
-import Tab from 'react-bootstrap/lib/Tab';
-import Tabs from 'react-bootstrap/lib/Tabs';
+import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { isFeatureVisible } from '@waldur/features/connect';

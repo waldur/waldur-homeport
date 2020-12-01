@@ -1,8 +1,7 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
-import useToggle from 'react-use/lib/useToggle';
+import { useAsync, useToggle } from 'react-use';
 import { reduxForm, change } from 'redux-form';
 
 import { CopyToClipboard } from '@waldur/core/CopyToClipboard';

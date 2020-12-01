@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { Tooltip } from '@waldur/core/Tooltip';

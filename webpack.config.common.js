@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const tsImportPluginFactory = require('ts-import-plugin');
 
 const AngularGetTextPlugin = require('./angular-gettext-plugin');
 const utils = require('./webpack.utils');
@@ -52,6 +53,20 @@ module.exports = {
             loader: 'ts-loader',
             options: {
               transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [
+                  tsImportPluginFactory([
+                    {
+                      libraryName: 'react-bootstrap',
+                      camel2DashComponentName: false,
+                    },
+                    {
+                      libraryName: 'react-use',
+                      camel2DashComponentName: false,
+                    },
+                  ]),
+                ],
+              }),
             },
           },
         ],

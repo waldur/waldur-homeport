@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { getById } from '@waldur/core/api';
 import { formatRelative, formatDateTime } from '@waldur/core/dateUtils';

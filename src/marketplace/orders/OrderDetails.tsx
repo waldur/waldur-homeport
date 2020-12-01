@@ -1,9 +1,7 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import Row from 'react-bootstrap/lib/Row';
-import useAsyncFn from 'react-use/lib/useAsyncFn';
-import useInterval from 'react-use/lib/useInterval';
+import { Col, Row } from 'react-bootstrap';
+import { useAsyncFn, useInterval } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getUUID } from '@waldur/core/utils';

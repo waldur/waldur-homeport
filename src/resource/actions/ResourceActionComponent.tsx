@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import DropdownButton from 'react-bootstrap/lib/DropdownButton';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';

@@ -1,7 +1,6 @@
 import Axios from 'axios';
 import React from 'react';
-import useAsyncFn from 'react-use/lib/useAsyncFn';
-import useBoolean from 'react-use/lib/useBoolean';
+import { useAsyncFn, useBoolean } from 'react-use';
 
 import { loadActions, buttonClick } from './action-utils-service';
 import './ActionButtonResource.scss';

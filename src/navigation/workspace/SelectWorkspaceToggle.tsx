@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import useMedia from 'react-use/lib/useMedia';
+import { useMedia } from 'react-use';
 
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';

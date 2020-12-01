@@ -1,6 +1,5 @@
 import React from 'react';
-import Tab from 'react-bootstrap/lib/Tab';
-import Tabs from 'react-bootstrap/lib/Tabs';
+import { Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 

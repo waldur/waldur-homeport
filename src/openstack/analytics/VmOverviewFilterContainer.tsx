@@ -1,5 +1,5 @@
 import React from 'react';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

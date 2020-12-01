@@ -1,5 +1,5 @@
 import React from 'react';
-import Radio from 'react-bootstrap/lib/Radio';
+import { Radio } from 'react-bootstrap';
 
 export const RadioField = ({
   input: { value, onChange },

@@ -1,7 +1,6 @@
 import moment from 'moment-timezone';
 import React from 'react';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
+import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { DateField } from '@waldur/form/DateField';

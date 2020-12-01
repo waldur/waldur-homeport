@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useBoolean } from 'react-use';
-import useAsyncFn from 'react-use/lib/useAsyncFn';
+import { useBoolean, useAsyncFn } from 'react-use';
 
 import { getAll } from '@waldur/core/api';
 import { InvoicesDropdown } from '@waldur/customer/payments/InvoicesDropdown';

@@ -1,5 +1,5 @@
 import React from 'react';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import { FormControl } from 'react-bootstrap';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const InputField = ({ input, meta, ...props }) => (

@@ -1,5 +1,5 @@
 import React from 'react';
-import Panel from 'react-bootstrap/lib/Panel';
+import { Panel } from 'react-bootstrap';
 import { FormSection } from 'redux-form';
 
 import { translate } from '@waldur/i18n';

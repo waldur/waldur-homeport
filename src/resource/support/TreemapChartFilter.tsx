@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Panel from 'react-bootstrap/lib/Panel';
+import { Panel } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
 
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';

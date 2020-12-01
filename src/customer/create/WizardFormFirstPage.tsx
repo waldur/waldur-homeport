@@ -1,5 +1,5 @@
 import React from 'react';
-import PanelBody from 'react-bootstrap/lib/PanelBody';
+import { PanelBody } from 'react-bootstrap';
 
 import { ENV } from '@waldur/core/services';
 import { getNameFieldValidators } from '@waldur/core/validators';

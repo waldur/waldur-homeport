@@ -1,7 +1,7 @@
 import { useRouter } from '@uirouter/react';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import useAsyncFn from 'react-use/lib/useAsyncFn';
+import { useAsyncFn } from 'react-use';
 import { change } from 'redux-form';
 
 import {

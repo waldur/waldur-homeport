@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
+import { Button } from 'react-bootstrap';
 
 interface SubmitButtonProps {
   submitting: boolean;

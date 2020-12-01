@@ -1,9 +1,11 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import Dropdown from 'react-bootstrap/lib/Dropdown';
-import DropdownMenu from 'react-bootstrap/lib/DropdownMenu';
-import DropdownToggle from 'react-bootstrap/lib/DropdownToggle';
-import Row from 'react-bootstrap/lib/Row';
+import {
+  Col,
+  Dropdown,
+  DropdownMenu,
+  DropdownToggle,
+  Row,
+} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 

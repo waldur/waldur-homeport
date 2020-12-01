@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactStars from 'react-rating-stars-component';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

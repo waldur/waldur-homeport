@@ -2,7 +2,7 @@ import { useRouter } from '@uirouter/react';
 import Qs from 'qs';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import useEffectOnce from 'react-use/lib/useEffectOnce';
+import { useEffectOnce } from 'react-use';
 
 import { post } from '@waldur/core/api';
 import { getQueryString } from '@waldur/core/utils';

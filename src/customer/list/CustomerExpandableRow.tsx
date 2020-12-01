@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

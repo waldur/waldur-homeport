@@ -1,7 +1,7 @@
 import React from 'react';
 import Gravatar from 'react-gravatar';
 import { useDispatch } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { getList } from '@waldur/core/api';
 import { formatDateTime } from '@waldur/core/dateUtils';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import useEffectOnce from 'react-use/lib/useEffectOnce';
+import { useEffectOnce } from 'react-use';
 import { reduxForm } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';

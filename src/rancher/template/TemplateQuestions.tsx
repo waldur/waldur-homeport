@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from 'react-bootstrap/lib/Form';
+import { Form } from 'react-bootstrap';
 import { reduxForm, FormSection } from 'redux-form';
 
 import { ENV } from '@waldur/core/services';

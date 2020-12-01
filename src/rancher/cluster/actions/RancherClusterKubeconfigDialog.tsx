@@ -1,5 +1,5 @@
 import React from 'react';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
