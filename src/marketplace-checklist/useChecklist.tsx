@@ -58,6 +58,16 @@ const useChecklistSelector = (categoryId?: string) => {
   };
 };
 
+const mapArrayToObject = (data: Answer[]): {} => {
+  return data.reduce(
+    (result: {}, answer: Answer) => ({
+      ...result,
+      [answer.question_uuid]: answer.value,
+    }),
+    {},
+  );
+};
+
 export const useUserChecklist = (userId, categoryId?) => {
   const { checklist, ...checklistLoader } = useChecklistSelector(categoryId);
 
@@ -67,6 +77,7 @@ export const useUserChecklist = (userId, categoryId?) => {
   const [categoryInfo, setCategoryInfo] = useState(null);
 
   const [answers, setAnswers] = useState<{}>();
+  const [answersTable, setAnswersTable] = useState<{}>();
   const [submitting, setSubmitting] = useState(false);
 
   const dispatch = useDispatch();
@@ -84,15 +95,10 @@ export const useUserChecklist = (userId, categoryId?) => {
         }
 
         setQuestionsList(questions);
-        setAnswers(
-          answersList.reduce(
-            (result, answer: Answer) => ({
-              ...result,
-              [answer.question_uuid]: answer.value,
-            }),
-            {},
-          ),
-        );
+
+        setAnswers(mapArrayToObject(answersList));
+        setAnswersTable(mapArrayToObject(answersList));
+
         setQuestionsLoading(false);
       } catch (error) {
         setQuestionsLoading(false);
@@ -111,12 +117,14 @@ export const useUserChecklist = (userId, categoryId?) => {
 
   const submit = useCallback(async () => {
     setSubmitting(true);
+
     try {
-      const payload = Object.keys(answers).map((question_uuid) => ({
+      const payload = Object.keys(answersTable).map((question_uuid) => ({
         question_uuid,
-        value: answers[question_uuid],
+        value: answersTable[question_uuid],
       }));
       await postAnswers(checklist.uuid, payload);
+      setAnswers(answersTable);
     } catch (error) {
       setSubmitting(false);
       const errorMessage = `${translate('Unable to submit answers.')} ${format(
@@ -127,7 +135,7 @@ export const useUserChecklist = (userId, categoryId?) => {
     }
     dispatch(showSuccess(translate('Answers have been submitted')));
     setSubmitting(false);
-  }, [answers]);
+  }, [answersTable]);
 
   return {
     ...checklistLoader,
@@ -138,6 +146,8 @@ export const useUserChecklist = (userId, categoryId?) => {
     categoryInfo,
     answers,
     setAnswers,
+    answersTable,
+    setAnswersTable,
     submit,
     submitting,
   };
