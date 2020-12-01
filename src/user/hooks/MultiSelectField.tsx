@@ -1,6 +1,5 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/lib/ListGroup';
-import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 

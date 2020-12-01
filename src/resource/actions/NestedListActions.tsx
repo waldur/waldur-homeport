@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import useAsync from 'react-use/lib/useAsync';
+import { Button } from 'react-bootstrap';
+import { useAsync } from 'react-use';
 
 import { loadNestedActions } from './action-utils-service';
 

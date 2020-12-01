@@ -1,8 +1,5 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import Row from 'react-bootstrap/lib/Row';
-import ToggleButton from 'react-bootstrap/lib/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
+import { Col, Row, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
 import { Panel } from '@waldur/core/Panel';

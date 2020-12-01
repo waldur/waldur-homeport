@@ -2,7 +2,7 @@ import geojson from 'geojson';
 import { LatLngTuple, Layer } from 'leaflet';
 import React from 'react';
 import { MapContainer, GeoJSON } from 'react-leaflet';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { OpenStreeMapTileLayer } from '@waldur/map/OpenStreeMapTileLayer';

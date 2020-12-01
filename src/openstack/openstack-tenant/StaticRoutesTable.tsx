@@ -1,6 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import Table from 'react-bootstrap/lib/Table';
+import { Button, Table } from 'react-bootstrap';
 import { Field, WrappedFieldArrayProps } from 'redux-form';
 
 import { required } from '@waldur/core/validators';

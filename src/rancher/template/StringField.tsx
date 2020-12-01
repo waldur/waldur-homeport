@@ -1,5 +1,5 @@
 import React from 'react';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import { FormControl } from 'react-bootstrap';
 
 import { FieldError } from '@waldur/form';
 

@@ -1,6 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import Row from 'react-bootstrap/lib/Row';
+import { Button, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 

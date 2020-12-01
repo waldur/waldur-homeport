@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import Table from 'react-bootstrap/lib/Table';
+import { Table } from 'react-bootstrap';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';

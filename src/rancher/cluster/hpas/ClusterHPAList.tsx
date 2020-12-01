@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
+import { ButtonGroup } from 'react-bootstrap';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { HPA } from '@waldur/rancher/types';

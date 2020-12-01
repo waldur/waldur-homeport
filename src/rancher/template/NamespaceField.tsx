@@ -1,5 +1,5 @@
 import React from 'react';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import { FormControl } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 

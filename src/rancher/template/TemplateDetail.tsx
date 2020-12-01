@@ -1,9 +1,8 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import React from 'react';
-import Panel from 'react-bootstrap/lib/Panel';
-import PanelGroup from 'react-bootstrap/lib/PanelGroup';
+import { Panel, PanelGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';

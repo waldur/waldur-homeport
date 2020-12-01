@@ -1,5 +1,5 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
+import { Col } from 'react-bootstrap';
 
 import { DataVolumeAddButton } from './DataVolumeAddButton';
 import { DataVolumePanel } from './DataVolumePanel';

@@ -1,6 +1,5 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import Row from 'react-bootstrap/lib/Row';
+import { Col, Row } from 'react-bootstrap';
 
 import { defaultCurrency } from '@waldur/core/services';
 import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';

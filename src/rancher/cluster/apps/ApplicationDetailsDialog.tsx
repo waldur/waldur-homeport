@@ -1,7 +1,5 @@
 import React from 'react';
-import Panel from 'react-bootstrap/lib/Panel';
-import PanelGroup from 'react-bootstrap/lib/PanelGroup';
-import Table from 'react-bootstrap/lib/Table';
+import { Panel, PanelGroup, Table } from 'react-bootstrap';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { translate } from '@waldur/i18n';

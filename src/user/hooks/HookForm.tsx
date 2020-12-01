@@ -1,5 +1,5 @@
 import React from 'react';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
+import { FormGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 

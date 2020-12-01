@@ -1,6 +1,5 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import Panel from 'react-bootstrap/lib/Panel';
+import { Col, Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';

@@ -1,5 +1,5 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
+import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';

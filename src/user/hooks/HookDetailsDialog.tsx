@@ -1,9 +1,11 @@
 import React from 'react';
-import ModalBody from 'react-bootstrap/lib/ModalBody';
-import ModalFooter from 'react-bootstrap/lib/ModalFooter';
-import ModalHeader from 'react-bootstrap/lib/ModalHeader';
-import ModalTitle from 'react-bootstrap/lib/ModalTitle';
-import useAsync from 'react-use/lib/useAsync';
+import {
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+} from 'react-bootstrap';
+import { useAsync } from 'react-use';
 import { AsyncState } from 'react-use/lib/useAsyncFn';
 import { reduxForm } from 'redux-form';
 

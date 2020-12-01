@@ -1,6 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
+import { Button, FormGroup } from 'react-bootstrap';
 
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';

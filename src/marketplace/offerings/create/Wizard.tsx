@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
+import { Col } from 'react-bootstrap';
 
 import { SubmitButton } from '@waldur/form';
 import { TranslateProps, withTranslation } from '@waldur/i18n';

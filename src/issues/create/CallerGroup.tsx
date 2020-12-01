@@ -1,9 +1,11 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  ControlLabel,
+  FormGroup,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';

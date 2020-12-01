@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';

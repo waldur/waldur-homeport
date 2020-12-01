@@ -1,7 +1,6 @@
 import { useRouter, useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import Row from 'react-bootstrap/lib/Row';
+import { Col, Row } from 'react-bootstrap';
 import { InjectedFormProps } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

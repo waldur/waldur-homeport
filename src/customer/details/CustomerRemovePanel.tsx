@@ -1,7 +1,7 @@
 import { useRouter } from '@uirouter/react';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { deleteById, getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

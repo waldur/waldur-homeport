@@ -1,8 +1,7 @@
 import type { EventInput } from '@fullcalendar/core';
 import moment from 'moment';
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import Modal from 'react-bootstrap/lib/Modal';
+import { Button, Modal } from 'react-bootstrap';
 
 import { DateAndTimeSelectField } from '@waldur/booking/components/modal/DateAndTimeSelect';
 import { translate } from '@waldur/i18n';

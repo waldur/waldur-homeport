@@ -1,9 +1,5 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import Panel from 'react-bootstrap/lib/Panel';
-import Row from 'react-bootstrap/lib/Row';
-import Tab from 'react-bootstrap/lib/Tab';
-import Tabs from 'react-bootstrap/lib/Tabs';
+import { Col, Panel, Row, Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';

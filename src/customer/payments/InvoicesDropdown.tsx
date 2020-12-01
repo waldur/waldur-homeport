@@ -1,6 +1,5 @@
 import React from 'react';
-import DropdownButton from 'react-bootstrap/lib/DropdownButton';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { Invoice } from '@waldur/invoices/types';

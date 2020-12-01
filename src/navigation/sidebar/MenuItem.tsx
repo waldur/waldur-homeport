@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import Label from 'react-bootstrap/lib/Label';
+import { Label } from 'react-bootstrap';
 
 import { wrapTooltip } from '@waldur/table/ActionButton';
 

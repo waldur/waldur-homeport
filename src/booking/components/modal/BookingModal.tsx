@@ -1,8 +1,6 @@
 import moment from 'moment-timezone';
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-import Modal from 'react-bootstrap/lib/Modal';
+import { Button, ButtonGroup, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { BookingModalProps, BookingProps } from '@waldur/booking/types';

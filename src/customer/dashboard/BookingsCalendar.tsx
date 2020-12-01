@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 import { getFormValues } from 'redux-form';
 
 import { getBookingsList } from '@waldur/booking/common/api';

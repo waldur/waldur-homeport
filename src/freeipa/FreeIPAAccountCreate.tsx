@@ -1,6 +1,5 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
+import { Col, FormGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm, change } from 'redux-form';
 

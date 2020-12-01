@@ -1,7 +1,5 @@
 import React from 'react';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
+import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/core/services';

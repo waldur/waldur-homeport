@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from 'react-bootstrap/lib/Table';
+import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues, isValid } from 'redux-form';
 

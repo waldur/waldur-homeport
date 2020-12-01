@@ -6,8 +6,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import ToggleButton from 'react-bootstrap/lib/ToggleButton';
+import { FormGroup, ToggleButton } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Field, formValueSelector, reduxForm } from 'redux-form';

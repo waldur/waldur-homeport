@@ -1,5 +1,5 @@
 import React from 'react';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import { FormControl } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 

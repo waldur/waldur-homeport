@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { formatRelative, formatDateTime } from '@waldur/core/dateUtils';

@@ -1,5 +1,5 @@
 import React from 'react';
-import PanelBody from 'react-bootstrap/lib/PanelBody';
+import { PanelBody } from 'react-bootstrap';
 
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';

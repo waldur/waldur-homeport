@@ -1,7 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React, { useEffect } from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import Row from 'react-bootstrap/lib/Row';
+import { Col, Row } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import useAsyncFn from 'react-use/lib/useAsyncFn';
+import { useAsyncFn } from 'react-use';
 
 import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

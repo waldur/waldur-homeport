@@ -1,5 +1,5 @@
 import React from 'react';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 import WindowedSelect from 'react-windowed-select';
 import { Field } from 'redux-form';
 

@@ -1,13 +1,14 @@
 import React from 'react';
-import ModalBody from 'react-bootstrap/lib/ModalBody';
-import ModalFooter from 'react-bootstrap/lib/ModalFooter';
-import ModalHeader from 'react-bootstrap/lib/ModalHeader';
-import ModalTitle from 'react-bootstrap/lib/ModalTitle';
-import Tab from 'react-bootstrap/lib/Tab';
-import Tabs from 'react-bootstrap/lib/Tabs';
+import {
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+  Tab,
+  Tabs,
+} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import useAsyncFn from 'react-use/lib/useAsyncFn';
-import useEffectOnce from 'react-use/lib/useEffectOnce';
+import { useAsyncFn, useEffectOnce } from 'react-use';
 import { createSelector } from 'reselect';
 
 import { getById } from '@waldur/core/api';

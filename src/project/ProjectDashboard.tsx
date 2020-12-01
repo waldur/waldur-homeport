@@ -1,6 +1,5 @@
 import React from 'react';
-import Col from 'react-bootstrap/lib/Col';
-import Row from 'react-bootstrap/lib/Row';
+import { Col, Row } from 'react-bootstrap';
 
 import { Panel } from '@waldur/core/Panel';
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';

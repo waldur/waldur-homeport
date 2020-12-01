@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 import { compose } from 'redux';
 import { reduxForm, InjectedFormProps } from 'redux-form';
 

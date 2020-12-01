@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 import { Field } from 'redux-form';
 
 import { getAll } from '@waldur/core/api';

@@ -1,5 +1,5 @@
 import React from 'react';
-import useAsync from 'react-use/lib/useAsync';
+import { useAsync } from 'react-use';
 
 import { getLocations } from '@waldur/azure/common/api';
 import { CreateSelectField } from '@waldur/azure/common/CreateSelectField';

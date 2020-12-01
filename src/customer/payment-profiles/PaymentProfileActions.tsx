@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
+import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import {

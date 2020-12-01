@@ -1,6 +1,5 @@
 import React from 'react';
-import ToggleButton from 'react-bootstrap/lib/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/lib/ToggleButtonGroup';
+import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 interface FilterChoice {
   label: React.ReactNode;

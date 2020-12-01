@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import useEffectOnce from 'react-use/lib/useEffectOnce';
+import { useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ngInjector } from '@waldur/core/services';

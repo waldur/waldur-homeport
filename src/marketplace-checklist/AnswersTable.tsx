@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from 'react-bootstrap/lib/Table';
+import { Table } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
