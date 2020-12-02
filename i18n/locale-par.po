@@ -47,6 +47,10 @@ msgstr "Select department..."
 msgid "Projects"
 msgstr "Departments"
 
+#: src/navigation/workspace/ProjectsPanel.tsx
+msgid "Projects ({count})"
+msgstr "Departments ({count})"
+
 #: src/team/add-team-member.html
 msgid "Projects list"
 msgstr "Departments list"
@@ -172,3 +176,11 @@ msgstr "Select department..."
 #: src/issues/notifications/NotificationCreateDialog.tsx
 msgid "Select projects..."
 msgstr "Select departments..."
+
+#: src/user/list/UserDashboard.tsx
+msgid "Managed projects"
+msgstr "Connected departments"
+
+#: src/project/ProjectDashboard.tsx
+msgid "Overview of {project} department"
+msgstr ""
