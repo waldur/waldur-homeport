@@ -114,7 +114,7 @@ export const CalendarSettings: React.FC = () => {
           value={[...getOptions(60), { value: '24:00', label: '24:00' }].filter(
             ({ value }) => value === endTime,
           )}
-          onChange={(newValue: any) => newValue.value === setEndTime}
+          onChange={(newValue: any) => setEndTime(newValue.value)}
         />
       </FormGroup>
 
