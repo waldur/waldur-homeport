@@ -189,6 +189,7 @@ export const CalendarSettings: React.FC = () => {
           options={timeZoneArray}
           value={timeZoneArray.filter(({ value }) => value === timeZone)}
           onChange={(newValue: any) => setTimeZone(newValue.value)}
+          {...reactSelectMenuPortaling()}
         />
       </FormGroup>
     </>
