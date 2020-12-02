@@ -96,6 +96,7 @@ export const CalendarSettings: React.FC = () => {
           options={getOptions(60)}
           value={getOptions(60).filter(({ value }) => value === startTime)}
           onChange={(newValue: any) => setStartTime(newValue.value)}
+          {...reactSelectMenuPortaling()}
         />
         <label
           className="col-xs-2 control-label"
@@ -115,6 +116,7 @@ export const CalendarSettings: React.FC = () => {
             ({ value }) => value === endTime,
           )}
           onChange={(newValue: any) => setEndTime(newValue.value)}
+          {...reactSelectMenuPortaling()}
         />
       </FormGroup>
 
