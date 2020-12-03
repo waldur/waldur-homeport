@@ -1332,6 +1332,10 @@ msgstr ""
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
+#: src/offering/OfferingPluginSecretOptionsForm.tsx
+msgid "Confirmation notification template"
+msgstr ""
+
 #: src/customer/team/PendingReviewDialog.tsx
 msgid "Confirming that data is correct"
 msgstr ""
