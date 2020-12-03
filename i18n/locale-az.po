@@ -438,7 +438,7 @@ msgstr "{resourceType} Xətalı vəziyyətdə silmək istədiyinizə əminsinizm
 
 #: src/resource/actions/action-utils-service.js
 msgid "Are you sure you want to delete a {resourceType}? {confirmTextSuffix}."
-msgstr "{resourceType} silmək istədiyinizə əminsinizmi? {TextSuffix təsdiq edin}."
+msgstr "{resourceType} silmək istədiyinizə əminsinizmi? {confirmTextSuffix}."
 
 #: src/providers/provider-list.js
 msgid "Are you sure you want to unlink provider and all related resources?"
