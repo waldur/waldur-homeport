@@ -96,6 +96,9 @@ export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
     { thumbnail },
   );
 
+export const updateOfferingAttributes = (offeringId, data) =>
+  post(`/marketplace-offerings/${offeringId}/update_attributes/`, data);
+
 export const uploadOfferingDocument = (
   offeringUrl: string,
   document: OfferingDocument,

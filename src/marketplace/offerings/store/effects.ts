@@ -142,7 +142,7 @@ function* updateOfferingState(action) {
       reason,
     );
     yield put(
-      updateEntity(constants.TABLE_NAME, offering.uuid, {
+      updateEntity(constants.OFFERING_TABLE_NAME, offering.uuid, {
         ...offering,
         state: response.state,
       }),

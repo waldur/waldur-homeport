@@ -2133,9 +2133,17 @@ msgstr ""
 msgid "Edit an availability"
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingActions.tsx
+msgid "Edit attributes"
+msgstr ""
+
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 msgid "Edit booking event"
+msgstr ""
+
+#: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
+msgid "Edit offering"
 msgstr ""
 
 #: src/customer/team/PendingReviewDialog.tsx
@@ -4294,6 +4302,7 @@ msgstr ""
 msgid "Offering has been created."
 msgstr ""
 
+#: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been updated."
 msgstr ""
@@ -7131,6 +7140,7 @@ msgstr ""
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/marketplace-checklist/UserChecklist.tsx
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
+#: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
 #: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
@@ -8440,6 +8450,10 @@ msgstr ""
 
 #: src/user/hooks/utils.ts
 msgid "Unable to update notification."
+msgstr ""
+
+#: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
+msgid "Unable to update offering"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
