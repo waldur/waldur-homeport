@@ -4,6 +4,7 @@ import { OfferingConfigurationDetails } from '@waldur/offering/OfferingConfigura
 import { OfferingConfigurationForm } from '@waldur/offering/OfferingConfigurationForm';
 
 import { OfferingPluginOptionsForm } from './OfferingPluginOptionsForm';
+import { OfferingPluginSecretOptionsForm } from './OfferingPluginSecretOptionsForm';
 import { serializer } from './serializer';
 
 registerOfferingType({
@@ -14,6 +15,7 @@ registerOfferingType({
   component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
   pluginOptionsForm: OfferingPluginOptionsForm,
+  secretOptionsForm: OfferingPluginSecretOptionsForm,
   serializer,
   showOptions: true,
   showComponents: true,
@@ -27,6 +29,7 @@ registerOfferingType({
   component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
   pluginOptionsForm: OfferingPluginOptionsForm,
+  secretOptionsForm: OfferingPluginSecretOptionsForm,
   serializer,
   showOptions: true,
   showComponents: true,
