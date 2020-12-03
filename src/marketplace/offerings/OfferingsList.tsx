@@ -10,7 +10,7 @@ import { withTranslation } from '@waldur/i18n';
 import { SUPPORT_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/customers/constants';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/customers/OfferingsListExpandableRow';
 import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
-import { TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
+import { OFFERING_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
@@ -70,7 +70,7 @@ export const TableComponent = (props) => {
       render: ({ row }) => {
         return (
           <ButtonGroup>
-            <OfferingActions row={row} />
+            <OfferingActions offering={row} />
             <PreviewOfferingButton offering={row} />
           </ButtonGroup>
         );
@@ -112,7 +112,7 @@ const mapPropsToFilter = (props) => {
 };
 
 export const TableOptions = {
-  table: TABLE_NAME,
+  table: OFFERING_TABLE_NAME,
   fetchData: createFetcher('marketplace-offerings'),
   mapPropsToFilter,
   exportRow: (row: Offering) => [

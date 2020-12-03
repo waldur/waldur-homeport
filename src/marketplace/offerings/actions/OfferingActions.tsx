@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { SetLocationDialog } from '@waldur/map/SetLocationDialog';
 import { RequestActionDialog } from '@waldur/marketplace/offerings/actions/RequestActionDialog';
+import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
@@ -13,34 +15,39 @@ import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
 
 import { ActionsDropdown } from './ActionsDropdown';
 import { PauseOfferingDialog } from './PauseOfferingDialog';
+import { UpdateOfferingAttributesDialog } from './UpdateOfferingAttributesDialog';
+
+interface OwnProps {
+  offering: Offering;
+}
 
 const mapStateToProps = (state: OuterState) => ({
   user: getUser(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  updateOfferingState: (offering, stateAction, reason?) => {
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateOfferingState: (offering: Offering, stateAction, reason?) => {
     dispatch(updateOfferingState(offering, stateAction, reason));
   },
-  pauseOffering: (offering) =>
+  pauseOffering: (offering: Offering) =>
     dispatch(
       openModalDialog(PauseOfferingDialog, {
         resolve: { offering },
       }),
     ),
-  requestPublishing: (offering) =>
+  requestPublishing: (offering: Offering) =>
     dispatch(
       openModalDialog(RequestActionDialog, {
         resolve: { offering, offeringRequestMode: 'publishing' },
       }),
     ),
-  requestEditing: (offering) =>
+  requestEditing: (offering: Offering) =>
     dispatch(
       openModalDialog(RequestActionDialog, {
         resolve: { offering, offeringRequestMode: 'editing' },
       }),
     ),
-  setLocation: (offering) =>
+  setLocation: (offering: Offering) =>
     dispatch(
       openModalDialog(SetLocationDialog, {
         resolve: {
@@ -51,80 +58,96 @@ const mapDispatchToProps = (dispatch) => ({
         size: 'lg',
       }),
     ),
+  updateAttributes: (offering: Offering) =>
+    dispatch(
+      openModalDialog(UpdateOfferingAttributesDialog, {
+        resolve: {
+          offering,
+        },
+        size: 'lg',
+      }),
+    ),
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+const mergeProps = (
+  stateProps: ReturnType<typeof mapStateToProps>,
+  dispatchProps: ReturnType<typeof mapDispatchToProps>,
+  ownProps: OwnProps,
+) => ({
   actions: [
     {
       label: translate('Activate'),
       handler: () => {
-        dispatchProps.updateOfferingState(ownProps.row, 'activate');
+        dispatchProps.updateOfferingState(ownProps.offering, 'activate');
       },
       visible:
-        [DRAFT, PAUSED].includes(ownProps.row.state) &&
+        [DRAFT, PAUSED].includes(ownProps.offering.state) &&
         stateProps.user.is_staff,
     },
     {
       label: translate('Pause'),
-      handler: () => dispatchProps.pauseOffering(ownProps.row),
-      visible: ownProps.row.state === ACTIVE,
+      handler: () => dispatchProps.pauseOffering(ownProps.offering),
+      visible: ownProps.offering.state === ACTIVE,
     },
     {
       label: translate('Archive'),
       handler: () => {
-        dispatchProps.updateOfferingState(ownProps.row, 'archive');
+        dispatchProps.updateOfferingState(ownProps.offering, 'archive');
       },
-      visible: ownProps.row.state !== ARCHIVED,
+      visible: ownProps.offering.state !== ARCHIVED,
     },
     {
       label: translate('Set to draft'),
       handler: () => {
-        dispatchProps.updateOfferingState(ownProps.row, 'draft');
+        dispatchProps.updateOfferingState(ownProps.offering, 'draft');
       },
-      visible:
-        ![DRAFT].includes(ownProps.row.state) && stateProps.user.is_staff,
+      visible: ownProps.offering.state !== DRAFT && stateProps.user.is_staff,
     },
     {
       label: translate('Edit'),
       handler: () =>
         $state.go('marketplace-offering-update', {
-          offering_uuid: ownProps.row.uuid,
+          offering_uuid: ownProps.offering.uuid,
         }),
       visible:
-        ownProps.row.state !== ARCHIVED &&
-        (ownProps.row.state === DRAFT || stateProps.user.is_staff),
+        ownProps.offering.state !== ARCHIVED &&
+        (ownProps.offering.state === DRAFT || stateProps.user.is_staff),
+    },
+    {
+      label: translate('Edit attributes'),
+      handler: () => dispatchProps.updateAttributes(ownProps.offering),
+      visible: ownProps.offering.state !== ARCHIVED && ownProps.offering.shared,
     },
     {
       label: translate('Screenshots'),
       handler: () =>
         $state.go('marketplace-offering-screenshots', {
-          offering_uuid: ownProps.row.uuid,
+          offering_uuid: ownProps.offering.uuid,
         }),
       visible:
-        ownProps.row.state !== ARCHIVED &&
-        (ownProps.row.state === DRAFT || stateProps.user.is_staff),
+        ownProps.offering.state !== ARCHIVED &&
+        (ownProps.offering.state === DRAFT || stateProps.user.is_staff),
     },
     {
       label: translate('Request publishing'),
-      handler: () => dispatchProps.requestPublishing(ownProps.row),
+      handler: () => dispatchProps.requestPublishing(ownProps.offering),
       visible:
-        [DRAFT].includes(ownProps.row.state) &&
-        (!stateProps.user.is_staff || stateProps.user.is_owner),
+        [DRAFT].includes(ownProps.offering.state) && !stateProps.user.is_staff,
     },
     {
       label: translate('Request editing'),
-      handler: () => dispatchProps.requestEditing(ownProps.row),
+      handler: () => dispatchProps.requestEditing(ownProps.offering),
       visible:
-        [ACTIVE, PAUSED].includes(ownProps.row.state) &&
-        (!stateProps.user.is_staff || stateProps.user.is_owner),
+        [ACTIVE, PAUSED].includes(ownProps.offering.state) &&
+        !stateProps.user.is_staff,
     },
     {
       label: translate('Set location'),
-      handler: () => dispatchProps.setLocation(ownProps.row),
-      visible: false,
-      // ![DRAFT].includes(ownProps.row.state) && stateProps.user.is_staff,
+      handler: () => dispatchProps.setLocation(ownProps.offering),
+      visible:
+        ![DRAFT].includes(ownProps.offering.state) && stateProps.user.is_staff,
     },
-  ].filter((row) => row.visible),
+  ].filter((offering) => offering.visible),
 });
 
 const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);

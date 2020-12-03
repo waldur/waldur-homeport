@@ -135,6 +135,11 @@ export const formatComponents = (components) =>
     limit_period: component.limit_period ? component.limit_period.value : null,
   }));
 
+export const formatSchedules = (schedules) =>
+  schedules.map(
+    pick(['start', 'end', 'title', 'allDay', 'extendedProps', 'id']),
+  );
+
 export const formatOfferingRequest = (
   request: OfferingFormData,
   components: OfferingComponent[],
@@ -162,9 +167,7 @@ export const formatOfferingRequest = (
   if (request.schedules) {
     result.attributes = {
       ...result.attributes,
-      schedules: request.schedules.map(
-        pick(['start', 'end', 'title', 'allDay', 'extendedProps', 'id']),
-      ),
+      schedules: formatSchedules(request.schedules),
     };
   }
 

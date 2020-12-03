@@ -10,10 +10,7 @@ interface ActionsDropdownProps {
 }
 
 export const ActionsDropdown = ({ actions }: ActionsDropdownProps) => (
-  <Dropdown
-    id="offering-actions"
-    className={actions.length === 0 ? 'disabled' : undefined}
-  >
+  <Dropdown id="offering-actions" disabled={actions.length === 0}>
     <DropdownToggle className="btn-sm">{translate('Actions')}</DropdownToggle>
     <DropdownMenu>
       {actions.map((action, index) => (

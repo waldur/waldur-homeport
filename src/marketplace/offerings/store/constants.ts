@@ -39,7 +39,7 @@ export const PAUSED = 'Paused';
 
 export const ARCHIVED = 'Archived';
 
-export const TABLE_NAME = 'marketplace-offerings';
+export const OFFERING_TABLE_NAME = 'marketplace-offerings';
 
 export const SCREENSHOTS_TABLE_NAME = 'marketplace-offering-screenshots';
 

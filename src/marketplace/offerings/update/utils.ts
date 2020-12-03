@@ -27,7 +27,7 @@ const parseOptions = (options: OfferingOptions) =>
         })
     : [];
 
-const parseAttributes = (category: Category, attributes) => {
+export const parseAttributes = (category: Category, attributes) => {
   const attributeMap = {};
   for (const section of category.sections) {
     for (const attr of section.attributes) {
