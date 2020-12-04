@@ -6,6 +6,7 @@ import { useAsync, useAsyncFn } from 'react-use';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
@@ -18,6 +19,11 @@ import {
   updateCustomerChecklists,
 } from './api';
 import { Category, Checklist } from './types';
+
+const formatRolesList = (roles) =>
+  roles.length === 0
+    ? 'N/A'
+    : roles.map((role) => translate(ENV.roles[role])).join(', ');
 
 export const ChecklistCustomer = () => {
   useTitle(translate('Checklists'));
@@ -104,6 +110,8 @@ export const ChecklistCustomer = () => {
               <tr>
                 <th>{translate('Category')}</th>
                 <th className="col-sm-2">{translate('Enabled')}</th>
+                <th className="col-sm-2">{translate('Organization roles')}</th>
+                <th className="col-sm-2">{translate('Project roles')}</th>
               </tr>
             </thead>
             <tbody>
@@ -136,6 +144,8 @@ export const ChecklistCustomer = () => {
                       </ToggleButton>
                     </ToggleButtonGroup>
                   </td>
+                  <td>{formatRolesList(checklist.customer_roles)}</td>
+                  <td>{formatRolesList(checklist.project_roles)}</td>
                 </tr>
               ))}
             </tbody>

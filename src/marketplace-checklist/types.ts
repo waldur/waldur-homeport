@@ -21,6 +21,8 @@ export interface Checklist {
   questions_count: number;
   category_uuid: string;
   checklists_count: number;
+  project_roles?: string[];
+  customer_roles?: string[];
 }
 
 export interface Answer {
