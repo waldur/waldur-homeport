@@ -4630,6 +4630,7 @@ msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/user/support/UserList.tsx
 msgid "Organization roles"
 msgstr ""
@@ -5418,6 +5419,7 @@ msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
+#: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
