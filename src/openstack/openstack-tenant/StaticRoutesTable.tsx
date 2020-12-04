@@ -7,7 +7,7 @@ import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
-import { validateIPv4, validatePrivateCIDR } from '../utils';
+import { validateIPv4 } from '../utils';
 
 export interface StaticRoute {
   destination: string;
@@ -22,15 +22,13 @@ const validateFixedIPs = (fixedIps) => (value) => {
 
 const ValidatedInputField = renderValidationWrapper(InputField);
 
-const destinationValidator = [required, validatePrivateCIDR];
-
 const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
   <tr>
     <td>
       <Field
         name={`${route}.destination`}
         component={ValidatedInputField}
-        validate={destinationValidator}
+        validate={required}
       />
     </td>
     <td>
