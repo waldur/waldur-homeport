@@ -1,4 +1,4 @@
-import { gettext } from '@waldur/i18n';
+import { gettext, translate } from '@waldur/i18n';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import { DEFAULT_EDIT_ACTION } from '@waldur/resource/actions/constants';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
@@ -26,6 +26,11 @@ ActionConfigurationRegistry.register('OpenStack.SecurityGroup', {
     },
     set_rules: {
       title: gettext('Set rules'),
+      getDialogTitle(resource) {
+        return translate('Set rules in {name} security group', {
+          name: resource.name.toUpperCase(),
+        });
+      },
       enabled: true,
       type: 'form',
       fields: {
