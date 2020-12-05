@@ -6815,6 +6815,10 @@ msgstr ""
 msgid "Set rules"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/module.ts
+msgid "Set rules in {name} security group"
+msgstr ""
+
 #: src/openstack/openstack-tenant/SetRoutersButton.tsx
 msgid "Set static routes"
 msgstr ""

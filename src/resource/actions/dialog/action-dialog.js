@@ -76,6 +76,9 @@ function ActionDialogController($scope, $q, $state, $rootScope) {
           $rootScope.$applyAsync();
         });
     },
+    get dialogTitle() {
+      return $scope.action.getDialogTitle($scope.resource);
+    },
     submitActive: function () {
       return (
         $scope.ActionForm.$dirty ||
