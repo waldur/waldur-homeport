@@ -601,11 +601,11 @@ msgid "Are you sure you want to cluster template? Note this will reset the node 
 msgstr ""
 
 #: src/resource/actions/action-utils-service.ts
-msgid "Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
+msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr ""
 
 #: src/resource/actions/action-utils-service.ts
-msgid "Are you sure you want to delete a {resourceType}?"
+msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileActions.tsx

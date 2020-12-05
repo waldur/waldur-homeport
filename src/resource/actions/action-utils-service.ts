@@ -85,15 +85,18 @@ const confirmAction = (model, name) => {
   const custom = ActionConfigurationRegistry.getActions(model.resource_type);
   const confirmTextSuffix = (custom && custom.delete_message) || '';
   if (name === 'destroy') {
-    const context = { resourceType: model.resource_type || 'resource' };
+    const context = {
+      name: model.name.toUpperCase(),
+      resourceType: model.resource_type || 'resource',
+    };
     let confirmText =
       model.state === 'Erred'
         ? translate(
-            'Are you sure you want to delete a {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. ',
+            'Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so. ',
             context,
           )
         : translate(
-            'Are you sure you want to delete a {resourceType}? ',
+            'Are you sure you want to delete a {name} {resourceType}? ',
             context,
           );
     if (confirmTextSuffix) {
