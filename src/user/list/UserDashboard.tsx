@@ -12,7 +12,7 @@ import * as actions from '@waldur/marketplace/landing/store/actions';
 import * as selectors from '@waldur/marketplace/landing/store/selectors';
 import { useTitle } from '@waldur/navigation/title';
 import { CategoriesList } from '@waldur/user/list/CategoriesList';
-import { ChecklistsList } from '@waldur/user/list/ChecklistsList';
+import { CategoryUserList } from '@waldur/user/list/CategoryUserList';
 
 import { CurrentUserEvents } from './CurrentUserEvents';
 import { CustomerPermissions } from './CustomerPermissions';
@@ -37,7 +37,7 @@ const UserDashboardContainer: React.FC = (props: any) => {
       {asyncState.value > 0 && (
         <>
           <Panel title={translate('Checklists')}>
-            <ChecklistsList />
+            <CategoryUserList />
           </Panel>
           <Panel title={translate('Marketplace')}>
             <CategoriesList {...props.categories} />

@@ -3,14 +3,14 @@ import React from 'react';
 import { Link } from '@waldur/core/Link';
 
 interface OwnProps {
-  checklist_uuid: string;
+  category_uuid: string;
   className?: string;
 }
 
-export const ChecklistLink: React.FC<OwnProps> = (props) => (
+export const CategoryLink: React.FC<OwnProps> = (props) => (
   <Link
     state={'marketplace-checklist-user'}
-    params={{ category: props.checklist_uuid }}
+    params={{ category: props.category_uuid }}
     className={props.className}
   >
     {props.children}
