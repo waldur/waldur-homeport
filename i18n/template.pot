@@ -1905,6 +1905,10 @@ msgstr ""
 msgid "Destroy"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/DestroyAction.ts
+msgid "Destroy {name} instance"
+msgstr ""
+
 #: src/resource/state/constants.ts
 msgid "Destroying"
 msgstr ""
@@ -2623,6 +2627,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
 msgid "Force destroy"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+msgid "Force destroy {name} instance"
 msgstr ""
 
 #: src/freeipa/FreeIPAAccount.tsx

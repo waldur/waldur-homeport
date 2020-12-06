@@ -19,6 +19,11 @@ export default function createAction(): ResourceAction<OpenStackInstance> {
     method: 'DELETE',
     destructive: true,
     title: translate('Force destroy'),
+    getDialogTitle(resource) {
+      return translate('Force destroy {name} instance', {
+        name: resource.name,
+      });
+    },
     validators: [validate],
     fields: [
       {

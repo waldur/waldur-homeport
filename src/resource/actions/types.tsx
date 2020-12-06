@@ -67,6 +67,7 @@ export interface ResourceAction<Resource = BaseResource> {
   name: string;
   title: string;
   dialogTitle?: string;
+  getDialogTitle?(resource: Resource): string;
   dialogSubtitle?: string;
   tab?: string;
   iconClass?: string;
