@@ -5,11 +5,10 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate, withTranslation } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace-checklist/api';
-import { Checklist } from '@waldur/marketplace-checklist/types';
-import { ChecklistCard } from '@waldur/user/list/ChecklistCard';
+import { CategoryUserCard } from '@waldur/user/list/CategoryUserCard';
 
-export const ChecklistsList = withTranslation(() => {
-  const { loading, value: checklists, error } = useAsync(getCategories, []);
+export const CategoryUserList = withTranslation(() => {
+  const { loading, value: categories, error } = useAsync(getCategories, []);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -18,17 +17,17 @@ export const ChecklistsList = withTranslation(() => {
   if (error) {
     return (
       <h3 className="text-center">
-        {translate('Unable to load marketplace checklists.')}
+        {translate('Unable to load marketplace categories.')}
       </h3>
     );
   }
 
   return (
     <Row>
-      {checklists.map((checklist: Checklist, index: number) =>
-        checklist.checklists_count !== 0 ? (
+      {categories.map((category, index) =>
+        category.checklists_count !== 0 ? (
           <Col key={index} md={2} sm={6}>
-            <ChecklistCard checklist={checklist} />
+            <CategoryUserCard category={category} />
           </Col>
         ) : null,
       )}

@@ -3,6 +3,8 @@ import { GeolocationPoint } from '@waldur/map/types';
 export interface Category {
   name: string;
   uuid: string;
+  checklists_count: number;
+  icon: string;
 }
 
 export interface Question {
@@ -15,12 +17,11 @@ export interface Question {
 
 export interface Checklist {
   name: string;
-  icon: string;
   description: string;
   uuid: string;
   questions_count: number;
+  category_name: string;
   category_uuid: string;
-  checklists_count: number;
   project_roles?: string[];
   customer_roles?: string[];
 }
