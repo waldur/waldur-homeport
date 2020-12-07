@@ -31,7 +31,7 @@ function* redirectToDetailView(resource_type, resource_uuid) {
 function* handleSubmitUsage(action) {
   const { period, components } = action.payload;
   const payload = {
-    plan_period: period.value.uuid,
+    plan_period: period.value?.uuid,
     usages: Object.keys(components).map((key) => ({
       type: key,
       ...components[key],

@@ -29,7 +29,7 @@ export const ResourceUsageButton = ({ row }: Props) => {
   const body = (
     <div className={classNames('btn-group', { disabled })}>
       <ResourceShowUsageButton resource={row.uuid} />
-      {['OK', 'Updating'].includes(row.state) && (
+      {['OK', 'Updating'].includes(row.state) && row.plan && (
         <ResourceCreateUsageButton
           offering_uuid={row.offering_uuid}
           resource_uuid={row.uuid}
