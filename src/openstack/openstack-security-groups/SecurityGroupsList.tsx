@@ -24,6 +24,7 @@ const TableComponent = (props) => {
         {
           title: translate('Name'),
           render: ({ row }) => <ResourceName resource={row} />,
+          orderField: 'name',
         },
         {
           title: translate('Rule count'),
@@ -41,6 +42,8 @@ const TableComponent = (props) => {
         },
       ]}
       verboseName={translate('security groups')}
+      initialSorting={{ field: 'name', mode: 'asc' }}
+      showPageSizeSelector={true}
       actions={
         <NestedListActions resource={props.resource} tab="security_groups" />
       }
