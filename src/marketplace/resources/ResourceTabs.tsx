@@ -35,8 +35,10 @@ export const ResourceTabs = ({ resource }) => (
         </PanelBody>
       </Tab>
     )}
-    <Tab eventKey="usage" title={translate('Usage')}>
-      <ResourceUsageTabsContainer resource={resource} />
-    </Tab>
+    {resource.marketplace_resource_uuid && (
+      <Tab eventKey="usage" title={translate('Usage')}>
+        <ResourceUsageTabsContainer resource={resource} />
+      </Tab>
+    )}
   </Tabs>
 );
