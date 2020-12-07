@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps } from '@waldur/i18n/types';
 
 import './Table.scss';
@@ -71,14 +70,6 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
   }
 
   renderBody() {
-    if (
-      this.props.loading &&
-      this.props.sorting &&
-      !this.props.sorting.loading
-    ) {
-      return <LoadingSpinner />;
-    }
-
     if (this.props.error) {
       return (
         <div>
@@ -99,13 +90,6 @@ class Table<RowType = any> extends React.Component<TableProps<RowType>> {
 
     return (
       <>
-        {this.props.sorting && this.props.sorting.loading && (
-          <>
-            <div className="blocking-layer">
-              <LoadingSpinner />
-            </div>
-          </>
-        )}
         <table className="table table-striped dataTable">
           <TableHeader
             onSortClick={this.props.sortList}
