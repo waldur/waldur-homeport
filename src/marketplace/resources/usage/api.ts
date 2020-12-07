@@ -55,13 +55,13 @@ const getComponentUsages = (resource_uuid: string) =>
 
 export const getOfferingComponentsAndUsages = async ({
   offering_uuid,
-  resource_uuid,
+  marketplace_resource_uuid,
 }: OrderItemResponse) => {
   const offering = await getOffering(offering_uuid);
   const components = offering.components.filter(
     (component) => component.billing_type === 'usage',
   );
-  const usages = await getComponentUsages(resource_uuid);
+  const usages = await getComponentUsages(marketplace_resource_uuid);
   const colors = generateColors(components.length, {
     colorStart: 0.25,
     colorEnd: 0.65,
