@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { TableLoadingSpinnerContainer } from '@waldur/table/TableLoadingSpinnerContainer';
+
 import { TableExportButton } from './TableExportButton';
 import { TableRefreshButton } from './TableRefreshButton';
 
@@ -11,6 +13,7 @@ export const TableButtons = (props) => (
       )}
       {props.actions}
       <TableRefreshButton {...props} />
+      <TableLoadingSpinnerContainer {...props} />
     </div>
   </div>
 );
