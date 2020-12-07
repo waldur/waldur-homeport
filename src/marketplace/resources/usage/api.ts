@@ -1,10 +1,13 @@
 import moment from 'moment-timezone';
 
+import { getAll } from '@waldur/core/api';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { generateColors } from '@waldur/customer/divisions/utils';
 import {
   getOffering,
   getResourcePlanPeriods,
 } from '@waldur/marketplace/common/api';
+import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import { UsageReportContext, ResourcePlanPeriod } from './types';
 
@@ -44,5 +47,29 @@ export const getUsageComponents = async (params: UsageReportContext) => {
   return {
     components,
     periods: options,
+  };
+};
+
+const getComponentUsages = (resource_uuid: string) =>
+  getAll('/marketplace-component-usages/', { params: { resource_uuid } });
+
+export const getOfferingComponentsAndUsages = async ({
+  offering_uuid,
+  resource_uuid,
+}: OrderItemResponse) => {
+  const offering = await getOffering(offering_uuid);
+  const components = offering.components.filter(
+    (component) => component.billing_type === 'usage',
+  );
+  const usages = await getComponentUsages(resource_uuid);
+  const colors = generateColors(components.length, {
+    colorStart: 0.25,
+    colorEnd: 0.65,
+    useEndAsStart: true,
+  });
+  return {
+    components: components.sort((a, b) => a.name.localeCompare(b.name)),
+    usages,
+    colors,
   };
 };

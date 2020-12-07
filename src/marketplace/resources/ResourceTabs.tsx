@@ -5,6 +5,7 @@ import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
+import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/ResourceUsageTabsContainer';
 
 import { ResourceOrderItems } from '../orders/item/list/ResourceOrderItems';
 
@@ -34,5 +35,8 @@ export const ResourceTabs = ({ resource }) => (
         </PanelBody>
       </Tab>
     )}
+    <Tab eventKey="usage" title={translate('Usage')}>
+      <ResourceUsageTabsContainer resource={resource} />
+    </Tab>
   </Tabs>
 );
