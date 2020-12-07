@@ -16,25 +16,38 @@ interface OverviewTabProps {
   offering: Offering;
 }
 
-export const OverviewTab = (props: OverviewTabProps) => (
-  <Row>
-    <Col md={6}>
+export const OverviewTab = (props: OverviewTabProps) => {
+  const hasLocation = props.offering.latitude && props.offering.longitude;
+  const description = (
+    <>
       <h4>{translate('Offering details')}</h4>
       <FormattedHtml html={props.offering.full_description} />
-    </Col>
-    <Col md={6}>
-      {props.offering.vendor_details && (
-        <>
-          <div className="display-flex justify-content-between align-items-baseline m-b-sm">
-            <h4>{translate('Service provider details')}</h4>
-            <DemoButton />
-          </div>
-          <FormattedHtml html={props.offering.vendor_details} />
-        </>
-      )}
+    </>
+  );
 
-      {props.offering.latitude && props.offering.longitude ? (
-        <>
+  if (!hasLocation) {
+    return (
+      <Row>
+        <Col md={12}>{description}</Col>
+      </Row>
+    );
+  }
+
+  if (hasLocation) {
+    return (
+      <Row>
+        <Col md={6}>{description}</Col>
+        <Col md={6}>
+          {props.offering.vendor_details && (
+            <>
+              <div className="display-flex justify-content-between align-items-baseline m-b-sm">
+                <h4>{translate('Service provider details')}</h4>
+                <DemoButton />
+              </div>
+              <FormattedHtml html={props.offering.vendor_details} />
+            </>
+          )}
+
           <h4 className="header-bottom-border">
             {translate('Provider location')}
           </h4>
@@ -42,8 +55,10 @@ export const OverviewTab = (props: OverviewTabProps) => (
             latitude={props.offering.latitude}
             longitude={props.offering.longitude}
           />
-        </>
-      ) : null}
-    </Col>
-  </Row>
-);
+        </Col>
+      </Row>
+    );
+  }
+
+  return null;
+};
