@@ -1732,6 +1732,7 @@ msgstr ""
 #: src/dashboard/chart.ts
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
+#: src/marketplace/resources/usage/utils.ts
 #: src/paypal/PaymentsList.tsx
 msgid "Date"
 msgstr ""
@@ -1845,6 +1846,7 @@ msgstr ""
 #: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 #: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/marketplace/resources/usage/utils.ts
 #: src/offering/OfferingConfigurationForm.tsx
 #: src/offering/OfferingSummaryTab.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -3578,6 +3580,7 @@ msgid "Marketplace checkout"
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
+#: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 msgid "Marketplace offering does not have any usage-based components."
 msgstr ""
 
@@ -6379,6 +6382,7 @@ msgstr ""
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/customers/utils.ts
+#: src/marketplace/resources/usage/utils.ts
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
 msgid "Save"
@@ -8127,6 +8131,7 @@ msgid "Unable to load customer."
 msgstr ""
 
 #: src/customer/divisions/CustomersDivisionsChart.tsx
+#: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/slurm/details/AllocationUsageTable.tsx
@@ -8194,15 +8199,12 @@ msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
 #: src/user/list/CategoriesList.tsx
+#: src/user/list/CategoryUserList.tsx
 msgid "Unable to load marketplace categories."
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "Unable to load marketplace category details"
-msgstr ""
-
-#: src/user/list/ChecklistsList.tsx
-msgid "Unable to load marketplace checklists."
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
@@ -8698,6 +8700,7 @@ msgid "Uptime"
 msgstr ""
 
 #: src/dashboard/chart.ts
+#: src/marketplace/resources/ResourceTabs.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
@@ -9040,6 +9043,7 @@ msgstr ""
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/marketplace/resources/usage/utils.ts
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr ""
