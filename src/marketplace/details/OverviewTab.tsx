@@ -32,33 +32,28 @@ export const OverviewTab = (props: OverviewTabProps) => {
       </Row>
     );
   }
+  return (
+    <Row>
+      <Col md={6}>{description}</Col>
+      <Col md={6}>
+        {props.offering.vendor_details && (
+          <>
+            <div className="display-flex justify-content-between align-items-baseline m-b-sm">
+              <h4>{translate('Service provider details')}</h4>
+              <DemoButton />
+            </div>
+            <FormattedHtml html={props.offering.vendor_details} />
+          </>
+        )}
 
-  if (hasLocation) {
-    return (
-      <Row>
-        <Col md={6}>{description}</Col>
-        <Col md={6}>
-          {props.offering.vendor_details && (
-            <>
-              <div className="display-flex justify-content-between align-items-baseline m-b-sm">
-                <h4>{translate('Service provider details')}</h4>
-                <DemoButton />
-              </div>
-              <FormattedHtml html={props.offering.vendor_details} />
-            </>
-          )}
-
-          <h4 className="header-bottom-border">
-            {translate('Provider location')}
-          </h4>
-          <LeafletMap
-            latitude={props.offering.latitude}
-            longitude={props.offering.longitude}
-          />
-        </Col>
-      </Row>
-    );
-  }
-
-  return null;
+        <h4 className="header-bottom-border">
+          {translate('Provider location')}
+        </h4>
+        <LeafletMap
+          latitude={props.offering.latitude}
+          longitude={props.offering.longitude}
+        />
+      </Col>
+    </Row>
+  );
 };
