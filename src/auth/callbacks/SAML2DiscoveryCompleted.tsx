@@ -12,7 +12,7 @@ export const SAML2DiscoveryCompleted = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     const qs = Qs.parse(getQueryString());
-    dispatch(loginSaml2Action(qs.entityId));
+    dispatch(loginSaml2Action(qs.entityID));
   }, [dispatch]);
   return (
     <div className="middle-box text-center">
