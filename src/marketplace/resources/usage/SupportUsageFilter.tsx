@@ -41,7 +41,7 @@ const PureSupportUsageFilter = (props: Props) => (
     <ProjectFilter
       customer_uuid={props.customer ? props.customer.uuid : null}
     />
-    <OfferingAutocomplete />
+    <OfferingAutocomplete offeringFilter={{ shared: true }} />
   </Row>
 );
 
@@ -57,6 +57,12 @@ const mapStateToProps = createSelector(
   }),
 );
 
-const enhance = compose(reduxForm({ form: FORM_ID }), connect(mapStateToProps));
+const enhance = compose(
+  reduxForm({
+    form: FORM_ID,
+    initialValues: { accounting_period: makeAccountingPeriods()[0] },
+  }),
+  connect(mapStateToProps),
+);
 
 export const SupportUsageFilter = enhance(PureSupportUsageFilter);
