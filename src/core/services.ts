@@ -1,4 +1,6 @@
-export let ENV = null;
+import { ApplicationConfigurationOptions } from './types';
+
+export let ENV: ApplicationConfigurationOptions = null;
 export let $rootScope = null;
 export let $compile = null;
 export let $state = null;

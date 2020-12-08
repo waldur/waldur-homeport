@@ -57,7 +57,7 @@ export const useAuthFeatures = () => {
     [state.name, router.stateService, dispatch],
   );
 
-  const methods = React.useMemo(
+  const methods = React.useMemo<Record<string, boolean>>(
     () =>
       ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS.reduce((result, item) => {
         result[item] = true;
@@ -105,6 +105,11 @@ export const useAuthFeatures = () => {
     methods.SAML2 &&
     ENV.plugins.WALDUR_AUTH_SAML2.ALLOW_TO_SELECT_IDENTITY_PROVIDER;
 
+  const showSaml2Discovery =
+    methods.SAML2 &&
+    ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_URL &&
+    ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_LABEL;
+
   return {
     loading,
     mode: state.name,
@@ -119,6 +124,7 @@ export const useAuthFeatures = () => {
     valimo: showValimo,
     saml2: showSaml2,
     saml2providers: showSaml2Providers,
+    saml2discovery: showSaml2Discovery,
     keycloak: showKeycloak,
     eduteams: showEduteams,
   };

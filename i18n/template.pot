@@ -2884,6 +2884,10 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
+#: src/auth/callbacks/SAML2DiscoveryCompleted.tsx
+msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
+msgstr ""
+
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.ts
 #: src/digitalocean/digitalocean-droplet-config.ts

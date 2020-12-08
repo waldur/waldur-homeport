@@ -6,6 +6,7 @@ import React from 'react';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
+import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { UsersService } from '@waldur/user/UsersService';
 
@@ -30,7 +31,7 @@ export const OauthLoginCompleted = () => {
 
   React.useEffect(() => {
     async function fetchToken() {
-      const qs = Qs.parse(document.location.search.split('?', 2)[1]);
+      const qs = Qs.parse(getQueryString());
       const url = `${ENV.apiEndpoint}api-auth/${provider}/`;
       try {
         const response = await Axios.post(url, {

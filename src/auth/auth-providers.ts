@@ -1,3 +1,5 @@
+import Qs from 'qs';
+
 import { ENV } from '@waldur/core/services';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -92,6 +94,20 @@ export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
     iconClass: 'fa-globe',
     label: 'eduGAIN',
     onClick: (dispatch) => dispatch(openModalDialog(AuthSaml2Dialog)),
+  },
+  {
+    providerKey: 'saml2discovery',
+    btnClass: 'btn-saml2-edu',
+    iconClass: 'fa-globe',
+    label: ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_LABEL,
+    onClick: () => {
+      const discovery = ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_URL;
+      const params = {
+        entityID: `${ENV.plugins.WALDUR_AUTH_SAML2.base_url}/api-auth/saml2/metadata/`,
+        return: `${window.location.origin}/saml2_discovery_completed/`,
+      };
+      window.location.href = `${discovery}?${Qs.stringify(params)}`;
+    },
   },
   {
     providerKey: 'valimo',
