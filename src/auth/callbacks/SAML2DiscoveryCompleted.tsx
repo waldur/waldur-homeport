@@ -6,13 +6,13 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-import { loginSaml2 } from '../saml2/store/actions';
+import { loginSaml2Action } from '../saml2/store/actions';
 
 export const SAML2DiscoveryCompleted = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     const qs = Qs.parse(getQueryString());
-    dispatch(loginSaml2({ 'identity-provider': { url: qs.entityId } }));
+    dispatch(loginSaml2Action(qs.entityId));
   }, [dispatch]);
   return (
     <div className="middle-box text-center">
