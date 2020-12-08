@@ -6,6 +6,7 @@ import { useAsync } from 'react-use';
 import { deleteById, getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV, ngInjector } from '@waldur/core/services';
+import { OrganizationRemovalErrorDialog } from '@waldur/customer/details/OrganizationRemovalErrorDialog';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
@@ -54,7 +55,9 @@ export const CustomerRemovePanel = () => {
               'Organization contains invoices. Please remove them first.',
             )
           : '';
-        return dispatch(showError(notification));
+        return notification
+          ? dispatch(showError(notification))
+          : dispatch(openModalDialog(OrganizationRemovalErrorDialog));
       }
       return dispatch(
         openModalDialog(IssueCreateDialog, {
