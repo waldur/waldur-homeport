@@ -5,6 +5,7 @@ import { AuthLoginFailed } from './AuthLoginFailed';
 import { AuthLogoutCompleted } from './AuthLogoutCompleted';
 import { AuthLogoutFailed } from './AuthLogoutFailed';
 import { OauthLoginCompleted } from './OauthLoginCompleted';
+import { SAML2DiscoveryCompleted } from './SAML2DiscoveryCompleted';
 
 export const states: StateDeclaration[] = [
   {
@@ -21,6 +22,16 @@ export const states: StateDeclaration[] = [
     name: 'home.oauth_login_completed',
     url: '/oauth_login_completed/:provider/',
     component: OauthLoginCompleted,
+    data: {
+      anonymous: true,
+      bodyClass: 'old',
+    },
+  },
+
+  {
+    name: 'home.saml2_discovery_completed',
+    url: '/saml2_discovery_completed/',
+    component: SAML2DiscoveryCompleted,
     data: {
       anonymous: true,
       bodyClass: 'old',

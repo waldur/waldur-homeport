@@ -1,5 +1,7 @@
 import { StateDeclaration as BaseStateDeclaration } from '@uirouter/core';
 
+import { PluginConfiguration } from '@waldur/auth/types';
+
 interface DataDeclaration {
   /** @deprecated in favor of useTitle */
   pageTitle: string;
@@ -45,3 +47,7 @@ interface ComponentStateDeclaration extends DataStateDeclaration {
 export type StateDeclaration =
   | ComponentStateDeclaration
   | TemplateStateDeclaration;
+
+export interface ApplicationConfigurationOptions extends Record<string, any> {
+  plugins: PluginConfiguration;
+}
