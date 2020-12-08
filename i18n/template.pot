@@ -5865,6 +5865,10 @@ msgstr ""
 msgid "Removed organizations cannot be restored!"
 msgstr ""
 
+#: src/customer/details/OrganizationRemovalErrorDialog.tsx
+msgid "Removing organization {organizationName}"
+msgstr ""
+
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "Removing the organization will delete all related resources."
 msgstr ""
@@ -7478,6 +7482,10 @@ msgstr ""
 msgid "Text has been copied"
 msgstr ""
 
+#: src/customer/details/OrganizationRemovalErrorDialog.tsx
+msgid "Thank you"
+msgstr ""
+
 #: src/issues/feedback/SupportFeedback.tsx
 msgid "Thank you for your response!"
 msgstr ""
@@ -7729,6 +7737,10 @@ msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "To remove account, please send a request to {support}."
+msgstr ""
+
+#: src/customer/details/OrganizationRemovalErrorDialog.tsx
+msgid "To remove your organization, please send an email to"
 msgstr ""
 
 #: src/dashboard/ReportIssueAction.tsx
