@@ -6,15 +6,10 @@ import { post, getFirst } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
+import { wait } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { setCurrentUser } from '@waldur/workspace/actions';
-
-function delay(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
 
 export const UserEmailChangeCallback = () => {
   const dispatch = useDispatch();
@@ -48,7 +43,7 @@ export const UserEmailChangeCallback = () => {
 
       if (currentUser) {
         dispatch(setCurrentUser(currentUser));
-        await delay(1000);
+        await wait(1000);
       }
       dispatch(stateGo('profile.manage'));
     }

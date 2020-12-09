@@ -4,7 +4,7 @@ import { takeEvery } from 'redux-saga/effects';
 
 import { ENV } from '@waldur/core/services';
 
-const SET_TITLE = 'waldur/navigation/SET_TITLE';
+export const SET_TITLE = 'waldur/navigation/SET_TITLE';
 
 interface SetTitleAction {
   type: typeof SET_TITLE;

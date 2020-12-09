@@ -51,3 +51,6 @@ export type StateDeclaration =
 export interface ApplicationConfigurationOptions extends Record<string, any> {
   plugins: PluginConfiguration;
 }
+
+// Polyfill taken from https://stackoverflow.com/a/63984409
+export type Await<T> = T extends PromiseLike<infer U> ? U : T;
