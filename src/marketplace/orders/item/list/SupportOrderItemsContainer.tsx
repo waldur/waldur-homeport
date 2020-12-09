@@ -17,6 +17,7 @@ export const SupportOrderItemsContainer = () => {
         showOrganizationFilter={true}
         showProviderFilter={true}
         showOfferingFilter={true}
+        offeringFilter={{ shared: true }}
       />
       <SupportOrderItemsList />
     </Panel>

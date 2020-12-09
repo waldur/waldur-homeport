@@ -18,6 +18,7 @@ interface OwnProps {
   showOfferingFilter?: boolean;
   showOrganizationFilter?: boolean;
   showProviderFilter?: boolean;
+  offeringFilter?: object;
 }
 
 interface StateProps {
@@ -46,8 +47,8 @@ const filterSelector = createSelector(
   },
 );
 
-const mapStateToProps = (state) => ({
-  offeringFilter: filterSelector(state),
+const mapStateToProps = (state, ownProps) => ({
+  offeringFilter: { ...ownProps.offeringFilter, ...filterSelector(state) },
 });
 
 const enhance = compose(
