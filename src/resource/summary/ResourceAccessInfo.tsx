@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DownloadLink } from '@waldur/core/DownloadLink';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { TranslateProps } from '@waldur/i18n';

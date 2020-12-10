@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useEffectOnce } from 'react-use';
 
 import { $state } from '@waldur/core/services';
@@ -36,8 +36,8 @@ function loadUser() {
 }
 
 export const UserDetails = () => {
-  const [pageClass, setPageClass] = React.useState<string>();
-  const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState<boolean>();
+  const [pageClass, setPageClass] = useState<string>();
+  const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
   const { state, params } = useCurrentStateAndParams();
 
   function refreshState() {
@@ -49,7 +49,7 @@ export const UserDetails = () => {
   useEffectOnce(() => {
     loadUser();
   });
-  React.useEffect(refreshState, [state, params]);
+  useEffect(refreshState, [state, params]);
 
   return (
     <Layout

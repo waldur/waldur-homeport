@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 export interface ToggleOpenProps {
   isOpen: boolean;
@@ -6,7 +6,7 @@ export interface ToggleOpenProps {
 }
 
 export const toggleOpen = (OriginalComponent) =>
-  class ToggleOpen extends React.Component<any> {
+  class ToggleOpen extends Component<any> {
     state = { isOpen: false };
 
     handleToggleOpen = () => this.setState({ isOpen: !this.state.isOpen });

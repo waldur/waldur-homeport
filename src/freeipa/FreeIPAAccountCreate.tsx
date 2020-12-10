@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useCallback } from 'react';
 import { Col, FormGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm, change } from 'redux-form';
@@ -31,11 +31,11 @@ export const FreeIPAAccountCreate = reduxForm<
     const dispatch = useDispatch();
     const user = useSelector(getUser);
 
-    React.useEffect(() => {
+    useEffect(() => {
       dispatch(change(FORM_ID, 'username', user.username));
     }, [user, dispatch]);
 
-    const callback = React.useCallback(
+    const callback = useCallback(
       async (formData) => {
         try {
           await createProfile(formData.username, formData.agree_with_policy);

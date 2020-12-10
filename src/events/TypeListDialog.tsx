@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 

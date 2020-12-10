@@ -1,5 +1,3 @@
-import React from 'react';
-
 import * as ResourceSummaryRegistry from '@waldur/resource/summary/registry';
 
 import { ResourceSummaryBase } from './ResourceSummaryBase';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { translate } from '@waldur/i18n';
 import { OfferingPeriodsRenderer } from '@waldur/marketplace/details/OfferingPeriodsRenderer';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';

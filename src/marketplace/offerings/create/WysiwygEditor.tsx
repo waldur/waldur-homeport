@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useAsync } from 'react-use';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -35,15 +35,15 @@ const loadModule = () =>
   import(/* webpackChunkName: "draft-js" */ './draftjs-module');
 
 export const WysiwygEditor = (props) => {
-  const [editorState, setEditorState] = React.useState();
+  const [editorState, setEditorState] = useState();
 
-  const contentRef = React.useRef();
+  const contentRef = useRef();
 
   const { loading, error, value: moduleValue } = useAsync<DraftModule>(
     loadModule,
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!moduleValue) {
       return;
     }
@@ -59,7 +59,7 @@ export const WysiwygEditor = (props) => {
     }
   }, [moduleValue]);
 
-  const onEditorStateChange = React.useCallback(
+  const onEditorStateChange = useCallback(
     (editorState) => {
       const htmlValue = moduleValue.draftToHtml(
         moduleValue.convertToRaw(editorState.getCurrentContent()),

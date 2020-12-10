@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
 export const choices = [

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   Button,
   ButtonGroup,
@@ -33,12 +33,11 @@ export const OrganizationGroup = ({ onSearch }) => {
       }),
     );
   const filterByCustomer = () => onSearch({ customer });
-  const loadOptions = React.useCallback(
-    (name) => refreshCustomers(name, caller),
-    [caller],
-  );
+  const loadOptions = useCallback((name) => refreshCustomers(name, caller), [
+    caller,
+  ]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(change(ISSUE_REGISTRATION_FORM_ID, 'customer', undefined));
   }, [dispatch, caller]);
 

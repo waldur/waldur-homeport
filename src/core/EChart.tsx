@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { Component } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -12,7 +12,7 @@ interface ChartProps {
   options: any;
 }
 
-export class EChart extends React.Component<ChartProps> {
+export class EChart extends Component<ChartProps> {
   container = undefined;
   chart = undefined;
 

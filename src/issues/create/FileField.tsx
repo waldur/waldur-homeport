@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { formatFilesize } from '@waldur/core/utils';
@@ -19,7 +19,7 @@ const FileListComponent = ({ files }) =>
   ) : null;
 
 export const FileField = ({ input, disabled }) => {
-  const fileInput = React.useRef<HTMLInputElement>();
+  const fileInput = useRef<HTMLInputElement>();
   return (
     <div>
       <input

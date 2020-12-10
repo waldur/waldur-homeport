@@ -1,4 +1,3 @@
-import React from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';

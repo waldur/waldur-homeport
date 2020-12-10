@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { withTranslation } from '@waldur/i18n';
 import { Field, PureResourceSummaryBase } from '@waldur/resource/summary';
 

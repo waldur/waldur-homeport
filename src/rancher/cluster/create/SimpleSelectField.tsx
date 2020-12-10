@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FieldError } from '@waldur/form';
 import { SelectControl } from '@waldur/form/SelectControl';
 

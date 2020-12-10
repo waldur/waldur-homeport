@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useMemo, useCallback } from 'react';
 
 import { ngInjector } from '@waldur/core/services';
 
@@ -11,16 +11,16 @@ interface Language {
 export const useLanguageSelector = () => {
   const service = ngInjector.get('LanguageUtilsService');
 
-  const [currentLanguage, setCurrentLanguage] = React.useState<Language>(
+  const [currentLanguage, setCurrentLanguage] = useState<Language>(
     service.getCurrentLanguage(),
   );
 
-  const languageChoices = React.useMemo<Language[]>(
+  const languageChoices = useMemo<Language[]>(
     () => service.getChoices().sort((a, b) => a.code.localeCompare(b.code)),
     [],
   );
 
-  const setLanguage = React.useCallback((language: Language) => {
+  const setLanguage = useCallback((language: Language) => {
     setCurrentLanguage(language);
     service.setCurrentLanguage(language);
     setTimeout(() => {

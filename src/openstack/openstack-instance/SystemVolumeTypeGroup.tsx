@@ -1,4 +1,3 @@
-import React from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';

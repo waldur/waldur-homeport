@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TranslateProps } from '@waldur/i18n';
 import { formatTemplate } from '@waldur/i18n/translate';
 

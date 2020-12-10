@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ActionList } from '@waldur/dashboard/ActionList';
 import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';
 import { getSupportPortalAction } from '@waldur/dashboard/SupportPortalAction';

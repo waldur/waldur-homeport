@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { translate } from '@waldur/i18n';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 

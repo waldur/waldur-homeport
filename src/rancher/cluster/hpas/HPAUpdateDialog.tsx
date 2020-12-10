@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 import { reduxForm } from 'redux-form';
@@ -29,9 +29,9 @@ interface OwnProps {
 }
 
 const useHPAUpdateDialog = (originalHPA) => {
-  const [submitting, setSubmitting] = React.useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch();
-  const callback = React.useCallback(
+  const callback = useCallback(
     async (formData: HPAUpdateFormData) => {
       try {
         setSubmitting(true);
@@ -71,12 +71,9 @@ export const HPAUpdateDialog = reduxForm<HPAUpdateFormData, OwnProps>({
   const { hpa } = props.resolve;
   const { submitting, callback } = useHPAUpdateDialog(hpa);
 
-  const metricNameOptions = React.useMemo<MetricOption[]>(
-    getMetricNameOptions,
-    [],
-  );
+  const metricNameOptions = useMemo<MetricOption[]>(getMetricNameOptions, []);
 
-  const targetTypeOptions = React.useMemo(getTargetTypeOptions, []);
+  const targetTypeOptions = useMemo(getTargetTypeOptions, []);
 
   useEffectOnce(() => {
     const metric = hpa.metrics[0];

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';
 import { Attribute } from '@waldur/marketplace/types';
 

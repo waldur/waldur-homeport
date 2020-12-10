@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -31,9 +31,9 @@ export const ResourceDetailsContainer = () => {
 
   useRecursiveTimeout(refreshResource, ENV.resourcesTimerInterval * 1000);
 
-  const [resource, setResource] = React.useState<BaseResource>();
+  const [resource, setResource] = useState<BaseResource>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       asyncResult.value &&
       (!resource || resource.modified !== asyncResult.value.modified)
@@ -49,7 +49,7 @@ export const ResourceDetailsContainer = () => {
 
   useTitle(resource ? resource.name : translate('Resource details'));
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!asyncResult.error) {
       return;
     }

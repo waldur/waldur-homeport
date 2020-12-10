@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ArticleCodeField } from '../ArticleCodeField';
 import { DisplayNameField } from '../DisplayNameField';
 import { InternalNameField } from '../InternalNameField';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { createFilter } from 'react-select/dist/react-select.cjs.dev';
 import { compose } from 'redux';
@@ -12,7 +12,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { loginSaml2 } from './store/actions';
 
-class PureAuthSaml2Dialog extends React.Component<InjectedFormProps> {
+class PureAuthSaml2Dialog extends Component<InjectedFormProps> {
   constructor(props) {
     super(props);
     $rootScope.$broadcast('enableRequests');

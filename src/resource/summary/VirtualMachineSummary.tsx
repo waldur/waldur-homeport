@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatRelative } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation } from '@waldur/i18n';

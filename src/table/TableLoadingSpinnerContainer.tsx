@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './TableLoadingSpinner.scss';
 import { TableProps } from '@waldur/table/Table';
 

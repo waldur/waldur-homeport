@@ -1,4 +1,3 @@
-import React from 'react';
 import { Modal } from 'react-bootstrap';
 
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';

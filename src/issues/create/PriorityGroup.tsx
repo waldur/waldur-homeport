@@ -1,4 +1,3 @@
-import React from 'react';
 import { Col, ControlLabel, FormGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';

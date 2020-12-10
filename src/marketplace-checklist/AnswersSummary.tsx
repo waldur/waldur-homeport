@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { PieChart } from './PieChart';
 import { Question, Answers } from './types';
@@ -30,7 +30,7 @@ export const AnswersSummary = ({
   answers: Answers;
   questions: Question[];
 }) => {
-  const counters = React.useMemo(() => countStats(answers, questions), [
+  const counters = useMemo(() => countStats(answers, questions), [
     answers,
     questions,
   ]);

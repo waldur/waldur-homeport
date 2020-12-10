@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { withTranslation, Translate, TranslateProps } from '@waldur/i18n';
 import { ResourceState } from '@waldur/resource/types';
 

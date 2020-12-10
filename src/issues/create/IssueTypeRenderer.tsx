@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { IssueTypeOption } from './types';
 
 export const IssueTypeRenderer = (option: IssueTypeOption) => (

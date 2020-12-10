@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
 
@@ -15,9 +15,7 @@ export interface InternalListFieldProps
   configuration: ListConfiguration;
 }
 
-class PureInternalListFieldForm extends React.Component<
-  InternalListFieldProps
-> {
+class PureInternalListFieldForm extends Component<InternalListFieldProps> {
   render() {
     return (
       <div>

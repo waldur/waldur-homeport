@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector, change } from 'redux-form';
@@ -77,7 +77,7 @@ const createIssue = async (
 };
 
 export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () => ({ ...getDefaultOptions(), ...resolve.options }),
     [resolve.options],
   );
@@ -94,7 +94,7 @@ export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
 
   const templateState = useAsync(getTemplates);
 
-  const onCreateIssue = React.useCallback(
+  const onCreateIssue = useCallback(
     (formData) => createIssue(formData, resolve.issue, dispatch),
     [resolve.issue, dispatch],
   );
@@ -106,7 +106,7 @@ export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
     selector(state, 'template'),
   );
 
-  const filteredTemplates = React.useMemo(
+  const filteredTemplates = useMemo(
     () =>
       templateState.value && issueType
         ? templateState.value.filter(
@@ -116,7 +116,7 @@ export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
     [templateState.value, issueType],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (issueTemplate) {
       dispatch(change(ISSUE_CREATION_FORM_ID, 'summary', issueTemplate.name));
       dispatch(
@@ -129,7 +129,7 @@ export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
     }
   }, [issueTemplate, dispatch]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (filteredTemplates.length == 0 && issueTemplate) {
       dispatch(change(ISSUE_CREATION_FORM_ID, 'template', undefined));
       dispatch(change(ISSUE_CREATION_FORM_ID, 'summary', ''));

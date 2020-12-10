@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const AttachmentsList = ({ attachments }) => (
   <ul className="list-unstyled">
     {attachments.map((attachment, index) => (

@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import React from 'react';
+import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -13,7 +13,7 @@ export const CreateSecurityGroupButton = ({ tenantUUID }) => {
 
   const dispatch = useDispatch();
 
-  const gotoTenant = React.useCallback(async () => {
+  const gotoTenant = useCallback(async () => {
     try {
       await waitForConfirmation(
         dispatch,

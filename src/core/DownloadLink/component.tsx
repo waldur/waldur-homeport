@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { Component } from 'react';
 
 import { ExternalLinkProps } from '../ExternalLink';
 
@@ -13,7 +13,7 @@ interface DownloadLinkProps extends ExternalLinkProps {
   className?: string;
 }
 
-export class PureDownloadLink extends React.Component<DownloadLinkProps> {
+export class PureDownloadLink extends Component<DownloadLinkProps> {
   render() {
     const { label, loading, loaded, erred, onDownload } = this.props;
     return (

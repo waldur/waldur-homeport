@@ -1,4 +1,3 @@
-import React from 'react';
 import Gravatar from 'react-gravatar';
 
 import { Table, connectTable, createFetcher } from '@waldur/table';

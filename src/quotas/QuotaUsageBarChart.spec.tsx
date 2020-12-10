@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 
 import { quotas } from '@waldur/openstack/openstack-instance/storyFixtures';
 import {

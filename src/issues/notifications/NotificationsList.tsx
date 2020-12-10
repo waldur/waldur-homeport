@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';

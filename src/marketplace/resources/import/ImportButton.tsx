@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 
 import { translate } from '@waldur/i18n';
 

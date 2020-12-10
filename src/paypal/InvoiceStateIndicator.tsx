@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
 
 export type InvoiceStateType = 'DRAFT' | 'SENT' | 'CANCELLED' | 'PAID';

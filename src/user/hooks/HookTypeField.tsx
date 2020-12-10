@@ -1,10 +1,10 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
 export const HookTypeField = ({ input, defaultValue }) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () => [
       {
         key: 'email',

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';

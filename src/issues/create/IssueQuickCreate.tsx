@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useEffect } from 'react';
 import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
@@ -82,12 +82,11 @@ export const ProjectGroup = ({ disabled, customer }) => {
   const dispatch = useDispatch();
   const projectRequired = useSelector(projectRequiredSelector);
 
-  const loadOptions = React.useCallback(
-    (name) => refreshProjects(name, customer),
-    [customer],
-  );
+  const loadOptions = useCallback((name) => refreshProjects(name, customer), [
+    customer,
+  ]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(change(ISSUE_QUICK_CREATE_FORM_ID, 'project', undefined));
   }, [dispatch, customer]);
 
@@ -124,12 +123,11 @@ export const ProjectGroup = ({ disabled, customer }) => {
 
 export const ResourceGroup = ({ disabled, project }) => {
   const dispatch = useDispatch();
-  const loadData = React.useCallback(
-    (name) => refreshResources(name, project),
-    [project],
-  );
+  const loadData = useCallback((name) => refreshResources(name, project), [
+    project,
+  ]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(change(ISSUE_QUICK_CREATE_FORM_ID, 'resource', undefined));
   }, [dispatch, project]);
 
@@ -174,7 +172,7 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
 })(({ handleSubmit, submitting }) => {
   const dispatch = useDispatch();
 
-  const createIssue = React.useCallback(
+  const createIssue = useCallback(
     async (formData: IssueFormData) => {
       const payload: IssueRequestPayload = {
         type: formData.type.id,

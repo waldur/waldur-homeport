@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 
 import { OrganizationDetailsDialog } from '@waldur/customer/list/OrganizationDetailsDialog';

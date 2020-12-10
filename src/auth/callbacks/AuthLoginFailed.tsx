@@ -1,5 +1,4 @@
 import Qs from 'qs';
-import React from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { getQueryString } from '@waldur/core/utils';

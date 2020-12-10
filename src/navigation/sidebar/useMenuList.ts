@@ -4,13 +4,13 @@ import {
   useCurrentStateAndParams,
 } from '@uirouter/react';
 import classNames from 'classnames';
-import React from 'react';
+import { useState, useEffect } from 'react';
 
 import { MenuItemType } from './types';
 
 export const useMenuList = (items: MenuItemType[]) => {
-  const [expandedItem, setExpandedItem] = React.useState<MenuItemType>();
-  const [activeItem, setActiveItem] = React.useState<MenuItemType>();
+  const [expandedItem, setExpandedItem] = useState<MenuItemType>();
+  const [activeItem, setActiveItem] = useState<MenuItemType>();
   const router = useRouter();
 
   const { state } = useCurrentStateAndParams();
@@ -41,7 +41,7 @@ export const useMenuList = (items: MenuItemType[]) => {
     }
   };
 
-  React.useEffect(updateItems, [items]);
+  useEffect(updateItems, [items]);
   useOnStateChanged(() => updateItems());
 
   const getItemCss = (item: MenuItemType) =>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -14,14 +14,14 @@ export const ProjectRolesList = ({ roleName, row }) => {
     <>
       {filteredProjects.map((item, index) => {
         return (
-          <React.Fragment key={index}>
+          <Fragment key={index}>
             <Link
               state="project.details"
               params={{ uuid: item.uuid }}
               label={item.name}
             />
             {index === filteredProjects.length - 1 ? null : ', '}
-          </React.Fragment>
+          </Fragment>
         );
       })}
     </>

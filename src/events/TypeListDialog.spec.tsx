@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 
 import { eventGroups } from './fixtures';
 import { TypeListDialog } from './TypeListDialog';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormContainer, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 

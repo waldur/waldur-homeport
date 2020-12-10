@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { renderWrapper, ROW_UUID, COLUMNS } from './TableBody.fixture';
 
 const expandableRow = () => <h3>Detailed info</h3>;

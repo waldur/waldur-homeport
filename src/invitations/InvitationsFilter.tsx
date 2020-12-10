@@ -1,11 +1,11 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { ToogleButtonFilter } from '@waldur/table/ToggleButtonFilter';
 
 const PureInvitationsFilter = () => {
-  const choices = React.useMemo(
+  const choices = useMemo(
     () => [
       {
         label: translate('Requested'),

@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { FieldArray, reduxForm } from 'redux-form';

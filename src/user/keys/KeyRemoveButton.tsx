@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -35,7 +35,7 @@ interface KeyRemoveButtonState {
   removing: boolean;
 }
 
-class KeyRemoveButtonComponent extends React.Component<
+class KeyRemoveButtonComponent extends Component<
   OwnProps & DispatchProps & TranslateProps,
   KeyRemoveButtonState
 > {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { IssueAttachment } from './IssueAttachment';
 import { IssueAttachmentLoading } from './IssueAttachmentLoading';
 import './IssueAttachmentsList.scss';

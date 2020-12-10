@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactStars from 'react-rating-stars-component';
 
 import { Tooltip } from '@waldur/core/Tooltip';

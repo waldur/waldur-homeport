@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import { getLatinNameValidators } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';
@@ -8,9 +8,7 @@ import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
-export class AllocationForm extends React.Component<
-  OfferingConfigurationFormProps
-> {
+export class AllocationForm extends Component<OfferingConfigurationFormProps> {
   componentDidMount() {
     const { project, plan } = this.props;
     const initialData = { ...this.props.initialAttributes, project, plan };

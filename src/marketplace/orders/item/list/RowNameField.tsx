@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/OrderItemDetailsLink';
 
 export const RowNameField = ({ row }) => (

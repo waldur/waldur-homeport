@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -17,9 +17,9 @@ import { openModalDialog, closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 export const CustomerErrorDialog = ({ resolve }) => {
-  const [message, setMessage] = React.useState<string>();
+  const [message, setMessage] = useState<string>();
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     if (isFeatureVisible('support')) {
       dispatch(closeModalDialog());
       dispatch(

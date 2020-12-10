@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const RolesRenderer = ({ roles }) => (
   <>
     {roles.map((role, index) => (

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Tooltip } from '@waldur/core/Tooltip';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 

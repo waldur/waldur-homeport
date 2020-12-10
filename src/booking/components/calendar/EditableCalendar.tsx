@@ -1,5 +1,4 @@
 import type { EventInput } from '@fullcalendar/core';
-import React from 'react';
 
 import { Calendar } from './Calendar';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormField } from '@waldur/form/types';
 import { Choice } from '@waldur/marketplace/offerings/types';
 

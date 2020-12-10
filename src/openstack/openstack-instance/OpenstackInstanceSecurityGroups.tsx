@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Select from 'react-select';
@@ -31,7 +31,7 @@ interface DispatchProps {
   openSecurityGroupsDetailsDialog(securityGroups: SecurityGroup[]): void;
 }
 
-class OpenstackInstanceSecurityGroupsComponent extends React.Component<
+class OpenstackInstanceSecurityGroupsComponent extends Component<
   OwnProps & DispatchProps & TranslateProps
 > {
   openDetailsDialog = (e) => {

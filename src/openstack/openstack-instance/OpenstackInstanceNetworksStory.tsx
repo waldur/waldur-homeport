@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import { OpenstackInstanceNetworks } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
 import {
@@ -7,7 +7,7 @@ import {
 } from '@waldur/openstack/openstack-instance/storyFixtures';
 import { connectAngularComponent } from '@waldur/store/connect';
 
-export class OpenstackInstanceNetworksStory extends React.Component {
+export class OpenstackInstanceNetworksStory extends Component {
   state = {
     selectedValue: [],
   };

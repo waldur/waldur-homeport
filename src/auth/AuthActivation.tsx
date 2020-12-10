@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
@@ -16,7 +16,7 @@ export const AuthActivation = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const activateAccount = React.useCallback(async () => {
+  const activateAccount = useCallback(async () => {
     try {
       await AuthService.activate({
         user_uuid,

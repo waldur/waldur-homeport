@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useEffect } from 'react';
 import { Col, ControlLabel, FormGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
@@ -16,12 +16,11 @@ const filterOption = (options) => options;
 export const ResourceGroup = ({ disabled }) => {
   const dispatch = useDispatch();
   const project = useSelector(projectSelector);
-  const loadData = React.useCallback(
-    (name) => refreshResources(name, project),
-    [project],
-  );
+  const loadData = useCallback((name) => refreshResources(name, project), [
+    project,
+  ]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(change(ISSUE_REGISTRATION_FORM_ID, 'resource', undefined));
   }, [dispatch, project]);
 

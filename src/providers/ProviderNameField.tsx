@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StringField } from '@waldur/form';
 
 export const ProviderNameField = (props) => (

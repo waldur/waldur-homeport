@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { range } from '@waldur/core/utils';
 import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';
 import { COMPARISON_COLUMNS } from '@waldur/marketplace/compare/store/constants';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n/translate';
@@ -13,10 +13,10 @@ const openProjectDialog = (project: Project) =>
 
 export const ProjectDetailsButton = ({ project }: { project: Project }) => {
   const dispatch = useDispatch();
-  const callback = React.useCallback(
-    () => dispatch(openProjectDialog(project)),
-    [dispatch, project],
-  );
+  const callback = useCallback(() => dispatch(openProjectDialog(project)), [
+    dispatch,
+    project,
+  ]);
   return (
     <ActionButton
       title={translate('Details')}

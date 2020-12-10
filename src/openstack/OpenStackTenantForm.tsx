@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StringField, SecretField, FormContainer } from '@waldur/form';
 
 export const OpenStackTenantForm = ({ translate, container }) => (

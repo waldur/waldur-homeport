@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ENV } from '@waldur/core/services';
 import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
 import { OfferingGrid } from '@waldur/marketplace/common/OfferingGrid';

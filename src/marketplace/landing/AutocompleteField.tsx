@@ -1,4 +1,3 @@
-import React from 'react';
 import { components } from 'react-select';
 import { AsyncPaginate } from 'react-select-async-paginate';
 

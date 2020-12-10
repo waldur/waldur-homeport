@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
 
 export type PaymentStateType = 'Erred' | 'Approved' | 'Created' | 'Cancelled';

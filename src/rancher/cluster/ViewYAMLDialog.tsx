@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsync, useToggle } from 'react-use';
@@ -21,13 +21,13 @@ export const ViewYAMLDialog = reduxForm<
 
   const { loading, value } = useAsync(() => getYAML(resolve.resource.url));
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (value) {
       dispatch(change('ViewYAMLDialog', 'yaml', value.yaml));
     }
   }, [dispatch, value]);
 
-  const updateYAML = React.useCallback(
+  const updateYAML = useCallback(
     async (formData) => {
       try {
         await putYAML(resolve.resource.url, formData.yaml);

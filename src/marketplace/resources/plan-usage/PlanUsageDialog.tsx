@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatDate } from '@waldur/core/dateUtils';
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';

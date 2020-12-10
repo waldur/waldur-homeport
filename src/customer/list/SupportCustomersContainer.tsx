@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Panel } from '@waldur/core/Panel';
 import { SupportCustomerFilter } from '@waldur/customer/list/SupportCustomerFilter';
 import { SupportCustomerList } from '@waldur/customer/list/SupportCustomerList';

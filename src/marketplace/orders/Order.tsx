@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -20,7 +20,7 @@ interface OrderProps {
 
 export const Order = (props: OrderProps) => {
   const showPrice = useSelector(showPriceSelector);
-  const maxUnit = React.useMemo(() => getMaxUnit(props.items), [props.items]);
+  const maxUnit = useMemo(() => getMaxUnit(props.items), [props.items]);
   return (
     <>
       <div className="table-responsive order">

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import {
   ControlLabel,
   FormControl,
@@ -139,7 +139,7 @@ export const DropletResizeDialog = reduxForm<
       [resource],
     );
     const dispatch = useDispatch();
-    const resizeDroplet = React.useCallback(
+    const resizeDroplet = useCallback(
       async (formData: DropletResizeDialogFormData) => {
         const payload = {
           size: formData.flavor.value,

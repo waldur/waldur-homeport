@@ -1,6 +1,4 @@
 // This directive is based on code from https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
-import React from 'react';
-
 const getCoordinatesForPercent = (percent) => {
   const x = Math.cos(2 * Math.PI * percent);
   const y = Math.sin(2 * Math.PI * percent);

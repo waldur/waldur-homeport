@@ -1,4 +1,3 @@
-import React from 'react';
 import { Col, Panel } from 'react-bootstrap';
 import { WrappedFieldArrayProps } from 'redux-form';
 

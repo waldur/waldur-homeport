@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { cloneElement, PureComponent } from 'react';
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
 import { Tooltip } from '@waldur/core/Tooltip';
@@ -13,7 +13,7 @@ export interface FormGroupProps extends FormField {
   clearOnUnmount?: boolean;
 }
 
-export class FormGroup extends React.PureComponent<FormGroupProps> {
+export class FormGroup extends PureComponent<FormGroupProps> {
   render() {
     const {
       input,
@@ -64,7 +64,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
               : undefined
           }
         >
-          {React.cloneElement(children as any, newProps)}
+          {cloneElement(children as any, newProps)}
           {description && (
             <p className="help-block m-b-none text-muted">{description}</p>
           )}

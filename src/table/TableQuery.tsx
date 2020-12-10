@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce';
-import React from 'react';
+import { Component } from 'react';
 
 import { translate } from '@waldur/i18n';
 
@@ -14,7 +14,7 @@ interface State {
   query: string;
 }
 
-export class TableQuery extends React.Component<Props, State> {
+export class TableQuery extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = { query: props.query || '' };

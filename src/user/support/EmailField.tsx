@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -14,14 +14,14 @@ import { UserEmailChangeDialog } from './UserEmailChangeDialog';
 export const EmailField = (props) => {
   const [waiting, setWaiting] = useState(false);
   const dispatch = useDispatch();
-  const openChangeDialog = React.useCallback(() => {
+  const openChangeDialog = useCallback(() => {
     dispatch(
       openModalDialog(UserEmailChangeDialog, {
         resolve: { user: props.user },
       }),
     );
   }, [dispatch, props.user]);
-  const cancelRequest = React.useCallback(async () => {
+  const cancelRequest = useCallback(async () => {
     try {
       setWaiting(true);
       await post(`/users/${props.user.uuid}/cancel_change_email/`, {

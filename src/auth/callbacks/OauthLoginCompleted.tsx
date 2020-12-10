@@ -1,7 +1,7 @@
 import { useRouter, useCurrentStateAndParams } from '@uirouter/react';
 import Axios from 'axios';
 import Qs from 'qs';
-import React from 'react';
+import { useState, useEffect } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -27,9 +27,9 @@ export const OauthLoginCompleted = () => {
   const {
     params: { provider },
   } = useCurrentStateAndParams();
-  const [error, setError] = React.useState();
+  const [error, setError] = useState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetchToken() {
       const qs = Qs.parse(getQueryString());
       const url = `${ENV.apiEndpoint}api-auth/${provider}/`;

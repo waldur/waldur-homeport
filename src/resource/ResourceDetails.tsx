@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsButton';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
@@ -13,7 +13,7 @@ import { ResourceTabs } from './tabs/ResourceTabs';
 import { formatResourceType } from './utils';
 
 export const ResourceDetails = ({ resource, refreshResource }) => {
-  const header = React.useMemo(() => {
+  const header = useMemo(() => {
     const config = registry.get(resource.resource_type);
     if (config) {
       return config.getHeader(resource);

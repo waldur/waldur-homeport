@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 
 interface RemoveButtonProps extends TranslateProps {

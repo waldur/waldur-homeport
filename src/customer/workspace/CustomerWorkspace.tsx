@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -25,8 +25,8 @@ function getBreadcrumbs(customer): BreadcrumbItem[] {
 }
 
 export const CustomerWorkspace = () => {
-  const [pageClass, setPageClass] = React.useState<string>();
-  const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState<boolean>();
+  const [pageClass, setPageClass] = useState<string>();
+  const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
   const customer = useSelector(getCustomer);
   const { state, params } = useCurrentStateAndParams();
 
@@ -38,7 +38,7 @@ export const CustomerWorkspace = () => {
 
   useBreadcrumbsFn(() => getBreadcrumbs(customer), [customer]);
 
-  React.useEffect(refreshState, [state, params]);
+  useEffect(refreshState, [state, params]);
 
   return (
     <Layout

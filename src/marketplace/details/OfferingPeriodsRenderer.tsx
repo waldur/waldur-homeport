@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatShortDateTime } from '@waldur/core/dateUtils';
 
 export const OfferingPeriodsRenderer = ({ schedules }) => (

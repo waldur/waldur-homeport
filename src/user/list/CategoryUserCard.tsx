@@ -1,5 +1,3 @@
-import React from 'react';
-
 import '@waldur/marketplace/landing/CategoryCard.scss';
 import { Category } from '@waldur/marketplace-checklist/types';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';

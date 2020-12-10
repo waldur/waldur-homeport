@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';

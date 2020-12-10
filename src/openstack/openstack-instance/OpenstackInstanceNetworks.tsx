@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import Select from 'react-select';
 
@@ -32,7 +32,7 @@ export const getDefaultFloatingIps = () => [
   },
 ];
 
-export class OpenstackInstanceNetworks extends React.Component<
+export class OpenstackInstanceNetworks extends Component<
   OpenstackInstanceNetworksComponentProps
 > {
   addItem = () => {

@@ -1,5 +1,4 @@
 import moment from 'moment-timezone';
-import React from 'react';
 import { useAsync } from 'react-use';
 
 import { getList } from '@waldur/core/api';

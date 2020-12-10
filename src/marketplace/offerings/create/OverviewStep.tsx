@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { StringField, FormContainer, FileUploadField } from '@waldur/form';

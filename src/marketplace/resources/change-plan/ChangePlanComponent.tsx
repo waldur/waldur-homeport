@@ -1,4 +1,3 @@
-import React from 'react';
 import { Field } from 'redux-form';
 
 import { ChoicesTable } from '@waldur/form/ChoicesTable';

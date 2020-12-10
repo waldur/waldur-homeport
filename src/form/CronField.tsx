@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
 import { range } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -32,7 +32,7 @@ const CronSelectField = ({ options, value, onChange }) => {
 };
 
 const BaseFrequencyField = ({ value, onChange }) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () => [
       { label: translate('minute'), value: Frequency.MINUTE },
       { label: translate('hour'), value: Frequency.HOUR },
@@ -50,7 +50,7 @@ const BaseFrequencyField = ({ value, onChange }) => {
 };
 
 const DayField = ({ value, onChange }) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () =>
       range(7).map((value) => ({
         value,
@@ -64,7 +64,7 @@ const DayField = ({ value, onChange }) => {
 };
 
 const DayOfMonthField = ({ value, onChange }) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () =>
       range(31).map((value) => ({
         value: value + 1,
@@ -78,7 +78,7 @@ const DayOfMonthField = ({ value, onChange }) => {
 };
 
 const MonthField = ({ value, onChange }) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () =>
       range(12).map((value) => ({
         value: value + 1,
@@ -92,7 +92,7 @@ const MonthField = ({ value, onChange }) => {
 };
 
 const HourField = ({ value, onChange }) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () =>
       range(24).map((value) => ({
         value,
@@ -106,7 +106,7 @@ const HourField = ({ value, onChange }) => {
 };
 
 const MinuteField = ({ value, onChange }) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () =>
       range(12).map((value) => ({
         value: value * 5,
@@ -123,16 +123,16 @@ export const CronField = (props) => {
   const {
     input: { value, onChange },
   } = props;
-  const [baseValue, setBaseValue] = React.useState(() =>
+  const [baseValue, setBaseValue] = useState(() =>
     value ? parseCrontab(value).base : Frequency.MINUTE,
   );
-  const [dayValues, setDayValues] = React.useState();
-  const [dayOfMonthValues, setDayOfMonthValues] = React.useState();
-  const [monthValues, setMonthValues] = React.useState();
-  const [hourValues, setHourValues] = React.useState();
-  const [minuteValues, setMinuteValues] = React.useState();
+  const [dayValues, setDayValues] = useState();
+  const [dayOfMonthValues, setDayOfMonthValues] = useState();
+  const [monthValues, setMonthValues] = useState();
+  const [hourValues, setHourValues] = useState();
+  const [minuteValues, setMinuteValues] = useState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!value) {
       return;
     }
@@ -172,7 +172,7 @@ export const CronField = (props) => {
     }
   }, [value]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     onChange(
       serializeCron({
         base: baseValue,

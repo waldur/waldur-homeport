@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { translate } from '@waldur/i18n';
 import { ReferralsList } from '@waldur/marketplace/referral/ReferralsList';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';

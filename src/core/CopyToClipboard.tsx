@@ -1,5 +1,5 @@
 import copy from 'copy-to-clipboard';
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -8,7 +8,7 @@ import { showSuccess } from '@waldur/store/coreSaga';
 export const CopyToClipboard = ({ value }) => {
   const dispatch = useDispatch();
 
-  const onClick = React.useCallback(() => {
+  const onClick = useCallback(() => {
     copy(value);
     dispatch(showSuccess(translate('File has been copied')));
   }, [dispatch, value]);

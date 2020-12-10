@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -18,9 +18,9 @@ interface OwnProps {
 }
 
 const useCatalogDeleteDialog = (catalog) => {
-  const [submitting, setSubmitting] = React.useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch();
-  const callback = React.useCallback(async () => {
+  const callback = useCallback(async () => {
     try {
       setSubmitting(true);
       await deleteCatalog(catalog.uuid);

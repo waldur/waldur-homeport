@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/services';
@@ -12,7 +12,7 @@ import { InvoiceItemDetails } from './InvoiceItemDetails';
 import { getActiveFixedPricePaymentProfile, groupInvoiceItems } from './utils';
 
 export const InvoiceDetails = ({ invoice }: { invoice: Invoice }) => {
-  const projects = React.useMemo(() => groupInvoiceItems(invoice.items), [
+  const projects = useMemo(() => groupInvoiceItems(invoice.items), [
     invoice.items,
   ]);
   const customer = useSelector(getCustomer);

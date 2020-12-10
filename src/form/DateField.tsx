@@ -1,4 +1,3 @@
-import React from 'react';
 import DatePicker from 'react-16-bootstrap-date-picker';
 
 export const DateField = (props) => {

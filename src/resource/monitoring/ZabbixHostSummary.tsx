@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary/Field';
 import { ResourceSummaryBase } from '@waldur/resource/summary/ResourceSummaryBase';

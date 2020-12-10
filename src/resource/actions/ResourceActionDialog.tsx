@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm, initialize } from 'redux-form';
 
@@ -33,7 +33,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
 )(({ resolve: { action, resource }, handleSubmit, submitting, invalid }) => {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (action.getInitialValues) {
       const initialValues = action.getInitialValues();
       dispatch(initialize(RESOURCE_ACTION_FORM, initialValues));

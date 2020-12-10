@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { useMemo, useState } from 'react';
 import Select from 'react-select';
 
 import { translate } from '@waldur/i18n';
@@ -57,8 +57,8 @@ export const ResourceRow = ({
   plans,
   assignPlan,
 }) => {
-  const payload = React.useMemo(() => serializeResource(resource), [resource]);
-  const [expanded, setExpanded] = React.useState(false);
+  const payload = useMemo(() => serializeResource(resource), [resource]);
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <>

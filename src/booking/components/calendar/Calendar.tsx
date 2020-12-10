@@ -1,8 +1,8 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 
-const LazyCalendar = React.lazy(() =>
+const LazyCalendar = lazy(() =>
   import(/* webpackChunkName: "fullcalendar" */ './LazyCalendar').then(
     ({ LazyCalendar }) => ({
       default: LazyCalendar,
@@ -11,7 +11,7 @@ const LazyCalendar = React.lazy(() =>
 );
 
 export const Calendar = (props) => (
-  <React.Suspense fallback={<LoadingSpinner />}>
+  <Suspense fallback={<LoadingSpinner />}>
     <LazyCalendar {...props} />
-  </React.Suspense>
+  </Suspense>
 );

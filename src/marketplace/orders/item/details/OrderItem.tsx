@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';

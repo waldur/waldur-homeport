@@ -1,5 +1,5 @@
 import accepts from 'attr-accept';
-import React from 'react';
+import { Component } from 'react';
 
 import { FormField } from './types';
 
@@ -10,7 +10,7 @@ export interface FileUploadFieldProps extends FormField {
   className?: string;
 }
 
-export class FileUploadField extends React.Component<FileUploadFieldProps> {
+export class FileUploadField extends Component<FileUploadFieldProps> {
   private fileInput: HTMLInputElement;
 
   state = {

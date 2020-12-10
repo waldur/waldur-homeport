@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useBoolean, useAsyncFn } from 'react-use';
 
@@ -28,11 +28,11 @@ export const LinkInvoiceAction = (props: LinkInvoiceActionProps) => {
 
   const [open, onToggle] = useBoolean(false);
 
-  const loadInvoicesIfOpen = React.useCallback(() => {
+  const loadInvoicesIfOpen = useCallback(() => {
     open && getInvoices();
   }, [open, getInvoices]);
 
-  React.useEffect(loadInvoicesIfOpen, [open]);
+  useEffect(loadInvoicesIfOpen, [open]);
 
   const triggerAction = (selectedInvoice: Invoice) => {
     if (props.disabled) {

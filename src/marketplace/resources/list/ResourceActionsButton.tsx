@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceSummaryButton } from '@waldur/resource/summary/ResourceSummaryButton';
 

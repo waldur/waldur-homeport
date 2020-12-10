@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { translate } from '@waldur/i18n';
 import { ServiceProviderManagement } from '@waldur/marketplace/service-providers/ServiceProviderManagement';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { BreadcrumbItem } from './types';
@@ -35,7 +35,7 @@ export const getBreadcrumbs = (state) => state.breadcrumbs as BreadcrumbItem[];
 
 export const useBreadcrumbs = (items: BreadcrumbItem[]) => {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     if (items) {
       dispatch(setBreadcrumbs(items));
     }
@@ -43,6 +43,6 @@ export const useBreadcrumbs = (items: BreadcrumbItem[]) => {
 };
 
 export const useBreadcrumbsFn = (fn: () => BreadcrumbItem[], deps?) => {
-  const breadcrumbs = React.useMemo(fn, deps);
+  const breadcrumbs = useMemo(fn, deps);
   useBreadcrumbs(breadcrumbs);
 };

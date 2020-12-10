@@ -1,4 +1,3 @@
-import React from 'react';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';

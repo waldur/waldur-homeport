@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import React from 'react';
+import { useState } from 'react';
 import { Button, ButtonGroup, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -17,7 +17,7 @@ const BookingModal = ({
   event,
 }: BookingModalProps) => {
   const dispatch = useDispatch();
-  const [newEvent, setNewEvent] = React.useState({
+  const [newEvent, setNewEvent] = useState({
     title: event.title,
     start: event.start,
     end: event.end,

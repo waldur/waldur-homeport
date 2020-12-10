@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Link } from '@waldur/core/Link';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { Customer } from '@waldur/workspace/types';

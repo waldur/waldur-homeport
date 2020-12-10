@@ -1,4 +1,3 @@
-import React from 'react';
 import { Radio } from 'react-bootstrap';
 
 export const RadioField = ({

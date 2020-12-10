@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatDateTime, formatFromNow } from '@waldur/core/dateUtils';
 
 export const CreatedField = (props: { resource: { created?: string } }) =>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { Field, change, FormAction } from 'redux-form';

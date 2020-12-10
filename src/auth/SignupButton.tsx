@@ -1,5 +1,4 @@
 import { useRouter } from '@uirouter/react';
-import React from 'react';
 
 import { translate } from '@waldur/i18n';
 

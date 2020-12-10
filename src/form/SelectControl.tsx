@@ -1,4 +1,3 @@
-import React from 'react';
 import Select, { Props as SelectProps, OptionTypeBase } from 'react-select';
 
 export function SelectControl<

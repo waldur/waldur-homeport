@@ -1,4 +1,3 @@
-import React from 'react';
 import { Col, Panel, PanelGroup, Row } from 'react-bootstrap';
 import { useInterval } from 'react-use';
 

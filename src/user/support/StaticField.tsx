@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface StaticFieldProps {
   label: string;
   value: string;

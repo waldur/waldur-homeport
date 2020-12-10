@@ -1,4 +1,3 @@
-import React from 'react';
 import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import {

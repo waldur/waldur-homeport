@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getUUID } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';
 import { formatAllocationPool } from '@waldur/openstack/openstack-network/utils';

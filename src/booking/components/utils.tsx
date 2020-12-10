@@ -1,6 +1,5 @@
 import type { EventApi } from '@fullcalendar/core';
 import classNames from 'classnames';
-import React from 'react';
 import { OverlayTrigger, Tooltip as BootstrapTooltip } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 

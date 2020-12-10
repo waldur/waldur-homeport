@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 
 import { FormField } from './types';

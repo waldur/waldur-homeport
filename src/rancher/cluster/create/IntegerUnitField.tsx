@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FieldError } from '@waldur/form';
 
 export const IntegerUnitField = (props) => (

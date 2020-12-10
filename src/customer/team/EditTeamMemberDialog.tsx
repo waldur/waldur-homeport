@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -140,7 +140,7 @@ export const EditTeamMemberDialog = reduxForm<
 })(({ submitting, handleSubmit, resolve }) => {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(
       change(
         FORM_ID,
@@ -168,7 +168,7 @@ export const EditTeamMemberDialog = reduxForm<
     });
   }, [resolve.editUser, resolve.currentCustomer.projects, dispatch]);
 
-  const saveUser = React.useCallback(
+  const saveUser = useCallback(
     async (formData) => {
       try {
         await savePermissions(formData, resolve);
@@ -197,7 +197,7 @@ export const EditTeamMemberDialog = reduxForm<
       CustomersService.isOwner(resolve.currentCustomer, resolve.currentUser) &&
       ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS);
 
-  const projects = React.useMemo(
+  const projects = useMemo(
     () =>
       resolve.currentCustomer.projects.map((project) => {
         const permissionProject = resolve.editUser.projects.find(

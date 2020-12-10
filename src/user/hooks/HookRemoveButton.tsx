@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -36,7 +36,7 @@ interface HookRemoveButtonState {
   removing: boolean;
 }
 
-class HookRemoveButtonComponent extends React.Component<
+class HookRemoveButtonComponent extends Component<
   OwnProps & DispatchProps & TranslateProps,
   HookRemoveButtonState
 > {

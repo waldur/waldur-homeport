@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { formatCrontab } from '@waldur/resource/crontab';

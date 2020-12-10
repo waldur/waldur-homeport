@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { AsyncState } from 'react-use/lib/useAsync';
 import { compose } from 'redux';

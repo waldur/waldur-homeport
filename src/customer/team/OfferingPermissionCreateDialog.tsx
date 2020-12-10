@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -28,7 +28,7 @@ export const OfferingPermissionCreateDialog = reduxForm({
 })(({ submitting, handleSubmit }) => {
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
-  const saveUser = React.useCallback(
+  const saveUser = useCallback(
     async (formData) => {
       try {
         await grantPermission({

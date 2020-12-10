@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce';
-import React from 'react';
+import { Component } from 'react';
 
 import { TranslateProps } from '@waldur/i18n';
 
@@ -12,7 +12,7 @@ interface FilterBarState {
   filter: string;
 }
 
-export class FilterBar extends React.Component<FilterBarProps, FilterBarState> {
+export class FilterBar extends Component<FilterBarProps, FilterBarState> {
   constructor(props) {
     super(props);
     this.state = {

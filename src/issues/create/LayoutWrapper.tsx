@@ -1,4 +1,3 @@
-import React from 'react';
 import { Col, ControlLabel, FormGroup } from 'react-bootstrap';
 
 export const LayoutWrapper = ({ layout, header, body }) =>

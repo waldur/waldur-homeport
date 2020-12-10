@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from 'react-use';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FieldArray } from 'redux-form';
 
 import { ENV } from '@waldur/core/services';

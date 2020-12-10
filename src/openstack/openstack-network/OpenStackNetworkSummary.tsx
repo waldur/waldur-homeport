@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getUUID } from '@waldur/core/utils';
 import { withTranslation } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';

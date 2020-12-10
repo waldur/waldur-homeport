@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ENV } from '@waldur/core/services';
 
 import { DEFAULT_NODE_CONFIGURATION } from './constants';

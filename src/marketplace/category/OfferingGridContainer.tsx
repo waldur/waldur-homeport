@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce';
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 
@@ -48,7 +48,7 @@ interface OfferingGridWrapperProps {
   loadOfferings: () => void;
 }
 
-class OfferingGridWrapper extends React.Component<OfferingGridWrapperProps> {
+class OfferingGridWrapper extends Component<OfferingGridWrapperProps> {
   componentDidMount() {
     this.props.getCategories();
     this.props.loadCategories();

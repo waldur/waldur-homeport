@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 const TableComponent = (props) => {

@@ -1,9 +1,9 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 
 export const FitWorld = () => {
   const map = useMap();
-  React.useEffect(() => {
+  useEffect(() => {
     map.fitWorld();
   }, [map]);
   return null;

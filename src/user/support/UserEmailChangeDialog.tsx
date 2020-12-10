@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -13,7 +13,7 @@ export const UserEmailChangeDialog = ({ resolve: { user } }) => {
 
   const { handleSubmit, submitting, email, setEmail } = useEmailChange(user);
 
-  const handleClose = React.useCallback(() => {
+  const handleClose = useCallback(() => {
     dispatch(closeModalDialog());
   }, []);
 

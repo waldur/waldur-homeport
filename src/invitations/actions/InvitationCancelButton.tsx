@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -24,7 +24,7 @@ export const InvitationCancelButton = ({ invitation }) => {
     }
   };
 
-  const isDisabled = React.useMemo(() => {
+  const isDisabled = useMemo(() => {
     if (
       !InvitationPolicyService.canManageInvitation(
         { user, customer },
@@ -39,7 +39,7 @@ export const InvitationCancelButton = ({ invitation }) => {
     return false;
   }, [user, customer, invitation]);
 
-  const tooltip = React.useMemo(() => {
+  const tooltip = useMemo(() => {
     if (
       !InvitationPolicyService.canManageInvitation(
         { user, customer },

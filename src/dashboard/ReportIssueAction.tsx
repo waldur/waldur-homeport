@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { MessageDialog } from '@waldur/core/MessageDialog';
 import { ENV, ngInjector } from '@waldur/core/services';

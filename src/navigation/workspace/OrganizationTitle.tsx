@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Tooltip } from '@waldur/core/Tooltip';
 
 import { ServiceProviderIcon } from './ServiceProviderIcon';

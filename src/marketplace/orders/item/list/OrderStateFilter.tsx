@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { compose } from 'redux';
@@ -16,7 +16,7 @@ interface StateProps {
 }
 
 type Props = StateProps;
-class PureOrderStateFilter extends React.Component<Props> {
+class PureOrderStateFilter extends Component<Props> {
   render() {
     return (
       <div className="form-group col-sm-3">

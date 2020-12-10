@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { CUSTOMERS_LIST_FILTER } from '@waldur/marketplace/offerings/customers/constants';
 import { CustomersList } from '@waldur/marketplace/offerings/customers/CustomersList';
@@ -6,7 +6,7 @@ import { CustomersListFilter } from '@waldur/marketplace/offerings/customers/Cus
 import { OfferingCostsChart } from '@waldur/marketplace/offerings/customers/OfferingCostsChart';
 
 export const OfferingsListExpandableRow = ({ row }) => {
-  const [uniqueFormId] = React.useState(`${CUSTOMERS_LIST_FILTER}-${row.uuid}`);
+  const [uniqueFormId] = useState(`${CUSTOMERS_LIST_FILTER}-${row.uuid}`);
   return (
     <>
       <CustomersListFilter uniqueFormId={uniqueFormId} />

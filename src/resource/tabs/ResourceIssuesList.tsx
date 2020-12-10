@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { IssuesList } from '@waldur/issues/list/IssuesList';
 
 export const ResourceIssuesList = (props) => (

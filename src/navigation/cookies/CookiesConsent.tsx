@@ -1,10 +1,10 @@
-import React from 'react';
+import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
 export const CookiesConsent = () => {
-  const [accepted, setAccepted] = React.useState(
+  const [accepted, setAccepted] = useState(
     localStorage['hideCookiesConsent'] === 'true',
   );
 

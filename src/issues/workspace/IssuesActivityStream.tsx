@@ -1,4 +1,3 @@
-import React from 'react';
 import Gravatar from 'react-gravatar';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';

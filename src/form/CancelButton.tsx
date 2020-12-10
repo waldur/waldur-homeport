@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface CancelButtonProps {
   disabled?: boolean;
   label: string;

@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
+import { useEffect } from 'react';
 import { useAsyncFn } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -87,7 +87,7 @@ export const OfferingDetails = () => {
 
   const router = useRouter();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!offeringUuid) {
       router.stateService.go('errorPage.notFound');
     } else {
@@ -95,7 +95,7 @@ export const OfferingDetails = () => {
     }
   }, [offeringUuid, router.stateService, reInitResource]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if ((error as any)?.status === 404) {
       router.stateService.go('errorPage.notFound');
     }

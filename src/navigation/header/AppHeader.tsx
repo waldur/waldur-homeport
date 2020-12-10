@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navbar, Row } from 'react-bootstrap';
 
 import { LanguageSelector } from '@waldur/i18n/LanguageSelector';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormField } from './types';
 
 interface TextFieldProps extends FormField {

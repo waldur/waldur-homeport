@@ -1,4 +1,3 @@
-import React from 'react';
 import Select from 'react-select';
 import { useAsync } from 'react-use';
 import { Field } from 'redux-form';

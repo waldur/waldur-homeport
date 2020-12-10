@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
+import { useMemo, useCallback } from 'react';
 import { Panel, PanelGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -50,7 +50,7 @@ export const TemplateDetail = () => {
     formValueSelector(FORM_ID)(state, 'project'),
   );
 
-  const namespaces = React.useMemo(() => project?.namespaces || [], [project]);
+  const namespaces = useMemo(() => project?.namespaces || [], [project]);
 
   const answers = useSelector((state) =>
     formValueSelector(FORM_ID)(state, 'answers'),
@@ -58,14 +58,14 @@ export const TemplateDetail = () => {
 
   const questions = state.value?.questions;
 
-  const visibleQuestions = React.useMemo(
+  const visibleQuestions = useMemo(
     () => parseVisibleQuestions(questions, answers),
     [questions, answers],
   );
 
   const dispatch = useDispatch();
 
-  const createApplication = React.useCallback(
+  const createApplication = useCallback(
     async (formData: FormData) => {
       try {
         await createApp(

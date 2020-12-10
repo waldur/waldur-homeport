@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { Tooltip } from '@waldur/core/Tooltip';

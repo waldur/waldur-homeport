@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
+import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -57,7 +57,7 @@ export const useAuthFeatures = () => {
     [state.name, router.stateService, dispatch],
   );
 
-  const methods = React.useMemo<Record<string, boolean>>(
+  const methods = useMemo<Record<string, boolean>>(
     () =>
       ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS.reduce((result, item) => {
         result[item] = true;

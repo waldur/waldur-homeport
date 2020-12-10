@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';

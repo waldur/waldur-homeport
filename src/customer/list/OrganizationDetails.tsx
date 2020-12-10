@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';

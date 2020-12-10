@@ -1,5 +1,4 @@
 import { useRouter } from '@uirouter/react';
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 

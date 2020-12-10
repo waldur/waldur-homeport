@@ -1,4 +1,3 @@
-import React from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 

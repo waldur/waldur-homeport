@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 
 import { translate } from '@waldur/i18n';
 import { ordinaryUser, staffUser } from '@waldur/user/support/fixtures';

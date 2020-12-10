@@ -1,5 +1,4 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
 import { useAsync } from 'react-use';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
