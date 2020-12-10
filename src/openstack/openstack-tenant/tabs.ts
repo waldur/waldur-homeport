@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { OpenStackResourceUsage } from '@waldur/openstack/OpenStackResourceUsage';
 import { QuotasTable } from '@waldur/quotas/QuotasTable';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
@@ -40,6 +41,11 @@ ResourceTabsConfiguration.register('OpenStack.Tenant', () => [
     key: 'quotas',
     title: translate('Quotas'),
     component: QuotasTable,
+  },
+  {
+    key: 'usage',
+    title: translate('Usage'),
+    component: OpenStackResourceUsage,
   },
   ...getDefaultResourceTabs(),
 ]);
