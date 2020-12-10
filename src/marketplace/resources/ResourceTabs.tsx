@@ -36,7 +36,10 @@ export const ResourceTabs = ({ resource }) => (
     )}
     {resource.marketplace_resource_uuid && (
       <Tab eventKey="usage" title={translate('Usage')}>
-        <ResourceUsageTabsContainer resource={resource} />
+        <ResourceUsageTabsContainer
+          offeringUuid={resource.offering_uuid}
+          marketplaceResourceUuid={resource.marketplace_resource_uuid}
+        />
       </Tab>
     )}
   </Tabs>

@@ -2,12 +2,10 @@ import moment from 'moment-timezone';
 
 import { getAll } from '@waldur/core/api';
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { generateColors } from '@waldur/customer/divisions/utils';
 import {
   getOffering,
   getResourcePlanPeriods,
 } from '@waldur/marketplace/common/api';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
 import { UsageReportContext, ResourcePlanPeriod } from './types';
 
@@ -53,23 +51,27 @@ export const getUsageComponents = async (params: UsageReportContext) => {
 const getComponentUsages = (resource_uuid: string) =>
   getAll('/marketplace-component-usages/', { params: { resource_uuid } });
 
-export const getOfferingComponentsAndUsages = async ({
-  offering_uuid,
-  marketplace_resource_uuid,
-}: OrderItemResponse) => {
+const getUsageBasedOfferingComponents = async (offering_uuid: string) => {
+  if (!offering_uuid) {
+    return null;
+  }
   const offering = await getOffering(offering_uuid);
   const components = offering.components.filter(
     (component) => component.billing_type === 'usage',
   );
-  const usages = await getComponentUsages(marketplace_resource_uuid);
-  const colors = generateColors(components.length, {
-    colorStart: 0.25,
-    colorEnd: 0.65,
-    useEndAsStart: true,
-  });
-  return {
-    components: components.sort((a, b) => a.name.localeCompare(b.name)),
-    usages,
-    colors,
-  };
+  return components.sort((a, b) => a.name.localeCompare(b.name));
+};
+
+const getUsages = async (marketplace_resource_uuid: string) =>
+  marketplace_resource_uuid
+    ? await getComponentUsages(marketplace_resource_uuid)
+    : null;
+
+export const getComponentsAndUsages = async (
+  offering_uuid: string,
+  marketplace_resource_uuid: string,
+) => {
+  const components = await getUsageBasedOfferingComponents(offering_uuid);
+  const usages = await getUsages(marketplace_resource_uuid);
+  return { components, usages };
 };
