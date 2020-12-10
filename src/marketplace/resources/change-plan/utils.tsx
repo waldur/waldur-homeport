@@ -6,11 +6,12 @@ import {
 import { translate } from '@waldur/i18n';
 import { getOffering, getResource } from '@waldur/marketplace/common/api';
 import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Offering, Plan } from '@waldur/marketplace/types';
 
+import { Resource } from '../types';
+
 export interface FetchedData {
-  resource: OrderItemResponse;
+  resource: Resource;
   offering: Offering;
   columns: SelectDialogFieldColumn[];
   choices: SelectDialogFieldChoice[];
@@ -61,7 +62,7 @@ const getPlanSwitchPrice = (plan: Plan) => {
 
 const getChoices = (
   offering: Offering,
-  resource: OrderItemResponse,
+  resource: Resource,
 ): SelectDialogFieldChoice[] =>
   sortPlans(offering.plans).map((plan) => ({
     url: plan.url,

@@ -9,16 +9,16 @@ import { getComponentsAndUsages } from './api';
 
 interface ResourceUsageTabsContainerProps {
   offeringUuid: string;
-  marketplaceResourceUuid: string;
+  resourceUuid: string;
 }
 
 export const ResourceUsageTabsContainer = ({
   offeringUuid,
-  marketplaceResourceUuid,
+  resourceUuid,
 }: ResourceUsageTabsContainerProps) => {
   const { loading, error, value } = useAsync(
-    () => getComponentsAndUsages(offeringUuid, marketplaceResourceUuid),
-    [offeringUuid, marketplaceResourceUuid],
+    () => getComponentsAndUsages(offeringUuid, resourceUuid),
+    [offeringUuid, resourceUuid],
   );
   return loading ? (
     <LoadingSpinner />

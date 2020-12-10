@@ -10,14 +10,14 @@ import { useTitle } from '@waldur/navigation/title';
 import { Customer } from '@waldur/workspace/types';
 
 import { getResource } from '../common/api';
-import { OrderItemResponse } from '../orders/types';
 
 import { ResourceSummary } from './ResourceSummary';
 import { ResourceTabs } from './ResourceTabs';
+import { Resource } from './types';
 
 interface GetBreadcrumbsProps {
   customer: Customer;
-  resource: OrderItemResponse;
+  resource: Resource;
 }
 
 const getBreadcrumbs = ({

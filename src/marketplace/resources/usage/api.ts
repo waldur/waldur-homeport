@@ -62,16 +62,14 @@ const getUsageBasedOfferingComponents = async (offering_uuid: string) => {
   return components.sort((a, b) => a.name.localeCompare(b.name));
 };
 
-const getUsages = async (marketplace_resource_uuid: string) =>
-  marketplace_resource_uuid
-    ? await getComponentUsages(marketplace_resource_uuid)
-    : null;
+const getUsages = async (resource_uuid: string) =>
+  resource_uuid ? await getComponentUsages(resource_uuid) : null;
 
 export const getComponentsAndUsages = async (
   offering_uuid: string,
-  marketplace_resource_uuid: string,
+  resource_uuid: string,
 ) => {
   const components = await getUsageBasedOfferingComponents(offering_uuid);
-  const usages = await getUsages(marketplace_resource_uuid);
+  const usages = await getUsages(resource_uuid);
   return { components, usages };
 };

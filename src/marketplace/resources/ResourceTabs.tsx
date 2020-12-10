@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
@@ -8,7 +9,9 @@ import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/
 
 import { ResourceOrderItems } from '../orders/item/list/ResourceOrderItems';
 
-export const ResourceTabs = ({ resource }) => (
+import { Resource } from './types';
+
+export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => (
   <Tabs
     defaultActiveKey="orderItems"
     id="resource-details"
@@ -34,11 +37,11 @@ export const ResourceTabs = ({ resource }) => (
         </PanelBody>
       </Tab>
     )}
-    {resource.marketplace_resource_uuid && (
+    {resource.is_usage_based && (
       <Tab eventKey="usage" title={translate('Usage')}>
         <ResourceUsageTabsContainer
           offeringUuid={resource.offering_uuid}
-          marketplaceResourceUuid={resource.marketplace_resource_uuid}
+          resourceUuid={resource.uuid}
         />
       </Tab>
     )}

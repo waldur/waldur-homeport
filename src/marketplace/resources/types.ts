@@ -31,4 +31,8 @@ export interface Resource extends ResourceReference {
   customer_uuid?: string;
   is_usage_based?: boolean;
   backend_id?: string;
+  limits: Record<string, number>;
+  current_usages?: Record<string, number>;
+  plan_uuid?: string;
+  plan_name?: string;
 }

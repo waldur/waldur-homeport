@@ -12,11 +12,12 @@ import {
 } from '@waldur/marketplace/common/registry';
 import { parseOfferingLimits } from '@waldur/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@waldur/marketplace/offerings/store/types';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { Offering, Plan } from '@waldur/marketplace/types';
 
+import { Resource } from '../types';
+
 export interface FetchedData {
-  resource: OrderItemResponse;
+  resource: Resource;
   offering: Offering;
   plan: Plan;
   limitSerializer: LimitParser;
