@@ -1,57 +1,44 @@
-import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { generateColors } from '@waldur/customer/divisions/utils';
 import { translate } from '@waldur/i18n';
-import { OrderItemResponse } from '@waldur/marketplace/orders/types';
-import { ResourceUsageChart } from '@waldur/marketplace/resources/usage/ResourceUsageChart';
+import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
 
-import { getOfferingComponentsAndUsages } from './api';
+import { getComponentsAndUsages } from './api';
 
 interface ResourceUsageTabsContainerProps {
-  resource: OrderItemResponse;
+  offeringUuid: string;
+  marketplaceResourceUuid: string;
 }
 
 export const ResourceUsageTabsContainer = ({
-  resource,
+  offeringUuid,
+  marketplaceResourceUuid,
 }: ResourceUsageTabsContainerProps) => {
-  const { loading, error, value } = useAsync(() =>
-    getOfferingComponentsAndUsages(resource),
+  const { loading, error, value } = useAsync(
+    () => getComponentsAndUsages(offeringUuid, marketplaceResourceUuid),
+    [offeringUuid, marketplaceResourceUuid],
   );
   return loading ? (
     <LoadingSpinner />
   ) : error ? (
     <>{translate('Unable to load data')}</>
-  ) : value.components.length === 0 ? (
+  ) : !value.components.length ? (
     <h3>
       {translate(
         'Marketplace offering does not have any usage-based components.',
       )}
     </h3>
   ) : (
-    <PanelBody>
-      <div className="tabs-container">
-        <Tabs
-          defaultActiveKey="tab-0"
-          id="resource-usage-component-tabs"
-          unmountOnExit
-          mountOnEnter
-          animation
-        >
-          {value.components.map((component, index: number) => (
-            <Tab title={component.name} key={index} eventKey={`tab-${index}`}>
-              <PanelBody style={{ display: 'flex', justifyContent: 'center' }}>
-                <ResourceUsageChart
-                  offeringComponent={component}
-                  usages={value.usages}
-                  colors={value.colors}
-                  tabIndex={index}
-                />
-              </PanelBody>
-            </Tab>
-          ))}
-        </Tabs>
-      </div>
-    </PanelBody>
+    <ResourceUsageTabs
+      components={value.components}
+      usages={value.usages}
+      colors={generateColors(value.components.length, {
+        colorStart: 0.25,
+        colorEnd: 0.65,
+        useEndAsStart: true,
+      })}
+    />
   );
 };

@@ -120,15 +120,10 @@ const fillUsages = (option, periods, usages) => {
   }
 };
 
-export const getEChartOptions = (
-  component,
-  usages,
-  colors: string[],
-  index: number,
-) => {
+export const getEChartOptions = (component, usages, color: string) => {
   const option = eChartInitialOption();
   setYAxisLabel(option, component.measured_unit);
-  setColor(option, colors[index]);
+  setColor(option, color);
   const lastTwelveMonths = getLastTwelveMonths();
   fillPeriods(lastTwelveMonths, option);
   usages = filterUsages(component, usages);
