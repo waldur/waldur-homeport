@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 
 import { Resource } from '@waldur/marketplace/resources/types';
 

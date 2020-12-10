@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Section } from '@waldur/marketplace/types';
 
 import { AttributeRow } from './AttributeRow';

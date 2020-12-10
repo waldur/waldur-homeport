@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatFilesize } from '@waldur/core/utils';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';

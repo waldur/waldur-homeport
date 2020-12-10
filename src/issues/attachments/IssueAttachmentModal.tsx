@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -14,7 +14,7 @@ interface PureIssueAttachmentModalProps {
   };
 }
 
-export class PureIssueAttachmentModal extends React.Component<
+export class PureIssueAttachmentModal extends Component<
   PureIssueAttachmentModalProps
 > {
   state = {

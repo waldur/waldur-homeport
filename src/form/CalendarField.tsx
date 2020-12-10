@@ -1,6 +1,6 @@
 import type { OptionsInput } from '@fullcalendar/core';
 import moment from 'moment';
-import React from 'react';
+import { Component } from 'react';
 import { FieldArray } from 'redux-form';
 
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
@@ -11,7 +11,7 @@ import {
   createAvailabilityDates,
 } from '@waldur/booking/utils';
 
-export class EditableCalendar extends React.Component<
+export class EditableCalendar extends Component<
   EditableCalendarProps,
   { availabilitySlots }
 > {

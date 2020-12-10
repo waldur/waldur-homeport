@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -26,7 +26,7 @@ interface ServiceProviderWrapperState {
   serviceProvider: ServiceProvider;
 }
 
-class ServiceProviderWrapper extends React.Component<
+class ServiceProviderWrapper extends Component<
   ServiceProviderWrapperProps,
   ServiceProviderWrapperState
 > {

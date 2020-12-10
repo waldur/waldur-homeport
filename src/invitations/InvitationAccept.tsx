@@ -1,5 +1,4 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
 import { useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';

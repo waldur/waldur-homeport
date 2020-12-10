@@ -32,7 +32,7 @@ export const mountTestForm: (
 export const errorOnSubmit = (error) => {
   const formError = new SubmissionError(error);
   let onSubmit;
-  const promise = new Promise((resolve) => {
+  const promise = new Promise<void>((resolve) => {
     onSubmit = () => {
       resolve();
       throw formError;

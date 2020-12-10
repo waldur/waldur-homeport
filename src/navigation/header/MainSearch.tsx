@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 

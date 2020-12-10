@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -20,7 +20,7 @@ export const PendingReviewDialog = ({ resolve: { reviewId } }) => {
     dispatch(stateGo('organization.team'));
     dispatch(closeModalDialog());
   };
-  const [submitting, setSubmitting] = React.useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const closeReviewCallback = async () => {
     setSubmitting(true);
     try {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AuthService } from '@waldur/auth/AuthService';
 import { translate } from '@waldur/i18n';
 

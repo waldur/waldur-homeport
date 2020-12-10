@@ -20,23 +20,23 @@ export function get<T = {}>(
   return Axios.get(fixURL(endpoint), options);
 }
 
-export function getList<T = {}>(endpoint: string, params?: {}): Promise<T[]> {
+export async function getList<T = {}>(endpoint: string, params?: {}) {
   const options = params ? { params } : undefined;
-  return get<T>(endpoint, options).then((response) =>
-    Array.isArray(response.data) ? response.data : [],
-  );
+  const response = await get<T>(endpoint, options);
+  return Array.isArray(response.data) ? (response.data as T[]) : [];
 }
 
-export function getSelectData<T = {}>(endpoint: string, params?: {}): any {
+export function getSelectData<T = {}>(endpoint: string, params?: {}) {
   const options = params ? { params } : undefined;
   return get<T>(endpoint, options).then((response) => ({
-    options: Array.isArray(response.data) ? response.data : [],
+    options: Array.isArray(response.data) ? (response.data as T[]) : [],
     totalItems: parseResultCount(response),
   }));
 }
 
-export function getFirst<T = {}>(endpoint, params?) {
-  return getList<T>(endpoint, params).then((data) => data[0]);
+export async function getFirst<T = {}>(endpoint, params?) {
+  const data = await getList<T>(endpoint, params);
+  return data[0];
 }
 
 export function getById<T = {}>(

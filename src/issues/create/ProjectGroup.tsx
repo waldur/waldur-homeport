@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useEffect } from 'react';
 import { Button, Col, ControlLabel, FormGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
@@ -18,17 +18,16 @@ export const ProjectGroup = ({ onSearch, disabled }) => {
   const project = useSelector(projectSelector);
   const customer = useSelector(customerSelector);
 
-  const filterByProject = React.useCallback(() => onSearch({ project }), [
+  const filterByProject = useCallback(() => onSearch({ project }), [
     project,
     onSearch,
   ]);
 
-  const loadOptions = React.useCallback(
-    (name) => refreshProjects(name, customer),
-    [customer],
-  );
+  const loadOptions = useCallback((name) => refreshProjects(name, customer), [
+    customer,
+  ]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(change(ISSUE_REGISTRATION_FORM_ID, 'project', undefined));
   }, [dispatch, customer]);
 

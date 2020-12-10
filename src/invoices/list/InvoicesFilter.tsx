@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
@@ -11,7 +11,7 @@ const PureInvoicesFilter = () => {
     (state) => getConfig(state).accountingMode,
   );
 
-  const choices = React.useMemo(() => {
+  const choices = useMemo(() => {
     const result = [
       {
         label: translate('Pending'),

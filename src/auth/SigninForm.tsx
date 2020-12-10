@@ -1,4 +1,3 @@
-import React from 'react';
 import { reduxForm, SubmissionError } from 'redux-form';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';

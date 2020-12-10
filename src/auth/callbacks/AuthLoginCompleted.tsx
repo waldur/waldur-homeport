@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -10,7 +10,7 @@ import { AuthService } from '../AuthService';
 export const AuthLoginCompleted = () => {
   const router = useRouter();
   const { params } = useCurrentStateAndParams();
-  const completeAuth = React.useCallback(
+  const completeAuth = useCallback(
     async (token, method) => {
       AuthService.setAuthHeader(token);
       const user = await UsersService.getCurrentUser();
@@ -21,7 +21,7 @@ export const AuthLoginCompleted = () => {
     },
     [router.stateService],
   );
-  React.useEffect(() => {
+  useEffect(() => {
     completeAuth(params.token, params.method);
   }, [completeAuth, params]);
 

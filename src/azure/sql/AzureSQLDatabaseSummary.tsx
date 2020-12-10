@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AzureSQLDatabase } from '@waldur/azure/common/types';
 import { withTranslation } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';

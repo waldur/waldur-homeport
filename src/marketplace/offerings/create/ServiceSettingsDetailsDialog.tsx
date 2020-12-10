@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React from 'react';
+import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -34,7 +34,7 @@ export const ServiceSettingsDetailsDialog = () => {
   }, [offeringScope]);
 
   const dispatch = useDispatch();
-  const updateProvider = React.useCallback(
+  const updateProvider = useCallback(
     (data) => actions.updateProvider(data, dispatch),
     [dispatch],
   );

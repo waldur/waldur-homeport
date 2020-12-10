@@ -1,4 +1,3 @@
-import React from 'react';
 import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 

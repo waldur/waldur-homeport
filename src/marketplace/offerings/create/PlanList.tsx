@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { PlanSummary } from './PlanSummary';
 
 export const PlanList = ({ title, plans, components }) =>

@@ -1,5 +1,4 @@
 import moment from 'moment-timezone';
-import React from 'react';
 import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';

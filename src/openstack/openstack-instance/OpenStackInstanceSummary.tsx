@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { withTranslation } from '@waldur/i18n';
 import { OpenStackSecurityGroupsLink } from '@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsLink';
 import { ZabbixHostField } from '@waldur/resource/monitoring/ZabbixHostField';

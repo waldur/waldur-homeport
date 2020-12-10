@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/core/services';
@@ -13,7 +13,7 @@ const createCatalogDialog = (cluster) =>
 
 export const CatalogCreateButton = (props) => {
   const dispatch = useDispatch();
-  const callback = React.useCallback(
+  const callback = useCallback(
     () => dispatch(createCatalogDialog(props.cluster)),
     [dispatch, props.cluster],
   );

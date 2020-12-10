@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { OfferingReportComponent } from './OfferingReportComponent';
 
 const reportWithoutSnapshots = (report) =>

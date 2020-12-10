@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
 import { useAsync } from 'react-use';
 
@@ -39,7 +39,7 @@ const loadData = async () => {
 };
 
 const CategoryPanel = ({ category, checklists, customer }) => {
-  const [checklist, setChecklist] = React.useState<Checklist>();
+  const [checklist, setChecklist] = useState<Checklist>();
   const statsState = useAsync(
     () =>
       checklist

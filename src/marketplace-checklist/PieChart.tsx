@@ -1,10 +1,10 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
 
 export const PieChart = ({ positive, negative, unknown }) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () => ({
       legend: {
         orient: 'vertical',

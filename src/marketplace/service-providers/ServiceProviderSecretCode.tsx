@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { TranslateProps } from '@waldur/i18n';
@@ -23,7 +23,7 @@ interface ServiceProviderSecretCodeProps extends TranslateProps {
   getServiceProviderSecretCode(): void;
 }
 
-class PureServiceProviderSecretCode extends React.Component<
+class PureServiceProviderSecretCode extends Component<
   ServiceProviderSecretCodeProps
 > {
   componentDidUpdate(prevProps) {

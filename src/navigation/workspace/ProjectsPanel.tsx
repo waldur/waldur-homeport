@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import { Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -17,7 +17,7 @@ import { useProjectFilter } from './utils';
 
 const CreateProjectButton = ({ selectedOrganization }) => {
   const user = useSelector(getUser);
-  const canCreate = React.useMemo(
+  const canCreate = useMemo(
     () => checkCustomerUser(selectedOrganization, user),
     [selectedOrganization, user],
   );
@@ -76,15 +76,13 @@ const ProjectListItem = ({ item }) => (
 
 export const ProjectsPanel = ({ selectedOrganization }) => {
   const currentProject = useSelector(getProject);
-  const [selectedProject, selectProject] = React.useState<Project>(
-    currentProject,
-  );
+  const [selectedProject, selectProject] = useState<Project>(currentProject);
 
   const { filter, setFilter, filteredProjects } = useProjectFilter(
     selectedOrganization?.projects,
   );
 
-  const selectFirstProject = React.useCallback(() => {
+  const selectFirstProject = useCallback(() => {
     if (
       !selectedProject &&
       selectedOrganization &&
@@ -94,7 +92,7 @@ export const ProjectsPanel = ({ selectedOrganization }) => {
     }
   }, [selectedOrganization, selectedProject]);
 
-  React.useEffect(selectFirstProject, [selectedOrganization]);
+  useEffect(selectFirstProject, [selectedOrganization]);
 
   return (
     <Col md={6} xs={12}>

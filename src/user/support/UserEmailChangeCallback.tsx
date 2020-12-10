@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
@@ -14,7 +14,7 @@ import { setCurrentUser } from '@waldur/workspace/actions';
 export const UserEmailChangeCallback = () => {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function load() {
       try {
         await post('/users/confirm_email/', { code: $state.params.token });

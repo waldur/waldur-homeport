@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setSettings } from '../../store/actions';
@@ -11,22 +11,18 @@ export const useCalendarSettings = () => {
   const curState: ConfigProps = useSelector(getSettings);
   const dispatch = useDispatch();
 
-  const [weekends, setWeekends] = React.useState<boolean>(curState.weekends);
-  const [slotDuration, setSlotDuration] = React.useState<any>(
-    curState.slotDuration,
-  );
-  const [startTime, setStartTime] = React.useState<any>(
+  const [weekends, setWeekends] = useState<boolean>(curState.weekends);
+  const [slotDuration, setSlotDuration] = useState<any>(curState.slotDuration);
+  const [startTime, setStartTime] = useState<any>(
     curState.businessHours.startTime,
   );
-  const [endTime, setEndTime] = React.useState<any>(
-    curState.businessHours.endTime,
-  );
-  const [daysOfWeek, setDaysOfWeek] = React.useState<number[]>(
+  const [endTime, setEndTime] = useState<any>(curState.businessHours.endTime);
+  const [daysOfWeek, setDaysOfWeek] = useState<number[]>(
     curState.businessHours.daysOfWeek,
   );
-  const [timeZone, setTimeZone] = React.useState<any>(moment.tz.guess());
+  const [timeZone, setTimeZone] = useState<any>(moment.tz.guess());
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(
       setSettings({
         weekends,

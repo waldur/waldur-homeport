@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -18,7 +18,7 @@ interface ComparisonSectionsState {
   categoryUuid: string;
 }
 
-export class ComparisonSections extends React.Component<
+export class ComparisonSections extends Component<
   ComparisonSectionsProps,
   ComparisonSectionsState
 > {

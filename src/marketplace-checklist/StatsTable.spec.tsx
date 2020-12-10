@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 import { Table } from 'react-bootstrap';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';

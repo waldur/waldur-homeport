@@ -1,4 +1,3 @@
-import React from 'react';
 import { ToggleButtonGroup } from 'react-bootstrap';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

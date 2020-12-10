@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 
@@ -75,7 +75,7 @@ interface OpenstackInstanceCreateFormComponentProps {
 
 const nameValidators = [required, validateOpenstackInstanceName];
 
-export class OpenstackInstanceCreateFormComponent extends React.Component<
+export class OpenstackInstanceCreateFormComponent extends Component<
   OfferingConfigurationFormProps &
     OpenstackInstanceCreateFormComponentProps &
     TranslateProps,

@@ -1,5 +1,4 @@
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
 
 import { AppFooter } from './AppFooter';
 import { CookiesConsent } from './cookies/CookiesConsent';

@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ngInjector } from '@waldur/core/services';
@@ -26,7 +26,7 @@ function getBreadcrumbs(): BreadcrumbItem[] {
 
 export function useReportingBreadcrumbs() {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(
       setBreadcrumbs([
         ...getBreadcrumbs(),
@@ -42,8 +42,8 @@ export function useReportingBreadcrumbs() {
 }
 
 export const SupportWorkspace = () => {
-  const [pageClass, setPageClass] = React.useState<string>();
-  const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState<boolean>();
+  const [pageClass, setPageClass] = useState<string>();
+  const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
   const { state, params } = useCurrentStateAndParams();
   const dispatch = useDispatch();
 
@@ -55,11 +55,11 @@ export const SupportWorkspace = () => {
 
   useBreadcrumbsFn(getBreadcrumbs, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(setCurrentWorkspace(SUPPORT_WORKSPACE));
   }, [dispatch]);
 
-  React.useEffect(refreshState, [state, params]);
+  useEffect(refreshState, [state, params]);
 
   return (
     <Layout

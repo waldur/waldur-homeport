@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { required } from '@waldur/core/validators';
 import { FormContainer, StringField } from '@waldur/form';
 

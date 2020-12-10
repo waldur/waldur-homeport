@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getById } from '@waldur/core/api';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { VirtualMachine } from '@waldur/resource/types';

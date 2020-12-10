@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
@@ -16,9 +16,7 @@ interface PureListFieldModalProps extends InjectedFormProps, TranslateProps {
   };
 }
 
-export class PureListFieldModal extends React.Component<
-  PureListFieldModalProps
-> {
+export class PureListFieldModal extends Component<PureListFieldModalProps> {
   state = {
     loading: true,
     selectedRowIndex: undefined,

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { dateTime } from '@waldur/core/utils';
 import { TranslateProps } from '@waldur/i18n';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { TranslateProps } from '@waldur/i18n';

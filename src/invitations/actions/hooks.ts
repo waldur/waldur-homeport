@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import React from 'react';
+import { useMemo, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 import { change } from 'redux-form';
@@ -71,15 +71,15 @@ export const useInvitationCreateDialog = (context) => {
     taxNumber,
   ]);
 
-  const roles = React.useMemo(() => getRoles(context), [context]);
-  React.useEffect(() => {
+  const roles = useMemo(() => getRoles(context), [context]);
+  useEffect(() => {
     dispatch(change('InvitationCreateDialog', 'role', roles[0].value));
   }, [dispatch, roles]);
 
   const roleDisabled = ENV.invitationRequireUserDetails && !userDetails;
   const projectEnabled = PROJECT_ROLES.includes(role) && !roleDisabled;
 
-  const createInvitation = React.useCallback(
+  const createInvitation = useCallback(
     async (formData) => {
       try {
         const payload: Record<string, any> = {};

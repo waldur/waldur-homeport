@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { Component } from 'react';
 
 import { FilterOptions } from '@waldur/form/types';
 
@@ -12,9 +12,7 @@ interface ChoicesTableFilterProps {
   wrapperClassName?: string;
 }
 
-export class ChoicesTableFilter extends React.Component<
-  ChoicesTableFilterProps
-> {
+export class ChoicesTableFilter extends Component<ChoicesTableFilterProps> {
   getBtnClass = (index, choice, props) => {
     if (index === 0 && !props.input.value) {
       return 'btn btn-sm btn-primary';

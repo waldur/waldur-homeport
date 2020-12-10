@@ -1,9 +1,9 @@
-import React from 'react';
+import { useEffect, useCallback } from 'react';
 
 import { ngInjector } from '@waldur/core/services';
 
 export const SidebarToggle = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     return ngInjector.get('$transitions').onStart({}, function () {
       const bodyClasses = document.body.classList;
       if (
@@ -15,7 +15,7 @@ export const SidebarToggle = () => {
     });
   }, []);
 
-  const toggleSidebar = React.useCallback(() => {
+  const toggleSidebar = useCallback(() => {
     const bodyClasses = document.body.classList;
     const sideMenu = document.querySelector<HTMLElement>('#side-menu');
     bodyClasses.toggle('mini-navbar');

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 

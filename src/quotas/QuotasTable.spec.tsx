@@ -1,5 +1,4 @@
 import { render } from 'enzyme';
-import React from 'react';
 
 import { QuotasTable } from './QuotasTable';
 

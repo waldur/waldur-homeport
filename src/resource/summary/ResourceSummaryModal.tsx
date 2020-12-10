@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -21,7 +21,7 @@ interface PureResourceSummaryModalProps extends TranslateProps {
   fetchResource(): void;
 }
 
-export class PureResourceSummaryModal extends React.Component<
+export class PureResourceSummaryModal extends Component<
   PureResourceSummaryModalProps
 > {
   componentDidMount() {

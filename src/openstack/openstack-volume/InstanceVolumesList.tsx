@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatFilesize } from '@waldur/core/utils';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';

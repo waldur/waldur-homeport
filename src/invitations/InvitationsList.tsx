@@ -1,4 +1,3 @@
-import React from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';

@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 import { Marker, Popup } from 'react-leaflet';
 
 import { CustomerMap } from './CustomerMap';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { createElement } from 'react';
 import { connect } from 'react-redux';
 import { isValid, getFormValues } from 'redux-form';
 
@@ -63,9 +63,7 @@ export const SummaryTable = (props: OrderSummaryProps) => (
           <td>{props.project.name}</td>
         </tr>
       )}
-      {props.extraComponent
-        ? React.createElement(props.extraComponent, props)
-        : null}
+      {props.extraComponent ? createElement(props.extraComponent, props) : null}
       {!getActiveFixedPricePaymentProfile(props.customer.payment_profiles) &&
         props.formData &&
         props.formData.plan && (

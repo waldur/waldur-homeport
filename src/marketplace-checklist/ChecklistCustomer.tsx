@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Table, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
@@ -28,8 +28,8 @@ const formatRolesList = (roles) =>
 export const ChecklistCustomer = () => {
   useTitle(translate('Checklists'));
   const customer = useSelector(getCustomer);
-  const [category, setCategory] = React.useState<Category>();
-  const [enabled, setEnabled] = React.useState<Record<string, boolean>>({});
+  const [category, setCategory] = useState<Category>();
+  const [enabled, setEnabled] = useState<Record<string, boolean>>({});
   const dispatch = useDispatch();
 
   const categoriesState = useAsync<Category[]>(getCategories);

@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 
 import { Step } from './Step';
 import './StepsList.scss';

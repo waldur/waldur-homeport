@@ -1,5 +1,4 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 

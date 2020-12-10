@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import loadEcharts from '@waldur/shims/load-echarts';
 
@@ -14,7 +14,7 @@ interface TreemapChartProps {
   tooltipValueFormatter?(value: number): string;
 }
 
-export class TreemapChart extends React.Component<TreemapChartProps> {
+export class TreemapChart extends Component<TreemapChartProps> {
   container = undefined;
   chart = undefined;
 

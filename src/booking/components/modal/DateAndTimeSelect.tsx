@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import moment from 'moment';
-import React from 'react';
 import DatePicker from 'react-16-bootstrap-date-picker';
 import Select from 'react-select';
 

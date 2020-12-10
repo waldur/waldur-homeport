@@ -1,4 +1,3 @@
-import React from 'react';
 import { InjectedFormProps, Field } from 'redux-form';
 
 import { SubmitButton, FieldError } from '@waldur/form';

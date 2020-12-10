@@ -1,5 +1,4 @@
 import { mount, ReactWrapper } from 'enzyme';
-import React from 'react';
 
 import { translate } from '@waldur/i18n';
 

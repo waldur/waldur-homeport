@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import React from 'react';
+import { useState } from 'react';
 import { Button, Modal, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -18,7 +18,7 @@ import { ProjectsPanel } from './ProjectsPanel';
 
 export const SelectWorkspaceDialog = () => {
   const currentCustomer = useSelector(getCustomer);
-  const [selectedOrganization, selectOrganization] = React.useState<Customer>(
+  const [selectedOrganization, selectOrganization] = useState<Customer>(
     currentCustomer,
   );
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -58,7 +58,7 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
     users &&
     users[comment.author_uuid] &&
     users[comment.author_uuid].map((currentUser, index) => (
-      <React.Fragment key={index}>{currentUser.toUpperCase()}</React.Fragment>
+      <Fragment key={index}>{currentUser.toUpperCase()}</Fragment>
     ));
   const onCommentClick = (evt) => {
     const target = evt.target as HTMLElement;

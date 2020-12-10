@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   Button,
   ModalBody,
@@ -20,21 +20,19 @@ import { InvitationService } from './InvitationService';
 export const InvitationConfirmDialog = ({ resolve: { token, deferred } }) => {
   const dispatch = useDispatch();
 
-  const close = React.useCallback(() => dispatch(closeModalDialog()), [
-    dispatch,
-  ]);
+  const close = useCallback(() => dispatch(closeModalDialog()), [dispatch]);
 
-  const dismiss = React.useCallback(() => {
+  const dismiss = useCallback(() => {
     deferred.reject();
     close();
   }, [close, deferred]);
 
-  const closeAcceptingNewEmail = React.useCallback(() => {
+  const closeAcceptingNewEmail = useCallback(() => {
     close();
     deferred.resolve(true);
   }, [close, deferred]);
 
-  const closeDecliningNewEmail = React.useCallback(() => {
+  const closeDecliningNewEmail = useCallback(() => {
     close();
     deferred.resolve(false);
   }, [close, deferred]);
@@ -45,13 +43,13 @@ export const InvitationConfirmDialog = ({ resolve: { token, deferred } }) => {
   );
   const invitation = asyncResult.value;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (asyncResult.error) {
       dismiss();
     }
   }, [asyncResult.error, dismiss]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!user || !invitation) {
       return;
     }

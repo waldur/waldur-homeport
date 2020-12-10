@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -61,7 +61,7 @@ interface ShoppingCartItemUpdateProps {
   setTitle: typeof setTitle;
 }
 
-class ShoppingCartItemUpdateComponent extends React.Component<
+class ShoppingCartItemUpdateComponent extends Component<
   ShoppingCartItemUpdateProps
 > {
   state = {

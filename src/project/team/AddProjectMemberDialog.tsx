@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -91,7 +91,7 @@ export const AddProjectMemberDialog = reduxForm<
 
   const dispatch = useDispatch();
 
-  const saveUser = React.useCallback(
+  const saveUser = useCallback(
     async (formData) => {
       try {
         await savePermissions(formData, resolve);
@@ -103,7 +103,7 @@ export const AddProjectMemberDialog = reduxForm<
     [dispatch, resolve],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (resolve.editUser) {
       dispatch(change(FORM_ID, 'user', resolve.editUser));
       dispatch(change(FORM_ID, 'role', resolve.editUser.role));
@@ -115,7 +115,7 @@ export const AddProjectMemberDialog = reduxForm<
     }
   }, [dispatch, resolve.editUser, callback]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (users) {
       dispatch(change(FORM_ID, 'role', PROJECT_ADMIN_ROLE));
     }

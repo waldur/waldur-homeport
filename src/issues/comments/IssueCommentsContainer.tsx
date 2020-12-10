@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -31,7 +31,7 @@ interface PureIssueCommentsContainerProps extends TranslateProps {
   renderHeader: boolean;
 }
 
-export class PureIssueCommentsContainer extends React.Component<
+export class PureIssueCommentsContainer extends Component<
   PureIssueCommentsContainerProps
 > {
   state = {

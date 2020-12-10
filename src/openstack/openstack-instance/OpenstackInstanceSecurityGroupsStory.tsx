@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
 import { connectAngularComponent } from '@waldur/store/connect';
@@ -7,7 +7,7 @@ import { SecurityGroup } from '../openstack-security-groups/types';
 
 import { securityGroups } from './storyFixtures';
 
-export class OpenstackInstanceSecurityGroupsStory extends React.Component {
+export class OpenstackInstanceSecurityGroupsStory extends Component {
   state = {
     selectedSecurityGroups: [],
   };

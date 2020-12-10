@@ -37,6 +37,8 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     'react/display-name': 'off',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
@@ -80,7 +82,6 @@ module.exports = {
     angular: true,
     beforeAll: true,
     afterAll: true,
-    $: true,
     moment: true,
     jest: true,
     describe: true,

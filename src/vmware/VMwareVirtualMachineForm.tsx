@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useMemo } from 'react';
 import { useAsync } from 'react-use';
 import { formValues, Field } from 'redux-form';
 
@@ -54,7 +54,7 @@ interface Props extends OfferingConfigurationFormProps {
 }
 
 const initAttributes = (props) => {
-  React.useEffect(() => {
+  useEffect(() => {
     const attributes = { ...props.initialAttributes };
     const initialData: Record<string, any> = { attributes };
     const activePlans = props.offering.plans.filter(
@@ -80,7 +80,7 @@ const initAttributes = (props) => {
 };
 
 const StaticDiskField = (props) => {
-  const diskValidator = React.useMemo(() => {
+  const diskValidator = useMemo(() => {
     const validators = [];
     if (props.limits.max_disk) {
       validators.push(maxAmount(props.limits.max_disk));
@@ -138,12 +138,12 @@ const FormComponent = (props: any) => {
       props.data.limits.max_disk_total / 1024,
   };
 
-  const cpuValidator = React.useMemo(
+  const cpuValidator = useMemo(
     () => (limits.max_cpu ? [minOne, maxAmount(limits.max_cpu)] : minOne),
     [limits.max_cpu],
   );
 
-  const coresPerSocketLimitValidator = React.useMemo(() => {
+  const coresPerSocketLimitValidator = useMemo(() => {
     const validators = [minOne, coresPerSocketValidator];
     if (limits.max_cores_per_socket) {
       validators.push(maxAmount(limits.max_cores_per_socket));
@@ -151,7 +151,7 @@ const FormComponent = (props: any) => {
     return validators;
   }, [limits.max_cores_per_socket]);
 
-  const ramValidator = React.useMemo(
+  const ramValidator = useMemo(
     () => (limits.max_ram ? [minOne, maxAmount(limits.max_ram)] : minOne),
     [limits.max_ram],
   );

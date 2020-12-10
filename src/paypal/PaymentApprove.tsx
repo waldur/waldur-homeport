@@ -1,6 +1,5 @@
 import { useRouter } from '@uirouter/react';
 import Qs from 'qs';
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 

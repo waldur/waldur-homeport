@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { ScreenshotsTab } from '@waldur/marketplace/offerings/screenshots/ScreenshotsTab';

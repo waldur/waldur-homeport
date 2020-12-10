@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { IssueCommentItem } from './IssueCommentItem';

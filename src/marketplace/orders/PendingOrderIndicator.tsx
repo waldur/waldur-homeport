@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import {
   Col,
   Dropdown,
@@ -39,7 +39,7 @@ interface PendingOrderIndicatorProps extends ToggleOpenProps {
   workspace: string;
 }
 
-export class PurePendingOrderIndicator extends React.Component<
+export class PurePendingOrderIndicator extends Component<
   PendingOrderIndicatorProps
 > {
   componentDidMount() {

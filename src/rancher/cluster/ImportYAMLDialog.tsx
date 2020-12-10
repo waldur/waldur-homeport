@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -16,7 +16,7 @@ export const ImportYAMLDialog = reduxForm<
 >({ form: 'ImportYAMLDialog' })(({ resolve, handleSubmit, submitting }) => {
   const dispatch = useDispatch();
 
-  const handler = React.useCallback(
+  const handler = useCallback(
     async (formData) => {
       try {
         await importYAML(resolve.cluster_id, formData.yaml);

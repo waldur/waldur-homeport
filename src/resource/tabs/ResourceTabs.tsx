@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
 import { Resource } from '../types';
 
@@ -14,11 +14,11 @@ export const ResourceTabs = ({ resource }: { resource: Resource }) => {
   const router = useRouter();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const tabs = React.useMemo(() => ResourceTabsConfiguration.get(resource), []);
+  const tabs = useMemo(() => ResourceTabsConfiguration.get(resource), []);
 
-  const [activeKey, setActiveKey] = React.useState<string>();
+  const [activeKey, setActiveKey] = useState<string>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (selectedTabName) {
       const selectedTab =
         tabs.filter((tab) => tab.key === selectedTabName)[0] || tabs[0];

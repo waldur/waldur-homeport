@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CustomerLink } from '@waldur/customer/CustomerLink';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { filterByUser } from '@waldur/workspace/selectors';

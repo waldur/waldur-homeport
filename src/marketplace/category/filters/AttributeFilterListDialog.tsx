@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ResetFormButton } from '@waldur/form/ResetFormButton';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';

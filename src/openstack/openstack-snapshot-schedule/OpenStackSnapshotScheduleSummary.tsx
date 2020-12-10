@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { withTranslation } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { PureScheduleSummary } from '@waldur/resource/summary/ScheduleSummary';

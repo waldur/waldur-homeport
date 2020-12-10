@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 
 import { ENV } from '@waldur/core/services';
 import { getLatinNameValidators } from '@waldur/core/validators';
@@ -21,7 +21,7 @@ import { OpenStackAllocationPool } from './OpenStackAllocationPool';
 import { OpenStackSubnetField } from './OpenStackSubnetField';
 import { validateSubnetPrivateCIDR } from './utils';
 
-export class OpenStackPackageForm extends React.Component<
+export class OpenStackPackageForm extends Component<
   OfferingConfigurationFormProps
 > {
   componentDidMount() {

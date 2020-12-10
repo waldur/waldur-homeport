@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormContainer } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';

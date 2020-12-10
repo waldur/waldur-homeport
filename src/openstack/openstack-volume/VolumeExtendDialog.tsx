@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useCallback } from 'react';
 import {
   ControlLabel,
   FormGroup,
@@ -47,11 +47,11 @@ export const VolumeExtendDialog = reduxForm<
 
     const minSize = Math.round(resource.size / 1024) + 1;
 
-    React.useEffect(() => {
+    useEffect(() => {
       dispatch(change('VolumeExtendDialog', 'size', minSize));
     }, [dispatch, minSize]);
 
-    const extendVolume = React.useCallback(
+    const extendVolume = useCallback(
       async (formData: VolumeExtendDialogFormData) => {
         const payload = {
           disk_size: formData.size * 1024,

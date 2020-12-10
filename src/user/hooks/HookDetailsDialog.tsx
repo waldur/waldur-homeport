@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -74,7 +74,7 @@ const HookDetails = reduxForm<HookFormData, OwnProps>({ form: 'HookForm' })(
 
 export const HookDetailsDialog = ({ resolve: { hook } }) => {
   const state = useAsync(loadEventGroupsOptions);
-  const initialValues = React.useMemo(() => getInitialValue(hook), [hook]);
+  const initialValues = useMemo(() => getInitialValue(hook), [hook]);
   return (
     <HookDetails
       hook={hook}

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 
 import { OrderStep } from './types';

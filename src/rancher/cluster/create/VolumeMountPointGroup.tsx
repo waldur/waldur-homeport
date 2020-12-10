@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, change, formValueSelector } from 'redux-form';
 
@@ -60,7 +60,7 @@ export const VolumeMountPointGroup = (props) => {
     props.nodeIndex,
     props.volumeIndex,
   );
-  const validateMountPoint = React.useMemo(
+  const validateMountPoint = useMemo(
     () => [required, createMountPointValidator(props.nodeIndex)],
     [props.nodeIndex],
   );

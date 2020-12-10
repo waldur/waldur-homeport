@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Panel } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
 

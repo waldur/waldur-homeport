@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Link } from '@waldur/core/Link';
 
 export const OrganizationLink = ({ row }) => (

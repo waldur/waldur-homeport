@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import {
   Dropdown,
   DropdownMenu,
@@ -23,7 +23,7 @@ const getSidebarItems = () =>
 
 export const UserDropdownMenu = () => {
   const user = useSelector(getUser);
-  const menuItems = React.useMemo(getSidebarItems, []);
+  const menuItems = useMemo(getSidebarItems, []);
   if (!user) {
     return null;
   }

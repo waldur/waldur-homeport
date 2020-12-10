@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';

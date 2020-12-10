@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { ProjectLink } from '@waldur/project/ProjectLink';
 import { Table, connectTable, createFetcher } from '@waldur/table';

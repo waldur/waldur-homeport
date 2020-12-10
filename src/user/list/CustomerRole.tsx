@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { BooleanField } from '@waldur/table/BooleanField';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -35,7 +35,7 @@ const createVolumeSizeValidator = (nodeIndex, volumeIndex) => (
 };
 
 export const VolumeSizeGroup = (props) => {
-  const validateVolumeSize = React.useMemo(
+  const validateVolumeSize = useMemo(
     () => [
       required,
       createVolumeSizeValidator(props.nodeIndex, props.volumeIndex),

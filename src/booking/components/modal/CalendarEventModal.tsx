@@ -1,6 +1,6 @@
 import type { EventInput } from '@fullcalendar/core';
 import moment from 'moment';
-import React from 'react';
+import { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 import { DateAndTimeSelectField } from '@waldur/booking/components/modal/DateAndTimeSelect';
@@ -21,7 +21,7 @@ interface CalendarEventModalProps {
   };
 }
 
-export class CalendarEventModal extends React.Component<
+export class CalendarEventModal extends Component<
   CalendarEventModalProps,
   EventInput
 > {

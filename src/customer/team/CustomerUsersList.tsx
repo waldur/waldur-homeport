@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -24,7 +24,7 @@ import { UserRemoveButton } from './UserRemoveButton';
 import { getRoles } from './utils';
 
 const UserProjectRolesList = ({ row }) => {
-  const roles = React.useMemo(getRoles, []);
+  const roles = useMemo(getRoles, []);
   return (
     <>
       {roles.map((role) => (

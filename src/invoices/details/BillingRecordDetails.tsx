@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/services';
@@ -16,7 +16,7 @@ import { groupInvoiceItems } from './utils';
 
 export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
   const customer = useSelector(getCustomer);
-  const projects = React.useMemo(() => groupInvoiceItems(invoice.items), [
+  const projects = useMemo(() => groupInvoiceItems(invoice.items), [
     invoice.items,
   ]);
   return (

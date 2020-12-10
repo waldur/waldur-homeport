@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 import { Col } from 'react-bootstrap';
 
 import { ENV } from '@waldur/core/services';
@@ -29,8 +29,8 @@ export const OrganizationsPanel = ({
   selectOrganization,
   organizationsCount,
 }) => {
-  const [filter, setFilter] = React.useState('');
-  const getPage = React.useCallback((page) => getCustomersPage(filter, page), [
+  const [filter, setFilter] = useState('');
+  const getPage = useCallback((page) => getCustomersPage(filter, page), [
     filter,
   ]);
 

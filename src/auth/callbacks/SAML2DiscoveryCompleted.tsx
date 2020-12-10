@@ -1,5 +1,5 @@
 import Qs from 'qs';
-import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -10,7 +10,7 @@ import { loginSaml2Action } from '../saml2/store/actions';
 
 export const SAML2DiscoveryCompleted = () => {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     const qs = Qs.parse(getQueryString());
     dispatch(loginSaml2Action(qs.entityID));
   }, [dispatch]);

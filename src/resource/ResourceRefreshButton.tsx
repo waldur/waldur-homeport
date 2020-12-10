@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 

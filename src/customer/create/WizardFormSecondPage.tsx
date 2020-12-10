@@ -1,4 +1,3 @@
-import React from 'react';
 import { PanelBody } from 'react-bootstrap';
 
 import { InputField } from '@waldur/form/InputField';

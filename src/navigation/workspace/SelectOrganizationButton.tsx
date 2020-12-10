@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -7,7 +7,7 @@ import { getUser, checkCustomerUser } from '@waldur/workspace/selectors';
 
 export const SelectOrganizationButton = ({ organization }) => {
   const user = useSelector(getUser);
-  const canGotoDashboard = React.useMemo(
+  const canGotoDashboard = useMemo(
     () => user.is_support || checkCustomerUser(organization, user),
     [organization, user],
   );

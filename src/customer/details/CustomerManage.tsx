@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { PaymentsPanel } from '@waldur/customer/payments/PaymentsPanel';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';

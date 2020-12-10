@@ -1,4 +1,3 @@
-import React from 'react';
 import { Panel, PanelGroup, Table } from 'react-bootstrap';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';

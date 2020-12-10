@@ -209,14 +209,16 @@ export function mergeLists(list1, list2, fieldIdentifier) {
   return list1;
 }
 
-export const returnReactSelectAsyncPaginateObject = (
-  response,
+export function returnReactSelectAsyncPaginateObject<T = {}>(
+  response: { options: T[]; totalItems: number },
   prevOptions,
   currentPage: number,
-) => ({
-  options: response.options,
-  hasMore: response.totalItems > prevOptions.length + ENV.pageSize,
-  additional: {
-    page: currentPage + 1,
-  },
-});
+) {
+  return {
+    options: response.options,
+    hasMore: response.totalItems > prevOptions.length + ENV.pageSize,
+    additional: {
+      page: currentPage + 1,
+    },
+  };
+}

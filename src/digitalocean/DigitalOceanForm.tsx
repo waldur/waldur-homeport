@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { SecretField, FormContainer } from '@waldur/form';
 
 export const DigitalOceanForm = ({ translate, container }) => (

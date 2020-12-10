@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import React from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
@@ -86,7 +86,7 @@ export const BillingDetails = () => {
     [invoiceId],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!invoiceId) {
       router.stateService.go('errorPage.notFound');
     } else {
@@ -94,7 +94,7 @@ export const BillingDetails = () => {
     }
   }, [invoiceId, router.stateService, callback]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if ((error as any)?.status === 404) {
       router.stateService.go('errorPage.notFound');
     }

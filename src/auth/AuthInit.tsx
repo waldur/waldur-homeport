@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -29,7 +29,7 @@ export const AuthInit = () => {
   const { loading, error, value: user } = useAsync(() =>
     UsersService.getCurrentUser(),
   );
-  const onSave = React.useCallback(
+  const onSave = useCallback(
     async (user) => {
       try {
         const response = await UsersService.update(formatInitialData(user));

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CustomersDivisionsChart } from '@waldur/customer/divisions/CustomersDivisionsChart';
 import { CustomersDivisionsFilter } from '@waldur/customer/divisions/CustomersDivisionsFilter';
 import { translate } from '@waldur/i18n';

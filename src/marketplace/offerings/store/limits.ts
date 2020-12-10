@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import {
   getFormLimitSerializer,
@@ -90,7 +90,7 @@ export const getDefaults = (offering: Offering) => {
 };
 
 export const getOfferingComponentValidator = (component: OfferingComponent) =>
-  React.useMemo(() => {
+  useMemo(() => {
     const validators = [];
     if (component.min_value) {
       validators.push(minAmount(component.min_value));
@@ -102,7 +102,7 @@ export const getOfferingComponentValidator = (component: OfferingComponent) =>
   }, [component.min_value, component.max_value]);
 
 export const getResourceComponentValidator = (limits: Limits) =>
-  React.useMemo(() => {
+  useMemo(() => {
     const validators = [];
     if (limits.min) {
       validators.push(minAmount(limits.min));

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
@@ -30,7 +30,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { fetchTenantOptions, fetchInstanceOptions } from './api';
 
-export class PureOfferingConfigurationForm extends React.Component<
+export class PureOfferingConfigurationForm extends Component<
   OfferingConfigurationFormProps
 > {
   componentDidMount() {

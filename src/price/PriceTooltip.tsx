@@ -1,4 +1,4 @@
-import React from 'react';
+import { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -12,7 +12,7 @@ interface Props extends TranslateProps {
   accountingMode: AccountingMode;
 }
 
-class PurePriceTooltip extends React.PureComponent<Props> {
+class PurePriceTooltip extends PureComponent<Props> {
   getTooltipMessage() {
     const { translate, accountingMode, estimated } = this.props;
 

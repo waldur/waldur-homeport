@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { takeEvery } from 'redux-saga/effects';
 
@@ -40,7 +40,7 @@ export const getTitle = (state) => state.title;
 
 export const useTitle = (title) => {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     if (!title) {
       return;
     }

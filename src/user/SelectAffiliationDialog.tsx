@@ -5,7 +5,7 @@
  * that the user is authorized to see.
  */
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormGroup, ToggleButton } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';

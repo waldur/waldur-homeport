@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { Table, connectTable, createFetcher } from '@waldur/table';

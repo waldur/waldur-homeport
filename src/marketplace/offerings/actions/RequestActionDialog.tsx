@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -22,7 +22,7 @@ export const RequestActionDialog = ({
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
-  React.useEffect(() => {
+  useEffect(() => {
     if (isFeatureVisible('support')) {
       close();
       dispatch(

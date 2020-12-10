@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getMessage } from './utils';
 
 interface Props {

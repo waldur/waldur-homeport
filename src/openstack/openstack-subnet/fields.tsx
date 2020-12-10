@@ -1,4 +1,3 @@
-import React from 'react';
 import { FieldArray } from 'redux-form';
 
 import { translate } from '@waldur/i18n';

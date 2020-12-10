@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
@@ -25,7 +25,7 @@ const PaymentProfileCreate = (props) => {
 
   const [isFixedPrice, setIsFixedPrice] = useState(false);
 
-  const paymentProfileTypeOptions = React.useMemo(
+  const paymentProfileTypeOptions = useMemo(
     () => getPaymentProfileTypeOptions(),
     [],
   );

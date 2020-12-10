@@ -1,5 +1,4 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
 import { Panel } from 'react-bootstrap';
 import Select from 'react-select';
 

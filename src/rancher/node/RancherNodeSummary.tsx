@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { withTranslation } from '@waldur/i18n';
 import { KeyValueButton } from '@waldur/marketplace/resources/KeyValueButton';
 import { ResourceLink } from '@waldur/resource/ResourceLink';

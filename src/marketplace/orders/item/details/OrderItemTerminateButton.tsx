@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -14,7 +14,7 @@ interface Props {
   showError(msg: string): void;
 }
 
-class PureOrderItemTerminateButton extends React.Component<Props> {
+class PureOrderItemTerminateButton extends Component<Props> {
   state = {
     loading: false,
   };

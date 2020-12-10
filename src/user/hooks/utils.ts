@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { titleCase } from '@waldur/core/utils';
@@ -78,7 +78,7 @@ const serializeHook = (hookType: HookType, formData: HookFormData) => {
 
 export const useHookForm = (hook?: HookResponse) => {
   const dispatch = useDispatch();
-  return React.useCallback(
+  return useCallback(
     async (formData: HookFormData) => {
       const hookType = hook ? hook.hook_type : formData.hook_type;
       if (hook) {

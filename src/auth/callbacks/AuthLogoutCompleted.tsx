@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { AuthService } from '../AuthService';
 
 export const AuthLogoutCompleted = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     AuthService.localLogout();
   }, []);
   return (

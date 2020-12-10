@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 import { Label, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import { Action } from './types';

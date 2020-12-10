@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TableLoadingSpinnerContainer } from '@waldur/table/TableLoadingSpinnerContainer';
 
 import { TableExportButton } from './TableExportButton';

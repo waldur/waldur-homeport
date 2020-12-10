@@ -1,6 +1,6 @@
 import { Calendar, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment-timezone';
-import React from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
@@ -30,12 +30,12 @@ import './Calendar.scss';
 export const getCalendarState = (state): State => state.bookings;
 
 export const LazyCalendarComponent = (props: CalendarComponentProps) => {
-  const elRef = React.useRef<HTMLDivElement>(null);
-  const calendarRef = React.useRef<Calendar>();
-  const oldDate = React.useRef<Date>();
-  const oldOptionsRef = React.useRef<OptionsInput>(props.options);
-  const [hovered, setHovered] = React.useState('');
-  const [modal, setModal] = React.useState({
+  const elRef = useRef<HTMLDivElement>(null);
+  const calendarRef = useRef<Calendar>();
+  const oldDate = useRef<Date>();
+  const oldOptionsRef = useRef<OptionsInput>(props.options);
+  const [hovered, setHovered] = useState('');
+  const [modal, setModal] = useState({
     isOpen: false,
     el: null,
     event: null,
@@ -203,9 +203,9 @@ export const LazyCalendarComponent = (props: CalendarComponentProps) => {
     calendarRef.current.addEventSource(props.events);
   };
 
-  React.useEffect(calendarMountEffect, []);
+  useEffect(calendarMountEffect, []);
 
-  React.useEffect(calendarUpdateEffect, [
+  useEffect(calendarUpdateEffect, [
     props.events,
     props.options,
     calendarRef,

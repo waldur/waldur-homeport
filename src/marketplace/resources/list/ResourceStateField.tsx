@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { pick } from '@waldur/core/utils';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource as ResourceType } from '@waldur/resource/types';

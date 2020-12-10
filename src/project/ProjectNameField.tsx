@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StringField } from '@waldur/form';
 import { TranslateProps } from '@waldur/i18n';
 

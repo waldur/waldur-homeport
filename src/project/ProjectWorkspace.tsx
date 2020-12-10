@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -31,8 +31,8 @@ function getBreadcrumbs(project, state): BreadcrumbItem[] {
 }
 
 export const ProjectWorkspace = () => {
-  const [pageClass, setPageClass] = React.useState<string>();
-  const [hideBreadcrumbs, setHideBreadcrumbs] = React.useState<boolean>();
+  const [pageClass, setPageClass] = useState<string>();
+  const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
   const project = useSelector(getProject);
   const { state, params } = useCurrentStateAndParams();
 
@@ -43,7 +43,7 @@ export const ProjectWorkspace = () => {
   }
   useBreadcrumbsFn(() => getBreadcrumbs(project, state), [project, state]);
 
-  React.useEffect(refreshState, [state, params]);
+  useEffect(refreshState, [state, params]);
 
   return (
     <Layout

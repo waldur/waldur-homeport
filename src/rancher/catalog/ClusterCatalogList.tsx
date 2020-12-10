@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -8,7 +8,7 @@ import { CatalogDeleteButton } from './CatalogDeleteButton';
 
 const TableComponent = (props) => {
   const { translate } = props;
-  const columns = React.useMemo(
+  const columns = useMemo(
     () => [
       {
         title: translate('Name'),

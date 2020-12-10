@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { translate } from '@waldur/i18n';
 import { fetchInvoicesStats } from '@waldur/invoices/api';
 import { INVOICES_STATS_TABLE } from '@waldur/invoices/constants';

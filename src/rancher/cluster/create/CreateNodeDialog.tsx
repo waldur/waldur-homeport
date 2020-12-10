@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
@@ -71,7 +71,7 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
 
   const dispatch = useDispatch();
 
-  const callback = React.useCallback(
+  const callback = useCallback(
     async (formData: FormData) => {
       try {
         await createNode(serializeNode(cluster, formData));

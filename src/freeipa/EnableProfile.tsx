@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -11,7 +11,7 @@ import { enableProfile } from './api';
 export const EnableProfile = ({ profile, setLoading, refreshProfile }) => {
   const dispatch = useDispatch();
 
-  const callback = React.useCallback(async () => {
+  const callback = useCallback(async () => {
     setLoading(true);
     try {
       await enableProfile(profile.uuid);

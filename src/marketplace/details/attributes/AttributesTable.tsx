@@ -1,4 +1,3 @@
-import React from 'react';
 import { Table } from 'react-bootstrap';
 
 import { Section } from '@waldur/marketplace/types';

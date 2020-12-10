@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm, formValueSelector, change } from 'redux-form';
@@ -29,9 +29,9 @@ interface OwnProps {
 }
 
 const useHPACreateDialog = (cluster) => {
-  const [submitting, setSubmitting] = React.useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch();
-  const callback = React.useCallback(
+  const callback = useCallback(
     async (formData: HPACreateFormData) => {
       try {
         setSubmitting(true);
@@ -89,13 +89,13 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
   const dispatch = useDispatch();
 
   // Clear workload selection after namespace selection has been changed
-  React.useEffect(() => {
+  useEffect(() => {
     if (namespace) {
       dispatch(change(FORM_ID, 'workload', null));
     }
   }, [dispatch, namespace]);
 
-  const validWorkloads = React.useMemo(
+  const validWorkloads = useMemo(
     () =>
       namespace &&
       value?.workloads.filter(
@@ -104,12 +104,9 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
     [value, namespace],
   );
 
-  const metricNameOptions = React.useMemo<MetricOption[]>(
-    getMetricNameOptions,
-    [],
-  );
+  const metricNameOptions = useMemo<MetricOption[]>(getMetricNameOptions, []);
 
-  const targetTypeOptions = React.useMemo(getTargetTypeOptions, []);
+  const targetTypeOptions = useMemo(getTargetTypeOptions, []);
 
   const metric: MetricOption = useSelector(metricSelector);
 

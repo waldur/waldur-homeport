@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -16,7 +16,7 @@ interface HeatMapComponentProps {
   setTitle: typeof setTitle;
 }
 
-class HeatMapComponent extends React.Component<HeatMapComponentProps> {
+class HeatMapComponent extends Component<HeatMapComponentProps> {
   componentDidMount() {
     this.props.fetchServiceUsageStart();
     this.props.setTitle(translate('Heatmap'));

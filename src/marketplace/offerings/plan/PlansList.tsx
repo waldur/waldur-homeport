@@ -1,4 +1,3 @@
-import React from 'react';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 

@@ -1,8 +1,8 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 
-const LazyIssueDetails = React.lazy(() =>
+const LazyIssueDetails = lazy(() =>
   import(/* webpackChunkName: "IssueDetails" */ './IssueDetails').then(
     ({ IssueDetails }) => ({
       default: IssueDetails,
@@ -11,7 +11,7 @@ const LazyIssueDetails = React.lazy(() =>
 );
 
 export const IssueDetailsContainer = (props) => (
-  <React.Suspense fallback={<LoadingSpinner />}>
+  <Suspense fallback={<LoadingSpinner />}>
     <LazyIssueDetails {...props} />
-  </React.Suspense>
+  </Suspense>
 );

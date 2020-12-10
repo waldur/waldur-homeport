@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
@@ -10,7 +10,7 @@ import { InvoicesStatsList } from '@waldur/invoices/list/InvoicesStatsList';
 
 import { getInvoice } from './api';
 
-export const CustomerExpandableRow = React.memo((props: any) => {
+export const CustomerExpandableRow = memo((props: any) => {
   const accountingPeriod = useSelector((state) =>
     formValueSelector('customerListFilter')(state, 'accounting_period'),
   );

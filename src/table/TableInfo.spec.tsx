@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import React from 'react';
 
 import { formatTemplate } from '@waldur/i18n/translate';
 

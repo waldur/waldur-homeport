@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -17,7 +17,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 export const RequestDirectAccessDialog = ({ resolve: { resource }, close }) => {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     if (isFeatureVisible('support')) {
       close();
       dispatch(

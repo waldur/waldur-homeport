@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import React from 'react';
+import { useState } from 'react';
 import {
   ControlLabel,
   FormControl,
@@ -29,7 +29,7 @@ import delay from './delay';
 
 export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(
   ({ submitting, invalid, handleSubmit }) => {
-    const [challengeCode, setChallengeCode] = React.useState<string>();
+    const [challengeCode, setChallengeCode] = useState<string>();
     const dispatch = useDispatch();
     const router = useRouter();
     const isMounted = useMountedState();

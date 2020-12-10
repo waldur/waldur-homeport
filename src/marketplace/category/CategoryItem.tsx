@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 
 import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
 import { Category } from '@waldur/marketplace/types';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync, useAsyncFn } from 'react-use';
 
@@ -24,12 +24,12 @@ const toggleElement = (element, list) =>
     : [...list, element];
 
 export const useImportDialog = (props: ImportDialogProps) => {
-  const [offering, setOffering] = React.useState<Offering>();
-  const [resources, setResources] = React.useState<ImportableResource[]>([]);
-  const [plans, setPlans] = React.useState<Record<string, Plan>>({});
-  const [submitting, setSubmitting] = React.useState(false);
+  const [offering, setOffering] = useState<Offering>();
+  const [resources, setResources] = useState<ImportableResource[]>([]);
+  const [plans, setPlans] = useState<Record<string, Plan>>({});
+  const [submitting, setSubmitting] = useState(false);
 
-  const submitEnabled = React.useMemo(
+  const submitEnabled = useMemo(
     () =>
       resources.length > 0 &&
       (!offering.billable ||
@@ -58,7 +58,7 @@ export const useImportDialog = (props: ImportDialogProps) => {
     [offering],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (offering) {
       resourceCallback();
     }

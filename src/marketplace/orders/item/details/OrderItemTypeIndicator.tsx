@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
@@ -9,7 +9,7 @@ export const OrderItemTypeIndicator = ({
 }: {
   orderItem: OrderItemDetailsType;
 }) => {
-  const label = React.useMemo(() => {
+  const label = useMemo(() => {
     switch (orderItem.type) {
       case 'Create':
         return translate('Provision new resource').toLocaleUpperCase();
@@ -30,7 +30,7 @@ export const OrderItemTypeIndicator = ({
     }
   }, [orderItem]);
 
-  const variant = React.useMemo(
+  const variant = useMemo(
     () =>
       orderItem.type === 'Create'
         ? 'primary'

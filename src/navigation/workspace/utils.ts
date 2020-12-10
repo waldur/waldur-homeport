@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CustomerCreateDialog } from '@waldur/customer/create/CustomerCreateDialog';
@@ -38,8 +38,8 @@ const filterProject = (project: Project, filter: string): boolean => {
 };
 
 export const useProjectFilter = (projects: Project[]) => {
-  const [filter, setFilter] = React.useState('');
-  const filteredProjects = React.useMemo(
+  const [filter, setFilter] = useState('');
+  const filteredProjects = useMemo(
     () =>
       projects
         ? projects.filter((project) => filterProject(project, filter))

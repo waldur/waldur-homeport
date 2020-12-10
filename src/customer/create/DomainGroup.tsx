@@ -1,4 +1,3 @@
-import React from 'react';
 import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 

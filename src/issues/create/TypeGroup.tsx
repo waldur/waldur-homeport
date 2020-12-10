@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -12,9 +12,7 @@ import { TypeField } from './TypeField';
 export const TypeGroup = ({ disabled, layout }) => {
   const user = useSelector(getUser);
   const showAllTypes = getShowAllTypes(user);
-  const issueTypes = React.useMemo(() => getIssueTypes(showAllTypes), [
-    showAllTypes,
-  ]);
+  const issueTypes = useMemo(() => getIssueTypes(showAllTypes), [showAllTypes]);
   return (
     <LayoutWrapper
       layout={layout}

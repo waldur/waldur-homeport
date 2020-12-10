@@ -1,5 +1,5 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import React from 'react';
+import { useState } from 'react';
 import { MapContainer } from 'react-leaflet';
 
 import { SubmitButton } from '@waldur/form';
@@ -24,7 +24,7 @@ interface SetLocationDialogProps {
 const provider = new OpenStreetMapProvider();
 
 export const SetLocationDialog = (props: SetLocationDialogProps) => {
-  const [coordinates, setCoordinates] = React.useState<GeolocationPoint>({
+  const [coordinates, setCoordinates] = useState<GeolocationPoint>({
     latitude: props.resolve.data.latitude,
     longitude: props.resolve.data.longitude,
   });

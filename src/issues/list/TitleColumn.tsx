@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Tooltip } from '@waldur/core/Tooltip';
 
 export const TitleColumn = ({ row }) => (

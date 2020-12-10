@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
 import { getEChartOptions } from '@waldur/marketplace/resources/usage/utils';
@@ -9,7 +9,7 @@ export const ResourceUsageChart = ({
   colors,
   tabIndex,
 }) => {
-  const options = React.useMemo(
+  const options = useMemo(
     () => getEChartOptions(offeringComponent, usages, colors, tabIndex),
     [offeringComponent, usages, colors, tabIndex],
   );

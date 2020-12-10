@@ -1,4 +1,3 @@
-import React from 'react';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 

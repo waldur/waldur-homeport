@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { Component, ReactNode } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import loadEcharts from '@waldur/shims/load-echarts';
@@ -13,7 +13,7 @@ interface SankeyDiagramState {
   loading: boolean;
 }
 
-export default class SankeyDiagram extends React.Component<
+export default class SankeyDiagram extends Component<
   SankeyDiagramProps,
   SankeyDiagramState
 > {

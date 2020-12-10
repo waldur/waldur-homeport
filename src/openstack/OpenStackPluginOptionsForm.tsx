@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
@@ -10,7 +10,7 @@ const pluginOptionsSelector = (state) =>
   formValueSelector(FORM_ID)(state, 'plugin_options');
 
 export const OpenStackPluginOptionsForm = ({ container }) => {
-  const STORAGE_MODE_OPTIONS = React.useMemo(
+  const STORAGE_MODE_OPTIONS = useMemo(
     () => [
       {
         label: translate('Fixed — use common storage quota'),

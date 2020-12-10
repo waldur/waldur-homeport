@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { translate } from '@waldur/i18n';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';

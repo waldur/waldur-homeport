@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Link } from '@waldur/core/Link';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';

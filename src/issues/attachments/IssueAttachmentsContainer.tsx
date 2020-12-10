@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -22,7 +22,7 @@ interface PureIssueAttachmentsContainerProps extends TranslateProps {
   uploading: number;
 }
 
-export class PureIssueAttachmentsContainer extends React.Component<
+export class PureIssueAttachmentsContainer extends Component<
   PureIssueAttachmentsContainerProps
 > {
   state = {

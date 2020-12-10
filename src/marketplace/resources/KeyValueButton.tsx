@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -9,7 +9,7 @@ import { MarketplaceKeyValueDialog } from './MarketplaceKeyValueDialog';
 export const KeyValueButton = (props) => {
   const dispatch = useDispatch();
 
-  const showDetails = React.useCallback(() => {
+  const showDetails = useCallback(() => {
     const resolve = { items: props.items };
     dispatch(openModalDialog(MarketplaceKeyValueDialog, { resolve }));
   }, [dispatch, props.items]);

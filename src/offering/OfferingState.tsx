@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { withTranslation, TranslateProps } from '@waldur/i18n';
 

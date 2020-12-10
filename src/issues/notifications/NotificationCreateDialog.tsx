@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -41,7 +41,7 @@ export const NotificationCreateDialog = reduxForm({
 })(({ submitting, invalid, handleSubmit }) => {
   const dispatch = useDispatch();
 
-  const createNotification = React.useCallback(
+  const createNotification = useCallback(
     async (formData) => {
       try {
         const response = await post<{ emails: string[] }>('/notifications/', {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
