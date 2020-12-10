@@ -8719,6 +8719,7 @@ msgstr ""
 #: src/marketplace/resources/ResourceTabs.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/openstack/openstack-tenant/tabs.ts
 #: src/slurm/details/utils.ts
 #: src/slurm/tabs.ts
 msgid "Usage"
