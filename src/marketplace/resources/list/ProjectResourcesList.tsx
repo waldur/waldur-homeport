@@ -18,6 +18,7 @@ import { CreateResourceButton } from './CreateResourceButton';
 import { EmptyResourcesListPlaceholder } from './EmptyResourcesListPlaceholder';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
+import { ResourceOpenDetail } from './ResourceOpenDetail';
 import { ResourceStateField } from './ResourceStateField';
 
 interface FieldProps {
@@ -91,6 +92,7 @@ export const TableComponent = (props) => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
+      expandableRow={ResourceOpenDetail}
     />
   );
 };
