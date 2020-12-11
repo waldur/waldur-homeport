@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { Panel } from 'react-bootstrap';
+import { useToggle } from 'react-use';
 import { reduxForm, Field } from 'redux-form';
 
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
@@ -17,19 +17,14 @@ interface TreemapChartFilterProps {
 }
 
 export const PureTreemapChartFilter = (props: TreemapChartFilterProps) => {
-  const [open, setOpen] = useState(true);
-  const togglePanel = () => {
-    setOpen(!open);
-  };
+  const [open, togglePanel] = useToggle(true);
 
   return (
     <Panel expanded={open}>
       <Panel.Heading>
         <Panel.Title>
           <h4 id="toggle-controls-label" onClick={togglePanel}>
-            {translate('{state} controls', {
-              state: !open ? 'Show' : 'Hide',
-            })}
+            {open ? translate('Hide controls') : translate('Show controls')}
           </h4>
         </Panel.Title>
       </Panel.Heading>

@@ -2768,6 +2768,10 @@ msgstr ""
 msgid "Helpdesk dashboard"
 msgstr ""
 
+#: src/resource/support/TreemapChartFilter.tsx
+msgid "Hide controls"
+msgstr ""
+
 #: src/rancher/cluster/ViewYAMLDialog.tsx
 msgid "Hide diff"
 msgstr ""
@@ -6893,6 +6897,10 @@ msgstr ""
 msgid "Show console log"
 msgstr ""
 
+#: src/resource/support/TreemapChartFilter.tsx
+msgid "Show controls"
+msgstr ""
+
 #: src/marketplace/resources/KeyValueButton.tsx
 msgid "Show details"
 msgstr ""
@@ -9900,10 +9908,6 @@ msgstr ""
 
 #: src/invitations/RoleField.tsx
 msgid "{role} in {project}"
-msgstr ""
-
-#: src/resource/support/TreemapChartFilter.tsx
-msgid "{state} controls"
 msgstr ""
 
 #: src/quotas/QuotasTable.tsx
