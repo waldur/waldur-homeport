@@ -1,5 +1,6 @@
 import { createPullAction } from '@waldur/resource/actions/base';
 
+import attachVolumeAction from './AttachVolumeAction';
 import changeFlavorAction from './ChangeFlavorAction';
 import consoleAction from './ConsoleAction';
 import consoleLogAction from './ConsoleLogAction';
@@ -31,4 +32,5 @@ export default [
   updateFloatingIpsAction,
   destroyAction,
   forceDestroyAction,
+  attachVolumeAction,
 ];

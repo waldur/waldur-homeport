@@ -137,6 +137,11 @@ export const createSnapshot = (id, data) =>
 export const createBackupSchedule = (id, data) =>
   post(`/openstacktenant-instances/${id}/create_backup_schedule/`, data);
 
+export const attachVolume = (volumeId, instanceUrl) =>
+  post(`/openstacktenant-volumes/${volumeId}/attach/`, {
+    instance: instanceUrl,
+  });
+
 export const createSnapshotSchedule = (id, data) =>
   post(`/openstacktenant-volumes/${id}/create_snapshot_schedule/`, data);
 

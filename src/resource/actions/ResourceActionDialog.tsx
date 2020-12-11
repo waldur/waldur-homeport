@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, initialize } from 'redux-form';
 
 import { StringField, TextField } from '@waldur/form';
+import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CronField } from '@waldur/form/CronField';
 import { DateField } from '@waldur/form/DateField';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { NumberField } from '@waldur/form/NumberField';
 import { TimezoneField } from '@waldur/form/TimezoneField';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 
@@ -92,6 +94,14 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
           );
         } else if (field.type === 'boolean') {
           return <AwesomeCheckboxField hideLabel={true} {...props} />;
+        } else if (field.type === 'async_select') {
+          return (
+            <AsyncSelectField
+              {...props}
+              loadOptions={field.loadOptions}
+              {...reactSelectMenuPortaling()}
+            />
+          );
         }
       })}
     </ActionDialog>
