@@ -670,6 +670,14 @@ msgstr ""
 msgid "Attach"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/AttachVolumeAction.tsx
+msgid "Attach has been scheduled."
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/AttachVolumeAction.tsx
+msgid "Attach volume"
+msgstr ""
+
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 msgid "Attached to"
@@ -7897,6 +7905,10 @@ msgstr ""
 msgid "Unable to approve order."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/AttachVolumeAction.tsx
+msgid "Unable to attach volume."
+msgstr ""
+
 #: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Unable to authenticate using Mobile ID."
 msgstr ""
@@ -9127,6 +9139,7 @@ msgstr ""
 msgid "Virtual machines count"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/AttachVolumeAction.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 msgid "Volume"
 msgstr ""
