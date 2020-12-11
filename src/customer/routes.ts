@@ -8,9 +8,9 @@ import { ProjectCreateContainer } from '../project/ProjectCreateContainer';
 import { CustomerDashboardContainer } from './dashboard/CustomerDashboardContainer';
 import { CustomerManage } from './details/CustomerManage';
 import { CustomerTeam } from './team/CustomerTeam';
-import { loadCustomer, CustomerController } from './utils';
 import { CustomerEventsView } from './workspace/CustomerEventsList';
 import { CustomerIssuesList } from './workspace/CustomerIssuesList';
+import { CustomerWorkspace } from './workspace/CustomerWorkspace';
 
 export const states: StateDeclaration[] = [
   {
@@ -21,11 +21,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: ORGANIZATION_WORKSPACE,
     },
-    template: '<customer-workspace></customer-workspace>',
-    resolve: {
-      currentCustomer: loadCustomer,
-    },
-    controller: CustomerController,
+    component: CustomerWorkspace,
   },
 
   {
