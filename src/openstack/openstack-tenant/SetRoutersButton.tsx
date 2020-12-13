@@ -1,10 +1,14 @@
 import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { SetRoutesDialog } from './SetRoutesDialog';
+const SetRoutesDialog = lazyComponent(
+  () => import(/* webpackChunkName: "SetRoutesDialog" */ './SetRoutesDialog'),
+  'SetRoutesDialog',
+);
 
 export const SetRoutersButton = ({ router }) => {
   const dispatch = useDispatch();

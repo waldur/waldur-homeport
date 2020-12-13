@@ -1,14 +1,22 @@
 import { connect } from 'react-redux';
 
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Link } from '@waldur/core/Link';
 import { Tooltip } from '@waldur/core/Tooltip';
-import { CustomerPopover } from '@waldur/customer/popover/CustomerPopover';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { UserPopover } from '@waldur/user/UserPopover';
+import { openUserPopover } from '@waldur/user/actions';
 
 import { Issue } from './types';
+
+const CustomerPopover = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerPopover" */ '@waldur/customer/popover/CustomerPopover'
+    ),
+  'CustomerPopover',
+);
 
 interface Props {
   item: Issue;
@@ -17,8 +25,7 @@ interface Props {
 }
 
 const connector = connect(null, (dispatch) => ({
-  openUserDialog: (user_uuid) =>
-    dispatch(openModalDialog(UserPopover, { resolve: { user_uuid } })),
+  openUserDialog: (user_uuid) => dispatch(openUserPopover({ user_uuid })),
 
   openCustomerDialog: (customer_uuid) =>
     dispatch(

@@ -1,8 +1,20 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
-import { ChecklistCustomer } from './ChecklistCustomer';
-import { ChecklistOverview } from './ChecklistOverview';
-import { UserChecklist } from './UserChecklist';
+const ChecklistCustomer = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "ChecklistCustomer" */ './ChecklistCustomer'),
+  'ChecklistCustomer',
+);
+const ChecklistOverview = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "ChecklistOverview" */ './ChecklistOverview'),
+  'ChecklistOverview',
+);
+const UserChecklist = lazyComponent(
+  () => import(/* webpackChunkName: "UserChecklist" */ './UserChecklist'),
+  'UserChecklist',
+);
 
 export const states: StateDeclaration[] = [
   {

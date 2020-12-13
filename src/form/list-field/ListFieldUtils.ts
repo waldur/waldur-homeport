@@ -1,7 +1,11 @@
-import { ListConfiguration } from '@waldur/form/list-field/types';
+import { lazyComponent } from '@waldur/core/lazyComponent';
+import type { ListConfiguration } from '@waldur/form/list-field/types';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { ListFieldModal } from './ListFieldModal';
+const ListFieldModal = lazyComponent(
+  () => import(/* webpackChunkName: "ListFieldModal" */ './ListFieldModal'),
+  'ListFieldModal',
+);
 
 export const openListFieldModal = (
   configuration: ListConfiguration,

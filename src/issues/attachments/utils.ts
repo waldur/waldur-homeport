@@ -1,9 +1,16 @@
 import accept from 'attr-accept';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { IssueAttachmentModal } from './IssueAttachmentModal';
+const IssueAttachmentModal = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "IssueAttachmentModal" */ './IssueAttachmentModal'
+    ),
+  'IssueAttachmentModal',
+);
 
 export const validateFiles = (
   files: File[] = [],

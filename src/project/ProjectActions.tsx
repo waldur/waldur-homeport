@@ -1,3 +1,4 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { $state } from '@waldur/core/services';
 import { ActionList } from '@waldur/dashboard/ActionList';
 import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';
@@ -7,7 +8,13 @@ import { openModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 import { Project, User } from '@waldur/workspace/types';
 
-import { ProjectDetailsDialog } from './ProjectDetailsDialog';
+const ProjectDetailsDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ProjectDetailsDialog" */ './ProjectDetailsDialog'
+    ),
+  'ProjectDetailsDialog',
+);
 
 interface ProjectActionsProps {
   user: User;

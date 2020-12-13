@@ -1,16 +1,65 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { PaymentProfileCreateContainer } from '@waldur/customer/payment-profiles/PaymentProfileCreateContainer';
-import { ProjectsList } from '@waldur/project/ProjectsList';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-import { ProjectCreateContainer } from '../project/ProjectCreateContainer';
-
-import { CustomerDashboardContainer } from './dashboard/CustomerDashboardContainer';
-import { CustomerManage } from './details/CustomerManage';
-import { CustomerTeam } from './team/CustomerTeam';
-import { CustomerEventsView } from './workspace/CustomerEventsList';
-import { CustomerIssuesList } from './workspace/CustomerIssuesList';
-import { CustomerWorkspace } from './workspace/CustomerWorkspace';
+const ProjectsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ProjectsList" */ '@waldur/project/ProjectsList'
+    ),
+  'ProjectsList',
+);
+const ProjectCreateContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ProjectCreateContainer" */ '../project/ProjectCreateContainer'
+    ),
+  'ProjectCreateContainer',
+);
+const PaymentProfileCreateContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "PaymentProfileCreateContainer" */ '@waldur/customer/payment-profiles/PaymentProfileCreateContainer'
+    ),
+  'PaymentProfileCreateContainer',
+);
+const CustomerDashboardContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerDashboardContainer" */ './dashboard/CustomerDashboardContainer'
+    ),
+  'CustomerDashboardContainer',
+);
+const CustomerManage = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "CustomerManage" */ './details/CustomerManage'),
+  'CustomerManage',
+);
+const CustomerTeam = lazyComponent(
+  () => import(/* webpackChunkName: "CustomerTeam" */ './team/CustomerTeam'),
+  'CustomerTeam',
+);
+const CustomerEventsView = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerEventsList" */ './workspace/CustomerEventsList'
+    ),
+  'CustomerEventsView',
+);
+const CustomerIssuesList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerIssuesList" */ './workspace/CustomerIssuesList'
+    ),
+  'CustomerIssuesList',
+);
+const CustomerWorkspace = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerWorkspace" */ './workspace/CustomerWorkspace'
+    ),
+  'CustomerWorkspace',
+);
 
 export const states: StateDeclaration[] = [
   {

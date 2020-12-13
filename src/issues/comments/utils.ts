@@ -2,8 +2,7 @@ import { escapeHtml } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Attachment } from '@waldur/issues/attachments/types';
 import { getFileName } from '@waldur/issues/attachments/utils';
-import { openModalDialog } from '@waldur/modal/actions';
-import { UserPopover } from '@waldur/user/UserPopover';
+import { openUserPopover } from '@waldur/user/actions';
 
 import { Comment } from './types';
 
@@ -129,4 +128,4 @@ export const formatJiraMarkup = (
     .replace(/\n/g, '<br/>');
 
 export const openUserModal = (uuid: string) =>
-  openModalDialog(UserPopover, { resolve: { user_uuid: uuid } });
+  openUserPopover({ user_uuid: uuid });

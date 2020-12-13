@@ -1,4 +1,5 @@
 import { StateDeclaration as BaseStateDeclaration } from '@uirouter/core';
+import { ComponentType } from 'react';
 
 import { PluginConfiguration } from '@waldur/auth/types';
 
@@ -41,7 +42,7 @@ interface TemplateStateDeclaration extends DataStateDeclaration {
 }
 
 interface ComponentStateDeclaration extends DataStateDeclaration {
-  component?: React.ComponentType<{}>;
+  component: ComponentType<any>;
 }
 
 export type StateDeclaration =

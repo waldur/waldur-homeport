@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { PAYMENTS_TABLE } from '@waldur/customer/details/constants';
-import { PaymentCreateDialogContainer } from '@waldur/customer/payments/PaymentCreateDialog';
 import { PaymentInvoiceRenderer } from '@waldur/customer/payments/PaymentInvoiceRenderer';
 import { PaymentProofRenderer } from '@waldur/customer/payments/PaymentProofRenderer';
 import { translate } from '@waldur/i18n';
@@ -14,6 +14,14 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
 
 import { PaymentActions } from './PaymentActions';
+
+const PaymentCreateDialogContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "PaymentCreateDialog" */ '@waldur/customer/payments/PaymentCreateDialog'
+    ),
+  'PaymentCreateDialogContainer',
+);
 
 const openPaymentCreateDialog = (profileUrl: string) =>
   openModalDialog(PaymentCreateDialogContainer, {

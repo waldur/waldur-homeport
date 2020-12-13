@@ -5,7 +5,7 @@ import {
   createLatinNameField,
   createDescriptionField,
 } from '@waldur/resource/actions/base';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 
@@ -31,7 +31,7 @@ export default function createAction({ resource }): ResourceAction {
         ),
       },
     ],
-    component: ResourceActionDialog,
+    component: LazyResourceActionDialog,
     useResolve: true,
     getInitialValues: () => ({
       name: resource.name + '-snapshot',

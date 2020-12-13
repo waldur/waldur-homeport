@@ -4,12 +4,20 @@ import { useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 
 import { RequestedEmail } from './RequestedEmail';
-import { UserEmailChangeDialog } from './UserEmailChangeDialog';
+
+const UserEmailChangeDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UserEmailChangeDialog" */ './UserEmailChangeDialog'
+    ),
+  'UserEmailChangeDialog',
+);
 
 export const EmailField = (props) => {
   const [waiting, setWaiting] = useState(false);

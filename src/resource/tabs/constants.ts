@@ -1,9 +1,24 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { ResourceOrderItemsTab } from '@waldur/marketplace/orders/item/list/ResourceOrderItems';
 
-import { ResourceEvents } from './ResourceEvents';
-import { ResourceIssuesList } from './ResourceIssuesList';
-import { ResourceTab } from './types';
+import type { ResourceTab } from './types';
+
+const ResourceOrderItemsTab = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ResourceOrderItems" */ '@waldur/marketplace/orders/item/list/ResourceOrderItems'
+    ),
+  'ResourceOrderItemsTab',
+);
+const ResourceEvents = lazyComponent(
+  () => import(/* webpackChunkName: "ResourceEvents" */ './ResourceEvents'),
+  'ResourceEvents',
+);
+const ResourceIssuesList = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "ResourceIssuesList" */ './ResourceIssuesList'),
+  'ResourceIssuesList',
+);
 
 export const getEventsTab = (): ResourceTab => ({
   key: 'events',

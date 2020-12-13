@@ -1,8 +1,19 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
-import { AzureSQLServerDetails } from './AzureSQLServerDetails';
-import { AzureSQLServerForm } from './AzureSQLServerForm';
+const AzureSQLServerDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AzureSQLServerDetails" */ './AzureSQLServerDetails'
+    ),
+  'AzureSQLServerDetails',
+);
+const AzureSQLServerForm = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "AzureSQLServerForm" */ './AzureSQLServerForm'),
+  'AzureSQLServerForm',
+);
 
 registerOfferingType({
   type: 'Azure.SQLServer',

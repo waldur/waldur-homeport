@@ -4,7 +4,7 @@ import { createSubnet } from '@waldur/openstack/api';
 import { getFields } from '@waldur/openstack/openstack-subnet/fields';
 import { SUBNET_PRIVATE_CIDR_PATTERN } from '@waldur/openstack/utils';
 import { validateState } from '@waldur/resource/actions/base';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
 
@@ -38,7 +38,7 @@ export default function createAction({ resource }): ResourceAction {
       enable_default_gateway: true,
       cidr: '192.168.42.0/24',
     }),
-    component: ResourceActionDialog,
+    component: LazyResourceActionDialog,
     useResolve: true,
     submitForm: async (dispatch, formData) => {
       try {

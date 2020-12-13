@@ -1,12 +1,19 @@
 import { AuthService } from '@waldur/auth/AuthService';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 
-import { InvitationConfirmDialog } from './InvitationConfirmDialog';
 import { InvitationService } from './InvitationService';
+const InvitationConfirmDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "InvitationConfirmDialog" */ './InvitationConfirmDialog'
+    ),
+  'InvitationConfirmDialog',
+);
 
 export class InvitationUtilsService {
   // @ngInject

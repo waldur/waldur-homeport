@@ -1,17 +1,20 @@
 import { getAll } from '@waldur/core/api';
 import { TreemapData } from '@waldur/resource/support/types';
+import { Project } from '@waldur/workspace/types';
 
 export interface QuotasMap {
   [key: string]: TreemapData;
 }
 
-export function parseProjects(projects, quotaNames) {
+export function parseProjects(projects: Project[], quotaNames) {
   const customers = {};
 
   for (const project of projects) {
     const quotas = {};
-    for (const quota of project.quotas) {
-      quotas[quota.name] = quota.usage;
+    if (project.quotas) {
+      for (const quota of project.quotas) {
+        quotas[quota.name] = quota.usage;
+      }
     }
     let currentPrice = 0;
     let estimatedPrice = 0;
@@ -69,5 +72,7 @@ export const loadData = (accounting_is_running: boolean) => {
     'quotas',
     'billing_price_estimate',
   ];
-  return getAll('/projects/', { params: { field, accounting_is_running } });
+  return getAll<Project>('/projects/', {
+    params: { field, accounting_is_running },
+  });
 };

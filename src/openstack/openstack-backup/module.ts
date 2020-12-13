@@ -1,10 +1,17 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
 import './breadcrumbs';
 import openstackBackupRestoreSummary from './openstack-backup-restore-summary';
-import { OpenStackBackupSummary } from './OpenStackBackupSummary';
+const OpenStackBackupSummary = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenStackBackupSummary" */ './OpenStackBackupSummary'
+    ),
+  'OpenStackBackupSummary',
+);
 
 import './tabs';
 

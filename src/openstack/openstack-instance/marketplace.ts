@@ -1,11 +1,25 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
-import { OpenstackInstanceCheckoutSummary } from '@waldur/openstack/openstack-instance/OpenstackInstanceCheckoutSummary';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 
-import { OpenstackInstanceCreateForm } from './OpenstackInstanceCreateForm';
 import { getVolumeTypeRequirements } from './utils';
+
+const OpenstackInstanceCheckoutSummary = lazyComponent(
+  () =>
+    import(
+      '@waldur/openstack/openstack-instance/OpenstackInstanceCheckoutSummary'
+    ),
+  'OpenstackInstanceCheckoutSummary',
+);
+const OpenstackInstanceCreateForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenstackInstanceCreateForm" */ './OpenstackInstanceCreateForm'
+    ),
+  'OpenstackInstanceCreateForm',
+);
 
 const serializeFloatingIPs = (networks) => {
   if (!networks) {

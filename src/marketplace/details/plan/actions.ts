@@ -1,7 +1,15 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { PlanDescription } from './PlanDescription';
-import { PlanDetailsDialog } from './PlanDetailsDialog';
+const PlanDescription = lazyComponent(
+  () => import(/* webpackChunkName: "PlanDescription" */ './PlanDescription'),
+  'PlanDescription',
+);
+const PlanDetailsDialog = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "PlanDetailsDialog" */ './PlanDetailsDialog'),
+  'PlanDetailsDialog',
+);
 
 export const showOfferingPlanDescription = (planDescription) =>
   openModalDialog(PlanDescription, {

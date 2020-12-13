@@ -1,11 +1,18 @@
 import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { OfferingReferralsDialog } from './OfferingReferralsDialog';
+const OfferingReferralsDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingReferralsDialog" */ './OfferingReferralsDialog'
+    ),
+  'OfferingReferralsDialog',
+);
 
 interface ReferralDetailsButtonProps {
   offering: Offering;

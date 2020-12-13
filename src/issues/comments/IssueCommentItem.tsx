@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { formatMediumDateTime } from '@waldur/core/dateUtils';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { $sanitize } from '@waldur/core/services';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { getAttachments } from '@waldur/issues/attachments/selectors';
@@ -14,7 +15,6 @@ import { openModalDialog } from '@waldur/modal/actions';
 
 import * as actions from './actions';
 import './IssueCommentItem.scss';
-import { IssueCommentDeleteDialog } from './IssueCommentDeleteDialog';
 import { IssueCommentsFormContainer } from './IssueCommentsFormContainer';
 import {
   getIsDeleting,
@@ -25,6 +25,13 @@ import {
 import { Comment, User } from './types';
 import * as utils from './utils';
 
+const IssueCommentDeleteDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "IssueCommentDeleteDialog" */ './IssueCommentDeleteDialog'
+    ),
+  'IssueCommentDeleteDialog',
+);
 interface PureIssueCommentItemProps extends TranslateProps {
   comment: Comment;
   user: User;

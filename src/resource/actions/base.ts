@@ -2,10 +2,10 @@ import { ENV } from '@waldur/core/services';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceState, BaseResource } from '@waldur/resource/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 
-import { ResourceActionDialog } from './ResourceActionDialog';
 import {
   ResourceAction,
   ActionField,
@@ -65,7 +65,7 @@ export function createEditAction<Resource extends BaseResource>({
     type: 'form',
     fields,
     validators,
-    component: ResourceActionDialog,
+    component: LazyResourceActionDialog,
     useResolve: true,
     getInitialValues:
       getInitialValues ||

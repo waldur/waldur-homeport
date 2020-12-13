@@ -1,7 +1,11 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { pick } from '@waldur/core/utils';
 import * as ProvidersRegistry from '@waldur/providers/registry';
 
-import { AzureForm } from './AzureForm';
+const AzureForm = lazyComponent(
+  () => import(/* webpackChunkName: "AzureForm" */ './AzureForm'),
+  'AzureForm',
+);
 
 const serializer = pick([
   'tenant_id',

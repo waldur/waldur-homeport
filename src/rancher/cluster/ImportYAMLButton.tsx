@@ -1,10 +1,14 @@
 import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { ImportYAMLDialog } from './ImportYAMLDialog';
+const ImportYAMLDialog = lazyComponent(
+  () => import(/* webpackChunkName: "ImportYAMLDialog" */ './ImportYAMLDialog'),
+  'ImportYAMLDialog',
+);
 
 export const ImportYAMLButton = ({ cluster_id }) => {
   const dispatch = useDispatch();

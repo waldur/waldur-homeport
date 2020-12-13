@@ -2,7 +2,7 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { validatePermissions } from '@waldur/offering/actions/utils';
 import { setBackendID } from '@waldur/offering/api';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
 
@@ -16,7 +16,7 @@ export default function setBackendIDAction({
     title: translate('Set backend ID'),
     type: 'form',
     method: 'POST',
-    component: ResourceActionDialog,
+    component: LazyResourceActionDialog,
     useResolve: true,
     validators: [validatePermissions],
     getInitialValues: () => ({

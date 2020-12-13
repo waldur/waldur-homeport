@@ -1,10 +1,24 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { USER_WORKSPACE } from '@waldur/workspace/types';
 
-import { KeyCreateForm } from './keys/KeyCreateForm';
-import { UserEmailChangeCallback } from './support/UserEmailChangeCallback';
 import { tabs, requireIdParam } from './tabs';
-import { UserDetails } from './UserDetails';
+
+const KeyCreateForm = lazyComponent(
+  () => import(/* webpackChunkName: "KeyCreateForm" */ './keys/KeyCreateForm'),
+  'KeyCreateForm',
+);
+const UserEmailChangeCallback = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UserEmailChangeCallback" */ './support/UserEmailChangeCallback'
+    ),
+  'UserEmailChangeCallback',
+);
+const UserDetails = lazyComponent(
+  () => import(/* webpackChunkName: "UserDetails" */ './UserDetails'),
+  'UserDetails',
+);
 
 export const states: StateDeclaration[] = [
   {

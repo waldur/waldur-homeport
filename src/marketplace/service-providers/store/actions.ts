@@ -1,6 +1,13 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { ServiceProviderSecretCodeGenerateConfirm } from '../ServiceProviderSecretCodeGenerateConfirm';
+const ServiceProviderSecretCodeGenerateConfirm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ServiceProviderSecretCodeGenerateConfirm" */ '../ServiceProviderSecretCodeGenerateConfirm'
+    ),
+  'ServiceProviderSecretCodeGenerateConfirm',
+);
 
 import * as constants from './constants';
 

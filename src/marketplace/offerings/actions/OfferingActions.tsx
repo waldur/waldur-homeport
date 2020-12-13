@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { SetLocationDialog } from '@waldur/map/SetLocationDialog';
-import { RequestActionDialog } from '@waldur/marketplace/offerings/actions/RequestActionDialog';
 import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
@@ -14,8 +13,35 @@ import { addOfferingLocation, updateOfferingState } from '../store/actions';
 import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
 
 import { ActionsDropdown } from './ActionsDropdown';
-import { PauseOfferingDialog } from './PauseOfferingDialog';
-import { UpdateOfferingAttributesDialog } from './UpdateOfferingAttributesDialog';
+
+const SetLocationDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SetLocationDialog" */ '@waldur/map/SetLocationDialog'
+    ),
+  'SetLocationDialog',
+);
+const RequestActionDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "RequestActionDialog" */ '@waldur/marketplace/offerings/actions/RequestActionDialog'
+    ),
+  'RequestActionDialog',
+);
+const PauseOfferingDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "PauseOfferingDialog" */ './PauseOfferingDialog'
+    ),
+  'PauseOfferingDialog',
+);
+const UpdateOfferingAttributesDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UpdateOfferingAttributesDialog" */ './UpdateOfferingAttributesDialog'
+    ),
+  'UpdateOfferingAttributesDialog',
+);
 
 interface OwnProps {
   offering: Offering;

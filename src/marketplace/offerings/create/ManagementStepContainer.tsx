@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { withTranslation } from '@waldur/i18n';
 import {
   getOfferingTypes,
@@ -17,7 +18,14 @@ import { findProvider } from '@waldur/providers/registry';
 import { getOffering, getType, getTypeLabel } from '../store/selectors';
 
 import { ManagementStep, ManagementStepProps } from './ManagementStep';
-import { ServiceSettingsDetailsDialog } from './ServiceSettingsDetailsDialog';
+
+const ServiceSettingsDetailsDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ServiceSettingsDetailsDialog" */ './ServiceSettingsDetailsDialog'
+    ),
+  'ServiceSettingsDetailsDialog',
+);
 
 const mapStateToProps = (state) => {
   const offering: Offering = getOffering(state).offering;

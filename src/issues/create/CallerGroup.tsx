@@ -10,8 +10,7 @@ import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { UserPopover } from '@waldur/user/UserPopover';
+import { openUserPopover } from '@waldur/user/actions';
 
 import { refreshUsers } from './api';
 import { callerSelector } from './selectors';
@@ -21,8 +20,7 @@ const renderer = (option) => option.full_name || option.username;
 const CallerActions = ({ onSearch }) => {
   const dispatch = useDispatch();
   const caller = useSelector(callerSelector);
-  const openUserDialog = () =>
-    dispatch(openModalDialog(UserPopover, { resolve: { user: caller } }));
+  const onClick = () => dispatch(openUserPopover({ user: caller }));
   const filterByCaller = () => onSearch({ caller });
   if (!caller) {
     return null;
@@ -30,7 +28,7 @@ const CallerActions = ({ onSearch }) => {
   return (
     <Col sm={3}>
       <ButtonGroup>
-        <Button onClick={openUserDialog}>
+        <Button onClick={onClick}>
           <i className="fa fa-eye" /> {translate('Details')}
         </Button>
         <Button onClick={filterByCaller}>

@@ -1,7 +1,14 @@
-import { Section, Offering } from '@waldur/marketplace/types';
+import { lazyComponent } from '@waldur/core/lazyComponent';
+import type { Section, Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { AttributeFilterListDialog } from '../filters/AttributeFilterListDialog';
+const AttributeFilterListDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AttributeFilterListDialog" */ '../filters/AttributeFilterListDialog'
+    ),
+  'AttributeFilterListDialog',
+);
 
 import * as constants from './constants';
 

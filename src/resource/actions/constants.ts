@@ -44,3 +44,5 @@ export const latinName = {
     field.pattern = ENV.enforceLatinName && LATIN_NAME_PATTERN;
   },
 };
+
+export const RESOURCE_ACTION_FORM = 'ResourceActionDialog';

@@ -1,11 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { OfferingReportDialog } from './OfferingReportDialog';
-import { Offering } from './types';
+import type { Offering } from './types';
+
+const OfferingReportDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingReportDialog" */ './OfferingReportDialog'
+    ),
+  'OfferingReportDialog',
+);
 
 interface OfferingReportButtonProps {
   offering: Pick<Partial<Offering>, 'report'>;

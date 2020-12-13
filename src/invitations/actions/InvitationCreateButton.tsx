@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -9,7 +10,13 @@ import {
   getCustomer,
 } from '@waldur/workspace/selectors';
 
-import { InvitationCreateDialog } from './InvitationCreateDialog';
+const InvitationCreateDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "InvitationCreateDialog" */ './InvitationCreateDialog'
+    ),
+  'InvitationCreateDialog',
+);
 
 export const InvitationCreateButton = () => {
   const user = useSelector(getUser);

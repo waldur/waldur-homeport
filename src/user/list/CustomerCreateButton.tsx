@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { CustomerCreateDialog } from '@waldur/customer/create/CustomerCreateDialog';
+import { customerCreateDialog } from '@waldur/customer/create/actions';
 import { canCreateOrganization } from '@waldur/customer/create/selectors';
 import { withTranslation } from '@waldur/i18n/translate';
-import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { OuterState } from '@waldur/workspace/types';
 
@@ -16,12 +15,6 @@ const CustomerCreateButton = ({ isVisible, onClick, translate }) =>
       icon="fa fa-plus"
     />
   ) : null;
-
-const customerCreateDialog = () =>
-  openModalDialog(CustomerCreateDialog, {
-    size: 'lg',
-    resolve: { role: 'CUSTOMER' },
-  });
 
 const enhance = compose(
   connect(

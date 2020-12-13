@@ -1,8 +1,28 @@
-import { BookingCheckoutSummary } from '@waldur/booking/BookingCheckoutSummary';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
-import { OfferingConfigurationDetails } from '@waldur/offering/OfferingConfigurationDetails';
-import { OfferingConfigurationForm } from '@waldur/offering/OfferingConfigurationForm';
+
+const BookingCheckoutSummary = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "BookingCheckoutSummary" */ '@waldur/booking/BookingCheckoutSummary'
+    ),
+  'BookingCheckoutSummary',
+);
+const OfferingConfigurationDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingConfigurationDetails" */ '@waldur/offering/OfferingConfigurationDetails'
+    ),
+  'OfferingConfigurationDetails',
+);
+const OfferingConfigurationForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingConfigurationForm" */ '@waldur/offering/OfferingConfigurationForm'
+    ),
+  'OfferingConfigurationForm',
+);
 
 import { OFFERING_TYPE_BOOKING } from './constants';
 

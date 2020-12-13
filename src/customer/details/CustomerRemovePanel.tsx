@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { deleteById, getAll } from '@waldur/core/api';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV, ngInjector } from '@waldur/core/services';
-import { OrganizationRemovalErrorDialog } from '@waldur/customer/details/OrganizationRemovalErrorDialog';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
+import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError } from '@waldur/store/coreSaga';
@@ -19,6 +19,14 @@ import {
   isOwner as isOwnerSelector,
   getCustomer,
 } from '@waldur/workspace/selectors';
+
+const OrganizationRemovalErrorDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OrganizationRemovalErrorDialog" */ '@waldur/customer/details/OrganizationRemovalErrorDialog'
+    ),
+  'OrganizationRemovalErrorDialog',
+);
 
 const loadInvoices = (customer) =>
   getAll<{ state: string; price: string }>('/invoices/', {
@@ -59,22 +67,20 @@ export const CustomerRemovePanel = () => {
           : dispatch(openModalDialog(OrganizationRemovalErrorDialog));
       }
       return dispatch(
-        openModalDialog(IssueCreateDialog, {
-          resolve: {
-            issue: {
-              customer,
-              type: ISSUE_IDS.CHANGE_REQUEST,
-              summary: translate('Organization removal'),
-            },
-            options: {
-              title: translate('Organization removal'),
-              hideTitle: true,
-              descriptionLabel: translate('Reason'),
-              descriptionPlaceholder: translate(
-                'Why do you need to remove organization with existing projects?',
-              ),
-              submitTitle: translate('Request removal'),
-            },
+        openIssueCreateDialog({
+          issue: {
+            customer,
+            type: ISSUE_IDS.CHANGE_REQUEST,
+            summary: translate('Organization removal'),
+          },
+          options: {
+            title: translate('Organization removal'),
+            hideTitle: true,
+            descriptionLabel: translate('Reason'),
+            descriptionPlaceholder: translate(
+              'Why do you need to remove organization with existing projects?',
+            ),
+            submitTitle: translate('Request removal'),
           },
         }),
       );

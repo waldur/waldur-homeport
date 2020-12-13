@@ -14,13 +14,12 @@ import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 
+import { RESOURCE_ACTION_FORM } from './constants';
 import { ResourceAction } from './types';
 
 interface ResourceActionDialogOwnProps {
   resolve: { action: ResourceAction; resource: any };
 }
-
-export const RESOURCE_ACTION_FORM = 'ResourceActionDialog';
 
 const validateJSON = (value: string) => {
   try {

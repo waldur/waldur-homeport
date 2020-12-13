@@ -1,11 +1,18 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import { ResourceStateConfigurationProvider } from '@waldur/resource/state/ResourceStateConfiguration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
 import './breadcrumbs';
-import { OpenStackSnapshotScheduleSummary } from './OpenStackSnapshotScheduleSummary';
 import './tabs';
+const OpenStackSnapshotScheduleSummary = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenStackSnapshotScheduleSummary" */ './OpenStackSnapshotScheduleSummary'
+    ),
+  'OpenStackSnapshotScheduleSummary',
+);
 
 export default () => {
   ActionConfigurationRegistry.register(

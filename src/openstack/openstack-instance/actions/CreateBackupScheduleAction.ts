@@ -4,10 +4,8 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { getFields } from '@waldur/openstack/openstack-backup-schedule/actions/fields';
 import { validateState } from '@waldur/resource/actions/base';
-import {
-  ResourceActionDialog,
-  RESOURCE_ACTION_FORM,
-} from '@waldur/resource/actions/ResourceActionDialog';
+import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
+import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
 
@@ -26,7 +24,7 @@ export default function createAction({ resource }): ResourceAction {
     method: 'POST',
     validators: [validateState('OK')],
     fields: getFields(),
-    component: ResourceActionDialog,
+    component: LazyResourceActionDialog,
     formId: RESOURCE_ACTION_FORM,
     useResolve: true,
     getInitialValues: () => ({

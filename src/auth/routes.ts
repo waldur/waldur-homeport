@@ -1,10 +1,29 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 import { UsersService } from '@waldur/user/UsersService';
 
-import { AuthActivation } from './AuthActivation';
-import { AuthInit } from './AuthInit';
-import { AuthLogin } from './AuthLogin';
+const AnonymousLayout = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
+    ),
+  'AnonymousLayout',
+);
+
+const AuthLogin = lazyComponent(
+  () => import(/* webpackChunkName: "AuthLogin" */ './AuthLogin'),
+  'AuthLogin',
+);
+
+const AuthActivation = lazyComponent(
+  () => import(/* webpackChunkName: "AuthActivation" */ './AuthActivation'),
+  'AuthActivation',
+);
+
+const AuthInit = lazyComponent(
+  () => import(/* webpackChunkName: "AuthInit" */ './AuthInit'),
+  'AuthInit',
+);
 
 export const states: StateDeclaration[] = [
   {

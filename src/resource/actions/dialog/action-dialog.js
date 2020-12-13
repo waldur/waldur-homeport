@@ -77,7 +77,9 @@ function ActionDialogController($scope, $q, $state, $rootScope) {
         });
     },
     get dialogTitle() {
-      return $scope.action.getDialogTitle($scope.resource);
+      return $scope.action.getDialogTitle
+        ? $scope.action.getDialogTitle($scope.resource)
+        : undefined;
     },
     submitActive: function () {
       return (

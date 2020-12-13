@@ -1,7 +1,14 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
-import { VMwareVirtualMachineForm } from './VMwareVirtualMachineForm';
+const VMwareVirtualMachineForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "VMwareVirtualMachineForm" */ './VMwareVirtualMachineForm'
+    ),
+  'VMwareVirtualMachineForm',
+);
 
 const serializer = ({
   template,
