@@ -1,12 +1,12 @@
 import Axios from 'axios';
 import { components } from 'react-select';
 import { useAsync } from 'react-use';
+import WindowedSelect from 'react-windowed-select';
 
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
 import { InputGroup } from './InputGroup';
-import { SelectField } from './SelectField';
 
 const CountryRenderer = (option) => (
   <>
@@ -38,18 +38,23 @@ export const loadCountries = async () => {
 };
 
 export const CountryGroup = () => {
-  const { loading, value } = useAsync(loadCountries);
+  const { loading, value: options } = useAsync(loadCountries);
   return (
     <InputGroup
       name="country"
       label={translate('Country')}
-      component={SelectField}
-      placeholder={translate('Select country...')}
-      components={{ Option, SingleValue }}
-      getOptionLabel={(option) => option.display_name}
-      options={value || []}
-      isLoading={loading}
-      isClearable={true}
+      component={({ input: { value, onChange } }) => (
+        <WindowedSelect
+          value={value}
+          onChange={onChange}
+          placeholder={translate('Select country...')}
+          components={{ Option, SingleValue }}
+          getOptionLabel={(option) => option.display_name}
+          options={options || []}
+          isLoading={loading}
+          isClearable={true}
+        />
+      )}
     />
   );
 };
