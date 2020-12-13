@@ -85,7 +85,8 @@ function ActionDialogController($scope, $q, $state, $rootScope) {
       return (
         $scope.ActionForm.$dirty ||
         $scope.action.method === 'DELETE' ||
-        !$scope.action.fields
+        !$scope.action.fields ||
+        $scope.submitting
       );
     },
     submitForm: function () {
@@ -120,6 +121,7 @@ function ActionDialogController($scope, $q, $state, $rootScope) {
       } else {
         promise = Axios.post($scope.action.url, form);
       }
+      $scope.submitting = true;
 
       return promise.then(
         function (response) {
@@ -138,7 +140,8 @@ function ActionDialogController($scope, $q, $state, $rootScope) {
           $scope.$close();
         },
         function (response) {
-          $scope.errors = response.data;
+          $scope.submitting = false;
+          $scope.errors = response?.data;
           store.dispatch(
             showErrorResponse(response, translate('Unable to perform action')),
           );
