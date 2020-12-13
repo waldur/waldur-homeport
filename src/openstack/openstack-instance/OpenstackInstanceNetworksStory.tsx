@@ -5,7 +5,6 @@ import {
   subnets,
   floatingIps,
 } from '@waldur/openstack/openstack-instance/storyFixtures';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 export class OpenstackInstanceNetworksStory extends Component {
   state = {
@@ -36,5 +35,3 @@ export class OpenstackInstanceNetworksStory extends Component {
     );
   }
 }
-
-export default connectAngularComponent(OpenstackInstanceNetworksStory);

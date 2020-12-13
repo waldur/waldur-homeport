@@ -1,7 +1,6 @@
 import { Component } from 'react';
 
 import { OpenstackInstanceSecurityGroups } from '@waldur/openstack/openstack-instance/OpenstackInstanceSecurityGroups';
-import { connectAngularComponent } from '@waldur/store/connect';
 
 import { SecurityGroup } from '../openstack-security-groups/types';
 
@@ -28,5 +27,3 @@ export class OpenstackInstanceSecurityGroupsStory extends Component {
     );
   }
 }
-
-export default connectAngularComponent(OpenstackInstanceSecurityGroupsStory);

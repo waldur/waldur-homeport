@@ -1,9 +1,7 @@
 import { AuthService } from '@waldur/auth/AuthService';
 
-import loadingSpinner from './LoadingSpinner';
 import sentryModule from './sentry';
 import injectServices from './services';
-import submitButton from './submit-button';
 
 // @ngInject
 function redirectToState($rootScope, $state) {
@@ -53,8 +51,6 @@ function initTitle(ENV) {
 }
 
 export default (module) => {
-  module.directive('submitButton', submitButton);
-  module.component('loadingSpinner', loadingSpinner);
   module.run(redirectToState);
   module.run(scrollToTop);
   module.run(injectServices);

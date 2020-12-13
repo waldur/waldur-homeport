@@ -6,7 +6,9 @@
 <form name="ActionForm">
   <div class="modal-body">
     <div ng-if="loading">
-      <loading-spinner></loading-spinner>
+      <h1 class="text-center">
+        <i class="fa fa-spinner fa-spin" ></i>
+      </h1>
     </div>
     <div ng-if="!loading">
       <p
@@ -60,8 +62,9 @@
       type="submit"
       class="btn btn-primary"
       ng-disabled="!submitActive()"
-      submit-button="submitForm()"
+      submit="submitForm()"
     >
+    <i ng-if="submitting" className="fa fa-spinner fa-spin" ></i>
       <span translate>Submit</span>
     </button>
     <button type="button" class="btn btn-default" ng-click="cancel()">
