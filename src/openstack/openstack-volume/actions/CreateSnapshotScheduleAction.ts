@@ -4,7 +4,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { createSnapshotSchedule } from '@waldur/openstack/api';
 import { getFields } from '@waldur/openstack/openstack-backup-schedule/actions/fields';
 import { validateState } from '@waldur/resource/actions/base';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
 
@@ -19,7 +19,7 @@ export default function createAction({ resource }): ResourceAction {
     method: 'POST',
     validators: [validateState('OK')],
     fields: getFields(),
-    component: ResourceActionDialog,
+    component: LazyResourceActionDialog,
     useResolve: true,
     getInitialValues: () => ({
       timezone: getDefaultTimezone(),

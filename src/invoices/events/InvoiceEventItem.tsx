@@ -4,9 +4,17 @@ import { useDispatch } from 'react-redux';
 
 import { formatRelative, formatDateTime } from '@waldur/core/dateUtils';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { EventDetailsDialog } from '@waldur/events/EventDetailsDialog';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
+
+const EventDetailsDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "EventDetailsDialog" */ '@waldur/events/EventDetailsDialog'
+    ),
+  'EventDetailsDialog',
+);
 
 export const InvoiceEventItem = ({ event }) => {
   const dispatch = useDispatch();

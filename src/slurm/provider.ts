@@ -1,6 +1,10 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import * as ProvidersRegistry from '@waldur/providers/registry';
 
-import { SlurmForm } from './SlurmForm';
+const SlurmForm = lazyComponent(
+  () => import(/* webpackChunkName: "SlurmForm" */ './SlurmForm'),
+  'SlurmForm',
+);
 
 const serializer = (fields) => ({
   batch_service: fields.batch_service.value,

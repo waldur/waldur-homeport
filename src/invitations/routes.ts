@@ -1,8 +1,19 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 
-import { InvitationAccept } from './InvitationAccept';
-import { InvitationApprove } from './InvitationApprove';
-import { InvitationReject } from './InvitationReject';
+const InvitationAccept = lazyComponent(
+  () => import(/* webpackChunkName: "InvitationAccept" */ './InvitationAccept'),
+  'InvitationAccept',
+);
+const InvitationApprove = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "InvitationApprove" */ './InvitationApprove'),
+  'InvitationApprove',
+);
+const InvitationReject = lazyComponent(
+  () => import(/* webpackChunkName: "InvitationReject" */ './InvitationReject'),
+  'InvitationReject',
+);
 
 export const states: StateDeclaration[] = [
   {

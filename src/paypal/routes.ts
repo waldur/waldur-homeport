@@ -1,8 +1,21 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 
-import { PaymentApprove } from './PaymentApprove';
-import { PaymentCancel } from './PaymentCancel';
+const AnonymousLayout = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
+    ),
+  'AnonymousLayout',
+);
+const PaymentApprove = lazyComponent(
+  () => import(/* webpackChunkName: "PaymentApprove" */ './PaymentApprove'),
+  'PaymentApprove',
+);
+const PaymentCancel = lazyComponent(
+  () => import(/* webpackChunkName: "PaymentCancel" */ './PaymentCancel'),
+  'PaymentCancel',
+);
 
 export const states: StateDeclaration[] = [
   {

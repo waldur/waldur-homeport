@@ -6,10 +6,8 @@ import {
   createLatinNameField,
   createDescriptionField,
 } from '@waldur/resource/actions/base';
-import {
-  ResourceActionDialog,
-  RESOURCE_ACTION_FORM,
-} from '@waldur/resource/actions/ResourceActionDialog';
+import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
+import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 
@@ -36,7 +34,7 @@ export default function createAction({ resource }): ResourceAction {
         ),
       },
     ],
-    component: ResourceActionDialog,
+    component: LazyResourceActionDialog,
     formId: RESOURCE_ACTION_FORM,
     useResolve: true,
     getInitialValues: () => ({

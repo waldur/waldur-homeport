@@ -2,7 +2,7 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { MessageDialog } from '@waldur/core/MessageDialog';
 import { ENV, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
+import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { openModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 
@@ -18,10 +18,8 @@ export const getIssueAction = (props: ReportIssueActionProps) => {
       const features = ngInjector.get('features');
       if (features.isVisible('support')) {
         store.dispatch(
-          openModalDialog(IssueCreateDialog, {
-            resolve: {
-              issue: props.issue,
-            },
+          openIssueCreateDialog({
+            issue: props.issue,
           }),
         );
       } else {

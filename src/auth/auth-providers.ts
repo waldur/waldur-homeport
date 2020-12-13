@@ -1,13 +1,26 @@
 import Qs from 'qs';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { ENV } from '@waldur/core/services';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { AuthButtonProps } from './AuthButton';
-import { AuthSaml2Dialog } from './saml2/AuthSaml2Dialog';
 import { loginSaml2Action } from './saml2/store/actions';
 import { getOauthCallback } from './utils';
-import { AuthValimoDialog } from './valimo/AuthValimoDialog';
+
+const AuthSaml2Dialog = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "AuthSaml2Dialog" */ './saml2/AuthSaml2Dialog'),
+  'AuthSaml2Dialog',
+);
+
+const AuthValimoDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AuthValimoDialog" */ './valimo/AuthValimoDialog'
+    ),
+  'AuthValimoDialog',
+);
 
 export const getAuthProviders: () => Omit<AuthButtonProps, 'mode'>[] = () => [
   {

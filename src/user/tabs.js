@@ -1,10 +1,35 @@
-import { FreeIpaAccount } from '@waldur/freeipa/FreeIPAAccount';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 
-import { HooksList } from './hooks/HooksList';
-import { KeysList } from './keys/KeysList';
-import { UserDashboard } from './list/UserDashboard';
-import { UserEventsWrapper } from './list/UserEventsWrapper';
-import { UserManage } from './UserManage';
+const FreeIpaAccount = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "FreeIPAAccount" */ '@waldur/freeipa/FreeIPAAccount'
+    ),
+  'FreeIpaAccount',
+);
+const HooksList = lazyComponent(
+  () => import(/* webpackChunkName: "HooksList" */ './hooks/HooksList'),
+  'HooksList',
+);
+const KeysList = lazyComponent(
+  () => import(/* webpackChunkName: "KeysList" */ './keys/KeysList'),
+  'KeysList',
+);
+const UserDashboard = lazyComponent(
+  () => import(/* webpackChunkName: "UserDashboard" */ './list/UserDashboard'),
+  'UserDashboard',
+);
+const UserEventsWrapper = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UserEventsWrapper" */ './list/UserEventsWrapper'
+    ),
+  'UserEventsWrapper',
+);
+const UserManage = lazyComponent(
+  () => import(/* webpackChunkName: "UserManage" */ './UserManage'),
+  'UserManage',
+);
 
 export const tabs = {
   dashboard: {

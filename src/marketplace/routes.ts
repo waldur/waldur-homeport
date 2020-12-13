@@ -1,36 +1,211 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { checkPermission } from '@waldur/issues/utils';
-import { SupportOfferings } from '@waldur/marketplace/offerings/customers/SupportOfferings';
-import { ResourceDetailsPageForCustomer } from '@waldur/marketplace/resources/ResourceDetailsPageForCustomer';
-import { ResourceDetailsPageForServiceProvider } from '@waldur/marketplace/resources/ResourceDetailsPageForServiceProvider';
-import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 
-import { CheckoutPage } from './cart/CheckoutPage';
-import { ShoppingCartItemUpdate } from './cart/ShoppingCartItemUpdate';
-import { CategoryPage } from './category/CategoryPage';
-import { ComparisonTable } from './compare/ComparisonTable';
-import { OfferingDetailsPage } from './details/DetailsPage';
-import { MarketplaceLanding } from './landing/LandingPageContainer';
-import { OfferingCreateContainer } from './offerings/create/OfferingCreateContainer';
-import { OfferingContainer } from './offerings/details/OfferingContainer';
-import { PublicOfferingDetails } from './offerings/details/PublicOfferingDetails';
-import { MyOfferingsListContainer } from './offerings/MyOfferingsListContainer';
-import { OfferingsListContainer } from './offerings/OfferingsListContainer';
-import { ScreenshotsContainer } from './offerings/screenshots/ScreenshotsContainer';
-import { OfferingUpdateContainer } from './offerings/update/OfferingUpdateContainer';
-import { OrderItemDetailsContainer } from './orders/item/details/OrderItemDetailsContainer';
-import { MyOrderItemsContainer } from './orders/item/list/MyOrderItemsContainer';
-import { OrderItemsContainer } from './orders/item/list/OrderItemsContainer';
-import { SupportOrderItemsContainer } from './orders/item/list/SupportOrderItemsContainer';
-import { OrderDetailsContainer } from './orders/OrderDetailsContainer';
-import { OrdersList } from './orders/OrdersList';
-import { CustomerResourcesContainer } from './resources/list/CustomerResourcesContainer';
-import { ProjectResourcesContainer } from './resources/list/ProjectResourcesContainer';
-import { PublicResourcesContainer } from './resources/list/PublicResourcesContainer';
-import { SupportResourcesContainer } from './resources/list/SupportResourcesContainer';
-import { PlanUsageContainer } from './resources/plan-usage/PlanUsageContainer';
-import { SupportUsageContainer } from './resources/usage/SupportUsageContainer';
-import { ProviderDetails } from './service-providers/ProviderDetails';
+const SupportOfferings = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportOfferings" */ '@waldur/marketplace/offerings/customers/SupportOfferings'
+    ),
+  'SupportOfferings',
+);
+const ResourceDetailsPageForCustomer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ResourceDetailsPageForCustomer" */ '@waldur/marketplace/resources/ResourceDetailsPageForCustomer'
+    ),
+  'ResourceDetailsPageForCustomer',
+);
+const ResourceDetailsPageForServiceProvider = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ResourceDetailsPageForServiceProvider" */
+
+      '@waldur/marketplace/resources/ResourceDetailsPageForServiceProvider'
+    ),
+  'ResourceDetailsPageForServiceProvider',
+);
+const AnonymousLayout = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
+    ),
+  'AnonymousLayout',
+);
+const CheckoutPage = lazyComponent(
+  () => import(/* webpackChunkName: "CheckoutPage" */ './cart/CheckoutPage'),
+  'CheckoutPage',
+);
+const ShoppingCartItemUpdate = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ShoppingCartItemUpdate" */ './cart/ShoppingCartItemUpdate'
+    ),
+  'ShoppingCartItemUpdate',
+);
+const CategoryPage = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "CategoryPage" */ './category/CategoryPage'),
+  'CategoryPage',
+);
+const ComparisonTable = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ComparisonTable" */ './compare/ComparisonTable'
+    ),
+  'ComparisonTable',
+);
+const OfferingDetailsPage = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingDetailsPage" */ './details/DetailsPage'
+    ),
+  'OfferingDetailsPage',
+);
+const MarketplaceLanding = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "MarketplaceLanding" */ './landing/LandingPageContainer'
+    ),
+  'MarketplaceLanding',
+);
+const OfferingCreateContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingCreateContainer" */ './offerings/create/OfferingCreateContainer'
+    ),
+  'OfferingCreateContainer',
+);
+const OfferingContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingContainer" */ './offerings/details/OfferingContainer'
+    ),
+  'OfferingContainer',
+);
+const PublicOfferingDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "PublicOfferingDetails" */ './offerings/details/PublicOfferingDetails'
+    ),
+  'PublicOfferingDetails',
+);
+const MyOfferingsListContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "MyOfferingsListContainer" */ './offerings/MyOfferingsListContainer'
+    ),
+  'MyOfferingsListContainer',
+);
+const OfferingsListContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingsListContainer" */ './offerings/OfferingsListContainer'
+    ),
+  'OfferingsListContainer',
+);
+const ScreenshotsContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingScreenshotsContainer" */ './offerings/screenshots/ScreenshotsContainer'
+    ),
+  'ScreenshotsContainer',
+);
+const OfferingUpdateContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingUpdateContainer" */ './offerings/update/OfferingUpdateContainer'
+    ),
+  'OfferingUpdateContainer',
+);
+const OrderItemDetailsContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OrderItemDetailsContainer" */ './orders/item/details/OrderItemDetailsContainer'
+    ),
+  'OrderItemDetailsContainer',
+);
+const MyOrderItemsContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "MyOrderItemsContainer" */ './orders/item/list/MyOrderItemsContainer'
+    ),
+  'MyOrderItemsContainer',
+);
+const OrderItemsContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OrderItemsContainer" */ './orders/item/list/OrderItemsContainer'
+    ),
+  'OrderItemsContainer',
+);
+const SupportOrderItemsContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportOrderItemsContainer" */ './orders/item/list/SupportOrderItemsContainer'
+    ),
+  'SupportOrderItemsContainer',
+);
+const OrderDetailsContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OrderDetailsContainer" */ './orders/OrderDetailsContainer'
+    ),
+  'OrderDetailsContainer',
+);
+const OrdersList = lazyComponent(
+  () => import(/* webpackChunkName: "OrdersList" */ './orders/OrdersList'),
+  'OrdersList',
+);
+const CustomerResourcesContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerResourcesContainer" */ './resources/list/CustomerResourcesContainer'
+    ),
+  'CustomerResourcesContainer',
+);
+const ProjectResourcesContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ProjectResourcesContainer" */ './resources/list/ProjectResourcesContainer'
+    ),
+  'ProjectResourcesContainer',
+);
+const PublicResourcesContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "PublicResourcesContainer" */ './resources/list/PublicResourcesContainer'
+    ),
+  'PublicResourcesContainer',
+);
+const SupportResourcesContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportResourcesContainer" */ './resources/list/SupportResourcesContainer'
+    ),
+  'SupportResourcesContainer',
+);
+const PlanUsageContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "PlanUsageContainer" */ './resources/plan-usage/PlanUsageContainer'
+    ),
+  'PlanUsageContainer',
+);
+const SupportUsageContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportUsageContainer" */ './resources/usage/SupportUsageContainer'
+    ),
+  'SupportUsageContainer',
+);
+const ProviderDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ProviderDetails" */ './service-providers/ProviderDetails'
+    ),
+  'ProviderDetails',
+);
 
 export const states: StateDeclaration[] = [
   {

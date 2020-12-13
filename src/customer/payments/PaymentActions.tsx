@@ -1,8 +1,8 @@
 import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LinkInvoiceAction } from '@waldur/customer/payments/LinkInvoiceAction';
-import { PaymentUpdateDialogContainer } from '@waldur/customer/payments/PaymentUpdateDialog';
 import {
   deletePayment,
   linkInvoice,
@@ -13,6 +13,14 @@ import { Invoice } from '@waldur/invoices/types';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { Payment } from '@waldur/workspace/types';
+
+const PaymentUpdateDialogContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "PaymentUpdateDialog" */ '@waldur/customer/payments/PaymentUpdateDialog'
+    ),
+  'PaymentUpdateDialogContainer',
+);
 
 const openDialog = async (dispatch, payment: Payment) => {
   try {

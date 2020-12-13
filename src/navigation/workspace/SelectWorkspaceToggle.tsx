@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from 'react-use';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -22,7 +23,13 @@ import {
 
 import './SelectWorkspaceToggle.scss';
 
-import { SelectWorkspaceDialog } from './SelectWorkspaceDialog';
+const SelectWorkspaceDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SelectWorkspaceDialog" */ './SelectWorkspaceDialog'
+    ),
+  'SelectWorkspaceDialog',
+);
 
 const workspaceIconClasses: Record<WorkspaceType, string> = {
   [ORGANIZATION_WORKSPACE]: 'fa-sitemap',

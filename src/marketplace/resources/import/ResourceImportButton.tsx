@@ -1,11 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { ResourceImportDialog } from './ResourceImportDialog';
+const ResourceImportDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ResourceImportDialog" */ './ResourceImportDialog'
+    ),
+  'ResourceImportDialog',
+);
 
 interface Props {
   category_uuid: string;

@@ -1,11 +1,19 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { gettext, translate } from '@waldur/i18n';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import { DEFAULT_EDIT_ACTION } from '@waldur/resource/actions/constants';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import './breadcrumbs';
-import { OpenStackSecurityGroupSummary } from './OpenStackSecurityGroupSummary';
 import securityGroupRuleEditor from './security-group-rule-editor';
+
+const OpenStackSecurityGroupSummary = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenStackSecurityGroupSummary" */ './OpenStackSecurityGroupSummary'
+    ),
+  'OpenStackSecurityGroupSummary',
+);
 
 import './tabs';
 

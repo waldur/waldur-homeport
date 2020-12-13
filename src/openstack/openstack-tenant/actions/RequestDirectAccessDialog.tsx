@@ -10,9 +10,8 @@ import { useDispatch } from 'react-redux';
 import { ENV } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
+import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
-import { openModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 export const RequestDirectAccessDialog = ({ resolve: { resource }, close }) => {
@@ -21,19 +20,17 @@ export const RequestDirectAccessDialog = ({ resolve: { resource }, close }) => {
     if (isFeatureVisible('support')) {
       close();
       dispatch(
-        openModalDialog(IssueCreateDialog, {
-          resolve: {
-            issue: {
-              type: ISSUE_IDS.SERVICE_REQUEST,
-              summary: translate('Request direct access to OpenStack Tenant'),
-              resource,
-            },
-            options: {
-              title: translate('Request direct access to OpenStack Tenant'),
-              descriptionPlaceholder: translate('Please provide a reason'),
-              descriptionLabel: translate('Description'),
-              hideTitle: true,
-            },
+        openIssueCreateDialog({
+          issue: {
+            type: ISSUE_IDS.SERVICE_REQUEST,
+            summary: translate('Request direct access to OpenStack Tenant'),
+            resource,
+          },
+          options: {
+            title: translate('Request direct access to OpenStack Tenant'),
+            descriptionPlaceholder: translate('Please provide a reason'),
+            descriptionLabel: translate('Description'),
+            hideTitle: true,
           },
         }),
       );

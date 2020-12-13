@@ -1,9 +1,14 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { marketplaceIsVisible } from '@waldur/marketplace/utils';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
-import { ChangeLimitsDialog } from './ChangeLimitsDialog';
+const ChangeLimitsDialog = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "ChangeLimitsDialog" */ './ChangeLimitsDialog'),
+  'ChangeLimitsDialog',
+);
 
 export default function createAction(ctx): ResourceAction {
   return {

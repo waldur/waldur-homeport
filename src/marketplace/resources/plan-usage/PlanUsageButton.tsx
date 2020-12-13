@@ -1,12 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { PlanUsageDialog } from './PlanUsageDialog';
-import { PlanUsageRowProps } from './types';
+import type { PlanUsageRowProps } from './types';
+
+const PlanUsageDialog = lazyComponent(
+  () => import(/* webpackChunkName: "PlanUsageDialog" */ './PlanUsageDialog'),
+  'PlanUsageDialog',
+);
 
 interface DispatchProps {
   openDialog(): void;

@@ -1,10 +1,29 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
-import { OpenStackPackageDetails } from './OpenStackPackageDetails';
-import { OpenStackPackageForm } from './OpenStackPackageForm';
-import { OpenStackPluginOptionsForm } from './OpenStackPluginOptionsForm';
+const OpenStackPackageDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenStackPackageDetails" */ './OpenStackPackageDetails'
+    ),
+  'OpenStackPackageDetails',
+);
+const OpenStackPackageForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenStackPackageForm" */ './OpenStackPackageForm'
+    ),
+  'OpenStackPackageForm',
+);
+const OpenStackPluginOptionsForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenStackPluginOptionsForm" */ './OpenStackPluginOptionsForm'
+    ),
+  'OpenStackPluginOptionsForm',
+);
 
 const ServiceSettingsAttributes = (): Attribute[] => [
   {

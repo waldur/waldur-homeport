@@ -1,12 +1,19 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { CatalogCreateDialog } from './CatalogCreateDialog';
+const CatalogCreateDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CatalogCreateDialog" */ './CatalogCreateDialog'
+    ),
+  'CatalogCreateDialog',
+);
 
 const createCatalogDialog = (cluster) =>
   openModalDialog(CatalogCreateDialog, { resolve: { cluster } });

@@ -1,15 +1,50 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { OpenStackResourceUsage } from '@waldur/openstack/OpenStackResourceUsage';
-import { QuotasTable } from '@waldur/quotas/QuotasTable';
 import { getDefaultResourceTabs } from '@waldur/resource/tabs/constants';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
-import { FloatingIpsList } from '../openstack-floating-ips/FloatingIpsList';
-import { TenantNetworksList } from '../openstack-network/TenantNetworksList';
-import { SecurityGroupsList } from '../openstack-security-groups/SecurityGroupsList';
-
-import { TenantPortsList } from './TenantPortsList';
-import { TenantRoutersList } from './TenantRoutersList';
+const OpenStackResourceUsage = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenStackResourceUsage" */ '@waldur/openstack/OpenStackResourceUsage'
+    ),
+  'OpenStackResourceUsage',
+);
+const QuotasTable = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "QuotasTable" */ '@waldur/quotas/QuotasTable'),
+  'QuotasTable',
+);
+const FloatingIpsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "FloatingIpsList" */ '../openstack-floating-ips/FloatingIpsList'
+    ),
+  'FloatingIpsList',
+);
+const TenantNetworksList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "TenantNetworksList" */ '../openstack-network/TenantNetworksList'
+    ),
+  'TenantNetworksList',
+);
+const SecurityGroupsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SecurityGroupsList" */ '../openstack-security-groups/SecurityGroupsList'
+    ),
+  'SecurityGroupsList',
+);
+const TenantPortsList = lazyComponent(
+  () => import(/* webpackChunkName: "TenantPortsList" */ './TenantPortsList'),
+  'TenantPortsList',
+);
+const TenantRoutersList = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "TenantRoutersList" */ './TenantRoutersList'),
+  'TenantRoutersList',
+);
 
 ResourceTabsConfiguration.register('OpenStack.Tenant', () => [
   {

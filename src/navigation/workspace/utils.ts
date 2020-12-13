@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CustomerCreateDialog } from '@waldur/customer/create/CustomerCreateDialog';
-import { openModalDialog, closeModalDialog } from '@waldur/modal/actions';
+import { customerCreateDialog } from '@waldur/customer/create/actions';
+import { closeModalDialog } from '@waldur/modal/actions';
 import { getConfig } from '@waldur/store/config';
 import { getUser } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
@@ -16,12 +16,7 @@ export const useCreateOrganization = () => {
   const canCreateOrganization = user.is_staff || ownerCanManage;
   const createOrganization = () => {
     dispatch(closeModalDialog());
-    dispatch(
-      openModalDialog(CustomerCreateDialog, {
-        size: 'lg',
-        resolve: { role: 'CUSTOMER' },
-      }),
-    );
+    dispatch(customerCreateDialog());
   };
   return [canCreateOrganization, createOrganization];
 };

@@ -1,9 +1,26 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
 
-import { InvalidObjectPage } from './InvalidObjectPage';
-import { InvalidQuotaPage } from './InvalidQuotaPage';
-import { InvalidRoutePage } from './InvalidRoutePage';
+const AnonymousLayout = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
+    ),
+  'AnonymousLayout',
+);
+const InvalidObjectPage = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "InvalidObjectPage" */ './InvalidObjectPage'),
+  'InvalidObjectPage',
+);
+const InvalidQuotaPage = lazyComponent(
+  () => import(/* webpackChunkName: "InvalidQuotaPage" */ './InvalidQuotaPage'),
+  'InvalidQuotaPage',
+);
+const InvalidRoutePage = lazyComponent(
+  () => import(/* webpackChunkName: "InvalidRoutePage" */ './InvalidRoutePage'),
+  'InvalidRoutePage',
+);
 
 export const states: StateDeclaration[] = [
   {

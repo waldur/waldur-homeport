@@ -1,10 +1,26 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
-import { OfferingConfigurationDetails } from '@waldur/offering/OfferingConfigurationDetails';
-import { OfferingConfigurationForm } from '@waldur/offering/OfferingConfigurationForm';
 import { serializer } from '@waldur/offering/serializer';
 
-import { ScriptsForm } from './ScriptsForm';
+const OfferingConfigurationDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingConfigurationDetails" */ '@waldur/offering/OfferingConfigurationDetails'
+    ),
+  'OfferingConfigurationDetails',
+);
+const OfferingConfigurationForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingConfigurationForm" */ '@waldur/offering/OfferingConfigurationForm'
+    ),
+  'OfferingConfigurationForm',
+);
+const ScriptsForm = lazyComponent(
+  () => import(/* webpackChunkName: "ScriptsForm" */ './ScriptsForm'),
+  'ScriptsForm',
+);
 
 registerOfferingType({
   type: 'Marketplace.Script',

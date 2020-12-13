@@ -9,9 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
+import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
-import { openModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
@@ -26,55 +25,53 @@ export const RequestActionDialog = ({
     if (isFeatureVisible('support')) {
       close();
       dispatch(
-        openModalDialog(IssueCreateDialog, {
-          resolve: {
-            issue: {
-              type: ISSUE_IDS.SERVICE_REQUEST,
-              summary: translate('Request {mode} of Public Offering', {
-                mode: offeringRequestMode,
-              }),
-              description:
-                offeringRequestMode === 'publishing'
-                  ? translate(
-                      'Please review and activate offering {offeringName} ({offeringUuid}). \n' +
-                        'Requestor: {userName} / {userUuid}. \n' +
-                        'Service provider: {customerName} / {customerUuid}',
-                      {
-                        offeringName: offering.name,
-                        offeringUuid: offering.uuid,
-                        userName: user.full_name,
-                        userUuid: user.uuid,
-                        customerName: customer.name,
-                        customerUuid: customer.uuid,
-                      },
-                    )
-                  : translate(
-                      'Please open offering {offeringName} ({offeringUuid}) for editing. \n' +
-                        'Requestor: {userName} / {userUuid}. \n' +
-                        'Service provider: {customerName} / {customerUuid}',
-                      {
-                        offeringName: offering.name,
-                        offeringUuid: offering.uuid,
-                        userName: user.full_name,
-                        userUuid: user.uuid,
-                        customerName: customer.name,
-                        customerUuid: customer.uuid,
-                      },
-                    ),
-              resource: {
-                ...offering,
-                url: undefined,
-              },
-              offeringRequestMode,
+        openIssueCreateDialog({
+          issue: {
+            type: ISSUE_IDS.SERVICE_REQUEST,
+            summary: translate('Request {mode} of Public Offering', {
+              mode: offeringRequestMode,
+            }),
+            description:
+              offeringRequestMode === 'publishing'
+                ? translate(
+                    'Please review and activate offering {offeringName} ({offeringUuid}). \n' +
+                      'Requestor: {userName} / {userUuid}. \n' +
+                      'Service provider: {customerName} / {customerUuid}',
+                    {
+                      offeringName: offering.name,
+                      offeringUuid: offering.uuid,
+                      userName: user.full_name,
+                      userUuid: user.uuid,
+                      customerName: customer.name,
+                      customerUuid: customer.uuid,
+                    },
+                  )
+                : translate(
+                    'Please open offering {offeringName} ({offeringUuid}) for editing. \n' +
+                      'Requestor: {userName} / {userUuid}. \n' +
+                      'Service provider: {customerName} / {customerUuid}',
+                    {
+                      offeringName: offering.name,
+                      offeringUuid: offering.uuid,
+                      userName: user.full_name,
+                      userUuid: user.uuid,
+                      customerName: customer.name,
+                      customerUuid: customer.uuid,
+                    },
+                  ),
+            resource: {
+              ...offering,
+              url: undefined,
             },
-            options: {
-              title: translate('Request {mode} of Public Offering', {
-                mode: offeringRequestMode,
-              }),
-              descriptionPlaceholder: translate('Please provide a reason'),
-              descriptionLabel: translate('Description'),
-              hideTitle: true,
-            },
+            offeringRequestMode,
+          },
+          options: {
+            title: translate('Request {mode} of Public Offering', {
+              mode: offeringRequestMode,
+            }),
+            descriptionPlaceholder: translate('Please provide a reason'),
+            descriptionLabel: translate('Description'),
+            hideTitle: true,
           },
         }),
       );

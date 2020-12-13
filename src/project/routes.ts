@@ -1,12 +1,34 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
-import { ProjectDashboardContainer } from './ProjectDashboardContainer';
-import { ProjectEventsView } from './ProjectEventsList';
-import { ProjectIssuesList } from './ProjectIssuesList';
-import { ProjectWorkspace } from './ProjectWorkspace';
 import { loadProject } from './resolve';
-import { ProjectTeam } from './team/ProjectTeam';
+
+const ProjectDashboardContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ProjectDashboardContainer" */ './ProjectDashboardContainer'
+    ),
+  'ProjectDashboardContainer',
+);
+const ProjectEventsView = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "ProjectEventsList" */ './ProjectEventsList'),
+  'ProjectEventsView',
+);
+const ProjectIssuesList = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "ProjectIssuesList" */ './ProjectIssuesList'),
+  'ProjectIssuesList',
+);
+const ProjectWorkspace = lazyComponent(
+  () => import(/* webpackChunkName: "ProjectWorkspace" */ './ProjectWorkspace'),
+  'ProjectWorkspace',
+);
+const ProjectTeam = lazyComponent(
+  () => import(/* webpackChunkName: "team/ProjectTeam" */ './team/ProjectTeam'),
+  'ProjectTeam',
+);
 
 export const states: StateDeclaration[] = [
   {

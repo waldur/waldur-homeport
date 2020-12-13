@@ -1,10 +1,18 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { InvitationCreateDialog } from '@waldur/invitations/actions/InvitationCreateDialog';
 import { openModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 
 import { CustomerActionsProps } from './types';
 import { checkPermissions } from './utils';
+
+const InvitationCreateDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "InvitationCreateDialog" */ '@waldur/invitations/actions/InvitationCreateDialog'
+    ),
+  'InvitationCreateDialog',
+);
 
 export const getInviteAction = (props: CustomerActionsProps) => {
   if (!checkPermissions(props)) {

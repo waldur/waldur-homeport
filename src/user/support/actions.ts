@@ -1,12 +1,23 @@
 import { createFormAction } from 'redux-form-saga';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { IssueCreateDialog } from '@waldur/issues/create/IssueCreateDialog';
+import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { UserDetailsDialog } from './UserDetailsDialog';
-import { UserRemovalMessageDialog } from './UserRemovalMessageDialog';
+const UserDetailsDialog = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "UserDetailsDialog" */ './UserDetailsDialog'),
+  'UserDetailsDialog',
+);
+const UserRemovalMessageDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UserRemovalMessageDialog" */ './UserRemovalMessageDialog'
+    ),
+  'UserRemovalMessageDialog',
+);
 
 export const showUserDetails = (user) =>
   openModalDialog(UserDetailsDialog, { resolve: { user }, size: 'lg' });
@@ -27,7 +38,7 @@ export const showUserRemoval = () => {
       submitTitle: translate('Request removal'),
     },
   };
-  return openModalDialog(IssueCreateDialog, { resolve });
+  return openIssueCreateDialog(resolve);
 };
 
 export const showUserRemovalMessage = (resolve) => {

@@ -1,12 +1,19 @@
 import { connect } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { getFormComponent } from '@waldur/marketplace/common/registry';
 import { openModalDialog } from '@waldur/modal/actions';
 import { Offering } from '@waldur/offering/types';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { PreviewOfferingDialog } from './PreviewOfferingDialog';
+const PreviewOfferingDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "PreviewOfferingDialog" */ './PreviewOfferingDialog'
+    ),
+  'PreviewOfferingDialog',
+);
 
 interface PreviewOfferingButtonProps {
   offering: Offering;

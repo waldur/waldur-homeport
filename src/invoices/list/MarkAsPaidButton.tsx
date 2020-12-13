@@ -1,11 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { MarkAsPaidDialog } from '@waldur/invoices/list/MarkAsPaidDialog';
 import { Invoice } from '@waldur/invoices/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
+
+const MarkAsPaidDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "MarkAsPaidDialog" */ '@waldur/invoices/list/MarkAsPaidDialog'
+    ),
+  'MarkAsPaidDialog',
+);
 
 const openMarkAsPaidDialog = (invoice: Invoice) =>
   openModalDialog(MarkAsPaidDialog, {

@@ -6,7 +6,7 @@ import {
   createDescriptionField,
   validateState,
 } from '@waldur/resource/actions/base';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 
@@ -19,7 +19,7 @@ export default function createAction({ resource }): ResourceAction {
     dialogTitle: translate('Restore volume snapshot'),
     fields: [createLatinNameField(), createDescriptionField()],
     validators: [validateState('OK')],
-    component: ResourceActionDialog,
+    component: LazyResourceActionDialog,
     useResolve: true,
     submitForm: async (dispatch, formData) => {
       try {

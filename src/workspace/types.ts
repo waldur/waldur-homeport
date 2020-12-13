@@ -96,6 +96,8 @@ export interface Project {
   quotas: Quota[];
   billing_price_estimate?: BillingPriceEstimate;
   customer_uuid?: string;
+  customer_name?: string;
+  customer_abbreviation?: string;
 }
 
 export const ORGANIZATION_WORKSPACE = 'WORKSPACE/ORGANIZATION';

@@ -1,5 +1,6 @@
 import { createFormAction } from 'redux-form-saga';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import {
@@ -9,8 +10,21 @@ import {
   DELETE_REQUEST,
   DELETE_FAILURE,
 } from './constants';
-import { ZabbixHostCreateDialog } from './ZabbixHostCreateDialog';
-import { ZabbixHostDetailsDialog } from './ZabbixHostDetailsDialog';
+
+const ZabbixHostCreateDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ZabbixHostCreateDialog" */ './ZabbixHostCreateDialog'
+    ),
+  'ZabbixHostCreateDialog',
+);
+const ZabbixHostDetailsDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ZabbixHostDetailsDialog" */ './ZabbixHostDetailsDialog'
+    ),
+  'ZabbixHostDetailsDialog',
+);
 
 export const fetchZabbixHost = (uuid) => ({
   type: FETCH_REQUEST,

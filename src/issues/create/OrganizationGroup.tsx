@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { Field, change } from 'redux-form';
 
-import { CustomerPopover } from '@waldur/customer/popover/CustomerPopover';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -18,6 +18,14 @@ import { refreshCustomers } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
 import { ISSUE_REGISTRATION_FORM_ID } from './constants';
 import { callerSelector, customerSelector } from './selectors';
+
+const CustomerPopover = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerPopover" */ '@waldur/customer/popover/CustomerPopover'
+    ),
+  'CustomerPopover',
+);
 
 const filterOption = (options) => options;
 

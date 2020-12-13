@@ -1,3 +1,4 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import './marketplace';
 import './provider';
 import './tabs';
@@ -6,9 +7,24 @@ import { registerResourceTypeLabel } from '@waldur/resource/utils';
 
 import './actions';
 import './breadcrumbs';
-import { VMwareDiskSummary } from './VMwareDiskSummary';
-import { VMwarePortSummary } from './VMwarePortSummary';
-import { VMwareVirtualMachineSummary } from './VMwareVirtualMachineSummary';
+
+const VMwareDiskSummary = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "VMwareDiskSummary" */ './VMwareDiskSummary'),
+  'VMwareDiskSummary',
+);
+const VMwarePortSummary = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "VMwarePortSummary" */ './VMwarePortSummary'),
+  'VMwarePortSummary',
+);
+const VMwareVirtualMachineSummary = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "VMwareVirtualMachineSummary" */ './VMwareVirtualMachineSummary'
+    ),
+  'VMwareVirtualMachineSummary',
+);
 
 registerResourceTypeLabel('VMware.VirtualMachine', 'vSphere Virtual Machine');
 registerResourceTypeLabel('VMware.Disk', 'VM Disk');

@@ -6,7 +6,7 @@ import {
   validateRuntimeState,
   validateState,
 } from '@waldur/resource/actions/base';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
+import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ActionContext } from '@waldur/resource/actions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
 
@@ -36,7 +36,7 @@ export default function createAction(ctx: ActionContext<OpenStackInstance>) {
       validateState('OK'),
       validateRuntimeState('SHUTOFF', 'ACTIVE'),
     ],
-    component: ResourceActionDialog,
+    component: LazyResourceActionDialog,
     useResolve: true,
     submitForm: async (dispatch, formData) => {
       try {

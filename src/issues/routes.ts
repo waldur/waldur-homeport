@@ -1,22 +1,111 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { CustomersDivisionsContainer } from '@waldur/customer/divisions/CustomersDivisionsContainer';
-import { LazyCustomerList } from '@waldur/customer/list/LazyCustomerList';
-import { OrganizationUpdateContainer } from '@waldur/customer/list/OrganizationUpdateContainer';
-import { SupportCustomersContainer } from '@waldur/customer/list/SupportCustomersContainer';
-import { SupportFeedback } from '@waldur/issues/feedback/SupportFeedback';
-import { SupportIssues } from '@waldur/issues/SupportIssues';
-import { FlowMapViewContainer } from '@waldur/providers/support/FlowMapViewContainer';
-import { HeatMapContainer } from '@waldur/providers/support/HeatMapContainer';
-import { SankeyDiagramContainer } from '@waldur/providers/support/SankeyDiagramContainer';
-import { UserListView } from '@waldur/user/support/UserListView';
 import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
-import { IssueDetailsContainer } from './IssueDetailsContainer';
-import { NotificationsList } from './notifications/NotificationsList';
 import { checkPermission } from './utils';
-import { IssuesDashboard } from './workspace/IssuesDashboard';
-import { IssuesHelpdesk } from './workspace/IssuesHelpdesk';
-import { SupportWorkspace } from './workspace/SupportWorkspace';
+
+const CustomersDivisionsContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomersDivisionsContainer" */ '@waldur/customer/divisions/CustomersDivisionsContainer'
+    ),
+  'CustomersDivisionsContainer',
+);
+const CustomerListContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerListContainer" */ '@waldur/customer/list/CustomerListContainer'
+    ),
+  'CustomerListContainer',
+);
+const OrganizationUpdateContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OrganizationUpdateContainer" */ '@waldur/customer/list/OrganizationUpdateContainer'
+    ),
+  'OrganizationUpdateContainer',
+);
+const SupportCustomersContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportCustomersContainer" */ '@waldur/customer/list/SupportCustomersContainer'
+    ),
+  'SupportCustomersContainer',
+);
+const SupportFeedback = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportFeedback" */ '@waldur/issues/feedback/SupportFeedback'
+    ),
+  'SupportFeedback',
+);
+const SupportIssues = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportIssues" */ '@waldur/issues/SupportIssues'
+    ),
+  'SupportIssues',
+);
+const FlowMapViewContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "FlowMapViewContainer" */ '@waldur/providers/support/FlowMapViewContainer'
+    ),
+  'FlowMapViewContainer',
+);
+const HeatMapContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "HeatMapContainer" */ '@waldur/providers/support/HeatMapContainer'
+    ),
+  'HeatMapContainer',
+);
+const SankeyDiagramContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SankeyDiagramContainer" */ '@waldur/providers/support/SankeyDiagramContainer'
+    ),
+  'SankeyDiagramContainer',
+);
+const UserListView = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "UserListView" */ '@waldur/user/support/UserListView'
+    ),
+  'UserListView',
+);
+const IssueDetailsContainer = lazyComponent(
+  () => import(/* webpackChunkName: "IssueDetails" */ './IssueDetails'),
+  'IssueDetailsContainer',
+);
+const NotificationsList = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "NotificationsList" */ './notifications/NotificationsList'
+    ),
+  'NotificationsList',
+);
+const IssuesDashboard = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "IssuesDashboard" */ './workspace/IssuesDashboard'
+    ),
+  'IssuesDashboard',
+);
+const IssuesHelpdesk = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "IssuesHelpdesk" */ './workspace/IssuesHelpdesk'
+    ),
+  'IssuesHelpdesk',
+);
+const SupportWorkspace = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportWorkspace" */ './workspace/SupportWorkspace'
+    ),
+  'SupportWorkspace',
+);
 
 export const states: StateDeclaration[] = [
   {
@@ -81,7 +170,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.organizations',
     url: 'organizations/',
-    component: LazyCustomerList,
+    component: CustomerListContainer,
     data: {
       feature: 'support.organizations',
     },

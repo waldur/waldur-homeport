@@ -1,10 +1,27 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
-import { RancherClusterCheckoutSummary } from './RancherClusterCheckoutSummary';
-import { RancherClusterForm } from './RancherClusterForm';
-import { RancherPluginOptionsForm } from './RancherPluginOptionsForm';
+const RancherClusterCheckoutSummary = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "RancherClusterCheckoutSummary" */ './RancherClusterCheckoutSummary'
+    ),
+  'RancherClusterCheckoutSummary',
+);
+const RancherClusterForm = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "RancherClusterForm" */ './RancherClusterForm'),
+  'RancherClusterForm',
+);
+const RancherPluginOptionsForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "RancherPluginOptionsForm" */ './RancherPluginOptionsForm'
+    ),
+  'RancherPluginOptionsForm',
+);
 
 const ServiceSettingsAttributes = (): Attribute[] => [
   {

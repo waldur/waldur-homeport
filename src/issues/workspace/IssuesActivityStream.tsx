@@ -8,8 +8,7 @@ import { FormattedJira } from '@waldur/core/FormattedJira';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { UserPopover } from '@waldur/user/UserPopover';
+import { openUserPopover } from '@waldur/user/actions';
 
 interface Comment {
   issue_key: string;
@@ -28,10 +27,8 @@ export const IssuesActivityStream = () => {
   const dispatch = useDispatch();
   const callback = (user_uuid) =>
     dispatch(
-      openModalDialog(UserPopover, {
-        resolve: {
-          user_uuid,
-        },
+      openUserPopover({
+        user_uuid,
       }),
     );
   return (

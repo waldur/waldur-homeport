@@ -1,14 +1,22 @@
 import { StateDeclaration } from '@waldur/core/types';
 import { gettext } from '@waldur/i18n';
-import { AnonymousLayout } from '@waldur/navigation/AnonymousLayout';
-import { withStore } from '@waldur/store/connect';
+
+import { lazyComponent } from './core/lazyComponent';
+
+const AnonymousLayout = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AnonymousLayout" */ '@waldur/navigation/AnonymousLayout'
+    ),
+  'AnonymousLayout',
+);
 
 export const states: StateDeclaration[] = [
   {
     name: 'tos',
     url: '/tos/',
     abstract: true,
-    component: withStore(AnonymousLayout),
+    component: AnonymousLayout,
   },
 
   {
@@ -36,7 +44,7 @@ export const states: StateDeclaration[] = [
     name: 'about',
     url: '/about/',
     abstract: true,
-    component: withStore(AnonymousLayout),
+    component: AnonymousLayout,
   },
 
   {
@@ -53,7 +61,7 @@ export const states: StateDeclaration[] = [
     name: 'policy',
     url: '/policy/',
     abstract: true,
-    component: withStore(AnonymousLayout),
+    component: AnonymousLayout,
   },
 
   {

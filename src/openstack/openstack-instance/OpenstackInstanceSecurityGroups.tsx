@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 import { compose } from 'redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import {
@@ -11,7 +12,13 @@ import {
   SecurityGroupOption,
 } from '@waldur/openstack/openstack-security-groups/types';
 
-import { OpenStackSecurityGroupsDialog } from '../openstack-security-groups/OpenStackSecurityGroupsDialog';
+const OpenStackSecurityGroupsDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenStackSecurityGroupsDialog" */ '../openstack-security-groups/OpenStackSecurityGroupsDialog'
+    ),
+  'OpenStackSecurityGroupsDialog',
+);
 
 const openSecurityGroupsDetailsDialog = (securityGroups: SecurityGroup[]) =>
   openModalDialog(OpenStackSecurityGroupsDialog, {

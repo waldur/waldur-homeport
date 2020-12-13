@@ -1,8 +1,15 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
-import { RequestDirectAccessDialog } from './RequestDirectAccessDialog';
+const RequestDirectAccessDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "RequestDirectAccessDialog" */ './RequestDirectAccessDialog'
+    ),
+  'RequestDirectAccessDialog',
+);
 
 export default function createAction(): ResourceAction {
   return {

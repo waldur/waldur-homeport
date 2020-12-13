@@ -2,16 +2,24 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { SCREENSHOTS_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering, Screenshot } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 
-import { ScreenshotDetailsDialog } from './ScreenshotDetailsDialog';
 import { ScreenshotsActions } from './ScreenshotsActions';
 import { ScreenshotsListPlaceholder } from './ScreenshotsListPlaceholder';
 import { ScreenshotThumbnail } from './ScreenshotThumbnail';
+
+const ScreenshotDetailsDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ScreenshotDetailsDialog" */ './ScreenshotDetailsDialog'
+    ),
+  'ScreenshotDetailsDialog',
+);
 
 const openScreenshotDetailsDialog = (screenshot: Screenshot) =>
   openModalDialog(ScreenshotDetailsDialog, {

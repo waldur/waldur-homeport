@@ -1,8 +1,10 @@
+import { ComponentType } from 'react';
+
 const registry = {};
 
 export const register = (
-  type,
-  component,
+  type: string,
+  component: ComponentType<any>,
   className = 'resource-details-table',
 ) => {
   registry[type] = {
@@ -11,6 +13,6 @@ export const register = (
   };
 };
 
-export const get = (type) => {
+export const get = (type: string) => {
   return registry[type];
 };

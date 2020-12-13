@@ -1,9 +1,23 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { GrowthContainer } from '@waldur/invoices/growth/GrowthContainer';
 import { checkPermission } from '@waldur/issues/utils';
 
-import { BillingDetails } from './details/BillingDetails';
-import { BillingTabs } from './list/BillingTabs';
+const GrowthContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "GrowthContainer" */ '@waldur/invoices/growth/GrowthContainer'
+    ),
+  'GrowthContainer',
+);
+const BillingDetails = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "BillingDetails" */ './details/BillingDetails'),
+  'BillingDetails',
+);
+const BillingTabs = lazyComponent(
+  () => import(/* webpackChunkName: "BillingTabs" */ './list/BillingTabs'),
+  'BillingTabs',
+);
 
 export const states: StateDeclaration[] = [
   {

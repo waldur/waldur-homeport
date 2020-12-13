@@ -1,8 +1,21 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
-import { AzureVirtualMachineDetails } from './AzureVirtualMachineDetails';
-import { AzureVirtualMachineForm } from './AzureVirtualMachineForm';
+const AzureVirtualMachineDetails = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AzureVirtualMachineDetails" */ './AzureVirtualMachineDetails'
+    ),
+  'AzureVirtualMachineDetails',
+);
+const AzureVirtualMachineForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "AzureVirtualMachineForm" */ './AzureVirtualMachineForm'
+    ),
+  'AzureVirtualMachineForm',
+);
 
 registerOfferingType({
   type: 'Azure.VirtualMachine',

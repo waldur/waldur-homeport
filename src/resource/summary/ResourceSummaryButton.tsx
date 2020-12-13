@@ -2,10 +2,17 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { ResourceSummaryModal } from './ResourceSummaryModal';
+const ResourceSummaryModal = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ResourceSummaryModal" */ './ResourceSummaryModal'
+    ),
+  'ResourceSummaryModal',
+);
 
 interface ResourceSummaryButtonProps {
   url: string;

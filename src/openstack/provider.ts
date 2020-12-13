@@ -1,8 +1,18 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { pick } from '@waldur/core/utils';
 import * as ProvidersRegistry from '@waldur/providers/registry';
 
-import { OpenStackForm } from './OpenStackForm';
-import { OpenStackTenantForm } from './OpenStackTenantForm';
+const OpenStackForm = lazyComponent(
+  () => import(/* webpackChunkName: "OpenStackForm" */ './OpenStackForm'),
+  'OpenStackForm',
+);
+const OpenStackTenantForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OpenStackTenantForm" */ './OpenStackTenantForm'
+    ),
+  'OpenStackTenantForm',
+);
 
 ProvidersRegistry.register({
   name: 'OpenStack',

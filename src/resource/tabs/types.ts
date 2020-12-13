@@ -1,9 +1,9 @@
-import React from 'react';
+import type { ComponentType } from 'react';
 
 export interface ResourceTab {
   key: string;
   title: string;
-  component: React.ComponentType<{ resource: any }>;
+  component: ComponentType<{ resource: any }>;
   feature?: string;
   isVisible?(resource): boolean;
 }
