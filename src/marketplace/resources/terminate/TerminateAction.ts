@@ -12,7 +12,6 @@ export default function createAction(ctx): ResourceAction {
     method: 'POST',
     component: TerminateDialog,
     title: translate('Terminate'),
-    useResolve: true,
     isVisible:
       marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
     validators: [validateState('OK', 'Erred')],

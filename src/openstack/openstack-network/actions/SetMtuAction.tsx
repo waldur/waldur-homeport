@@ -25,7 +25,6 @@ export default function createAction({ resource }): ResourceAction {
       mtu: resource.mtu,
     }),
     component: LazyResourceActionDialog,
-    useResolve: true,
     submitForm: async (dispatch, formData) => {
       try {
         await setNetworkMtu(resource.uuid, formData.mtu);

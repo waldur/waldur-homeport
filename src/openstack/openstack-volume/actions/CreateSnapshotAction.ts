@@ -32,7 +32,6 @@ export default function createAction({ resource }): ResourceAction {
       },
     ],
     component: LazyResourceActionDialog,
-    useResolve: true,
     getInitialValues: () => ({
       name: resource.name + '-snapshot',
     }),

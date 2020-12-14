@@ -18,7 +18,6 @@ export default function createAction(): ResourceAction {
     method: 'POST',
     title: translate('Request direct access'),
     component: RequestDirectAccessDialog,
-    useResolve: true,
     isVisible: !ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
   };
 }

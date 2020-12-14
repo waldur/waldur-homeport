@@ -47,7 +47,6 @@
     "angular-translate-loader-static-files": "^2.18.2",
     "angular-translate-storage-cookie": "^2.18.2",
     "angular-translate-storage-local": "^2.18.2",
-    "angular-ui-bootstrap": "^2.5.0",
     "angulartics": "^1.4.0",
     "angulartics-google-analytics": "^0.4.0",
     "attr-accept": "^1.1.0",

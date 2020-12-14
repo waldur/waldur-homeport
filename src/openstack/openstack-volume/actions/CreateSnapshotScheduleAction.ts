@@ -20,7 +20,6 @@ export default function createAction({ resource }): ResourceAction {
     validators: [validateState('OK')],
     fields: getFields(),
     component: LazyResourceActionDialog,
-    useResolve: true,
     getInitialValues: () => ({
       timezone: getDefaultTimezone(),
       schedule: '0 * * * *',

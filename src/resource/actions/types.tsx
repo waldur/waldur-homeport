@@ -79,8 +79,7 @@ export interface ResourceAction<Resource = BaseResource> {
   destructive?: boolean;
   validators?: Array<ActionValidator<Resource>>;
   dialogSize?: 'lg' | 'xl';
-  component?: string | React.ComponentType<any>;
-  useResolve?: boolean;
+  component?: React.ComponentType<any>;
   isVisible?: boolean;
   init?(resource, form, action): void;
   serializer?(form): object;

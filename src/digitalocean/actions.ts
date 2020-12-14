@@ -14,7 +14,6 @@ ActionConfigurationRegistry.register('DigitalOcean.Droplet', {
   options: {
     resize: {
       component: DropletResizeDialog,
-      useResolve: true,
     },
   },
 });

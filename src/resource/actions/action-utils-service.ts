@@ -4,6 +4,7 @@ import { $rootScope, $q, ngInjector } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { angular2react } from '@waldur/shims/angular2react';
 import { showSuccess } from '@waldur/store/coreSaga';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
@@ -154,37 +155,21 @@ const applyAction = (controller, resource, action) => {
   );
 };
 
-const openActionDialog = (controller, resource, name, action) => {
-  const component = action.component || 'actionDialog';
-  const params = { component, size: action.dialogSize, scope: undefined };
-  if (action.useResolve) {
-    Object.assign(params, {
-      resolve: {
-        action,
-        controller,
-        resource,
-      },
-      formId: action.formId,
-    });
-  } else {
-    const dialogScope = $rootScope.$new();
-    Object.assign(dialogScope, {
+const ActionDialog = angular2react('actionDialog', ['resolve']);
+
+const openActionDialog = (controller, resource, action) => {
+  const component = action.component || ActionDialog;
+  const params = {
+    component,
+    size: action.dialogSize,
+    resolve: {
       action,
       controller,
       resource,
-    });
-    params.scope = dialogScope;
-  }
-  if (typeof component === 'string') {
-    ngInjector
-      .get('$uibModal')
-      .open(params)
-      .result.then(function () {
-        $rootScope.$broadcast('actionApplied', name);
-      });
-  } else {
-    store.dispatch(openModalDialog(component, params));
-  }
+    },
+    formId: action.formId,
+  };
+  store.dispatch(openModalDialog(component, params));
 };
 
 export const buttonClick = (controller, model, name, action) => {
@@ -193,7 +178,7 @@ export const buttonClick = (controller, model, name, action) => {
       return applyAction(controller, model, action);
     }
   } else if (action.type === 'form') {
-    openActionDialog(controller, model, name, action);
+    openActionDialog(controller, model, action);
     return $q.when(true);
   } else if (action.type === 'callback') {
     return action.execute(model);

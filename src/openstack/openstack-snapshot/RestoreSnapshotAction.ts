@@ -20,7 +20,6 @@ export default function createAction({ resource }): ResourceAction {
     fields: [createLatinNameField(), createDescriptionField()],
     validators: [validateState('OK')],
     component: LazyResourceActionDialog,
-    useResolve: true,
     submitForm: async (dispatch, formData) => {
       try {
         await restoreSnapshot(resource.uuid, formData);

@@ -20,7 +20,6 @@ export default function createAction(): ResourceAction<Volume> {
     type: 'form',
     method: 'POST',
     component: VolumeExtendDialog,
-    useResolve: true,
     title: translate('Extend'),
     validators: [isBootable, validateState('OK')],
     fields: [],

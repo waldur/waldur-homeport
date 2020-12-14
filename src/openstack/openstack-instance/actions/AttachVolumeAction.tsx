@@ -37,7 +37,6 @@ export default function createAction(ctx: ActionContext<OpenStackInstance>) {
       validateRuntimeState('SHUTOFF', 'ACTIVE'),
     ],
     component: LazyResourceActionDialog,
-    useResolve: true,
     submitForm: async (dispatch, formData) => {
       try {
         await attachVolume(formData.volume.uuid, ctx.resource.url);

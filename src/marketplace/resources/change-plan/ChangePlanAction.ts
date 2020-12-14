@@ -16,7 +16,6 @@ export default function createAction(ctx): ResourceAction {
     method: 'POST',
     component: ChangePlanDialog,
     title: translate('Change plan'),
-    useResolve: true,
     dialogSize: 'lg',
     isVisible:
       marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,

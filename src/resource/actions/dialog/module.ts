@@ -15,7 +15,7 @@ import { HelpIcon } from './HelpIcon';
 import multiplyBy from './multiply-by';
 
 export default (module) => {
-  module.directive('actionDialog', actionDialog);
+  module.component('actionDialog', actionDialog);
   module.component('actionField', actionField);
   module.component('actionFieldBoolean', actionFieldBoolean);
   module.component('actionFieldInteger', actionFieldInteger);
