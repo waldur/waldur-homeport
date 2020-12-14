@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsButton';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
@@ -12,7 +12,7 @@ import { ResourceSummary } from './summary/ResourceSummary';
 import { ResourceTabs } from './tabs/ResourceTabs';
 import { formatResourceType } from './utils';
 
-export const ResourceDetails = ({ resource, refreshResource }) => {
+let ResourceDetails = ({ resource, refreshResource }) => {
   const header = useMemo(() => {
     const config = registry.get(resource.resource_type);
     if (config) {
@@ -66,3 +66,6 @@ export const ResourceDetails = ({ resource, refreshResource }) => {
     </div>
   );
 };
+
+ResourceDetails = React.memo(ResourceDetails);
+export { ResourceDetails };
