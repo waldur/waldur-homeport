@@ -153,7 +153,7 @@ class ActionDialogController {
         }
 
         this.resolve.controller.reInitResource(this.resolve.resource);
-        this.$close();
+        this.close();
       },
       (response) => {
         this.submitting = false;
@@ -164,7 +164,7 @@ class ActionDialogController {
       },
     );
   }
-  cancel() {
+  close() {
     store.dispatch(closeModalDialog());
   }
 }
