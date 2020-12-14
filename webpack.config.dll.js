@@ -48,27 +48,11 @@ module.exports = {
     library: '[name]_[hash]_lib',
   },
 
-  module: {
-    rules: [
-      // Temporary workaround for Angular UI router and React Bootstrap integration
-      {
-        test: /SafeAnchor\.js$/,
-        loader: 'ts-loader',
-      },
-    ],
-  },
-
   plugins: [
     // Moment locales extraction
     new webpack.ContextReplacementPlugin(
       /moment[/\\]locale$/,
       /(az|en-gb|et|ru|lt|lv)/,
-    ),
-
-    // Temporary workaround for Angular UI router and React Bootstrap integration
-    new webpack.NormalModuleReplacementPlugin(
-      /SafeAnchor\.js/,
-      path.resolve('./src/shims/AngularRouterAnchor.tsx'),
     ),
     new webpack.DllPlugin({
       // The path to the manifest file which maps between
