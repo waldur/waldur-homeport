@@ -483,7 +483,7 @@ msgstr ""
 msgid "Allocation pools"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
+#: src/booking/components/WeekendsGroup.tsx
 msgid "Allow bookings to be scheduled at weekends"
 msgstr ""
 
@@ -953,7 +953,7 @@ msgstr ""
 msgid "Browse image"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
+#: src/booking/components/BusinessHoursGroup.tsx
 msgid "Business hours"
 msgstr ""
 
@@ -1692,7 +1692,7 @@ msgstr ""
 msgid "DNS name servers"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
+#: src/booking/components/BusinessHoursGroup.tsx
 msgid "Daily available booking time range"
 msgstr ""
 
@@ -2961,7 +2961,7 @@ msgstr ""
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
+#: src/booking/components/WeekendsGroup.tsx
 msgid "Include weekends"
 msgstr ""
 
@@ -3755,7 +3755,7 @@ msgstr ""
 msgid "Minimum allowed value"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
+#: src/booking/components/SlotDurationGroup.tsx
 msgid "Minimum booking time slot duration."
 msgstr ""
 
@@ -6557,7 +6557,7 @@ msgstr ""
 msgid "Select assignee..."
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
+#: src/booking/components/WeekdaysGroup.tsx
 msgid "Select available weekdays"
 msgstr ""
 
@@ -7703,11 +7703,11 @@ msgstr ""
 msgid "Time in progress"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
+#: src/booking/components/SlotDurationGroup.tsx
 msgid "Time slot"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
+#: src/booking/components/TimeZoneGroup.tsx
 msgid "Time zone"
 msgstr ""
 
@@ -9754,7 +9754,7 @@ msgstr ""
 msgid "team members"
 msgstr ""
 
-#: src/booking/components/CalendarSettings.tsx
+#: src/booking/components/BusinessHoursGroup.tsx
 msgid "till"
 msgstr ""
 

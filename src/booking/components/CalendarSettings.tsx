@@ -1,24 +1,11 @@
-import moment from 'moment-timezone';
-import React, { useCallback, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import Select from 'react-select';
+import { useCallback, useEffect, useRef, FunctionComponent } from 'react';
 
-import { Tooltip } from '@waldur/core/Tooltip';
-import { getOptions } from '@waldur/form/TimeSelectField';
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
-import { translate } from '@waldur/i18n';
-import { getLocale } from '@waldur/i18n/translate';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-
-import { handleWeekDays, getDurationOptions } from '../utils';
-
+import { BusinessHoursGroup } from './BusinessHoursGroup';
 import { useCalendarSettings } from './hooks/useCalendarSettings';
-
-const timeZoneArray = moment.tz
-  .names()
-  .map((zone) => ({ value: zone, label: zone }));
-const daysArray = [1, 2, 3, 4, 5, 6, 0];
-const getDayLabel = (day: number): string => moment.weekdays(day);
+import { SlotDurationGroup } from './SlotDurationGroup';
+import { TimeZoneGroup } from './TimeZoneGroup';
+import { WeekdaysGroup } from './WeekdaysGroup';
+import { WeekendsGroup } from './WeekendsGroup';
 
 const usePreviousWeekendsValue = (value) => {
   const ref = useRef();
@@ -28,7 +15,7 @@ const usePreviousWeekendsValue = (value) => {
   return ref.current;
 };
 
-export const CalendarSettings: React.FC = () => {
+export const CalendarSettings: FunctionComponent = () => {
   const {
     weekends,
     daysOfWeek,
@@ -65,135 +52,21 @@ export const CalendarSettings: React.FC = () => {
     updateWeekends();
   }, [updateWeekends, weekends]);
 
-  const locale = useSelector(getLocale);
-
-  const durationOptions = React.useMemo(
-    () => getDurationOptions(locale.locale),
-    [locale],
-  );
-
   return (
     <>
-      <FormGroup
-        label={translate('Business hours')}
-        labelClassName="control-label col-sm-3"
-        valueClassName="col-sm-8"
-        description={translate('Daily available booking time range')}
-      >
-        <label
-          className="col-xs-2 control-label"
-          htmlFor="react-select-startTime--value"
-        >
-          <i className="fa fa-clock-o" />
-        </label>
-        <Select
-          instanceId="startTime"
-          className="col-xs-4"
-          name="startTime"
-          isSearchable={false}
-          isClearable={false}
-          isMulti={false}
-          options={getOptions(60)}
-          value={getOptions(60).filter(({ value }) => value === startTime)}
-          onChange={(newValue: any) => setStartTime(newValue.value)}
-          {...reactSelectMenuPortaling()}
-        />
-        <label
-          className="col-xs-2 control-label"
-          htmlFor="react-select-endTime--value"
-        >
-          {translate('till')}
-        </label>
-        <Select
-          instanceId="endTime"
-          name="endTime"
-          className="col-xs-4"
-          isSearchable={false}
-          isClearable={false}
-          isMulti={false}
-          options={[...getOptions(60), { value: '24:00', label: '24:00' }]}
-          value={[...getOptions(60), { value: '24:00', label: '24:00' }].filter(
-            ({ value }) => value === endTime,
-          )}
-          onChange={(newValue: any) => setEndTime(newValue.value)}
-          {...reactSelectMenuPortaling()}
-        />
-      </FormGroup>
-
-      <FormGroup
-        label={translate('Select available weekdays')}
-        labelClassName="control-label col-sm-3"
-        valueClassName={'col-sm-8'}
-      >
-        <div className="weekDays-selector">
-          {daysArray.map((day, index) => (
-            <Tooltip key={index} label={getDayLabel(day)} id={`weekday-${day}`}>
-              <input
-                type="checkbox"
-                id={`weekday-${day}`}
-                value={day}
-                checked={daysOfWeek.includes(day)}
-                onChange={(e) =>
-                  setDaysOfWeek(handleWeekDays(daysOfWeek, e.target.value))
-                }
-              />
-              <label htmlFor={`weekday-${day}`}>
-                {getDayLabel(day)[0].toUpperCase()}
-              </label>
-            </Tooltip>
-          ))}
-        </div>
-      </FormGroup>
-
-      <FormGroup
-        label={translate('Include weekends')}
-        labelClassName="control-label col-sm-3"
-        description={translate('Allow bookings to be scheduled at weekends')}
-      >
-        <div className="checkbox-toggle">
-          <input
-            type="checkbox"
-            id="weekendsToggle"
-            checked={weekends}
-            onChange={() => setWeekends(!weekends)}
-          />
-          <label htmlFor="weekendsToggle">Toggle weekends</label>
-        </div>
-      </FormGroup>
-
-      <FormGroup
-        label={translate('Time slot')}
-        labelClassName="control-label col-sm-3"
-        valueClassName={'col-sm-8'}
-        description={translate('Minimum booking time slot duration.')}
-      >
-        <Select
-          name="timeSlotSelect"
-          isSearchable={false}
-          isClearable={false}
-          isMulti={false}
-          options={durationOptions}
-          value={durationOptions.filter(({ value }) => value === slotDuration)}
-          onChange={(newValue: any) => setSlotDuration(newValue.value)}
-          {...reactSelectMenuPortaling()}
-        />
-      </FormGroup>
-
-      <FormGroup
-        label={translate('Time zone')}
-        labelClassName="control-label col-sm-3"
-        valueClassName={'col-sm-8'}
-      >
-        <Select
-          name="timeZone"
-          isSearchable={true}
-          isClearable={false}
-          options={timeZoneArray}
-          value={timeZoneArray.filter(({ value }) => value === timeZone)}
-          onChange={(newValue: any) => setTimeZone(newValue.value)}
-          {...reactSelectMenuPortaling()}
-        />
-      </FormGroup>
+      <BusinessHoursGroup
+        startTime={startTime}
+        endTime={endTime}
+        setStartTime={setStartTime}
+        setEndTime={setEndTime}
+      />
+      <WeekdaysGroup daysOfWeek={daysOfWeek} setDaysOfWeek={setDaysOfWeek} />
+      <WeekendsGroup weekends={weekends} setWeekends={setWeekends} />
+      <SlotDurationGroup
+        slotDuration={slotDuration}
+        setSlotDuration={setSlotDuration}
+      />
+      <TimeZoneGroup timeZone={timeZone} setTimeZone={setTimeZone} />
     </>
   );
 };
