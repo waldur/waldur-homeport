@@ -1,8 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Await } from '@waldur/core/types';
+import { useRecursiveTimeout } from '@waldur/core/useRecursiveTimeout';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
@@ -92,38 +94,58 @@ export const OrderItemDetailsContainer: React.FC<{}> = () => {
     [order_item_uuid],
   );
 
-  useBreadcrumbsFn(() => (value ? getBreadcrumbs(value.orderItem) : []), [
-    value,
-  ]);
-
-  useTitle(
-    value ? value.orderItem.offering_name : translate('Order item details'),
-  );
-
   useEffectOnce(() => {
     loadData();
   });
 
+  const [asyncValue, setAsyncValue] = useState<
+    Await<ReturnType<typeof loadData>>
+  >();
+
+  // Refresh order item details each 5 seconds until it is switched from pending state to terminal state
+  const pollingDelay = ['pending', 'executing'].includes(
+    asyncValue?.orderItem.state,
+  )
+    ? 5000
+    : null;
+  useRecursiveTimeout(loadData, pollingDelay);
+
+  useEffect(() => {
+    if (
+      value &&
+      (!asyncValue ||
+        asyncValue.orderItem.modified !== value.orderItem.modified)
+    ) {
+      setAsyncValue(value);
+    }
+  }, [value, asyncValue]);
+
+  useBreadcrumbsFn(
+    () => (asyncValue ? getBreadcrumbs(asyncValue.orderItem) : []),
+    [asyncValue],
+  );
+
+  useTitle(
+    asyncValue
+      ? asyncValue.orderItem.offering_name
+      : translate('Order item details'),
+  );
+
   // Don't render loading indicator if order item is refreshing
   // since if it is in pending state it is refreshed via periodic polling
+  if (asyncValue) {
+    return (
+      <>
+        <OrderItemDetails {...asyncValue} loadData={loadData} />
+        <OfferingTabsComponent tabs={asyncValue.tabs} />
+      </>
+    );
+  }
   if (loading) {
     return <LoadingSpinner />;
   }
   if (error) {
     return <h3>{translate('Unable to get order item.')}</h3>;
   }
-  if (!value) {
-    return null;
-  }
-  return (
-    <>
-      <OrderItemDetails
-        orderItem={value.orderItem}
-        offering={value.offering}
-        limits={value.limits}
-        loadData={loadData}
-      />
-      <OfferingTabsComponent tabs={value.tabs} />
-    </>
-  );
+  return null;
 };
