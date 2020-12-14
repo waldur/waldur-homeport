@@ -33,7 +33,6 @@ module.exports = {
       'angular-translate-storage-local',
       'angular-translate-loader-static-files',
       'angular-sanitize',
-      'angular-ui-bootstrap',
       'angular-bind-html-compile-ci-dev',
     ],
   },

@@ -17,7 +17,6 @@ export default function setBackendIDAction({
     type: 'form',
     method: 'POST',
     component: LazyResourceActionDialog,
-    useResolve: true,
     validators: [validatePermissions],
     getInitialValues: () => ({
       backend_id: resource.backend_id,

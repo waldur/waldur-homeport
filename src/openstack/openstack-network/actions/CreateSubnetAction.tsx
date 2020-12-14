@@ -39,7 +39,6 @@ export default function createAction({ resource }): ResourceAction {
       cidr: '192.168.42.0/24',
     }),
     component: LazyResourceActionDialog,
-    useResolve: true,
     submitForm: async (dispatch, formData) => {
       try {
         await createSubnet(resource.uuid, formData);

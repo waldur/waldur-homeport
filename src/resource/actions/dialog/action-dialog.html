@@ -1,31 +1,31 @@
 <div class="modal-header">
   <h3 class="modal-title">
-    {{ dialogTitle || action.dialogTitle || action.title }}
+    {{ $ctrl.dialogTitle }}
   </h3>
 </div>
-<form name="ActionForm">
+<form name="$ctrl.ActionForm" ng-submit="$ctrl.submitForm()">
   <div class="modal-body">
-    <div ng-if="loading">
+    <div ng-if="$ctrl.loading">
       <h1 class="text-center">
-        <i class="fa fa-spinner fa-spin" ></i>
+        <i class="fa fa-spinner fa-spin"></i>
       </h1>
     </div>
-    <div ng-if="!loading">
+    <div ng-if="!$ctrl.loading">
       <p
-        ng-if="::action.dialogSubtitle"
-        bind-html-compile="action.dialogSubtitle"
+        ng-if="::$ctrl.resolve.action.dialogSubtitle"
+        bind-html-compile="$ctrl.resolve.action.dialogSubtitle"
       ></p>
-      <div class="form-group" ng-if="action.name === 'destroy'">
+      <div class="form-group" ng-if="$ctrl.resolve.action.name === 'destroy'">
         <label class="control-label">
           <h4>
             <b translate>You are about to delete:</b>
-            {{ resource.name }}
+            {{ $ctrl.resolve.resource.name }}
           </h4>
         </label>
       </div>
       <div
         class="form-group"
-        ng-repeat="(name, field) in fields"
+        ng-repeat="(name, field) in $ctrl.fields"
         ng-class="field.formGroupClass"
       >
         <label
@@ -39,20 +39,20 @@
         <div>
           <action-field
             field="field"
-            model="form"
-            form="ActionForm"
-            context="{resource: resource}"
+            model="$ctrl.form"
+            form="$ctrl.ActionForm"
+            context="{resource: $ctrl.resolve.resource}"
           ></action-field>
           <p
             class="text-danger"
-            ng-repeat="error in errors[name]"
+            ng-repeat="error in $ctrl.errors[name]"
             ng-bind="error"
           ></p>
         </div>
       </div>
       <p
         class="text-danger"
-        ng-repeat="error in errors.non_field_errors"
+        ng-repeat="error in $ctrl.errors.non_field_errors"
         ng-bind="error"
       ></p>
     </div>
@@ -61,13 +61,12 @@
     <button
       type="submit"
       class="btn btn-primary"
-      ng-disabled="!submitActive()"
-      submit="submitForm()"
+      ng-disabled="!$ctrl.submitActive()"
     >
-    <i ng-if="submitting" className="fa fa-spinner fa-spin" ></i>
+      <i ng-if="submitting" className="fa fa-spinner fa-spin"></i>
       <span translate>Submit</span>
     </button>
-    <button type="button" class="btn btn-default" ng-click="cancel()">
+    <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()">
       <span translate>Cancel</span>
     </button>
   </div>

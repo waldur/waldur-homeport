@@ -26,7 +26,6 @@ export default function createAction({ resource }): ResourceAction {
     fields: getFields(),
     component: LazyResourceActionDialog,
     formId: RESOURCE_ACTION_FORM,
-    useResolve: true,
     getInitialValues: () => ({
       timezone: getDefaultTimezone(),
       schedule: '0 * * * *',

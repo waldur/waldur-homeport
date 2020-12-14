@@ -66,7 +66,6 @@ export function createEditAction<Resource extends BaseResource>({
     fields,
     validators,
     component: LazyResourceActionDialog,
-    useResolve: true,
     getInitialValues:
       getInitialValues ||
       (() => ({

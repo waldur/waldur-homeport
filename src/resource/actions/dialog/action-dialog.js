@@ -2,6 +2,7 @@ import Axios from 'axios';
 import Qs from 'qs';
 
 import { translate } from '@waldur/i18n';
+import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse } from '@waldur/store/coreSaga';
 import store from '@waldur/store/store';
 
@@ -11,155 +12,167 @@ import { defaultFieldOptions } from '../constants';
 
 import template from './action-dialog.html';
 
-// @ngInject
-function ActionDialogController($scope, $q, $state, $rootScope) {
-  Object.assign($scope, {
-    init: function () {
-      $scope.errors = {};
-      $scope.form = {};
-      $scope.loading = true;
-      let promise;
-      if ($scope.action.init) {
-        promise = $scope.action.init(
-          $scope.resource,
-          $scope.form,
-          $scope.action,
-        );
-      } else if ($scope.action.fields) {
-        promise = getSelectList($scope.action.fields);
-      } else {
-        promise = $q.when(true);
-      }
-      promise
-        .then(function () {
-          angular.forEach($scope.action.fields, function (field, name) {
-            if (field.init) {
-              field.init(field, $scope.resource, $scope.form, $scope.action);
-            }
-            if (field.default_value) {
-              $scope.form[name] = field.default_value;
-            }
-            if (
-              !field.init &&
-              (field.resource_default_value || $scope.action.method === 'PUT')
-            ) {
-              $scope.form[name] = angular.copy($scope.resource[name]);
-            }
-            if (field.modelParser) {
-              $scope.form[name] = field.modelParser(field, $scope.form[name]);
-            }
-            if (field.type === 'multiselect' && !$scope.action.init) {
-              $scope.form[name] = formatChoices(field, $scope.form[name]);
-            }
-            if ($scope.action.name === 'edit') {
-              $scope.form[name] = $scope.resource[name];
-              if (field.type === 'datetime' && $scope.resource[name]) {
-                $scope.form[name] = new Date($scope.resource[name]);
-              }
-            }
-            if (defaultFieldOptions[field.type]) {
-              field.options = defaultFieldOptions[field.type];
-            }
-          });
-          if ($scope.action.order) {
-            $scope.fields = $scope.action.order.reduce((result, name) => {
-              result[name] = $scope.action.fields[name];
-              return result;
-            }, {});
-          } else {
-            $scope.fields = $scope.action.fields;
-          }
-        })
-        .finally(function () {
-          $scope.loading = false;
-          // Trigger digest for async/await
-          $rootScope.$applyAsync();
-        });
-    },
-    get dialogTitle() {
-      return $scope.action.getDialogTitle
-        ? $scope.action.getDialogTitle($scope.resource)
-        : undefined;
-    },
-    submitActive: function () {
-      return (
-        $scope.ActionForm.$dirty ||
-        $scope.action.method === 'DELETE' ||
-        !$scope.action.fields ||
-        $scope.submitting
+class ActionDialogController {
+  // @ngInject
+  constructor($q, $state, $rootScope) {
+    this.$q = $q;
+    this.$state = $state;
+    this.$rootScope = $rootScope;
+  }
+  $onInit() {
+    this.errors = {};
+    this.form = {};
+    this.loading = true;
+    let promise;
+    if (this.resolve.action.init) {
+      promise = this.resolve.action.init(
+        this.resolve.resource,
+        this.form,
+        this.resolve.action,
       );
-    },
-    submitForm: function () {
-      if ($scope.ActionForm.$invalid) {
-        return $q.reject();
-      }
-      const fields = $scope.action.fields;
-      if (!$scope.action.url) {
-        $scope.action.url = $scope.resource.url + $scope.action.name + '/';
-      }
-      let form = {};
-      if ($scope.action.serializer) {
-        form = $scope.action.serializer($scope.form);
-      } else {
-        for (const name in fields) {
-          if ($scope.form[name] !== null) {
-            const field = fields[name];
-            const serializer = field.serializer || angular.identity;
-            form[name] = serializer($scope.form[name], field);
+    } else if (this.resolve.action.fields) {
+      promise = getSelectList(this.resolve.action.fields);
+    } else {
+      promise = this.$q.when(true);
+    }
+    promise
+      .then(() => {
+        angular.forEach(this.resolve.action.fields, (field, name) => {
+          if (field.init) {
+            field.init(
+              field,
+              this.resolve.resource,
+              this.form,
+              this.resolve.action,
+            );
           }
+          if (field.default_value) {
+            this.form[name] = field.default_value;
+          }
+          if (
+            !field.init &&
+            (field.resource_default_value ||
+              this.resolve.action.method === 'PUT')
+          ) {
+            this.form[name] = angular.copy(this.resolve.resource[name]);
+          }
+          if (field.modelParser) {
+            this.form[name] = field.modelParser(field, this.form[name]);
+          }
+          if (field.type === 'multiselect' && !this.resolve.action.init) {
+            this.form[name] = formatChoices(field, this.form[name]);
+          }
+          if (this.resolve.action.name === 'edit') {
+            this.form[name] = this.resolve.resource[name];
+            if (field.type === 'datetime' && this.resolve.resource[name]) {
+              this.form[name] = new Date(this.resolve.resource[name]);
+            }
+          }
+          if (defaultFieldOptions[field.type]) {
+            field.options = defaultFieldOptions[field.type];
+          }
+        });
+        if (this.resolve.action.order) {
+          this.fields = this.resolve.action.order.reduce((result, name) => {
+            result[name] = this.resolve.action.fields[name];
+            return result;
+          }, {});
+        } else {
+          this.fields = this.resolve.action.fields;
+        }
+      })
+      .finally(() => {
+        this.loading = false;
+        // Trigger digest for async/await
+        this.$rootScope.$applyAsync();
+      });
+  }
+  get dialogTitle() {
+    if (this.resolve.action.getDialogTitle) {
+      return this.resolve.action.getDialogTitle(this.resolve.resource);
+    } else if (this.resolve.action.dialogTitle) {
+      return this.resolve.action.dialogTitle;
+    } else {
+      return this.resolve.action.title;
+    }
+  }
+  submitActive() {
+    return (
+      this.ActionForm.$dirty ||
+      this.resolve.action.method === 'DELETE' ||
+      !this.resolve.action.fields ||
+      this.submitting
+    );
+  }
+  submitForm() {
+    if (this.ActionForm.$invalid) {
+      return this.$q.reject();
+    }
+    const fields = this.resolve.action.fields;
+    if (!this.resolve.action.url) {
+      this.resolve.action.url =
+        this.resolve.resource.url + this.resolve.action.name + '/';
+    }
+    let form = {};
+    if (this.resolve.action.serializer) {
+      form = this.resolve.action.serializer(this.form);
+    } else {
+      for (const name in fields) {
+        if (this.form[name] !== null) {
+          const field = fields[name];
+          const serializer = field.serializer || angular.identity;
+          form[name] = serializer(this.form[name], field);
         }
       }
+    }
 
-      let promise;
-      let url;
-      if ($scope.action.method === 'DELETE') {
-        url = $scope.action.url + '?' + Qs.stringify($scope.form);
-        promise = Axios.delete(url);
-      } else if ($scope.action.method === 'PUT') {
-        url = $scope.resource.url;
-        promise = Axios.put(url, form);
-      } else {
-        promise = Axios.post($scope.action.url, form);
-      }
-      $scope.submitting = true;
+    let promise;
+    let url;
+    if (this.resolve.action.method === 'DELETE') {
+      url = this.resolve.action.url + '?' + Qs.stringify(this.form);
+      promise = Axios.delete(url);
+    } else if (this.resolve.action.method === 'PUT') {
+      url = this.resolve.resource.url;
+      promise = Axios.put(url, form);
+    } else {
+      promise = Axios.post(this.resolve.action.url, form);
+    }
+    this.submitting = true;
 
-      return promise.then(
-        function (response) {
-          $scope.errors = {};
-          handleActionSuccess($scope.action);
+    return promise.then(
+      (response) => {
+        this.errors = {};
+        handleActionSuccess(this.resolve.action);
 
-          if (response.status === 201 && $scope.action.followRedirect) {
-            const resource = response.data;
-            return $state.go('resource-details', {
-              resource_type: resource.resource_type,
-              uuid: resource.uuid,
-            });
-          }
+        if (response.status === 201 && this.resolve.action.followRedirect) {
+          const resource = response.data;
+          return this.$state.go('resource-details', {
+            resource_type: resource.resource_type,
+            uuid: resource.uuid,
+          });
+        }
 
-          $scope.controller.reInitResource($scope.resource);
-          $scope.$close();
-        },
-        function (response) {
-          $scope.submitting = false;
-          $scope.errors = response?.data;
-          store.dispatch(
-            showErrorResponse(response, translate('Unable to perform action')),
-          );
-        },
-      );
-    },
-    cancel: function () {
-      $scope.$dismiss();
-    },
-  });
-  $scope.init();
+        this.resolve.controller.reInitResource(this.resolve.resource);
+        this.$close();
+      },
+      (response) => {
+        this.submitting = false;
+        this.errors = response?.data;
+        store.dispatch(
+          showErrorResponse(response, translate('Unable to perform action')),
+        );
+      },
+    );
+  }
+  cancel() {
+    store.dispatch(closeModalDialog());
+  }
 }
 
-// TODO: Convert directive to Angular 1.5 component
-export default function actionDialog() {
-  return {
-    restrict: 'E',
-    template: template,
-    controller: ActionDialogController,
-  };
-}
+export default {
+  template: template,
+  controller: ActionDialogController,
+  bindings: {
+    resolve: '<',
+  },
+};

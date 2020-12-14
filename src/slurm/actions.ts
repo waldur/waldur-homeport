@@ -24,7 +24,6 @@ const createDetailsAction = (): ResourceAction => ({
   name: 'details',
   title: translate('Details'),
   component: AllocationDetailsDialog,
-  useResolve: true,
   type: 'form',
   dialogSize: 'lg',
 });

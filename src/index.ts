@@ -48,7 +48,6 @@ const appModule = angular.module('waldur', [
   'angulartics',
   'angulartics.google.analytics',
   'ngSanitize',
-  'ui.bootstrap',
   'angular-bind-html-compile',
 ]);
 

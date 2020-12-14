@@ -2447,11 +2447,6 @@ angular-translate@^2.18.2, angular-translate@~2.18.2:
   dependencies:
     angular "^1.7.9"
 
-angular-ui-bootstrap@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-2.5.0.tgz#2facefb915386655dc5f44150258032517236d01"
-  integrity sha1-L6zvuRU4ZlXcX0QVAlgDJRcjbQE=
-
 angular@^1.7.9, angular@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.0.tgz#b1ec179887869215cab6dfd0df2e42caa65b1b51"

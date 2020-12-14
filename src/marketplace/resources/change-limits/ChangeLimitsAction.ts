@@ -17,7 +17,6 @@ export default function createAction(ctx): ResourceAction {
     method: 'POST',
     component: ChangeLimitsDialog,
     title: translate('Change limits'),
-    useResolve: true,
     dialogSize: 'lg',
     isVisible:
       marketplaceIsVisible() && ctx.resource.marketplace_resource_uuid !== null,
