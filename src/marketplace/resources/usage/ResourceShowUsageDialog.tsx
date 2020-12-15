@@ -1,11 +1,10 @@
 import { translate } from '@waldur/i18n';
+import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/ResourceUsageTabsContainer';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-import { ResourceUsagesList } from './ResourceUsageList';
-
 interface ResourceUsageDialogProps {
-  resolve: { resource_uuid: string };
+  resolve: { offeringUuid: string; resourceUuid: string };
 }
 
 export const ResourceShowUsageDialog = (props: ResourceUsageDialogProps) => (
@@ -13,6 +12,9 @@ export const ResourceShowUsageDialog = (props: ResourceUsageDialogProps) => (
     title={translate('Resource usage')}
     footer={<CloseDialogButton />}
   >
-    <ResourceUsagesList resource_uuid={props.resolve.resource_uuid} />
+    <ResourceUsageTabsContainer
+      offeringUuid={props.resolve.offeringUuid}
+      resourceUuid={props.resolve.resourceUuid}
+    />
   </ModalDialog>
 );

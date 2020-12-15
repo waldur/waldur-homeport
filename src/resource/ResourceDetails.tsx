@@ -42,7 +42,8 @@ let ResourceDetails = ({ resource, refreshResource }) => {
               )}
               {resource.is_usage_based && (
                 <ResourceShowUsageButton
-                  resource={resource.marketplace_resource_uuid}
+                  offeringUuid={resource.marketplace_offering_uuid}
+                  resourceUuid={resource.marketplace_resource_uuid}
                 />
               )}
               {resource.marketplace_plan_uuid && (

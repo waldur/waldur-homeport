@@ -27,7 +27,10 @@ export const ResourceUsageButton = ({ row }: Props) => {
     !['OK', 'Updating', 'Terminating', 'Terminated'].includes(row.state);
   const body = (
     <div className={classNames('btn-group', { disabled })}>
-      <ResourceShowUsageButton resource={row.uuid} />
+      <ResourceShowUsageButton
+        offeringUuid={row.offering_uuid}
+        resourceUuid={row.uuid}
+      />
       {['OK', 'Updating'].includes(row.state) && row.plan && (
         <ResourceCreateUsageButton
           offering_uuid={row.offering_uuid}

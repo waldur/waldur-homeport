@@ -20,7 +20,10 @@ export const OfferingActions = ({ offering, reInitResource }) => (
       <OfferingDetailsButton offering={offering.marketplace_offering_uuid} />
     )}
     {offering.is_usage_based && (
-      <ResourceShowUsageButton resource={offering.marketplace_resource_uuid} />
+      <ResourceShowUsageButton
+        offeringUuid={offering.marketplace_offering_uuid}
+        resourceUuid={offering.marketplace_resource_uuid}
+      />
     )}
     {offering.marketplace_plan_uuid && (
       <PlanDetailsButton resource={offering.marketplace_resource_uuid} />
