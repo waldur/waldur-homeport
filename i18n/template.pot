@@ -8591,6 +8591,8 @@ msgstr ""
 msgid "Unique ID of a resource within management plugin"
 msgstr ""
 
+#: src/invoices/details/BillingRecordDetails.tsx
+#: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
 #: src/offering/actions/CompleteAction.ts

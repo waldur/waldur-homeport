@@ -7,6 +7,7 @@ export interface InvoiceItem {
   details: any;
   start: string;
   end: string;
+  measured_unit: string;
   unit_price: string;
   price: string;
   factor: number;

@@ -19,6 +19,7 @@ export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
   const projects = useMemo(() => groupInvoiceItems(invoice.items), [
     invoice.items,
   ]);
+
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -57,6 +58,7 @@ export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
                 <thead>
                   <tr>
                     <th>{translate('Item')}</th>
+                    <th>{translate('Unit')}</th>
                     <th>{translate('Quantity')}</th>
                     <th>{translate('Unit price')}</th>
                     <th>
@@ -81,6 +83,7 @@ export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
                             itemId={`item-${projectIndex}-${itemIndex}`}
                           />
                         </td>
+                        <td>{item.measured_unit}</td>
                         <td>{item.factor || item.quantity}</td>
                         <td>{defaultCurrency(item.unit_price)}</td>
                         <td>{defaultCurrency(item.price)}</td>
