@@ -61,7 +61,10 @@ export const TableComponent = (props) => {
       render: ({ row }) => {
         const body = (
           <div className={classNames({ disabled: !row.is_usage_based })}>
-            <ResourceShowUsageButton resource={row.uuid} />
+            <ResourceShowUsageButton
+              offeringUuid={row.offering_uuid}
+              resourceUuid={row.uuid}
+            />
           </div>
         );
         if (!row.is_usage_based) {
