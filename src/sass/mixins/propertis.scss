@@ -5,11 +5,3 @@
   }
   #{$property}: $px;
 }
-
-@mixin boxshadow($values, $color) {
-  $px: ();
-  @each $value in $values {
-    $px: append($px, $value + px);
-  }
-  box-shadow: $px $color;
-}

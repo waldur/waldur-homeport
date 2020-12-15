@@ -6,12 +6,6 @@
   background: #ffffff;
   border: 0px solid #d8d8d8;
   box-shadow: 0px 2px 2px 0px rgba(223, 223, 223, 0.5);
-  &.no-styles {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    text-align: center;
-  }
   // empty
   &.clear {
     padding: 0;
@@ -32,32 +26,4 @@
   @include bp(md) {
     @include property(margin, 20 30);
   }
-  // md
-  .simple-line {
-    @include property(padding, 0 10);
-    @include property(margin, 20 0);
-    &.first {
-      @include property(margin-top, 0);
-    }
-    // &.first
-  }
-  // simple-line
-  &.empty-data-block {
-    text-align: center;
-    h2 {
-      float: none;
-    }
-  }
-  &.text-page {
-    text-align: justify;
-    padding: 50px 80px;
-
-    @include bp(xs) {
-      @include property(padding, 50 20);
-    }
-    //xs
-  }
-  // tos-page
 }
-
-// white-box
