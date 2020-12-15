@@ -76,7 +76,7 @@ const UserListView = lazyComponent(
 );
 const IssueDetailsContainer = lazyComponent(
   () => import(/* webpackChunkName: "IssueDetails" */ './IssueDetails'),
-  'IssueDetailsContainer',
+  'IssueDetails',
 );
 const NotificationsList = lazyComponent(
   () =>
