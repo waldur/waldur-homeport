@@ -16,7 +16,7 @@ export const NumberField = (props: NumberFieldProps) => {
   );
   if (props.unit) {
     return (
-      <div className="input-group" style={{ maxWidth: '15em' }}>
+      <div className="input-group" style={{ maxWidth: '15em', zIndex: 0 }}>
         {control}
         <span className="input-group-addon">{props.unit}</span>
       </div>
