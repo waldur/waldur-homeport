@@ -1,3 +1,27 @@
+/* eslint-disable no-redeclare */
+// Must be declared global to be detected by typescript (allows import/export)
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Cypress {
+    interface Chainable {
+      mockUser(): Chainable;
+      mockCustomer(): Chainable;
+      fillAndSubmitLoginForm(username?: string, password?: string): Chainable;
+      login(username?: string, password?: string): Chainable;
+      openDropdownByLabel(value: string): Chainable;
+      openDropdownByLabelForce(value: string): Chainable;
+      openCustomerCreateDialog(): Chainable;
+      openWorkspaceSelector(): Chainable;
+      selectTheFirstOptionOfDropdown(): Chainable;
+      openSelectDialog(selectId: string, option: string): Chainable;
+      buttonShouldBeDisabled(btnClass: string): Chainable;
+      visitInstanceCreateForm(): Chainable;
+      visitOrganizations(): Chainable;
+      waitForSpinner(): Chainable;
+    }
+  }
+}
+
 import '../integration/support/commands';
 import '../integration/openstack/instance/commands';
 

@@ -1,4 +1,5 @@
 {
   "baseUrl": "http://localhost:8001/",
-  "projectId": "Waldur HomePort"
+  "projectId": "Waldur HomePort",
+  "supportFile": "cypress/support/index.ts"
 }
