@@ -115,7 +115,7 @@ describe('Customer creation dialog', () => {
 
       // Wait for modal to hide
       .get('.modal-content')
-      .should('not.be.visible')
+      .should('not.exist')
 
       // Workspace selector indicates organization workspace
       .get('.select-workspace-toggle.btn-primary')

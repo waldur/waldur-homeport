@@ -57,7 +57,7 @@ Cypress.Commands.add('login', function (username, password) {
 });
 
 Cypress.Commands.add('waitForSpinner', () => {
-  cy.get('.fa-spinner.fa-spin').should('not.be.visible');
+  cy.get('.fa-spinner.fa-spin').should('not.exist');
 });
 
 Cypress.Commands.add('openDropdownByLabel', (label) => {
@@ -77,7 +77,7 @@ Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
 });
 
 Cypress.Commands.add('openWorkspaceSelector', () => {
-  cy
+  cy.waitForSpinner()
     // Workspace selector indicates user workspace
     .get('.select-workspace-toggle.btn-info')
 
