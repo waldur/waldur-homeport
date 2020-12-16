@@ -23,12 +23,12 @@ const PaymentProfileCreateContainer = lazyComponent(
     ),
   'PaymentProfileCreateContainer',
 );
-const CustomerDashboardContainer = lazyComponent(
+const CustomerDashboard = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "CustomerDashboardContainer" */ './dashboard/CustomerDashboardContainer'
+      /* webpackChunkName: "CustomerDashboard" */ './dashboard/CustomerDashboard'
     ),
-  'CustomerDashboardContainer',
+  'CustomerDashboard',
 );
 const CustomerManage = lazyComponent(
   () =>
@@ -76,7 +76,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'organization.dashboard',
     url: 'dashboard/',
-    component: CustomerDashboardContainer,
+    component: CustomerDashboard,
     data: {
       pageClass: 'gray-bg',
       hideBreadcrumbs: true,

@@ -5,17 +5,19 @@ import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExten
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { Customer, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-export const getSidebarItems = (customer: Customer): MenuItemType[] => [
-  {
-    key: 'dashboard',
-    label: translate('Dashboard'),
-    icon: 'fa-th-large',
-    state: 'organization.dashboard',
-    params: {
-      uuid: customer.uuid,
-    },
-    index: 100,
+export const getDashboardItem = (customerId: string): MenuItemType => ({
+  key: 'dashboard',
+  label: translate('Dashboard'),
+  icon: 'fa-th-large',
+  state: 'organization.dashboard',
+  params: {
+    uuid: customerId,
   },
+  index: 100,
+});
+
+export const getSidebarItems = (customer: Customer): MenuItemType[] => [
+  getDashboardItem(customer.uuid),
   {
     key: 'projects',
     label: translate('Projects'),

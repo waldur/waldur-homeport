@@ -12,18 +12,19 @@ import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { ENV } from '@waldur/core/services';
 import { CustomerPermissionsService } from '@waldur/customer/services/CustomerPermissionsService';
-import { CustomersService } from '@waldur/customer/services/CustomersService';
 import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse } from '@waldur/store/coreSaga';
 import { fetchListStart } from '@waldur/table/actions';
+import { checkCustomerUser, checkIsOwner } from '@waldur/workspace/selectors';
 
 import { OwnerExpirationTimeGroup } from './OwnerExpirationTimeGroup';
 import { OwnerGroup } from './OwnerGroup';
 import { ProjectsListGroup } from './ProjectsListGroup';
 import { UserGroup } from './UserGroup';
+
 import './EditTeamMemberDialog.scss';
 
 const FORM_ID = 'EditTeamMemberDialog';
@@ -186,15 +187,15 @@ export const EditTeamMemberDialog = reduxForm<
     [dispatch, resolve],
   );
 
-  const canChangeRole = CustomersService.checkCustomerUser(
+  const canChangeRole = checkCustomerUser(
     resolve.currentCustomer,
     resolve.currentUser,
   );
 
   const canManageOwner =
     resolve.currentUser.is_staff ||
-    (CustomersService.isOwner(resolve.currentCustomer, resolve.editUser) &&
-      CustomersService.isOwner(resolve.currentCustomer, resolve.currentUser) &&
+    (checkIsOwner(resolve.currentCustomer, resolve.editUser) &&
+      checkIsOwner(resolve.currentCustomer, resolve.currentUser) &&
       ENV.plugins.WALDUR_CORE.OWNERS_CAN_MANAGE_OWNERS);
 
   const projects = useMemo(

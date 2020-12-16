@@ -13,7 +13,12 @@ import {
   setCurrentProject,
   setCurrentWorkspace,
 } from '@waldur/workspace/actions';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import {
+  checkCustomerUser,
+  checkIsServiceManager,
+  getCustomer,
+  getUser,
+} from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { CustomersService } from '../services/CustomersService';
@@ -54,7 +59,8 @@ export const CustomerWorkspace = () => {
         dispatch(setCurrentWorkspace(ORGANIZATION_WORKSPACE));
 
         if (
-          !CustomersService.checkCustomerUser(currentCustomer, currentUser) &&
+          !checkCustomerUser(currentCustomer, currentUser) &&
+          !checkIsServiceManager(currentCustomer, currentUser) &&
           !currentUser.is_support
         ) {
           dispatch(stateGo('errorPage.notFound'));

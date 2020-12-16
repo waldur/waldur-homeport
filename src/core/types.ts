@@ -50,6 +50,7 @@ export type StateDeclaration =
   | TemplateStateDeclaration;
 
 export interface ApplicationConfigurationOptions extends Record<string, any> {
+  apiEndpoint: string;
   plugins: PluginConfiguration;
 }
 
