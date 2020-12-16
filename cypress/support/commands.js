@@ -101,7 +101,7 @@ Cypress.Commands.add('openCustomerCreateDialog', () => {
     .click({ force: true })
 
     // Modal dialog should be displayed
-    .get('.modal-title')
+    .get('h4.modal-title', { withinSubject: null })
     .contains('Create organization');
 });
 

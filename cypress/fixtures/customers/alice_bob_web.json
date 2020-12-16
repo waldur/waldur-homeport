@@ -16,6 +16,7 @@
       }
     ],
     "owners": [],
+    "service_managers": [],
     "is_expert_provider": false,
     "quotas": []
   },
@@ -33,6 +34,7 @@
         "native_name": "Bob Leböwski"
       }
     ],
+    "service_managers": [],
     "is_expert_provider": true,
     "quotas": []
   },

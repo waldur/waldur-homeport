@@ -85,10 +85,13 @@ const TableOptions: TableOptionsType = {
   table: 'project-users',
   fetchData: fetchProjectUsers,
   queryField: 'full_name',
-  mapPropsToFilter: (props) => ({
-    project_uuid: props.project.uuid,
-    o: 'concatenated_name',
-  }),
+  mapPropsToFilter: (props) =>
+    props.project
+      ? {
+          project_uuid: props.project.uuid,
+          o: 'concatenated_name',
+        }
+      : {},
 };
 
 const ProjectUsersListComponent = connectTable(TableOptions)(TableComponent);

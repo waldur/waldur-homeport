@@ -50,6 +50,18 @@ export const checkIsOwner = (customer, user) => {
   return false;
 };
 
+export const checkIsServiceManager = (customer, user) => {
+  if (!customer || !user) {
+    return false;
+  }
+  for (let i = 0; i < customer.service_managers.length; i++) {
+    if (user && user.uuid === customer.service_managers[i].uuid) {
+      return true;
+    }
+  }
+  return false;
+};
+
 export const checkCustomerUser = (customer, user) => {
   if (user && user.is_staff) {
     return true;
