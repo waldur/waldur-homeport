@@ -32,6 +32,7 @@ export interface ComponentUsage {
   type: string;
   measured_unit: string;
   usage: number;
+  date: string;
   description: string;
 }
 

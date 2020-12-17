@@ -1,9 +1,23 @@
+import { Moment } from 'moment';
 import moment from 'moment-timezone';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { OfferingComponent } from '@waldur/marketplace/types';
 
-const eChartInitialOption = () => ({
+import { ComponentUsage } from './types';
+
+interface RowData {
+  value: number;
+  description: string;
+}
+
+const formatChart = (
+  name: string,
+  color: string,
+  labels: string[],
+  usages: RowData[],
+) => ({
   toolbox: {
     feature: {
       saveAsImage: {
@@ -40,7 +54,7 @@ const eChartInitialOption = () => ({
   xAxis: [
     {
       type: 'category',
-      data: [],
+      data: labels,
       axisPointer: {
         type: 'shadow',
       },
@@ -49,7 +63,7 @@ const eChartInitialOption = () => ({
   yAxis: [
     {
       type: 'value',
-      name: '',
+      name,
       axisLabel: {
         formatter: '{value}',
       },
@@ -58,78 +72,73 @@ const eChartInitialOption = () => ({
   series: [
     {
       type: 'bar',
-      data: [],
+      data: usages,
+      color,
     },
   ],
 });
 
-const setYAxisLabel = (option, unit: string): void => {
-  option.yAxis[0].name = unit;
-};
-
 // Filters usages by type and the last 12 months period
-const filterUsages = (component, usages) =>
-  usages.filter((usage) => {
-    const twelveMonthsAgo = moment().subtract(12, 'months');
+const filterUsages = (
+  component: OfferingComponent,
+  usages: ComponentUsage[],
+) => {
+  const threshold = moment().subtract(12, 'months');
+  return usages.filter((usage) => {
     return (
-      twelveMonthsAgo.isBefore(usage.date) &&
+      threshold.isBefore(usage.date) &&
       moment().diff(usage.date) >= 0 &&
       usage.type === component.type
     );
   });
+};
 
-const getLastTwelveMonths = (): any[] => {
-  const lastTwelveMonths = [];
+const getLastTwelveMonths = (): Moment[] => {
+  const periods = [];
   for (let i = 11; i >= 0; i--) {
-    lastTwelveMonths.push(moment().subtract(i, 'months'));
+    periods.push(moment().subtract(i, 'months'));
   }
-  return lastTwelveMonths;
+  return periods;
 };
 
-const fillPeriods = (lastTwelveMonths, option): void => {
-  const periods: string[] = [];
-  lastTwelveMonths.forEach((period) => {
-    const month = period.month() + 1;
-    const year = period.year();
-    periods.push(`${month} - ${year}`);
-  });
-  option.xAxis[0].data = periods;
-};
-
-const setColor = (option, color: string) => {
-  option.series[0].color = color;
-};
-
-const fillUsages = (option, periods, usages) => {
+const getUsages = (periods: Moment[], usages: ComponentUsage[]): RowData[] => {
+  const result = [];
   for (let i = 0; i < periods.length; i++) {
     for (let j = 0; j < usages.length; j++) {
       if (
-        moment(periods[i]).format('YYYY-MM') ===
+        periods[i].format('YYYY-MM') ===
         moment(usages[j].date).format('YYYY-MM')
       ) {
-        option.series[0].data.push({
+        result.push({
           value: usages[j].usage,
           description: usages[j].description,
         });
         break;
       }
       if (j === usages.length - 1) {
-        option.series[0].data.push(0);
+        result.push({
+          value: 0,
+          description: '',
+        });
       }
     }
   }
+  return result;
 };
 
-export const getEChartOptions = (component, usages, color: string) => {
-  const option = eChartInitialOption();
-  setYAxisLabel(option, component.measured_unit);
-  setColor(option, color);
-  const lastTwelveMonths = getLastTwelveMonths();
-  fillPeriods(lastTwelveMonths, option);
-  usages = filterUsages(component, usages);
-  if (!usages.length) {
-    return option;
-  }
-  fillUsages(option, lastTwelveMonths, usages);
-  return option;
+const formatMonthPeriod = (date: Moment) => {
+  const month = date.month() + 1;
+  const year = date.year();
+  return `${month} - ${year}`;
+};
+
+export const getEChartOptions = (
+  component: OfferingComponent,
+  usages: ComponentUsage[],
+  color: string,
+) => {
+  const periods = getLastTwelveMonths();
+  const labels = periods.map(formatMonthPeriod);
+  const formattedUsages = getUsages(periods, filterUsages(component, usages));
+  return formatChart(component.measured_unit, color, labels, formattedUsages);
 };

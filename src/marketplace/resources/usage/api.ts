@@ -7,7 +7,11 @@ import {
   getResourcePlanPeriods,
 } from '@waldur/marketplace/common/api';
 
-import { UsageReportContext, ResourcePlanPeriod } from './types';
+import {
+  UsageReportContext,
+  ResourcePlanPeriod,
+  ComponentUsage,
+} from './types';
 
 export const getPeriodLabel = (
   period: Pick<ResourcePlanPeriod, 'start' | 'end' | 'plan_name'>,
@@ -49,7 +53,9 @@ export const getUsageComponents = async (params: UsageReportContext) => {
 };
 
 const getComponentUsages = (resource_uuid: string) =>
-  getAll('/marketplace-component-usages/', { params: { resource_uuid } });
+  getAll<ComponentUsage>('/marketplace-component-usages/', {
+    params: { resource_uuid },
+  });
 
 const getUsageBasedOfferingComponents = async (offering_uuid: string) => {
   if (!offering_uuid) {
