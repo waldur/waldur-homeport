@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useState, useEffect } from 'react';
-import { useAsyncFn, useEffectOnce } from 'react-use';
+import { useAsyncFn, useEffectOnce, useNetwork } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
@@ -29,7 +29,10 @@ export const ResourceDetailsContainer = () => {
     refreshResource();
   });
 
-  useRecursiveTimeout(refreshResource, ENV.resourcesTimerInterval * 1000);
+  const { online } = useNetwork();
+
+  const pullInterval = online ? ENV.defaultPullInterval * 1000 : null;
+  useRecursiveTimeout(refreshResource, pullInterval);
 
   const [resource, setResource] = useState<BaseResource>();
 

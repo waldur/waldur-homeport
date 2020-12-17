@@ -1,8 +1,9 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React, { useEffect, useState } from 'react';
-import { useAsyncFn, useEffectOnce } from 'react-use';
+import { useAsyncFn, useEffectOnce, useNetwork } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { ENV } from '@waldur/core/services';
 import { Await } from '@waldur/core/types';
 import { useRecursiveTimeout } from '@waldur/core/useRecursiveTimeout';
 import { translate } from '@waldur/i18n';
@@ -102,13 +103,14 @@ export const OrderItemDetailsContainer: React.FC<{}> = () => {
     Await<ReturnType<typeof loadData>>
   >();
 
-  // Refresh order item details each 5 seconds until it is switched from pending state to terminal state
-  const pollingDelay = ['pending', 'executing'].includes(
-    asyncValue?.orderItem.state,
-  )
-    ? 5000
-    : null;
-  useRecursiveTimeout(loadData, pollingDelay);
+  const { online } = useNetwork();
+
+  // Refresh order item details until it is switched from pending state to terminal state
+  const pullInterval =
+    online && ['pending', 'executing'].includes(asyncValue?.orderItem.state)
+      ? ENV.defaultPullInterval * 1000
+      : null;
+  useRecursiveTimeout(loadData, pullInterval);
 
   useEffect(() => {
     if (
