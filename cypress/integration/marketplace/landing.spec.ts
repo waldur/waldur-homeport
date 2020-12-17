@@ -1,6 +1,7 @@
 xdescribe('Marketplace landing view', () => {
   beforeEach(() => {
     cy.mockUser()
+      .mockChecklists()
       .setToken()
 
       .log('Visit Marketplace')
@@ -17,11 +18,6 @@ xdescribe('Marketplace landing view', () => {
         fixture: 'marketplace/categories.json',
       })
       .intercept('GET', '/api/marketplace-orders/', [])
-      .intercept('HEAD', '/api/marketplace-checklists/', {
-        headers: {
-          'x-result-count': '0',
-        },
-      })
       .visit('/organizations/10a05c2fcab44588a7aa2e16809504cf/marketplace/')
       .waitForSpinner();
   });

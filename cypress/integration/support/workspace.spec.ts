@@ -1,6 +1,7 @@
 describe('Financial overview', () => {
   beforeEach(() => {
     cy.mockUser()
+      .mockChecklists()
       .intercept('GET', '/api/marketplace-offerings/', {
         fixture: 'marketplace/offerings.json',
       })
@@ -36,14 +37,6 @@ describe('Financial overview', () => {
       })
       .intercept('GET', '/api/projects/', {
         fixture: 'projects/certifications.json',
-      })
-      .intercept('HEAD', '/api/marketplace-checklists/', {
-        headers: {
-          'x-result-count': '1',
-        },
-      })
-      .intercept('GET', '/api/marketplace-checklists-categories/', {
-        fixture: 'marketplace/checklists_categories.json',
       })
       .setToken()
       .visit('/profile/')

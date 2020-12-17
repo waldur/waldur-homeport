@@ -1,9 +1,4 @@
 {
   "apiEndpoint": "",
-  "enabledFeatures": [
-    "marketplace",
-    "support.organizations",
-    "user.ssh-keys",
-    "notifications"
-  ]
+  "enableExperimental": true
 }

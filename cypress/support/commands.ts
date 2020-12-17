@@ -6,6 +6,7 @@ declare global {
     interface Chainable {
       mockUser(): Chainable;
       mockCustomer(): Chainable;
+      mockChecklists(): Chainable;
       fillAndSubmitLoginForm(username?: string, password?: string): Chainable;
       setToken(): Chainable;
       openDropdownByLabel(value: string): Chainable;
@@ -109,4 +110,14 @@ Cypress.Commands.add('mockCustomer', () => {
     .intercept('GET', '/api/invoices/', [])
     .intercept('GET', '/api/projects/', [])
     .intercept('GET', '/api/marketplace-orders/', []);
+});
+
+Cypress.Commands.add('mockChecklists', () => {
+  cy.intercept('HEAD', '/api/marketplace-checklists/', {
+    headers: {
+      'x-result-count': '1',
+    },
+  }).intercept('GET', '/api/marketplace-checklists-categories/', {
+    fixture: 'marketplace/checklists_categories.json',
+  });
 });

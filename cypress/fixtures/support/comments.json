@@ -1,0 +1,16 @@
+[
+  {
+    "url": "https://example.com/api/support-comments/d491e1cd0f084dd49f3ee38c22f864fc/",
+    "uuid": "d491e1cd0f084dd49f3ee38c22f864fc",
+    "issue": "https://example.com/api/support-issues/53f12ab2f09f48479d06018819a92874/",
+    "issue_key": "ERI-34",
+    "description": "Magazine foot western wall protect. Life happen single boy fall mouth my. Wear service world everybody common skin wonder let.",
+    "is_public": true,
+    "author_name": "Mrs. Jennifer Cunningham",
+    "author_uuid": "78f28e6bcf68497d9e455de6d289c836",
+    "author_user": "https://example.com/api/users/78f28e6bcf68497d9e455de6d289c836/",
+    "author_email": "LisaRodgers@example.com",
+    "backend_id": "12311",
+    "created": "2020-06-01T20:47:37.687089Z"
+  }
+]

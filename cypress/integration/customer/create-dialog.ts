@@ -2,6 +2,7 @@ describe('Customer creation dialog', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockCustomer()
+      .mockChecklists()
       .intercept('OPTIONS', '/api/customers/', {
         fixture: 'customers/countries.json',
       })
@@ -11,11 +12,6 @@ describe('Customer creation dialog', () => {
       .intercept('GET', '/api/marketplace-category-component-usages/', [])
       .intercept('GET', '/api/marketplace-resources/', [])
       .intercept('GET', '/api/marketplace-offerings/', [])
-      .intercept('HEAD', '/api/marketplace-checklists/', {
-        headers: {
-          'x-result-count': '0',
-        },
-      })
       .setToken()
       .visit('/profile/')
       .waitForSpinner()

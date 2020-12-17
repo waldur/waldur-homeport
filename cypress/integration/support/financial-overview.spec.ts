@@ -1,6 +1,7 @@
 describe('Financial overview', () => {
   beforeEach(() => {
     cy.mockUser()
+      .mockChecklists()
       .setToken()
       .intercept('GET', '/api/customers/', {
         fixture: 'customers/alice_bob_web.json',
@@ -11,8 +12,6 @@ describe('Financial overview', () => {
       .intercept('GET', '/api/invoices/', {
         fixture: 'customers/invoices.json',
       })
-      .intercept('GET', '/api/marketplace-checklists/', [])
-      .intercept('GET', '/api/marketplace-checklists-categories/', [])
       .visit('/support/organizations/', { log: false });
   });
 

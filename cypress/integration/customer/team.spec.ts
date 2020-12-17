@@ -1,6 +1,7 @@
 describe('Team', () => {
   beforeEach(() => {
     cy.mockUser()
+      .mockChecklists()
       .setToken()
 
       .intercept(
@@ -10,11 +11,6 @@ describe('Team', () => {
           fixture: 'marketplace/counters.json',
         },
       )
-      .intercept('HEAD', '/api/marketplace-checklists/', {
-        headers: {
-          'x-result-count': '0',
-        },
-      })
       .intercept('GET', '/api/customers/6983ac22f2bb469189311ab21e493359/', {
         fixture: 'customers/alice.json',
       })
