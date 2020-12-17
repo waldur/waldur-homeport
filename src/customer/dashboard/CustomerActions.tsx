@@ -1,5 +1,6 @@
 import { ActionList } from '@waldur/dashboard/ActionList';
 import { getIssueAction } from '@waldur/dashboard/ReportIssueAction';
+import { getReportSecurityIncidentAction } from '@waldur/dashboard/ReportSecurityIncidentAction';
 import { getSupportPortalAction } from '@waldur/dashboard/SupportPortalAction';
 
 import { getProjectAction } from './CreateProjectAction';
@@ -16,6 +17,7 @@ export const CustomerActions = (props: CustomerActionsProps) => (
         state: 'organization.issues',
       }),
       getSupportPortalAction(),
+      getReportSecurityIncidentAction(),
     ].filter((action) => action !== undefined)}
   />
 );

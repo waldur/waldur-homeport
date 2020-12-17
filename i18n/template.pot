@@ -689,6 +689,7 @@ msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 #: src/issues/create/IssueCreateForm.tsx
+#: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 msgid "Attachments"
 msgstr ""
 
@@ -1744,6 +1745,10 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
+#: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
+msgid "Date and time of incident"
+msgstr ""
+
 #: src/user/support/UserDetailsTable.tsx
 msgid "Date joined"
 msgstr ""
@@ -1842,6 +1847,7 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/issues/list/IssuesShortList.tsx
+#: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
@@ -5883,6 +5889,7 @@ msgstr ""
 msgid "Removing the organization will delete all related resources."
 msgstr ""
 
+#: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 #: src/offering/actions/UpdateAction.ts
 msgid "Report"
 msgstr ""
@@ -5901,6 +5908,11 @@ msgstr ""
 
 #: src/offering/OfferingReportComponent.tsx
 msgid "Report is invalid."
+msgstr ""
+
+#: src/dashboard/ReportSecurityIncidentAction.tsx
+#: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
+msgid "Report security incident"
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceCreateUsageButton.tsx
@@ -6505,6 +6517,14 @@ msgstr ""
 msgid "Security groups details"
 msgstr ""
 
+#: src/issues/security-incident/utils.ts
+msgid "Security incident date: {date}"
+msgstr ""
+
+#: src/issues/security-incident/utils.ts
+msgid "Security incident type: {type}"
+msgstr ""
+
 #: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 msgid "See all"
@@ -6590,6 +6610,10 @@ msgstr ""
 
 #: src/customer/list/SelectOrganizationDivisionField.tsx
 msgid "Select division..."
+msgstr ""
+
+#: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
+msgid "Select incident type"
 msgstr ""
 
 #: src/offering/OfferingConfigurationForm.tsx
@@ -7724,6 +7748,7 @@ msgstr ""
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/SummaryGroup.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 #: src/marketplace/referral/ReferralsList.tsx
 #: src/user/keys/KeysList.tsx
 msgid "Title"
@@ -7755,6 +7780,10 @@ msgstr ""
 
 #: src/customer/details/OrganizationRemovalErrorDialog.tsx
 msgid "To remove your organization, please send an email to"
+msgstr ""
+
+#: src/dashboard/ReportSecurityIncidentAction.tsx
+msgid "To report a security incident, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a>."
 msgstr ""
 
 #: src/dashboard/ReportIssueAction.tsx
@@ -7857,6 +7886,10 @@ msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 msgid "Type is invalid."
+msgstr ""
+
+#: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
+msgid "Type of incident"
 msgstr ""
 
 #: src/rancher/catalog/ClusterCatalogList.tsx
@@ -8406,6 +8439,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Unable to remove screenshot."
+msgstr ""
+
+#: src/issues/security-incident/store/effects.ts
+msgid "Unable to report security incident."
 msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx

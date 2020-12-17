@@ -22,7 +22,7 @@ import { sendIssueCreateRequest } from './utils';
 
 const filterOption = (options) => options;
 
-const ISSUE_QUICK_CREATE_FORM_ID = 'IssueQuickCreate';
+export const ISSUE_QUICK_CREATE_FORM_ID = 'IssueQuickCreate';
 
 const formSelector = formValueSelector(ISSUE_QUICK_CREATE_FORM_ID);
 
@@ -78,7 +78,7 @@ const projectRequiredSelector = createSelector(
   },
 );
 
-export const ProjectGroup = ({ disabled, customer }) => {
+export const ProjectGroup = ({ disabled, customer, formId }) => {
   const dispatch = useDispatch();
   const projectRequired = useSelector(projectRequiredSelector);
 
@@ -87,7 +87,7 @@ export const ProjectGroup = ({ disabled, customer }) => {
   ]);
 
   useEffect(() => {
-    dispatch(change(ISSUE_QUICK_CREATE_FORM_ID, 'project', undefined));
+    dispatch(change(formId, 'project', undefined));
   }, [dispatch, customer]);
 
   return (
@@ -121,14 +121,14 @@ export const ProjectGroup = ({ disabled, customer }) => {
   );
 };
 
-export const ResourceGroup = ({ disabled, project }) => {
+export const ResourceGroup = ({ disabled, project, formId }) => {
   const dispatch = useDispatch();
   const loadData = useCallback((name) => refreshResources(name, project), [
     project,
   ]);
 
   useEffect(() => {
-    dispatch(change(ISSUE_QUICK_CREATE_FORM_ID, 'resource', undefined));
+    dispatch(change(formId, 'resource', undefined));
   }, [dispatch, project]);
 
   return (
@@ -206,10 +206,12 @@ export const IssueQuickCreate = reduxForm<IssueFormData>({
         <ProjectGroup
           disabled={submitting}
           customer={useSelector(customerSelector)}
+          formId={ISSUE_QUICK_CREATE_FORM_ID}
         />
         <ResourceGroup
           disabled={submitting}
           project={useSelector(projectSelector)}
+          formId={ISSUE_QUICK_CREATE_FORM_ID}
         />
         <div className="text-right">
           <SubmitButton submitting={submitting} block={false}>

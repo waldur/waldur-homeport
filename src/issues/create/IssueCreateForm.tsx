@@ -16,6 +16,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import {
+  ISSUE_QUICK_CREATE_FORM_ID,
   ProjectGroup,
   ResourceGroup,
 } from '@waldur/issues/create/IssueQuickCreate';
@@ -138,10 +139,12 @@ export const IssueCreateForm = enhance(
             <ProjectGroup
               disabled={submitting}
               customer={useSelector(getCustomer)}
+              formId={ISSUE_QUICK_CREATE_FORM_ID}
             />
             <ResourceGroup
               disabled={submitting}
               project={useSelector(issueCreateProjectSelector)}
+              formId={ISSUE_QUICK_CREATE_FORM_ID}
             />
             {attachments.length > 0 && (
               <FormGroup>
