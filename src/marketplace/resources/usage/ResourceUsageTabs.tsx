@@ -1,14 +1,20 @@
+import { FunctionComponent } from 'react';
 import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 
 import { ResourceUsageChart } from '@waldur/marketplace/resources/usage/ResourceUsageChart';
+import { OfferingComponent } from '@waldur/marketplace/types';
+
+import { ComponentUsage } from './types';
 
 interface ResourceUsageTabsProps {
-  components;
-  usages;
+  components: OfferingComponent[];
+  usages: ComponentUsage[];
   colors: string[];
 }
 
-export const ResourceUsageTabs = (props: ResourceUsageTabsProps) => (
+export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
+  props,
+) => (
   <PanelBody>
     <div className="tabs-container">
       <Tabs
