@@ -1,16 +1,12 @@
 describe('User manage', () => {
   beforeEach(() => {
-    cy.server()
-      .mockUser()
-      .route('http://localhost:8080/api/support-templates/', [])
-      .route({
-        url:
-          'http://localhost:8080/api/users/3a836bc76e1b40349ec1a0d8220f374f/',
-        method: 'PATCH',
-        response: 'fixture:users/alice.json',
+    cy.mockUser()
+      .intercept('GET', '/api/support-templates/', [])
+      .intercept('PATCH', '/api/users/3a836bc76e1b40349ec1a0d8220f374f/', {
+        fixture: 'users/alice.json',
       })
-      .route('http://localhost:8080/api/marketplace-checklists-categories/', [])
-      .login()
+      .intercept('GET', '/api/marketplace-checklists-categories/', [])
+      .setToken()
       .visit('/profile/manage/');
   });
 

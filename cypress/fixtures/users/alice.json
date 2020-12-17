@@ -1,6 +1,6 @@
 [
   {
-    "url": "http://localhost:8080/api/users/3a836bc76e1b40349ec1a0d8220f374f/",
+    "url": "/api/users/3a836bc76e1b40349ec1a0d8220f374f/",
     "uuid": "3a836bc76e1b40349ec1a0d8220f374f",
     "username": "staff",
     "full_name": "Alice Lebowski",

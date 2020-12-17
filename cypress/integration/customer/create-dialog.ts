@@ -1,55 +1,32 @@
 describe('Customer creation dialog', () => {
   beforeEach(() => {
-    cy.server()
-      .mockUser()
+    cy.mockUser()
       .mockCustomer()
-      .route({
-        url: 'http://localhost:8080/api/customers/',
-        method: 'OPTIONS',
-        response: 'fixture:customers/countries.json',
+      .intercept('OPTIONS', '/api/customers/', {
+        fixture: 'customers/countries.json',
       })
-      .route({
-        url: 'http://localhost:8080/api/customers/',
-        method: 'POST',
-        response: 'fixture:customers/alice.json',
-      })
-      .route({
-        url: 'http://localhost:8080/api/marketplace-orders/?**',
-        method: 'GET',
-        response: [],
-      })
-      .route({
-        url: 'http://localhost:8080/api/daily-quotas/?**',
-        method: 'GET',
-        response: { nc_user_count: [] },
-      })
-      .route({
-        url: 'http://localhost:8080/api/marketplace-category-component-usages/',
-        method: 'GET',
-        response: [],
-      })
-      .route({
-        url: 'http://localhost:8080/api/marketplace-resources/?**',
-        method: 'GET',
-        response: [],
-      })
-      .route({
-        url: 'http://localhost:8080/api/marketplace-offerings/?**',
-        method: 'GET',
-        response: [],
-      })
-      .route({
-        url: 'http://localhost:8080/api/marketplace-checklists/',
-        method: 'HEAD',
-        response: {
-          headers: {
-            'x-result-count': 0,
-          },
+      .intercept('POST', '/api/customers/', { fixture: 'customers/alice.json' })
+      .intercept('GET', '/api/marketplace-orders/', [])
+      .intercept('GET', '/api/daily-quotas/', { nc_user_count: [] })
+      .intercept('GET', '/api/marketplace-category-component-usages/', [])
+      .intercept('GET', '/api/marketplace-resources/', [])
+      .intercept('GET', '/api/marketplace-offerings/', [])
+      .intercept('HEAD', '/api/marketplace-checklists/', {
+        headers: {
+          'x-result-count': '0',
         },
       })
-      .login()
+      .setToken()
+      .visit('/profile/')
       .waitForSpinner()
-      .openCustomerCreateDialog();
+      // Click on "Add organization" button
+      .get('.modal-footer button')
+      .contains('Create')
+      .click({ force: true })
+
+      // Modal dialog should be displayed
+      .get('h4.modal-title', { withinSubject: null })
+      .contains('Create organization');
   });
 
   it('Validates required fields', () => {
@@ -62,7 +39,7 @@ describe('Customer creation dialog', () => {
       // Error message should be displayed
       .get('[name="name"]')
       .then(($input) => {
-        expect($input[0].validationMessage).to.exist;
+        expect($input[0]['validationMessage']).to.exist;
       })
 
       // Enter organization name

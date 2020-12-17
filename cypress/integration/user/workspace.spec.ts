@@ -1,19 +1,15 @@
 describe('User workspace', function () {
   beforeEach(() => {
-    cy.server()
-      .mockUser()
-      .route('http://localhost:8080/api/marketplace-checklists-categories/', [])
-      .route({
-        url: 'http://localhost:8080/api/marketplace-checklists/',
-        method: 'HEAD',
-        response: {
-          headers: {
-            'x-result-count': 0,
-          },
+    cy.mockUser()
+      .intercept('GET', '/api/marketplace-checklists-categories/', [])
+      .intercept('HEAD', '/api/marketplace-checklists/', {
+        headers: {
+          'x-result-count': '0',
         },
       })
       .as('checklist-categories')
-      .login()
+      .setToken()
+      .visit('/profile/')
       .wait('@checklist-categories')
       .wait(500);
   });

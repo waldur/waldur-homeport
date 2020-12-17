@@ -1,23 +1,52 @@
 describe('OpenStackInstanceCreateForm', () => {
   beforeEach(() => {
-    cy.server()
-      .mockUser()
+    cy.mockUser()
       .mockCustomer()
-      .login()
-      .visitInstanceCreateForm()
+      .setToken()
+      .intercept('GET', '/api/marketplace-plugins/', {
+        fixture: 'offerings/marketplacePlugins.json',
+      })
+      .intercept('GET', '/api/marketplace-orders/', [])
+      .intercept('GET', '/api/marketplace-offerings/', {
+        fixture: 'offerings/openstackInstance.json',
+      })
+      .intercept('GET', '/api/marketplace-categories/', {
+        fixture: 'offerings/offeringCategory.json',
+      })
+      .intercept('GET', '/api/service-settings/', {
+        fixture: 'offerings/serviceSettings.json',
+      })
+      .intercept('GET', '/api/openstacktenant-images/', {
+        fixture: 'offerings/images.json',
+      })
+      .intercept('GET', '/api/openstacktenant-flavors/', {
+        fixture: 'offerings/flavors.json',
+      })
+      .intercept('GET', '/api/keys/', { fixture: 'offerings/sshKeys.json' })
+      .intercept('GET', '/api/openstacktenant-security-groups/', {
+        fixture: 'offerings/securityGroups.json',
+      })
+      .intercept('GET', '/api/openstacktenant-subnets/', {
+        fixture: 'offerings/subnets.json',
+      })
+      .intercept('GET', '/api/openstacktenant-floating-ips/', {
+        fixture: 'offerings/floatingIps.json',
+      })
+      .intercept('GET', '/api/openstacktenant-instance-availability-zones/', [])
+      .intercept('GET', '/api/openstacktenant-volume-types/', [])
+      .visit(
+        '/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering/3bcdcdb0987545f0b50e6eed26bb49d6/',
+      )
       .waitForSpinner();
   });
 
   it('should create OpenStack virtual machine', () => {
-    cy.route({
-      url: 'http://localhost:8080/api/marketplace-cart-items/',
-      method: 'POST',
-      response: 'fixture:offerings/shoppingCartItem.json',
+    cy.intercept('POST', '/api/marketplace-cart-items/', {
+      fixture: 'offerings/shoppingCartItem.json',
     })
-      .route(
-        'http://localhost:8080/api/marketplace-cart-items/',
-        'fixture:offerings/shoppingCartItem.json',
-      )
+      .intercept('GET', '/api/marketplace-cart-items/', {
+        fixture: 'offerings/shoppingCartItem.json',
+      })
       .get('input[name="attributes.name"]')
       .type('openstack-instance')
       .openSelectDialog('image', 'CentOS 7 64bit')
@@ -27,11 +56,7 @@ describe('OpenStackInstanceCreateForm', () => {
       .get('div[class$="placeholder"]')
       .first()
       .click()
-
-      // Select first project
-      .get('*div[id^="react-select"]')
-      .first()
-      .click()
+      .selectTheFirstOptionOfDropdown()
 
       .get('button')
       .contains('Add to cart')
@@ -48,11 +73,8 @@ describe('OpenStackInstanceCreateForm', () => {
       .get('div[class$="placeholder"]')
       .first()
       .click()
+      .selectTheFirstOptionOfDropdown()
 
-      // Select first project
-      .get('*div[id^="react-select"]')
-      .first()
-      .click()
       .get('.table-bordered')
       .should('be.visible')
       .contains('m1.little');
@@ -78,11 +100,7 @@ describe('OpenStackInstanceCreateForm', () => {
       .get('div[class$="placeholder"]')
       .first()
       .click()
-
-      // Select first project
-      .get('*div[id^="react-select"]')
-      .first()
-      .click()
+      .selectTheFirstOptionOfDropdown()
 
       .get('.btn-sm')
       .should('not.have.class', 'disabled');

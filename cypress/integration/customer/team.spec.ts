@@ -1,88 +1,91 @@
 describe('Team', () => {
   beforeEach(() => {
-    cy.server()
-      .mockUser()
-      .login()
+    cy.mockUser()
+      .setToken()
 
-      .route(
-        'http://localhost:8080/api/customers/**/counters/**',
-        'fixture:marketplace/counters.json',
+      .intercept(
+        'GET',
+        '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/counters/',
+        {
+          fixture: 'marketplace/counters.json',
+        },
       )
-      .route({
-        url: 'http://localhost:8080/api/marketplace-checklists/',
-        method: 'HEAD',
-        response: {
-          headers: {
-            'x-result-count': 0,
-          },
+      .intercept('HEAD', '/api/marketplace-checklists/', {
+        headers: {
+          'x-result-count': '0',
         },
       })
-      .route(
-        'http://localhost:8080/api/customers/6983ac22f2bb469189311ab21e493359/',
-        'fixture:customers/alice.json',
+      .intercept('GET', '/api/customers/6983ac22f2bb469189311ab21e493359/', {
+        fixture: 'customers/alice.json',
+      })
+      .intercept('GET', '/api/marketplace-orders/', [])
+      .intercept(
+        'GET',
+        '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/users/',
+        {
+          fixture: 'customers/customer_users.json',
+        },
       )
-      .route('http://localhost:8080/api/marketplace-orders/**', [])
-      .route(
-        'http://localhost:8080/api/customers/**/users/**',
-        'fixture:customers/customer_users.json',
-      )
-      .route({
-        url: 'http://localhost:8080/api/customer-permissions/**',
-        method: 'DELETE',
-        response: [],
-      })
-      .route({
-        url: 'http://localhost:8080/api/project-permissions/**',
-        method: 'DELETE',
-        response: [],
-      })
-      .route({
-        url: 'http://localhost:8080/api/project-permissions/',
-        method: 'POST',
-        response: [],
-      })
+      .intercept('DELETE', '/api/project-permissions/', {})
+      .as('deleteProjectPermission')
 
-      .log('Visit Team')
+      .intercept('DELETE', '/api/customer-permissions/', {})
+      .as('deleteCustomerPermission')
+
+      .intercept('POST', '/api/project-permissions/', {})
+      .as('createProjectPermission')
+
+      .intercept('GET', '/api/users/a37feb500aa0445b8dd45ae43a48b6e5/', {
+        fixture: 'users/alice.json',
+      })
+      .as('getUserDetails')
+
       .visit('/organizations/6983ac22f2bb469189311ab21e493359/team/')
+      .get('.loading-title')
+      .should('not.exist')
       .waitForSpinner();
   });
 
-  it('Covers Team view', () => {
-    cy.log('Details button')
-      .get('tbody tr:first-child td:last-child button:first-child')
-      .click({ force: true })
-      .get('.modal-title')
-      .contains('User details')
-      .get('.modal-footer span')
-      .contains('Cancel')
-      .click()
-      .wait(500)
+  it('Allows to view permission details', () => {
+    cy.get('tbody tr button').contains('Details').click({ force: true });
+    cy.get('.modal-title').contains('User details');
+    cy.get('.modal-content').within(() => {
+      cy.waitForSpinner().get('table').should('be.visible');
+    });
+    cy.wait('@getUserDetails');
+  });
 
-      .log('Remove button')
-      .get('tbody tr:first-child td:last-child button:last-child')
-      .contains('Remove')
-      .click({ force: true })
+  it('Allows to remove team member', () => {
+    cy.get('tbody tr button').contains('Remove').click({ force: true });
 
-      .log('Edit button')
-      .get('tbody tr:first-child td:last-child button:nth-child(2)')
-      .contains('Edit')
-      .click({ force: true })
-      .get('.modal-title')
+    // Notification should be shown
+    cy.get('p', { withinSubject: null })
+      .contains('Team member has been removed.')
+      .wait('@deleteProjectPermission');
+  });
+
+  it('Allows to edit permission', () => {
+    cy.get('tbody tr button').contains('Edit').click({ force: true });
+    cy.get('.modal-title')
       .contains('Edit team member')
+      .get('.modal-content')
+      .within(() => {
+        cy.get('.checkbox')
+          .contains('Organization owner')
+          .click()
 
-      .get('.checkbox')
-      .contains('Organization owner')
-      .click()
-      // Open Role dropdown
-      .get('div[class$="placeholder"]')
-      .first()
-      .click({ force: true })
-      // Select the first option
-      .get('*div[id^="react-select"]')
-      .first()
-      .click({ force: true })
-      .get('button')
-      .contains('Save')
-      .click();
+          // Open Role dropdown
+          .get('div[class$="placeholder"]')
+          .first()
+          .click({ force: true })
+          .selectTheFirstOptionOfDropdown()
+
+          .get('button')
+          .contains('Save')
+          .click()
+
+          .wait('@createProjectPermission')
+          .wait('@deleteCustomerPermission');
+      });
   });
 });

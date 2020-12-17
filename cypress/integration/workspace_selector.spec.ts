@@ -3,30 +3,37 @@ const getTextList = ($p) =>
 
 describe('Workspace selector', () => {
   beforeEach(() => {
-    cy.server()
-      .route({
-        url:
-          'http://localhost:8080/api/customers/?page=1&page_size=10&field=name&field=uuid&field=projects&field=owners&field=abbreviation&field=is_service_provider&o=name&query=',
-        response: 'fixture:customers/alice_bob_web.json',
-        headers: {
-          'x-result-count': 3,
-        },
-      })
-      .route({
-        url:
-          'http://localhost:8080/api/customers/?page=1&page_size=10&field=name&field=uuid&field=projects&field=owners&field=abbreviation&field=is_service_provider&o=name&query=lebowski',
-        response: 'fixture:customers/alice_bob_web.json',
-        headers: {
-          'x-result-count': 2,
-        },
-      })
+    cy.intercept('HEAD', '/api/customers/', {
+      headers: {
+        'x-result-count': '3',
+      },
+    });
+    cy.intercept('GET', '/api/customers/?', (req) => {
+      if (req.url.indexOf('lebowski') !== -1) {
+        req.reply({
+          fixture: 'customers/lebowski.json',
+          headers: {
+            'x-result-count': '2',
+          },
+        });
+      } else {
+        req.reply({
+          fixture: 'customers/alice_bob_web.json',
+          headers: {
+            'x-result-count': '3',
+          },
+        });
+      }
+    })
       .mockUser()
-      .mockCustomer()
-      .route(
-        'http://localhost:8080/api/projects/**',
-        'fixture:projects/alice_azure.json',
-      )
-      .login()
+      .intercept('GET', '/api/projects/6f3ae6f43d284ca196afeb467880b3b9/', {
+        fixture: 'projects/alice_azure.json',
+      })
+      .intercept('GET', '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/', {
+        fixture: 'customers/alice.json',
+      })
+      .setToken()
+      .visit('/profile/')
       .openWorkspaceSelector();
   });
 

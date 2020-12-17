@@ -1,26 +1,32 @@
 describe('Customer creation toggle', () => {
   beforeEach(() => {
-    cy.server()
-      .mockUser()
-      .route(
-        'http://localhost:8080/api/customers/?**',
-        'fixture:customers/alice_bob_web.json',
-      )
-      .route({
-        url: 'http://localhost:8080/api/marketplace-checklists/',
-        method: 'HEAD',
-        response: {
-          headers: {
-            'x-result-count': 0,
-          },
+    cy.mockUser()
+      .intercept('GET', '/api/customers/', {
+        fixture: 'customers/alice_bob_web.json',
+      })
+      .intercept('HEAD', '/api/marketplace-checklists/', {
+        headers: {
+          'x-result-count': '0',
         },
       })
-      .route('http://localhost:8080/api/marketplace-categories/', [])
-      .login();
+      .intercept('GET', '/api/marketplace-categories/', [])
+      .setToken()
+      .visit('/profile/')
+      .get('.loading-title')
+      .should('not.exist')
+      .waitForSpinner();
   });
 
   it('Allows to create customer from user dashboard', () => {
-    cy.waitForSpinner().openCustomerCreateDialog();
+    cy
+      // Click on "Add organization" button
+      .get('.modal-footer button')
+      .contains('Create')
+      .click({ force: true })
+
+      // Modal dialog should be displayed
+      .get('h4.modal-title', { withinSubject: null })
+      .contains('Create organization');
   });
 
   it('Allows to create customer from workspace selector', () => {
