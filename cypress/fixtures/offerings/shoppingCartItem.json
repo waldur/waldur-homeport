@@ -1,6 +1,6 @@
 [
   {
-    "offering": "http://localhost:8080/api/marketplace-offerings/3bcdcdb0987545f0b50e6eed26bb49d6/",
+    "offering": "/api/marketplace-offerings/3bcdcdb0987545f0b50e6eed26bb49d6/",
     "offering_name": "Virtual machine",
     "offering_uuid": "3bcdcdb0987545f0b50e6eed26bb49d6",
     "offering_description": "",
@@ -18,9 +18,9 @@
     "attributes": {
       "subnets": [
         {
-          "network": "http://localhost:8080/api/openstacktenant-networks/9b8fa00872fc4c0599b0c0d8ea41f473/",
+          "network": "/api/openstacktenant-networks/9b8fa00872fc4c0599b0c0d8ea41f473/",
           "enable_dhcp": true,
-          "url": "http://localhost:8080/api/openstacktenant-subnets/8a07dca67f71459daab5f7f02147a367/",
+          "url": "/api/openstacktenant-subnets/8a07dca67f71459daab5f7f02147a367/",
           "dns_nameservers": [],
           "uuid": "8a07dca67f71459daab5f7f02147a367",
           "label": "baip-demo-sub-net (192.168.42.0/24)",
@@ -39,8 +39,8 @@
       "name": "Openstack instance",
       "image": {
         "name": "Centosa",
-        "settings": "http://localhost:8080/api/service-settings/b13719a4b49344f699706716058209c5/",
-        "url": "http://localhost:8080/api/openstacktenant-images/b7c42df5f67a4e36b9ea4ab99d9d3193/",
+        "settings": "/api/service-settings/b13719a4b49344f699706716058209c5/",
+        "url": "/api/openstacktenant-images/b7c42df5f67a4e36b9ea4ab99d9d3193/",
         "min_ram": 0,
         "min_disk": 0,
         "uuid": "b7c42df5f67a4e36b9ea4ab99d9d3193"
@@ -53,8 +53,8 @@
       ],
       "flavor": {
         "uuid": "a15bd0d6f03b4784966dcb484c2b0f61",
-        "settings": "http://localhost:8080/api/service-settings/b13719a4b49344f699706716058209c5/",
-        "url": "http://localhost:8080/api/openstacktenant-flavors/a15bd0d6f03b4784966dcb484c2b0f61/",
+        "settings": "/api/service-settings/b13719a4b49344f699706716058209c5/",
+        "url": "/api/openstacktenant-flavors/a15bd0d6f03b4784966dcb484c2b0f61/",
         "ram": 2048,
         "disabled": false,
         "cores": 1,
@@ -65,8 +65,8 @@
       "security_groups": [
         {
           "description": "Default security group",
-          "settings": "http://localhost:8080/api/service-settings/b13719a4b49344f699706716058209c5/",
-          "url": "http://localhost:8080/api/openstacktenant-security-groups/3773c164fc4849a3947cccaa06ba2905/",
+          "settings": "/api/service-settings/b13719a4b49344f699706716058209c5/",
+          "url": "/api/openstacktenant-security-groups/3773c164fc4849a3947cccaa06ba2905/",
           "uuid": "3773c164fc4849a3947cccaa06ba2905",
           "rules": [
             {

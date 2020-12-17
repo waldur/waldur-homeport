@@ -5,12 +5,12 @@
     "abbreviation": "",
     "projects": [
       {
-        "url": "http://localhost:8080/api/projects/6f3ae6f43d284ca196afeb467880b3b9/",
+        "url": "/api/projects/6f3ae6f43d284ca196afeb467880b3b9/",
         "uuid": "6f3ae6f43d284ca196afeb467880b3b9",
         "name": "OpenStack Alice project"
       },
       {
-        "url": "http://localhost:8080/api/projects/df4193e2bee24a4c8e339474d74c5f8c/",
+        "url": "/api/projects/df4193e2bee24a4c8e339474d74c5f8c/",
         "uuid": "df4193e2bee24a4c8e339474d74c5f8c",
         "name": "Azure Alice project"
       }
@@ -27,7 +27,7 @@
     "projects": [],
     "owners": [
       {
-        "url": "http://localhost:8080/api/users/4a5ef3a10e604ccfa16c9d1c9254e51c/",
+        "url": "/api/users/4a5ef3a10e604ccfa16c9d1c9254e51c/",
         "uuid": "4a5ef3a10e604ccfa16c9d1c9254e51c",
         "username": "Bob",
         "full_name": "Bob Lebowski",
@@ -44,7 +44,7 @@
     "abbreviation": "",
     "projects": [
       {
-        "url": "http://localhost:8080/api/projects/50ae63d0d1284c3c9e1331e746efe8bf/",
+        "url": "/api/projects/50ae63d0d1284c3c9e1331e746efe8bf/",
         "uuid": "50ae63d0d1284c3c9e1331e746efe8bf",
         "name": "Web Services"
       }

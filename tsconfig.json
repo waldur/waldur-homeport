@@ -16,19 +16,9 @@
     "paths": {
       "@waldur/*": ["src/*"]
     },
-    // Workaround for https://github.com/cypress-io/cypress/issues/1087
-    "skipLibCheck": true,
-    "lib": [
-      "es2016",
-      "dom"
-    ]
+    "lib": ["es2016", "dom"]
   },
-  "include": [
-    "./src/**/*",
-    "./cypress/**/*",
-  ],
-  "typeRoots": [
-    "./node_modules/@types",
-    "./typings.d.ts"
-  ]
+  "include": ["./src/**/*"],
+  "exclude": ["./cypress/**/*"],
+  "typeRoots": ["./node_modules/@types", "./typings.d.ts"]
 }

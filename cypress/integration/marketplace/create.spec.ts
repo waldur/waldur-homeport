@@ -1,24 +1,18 @@
 describe('Offering creation', () => {
   beforeEach(() => {
-    cy.server()
-      .mockCustomer()
+    cy.mockCustomer()
       .mockUser()
-      .login()
+      .setToken()
 
       .log('Visit Marketplace Offering Create')
-      .route(
-        'http://localhost:8080/api/marketplace-categories/',
-        'fixture:marketplace/categories.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-plugins/',
-        'fixture:marketplace/plugins.json',
-      )
-      .route({
-        url: 'http://localhost:8080/api/marketplace-offerings/',
-        method: 'POST',
-        response: {},
+      .intercept('GET', '/api/marketplace-categories/', {
+        fixture: 'marketplace/categories.json',
       })
+      .intercept('GET', '/api/marketplace-plugins/', {
+        fixture: 'marketplace/plugins.json',
+      })
+      .intercept('POST', '/api/marketplace-offerings/', {})
+      .as('createOffering')
       .visit(
         '/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering-create/',
       )
@@ -146,6 +140,38 @@ describe('Offering creation', () => {
       .get('button[type="submit"]')
       .contains('Submit')
       .click()
+
+      .wait('@createOffering')
+      .its('request.body')
+      .should('deep.equal', {
+        name: 'My offering',
+        category:
+          '/api/marketplace-categories/4588ff519260461893ab371b8fe83363/',
+        type: 'Support.OfferingTemplate',
+        shared: true,
+        attributes: {
+          hpc_Security_certification: ['hpc_Security_certification_iskel'],
+        },
+        components: [
+          {
+            type: 'internalName',
+            name: 'displayName',
+            billing_type: 'usage',
+            limit_period: null,
+          },
+        ],
+        plans: [
+          {
+            name: 'my plan name',
+            unit: 'month',
+            prices: { internalName: '1' },
+          },
+        ],
+        options: {
+          order: ['intName'],
+          options: { intName: { type: 'boolean', label: 'displayName' } },
+        },
+      })
 
       // Ensure that a user is redirected to offerings list page after successfully submitting the form
       .location()

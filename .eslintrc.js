@@ -94,7 +94,5 @@ module.exports = {
     inject: true,
     process: true,
     require: true,
-    cy: true,
-    Cypress: true,
   },
 };

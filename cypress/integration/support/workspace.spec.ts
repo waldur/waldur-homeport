@@ -1,69 +1,60 @@
 describe('Financial overview', () => {
   beforeEach(() => {
-    cy.server()
-      .mockUser()
-      .route(
-        'http://localhost:8080/api/marketplace-checklists-categories/',
-        'fixture:marketplace/checklists_categories.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-offerings/**',
-        'fixture:marketplace/offerings.json',
-      )
-      .route(
-        'http://localhost:8080/api/customers/?**',
-        'fixture:customers/alice_bob_web.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-categories/?**',
-        'fixture:marketplace/categories.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-resources/?**',
-        'fixture:marketplace/resources.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-service-providers/?**',
-        'fixture:marketplace/service_providers.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-plans/usage_stats/?**',
-        'fixture:marketplace/plans_usage_stats.json',
-      )
-      .route(
-        'http://localhost:8080/api/invoices/**',
-        'fixture:customers/invoices.json',
-      )
-      .route(
-        'http://localhost:8080/api/billing-total-cost/**',
-        'fixture:customers/billing_total_cost.json',
-      )
-      .route(
-        'http://localhost:8080/api/invoices/growth/**',
-        'fixture:customers/invoices_growth.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-order-items/**',
-        'fixture:marketplace/order_items.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-component-usages/**',
-        'fixture:marketplace/component_usages.json',
-      )
-      .route(
-        'http://localhost:8080/api/projects/**',
-        'fixture:projects/certifications.json',
-      )
-      .route({
-        url: 'http://localhost:8080/api/marketplace-checklists/',
-        method: 'HEAD',
-        response: {
-          headers: {
-            'x-result-count': 0,
-          },
+    cy.mockUser()
+      .intercept('GET', '/api/marketplace-offerings/', {
+        fixture: 'marketplace/offerings.json',
+      })
+      .intercept('GET', '/api/customers/', {
+        fixture: 'customers/alice_bob_web.json',
+      })
+      .intercept('GET', '/api/marketplace-categories/', {
+        fixture: 'marketplace/categories.json',
+      })
+      .intercept('GET', '/api/marketplace-resources/', {
+        fixture: 'marketplace/resources.json',
+      })
+      .intercept('GET', '/api/marketplace-service-providers/', {
+        fixture: 'marketplace/service_providers.json',
+      })
+      .intercept('GET', '/api/marketplace-plans/usage_stats/', {
+        fixture: 'marketplace/plans_usage_stats.json',
+      })
+      .intercept('GET', '/api/invoices/', {
+        fixture: 'customers/invoices.json',
+      })
+      .intercept('GET', '/api/billing-total-cost/', {
+        fixture: 'customers/billing_total_cost.json',
+      })
+      .intercept('GET', '/api/invoices/growth/', {
+        fixture: 'customers/invoices_growth.json',
+      })
+      .intercept('GET', '/api/marketplace-order-items/', {
+        fixture: 'marketplace/order_items.json',
+      })
+      .intercept('GET', '/api/marketplace-component-usages/', {
+        fixture: 'marketplace/component_usages.json',
+      })
+      .intercept('GET', '/api/projects/', {
+        fixture: 'projects/certifications.json',
+      })
+      .intercept('HEAD', '/api/marketplace-checklists/', {
+        headers: {
+          'x-result-count': '1',
         },
       })
-      .login();
+      .intercept('GET', '/api/marketplace-checklists-categories/', {
+        fixture: 'marketplace/checklists_categories.json',
+      })
+      .setToken()
+      .visit('/profile/')
+      .waitForSpinner();
+  });
+
+  it('should render menu item for each checklist category', () => {
+    cy
+      // Ensure that "Project checklist" menu item is present
+      .get('.nav-label')
+      .contains('Project checklist');
   });
 
   it('should browse menus in support workspace', () => {
@@ -72,14 +63,6 @@ describe('Financial overview', () => {
       .first()
       .children('a')
       .click({ force: true })
-
-      // Ensure that "Back to personal dashboard" menu item is present
-      .get('.nav-label')
-      .contains('Back to personal dashboard')
-
-      // Ensure that "Project checklist" menu item is present
-      .get('.nav-label')
-      .contains('Project checklist')
 
       // Check support reporting menu items
       .get('.nav-label')

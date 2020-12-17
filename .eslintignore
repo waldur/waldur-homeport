@@ -1,3 +1,4 @@
 *.fixture.ts
 typings.d.ts
 .cache-loader
+cypress

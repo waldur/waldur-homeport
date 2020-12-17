@@ -1,5 +1,5 @@
 {
-  "apiEndpoint": "http://localhost:8080/",
+  "apiEndpoint": "",
   "enabledFeatures": [
     "marketplace",
     "support.organizations",

@@ -1,34 +1,25 @@
 xdescribe('Marketplace landing view', () => {
   beforeEach(() => {
-    cy.server()
-      .mockUser()
-      .login()
+    cy.mockUser()
+      .setToken()
 
       .log('Visit Marketplace')
-      .route(
-        'http://localhost:8080/api/customers/**/counters/**',
-        'fixture:marketplace/counters.json',
-      )
-      .route(
-        'http://localhost:8080/api/customers/**',
-        'fixture:marketplace/anderson_and_sons.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-offerings/**',
-        'fixture:marketplace/offerings.json',
-      )
-      .route(
-        'http://localhost:8080/api/marketplace-categories/?**',
-        'fixture:marketplace/categories.json',
-      )
-      .route('http://localhost:8080/api/marketplace-orders/?**', [])
-      .route({
-        url: 'http://localhost:8080/api/marketplace-checklists/',
-        method: 'HEAD',
-        response: {
-          headers: {
-            'x-result-count': 0,
-          },
+      .intercept('GET', '/api/customers/**/counters/', {
+        fixture: 'marketplace/counters.json',
+      })
+      .intercept('GET', '/api/customers/', {
+        fixture: 'marketplace/anderson_and_sons.json',
+      })
+      .intercept('GET', '/api/marketplace-offerings/', {
+        fixture: 'marketplace/offerings.json',
+      })
+      .intercept('GET', '/api/marketplace-categories/', {
+        fixture: 'marketplace/categories.json',
+      })
+      .intercept('GET', '/api/marketplace-orders/', [])
+      .intercept('HEAD', '/api/marketplace-checklists/', {
+        headers: {
+          'x-result-count': '0',
         },
       })
       .visit('/organizations/10a05c2fcab44588a7aa2e16809504cf/marketplace/')

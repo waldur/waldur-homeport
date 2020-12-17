@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["es5", "dom"],
-    "types": ["cypress"]
+    "types": ["cypress"],
+    // Workaround for https://github.com/cypress-io/cypress/issues/1087
+    "skipLibCheck": true
   },
   "include": ["**/*.ts"]
 }
