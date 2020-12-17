@@ -1,11 +1,11 @@
 describe('User manage', () => {
   beforeEach(() => {
     cy.mockUser()
+      .mockChecklists()
       .intercept('GET', '/api/support-templates/', [])
       .intercept('PATCH', '/api/users/3a836bc76e1b40349ec1a0d8220f374f/', {
         fixture: 'users/alice.json',
       })
-      .intercept('GET', '/api/marketplace-checklists-categories/', [])
       .setToken()
       .visit('/profile/manage/');
   });
@@ -47,7 +47,7 @@ describe('User manage', () => {
       .contains('Remove profile')
       .click()
       // Close remove profile dialog
-      .get('span:contains(Close)')
+      .get('span:contains(Cancel)')
       .last()
       .click()
 

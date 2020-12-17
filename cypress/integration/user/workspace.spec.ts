@@ -1,17 +1,6 @@
 describe('User workspace', function () {
   beforeEach(() => {
-    cy.mockUser()
-      .intercept('GET', '/api/marketplace-checklists-categories/', [])
-      .intercept('HEAD', '/api/marketplace-checklists/', {
-        headers: {
-          'x-result-count': '0',
-        },
-      })
-      .as('checklist-categories')
-      .setToken()
-      .visit('/profile/')
-      .wait('@checklist-categories')
-      .wait(500);
+    cy.mockUser().mockChecklists().setToken().visit('/profile/').wait(500);
   });
 
   it('Should go to audit log', () => {

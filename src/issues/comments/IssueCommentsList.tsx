@@ -10,19 +10,20 @@ interface PureIssueCommentsListProps extends TranslateProps {
 
 export const PureIssueCommentsList = (props: PureIssueCommentsListProps) => {
   const { comments, erred, translate } = props;
-  const body =
-    comments.length &&
-    comments.map((comment: any) => (
-      <IssueCommentItem key={comment.uuid} comment={comment} />
-    ));
 
   if (erred) {
     return <div>{translate('Unable to load comments.')}</div>;
   }
-  if (!body.length) {
+  if (!comments.length) {
     return <div>{translate('There are no comments yet.')}</div>;
   }
-  return <div className="vertical-container dark-timeline">{body}</div>;
+  return (
+    <div className="vertical-container dark-timeline">
+      {comments.map((comment) => (
+        <IssueCommentItem key={comment.uuid} comment={comment} />
+      ))}
+    </div>
+  );
 };
 
 export const IssueCommentsList = withTranslation(PureIssueCommentsList);

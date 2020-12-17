@@ -1,15 +1,10 @@
 describe('Customer creation toggle', () => {
   beforeEach(() => {
     cy.mockUser()
+      .mockChecklists()
       .intercept('GET', '/api/customers/', {
         fixture: 'customers/alice_bob_web.json',
       })
-      .intercept('HEAD', '/api/marketplace-checklists/', {
-        headers: {
-          'x-result-count': '0',
-        },
-      })
-      .intercept('GET', '/api/marketplace-categories/', [])
       .setToken()
       .visit('/profile/')
       .get('.loading-title')
