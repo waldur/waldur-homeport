@@ -3,12 +3,13 @@ import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { SUPPORT_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/customers/constants';
 import {
   OfferingStateFilter,
   getStates,
 } from '@waldur/marketplace/offerings/OfferingStateFilter';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
+
+import { SUPPORT_OFFERINGS_FILTER_FORM_ID } from './constants';
 
 const PureSupportOfferingsFilter = () => (
   <Row>

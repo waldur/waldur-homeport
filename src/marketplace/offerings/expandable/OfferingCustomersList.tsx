@@ -3,21 +3,22 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { fetchOfferingCustomers } from '@waldur/marketplace/offerings/customers/api';
-import { CUSTOMERS_LIST_TABLE_ID } from '@waldur/marketplace/offerings/customers/constants';
 import { Table, connectTable } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
+
+import { fetchOfferingCustomers } from './api';
+import { OFFERING_CUSTOMERS_LIST_TABLE_ID } from './constants';
 
 export const TableComponent = (props) => {
   const { filterColumns } = props;
   const columns = filterColumns([
     {
       title: translate('Organization'),
-      render: ({ row }) => <span>{row.name}</span>,
+      render: ({ row }) => <>{row.name}</>,
     },
     {
       title: translate('Abbreviation'),
-      render: ({ row }) => <span>{renderFieldOrDash(row.abbreviation)}</span>,
+      render: ({ row }) => <>{renderFieldOrDash(row.abbreviation)}</>,
     },
   ]);
 
@@ -41,7 +42,7 @@ const mapPropsToFilter = ({ customerListFilter, offeringUuid }) => ({
 });
 
 const TableOptions = {
-  table: CUSTOMERS_LIST_TABLE_ID,
+  table: OFFERING_CUSTOMERS_LIST_TABLE_ID,
   fetchData: fetchOfferingCustomers,
   queryField: 'query',
   mapPropsToFilter: (props) => mapPropsToFilter(props),
@@ -57,4 +58,4 @@ const enhance = compose<any>(
   connectTable(TableOptions),
 );
 
-export const CustomersList = enhance(TableComponent);
+export const OfferingCustomersList = enhance(TableComponent);

@@ -31,7 +31,7 @@ const mapStateToProps = (_state, ownProps) => {
   };
 };
 
-export const CustomersListFilter = compose(
+export const OfferingCustomersListFilter = compose(
   connect(mapStateToProps),
   reduxForm<{}, any>({}),
 )(PureCustomersListFilter);

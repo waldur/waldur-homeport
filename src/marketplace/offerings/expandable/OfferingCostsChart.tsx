@@ -5,8 +5,9 @@ import { formValueSelector } from 'redux-form';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getOfferingCostChartData } from '@waldur/marketplace/offerings/customers/api';
-import { formatOfferingCostsChart } from '@waldur/marketplace/offerings/customers/utils';
+
+import { getOfferingCostChartData } from './api';
+import { formatOfferingCostsChart } from './utils';
 
 const getAccountingRunningFieldValue = (state, formId) =>
   formValueSelector(formId)(state, 'accounting_is_running');

@@ -47,7 +47,7 @@ msgstr ""
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
-#: src/marketplace/offerings/customers/CustomersList.tsx
+#: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 msgid "Abbreviation"
@@ -1065,6 +1065,7 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/CategoryFilter.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
@@ -1416,7 +1417,7 @@ msgstr ""
 
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/offerings/customers/utils.ts
+#: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -1568,6 +1569,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -3889,6 +3891,7 @@ msgstr ""
 #: src/marketplace/offerings/plan/PlanForm.tsx
 #: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
 #: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -4153,7 +4156,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: src/marketplace/offerings/customers/SupportOfferingsFilter.tsx
+#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 msgid "No service providers"
 msgstr ""
 
@@ -4392,7 +4395,8 @@ msgstr ""
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/issues/workspace/issue-navigation-service.js
 #: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/offerings/customers/SupportOfferings.tsx
+#: src/marketplace/offerings/support/SupportOfferingsContainer.tsx
+#: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 msgid "Offerings"
 msgstr ""
@@ -4589,7 +4593,7 @@ msgstr ""
 #: src/issues/create/OrganizationGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
-#: src/marketplace/offerings/customers/CustomersList.tsx
+#: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
@@ -4713,7 +4717,7 @@ msgstr ""
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
 #: src/issues/workspace/issue-navigation-service.js
-#: src/marketplace/offerings/customers/CustomersList.tsx
+#: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"
 msgstr ""
@@ -6411,7 +6415,7 @@ msgstr ""
 #: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/offerings/customers/utils.ts
+#: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/resources/usage/utils.ts
 #: src/project/team/AddProjectMemberDialog.tsx
 #: src/providers/ProviderUpdateForm.tsx
@@ -6702,7 +6706,7 @@ msgid "Select service provider"
 msgstr ""
 
 #: src/customer/list/ServiceProviderFilter.tsx
-#: src/marketplace/offerings/customers/SupportOfferingsFilter.tsx
+#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 msgid "Select service provider..."
 msgstr ""
 
@@ -6790,8 +6794,8 @@ msgstr ""
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
 #: src/marketplace/details/OrderSummary.tsx
-#: src/marketplace/offerings/OfferingsList.tsx
-#: src/marketplace/offerings/customers/SupportOfferingsFilter.tsx
+#: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
+#: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/ProviderAutocomplete.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
@@ -7097,6 +7101,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
@@ -8285,7 +8290,7 @@ msgstr ""
 msgid "Unable to load marketplace offerings."
 msgstr ""
 
-#: src/marketplace/offerings/customers/OfferingCostsChart.tsx
+#: src/marketplace/offerings/expandable/OfferingCostsChart.tsx
 msgid "Unable to load offering cost chart."
 msgstr ""
 
