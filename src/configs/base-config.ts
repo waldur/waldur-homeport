@@ -19,8 +19,6 @@ const ENV = {
   // Either 'accounting' or 'billing'
   accountingMode: 'accounting',
 
-  defaultListCacheTime: 60 * 10,
-  optionsCacheTime: 10 * 1000,
   disabledFeatures: [],
   enabledFeatures: [
     'billing',
@@ -47,25 +45,13 @@ const ENV = {
   ],
   featuresVisible: false,
 
-  requestTimeout: 1000 * 20,
-  countsCacheTime: 60, // seconds
-  enablePurchaseCostDisplay: true,
-
-  resourceDetailInterval: 5, // seconds
-  resourcesTimerInterval: 30, // seconds
+  defaultPullInterval: 5, // seconds
   countersTimerInterval: 30, // seconds
 
   // Allows to provide help text for the civil code field in invitation form
   invitationCivilCodeHelpText: gettext(
     'Must start with a country prefix ie EE34501234215',
   ),
-
-  // an interval in milliseconds to check invitation if server returns 500 or there is a network error.
-  invitationCheckInterval: 5000,
-
-  // refresh timeout for a single resource polling.
-  resourcePollingEnabled: true,
-  singleResourcePollingTimeout: 1000 * 2,
 
   roles: {
     owner: gettext('Organization owner'),

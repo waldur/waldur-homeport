@@ -1,9 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useAsyncFn, useInterval } from 'react-use';
+import { useAsyncFn, useInterval, useNetwork } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { ENV } from '@waldur/core/services';
 import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getOrderDetails } from '@waldur/marketplace/common/api';
@@ -66,8 +67,14 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props) => {
     oldValue.current = value;
   }, [value]);
 
-  // Refresh order details each 5 seconds until it is switched from pending state to terminal state
-  useInterval(loadData, value?.order?.state === 'executing' ? 5000 : null);
+  const { online } = useNetwork();
+
+  const pullInterval =
+    online && value?.order?.state === 'executing'
+      ? ENV.defaultPullInterval * 1000
+      : null;
+  // Refresh order details until it is switched from pending state to terminal state
+  useInterval(loadData, pullInterval);
 
   // Don't render loading indicator if order item is refreshing
   // since if it is in pending state it is refreshed via periodic polling
