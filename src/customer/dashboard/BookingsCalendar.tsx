@@ -12,7 +12,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { BOOKINGS_FILTER_FORM_ID } from '@waldur/customer/dashboard/contants';
 import { translate } from '@waldur/i18n';
-import { selectTablePagination } from '@waldur/workspace/selectors';
+import { selectTablePagination } from '@waldur/table/selectors';
 
 const bookingsFilterFormSelector = (state) =>
   (getFormValues(BOOKINGS_FILTER_FORM_ID)(state) || {}) as { state };
