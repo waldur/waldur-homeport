@@ -2,12 +2,12 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { checkPermission } from '@waldur/issues/utils';
 
-const SupportOfferings = lazyComponent(
+const SupportOfferingsContainer = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "SupportOfferings" */ '@waldur/marketplace/offerings/customers/SupportOfferings'
+      /* webpackChunkName: "SupportOfferingsContainer" */ '@waldur/marketplace/offerings/support/SupportOfferingsContainer'
     ),
-  'SupportOfferings',
+  'SupportOfferingsContainer',
 );
 const ResourceDetailsPageForCustomer = lazyComponent(
   () =>
@@ -469,7 +469,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-support-offerings',
     url: 'offerings/',
-    component: SupportOfferings,
+    component: SupportOfferingsContainer,
     parent: 'support',
     resolve: {
       permission: checkPermission,
