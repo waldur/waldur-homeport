@@ -1,4 +1,5 @@
-import { connect } from 'react-redux';
+import { FunctionComponent } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -15,32 +16,22 @@ const ResourceCreateUsageDialog = lazyComponent(
   'ResourceCreateUsageDialog',
 );
 
-const openResourceUsageDialog = (props: UsageReportContext) =>
-  openModalDialog(ResourceCreateUsageDialog, {
-    resolve: props,
-  });
-
-interface DispatchProps {
-  openDialog(): void;
-}
-
-const PureResourceUsageButton = (props: UsageReportContext & DispatchProps) => (
-  <ActionButton
-    title={translate('Report usage')}
-    icon="fa fa-plus"
-    action={props.openDialog}
-  />
-);
-
-const mapDispatchToProps = (dispatch, ownProps: UsageReportContext) => ({
-  openDialog: () => dispatch(openResourceUsageDialog(ownProps)),
-});
-
-export const ResourceCreateUsageButton = connect<
-  {},
-  DispatchProps,
-  UsageReportContext
->(
-  null,
-  mapDispatchToProps,
-)(PureResourceUsageButton);
+export const ResourceCreateUsageButton: FunctionComponent<
+  UsageReportContext & { disabled: boolean }
+> = (props) => {
+  const dispatch = useDispatch();
+  const openDialog = () =>
+    dispatch(
+      openModalDialog(ResourceCreateUsageDialog, {
+        resolve: props,
+      }),
+    );
+  return (
+    <ActionButton
+      title={translate('Report usage')}
+      icon="fa fa-plus"
+      action={openDialog}
+      disabled={props.disabled}
+    />
+  );
+};

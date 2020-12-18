@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { ButtonGroup } from 'react-bootstrap';
 
 import { Resource } from '@waldur/marketplace/resources/types';
 
@@ -21,31 +21,25 @@ interface Props {
 }
 
 export const ResourceUsageButton = ({ row }: Props) => {
-  const disabled =
-    !row.is_usage_based ||
-    !row.plan ||
-    !['OK', 'Updating', 'Terminating', 'Terminated'].includes(row.state);
-  const body = (
-    <div className={classNames('btn-group', { disabled })}>
+  if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
+    return 'N/A';
+  }
+  const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
+  return (
+    <ButtonGroup>
       <ResourceShowUsageButton
         offeringUuid={row.offering_uuid}
         resourceUuid={row.uuid}
       />
-      {['OK', 'Updating'].includes(row.state) && row.plan && (
-        <ResourceCreateUsageButton
-          offering_uuid={row.offering_uuid}
-          resource_uuid={row.uuid}
-          resource_name={row.name}
-          customer_name={row.customer_name}
-          project_name={row.project_name}
-          backend_id={row.backend_id}
-        />
-      )}
-    </div>
+      <ResourceCreateUsageButton
+        offering_uuid={row.offering_uuid}
+        resource_uuid={row.uuid}
+        resource_name={row.name}
+        customer_name={row.customer_name}
+        project_name={row.project_name}
+        backend_id={row.backend_id}
+        disabled={disabled}
+      />
+    </ButtonGroup>
   );
-  if (disabled) {
-    return <span>N/A</span>;
-  } else {
-    return body;
-  }
 };
