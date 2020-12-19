@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
@@ -26,7 +27,9 @@ const KubeconfigFilePanel = (props) => {
   );
 };
 
-export const RancherClusterKubeconfigDialog = (props) => {
+export const RancherClusterKubeconfigDialog: FunctionComponent<any> = (
+  props,
+) => {
   const { loading, error, value } = useAsync(() =>
     getKubeconfigFile(props.resolve.resource.uuid),
   );

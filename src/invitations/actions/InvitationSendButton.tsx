@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -12,7 +12,9 @@ import { InvitationPolicyService } from './InvitationPolicyService';
 
 const statesForResend = ['pending', 'expired'];
 
-export const InvitationSendButton = ({ invitation }) => {
+export const InvitationSendButton: FunctionComponent<{ invitation }> = ({
+  invitation,
+}) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);

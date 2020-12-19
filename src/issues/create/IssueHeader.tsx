@@ -1,8 +1,9 @@
+import { FunctionComponent } from 'react';
 import { FormGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-export const IssueHeader = ({ issue }) => {
+export const IssueHeader: FunctionComponent<{ issue }> = ({ issue }) => {
   const customerName = issue.customer
     ? issue.customer.name
     : issue.project

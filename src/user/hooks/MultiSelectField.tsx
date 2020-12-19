@@ -1,9 +1,12 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 
-export const MultiSelectField = ({ input, options }) => (
+export const MultiSelectField: FunctionComponent<{ input; options }> = ({
+  input,
+  options,
+}) => (
   <ListGroup>
     {options.map((option, index) => (
       <ListGroupItem

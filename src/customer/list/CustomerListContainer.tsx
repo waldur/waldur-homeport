@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { getList } from '@waldur/core/api';
@@ -61,7 +62,7 @@ async function loadData() {
   return { initialValues, accountingPeriods };
 }
 
-export const CustomerListContainer = () => {
+export const CustomerListContainer: FunctionComponent = () => {
   useTitle(translate('Financial overview'));
   useReportingBreadcrumbs();
   const { loading, error, value: data } = useAsync(loadData);

@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ngInjector } from '@waldur/core/services';
@@ -41,7 +41,7 @@ export function useReportingBreadcrumbs() {
   });
 }
 
-export const SupportWorkspace = () => {
+export const SupportWorkspace: FunctionComponent = () => {
   const [pageClass, setPageClass] = useState<string>();
   const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
   const { state, params } = useCurrentStateAndParams();

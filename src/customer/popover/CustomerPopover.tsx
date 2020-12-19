@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -10,7 +11,9 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { CustomerSummary } from './CustomerSummary';
 import { CustomerUsersList } from './CustomerUsersList';
 
-export const CustomerPopover = ({ resolve: { customer_uuid } }) => {
+export const CustomerPopover: FunctionComponent<{
+  resolve: { customer_uuid };
+}> = ({ resolve: { customer_uuid } }) => {
   const { loading, error, value } = useAsync(
     async () => await getCustomer(customer_uuid),
     [],

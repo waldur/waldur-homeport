@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -19,7 +20,7 @@ async function loadData(customerId) {
   return { provider, offerings };
 }
 
-export const ProviderDetails = () => {
+export const ProviderDetails: FunctionComponent = () => {
   const {
     params: { customer_uuid },
   } = useCurrentStateAndParams();

@@ -1,8 +1,13 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
 
-export const ImportButton = ({ disabled, submitting, onClick }) => (
+export const ImportButton: FunctionComponent<{
+  disabled;
+  submitting;
+  onClick;
+}> = ({ disabled, submitting, onClick }) => (
   <button
     className={classNames('btn btn-primary', {
       disabled: disabled || submitting,

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { FormControlStatic } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
@@ -14,7 +15,7 @@ const selector = formValueSelector(RESOURCE_ACTION_FORM);
 
 const cidrSelector = (state) => selector(state, 'cidr');
 
-export const InternalNetworkAllocationPool = () => {
+export const InternalNetworkAllocationPool: FunctionComponent = () => {
   const cidr = useSelector(cidrSelector);
   const body = cidr ? getAllocationPool(cidr) : <>&mdash;</>;
   return (

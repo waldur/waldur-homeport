@@ -6,6 +6,7 @@ import momentPlugin from '@fullcalendar/moment';
 import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { FunctionComponent } from 'react';
 
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
@@ -13,9 +14,10 @@ import '@fullcalendar/list/main.css';
 import '@fullcalendar/timegrid/main.css';
 
 import './Calendar.scss';
+
 import { defaultConfig } from './defaultConfig';
 
-export const LazyCalendar = (props) => (
+export const LazyCalendar: FunctionComponent<any> = (props) => (
   <FullCalendar
     plugins={[
       dayGridPlugin,

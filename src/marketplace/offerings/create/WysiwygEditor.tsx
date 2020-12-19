@@ -1,4 +1,10 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  FunctionComponent,
+} from 'react';
 import { useAsync } from 'react-use';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -34,7 +40,7 @@ interface DraftModule {
 const loadModule = () =>
   import(/* webpackChunkName: "draft-js" */ './draftjs-module');
 
-export const WysiwygEditor = (props) => {
+export const WysiwygEditor: FunctionComponent<any> = (props) => {
   const [editorState, setEditorState] = useState();
 
   const contentRef = useRef();

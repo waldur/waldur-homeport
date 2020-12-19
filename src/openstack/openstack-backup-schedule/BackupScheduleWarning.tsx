@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react';
 import { Panel } from 'react-bootstrap';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 
-export const BackupScheduleWarning = () => (
+export const BackupScheduleWarning: FunctionComponent = () => (
   <Panel id="backup-schedule-message">
     <Panel.Heading>
       <Panel.Title toggle={true}>

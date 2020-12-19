@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import {
   Dropdown,
   DropdownMenu,
@@ -8,7 +9,7 @@ import {
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
-export const InvoiceActions = ({ invoice }) =>
+export const InvoiceActions: FunctionComponent<{ invoice }> = ({ invoice }) =>
   invoice.backend_id ? (
     <Dropdown id="InvoiceActions">
       <DropdownToggle className="btn-sm">{translate('Actions')}</DropdownToggle>

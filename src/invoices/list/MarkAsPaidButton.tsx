@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -21,7 +22,7 @@ const openMarkAsPaidDialog = (invoice: Invoice) =>
     size: 'lg',
   });
 
-export const MarkAsPaidButton = ({ row }) => {
+export const MarkAsPaidButton: FunctionComponent<{ row }> = ({ row }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   if (!user.is_staff) {

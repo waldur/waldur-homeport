@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Button, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -18,7 +19,7 @@ const InitialCreateOrganizationButton = () => {
   );
 };
 
-export const EmptyOrganizationsPlaceholder = () => (
+export const EmptyOrganizationsPlaceholder: FunctionComponent = () => (
   <Row>
     <div className="middle-box text-center">
       <h3 className="font-bold m-b-lg">

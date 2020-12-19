@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import {
   Dropdown,
   DropdownMenu,
@@ -8,7 +9,7 @@ import {
 import { translate } from './translate';
 import { useLanguageSelector } from './useLanguageSelector';
 
-export const LanguageSelector = () => {
+export const LanguageSelector: FunctionComponent = () => {
   const {
     currentLanguage,
     languageChoices,

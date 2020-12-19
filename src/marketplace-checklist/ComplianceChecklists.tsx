@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -42,7 +43,7 @@ const ProjectChecklist = ({ project }) => {
   );
 };
 
-export const ComplianceChecklists = () => {
+export const ComplianceChecklists: FunctionComponent = () => {
   const project = useSelector(getProject);
   if (!project) {
     return null;

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { useAsync } from 'react-use';
 import { Field } from 'redux-form';
@@ -26,7 +27,7 @@ const loadData = (projectId) =>
     params: { project_uuid: projectId },
   });
 
-export const TenantSelector = (props) => {
+export const TenantSelector: FunctionComponent<any> = (props) => {
   const resourceProps = useAsync(() => loadData(props.project.uuid), [
     props.project,
   ]);

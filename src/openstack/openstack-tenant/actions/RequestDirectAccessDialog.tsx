@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -14,7 +14,10 @@ import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
-export const RequestDirectAccessDialog = ({ resolve: { resource }, close }) => {
+export const RequestDirectAccessDialog: FunctionComponent<{
+  resolve: { resource };
+  close;
+}> = ({ resolve: { resource }, close }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (isFeatureVisible('support')) {

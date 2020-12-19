@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { useEffect } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
@@ -69,7 +69,7 @@ const loadData = async (invoiceId: string) => {
   return invoice;
 };
 
-export const BillingDetails = () => {
+export const BillingDetails: FunctionComponent = () => {
   useTitle(
     ENV.accountingMode === 'accounting'
       ? translate('Accounting record')

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import MediaQuery from 'react-responsive';
 
@@ -10,7 +11,7 @@ import { MobileFilterActions } from './filters/MobileFilterActions';
 import { OfferingGridContainer } from './OfferingGridContainer';
 import { ShopCategoriesContainer } from './ShopCategoriesContainer';
 
-export const CategoryPage = () => {
+export const CategoryPage: FunctionComponent = () => {
   useTitle(translate('Marketplace offerings'));
   return (
     <Row>

@@ -1,8 +1,12 @@
-import { useCallback } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { FormControl, FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-export const InputGroup = ({ fieldName, placeholder, type }) => {
+export const InputGroup: FunctionComponent<{
+  fieldName;
+  placeholder;
+  type;
+}> = ({ fieldName, placeholder, type }) => {
   const renderComponent = useCallback(
     ({ input }) => (
       <FormControl type={type} placeholder={placeholder} {...input} />

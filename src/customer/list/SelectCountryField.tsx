@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 import WindowedSelect from 'react-windowed-select';
 import { Field } from 'redux-form';
@@ -13,7 +14,7 @@ export const SelectField = ({ input: { value, onChange }, ...props }) => (
   <WindowedSelect value={value} onChange={onChange} {...props} />
 );
 
-export const SelectCountryField = () => {
+export const SelectCountryField: FunctionComponent = () => {
   const { loading, value } = useAsync(loadCountries);
   return (
     <div className="form-group">

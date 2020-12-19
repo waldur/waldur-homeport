@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, FunctionComponent } from 'react';
 import { Panel, PanelGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -22,7 +22,7 @@ import { TemplateHeader } from './TemplateHeader';
 import { FormData } from './types';
 import { serializeApplication, parseVisibleQuestions, loadData } from './utils';
 
-export const TemplateDetail = () => {
+export const TemplateDetail: FunctionComponent = () => {
   const {
     params: { templateUuid, clusterUuid },
   } = useCurrentStateAndParams();

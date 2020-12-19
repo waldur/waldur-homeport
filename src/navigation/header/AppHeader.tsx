@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Navbar, Row } from 'react-bootstrap';
 
 import { LanguageSelector } from '@waldur/i18n/LanguageSelector';
@@ -15,7 +16,7 @@ import { LogoutLink } from './LogoutLink';
 import { MainSearch } from './MainSearch';
 import { SupportLink } from './SupportLink';
 
-export const AppHeader = () => (
+export const AppHeader: FunctionComponent = () => (
   <Row className="border-bottom">
     <Navbar staticTop bsStyle="inverse" fluid className="m-b-none">
       <div style={{ display: 'flex' }}>

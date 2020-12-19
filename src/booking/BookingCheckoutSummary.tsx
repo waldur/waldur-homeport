@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { OfferingPeriodsRenderer } from '@waldur/marketplace/details/OfferingPeriodsRenderer';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
@@ -26,6 +28,6 @@ const BookingExtraComponent = (props) => (
   </>
 );
 
-export const BookingCheckoutSummary = (props) => (
+export const BookingCheckoutSummary: FunctionComponent<any> = (props) => (
   <OrderSummary {...props} extraComponent={BookingExtraComponent} />
 );

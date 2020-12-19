@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, FunctionComponent } from 'react';
 
 import { range } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -119,7 +119,7 @@ const MinuteField = ({ value, onChange }) => {
   );
 };
 
-export const CronField = (props) => {
+export const CronField: FunctionComponent<any> = (props) => {
   const {
     input: { value, onChange },
   } = props;

@@ -1,6 +1,11 @@
+import { FunctionComponent } from 'react';
+
 import { StringField, SecretField, FormContainer } from '@waldur/form';
 
-export const OpenStackTenantForm = ({ translate, container }) => (
+export const OpenStackTenantForm: FunctionComponent<{
+  translate;
+  container;
+}> = ({ translate, container }) => (
   <FormContainer {...container}>
     <StringField
       name="backend_url"

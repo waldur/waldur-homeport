@@ -1,4 +1,4 @@
-import { useState, createElement } from 'react';
+import { useState, createElement, FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
@@ -8,7 +8,7 @@ import { WizardFormSecondPage } from './WizardFormSecondPage';
 
 const WizardForms = [WizardFormFirstPage, WizardFormSecondPage];
 
-export const CustomerCreateForm = (props) => {
+export const CustomerCreateForm: FunctionComponent<any> = (props) => {
   const [step, setStep] = useState(1);
   const steps = [translate('General information')];
   if (!ENV.hideOrganizationBillingStep) {

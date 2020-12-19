@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { Panel } from 'react-bootstrap';
 import Select from 'react-select';
 
@@ -10,7 +11,7 @@ import { CustomerMap } from './CustomerMap';
 import { StatsTable } from './StatsTable';
 import { useChecklistOverview } from './useChecklist';
 
-export const ChecklistOverview = () => {
+export const ChecklistOverview: FunctionComponent = () => {
   useTitle(translate('Compliance'));
   const {
     params: { category },

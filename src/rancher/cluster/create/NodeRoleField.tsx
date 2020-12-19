@@ -1,8 +1,9 @@
+import { FunctionComponent } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-export const NodeRoleField = (props) => (
+export const NodeRoleField: FunctionComponent<any> = (props) => (
   <ToggleButtonGroup
     value={props.input.value}
     onChange={props.input.onChange}

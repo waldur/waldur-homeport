@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -39,7 +39,7 @@ function getBreadcrumbs(customer): BreadcrumbItem[] {
   }
 }
 
-export const CustomerWorkspace = () => {
+export const CustomerWorkspace: FunctionComponent = () => {
   const [pageClass, setPageClass] = useState<string>();
   const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
   const customer = useSelector(getCustomer);

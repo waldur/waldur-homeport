@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -14,10 +14,10 @@ import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
-export const RequestActionDialog = ({
-  resolve: { offering, offeringRequestMode },
-  close,
-}) => {
+export const RequestActionDialog: FunctionComponent<{
+  resolve: { offering; offeringRequestMode };
+  close;
+}> = ({ resolve: { offering, offeringRequestMode }, close }) => {
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
@@ -14,7 +15,7 @@ const growthFilterFormSelector = formValueSelector(GROWTH_FILTER_ID);
 const getAccountingRunningFieldValue = (state) =>
   growthFilterFormSelector(state, 'accounting_is_running');
 
-export const GrowthChart = () => {
+export const GrowthChart: FunctionComponent = () => {
   const accountRunningState = useSelector(getAccountingRunningFieldValue);
   const { loading, error, value: option } = useAsync(
     () =>

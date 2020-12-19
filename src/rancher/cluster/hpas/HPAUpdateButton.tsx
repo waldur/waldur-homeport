@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -13,7 +14,7 @@ const HPAUpdateDialog = lazyComponent(
 const editHPADialog = (hpa) =>
   openModalDialog(HPAUpdateDialog, { resolve: { hpa } });
 
-export const HPAUpdateButton = ({ hpa }) => {
+export const HPAUpdateButton: FunctionComponent<{ hpa }> = ({ hpa }) => {
   const dispatch = useDispatch();
   const callback = () => dispatch(editHPADialog(hpa));
   return (

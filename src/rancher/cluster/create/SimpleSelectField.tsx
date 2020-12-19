@@ -1,7 +1,9 @@
+import { FunctionComponent } from 'react';
+
 import { FieldError } from '@waldur/form';
 import { SelectControl } from '@waldur/form/SelectControl';
 
-export const SimpleSelectField = (props) => (
+export const SimpleSelectField: FunctionComponent<any> = (props) => (
   <>
     <SelectControl
       value={props.options.filter(({ value }) => value === props.input.value)}

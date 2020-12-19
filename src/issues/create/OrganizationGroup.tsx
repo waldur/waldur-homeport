@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, FunctionComponent } from 'react';
 import {
   Button,
   ButtonGroup,
@@ -29,7 +29,9 @@ const CustomerPopover = lazyComponent(
 
 const filterOption = (options) => options;
 
-export const OrganizationGroup = ({ onSearch }) => {
+export const OrganizationGroup: FunctionComponent<{ onSearch }> = ({
+  onSearch,
+}) => {
   const dispatch = useDispatch();
   const caller = useSelector(callerSelector);
   const customer = useSelector(customerSelector);

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -20,7 +21,7 @@ const loadBookingOfferingsCount = async (customerUuid: string) =>
     },
   });
 
-export const CustomerBookingManagement = () => {
+export const CustomerBookingManagement: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   const { loading, value: offeringsCount, error } = useAsync(
     () => loadBookingOfferingsCount(customer.uuid),

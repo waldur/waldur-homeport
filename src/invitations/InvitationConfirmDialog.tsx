@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, FunctionComponent } from 'react';
 import {
   Button,
   ModalBody,
@@ -17,7 +17,9 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { InvitationService } from './InvitationService';
 
-export const InvitationConfirmDialog = ({ resolve: { token, deferred } }) => {
+export const InvitationConfirmDialog: FunctionComponent<{
+  resolve: { token; deferred };
+}> = ({ resolve: { token, deferred } }) => {
   const dispatch = useDispatch();
 
   const close = useCallback(() => dispatch(closeModalDialog()), [dispatch]);

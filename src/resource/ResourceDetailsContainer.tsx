@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import { useAsyncFn, useEffectOnce, useNetwork } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -16,7 +16,7 @@ import { ResourceDetails } from './ResourceDetails';
 import { ResourcesService } from './ResourcesService';
 import { BaseResource } from './types';
 
-export const ResourceDetailsContainer = () => {
+export const ResourceDetailsContainer: FunctionComponent = () => {
   const { params } = useCurrentStateAndParams();
   const router = useRouter();
 

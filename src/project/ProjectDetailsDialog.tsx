@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -6,7 +7,9 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import { ProjectUpdateContainer } from './ProjectUpdateContainer';
 
-export const ProjectDetailsDialog = ({ resolve: { project } }) => (
+export const ProjectDetailsDialog: FunctionComponent<{
+  resolve: { project };
+}> = ({ resolve: { project } }) => (
   <ModalDialog
     title={translate('Project details')}
     footer={<CloseDialogButton />}

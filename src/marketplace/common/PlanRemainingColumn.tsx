@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Label } from 'react-bootstrap';
 
 const getColor = (value) =>
@@ -9,7 +10,7 @@ const getColor = (value) =>
     ? 'danger'
     : 'success';
 
-export const PlanRemainingColumn = ({ row }) => (
+export const PlanRemainingColumn: FunctionComponent<{ row }> = ({ row }) => (
   <Label
     bsStyle={getColor(row.remaining)}
     className="m-r-sm m-l-sm"

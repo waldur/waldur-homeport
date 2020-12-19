@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
-export const OrderTypeFilter = () => (
+export const OrderTypeFilter: FunctionComponent = () => (
   <div className="form-group col-sm-3">
     <label className="control-label">{translate('Type')}</label>
     <Field

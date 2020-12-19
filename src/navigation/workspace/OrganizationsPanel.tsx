@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, FunctionComponent } from 'react';
 import { Col } from 'react-bootstrap';
 
 import { ENV } from '@waldur/core/services';
@@ -24,11 +24,11 @@ const EmptyOrganizationListPlaceholder = () => (
   </span>
 );
 
-export const OrganizationsPanel = ({
-  selectedOrganization,
-  selectOrganization,
-  organizationsCount,
-}) => {
+export const OrganizationsPanel: FunctionComponent<{
+  selectedOrganization;
+  selectOrganization;
+  organizationsCount;
+}> = ({ selectedOrganization, selectOrganization, organizationsCount }) => {
   const [filter, setFilter] = useState('');
   const getPage = useCallback((page) => getCustomersPage(filter, page), [
     filter,

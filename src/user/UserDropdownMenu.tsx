@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import {
   Dropdown,
   DropdownMenu,
@@ -21,7 +21,7 @@ const getSidebarItems = () =>
     .filter((item) => isFeatureVisible(item.feature))
     .map((item) => ({ ...item, href: $state.href(item.state) }));
 
-export const UserDropdownMenu = () => {
+export const UserDropdownMenu: FunctionComponent = () => {
   const user = useSelector(getUser);
   const menuItems = useMemo(getSidebarItems, []);
   if (!user) {

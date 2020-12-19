@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
@@ -24,7 +24,7 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-const PaymentProfileUpdateDialog = (props) => {
+const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
   const [isFixedPrice, setIsFixedPrice] = useState(
     props.resolve.payment_type === 'fixed_price',
   );

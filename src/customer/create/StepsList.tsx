@@ -1,6 +1,10 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 
-export const StepsList = ({ steps, step }) => (
+export const StepsList: FunctionComponent<{ steps; step }> = ({
+  steps,
+  step,
+}) => (
   <>
     {steps.length > 1 && (
       <div className="steps clearfix">

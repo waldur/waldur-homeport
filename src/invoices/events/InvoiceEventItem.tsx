@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -16,7 +17,7 @@ const EventDetailsDialog = lazyComponent(
   'EventDetailsDialog',
 );
 
-export const InvoiceEventItem = ({ event }) => {
+export const InvoiceEventItem: FunctionComponent<{ event }> = ({ event }) => {
   const dispatch = useDispatch();
 
   const showEventDetails = (event) => {

@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { CreatedField } from '@waldur/resource/summary/CreatedField';
@@ -7,7 +9,9 @@ import { MarketplaceResourceStateField } from './list/MarketplaceResourceStateFi
 import { ResourceDetailsLink } from './ResourceDetailsLink';
 import { Resource } from './types';
 
-export const ResourceSummary = ({ resource }) => (
+export const ResourceSummary: FunctionComponent<{ resource }> = ({
+  resource,
+}) => (
   <dl className="dl-horizontal resource-details-table">
     <Field label={translate('Offering type')} value={resource.offering_name} />
     <Field

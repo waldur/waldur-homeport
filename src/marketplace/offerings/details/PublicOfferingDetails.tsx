@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -13,7 +14,7 @@ import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
 import { OfferingHeader } from './OfferingHeader';
 
-export const PublicOfferingDetails = () => {
+export const PublicOfferingDetails: FunctionComponent = () => {
   const {
     params: { uuid },
   } = useCurrentStateAndParams();

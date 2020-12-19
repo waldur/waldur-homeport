@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -77,7 +78,7 @@ const enhance = compose(connect(mapsStateToProps), connectTable(TableOptions));
 
 const BillingRecordsListComponent = enhance(TableComponent);
 
-export const BillingRecordsList = () => (
+export const BillingRecordsList: FunctionComponent = () => (
   <>
     <InvoicesFilter />
     <BillingRecordsListComponent />

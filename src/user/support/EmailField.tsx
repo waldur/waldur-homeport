@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -19,7 +19,7 @@ const UserEmailChangeDialog = lazyComponent(
   'UserEmailChangeDialog',
 );
 
-export const EmailField = (props) => {
+export const EmailField: FunctionComponent<any> = (props) => {
   const [waiting, setWaiting] = useState(false);
   const dispatch = useDispatch();
   const openChangeDialog = useCallback(() => {

@@ -1,10 +1,11 @@
 import Qs from 'qs';
+import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-export const AuthLoginFailed = () => {
+export const AuthLoginFailed: FunctionComponent = () => {
   const qs = Qs.parse(getQueryString());
   const message = qs?.message;
 

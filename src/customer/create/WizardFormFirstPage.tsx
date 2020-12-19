@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { PanelBody } from 'react-bootstrap';
 
 import { ENV } from '@waldur/core/services';
@@ -17,7 +18,7 @@ const formatCompanyTypes = (ENV) =>
     label: item,
   }));
 
-export const WizardFormFirstPage = (props) => (
+export const WizardFormFirstPage: FunctionComponent<any> = (props) => (
   <WizardForm {...props}>
     <PanelBody>
       <InputGroup

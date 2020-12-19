@@ -1,8 +1,12 @@
+import { FunctionComponent } from 'react';
+
 import { Tooltip } from '@waldur/core/Tooltip';
 
 import { ServiceProviderIcon } from './ServiceProviderIcon';
 
-export const OrganizationTitle = ({ organization }) =>
+export const OrganizationTitle: FunctionComponent<{ organization }> = ({
+  organization,
+}) =>
   organization.abbreviation ? (
     <Tooltip
       label={organization.name}

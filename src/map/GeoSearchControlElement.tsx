@@ -1,8 +1,8 @@
 import { GeoSearchControl } from 'leaflet-geosearch';
-import { useEffect } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 import { useMap } from 'react-leaflet';
 
-export const GeoSearchControlElement = (props) => {
+export const GeoSearchControlElement: FunctionComponent<any> = (props) => {
   const map = useMap();
 
   useEffect(() => {

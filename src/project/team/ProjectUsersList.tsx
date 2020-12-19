@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -96,7 +97,7 @@ const TableOptions: TableOptionsType = {
 
 const ProjectUsersListComponent = connectTable(TableOptions)(TableComponent);
 
-export const ProjectUsersList = () => {
+export const ProjectUsersList: FunctionComponent = () => {
   const user = useSelector(getUser);
   const project = useSelector(getProject);
   const { loading, error, value } = useAsync(

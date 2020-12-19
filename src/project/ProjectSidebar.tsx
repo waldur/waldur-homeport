@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -12,7 +13,7 @@ import {
   getExtraSidebarItems,
 } from './utils';
 
-export const ProjectSidebar = () => {
+export const ProjectSidebar: FunctionComponent = () => {
   const project = useSelector(getProject);
   const sidebarItems = useSelector(getSidebarItems);
 

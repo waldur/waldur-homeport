@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';
@@ -6,7 +7,7 @@ import { showSuccess, showError } from '@waldur/store/coreSaga';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
-export const SendNotificationButton = ({ row }) => {
+export const SendNotificationButton: FunctionComponent<{ row }> = ({ row }) => {
   const user = useSelector(getUser);
   const dispatch = useDispatch();
   if (!user.is_staff) {

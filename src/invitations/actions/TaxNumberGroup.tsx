@@ -1,9 +1,11 @@
+import { FunctionComponent } from 'react';
+
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
 import { InputGroup } from './InputGroup';
 
-export const TaxNumberGroup = ({ disabled }) =>
+export const TaxNumberGroup: FunctionComponent<{ disabled }> = ({ disabled }) =>
   ENV.invitationShowTaxNumber ? (
     <InputGroup
       name="tax_number"

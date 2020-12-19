@@ -1,6 +1,6 @@
 import type { OptionsInput } from '@fullcalendar/core';
 import moment from 'moment';
-import { Component } from 'react';
+import { Component, FunctionComponent } from 'react';
 import { FieldArray } from 'redux-form';
 
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
@@ -148,6 +148,6 @@ export class EditableCalendar extends Component<
   }
 }
 
-export const CalendarField = (props) => (
+export const CalendarField: FunctionComponent<any> = (props) => (
   <FieldArray name={props.name} component={EditableCalendar} {...props} />
 );

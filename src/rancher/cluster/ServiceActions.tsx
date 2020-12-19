@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
@@ -11,7 +12,7 @@ import { deleteService } from '../api';
 
 import { ViewYAMLButton } from './ViewYAMLButton';
 
-export const ServiceActions = ({ service }) => {
+export const ServiceActions: FunctionComponent<{ service }> = ({ service }) => {
   const dispatch = useDispatch();
 
   const [deleteResult, deleteCallback] = useAsyncFn(async () => {

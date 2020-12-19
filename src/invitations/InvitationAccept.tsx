@@ -1,11 +1,12 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV, ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
-export const InvitationAccept = () => {
+export const InvitationAccept: FunctionComponent = () => {
   const router = useRouter();
   const {
     params: { uuid },

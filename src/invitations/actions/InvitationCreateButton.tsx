@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -18,7 +19,7 @@ const InvitationCreateDialog = lazyComponent(
   'InvitationCreateDialog',
 );
 
-export const InvitationCreateButton = () => {
+export const InvitationCreateButton: FunctionComponent = () => {
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);

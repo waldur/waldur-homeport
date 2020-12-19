@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from 'react-use';
@@ -77,7 +78,7 @@ const getTitleTooltip = (isWide, workspace, customer, project) => {
   }
 };
 
-export const SelectWorkspaceToggle = () => {
+export const SelectWorkspaceToggle: FunctionComponent = () => {
   const dispatch = useDispatch();
   const workspace = useSelector(getWorkspace);
   const customer = useSelector(getCustomer);

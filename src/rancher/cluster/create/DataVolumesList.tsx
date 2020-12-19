@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react';
 import { Col } from 'react-bootstrap';
 
 import { DataVolumeAddButton } from './DataVolumeAddButton';
 import { DataVolumePanel } from './DataVolumePanel';
 
-export const DataVolumesList = (props) => (
+export const DataVolumesList: FunctionComponent<any> = (props) => (
   <div className="form-group">
     <Col smOffset={props.smOffset} sm={props.sm}>
       {props.fields.map((volume, index) => (

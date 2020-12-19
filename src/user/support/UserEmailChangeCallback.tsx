@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
@@ -11,7 +11,7 @@ import { translate } from '@waldur/i18n';
 import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { setCurrentUser } from '@waldur/workspace/actions';
 
-export const UserEmailChangeCallback = () => {
+export const UserEmailChangeCallback: FunctionComponent = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {

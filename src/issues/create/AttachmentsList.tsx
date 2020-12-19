@@ -1,4 +1,8 @@
-export const AttachmentsList = ({ attachments }) => (
+import { FunctionComponent } from 'react';
+
+export const AttachmentsList: FunctionComponent<{ attachments }> = ({
+  attachments,
+}) => (
   <ul className="list-unstyled">
     {attachments.map((attachment, index) => (
       <li key={index}>

@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 
@@ -18,7 +20,7 @@ export const bookingStateAliases = (state: string): string => {
   }
 };
 
-export const BookingStateField = ({ row }) => (
+export const BookingStateField: FunctionComponent<{ row }> = ({ row }) => (
   <ResourceStateField
     row={{
       ...row,

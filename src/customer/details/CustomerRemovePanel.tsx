@@ -1,4 +1,5 @@
 import { useRouter } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -33,7 +34,7 @@ const loadInvoices = (customer) =>
     params: { field: ['state', 'price'], customer_uuid: customer.uuid },
   });
 
-export const CustomerRemovePanel = () => {
+export const CustomerRemovePanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
   const isOwner = useSelector(isOwnerSelector);

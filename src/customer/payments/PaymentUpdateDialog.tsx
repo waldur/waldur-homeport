@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
@@ -18,7 +19,7 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-const PaymentUpdateDialog = (props) => (
+const PaymentUpdateDialog: FunctionComponent<any> = (props) => (
   <form
     onSubmit={props.handleSubmit(props.submitRequest)}
     className="form-horizontal"

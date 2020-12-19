@@ -1,10 +1,11 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { getRoles } from '@waldur/customer/team/utils';
 import { translate } from '@waldur/i18n';
 
-export const ProjectRoleSelectField = () => (
+export const ProjectRoleSelectField: FunctionComponent = () => (
   <div className="form-group col-sm-3">
     <label className="control-label">{translate('Project role')}</label>
     <Field

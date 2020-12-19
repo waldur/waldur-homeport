@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -18,7 +18,7 @@ const CatalogDeleteDialog = lazyComponent(
 const deleteCatalogDialog = (catalog) =>
   openModalDialog(CatalogDeleteDialog, { resolve: { catalog } });
 
-export const CatalogDeleteButton = (props) => {
+export const CatalogDeleteButton: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
   const callback = useCallback(
     () => dispatch(deleteCatalogDialog(props.catalog)),

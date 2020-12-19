@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -9,7 +10,7 @@ export const getOptions = () => [
   { value: undefined, label: translate('All') },
 ];
 
-export const ServiceProviderFilter = () => (
+export const ServiceProviderFilter: FunctionComponent = () => (
   <div className="form-group col-sm-3">
     <label className="control-label">{translate('Service provider')}</label>
     <Field

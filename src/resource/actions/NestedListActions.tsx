@@ -1,9 +1,13 @@
+import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { loadNestedActions } from './action-utils-service';
 
-export const NestedListActions = ({ resource, tab }) => {
+export const NestedListActions: FunctionComponent<{ resource; tab }> = ({
+  resource,
+  tab,
+}) => {
   const controller = {
     handleActionException: () => {
       // eslint-disable-next-line no-console

@@ -1,7 +1,9 @@
+import { FunctionComponent } from 'react';
+
 import { useLanguageSelector } from './useLanguageSelector';
 import './LanguageSelectorMenuItem.scss';
 
-export const LanguageSelectorMenuItem = () => {
+export const LanguageSelectorMenuItem: FunctionComponent = () => {
   const {
     currentLanguage,
     languageChoices,

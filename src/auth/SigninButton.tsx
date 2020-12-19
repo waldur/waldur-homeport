@@ -1,8 +1,9 @@
 import { useRouter } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
 
-export const SigninButton = () => {
+export const SigninButton: FunctionComponent = () => {
   const router = useRouter();
   return (
     <div className="form-group m-b-sm">

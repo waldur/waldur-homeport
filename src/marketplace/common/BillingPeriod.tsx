@@ -1,6 +1,8 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 
-export const BillingPeriod = (props) => {
+export const BillingPeriod: FunctionComponent<any> = (props) => {
   const labels = {
     month: translate('Price per month'),
     half_month: translate('Price per half month'),

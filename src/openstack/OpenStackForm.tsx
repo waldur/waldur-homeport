@@ -1,7 +1,12 @@
+import { FunctionComponent } from 'react';
+
 import { required } from '@waldur/core/validators';
 import { StringField, SecretField, FormContainer } from '@waldur/form';
 
-export const OpenStackForm = ({ translate, container }) => (
+export const OpenStackForm: FunctionComponent<{ translate; container }> = ({
+  translate,
+  container,
+}) => (
   <FormContainer {...container}>
     <StringField
       name="backend_url"

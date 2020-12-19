@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { useAsync } from 'react-use';
 
@@ -5,6 +6,7 @@ import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
+
 import './CustomerSupportRating.scss';
 
 const loadData = async () => {
@@ -27,7 +29,7 @@ const getTotalNumberOfReviews = (feedback): number => {
   return sum;
 };
 
-export const CustomerSupportRating = () => {
+export const CustomerSupportRating: FunctionComponent = () => {
   const { loading, error, value } = useAsync(loadData, []);
   return loading ? (
     <LoadingSpinner />

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -5,9 +6,13 @@ import { OfferingGrid } from '@waldur/marketplace/common/OfferingGrid';
 import { Field } from '@waldur/resource/summary';
 
 import { OfferingLogo } from '../common/OfferingLogo';
+
 import './ProviderDetails.scss';
 
-export const ProviderDetailsBody = ({ provider, offerings }) => (
+export const ProviderDetailsBody: FunctionComponent<{
+  provider;
+  offerings;
+}> = ({ provider, offerings }) => (
   <Row>
     <Col md={3}>
       {provider.customer_image && (

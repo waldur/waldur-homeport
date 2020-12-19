@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useEffect } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -37,7 +37,7 @@ const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
   ];
 };
 
-export const ScreenshotsContainer = () => {
+export const ScreenshotsContainer: FunctionComponent = () => {
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();

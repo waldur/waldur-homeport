@@ -1,4 +1,10 @@
-import { useMemo, useState, useCallback, useEffect } from 'react';
+import {
+  useMemo,
+  useState,
+  useCallback,
+  useEffect,
+  FunctionComponent,
+} from 'react';
 import { Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -74,7 +80,9 @@ const ProjectListItem = ({ item }) => (
   </>
 );
 
-export const ProjectsPanel = ({ selectedOrganization }) => {
+export const ProjectsPanel: FunctionComponent<{ selectedOrganization }> = ({
+  selectedOrganization,
+}) => {
   const currentProject = useSelector(getProject);
   const [selectedProject, selectProject] = useState<Project>(currentProject);
 

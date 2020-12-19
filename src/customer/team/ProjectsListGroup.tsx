@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import { FunctionComponent } from 'react';
 import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
@@ -8,7 +9,10 @@ import { translate } from '@waldur/i18n';
 import './ProjectsListGroup.scss';
 import { ProjectRoleField } from './ProjectRoleField';
 
-export const ProjectsListGroup = ({ canChangeRole, projects }) => {
+export const ProjectsListGroup: FunctionComponent<{
+  canChangeRole;
+  projects;
+}> = ({ canChangeRole, projects }) => {
   return projects.length === 0 ? (
     <p className="text-danger">
       {translate('There are no available projects.')}

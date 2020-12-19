@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, FunctionComponent } from 'react';
 import { Col, ControlLabel, FormGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
@@ -13,7 +13,9 @@ import { projectSelector } from './selectors';
 
 const filterOption = (options) => options;
 
-export const ResourceGroup = ({ disabled }) => {
+export const ResourceGroup: FunctionComponent<{ disabled }> = ({
+  disabled,
+}) => {
   const dispatch = useDispatch();
   const project = useSelector(projectSelector);
   const loadData = useCallback((name) => refreshResources(name, project), [

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { formatFilesize } from '@waldur/core/utils';
@@ -9,7 +10,7 @@ import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-export const ImageGroup = (props) => (
+export const ImageGroup: FunctionComponent<any> = (props) => (
   <CreateResourceFormGroup label={translate('Image')} required={true}>
     <Field
       name="attributes.image"

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -13,7 +14,7 @@ const NotificationCreateDialog = lazyComponent(
   'NotificationCreateDialog',
 );
 
-export const NotificationCreateButton = () => {
+export const NotificationCreateButton: FunctionComponent = () => {
   const dispatch = useDispatch();
   const callback = () => dispatch(openModalDialog(NotificationCreateDialog));
   return (

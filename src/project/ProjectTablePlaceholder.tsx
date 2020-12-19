@@ -1,10 +1,12 @@
+import { FunctionComponent } from 'react';
+
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 const Illustration = require('@waldur/images/table-placeholders/undraw_organizing_projects.svg');
 
-export const ProjectTablePlaceholder = () => (
+export const ProjectTablePlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder
     illustration={Illustration}
     title={translate(`Your organization does not have any projects yet.`)}

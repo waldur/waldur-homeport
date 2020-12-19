@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -13,7 +14,7 @@ const mapStateToProps = createSelector(getCustomer, (customer) => ({
 
 const CustomerIssuesListComponent = connect(mapStateToProps)(IssuesList);
 
-export const CustomerIssuesList = () => {
+export const CustomerIssuesList: FunctionComponent = () => {
   useTitle(translate('Issues'));
   return <CustomerIssuesListComponent hiddenColumns={['customer']} />;
 };

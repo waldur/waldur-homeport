@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -61,7 +62,7 @@ function getNavItems(user, customer, project) {
   return [];
 }
 
-export const UserSidebar = () => {
+export const UserSidebar: FunctionComponent = () => {
   const workspaceUser = useSelector(
     (state: OuterState) => state.workspace?.user,
   );

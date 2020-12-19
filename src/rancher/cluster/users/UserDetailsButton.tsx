@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -11,7 +12,7 @@ const UserDetailsDialog = lazyComponent(
   'UserDetailsDialog',
 );
 
-export const UserDetailsButton = ({ user }) => {
+export const UserDetailsButton: FunctionComponent<{ user }> = ({ user }) => {
   const dispatch = useDispatch();
   const callback = () =>
     dispatch(

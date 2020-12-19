@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, FunctionComponent } from 'react';
 import { Button, Col, ControlLabel, FormGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
@@ -13,7 +13,10 @@ import { projectSelector, customerSelector } from './selectors';
 
 const filterOption = (options) => options;
 
-export const ProjectGroup = ({ onSearch, disabled }) => {
+export const ProjectGroup: FunctionComponent<{ onSearch; disabled }> = ({
+  onSearch,
+  disabled,
+}) => {
   const dispatch = useDispatch();
   const project = useSelector(projectSelector);
   const customer = useSelector(customerSelector);

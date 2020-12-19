@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -9,7 +10,7 @@ import { ShoppingCart } from './ShoppingCart';
 import { ShoppingCartSidebar } from './ShoppingCartSidebar';
 import { ShoppingCartSteps } from './ShoppingCartSteps';
 
-export const CheckoutPage = () => {
+export const CheckoutPage: FunctionComponent = () => {
   useTitle(translate('Marketplace checkout'));
   return (
     <Row>

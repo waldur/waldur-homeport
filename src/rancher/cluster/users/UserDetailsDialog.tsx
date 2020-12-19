@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -10,7 +11,9 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { UserDetailsTable } from './UserDetailsTable';
 
-export const UserDetailsDialog = ({ resolve }) => {
+export const UserDetailsDialog: FunctionComponent<{ resolve }> = ({
+  resolve,
+}) => {
   return (
     <>
       <ModalHeader>

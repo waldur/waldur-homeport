@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -7,7 +8,11 @@ import { withTranslation } from '@waldur/i18n/translate';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { OuterState } from '@waldur/workspace/types';
 
-const CustomerCreateButton = ({ isVisible, onClick, translate }) =>
+const CustomerCreateButton: FunctionComponent<{
+  isVisible;
+  onClick;
+  translate;
+}> = ({ isVisible, onClick, translate }) =>
   isVisible ? (
     <ActionButton
       title={translate('Add organization')}

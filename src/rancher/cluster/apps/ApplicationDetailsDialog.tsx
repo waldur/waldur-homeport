@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Panel, PanelGroup, Table } from 'react-bootstrap';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
@@ -61,7 +62,9 @@ const ApplicationAnswersTable = ({ application }) => (
   </Table>
 );
 
-export const ApplicationDetailsDialog = ({ resolve: { application } }) => (
+export const ApplicationDetailsDialog: FunctionComponent<{
+  resolve: { application };
+}> = ({ resolve: { application } }) => (
   <ModalDialog
     title={translate('Application details')}
     footer={<CloseDialogButton />}

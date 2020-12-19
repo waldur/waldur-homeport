@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
@@ -10,7 +11,7 @@ import { getIssues } from '../api';
 
 import { IssueRow } from './IssueRow';
 
-export const IssuesShortList = () => {
+export const IssuesShortList: FunctionComponent = () => {
   const user = useSelector(getUser);
   const [{ loading, error, value }, loadData] = useAsyncFn(
     () => getIssues({ caller: user.url }),

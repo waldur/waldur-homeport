@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ngInjector, $state } from '@waldur/core/services';
@@ -13,7 +14,7 @@ const showLink = (state) => {
   return user && (user.is_staff || user.is_support);
 };
 
-export const SupportLink = () => {
+export const SupportLink: FunctionComponent = () => {
   const visible = useSelector(showLink);
 
   if (!visible) {

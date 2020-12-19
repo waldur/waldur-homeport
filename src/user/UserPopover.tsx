@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -29,7 +30,7 @@ const getCanSeeChecklist = createSelector(
   (support, staff, owner) => support || staff || owner,
 );
 
-export const UserPopover = ({ resolve }) => {
+export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
   const [{ loading, value }, callback] = useAsyncFn(async () => {
     let user;
     if (resolve.user_uuid) {

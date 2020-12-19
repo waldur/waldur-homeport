@@ -1,7 +1,12 @@
+import { FunctionComponent } from 'react';
+
 import { required } from '@waldur/core/validators';
 import { StringField, SelectField, FormContainer } from '@waldur/form';
 
-export const SlurmForm = ({ translate, container }) => (
+export const SlurmForm: FunctionComponent<{ translate; container }> = ({
+  translate,
+  container,
+}) => (
   <FormContainer {...container}>
     <SelectField
       name="batch_service"

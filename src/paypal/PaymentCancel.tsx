@@ -1,5 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import Qs from 'qs';
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
@@ -11,7 +12,7 @@ import { showError, showSuccess } from '@waldur/store/coreSaga';
 
 const cancelPayment = (payload) => post('/paypal-payments/cancel/', payload);
 
-export const PaymentCancel = () => {
+export const PaymentCancel: FunctionComponent = () => {
   useTitle(translate('Cancel payment'));
   const dispatch = useDispatch();
   const router = useRouter();

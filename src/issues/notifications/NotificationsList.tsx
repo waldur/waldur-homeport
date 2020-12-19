@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
@@ -43,7 +45,7 @@ const TableOptions: TableOptionsType = {
 
 const NotificationsListComponent = connectTable(TableOptions)(TableComponent);
 
-export const NotificationsList = () => {
+export const NotificationsList: FunctionComponent = () => {
   useTitle(translate('Notifications'));
   return (
     <Panel>

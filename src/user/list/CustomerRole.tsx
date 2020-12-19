@@ -9,6 +9,6 @@ interface Props {
   };
 }
 
-export const CustomerRole: FunctionComponent<Props> = ({ row }) => (
+export const CustomerRole: FunctionComponent<any> = ({ row }) => (
   <BooleanField value={row.role === CUSTOMER_OWNER_ROLE} />
 );

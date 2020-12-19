@@ -1,7 +1,9 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { ServiceProviderManagement } from '@waldur/marketplace/service-providers/ServiceProviderManagement';
 
-export const CustomerMarketplacePanel = () => (
+export const CustomerMarketplacePanel: FunctionComponent = () => (
   <div className="highlight">
     <h3>{translate('Marketplace service provider')}</h3>
     <p>

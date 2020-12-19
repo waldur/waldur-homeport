@@ -7,7 +7,7 @@ interface Props {
   state: ResourceState;
 }
 
-export const OfferingRuntimeState: FunctionComponent<Props> = (props) => (
+export const OfferingRuntimeState: FunctionComponent<any> = (props) => (
   <StateIndicator
     label={props.state}
     variant={
