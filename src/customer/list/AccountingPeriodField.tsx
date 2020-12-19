@@ -10,7 +10,7 @@ interface Props {
   options: AccountingPeriodOption[];
 }
 
-export const AccountingPeriodField: FunctionComponent<any> = (props) => (
+export const AccountingPeriodField: FunctionComponent<Props> = (props) => (
   <Field
     name="accounting_period"
     component={(prop) => (

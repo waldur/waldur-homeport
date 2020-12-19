@@ -31,9 +31,7 @@ interface PureIssueCommentsContainerProps extends TranslateProps {
   renderHeader: boolean;
 }
 
-export class PureIssueCommentsContainer extends Component<
-  PureIssueCommentsContainerProps
-> {
+export class PureIssueCommentsContainer extends Component<PureIssueCommentsContainerProps> {
   state = {
     dropzoneActive: false,
   };

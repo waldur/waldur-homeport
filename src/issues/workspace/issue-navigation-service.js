@@ -251,13 +251,10 @@ export default class IssueNavigationService {
 
 // @ngInject
 export function attachStateUtils($rootScope, IssueNavigationService) {
-  $rootScope.$on('$stateChangeSuccess', function (
-    event,
-    toState,
-    toParams,
-    fromState,
-    fromParams,
-  ) {
-    IssueNavigationService.setPrevState(fromState, fromParams);
-  });
+  $rootScope.$on(
+    '$stateChangeSuccess',
+    function (event, toState, toParams, fromState, fromParams) {
+      IssueNavigationService.setPrevState(fromState, fromParams);
+    },
+  );
 }

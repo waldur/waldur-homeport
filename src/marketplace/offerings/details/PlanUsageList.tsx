@@ -61,6 +61,6 @@ const TableOptions = {
 
 const connector = compose(connectTable(TableOptions), withTranslation);
 
-export const PlanUsageList = connector(TableComponent) as React.ComponentType<
-  PlanUsageListProps
->;
+export const PlanUsageList = connector(
+  TableComponent,
+) as React.ComponentType<PlanUsageListProps>;

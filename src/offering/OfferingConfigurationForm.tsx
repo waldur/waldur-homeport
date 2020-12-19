@@ -30,9 +30,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { fetchTenantOptions, fetchInstanceOptions } from './api';
 
-export class PureOfferingConfigurationForm extends Component<
-  OfferingConfigurationFormProps
-> {
+export class PureOfferingConfigurationForm extends Component<OfferingConfigurationFormProps> {
   componentDidMount() {
     const attributes = { ...this.props.initialAttributes };
     if (this.props.offering.options.order) {

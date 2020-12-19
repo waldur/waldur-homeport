@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
@@ -6,10 +5,14 @@ import thunk from 'redux-thunk';
 import sagas from './effects';
 import rootReducer from './reducers';
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
+  }
+}
+
 const composeEnhancers =
-  // @ts-ignore
   (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-    // @ts-ignore
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
       trace: true,
       traceLimit: 25,

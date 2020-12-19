@@ -39,9 +39,7 @@ interface PendingOrderIndicatorProps extends ToggleOpenProps {
   workspace: string;
 }
 
-export class PurePendingOrderIndicator extends Component<
-  PendingOrderIndicatorProps
-> {
+export class PurePendingOrderIndicator extends Component<PendingOrderIndicatorProps> {
   componentDidMount() {
     const { workspace, customer } = this.props;
     if (!customer) {

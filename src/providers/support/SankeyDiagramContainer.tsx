@@ -19,9 +19,7 @@ interface SankeyDiagramComponentProps {
   setTitle: typeof setTitle;
 }
 
-class SankeyDiagramComponent extends React.Component<
-  SankeyDiagramComponentProps
-> {
+class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps> {
   sankeyDiagramCalculator = new SankeyDiagramCalculator();
 
   componentDidMount() {

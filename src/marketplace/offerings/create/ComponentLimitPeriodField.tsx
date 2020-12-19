@@ -34,7 +34,7 @@ interface Props {
   limitPeriod: LimitPeriodOption;
 }
 
-export const ComponentLimitPeriodField: FunctionComponent<any> = (props) => (
+export const ComponentLimitPeriodField: FunctionComponent<Props> = (props) => (
   <FormGroup label={translate('Limit period')}>
     <Field
       name="limit_period"
