@@ -61,9 +61,7 @@ interface ShoppingCartItemUpdateProps {
   setTitle: typeof setTitle;
 }
 
-class ShoppingCartItemUpdateComponent extends Component<
-  ShoppingCartItemUpdateProps
-> {
+class ShoppingCartItemUpdateComponent extends Component<ShoppingCartItemUpdateProps> {
   state = {
     loading: false,
     loaded: false,

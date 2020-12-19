@@ -14,9 +14,7 @@ interface PureIssueAttachmentModalProps {
   };
 }
 
-export class PureIssueAttachmentModal extends Component<
-  PureIssueAttachmentModalProps
-> {
+export class PureIssueAttachmentModal extends Component<PureIssueAttachmentModalProps> {
   state = {
     loading: true,
   };

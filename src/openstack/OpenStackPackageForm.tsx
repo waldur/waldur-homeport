@@ -21,9 +21,7 @@ import { OpenStackAllocationPool } from './OpenStackAllocationPool';
 import { OpenStackSubnetField } from './OpenStackSubnetField';
 import { validateSubnetPrivateCIDR } from './utils';
 
-export class OpenStackPackageForm extends Component<
-  OfferingConfigurationFormProps
-> {
+export class OpenStackPackageForm extends Component<OfferingConfigurationFormProps> {
   componentDidMount() {
     const { project, plan } = this.props;
     const defaults = getDefaults(this.props.offering);

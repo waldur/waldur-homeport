@@ -21,9 +21,7 @@ interface PureResourceSummaryModalProps extends TranslateProps {
   fetchResource(): void;
 }
 
-export class PureResourceSummaryModal extends Component<
-  PureResourceSummaryModalProps
-> {
+export class PureResourceSummaryModal extends Component<PureResourceSummaryModalProps> {
   componentDidMount() {
     this.props.fetchResource();
   }

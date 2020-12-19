@@ -22,9 +22,7 @@ interface PureIssueAttachmentsContainerProps extends TranslateProps {
   uploading: number;
 }
 
-export class PureIssueAttachmentsContainer extends Component<
-  PureIssueAttachmentsContainerProps
-> {
+export class PureIssueAttachmentsContainer extends Component<PureIssueAttachmentsContainerProps> {
   state = {
     dropzoneActive: false,
   };

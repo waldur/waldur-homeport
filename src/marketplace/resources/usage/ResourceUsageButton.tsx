@@ -21,9 +21,9 @@ interface Props {
   >;
 }
 
-export const ResourceUsageButton: FunctionComponent<any> = ({ row }) => {
+export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
   if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
-    return 'N/A';
+    return <>{'N/A'}</>;
   }
   const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
   return (

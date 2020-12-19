@@ -1,8 +1,7 @@
-import { FunctionComponent } from 'react';
-
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { MessageDialog } from '@waldur/core/MessageDialog';
-import { ENV, ngInjector } from '@waldur/core/services';
+import { ENV } from '@waldur/core/services';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -13,14 +12,11 @@ interface ReportIssueActionProps {
   state: string;
 }
 
-export const getIssueAction: FunctionComponent<ReportIssueActionProps> = (
-  props,
-) => {
+export const getIssueAction = (props: ReportIssueActionProps) => {
   return {
     title: translate('Report an issue'),
     onClick() {
-      const features = ngInjector.get('features');
-      if (features.isVisible('support')) {
+      if (isFeatureVisible('support')) {
         store.dispatch(
           openIssueCreateDialog({
             issue: props.issue,

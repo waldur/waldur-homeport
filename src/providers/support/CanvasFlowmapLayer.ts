@@ -5,7 +5,7 @@ import L from 'leaflet';
 // layer source code
 const canvasRenderer = L.canvas();
 
-export const CanvasFlowmapLayer = L.GeoJSON.extend({
+export const CanvasFlowmapLayer: any = L.GeoJSON.extend({
   options: {
     // this is only a default option example,
     // developers will most likely need to provide this

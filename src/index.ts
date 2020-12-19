@@ -68,18 +68,6 @@ slurmModule();
 storeModule(appModule);
 rancherModule();
 
-function requirePlugins(module) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
-  const context = require.context('./plugins', true, /module\.js$/);
-  context.keys().forEach((key) => {
-    const plugin = context(key).default;
-    plugin(module);
-  });
-}
-
-requirePlugins(appModule);
-
 registerRoutes(appModule);
 
 bootstrap('waldur');

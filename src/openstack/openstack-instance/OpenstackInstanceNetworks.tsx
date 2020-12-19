@@ -32,9 +32,7 @@ export const getDefaultFloatingIps = () => [
   },
 ];
 
-export class OpenstackInstanceNetworks extends Component<
-  OpenstackInstanceNetworksComponentProps
-> {
+export class OpenstackInstanceNetworks extends Component<OpenstackInstanceNetworksComponentProps> {
   addItem = () => {
     if (this.hasFreeSubnets()) {
       if (this.props.input.value) {

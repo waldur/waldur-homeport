@@ -64,6 +64,7 @@ export interface Customer {
   uuid: string;
   url: string;
   owners: User[];
+  service_managers?: User[];
   projects?: Project[];
   is_service_provider?: boolean;
   abbreviation?: string;

@@ -5,28 +5,24 @@ import injectServices from './services';
 
 // @ngInject
 function redirectToState($rootScope, $state) {
-  $rootScope.$on('$stateChangeError', function (
-    event,
-    toState,
-    toParams,
-    fromState,
-    fromParams,
-    error,
-  ) {
-    // Erred state is terminal, user should not be redirected from erred state to login
-    // so that he would be able to read error message details
-    if (error && error.detail && error.detail.status === 401) {
-      return AuthService.localLogout({
-        toState: toState.name,
-        toParams: JSON.parse(JSON.stringify(toParams)),
-      });
-    }
-    if (error && error.redirectTo && error.status !== -1) {
-      $state.go(error.redirectTo);
-    } else {
-      $state.go('errorPage.notFound');
-    }
-  });
+  $rootScope.$on(
+    '$stateChangeError',
+    function (event, toState, toParams, fromState, fromParams, error) {
+      // Erred state is terminal, user should not be redirected from erred state to login
+      // so that he would be able to read error message details
+      if (error && error.detail && error.detail.status === 401) {
+        return AuthService.localLogout({
+          toState: toState.name,
+          toParams: JSON.parse(JSON.stringify(toParams)),
+        });
+      }
+      if (error && error.redirectTo && error.status !== -1) {
+        $state.go(error.redirectTo);
+      } else {
+        $state.go('errorPage.notFound');
+      }
+    },
+  );
 }
 
 // @ngInject

@@ -13,7 +13,7 @@ interface Props {
   removeOfferingQuotas(): void;
 }
 
-export const ComponentForm: FunctionComponent<any> = (props) => (
+export const ComponentForm: FunctionComponent<Props> = (props) => (
   <>
     <InternalNameField name="type" />
     <DisplayNameField name="name" />

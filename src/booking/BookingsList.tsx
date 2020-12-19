@@ -166,6 +166,6 @@ const enhance = compose(
   withTranslation,
 );
 
-export const BookingsList = enhance(TableComponent) as React.ComponentType<
-  BookingsList
->;
+export const BookingsList = enhance(
+  TableComponent,
+) as React.ComponentType<BookingsList>;

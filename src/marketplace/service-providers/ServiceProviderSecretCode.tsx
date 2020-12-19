@@ -23,9 +23,7 @@ interface ServiceProviderSecretCodeProps extends TranslateProps {
   getServiceProviderSecretCode(): void;
 }
 
-class PureServiceProviderSecretCode extends Component<
-  ServiceProviderSecretCodeProps
-> {
+class PureServiceProviderSecretCode extends Component<ServiceProviderSecretCodeProps> {
   componentDidUpdate(prevProps) {
     if (
       this.props.serviceProvider &&

@@ -1,7 +1,6 @@
-import { ngInjector } from '@waldur/core/services';
+import { isFeatureVisible } from '@waldur/features/connect';
 
-export const marketplaceIsVisible = () =>
-  ngInjector.get('features').isVisible('marketplace');
+export const marketplaceIsVisible = () => isFeatureVisible('marketplace');
 
 export const getCategoryLink = (projectId, categoryId) => ({
   state: 'marketplace-project-resources',

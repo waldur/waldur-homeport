@@ -34,8 +34,6 @@ const composeFeatureCollection = (
 });
 
 export const getFlowmapLayer = (data: UsageData): Layer =>
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
   new CanvasFlowmapLayer(composeFeatureCollection(data), {
     originAndDestinationFieldIds: {
       originUniqueIdField: 'provider_uuid',

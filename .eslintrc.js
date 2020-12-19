@@ -72,6 +72,8 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'warn',
     'react-hooks/exhaustive-deps': 'warn',
     '@typescript-eslint/no-this-alias': 'warn',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/ban-types': 'off',
     'no-console': 'error',
     'import/no-named-as-default': 'error',
     'require-await': 'error',

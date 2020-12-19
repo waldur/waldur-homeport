@@ -87,9 +87,7 @@ export interface PluginConfiguration {
   WALDUR_MARKETPLACE: MarketplaceConfiguration;
   WALDUR_OPENSTACK: Partial<OpenStackConfiguration>;
   WALDUR_OPENSTACK_TENANT: Partial<OpenStackTenantConfiguration>;
-  WALDUR_MARKETPLACE_OPENSTACK: Partial<
-    MarketplaceOpenStackTenantConfiguration
-  >;
+  WALDUR_MARKETPLACE_OPENSTACK: Partial<MarketplaceOpenStackTenantConfiguration>;
   WALDUR_RANCHER: RancherConfiguration;
   WALDUR_VMWARE: Partial<VMWareConfiguration>;
 }
