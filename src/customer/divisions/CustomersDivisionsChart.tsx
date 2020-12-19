@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
@@ -27,7 +28,7 @@ const loadData = (accounting_is_running: boolean) =>
     customers,
   }));
 
-export const CustomersDivisionsChart = () => {
+export const CustomersDivisionsChart: FunctionComponent = () => {
   const accountRunningState = useSelector(getAccountingRunningFieldValue);
   const { loading, error, value: option } = useAsync(
     () => loadData(accountRunningState?.value).then(getEChartOptions),

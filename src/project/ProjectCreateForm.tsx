@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import {
   TextField,
   SelectField,
@@ -8,7 +10,7 @@ import {
 
 import { ProjectNameField } from './ProjectNameField';
 
-export const ProjectCreateForm = (props) => (
+export const ProjectCreateForm: FunctionComponent<any> = (props) => (
   <form
     onSubmit={props.handleSubmit(props.createProject)}
     className="form-horizontal"

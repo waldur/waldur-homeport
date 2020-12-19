@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
 
-export const DocsLink = () => {
+export const DocsLink: FunctionComponent = () => {
   const link = useSelector((state) => getConfig(state).docsLink);
   if (!link) {
     return null;

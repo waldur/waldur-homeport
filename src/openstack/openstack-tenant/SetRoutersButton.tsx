@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -10,7 +11,7 @@ const SetRoutesDialog = lazyComponent(
   'SetRoutesDialog',
 );
 
-export const SetRoutersButton = ({ router }) => {
+export const SetRoutersButton: FunctionComponent<{ router }> = ({ router }) => {
   const dispatch = useDispatch();
   const openDialog = () =>
     dispatch(

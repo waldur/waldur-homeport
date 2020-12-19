@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -9,7 +9,10 @@ import { getShowAllTypes, getIssueTypes } from '../types/utils';
 import { LayoutWrapper } from './LayoutWrapper';
 import { TypeField } from './TypeField';
 
-export const TypeGroup = ({ disabled, layout }) => {
+export const TypeGroup: FunctionComponent<{ disabled; layout }> = ({
+  disabled,
+  layout,
+}) => {
   const user = useSelector(getUser);
   const showAllTypes = getShowAllTypes(user);
   const issueTypes = useMemo(() => getIssueTypes(showAllTypes), [showAllTypes]);

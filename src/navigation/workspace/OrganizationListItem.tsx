@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -5,13 +6,13 @@ import { translate } from '@waldur/i18n';
 import { OrganizationTitle } from './OrganizationTitle';
 import { SelectOrganizationButton } from './SelectOrganizationButton';
 
-export const OrganizationListItem = ({
-  data,
-  index,
-  style,
-  selected,
-  onSelect,
-}) => {
+export const OrganizationListItem: FunctionComponent<{
+  data;
+  index;
+  style;
+  selected;
+  onSelect;
+}> = ({ data, index, style, selected, onSelect }) => {
   const item = data[index];
 
   if (item.isFetching) {

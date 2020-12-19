@@ -1,10 +1,11 @@
+import { FunctionComponent } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field } from 'redux-form';
 
 import { divisionTypeAutocomplete } from '@waldur/customer/list/api';
 import { translate } from '@waldur/i18n';
 
-export const DivisionTypeFilter = () => (
+export const DivisionTypeFilter: FunctionComponent = () => (
   <div className="form-group col-sm-3">
     <label className="control-label">{translate('Division type')}</label>
     <Field

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FunctionComponent } from 'react';
 import Select from 'react-select';
 import { useAsync } from 'react-use';
 
@@ -72,7 +72,9 @@ const CategoryPanel = ({ category, checklists, customer }) => {
   );
 };
 
-export const CustomerChecklistOverview = ({ customer }) => {
+export const CustomerChecklistOverview: FunctionComponent<{ customer }> = ({
+  customer,
+}) => {
   const asyncState = useAsync(loadData, []);
 
   if (asyncState.loading) {

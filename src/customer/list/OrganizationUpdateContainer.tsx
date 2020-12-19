@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -21,7 +22,7 @@ const getBreadcrumbs = (): BreadcrumbItem[] => [
   },
 ];
 
-export const OrganizationUpdateContainer = () => {
+export const OrganizationUpdateContainer: FunctionComponent = () => {
   const {
     params: { customer_uuid },
   } = useCurrentStateAndParams();

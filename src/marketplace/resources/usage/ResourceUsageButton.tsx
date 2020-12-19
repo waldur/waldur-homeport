@@ -21,7 +21,7 @@ interface Props {
   >;
 }
 
-export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
+export const ResourceUsageButton: FunctionComponent<any> = ({ row }) => {
   if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
     return 'N/A';
   }

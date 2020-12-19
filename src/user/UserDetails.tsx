@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import { useEffectOnce } from 'react-use';
 
 import { $state } from '@waldur/core/services';
@@ -35,7 +35,7 @@ function loadUser() {
   });
 }
 
-export const UserDetails = () => {
+export const UserDetails: FunctionComponent = () => {
   const [pageClass, setPageClass] = useState<string>();
   const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
   const { state, params } = useCurrentStateAndParams();

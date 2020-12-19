@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, change, formValueSelector } from 'redux-form';
 
@@ -54,7 +54,7 @@ const useMinimalSize = (form, nodeIndex, volumeIndex) => {
   };
 };
 
-export const VolumeMountPointGroup = (props) => {
+export const VolumeMountPointGroup: FunctionComponent<any> = (props) => {
   const setValidVolumeSize = useMinimalSize(
     props.form,
     props.nodeIndex,

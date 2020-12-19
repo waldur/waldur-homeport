@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -72,7 +72,9 @@ const HookDetails = reduxForm<HookFormData, OwnProps>({ form: 'HookForm' })(
   HookDetailsComponent,
 );
 
-export const HookDetailsDialog = ({ resolve: { hook } }) => {
+export const HookDetailsDialog: FunctionComponent<{ resolve: { hook } }> = ({
+  resolve: { hook },
+}) => {
   const state = useAsync(loadEventGroupsOptions);
   const initialValues = useMemo(() => getInitialValue(hook), [hook]);
   return (

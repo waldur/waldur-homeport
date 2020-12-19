@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -19,7 +20,7 @@ interface Comment {
   created: string;
 }
 
-export const IssuesActivityStream = () => {
+export const IssuesActivityStream: FunctionComponent = () => {
   const { loading, error, value } = useAsync(
     async () => await getList<Comment>('/support-comments/'),
     [],

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { formatFilesize } from '@waldur/core/utils';
@@ -18,7 +18,10 @@ const FileListComponent = ({ files }) =>
     </ul>
   ) : null;
 
-export const FileField = ({ input, disabled }) => {
+export const FileField: FunctionComponent<{ input; disabled }> = ({
+  input,
+  disabled,
+}) => {
   const fileInput = useRef<HTMLInputElement>();
   return (
     <div>

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -16,7 +17,7 @@ const IntegerField = renderValidationWrapper((fieldProps) => (
   </>
 ));
 
-export const SystemVolumeSizeGroup = () => (
+export const SystemVolumeSizeGroup: FunctionComponent = () => (
   <CreateResourceFormGroup
     label={translate('System volume size')}
     required={true}

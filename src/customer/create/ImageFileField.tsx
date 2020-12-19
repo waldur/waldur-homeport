@@ -1,10 +1,13 @@
-import { useRef } from 'react';
+import { useRef, FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-export const ImageFileField = ({ input, disabled }) => {
+export const ImageFileField: FunctionComponent<{ input; disabled }> = ({
+  input,
+  disabled,
+}) => {
   const fileInput = useRef<HTMLInputElement>();
   return (
     <div>

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -106,6 +107,6 @@ const PureRancherExtraComponent = (props) =>
 
 const RancherExtraComponent = connector(PureRancherExtraComponent);
 
-export const RancherClusterCheckoutSummary = (props) => (
-  <OrderSummary {...props} extraComponent={RancherExtraComponent} />
-);
+export const RancherClusterCheckoutSummary: FunctionComponent<any> = (
+  props,
+) => <OrderSummary {...props} extraComponent={RancherExtraComponent} />;

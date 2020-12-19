@@ -1,9 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
-export const AuthHeader = () => {
+export const AuthHeader: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
   return (
     <>

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -9,7 +10,7 @@ export const getOptions = () => [
   { value: undefined, label: translate('All') },
 ];
 
-export const AccountingRunningField = () => (
+export const AccountingRunningField: FunctionComponent = () => (
   <Field
     name="accounting_is_running"
     component={(prop) => (

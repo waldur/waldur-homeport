@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
@@ -6,7 +7,7 @@ import { translate } from '@waldur/i18n';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-export const PublicKeyGroup = (props) => (
+export const PublicKeyGroup: FunctionComponent<any> = (props) => (
   <CreateResourceFormGroup label={translate('SSH public key')}>
     <Field
       name="attributes.ssh_public_key"

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -11,7 +12,7 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-export const OrganizationRemovalErrorDialog = () => {
+export const OrganizationRemovalErrorDialog: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   return (
     <>

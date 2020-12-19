@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { useCallback } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
@@ -9,7 +9,7 @@ import { showSuccess, showError } from '@waldur/store/coreSaga';
 
 import { AuthService } from './AuthService';
 
-export const AuthActivation = () => {
+export const AuthActivation: FunctionComponent = () => {
   const {
     params: { user_uuid, token },
   } = useCurrentStateAndParams();

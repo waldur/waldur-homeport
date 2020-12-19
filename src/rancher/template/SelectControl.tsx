@@ -1,8 +1,14 @@
+import { FunctionComponent } from 'react';
 import { FormControl } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-export const SelectControl = ({ input, options, getLabel, getValue }) => (
+export const SelectControl: FunctionComponent<{
+  input;
+  options;
+  getLabel;
+  getValue;
+}> = ({ input, options, getLabel, getValue }) => (
   <FormControl
     componentClass="select"
     value={getValue(input.value)}

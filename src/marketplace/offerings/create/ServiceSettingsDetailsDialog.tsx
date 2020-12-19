@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { useCallback } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -18,7 +18,7 @@ interface ProviderData {
   name: string;
 }
 
-export const ServiceSettingsDetailsDialog = () => {
+export const ServiceSettingsDetailsDialog: FunctionComponent = () => {
   const offeringData = useSelector(getOffering);
   const offeringScope = offeringData.offering.scope;
   const state = useAsync(async () => {

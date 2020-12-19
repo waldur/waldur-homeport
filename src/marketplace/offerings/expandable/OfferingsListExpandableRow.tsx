@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, FunctionComponent } from 'react';
 
 import { OFFERING_CUSTOMERS_LIST_FILTER } from './constants';
 import { OfferingCostsChart } from './OfferingCostsChart';
 import { OfferingCustomersList } from './OfferingCustomersList';
 import { OfferingCustomersListFilter } from './OfferingCustomersListFilter';
 
-export const OfferingsListExpandableRow = ({ row }) => {
+export const OfferingsListExpandableRow: FunctionComponent<{ row }> = ({
+  row,
+}) => {
   const [uniqueFormId] = useState(
     `${OFFERING_CUSTOMERS_LIST_FILTER}-${row.uuid}`,
   );

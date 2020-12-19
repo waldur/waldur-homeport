@@ -1,8 +1,10 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { goBack } from '@waldur/navigation/utils';
 
-export const InvalidObjectPage = () => {
+export const InvalidObjectPage: FunctionComponent = () => {
   useTitle(translate('Page is not found.'));
   return (
     <div className="middle-box text-center">

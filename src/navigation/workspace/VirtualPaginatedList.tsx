@@ -1,4 +1,4 @@
-import { useCallback, forwardRef } from 'react';
+import { useCallback, forwardRef, FunctionComponent } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { FixedSizeList as List } from 'react-window';
 import paginate from 'react-window-paginated';
@@ -32,6 +32,6 @@ const CustomScrollbarsVirtualList = forwardRef((props: any, ref) => (
   <CustomScrollbars {...props} forwardedRef={ref} />
 ));
 
-export const VirtualPaginatedList = (props) => (
+export const VirtualPaginatedList: FunctionComponent<any> = (props) => (
   <PaginatedList {...props} outerElementType={CustomScrollbarsVirtualList} />
 );

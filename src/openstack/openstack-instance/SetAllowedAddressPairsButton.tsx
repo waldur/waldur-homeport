@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -13,7 +14,10 @@ const SetAllowedAddressPairsDialog = lazyComponent(
   'SetAllowedAddressPairsDialog',
 );
 
-export const SetAllowedAddressPairsButton = ({ instance, internalIp }) => {
+export const SetAllowedAddressPairsButton: FunctionComponent<{
+  instance;
+  internalIp;
+}> = ({ instance, internalIp }) => {
   const dispatch = useDispatch();
   const openDialog = () =>
     dispatch(

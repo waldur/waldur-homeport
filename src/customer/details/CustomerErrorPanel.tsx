@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -13,7 +14,7 @@ const CustomerErrorDialog = lazyComponent(
   'CustomerErrorDialog',
 );
 
-export const CustomerErrorPanel = () => {
+export const CustomerErrorPanel: FunctionComponent = () => {
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
   const reportError = () =>

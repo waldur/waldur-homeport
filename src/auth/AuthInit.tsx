@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import { useCallback } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -23,7 +23,7 @@ const formatInitialData = pick([
   'phone_number',
 ]);
 
-export const AuthInit = () => {
+export const AuthInit: FunctionComponent = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { loading, error, value: user } = useAsync(() =>

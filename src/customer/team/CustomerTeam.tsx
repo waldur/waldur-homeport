@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -12,7 +13,7 @@ import { CustomerPermissionsReviewList } from './CustomerPermissionsReviewList';
 import { CustomerUsersList } from './CustomerUsersList';
 import { OfferingPermissionsList } from './OfferingPermissionsList';
 
-export const CustomerTeam = () => {
+export const CustomerTeam: FunctionComponent = () => {
   useTitle(translate('Team'));
   const customer = useSelector(getCustomer);
   return (

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import {
   Button,
   ModalBody,
@@ -14,7 +15,9 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { InvoiceEventItem } from './InvoiceEventItem';
 import { loadEvents } from './utils';
 
-export const InvoiceEventsDialog = ({ resolve }) => {
+export const InvoiceEventsDialog: FunctionComponent<{ resolve }> = ({
+  resolve,
+}) => {
   const { loading, error, value: events, retry } = useAsyncRetry(() =>
     loadEvents(resolve.item),
   );

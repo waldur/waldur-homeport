@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 import { components } from 'react-select';
 import { Field } from 'redux-form';
@@ -31,7 +32,11 @@ const Option = (props) => (
   </components.Option>
 );
 
-export const UserGroup = ({ editUser, users, disabled }) =>
+export const UserGroup: FunctionComponent<{ editUser; users; disabled }> = ({
+  editUser,
+  users,
+  disabled,
+}) =>
   editUser ? (
     <FormGroup>
       <FormControl.Static>

@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -21,7 +22,7 @@ const linkify = (s) =>
 
 const loadIssue = (id) => getById<any>('/support-issues/', id);
 
-export const IssueDetails = () => {
+export const IssueDetails: FunctionComponent = () => {
   const currentUser = useSelector(getUser);
 
   useTitle(translate('Request detail'));

@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
@@ -53,7 +55,9 @@ const formatLoginDetails = (props) => {
   );
 };
 
-export const SlurmAllocationSummaryExtraDetails = (props) => (
+export const SlurmAllocationSummaryExtraDetails: FunctionComponent<any> = (
+  props,
+) => (
   <div className="slurm-allocation-summary-extra-details-container">
     <div className={props.resource.username ? 'field-container' : ''}>
       <Field

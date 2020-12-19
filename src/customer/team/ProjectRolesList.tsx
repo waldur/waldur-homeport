@@ -1,9 +1,12 @@
-import { Fragment } from 'react';
+import { Fragment, FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
-export const ProjectRolesList = ({ roleName, row }) => {
+export const ProjectRolesList: FunctionComponent<{ roleName; row }> = ({
+  roleName,
+  row,
+}) => {
   const filteredProjects = row.projects.filter(
     (item) => item.role === roleName,
   );

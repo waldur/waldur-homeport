@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
@@ -29,7 +31,7 @@ const ManageNetworksButton = (props) => (
   </Link>
 );
 
-export const OpenStackInstanceTenantButton = (props) =>
+export const OpenStackInstanceTenantButton: FunctionComponent<any> = (props) =>
   props.resource.tenant_uuid ? (
     <>
       <ManageSecurityGroupsButton resource={props.resource} />{' '}

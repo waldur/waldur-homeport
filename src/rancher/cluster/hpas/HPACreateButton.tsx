@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -13,7 +14,9 @@ const HPACreateDialog = lazyComponent(
 const createHPADialog = (cluster) =>
   openModalDialog(HPACreateDialog, { resolve: { cluster } });
 
-export const HPACreateButton = ({ cluster }) => {
+export const HPACreateButton: FunctionComponent<{ cluster }> = ({
+  cluster,
+}) => {
   const dispatch = useDispatch();
   const callback = () => dispatch(createHPADialog(cluster));
   return (

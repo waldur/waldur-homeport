@@ -1,10 +1,11 @@
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { OpenstackInstanceDataVolume } from '@waldur/openstack/openstack-instance/OpenstackInstanceDataVolume';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
-export const DataVolumeSizeGroup = (props) => (
+export const DataVolumeSizeGroup: FunctionComponent<any> = (props) => (
   <CreateResourceFormGroup>
     <Field
       name="attributes.data_volume_size"

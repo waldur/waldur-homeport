@@ -1,11 +1,11 @@
 import copy from 'copy-to-clipboard';
-import { useCallback } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/coreSaga';
 
-export const CopyToClipboard = ({ value }) => {
+export const CopyToClipboard: FunctionComponent<{ value }> = ({ value }) => {
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {

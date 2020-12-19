@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
@@ -28,7 +29,7 @@ const providerAutocomplete = async (
   );
 };
 
-export const SharedProviderFilter = () => (
+export const SharedProviderFilter: FunctionComponent = () => (
   <div className="ibox">
     <div className="ibox-content">
       <div className="row">

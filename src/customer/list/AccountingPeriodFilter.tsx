@@ -9,7 +9,7 @@ interface Props {
   options: AccountingPeriodOption[];
 }
 
-export const AccountingPeriodFilter: FunctionComponent<Props> = (props) => (
+export const AccountingPeriodFilter: FunctionComponent<any> = (props) => (
   <div className="form-group col-sm-3">
     <label className="control-label">{translate('Accounting period')}</label>
     <AccountingPeriodField options={props.options} />

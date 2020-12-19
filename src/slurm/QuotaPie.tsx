@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 // This directive is based on code from https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
 const getCoordinatesForPercent = (percent) => {
   const x = Math.cos(2 * Math.PI * percent);
@@ -16,7 +18,7 @@ const getSlices = (value) => [
   },
 ];
 
-export const QuotaPie = ({ value }) => {
+export const QuotaPie: FunctionComponent<{ value }> = ({ value }) => {
   const slices = getSlices(value);
   let cumulativePercent = 0;
 

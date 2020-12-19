@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { PanelBody } from 'react-bootstrap';
 
 import { InputField } from '@waldur/form/InputField';
@@ -7,7 +8,7 @@ import { CountryGroup } from './CountryGroup';
 import { InputGroup } from './InputGroup';
 import { WizardForm } from './WizardForm';
 
-export const WizardFormSecondPage = (props) => (
+export const WizardFormSecondPage: FunctionComponent<any> = (props) => (
   <WizardForm {...props}>
     <PanelBody>
       <InputGroup

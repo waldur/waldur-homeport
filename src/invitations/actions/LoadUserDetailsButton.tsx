@@ -1,9 +1,13 @@
+import { FunctionComponent } from 'react';
 import { Button, FormGroup } from 'react-bootstrap';
 
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 
-export const LoadUserDetailsButton = ({ loading, onClick }) =>
+export const LoadUserDetailsButton: FunctionComponent<{ loading; onClick }> = ({
+  loading,
+  onClick,
+}) =>
   ENV.invitationRequireUserDetails ? (
     <FormGroup>
       <Button bsStyle="primary" disabled={loading} onClick={onClick}>

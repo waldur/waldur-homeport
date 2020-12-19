@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { AuthService } from '@waldur/auth/AuthService';
 import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
@@ -7,7 +9,7 @@ import { goBack } from '../utils';
 
 import './SiteHeader.scss';
 
-export const SiteHeader = () => {
+export const SiteHeader: FunctionComponent = () => {
   return (
     <div className="border-bottom">
       <nav className="navbar navbar-static-top white-bg m-b-none">

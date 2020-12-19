@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
@@ -9,7 +9,9 @@ import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 const pluginOptionsSelector = (state) =>
   formValueSelector(FORM_ID)(state, 'plugin_options');
 
-export const OpenStackPluginOptionsForm = ({ container }) => {
+export const OpenStackPluginOptionsForm: FunctionComponent<{ container }> = ({
+  container,
+}) => {
   const STORAGE_MODE_OPTIONS = useMemo(
     () => [
       {

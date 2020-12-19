@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -13,7 +14,7 @@ const InvoiceEventsDialog = lazyComponent(
   'InvoiceEventsDialog',
 );
 
-export const InvoiceEventsToggle = ({ item }) => {
+export const InvoiceEventsToggle: FunctionComponent<{ item }> = ({ item }) => {
   const dispatch = useDispatch();
   const showEvents = () => {
     dispatch(

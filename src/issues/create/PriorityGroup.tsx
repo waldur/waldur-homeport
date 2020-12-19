@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, ControlLabel, FormGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
@@ -7,7 +8,10 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { SelectField } from './SelectField';
 
-export const PriorityGroup = ({ priorities, disabled }) => {
+export const PriorityGroup: FunctionComponent<{ priorities; disabled }> = ({
+  priorities,
+  disabled,
+}) => {
   const user = useSelector(getUser);
   if (!user || (!user.is_staff && !user.is_support)) {
     return null;

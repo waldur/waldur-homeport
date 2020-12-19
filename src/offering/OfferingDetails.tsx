@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { useEffect } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 import { useAsyncFn } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -69,7 +69,7 @@ const loadOffering = async (offeringUuid) => {
   };
 };
 
-export const OfferingDetails = () => {
+export const OfferingDetails: FunctionComponent = () => {
   const {
     params: { uuid: offeringUuid },
   } = useCurrentStateAndParams();

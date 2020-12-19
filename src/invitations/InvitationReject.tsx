@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
@@ -7,7 +8,7 @@ import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
 
-export const InvitationReject = () => {
+export const InvitationReject: FunctionComponent = () => {
   const router = useRouter();
   const {
     params: { token },

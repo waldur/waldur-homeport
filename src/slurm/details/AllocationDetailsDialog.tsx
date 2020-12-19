@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -10,7 +11,9 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { AllocationUsageTable } from './AllocationUsageTable';
 
-export const AllocationDetailsDialog = ({ resolve: { resource } }) => (
+export const AllocationDetailsDialog: FunctionComponent<{
+  resolve: { resource };
+}> = ({ resolve: { resource } }) => (
   <>
     <ModalHeader>
       <ModalTitle>{translate('SLURM allocation usage')}</ModalTitle>

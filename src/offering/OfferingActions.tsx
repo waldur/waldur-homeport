@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsButton';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
@@ -7,7 +9,10 @@ import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResou
 
 import { OfferingReportButton } from './OfferingReportButton';
 
-export const OfferingActions = ({ offering, reInitResource }) => (
+export const OfferingActions: FunctionComponent<{
+  offering;
+  reInitResource;
+}> = ({ offering, reInitResource }) => (
   <div className="pull-right">
     <button className="btn btn-default btn-sm" onClick={reInitResource}>
       <i className="fa fa-refresh" /> {translate('Refresh')}

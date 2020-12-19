@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -16,7 +16,9 @@ import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
-export const CustomerErrorDialog = ({ resolve }) => {
+export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
+  resolve,
+}) => {
   const [message, setMessage] = useState<string>();
   const dispatch = useDispatch();
   useEffect(() => {

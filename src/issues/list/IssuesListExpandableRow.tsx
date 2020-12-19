@@ -1,9 +1,13 @@
 import './IssuesListExpandableRow.scss';
 
+import { FunctionComponent } from 'react';
+
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
-export const IssuesListExpandableRow = ({ row }) => (
+export const IssuesListExpandableRow: FunctionComponent<{ row }> = ({
+  row,
+}) => (
   <div className="container-fluid">
     <div className="issue-list-expandable-row col-sm-12">
       <div className="m-b-xs">

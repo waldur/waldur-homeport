@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -6,7 +6,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { IssueRegistration } from '../create/IssueRegistration';
 import { IssuesList } from '../list/IssuesList';
 
-export const IssuesHelpdesk = () => {
+export const IssuesHelpdesk: FunctionComponent = () => {
   useTitle(translate('Helpdesk dashboard'));
   const [filter, setFilter] = useState({});
   const onSearch = useCallback((issue) => {

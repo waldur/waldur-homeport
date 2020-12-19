@@ -1,10 +1,12 @@
+import { FunctionComponent } from 'react';
+
 import { ENV } from '@waldur/core/services';
 
 import { DEFAULT_NODE_CONFIGURATION } from './constants';
 import { NodeAddButton } from './NodeAddButton';
 import { NodePanel } from './NodePanel';
 
-export const NodeList = (props) => {
+export const NodeList: FunctionComponent<any> = (props) => {
   const onAdd = () => {
     props.fields.push({
       ...DEFAULT_NODE_CONFIGURATION,

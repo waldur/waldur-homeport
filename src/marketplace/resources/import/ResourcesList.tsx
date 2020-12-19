@@ -1,15 +1,17 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 
 import { ResourceRow } from './ResourceRow';
 
-export const ResourcesList = ({
-  resources,
-  offering,
-  value,
-  toggleResource,
-  plans,
-  assignPlan,
-}) => (
+export const ResourcesList: FunctionComponent<{
+  resources;
+  offering;
+  value;
+  toggleResource;
+  plans;
+  assignPlan;
+}> = ({ resources, offering, value, toggleResource, plans, assignPlan }) => (
   <table className="table">
     <thead>
       <tr>

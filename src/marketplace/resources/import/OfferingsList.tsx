@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { Panel } from '@waldur/core/Panel';
@@ -41,7 +42,11 @@ const OfferingItem = ({ offering, value, onChange, id }) => (
   </Panel>
 );
 
-export const OfferingsList = ({ choices, value, onChange }) => (
+export const OfferingsList: FunctionComponent<{ choices; value; onChange }> = ({
+  choices,
+  value,
+  onChange,
+}) => (
   <Row>
     {choices.map((offering, index) => (
       <Col key={index} md={3} xs={6} sm={4} onClick={() => onChange(offering)}>

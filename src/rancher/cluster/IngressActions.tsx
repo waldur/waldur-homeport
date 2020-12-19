@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
@@ -11,7 +12,7 @@ import { deleteIngress } from '../api';
 
 import { ViewYAMLButton } from './ViewYAMLButton';
 
-export const IngressActions = ({ ingress }) => {
+export const IngressActions: FunctionComponent<{ ingress }> = ({ ingress }) => {
   const dispatch = useDispatch();
 
   const [deleteResult, deleteCallback] = useAsyncFn(async () => {

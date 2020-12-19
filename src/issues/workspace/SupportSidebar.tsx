@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 
 import { ngInjector } from '@waldur/core/services';
 import { Sidebar } from '@waldur/navigation/sidebar/Sidebar';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 
-export const SupportSidebar = () => {
+export const SupportSidebar: FunctionComponent = () => {
   const [items, setItems] = useState<MenuItemType[]>([]);
 
   useEffect(() => {

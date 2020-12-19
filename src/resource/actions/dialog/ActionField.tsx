@@ -1,10 +1,17 @@
+import { FunctionComponent } from 'react';
+
 import { formatSnakeCase } from '@waldur/core/utils';
 import { angular2react } from '@waldur/shims/angular2react';
 import { connectAngularComponent } from '@waldur/store/connect';
 
 const PROPS = ['field', 'model', 'form', 'context'];
 
-export const ActionField = ({ field, model, form, context }) => {
+export const ActionField: FunctionComponent<{
+  field;
+  model;
+  form;
+  context;
+}> = ({ field, model, form, context }) => {
   if (typeof field.component === 'function') {
     return (
       <field.component

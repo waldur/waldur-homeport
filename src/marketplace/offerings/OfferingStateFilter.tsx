@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -10,7 +11,7 @@ export const getStates = () => [
   { value: 'Archived', label: translate('Archived') },
 ];
 
-export const OfferingStateFilter = () => (
+export const OfferingStateFilter: FunctionComponent = () => (
   <div className="form-group col-sm-3">
     <label className="control-label">{translate('State')}</label>
     <Field

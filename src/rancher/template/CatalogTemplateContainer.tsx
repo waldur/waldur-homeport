@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -57,7 +58,7 @@ const loadData = async (clusterUuid: string, catalogUuid: string) => {
   return { cluster, catalog };
 };
 
-export const CatalogTemplateContainer = () => {
+export const CatalogTemplateContainer: FunctionComponent = () => {
   useTitle(translate('Application templates'));
 
   const {

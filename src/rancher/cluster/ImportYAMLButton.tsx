@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -10,7 +11,9 @@ const ImportYAMLDialog = lazyComponent(
   'ImportYAMLDialog',
 );
 
-export const ImportYAMLButton = ({ cluster_id }) => {
+export const ImportYAMLButton: FunctionComponent<{ cluster_id }> = ({
+  cluster_id,
+}) => {
   const dispatch = useDispatch();
   return (
     <ActionButton

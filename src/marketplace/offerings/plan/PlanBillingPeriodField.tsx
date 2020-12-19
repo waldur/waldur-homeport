@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -5,7 +6,7 @@ import { required } from '@waldur/core/validators';
 
 import { getBillingPeriods } from './constants';
 
-export const PlanBillingPeriodField = () => (
+export const PlanBillingPeriodField: FunctionComponent = () => (
   <Field
     name="unit"
     validate={required}

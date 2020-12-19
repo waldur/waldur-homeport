@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -14,7 +14,9 @@ import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 import { closeReview } from './api';
 import { CustomerUsersList } from './CustomerUsersList';
 
-export const PendingReviewDialog = ({ resolve: { reviewId } }) => {
+export const PendingReviewDialog: FunctionComponent<{
+  resolve: { reviewId };
+}> = ({ resolve: { reviewId } }) => {
   const dispatch = useDispatch();
   const gotoTeam = () => {
     dispatch(stateGo('organization.team'));

@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 import { useMap } from 'react-leaflet';
 
-export const FitWorld = () => {
+export const FitWorld: FunctionComponent = () => {
   const map = useMap();
   useEffect(() => {
     map.fitWorld();

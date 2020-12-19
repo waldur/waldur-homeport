@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -30,7 +30,7 @@ function getBreadcrumbs(project, state): BreadcrumbItem[] {
   }
 }
 
-export const ProjectWorkspace = () => {
+export const ProjectWorkspace: FunctionComponent = () => {
   const [pageClass, setPageClass] = useState<string>();
   const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
   const project = useSelector(getProject);

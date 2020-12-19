@@ -1,8 +1,9 @@
+import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-export const KeyValueTable = (props) => (
+export const KeyValueTable: FunctionComponent<any> = (props) => (
   <Table bordered={true}>
     <thead>
       <tr>

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -7,7 +8,7 @@ import { SharedProviderCustomers } from './SharedProviderCustomers';
 import { providerSelector } from './SharedProviderFilter';
 import { SharedProviderResources } from './SharedProviderResources';
 
-const SharedProviderTabs = ({ provider }) =>
+const SharedProviderTabs: FunctionComponent<{ provider }> = ({ provider }) =>
   provider ? (
     <div className="ibox">
       <div className="ibox-content">

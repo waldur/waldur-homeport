@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import {
   Button,
   ButtonGroup,
@@ -41,7 +42,7 @@ const CallerActions = ({ onSearch }) => {
 
 const filterOption = (options) => options;
 
-export const CallerGroup = ({ onSearch }) => (
+export const CallerGroup: FunctionComponent<{ onSearch }> = ({ onSearch }) => (
   <FormGroup>
     <Col sm={3} componentClass={ControlLabel}>
       {translate('Caller')}

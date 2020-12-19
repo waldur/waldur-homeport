@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FunctionComponent } from 'react';
 import { Table, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
@@ -25,7 +25,7 @@ const formatRolesList = (roles) =>
     ? 'N/A'
     : roles.map((role) => translate(ENV.roles[role])).join(', ');
 
-export const ChecklistCustomer = () => {
+export const ChecklistCustomer: FunctionComponent = () => {
   useTitle(translate('Checklists'));
   const customer = useSelector(getCustomer);
   const [category, setCategory] = useState<Category>();

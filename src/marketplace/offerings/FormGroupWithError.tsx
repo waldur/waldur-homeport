@@ -1,8 +1,12 @@
+import { FunctionComponent } from 'react';
+
 import { FieldError } from '@waldur/form';
 
 import { FormGroup } from './FormGroup';
 
-export const FormGroupWithError = (inputProps) => (
+export const FormGroupWithError: FunctionComponent<inputProps> = (
+  inputProps,
+) => (
   <FormGroup
     label={inputProps.label}
     description={inputProps.description}

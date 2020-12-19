@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -8,7 +8,11 @@ import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 
 import { disableProfile } from './api';
 
-export const DisableProfile = ({ profile, setLoading, refreshProfile }) => {
+export const DisableProfile: FunctionComponent<{
+  profile;
+  setLoading;
+  refreshProfile;
+}> = ({ profile, setLoading, refreshProfile }) => {
   const dispatch = useDispatch();
 
   const callback = useCallback(async () => {

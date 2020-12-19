@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { FieldArray } from 'redux-form';
 
@@ -22,7 +23,9 @@ const PROGRAMMING_LANGUAGE_CHOICES = [
 const getLanguage = (state) =>
   (getForm(state, 'secret_options') || {}).language;
 
-export const ScriptsForm = ({ container }) => {
+export const ScriptsForm: FunctionComponent<{ container }> = ({
+  container,
+}) => {
   const language = useSelector(getLanguage);
   return (
     <>

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 import {
   Col,
   ControlLabel,
@@ -42,7 +43,7 @@ const validateUsername = (username: string) => {
   }
 };
 
-export const UsernameGroup = () => (
+export const UsernameGroup: FunctionComponent = () => (
   <FormGroup>
     <Col sm={3} componentClass={ControlLabel}>
       {translate('Username')}

@@ -1,15 +1,15 @@
 import classNames from 'classnames';
-import { useRef, useCallback, useEffect } from 'react';
+import { useRef, useCallback, useEffect, FunctionComponent } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-export const BaseList = ({
-  items,
-  selectedItem,
-  selectItem,
-  EmptyPlaceholder,
-  ItemComponent,
-}) => {
+export const BaseList: FunctionComponent<{
+  items;
+  selectedItem;
+  selectItem;
+  EmptyPlaceholder;
+  ItemComponent;
+}> = ({ items, selectedItem, selectItem, EmptyPlaceholder, ItemComponent }) => {
   const scrollBarRef = useRef<Scrollbars>();
   const itemId = selectedItem?.uuid;
 

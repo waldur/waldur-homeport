@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { components } from 'react-select';
 import { Field } from 'redux-form';
 
@@ -18,7 +19,10 @@ const SingleValue = (props) => (
   </components.SingleValue>
 );
 
-export const TypeField = ({ issueTypes, isDisabled }) => (
+export const TypeField: FunctionComponent<{ issueTypes; isDisabled }> = ({
+  issueTypes,
+  isDisabled,
+}) => (
   <Field
     name="type"
     component={SelectField}

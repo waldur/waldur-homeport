@@ -1,6 +1,7 @@
+import { FunctionComponent } from 'react';
 import { OverlayTrigger, Tooltip as BootstrapTooltip } from 'react-bootstrap';
 
-export const HelpIcon = ({ helpText }) =>
+export const HelpIcon: FunctionComponent<{ helpText }> = ({ helpText }) =>
   helpText ? (
     <OverlayTrigger
       placement="top"

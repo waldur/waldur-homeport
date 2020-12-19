@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react';
 import ReactStars from 'react-rating-stars-component';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { IssueTypeIcon } from '@waldur/issues/types/IssueTypeIcon';
 
-export const StatusColumn = ({ row }) => (
+export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
   <>
     <IssueTypeIcon type={row.type} /> {row.status || 'N/A'}
     {row.feedback ? (

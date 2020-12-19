@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { get } from '@waldur/core/api';
@@ -31,7 +31,7 @@ const ResourceOpenDetailMarketplace = ({ row }) => {
   return <ResourceSummaryMarketplace resource={row} />;
 };
 
-export const ResourceOpenDetail = ({ row }) => {
+export const ResourceOpenDetail: FunctionComponent<{ row }> = ({ row }) => {
   return (
     <>
       {row.scope && <ResourceOpenDetailResources row={row} />}

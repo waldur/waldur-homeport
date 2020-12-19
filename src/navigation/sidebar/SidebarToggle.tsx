@@ -1,8 +1,8 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, FunctionComponent } from 'react';
 
 import { ngInjector } from '@waldur/core/services';
 
-export const SidebarToggle = () => {
+export const SidebarToggle: FunctionComponent = () => {
   useEffect(() => {
     return ngInjector.get('$transitions').onStart({}, function () {
       const bodyClasses = document.body.classList;

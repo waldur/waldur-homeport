@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -6,7 +7,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { NodeRoleField } from './NodeRoleField';
 
-export const NodeRoleGroup = (props) => (
+export const NodeRoleGroup: FunctionComponent<any> = (props) => (
   <FormGroup
     label={translate('Role')}
     required={true}

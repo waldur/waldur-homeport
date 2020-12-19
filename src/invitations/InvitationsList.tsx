@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -89,7 +90,7 @@ const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
 const InvitationsListComponent = enhance(TableComponent);
 
-export const InvitationsList = () => (
+export const InvitationsList: FunctionComponent = () => (
   <>
     <InvitationsFilter />
     <InvitationsListComponent />

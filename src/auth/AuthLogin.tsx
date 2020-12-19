@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -16,7 +16,7 @@ import { SignupButton } from './SignupButton';
 import { SignupForm } from './SignupForm';
 import { useAuthFeatures } from './useAuthFeatures';
 
-export const AuthLogin = () => {
+export const AuthLogin: FunctionComponent = () => {
   const features = useAuthFeatures();
   const locale = useSelector((state: { locale: string }) => state.locale);
   const providers = useMemo(getAuthProviders, [locale]);

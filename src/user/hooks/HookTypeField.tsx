@@ -1,9 +1,12 @@
-import { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-export const HookTypeField = ({ input, defaultValue }) => {
+export const HookTypeField: FunctionComponent<{ input; defaultValue }> = ({
+  input,
+  defaultValue,
+}) => {
   const options = useMemo(
     () => [
       {

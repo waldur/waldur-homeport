@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -18,7 +18,7 @@ const CatalogCreateDialog = lazyComponent(
 const createCatalogDialog = (cluster) =>
   openModalDialog(CatalogCreateDialog, { resolve: { cluster } });
 
-export const CatalogCreateButton = (props) => {
+export const CatalogCreateButton: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
   const callback = useCallback(
     () => dispatch(createCatalogDialog(props.cluster)),

@@ -1,7 +1,7 @@
-import { createElement } from 'react';
+import { createElement, FunctionComponent } from 'react';
 import { FormSection } from 'redux-form';
 
-export const ProviderFormBody = (props) => (
+export const ProviderFormBody: FunctionComponent<any> = (props) => (
   <FormSection name="details">
     {props.type &&
       props.type.component &&

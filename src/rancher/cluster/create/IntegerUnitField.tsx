@@ -1,6 +1,8 @@
+import { FunctionComponent } from 'react';
+
 import { FieldError } from '@waldur/form';
 
-export const IntegerUnitField = (props) => (
+export const IntegerUnitField: FunctionComponent<any> = (props) => (
   <>
     <div className="input-group" style={{ maxWidth: 200 }}>
       <input {...props.input} type="number" className="form-control" min="0" />

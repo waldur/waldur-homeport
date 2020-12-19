@@ -1,7 +1,13 @@
+import { FunctionComponent } from 'react';
+
 import { required } from '@waldur/core/validators';
 import { SelectField } from '@waldur/form';
 
-export const CreateSelectField = (label, name, options) => (
+export const CreateSelectField: FunctionComponent<any> = (
+  label,
+  name,
+  options,
+) => (
   <SelectField
     label={label}
     name={name}

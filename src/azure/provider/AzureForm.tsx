@@ -1,7 +1,12 @@
+import { FunctionComponent } from 'react';
+
 import { required } from '@waldur/core/validators';
 import { FormContainer, StringField } from '@waldur/form';
 
-export const AzureForm = ({ translate, container }) => (
+export const AzureForm: FunctionComponent<{ translate; container }> = ({
+  translate,
+  container,
+}) => (
   <FormContainer {...container}>
     <StringField
       name="subscription_id"

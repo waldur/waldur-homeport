@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { PaymentsList } from '@waldur/customer/payments/PaymentsList';
@@ -13,7 +13,7 @@ import {
 
 import { CustomerAccordion } from '../details/CustomerAccordion';
 
-export const PaymentsPanel = () => {
+export const PaymentsPanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   const [activePaymentProfile, setActivePaymentProfile] = useState(
     getActivePaymentProfile(customer.payment_profiles),

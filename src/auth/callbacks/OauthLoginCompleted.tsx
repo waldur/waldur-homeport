@@ -1,7 +1,7 @@
 import { useRouter, useCurrentStateAndParams } from '@uirouter/react';
 import Axios from 'axios';
 import Qs from 'qs';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -22,7 +22,7 @@ const getClientId = (provider) =>
     eduteams: ENV.plugins.WALDUR_AUTH_SOCIAL.EDUTEAMS_CLIENT_ID,
   }[provider]);
 
-export const OauthLoginCompleted = () => {
+export const OauthLoginCompleted: FunctionComponent = () => {
   const router = useRouter();
   const {
     params: { provider },
