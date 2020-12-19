@@ -90,7 +90,7 @@ export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
         <div className="comment-item__header m-b-sm">
           <div className="comment-item__title">
             <a onClick={openUserDialog}>{comment.author_name}</a>&#32;
-            <span>{translate('commented:')}</span>
+            <>{translate('commented:')}</>
           </div>
           <div className="comment-item__controls">
             {(user.is_staff || user.uuid === comment.author_uuid) && (

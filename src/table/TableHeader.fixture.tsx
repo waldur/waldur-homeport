@@ -2,11 +2,11 @@ import { shallow } from 'enzyme';
 
 import { TableHeader } from './TableHeader';
 
-const FullNameField = ({ row }) => <span>{row.full_name}</span>;
+const FullNameField = ({ row }) => <>{row.full_name}</>;
 
-const EmailField = ({ row }) => <span>{row.email}</span>;
+const EmailField = ({ row }) => <>{row.email}</>;
 
-const PhoneNumberField = ({ row }) => <span>{row.phone_number}</span>;
+const PhoneNumberField = ({ row }) => <>{row.phone_number}</>;
 
 export const renderWrapper = (columns, currentSorting?, expandableRow?) =>
   shallow(

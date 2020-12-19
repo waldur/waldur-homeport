@@ -26,7 +26,7 @@ const PureCloseDialogButton = ({
     className={className || 'btn btn-default'}
     onClick={dismiss}
   >
-    <span>{label || translate('Cancel')}</span>
+    <>{label || translate('Cancel')}</>
   </button>
 );
 

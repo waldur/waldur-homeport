@@ -12,27 +12,27 @@ const TableComponent = (props) => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => <span>{row.name}</span>,
+          render: ({ row }) => <>{row.name}</>,
         },
         {
           title: translate('Project'),
-          render: ({ row }) => <span>{row.project_name}</span>,
+          render: ({ row }) => <>{row.project_name}</>,
         },
         {
           title: translate('Namespace'),
-          render: ({ row }) => <span>{row.namespace_name}</span>,
+          render: ({ row }) => <>{row.namespace_name}</>,
         },
         {
           title: translate('Scale'),
-          render: ({ row }) => <span>{row.scale}</span>,
+          render: ({ row }) => <>{row.scale}</>,
         },
         {
           title: translate('Created'),
-          render: ({ row }) => <span>{formatDate(row.created)}</span>,
+          render: ({ row }) => <>{formatDate(row.created)}</>,
         },
         {
           title: translate('State'),
-          render: ({ row }) => <span>{row.runtime_state}</span>,
+          render: ({ row }) => <>{row.runtime_state}</>,
         },
         {
           title: translate('Actions'),

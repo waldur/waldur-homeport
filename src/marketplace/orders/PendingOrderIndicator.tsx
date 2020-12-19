@@ -163,7 +163,7 @@ const PendingOrderDropdownItem = (props) => (
           {props.order.items.map((item) => (
             <div key={item.uuid}>
               <p>
-                <span>{getNamePrefix(item.type)} </span>
+                <>{getNamePrefix(item.type)} </>
                 <strong>{item.attributes.name}</strong>
               </p>
               <span className="display-flex text-muted small">

@@ -11,7 +11,7 @@ const EventMessageField = ({ row }) => (
   <FormattedHtml html={eventsRegistry.formatEvent(row)} />
 );
 
-const EventDateField = ({ row }) => <span>{formatDateTime(row.created)}</span>;
+const EventDateField = ({ row }) => <>{formatDateTime(row.created)}</>;
 
 const TableComponent = (props) => {
   const { translate } = props;

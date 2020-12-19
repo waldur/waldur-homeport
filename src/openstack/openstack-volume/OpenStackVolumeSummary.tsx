@@ -22,7 +22,7 @@ const formatInstance = (props) =>
       label={props.resource.instance_name}
     />
   ) : (
-    <span>&ndash;</span>
+    <>&ndash;</>
   );
 
 const PureOpenStackVolumeSummary = (props: ResourceSummaryProps) => {

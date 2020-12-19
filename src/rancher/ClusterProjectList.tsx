@@ -10,15 +10,15 @@ const TableComponent = (props) => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => <span>{row.name}</span>,
+          render: ({ row }) => <>{row.name}</>,
         },
         {
           title: translate('Description'),
-          render: ({ row }) => <span>{row.description}</span>,
+          render: ({ row }) => <>{row.description}</>,
         },
         {
           title: translate('State'),
-          render: ({ row }) => <span>{row.runtime_state}</span>,
+          render: ({ row }) => <>{row.runtime_state}</>,
         },
       ]}
       verboseName={translate('projects')}

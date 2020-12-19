@@ -60,9 +60,9 @@ const ExpandableRow = ({ row }: DetailedInfo) => (
       </React.Fragment>
     ))}
     <h3 className="m-t-sm">{translate('Project description')}</h3>
-    <span>{renderFieldOrDash(row.project_description)}</span>
+    <>{renderFieldOrDash(row.project_description)}</>
     <h3 className="m-t-sm">{translate('Booking description')}</h3>
-    <span>{renderFieldOrDash(row.description)}</span>
+    <>{renderFieldOrDash(row.description)}</>
   </div>
 );
 

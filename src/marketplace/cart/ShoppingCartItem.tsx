@@ -33,7 +33,7 @@ const TosCell = (props: ShoppingCartItemProps) => (
         offering_terms_of_service={props.item.offering_terms_of_service}
       />
     ) : (
-      <span>&mdash;</span>
+      <>&mdash;</>
     )}
   </td>
 );

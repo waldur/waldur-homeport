@@ -210,7 +210,7 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OwnProps> = ({
               <td>
                 <strong>{translate('Project')}</strong>
               </td>
-              <td>{project ? project.name : <span>&mdash;</span>}</td>
+              <td>{project ? project.name : <>&mdash;</>}</td>
             </tr>
           </tbody>
         </Table>

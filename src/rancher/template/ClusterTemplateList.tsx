@@ -25,16 +25,16 @@ const TableComponent = (props) => {
         },
         {
           title: translate('Description'),
-          render: ({ row }) => <span>{row.description}</span>,
+          render: ({ row }) => <>{row.description}</>,
         },
         {
           title: translate('Catalog'),
-          render: ({ row }) => <span>{row.catalog_name}</span>,
+          render: ({ row }) => <>{row.catalog_name}</>,
           orderField: 'catalog_name',
         },
         {
           title: translate('State'),
-          render: ({ row }) => <span>{row.runtime_state}</span>,
+          render: ({ row }) => <>{row.runtime_state}</>,
         },
       ]}
       verboseName={translate('application templates')}

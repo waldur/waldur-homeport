@@ -42,7 +42,7 @@ export const WorkspaceLabel = () => {
   const workspace = useSelector(getWorkspace);
   return (
     <div className="workspace-label-container hidden-md-stable">
-      <span>{getWorkspaceAlias(workspace)}</span>
+      <>{getWorkspaceAlias(workspace)}</>
     </div>
   );
 };

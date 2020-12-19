@@ -43,23 +43,23 @@ export const TableComponent = (props) => {
     },
     {
       title: translate('Offering type'),
-      render: ({ row }) => <span>{row.offering_name}</span>,
+      render: ({ row }) => <>{row.offering_name}</>,
     },
     {
       title: translate('Client organization'),
-      render: ({ row }) => <span>{row.customer_name}</span>,
+      render: ({ row }) => <>{row.customer_name}</>,
     },
     {
       title: translate('Project'),
-      render: ({ row }) => <span>{row.project_name}</span>,
+      render: ({ row }) => <>{row.project_name}</>,
     },
     {
       title: translate('Category'),
-      render: ({ row }) => <span>{row.category_title}</span>,
+      render: ({ row }) => <>{row.category_title}</>,
     },
     {
       title: translate('Plan'),
-      render: ({ row }) => <span>{row.plan_name || 'N/A'}</span>,
+      render: ({ row }) => <>{row.plan_name || 'N/A'}</>,
     },
     {
       title: translate('Created at'),

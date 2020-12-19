@@ -7,12 +7,12 @@ import { Table, connectTable } from '@waldur/table/index';
 
 import { formatFilter } from './utils';
 
-const ImageNameField = ({ row }) => <span>{row.name}</span>;
+const ImageNameField = ({ row }) => <>{row.name}</>;
 const NumOfRunningInstancesField = ({ row }) => (
-  <span>{row.running_instances_count}</span>
+  <>{row.running_instances_count}</>
 );
 const NumOfCreatedInstancesField = ({ row }) => (
-  <span>{row.created_instances_count}</span>
+  <>{row.created_instances_count}</>
 );
 
 const TableComponent = (props) => {

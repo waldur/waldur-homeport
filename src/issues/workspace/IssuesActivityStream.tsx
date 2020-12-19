@@ -39,14 +39,14 @@ export const IssuesActivityStream = () => {
             <small>
               <i className="fa fa-list"></i>
             </small>{' '}
-            <span>{translate('See all')}</span>
+            <>{translate('See all')}</>
           </button>
 
           <button className="btn btn-default btn-xs">
             <small>
               <i className="fa fa-refresh"></i>
             </small>{' '}
-            <span>{translate('Refresh')}</span>
+            <>{translate('Refresh')}</>
           </button>
         </span>
 
@@ -84,7 +84,7 @@ export const IssuesActivityStream = () => {
                     ) : (
                       item.author_name
                     )}{' '}
-                    <span>{translate('commented on')}</span>{' '}
+                    <>{translate('commented on')}</>{' '}
                     <Link
                       state="issue.details"
                       params={{ key: item.issue_key }}

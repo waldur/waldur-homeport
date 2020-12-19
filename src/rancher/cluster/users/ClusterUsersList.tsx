@@ -12,11 +12,11 @@ const TableComponent = (props) => {
       columns={[
         {
           title: translate('Full name'),
-          render: ({ row }) => <span>{row.full_name}</span>,
+          render: ({ row }) => <>{row.full_name}</>,
         },
         {
           title: translate('Username'),
-          render: ({ row }) => <span>{row.user_name}</span>,
+          render: ({ row }) => <>{row.user_name}</>,
         },
         {
           title: translate('Cluster roles'),

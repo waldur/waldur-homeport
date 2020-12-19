@@ -21,7 +21,7 @@ const PureResetFormButton = ({
     className={className || 'btn btn-danger'}
     onClick={resetForm}
   >
-    <span>{label || translate('Reset')}</span>
+    <>{label || translate('Reset')}</>
   </button>
 );
 

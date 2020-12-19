@@ -24,17 +24,15 @@ const renderFieldOrDash = (field) => {
 };
 
 const PhoneNumberField = ({ row }) => (
-  <span>{renderFieldOrDash(row.phone_number)}</span>
+  <>{renderFieldOrDash(row.phone_number)}</>
 );
 
-const EmailField = ({ row }) => <span>{renderFieldOrDash(row.email)}</span>;
+const EmailField = ({ row }) => <>{renderFieldOrDash(row.email)}</>;
 
-const FullNameField = ({ row }) => (
-  <span>{renderFieldOrDash(row.full_name)}</span>
-);
+const FullNameField = ({ row }) => <>{renderFieldOrDash(row.full_name)}</>;
 
 const OrganizationField = ({ row }) => (
-  <span>{renderFieldOrDash(row.organization)}</span>
+  <>{renderFieldOrDash(row.organization)}</>
 );
 
 const StaffStatusField = ({ row }) => {

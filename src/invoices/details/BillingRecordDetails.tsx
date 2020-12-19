@@ -62,7 +62,7 @@ export const BillingRecordDetails = ({ invoice }: { invoice: Invoice }) => {
                     <th>{translate('Quantity')}</th>
                     <th>{translate('Unit price')}</th>
                     <th>
-                      <PriceTooltip /> <span>{translate('Total price')}</span>
+                      <PriceTooltip /> <>{translate('Total price')}</>
                     </th>
                   </tr>
                 </thead>
