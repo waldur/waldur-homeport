@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { wrapTooltip } from '@waldur/table/ActionButton';
@@ -10,12 +10,12 @@ interface ApproveButtonProps {
   className?: string;
 }
 
-export const ApproveButton: React.FC<ApproveButtonProps> = ({
+export const ApproveButton: FunctionComponent<ApproveButtonProps> = ({
   onClick,
   submitting,
   tooltip,
   className,
-}: ApproveButtonProps) =>
+}) =>
   wrapTooltip(
     tooltip,
     <button

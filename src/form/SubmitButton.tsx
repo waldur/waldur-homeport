@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 
 interface SubmitButtonProps {
   submitting: boolean;
@@ -8,9 +8,7 @@ interface SubmitButtonProps {
   onClick?(): void;
 }
 
-export const SubmitButton: React.FC<SubmitButtonProps> = (
-  props: SubmitButtonProps,
-) => (
+export const SubmitButton: FunctionComponent<SubmitButtonProps> = (props) => (
   <button
     type="submit"
     className={props.className}

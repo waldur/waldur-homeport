@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { InjectedFormProps } from 'redux-form';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -31,7 +32,9 @@ type TerminateDialogProps = OwnProps &
   StateProps &
   InjectedFormProps;
 
-export const PureTerminateDialog = (props: TerminateDialogProps) => (
+export const PureTerminateDialog: FunctionComponent<TerminateDialogProps> = (
+  props,
+) => (
   <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
       title={translate('Terminate resource {resourceName}', {

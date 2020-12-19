@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { FunctionComponent } from 'react';
 
 interface StepProps {
   active?: boolean;
@@ -9,7 +9,7 @@ interface StepProps {
   disabled?: boolean;
 }
 
-export const Step: React.FC<StepProps> = (props: StepProps) => (
+export const Step: FunctionComponent<StepProps> = (props) => (
   <a
     className={classNames('step', {
       active: props.active,

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { FileUploadField } from '@waldur/form';
@@ -15,7 +16,9 @@ const getImageUrl = (image) => {
   return '';
 };
 
-export const ImageUploadField = (props: FileUploadFieldProps) => {
+export const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (
+  props,
+) => {
   if (!props.input.value) {
     return <FileUploadField {...props} />;
   }

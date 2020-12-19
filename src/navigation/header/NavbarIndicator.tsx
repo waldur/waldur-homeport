@@ -1,7 +1,6 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
-
 import './NavbarIndicator.scss';
 
 interface NavbarIndicatorProps {
@@ -12,8 +11,8 @@ interface NavbarIndicatorProps {
   params?: Record<string, string>;
 }
 
-export const NavbarIndicator: React.FC<NavbarIndicatorProps> = (
-  props: NavbarIndicatorProps,
+export const NavbarIndicator: FunctionComponent<NavbarIndicatorProps> = (
+  props,
 ) => (
   <li className="navbar-indicator">
     <Link state={props.state} params={props.params}>

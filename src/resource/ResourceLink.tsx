@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 
@@ -8,7 +8,7 @@ interface ResourceLinkProps {
   label: React.ReactNode;
 }
 
-export const ResourceLink = (props: ResourceLinkProps) => (
+export const ResourceLink: FunctionComponent<ResourceLinkProps> = (props) => (
   <Link
     state="resource-details"
     params={{

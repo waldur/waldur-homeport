@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { OfferingButton } from '@waldur/marketplace/common/OfferingButton';
 
@@ -12,8 +14,8 @@ interface ShoppingCartUpdateButtonProps {
   icon?: string;
 }
 
-export const ShoppingCartUpdateButton = (
-  props: ShoppingCartUpdateButtonProps,
+export const ShoppingCartUpdateButton: FunctionComponent<ShoppingCartUpdateButtonProps> = (
+  props,
 ) => (
   <OfferingButton
     icon="fa fa-refresh"

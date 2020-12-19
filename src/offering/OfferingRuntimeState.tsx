@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { ResourceState } from '@waldur/marketplace/resources/types';
 
@@ -5,7 +7,7 @@ interface Props {
   state: ResourceState;
 }
 
-export const OfferingRuntimeState = (props: Props) => (
+export const OfferingRuntimeState: FunctionComponent<Props> = (props) => (
   <StateIndicator
     label={props.state}
     variant={

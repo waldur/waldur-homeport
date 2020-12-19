@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -8,8 +8,8 @@ interface TermsOfServiceProps {
   agreementDate: string;
 }
 
-export const TermsOfService: React.FC<TermsOfServiceProps> = (
-  props: TermsOfServiceProps,
+export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
+  props,
 ) => {
   return (
     <div className="form-group">

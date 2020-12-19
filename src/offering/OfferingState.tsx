@@ -1,5 +1,7 @@
+import { FunctionComponent } from 'react';
+
 import { StateIndicator } from '@waldur/core/StateIndicator';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { Offering } from './types';
 
@@ -7,7 +9,9 @@ interface OfferingStateProps extends TranslateProps {
   offering: Pick<Offering, 'state'>;
 }
 
-export const PureOfferingState = (props: OfferingStateProps) =>
+export const PureOfferingState: FunctionComponent<OfferingStateProps> = (
+  props,
+) =>
   props.offering ? (
     <StateIndicator
       variant={props.offering.state === 'Terminated' ? 'danger' : 'primary'}

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -14,8 +15,8 @@ interface IssueCommentDeleteDialogProps extends TranslateProps {
   };
 }
 
-export const PureIssueCommentDeleteDialog = (
-  props: IssueCommentDeleteDialogProps,
+export const PureIssueCommentDeleteDialog: FunctionComponent<IssueCommentDeleteDialogProps> = (
+  props,
 ) => {
   const { onSubmit, translate } = props;
   return (

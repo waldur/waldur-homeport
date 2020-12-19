@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { BookingsFilter } from '@waldur/booking/BookingsFilter';
@@ -8,7 +9,9 @@ interface OfferingBookingTab {
   offeringUuid: string;
 }
 
-export const OfferingBookingTab = ({ offeringUuid }: OfferingBookingTab) => (
+export const OfferingBookingTab: FunctionComponent<OfferingBookingTab> = ({
+  offeringUuid,
+}) => (
   <Row>
     <Col md={6}>
       <BookingsCalendar offeringUuid={offeringUuid} />

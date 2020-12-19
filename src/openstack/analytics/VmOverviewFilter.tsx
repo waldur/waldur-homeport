@@ -1,16 +1,18 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
-
 import './VmOverviewFilter.scss';
 
 interface VmOverviewFilterProps {
   serviceProviders: any[];
 }
 
-export const VmOverviewFilter = (props: VmOverviewFilterProps) => (
+export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
+  props,
+) => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline" id="vm-overview-filter">

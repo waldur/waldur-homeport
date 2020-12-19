@@ -1,5 +1,5 @@
 import { UISref } from '@uirouter/react';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface LinkProps {
   label?: React.ReactNode;
@@ -11,7 +11,7 @@ interface LinkProps {
   onClick?: () => void;
 }
 
-export const Link = (props: LinkProps) => (
+export const Link: FunctionComponent<LinkProps> = (props) => (
   <UISref to={props.state} params={props.params}>
     <a
       target={props.target}

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -23,7 +24,9 @@ interface OwnProps {
 
 export type UserDetailsViewProps = TranslateProps & StateProps & OwnProps;
 
-export const PureUserDetailsView = (props: UserDetailsViewProps) => (
+export const PureUserDetailsView: FunctionComponent<UserDetailsViewProps> = (
+  props,
+) => (
   <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
     {props.isVisibleForSupportOrStaff && (
       <Tab eventKey={1} title={props.translate('Details')}>

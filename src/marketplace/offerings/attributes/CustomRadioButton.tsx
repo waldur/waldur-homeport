@@ -1,13 +1,16 @@
+import { FunctionComponent } from 'react';
+
 import { FormField } from '@waldur/form/types';
 import { Choice } from '@waldur/marketplace/offerings/types';
-
 import './CustomRadioButton.scss';
 
 interface CustomRadioButtonProps extends FormField {
   choices: Choice[];
 }
 
-export const CustomRadioButton = (props: CustomRadioButtonProps) => (
+export const CustomRadioButton: FunctionComponent<CustomRadioButtonProps> = (
+  props,
+) => (
   <div className="custom-radio-button">
     {props.choices.map((choice, index) => (
       <label key={index}>

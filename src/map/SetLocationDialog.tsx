@@ -1,5 +1,5 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import { useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { MapContainer } from 'react-leaflet';
 
 import { SubmitButton } from '@waldur/form';
@@ -7,9 +7,9 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-import './SetLocationDialog.scss';
 import { GeoSearchControlElement } from './GeoSearchControlElement';
 import { OpenStreeMapTileLayer } from './OpenStreeMapTileLayer';
+import './SetLocationDialog.scss';
 import { GeolocationPoint } from './types';
 
 interface Data extends GeolocationPoint {
@@ -23,7 +23,9 @@ interface SetLocationDialogProps {
 
 const provider = new OpenStreetMapProvider();
 
-export const SetLocationDialog = (props: SetLocationDialogProps) => {
+export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = (
+  props,
+) => {
   const [coordinates, setCoordinates] = useState<GeolocationPoint>({
     latitude: props.resolve.data.latitude,
     longitude: props.resolve.data.longitude,

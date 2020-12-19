@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { FieldArray } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -17,7 +18,7 @@ interface AccountingStepProps {
   builtinComponents: OfferingComponent[];
 }
 
-export const AccountingStep = (props: AccountingStepProps) =>
+export const AccountingStep: FunctionComponent<AccountingStepProps> = (props) =>
   props.type ? (
     <>
       {props.showLimits && props.builtinComponents.length > 0 && (

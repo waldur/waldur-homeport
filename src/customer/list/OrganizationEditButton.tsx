@@ -1,4 +1,5 @@
 import { useRouter } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
@@ -8,7 +9,9 @@ interface OrganizationEditButtonProps {
   customer: Customer;
 }
 
-export const OrganizationEditButton = (props: OrganizationEditButtonProps) => {
+export const OrganizationEditButton: FunctionComponent<OrganizationEditButtonProps> = (
+  props,
+) => {
   const router = useRouter();
   return (
     <ActionButton

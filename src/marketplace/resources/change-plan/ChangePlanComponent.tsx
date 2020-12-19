@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { ChoicesTable } from '@waldur/form/ChoicesTable';
@@ -5,7 +6,7 @@ import { translate } from '@waldur/i18n';
 
 import { FetchedData } from './utils';
 
-export const ChangePlanComponent = (props: FetchedData) => (
+export const ChangePlanComponent: FunctionComponent<FetchedData> = (props) => (
   <div>
     {props.resource.plan_name ? (
       <p>

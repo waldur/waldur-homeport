@@ -1,6 +1,6 @@
-import { createElement } from 'react';
+import { createElement, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { isValid, getFormValues } from 'redux-form';
+import { getFormValues, isValid } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
@@ -14,13 +14,13 @@ import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/Offe
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
-import { Project, Customer } from '@waldur/workspace/types';
+import { Customer, Project } from '@waldur/workspace/types';
 
 import { pricesSelector } from './plan/utils';
-import { OrderSummaryProps, OfferingFormData } from './types';
-import { formatOrderItemForUpdate, formatOrderItemForCreate } from './utils';
+import { OfferingFormData, OrderSummaryProps } from './types';
+import { formatOrderItemForCreate, formatOrderItemForUpdate } from './utils';
 
-export const SummaryTable = (props: OrderSummaryProps) => (
+export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => (
   <table className="table offering-details-section-table">
     <tbody>
       <tr>

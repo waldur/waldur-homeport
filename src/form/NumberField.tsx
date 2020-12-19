@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { FormField } from './types';
 
 interface NumberFieldProps extends FormField {
@@ -8,7 +10,7 @@ interface NumberFieldProps extends FormField {
   placeholder?: string;
 }
 
-export const NumberField = (props: NumberFieldProps) => {
+export const NumberField: FunctionComponent<NumberFieldProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, parse, format, ...rest } = props;
   const control = (

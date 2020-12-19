@@ -1,4 +1,5 @@
 import type { EventInput } from '@fullcalendar/core';
+import { FunctionComponent } from 'react';
 
 import { Calendar } from './Calendar';
 
@@ -10,7 +11,9 @@ interface EditableCalendarProps {
   eventResize: (event) => void;
 }
 
-export const EditableCalendar = (props: EditableCalendarProps) => (
+export const EditableCalendar: FunctionComponent<EditableCalendarProps> = (
+  props,
+) => (
   <Calendar
     editable={true}
     selectable={true}

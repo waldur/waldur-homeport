@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -25,7 +26,9 @@ const openReferralsDialog = (offering: Offering) => {
   });
 };
 
-export const ReferralDetailsButton = (props: ReferralDetailsButtonProps) => {
+export const ReferralDetailsButton: FunctionComponent<ReferralDetailsButtonProps> = (
+  props,
+) => {
   const dispatch = useDispatch();
   return (
     <ActionButton

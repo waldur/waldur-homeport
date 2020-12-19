@@ -1,9 +1,11 @@
+import { FunctionComponent } from 'react';
+
 interface ComparisonItemRemoveButtonProps {
   onClick(): void;
 }
 
-export const ComparisonItemRemoveButton = (
-  props: ComparisonItemRemoveButtonProps,
+export const ComparisonItemRemoveButton: FunctionComponent<ComparisonItemRemoveButtonProps> = (
+  props,
 ) => (
   <a
     className="text-muted comparison-item-close"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 
@@ -11,7 +11,9 @@ interface ResourceDetailsLinkProps {
 
 const supportOfferingTemplate = 'Support.Offering';
 
-export const ResourceDetailsLink = (props: ResourceDetailsLinkProps) => {
+export const ResourceDetailsLink: FunctionComponent<ResourceDetailsLinkProps> = (
+  props,
+) => {
   if (props.item.resource_type === supportOfferingTemplate) {
     return (
       <Link

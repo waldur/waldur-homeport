@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
@@ -20,7 +22,7 @@ interface OrderItemProps {
   maxUnit: BillingPeriod;
 }
 
-export const OrderItem = (props: OrderItemProps) => {
+export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
   return (
     <tr>
       <td>

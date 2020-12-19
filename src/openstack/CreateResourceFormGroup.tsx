@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
@@ -8,11 +8,11 @@ interface CreateResourceFormGroupFormGroupProps {
   children: React.ReactNode;
 }
 
-export const CreateResourceFormGroup = ({
+export const CreateResourceFormGroup: FunctionComponent<CreateResourceFormGroupFormGroupProps> = ({
   label,
   required,
   children,
-}: CreateResourceFormGroupFormGroupProps) => (
+}) => (
   <>
     {label ? (
       <FormGroup

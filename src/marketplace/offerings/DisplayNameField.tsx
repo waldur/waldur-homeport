@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -9,7 +10,9 @@ interface DisplayNameFieldProps {
   name: string;
 }
 
-export const DisplayNameField = (props: DisplayNameFieldProps) => (
+export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
+  props,
+) => (
   <FormGroup
     label={translate('Display name')}
     required={true}

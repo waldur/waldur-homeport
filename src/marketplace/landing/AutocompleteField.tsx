@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { components } from 'react-select';
 import { AsyncPaginate } from 'react-select-async-paginate';
 
@@ -35,7 +36,9 @@ interface AutocompleteFieldProps {
   noOptionsMessage?: (message) => string;
 }
 
-export const AutocompleteField = (props: AutocompleteFieldProps) => (
+export const AutocompleteField: FunctionComponent<AutocompleteFieldProps> = (
+  props,
+) => (
   <AsyncPaginate
     placeholder={props.placeholder}
     loadOptions={props.loadOfferings}

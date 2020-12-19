@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { $state } from '@waldur/core/services';
 import { ActionList } from '@waldur/dashboard/ActionList';
@@ -48,7 +50,9 @@ const getTeamAction = (props: ProjectActionsProps) => {
   };
 };
 
-export const ProjectActions = (props: ProjectActionsProps) => {
+export const ProjectActions: FunctionComponent<ProjectActionsProps> = (
+  props,
+) => {
   const actions = [
     getDetailsAction(props.project),
     getTeamAction(props),

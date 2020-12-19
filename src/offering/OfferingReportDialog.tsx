@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -11,7 +13,9 @@ interface OfferingReportDialogProps {
   };
 }
 
-export const OfferingReportDialog = (props: OfferingReportDialogProps) => (
+export const OfferingReportDialog: FunctionComponent<OfferingReportDialogProps> = (
+  props,
+) => (
   <ModalDialog
     title={translate('Report details')}
     footer={<CloseDialogButton />}

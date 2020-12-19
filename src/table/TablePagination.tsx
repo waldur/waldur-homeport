@@ -1,4 +1,5 @@
 import { Pagination } from '@react-bootstrap/pagination';
+import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
 
@@ -8,7 +9,9 @@ interface TablePaginationProps extends PaginationProps {
   gotoPage: (page: any) => void;
 }
 
-export const TablePagination = (props: TablePaginationProps) => (
+export const TablePagination: FunctionComponent<TablePaginationProps> = (
+  props,
+) => (
   <div className="text-right">
     <Pagination
       prev={translate('Previous')}

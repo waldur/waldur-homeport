@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { InternalListField } from '@waldur/form/list-field/ListFieldInternal';
 import { ListFieldParameters } from '@waldur/form/list-field/types';
 
-export const ListField = (params: ListFieldParameters) => {
+export const ListField: FunctionComponent<ListFieldParameters> = (params) => {
   return (
     <div className="form-group">
       <label className="control-label col-sm-2">{params.label}</label>

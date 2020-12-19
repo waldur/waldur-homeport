@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { ReferralDetailsButton } from '@waldur/marketplace/referral/ReferralDetailsButton';
 import { Offering } from '@waldur/marketplace/types';
@@ -7,7 +9,9 @@ interface ReferralDetailsFieldProps {
   offering: Offering;
 }
 
-export const ReferralDetailsField = (props: ReferralDetailsFieldProps) =>
+export const ReferralDetailsField: FunctionComponent<ReferralDetailsFieldProps> = (
+  props,
+) =>
   props.offering.citation_count >= 0 ? (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <div style={{ marginRight: '10px', marginBottom: '-5px' }}>

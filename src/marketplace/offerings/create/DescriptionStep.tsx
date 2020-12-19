@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField } from '@waldur/form';
 import { TranslateProps } from '@waldur/i18n';
@@ -11,7 +13,9 @@ interface DescriptionStepProps extends TranslateProps {
   onCategoryChange(): void;
 }
 
-export const DescriptionStep = (props: DescriptionStepProps) => (
+export const DescriptionStep: FunctionComponent<DescriptionStepProps> = (
+  props,
+) => (
   <>
     <FormContainer
       submitting={false}

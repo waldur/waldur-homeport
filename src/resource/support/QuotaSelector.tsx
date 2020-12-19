@@ -1,6 +1,7 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 
-import { QuotaList, QuotaChoice } from './types';
+import { QuotaChoice, QuotaList } from './types';
 
 interface QuotaSelectorProps {
   quotas: QuotaList;
@@ -9,7 +10,7 @@ interface QuotaSelectorProps {
   disabled?: boolean;
 }
 
-export const QuotaSelector = (props: QuotaSelectorProps) => (
+export const QuotaSelector: FunctionComponent<QuotaSelectorProps> = (props) => (
   <Select
     value={props.value}
     onChange={props.handleChange}

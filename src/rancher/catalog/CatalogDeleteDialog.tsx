@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { FunctionComponent, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -42,7 +42,7 @@ const useCatalogDeleteDialog = (catalog) => {
   };
 };
 
-export const CatalogDeleteDialog = (props: OwnProps) => {
+export const CatalogDeleteDialog: FunctionComponent<OwnProps> = (props) => {
   const { submitting, deleteCatalog } = useCatalogDeleteDialog(
     props.resolve.catalog,
   );

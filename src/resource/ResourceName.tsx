@@ -1,8 +1,10 @@
+import { FunctionComponent } from 'react';
+
 import { Tooltip } from '@waldur/core/Tooltip';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { ResourceLink } from './ResourceLink';
-import { getResourceIcon, formatResourceType, formatDefault } from './utils';
+import { formatDefault, formatResourceType, getResourceIcon } from './utils';
 
 interface ResourceNameProps {
   resource: {
@@ -13,7 +15,7 @@ interface ResourceNameProps {
   };
 }
 
-export const ResourceIcon = (props: ResourceNameProps) => (
+export const ResourceIcon: FunctionComponent<ResourceNameProps> = (props) => (
   <Tooltip
     id={`resourceIcon-${props.resource.uuid}`}
     label={formatResourceType(props.resource)}

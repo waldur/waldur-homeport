@@ -1,10 +1,11 @@
-import { reduxForm, InjectedFormProps } from 'redux-form';
+import { FunctionComponent } from 'react';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import {
-  TextField,
-  FormContainer,
   FieldError,
+  FormContainer,
   SubmitButton,
+  TextField,
 } from '@waldur/form';
 import { StaticField } from '@waldur/form/StaticField';
 import { TranslateProps } from '@waldur/i18n';
@@ -21,7 +22,9 @@ interface ProjectUpdateFormProps extends TranslateProps, InjectedFormProps {
   project_type?: string;
 }
 
-export const PureProjectUpdateForm = (props: ProjectUpdateFormProps) => (
+export const PureProjectUpdateForm: FunctionComponent<ProjectUpdateFormProps> = (
+  props,
+) => (
   <form
     onSubmit={props.handleSubmit(props.updateProject)}
     className="form-horizontal"

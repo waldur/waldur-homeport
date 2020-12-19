@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -15,7 +16,7 @@ interface OverviewTabProps {
   offering: Offering;
 }
 
-export const OverviewTab = (props: OverviewTabProps) => {
+export const OverviewTab: FunctionComponent<OverviewTabProps> = (props) => {
   const hasLocation = props.offering.latitude && props.offering.longitude;
   const description = (
     <>

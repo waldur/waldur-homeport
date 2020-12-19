@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { Link } from '@waldur/core/Link';
 
 interface ProjectLinkProps {
@@ -7,7 +9,7 @@ interface ProjectLinkProps {
   };
 }
 
-export const ProjectLink = ({ row }: ProjectLinkProps) => (
+export const ProjectLink: FunctionComponent<ProjectLinkProps> = ({ row }) => (
   <Link
     state="project"
     params={{ uuid: row.project_uuid }}

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -33,7 +34,7 @@ interface Props {
   limitPeriod: LimitPeriodOption;
 }
 
-export const ComponentLimitPeriodField = (props: Props) => (
+export const ComponentLimitPeriodField: FunctionComponent<Props> = (props) => (
   <FormGroup label={translate('Limit period')}>
     <Field
       name="limit_period"

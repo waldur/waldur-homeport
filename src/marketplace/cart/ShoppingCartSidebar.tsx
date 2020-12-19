@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { DownloadLink } from '@waldur/core/DownloadLink';
@@ -17,7 +18,9 @@ interface ShoppingCartSidebarProps {
   project: Project;
 }
 
-export const PureShoppingCartSidebar = (props: ShoppingCartSidebarProps) =>
+export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps> = (
+  props,
+) =>
   props.customer ? (
     <aside className="shopping-cart-sidebar">
       <div className="shopping-cart-sidebar-title">

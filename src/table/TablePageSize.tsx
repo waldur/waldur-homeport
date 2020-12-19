@@ -1,7 +1,7 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 
 import { translate } from '@waldur/i18n';
-
 import './TablePageSize.scss';
 
 const options = [10, 25, 50, 100].map((v) => ({
@@ -14,7 +14,7 @@ interface TablePageSizeProps {
   updatePageSize: (value: {}) => void;
 }
 
-export const TablePageSize = (props: TablePageSizeProps) => {
+export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
   const pageSize = props.pageSize ? props.pageSize : 10;
   return (
     <div>

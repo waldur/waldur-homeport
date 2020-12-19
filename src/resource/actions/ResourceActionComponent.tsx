@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { Tooltip } from '@waldur/core/Tooltip';
@@ -38,8 +39,8 @@ const ActionItem = ({ action, actionKey, onSelect }) => (
   </MenuItem>
 );
 
-export const ResourceActionComponent = (
-  props: ResourceActionComponentProps,
+export const ResourceActionComponent: FunctionComponent<ResourceActionComponentProps> = (
+  props,
 ) => (
   <DropdownButton
     title={translate('Actions')}

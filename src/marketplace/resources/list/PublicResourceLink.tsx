@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { Link } from '@waldur/core/Link';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { Customer } from '@waldur/workspace/types';
@@ -19,10 +21,10 @@ const BackendIdTooltip = ({ backendId }) =>
     </>
   );
 
-export const PublicResourceLink = ({
+export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
   row,
   customer,
-}: PublicResourceLinkProps) => {
+}) => {
   const label = row.name || row.offering_name;
   return (
     <>

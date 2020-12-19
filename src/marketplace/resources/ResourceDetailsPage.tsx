@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -40,7 +41,9 @@ interface ResourceDetailsPageProps {
   customer?: Customer;
 }
 
-export const ResourceDetailsPage = ({ customer }: ResourceDetailsPageProps) => {
+export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = ({
+  customer,
+}) => {
   const {
     params: { resource_uuid },
   } = useCurrentStateAndParams();

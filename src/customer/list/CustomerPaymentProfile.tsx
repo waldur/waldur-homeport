@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { PaymentProfile } from '@waldur/workspace/types';
@@ -6,7 +8,9 @@ interface CustomerPaymentProfileProps {
   paymentProfiles: PaymentProfile[];
 }
 
-export const CustomerPaymentProfile = (props: CustomerPaymentProfileProps) => {
+export const CustomerPaymentProfile: FunctionComponent<CustomerPaymentProfileProps> = (
+  props,
+) => {
   if (!props.paymentProfiles) {
     return null;
   }

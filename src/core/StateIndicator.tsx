@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 
@@ -27,7 +28,7 @@ const wrapTooltip = (label, children) =>
     children
   );
 
-export const StateIndicator = (props: StateIndicatorProps) =>
+export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
   wrapTooltip(
     props.tooltip,
     <div className={`progress state-indicator m-b-none`}>

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { FieldArray, FormSection } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField } from '@waldur/form';
 import { StaticField } from '@waldur/form/StaticField';
-import { TranslateProps, translate } from '@waldur/i18n';
+import { translate, TranslateProps } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
 import { ProviderFormProps } from '@waldur/providers/types';
 
@@ -31,7 +31,9 @@ const ContainerProps = {
   clearOnUnmount: false,
 };
 
-export const ManagementStep = (props: ManagementStepProps) => (
+export const ManagementStep: FunctionComponent<ManagementStepProps> = (
+  props,
+) => (
   <>
     <FormContainer {...ContainerProps}>
       {props.editable ? (

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface DashboardHeaderProps {
   title: React.ReactNode;
   subtitle: React.ReactNode;
 }
 
-export const DashboardHeader = (props: DashboardHeaderProps) => (
+export const DashboardHeader: FunctionComponent<DashboardHeaderProps> = (
+  props,
+) => (
   <div
     style={{
       margin: -15,

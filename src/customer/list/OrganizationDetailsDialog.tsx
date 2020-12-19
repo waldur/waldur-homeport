@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { OrganizationDetails } from '@waldur/customer/list/OrganizationDetails';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
@@ -10,8 +12,8 @@ interface PureOrganizationDetailsDialogProps {
   };
 }
 
-export const OrganizationDetailsDialog = (
-  props: PureOrganizationDetailsDialogProps,
+export const OrganizationDetailsDialog: FunctionComponent<PureOrganizationDetailsDialogProps> = (
+  props,
 ) => (
   <ModalDialog
     title={translate('Organization details')}

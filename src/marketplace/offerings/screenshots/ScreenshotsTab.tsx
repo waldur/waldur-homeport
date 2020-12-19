@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -15,7 +16,9 @@ interface ScreenshotsTabProps {
   screenshots: Screenshot[];
 }
 
-export const ScreenshotsTab = (props: ScreenshotsTabProps) => {
+export const ScreenshotsTab: FunctionComponent<ScreenshotsTabProps> = (
+  props,
+) => {
   const dispatch = useDispatch();
   return (
     <Row>

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
@@ -22,9 +23,9 @@ import { UserDetails } from '@waldur/workspace/types';
 import { EmailField } from './EmailField';
 import { TermsOfService } from './TermsOfService';
 import {
-  tokenOptions,
   tokenLifetimeTooltip,
   TokenLifetimeWarning,
+  tokenOptions,
 } from './TokenLifetimeField';
 
 interface UserEditFormData {
@@ -54,7 +55,9 @@ interface UserEditFormProps extends TranslateProps, InjectedFormProps {
   protected?: boolean;
 }
 
-export const PureUserEditForm = (props: UserEditFormProps) => (
+export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
+  props,
+) => (
   <form
     onSubmit={props.handleSubmit(props.updateUser)}
     className="form-horizontal col-sm-10 col-xs-12"

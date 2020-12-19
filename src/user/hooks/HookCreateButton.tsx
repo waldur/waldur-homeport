@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n/translate';
@@ -9,7 +10,9 @@ interface HookCreateButtonProps {
   showHookUpdateDialog?(): void;
 }
 
-export const PureHookCreateButton = (props: HookCreateButtonProps) => (
+export const PureHookCreateButton: FunctionComponent<HookCreateButtonProps> = (
+  props,
+) => (
   <ActionButton
     title={translate('Add notification')}
     action={props.showHookUpdateDialog}

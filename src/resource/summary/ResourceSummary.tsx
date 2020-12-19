@@ -1,13 +1,17 @@
+import { FunctionComponent } from 'react';
+
 import * as ResourceSummaryRegistry from '@waldur/resource/summary/registry';
 
-import { ResourceSummaryBase } from './ResourceSummaryBase';
 import './resource-summary.scss';
+import { ResourceSummaryBase } from './ResourceSummaryBase';
 
 interface ResourceSummaryProps {
   resource: any;
 }
 
-export const ResourceSummary = (props: ResourceSummaryProps) => {
+export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
+  props,
+) => {
   const { component: SummaryComponent = ResourceSummaryBase, className } =
     ResourceSummaryRegistry.get(props.resource.resource_type) || {};
   return (

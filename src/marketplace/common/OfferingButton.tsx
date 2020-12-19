@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import React from 'react';
+import { FunctionComponent } from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
-
 import './OfferingButton.scss';
 
 interface OfferingButtonProps {
@@ -15,8 +14,8 @@ interface OfferingButtonProps {
   isAddingItem?: boolean;
 }
 
-export const OfferingButton: React.FC<OfferingButtonProps> = (
-  props: OfferingButtonProps,
+export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
+  props,
 ) => {
   if (props.flavor === 'primary') {
     return (

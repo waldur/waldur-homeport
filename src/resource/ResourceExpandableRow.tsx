@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
@@ -10,7 +12,9 @@ interface ResourceExpandableRowProps {
   rows: ExpandableRow[];
 }
 
-export const ResourceExpandableRow = (props: ResourceExpandableRowProps) =>
+export const ResourceExpandableRow: FunctionComponent<ResourceExpandableRowProps> = (
+  props,
+) =>
   props.rows.length > 0 ? (
     <dl className="dl-horizontal m-t-sm resource-details-table">
       {props.rows.map((row, index) => (

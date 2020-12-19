@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface RowProps {
   isVisible?: boolean;
@@ -6,7 +6,7 @@ interface RowProps {
   label: React.ReactNode;
 }
 
-export const Row = (props: RowProps) =>
+export const Row: FunctionComponent<RowProps> = (props) =>
   props.isVisible !== false && props.value ? (
     <tr>
       <td>

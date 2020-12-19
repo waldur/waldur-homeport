@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
 import { AnswerGroup } from './AnswerGroup';
-import { Question, Answers } from './types';
+import { Answers, Question } from './types';
 
 interface TableProps {
   answers: Answers;
@@ -86,12 +86,12 @@ const TableBody = ({
   </tbody>
 );
 
-export const AnswersTable = ({
+export const AnswersTable: FunctionComponent<TableProps> = ({
   questions,
   answers,
   setAnswers,
   readOnly,
-}: TableProps) => (
+}) => (
   <Table responsive={true} bordered={true} striped={true} className="m-t-md">
     <TableHeader />
     <TableBody

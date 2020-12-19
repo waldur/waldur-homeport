@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -5,7 +7,9 @@ import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 
 import { OrderItemDetailsField } from './OrderItemDetailsField';
 
-export const OrderItemDetailsHeader = (props: OrderItemDetailsProps) => (
+export const OrderItemDetailsHeader: FunctionComponent<OrderItemDetailsProps> = (
+  props,
+) => (
   <>
     {props.orderItem.marketplace_resource_uuid && (
       <OrderItemDetailsField label={translate('Resource UUID')}>

@@ -1,10 +1,11 @@
+import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
+import '@waldur/marketplace/landing/CategoryCard.scss';
 import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
 import { Category } from '@waldur/marketplace/types';
-import '@waldur/marketplace/landing/CategoryCard.scss';
 import { openModalDialog } from '@waldur/modal/actions';
 import { stateGo } from '@waldur/store/coreSaga';
 import { ORGANIZATION_ROUTE, PROJECT_ROUTE } from '@waldur/user/constants';
@@ -24,7 +25,7 @@ interface CategoryCardProps {
   category: Category;
 }
 
-export const CategoryCard = (props: CategoryCardProps) => {
+export const CategoryCard: FunctionComponent<CategoryCardProps> = (props) => {
   const dispatch = useDispatch();
   const customerPermissions: any[] = useSelector(getUserCustomerPermissions);
   const projectPermissions: any[] = useSelector(getUserProjectPermissions);
