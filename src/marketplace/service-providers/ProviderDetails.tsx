@@ -35,7 +35,7 @@ export const ProviderDetails = () => {
   }
 
   if (error) {
-    return <span>{translate('Unable to load service provider.')}</span>;
+    return <>{translate('Unable to load service provider.')}</>;
   }
   return <ProviderDetailsBody {...value} />;
 };

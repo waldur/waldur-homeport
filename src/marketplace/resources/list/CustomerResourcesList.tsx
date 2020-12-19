@@ -37,15 +37,15 @@ export const TableComponent = (props) => {
     },
     {
       title: translate('Project'),
-      render: ({ row }) => <span>{row.project_name}</span>,
+      render: ({ row }) => <>{row.project_name}</>,
     },
     {
       title: translate('Category'),
-      render: ({ row }) => <span>{row.category_title}</span>,
+      render: ({ row }) => <>{row.category_title}</>,
     },
     {
       title: translate('Created at'),
-      render: ({ row }) => <span>{formatDateTime(row.created)}</span>,
+      render: ({ row }) => <>{formatDateTime(row.created)}</>,
       orderField: 'created',
     },
     {
@@ -54,7 +54,7 @@ export const TableComponent = (props) => {
     },
     {
       title: translate('Plan'),
-      render: ({ row }) => <span>{row.plan_name || 'N/A'}</span>,
+      render: ({ row }) => <>{row.plan_name || 'N/A'}</>,
     },
     {
       title: translate('Actions'),

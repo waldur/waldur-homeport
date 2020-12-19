@@ -18,7 +18,7 @@ export const PureOpenStackSecurityGroupsLink = (props) =>
       <i className="fa fa-info-circle m-l-xs" aria-hidden="true" />
     </span>
   ) : (
-    <span>&mdash;</span>
+    <>&mdash;</>
   );
 
 export const openDetailsDialog = (securityGroups) =>

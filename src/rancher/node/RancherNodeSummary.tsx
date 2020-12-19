@@ -17,7 +17,7 @@ const formatInstance = (resource) =>
       label={resource.instance_name}
     />
   ) : (
-    <span>&ndash;</span>
+    <>&ndash;</>
   );
 
 const PureRancherNodeSummary = (props: ResourceSummaryProps) => {

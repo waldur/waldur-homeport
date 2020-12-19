@@ -12,7 +12,7 @@ interface PlanDetailsProps extends TranslateProps {
   showOfferingPlanDescription?(): void;
 }
 
-const renderValue = (value) => (value ? value : <span>&mdash;</span>);
+const renderValue = (value) => (value ? value : <>&mdash;</>);
 
 export const PlanDetails = withTranslation((props: PlanDetailsProps) => {
   const { plan_name, plan_description } = props.orderItem;

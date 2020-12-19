@@ -32,7 +32,7 @@ export const AppFooter = () => {
         </ul>
       </div>
       <div>
-        <span>{translate('Version')}</span>: {buildId}
+        <>{translate('Version')}</>: {buildId}
       </div>
     </footer>
   );

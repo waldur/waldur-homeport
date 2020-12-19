@@ -45,7 +45,7 @@ const TableComponent = (props: TableProps<Catalog> & OwnProps) => {
         },
         {
           title: translate('Description'),
-          render: ({ row }) => <span>{row.description}</span>,
+          render: ({ row }) => <>{row.description}</>,
         },
       ]}
       verboseName={translate('application templates')}

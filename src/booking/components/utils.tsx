@@ -19,7 +19,7 @@ export const bookingDataTemplate = (event) => {
         <label className="control-label col-xs-4" style={{ marginTop: '-7px' }}>
           {item.label}
         </label>
-        <span>{item.value ? item.value : 'N/A'}</span>
+        <>{item.value ? item.value : 'N/A'}</>
       </div>
     </div>
   ));

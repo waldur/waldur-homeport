@@ -18,23 +18,23 @@ import {
 import { OrganizationLink } from './OrganizationLink';
 
 const AbbreviationField = ({ row }) => (
-  <span>{renderFieldOrDash(row.abbreviation)}</span>
+  <>{renderFieldOrDash(row.abbreviation)}</>
 );
 
 const CreatedDateField = ({ row }) => (
-  <span>{renderFieldOrDash(formatDate(row.created))}</span>
+  <>{renderFieldOrDash(formatDate(row.created))}</>
 );
 
 const AccountingStartDateField = ({ row }) => (
-  <span>{renderFieldOrDash(formatDate(row.accounting_start_date))}</span>
+  <>{renderFieldOrDash(formatDate(row.accounting_start_date))}</>
 );
 
 const RegistrationCodeField = ({ row }) => (
-  <span>{renderFieldOrDash(row.registration_code)}</span>
+  <>{renderFieldOrDash(row.registration_code)}</>
 );
 
 const AgreementNumberField = ({ row }) => (
-  <span>{renderFieldOrDash(row.agreement_number)}</span>
+  <>{renderFieldOrDash(row.agreement_number)}</>
 );
 
 const renderTitleWithPriceTooltip = (title) => (

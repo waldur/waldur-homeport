@@ -26,11 +26,11 @@ const TableComponent = (props) => {
       },
       {
         title: translate('Description'),
-        render: ({ row }) => <span>{row.description}</span>,
+        render: ({ row }) => <>{row.description}</>,
       },
       {
         title: translate('URL'),
-        render: ({ row }) => <span>{row.catalog_url}</span>,
+        render: ({ row }) => <>{row.catalog_url}</>,
       },
       {
         title: translate('Actions'),

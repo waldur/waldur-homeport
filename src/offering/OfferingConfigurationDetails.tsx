@@ -2,7 +2,7 @@ import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/O
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 import { BooleanField } from '@waldur/table/BooleanField';
 
-const renderValue = (value) => (value ? value : <span>&mdash;</span>);
+const renderValue = (value) => (value ? value : <>&mdash;</>);
 
 export const OfferingConfigurationDetails = (props: OrderItemDetailsProps) => {
   const options = props.offering.options.options || {};
