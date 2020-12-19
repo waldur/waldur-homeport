@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import Select from 'react-select';
 import { Field } from 'redux-form';
 
@@ -9,7 +10,7 @@ interface Props {
   options: AccountingPeriodOption[];
 }
 
-export const AccountingPeriodField = (props: Props) => (
+export const AccountingPeriodField: FunctionComponent<Props> = (props) => (
   <Field
     name="accounting_period"
     component={(prop) => (

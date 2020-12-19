@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 interface FilterChoice {
@@ -13,7 +13,9 @@ interface ToogleButtonFilterProps {
   onChange(values: any[]): void;
 }
 
-export const ToogleButtonFilter = (props: ToogleButtonFilterProps) => (
+export const ToogleButtonFilter: FunctionComponent<ToogleButtonFilterProps> = (
+  props,
+) => (
   <ToggleButtonGroup
     type="checkbox"
     defaultValue={props.defaultValue}

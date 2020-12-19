@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -38,7 +39,9 @@ const TosCell = (props: ShoppingCartItemProps) => (
   </td>
 );
 
-export const ShoppingCartItem = (props: ShoppingCartItemProps) => {
+export const ShoppingCartItem: FunctionComponent<ShoppingCartItemProps> = (
+  props,
+) => {
   const showPrice = useSelector(showPriceSelector);
   return (
     <tr>

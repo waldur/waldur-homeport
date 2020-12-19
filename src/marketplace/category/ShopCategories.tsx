@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
 
@@ -14,7 +16,9 @@ const getSortedCategoriesByTitle = (categories: Category[]): Category[] =>
     a.title > b.title ? 1 : b.title > a.title ? -1 : 0,
   );
 
-export const ShopCategories = (props: ShopCategoriesProps) => {
+export const ShopCategories: FunctionComponent<ShopCategoriesProps> = (
+  props,
+) => {
   const sortedCategories = getSortedCategoriesByTitle(props.categories);
   return (
     <section>

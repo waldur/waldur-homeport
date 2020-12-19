@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -18,7 +19,9 @@ interface OfferingHeaderProps extends TranslateProps {
   showIssueLink: boolean;
 }
 
-export const PureOfferingHeader = (props: OfferingHeaderProps) => (
+export const PureOfferingHeader: FunctionComponent<OfferingHeaderProps> = (
+  props,
+) => (
   <dl className="dl-horizontal resource-details-table col-sm-12">
     <Field label={props.translate('Name')}>{props.offering.name}</Field>
 

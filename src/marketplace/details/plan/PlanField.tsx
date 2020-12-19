@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
@@ -7,7 +9,7 @@ interface PlanFieldProps {
   offering?: Offering;
 }
 
-export const PlanField = (props: PlanFieldProps) =>
+export const PlanField: FunctionComponent<PlanFieldProps> = (props) =>
   props.offering.plans.length > 0 ? (
     <div className="form-group">
       <label className="control-label col-sm-3">

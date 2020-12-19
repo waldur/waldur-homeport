@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
@@ -17,7 +18,9 @@ interface OfferingCostChartProps {
   uniqueFormId: string;
 }
 
-export const OfferingCostsChart = (props: OfferingCostChartProps) => {
+export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = (
+  props,
+) => {
   const accountRunningState = useSelector((state) =>
     getAccountingRunningFieldValue(state, props.uniqueFormId),
   );

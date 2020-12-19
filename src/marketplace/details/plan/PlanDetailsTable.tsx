@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { connect, useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/services';
@@ -52,8 +52,8 @@ const UsageRows = (props: {
     </>
   );
 
-export const PureDetailsTable: React.FC<PlanDetailsTableProps> = (
-  props: PlanDetailsTableProps,
+export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
+  props,
 ) => {
   if (props.components.length === 0) {
     return null;

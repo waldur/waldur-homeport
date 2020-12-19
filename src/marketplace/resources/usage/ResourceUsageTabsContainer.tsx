@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -12,10 +13,10 @@ interface ResourceUsageTabsContainerProps {
   resourceUuid: string;
 }
 
-export const ResourceUsageTabsContainer = ({
+export const ResourceUsageTabsContainer: FunctionComponent<ResourceUsageTabsContainerProps> = ({
   offeringUuid,
   resourceUuid,
-}: ResourceUsageTabsContainerProps) => {
+}) => {
   const { loading, error, value } = useAsync(
     () => getComponentsAndUsages(offeringUuid, resourceUuid),
     [offeringUuid, resourceUuid],

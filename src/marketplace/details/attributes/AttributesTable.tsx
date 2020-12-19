@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 
 import { Section } from '@waldur/marketplace/types';
@@ -9,7 +10,9 @@ interface AttributesTableProps {
   attributes: any;
 }
 
-export const AttributesTable = (props: AttributesTableProps) => (
+export const AttributesTable: FunctionComponent<AttributesTableProps> = (
+  props,
+) => (
   <Table bordered={true} hover={true} responsive={true}>
     <tbody>
       {props.sections.map((section, index) => (

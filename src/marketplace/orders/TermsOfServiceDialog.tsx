@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -9,7 +11,9 @@ interface TermsOfServiceDialogProps {
   };
 }
 
-export const TermsOfServiceDialog = (props: TermsOfServiceDialogProps) => (
+export const TermsOfServiceDialog: FunctionComponent<TermsOfServiceDialogProps> = (
+  props,
+) => (
   <ModalDialog
     title={translate('Terms of Service')}
     footer={<CloseDialogButton />}

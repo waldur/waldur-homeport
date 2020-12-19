@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { ArticleCodeField } from '../ArticleCodeField';
 import { DisplayNameField } from '../DisplayNameField';
 import { InternalNameField } from '../InternalNameField';
@@ -11,7 +13,7 @@ interface Props {
   removeOfferingQuotas(): void;
 }
 
-export const ComponentForm = (props: Props) => (
+export const ComponentForm: FunctionComponent<Props> = (props) => (
   <>
     <InternalNameField name="type" />
     <DisplayNameField name="name" />

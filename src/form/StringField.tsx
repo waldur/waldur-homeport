@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { FormField } from './types';
 
 interface StringFieldProps extends FormField {
@@ -7,7 +9,7 @@ interface StringFieldProps extends FormField {
   pattern?: string;
 }
 
-export const StringField = (props: StringFieldProps) => {
+export const StringField: FunctionComponent<StringFieldProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
   return (

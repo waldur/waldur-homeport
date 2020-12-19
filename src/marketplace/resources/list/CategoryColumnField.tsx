@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { formatFilesize } from '@waldur/core/utils';
 import { CategoryColumn } from '@waldur/marketplace/types';
 
@@ -9,7 +11,9 @@ interface CategoryColumnFieldProps {
   column: CategoryColumn;
 }
 
-export const CategoryColumnField = (props: CategoryColumnFieldProps) => {
+export const CategoryColumnField: FunctionComponent<CategoryColumnFieldProps> = (
+  props,
+) => {
   const metadata = props.row.backend_metadata;
   const value = props.column.attribute
     ? metadata[props.column.attribute]

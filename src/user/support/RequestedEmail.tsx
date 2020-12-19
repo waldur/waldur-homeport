@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-import { StaticField } from './StaticField';
 import './RequestedEmail.scss';
+import { StaticField } from './StaticField';
 
 interface RequestedEmailProps {
   requestedEmail: string;
@@ -11,7 +12,9 @@ interface RequestedEmailProps {
   waiting: boolean;
 }
 
-export const RequestedEmail = (props: RequestedEmailProps) => (
+export const RequestedEmail: FunctionComponent<RequestedEmailProps> = (
+  props,
+) => (
   <div id="requested-email-container">
     <StaticField
       label={translate('Requested email')}

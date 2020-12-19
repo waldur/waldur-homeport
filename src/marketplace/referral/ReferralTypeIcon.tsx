@@ -1,10 +1,14 @@
+import { FunctionComponent } from 'react';
+
 import { Tooltip } from '@waldur/core/Tooltip';
 
 interface ReferralTypeIconProps {
   resourceType: string;
 }
 
-export const ReferralTypeIcon = (props: ReferralTypeIconProps) => {
+export const ReferralTypeIcon: FunctionComponent<ReferralTypeIconProps> = (
+  props,
+) => {
   /* Available values of resource type:
    * https://schema.datacite.org/meta/kernel-4.1/include/datacite-resourceType-v4.1.xsd
    */

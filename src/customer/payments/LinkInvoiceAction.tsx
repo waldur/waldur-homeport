@@ -1,6 +1,6 @@
-import { useCallback, useEffect } from 'react';
+import { FunctionComponent, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useBoolean, useAsyncFn } from 'react-use';
+import { useAsyncFn, useBoolean } from 'react-use';
 
 import { getAll } from '@waldur/core/api';
 import { InvoicesDropdown } from '@waldur/customer/payments/InvoicesDropdown';
@@ -18,7 +18,9 @@ const loadInvoices = (customer: Customer) =>
     params: { customer: customer.url, state: 'paid' },
   });
 
-export const LinkInvoiceAction = (props: LinkInvoiceActionProps) => {
+export const LinkInvoiceAction: FunctionComponent<LinkInvoiceActionProps> = (
+  props,
+) => {
   const customer = useSelector(getCustomer);
 
   const [{ loading, error, value }, getInvoices] = useAsyncFn(

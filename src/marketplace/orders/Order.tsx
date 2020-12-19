@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -18,7 +18,7 @@ interface OrderProps {
   project_uuid: string;
 }
 
-export const Order = (props: OrderProps) => {
+export const Order: FunctionComponent<OrderProps> = (props) => {
   const showPrice = useSelector(showPriceSelector);
   const maxUnit = useMemo(() => getMaxUnit(props.items), [props.items]);
   return (

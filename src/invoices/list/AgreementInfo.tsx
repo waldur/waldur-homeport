@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
@@ -14,7 +14,7 @@ interface AgreementInfoProps {
   paymentProfiles?: PaymentProfile[];
 }
 
-export const AgreementInfo = (props: AgreementInfoProps) => {
+export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
   const customer = useSelector(getCustomer);
   const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
     customer ? customer.payment_profiles : props.paymentProfiles,

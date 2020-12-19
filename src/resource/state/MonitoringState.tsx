@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
 
 export type MonitoringStateType = 'Unregistered' | 'Erred' | 'Warning' | 'OK';
@@ -15,7 +17,9 @@ interface MonitoringStateIndicatorProps {
   };
 }
 
-export const MonitoringState = (props: MonitoringStateIndicatorProps) => (
+export const MonitoringState: FunctionComponent<MonitoringStateIndicatorProps> = (
+  props,
+) => (
   <StateIndicator
     label={props.resource.monitoring_state}
     variant={LABEL_CLASSES[props.resource.monitoring_state] || 'info'}

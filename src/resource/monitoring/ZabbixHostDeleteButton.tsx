@@ -1,7 +1,8 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
+import { translate, TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { deleteRequest } from './actions';
 import { getMonitoringState } from './selectors';
@@ -16,8 +17,8 @@ interface ZabbixHostDeleteButtonProps extends TranslateProps {
 const canDeleteHost = (host) =>
   host && (host.state === 'OK' || host.state === 'Erred');
 
-export const PureZabbixHostDeleteButton = (
-  props: ZabbixHostDeleteButtonProps,
+export const PureZabbixHostDeleteButton: FunctionComponent<ZabbixHostDeleteButtonProps> = (
+  props,
 ) =>
   canDeleteHost(props.host) ? (
     <button

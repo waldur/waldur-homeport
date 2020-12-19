@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -22,7 +23,9 @@ const LoadingErred = ({ loadData }) => (
   </div>
 );
 
-export const CategoryResourcesList = (props: CategoryResourcesListProps) => {
+export const CategoryResourcesList: FunctionComponent<CategoryResourcesListProps> = (
+  props,
+) => {
   const [{ loading, error, value }, callback] = useAsyncFn(
     () => loadCategories(props.scopeType, props.scope),
     [props.scope],

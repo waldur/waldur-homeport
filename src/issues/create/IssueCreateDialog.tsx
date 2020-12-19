@@ -1,23 +1,23 @@
-import { useMemo, useCallback, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
-import { formValueSelector, change } from 'redux-form';
+import { change, formValueSelector } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { getTemplates, IssueTemplate } from '@waldur/issues/api';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { getShowAllTypes, getIssueTypes } from '../types/utils';
+import { getIssueTypes, getShowAllTypes } from '../types/utils';
 
 import { ISSUE_CREATION_FORM_ID } from './constants';
 import { IssueCreateForm } from './IssueCreateForm';
 import {
-  IssueOptions,
-  IssueTypeOption,
   CreateIssueProps,
-  IssueRequestPayload,
   IssueFormData,
+  IssueOptions,
+  IssueRequestPayload,
+  IssueTypeOption,
 } from './types';
 import { sendIssueCreateRequest } from './utils';
 
@@ -76,7 +76,9 @@ const createIssue = async (
   await sendIssueCreateRequest(payload, dispatch, formData.files);
 };
 
-export const IssueCreateDialog = ({ resolve }: CreateIssueDialogProps) => {
+export const IssueCreateDialog: FunctionComponent<CreateIssueDialogProps> = ({
+  resolve,
+}) => {
   const options = useMemo(
     () => ({ ...getDefaultOptions(), ...resolve.options }),
     [resolve.options],

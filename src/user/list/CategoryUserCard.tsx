@@ -1,6 +1,9 @@
-import '@waldur/marketplace/landing/CategoryCard.scss';
+import { FunctionComponent } from 'react';
+
 import { Category } from '@waldur/marketplace-checklist/types';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
+
+import '@waldur/marketplace/landing/CategoryCard.scss';
 
 import { CategoryLink } from './CategoryLink';
 
@@ -8,7 +11,9 @@ interface CategoryUserCardProps {
   category: Category;
 }
 
-export const CategoryUserCard = (props: CategoryUserCardProps) => (
+export const CategoryUserCard: FunctionComponent<CategoryUserCardProps> = (
+  props,
+) => (
   <div className="category-card" style={{ height: '122px' }}>
     <CategoryLink
       className="category-thumb"

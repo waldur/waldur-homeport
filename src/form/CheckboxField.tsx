@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { FormField } from './types';
 
 interface CheckboxFieldProps extends FormField {
@@ -5,7 +7,7 @@ interface CheckboxFieldProps extends FormField {
   checked?: boolean;
 }
 
-export const CheckboxField = (props: CheckboxFieldProps) => {
+export const CheckboxField: FunctionComponent<CheckboxFieldProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
   return <input {...props.input} type="checkbox" {...rest} />;

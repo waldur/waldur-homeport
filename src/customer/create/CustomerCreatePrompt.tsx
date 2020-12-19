@@ -1,6 +1,7 @@
-import { InjectedFormProps, Field } from 'redux-form';
+import { FunctionComponent } from 'react';
+import { Field, InjectedFormProps } from 'redux-form';
 
-import { SubmitButton, FieldError } from '@waldur/form';
+import { FieldError, SubmitButton } from '@waldur/form';
 import {
   RadioButtonChoice,
   RadioButtonField,
@@ -18,7 +19,9 @@ interface CustomerCreatePromptProps extends TranslateProps, InjectedFormProps {
   onSubmit(data: { [key: string]: string }): void;
 }
 
-export const CustomerCreatePrompt = (props: CustomerCreatePromptProps) => {
+export const CustomerCreatePrompt: FunctionComponent<CustomerCreatePromptProps> = (
+  props,
+) => {
   const {
     renderServiceProvider,
     translate,

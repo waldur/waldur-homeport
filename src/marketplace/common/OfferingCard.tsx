@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { FunctionComponent } from 'react';
 
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
@@ -14,7 +15,7 @@ interface OfferingCardProps {
   offering: Offering;
 }
 
-export const OfferingCard = (props: OfferingCardProps) =>
+export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
   wrapTooltip(
     props.offering.state === 'Paused' && props.offering.paused_reason,
     <div

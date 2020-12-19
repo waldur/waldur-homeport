@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { Section } from '@waldur/marketplace/types';
 
 import { AttributeRow } from './AttributeRow';
@@ -8,7 +10,9 @@ interface AttributeSectionProps {
   hideHeader: boolean;
 }
 
-export const AttributeSection = (props: AttributeSectionProps) => (
+export const AttributeSection: FunctionComponent<AttributeSectionProps> = (
+  props,
+) => (
   <>
     {!props.hideHeader && (
       <tr className="gray-bg">

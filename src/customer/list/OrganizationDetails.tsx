@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
@@ -7,7 +9,9 @@ interface OrganizationDetailsProps {
   customer: Customer;
 }
 
-export const OrganizationDetails = (props: OrganizationDetailsProps) => (
+export const OrganizationDetails: FunctionComponent<OrganizationDetailsProps> = (
+  props,
+) => (
   <dl className="dl-horizontal resource-details-table col-sm-12">
     <Field label={translate('Name')} value={props.customer.name} />
     <Field label={translate('UUID')} value={props.customer.uuid} />

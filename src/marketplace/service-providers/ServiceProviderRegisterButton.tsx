@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { dateTime } from '@waldur/core/utils';
 import { TranslateProps } from '@waldur/i18n';
@@ -12,8 +14,8 @@ interface ServiceProviderRegisterButtonProps extends TranslateProps {
   registerServiceProvider?(): void;
 }
 
-export const ServiceProviderRegisterButton = (
-  props: ServiceProviderRegisterButtonProps,
+export const ServiceProviderRegisterButton: FunctionComponent<ServiceProviderRegisterButtonProps> = (
+  props,
 ) => {
   if (props.loading) {
     return <LoadingSpinner />;

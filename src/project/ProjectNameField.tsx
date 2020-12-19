@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { StringField } from '@waldur/form';
 import { TranslateProps } from '@waldur/i18n';
 
@@ -20,7 +22,9 @@ const checkDuplicate = (value, props) =>
 const validateProjectName = (value, _, props) =>
   checkDuplicate(value, props) || checkPattern(value, props);
 
-export const ProjectNameField = ({ translate }: TranslateProps) => (
+export const ProjectNameField: FunctionComponent<TranslateProps> = ({
+  translate,
+}) => (
   <StringField
     label={translate('Project name')}
     name="name"

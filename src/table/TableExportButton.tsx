@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Dropdown, DropdownMenu, DropdownToggle } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -6,7 +7,7 @@ interface Props {
   exportAs?: (format: string) => void;
 }
 
-export const TableExportButton = ({ exportAs }: Props) => {
+export const TableExportButton: FunctionComponent<Props> = ({ exportAs }) => {
   const exporters = [
     {
       label: translate('Copy to clipboard'),

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -7,7 +8,6 @@ import { issueAttachmentsGet } from '@waldur/issues/attachments/actions';
 import { getIsLoading as getAttachmentsIsLoading } from '@waldur/issues/attachments/selectors';
 import { issueCommentsGet } from '@waldur/issues/comments/actions';
 import { getIsLoading as getCommentsIsLoading } from '@waldur/issues/comments/selectors';
-
 import './IssueReload.scss';
 
 interface PureIssueReloadProps extends TranslateProps {
@@ -16,7 +16,9 @@ interface PureIssueReloadProps extends TranslateProps {
   fetchData(): void;
 }
 
-export const PureIssueReload = (props: PureIssueReloadProps) => {
+export const PureIssueReload: FunctionComponent<PureIssueReloadProps> = (
+  props,
+) => {
   const { fetchData, loading, translate } = props;
 
   return (

@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -8,7 +10,7 @@ interface MessageDialogProps {
   };
 }
 
-export const MessageDialog = (props: MessageDialogProps) => (
+export const MessageDialog: FunctionComponent<MessageDialogProps> = (props) => (
   <ModalDialog title={props.resolve.title} footer={<CloseDialogButton />}>
     {props.resolve.message}
   </ModalDialog>

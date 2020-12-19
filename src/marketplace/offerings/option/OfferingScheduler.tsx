@@ -1,14 +1,14 @@
+import { FunctionComponent } from 'react';
 import { Col, Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { WrappedFieldArrayProps, formValueSelector } from 'redux-form';
+import { formValueSelector, WrappedFieldArrayProps } from 'redux-form';
 
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
 import { CalendarSettings } from '@waldur/booking/components/CalendarSettings';
-import { BookingProps, State, ConfigProps } from '@waldur/booking/types';
+import { BookingProps, ConfigProps, State } from '@waldur/booking/types';
 import { deleteCalendarBooking } from '@waldur/booking/utils';
-import { withTranslation, TranslateProps } from '@waldur/i18n';
-
+import { TranslateProps, withTranslation } from '@waldur/i18n';
 import './OfferingScheduler.scss';
 
 type OfferingSchedulerProps = TranslateProps &
@@ -19,7 +19,9 @@ type OfferingSchedulerProps = TranslateProps &
     config: ConfigProps;
   };
 
-export const PureOfferingScheduler = (props: OfferingSchedulerProps) => (
+export const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
+  props,
+) => (
   <div className="form-group ">
     <Col smOffset={2} sm={8}>
       <Panel>

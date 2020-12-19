@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { TranslateProps } from '@waldur/i18n';
 import { formatTemplate } from '@waldur/i18n/translate';
 
@@ -12,7 +14,9 @@ interface MonitoringGuideProps extends TranslateProps {
   };
 }
 
-export const MonitoringGuide = (props: MonitoringGuideProps) => {
+export const MonitoringGuide: FunctionComponent<MonitoringGuideProps> = (
+  props,
+) => {
   const formatGuide = (template) =>
     formatTemplate(template, {
       ZABBIX_CLIENT_ID: props.resource.uuid,

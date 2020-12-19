@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
 import { Resource } from '@waldur/marketplace/resources/types';
@@ -20,7 +21,7 @@ interface Props {
   >;
 }
 
-export const ResourceUsageButton = ({ row }: Props) => {
+export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
   if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
     return 'N/A';
   }

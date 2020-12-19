@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -18,8 +18,8 @@ import './IssueCommentItem.scss';
 import { IssueCommentsFormContainer } from './IssueCommentsFormContainer';
 import {
   getIsDeleting,
-  getIsUiDisabled,
   getIsFormToggleDisabled,
+  getIsUiDisabled,
   getUser,
 } from './selectors';
 import { Comment, User } from './types';
@@ -46,7 +46,9 @@ interface PureIssueCommentItemProps extends TranslateProps {
   toggleForm(): void;
 }
 
-export const PureIssueCommentItem = (props: PureIssueCommentItemProps) => {
+export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> = (
+  props,
+) => {
   const {
     comment,
     attachments,

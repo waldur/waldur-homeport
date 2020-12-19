@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
 import { IssueCommentItem } from './IssueCommentItem';
@@ -8,7 +10,9 @@ interface PureIssueCommentsListProps extends TranslateProps {
   erred?: boolean;
 }
 
-export const PureIssueCommentsList = (props: PureIssueCommentsListProps) => {
+export const PureIssueCommentsList: FunctionComponent<PureIssueCommentsListProps> = (
+  props,
+) => {
   const { comments, erred, translate } = props;
 
   if (erred) {

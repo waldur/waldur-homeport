@@ -1,10 +1,14 @@
+import { FunctionComponent } from 'react';
+
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 import { BooleanField } from '@waldur/table/BooleanField';
 
 const renderValue = (value) => (value ? value : <>&mdash;</>);
 
-export const OfferingConfigurationDetails = (props: OrderItemDetailsProps) => {
+export const OfferingConfigurationDetails: FunctionComponent<OrderItemDetailsProps> = (
+  props,
+) => {
   const options = props.offering.options.options || {};
   const attributes = props.orderItem.attributes;
   const keys = Object.keys(options).filter(

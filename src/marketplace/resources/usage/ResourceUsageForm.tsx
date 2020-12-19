@@ -1,11 +1,12 @@
-import { InjectedFormProps, Field } from 'redux-form';
+import { FunctionComponent } from 'react';
+import { Field, InjectedFormProps } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,
   NumberField,
-  TextField,
   SelectField,
+  TextField,
 } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
@@ -38,7 +39,9 @@ const SummaryField = ({ label, value }) => (
   </p>
 );
 
-export const ResourceUsageForm = (props: ResourceUsageFormProps) => {
+export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
+  props,
+) => {
   const components = [];
   props.components.forEach((component: OfferingComponent, index) => {
     components.push(

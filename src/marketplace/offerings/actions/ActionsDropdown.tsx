@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Dropdown, DropdownMenu, DropdownToggle } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -8,7 +9,9 @@ interface ActionsDropdownProps {
   actions: OfferingAction[];
 }
 
-export const ActionsDropdown = ({ actions }: ActionsDropdownProps) => (
+export const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
+  actions,
+}) => (
   <Dropdown id="offering-actions" disabled={actions.length === 0}>
     <DropdownToggle className="btn-sm">{translate('Actions')}</DropdownToggle>
     <DropdownMenu>

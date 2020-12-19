@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 
@@ -10,7 +10,7 @@ export interface FieldProps {
   valueClass?: string;
 }
 
-export const Field: React.FC<FieldProps> = (props: FieldProps) =>
+export const Field: FunctionComponent<FieldProps> = (props) =>
   props.value || props.children ? (
     <div className="m-b-xs">
       <dt>

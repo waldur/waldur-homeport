@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import moment from 'moment';
+import { FunctionComponent } from 'react';
 import DatePicker from 'react-16-bootstrap-date-picker';
 import Select from 'react-select';
 
@@ -22,7 +23,9 @@ interface TimeSelect {
   minute: number;
 }
 
-export const DateAndTimeSelectField = (props: DateAndTimeSelectField) => (
+export const DateAndTimeSelectField: FunctionComponent<DateAndTimeSelectField> = (
+  props,
+) => (
   <div className="form-group">
     <label className="control-label col-sm-2">{props.label}</label>
     <div className="col-sm-5">

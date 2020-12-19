@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -14,8 +15,8 @@ interface PureIssueCommentsFomrMainContainerProps extends TranslateProps {
   toggle(): void;
 }
 
-export const PureIssueCommentsFormMainContainer = (
-  props: PureIssueCommentsFomrMainContainerProps,
+export const PureIssueCommentsFormMainContainer: FunctionComponent<PureIssueCommentsFomrMainContainerProps> = (
+  props,
 ) => {
   const { opened, toggle, formId, uiDisabled, translate } = props;
 

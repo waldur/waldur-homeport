@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { StateIndicator, StateVariant } from '@waldur/core/StateIndicator';
 
 export type PaymentStateType = 'Erred' | 'Approved' | 'Created' | 'Cancelled';
@@ -15,7 +17,9 @@ interface PaymentStateIndicatorProps {
   };
 }
 
-export const PaymentStateIndicator = (props: PaymentStateIndicatorProps) => (
+export const PaymentStateIndicator: FunctionComponent<PaymentStateIndicatorProps> = (
+  props,
+) => (
   <StateIndicator
     label={props.payment.state}
     variant={LABEL_CLASSES[props.payment.state] || 'info'}

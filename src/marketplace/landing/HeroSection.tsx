@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { FunctionComponent } from 'react';
 import './HeroSection.scss';
 
 interface HeroSectionProps {
@@ -7,7 +6,7 @@ interface HeroSectionProps {
   children?: React.ReactNode;
 }
 
-export const HeroSection = (props: HeroSectionProps) => (
+export const HeroSection: FunctionComponent<HeroSectionProps> = (props) => (
   <div className="marketplace-hero__background">
     <div className="marketplace-hero__table">
       <div className="marketplace-hero__main">

@@ -1,9 +1,13 @@
+import { FunctionComponent } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
 import { SecretValueField } from '@waldur/marketplace/SecretValueField';
 import { OrderItemDetailsProps } from '@waldur/marketplace/types';
 
-export const AzureSQLServerDetails = (props: OrderItemDetailsProps) => {
+export const AzureSQLServerDetails: FunctionComponent<OrderItemDetailsProps> = (
+  props,
+) => {
   const { attributes } = props.orderItem;
   return (
     <>

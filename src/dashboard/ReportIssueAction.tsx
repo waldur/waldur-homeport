@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { MessageDialog } from '@waldur/core/MessageDialog';
 import { ENV, ngInjector } from '@waldur/core/services';
@@ -11,7 +13,9 @@ interface ReportIssueActionProps {
   state: string;
 }
 
-export const getIssueAction = (props: ReportIssueActionProps) => {
+export const getIssueAction: FunctionComponent<ReportIssueActionProps> = (
+  props,
+) => {
   return {
     title: translate('Report an issue'),
     onClick() {

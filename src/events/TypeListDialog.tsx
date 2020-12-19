@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -9,7 +11,9 @@ interface TypeListDialogProps {
   dialogTitle: string;
 }
 
-export const TypeListDialog = (props: TypeListDialogProps) => (
+export const TypeListDialog: FunctionComponent<TypeListDialogProps> = (
+  props,
+) => (
   <ModalDialog
     title={props.dialogTitle}
     bodyClassName="types-list-dialog"

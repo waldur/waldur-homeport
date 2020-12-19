@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 
@@ -9,7 +9,7 @@ interface EventFieldProps {
   params?: {};
 }
 
-export const EventField = (props: EventFieldProps) => {
+export const EventField: FunctionComponent<EventFieldProps> = (props) => {
   let value = props.value;
   if (!value) {
     return null;

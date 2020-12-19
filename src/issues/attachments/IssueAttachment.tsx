@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -29,7 +30,9 @@ const getThumbnail = (attachment: Attachment, openModalHandler) => {
   }
 };
 
-export const PureIssueAttachment = (props: PureIssueAttachmentProps) => {
+export const PureIssueAttachment: FunctionComponent<PureIssueAttachmentProps> = (
+  props,
+) => {
   const { attachment, isDeleting, deleteAttachment, openModal } = props;
 
   return (

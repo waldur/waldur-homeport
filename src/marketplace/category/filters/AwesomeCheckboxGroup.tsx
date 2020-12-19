@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
@@ -15,8 +15,8 @@ interface AwesomeCheckBoxGroupProps {
   groupType?: string;
 }
 
-export const AwesomeCheckBoxGroup: React.FC<AwesomeCheckBoxGroupProps> = (
-  props: AwesomeCheckBoxGroupProps,
+export const AwesomeCheckBoxGroup: FunctionComponent<AwesomeCheckBoxGroupProps> = (
+  props,
 ) => (
   <span>
     {props.options.map((option, index) => (

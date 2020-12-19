@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -19,7 +20,9 @@ const ActionItem = ({ invoice, invoiceKey, onSelect }) => (
   </MenuItem>
 );
 
-export const InvoicesDropdown = (props: ResourceActionComponentProps) => (
+export const InvoicesDropdown: FunctionComponent<ResourceActionComponentProps> = (
+  props,
+) => (
   <DropdownButton
     title={
       <>

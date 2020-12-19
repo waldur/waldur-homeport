@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react';
 import { InjectedFormProps } from 'redux-form';
 
 import {
-  SubmitButton,
   CancelButton,
   FormContainer,
+  SubmitButton,
   TextField,
 } from '@waldur/form';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
@@ -18,7 +19,9 @@ interface PureIssueCommentsFormProps extends TranslateProps, InjectedFormProps {
   onSubmit(data: any): void;
 }
 
-export const PureIssueCommentsForm = (props: PureIssueCommentsFormProps) => {
+export const PureIssueCommentsForm: FunctionComponent<PureIssueCommentsFormProps> = (
+  props,
+) => {
   const {
     submitting,
     uiDisabled,

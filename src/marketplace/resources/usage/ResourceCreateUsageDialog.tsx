@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -13,8 +14,8 @@ interface ResourceCreateUsageDialogProps {
   resolve: UsageReportContext;
 }
 
-export const ResourceCreateUsageDialog = (
-  props: ResourceCreateUsageDialogProps,
+export const ResourceCreateUsageDialog: FunctionComponent<ResourceCreateUsageDialogProps> = (
+  props,
 ) => {
   const { loading, error, value } = useAsync(
     () => getUsageComponents(props.resolve),

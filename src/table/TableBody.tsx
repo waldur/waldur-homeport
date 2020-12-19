@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { Column } from './types';
 
@@ -20,13 +20,13 @@ const TableCells = ({ row, columns }) => (
   </>
 );
 
-export const TableBody = ({
+export const TableBody: FunctionComponent<TableBodyProps> = ({
   rows,
   columns,
   expandableRow,
   toggleRow,
   toggled,
-}: TableBodyProps) => (
+}) => (
   <tbody>
     {rows.map((row, rowIndex) => (
       <React.Fragment key={rowIndex}>

@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import React from 'react';
+import { FunctionComponent } from 'react';
 
 import { range } from '@waldur/core/utils';
-
 import './RatingStars.scss';
 
 interface RatingStarsProps {
@@ -11,9 +10,7 @@ interface RatingStarsProps {
   size?: 'default' | 'medium';
 }
 
-export const RatingStars: React.FC<RatingStarsProps> = (
-  props: RatingStarsProps,
-) => (
+export const RatingStars: FunctionComponent<RatingStarsProps> = (props) => (
   <div
     className={classNames('rating-stars', {
       'rating-stars-default': props.size === 'default',

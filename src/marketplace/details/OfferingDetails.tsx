@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -8,7 +9,7 @@ import { Offering } from '@waldur/marketplace/types';
 
 import { OfferingConfigurator } from './OfferingConfigurator';
 import './OfferingDetails.scss';
-import { OfferingTabsComponent, OfferingTab } from './OfferingTabsComponent';
+import { OfferingTab, OfferingTabsComponent } from './OfferingTabsComponent';
 
 interface OfferingDetailsProps {
   offering: Offering;
@@ -16,7 +17,9 @@ interface OfferingDetailsProps {
   limits: string[];
 }
 
-export const OfferingDetails = (props: OfferingDetailsProps) => {
+export const OfferingDetails: FunctionComponent<OfferingDetailsProps> = (
+  props,
+) => {
   const CheckoutSummaryComponent = getCheckoutSummaryComponent(
     props.offering.type,
   );

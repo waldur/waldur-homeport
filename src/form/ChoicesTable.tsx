@@ -1,16 +1,15 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
 
 import './ChoicesTable.scss';
-
 import { ChoicesTableFilter } from './ChoicesTableFilter';
 import {
-  SelectDialogFieldColumn,
   SelectDialogFieldChoice,
+  SelectDialogFieldColumn,
 } from './SelectDialogField';
 
 interface PureChoicesTableProps {
@@ -24,8 +23,8 @@ interface ChoicesTableProps extends PureChoicesTableProps {
   filterOptions?: FilterOptions;
 }
 
-export const PureChoicesTable: React.FC<PureChoicesTableProps> = (
-  props: ChoicesTableProps,
+export const PureChoicesTable: FunctionComponent<ChoicesTableProps> = (
+  props,
 ) => (
   <div className="table-responsive choices-table">
     <Table bsClass="table">

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { withTranslation } from '@waldur/i18n';
@@ -16,7 +17,9 @@ interface ZabbixHostFieldProps extends ResourceSummaryProps {
   };
 }
 
-export const PureZabbixHostField = (props: ZabbixHostFieldProps) => {
+export const PureZabbixHostField: FunctionComponent<ZabbixHostFieldProps> = (
+  props,
+) => {
   if (!props.isVisible) {
     return null;
   }
