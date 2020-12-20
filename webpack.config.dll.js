@@ -27,7 +27,6 @@ module.exports = {
       'angular-loader',
       'angulartics',
       'angulartics-google-analytics',
-      'ui-select',
       'angular-translate',
       'angular-translate-storage-cookie',
       'angular-translate-storage-local',

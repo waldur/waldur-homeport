@@ -5,6 +5,7 @@ const actionFieldMultiselect = {
   bindings: {
     model: '<',
     field: '<',
+    form: '<',
   },
   controller: class FieldController {
     $onInit() {

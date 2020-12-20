@@ -116,7 +116,6 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
     "resize-observer-polyfill": "^1.5.1",
-    "ui-select": "^0.18.1",
     "world-flags-sprite": "^0.0.2"
   },
   "devDependencies": {

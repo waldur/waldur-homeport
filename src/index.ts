@@ -42,7 +42,6 @@ const appModule = angular.module('waldur', [
   UI_ROUTER_REACT_HYBRID,
   'ui.router.state.events',
   'ngCookies',
-  'ui.select',
   'ngAnimate',
   'pascalprecht.translate',
   'angulartics',
