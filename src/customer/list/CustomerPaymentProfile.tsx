@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { PaymentProfile } from '@waldur/workspace/types';
 
 interface CustomerPaymentProfileProps {
@@ -18,8 +19,8 @@ export const CustomerPaymentProfile: FunctionComponent<CustomerPaymentProfilePro
     (element) => element.is_active,
   );
   return activePaymentProfile ? (
-    <dl className="dl-horizontal m-t-sm resource-details-table">
-      <div className="m-b-xs">
+    <ResourceDetailsTable>
+      <div className="m-b-xs m-t-sm ">
         <dt>{translate('Payment profile ')}</dt>
         <dd>
           <Tooltip
@@ -32,6 +33,6 @@ export const CustomerPaymentProfile: FunctionComponent<CustomerPaymentProfilePro
           </Tooltip>
         </dd>
       </div>
-    </dl>
+    </ResourceDetailsTable>
   ) : null;
 };

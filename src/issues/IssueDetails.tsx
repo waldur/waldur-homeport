@@ -1,5 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
+import { Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -9,6 +10,8 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { Field } from '@waldur/resource/summary';
+import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
@@ -58,109 +61,107 @@ export const IssueDetails: FunctionComponent = () => {
             </div>
           </div>
           <div className="row m-b-md">
-            <dl className="dl-horizontal resource-details-table col-sm-12">
-              <div className="m-b-xs">
-                <dt>{translate('Caller')}:</dt>
-                <dd>{issue.caller_full_name}</dd>
-              </div>
+            <Col sm={12}>
+              <ResourceDetailsTable>
+                <Field
+                  label={translate('Caller')}
+                  value={issue.caller_full_name}
+                />
 
-              {issue.reporter_name && staffOrSupport && (
-                <div className="m-b-xs">
-                  <dt>{translate('Reporter')}:</dt>
-                  <dd>{issue.reporter_name}</dd>
-                </div>
-              )}
+                {issue.reporter_name && staffOrSupport && (
+                  <Field
+                    label={translate('Reporter')}
+                    value={issue.reporter_name}
+                  />
+                )}
 
-              {staffOrSupport && (
-                <div className="m-b-xs">
-                  <dt>{translate('Assigned to')}:</dt>
-                  <dd>{issue.assignee_name || 'N/A'}</dd>
-                </div>
-              )}
+                {staffOrSupport && (
+                  <Field
+                    label={translate('Assigned to')}
+                    value={issue.assignee_name || 'N/A'}
+                  />
+                )}
 
-              {issue.customer_name && (
-                <div className="m-b-xs">
-                  <dt>{translate('Organization')}:</dt>
-                  <dd>{issue.customer_name}</dd>
-                </div>
-              )}
+                {issue.customer_name && (
+                  <Field
+                    label={translate('Organization')}
+                    value={issue.customer_name}
+                  />
+                )}
 
-              <div className="m-b-xs">
-                <dt>{translate('Request type')}:</dt>
-                <dd>{issue.type}</dd>
-              </div>
+                <Field label={translate('Request type')} value={issue.type} />
 
-              {issue.project_name && (
-                <div className="m-b-xs">
-                  <dt>{translate('Project')}:</dt>
-                  <dd>{issue.project_name}</dd>
-                </div>
-              )}
+                {issue.project_name && (
+                  <Field
+                    label={translate('Project')}
+                    value={issue.project_name}
+                  />
+                )}
 
-              {issue.resource_type && (
-                <div className="m-b-xs">
-                  <dt>{translate('Service type')}:</dt>
-                  <dd>{issue.resource_type}</dd>
-                </div>
-              )}
+                {issue.resource_type && (
+                  <Field
+                    label={translate('Service type')}
+                    value={issue.resource_type}
+                  />
+                )}
 
-              {issue.resource_name && (
-                <div className="m-b-xs">
-                  <dt>{translate('Affected resource')}:</dt>
-                  <dd>{issue.resource_name}</dd>
-                </div>
-              )}
+                {issue.resource_name && (
+                  <Field
+                    label={translate('Affected resource')}
+                    value={issue.resource_name}
+                  />
+                )}
 
-              <div className="m-b-xs">
-                <dt>{translate('Status')}:</dt>
-                <dd>{issue.status || 'N/A'}</dd>
-              </div>
+                <Field
+                  label={translate('Status')}
+                  value={issue.status || 'N/A'}
+                />
 
-              {issue.resolution && (
-                <div className="m-b-xs">
-                  <dt>{translate('Resolution')}:</dt>
-                  <dd>{issue.resolution}</dd>
-                </div>
-              )}
+                {issue.resolution && (
+                  <Field
+                    label={translate('Resolution')}
+                    value={issue.resolution}
+                  />
+                )}
 
-              {issue.priority && (
-                <div className="m-b-xs">
-                  <dt>{translate('Priority')}:</dt>
-                  <dd>{issue.priority}</dd>
-                </div>
-              )}
+                {issue.priority && (
+                  <Field label={translate('Priority')} value={issue.priority} />
+                )}
 
-              {issue.link && staffOrSupport && (
-                <div className="m-b-xs">
-                  <dt>{translate('Link')}:</dt>
-                  <dd>
-                    <a
-                      href={issue.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="fa fa-external-link" />{' '}
-                      {translate('Open in Service Desk')}
-                    </a>
-                  </dd>
-                </div>
-              )}
+                {issue.link && staffOrSupport && (
+                  <Field
+                    label={translate('Link')}
+                    value={
+                      <a
+                        href={issue.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fa fa-external-link" />{' '}
+                        {translate('Open in Service Desk')}
+                      </a>
+                    }
+                  />
+                )}
 
-              <div className="m-b-xs">
-                <dt>{translate('Created')}:</dt>
-                <dd>
-                  {formatRelative(issue.created)} ago,{' '}
-                  {formatDateTime(issue.created)}
-                </dd>
-              </div>
-            </dl>
+                <Field
+                  label={translate('Created')}
+                  value={
+                    <>
+                      {formatRelative(issue.created)} ago,{' '}
+                      {formatDateTime(issue.created)}
+                    </>
+                  }
+                />
+              </ResourceDetailsTable>
+            </Col>
 
-            <div className="col-sm-12">
+            <Col sm={12}>
               <h3>{translate('Description')}</h3>
               <div className="html-description">
                 <FormattedHtml html={linkify(issue.description)} />
               </div>
-            </div>
+            </Col>
           </div>
         </div>
       </div>

@@ -5,11 +5,11 @@ const registry = {};
 export const register = (
   type: string,
   component: ComponentType<any>,
-  className = 'resource-details-table',
+  useDefaultWrapper = true,
 ) => {
   registry[type] = {
     component,
-    className,
+    useDefaultWrapper,
   };
 };
 
