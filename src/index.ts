@@ -47,7 +47,6 @@ const appModule = angular.module('waldur', [
   'pascalprecht.translate',
   'angulartics',
   'angulartics.google.analytics',
-  'ngSanitize',
   'angular-bind-html-compile',
 ]);
 
