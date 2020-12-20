@@ -29,8 +29,6 @@ import 'angular-cookies';
 import 'angular-loader';
 import 'angulartics';
 import 'angulartics-google-analytics';
-import 'ui-select';
-import 'ui-select/dist/select.css';
 import 'angular-translate';
 import 'angular-translate-storage-cookie';
 import 'angular-translate-storage-local';

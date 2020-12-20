@@ -2,7 +2,6 @@ import { connectAngularComponent } from '@waldur/store/connect';
 
 import actionDialog from './action-dialog';
 import actionFieldBoolean from './action-field-boolean';
-import actionFieldChoice from './action-field-choice';
 import actionFieldDecimal from './action-field-decimal';
 import actionFieldInteger from './action-field-integer';
 import actionFieldMultiselect from './action-field-multiselect';
@@ -13,6 +12,7 @@ import actionField from './ActionField';
 import { FieldLabel } from './FieldLabel';
 import { HelpIcon } from './HelpIcon';
 import multiplyBy from './multiply-by';
+import { ReactSelect } from './ReactSelect';
 
 export default (module) => {
   module.component('actionDialog', actionDialog);
@@ -24,11 +24,14 @@ export default (module) => {
   module.component('actionFieldSelect', actionFieldSelect);
   module.component('actionFieldString', actionFieldString);
   module.component('actionFieldText', actionFieldText);
-  module.component('actionFieldChoice', actionFieldChoice);
   module.component('helpicon', connectAngularComponent(HelpIcon, ['helpText']));
   module.directive('multiplyBy', multiplyBy);
   module.component(
     'fieldLabel',
     connectAngularComponent(FieldLabel, ['field']),
+  );
+  module.component(
+    'reactSelect',
+    connectAngularComponent(ReactSelect, ['field', 'model', 'form']),
   );
 };
