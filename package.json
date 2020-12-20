@@ -40,7 +40,6 @@
     "@uirouter/react-hybrid": "^1.0.1",
     "angular": "^1.8.0",
     "angular-animate": "^1.8.0",
-    "angular-bind-html-compile-ci-dev": "^1.2.2",
     "angular-cookies": "^1.8.0",
     "angular-loader": "^1.8.0",
     "angular-translate": "^2.18.2",

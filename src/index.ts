@@ -46,7 +46,6 @@ const appModule = angular.module('waldur', [
   'pascalprecht.translate',
   'angulartics',
   'angulartics.google.analytics',
-  'angular-bind-html-compile',
 ]);
 
 rootModule(appModule);

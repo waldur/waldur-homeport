@@ -2487,11 +2487,6 @@ angular-animate@^1.8.0:
   resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.8.0.tgz#fc6333a5a052129dc5fa0b02cd676304d2b99e9d"
   integrity sha512-ROFK3UIn1MSVpqAlay15ZxjPmVbvwaO3Zn/2vhmQdYeqxSbUVuOckcvtDLBpHPGPtOAreu35qfV7NQ7u2EgDcA==
 
-angular-bind-html-compile-ci-dev@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/angular-bind-html-compile-ci-dev/-/angular-bind-html-compile-ci-dev-1.2.2.tgz#fb85dba1ab8e8ceb9564a4260dd360ddd43606ab"
-  integrity sha1-+4XboauOjOuVZKQmDdNg3dQ2Bqs=
-
 "angular-cookies@>=1.2.26 <1.8":
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.7.9.tgz#0f0cd2a9d1c81e5b8d6c6711d41f0909f9d0b8e0"
