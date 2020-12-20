@@ -1,8 +1,9 @@
+import DOMPurify from 'dompurify';
 import React from 'react';
 
-import { $sanitize } from '@waldur/core/services';
-
 export const FormattedHtml: React.FC<{ html: string }> = (props) => {
-  const html = React.useMemo(() => $sanitize(props.html), [props.html]);
+  const html = React.useMemo(() => DOMPurify.sanitize(props.html), [
+    props.html,
+  ]);
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 };

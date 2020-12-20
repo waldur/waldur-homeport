@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import { Fragment, FunctionComponent } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
@@ -5,7 +6,6 @@ import { compose } from 'redux';
 
 import { formatMediumDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { $sanitize } from '@waldur/core/services';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { getAttachments } from '@waldur/issues/attachments/selectors';
 import { Attachment } from '@waldur/issues/attachments/types';
@@ -123,7 +123,7 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
         <div
           className="comment-item__content"
           dangerouslySetInnerHTML={{
-            __html: $sanitize(
+            __html: DOMPurify.sanitize(
               utils.formatJiraMarkup(comment.description, attachments),
             ),
           }}

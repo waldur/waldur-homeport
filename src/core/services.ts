@@ -8,9 +8,6 @@ export let $filter = null;
 export let $uiRouterGlobals = null;
 export let ngInjector = null;
 export let $q = null;
-// Init with identity function for testing only.
-// When application is initialized, it is replaced with actual service.
-export let $sanitize = (x) => x;
 
 export const formatCurrency = (
   value: string | number,
@@ -46,7 +43,6 @@ export default function injectServices($injector) {
   $filter = $injector.get('$filter');
   $uiRouterGlobals = $injector.get('$uiRouterGlobals');
   $q = $injector.get('$q');
-  $sanitize = $injector.get('$sanitize');
   ngInjector = $injector;
 }
 injectServices.$inject = ['$injector'];
