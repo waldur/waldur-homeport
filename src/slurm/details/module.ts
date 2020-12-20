@@ -10,5 +10,5 @@ const SlurmAllocationSummary = lazyComponent(
 );
 
 export default () => {
-  ResourceSummary.register('SLURM.Allocation', SlurmAllocationSummary, '');
+  ResourceSummary.register('SLURM.Allocation', SlurmAllocationSummary, false);
 };

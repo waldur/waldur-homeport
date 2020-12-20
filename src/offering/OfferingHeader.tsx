@@ -6,6 +6,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/services';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
+import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { Field } from './Field';
@@ -22,7 +23,7 @@ interface OfferingHeaderProps extends TranslateProps {
 export const PureOfferingHeader: FunctionComponent<OfferingHeaderProps> = (
   props,
 ) => (
-  <dl className="dl-horizontal resource-details-table col-sm-12">
+  <ResourceDetailsTable>
     <Field label={props.translate('Name')}>{props.offering.name}</Field>
 
     <Field label={props.translate('Created')}>
@@ -91,7 +92,7 @@ export const PureOfferingHeader: FunctionComponent<OfferingHeaderProps> = (
         {props.offering.backend_id}
       </Field>
     )}
-  </dl>
+  </ResourceDetailsTable>
 );
 
 const mapStateToProps = (state, ownProps) => {

@@ -5,6 +5,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
+import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { getConfig, getNativeNameVisible } from '@waldur/store/config';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -31,7 +32,7 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
         'Update your organization name, logo, accounting and contact details.',
       )}
     >
-      <dl className="dl-horizontal resource-details-table">
+      <ResourceDetailsTable>
         <Field label={translate('Name')} value={customer.display_name} />
 
         {nativeNameVisible && (
@@ -107,7 +108,7 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
           label={translate('Bank account')}
           value={customer.bank_account}
         />
-      </dl>
+      </ResourceDetailsTable>
 
       <CustomerLogoUpdateContainer customer={customer} />
     </CustomerAccordion>

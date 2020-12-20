@@ -5,6 +5,7 @@ import {
   ResourceSummaryProps,
   PureResourceSummaryBase,
 } from '@waldur/resource/summary';
+import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { SlurmAllocationSummaryExtraDetails } from '@waldur/slurm/details/SlurmAllocationSummaryExtraDetails';
 
 const formatQuota = (translate, usage, limit) =>
@@ -32,7 +33,7 @@ const PureSlurmAllocationSummary = (props: ResourceSummaryProps) => {
   const { translate } = props;
   return (
     <>
-      <div className="resource-details-table">
+      <ResourceDetailsTable>
         <PureResourceSummaryBase {...props} />
         <Field
           label={translate('CPU')}
@@ -49,7 +50,7 @@ const PureSlurmAllocationSummary = (props: ResourceSummaryProps) => {
           value={formatRAM(props)}
           helpText={translate('Total RAM GB-hours consumed this month')}
         />
-      </div>
+      </ResourceDetailsTable>
       <SlurmAllocationSummaryExtraDetails resource={props.resource} />
     </>
   );
