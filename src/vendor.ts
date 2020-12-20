@@ -33,7 +33,6 @@ import 'angular-translate';
 import 'angular-translate-storage-cookie';
 import 'angular-translate-storage-local';
 import 'angular-translate-loader-static-files';
-import 'angular-bind-html-compile-ci-dev';
 
 // if (process.env.NODE_ENV === 'production') {
 //   require('offline-plugin/runtime').install(); // eslint-disable-line global-require

@@ -13,7 +13,7 @@
     <div ng-if="!$ctrl.loading">
       <p
         ng-if="::$ctrl.resolve.action.dialogSubtitle"
-        bind-html-compile="$ctrl.resolve.action.dialogSubtitle"
+        ng-bind-html="$ctrl.resolve.action.dialogSubtitle"
       ></p>
       <div class="form-group" ng-if="$ctrl.resolve.action.name === 'destroy'">
         <label class="control-label">

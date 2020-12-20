@@ -31,7 +31,6 @@ module.exports = {
       'angular-translate-storage-cookie',
       'angular-translate-storage-local',
       'angular-translate-loader-static-files',
-      'angular-bind-html-compile-ci-dev',
     ],
   },
   output: {
