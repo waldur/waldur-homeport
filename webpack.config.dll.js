@@ -25,8 +25,6 @@ module.exports = {
       'angular-animate',
       'angular-cookies',
       'angular-loader',
-      'angulartics',
-      'angulartics-google-analytics',
       'angular-translate',
       'angular-translate-storage-cookie',
       'angular-translate-storage-local',

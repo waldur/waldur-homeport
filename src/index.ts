@@ -44,8 +44,6 @@ const appModule = angular.module('waldur', [
   'ngCookies',
   'ngAnimate',
   'pascalprecht.translate',
-  'angulartics',
-  'angulartics.google.analytics',
 ]);
 
 rootModule(appModule);

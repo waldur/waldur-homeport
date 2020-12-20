@@ -27,8 +27,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'angular-animate';
 import 'angular-cookies';
 import 'angular-loader';
-import 'angulartics';
-import 'angulartics-google-analytics';
 import 'angular-translate';
 import 'angular-translate-storage-cookie';
 import 'angular-translate-storage-local';
