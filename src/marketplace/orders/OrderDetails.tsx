@@ -5,7 +5,6 @@ import { useAsyncFn, useInterval, useNetwork } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ENV } from '@waldur/core/services';
-import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { getOrderDetails } from '@waldur/marketplace/common/api';
 import { OrderSummary } from '@waldur/marketplace/orders/OrderSummary';
@@ -32,7 +31,8 @@ async function loadOrder(order_uuid) {
     items: order.items,
     total_cost: order.total_cost,
     file: order.file,
-    project_uuid: getUUID(order.project),
+    project_uuid: order.project_uuid,
+    customer_uuid: order.customer_uuid,
   };
 }
 
@@ -99,6 +99,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props) => {
           <Order
             items={data.items}
             project_uuid={data.project_uuid}
+            customer_uuid={data.customer_uuid}
             editable={false}
           />
           <div className="text-right">
