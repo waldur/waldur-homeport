@@ -913,7 +913,7 @@ msgstr ""
 msgid "Booking"
 msgstr ""
 
-#: src/booking/BookingsList.tsx
+#: src/booking/BookingsListExpandableRow.tsx
 msgid "Booking description"
 msgstr ""
 
@@ -1558,7 +1558,7 @@ msgstr ""
 msgid "Create your first project"
 msgstr ""
 
-#: src/booking/BookingsList.tsx
+#: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -5345,7 +5345,7 @@ msgstr ""
 msgid "Product code"
 msgstr ""
 
-#: src/booking/BookingsList.tsx
+#: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/events/EventDetailsTable.tsx
@@ -5386,7 +5386,7 @@ msgstr ""
 msgid "Project could not be updated."
 msgstr ""
 
-#: src/booking/BookingsList.tsx
+#: src/booking/BookingsListExpandableRow.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "Project description"
@@ -6433,7 +6433,6 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: src/booking/BookingsList.tsx
 #: src/marketplace/resources/ResourceTabs.tsx
 msgid "Schedules"
 msgstr ""
@@ -7732,6 +7731,10 @@ msgstr ""
 
 #: src/booking/components/SlotDurationGroup.tsx
 msgid "Time slot"
+msgstr ""
+
+#: src/booking/BookingsList.tsx
+msgid "Time slots"
 msgstr ""
 
 #: src/booking/components/TimeZoneGroup.tsx
