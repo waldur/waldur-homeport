@@ -10,5 +10,5 @@ Cypress.Commands.add('openSelectDialog', (selectId, option) => {
 });
 
 Cypress.Commands.add('buttonShouldBeDisabled', (btnClass) =>
-  cy.get(btnClass).should('have.class', 'disabled'),
+  cy.get(btnClass).should('have.attr', 'disabled'),
 );

@@ -88,12 +88,12 @@ describe('OpenStackInstanceCreateForm', () => {
   });
 
   it('should keep "Add to cart" button disabled if required fields are not selected', () => {
-    cy.buttonShouldBeDisabled('.btn-sm')
+    cy.buttonShouldBeDisabled('.btn-sm.btn-primary')
       .get('input[name="attributes.name"]')
       .type('openstack-instance')
-      .buttonShouldBeDisabled('.btn-sm')
+      .buttonShouldBeDisabled('.btn-sm.btn-primary')
       .openSelectDialog('image', 'CentOS 7 64bit')
-      .buttonShouldBeDisabled('.btn-sm')
+      .buttonShouldBeDisabled('.btn-sm.btn-primary')
       .openSelectDialog('flavor', 'm1.little')
 
       // Open dropdown for project selector
@@ -102,7 +102,7 @@ describe('OpenStackInstanceCreateForm', () => {
       .click()
       .selectTheFirstOptionOfDropdown()
 
-      .get('.btn-sm')
-      .should('not.have.class', 'disabled');
+      .get('.btn-sm.btn-primary')
+      .should('not.have.attr', 'disabled');
   });
 });
