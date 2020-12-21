@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -12,7 +12,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { CategoryFilter } from './CategoryFilter';
 import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
-const PurePublicResourcesFilter = (props) => (
+const PurePublicResourcesFilter: FunctionComponent<any> = (props) => (
   <Row>
     <OfferingAutocomplete offeringFilter={props.offeringFilter} />
     <OrganizationAutocomplete />
@@ -39,6 +39,4 @@ const enhance = compose(
   connect(mapStateToProps),
 );
 
-export const PublicResourcesFilter = enhance(
-  PurePublicResourcesFilter,
-) as React.ComponentType<{}>;
+export const PublicResourcesFilter = enhance(PurePublicResourcesFilter);

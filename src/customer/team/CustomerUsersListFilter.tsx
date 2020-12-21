@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
@@ -5,7 +6,7 @@ import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/consta
 import { OrganizationRoleSelectField } from '@waldur/customer/team/OrganizationRoleSelectField';
 import { ProjectRoleSelectField } from '@waldur/customer/team/ProjectRoleSelectField';
 
-const PureCustomerUsersListFilter = () => (
+const PureCustomerUsersListFilter: FunctionComponent = () => (
   <Row>
     <ProjectRoleSelectField />
     <OrganizationRoleSelectField />

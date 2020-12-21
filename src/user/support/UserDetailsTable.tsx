@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -31,7 +32,9 @@ interface OwnProps {
 
 export type UserDetailsTableProps = TranslateProps & StateProps & OwnProps;
 
-const PureUserDetailsTable = (props: UserDetailsTableProps) => (
+const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
+  props,
+) => (
   <Table responsive={true} bordered={true}>
     <tbody>
       <Row label={props.translate('Full name')} value={props.user.full_name} />

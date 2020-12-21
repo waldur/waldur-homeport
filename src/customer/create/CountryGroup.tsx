@@ -18,13 +18,13 @@ const CountryRenderer = (option) => (
   </>
 );
 
-export const Option = (props) => (
+export const Option: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
     <CountryRenderer {...props.data} />
   </components.Option>
 );
 
-export const SingleValue = (props) => (
+export const SingleValue: FunctionComponent<any> = (props) => (
   <components.SingleValue {...props}>
     <CountryRenderer {...props.data} />
   </components.SingleValue>

@@ -16,7 +16,7 @@ import { InvitationSendButton } from './actions/InvitationSendButton';
 import { InvitationsFilter } from './InvitationsFilter';
 import { RoleField } from './RoleField';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

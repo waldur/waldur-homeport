@@ -14,13 +14,10 @@ interface TableProps {
   readOnly: boolean;
 }
 
-const QuestionGroup = ({
-  question,
-  answers,
-}: {
+const QuestionGroup: FunctionComponent<{
   answers: Answers;
   question: Question;
-}) => (
+}> = ({ question, answers }) => (
   <>
     {question.description}
     {answers[question.uuid] !== question.correct_answer &&
@@ -38,7 +35,7 @@ const QuestionGroup = ({
   </>
 );
 
-const TableHeader = () => (
+const TableHeader: FunctionComponent = () => (
   <thead>
     <tr>
       <th className="col-sm-1">#</th>
@@ -57,12 +54,12 @@ const RenderAnswer: React.FC<{ value: boolean | null }> = ({ value }) =>
     <>{translate('N/A')}</>
   );
 
-const TableBody = ({
+const TableBody: FunctionComponent<TableProps> = ({
   questions,
   answers,
   setAnswers,
   readOnly,
-}: TableProps) => (
+}) => (
   <tbody>
     {questions.map((question, index) => (
       <tr key={question.uuid}>

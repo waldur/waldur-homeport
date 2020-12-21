@@ -50,7 +50,7 @@ export const issueAttachmentsPutStart = (
   },
 });
 
-export const issueAttachmentsPutReject = (): Action<{}> => ({
+export const issueAttachmentsPutReject = (): Action => ({
   type: constants.ISSUE_ATTACHMENTS_PUT_REJECT,
 });
 

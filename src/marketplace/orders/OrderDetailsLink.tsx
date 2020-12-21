@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -9,7 +10,7 @@ import {
   SUPPORT_WORKSPACE,
 } from '@waldur/workspace/types';
 
-const PureOrderDetailsLink = (props) => (
+const PureOrderDetailsLink: FunctionComponent<any> = (props) => (
   <Link
     state={props.state}
     params={{ ...props.params, order_uuid: props.order_uuid }}

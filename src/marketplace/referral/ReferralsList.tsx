@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { ENV } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -6,7 +8,7 @@ import { ReferralTypeIcon } from '@waldur/marketplace/referral/ReferralTypeIcon'
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Title'),

@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
-const ManageSecurityGroupsButton = (props) => (
+const ManageSecurityGroupsButton: FunctionComponent<any> = (props) => (
   <Link
     state="resource-details"
     params={{
@@ -17,7 +17,7 @@ const ManageSecurityGroupsButton = (props) => (
   </Link>
 );
 
-const ManageNetworksButton = (props) => (
+const ManageNetworksButton: FunctionComponent<any> = (props) => (
   <Link
     state="resource-details"
     params={{

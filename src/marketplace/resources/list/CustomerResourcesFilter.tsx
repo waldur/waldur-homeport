@@ -39,6 +39,4 @@ const enhance = compose(
   connect(mapStateToProps),
 );
 
-export const CustomerResourcesFilter = enhance(
-  PureCustomerResourcesFilter,
-) as React.ComponentType<{}>;
+export const CustomerResourcesFilter = enhance(PureCustomerResourcesFilter);

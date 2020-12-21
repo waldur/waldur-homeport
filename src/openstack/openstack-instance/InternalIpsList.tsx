@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { getById } from '@waldur/core/api';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { VirtualMachine } from '@waldur/resource/types';
@@ -5,7 +7,7 @@ import { Table, connectTable } from '@waldur/table';
 
 import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

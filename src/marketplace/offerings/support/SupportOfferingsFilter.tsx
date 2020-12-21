@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
@@ -11,7 +11,7 @@ import { OrganizationAutocomplete } from '@waldur/marketplace/orders/Organizatio
 
 import { SUPPORT_OFFERINGS_FILTER_FORM_ID } from './constants';
 
-const PureSupportOfferingsFilter = () => (
+const PureSupportOfferingsFilter: FunctionComponent = () => (
   <Row>
     <OfferingStateFilter />
     <OrganizationAutocomplete
@@ -30,6 +30,4 @@ const enhance = reduxForm({
   },
 });
 
-export const SupportOfferingsFilter = enhance(
-  PureSupportOfferingsFilter,
-) as React.ComponentType<{}>;
+export const SupportOfferingsFilter = enhance(PureSupportOfferingsFilter);

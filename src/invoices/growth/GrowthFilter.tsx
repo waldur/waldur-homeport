@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
@@ -7,7 +8,7 @@ import {
 } from '@waldur/customer/list/AccountingRunningField';
 import { GROWTH_FILTER_ID } from '@waldur/invoices/constants';
 
-export const PureGrowthFilter = () => (
+export const PureGrowthFilter: FunctionComponent = () => (
   <div className="ibox">
     <div className="ibox-content border-bottom m-t-md">
       <form className="form-inline">

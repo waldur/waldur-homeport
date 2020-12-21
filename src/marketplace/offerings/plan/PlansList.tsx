@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -7,7 +8,7 @@ import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
 import { PlanAddButton } from './PlanAddButton';
 import { PlanPanel } from './PlanPanel';
 
-const PlansListComponent = (props) => (
+const PlansListComponent: FunctionComponent<any> = (props) => (
   <div className="form-group">
     <Col smOffset={2} sm={8} className="m-b-sm">
       <p className="form-control-static">

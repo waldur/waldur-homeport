@@ -1,4 +1,5 @@
 import { useRouter } from '@uirouter/react';
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -11,7 +12,7 @@ import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
 
 import { PaymentProfileActions } from './PaymentProfileActions';
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const router = useRouter();
 
   const tooltipAndDisabledAttributes = {

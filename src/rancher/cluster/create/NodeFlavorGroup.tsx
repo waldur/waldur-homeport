@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -8,7 +8,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { LonghornWorkerWarning } from './LonghornWorkerWarning';
 
-const SelectFlavorField = (props) => (
+const SelectFlavorField: FunctionComponent<any> = (props) => (
   <SelectControl
     value={props.input.value}
     onChange={props.input.onChange}

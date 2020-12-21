@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -15,7 +16,7 @@ import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
 import { ShowRequestButton } from './ShowRequestButton';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Offering'),

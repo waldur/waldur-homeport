@@ -1,7 +1,9 @@
+import { FunctionComponent } from 'react';
+
 import { Link } from '@waldur/core/Link';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

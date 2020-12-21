@@ -65,6 +65,4 @@ const mapStateToProps = (state) => ({
   customerListFilter: getFormValues('customerListFilter')(state),
 });
 
-export const TotalCostContainer = connect(mapStateToProps)(
-  TotalCostComponent,
-) as React.ComponentType<{}>;
+export const TotalCostContainer = connect(mapStateToProps)(TotalCostComponent);

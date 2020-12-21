@@ -13,7 +13,7 @@ import { InvoiceActions } from './InvoiceActions';
 import { InvoicesFilter } from './InvoicesFilter';
 import { InvoiceStateIndicator } from './InvoiceStateIndicator';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

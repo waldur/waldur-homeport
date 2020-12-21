@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -29,7 +29,7 @@ interface StateProps {
   filter: ResourceFilter;
 }
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   React.useEffect(() => {
     props.resetPagination();
   }, [props.filter]);
@@ -155,6 +155,4 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const PublicResourcesList = enhance(
-  TableComponent,
-) as React.ComponentType<{}>;
+export const PublicResourcesList = enhance(TableComponent);

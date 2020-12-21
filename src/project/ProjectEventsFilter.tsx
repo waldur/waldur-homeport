@@ -1,10 +1,11 @@
+import { FunctionComponent } from 'react';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { translate, withTranslation } from '@waldur/i18n';
 import { ToogleButtonFilter } from '@waldur/table/ToggleButtonFilter';
 
-const PureProjectEventsFilter = () => (
+const PureProjectEventsFilter: FunctionComponent = () => (
   <Field
     name="feature"
     component={(props) => (

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -25,7 +26,9 @@ interface ResourceUsageButton {
   openDialog(): void;
 }
 
-const PureResourceUsageButton = (props: ResourceUsageButton) => (
+const PureResourceUsageButton: FunctionComponent<ResourceUsageButton> = (
+  props,
+) => (
   <ActionButton
     title={translate('Show usage')}
     icon="fa fa-eye"

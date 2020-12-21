@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -15,7 +16,7 @@ interface DispatchProps {
 
 type Props = OwnProps & DispatchProps;
 
-const PurePlanDetailsButton = (props: Props) => (
+const PurePlanDetailsButton: FunctionComponent<Props> = (props) => (
   <ActionButton
     title={translate('Plan details')}
     action={props.showPlanDetailsDialog}

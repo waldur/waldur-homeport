@@ -78,7 +78,7 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => (
   </table>
 );
 
-const PureOrderSummary = (props: OrderSummaryProps) => (
+const PureOrderSummary: FunctionComponent<OrderSummaryProps> = (props) => (
   <>
     <OfferingLogo src={props.offering.thumbnail} size="small" />
     <SummaryTable {...props} />

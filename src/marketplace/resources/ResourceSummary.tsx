@@ -10,7 +10,7 @@ import { MarketplaceResourceStateField } from './list/MarketplaceResourceStateFi
 import { ResourceDetailsLink } from './ResourceDetailsLink';
 import { Resource } from './types';
 
-export const ResourceSummary: FunctionComponent<{ resource }> = ({
+export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
   resource,
 }) => (
   <ResourceDetailsTable>
@@ -24,7 +24,7 @@ export const ResourceSummary: FunctionComponent<{ resource }> = ({
     <Field label={translate('Plan')} value={resource.plan_name || 'N/A'} />
     <Field
       label={translate('State')}
-      value={<MarketplaceResourceStateField resource={resource as Resource} />}
+      value={<MarketplaceResourceStateField resource={resource} />}
     />
     <Field
       label={translate('Created')}

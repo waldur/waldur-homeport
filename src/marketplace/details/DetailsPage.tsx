@@ -25,7 +25,7 @@ async function loadData(offering_uuid: string) {
   return { offering, tabs, limits };
 }
 
-export const OfferingDetailsPage: React.FC<{}> = () => {
+export const OfferingDetailsPage: React.FC = () => {
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();

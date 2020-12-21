@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
@@ -18,7 +19,7 @@ import {
 import { EmailField } from '@waldur/form/EmailField';
 import { translate } from '@waldur/i18n';
 
-const PureOrganizationUpdate = (props) => (
+const PureOrganizationUpdate: FunctionComponent<any> = (props) => (
   <form
     onSubmit={props.handleSubmit(props.submitRequest)}
     className="form-horizontal"

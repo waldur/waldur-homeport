@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -19,6 +18,4 @@ const enhance = compose(
   }),
 );
 
-export const SupportResourcesList = enhance(
-  TableComponent,
-) as React.ComponentType<{}>;
+export const SupportResourcesList = enhance(TableComponent);

@@ -15,7 +15,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { InvoicesFilter } from './InvoicesFilter';
 import { SendNotificationButton } from './SendNotificationButton';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   const columns = [
     {

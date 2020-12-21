@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -9,7 +10,7 @@ import { OFFERING_PERMISSIONS_LIST_ID } from './constants';
 import { OfferingPermissionCreateButton } from './OfferingPermissionCreateButton';
 import { OfferingPermissionRemoveButton } from './OfferingPermissionRemoveButton';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

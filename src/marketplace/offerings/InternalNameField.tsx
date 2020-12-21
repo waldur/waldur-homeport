@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -18,7 +19,9 @@ export const validateInternalName = (value: string) =>
 
 const validators = [required, validateInternalName];
 
-export const InternalNameField = (props: InternalNameFieldProps) => (
+export const InternalNameField: FunctionComponent<InternalNameFieldProps> = (
+  props,
+) => (
   <Field
     name={props.name}
     validate={validators}

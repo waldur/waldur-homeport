@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -29,7 +30,7 @@ const mapStateToProps = (state) => ({
 
 const ProjectEvents = connect(mapStateToProps)(PureProjectEvents);
 
-export const ProjectEventsView = (props) => (
+export const ProjectEventsView: FunctionComponent<any> = (props) => (
   <>
     <ProjectEventsFilter />
     <ProjectEvents {...props} />

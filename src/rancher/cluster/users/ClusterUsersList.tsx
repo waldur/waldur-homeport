@@ -1,10 +1,12 @@
+import { FunctionComponent } from 'react';
+
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 import { RolesRenderer } from './RolesRenderer';
 import { UserDetailsButton } from './UserDetailsButton';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

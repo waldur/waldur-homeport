@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -43,7 +44,7 @@ const renderTitleWithPriceTooltip = (title) => (
   </>
 );
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns, customerListFilter } = props;
   const accountingPeriodIsCurrent =
     customerListFilter.accounting_period &&

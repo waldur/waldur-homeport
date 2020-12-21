@@ -18,7 +18,7 @@ const OrganizationsHeader = ({ organizationsCount }) => (
   </h3>
 );
 
-const EmptyOrganizationListPlaceholder = () => (
+const EmptyOrganizationListPlaceholder: FunctionComponent = () => (
   <span className="ellipsis">
     {translate('There are no organizations matching filter.')}
   </span>

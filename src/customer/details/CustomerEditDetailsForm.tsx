@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { compose } from 'redux';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 
@@ -14,7 +15,9 @@ interface OwnProps {
 
 type ConnectedProps = OwnProps & InjectedFormProps & TranslateProps;
 
-const PureCustomerEditDetailsForm = (props: ConnectedProps) => (
+const PureCustomerEditDetailsForm: FunctionComponent<ConnectedProps> = (
+  props,
+) => (
   <form onSubmit={props.handleSubmit(props.onSubmit)} className="form-vertical">
     <div>
       <Field

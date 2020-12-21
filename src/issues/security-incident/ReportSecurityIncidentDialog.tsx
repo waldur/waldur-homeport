@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
@@ -28,7 +29,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-const PureReportSecurityIncidentDialog = (props) => (
+const PureReportSecurityIncidentDialog: FunctionComponent<any> = (props) => (
   <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
       title={translate('Report security incident')}

@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { FunctionComponent, Component } from 'react';
 import {
   Col,
   Dropdown,
@@ -147,7 +147,7 @@ const getNamePrefix = (type: OrderItemType) => {
   }
 };
 
-const PendingOrderDropdownItem = (props) => (
+const PendingOrderDropdownItem: FunctionComponent<any> = (props) => (
   <>
     <li>
       <OrderDetailsLink

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import Gravatar from 'react-gravatar';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -37,7 +37,7 @@ const UserProjectRolesList = ({ row }) => {
   );
 };
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}

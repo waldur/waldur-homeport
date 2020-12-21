@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { Field, change, FormAction } from 'redux-form';
@@ -5,7 +6,7 @@ import { Field, change, FormAction } from 'redux-form';
 import { setCurrentProject } from '@waldur/workspace/actions';
 import { Project } from '@waldur/workspace/types';
 
-const PureProjectSelectField = (props) => (
+const PureProjectSelectField: FunctionComponent<any> = (props) => (
   <Field
     name="project"
     component={(fieldProps) => (

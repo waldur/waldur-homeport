@@ -1,8 +1,10 @@
+import { FunctionComponent } from 'react';
+
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

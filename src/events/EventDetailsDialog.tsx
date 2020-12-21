@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -18,7 +18,7 @@ interface Props extends TranslateProps, StateProps {
   resolve: { event: Event };
 }
 
-const PureEventDetailsDialog = (props: Props) => (
+const PureEventDetailsDialog: FunctionComponent<Props> = (props) => (
   <ModalDialog
     title={props.translate('Event details')}
     footer={<CloseDialogButton />}
@@ -37,6 +37,4 @@ const mapStateToProps = (state) => ({
 
 const enhance = compose(connect<StateProps>(mapStateToProps), withTranslation);
 
-export const EventDetailsDialog = enhance(
-  PureEventDetailsDialog,
-) as React.ComponentType<{}>;
+export const EventDetailsDialog = enhance(PureEventDetailsDialog);

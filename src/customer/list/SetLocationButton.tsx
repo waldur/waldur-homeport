@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -33,7 +34,9 @@ const openSetLocationDialog = (
     size: 'lg',
   });
 
-const PureSetLocationButton = (props: SetLocationButtonProps) => (
+const PureSetLocationButton: FunctionComponent<SetLocationButtonProps> = (
+  props,
+) => (
   <ActionButton
     title={translate('Set location')}
     icon="fa fa-map-marker"

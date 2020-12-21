@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -16,7 +17,7 @@ import { OrderItemslistTablePlaceholder } from './OrderItemsListPlaceholder';
 import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Offering'),

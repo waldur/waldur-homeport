@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -9,7 +10,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ReviewCloseButton } from './ReviewCloseButton';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}

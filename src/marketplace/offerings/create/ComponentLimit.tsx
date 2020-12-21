@@ -68,4 +68,4 @@ export const ComponentLimit = enhance((props: Values) => {
       )}
     </>
   );
-}) as React.ComponentType<{}>;
+});

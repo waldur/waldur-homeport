@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { Link } from '@waldur/core/Link';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
@@ -7,7 +9,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { NodeRoleField } from './NodeRoleField';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

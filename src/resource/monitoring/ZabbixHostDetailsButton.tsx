@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { openDetailsDialog } from './actions';
@@ -13,7 +13,7 @@ interface DispatchProps {
   onOpenDetailsDialog(): void;
 }
 
-const PureZabbixHostDetailsButton = (props) => (
+const PureZabbixHostDetailsButton: FunctionComponent<any> = (props) => (
   <a className="btn btn-default btn-xs" onClick={props.onOpenDetailsDialog}>
     <i className={`${props.textClass} fa fa-line-chart`} /> {props.label}
   </a>

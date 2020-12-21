@@ -13,7 +13,7 @@ import { getItems } from './store/selectors';
 
 import './ComparisonTable.scss';
 
-export const ComparisonTable: React.FC<{}> = () => {
+export const ComparisonTable: React.FC = () => {
   const items = useSelector(getItems);
   useTitle(translate('Compare items'));
   return (

@@ -7,13 +7,13 @@ import { translate } from '@waldur/i18n';
 import { IssueTypeRenderer } from './IssueTypeRenderer';
 import { SelectField } from './SelectField';
 
-const Option = (props) => (
+const Option: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
     <IssueTypeRenderer {...props.data} />
   </components.Option>
 );
 
-const SingleValue = (props) => (
+const SingleValue: FunctionComponent<any> = (props) => (
   <components.SingleValue {...props}>
     <IssueTypeRenderer {...props.data} />
   </components.SingleValue>
