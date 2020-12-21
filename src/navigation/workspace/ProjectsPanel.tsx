@@ -1,4 +1,5 @@
 import {
+  FunctionComponent,
   useMemo,
   useState,
   useCallback,
@@ -43,7 +44,7 @@ const CreateProjectButton = ({ selectedOrganization }) => {
   );
 };
 
-const EmptyProjectsPlaceholder = () => (
+const EmptyProjectsPlaceholder: FunctionComponent = () => (
   <p className="text-center text-danger">
     {translate('There are no projects yet for this organization.')}
   </p>
@@ -67,7 +68,7 @@ const SelectProjectButton = ({ project }) => (
   </Link>
 );
 
-const EmptyProjectListPlaceholder = () => (
+const EmptyProjectListPlaceholder: FunctionComponent = () => (
   <span className="ellipsis">
     {translate('There are no projects matching filter.')}
   </span>

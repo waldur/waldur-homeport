@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -26,7 +27,7 @@ const openScreenshotDetailsDialog = (screenshot: Screenshot) =>
     resolve: screenshot,
   });
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
 
   const columns = [

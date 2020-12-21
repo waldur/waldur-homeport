@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -9,7 +10,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { PlanUsageButton } from './PlanUsageButton';
 import { PlanUsageRowProps } from './types';
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   const columns = [
     {

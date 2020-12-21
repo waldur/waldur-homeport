@@ -8,7 +8,7 @@ import {
 } from '@waldur/marketplace/common/utils';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-export const ComponentMinValueField: React.FC<{}> = () => (
+export const ComponentMinValueField: React.FC = () => (
   <FormGroup label={translate('Minimum allowed value')}>
     <Field
       component="input"

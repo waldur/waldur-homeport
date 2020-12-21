@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
 import { OfferingStateFilter, getStates } from './OfferingStateFilter';
 
-const PureOfferingsFilter = () => (
+const PureOfferingsFilter: FunctionComponent = () => (
   <Row>
     <OfferingStateFilter />
   </Row>
@@ -17,6 +17,4 @@ const enhance = reduxForm({
   },
 });
 
-export const OfferingsFilter = enhance(
-  PureOfferingsFilter,
-) as React.ComponentType<{}>;
+export const OfferingsFilter = enhance(PureOfferingsFilter);

@@ -102,4 +102,4 @@ const matchDispatchToProps = {
 export const SankeyDiagramContainer = connect(
   mapStateToProps,
   matchDispatchToProps,
-)(SankeyDiagramComponent) as React.ComponentType<{}>;
+)(SankeyDiagramComponent);

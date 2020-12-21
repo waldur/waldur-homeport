@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -15,7 +15,7 @@ interface StateProps {
   customer: Customer;
 }
 
-const PureMyOrderItemsFilter = (props: StateProps) => (
+const PureMyOrderItemsFilter: FunctionComponent<StateProps> = (props) => (
   <Row>
     <ProjectFilter customer_uuid={props.customer.uuid} />
     <OrderStateFilter />
@@ -32,6 +32,4 @@ const enhance = compose(
   connect(mapStateToProps),
 );
 
-export const MyOrderItemsFilter = enhance(
-  PureMyOrderItemsFilter,
-) as React.ComponentType<{}>;
+export const MyOrderItemsFilter = enhance(PureMyOrderItemsFilter);

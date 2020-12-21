@@ -124,4 +124,4 @@ const mapStateToProps = (state) => ({
 
 export const CustomerDetailsPanel = connect(mapStateToProps)(
   PureCustomerDetails,
-) as React.ComponentType;
+);

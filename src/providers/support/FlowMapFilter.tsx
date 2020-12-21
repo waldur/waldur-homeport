@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
@@ -39,7 +40,7 @@ const serviceProviderTypeOptions = [
   },
 ];
 
-const PureFlowMapFilter = (props: FlowMapFilterProps) => (
+const PureFlowMapFilter: FunctionComponent<FlowMapFilterProps> = (props) => (
   <div className="ibox">
     <div className="ibox-content">
       <form className="form-inline" id="flow-map-form">

@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -10,7 +11,7 @@ import { formatAttributes } from '../store/utils';
 
 import { hasError } from './utils';
 
-const PureDescriptionSummary = (props) => (
+const PureDescriptionSummary: FunctionComponent<any> = (props) => (
   <>
     <h3>{translate('Description')}</h3>
     {props.categoryInvalid ? (

@@ -22,7 +22,7 @@ export interface ResourceUsageFormProps extends InjectedFormProps {
   onPeriodChange(): void;
 }
 
-const StaticPlanField = () => (
+const StaticPlanField: FunctionComponent = () => (
   <Field
     name="period"
     component={(fieldProps) => (

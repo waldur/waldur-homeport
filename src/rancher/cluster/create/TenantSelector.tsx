@@ -9,7 +9,7 @@ import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-const SelectTenantField = (props) => (
+const SelectTenantField: FunctionComponent<any> = (props) => (
   <Select
     value={props.options.filter(
       ({ settings }) => settings === props.input.value,

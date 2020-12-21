@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormControl } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
@@ -12,7 +12,7 @@ import { Namespace } from '../types';
 import { DecoratedField } from './DecoratedField';
 import { SelectControl } from './SelectControl';
 
-const NamespaceSwitcher = () => (
+const NamespaceSwitcher: FunctionComponent = () => (
   <Field
     name="useNewNamespace"
     component={(fieldProps) => (

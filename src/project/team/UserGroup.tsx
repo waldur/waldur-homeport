@@ -7,7 +7,7 @@ import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { SelectField } from '@waldur/issues/create/SelectField';
 
-const Option = (props) => (
+const Option: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
     <>
       <div>{props.data.full_name}</div>

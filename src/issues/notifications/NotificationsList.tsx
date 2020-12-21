@@ -10,7 +10,7 @@ import { TableOptionsType } from '@waldur/table/types';
 import { NotificationCreateButton } from './NotificationCreateButton';
 import { NotificationExpandableRow } from './NotificationExpandableRow';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}

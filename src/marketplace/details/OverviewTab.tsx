@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { LeafletMap } from '@waldur/map/LeafletMap';
 import { Offering } from '@waldur/marketplace/types';
 
-const DemoButton = () => (
+const DemoButton: FunctionComponent = () => (
   <button className="btn btn-outline btn-success btn-sm">
     <i className="fa fa-comment" /> {translate('Request demo')}
   </button>

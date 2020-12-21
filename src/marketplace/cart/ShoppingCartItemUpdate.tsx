@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { FunctionComponent, Component } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -25,7 +25,9 @@ interface PureShoppingCartItemUpdateProps {
   limits: string[];
 }
 
-const PureShoppingCartItemUpdate = (props: PureShoppingCartItemUpdateProps) => (
+const PureShoppingCartItemUpdate: FunctionComponent<PureShoppingCartItemUpdateProps> = (
+  props,
+) => (
   <>
     {props.offering.description && (
       <div className="bs-callout bs-callout-success">

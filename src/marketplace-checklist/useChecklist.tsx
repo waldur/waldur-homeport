@@ -13,7 +13,7 @@ import {
   getStats,
   getCategory,
 } from './api';
-import { Checklist, Answer, ChecklistStats } from './types';
+import { Checklist, Answer, ChecklistStats, Question } from './types';
 
 const useChecklistSelector = (categoryId?: string) => {
   const [checklistOptions, setChecklistOptions] = useState([]);
@@ -58,26 +58,27 @@ const useChecklistSelector = (categoryId?: string) => {
   };
 };
 
-const mapArrayToObject = (data: Answer[]): {} => {
-  return data.reduce(
+type AnswersTableType = Record<string, boolean>;
+
+const mapArrayToObject = (data: Answer[]): AnswersTableType =>
+  data.reduce(
     (result: {}, answer: Answer) => ({
       ...result,
       [answer.question_uuid]: answer.value,
     }),
     {},
   );
-};
 
 export const useUserChecklist = (userId, categoryId?) => {
   const { checklist, ...checklistLoader } = useChecklistSelector(categoryId);
 
-  const [questionsList, setQuestionsList] = useState([]);
+  const [questionsList, setQuestionsList] = useState<Question[]>([]);
   const [questionsLoading, setQuestionsLoading] = useState(true);
   const [questionsErred, setQuestionsErred] = useState(true);
   const [categoryInfo, setCategoryInfo] = useState(null);
 
-  const [answers, setAnswers] = useState<{}>();
-  const [answersTable, setAnswersTable] = useState<{}>();
+  const [answers, setAnswers] = useState<AnswersTableType>();
+  const [answersTable, setAnswersTable] = useState<AnswersTableType>();
   const [submitting, setSubmitting] = useState(false);
 
   const dispatch = useDispatch();

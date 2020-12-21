@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -19,7 +19,7 @@ interface DispatchProps {
 
 type Props = DispatchProps & PlanUsageRowProps;
 
-const PurePlanUsageButton = (props: Props) => (
+const PurePlanUsageButton: FunctionComponent<Props> = (props) => (
   <ActionButton
     title={translate('Show chart')}
     disabled={props.row.limit === null}

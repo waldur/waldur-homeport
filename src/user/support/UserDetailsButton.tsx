@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -12,7 +13,9 @@ interface UserDetailsButtonProps extends TranslateProps {
   onClick: () => void;
 }
 
-const PureUserDetailsButton = (props: UserDetailsButtonProps) => (
+const PureUserDetailsButton: FunctionComponent<UserDetailsButtonProps> = (
+  props,
+) => (
   <ActionButton
     title={props.translate('Details')}
     action={props.onClick}

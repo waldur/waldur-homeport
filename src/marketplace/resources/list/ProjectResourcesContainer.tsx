@@ -12,7 +12,7 @@ import { ProjectResourcesFilter } from './ProjectResourcesFilter';
 import { ProjectResourcesList } from './ProjectResourcesList';
 import { loadData } from './utils';
 
-export const ProjectResourcesContainer: React.FC<{}> = () => {
+export const ProjectResourcesContainer: React.FC = () => {
   const {
     params: { category_uuid },
   } = useCurrentStateAndParams();

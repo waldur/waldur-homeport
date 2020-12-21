@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useAsyncFn, useInterval, useNetwork } from 'react-use';
 
@@ -36,7 +36,7 @@ async function loadOrder(order_uuid) {
   };
 }
 
-const OrderRefreshButton = (props) => (
+const OrderRefreshButton: FunctionComponent<any> = (props) => (
   <button
     type="button"
     className="btn btn-default btn-sm m-r-sm"

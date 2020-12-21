@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { compose } from 'redux';
 
 import { withTranslation, translate } from '@waldur/i18n';
@@ -10,7 +10,7 @@ interface PlanUsageListProps {
   offering_uuid: string;
 }
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Name'),

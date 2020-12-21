@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -31,7 +32,7 @@ const ProjectActionsField = ({ row }) => (
   </div>
 );
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const { translate, filterColumns } = props;
   useTitle(translate('Projects'));
   const columns = filterColumns([

@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { formatDate } from '@waldur/core/dateUtils';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
@@ -5,7 +7,7 @@ import { TableOptionsType } from '@waldur/table/types';
 import { ImportYAMLButton } from './ImportYAMLButton';
 import { ServiceActions } from './ServiceActions';
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

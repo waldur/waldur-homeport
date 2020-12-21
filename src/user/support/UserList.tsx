@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -12,7 +13,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table/index';
 import { UserActivateButton } from './UserActivateButton';
 import { UserDetailsButton } from './UserDetailsButton';
 
-const UserActionsButton = (props) => (
+const UserActionsButton: FunctionComponent<any> = (props) => (
   <ButtonGroup>
     <UserDetailsButton {...props} />
     <UserActivateButton {...props} />
@@ -85,7 +86,7 @@ const SupportStatusField = ({ row }) => {
   return <BooleanField value={row.is_support} />;
 };
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

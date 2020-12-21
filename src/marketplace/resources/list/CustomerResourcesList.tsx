@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -28,7 +28,7 @@ interface StateProps {
   filter: ResourceFilter;
 }
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -143,6 +143,4 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const CustomerResourcesList = enhance(
-  TableComponent,
-) as React.ComponentType<{}>;
+export const CustomerResourcesList = enhance(TableComponent);

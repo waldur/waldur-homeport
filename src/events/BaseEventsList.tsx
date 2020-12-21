@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { ENV } from '@waldur/core/services';
@@ -13,7 +15,7 @@ const EventMessageField = ({ row }) => (
 
 const EventDateField = ({ row }) => <>{formatDateTime(row.created)}</>;
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
     <Table

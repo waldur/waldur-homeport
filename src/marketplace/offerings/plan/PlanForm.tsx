@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { compose } from 'redux';
 import { Field, FormSection } from 'redux-form';
 
@@ -22,7 +23,7 @@ interface PlanFormProps extends TranslateProps {
   plan: string;
 }
 
-const PlanNameField = () => (
+const PlanNameField: FunctionComponent = () => (
   <Field
     name="name"
     type="text"
@@ -32,7 +33,7 @@ const PlanNameField = () => (
   />
 );
 
-const PlanDescriptionField = () => (
+const PlanDescriptionField: FunctionComponent = () => (
   <Field name="description" component={WysiwygEditor} />
 );
 

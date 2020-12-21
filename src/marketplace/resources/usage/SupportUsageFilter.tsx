@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import { FunctionComponent } from 'react';
 import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -33,7 +34,7 @@ interface Props {
   customer: Customer;
 }
 
-const PureSupportUsageFilter = (props: Props) => (
+const PureSupportUsageFilter: FunctionComponent<Props> = (props) => (
   <Row>
     <AccountingPeriodFilter options={props.options} />
     <OrganizationAutocomplete />

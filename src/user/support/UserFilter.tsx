@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
@@ -13,7 +14,7 @@ interface UserFilterProps extends TranslateProps {
   nativeNameVisible: boolean;
 }
 
-const PureUserFilter = (props: UserFilterProps) => (
+const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
   <form className="form-inline" id="user-filter">
     <FormContainer
       labelClass="m-r-md"

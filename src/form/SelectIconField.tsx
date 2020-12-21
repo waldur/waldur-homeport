@@ -4,11 +4,11 @@ import { components } from 'react-select';
 import { optionRenderer } from './optionRenderer';
 import { SelectField } from './SelectField';
 
-const Option = (props) => (
+const Option: FunctionComponent<any> = (props) => (
   <components.Option {...props}>{optionRenderer(props.data)}</components.Option>
 );
 
-const SingleValue = (props) => (
+const SingleValue: FunctionComponent<any> = (props) => (
   <components.SingleValue {...props}>
     {optionRenderer(props.data)}
   </components.SingleValue>

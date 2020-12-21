@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -24,7 +25,9 @@ interface OfferingDetailsButton {
   openDialog(): void;
 }
 
-const PureOfferingDetailsButton = (props: OfferingDetailsButton) => (
+const PureOfferingDetailsButton: FunctionComponent<OfferingDetailsButton> = (
+  props,
+) => (
   <ActionButton
     title={translate('Offering details')}
     icon="fa fa-eye"

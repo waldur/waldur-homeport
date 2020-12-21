@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -31,7 +32,7 @@ const openPaymentCreateDialog = (profileUrl: string) =>
     size: 'lg',
   });
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const activePaymentProfile = getActivePaymentProfile(
     props.customer.payment_profiles,
   );

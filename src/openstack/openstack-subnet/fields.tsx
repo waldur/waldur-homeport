@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { FieldArray } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -8,7 +9,7 @@ import {
   createDescriptionField,
 } from '@waldur/resource/actions/base';
 
-const HostRoutesField = () => (
+const HostRoutesField: FunctionComponent = () => (
   <>
     <div className="form-group">
       <label>{translate('Host routes')}</label>
@@ -17,7 +18,7 @@ const HostRoutesField = () => (
   </>
 );
 
-const NameserversField = () => (
+const NameserversField: FunctionComponent = () => (
   <>
     <div className="form-group">
       <label>{translate('DNS name servers')}</label>

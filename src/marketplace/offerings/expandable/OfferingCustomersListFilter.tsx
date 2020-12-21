@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -8,7 +9,7 @@ import {
   getOptions,
 } from '@waldur/customer/list/AccountingRunningField';
 
-export const PureCustomersListFilter = () => (
+export const PureCustomersListFilter: FunctionComponent = () => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline">

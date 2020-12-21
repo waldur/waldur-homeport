@@ -24,7 +24,7 @@ interface ShoppingCartItemProps {
   maxUnit: BillingPeriod;
 }
 
-const TosCell = (props: ShoppingCartItemProps) => (
+const TosCell: FunctionComponent<ShoppingCartItemProps> = (props) => (
   <td className="text-center">
     {props.item.offering_shared &&
     props.item.offering_billable &&

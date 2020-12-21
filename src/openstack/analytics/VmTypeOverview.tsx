@@ -40,4 +40,4 @@ export const VmTypeOverview = connect((state) =>
       </Tabs>
     </Panel>
   );
-}) as React.ComponentType<{}>;
+});

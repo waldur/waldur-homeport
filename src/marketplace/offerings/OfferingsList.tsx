@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -23,7 +24,7 @@ const OfferingNameColumn = ({ row }) => (
   <OfferingDetailsLink offering_uuid={row.uuid}>{row.name}</OfferingDetailsLink>
 );
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
 
   const columns = [

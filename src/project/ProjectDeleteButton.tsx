@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n/translate';
@@ -12,7 +12,7 @@ interface OwnProps {
   project: Project;
 }
 
-const PureProjectDeleteButton = (props) => (
+const PureProjectDeleteButton: FunctionComponent<any> = (props) => (
   <ActionButton
     title={translate('Delete')}
     action={props.showProjectRemoveDialog}

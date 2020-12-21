@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -17,7 +18,7 @@ import { isStaff } from '@waldur/workspace/selectors';
 
 import { OrganizationLink } from './OrganizationLink';
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Name'),

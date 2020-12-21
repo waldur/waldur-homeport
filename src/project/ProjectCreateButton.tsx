@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { isCustomerQuotaReached } from '@waldur/core/utils';
@@ -8,7 +8,7 @@ import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { gotoProjectCreate } from './actions';
 
-const PureProjectCreateButton = (props) => (
+const PureProjectCreateButton: FunctionComponent<any> = (props) => (
   <ActionButton
     title={translate('Add project')}
     action={props.gotoProjectCreate}
@@ -43,6 +43,4 @@ const mapStateToProps = (state) => {
 
 const enhance = connect(mapStateToProps, { gotoProjectCreate });
 
-export const ProjectCreateButton = enhance(
-  PureProjectCreateButton,
-) as React.ComponentType<{}>;
+export const ProjectCreateButton = enhance(PureProjectCreateButton);

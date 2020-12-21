@@ -85,7 +85,7 @@ async function loadOrderItem(order_item_uuid) {
   };
 }
 
-export const OrderItemDetailsContainer: React.FC<{}> = () => {
+export const OrderItemDetailsContainer: React.FC = () => {
   const {
     params: { order_item_uuid },
   } = useCurrentStateAndParams();

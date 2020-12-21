@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/services';
@@ -16,7 +16,7 @@ interface Props {
   limits: Limits;
 }
 
-const CellWrapper = (props) => (
+const CellWrapper: FunctionComponent<any> = (props) => (
   <td className={props.meta.error ? 'form-group has-error' : 'form-group'}>
     <div className="input-group">
       <input

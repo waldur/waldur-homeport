@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
@@ -10,7 +11,7 @@ const offeringProps = {
   },
 };
 
-const PurePlanUsageFilter = () => (
+const PurePlanUsageFilter: FunctionComponent = () => (
   <Row>
     <ProviderAutocomplete className="col-sm-6" />
     <OfferingAutocomplete {...offeringProps} className="col-sm-6" />

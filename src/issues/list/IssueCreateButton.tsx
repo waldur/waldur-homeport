@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -6,7 +7,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { openIssueCreateDialog } from '../create/actions';
 import { ISSUE_CREATION_FORM_ID } from '../create/constants';
 
-const PureIssueCreateButton = (props) => (
+const PureIssueCreateButton: FunctionComponent<any> = (props) => (
   <ActionButton
     title={translate('Create')}
     action={props.onClick}

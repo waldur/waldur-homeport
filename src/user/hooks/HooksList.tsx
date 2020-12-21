@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -23,7 +24,7 @@ const getDestinationField = (row) => row.destination_url || row.email || 'N/A';
 const getEventsField = (row) =>
   row.event_groups.map(formatEventTitle).join(', ');
 
-const TableComponent = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   useTitle(translate('Notifications'));
   return (

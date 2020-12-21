@@ -12,7 +12,7 @@ interface SelectOrganizationDivisionFieldProps {
 
 const RIGHT_ARROW_HTML = <>&rarr;</>;
 
-const Option = (props) => (
+const Option: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
     {props.data.parent_name ? (
       <>
@@ -23,7 +23,7 @@ const Option = (props) => (
   </components.Option>
 );
 
-const SingleValue = (props) => (
+const SingleValue: FunctionComponent<any> = (props) => (
   <components.SingleValue {...props}>
     {props.data.parent_name ? (
       <>

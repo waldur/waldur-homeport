@@ -8,7 +8,7 @@ import {
 } from '@waldur/marketplace/common/utils';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-export const ComponentMaxValueField: React.FC<{}> = () => (
+export const ComponentMaxValueField: React.FC = () => (
   <FormGroup label={translate('Maximum allowed value')}>
     <Field
       component="input"

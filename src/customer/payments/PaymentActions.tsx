@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -41,7 +42,7 @@ const openPaymentUpdateDialog = (payment: Payment) =>
     size: 'lg',
   });
 
-const Actions = (props) => (
+const Actions: FunctionComponent<any> = (props) => (
   <ButtonGroup>
     <ActionButton
       title={translate('Edit')}

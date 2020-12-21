@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
@@ -9,7 +10,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import { fetchOfferingCustomers } from './api';
 import { OFFERING_CUSTOMERS_LIST_TABLE_ID } from './constants';
 
-export const TableComponent = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
   const columns = filterColumns([
     {
