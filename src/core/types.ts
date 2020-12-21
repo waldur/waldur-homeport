@@ -49,9 +49,17 @@ export type StateDeclaration =
   | ComponentStateDeclaration
   | TemplateStateDeclaration;
 
+export interface LanguageOption {
+  code: string;
+  label: string;
+  display_code?: string;
+}
+
 export interface ApplicationConfigurationOptions extends Record<string, any> {
   apiEndpoint: string;
   plugins: PluginConfiguration;
+  languageChoices: LanguageOption[];
+  defaultLanguage: string;
 }
 
 // Polyfill taken from https://stackoverflow.com/a/63984409

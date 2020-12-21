@@ -1,19 +1,19 @@
 import Axios from 'axios';
+import moment from 'moment-timezone';
 
-export default class LanguageUtilsService {
-  // @ngInject
-  constructor($translate, ENV) {
-    this.$translate = $translate;
-    this.ENV = ENV;
-  }
+import { ENV, ngInjector } from '@waldur/core/services';
+import { LanguageOption } from '@waldur/core/types';
+
+class LanguageUtilsServiceClass {
+  currentLanguge: LanguageOption;
 
   getCurrentLanguage() {
-    return this.current;
+    return this.currentLanguge;
   }
 
-  setCurrentLanguage(language) {
-    this.current = language;
-    this.$translate.use(language.code);
+  setCurrentLanguage(language: LanguageOption) {
+    this.currentLanguge = language;
+    ngInjector.get('$translate').use(language.code);
     moment.locale(language.code);
     Axios.defaults.headers.common['Accept-Language'] = language.code;
   }
@@ -22,17 +22,17 @@ export default class LanguageUtilsService {
     // Check if current language is listed in choices and
     // switch to default language if current choice is invalid.
     // Fallback to first option in languageChoices list if defaultLanguage is invalid.
-    const key = this.$translate.storageKey();
-    const storage = this.$translate.storage();
+    const key = ngInjector.get('$translate').storageKey();
+    const storage = ngInjector.get('$translate').storage();
     const code = storage.get(key);
     const current =
       this.findLanguageByCode(code) ||
-      this.findLanguageByCode(this.ENV.defaultLanguage) ||
+      this.findLanguageByCode(ENV.defaultLanguage) ||
       this.getChoices()[0];
     this.setCurrentLanguage(current);
   }
 
-  findLanguageByCode(code) {
+  findLanguageByCode(code?: string) {
     if (!code) {
       return;
     }
@@ -40,6 +40,8 @@ export default class LanguageUtilsService {
   }
 
   getChoices() {
-    return this.ENV.languageChoices;
+    return ENV.languageChoices;
   }
 }
+
+export const LanguageUtilsService = new LanguageUtilsServiceClass();
