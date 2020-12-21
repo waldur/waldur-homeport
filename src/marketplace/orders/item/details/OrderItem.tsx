@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { Link } from '@waldur/core/Link';
 import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -15,6 +16,7 @@ import { OrderItemDetailsLink } from './OrderItemDetailsLink';
 
 interface OrderItemProps {
   project_uuid: string;
+  customer_uuid: string;
   item: OrderItemResponse;
   editable: boolean;
   onRemove?(): void;
@@ -51,13 +53,24 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
                 <FormattedHtml html={props.item.offering_description} />
               )}
             </p>
-            {props.item.resource_uuid && (
+            {props.item.resource_uuid ? (
               <p>
                 <ResourceDetailsLink item={props.item as ResourceReference}>
                   {translate('Resource link')}
                 </ResourceDetailsLink>
               </p>
-            )}
+            ) : props.item.marketplace_resource_uuid ? (
+              <p>
+                <Link
+                  state="marketplace-public-resource-details"
+                  params={{
+                    uuid: props.customer_uuid,
+                    resource_uuid: props.item.marketplace_resource_uuid,
+                  }}
+                  label={translate('Resource link')}
+                />
+              </p>
+            ) : null}
           </div>
         </div>
       </td>

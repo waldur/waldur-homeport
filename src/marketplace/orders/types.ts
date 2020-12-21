@@ -89,4 +89,5 @@ export interface Order {
   file?: string;
   project?: string;
   project_uuid?: string;
+  customer_uuid?: string;
 }

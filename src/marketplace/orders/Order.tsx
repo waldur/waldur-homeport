@@ -16,6 +16,7 @@ interface OrderProps {
   editable: boolean;
   onOrderItemRemove?(item: OrderItemResponse): void;
   project_uuid: string;
+  customer_uuid: string;
 }
 
 export const Order: FunctionComponent<OrderProps> = (props) => {
@@ -52,6 +53,7 @@ export const Order: FunctionComponent<OrderProps> = (props) => {
                 item={item}
                 editable={props.editable}
                 project_uuid={props.project_uuid}
+                customer_uuid={props.customer_uuid}
                 showPrice={showPrice}
                 maxUnit={maxUnit}
               />
