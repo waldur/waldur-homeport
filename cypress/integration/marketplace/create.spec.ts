@@ -50,7 +50,9 @@ describe('Offering creation', () => {
       // Management step
       .log('Select management type')
       .openDropdownByLabel('Type')
-      .selectTheFirstOptionOfDropdown()
+      .get('*div[id^="react-select"]')
+      .contains('Request-based item')
+      .click()
 
       .log('Add user input field')
       .get('button')

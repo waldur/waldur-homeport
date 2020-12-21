@@ -109,10 +109,12 @@ export function getOfferingTypes(): Option[] {
   const keys = Object.keys(REGISTRY).filter(
     (key) => !REGISTRY[key].disableOfferingCreation,
   );
-  return keys.map((key) => ({
-    value: key,
-    label: REGISTRY[key].label,
-  }));
+  return keys
+    .map((key) => ({
+      value: key,
+      label: REGISTRY[key].label,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
 }
 
 export function showOfferingOptions(offeringType: string) {
