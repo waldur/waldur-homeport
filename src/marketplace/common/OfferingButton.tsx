@@ -1,7 +1,9 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 
 import { Tooltip } from '@waldur/core/Tooltip';
+
 import './OfferingButton.scss';
 
 interface OfferingButtonProps {
@@ -19,16 +21,15 @@ export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
 ) => {
   if (props.flavor === 'primary') {
     return (
-      <button
-        type="button"
-        className={classNames('btn btn-sm btn-primary', {
-          disabled: props.disabled,
-        })}
+      <Button
+        bsSize="sm"
+        bsStyle="primary"
+        disabled={props.disabled}
         onClick={props.onClick}
       >
         {props.isAddingItem && <i className="fa fa-spinner fa-spin m-r-xs" />}
         <i className={props.icon} /> {props.title}
-      </button>
+      </Button>
     );
   } else if (props.flavor === 'secondary') {
     return (
