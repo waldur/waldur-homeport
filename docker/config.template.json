@@ -1,0 +1,5 @@
+{
+  "apiEndpoint": "${API_URL}",
+  "accountingMode": "billing"
+}
+
