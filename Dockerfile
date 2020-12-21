@@ -19,5 +19,13 @@ RUN yarn build
 # production environment
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
+
+ENV API_URL="http://localhost:8080"
+
+# put config template outside the public root
+COPY docker/config.template.json /usr/share/nginx/
+# replace default configuration
+COPY docker/nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/bin/sh",  "-c",  "mkdir -p /usr/share/nginx/html/scripts/configs/ && envsubst < /usr/share/nginx/config.template.json > /usr/share/nginx/html/scripts/configs/config.json && exec nginx -g 'daemon off;'"]
