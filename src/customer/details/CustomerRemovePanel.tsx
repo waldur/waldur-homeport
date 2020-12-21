@@ -6,7 +6,7 @@ import { useAsync } from 'react-use';
 import { deleteById, getAll } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV, ngInjector } from '@waldur/core/services';
+import { ENV } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
@@ -14,6 +14,7 @@ import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError } from '@waldur/store/coreSaga';
 import store from '@waldur/store/store';
+import { StateUtilsService } from '@waldur/user/StateUtilsService';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
 import {
   getUser,
@@ -89,7 +90,6 @@ export const CustomerRemovePanel: FunctionComponent = () => {
 
     const confirmDelete = confirm(translate('Confirm deletion?'));
     if (confirmDelete) {
-      const StateUtilsService = ngInjector.get('StateUtilsService');
       store.dispatch(setCurrentCustomer(null));
       deleteById('/customers/', customer.uuid).then(
         () => {

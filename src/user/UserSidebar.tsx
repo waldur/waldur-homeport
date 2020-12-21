@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { Sidebar } from '@waldur/navigation/sidebar/Sidebar';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
@@ -26,14 +25,13 @@ import {
 } from '@waldur/workspace/types';
 
 import { getPrivateUserTabs, getPublicUserTabs } from './constants';
+import { StateUtilsService } from './StateUtilsService';
 
 const getExtraSidebarItems = (): Promise<MenuItemType[]> => {
   return SidebarExtensionService.getItems(USER_WORKSPACE);
 };
 
 function getNavItems(user, customer, project) {
-  const StateUtilsService = ngInjector.get('StateUtilsService');
-
   const prevWorkspace = StateUtilsService.getPrevWorkspace();
   if (prevWorkspace === PROJECT_WORKSPACE) {
     return [
