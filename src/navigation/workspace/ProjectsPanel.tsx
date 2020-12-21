@@ -1,5 +1,4 @@
 import {
-  FunctionComponent,
   useMemo,
   useState,
   useCallback,
@@ -16,13 +15,15 @@ import {
   getUser,
   checkCustomerUser,
 } from '@waldur/workspace/selectors';
-import { Project } from '@waldur/workspace/types';
+import { Customer, Project } from '@waldur/workspace/types';
 
 import { BaseList } from './BaseList';
 import { FilterGroup } from './FilterGroup';
 import { useProjectFilter } from './utils';
 
-const CreateProjectButton = ({ selectedOrganization }) => {
+const CreateProjectButton: FunctionComponent<{
+  selectedOrganization: Customer;
+}> = ({ selectedOrganization }) => {
   const user = useSelector(getUser);
   const canCreate = useMemo(
     () => checkCustomerUser(selectedOrganization, user),
@@ -50,7 +51,9 @@ const EmptyProjectsPlaceholder: FunctionComponent = () => (
   </p>
 );
 
-const ProjectsHeader = ({ selectedOrganization }) => (
+const ProjectsHeader: FunctionComponent<{
+  selectedOrganization?: Customer;
+}> = ({ selectedOrganization }) => (
   <h3 className="m-b-md">
     {translate('Projects ({count})', {
       count: selectedOrganization?.projects?.length || 0,
@@ -81,9 +84,9 @@ const ProjectListItem = ({ item }) => (
   </>
 );
 
-export const ProjectsPanel: FunctionComponent<{ selectedOrganization }> = ({
-  selectedOrganization,
-}) => {
+export const ProjectsPanel: FunctionComponent<{
+  selectedOrganization: Customer;
+}> = ({ selectedOrganization }) => {
   const currentProject = useSelector(getProject);
   const [selectedProject, selectProject] = useState<Project>(currentProject);
 

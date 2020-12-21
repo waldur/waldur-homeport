@@ -1,28 +1,25 @@
 import { useState, useMemo, useCallback } from 'react';
 
-import { ngInjector } from '@waldur/core/services';
+import { LanguageOption } from '@waldur/core/types';
 
-interface Language {
-  code: string;
-  display_code: string;
-  label: string;
-}
+import { LanguageUtilsService } from './LanguageUtilsService';
 
 export const useLanguageSelector = () => {
-  const service = ngInjector.get('LanguageUtilsService');
-
-  const [currentLanguage, setCurrentLanguage] = useState<Language>(
-    service.getCurrentLanguage(),
+  const [currentLanguage, setCurrentLanguage] = useState<LanguageOption>(
+    LanguageUtilsService.getCurrentLanguage(),
   );
 
-  const languageChoices = useMemo<Language[]>(
-    () => service.getChoices().sort((a, b) => a.code.localeCompare(b.code)),
+  const languageChoices = useMemo<LanguageOption[]>(
+    () =>
+      LanguageUtilsService.getChoices().sort((a, b) =>
+        a.code.localeCompare(b.code),
+      ),
     [],
   );
 
-  const setLanguage = useCallback((language: Language) => {
+  const setLanguage = useCallback((language: LanguageOption) => {
     setCurrentLanguage(language);
-    service.setCurrentLanguage(language);
+    LanguageUtilsService.setCurrentLanguage(language);
     setTimeout(() => {
       location.reload();
     }, 1000);
