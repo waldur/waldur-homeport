@@ -7,6 +7,7 @@ import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/types';
 import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { setCurrentCustomer } from '@waldur/workspace/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { canRegisterServiceProviderForCustomer } from './selectors';
@@ -18,6 +19,7 @@ interface ServiceProviderWrapperProps extends TranslateProps {
   canRegisterServiceProvider: boolean;
   showError?(message: string): void;
   showSuccess?(message: string): void;
+  updateCustomer(customer: Customer): void;
 }
 
 interface ServiceProviderWrapperState {
@@ -25,6 +27,12 @@ interface ServiceProviderWrapperState {
   loading: boolean;
   serviceProvider: ServiceProvider;
 }
+
+const updateCustomer = (customer: Customer) =>
+  setCurrentCustomer({
+    ...customer,
+    is_service_provider: true,
+  });
 
 class ServiceProviderWrapper extends Component<
   ServiceProviderWrapperProps,
@@ -46,6 +54,7 @@ class ServiceProviderWrapper extends Component<
       });
       this.setState({ registering: false, serviceProvider });
       this.props.showSuccess(successMessage);
+      this.props.updateCustomer(this.props.customer);
     } catch (error) {
       this.setState({ registering: false });
       this.props.showError(errorMessage);
@@ -104,6 +113,7 @@ const enhance = compose(
   connect(mapStateToProps, {
     showError,
     showSuccess,
+    updateCustomer,
   }),
 );
 
