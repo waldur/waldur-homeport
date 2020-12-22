@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { getSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 

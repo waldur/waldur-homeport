@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useAsync } from 'react-use';
 import { getFormValues } from 'redux-form';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 import * as api from './api';

@@ -3,8 +3,8 @@ import Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { Table, connectTable } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';

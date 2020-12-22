@@ -1,5 +1,5 @@
+import { ENV } from '@waldur/configs/default';
 import { getSelectData, post } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';

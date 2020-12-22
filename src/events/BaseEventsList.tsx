@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { ENV } from '@waldur/core/services';
 import eventsRegistry from '@waldur/events/registry';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 

@@ -1,6 +1,6 @@
+import { ENV } from '@waldur/configs/default';
 import { get } from '@waldur/core/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { ActionContext } from '@waldur/resource/actions/types';

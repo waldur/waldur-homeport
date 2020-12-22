@@ -1,8 +1,7 @@
 import { StateService } from '@uirouter/core';
 
-import { ApplicationConfigurationOptions } from './types';
+import { ENV } from '@waldur/configs/default';
 
-export let ENV: ApplicationConfigurationOptions = null;
 export let $rootScope = null;
 export let $compile = null;
 export let $state: StateService = null;
@@ -38,7 +37,6 @@ export const defaultCurrency = (value) => {
 };
 
 export default function injectServices($injector) {
-  ENV = $injector.get('ENV');
   $rootScope = $injector.get('$rootScope');
   $compile = $injector.get('$compile');
   $state = $injector.get('$state');

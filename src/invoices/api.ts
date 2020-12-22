@@ -1,6 +1,6 @@
+import { ENV } from '@waldur/configs/default';
 import { get, sendForm } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
-import { ENV } from '@waldur/core/services';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
 

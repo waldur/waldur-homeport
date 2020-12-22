@@ -3,9 +3,9 @@ import { useEffect, FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
 import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV } from '@waldur/core/services';
 import { getUUID } from '@waldur/core/utils';
 import { CustomerSidebar } from '@waldur/customer/workspace/CustomerSidebar';
 import { isFeatureVisible } from '@waldur/features/connect';

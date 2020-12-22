@@ -9,13 +9,13 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { ENV } from '@waldur/configs/default';
 import { post } from '@waldur/core/api';
 import {
   CUSTOMER_OWNER_ROLE,
   PROJECT_ADMIN_ROLE,
   PROJECT_MANAGER_ROLE,
 } from '@waldur/core/constants';
-import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,

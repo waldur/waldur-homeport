@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import terminateAction from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { ResourceAction } from '@waldur/resource/actions/types';
 

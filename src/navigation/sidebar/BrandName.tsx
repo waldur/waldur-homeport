@@ -2,7 +2,7 @@ import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import {
   getWorkspace,
   getCustomer,

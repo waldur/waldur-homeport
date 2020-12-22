@@ -1,5 +1,5 @@
+import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { ENV } from '@waldur/core/services';
 
 export function wait(amount = 0) {
   return new Promise((resolve) => setTimeout(resolve, amount));

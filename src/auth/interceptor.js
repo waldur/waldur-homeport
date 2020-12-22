@@ -1,14 +1,15 @@
 import Axios from 'axios';
 import Qs from 'qs';
 
-import { ENV, ngInjector } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
+import { ngInjector } from '@waldur/core/services';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { closeModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 
 import { AuthService } from './AuthService';
 
-// @ngInject
 function initAuthToken() {
   // When application starts up, we need to inject auth token if it exists
   const token = localStorage['AUTH_TOKEN'];
@@ -49,7 +50,7 @@ Axios.interceptors.response.use(
 );
 
 // @ngInject
-function requireAuth($transitions, $rootScope, features) {
+function requireAuth($transitions, $rootScope) {
   $transitions.onStart(
     {
       to: (state) =>
@@ -101,7 +102,7 @@ function requireAuth($transitions, $rootScope, features) {
       to: (state) =>
         state.data &&
         state.data.feature &&
-        !features.isVisible(state.data.feature),
+        !isFeatureVisible(state.data.feature),
     },
     (transition) => transition.router.stateService.target('errorPage.notFound'),
   );

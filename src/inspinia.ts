@@ -1,10 +1,3 @@
-/**
- * INSPINIA - Responsive Admin Theme
- * 2.6
- *
- * Custom scripts
- */
-
 // Minimalize menu when screen is less than 768px
 function updateSidebar() {
   if (document.body.clientWidth < 769) {

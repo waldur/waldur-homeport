@@ -20,7 +20,8 @@
  */
 import Axios from 'axios';
 
-import { $state, $uiRouterGlobals, ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
+import { $state, $uiRouterGlobals } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/coreSaga';
 import store from '@waldur/store/store';

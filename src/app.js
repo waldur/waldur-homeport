@@ -14,22 +14,3 @@ export function urlRouterProvider(
   $urlRouterProvider.when('/', '/profile/');
   $qProvider.errorOnUnhandledRejections(false);
 }
-
-// @ngInject
-export function extendEnv(ENV) {
-  Object.assign(ENV, window.$$CUSTOMENV);
-  if (ENV.enableExperimental) {
-    Object.assign(ENV, window.$$MODES.experimentalMode);
-  } else {
-    Object.assign(ENV, window.$$MODES.stableMode);
-  }
-}
-
-// @ngInject
-export function featuresProviderConfig(ENV, featuresProvider) {
-  featuresProvider.setDisabledFeatures(
-    ENV.toBeFeatures.concat(ENV.disabledFeatures),
-  );
-  featuresProvider.setEnabledFeatures(ENV.enabledFeatures);
-  featuresProvider.setVisibility(ENV.featuresVisible);
-}

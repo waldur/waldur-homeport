@@ -1,5 +1,5 @@
+import { ENV } from '@waldur/configs/default';
 import { getFirst, sendForm } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 
 interface UpdateLogoParams {
   customerUuid: string;

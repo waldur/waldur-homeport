@@ -80,7 +80,6 @@ module.exports = {
     'no-prototype-builtins': 'off',
   },
   globals: {
-    gettext: true,
     angular: true,
     beforeAll: true,
     afterAll: true,

@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 
 // Avoid to re-download the fonts every time pdfmake is used, useful for SPA.
 let pdfMakeInstance: any = null;

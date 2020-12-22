@@ -3,9 +3,9 @@ import Axios from 'axios';
 import Qs from 'qs';
 import { useState, useEffect, FunctionComponent } from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV } from '@waldur/core/services';
 import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { UsersService } from '@waldur/user/UsersService';

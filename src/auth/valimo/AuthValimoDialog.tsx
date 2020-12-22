@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { useMountedState } from 'react-use';
 import { reduxForm, Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';

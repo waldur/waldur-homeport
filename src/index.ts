@@ -3,7 +3,6 @@ import angular from 'angular';
 import '@uirouter/angularjs/release/stateEvents';
 
 import './vendor';
-import './globals';
 import './sass/style.scss';
 import '../svgfonts.font';
 
@@ -13,7 +12,6 @@ import bootstrap from './core/bootstrap';
 import coreModule from './core/module';
 import './customer/module';
 import digitaloceanModule from './digitalocean/module';
-import featuresModule from './features/module';
 import i18nModule from './i18n/module';
 import invitationsModule from './invitations/module';
 import './invoices/module';
@@ -47,7 +45,6 @@ const appModule = angular.module('waldur', [
 ]);
 
 rootModule(appModule);
-featuresModule(appModule);
 issuesModule(appModule);
 userModule(appModule);
 resourceModule(appModule);

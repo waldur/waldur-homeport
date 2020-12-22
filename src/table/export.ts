@@ -3,7 +3,7 @@ import FileSaver from 'file-saver';
 import Papa from 'papaparse';
 import { put, call, select } from 'redux-saga/effects';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { loadPdfMake } from '@waldur/shims/pdfmake';
 import { fetchAll } from '@waldur/table/api';
 

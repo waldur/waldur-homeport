@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { withTranslation } from '@waldur/i18n';
 import {
   Field,

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Button, FormGroup } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 export const LoadUserDetailsButton: FunctionComponent<{ loading; onClick }> = ({

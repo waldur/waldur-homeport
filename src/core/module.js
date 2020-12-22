@@ -1,4 +1,5 @@
 import { AuthService } from '@waldur/auth/AuthService';
+import { ENV } from '@waldur/configs/default';
 
 import sentryModule from './sentry';
 import injectServices from './services';
@@ -41,8 +42,7 @@ function defaultErrorHandler($state) {
   });
 }
 
-// @ngInject
-function initTitle(ENV) {
+function initTitle() {
   document.title = ENV.modePageTitle;
 }
 

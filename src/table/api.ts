@@ -1,8 +1,8 @@
 import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import Qs from 'qs';
 
+import { ENV } from '@waldur/configs/default';
 import { getNextPageUrl, parseResultCount } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 
 import { Fetcher, TableRequest } from './types';
 

@@ -1,4 +1,5 @@
 import { AuthService } from '@waldur/auth/AuthService';
+import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -17,7 +18,7 @@ const InvitationConfirmDialog = lazyComponent(
 
 export class InvitationUtilsService {
   // @ngInject
-  constructor($q, $state, $rootScope, $timeout, ENV) {
+  constructor($q, $state, $rootScope, $timeout) {
     this.$q = $q;
     this.$state = $state;
     this.$rootScope = $rootScope;

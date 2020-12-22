@@ -1,6 +1,7 @@
 import angular from 'angular';
 import Axios from 'axios';
 
+import { ENV } from '@waldur/configs/default';
 import experimentalMode from '@waldur/configs/modes/experimental.json';
 import stableMode from '@waldur/configs/modes/stable.json';
 import { renderModalContainer } from '@waldur/modal/ModalContainer';
@@ -78,9 +79,14 @@ export default async function bootstrap(modulename) {
   if (!config) {
     return;
   }
-  window['$$CUSTOMENV'] = config;
-  window['$$MODES'] = modes;
-  attachTracking(window['$$CUSTOMENV']);
+
+  Object.assign(ENV, config);
+  if (ENV.enableExperimental) {
+    Object.assign(ENV, modes.experimentalMode);
+  } else {
+    Object.assign(ENV, modes.stableMode);
+  }
+  attachTracking(ENV);
 
   angular.element(document).ready(function () {
     angular.bootstrap(document, [modulename], { strictDi: true });

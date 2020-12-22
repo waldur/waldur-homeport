@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { ENV, defaultCurrency } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
+import { defaultCurrency } from '@waldur/core/services';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 

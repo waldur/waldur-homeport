@@ -57,7 +57,7 @@ export interface LanguageOption {
 
 export interface ApplicationConfigurationOptions extends Record<string, any> {
   apiEndpoint: string;
-  plugins: PluginConfiguration;
+  plugins?: PluginConfiguration;
   languageChoices: LanguageOption[];
   defaultLanguage: string;
 }

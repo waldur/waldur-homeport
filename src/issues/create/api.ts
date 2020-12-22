@@ -1,5 +1,5 @@
+import { ENV } from '@waldur/configs/default';
 import { getList, getSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { Project, Customer, User } from '@waldur/workspace/types';
 

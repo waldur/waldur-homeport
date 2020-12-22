@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
+import { ENV } from '@waldur/configs/default';
 import { get, getAll, getById, parseResultCount, post } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 
 import {
   Category,

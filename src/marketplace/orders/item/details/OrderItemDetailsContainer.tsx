@@ -2,8 +2,8 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import React, { useEffect, useState } from 'react';
 import { useAsyncFn, useEffectOnce, useNetwork } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV } from '@waldur/core/services';
 import { Await } from '@waldur/core/types';
 import { useRecursiveTimeout } from '@waldur/core/useRecursiveTimeout';
 import { translate } from '@waldur/i18n';

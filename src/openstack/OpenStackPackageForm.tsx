@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { getLatinNameValidators } from '@waldur/core/validators';
 import {
   FormContainer,

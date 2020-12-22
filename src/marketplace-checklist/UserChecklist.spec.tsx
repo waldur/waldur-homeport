@@ -19,7 +19,7 @@ import { UserChecklist } from './UserChecklist';
 
 const apiMock = api as jest.Mocked<typeof api>;
 
-jest.mock('@waldur/core/services', () => ({
+jest.mock('@waldur/configs/default', () => ({
   ENV: 'localhost',
 }));
 

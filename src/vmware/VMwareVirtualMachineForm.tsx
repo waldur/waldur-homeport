@@ -2,8 +2,8 @@ import { useEffect, useMemo } from 'react';
 import { useAsync } from 'react-use';
 import { formValues, Field } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,

@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { getInstances } from '@waldur/openstack/api';
 import { ResourceAction } from '@waldur/resource/actions/types';

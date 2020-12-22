@@ -1,5 +1,6 @@
 import Axios, { AxiosRequestConfig } from 'axios';
 
+import { ENV } from '@waldur/configs/default';
 import {
   get,
   getAll,
@@ -13,7 +14,6 @@ import {
   getSelectData,
   parseResultCount,
 } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 import { Customer } from '@waldur/customer/types';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import {

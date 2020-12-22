@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { InvitationService } from '@waldur/invitations/InvitationService';
 import { showError } from '@waldur/store/coreSaga';

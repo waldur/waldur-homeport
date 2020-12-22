@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { getProjectList } from '@waldur/marketplace/common/api';
 
