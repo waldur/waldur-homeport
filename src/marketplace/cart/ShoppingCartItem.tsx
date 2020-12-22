@@ -7,6 +7,7 @@ import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { showPriceSelector } from '@waldur/invoices/details/utils';
+import { ShoppingCartTimeSlots } from '@waldur/marketplace/cart/ShoppingCartTimeSlots';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 
@@ -65,6 +66,9 @@ export const ShoppingCartItem: FunctionComponent<ShoppingCartItemProps> = (
                 <FormattedHtml html={props.item.offering_description} />
               )}
             </p>
+            <ShoppingCartTimeSlots
+              schedules={props.item.attributes.schedules}
+            />
           </div>
         </div>
       </td>

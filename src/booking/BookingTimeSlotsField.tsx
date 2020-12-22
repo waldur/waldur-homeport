@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
 
-const wrapScheduleTitleTooltip = (label, children) =>
+export const wrapScheduleTitleTooltip = (label: string, children) =>
   label ? (
     <Tooltip label={label} id="schedule-title-label">
       {children}
