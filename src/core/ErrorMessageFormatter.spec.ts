@@ -1,6 +1,6 @@
 import { format } from './ErrorMessageFormatter';
 
-jest.mock('@waldur/core/services', () => ({
+jest.mock('@waldur/configs/default', () => ({
   ENV: { apiEndpoint: 'https://example.com/' },
 }));
 

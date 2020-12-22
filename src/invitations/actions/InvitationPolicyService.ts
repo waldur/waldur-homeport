@@ -1,5 +1,5 @@
+import { ENV } from '@waldur/configs/default';
 import { CUSTOMER_OWNER_ROLE, PROJECT_ROLES } from '@waldur/core/constants';
-import { ENV } from '@waldur/core/services';
 import { checkIsOwner } from '@waldur/workspace/selectors';
 
 export const InvitationPolicyService = {

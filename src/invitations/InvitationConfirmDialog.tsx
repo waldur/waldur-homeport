@@ -9,8 +9,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';

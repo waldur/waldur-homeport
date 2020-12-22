@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 
 export const login = (phone) => {
   return Axios.post(`${ENV.apiEndpoint}api/auth-valimo/`, {

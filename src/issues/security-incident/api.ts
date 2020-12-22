@@ -1,5 +1,5 @@
+import { ENV } from '@waldur/configs/default';
 import { sendForm } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 import { formatDescriptionField } from '@waldur/issues/security-incident/utils';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 

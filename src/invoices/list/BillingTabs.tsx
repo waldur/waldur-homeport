@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { PanelBody } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { useTitle } from '@waldur/navigation/title';
 import { PayPalInvoicesList } from '@waldur/paypal/PayPalInvoicesList';

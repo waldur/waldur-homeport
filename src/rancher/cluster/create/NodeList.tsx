@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 
 import { DEFAULT_NODE_CONFIGURATION } from './constants';
 import { NodeAddButton } from './NodeAddButton';

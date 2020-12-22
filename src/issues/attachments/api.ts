@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
+import { ENV } from '@waldur/configs/default';
 import { sendForm } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 
 export const getAttachments = (issue: string) => {
   return Axios.get(`${ENV.apiEndpoint}api/support-attachments/`, {

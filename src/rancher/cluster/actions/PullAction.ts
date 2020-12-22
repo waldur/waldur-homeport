@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { createPullAction } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 

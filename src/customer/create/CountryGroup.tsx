@@ -4,7 +4,7 @@ import { components } from 'react-select';
 import { useAsync } from 'react-use';
 import WindowedSelect from 'react-windowed-select';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 import { InputGroup } from './InputGroup';

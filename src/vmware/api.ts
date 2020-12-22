@@ -1,5 +1,5 @@
+import { ENV } from '@waldur/configs/default';
 import { getAll, getById } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 
 const getLimits = (settingsId) => getById('/vmware-limits/', settingsId);
 

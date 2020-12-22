@@ -5,7 +5,7 @@ import Axios, {
   AxiosResponse,
 } from 'axios';
 
-import { ENV } from './services';
+import { ENV } from '@waldur/configs/default';
 
 const fixURL = (endpoint: string) =>
   endpoint.startsWith('http') ? endpoint : `${ENV.apiEndpoint}api${endpoint}`;

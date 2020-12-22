@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';

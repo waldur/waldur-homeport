@@ -1,5 +1,6 @@
+import { ENV } from '@waldur/configs/default';
 import { getFirst, getById, patch } from '@waldur/core/api';
-import { ENV, $q } from '@waldur/core/services';
+import { $q } from '@waldur/core/services';
 import store from '@waldur/store/store';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';

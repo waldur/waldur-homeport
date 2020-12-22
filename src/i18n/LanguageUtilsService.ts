@@ -1,7 +1,8 @@
 import Axios from 'axios';
 import moment from 'moment-timezone';
 
-import { ENV, ngInjector } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
+import { ngInjector } from '@waldur/core/services';
 import { LanguageOption } from '@waldur/core/types';
 
 class LanguageUtilsServiceClass {

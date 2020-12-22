@@ -9,8 +9,8 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, change, arrayPush } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { ENV } from '@waldur/configs/default';
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
-import { ENV } from '@waldur/core/services';
 import { CustomerPermissionsService } from '@waldur/customer/services/CustomerPermissionsService';
 import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
 import { translate } from '@waldur/i18n';

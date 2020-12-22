@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { ISSUE_IDS, ISSUE_TYPE_CHOICES } from '@waldur/issues/types/constants';
 import { User } from '@waldur/workspace/types';
 

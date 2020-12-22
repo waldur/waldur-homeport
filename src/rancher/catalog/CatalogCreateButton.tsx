@@ -1,8 +1,8 @@
 import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';

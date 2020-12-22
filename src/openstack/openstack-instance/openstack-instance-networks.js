@@ -1,3 +1,4 @@
+import { gettext } from '@waldur/i18n';
 import { internalIpFormatter } from './openstack-instance-config';
 import template from './openstack-instance-networks.html';
 

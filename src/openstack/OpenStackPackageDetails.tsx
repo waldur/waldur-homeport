@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsField } from '@waldur/marketplace/orders/item/details/OrderItemDetailsField';
 import { SecretValueField } from '@waldur/marketplace/SecretValueField';

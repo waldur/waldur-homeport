@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';

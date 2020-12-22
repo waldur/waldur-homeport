@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import React from 'react';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 
 import './ErrorBoundary.css';
 

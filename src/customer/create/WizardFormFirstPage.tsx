@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { PanelBody } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { getNameFieldValidators } from '@waldur/core/validators';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
@@ -12,7 +12,7 @@ import { InputGroup } from './InputGroup';
 import { SelectField } from './SelectField';
 import { WizardForm } from './WizardForm';
 
-const formatCompanyTypes = (ENV) =>
+const formatCompanyTypes = () =>
   (ENV.plugins.WALDUR_CORE.COMPANY_TYPES || []).map((item) => ({
     value: item,
     label: item,
@@ -44,7 +44,7 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => (
           name="type"
           component={SelectField}
           label={translate('Organization type')}
-          options={formatCompanyTypes(ENV)}
+          options={formatCompanyTypes()}
           isClearable={true}
         />
       )}

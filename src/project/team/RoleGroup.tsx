@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { FormControl, FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 

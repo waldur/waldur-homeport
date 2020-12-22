@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';

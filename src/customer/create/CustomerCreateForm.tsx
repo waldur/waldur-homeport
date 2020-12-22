@@ -1,6 +1,6 @@
 import { useState, createElement, FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';

@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
+import { ENV } from '@waldur/configs/default';
 import { parseResultCount } from '@waldur/core/api';
-import { ENV } from '@waldur/core/services';
 
 export const getCustomersCount = () =>
   Axios.head(`${ENV.apiEndpoint}api/customers/`).then((response) =>

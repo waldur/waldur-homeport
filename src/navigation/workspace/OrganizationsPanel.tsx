@@ -1,7 +1,7 @@
 import { useState, useCallback, FunctionComponent } from 'react';
 import { Col } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 import { getCustomersPage } from './api';

@@ -3,9 +3,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reset, SubmissionError } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { sendForm } from '@waldur/core/api';
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
-import { ENV } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
 import { getCurrentUser } from '@waldur/user/UsersService';

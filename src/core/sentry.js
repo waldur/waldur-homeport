@@ -7,8 +7,10 @@ only then decide if we need to install Sentry client or not.
 
 import * as Sentry from '@sentry/browser';
 
+import { ENV } from '@waldur/configs/default';
+
 // @ngInject
-function exceptionHandlerFactory($log, ENV) {
+function exceptionHandlerFactory($log) {
   return function (exception, cause) {
     if (ENV.SENTRY_DSN) {
       if (cause) {
@@ -48,8 +50,7 @@ function normalizeEvent(event) {
   return event;
 }
 
-// @ngInject
-function attachSentry(ENV) {
+function attachSentry() {
   if (ENV.SENTRY_DSN) {
     Sentry.init({
       dsn: ENV.SENTRY_DSN,

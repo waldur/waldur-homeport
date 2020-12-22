@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { ExternalLink } from '@waldur/core/ExternalLink';
-import { ENV } from '@waldur/core/services';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,

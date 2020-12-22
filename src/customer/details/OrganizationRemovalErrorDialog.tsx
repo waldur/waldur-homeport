@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { getCustomer } from '@waldur/workspace/selectors';

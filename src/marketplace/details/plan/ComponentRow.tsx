@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { ENV, formatCurrency } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
+import { formatCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';

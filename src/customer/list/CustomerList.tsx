@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { formatDate } from '@waldur/core/dateUtils';
-import { ENV } from '@waldur/core/services';
 import { withTranslation, translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { Table, connectTable, createFetcher } from '@waldur/table';

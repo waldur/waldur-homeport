@@ -2,8 +2,8 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useState, useEffect, FunctionComponent } from 'react';
 import { useAsyncFn, useEffectOnce, useNetwork } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV } from '@waldur/core/services';
 import { useRecursiveTimeout } from '@waldur/core/useRecursiveTimeout';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';

@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { gettext } from '@waldur/i18n';
 

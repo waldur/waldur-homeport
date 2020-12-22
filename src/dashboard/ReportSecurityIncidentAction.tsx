@@ -1,6 +1,6 @@
+import { ENV } from '@waldur/configs/default';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { MessageDialog } from '@waldur/core/MessageDialog';
-import { ENV } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { openReportSecurityIncidentDialog } from '@waldur/issues/security-incident/store/actions';

@@ -3,8 +3,8 @@ import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ENV } from '@waldur/core/services';
 import { pick } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/coreSaga';

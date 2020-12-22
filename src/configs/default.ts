@@ -1,8 +1,9 @@
-import { gettext } from '@waldur/i18n';
+import { ApplicationConfigurationOptions } from '@waldur/core/types';
 
-const ENV = {
+const gettext = (x: string): string => x;
+
+export const ENV: ApplicationConfigurationOptions = {
   // general config
-  name: '',
   apiEndpoint: 'http://localhost:8080/',
   modePageTitle: 'Waldur | Cloud Service Management',
   shortPageTitle: 'Waldur',
@@ -159,5 +160,3 @@ const ENV = {
     },
   },
 };
-
-export default ENV;

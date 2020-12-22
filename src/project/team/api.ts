@@ -1,6 +1,6 @@
+import { ENV } from '@waldur/configs/default';
 import { getList } from '@waldur/core/api';
 import { PROJECT_MANAGER_ROLE } from '@waldur/core/constants';
-import { ENV } from '@waldur/core/services';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
 

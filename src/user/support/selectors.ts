@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { isVisible } from '@waldur/store/config';
 import { getUser } from '@waldur/workspace/selectors';
 

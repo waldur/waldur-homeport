@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { FieldArray } from 'redux-form';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 
 import { DataVolumesList } from './DataVolumesList';
 import { SystemVolumeSizeGroup } from './SystemVolumeSizeGroup';

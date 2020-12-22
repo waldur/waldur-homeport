@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 

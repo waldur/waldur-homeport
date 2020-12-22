@@ -1,8 +1,8 @@
 import moment from 'moment-timezone';
 
+import { ENV } from '@waldur/configs/default';
 import { getAll } from '@waldur/core/api';
 import { formatDateToYearMonth } from '@waldur/core/dateUtils';
-import { ENV } from '@waldur/core/services';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
 

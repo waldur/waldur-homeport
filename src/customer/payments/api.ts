@@ -1,6 +1,6 @@
+import { ENV } from '@waldur/configs/default';
 import { deleteById, getAll, post, sendForm } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
-import { ENV } from '@waldur/core/services';
 import { Payment } from '@waldur/workspace/types';
 
 export const getTotalOfSumPaid = (profileUuid: string) => {

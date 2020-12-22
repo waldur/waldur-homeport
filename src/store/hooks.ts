@@ -1,6 +1,7 @@
 import ReactGA from 'react-ga';
 
-import { ENV, $rootScope, ngInjector } from '@waldur/core/services';
+import { ENV } from '@waldur/configs/default';
+import { $rootScope, ngInjector } from '@waldur/core/services';
 
 import { initConfig } from './config';
 import { localeUpdated } from './locale';

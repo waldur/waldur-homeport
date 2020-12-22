@@ -1,10 +1,10 @@
+import { ENV } from '@waldur/configs/default';
 import {
   CUSTOMER_OWNER_ROLE,
   PROJECT_ADMIN_ROLE,
   PROJECT_MANAGER_ROLE,
   PROJECT_MEMBER_ROLE,
 } from '@waldur/core/constants';
-import { ENV } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 
