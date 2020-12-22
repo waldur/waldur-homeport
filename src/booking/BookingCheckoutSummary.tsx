@@ -4,7 +4,7 @@ import { translate } from '@waldur/i18n';
 import { OfferingPeriodsRenderer } from '@waldur/marketplace/details/OfferingPeriodsRenderer';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 
-const BookingExtraComponent: FunctionComponent<any> = (props) => (
+export const BookingExtraComponent: FunctionComponent<any> = (props) => (
   <>
     {props.formData &&
     props.formData.attributes &&

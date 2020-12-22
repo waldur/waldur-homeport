@@ -6,6 +6,7 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { ShoppingCartItemUpdateExtraComponent } from '@waldur/marketplace/cart/ShoppingCartItemUpdateExtraComponent';
 import { Plan, Offering } from '@waldur/marketplace/types';
 import { setTitle } from '@waldur/navigation/title';
 
@@ -52,6 +53,7 @@ const PureShoppingCartItemUpdate: FunctionComponent<PureShoppingCartItemUpdatePr
         <OrderSummary
           offering={{ ...props.offering, uuid: props.shoppingCartItem.uuid }}
           updateMode={true}
+          extraComponent={ShoppingCartItemUpdateExtraComponent}
         />
       </Col>
     </Row>
