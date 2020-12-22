@@ -5,14 +5,14 @@ import { ENV, ngInjector } from '@waldur/core/services';
 import { LanguageOption } from '@waldur/core/types';
 
 class LanguageUtilsServiceClass {
-  currentLanguge: LanguageOption;
+  currentLanguage: LanguageOption;
 
   getCurrentLanguage() {
-    return this.currentLanguge;
+    return this.currentLanguage;
   }
 
   setCurrentLanguage(language: LanguageOption) {
-    this.currentLanguge = language;
+    this.currentLanguage = language;
     ngInjector.get('$translate').use(language.code);
     moment.locale(language.code);
     Axios.defaults.headers.common['Accept-Language'] = language.code;
