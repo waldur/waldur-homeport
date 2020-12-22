@@ -8206,6 +8206,7 @@ msgid "Unable to load customer."
 msgstr ""
 
 #: src/customer/divisions/CustomersDivisionsChart.tsx
+#: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/project/team/ProjectUsersList.tsx

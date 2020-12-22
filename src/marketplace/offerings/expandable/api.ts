@@ -3,6 +3,7 @@ import moment from 'moment-timezone';
 import { ENV } from '@waldur/configs/default';
 import { getAll } from '@waldur/core/api';
 import { formatDateToYearMonth } from '@waldur/core/dateUtils';
+import { ComponentUsage } from '@waldur/marketplace/resources/usage/types';
 import { parseResponse } from '@waldur/table/api';
 import { Fetcher, TableRequest } from '@waldur/table/types';
 
@@ -28,3 +29,8 @@ export const getOfferingCostChartData = (
       end: formatDateToYearMonth(moment()),
     },
   }).then((response) => response);
+
+export const getOfferingComponentStats = (offeringUuid: string) =>
+  getAll<ComponentUsage>(
+    `/marketplace-offerings/${offeringUuid}/component_stats/`,
+  );
