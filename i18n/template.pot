@@ -814,17 +814,17 @@ msgstr ""
 msgid "Back to login"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/project/utils.ts
 #: src/user/UserSidebar.tsx
 msgid "Back to organization"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Back to personal dashboard"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/user/UserSidebar.tsx
 msgid "Back to project"
 msgstr ""
@@ -1029,7 +1029,7 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Capacity"
 msgstr ""
 
@@ -1701,7 +1701,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/workspace/utils.ts
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/project/ProjectDashboard.tsx
 #: src/project/utils.ts
 #: src/user/constants.ts
@@ -2546,7 +2546,7 @@ msgstr ""
 msgid "Filter projects"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Financial"
 msgstr ""
 
@@ -2629,7 +2629,7 @@ msgstr ""
 msgid "Floating IPs"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/FlowMapViewContainer.tsx
 msgid "Flowmap"
 msgstr ""
@@ -2744,7 +2744,7 @@ msgid "Grant permission"
 msgstr ""
 
 #: src/invoices/growth/GrowthContainer.tsx
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Growth"
 msgstr ""
 
@@ -2770,12 +2770,12 @@ msgstr ""
 msgid "HPA"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/HeatMapContainer.tsx
 msgid "Heatmap"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Helpdesk"
 msgstr ""
 
@@ -4236,7 +4236,7 @@ msgid "Notification method"
 msgstr ""
 
 #: src/issues/notifications/NotificationsList.tsx
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/user/constants.ts
 #: src/user/hooks/HooksList.tsx
 msgid "Notifications"
@@ -4393,7 +4393,7 @@ msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsContainer.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
@@ -4572,7 +4572,7 @@ msgstr ""
 msgid "Order summary"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Ordering"
 msgstr ""
 
@@ -4716,7 +4716,7 @@ msgstr ""
 #: src/customer/list/SupportCustomersContainer.tsx
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/issues/notifications/NotificationExpandableRow.tsx
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 msgid "Organizations"
@@ -5937,8 +5937,8 @@ msgstr ""
 msgid "Reporter"
 msgstr ""
 
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/issues/workspace/SupportWorkspace.tsx
-#: src/issues/workspace/issue-navigation-service.js
 msgid "Reporting"
 msgstr ""
 
@@ -6196,7 +6196,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -6223,7 +6223,7 @@ msgstr ""
 msgid "Resources represent the services you are using."
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Resources usage"
 msgstr ""
@@ -6403,7 +6403,7 @@ msgstr ""
 msgid "SSH public key"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/SankeyDiagramContainer.tsx
 msgid "Sankey diagram"
 msgstr ""
@@ -6892,7 +6892,7 @@ msgstr ""
 msgid "Shared"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/resource/support/SharedProviderContainer.tsx
 msgid "Shared providers"
 msgstr ""
@@ -7307,7 +7307,7 @@ msgstr ""
 msgid "Support request events"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Support requests"
 msgstr ""
 
@@ -8796,7 +8796,7 @@ msgstr ""
 msgid "Usage information is not available."
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Usage overview"
 msgstr ""
 
@@ -8804,7 +8804,7 @@ msgstr ""
 msgid "Usage report has been submitted."
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/resources/usage/SupportUsageContainer.tsx
 msgid "Usage reports"
 msgstr ""
@@ -9006,7 +9006,7 @@ msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscor
 msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/project/team/ProjectTeam.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/support/UserListView.tsx
@@ -9079,7 +9079,7 @@ msgstr ""
 msgid "VM snapshots"
 msgstr ""
 
-#: src/issues/workspace/issue-navigation-service.js
+#: src/issues/workspace/IssueNavigationService.ts
 #: src/openstack/analytics/VmTypeOverviewContainer.tsx
 msgid "VM type overview"
 msgstr ""
