@@ -1,12 +1,14 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ngInjector, $state } from '@waldur/core/services';
+import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { IssueNavigationService } from '@waldur/issues/workspace/IssueNavigationService';
 import { isVisible } from '@waldur/store/config';
 import { getUser } from '@waldur/workspace/selectors';
+import { OuterState } from '@waldur/workspace/types';
 
-const showLink = (state) => {
+const showLink = (state: OuterState) => {
   if (isVisible(state, 'support')) {
     return true;
   }
@@ -21,8 +23,7 @@ export const SupportLink: FunctionComponent = () => {
     return null;
   }
 
-  const gotoSupport = () =>
-    ngInjector.get('IssueNavigationService').gotoDashboard();
+  const gotoSupport = () => IssueNavigationService.gotoDashboard();
 
   const isActive = $state.includes('support') || $state.is('support');
 

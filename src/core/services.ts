@@ -1,13 +1,15 @@
+import { StateService } from '@uirouter/core';
+
 import { ApplicationConfigurationOptions } from './types';
 
 export let ENV: ApplicationConfigurationOptions = null;
 export let $rootScope = null;
 export let $compile = null;
-export let $state = null;
+export let $state: StateService = null;
 export let $filter = null;
 export let $uiRouterGlobals = null;
 export let ngInjector = null;
-export let $q = null;
+export let $q: angular.IQService = null;
 
 export const formatCurrency = (
   value: string | number,
