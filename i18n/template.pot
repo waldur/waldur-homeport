@@ -3092,7 +3092,7 @@ msgstr ""
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
-#: src/invitations/utils.js
+#: src/invitations/utils.ts
 msgid "Internal server error occurred. Please try again or contact support."
 msgstr ""
 
@@ -3109,7 +3109,7 @@ msgstr ""
 msgid "Invitation check"
 msgstr ""
 
-#: src/invitations/utils.js
+#: src/invitations/utils.ts
 msgid "Invitation could not be accepted"
 msgstr ""
 
@@ -3133,15 +3133,15 @@ msgstr ""
 msgid "Invitation has been sent again."
 msgstr ""
 
-#: src/invitations/utils.js
+#: src/invitations/utils.ts
 msgid "Invitation is not found."
 msgstr ""
 
-#: src/invitations/utils.js
+#: src/invitations/utils.ts
 msgid "Invitation is not valid anymore."
 msgstr ""
 
-#: src/invitations/utils.js
+#: src/invitations/utils.ts
 msgid "Invitation is not valid."
 msgstr ""
 
@@ -9444,7 +9444,7 @@ msgstr ""
 msgid "Your invitation is being processed."
 msgstr ""
 
-#: src/invitations/utils.js
+#: src/invitations/utils.ts
 msgid "Your invitation was accepted."
 msgstr ""
 
