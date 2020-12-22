@@ -1,8 +1,8 @@
 import type { EventInput, EventApi } from '@fullcalendar/core';
+import uniqueId from 'lodash.uniqueid';
 import moment from 'moment';
 
 import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
-import { randomId } from '@waldur/core/fixtures';
 import { fetchListStart } from '@waldur/table/actions';
 
 import { BookingProps } from './types';
@@ -16,7 +16,7 @@ export const createCalendarBookingEvent = ({
   id,
   title,
 }: EventInput) => ({
-  id: id || randomId(),
+  id: id || uniqueId('booking'),
   type,
   allDay,
   constraint,
@@ -118,7 +118,7 @@ export const createBooking = (
   }: EventApi | EventInput | BookingProps,
   timeStamp?: string,
 ): BookingProps => ({
-  id: id || `${randomId()}-${timeStamp!}`,
+  id: id || `${uniqueId('booking')}-${timeStamp!}`,
   start,
   end,
   allDay,
