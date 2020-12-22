@@ -49,7 +49,6 @@ issuesModule(appModule);
 userModule(appModule);
 resourceModule(appModule);
 authModule(appModule);
-invitationsModule(appModule);
 openstackModule(appModule);
 digitaloceanModule();
 offeringsModule();
@@ -59,6 +58,7 @@ configModule(appModule);
 slurmModule();
 storeModule(appModule);
 rancherModule();
+invitationsModule(appModule);
 
 registerRoutes(appModule);
 

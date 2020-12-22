@@ -1,6 +1,7 @@
-import { InvitationUtilsService, attachInvitationUtils } from './utils';
+import { init } from './utils';
 
 export default (module) => {
-  module.service('invitationUtilsService', InvitationUtilsService);
-  module.run(attachInvitationUtils);
+  module.run(() => {
+    init();
+  });
 };

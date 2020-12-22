@@ -4,9 +4,10 @@ import { useDispatch } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/coreSaga';
+
+import { InvitationService } from './InvitationService';
 
 export const InvitationApprove: FunctionComponent = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ export const InvitationApprove: FunctionComponent = () => {
   useEffectOnce(() => {
     async function processToken() {
       try {
-        await ngInjector.get('invitationUtilsService').approve(token);
+        await InvitationService.approve(token);
         dispatch(showSuccess(translate('Invitation has been approved.')));
         router.stateService.go('login');
       } catch (e) {
