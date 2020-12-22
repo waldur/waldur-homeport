@@ -1,5 +1,8 @@
+import { $state } from '@waldur/core/services';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
+import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { filterItems } from '@waldur/navigation/sidebar/utils';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
@@ -8,94 +11,110 @@ import {
   ORGANIZATION_WORKSPACE,
   PROJECT_WORKSPACE,
   SUPPORT_WORKSPACE,
+  User,
   USER_WORKSPACE,
 } from '@waldur/workspace/types';
 
-const getHelpdeskItems = () => [
+const getHelpdeskItems = (): MenuItemType[] => [
   {
+    key: 'helpdesk',
     label: translate('Helpdesk'),
     icon: 'fa-headphones',
     state: 'support.helpdesk',
   },
 ];
 
-const getDashboardItems = () => [
+const getDashboardItems = (): MenuItemType[] => [
   {
+    key: 'dashboard',
     label: translate('Dashboard'),
     icon: 'fa-th-large',
     state: 'support.dashboard',
   },
   {
+    key: 'list',
     label: translate('Support requests'),
     icon: 'fa-list',
     state: 'support.list',
   },
 ];
 
-const getReportItems = () => [
+const getReportItems = (): MenuItemType[] => [
   {
     label: translate('Users'),
     icon: 'fa-users',
     state: 'support.users',
+    key: 'support.users',
     feature: 'support.users',
   },
   {
     label: translate('Organizations'),
     icon: 'fa-building',
     state: 'support.customers',
+    key: 'support.customers',
     feature: 'support.organizations',
   },
   {
     label: translate('Notifications'),
     icon: 'fa-bell',
     state: 'support.notifications',
+    key: 'support.notifications',
   },
   {
     label: translate('Reporting'),
     icon: 'fa-files-o',
+    key: 'reporting',
     children: [
       {
         label: translate('Capacity'),
         icon: 'fa-puzzle-piece',
         state: 'marketplace-support-plan-usages',
+        key: 'support-plan-usages',
       },
       {
         label: translate('Financial'),
         icon: 'fa-university',
         state: 'support.organizations',
+        key: 'support.organizations',
         feature: 'support.organizations',
       },
       {
         label: translate('Growth'),
         icon: 'fa-line-chart',
         state: 'invoicesGrowth',
+        key: 'invoicesGrowth',
       },
       {
         label: translate('Offerings'),
         icon: 'fa-files-o',
         state: 'marketplace-support-offerings',
+        key: 'marketplace-support-offerings',
       },
       {
         label: translate('Organizations'),
         icon: 'fa-building',
         state: 'support.organizations-divisions',
+        key: 'support.organizations-divisions',
         feature: 'support.organizations',
       },
       {
         label: translate('Ordering'),
         icon: 'fa-files-o',
         state: 'marketplace-support-order-items',
+        key: 'support-order-items',
       },
       {
         label: translate('Resources usage'),
         icon: 'fa-map',
         state: 'support.resources-treemap',
+        key: 'support.resources-treemap',
         feature: 'support.resources-treemap',
       },
       {
         label: translate('Usage reports'),
         icon: 'fa-puzzle-piece',
         state: 'marketplace-support-usage-reports',
+        key: 'support-usage-reports',
       },
     ],
   },
@@ -103,35 +122,41 @@ const getReportItems = () => [
     label: translate('Resources'),
     icon: 'fa-files-o',
     state: 'marketplace-support-resources',
+    key: 'marketplace-support-resources',
   },
   {
     label: translate('Shared providers'),
     icon: 'fa-random',
     state: 'support.shared-providers',
+    key: 'support.shared-providers',
     feature: 'support.shared-providers',
   },
   {
     label: translate('Usage overview'),
     icon: 'fa-map',
     state: 'support.usage',
+    key: 'support.usage',
     feature: 'support.usage',
     children: [
       {
         label: translate('Flowmap'),
         icon: 'fa-sitemap',
         state: 'support.flowmap',
+        key: 'support.flowmap',
         feature: 'support.flowmap',
       },
       {
         label: translate('Heatmap'),
         icon: 'fa-fire',
         state: 'support.heatmap',
+        key: 'support.heatmap',
         feature: 'support.heatmap',
       },
       {
         label: translate('Sankey diagram'),
         icon: 'fa-code-fork',
         state: 'support.sankey-diagram',
+        key: 'support.sankey-diagram',
         feature: 'support.sankey-diagram',
       },
     ],
@@ -140,38 +165,38 @@ const getReportItems = () => [
     label: translate('VM type overview'),
     icon: 'fa-desktop',
     state: 'support.vm-type-overview',
+    key: 'vm-type-overview',
     feature: 'support.vm-type-overview',
   },
 ];
 
 // This service checks users status and returns different sidebar items and router state
-export default class IssueNavigationService {
-  // @ngInject
-  constructor($state, features) {
-    this.$state = $state;
-    this.features = features;
-  }
+class IssueNavigationServiceClass {
+  currentUser: User;
+  prevState;
+  prevParams;
+  prevWorkspace;
 
   get isVisible() {
-    if (this.features.isVisible('support')) {
+    if (isFeatureVisible('support')) {
       return true;
     }
     return isOwnerOrStaff(store.getState());
   }
 
   gotoDashboard() {
-    if (!this.features.isVisible('support')) {
-      if (this.features.isVisible('marketplace')) {
-        return this.$state.go('marketplace-support-resources');
+    if (!isFeatureVisible('support')) {
+      if (isFeatureVisible('marketplace')) {
+        return $state.go('marketplace-support-resources');
       } else {
-        return this.$state.go('support.resources');
+        return $state.go('support.resources');
       }
     }
     return UsersService.getCurrentUser().then((user) => {
       if (user.is_staff || user.is_support) {
-        this.$state.go('support.helpdesk');
+        $state.go('support.helpdesk');
       } else {
-        this.$state.go('support.dashboard');
+        $state.go('support.dashboard');
       }
     });
   }
@@ -180,7 +205,7 @@ export default class IssueNavigationService {
     return UsersService.getCurrentUser()
       .then((user) => {
         this.currentUser = user;
-        if (!this.features.isVisible('support')) {
+        if (!isFeatureVisible('support')) {
           return [];
         }
         const dashboardItems = filterItems(getDashboardItems());
@@ -194,9 +219,8 @@ export default class IssueNavigationService {
         }
       })
       .then((items) => {
-        items = angular.copy(items);
         if (this.getBackItemLabel()) {
-          items.unshift(this.getBackItem());
+          return [this.getBackItem(), ...items];
         }
         return items;
       })
@@ -230,7 +254,7 @@ export default class IssueNavigationService {
     return {
       label: this.getBackItemLabel(),
       icon: 'fa-arrow-left',
-      action: () => this.$state.go(this.prevState, this.prevParams),
+      action: () => $state.go(this.prevState, this.prevParams),
     };
   }
 
@@ -249,12 +273,4 @@ export default class IssueNavigationService {
   }
 }
 
-// @ngInject
-export function attachStateUtils($rootScope, IssueNavigationService) {
-  $rootScope.$on(
-    '$stateChangeSuccess',
-    function (event, toState, toParams, fromState, fromParams) {
-      IssueNavigationService.setPrevState(fromState, fromParams);
-    },
-  );
-}
+export const IssueNavigationService = new IssueNavigationServiceClass();

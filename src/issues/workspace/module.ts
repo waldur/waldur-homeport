@@ -1,8 +1,5 @@
-import IssueNavigationService, {
-  attachStateUtils,
-} from './issue-navigation-service';
+import { attachStateUtils } from './attachStateUtils';
 
 export default (module) => {
   module.run(attachStateUtils);
-  module.service('IssueNavigationService', IssueNavigationService);
 };

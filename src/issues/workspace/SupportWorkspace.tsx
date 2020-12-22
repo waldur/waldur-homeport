@@ -2,7 +2,6 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useEffect, useState, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { ngInjector } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import {
   setBreadcrumbs,
@@ -13,13 +12,14 @@ import { Layout } from '@waldur/navigation/Layout';
 import { setCurrentWorkspace } from '@waldur/workspace/actions';
 import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
+import { IssueNavigationService } from './IssueNavigationService';
 import { SupportSidebar } from './SupportSidebar';
 
 function getBreadcrumbs(): BreadcrumbItem[] {
   return [
     {
       label: translate('Support dashboard'),
-      action: () => ngInjector.get('IssueNavigationService').gotoDashboard(),
+      action: () => IssueNavigationService.gotoDashboard(),
     },
   ];
 }
