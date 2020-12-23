@@ -114,6 +114,7 @@ export const NotificationCreateDialog = reduxForm({
               },
             ]}
             isMulti={true}
+            noUpdateOnBlur={true}
           />
           <AsyncSelectField
             name="projects"
@@ -140,6 +141,7 @@ export const NotificationCreateDialog = reduxForm({
               },
             ]}
             isMulti={true}
+            noUpdateOnBlur={true}
           />
           <AsyncSelectField
             name="offerings"
