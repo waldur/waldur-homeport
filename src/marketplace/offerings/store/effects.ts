@@ -223,11 +223,9 @@ function* removeOfferingScreenshot(action: Action<any>) {
 function* addOfferingLocation(action: Action<any>) {
   try {
     const { offering } = action.payload;
-    const response = yield call(api.updateOffering, offering.uuid, offering);
+    yield call(api.updateOffering, offering.uuid, offering);
     yield put(showSuccess(translate('Location has been saved successfully.')));
-    if (response.status === 201) {
-      yield put(closeModalDialog());
-    }
+    yield put(closeModalDialog());
   } catch (error) {
     const errorMessage = `${translate('Unable to save location.')} ${format(
       error,
