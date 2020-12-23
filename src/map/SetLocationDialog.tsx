@@ -1,6 +1,6 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import { FunctionComponent, useState } from 'react';
-import { MapContainer } from 'react-leaflet';
+import { MapContainer, Marker, Popup } from 'react-leaflet';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -66,11 +66,20 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = (
         zoomControl={true}
         worldCopyJump={true}
       >
+        {coordinates.latitude && coordinates.longitude ? (
+          <Marker position={[coordinates.latitude, coordinates.longitude]}>
+            <Popup>
+              {translate('Location of {offeringName} offering', {
+                offeringName: props.resolve.data.name,
+              })}
+            </Popup>
+          </Marker>
+        ) : null}
         <OpenStreeMapTileLayer />
         <GeoSearchControlElement
           provider={provider}
           showMarker={true}
-          showPopup={false}
+          showPopup={true}
           popupFormat={({ result }) => result.label}
           maxMarkers={1}
           retainZoomLevel={true}
@@ -78,6 +87,7 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = (
           autoClose={false}
           searchLabel={translate('Enter address...')}
           keepResult={false}
+          updateMap={true}
           onLocationFound={(loc) => {
             setCoordinates({ latitude: loc.lat, longitude: loc.lng });
           }}

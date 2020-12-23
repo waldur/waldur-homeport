@@ -3482,6 +3482,10 @@ msgstr ""
 msgid "Location has been saved successfully."
 msgstr ""
 
+#: src/map/SetLocationDialog.tsx
+msgid "Location of {offeringName} offering"
+msgstr ""
+
 #: src/navigation/header/LogoutLink.tsx
 #: src/navigation/header/SiteHeader.tsx
 #: src/user/UserDropdownMenu.tsx
