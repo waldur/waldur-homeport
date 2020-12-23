@@ -171,7 +171,8 @@ const mergeProps = (
       label: translate('Set location'),
       handler: () => dispatchProps.setLocation(ownProps.offering),
       visible:
-        ![DRAFT].includes(ownProps.offering.state) && stateProps.user.is_staff,
+        ![ARCHIVED].includes(ownProps.offering.state) &&
+        stateProps.user.is_staff,
     },
   ].filter((offering) => offering.visible),
 });
