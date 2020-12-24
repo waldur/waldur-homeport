@@ -116,6 +116,13 @@ const mergeProps = (
       visible: ownProps.offering.state === ACTIVE,
     },
     {
+      label: translate('Unpause'),
+      handler: () => {
+        dispatchProps.updateOfferingState(ownProps.offering, 'unpause');
+      },
+      visible: ownProps.offering.state === PAUSED,
+    },
+    {
       label: translate('Archive'),
       handler: () => {
         dispatchProps.updateOfferingState(ownProps.offering, 'archive');
