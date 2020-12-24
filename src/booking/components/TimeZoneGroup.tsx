@@ -1,14 +1,8 @@
-import moment from 'moment-timezone';
 import { FunctionComponent } from 'react';
-import Select from 'react-select';
 
-import { reactSelectMenuPortaling } from '@waldur/form/utils';
+import { TimezoneField } from '@waldur/form/TimezoneField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-
-const timeZoneArray = moment.tz
-  .names()
-  .map((zone) => ({ value: zone, label: zone }));
 
 interface TimeZoneGroupProps {
   timeZone: string;
@@ -24,14 +18,10 @@ export const TimeZoneGroup: FunctionComponent<TimeZoneGroupProps> = ({
     labelClassName="control-label col-sm-3"
     valueClassName={'col-sm-8'}
   >
-    <Select
-      name="timeZone"
+    <TimezoneField
       isSearchable={true}
       isClearable={false}
-      options={timeZoneArray}
-      value={timeZoneArray.filter(({ value }) => value === timeZone)}
-      onChange={(newValue: any) => setTimeZone(newValue.value)}
-      {...reactSelectMenuPortaling()}
+      input={{ value: timeZone, onChange: setTimeZone }}
     />
   </FormGroup>
 );

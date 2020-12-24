@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Limits } from '@waldur/marketplace/common/registry';
 import {
   parseIntField,

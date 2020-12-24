@@ -24,7 +24,7 @@ interface SelectOption {
 
 interface SelectField<Resource> extends BaseField<Resource> {
   serializer?: (items: any[]) => any[];
-  formatter?: ($filter, item) => string;
+  formatter?: (item) => string;
   modelParser?: (field, items) => any[];
   display_name_field?: string;
   value_field?: string;

@@ -11,12 +11,11 @@
   ng-pattern="$ctrl.field.pattern"
 />
 <p class="text-danger" ng-if="$ctrl.showRequiredError()">
-  <span translate>This field is required.</span>
+  {{ $ctrl.getRequiredErrorMessage() }}
 </p>
 <p class="text-danger" ng-if="$ctrl.showPatternError()">
-  <span translate>This field contains invalid characters.</span>
+  {{ $ctrl.getInvalidErrorMessage }}
 </p>
 <p class="text-danger" ng-if="$ctrl.showMaxLengthError()">
-  <span>{{ $ctrl.getMaxLengthErrorMessage() }}</span
-  >.
+  {{ $ctrl.getMaxLengthErrorMessage() }}
 </p>

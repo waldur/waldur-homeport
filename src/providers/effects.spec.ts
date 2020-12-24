@@ -1,4 +1,4 @@
-import { showSuccess } from '@waldur/store/coreSaga';
+import { showSuccess } from '@waldur/store/notify';
 
 import * as actions from './actions';
 import { setupFixture } from './effects.fixture';

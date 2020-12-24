@@ -4,7 +4,7 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceState, BaseResource } from '@waldur/resource/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import {
   ResourceAction,

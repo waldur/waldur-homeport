@@ -1,4 +1,3 @@
-import { $rootScope } from '@waldur/core/services';
 import { getDefaultTimezone } from '@waldur/form/TimezoneField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -7,7 +6,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
 import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { createBackupSchedule } from '../../api';
 
@@ -49,7 +48,7 @@ export default function createAction({ resource }): ResourceAction {
       }
     },
     onSuccess() {
-      $rootScope.$broadcast('updateBackupScheduleList');
+      // TODO: updateBackupScheduleList
     },
   };
 }

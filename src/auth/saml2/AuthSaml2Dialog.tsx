@@ -5,7 +5,6 @@ import { compose } from 'redux';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 
 import { fetchIdentityProviderOptions } from '@waldur/auth/saml2/utils';
-import { $rootScope } from '@waldur/core/services';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -13,11 +12,6 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { loginSaml2 } from './store/actions';
 
 class PureAuthSaml2Dialog extends Component<InjectedFormProps> {
-  constructor(props) {
-    super(props);
-    $rootScope.$broadcast('enableRequests');
-  }
-
   identityProviderAutocomplete(
     input: string,
     prevOptions,

@@ -14,19 +14,17 @@ const OpenStackSnapshotScheduleSummary = lazyComponent(
   'OpenStackSnapshotScheduleSummary',
 );
 
-export default () => {
-  ActionConfigurationRegistry.register(
-    'OpenStackTenant.SnapshotSchedule',
-    actions,
-  );
-  ResourceSummary.register(
-    'OpenStackTenant.SnapshotSchedule',
-    OpenStackSnapshotScheduleSummary,
-  );
-  ResourceStateConfigurationProvider.register(
-    'OpenStackTenant.SnapshotSchedule',
-    {
-      error_states: ['error'],
-    },
-  );
-};
+ActionConfigurationRegistry.register(
+  'OpenStackTenant.SnapshotSchedule',
+  actions,
+);
+ResourceSummary.register(
+  'OpenStackTenant.SnapshotSchedule',
+  OpenStackSnapshotScheduleSummary,
+);
+ResourceStateConfigurationProvider.register(
+  'OpenStackTenant.SnapshotSchedule',
+  {
+    error_states: ['error'],
+  },
+);

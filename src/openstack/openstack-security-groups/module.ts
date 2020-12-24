@@ -5,7 +5,6 @@ import { DEFAULT_EDIT_ACTION } from '@waldur/resource/actions/constants';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import './breadcrumbs';
-import securityGroupRuleEditor from './security-group-rule-editor';
 
 const OpenStackSecurityGroupSummary = lazyComponent(
   () =>
@@ -57,10 +56,7 @@ ActionConfigurationRegistry.register('OpenStack.SecurityGroup', {
   },
 });
 
-export default (module) => {
-  ResourceSummary.register(
-    'OpenStack.SecurityGroup',
-    OpenStackSecurityGroupSummary,
-  );
-  module.component('securityGroupRuleEditor', securityGroupRuleEditor);
-};
+ResourceSummary.register(
+  'OpenStack.SecurityGroup',
+  OpenStackSecurityGroupSummary,
+);

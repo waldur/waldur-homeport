@@ -4,6 +4,4 @@ import actions from './actions';
 import './events';
 import './marketplace';
 
-export default () => {
-  ActionConfigurationRegistry.register('Support.Offering', actions);
-};
+ActionConfigurationRegistry.register('Support.Offering', actions);

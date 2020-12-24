@@ -1,6 +1,9 @@
+import { createRouterMiddleware } from '@uirouter/redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
+
+import { router } from '@waldur/router';
 
 import sagas from './effects';
 import rootReducer from './reducers';
@@ -18,9 +21,12 @@ const composeEnhancers =
       traceLimit: 25,
     })) ||
   compose;
+
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = [sagaMiddleware, thunk];
+const routerMiddleware = createRouterMiddleware(router);
+
+const middlewares = [sagaMiddleware, routerMiddleware, thunk];
 let enhancedMiddlewares;
 
 if (process.env.NODE_ENV !== 'production') {

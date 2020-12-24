@@ -8,7 +8,7 @@ import {
 } from '@waldur/resource/actions/base';
 import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ActionContext } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { OpenStackInstance } from '../types';
 

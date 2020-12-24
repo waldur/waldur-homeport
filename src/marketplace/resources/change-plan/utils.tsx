@@ -1,4 +1,4 @@
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import {
   SelectDialogFieldColumn,
   SelectDialogFieldChoice,

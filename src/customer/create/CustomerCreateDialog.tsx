@@ -7,7 +7,7 @@ import { ENV } from '@waldur/configs/default';
 import { sendForm } from '@waldur/core/api';
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
-import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';

@@ -1,17 +1,7 @@
-import { gettext } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
+
 import { internalIpFormatter } from './openstack-instance-config';
 import template from './openstack-instance-networks.html';
-
-const FLOATING_IP_CHOICES = [
-  {
-    value: '',
-    display_name: gettext('Skip floating IP assignment'),
-  },
-  {
-    value: true,
-    display_name: gettext('Auto-assign floating IP'),
-  },
-];
 
 const openstackInstanceNetworks = {
   template,
@@ -24,6 +14,11 @@ const openstackInstanceNetworks = {
     // @ngInject
     constructor($scope) {
       this.$scope = $scope;
+      this.messages = {
+        selectSubnet: translate('Select connected subnet'),
+        addItem: translate('Add'),
+        deleteItem: translate('Delete'),
+      };
     }
 
     $onInit() {
@@ -67,7 +62,17 @@ const openstackInstanceNetworks = {
           value: floating_ip.url,
         }),
       );
-      this.floating_ips = FLOATING_IP_CHOICES.concat(floating_ips);
+      this.floating_ips = [
+        {
+          value: '',
+          display_name: translate('Skip floating IP assignment'),
+        },
+        {
+          value: true,
+          display_name: translate('Auto-assign floating IP'),
+        },
+        ...floating_ips,
+      ];
     }
 
     serializeFloatingIps() {

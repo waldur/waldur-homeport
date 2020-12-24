@@ -9,18 +9,14 @@
       "request": "launch",
       "name": "Jest Test",
       "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "args": [
-        "${file}",
-        "--config",
-        "jest.config.js"
-      ],
+      "args": ["${file}", "--config", "jest.config.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "disableOptimisticBPs": true,
       "windows": {
-        "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
       },
-      "runtimeExecutable": "${env:HOME}/.nvm/versions/node/v12.14.1/bin/node"
+      "runtimeExecutable": "${env:HOME}/.nvm/versions/node/v12.18.2/bin/node"
     }
   ]
 }

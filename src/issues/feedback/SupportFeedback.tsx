@@ -1,3 +1,4 @@
+import { triggerTransition } from '@uirouter/redux';
 import ReactStars from 'react-rating-stars-component';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
@@ -9,8 +10,10 @@ import { translate } from '@waldur/i18n';
 import { addFeedback } from '@waldur/issues/feedback/api';
 import { SUPPORT_FEEDBACK_FORM_ID } from '@waldur/issues/feedback/constants';
 import { useTitle } from '@waldur/navigation/title';
+import { router } from '@waldur/router';
+import { showError, showSuccess } from '@waldur/store/notify';
+
 import './SupportFeedback.scss';
-import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
 
 const SupportFeedbackContainer = (props) => {
   useTitle(translate('Feedback'));
@@ -20,10 +23,10 @@ const SupportFeedbackContainer = (props) => {
     try {
       await addFeedback({
         ...formData,
-        token: props.$stateParams.token,
+        token: router.globals.params.token,
       });
       dispatch(showSuccess(translate('Thank you for your response!')));
-      dispatch(stateGo('login'));
+      dispatch(triggerTransition('login', {}));
     } catch (error) {
       const errorMessage = `${translate('Unable to send feedback.')} ${format(
         error,
@@ -84,9 +87,9 @@ const SupportFeedbackContainer = (props) => {
   );
 };
 
-const mapStateToProps = (_state, ownProps) => ({
+const mapStateToProps = () => ({
   initialValues: {
-    evaluation: parseInt(ownProps.$stateParams.evaluation),
+    evaluation: parseInt(router.globals.params?.evaluation || 0, 10),
   },
 });
 

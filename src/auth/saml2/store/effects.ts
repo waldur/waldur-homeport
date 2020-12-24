@@ -3,7 +3,7 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import * as api from '@waldur/auth/saml2/api';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
-import { showError } from '@waldur/store/coreSaga';
+import { showError } from '@waldur/store/notify';
 
 import * as actions from './actions';
 

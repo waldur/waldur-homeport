@@ -16,7 +16,7 @@ import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPerm
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { showErrorResponse } from '@waldur/store/coreSaga';
+import { showErrorResponse } from '@waldur/store/notify';
 import { fetchListStart } from '@waldur/table/actions';
 import { checkCustomerUser, checkIsOwner } from '@waldur/workspace/selectors';
 

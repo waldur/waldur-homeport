@@ -21,9 +21,9 @@
 import Axios from 'axios';
 
 import { ENV } from '@waldur/configs/default';
-import { $state, $uiRouterGlobals } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/coreSaga';
+import { router } from '@waldur/router';
+import { showSuccess } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
@@ -93,11 +93,14 @@ async function activate(user) {
 }
 
 function redirectOnSuccess() {
-  const { toState, toParams } = $uiRouterGlobals.params;
-  if (toState) {
-    return $state.go(toState, toParams, { reload: true });
+  if (router.globals.params) {
+    return router.stateService.go(
+      router.globals.params.toState,
+      router.globals.params.toParams,
+      { reload: true },
+    );
   } else {
-    return $state.go('profile.details', { reload: true });
+    return router.stateService.go('profile.details', { reload: true });
   }
 }
 
@@ -105,7 +108,7 @@ function localLogout(params?) {
   store.dispatch(setCurrentUser(undefined));
   delete Axios.defaults.headers.common['Authorization'];
   localStorage.removeItem('AUTH_TOKEN');
-  $state.go('login', params);
+  router.stateService.go('login', params);
   resetAuthenticationMethod();
 }
 

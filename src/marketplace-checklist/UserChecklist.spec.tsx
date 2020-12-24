@@ -23,14 +23,6 @@ jest.mock('@waldur/configs/default', () => ({
   ENV: 'localhost',
 }));
 
-jest.mock('@waldur/store/coreSaga', () => ({
-  showSuccess: jest.fn((message) => ({
-    type: 'success',
-    payload: { message },
-  })),
-  showError: jest.fn((message) => ({ type: 'error', payload: { message } })),
-}));
-
 jest.mock('@waldur/core/EChart', () => ({
   EChart: jest.fn(() => null),
 }));
@@ -163,7 +155,7 @@ describe('UserChecklist', () => {
 
     // Assert
     const actions = store.getActions();
-    expect(actions[0].type).toBe('error');
+    expect(actions[0].payload.status).toBe('error');
   });
 
   it('renders answers table', async () => {
@@ -252,7 +244,7 @@ describe('UserChecklist', () => {
 
     // Assert
     const actions = store.getActions();
-    expect(actions[1].type).toBe('success');
+    expect(actions[1].payload.status).toBe('success');
   });
 
   it('does not update pie chart if submit failed', async () => {
@@ -279,7 +271,7 @@ describe('UserChecklist', () => {
 
     // Assert
     const actions = store.getActions();
-    expect(actions[1].type).toBe('error');
+    expect(actions[1].payload.status).toBe('error');
   });
 
   it('conceals submit button if checklist is read-only', async () => {

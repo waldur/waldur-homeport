@@ -48,9 +48,13 @@ export const states: StateDeclaration[] = [
       workspace: USER_WORKSPACE,
     },
     component: UserDetails,
-    resolve: {
-      requireIdParam,
-    },
+    resolve: [
+      {
+        token: 'requireIdParam',
+        resolveFn: requireIdParam,
+        deps: ['$transition$'],
+      },
+    ],
   },
 
   { name: 'users.details', ...tabs.events },

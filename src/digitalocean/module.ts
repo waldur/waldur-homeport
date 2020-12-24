@@ -12,6 +12,4 @@ const DigitalOceanDropletSummary = lazyComponent(
   'DigitalOceanDropletSummary',
 );
 
-export default () => {
-  ResourceSummary.register('DigitalOcean.Droplet', DigitalOceanDropletSummary);
-};
+ResourceSummary.register('DigitalOcean.Droplet', DigitalOceanDropletSummary);

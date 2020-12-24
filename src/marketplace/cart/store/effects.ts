@@ -1,3 +1,4 @@
+import { triggerTransition } from '@uirouter/redux';
 import { delay } from 'redux-saga';
 import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
@@ -5,7 +6,7 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
-import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 import {
   SET_CURRENT_PROJECT,
   SET_CURRENT_CUSTOMER,
@@ -84,7 +85,9 @@ function* addItem(action) {
     yield put(actions.setItems(items));
 
     yield put(showSuccess(translate('Item has been added to shopping cart.')));
-    yield put(stateGo('marketplace-checkout', { uuid: item.project_uuid }));
+    yield put(
+      triggerTransition('marketplace-checkout', { uuid: item.project_uuid }),
+    );
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to add item to shopping cart.',
@@ -127,7 +130,9 @@ function* updateItem(action) {
     yield put(actions.setItems(items));
 
     yield put(showSuccess(translate('Shopping cart item has been updated.')));
-    yield put(stateGo('marketplace-checkout', { uuid: item.project_uuid }));
+    yield put(
+      triggerTransition('marketplace-checkout', { uuid: item.project_uuid }),
+    );
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to update shopping cart item.',
@@ -151,13 +156,15 @@ function* createOrder() {
     const workspace: WorkspaceType = yield select(getWorkspace);
     if (workspace === ORGANIZATION_WORKSPACE) {
       yield put(
-        stateGo('marketplace-order-details-customer', {
+        triggerTransition('marketplace-order-details-customer', {
           order_uuid: order.uuid,
         }),
       );
     } else {
       yield put(
-        stateGo('marketplace-order-details', { order_uuid: order.uuid }),
+        triggerTransition('marketplace-order-details', {
+          order_uuid: order.uuid,
+        }),
       );
     }
   } catch (error) {

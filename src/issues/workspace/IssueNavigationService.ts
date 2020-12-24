@@ -1,9 +1,9 @@
-import { $state } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
 import { filterItems } from '@waldur/navigation/sidebar/utils';
+import { router } from '@waldur/router';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { isOwnerOrStaff } from '@waldur/workspace/selectors';
@@ -187,16 +187,16 @@ class IssueNavigationServiceClass {
   gotoDashboard() {
     if (!isFeatureVisible('support')) {
       if (isFeatureVisible('marketplace')) {
-        return $state.go('marketplace-support-resources');
+        return router.stateService.go('marketplace-support-resources');
       } else {
-        return $state.go('support.resources');
+        return router.stateService.go('support.resources');
       }
     }
     return UsersService.getCurrentUser().then((user) => {
       if (user.is_staff || user.is_support) {
-        $state.go('support.helpdesk');
+        router.stateService.go('support.helpdesk');
       } else {
-        $state.go('support.dashboard');
+        router.stateService.go('support.dashboard');
       }
     });
   }
@@ -254,7 +254,7 @@ class IssueNavigationServiceClass {
     return {
       label: this.getBackItemLabel(),
       icon: 'fa-arrow-left',
-      action: () => $state.go(this.prevState, this.prevParams),
+      action: () => router.stateService.go(this.prevState, this.prevParams),
     };
   }
 

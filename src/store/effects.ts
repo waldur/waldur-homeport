@@ -21,10 +21,7 @@ import resourceSummarySaga from '@waldur/resource/summary/effects';
 import tableSaga from '@waldur/table/effects';
 import userSaga from '@waldur/user/support/effects';
 
-import coreSaga from './coreSaga';
-
 export default [
-  coreSaga,
   authSaga,
   bookingSaga,
   downloadLinkSaga,

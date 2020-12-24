@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { terminateOrderItem } from '@waldur/marketplace/common/api';
-import { showSuccess, showError } from '@waldur/store/coreSaga';
+import { showSuccess, showError } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 interface Props {

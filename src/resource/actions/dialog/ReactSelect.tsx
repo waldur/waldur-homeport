@@ -1,8 +1,9 @@
+import angular from 'angular';
 import { FC, useEffect, useState } from 'react';
 import Select from 'react-select';
 
-import { ngInjector } from '@waldur/core/services';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
+import { $injector } from '@waldur/ng';
 
 type Choice = { value: string; display_name: string };
 
@@ -18,7 +19,7 @@ interface ReactSelectProps {
 
 export const ReactSelect: FC<ReactSelectProps> = (props) => {
   const [value, setValue] = useState<any[]>(props.model[props.field.name]);
-  const $timeout = ngInjector.get('$timeout');
+  const $timeout = $injector.get('$timeout');
   useEffect(() => {
     if (value !== props.model[props.field.name]) {
       $timeout(() => {

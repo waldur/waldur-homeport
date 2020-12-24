@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { IssueNavigationService } from '@waldur/issues/workspace/IssueNavigationService';
+import { router } from '@waldur/router';
 import { isVisible } from '@waldur/store/config';
 import { getUser } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
@@ -25,7 +25,9 @@ export const SupportLink: FunctionComponent = () => {
 
   const gotoSupport = () => IssueNavigationService.gotoDashboard();
 
-  const isActive = $state.includes('support') || $state.is('support');
+  const isActive =
+    router.stateService.includes('support') ||
+    router.stateService.is('support');
 
   return (
     <li>

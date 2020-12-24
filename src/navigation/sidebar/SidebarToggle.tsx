@@ -1,20 +1,6 @@
-import { useEffect, useCallback, FunctionComponent } from 'react';
-
-import { ngInjector } from '@waldur/core/services';
+import { useCallback, FunctionComponent } from 'react';
 
 export const SidebarToggle: FunctionComponent = () => {
-  useEffect(() => {
-    return ngInjector.get('$transitions').onStart({}, function () {
-      const bodyClasses = document.body.classList;
-      if (
-        bodyClasses.contains('mini-navbar') &&
-        bodyClasses.contains('body-small')
-      ) {
-        bodyClasses.remove('mini-navbar');
-      }
-    });
-  }, []);
-
   const toggleSidebar = useCallback(() => {
     const bodyClasses = document.body.classList;
     const sideMenu = document.querySelector<HTMLElement>('#side-menu');

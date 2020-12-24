@@ -8,10 +8,6 @@ module.exports = {
     vendor: [
       'core-js/stable',
       'regenerator-runtime/runtime',
-      '@sentry/core',
-      '@sentry/browser',
-      '@sentry/types',
-      '@sentry/utils',
       'moment-timezone',
 
       'redux',
@@ -21,14 +17,6 @@ module.exports = {
       'react',
       'react-dom',
       'react-redux',
-      'angular',
-      'angular-animate',
-      'angular-cookies',
-      'angular-loader',
-      'angular-translate',
-      'angular-translate-storage-cookie',
-      'angular-translate-storage-local',
-      'angular-translate-loader-static-files',
     ],
   },
   output: {

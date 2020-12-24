@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { BookingModalProps, BookingProps } from '@waldur/booking/types';
 import { translate } from '@waldur/i18n';
-import { showError } from '@waldur/store/coreSaga';
+import { showError } from '@waldur/store/notify';
 
 import { DateAndTimeSelectField } from './DateAndTimeSelect';
 

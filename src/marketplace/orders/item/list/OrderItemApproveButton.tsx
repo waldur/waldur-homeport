@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { approveOrderItem, getOrderItem } from '@waldur/marketplace/common/api';
-import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { updateEntity } from '@waldur/table/actions';
 

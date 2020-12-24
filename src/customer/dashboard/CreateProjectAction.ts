@@ -1,5 +1,5 @@
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
+import { router } from '@waldur/router';
 
 import { CustomerActionsProps } from './types';
 import { checkPermissions } from './utils';
@@ -11,7 +11,7 @@ export const getProjectAction = (props: CustomerActionsProps) => {
   return {
     title: translate('Add project'),
     onClick() {
-      $state.go('organization.createProject');
+      router.stateService.go('organization.createProject');
     },
   };
 };

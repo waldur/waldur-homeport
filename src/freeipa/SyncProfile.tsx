@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { syncProfile } from './api';
 

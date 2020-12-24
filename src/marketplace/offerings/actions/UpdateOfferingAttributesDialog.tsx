@@ -15,7 +15,7 @@ import { isOfferingTypeSchedulable } from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { updateEntity } from '@waldur/table/actions';
 
 import { OfferingAttributes } from '../attributes/OfferingAttributes';

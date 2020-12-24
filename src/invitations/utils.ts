@@ -1,11 +1,11 @@
 import { AuthService } from '@waldur/auth/AuthService';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { $q, $rootScope, $state } from '@waldur/core/services';
+import { createDeferred } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { router } from '@waldur/router';
+import { showError, showSuccess } from '@waldur/store/notify';
 import store from '@waldur/store/store';
-import { UsersService } from '@waldur/user/UsersService';
 
 import { InvitationService } from './InvitationService';
 
@@ -17,40 +17,6 @@ const InvitationConfirmDialog = lazyComponent(
   'InvitationConfirmDialog',
 );
 
-export function init() {
-  /*
-     Display invitation confirm dialog on registration.
-
-     Triggered only if user has registered, which is the case if:
-     - $stateChangeSuccess called;
-     - user is logged in;
-     - invitation token is set in invitation service;
-     - user has filled all mandatory fields;
-     */
-  $rootScope.$on('$stateChangeSuccess', (_, toState) => {
-    if (
-      AuthService.isAuthenticated() &&
-      toState.name !== 'marketplace-public-offering.details'
-    ) {
-      UsersService.getCurrentUser().then((user) => {
-        const token = InvitationService.getInvitationToken();
-        if (token && !UsersService.mandatoryFieldsMissing(user)) {
-          confirmInvitation(token)
-            .then((replaceEmail) => {
-              acceptInvitation(token, replaceEmail);
-            })
-            .catch(() => {
-              InvitationService.clearInvitationToken();
-              store.dispatch(
-                showError(translate('Invitation could not be accepted')),
-              );
-            });
-        }
-      });
-    }
-  });
-}
-
 export function checkAndAccept(token) {
   /*
      Call confirm token dialog, accept it and redirect user to profile.
@@ -61,7 +27,7 @@ export function checkAndAccept(token) {
     return confirmInvitation(token)
       .then((replaceEmail) => {
         acceptInvitation(token, replaceEmail).then(() => {
-          $state.go('profile.details');
+          router.stateService.go('profile.details');
         });
       })
       .catch(() => {
@@ -69,22 +35,20 @@ export function checkAndAccept(token) {
         store.dispatch(
           showError(translate('Invitation is not valid anymore.')),
         );
-        $state.go('profile.details');
+        router.stateService.go('profile.details');
       });
   } else {
     InvitationService.setInvitationToken(token);
-    $state.go('register');
+    router.stateService.go('register');
   }
 }
 
-function acceptInvitation(token, replaceEmail) {
+export function acceptInvitation(token, replaceEmail) {
   return InvitationService.accept(token, replaceEmail)
     .then(() => {
       store.dispatch(showSuccess(translate('Your invitation was accepted.')));
       InvitationService.clearInvitationToken();
-      $rootScope.$broadcast('refreshCustomerList', {
-        updateSignal: true,
-      });
+      // TODO: Invalidate customers list
     })
     .catch((response) => {
       if (response.status === 404) {
@@ -104,8 +68,8 @@ function acceptInvitation(token, replaceEmail) {
     });
 }
 
-function confirmInvitation(token) {
-  const deferred = $q.defer();
+export function confirmInvitation(token) {
+  const deferred = createDeferred();
   store.dispatch(
     openModalDialog(InvitationConfirmDialog, {
       resolve: {

@@ -1,14 +1,15 @@
+import { triggerTransition } from '@uirouter/redux';
 import { reset, change } from 'redux-form';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { Action } from '@waldur/core/reducerActions';
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
+import { router } from '@waldur/router';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { updateEntity } from '@waldur/table/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -107,7 +108,7 @@ function* createOffering(action: Action<OfferingFormData>) {
     yield put(constants.createOffering.failure());
     return;
   }
-  yield call(() => $state.go('marketplace-vendor-offerings'));
+  yield call(() => router.stateService.go('marketplace-vendor-offerings'));
   yield put(reset(constants.FORM_ID));
   yield put(setStep('Overview'));
   yield put(showSuccess(translate('Offering has been created.')));
@@ -134,7 +135,7 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
   yield put(constants.updateOffering.success());
   yield put(reset(constants.FORM_ID));
   yield put(showSuccess(translate('Offering has been updated.')));
-  yield put(stateGo('marketplace-vendor-offerings'));
+  yield put(triggerTransition('marketplace-vendor-offerings', {}));
 }
 
 function* updateOfferingState(action) {

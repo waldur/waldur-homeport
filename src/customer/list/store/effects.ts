@@ -1,10 +1,11 @@
+import { triggerTransition } from '@uirouter/redux';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import * as api from '@waldur/customer/list/api';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { fetchListStart } from '@waldur/table/actions';
 
 import * as constants from '../constants';
@@ -16,7 +17,7 @@ function* organizationUpdate(action) {
     yield put(
       showSuccess(translate('Organization has been updated successfully.')),
     );
-    yield put(stateGo('support.customers'));
+    yield put(triggerTransition('support.customers', {}));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to update organization.',

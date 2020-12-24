@@ -1,3 +1,4 @@
+import { triggerTransition } from '@uirouter/redux';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -8,7 +9,7 @@ import { updatePaymentsList } from '@waldur/customer/payments/utils';
 import { translate } from '@waldur/i18n';
 import { getCustomer as getCustomerApi } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { FETCH_LIST_START } from '@waldur/table/actions';
 import { fetchList } from '@waldur/table/effects';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
@@ -41,7 +42,7 @@ function* addPaymentProfile(action) {
     );
     const updatedCustomer = yield call(getCustomerApi, customer.uuid);
     yield put(setCurrentCustomer(updatedCustomer));
-    yield put(stateGo('organization.manage'));
+    yield put(triggerTransition('organization.manage', {}));
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to create payment profile.',

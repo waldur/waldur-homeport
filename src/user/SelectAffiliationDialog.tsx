@@ -5,6 +5,7 @@
  * that the user is authorized to see.
  */
 
+import { triggerTransition } from '@uirouter/redux';
 import { useEffect, useState } from 'react';
 import { FormGroup, ToggleButton } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -18,7 +19,6 @@ import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { stateGo } from '@waldur/store/coreSaga';
 import {
   ORGANIZATION_ROUTE,
   PROJECT_ROUTE,
@@ -143,7 +143,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit: (formData) =>
     dispatch(
-      stateGo(formData.affiliation, {
+      triggerTransition(formData.affiliation, {
         uuid:
           formData.affiliation === ORGANIZATION_ROUTE
             ? formData.organization

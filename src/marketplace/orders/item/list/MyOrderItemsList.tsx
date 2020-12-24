@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';

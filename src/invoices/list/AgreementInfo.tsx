@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
 import { formatDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { getTotalOfSumPaid } from '@waldur/customer/payments/api';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';

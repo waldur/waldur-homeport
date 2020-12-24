@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Panel } from '@waldur/core/Panel';
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { router } from '@waldur/router';
 
 import { setOrderStateFilter } from '../../store/actions';
 
@@ -29,7 +29,7 @@ export const MyOrderItemsContainer: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const filterOptions = useSelector(filterOptionsSelector);
   React.useEffect(() => {
-    const { filterState } = $state.params;
+    const { filterState } = router.stateService.params;
     if (filterState) {
       const filterOption = filterOptions.find((op) => op.value === filterState);
       if (filterOption) {

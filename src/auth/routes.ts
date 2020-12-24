@@ -1,6 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { UsersService } from '@waldur/user/UsersService';
 
 const AnonymousLayout = lazyComponent(
   () =>
@@ -75,9 +74,6 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       bodyClass: 'old',
-    },
-    resolve: {
-      currentUser: () => UsersService.getCurrentUser(),
     },
   },
 ];

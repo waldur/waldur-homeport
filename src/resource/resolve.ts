@@ -1,6 +1,8 @@
+import { Transition } from '@uirouter/react';
+
 import { getById } from '@waldur/core/api';
-import { $q, $state } from '@waldur/core/services';
 import { CustomersService } from '@waldur/customer/services/CustomersService';
+import { router } from '@waldur/router';
 import store from '@waldur/store/store';
 import {
   setCurrentCustomer,
@@ -11,12 +13,12 @@ import { Project, PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
 import { ResourcesService } from './ResourcesService';
 
-export function loadResource($stateParams) {
-  if (!$stateParams.uuid) {
-    return $q.reject();
+export function loadResource(trans: Transition) {
+  if (!trans.params().uuid) {
+    return Promise.reject();
   }
 
-  return ResourcesService.get($stateParams.resource_type, $stateParams.uuid)
+  return ResourcesService.get(trans.params().resource_type, trans.params().uuid)
     .then((resource) => {
       return getById<Project>('/projects/', resource.project_uuid).then(
         (project) => {
@@ -34,9 +36,7 @@ export function loadResource($stateParams) {
     })
     .catch((response) => {
       if (response.status === 404) {
-        $state.go('errorPage.notFound');
+        router.stateService.go('errorPage.notFound');
       }
     });
 }
-
-loadResource.$inject = ['$stateParams'];

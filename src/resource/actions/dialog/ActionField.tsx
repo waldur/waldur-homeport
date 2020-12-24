@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { formatSnakeCase } from '@waldur/core/utils';
 import { angular2react } from '@waldur/shims/angular2react';
-import { connectAngularComponent } from '@waldur/store/connect';
+import { react2angular } from '@waldur/shims/react2angular';
 
 const PROPS = ['field', 'model', 'form', 'context'];
 
@@ -36,4 +36,4 @@ export const ActionField: FunctionComponent<{
   );
 };
 
-export default connectAngularComponent(ActionField, PROPS);
+export default react2angular(ActionField, PROPS as any);

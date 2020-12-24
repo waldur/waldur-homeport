@@ -11,7 +11,7 @@ import {
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { ISSUE_COMMENTS_FORM_SUBMIT_CANCEL } from '@waldur/issues/comments/constants';
-import { showError } from '@waldur/store/coreSaga';
+import { showError } from '@waldur/store/notify';
 
 import * as actions from './actions';
 import * as api from './api';

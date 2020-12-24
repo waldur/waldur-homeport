@@ -6,7 +6,7 @@ import { useAsync } from 'react-use';
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { InvitationService } from '@waldur/invitations/InvitationService';
-import { showError } from '@waldur/store/coreSaga';
+import { showError } from '@waldur/store/notify';
 
 const checkRegistrationMethods = async (mode, router, dispatch) => {
   /*

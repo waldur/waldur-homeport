@@ -13,7 +13,7 @@ function createSubnetField(ctx) {
     placeholder: translate('Select subnets to connect to...'),
     resource_default_value: true,
     serializer: (items) => items.map((item) => ({ subnet: item.value })),
-    formatter: (_, item) => internalIpFormatter(item),
+    formatter: (item) => internalIpFormatter(item),
     modelParser: (_, items) =>
       items.map((item) => ({
         url: item.subnet,

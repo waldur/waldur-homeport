@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { triggerTransition } from '@uirouter/redux';
 import { useState, useEffect, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -7,7 +8,6 @@ import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
-import { stateGo } from '@waldur/store/coreSaga';
 import {
   setCurrentCustomer,
   setCurrentProject,
@@ -50,7 +50,7 @@ export const CustomerWorkspace: FunctionComponent = () => {
   const dispatch = useDispatch();
   useAsync(async () => {
     if (!customerId) {
-      dispatch(stateGo('errorPage.notFound'));
+      dispatch(triggerTransition('errorPage.notFound', {}));
     } else {
       try {
         const currentCustomer = await CustomersService.get(customerId);
@@ -63,10 +63,10 @@ export const CustomerWorkspace: FunctionComponent = () => {
           !checkIsServiceManager(currentCustomer, currentUser) &&
           !currentUser.is_support
         ) {
-          dispatch(stateGo('errorPage.notFound'));
+          dispatch(triggerTransition('errorPage.notFound', {}));
         }
       } catch {
-        dispatch(stateGo('errorPage.notFound'));
+        dispatch(triggerTransition('errorPage.notFound', {}));
       }
     }
   }, [customerId]);

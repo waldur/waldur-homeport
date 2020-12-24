@@ -5,15 +5,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const AngularGetTextPlugin = require('./angular-gettext-plugin');
 const utils = require('./webpack.utils');
 const scssPath = path.resolve('./src/');
 const imagesPath = path.resolve('./src/images');
 
 module.exports = {
   entry: {
-    index: './src/index.ts',
+    index: './src/index.tsx',
   },
   output: {
     path: utils.formatPath('.'),
@@ -186,6 +186,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new MonacoWebpackPlugin({
       // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
       languages: ['json', 'yaml', 'shell', 'python'],
@@ -236,26 +237,6 @@ module.exports = {
       // manifest.json is an experimental feature that is currently breaking caching
       // {from:  './app/manifest.json', to: utils.formatPath('manifest.json'), toType: 'file'},
     ]),
-    // Internationalization plugin, extracts strings for translation, and generates JSON dictionaries based on the already translated ones.
-    new AngularGetTextPlugin({
-      compileTranslations: {
-        input: path.resolve('./i18n/*.po'),
-        outputFolder: 'scripts/i18n',
-        format: 'json',
-      },
-      extractStrings: {
-        patterns: [
-          'src/**/*.html',
-          'src/**/*.js',
-          'src/**/*.jsx',
-          'src/**/*.ts',
-          'src/**/*.tsx',
-        ],
-        destination: path.resolve('./i18n/template.pot'),
-        lineNumbers: false,
-        markerNames: ['gettext', 'translate'],
-      },
-    }),
   ],
   stats: {
     children: false,

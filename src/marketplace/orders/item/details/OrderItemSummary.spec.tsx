@@ -2,7 +2,7 @@ import { BillingType } from '@waldur/marketplace/types';
 
 import { getUpdateSummary } from './OrderItemSummary';
 
-jest.mock('@waldur/core/services', () => ({
+jest.mock('@waldur/core/formatCurrency', () => ({
   defaultCurrency: (val) => val,
 }));
 

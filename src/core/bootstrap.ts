@@ -1,53 +1,36 @@
-import angular from 'angular';
 import Axios from 'axios';
 
+import { afterBootstrap } from '@waldur/afterBootstrap';
 import { ENV } from '@waldur/configs/default';
 import experimentalMode from '@waldur/configs/modes/experimental.json';
 import stableMode from '@waldur/configs/modes/stable.json';
-import { renderModalContainer } from '@waldur/modal/ModalContainer';
-import { renderNotificationsContainer } from '@waldur/modal/NotificationContainer';
-
-import attachTracking from './tracking';
 
 const CONFIG_FILE = 'scripts/configs/config.json';
 const modes = { stableMode, experimentalMode };
 
-function renderError(details) {
-  document
-    .querySelector('.loading-screen')
-    .setAttribute('style', 'display: none');
-  document.querySelector('.erred-screen').setAttribute('style', '');
-  document.querySelector('#wrapper').remove();
-  document.querySelector('.erred-screen-message').textContent = details;
-  document.querySelector('#retry-bootstrap').addEventListener('click', () => {
-    location.reload();
-  });
-}
-
-async function loadConfig() {
+export async function loadConfig() {
   let frontendSettings, backendSettings;
   try {
     const frontendResponse = await Axios.get(CONFIG_FILE);
     frontendSettings = frontendResponse.data;
   } catch (response) {
     if (!response) {
-      renderError(`Unable to fetch client configuration file.`);
-      return;
+      throw new Error(`Unable to fetch client configuration file.`);
     } else if (response.status === 404) {
       // fallback to default configuration
       frontendSettings = {
         apiEndpoint: 'http://localhost:8080/',
       };
     } else {
-      renderError(response);
-      return;
+      throw new Error(response);
     }
   }
 
   // Axios swallows JSON parse error
   if (typeof frontendSettings !== 'object') {
-    renderError(`Unable to parse client configuration file ${CONFIG_FILE}.`);
-    return;
+    throw new Error(
+      `Unable to parse client configuration file ${CONFIG_FILE}.`,
+    );
   }
 
   try {
@@ -57,40 +40,26 @@ async function loadConfig() {
     backendSettings = backendResponse.data;
   } catch (response) {
     if (!response) {
-      renderError(
+      throw new Error(
         `Unfortunately, connection to server has failed. Please check if you can connect to ${frontendSettings.apiEndpoint} from your browser and contact support if the error continues.`,
       );
       return;
     } else if (response.status >= 400) {
-      renderError(
+      throw new Error(
         `Unable to fetch server configuration. Error message: ${response.statusText}`,
       );
     } else {
-      renderError(response);
+      throw new Error(response);
     }
-    return;
   }
 
-  return { ...frontendSettings, plugins: backendSettings };
-}
-
-export default async function bootstrap(modulename) {
-  const config = await loadConfig();
-  if (!config) {
-    return;
-  }
-
+  const config = { ...frontendSettings, plugins: backendSettings };
   Object.assign(ENV, config);
   if (ENV.enableExperimental) {
     Object.assign(ENV, modes.experimentalMode);
   } else {
     Object.assign(ENV, modes.stableMode);
   }
-  attachTracking(ENV);
-
-  angular.element(document).ready(function () {
-    angular.bootstrap(document, [modulename], { strictDi: true });
-    renderModalContainer();
-    renderNotificationsContainer();
-  });
+  afterBootstrap();
+  return true;
 }

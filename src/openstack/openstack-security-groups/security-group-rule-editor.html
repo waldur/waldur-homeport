@@ -1,22 +1,22 @@
 <table class="table table-bordered">
   <tbody ng-if="$ctrl.target.length === 0">
     <tr colspan="5">
-      <td class="text-center" translate>
-        Security group does not contain any rule yet.
+      <td class="text-center">
+        {{ $ctrl.getRulePlaceholder() }}
       </td>
     </tr>
   </tbody>
   <thead ng-if="$ctrl.target.length > 0">
     <tr>
-      <th translate>Ethernet type</th>
-      <th translate>Direction</th>
-      <th translate>IP protocol</th>
-      <th translate>From port</th>
-      <th translate>To port</th>
-      <th translate>Remote CIDR</th>
-      <th translate>Remote security group</th>
-      <th translate>Description</th>
-      <th translate>Actions</th>
+      <th>{{ $ctrl.getEthernetTypeHeader() }}</th>
+      <th>{{ $ctrl.getDirectionHeader() }}</th>
+      <th>{{ $ctrl.getIpProtocolHeader() }}</th>
+      <th>{{ $ctrl.getFromPortHeader() }}</th>
+      <th>{{ $ctrl.getToPortHeader() }}</th>
+      <th>{{ $ctrl.getRemoteCidrHeader() }}</th>
+      <th>{{ $ctrl.getRemoteSecurityGroupHeader() }}</th>
+      <th>{{ $ctrl.getDescriptionHeader() }}</th>
+      <th>{{ $ctrl.getActionsHeader() }}</th>
     </tr>
   </thead>
   <tbody ng-if="$ctrl.target.length > 0">
@@ -27,8 +27,7 @@
           ng-model="rule.ethertype"
           class="form-control"
           required
-        >
-        </select>
+        ></select>
       </td>
       <td>
         <select
@@ -36,16 +35,14 @@
           ng-model="rule.direction"
           class="form-control"
           required
-        >
-        </select>
+        ></select>
       </td>
       <td>
         <select
           ng-options="protocol.value as protocol.label for protocol in $ctrl.protocols"
           ng-model="rule.protocol"
           class="form-control"
-        >
-        </select>
+        ></select>
       </td>
       <td
         class="form-group"
@@ -99,7 +96,7 @@
           class="form-control"
           ng-if="!$ctrl.loading"
         >
-        <option value="" translate>None</option>
+          <option value="">{{ $ctrl.getRemoteGroupPlaceholder() }}</option>
         </select>
       </td>
       <td class="form-group">
@@ -116,7 +113,7 @@
           ng-click="$ctrl.deleteRule(rule)"
         >
           <i class="fa fa-trash"></i>&nbsp;
-          <span translate>Delete</span>
+          {{ $ctrl.getDeleteRuleMessage() }}
         </button>
       </td>
     </tr>
@@ -125,5 +122,5 @@
 
 <button class="btn btn-primary btn-sm" ng-click="$ctrl.addRule()" type="button">
   <i class="fa fa-plus"></i>&nbsp;
-  <span translate>Add rule</span>
+  {{ $ctrl.getAddRuleMessage() }}
 </button>

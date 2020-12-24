@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
 import { translate } from '@waldur/i18n';
-import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { deleteEntity } from '@waldur/table/actions';
 

@@ -7,7 +7,6 @@
   max="{{ ::$ctrl.maxValue }}"
   ng-min="{{ ::$ctrl.field.min_value }}"
   ng-max="{{ ::$ctrl.field.max_value }}"
-  multiply-by="$ctrl.field.factor"
   placeholder="{{ ::$ctrl.minValue }}"
   class="form-control"
   ng-required="$ctrl.field.required"
@@ -18,23 +17,20 @@
 <p
   class="help-block text-danger"
   ng-if="$ctrl.form[$ctrl.field.name].$error.pattern"
-  translate
 >
-  Not a valid value
+  {{ $ctrl.getInvalidErrorMessage() }}
 </p>
 
 <p
   class="help-block text-danger"
   ng-if="$ctrl.form[$ctrl.field.name].$error.min"
 >
-  <span translate>Minimal valid value is</span> {{ $ctrl.minValue }}
-  {{ ::$ctrl.field.units }}
+  {{ $ctrl.getMinErrorMessage() }}
 </p>
 
 <p
   class="help-block text-danger"
   ng-if="$ctrl.form[$ctrl.field.name].$error.max"
 >
-  <span translate>Maximal valid value is</span> {{ $ctrl.maxValue }}
-  {{ ::$ctrl.field.units }}
+  {{ $ctrl.getMaxErrorMessage() }}
 </p>

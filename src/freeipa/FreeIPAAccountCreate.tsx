@@ -5,7 +5,7 @@ import { reduxForm, change } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { translate } from '@waldur/i18n';
-import { showSuccess, showError } from '@waldur/store/coreSaga';
+import { showSuccess, showError } from '@waldur/store/notify';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { createProfile } from './api';
