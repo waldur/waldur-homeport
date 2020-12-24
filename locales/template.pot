@@ -8688,6 +8688,10 @@ msgstr ""
 msgid "Unpaid"
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingActions.tsx
+msgid "Unpause"
+msgstr ""
+
 #: src/customer/details/CustomerEditDetailsForm.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx

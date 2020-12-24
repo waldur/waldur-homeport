@@ -1,3 +1,4 @@
+import { UISref } from '@uirouter/react';
 import { useMemo, FunctionComponent } from 'react';
 import {
   Dropdown,
@@ -11,15 +12,12 @@ import { useSelector } from 'react-redux';
 import { AuthService } from '@waldur/auth/AuthService';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { router } from '@waldur/router';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getPrivateUserTabs } from './constants';
 
 const getSidebarItems = () =>
-  getPrivateUserTabs()
-    .filter((item) => isFeatureVisible(item.feature))
-    .map((item) => ({ ...item, href: router.stateService.href(item.state) }));
+  getPrivateUserTabs().filter((item) => isFeatureVisible(item.feature));
 
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useSelector(getUser);
@@ -42,9 +40,9 @@ export const UserDropdownMenu: FunctionComponent = () => {
         </DropdownToggle>
         <DropdownMenu className="m-t-xs">
           {menuItems.map((item, index) => (
-            <MenuItem key={index} href={item.href}>
-              {item.label}
-            </MenuItem>
+            <UISref key={index} to={item.state}>
+              <MenuItem>{item.label}</MenuItem>
+            </UISref>
           ))}
           <MenuItem divider />
           <MenuItem onClick={AuthService.logout}>
