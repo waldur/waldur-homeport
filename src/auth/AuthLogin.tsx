@@ -1,8 +1,8 @@
 import { useMemo, FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { LanguageList } from '@waldur/i18n/LanguageList';
+import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
 import { AppFooter } from '@waldur/navigation/AppFooter';
 import { CookiesConsent } from '@waldur/navigation/cookies/CookiesConsent';
 
@@ -18,7 +18,7 @@ import { useAuthFeatures } from './useAuthFeatures';
 
 export const AuthLogin: FunctionComponent = () => {
   const features = useAuthFeatures();
-  const locale = useSelector((state: { locale: string }) => state.locale);
+  const locale = LanguageUtilsService.getCurrentLanguage().code;
   const providers = useMemo(getAuthProviders, [locale]);
   return (
     <>
