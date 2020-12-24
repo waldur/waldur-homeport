@@ -24,12 +24,12 @@ export const OfferingsListExpandableRow: FunctionComponent<{
         />
       </div>
       <OfferingCostsChart offeringUuid={row.uuid} uniqueFormId={uniqueFormId} />
-      {row.components.length && (
+      {row.components.length > 0 ? (
         <OfferingUsageChart
           offeringUuid={row.uuid}
           components={row.components}
         />
-      )}
+      ) : null}
     </>
   );
 };

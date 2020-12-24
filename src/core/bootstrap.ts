@@ -43,7 +43,6 @@ export async function loadConfig() {
       throw new Error(
         `Unfortunately, connection to server has failed. Please check if you can connect to ${frontendSettings.apiEndpoint} from your browser and contact support if the error continues.`,
       );
-      return;
     } else if (response.status >= 400) {
       throw new Error(
         `Unable to fetch server configuration. Error message: ${response.statusText}`,
