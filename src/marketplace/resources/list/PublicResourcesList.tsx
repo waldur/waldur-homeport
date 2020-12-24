@@ -7,7 +7,11 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { Table, connectTable, createFetcher } from '@waldur/table';
-import { getCustomer } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  getUser,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { ResourceUsageButton } from '../usage/ResourceUsageButton';
@@ -24,10 +28,7 @@ interface ResourceFilter {
   offering?: Offering;
 }
 
-interface StateProps {
-  customer: Customer;
-  filter: ResourceFilter;
-}
+type StateProps = Readonly<ReturnType<typeof mapStateToProps>>;
 
 export const TableComponent: FunctionComponent<any> = (props) => {
   React.useEffect(() => {
@@ -113,6 +114,9 @@ const mapPropsToFilter = (props: StateProps) => {
       filter.category_uuid = props.filter.category.uuid;
     }
   }
+  if (props.isServiceManager) {
+    filter.service_manager_uuid = props.user.uuid;
+  }
   return filter;
 };
 
@@ -147,7 +151,9 @@ export const TableOptions = {
 
 const mapStateToProps = (state) => ({
   customer: getCustomer(state),
-  filter: getFormValues('PublicResourcesFilter')(state),
+  filter: getFormValues('PublicResourcesFilter')(state) as ResourceFilter,
+  user: getUser(state),
+  isServiceManager: isServiceManagerSelector(state),
 });
 
 const enhance = compose(

@@ -81,6 +81,12 @@ export const getOwner = createSelector(
   },
 );
 
+export const isServiceManagerSelector = createSelector(
+  getCustomer,
+  getUser,
+  checkIsServiceManager,
+);
+
 export const isOwner = createSelector(getOwner, (owner) => {
   return !!owner;
 });

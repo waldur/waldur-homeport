@@ -11,7 +11,12 @@ import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expand
 import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
 import { OFFERING_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { Table, connectTable, createFetcher } from '@waldur/table';
-import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  getUser,
+  isOwnerOrStaff,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 import { Offering } from '../types';
 
@@ -76,18 +81,25 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, string | boolean> = {
+interface FilterData {
+  state: { value: string }[];
+}
+
+type StateProps = Readonly<ReturnType<typeof mapStateToProps>>;
+
+const mapPropsToFilter = (props: StateProps) => {
+  const filter: Record<string, any> = {
     billable: true,
     shared: true,
   };
   if (props.customer) {
     filter.customer_uuid = props.customer.uuid;
   }
-  if (props.filter) {
-    if (props.filter.state) {
-      filter.state = props.filter.state.map((option) => option.value);
-    }
+  if (props.filter?.state) {
+    filter.state = props.filter.state.map((option) => option.value);
+  }
+  if (props.isServiceManager) {
+    filter.service_manager_uuid = props.user.uuid;
   }
   return filter;
 };
@@ -114,9 +126,11 @@ const showOfferingCreateButton = createSelector(
 
 const mapStateToProps = (state) => ({
   customer: getCustomer(state),
+  user: getUser(state),
+  isServiceManager: isServiceManagerSelector(state),
   actionsDisabled: !isOwnerOrStaff(state),
   showOfferingCreateButton: showOfferingCreateButton(state),
-  filter: getFormValues('OfferingsFilter')(state),
+  filter: getFormValues('OfferingsFilter')(state) as FilterData,
 });
 
 const enhance = compose(

@@ -7,7 +7,11 @@ import { createSelector } from 'reselect';
 
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { getCustomer } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  getUser,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
 import { getStates, ResourceStateFilter } from './ResourceStateFilter';
@@ -21,9 +25,17 @@ const PurePublicResourcesFilter: FunctionComponent<any> = (props) => (
   </Row>
 );
 
-const filterSelector = createSelector(getCustomer, (customer) => ({
-  customer_uuid: customer.uuid,
-}));
+const filterSelector = createSelector(
+  getCustomer,
+  getUser,
+  isServiceManagerSelector,
+  (customer, user, isServiceManager) =>
+    isServiceManager
+      ? { customer_uuid: customer.uuid, service_manager_uuid: user.uuid }
+      : {
+          customer_uuid: customer.uuid,
+        },
+);
 
 const mapStateToProps = (state) => ({
   offeringFilter: filterSelector(state),
