@@ -31,7 +31,7 @@ describe('IssueCommentsForm', () => {
     expect(hasNoCommentsMessage(wrapper)).toBe(true);
   });
 
-  it('renders erorr', () => {
+  it('renders error', () => {
     const wrapper = renderWrapper({
       erred: true,
     });
