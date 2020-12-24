@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 import { translate } from '@waldur/i18n';
 
 import { internalIpFormatter } from './openstack-instance-config';

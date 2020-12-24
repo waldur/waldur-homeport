@@ -1,3 +1,4 @@
+import angular from 'angular';
 import Axios from 'axios';
 import Qs from 'qs';
 
