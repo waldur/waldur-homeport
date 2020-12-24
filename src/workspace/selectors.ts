@@ -47,29 +47,19 @@ export const isSupport = (state: OuterState): boolean =>
 export const isStaffOrSupport = (state: OuterState): boolean =>
   isStaff(state) || isSupport(state);
 
-export const checkIsOwner = (customer: Customer, user: User): boolean => {
-  for (let i = 0; i < customer.owners.length; i++) {
-    if (user && user.uuid === customer.owners[i].uuid) {
-      return true;
-    }
-  }
-  return false;
-};
+export const checkIsOwner = (customer: Customer, user: User): boolean =>
+  customer &&
+  user &&
+  customer.owners.find((owner) => owner.uuid === user.uuid) !== undefined;
 
 export const checkIsServiceManager = (
   customer: Customer,
   user: User,
-): boolean => {
-  if (!customer || !user) {
-    return false;
-  }
-  for (let i = 0; i < customer.service_managers.length; i++) {
-    if (user && user.uuid === customer.service_managers[i].uuid) {
-      return true;
-    }
-  }
-  return false;
-};
+): boolean =>
+  customer &&
+  user &&
+  customer.service_managers.find((manager) => manager.uuid === user.uuid) !==
+    undefined;
 
 export const checkCustomerUser = (customer: Customer, user: User): boolean => {
   if (user && user.is_staff) {
