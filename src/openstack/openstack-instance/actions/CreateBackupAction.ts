@@ -9,7 +9,7 @@ import {
 import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
 import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/coreSaga';
+import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 export default function createAction({ resource }): ResourceAction {
   return {

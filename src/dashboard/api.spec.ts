@@ -3,7 +3,7 @@ import { advanceTo, clear } from 'jest-date-mock';
 import * as api from './api';
 import { Quota } from './types';
 
-jest.mock('@waldur/core/services', () => ({
+jest.mock('@waldur/core/formatCurrency', () => ({
   defaultCurrency: (val) => `EUR${val}`,
 }));
 

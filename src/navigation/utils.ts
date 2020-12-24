@@ -1,16 +1,25 @@
-import { $rootScope, $state } from '@waldur/core/services';
+import { router } from '@waldur/router';
+
+let state;
+let params;
+
+export function setPrevState(newState) {
+  state = newState;
+}
+
+export function setPrevParams(newParams) {
+  params = newParams;
+}
 
 export const goBack = () => {
-  const state = $rootScope.prevPreviousState;
-  const params = $rootScope.prevPreviousParams;
   if (
     state &&
     state.name &&
     state.name !== 'errorPage.notFound' &&
     state.name !== 'errorPage.limitQuota'
   ) {
-    $state.go(state.name, params);
+    router.stateService.go(state.name, params);
   } else {
-    $state.go('profile.details');
+    router.stateService.go('profile.details');
   }
 };

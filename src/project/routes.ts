@@ -40,9 +40,13 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: PROJECT_WORKSPACE,
     },
-    resolve: {
-      project: loadProject,
-    },
+    resolve: [
+      {
+        token: 'project',
+        deps: ['$transition$'],
+        resolveFn: loadProject,
+      },
+    ],
   },
 
   {

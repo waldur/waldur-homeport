@@ -22,7 +22,8 @@
     "ci:conf": "mkdirp build/scripts/configs/ && cp src/configs/test-config.json build/scripts/configs/config.json",
     "ci:start": "yarn build && yarn ci:conf && yarn serve build --single --listen 8001",
     "ci:run": "cypress run",
-    "ci:test": "start-server-and-test ci:start http://localhost:8001/ ci:run"
+    "ci:test": "start-server-and-test ci:start http://localhost:8001/ ci:run",
+    "gettext:extract": "angular-gettext-cli --files 'src/**/*.+(js|ts|tsx|html)' --exclude '**/*.spec.(js|ts|tsx)' --dest './locales/template.pot' --marker-names translate,gettext --no-line-numbers"
   },
   "dependencies": {
     "@fullcalendar/bootstrap": "~4.2.0",
@@ -35,17 +36,11 @@
     "@fullcalendar/react": "~4.2.0",
     "@fullcalendar/timegrid": "~4.2.0",
     "@react-bootstrap/pagination": "^1.0.0",
-    "@sentry/browser": "5.4.0",
+    "@sentry/react": "^5.29.2",
     "@tweenjs/tween.js": "^18.6.4",
-    "@uirouter/react-hybrid": "^1.0.1",
+    "@uirouter/react": "^1.0.5",
+    "@uirouter/redux": "^1.0.0",
     "angular": "^1.8.0",
-    "angular-animate": "^1.8.0",
-    "angular-cookies": "^1.8.0",
-    "angular-loader": "^1.8.0",
-    "angular-translate": "^2.18.2",
-    "angular-translate-loader-static-files": "^2.18.2",
-    "angular-translate-storage-cookie": "^2.18.2",
-    "angular-translate-storage-local": "^2.18.2",
     "attr-accept": "^1.1.0",
     "axios": "^0.19.2",
     "bootstrap": "^3.3.7",
@@ -66,6 +61,7 @@
     "html-to-draftjs": "^1.5.0",
     "immutable": "^3.8.2",
     "ip-regex": "^4.2.0",
+    "json-loader": "^0.5.7",
     "jszip": "^3.4.0",
     "leaflet": "^1.7.1",
     "leaflet-geosearch": "^3.0.6",
@@ -82,6 +78,8 @@
     "npm-font-open-sans": "^1.0.3",
     "papaparse": "^5.2.0",
     "pdfmake": "^0.1.65",
+    "po-loader": "^0.5.0",
+    "po2json": "^0.4.5",
     "prop-types": "^15.6.2",
     "qs": "^6.9.3",
     "react": "^16.13.1",
@@ -105,8 +103,7 @@
     "react-window": "^1.8.5",
     "react-window-paginated": "^1.0.0",
     "react-windowed-select": "^2.0.3",
-    "reapop": "^2.1.0",
-    "reapop-theme-bootstrap": "^1.0.2",
+    "reapop": "^3.0.1",
     "redux": "^4.0.1",
     "redux-form": "^8.3.5",
     "redux-form-saga": "^0.2.0",
@@ -145,7 +142,7 @@
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
     "add-asset-html-webpack-plugin": "^3.1.2",
-    "angular-gettext-tools": "^2.5.3",
+    "angular-gettext-cli": "^1.2.0",
     "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",
     "babel-plugin-angularjs-annotate": "^0.8.2",
@@ -167,6 +164,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^2.0.0",
+    "fork-ts-checker-webpack-plugin": "^6.0.8",
     "html-loader": "^0.5.5",
     "html-webpack-harddisk-plugin": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
@@ -181,7 +179,6 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "offline-plugin": "^4.8.1",
-    "pofile": "^1.0.9",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.2.1",
@@ -206,7 +203,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint-staged"
+      "pre-commit": "yarn gettext:extract && yarn lint-staged"
     }
   },
   "lint-staged": {

@@ -28,9 +28,17 @@ const actionFieldString = {
     }
 
     getMaxLengthErrorMessage() {
-      return translate('Field length must be less than {maxlength} symbols', {
+      return translate('Field length must be less than {maxlength} symbols.', {
         maxlength: this.field.maxlength,
       });
+    }
+
+    getRequiredErrorMessage() {
+      return translate('This field is required.');
+    }
+
+    getInvalidErrorMessage() {
+      return translate('This field contains invalid characters.');
     }
   },
 };

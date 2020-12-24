@@ -2,7 +2,7 @@ import moment from 'moment-timezone';
 
 import { getList } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import {
   getDailyQuotaCharts,
   padMissingValues,

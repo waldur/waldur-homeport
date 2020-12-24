@@ -14,10 +14,8 @@ const OpenStackVolumeSummary = lazyComponent(
   'OpenStackVolumeSummary',
 );
 
-export default () => {
-  ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);
-  ActionConfigurationRegistry.register('OpenStackTenant.Volume', actions);
-  ResourceStateConfigurationProvider.register('OpenStackTenant.Volume', {
-    error_states: ['error'],
-  });
-};
+ResourceSummary.register('OpenStackTenant.Volume', OpenStackVolumeSummary);
+ActionConfigurationRegistry.register('OpenStackTenant.Volume', actions);
+ResourceStateConfigurationProvider.register('OpenStackTenant.Volume', {
+  error_states: ['error'],
+});

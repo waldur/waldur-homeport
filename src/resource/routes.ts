@@ -23,9 +23,13 @@ export const states: StateDeclaration[] = [
         dynamic: true,
       },
     },
-    resolve: {
-      resource: loadResource,
-    },
+    resolve: [
+      {
+        token: 'resource',
+        deps: ['$transition$'],
+        resolveFn: loadResource,
+      },
+    ],
     data: {
       auth: true,
       workspace: PROJECT_WORKSPACE,

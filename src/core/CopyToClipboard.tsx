@@ -3,7 +3,7 @@ import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/coreSaga';
+import { showSuccess } from '@waldur/store/notify';
 
 export const CopyToClipboard: FunctionComponent<{ value }> = ({ value }) => {
   const dispatch = useDispatch();

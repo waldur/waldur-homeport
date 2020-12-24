@@ -4,7 +4,7 @@ import { setNetworkMtu } from '@waldur/openstack/api';
 import { validateState } from '@waldur/resource/actions/base';
 import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 export default function createAction({ resource }): ResourceAction {
   return {

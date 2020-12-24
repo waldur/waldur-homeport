@@ -1,11 +1,12 @@
+import { triggerTransition } from '@uirouter/redux';
 import { SubmissionError, change } from 'redux-form';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
+import { router } from '@waldur/router';
+import { showError, showSuccess } from '@waldur/store/notify';
 
 import * as api from '../../common/api';
 
@@ -16,11 +17,11 @@ function* redirectToDetailView(resource_type, resource_uuid) {
     resource_type === 'Support.Offering'
       ? 'offeringDetails'
       : 'resource-details';
-  if ($state.current.name !== state) {
+  if (router.globals.current.name !== state) {
     return;
   }
   yield put(
-    stateGo(state, {
+    triggerTransition(state, {
       uuid: resource_uuid,
       resource_type,
       tab: 'orderItems',

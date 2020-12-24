@@ -11,7 +11,7 @@ import { SubmitButton } from '@waldur/form/SubmitButton';
 import { TextField } from '@waldur/form/TextField';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { showSuccess } from '@waldur/store/coreSaga';
+import { showSuccess } from '@waldur/store/notify';
 
 import { createKey } from './api';
 

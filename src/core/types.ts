@@ -4,8 +4,6 @@ import { ComponentType } from 'react';
 import { PluginConfiguration } from '@waldur/auth/types';
 
 interface DataDeclaration {
-  /** @deprecated in favor of useTitle */
-  pageTitle: string;
   /** State is disabled as long as its feature is disabled */
   feature: string;
   /** Related sidebar item is expanded if its key matches current state sidebarKey */
@@ -31,23 +29,10 @@ interface DataDeclaration {
   pageClass: string;
 }
 
-interface DataStateDeclaration extends BaseStateDeclaration {
+export interface StateDeclaration extends BaseStateDeclaration {
+  component: ComponentType<any>;
   data?: Partial<DataDeclaration>;
 }
-
-interface TemplateStateDeclaration extends DataStateDeclaration {
-  template?: string;
-  templateUrl?: string;
-  controller?: Function;
-}
-
-interface ComponentStateDeclaration extends DataStateDeclaration {
-  component: ComponentType<any>;
-}
-
-export type StateDeclaration =
-  | ComponentStateDeclaration
-  | TemplateStateDeclaration;
 
 export interface LanguageOption {
   code: string;

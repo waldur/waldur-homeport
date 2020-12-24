@@ -1,3 +1,4 @@
+import { triggerTransition } from '@uirouter/redux';
 import { useState, FunctionComponent } from 'react';
 import {
   ModalBody,
@@ -9,7 +10,7 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess, stateGo } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 
 import { closeReview } from './api';
 import { CustomerUsersList } from './CustomerUsersList';
@@ -19,7 +20,7 @@ export const PendingReviewDialog: FunctionComponent<{
 }> = ({ resolve: { reviewId } }) => {
   const dispatch = useDispatch();
   const gotoTeam = () => {
-    dispatch(stateGo('organization.team'));
+    dispatch(triggerTransition('organization.team', {}));
     dispatch(closeModalDialog());
   };
   const [submitting, setSubmitting] = useState(false);

@@ -8,7 +8,7 @@ import { post } from '@waldur/core/api';
 import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 
 const approvePayment = (payload) => post('/paypal-payments/approve/', payload);
 

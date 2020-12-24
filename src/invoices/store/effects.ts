@@ -5,7 +5,7 @@ import { Action } from '@waldur/core/reducerActions';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/invoices/api';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { FETCH_LIST_START } from '@waldur/table/actions';
 import { fetchList } from '@waldur/table/effects';
 import { getCustomer } from '@waldur/workspace/selectors';

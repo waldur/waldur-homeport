@@ -1,7 +1,7 @@
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getCategoryUsages } from '@waldur/marketplace/common/api';
 import { CategoryComponentUsage } from '@waldur/marketplace/types';
+import { router } from '@waldur/router';
 import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { Category } from './CategoryResources';
@@ -161,7 +161,7 @@ const formatData = (
                 workspace === ORGANIZATION_WORKSPACE
                   ? 'marketplace-category-customer'
                   : 'marketplace-category';
-              $state.go(state, { category_uuid: category.uuid });
+              router.stateService.go(state, { category_uuid: category.uuid });
             },
           },
         ],

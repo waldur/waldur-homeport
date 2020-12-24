@@ -4,7 +4,7 @@ import { validatePermissions } from '@waldur/offering/actions/utils';
 import { setBackendID } from '@waldur/offering/api';
 import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { Offering } from '../types';
 

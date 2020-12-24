@@ -13,6 +13,4 @@ const OpenStackSubNetSummary = lazyComponent(
   'OpenStackSubNetSummary',
 );
 
-export default () => {
-  ResourceSummary.register('OpenStack.SubNet', OpenStackSubNetSummary);
-};
+ResourceSummary.register('OpenStack.SubNet', OpenStackSubNetSummary);

@@ -1,4 +1,3 @@
-import { $rootScope } from '@waldur/core/services';
 import { translate, gettext } from '@waldur/i18n';
 import { executeConsoleAction } from '@waldur/openstack/utils';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
@@ -32,16 +31,14 @@ ActionConfigurationRegistry.register('VMware.VirtualMachine', {
         },
       },
       onSuccess: () => {
-        $rootScope.$broadcast('refreshResource');
-        $rootScope.$broadcast('refreshList');
+        // TODO: refreshResource & refreshList
       },
     },
     create_port: {
       tab: 'ports',
       title: translate('Create Network adapter'),
       onSuccess: () => {
-        $rootScope.$broadcast('refreshResource');
-        $rootScope.$broadcast('refreshList');
+        // TODO: refreshResource & refreshList
       },
     },
     update: {

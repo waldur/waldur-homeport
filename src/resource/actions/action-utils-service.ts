@@ -1,16 +1,21 @@
 import Axios from 'axios';
 
-import { $rootScope, $q, ngInjector } from '@waldur/core/services';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { angular2react } from '@waldur/shims/angular2react';
-import { showSuccess } from '@waldur/store/coreSaga';
+import { showSuccess } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { ActionConfigurationRegistry } from './action-configuration';
+
+const LegacyActionDialog = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "LegacyActionDialog" */ './LegacyActionDialog'),
+  'LegacyActionDialog',
+);
 
 const parseValidators = (validators, context) => {
   let reason = '';
@@ -117,9 +122,9 @@ export const handleActionSuccess = (action) => {
     });
   store.dispatch(showSuccess(template));
   if (action.onSuccess) {
-    action.onSuccess(ngInjector);
+    action.onSuccess();
   } else {
-    $rootScope.$broadcast('refreshResource');
+    // TODO: refreshResource
   }
 };
 
@@ -132,7 +137,7 @@ const applyAction = (controller, resource, action) => {
   function onSuccess(response) {
     if (response.status === 201 || response.status === 202) {
       if (response.config.method === 'DELETE') {
-        $rootScope.$broadcast('resourceDeletion');
+        // TODO: refreshResource
       }
       handleActionSuccess(action);
     } else if (response.status === 204) {
@@ -155,10 +160,8 @@ const applyAction = (controller, resource, action) => {
   );
 };
 
-const ActionDialog = angular2react('actionDialog', ['resolve']);
-
 const openActionDialog = (controller, resource, action) => {
-  const component = action.component || ActionDialog;
+  const component = action.component || LegacyActionDialog;
   const params = {
     component,
     size: action.dialogSize,
@@ -179,11 +182,11 @@ export const buttonClick = (controller, model, name, action) => {
     }
   } else if (action.type === 'form') {
     openActionDialog(controller, model, action);
-    return $q.when(true);
+    return Promise.resolve(true);
   } else if (action.type === 'callback') {
     return action.execute(model);
   }
-  return $q.reject();
+  return Promise.reject();
 };
 
 export const loadActions = (model) => {

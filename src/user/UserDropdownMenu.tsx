@@ -9,9 +9,9 @@ import Gravatar from 'react-gravatar';
 import { useSelector } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
-import { $state } from '@waldur/core/services';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
+import { router } from '@waldur/router';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getPrivateUserTabs } from './constants';
@@ -19,7 +19,7 @@ import { getPrivateUserTabs } from './constants';
 const getSidebarItems = () =>
   getPrivateUserTabs()
     .filter((item) => isFeatureVisible(item.feature))
-    .map((item) => ({ ...item, href: $state.href(item.state) }));
+    .map((item) => ({ ...item, href: router.stateService.href(item.state) }));
 
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useSelector(getUser);

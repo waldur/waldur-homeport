@@ -1,4 +1,4 @@
-import { $q } from '@waldur/core/services';
+import { createDeferred } from '@waldur/core/utils';
 
 import { ConfirmationDialog } from './ConfirmationDialog';
 
@@ -19,7 +19,7 @@ export const closeModalDialog = () => ({
 });
 
 export const waitForConfirmation = (dispatch, title, body) => {
-  const deferred = $q.defer();
+  const deferred = createDeferred();
   const params = {
     resolve: {
       deferred,

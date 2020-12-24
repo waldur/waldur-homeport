@@ -1,7 +1,7 @@
-import { $state } from '@waldur/core/services';
+import { router } from '@waldur/router';
 
 export const getLink = (route, params, label) =>
-  `<a href="${$state.href(route, params)}">${label}</a>`;
+  `<a href="${router.stateService.href(route, params)}">${label}</a>`;
 
 const getUserLink = (event) => {
   const name = event.user_full_name || event.user_username;

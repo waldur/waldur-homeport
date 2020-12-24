@@ -1,0 +1,78 @@
+.loading-screen {
+  position: relative;
+  top: 35%;
+}
+.loading-screen img {
+  display: block;
+  margin: 0 auto;
+}
+.loading-title {
+  color: #676a6c;
+  text-align: center;
+}
+.loading-title:after {
+  color: #2f4050;
+  content: ' .';
+  font-size: 40px;
+  animation: dots-mobile 1s steps(5, end) infinite;
+}
+
+@media screen and (min-width: 769px) {
+  .loading-title:after {
+    color: #ffffff;
+    animation: dots 1s steps(5, end) infinite;
+  }
+}
+
+@keyframes dots-mobile {
+  0% {
+    text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #ffffff;
+  }
+  33% {
+    text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #ffffff;
+  }
+  66% {
+    text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #2f4050;
+  }
+  100% {
+    color: #ffffff;
+    text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #ffffff;
+  }
+}
+
+@keyframes dots {
+  0% {
+    text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #2f4050;
+  }
+  33% {
+    text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #2f4050;
+  }
+  66% {
+    text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #ffffff;
+  }
+  100% {
+    color: #2f4050;
+    text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #2f4050;
+  }
+}
+
+.erred-screen {
+  position: relative;
+  top: 25%;
+  text-align: center;
+  color: #676a6c;
+  max-width: 500px;
+}
+@media (max-width: 768px) {
+  .erred-screen-message {
+    font-size: 17px;
+    margin: 15px;
+  }
+
+  .erred-screen {
+    top: 15%;
+  }
+}
+.erred-screen-icon {
+  font-size: 100pt;
+}

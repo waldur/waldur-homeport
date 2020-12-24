@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import { $state } from '@waldur/core/services';
 import * as actions from '@waldur/marketplace/offerings/store/actions';
+import { router } from '@waldur/router';
 
 import { mergeProps } from '../create/OfferingCreateContainer';
 import { updateOffering, FORM_ID } from '../store/constants';
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
     updateOffering(
       {
         ...data,
-        offeringUuid: $state.params.offering_uuid,
+        offeringUuid: router.globals.params.offering_uuid,
       },
       dispatch,
     ),

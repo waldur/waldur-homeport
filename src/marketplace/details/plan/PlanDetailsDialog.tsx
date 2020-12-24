@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAsync } from 'react-use';
 
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { defaultCurrency } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { getResource, getOffering } from '@waldur/marketplace/common/api';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';

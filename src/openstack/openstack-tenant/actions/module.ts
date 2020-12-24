@@ -2,6 +2,4 @@ import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-con
 
 import actions from './index';
 
-export default () => {
-  ActionConfigurationRegistry.register('OpenStack.Tenant', actions);
-};
+ActionConfigurationRegistry.register('OpenStack.Tenant', actions);

@@ -18,7 +18,7 @@ import { ENV } from '@waldur/configs/default';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { showErrorResponse, showError } from '@waldur/store/coreSaga';
+import { showErrorResponse, showError } from '@waldur/store/notify';
 import { UsersService } from '@waldur/user/UsersService';
 
 import { AuthService } from '../AuthService';

@@ -14,19 +14,11 @@ const OpenStackBackupScheduleSummary = lazyComponent(
   'OpenStackBackupScheduleSummary',
 );
 
-export default () => {
-  ActionConfigurationRegistry.register(
-    'OpenStackTenant.BackupSchedule',
-    actions,
-  );
-  ResourceSummary.register(
-    'OpenStackTenant.BackupSchedule',
-    OpenStackBackupScheduleSummary,
-  );
-  ResourceStateConfigurationProvider.register(
-    'OpenStackTenant.BackupSchedule',
-    {
-      error_states: ['error'],
-    },
-  );
-};
+ActionConfigurationRegistry.register('OpenStackTenant.BackupSchedule', actions);
+ResourceSummary.register(
+  'OpenStackTenant.BackupSchedule',
+  OpenStackBackupScheduleSummary,
+);
+ResourceStateConfigurationProvider.register('OpenStackTenant.BackupSchedule', {
+  error_states: ['error'],
+});

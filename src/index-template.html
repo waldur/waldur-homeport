@@ -17,107 +17,6 @@
     id="page-top"
     ng-csp="no-unsafe-eval"
   >
-    <div id="notifications-root"></div>
-    <div class="loading-screen" ng-if="::false">
-      <style>
-        .loading-screen {
-          position: relative;
-          top: 35%;
-        }
-        .loading-screen img {
-          display: block;
-          margin: 0 auto;
-        }
-        .loading-title {
-          color: #676a6c;
-          text-align: center;
-        }
-        .loading-title:after {
-          color: #2f4050;
-          content: ' .';
-          font-size: 40px;
-          animation: dots-mobile 1s steps(5, end) infinite;
-        }
-
-        @media screen and (min-width: 769px) {
-          .loading-title:after {
-            color: #ffffff;
-            animation: dots 1s steps(5, end) infinite;
-          }
-        }
-
-        @keyframes dots-mobile {
-          0% {
-            text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #ffffff;
-          }
-          33% {
-            text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #ffffff;
-          }
-          66% {
-            text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #2f4050;
-          }
-          100% {
-            color: #ffffff;
-            text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #ffffff;
-          }
-        }
-
-        @keyframes dots {
-          0% {
-            text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #2f4050;
-          }
-          33% {
-            text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #2f4050;
-          }
-          66% {
-            text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #ffffff;
-          }
-          100% {
-            color: #2f4050;
-            text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #2f4050;
-          }
-        }
-      </style>
-      <img src="/images/waldur/logo120x120.png" alt="Logo should be here" />
-      <h1 class="loading-title">Loading assets, please wait.</h1>
-    </div>
-    <div class="erred-screen center-block" style="display: none">
-      <style>
-        .erred-screen {
-          position: relative;
-          top: 25%;
-          text-align: center;
-          color: #676a6c;
-          max-width: 500px;
-        }
-        @media (max-width: 768px) {
-          .erred-screen-message {
-            font-size: 17px;
-            margin: 15px;
-          }
-
-          .erred-screen {
-            top: 15%;
-          }
-        }
-        .erred-screen-icon {
-          font-size: 100pt;
-        }
-      </style>
-      <div class="erred-screen-icon">
-        <i class="fa fa-exclamation-triangle"></i>
-      </div>
-      <h1>Unable to bootstrap application.</h1>
-      <p class="erred-screen-message"></p>
-      <button
-        type="button"
-        class="btn btn-success text-uppercase"
-        id="retry-bootstrap"
-      >
-        <i class="fa fa-refresh"></i>
-        Retry
-      </button>
-    </div>
     <noscript>
       <div class="container">
         <div class="row">
@@ -191,7 +90,8 @@
         </div>
       </div>
     </noscript>
-    <div id="react-root"></div>
-    <ui-view id="wrapper"></ui-view>
+    <div id="wrapper">
+      <div id="react-root"></div>
+    </div>
   </body>
 </html>

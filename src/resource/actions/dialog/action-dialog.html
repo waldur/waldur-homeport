@@ -18,7 +18,7 @@
       <div class="form-group" ng-if="$ctrl.resolve.action.name === 'destroy'">
         <label class="control-label">
           <h4>
-            <b translate>You are about to delete:</b>
+            <b>{{ $ctrl.getConfirmationMessage() }}</b>
             {{ $ctrl.resolve.resource.name }}
           </h4>
         </label>
@@ -64,10 +64,10 @@
       ng-disabled="!$ctrl.submitActive()"
     >
       <i ng-if="submitting" className="fa fa-spinner fa-spin"></i>
-      <span translate>Submit</span>
+      {{ $ctrl.getSubmitMessage() }}
     </button>
     <button type="button" class="btn btn-default" ng-click="$ctrl.close()">
-      <span translate>Cancel</span>
+      {{ $ctrl.getCancelMessage() }}
     </button>
   </div>
 </form>

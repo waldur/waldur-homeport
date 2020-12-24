@@ -20,7 +20,7 @@ import {
   transformBookingEvent,
   handleSchedule,
 } from '@waldur/booking/utils';
-import { showSuccess, showError } from '@waldur/store/coreSaga';
+import { showSuccess, showError } from '@waldur/store/notify';
 
 import BookingModal from '../modal/BookingModal';
 

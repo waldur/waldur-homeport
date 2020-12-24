@@ -10,7 +10,7 @@ import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { updateHPA } from '@waldur/rancher/api';
 import { HPA } from '@waldur/rancher/types';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { updateEntity } from '@waldur/table/actions';
 
 import { MetricOption, HPAUpdateFormData } from './types';

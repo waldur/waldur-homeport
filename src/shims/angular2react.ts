@@ -2,7 +2,7 @@ import { IScope } from 'angular';
 import kebabCase from 'lodash.kebabcase';
 import React from 'react';
 
-import { $rootScope, $compile } from '@waldur/core/services';
+import { $injector } from '@waldur/ng';
 
 interface Scope<Props> extends IScope {
   props: Props;
@@ -17,7 +17,7 @@ export function angular2react<Props extends object>(
 
     // Initialize AngularJS component scope when ReactJS component is mounted
     const [scope, setScope] = React.useState<Scope<Props>>(() =>
-      Object.assign($rootScope.$new(true), { props }),
+      Object.assign($injector.get('$rootScope').$new(true), { props }),
     );
 
     const destroyScope = React.useCallback(() => {
@@ -56,8 +56,7 @@ export function angular2react<Props extends object>(
       if (didInitialCompile) {
         return;
       }
-
-      $compile(element)(scope);
+      $injector.get('$compile')(element)(scope);
       try {
         scope.$digest();
       } catch (e) {

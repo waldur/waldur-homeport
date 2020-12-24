@@ -3,7 +3,9 @@ import Qs from 'qs';
 
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse } from '@waldur/store/coreSaga';
+import { $injector } from '@waldur/ng';
+import { router } from '@waldur/router';
+import { showErrorResponse } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 
 import { getSelectList, formatChoices } from '../action-resource-loader';
@@ -13,13 +15,10 @@ import { defaultFieldOptions } from '../constants';
 import template from './action-dialog.html';
 
 class ActionDialogController {
-  // @ngInject
-  constructor($q, $state, $rootScope) {
-    this.$q = $q;
-    this.$state = $state;
-    this.$rootScope = $rootScope;
-  }
   $onInit() {
+    if (!this.resolve) {
+      return;
+    }
     this.errors = {};
     this.form = {};
     this.loading = true;
@@ -33,7 +32,7 @@ class ActionDialogController {
     } else if (this.resolve.action.fields) {
       promise = getSelectList(this.resolve.action.fields);
     } else {
-      promise = this.$q.when(true);
+      promise = Promise.resolve(true);
     }
     promise
       .then(() => {
@@ -84,7 +83,7 @@ class ActionDialogController {
       .finally(() => {
         this.loading = false;
         // Trigger digest for async/await
-        this.$rootScope.$applyAsync();
+        $injector.get('$rootScope').$applyAsync();
       });
   }
   get dialogTitle() {
@@ -97,16 +96,19 @@ class ActionDialogController {
     }
   }
   submitActive() {
+    if (this.ActionForm.$invalid) {
+      return false;
+    }
     return (
       this.ActionForm.$dirty ||
       this.resolve.action.method === 'DELETE' ||
       !this.resolve.action.fields ||
-      this.submitting
+      !this.submitting
     );
   }
   submitForm() {
     if (this.ActionForm.$invalid) {
-      return this.$q.reject();
+      return Promise.reject();
     }
     const fields = this.resolve.action.fields;
     if (!this.resolve.action.url) {
@@ -146,7 +148,7 @@ class ActionDialogController {
 
         if (response.status === 201 && this.resolve.action.followRedirect) {
           const resource = response.data;
-          return this.$state.go('resource-details', {
+          return router.stateService.go('resource-details', {
             resource_type: resource.resource_type,
             uuid: resource.uuid,
           });
@@ -166,6 +168,15 @@ class ActionDialogController {
   }
   close() {
     store.dispatch(closeModalDialog());
+  }
+  getConfirmationMessage() {
+    return translate('You are about to delete:');
+  }
+  getSubmitMessage() {
+    return translate('Submit');
+  }
+  getCancelMessage() {
+    return translate('Cancel');
   }
 }
 

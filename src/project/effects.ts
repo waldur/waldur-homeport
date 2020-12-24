@@ -1,14 +1,10 @@
+import { triggerTransition } from '@uirouter/redux';
 import { SubmissionError } from 'redux-form';
 import { takeEvery, put, call, select } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
-import {
-  showSuccess,
-  stateGo,
-  emitSignal,
-  showError,
-} from '@waldur/store/coreSaga';
+import { showSuccess, showError } from '@waldur/store/notify';
 import { deleteEntity } from '@waldur/table/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -32,8 +28,8 @@ export function* handleCreateProject(action) {
       customer,
     });
     const project = response.data;
-    yield put(stateGo('project.details', { uuid: project.uuid }));
-    yield put(emitSignal('refreshProjectList', { project }));
+    yield put(triggerTransition('project.details', { uuid: project.uuid }));
+    // TODO: refreshProjectList
     yield put(createProject.success());
     yield put(showSuccess(successMessage));
   } catch (error) {
@@ -48,12 +44,16 @@ export function* handleCreateProject(action) {
 
 function* handleGotoProjectCreate() {
   const customer = yield select(getCustomer);
-  yield put(stateGo('organization.createProject', { uuid: customer.uuid }));
+  yield put(
+    triggerTransition('organization.createProject', { uuid: customer.uuid }),
+  );
 }
 
 function* handleGotoProjectList() {
   const customer = yield select(getCustomer);
-  yield put(stateGo('organization.projects', { uuid: customer.uuid }));
+  yield put(
+    triggerTransition('organization.projects', { uuid: customer.uuid }),
+  );
 }
 
 export function* handleUpdateProject(action) {
@@ -64,7 +64,7 @@ export function* handleUpdateProject(action) {
     const response = yield call(api.updateProject, action.payload);
     const project = response.data;
     yield call(api.dangerouslyUpdateProject, action.payload.cache, project);
-    yield put(emitSignal('refreshProjectList', { project }));
+    // TODO: refreshProjectList
     yield put(updateProject.success());
     yield put(showSuccess(successMessage));
   } catch (error) {

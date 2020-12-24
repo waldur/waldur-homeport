@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { defaultCurrency } from '@waldur/core/services';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { showPriceSelector } from '@waldur/invoices/details/utils';

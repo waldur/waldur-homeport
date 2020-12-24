@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
 import { FunctionComponent, useMemo } from 'react';
 
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { OrderItemDetailsType } from '@waldur/marketplace/orders/types';
 import { Offering, OfferingComponent } from '@waldur/marketplace/types';

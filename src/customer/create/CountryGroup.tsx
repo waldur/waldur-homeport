@@ -8,6 +8,7 @@ import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 import { InputGroup } from './InputGroup';
+import 'world-flags-sprite/stylesheets/flags16.css';
 
 const CountryRenderer = (option) => (
   <>

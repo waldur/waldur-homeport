@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { fetchListStart } from '@waldur/table/actions';
 import { getCustomer } from '@waldur/workspace/selectors';

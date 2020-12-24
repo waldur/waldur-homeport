@@ -1,4 +1,4 @@
-import { gettext } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/ResourceBreadcrumbsRegistry';
 
 ResourceBreadcrumbsRegistry.register('Rancher.Node', (resource) => {
@@ -12,7 +12,7 @@ ResourceBreadcrumbsRegistry.register('Rancher.Node', (resource) => {
       },
     },
     {
-      label: gettext('Nodes'),
+      label: translate('Nodes'),
       state: 'resource-details',
       params: {
         uuid: resource.cluster_uuid,

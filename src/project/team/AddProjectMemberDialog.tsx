@@ -17,7 +17,7 @@ import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPerm
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { showErrorResponse } from '@waldur/store/coreSaga';
+import { showErrorResponse } from '@waldur/store/notify';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
 import { RoleGroup } from './RoleGroup';

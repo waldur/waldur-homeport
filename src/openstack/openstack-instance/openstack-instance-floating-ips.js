@@ -1,14 +1,7 @@
-import { gettext } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 
 import { internalIpFormatter } from './openstack-instance-config';
 import template from './openstack-instance-floating-ips.html';
-
-const FLOATING_IP_CHOICES = [
-  {
-    value: true,
-    display_name: gettext('Auto-assign floating IP'),
-  },
-];
 
 const openstackInstanceFloatingIps = {
   template,
@@ -21,6 +14,17 @@ const openstackInstanceFloatingIps = {
     // @ngInject
     constructor($scope) {
       this.$scope = $scope;
+      this.messages = {
+        noSubnets: translate(
+          'Instance is not connected to any internal subnets yet. Please connect it to internal subnet first.',
+        ),
+        noFloatingIps: translate(
+          'Instance does not have any floating IPs yet.',
+        ),
+        selectSubnet: translate('Select connected subnet'),
+        addItem: translate('Add'),
+        deleteItem: translate('Delete'),
+      };
     }
 
     $onInit() {
@@ -37,7 +41,13 @@ const openstackInstanceFloatingIps = {
         }),
         value: internal_ip.subnet,
       }));
-      this.floating_ips = FLOATING_IP_CHOICES.concat(this.field.choices);
+      this.floating_ips = [
+        {
+          value: true,
+          display_name: translate('Auto-assign floating IP'),
+        },
+        ...this.field.choices,
+      ];
       this.$scope.$watch(
         () => this.items,
         () => {

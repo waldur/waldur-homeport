@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync, useAsyncFn } from 'react-use';
 
@@ -10,7 +10,7 @@ import {
 } from '@waldur/marketplace/common/api';
 import { ImportableResource, Offering, Plan } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { createEntity } from '@waldur/table/actions';
 
 import { ImportDialogProps } from './types';
@@ -23,9 +23,7 @@ const toggleElement = (element, list) =>
     ? list.filter((item) => item !== element)
     : [...list, element];
 
-export const useImportDialog: FunctionComponent<ImportDialogProps> = (
-  props,
-) => {
+export const useImportDialog = (props: ImportDialogProps) => {
   const [offering, setOffering] = useState<Offering>();
   const [resources, setResources] = useState<ImportableResource[]>([]);
   const [plans, setPlans] = useState<Record<string, Plan>>({});

@@ -2,7 +2,7 @@ import { createElement, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues, isValid } from 'redux-form';
 
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';

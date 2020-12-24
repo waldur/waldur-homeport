@@ -3,8 +3,8 @@ import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues, isValid } from 'redux-form';
 
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Panel } from '@waldur/core/Panel';
-import { defaultCurrency } from '@waldur/core/services';
 import { formatFilesize } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';

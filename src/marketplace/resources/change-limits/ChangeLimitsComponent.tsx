@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { OfferingLimits } from '@waldur/marketplace/offerings/store/types';
 import { Plan } from '@waldur/marketplace/types';

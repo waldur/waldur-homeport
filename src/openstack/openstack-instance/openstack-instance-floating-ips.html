@@ -1,9 +1,9 @@
-<div ng-if="$ctrl.subnets.length === 0" translate>
-  Instance is not connected to any internal subnets yet. Please connect it to internal subnet first.
+<div ng-if="$ctrl.subnets.length === 0">
+  {{ $ctrl.messages.noSubnets }}
 </div>
 <div ng-if="$ctrl.subnets.length > 0">
-  <div ng-if="$ctrl.items.length === 0" translate>
-    Instance does not have any floating IPs yet.
+  <div ng-if="$ctrl.items.length === 0">
+    {{ $ctrl.messages.noFloatingIps }}
   </div>
   <table class="table table-borderless m-b-xs" ng-if="$ctrl.items.length > 0">
     <tbody>
@@ -18,7 +18,7 @@
             ng-model="item.subnet"
             class="form-control"
           >
-            <option value="" translate>Select connected subnet</option>
+            <option value="">{{ $ctrl.messages.selectSubnet }}</option>
           </select>
         </td>
         <td class="col-md-5">
@@ -31,14 +31,13 @@
             ng-model="item.floating_ip"
             ng-class="{ disabled: !item.subnet }"
             class="form-control"
-          >
-          </select>
+          ></select>
         </td>
         <td>
           <button
             type="button"
             class="btn btn-default"
-            ng-attr-title="{{ 'Delete' | translate }}"
+            ng-attr-title="{{ $ctrl.messages.deleteItem }}"
             ng-click="$ctrl.deleteItem(item)"
           >
             <i class="fa fa-trash-o"></i>
@@ -50,6 +49,6 @@
 
   <button type="button" class="btn btn-default" ng-click="$ctrl.addItem()">
     <i class="fa fa-plus"></i>
-    <span translate>Add</span>
+    {{ $ctrl.messages.addItem }}
   </button>
 </div>

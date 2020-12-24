@@ -1,5 +1,5 @@
 import { getUUID } from '@waldur/core/utils';
-import { gettext } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/ResourceBreadcrumbsRegistry';
 
 import { getTenantListState } from '../utils';
@@ -17,7 +17,7 @@ ResourceBreadcrumbsRegistry.register('OpenStack.Network', (resource) => {
       },
     },
     {
-      label: gettext('Networks'),
+      label: translate('Networks'),
       state: 'resource-details',
       params: {
         uuid: tenant_uuid,

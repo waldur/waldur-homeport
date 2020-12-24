@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';

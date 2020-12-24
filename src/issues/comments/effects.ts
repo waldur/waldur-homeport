@@ -26,7 +26,7 @@ import {
 } from '@waldur/issues/attachments/constants';
 import { getUploading } from '@waldur/issues/attachments/selectors';
 import { Attachment } from '@waldur/issues/attachments/types';
-import { showError } from '@waldur/store/coreSaga';
+import { showError } from '@waldur/store/notify';
 
 import * as actions from './actions';
 import * as api from './api';

@@ -14,7 +14,7 @@ import {
 } from '@waldur/core/constants';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 
 import { InvitationService } from '../InvitationService';
 

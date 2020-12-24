@@ -1,6 +1,5 @@
 import { ENV } from '@waldur/configs/default';
 import { getFirst, getById, patch } from '@waldur/core/api';
-import { $q } from '@waldur/core/services';
 import store from '@waldur/store/store';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
@@ -11,18 +10,18 @@ export const getCurrentUser = () =>
 
 class UsersServiceClass {
   get(userId) {
-    return $q.when(getById<UserDetails>('/users/', userId));
+    return getById<UserDetails>('/users/', userId);
   }
 
   update(user) {
-    return $q.when(patch(`/users/${user.uuid}/`, user));
+    return patch(`/users/${user.uuid}/`, user);
   }
 
   getCurrentUser() {
     if (getUser(store.getState())) {
-      return $q.when(getUser(store.getState()));
+      return Promise.resolve(getUser(store.getState()));
     }
-    return $q.when(getCurrentUser()).then((user) => {
+    return getCurrentUser().then((user) => {
       store.dispatch(setCurrentUser(user));
       return user;
     });

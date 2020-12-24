@@ -10,6 +10,9 @@ export const setupFixture = (state = {}) => {
   const hasActionWithType = (type) =>
     dispatched.find((a) => a.type === type) !== undefined;
 
+  const hasActionWithMessage = (message) =>
+    dispatched.find((a) => a?.payload?.message === message) !== undefined;
+
   const dispatched = [];
   const store = {
     dispatch: (a) => dispatched.push(a),
@@ -19,6 +22,7 @@ export const setupFixture = (state = {}) => {
   return {
     dispatched,
     hasActionWithType,
+    hasActionWithMessage,
     mockUpdateUser,
     updateUser,
   };

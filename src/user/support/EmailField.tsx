@@ -7,7 +7,7 @@ import { format } from '@waldur/core/ErrorMessageFormatter';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 
 import { RequestedEmail } from './RequestedEmail';
 

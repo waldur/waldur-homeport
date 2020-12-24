@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { defaultCurrency } from '@waldur/core/services';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';
 import { translate } from '@waldur/i18n';
 import { Project } from '@waldur/workspace/types';

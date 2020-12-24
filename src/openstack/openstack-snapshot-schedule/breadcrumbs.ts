@@ -1,5 +1,5 @@
 import { getUUID } from '@waldur/core/utils';
-import { gettext } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/ResourceBreadcrumbsRegistry';
 
 import { getInstanceListState } from '../utils';
@@ -19,7 +19,7 @@ ResourceBreadcrumbsRegistry.register(
         },
       },
       {
-        label: gettext('Snapshot schedules'),
+        label: translate('Snapshot schedules'),
         state: 'resource-details',
         params: {
           uuid: volume_uuid,

@@ -4,7 +4,7 @@ import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { showSuccess, showError, emitSignal } from '@waldur/store/coreSaga';
+import { showSuccess, showError } from '@waldur/store/notify';
 import { SET_CURRENT_CUSTOMER } from '@waldur/workspace/constants';
 import { checkIsOwner, getUser } from '@waldur/workspace/selectors';
 
@@ -26,7 +26,7 @@ export function* uploadLogo(action) {
 
   try {
     yield call(api.uploadLogo, { customerUuid, image });
-    yield put(emitSignal('refreshCustomer'));
+    // TODO: refreshCustomer
     yield put(actions.uploadLogo.success());
     yield put(showSuccess(successMessage));
   } catch (error) {
@@ -47,7 +47,7 @@ export function* removeLogo(action) {
     yield put(reset('customerLogo'));
     if (customer.image) {
       yield call(api.removeLogo, { customerUuid: customer.uuid });
-      yield put(emitSignal('refreshCustomer'));
+      // TODO: refreshCustomer
       yield put(showSuccess(successMessage));
     }
   } catch (error) {

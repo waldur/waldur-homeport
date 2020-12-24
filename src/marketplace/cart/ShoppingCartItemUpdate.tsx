@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartItemUpdateExtraComponent } from '@waldur/marketplace/cart/ShoppingCartItemUpdateExtraComponent';
 import { Plan, Offering } from '@waldur/marketplace/types';
 import { setTitle } from '@waldur/navigation/title';
+import { router } from '@waldur/router';
 
 import * as api from '../common/api';
 import { OrderSummary } from '../details/OrderSummary';
@@ -121,9 +121,9 @@ class ShoppingCartItemUpdateComponent extends Component<ShoppingCartItemUpdatePr
 }
 
 const mapStateToProps = (state) => ({
-  shoppingCartItem: getItemSelectorFactory($state.params.order_item_uuid)(
-    state,
-  ),
+  shoppingCartItem: getItemSelectorFactory(
+    router.globals.params.order_item_uuid,
+  )(state),
 });
 
 export const ShoppingCartItemUpdate = connect(mapStateToProps, { setTitle })(

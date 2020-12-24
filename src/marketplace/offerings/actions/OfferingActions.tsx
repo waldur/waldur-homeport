@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { $state } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
+import { router } from '@waldur/router';
 import { getUser } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
@@ -132,7 +132,7 @@ const mergeProps = (
     {
       label: translate('Edit'),
       handler: () =>
-        $state.go('marketplace-offering-update', {
+        router.stateService.go('marketplace-offering-update', {
           offering_uuid: ownProps.offering.uuid,
         }),
       visible:
@@ -147,7 +147,7 @@ const mergeProps = (
     {
       label: translate('Screenshots'),
       handler: () =>
-        $state.go('marketplace-offering-screenshots', {
+        router.stateService.go('marketplace-offering-screenshots', {
           offering_uuid: ownProps.offering.uuid,
         }),
       visible:

@@ -1,4 +1,4 @@
-import { $state } from '@waldur/core/services';
+import { router } from '@waldur/router';
 import { USER_WORKSPACE } from '@waldur/workspace/types';
 
 class StateUtilsServiceClass {
@@ -24,7 +24,7 @@ class StateUtilsServiceClass {
 
   goBack() {
     if (this.prevState) {
-      $state.go(this.prevState, this.prevParams);
+      router.stateService.go(this.prevState, this.prevParams);
     }
   }
 

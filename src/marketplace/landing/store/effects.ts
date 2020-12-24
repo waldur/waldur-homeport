@@ -1,7 +1,7 @@
+import { triggerTransition } from '@uirouter/redux';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { Category } from '@waldur/marketplace/types';
-import { stateGo } from '@waldur/store/coreSaga';
 import {
   getWorkspace,
   getCustomer,
@@ -69,9 +69,9 @@ function* gotoOffering(action) {
   const params = { offering_uuid: offeringId };
   const workspace: WorkspaceType = yield select(getWorkspace);
   if (workspace === ORGANIZATION_WORKSPACE) {
-    yield put(stateGo('marketplace-offering-customer', params));
+    yield put(triggerTransition('marketplace-offering-customer', params));
   } else {
-    yield put(stateGo('marketplace-offering', params));
+    yield put(triggerTransition('marketplace-offering', params));
   }
 }
 

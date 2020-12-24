@@ -4,7 +4,7 @@ import * as api from '@waldur/booking/common/api';
 import { updateBookingsList } from '@waldur/booking/utils';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { selectTableSorting } from '@waldur/table/selectors';
 
 import * as constants from '../constants';

@@ -1,4 +1,3 @@
-import { $rootScope } from '@waldur/core/services';
 import { translate } from '@waldur/i18n';
 import {
   validateState,
@@ -34,7 +33,9 @@ export default function createAction(): ResourceAction {
         })),
       };
     },
-    onSuccess: () => $rootScope.$broadcast('refreshSecurityGroupsList'),
+    onSuccess: () => {
+      // TODO: refreshSecurityGroupsList
+    },
     dialogSize: 'xl',
     validators: [validateState('OK')],
   };

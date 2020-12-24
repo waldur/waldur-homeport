@@ -6,7 +6,7 @@ import * as api from '@waldur/customer/payments/api';
 import { updatePaymentsList } from '@waldur/customer/payments/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as constants from '../constants';

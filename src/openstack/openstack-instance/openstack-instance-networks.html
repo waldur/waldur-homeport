@@ -7,7 +7,9 @@
           ng-model="item.subnet"
           class="form-control"
         >
-          <option ng-if="!item.subnet" value="" translate>Select subnet</option>
+          <option ng-if="!item.subnet" value="">
+            {{ $ctrl.messages.selectSubnet }}
+          </option>
         </select>
       </td>
       <td class="col-md-5">
@@ -16,14 +18,13 @@
           ng-model="item.floating_ip"
           ng-class="{ disabled: !item.subnet }"
           class="form-control"
-        >
-        </select>
+        ></select>
       </td>
       <td class="p-r-n">
         <button
           type="button"
           class="btn btn-default"
-          ng-attr-tite="{{ 'Delete' | translate }}"
+          ng-attr-tite="{{ $ctrl.messages.deleteItem }}"
           ng-click="$ctrl.deleteItem(item)"
         >
           <i class="fa fa-trash-o"></i>
@@ -40,5 +41,5 @@
   ng-class="{ disabled: !$ctrl.hasFreeSubnets() }"
 >
   <i class="fa fa-plus"></i>
-  <span translate>Add</span>
+  {{ $ctrl.messages.addItem }}
 </button>

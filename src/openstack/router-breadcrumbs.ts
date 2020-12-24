@@ -1,4 +1,4 @@
-import { gettext } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/ResourceBreadcrumbsRegistry';
 
 import { getTenantListState } from './utils';
@@ -15,7 +15,7 @@ ResourceBreadcrumbsRegistry.register('OpenStack.Router', (resource) => {
       },
     },
     {
-      label: gettext('Routers'),
+      label: translate('Routers'),
       state: 'resource-details',
       params: {
         uuid: resource.tenant_uuid,

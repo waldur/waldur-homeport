@@ -6,7 +6,7 @@ import { SUBNET_PRIVATE_CIDR_PATTERN } from '@waldur/openstack/utils';
 import { validateState } from '@waldur/resource/actions/base';
 import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
 import { ResourceAction } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/coreSaga';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { InternalNetworkAllocationPool } from '../InternalNetworkAllocationPool';
 

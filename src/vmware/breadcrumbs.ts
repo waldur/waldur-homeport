@@ -1,4 +1,4 @@
-import { gettext } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import { ResourceBreadcrumbsRegistry } from '@waldur/resource/breadcrumbs/ResourceBreadcrumbsRegistry';
 
 ResourceBreadcrumbsRegistry.register('VMware.Disk', (resource) => {
@@ -12,7 +12,7 @@ ResourceBreadcrumbsRegistry.register('VMware.Disk', (resource) => {
       },
     },
     {
-      label: gettext('Disks'),
+      label: translate('Disks'),
       state: 'resource-details',
       params: {
         uuid: resource.vm_uuid,
@@ -34,7 +34,7 @@ ResourceBreadcrumbsRegistry.register('VMware.Port', (resource) => {
       },
     },
     {
-      label: gettext('Network adapters'),
+      label: translate('Network adapters'),
       state: 'resource-details',
       params: {
         uuid: resource.vm_uuid,

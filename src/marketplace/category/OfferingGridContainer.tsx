@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 
-import { $state } from '@waldur/core/services';
+import { router } from '@waldur/router';
 
 import { OfferingGrid } from '../common/OfferingGrid';
 import * as actions from '../landing/store/actions';
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => ({
   items: getOfferings(state),
   loading: isOfferingsLoading(state),
   loaded: isOfferingsLoaded(state),
-  filterCategory: $state.params.category_uuid,
+  filterCategory: router.globals.params.category_uuid,
   filterAttributes: getFilterAttributes(state),
   filterName: getFilterName(state),
 });

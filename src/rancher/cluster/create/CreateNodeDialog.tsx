@@ -14,7 +14,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Flavor } from '@waldur/openstack/openstack-instance/types';
 import { createNode } from '@waldur/rancher/api';
 import { Cluster } from '@waldur/rancher/types';
-import { showError, showSuccess } from '@waldur/store/coreSaga';
+import { showError, showSuccess } from '@waldur/store/notify';
 
 import { NodeFlavorGroup } from './NodeFlavorGroup';
 import { NodeRoleGroup } from './NodeRoleGroup';

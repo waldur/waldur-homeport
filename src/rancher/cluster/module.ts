@@ -13,7 +13,5 @@ const RancherClusterSummary = lazyComponent(
   'RancherClusterSummary',
 );
 
-export default () => {
-  ResourceSummary.register('Rancher.Cluster', RancherClusterSummary);
-  ActionConfigurationRegistry.register('Rancher.Cluster', clusterActions);
-};
+ResourceSummary.register('Rancher.Cluster', RancherClusterSummary);
+ActionConfigurationRegistry.register('Rancher.Cluster', clusterActions);

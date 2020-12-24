@@ -20,7 +20,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { BaseResource } from '@waldur/resource/types';
 import { formatFlavor } from '@waldur/resource/utils';
-import { showSuccess, showError } from '@waldur/store/coreSaga';
+import { showSuccess, showError } from '@waldur/store/notify';
 
 import { RadioField } from './RadioField';
 import { SelectField } from './SelectField';

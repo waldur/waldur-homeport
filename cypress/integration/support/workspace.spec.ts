@@ -39,7 +39,9 @@ describe('Financial overview', () => {
         fixture: 'projects/certifications.json',
       })
       .setToken()
-      .visit('/profile/')
+      .visit('/support/helpdesk/')
+      .get('h2')
+      .contains('Helpdesk dashboard')
       .waitForSpinner();
   });
 
@@ -51,50 +53,29 @@ describe('Financial overview', () => {
   });
 
   it('should browse menus in support workspace', () => {
-    // Go to support workspace
-    cy.get('.container-fluid ul.nav li')
-      .first()
-      .children('a')
-      .click({ force: true })
+    cy.wait(500);
+    // Check support reporting menu items
+    cy.contains('.nav-label', 'Reporting').click();
 
-      // Check support reporting menu items
-      .get('.nav-label')
-      .contains('Reporting')
-      .click()
+    // Reporting => Capacity
+    cy.contains('.nav-label', 'Capacity').click();
 
-      // Reporting => Capacity
-      .get('.nav-label')
-      .contains('Capacity')
-      .click()
+    // Reporting => Financial
+    cy.contains('.nav-label', 'Financial').click();
 
-      // Reporting => Financial
-      .get('.nav-label')
-      .contains('Financial')
-      .click()
+    // Reporting => Growth
+    cy.contains('.nav-label', 'Growth').click();
 
-      // Reporting => Growth
-      .get('.nav-label')
-      .contains('Growth')
-      .click()
+    // Reporting => Offerings
+    cy.contains('.nav-label', 'Offerings').click();
 
-      // Reporting => Offerings
-      .get('.nav-label')
-      .contains('Offerings')
-      .click()
+    // Reporting => Ordering
+    cy.contains('.nav-label', 'Ordering').click();
 
-      // Reporting => Ordering
-      .get('.nav-label')
-      .contains('Ordering')
-      .click()
+    // Reporting => Usage reports
+    cy.contains('.nav-label', 'Usage reports').click();
 
-      // Reporting => Usage reports
-      .get('.nav-label')
-      .contains('Usage reports')
-      .click()
-
-      // Resources
-      .get('.nav-label')
-      .contains('Resources')
-      .click();
+    // Resources
+    cy.contains('.nav-label', 'Resources').click();
   });
 });

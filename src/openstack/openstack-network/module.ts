@@ -13,6 +13,4 @@ const OpenStackNetworkSummary = lazyComponent(
   'OpenStackNetworkSummary',
 );
 
-export default () => {
-  ResourceSummary.register('OpenStack.Network', OpenStackNetworkSummary);
-};
+ResourceSummary.register('OpenStack.Network', OpenStackNetworkSummary);

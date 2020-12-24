@@ -1,9 +1,8 @@
 import { getAll } from '@waldur/core/api';
-import { $filter, $q } from '@waldur/core/services';
 
 interface LegacyActionField {
   valueFormatter(option: any): any;
-  formatter($filter: any, option: any): any;
+  formatter(option: any): any;
   value_field: string;
   display_name_field: string;
   url?: string;
@@ -23,7 +22,7 @@ const valueFormatter = (field: LegacyActionField, item) => {
 
 const displayFormatter = (field: LegacyActionField, item) => {
   if (field.formatter) {
-    return field.formatter($filter, item);
+    return field.formatter(item);
   } else {
     return item[field.display_name_field];
   }
@@ -50,7 +49,7 @@ const loadChoices = (field: LegacyActionField) => {
 };
 
 export const getSelectList = (fields: Record<string, LegacyActionField>) => {
-  return $q.all(
+  return Promise.all(
     Object.keys(fields)
       .filter((key) => fields[key].url)
       .map((key) => loadChoices(fields[key])),

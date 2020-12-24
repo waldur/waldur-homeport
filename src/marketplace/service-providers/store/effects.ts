@@ -3,7 +3,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { showSuccess, showError } from '@waldur/store/coreSaga';
+import { showSuccess, showError } from '@waldur/store/notify';
 
 import * as actions from './actions';
 import * as constants from './constants';

@@ -12,7 +12,7 @@ import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
-import { showError } from '@waldur/store/coreSaga';
+import { showError } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 import { StateUtilsService } from '@waldur/user/StateUtilsService';
 import { setCurrentCustomer } from '@waldur/workspace/actions';

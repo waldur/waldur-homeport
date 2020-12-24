@@ -1,7 +1,6 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import 'angular';
 import moment from 'moment-timezone';
 require('moment/locale/ar');
 require('moment/locale/az');
@@ -20,17 +19,8 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-geosearch/assets/css/leaflet.css';
 
 import 'font-awesome/css/font-awesome.css';
-import 'world-flags-sprite/stylesheets/flags16.css';
 import 'npm-font-open-sans';
 import 'bootstrap/dist/css/bootstrap.css';
-
-import 'angular-animate';
-import 'angular-cookies';
-import 'angular-loader';
-import 'angular-translate';
-import 'angular-translate-storage-cookie';
-import 'angular-translate-storage-local';
-import 'angular-translate-loader-static-files';
 
 // if (process.env.NODE_ENV === 'production') {
 //   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
