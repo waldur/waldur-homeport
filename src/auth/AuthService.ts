@@ -93,7 +93,7 @@ async function activate(user) {
 }
 
 function redirectOnSuccess() {
-  if (router.globals.params) {
+  if (router.globals.params?.toState) {
     return router.stateService.go(
       router.globals.params.toState,
       router.globals.params.toParams,
