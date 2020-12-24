@@ -6,9 +6,15 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
+import { Offering, ServiceProvider } from '@waldur/marketplace/types';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  getUser,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
+import { Customer } from '@waldur/workspace/types';
 
 import { TABLE_PUBLIC_ORDERS } from './constants';
 import { OrderItemApproveButton } from './OrderItemApproveButton';
@@ -82,7 +88,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 const OrderItemsListTableOptions = {
   table: TABLE_PUBLIC_ORDERS,
   fetchData: createFetcher('marketplace-order-items'),
-  mapPropsToFilter: (props) => {
+  mapPropsToFilter: (props: StateProps) => {
     const filter: Record<string, string> = {
       provider_uuid: props.customer.uuid,
     };
@@ -103,13 +109,28 @@ const OrderItemsListTableOptions = {
         filter.type = props.filter.type.value;
       }
     }
+    if (props.isServiceManager) {
+      filter.service_manager_uuid = props.user.uuid;
+    }
     return filter;
   },
 };
 
+interface FormData {
+  offering?: Offering;
+  organization?: Customer;
+  provider?: ServiceProvider;
+  state?: { value: string };
+  type?: { value: string };
+}
+
+type StateProps = Readonly<ReturnType<typeof mapStateToProps>>;
+
 const mapStateToProps = (state) => ({
-  filter: getFormValues('OrderItemFilter')(state),
+  filter: getFormValues('OrderItemFilter')(state) as FormData,
   customer: getCustomer(state),
+  user: getUser(state),
+  isServiceManager: isServiceManagerSelector(state),
 });
 
 const enhance = compose(

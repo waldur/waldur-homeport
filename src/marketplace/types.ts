@@ -199,6 +199,7 @@ export interface OfferingsListType {
 }
 
 export interface ServiceProvider {
+  customer_uuid?: string;
   name: string;
   uuid: string;
   image?: string;
