@@ -59,7 +59,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => {
         return (
           <ButtonGroup>
-            <OfferingActions offering={row} />
+            {!props.user.is_support && <OfferingActions offering={row} />}
             <PreviewOfferingButton offering={row} />
           </ButtonGroup>
         );
