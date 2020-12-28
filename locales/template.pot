@@ -877,7 +877,6 @@ msgstr ""
 msgid "Batch processing documentation"
 msgstr ""
 
-#: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 msgid "Batch service"
 msgstr ""
@@ -3544,10 +3543,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "MAC address (optional)"
-msgstr ""
-
-#: src/slurm/register-header.ts
-msgid "MOAB allocation"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -6357,7 +6352,6 @@ msgstr ""
 
 #: src/slurm/actions.ts
 #: src/slurm/marketplace.ts
-#: src/slurm/register-header.ts
 msgid "SLURM allocation"
 msgstr ""
 

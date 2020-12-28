@@ -6,7 +6,6 @@ import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/Res
 import { OpenStackInstanceTenantButton } from '@waldur/openstack/openstack-instance/OpenStackInstanceTenantButton';
 
 import { ActionButtonResource } from './actions/ActionButtonResource';
-import * as registry from './resource-configuration';
 import { ResourceRefreshButton } from './ResourceRefreshButton';
 import { ResourceSummary } from './summary/ResourceSummary';
 import { ResourceTabs } from './tabs/ResourceTabs';
@@ -17,12 +16,7 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
   refreshResource,
 }) => {
   const header = useMemo(() => {
-    const config = registry.get(resource.resource_type);
-    if (config) {
-      return config.getHeader(resource);
-    } else {
-      return formatResourceType(resource);
-    }
+    return formatResourceType(resource);
   }, [resource]);
 
   if (!resource) {
