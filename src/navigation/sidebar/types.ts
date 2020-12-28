@@ -1,5 +1,5 @@
 export interface MenuItemType {
-  key: string;
+  key?: string;
   icon: string;
   label: string;
   state?: string;
