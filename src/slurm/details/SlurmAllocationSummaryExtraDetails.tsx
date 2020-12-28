@@ -8,9 +8,7 @@ import { CopyToClipboardButton } from '@waldur/slurm/CopyToClipboardButton';
 import './SlurmAllocationSummaryExtraDetails.scss';
 
 const formatSubmitDetails = (props) => {
-  const value = `${
-    props.resource.batch_service === 'MOAB' ? 'qsub' : 'sbatch'
-  } -A ${props.resource.backend_id}`;
+  const value = `sbatch -A ${props.resource.backend_id}`;
   return (
     <div className="pre-container">
       <pre>
