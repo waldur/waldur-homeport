@@ -1,9 +1,7 @@
 import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { Resource } from '@waldur/marketplace/resources/types';
-import { getUser } from '@waldur/workspace/selectors';
 
 import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
 import { ResourceShowUsageButton } from './ResourceShowUsageButton';
@@ -24,7 +22,6 @@ interface Props {
 }
 
 export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
-  const user = useSelector(getUser);
   if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
     return <>{'N/A'}</>;
   }
@@ -35,17 +32,15 @@ export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
         offeringUuid={row.offering_uuid}
         resourceUuid={row.uuid}
       />
-      {!user.is_support && (
-        <ResourceCreateUsageButton
-          offering_uuid={row.offering_uuid}
-          resource_uuid={row.uuid}
-          resource_name={row.name}
-          customer_name={row.customer_name}
-          project_name={row.project_name}
-          backend_id={row.backend_id}
-          disabled={disabled}
-        />
-      )}
+      <ResourceCreateUsageButton
+        offering_uuid={row.offering_uuid}
+        resource_uuid={row.uuid}
+        resource_name={row.name}
+        customer_name={row.customer_name}
+        project_name={row.project_name}
+        backend_id={row.backend_id}
+        disabled={disabled}
+      />
     </ButtonGroup>
   );
 };
