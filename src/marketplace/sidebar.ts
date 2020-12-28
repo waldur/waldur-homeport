@@ -44,103 +44,72 @@ export const getPublicServices = (customerId: string): MenuItemType => ({
   ],
 });
 
-SidebarExtensionService.register(ORGANIZATION_WORKSPACE, () => {
+export const getDefaultItems = (customerUuid: string): MenuItemType[] => [
+  {
+    key: 'marketplace',
+    icon: 'fa-shopping-cart',
+    label: translate('Marketplace'),
+    state: 'marketplace-landing-customer',
+    params: {
+      uuid: customerUuid,
+    },
+    index: 210,
+  },
+  {
+    key: 'marketplace-services',
+    label: translate('My services'),
+    icon: 'fa-shopping-cart',
+    index: 310,
+    children: [
+      {
+        label: translate('My offerings'),
+        icon: 'fa-file',
+        state: 'marketplace-my-offerings',
+        params: {
+          uuid: customerUuid,
+        },
+        feature: 'marketplace.my-offerings',
+      },
+      {
+        key: 'marketplace',
+        icon: 'fa-file',
+        label: translate('My orders'),
+        state: 'marketplace-my-order-items',
+        params: {
+          uuid: customerUuid,
+        },
+      },
+      {
+        icon: 'fa-file',
+        label: translate('My resources'),
+        state: 'marketplace-customer-resources',
+        params: {
+          uuid: customerUuid,
+        },
+      },
+    ],
+  },
+];
+
+export const orgWorkspaceCallbackFn = () => {
   const customer = getCustomer(store.getState());
   if (!customer) {
     return [];
   }
-  const items = [
-    {
-      key: 'marketplace',
-      icon: 'fa-shopping-cart',
-      label: translate('Marketplace'),
-      state: 'marketplace-landing-customer',
-      params: {
-        uuid: customer.uuid,
-      },
-      index: 210,
-    },
-  ];
-
   if (customer.is_service_provider) {
     return [
-      ...items,
-      {
-        key: 'marketplace-services',
-        label: translate('My services'),
-        icon: 'fa-shopping-cart',
-        index: 310,
-        children: [
-          {
-            label: translate('My offerings'),
-            icon: 'fa-file',
-            state: 'marketplace-my-offerings',
-            params: {
-              uuid: customer.uuid,
-            },
-            feature: 'marketplace.my-offerings',
-          },
-          {
-            key: 'marketplace',
-            icon: 'fa-file',
-            label: translate('My orders'),
-            state: 'marketplace-my-order-items',
-            params: {
-              uuid: customer.uuid,
-            },
-          },
-          {
-            icon: 'fa-file',
-            label: translate('My resources'),
-            state: 'marketplace-customer-resources',
-            params: {
-              uuid: customer.uuid,
-            },
-          },
-        ],
-      },
+      ...getDefaultItems(customer.uuid),
       getPublicServices(customer.uuid),
     ];
   } else {
-    return [
-      ...items,
-      {
-        key: 'marketplace-services',
-        label: translate('My services'),
-        icon: 'fa-shopping-cart',
-        index: 310,
-        children: [
-          {
-            label: translate('My offerings'),
-            icon: 'fa-file',
-            state: 'marketplace-my-offerings',
-            params: {
-              uuid: customer.uuid,
-            },
-            feature: 'marketplace.my-offerings',
-          },
-          {
-            icon: 'fa-file',
-            label: translate('My resources'),
-            state: 'marketplace-customer-resources',
-            params: {
-              uuid: customer.uuid,
-            },
-          },
-          {
-            key: 'marketplace',
-            icon: 'fa-file',
-            label: translate('My orders'),
-            state: 'marketplace-my-order-items',
-            params: {
-              uuid: customer.uuid,
-            },
-          },
-        ],
-      },
-    ];
+    return getDefaultItems(customer.uuid);
   }
-});
+};
+
+SidebarExtensionService.register(
+  ORGANIZATION_WORKSPACE,
+  orgWorkspaceCallbackFn,
+);
 
 SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
   const project = getProject(store.getState());
