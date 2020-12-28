@@ -18,7 +18,7 @@ interface ShoppingCartTimeSlotsProps {
 export const ShoppingCartTimeSlots: FunctionComponent<ShoppingCartTimeSlotsProps> = ({
   schedules,
 }) =>
-  schedules.length ? (
+  schedules?.length ? (
     <p>
       <>{translate('Time slots')}: </>
       {schedules.map((schedule, index: number) => (
