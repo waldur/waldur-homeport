@@ -1,5 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { gettext, translate } from '@waldur/i18n';
+import { gettext } from '@waldur/i18n';
 import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
 import { DEFAULT_EDIT_ACTION } from '@waldur/resource/actions/constants';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
@@ -12,6 +12,14 @@ const OpenStackSecurityGroupSummary = lazyComponent(
       /* webpackChunkName: "OpenStackSecurityGroupSummary" */ './OpenStackSecurityGroupSummary'
     ),
   'OpenStackSecurityGroupSummary',
+);
+
+const SecurityGroupEditorDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SecurityGroupEditorDialog" */ './SecurityGroupEditorDialog'
+    ),
+  'SecurityGroupEditorDialog',
 );
 
 import './tabs';
@@ -33,25 +41,10 @@ ActionConfigurationRegistry.register('OpenStack.SecurityGroup', {
     },
     set_rules: {
       title: gettext('Set rules'),
-      getDialogTitle(resource) {
-        return translate('Set rules in {name} security group', {
-          name: resource.name.toUpperCase(),
-        });
-      },
+      component: SecurityGroupEditorDialog,
       enabled: true,
       type: 'form',
-      fields: {
-        rules: {
-          component: 'securityGroupRuleEditor',
-          resource_default_value: true,
-        },
-      },
       dialogSize: 'xl',
-      serializer: (model) =>
-        model.rules.map((rule) => ({
-          ...rule,
-          protocol: rule.protocol === null ? '' : rule.protocol,
-        })),
     },
   },
 });

@@ -7,6 +7,8 @@ export interface SecurityGroup {
   settings: string;
   description: string;
   rules: SecurityGroupRule[];
+  resource_type?: string;
+  tenant?: string;
 }
 
 export interface SecurityGroupOption extends SecurityGroup {

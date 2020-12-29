@@ -3,7 +3,6 @@ import angular from 'angular';
 import openstackBackupRestoreSummary from '@waldur/openstack/openstack-backup/openstack-backup-restore-summary';
 import openstackInstanceFloatingIps from '@waldur/openstack/openstack-instance/openstack-instance-floating-ips';
 import openstackInstanceNetworks from '@waldur/openstack/openstack-instance/openstack-instance-networks';
-import securityGroupRuleEditor from '@waldur/openstack/openstack-security-groups/security-group-rule-editor';
 import actionDialog from '@waldur/resource/actions/dialog/action-dialog';
 import actionFieldBoolean from '@waldur/resource/actions/dialog/action-field-boolean';
 import actionFieldDecimal from '@waldur/resource/actions/dialog/action-field-decimal';
@@ -26,7 +25,6 @@ module.component(
   'openstackBackupRestoreSummary',
   openstackBackupRestoreSummary,
 );
-module.component('securityGroupRuleEditor', securityGroupRuleEditor);
 module.component('actionDialog', actionDialog);
 module.component('actionField', actionField);
 module.component('actionFieldBoolean', actionFieldBoolean);

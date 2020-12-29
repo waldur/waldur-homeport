@@ -29,6 +29,9 @@ export const loadSecurityGroups = (settings_uuid: string) =>
 export const loadSecurityGroupsResources = (params?) =>
   getAll<SecurityGroup>('/openstack-security-groups/', { params });
 
+export const setSecurityGroupRules = (id, data) =>
+  post(`/openstack-security-groups/${id}/set_rules/`, data);
+
 export const loadVolumeAvailabilityZones = (settings_uuid: string) =>
   getAll<AvailabilityZone>('/openstacktenant-volume-availability-zones/', {
     params: { settings_uuid },
