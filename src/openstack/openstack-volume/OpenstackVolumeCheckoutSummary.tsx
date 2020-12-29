@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { getFormValues, isValid } from 'redux-form';
+import { isValid } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Panel } from '@waldur/core/Panel';
@@ -16,6 +16,7 @@ import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
 import { formatOrderItemForCreate } from '@waldur/marketplace/details/utils';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
 import { Offering } from '@waldur/marketplace/types';
+import { formDataSelector } from '@waldur/marketplace/utils';
 import { Quota } from '@waldur/openstack/types';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
@@ -82,9 +83,6 @@ const getQuotas = ({ formData, usages, limits, project, components }) => {
 interface OwnProps {
   offering: Offering;
 }
-
-const formDataSelector = (state) =>
-  (getFormValues('marketplaceOffering')(state) || {}) as any;
 
 const formIsValidSelector = (state) => isValid('marketplaceOffering')(state);
 
