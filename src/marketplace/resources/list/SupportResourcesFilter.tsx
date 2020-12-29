@@ -6,7 +6,7 @@ import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/Offe
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 
 import { CategoryFilter } from './CategoryFilter';
-import { ResourceStateFilter } from './ResourceStateFilter';
+import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
 const PureSupportResourcesFilter: FunctionComponent = () => (
   <Row>
@@ -17,6 +17,11 @@ const PureSupportResourcesFilter: FunctionComponent = () => (
   </Row>
 );
 
-const enhance = reduxForm({ form: 'SupportResourcesFilter' });
+const enhance = reduxForm({
+  form: 'SupportResourcesFilter',
+  initialValues: {
+    state: getStates().find(({ value }) => value === 'OK'),
+  },
+});
 
 export const SupportResourcesFilter = enhance(PureSupportResourcesFilter);
