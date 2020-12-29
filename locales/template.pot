@@ -5064,6 +5064,10 @@ msgstr ""
 msgid "Plans are invalid."
 msgstr ""
 
+#: src/booking/components/modal/BookingModal.tsx
+msgid "Please add resource name before editing a schedule."
+msgstr ""
+
 #: src/customer/create/CustomerCreatePrompt.tsx
 msgid "Please create a new one picking the profile that best matches your organization:"
 msgstr ""
@@ -7753,7 +7757,6 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
-#: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/create/SummaryGroup.tsx
