@@ -16,6 +16,7 @@ import {
   getUser,
   isOwnerOrStaff,
   isServiceManagerSelector,
+  isSupportOnly,
 } from '@waldur/workspace/selectors';
 
 import { Offering } from '../types';
@@ -59,7 +60,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => {
         return (
           <ButtonGroup>
-            <OfferingActions offering={row} />
+            {!props.isSupportOnly && <OfferingActions offering={row} />}
             <PreviewOfferingButton offering={row} />
           </ButtonGroup>
         );
@@ -128,6 +129,7 @@ const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   user: getUser(state),
   isServiceManager: isServiceManagerSelector(state),
+  isSupportOnly: isSupportOnly(state),
   actionsDisabled: !isOwnerOrStaff(state),
   showOfferingCreateButton: showOfferingCreateButton(state),
   filter: getFormValues('OfferingsFilter')(state) as FilterData,

@@ -44,6 +44,12 @@ export const isStaff = (state: OuterState): boolean =>
 export const isSupport = (state: OuterState): boolean =>
   getUser(state) && getUser(state).is_support;
 
+export const isSupportOnly = (state: OuterState): boolean =>
+  isSupport(state) &&
+  !isStaff(state) &&
+  !checkIsOwner(state.workspace.customer, state.workspace.user) &&
+  !checkIsServiceManager(state.workspace.customer, state.workspace.user);
+
 export const isStaffOrSupport = (state: OuterState): boolean =>
   isStaff(state) || isSupport(state);
 
