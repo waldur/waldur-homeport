@@ -24,7 +24,6 @@ export interface UserDetails extends User {
   date_joined: string;
   organization: string;
   job_title: string;
-  is_support: boolean;
   token: string;
   agreement_date: string;
   is_active: boolean;
