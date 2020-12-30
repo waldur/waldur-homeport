@@ -12,7 +12,10 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { BOOKINGS_FILTER_FORM_ID } from '@waldur/customer/dashboard/contants';
 import { translate } from '@waldur/i18n';
-import { selectTablePagination } from '@waldur/table/selectors';
+import {
+  selectTablePagination,
+  selectTableSorting,
+} from '@waldur/table/selectors';
 
 const bookingsFilterFormSelector = (state) =>
   (getFormValues(BOOKINGS_FILTER_FORM_ID)(state) || {}) as { state };
@@ -57,6 +60,7 @@ async function loadBookingOfferings(
   state,
   page,
   page_size,
+  sorting,
 ) {
   const bookings = await getBookingsList({
     provider_uuid: providerUuid,
@@ -65,6 +69,7 @@ async function loadBookingOfferings(
     state: state?.map(({ value }) => value),
     page,
     page_size,
+    o: `${sorting.mode === 'desc' ? '-' : ''}${sorting.field}`,
   });
   return getCalendarEvents(bookings);
 }
@@ -86,6 +91,9 @@ export const BookingsCalendar = ({
   const bookingsListPageSize = useSelector(
     (state) => selectTablePagination(state, BOOKING_RESOURCES_TABLE)?.pageSize,
   );
+  const bookingsListSorting = useSelector((state) =>
+    selectTableSorting(state, BOOKING_RESOURCES_TABLE),
+  );
 
   const { loading, value: calendarEvents, error } = useAsync(
     () =>
@@ -95,6 +103,7 @@ export const BookingsCalendar = ({
         bookingsFilterState,
         bookingsListCurrentPage,
         bookingsListPageSize,
+        bookingsListSorting,
       ),
     [
       providerUuid,
@@ -102,6 +111,7 @@ export const BookingsCalendar = ({
       bookingsFilterState,
       bookingsListCurrentPage,
       bookingsListPageSize,
+      bookingsListSorting,
     ],
   );
 
