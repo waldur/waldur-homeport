@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
+import { ResourceOpenDetail } from '@waldur/marketplace/resources/list/ResourceOpenDetail';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -53,6 +54,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('Resources')}
       initialSorting={{ field: 'created', mode: 'desc' }}
+      expandableRow={ResourceOpenDetail}
     />
   );
 };
