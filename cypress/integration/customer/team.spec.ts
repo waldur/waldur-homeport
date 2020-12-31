@@ -65,23 +65,20 @@ describe('Team', () => {
     cy.get('.modal-title')
       .contains('Edit team member')
       .get('.modal-content')
-      .within(() => {
-        cy.get('.checkbox')
-          .contains('Organization owner')
-          .click()
+      .get('.checkbox')
+      .contains('Organization owner')
+      .click()
 
-          // Open Role dropdown
-          .get('div[class$="placeholder"]')
-          .first()
-          .click({ force: true })
-          .selectTheFirstOptionOfDropdown()
+      // Open Role dropdown
+      .get('div[class$="placeholder"]')
+      .first()
+      .click({ force: true })
+      .selectTheFirstOptionOfDropdown()
 
-          .get('button')
-          .contains('Save')
-          .click()
+      .get('button')
+      .contains('Save')
+      .click()
 
-          .wait('@createProjectPermission')
-          .wait('@deleteCustomerPermission');
-      });
+      .wait('@deleteCustomerPermission');
   });
 });
