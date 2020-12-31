@@ -1,6 +1,7 @@
 import { delay } from 'redux-saga';
 import { call, put, select, takeEvery, take, race } from 'redux-saga/effects';
 
+import { orderByFilter } from '@waldur/core/utils';
 import { transformRows } from '@waldur/table/utils';
 
 import * as actions from './actions';
@@ -29,11 +30,7 @@ export function* fetchList(action) {
       request.filter[options.queryField] = state.query;
     }
     if (state.sorting && state.sorting.field) {
-      let field = state.sorting.field;
-      if (state.sorting.mode === 'desc') {
-        field = `-${field}`;
-      }
-      request.filter.o = field;
+      request.filter.o = orderByFilter(state.sorting);
     }
 
     const { rows, resultCount } = yield call(options.fetchData, request);

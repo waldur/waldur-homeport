@@ -10,6 +10,7 @@ import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
 import { eventsMapper } from '@waldur/booking/utils';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { orderByFilter } from '@waldur/core/utils';
 import { BOOKINGS_FILTER_FORM_ID } from '@waldur/customer/dashboard/contants';
 import { translate } from '@waldur/i18n';
 import {
@@ -69,7 +70,7 @@ async function loadBookingOfferings(
     state: state?.map(({ value }) => value),
     page,
     page_size,
-    o: `${sorting.mode === 'desc' ? '-' : ''}${sorting.field}`,
+    o: orderByFilter(sorting),
   });
   return getCalendarEvents(bookings);
 }

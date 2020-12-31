@@ -182,3 +182,8 @@ export const createDeferred = () => {
   });
   return deferred.promise;
 };
+
+export const orderByFilter = (sorting: {
+  mode: 'asc' | 'desc';
+  field: string;
+}): string => `${sorting.mode === 'desc' ? '-' : ''}${sorting.field}`;

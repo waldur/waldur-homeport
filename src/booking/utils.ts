@@ -3,6 +3,7 @@ import uniqueId from 'lodash.uniqueid';
 import moment from 'moment';
 
 import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
+import { orderByFilter } from '@waldur/core/utils';
 import { fetchListStart } from '@waldur/table/actions';
 
 import { BookingProps } from './types';
@@ -345,7 +346,7 @@ export const updateBookingsList = (
 ) =>
   fetchListStart(BOOKING_RESOURCES_TABLE, {
     offering_type: 'Marketplace.Booking',
-    o: `${sorting.mode === 'desc' ? '-' : ''}${sorting.field}`,
+    o: orderByFilter(sorting),
     state: filterState.map(({ value }) => value),
     offering_uuid,
     provider_uuid,
