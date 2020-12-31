@@ -59,7 +59,7 @@ Run jest tests:
 
 Run E2E tests:
   image:
-    name: registry.hpc.ut.ee/mirror/cypress/included:6.1.0
+    name: registry.hpc.ut.ee/mirror/cypress/included:6.2.0
     entrypoint: [""]
   stage: test
   interruptible: true
