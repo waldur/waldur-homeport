@@ -1,4 +1,8 @@
 form#edit-team-member-dialog {
   position: fixed;
   background-color: inherit;
+
+  .modal-body {
+    overflow: scroll;
+  }
 }

@@ -4,3 +4,8 @@ export const reactSelectMenuPortaling = (): any => ({
   menuPosition: 'fixed',
   menuPlacement: 'bottom',
 });
+
+export const datePickerOverlayContainerInDialogs = () => ({
+  calendarPlacement: 'bottom',
+  calendarContainer: document.getElementsByClassName('modal-dialog')[0],
+});
