@@ -1,22 +1,33 @@
 import moment from 'moment-timezone';
-import { useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Button, ButtonGroup, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { BookingModalProps, BookingProps } from '@waldur/booking/types';
+import { BookingProps } from '@waldur/booking/types';
 import { translate } from '@waldur/i18n';
 import { formDataSelector } from '@waldur/marketplace/utils';
 import { showError } from '@waldur/store/notify';
 
 import { DateAndTimeSelectField } from './DateAndTimeSelect';
 
-const BookingModal = ({
+interface BookingModalProps {
+  isOpen: boolean;
+  toggle: () => void;
+  event: BookingProps | null | undefined;
+  onSuccess: (payload: {
+    oldID: BookingProps['id'];
+    event: BookingProps;
+  }) => any;
+  onDelete: () => void;
+}
+
+export const BookingModal: FC<BookingModalProps> = ({
   isOpen,
   toggle,
   onSuccess,
   onDelete,
   event,
-}: BookingModalProps) => {
+}) => {
   const dispatch = useDispatch();
   const marketplaceOfferingForm = useSelector(formDataSelector);
   const [newEvent, setNewEvent] = useState({
@@ -150,5 +161,3 @@ const BookingModal = ({
     </Modal>
   );
 };
-
-export default BookingModal;

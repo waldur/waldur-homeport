@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
+import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 import { NodeRole } from '@waldur/rancher/types';
 
@@ -107,6 +108,6 @@ const PureRancherExtraComponent = (props) =>
 
 const RancherExtraComponent = connector(PureRancherExtraComponent);
 
-export const RancherClusterCheckoutSummary: FunctionComponent<any> = (
+export const RancherClusterCheckoutSummary: FunctionComponent<OfferingDetailsProps> = (
   props,
 ) => <OrderSummary {...props} extraComponent={RancherExtraComponent} />;

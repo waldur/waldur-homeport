@@ -1,17 +1,9 @@
 import { Calendar, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment-timezone';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
-import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/list/main.css';
-import '@fullcalendar/timegrid/main.css';
 
-import {
-  BookingProps,
-  State,
-  CalendarComponentProps,
-} from '@waldur/booking/types';
+import { BookingProps } from '@waldur/booking/types';
 import {
   createBooking,
   keysOf,
@@ -22,14 +14,27 @@ import {
 } from '@waldur/booking/utils';
 import { showSuccess, showError } from '@waldur/store/notify';
 
-import BookingModal from '../modal/BookingModal';
+import { BookingModal } from '../modal/BookingModal';
 
 import { defaultOptions } from './defaultOptions';
 import './Calendar.scss';
+import './styles';
 
-export const getCalendarState = (state): State => state.bookings;
+interface AvailabilitySlot {
+  start: Date | string;
+  end: Date | string;
+}
 
-export const LazyCalendarComponent = (props: CalendarComponentProps) => {
+export interface CalendarComponentProps {
+  calendarType: 'create' | 'edit' | 'read';
+  events: BookingProps[];
+  availabilitySlots?: AvailabilitySlot[];
+  options?: OptionsInput;
+  addEventCb?: (event: BookingProps) => any;
+  removeEventCb?: (id: BookingProps['id']) => any;
+}
+
+export const LazyCalendarComponent: FC<CalendarComponentProps> = (props) => {
   const elRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<Calendar>();
   const oldDate = useRef<Date>();

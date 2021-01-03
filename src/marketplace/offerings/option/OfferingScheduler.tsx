@@ -1,28 +1,29 @@
 import { FunctionComponent } from 'react';
-import { Col, Panel } from 'react-bootstrap';
+import { Col, FormGroup, Panel } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { formValueSelector, WrappedFieldArrayProps } from 'redux-form';
+import { WrappedFieldArrayProps } from 'redux-form';
 
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
 import { CalendarSettings } from '@waldur/booking/components/CalendarSettings';
-import { BookingProps, ConfigProps, State } from '@waldur/booking/types';
+import { getConfig } from '@waldur/booking/store/selectors';
+import { BookingProps } from '@waldur/booking/types';
 import { deleteCalendarBooking } from '@waldur/booking/utils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+
 import './OfferingScheduler.scss';
+import { getSchedules } from '../store/selectors';
+
+type StateProps = ReturnType<typeof mapStateToProps>;
 
 type OfferingSchedulerProps = TranslateProps &
-  WrappedFieldArrayProps<any> & {
-    setModalProps: (event) => void;
-    openModal: (cb) => void;
-    schedules: BookingProps[];
-    config: ConfigProps;
-  };
+  WrappedFieldArrayProps<BookingProps> &
+  StateProps;
 
-export const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
+const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
   props,
 ) => (
-  <div className="form-group ">
+  <FormGroup>
     <Col smOffset={2} sm={8}>
       <Panel>
         <Panel.Heading>
@@ -41,12 +42,12 @@ export const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = 
         options={props.config}
       />
     </Col>
-  </div>
+  </FormGroup>
 );
 
 const mapStateToProps = (state) => ({
-  schedules: formValueSelector('marketplaceOfferingCreate')(state, 'schedules'),
-  config: state.bookings.config as State,
+  schedules: getSchedules(state),
+  config: getConfig(state),
 });
 
 const enhance = compose(connect(mapStateToProps), withTranslation);

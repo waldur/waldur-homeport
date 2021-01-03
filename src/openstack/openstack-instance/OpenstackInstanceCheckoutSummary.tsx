@@ -12,10 +12,10 @@ import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCa
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
+import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
 import { formatOrderItemForCreate } from '@waldur/marketplace/details/utils';
 import { ProviderLink } from '@waldur/marketplace/links/ProviderLink';
-import { Offering } from '@waldur/marketplace/types';
 import { Quota } from '@waldur/openstack/types';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
@@ -31,10 +31,6 @@ interface FormData {
   image?: { name: string };
   flavor?: Flavor;
   attributes?: Record<string, any>;
-}
-
-interface OwnProps {
-  offering: Offering;
 }
 
 const getTotalStorage = (formData) =>
@@ -147,7 +143,7 @@ const flavorSelector = (state) => {
   return formAttrs.flavor ? formAttrs.flavor : {};
 };
 
-export const OpenstackInstanceCheckoutSummary: React.FC<OwnProps> = ({
+export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> = ({
   offering,
 }) => {
   const customer = useSelector(getCustomer);

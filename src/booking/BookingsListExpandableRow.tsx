@@ -1,4 +1,3 @@
-import { EventInput } from '@fullcalendar/core';
 import { FunctionComponent } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -7,18 +6,10 @@ import { Field } from '@waldur/resource/summary';
 import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
+import { BookingResource } from './types';
+
 interface DetailedInfo {
-  row: {
-    uuid: string;
-    state: string;
-    attributes: {
-      schedules: EventInput[];
-    };
-    project_name: string;
-    project_description: string;
-    description: string;
-    created: string;
-  };
+  row: BookingResource;
 }
 
 export const BookingsListExpandableRow: FunctionComponent<DetailedInfo> = ({

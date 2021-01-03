@@ -3,6 +3,8 @@ import { FunctionComponent } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
 
+import { BookingResource } from './types';
+
 export const wrapScheduleTitleTooltip = (label: string, children) =>
   label ? (
     <Tooltip label={label} id="schedule-title-label">
@@ -12,16 +14,21 @@ export const wrapScheduleTitleTooltip = (label: string, children) =>
     children
   );
 
-export const BookingTimeSlotsField: FunctionComponent<{ row }> = ({ row }) =>
-  row.attributes.schedules.map((schedule) => (
-    <span key={schedule.id} style={{ display: 'block' }}>
-      {wrapScheduleTitleTooltip(
-        schedule.title,
-        <>
-          {formatDateTime(schedule.start)}
-          {' - '}
-          {formatDateTime(schedule.end)}
-        </>,
-      )}
-    </span>
-  ));
+export const BookingTimeSlotsField: FunctionComponent<{
+  row: BookingResource;
+}> = ({ row }) => (
+  <>
+    {row.attributes.schedules.map((schedule) => (
+      <div key={schedule.id}>
+        {wrapScheduleTitleTooltip(
+          schedule.title,
+          <>
+            {formatDateTime(schedule.start)}
+            {' - '}
+            {formatDateTime(schedule.end)}
+          </>,
+        )}
+      </div>
+    ))}
+  </>
+);

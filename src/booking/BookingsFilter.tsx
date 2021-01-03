@@ -6,7 +6,7 @@ import {
   BookingStateFilter,
   getStates,
 } from '@waldur/booking/BookingStateFilter';
-import { BOOKINGS_FILTER_FORM_ID } from '@waldur/customer/dashboard/contants';
+import { BOOKINGS_FILTER_FORM_ID } from '@waldur/booking/store/constants';
 
 const PureBookingsFilter: FunctionComponent = () => (
   <Row style={{ margin: '0' }}>

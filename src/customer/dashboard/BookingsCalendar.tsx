@@ -1,28 +1,23 @@
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
-import { getFormValues } from 'redux-form';
 
-import { getBookingsList } from '@waldur/booking/common/api';
+import { getBookingsList } from '@waldur/booking/api';
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { eventRender } from '@waldur/booking/components/utils';
 import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
+import { bookingFormSelector } from '@waldur/booking/store/selectors';
 import { eventsMapper } from '@waldur/booking/utils';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { orderByFilter } from '@waldur/core/utils';
-import { BOOKINGS_FILTER_FORM_ID } from '@waldur/customer/dashboard/contants';
 import { translate } from '@waldur/i18n';
 import {
   selectTablePagination,
   selectTableSorting,
 } from '@waldur/table/selectors';
 
-const bookingsFilterFormSelector = (state) =>
-  (getFormValues(BOOKINGS_FILTER_FORM_ID)(state) || {}) as { state };
-
-const bookingsFilterStateSelector = (state) =>
-  bookingsFilterFormSelector(state).state;
+const bookingsFilterStateSelector = (state) => bookingFormSelector(state).state;
 
 export const getCalendarEvent = (bookingItem, event) => ({
   ...event,

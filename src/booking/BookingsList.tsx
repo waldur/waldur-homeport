@@ -1,23 +1,25 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getFormValues } from 'redux-form';
 
 import { BookingActions } from '@waldur/booking/BookingActions';
 import { BookingsListExpandableRow } from '@waldur/booking/BookingsListExpandableRow';
 import { BookingStateField } from '@waldur/booking/BookingStateField';
 import { BookingTimeSlotsField } from '@waldur/booking/BookingTimeSlotsField';
 import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
-import { BOOKINGS_FILTER_FORM_ID } from '@waldur/customer/dashboard/contants';
 import { translate, withTranslation } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
-interface BookingsList {
+import { bookingFormSelector } from './store/selectors';
+
+type OwnProps = {
   offeringUuid?: string;
   providerUuid?: string;
-}
+};
+
+type StateProps = ReturnType<typeof mapStateToProps>;
 
 const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
@@ -79,8 +81,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, string | boolean> = {
+const mapPropsToFilter = (props: StateProps & OwnProps) => {
+  const filter: Record<string, any> = {
     offering_type: 'Marketplace.Booking',
   };
   if (props.offeringUuid) {
@@ -106,7 +108,7 @@ const TableOptions = {
 const mapStateToProps = (state) => ({
   customer: getCustomer(state),
   actionsDisabled: !isOwnerOrStaff(state),
-  filter: getFormValues(BOOKINGS_FILTER_FORM_ID)(state),
+  filter: bookingFormSelector(state),
 });
 
 const enhance = compose(
@@ -117,4 +119,4 @@ const enhance = compose(
 
 export const BookingsList = enhance(
   TableComponent,
-) as React.ComponentType<BookingsList>;
+) as React.ComponentType<OwnProps>;

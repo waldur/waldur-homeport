@@ -11,7 +11,7 @@ import { OfferingConfigurator } from './OfferingConfigurator';
 import './OfferingDetails.scss';
 import { OfferingTab, OfferingTabsComponent } from './OfferingTabsComponent';
 
-interface OfferingDetailsProps {
+export interface OfferingDetailsProps {
   offering: Offering;
   tabs: OfferingTab[];
   limits: string[];
