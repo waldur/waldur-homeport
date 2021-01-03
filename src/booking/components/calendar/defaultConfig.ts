@@ -1,6 +1,8 @@
+import { OptionsInput } from '@fullcalendar/core';
+
 import { translate } from '@waldur/i18n';
 
-export const defaultConfig = {
+export const defaultConfig: OptionsInput = {
   defaultView: 'dayGridMonth',
   themeSystem: 'bootstrap',
   height: 'auto',
@@ -33,9 +35,6 @@ export const defaultConfig = {
   slotLabelFormat: 'H:mm',
   allDayHtml: translate('All day'),
   fixedWeekCount: false,
-  timeFormat: {
-    '': 'H(:mm)( - H:mm)',
-  },
   eventTimeFormat: {
     hour: 'numeric',
     minute: '2-digit',

@@ -1,25 +1,39 @@
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
 
 import * as constants from '@waldur/booking/constants';
-import { BOOKINGS_FILTER_FORM_ID } from '@waldur/customer/dashboard/contants';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser, isOwner } from '@waldur/workspace/selectors';
 import { OuterState } from '@waldur/workspace/types';
 
 import { acceptBookingItem, rejectBookingItem } from './store/actions';
+import { bookingFormSelector } from './store/selectors';
+import { BookingResource } from './types';
 
 const mapStateToProps = (state: OuterState) => ({
   user: getUser(state),
   isOwner: isOwner(state),
-  filter: getFormValues(BOOKINGS_FILTER_FORM_ID)(state),
+  filter: bookingFormSelector(state),
 });
 
 const mapDispatchToProps = { acceptBookingItem, rejectBookingItem };
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+type DispatchProps = typeof mapDispatchToProps;
+
+type OwnProps = {
+  row: BookingResource;
+  offeringUuid: string;
+  providerUuid: string;
+};
+
+const mergeProps = (
+  stateProps: StateProps,
+  dispatchProps: DispatchProps,
+  ownProps: OwnProps,
+) => ({
   actions: [
     {
       label: translate('Accept'),

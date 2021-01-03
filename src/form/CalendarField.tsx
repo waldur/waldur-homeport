@@ -1,15 +1,20 @@
-import type { OptionsInput } from '@fullcalendar/core';
+import type { EventInput, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment';
 import { Component, FunctionComponent } from 'react';
-import { FieldArray } from 'redux-form';
+import { FieldArray, WrappedFieldArrayProps } from 'redux-form';
 
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
-import { EditableCalendarProps } from '@waldur/booking/types';
+import { BookingProps } from '@waldur/booking/types';
 import {
   deleteCalendarBooking,
   createAvailabilitySlots,
   createAvailabilityDates,
 } from '@waldur/booking/utils';
+
+interface EditableCalendarProps extends WrappedFieldArrayProps<BookingProps> {
+  excludedEvents?: BookingProps[];
+  schedules: EventInput[];
+}
 
 export class EditableCalendar extends Component<
   EditableCalendarProps,

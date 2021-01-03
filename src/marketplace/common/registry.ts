@@ -9,6 +9,8 @@ import {
   OfferingComponent,
 } from '@waldur/marketplace/types';
 
+import { OfferingDetailsProps } from '../details/OfferingDetails';
+
 const REGISTRY: { [key: string]: Omit<OfferingConfiguration, 'type'> } = {};
 
 export type Limits = Record<string, number>;
@@ -21,7 +23,7 @@ interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   pluginOptionsForm?: React.ComponentType<any>;
   secretOptionsForm?: React.ComponentType<any>;
   detailsComponent?: React.ComponentType<OrderItemDetailsProps>;
-  checkoutSummaryComponent?: any;
+  checkoutSummaryComponent?: React.ComponentType<OfferingDetailsProps>;
   serializer?: (
     attributes: AttributesType,
     offering: Offering,

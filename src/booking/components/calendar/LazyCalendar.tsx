@@ -1,4 +1,5 @@
 import bootstrapPlugin from '@fullcalendar/bootstrap';
+import { OptionsInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
@@ -8,16 +9,11 @@ import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { FunctionComponent } from 'react';
 
-import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/list/main.css';
-import '@fullcalendar/timegrid/main.css';
-
 import './Calendar.scss';
-
 import { defaultConfig } from './defaultConfig';
+import './styles';
 
-export const LazyCalendar: FunctionComponent<any> = (props) => (
+export const LazyCalendar: FunctionComponent<OptionsInput> = (props) => (
   <FullCalendar
     plugins={[
       dayGridPlugin,

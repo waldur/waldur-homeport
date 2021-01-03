@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
-import * as api from '@waldur/booking/common/api';
+import * as api from '@waldur/booking/api';
 import { updateBookingsList } from '@waldur/booking/utils';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';

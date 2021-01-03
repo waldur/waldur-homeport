@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { OfferingPeriodsRenderer } from '@waldur/marketplace/details/OfferingPeriodsRenderer';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 
@@ -28,6 +29,6 @@ export const BookingExtraComponent: FunctionComponent<any> = (props) => (
   </>
 );
 
-export const BookingCheckoutSummary: FunctionComponent<any> = (props) => (
-  <OrderSummary {...props} extraComponent={BookingExtraComponent} />
-);
+export const BookingCheckoutSummary: FunctionComponent<OfferingDetailsProps> = (
+  props,
+) => <OrderSummary {...props} extraComponent={BookingExtraComponent} />;

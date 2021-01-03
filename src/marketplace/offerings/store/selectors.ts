@@ -1,6 +1,7 @@
 import { formValueSelector, getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { BookingProps } from '@waldur/booking/types';
 import { getOfferingComponentsFilter } from '@waldur/marketplace/common/registry';
 import { OfferingComponent } from '@waldur/marketplace/types';
 import {
@@ -112,3 +113,6 @@ export const isOfferingManagementDisabled = createSelector(
     }
   },
 );
+
+export const getSchedules = (state) =>
+  getForm(state, 'schedules') as BookingProps[];
