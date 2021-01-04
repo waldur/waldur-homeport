@@ -1,22 +1,27 @@
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { MARKETPLACE_FILTER_FORM } from './constants';
 
-const getCategory = (state) => state.marketplace.category;
-export const getFilterName = (state) => getCategory(state).filterQuery;
-export const isLoading = (state) => getCategory(state).loading;
-export const isLoaded = (state) => getCategory(state).loaded;
-export const isErred = (state) => getCategory(state).erred;
-export const getSections = (state) => getCategory(state).sections;
+const getCategory = (state: RootState) => state.marketplace.category;
+export const getFilterName = (state: RootState) =>
+  getCategory(state).filterQuery;
+export const isLoading = (state: RootState) => getCategory(state).loading;
+export const isLoaded = (state: RootState) => getCategory(state).loaded;
+export const isErred = (state: RootState) => getCategory(state).erred;
+export const getSections = (state: RootState) => getCategory(state).sections;
 
-const getCategoryOfferings = (state) => state.marketplace.categoryOfferings;
-export const getOfferings = (state) => getCategoryOfferings(state).items;
-export const isOfferingsLoading = (state) =>
+const getCategoryOfferings = (state: RootState) =>
+  state.marketplace.categoryOfferings;
+export const getOfferings = (state: RootState) =>
+  getCategoryOfferings(state).items;
+export const isOfferingsLoading = (state: RootState) =>
   getCategoryOfferings(state).loading;
-export const isOfferingsLoaded = (state) => getCategoryOfferings(state).loaded;
+export const isOfferingsLoaded = (state: RootState) =>
+  getCategoryOfferings(state).loaded;
 
 export const formatAttributesFilter = (query) => {
   if (query) {

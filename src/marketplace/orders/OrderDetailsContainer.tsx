@@ -2,12 +2,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import { OrderDetails } from './OrderDetails';
 import * as actions from './store/actions';
 import * as selectors from './store/selectors';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   stateChangeStatus: selectors.getStateChangeStatus(state),
   orderCanBeApproved: selectors.orderCanBeApproved(state),
 });

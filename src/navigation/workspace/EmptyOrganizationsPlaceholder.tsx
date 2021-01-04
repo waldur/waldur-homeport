@@ -12,7 +12,7 @@ const InitialCreateOrganizationButton = () => {
   }
   return (
     <div>
-      <Button onClick={onClick}>
+      <Button onClick={onClick as any}>
         <i className="fa fa-plus" /> {translate('Add new organization')}
       </Button>
     </div>

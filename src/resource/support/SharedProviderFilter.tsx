@@ -6,6 +6,7 @@ import { ENV } from '@waldur/configs/default';
 import { getSelectData } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 const providerAutocomplete = async (
   query: string,
@@ -64,7 +65,7 @@ export const SharedProviderFilter: FunctionComponent = () => (
 
 const FORM_ID = 'SharedProviderFilter';
 
-export const providerSelector = (state) =>
+export const providerSelector = (state: RootState) =>
   formValueSelector(FORM_ID)(state, 'provider');
 
 const enhance = reduxForm({ form: FORM_ID });

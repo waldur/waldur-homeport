@@ -5,6 +5,7 @@ import { formValueSelector, clearFields } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import { getProjectSecrets } from '../api';
 import { FieldProps } from '../types';
@@ -14,7 +15,7 @@ import { DecoratedField } from './DecoratedField';
 import { SelectControl } from './SelectControl';
 
 export const SecretField: React.FC<FieldProps> = (props) => {
-  const project = useSelector((state) =>
+  const project = useSelector((state: RootState) =>
     formValueSelector(FORM_ID)(state, 'project'),
   );
   const { loading, error, value: options } = useAsync(

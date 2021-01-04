@@ -6,7 +6,7 @@ import {
 
 import * as actions from './actions';
 
-export interface InitialState {
+interface ProviderState {
   data: {
     organizations: Organizations;
     service_providers: ServiceProviders;
@@ -15,9 +15,10 @@ export interface InitialState {
   selectedServiceProviderUuid: string;
   loading: boolean;
   infoPanelIsVisible: boolean;
+  error?: any;
 }
 
-const INITIAL_STATE: InitialState = {
+const INITIAL_STATE: ProviderState = {
   data: {
     organizations: {},
     service_providers: {},
@@ -28,7 +29,10 @@ const INITIAL_STATE: InitialState = {
   infoPanelIsVisible: false,
 };
 
-export function reducer(state = INITIAL_STATE, action) {
+export function reducer(
+  state: ProviderState = INITIAL_STATE,
+  action,
+): ProviderState {
   switch (action.type) {
     case actions.SERVICE_USAGE_FETCH_START:
       return {
@@ -71,7 +75,7 @@ export function reducer(state = INITIAL_STATE, action) {
     case actions.USAGE_DATA_CLEAN:
       return {
         ...state,
-        INITIAL_STATE,
+        ...INITIAL_STATE,
       };
 
     default:

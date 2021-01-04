@@ -1,6 +1,6 @@
 import type { EventInput } from '@fullcalendar/core';
 
-export interface State {
+export interface BookingState {
   schedules: BookingProps[];
   bookings: BookingProps[];
   config: ConfigProps;

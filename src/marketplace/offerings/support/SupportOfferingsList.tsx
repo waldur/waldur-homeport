@@ -8,6 +8,7 @@ import { withTranslation } from '@waldur/i18n';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
 import { OfferingsListTablePlaceholder } from '@waldur/marketplace/offerings/OfferingsListTablePlaceholder';
 import { Offering } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -88,7 +89,7 @@ export const TableOptions = {
   exportFields: ['Name', 'Service provider', 'Created', 'Category', 'State'],
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   filter: getFormValues(SUPPORT_OFFERINGS_FILTER_FORM_ID)(state),
 });

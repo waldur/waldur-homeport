@@ -15,6 +15,7 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import * as actions from '@waldur/marketplace/orders/store/actions';
+import { RootState } from '@waldur/store/reducers';
 import {
   getCustomer,
   isOwnerOrStaff,
@@ -214,7 +215,7 @@ const ShowAllLink = (props) => {
   }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   const { pendingOrders } = state.marketplace.orders;
   return {
     customer: getCustomer(state),

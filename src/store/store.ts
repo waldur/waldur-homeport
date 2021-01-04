@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import { router } from '@waldur/router';
 
 import sagas from './effects';
-import rootReducer from './reducers';
+import { rootReducer } from './reducers';
 
 declare global {
   interface Window {

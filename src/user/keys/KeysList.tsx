@@ -4,6 +4,7 @@ import { compose } from 'redux';
 
 import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
+import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher, connectTable } from '@waldur/table';
 import { KeysListTablePlaceholder } from '@waldur/user/keys/KeysListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
@@ -56,7 +57,7 @@ const TableOptions = {
   queryField: 'name',
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
   isStaffOrSelf: isStaffOrSelfSelectorCreator(router.globals.params)(state),
 });

@@ -1,4 +1,5 @@
 import { initConfig, reducer, isVisible } from './config';
+import { RootState } from './reducers';
 
 describe('Configuration reducer', () => {
   const disabledFeatures = { freeipa: true, support: true };
@@ -26,28 +27,32 @@ describe('Configuration reducer', () => {
   });
 
   it('should check disabled features', () => {
-    const state = { config: { disabledFeatures, enabledFeatures } };
+    const state = ({
+      config: { disabledFeatures, enabledFeatures },
+    } as unknown) as RootState;
     expect(isVisible(state, 'freeipa')).toBe(false);
     expect(isVisible(state, 'support')).toBe(false);
   });
 
   it('should check enabled features', () => {
-    const state = { config: { disabledFeatures, enabledFeatures } };
+    const state = ({
+      config: { disabledFeatures, enabledFeatures },
+    } as unknown) as RootState;
     expect(isVisible(state, 'billing')).toBe(true);
     expect(isVisible(state, 'marketplace')).toBe(true);
   });
 
   it('should check visibility for all other features 1', () => {
-    const state = {
+    const state = ({
       config: { disabledFeatures, enabledFeatures, featuresVisible: true },
-    };
+    } as unknown) as RootState;
     expect(isVisible(state, 'visibleFeature')).toBe(true);
   });
 
   it('should check visibility for all other features 2', () => {
-    const state = {
+    const state = ({
       config: { disabledFeatures, enabledFeatures, featuresVisible: false },
-    };
+    } as unknown) as RootState;
     expect(isVisible(state, 'hiddenFeature')).toBe(false);
   });
 });

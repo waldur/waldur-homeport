@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -23,7 +24,7 @@ const PureMyOrderItemsFilter: FunctionComponent<StateProps> = (props) => (
   </Row>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
 });
 

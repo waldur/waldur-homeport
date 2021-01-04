@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 
 import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { Tooltip } from '@waldur/core/Tooltip';
+import { RootState } from '@waldur/store/reducers';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { Table, connectTable, createFetcher } from '@waldur/table/index';
@@ -215,7 +216,7 @@ const TableOptions = {
   ],
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   userFilter: getFormValues('userFilter')(state),
 });
 

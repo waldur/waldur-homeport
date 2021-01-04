@@ -1,15 +1,19 @@
-const INITIAL_STATE = null;
+import { ApplicationConfigurationOptions } from '@waldur/core/types';
+
+import { RootState } from './reducers';
+
+const INITIAL_STATE: ApplicationConfigurationOptions = null;
 
 export const INIT_CONFIG = 'waldur/core/INIT_CONFIG';
 
-export const initConfig = (config) => ({
+export const initConfig = (config: any) => ({
   type: INIT_CONFIG,
   payload: {
     config,
   },
 });
 
-const getFeaturesMap = (features) => {
+const getFeaturesMap = (features: string[]) => {
   const map = {};
   features.forEach((feature) => {
     map[feature] = true;
@@ -17,7 +21,10 @@ const getFeaturesMap = (features) => {
   return map;
 };
 
-export const reducer = (state = INITIAL_STATE, action) => {
+export const reducer = (
+  state = INITIAL_STATE,
+  action,
+): ApplicationConfigurationOptions => {
   switch (action.type) {
     case INIT_CONFIG: {
       const {
@@ -37,9 +44,9 @@ export const reducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export const getConfig = (state) => state.config;
+export const getConfig = (state: RootState) => state.config;
 
-export const isVisible = (state, feature) => {
+export const isVisible = (state: RootState, feature: string): boolean => {
   const {
     featuresVisible,
     disabledFeatures = {},
@@ -57,5 +64,5 @@ export const isVisible = (state, feature) => {
   return featuresVisible;
 };
 
-export const getNativeNameVisible = (state) =>
+export const getNativeNameVisible = (state: RootState) =>
   state.config.plugins.WALDUR_CORE.NATIVE_NAME_ENABLED === true;

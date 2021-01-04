@@ -9,15 +9,15 @@ import { ShoppingCartItemUpdateExtraComponent } from '@waldur/marketplace/cart/S
 import { Plan, Offering } from '@waldur/marketplace/types';
 import { setTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
+import { RootState } from '@waldur/store/reducers';
 
 import * as api from '../common/api';
+import '../details/OfferingDetails.scss';
 import { OrderSummary } from '../details/OrderSummary';
 import { OrderItemResponse } from '../orders/types';
 
 import { ShoppingCartItemUpdateForm } from './ShoppingCartItemUpdateForm';
 import { getItemSelectorFactory } from './store/selectors';
-
-import '../details/OfferingDetails.scss';
 
 interface PureShoppingCartItemUpdateProps {
   offering: Offering;
@@ -120,7 +120,7 @@ class ShoppingCartItemUpdateComponent extends Component<ShoppingCartItemUpdatePr
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   shoppingCartItem: getItemSelectorFactory(
     router.globals.params.order_item_uuid,
   )(state),

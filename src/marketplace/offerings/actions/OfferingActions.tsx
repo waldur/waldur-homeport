@@ -6,8 +6,8 @@ import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
+import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
 
 import { addOfferingLocation, updateOfferingState } from '../store/actions';
 import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
@@ -47,7 +47,7 @@ interface OwnProps {
   offering: Offering;
 }
 
-const mapStateToProps = (state: OuterState) => ({
+const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
 });
 

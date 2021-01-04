@@ -20,6 +20,7 @@ import { OFFERING_SCREENSHOTS_FORM_ID } from '@waldur/marketplace/offerings/stor
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { RootState } from '@waldur/store/reducers';
 
 const AddOfferingScreenshotDialog: FunctionComponent<any> = (props) => (
   <form
@@ -73,7 +74,8 @@ const AddOfferingScreenshotDialog: FunctionComponent<any> = (props) => (
 );
 
 const selector = formValueSelector(OFFERING_SCREENSHOTS_FORM_ID);
-const mapStateToProps = (state) => ({
+
+const mapStateToProps = (state: RootState) => ({
   isSubmittingScreenshot: getOffering(state).isAddingScreenshot,
   screenshotsField: selector(state, 'screenshots'),
 });

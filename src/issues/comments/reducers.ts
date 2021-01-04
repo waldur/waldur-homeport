@@ -6,9 +6,9 @@ import {
 } from '@waldur/issues/attachments/constants';
 
 import * as constants from './constants';
-import { Payload, State } from './types';
+import { Payload, State as CommentsState } from './types';
 
-const INITIAL_STATE: State = {
+const INITIAL_STATE: CommentsState = {
   loading: false,
   errors: [],
   items: [],
@@ -21,9 +21,9 @@ const INITIAL_STATE: State = {
 };
 
 export const reducer = (
-  state: State = INITIAL_STATE,
+  state: CommentsState = INITIAL_STATE,
   action: Action<Payload>,
-) => {
+): CommentsState => {
   const { type, payload } = action;
   switch (type) {
     case constants.ISSUE_COMMENTS_GET:
@@ -90,7 +90,7 @@ export const reducer = (
     case ISSUE_ATTACHMENTS_PUT_SUCCESS:
       return {
         ...state,
-        pendingAttachments: [...state.pendingAttachments, payload.item],
+        pendingAttachments: [...state.pendingAttachments, payload.item as any],
       };
     case ISSUE_ATTACHMENTS_DELETE_SUCCESS:
       return {

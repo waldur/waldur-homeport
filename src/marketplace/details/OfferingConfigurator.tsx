@@ -8,8 +8,9 @@ import {
   getFormValidator,
 } from '@waldur/marketplace/common/registry';
 import { Offering, Plan } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
-import { Project, OuterState } from '@waldur/workspace/types';
+import { Project } from '@waldur/workspace/types';
 
 import { getDefaultLimits } from '../offerings/utils';
 
@@ -37,7 +38,7 @@ const storeConnector = connect<
   { project: Project },
   {},
   { offering: Offering; limits: string[] },
-  OuterState
+  RootState
 >((state, ownProps) => ({
   project: getProject(state),
   initialValues: {

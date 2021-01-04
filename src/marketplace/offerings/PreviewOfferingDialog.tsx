@@ -13,8 +13,9 @@ import {
 } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
-import { OuterState, Project } from '@waldur/workspace/types';
+import { Project } from '@waldur/workspace/types';
 
 import { getDefaultLimits } from './utils';
 
@@ -48,7 +49,7 @@ const storeConnector = connect<
   { project: Project },
   {},
   PreviewOfferingOwnProps,
-  OuterState
+  RootState
 >((state, ownProps) => ({
   project: getProject(state),
   initialValues: {

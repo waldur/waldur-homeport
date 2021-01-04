@@ -1,3 +1,4 @@
+import { RootState } from '@waldur/store/reducers';
 import {
   isOwner,
   isAdmin,
@@ -5,11 +6,12 @@ import {
   isStaff,
 } from '@waldur/workspace/selectors';
 
-const getOrders = (state) => state.marketplace.orders;
-export const getStateChangeStatus = (state) =>
+const getOrders = (state: RootState) => state.marketplace.orders;
+
+export const getStateChangeStatus = (state: RootState) =>
   getOrders(state).stateChangeStatus;
 
-export const orderCanBeApproved = (state) => {
+export const orderCanBeApproved = (state: RootState) => {
   if (isStaff(state)) {
     return true;
   }

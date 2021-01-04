@@ -1,6 +1,7 @@
 import { formValueSelector } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import { MetricsFormData } from './types';
 
@@ -42,5 +43,5 @@ export const serializeMetrics = (formData: MetricsFormData) => [
 
 export const FORM_ID = 'RancherHPACreate';
 
-export const metricSelector = (state) =>
+export const metricSelector = (state: RootState) =>
   formValueSelector(FORM_ID)(state, 'metric_name');

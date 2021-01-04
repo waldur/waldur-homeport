@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -12,8 +12,8 @@ interface ConfirmationDialogProps {
       resolve: () => void;
       reject: () => void;
     };
-    title: string;
-    body: string;
+    title: ReactNode;
+    body: ReactNode;
   };
 }
 

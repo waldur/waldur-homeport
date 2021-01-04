@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
+import { RootState } from '@waldur/store/reducers';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
@@ -10,7 +11,7 @@ interface OwnProps {
   className?: string;
 }
 
-const stateSelector = (state) => {
+const stateSelector = (state: RootState) => {
   const workspace = getWorkspace(state);
   if (workspace === ORGANIZATION_WORKSPACE) {
     return 'marketplace-category-customer';

@@ -1,6 +1,8 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { RootState } from '@waldur/store/reducers';
+
 import { BreadcrumbItem } from './types';
 
 const SET_BREADCRUMBS = 'waldur/navigation/SET_BREADCRUMBS';
@@ -21,7 +23,12 @@ export const setBreadcrumbs = (
   },
 });
 
-export const reducer = (state = [], action) => {
+type BreadcrumbState = BreadcrumbItem[];
+
+export const reducer = (
+  state: BreadcrumbState = [],
+  action,
+): BreadcrumbState => {
   switch (action.type) {
     case SET_BREADCRUMBS:
       return action.payload.items;
@@ -31,7 +38,7 @@ export const reducer = (state = [], action) => {
   }
 };
 
-export const getBreadcrumbs = (state) => state.breadcrumbs as BreadcrumbItem[];
+export const getBreadcrumbs = (state: RootState) => state.breadcrumbs;
 
 export const useBreadcrumbs = (items: BreadcrumbItem[]) => {
   const dispatch = useDispatch();

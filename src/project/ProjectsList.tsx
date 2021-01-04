@@ -6,6 +6,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { withTranslation } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { formatLongText } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -80,7 +81,7 @@ const TableOptions = {
   table: 'ProjectsList',
   fetchData: createFetcher('projects'),
   queryField: 'query',
-  getDefaultFilter: (state) => ({
+  getDefaultFilter: (state: RootState) => ({
     customer: getCustomer(state).uuid,
     o: 'name',
   }),

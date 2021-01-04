@@ -20,6 +20,7 @@ import { Quota } from '@waldur/openstack/types';
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { Flavor } from './types';
@@ -125,20 +126,21 @@ const getQuotas = ({ formData, usages, limits, project, components }) => {
   return quotas;
 };
 
-const formDataSelector = (state) =>
+const formDataSelector = (state: RootState) =>
   (getFormValues('marketplaceOffering')(state) || {}) as FormData;
 
-const formHasFlavorSelector = (state) =>
+const formHasFlavorSelector = (state: RootState) =>
   Boolean(formDataSelector(state).flavor);
 
-const formIsValidSelector = (state) => isValid('marketplaceOffering')(state);
+const formIsValidSelector = (state: RootState) =>
+  isValid('marketplaceOffering')(state);
 
-const formAttributesSelector = (state) => {
+const formAttributesSelector = (state: RootState) => {
   const formData = formDataSelector(state);
   return formData.attributes || {};
 };
 
-const flavorSelector = (state) => {
+const flavorSelector = (state: RootState) => {
   const formAttrs = formAttributesSelector(state);
   return formAttrs.flavor ? formAttrs.flavor : {};
 };
@@ -152,8 +154,9 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> = 
   const formHasFlavor = useSelector(formHasFlavorSelector);
   const formData = useSelector(formAttributesSelector);
   const flavor = useSelector(flavorSelector);
-  const total = useSelector((state) => pricesSelector(state, { offering }))
-    .total;
+  const total = useSelector((state: RootState) =>
+    pricesSelector(state, { offering }),
+  ).total;
   const components = React.useMemo(
     () => (offering.plans.length > 0 ? offering.plans[0].prices : {}),
     [offering],

@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -116,7 +117,7 @@ const TableOptions = {
   exportFields,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   filter: getFormValues('MyOrderItemsFilter')(state),
   customer: getCustomer(state),
 });

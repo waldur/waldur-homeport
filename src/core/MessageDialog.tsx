@@ -1,12 +1,12 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 interface MessageDialogProps {
   resolve: {
-    title: string;
-    message: string;
+    title: ReactNode;
+    message: ReactNode;
   };
 }
 

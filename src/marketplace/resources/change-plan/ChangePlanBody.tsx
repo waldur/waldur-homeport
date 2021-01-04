@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import { orderCanBeApproved } from '@waldur/marketplace/orders/store/selectors';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { RootState } from '@waldur/store/reducers';
 
 import { switchPlan } from '../store/constants';
 
@@ -17,7 +18,7 @@ import { FetchedData } from './utils';
 
 const FORM_ID = 'marketplaceChangePlan';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   orderCanBeApproved: orderCanBeApproved(state),
 });
 

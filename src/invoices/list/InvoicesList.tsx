@@ -8,6 +8,7 @@ import { Link } from '@waldur/core/Link';
 import { INVOICES_TABLE } from '@waldur/invoices/constants';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { MarkAsPaidButton } from '@waldur/invoices/list/MarkAsPaidButton';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -84,7 +85,7 @@ const TableOptions: TableOptionsType = {
   queryField: 'number',
 };
 
-const mapsStateToProps = (state) => ({
+const mapsStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   stateFilter: getFormValues('InvoicesFilter')(state),
 });

@@ -4,6 +4,7 @@ import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
+import { RootState } from '@waldur/store/reducers';
 
 import { FORM_ID } from '../store/constants';
 import { getCategory } from '../store/selectors';
@@ -11,7 +12,9 @@ import { formatAttributes } from '../store/utils';
 
 import { hasError } from './utils';
 
-const PureDescriptionSummary: FunctionComponent<any> = (props) => (
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+const PureDescriptionSummary: FunctionComponent<StateProps> = (props) => (
   <>
     <h3>{translate('Description')}</h3>
     {props.categoryInvalid ? (
@@ -34,7 +37,7 @@ const PureDescriptionSummary: FunctionComponent<any> = (props) => (
   </>
 );
 
-const connector = connect((state) => {
+const mapStateToProps = (state: RootState) => {
   const categoryInvalid = hasError('category')(state);
   const attributesInvalid = hasError('attributes')(state);
 
@@ -59,6 +62,8 @@ const connector = connect((state) => {
     categoryInvalid,
     attributesInvalid,
   };
-});
+};
 
-export const DescriptionSummary = connector(PureDescriptionSummary);
+export const DescriptionSummary = connect(mapStateToProps)(
+  PureDescriptionSummary,
+);

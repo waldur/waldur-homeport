@@ -1,3 +1,5 @@
+import { RootState } from '@waldur/store/reducers';
+
 import {
   DOWNLOAD_REQUEST,
   DOWNLOAD_SUCCESS,
@@ -42,4 +44,4 @@ export function reducer(state = INITIAL_STATE, action) {
   }
 }
 
-export const getDownloadLinkState = (state) => state.downloadLink;
+export const getDownloadLinkState = (state: RootState) => state.downloadLink;

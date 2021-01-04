@@ -1,6 +1,8 @@
+import { FC } from 'react';
 import { connect } from 'react-redux';
 
 import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
+import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
@@ -11,7 +13,7 @@ interface CartIndicatorProps {
   project: Project;
 }
 
-const PureCartIndicator = (props: CartIndicatorProps) =>
+const PureCartIndicator: FC<CartIndicatorProps> = (props) =>
   props.project ? (
     <NavbarIndicator
       state={'marketplace-checkout'}
@@ -22,7 +24,7 @@ const PureCartIndicator = (props: CartIndicatorProps) =>
     />
   ) : null;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   count: getCount(state),
   project: getProject(state),
 });

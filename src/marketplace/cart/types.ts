@@ -1,18 +1,12 @@
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 
-export interface State {
+export interface CartState {
   items: OrderItemResponse[];
   addingItem: boolean;
   removingItem: boolean;
   updatingItem: boolean;
   creatingOrder: boolean;
-}
-
-export interface OuterState {
-  marketplace: {
-    cart: State;
-  };
 }
 
 export interface SubmitCartRequest {

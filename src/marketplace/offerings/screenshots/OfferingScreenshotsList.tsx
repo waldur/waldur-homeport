@@ -8,6 +8,7 @@ import { SCREENSHOTS_TABLE_NAME } from '@waldur/marketplace/offerings/store/cons
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering, Screenshot } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
+import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 
 import { ScreenshotsActions } from './ScreenshotsActions';
@@ -94,7 +95,7 @@ const TableOptions = {
   exportFields: ['Name', 'Description', 'Created'],
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   offering: getOffering(state).offering,
 });
 

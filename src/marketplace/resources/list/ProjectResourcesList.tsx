@@ -7,6 +7,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getProject } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
@@ -122,7 +123,7 @@ const TableOptions = {
   queryField: 'name',
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
   importVisible: isVisible(state, 'import'),
   filter: getFormValues('ProjectResourcesFilter')(state),

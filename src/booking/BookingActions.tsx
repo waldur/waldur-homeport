@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 
 import * as constants from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser, isOwner } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
 
 import { acceptBookingItem, rejectBookingItem } from './store/actions';
 import { bookingFormSelector } from './store/selectors';
 import { BookingResource } from './types';
 
-const mapStateToProps = (state: OuterState) => ({
+const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
   isOwner: isOwner(state),
   filter: bookingFormSelector(state),

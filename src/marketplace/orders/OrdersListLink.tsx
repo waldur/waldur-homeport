@@ -2,15 +2,19 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
+import { RootState } from '@waldur/store/reducers';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import {
-  OuterState,
   ORGANIZATION_WORKSPACE,
   PROJECT_WORKSPACE,
   SUPPORT_WORKSPACE,
 } from '@waldur/workspace/types';
 
-const PureOrderItemDetailsLink: FunctionComponent<any> = (props) => (
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+const PureOrderItemDetailsLink: FunctionComponent<StateProps & OwnProps> = (
+  props,
+) => (
   <Link
     state={props.state}
     params={{ ...props.params, order_item_uuid: props.order_item_uuid }}
@@ -21,10 +25,6 @@ const PureOrderItemDetailsLink: FunctionComponent<any> = (props) => (
   </Link>
 );
 
-interface StateProps {
-  state: string;
-}
-
 interface OwnProps {
   order_item_uuid: string;
   customer_uuid?: string;
@@ -33,29 +33,29 @@ interface OwnProps {
   onClick?: () => void;
 }
 
-const connector = connect<StateProps, {}, OwnProps, OuterState>(
-  (state, ownProps) => {
-    const workspace = getWorkspace(state);
-    if (workspace === ORGANIZATION_WORKSPACE) {
-      return {
-        state: 'marketplace-order-item-details-customer',
-      };
-    } else if (workspace === PROJECT_WORKSPACE) {
-      return {
-        state: 'marketplace-order-list',
-        params: {
-          uuid: ownProps.project_uuid,
-        },
-      };
-    } else if (workspace === SUPPORT_WORKSPACE) {
-      return {
-        state: 'marketplace-order-item-details-customer',
-        params: {
-          uuid: ownProps.customer_uuid,
-        },
-      };
-    }
-  },
-);
+const mapStateToProps = (state: RootState, ownProps: OwnProps) => {
+  const workspace = getWorkspace(state);
+  if (workspace === ORGANIZATION_WORKSPACE) {
+    return {
+      state: 'marketplace-order-item-details-customer',
+    };
+  } else if (workspace === PROJECT_WORKSPACE) {
+    return {
+      state: 'marketplace-order-list',
+      params: {
+        uuid: ownProps.project_uuid,
+      },
+    };
+  } else if (workspace === SUPPORT_WORKSPACE) {
+    return {
+      state: 'marketplace-order-item-details-customer',
+      params: {
+        uuid: ownProps.customer_uuid,
+      },
+    };
+  }
+};
 
-export const OrderItemDetailsLink = connector(PureOrderItemDetailsLink);
+export const OrderItemDetailsLink = connect(mapStateToProps)(
+  PureOrderItemDetailsLink,
+);

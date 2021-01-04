@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { PAYMENT_PROFILES_TABLE } from '@waldur/customer/details/constants';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
@@ -82,7 +83,7 @@ const TableOptions = {
   }),
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   isStaff: isStaff(state),
   isSupport: isSupport(state),

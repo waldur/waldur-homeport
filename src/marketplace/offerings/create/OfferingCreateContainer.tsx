@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { setTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
+import { RootState } from '@waldur/store/reducers';
 
 import { loadDataStart, setStep } from '../store/actions';
 import { FORM_ID, createOffering } from '../store/constants';
@@ -19,7 +20,7 @@ import { OfferingStep, STEPS } from '../types';
 
 import { OfferingCreateDialog } from './OfferingCreateDialog';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   step: getStep(state),
   loading: isLoading(state),
   loaded: isLoaded(state),

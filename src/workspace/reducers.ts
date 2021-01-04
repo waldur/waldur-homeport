@@ -4,16 +4,16 @@ import {
   SET_CURRENT_WORKSPACE,
   SET_CURRENT_USER,
 } from './constants';
-import { Workspace } from './types';
+import { WorkspaceState } from './types';
 
-const INITIAL_STATE: Workspace = {
+const INITIAL_STATE: WorkspaceState = {
   user: undefined,
   customer: undefined,
   project: undefined,
   workspace: undefined,
 };
 
-export const reducer = (state = INITIAL_STATE, action) => {
+export const reducer = (state = INITIAL_STATE, action): WorkspaceState => {
   switch (action.type) {
     case SET_CURRENT_CUSTOMER:
       return {

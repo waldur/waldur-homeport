@@ -2,6 +2,7 @@ import {
   PROJECT_ADMIN_ROLE,
   PROJECT_MANAGER_ROLE,
 } from '@waldur/core/constants';
+import { RootState } from '@waldur/store/reducers';
 
 import { orderCanBeApproved } from './selectors';
 
@@ -41,7 +42,9 @@ describe('orderCanBeApproved utility function', () => {
     const workspace = {
       user: staff,
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(true);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(true);
   });
   it('should return true if OWNER_CAN_APPROVE_ORDER and current user is owner', () => {
     const config = {
@@ -62,7 +65,9 @@ describe('orderCanBeApproved utility function', () => {
         owners: [user],
       },
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(true);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(true);
   });
   it('should return false if OWNER_CAN_APPROVE_ORDER but current user is not the owner', () => {
     const config = {
@@ -83,7 +88,9 @@ describe('orderCanBeApproved utility function', () => {
         owners: [],
       },
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(false);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(false);
   });
   it('should return false if OWNER_CAN_APPROVE_ORDER is equal to false but current user is the owner', () => {
     const config = {
@@ -104,7 +111,9 @@ describe('orderCanBeApproved utility function', () => {
         owners: [user],
       },
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(false);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(false);
   });
   it('should return true if ADMIN_CAN_APPROVE_ORDER and current user is the admin', () => {
     const config = {
@@ -125,7 +134,9 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [admin],
       },
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(true);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(true);
   });
   it('should return false if ADMIN_CAN_APPROVE_ORDER is equal to false but current user is the admin', () => {
     const config = {
@@ -146,7 +157,9 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [admin],
       },
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(false);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(false);
   });
   it('should return false if ADMIN_CAN_APPROVE_ORDER but current user is not the admin', () => {
     const config = {
@@ -167,7 +180,9 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [],
       },
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(false);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(false);
   });
   it('should return true if MANAGER_CAN_APPROVE_ORDER and current user is the manager', () => {
     const config = {
@@ -188,7 +203,9 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [manager],
       },
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(true);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(true);
   });
   it('should return false if MANAGER_CAN_APPROVE_ORDER is equal to false but current user is the manager', () => {
     const config = {
@@ -209,7 +226,9 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [manager],
       },
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(false);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(false);
   });
   it('should return false if MANAGER_CAN_APPROVE_ORDER but current user is not the manager', () => {
     const config = {
@@ -230,6 +249,8 @@ describe('orderCanBeApproved utility function', () => {
         permissions: [],
       },
     };
-    expect(orderCanBeApproved({ config, workspace })).toEqual(false);
+    expect(
+      orderCanBeApproved(({ config, workspace } as unknown) as RootState),
+    ).toEqual(false);
   });
 });

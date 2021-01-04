@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
@@ -74,7 +75,7 @@ const TableOptions: TableOptionsType = {
   mapPropsToFilter,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   showActions: isOwnerOrStaff(state),
   stateFilter: getFormValues('PayPalInvoicesFilter')(state),

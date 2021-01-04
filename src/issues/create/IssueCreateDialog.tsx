@@ -6,6 +6,7 @@ import { change, formValueSelector } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { getTemplates, IssueTemplate } from '@waldur/issues/api';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
+import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getIssueTypes, getShowAllTypes } from '../types/utils';
@@ -101,10 +102,10 @@ export const IssueCreateDialog: FunctionComponent<CreateIssueDialogProps> = ({
     [resolve.issue, dispatch],
   );
 
-  const issueType = useSelector<any, IssueTypeOption>((state) =>
+  const issueType = useSelector<any, IssueTypeOption>((state: RootState) =>
     selector(state, 'type'),
   );
-  const issueTemplate = useSelector<any, IssueTemplate>((state) =>
+  const issueTemplate = useSelector<any, IssueTemplate>((state: RootState) =>
     selector(state, 'template'),
   );
 

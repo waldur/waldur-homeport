@@ -9,6 +9,7 @@ import { BookingTimeSlotsField } from '@waldur/booking/BookingTimeSlotsField';
 import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
 import { translate, withTranslation } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
+import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
@@ -105,7 +106,7 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   actionsDisabled: !isOwnerOrStaff(state),
   filter: bookingFormSelector(state),

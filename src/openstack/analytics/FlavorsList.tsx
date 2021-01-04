@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { RootState } from '@waldur/store/reducers';
 import { createFetcher } from '@waldur/table/api';
 import { Table, connectTable } from '@waldur/table/index';
 
@@ -46,7 +47,7 @@ const TableOptions = {
   mapPropsToFilter: (props) => formatFilter(props.vmOverviewFilter),
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   vmOverviewFilter: getFormValues('vmOverviewFilter')(state),
 });
 

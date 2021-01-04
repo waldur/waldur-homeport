@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
 
 import { OFFERING_PERMISSIONS_LIST_ID } from './constants';
 import { OfferingPermissionCreateButton } from './OfferingPermissionCreateButton';
@@ -55,7 +55,7 @@ const TableOptions = {
   }),
 };
 
-export const OfferingPermissionsList = connect((state: OuterState) => ({
+export const OfferingPermissionsList = connect((state: RootState) => ({
   customer: getCustomer(state),
   isOwnerOrStaff: isOwnerOrStaff(state),
 }))(connectTable(TableOptions)(TableComponent));

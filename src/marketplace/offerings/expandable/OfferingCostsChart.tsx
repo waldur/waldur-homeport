@@ -6,6 +6,7 @@ import { formValueSelector } from 'redux-form';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import { getOfferingCostChartData } from './api';
 import { formatOfferingCostsChart } from './utils';
@@ -21,7 +22,7 @@ interface OfferingCostChartProps {
 export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = (
   props,
 ) => {
-  const accountRunningState = useSelector((state) =>
+  const accountRunningState = useSelector((state: RootState) =>
     getAccountingRunningFieldValue(state, props.uniqueFormId),
   );
   const { loading, error, value: option } = useAsync(

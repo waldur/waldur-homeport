@@ -6,6 +6,7 @@ import { reduxForm } from 'redux-form';
 import { StringField, FormContainer, SelectField } from '@waldur/form';
 import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 
 import './UserFilter.scss';
 
@@ -94,7 +95,7 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
   </form>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   nativeNameVisible: getNativeNameVisible(state),
 });
 

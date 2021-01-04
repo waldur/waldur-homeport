@@ -5,12 +5,13 @@ import { reduxForm, SubmissionError } from 'redux-form';
 import { translate, withTranslation } from '@waldur/i18n';
 import { renderServiceProvider } from '@waldur/marketplace/service-providers/selectors';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { RootState } from '@waldur/store/reducers';
 
 import { customerCreateDialog } from './actions';
 import * as constants from './constants';
 import { CustomerCreatePrompt } from './CustomerCreatePrompt';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   renderServiceProvider: renderServiceProvider(state),
 });
 

@@ -4,6 +4,7 @@ import { getFormValues } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
 import { Section } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 
 import { FORM_ID } from '../store/constants';
 
@@ -48,7 +49,7 @@ const PureOverviewSummary = (props) => {
   );
 };
 
-const connector = connect((state) => ({
+const connector = connect((state: RootState) => ({
   formData: getFormValues(FORM_ID)(state),
   nameInvalid: hasError('name')(state),
 }));

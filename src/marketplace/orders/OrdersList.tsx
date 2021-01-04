@@ -7,6 +7,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { withTranslation } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { getProject } from '@waldur/workspace/selectors';
@@ -92,7 +93,7 @@ const TableOptions = {
   ],
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
 });
 

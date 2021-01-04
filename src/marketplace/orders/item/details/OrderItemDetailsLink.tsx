@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
+import { RootState } from '@waldur/store/reducers';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import {
-  OuterState,
   ORGANIZATION_WORKSPACE,
   PROJECT_WORKSPACE,
   SUPPORT_WORKSPACE,
@@ -33,7 +33,7 @@ interface OwnProps {
   onClick?: () => void;
 }
 
-const connector = connect<StateProps, {}, OwnProps, OuterState>(
+const connector = connect<StateProps, {}, OwnProps, RootState>(
   (state, ownProps) => {
     const workspace = getWorkspace(state);
     if (workspace === ORGANIZATION_WORKSPACE) {

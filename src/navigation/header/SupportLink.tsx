@@ -5,10 +5,10 @@ import { translate } from '@waldur/i18n';
 import { IssueNavigationService } from '@waldur/issues/workspace/IssueNavigationService';
 import { router } from '@waldur/router';
 import { isVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
 
-const showLink = (state: OuterState) => {
+const showLink = (state: RootState) => {
   if (isVisible(state, 'support')) {
     return true;
   }

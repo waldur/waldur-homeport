@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import { NavbarIndicator } from '@waldur/navigation/header/NavbarIndicator';
+import { RootState } from '@waldur/store/reducers';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import {
   WorkspaceType,
@@ -29,7 +30,7 @@ const PureComparisonIndicator = (props: ComparisonIndicatorProps) =>
     />
   ) : null;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   count: getCount(state),
   workspace: getWorkspace(state),
 });

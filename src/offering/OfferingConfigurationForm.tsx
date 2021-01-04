@@ -26,6 +26,7 @@ import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { getDefaultLimits } from '@waldur/marketplace/offerings/utils';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { SelectMultiCheckboxGroup } from '@waldur/offering/SelectMultiCheckboxGroup';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { fetchTenantOptions, fetchInstanceOptions } from './api';
@@ -194,7 +195,7 @@ export class PureOfferingConfigurationForm extends Component<OfferingConfigurati
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
 });
 

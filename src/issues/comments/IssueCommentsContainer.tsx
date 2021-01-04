@@ -8,6 +8,7 @@ import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { issueAttachmentsPut } from '@waldur/issues/attachments/actions';
 import { LoadingOverlay } from '@waldur/issues/comments/LoadingOverlay';
 import { IssueReload } from '@waldur/issues/IssueReload';
+import { RootState } from '@waldur/store/reducers';
 
 import * as actions from './actions';
 import * as constants from './constants';
@@ -108,7 +109,7 @@ export class PureIssueCommentsContainer extends Component<PureIssueCommentsConta
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   comments: getCommentsSelector(state),
   loading: getIsLoading(state),
   erred: getCommentsGetErred(state),

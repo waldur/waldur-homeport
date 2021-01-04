@@ -1,8 +1,10 @@
+import { FC } from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 export const tokenOptions = [
   { name: '10 min', value: 600 },
@@ -24,7 +26,9 @@ export const tokenLifetimeTooltip = (
   </Tooltip>
 );
 
-const PureTokenLifetimeWarning = (props: { token_lifetime: number | null }) =>
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+const PureTokenLifetimeWarning: FC<StateProps> = (props) =>
   props.token_lifetime === null ? (
     <div className="form-group">
       <p className="help-block text-danger col-sm-offset-3 col-sm-7">
@@ -38,9 +42,11 @@ const PureTokenLifetimeWarning = (props: { token_lifetime: number | null }) =>
     </div>
   ) : null;
 
-const connector = connect((state) => {
+const mapStateToProps = (state: RootState) => {
   const option = formValueSelector('userEdit')(state, 'token_lifetime');
   return { token_lifetime: option ? option.value : undefined };
-});
+};
 
-export const TokenLifetimeWarning = connector(PureTokenLifetimeWarning);
+export const TokenLifetimeWarning = connect(mapStateToProps)(
+  PureTokenLifetimeWarning,
+);

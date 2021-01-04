@@ -8,6 +8,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { getConfig } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
@@ -55,7 +56,7 @@ const ProjectCreateComponent: React.FC<ProjectCreateProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   enforceLatinName: getConfig(state).enforceLatinName,
 });

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { setTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 
 import { fetchServiceUsageStart } from './actions';
 import { FlowMapFilter } from './FlowMapFilter';
@@ -88,7 +89,7 @@ class SankeyDiagramComponent extends React.Component<SankeyDiagramComponentProps
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   serviceUsage: selectServiceUsage(state),
   organizationNames: propertySelectorFactory('name')(state),
   countryNames: propertySelectorFactory('country')(state),

@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
+import { RootState } from '@waldur/store/reducers';
 import {
   getCustomer,
   getUser,
@@ -16,7 +17,9 @@ import {
 import { CategoryFilter } from './CategoryFilter';
 import { getStates, ResourceStateFilter } from './ResourceStateFilter';
 
-const PurePublicResourcesFilter: FunctionComponent<any> = (props) => (
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => (
   <Row>
     <OfferingAutocomplete offeringFilter={props.offeringFilter} />
     <OrganizationAutocomplete />
@@ -37,7 +40,7 @@ const filterSelector = createSelector(
         },
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   offeringFilter: filterSelector(state),
 });
 

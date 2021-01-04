@@ -7,6 +7,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { Offering, ServiceProvider } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import {
@@ -126,7 +127,7 @@ interface FormData {
 
 type StateProps = Readonly<ReturnType<typeof mapStateToProps>>;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   filter: getFormValues('OrderItemFilter')(state) as FormData,
   customer: getCustomer(state),
   user: getUser(state),

@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { IssueReload } from '@waldur/issues/IssueReload';
+import { RootState } from '@waldur/store/reducers';
 
 import * as actions from './actions';
 import './IssueAttachmentsContainer.scss';
@@ -98,7 +99,7 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   attachments: getAttachments(state),
   loading: getIsLoading(state),
   uploading: getUploading(state),

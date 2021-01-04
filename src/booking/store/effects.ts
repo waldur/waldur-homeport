@@ -5,6 +5,7 @@ import { updateBookingsList } from '@waldur/booking/utils';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/notify';
+import { RootState } from '@waldur/store/reducers';
 import { selectTableSorting } from '@waldur/table/selectors';
 
 import * as constants from '../constants';
@@ -30,7 +31,7 @@ function* acceptBookingItem(action) {
     const response = yield call(api.getBookingsList, action.payload);
     yield put(setBookingItems(action.payload.offering_uuid, response));
     yield put(showSuccess(translate('Booking has been accepted.')));
-    const bookingsListSorting = yield select((state) =>
+    const bookingsListSorting = yield select((state: RootState) =>
       selectTableSorting(state, BOOKING_RESOURCES_TABLE),
     );
     yield put(
@@ -55,7 +56,7 @@ function* rejectBookingItem(action) {
     const response = yield call(api.getBookingsList, action.payload);
     yield put(setBookingItems(action.payload.offering_uuid, response));
     yield put(showSuccess(translate('Booking has been rejected.')));
-    const bookingsListSorting = yield select((state) =>
+    const bookingsListSorting = yield select((state: RootState) =>
       selectTableSorting(state, BOOKING_RESOURCES_TABLE),
     );
     yield put(

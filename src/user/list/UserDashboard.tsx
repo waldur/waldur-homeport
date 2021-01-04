@@ -11,6 +11,7 @@ import { countChecklists } from '@waldur/marketplace-checklist/api';
 import * as actions from '@waldur/marketplace/landing/store/actions';
 import * as selectors from '@waldur/marketplace/landing/store/selectors';
 import { useTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 import { CategoriesList } from '@waldur/user/list/CategoriesList';
 import { CategoryUserList } from '@waldur/user/list/CategoryUserList';
 
@@ -18,7 +19,13 @@ import { CurrentUserEvents } from './CurrentUserEvents';
 import { CustomerPermissions } from './CustomerPermissions';
 import { ProjectPermissions } from './ProjectPermissions';
 
-const UserDashboardContainer: React.FC = (props: any) => {
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+type DispatchProps = typeof mapDispatchToProps;
+
+const UserDashboardContainer: React.FC<StateProps & DispatchProps> = (
+  props,
+) => {
   useTitle(translate('User dashboard'));
   const { getCategories } = props;
   React.useEffect(() => {
@@ -78,7 +85,7 @@ const mapDispatchToProps = {
   getCategories: actions.categoriesFetchStart,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   categories: selectors.getCategories(state),
 });
 

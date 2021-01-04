@@ -18,12 +18,13 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Offering } from '@waldur/marketplace/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ClusterTemplate } from '@waldur/rancher/types';
+import { RootState } from '@waldur/store/reducers';
 
 import { NodeList } from './NodeList';
 import { SubnetGroup } from './SubnetGroup';
 import { loadData } from './utils';
 
-const getTemplate = (state) =>
+const getTemplate = (state: RootState) =>
   formValueSelector(FORM_ID)(state, 'attributes.template');
 
 const NODES_FIELD_ARRAY = 'attributes.nodes';

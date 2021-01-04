@@ -10,8 +10,10 @@ import { getConfig } from '@waldur/booking/store/selectors';
 import { BookingProps } from '@waldur/booking/types';
 import { deleteCalendarBooking } from '@waldur/booking/utils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import './OfferingScheduler.scss';
+
 import { getSchedules } from '../store/selectors';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -45,7 +47,7 @@ const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
   </FormGroup>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   schedules: getSchedules(state),
   config: getConfig(state),
 });

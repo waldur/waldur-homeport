@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
 import { getConfig, getNativeNameVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerAccordion } from './CustomerAccordion';
@@ -115,7 +116,7 @@ export const PureCustomerDetails: React.FC<CustomerDetailsProps> = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   organizationSubnetsVisible: getConfig(state).organizationSubnetsVisible,
   organizationDomainVisible: getConfig(state).organizationDomainVisible,

@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import * as actions from '@waldur/marketplace/offerings/store/actions';
 import { router } from '@waldur/router';
+import { RootState } from '@waldur/store/reducers';
 
 import { mergeProps } from '../create/OfferingCreateContainer';
 import { updateOffering, FORM_ID } from '../store/constants';
@@ -19,7 +20,7 @@ import { OfferingStep } from '../types';
 import { OfferingUpdateDialog } from './OfferingUpdateDialog';
 import { getInitialValues } from './utils';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   step: getStep(state),
   disabled: isOfferingManagementDisabled(state),
   initialValues: getInitialValues(state),

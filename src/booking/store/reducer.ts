@@ -1,7 +1,7 @@
 import * as constants from '../constants';
-import { State } from '../types';
+import { BookingState } from '../types';
 
-const INITIAL_STATE: State = {
+const INITIAL_STATE: BookingState = {
   bookings: [],
   schedules: [],
   config: {
@@ -17,7 +17,10 @@ const INITIAL_STATE: State = {
   },
 };
 
-export const reducer = (state = INITIAL_STATE, action) => {
+export const reducer = (
+  state: BookingState = INITIAL_STATE,
+  action,
+): BookingState => {
   const { type, payload } = action;
   switch (type) {
     case constants.BOOKINGS_SET:

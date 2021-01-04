@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import { OfferingComponent } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 
 import {
   getPlanPrice,
@@ -18,7 +19,8 @@ interface ConnectedPlanStateProps {
 export const connectPlanComponents = connect<
   ConnectedPlanStateProps,
   {},
-  { plan: string; archived?: boolean }
+  { plan: string; archived?: boolean },
+  RootState
 >((state, ownProps) => {
   const total = getPlanPrice(state, ownProps.plan);
   const type = getType(state);

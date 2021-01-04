@@ -11,6 +11,7 @@ import {
 } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
 import { formatFlavor } from '@waldur/resource/utils';
+import { RootState } from '@waldur/store/reducers';
 
 import { parseQuotas } from '../utils';
 
@@ -75,7 +76,7 @@ export const PureOpenStackTenantSummary: FunctionComponent<OpenStackTenantSummar
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   tenantCredentialsVisible:
     state.config.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
 });

@@ -4,8 +4,9 @@ import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { Plan, Offering, AttributesType } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
-import { Project, OuterState } from '@waldur/workspace/types';
+import { Project } from '@waldur/workspace/types';
 
 import { FORM_ID } from '../details/constants';
 import {
@@ -24,8 +25,8 @@ const storeConnector = connect<
     initialLimits: AttributesType;
     initialAttributes: AttributesType;
   },
-  OuterState
->((state) => ({
+  RootState
+>((state: RootState) => ({
   project: getProject(state),
 }));
 

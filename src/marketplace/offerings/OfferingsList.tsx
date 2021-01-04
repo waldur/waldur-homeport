@@ -10,6 +10,7 @@ import { withTranslation } from '@waldur/i18n';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
 import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
 import { OFFERING_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import {
   getCustomer,
@@ -125,7 +126,7 @@ const showOfferingCreateButton = createSelector(
     customer && customer.is_service_provider && ownerOrStaff,
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   user: getUser(state),
   isServiceManager: isServiceManagerSelector(state),

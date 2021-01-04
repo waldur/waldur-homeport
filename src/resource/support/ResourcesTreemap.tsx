@@ -8,6 +8,7 @@ import { formatFilesize } from '@waldur/core/utils';
 import { TranslateProps, withTranslation, translate } from '@waldur/i18n';
 import { useReportingBreadcrumbs } from '@waldur/issues/workspace/SupportWorkspace';
 import { useTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 
 import { loadData, parseProjects } from './api';
 import { treemapFilterSelector } from './selectors';
@@ -135,7 +136,7 @@ const TreemapContainer = (props: StateProps & TranslateProps) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   accounting_is_running: treemapFilterSelector(state, 'accounting_is_running'),
   quota: treemapFilterSelector(state, 'quota'),
 });

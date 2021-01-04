@@ -12,6 +12,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 
 import { CreateScreenshotButton } from './CreateScreenshotButton';
 import { OfferingScreenshotsList } from './OfferingScreenshotsList';
@@ -50,7 +51,9 @@ export const ScreenshotsContainer: FunctionComponent = () => {
     }
   }, [dispatch, offering_uuid]);
 
-  const offering = useSelector((state) => getOffering(state).offering);
+  const offering = useSelector(
+    (state: RootState) => getOffering(state).offering,
+  );
 
   useBreadcrumbsFn(() => (offering ? getBreadcrumbs(offering) : []), [
     offering,

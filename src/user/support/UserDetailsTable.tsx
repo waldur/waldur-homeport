@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import {
   formatRegistrationMethod,
   formatUserStatus,
@@ -85,7 +86,7 @@ const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
   </Table>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   userLanguageIsVisible: userLanguageIsVisible(state),
   userCompetenceIsVisible: userCompetenceIsVisible(state),
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),

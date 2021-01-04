@@ -10,6 +10,7 @@ import {
   SidebarMenuProps,
 } from '@waldur/navigation/sidebar/types';
 import { filterItems, mergeItems } from '@waldur/navigation/sidebar/utils';
+import { RootState } from '@waldur/store/reducers';
 import store from '@waldur/store/store';
 import {
   getCustomer,
@@ -18,7 +19,6 @@ import {
   isOwnerOrStaff,
 } from '@waldur/workspace/selectors';
 import {
-  OuterState,
   ORGANIZATION_WORKSPACE,
   PROJECT_WORKSPACE,
   USER_WORKSPACE,
@@ -62,7 +62,7 @@ function getNavItems(user, customer, project) {
 
 export const UserSidebar: FunctionComponent = () => {
   const workspaceUser = useSelector(
-    (state: OuterState) => state.workspace?.user,
+    (state: RootState) => state.workspace?.user,
   );
   const currentUser = useSelector(getUser);
   const currentCustomer = useSelector(getCustomer);

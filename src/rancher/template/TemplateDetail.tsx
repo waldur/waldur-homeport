@@ -13,6 +13,7 @@ import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { useTitle } from '@waldur/navigation/title';
 import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
 import { showError, showSuccess } from '@waldur/store/notify';
+import { RootState } from '@waldur/store/reducers';
 
 import { createApp } from '../api';
 
@@ -46,13 +47,13 @@ export const TemplateDetail: FunctionComponent = () => {
     state.value ? state.value.template.name : translate('Template details'),
   );
 
-  const project = useSelector((state) =>
+  const project = useSelector((state: RootState) =>
     formValueSelector(FORM_ID)(state, 'project'),
   );
 
   const namespaces = useMemo(() => project?.namespaces || [], [project]);
 
-  const answers = useSelector((state) =>
+  const answers = useSelector((state: RootState) =>
     formValueSelector(FORM_ID)(state, 'answers'),
   );
 

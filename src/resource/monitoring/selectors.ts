@@ -1,4 +1,7 @@
 import { isVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 
-export const getMonitoringState = (state) => state.resource.monitoring;
-export const monitoringIsVisible = (state) => isVisible(state, 'monitoring');
+export const getMonitoringState = (state: RootState) =>
+  state.resource.monitoring;
+export const monitoringIsVisible = (state: RootState) =>
+  isVisible(state, 'monitoring');

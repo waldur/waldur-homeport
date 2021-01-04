@@ -1,3 +1,4 @@
+import { RootState } from '@waldur/store/reducers';
 import {
   ordinaryUser,
   staffUser,
@@ -6,14 +7,15 @@ import {
 
 import { userManageIsVisible, isVisibleForSupportOrStaff } from './selectors';
 
-const createState = (user) => ({
-  workspace: {
-    user,
-  },
-  config: {
-    featuresVisible: true,
-  },
-});
+const createState = (user) =>
+  (({
+    workspace: {
+      user,
+    },
+    config: {
+      featuresVisible: true,
+    },
+  } as unknown) as RootState);
 
 describe('UserDetailsView', () => {
   it('should conceal "Manage" tab for support user', () => {

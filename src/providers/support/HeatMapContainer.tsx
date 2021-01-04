@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { setTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 
 import { fetchServiceUsageStart } from './actions';
 import { FlowMapFilter } from './FlowMapFilter';
@@ -37,7 +38,7 @@ class HeatMapComponent extends Component<HeatMapComponentProps> {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   serviceUsage: selectServiceUsage(state),
   countriesToRender: selectCountriesToRender(state),
 });

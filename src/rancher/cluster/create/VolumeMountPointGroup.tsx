@@ -5,6 +5,7 @@ import { Field, change, formValueSelector } from 'redux-form';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { RootState } from '@waldur/store/reducers';
 
 import { getMinSize } from './getMinSize';
 import { SimpleSelectField } from './SimpleSelectField';
@@ -39,7 +40,8 @@ const getSizeField = (nodeIndex, volumeIndex) => {
 const useMinimalSize = (form, nodeIndex, volumeIndex) => {
   const sizeField = getSizeField(nodeIndex, volumeIndex);
   const dispatch = useDispatch();
-  const getSize = (state) => formValueSelector(form)(state, sizeField);
+  const getSize = (state: RootState) =>
+    formValueSelector(form)(state, sizeField);
 
   const volumeSize = useSelector(getSize);
 

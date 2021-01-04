@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { OrderItemRequest, OuterState } from '@waldur/marketplace/cart/types';
+import { OrderItemRequest } from '@waldur/marketplace/cart/types';
+import { RootState } from '@waldur/store/reducers';
 
 import { ShoppingCartButton } from './ShoppingCartButton';
 import { addItemRequest } from './store/actions';
@@ -17,7 +18,7 @@ interface DispatchProps {
   onBtnClick(): void;
 }
 
-const mapStateToProps = (state: OuterState, ownProps: OwnProps) => ({
+const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
   disabled: ownProps.disabled || isAddingItem(state),
   isAddingItem: isAddingItem(state),
 });

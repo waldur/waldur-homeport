@@ -1,44 +1,33 @@
-import { Component } from 'react';
+import { FC } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { compose } from 'redux';
 import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
-interface Option {
-  value: string;
-  label: string;
-}
+type StateProps = ReturnType<typeof mapStateToProps>;
 
-interface StateProps {
-  orderFilterStateOptions: Option[];
-}
-
-type Props = StateProps;
-class PureOrderStateFilter extends Component<Props> {
-  render() {
-    return (
-      <div className="form-group col-sm-3">
-        <label className="control-label">{translate('State')}</label>
-        <Field
-          name="state"
-          component={(fieldProps) => (
-            <Select
-              placeholder={translate('Select state...')}
-              options={this.props.orderFilterStateOptions}
-              value={fieldProps.input.value}
-              onChange={(value) => fieldProps.input.onChange(value)}
-              isClearable={true}
-            />
-          )}
+const PureOrderStateFilter: FC<StateProps> = (props) => (
+  <div className="form-group col-sm-3">
+    <label className="control-label">{translate('State')}</label>
+    <Field
+      name="state"
+      component={(fieldProps) => (
+        <Select
+          placeholder={translate('Select state...')}
+          options={props.orderFilterStateOptions}
+          value={fieldProps.input.value}
+          onChange={(value) => fieldProps.input.onChange(value)}
+          isClearable={true}
         />
-      </div>
-    );
-  }
-}
+      )}
+    />
+  </div>
+);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return {
     orderFilterStateOptions: state.marketplace.orders.tableFilter.stateOptions,
   };

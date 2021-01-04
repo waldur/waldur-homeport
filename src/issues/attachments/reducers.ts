@@ -1,9 +1,9 @@
 import { Action } from '@waldur/core/reducerActions';
 
 import * as constants from './constants';
-import { Payload, State } from './types';
+import { Payload, IssuesState } from './types';
 
-const INITIAL_STATE: State = {
+const INITIAL_STATE: IssuesState = {
   loading: false,
   errors: [],
   items: [],
@@ -13,9 +13,9 @@ const INITIAL_STATE: State = {
 };
 
 export const reducer = (
-  state: State = INITIAL_STATE,
+  state: IssuesState = INITIAL_STATE,
   action: Action<Payload>,
-) => {
+): IssuesState => {
   const { type, payload } = action;
   switch (type) {
     case constants.ISSUE_ATTACHMENTS_GET:
