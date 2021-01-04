@@ -20,7 +20,7 @@ export const RequestedEmail: FunctionComponent<RequestedEmailProps> = (
       label={translate('Requested email')}
       value={props.requestedEmail}
     />
-    <label className="col-sm-3 col-md-4 col-lg-3">{translate('')}</label>
+    <label className="col-sm-3 col-md-4 col-lg-3" />
     <div className="col-sm-9 col-md-8">
       <Button id="cancel-request-btn" onClick={props.onCancelRequest}>
         {props.waiting && (
