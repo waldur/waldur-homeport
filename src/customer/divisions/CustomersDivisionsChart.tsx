@@ -13,10 +13,11 @@ import {
   getAllOrganizationDivisions,
   getCustomersDivisionUuids,
 } from '@waldur/marketplace/common/api';
+import { RootState } from '@waldur/store/reducers';
 
 const growthFilterFormSelector = formValueSelector(CUSTOMERS_DIVISIONS_FORM_ID);
 
-const getAccountingRunningFieldValue = (state) =>
+const getAccountingRunningFieldValue = (state: RootState) =>
   growthFilterFormSelector(state, 'accounting_is_running');
 
 const loadData = (accounting_is_running: boolean) =>

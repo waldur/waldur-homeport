@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
+import { RootState } from '@waldur/store/reducers';
 
 import { PlanAddButton } from './PlanAddButton';
 import { PlanPanel } from './PlanPanel';
@@ -33,7 +34,7 @@ const PlansListComponent: FunctionComponent<any> = (props) => (
   </div>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   selectedProvider: state.form.marketplaceOfferingCreate.values.type,
 });
 

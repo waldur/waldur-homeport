@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 
 interface ExternalLink {
   label: string;
@@ -30,7 +31,7 @@ const ExternalLinksComponent = (props: Props) =>
     </DropdownButton>
   );
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   const externalLinks = getConfig(state).externalLinks;
   return {
     externalLinks,

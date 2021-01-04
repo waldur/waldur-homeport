@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
 import { getEventsList } from '@waldur/events/BaseEventsList';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
 
 export const PureCustomerPermissionsLogList = getEventsList({
   mapPropsToFilter: (props) => ({
@@ -11,7 +11,7 @@ export const PureCustomerPermissionsLogList = getEventsList({
   }),
 });
 
-const enhance = connect((state: OuterState) => ({
+const enhance = connect((state: RootState) => ({
   customer: getCustomer(state),
 }));
 

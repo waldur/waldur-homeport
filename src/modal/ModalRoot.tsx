@@ -6,6 +6,7 @@ import { isDirty } from 'redux-form';
 
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import { closeModalDialog } from './actions';
 
@@ -22,9 +23,9 @@ export const ModalRoot: FunctionComponent = () => {
       modal: TState;
     },
     TState
-  >((state) => state.modal);
+  >((state: RootState) => state.modal);
   const dispatch = useDispatch();
-  const isDirtyForm = useSelector((state) =>
+  const isDirtyForm = useSelector((state: RootState) =>
     modalProps?.formId ? isDirty(modalProps.formId)(state) : false,
   );
   const onHide = () => {

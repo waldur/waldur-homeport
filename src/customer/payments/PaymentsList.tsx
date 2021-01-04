@@ -10,6 +10,7 @@ import { PaymentProofRenderer } from '@waldur/customer/payments/PaymentProofRend
 import { translate } from '@waldur/i18n';
 import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
 import { openModalDialog } from '@waldur/modal/actions';
+import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
@@ -109,7 +110,7 @@ const TableOptions = {
   }),
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   isStaff: isStaff(state),
   isSupport: isSupport(state),

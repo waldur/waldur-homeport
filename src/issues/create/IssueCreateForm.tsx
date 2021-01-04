@@ -21,6 +21,7 @@ import {
   ResourceGroup,
 } from '@waldur/issues/create/IssueQuickCreate';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { IssueTemplate, IssueTemplateAttachment } from '../api';
@@ -44,7 +45,7 @@ interface OwnProps {
   initialValues: any;
 }
 
-export const issueCreateProjectSelector = (state) =>
+export const issueCreateProjectSelector = (state: RootState) =>
   formValueSelector(ISSUE_CREATION_FORM_ID)(state, 'project');
 
 const mapStateToProps = (_, ownProps: OwnProps) => {

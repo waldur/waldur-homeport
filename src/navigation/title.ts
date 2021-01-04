@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { takeEvery } from 'redux-saga/effects';
 
 import { ENV } from '@waldur/configs/default';
+import { RootState } from '@waldur/store/reducers';
 
 export const SET_TITLE = 'waldur/navigation/SET_TITLE';
 
@@ -36,9 +37,9 @@ export function* effects() {
   });
 }
 
-export const getTitle = (state) => state.title;
+export const getTitle = (state: RootState) => state.title;
 
-export const useTitle = (title) => {
+export const useTitle = (title: string) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!title) {

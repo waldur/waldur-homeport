@@ -5,6 +5,7 @@ import { isEmpty } from '@waldur/core/utils';
 import { getEventsList } from '@waldur/events/BaseEventsList';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerEventsFilter } from './CustomerEventsFilter';
@@ -22,7 +23,7 @@ export const PureCustomerEvents = getEventsList({
   },
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   userFilter: getFormValues('customerEventsFilter')(state),
 });

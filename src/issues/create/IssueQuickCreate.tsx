@@ -9,6 +9,7 @@ import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { getList } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { BaseResource } from '@waldur/resource/types';
+import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -26,9 +27,9 @@ export const ISSUE_QUICK_CREATE_FORM_ID = 'IssueQuickCreate';
 
 const formSelector = formValueSelector(ISSUE_QUICK_CREATE_FORM_ID);
 
-const projectSelector = (state) => formSelector(state, 'project');
+const projectSelector = (state: RootState) => formSelector(state, 'project');
 
-const customerSelector = (state) => formSelector(state, 'customer');
+const customerSelector = (state: RootState) => formSelector(state, 'customer');
 
 const refreshCustomers = async (name: string) => {
   const params: Record<string, string> = {};

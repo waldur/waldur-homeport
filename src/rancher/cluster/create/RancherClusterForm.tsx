@@ -19,13 +19,14 @@ import { PlanField } from '@waldur/marketplace/details/plan/PlanField';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import { loadSshKeysOptions } from '@waldur/openstack/api';
+import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { TenantGroup } from './TenantGroup';
 import { TenantSelector } from './TenantSelector';
 import { rancherClusterName } from './utils';
 
-const getTenant = (state) =>
+const getTenant = (state: RootState) =>
   formValueSelector(FORM_ID)(state, 'attributes.tenant_settings');
 
 export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (

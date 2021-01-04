@@ -6,8 +6,8 @@ import { removeOfferingScreenshot } from '@waldur/marketplace/offerings/store/ac
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { Offering, Screenshot } from '@waldur/marketplace/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
 
 const openDialog = async (
   dispatch,
@@ -26,7 +26,7 @@ const openDialog = async (
   dispatch(removeOfferingScreenshot(offering, screenshot));
 };
 
-const mapStateToProps = (state: OuterState) => ({
+const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
   offering: getOffering(state).offering,
 });

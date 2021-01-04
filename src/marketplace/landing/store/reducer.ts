@@ -1,3 +1,5 @@
+import { Category, Offering } from '@waldur/marketplace/types';
+
 import * as constants from './constants';
 
 const INITIAL_STATE = {
@@ -13,7 +15,23 @@ const INITIAL_STATE = {
   },
 };
 
-export const landingReducer = (state = INITIAL_STATE, action) => {
+interface LandingState {
+  categories: {
+    items: Category[];
+    loading: boolean;
+    loaded: boolean;
+  };
+  offerings: {
+    items: Offering[];
+    loading: boolean;
+    loaded: boolean;
+  };
+}
+
+export const landingReducer = (
+  state: LandingState = INITIAL_STATE,
+  action,
+): LandingState => {
   const { type, payload } = action;
   switch (type) {
     case constants.CATEGORIES_FETCH_START:

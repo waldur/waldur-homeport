@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate, withTranslation } from '@waldur/i18n/translate';
 import { isVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { selectTableRows } from '@waldur/table/selectors';
 
@@ -55,18 +56,18 @@ export function connectTable(options: TableOptionsType) {
         toggleRow: (row: any) => dispatch(actions.toggleRow(table, row)),
       });
 
-      const filterByFeature = (state) => (columns) =>
+      const filterByFeature = (state: RootState) => (columns) =>
         columns.filter(
           (column) => !column.feature || isVisible(state, column.feature),
         );
 
-      const filterColumns = (state) => (columns) => {
+      const filterColumns = (state: RootState) => (columns) => {
         return filterByFeature(state)(columns).filter(
           (column) => column.visible === undefined || column.visible === true,
         );
       };
 
-      const mapStateToProps = (state) => ({
+      const mapStateToProps = (state: RootState) => ({
         filterColumns: filterColumns(state),
         ...getTableState(table)(state),
         rows: selectTableRows(state, table),

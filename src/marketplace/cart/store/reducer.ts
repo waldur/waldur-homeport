@@ -1,8 +1,8 @@
-import { State } from '../types';
+import { CartState } from '../types';
 
 import * as constants from './constants';
 
-const INITIAL_STATE: State = {
+const INITIAL_STATE: CartState = {
   items: [],
   addingItem: false,
   removingItem: false,
@@ -10,7 +10,7 @@ const INITIAL_STATE: State = {
   creatingOrder: false,
 };
 
-export const cartReducer = (state = INITIAL_STATE, action) => {
+export const cartReducer = (state = INITIAL_STATE, action): CartState => {
   const { type, payload } = action;
   switch (type) {
     case constants.ADD_ITEM_REQUEST:

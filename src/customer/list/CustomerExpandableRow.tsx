@@ -7,11 +7,12 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { AgreementInfo } from '@waldur/invoices/list/AgreementInfo';
 import { InvoicesStatsList } from '@waldur/invoices/list/InvoicesStatsList';
+import { RootState } from '@waldur/store/reducers';
 
 import { getInvoice } from './api';
 
 export const CustomerExpandableRow = memo((props: any) => {
-  const accountingPeriod = useSelector((state) =>
+  const accountingPeriod = useSelector((state: RootState) =>
     formValueSelector('customerListFilter')(state, 'accounting_period'),
   );
   const { loading, error, value } = useAsync(

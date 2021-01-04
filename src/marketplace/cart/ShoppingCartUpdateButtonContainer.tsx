@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { isUpdatingItem } from '@waldur/marketplace/cart/store/selectors';
-import { OuterState } from '@waldur/marketplace/cart/types';
+import { RootState } from '@waldur/store/reducers';
 
 import { OrderItemResponse } from '../orders/types';
 
@@ -19,7 +19,7 @@ interface DispatchProps {
   updateItem(): void;
 }
 
-const mapStateToProps = (state: OuterState, ownProps: OwnProps) => ({
+const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
   disabled: ownProps.disabled || isUpdatingItem(state),
 });
 

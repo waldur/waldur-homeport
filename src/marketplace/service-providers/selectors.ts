@@ -1,11 +1,13 @@
 import { createSelector } from 'reselect';
 
 import { isVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import { isStaff, isOwner } from '@waldur/workspace/selectors';
 
-const serviceProviderIsVisible = (state) => isVisible(state, 'marketplace');
+const serviceProviderIsVisible = (state: RootState) =>
+  isVisible(state, 'marketplace');
 
-const ownerCanRegisterServiceProvider = (state: any): boolean =>
+const ownerCanRegisterServiceProvider = (state: RootState): boolean =>
   state.config.plugins.WALDUR_MARKETPLACE.OWNER_CAN_REGISTER_SERVICE_PROVIDER;
 
 export const renderServiceProvider = createSelector(

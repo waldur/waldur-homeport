@@ -10,7 +10,7 @@ export interface Attachment {
   uuid: string;
 }
 
-export interface State {
+export interface IssuesState {
   loading: boolean;
   errors: any[];
   items: Attachment[];

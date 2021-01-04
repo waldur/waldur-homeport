@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
@@ -114,7 +115,7 @@ const TableOptions = {
   mapPropsToFilter,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   usageFilter: getFormValues(FORM_ID)(state),
 });
 

@@ -1,15 +1,15 @@
 import { createSelector } from 'reselect';
 
+import { RootState } from '@waldur/store/reducers';
 import {
   isStaff,
   getUserCustomerPermissions,
 } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
 
-export const canManageCustomer = (state: any): boolean =>
+export const canManageCustomer = (state: RootState): boolean =>
   state.config.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER;
 
-export const canCreateOrganization = (state: OuterState): boolean =>
+export const canCreateOrganization = (state: RootState): boolean =>
   isStaff(state) || canManageCustomer(state);
 
 export const renderCustomerCreatePrompt = createSelector(

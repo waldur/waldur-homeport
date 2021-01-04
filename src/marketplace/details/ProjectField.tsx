@@ -1,33 +1,35 @@
+import { FC } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
+import { RootState } from '@waldur/store/reducers';
 import { getWorkspace, getCustomer } from '@waldur/workspace/selectors';
-import {
-  Project,
-  OuterState,
-  ORGANIZATION_WORKSPACE,
-} from '@waldur/workspace/types';
+import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 import { FormGroup } from '../offerings/FormGroup';
 
 import { ProjectSelectField } from './ProjectSelectField';
 
-const connector = connect<{ projects?: Project[] }, {}, {}, OuterState>(
-  (state) => {
-    const workspace = getWorkspace(state);
-    const customer = getCustomer(state);
-    if (workspace === ORGANIZATION_WORKSPACE) {
-      return {
-        projects: customer.projects,
-      };
-    } else {
-      return {};
-    }
-  },
-);
+const mapStateToProps = (state: RootState) => {
+  const workspace = getWorkspace(state);
+  const customer = getCustomer(state);
+  if (workspace === ORGANIZATION_WORKSPACE) {
+    return {
+      projects: customer.projects,
+    };
+  } else {
+    return {};
+  }
+};
 
-const PureProjectField = (props) =>
+const connector = connect(mapStateToProps);
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+type OwnProps = { previewMode?: boolean };
+
+const PureProjectField: FC<StateProps & OwnProps> = (props) =>
   props.projects ? (
     <FormGroup
       labelClassName="control-label col-sm-3"

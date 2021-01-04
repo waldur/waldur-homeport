@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { isCustomerQuotaReached } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n/translate';
+import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
 
@@ -18,7 +19,7 @@ const PureProjectCreateButton: FunctionComponent<any> = (props) => (
   />
 );
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   const ownerOrStaff = isOwnerOrStaff(state);
   const customer = getCustomer(state);
 

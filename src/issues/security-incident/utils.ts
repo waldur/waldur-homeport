@@ -3,6 +3,7 @@ import { formValueSelector } from 'redux-form';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { REPORT_SECURITY_INCIDENT_FORM_ID } from '@waldur/issues/security-incident/constants';
+import { RootState } from '@waldur/store/reducers';
 
 const SECURITY_INCIDENT_TYPES: string[] = [
   'Phishing',
@@ -18,7 +19,7 @@ export const getSecurityIncidentTypeOptions = () =>
     value: type,
   }));
 
-export const reportSecurityIncidentProjectSelector = (state) =>
+export const reportSecurityIncidentProjectSelector = (state: RootState) =>
   formValueSelector(REPORT_SECURITY_INCIDENT_FORM_ID)(state, 'project');
 
 export const formatDescriptionField = (

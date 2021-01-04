@@ -12,7 +12,7 @@ export const CreateOrganizationButton: FunctionComponent = () => {
   return (
     <a
       className="pull-right btn btn-sm btn-default"
-      onClick={onClick}
+      onClick={onClick as any}
       id="add-new-organization"
     >
       <i className="fa fa-plus" /> {translate('Add new')}{' '}

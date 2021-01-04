@@ -1,10 +1,19 @@
+import { Offering } from '@waldur/marketplace/types';
+
 import * as constants from './constants';
 
-const INITIAL_STATE = {
+interface ComparisonState {
+  items: Offering[];
+}
+
+const INITIAL_STATE: ComparisonState = {
   items: [],
 };
 
-export const comparisonReducer = (state = INITIAL_STATE, action) => {
+export const comparisonReducer = (
+  state = INITIAL_STATE,
+  action,
+): ComparisonState => {
   const { type, payload } = action;
   switch (type) {
     case constants.ADD_ITEM:

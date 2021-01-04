@@ -114,13 +114,9 @@ export type WorkspaceType =
   | typeof PROJECT_WORKSPACE
   | typeof USER_WORKSPACE;
 
-export interface Workspace {
+export interface WorkspaceState {
   user: User;
   customer?: Customer;
   project?: Project;
   workspace?: WorkspaceType;
-}
-
-export interface OuterState {
-  workspace: Workspace;
 }

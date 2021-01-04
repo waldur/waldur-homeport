@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { createSelector } from 'reselect';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { isStaff } from '@waldur/workspace/selectors';
 
@@ -17,7 +18,6 @@ import {
   getItems,
   isCreatingOrder,
 } from './store/selectors';
-import { OuterState } from './types';
 
 interface ForwardButtonComponentProps extends TranslateProps {
   createOrder(): void;
@@ -73,7 +73,7 @@ const orderCanBeAutoapproved = createSelector(
   (staff, isPrivate, permissions) => staff || isPrivate || permissions,
 );
 
-const mapStateToProps = (state: OuterState) => ({
+const mapStateToProps = (state: RootState) => ({
   items: getItems(state),
   disabled: isCreatingOrder(state) || !allTermsOfServiceAgreed(state),
   orderCanBeApproved: orderCanBeAutoapproved(state),

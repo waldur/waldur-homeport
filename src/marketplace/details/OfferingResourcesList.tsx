@@ -15,6 +15,7 @@ import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceS
 import { ResourceState } from '@waldur/marketplace/resources/types';
 import { ResourceUsageButton } from '@waldur/marketplace/resources/usage/ResourceUsageButton';
 import { Offering } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 interface OfferingResourceFilter {
@@ -113,7 +114,7 @@ export const TableOptions = {
   queryField: 'query',
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   filter: getFormValues(FILTER_OFFERING_RESOURCE)(state),
 });
 

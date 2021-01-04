@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { isStaff, isOwner } from '@waldur/workspace/selectors';
 
 import { canManageCustomer } from '../create/selectors';
@@ -10,7 +11,7 @@ import { canManageCustomer } from '../create/selectors';
 import { CustomerLogoUpdate } from './CustomerLogoUpdate';
 import * as actions from './store/actions';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   formData: getFormValues('customerLogo')(state),
   canEdit: isStaff(state) || (isOwner(state) && canManageCustomer(state)),
 });

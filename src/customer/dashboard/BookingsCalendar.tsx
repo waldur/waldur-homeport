@@ -12,12 +12,14 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { orderByFilter } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import {
   selectTablePagination,
   selectTableSorting,
 } from '@waldur/table/selectors';
 
-const bookingsFilterStateSelector = (state) => bookingFormSelector(state).state;
+const bookingsFilterStateSelector = (state: RootState) =>
+  bookingFormSelector(state).state;
 
 export const getCalendarEvent = (bookingItem, event) => ({
   ...event,
@@ -81,13 +83,14 @@ export const BookingsCalendar = ({
 }: BookingsCalendarProps) => {
   const bookingsFilterState = useSelector(bookingsFilterStateSelector);
   const bookingsListCurrentPage = useSelector(
-    (state) =>
+    (state: RootState) =>
       selectTablePagination(state, BOOKING_RESOURCES_TABLE)?.currentPage,
   );
   const bookingsListPageSize = useSelector(
-    (state) => selectTablePagination(state, BOOKING_RESOURCES_TABLE)?.pageSize,
+    (state: RootState) =>
+      selectTablePagination(state, BOOKING_RESOURCES_TABLE)?.pageSize,
   );
-  const bookingsListSorting = useSelector((state) =>
+  const bookingsListSorting = useSelector((state: RootState) =>
     selectTableSorting(state, BOOKING_RESOURCES_TABLE),
   );
 

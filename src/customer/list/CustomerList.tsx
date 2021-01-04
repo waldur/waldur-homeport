@@ -7,6 +7,7 @@ import { ENV } from '@waldur/configs/default';
 import { formatDate } from '@waldur/core/dateUtils';
 import { withTranslation, translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
@@ -176,7 +177,7 @@ const TableOptions = {
   exportFields,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customerListFilter: getFormValues('customerListFilter')(state),
 });
 

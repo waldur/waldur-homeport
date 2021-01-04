@@ -4,6 +4,7 @@ import { compose } from 'redux';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 type AccountingMode = 'billing' | 'accounting';
 
@@ -47,7 +48,7 @@ class PurePriceTooltip extends PureComponent<Props> {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   accountingMode: state.config.accountingMode,
 });
 

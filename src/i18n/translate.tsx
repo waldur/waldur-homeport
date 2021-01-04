@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 
+import { RootState } from '@waldur/store/reducers';
+
 import { LanguageUtilsService } from './LanguageUtilsService';
 import { Translate, TranslateProps } from './types';
 
@@ -12,7 +14,7 @@ const translateFilter = (template) =>
 export const translate: Translate = (template, context) =>
   formatTemplate(translateFilter(template), context);
 
-export const getLocale = (state) => ({
+export const getLocale = (state: RootState) => ({
   locale: state.locale,
   translate,
 });

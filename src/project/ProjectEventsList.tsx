@@ -4,6 +4,7 @@ import { getFormValues } from 'redux-form';
 
 import { isEmpty } from '@waldur/core/utils';
 import { getEventsList } from '@waldur/events/BaseEventsList';
+import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectEventsFilter } from './ProjectEventsFilter';
@@ -23,7 +24,7 @@ export const PureProjectEvents = getEventsList({
   },
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   userFilter: getFormValues('projectEventsFilter')(state),
   project: getProject(state),
 });

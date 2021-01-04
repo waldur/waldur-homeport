@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { PlanUsageButton } from './PlanUsageButton';
@@ -90,7 +91,7 @@ const TableOptions = {
   ],
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   filter: getFormValues('PlanUsageFilter')(state),
 });
 

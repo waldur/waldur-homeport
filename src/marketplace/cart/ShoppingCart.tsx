@@ -6,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { showPriceSelector } from '@waldur/invoices/details/utils';
 import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { OrderItemResponse } from '@waldur/marketplace/orders/types';
+import { RootState } from '@waldur/store/reducers';
 
 import { BillingPeriod as BillingPeriodType } from '../types';
 
@@ -19,7 +20,6 @@ import {
   isRemovingItem,
   getTermsOfServiceIsVisible,
 } from './store/selectors';
-import { OuterState } from './types';
 
 interface ShoppingCartProps {
   items: OrderItemResponse[];
@@ -74,7 +74,7 @@ const PureShoppingCart = (props: ShoppingCartProps) => {
   );
 };
 
-const mapStateToProps = (state: OuterState) => ({
+const mapStateToProps = (state: RootState) => ({
   items: getItems(state),
   maxUnit: getMaxUnitSelector(state),
   isRemovingItem: isRemovingItem(state),

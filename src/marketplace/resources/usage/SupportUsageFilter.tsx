@@ -11,6 +11,7 @@ import { AccountingPeriodOption } from '@waldur/customer/list/types';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
+import { RootState } from '@waldur/store/reducers';
 import { Customer, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
 const makeAccountingPeriods = () => {
@@ -50,7 +51,7 @@ export const FORM_ID = 'SupportUsageFilter';
 const selector = formValueSelector(FORM_ID);
 
 const mapStateToProps = createSelector(
-  (state) => selector(state, ORGANIZATION_WORKSPACE),
+  (state: RootState) => selector(state, ORGANIZATION_WORKSPACE),
   (customer) => ({
     customer,
     options: makeAccountingPeriods(),

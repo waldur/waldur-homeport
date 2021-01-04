@@ -19,6 +19,7 @@ import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { RootState } from '@waldur/store/reducers';
 import {
   ORGANIZATION_ROUTE,
   PROJECT_ROUTE,
@@ -136,7 +137,8 @@ const SelectAffiliationDialogContainer = (props) => {
 };
 
 const selector = formValueSelector(SELECT_AFFILIATION_FORM_ID);
-const mapStateToProps = (state) => ({
+
+const mapStateToProps = (state: RootState) => ({
   affiliationValue: selector(state, 'affiliation'),
 });
 

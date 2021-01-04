@@ -5,6 +5,7 @@ import { DownloadLink } from '@waldur/core/DownloadLink';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -64,7 +65,7 @@ export const PureShoppingCartSidebar: FunctionComponent<ShoppingCartSidebarProps
     </aside>
   ) : null;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   project: getProject(state),
   total: getTotal(state),

@@ -8,6 +8,7 @@ import { required } from '@waldur/core/validators';
 import { StringField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import { HookTypeField } from './HookTypeField';
 import { MultiSelectField } from './MultiSelectField';
@@ -21,7 +22,9 @@ interface OwnProps {
 const selector = formValueSelector('HookForm');
 
 export const HookForm: React.FC<OwnProps> = ({ isNew, eventGroups }) => {
-  const hookType = useSelector((state) => selector(state, 'hook_type'));
+  const hookType = useSelector((state: RootState) =>
+    selector(state, 'hook_type'),
+  );
   return (
     <>
       {isNew ? (

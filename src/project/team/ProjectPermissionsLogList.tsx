@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
 import { getEventsList } from '@waldur/events/BaseEventsList';
+import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
 
 const EVENT_TYPES = ['role_granted', 'role_revoked', 'role_updated'];
 
@@ -16,7 +16,7 @@ export const PureProjectPermissionsLogList = getEventsList({
       : { event_type: EVENT_TYPES },
 });
 
-const enhance = connect((state: OuterState) => ({
+const enhance = connect((state: RootState) => ({
   project: getProject(state),
 }));
 

@@ -9,6 +9,7 @@ import { getIsLoading as getAttachmentsIsLoading } from '@waldur/issues/attachme
 import { issueCommentsGet } from '@waldur/issues/comments/actions';
 import { getIsLoading as getCommentsIsLoading } from '@waldur/issues/comments/selectors';
 import './IssueReload.scss';
+import { RootState } from '@waldur/store/reducers';
 
 interface PureIssueReloadProps extends TranslateProps {
   issueUrl: string;
@@ -30,7 +31,7 @@ export const PureIssueReload: FunctionComponent<PureIssueReloadProps> = (
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   loading: getAttachmentsIsLoading(state) || getCommentsIsLoading(state),
 });
 

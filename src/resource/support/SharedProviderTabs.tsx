@@ -3,6 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import { SharedProviderCustomers } from './SharedProviderCustomers';
 import { providerSelector } from './SharedProviderFilter';
@@ -32,7 +33,7 @@ const SharedProviderTabs: FunctionComponent<{ provider }> = ({ provider }) =>
     </div>
   ) : null;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   provider: providerSelector(state),
 });
 

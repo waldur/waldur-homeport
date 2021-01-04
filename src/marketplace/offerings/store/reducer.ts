@@ -1,17 +1,35 @@
+import { Category, Offering } from '@waldur/marketplace/types';
+
+import { OfferingStep } from '../types';
+
 import * as constants from './constants';
 
-const INITIAL_STATE = {
+interface OfferingState {
+  step: OfferingStep;
+  loading: boolean;
+  loaded: boolean;
+  erred: boolean;
+  categories: Category[];
+  offering: Offering;
+  plugins: any;
+  isAddingScreenshot: boolean;
+}
+
+const INITIAL_STATE: OfferingState = {
   step: 'Overview',
   loading: true,
   loaded: false,
   erred: false,
   categories: [],
   plugins: {},
-  offering: {},
+  offering: {} as Offering,
   isAddingScreenshot: false,
 };
 
-export const offeringReducer = (state = INITIAL_STATE, action) => {
+export const offeringReducer = (
+  state = INITIAL_STATE,
+  action,
+): OfferingState => {
   const { type, payload } = action;
   switch (type) {
     case constants.SET_STEP:

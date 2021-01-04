@@ -11,6 +11,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { createHPA, listWorkloads, listNamespaces } from '@waldur/rancher/api';
 import { Resource } from '@waldur/resource/types';
 import { showError, showSuccess } from '@waldur/store/notify';
+import { RootState } from '@waldur/store/reducers';
 import { createEntity } from '@waldur/table/actions';
 
 import { MetricOption, HPACreateFormData } from './types';
@@ -66,7 +67,8 @@ const useHPACreateDialog = (cluster) => {
   };
 };
 
-const getNamespace = (state) => formValueSelector(FORM_ID)(state, 'namespace');
+const getNamespace = (state: RootState) =>
+  formValueSelector(FORM_ID)(state, 'namespace');
 
 export const HPACreateDialog = reduxForm<{}, OwnProps>({
   form: FORM_ID,

@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 import { getCustomer } from '@waldur/workspace/selectors';
-import { Customer, OuterState } from '@waldur/workspace/types';
+import { Customer } from '@waldur/workspace/types';
 
 const TwoDocumentsIllustration: string = require('@waldur/images/table-placeholders/undraw_no_data_qbuo.svg');
 
@@ -36,6 +37,6 @@ const PureOfferingsListTablePlaceholder = ({
   />
 );
 
-export const OfferingsListTablePlaceholder = connect((state: OuterState) => ({
+export const OfferingsListTablePlaceholder = connect((state: RootState) => ({
   customer: getCustomer(state),
 }))(PureOfferingsListTablePlaceholder);

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { customerCreateDialog } from '@waldur/customer/create/actions';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { getConfig } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
@@ -11,7 +12,8 @@ export const useCreateOrganization = () => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const ownerCanManage = useSelector(
-    (state) => getConfig(state).plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER,
+    (state: RootState) =>
+      getConfig(state).plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER,
   );
   const canCreateOrganization = user.is_staff || ownerCanManage;
   const createOrganization = () => {

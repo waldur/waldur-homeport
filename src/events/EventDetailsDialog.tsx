@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { RootState } from '@waldur/store/reducers';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { EventDetailsTable } from './EventDetailsTable';
@@ -31,7 +32,7 @@ const PureEventDetailsDialog: FunctionComponent<Props> = (props) => (
   </ModalDialog>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   isStaffOrSupport: isStaffOrSupport(state),
 });
 

@@ -4,12 +4,13 @@ import {
   PROJECT_ADMIN_ROLE,
   PROJECT_MANAGER_ROLE,
 } from '@waldur/core/constants';
+import { RootState } from '@waldur/store/reducers';
 
-import { User, Customer, Project, OuterState, WorkspaceType } from './types';
+import { User, Customer, Project, WorkspaceType } from './types';
 
-export const getUser = (state: OuterState): User => state.workspace.user;
+export const getUser = (state: RootState): User => state.workspace.user;
 
-export const getCustomer = (state: OuterState): Customer =>
+export const getCustomer = (state: RootState): Customer =>
   state.workspace.customer;
 
 export const getUserCustomerPermissions = createSelector(
@@ -32,25 +33,25 @@ export const getUserProjectPermissions = createSelector(
   },
 );
 
-export const getProject = (state: OuterState): Project =>
+export const getProject = (state: RootState): Project =>
   state.workspace.project;
 
-export const getWorkspace = (state: OuterState): WorkspaceType =>
+export const getWorkspace = (state: RootState): WorkspaceType =>
   state.workspace.workspace;
 
-export const isStaff = (state: OuterState): boolean =>
+export const isStaff = (state: RootState): boolean =>
   getUser(state) && getUser(state).is_staff;
 
-export const isSupport = (state: OuterState): boolean =>
+export const isSupport = (state: RootState): boolean =>
   getUser(state) && getUser(state).is_support;
 
-export const isSupportOnly = (state: OuterState): boolean =>
+export const isSupportOnly = (state: RootState): boolean =>
   isSupport(state) &&
   !isStaff(state) &&
   !checkIsOwner(state.workspace.customer, state.workspace.user) &&
   !checkIsServiceManager(state.workspace.customer, state.workspace.user);
 
-export const isStaffOrSupport = (state: OuterState): boolean =>
+export const isStaffOrSupport = (state: RootState): boolean =>
   isStaff(state) || isSupport(state);
 
 export const checkIsOwner = (customer: Customer, user: User): boolean =>
@@ -139,6 +140,6 @@ export const isAdmin = createSelector(
   },
 );
 
-export const filterByUser = (state: OuterState) => ({
+export const filterByUser = (state: RootState) => ({
   user_url: getUser(state)?.url,
 });

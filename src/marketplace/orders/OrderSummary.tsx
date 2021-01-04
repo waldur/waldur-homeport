@@ -2,22 +2,19 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
-import { Customer, Project } from '@waldur/workspace/types';
 
 import { PureShoppingCartSidebar } from '../cart/ShoppingCartSidebar';
 
-interface StateProps {
-  customer: Customer;
-  project: Project;
-}
+type StateProps = ReturnType<typeof mapStateToProps>;
 
 interface OwnProps {
   total: number;
   file?: string;
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   project: getProject(state),
 });

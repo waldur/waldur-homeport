@@ -38,6 +38,7 @@ import {
   validateOpenstackInstanceName,
 } from '@waldur/openstack/openstack-instance/utils';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
+import { RootState } from '@waldur/store/reducers';
 import { User } from '@waldur/workspace/types';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
@@ -321,7 +322,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   currentUser: getUser(state),
   image: offeringSelector(state, 'attributes.image'),
   flavor: offeringSelector(state, 'attributes.flavor'),

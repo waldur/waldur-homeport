@@ -4,29 +4,26 @@ import { createSelector } from 'reselect';
 import { getMaxUnit } from '@waldur/marketplace/common/utils';
 import { BillingPeriod } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
-
-import { OuterState } from '../types';
+import { RootState } from '@waldur/store/reducers';
 
 import { ToSForm } from './constants';
 
-const getCart = (state: OuterState) => state.marketplace.cart;
+const getCart = (state: RootState) => state.marketplace.cart;
 
-export const getItems = (state: OuterState) => getCart(state).items;
+export const getItems = (state: RootState) => getCart(state).items;
 
-export const getCount = (state: OuterState) => getItems(state).length;
+export const getCount = (state: RootState) => getItems(state).length;
 
-export const isAddingItem = (state: OuterState) => getCart(state).addingItem;
+export const isAddingItem = (state: RootState) => getCart(state).addingItem;
 
-export const isRemovingItem = (state: OuterState) =>
-  getCart(state).removingItem;
+export const isRemovingItem = (state: RootState) => getCart(state).removingItem;
 
-export const isUpdatingItem = (state: OuterState) =>
-  getCart(state).updatingItem;
+export const isUpdatingItem = (state: RootState) => getCart(state).updatingItem;
 
-export const isCreatingOrder = (state: OuterState) =>
+export const isCreatingOrder = (state: RootState) =>
   getCart(state).creatingOrder;
 
-export const getMaxUnitSelector = (state: OuterState): BillingPeriod => {
+export const getMaxUnitSelector = (state: RootState): BillingPeriod => {
   const items = getItems(state);
   return getMaxUnit(items);
 };
@@ -40,16 +37,16 @@ export const getItemSelectorFactory = (orderItemUuid) =>
     items.find((item) => item.uuid === orderItemUuid),
   );
 
-const getFormState = (state) => state.form;
+const getFormState = (state: RootState) => state.form;
 const getNamedFormState = (formName) =>
   createSelector(getFormState, (formState = {}) => formState[formName]);
 const getRegisteredFields = (formName) =>
   createSelector(
     getNamedFormState(formName),
-    (namedFormState = {}) => namedFormState.registeredFields,
+    (namedFormState) => namedFormState?.registeredFields,
   );
 
-export const getTermsOfServiceIsVisible = (state) =>
+export const getTermsOfServiceIsVisible = (state: RootState) =>
   isVisible(state, 'marketplace.termsOfService');
 
 export const allTermsOfServiceAgreed = createSelector(

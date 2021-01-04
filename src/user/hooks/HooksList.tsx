@@ -4,6 +4,7 @@ import { compose } from 'redux';
 
 import { titleCase } from '@waldur/core/utils';
 import { useTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher, connectTable } from '@waldur/table';
 import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
@@ -84,7 +85,7 @@ const TableOptions = {
   exportFields: ['Method', 'Destination', 'Events'],
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
 });
 

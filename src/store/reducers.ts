@@ -18,7 +18,7 @@ import { reducer as workspace } from '@waldur/workspace/reducers';
 import { reducer as config } from './config';
 import { reducer as locale } from './locale';
 
-export default combineReducers({
+export const rootReducer = combineReducers({
   form: formReducer,
   notifications: notificationsReducer(),
   router: routerReducer,
@@ -36,3 +36,5 @@ export default combineReducers({
   title,
   breadcrumbs,
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

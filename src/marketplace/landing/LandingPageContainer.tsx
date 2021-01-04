@@ -8,6 +8,7 @@ import {
   OfferingsListType,
 } from '@waldur/marketplace/types';
 import { useTitle } from '@waldur/navigation/title';
+import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -58,7 +59,7 @@ const mapDispatchToProps = {
   gotoOffering: actions.gotoOffering,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   categories: selectors.getCategories(state),
   offerings: selectors.getOfferings(state),

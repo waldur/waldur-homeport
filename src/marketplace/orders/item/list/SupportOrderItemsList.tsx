@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
+import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -34,7 +35,7 @@ const TableOptions = {
   },
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   filter: getFormValues('OrderItemFilter')(state),
   customer: getCustomer(state),
 });

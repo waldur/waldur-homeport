@@ -5,8 +5,9 @@ import { formValueSelector } from 'redux-form';
 import { FormContainer, SelectField, NumberField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/offerings/store/constants';
+import { RootState } from '@waldur/store/reducers';
 
-const pluginOptionsSelector = (state) =>
+const pluginOptionsSelector = (state: RootState) =>
   formValueSelector(FORM_ID)(state, 'plugin_options');
 
 export const OpenStackPluginOptionsForm: FunctionComponent<{ container }> = ({

@@ -1,7 +1,9 @@
+import { FC } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import { FORM_ID } from '../store/constants';
 import { getType, getComponents } from '../store/selectors';
@@ -9,7 +11,9 @@ import { getType, getComponents } from '../store/selectors';
 import { PlanList } from './PlanList';
 import { hasError } from './utils';
 
-const PureAccountingSummary = (props) => {
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+const PureAccountingSummary: FC<StateProps> = (props) => {
   return (
     <>
       <h3>{translate('Accounting')}</h3>
@@ -37,7 +41,7 @@ const PureAccountingSummary = (props) => {
   );
 };
 
-const connector = connect((state) => {
+const mapStateToProps = (state: RootState) => {
   const formData: any = getFormValues(FORM_ID)(state);
   const type = getType(state);
   const components = type && getComponents(state, type);
@@ -56,6 +60,8 @@ const connector = connect((state) => {
     activePlans,
     archivedPlans,
   };
-});
+};
 
-export const AccountingSummary = connector(PureAccountingSummary);
+export const AccountingSummary = connect(mapStateToProps)(
+  PureAccountingSummary,
+);

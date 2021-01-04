@@ -8,6 +8,7 @@ import { IssuesListExpandableRow } from '@waldur/issues/list/IssuesListExpandabl
 import { IssuesListPlaceholder } from '@waldur/issues/list/IssuesListPlaceholder';
 import { StatusColumn } from '@waldur/issues/list/StatusColumn';
 import { TitleColumn } from '@waldur/issues/list/TitleColumn';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
@@ -152,7 +153,7 @@ const TableOptions = {
   exportFields,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   supportOrStaff: getUser(state)?.is_staff || getUser(state)?.is_support,
 });
 

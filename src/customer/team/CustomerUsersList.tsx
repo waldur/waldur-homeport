@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import { CustomerRole } from '@waldur/user/list/CustomerRole';
@@ -104,7 +105,7 @@ const TableOptions: TableOptionsType = {
   mapPropsToFilter,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
   user: getUser(state),
   isOwnerOrStaff: isOwnerOrStaffSelector(state),

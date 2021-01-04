@@ -11,6 +11,7 @@ import {
 import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
 import { Section } from '@waldur/marketplace/types';
 import { getSerializer } from '@waldur/providers/registry';
+import { RootState } from '@waldur/store/reducers';
 
 import { FORM_ID } from '../store/constants';
 
@@ -66,7 +67,7 @@ const PureManagementSummary = (props) => {
   );
 };
 
-const connector = connect((state) => {
+const connector = connect((state: RootState) => {
   const formData = getFormValues(FORM_ID)(state);
   const typeInvalid = hasError('type')(state);
   const optionsInvalid = hasError('options')(state);

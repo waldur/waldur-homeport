@@ -2,6 +2,7 @@ import {
   PROJECT_ADMIN_ROLE,
   PROJECT_MANAGER_ROLE,
 } from '@waldur/core/constants';
+import { RootState } from '@waldur/store/reducers';
 
 import { isOwnerOrStaff, isManager, isAdmin } from './selectors';
 
@@ -22,7 +23,7 @@ describe('isOwnerOrStaff selector', () => {
 
   it('returns true if user is staff', () => {
     const workspace = { user: staff };
-    const actual = isOwnerOrStaff({ workspace });
+    const actual = isOwnerOrStaff({ workspace } as RootState);
     expect(actual).toBe(true);
   });
 
@@ -36,7 +37,7 @@ describe('isOwnerOrStaff selector', () => {
         owners: [owner],
       },
     };
-    const actual = isOwnerOrStaff({ workspace });
+    const actual = isOwnerOrStaff({ workspace } as RootState);
     expect(actual).toBe(true);
   });
 
@@ -50,7 +51,7 @@ describe('isOwnerOrStaff selector', () => {
         owners: [staff],
       },
     };
-    const actual = isOwnerOrStaff({ workspace });
+    const actual = isOwnerOrStaff({ workspace } as RootState);
     expect(actual).toBe(false);
   });
 });
@@ -77,7 +78,7 @@ describe('isManager selector', () => {
         quotas: [],
       },
     };
-    const actual = isManager({ workspace });
+    const actual = isManager({ workspace } as RootState);
     expect(actual).toBe(true);
   });
 });
@@ -104,7 +105,7 @@ describe('isAdmin selector', () => {
         quotas: [],
       },
     };
-    const actual = isAdmin({ workspace });
+    const actual = isAdmin({ workspace } as RootState);
     expect(actual).toBe(true);
   });
 });

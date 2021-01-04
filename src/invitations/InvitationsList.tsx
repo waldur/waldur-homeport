@@ -6,6 +6,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -81,7 +82,7 @@ const TableOptions: TableOptionsType = {
   queryField: 'email',
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   stateFilter: getFormValues('InvitationsFilter')(state),
 });

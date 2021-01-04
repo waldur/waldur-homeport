@@ -8,6 +8,7 @@ import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 import { NodeRole } from '@waldur/rancher/types';
+import { RootState } from '@waldur/store/reducers';
 
 const countNodesByRole = (role: NodeRole, nodes) =>
   nodes.filter((node) => (node.roles || []).includes(role)).length;
@@ -32,7 +33,7 @@ const getTotalCores = (nodes) => sum(getFlavorField('cores', nodes));
 
 const getTotalRam = (nodes) => sum(getFlavorField('ram', nodes));
 
-const getStats = (state) => {
+const getStats = (state: RootState) => {
   const formData: any = getFormValues(FORM_ID)(state);
   if (!formData || !formData.attributes) {
     return {};

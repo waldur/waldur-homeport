@@ -6,6 +6,7 @@ import {
   showComponentsList,
   showOfferingLimits,
 } from '@waldur/marketplace/common/registry';
+import { RootState } from '@waldur/store/reducers';
 
 import {
   removeOfferingComponent,
@@ -15,7 +16,7 @@ import { getType, getComponents } from '../store/selectors';
 
 import { AccountingStep } from './AccountingStep';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   const type = getType(state);
   const showComponents = type && showComponentsList(type);
   const showLimits = type && showOfferingLimits(type);

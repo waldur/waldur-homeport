@@ -3,9 +3,9 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { withTranslation } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { connectTable } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
-import { OuterState } from '@waldur/workspace/types';
 
 import { TableComponent, TableOptions } from './OfferingsList';
 
@@ -25,7 +25,7 @@ const mapPropsToFilter = (props) => {
 };
 
 const enhance = compose(
-  connect((state: OuterState) => ({
+  connect((state: RootState) => ({
     customer: getCustomer(state),
     actionsDisabled: true,
     showOfferingCreateButton: false,

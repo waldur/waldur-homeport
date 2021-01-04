@@ -4,11 +4,12 @@ import { Field, reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 import { ToogleButtonFilter } from '@waldur/table/ToggleButtonFilter';
 
 const PureInvoicesFilter = () => {
   const accountingMode = useSelector(
-    (state) => getConfig(state).accountingMode,
+    (state: RootState) => getConfig(state).accountingMode,
   );
 
   const choices = useMemo(() => {

@@ -5,11 +5,12 @@ import { getFormValues } from 'redux-form';
 
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 
 import { FlavorsList } from './FlavorsList';
 import { ImagesList } from './ImagesList';
 
-export const VmTypeOverview = connect((state) =>
+export const VmTypeOverview = connect((state: RootState) =>
   getFormValues('vmOverviewFilter')(state),
 )((formValues: { service_provider: any[] }) => {
   if (

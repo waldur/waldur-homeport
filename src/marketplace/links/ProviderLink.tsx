@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
+import { RootState } from '@waldur/store/reducers';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
@@ -26,7 +27,7 @@ const PureProviderLink: React.FC<ProviderLinkProps> = (props) => (
   </Link>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   workspace: getWorkspace(state),
 });
 

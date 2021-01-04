@@ -4,6 +4,7 @@ import { get } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { SidebarExtensionService } from '@waldur/navigation/sidebar/SidebarExtensionService';
 import { MenuItemType } from '@waldur/navigation/sidebar/types';
+import { RootState } from '@waldur/store/reducers';
 import {
   getUser,
   getCustomer,
@@ -12,7 +13,6 @@ import {
 } from '@waldur/workspace/selectors';
 import {
   Project,
-  OuterState,
   Customer,
   User,
   PROJECT_WORKSPACE,
@@ -66,7 +66,7 @@ const getDefaultItems = (project) => [
 ];
 
 export const getSidebarItems = createSelector<
-  OuterState,
+  RootState,
   User,
   Customer,
   Project,

@@ -1,6 +1,16 @@
+import { Offering, Section } from '@waldur/marketplace/types';
+
 import * as constants from './constants';
 
-const INITIAL_STATE = {
+interface CategoryState {
+  filterQuery: string;
+  sections: Section[];
+  loading: boolean;
+  loaded: boolean;
+  erred: boolean;
+}
+
+const CATEGORY_INITIAL_STATE: CategoryState = {
   filterQuery: undefined,
   sections: [],
   loading: true,
@@ -8,7 +18,10 @@ const INITIAL_STATE = {
   erred: false,
 };
 
-export const categoryReducer = (state = INITIAL_STATE, action) => {
+export const categoryReducer = (
+  state = CATEGORY_INITIAL_STATE,
+  action,
+): CategoryState => {
   const { type, payload } = action;
   switch (type) {
     case constants.SET_FILTER_QUERY:
@@ -47,7 +60,24 @@ export const categoryReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export const categoryOfferingsReducer = (state = { items: [] }, action) => {
+interface CategoryOfferingState {
+  items: Offering[];
+  loading: boolean;
+  loaded: boolean;
+  erred: boolean;
+}
+
+const CATEGORY_OFFERING_INITIAL_STATE: CategoryOfferingState = {
+  items: [],
+  loading: false,
+  loaded: false,
+  erred: false,
+};
+
+export const categoryOfferingsReducer = (
+  state = CATEGORY_OFFERING_INITIAL_STATE,
+  action,
+): CategoryOfferingState => {
   const { type, payload } = action;
   switch (type) {
     case constants.LOAD_OFFERINGS_START:

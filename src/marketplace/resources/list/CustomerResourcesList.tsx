@@ -8,6 +8,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { Category } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -133,7 +134,7 @@ const TableOptions = {
   queryField: 'name',
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   filter: getFormValues('CustomerResourcesFilter')(state),
 });

@@ -11,9 +11,9 @@ import {
   getPluginOptionsForm,
   getSecretOptionsForm,
 } from '@waldur/marketplace/common/registry';
-import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { findProvider } from '@waldur/providers/registry';
+import { RootState } from '@waldur/store/reducers';
 
 import { getOffering, getType, getTypeLabel } from '../store/selectors';
 
@@ -27,8 +27,8 @@ const ServiceSettingsDetailsDialog = lazyComponent(
   'ServiceSettingsDetailsDialog',
 );
 
-const mapStateToProps = (state) => {
-  const offering: Offering = getOffering(state).offering;
+const mapStateToProps = (state: RootState) => {
+  const offering = getOffering(state).offering;
   const props: Partial<ManagementStepProps> = {
     offeringTypes: getOfferingTypes(),
     editable: !offering,

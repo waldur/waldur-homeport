@@ -4,15 +4,22 @@ import { compose } from 'redux';
 
 import { customerCreateDialog } from '@waldur/customer/create/actions';
 import { canCreateOrganization } from '@waldur/customer/create/selectors';
+import { TranslateProps } from '@waldur/i18n';
 import { withTranslation } from '@waldur/i18n/translate';
+import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { OuterState } from '@waldur/workspace/types';
 
-const CustomerCreateButton: FunctionComponent<{
-  isVisible;
-  onClick;
-  translate;
-}> = ({ isVisible, onClick, translate }) =>
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+type DispatchProps = typeof mapDispatchToProps;
+
+type CustomerCreateButtonProps = StateProps & DispatchProps & TranslateProps;
+
+const CustomerCreateButton: FunctionComponent<CustomerCreateButtonProps> = ({
+  isVisible,
+  onClick,
+  translate,
+}) =>
   isVisible ? (
     <ActionButton
       title={translate('Add organization')}
@@ -21,15 +28,16 @@ const CustomerCreateButton: FunctionComponent<{
     />
   ) : null;
 
+const mapDispatchToProps = {
+  onClick: customerCreateDialog,
+};
+
+const mapStateToProps = (state: RootState) => ({
+  isVisible: canCreateOrganization(state),
+});
+
 const enhance = compose(
-  connect(
-    (state: OuterState) => ({
-      isVisible: canCreateOrganization(state),
-    }),
-    {
-      onClick: customerCreateDialog,
-    },
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   withTranslation,
 );
 

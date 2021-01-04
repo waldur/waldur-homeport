@@ -1,3 +1,5 @@
+import { RootState } from '@waldur/store/reducers';
+
 import { data } from './api';
 import {
   selectServiceProvider,
@@ -6,14 +8,14 @@ import {
   propertySelectorFactory,
 } from './selectors';
 
-const state = {
+const state = ({
   serviceUsage: {
     data,
     selectedServiceProviderUuid: 'csc',
     loading: false,
     infoPanelIsVisible: false,
   },
-};
+} as unknown) as RootState;
 
 describe('Selectors', () => {
   it('should return selected service provider', () => {

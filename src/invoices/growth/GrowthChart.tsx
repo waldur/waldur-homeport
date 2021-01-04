@@ -9,10 +9,11 @@ import { translate } from '@waldur/i18n';
 import { getGrowthChartData } from '@waldur/invoices/api';
 import { GROWTH_FILTER_ID } from '@waldur/invoices/constants';
 import { formatGrowthChart } from '@waldur/invoices/growth/utils';
+import { RootState } from '@waldur/store/reducers';
 
 const growthFilterFormSelector = formValueSelector(GROWTH_FILTER_ID);
 
-const getAccountingRunningFieldValue = (state) =>
+const getAccountingRunningFieldValue = (state: RootState) =>
   growthFilterFormSelector(state, 'accounting_is_running');
 
 export const GrowthChart: FunctionComponent = () => {

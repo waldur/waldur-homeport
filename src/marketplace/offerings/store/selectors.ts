@@ -4,6 +4,7 @@ import { createSelector } from 'reselect';
 import { BookingProps } from '@waldur/booking/types';
 import { getOfferingComponentsFilter } from '@waldur/marketplace/common/registry';
 import { OfferingComponent } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 import {
   isOwnerOrStaff,
   getCustomer,
@@ -14,20 +15,24 @@ import { FORM_ID, DRAFT } from './constants';
 import { PlanFormData } from './types';
 import { formatComponents } from './utils';
 
-export const getOffering = (state) => state.marketplace.offering;
-export const getStep = (state) => getOffering(state).step;
-export const isLoading = (state) => getOffering(state).loading;
-export const isLoaded = (state) => getOffering(state).loaded;
-export const isErred = (state) => getOffering(state).erred;
-export const getCategories = (state) => getOffering(state).categories;
-export const getOfferingComponents = (state, type) =>
+export const getOffering = (state: RootState) => state.marketplace.offering;
+export const getStep = (state: RootState) => getOffering(state).step;
+export const isLoading = (state: RootState) => getOffering(state).loading;
+export const isLoaded = (state: RootState) => getOffering(state).loaded;
+export const isErred = (state: RootState) => getOffering(state).erred;
+export const getCategories = (state: RootState) =>
+  getOffering(state).categories;
+export const getOfferingComponents = (state: RootState, type) =>
   getOffering(state).plugins[type].components;
-export const getOfferingLimits = (state, type) =>
+export const getOfferingLimits = (state: RootState, type) =>
   getOffering(state).plugins[type].available_limits;
 
 export const getForm = formValueSelector(FORM_ID);
 
-export const getComponents = (state, type): OfferingComponent[] => {
+export const getComponents = (
+  state: RootState,
+  type: string,
+): OfferingComponent[] => {
   const builtinComponents = getOfferingComponents(state, type);
   const builtinTypes: string[] = builtinComponents.map((c) => c.type);
   const formComponents: OfferingComponent[] = formatComponents(
@@ -45,30 +50,30 @@ export const getComponents = (state, type): OfferingComponent[] => {
   return components;
 };
 
-export const getTypeLabel = (state: any): string => {
+export const getTypeLabel = (state: RootState): string => {
   const option = getForm(state, 'type');
   if (option) {
     return option.label;
   }
 };
 
-export const getType = (state: any): string => {
+export const getType = (state: RootState): string => {
   const option = getForm(state, 'type');
   if (option) {
     return option.value;
   }
 };
 
-export const getCategory = (state) => getForm(state, 'category');
+export const getCategory = (state: RootState) => getForm(state, 'category');
 
-export const getAttributes = (state) => getForm(state, 'attributes');
+export const getAttributes = (state: RootState) => getForm(state, 'attributes');
 
 export const getPlans = (state): PlanFormData[] => getForm(state, 'plans');
 
-export const getPlanData = (state, planPath: string): PlanFormData =>
+export const getPlanData = (state: RootState, planPath: string): PlanFormData =>
   getForm(state, planPath);
 
-export const getPlanPrice = (state, planPath) => {
+export const getPlanPrice = (state: RootState, planPath: string) => {
   const planData = getPlanData(state, planPath);
   if (planData && planData.quotas && planData.prices) {
     const type = getType(state);
@@ -114,5 +119,5 @@ export const isOfferingManagementDisabled = createSelector(
   },
 );
 
-export const getSchedules = (state) =>
+export const getSchedules = (state: RootState) =>
   getForm(state, 'schedules') as BookingProps[];

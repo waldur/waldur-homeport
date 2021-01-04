@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n/translate';
+import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
@@ -22,7 +23,7 @@ const PureProjectDeleteButton: FunctionComponent<any> = (props) => (
   />
 );
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   const ownerOrStaff = isOwnerOrStaff(state);
 
   if (!ownerOrStaff) {

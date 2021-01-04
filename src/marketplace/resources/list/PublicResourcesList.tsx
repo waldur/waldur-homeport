@@ -7,6 +7,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ResourceOpenDetail } from '@waldur/marketplace/resources/list/ResourceOpenDetail';
 import { Category, Offering } from '@waldur/marketplace/types';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import {
   getCustomer,
@@ -151,7 +152,7 @@ export const TableOptions = {
   queryField: 'query',
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   filter: getFormValues('PublicResourcesFilter')(state) as ResourceFilter,
   user: getUser(state),

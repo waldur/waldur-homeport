@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { createDeferred } from '@waldur/core/utils';
 
 import { ConfirmationDialog } from './ConfirmationDialog';
@@ -7,7 +9,7 @@ export const CLOSE = 'waldur/modal/CLOSE';
 
 export const openModalDialog = <P = any>(
   modalComponent: React.ComponentType<P>,
-  modalProps?: any,
+  modalProps?: P & { size?: 'lg' | 'xl' },
 ) => ({
   type: 'SHOW_MODAL',
   modalComponent,
@@ -18,7 +20,11 @@ export const closeModalDialog = () => ({
   type: 'HIDE_MODAL',
 });
 
-export const waitForConfirmation = (dispatch, title, body) => {
+export const waitForConfirmation = (
+  dispatch,
+  title: ReactNode,
+  body: ReactNode,
+) => {
   const deferred = createDeferred();
   const params = {
     resolve: {

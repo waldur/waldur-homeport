@@ -8,6 +8,7 @@ import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNa
 import { ResourceOpenDetail } from '@waldur/marketplace/resources/list/ResourceOpenDetail';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { Resource } from '@waldur/marketplace/resources/types';
+import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
@@ -71,7 +72,7 @@ const TableOptions = {
       : {},
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
 });
 

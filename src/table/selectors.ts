@@ -1,13 +1,15 @@
 import { createSelector } from 'reselect';
 
-const selectTableEntities = (state, table) => {
+import { RootState } from '@waldur/store/reducers';
+
+const selectTableEntities = (state: RootState, table: string) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].entities;
   }
   return {};
 };
 
-const selectTableEntitiesOrder = (state, table) => {
+const selectTableEntitiesOrder = (state: RootState, table: string) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].order;
   }
@@ -32,13 +34,13 @@ export const selectTableRows = createSelector(
   },
 );
 
-export const selectTablePagination = (state, table) => {
+export const selectTablePagination = (state: RootState, table: string) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].pagination;
   }
 };
 
-export const selectTableSorting = (state, table) => {
+export const selectTableSorting = (state: RootState, table: string) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].sorting;
   }

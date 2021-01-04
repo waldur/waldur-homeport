@@ -1,9 +1,13 @@
 import { createSelector } from 'reselect';
 
-export const selectServiceUsage = (state) => state.serviceUsage.data;
-export const selectServiceProviderUuid = (state) =>
+import { RootState } from '@waldur/store/reducers';
+
+export const selectServiceUsage = (state: RootState) => state.serviceUsage.data;
+
+export const selectServiceProviderUuid = (state: RootState) =>
   state.serviceUsage.selectedServiceProviderUuid;
-export const selectInfoPanelStatus = (state) =>
+
+export const selectInfoPanelStatus = (state: RootState) =>
   state.serviceUsage.infoPanelIsVisible;
 
 export const selectServiceProvider = createSelector(

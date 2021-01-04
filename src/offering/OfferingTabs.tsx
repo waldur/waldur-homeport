@@ -6,6 +6,7 @@ import { withTranslation, TranslateProps } from '@waldur/i18n';
 import { IssueCommentsContainer } from '@waldur/issues/comments/IssueCommentsContainer';
 import { ResourceOrderItems } from '@waldur/marketplace/orders/item/list/ResourceOrderItems';
 import { isVisible } from '@waldur/store/config';
+import { RootState } from '@waldur/store/reducers';
 
 import { OfferingEvents } from './OfferingEvents';
 import { OfferingSummaryTab } from './OfferingSummaryTab';
@@ -93,11 +94,13 @@ export const PureOfferingTabs: React.FC<OfferingTabsProps> = (props) => {
   );
 };
 
-const connector = connect<StateProps, {}, OwnProps>((state, ownProps) => ({
-  showComments:
-    isVisible(state, 'offering.comments') &&
-    Boolean(ownProps.offering.issue && ownProps.offering.issue_key),
-}));
+const connector = connect<StateProps, {}, OwnProps>(
+  (state: RootState, ownProps) => ({
+    showComments:
+      isVisible(state, 'offering.comments') &&
+      Boolean(ownProps.offering.issue && ownProps.offering.issue_key),
+  }),
+);
 
 export const OfferingTabs = withTranslation(
   connector(PureOfferingTabs),

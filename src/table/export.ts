@@ -5,6 +5,7 @@ import { put, call, select } from 'redux-saga/effects';
 
 import { ENV } from '@waldur/configs/default';
 import { loadPdfMake } from '@waldur/shims/pdfmake';
+import { RootState } from '@waldur/store/reducers';
 import { fetchAll } from '@waldur/table/api';
 
 import { blockStart, blockStop } from './actions';
@@ -84,7 +85,7 @@ const exporters = {
 
 export function* exportTable(action) {
   const { table, format, props } = action.payload;
-  let rows = yield select((state) => selectTableRows(state, table));
+  let rows = yield select((state: RootState) => selectTableRows(state, table));
   const {
     exportFields,
     exportRow,
