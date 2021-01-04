@@ -34,8 +34,7 @@ export const InvoiceEventsDialog: FunctionComponent<{ resolve }> = ({
           <>
             <p>{translate('Unable to load events for this resource.')}</p>
             <Button bsStyle="primary" onClick={retry}>
-              <i className="fa fa-refresh"></i>
-              {translate('Retry')}
+              <i className="fa fa-refresh"></i> {translate('Retry')}
             </Button>
           </>
         ) : events.length === 0 ? (
