@@ -1,6 +1,0 @@
-{
-  "name": "development",
-  "apiEndpoint": "http://localhost:3011/",
-  "toBeFeatures": [],
-  "featuresVisible": true
-}

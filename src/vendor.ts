@@ -13,8 +13,6 @@ require('moment/locale/ru');
 require('moment/locale/uk');
 moment.locale('en-gb');
 
-window['moment'] = moment;
-
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-geosearch/assets/css/leaflet.css';
 
