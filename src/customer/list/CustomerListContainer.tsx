@@ -40,7 +40,7 @@ const getInvoices = (params) => getList<Invoice>('/invoices/', params);
 async function oldestInvoice() {
   const params = {
     page_size: 1,
-    o: ['year', 'month'],
+    o: ['year', 'month'].join(','),
     field: ['year', 'month'],
   };
   const response = await getInvoices(params);

@@ -10,7 +10,7 @@ interface Props {
   accountingPeriods: AccountingPeriodOption[];
 }
 
-export const PureCustomerListFilter: FunctionComponent<any> = (props) => (
+export const PureCustomerListFilter: FunctionComponent<Props> = (props) => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline">
