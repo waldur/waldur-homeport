@@ -1,3 +1,5 @@
+import { FixedIP } from '@waldur/resource/types';
+
 export interface Quota {
   name: string;
   limit: number;
@@ -30,4 +32,13 @@ export interface SecurityGroupRule {
   remote_group_name?: string;
   remote_group_uuid?: string;
   description?: string;
+}
+
+export interface Port {
+  uuid: string;
+  fixed_ips?: FixedIP[];
+  allowed_address_pairs?: any;
+  mac_address?: string;
+  network_name: string;
+  network_uuid: string;
 }

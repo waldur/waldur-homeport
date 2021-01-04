@@ -2,15 +2,18 @@ import { FunctionComponent } from 'react';
 
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
+import { Port } from '../types';
+
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
-    <Table
+    <Table<Port>
       {...props}
       columns={[
         {
-          title: translate('IPv4 address'),
-          render: ({ row }) => row.ip4_address || 'N/A',
+          title: translate('IP address'),
+          render: ({ row }) =>
+            row.fixed_ips.map((fip) => fip.ip_address).join(', ') || 'N/A',
         },
         {
           title: translate('MAC address'),

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InternalIpsList renders list 1`] = `"<tr><td>192.168.42.14</td><td>fa:16:3e:93:f0:7d</td><td>theses-and-papers-on-mach-sub-net</td><td>192.168.42.0/24</td><td><button type=\\"button\\" class=\\"btn btn-sm btn-default\\"><i class=\\"fa fa-pencil\\"></i> Set allowed address pairs</button></td></tr>"`;
