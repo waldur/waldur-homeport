@@ -180,7 +180,7 @@ export const createDeferred = () => {
     deferred.resolve = resolve;
     deferred.reject = reject;
   });
-  return deferred.promise;
+  return deferred;
 };
 
 export const orderByFilter = (sorting: {
