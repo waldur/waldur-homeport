@@ -23,7 +23,7 @@ export class EventRegistry {
   formatEvent(event) {
     const formatter = this.formatters[event.event_type];
     if (formatter) {
-      return formatter(event.context);
+      return formatter(event.context) || event.message;
     } else {
       return event.message;
     }
