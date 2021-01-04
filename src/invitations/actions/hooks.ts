@@ -87,7 +87,7 @@ export const useInvitationCreateDialog = (context) => {
           uuid: 'TEMPLATE',
         });
         payload.link_template =
-          location.origin + '/' + path.replace('TEMPLATE', '{uuid}');
+          location.origin + path.replace('TEMPLATE', '{uuid}');
         payload.email = formData.email;
         payload.civil_number = formData.civil_number;
         payload.tax_number = formData.tax_number;
