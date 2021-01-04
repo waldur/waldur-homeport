@@ -5,8 +5,8 @@ import { ConfirmationDialog } from './ConfirmationDialog';
 export const OPEN = 'waldur/modal/OPEN';
 export const CLOSE = 'waldur/modal/CLOSE';
 
-export const openModalDialog = (
-  modalComponent: React.ComponentType<any> | string,
+export const openModalDialog = <P = any>(
+  modalComponent: React.ComponentType<P>,
   modalProps?: any,
 ) => ({
   type: 'SHOW_MODAL',

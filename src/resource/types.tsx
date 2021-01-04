@@ -46,15 +46,27 @@ export interface Volume extends Resource {
   service_uuid?: string;
 }
 
-interface InternalIp {
-  ip4_address?: string;
+export interface FixedIP {
+  ip_address: string;
+  subnet_id: string;
+}
+
+interface SubnetReference {
+  subnet: string;
+  subnet_uuid: string;
+  subnet_name: string;
+  subnet_description: string;
+  subnet_cidr: string;
+}
+
+export interface InternalIP extends Partial<SubnetReference> {
+  fixed_ips?: FixedIP[];
+  allowed_address_pairs?: any;
   mac_address?: string;
-  subnet_name?: string;
-  subnet_cidr?: string;
 }
 
 export interface VirtualMachine extends Resource {
-  internal_ips_set?: InternalIp[];
+  internal_ips_set?: InternalIP[];
   cores: number;
   disk: number;
   ram: number;

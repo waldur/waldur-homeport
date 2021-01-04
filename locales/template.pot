@@ -2875,7 +2875,9 @@ msgid "ID code"
 msgstr ""
 
 #: src/events/EventDetailsTable.tsx
+#: src/openstack/openstack-instance/InternalIpsList.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
+#: src/openstack/openstack-tenant/TenantPortsList.tsx
 msgid "IP address"
 msgstr ""
 
@@ -2890,11 +2892,6 @@ msgstr ""
 
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 msgid "IP version"
-msgstr ""
-
-#: src/openstack/openstack-instance/InternalIpsList.tsx
-#: src/openstack/openstack-tenant/TenantPortsList.tsx
-msgid "IPv4 address"
 msgstr ""
 
 #: src/rancher/template/CatalogTemplateList.tsx
@@ -7258,12 +7255,12 @@ msgstr ""
 msgid "Subnet CIDR"
 msgstr ""
 
-#: src/openstack/openstack-instance/InternalIpsList.tsx
-msgid "Subnet Name"
-msgstr ""
-
 #: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
 msgid "Subnet has been created."
+msgstr ""
+
+#: src/openstack/openstack-instance/InternalIpsList.tsx
+msgid "Subnet name"
 msgstr ""
 
 #: src/openstack/openstack-network/TenantNetworksList.tsx

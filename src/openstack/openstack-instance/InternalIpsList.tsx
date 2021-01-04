@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { getById } from '@waldur/core/api';
 import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
-import { VirtualMachine } from '@waldur/resource/types';
+import { VirtualMachine, InternalIP } from '@waldur/resource/types';
 import { Table, connectTable } from '@waldur/table';
 
 import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';
@@ -10,19 +10,20 @@ import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
   return (
-    <Table
+    <Table<InternalIP>
       {...props}
       columns={[
         {
-          title: translate('IPv4 address'),
-          render: ({ row }) => row.ip4_address,
+          title: translate('IP address'),
+          render: ({ row }) =>
+            row.fixed_ips.map((fip) => fip.ip_address).join(', ') || 'N/A',
         },
         {
           title: translate('MAC address'),
           render: ({ row }) => row.mac_address,
         },
         {
-          title: translate('Subnet Name'),
+          title: translate('Subnet name'),
           render: ({ row }) => row.subnet_name,
         },
         {
@@ -60,7 +61,7 @@ const TableOptions = {
   table: 'openstack-internal-ips',
   fetchData: getInternalIps,
   mapPropsToFilter: (props) => ({
-    uuid: props.resource.uuid,
+    uuid: props.resource?.uuid,
   }),
 };
 
