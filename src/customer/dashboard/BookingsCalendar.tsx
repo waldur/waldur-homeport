@@ -19,7 +19,7 @@ import {
 } from '@waldur/table/selectors';
 
 const bookingsFilterStateSelector = (state: RootState) =>
-  bookingFormSelector(state).state;
+  bookingFormSelector(state)?.state;
 
 export const getCalendarEvent = (bookingItem, event) => ({
   ...event,
