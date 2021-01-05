@@ -100,11 +100,13 @@ class ActionDialogController {
     if (this.ActionForm.$invalid) {
       return false;
     }
+    if (this.submitting) {
+      return false;
+    }
     return (
       this.ActionForm.$dirty ||
       this.resolve.action.method === 'DELETE' ||
-      !this.resolve.action.fields ||
-      !this.submitting
+      !this.resolve.action.fields
     );
   }
   submitForm() {
