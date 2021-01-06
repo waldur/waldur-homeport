@@ -8,10 +8,21 @@ import { InvoiceItem } from '../types';
 export function getItemName(item: InvoiceItem) {
   if (item.details) {
     // eslint-disable-next-line no-unused-vars
-    const { offering_name, plan_name, offering_component_name } = item.details;
-    if (offering_name && plan_name && offering_component_name) {
-      return `${offering_name} - ${offering_component_name} - ${plan_name}`;
+    const {
+      resource_name,
+      offering_name,
+      plan_name,
+      offering_component_name,
+    } = item.details;
+    if (
+      resource_name &&
+      offering_name &&
+      plan_name &&
+      offering_component_name
+    ) {
+      return `${resource_name} / ${offering_name} - ${offering_component_name} - ${plan_name}`;
     }
+    return `${item.name}: ${item.scope_uuid} / ${item.scope_type}`;
   }
   return item.name;
 }

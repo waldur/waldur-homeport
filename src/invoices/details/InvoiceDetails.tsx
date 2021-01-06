@@ -81,6 +81,7 @@ export const InvoiceDetails = ({ invoice }: { invoice: Invoice }) => {
                     <tr key={itemIndex}>
                       <td>
                         <InvoiceItemDetails
+                          customerId={customer.uuid}
                           item={item}
                           itemId={`item-${projectIndex}-${itemIndex}`}
                         />
