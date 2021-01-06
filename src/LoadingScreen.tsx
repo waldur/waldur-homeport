@@ -11,11 +11,16 @@ export const LoadingScreen: FunctionComponent<{
   return (
     <>
       {loading ? (
-        <div className="loading-screen">
-          <img src="/images/waldur/logo120x120.png" alt="Logo should be here" />
-          <h1 className="loading-title">
-            {translate('Loading assets, please wait.')}
-          </h1>
+        <div className="loading-screen-container">
+          <div className="loading-screen">
+            <img
+              src="/images/waldur/logo120x120.png"
+              alt="Logo should be here"
+            />
+            <h1 className="loading-title">
+              {translate('Loading assets, please wait.')}
+            </h1>
+          </div>
         </div>
       ) : null}
       {error ? (
@@ -34,8 +39,7 @@ export const LoadingScreen: FunctionComponent<{
               location.reload();
             }}
           >
-            <i className="fa fa-refresh"></i>
-            {translate('Retry')}
+            <i className="fa fa-refresh"></i> {translate('Retry')}
           </button>
         </div>
       ) : null}
