@@ -18,6 +18,7 @@ export const getCustomersPage = (query, page) =>
         'uuid',
         'projects',
         'owners',
+        'service_managers',
         'abbreviation',
         'is_service_provider',
       ],
