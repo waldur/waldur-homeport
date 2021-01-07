@@ -4,10 +4,13 @@ import { formValueSelector, reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
+import {
+  loadSecurityGroupsResources,
+  setSecurityGroupRules,
+} from '@waldur/openstack/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 
-import { loadSecurityGroupsResources, setSecurityGroupRules } from '../../api';
 import { SecurityGroup } from '../types';
 
 import { FormData, Rule } from './types';
@@ -36,8 +39,8 @@ export const getToPortMin = (rule: Rule) => {
 
 const FORM_NAME = 'securityGroupRuleEdit';
 
-export const getRuleSelector = (name) => (state: RootState) =>
-  formValueSelector(FORM_NAME)(state, name);
+export const getRuleSelector = (name: string) => (state: RootState) =>
+  formValueSelector(FORM_NAME)(state, name) as Rule;
 
 type OwnProps = ReturnType<typeof useRulesEditor> & { resourceName: string };
 
