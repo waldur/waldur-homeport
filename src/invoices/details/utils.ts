@@ -22,7 +22,7 @@ export function getItemName(item: InvoiceItem) {
     ) {
       return `${resource_name} / ${offering_name} - ${offering_component_name} - ${plan_name}`;
     }
-    return `${item.name}: ${item.scope_uuid} / ${item.scope_type}`;
+    return `${item.name}`;
   }
   return item.name;
 }
