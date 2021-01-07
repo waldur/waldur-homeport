@@ -12,7 +12,6 @@ import { FromPortField } from './FromPortField';
 import { ProtocolField } from './ProtocolField';
 import { RemoteGroupField } from './RemoteGroupField';
 import { ToPortField } from './ToPortField';
-import { Rule } from './types';
 import { getRuleSelector } from './utils';
 
 interface Props {
@@ -26,7 +25,7 @@ export const RuleRow: FC<Props> = ({
   onRemove,
   remoteSecurityGroups,
 }) => {
-  const rule: Rule = useSelector(getRuleSelector(name));
+  const rule = useSelector(getRuleSelector(name));
   return (
     <tr>
       <EtherTypeField />

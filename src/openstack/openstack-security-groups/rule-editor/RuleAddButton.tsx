@@ -12,7 +12,7 @@ interface Props {
 
 const DEFAULT_RULE = {
   ethertype: 'IPv4',
-  protocol: 'ICMP',
+  protocol: 'icmp',
   direction: 'ingress',
   from_port: -1,
   to_port: -1,
