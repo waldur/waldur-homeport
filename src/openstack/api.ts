@@ -59,6 +59,9 @@ export const loadFloatingIps = (settings_uuid: string) =>
     },
   });
 
+export const setFloatingIps = (id, data) =>
+  post(`/openstacktenant-instances/${id}/update_floating_ips/`, data);
+
 export const loadSshKeys = (user_uuid: string) =>
   getAll<SshKey>('/keys/', { params: { user_uuid } });
 

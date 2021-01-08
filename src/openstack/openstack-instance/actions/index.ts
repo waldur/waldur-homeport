@@ -12,7 +12,7 @@ import forceDestroyAction from './ForceDestroyAction';
 import restartAction from './RestartAction';
 import startAction from './StartAction';
 import stopAction from './StopAction';
-import updateFloatingIpsAction from './UpdateFloatingIpsAction';
+import updateFloatingIpsAction from './update-floating-ips/UpdateFloatingIpsAction';
 import updateInternalIpsSet from './UpdateInternalIpsSet';
 import updateSecurityGroupsAction from './UpdateSecurityGroupsAction';
 
