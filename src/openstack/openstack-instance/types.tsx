@@ -7,7 +7,7 @@ interface RancherClusterReference {
 
 export interface OpenStackInstance extends VirtualMachine {
   flavor_name: string;
-  floating_ips?: string[];
+  floating_ips?: FloatingIp[];
   runtime_state: 'SHUTOFF' | 'ACTIVE';
   security_groups?: string[];
   availability_zone_name?: string;
@@ -35,6 +35,8 @@ export interface FloatingIp {
   address: string;
   runtime_state: string;
   is_booked: boolean;
+  subnet?: string;
+  subnet_name?: string;
 }
 
 export interface ServiceComponent {

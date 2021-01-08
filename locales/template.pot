@@ -234,7 +234,7 @@ msgstr ""
 
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.js
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.js
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Add"
@@ -744,7 +744,7 @@ msgid "Auto approve in service provider projects"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.js
+#: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Auto-assign floating IP"
 msgstr ""
@@ -1807,7 +1807,7 @@ msgstr ""
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.js
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.js
 #: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
 #: src/project/ProjectDeleteButton.tsx
@@ -2627,6 +2627,10 @@ msgstr ""
 msgid "Floating IPs"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
+msgid "Floating IPs update has been scheduled."
+msgstr ""
+
 #: src/issues/workspace/IssueNavigationService.ts
 #: src/providers/support/FlowMapViewContainer.tsx
 msgid "Flowmap"
@@ -3018,7 +3022,7 @@ msgstr ""
 msgid "Instance"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.js
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 msgid "Instance does not have any floating IPs yet."
 msgstr ""
 
@@ -3034,7 +3038,7 @@ msgstr ""
 msgid "Instance is already stopped."
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.js
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
 msgstr ""
 
@@ -6601,7 +6605,7 @@ msgstr ""
 msgid "Select certifications"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.js
+#: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
 #: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Select connected subnet"
 msgstr ""
@@ -7225,6 +7229,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsForm.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesForm.tsx
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
@@ -8240,6 +8245,7 @@ msgstr ""
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/offering/OfferingDetails.tsx
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsForm.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesForm.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
@@ -8559,6 +8565,10 @@ msgstr ""
 msgid "Unable to update enabled checklists."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
+msgid "Unable to update floating IPs."
+msgstr ""
+
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Unable to update horizontal pod autoscaler."
 msgstr ""
@@ -8710,8 +8720,12 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/UpdateFloatingIpsAction.ts
+#: src/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsAction.ts
 msgid "Update floating IPs"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsForm.tsx
+msgid "Update floating IPs in {name} virtual machine"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
