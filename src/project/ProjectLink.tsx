@@ -11,7 +11,7 @@ interface ProjectLinkProps {
 
 export const ProjectLink: FunctionComponent<ProjectLinkProps> = ({ row }) => (
   <Link
-    state="project"
+    state="project.details"
     params={{ uuid: row.project_uuid }}
     label={row.project_name}
   />
