@@ -16,7 +16,7 @@ interface EditableCalendarProps extends WrappedFieldArrayProps<BookingProps> {
   schedules: EventInput[];
 }
 
-export class EditableCalendar extends Component<
+class EditableCalendar extends Component<
   EditableCalendarProps,
   { availabilitySlots }
 > {
