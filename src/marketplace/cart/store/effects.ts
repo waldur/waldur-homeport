@@ -32,6 +32,11 @@ const flattenAttributes = (attributes) => {
   return newAttributes;
 };
 
+/* Since back-end doesn't allow slots in the past,
+ * this function detects slots that are in the past and
+ * sets the time to 20 minutes later in the future.
+ * We add a small buffer that corresponds to max time spend on creating a booking
+ */
 const handlePastSlots = (attributes) => {
   const currentTime = moment().format();
   const currentTimePlus20Minutes = moment().add(20, 'minutes').format();
