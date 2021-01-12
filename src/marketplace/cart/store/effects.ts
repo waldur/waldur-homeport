@@ -1,4 +1,5 @@
 import { triggerTransition } from '@uirouter/redux';
+import moment from 'moment';
 import { delay } from 'redux-saga';
 import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
@@ -31,10 +32,32 @@ const flattenAttributes = (attributes) => {
   return newAttributes;
 };
 
+const formatAttributes = (attributes) => {
+  const currentTime = moment().format();
+  const currentTimePlus20Minutes = moment().add(20, 'minutes').format();
+
+  const newSchedules = attributes.schedules.map((schedule) => {
+    if (moment(schedule.start).isBefore(currentTime)) {
+      return {
+        ...schedule,
+        start: currentTimePlus20Minutes,
+        title: schedule.title || 'test',
+      };
+    } else {
+      return schedule;
+    }
+  });
+  return {
+    ...attributes,
+    schedules: newSchedules,
+  };
+};
+
 const formatItem = (item) => ({
   plan: item.plan ? item.plan.url : undefined,
   project: item.project,
-  attributes: flattenAttributes(item.attributes),
+  attributes: flattenAttributes(formatAttributes(item.attributes)),
+  // attributes: flattenAttributes(item.attributes),
   limits: item.limits,
 });
 
@@ -119,6 +142,8 @@ function* removeItem(action) {
 
 function* updateItem(action) {
   try {
+    // eslint-disable-next-line no-console
+    console.log('action.payload.item', action.payload.item);
     const item = yield call(
       api.updateCartItem,
       action.payload.item.uuid,
@@ -150,7 +175,7 @@ function* createOrder() {
     return;
   }
   try {
-    const order = yield call(api.submitCart, { project: project.url });
+    const order = yield call(api.submitCart, { project: project.url }); //
     yield put(showSuccess(translate('Order has been submitted.')));
     yield put(actions.createOrderSuccess());
     const workspace: WorkspaceType = yield select(getWorkspace);
@@ -183,3 +208,5 @@ export default function* () {
   yield takeEvery(constants.REMOVE_ITEM_REQUEST, removeItem);
   yield takeEvery(constants.CREATE_ORDER_REQUEST, createOrder);
 }
+
+// Request URL: https://rest-test.nodeconductor.com/api/marketplace-cart-items/833887cfbe9444229eddfe0027aed397/

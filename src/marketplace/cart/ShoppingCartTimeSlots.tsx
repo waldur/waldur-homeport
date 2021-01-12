@@ -22,14 +22,14 @@ export const ShoppingCartTimeSlots: FunctionComponent<ShoppingCartTimeSlotsProps
     <p>
       <>{translate('Time slots')}: </>
       {schedules.map((schedule, index: number) => (
-        <Fragment key={schedule.id}>
+        <Fragment key={schedule?.id}>
           <>
             {wrapScheduleTitleTooltip(
-              schedule.title,
+              schedule?.title,
               <>
-                {formatDateTime(schedule.start)}
+                {formatDateTime(schedule?.start)}
                 {' - '}
-                {formatDateTime(schedule.end)}
+                {formatDateTime(schedule?.end)}
               </>,
             )}
           </>
