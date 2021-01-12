@@ -277,7 +277,7 @@ msgid "Adding link"
 msgstr ""
 
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Additional data that will be added to instance on provisioning."
 msgstr ""
@@ -434,7 +434,7 @@ msgstr ""
 msgid "Apps"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid ""
 "Are you sure you do not want to create a data volume? System volume is not "
 "resizable"
@@ -1429,7 +1429,7 @@ msgstr ""
 #: src/offering/appstore-offering.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
@@ -1976,7 +1976,7 @@ msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/user/keys/key-list.js
 msgid "Fingerprint"
 msgstr ""
@@ -1991,7 +1991,7 @@ msgstr ""
 
 #: src/cost-planning/cost-plan-flavors.html
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
@@ -2003,7 +2003,7 @@ msgid "Flavor exclude regex"
 msgstr ""
 
 #: src/analytics/FlavorsList.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
 msgstr ""
@@ -2323,7 +2323,7 @@ msgstr ""
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Image"
 msgstr ""
@@ -2333,7 +2333,7 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Image name"
 msgstr ""
 
@@ -3036,11 +3036,11 @@ msgstr ""
 msgid "Metric"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Min RAM"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Min storage"
 msgstr ""
 
@@ -3127,7 +3127,7 @@ msgstr ""
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
@@ -3193,7 +3193,7 @@ msgid "Network has been updated."
 msgstr ""
 
 #: src/openstack/openstack-backup/actions.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-network/breadcrumbs.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
@@ -4616,7 +4616,7 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/quotas/constants.js
 #: src/resource-import/import-virtual-machines-list.js
@@ -5170,7 +5170,7 @@ msgstr ""
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "SSH public key"
 msgstr ""
 
@@ -5238,7 +5238,7 @@ msgstr ""
 
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-security-groups/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
 msgid "Security groups"
@@ -5354,7 +5354,7 @@ msgstr ""
 
 #: src/openstack/openstack-backup/actions.js
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Select security groups..."
 msgstr ""
 
@@ -5734,7 +5734,7 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/customer/CustomerList.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/project/project-workspace.js
@@ -5862,7 +5862,7 @@ msgstr ""
 msgid "System user"
 msgstr ""
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "System volume size"
 msgstr ""
 
@@ -6614,7 +6614,7 @@ msgstr ""
 
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
 msgstr ""
@@ -6819,7 +6819,7 @@ msgstr ""
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
 msgstr ""
@@ -7177,7 +7177,7 @@ msgid "You have no volumes yet."
 msgstr ""
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid ""
 "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</"
 "a>."
@@ -7376,7 +7376,7 @@ msgstr ""
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "vCPU"

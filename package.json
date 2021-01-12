@@ -145,7 +145,6 @@
     "angular-gettext-cli": "^1.2.0",
     "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",
-    "babel-plugin-angularjs-annotate": "^0.8.2",
     "cache-loader": "^4.1.0",
     "clean-terminal-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",

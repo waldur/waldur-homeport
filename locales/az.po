@@ -278,7 +278,7 @@ msgid "Adding link"
 msgstr "Link əlavə olunur"
 
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Tələbə əsasən nümunəyə əlavə olunacaq əlavə data."
@@ -428,7 +428,7 @@ msgstr "Ödənişi təsdiq edin"
 msgid "Apps"
 msgstr "Tətbiqlər"
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Are you sure you do not want to create a data volume? System volume is not resizable"
 msgstr "Data həcmini yaratmaq istəmədiyinizə əminsinizmi? Sistemin həcmi ölçüləbilən deyil"
 
@@ -1374,7 +1374,7 @@ msgstr "Yerləşdirmə planında hələ də heç bir maddə yoxdur "
 #: src/offering/offering-summary.html
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
 #: src/openstack/openstack-tenant/openstack-tenant-request-custom-flavour.js
 #: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js
@@ -1901,7 +1901,7 @@ msgstr "Çatışmayan quraşdırılmış kitabxanaları tapmaq"
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/user/keys/key-list.js
 msgid "Fingerprint"
 msgstr "Barmaq izi "
@@ -1916,7 +1916,7 @@ msgstr "Birinci "
 
 #: src/cost-planning/cost-plan-flavors.html
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
@@ -1927,7 +1927,7 @@ msgstr "Variant "
 msgid "Flavor exclude regex"
 msgstr "Variantlar daimi ifadələri istisna edir "
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
 msgstr "Variantların adı "
@@ -2233,7 +2233,7 @@ msgstr "Yerli GitLab istifadə edirsinizsə, URL-i göstərin"
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 msgid "Image"
 msgstr "Təsvir"
@@ -2242,7 +2242,7 @@ msgstr "Təsvir"
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Image name"
 msgstr "Təsvir adı"
 
@@ -2904,11 +2904,11 @@ msgstr "Metod"
 msgid "Metric"
 msgstr "Metrik (ölçü)"
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Min RAM"
 msgstr "Minimal RAM (əməliyyat yaddaşı)"
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Min storage"
 msgstr "Minimal saxlama"
 
@@ -2993,7 +2993,7 @@ msgstr "Yoxdur "
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
@@ -3053,7 +3053,7 @@ msgid "Network has been updated."
 msgstr "Şəbəkə yeniləndi."
 
 #: src/openstack/openstack-backup/actions.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-network/breadcrumbs.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
@@ -4409,7 +4409,7 @@ msgstr "Kvotalar yenilənib."
 #: src/appstore/appstore-compare-list.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/quotas/constants.js
 #: src/resource-import/import-virtual-machines-list.js
@@ -4925,7 +4925,7 @@ msgstr "SSH (təhlükəsizlik örtükləri) portu"
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "SSH public key"
 msgstr "SSH (təhlükəsizlik örtükləri) ictimai açarı"
 
@@ -4992,7 +4992,7 @@ msgstr "Təhlükəsizlik qrupu yeniləndi."
 
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-security-groups/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
 msgid "Security groups"
@@ -5100,7 +5100,7 @@ msgstr "Vəzifəni seçin"
 
 #: src/openstack/openstack-backup/actions.js
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Select security groups..."
 msgstr "Təhlükəsizlik qruplarını seçin ..."
 
@@ -5452,7 +5452,7 @@ msgstr "Durdurma"
 #: src/appstore/appstore-compare-list.js
 #: src/customer/customer-list.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #: src/project/project-workspace.js
@@ -5578,7 +5578,7 @@ msgstr "Sistem provayderi (təminatçısı)"
 msgid "System user"
 msgstr "Sistem istifadəçisi"
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "System volume size"
 msgstr "Sistemin həcmi ölçüsü"
 
@@ -6269,7 +6269,7 @@ msgstr "İstifadəçi paneli"
 
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
 msgstr "İstifadəçi məlumatları"
@@ -6451,7 +6451,7 @@ msgstr "ƏDV dərəcəsi"
 #: src/azure/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
 msgstr "VM (virtual maşın) adı"
@@ -6797,7 +6797,7 @@ msgid "You have no volumes yet."
 msgstr "Sizin hələ həcmləriniz yoxdur."
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</a>."
 msgstr "Siz <a ui-sref=\"profile.keys\"> profilinizə hər hansı bir SSH (təhlükəsiz örtük) açarını əlavə etməmisiniz."
 
@@ -6987,7 +6987,7 @@ msgstr "istifadəçilər"
 #: src/ansible/python-management/create/PythonManagementCreateContainer.tsx
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "vCPU"
