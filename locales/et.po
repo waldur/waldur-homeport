@@ -362,7 +362,7 @@ msgstr "Lingi lisamine"
 
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Täiendavad andmed mida lisatakse üksuse eraldamisel."
@@ -571,7 +571,7 @@ msgstr "Arhiiv"
 msgid "Archived"
 msgstr "Arhiveeritud"
 
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid ""
 "Are you sure you do not want to create a data volume? System volume is not "
 "resizable"
@@ -1713,7 +1713,7 @@ msgstr "Kasutuselevõtu plaanis ei ole elemente."
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/actions/request-custom-flavour.js
 #: src/openstack/openstack-tenant/actions/request-direct-access.js
 #: src/openstack/openstack-tenant/openstack-tenant-config.js
@@ -2273,7 +2273,7 @@ msgstr "Leia paigaldatud teegid mis on kadunud"
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/user/keys/KeysList.tsx
 msgid "Fingerprint"
 msgstr "Sõrmejälg"
@@ -2295,7 +2295,7 @@ msgstr "Fikseeritud hind"
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
@@ -2308,7 +2308,7 @@ msgstr "Tüübi välistamise regex"
 
 #: src/analytics/FlavorsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "Flavor name"
 msgstr "Tüübi nimi"
@@ -2658,7 +2658,7 @@ msgstr "Kui kasutate kohapealset GitLabi, täpsustage URl"
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
 #, fuzzy
 msgid "Image"
@@ -2676,7 +2676,7 @@ msgstr "Pildi nimi"
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #, fuzzy
 msgid "Image name"
 msgstr "Pildi nimi"
@@ -3539,12 +3539,12 @@ msgid "Metric"
 msgstr "Mõõdik"
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Min RAM"
 msgstr "Min RAM"
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Min storage"
 msgstr "Min. salvestusmaht"
 
@@ -3669,7 +3669,7 @@ msgstr "N/A"
 #: src/openstack/openstack-backup/backup-snapshots-list.js
 #: src/openstack/openstack-backup/openstack-backups-list.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-network/openstack-tenant-networks.js
 #: src/openstack/openstack-security-groups/security-groups-list.js
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js
@@ -3761,7 +3761,7 @@ msgstr "Võrku on uuendatud."
 
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-network/breadcrumbs.js
 #: src/openstack/openstack-subnet/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
@@ -5531,7 +5531,7 @@ msgstr "Kvoodid muudetud."
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/resource-import/import-virtual-machines-list.js
 #: src/rijkscloud/InstanceCreateConfig.js
@@ -6257,7 +6257,7 @@ msgstr "SSH võtmed"
 #: src/ansible/playbook-jobs/details/ansible-job-summary.html
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "SSH public key"
 msgstr "SSH avalik võti"
 
@@ -6330,7 +6330,7 @@ msgstr "Turvagrupp on uuendatud."
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-security-groups/breadcrumbs.js
 #: src/openstack/openstack-tenant/tabs.js
 msgid "Security groups"
@@ -6497,7 +6497,7 @@ msgstr "Vali roll"
 #: src/openstack/openstack-backup/actions/RestoreAction.ts
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "Select security groups..."
 msgstr "Vali turvagrupid..."
 
@@ -7009,7 +7009,7 @@ msgstr "Peatan"
 #: src/customer/api.ts src/dashboard/categories.ts
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html
@@ -7157,7 +7157,7 @@ msgid "System volume couldn't be detached."
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid "System volume size"
 msgstr "Süsteemi volüümi suurus"
 
@@ -8297,7 +8297,7 @@ msgstr "Kasutaja töölaud"
 #: src/azure/vm/azure-virtual-machine-config.js
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "User data"
 msgstr "Kasutajaandmed"
@@ -8533,7 +8533,7 @@ msgstr "Käibemaksu määr (%)"
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "VM name"
 msgstr "VMi nimi"
@@ -8980,7 +8980,7 @@ msgstr ""
 "\">profiilile</a>."
 
 #: src/ansible/playbook-jobs/create/ansible-job-create.js
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 msgid ""
 "You have not added any SSH keys to your <a ui-sref=\"profile.keys\">profile</"
 "a>."
@@ -9221,7 +9221,7 @@ msgstr "Kasutajad"
 #: src/digitalocean/digitalocean-droplet-config.js
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html
-#: src/openstack/openstack-instance/openstack-instance-config.js
+#: src/openstack/openstack-instance/utils.js
 #: src/openstack/openstack-tenant/openstack-tenant-prices.js
 #: src/rijkscloud/InstanceCreateConfig.js
 msgid "vCPU"

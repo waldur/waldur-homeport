@@ -14,11 +14,6 @@ import { offeringSelector } from '@waldur/marketplace/details/selectors';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 import * as api from '@waldur/openstack/api';
 import {
-  flavorValidator,
-  flavorComparator,
-  internalIpFormatter,
-} from '@waldur/openstack/openstack-instance/openstack-instance-config';
-import {
   OpenstackInstanceNetworks,
   getDefaultFloatingIps,
 } from '@waldur/openstack/openstack-instance/OpenstackInstanceNetworks';
@@ -31,6 +26,9 @@ import {
   SshKey,
 } from '@waldur/openstack/openstack-instance/types';
 import {
+  flavorValidator,
+  flavorComparator,
+  formatSubnet,
   validateAndSort,
   calculateSystemVolumeSize,
   formatVolumeTypeChoices,
@@ -157,7 +155,7 @@ export class OpenstackInstanceCreateFormComponent extends Component<
           return {
             subnet: {
               ...subnet,
-              label: internalIpFormatter(subnet),
+              label: formatSubnet(subnet),
             },
             floatingIp,
           };

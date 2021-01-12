@@ -1,7 +1,5 @@
 import angular from 'angular';
 
-import openstackBackupRestoreSummary from '@waldur/openstack/openstack-backup/openstack-backup-restore-summary';
-import openstackInstanceNetworks from '@waldur/openstack/openstack-instance/openstack-instance-networks';
 import actionDialog from '@waldur/resource/actions/dialog/action-dialog';
 import actionFieldBoolean from '@waldur/resource/actions/dialog/action-field-boolean';
 import actionFieldDecimal from '@waldur/resource/actions/dialog/action-field-decimal';
@@ -18,11 +16,6 @@ import { react2angular } from '@waldur/shims/react2angular';
 
 const module = angular.module('waldur', []);
 
-module.component('openstackInstanceNetworks', openstackInstanceNetworks);
-module.component(
-  'openstackBackupRestoreSummary',
-  openstackBackupRestoreSummary,
-);
 module.component('actionDialog', actionDialog);
 module.component('actionField', actionField);
 module.component('actionFieldBoolean', actionFieldBoolean);

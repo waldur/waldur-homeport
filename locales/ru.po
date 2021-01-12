@@ -693,7 +693,7 @@ msgstr "Удалить"
 #: src/offering/offering-summary.html:65
 #: src/openstack/openstack-backup/backup-snapshots-list.js:37
 #: src/openstack/openstack-backup/openstack-backups-list.js:43
-#: src/openstack/openstack-instance/openstack-instance-config.js:143
+#: src/openstack/openstack-instance/utils.js:143
 #: src/openstack/openstack-tenant/openstack-tenant-config.js:47
 #: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.js:30
 #: src/openstack/openstack-volume/openstack-volume-config.js:25
@@ -1160,7 +1160,7 @@ msgstr "Больше информации"
 #: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:34
 #: src/openstack/openstack-backup/backup-snapshots-list.js:32
 #: src/openstack/openstack-backup/openstack-backups-list.js:38
-#: src/openstack/openstack-instance/openstack-instance-config.js:90
+#: src/openstack/openstack-instance/utils.js:90
 #: src/openstack/openstack-network/openstack-tenant-networks.js:36
 #: src/openstack/openstack-security-groups/security-groups-list.js:35
 #: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:34
@@ -1191,7 +1191,7 @@ msgid "Network has been updated."
 msgstr "Сеть обновлена."
 
 #: src/openstack/openstack-backup/actions.js:41
-#: src/openstack/openstack-instance/openstack-instance-config.js:122
+#: src/openstack/openstack-instance/utils.js:122
 #: src/openstack/openstack-network/breadcrumbs.js:22
 #: src/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"

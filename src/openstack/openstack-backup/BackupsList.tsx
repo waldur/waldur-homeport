@@ -24,7 +24,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Keep until'),
-          render: ({ row }) => formatDateTime(row.kept_until),
+          render: ({ row }) =>
+            row.kept_until
+              ? formatDateTime(row.kept_until)
+              : translate('Keep forever'),
         },
         {
           title: translate('State'),

@@ -15,6 +15,20 @@ import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types
 
 import { AvailabilityZone, VolumeType } from './types';
 
+export interface BackupRestoreRequestBody {
+  flavor: string;
+  internal_ips_set: {
+    subnet: string;
+  }[];
+  floating_ips: {
+    subnet: string;
+    url?: string;
+  }[];
+  security_groups: {
+    url: string;
+  }[];
+}
+
 export const loadFlavors = (settings_uuid: string) =>
   getAll<Flavor>('/openstacktenant-flavors/', { params: { settings_uuid } });
 
@@ -133,6 +147,9 @@ export const restoreSnapshot = (id, data) =>
 
 export const updateBackup = (id, data) =>
   put(`/openstacktenant-backups/${id}/`, data);
+
+export const restoreBackup = (id: string, data: BackupRestoreRequestBody) =>
+  post(`/openstacktenant-backups/${id}/restore/`, data);
 
 export const createBackup = (id, data) =>
   post(`/openstacktenant-instances/${id}/backup/`, data);

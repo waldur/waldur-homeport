@@ -9,8 +9,8 @@ import { loadFloatingIps, setFloatingIps } from '@waldur/openstack/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 
-import { internalIpFormatter } from '../../openstack-instance-config';
 import { OpenStackInstance } from '../../types';
+import { formatSubnet } from '../../utils';
 
 interface FloatingIpPair {
   floating_ip: string | boolean;
@@ -29,10 +29,10 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance) => {
       loadFloatingIps(resource.service_settings_uuid).then((floatingIps) => [
         {
           value: true,
-          display_name: translate('Auto-assign floating IP'),
+          label: translate('Auto-assign floating IP'),
         },
         ...floatingIps.map((item) => ({
-          display_name: item.address,
+          label: item.address,
           value: item.url,
         })),
       ]),
@@ -41,10 +41,10 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance) => {
 
   const subnets = useMemo(
     () => [
-      { value: '', display_name: translate('Select connected subnet') },
+      { value: '', label: translate('Select connected subnet') },
       ...resource.internal_ips_set.map((internal_ip) => ({
         value: internal_ip.subnet,
-        display_name: internalIpFormatter({
+        label: formatSubnet({
           name: internal_ip.subnet_name,
           cidr: internal_ip.subnet_cidr,
         }),

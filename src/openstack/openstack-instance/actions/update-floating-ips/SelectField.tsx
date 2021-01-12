@@ -14,9 +14,9 @@ export const SelectField = ({ name, options, disabled = false }) => (
     componentClass="select"
     disabled={disabled}
   >
-    {options.map((subnet, index) => (
-      <option value={subnet.value} key={index}>
-        {subnet.display_name}
+    {options.map((option, index) => (
+      <option value={option.value} key={index}>
+        {option.label}
       </option>
     ))}
   </Field>
