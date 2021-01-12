@@ -120,12 +120,12 @@ export const removeCartItem = (id: string) =>
 
 export const updateCartItem = (id: string, data: object) =>
   patch(`/marketplace-cart-items/${id}/`, data).then(
-    (response) => response.data, // update
+    (response) => response.data,
   );
 
 export const submitCart = (data: object) =>
   post<SubmitCartRequest>('/marketplace-cart-items/submit/', data).then(
-    (response) => response.data, // add
+    (response) => response.data,
   );
 
 export const getOrdersList = (params?: {}) =>
