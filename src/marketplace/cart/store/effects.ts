@@ -40,7 +40,6 @@ const handlePastSlots = (attributes) => {
       ? {
           ...schedule,
           start: currentTimePlus20Minutes,
-          title: schedule.title || 'test',
         }
       : schedule,
   );
@@ -138,8 +137,6 @@ function* removeItem(action) {
 
 function* updateItem(action) {
   try {
-    // eslint-disable-next-line no-console
-    console.log('action.payload.item', action.payload.item);
     const item = yield call(
       api.updateCartItem,
       action.payload.item.uuid,
@@ -171,7 +168,7 @@ function* createOrder() {
     return;
   }
   try {
-    const order = yield call(api.submitCart, { project: project.url }); //
+    const order = yield call(api.submitCart, { project: project.url });
     yield put(showSuccess(translate('Order has been submitted.')));
     yield put(actions.createOrderSuccess());
     const workspace: WorkspaceType = yield select(getWorkspace);
@@ -204,5 +201,3 @@ export default function* () {
   yield takeEvery(constants.REMOVE_ITEM_REQUEST, removeItem);
   yield takeEvery(constants.CREATE_ORDER_REQUEST, createOrder);
 }
-
-// Request URL: https://rest-test.nodeconductor.com/api/marketplace-cart-items/833887cfbe9444229eddfe0027aed397/
