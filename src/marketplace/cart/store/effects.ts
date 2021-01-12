@@ -32,32 +32,28 @@ const flattenAttributes = (attributes) => {
   return newAttributes;
 };
 
-const formatAttributes = (attributes) => {
+const handlePastSlots = (attributes) => {
   const currentTime = moment().format();
   const currentTimePlus20Minutes = moment().add(20, 'minutes').format();
-
-  const newSchedules = attributes.schedules.map((schedule) => {
-    if (moment(schedule.start).isBefore(currentTime)) {
-      return {
-        ...schedule,
-        start: currentTimePlus20Minutes,
-        title: schedule.title || 'test',
-      };
-    } else {
-      return schedule;
-    }
-  });
+  const schedules = attributes.schedules.map((schedule) =>
+    moment(schedule.start).isBefore(currentTime)
+      ? {
+          ...schedule,
+          start: currentTimePlus20Minutes,
+          title: schedule.title || 'test',
+        }
+      : schedule,
+  );
   return {
     ...attributes,
-    schedules: newSchedules,
+    schedules,
   };
 };
 
 const formatItem = (item) => ({
   plan: item.plan ? item.plan.url : undefined,
   project: item.project,
-  attributes: flattenAttributes(formatAttributes(item.attributes)),
-  // attributes: flattenAttributes(item.attributes),
+  attributes: flattenAttributes(handlePastSlots(item.attributes)),
   limits: item.limits,
 });
 

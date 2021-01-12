@@ -118,7 +118,6 @@ export const addCartItem = (data: object) =>
 export const removeCartItem = (id: string) =>
   deleteById('/marketplace-cart-items/', id);
 
-// Request URL: https://rest-test.nodeconductor.com/api/marketplace-cart-items/833887cfbe9444229eddfe0027aed397/
 export const updateCartItem = (id: string, data: object) =>
   patch(`/marketplace-cart-items/${id}/`, data).then(
     (response) => response.data, // update
