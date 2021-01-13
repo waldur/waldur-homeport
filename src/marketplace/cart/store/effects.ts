@@ -41,23 +41,15 @@ export const handlePastSlotsForBookingOffering = (attributes) => {
   if (!attributes.schedules) {
     return attributes;
   }
-  // eslint-disable-next-line no-console
-  console.log('before attributes', attributes);
-  const currentTime = moment().format();
   const currentTimePlus20Minutes = moment().add(20, 'minutes').format();
   const schedules = attributes.schedules.map((schedule) =>
-    moment(schedule.start).isBefore(currentTime)
+    moment(schedule.start).isSameOrBefore()
       ? {
           ...schedule,
           start: currentTimePlus20Minutes,
         }
       : schedule,
   );
-  // eslint-disable-next-line no-console
-  console.log('after attributes', {
-    ...attributes,
-    schedules,
-  });
   return {
     ...attributes,
     schedules,
