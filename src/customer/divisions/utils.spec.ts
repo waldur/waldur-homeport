@@ -4,7 +4,6 @@ const customers = require('./fixtures/customers.json');
 const divisions = require('./fixtures/divisions.json');
 const eChartOption = require('./fixtures/echart-option.json');
 
-// example
 jest.mock('moment-timezone', () => {
   return () => jest.requireActual('moment')('2020-07-01T00:00:00.000Z');
 });
