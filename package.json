@@ -18,12 +18,14 @@
     "format:fix": "yarn prettier --write \"src/**/*.js\" \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
     "lint:check": "yarn eslint --ext ts,tsx src",
     "lint:fix": "yarn eslint --fix --ext ts,tsx src",
-    "test": "yarn format:check && yarn lint:check && jest --verbose --runInBand && npm run build",
+    "_test": "yarn format:check && yarn lint:check && jest --verbose --runInBand && npm run build",
     "ci:conf": "mkdirp build/scripts/configs/ && cp src/configs/test-config.json build/scripts/configs/config.json",
     "ci:start": "yarn build && yarn ci:conf && yarn serve build --single --listen 8001",
     "ci:run": "cypress run",
     "ci:test": "start-server-and-test ci:start http://localhost:8001/ ci:run",
-    "gettext:extract": "angular-gettext-cli --files 'src/**/*.+(js|ts|tsx|html)' --exclude '**/*.spec.(js|ts|tsx)' --dest './locales/template.pot' --marker-names translate,gettext --no-line-numbers"
+    "gettext:extract": "angular-gettext-cli --files 'src/**/*.+(js|ts|tsx|html)' --exclude '**/*.spec.(js|ts|tsx)' --dest './locales/template.pot' --marker-names translate,gettext --no-line-numbers",
+    "test": "TZ=UTC jest",
+    "coverage": "TZ=UTC jest --coverage"
   },
   "dependencies": {
     "@fullcalendar/bootstrap": "~4.2.0",

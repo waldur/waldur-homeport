@@ -38,6 +38,8 @@ const flattenAttributes = (attributes) => {
  * We add a small buffer that corresponds to max time spend on creating a booking
  */
 export const handlePastSlotsForBookingOffering = (attributes) => {
+  // eslint-disable-next-line no-console
+  console.log('moment().format()', moment().format());
   if (!attributes.schedules) {
     return attributes;
   }
