@@ -1,10 +1,15 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import {
-  validateState,
-  createLatinNameField,
-  createDescriptionField,
-} from '@waldur/resource/actions/base';
+import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
+
+const CreateSecurityGroupDialog = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CreateSecurityGroupDialog" */ './CreateSecurityGroupDialog'
+    ),
+  'CreateSecurityGroupDialog',
+);
 
 export default function createAction(): ResourceAction {
   return {
@@ -13,29 +18,8 @@ export default function createAction(): ResourceAction {
     method: 'POST',
     tab: 'security_groups',
     title: translate('Create'),
-    dialogTitle: translate('Create security group for OpenStack tenant'),
+    component: CreateSecurityGroupDialog,
     iconClass: 'fa fa-plus',
-    fields: [
-      createLatinNameField(),
-      createDescriptionField(),
-      {
-        name: 'rules',
-        component: 'securityGroupRuleEditor',
-      },
-    ],
-    serializer: (form) => {
-      return {
-        name: form.name,
-        description: form.description,
-        rules: form.rules.map((rule) => ({
-          ...rule,
-          protocol: rule.protocol === null ? '' : rule.protocol,
-        })),
-      };
-    },
-    onSuccess: () => {
-      // TODO: refreshSecurityGroupsList
-    },
     dialogSize: 'xl',
     validators: [validateState('OK')],
   };

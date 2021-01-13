@@ -1536,8 +1536,8 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
-msgid "Create security group for OpenStack tenant"
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
+msgid "Create security group for OpenStack tenant {name}"
 msgstr ""
 
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
@@ -1869,6 +1869,7 @@ msgstr ""
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
@@ -3916,6 +3917,7 @@ msgstr ""
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
@@ -6506,6 +6508,10 @@ msgstr ""
 msgid "Search for offerings..."
 msgstr ""
 
+#: src/openstack/openstack-tenant/actions/utils.ts
+msgid "Security group creation has been scheduled."
+msgstr ""
+
 #: src/openstack/openstack-security-groups/rule-editor/RulesList.tsx
 msgid "Security group does not contain any rule yet."
 msgstr ""
@@ -7237,6 +7243,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsForm.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesForm.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
@@ -7575,11 +7582,11 @@ msgid "The project will be changed for all items in cart."
 msgstr ""
 
 #: src/openstack/openstack-security-groups/rule-editor/CIDRField.tsx
-msgid "The value is not valid IP v4"
+msgid "The value is not valid IP v4 CIDR"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/rule-editor/CIDRField.tsx
-msgid "The value is not valid IP v6"
+msgid "The value is not valid IP v6 CIDR"
 msgstr ""
 
 #: src/rancher/cluster/create/LonghornWorkerWarning.tsx
@@ -8053,6 +8060,10 @@ msgstr ""
 msgid "Unable to create request."
 msgstr ""
 
+#: src/openstack/openstack-tenant/actions/utils.ts
+msgid "Unable to create security group."
+msgstr ""
+
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
 msgid "Unable to create snapshot schedule."
 msgstr ""
@@ -8254,6 +8265,7 @@ msgstr ""
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsForm.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesForm.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx

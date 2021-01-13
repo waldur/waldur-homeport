@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
-import { FormSection, WrappedFieldArrayProps } from 'redux-form';
+import { FormName, FormSection, WrappedFieldArrayProps } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
@@ -35,15 +35,20 @@ export const RulesList: FC<Props> = ({ fields, remoteSecurityGroups }) => (
             <RulesHeader />
           </thead>
           <tbody>
-            {fields.map((rule, index) => (
-              <FormSection name={rule} key={index}>
-                <RuleRow
-                  name={rule}
-                  onRemove={() => fields.remove(index)}
-                  remoteSecurityGroups={remoteSecurityGroups}
-                />
-              </FormSection>
-            ))}
+            <FormName>
+              {({ form }) =>
+                fields.map((rule, index) => (
+                  <FormSection name={rule} key={index}>
+                    <RuleRow
+                      formName={form}
+                      ruleName={rule}
+                      onRemove={() => fields.remove(index)}
+                      remoteSecurityGroups={remoteSecurityGroups}
+                    />
+                  </FormSection>
+                ))
+              }
+            </FormName>
           </tbody>
         </>
       )}

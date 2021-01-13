@@ -3,7 +3,11 @@ import { Provider } from 'react-redux';
 import { Store } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { actWait, updateWrapper } from '@waldur/core/testUtils';
+import {
+  actWait,
+  findButtonByText,
+  updateWrapper,
+} from '@waldur/core/testUtils';
 import {
   FloatingIp,
   OpenStackInstance,
@@ -49,12 +53,6 @@ export const fakeFloatingIPs = ([
 ] as unknown) as FloatingIp[];
 
 type DialogWrapperType = ReactWrapper<typeof UpdateFloatingIpsDialog>;
-
-function findButtonByText(wrapper: DialogWrapperType, text: string) {
-  return wrapper.findWhere(
-    (node) => node.type() === 'button' && node.text().trim() === text,
-  );
-}
 
 export class DialogFixture {
   store: Store;

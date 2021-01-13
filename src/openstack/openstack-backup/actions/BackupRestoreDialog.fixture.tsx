@@ -4,7 +4,11 @@ import Select from 'react-select';
 import { Store } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { actWait, updateWrapper } from '@waldur/core/testUtils';
+import {
+  actWait,
+  findButtonByText,
+  updateWrapper,
+} from '@waldur/core/testUtils';
 import { Flavor, Subnet } from '@waldur/openstack/openstack-instance/types';
 
 import { OpenStackBackup } from '../types';
@@ -84,12 +88,6 @@ export const fakeFlavors = ([
 ] as unknown) as Flavor[];
 
 type DialogWrapperType = ReactWrapper<typeof BackupRestoreDialog>;
-
-function findButtonByText(wrapper: DialogWrapperType, text: string) {
-  return wrapper.findWhere(
-    (node) => node.type() === 'button' && node.text().trim() === text,
-  );
-}
 
 export class DialogFixture {
   store: Store;

@@ -3,7 +3,11 @@ import { Provider } from 'react-redux';
 import { Store } from 'redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { actWait, updateWrapper } from '@waldur/core/testUtils';
+import {
+  actWait,
+  findButtonByText,
+  updateWrapper,
+} from '@waldur/core/testUtils';
 
 import { SecurityGroupEditorDialog } from './SecurityGroupEditorDialog';
 import { SecurityGroup } from './types';
@@ -27,7 +31,7 @@ export const fakeSecurityGroup = {
   tenant: '/api/openstack-tenants/2bfc029827bb41e884ff60f4b8eff3b2/',
 } as SecurityGroup;
 
-export const defaultSecurityGroup = {
+export const defaultSecurityGroup = ({
   url: '/api/openstack-security-groups/c4d9e3ece3be48ddb6dcf86c81b695de/',
   uuid: 'c4d9e3ece3be48ddb6dcf86c81b695de',
   name: 'default',
@@ -47,15 +51,9 @@ export const defaultSecurityGroup = {
       protocol: '',
     },
   ],
-} as SecurityGroup;
+} as unknown) as SecurityGroup;
 
 type DialogWrapperType = ReactWrapper<typeof SecurityGroupEditorDialog>;
-
-function findButtonByText(wrapper: DialogWrapperType, text: string) {
-  return wrapper.findWhere(
-    (node) => node.type() === 'button' && node.text().trim() === text,
-  );
-}
 
 export class DialogFixture {
   store: Store;
