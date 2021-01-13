@@ -41,10 +41,13 @@ export const useCreateSecurityGroupForm = (resource: OpenStackTenant) => {
     try {
       await createSecurityGroup(resource.uuid, {
         ...formData,
-        rules: formData.rules.map((rule) => ({
-          ...rule,
-          protocol: rule.protocol === null ? '' : rule.protocol,
-        })),
+        rules:
+          formData.rules === undefined
+            ? []
+            : formData.rules.map((rule) => ({
+                ...rule,
+                protocol: rule.protocol === null ? '' : rule.protocol,
+              })),
       });
       dispatch(
         showSuccess(translate('Security group creation has been scheduled.')),
