@@ -1,5 +1,3 @@
-import { ENV } from '@waldur/configs/default';
-import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { gettext } from '@waldur/i18n';
 
 export const defaultFieldOptions = {
@@ -32,16 +30,6 @@ export const DEFAULT_EDIT_ACTION = {
       required: false,
       type: 'text',
     },
-  },
-};
-
-export const latinName = {
-  label: gettext('Name'),
-  maxlength: 150,
-  required: true,
-  type: 'string',
-  init: (field) => {
-    field.pattern = ENV.enforceLatinName && LATIN_NAME_PATTERN;
   },
 };
 

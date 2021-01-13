@@ -13,7 +13,13 @@ import {
 } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 
-import { AvailabilityZone, VolumeType } from './types';
+import {
+  AvailabilityZone,
+  EthernetType,
+  SecurityGroupDirection,
+  SecurityGroupProtocol,
+  VolumeType,
+} from './types';
 
 export interface BackupRestoreRequestBody {
   flavor: string;
@@ -27,6 +33,23 @@ export interface BackupRestoreRequestBody {
   security_groups: {
     url: string;
   }[];
+}
+
+interface CreateSecurityGroupRuleRequestBody {
+  ethertype: EthernetType;
+  direction: SecurityGroupDirection;
+  protocol: SecurityGroupProtocol;
+  from_port: number;
+  to_port: number;
+  cidr: string;
+  remote_group?: string;
+  description?: string;
+}
+
+export interface CreateSecurityGroupRequestBody {
+  name: string;
+  description?: string;
+  rules: CreateSecurityGroupRuleRequestBody[];
 }
 
 export const loadFlavors = (settings_uuid: string) =>
@@ -120,6 +143,11 @@ export const getInstances = (params) =>
 
 export const updateTenant = (id, data) =>
   put(`/openstack-tenants/${id}/`, data);
+
+export const createSecurityGroup = (
+  id: string,
+  data: CreateSecurityGroupRequestBody,
+) => post(`/openstack-tenants/${id}/create_security_group/`, data);
 
 export const updateNetwork = (id, data) =>
   put(`/openstack-networks/${id}/`, data);

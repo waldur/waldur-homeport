@@ -14,18 +14,20 @@ import { RemoteGroupField } from './RemoteGroupField';
 import { ToPortField } from './ToPortField';
 import { getRuleSelector } from './utils';
 
-interface Props {
-  name: string;
+interface RuleRowProps {
+  formName: string;
+  ruleName: string;
   onRemove(): void;
   remoteSecurityGroups: SecurityGroup[];
 }
 
-export const RuleRow: FC<Props> = ({
-  name,
+export const RuleRow: FC<RuleRowProps> = ({
+  formName,
+  ruleName,
   onRemove,
   remoteSecurityGroups,
 }) => {
-  const rule = useSelector(getRuleSelector(name));
+  const rule = useSelector(getRuleSelector(formName, ruleName));
   return (
     <tr>
       <EtherTypeField />

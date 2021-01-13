@@ -39,8 +39,9 @@ export const getToPortMin = (rule: Rule) => {
 
 const FORM_NAME = 'securityGroupRuleEdit';
 
-export const getRuleSelector = (name: string) => (state: RootState) =>
-  formValueSelector(FORM_NAME)(state, name) as Rule;
+export const getRuleSelector = (formName: string, name: string) => (
+  state: RootState,
+) => formValueSelector(formName)(state, name) as Rule;
 
 type OwnProps = ReturnType<typeof useRulesEditor> & { resourceName: string };
 

@@ -11,15 +11,15 @@ const IPv4_CIDR_PATTERN = cidrRegex.v4({ exact: true });
 
 const IPv6_CIDR_PATTERN = cidrRegex.v6({ exact: true });
 
-const validateIPv4 = (value: string) => {
+const validateIPv4CIDR = (value: string) => {
   if (value && !value.match(IPv4_CIDR_PATTERN)) {
-    return translate('The value is not valid IP v4');
+    return translate('The value is not valid IP v4 CIDR');
   }
 };
 
-const validateIPv6 = (value: string) => {
+const validateIPv6CIDR = (value: string) => {
   if (value && !value.match(IPv6_CIDR_PATTERN)) {
-    return translate('The value is not valid IP v6');
+    return translate('The value is not valid IP v6 CIDR');
   }
 };
 
@@ -39,7 +39,7 @@ export const CIDRField: FC<Props> = ({ rule }) => (
   <Field
     name="cidr"
     component={FormField}
-    validate={rule.ethertype === 'IPv4' ? validateIPv4 : validateIPv6}
+    validate={rule.ethertype === 'IPv4' ? validateIPv4CIDR : validateIPv6CIDR}
     placeholder={getCIDRPlaceholder(rule)}
   />
 );

@@ -20,3 +20,9 @@ export async function updateWrapper<P = {}>(
     wrapper.update();
   });
 }
+
+export function findButtonByText(wrapper: ReactWrapper, text: string) {
+  return wrapper.findWhere(
+    (node) => node.type() === 'button' && node.text().trim() === text,
+  );
+}
