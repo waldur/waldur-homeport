@@ -45,7 +45,9 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
                 order_item_uuid={props.item.uuid}
                 project_uuid={props.project_uuid}
               >
-                {props.item.attributes.name || props.item.offering_name}
+                {props.item.attributes.name ||
+                  props.item.resource_name ||
+                  props.item.offering_name}
               </OrderItemDetailsLink>
             </h5>
             <p>
