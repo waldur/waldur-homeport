@@ -58,7 +58,9 @@ export const ShoppingCartItem: FunctionComponent<ShoppingCartItemProps> = (
           <div className="offering-info">
             <h5 className="offering-title">
               <ShoppingCartItemUpdateLink order_item_uuid={props.item.uuid}>
-                {props.item.attributes.name || props.item.offering_name}
+                {props.item.attributes.name ||
+                  props.item.resource_name ||
+                  props.item.offering_name}
               </ShoppingCartItemUpdateLink>
             </h5>
             <p>
