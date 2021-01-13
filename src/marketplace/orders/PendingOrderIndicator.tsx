@@ -163,7 +163,9 @@ const PendingOrderDropdownItem: FunctionComponent<any> = (props) => (
             <div key={item.uuid}>
               <p>
                 <>{getNamePrefix(item.type)} </>
-                <strong>{item.attributes.name}</strong>
+                <strong>
+                  {item.attributes.name || props.item.resource_name}
+                </strong>
               </p>
               <span className="display-flex text-muted small">
                 {getLabel(item.offering_type)}
