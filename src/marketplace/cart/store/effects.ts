@@ -37,10 +37,12 @@ const flattenAttributes = (attributes) => {
  * sets the time to 20 minutes later in the future.
  * We add a small buffer that corresponds to max time spend on creating a booking
  */
-const handlePastSlotsForBookingOffering = (attributes) => {
+export const handlePastSlotsForBookingOffering = (attributes) => {
   if (!attributes.schedules) {
     return attributes;
   }
+  // eslint-disable-next-line no-console
+  console.log('before attributes', attributes);
   const currentTime = moment().format();
   const currentTimePlus20Minutes = moment().add(20, 'minutes').format();
   const schedules = attributes.schedules.map((schedule) =>
@@ -51,6 +53,11 @@ const handlePastSlotsForBookingOffering = (attributes) => {
         }
       : schedule,
   );
+  // eslint-disable-next-line no-console
+  console.log('after attributes', {
+    ...attributes,
+    schedules,
+  });
   return {
     ...attributes,
     schedules,

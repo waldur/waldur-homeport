@@ -5,6 +5,7 @@ const eChartOption = require('./fixtures/echart-option.json');
 const usages = require('./fixtures/usages.json');
 const userUsages = require('./fixtures/user-usages.json');
 
+// setting mock time example
 jest.mock('moment-timezone', () => {
   return () => jest.requireActual('moment')('2020-07-01T00:00:00.000Z');
 });
