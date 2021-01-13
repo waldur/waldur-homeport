@@ -4,7 +4,7 @@ const attributesAfter = require('./fixtures/attributes-after.json');
 const attributesBefore = require('./fixtures/attributes-before.json');
 
 jest.mock('moment-timezone', () => {
-  return () => jest.requireActual('moment')('2020-01-13T00:00:00.000Z');
+  return () => jest.requireActual('moment')('2020-01-13T13:30:00+04:00');
 });
 
 describe('Booking offering time slots', () => {
