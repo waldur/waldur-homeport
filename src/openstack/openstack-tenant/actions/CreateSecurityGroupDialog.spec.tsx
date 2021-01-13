@@ -58,4 +58,25 @@ describe('CreateSecurityGroupDialog', () => {
       ],
     });
   });
+
+  it('allows to create empty group', async () => {
+    // Arrange
+    apiMock.createSecurityGroup.mockResolvedValue(null);
+    const dialog = new DialogFixture(store);
+    await dialog.render();
+    await dialog.update();
+
+    // Act
+    dialog.name = 'Empty';
+    dialog.description = 'Empty Security Group';
+    dialog.submitForm();
+    await dialog.update();
+
+    // Assert
+    expect(apiMock.createSecurityGroup).toBeCalledWith(fakeTenant.uuid, {
+      name: 'Empty',
+      description: 'Empty Security Group',
+      rules: [],
+    });
+  });
 });
