@@ -19,6 +19,7 @@ RUN yarn build
 # production environment
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/build-info /
 
 ENV API_URL="http://localhost:8080"
 
