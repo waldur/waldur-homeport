@@ -37,7 +37,10 @@ const flattenAttributes = (attributes) => {
  * sets the time to 20 minutes later in the future.
  * We add a small buffer that corresponds to max time spend on creating a booking
  */
-const handlePastSlots = (attributes) => {
+const handlePastSlotsForBookingOffering = (attributes) => {
+  if (!attributes.schedules) {
+    return attributes;
+  }
   const currentTime = moment().format();
   const currentTimePlus20Minutes = moment().add(20, 'minutes').format();
   const schedules = attributes.schedules.map((schedule) =>
@@ -57,7 +60,9 @@ const handlePastSlots = (attributes) => {
 const formatItem = (item) => ({
   plan: item.plan ? item.plan.url : undefined,
   project: item.project,
-  attributes: flattenAttributes(handlePastSlots(item.attributes)),
+  attributes: flattenAttributes(
+    handlePastSlotsForBookingOffering(item.attributes),
+  ),
   limits: item.limits,
 });
 
