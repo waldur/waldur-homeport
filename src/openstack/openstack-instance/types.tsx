@@ -50,6 +50,7 @@ export interface Flavor extends ServiceComponent {
   name: string;
   disabled: boolean;
   display_name?: string;
+  disk: number;
 }
 
 export interface Image extends ServiceComponent {

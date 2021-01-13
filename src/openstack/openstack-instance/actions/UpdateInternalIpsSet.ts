@@ -3,7 +3,7 @@ import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 import { ResourceAction } from '@waldur/resource/actions/types';
 
-import { internalIpFormatter } from '../openstack-instance-config';
+import { formatSubnet } from '../utils';
 
 function createSubnetField(ctx) {
   return {
@@ -13,7 +13,7 @@ function createSubnetField(ctx) {
     placeholder: translate('Select subnets to connect to...'),
     resource_default_value: true,
     serializer: (items) => items.map((item) => ({ subnet: item.value })),
-    formatter: (item) => internalIpFormatter(item),
+    formatter: (item) => formatSubnet(item),
     modelParser: (_, items) =>
       items.map((item) => ({
         url: item.subnet,

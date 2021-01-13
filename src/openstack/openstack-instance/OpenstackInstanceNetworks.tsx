@@ -4,8 +4,8 @@ import Select from 'react-select';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { internalIpFormatter } from '@waldur/openstack/openstack-instance/openstack-instance-config';
 import { Subnet, FloatingIp } from '@waldur/openstack/openstack-instance/types';
+import { formatSubnet } from '@waldur/openstack/openstack-instance/utils';
 
 interface NetworkItem {
   subnet?;
@@ -95,7 +95,7 @@ export class OpenstackInstanceNetworks extends Component<OpenstackInstanceNetwor
       .filter(this.getAvailableNetworkItems('subnet'))
       .map((subnet) => ({
         ...subnet,
-        label: internalIpFormatter(subnet),
+        label: formatSubnet(subnet),
       }));
 
   getFreeFloatingIps = () => [

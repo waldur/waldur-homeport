@@ -233,9 +233,9 @@ msgid "Activity stream"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsForm.tsx
+#: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
-#: src/openstack/openstack-instance/openstack-instance-networks.js
 #: src/project/team/AddProjectMemberDialog.tsx
 msgid "Add"
 msgstr ""
@@ -743,9 +743,9 @@ msgstr ""
 msgid "Auto approve in service provider projects"
 msgstr ""
 
+#: src/openstack/openstack-backup/actions/utils.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
-#: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Auto-assign floating IP"
 msgstr ""
 
@@ -1806,9 +1806,9 @@ msgstr ""
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
+#: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
-#: src/openstack/openstack-instance/openstack-instance-networks.js
 #: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
 #: src/project/ProjectDeleteButton.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
@@ -2574,7 +2574,7 @@ msgstr ""
 msgid "Fixed-price contract"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions/RestoreAction.ts
+#: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/FlavorGroup.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/cluster/create/NodeFlavorGroup.tsx
@@ -3327,6 +3327,7 @@ msgstr ""
 msgid "Job title"
 msgstr ""
 
+#: src/openstack/openstack-backup/BackupsList.tsx
 #: src/resource/utils.tsx
 msgid "Keep forever"
 msgstr ""
@@ -4037,7 +4038,7 @@ msgstr ""
 msgid "Network name"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions/RestoreAction.ts
+#: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-network/breadcrumbs.ts
 #: src/openstack/openstack-subnet/breadcrumbs.ts
@@ -6244,6 +6245,10 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
+#: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
+msgid "Restore virtual machine from backup {name}"
+msgstr ""
+
 #: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
 msgid "Restore volume snapshot"
 msgstr ""
@@ -6513,7 +6518,7 @@ msgstr ""
 msgid "Security group rules update has been scheduled."
 msgstr ""
 
-#: src/openstack/openstack-backup/actions/RestoreAction.ts
+#: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
@@ -6605,8 +6610,8 @@ msgstr ""
 msgid "Select certifications"
 msgstr ""
 
+#: src/openstack/openstack-backup/actions/utils.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/utils.tsx
-#: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Select connected subnet"
 msgstr ""
 
@@ -6706,7 +6711,7 @@ msgstr ""
 msgid "Select role"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions/RestoreAction.ts
+#: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceSecurityGroups.tsx
 #: src/openstack/openstack-instance/actions/UpdateSecurityGroupsAction.ts
 msgid "Select security groups..."
@@ -7038,8 +7043,8 @@ msgstr ""
 msgid "Skip connection to external network"
 msgstr ""
 
+#: src/openstack/openstack-backup/actions/utils.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
-#: src/openstack/openstack-instance/openstack-instance-networks.js
 msgid "Skip floating IP assignment"
 msgstr ""
 
@@ -7229,6 +7234,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
+#: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsForm.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesForm.tsx
 #: src/openstack/openstack-volume/VolumeExtendDialog.tsx
@@ -8245,6 +8251,7 @@ msgstr ""
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/offering/OfferingDetails.tsx
+#: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsForm.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesForm.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
@@ -8482,6 +8489,10 @@ msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Unable to resize droplet."
+msgstr ""
+
+#: src/openstack/openstack-backup/actions/utils.tsx
+msgid "Unable to restore VM snapshot."
 msgstr ""
 
 #: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
@@ -9091,6 +9102,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupAction.ts
 msgid "VM snapshot has been created."
+msgstr ""
+
+#: src/openstack/openstack-backup/actions/utils.tsx
+msgid "VM snapshot restoration has been scheduled."
 msgstr ""
 
 #: src/openstack/openstack-backup-schedule/actions/EditAction.ts

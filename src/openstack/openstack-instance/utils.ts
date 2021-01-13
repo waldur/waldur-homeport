@@ -3,6 +3,8 @@ import { formatFlavor } from '@waldur/resource/utils';
 
 import { VolumeType } from '../types';
 
+import { Flavor } from './types';
+
 export const validateAndSort = (formData, choices, validator, comparator) =>
   choices
     .map((choice) => ({
@@ -104,3 +106,32 @@ export const getVolumeTypeRequirements = (formData) => {
   }
   return required;
 };
+
+export function formatSubnet(subnet) {
+  return `${subnet.name} (${subnet.cidr})`;
+}
+
+export function flavorComparator(a: Flavor, b: Flavor) {
+  if (a.disabled < b.disabled) return -1;
+  if (a.disabled > b.disabled) return 1;
+
+  if (a.cores > b.cores) return 1;
+  if (a.cores < b.cores) return -1;
+
+  if (a.ram > b.ram) return 1;
+  if (a.ram < b.ram) return -1;
+
+  if (a.disk > b.disk) return 1;
+  if (a.disk < b.disk) return -1;
+  return 0;
+}
+
+export function flavorValidator(model, choice) {
+  if (!model.image) {
+    return true;
+  }
+  if (model.image.min_ram > choice.ram) {
+    return true;
+  }
+  return false;
+}

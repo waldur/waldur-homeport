@@ -607,14 +607,14 @@ msgstr "Es gribu citu pakalpojumu"
 #: src/azure/azure-virtual-machine-config.js:26
 #: src/digitalocean/digitalocean-droplet-config.js:31
 #: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:27
-#: src/openstack/openstack-instance/openstack-instance-config.js:24
+#: src/openstack/openstack-instance/utils.js:24
 #: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:22
 msgid "Image"
 msgstr "Attēls"
 
 #: src/azure/azure-virtual-machine-config.js:30
 #: src/digitalocean/digitalocean-droplet-config.js:35
-#: src/openstack/openstack-instance/openstack-instance-config.js:28
+#: src/openstack/openstack-instance/utils.js:28
 msgid "Image name"
 msgstr "Attēla nosaukums"
 
@@ -772,7 +772,7 @@ msgid "Network"
 msgstr "Tīkls"
 
 #: src/openstack/openstack-backup/actions.js:41
-#: src/openstack/openstack-instance/openstack-instance-config.js:122
+#: src/openstack/openstack-instance/utils.js:122
 #: src/openstack/openstack-network/breadcrumbs.js:22
 #: src/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
