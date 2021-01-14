@@ -52,6 +52,17 @@ export interface CreateSecurityGroupRequestBody {
   rules: CreateSecurityGroupRuleRequestBody[];
 }
 
+export interface UpdateInternalIpsRequestBody {
+  internal_ips_set: {
+    subnet: string;
+  }[];
+}
+
+export interface UpdateSecurityGroupsRequestBody {
+  security_groups: {
+    url: string;
+  }[];
+}
 export const loadFlavors = (settings_uuid: string) =>
   getAll<Flavor>('/openstacktenant-flavors/', { params: { settings_uuid } });
 
@@ -98,6 +109,16 @@ export const loadFloatingIps = (settings_uuid: string) =>
 
 export const setFloatingIps = (id, data) =>
   post(`/openstacktenant-instances/${id}/update_floating_ips/`, data);
+
+export const updateInternalIps = (
+  id: string,
+  data: UpdateInternalIpsRequestBody,
+) => post(`/openstacktenant-instances/${id}/update_internal_ips_set/`, data);
+
+export const updateSecurityGroups = (
+  id: string,
+  data: UpdateSecurityGroupsRequestBody,
+) => post(`/openstacktenant-instances/${id}/update_security_groups/`, data);
 
 export const loadSshKeys = (user_uuid: string) =>
   getAll<SshKey>('/keys/', { params: { user_uuid } });

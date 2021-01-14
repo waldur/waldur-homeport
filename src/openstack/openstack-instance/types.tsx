@@ -1,5 +1,7 @@
 import { VirtualMachine } from '@waldur/resource/types';
 
+import { SecurityGroup } from '../openstack-security-groups/types';
+
 interface RancherClusterReference {
   uuid: string;
   name: string;
@@ -9,7 +11,7 @@ export interface OpenStackInstance extends VirtualMachine {
   flavor_name: string;
   floating_ips?: FloatingIp[];
   runtime_state: 'SHUTOFF' | 'ACTIVE';
-  security_groups?: string[];
+  security_groups?: SecurityGroup[];
   availability_zone_name?: string;
   rancher_cluster?: RancherClusterReference;
 }

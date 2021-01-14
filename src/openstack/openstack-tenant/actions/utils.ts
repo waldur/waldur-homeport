@@ -59,14 +59,12 @@ export const useCreateSecurityGroupForm = (resource: OpenStackTenant) => {
       );
     }
   };
-  return { asyncState, submitRequest };
+  return { asyncState, submitRequest, resource };
 };
 
 const FORM_NAME = 'CreateSecurityGroupForm';
 
-type OwnProps = ReturnType<typeof useCreateSecurityGroupForm> & {
-  resourceName: string;
-};
+type OwnProps = ReturnType<typeof useCreateSecurityGroupForm>;
 
 export const connectForm = reduxForm<CreateSecurityGroupFormData, OwnProps>({
   form: FORM_NAME,

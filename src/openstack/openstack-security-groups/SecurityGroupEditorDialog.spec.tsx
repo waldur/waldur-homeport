@@ -1,8 +1,7 @@
-import { reducer as notificationsReducer } from 'reapop';
-import { combineReducers, createStore, Store } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { Store } from 'redux';
 
 import * as api from '@waldur/openstack/api';
+import { createActionStore } from '@waldur/resource/actions/testUtils';
 
 import {
   DialogFixture,
@@ -18,18 +17,14 @@ describe('SecurityGroupEditorDialog', () => {
   let store: Store;
 
   beforeEach(() => {
-    const reducer = combineReducers({
-      form: formReducer,
-      notifications: notificationsReducer(),
-    });
-    store = createStore(reducer);
+    store = createActionStore();
     apiMock.loadSecurityGroupsResources.mockResolvedValue([]);
   });
 
   it('renders current security group rule name in modal dialog title', async () => {
     const dialog = new DialogFixture(store);
     await dialog.render();
-    expect(dialog.modalTitle).toBe('Set rules in HTTP security group');
+    expect(dialog.modalTitle).toBe('Set rules in http security group');
   });
 
   it('renders loading spinner while security groups are being loaded', async () => {

@@ -15,5 +15,5 @@ export const UpdateFloatingIpsDialog: FC<UpdateFloatingIpsDialogProps> = ({
   resolve: { resource },
 }) => {
   const editorState = useFloatingIpsEditor(resource);
-  return <FloatingIpsForm resourceName={resource.name} {...editorState} />;
+  return <FloatingIpsForm {...editorState} />;
 };

@@ -2,13 +2,10 @@ import { FC } from 'react';
 import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { Field, FieldArray } from 'redux-form';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { SelectField } from '@waldur/form';
-import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
 
 import { OpenStackBackup } from '../types';
 
@@ -17,7 +14,7 @@ import { connectBackupRestoreForm, useBackupRestoreForm } from './utils';
 
 const BackupRestoreForm = connectBackupRestoreForm(
   ({
-    resourceName,
+    resource,
     asyncState,
     submitting,
     handleSubmit,
@@ -25,26 +22,16 @@ const BackupRestoreForm = connectBackupRestoreForm(
     invalid,
   }) => (
     <form onSubmit={handleSubmit(submitRequest)}>
-      <ModalDialog
+      <AsyncActionDialog
         title={translate('Restore virtual machine from backup {name}', {
-          name: resourceName,
+          name: resource.name,
         })}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={submitting}
-              disabled={asyncState.loading || invalid}
-              label={translate('Submit')}
-            />
-          </>
-        }
+        loading={asyncState.loading}
+        error={asyncState.error}
+        submitting={submitting}
+        invalid={invalid}
       >
-        {asyncState.loading ? (
-          <LoadingSpinner />
-        ) : asyncState.error ? (
-          <>{translate('Unable to load data.')}</>
-        ) : (
+        {asyncState.value ? (
           <>
             <FormGroup>
               <ControlLabel>{translate('Flavor')}</ControlLabel>
@@ -75,8 +62,8 @@ const BackupRestoreForm = connectBackupRestoreForm(
               />
             </FormGroup>
           </>
-        )}
-      </ModalDialog>
+        ) : null}
+      </AsyncActionDialog>
     </form>
   ),
 );

@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
-import { AsyncState } from 'react-use/lib/useAsync';
 import { formValueSelector, reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
@@ -162,7 +161,7 @@ export const useBackupRestoreForm = (resource: OpenStackBackup) => {
     }
   };
   return {
-    resourceName: resource.name,
+    resource: resource,
     asyncState: asyncState,
     submitRequest: submitRequest,
     initialValues: getInitialValues(resource),
@@ -171,13 +170,11 @@ export const useBackupRestoreForm = (resource: OpenStackBackup) => {
 
 const FORM_NAME = 'BackupRestoreForm';
 
+type BackupRestoreOwnProps = ReturnType<typeof useBackupRestoreForm>;
+
 export const connectBackupRestoreForm = reduxForm<
   BackupRestoreFormData,
-  {
-    resourceName: string;
-    asyncState: AsyncState<BackupFormChoices>;
-    submitRequest(formData: BackupRestoreFormData): void;
-  }
+  BackupRestoreOwnProps
 >({
   form: FORM_NAME,
 });

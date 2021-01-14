@@ -43,7 +43,7 @@ export const getRuleSelector = (formName: string, name: string) => (
   state: RootState,
 ) => formValueSelector(formName)(state, name) as Rule;
 
-type OwnProps = ReturnType<typeof useRulesEditor> & { resourceName: string };
+type OwnProps = ReturnType<typeof useRulesEditor>;
 
 export const connectForm = reduxForm<FormData, OwnProps>({ form: FORM_NAME });
 
@@ -86,5 +86,10 @@ export const useRulesEditor = (resource: SecurityGroup) => {
       );
     }
   };
-  return { asyncState, submitRequest };
+  return {
+    asyncState,
+    submitRequest,
+    resource,
+    initialValues: { rules: resource.rules },
+  };
 };

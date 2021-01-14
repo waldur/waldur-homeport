@@ -13,8 +13,8 @@ import restartAction from './RestartAction';
 import startAction from './StartAction';
 import stopAction from './StopAction';
 import updateFloatingIpsAction from './update-floating-ips/UpdateFloatingIpsAction';
-import updateInternalIpsSet from './UpdateInternalIpsSet';
-import updateSecurityGroupsAction from './UpdateSecurityGroupsAction';
+import updateInternalIpsSet from './update-internal-ips/UpdateInternalIpsSetAction';
+import updateSecurityGroupsAction from './update-security-groups/UpdateSecurityGroupsAction';
 
 export default [
   editAction,
