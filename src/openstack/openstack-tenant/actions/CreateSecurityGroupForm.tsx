@@ -1,14 +1,11 @@
 import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { Field, FieldArray } from 'redux-form';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getLatinNameValidators } from '@waldur/core/validators';
-import { SubmitButton } from '@waldur/form';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { RulesList } from '@waldur/openstack/openstack-security-groups/rule-editor/RulesList';
+import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
 
 import { connectForm } from './utils';
 
@@ -19,29 +16,19 @@ export const CreateSecurityGroupForm = connectForm(
     invalid,
     submitRequest,
     asyncState,
-    resourceName,
+    resource,
   }) => (
     <form onSubmit={handleSubmit(submitRequest)}>
-      <ModalDialog
+      <AsyncActionDialog
         title={translate('Create security group for OpenStack tenant {name}', {
-          name: resourceName,
+          name: resource.name,
         })}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={submitting}
-              disabled={asyncState.loading || invalid}
-              label={translate('Submit')}
-            />
-          </>
-        }
+        loading={asyncState.loading}
+        error={asyncState.error}
+        submitting={submitting}
+        invalid={invalid}
       >
-        {asyncState.loading ? (
-          <LoadingSpinner />
-        ) : asyncState.error ? (
-          <>{translate('Unable to load data.')}</>
-        ) : (
+        {asyncState.value ? (
           <>
             <FormGroup>
               <ControlLabel>{translate('Name')}</ControlLabel>
@@ -68,8 +55,8 @@ export const CreateSecurityGroupForm = connectForm(
               remoteSecurityGroups={asyncState.value}
             />
           </>
-        )}
-      </ModalDialog>
+        ) : null}
+      </AsyncActionDialog>
     </form>
   ),
 );

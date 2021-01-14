@@ -1,10 +1,7 @@
 import { FieldArray } from 'redux-form';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
 
 import { RulesList } from './RulesList';
 import { connectForm } from './utils';
@@ -16,36 +13,26 @@ export const RulesForm = connectForm(
     invalid,
     submitRequest,
     asyncState,
-    resourceName,
+    resource,
   }) => (
     <form onSubmit={handleSubmit(submitRequest)}>
-      <ModalDialog
+      <AsyncActionDialog
         title={translate('Set rules in {name} security group', {
-          name: resourceName,
+          name: resource.name,
         })}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={submitting}
-              disabled={asyncState.loading || invalid}
-              label={translate('Submit')}
-            />
-          </>
-        }
+        loading={asyncState.loading}
+        error={asyncState.error}
+        submitting={submitting}
+        invalid={invalid}
       >
-        {asyncState.loading ? (
-          <LoadingSpinner />
-        ) : asyncState.error ? (
-          <>{translate('Unable to load data.')}</>
-        ) : (
+        {asyncState.value ? (
           <FieldArray
             name="rules"
             component={RulesList}
             remoteSecurityGroups={asyncState.value}
           />
-        )}
-      </ModalDialog>
+        ) : null}
+      </AsyncActionDialog>
     </form>
   ),
 );

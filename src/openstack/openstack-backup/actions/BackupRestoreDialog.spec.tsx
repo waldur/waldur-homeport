@@ -1,10 +1,9 @@
-import { reducer as notificationsReducer } from 'reapop';
-import { combineReducers, createStore, Store } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { Store } from 'redux';
 
 import * as api from '@waldur/openstack/api';
 import { FloatingIp } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
+import { createActionStore } from '@waldur/resource/actions/testUtils';
 
 import {
   DialogFixture,
@@ -21,11 +20,7 @@ describe('BackupRestoreDialog', () => {
   let store: Store;
 
   beforeEach(() => {
-    const reducer = combineReducers({
-      form: formReducer,
-      notifications: notificationsReducer(),
-    });
-    store = createStore(reducer);
+    store = createActionStore();
     apiMock.loadFlavors.mockResolvedValue([]);
     apiMock.loadSecurityGroups.mockResolvedValue([]);
     apiMock.loadFloatingIps.mockResolvedValue([]);

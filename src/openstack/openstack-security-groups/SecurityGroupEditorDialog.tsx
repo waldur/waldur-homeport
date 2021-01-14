@@ -13,13 +13,6 @@ export interface SecurityGroupEditorDialogProps {
 export const SecurityGroupEditorDialog: FC<SecurityGroupEditorDialogProps> = ({
   resolve: { resource },
 }) => {
-  const { asyncState, submitRequest } = useRulesEditor(resource);
-  return (
-    <RulesForm
-      resourceName={resource.name.toUpperCase()}
-      asyncState={asyncState}
-      submitRequest={submitRequest}
-      initialValues={{ rules: resource.rules }}
-    />
-  );
+  const formState = useRulesEditor(resource);
+  return <RulesForm {...formState} />;
 };

@@ -14,12 +14,6 @@ export interface CreateSecurityGroupDialogProps {
 export const CreateSecurityGroupDialog: FC<CreateSecurityGroupDialogProps> = ({
   resolve: { resource },
 }) => {
-  const { asyncState, submitRequest } = useCreateSecurityGroupForm(resource);
-  return (
-    <CreateSecurityGroupForm
-      resourceName={resource.name.toUpperCase()}
-      asyncState={asyncState}
-      submitRequest={submitRequest}
-    />
-  );
+  const formState = useCreateSecurityGroupForm(resource);
+  return <CreateSecurityGroupForm {...formState} />;
 };

@@ -95,17 +95,14 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance) => {
       );
     }
   };
-  return { asyncState, initialValues, subnets, submitRequest };
+  return { asyncState, initialValues, subnets, submitRequest, resource };
 };
 
 const FORM_NAME = 'updateFloatingIPs';
 
-type OwnProps = ReturnType<typeof useFloatingIpsEditor> & {
-  resourceName: string;
-  subnets;
-};
+type FloatingIPsOwnProps = ReturnType<typeof useFloatingIpsEditor>;
 
-export const connectForm = reduxForm<FloatingIPsFormData, OwnProps>({
+export const connectForm = reduxForm<FloatingIPsFormData, FloatingIPsOwnProps>({
   form: FORM_NAME,
 });
 

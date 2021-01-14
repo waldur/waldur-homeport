@@ -9,7 +9,7 @@ import { router } from '@waldur/router';
 import { showErrorResponse } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 
-import { getSelectList, formatChoices } from '../action-resource-loader';
+import { getSelectList } from '../action-resource-loader';
 import { handleActionSuccess } from '../action-utils-service';
 import { defaultFieldOptions } from '../constants';
 
@@ -58,9 +58,6 @@ class ActionDialogController {
           }
           if (field.modelParser) {
             this.form[name] = field.modelParser(field, this.form[name]);
-          }
-          if (field.type === 'multiselect' && !this.resolve.action.init) {
-            this.form[name] = formatChoices(field, this.form[name]);
           }
           if (this.resolve.action.name === 'edit') {
             this.form[name] = this.resolve.resource[name];
