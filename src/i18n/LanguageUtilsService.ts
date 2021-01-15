@@ -19,8 +19,8 @@ class LanguageUtilsServiceClass {
   setCurrentLanguage(language: LanguageOption) {
     this.currentLanguage = language;
     localStorage.setItem('NG_TRANSLATE_LANG_KEY', language.code);
-    getLocaleData(language.code).then((data) => {
-      this.dictionary = data;
+    getLocaleData(language.code).then((mod) => {
+      this.dictionary = mod.default;
     });
     moment.locale(language.code);
     Axios.defaults.headers.common['Accept-Language'] = language.code;
