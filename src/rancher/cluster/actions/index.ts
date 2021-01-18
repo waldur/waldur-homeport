@@ -1,11 +1,9 @@
-import { createNodeAction } from './CreateNodeAction';
-import { kubeconfigAction } from './KubeconfigFileAction';
-import { pullAction } from './PullAction';
-import terminateAction from './TerminateAction';
+import { KubeconfigFileAction } from './KubeconfigFileAction';
+import { PullClusterAction } from './PullClusterAction';
+import { TerminateClusterAction } from './TerminateClusterAction';
 
 export default [
-  createNodeAction,
-  kubeconfigAction,
-  pullAction,
-  terminateAction,
+  KubeconfigFileAction,
+  PullClusterAction,
+  TerminateClusterAction,
 ];

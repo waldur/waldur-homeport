@@ -1,17 +1,9 @@
 import { ENV } from '@waldur/configs/default';
 import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
-import { ResourceState, BaseResource } from '@waldur/resource/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { ResourceState } from '@waldur/resource/types';
 
-import {
-  ResourceAction,
-  ActionField,
-  ActionContext,
-  ActionValidator,
-} from './types';
+import { ActionField, ActionContext } from './types';
 
 export function createLatinNameField(): ActionField {
   return {
@@ -41,67 +33,6 @@ export function createDescriptionField(): ActionField {
     maxlength: 2000,
     required: false,
     type: 'text',
-  };
-}
-
-export function createEditAction<Resource extends BaseResource>({
-  fields,
-  validators,
-  updateResource,
-  verboseName,
-  resource,
-  getInitialValues,
-}: {
-  fields?: ActionField<Resource>[];
-  validators?: ActionValidator<Resource>[];
-  updateResource(id: string, formData: any): Promise<any>;
-  verboseName: string;
-  resource: Resource;
-  getInitialValues?(): any;
-}): ResourceAction<Resource> {
-  return {
-    name: 'update',
-    title: translate('Edit'),
-    type: 'form',
-    fields,
-    validators,
-    component: LazyResourceActionDialog,
-    getInitialValues:
-      getInitialValues ||
-      (() => ({
-        name: resource.name,
-        description: resource.description,
-      })),
-    submitForm: async (dispatch, formData) => {
-      try {
-        await updateResource(resource.uuid, formData);
-        dispatch(
-          showSuccess(
-            translate('{verboseName} has been updated.', { verboseName }),
-          ),
-        );
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to update {verboseName}.', {
-              verboseName,
-            }),
-          ),
-        );
-      }
-    },
-  };
-}
-
-export function createPullAction(ctx: ActionContext): ResourceAction {
-  return {
-    name: 'pull',
-    title: translate('Synchronise'),
-    method: 'POST',
-    type: 'button',
-    isVisible: ctx.resource.backend_id !== '',
   };
 }
 

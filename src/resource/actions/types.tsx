@@ -71,8 +71,7 @@ export interface ResourceAction<Resource = BaseResource> {
   dialogSubtitle?: string;
   tab?: string;
   iconClass?: string;
-  fields?: Array<ActionField<Resource>>;
-  type: ActionType;
+  type?: ActionType;
   successMessage?: string;
   onSuccess?: () => void;
   method?: ActionMethod;
@@ -81,10 +80,8 @@ export interface ResourceAction<Resource = BaseResource> {
   dialogSize?: 'lg' | 'xl';
   component?: React.ComponentType<any>;
   isVisible?: boolean;
-  init?(resource, form, action): void;
   serializer?(form): object;
   execute?(resource): void;
-  getInitialValues?(): any;
   submitForm?(dispatch: Dispatch<any>, formData: any);
   formId?: string;
 }

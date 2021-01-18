@@ -1,12 +1,13 @@
 import { FunctionComponent } from 'react';
 
-import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { formatCrontab } from '@waldur/resource/crontab';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
+
+import { CreateBackupScheduleAction } from '../openstack-instance/actions/CreateBackupScheduleAction';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
@@ -42,9 +43,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('VM snapshot schedules')}
       hasQuery={false}
-      actions={
-        <NestedListActions resource={props.resource} tab="backup_schedules" />
-      }
+      actions={<CreateBackupScheduleAction resource={props.resource} />}
     />
   );
 };

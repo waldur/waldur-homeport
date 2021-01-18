@@ -1,26 +1,16 @@
-import changeLimitsAction from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
-import changePlanAction from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
-import { createPullAction } from '@waldur/resource/actions/base';
+import { ChangeLimitsAction } from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
+import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
 
-import createFloatingIpAction from './CreateFloatingIpAction';
-import createNetworkAction from './CreateNetworkAction';
-import createSecurityGroupAction from './CreateSecurityGroupAction';
-import editAction from './EditAction';
-import pullFloatingIpsAction from './PullFloatingIpsAction';
-import pullSecurityGroupsAction from './PullSecurityGroupsAction';
-import requestDirectAccessAction from './RequestDirectAccessAction';
-import terminateAction from './TerminateAction';
+import { EditAction } from './EditAction';
+import { PullTenantAction } from './PullTenantAction';
+import { RequestDirectAccessAction } from './RequestDirectAccessAction';
+import { TerminateTenantAction } from './TerminateTenantAction';
 
 export default [
-  editAction,
-  requestDirectAccessAction,
-  createPullAction,
-  changePlanAction,
-  changeLimitsAction,
-  createNetworkAction,
-  createSecurityGroupAction,
-  pullSecurityGroupsAction,
-  pullFloatingIpsAction,
-  createFloatingIpAction,
-  terminateAction,
+  EditAction,
+  RequestDirectAccessAction,
+  PullTenantAction,
+  ChangePlanAction,
+  ChangeLimitsAction,
+  TerminateTenantAction,
 ];

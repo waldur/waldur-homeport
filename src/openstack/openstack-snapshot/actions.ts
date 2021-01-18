@@ -1,13 +1,13 @@
-import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
-import { createPullAction } from '@waldur/resource/actions/base';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 
-import destroyAction from './DestroyAction';
-import editAction from './EditAction';
-import restoreAction from './RestoreSnapshotAction';
+import { DestroySnapshotAction } from './DestroySnapshotAction';
+import { EditAction } from './EditAction';
+import { PullSnapshotAction } from './PullSnapshotAction';
+import { RestoreSnapshotAction } from './RestoreSnapshotAction';
 
-ActionConfigurationRegistry.register('OpenStackTenant.Snapshot', [
-  editAction,
-  createPullAction,
-  restoreAction,
-  destroyAction,
+ActionRegistry.register('OpenStackTenant.Snapshot', [
+  EditAction,
+  PullSnapshotAction,
+  RestoreSnapshotAction,
+  DestroySnapshotAction,
 ]);

@@ -34,6 +34,12 @@ export const getTemplateVersion = (templateUuid: string, versionUuid: string) =>
 export const getCluster = (clusterUuid) =>
   getById<Cluster>('/rancher-clusters/', clusterUuid);
 
+export const pullCluster = (clusterUuid: string) =>
+  post(`/rancher-clusters/${clusterUuid}/pull/`);
+
+export const pullNode = (clusterUuid: string) =>
+  post(`/rancher-nodes/${clusterUuid}/pull/`);
+
 export const getKubeconfigFile = (resourceId) =>
   get<KubeconfigFile>(`/rancher-clusters/${resourceId}/kubeconfig_file/`).then(
     (response) => response.data.config,
@@ -54,6 +60,22 @@ export const createApp = (payload) => post('/rancher-apps/', payload);
 export const removeApp = (uuid) => deleteById(`/rancher-apps/`, uuid);
 
 export const createNode = (payload) => post('/rancher-nodes/', payload);
+
+export const linkInstance = (id, payload) =>
+  post(`/rancher-nodes/${id}/link_openstack/`, payload);
+
+export const unlinkInstance = (id: string) =>
+  post(`/rancher-nodes/${id}/unlink_openstack/`);
+
+export const getNodeConsoleUrl = (id) =>
+  get<{ url: string }>(`/rancher-nodes/${id}/console/`).then(
+    (response) => response.data.url,
+  );
+
+export const getNodeConsoleLog = (id) =>
+  get<string>(`/rancher-nodes/${id}/console_log/`).then(
+    (response) => response.data,
+  );
 
 export const listWorkloads = (params) =>
   getAll<Workload>('/rancher-workloads/', params);
@@ -94,3 +116,5 @@ export const importYAML = (clusterId: string, yaml: string) =>
 
 export const deleteService = (id: string) =>
   deleteById('/rancher-services/', id);
+
+export const destroyNode = (id: string) => deleteById('/rancher-nodes/', id);

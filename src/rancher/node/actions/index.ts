@@ -1,15 +1,15 @@
-import { consoleAction } from './ConsoleAction';
-import { consoleLogAction } from './ConsoleLogAction';
-import destroyAction from './DestroyAction';
-import linkAction from './LinkAction';
-import { pullAction } from './PullAction';
-import unlinkAction from './UnlinkAction';
+import { ConsoleAction } from './ConsoleAction';
+import { ConsoleLogAction } from './ConsoleLogAction';
+import { DestroyAction } from './DestroyAction';
+import { LinkAction } from './LinkAction';
+import { PullNodeAction } from './PullNodeAction';
+import { UnlinkAction } from './UnlinkAction';
 
 export default [
-  pullAction,
-  linkAction,
-  unlinkAction,
-  destroyAction,
-  consoleAction,
-  consoleLogAction,
+  PullNodeAction,
+  LinkAction,
+  UnlinkAction,
+  DestroyAction,
+  ConsoleAction,
+  ConsoleLogAction,
 ];

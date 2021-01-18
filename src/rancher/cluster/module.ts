@@ -1,5 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import clusterActions from './actions';
@@ -14,4 +14,4 @@ const RancherClusterSummary = lazyComponent(
 );
 
 ResourceSummary.register('Rancher.Cluster', RancherClusterSummary);
-ActionConfigurationRegistry.register('Rancher.Cluster', clusterActions);
+ActionRegistry.register('Rancher.Cluster', clusterActions);

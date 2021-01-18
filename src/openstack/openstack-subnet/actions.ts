@@ -1,11 +1,11 @@
-import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
-import { createPullAction } from '@waldur/resource/actions/base';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 
-import DestroyAction from './DestroyAction';
-import EditAction from './EditAction';
+import { DestroySubnetAction } from './DestroySubnetAction';
+import { EditSubnetAction } from './EditSubnetAction';
+import { PullSubnetAction } from './PullSubnetAction';
 
-ActionConfigurationRegistry.register('OpenStack.SubNet', [
-  EditAction,
-  createPullAction,
-  DestroyAction,
+ActionRegistry.register('OpenStack.SubNet', [
+  EditSubnetAction,
+  PullSubnetAction,
+  DestroySubnetAction,
 ]);

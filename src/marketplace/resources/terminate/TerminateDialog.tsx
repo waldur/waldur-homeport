@@ -13,9 +13,7 @@ export interface OwnProps {
       name: string;
       marketplace_resource_uuid: string;
     };
-    action: {
-      dialogSubtitle?: string;
-    };
+    dialogSubtitle?: string;
   };
 }
 
@@ -61,8 +59,8 @@ export const PureTerminateDialog: FunctionComponent<TerminateDialogProps> = (
           resourceName: props.resolve.resource.name,
         },
       )}
-      {props.resolve.action.dialogSubtitle && (
-        <FormattedHtml html={props.resolve.action.dialogSubtitle} />
+      {props.resolve.dialogSubtitle && (
+        <FormattedHtml html={props.resolve.dialogSubtitle} />
       )}
     </ModalDialog>
   </form>

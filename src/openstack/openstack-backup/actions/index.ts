@@ -1,5 +1,5 @@
-import destroyAction from './DestroyAction';
-import editAction from './EditAction';
-import restoreAction from './RestoreAction';
+import { DestroyBackupAction } from './DestroyBackupAction';
+import { EditAction } from './EditAction';
+import { RestoreAction } from './RestoreAction';
 
-export default [editAction, restoreAction, destroyAction];
+export default [EditAction, RestoreAction, DestroyBackupAction];

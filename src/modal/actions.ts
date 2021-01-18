@@ -7,9 +7,11 @@ import { ConfirmationDialog } from './ConfirmationDialog';
 export const OPEN = 'waldur/modal/OPEN';
 export const CLOSE = 'waldur/modal/CLOSE';
 
+export type DialogSizeType = 'lg' | 'xl';
+
 export const openModalDialog = <P = any>(
   modalComponent: React.ComponentType<P>,
-  modalProps?: P & { size?: 'lg' | 'xl' },
+  modalProps?: P & { size?: DialogSizeType },
 ) => ({
   type: 'SHOW_MODAL',
   modalComponent,

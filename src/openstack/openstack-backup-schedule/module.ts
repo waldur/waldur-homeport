@@ -1,5 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 import { ResourceStateConfigurationProvider } from '@waldur/resource/state/ResourceStateConfiguration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
@@ -14,7 +14,7 @@ const OpenStackBackupScheduleSummary = lazyComponent(
   'OpenStackBackupScheduleSummary',
 );
 
-ActionConfigurationRegistry.register('OpenStackTenant.BackupSchedule', actions);
+ActionRegistry.register('OpenStackTenant.BackupSchedule', actions);
 ResourceSummary.register(
   'OpenStackTenant.BackupSchedule',
   OpenStackBackupScheduleSummary,

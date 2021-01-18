@@ -1,12 +1,14 @@
 import { FunctionComponent } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 
-import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource } from '@waldur/resource/types';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
+import { CreateSecurityGroupAction } from '../openstack-tenant/actions/CreateSecurityGroupAction';
+import { PullSecurityGroupsAction } from '../openstack-tenant/actions/PullSecurityGroupsAction';
 import { SecurityGroupRule } from '../types';
 
 interface ResourceRules extends Resource {
@@ -45,7 +47,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector={true}
       actions={
-        <NestedListActions resource={props.resource} tab="security_groups" />
+        <ButtonGroup>
+          <CreateSecurityGroupAction resource={props.resource} />
+          <PullSecurityGroupsAction resource={props.resource} />
+        </ButtonGroup>
       }
     />
   );

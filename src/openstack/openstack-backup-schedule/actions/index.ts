@@ -1,6 +1,11 @@
-import activateAction from './ActivateAction';
-import deactivateAction from './DeactivateAction';
-import destroyAction from './DestroyAction';
-import editAction from './EditAction';
+import { ActivateAction } from './ActivateAction';
+import { DeactivateAction } from './DeactivateAction';
+import { DestroyBackupScheduleAction } from './DestroyBackupScheduleAction';
+import { EditAction } from './EditAction';
 
-export default [editAction, activateAction, deactivateAction, destroyAction];
+export default [
+  EditAction,
+  ActivateAction,
+  DeactivateAction,
+  DestroyBackupScheduleAction,
+];

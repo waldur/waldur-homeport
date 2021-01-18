@@ -1,5 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { ResourceTabsConfiguration } from '@waldur/resource/tabs/ResourceTabsConfiguration';
 
@@ -14,4 +14,4 @@ const RancherNodeSummary = lazyComponent(
 
 ResourceTabsConfiguration.register('Rancher.Node', () => []);
 ResourceSummary.register('Rancher.Node', RancherNodeSummary);
-ActionConfigurationRegistry.register('Rancher.Node', nodeActions);
+ActionRegistry.register('Rancher.Node', nodeActions);

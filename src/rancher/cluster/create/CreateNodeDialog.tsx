@@ -23,7 +23,7 @@ import { SubnetGroup } from './SubnetGroup';
 import { loadData } from './utils';
 
 interface OwnProps {
-  resolve: { cluster: any };
+  resolve: { resource: any };
   flavors: any[];
   subnets: any[];
 }
@@ -66,7 +66,7 @@ const loadNodeCreateData = async (cluster: Cluster) => {
 export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   form: 'RancherNodeCreate',
 })((props) => {
-  const cluster = props.resolve.cluster;
+  const cluster = props.resolve.resource;
   const state = useAsync(() => loadNodeCreateData(cluster), [cluster]);
 
   const dispatch = useDispatch();

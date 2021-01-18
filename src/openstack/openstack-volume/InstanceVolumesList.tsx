@@ -1,12 +1,13 @@
 import { FunctionComponent } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
-import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
+
+import { AttachVolumeAction } from '../openstack-instance/actions/AttachVolumeAction';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
@@ -43,7 +44,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => <ResourceRowActions resource={row} />,
         },
       ]}
-      actions={<NestedListActions resource={props.resource} tab="volumes" />}
+      actions={<AttachVolumeAction resource={props.resource} />}
       verboseName={translate('volumes')}
     />
   );

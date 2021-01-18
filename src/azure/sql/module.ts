@@ -2,7 +2,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import './marketplace';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-import './azure-sql-server-actions';
+import './actions';
 import './tabs';
 
 const AzureSQLDatabaseSummary = lazyComponent(

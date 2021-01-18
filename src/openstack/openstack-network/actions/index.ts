@@ -1,15 +1,15 @@
-import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
-import { createPullAction } from '@waldur/resource/actions/base';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 
-import CreateSubnetAction from './CreateSubnetAction';
-import DestroyAction from './DestroyAction';
-import EditAction from './EditAction';
-import SetMtuAction from './SetMtuAction';
+import { CreateSubnetAction } from './CreateSubnetAction';
+import { DestroyNetworkAction } from './DestroyNetworkAction';
+import { EditNetworkAction } from './EditNetworkAction';
+import { PullNetworkAction } from './PullNetworkAction';
+import { SetMtuAction } from './SetMtuAction';
 
-ActionConfigurationRegistry.register('OpenStack.Network', [
-  EditAction,
-  createPullAction,
+ActionRegistry.register('OpenStack.Network', [
+  EditNetworkAction,
+  PullNetworkAction,
   CreateSubnetAction,
   SetMtuAction,
-  DestroyAction,
+  DestroyNetworkAction,
 ]);

@@ -1,7 +1,11 @@
-import activateAction from '@waldur/openstack/openstack-backup-schedule/actions/ActivateAction';
-import deactivateAction from '@waldur/openstack/openstack-backup-schedule/actions/DeactivateAction';
-import destroyAction from '@waldur/openstack/openstack-backup-schedule/actions/DestroyAction';
+import { ActivateSnapshotScheduleAction } from './ActivateSnapshotScheduleAction';
+import { DeactivateSnapshotScheduleAction } from './DeactivateSnapshotScheduleAction';
+import { DestroySnapshotScheduleAction } from './DestroySnapshotScheduleAction';
+import { EditAction } from './EditAction';
 
-import editAction from './EditAction';
-
-export default [editAction, activateAction, deactivateAction, destroyAction];
+export default [
+  EditAction,
+  ActivateSnapshotScheduleAction,
+  DeactivateSnapshotScheduleAction,
+  DestroySnapshotScheduleAction,
+];

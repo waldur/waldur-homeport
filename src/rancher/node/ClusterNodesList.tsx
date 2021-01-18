@@ -1,11 +1,12 @@
 import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+
+import { CreateNodeAction } from '../cluster/actions/CreateNodeAction';
 
 import { NodeRoleField } from './NodeRoleField';
 
@@ -51,7 +52,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('Kubernetes nodes')}
-      actions={<NestedListActions resource={props.resource} tab="nodes" />}
+      actions={<CreateNodeAction resource={props.resource} />}
     />
   );
 };

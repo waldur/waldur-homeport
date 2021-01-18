@@ -1,5 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import actions from './actions';
@@ -15,4 +15,4 @@ const OpenStackBackupSummary = lazyComponent(
 import './tabs';
 
 ResourceSummary.register('OpenStackTenant.Backup', OpenStackBackupSummary);
-ActionConfigurationRegistry.register('OpenStackTenant.Backup', actions);
+ActionRegistry.register('OpenStackTenant.Backup', actions);
