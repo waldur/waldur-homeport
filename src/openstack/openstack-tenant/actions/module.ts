@@ -1,5 +1,5 @@
-import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 
 import actions from './index';
 
-ActionConfigurationRegistry.register('OpenStack.Tenant', actions);
+ActionRegistry.register('OpenStack.Tenant', actions);

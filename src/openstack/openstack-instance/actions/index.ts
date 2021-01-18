@@ -1,36 +1,27 @@
-import { createPullAction } from '@waldur/resource/actions/base';
-
-import attachVolumeAction from './AttachVolumeAction';
-import changeFlavorAction from './ChangeFlavorAction';
-import consoleAction from './ConsoleAction';
-import consoleLogAction from './ConsoleLogAction';
-import createBackupAction from './CreateBackupAction';
-import createBackupScheduleAction from './CreateBackupScheduleAction';
-import destroyAction from './DestroyAction';
-import editAction from './EditAction';
-import forceDestroyAction from './ForceDestroyAction';
-import restartAction from './RestartAction';
-import startAction from './StartAction';
-import stopAction from './StopAction';
-import updateFloatingIpsAction from './update-floating-ips/UpdateFloatingIpsAction';
-import updateInternalIpsSet from './update-internal-ips/UpdateInternalIpsSetAction';
-import updateSecurityGroupsAction from './update-security-groups/UpdateSecurityGroupsAction';
+import { ChangeFlavorAction } from './ChangeFlavorAction';
+import { ConsoleAction } from './ConsoleAction';
+import { ConsoleLogAction } from './ConsoleLogAction';
+import { DestroyAction } from './DestroyAction';
+import { EditAction } from './EditAction';
+import { ForceDestroyAction } from './ForceDestroyAction';
+import { PullInstanceAction } from './PullInstanceAction';
+import { RestartAction } from './RestartAction';
+import { StartAction } from './StartAction';
+import { StopAction } from './StopAction';
+import { UpdateFloatingIpsAction } from './update-floating-ips/UpdateFloatingIpsAction';
+import { UpdateSecurityGroupsAction } from './update-security-groups/UpdateSecurityGroupsAction';
 
 export default [
-  editAction,
-  createPullAction,
-  startAction,
-  stopAction,
-  restartAction,
-  consoleLogAction,
-  consoleAction,
-  changeFlavorAction,
-  createBackupAction,
-  createBackupScheduleAction,
-  updateSecurityGroupsAction,
-  updateInternalIpsSet,
-  updateFloatingIpsAction,
-  destroyAction,
-  forceDestroyAction,
-  attachVolumeAction,
+  EditAction,
+  PullInstanceAction,
+  StartAction,
+  StopAction,
+  RestartAction,
+  ConsoleLogAction,
+  ConsoleAction,
+  ChangeFlavorAction,
+  UpdateSecurityGroupsAction,
+  UpdateFloatingIpsAction,
+  DestroyAction,
+  ForceDestroyAction,
 ];

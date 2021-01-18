@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
 import { getById } from '@waldur/core/api';
-import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { VirtualMachine, InternalIP } from '@waldur/resource/types';
 import { Table, connectTable } from '@waldur/table';
 
+import { UpdateInternalIpsAction } from './actions/update-internal-ips/UpdateInternalIpsSetAction';
 import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
@@ -41,9 +41,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('internal IPs')}
-      actions={
-        <NestedListActions resource={props.resource} tab="internal_ips" />
-      }
+      actions={<UpdateInternalIpsAction resource={props.resource} />}
     />
   );
 };

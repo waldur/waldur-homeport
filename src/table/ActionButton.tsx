@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Tooltip } from '@waldur/core/Tooltip';
 
-interface ActionButtonProps {
+export interface ActionButtonProps {
   title: string;
   action: () => void;
   icon?: string;

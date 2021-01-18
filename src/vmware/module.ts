@@ -5,8 +5,8 @@ import './tabs';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 import { registerResourceTypeLabel } from '@waldur/resource/utils';
 
-import './actions';
 import './breadcrumbs';
+import './actions';
 
 const VMwareDiskSummary = lazyComponent(
   () =>

@@ -129,6 +129,11 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/resource/actions/AsyncActionButton.tsx
+#: src/resource/actions/AsyncActionItem.tsx
+msgid "Action has been applied."
+msgstr ""
+
 #: src/azure/sql/DatabasesList.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
@@ -185,6 +190,7 @@ msgstr ""
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
+#: src/resource/actions/ActionMenuButton.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/hooks/HooksList.tsx
@@ -196,7 +202,8 @@ msgid "Actions"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingActions.tsx
-#: src/openstack/openstack-backup-schedule/actions/ActivateAction.ts
+#: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
 #: src/user/support/UserActivateButton.tsx
 msgid "Activate"
 msgstr ""
@@ -599,11 +606,11 @@ msgstr ""
 msgid "Are you sure you want to cluster template? Note this will reset the node plan."
 msgstr ""
 
-#: src/resource/actions/action-utils-service.ts
+#: src/resource/actions/DestroyActionItem.tsx
 msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
 msgstr ""
 
-#: src/resource/actions/action-utils-service.ts
+#: src/resource/actions/DestroyActionItem.tsx
 msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr ""
 
@@ -647,10 +654,6 @@ msgstr ""
 msgid "Are you sure you would like to terminate resource {resourceName}?"
 msgstr ""
 
-#: src/resource/actions/action-utils-service.ts
-msgid "Are you sure? This action cannot be undone."
-msgstr ""
-
 #: src/marketplace/offerings/ArticleCodeField.tsx
 msgid "Article code"
 msgstr ""
@@ -665,15 +668,20 @@ msgstr ""
 msgid "At least one plan must be entered"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/AttachAction.ts
+#: src/openstack/openstack-volume/actions/AttachAction.tsx
 msgid "Attach"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/AttachVolumeAction.tsx
+#: src/openstack/openstack-volume/actions/AttachDialog.tsx
+msgid "Attach OpenStack Volume to Instance"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
 msgid "Attach has been scheduled."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/AttachVolumeAction.tsx
+#: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
 msgid "Attach volume"
 msgstr ""
 
@@ -835,12 +843,12 @@ msgstr ""
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/offering/OfferingHeader.tsx
-#: src/offering/actions/SetBackendIDAction.ts
+#: src/offering/actions/SetBackendIdDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Backend ID"
 msgstr ""
 
-#: src/offering/actions/SetBackendIDAction.ts
+#: src/offering/actions/SetBackendIdDialog.tsx
 msgid "Backend ID has been successfully set."
 msgstr ""
 
@@ -996,7 +1004,6 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/project/ProjectCreateForm.tsx
-#: src/resource/actions/dialog/action-dialog.js
 #: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
@@ -1023,7 +1030,7 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
+#: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
@@ -1096,15 +1103,16 @@ msgstr ""
 msgid "Change email"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
+#: src/openstack/openstack-instance/actions/ChangeFlavorAction.tsx
+#: src/openstack/openstack-instance/actions/ChangeFlavorDialog.tsx
 msgid "Change flavor"
 msgstr ""
 
-#: src/marketplace/resources/change-limits/ChangeLimitsAction.ts
+#: src/marketplace/resources/change-limits/ChangeLimitsAction.tsx
 msgid "Change limits"
 msgstr ""
 
-#: src/marketplace/resources/change-plan/ChangePlanAction.ts
+#: src/marketplace/resources/change-plan/ChangePlanAction.tsx
 msgid "Change plan"
 msgstr ""
 
@@ -1280,10 +1288,6 @@ msgstr ""
 msgid "Competence"
 msgstr ""
 
-#: src/offering/actions/CompleteAction.ts
-msgid "Complete"
-msgstr ""
-
 #: src/marketplace-checklist/ChecklistOverview.tsx
 msgid "Compliance"
 msgstr ""
@@ -1318,7 +1322,7 @@ msgid "Configuration options"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsSetAction.ts
+#: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsSetAction.tsx
 msgid "Configure"
 msgstr ""
 
@@ -1437,7 +1441,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: src/azure/sql/CreateDatabaseAction.ts
+#: src/azure/sql/CreateDatabaseAction.tsx
 #: src/customer/create/CustomerCreatePrompt.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
@@ -1445,32 +1449,32 @@ msgstr ""
 #: src/issues/notifications/NotificationCreateButton.tsx
 #: src/issues/notifications/NotificationCreateDialog.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
-#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
-#: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
-#: src/openstack/openstack-tenant/actions/CreateNetworkAction.ts
-#: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.ts
-#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
-#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
+#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateNetworkAction.tsx
+#: src/openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx
+#: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create"
 msgstr ""
 
-#: src/vmware/actions.ts
+#: src/vmware/actions/CreatePortAction.tsx
 msgid "Create Network adapter"
 msgstr ""
 
-#: src/azure/sql/CreateDatabaseAction.ts
+#: src/azure/sql/CreateDatabaseDialog.tsx
 msgid "Create SQL database in PostgreSQL server"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
+#: src/openstack/openstack-instance/actions/CreateBackupDialog.tsx
 msgid "Create VM snapshot for OpenStack instance"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: src/openstack/openstack-instance/actions/CreateBackupScheduleDialog.tsx
 msgid "Create VM snapshot schedule for OpenStack instance"
 msgstr ""
 
@@ -1495,23 +1499,20 @@ msgstr ""
 msgid "Create catalog"
 msgstr ""
 
-#: src/vmware/actions.ts
+#: src/vmware/actions/CreateDiskAction.tsx
+#: src/vmware/actions/CreateDiskDialog.tsx
 msgid "Create disk"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.ts
-msgid "Create floating IP for OpenStack tenant"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 msgid "Create horizontal pod autoscaler"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/CreateNetworkAction.ts
+#: src/openstack/openstack-tenant/actions/CreateNetworkDialog.tsx
 msgid "Create network for OpenStack tenant"
 msgstr ""
 
-#: src/rancher/cluster/actions/CreateNodeAction.ts
+#: src/rancher/cluster/actions/CreateNodeAction.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 msgid "Create node"
 msgstr ""
@@ -1524,6 +1525,10 @@ msgstr ""
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/customer/create/WizardForm.tsx
 msgid "Create organization"
+msgstr ""
+
+#: src/vmware/actions/CreatePortDialog.tsx
+msgid "Create port"
 msgstr ""
 
 #: src/project/ProjectCreateContainer.tsx
@@ -1540,15 +1545,16 @@ msgstr ""
 msgid "Create security group for OpenStack tenant {name}"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotDialog.tsx
 msgid "Create snapshot for OpenStack volume"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleDialog.tsx
 msgid "Create snapshot schedule for OpenStack volume"
 msgstr ""
 
 #: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
+#: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Create subnet"
 msgstr ""
 
@@ -1681,7 +1687,7 @@ msgid "Current replicas"
 msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
-#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Current size"
 msgstr ""
 
@@ -1761,7 +1767,8 @@ msgstr ""
 msgid "Day"
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/actions/DeactivateAction.ts
+#: src/openstack/openstack-backup-schedule/actions/DeactivateAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/DeactivateSnapshotScheduleAction.tsx
 #: src/user/support/UserActivateButton.tsx
 msgid "Deactivate"
 msgstr ""
@@ -1827,12 +1834,12 @@ msgstr ""
 msgid "Delete catalog"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/DestroyAction.ts
-#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+#: src/openstack/openstack-instance/actions/DestroyDialog.tsx
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
 msgid "Delete volumes"
 msgstr ""
 
-#: src/azure/sql/DestroyServerAction.ts
+#: src/azure/sql/DestroyServerAction.tsx
 msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
 msgstr ""
 
@@ -1884,7 +1891,6 @@ msgstr ""
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
-#: src/resource/actions/constants.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -1907,21 +1913,16 @@ msgstr ""
 msgid "Destination URL"
 msgstr ""
 
-#: src/azure/sql/DestroyServerAction.ts
-#: src/offering/actions/DestroyAction.ts
-#: src/openstack/openstack-backup-schedule/actions/DestroyAction.ts
-#: src/openstack/openstack-backup/actions/DestroyAction.ts
-#: src/openstack/openstack-instance/actions/DestroyAction.ts
-#: src/openstack/openstack-network/actions/DestroyAction.ts
-#: src/openstack/openstack-security-groups/module.ts
-#: src/openstack/openstack-snapshot/DestroyAction.ts
-#: src/openstack/openstack-subnet/DestroyAction.ts
-#: src/openstack/openstack-volume/actions/DestroyAction.ts
-#: src/rancher/node/actions/DestroyAction.ts
+#: src/openstack/openstack-instance/actions/DestroyAction.tsx
+#: src/resource/actions/DestroyActionItem.tsx
 msgid "Destroy"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/DestroyAction.ts
+#: src/resource/actions/DestroyActionItem.tsx
+msgid "Destroy resource"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/DestroyDialog.tsx
 msgid "Destroy {name} instance"
 msgstr ""
 
@@ -1929,7 +1930,7 @@ msgstr ""
 msgid "Destroying"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/DetachAction.ts
+#: src/openstack/openstack-volume/actions/DetachAction.tsx
 msgid "Detach"
 msgstr ""
 
@@ -1954,7 +1955,7 @@ msgstr ""
 #: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
-#: src/slurm/actions.ts
+#: src/slurm/DetailsAction.tsx
 #: src/user/UserDropdownMenu.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
@@ -2000,6 +2001,14 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
+#: src/vmware/actions/ExtendDiskDialog.tsx
+msgid "Disk extension has been scheduled."
+msgstr ""
+
+#: src/vmware/actions/CreateDiskDialog.tsx
+msgid "Disk has been created."
+msgstr ""
+
 #: src/vmware/breadcrumbs.ts
 #: src/vmware/tabs.ts
 msgid "Disks"
@@ -2021,7 +2030,7 @@ msgstr ""
 msgid "Do not allow user to specify quotas when offering is provisioned."
 msgstr ""
 
-#: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
+#: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Do not configure a gateway for this subnet"
 msgstr ""
 
@@ -2037,7 +2046,7 @@ msgstr ""
 msgid "Do you really want to delete comment?"
 msgstr ""
 
-#: src/rancher/node/actions/UnlinkAction.ts
+#: src/rancher/node/actions/UnlinkAction.tsx
 msgid "Do you want to unlink instance {name}?"
 msgstr ""
 
@@ -2141,11 +2150,21 @@ msgstr ""
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
+#: src/offering/actions/UpdateAction.tsx
+#: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
+#: src/openstack/openstack-backup/actions/EditAction.tsx
+#: src/openstack/openstack-instance/actions/EditAction.tsx
+#: src/openstack/openstack-network/actions/EditNetworkAction.tsx
+#: src/openstack/openstack-security-groups/EditAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/EditAction.tsx
+#: src/openstack/openstack-snapshot/EditAction.tsx
+#: src/openstack/openstack-subnet/EditSubnetAction.tsx
+#: src/openstack/openstack-tenant/actions/EditAction.tsx
+#: src/openstack/openstack-volume/actions/EditAction.tsx
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
-#: src/resource/actions/base.ts
-#: src/resource/actions/constants.ts
-#: src/vmware/actions.ts
+#: src/slurm/EditAction.tsx
+#: src/vmware/actions/EditAction.tsx
 msgid "Edit"
 msgstr ""
 
@@ -2417,7 +2436,7 @@ msgstr ""
 msgid "Every year"
 msgstr ""
 
-#: src/offering/actions/UpdateAction.ts
+#: src/offering/actions/UpdateDialog.tsx
 msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr ""
 
@@ -2458,12 +2477,17 @@ msgstr ""
 msgid "Export as"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/ExtendAction.ts
+#: src/openstack/openstack-volume/actions/ExtendAction.tsx
+#: src/vmware/actions/ExtendDiskAction.tsx
 msgid "Extend"
 msgstr ""
 
-#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Extend OpenStack volume"
+msgstr ""
+
+#: src/vmware/actions/ExtendDiskDialog.tsx
+msgid "Extend disk"
 msgstr ""
 
 #: src/resource/state/constants.ts
@@ -2500,10 +2524,6 @@ msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
 msgid "Feedback"
-msgstr ""
-
-#: src/resource/actions/dialog/action-field-string.js
-msgid "Field length must be less than {maxlength} symbols."
 msgstr ""
 
 #: src/issues/attachments/utils.ts
@@ -2582,6 +2602,10 @@ msgstr ""
 msgid "Flavor"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ChangeFlavorDialog.tsx
+msgid "Flavor change has been scheduled."
+msgstr ""
+
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Flavor exclude regex"
 msgstr ""
@@ -2645,11 +2669,11 @@ msgstr ""
 msgid "For"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.tsx
 msgid "Force destroy"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
 msgid "Force destroy {name} instance"
 msgstr ""
 
@@ -2687,7 +2711,7 @@ msgid "Full name"
 msgstr ""
 
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "GB"
@@ -2722,7 +2746,7 @@ msgstr ""
 msgid "General information"
 msgstr ""
 
-#: src/rancher/cluster/actions/KubeconfigFileAction.ts
+#: src/rancher/cluster/actions/KubeconfigFileAction.tsx
 msgid "Generate Kubeconfig file"
 msgstr ""
 
@@ -2751,16 +2775,16 @@ msgstr ""
 msgid "Growth"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions/EditAction.ts
-#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
+#: src/openstack/openstack-backup/actions/EditDialog.tsx
+#: src/openstack/openstack-instance/actions/CreateBackupDialog.tsx
 msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotDialog.tsx
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/EditAction.ts
+#: src/openstack/openstack-snapshot/EditDialog.tsx
 msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
 msgstr ""
 
@@ -3018,9 +3042,13 @@ msgstr ""
 
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
-#: src/openstack/openstack-volume/actions/AttachAction.ts
+#: src/openstack/openstack-volume/actions/AttachDialog.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 msgid "Instance"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/DestroyDialog.tsx
+msgid "Instance deletion has been scheduled."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
@@ -3031,11 +3059,15 @@ msgstr ""
 msgid "Instance does not have any security groups yet."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/StartAction.ts
+#: src/rancher/node/actions/LinkDialog.tsx
+msgid "Instance has been linked."
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/StartAction.tsx
 msgid "Instance is already active."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/StopAction.ts
+#: src/openstack/openstack-instance/actions/StopAction.tsx
 msgid "Instance is already stopped."
 msgstr ""
 
@@ -3043,15 +3075,15 @@ msgstr ""
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+#: src/openstack/openstack-instance/actions/ForceDestroyAction.tsx
 msgid "Instance should be OK, or erred. Please contact support."
 msgstr ""
 
-#: src/rancher/cluster/actions/KubeconfigFileAction.ts
+#: src/rancher/cluster/actions/KubeconfigFileAction.tsx
 msgid "Instance should be OK. Please contact support."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/DestroyAction.ts
+#: src/openstack/openstack-instance/actions/DestroyAction.tsx
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr ""
 
@@ -3088,7 +3120,7 @@ msgstr ""
 #: src/openstack/OpenStackPackageDetails.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
-#: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
+#: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Internal network mask (CIDR)"
 msgstr ""
 
@@ -3337,10 +3369,10 @@ msgstr ""
 msgid "Keep until"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions/EditAction.ts
-#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
-#: src/openstack/openstack-snapshot/EditAction.ts
-#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+#: src/openstack/openstack-backup/actions/EditDialog.tsx
+#: src/openstack/openstack-instance/actions/CreateBackupDialog.tsx
+#: src/openstack/openstack-snapshot/EditDialog.tsx
+#: src/openstack/openstack-volume/actions/CreateSnapshotDialog.tsx
 msgid "Kept until"
 msgstr ""
 
@@ -3448,7 +3480,8 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: src/rancher/node/actions/LinkAction.ts
+#: src/rancher/node/actions/LinkAction.tsx
+#: src/rancher/node/actions/LinkDialog.tsx
 msgid "Link OpenStack Instance"
 msgstr ""
 
@@ -3549,7 +3582,7 @@ msgid "MAC address (optional)"
 msgstr ""
 
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
-#: src/openstack/openstack-network/actions/SetMtuAction.tsx
+#: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "MTU"
 msgstr ""
 
@@ -3651,10 +3684,6 @@ msgstr ""
 msgid "Maximal number of resources"
 msgstr ""
 
-#: src/resource/actions/dialog/action-field-integer.ts
-msgid "Maximal valid value is {minValue} {units}."
-msgstr ""
-
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Maximal value"
 msgstr ""
@@ -3753,10 +3782,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/ImageGroup.tsx
 msgid "Min storage"
-msgstr ""
-
-#: src/resource/actions/dialog/action-field-integer.ts
-msgid "Minimal valid value is {minValue} {units}."
 msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
@@ -3937,7 +3962,6 @@ msgstr ""
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
-#: src/resource/actions/constants.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -4024,10 +4048,11 @@ msgstr ""
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwarePortSummary.tsx
+#: src/vmware/actions/CreatePortDialog.tsx
 msgid "Network"
 msgstr ""
 
-#: src/openstack/openstack-network/actions/SetMtuAction.tsx
+#: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "Network MTU has been updated."
 msgstr ""
 
@@ -4057,7 +4082,7 @@ msgstr ""
 msgid "New email"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
+#: src/openstack/openstack-instance/actions/ChangeFlavorDialog.tsx
 msgid "New flavor"
 msgstr ""
 
@@ -4071,7 +4096,7 @@ msgid "New plan"
 msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
-#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "New size"
 msgstr ""
 
@@ -4194,10 +4219,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderRegisterButton.tsx
 msgid "Not a service provider."
-msgstr ""
-
-#: src/resource/actions/dialog/action-field-integer.ts
-msgid "Not a valid value."
 msgstr ""
 
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
@@ -4458,9 +4479,7 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleAction.ts
-#: src/rancher/node/actions/ConsoleAction.ts
-#: src/vmware/actions.ts
+#: src/resource/actions/OpenConsoleActionItem.tsx
 msgid "Open console"
 msgstr ""
 
@@ -4485,10 +4504,18 @@ msgstr ""
 msgid "OpenStack events"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/EditAction.ts
+#: src/openstack/openstack-instance/actions/EditDialog.tsx
 #: src/openstack/openstack-instance/marketplace.ts
-#: src/rancher/node/actions/LinkAction.ts
+#: src/rancher/node/actions/LinkDialog.tsx
 msgid "OpenStack instance"
+msgstr ""
+
+#: src/rancher/node/actions/UnlinkAction.tsx
+msgid "OpenStack instance has been unlinked from Rancher node."
+msgstr ""
+
+#: src/openstack/openstack-tenant/actions/CreateNetworkDialog.tsx
+msgid "OpenStack networks has been created."
 msgstr ""
 
 #: src/openstack/marketplace.ts
@@ -4503,15 +4530,15 @@ msgstr ""
 msgid "OpenStack package {tenant_name} has been deleted."
 msgstr ""
 
-#: src/openstack/openstack-subnet/EditAction.ts
+#: src/openstack/openstack-subnet/EditSubnetDialog.tsx
 msgid "OpenStack subnet"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/EditAction.ts
+#: src/openstack/openstack-tenant/actions/EditDialog.tsx
 msgid "OpenStack tenant"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/EditAction.ts
+#: src/openstack/openstack-volume/actions/EditDialog.tsx
 #: src/openstack/openstack-volume/marketplace.ts
 msgid "OpenStack volume"
 msgstr ""
@@ -4930,22 +4957,18 @@ msgid "Pending approval for removal of"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
-#: src/offering/actions/CompleteAction.ts
 msgid "Per day"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
-#: src/offering/actions/CompleteAction.ts
 msgid "Per half month"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
-#: src/offering/actions/CompleteAction.ts
 msgid "Per hour"
 msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
-#: src/offering/actions/CompleteAction.ts
 msgid "Per month"
 msgstr ""
 
@@ -5179,15 +5202,15 @@ msgstr ""
 msgid "Please select your language"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/RestartAction.ts
+#: src/openstack/openstack-instance/actions/RestartAction.tsx
 msgid "Please start instance first."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ChangeFlavorAction.ts
+#: src/openstack/openstack-instance/actions/ChangeFlavorAction.tsx
 msgid "Please stop the instance before changing its flavor."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/DestroyAction.ts
+#: src/openstack/openstack-instance/actions/DestroyAction.tsx
 msgid "Please stop the instance before its removal."
 msgstr ""
 
@@ -5214,6 +5237,10 @@ msgstr ""
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/marketplace.ts
 msgid "Port"
+msgstr ""
+
+#: src/vmware/actions/CreatePortDialog.tsx
+msgid "Port has been created."
 msgstr ""
 
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
@@ -5624,7 +5651,6 @@ msgstr ""
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/offering/actions/CompleteAction.ts
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 msgid "Quantity"
@@ -5698,6 +5724,10 @@ msgstr ""
 #: src/configs/default.ts
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Reason unknown, please contact support."
+msgstr ""
+
+#: src/vmware/actions/RebootAction.tsx
+msgid "Reboot"
 msgstr ""
 
 #: src/marketplace/landing/LandingPage.tsx
@@ -5824,8 +5854,8 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/DestroyAction.ts
-#: src/openstack/openstack-instance/actions/ForceDestroyAction.ts
+#: src/openstack/openstack-instance/actions/DestroyDialog.tsx
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
 msgid "Release floating IPs"
 msgstr ""
 
@@ -5900,7 +5930,7 @@ msgid "Removing the organization will delete all related resources."
 msgstr ""
 
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
-#: src/offering/actions/UpdateAction.ts
+#: src/offering/actions/UpdateDialog.tsx
 msgid "Report"
 msgstr ""
 
@@ -5973,7 +6003,7 @@ msgstr ""
 msgid "Request details"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/RequestDirectAccessAction.ts
+#: src/openstack/openstack-tenant/actions/RequestDirectAccessAction.tsx
 msgid "Request direct access"
 msgstr ""
 
@@ -6009,10 +6039,6 @@ msgstr ""
 
 #: src/issues/create/IssueCreateDialog.tsx
 msgid "Request title"
-msgstr ""
-
-#: src/resource/actions/action-utils-service.ts
-msgid "Request to {action} has been accepted."
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
@@ -6068,6 +6094,7 @@ msgstr ""
 
 #: src/form/AppstoreListDialog.tsx
 #: src/form/ResetFormButton.tsx
+#: src/vmware/actions/ResetAction.tsx
 msgid "Reset"
 msgstr ""
 
@@ -6104,6 +6131,10 @@ msgstr ""
 msgid "Resource configuration is invalid. Please fix errors in form."
 msgstr ""
 
+#: src/resource/actions/DestroyActionItem.tsx
+msgid "Resource deletion has been scheduled."
+msgstr ""
+
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Resource description"
 msgstr ""
@@ -6134,14 +6165,6 @@ msgstr ""
 
 #: src/azure/AzureResourceSummary.tsx
 msgid "Resource group"
-msgstr ""
-
-#: src/resource/actions/action-utils-service.ts
-msgid "Resource has been deleted."
-msgstr ""
-
-#: src/resource/actions/constants.ts
-msgid "Resource has been updated."
 msgstr ""
 
 #: src/resource/state/utils.ts
@@ -6179,11 +6202,13 @@ msgstr ""
 msgid "Resource plan change request has been submitted."
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/actions/ActivateAction.ts
+#: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
 msgid "Resource schedule is already activated."
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/actions/DeactivateAction.ts
+#: src/openstack/openstack-backup-schedule/actions/DeactivateAction.tsx
+#: src/openstack/openstack-snapshot-schedule/actions/DeactivateSnapshotScheduleAction.tsx
 msgid "Resource schedule is already deactivated."
 msgstr ""
 
@@ -6234,7 +6259,7 @@ msgstr ""
 msgid "Resources usage"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/RestartAction.ts
+#: src/openstack/openstack-instance/actions/RestartAction.tsx
 msgid "Restart"
 msgstr ""
 
@@ -6242,8 +6267,8 @@ msgstr ""
 msgid "Restarting"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions/RestoreAction.ts
-#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+#: src/openstack/openstack-backup/actions/RestoreAction.tsx
+#: src/openstack/openstack-snapshot/RestoreSnapshotAction.tsx
 msgid "Restore"
 msgstr ""
 
@@ -6251,7 +6276,7 @@ msgstr ""
 msgid "Restore virtual machine from backup {name}"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+#: src/openstack/openstack-snapshot/RestoreSnapshotDialog.tsx
 msgid "Restore volume snapshot"
 msgstr ""
 
@@ -6281,8 +6306,12 @@ msgstr ""
 msgid "Retry"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/RetypeAction.ts
+#: src/openstack/openstack-volume/actions/RetypeAction.tsx
 msgid "Retype"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/RetypeDialog.tsx
+msgid "Retype OpenStack Volume"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
@@ -6362,13 +6391,17 @@ msgstr ""
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr ""
 
-#: src/slurm/actions.ts
+#: src/slurm/EditDialog.tsx
 #: src/slurm/marketplace.ts
 msgid "SLURM allocation"
 msgstr ""
 
 #: src/slurm/details/AllocationDetailsDialog.tsx
 msgid "SLURM allocation usage"
+msgstr ""
+
+#: src/azure/sql/CreateDatabaseDialog.tsx
+msgid "SQL database has been created."
 msgstr ""
 
 #: src/azure/sql/AzureSQLServerForm.tsx
@@ -6516,10 +6549,6 @@ msgstr ""
 msgid "Security group does not contain any rule yet."
 msgstr ""
 
-#: src/openstack/openstack-security-groups/module.ts
-msgid "Security group has been updated."
-msgstr ""
-
 #: src/openstack/openstack-security-groups/rule-editor/utils.ts
 msgid "Security group rules update has been scheduled."
 msgstr ""
@@ -6586,10 +6615,6 @@ msgstr ""
 
 #: src/user/SelectAffiliationDialog.tsx
 msgid "Select affiliation"
-msgstr ""
-
-#: src/resource/actions/dialog/action-field-select.js
-msgid "Select an option"
 msgstr ""
 
 #: src/rancher/template/SelectControl.tsx
@@ -6872,6 +6897,7 @@ msgid "Services"
 msgstr ""
 
 #: src/openstack/openstack-network/actions/SetMtuAction.tsx
+#: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "Set MTU"
 msgstr ""
 
@@ -6880,7 +6906,8 @@ msgstr ""
 msgid "Set allowed address pairs"
 msgstr ""
 
-#: src/offering/actions/SetBackendIDAction.ts
+#: src/offering/actions/SetBackendIDAction.tsx
+#: src/offering/actions/SetBackendIdDialog.tsx
 msgid "Set backend ID"
 msgstr ""
 
@@ -6890,7 +6917,7 @@ msgstr ""
 msgid "Set location"
 msgstr ""
 
-#: src/openstack/openstack-security-groups/module.ts
+#: src/openstack/openstack-security-groups/SetRulesAction.tsx
 msgid "Set rules"
 msgstr ""
 
@@ -6947,8 +6974,7 @@ msgstr ""
 msgid "Show choices"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/ConsoleLogAction.ts
-#: src/rancher/node/actions/ConsoleLogAction.ts
+#: src/resource/actions/OpenConsoleLogActionItem.tsx
 msgid "Show console log"
 msgstr ""
 
@@ -7006,6 +7032,10 @@ msgstr ""
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr ""
 
+#: src/vmware/actions/ShutdownAction.tsx
+msgid "Shutdown"
+msgstr ""
+
 #: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Sign in"
 msgstr ""
@@ -7028,11 +7058,9 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/VMwareDiskSummary.tsx
+#: src/vmware/actions/CreateDiskDialog.tsx
+#: src/vmware/actions/ExtendDiskDialog.tsx
 msgid "Size"
-msgstr ""
-
-#: src/vmware/actions.ts
-msgid "Size in GiB"
 msgstr ""
 
 #: src/azure/vm/azure-virtual-machine-config.ts
@@ -7054,7 +7082,7 @@ msgstr ""
 msgid "Skip floating IP assignment"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleDialog.tsx
 msgid "Snapshot schedule for volume has been created."
 msgstr ""
 
@@ -7094,7 +7122,8 @@ msgstr ""
 #: src/booking/components/modal/BookingModal.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/booking/components/utils.tsx
-#: src/openstack/openstack-instance/actions/StartAction.ts
+#: src/openstack/openstack-instance/actions/StartAction.tsx
+#: src/vmware/actions/StartAction.tsx
 msgid "Start"
 msgstr ""
 
@@ -7190,7 +7219,8 @@ msgstr ""
 msgid "Step 2. Select resources"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/StopAction.ts
+#: src/openstack/openstack-instance/actions/StopAction.tsx
+#: src/vmware/actions/StopAction.tsx
 msgid "Stop"
 msgstr ""
 
@@ -7240,7 +7270,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
-#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 #: src/rancher/cluster/ImportYAMLDialog.tsx
@@ -7249,7 +7279,6 @@ msgstr ""
 #: src/rancher/cluster/hpas/HPAUpdateDialog.tsx
 #: src/resource/actions/AsyncActionDialog.tsx
 #: src/resource/actions/ResourceActionDialog.tsx
-#: src/resource/actions/dialog/action-dialog.js
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
 msgstr ""
@@ -7270,7 +7299,7 @@ msgstr ""
 msgid "Subnet CIDR"
 msgstr ""
 
-#: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
+#: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Subnet has been created."
 msgstr ""
 
@@ -7346,18 +7375,22 @@ msgstr ""
 msgid "Sure? Form data would be lost"
 msgstr ""
 
+#: src/vmware/actions/SuspendAction.tsx
+msgid "Suspend"
+msgstr ""
+
 #: src/freeipa/SyncProfile.tsx
 msgid "Sync profile"
 msgstr ""
 
-#: src/openstack/openstack-floating-ips/module.ts
-#: src/openstack/openstack-security-groups/module.ts
-#: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.ts
-#: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.ts
-#: src/openstack/openstack-volume/actions/PullAction.ts
-#: src/resource/actions/base.ts
-#: src/vmware/actions.ts
+#: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.tsx
+#: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.tsx
+#: src/resource/actions/PullActionItem.tsx
 msgid "Synchronise"
+msgstr ""
+
+#: src/resource/actions/PullActionItem.tsx
+msgid "Synchronization has been scheduled."
 msgstr ""
 
 #: src/configs/default.ts
@@ -7505,8 +7538,7 @@ msgid "Tenant user username"
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
-#: src/marketplace/resources/terminate/TerminateAction.ts
-#: src/offering/actions/TerminateAction.ts
+#: src/marketplace/resources/terminate/TerminateAction.tsx
 msgid "Terminate"
 msgstr ""
 
@@ -7709,17 +7741,12 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
-#: src/resource/actions/dialog/action-field-string.js
-msgid "This field contains invalid characters."
-msgstr ""
-
 #: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
 #: src/marketplace/details/OfferingConfigurator.tsx
 msgid "This field is required"
 msgstr ""
 
 #: src/core/validators.ts
-#: src/resource/actions/dialog/action-field-string.js
 msgid "This field is required."
 msgstr ""
 
@@ -7953,6 +7980,11 @@ msgstr ""
 msgid "Unable to add screenshot."
 msgstr ""
 
+#: src/resource/actions/AsyncActionButton.tsx
+#: src/resource/actions/AsyncActionItem.tsx
+msgid "Unable to apply action."
+msgstr ""
+
 #: src/invitations/InvitationApprove.tsx
 msgid "Unable to approve invitation."
 msgstr ""
@@ -7965,7 +7997,11 @@ msgstr ""
 msgid "Unable to approve order."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/AttachVolumeAction.tsx
+#: src/openstack/openstack-volume/actions/AttachDialog.tsx
+msgid "Unable to attach volume to instance."
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
 msgid "Unable to attach volume."
 msgstr ""
 
@@ -7993,6 +8029,10 @@ msgstr ""
 msgid "Unable to change email."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ChangeFlavorDialog.tsx
+msgid "Unable to change flavor."
+msgstr ""
+
 #: src/customer/team/PendingReviewDialog.tsx
 msgid "Unable to close review."
 msgstr ""
@@ -8001,11 +8041,19 @@ msgstr ""
 msgid "Unable to confirm email."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: src/openstack/openstack-tenant/actions/CreateNetworkDialog.tsx
+msgid "Unable to create OpenStack networks."
+msgstr ""
+
+#: src/azure/sql/CreateDatabaseDialog.tsx
+msgid "Unable to create SQL database."
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/CreateBackupScheduleDialog.tsx
 msgid "Unable to create VM snapshot schedule."
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
+#: src/openstack/openstack-instance/actions/CreateBackupDialog.tsx
 msgid "Unable to create VM snapshot."
 msgstr ""
 
@@ -8019,6 +8067,10 @@ msgstr ""
 
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 msgid "Unable to create catalog."
+msgstr ""
+
+#: src/vmware/actions/CreateDiskDialog.tsx
+msgid "Unable to create disk."
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPACreateDialog.tsx
@@ -8053,6 +8105,10 @@ msgstr ""
 msgid "Unable to create payment."
 msgstr ""
 
+#: src/vmware/actions/CreatePortDialog.tsx
+msgid "Unable to create port."
+msgstr ""
+
 #: src/issues/create/utils.ts
 msgid "Unable to create request."
 msgstr ""
@@ -8061,15 +8117,15 @@ msgstr ""
 msgid "Unable to create security group."
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotScheduleDialog.tsx
 msgid "Unable to create snapshot schedule."
 msgstr ""
 
-#: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
+#: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Unable to create subnet."
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotDialog.tsx
 msgid "Unable to create volume snapshot."
 msgstr ""
 
@@ -8089,8 +8145,16 @@ msgstr ""
 msgid "Unable to delete comment."
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/DestroyDialog.tsx
+msgid "Unable to delete instance."
+msgstr ""
+
 #: src/customer/payments/store/effects.ts
 msgid "Unable to delete payment."
+msgstr ""
+
+#: src/resource/actions/DestroyActionItem.tsx
+msgid "Unable to delete resource."
 msgstr ""
 
 #: src/customer/team/UserRemoveButton.tsx
@@ -8100,6 +8164,10 @@ msgstr ""
 
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 msgid "Unable to delete {resourceType}."
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
+msgid "Unable to destroy VM."
 msgstr ""
 
 #: src/freeipa/DisableProfile.tsx
@@ -8118,7 +8186,11 @@ msgstr ""
 msgid "Unable to enable payment profile."
 msgstr ""
 
-#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+#: src/vmware/actions/ExtendDiskDialog.tsx
+msgid "Unable to extend disk."
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Unable to extend volume."
 msgstr ""
 
@@ -8173,6 +8245,10 @@ msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to initialize shopping cart."
+msgstr ""
+
+#: src/rancher/node/actions/LinkDialog.tsx
+msgid "Unable to link instance."
 msgstr ""
 
 #: src/customer/payments/store/effects.ts
@@ -8416,16 +8492,16 @@ msgstr ""
 msgid "Unable to mark the invoice as paid."
 msgstr ""
 
-#: src/openstack/utils.ts
+#: src/resource/actions/OpenConsoleLogActionItem.tsx
 msgid "Unable to open console log"
+msgstr ""
+
+#: src/resource/actions/OpenConsoleActionItem.tsx
+msgid "Unable to open console."
 msgstr ""
 
 #: src/openstack/utils.ts
 msgid "Unable to open console. Error message: {message}"
-msgstr ""
-
-#: src/resource/actions/dialog/action-dialog.js
-msgid "Unable to perform action"
 msgstr ""
 
 #: src/customer/team/ReviewCloseButton.tsx
@@ -8501,8 +8577,12 @@ msgstr ""
 msgid "Unable to restore VM snapshot."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+#: src/openstack/openstack-snapshot/RestoreSnapshotDialog.tsx
 msgid "Unable to restore volume snapshot."
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/RetypeDialog.tsx
+msgid "Unable to retype volume."
 msgstr ""
 
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
@@ -8526,12 +8606,12 @@ msgstr ""
 msgid "Unable to send record notification."
 msgstr ""
 
-#: src/offering/actions/SetBackendIDAction.ts
+#: src/offering/actions/SetBackendIdDialog.tsx
 msgid "Unable to set backend ID."
 msgstr ""
 
-#: src/openstack/utils.ts
-msgid "Unable to show console log. Error message: {message}"
+#: src/resource/actions/OpenConsoleLogActionItem.tsx
+msgid "Unable to show console log."
 msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx
@@ -8566,6 +8646,14 @@ msgstr ""
 msgid "Unable to sync FreeIPA profile."
 msgstr ""
 
+#: src/resource/actions/PullActionItem.tsx
+msgid "Unable to synchronize resource."
+msgstr ""
+
+#: src/rancher/node/actions/UnlinkAction.tsx
+msgid "Unable to unlink instance from node."
+msgstr ""
+
 #: src/customer/payments/store/effects.ts
 msgid "Unable to unlink invoice from the payment."
 msgstr ""
@@ -8594,7 +8682,7 @@ msgstr ""
 msgid "Unable to update internal IPs of OpenStack instance."
 msgstr ""
 
-#: src/openstack/openstack-network/actions/SetMtuAction.tsx
+#: src/openstack/openstack-network/actions/SetMtuDialog.tsx
 msgid "Unable to update network MTU."
 msgstr ""
 
@@ -8651,7 +8739,7 @@ msgstr ""
 msgid "Unable to update user."
 msgstr ""
 
-#: src/resource/actions/base.ts
+#: src/resource/actions/UpdateResourceDialog.tsx
 msgid "Unable to update {verboseName}."
 msgstr ""
 
@@ -8696,13 +8784,11 @@ msgstr ""
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/marketplace/details/plan/LimitlessComponentsTable.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
-#: src/offering/actions/CompleteAction.ts
 msgid "Unit"
 msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/InvoiceDetails.tsx
-#: src/offering/actions/CompleteAction.ts
 msgid "Unit price"
 msgstr ""
 
@@ -8715,7 +8801,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: src/rancher/node/actions/UnlinkAction.ts
+#: src/rancher/node/actions/UnlinkAction.tsx
 msgid "Unlink instance"
 msgstr ""
 
@@ -8745,7 +8831,35 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsAction.ts
+#: src/openstack/openstack-instance/actions/EditDialog.tsx
+msgid "Update OpenStack instance"
+msgstr ""
+
+#: src/openstack/openstack-subnet/EditSubnetDialog.tsx
+msgid "Update OpenStack subnet"
+msgstr ""
+
+#: src/openstack/openstack-tenant/actions/EditDialog.tsx
+msgid "Update OpenStack tenant"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/EditDialog.tsx
+msgid "Update OpenStack volume"
+msgstr ""
+
+#: src/slurm/EditDialog.tsx
+msgid "Update SLURM allocation"
+msgstr ""
+
+#: src/openstack/openstack-backup/actions/EditDialog.tsx
+msgid "Update VM snapshot"
+msgstr ""
+
+#: src/openstack/openstack-backup-schedule/actions/EditDialog.tsx
+msgid "Update backup schedule"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsAction.tsx
 msgid "Update floating IPs"
 msgstr ""
 
@@ -8769,6 +8883,10 @@ msgstr ""
 msgid "Update location"
 msgstr ""
 
+#: src/openstack/openstack-network/actions/EditNetworkDialog.tsx
+msgid "Update network"
+msgstr ""
+
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Update notification"
 msgstr ""
@@ -8779,6 +8897,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-security-groups/utils.ts
 msgid "Update of OpenStack instance security groups has been scheduled."
+msgstr ""
+
+#: src/offering/actions/UpdateDialog.tsx
+msgid "Update offering"
 msgstr ""
 
 #: src/customer/payments/PaymentUpdateDialog.tsx
@@ -8801,7 +8923,11 @@ msgstr ""
 msgid "Update project details"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsAction.ts
+#: src/openstack/openstack-security-groups/EditDialog.tsx
+msgid "Update security group"
+msgstr ""
+
+#: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsAction.tsx
 msgid "Update security groups"
 msgstr ""
 
@@ -8815,6 +8941,18 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Update static routes"
+msgstr ""
+
+#: src/vmware/actions/EditDialog.tsx
+msgid "Update virtual machine"
+msgstr ""
+
+#: src/openstack/openstack-snapshot/EditDialog.tsx
+msgid "Update volume snapshot"
+msgstr ""
+
+#: src/openstack/openstack-snapshot-schedule/actions/EditDialog.tsx
+msgid "Update volume snapshot schedule"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
@@ -9119,6 +9257,10 @@ msgstr ""
 msgid "VAT rate"
 msgstr ""
 
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
+msgid "VM deletion has been destroyed."
+msgstr ""
+
 #: src/azure/vm/azure-virtual-machine-config.ts
 #: src/digitalocean/digitalocean-droplet-config.ts
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
@@ -9126,11 +9268,11 @@ msgstr ""
 msgid "VM name"
 msgstr ""
 
-#: src/openstack/openstack-backup/actions/EditAction.ts
+#: src/openstack/openstack-backup/actions/EditDialog.tsx
 msgid "VM snapshot"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupAction.ts
+#: src/openstack/openstack-instance/actions/CreateBackupDialog.tsx
 msgid "VM snapshot has been created."
 msgstr ""
 
@@ -9138,7 +9280,7 @@ msgstr ""
 msgid "VM snapshot restoration has been scheduled."
 msgstr ""
 
-#: src/openstack/openstack-backup-schedule/actions/EditAction.ts
+#: src/openstack/openstack-backup-schedule/actions/EditDialog.tsx
 msgid "VM snapshot schedule"
 msgstr ""
 
@@ -9146,7 +9288,7 @@ msgstr ""
 msgid "VM snapshot schedule caveats"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.ts
+#: src/openstack/openstack-instance/actions/CreateBackupScheduleDialog.tsx
 msgid "VM snapshot schedule has been created."
 msgstr ""
 
@@ -9264,21 +9406,29 @@ msgstr ""
 msgid "Virtual machines count"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/AttachVolumeAction.tsx
+#: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
 #: src/openstack/openstack-snapshot/OpenStackSnapshotSummary.tsx
 msgid "Volume"
 msgstr ""
 
-#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+#: src/openstack/openstack-volume/actions/AttachDialog.tsx
+msgid "Volume has been attached to instance."
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Volume has been extended."
 msgstr ""
 
+#: src/openstack/openstack-volume/actions/RetypeDialog.tsx
+msgid "Volume has been retyped."
+msgstr ""
+
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/VolumeExtendDialog.tsx
+#: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Volume name"
 msgstr ""
 
-#: src/openstack/openstack-volume/actions/DestroyAction.ts
+#: src/openstack/openstack-volume/actions/DestroyAction.tsx
 msgid "Volume should be in OK state."
 msgstr ""
 
@@ -9286,15 +9436,11 @@ msgstr ""
 msgid "Volume size"
 msgstr ""
 
-#: src/openstack/openstack-snapshot/EditAction.ts
-msgid "Volume snapshot"
-msgstr ""
-
-#: src/openstack/openstack-volume/actions/CreateSnapshotAction.ts
+#: src/openstack/openstack-volume/actions/CreateSnapshotDialog.tsx
 msgid "Volume snapshot has been created."
 msgstr ""
 
-#: src/openstack/openstack-snapshot/RestoreSnapshotAction.ts
+#: src/openstack/openstack-snapshot/RestoreSnapshotDialog.tsx
 msgid "Volume snapshot has been restored."
 msgstr ""
 
@@ -9304,7 +9450,7 @@ msgstr ""
 
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCreateForm.tsx
-#: src/openstack/openstack-volume/actions/RetypeAction.ts
+#: src/openstack/openstack-volume/actions/RetypeDialog.tsx
 #: src/rancher/cluster/create/VolumeTypeGroup.tsx
 msgid "Volume type"
 msgstr ""
@@ -9397,10 +9543,6 @@ msgstr ""
 
 #: src/invitations/InvitationConfirmDialog.tsx
 msgid "Yes, use invitation email"
-msgstr ""
-
-#: src/resource/actions/dialog/action-dialog.js
-msgid "You are about to delete:"
 msgstr ""
 
 #: src/customer/details/CustomerErrorPanel.tsx
@@ -9722,7 +9864,7 @@ msgstr ""
 msgid "month"
 msgstr ""
 
-#: src/openstack/openstack-network/actions/EditAction.ts
+#: src/openstack/openstack-network/actions/EditNetworkDialog.tsx
 msgid "network"
 msgstr ""
 
@@ -9739,7 +9881,7 @@ msgid "of"
 msgstr ""
 
 #: src/marketplace/landing/CategoryCard.tsx
-#: src/offering/actions/UpdateAction.ts
+#: src/offering/actions/UpdateDialog.tsx
 msgid "offering"
 msgstr ""
 
@@ -9841,6 +9983,10 @@ msgstr ""
 msgid "routers"
 msgstr ""
 
+#: src/openstack/openstack-security-groups/EditDialog.tsx
+msgid "security group"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/SecurityGroupsList.tsx
 msgid "security groups"
 msgstr ""
@@ -9923,7 +10069,15 @@ msgstr ""
 msgid "vSphere Virtual Machine"
 msgstr ""
 
-#: src/openstack/openstack-snapshot-schedule/actions/EditAction.ts
+#: src/vmware/actions/EditDialog.tsx
+msgid "virtual machine"
+msgstr ""
+
+#: src/openstack/openstack-snapshot/EditDialog.tsx
+msgid "volume snapshot"
+msgstr ""
+
+#: src/openstack/openstack-snapshot-schedule/actions/EditDialog.tsx
 msgid "volume snapshot schedule"
 msgstr ""
 
@@ -10089,7 +10243,7 @@ msgstr ""
 msgid "{value} at {date}, estimated"
 msgstr ""
 
-#: src/resource/actions/base.ts
+#: src/resource/actions/UpdateResourceDialog.tsx
 msgid "{verboseName} has been updated."
 msgstr ""
 

@@ -2,11 +2,12 @@ import { FunctionComponent } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatFilesize } from '@waldur/core/utils';
-import { NestedListActions } from '@waldur/resource/actions/NestedListActions';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, connectTable, createFetcher } from '@waldur/table';
+
+import { CreateDiskAction } from './actions/CreateDiskAction';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   const { translate } = props;
@@ -39,7 +40,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('disks')}
       hasQuery={false}
-      actions={<NestedListActions resource={props.resource} tab="disks" />}
+      actions={<CreateDiskAction resource={props.resource} />}
     />
   );
 };

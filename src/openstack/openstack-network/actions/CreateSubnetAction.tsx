@@ -1,52 +1,21 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { createSubnet } from '@waldur/openstack/api';
-import { getFields } from '@waldur/openstack/openstack-subnet/fields';
-import { SUBNET_PRIVATE_CIDR_PATTERN } from '@waldur/openstack/utils';
 import { validateState } from '@waldur/resource/actions/base';
-import { LazyResourceActionDialog } from '@waldur/resource/actions/LazyResourceActionDialog';
-import { ResourceAction } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
-import { InternalNetworkAllocationPool } from '../InternalNetworkAllocationPool';
+const CreateSubnetDialog = lazyComponent(
+  () =>
+    import(/* webpackChunkName: "CreateSubnetDialog" */ './CreateSubnetDialog'),
+  'CreateSubnetDialog',
+);
 
-export default function createAction({ resource }): ResourceAction {
-  return {
-    name: 'create_subnet',
-    title: translate('Create subnet'),
-    type: 'form',
-    validators: [validateState('OK')],
-    fields: [
-      ...getFields(),
-      {
-        name: 'disable_gateway',
-        type: 'boolean',
-        label: translate('Do not configure a gateway for this subnet'),
-      },
-      {
-        name: 'cidr',
-        label: translate('Internal network mask (CIDR)'),
-        type: 'string',
-        pattern: SUBNET_PRIVATE_CIDR_PATTERN,
-      },
-      {
-        name: 'allocation_pool',
-        component: InternalNetworkAllocationPool,
-      },
-    ],
-    getInitialValues: () => ({
-      enable_default_gateway: true,
-      cidr: '192.168.42.0/24',
-    }),
-    component: LazyResourceActionDialog,
-    submitForm: async (dispatch, formData) => {
-      try {
-        await createSubnet(resource.uuid, formData);
-        dispatch(showSuccess(translate('Subnet has been created.')));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to create subnet.')));
-      }
-    },
-  };
-}
+const validators = [validateState('OK')];
+
+export const CreateSubnetAction = ({ resource }) => (
+  <DialogActionItem
+    validators={validators}
+    title={translate('Create subnet')}
+    modalComponent={CreateSubnetDialog}
+    resource={resource}
+  />
+);

@@ -1,7 +1,8 @@
-import { ActionConfigurationRegistry } from '@waldur/resource/actions/action-configuration';
+import { ActionRegistry } from '@waldur/resource/actions/registry';
 
-import actions from './actions';
+import { OfferingActions } from './actions/OfferingActions';
+
 import './events';
 import './marketplace';
 
-ActionConfigurationRegistry.register('Support.Offering', actions);
+ActionRegistry.register('Support.Offering', OfferingActions);

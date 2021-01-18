@@ -2,8 +2,8 @@ import Axios from 'axios';
 import React from 'react';
 import { useAsyncFn, useBoolean } from 'react-use';
 
-import { loadActions, buttonClick } from './action-utils-service';
 import './ActionButtonResource.scss';
+import { ActionRegistry } from './registry';
 import { ResourceActionComponent } from './ResourceActionComponent';
 
 interface ActionButtonResourceProps {
@@ -12,16 +12,10 @@ interface ActionButtonResourceProps {
   controller?: any;
 }
 
-async function loadData(url) {
+async function loadData(url: string) {
   const response = await Axios.get(url);
   const resource = response.data;
-  const rawActions = await loadActions(resource);
-  const actions = {};
-  for (const key in rawActions) {
-    if (!rawActions[key].tab) {
-      actions[key] = rawActions[key];
-    }
-  }
+  const actions = ActionRegistry.getActions(resource.resource_type);
   return { resource, actions };
 }
 
@@ -43,17 +37,6 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
 
   React.useEffect(loadActionsIfOpen, [open]);
 
-  const triggerAction = (name: string, action: any) => {
-    if (!action.enabled || action.pending) {
-      return;
-    }
-    const controller = props.controller || {
-      handleActionException: () => undefined,
-      reInitResource: () => undefined,
-    };
-    return buttonClick(controller, value.resource, name, action);
-  };
-
   return (
     <ResourceActionComponent
       open={open}
@@ -62,7 +45,7 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
       error={error}
       actions={value?.actions}
       onToggle={onToggle}
-      onSelect={triggerAction}
+      resource={value?.resource}
     />
   );
 };

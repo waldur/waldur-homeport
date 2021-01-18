@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { reduxForm, initialize } from 'redux-form';
+import { reduxForm } from 'redux-form';
 
 import { StringField, TextField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
@@ -13,12 +11,14 @@ import { TimezoneField } from '@waldur/form/TimezoneField';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
+import { SelectField } from '@waldur/openstack/openstack-instance/actions/update-floating-ips/SelectField';
 
 import { RESOURCE_ACTION_FORM } from './constants';
-import { ResourceAction } from './types';
 
 interface ResourceActionDialogOwnProps {
-  resolve: { action: ResourceAction; resource: any };
+  submitForm(formData): void;
+  dialogTitle: string;
+  fields: any[];
 }
 
 const validateJSON = (value: string) => {
@@ -31,28 +31,18 @@ const validateJSON = (value: string) => {
 
 export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
   { form: RESOURCE_ACTION_FORM },
-)(({ resolve: { action, resource }, handleSubmit, submitting, invalid }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (action.getInitialValues) {
-      const initialValues = action.getInitialValues();
-      dispatch(initialize(RESOURCE_ACTION_FORM, initialValues));
-    }
-  }, [dispatch, action, resource]);
-
-  const callback = (formData) => action.submitForm(dispatch, formData);
+)(({ submitForm, handleSubmit, submitting, invalid, dialogTitle, fields }) => {
   return (
     <ActionDialog
-      title={action.dialogTitle || action.title}
+      title={dialogTitle}
       submitLabel={translate('Submit')}
-      onSubmit={handleSubmit(callback)}
+      onSubmit={handleSubmit(submitForm)}
       submitting={submitting}
       invalid={invalid}
       layout="vertical"
     >
-      {Object.keys(action.fields).map((key) => {
-        const field = action.fields[key];
+      {Object.keys(fields).map((key) => {
+        const field = fields[key];
         const props = {
           key: key,
           name: key,
@@ -93,6 +83,8 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
           );
         } else if (field.type === 'boolean') {
           return <AwesomeCheckboxField hideLabel={true} {...props} />;
+        } else if (field.type === 'select') {
+          return <SelectField {...props} options={field.options} />;
         } else if (field.type === 'async_select') {
           return (
             <AsyncSelectField
