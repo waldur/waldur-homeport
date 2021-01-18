@@ -5,6 +5,8 @@ import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
+import { formatResourceType } from '../utils';
+
 import { ActionItem } from './ActionItem';
 import { ActionValidator } from './types';
 import { useValidators } from './useValidators';
@@ -19,7 +21,7 @@ interface DestroyActionItemProps<T> {
 const getConfirmationText = (resource) => {
   const context = {
     name: resource.name.toUpperCase(),
-    resourceType: resource.resource_type || 'resource',
+    resourceType: formatResourceType(resource) || 'resource',
   };
   if (resource.state === 'Erred') {
     return translate(
@@ -44,7 +46,7 @@ export const DestroyActionItem: <T extends { uuid: string }>(
       await waitForConfirmation(
         dispatch,
         translate('Destroy resource'),
-        getConfirmationText(resource) + dialogSubtitle || '',
+        getConfirmationText(resource) + (dialogSubtitle || ''),
       );
     } catch {
       return;
