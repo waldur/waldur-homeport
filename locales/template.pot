@@ -190,7 +190,6 @@ msgstr ""
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
-#: src/resource/actions/ActionMenuButton.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/hooks/HooksList.tsx
@@ -3048,6 +3047,7 @@ msgid "Instance"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/DestroyDialog.tsx
+#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
 msgid "Instance deletion has been scheduled."
 msgstr ""
 
@@ -8167,7 +8167,7 @@ msgid "Unable to delete {resourceType}."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
-msgid "Unable to destroy VM."
+msgid "Unable to destroy instance."
 msgstr ""
 
 #: src/freeipa/DisableProfile.tsx
@@ -8340,6 +8340,7 @@ msgstr ""
 #: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/SecretField.tsx
 #: src/resource/actions/AsyncActionDialog.tsx
+#: src/resource/actions/ResourceActionDialog.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 #: src/user/list/UserDashboard.tsx
 msgid "Unable to load data."
@@ -8831,34 +8832,6 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: src/openstack/openstack-instance/actions/EditDialog.tsx
-msgid "Update OpenStack instance"
-msgstr ""
-
-#: src/openstack/openstack-subnet/EditSubnetDialog.tsx
-msgid "Update OpenStack subnet"
-msgstr ""
-
-#: src/openstack/openstack-tenant/actions/EditDialog.tsx
-msgid "Update OpenStack tenant"
-msgstr ""
-
-#: src/openstack/openstack-volume/actions/EditDialog.tsx
-msgid "Update OpenStack volume"
-msgstr ""
-
-#: src/slurm/EditDialog.tsx
-msgid "Update SLURM allocation"
-msgstr ""
-
-#: src/openstack/openstack-backup/actions/EditDialog.tsx
-msgid "Update VM snapshot"
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/actions/EditDialog.tsx
-msgid "Update backup schedule"
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsAction.tsx
 msgid "Update floating IPs"
 msgstr ""
@@ -8883,10 +8856,6 @@ msgstr ""
 msgid "Update location"
 msgstr ""
 
-#: src/openstack/openstack-network/actions/EditNetworkDialog.tsx
-msgid "Update network"
-msgstr ""
-
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Update notification"
 msgstr ""
@@ -8897,10 +8866,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-security-groups/utils.ts
 msgid "Update of OpenStack instance security groups has been scheduled."
-msgstr ""
-
-#: src/offering/actions/UpdateDialog.tsx
-msgid "Update offering"
 msgstr ""
 
 #: src/customer/payments/PaymentUpdateDialog.tsx
@@ -8923,10 +8888,6 @@ msgstr ""
 msgid "Update project details"
 msgstr ""
 
-#: src/openstack/openstack-security-groups/EditDialog.tsx
-msgid "Update security group"
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsAction.tsx
 msgid "Update security groups"
 msgstr ""
@@ -8943,20 +8904,12 @@ msgstr ""
 msgid "Update static routes"
 msgstr ""
 
-#: src/vmware/actions/EditDialog.tsx
-msgid "Update virtual machine"
-msgstr ""
-
-#: src/openstack/openstack-snapshot/EditDialog.tsx
-msgid "Update volume snapshot"
-msgstr ""
-
-#: src/openstack/openstack-snapshot-schedule/actions/EditDialog.tsx
-msgid "Update volume snapshot schedule"
-msgstr ""
-
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Update your organization name, logo, accounting and contact details."
+msgstr ""
+
+#: src/resource/actions/UpdateResourceDialog.tsx
+msgid "Update {resourceType} {resourceName}"
 msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
@@ -9255,10 +9208,6 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "VAT rate"
-msgstr ""
-
-#: src/openstack/openstack-instance/actions/ForceDestroyDialog.tsx
-msgid "VM deletion has been destroyed."
 msgstr ""
 
 #: src/azure/vm/azure-virtual-machine-config.ts
