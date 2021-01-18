@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
@@ -46,10 +45,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Plan'),
       render: ({ row }) => renderFieldOrDash(row.plan_name),
-    },
-    {
-      title: translate('Cost'),
-      render: ({ row }) => defaultCurrency(row.cost),
     },
     {
       title: translate('Actions'),
@@ -96,7 +91,6 @@ const exportRow = (row) => [
   row.type,
   row.state,
   renderFieldOrDash(row.plan_name),
-  defaultCurrency(row.cost || 0),
 ];
 
 const exportFields = [
