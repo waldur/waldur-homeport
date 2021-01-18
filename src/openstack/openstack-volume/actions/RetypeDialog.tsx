@@ -27,18 +27,33 @@ export const RetypeDialog = ({ resolve: { resource } }) => {
   const fields = asyncState.value
     ? [
         {
-          name: 'type',
-          label: translate('Volume type'),
-          type: 'select',
-          required: true,
-          options: asyncState.value.types,
+          component: () => (
+            <p>
+              <strong>{translate('Current type')}</strong>: {resource.type_name}
+            </p>
+          ),
         },
+        asyncState.value.types.length > 0
+          ? {
+              name: 'type',
+              label: translate('Volume type'),
+              type: 'select',
+              required: true,
+              options: asyncState.value.types,
+            }
+          : {
+              component: () => (
+                <p>{translate('There are no other volume types available.')}</p>
+              ),
+            },
       ]
     : [];
 
   return (
     <ResourceActionDialog
       dialogTitle={translate('Retype OpenStack Volume')}
+      loading={asyncState.loading}
+      error={asyncState.error}
       fields={fields}
       submitForm={async (formData) => {
         try {
