@@ -53,6 +53,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('Offerings')}
       initialSorting={{ field: 'created', mode: 'desc' }}
+      hasQuery={true}
       enableExport={true}
       expandableRow={OfferingsListExpandableRow}
     />
@@ -87,6 +88,7 @@ export const TableOptions = {
     row.state,
   ],
   exportFields: ['Name', 'Service provider', 'Created', 'Category', 'State'],
+  queryField: 'name',
 };
 
 const mapStateToProps = (state: RootState) => ({
