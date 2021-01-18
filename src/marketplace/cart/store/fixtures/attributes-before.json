@@ -1,0 +1,17 @@
+{
+  "schedules": [
+    {
+      "id": "booking36-219035.34500001115",
+      "start": "2021-01-13T00:00:01+04:00",
+      "end": "2021-01-16T00:00:02+04:00",
+      "allDay": false,
+      "title": "",
+      "extendedProps": {
+        "type": "Schedule"
+      },
+      "classNames": "booking booking-Schedule"
+    }
+  ],
+  "name": "my-booking-offering",
+  "description": "this is my offering"
+}
