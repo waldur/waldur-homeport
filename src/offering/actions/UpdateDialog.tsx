@@ -6,7 +6,6 @@ import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDia
 export const UpdateDialog = ({ resolve: { resource } }) => {
   return (
     <UpdateResourceDialog
-      dialogTitle={translate('Update offering')}
       fields={[
         createNameField(),
         {

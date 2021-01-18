@@ -10,7 +10,6 @@ import { updateAllocation } from './api';
 export const EditDialog = ({ resolve: { resource } }) => {
   return (
     <UpdateResourceDialog
-      dialogTitle={translate('Update SLURM allocation')}
       fields={[createNameField(), createDescriptionField()]}
       resource={resource}
       initialValues={{

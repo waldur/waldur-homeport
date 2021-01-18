@@ -9,7 +9,6 @@ import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDia
 export const EditNetworkDialog = ({ resolve: { resource } }) => {
   return (
     <UpdateResourceDialog
-      dialogTitle={translate('Update network')}
       fields={[createNameField(), createDescriptionField()]}
       resource={resource}
       initialValues={{
