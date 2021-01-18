@@ -59,7 +59,11 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
         label={translate('External IP')}
         value={formatIpList(props.resource.external_ips)}
       />
-      <Field label={translate('SSH key')} value={props.resource.key_name} />
+      <Field
+        label={translate('SSH key')}
+        value={props.resource.key_name}
+        helpText={props.resource.key_fingerprint}
+      />
       <Field label={translate('Uptime')} value={formatUptime(props)} />
     </>
   );
