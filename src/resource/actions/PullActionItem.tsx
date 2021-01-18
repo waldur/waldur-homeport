@@ -27,7 +27,7 @@ export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
     }
   };
   if (!resource.backend_id) {
-    return;
+    return null;
   }
   return <ActionItem title={translate('Synchronise')} action={callback} />;
 };
