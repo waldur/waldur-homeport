@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { destroyInstance } from '@waldur/openstack/api';
+import { destroyInstance, DestroyInstanceParams } from '@waldur/openstack/api';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
@@ -29,7 +29,7 @@ export const DestroyDialog = ({ resolve: { resource } }) => {
         delete_volumes: true,
         release_floating_ips: true,
       }}
-      submitForm={async (formData) => {
+      submitForm={async (formData: DestroyInstanceParams) => {
         try {
           await destroyInstance(resource.uuid, formData);
           dispatch(
