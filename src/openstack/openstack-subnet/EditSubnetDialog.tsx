@@ -7,7 +7,6 @@ import { getFields } from './fields';
 export const EditSubnetDialog = ({ resolve: { resource } }) => {
   return (
     <UpdateResourceDialog
-      dialogTitle={translate('Update OpenStack subnet')}
       fields={getFields()}
       resource={resource}
       initialValues={{

@@ -7,7 +7,6 @@ import { getFields } from './fields';
 export const EditDialog = ({ resolve: { resource } }) => {
   return (
     <UpdateResourceDialog
-      dialogTitle={translate('Update backup schedule')}
       fields={getFields()}
       resource={resource}
       initialValues={{

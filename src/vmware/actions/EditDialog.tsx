@@ -10,7 +10,6 @@ import { updateVirtualMachine } from '../api';
 export const EditDialog = ({ resolve: { resource } }) => {
   return (
     <UpdateResourceDialog
-      dialogTitle={translate('Update virtual machine')}
       fields={[createNameField(), createDescriptionField()]}
       resource={resource}
       initialValues={{

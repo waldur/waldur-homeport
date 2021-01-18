@@ -17,14 +17,12 @@ interface UpdateResourceDialogProps {
   verboseName: string;
   resource: Resource;
   initialValues: any;
-  dialogTitle: string;
 }
 
 export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
   resource,
   updateResource,
   verboseName,
-  dialogTitle,
   fields,
   initialValues,
 }) => {
@@ -51,7 +49,10 @@ export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
           );
         }
       }}
-      dialogTitle={dialogTitle}
+      dialogTitle={translate('Update {resourceType} {resourceName}', {
+        resourceType: verboseName,
+        resourceName: resource.name,
+      })}
       fields={fields}
       initialValues={initialValues}
     />

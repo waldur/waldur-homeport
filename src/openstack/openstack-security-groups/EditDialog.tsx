@@ -9,7 +9,6 @@ import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDia
 export const EditDialog = ({ resolve: { resource } }) => {
   return (
     <UpdateResourceDialog
-      dialogTitle={translate('Update security group')}
       fields={[createNameField(), createDescriptionField()]}
       resource={resource}
       initialValues={{
