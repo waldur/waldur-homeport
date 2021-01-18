@@ -77,6 +77,15 @@ export interface CreateNetworkRequestBody {
   description: string;
 }
 
+export interface DestroyInstanceParams {
+  delete_volumes?: boolean;
+  release_floating_ips?: boolean;
+}
+
+export interface ChangeFlavorRequestBody {
+  flavor: string;
+}
+
 export const pullTenant = (id: string) =>
   post(`/openstack-tenants/${id}/pull/`);
 
@@ -269,14 +278,16 @@ export const setNetworkMtu = (id, mtu) =>
 export const updateInstance = (id: string, data) =>
   put(`/openstacktenant-instances/${id}/`, data);
 
-export const changeFlavor = (id: string, data) =>
+export const changeFlavor = (id: string, data: ChangeFlavorRequestBody) =>
   post(`/openstacktenant-instances/${id}/change_flavor/`, data);
 
-export const destroyInstance = (id: string, data) =>
-  deleteById('/openstacktenant-instances/', id, data);
+export const destroyInstance = (id: string, params: DestroyInstanceParams) =>
+  deleteById('/openstacktenant-instances/', id, { params });
 
-export const forceDestroyInstance = (id: string, data) =>
-  remove(`/openstacktenant-instances/${id}/force_destroy/`, data);
+export const forceDestroyInstance = (
+  id: string,
+  params: DestroyInstanceParams,
+) => remove(`/openstacktenant-instances/${id}/force_destroy/`, { params });
 
 export const updateVolume = (id: string, data) =>
   put(`/openstacktenant-volumes/${id}/`, data);
