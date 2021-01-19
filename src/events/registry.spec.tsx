@@ -24,16 +24,14 @@ describe('Event registry', () => {
         },
       ],
     });
-    expect(registry.formatEvent(event)).toBe(
-      'User Alice Lebowski authenticated successfully.',
-    );
+    expect(registry.formatEvent(event)).toMatchSnapshot();
   });
 
   it('uses custom context if possible', () => {
     registry.registerGroup({
       title: 'User events',
       context: (e) => ({
-        user_link: `<a href="${e.user_uuid}">${e.user_full_name}</a>`,
+        user_link: <a href={e.user_uuid}>{e.user_full_name}</a>,
       }),
       events: [
         {
@@ -42,9 +40,7 @@ describe('Event registry', () => {
         },
       ],
     });
-    const expected =
-      'User <a href="a45c8927e176455781f63e7c7baf9567">Alice Lebowski</a> authenticated successfully.';
-    expect(registry.formatEvent(event)).toBe(expected);
+    expect(registry.formatEvent(event)).toMatchSnapshot();
   });
 
   it('uses event context as is by default', () => {
@@ -57,8 +53,6 @@ describe('Event registry', () => {
         },
       ],
     });
-    expect(registry.formatEvent(event)).toBe(
-      'User Alice Lebowski authenticated successfully.',
-    );
+    expect(registry.formatEvent(event)).toMatchSnapshot();
   });
 });

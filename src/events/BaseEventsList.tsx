@@ -2,16 +2,11 @@ import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import eventsRegistry from '@waldur/events/registry';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
 import { EventDetailsButton } from './EventDetailsButton';
 import { EventTypesButton } from './EventTypesButton';
-
-const EventMessageField = ({ row }) => (
-  <FormattedHtml html={eventsRegistry.formatEvent(row)} />
-);
 
 const EventDateField = ({ row }) => <>{formatDateTime(row.created)}</>;
 
@@ -23,7 +18,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={props.filterColumns([
         {
           title: translate('Message'),
-          render: EventMessageField,
+          render: ({ row }) => eventsRegistry.formatEvent(row),
         },
         {
           title: translate('Timestamp'),

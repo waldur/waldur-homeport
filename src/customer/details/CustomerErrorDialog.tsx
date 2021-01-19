@@ -1,4 +1,4 @@
-import { useState, useEffect, FunctionComponent } from 'react';
+import { useEffect, FunctionComponent } from 'react';
 import {
   ModalBody,
   ModalFooter,
@@ -8,9 +8,8 @@ import {
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { translate } from '@waldur/i18n';
+import { translate, formatJsxTemplate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -19,10 +18,9 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
   resolve,
 }) => {
-  const [message, setMessage] = useState<string>();
   const dispatch = useDispatch();
   useEffect(() => {
-    if (isFeatureVisible('support')) {
+    if (isFeatureVisible('support') || !ENV.supportEmail) {
       dispatch(closeModalDialog());
       dispatch(
         openIssueCreateDialog({
@@ -33,14 +31,6 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
           },
         }),
       );
-    } else {
-      const context = { supportEmail: ENV.supportEmail };
-      setMessage(
-        translate(
-          'To correct details of your organization, please send an email to <a href="mailto:{supportEmail}">{supportEmail}</a> highlighting the errors in current details. Thank you!',
-          context,
-        ),
-      );
     }
   }, [dispatch, resolve]);
   return (
@@ -48,7 +38,19 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
       <ModalHeader>
         <ModalTitle>{translate('Incorrect organization details')}</ModalTitle>
       </ModalHeader>
-      <ModalBody>{message && <FormattedHtml html={message} />}</ModalBody>
+      <ModalBody>
+        {ENV.supportEmail
+          ? translate(
+              'To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!',
+              {
+                supportEmail: (
+                  <a href={`mailto:${ENV.supportEmail}`}>{ENV.supportEmail}</a>
+                ),
+              },
+              formatJsxTemplate,
+            )
+          : null}
+      </ModalBody>
       <ModalFooter>
         <CloseDialogButton />
       </ModalFooter>

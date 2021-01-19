@@ -8,7 +8,7 @@ import {
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import { translate } from '@waldur/i18n';
+import { translate, formatJsxTemplate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -24,11 +24,17 @@ export const OrganizationRemovalErrorDialog: FunctionComponent = () => {
         </ModalTitle>
       </ModalHeader>
       <ModalBody>
-        <p>
-          {translate('To remove your organization, please send an email to')}{' '}
-          <a href={`mailto:${ENV.supportEmail}`}>{ENV.supportEmail}</a>.{' '}
-          {translate('Thank you')}!
-        </p>
+        {ENV.supportEmail
+          ? translate(
+              'To remove your organization, please send an email to {supportEmail}. Thank you!',
+              {
+                supportEmail: (
+                  <a href={`mailto:${ENV.supportEmail}`}>{ENV.supportEmail}</a>
+                ),
+              },
+              formatJsxTemplate,
+            )
+          : null}
       </ModalBody>
       <ModalFooter>
         <CloseDialogButton />

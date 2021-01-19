@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
+import { formatJsx, translate } from '@waldur/i18n';
 
 interface TermsOfServiceProps {
   initial?: boolean;
@@ -14,21 +14,24 @@ export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
   return (
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-9">
-        {!props.initial ? (
-          props.agreementDate && (
-            <>
-              <Link state="tos.index" label={translate('Terms of Service')} />
-              &nbsp;
-              {translate('have been accepted on')}&nbsp;
-              {props.agreementDate}
-            </>
-          )
-        ) : (
-          <>
-            {translate('By submitting the form you are agreeing to the')}&nbsp;
-            <Link state="tos.index" label={translate('Terms of Service')} />
-          </>
-        )}
+        {!props.initial
+          ? props.agreementDate &&
+            translate(
+              '<Link>Terms of Service</Link> have been accepted on <Date></Date>',
+              {
+                Link: (s) => <Link state="tos.index" label={s} />,
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                Date: (_) => props.agreementDate,
+              },
+              formatJsx,
+            )
+          : translate(
+              'By submitting the form you are agreeing to the <Link>Terms of Service</Link>.',
+              {
+                Link: (s: string) => <Link state="tos.index" label={s} />,
+              },
+              formatJsx,
+            )}
       </div>
     </div>
   );

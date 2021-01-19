@@ -8,7 +8,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { FormattedJira } from '@waldur/core/FormattedJira';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { translate, formatJsxTemplate } from '@waldur/i18n';
 import { openUserPopover } from '@waldur/user/actions';
 
 interface Comment {
@@ -78,20 +78,27 @@ export const IssuesActivityStream: FunctionComponent = () => {
                 </div>
                 <div className="vertical-timeline-content">
                   <p className="m-n">
-                    {item.author_uuid ? (
-                      <a onClick={() => callback(item.author_uuid)}>
-                        {item.author_name}
-                      </a>
-                    ) : (
-                      item.author_name
+                    {translate(
+                      '{user} commented on {issue}',
+                      {
+                        user: item.author_uuid ? (
+                          <a onClick={() => callback(item.author_uuid)}>
+                            {item.author_name}
+                          </a>
+                        ) : (
+                          item.author_name
+                        ),
+                        issue: (
+                          <Link
+                            state="issue.details"
+                            params={{ key: item.issue_key }}
+                          >
+                            {item.issue_key}
+                          </Link>
+                        ),
+                      },
+                      formatJsxTemplate,
                     )}{' '}
-                    <>{translate('commented on')}</>{' '}
-                    <Link
-                      state="issue.details"
-                      params={{ key: item.issue_key }}
-                    >
-                      {item.issue_key}
-                    </Link>{' '}
                   </p>
                   <FormattedJira text={item.description} />
                   <span className="vertical-date small text-muted">

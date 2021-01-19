@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formatJsx allows to use angular braces syntax to interpolate JSX component 1`] = `
+Array [
+  "By submitting the form you are agreeing to the ",
+  <a
+    href="example.com"
+  >
+    Terms of Service
+  </a>,
+  ".",
+]
+`;
+
+exports[`formatJsxTemplate allows to use curly braces syntax to interpolate JSX component 1`] = `
+Array [
+  "Please send an email to ",
+  <a
+    href="mailto:admin@example.com"
+  >
+    admin@example.com
+  </a>,
+  ". Thank you!",
+]
+`;
