@@ -35,21 +35,6 @@ export const ProjectCreateForm: FunctionComponent<any> = (props) => (
           isClearable={true}
         />
       )}
-      {props.certifications.length >= 1 && (
-        <SelectField
-          label={props.translate('Certifications')}
-          name="certifications"
-          description={props.translate(
-            'Provider certification required by this project.',
-          )}
-          placeholder={props.translate('Select certifications')}
-          options={props.certifications}
-          getOptionValue={(option) => option.url}
-          getOptionLabel={(option) => option.name}
-          isMulti={true}
-          isClearable={true}
-        />
-      )}
     </FormContainer>
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-5">

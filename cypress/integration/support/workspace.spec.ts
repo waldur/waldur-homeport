@@ -35,9 +35,6 @@ describe('Financial overview', () => {
       .intercept('GET', '/api/marketplace-component-usages/', {
         fixture: 'marketplace/component_usages.json',
       })
-      .intercept('GET', '/api/projects/', {
-        fixture: 'projects/certifications.json',
-      })
       .setToken()
       .visit('/support/helpdesk/')
       .get('h2')
