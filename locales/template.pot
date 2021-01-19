@@ -1090,10 +1090,6 @@ msgstr ""
 msgid "Category name"
 msgstr ""
 
-#: src/project/ProjectCreateForm.tsx
-msgid "Certifications"
-msgstr ""
-
 #: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Challenge code"
 msgstr ""
@@ -5566,10 +5562,6 @@ msgstr ""
 msgid "Provider"
 msgstr ""
 
-#: src/project/ProjectCreateForm.tsx
-msgid "Provider certification required by this project."
-msgstr ""
-
 #: src/marketplace/offerings/create/ServiceSettingsDetailsDialog.tsx
 #: src/marketplace/service-providers/ProviderDetails.tsx
 msgid "Provider details"
@@ -6641,10 +6633,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/CategoryFilter.tsx
 msgid "Select category..."
-msgstr ""
-
-#: src/project/ProjectCreateForm.tsx
-msgid "Select certifications"
 msgstr ""
 
 #: src/openstack/openstack-backup/actions/utils.tsx
@@ -8448,7 +8436,7 @@ msgid "Unable to load project resources."
 msgstr ""
 
 #: src/project/ProjectCreateContainer.tsx
-msgid "Unable to load project types or certifications."
+msgid "Unable to load project types."
 msgstr ""
 
 #: src/marketplace/offerings/create/ServiceSettingsDetailsDialog.tsx

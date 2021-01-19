@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 import { ENV } from '@waldur/configs/default';
-import { deleteById, getAll, post } from '@waldur/core/api';
+import { deleteById } from '@waldur/core/api';
 
 export const createProject = (project) =>
   Axios.post(`${ENV.apiEndpoint}api/projects/`, {
@@ -9,9 +9,6 @@ export const createProject = (project) =>
     description: project.description,
     customer: project.customer.url,
     type: project.type && project.type.url,
-    certifications:
-      project.certifications &&
-      project.certifications.map((item) => ({ url: item.url })),
   });
 
 export const updateProject = (project) =>
@@ -21,13 +18,6 @@ export const updateProject = (project) =>
   });
 
 export const deleteProject = (projectId) => deleteById('/projects/', projectId);
-
-export const loadCertifications = () => getAll('/service-certifications/');
-
-export const updateCertifications = (projectId, certifications) =>
-  post(`/projects/${projectId}/update_certifications/`, {
-    certifications,
-  });
 
 export const loadProjectTypes = () =>
   Axios.get(`${ENV.apiEndpoint}api/project-types/`).then(

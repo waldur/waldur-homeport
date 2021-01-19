@@ -11,10 +11,6 @@ describe('Project creation dialog', () => {
       .setToken()
       .intercept('POST', '/api/projects/', {})
       .as('createProject')
-      .intercept('GET', '/api/service-certifications/', {
-        fixture: 'projects/certifications.json',
-      })
-      .as('getCerts')
 
       .intercept('GET', '/api/project-types/', {
         fixture: 'projects/types.json',
@@ -26,7 +22,7 @@ describe('Project creation dialog', () => {
   });
 
   it('Validates required fields', () => {
-    cy.wait(['@getCerts', '@getTypes']).then(() => {
+    cy.wait(['@getTypes']).then(() => {
       cy
 
         // Ensure that button is disabled as form is empty
@@ -47,12 +43,6 @@ describe('Project creation dialog', () => {
         .click()
         .selectTheFirstOptionOfDropdown()
 
-        // Open dropdown for project certifications selector
-        .get('div[class$="placeholder"]')
-        .eq(0)
-        .click()
-        .selectTheFirstOptionOfDropdown()
-
         // Submit form
         .get('button')
         .contains('Add project')
@@ -63,12 +53,6 @@ describe('Project creation dialog', () => {
           name: 'Internal OpenStack project',
           description: 'Test project',
           type: '/api/project-types/b4736efa2cc44777b4143463ba8f9bf8/',
-          certifications: [
-            {
-              url:
-                '/api/service-certifications/71969b205ff943c6b0d89e98f466a2dc/',
-            },
-          ],
         });
     });
   });

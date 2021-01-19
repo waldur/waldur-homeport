@@ -23,10 +23,8 @@ interface ProjectCreateProps extends InjectedFormProps, TranslateProps {
 
 const loadData = async () => {
   const projectTypes = await api.loadProjectTypes();
-  const certifications = await api.loadCertifications();
   return {
     projectTypes,
-    certifications,
   };
 };
 
@@ -42,18 +40,12 @@ const ProjectCreateComponent: React.FC<ProjectCreateProps> = (props) => {
   if (error) {
     return (
       <h3 className="text-center">
-        {props.translate('Unable to load project types or certifications.')}
+        {props.translate('Unable to load project types.')}
       </h3>
     );
   }
 
-  return (
-    <ProjectCreateForm
-      {...props}
-      projectTypes={value.projectTypes}
-      certifications={value.certifications}
-    />
-  );
+  return <ProjectCreateForm {...props} projectTypes={value.projectTypes} />;
 };
 
 const mapStateToProps = (state: RootState) => ({
