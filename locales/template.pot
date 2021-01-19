@@ -12,6 +12,10 @@ msgstr ""
 msgid "(VAT is not included)"
 msgstr ""
 
+#: src/user/support/TermsOfService.tsx
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr ""
+
 #: src/marketplace-checklist/AnswerGroup.tsx
 msgid "?"
 msgstr ""
@@ -968,7 +972,7 @@ msgid "By setting token lifetime to indefinite you are allowing anyone who has t
 msgstr ""
 
 #: src/user/support/TermsOfService.tsx
-msgid "By submitting the form you are agreeing to the"
+msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
 msgstr ""
 
 #: src/openstack/openstack-subnet/NetworkSubnetsList.tsx
@@ -1420,8 +1424,6 @@ msgstr ""
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/marketplace/offerings/expandable/utils.ts
 #: src/marketplace/orders/OrdersList.tsx
-#: src/marketplace/orders/item/list/MyOrderItemsList.tsx
-#: src/marketplace/orders/item/list/OrderItemsList.tsx
 msgid "Cost"
 msgstr ""
 
@@ -1688,6 +1690,10 @@ msgstr ""
 #: src/digitalocean/DropletResizeDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Current size"
+msgstr ""
+
+#: src/openstack/openstack-volume/actions/RetypeDialog.tsx
+msgid "Current type"
 msgstr ""
 
 #: src/issues/CustomerSupportRating.tsx
@@ -7566,7 +7572,6 @@ msgstr ""
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 #: src/navigation/AppFooter.tsx
-#: src/user/support/TermsOfService.tsx
 msgid "Terms of Service"
 msgstr ""
 
@@ -7576,10 +7581,6 @@ msgstr ""
 
 #: src/slurm/CopyToClipboardButton.tsx
 msgid "Text has been copied"
-msgstr ""
-
-#: src/customer/details/OrganizationRemovalErrorDialog.tsx
-msgid "Thank you"
 msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
@@ -7701,6 +7702,10 @@ msgstr ""
 msgid "There are no other plans available."
 msgstr ""
 
+#: src/openstack/openstack-volume/actions/RetypeDialog.tsx
+msgid "There are no other volume types available."
+msgstr ""
+
 #: src/navigation/workspace/ProjectsPanel.tsx
 msgid "There are no projects matching filter."
 msgstr ""
@@ -7816,7 +7821,7 @@ msgid "To"
 msgstr ""
 
 #: src/customer/details/CustomerErrorDialog.tsx
-msgid "To correct details of your organization, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a> highlighting the errors in current details. Thank you!"
+msgid "To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
@@ -7836,15 +7841,15 @@ msgid "To remove account, please send a request to {support}."
 msgstr ""
 
 #: src/customer/details/OrganizationRemovalErrorDialog.tsx
-msgid "To remove your organization, please send an email to"
+msgid "To remove your organization, please send an email to {supportEmail}. Thank you!"
 msgstr ""
 
 #: src/dashboard/ReportSecurityIncidentAction.tsx
-msgid "To report a security incident, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a>."
+msgid "To report a security incident, please send an email to {supportEmail}."
 msgstr ""
 
 #: src/dashboard/ReportIssueAction.tsx
-msgid "To report an issue, please send an email to <a href=\"mailto:{supportEmail}\">{supportEmail}</a>."
+msgid "To report an issue, please send an email to {supportEmail}."
 msgstr ""
 
 #: src/booking/components/calendar/defaultConfig.ts
@@ -9688,10 +9693,6 @@ msgstr ""
 msgid "catalogues"
 msgstr ""
 
-#: src/issues/workspace/IssuesActivityStream.tsx
-msgid "commented on"
-msgstr ""
-
 #: src/issues/comments/IssueCommentItem.tsx
 msgid "commented:"
 msgstr ""
@@ -9763,7 +9764,6 @@ msgid "generate automatically"
 msgstr ""
 
 #: src/freeipa/FreeIPAAccountEdit.tsx
-#: src/user/support/TermsOfService.tsx
 msgid "have been accepted on"
 msgstr ""
 
@@ -10162,6 +10162,10 @@ msgstr ""
 
 #: src/quotas/QuotaUsageBarChart.tsx
 msgid "{usage} of {limit} used"
+msgstr ""
+
+#: src/issues/workspace/IssuesActivityStream.tsx
+msgid "{user} commented on {issue}"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event registry uses custom context if possible 1`] = `
+<React.Fragment>
+  <React.Fragment>
+    User 
+  </React.Fragment>
+  <React.Fragment>
+    <a
+      href="a45c8927e176455781f63e7c7baf9567"
+    >
+      Alice Lebowski
+    </a>
+  </React.Fragment>
+  <React.Fragment>
+     authenticated successfully.
+  </React.Fragment>
+</React.Fragment>
+`;
+
+exports[`Event registry uses custom formatter if possible 1`] = `"User Alice Lebowski authenticated successfully."`;
+
+exports[`Event registry uses event context as is by default 1`] = `
+<React.Fragment>
+  <React.Fragment>
+    User 
+  </React.Fragment>
+  <React.Fragment>
+    Alice Lebowski
+  </React.Fragment>
+  <React.Fragment>
+     authenticated successfully.
+  </React.Fragment>
+</React.Fragment>
+`;

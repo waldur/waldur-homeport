@@ -55,11 +55,11 @@ export const isVisible = (state: RootState, feature: string): boolean => {
   if (feature === undefined || feature === null) {
     return true;
   }
-  if (enabledFeatures[feature]) {
-    return true;
-  }
   if (disabledFeatures[feature]) {
     return false;
+  }
+  if (enabledFeatures[feature]) {
+    return true;
   }
   return featuresVisible;
 };

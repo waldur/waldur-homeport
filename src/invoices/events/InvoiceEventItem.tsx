@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { formatRelative, formatDateTime } from '@waldur/core/dateUtils';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
@@ -38,7 +37,7 @@ export const InvoiceEventItem: FunctionComponent<{ event }> = ({ event }) => {
       </div>
 
       <div className="vertical-timeline-content">
-        <FormattedHtml html={event.message} />
+        {event.message}
         <Button
           bsSize="sm"
           bsStyle="primary"

@@ -1,7 +1,10 @@
-import { router } from '@waldur/router';
+import { UISref } from '@uirouter/react';
 
-export const getLink = (route, params, label) =>
-  `<a href="${router.stateService.href(route, params)}">${label}</a>`;
+export const getLink = (route, params, label) => (
+  <UISref to={route} params={params}>
+    <a>{label}</a>
+  </UISref>
+);
 
 const getUserLink = (event) => {
   const name = event.user_full_name || event.user_username;
