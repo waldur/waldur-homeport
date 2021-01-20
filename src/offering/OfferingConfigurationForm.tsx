@@ -187,6 +187,7 @@ export class PureOfferingConfigurationForm extends Component<OfferingConfigurati
               name="attributes.schedules"
               excludedEvents={this.props.offering.attributes.schedules || []}
               label={translate('Select dates')}
+              offeringUuid={props.offering.uuid}
             />
           )}
         </FormContainer>

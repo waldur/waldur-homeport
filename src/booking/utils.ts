@@ -2,11 +2,15 @@ import type { EventInput, EventApi } from '@fullcalendar/core';
 import uniqueId from 'lodash.uniqueid';
 import moment from 'moment';
 
-import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
+import {
+  BOOKING_RESOURCES_TABLE,
+  CURSOR_NOT_ALLOWED_CLASSNAME,
+} from '@waldur/booking/constants';
 import { orderByFilter } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
 import { fetchListStart } from '@waldur/table/actions';
 
-import { BookingProps } from './types';
+import { BookedItem, BookingProps } from './types';
 
 export const createCalendarBookingEvent = ({
   type,
@@ -351,3 +355,20 @@ export const updateBookingsList = (
     offering_uuid,
     provider_uuid,
   });
+
+export const getBookedSlots = (bookedItems: BookedItem[]) =>
+  bookedItems.map((item) => ({
+    id: uniqueId('booking'),
+    start: item.start,
+    end: item.end,
+    allDay: false,
+    title: translate('Reserved slot'),
+    extendedProps: {
+      type: 'Schedule',
+    },
+    backgroundColor: '#333',
+    borderColor: '#333',
+    textColor: '#c6c7cb',
+    className: CURSOR_NOT_ALLOWED_CLASSNAME,
+    classNames: 'booking booking-Schedule',
+  }));

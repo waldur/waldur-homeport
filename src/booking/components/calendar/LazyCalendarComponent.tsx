@@ -3,6 +3,7 @@ import moment from 'moment-timezone';
 import { useRef, useState, useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { CURSOR_NOT_ALLOWED_CLASSNAME } from '@waldur/booking/constants';
 import { BookingProps } from '@waldur/booking/types';
 import {
   createBooking,
@@ -12,6 +13,7 @@ import {
   transformBookingEvent,
   handleSchedule,
 } from '@waldur/booking/utils';
+import { translate } from '@waldur/i18n';
 import { showSuccess, showError } from '@waldur/store/notify';
 
 import { BookingModal } from '../modal/BookingModal';
@@ -69,8 +71,9 @@ export const LazyCalendarComponent: FC<CalendarComponentProps> = (props) => {
 
   const eventClick = ({ el, event }) => {
     if (
-      props.calendarType === 'edit' &&
-      event.extendedProps.type === 'Availability'
+      (props.calendarType === 'edit' &&
+        event.extendedProps.type === 'Availability') ||
+      event.classNames.includes(CURSOR_NOT_ALLOWED_CLASSNAME)
     ) {
       return;
     }
@@ -108,28 +111,31 @@ export const LazyCalendarComponent: FC<CalendarComponentProps> = (props) => {
       const calendarApi = calendarRef.current;
       const checkEvents = calendarApi.getEvents();
 
-      checkEvents.forEach(function (event) {
-        if (
+      const isOverlapping = !!checkEvents.find((event) => {
+        return (
           event.rendering !== 'background' &&
           ((event.start >= arg.start && event.start <= arg.end) ||
             (event.end > arg.start && event.end <= arg.end) ||
             (arg.start >= event.start && arg.start < event.end) ||
             (arg.end >= event.start && arg.end <= event.end))
-        ) {
-          dispatch(
-            showError('Booking is not allowed to overlap other bookings.'),
-          );
-          return calendarApi.unselect();
-        }
+        );
       });
 
-      const scheduledBooking = handleSchedule(
-        arg,
-        props.availabilitySlots,
-        props.options.slotDuration,
-      );
-
-      return addBooking(scheduledBooking);
+      if (isOverlapping) {
+        dispatch(
+          showError(
+            translate('Booking is not allowed to overlap other bookings.'),
+          ),
+        );
+        return calendarApi.unselect();
+      } else {
+        const scheduledBooking = handleSchedule(
+          arg,
+          props.availabilitySlots,
+          props.options.slotDuration,
+        );
+        return addBooking(scheduledBooking);
+      }
     }
   };
 

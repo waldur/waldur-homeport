@@ -1,19 +1,25 @@
 import type { EventInput, OptionsInput } from '@fullcalendar/core';
 import moment from 'moment';
-import { Component, FunctionComponent } from 'react';
+import React, { Component, FunctionComponent } from 'react';
+import { useAsync } from 'react-use';
 import { FieldArray, WrappedFieldArrayProps } from 'redux-form';
 
+import { getOfferingBookedItems } from '@waldur/booking/api';
 import { CalendarComponent } from '@waldur/booking/components/calendar/CalendarComponent';
-import { BookingProps } from '@waldur/booking/types';
+import { BookedItem, BookingProps } from '@waldur/booking/types';
 import {
   deleteCalendarBooking,
   createAvailabilitySlots,
   createAvailabilityDates,
+  getBookedSlots,
 } from '@waldur/booking/utils';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { translate } from '@waldur/i18n';
 
 interface EditableCalendarProps extends WrappedFieldArrayProps<BookingProps> {
   excludedEvents?: BookingProps[];
   schedules: EventInput[];
+  bookedItems: BookedItem[];
 }
 
 class EditableCalendar extends Component<
@@ -129,7 +135,7 @@ class EditableCalendar extends Component<
   };
 
   render() {
-    const { excludedEvents, fields } = this.props;
+    const { excludedEvents, fields, bookedItems } = this.props;
     let events = fields.getAll();
     if (!events) {
       events = [];
@@ -137,7 +143,7 @@ class EditableCalendar extends Component<
     return (
       <CalendarComponent
         calendarType="edit"
-        events={[...excludedEvents, ...events]}
+        events={[...excludedEvents, ...events, ...getBookedSlots(bookedItems)]}
         options={this.getCalendarConfig()}
         availabilitySlots={this.state.availabilitySlots}
         addEventCb={(addedEvent) => {
@@ -153,6 +159,23 @@ class EditableCalendar extends Component<
   }
 }
 
-export const CalendarField: FunctionComponent<any> = (props) => (
-  <FieldArray name={props.name} component={EditableCalendar} {...props} />
-);
+export const CalendarField: FunctionComponent<any> = (props) => {
+  const { loading, value: bookedItems, error } = useAsync(
+    () => getOfferingBookedItems(props.offeringUuid),
+    [],
+  );
+  if (loading) {
+    return <LoadingSpinner />;
+  } else if (error) {
+    return <>{translate('Unable to load booked items.')}</>;
+  } else {
+    return (
+      <FieldArray
+        name={props.name}
+        component={EditableCalendar}
+        bookedItems={bookedItems}
+        {...props}
+      />
+    );
+  }
+};

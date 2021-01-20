@@ -38,3 +38,8 @@ export interface BookingResource {
   description: string;
   created: string;
 }
+
+export interface BookedItem {
+  start: string;
+  end: string;
+}
