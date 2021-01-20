@@ -28,11 +28,12 @@ Axios.interceptors.response.use(
       error.response.status === 401 &&
       error.config.url !== ENV.apiEndpoint + 'api-auth/password/'
     ) {
+      const target = router.globals.transition.targetState();
       AuthService.localLogout(
-        router.globals.current.name
+        target
           ? {
-              toState: router.globals.current.name,
-              toParams: router.globals.params,
+              toState: target.name(),
+              toParams: target.params(),
             }
           : undefined,
       );
