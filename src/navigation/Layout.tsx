@@ -4,6 +4,8 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { getUser } from '@waldur/workspace/selectors';
+
 import { AppFooter } from './AppFooter';
 import { BreadcrumbsContainer } from './breadcrumbs/BreadcrumbsContainer';
 import { CookiesConsent } from './cookies/CookiesConsent';
@@ -27,6 +29,10 @@ export const Layout: React.FC<LayoutProps> = ({
   sidebarClass,
 }) => {
   const pageTitle = useSelector(getTitle);
+  const currentUser = useSelector(getUser);
+  if (!currentUser) {
+    return null;
+  }
   return (
     <>
       {sidebar}
