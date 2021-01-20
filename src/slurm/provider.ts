@@ -7,7 +7,6 @@ const SlurmForm = lazyComponent(
 );
 
 const serializer = (fields) => ({
-  batch_service: fields.batch_service.value,
   hostname: fields.hostname,
   username: fields.username,
   port: fields.port,

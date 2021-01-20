@@ -183,4 +183,84 @@ describe('Offering creation', () => {
         );
       });
   });
+
+  it('allows to create new SLURM allocation offering', () => {
+    cy
+      // Overview step
+      .get('input[name="name"]')
+      .type('SLURM allocation offering')
+
+      .get('button')
+      .contains('Next')
+      .click()
+
+      // Description step
+      .log('Select the first option of category field')
+      .openDropdownByLabel('Category')
+      .selectTheFirstOptionOfDropdown()
+
+      // Management step
+      .get('button')
+      .contains('Next')
+      .click()
+
+      .log('Select management type')
+      .openDropdownByLabel('Type')
+      .get('*div[id^="react-select"]')
+      .contains('SLURM allocation')
+      .click()
+
+      .get('input[name="hostname"]')
+      .type('slurm.example.com')
+      .get('input[name="username"]')
+      .type('admin')
+      .get('input[name="default_account"]')
+      .type('waldur')
+
+      // Accounting step
+      .get('button')
+      .contains('Next')
+      .click()
+
+      // Add plan
+      .get('button')
+      .contains('Add plan')
+      .click()
+
+      .get('input[name="plans[0].name"]')
+      .type('Default plan')
+
+      // Select the first option of "Billing period" dropdown of 'Add plan" form
+      .openDropdownByLabelForce('Billing period')
+      .selectTheFirstOptionOfDropdown()
+
+      .get('input[name="plans[0].prices.cpu"]')
+      .type('1')
+
+      .log('Go to Review step')
+      .get('button')
+      .contains('Next')
+      .click()
+
+      .get('button[type="submit"]')
+      .contains('Submit')
+      .click()
+
+      .wait('@createOffering')
+      .its('request.body')
+      .should('deep.equal', {
+        name: 'SLURM allocation offering',
+        category:
+          '/api/marketplace-categories/4588ff519260461893ab371b8fe83363/',
+        type: 'SlurmInvoices.SlurmPackage',
+        service_attributes: {
+          hostname: 'slurm.example.com',
+          username: 'admin',
+          default_account: 'waldur',
+        },
+        shared: true,
+        attributes: {},
+        plans: [{ name: 'Default plan', unit: 'month', prices: { cpu: '1' } }],
+      });
+  });
 });
