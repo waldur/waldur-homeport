@@ -13,7 +13,6 @@ export const OFFERING: Offering = {
   template_uuid: '9b9247f70d594fbfa2852c1f6d643563',
   state: 'Requested',
   type_label: 'Oracle IAAS',
-  unit_price: 10.0,
   unit: 'day',
   created: '2018-10-31T15:58:55.177810Z',
   modified: '2018-11-28T08:45:48.388173Z',

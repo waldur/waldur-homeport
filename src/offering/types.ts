@@ -12,7 +12,6 @@ export interface Offering {
   name: string;
   type: string;
   type_label: string;
-  unit_price: number;
   issue: string;
   issue_key?: string;
   issue_status?: string;
