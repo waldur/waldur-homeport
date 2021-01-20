@@ -934,6 +934,10 @@ msgstr ""
 msgid "Booking has been rejected."
 msgstr ""
 
+#: src/booking/components/calendar/LazyCalendarComponent.tsx
+msgid "Booking is not allowed to overlap other bookings."
+msgstr ""
+
 #: src/customer/dashboard/CustomerBookingManagement.tsx
 msgid "Booking management"
 msgstr ""
@@ -6090,6 +6094,10 @@ msgstr ""
 msgid "Resend"
 msgstr ""
 
+#: src/booking/utils.ts
+msgid "Reserved slot"
+msgstr ""
+
 #: src/form/AppstoreListDialog.tsx
 #: src/form/ResetFormButton.tsx
 #: src/vmware/actions/ResetAction.tsx
@@ -8258,6 +8266,10 @@ msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to load application template details."
+msgstr ""
+
+#: src/form/CalendarField.tsx
+msgid "Unable to load booked items."
 msgstr ""
 
 #: src/customer/dashboard/BookingsCalendar.tsx

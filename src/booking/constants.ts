@@ -13,3 +13,5 @@ export const BOOKING_ACCEPT = 'waldur/booking/ACCEPT';
 export const BOOKING_REJECT = 'waldur/booking/REJECT';
 
 export const BOOKING_CREATED = 'Creating';
+
+export const CURSOR_NOT_ALLOWED_CLASSNAME = 'cursor-not-allowed';
