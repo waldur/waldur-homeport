@@ -38,6 +38,6 @@ Axios.interceptors.response.use(
           : undefined,
       );
     }
-    return Promise.reject(error.response);
+    return Promise.reject(error);
   },
 );
