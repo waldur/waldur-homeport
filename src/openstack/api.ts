@@ -182,13 +182,13 @@ export const setFloatingIps = (id: string, data) =>
   post(`/openstacktenant-instances/${id}/update_floating_ips/`, data);
 
 export const getInstanceConsoleUrl = (id: string) =>
-  get<string>(`/openstacktenant-instances/${id}/console/`).then(
-    (response) => response.data,
+  get<{ url: string }>(`/openstacktenant-instances/${id}/console/`).then(
+    (response) => response.data.url,
   );
 
-export const getInstanceConsoleLogUrl = (id: string) =>
-  get<{ url: string }>(`/openstacktenant-instances/${id}/console_log/`).then(
-    (response) => response.data.url,
+export const getInstanceConsoleLog = (id: string) =>
+  get<string>(`/openstacktenant-instances/${id}/console_log/`).then(
+    (response) => response.data,
   );
 
 export const updateInternalIps = (
