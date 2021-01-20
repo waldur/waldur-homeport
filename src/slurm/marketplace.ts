@@ -13,11 +13,6 @@ const AllocationForm = lazyComponent(
 
 const ServiceSettingsAttributes = (): Attribute[] => [
   {
-    key: 'batch_service',
-    title: translate('Batch service'),
-    type: 'string',
-  },
-  {
     key: 'hostname',
     title: translate('Hostname'),
     type: 'string',
