@@ -105,3 +105,24 @@ export const categoryChanged = (category: Category) => ({
     category,
   },
 });
+
+export const googleCalendarSync = (uuid: string) => ({
+  type: constants.GOOGLE_CALENDAR_SYNC,
+  payload: {
+    uuid,
+  },
+});
+
+export const googleCalendarPublish = (uuid: string) => ({
+  type: constants.GOOGLE_CALENDAR_PUBLISH,
+  payload: {
+    uuid,
+  },
+});
+
+export const googleCalendarUnpublish = (uuid: string) => ({
+  type: constants.GOOGLE_CALENDAR_UNPUBLISH,
+  payload: {
+    uuid,
+  },
+});

@@ -260,3 +260,18 @@ export const importResource = ({ offering_uuid, ...payload }) =>
     `/marketplace-offerings/${offering_uuid}/import_resource/`,
     payload,
   ).then((response) => response.data);
+
+export const syncGoogleCalendar = (uuid: string) =>
+  post(`/booking-offerings/${uuid}/google_calendar_sync/`).then(
+    (response) => response.data,
+  );
+
+export const publishGoogleCalendar = (uuid: string) =>
+  post(`/booking-offerings/${uuid}/share_google_calendar/`).then(
+    (response) => response.data,
+  );
+
+export const unpublishGoogleCalendar = (uuid: string) =>
+  post(`/booking-offerings/${uuid}/unshare_google_calendar/`).then(
+    (response) => response.data,
+  );

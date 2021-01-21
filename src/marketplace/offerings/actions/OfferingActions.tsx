@@ -3,13 +3,20 @@ import { Dispatch } from 'redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { googleCalendarActions } from '@waldur/marketplace/offerings/actions/GoogleCalendarActions';
 import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
-import { getUser } from '@waldur/workspace/selectors';
+import { getUser, isOwner } from '@waldur/workspace/selectors';
 
-import { addOfferingLocation, updateOfferingState } from '../store/actions';
+import {
+  addOfferingLocation,
+  googleCalendarPublish,
+  googleCalendarSync,
+  googleCalendarUnpublish,
+  updateOfferingState,
+} from '../store/actions';
 import { DRAFT, ACTIVE, ARCHIVED, PAUSED } from '../store/constants';
 
 import { ActionsDropdown } from './ActionsDropdown';
@@ -49,6 +56,7 @@ interface OwnProps {
 
 const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
+  isOwner: isOwner(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -93,6 +101,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         size: 'lg',
       }),
     ),
+  syncGoogleCalendar: (offering: Offering) =>
+    dispatch(googleCalendarSync(offering.uuid)),
+  publishGoogleCalendar: (offering: Offering) =>
+    dispatch(googleCalendarPublish(offering.uuid)),
+  unpublishGoogleCalendar: (offering: Offering) =>
+    dispatch(googleCalendarUnpublish(offering.uuid)),
 });
 
 const mergeProps = (
@@ -181,6 +195,7 @@ const mergeProps = (
         ![ARCHIVED].includes(ownProps.offering.state) &&
         stateProps.user.is_staff,
     },
+    ...googleCalendarActions(dispatchProps, ownProps, stateProps),
   ].filter((offering) => offering.visible),
 });
 

@@ -119,6 +119,7 @@ export interface Offering extends GeolocationPoint {
   referred_pids: ReferredPids[];
   latitude: number;
   longitude: number;
+  google_calendar_is_public: boolean;
 }
 
 export interface Screenshot {

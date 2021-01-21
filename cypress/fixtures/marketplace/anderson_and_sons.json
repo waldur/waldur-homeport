@@ -27,6 +27,13 @@
   ],
   "owners": [
     {
+      "url": "/api/users/3a836bc76e1b40349ec1a0d8220f374f/",
+      "uuid": "3a836bc76e1b40349ec1a0d8220f374f",
+      "username": "alice@lebowski.com",
+      "full_name": "Alice Lebowski",
+      "native_name": "Alice Lebowski"
+    },
+    {
       "url": "/api/users/c05d30a41453433d8fe4fb659270ea69/",
       "uuid": "c05d30a41453433d8fe4fb659270ea69",
       "username": "angelpeterson@gmail.com",
@@ -102,6 +109,7 @@
       "is_active": true
     }
   ],
+  "service_managers": [],
   "is_service_provider": false,
   "billing_price_estimate": {
     "url": "/api/billing-price-estimates/7cbf6ff4313840f781e442028fb8c1d7/",
