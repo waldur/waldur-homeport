@@ -888,10 +888,6 @@ msgstr ""
 msgid "Batch processing documentation"
 msgstr ""
 
-#: src/slurm/marketplace.ts
-msgid "Batch service"
-msgstr ""
-
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Batch vCPU"
 msgstr ""
@@ -2765,6 +2761,18 @@ msgstr ""
 
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 msgid "Go to my profile"
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Google Calendar has been published successfully."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Google Calendar has been synced successfully."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Google Calendar has been unpublished successfully."
 msgstr ""
 
 #: src/navigation/cookies/CookiesConsent.tsx
@@ -5621,6 +5629,10 @@ msgstr ""
 msgid "Public services"
 msgstr ""
 
+#: src/marketplace/offerings/actions/GoogleCalendarActions.ts
+msgid "Publish as Google Calendar"
+msgstr ""
+
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "Published"
 msgstr ""
@@ -7384,6 +7396,10 @@ msgstr ""
 msgid "Sync profile"
 msgstr ""
 
+#: src/marketplace/offerings/actions/GoogleCalendarActions.ts
+msgid "Sync with Google Calendar"
+msgstr ""
+
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.tsx
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.tsx
 #: src/resource/actions/PullActionItem.tsx
@@ -8522,6 +8538,10 @@ msgstr ""
 msgid "Unable to process payment."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to publish Google Calendar."
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to register service provider."
 msgstr ""
@@ -8651,6 +8671,10 @@ msgstr ""
 msgid "Unable to sync FreeIPA profile."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to sync Google Calendar."
+msgstr ""
+
 #: src/resource/actions/PullActionItem.tsx
 msgid "Unable to synchronize resource."
 msgstr ""
@@ -8661,6 +8685,10 @@ msgstr ""
 
 #: src/customer/payments/store/effects.ts
 msgid "Unable to unlink invoice from the payment."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to unpublish Google Calendar."
 msgstr ""
 
 #: src/rancher/cluster/ViewYAMLDialog.tsx
@@ -8820,6 +8848,10 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 msgid "Unpause"
+msgstr ""
+
+#: src/marketplace/offerings/actions/GoogleCalendarActions.ts
+msgid "Unpublish as Google Calendar"
 msgstr ""
 
 #: src/customer/details/CustomerEditDetailsForm.tsx

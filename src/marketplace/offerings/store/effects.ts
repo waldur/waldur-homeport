@@ -235,6 +235,58 @@ function* addOfferingLocation(action: Action<any>) {
   }
 }
 
+function* googleCalendarSync(action: Action<any>) {
+  const { uuid } = action.payload;
+  try {
+    yield call(api.syncGoogleCalendar, uuid);
+    yield put(
+      showSuccess(translate('Google Calendar has been synced successfully.')),
+    );
+    yield put(closeModalDialog());
+  } catch (error) {
+    const errorMessage = `${translate(
+      'Unable to sync Google Calendar.',
+    )} ${format(error)}`;
+    yield put(showError(errorMessage));
+  }
+}
+
+function* googleCalendarPublish(action: Action<any>) {
+  const { uuid } = action.payload;
+  try {
+    yield call(api.publishGoogleCalendar, uuid);
+    yield put(
+      showSuccess(
+        translate('Google Calendar has been published successfully.'),
+      ),
+    );
+    yield put(closeModalDialog());
+  } catch (error) {
+    const errorMessage = `${translate(
+      'Unable to publish Google Calendar.',
+    )} ${format(error)}`;
+    yield put(showError(errorMessage));
+  }
+}
+
+function* googleCalendarUnpublish(action: Action<any>) {
+  const { uuid } = action.payload;
+  try {
+    yield call(api.unpublishGoogleCalendar, uuid);
+    yield put(
+      showSuccess(
+        translate('Google Calendar has been unpublished successfully.'),
+      ),
+    );
+    yield put(closeModalDialog());
+  } catch (error) {
+    const errorMessage = `${translate(
+      'Unable to unpublish Google Calendar.',
+    )} ${format(error)}`;
+    yield put(showError(errorMessage));
+  }
+}
+
 export default function* () {
   yield takeEvery(constants.REMOVE_OFFERING_COMPONENT, removeOfferingComponent);
   yield takeEvery(constants.REMOVE_OFFERING_QUOTAS, removeOfferingQuotas);
@@ -250,4 +302,7 @@ export default function* () {
     removeOfferingScreenshot,
   );
   yield takeEvery(constants.ADD_OFFERING_LOCATION, addOfferingLocation);
+  yield takeEvery(constants.GOOGLE_CALENDAR_SYNC, googleCalendarSync);
+  yield takeEvery(constants.GOOGLE_CALENDAR_PUBLISH, googleCalendarPublish);
+  yield takeEvery(constants.GOOGLE_CALENDAR_UNPUBLISH, googleCalendarUnpublish);
 }

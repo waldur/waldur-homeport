@@ -1,0 +1,234 @@
+[
+  {
+    "url": "/api/marketplace-offerings/7a980d6131cd441d94482c7128be0731/",
+    "uuid": "7a980d6131cd441d94482c7128be0731",
+    "created": "2020-12-28T10:54:43.480065Z",
+    "name": "booking-offering-1",
+    "description": "",
+    "full_description": "",
+    "terms_of_service": "",
+    "customer": "/api/customers/6983ac22f2bb469189311ab21e493359/",
+    "customer_uuid": "6983ac22f2bb469189311ab21e493359",
+    "customer_name": "Alexander, Ford and Moore",
+    "category": "/api/marketplace-categories/4d3a131dc20347e4abd1bdd3a16e73d1/",
+    "category_uuid": "4d3a131dc20347e4abd1bdd3a16e73d1",
+    "category_title": "AKKI",
+    "rating": null,
+    "attributes": {
+      "schedules": [
+        {
+          "id": "booking1-87110.8499999973",
+          "end": "2021-01-31T20:00:00.000Z",
+          "start": "2021-01-20T11:03:40.000Z",
+          "title": "",
+          "allDay": true,
+          "extendedProps": {
+            "type": "Availability",
+            "config": {
+              "weekends": true,
+              "slotDuration": "01:00:00",
+              "businessHours": {
+                "endTime": "24:00",
+                "startTime": "00:00",
+                "daysOfWeek": [0, 1, 2, 3, 4, 5, 6]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "options": {
+      "order": [],
+      "options": {}
+    },
+    "components": [
+      {
+        "billing_type": "fixed",
+        "type": "component_1",
+        "name": "component_name",
+        "description": "",
+        "measured_unit": "gb",
+        "limit_period": null,
+        "limit_amount": null,
+        "disable_quotas": false,
+        "use_limit_for_billing": false,
+        "product_code": "",
+        "article_code": "",
+        "max_value": null,
+        "min_value": null,
+        "is_boolean": false,
+        "default_limit": null,
+        "factor": null
+      }
+    ],
+    "plugin_options": {},
+    "state": "Active",
+    "native_name": "",
+    "native_description": "",
+    "vendor_details": "",
+    "thumbnail": null,
+    "order_item_count": 6,
+    "plans": [
+      {
+        "url": "/api/marketplace-plans/99da3a09dfdd47eca920f7eb59519e2e/",
+        "uuid": "99da3a09dfdd47eca920f7eb59519e2e",
+        "name": "plan name",
+        "description": "",
+        "article_code": "",
+        "product_code": "",
+        "prices": {
+          "component_1": 0
+        },
+        "quotas": {
+          "component_1": 0
+        },
+        "max_amount": null,
+        "archived": false,
+        "is_active": true,
+        "unit_price": "0.0000000",
+        "unit": "month",
+        "init_price": 0,
+        "switch_price": 0
+      }
+    ],
+    "screenshots": [],
+    "type": "Marketplace.Booking",
+    "shared": true,
+    "billable": true,
+    "scope": null,
+    "files": [],
+    "quotas": null,
+    "paused_reason": "",
+    "datacite_doi": "",
+    "citation_count": -1,
+    "latitude": 39.7837304,
+    "longitude": -100.4458825,
+    "google_calendar_is_public": true
+  },
+  {
+    "url": "/api/marketplace-offerings/2dac7b969de443d9a9214ebecd26fe4b/",
+    "uuid": "2dac7b969de443d9a9214ebecd26fe4b",
+    "created": "2020-12-17T12:29:42.974538Z",
+    "name": "my new booking offering",
+    "description": "",
+    "full_description": "",
+    "terms_of_service": "",
+    "customer": "/api/customers/6983ac22f2bb469189311ab21e493359/",
+    "customer_uuid": "6983ac22f2bb469189311ab21e493359",
+    "customer_name": "Alexander, Ford and Moore",
+    "category": "/api/marketplace-categories/4d3a131dc20347e4abd1bdd3a16e73d1/",
+    "category_uuid": "4d3a131dc20347e4abd1bdd3a16e73d1",
+    "category_title": "AKKI",
+    "rating": null,
+    "attributes": {
+      "schedules": [
+        {
+          "id": "booking119-107572.45999999577",
+          "end": "2021-01-31T20:00:00.000Z",
+          "start": "2021-01-20T15:31:37.000Z",
+          "title": "",
+          "allDay": true,
+          "extendedProps": {
+            "type": "Availability",
+            "config": {
+              "weekends": true,
+              "slotDuration": "01:00:00",
+              "businessHours": {
+                "endTime": "24:00",
+                "startTime": "00:00",
+                "daysOfWeek": [0, 1, 2, 3, 4, 5, 6]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "options": {
+      "order": [],
+      "options": {}
+    },
+    "components": [
+      {
+        "billing_type": "usage",
+        "type": "IntName",
+        "name": "IntName",
+        "description": "",
+        "measured_unit": "IntName_unit",
+        "limit_period": null,
+        "limit_amount": null,
+        "disable_quotas": true,
+        "use_limit_for_billing": false,
+        "product_code": "",
+        "article_code": "",
+        "max_value": null,
+        "min_value": null,
+        "is_boolean": false,
+        "default_limit": null,
+        "factor": null
+      },
+      {
+        "billing_type": "usage",
+        "type": "some-component-2",
+        "name": "some-component-2",
+        "description": "",
+        "measured_unit": "gb",
+        "limit_period": null,
+        "limit_amount": null,
+        "disable_quotas": true,
+        "use_limit_for_billing": false,
+        "product_code": "",
+        "article_code": "",
+        "max_value": null,
+        "min_value": null,
+        "is_boolean": false,
+        "default_limit": null,
+        "factor": null
+      }
+    ],
+    "plugin_options": {},
+    "state": "Active",
+    "native_name": "",
+    "native_description": "",
+    "vendor_details": "",
+    "thumbnail": null,
+    "order_item_count": 11,
+    "plans": [
+      {
+        "url": "/api/marketplace-plans/b71dfde05b53428c9a51cc60a1052735/",
+        "uuid": "b71dfde05b53428c9a51cc60a1052735",
+        "name": "plan name",
+        "description": "",
+        "article_code": "",
+        "product_code": "",
+        "prices": {
+          "IntName": 5,
+          "some-component-2": 2
+        },
+        "quotas": {
+          "IntName": 0,
+          "some-component-2": 0
+        },
+        "max_amount": null,
+        "archived": false,
+        "is_active": true,
+        "unit_price": "0.0000000",
+        "unit": "month",
+        "init_price": 0,
+        "switch_price": 0
+      }
+    ],
+    "screenshots": [],
+    "type": "Marketplace.Booking",
+    "shared": true,
+    "billable": true,
+    "scope": null,
+    "files": [],
+    "quotas": null,
+    "paused_reason": "",
+    "datacite_doi": "",
+    "citation_count": -1,
+    "latitude": -13.0638577,
+    "longitude": 36.4669964,
+    "google_calendar_is_public": false
+  }
+]
