@@ -60,4 +60,33 @@ describe('Expired token redirect', () => {
       .location('pathname')
       .should('match', /projects\/df4193e2bee24a4c8e339474d74c5f8c\//);
   });
+
+  it('should redirect to attempted url with params after login even if 401 error is not raised during transition', () => {
+    cy.server()
+      .route('GET', '/api/configuration/', 'fixture:configuration.json')
+      .route('GET', '/api/users/?current=', 'fixture:users/alice.json')
+      .route('POST', '/api-auth/password/', { token: 'valid' })
+      .route({ method: 'GET', url: '/api/events/**', response: [] })
+      .as('success')
+      .setToken()
+      .visit('/profile/events/')
+      .wait(['@success']);
+
+    cy.route({
+      method: 'GET',
+      url: '/api/events/**',
+      status: 401,
+      response: [],
+    }).as('error');
+
+    cy.get('.btn')
+      .contains('Refresh')
+      .click()
+      .wait(['@error'])
+      .route({ method: 'GET', url: '/api/events/**', response: [] });
+
+    cy.fillAndSubmitLoginForm()
+      .location('pathname')
+      .should('match', /profile\/events\//);
+  });
 });
