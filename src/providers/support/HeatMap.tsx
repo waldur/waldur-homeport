@@ -5,7 +5,7 @@ import { MapContainer, GeoJSON } from 'react-leaflet';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { OpenStreeMapTileLayer } from '@waldur/map/OpenStreeMapTileLayer';
+import { OpenStreetMapTileLayer } from '@waldur/map/OpenStreetMapTileLayer';
 
 import { countryInfo } from './countryInfo';
 import './HeatMap.scss';
@@ -43,7 +43,7 @@ export const HeatMap: React.FC<HeatMapProps> = (props) => {
   } else if (value) {
     return (
       <MapContainer id="heat-map" center={props.center} zoom={props.zoom}>
-        <OpenStreeMapTileLayer />
+        <OpenStreetMapTileLayer />
         {value.map((data, index) => (
           <GeoJSON
             key={index}

@@ -8,7 +8,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import { GeoSearchControlElement } from './GeoSearchControlElement';
-import { OpenStreeMapTileLayer } from './OpenStreeMapTileLayer';
+import { OpenStreetMapTileLayer } from './OpenStreetMapTileLayer';
 import './SetLocationDialog.scss';
 import { GeolocationPoint } from './types';
 
@@ -66,6 +66,7 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = (
         zoomControl={true}
         worldCopyJump={true}
       >
+        <OpenStreetMapTileLayer />
         {coordinates.latitude && coordinates.longitude ? (
           <Marker position={[coordinates.latitude, coordinates.longitude]}>
             <Popup>
@@ -75,9 +76,9 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = (
             </Popup>
           </Marker>
         ) : null}
-        <OpenStreeMapTileLayer />
         <GeoSearchControlElement
           provider={provider}
+          style={'bar'}
           showMarker={true}
           showPopup={true}
           popupFormat={({ result }) => result.label}
@@ -85,6 +86,7 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = (
           retainZoomLevel={true}
           animateZoom={true}
           autoClose={false}
+          autoComplete={true}
           searchLabel={translate('Enter address...')}
           keepResult={false}
           updateMap={true}

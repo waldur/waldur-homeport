@@ -3,7 +3,7 @@ import React from 'react';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 
 import { FitWorld } from '@waldur/map/FitWorld';
-import { OpenStreeMapTileLayer } from '@waldur/map/OpenStreeMapTileLayer';
+import { OpenStreetMapTileLayer } from '@waldur/map/OpenStreetMapTileLayer';
 
 import { ChecklistStats } from './types';
 
@@ -29,7 +29,7 @@ const yellowIcon = createIcon(iconYellow);
 
 export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => (
   <MapContainer style={{ width: '100%', height: 300 }}>
-    <OpenStreeMapTileLayer />
+    <OpenStreetMapTileLayer />
     <FitWorld />
     {customers
       .filter((customer) => customer.longitude && customer.latitude)
