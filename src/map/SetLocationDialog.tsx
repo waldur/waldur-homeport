@@ -4,6 +4,7 @@ import { MapContainer, Marker, Popup } from 'react-leaflet';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { CustomMarkerIcon } from '@waldur/map/CustomMarkerIcon';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -68,7 +69,10 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = (
       >
         <OpenStreetMapTileLayer />
         {coordinates.latitude && coordinates.longitude ? (
-          <Marker position={[coordinates.latitude, coordinates.longitude]}>
+          <Marker
+            position={[coordinates.latitude, coordinates.longitude]}
+            icon={CustomMarkerIcon()}
+          >
             <Popup>
               {translate('Location of {offeringName} offering', {
                 offeringName: props.resolve.data.name,
@@ -85,7 +89,7 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = (
           maxMarkers={1}
           retainZoomLevel={true}
           animateZoom={true}
-          autoClose={false}
+          autoClose={true}
           autoComplete={true}
           searchLabel={translate('Enter address...')}
           keepResult={false}
