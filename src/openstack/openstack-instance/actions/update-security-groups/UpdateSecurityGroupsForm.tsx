@@ -2,6 +2,7 @@ import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { SelectField } from '@waldur/form';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
 
@@ -38,6 +39,7 @@ export const UpdateSecurityGroupsForm = connectForm(
               placeholder={translate('Select security groups...')}
               options={asyncState.value}
               isMulti={true}
+              {...reactSelectMenuPortaling()}
             />
           </FormGroup>
         ) : null}
