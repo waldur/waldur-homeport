@@ -6097,6 +6097,10 @@ msgstr ""
 msgid "Requested email"
 msgstr ""
 
+#: src/marketplace/common/OfferingCard.tsx
+msgid "Requesting of new resources has been temporarily paused"
+msgstr ""
+
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Required"
 msgstr ""

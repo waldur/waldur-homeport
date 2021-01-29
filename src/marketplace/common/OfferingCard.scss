@@ -7,6 +7,12 @@
   background-color: #fff;
   margin-bottom: 30px;
 
+  &.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
   .offering-thumb {
     display: block;
     overflow: hidden;

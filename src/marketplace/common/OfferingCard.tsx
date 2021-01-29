@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
+import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { OfferingCompareButtonContainer } from '@waldur/marketplace/compare/OfferingCompareButtonContainer';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
@@ -17,7 +18,9 @@ interface OfferingCardProps {
 
 export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
   wrapTooltip(
-    props.offering.state === 'Paused' && props.offering.paused_reason,
+    props.offering.state === 'Paused' &&
+      (props.offering.paused_reason ||
+        translate('Requesting of new resources has been temporarily paused')),
     <div
       className={classNames('offering-card', {
         disabled: props.offering.state !== 'Active',
