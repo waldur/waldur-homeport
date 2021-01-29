@@ -4,7 +4,7 @@ import { translate } from '../i18n';
 import { showError } from '../store/notify';
 import { UsersService } from '../user/UsersService';
 
-import { InvitationService } from './InvitationService';
+import { clearInvitationToken, getInvitationToken } from './InvitationStorage';
 import { acceptInvitation, confirmInvitation } from './utils';
 
 /*
@@ -18,14 +18,14 @@ import { acceptInvitation, confirmInvitation } from './utils';
 */
 export function tryAcceptInvitation() {
   UsersService.getCurrentUser().then((user) => {
-    const token = InvitationService.getInvitationToken();
+    const token = getInvitationToken();
     if (token && !UsersService.mandatoryFieldsMissing(user)) {
       confirmInvitation(token)
         .then((replaceEmail) => {
           acceptInvitation(token, replaceEmail);
         })
         .catch(() => {
-          InvitationService.clearInvitationToken();
+          clearInvitationToken();
           store.dispatch(
             showError(translate('Invitation could not be accepted')),
           );

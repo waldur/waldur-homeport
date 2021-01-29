@@ -1,3 +1,5 @@
+import { getItem, removeItem, setItem } from '@waldur/auth/AuthStorage';
+
 export class UserStorage {
   private key: string;
 
@@ -6,11 +8,11 @@ export class UserStorage {
   }
 
   set(value: object) {
-    sessionStorage.setItem(this.key, JSON.stringify(value));
+    setItem(this.key, JSON.stringify(value));
   }
 
   get() {
-    const data = sessionStorage.getItem(this.key);
+    const data = getItem(this.key);
     if (data) {
       return JSON.parse(data);
     } else {
@@ -19,6 +21,6 @@ export class UserStorage {
   }
 
   remove() {
-    sessionStorage.removeItem(this.key);
+    removeItem(this.key);
   }
 }

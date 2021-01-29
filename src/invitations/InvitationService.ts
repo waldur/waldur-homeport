@@ -1,7 +1,5 @@
 import { post } from '@waldur/core/api';
 
-const invitationStorageToken = 'ncInvitationToken';
-
 class InvitationServiceClass {
   createInvitation(payload) {
     return post('/user-invitations/', payload);
@@ -39,20 +37,6 @@ class InvitationServiceClass {
 
   executeAction(invitation_uuid, action, data?) {
     return post(`/user-invitations/${invitation_uuid}/${action}/`, data);
-  }
-
-  setInvitationToken(invitationUUID) {
-    if (invitationUUID) {
-      localStorage[invitationStorageToken] = invitationUUID;
-    }
-  }
-
-  getInvitationToken() {
-    return localStorage[invitationStorageToken];
-  }
-
-  clearInvitationToken() {
-    localStorage.removeItem(invitationStorageToken);
   }
 }
 
