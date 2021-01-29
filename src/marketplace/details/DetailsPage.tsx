@@ -1,4 +1,4 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import React from 'react';
 import { useAsync } from 'react-use';
 
@@ -30,6 +30,8 @@ export const OfferingDetailsPage: React.FC = () => {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
 
+  const router = useRouter();
+
   const { loading, value, error } = useAsync(() => loadData(offering_uuid), [
     offering_uuid,
   ]);
@@ -46,6 +48,11 @@ export const OfferingDetailsPage: React.FC = () => {
 
   if (error) {
     return <h3>{translate('Unable to load offering details.')}</h3>;
+  }
+
+  if (value.offering.state !== 'Active') {
+    router.stateService.go('errorPage.notFound');
+    return null;
   }
 
   return (
