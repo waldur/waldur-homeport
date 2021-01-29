@@ -6,6 +6,7 @@ import { useAsync } from 'react-use';
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { InvitationService } from '@waldur/invitations/InvitationService';
+import { getInvitationToken } from '@waldur/invitations/InvitationStorage';
 import { showError } from '@waldur/store/notify';
 
 const checkRegistrationMethods = async (mode, router, dispatch) => {
@@ -29,7 +30,7 @@ const checkRegistrationMethods = async (mode, router, dispatch) => {
     return;
   }
 
-  const token = InvitationService.getInvitationToken();
+  const token = getInvitationToken();
   if (!token) {
     dispatch(showError(translate('Invitation token is not found.')));
     router.stateService.go('errorPage.notFound');

@@ -5,7 +5,7 @@
  *
  * Consider the following workflow:
  *
- * 1) When login is completed, authentication method is persisted in the localStorage
+ * 1) When login is completed, authentication method is persisted in the authStorage
  *    with key authenticationMethod so that it wouldn't be reset when page is refreshed.
  *
  * 2) When logout is initiated, it is first checked whether there's authentication method and
@@ -16,7 +16,7 @@
  * 4) After user is successfully logged out from third-party authentication backend, such as SAML2,
  *    he is redirected back to the HomePort.
  *
- * 5) Authentication token and authentication method is cleaned up in the local storage.
+ * 5) Authentication token and authentication method is cleaned up in the auth storage.
  */
 import Axios from 'axios';
 
@@ -28,20 +28,15 @@ import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 
-function setAuthenticationMethod(method) {
-  localStorage['authenticationMethod'] = method;
-}
-
-function resetAuthenticationMethod() {
-  localStorage.removeItem('authenticationMethod');
-}
-
-function getAuthenticationMethod() {
-  return localStorage['authenticationMethod'];
-}
+import {
+  getAuthenticationMethod,
+  resetAuthenticationMethod,
+  setAuthenticationMethod,
+} from './AuthMethodStorage';
+import { getToken, removeToken, setToken } from './TokenStorage';
 
 function setAuthHeader(token) {
-  localStorage['AUTH_TOKEN'] = token;
+  setToken(token);
   Axios.defaults.headers.common['Authorization'] = 'Token ' + token;
 }
 
@@ -52,20 +47,18 @@ function loginSuccess(response) {
 }
 
 function isAuthenticated() {
-  return !!localStorage['AUTH_TOKEN'];
+  return !!getToken();
 }
 
 function getDownloadLink(href) {
   if (href) {
-    return (
-      href + '?x-auth-token=' + localStorage['AUTH_TOKEN'] + '&download=true'
-    );
+    return href + '?x-auth-token=' + getToken() + '&download=true';
   }
 }
 
 function getLink(href) {
   if (href) {
-    return href + '?x-auth-token=' + localStorage['AUTH_TOKEN'];
+    return href + '?x-auth-token=' + getToken();
   }
 }
 
@@ -107,7 +100,7 @@ function redirectOnSuccess() {
 function localLogout(params?) {
   store.dispatch(setCurrentUser(undefined));
   delete Axios.defaults.headers.common['Authorization'];
-  localStorage.removeItem('AUTH_TOKEN');
+  removeToken();
   router.stateService.go('login', params);
   resetAuthenticationMethod();
 }

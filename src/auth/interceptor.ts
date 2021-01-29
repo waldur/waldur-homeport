@@ -6,10 +6,11 @@ import { ENV } from '@waldur/configs/default';
 import { router } from '@waldur/router';
 
 import { AuthService } from './AuthService';
+import { getToken } from './TokenStorage';
 
 export function initAuthToken() {
   // When application starts up, we need to inject auth token if it exists
-  const token = localStorage['AUTH_TOKEN'];
+  const token = getToken();
   if (token) {
     Axios.defaults.headers.common['Authorization'] = 'Token ' + token;
   }

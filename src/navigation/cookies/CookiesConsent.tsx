@@ -3,10 +3,10 @@ import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
+import { getConsent, setConsent } from './CookiesStorage';
+
 export const CookiesConsent: FunctionComponent = () => {
-  const [accepted, setAccepted] = useState(
-    localStorage['hideCookiesConsent'] === 'true',
-  );
+  const [accepted, setAccepted] = useState(getConsent() === 'true');
 
   if (accepted) {
     return null;
@@ -14,7 +14,7 @@ export const CookiesConsent: FunctionComponent = () => {
 
   const hideConsent = () => {
     setAccepted(true);
-    localStorage['hideCookiesConsent'] = 'true';
+    setConsent('true');
   };
 
   return (

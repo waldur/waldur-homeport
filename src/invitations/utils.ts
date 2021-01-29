@@ -8,6 +8,7 @@ import { showError, showSuccess } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 
 import { InvitationService } from './InvitationService';
+import { clearInvitationToken, setInvitationToken } from './InvitationStorage';
 
 const InvitationConfirmDialog = lazyComponent(
   () =>
@@ -31,14 +32,14 @@ export function checkAndAccept(token) {
         });
       })
       .catch(() => {
-        InvitationService.clearInvitationToken();
+        clearInvitationToken();
         store.dispatch(
           showError(translate('Invitation is not valid anymore.')),
         );
         router.stateService.go('profile.details');
       });
   } else {
-    InvitationService.setInvitationToken(token);
+    setInvitationToken(token);
     router.stateService.go('register');
   }
 }
@@ -47,14 +48,14 @@ export function acceptInvitation(token, replaceEmail) {
   return InvitationService.accept(token, replaceEmail)
     .then(() => {
       store.dispatch(showSuccess(translate('Your invitation was accepted.')));
-      InvitationService.clearInvitationToken();
+      clearInvitationToken();
       // TODO: Invalidate customers list
     })
     .catch((response) => {
       if (response.status === 404) {
         store.dispatch(showError(translate('Invitation is not found.')));
       } else if (response.status === 400) {
-        InvitationService.clearInvitationToken();
+        clearInvitationToken();
         store.dispatch(showError(translate('Invitation is not valid.')));
       } else if (response.status === 500) {
         store.dispatch(
