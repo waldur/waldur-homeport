@@ -54,7 +54,7 @@ Run jest tests:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - npm install -g jest
-    - jest --verbose --runInBand --coverage --reporters=jest-junit
+    - JEST_JUNIT_SUITE_NAME="{filename}" jest --verbose --runInBand --coverage --reporters=jest-junit
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   artifacts:
     when: always
