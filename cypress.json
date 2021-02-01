@@ -4,6 +4,6 @@
   "supportFile": "cypress/support/index.ts",
   "reporter": "junit",
   "reporterOptions": {
-    "mochaFile": "cypress/results/output.xml"
+    "mochaFile": "cypress/results/output-[hash].xml"
   }
 }
