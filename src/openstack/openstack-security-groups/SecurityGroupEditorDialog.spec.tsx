@@ -195,6 +195,18 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.toPortIsInvalid).toBe(true);
   });
 
+  it('validates from port min and to port max values according to the "any" protocol', async () => {
+    const dialog = new DialogFixture(store);
+    await dialog.render();
+    await dialog.update();
+
+    dialog.protocol = 'any';
+    dialog.fromPort = -1;
+    dialog.toPort = -1;
+    expect(dialog.fromPortIsInvalid).toBe(false);
+    expect(dialog.toPortIsInvalid).toBe(false);
+  });
+
   it('validates to port as required', async () => {
     const dialog = new DialogFixture(store);
     await dialog.render();
