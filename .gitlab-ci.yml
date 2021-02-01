@@ -88,7 +88,7 @@ Run E2E tests:
       - cypress/videos
     reports:
       junit:
-        - cypress/results/output.xml
+        - cypress/results/output-*.xml
 
 Build artifact:
   stage: build
