@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
+import { Customer } from '@waldur/workspace/types';
 
 interface CustomerSummaryProps {
   customer: Customer;

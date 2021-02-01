@@ -13,8 +13,8 @@ import {
   deleteById,
   getSelectData,
   parseResultCount,
+  put,
 } from '@waldur/core/api';
-import { Customer } from '@waldur/customer/types';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import {
   Order,
@@ -29,7 +29,7 @@ import {
   PluginMetadata,
   ImportableResource,
 } from '@waldur/marketplace/types';
-import { Project } from '@waldur/workspace/types';
+import { Customer, Project } from '@waldur/workspace/types';
 
 import { OfferingDocument } from '../offerings/store/types';
 import { Resource } from '../resources/types';
@@ -84,10 +84,19 @@ export const createOffering = (data) =>
 export const updateOffering = (offeringId, data) =>
   patch<Offering>(`/marketplace-offerings/${offeringId}/`, data);
 
+export const updateResource = (resourceId: string, data) =>
+  put<Resource>(`/marketplace-resources/${resourceId}/`, data);
+
 export const getResourcePlanPeriods = (resourceId: string) =>
   getAll<ResourcePlanPeriod>(
     `/marketplace-resources/${resourceId}/plan_periods/`,
   );
+
+export const submitReport = (resourceId: string, payload) =>
+  post(`/marketplace-resources/${resourceId}/submit_report/`, payload);
+
+export const setBackendId = (resourceId: string, payload) =>
+  post(`/marketplace-resources/${resourceId}/set_backend_id/`, payload);
 
 export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
   sendForm<Offering>(
@@ -172,8 +181,6 @@ export const getDivisionTypesList = (params?: {}) =>
   getSelectData('/division-types/', params);
 
 export const getAllOrganizationDivisions = () => getAll('/divisions/', {});
-
-export const getCustomer = (id: string) => getById<Customer>('/customers/', id);
 
 export const getCustomersDivisionUuids = (accounting_is_running: boolean) =>
   getAll('/customers/', {

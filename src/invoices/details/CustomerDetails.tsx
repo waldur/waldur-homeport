@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
+import { Customer } from '@waldur/workspace/types';
 
 import { formatPhone } from './utils';
 

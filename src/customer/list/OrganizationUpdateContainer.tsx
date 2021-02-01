@@ -6,10 +6,10 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { CustomerLogoUpdateContainer } from '@waldur/customer/details/CustomerLogoUpdateContainer';
 import { OrganizationUpdate } from '@waldur/customer/list/OrganizationUpdate';
 import { translate } from '@waldur/i18n';
-import { getCustomer } from '@waldur/marketplace/common/api';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
+import { getCustomer } from '@waldur/project/api';
 
 const getBreadcrumbs = (): BreadcrumbItem[] => [
   {

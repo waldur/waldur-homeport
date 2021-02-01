@@ -3,6 +3,7 @@ import Axios from 'axios';
 import Qs from 'qs';
 
 import { ENV } from '@waldur/configs/default';
+import { cleanObject } from '@waldur/core/utils';
 import { router } from '@waldur/router';
 
 import { AuthService } from './AuthService';
@@ -40,7 +41,9 @@ Axios.interceptors.response.use(
       } else if (router.globals.$current.name) {
         params = {
           toState: router.globals.$current.name,
-          toParams: router.globals.$current.params,
+          toParams: router.globals.params
+            ? cleanObject(router.globals.params)
+            : undefined,
         };
       }
       AuthService.localLogout(params);

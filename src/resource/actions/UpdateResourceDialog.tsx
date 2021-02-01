@@ -16,11 +16,13 @@ interface UpdateResourceDialogProps {
   updateResource(id: string, formData: any): Promise<any>;
   verboseName: string;
   resource: Resource;
+  reInitResource?(): void;
   initialValues: any;
 }
 
 export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
   resource,
+  reInitResource,
   updateResource,
   verboseName,
   fields,
@@ -37,6 +39,9 @@ export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
               translate('{verboseName} has been updated.', { verboseName }),
             ),
           );
+          if (reInitResource) {
+            await reInitResource();
+          }
           dispatch(closeModalDialog());
         } catch (e) {
           dispatch(

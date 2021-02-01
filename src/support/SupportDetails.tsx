@@ -1,0 +1,45 @@
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+
+import { Issue } from '@waldur/issues/list/types';
+import { Resource } from '@waldur/marketplace/resources/types';
+
+import { SupportActions } from './SupportActions';
+import { SupportDetailsTable } from './SupportDetailsTable';
+import { SupportTabs } from './SupportTabs';
+
+interface SupportSummaryProps {
+  resource: Resource;
+  summary?: string;
+  issue?: Issue;
+  reInitResource(): void;
+}
+
+export const SupportDetails: React.FC<SupportSummaryProps> = (props) => (
+  <div className="wrapper wrapper-content">
+    <div className="ibox-content">
+      <Row className="m-b-md">
+        <Col lg={12}>
+          <SupportActions
+            resource={props.resource}
+            reInitResource={props.reInitResource}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col lg={12}>
+          <SupportDetailsTable resource={props.resource} />
+        </Col>
+      </Row>
+      <Row>
+        <Col lg={12}>
+          <SupportTabs
+            resource={props.resource}
+            summary={props.summary}
+            issue={props.issue}
+          />
+        </Col>
+      </Row>
+    </div>
+  </div>
+);

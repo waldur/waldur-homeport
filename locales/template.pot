@@ -715,8 +715,8 @@ msgstr ""
 msgid "Attributes filter"
 msgstr ""
 
-#: src/offering/OfferingTabs.tsx
 #: src/resource/tabs/constants.ts
+#: src/support/SupportTabs.tsx
 #: src/user/support/UserDetailsView.tsx
 msgid "Audit log"
 msgstr ""
@@ -750,7 +750,7 @@ msgstr ""
 msgid "Authorized personnel"
 msgstr ""
 
-#: src/offering/OfferingPluginOptionsForm.tsx
+#: src/support/OfferingPluginOptionsForm.tsx
 msgid "Auto approve in service provider projects"
 msgstr ""
 
@@ -843,15 +843,15 @@ msgstr ""
 msgid "Back to shopping"
 msgstr ""
 
+#: src/marketplace/resources/SetBackendIdDialog.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/offering/OfferingHeader.tsx
-#: src/offering/actions/SetBackendIdDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/support/SupportDetailsTable.tsx
 msgid "Backend ID"
 msgstr ""
 
-#: src/offering/actions/SetBackendIdDialog.tsx
+#: src/marketplace/resources/SetBackendIdDialog.tsx
 msgid "Backend ID has been successfully set."
 msgstr ""
 
@@ -1270,7 +1270,7 @@ msgid "Comment"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsContainer.tsx
-#: src/offering/OfferingTabs.tsx
+#: src/support/SupportTabs.tsx
 msgid "Comments"
 msgstr ""
 
@@ -1343,7 +1343,7 @@ msgstr ""
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr ""
 
-#: src/offering/OfferingPluginSecretOptionsForm.tsx
+#: src/support/OfferingPluginSecretOptionsForm.tsx
 msgid "Confirmation notification template"
 msgstr ""
 
@@ -1406,7 +1406,7 @@ msgstr ""
 msgid "Control plane"
 msgstr ""
 
-#: src/offering/OracleSnapshots.tsx
+#: src/support/OracleSnapshots.tsx
 msgid "Copy of"
 msgstr ""
 
@@ -1572,7 +1572,6 @@ msgstr ""
 #: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
-#: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/ScheduleSnapshotsList.tsx
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
@@ -1585,6 +1584,7 @@ msgstr ""
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
+#: src/support/SupportDetailsTable.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -1646,7 +1646,7 @@ msgstr ""
 msgid "Creating snapshot schedule"
 msgstr ""
 
-#: src/offering/OracleSnapshots.tsx
+#: src/support/OracleSnapshots.tsx
 msgid "Creation time"
 msgstr ""
 
@@ -1868,8 +1868,6 @@ msgstr ""
 #: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/offering/OfferingConfigurationForm.tsx
-#: src/offering/OfferingSummaryTab.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceCreateForm.tsx
@@ -1893,6 +1891,8 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/support/OfferingConfigurationForm.tsx
+#: src/support/SupportSummaryTab.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
@@ -2151,7 +2151,6 @@ msgstr ""
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
-#: src/offering/actions/UpdateAction.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -2165,6 +2164,7 @@ msgstr ""
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
+#: src/support/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
 msgid "Edit"
 msgstr ""
@@ -2328,7 +2328,6 @@ msgstr ""
 
 #: src/events/EventDetailsTable.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/offering/OfferingHeader.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr ""
@@ -2437,7 +2436,7 @@ msgstr ""
 msgid "Every year"
 msgstr ""
 
-#: src/offering/actions/UpdateDialog.tsx
+#: src/marketplace/resources/report/SubmitReportDialog.tsx
 msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr ""
 
@@ -3308,18 +3307,9 @@ msgstr ""
 msgid "Issue"
 msgstr ""
 
-#: src/offering/OfferingHeader.tsx
-msgid "Issue key"
-msgstr ""
-
 #: src/events/EventDetailsTable.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
-#: src/offering/OfferingHeader.tsx
 msgid "Issue link"
-msgstr ""
-
-#: src/offering/OfferingHeader.tsx
-msgid "Issue status"
 msgstr ""
 
 #: src/issues/events.ts
@@ -3942,9 +3932,6 @@ msgstr ""
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/offering/OfferingConfigurationForm.tsx
-#: src/offering/OfferingHeader.tsx
-#: src/offering/OracleSnapshots.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -3977,6 +3964,9 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
+#: src/support/OfferingConfigurationForm.tsx
+#: src/support/OracleSnapshots.tsx
+#: src/support/SupportDetailsTable.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
@@ -4349,6 +4339,7 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/project/ProjectResourcesList.tsx
+#: src/support/SupportDetailsTable.tsx
 msgid "Offering"
 msgstr ""
 
@@ -4371,10 +4362,6 @@ msgstr ""
 
 #: src/marketplace/offerings/screenshots/ScreenshotsListPlaceholder.tsx
 msgid "Offering doesn't have screenshots."
-msgstr ""
-
-#: src/offering/events.ts
-msgid "Offering events"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -4414,22 +4401,10 @@ msgstr ""
 msgid "Offering state has been updated."
 msgstr ""
 
-#: src/offering/events.ts
-msgid "Offering state has changed to {offering_state}."
-msgstr ""
-
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Offering type"
-msgstr ""
-
-#: src/offering/events.ts
-msgid "Offering {offering_link} has been created."
-msgstr ""
-
-#: src/offering/events.ts
-msgid "Offering {offering_name} has been deleted."
 msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
@@ -4482,7 +4457,7 @@ msgstr ""
 msgid "Only staff can remove organization."
 msgstr ""
 
-#: src/offering/actions/utils.ts
+#: src/marketplace/resources/report/utils.ts
 msgid "Only staff users are allowed to perform this action."
 msgstr ""
 
@@ -4498,7 +4473,6 @@ msgid "Open console"
 msgstr ""
 
 #: src/issues/IssueDetails.tsx
-#: src/offering/OfferingHeader.tsx
 msgid "Open in Service Desk"
 msgstr ""
 
@@ -4609,8 +4583,8 @@ msgstr ""
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/ResourceTabs.tsx
-#: src/offering/OfferingTabs.tsx
 #: src/resource/tabs/constants.ts
+#: src/support/SupportTabs.tsx
 msgid "Order items"
 msgstr ""
 
@@ -5514,11 +5488,11 @@ msgstr ""
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/navigation/workspace/WorkspaceLabel.tsx
-#: src/offering/OfferingDetails.tsx
 #: src/project/ProjectWorkspace.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/breadcrumbs.ts
 #: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
+#: src/support/SupportDetailsContainer.tsx
 msgid "Project workspace"
 msgstr ""
 
@@ -5570,6 +5544,7 @@ msgstr ""
 #: src/providers/support/MapInfoPanel.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
+#: src/support/SupportDetailsTable.tsx
 msgid "Provider"
 msgstr ""
 
@@ -5783,8 +5758,8 @@ msgstr ""
 #: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/orders/OrderDetails.tsx
-#: src/offering/OfferingActions.tsx
 #: src/resource/ResourceRefreshButton.tsx
+#: src/support/SupportActions.tsx
 #: src/table/TableRefreshButton.tsx
 msgid "Refresh"
 msgstr ""
@@ -5943,7 +5918,7 @@ msgid "Removing the organization will delete all related resources."
 msgstr ""
 
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
-#: src/offering/actions/UpdateDialog.tsx
+#: src/marketplace/resources/report/SubmitReportDialog.tsx
 msgid "Report"
 msgstr ""
 
@@ -5951,15 +5926,19 @@ msgstr ""
 msgid "Report an issue"
 msgstr ""
 
-#: src/offering/OfferingReportDialog.tsx
+#: src/marketplace/resources/report/ShowReportDialog.tsx
 msgid "Report details"
+msgstr ""
+
+#: src/marketplace/resources/report/SubmitReportDialog.tsx
+msgid "Report has been submitted"
 msgstr ""
 
 #: src/customer/details/CustomerErrorPanel.tsx
 msgid "Report incorrect data"
 msgstr ""
 
-#: src/offering/OfferingReportComponent.tsx
+#: src/marketplace/resources/report/ShowReportComponent.tsx
 msgid "Report is invalid."
 msgstr ""
 
@@ -6012,7 +5991,7 @@ msgid "Request detail"
 msgstr ""
 
 #: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
-#: src/offering/OfferingDetails.tsx
+#: src/support/SupportDetailsContainer.tsx
 msgid "Request details"
 msgstr ""
 
@@ -6073,11 +6052,11 @@ msgstr ""
 msgid "Request {requestId} has been created."
 msgstr ""
 
-#: src/offering/marketplace.ts
+#: src/support/marketplace.ts
 msgid "Request-based item"
 msgstr ""
 
-#: src/offering/marketplace.ts
+#: src/support/marketplace.ts
 msgid "Request-based item (without Service Desk)"
 msgstr ""
 
@@ -6255,7 +6234,6 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
 #: src/marketplace/sidebar.ts
-#: src/offering/OfferingDetails.tsx
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectWorkspace.tsx
@@ -6264,6 +6242,7 @@ msgstr ""
 #: src/resource/breadcrumbs/ResourceBreadcrumbsRegistry.ts
 #: src/resource/support/ResourcesTreemap.tsx
 #: src/resource/support/TreemapChartFilter.tsx
+#: src/support/SupportDetailsContainer.tsx
 msgid "Resources"
 msgstr ""
 
@@ -6399,7 +6378,6 @@ msgstr ""
 msgid "Running accounting"
 msgstr ""
 
-#: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Runtime state"
 msgstr ""
@@ -6668,7 +6646,7 @@ msgstr ""
 msgid "Select country..."
 msgstr ""
 
-#: src/offering/OfferingConfigurationForm.tsx
+#: src/support/OfferingConfigurationForm.tsx
 msgid "Select dates"
 msgstr ""
 
@@ -6684,7 +6662,7 @@ msgstr ""
 msgid "Select incident type"
 msgstr ""
 
-#: src/offering/OfferingConfigurationForm.tsx
+#: src/support/OfferingConfigurationForm.tsx
 msgid "Select instance..."
 msgstr ""
 
@@ -6801,7 +6779,7 @@ msgstr ""
 msgid "Select subnets to connect to..."
 msgstr ""
 
-#: src/offering/OfferingConfigurationForm.tsx
+#: src/support/OfferingConfigurationForm.tsx
 msgid "Select tenant..."
 msgstr ""
 
@@ -6923,8 +6901,8 @@ msgstr ""
 msgid "Set allowed address pairs"
 msgstr ""
 
-#: src/offering/actions/SetBackendIDAction.tsx
-#: src/offering/actions/SetBackendIdDialog.tsx
+#: src/marketplace/resources/SetBackendIdAction.tsx
+#: src/marketplace/resources/SetBackendIdDialog.tsx
 msgid "Set backend ID"
 msgstr ""
 
@@ -7019,7 +6997,7 @@ msgstr ""
 msgid "Show private"
 msgstr ""
 
-#: src/offering/OfferingReportButton.tsx
+#: src/marketplace/resources/report/ShowReportButton.tsx
 msgid "Show report"
 msgstr ""
 
@@ -7112,9 +7090,9 @@ msgstr ""
 msgid "Snapshot size limit"
 msgstr ""
 
-#: src/offering/OfferingTabs.tsx
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
+#: src/support/SupportTabs.tsx
 msgid "Snapshots"
 msgstr ""
 
@@ -7181,7 +7159,6 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
-#: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -7208,6 +7185,7 @@ msgstr ""
 #: src/rancher/template/ClusterTemplateList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderResources.tsx
+#: src/support/SupportDetailsTable.tsx
 #: src/user/hooks/HooksList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -7300,6 +7278,11 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
+#: src/marketplace/resources/report/SubmitReportAction.tsx
+#: src/marketplace/resources/report/SubmitReportDialog.tsx
+msgid "Submit report"
+msgstr ""
+
 #: src/marketplace/resources/usage/ResourceUsageSubmitButton.tsx
 msgid "Submit usage report"
 msgstr ""
@@ -7350,11 +7333,11 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/offering/OfferingTabs.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
+#: src/support/SupportTabs.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Summary"
 msgstr ""
@@ -7772,11 +7755,11 @@ msgstr ""
 
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/offering/OfferingConfigurationForm.tsx
 #: src/openstack/OpenStackPackageForm.tsx
 #: src/project/ProjectNameField.tsx
 #: src/rancher/cluster/create/RancherClusterForm.tsx
 #: src/slurm/AllocationForm.tsx
+#: src/support/OfferingConfigurationForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "This name will be visible in accounting data."
 msgstr ""
@@ -7953,7 +7936,6 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
-#: src/offering/OfferingHeader.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/paypal/PaymentsList.tsx
@@ -8358,13 +8340,13 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
-#: src/offering/OfferingDetails.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
 #: src/rancher/template/SecretField.tsx
 #: src/resource/actions/AsyncActionDialog.tsx
 #: src/resource/actions/ResourceActionDialog.tsx
+#: src/support/SupportDetailsContainer.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 #: src/user/list/UserDashboard.tsx
 msgid "Unable to load data."
@@ -8635,7 +8617,7 @@ msgstr ""
 msgid "Unable to send record notification."
 msgstr ""
 
-#: src/offering/actions/SetBackendIdDialog.tsx
+#: src/marketplace/resources/SetBackendIdDialog.tsx
 msgid "Unable to set backend ID."
 msgstr ""
 
@@ -8661,6 +8643,10 @@ msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
 msgid "Unable to submit plan change request."
+msgstr ""
+
+#: src/marketplace/resources/report/SubmitReportDialog.tsx
+msgid "Unable to submit report."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
@@ -8810,6 +8796,7 @@ msgid "Unique ID of a resource created via Marketplace"
 msgstr ""
 
 #: src/resource/summary/ResourceSummaryBase.tsx
+#: src/support/SupportDetailsTable.tsx
 msgid "Unique ID of a resource in a backend system"
 msgstr ""
 
@@ -9332,7 +9319,6 @@ msgstr ""
 msgid "Valid runtime states for operation: {validStates}."
 msgstr ""
 
-#: src/offering/actions/utils.ts
 #: src/resource/actions/base.ts
 msgid "Valid states for operation: {validStates}."
 msgstr ""
@@ -9865,7 +9851,6 @@ msgid "of"
 msgstr ""
 
 #: src/marketplace/landing/CategoryCard.tsx
-#: src/offering/actions/UpdateDialog.tsx
 msgid "offering"
 msgstr ""
 
@@ -9949,6 +9934,10 @@ msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "referrals"
+msgstr ""
+
+#: src/support/EditDialog.tsx
+msgid "request-based item"
 msgstr ""
 
 #: src/resource/support/SharedProviderResources.tsx

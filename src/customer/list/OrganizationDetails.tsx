@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react';
 import { Col } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { ResourceDetailsTable } from '@waldur/resource/summary/ResourceDetailsTable';
+import { Customer } from '@waldur/workspace/types';
 
 interface OrganizationDetailsProps {
   customer: Customer;

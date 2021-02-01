@@ -4,7 +4,8 @@ import { translate } from '@waldur/i18n';
 import { ReferralsList } from '@waldur/marketplace/referral/ReferralsList';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Offering } from '@waldur/offering/types';
+
+import { Offering } from '../types';
 
 interface OfferingReferralsDialogProps {
   resolve: Offering;

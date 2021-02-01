@@ -7,7 +7,8 @@ import { RootState } from '@waldur/store/reducers';
 
 import { terminateResource } from '../store/constants';
 
-import { PureTerminateDialog } from './TerminateDialog';
+import { TerminateDialog } from './TerminateDialog';
+import { TerminateDialogOwnProps } from './types';
 
 const mapStateToProps = (state: RootState) => ({
   orderCanBeApproved: orderCanBeApproved(state),
@@ -17,18 +18,21 @@ const mapDispatchToProps = (dispatch, ownProps: any) => ({
   submitRequest: () =>
     terminateResource(
       {
-        marketplace_resource_uuid:
-          ownProps.resolve.resource.marketplace_resource_uuid,
-        resource_uuid: ownProps.resolve.resource.uuid,
-        resource_type: ownProps.resolve.resource.resource_type,
+        resource: ownProps.asyncState.value,
       },
       dispatch,
     ),
 });
 
 const connector = compose(
-  reduxForm({ form: 'TerminateResourceDialog' }),
-  connect(mapStateToProps, mapDispatchToProps),
+  reduxForm<{}, TerminateDialogOwnProps>({
+    form: 'TerminateResourceDialog',
+  }),
+  connect<
+    ReturnType<typeof mapStateToProps>,
+    ReturnType<typeof mapDispatchToProps>,
+    TerminateDialogOwnProps
+  >(mapStateToProps, mapDispatchToProps),
 );
 
-export const TerminateDialog = connector(PureTerminateDialog);
+export const TerminateContainer = connector(TerminateDialog);

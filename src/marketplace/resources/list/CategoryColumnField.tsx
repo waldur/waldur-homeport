@@ -33,6 +33,7 @@ export const CategoryColumnField: FunctionComponent<CategoryColumnFieldProps> = 
       return (
         <ResourceDetailsLink
           item={{
+            offering_type: 'OpenStackTenant.Instance',
             resource_uuid: metadata.instance_uuid,
             resource_type: 'OpenStackTenant.Instance',
           }}

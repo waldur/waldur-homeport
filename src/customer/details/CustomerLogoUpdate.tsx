@@ -3,9 +3,9 @@ import { Col, Row } from 'react-bootstrap';
 
 import { CustomerEditDetailsForm } from '@waldur/customer/details/CustomerEditDetailsForm';
 import { CustomerLogoUpdateFormData } from '@waldur/customer/details/types';
-import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { Customer } from '@waldur/workspace/types';
 
 import './CustomerLogoUpdate.scss';
 

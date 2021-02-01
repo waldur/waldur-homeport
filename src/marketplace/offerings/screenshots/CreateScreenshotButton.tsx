@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
-import { Offering } from '@waldur/offering/types';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const CreateScreenshotDialog = lazyComponent(

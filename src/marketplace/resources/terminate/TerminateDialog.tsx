@@ -7,15 +7,7 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-export interface OwnProps {
-  resolve: {
-    resource: {
-      name: string;
-      marketplace_resource_uuid: string;
-    };
-    dialogSubtitle?: string;
-  };
-}
+import { TerminateDialogOwnProps } from './types';
 
 interface DispatchProps {
   submitRequest(): void;
@@ -25,18 +17,18 @@ interface StateProps {
   orderCanBeApproved: boolean;
 }
 
-type TerminateDialogProps = OwnProps &
+type TerminateDialogProps = TerminateDialogOwnProps &
   DispatchProps &
   StateProps &
   InjectedFormProps;
 
-export const PureTerminateDialog: FunctionComponent<TerminateDialogProps> = (
+export const TerminateDialog: FunctionComponent<TerminateDialogProps> = (
   props,
 ) => (
   <form onSubmit={props.handleSubmit(props.submitRequest)}>
     <ModalDialog
       title={translate('Terminate resource {resourceName}', {
-        resourceName: props.resolve.resource.name,
+        resourceName: props.asyncState?.value?.name,
       })}
       footer={
         <>
@@ -56,12 +48,10 @@ export const PureTerminateDialog: FunctionComponent<TerminateDialogProps> = (
       {translate(
         'Are you sure you would like to terminate resource {resourceName}?',
         {
-          resourceName: props.resolve.resource.name,
+          resourceName: props.asyncState?.value?.name,
         },
       )}
-      {props.resolve.dialogSubtitle && (
-        <FormattedHtml html={props.resolve.dialogSubtitle} />
-      )}
+      {props.dialogSubtitle && <FormattedHtml html={props.dialogSubtitle} />}
     </ModalDialog>
   </form>
 );

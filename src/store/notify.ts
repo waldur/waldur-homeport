@@ -24,6 +24,6 @@ export const showErrorResponse = (
   message?: string,
 ) => {
   const details = format(response);
-  const errorMessage = `${message}. ${details}`;
+  const errorMessage = `${message} ${details}`;
   return showError(errorMessage);
 };

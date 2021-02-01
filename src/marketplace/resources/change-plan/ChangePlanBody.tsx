@@ -26,9 +26,7 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
   submitRequest: (data) =>
     switchPlan(
       {
-        marketplace_resource_uuid: ownProps.asyncState.value.resource.uuid,
-        resource_uuid: ownProps.asyncState.value.resource.resource_uuid,
-        resource_type: ownProps.asyncState.value.resource.resource_type,
+        resource: ownProps.asyncState.value.resource,
         plan_url: data.plan.url,
       },
       dispatch,

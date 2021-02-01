@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
-import { deleteById, getAll } from '@waldur/core/api';
+import { getAll } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -12,6 +12,7 @@ import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
+import { deleteCustomer } from '@waldur/project/api';
 import { showError } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 import { StateUtilsService } from '@waldur/user/StateUtilsService';
@@ -91,7 +92,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
     const confirmDelete = confirm(translate('Confirm deletion?'));
     if (confirmDelete) {
       store.dispatch(setCurrentCustomer(null));
-      deleteById('/customers/', customer.uuid).then(
+      deleteCustomer(customer.uuid).then(
         () => {
           router.stateService.go('profile.details').then(() => {
             StateUtilsService.clear();

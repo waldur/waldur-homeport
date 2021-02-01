@@ -10,7 +10,7 @@ import './digitalocean/module';
 import './issues/module';
 import './customer/module';
 import './invoices/module';
-import './offering/module';
+import './support/module';
 import './openstack/module';
 import './project/module';
 import './rancher/module';

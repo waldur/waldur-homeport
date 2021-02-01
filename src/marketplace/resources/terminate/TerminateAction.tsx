@@ -4,7 +4,7 @@ import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
-import { TerminateDialog } from './TerminateContainer';
+import { TerminateDialogContainer } from './TerminateDialogContainer';
 
 const validators = [validateState('OK', 'Erred')];
 
@@ -21,7 +21,7 @@ export const TerminateAction: FC<TerminateActionProps> = ({
     <DialogActionItem
       validators={validators}
       title={translate('Terminate')}
-      modalComponent={TerminateDialog as any}
+      modalComponent={TerminateDialogContainer}
       extraResolve={{ dialogSubtitle }}
       resource={resource}
     />
