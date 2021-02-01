@@ -1,5 +1,4 @@
 import { omit, pick } from '@waldur/core/utils';
-import { Customer } from '@waldur/customer/types';
 import { showOfferingLimits } from '@waldur/marketplace/common/registry';
 import {
   OptionField,
@@ -7,6 +6,7 @@ import {
   Attribute,
   OfferingComponent,
 } from '@waldur/marketplace/types';
+import { Customer } from '@waldur/workspace/types';
 
 import { serializeLimitValues } from './limits';
 import {

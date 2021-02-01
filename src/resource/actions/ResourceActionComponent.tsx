@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { ComponentType, FunctionComponent } from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -9,8 +9,9 @@ interface ResourceActionComponentProps {
   open?: boolean;
   loading?: boolean;
   error?: object;
-  actions: any;
+  actions: ComponentType<{ resource; reInitResource }>[];
   resource: any;
+  reInitResource?(): void;
 }
 
 export const ResourceActionComponent: FunctionComponent<ResourceActionComponentProps> = (
@@ -32,7 +33,11 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
       ) : props.actions ? (
         <>
           {props.actions.map((ActionComponent, index) => (
-            <ActionComponent key={index} resource={props.resource} />
+            <ActionComponent
+              key={index}
+              resource={props.resource}
+              reInitResource={props.reInitResource}
+            />
           ))}
         </>
       ) : (

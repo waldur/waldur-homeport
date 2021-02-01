@@ -1,7 +1,17 @@
 import Axios from 'axios';
 
 import { ENV } from '@waldur/configs/default';
-import { deleteById } from '@waldur/core/api';
+import { deleteById, getById, getList } from '@waldur/core/api';
+import { Customer, Project } from '@waldur/workspace/types';
+
+export const getProject = (projectId: string) =>
+  getById<Project>('/projects/', projectId);
+
+export const getCustomer = (customerId: string) =>
+  getById<Customer>('/customers/', customerId);
+
+export const getCustomersList = (params) =>
+  getList<Customer>('/customers/', params);
 
 export const createProject = (project) =>
   Axios.post(`${ENV.apiEndpoint}api/projects/`, {
@@ -17,7 +27,11 @@ export const updateProject = (project) =>
     description: project.description,
   });
 
-export const deleteProject = (projectId) => deleteById('/projects/', projectId);
+export const deleteCustomer = (customerId: string) =>
+  deleteById('/customers/', customerId);
+
+export const deleteProject = (projectId: string) =>
+  deleteById('/projects/', projectId);
 
 export const loadProjectTypes = () =>
   Axios.get(`${ENV.apiEndpoint}api/project-types/`).then(

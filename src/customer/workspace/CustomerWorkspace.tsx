@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
+import { getCustomer } from '@waldur/project/api';
 import {
   setCurrentCustomer,
   setCurrentProject,
@@ -16,12 +17,10 @@ import {
 import {
   checkCustomerUser,
   checkIsServiceManager,
-  getCustomer,
+  getCustomer as getCustomerSelector,
   getUser,
 } from '@waldur/workspace/selectors';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
-
-import { CustomersService } from '../services/CustomersService';
 
 import { CustomerSidebar } from './CustomerSidebar';
 
@@ -42,7 +41,7 @@ function getBreadcrumbs(customer): BreadcrumbItem[] {
 export const CustomerWorkspace: FunctionComponent = () => {
   const [pageClass, setPageClass] = useState<string>();
   const [hideBreadcrumbs, setHideBreadcrumbs] = useState<boolean>();
-  const customer = useSelector(getCustomer);
+  const customer = useSelector(getCustomerSelector);
   const currentUser = useSelector(getUser);
   const { state, params } = useCurrentStateAndParams();
   const customerId = params?.uuid;
@@ -53,7 +52,7 @@ export const CustomerWorkspace: FunctionComponent = () => {
       dispatch(triggerTransition('errorPage.notFound', {}));
     } else {
       try {
-        const currentCustomer = await CustomersService.get(customerId);
+        const currentCustomer = await getCustomer(customerId);
         dispatch(setCurrentCustomer(currentCustomer));
         dispatch(setCurrentProject(null));
         dispatch(setCurrentWorkspace(ORGANIZATION_WORKSPACE));

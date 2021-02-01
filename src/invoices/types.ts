@@ -1,4 +1,4 @@
-import { Customer } from '@waldur/customer/types';
+import { Customer } from '@waldur/workspace/types';
 
 export interface InvoiceItem {
   tax: string;

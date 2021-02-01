@@ -2,7 +2,6 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { Customer } from '@waldur/customer/types';
 import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/types';
@@ -10,6 +9,7 @@ import { showError, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
+import { Customer } from '@waldur/workspace/types';
 
 import { canRegisterServiceProviderForCustomer } from './selectors';
 import { ServiceProviderRegisterButton } from './ServiceProviderRegisterButton';

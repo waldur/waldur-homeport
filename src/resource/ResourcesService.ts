@@ -14,8 +14,6 @@ class ResourcesServiceClass {
   async getUrlByType(resource_type) {
     if (resource_type === 'JIRA.Issue') {
       return `/jira-issues/`;
-    } else if (resource_type === 'Support.Offering') {
-      return `/support-offerings/`;
     } else if (resource_type === 'Rancher.Node') {
       return `/rancher-nodes/`;
     }

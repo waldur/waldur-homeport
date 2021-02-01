@@ -1,9 +1,13 @@
-import { get, getById } from '@waldur/core/api';
+import { get } from '@waldur/core/api';
+import { getCustomer } from '@waldur/project/api';
 import store from '@waldur/store/store';
 import { UsersService } from '@waldur/user/UsersService';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
-import { checkCustomerUser, getCustomer } from '@waldur/workspace/selectors';
-import { Customer, User } from '@waldur/workspace/types';
+import {
+  checkCustomerUser,
+  getCustomer as getCustomerSelector,
+} from '@waldur/workspace/selectors';
+import { User } from '@waldur/workspace/types';
 
 class CustomersServiceClass {
   getUsers(customerUuid) {
@@ -13,11 +17,11 @@ class CustomersServiceClass {
   }
 
   get(customerUuid) {
-    return getById<Customer>('/customers/', customerUuid);
+    return getCustomer(customerUuid);
   }
 
   isOwnerOrStaff() {
-    const customer = getCustomer(store.getState());
+    const customer = getCustomerSelector(store.getState());
     return UsersService.getCurrentUser().then((user) => {
       return checkCustomerUser(customer, user);
     });

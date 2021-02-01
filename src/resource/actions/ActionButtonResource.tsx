@@ -9,7 +9,6 @@ import { ResourceActionComponent } from './ResourceActionComponent';
 interface ActionButtonResourceProps {
   url: string;
   disabled?: boolean;
-  controller?: any;
 }
 
 async function loadData(url: string) {

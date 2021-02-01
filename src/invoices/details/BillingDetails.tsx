@@ -10,11 +10,11 @@ import { getUUID } from '@waldur/core/utils';
 import { CustomerSidebar } from '@waldur/customer/workspace/CustomerSidebar';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { getCustomer } from '@waldur/marketplace/common/api';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { Layout } from '@waldur/navigation/Layout';
 import { useTitle } from '@waldur/navigation/title';
+import { getCustomer } from '@waldur/project/api';
 import store from '@waldur/store/store';
 import {
   setCurrentCustomer,

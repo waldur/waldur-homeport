@@ -2,12 +2,12 @@ import React from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
-import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
 import { createFetcher, Table, connectTable } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { Column, TableOptionsType } from '@waldur/table/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
+import { Customer } from '@waldur/workspace/types';
 
 const AbbreviationField = ({ row }) => (
   <>{renderFieldOrDash(row.abbreviation)}</>

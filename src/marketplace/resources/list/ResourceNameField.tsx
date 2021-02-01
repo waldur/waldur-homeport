@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 
+import { Link } from '@waldur/core/Link';
 import { Tooltip } from '@waldur/core/Tooltip';
+import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 import { Customer } from '@waldur/workspace/types';
 
 import { ResourceDetailsLink } from '../ResourceDetailsLink';
@@ -36,6 +38,17 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
   if (row.resource_type && row.resource_uuid) {
     LinkComponent = (
       <ResourceDetailsLink item={row}>{label}</ResourceDetailsLink>
+    );
+  } else if (row.offering_type === SUPPORT_OFFERING_TYPE) {
+    LinkComponent = (
+      <Link
+        state="project.support-details"
+        params={{
+          resource_uuid: row.uuid,
+          uuid: row.project_uuid,
+        }}
+        label={label}
+      />
     );
   } else {
     LinkComponent = <PublicResourceLink row={row} customer={customer} />;

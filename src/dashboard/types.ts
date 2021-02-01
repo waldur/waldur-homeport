@@ -13,7 +13,7 @@ export interface Chart {
 }
 
 export interface Scope {
-  url: string;
+  url?: string;
   payment_profiles?: PaymentProfile[];
 }
 

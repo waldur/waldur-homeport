@@ -1,6 +1,7 @@
 import { ENV } from '@waldur/configs/default';
 import { getList, getSelectData } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
+import { getCustomersList } from '@waldur/project/api';
 import { Project, Customer, User } from '@waldur/workspace/types';
 
 export const refreshSupportUsers = async (name: string) => {
@@ -25,7 +26,7 @@ export const refreshCustomers = async (name: string, caller?: User) => {
   if (name) {
     params.name = name;
   }
-  const customers = await getList('/customers/', params);
+  const customers = await getCustomersList(params);
   return { options: customers };
 };
 

@@ -1,19 +1,19 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
-import { serializer } from '@waldur/offering/serializer';
+import { serializer } from '@waldur/support/serializer';
 
 const OfferingConfigurationDetails = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "OfferingConfigurationDetails" */ '@waldur/offering/OfferingConfigurationDetails'
+      /* webpackChunkName: "OfferingConfigurationDetails" */ '@waldur/support/OfferingConfigurationDetails'
     ),
   'OfferingConfigurationDetails',
 );
 const OfferingConfigurationForm = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "OfferingConfigurationForm" */ '@waldur/offering/OfferingConfigurationForm'
+      /* webpackChunkName: "OfferingConfigurationForm" */ '@waldur/support/OfferingConfigurationForm'
     ),
   'OfferingConfigurationForm',
 );

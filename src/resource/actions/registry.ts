@@ -1,5 +1,10 @@
+import { ComponentType } from 'react';
+
 class ActionConfiguration {
-  private resources = {};
+  private resources: Record<
+    string,
+    ComponentType<{ resource; reInitResource }>[]
+  > = {};
 
   register(type, config: any) {
     this.resources[type] = config;

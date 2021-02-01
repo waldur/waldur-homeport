@@ -3,6 +3,9 @@ export interface Issue {
   key: string;
   uuid: string;
   url?: string;
+  link?: string;
+  status?: string;
+  description?: string;
   summary: string;
   caller_uuid: string;
   caller_full_name: string;

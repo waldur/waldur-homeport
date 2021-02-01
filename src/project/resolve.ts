@@ -1,7 +1,5 @@
 import { Transition } from '@uirouter/react';
 
-import { getById } from '@waldur/core/api';
-import { CustomersService } from '@waldur/customer/services/CustomersService';
 import { ProjectPermissionsService } from '@waldur/customer/services/ProjectPermissionsService';
 import { router } from '@waldur/router';
 import store from '@waldur/store/store';
@@ -11,7 +9,9 @@ import {
   setCurrentProject,
   setCurrentWorkspace,
 } from '@waldur/workspace/actions';
-import { PROJECT_WORKSPACE, Project } from '@waldur/workspace/types';
+import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
+
+import { getProject, getCustomer } from './api';
 
 export function loadProject(transition: Transition) {
   if (!transition.params().uuid) {
@@ -21,11 +21,8 @@ export function loadProject(transition: Transition) {
   async function loadData() {
     try {
       const user = await UsersService.getCurrentUser();
-      const project = await getById<Project>(
-        '/projects/',
-        transition.params().uuid,
-      );
-      const customer = await CustomersService.get(project.customer_uuid);
+      const project = await getProject(transition.params().uuid);
+      const customer = await getCustomer(project.customer_uuid);
       const permissions = await ProjectPermissionsService.getList({
         user: user.uuid,
         project: project.uuid,

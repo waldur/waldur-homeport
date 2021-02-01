@@ -1,9 +1,9 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 
-import { Customer } from '@waldur/customer/types';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { Customer } from '@waldur/workspace/types';
 
 interface OrganizationEditButtonProps {
   customer: Customer;
