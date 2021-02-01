@@ -217,6 +217,6 @@
     ]
   },
   "jest-junit": {
-     "suiteNameTemplate": "filename"
+     "suiteNameTemplate": "{filename}"
   }
 }
