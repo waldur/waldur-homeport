@@ -216,7 +216,7 @@
       "yarn prettier --write"
     ]
   },
-  "jest-junit" : {
+  "jest-junit": {
      "suiteNameTemplate": "filename"
   }
 }
