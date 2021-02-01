@@ -1,5 +1,9 @@
 {
   "baseUrl": "http://localhost:8001/",
   "projectId": "Waldur HomePort",
-  "supportFile": "cypress/support/index.ts"
+  "supportFile": "cypress/support/index.ts",
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "cypress/results/output.xml"
+  }
 }

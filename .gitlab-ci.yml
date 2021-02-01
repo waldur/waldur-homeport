@@ -54,8 +54,13 @@ Run jest tests:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - npm install -g jest
-    - jest --verbose --runInBand --coverage
+    - jest --verbose --runInBand --coverage --reporters=jest-junit
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - junit.xml
 
 Run E2E tests:
   image:
@@ -83,7 +88,7 @@ Run E2E tests:
       - cypress/videos
     reports:
       junit:
-        - results/TEST-*.xml
+        - cypress/results/output.xml
 
 Build artifact:
   stage: build
