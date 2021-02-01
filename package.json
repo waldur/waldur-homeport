@@ -215,5 +215,8 @@
     "**/*.{css,scss}": [
       "yarn prettier --write"
     ]
+  },
+  "jest-junit" : {
+     "suiteNameTemplate": "filename"
   }
 }
