@@ -146,7 +146,7 @@ export const loadSecurityGroupsResources = (params?) =>
   getAll<SecurityGroup>('/openstack-security-groups/', { params });
 
 export const updateSecurityGroup = (id: string, data) =>
-  put(`/openstack-security-groups/${id}`, data);
+  put(`/openstack-security-groups/${id}/`, data);
 
 export const setSecurityGroupRules = (id: string, data) =>
   post(`/openstack-security-groups/${id}/set_rules/`, data);
