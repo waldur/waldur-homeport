@@ -268,6 +268,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-offering-details/:offering_uuid/',
     component: OfferingContainer,
     parent: 'organization',
+    data: {
+      sidebarKey: 'marketplace-services',
+    },
   },
 
   {
@@ -387,6 +390,9 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-order-item-details/:order_item_uuid/',
     component: OrderItemDetailsContainer,
     parent: 'organization',
+    data: {
+      sidebarKey: 'marketplace-services',
+    },
   },
 
   {
