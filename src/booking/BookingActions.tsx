@@ -5,7 +5,11 @@ import * as constants from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { getUser, isOwner } from '@waldur/workspace/selectors';
+import {
+  getUser,
+  isOwner,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 import { acceptBookingItem, rejectBookingItem } from './store/actions';
 import { bookingFormSelector } from './store/selectors';
@@ -14,6 +18,7 @@ import { BookingResource } from './types';
 const mapStateToProps = (state: RootState) => ({
   user: getUser(state),
   isOwner: isOwner(state),
+  isServiceManager: isServiceManagerSelector(state),
   filter: bookingFormSelector(state),
 });
 
@@ -46,7 +51,9 @@ const mergeProps = (
         }),
       visible:
         ownProps.row.state === constants.BOOKING_CREATED &&
-        (stateProps.user.is_staff || stateProps.isOwner),
+        (stateProps.user.is_staff ||
+          stateProps.isOwner ||
+          stateProps.isServiceManager),
     },
     {
       label: translate('Reject'),
@@ -59,7 +66,9 @@ const mergeProps = (
         }),
       visible:
         ownProps.row.state === constants.BOOKING_CREATED &&
-        (stateProps.user.is_staff || stateProps.isOwner),
+        (stateProps.user.is_staff ||
+          stateProps.isOwner ||
+          stateProps.isServiceManager),
     },
   ].filter((row) => row.visible),
 });
