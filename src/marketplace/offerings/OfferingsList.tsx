@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { withTranslation } from '@waldur/i18n';
+import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingsListExpandableRow } from '@waldur/marketplace/offerings/expandable/OfferingsListExpandableRow';
 import { PreviewOfferingButton } from '@waldur/marketplace/offerings/PreviewOfferingButton';
 import { OFFERING_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
@@ -52,6 +53,10 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('State'),
       render: ({ row }) => row.state,
+    },
+    {
+      title: translate('Type'),
+      render: ({ row }) => getLabel(row.type),
     },
   ];
 
@@ -115,8 +120,9 @@ export const TableOptions = {
     formatDateTime(row.created),
     row.category_title,
     row.state,
+    row.type,
   ],
-  exportFields: ['Name', 'Created', 'Category', 'State'],
+  exportFields: ['Name', 'Created', 'Category', 'State', 'Type'],
 };
 
 const showOfferingCreateButton = createSelector(
