@@ -7,6 +7,7 @@ import { BookingsListExpandableRow } from '@waldur/booking/BookingsListExpandabl
 import { BookingStateField } from '@waldur/booking/BookingStateField';
 import { BookingTimeSlotsField } from '@waldur/booking/BookingTimeSlotsField';
 import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
+import { CreatedByField } from '@waldur/booking/CreatedByField';
 import { translate, withTranslation } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { RootState } from '@waldur/store/reducers';
@@ -41,11 +42,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Created by'),
-      render: ({ row }) => row.created_by_full_name,
-    },
-    {
-      title: translate('Approved by'),
-      render: ({ row }) => row.approved_by_full_name,
+      render: CreatedByField,
     },
     {
       title: translate('State'),
