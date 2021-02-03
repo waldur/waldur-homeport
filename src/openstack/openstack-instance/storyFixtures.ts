@@ -251,10 +251,8 @@ export const summaryData = {
     name: 'My project',
     permissions: [],
     billing_price_estimate: {
-      limit: -1,
       total: 1328.58,
       current: 1328.58,
-      threshold: 2000,
     },
     quotas: [],
   },

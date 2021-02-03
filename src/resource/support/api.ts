@@ -20,8 +20,8 @@ export function parseProjects(projects: Project[], quotaNames) {
     let estimatedPrice = 0;
 
     if (project.billing_price_estimate) {
-      currentPrice = project.billing_price_estimate.current;
-      estimatedPrice = project.billing_price_estimate.total;
+      currentPrice = parseFloat(project.billing_price_estimate.current);
+      estimatedPrice = parseFloat(project.billing_price_estimate.total);
     }
 
     quotas['current_price'] = currentPrice;

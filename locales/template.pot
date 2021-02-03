@@ -1422,10 +1422,6 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: src/project/ProjectCounters.tsx
-msgid "Cost threshold"
-msgstr ""
-
 #: src/customer/create/CustomerCreateDialog.tsx
 msgid "Could not create organization"
 msgstr ""

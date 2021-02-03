@@ -66,10 +66,10 @@ export interface Quota {
 }
 
 interface BillingPriceEstimate {
-  total: number;
-  current: number;
-  limit: number;
-  threshold: number;
+  total: string;
+  current: string;
+  tax: string;
+  tax_current: string;
 }
 
 export interface Project {

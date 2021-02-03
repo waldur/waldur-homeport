@@ -191,9 +191,7 @@
   "type_name": null,
   "billing_price_estimate": {
     "url": "/api/billing-price-estimates/8933409d01d14a869ca74116a8bfb269/",
-    "threshold": 0,
     "total": 0,
-    "current": 0,
-    "limit": -1
+    "current": 0
   }
 }
