@@ -587,7 +587,6 @@ msgstr ""
 msgid "Approved at"
 msgstr ""
 
-#: src/booking/BookingsList.tsx
 #: src/booking/components/utils.tsx
 #: src/marketplace/orders/OrdersList.tsx
 msgid "Approved by"
@@ -5976,6 +5975,10 @@ msgstr ""
 
 #: src/marketplace/cart/ForwardButton.tsx
 msgid "Request an approval"
+msgstr ""
+
+#: src/booking/CreatedByField.tsx
+msgid "Request approved by {name}"
 msgstr ""
 
 #: src/marketplace/details/OverviewTab.tsx

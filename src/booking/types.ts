@@ -37,6 +37,8 @@ export interface BookingResource {
   project_description: string;
   description: string;
   created: string;
+  approved_by_full_name: string;
+  created_by_full_name: string;
 }
 
 export interface BookedItem {
