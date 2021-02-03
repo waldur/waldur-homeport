@@ -78,7 +78,9 @@ export const ShoppingCartItem: FunctionComponent<ShoppingCartItemProps> = (
         <>
           {props.maxUnit ? (
             <td className="text-center text-lg">
-              {defaultCurrency(props.item.fixed_price || 0)}
+              {defaultCurrency(
+                props.item.estimate || props.item.fixed_price || 0,
+              )}
             </td>
           ) : null}
           <td className="text-center text-lg">

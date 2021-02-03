@@ -81,7 +81,7 @@ export const OrderItem: FunctionComponent<OrderItemProps> = (props) => {
         <>
           {props.maxUnit ? (
             <td className="text-center text-lg">
-              {defaultCurrency(props.item.fixed_price || 0)}
+              {defaultCurrency(props.item.cost || props.item.fixed_price || 0)}
             </td>
           ) : null}
           <td className="text-center text-lg">
