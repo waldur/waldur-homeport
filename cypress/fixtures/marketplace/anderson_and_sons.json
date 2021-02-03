@@ -113,10 +113,8 @@
   "is_service_provider": false,
   "billing_price_estimate": {
     "url": "/api/billing-price-estimates/7cbf6ff4313840f781e442028fb8c1d7/",
-    "threshold": 0,
     "total": 49.7655896,
     "current": 14.4480744,
-    "limit": -1,
     "tax": 0,
     "tax_current": 0
   }

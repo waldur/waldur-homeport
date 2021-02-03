@@ -20,14 +20,5 @@ export const ProjectCounters: FunctionComponent<ProjectCountersProps> = (
         value={defaultCurrency(props.project.billing_price_estimate.total)}
       />
     </Col>
-    <Col md={6}>
-      <DashboardCounter
-        label={translate('Cost threshold')}
-        value={
-          props.project.billing_price_estimate.threshold &&
-          defaultCurrency(props.project.billing_price_estimate.threshold)
-        }
-      />
-    </Col>
   </Row>
 );

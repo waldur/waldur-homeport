@@ -4,8 +4,11 @@ import { ENV } from '@waldur/configs/default';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Customer } from '@waldur/workspace/types';
 
-export const CurrentCostField: FunctionComponent<{ row }> = ({ row }) => {
+export const CurrentCostField: FunctionComponent<{ row: Customer }> = ({
+  row,
+}) => {
   if (getActiveFixedPricePaymentProfile(row.payment_profiles)) {
     return DASH_ESCAPE_CODE;
   }
@@ -23,7 +26,11 @@ export const CurrentCostField: FunctionComponent<{ row }> = ({ row }) => {
   }
 };
 
-export const ExportCurrentCostField = ({ row }) => {
+export const ExportCurrentCostField = ({
+  row,
+}: {
+  row: Customer;
+}): number | string => {
   if (getActiveFixedPricePaymentProfile(row.payment_profiles)) {
     return DASH_ESCAPE_CODE;
   }

@@ -41,10 +41,7 @@ const getDailyPrice = (formData, components) => {
   return size * (components[component] || 0);
 };
 
-const getMonthlyPrice = (formData, components) =>
-  getDailyPrice(formData, components) * 30;
-
-const getQuotas = ({ formData, usages, limits, project, components }) => {
+const getQuotas = ({ formData, usages, limits }) => {
   const quotas: Quota[] = [
     {
       name: 'storage',
@@ -69,14 +66,6 @@ const getQuotas = ({ formData, usages, limits, project, components }) => {
           required: required[key] || 0,
         });
       });
-  }
-  if (project && project.billing_price_estimate) {
-    quotas.push({
-      name: 'cost',
-      usage: project.billing_price_estimate.total,
-      limit: project.billing_price_estimate.limit,
-      required: getMonthlyPrice(formData, components),
-    });
   }
   return quotas;
 };
@@ -114,10 +103,11 @@ export const OpenstackVolumeCheckoutSummary: React.FC<OfferingDetailsProps> = ({
     components,
   ]);
 
-  const quotas = React.useMemo(
-    () => getQuotas({ formData, usages, limits, project, components }),
-    [formData, usages, limits, project, components],
-  );
+  const quotas = React.useMemo(() => getQuotas({ formData, usages, limits }), [
+    formData,
+    usages,
+    limits,
+  ]);
 
   const orderItem = React.useMemo(
     () =>

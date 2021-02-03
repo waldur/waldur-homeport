@@ -72,9 +72,6 @@ const getDailyPrice = (formData, components) => {
   }
 };
 
-const getMonthlyPrice = (formData, components) =>
-  getDailyPrice(formData, components) * 30;
-
 function extendVolumeTypeQuotas(formData, usages, limits) {
   const quotas = [];
   if (isFeatureVisible('openstack.volume-types')) {
@@ -93,7 +90,7 @@ function extendVolumeTypeQuotas(formData, usages, limits) {
   return quotas;
 }
 
-const getQuotas = ({ formData, usages, limits, project, components }) => {
+const getQuotas = ({ formData, usages, limits }) => {
   const quotas: Quota[] = [
     {
       name: 'vcpu',
@@ -115,14 +112,6 @@ const getQuotas = ({ formData, usages, limits, project, components }) => {
     },
     ...extendVolumeTypeQuotas(formData, usages, limits),
   ];
-  if (project && project.billing_price_estimate) {
-    quotas.push({
-      name: 'cost',
-      usage: project.billing_price_estimate.total,
-      limit: project.billing_price_estimate.limit,
-      required: getMonthlyPrice(formData, components),
-    });
-  }
   return quotas;
 };
 
@@ -172,10 +161,11 @@ export const OpenstackInstanceCheckoutSummary: React.FC<OfferingDetailsProps> = 
     components,
   ]);
 
-  const quotas = React.useMemo(
-    () => getQuotas({ formData, usages, limits, project, components }),
-    [formData, usages, limits, project, components],
-  );
+  const quotas = React.useMemo(() => getQuotas({ formData, usages, limits }), [
+    formData,
+    usages,
+    limits,
+  ]);
 
   const orderItem = React.useMemo(
     () =>
