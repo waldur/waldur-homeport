@@ -2943,6 +2943,10 @@ msgstr ""
 msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
 msgstr ""
 
+#: src/marketplace/offerings/option/OfferingOptions.tsx
+msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
+msgstr ""
+
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/azure-virtual-machine-config.ts
 #: src/digitalocean/digitalocean-droplet-config.ts
