@@ -3,7 +3,6 @@ import { delay } from 'redux-saga';
 import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { showError, showSuccess } from '@waldur/store/notify';
@@ -49,9 +48,6 @@ const formatItemToUpdate = (item) => ({
 });
 
 function* initCart() {
-  if (!isFeatureVisible('marketplace')) {
-    return;
-  }
   // Wait a little bit to avoid race conditions
   yield call(delay, 500);
   const project = yield select(getProject);
