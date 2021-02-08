@@ -10,9 +10,11 @@ import { router } from '@waldur/router';
 import { showError, showSuccess } from '@waldur/store/notify';
 import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 
+import { Resource } from '../types';
+
 import * as constants from './constants';
 
-function* redirectToDetailView(resource) {
+function* redirectToDetailView(resource: Resource) {
   const state =
     resource.offering_type === SUPPORT_OFFERING_TYPE
       ? 'project.support-details'
@@ -28,7 +30,7 @@ function* redirectToDetailView(resource) {
           tab: 'orderItems',
         }
       : {
-          uuid: resource.uuid,
+          uuid: resource.resource_uuid,
           resource_type: resource.resource_type,
           tab: 'orderItems',
         };
