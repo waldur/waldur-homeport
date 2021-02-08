@@ -21,6 +21,10 @@ export const format = (response) => {
   See also: https://fetch.spec.whatwg.org/#concept-filtered-response
   */
 
+  if (response && response.isAxiosError) {
+    response = response.response;
+  }
+
   if (!response || response.status === -1) {
     return translate(
       'Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.',
