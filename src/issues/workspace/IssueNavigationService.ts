@@ -186,11 +186,7 @@ class IssueNavigationServiceClass {
 
   gotoDashboard() {
     if (!isFeatureVisible('support')) {
-      if (isFeatureVisible('marketplace')) {
-        return router.stateService.go('marketplace-support-resources');
-      } else {
-        return router.stateService.go('support.resources');
-      }
+      return router.stateService.go('marketplace-support-resources');
     }
     return UsersService.getCurrentUser().then((user) => {
       if (user.is_staff || user.is_support) {

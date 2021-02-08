@@ -4,31 +4,9 @@ import { RootState } from '@waldur/store/reducers';
 import { renderServiceProvider } from './selectors';
 
 describe('renderServiceProvider', () => {
-  it('should return false if serviceProvider feature is disabled', () => {
+  it('should return true if user is staff', () => {
     const state = ({
       config: {
-        disabledFeatures: {
-          marketplace: true,
-        },
-        plugins: {
-          WALDUR_MARKETPLACE: {
-            OWNER_CAN_REGISTER_SERVICE_PROVIDER: false,
-          },
-        },
-      },
-      workspace: {
-        user,
-      },
-    } as unknown) as RootState;
-    expect(renderServiceProvider(state)).toEqual(false);
-  });
-
-  it('should return false if serviceProvider feature is disabled even if user is staff', () => {
-    const state = ({
-      config: {
-        disabledFeatures: {
-          marketplace: true,
-        },
         plugins: {
           WALDUR_MARKETPLACE: {
             OWNER_CAN_REGISTER_SERVICE_PROVIDER: false,
@@ -39,7 +17,7 @@ describe('renderServiceProvider', () => {
         user: staff,
       },
     } as unknown) as RootState;
-    expect(renderServiceProvider(state)).toEqual(false);
+    expect(renderServiceProvider(state)).toEqual(true);
   });
 
   it('should return true if serviceProvider feature is enabled and user is staff', () => {
