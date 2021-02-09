@@ -4,6 +4,7 @@ import { Panel } from 'react-bootstrap';
 import Select from 'react-select';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
@@ -29,18 +30,13 @@ export const ChecklistOverview: FunctionComponent = () => {
     return (
       <>
         <Select
-          getOptionValue={(option) => option.uuid}
-          getOptionLabel={(option) => option.name}
+          getOptionValue={(option: any) => option.uuid}
+          getOptionLabel={(option: any) => option.name}
           value={state.checklist}
           onChange={state.setChecklist}
           options={state.checklistOptions}
           isClearable={false}
-          styles={{
-            control: (base) => ({
-              ...base,
-              zIndex: 2000,
-            }) /* Because leaflet z-index is 1000 */,
-          }}
+          {...reactSelectMenuPortaling()}
         />
         {state.statsLoading ? (
           <LoadingSpinner />
