@@ -26,6 +26,11 @@ export interface Checklist {
   customer_roles?: string[];
 }
 
+export interface ChecklistSelectorOption {
+  name: string;
+  uuid: string;
+}
+
 export interface Answer {
   question_uuid: string;
   value: boolean;
