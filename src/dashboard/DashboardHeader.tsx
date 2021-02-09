@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 
 interface DashboardHeaderProps {
   title: React.ReactNode;
-  subtitle: React.ReactNode;
+  subtitle?: React.ReactNode;
 }
 
 export const DashboardHeader: FunctionComponent<DashboardHeaderProps> = (
@@ -17,6 +17,6 @@ export const DashboardHeader: FunctionComponent<DashboardHeaderProps> = (
     }}
   >
     <h2>{props.title}</h2>
-    <p style={{ fontSize: 15 }}>{props.subtitle}</p>
+    {props.subtitle && <p style={{ fontSize: 15 }}>{props.subtitle}</p>}
   </div>
 );

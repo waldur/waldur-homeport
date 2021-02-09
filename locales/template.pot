@@ -5921,6 +5921,10 @@ msgstr ""
 msgid "Report"
 msgstr ""
 
+#: src/dashboard/ReportSecurityIncidentAction.tsx
+msgid "Report a security incident"
+msgstr ""
+
 #: src/dashboard/ReportIssueAction.tsx
 msgid "Report an issue"
 msgstr ""
@@ -5941,7 +5945,6 @@ msgstr ""
 msgid "Report is invalid."
 msgstr ""
 
-#: src/dashboard/ReportSecurityIncidentAction.tsx
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 msgid "Report security incident"
 msgstr ""
@@ -8490,6 +8493,10 @@ msgstr ""
 msgid "Unable to load tenant."
 msgstr ""
 
+#: src/user/list/UserDashboardChart.tsx
+msgid "Unable to load user monthly activity data."
+msgstr ""
+
 #: src/auth/AuthInit.tsx
 #: src/user/UserPopover.tsx
 msgid "Unable to load user."
@@ -9061,6 +9068,10 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
+#: src/user/utils.ts
+msgid "User events this month"
+msgstr ""
+
 #: src/user/support/effects.ts
 msgid "User has been activated."
 msgstr ""
@@ -9465,6 +9476,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/project/ProjectDashboard.tsx
+#: src/user/list/UserDashboard.tsx
 msgid "Welcome, {user}!"
 msgstr ""
 
@@ -10085,6 +10097,10 @@ msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
 msgid "{category} resources"
+msgstr ""
+
+#: src/user/utils.ts
+msgid "{count} user events in {date}"
 msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx

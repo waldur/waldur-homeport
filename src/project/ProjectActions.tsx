@@ -58,7 +58,6 @@ export const ProjectActions: FunctionComponent<ProjectActionsProps> = (
     getTeamAction(props),
     getIssueAction({
       issue: { project: props.project },
-      state: 'project.issues',
     }),
     getSupportPortalAction(),
   ].filter((action) => action !== undefined);

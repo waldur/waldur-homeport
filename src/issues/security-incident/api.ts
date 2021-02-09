@@ -13,8 +13,8 @@ export const reportSecurityIncident = (formData) => {
       formData.date,
       formData.type.value,
     ),
-    project: formData.project.url,
-    resource: formData.resource.url,
+    project: formData.project?.url,
+    resource: formData.resource?.url,
     is_reported_manually: true,
   };
   return sendForm('POST', `${ENV.apiEndpoint}api/support-issues/`, reqData);
