@@ -6,6 +6,7 @@ import Select from 'react-select';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { reactSelectMenuPortaling } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
+import { ChecklistSelectorOption } from '@waldur/marketplace-checklist/types';
 import { useTitle } from '@waldur/navigation/title';
 
 import { CustomerMap } from './CustomerMap';
@@ -30,8 +31,8 @@ export const ChecklistOverview: FunctionComponent = () => {
     return (
       <>
         <Select
-          getOptionValue={(option: any) => option.uuid}
-          getOptionLabel={(option: any) => option.name}
+          getOptionValue={({ uuid }: ChecklistSelectorOption) => uuid}
+          getOptionLabel={({ name }: ChecklistSelectorOption) => name}
           value={state.checklist}
           onChange={state.setChecklist}
           options={state.checklistOptions}
