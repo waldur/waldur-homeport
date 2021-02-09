@@ -18,7 +18,6 @@ export const CustomerActions: FunctionComponent<CustomerActionsProps> = (
       getInviteAction(props),
       getIssueAction({
         issue: { customer: props.customer },
-        state: 'organization.issues',
       }),
       getSupportPortalAction(),
       getReportSecurityIncidentAction(),

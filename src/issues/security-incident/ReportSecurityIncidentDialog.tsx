@@ -75,17 +75,21 @@ const PureReportSecurityIncidentDialog: FunctionComponent<any> = (props) => (
           maxLength={160}
         />
 
-        <ProjectGroup
-          disabled={props.submitting}
-          customer={useSelector(getCustomer)}
-          formId={REPORT_SECURITY_INCIDENT_FORM_ID}
-        />
+        {props.resolve.showProjectField && (
+          <ProjectGroup
+            disabled={props.submitting}
+            customer={useSelector(getCustomer)}
+            formId={REPORT_SECURITY_INCIDENT_FORM_ID}
+          />
+        )}
 
-        <ResourceGroup
-          disabled={props.submitting}
-          project={useSelector(reportSecurityIncidentProjectSelector)}
-          formId={REPORT_SECURITY_INCIDENT_FORM_ID}
-        />
+        {props.resolve.showResourceField && (
+          <ResourceGroup
+            disabled={props.submitting}
+            project={useSelector(reportSecurityIncidentProjectSelector)}
+            formId={REPORT_SECURITY_INCIDENT_FORM_ID}
+          />
+        )}
 
         <FormGroup>
           <ControlLabel>{translate('Attachments')}</ControlLabel>

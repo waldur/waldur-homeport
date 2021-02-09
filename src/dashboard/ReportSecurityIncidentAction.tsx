@@ -6,16 +6,21 @@ import { openReportSecurityIncidentDialog } from '@waldur/issues/security-incide
 import { openModalDialog } from '@waldur/modal/actions';
 import store from '@waldur/store/store';
 
-export const getReportSecurityIncidentAction = () => ({
-  title: translate('Report security incident'),
+export const getReportSecurityIncidentAction = (
+  showProjectField = true,
+  showResourceField = true,
+) => ({
+  title: translate('Report a security incident'),
   onClick() {
     if (isFeatureVisible('support')) {
-      store.dispatch(openReportSecurityIncidentDialog());
+      store.dispatch(
+        openReportSecurityIncidentDialog(showProjectField, showResourceField),
+      );
     } else {
       store.dispatch(
         openModalDialog(MessageDialog, {
           resolve: {
-            title: translate('Report security incident'),
+            title: translate('Report a security incident'),
             message: translate(
               'To report a security incident, please send an email to {supportEmail}.',
               {

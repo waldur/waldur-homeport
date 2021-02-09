@@ -11,8 +11,13 @@ const ReportSecurityIncidentDialog = lazyComponent(
   'ReportSecurityIncidentDialog',
 );
 
-export const openReportSecurityIncidentDialog = () =>
-  openModalDialog(ReportSecurityIncidentDialog);
+export const openReportSecurityIncidentDialog = (
+  showProjectField,
+  showResourceField,
+) =>
+  openModalDialog(ReportSecurityIncidentDialog, {
+    resolve: { showProjectField, showResourceField },
+  });
 
 export const reportIncident = (formData) => ({
   type: constants.REPORT_INCIDENT,

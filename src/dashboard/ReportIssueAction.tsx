@@ -8,7 +8,6 @@ import store from '@waldur/store/store';
 
 interface ReportIssueActionProps {
   issue: any;
-  state: string;
 }
 
 export const getIssueAction = (props: ReportIssueActionProps) => {
