@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -123,13 +124,15 @@ export const BookingsCalendar = ({
   }
 
   return calendarEvents.length ? (
-    <Calendar
-      height="auto"
-      eventLimit={false}
-      events={calendarEvents}
-      eventRender={(info) => eventRender({ ...info, withTooltip: true })}
-    />
-  ) : (
-    <p>{translate('There are no events.')}</p>
-  );
+    <Row style={{ marginBottom: '30px' }}>
+      <Col md={8} mdOffset={2}>
+        <Calendar
+          height="auto"
+          eventLimit={false}
+          events={calendarEvents}
+          eventRender={(info) => eventRender({ ...info, withTooltip: true })}
+        />
+      </Col>
+    </Row>
+  ) : null;
 };

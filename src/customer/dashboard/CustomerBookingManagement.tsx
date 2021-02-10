@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -35,11 +34,7 @@ export const CustomerBookingManagement: FunctionComponent = () => {
   }
   return customer.is_service_provider && offeringsCount ? (
     <Panel title={translate('Booking management')}>
-      <Row style={{ marginBottom: '30px' }}>
-        <Col md={8} mdOffset={2}>
-          <BookingsCalendar providerUuid={customer.uuid} />
-        </Col>
-      </Row>
+      <BookingsCalendar providerUuid={customer.uuid} />
       <BookingsFilter />
       <BookingsList providerUuid={customer.uuid} />
     </Panel>
