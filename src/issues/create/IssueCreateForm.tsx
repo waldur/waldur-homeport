@@ -43,6 +43,7 @@ interface OwnProps {
   filteredTemplates: IssueTemplate[];
   attachments: IssueTemplateAttachment[];
   initialValues: any;
+  hideProjectAndResourceFields?: boolean;
 }
 
 export const issueCreateProjectSelector = (state: RootState) =>
@@ -76,6 +77,7 @@ export const IssueCreateForm = enhance(
     templateState,
     filteredTemplates,
     attachments,
+    hideProjectAndResourceFields,
     handleSubmit,
     submitting,
   }) => (
@@ -137,16 +139,20 @@ export const IssueCreateForm = enhance(
                 disabled={submitting}
               />
             </FormGroup>
-            <ProjectGroup
-              disabled={submitting}
-              customer={useSelector(getCustomer)}
-              formId={ISSUE_QUICK_CREATE_FORM_ID}
-            />
-            <ResourceGroup
-              disabled={submitting}
-              project={useSelector(issueCreateProjectSelector)}
-              formId={ISSUE_QUICK_CREATE_FORM_ID}
-            />
+            {!hideProjectAndResourceFields && (
+              <>
+                <ProjectGroup
+                  disabled={submitting}
+                  customer={useSelector(getCustomer)}
+                  formId={ISSUE_QUICK_CREATE_FORM_ID}
+                />
+                <ResourceGroup
+                  disabled={submitting}
+                  project={useSelector(issueCreateProjectSelector)}
+                  formId={ISSUE_QUICK_CREATE_FORM_ID}
+                />
+              </>
+            )}
             {attachments.length > 0 && (
               <FormGroup>
                 <ControlLabel>{translate('Template files')}</ControlLabel>

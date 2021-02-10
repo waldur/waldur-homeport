@@ -27,6 +27,7 @@ interface CreateIssueDialogProps {
     issue: CreateIssueProps;
     options: IssueOptions;
     defer: { resolve(): void; reject(): void };
+    hideProjectAndResourceFields?: boolean;
   };
 }
 
@@ -152,6 +153,7 @@ export const IssueCreateDialog: FunctionComponent<CreateIssueDialogProps> = ({
       initialValues={{
         type: defaultTypeOption,
       }}
+      hideProjectAndResourceFields={resolve.hideProjectAndResourceFields}
     />
   );
 };
