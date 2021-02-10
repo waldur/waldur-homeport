@@ -39,6 +39,13 @@ const SupportFeedback = lazyComponent(
     ),
   'SupportFeedback',
 );
+const SupportFeedbackListContainer = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SupportFeedbackListContainer" */ '@waldur/issues/feedback/SupportFeedbackListContainer'
+    ),
+  'SupportFeedbackListContainer',
+);
 const SupportIssues = lazyComponent(
   () =>
     import(
@@ -164,6 +171,18 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support',
       bodyClass: 'old',
+    },
+  },
+
+  {
+    name: 'support.feedback',
+    url: 'feedback/',
+    component: SupportFeedbackListContainer,
+    data: {
+      sidebarKey: 'reporting',
+    },
+    resolve: {
+      permission: checkPermission,
     },
   },
 

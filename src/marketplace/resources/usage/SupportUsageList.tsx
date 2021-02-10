@@ -1,10 +1,10 @@
-import moment from 'moment-timezone';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { getStartAndEndDatesOfMonth } from '@waldur/issues/utils';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
@@ -89,10 +89,11 @@ const mapPropsToFilter = (props) => {
   const filter: UsageReportRequest = {};
   if (props.usageFilter) {
     if (props.usageFilter.accounting_period) {
-      const { year, month } = props.usageFilter.accounting_period.value;
-      const dt = moment({ year, month: month - 1 });
-      filter.date_after = dt.startOf('month').format('YYYY-MM-DD');
-      filter.date_before = dt.endOf('month').format('YYYY-MM-DD');
+      const { start, end } = getStartAndEndDatesOfMonth(
+        props.usageFilter.accounting_period.value,
+      );
+      filter.date_after = start;
+      filter.date_before = end;
     }
     if (props.usageFilter.organization) {
       filter.customer_uuid = props.usageFilter.organization.uuid;

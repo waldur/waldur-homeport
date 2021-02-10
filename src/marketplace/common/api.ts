@@ -213,6 +213,8 @@ export const deleteOfferingScreenshot = (screenshotUuid: string) =>
 export const getServiceProviderList = (params?: {}) =>
   getSelectData<ServiceProvider>('/marketplace-service-providers/', params);
 
+export const getUsers = (params?: {}) => getSelectData('/users/', params);
+
 export const createServiceProvider = (params) =>
   post<ServiceProvider>('/marketplace-service-providers/', params).then(
     (response) => response.data,

@@ -2,12 +2,13 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 
+import { PeriodOption } from '@waldur/form/types';
+
 import { AccountingPeriodField } from './AccountingPeriodField';
 import { AccountingRunningField } from './AccountingRunningField';
-import { AccountingPeriodOption } from './types';
 
 interface Props {
-  accountingPeriods: AccountingPeriodOption[];
+  accountingPeriods: PeriodOption[];
 }
 
 export const PureCustomerListFilter: FunctionComponent<Props> = (props) => (

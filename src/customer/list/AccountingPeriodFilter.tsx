@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 
+import { PeriodOption } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 
 import { AccountingPeriodField } from './AccountingPeriodField';
-import { AccountingPeriodOption } from './types';
 
 interface Props {
-  options: AccountingPeriodOption[];
+  options: PeriodOption[];
 }
 
 export const AccountingPeriodFilter: FunctionComponent<Props> = (props) => (

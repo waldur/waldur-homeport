@@ -1263,6 +1263,7 @@ msgstr ""
 #: src/issues/comments/IssueCommentsFormMainContainer.spec.tsx
 #: src/issues/comments/IssueCommentsFormMainContainer.tsx
 #: src/issues/feedback/SupportFeedback.tsx
+#: src/issues/feedback/SupportFeedbackListExpandableRow.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Comment"
@@ -1561,6 +1562,7 @@ msgstr ""
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueDetails.tsx
+#: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -2359,6 +2361,7 @@ msgid "Ethernet type"
 msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
+#: src/issues/feedback/SupportFeedbackList.tsx
 msgid "Evaluation"
 msgstr ""
 
@@ -2518,6 +2521,8 @@ msgid "Fee applied each time this plan is activated."
 msgstr ""
 
 #: src/issues/feedback/SupportFeedback.tsx
+#: src/issues/feedback/SupportFeedbackListContainer.tsx
+#: src/issues/workspace/IssueNavigationService.ts
 msgid "Feedback"
 msgstr ""
 
@@ -3302,6 +3307,7 @@ msgstr ""
 msgid "Is service provider"
 msgstr ""
 
+#: src/issues/feedback/SupportFeedbackList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 msgid "Issue"
 msgstr ""
@@ -4044,6 +4050,7 @@ msgstr ""
 msgid "Native name"
 msgstr ""
 
+#: src/issues/feedback/utils.ts
 #: src/marketplace-checklist/PieChart.tsx
 msgid "Negative"
 msgstr ""
@@ -4075,6 +4082,10 @@ msgstr ""
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Networks"
+msgstr ""
+
+#: src/issues/feedback/utils.ts
+msgid "Neutral"
 msgstr ""
 
 #: src/user/support/EmailChangeForm.tsx
@@ -4192,6 +4203,10 @@ msgstr ""
 
 #: src/marketplace/offerings/support/SupportOfferingsFilter.tsx
 msgid "No service providers"
+msgstr ""
+
+#: src/issues/feedback/UserAutocomplete.tsx
+msgid "No users"
 msgstr ""
 
 #: src/invitations/InvitationConfirmDialog.tsx
@@ -5238,6 +5253,7 @@ msgstr ""
 msgid "Ports"
 msgstr ""
 
+#: src/issues/feedback/utils.ts
 #: src/marketplace-checklist/PieChart.tsx
 msgid "Positive"
 msgstr ""
@@ -6664,6 +6680,10 @@ msgstr ""
 msgid "Select division..."
 msgstr ""
 
+#: src/issues/feedback/EvaluationSelectField.tsx
+msgid "Select evaluation..."
+msgstr ""
+
 #: src/issues/security-incident/ReportSecurityIncidentDialog.tsx
 msgid "Select incident type"
 msgstr ""
@@ -6700,6 +6720,10 @@ msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
 msgid "Select organizations..."
+msgstr ""
+
+#: src/issues/feedback/PeriodFilterField.tsx
+msgid "Select period..."
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceRow.tsx
@@ -6794,6 +6818,7 @@ msgid "Select type..."
 msgstr ""
 
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
+#: src/issues/feedback/UserAutocomplete.tsx
 #: src/project/team/UserGroup.tsx
 msgid "Select user..."
 msgstr ""
@@ -9043,6 +9068,7 @@ msgstr ""
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/customer/team/UserGroup.tsx
 #: src/events/EventDetailsTable.tsx
+#: src/issues/feedback/SupportFeedbackList.tsx
 #: src/project/team/UserGroup.tsx
 msgid "User"
 msgstr ""
@@ -9378,6 +9404,14 @@ msgstr ""
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 msgid "Version"
+msgstr ""
+
+#: src/issues/feedback/utils.ts
+msgid "Very negative"
+msgstr ""
+
+#: src/issues/feedback/utils.ts
+msgid "Very positive"
 msgstr ""
 
 #: src/rancher/cluster/ViewYAMLButton.tsx
@@ -10003,6 +10037,10 @@ msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "support"
+msgstr ""
+
+#: src/issues/feedback/SupportFeedbackList.tsx
+msgid "support feedback"
 msgstr ""
 
 #: src/issues/list/IssuesList.tsx
