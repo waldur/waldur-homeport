@@ -116,6 +116,12 @@ const getReportItems = (): MenuItemType[] => [
         state: 'marketplace-support-usage-reports',
         key: 'support-usage-reports',
       },
+      {
+        label: translate('Feedback'),
+        icon: 'fa-users',
+        state: 'support.feedback',
+        key: 'support.feedback',
+      },
     ],
   },
   {
