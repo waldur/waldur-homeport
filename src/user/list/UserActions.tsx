@@ -14,6 +14,7 @@ export const UserActions: FunctionComponent<UserActionsProps> = ({ user }) => (
     actions={[
       getIssueAction({
         issue: { user },
+        hideProjectAndResourceFields: true,
       }),
       getReportSecurityIncidentAction(false, false),
     ].filter((action) => action !== undefined)}
