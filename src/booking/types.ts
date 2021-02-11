@@ -44,4 +44,5 @@ export interface BookingResource {
 export interface BookedItem {
   start: string;
   end: string;
+  created_by_full_name: string;
 }

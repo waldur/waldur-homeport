@@ -6114,6 +6114,10 @@ msgstr ""
 msgid "Reserved slot"
 msgstr ""
 
+#: src/booking/utils.ts
+msgid "Reserved slot by {name}"
+msgstr ""
+
 #: src/form/AppstoreListDialog.tsx
 #: src/form/ResetFormButton.tsx
 #: src/vmware/actions/ResetAction.tsx
@@ -7701,10 +7705,6 @@ msgstr ""
 
 #: src/invoices/events/InvoiceEventsDialog.tsx
 msgid "There are no events for this resource."
-msgstr ""
-
-#: src/customer/dashboard/BookingsCalendar.tsx
-msgid "There are no events."
 msgstr ""
 
 #: src/customer/payments/InvoicesDropdown.tsx

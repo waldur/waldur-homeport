@@ -362,7 +362,11 @@ export const getBookedSlots = (bookedItems: BookedItem[]) =>
     start: item.start,
     end: item.end,
     allDay: false,
-    title: translate('Reserved slot'),
+    title: item.created_by_full_name
+      ? translate('Reserved slot by {name}', {
+          name: item.created_by_full_name,
+        })
+      : translate('Reserved slot'),
     extendedProps: {
       type: 'Schedule',
     },
