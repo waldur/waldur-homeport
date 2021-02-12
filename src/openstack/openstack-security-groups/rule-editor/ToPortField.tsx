@@ -5,14 +5,14 @@ import { maxValue, minValue, required } from '@waldur/core/validators';
 
 import { FormField } from './FormField';
 import { Rule } from './types';
-import { getPortMax, getToPortMin } from './utils';
+import { getPortMax } from './utils';
 
 interface Props {
   rule: Rule;
 }
 
 export const ToPortField: FC<Props> = ({ rule }) => {
-  const min = getToPortMin(rule);
+  const min = rule.from_port || -1;
   const max = getPortMax(rule);
   const validate = useMemo(() => [required, minValue(min), maxValue(max)], [
     min,
