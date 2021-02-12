@@ -781,6 +781,10 @@ msgstr ""
 msgid "Available quota usage: {usage}"
 msgstr ""
 
+#: src/user/list/UserDashboardChart.tsx
+msgid "Average of all checklists"
+msgstr ""
+
 #: src/rancher/cluster/hpas/utils.ts
 msgid "Average utilization"
 msgstr ""

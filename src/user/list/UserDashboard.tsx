@@ -48,7 +48,7 @@ const UserDashboardContainer: React.FC<StateProps & DispatchProps> = (
       <DashboardHeader
         title={translate('Welcome, {user}!', { user: user.full_name })}
       />
-      <UserDashboardChart user={user} />
+      <UserDashboardChart user={user} hasChecklists={asyncState.value > 0} />
       <div className="wrapper wrapper-content">
         {asyncState.value > 0 && (
           <>
