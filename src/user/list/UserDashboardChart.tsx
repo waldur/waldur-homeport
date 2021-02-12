@@ -6,21 +6,39 @@ import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';
 import { translate } from '@waldur/i18n';
-import { getUserMonthlyActivity } from '@waldur/user/api';
+import { PieChart } from '@waldur/marketplace-checklist/PieChart';
+import {
+  getUserChecklistScore,
+  getUserMonthlyActivity,
+} from '@waldur/user/api';
 import { UserActions } from '@waldur/user/list/UserActions';
 import { formatUserMonthlyActivityChart } from '@waldur/user/utils';
 import { User } from '@waldur/workspace/types';
 
 interface UserDashboardChart {
   user: User;
+  hasChecklists: boolean;
+}
+
+async function loadCharts(user: User, hasChecklists: boolean) {
+  const events = await getUserMonthlyActivity(user.url).then(
+    formatUserMonthlyActivityChart,
+  );
+  if (hasChecklists) {
+    const checklists = await getUserChecklistScore(user.uuid);
+    return { events, checklists };
+  } else {
+    return { events };
+  }
 }
 
 export const UserDashboardChart: FunctionComponent<UserDashboardChart> = ({
   user,
+  hasChecklists,
 }) => {
   const { loading, error, value } = useAsync(
-    () => getUserMonthlyActivity(user.url).then(formatUserMonthlyActivityChart),
-    [user],
+    () => loadCharts(user, hasChecklists),
+    [user, hasChecklists],
   );
   return loading ? (
     <LoadingSpinner />
@@ -31,12 +49,26 @@ export const UserDashboardChart: FunctionComponent<UserDashboardChart> = ({
       <Row>
         <Col md={4}>
           <DashboardCounter
-            label={value.chart.title}
-            value={value.chart.current}
+            label={value.events.title}
+            value={value.events.current}
           />
-          <EChart options={value.options} height="100px" />
+          <EChart options={value.events.chart} height="100px" />
         </Col>
-        <Col md={4}>{/*empty for now*/}</Col>
+        <Col md={4}>
+          {hasChecklists ? (
+            <>
+              <DashboardCounter
+                label={translate('Average of all checklists')}
+                value={`${value.checklists.score}%`}
+              />
+              <PieChart
+                positive={value.checklists.score}
+                negative={100 - value.checklists.score}
+                height="100px"
+              />
+            </>
+          ) : null}
+        </Col>
         <Col md={4}>
           <UserActions user={user} />
         </Col>

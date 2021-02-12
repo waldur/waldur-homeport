@@ -3,10 +3,18 @@ import { useMemo, FunctionComponent } from 'react';
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
 
-export const PieChart: FunctionComponent<{ positive; negative; unknown }> = ({
+interface PieChartProps {
+  positive?: number;
+  negative?: number;
+  unknown?: number;
+  height?: string;
+}
+
+export const PieChart: FunctionComponent<PieChartProps> = ({
   positive,
   negative,
   unknown,
+  height,
 }) => {
   const options = useMemo(
     () => ({
@@ -50,5 +58,12 @@ export const PieChart: FunctionComponent<{ positive; negative; unknown }> = ({
     }),
     [positive, negative, unknown],
   );
-  return <EChart options={options} height="300px" />;
+  return <EChart options={options} height={height} />;
+};
+
+PieChart.defaultProps = {
+  height: '300px',
+  positive: 0,
+  negative: 0,
+  unknown: 0,
 };
