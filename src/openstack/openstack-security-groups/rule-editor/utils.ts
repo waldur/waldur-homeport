@@ -15,14 +15,6 @@ import { SecurityGroup } from '../types';
 
 import { FormData, Rule } from './types';
 
-export const getPortMin = (rule: Rule) => {
-  if (rule.protocol === 'icmp' || rule.protocol === 'any' || !rule.protocol) {
-    return -1;
-  } else {
-    return 1;
-  }
-};
-
 export const getPortMax = (rule: Rule) => {
   if (rule.protocol === 'any' || !rule.protocol) {
     return -1;
@@ -31,10 +23,6 @@ export const getPortMax = (rule: Rule) => {
   } else {
     return 65535;
   }
-};
-
-export const getToPortMin = (rule: Rule) => {
-  return Math.max(getPortMin(rule), rule.from_port || -1);
 };
 
 const FORM_NAME = 'securityGroupRuleEdit';

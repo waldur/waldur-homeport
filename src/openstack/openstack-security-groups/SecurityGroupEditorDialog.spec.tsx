@@ -140,7 +140,7 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.cidrIsInvalid).toBe(true);
   });
 
-  it('allows to specify cidr according to IPv6', async () => {
+  it('allows to specify CIDR according to IPv6', async () => {
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
@@ -150,18 +150,7 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.cidrIsInvalid).toBe(false);
   });
 
-  it('validates from port min value according to the protocol', async () => {
-    const dialog = new DialogFixture(store);
-    await dialog.render();
-    await dialog.update();
-
-    expect(dialog.fromPortIsInvalid).toBe(false);
-    dialog.fromPort = -1;
-    dialog.protocol = 'tcp';
-    expect(dialog.fromPortIsInvalid).toBe(true);
-  });
-
-  it('validates from port max value according to the protocol', async () => {
+  it('checks from port max value for ICMP protocol', async () => {
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
@@ -172,7 +161,7 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.fromPortIsInvalid).toBe(true);
   });
 
-  it('validates to port min value according to the from port value', async () => {
+  it('checks that to port is greater then from port', async () => {
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
@@ -184,7 +173,7 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.toPortIsInvalid).toBe(true);
   });
 
-  it('validates to port max value according to the protocol', async () => {
+  it('checks to port max value for ICMP protocol', async () => {
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
@@ -195,12 +184,36 @@ describe('SecurityGroupEditorDialog', () => {
     expect(dialog.toPortIsInvalid).toBe(true);
   });
 
-  it('validates from port min and to port max values according to the "any" protocol', async () => {
+  it('allows to use any port range with any protocol', async () => {
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
 
     dialog.protocol = 'any';
+    dialog.fromPort = -1;
+    dialog.toPort = -1;
+    expect(dialog.fromPortIsInvalid).toBe(false);
+    expect(dialog.toPortIsInvalid).toBe(false);
+  });
+
+  it('allows to use any port range with TCP protocol', async () => {
+    const dialog = new DialogFixture(store);
+    await dialog.render();
+    await dialog.update();
+
+    dialog.protocol = 'tcp';
+    dialog.fromPort = -1;
+    dialog.toPort = -1;
+    expect(dialog.fromPortIsInvalid).toBe(false);
+    expect(dialog.toPortIsInvalid).toBe(false);
+  });
+
+  it('allows to use any port range with UDP protocol', async () => {
+    const dialog = new DialogFixture(store);
+    await dialog.render();
+    await dialog.update();
+
+    dialog.protocol = 'udp';
     dialog.fromPort = -1;
     dialog.toPort = -1;
     expect(dialog.fromPortIsInvalid).toBe(false);
