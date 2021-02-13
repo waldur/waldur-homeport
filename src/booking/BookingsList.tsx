@@ -18,7 +18,8 @@ import { bookingFormSelector } from './store/selectors';
 
 type OwnProps = {
   offeringUuid?: string;
-  providerUuid?: string;
+  customerUuid?: string;
+  isServiceProvider?: boolean;
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -86,8 +87,9 @@ const mapPropsToFilter = (props: StateProps & OwnProps) => {
   if (props.offeringUuid) {
     filter.offering_uuid = props.offeringUuid;
   }
-  if (props.providerUuid) {
-    filter.provider_uuid = props.providerUuid;
+  if (props.customerUuid) {
+    filter[props.isServiceProvider ? 'provider_uuid' : 'customer_uuid'] =
+      props.customerUuid;
   }
   if (props.filter) {
     if (props.filter.state) {

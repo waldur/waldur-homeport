@@ -70,6 +70,12 @@ export const getOfferingsCount = (options?: {}) =>
     options,
   ).then((response) => parseResultCount(response));
 
+export const getResourcesCount = (options?: {}) =>
+  Axios.head(
+    `${ENV.apiEndpoint}api/marketplace-resources/`,
+    options,
+  ).then((response) => parseResultCount(response));
+
 export const getProviderOfferings = (customerUuid: string) =>
   getAllOfferings({ params: { customer_uuid: customerUuid } });
 
