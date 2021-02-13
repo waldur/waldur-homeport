@@ -4,7 +4,12 @@ import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
-export const getStates = () => [
+export interface BookingFilterStateOption {
+  value: string;
+  label: string;
+}
+
+export const getStates = (): BookingFilterStateOption[] => [
   { value: 'Creating', label: translate('Unconfirmed') },
   { value: 'OK', label: translate('Accepted') },
   { value: 'Terminated', label: translate('Rejected') },
