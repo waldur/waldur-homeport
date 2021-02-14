@@ -53,8 +53,8 @@ export const CustomerBookingManagement: FunctionComponent = () => {
   if (error) {
     return <h3>{translate('Unable to load booking offerings.')}</h3>;
   }
-  return value.offeringsCount &&
-    (customer.is_service_provider || value.resourcesCount) ? (
+  return (value.offeringsCount && customer.is_service_provider) ||
+    value.resourcesCount ? (
     <Panel title={translate('Booking management')}>
       <BookingsCalendar
         customerUuid={customer.uuid}
