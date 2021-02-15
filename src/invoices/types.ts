@@ -5,8 +5,6 @@ export interface InvoiceItem {
   total: string;
   name: string;
   details: any;
-  scope_uuid: string;
-  scope_type: string;
   start: string;
   end: string;
   measured_unit: string;
@@ -16,6 +14,7 @@ export interface InvoiceItem {
   quantity?: number;
   project_uuid?: string;
   project_name?: string;
+  resource?: string;
 }
 
 export interface Invoice {

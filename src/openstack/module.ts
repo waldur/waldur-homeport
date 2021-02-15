@@ -10,6 +10,5 @@ import './openstack-subnet/module';
 import './openstack-tenant/module';
 import './openstack-volume/module';
 import './provider';
-import './events';
 import './marketplace';
 import './router-breadcrumbs';

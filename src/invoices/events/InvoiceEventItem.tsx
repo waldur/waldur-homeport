@@ -8,6 +8,8 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 
+import { InvoiceEvent } from './types';
+
 const EventDetailsDialog = lazyComponent(
   () =>
     import(
@@ -16,10 +18,16 @@ const EventDetailsDialog = lazyComponent(
   'EventDetailsDialog',
 );
 
-export const InvoiceEventItem: FunctionComponent<{ event }> = ({ event }) => {
+interface InvoiceEventItemProps {
+  event: InvoiceEvent;
+}
+
+export const InvoiceEventItem: FunctionComponent<InvoiceEventItemProps> = ({
+  event,
+}) => {
   const dispatch = useDispatch();
 
-  const showEventDetails = (event) => {
+  const showEventDetails = (event: InvoiceEvent) => {
     dispatch(closeModalDialog());
     dispatch(
       openModalDialog(EventDetailsDialog, {

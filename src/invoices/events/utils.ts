@@ -1,10 +1,13 @@
-import { getAll } from '@waldur/core/api';
+import { getEvents } from '@waldur/events/api';
 import eventsRegistry from '@waldur/events/registry';
+import { Event } from '@waldur/events/types';
+
+import { InvoiceItem } from '../types';
+
+import { InvoiceEvent } from './types';
 
 const getEventColor = (event) => {
   const classes = {
-    openstack_package_created: 'bg-success',
-    openstack_package_deleted: 'bg-success',
     resource_creation_scheduled: 'bg-info',
     resource_creation_succeeded: 'bg-success',
     resource_creation_failed: 'bg-danger',
@@ -17,8 +20,6 @@ const getEventColor = (event) => {
 
 const getEventIcon = (event) => {
   const classes = {
-    openstack_package_created: 'fa-plus-circle',
-    openstack_package_deleted: 'fa-trash-o',
     resource_creation_scheduled: 'fa-plus-circle',
     resource_creation_succeeded: 'fa-plus-circle',
     resource_creation_failed: 'fa-plus-circle',
@@ -29,7 +30,7 @@ const getEventIcon = (event) => {
   return classes[event.event_type];
 };
 
-const parseEvents = (events) => {
+const parseEvents = (events: Event[]): InvoiceEvent[] => {
   return events.map((event) => ({
     date: event.created,
     message: eventsRegistry.formatEvent(event),
@@ -39,14 +40,10 @@ const parseEvents = (events) => {
   }));
 };
 
-export const loadEvents = async (item) => {
-  // TODO: Remove extra check after https://opennode.atlassian.net/browse/WAL-1211
-  if (item.scope_type && item.scope_uuid) {
-    const events = await getAll('/events/', {
-      params: {
-        resource_type: item.scope_type,
-        resource_uuid: item.scope_uuid,
-      },
+export const loadEvents = async (item: InvoiceItem) => {
+  if (item.resource) {
+    const events = await getEvents({
+      resource: item.resource,
     });
     return parseEvents(events);
   } else {

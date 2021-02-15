@@ -4506,10 +4506,6 @@ msgstr ""
 msgid "OpenStack Instance"
 msgstr ""
 
-#: src/openstack/events.ts
-msgid "OpenStack events"
-msgstr ""
-
 #: src/openstack/openstack-instance/actions/EditDialog.tsx
 #: src/openstack/openstack-instance/marketplace.ts
 #: src/rancher/node/actions/LinkDialog.tsx
@@ -4526,14 +4522,6 @@ msgstr ""
 
 #: src/openstack/marketplace.ts
 msgid "OpenStack package"
-msgstr ""
-
-#: src/openstack/events.ts
-msgid "OpenStack package {tenant_link} has been created."
-msgstr ""
-
-#: src/openstack/events.ts
-msgid "OpenStack package {tenant_name} has been deleted."
 msgstr ""
 
 #: src/openstack/openstack-subnet/EditSubnetDialog.tsx
