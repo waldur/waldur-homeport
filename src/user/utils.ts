@@ -12,6 +12,6 @@ export const formatUserMonthlyActivityChart = (userMonthlyActivityData) => {
   return {
     chart: getScopeChartOptions(dates, values),
     title: translate('User events this month'),
-    current: userMonthlyActivityData[userMonthlyActivityData.length - 2].count,
+    current: userMonthlyActivityData[userMonthlyActivityData.length - 1].count,
   };
 };
