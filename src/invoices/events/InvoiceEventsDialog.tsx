@@ -12,10 +12,18 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
+import { InvoiceItem } from '../types';
+
 import { InvoiceEventItem } from './InvoiceEventItem';
 import { loadEvents } from './utils';
 
-export const InvoiceEventsDialog: FunctionComponent<{ resolve }> = ({
+interface InvoiceEventsDialogProps {
+  resolve: {
+    item: InvoiceItem;
+  };
+}
+
+export const InvoiceEventsDialog: FunctionComponent<InvoiceEventsDialogProps> = ({
   resolve,
 }) => {
   const { loading, error, value: events, retry } = useAsyncRetry(() =>
