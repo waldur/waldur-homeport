@@ -6,23 +6,32 @@ import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 import { InvoiceEventsToggle } from '../events/InvoiceEventsToggle';
+import { InvoiceItem } from '../types';
 
 import { getItemName } from './utils';
 
-export const InvoiceItemDetails: FunctionComponent<{
-  item;
-  itemId;
-  customerId;
-}> = ({ item, itemId, customerId }) => (
+interface InvoiceItemDetailsProps {
+  item: InvoiceItem;
+  itemId: string;
+  customerId: string;
+}
+
+export const InvoiceItemDetails: FunctionComponent<InvoiceItemDetailsProps> = ({
+  item,
+  itemId,
+  customerId,
+}) => (
   <>
     <div>
       <strong>{getItemName(item)}</strong>{' '}
-      <Link
-        state="marketplace-public-resource-details"
-        params={{ uuid: customerId, resource_uuid: item.scope_uuid }}
-      >
-        <i className={'fa fa-external-link'}></i>
-      </Link>
+      {item.resource_uuid ? (
+        <Link
+          state="marketplace-public-resource-details"
+          params={{ uuid: customerId, resource_uuid: item.resource_uuid }}
+        >
+          <i className="fa fa-external-link"></i>
+        </Link>
+      ) : null}
     </div>
     <Tooltip
       id={itemId}
