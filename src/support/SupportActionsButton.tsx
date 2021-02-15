@@ -20,7 +20,7 @@ const ActionsList = [
 
 interface SupportActionsButtonProps {
   resource: Resource;
-  reInitResource(): void;
+  reInitResource?(): void;
 }
 
 export const SupportActionsButton: FunctionComponent<SupportActionsButtonProps> = (
