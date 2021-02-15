@@ -24,7 +24,7 @@ export const AttachDialog = ({ resolve: { resource } }) => {
     return {
       instances: instances.map((choice) => ({
         value: choice.url,
-        display_name: choice.name,
+        label: choice.name,
       })),
     };
   });
@@ -47,7 +47,7 @@ export const AttachDialog = ({ resolve: { resource } }) => {
       fields={fields}
       submitForm={async (formData) => {
         try {
-          await attachVolume(resource.uuid, formData.instance.value);
+          await attachVolume(resource.uuid, formData.instance);
           dispatch(
             showSuccess(translate('Volume has been attached to instance.')),
           );
