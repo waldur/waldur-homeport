@@ -19,5 +19,4 @@ export interface PlanDetailsTableProps extends PricesData {
   viewMode?: boolean;
   formGroupClassName?: string;
   columnClassName?: string;
-  limits?: string[];
 }
