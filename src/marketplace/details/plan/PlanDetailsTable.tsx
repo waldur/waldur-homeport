@@ -67,11 +67,11 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
   const fixedRows = props.components.filter(
     (component) => component.billing_type === 'fixed',
   );
-  const fixedWithLimits = fixedRows.filter((component) =>
-    props.limits.includes(component.type),
+  const fixedWithLimits = fixedRows.filter(
+    (component) => component.disable_quotas === false,
   );
   const fixedWithoutLimits = fixedRows.filter(
-    (component) => !props.limits.includes(component.type),
+    (component) => component.disable_quotas === true,
   );
   const usageRows = props.components.filter(
     (component) => component.billing_type === 'usage',
@@ -168,7 +168,6 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
 PureDetailsTable.defaultProps = {
   formGroupClassName: 'form-group',
   columnClassName: 'col-sm-offset-3 col-sm-9',
-  limits: [],
 };
 
 const connector = connect(pricesSelector);

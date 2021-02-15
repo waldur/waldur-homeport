@@ -39,7 +39,6 @@ export const PlanDetails = withTranslation((props: PlanDetailsProps) => {
           viewMode={true}
           orderItem={props.orderItem}
           offering={props.offering}
-          limits={props.limits}
         />
       </OrderItemDetailsField>
     </>

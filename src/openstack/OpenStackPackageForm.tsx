@@ -60,7 +60,7 @@ export class OpenStackPackageForm extends Component<OfferingConfigurationFormPro
             required={true}
           />
           <PlanField offering={props.offering} />
-          <PlanDetailsTable offering={props.offering} limits={props.limits} />
+          <PlanDetailsTable offering={props.offering} />
           <TextField
             label={translate('Tenant description')}
             name="attributes.description"

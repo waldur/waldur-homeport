@@ -76,11 +76,7 @@ export const RancherClusterForm: React.FC<OfferingConfigurationFormProps> = (
           required={true}
         />
         <PlanField offering={props.offering} />
-        <PlanDetailsTable
-          offering={props.offering}
-          limits={props.limits}
-          viewMode={true}
-        />
+        <PlanDetailsTable offering={props.offering} viewMode={true} />
         <TextField
           label={translate('Cluster description')}
           name="attributes.description"
