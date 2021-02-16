@@ -26,6 +26,13 @@ const OfferingConfigurationForm = lazyComponent(
     ),
   'OfferingConfigurationForm',
 );
+const OfferingPluginOptionsForm = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "OfferingPluginOptionsForm" */ '@waldur/support/OfferingPluginOptionsForm'
+    ),
+  'OfferingPluginOptionsForm',
+);
 
 import { OFFERING_TYPE_BOOKING } from './constants';
 
@@ -67,6 +74,7 @@ registerOfferingType({
   },
   checkoutSummaryComponent: BookingCheckoutSummary,
   component: OfferingConfigurationForm,
+  pluginOptionsForm: OfferingPluginOptionsForm,
   detailsComponent: OfferingConfigurationDetails,
   showOptions: true,
   showComponents: true,
