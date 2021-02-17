@@ -19,8 +19,10 @@ import {
   ProjectGroup,
   ResourceGroup,
 } from '@waldur/issues/create/IssueQuickCreate';
-import { REPORT_SECURITY_INCIDENT_FORM_ID } from '@waldur/issues/security-incident/constants';
-import { reportIncident } from '@waldur/issues/security-incident/store/actions';
+import {
+  REPORT_INCIDENT,
+  REPORT_SECURITY_INCIDENT_FORM_ID,
+} from '@waldur/issues/security-incident/constants';
 import {
   getSecurityIncidentTypeOptions,
   reportSecurityIncidentProjectSelector,
@@ -105,7 +107,7 @@ const PureReportSecurityIncidentDialog: FunctionComponent<any> = (props) => (
 );
 
 const mapDispatchToProps = (dispatch) => ({
-  submitRequest: (formData) => dispatch(reportIncident(formData)),
+  submitRequest: (formData) => REPORT_INCIDENT(formData, dispatch),
 });
 
 const connector = connect(null, mapDispatchToProps);
