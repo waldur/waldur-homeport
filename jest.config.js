@@ -20,4 +20,5 @@ module.exports = {
     },
   },
   snapshotSerializers: ['enzyme-to-json/serializer'],
+  coverageReporters: ['text', 'cobertura'],
 };

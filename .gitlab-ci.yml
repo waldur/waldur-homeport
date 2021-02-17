@@ -59,8 +59,8 @@ Run jest tests:
   artifacts:
     when: always
     reports:
-      junit:
-        - junit.xml
+      junit: junit.xml
+      cobertura: coverage/cobertura-coverage.xml
 
 Run E2E tests:
   image:

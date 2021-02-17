@@ -215,5 +215,13 @@
     "**/*.{css,scss}": [
       "yarn prettier --write"
     ]
+  },
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "output": "./junit.xml",
+    "classNameTemplate": "{classname}-{title}",
+    "titleTemplate": "{classname}-{title}",
+    "ancestorSeparator": " › ",
+    "suiteNameTemplate": "{filepath}"
   }
 }
