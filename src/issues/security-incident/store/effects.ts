@@ -14,15 +14,17 @@ function* reportIncident(action) {
       ...action.payload,
     });
     yield put(showSuccess('Security incident has been successfully reported.'));
+    yield put(constants.REPORT_INCIDENT.success());
     yield put(closeModalDialog());
   } catch (error) {
     const errorMessage = `${translate(
       'Unable to report security incident.',
     )} ${format(error)}`;
     yield put(showError(errorMessage));
+    yield put(constants.REPORT_INCIDENT.failure());
   }
 }
 
 export default function* () {
-  yield takeEvery(constants.REPORT_INCIDENT, reportIncident);
+  yield takeEvery(constants.REPORT_INCIDENT.REQUEST, reportIncident);
 }
