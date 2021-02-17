@@ -1097,6 +1097,10 @@ msgstr ""
 msgid "Challenge code"
 msgstr ""
 
+#: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
+msgid "Change"
+msgstr ""
+
 #: src/issues/types/constants.ts
 msgid "Change Request"
 msgstr ""
