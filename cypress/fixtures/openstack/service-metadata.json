@@ -1,0 +1,166 @@
+{
+  "OpenStack": {
+    "url": "/api/openstack/",
+    "service_project_link_url": "/api/openstack-service-project-link/",
+    "resources": {
+      "FloatingIP": "/api/openstack-floating-ips/",
+      "SecurityGroup": "/api/openstack-security-groups/",
+      "Tenant": "/api/openstack-tenants/",
+      "Router": "/api/openstack-routers/",
+      "Port": "/api/openstack-ports/",
+      "Network": "/api/openstack-networks/",
+      "SubNet": "/api/openstack-subnets/"
+    },
+    "properties": {
+      "Flavor": "/api/openstack-flavors/",
+      "Image": "/api/openstack-images/",
+      "VolumeType": "/api/openstack-volume-types/"
+    },
+    "is_public_service": false
+  },
+  "OpenStackTenant": {
+    "url": "/api/openstacktenant/",
+    "service_project_link_url": "/api/openstacktenant-service-project-link/",
+    "resources": {
+      "Volume": "/api/openstacktenant-volumes/",
+      "Snapshot": "/api/openstacktenant-snapshots/",
+      "Instance": "/api/openstacktenant-instances/",
+      "Backup": "/api/openstacktenant-backups/",
+      "BackupSchedule": "/api/openstacktenant-backup-schedules/",
+      "SnapshotSchedule": "/api/openstacktenant-snapshot-schedules/"
+    },
+    "properties": {
+      "Image": "/api/openstacktenant-images/",
+      "Flavor": "/api/openstacktenant-flavors/",
+      "Network": "/api/openstacktenant-networks/",
+      "SubNet": "/api/openstacktenant-subnets/",
+      "FloatingIP": "/api/openstacktenant-floating-ips/",
+      "SecurityGroup": "/api/openstacktenant-security-groups/",
+      "VolumeAvailabilityZone": "/api/openstacktenant-volume-availability-zones/",
+      "InstanceAvailabilityZone": "/api/openstacktenant-instance-availability-zones/",
+      "VolumeType": "/api/openstacktenant-volume-types/"
+    },
+    "is_public_service": false
+  },
+  "Amazon": {
+    "url": "/api/aws/",
+    "service_project_link_url": "/api/aws-service-project-link/",
+    "resources": {
+      "Instance": "/api/aws-instances/",
+      "Volume": "/api/aws-volumes/"
+    },
+    "properties": {
+      "Region": "/api/aws-regions/",
+      "Image": "/api/aws-images/",
+      "Size": "/api/aws-sizes/"
+    },
+    "is_public_service": true
+  },
+  "Azure": {
+    "url": "/api/azure/",
+    "service_project_link_url": "/api/azure-service-project-link/",
+    "resources": {
+      "ResourceGroup": "/api/azure-resource-groups/",
+      "VirtualMachine": "/api/azure-virtualmachines/",
+      "PublicIP": "/api/azure-public-ips/",
+      "SQLServer": "/api/azure-sql-servers/",
+      "SQLDatabase": "/api/azure-sql-databases/"
+    },
+    "properties": {
+      "Image": "/api/azure-images/",
+      "Size": "/api/azure-sizes/",
+      "Location": "/api/azure-locations/"
+    },
+    "is_public_service": true
+  },
+  "DigitalOcean": {
+    "url": "/api/digitalocean/",
+    "service_project_link_url": "/api/digitalocean-service-project-link/",
+    "resources": {
+      "Droplet": "/api/digitalocean-droplets/"
+    },
+    "properties": {
+      "Region": "/api/digitalocean-regions/",
+      "Image": "/api/digitalocean-images/",
+      "Size": "/api/digitalocean-sizes/"
+    },
+    "is_public_service": true
+  },
+  "JIRA": {
+    "url": "/api/jira/",
+    "service_project_link_url": "/api/jira-service-project-link/",
+    "resources": {
+      "Project": "/api/jira-projects/"
+    },
+    "properties": {
+      "ProjectTemplate": "/api/jira-project-templates/",
+      "IssueType": "/api/jira-issue-types/",
+      "Priority": "/api/jira-priorities/"
+    },
+    "is_public_service": false
+  },
+  "Rancher": {
+    "url": "/api/rancher/",
+    "service_project_link_url": "/api/rancher-spl/",
+    "resources": {
+      "Cluster": "/api/rancher-clusters/",
+      "Application": "/api/rancher-apps/",
+      "Ingress": "/api/rancher-ingresses/",
+      "Service": "/api/rancher-services/"
+    },
+    "properties": {
+      "Project": "/api/rancher-projects/",
+      "Namespace": "/api/rancher-namespaces/",
+      "Template": "/api/rancher-templates/"
+    },
+    "is_public_service": false
+  },
+  "SLURM": {
+    "url": "/api/slurm/",
+    "service_project_link_url": "/api/slurm-service-project-link/",
+    "resources": {
+      "Allocation": "/api/slurm-allocations/"
+    },
+    "properties": {},
+    "is_public_service": false
+  },
+  "VMware": {
+    "url": "/api/vmware/",
+    "service_project_link_url": "/api/vmware-service-project-link/",
+    "resources": {
+      "VirtualMachine": "/api/vmware-virtual-machine/",
+      "Port": "/api/vmware-ports/",
+      "Disk": "/api/vmware-disks/"
+    },
+    "properties": {
+      "Template": "/api/vmware-templates/",
+      "Cluster": "/api/vmware-clusters/",
+      "Network": "/api/vmware-networks/",
+      "Datastore": "/api/vmware-datastores/",
+      "Folder": "/api/vmware-folders/"
+    },
+    "is_public_service": false
+  },
+  "WaldurRemote": {
+    "url": "/api/remote-waldur/",
+    "service_project_link_url": "/api/remote-waldur-spl/",
+    "resources": {},
+    "properties": {},
+    "is_public_service": true
+  },
+  "Zabbix": {
+    "url": "/api/zabbix/",
+    "service_project_link_url": "/api/zabbix-service-project-link/",
+    "resources": {
+      "Host": "/api/zabbix-hosts/",
+      "ITService": "/api/zabbix-itservices/"
+    },
+    "properties": {
+      "Template": "/api/zabbix-templates/",
+      "Trigger": "/api/zabbix-triggers/",
+      "UserGroup": "/api/zabbix-user-groups/",
+      "User": "/api/zabbix-users/"
+    },
+    "is_public_service": false
+  }
+}
