@@ -58,14 +58,10 @@ export const CustomerBookingManagement: FunctionComponent = () => {
     <Panel title={translate('Booking management')}>
       <BookingsCalendar
         customerUuid={customer.uuid}
-        isServiceProvider={customer.is_service_provider}
         {...bookingsCalendarProps}
       />
       <BookingsFilter />
-      <BookingsList
-        customerUuid={customer.uuid}
-        isServiceProvider={customer.is_service_provider}
-      />
+      <BookingsList customerUuid={customer.uuid} />
     </Panel>
   ) : null;
 };
