@@ -50,10 +50,9 @@ async function loadBookingOfferings({
   bookingsListCurrentPage: page,
   bookingsListPageSize: page_size,
   bookingsListSorting: sorting,
-  isServiceProvider,
 }: BookingsCalendarProps) {
   const bookings = await getBookingsList({
-    [isServiceProvider ? 'provider_uuid' : 'customer_uuid']: customerUuid,
+    connected_customer_uuid: customerUuid,
     offering_uuid: offeringUuid,
     offering_type: 'Marketplace.Booking',
     state: state?.map(({ value }) => value),
@@ -67,7 +66,6 @@ async function loadBookingOfferings({
 interface BookingsCalendarProps {
   customerUuid?: string;
   offeringUuid?: string;
-  isServiceProvider?: boolean;
   bookingsFilterState: BookingFilterStateOption[];
   bookingsListCurrentPage: number;
   bookingsListPageSize: number;
