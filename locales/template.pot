@@ -162,9 +162,7 @@ msgstr ""
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
-#: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/resources/usage/ResourceUsageButton.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -203,6 +201,14 @@ msgstr ""
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Actions"
+msgstr ""
+
+#: src/marketplace/resources/usage/ResourceUsageButton.tsx
+msgid "Actions===="
+msgstr ""
+
+#: src/marketplace/resources/list/PublicResourcesList.tsx
+msgid "Actionssssssss===="
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingActions.tsx
@@ -3662,6 +3668,10 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 msgid "Marketplace offering does not have any usage-based components."
+msgstr ""
+
+#: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
+msgid "Marketplace offering does not have any usages."
 msgstr ""
 
 #: src/marketplace/category/CategoryPage.tsx

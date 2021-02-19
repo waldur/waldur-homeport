@@ -31,6 +31,8 @@ export const ResourceUsageTabsContainer: FunctionComponent<ResourceUsageTabsCont
         'Marketplace offering does not have any usage-based components.',
       )}
     </h3>
+  ) : !value.usages ? (
+    <h3>{translate('Marketplace offering does not have any usages.')}</h3>
   ) : (
     <ResourceUsageTabs
       components={value.components}

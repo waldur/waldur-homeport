@@ -23,3 +23,5 @@ export const ChangePlanAction: FC<{ resource: Resource }> = ({ resource }) =>
       resource={resource}
     />
   ) : null;
+
+// good example of aciton
