@@ -22,5 +22,3 @@ export const SetBackendIdAction: FC<any> = ({ resource, reInitResource }) => (
     resource={resource}
   />
 );
-
-// the action for setting backend id

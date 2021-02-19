@@ -38,4 +38,3 @@ export const SupportActionsButton: FunctionComponent<SupportActionsButtonProps> 
     />
   );
 };
-// use this example
