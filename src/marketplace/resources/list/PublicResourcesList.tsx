@@ -73,8 +73,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ResourceStateField,
     },
     {
-      title: translate('Actionssssssss===='),
-      // render: ResourceUsageButton,
+      title: translate('Actions'),
       render: OfferingResourcesActions,
     },
   ];

@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { Resource } from '@waldur/resource/types';
+// import { Resource } from '@waldur/resource/types';
 
 const ResourceShowUsageDialog = lazyComponent(
   () =>
@@ -14,18 +14,30 @@ const ResourceShowUsageDialog = lazyComponent(
   'ResourceShowUsageDialog',
 );
 
-const validators = [validateState('OK')];
+// interface ResourceShowUsageButtonProps extends Resource {
+interface ResourceShowUsageButtonProps {
+  resource?: Resource;
+  offeringUuid: string;
+  resourceUuid: string;
+}
 
-export const ResourceShowUsageButton: FunctionComponent<{
-  resource: Resource;
-}> = ({ resource }) =>
-  resource.marketplace_resource_uuid !== null ? (
+// const validators = [validateState('OK')];
+
+export const ResourceShowUsageButton: FunctionComponent<ResourceShowUsageButtonProps> = ({
+  resource,
+  offeringUuid,
+  resourceUuid,
+}: any) => {
+  // console.log('ResourceShowUsageButton props', props);
+  return (
     <DialogActionItem
-      validators={validators}
+      // validators={validators}
       title={translate('Show usage')}
       icon="fa fa-eye"
       dialogSize="lg"
       modalComponent={ResourceShowUsageDialog}
       resource={resource}
+      extraResolve={{ offeringUuid, resourceUuid }}
     />
-  ) : null;
+  );
+};

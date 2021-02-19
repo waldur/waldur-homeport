@@ -8,7 +8,7 @@ import { OfferingsFilter } from './OfferingsFilter';
 import { OfferingsList } from './OfferingsList';
 
 export const OfferingsListContainer: FunctionComponent = () => {
-  useTitle(translate('Public offerings==='));
+  useTitle(translate('Public offerings'));
   return (
     <Panel>
       <OfferingsFilter />

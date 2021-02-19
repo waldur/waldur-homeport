@@ -4,7 +4,9 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-// import { Resource } from '@waldur/resource/types';
+import { Resource } from '@waldur/resource/types';
+
+import { UsageReportContext } from './types';
 
 const ResourceCreateUsageDialog = lazyComponent(
   () =>
@@ -14,27 +16,25 @@ const ResourceCreateUsageDialog = lazyComponent(
   'ResourceCreateUsageDialog',
 );
 
+interface ResourceCreateUsageButtonProps extends UsageReportContext {
+  disabled: boolean;
+  resource?: Resource;
+}
+
 const validators = [validateState('OK', 'Updating', 'Deleting')];
 
-export const ResourceCreateUsageButton: FunctionComponent<{
-  resource: any;
-}> = ({ resource }) =>
-  resource.marketplace_resource_uuid !== null ? (
-    <DialogActionItem
-      validators={validators}
-      title={translate('Report usage')}
-      icon="fa fa-plus"
-      // dialogSize="lg"
-      modalComponent={ResourceCreateUsageDialog}
-      // resource={resource}
-      resource={{
-        ...resource,
-        offering_uuid: resource.offering_uuid,
-        resource_uuid: resource.uuid,
-        resource_name: resource.name,
-        customer_name: resource.customer_name,
-        project_name: resource.project_name,
-        backend_id: resource.backend_id,
-      }}
-    />
-  ) : null;
+export const ResourceCreateUsageButton: FunctionComponent<ResourceCreateUsageButtonProps> = (
+  props,
+) => (
+  <DialogActionItem
+    validators={validators}
+    title={translate('Report usage')}
+    icon="fa fa-plus"
+    modalComponent={ResourceCreateUsageDialog}
+    resource={props.resource}
+    extraResolve={{
+      resource_uuid: props.resource_uuid,
+      resource_name: props.resource_name,
+    }}
+  />
+);
