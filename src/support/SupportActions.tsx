@@ -40,6 +40,7 @@ export const SupportActions: FunctionComponent<SupportActionsProps> = ({
     )}
     {resource.is_usage_based && (
       <ResourceShowUsageButton
+        resource={resource}
         offeringUuid={resource.offering_uuid}
         resourceUuid={resource.uuid}
       />

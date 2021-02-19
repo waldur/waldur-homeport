@@ -63,6 +63,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
         const body = (
           <div className={classNames({ disabled: !row.is_usage_based })}>
             <ResourceShowUsageButton
+              resource={row}
               offeringUuid={row.offering_uuid}
               resourceUuid={row.uuid}
             />

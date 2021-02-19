@@ -2,9 +2,8 @@ import { FunctionComponent } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-import { Resource } from '@waldur/resource/types';
-// import { Resource } from '@waldur/resource/types';
 
 const ResourceShowUsageDialog = lazyComponent(
   () =>
@@ -14,30 +13,26 @@ const ResourceShowUsageDialog = lazyComponent(
   'ResourceShowUsageDialog',
 );
 
-// interface ResourceShowUsageButtonProps extends Resource {
 interface ResourceShowUsageButtonProps {
-  resource?: Resource;
+  resource: any;
   offeringUuid: string;
   resourceUuid: string;
 }
 
-// const validators = [validateState('OK')];
+const validators = [validateState('OK')];
 
 export const ResourceShowUsageButton: FunctionComponent<ResourceShowUsageButtonProps> = ({
   resource,
   offeringUuid,
   resourceUuid,
-}: any) => {
-  // console.log('ResourceShowUsageButton props', props);
-  return (
-    <DialogActionItem
-      // validators={validators}
-      title={translate('Show usage')}
-      icon="fa fa-eye"
-      dialogSize="lg"
-      modalComponent={ResourceShowUsageDialog}
-      resource={resource}
-      extraResolve={{ offeringUuid, resourceUuid }}
-    />
-  );
-};
+}: any) => (
+  <DialogActionItem
+    validators={validators}
+    title={translate('Show usage')}
+    icon="fa fa-eye"
+    dialogSize="lg"
+    modalComponent={ResourceShowUsageDialog}
+    resource={resource}
+    extraResolve={{ offeringUuid, resourceUuid }}
+  />
+);

@@ -2,9 +2,8 @@ import { FunctionComponent } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-// import { validateState } from '@waldur/resource/actions/base';
+import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-import { Resource } from '@waldur/resource/types';
 
 import { UsageReportContext } from './types';
 
@@ -17,17 +16,17 @@ const ResourceCreateUsageDialog = lazyComponent(
 );
 
 interface ResourceCreateUsageButtonProps {
-  resource?: Resource;
+  resource: any;
   usageReportContext: UsageReportContext;
 }
 
-// const validators = [validateState('OK', 'Updating', 'Deleting')];
+const validators = [validateState('OK', 'Updating', 'Deleting')];
 
 export const ResourceCreateUsageButton: FunctionComponent<ResourceCreateUsageButtonProps> = (
   props,
 ) => (
   <DialogActionItem
-    // validators={validators}
+    validators={validators}
     title={translate('Report usage')}
     icon="fa fa-plus"
     modalComponent={ResourceCreateUsageDialog}

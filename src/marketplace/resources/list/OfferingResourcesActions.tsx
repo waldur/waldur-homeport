@@ -22,12 +22,14 @@ export const OfferingResourcesActions: FunctionComponent<OfferingResourcesAction
       actions={[
         () => (
           <ResourceShowUsageButton
+            resource={row}
             offeringUuid={row.offering_uuid}
             resourceUuid={row.uuid}
           />
         ),
         () => (
           <ResourceCreateUsageButton
+            resource={row}
             usageReportContext={{
               offering_uuid: row.offering_uuid,
               resource_uuid: row.uuid,

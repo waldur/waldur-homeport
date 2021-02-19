@@ -31,11 +31,13 @@ export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
   return (
     <ButtonGroup>
       <ResourceShowUsageButton
+        resource={row}
         offeringUuid={row.offering_uuid}
         resourceUuid={row.uuid}
       />
       {!is_support_only && (
         <ResourceCreateUsageButton
+          resource={row}
           usageReportContext={{
             offering_uuid: row.offering_uuid,
             resource_uuid: row.uuid,
