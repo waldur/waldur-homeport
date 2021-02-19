@@ -2,7 +2,7 @@ import { DialogSizeType } from '@waldur/modal/actions';
 import { ActionValidator } from '@waldur/resource/actions/types';
 
 type ModalComponentProps<T> = React.ComponentType<{
-  resolve?: { resource: T };
+  resolve: { resource: T };
   formId?: string;
 }>;
 

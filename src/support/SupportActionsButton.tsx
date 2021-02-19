@@ -10,7 +10,6 @@ import { ResourceActionComponent } from '@waldur/resource/actions/ResourceAction
 
 import { EditAction } from './EditAction';
 
-// action list
 const ActionsList = [
   EditAction,
   SubmitReportAction,

@@ -2,11 +2,6 @@ import { ComponentType, FunctionComponent } from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-// import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
-// import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
-// import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
-// import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
-// import { EditAction } from '@waldur/support/EditAction';
 
 interface ResourceActionComponentProps {
   onToggle: (isOpen: boolean) => void;
@@ -18,14 +13,6 @@ interface ResourceActionComponentProps {
   resource: any;
   reInitResource?(): void;
 }
-/*
-const ActionsList = [
-  EditAction,
-  SubmitReportAction,
-  ChangePlanAction,
-  SetBackendIdAction,
-  TerminateAction,
-];*/
 
 export const ResourceActionComponent: FunctionComponent<ResourceActionComponentProps> = (
   props,
