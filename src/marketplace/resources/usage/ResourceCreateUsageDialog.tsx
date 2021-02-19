@@ -11,24 +11,22 @@ import { ResourceUsageSubmitButton } from './ResourceUsageSubmitButton';
 import { UsageReportContext } from './types';
 
 interface ResourceCreateUsageDialogProps {
-  resolve: { resource: UsageReportContext };
+  resolve: UsageReportContext;
 }
 
 export const ResourceCreateUsageDialog: FunctionComponent<ResourceCreateUsageDialogProps> = (
   props,
 ) => {
-  // eslint-disable-next-line no-console
-  console.log('ResourceCreateUsageDialog props', props);
   const { loading, error, value } = useAsync(
-    () => getUsageComponents(props.resolve.resource),
+    () => getUsageComponents(props.resolve),
     [props.resolve],
   );
   return (
     <ModalDialog
       title={translate('Resource usage for {resource}', {
-        resource: props.resolve.resource.resource_name,
+        resource: props.resolve.resource_name,
       })}
-      footer={<ResourceUsageSubmitButton params={props.resolve.resource} />}
+      footer={<ResourceUsageSubmitButton params={props.resolve} />}
     >
       {loading ? (
         <LoadingSpinner />
@@ -42,7 +40,7 @@ export const ResourceCreateUsageDialog: FunctionComponent<ResourceCreateUsageDia
         </h3>
       ) : (
         <ResourceUsageFormContainer
-          params={props.resolve.resource}
+          params={props.resolve}
           components={value.components}
           periods={value.periods}
         />

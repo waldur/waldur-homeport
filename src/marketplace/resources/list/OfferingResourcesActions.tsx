@@ -26,7 +26,18 @@ export const OfferingResourcesActions: FunctionComponent<OfferingResourcesAction
             resourceUuid={row.uuid}
           />
         ),
-        ResourceCreateUsageButton,
+        () => (
+          <ResourceCreateUsageButton
+            usageReportContext={{
+              offering_uuid: row.offering_uuid,
+              resource_uuid: row.uuid,
+              resource_name: row.name,
+              customer_name: row.customer_name,
+              project_name: row.project_name,
+              backend_id: row.backend_id,
+            }}
+          />
+        ),
         SetBackendIdAction,
       ]}
       resource={row}
