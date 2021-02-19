@@ -1,12 +1,10 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
-
-import { UsageReportContext } from './types';
+import { validateState } from '@waldur/resource/actions/base';
+import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
+// import { Resource } from '@waldur/resource/types';
 
 const ResourceCreateUsageDialog = lazyComponent(
   () =>
@@ -16,22 +14,27 @@ const ResourceCreateUsageDialog = lazyComponent(
   'ResourceCreateUsageDialog',
 );
 
-export const ResourceCreateUsageButton: FunctionComponent<
-  UsageReportContext & { disabled: boolean }
-> = (props) => {
-  const dispatch = useDispatch();
-  const openDialog = () =>
-    dispatch(
-      openModalDialog(ResourceCreateUsageDialog, {
-        resolve: props,
-      }),
-    );
-  return (
-    <ActionButton
+const validators = [validateState('OK', 'Updating', 'Deleting')];
+
+export const ResourceCreateUsageButton: FunctionComponent<{
+  resource: any;
+}> = ({ resource }) =>
+  resource.marketplace_resource_uuid !== null ? (
+    <DialogActionItem
+      validators={validators}
       title={translate('Report usage')}
       icon="fa fa-plus"
-      action={openDialog}
-      disabled={props.disabled}
+      // dialogSize="lg"
+      modalComponent={ResourceCreateUsageDialog}
+      // resource={resource}
+      resource={{
+        ...resource,
+        offering_uuid: resource.offering_uuid,
+        resource_uuid: resource.uuid,
+        resource_name: resource.name,
+        customer_name: resource.customer_name,
+        project_name: resource.project_name,
+        backend_id: resource.backend_id,
+      }}
     />
-  );
-};
+  ) : null;

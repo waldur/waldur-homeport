@@ -16,7 +16,7 @@ const ResourceShowUsageDialog = lazyComponent(
 
 const validators = [validateState('OK')];
 
-export const ResourcesShowUsageButton: FunctionComponent<{
+export const ResourceShowUsageButton: FunctionComponent<{
   resource: Resource;
 }> = ({ resource }) =>
   resource.marketplace_resource_uuid !== null ? (

@@ -6,7 +6,8 @@ import { useBoolean } from 'react-use';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 // import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { Resource } from '@waldur/marketplace/resources/types';
-import { ResourcesShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
+import { ResourceCreateUsageButton } from '@waldur/marketplace/resources/usage/ResourceCreateUsageButton';
+import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
 
 // action list
@@ -14,7 +15,8 @@ const ActionsList = [
   // SubmitReportAction,
   // ChangePlanAction,
   SetBackendIdAction,
-  ResourcesShowUsageButton,
+  ResourceShowUsageButton,
+  ResourceCreateUsageButton,
   // TerminateAction,
 ];
 

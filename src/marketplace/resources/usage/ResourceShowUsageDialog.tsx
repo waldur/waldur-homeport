@@ -6,7 +6,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 interface ResourceUsageDialogProps {
-  resolve: { resource: { offering_uuid: string; resource_uuid: string } };
+  resolve: { resource: { offering_uuid: string; uuid: string } };
 }
 
 export const ResourceShowUsageDialog: FunctionComponent<ResourceUsageDialogProps> = (
@@ -21,7 +21,7 @@ export const ResourceShowUsageDialog: FunctionComponent<ResourceUsageDialogProps
     >
       <ResourceUsageTabsContainer
         offeringUuid={props.resolve.resource.offering_uuid}
-        resourceUuid={props.resolve.resource.resource_uuid}
+        resourceUuid={props.resolve.resource.uuid}
       />
     </ModalDialog>
   );

@@ -7,8 +7,8 @@ import { translate } from '@waldur/i18n';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { isSupportOnly } from '@waldur/workspace/selectors';
 
-import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
-import { ResourceShowUsageButton } from './ResourceShowUsageButton';
+// import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
+// import { ResourceShowUsageButton } from './ResourceShowUsageButton';
 
 interface Props {
   row: Pick<
@@ -31,7 +31,6 @@ export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
   if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
     return <>{'N/A'}</>;
   }
-  const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
   return (
     <DropdownButton
       title={translate('Actions====')}
@@ -43,13 +42,13 @@ export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
     >
       <MenuItem eventKey="1">{translate('Loading actions')}</MenuItem>
       <MenuItem eventKey="1">
-        <ResourceShowUsageButton
+        {/* <ResourceShowUsageButton
           offeringUuid={row.offering_uuid}
           resourceUuid={row.uuid}
-        />
+        />*/}
         {!is_support_only && (
           <MenuItem eventKey="1">
-            <ResourceCreateUsageButton
+            {/* <ResourceCreateUsageButton
               offering_uuid={row.offering_uuid}
               resource_uuid={row.uuid}
               resource_name={row.name}
@@ -57,7 +56,7 @@ export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
               project_name={row.project_name}
               backend_id={row.backend_id}
               disabled={disabled}
-            />
+            />*/}
           </MenuItem>
         )}
         <p>set backend id</p>

@@ -25,6 +25,9 @@ export interface BaseResource {
   marketplace_resource_uuid?: string;
   marketplace_category_uuid?: string;
   project_uuid?: string;
+  offering_uuid?: string;
+  customer_name?: string;
+  project_name?: string;
 }
 
 export interface Resource extends BaseResource {
