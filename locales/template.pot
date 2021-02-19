@@ -164,6 +164,7 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/marketplace/resources/usage/ResourceUsageButton.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
@@ -3514,6 +3515,7 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
+#: src/marketplace/resources/usage/ResourceUsageButton.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "Loading actions"
 msgstr ""
@@ -5592,12 +5594,15 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
-#: src/marketplace/offerings/OfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/sidebar.ts
 msgid "Public offerings"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingsListContainer.tsx
+msgid "Public offerings==="
 msgstr ""
 
 #: src/marketplace/orders/item/list/OrderItemsContainer.tsx

@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { OfferingResourcesActions } from '@waldur/marketplace/resources/list/OfferingResourcesActions';
 import { ResourceOpenDetail } from '@waldur/marketplace/resources/list/ResourceOpenDetail';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
@@ -15,8 +16,6 @@ import {
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
-
-import { ResourceUsageButton } from '../usage/ResourceUsageButton';
 
 import { TABLE_PUBLIC_RESOURCE } from './constants';
 import { PublicResourceLink } from './PublicResourceLink';
@@ -74,8 +73,9 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ResourceStateField,
     },
     {
-      title: translate('Actions'),
-      render: ResourceUsageButton,
+      title: translate('Actionssssssss===='),
+      // render: ResourceUsageButton,
+      render: OfferingResourcesActions,
     },
   ];
 

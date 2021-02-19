@@ -1,30 +1,26 @@
 import { FunctionComponent } from 'react';
 import { useBoolean } from 'react-use';
 
-import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
-import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
+// import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
+// import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
-import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
+// import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
 
-import { EditAction } from './EditAction';
-
 // action list
 const ActionsList = [
-  EditAction,
-  SubmitReportAction,
-  ChangePlanAction,
+  // SubmitReportAction,
+  // ChangePlanAction,
   SetBackendIdAction,
-  TerminateAction,
+  // TerminateAction,
 ];
 
 interface SupportActionsButtonProps {
-  resource: Resource;
-  reInitResource?(): void;
+  row: Resource;
 }
 
-export const SupportActionsButton: FunctionComponent<SupportActionsButtonProps> = (
+export const OfferingResourcesActions: FunctionComponent<SupportActionsButtonProps> = (
   props,
 ) => {
   const [open, onToggle] = useBoolean(false);
@@ -34,8 +30,7 @@ export const SupportActionsButton: FunctionComponent<SupportActionsButtonProps> 
       open={open}
       onToggle={onToggle}
       actions={ActionsList}
-      resource={props.resource}
-      reInitResource={props.reInitResource}
+      resource={props.row}
     />
   );
 };

@@ -34,7 +34,7 @@ export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
   const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
   return (
     <DropdownButton
-      title={translate('Actions')}
+      title={translate('Actions====')}
       id="resources-actions"
       className="dropdown-btn"
       onToggle={onToggle}
