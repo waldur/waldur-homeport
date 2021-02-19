@@ -69,7 +69,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
 
   columns.push({
     title: translate('Actions'),
-    render: ResourceActionsButton,
+    render: ResourceActionsButton, //
   });
 
   const tableActions = (

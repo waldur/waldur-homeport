@@ -102,7 +102,7 @@ export const submitReport = (resourceId: string, payload) =>
   post(`/marketplace-resources/${resourceId}/submit_report/`, payload);
 
 export const setBackendId = (resourceId: string, payload) =>
-  post(`/marketplace-resources/${resourceId}/set_backend_id/`, payload);
+  post(`/marketplace-resources/${resourceId}/set_backend_id/`, payload); // api endpoint
 
 export const uploadOfferingThumbnail = (offeringId, thumbnail) =>
   sendForm<Offering>(
