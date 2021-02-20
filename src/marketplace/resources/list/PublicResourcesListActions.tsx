@@ -7,11 +7,11 @@ import { ResourceCreateUsageButton } from '@waldur/marketplace/resources/usage/R
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
 
-interface OfferingResourcesActionsProps {
+interface PublicResourcesListActionsProps {
   row: Resource;
 }
 
-export const OfferingResourcesActions: FunctionComponent<OfferingResourcesActionsProps> = ({
+export const PublicResourcesListActions: FunctionComponent<PublicResourcesListActionsProps> = ({
   row,
 }) => {
   const [open, onToggle] = useBoolean(false);

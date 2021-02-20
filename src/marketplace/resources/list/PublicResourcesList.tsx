@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { OfferingResourcesActions } from '@waldur/marketplace/resources/list/OfferingResourcesActions';
+import { PublicResourcesListActions } from '@waldur/marketplace/resources/list/PublicResourcesListActions';
 import { ResourceOpenDetail } from '@waldur/marketplace/resources/list/ResourceOpenDetail';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
@@ -74,7 +74,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Actions'),
-      render: OfferingResourcesActions,
+      render: PublicResourcesListActions,
     },
   ];
 
