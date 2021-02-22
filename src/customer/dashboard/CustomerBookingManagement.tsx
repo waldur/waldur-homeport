@@ -30,7 +30,7 @@ const loadBookingResourcesCount = (customerUuid: string) =>
   getResourcesCount({
     params: {
       customer_uuid: customerUuid,
-      type: OFFERING_TYPE_BOOKING,
+      offering_type: OFFERING_TYPE_BOOKING,
     },
   });
 
