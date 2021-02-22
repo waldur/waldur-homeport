@@ -1,20 +1,11 @@
-import moment from 'moment-timezone';
+import moment from 'moment';
 
 import { translate } from '@waldur/i18n';
-import { palette } from '@waldur/slurm/details/constants';
+import { getComponentUsages } from '@waldur/marketplace/common/api';
+import { getChartSpec, palette } from '@waldur/slurm/details/constants';
 
-export interface Period {
-  month: number;
-  year: number;
-}
-
-interface Usage extends Period {
-  username: string;
-  full_name: string;
-  cpu_usage: number;
-  gpu_usage: number;
-  ram_usage: number;
-}
+import { getAllocationUserUsages } from './api';
+import { Period, Usage, UserUsage } from './types';
 
 const eChartInitialOption = () => ({
   color: palette,
@@ -71,8 +62,8 @@ const eChartInitialOption = () => ({
   ],
 });
 
-const getDistinctUsers = (userUsages: Usage[]): Usage[] => {
-  const distinctUsers: Usage[] = [];
+const getDistinctUsers = (userUsages: UserUsage[]): UserUsage[] => {
+  const distinctUsers: UserUsage[] = [];
   const map = new Map();
   for (const item of userUsages) {
     if (!map.has(item.username)) {
@@ -106,12 +97,12 @@ export const getPeriods = (xAxisPeriods: string[]): Period[] => {
 };
 
 const convertMBToGB = (mb: number): number =>
-  parseFloat((mb / 1000).toFixed(2));
+  parseFloat((mb / 1024).toFixed(2));
 
 const convertMinuteToHour = (minutes: number): number =>
   parseFloat((minutes / 60).toFixed(2));
 
-const setMaxAndAverageUsages = (option, usages, chart) => {
+const setMaxAndAverageUsages = (option, usages: Usage[], chart) => {
   let maxUsage = Math.max(...usages.map((usage) => usage[chart.field]));
   let averageUsage =
     usages.reduce((total, next) => total + next[chart.field], 0) /
@@ -138,7 +129,7 @@ const setUnitForRamUsage = (option, chart) => {
   }
 };
 
-const fillUsages = (option, periods, usages, chart) => {
+const fillUsages = (option, periods: Period[], usages: Usage[], chart) => {
   // filling data of line chart (general usages)
   for (let i = 0; i < periods.length; i++) {
     for (let j = 0; j < usages.length; j++) {
@@ -197,8 +188,11 @@ const filterUsagesBySixMonthsPeriod = (usages: Usage[]): Usage[] =>
     return sixMonthsAgo <= usageDate && usageDate <= moment();
   });
 
-const fillSeriesAndLegendWithDistinctUsers = (option, userUsages) => {
-  const distinctUsers: any = getDistinctUsers(userUsages);
+const fillSeriesAndLegendWithDistinctUsers = (
+  option,
+  userUsages: UserUsage[],
+) => {
+  const distinctUsers = getDistinctUsers(userUsages);
   distinctUsers.forEach((user) => {
     option.series.push({
       name: user.username,
@@ -210,7 +204,11 @@ const fillSeriesAndLegendWithDistinctUsers = (option, userUsages) => {
   });
 };
 
-export const getEChartOptions = (chart, usages, userUsages) => {
+export const getEChartOptions = (
+  chart,
+  usages: Usage[],
+  userUsages: UserUsage[],
+) => {
   const option = eChartInitialOption();
 
   // filling periods
@@ -225,4 +223,34 @@ export const getEChartOptions = (chart, usages, userUsages) => {
   fillUserUsages(option, periods, userUsages, chart);
 
   return option;
+};
+
+export const loadCharts = async (
+  allocationUrl: string,
+  resourceUuid: string,
+) => {
+  const componentUsages = await getComponentUsages(resourceUuid);
+  const periodUsages = {};
+  componentUsages.forEach((component) => {
+    const period = moment(component.billing_period).format('YYYY-MM');
+    periodUsages[period] = periodUsages[period] || {};
+    periodUsages[period][component.type] = component.usage;
+  });
+  const usages: Usage[] = Object.keys(periodUsages).map((period) => {
+    const date = moment(period, 'YYYY-MM');
+    return {
+      year: date.year(),
+      month: date.month() + 1,
+      cpu_usage: periodUsages[period].cpu,
+      gpu_usage: periodUsages[period].gpu,
+      ram_usage: periodUsages[period].ram,
+    };
+  });
+  const userUsages = await getAllocationUserUsages({
+    allocation: allocationUrl,
+  });
+  return getChartSpec().map((chart) => ({
+    ...chart,
+    options: getEChartOptions(chart, usages, userUsages),
+  }));
 };

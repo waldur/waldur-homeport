@@ -1,0 +1,62 @@
+[
+  {
+    "type": "cpu",
+    "usage": 1000,
+    "billing_period": "2020-02-01T00:00:00Z"
+  },
+  {
+    "type": "cpu",
+    "usage": 2000,
+    "billing_period": "2020-03-01T00:00:00Z"
+  },
+  {
+    "type": "cpu",
+    "usage": 4000,
+    "billing_period": "2020-04-01T00:00:00Z"
+  },
+  {
+    "type": "cpu",
+    "usage": 2000,
+    "billing_period": "2020-05-01T00:00:00Z"
+  },
+  {
+    "type": "gpu",
+    "usage": 1000,
+    "billing_period": "2020-02-01T00:00:00Z"
+  },
+  {
+    "type": "gpu",
+    "usage": 2000,
+    "billing_period": "2020-03-01T00:00:00Z"
+  },
+  {
+    "type": "gpu",
+    "usage": 4000,
+    "billing_period": "2020-04-01T00:00:00Z"
+  },
+  {
+    "type": "gpu",
+    "usage": 2000,
+    "billing_period": "2020-05-01T00:00:00Z"
+  },
+  {
+    "type": "ram",
+    "usage": 1000,
+    "billing_period": "2020-02-01T00:00:00Z"
+  },
+  {
+    "type": "ram",
+    "usage": 2000,
+    "billing_period": "2020-03-01T00:00:00Z"
+  },
+  {
+    "type": "ram",
+    "usage": 4000,
+    "billing_period": "2020-04-01T00:00:00Z"
+  },
+  {
+    "type": "ram",
+    "usage": 2000,
+    "billing_period": "2020-05-01T00:00:00Z"
+  }
+]

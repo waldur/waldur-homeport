@@ -33,7 +33,7 @@ import { Customer, Project } from '@waldur/workspace/types';
 
 import { OfferingDocument } from '../offerings/store/types';
 import { Resource } from '../resources/types';
-import { ResourcePlanPeriod } from '../resources/usage/types';
+import { ComponentUsage, ResourcePlanPeriod } from '../resources/usage/types';
 
 export const getPlugins = () =>
   get<PluginMetadata[]>('/marketplace-plugins/').then(
@@ -51,6 +51,11 @@ export const getCategoryUsages = (options?: {}) =>
     '/marketplace-category-component-usages/',
     options,
   );
+
+export const getComponentUsages = (resource_uuid: string) =>
+  getAll<ComponentUsage>('/marketplace-component-usages/', {
+    params: { resource_uuid },
+  });
 
 export const getCategory = (id: string, options?: AxiosRequestConfig) =>
   getById<Category>('/marketplace-categories/', id, options);

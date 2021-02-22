@@ -16,7 +16,7 @@
       "windows": {
         "program": "${workspaceFolder}/node_modules/jest/bin/jest"
       },
-      "runtimeExecutable": "${env:HOME}/.nvm/versions/node/v12.18.2/bin/node"
+      "runtimeExecutable": "${env:HOME}/.nvm/versions/node/v14.15.4/bin/node"
     }
   ]
 }

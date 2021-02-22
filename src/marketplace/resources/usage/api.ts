@@ -1,17 +1,13 @@
 import moment from 'moment-timezone';
 
-import { getAll } from '@waldur/core/api';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import {
+  getComponentUsages,
   getOffering,
   getResourcePlanPeriods,
 } from '@waldur/marketplace/common/api';
 
-import {
-  UsageReportContext,
-  ResourcePlanPeriod,
-  ComponentUsage,
-} from './types';
+import { UsageReportContext, ResourcePlanPeriod } from './types';
 
 export const getPeriodLabel = (
   period: Pick<ResourcePlanPeriod, 'start' | 'end' | 'plan_name'>,
@@ -51,11 +47,6 @@ export const getUsageComponents = async (params: UsageReportContext) => {
     periods: options,
   };
 };
-
-const getComponentUsages = (resource_uuid: string) =>
-  getAll<ComponentUsage>('/marketplace-component-usages/', {
-    params: { resource_uuid },
-  });
 
 const getUsageBasedOfferingComponents = async (offering_uuid: string) => {
   if (!offering_uuid) {
