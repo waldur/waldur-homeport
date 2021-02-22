@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
+import { DropdownButton } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useBoolean } from 'react-use';
 
+import { translate } from '@waldur/i18n';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { isSupportOnly } from '@waldur/workspace/selectors';
 
@@ -23,13 +25,22 @@ interface Props {
   >;
 }
 
-export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
+export const OfferingResourcesListActions: FunctionComponent<Props> = ({
+  row,
+}) => {
+  const [open, onToggle] = useBoolean(false);
   const is_support_only = useSelector(isSupportOnly);
   if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
     return <>{'N/A'}</>;
   }
   return (
-    <ButtonGroup>
+    <DropdownButton
+      title={translate('Actions')}
+      id="offering-resources-actions-dropdown-btn"
+      className="dropdown-btn"
+      onToggle={onToggle}
+      open={open}
+    >
       <ResourceShowUsageButton
         resource={row}
         offeringUuid={row.offering_uuid}
@@ -48,6 +59,6 @@ export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
           }}
         />
       )}
-    </ButtonGroup>
+    </DropdownButton>
   );
 };

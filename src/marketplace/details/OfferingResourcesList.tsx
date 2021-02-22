@@ -13,7 +13,7 @@ import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicRes
 import { PublicResourcesListPlaceholder } from '@waldur/marketplace/resources/list/PublicResourcesListPlaceholder';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { ResourceState } from '@waldur/marketplace/resources/types';
-import { ResourceUsageButton } from '@waldur/marketplace/resources/usage/ResourceUsageButton';
+import { OfferingResourcesListActions } from '@waldur/marketplace/resources/usage/OfferingResourcesListActions';
 import { Offering } from '@waldur/marketplace/types';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
@@ -60,7 +60,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Actions'),
-      render: ResourceUsageButton,
+      render: OfferingResourcesListActions,
     },
   ];
 
