@@ -2,18 +2,13 @@
   "toBeFeatures": [
     "compare",
     "apps",
-    "premiumSupport",
     "alerts",
     "mainSearch",
     "monitoring",
     "monitoring_state",
     "help",
-    "resource.applications",
     "support.activity",
-    "support.sla",
-    "support.assigned_to_me",
     "support.activity_stream",
-    "support.regular_issue_filters",
     "support.usage",
     "support.flowmap",
     "support.heatmap",
@@ -22,12 +17,10 @@
     "user.preferred_language",
     "user.competence",
     "backup",
-    "connected_issues",
     "jira",
     "marketplace.review",
     "marketplace.termsOfService",
     "marketplace.documents"
   ],
-  "featuresVisible": false,
-  "futureCategories": ["support", "apps"]
+  "featuresVisible": false
 }
