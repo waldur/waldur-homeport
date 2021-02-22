@@ -1174,10 +1174,6 @@ msgstr ""
 msgid "Choices as comma-separated list"
 msgstr ""
 
-#: src/form/list-field/ListFieldInternal.tsx
-msgid "Choose option"
-msgstr ""
-
 #: src/customer/popover/CustomerUsersList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
@@ -5186,10 +5182,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 msgid "Please select flavor to see price estimate."
-msgstr ""
-
-#: src/form/list-field/ListFieldModal.tsx
-msgid "Please select one"
 msgstr ""
 
 #: src/marketplace/offerings/create/AccountingStep.tsx
