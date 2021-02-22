@@ -18,11 +18,14 @@ const RulesPlaceholder: FC = () => (
   </tr>
 );
 
-interface Props extends WrappedFieldArrayProps {
+interface RulesListProps extends WrappedFieldArrayProps {
   remoteSecurityGroups: SecurityGroup[];
 }
 
-export const RulesList: FC<Props> = ({ fields, remoteSecurityGroups }) => (
+export const RulesList: FC<RulesListProps> = ({
+  fields,
+  remoteSecurityGroups,
+}) => (
   <>
     <Table bordered>
       {fields.length === 0 ? (

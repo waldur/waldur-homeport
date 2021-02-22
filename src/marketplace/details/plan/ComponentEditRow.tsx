@@ -11,7 +11,7 @@ import { getOfferingComponentValidator } from '@waldur/marketplace/offerings/sto
 import { ComponentRow } from './ComponentRow';
 import { Component } from './types';
 
-interface Props {
+interface ComponentEditRowProps {
   component: Component;
 }
 
@@ -40,7 +40,7 @@ const RowWrapper = (
   </ComponentRow>
 );
 
-export const ComponentEditRow: React.FC<Props> = (props) => (
+export const ComponentEditRow: React.FC<ComponentEditRowProps> = (props) => (
   <Field
     name={`limits.${props.component.type}`}
     parse={parseIntField}

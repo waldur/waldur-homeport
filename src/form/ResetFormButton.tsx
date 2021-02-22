@@ -4,7 +4,7 @@ import { reset } from 'redux-form';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
-interface Props extends TranslateProps {
+interface ResetFormButtonProps extends TranslateProps {
   label?: string;
   resetForm(): void;
   className?: string;
@@ -15,7 +15,7 @@ const PureResetFormButton = ({
   label,
   className,
   translate,
-}: Props) => (
+}: ResetFormButtonProps) => (
   <button
     type="button"
     className={className || 'btn btn-danger'}

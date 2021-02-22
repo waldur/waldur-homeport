@@ -10,7 +10,7 @@ import { isSupportOnly } from '@waldur/workspace/selectors';
 import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
 import { ResourceShowUsageButton } from './ResourceShowUsageButton';
 
-interface Props {
+interface ResourceUsageButtonProps {
   row: Pick<
     Resource,
     | 'state'
@@ -25,7 +25,7 @@ interface Props {
   >;
 }
 
-export const OfferingResourcesListActions: FunctionComponent<Props> = ({
+export const OfferingResourcesListActions: FunctionComponent<ResourceUsageButtonProps> = ({
   row,
 }) => {
   const [open, onToggle] = useBoolean(false);

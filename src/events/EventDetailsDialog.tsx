@@ -15,11 +15,13 @@ interface StateProps {
   isStaffOrSupport: boolean;
 }
 
-interface Props extends TranslateProps, StateProps {
+interface EventDetailsDialogProps extends TranslateProps, StateProps {
   resolve: { event: Event };
 }
 
-const PureEventDetailsDialog: FunctionComponent<Props> = (props) => (
+const PureEventDetailsDialog: FunctionComponent<EventDetailsDialogProps> = (
+  props,
+) => (
   <ModalDialog
     title={props.translate('Event details')}
     footer={<CloseDialogButton />}

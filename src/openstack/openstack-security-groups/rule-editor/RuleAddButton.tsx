@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 
 import { Rule } from './types';
 
-interface Props {
+interface RuleAddButtonProps {
   fields: FieldArrayFieldsProps<Rule>;
 }
 
@@ -18,7 +18,7 @@ const DEFAULT_RULE = {
   to_port: -1,
 };
 
-export const RuleAddButton: FC<Props> = ({ fields }) => (
+export const RuleAddButton: FC<RuleAddButtonProps> = ({ fields }) => (
   <Button
     bsStyle="primary"
     bsSize="sm"

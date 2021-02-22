@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
-interface Props {
+interface BooleanFieldProps {
   value: boolean;
 }
 
-export const BooleanField: FunctionComponent<Props> = ({ value }) => (
+export const BooleanField: FunctionComponent<BooleanFieldProps> = ({
+  value,
+}) => (
   <i
     className={classNames('fa', {
       'fa-check': value,

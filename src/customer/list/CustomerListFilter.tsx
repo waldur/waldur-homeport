@@ -7,11 +7,13 @@ import { PeriodOption } from '@waldur/form/types';
 import { AccountingPeriodField } from './AccountingPeriodField';
 import { AccountingRunningField } from './AccountingRunningField';
 
-interface Props {
+interface CustomerListFilterProps {
   accountingPeriods: PeriodOption[];
 }
 
-export const PureCustomerListFilter: FunctionComponent<Props> = (props) => (
+export const PureCustomerListFilter: FunctionComponent<CustomerListFilterProps> = (
+  props,
+) => (
   <div className="ibox">
     <div className="ibox-content m-b-sm border-bottom">
       <form className="form-inline">
@@ -28,6 +30,6 @@ export const PureCustomerListFilter: FunctionComponent<Props> = (props) => (
   </div>
 );
 
-export const CustomerListFilter = reduxForm<{}, Props>({
+export const CustomerListFilter = reduxForm<{}, CustomerListFilterProps>({
   form: 'customerListFilter',
 })(PureCustomerListFilter);

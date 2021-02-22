@@ -7,14 +7,14 @@ import { terminateOrderItem } from '@waldur/marketplace/common/api';
 import { showSuccess, showError } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-interface Props {
+interface OrderItemTerminateButtonProps {
   uuid: string;
   loadData(): void;
   showSuccess(msg: string): void;
   showError(msg: string): void;
 }
 
-class PureOrderItemTerminateButton extends Component<Props> {
+class PureOrderItemTerminateButton extends Component<OrderItemTerminateButtonProps> {
   state = {
     loading: false,
   };

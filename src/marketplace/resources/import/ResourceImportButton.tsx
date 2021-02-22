@@ -14,13 +14,15 @@ const ResourceImportDialog = lazyComponent(
   'ResourceImportDialog',
 );
 
-interface Props {
+interface ResourceImportButtonProps {
   category_uuid: string;
   project_uuid: string;
   openDialog(): void;
 }
 
-const PureResourceImportButton: React.FC<Props> = (props) => (
+const PureResourceImportButton: React.FC<ResourceImportButtonProps> = (
+  props,
+) => (
   <ActionButton
     title={translate('Import resource')}
     action={props.openDialog}

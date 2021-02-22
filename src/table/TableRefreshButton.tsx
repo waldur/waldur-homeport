@@ -2,11 +2,11 @@ import { FunctionComponent } from 'react';
 
 import { TranslateProps } from '@waldur/i18n/types';
 
-interface Props extends TranslateProps {
+interface TableRefreshButtonProps extends TranslateProps {
   fetch: () => void;
 }
 
-export const TableRefreshButton: FunctionComponent<Props> = ({
+export const TableRefreshButton: FunctionComponent<TableRefreshButtonProps> = ({
   fetch,
   translate,
 }) => (

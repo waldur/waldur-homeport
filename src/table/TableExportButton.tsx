@@ -3,11 +3,13 @@ import { Dropdown, DropdownMenu, DropdownToggle } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-interface Props {
+interface TableExportButtonProps {
   exportAs?: (format: string) => void;
 }
 
-export const TableExportButton: FunctionComponent<Props> = ({ exportAs }) => {
+export const TableExportButton: FunctionComponent<TableExportButtonProps> = ({
+  exportAs,
+}) => {
   const exporters = [
     {
       label: translate('Copy to clipboard'),
