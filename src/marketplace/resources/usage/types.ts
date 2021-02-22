@@ -34,6 +34,7 @@ export interface ComponentUsage {
   usage: number;
   date: string;
   description: string;
+  billing_period: string;
 }
 
 export interface ResourcePlanPeriod {

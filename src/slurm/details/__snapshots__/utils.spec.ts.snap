@@ -1,0 +1,393 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SLURM allocation usage chart formatter parses data and returns eChart option correctly 1`] = `
+Array [
+  Object {
+    "field": "cpu_usage",
+    "name": "CPU usage",
+    "options": Object {
+      "color": Array [
+        "#003366",
+        "#006699",
+        "#23c6c8",
+        "#eee8d5",
+        "#1c84c6",
+        "green",
+        "red",
+        "orange",
+        "yellow",
+        "purple",
+        "aqua",
+        "pink",
+      ],
+      "legend": Object {
+        "data": Array [
+          "Usage",
+          "douglas",
+          "steven",
+          "corey",
+        ],
+      },
+      "series": Array [
+        Object {
+          "data": Array [
+            16.67,
+            33.33,
+            66.67,
+            33.33,
+            0,
+            0,
+          ],
+          "name": "Usage",
+          "type": "line",
+          "yAxisIndex": 1,
+        },
+        Object {
+          "data": Array [
+            0,
+            0,
+            25,
+            0,
+            16.67,
+            0,
+          ],
+          "name": "douglas",
+          "type": "bar",
+          "yAxisIndex": 0,
+        },
+        Object {
+          "data": Array [
+            0,
+            16.67,
+            0,
+            66.67,
+            16.67,
+            0,
+          ],
+          "name": "steven",
+          "type": "bar",
+          "yAxisIndex": 0,
+        },
+        Object {
+          "data": Array [
+            0,
+            0,
+            8.33,
+            0,
+            0,
+            0,
+          ],
+          "name": "corey",
+          "type": "bar",
+          "yAxisIndex": 0,
+        },
+      ],
+      "tooltip": Object {
+        "axisPointer": Object {
+          "crossStyle": Object {
+            "color": "#999",
+          },
+          "type": "cross",
+        },
+        "trigger": "axis",
+      },
+      "xAxis": Array [
+        Object {
+          "axisPointer": Object {
+            "type": "shadow",
+          },
+          "data": Array [
+            "2 - 2020",
+            "3 - 2020",
+            "4 - 2020",
+            "5 - 2020",
+            "6 - 2020",
+            "7 - 2020",
+          ],
+          "type": "category",
+        },
+      ],
+      "yAxis": Array [
+        Object {
+          "axisLabel": Object {
+            "formatter": "{value} h",
+          },
+          "interval": 37.5,
+          "max": 80,
+          "min": 0,
+          "name": "Usage",
+          "type": "value",
+        },
+        Object {
+          "axisLabel": Object {
+            "formatter": "{value} h",
+          },
+          "interval": 37.5,
+          "max": 80,
+          "min": 0,
+          "name": "",
+          "type": "value",
+        },
+      ],
+    },
+  },
+  Object {
+    "field": "gpu_usage",
+    "name": "GPU usage",
+    "options": Object {
+      "color": Array [
+        "#003366",
+        "#006699",
+        "#23c6c8",
+        "#eee8d5",
+        "#1c84c6",
+        "green",
+        "red",
+        "orange",
+        "yellow",
+        "purple",
+        "aqua",
+        "pink",
+      ],
+      "legend": Object {
+        "data": Array [
+          "Usage",
+          "douglas",
+          "steven",
+          "corey",
+        ],
+      },
+      "series": Array [
+        Object {
+          "data": Array [
+            16.67,
+            33.33,
+            66.67,
+            33.33,
+            0,
+            0,
+          ],
+          "name": "Usage",
+          "type": "line",
+          "yAxisIndex": 1,
+        },
+        Object {
+          "data": Array [
+            0,
+            0,
+            25,
+            0,
+            16.67,
+            0,
+          ],
+          "name": "douglas",
+          "type": "bar",
+          "yAxisIndex": 0,
+        },
+        Object {
+          "data": Array [
+            0,
+            16.67,
+            0,
+            66.67,
+            16.67,
+            0,
+          ],
+          "name": "steven",
+          "type": "bar",
+          "yAxisIndex": 0,
+        },
+        Object {
+          "data": Array [
+            0,
+            0,
+            8.33,
+            0,
+            0,
+            0,
+          ],
+          "name": "corey",
+          "type": "bar",
+          "yAxisIndex": 0,
+        },
+      ],
+      "tooltip": Object {
+        "axisPointer": Object {
+          "crossStyle": Object {
+            "color": "#999",
+          },
+          "type": "cross",
+        },
+        "trigger": "axis",
+      },
+      "xAxis": Array [
+        Object {
+          "axisPointer": Object {
+            "type": "shadow",
+          },
+          "data": Array [
+            "2 - 2020",
+            "3 - 2020",
+            "4 - 2020",
+            "5 - 2020",
+            "6 - 2020",
+            "7 - 2020",
+          ],
+          "type": "category",
+        },
+      ],
+      "yAxis": Array [
+        Object {
+          "axisLabel": Object {
+            "formatter": "{value} h",
+          },
+          "interval": 37.5,
+          "max": 80,
+          "min": 0,
+          "name": "Usage",
+          "type": "value",
+        },
+        Object {
+          "axisLabel": Object {
+            "formatter": "{value} h",
+          },
+          "interval": 37.5,
+          "max": 80,
+          "min": 0,
+          "name": "",
+          "type": "value",
+        },
+      ],
+    },
+  },
+  Object {
+    "field": "ram_usage",
+    "name": "RAM usage",
+    "options": Object {
+      "color": Array [
+        "#003366",
+        "#006699",
+        "#23c6c8",
+        "#eee8d5",
+        "#1c84c6",
+        "green",
+        "red",
+        "orange",
+        "yellow",
+        "purple",
+        "aqua",
+        "pink",
+      ],
+      "legend": Object {
+        "data": Array [
+          "Usage",
+          "douglas",
+          "steven",
+          "corey",
+        ],
+      },
+      "series": Array [
+        Object {
+          "data": Array [
+            0.02,
+            0.03,
+            0.07,
+            0.03,
+            0,
+            0,
+          ],
+          "name": "Usage",
+          "type": "line",
+          "yAxisIndex": 1,
+        },
+        Object {
+          "data": Array [
+            0,
+            0,
+            0.02,
+            0,
+            0.02,
+            0,
+          ],
+          "name": "douglas",
+          "type": "bar",
+          "yAxisIndex": 0,
+        },
+        Object {
+          "data": Array [
+            0,
+            0.02,
+            0,
+            0.07,
+            0.02,
+            0,
+          ],
+          "name": "steven",
+          "type": "bar",
+          "yAxisIndex": 0,
+        },
+        Object {
+          "data": Array [
+            0,
+            0,
+            0.01,
+            0,
+            0,
+            0,
+          ],
+          "name": "corey",
+          "type": "bar",
+          "yAxisIndex": 0,
+        },
+      ],
+      "tooltip": Object {
+        "axisPointer": Object {
+          "crossStyle": Object {
+            "color": "#999",
+          },
+          "type": "cross",
+        },
+        "trigger": "axis",
+      },
+      "xAxis": Array [
+        Object {
+          "axisPointer": Object {
+            "type": "shadow",
+          },
+          "data": Array [
+            "2 - 2020",
+            "3 - 2020",
+            "4 - 2020",
+            "5 - 2020",
+            "6 - 2020",
+            "7 - 2020",
+          ],
+          "type": "category",
+        },
+      ],
+      "yAxis": Array [
+        Object {
+          "axisLabel": Object {
+            "formatter": "{value} GB-hours",
+          },
+          "interval": 0.04,
+          "max": 1,
+          "min": 0,
+          "name": "Usage",
+          "type": "value",
+        },
+        Object {
+          "axisLabel": Object {
+            "formatter": "{value} GB-hours",
+          },
+          "interval": 0.04,
+          "max": 1,
+          "min": 0,
+          "name": "",
+          "type": "value",
+        },
+      ],
+    },
+  },
+]
+`;
