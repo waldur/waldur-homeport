@@ -12,12 +12,12 @@ interface ZabbixHost extends Resource {
   host_group_name: string;
 }
 
-interface Props extends TranslateProps {
+interface ZabbixHostSummaryProps extends TranslateProps {
   resource: ZabbixHost;
 }
 
 export const ZabbixHostSummary = withTranslation(
-  ({ resource, translate }: Props) => (
+  ({ resource, translate }: ZabbixHostSummaryProps) => (
     <>
       <ResourceSummaryBase resource={resource} />
       <Field label={translate('Host name')} value={resource.visible_name} />

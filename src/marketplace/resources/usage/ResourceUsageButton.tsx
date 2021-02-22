@@ -8,7 +8,7 @@ import { isSupportOnly } from '@waldur/workspace/selectors';
 import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
 import { ResourceShowUsageButton } from './ResourceShowUsageButton';
 
-interface Props {
+interface ResourceUsageButtonProps {
   row: Pick<
     Resource,
     | 'state'
@@ -23,7 +23,9 @@ interface Props {
   >;
 }
 
-export const ResourceUsageButton: FunctionComponent<Props> = ({ row }) => {
+export const ResourceUsageButton: FunctionComponent<ResourceUsageButtonProps> = ({
+  row,
+}) => {
   const is_support_only = useSelector(isSupportOnly);
   if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
     return <>{'N/A'}</>;

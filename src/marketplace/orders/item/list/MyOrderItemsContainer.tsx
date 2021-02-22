@@ -17,7 +17,7 @@ interface StateOptions {
   label: string;
 }
 
-interface Props {
+interface MyOrderItemsContainerProps {
   orderFilterStateOptions: StateOptions[];
   setOrderStateFilter: (arg: StateOptions) => void;
 }
@@ -25,7 +25,7 @@ interface Props {
 const filterOptionsSelector = (state: RootState) =>
   state.marketplace.orders.tableFilter.stateOptions;
 
-export const MyOrderItemsContainer: React.FC<Props> = () => {
+export const MyOrderItemsContainer: React.FC<MyOrderItemsContainerProps> = () => {
   useTitle(translate('My orders'));
   const dispatch = useDispatch();
   const filterOptions = useSelector(filterOptionsSelector);

@@ -6,7 +6,7 @@ import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-interface Props {
+interface ComponentAccountingTypeFieldProps {
   removeOfferingQuotas(): void;
 }
 
@@ -17,7 +17,9 @@ export const getAccountingTypeOptions = () => [
   { label: translate('One-time on plan switch'), value: 'few' },
 ];
 
-export const ComponentAccountingTypeField: React.FC<Props> = (props) => (
+export const ComponentAccountingTypeField: React.FC<ComponentAccountingTypeFieldProps> = (
+  props,
+) => (
   <FormGroup label={translate('Accounting type')} required={true}>
     <Field
       name="billing_type"

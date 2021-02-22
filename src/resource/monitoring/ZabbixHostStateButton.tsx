@@ -40,13 +40,15 @@ const mapStateToParams = (state: ResourceState, translate: Translate) => {
   }
 };
 
-interface Props extends TranslateProps {
+interface ZabbixHostStateButtonProps extends TranslateProps {
   host: {
     state: ResourceState;
   };
 }
 
-export const PureZabbixHostStateButton: FunctionComponent<Props> = (props) => {
+export const PureZabbixHostStateButton: FunctionComponent<ZabbixHostStateButtonProps> = (
+  props,
+) => {
   const params = mapStateToParams(props.host.state, props.translate);
   return <ZabbixHostDetailsButton host={props.host} {...params} />;
 };

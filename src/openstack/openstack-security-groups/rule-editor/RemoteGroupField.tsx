@@ -10,11 +10,11 @@ interface Choice {
   name: string;
 }
 
-interface Props {
+interface RemoteGroupFieldProps {
   choices: Choice[];
 }
 
-export const RemoteGroupField: FC<Props> = ({ choices }) => (
+export const RemoteGroupField: FC<RemoteGroupFieldProps> = ({ choices }) => (
   <Field name="remote_group" component={FormField} componentClass="select">
     <option value="">{translate('None')}</option>
     {choices.map((choice, index) => (

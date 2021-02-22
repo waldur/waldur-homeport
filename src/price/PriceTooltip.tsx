@@ -8,12 +8,12 @@ import { RootState } from '@waldur/store/reducers';
 
 type AccountingMode = 'billing' | 'accounting';
 
-interface Props extends TranslateProps {
+interface PriceTooltipProps extends TranslateProps {
   estimated?: boolean;
   accountingMode: AccountingMode;
 }
 
-class PurePriceTooltip extends PureComponent<Props> {
+class PurePriceTooltip extends PureComponent<PriceTooltipProps> {
   getTooltipMessage() {
     const { translate, accountingMode, estimated } = this.props;
 

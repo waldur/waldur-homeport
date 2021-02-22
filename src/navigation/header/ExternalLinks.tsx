@@ -10,12 +10,12 @@ interface ExternalLink {
   url: string;
 }
 
-interface Props {
+interface ExternalLinksComponentProps {
   externalLinks: ExternalLink[];
   onSelect(eventKey: any): void;
 }
 
-const ExternalLinksComponent = (props: Props) =>
+const ExternalLinksComponent = (props: ExternalLinksComponentProps) =>
   props.externalLinks.length > 0 && (
     <DropdownButton
       title={translate('External links')}

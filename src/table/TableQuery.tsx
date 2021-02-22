@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 
 import './TableQuery.scss';
 
-interface Props {
+interface TableQueryProps {
   query: string;
   setQuery: (query: string) => void;
 }
@@ -14,7 +14,7 @@ interface State {
   query: string;
 }
 
-export class TableQuery extends Component<Props, State> {
+export class TableQuery extends Component<TableQueryProps, State> {
   constructor(props) {
     super(props);
     this.state = { query: props.query || '' };

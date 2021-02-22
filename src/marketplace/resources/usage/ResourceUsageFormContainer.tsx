@@ -10,7 +10,7 @@ import { submitUsage, FORM_ID } from '../store/constants';
 import { ResourceUsageForm } from './ResourceUsageForm';
 import { UsageReportContext, ComponentUsage } from './types';
 
-interface Props {
+interface OwnProps {
   components: OfferingComponent[];
   periods: any;
   params: UsageReportContext;
@@ -28,7 +28,7 @@ const mapComponents = (components: ComponentUsage[]) =>
     {},
   );
 
-const mapStateToProps = (_, ownProps: Props) =>
+const mapStateToProps = (_, ownProps: OwnProps) =>
   ownProps.periods
     ? {
         initialValues: {

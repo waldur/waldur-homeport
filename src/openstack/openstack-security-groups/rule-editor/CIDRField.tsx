@@ -31,11 +31,11 @@ const getCIDRPlaceholder = (rule: Rule) => {
   }
 };
 
-interface Props {
+interface CIDRFieldProps {
   rule: Rule;
 }
 
-export const CIDRField: FC<Props> = ({ rule }) => (
+export const CIDRField: FC<CIDRFieldProps> = ({ rule }) => (
   <Field
     name="cidr"
     component={FormField}
