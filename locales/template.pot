@@ -1004,7 +1004,7 @@ msgid "Caller"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/form/AppstoreListDialog.tsx
+#: src/form/ListDialog.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
@@ -6114,7 +6114,7 @@ msgstr ""
 msgid "Reserved slot by {name}"
 msgstr ""
 
-#: src/form/AppstoreListDialog.tsx
+#: src/form/ListDialog.tsx
 #: src/form/ResetFormButton.tsx
 #: src/vmware/actions/ResetAction.tsx
 msgid "Reset"
@@ -6617,7 +6617,7 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: src/form/AppstoreListDialog.tsx
+#: src/form/ListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx

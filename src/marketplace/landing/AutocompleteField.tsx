@@ -2,7 +2,19 @@ import { FunctionComponent } from 'react';
 import { components } from 'react-select';
 import { AsyncPaginate } from 'react-select-async-paginate';
 
-import { renderIcon } from '@waldur/form/optionRenderer';
+const renderIcon = (src: string, imgStyle: any) => (
+  <img
+    src={src}
+    style={{
+      display: 'inline-block',
+      marginRight: 10,
+      position: 'relative',
+      top: -2,
+      verticalAlign: 'middle',
+      ...imgStyle,
+    }}
+  />
+);
 
 const Option = (props) => {
   const img = renderIcon(props.data.thumbnail, { width: 19 });
