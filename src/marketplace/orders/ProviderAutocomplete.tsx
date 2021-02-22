@@ -5,11 +5,13 @@ import { Field } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { providerAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
-interface Props {
+interface ProviderAutocompleteProps {
   className?: string;
 }
 
-export const ProviderAutocomplete: React.FC<Props> = (props) => (
+export const ProviderAutocomplete: React.FC<ProviderAutocompleteProps> = (
+  props,
+) => (
   <div className={`form-group ${props.className}`}>
     <label className="control-label">{translate('Service provider')}</label>
     <Field

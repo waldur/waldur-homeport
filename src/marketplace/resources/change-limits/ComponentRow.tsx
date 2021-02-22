@@ -12,7 +12,7 @@ import { PriceField } from '@waldur/marketplace/resources/change-limits/PriceFie
 
 import { ComponentRowType } from './connector';
 
-interface Props {
+interface ComponentRowProps {
   component: ComponentRowType;
   limits: Limits;
 }
@@ -34,7 +34,10 @@ const CellWrapper: FunctionComponent<any> = (props) => (
   </td>
 );
 
-export const ComponentRow: React.FC<Props> = ({ component, limits }) => (
+export const ComponentRow: React.FC<ComponentRowProps> = ({
+  component,
+  limits,
+}) => (
   <tr>
     <td>
       <p className="form-control-static">{component.name}</p>

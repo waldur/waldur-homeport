@@ -7,11 +7,11 @@ import { FormField } from './FormField';
 import { Rule } from './types';
 import { getPortMax } from './utils';
 
-interface Props {
+interface FromPortFieldProps {
   rule: Rule;
 }
 
-export const FromPortField: FC<Props> = ({ rule }) => {
+export const FromPortField: FC<FromPortFieldProps> = ({ rule }) => {
   const max = getPortMax(rule);
   const validate = useMemo(() => [required, maxValue(max)], [max]);
   return (

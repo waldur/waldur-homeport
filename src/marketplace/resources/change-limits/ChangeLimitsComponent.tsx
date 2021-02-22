@@ -9,12 +9,14 @@ import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { ComponentRow } from './ComponentRow';
 import { StateProps } from './connector';
 
-interface Props extends StateProps {
+interface ChangeLimitsComponentProps extends StateProps {
   plan: Plan;
   offeringLimits: OfferingLimits;
 }
 
-export const ChangeLimitsComponent: React.FC<Props> = (props) => (
+export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = (
+  props,
+) => (
   <div>
     {props.plan ? (
       <p>

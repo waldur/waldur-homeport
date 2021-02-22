@@ -18,7 +18,7 @@ const CustomerPopover = lazyComponent(
   'CustomerPopover',
 );
 
-interface Props {
+interface IssueRowProps {
   item: Issue;
   openUserDialog(id: string): void;
   openCustomerDialog(id: string): void;
@@ -36,7 +36,7 @@ const connector = connect(null, (dispatch) => ({
     ),
 }));
 
-export const IssueRow = connector((props: Props) => (
+export const IssueRow = connector((props: IssueRowProps) => (
   <tr>
     <td>
       <Tooltip label={props.item.type} id="issue-type-label">

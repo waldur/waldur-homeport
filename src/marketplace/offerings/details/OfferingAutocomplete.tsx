@@ -5,12 +5,14 @@ import { translate } from '@waldur/i18n';
 import { offeringsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { AutocompleteField } from '@waldur/marketplace/landing/AutocompleteField';
 
-interface Props {
+interface OfferingAutocompleteProps {
   offeringFilter?: object;
   className?: string;
 }
 
-export const OfferingAutocomplete: React.FC<Props> = (props) => (
+export const OfferingAutocomplete: React.FC<OfferingAutocompleteProps> = (
+  props,
+) => (
   <div className={`form-group ${props.className}`}>
     <label className="control-label">{translate('Offering')}</label>
     <Field

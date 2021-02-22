@@ -9,11 +9,13 @@ import {
 } from '@waldur/marketplace/common/utils';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
-interface Props {
+interface OfferingLimitsTableProps {
   components: OfferingComponent[];
 }
 
-export const OfferingLimitsTable: React.FC<Props> = (props) => (
+export const OfferingLimitsTable: React.FC<OfferingLimitsTableProps> = (
+  props,
+) => (
   <div className="form-group">
     <Col smOffset={2} sm={8} className="m-b-sm">
       <p className="form-control-static">

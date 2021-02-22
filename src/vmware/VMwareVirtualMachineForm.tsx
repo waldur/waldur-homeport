@@ -46,7 +46,7 @@ const GuestOSField = formValues<any>({
   ) : null,
 );
 
-interface Props extends OfferingConfigurationFormProps {
+interface VMwareVirtualMachineFormProps extends OfferingConfigurationFormProps {
   variable: {
     settings_uuid: string;
     customer_uuid: string;
@@ -271,16 +271,18 @@ const FormComponent = (props: any) => {
   );
 };
 
-export const VMwareVirtualMachineForm = connector((props: Props) => {
-  const { loading, error, value } = useAsync(
-    () => loadFormOptions(props.variable),
-    [props.variable],
-  );
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-  if (error) {
-    return <>{translate('Unable to load form options.')}</>;
-  }
-  return <FormComponent {...props} data={value} />;
-});
+export const VMwareVirtualMachineForm = connector(
+  (props: VMwareVirtualMachineFormProps) => {
+    const { loading, error, value } = useAsync(
+      () => loadFormOptions(props.variable),
+      [props.variable],
+    );
+    if (loading) {
+      return <LoadingSpinner />;
+    }
+    if (error) {
+      return <>{translate('Unable to load form options.')}</>;
+    }
+    return <FormComponent {...props} data={value} />;
+  },
+);

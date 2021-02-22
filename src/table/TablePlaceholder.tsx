@@ -2,12 +2,12 @@ import { FunctionComponent } from 'react';
 
 import { getMessage } from './utils';
 
-interface Props {
+interface TablePlaceholderProps {
   query?: string;
   verboseName?: string;
 }
 
-export const TablePlaceholder: FunctionComponent<Props> = ({
+export const TablePlaceholder: FunctionComponent<TablePlaceholderProps> = ({
   query,
   verboseName,
 }) => {

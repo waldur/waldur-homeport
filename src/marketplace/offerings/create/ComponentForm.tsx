@@ -9,11 +9,11 @@ import { ComponentAccountingTypeField } from './ComponentAccountingTypeField';
 import { ComponentLimit } from './ComponentLimit';
 import { ComponentMeasuredUnitField } from './ComponentMeasuredUnitField';
 
-interface Props {
+interface ComponentFormProps {
   removeOfferingQuotas(): void;
 }
 
-export const ComponentForm: FunctionComponent<Props> = (props) => (
+export const ComponentForm: FunctionComponent<ComponentFormProps> = (props) => (
   <>
     <InternalNameField name="type" />
     <DisplayNameField name="name" />

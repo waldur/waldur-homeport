@@ -14,12 +14,14 @@ import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter'
 import { RootState } from '@waldur/store/reducers';
 import { Customer, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-interface Props {
+interface SupportUsageFilterProps {
   options: PeriodOption[];
   customer: Customer;
 }
 
-const PureSupportUsageFilter: FunctionComponent<Props> = (props) => (
+const PureSupportUsageFilter: FunctionComponent<SupportUsageFilterProps> = (
+  props,
+) => (
   <Row>
     <AccountingPeriodFilter options={props.options} />
     <OrganizationAutocomplete />

@@ -6,11 +6,13 @@ import { FormattedHtml } from './core/FormattedHtml';
 import { LoadingSpinner } from './core/LoadingSpinner';
 import { translate } from './i18n';
 
-interface Props {
+interface TemplateComponentProps {
   url: string;
 }
 
-export const TemplateComponent: FunctionComponent<Props> = (props) => {
+export const TemplateComponent: FunctionComponent<TemplateComponentProps> = (
+  props,
+) => {
   const { loading, error, value } = useAsync(
     () => Axios.get(props.url).then((response) => response.data),
     [],
