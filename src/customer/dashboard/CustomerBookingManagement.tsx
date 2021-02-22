@@ -4,6 +4,7 @@ import { useAsync } from 'react-use';
 
 import { BookingsFilter } from '@waldur/booking/BookingsFilter';
 import { BookingsList } from '@waldur/booking/BookingsList';
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { BookingsCalendar } from '@waldur/customer/dashboard/BookingsCalendar';
@@ -20,7 +21,7 @@ const loadBookingOfferingsCount = (customerUuid: string) =>
   getOfferingsCount({
     params: {
       customer_uuid: customerUuid,
-      type: 'Marketplace.Booking',
+      type: OFFERING_TYPE_BOOKING,
       state: ['Active', 'Paused'],
     },
   });
@@ -29,7 +30,7 @@ const loadBookingResourcesCount = (customerUuid: string) =>
   getResourcesCount({
     params: {
       customer_uuid: customerUuid,
-      type: 'Marketplace.Booking',
+      type: OFFERING_TYPE_BOOKING,
     },
   });
 
