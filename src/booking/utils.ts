@@ -5,6 +5,7 @@ import moment from 'moment';
 import {
   BOOKING_RESOURCES_TABLE,
   CURSOR_NOT_ALLOWED_CLASSNAME,
+  OFFERING_TYPE_BOOKING,
 } from '@waldur/booking/constants';
 import { orderByFilter } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -349,7 +350,7 @@ export const updateBookingsList = (
   sorting,
 ) =>
   fetchListStart(BOOKING_RESOURCES_TABLE, {
-    offering_type: 'Marketplace.Booking',
+    offering_type: OFFERING_TYPE_BOOKING,
     o: orderByFilter(sorting),
     state: filterState.map(({ value }) => value),
     offering_uuid,

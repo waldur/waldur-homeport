@@ -6,6 +6,7 @@ import { getBookingsList } from '@waldur/booking/api';
 import { BookingFilterStateOption } from '@waldur/booking/BookingStateFilter';
 import { Calendar } from '@waldur/booking/components/calendar/Calendar';
 import { eventRender } from '@waldur/booking/components/utils';
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { eventsMapper } from '@waldur/booking/utils';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -54,7 +55,7 @@ async function loadBookingOfferings({
   const bookings = await getBookingsList({
     connected_customer_uuid: customerUuid,
     offering_uuid: offeringUuid,
-    offering_type: 'Marketplace.Booking',
+    offering_type: OFFERING_TYPE_BOOKING,
     state: state?.map(({ value }) => value),
     page,
     page_size,

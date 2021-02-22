@@ -3,7 +3,6 @@ export { StringField } from './StringField';
 export { TextField } from './TextField';
 export { SelectField } from './SelectField';
 export { SelectAsyncField } from './SelectAsyncField';
-export { SelectIconField } from './SelectIconField';
 export { SubmitButton } from './SubmitButton';
 export { CancelButton } from './CancelButton';
 export { FormContainer } from './FormContainer';

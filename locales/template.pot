@@ -1005,7 +1005,7 @@ msgid "Caller"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
-#: src/form/AppstoreListDialog.tsx
+#: src/form/ListDialog.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
@@ -1173,10 +1173,6 @@ msgstr ""
 
 #: src/marketplace/offerings/option/OptionForm.tsx
 msgid "Choices as comma-separated list"
-msgstr ""
-
-#: src/form/list-field/ListFieldInternal.tsx
-msgid "Choose option"
 msgstr ""
 
 #: src/customer/popover/CustomerUsersList.tsx
@@ -5189,10 +5185,6 @@ msgstr ""
 msgid "Please select flavor to see price estimate."
 msgstr ""
 
-#: src/form/list-field/ListFieldModal.tsx
-msgid "Please select one"
-msgstr ""
-
 #: src/marketplace/offerings/create/AccountingStep.tsx
 msgid "Please select type in Management tab first."
 msgstr ""
@@ -6115,7 +6107,7 @@ msgstr ""
 msgid "Reserved slot by {name}"
 msgstr ""
 
-#: src/form/AppstoreListDialog.tsx
+#: src/form/ListDialog.tsx
 #: src/form/ResetFormButton.tsx
 #: src/vmware/actions/ResetAction.tsx
 msgid "Reset"
@@ -6618,7 +6610,7 @@ msgstr ""
 msgid "Segmentation ID"
 msgstr ""
 
-#: src/form/AppstoreListDialog.tsx
+#: src/form/ListDialog.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
 #: src/navigation/workspace/ProjectsPanel.tsx

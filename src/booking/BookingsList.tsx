@@ -6,7 +6,10 @@ import { BookingActions } from '@waldur/booking/BookingActions';
 import { BookingsListExpandableRow } from '@waldur/booking/BookingsListExpandableRow';
 import { BookingStateField } from '@waldur/booking/BookingStateField';
 import { BookingTimeSlotsField } from '@waldur/booking/BookingTimeSlotsField';
-import { BOOKING_RESOURCES_TABLE } from '@waldur/booking/constants';
+import {
+  BOOKING_RESOURCES_TABLE,
+  OFFERING_TYPE_BOOKING,
+} from '@waldur/booking/constants';
 import { CreatedByField } from '@waldur/booking/CreatedByField';
 import { translate, withTranslation } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
@@ -81,7 +84,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 const mapPropsToFilter = (props: StateProps & OwnProps) => {
   const filter: Record<string, any> = {
-    offering_type: 'Marketplace.Booking',
+    offering_type: OFFERING_TYPE_BOOKING,
   };
   if (props.offeringUuid) {
     filter.offering_uuid = props.offeringUuid;

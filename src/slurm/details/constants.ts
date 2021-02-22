@@ -4,17 +4,14 @@ export const getChartSpec = () => [
   {
     name: translate('CPU usage'),
     field: 'cpu_usage',
-    factor: 60,
   },
   {
     name: translate('GPU usage'),
     field: 'gpu_usage',
-    factor: 60,
   },
   {
     name: translate('RAM usage'),
     field: 'ram_usage',
-    factor: 1024,
   },
 ];
 
