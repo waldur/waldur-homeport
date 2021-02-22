@@ -3,7 +3,7 @@ import React from 'react';
 import { CustomComponentInputProps, FilterOptions } from '@waldur/form/types';
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 
-import { AppstoreListDialog } from './AppstoreListDialog';
+import { ListDialog } from './ListDialog';
 
 export interface SelectDialogFieldChoice extends Record<string, any> {
   url: string;
@@ -77,7 +77,7 @@ export class SelectDialogFieldComponent extends React.Component<
             props.translate('Show choices')}{' '}
           <i className="fa fa-caret-down" />
         </a>
-        <AppstoreListDialog
+        <ListDialog
           show={this.state.showListDialog}
           title={props.dialogTitle}
           columns={props.columns}
