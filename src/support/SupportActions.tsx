@@ -38,13 +38,11 @@ export const SupportActions: FunctionComponent<SupportActionsProps> = ({
     {resource.offering_uuid && (
       <OfferingDetailsButton offering={resource.offering_uuid} />
     )}
-    {resource.is_usage_based && (
-      <ResourceShowUsageButton
-        resource={resource}
-        offeringUuid={resource.offering_uuid}
-        resourceUuid={resource.uuid}
-      />
-    )}
+    <ResourceShowUsageButton
+      resource={resource}
+      offeringUuid={resource.offering_uuid}
+      resourceUuid={resource.uuid}
+    />
     {resource.plan_uuid && <PlanDetailsButton resource={resource.uuid} />}
   </div>
 );

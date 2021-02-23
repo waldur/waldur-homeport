@@ -1,5 +1,6 @@
 import { ChangeLimitsAction } from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
+import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 
 import { EditAction } from './EditAction';
 import { PullTenantAction } from './PullTenantAction';
@@ -13,4 +14,5 @@ export default [
   ChangePlanAction,
   ChangeLimitsAction,
   TerminateTenantAction,
+  ResourceShowUsageButton,
 ];

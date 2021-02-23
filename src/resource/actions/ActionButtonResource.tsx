@@ -9,6 +9,8 @@ import { ResourceActionComponent } from './ResourceActionComponent';
 interface ActionButtonResourceProps {
   url: string;
   disabled?: boolean;
+  offeringUuid?: string;
+  resourceUuid?: string;
 }
 
 async function loadData(url: string) {
@@ -21,7 +23,7 @@ async function loadData(url: string) {
 export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
   props,
 ) => {
-  const { url } = props;
+  const { url, offeringUuid, resourceUuid } = props;
 
   const [{ loading, error, value }, getActions] = useAsyncFn(
     () => loadData(url),
@@ -45,6 +47,8 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
       actions={value?.actions}
       onToggle={onToggle}
       resource={value?.resource}
+      offeringUuid={offeringUuid}
+      resourceUuid={resourceUuid}
     />
   );
 };

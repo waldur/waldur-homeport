@@ -2,7 +2,6 @@ import React, { useMemo, FunctionComponent } from 'react';
 
 import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsButton';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
-import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { OpenStackInstanceTenantButton } from '@waldur/openstack/openstack-instance/OpenStackInstanceTenantButton';
 
 import { ActionButtonResource } from './actions/ActionButtonResource';
@@ -29,19 +28,16 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
         <div className="row m-b-md">
           <div className="col-lg-12">
             <div className="pull-right">
-              <ActionButtonResource url={resource.url} />
+              <ActionButtonResource
+                url={resource.url}
+                offeringUuid={resource.marketplace_offering_uuid}
+                resourceUuid={resource.marketplace_resource_uuid}
+              />
               <ResourceRefreshButton refreshResource={refreshResource} />
               <OpenStackInstanceTenantButton resource={resource} />
               {resource.marketplace_offering_uuid && (
                 <OfferingDetailsButton
                   offering={resource.marketplace_offering_uuid}
-                />
-              )}
-              {resource.is_usage_based && (
-                <ResourceShowUsageButton
-                  resource={resource}
-                  offeringUuid={resource.marketplace_offering_uuid}
-                  resourceUuid={resource.marketplace_resource_uuid}
                 />
               )}
               {resource.marketplace_plan_uuid && (

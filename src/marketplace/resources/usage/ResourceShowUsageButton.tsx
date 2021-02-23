@@ -15,8 +15,8 @@ const ResourceShowUsageDialog = lazyComponent(
 
 interface ResourceShowUsageButtonProps {
   resource: any;
-  offeringUuid: string;
-  resourceUuid: string;
+  offeringUuid?: string;
+  resourceUuid?: string;
 }
 
 const validators = [validateState('OK')];
@@ -25,14 +25,15 @@ export const ResourceShowUsageButton: FunctionComponent<ResourceShowUsageButtonP
   resource,
   offeringUuid,
   resourceUuid,
-}: any) => (
-  <DialogActionItem
-    validators={validators}
-    title={translate('Show usage')}
-    icon="fa fa-eye"
-    dialogSize="lg"
-    modalComponent={ResourceShowUsageDialog}
-    resource={resource}
-    extraResolve={{ offeringUuid, resourceUuid }}
-  />
-);
+}: any) =>
+  resource.is_usage_based ? (
+    <DialogActionItem
+      validators={validators}
+      title={translate('Show usage')}
+      icon="fa fa-eye"
+      dialogSize="lg"
+      modalComponent={ResourceShowUsageDialog}
+      resource={resource}
+      extraResolve={{ offeringUuid, resourceUuid }}
+    />
+  ) : null;

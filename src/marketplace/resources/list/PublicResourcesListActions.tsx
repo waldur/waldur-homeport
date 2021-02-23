@@ -19,14 +19,10 @@ export const PublicResourcesListActions: FunctionComponent<PublicResourcesListAc
     <ResourceActionComponent
       open={open}
       onToggle={onToggle}
+      offeringUuid={row.offering_uuid}
+      resourceUuid={row.uuid}
       actions={[
-        () => (
-          <ResourceShowUsageButton
-            resource={row}
-            offeringUuid={row.offering_uuid}
-            resourceUuid={row.uuid}
-          />
-        ),
+        ResourceShowUsageButton,
         () => (
           <ResourceCreateUsageButton
             resource={row}

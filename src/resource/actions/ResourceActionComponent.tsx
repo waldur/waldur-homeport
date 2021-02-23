@@ -9,8 +9,15 @@ interface ResourceActionComponentProps {
   open?: boolean;
   loading?: boolean;
   error?: object;
-  actions: ComponentType<{ resource; reInitResource }>[];
+  actions: ComponentType<{
+    resource;
+    reInitResource;
+    offeringUuid?;
+    resourceUuid?;
+  }>[];
   resource: any;
+  offeringUuid?: string;
+  resourceUuid?: string;
   reInitResource?(): void;
 }
 
@@ -37,6 +44,8 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
               key={index}
               resource={props.resource}
               reInitResource={props.reInitResource}
+              offeringUuid={props.offeringUuid}
+              resourceUuid={props.resourceUuid}
             />
           ))}
         </>
