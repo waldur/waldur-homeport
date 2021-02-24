@@ -56,7 +56,7 @@ const mergeProps = (
           stateProps.isServiceManager),
     },
     {
-      label: translate('Reject'),
+      label: translate('Reject===='),
       handler: () =>
         dispatchProps.rejectBookingItem({
           ...ownProps.row,

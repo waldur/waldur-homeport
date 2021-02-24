@@ -74,6 +74,7 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
     <>
       <Row className="m-b-md">
         <Col sm={12}>
+          {/*add actions dropdown above*/}
           <ResourceSummary resource={resource} />
         </Col>
       </Row>

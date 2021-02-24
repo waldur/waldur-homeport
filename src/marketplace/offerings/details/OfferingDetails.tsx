@@ -23,6 +23,7 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => (
         className="pull-right m-r-md"
         style={{ position: 'relative', zIndex: 100 }}
       >
+        {/*actions example*/}
         <OfferingActions offering={props.offering} />
       </div>
     )}

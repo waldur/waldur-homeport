@@ -11,7 +11,7 @@ export const acceptBooking = (bookingUuid: string) =>
   post(`/booking-resources/${bookingUuid}/accept/`);
 
 export const rejectBooking = (bookingUuid: string) =>
-  post(`/booking-resources/${bookingUuid}/reject/`);
+  post(`/booking-resources/${bookingUuid}/reject/`); // api endpoint of reject
 
 export const getOfferingBookedItems = (offeringUuid: string) =>
   getAll<BookedItem[]>(`/marketplace-bookings/${offeringUuid}/`).then(

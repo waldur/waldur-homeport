@@ -60,7 +60,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
   if (!props.actionsDisabled) {
     columns.push({
-      title: translate('Actions'),
+      title: translate('Actions===='),
       render: ({ row }) => (
         <BookingActions
           row={row}
