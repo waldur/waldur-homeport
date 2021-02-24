@@ -1,10 +1,12 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+// import { OfferingActions } from '@waldur/marketplace/offerings/actions/OfferingActions';
+import { ResourceActions } from '@waldur/marketplace/resources/ResourceActions';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
@@ -71,9 +73,17 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
 
   const resource = state.value;
   return (
-    <>
+    <div className="wrapper wrapper-content">
       <Row className="m-b-md">
         <Col sm={12}>
+          <div
+            className="pull-right m-r-md"
+            style={{ position: 'relative', zIndex: 100 }}
+          >
+            {/*actions example*/}
+            {/*<OfferingActions offering={props.offering} />*/}
+            <ResourceActions resource={resource} />
+          </div>
           {/*add actions dropdown above*/}
           <ResourceSummary resource={resource} />
         </Col>
@@ -83,6 +93,6 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
           <ResourceTabs resource={resource} />
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
