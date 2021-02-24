@@ -158,6 +158,7 @@ msgstr ""
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
+#: src/marketplace/resources/ResourceActions.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -607,6 +608,10 @@ msgstr ""
 msgid "Archived plans"
 msgstr ""
 
+#: src/marketplace/resources/CancelAction.tsx
+msgid "Are you sure you want to cancel a {name}?"
+msgstr ""
+
 #: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Are you sure you want to cluster template? Note this will reset the node plan."
 msgstr ""
@@ -1011,6 +1016,7 @@ msgstr ""
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/orders/item/details/OrderItemTerminateButton.tsx
+#: src/marketplace/resources/CancelAction.tsx
 #: src/modal/CloseDialogButton.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/user/keys/KeyCreateForm.tsx
@@ -1028,6 +1034,10 @@ msgstr ""
 
 #: src/user/support/RequestedEmail.tsx
 msgid "Cancel request"
+msgstr ""
+
+#: src/marketplace/resources/CancelAction.tsx
+msgid "Cancel resource"
 msgstr ""
 
 #: src/invitations/InvitationsFilter.tsx
@@ -6190,6 +6200,10 @@ msgstr ""
 msgid "Resource group"
 msgstr ""
 
+#: src/marketplace/resources/CancelAction.tsx
+msgid "Resource has been cancelled."
+msgstr ""
+
 #: src/resource/state/utils.ts
 msgid "Resource is in sync"
 msgstr ""
@@ -8054,6 +8068,10 @@ msgstr ""
 
 #: src/user/support/EmailField.tsx
 msgid "Unable to cancel request."
+msgstr ""
+
+#: src/marketplace/resources/CancelAction.tsx
+msgid "Unable to cancel resource."
 msgstr ""
 
 #: src/user/support/useEmailChange.ts

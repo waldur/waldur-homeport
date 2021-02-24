@@ -80,11 +80,8 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
             className="pull-right m-r-md"
             style={{ position: 'relative', zIndex: 100 }}
           >
-            {/*actions example*/}
-            {/*<OfferingActions offering={props.offering} />*/}
             <ResourceActions resource={resource} />
           </div>
-          {/*add actions dropdown above*/}
           <ResourceSummary resource={resource} />
         </Col>
       </Row>
