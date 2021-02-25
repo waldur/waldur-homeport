@@ -1,41 +1,65 @@
-import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
+import { rejectBooking } from '@waldur/booking/api';
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
+import * as constants from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
-import { cancelResource } from '@waldur/marketplace/resources/api';
-import { Resource } from '@waldur/marketplace/resources/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { RootState } from '@waldur/store/reducers';
+import {
+  getUser,
+  isOwner,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
-interface CancelActionProps {
-  resource: Resource;
-}
+const mapStateToProps = (state: RootState) => ({
+  user: getUser(state),
+  isOwner: isOwner(state),
+  isServiceManager: isServiceManagerSelector(state),
+});
 
-export const CancelAction: FunctionComponent<CancelActionProps> = ({
-  resource,
-}) => {
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+const PureCancelAction = (props) => {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-console
-  console.log(resource);
+  console.log('props', props);
+  // eslint-disable-next-line no-console
+  console.log(props.resource);
   const callback = async () => {
     try {
       await waitForConfirmation(
         dispatch,
         translate('Cancel resource'),
         translate('Are you sure you want to cancel a {name}?', {
-          name: resource.name.toUpperCase(),
+          name: props.resource.name.toUpperCase(),
         }),
       );
     } catch {
       return;
     }
     try {
-      await cancelResource(resource.url);
+      await rejectBooking(props.resource.uuid);
       dispatch(showSuccess(translate('Resource has been cancelled.')));
     } catch (e) {
       dispatch(showErrorResponse(e, translate('Unable to cancel resource.')));
     }
   };
-  return <ActionItem title={translate('Cancel')} action={callback} />;
+  return (
+    <ActionItem
+      title={translate('Cancel')}
+      action={callback}
+      disabled={
+        props.resource.offering_type !== OFFERING_TYPE_BOOKING &&
+        props.resource.state !== constants.BOOKING_CREATED &&
+        (!props.user.is_staff || !props.isOwner || !props.isServiceManager)
+      }
+    />
+  );
 };
+
+export const CancelAction = connect<StateProps>(mapStateToProps)(
+  PureCancelAction,
+);
