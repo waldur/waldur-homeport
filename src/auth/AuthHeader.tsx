@@ -1,4 +1,4 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
+import { useRouter, useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
@@ -6,6 +6,8 @@ import { translate } from '@waldur/i18n';
 
 export const AuthHeader: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
+  const router = useRouter();
+  const sessionExpired = Boolean(router.globals.params?.toState);
   return (
     <>
       {ENV.loginLogo ? (
@@ -30,6 +32,10 @@ export const AuthHeader: FunctionComponent = () => {
       <p>
         {state.name === 'register'
           ? translate('Create an account')
+          : sessionExpired
+          ? translate(
+              'Your session has expired, please enter credentials to continue.',
+            )
           : translate(
               'Your single pane of control for all cloud services. Login in to see it in action.',
             )}
