@@ -10149,6 +10149,10 @@ msgstr ""
 msgid "{number} days"
 msgstr ""
 
+#: src/issues/IssueDetails.tsx
+msgid "{relative} ago, {date}"
+msgstr ""
+
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 msgid "{resourceType} has been deleted."
 msgstr ""
