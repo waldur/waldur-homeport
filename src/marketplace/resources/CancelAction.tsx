@@ -26,8 +26,6 @@ const PureCancelAction = (props) => {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-console
   console.log('props', props);
-  // eslint-disable-next-line no-console
-  console.log(props.resource);
   const callback = async () => {
     try {
       await waitForConfirmation(
@@ -52,9 +50,11 @@ const PureCancelAction = (props) => {
       title={translate('Cancel')}
       action={callback}
       disabled={
-        props.resource.offering_type !== OFFERING_TYPE_BOOKING &&
-        props.resource.state !== constants.BOOKING_CREATED &&
-        (!props.user.is_staff || !props.isOwner || !props.isServiceManager)
+        props.resource.offering_type !== OFFERING_TYPE_BOOKING ||
+        props.resource.state !== constants.BOOKING_CREATED ||
+        !props.user.is_staff ||
+        !props.isOwner ||
+        !props.isServiceManager
       }
     />
   );
