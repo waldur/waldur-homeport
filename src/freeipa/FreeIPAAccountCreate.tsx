@@ -23,6 +23,11 @@ interface FreeIPAAccountCreateOwnProps {
   onProfileAdded(): void;
 }
 
+const SUGGESTED_USERNAME_PATTERN = /[^a-zA-Z0-9._-]/g;
+
+const fixUsername = (username: string): string =>
+  username.replace(SUGGESTED_USERNAME_PATTERN, '_');
+
 export const FreeIPAAccountCreate = reduxForm<
   FreeIPAAccountCreateFormData,
   FreeIPAAccountCreateOwnProps
@@ -32,7 +37,7 @@ export const FreeIPAAccountCreate = reduxForm<
     const user = useSelector(getUser);
 
     useEffect(() => {
-      dispatch(change(FORM_ID, 'username', user.username));
+      dispatch(change(FORM_ID, 'username', fixUsername(user.username)));
     }, [user, dispatch]);
 
     const callback = useCallback(
