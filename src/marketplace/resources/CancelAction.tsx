@@ -1,7 +1,6 @@
 import { connect, useDispatch } from 'react-redux';
 
 import { rejectBooking } from '@waldur/booking/api';
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import * as constants from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -48,7 +47,6 @@ const PureCancelAction = (props) => {
       title={translate('Cancel')}
       action={callback}
       disabled={
-        props.resource.offering_type !== OFFERING_TYPE_BOOKING ||
         props.resource.state !== constants.BOOKING_CREATED ||
         !props.user.is_staff ||
         !props.isOwner ||

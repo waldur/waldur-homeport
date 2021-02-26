@@ -5,7 +5,7 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { ResourceActions } from '@waldur/marketplace/resources/ResourceActions';
+import { BookingResourceActions } from '@waldur/marketplace/resources/BookingResourceActions';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
@@ -75,12 +75,7 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
     <div className="wrapper wrapper-content">
       <Row className="m-b-md">
         <Col sm={12}>
-          <div
-            className="pull-right m-r-md"
-            style={{ position: 'relative', zIndex: 100 }}
-          >
-            <ResourceActions resource={resource} />
-          </div>
+          <BookingResourceActions resource={resource} />
           <ResourceSummary resource={resource} />
         </Col>
       </Row>
