@@ -68,4 +68,3 @@ export const DestroyActionItem: <T extends { uuid: string }>(
     />
   );
 };
-// example

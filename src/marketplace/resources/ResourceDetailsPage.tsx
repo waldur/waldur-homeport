@@ -5,7 +5,6 @@ import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-// import { OfferingActions } from '@waldur/marketplace/offerings/actions/OfferingActions';
 import { ResourceActions } from '@waldur/marketplace/resources/ResourceActions';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';

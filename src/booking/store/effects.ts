@@ -52,7 +52,6 @@ function* acceptBookingItem(action) {
 
 function* rejectBookingItem(action) {
   try {
-    // reject
     yield call(api.rejectBooking, action.payload.uuid);
     const response = yield call(api.getBookingsList, action.payload);
     yield put(setBookingItems(action.payload.offering_uuid, response));

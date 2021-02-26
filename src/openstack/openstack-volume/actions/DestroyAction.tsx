@@ -30,4 +30,3 @@ export const DestroyAction = ({ resource }) => (
     apiMethod={destroyVolume}
   />
 );
-//example

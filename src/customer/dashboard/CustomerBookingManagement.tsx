@@ -56,7 +56,7 @@ export const CustomerBookingManagement: FunctionComponent = () => {
   }
   return (value.offeringsCount && customer.is_service_provider) ||
     value.resourcesCount ? (
-    <Panel title={translate('Booking management===')}>
+    <Panel title={translate('Booking management')}>
       <BookingsCalendar
         customerUuid={customer.uuid}
         {...bookingsCalendarProps}

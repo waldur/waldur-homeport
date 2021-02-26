@@ -14,10 +14,7 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
   resource,
 }) => (
   <ResourceDetailsTable>
-    <Field
-      label={translate('Offering type====')}
-      value={resource.offering_name}
-    />
+    <Field label={translate('Offering type')} value={resource.offering_name} />
     <Field
       label={translate('Client organization')}
       value={resource.customer_name}

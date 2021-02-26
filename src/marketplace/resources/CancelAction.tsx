@@ -24,8 +24,6 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 
 const PureCancelAction = (props) => {
   const dispatch = useDispatch();
-  // eslint-disable-next-line no-console
-  console.log('props', props);
   const callback = async () => {
     try {
       await waitForConfirmation(
