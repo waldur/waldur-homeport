@@ -6,17 +6,10 @@ import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitR
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { Resource } from '@waldur/marketplace/resources/types';
+import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
 
 import { EditAction } from './EditAction';
-
-const ActionsList = [
-  EditAction,
-  SubmitReportAction,
-  ChangePlanAction,
-  SetBackendIdAction,
-  TerminateAction,
-];
 
 interface SupportActionsButtonProps {
   resource: Resource;
@@ -27,7 +20,20 @@ export const SupportActionsButton: FunctionComponent<SupportActionsButtonProps> 
   props,
 ) => {
   const [open, onToggle] = useBoolean(false);
-
+  const ActionsList = [
+    EditAction,
+    SubmitReportAction,
+    ChangePlanAction,
+    SetBackendIdAction,
+    TerminateAction,
+    () => (
+      <ResourceShowUsageButton
+        resource={props.resource}
+        offeringUuid={props.resource.offering_uuid}
+        resourceUuid={props.resource.uuid}
+      />
+    ),
+  ];
   return (
     <ResourceActionComponent
       open={open}

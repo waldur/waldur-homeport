@@ -5,7 +5,6 @@ import { PlanDetailsButton } from '@waldur/marketplace/details/plan/PlanDetailsB
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
 import { ShowReportButton } from '@waldur/marketplace/resources/report/ShowReportButton';
 import { Resource } from '@waldur/marketplace/resources/types';
-import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
 import { isOracleOffering } from '@waldur/support/utils';
 
 import { SupportActionsButton } from './SupportActionsButton';
@@ -38,11 +37,6 @@ export const SupportActions: FunctionComponent<SupportActionsProps> = ({
     {resource.offering_uuid && (
       <OfferingDetailsButton offering={resource.offering_uuid} />
     )}
-    <ResourceShowUsageButton
-      resource={resource}
-      offeringUuid={resource.offering_uuid}
-      resourceUuid={resource.uuid}
-    />
     {resource.plan_uuid && <PlanDetailsButton resource={resource.uuid} />}
   </div>
 );

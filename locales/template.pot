@@ -161,6 +161,7 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/CustomerResourcesListActions.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageList.tsx
@@ -9013,10 +9014,6 @@ msgstr ""
 #: src/slurm/details/utils.ts
 #: src/slurm/tabs.ts
 msgid "Usage"
-msgstr ""
-
-#: src/marketplace/resources/list/CustomerResourcesList.tsx
-msgid "Usage information is not available."
 msgstr ""
 
 #: src/issues/workspace/IssueNavigationService.ts
