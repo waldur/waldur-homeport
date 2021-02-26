@@ -9697,6 +9697,10 @@ msgid "Your organization does not have any projects yet."
 msgstr ""
 
 #: src/auth/AuthHeader.tsx
+msgid "Your session has expired, please enter credentials to continue."
+msgstr ""
+
+#: src/auth/AuthHeader.tsx
 msgid "Your single pane of control for all cloud services. Login in to see it in action."
 msgstr ""
 
@@ -10144,6 +10148,10 @@ msgstr ""
 
 #: src/resource/utils.tsx
 msgid "{number} days"
+msgstr ""
+
+#: src/issues/IssueDetails.tsx
+msgid "{relative} ago, {date}"
 msgstr ""
 
 #: src/rancher/cluster/ResourceDeleteButton.tsx

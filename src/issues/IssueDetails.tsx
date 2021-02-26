@@ -146,12 +146,10 @@ export const IssueDetails: FunctionComponent = () => {
 
                 <Field
                   label={translate('Created')}
-                  value={
-                    <>
-                      {formatRelative(issue.created)} ago,{' '}
-                      {formatDateTime(issue.created)}
-                    </>
-                  }
+                  value={translate('{relative} ago, {date}', {
+                    relate: formatRelative(issue.created),
+                    date: formatDateTime(issue.created),
+                  })}
                 />
               </ResourceDetailsTable>
             </Col>

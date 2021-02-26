@@ -38,6 +38,8 @@ Axios.interceptors.response.use(
           toState: target.name(),
           toParams: target.params(),
         };
+      } else if (router.globals.$current.name === 'login') {
+        params = router.globals.params as any;
       } else if (router.globals.$current.name) {
         params = {
           toState: router.globals.$current.name,
