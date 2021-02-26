@@ -139,6 +139,7 @@ msgid "Action has been applied."
 msgstr ""
 
 #: src/azure/sql/DatabasesList.tsx
+#: src/booking/BookingsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payments/PaymentsList.tsx
@@ -202,10 +203,6 @@ msgstr ""
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Actions"
-msgstr ""
-
-#: src/booking/BookingsList.tsx
-msgid "Actions===="
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingActions.tsx
@@ -946,7 +943,7 @@ msgid "Booking is not allowed to overlap other bookings."
 msgstr ""
 
 #: src/customer/dashboard/CustomerBookingManagement.tsx
-msgid "Booking management==="
+msgid "Booking management"
 msgstr ""
 
 #: src/booking/BookingsList.tsx
@@ -4432,13 +4429,10 @@ msgstr ""
 msgid "Offering state has been updated."
 msgstr ""
 
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Offering type"
-msgstr ""
-
-#: src/marketplace/resources/ResourceSummary.tsx
-msgid "Offering type===="
 msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
@@ -5849,13 +5843,10 @@ msgstr ""
 msgid "Regular user"
 msgstr ""
 
+#: src/booking/BookingActions.tsx
 #: src/marketplace/orders/RejectButton.tsx
 #: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
 msgid "Reject"
-msgstr ""
-
-#: src/booking/BookingActions.tsx
-msgid "Reject===="
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
