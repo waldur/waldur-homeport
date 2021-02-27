@@ -47,9 +47,9 @@ const PureCancelAction = (props) => {
       title={translate('Cancel')}
       action={callback}
       disabled={
-        props.resource.state !== constants.BOOKING_CREATED ||
-        !props.user.is_staff ||
-        !props.isOwner ||
+        props.resource.state !== constants.BOOKING_CREATED &&
+        !props.user.is_staff &&
+        !props.isOwner &&
         !props.isServiceManager
       }
     />
