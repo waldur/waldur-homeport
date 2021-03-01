@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -45,11 +45,15 @@ interface ResourceDetailsPageProps {
 export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = ({
   customer,
 }) => {
+  const [shouldUpdateResource, setShouldUpdateResource] = useState();
   const {
     params: { resource_uuid },
   } = useCurrentStateAndParams();
 
-  const state = useAsync(() => getResource(resource_uuid), [resource_uuid]);
+  const state = useAsync(() => getResource(resource_uuid), [
+    resource_uuid,
+    shouldUpdateResource,
+  ]);
 
   useTitle(state.value ? state.value.name : translate('Resource details'));
 
@@ -75,7 +79,10 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
     <div className="wrapper wrapper-content">
       <Row className="m-b-md">
         <Col sm={12}>
-          <BookingResourceActions resource={resource} />
+          <BookingResourceActions
+            resource={resource}
+            updateResource={(e) => setShouldUpdateResource(e)}
+          />
           <ResourceSummary resource={resource} />
         </Col>
       </Row>

@@ -3,6 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import { rejectBooking } from '@waldur/booking/api';
 import * as constants from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
+import { Resource } from '@waldur/marketplace/resources/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -21,6 +22,11 @@ const mapStateToProps = (state: RootState) => ({
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 
+interface OwnProps {
+  resource: Resource;
+  onCancel: (e) => void;
+}
+
 const PureCancelAction = (props) => {
   const dispatch = useDispatch();
   const callback = async () => {
@@ -36,7 +42,8 @@ const PureCancelAction = (props) => {
       return;
     }
     try {
-      await rejectBooking(props.resource.uuid);
+      const response = await rejectBooking(props.resource.uuid);
+      props.onCancel(response);
       dispatch(showSuccess(translate('Resource has been cancelled.')));
     } catch (e) {
       dispatch(showErrorResponse(e, translate('Unable to cancel resource.')));
@@ -54,6 +61,6 @@ const PureCancelAction = (props) => {
   );
 };
 
-export const CancelAction = connect<StateProps>(mapStateToProps)(
+export const CancelAction = connect<StateProps, {}, OwnProps>(mapStateToProps)(
   PureCancelAction,
 );

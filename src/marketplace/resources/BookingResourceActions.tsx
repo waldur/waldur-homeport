@@ -9,10 +9,12 @@ import { Resource } from '@waldur/marketplace/resources/types';
 
 interface BookingResourceActionsProps {
   resource: Resource;
+  updateResource: (e) => void;
 }
 
 export const BookingResourceActions: FunctionComponent<BookingResourceActionsProps> = ({
   resource,
+  updateResource,
 }) => {
   const [open, onToggle] = useBoolean(false);
   return resource.offering_type === OFFERING_TYPE_BOOKING ? (
@@ -27,7 +29,7 @@ export const BookingResourceActions: FunctionComponent<BookingResourceActionsPro
         onToggle={onToggle}
         open={open}
       >
-        <CancelAction resource={resource} />
+        <CancelAction resource={resource} onCancel={updateResource} />
       </DropdownButton>
     </div>
   ) : null;
