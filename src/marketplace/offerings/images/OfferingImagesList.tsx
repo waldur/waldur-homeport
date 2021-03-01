@@ -4,28 +4,26 @@ import { compose } from 'redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { SCREENSHOTS_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
+import { IMAGES_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
-import { Offering, Screenshot } from '@waldur/marketplace/types';
+import { Offering, Image } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 
-import { ScreenshotsActions } from './ScreenshotsActions';
-import { ScreenshotsListPlaceholder } from './ScreenshotsListPlaceholder';
-import { ScreenshotThumbnail } from './ScreenshotThumbnail';
+import { ImagesActions } from './ImagesActions';
+import { ImagesListPlaceholder } from './ImagesListPlaceholder';
+import { ImageThumbnail } from './ImageThumbnail';
 
-const ScreenshotDetailsDialog = lazyComponent(
+const ImageDetailsDialog = lazyComponent(
   () =>
-    import(
-      /* webpackChunkName: "ScreenshotDetailsDialog" */ './ScreenshotDetailsDialog'
-    ),
-  'ScreenshotDetailsDialog',
+    import(/* webpackChunkName: "ImageDetailsDialog" */ './ImageDetailsDialog'),
+  'ImageDetailsDialog',
 );
 
-const openScreenshotDetailsDialog = (screenshot: Screenshot) =>
-  openModalDialog(ScreenshotDetailsDialog, {
-    resolve: screenshot,
+const openImageDetailsDialog = (image: Image) =>
+  openModalDialog(ImageDetailsDialog, {
+    resolve: image,
   });
 
 export const TableComponent: FunctionComponent<any> = (props) => {
@@ -35,9 +33,9 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Thumbnail'),
       render: ({ row }) => (
-        <ScreenshotThumbnail
-          screenshot={row}
-          onClick={() => props.openViewScreenshotDialog(row)}
+        <ImageThumbnail
+          image={row}
+          onClick={() => props.openViewImageDialog(row)}
         />
       ),
     },
@@ -58,7 +56,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Actions'),
       render: ({ row }) => {
-        return <ScreenshotsActions row={row} />;
+        return <ImagesActions row={row} />;
       },
     },
   ];
@@ -67,8 +65,8 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     <Table
       {...props}
       columns={columns}
-      placeholderComponent={<ScreenshotsListPlaceholder />}
-      verboseName={translate('Offerings screenshots')}
+      placeholderComponent={<ImagesListPlaceholder />}
+      verboseName={translate('Offerings images')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
     />
@@ -84,7 +82,7 @@ const mapPropsToFilter = (props) => {
 };
 
 const TableOptions = {
-  table: SCREENSHOTS_TABLE_NAME,
+  table: IMAGES_TABLE_NAME,
   fetchData: createFetcher('marketplace-screenshots'),
   mapPropsToFilter,
   exportRow: (row: Offering) => [
@@ -100,8 +98,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  openViewScreenshotDialog: (image) =>
-    dispatch(openScreenshotDetailsDialog(image)),
+  openViewImageDialog: (image) => dispatch(openImageDetailsDialog(image)),
 });
 
 const enhance = compose(
@@ -109,4 +106,4 @@ const enhance = compose(
   connectTable(TableOptions),
 );
 
-export const OfferingScreenshotsList = enhance(TableComponent);
+export const OfferingImagesList = enhance(TableComponent);

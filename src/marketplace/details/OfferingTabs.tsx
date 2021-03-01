@@ -1,6 +1,6 @@
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
-import { ScreenshotsTab } from '@waldur/marketplace/offerings/screenshots/ScreenshotsTab';
+import { ImagesTab } from '@waldur/marketplace/offerings/images/ImagesTab';
 import { Offering, Section } from '@waldur/marketplace/types';
 
 import { AttributesTable } from './attributes/AttributesTable';
@@ -43,10 +43,8 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     },
     {
       visible: props.offering.screenshots.length > 0,
-      title: translate('Screenshots'),
-      component: () => (
-        <ScreenshotsTab screenshots={props.offering.screenshots} />
-      ),
+      title: translate('Images'),
+      component: () => <ImagesTab images={props.offering.screenshots} />,
     },
   ];
 

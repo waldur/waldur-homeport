@@ -2,28 +2,24 @@ import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { ActionsDropdown } from '@waldur/marketplace/offerings/actions/ActionsDropdown';
-import { removeOfferingScreenshot } from '@waldur/marketplace/offerings/store/actions';
+import { removeOfferingImage } from '@waldur/marketplace/offerings/store/actions';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
-import { Offering, Screenshot } from '@waldur/marketplace/types';
+import { Offering, Image } from '@waldur/marketplace/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
-const openDialog = async (
-  dispatch,
-  screenshot: Screenshot,
-  offering: Offering,
-) => {
+const openDialog = async (dispatch, image: Image, offering: Offering) => {
   try {
     await waitForConfirmation(
       dispatch,
       translate('Confirmation'),
-      translate('Are you sure you want to delete the screenshot?'),
+      translate('Are you sure you want to delete the image?'),
     );
   } catch {
     return;
   }
-  dispatch(removeOfferingScreenshot(offering, screenshot));
+  dispatch(removeOfferingImage(offering, image));
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -32,8 +28,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  openConfirmationDialog: (screenshot: Screenshot, offering: Offering) =>
-    openDialog(dispatch, screenshot, offering),
+  openConfirmationDialog: (image: Image, offering: Offering) =>
+    openDialog(dispatch, image, offering),
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
@@ -49,4 +45,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
 
 const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);
 
-export const ScreenshotsActions = enhance(ActionsDropdown);
+export const ImagesActions = enhance(ActionsDropdown);

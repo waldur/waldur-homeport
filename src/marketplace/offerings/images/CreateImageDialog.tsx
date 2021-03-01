@@ -13,28 +13,28 @@ import {
 import { translate } from '@waldur/i18n';
 import { ImageUploadField } from '@waldur/marketplace/offerings/create/ImageUploadField';
 import {
-  addOfferingScreenshot,
-  isAddingOfferingScreenshot,
+  addOfferingImage,
+  isAddingOfferingImage,
 } from '@waldur/marketplace/offerings/store/actions';
-import { OFFERING_SCREENSHOTS_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
+import { OFFERING_IMAGES_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 import { getOffering } from '@waldur/marketplace/offerings/store/selectors';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { RootState } from '@waldur/store/reducers';
 
-const AddOfferingScreenshotDialog: FunctionComponent<any> = (props) => (
+const AddOfferingImageDialog: FunctionComponent<any> = (props) => (
   <form
     onSubmit={props.handleSubmit(props.submitRequest)}
     className="form-horizontal"
   >
     <ModalDialog
-      title={translate('Add screenshot')}
+      title={translate('Add image')}
       footer={
         <>
           <CloseDialogButton />
           <SubmitButton
-            disabled={props.invalid || !props.screenshotsField}
-            submitting={props.isSubmittingScreenshot}
+            disabled={props.invalid || !props.imagesField}
+            submitting={props.isSubmittingImage}
             label={translate('Submit')}
           />
         </>
@@ -47,8 +47,8 @@ const AddOfferingScreenshotDialog: FunctionComponent<any> = (props) => (
         clearOnUnmount={false}
       >
         <ImageUploadField
-          name="screenshots"
-          label={translate('Screenshot: ')}
+          name="images"
+          label={translate('Image: ')}
           accept={'image/*'}
           buttonLabel={translate('Browse')}
           className="btn btn-default"
@@ -73,18 +73,18 @@ const AddOfferingScreenshotDialog: FunctionComponent<any> = (props) => (
   </form>
 );
 
-const selector = formValueSelector(OFFERING_SCREENSHOTS_FORM_ID);
+const selector = formValueSelector(OFFERING_IMAGES_FORM_ID);
 
 const mapStateToProps = (state: RootState) => ({
-  isSubmittingScreenshot: getOffering(state).isAddingScreenshot,
-  screenshotsField: selector(state, 'screenshots'),
+  isSubmittingImage: getOffering(state).isAddingImage,
+  imagesField: selector(state, 'images'),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     submitRequest: (formData) => {
-      dispatch(isAddingOfferingScreenshot(true));
-      dispatch(addOfferingScreenshot(formData, ownProps.resolve.offering));
+      dispatch(isAddingOfferingImage(true));
+      dispatch(addOfferingImage(formData, ownProps.resolve.offering));
     },
   };
 };
@@ -94,8 +94,8 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 const enhance = compose(
   connector,
   reduxForm({
-    form: OFFERING_SCREENSHOTS_FORM_ID,
+    form: OFFERING_IMAGES_FORM_ID,
   }),
 );
 
-export const CreateScreenshotDialog = enhance(AddOfferingScreenshotDialog);
+export const CreateImageDialog = enhance(AddOfferingImageDialog);

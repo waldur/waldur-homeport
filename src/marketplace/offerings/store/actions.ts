@@ -1,4 +1,4 @@
-import { Offering, Category, Screenshot } from '@waldur/marketplace/types';
+import { Offering, Category, Image } from '@waldur/marketplace/types';
 
 import { OfferingStep } from '../types';
 
@@ -24,9 +24,9 @@ export const updateOfferingState = (
   },
 });
 
-export const addOfferingScreenshot = (formData: any, offering: Offering) => {
+export const addOfferingImage = (formData: any, offering: Offering) => {
   return {
-    type: constants.ADD_OFFERING_SCREENSHOT,
+    type: constants.ADD_OFFERING_IMAGE,
     payload: {
       formData,
       offering,
@@ -34,15 +34,12 @@ export const addOfferingScreenshot = (formData: any, offering: Offering) => {
   };
 };
 
-export const removeOfferingScreenshot = (
-  offering: Offering,
-  screenshot: Screenshot,
-) => {
+export const removeOfferingImage = (offering: Offering, image: Image) => {
   return {
-    type: constants.REMOVE_OFFERING_SCREENSHOT,
+    type: constants.REMOVE_OFFERING_IMAGE,
     payload: {
       offering,
-      screenshot,
+      image,
     },
   };
 };
@@ -54,9 +51,9 @@ export const addOfferingLocation = (offering: Offering) => ({
   },
 });
 
-export const isAddingOfferingScreenshot = (isAdding: boolean) => {
+export const isAddingOfferingImage = (isAdding: boolean) => {
   return {
-    type: constants.IS_ADDING_OFFERING_SCREENSHOT,
+    type: constants.IS_ADDING_OFFERING_IMAGE,
     payload: {
       isAdding,
     },
