@@ -166,9 +166,9 @@ const mergeProps = (
       visible: ownProps.offering.state !== ARCHIVED && ownProps.offering.shared,
     },
     {
-      label: translate('Screenshots'),
+      label: translate('Images'),
       handler: () =>
-        router.stateService.go('marketplace-offering-screenshots', {
+        router.stateService.go('marketplace-offering-images', {
           offering_uuid: ownProps.offering.uuid,
         }),
       visible:

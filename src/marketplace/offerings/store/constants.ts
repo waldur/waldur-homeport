@@ -14,12 +14,12 @@ export const SET_STEP = 'waldur/marketplace/offering/SET_STATE';
 export const UPDATE_OFFERING_STATE =
   'waldur/marketplace/offering/UPDATE_OFFERING_STATE';
 export const CATEGORY_CHANGED = 'waldur/marketplace/offering/CATEGORY_CHANGED';
-export const ADD_OFFERING_SCREENSHOT =
-  'waldur/marketplace/offering/ADD_OFFERING_SCREENSHOT';
-export const REMOVE_OFFERING_SCREENSHOT =
-  'waldur/marketplace/offering/REMOVE_OFFERING_SCREENSHOT';
-export const IS_ADDING_OFFERING_SCREENSHOT =
-  'waldur/marketplace/offering/IS_ADDING_OFFERING_SCREENSHOT';
+export const ADD_OFFERING_IMAGE =
+  'waldur/marketplace/offering/ADD_OFFERING_IMAGE';
+export const REMOVE_OFFERING_IMAGE =
+  'waldur/marketplace/offering/REMOVE_OFFERING_IMAGE';
+export const IS_ADDING_OFFERING_IMAGE =
+  'waldur/marketplace/offering/IS_ADDING_OFFERING_IMAGE';
 export const ADD_OFFERING_LOCATION =
   'waldur/marketplace/offering/ADD_OFFERING_LOCATION';
 
@@ -41,11 +41,11 @@ export const ARCHIVED = 'Archived';
 
 export const OFFERING_TABLE_NAME = 'marketplace-offerings';
 
-export const SCREENSHOTS_TABLE_NAME = 'marketplace-offering-screenshots';
+export const IMAGES_TABLE_NAME = 'marketplace-offering-images';
 
 export const FORM_ID = 'marketplaceOfferingCreate';
 
-export const OFFERING_SCREENSHOTS_FORM_ID = 'marketplaceOfferingScreenshots';
+export const OFFERING_IMAGES_FORM_ID = 'marketplaceOfferingImages';
 
 export const GOOGLE_CALENDAR_SYNC = 'GoogleCalendarSync';
 export const GOOGLE_CALENDAR_PUBLISH = 'GoogleCalendarPublish';

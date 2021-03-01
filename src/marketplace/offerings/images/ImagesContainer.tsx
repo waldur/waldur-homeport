@@ -14,8 +14,8 @@ import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 
-import { CreateScreenshotButton } from './CreateScreenshotButton';
-import { OfferingScreenshotsList } from './OfferingScreenshotsList';
+import { CreateImageButton } from './CreateImageButton';
+import { OfferingImagesList } from './OfferingImagesList';
 
 const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
   return [
@@ -38,7 +38,7 @@ const getBreadcrumbs = (offering: Offering): BreadcrumbItem[] => {
   ];
 };
 
-export const ScreenshotsContainer: FunctionComponent = () => {
+export const ImagesContainer: FunctionComponent = () => {
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
@@ -61,10 +61,10 @@ export const ScreenshotsContainer: FunctionComponent = () => {
 
   useTitle(
     offering
-      ? translate('Offering screenshots ({name})', {
+      ? translate('Offering images ({name})', {
           name: offering.name,
         })
-      : translate('Offering screenshots'),
+      : translate('Offering images'),
   );
 
   if (!offering) {
@@ -78,9 +78,9 @@ export const ScreenshotsContainer: FunctionComponent = () => {
           </Col>
         </Row>
 
-        <CreateScreenshotButton offering={offering} />
+        <CreateImageButton offering={offering} />
 
-        <OfferingScreenshotsList />
+        <OfferingImagesList />
       </>
     );
   }

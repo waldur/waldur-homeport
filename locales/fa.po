@@ -150,7 +150,7 @@ msgstr "نوع حسابداری"
 #: src/invitations/InvitationsList.tsx src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/OfferingImagesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
@@ -1678,7 +1678,7 @@ msgstr "اولین پروژه را ایجاد کنید"
 #: src/booking/BookingsList.tsx src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesFilter.tsx src/issues/IssueDetails.tsx
 #: src/issues/list/IssuesList.tsx src/jira/issue/JiraIssuesList.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/OfferingImagesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
@@ -1968,7 +1968,7 @@ msgstr ""
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/OfferingImagesList.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -4125,7 +4125,7 @@ msgstr "سرویس های من"
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/OfferingImagesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/create/OfferingLimitsTable.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
@@ -4602,7 +4602,7 @@ msgstr "پیشنهاد { لینک _پیشنهادی } حذف شده است."
 msgid "Offerings"
 msgstr "پیشنهادات"
 
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/OfferingImagesList.tsx
 msgid "Offerings screenshots"
 msgstr ""
 
@@ -6406,20 +6406,20 @@ msgid "Score"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
-msgid "Screenshot has been added."
+msgid "Image has been added."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
-msgid "Screenshot has been removed."
+msgid "Image has been removed."
 msgstr ""
 
-#: src/marketplace/offerings/ScreenshotThumbnail.tsx
+#: src/marketplace/offerings/ImageThumbnail.tsx
 #: src/marketplace/offerings/ViewOfferingScreenshotDialog.tsx
-msgid "Screenshot here"
+msgid "Image here"
 msgstr ""
 
 #: src/marketplace/offerings/AddOfferingScreenshotDialog.tsx
-msgid "Screenshot:"
+msgid "Image:"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
@@ -7487,7 +7487,7 @@ msgid ""
 "website."
 msgstr ""
 
-#: src/marketplace/offerings/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/OfferingImagesList.tsx
 msgid "Thumbnail"
 msgstr ""
 

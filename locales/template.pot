@@ -155,7 +155,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -280,6 +280,11 @@ msgstr ""
 msgid "Add environment variable"
 msgstr ""
 
+#: src/marketplace/offerings/images/CreateImageButton.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+msgid "Add image"
+msgstr ""
+
 #: src/marketplace/compare/ComparisonItemPlaceholder.tsx
 msgid "Add item"
 msgstr ""
@@ -361,11 +366,6 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/rule-editor/RuleAddButton.tsx
 msgid "Add rule"
-msgstr ""
-
-#: src/marketplace/offerings/screenshots/CreateScreenshotButton.tsx
-#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
-msgid "Add screenshot"
 msgstr ""
 
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
@@ -616,16 +616,16 @@ msgstr ""
 msgid "Are you sure you want to delete a {name} {resourceType}?"
 msgstr ""
 
+#: src/marketplace/offerings/images/ImagesActions.tsx
+msgid "Are you sure you want to delete the image?"
+msgstr ""
+
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 msgid "Are you sure you want to delete the payment profile?"
 msgstr ""
 
 #: src/customer/payments/PaymentActions.tsx
 msgid "Are you sure you want to delete the payment?"
-msgstr ""
-
-#: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
-msgid "Are you sure you want to delete the screenshot?"
 msgstr ""
 
 #: src/rancher/cluster/ResourceDeleteButton.tsx
@@ -958,7 +958,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
-#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
 msgid "Browse"
 msgstr ""
 
@@ -1336,7 +1336,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
-#: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
+#: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-instance/CreateSecurityGroupButton.tsx
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 #: src/rancher/cluster/create/TenantGroup.tsx
@@ -1570,7 +1570,7 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
-#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -1814,7 +1814,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileActions.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
-#: src/marketplace/offerings/screenshots/ScreenshotsActions.tsx
+#: src/marketplace/offerings/images/ImagesActions.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceNetworks.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
@@ -1863,10 +1863,10 @@ msgstr ""
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/option/OptionForm.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
-#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -2959,7 +2959,17 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Image has been added."
+msgstr ""
+
+#: src/marketplace/offerings/store/effects.ts
+msgid "Image has been removed."
+msgstr ""
+
 #: src/marketplace/offerings/create/ImageUploadField.tsx
+#: src/marketplace/offerings/images/ImageDetailsDialog.tsx
+#: src/marketplace/offerings/images/ImageThumbnail.tsx
 msgid "Image here"
 msgstr ""
 
@@ -2970,6 +2980,12 @@ msgstr ""
 msgid "Image name"
 msgstr ""
 
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+msgid "Image:"
+msgstr ""
+
+#: src/marketplace/details/OfferingTabs.tsx
+#: src/marketplace/offerings/actions/OfferingActions.tsx
 #: src/openstack/analytics/VmTypeOverview.tsx
 msgid "Images"
 msgstr ""
@@ -3880,7 +3896,7 @@ msgstr ""
 
 #: src/marketplace/offerings/MyOfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
+#: src/marketplace/offerings/images/ImagesContainer.tsx
 #: src/marketplace/sidebar.ts
 msgid "My offerings"
 msgstr ""
@@ -3931,9 +3947,9 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/plan/PlanForm.tsx
-#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
-#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
@@ -4378,8 +4394,8 @@ msgstr ""
 msgid "Offering details"
 msgstr ""
 
-#: src/marketplace/offerings/screenshots/ScreenshotsListPlaceholder.tsx
-msgid "Offering doesn't have screenshots."
+#: src/marketplace/offerings/images/ImagesListPlaceholder.tsx
+msgid "Offering doesn't have images."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -4389,6 +4405,14 @@ msgstr ""
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been updated."
+msgstr ""
+
+#: src/marketplace/offerings/images/ImagesContainer.tsx
+msgid "Offering images"
+msgstr ""
+
+#: src/marketplace/offerings/images/ImagesContainer.tsx
+msgid "Offering images ({name})"
 msgstr ""
 
 #: src/marketplace/offerings/create/ReviewStep.tsx
@@ -4405,14 +4429,6 @@ msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
 msgid "Offering permissions"
-msgstr ""
-
-#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
-msgid "Offering screenshots"
-msgstr ""
-
-#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
-msgid "Offering screenshots ({name})"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -4435,8 +4451,8 @@ msgstr ""
 msgid "Offerings"
 msgstr ""
 
-#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
-msgid "Offerings screenshots"
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
+msgid "Offerings images"
 msgstr ""
 
 #: src/marketplace/offerings/create/ComponentAccountingTypeField.tsx
@@ -4717,7 +4733,7 @@ msgstr ""
 #: src/invoices/details/BillingDetails.tsx
 #: src/marketplace/details/utils.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
+#: src/marketplace/offerings/images/ImagesContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
@@ -5153,7 +5169,7 @@ msgstr ""
 msgid "Please provide registration code of your company."
 msgstr ""
 
-#: src/marketplace/offerings/screenshots/ScreenshotsListPlaceholder.tsx
+#: src/marketplace/offerings/images/ImagesListPlaceholder.tsx
 msgid "Please provide visual material describing the Offering"
 msgstr ""
 
@@ -5586,7 +5602,7 @@ msgstr ""
 
 #: src/marketplace/offerings/OfferingsListContainer.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
-#: src/marketplace/offerings/screenshots/ScreenshotsContainer.tsx
+#: src/marketplace/offerings/images/ImagesContainer.tsx
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/sidebar.ts
 msgid "Public offerings"
@@ -6501,28 +6517,6 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
-#: src/marketplace/offerings/store/effects.ts
-msgid "Screenshot has been added."
-msgstr ""
-
-#: src/marketplace/offerings/store/effects.ts
-msgid "Screenshot has been removed."
-msgstr ""
-
-#: src/marketplace/offerings/screenshots/ScreenshotDetailsDialog.tsx
-#: src/marketplace/offerings/screenshots/ScreenshotThumbnail.tsx
-msgid "Screenshot here"
-msgstr ""
-
-#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
-msgid "Screenshot:"
-msgstr ""
-
-#: src/marketplace/details/OfferingTabs.tsx
-#: src/marketplace/offerings/actions/OfferingActions.tsx
-msgid "Screenshots"
-msgstr ""
-
 #: src/marketplace-script/ScriptsForm.tsx
 msgid "Script for creation of a resource"
 msgstr ""
@@ -7284,7 +7278,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/PauseOfferingDialog.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 #: src/marketplace/offerings/create/Wizard.tsx
-#: src/marketplace/offerings/screenshots/CreateScreenshotDialog.tsx
+#: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
@@ -7791,7 +7785,7 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
-#: src/marketplace/offerings/screenshots/OfferingScreenshotsList.tsx
+#: src/marketplace/offerings/images/OfferingImagesList.tsx
 msgid "Thumbnail"
 msgstr ""
 
@@ -7994,12 +7988,12 @@ msgstr ""
 msgid "Unable to activate user."
 msgstr ""
 
-#: src/marketplace/cart/store/effects.ts
-msgid "Unable to add item to shopping cart."
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to add image."
 msgstr ""
 
-#: src/marketplace/offerings/store/effects.ts
-msgid "Unable to add screenshot."
+#: src/marketplace/cart/store/effects.ts
+msgid "Unable to add item to shopping cart."
 msgstr ""
 
 #: src/resource/actions/AsyncActionButton.tsx
@@ -8580,6 +8574,10 @@ msgstr ""
 msgid "Unable to remove hook."
 msgstr ""
 
+#: src/marketplace/offerings/store/effects.ts
+msgid "Unable to remove image."
+msgstr ""
+
 #: src/marketplace/cart/store/effects.ts
 msgid "Unable to remove item from shopping cart."
 msgstr ""
@@ -8590,10 +8588,6 @@ msgstr ""
 
 #: src/customer/payment-profiles/store/effects.ts
 msgid "Unable to remove payment profile."
-msgstr ""
-
-#: src/marketplace/offerings/store/effects.ts
-msgid "Unable to remove screenshot."
 msgstr ""
 
 #: src/issues/security-incident/store/effects.ts
@@ -9406,8 +9400,8 @@ msgstr ""
 msgid "View YAML"
 msgstr ""
 
-#: src/marketplace/offerings/screenshots/ScreenshotDetailsDialog.tsx
-msgid "Viewing screenshot"
+#: src/marketplace/offerings/images/ImageDetailsDialog.tsx
+msgid "Viewing image"
 msgstr ""
 
 #: src/openstack/utils.ts
