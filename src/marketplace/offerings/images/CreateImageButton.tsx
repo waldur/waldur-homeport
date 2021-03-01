@@ -6,27 +6,25 @@ import { Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-const CreateScreenshotDialog = lazyComponent(
+const CreateImageDialog = lazyComponent(
   () =>
-    import(
-      /* webpackChunkName: "CreateScreenshotDialog" */ './CreateScreenshotDialog'
-    ),
-  'CreateScreenshotDialog',
+    import(/* webpackChunkName: "CreateImageDialog" */ './CreateImageDialog'),
+  'CreateImageDialog',
 );
 
-interface CreateScreenshotButtonProps {
+interface CreateImageButtonProps {
   offering: Offering;
   openDialog(): void;
 }
 
-const openScreenshotDialog = (props: CreateScreenshotButtonProps) => {
-  return openModalDialog(CreateScreenshotDialog, {
+const openImageDialog = (props: CreateImageButtonProps) => {
+  return openModalDialog(CreateImageDialog, {
     resolve: props,
     size: 'lg',
   });
 };
 
-const PureCreateScreenshotButton = (props: CreateScreenshotButtonProps) => {
+const PureCreateImageButton = (props: CreateImageButtonProps) => {
   return (
     <div
       style={{
@@ -36,7 +34,7 @@ const PureCreateScreenshotButton = (props: CreateScreenshotButtonProps) => {
       }}
     >
       <ActionButton
-        title={translate('Add screenshot')}
+        title={translate('Add image')}
         icon="fa fa-plus"
         action={props.openDialog}
       />
@@ -45,10 +43,10 @@ const PureCreateScreenshotButton = (props: CreateScreenshotButtonProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  openDialog: () => dispatch(openScreenshotDialog(ownProps)),
+  openDialog: () => dispatch(openImageDialog(ownProps)),
 });
 
-export const CreateScreenshotButton = connect(
+export const CreateImageButton = connect(
   null,
   mapDispatchToProps,
-)(PureCreateScreenshotButton);
+)(PureCreateImageButton);

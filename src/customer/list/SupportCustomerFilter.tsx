@@ -9,10 +9,7 @@ import {
 import { SUPPORT_CUSTOMERS_FORM_ID } from '@waldur/customer/list/constants';
 import { DivisionTypeFilter } from '@waldur/customer/list/DivisionTypeFilter';
 import { SelectOrganizationDivisionField } from '@waldur/customer/list/SelectOrganizationDivisionField';
-import {
-  getOptions as ServiceProviderFilterOptions,
-  ServiceProviderFilter,
-} from '@waldur/customer/list/ServiceProviderFilter';
+import { ServiceProviderFilter } from '@waldur/customer/list/ServiceProviderFilter';
 import { translate } from '@waldur/i18n';
 
 export const PureSupportCustomerFilter: FunctionComponent = () => (
@@ -31,6 +28,5 @@ export const SupportCustomerFilter = reduxForm<{}, any>({
   form: SUPPORT_CUSTOMERS_FORM_ID,
   initialValues: {
     accounting_is_running: AccountingRunningFieldOptions()[0],
-    is_service_provider: ServiceProviderFilterOptions()[0],
   },
 })(PureSupportCustomerFilter);

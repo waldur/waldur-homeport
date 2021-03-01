@@ -1,19 +1,19 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { Screenshot } from '@waldur/marketplace/types';
+import { Image } from '@waldur/marketplace/types';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-interface ScreenshotDetailsDialogProps {
-  resolve: Screenshot;
+interface ImageDetailsDialogProps {
+  resolve: Image;
 }
 
-export const ScreenshotDetailsDialog: FunctionComponent<ScreenshotDetailsDialogProps> = (
+export const ImageDetailsDialog: FunctionComponent<ImageDetailsDialogProps> = (
   props,
 ) => (
   <ModalDialog
-    title={translate('Viewing screenshot')}
+    title={translate('Viewing image')}
     footer={<CloseDialogButton />}
   >
     <div
@@ -23,7 +23,7 @@ export const ScreenshotDetailsDialog: FunctionComponent<ScreenshotDetailsDialogP
         justifyContent: 'center',
       }}
     >
-      <img src={props.resolve.image} alt={translate('Screenshot here')} />
+      <img src={props.resolve.image} alt={translate('Image here')} />
       <span style={{ marginTop: '10px' }}>{props.resolve.description}</span>
     </div>
   </ModalDialog>
