@@ -12,6 +12,7 @@ msgstr ""
 msgid "(VAT is not included)"
 msgstr ""
 
+#: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/user/support/TermsOfService.tsx
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr ""
@@ -7580,7 +7581,6 @@ msgstr ""
 msgid "Terminating"
 msgstr ""
 
-#: src/freeipa/FreeIPAAccountEdit.tsx
 #: src/freeipa/TosGroup.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -9818,10 +9818,6 @@ msgstr ""
 
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "generate automatically"
-msgstr ""
-
-#: src/freeipa/FreeIPAAccountEdit.tsx
-msgid "have been accepted on"
 msgstr ""
 
 #: src/rancher/cluster/hpas/HPADeleteButton.tsx
