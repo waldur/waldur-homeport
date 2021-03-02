@@ -1,44 +1,14 @@
 import * as constants from '../constants';
 import { BookingProps } from '../types';
 
-export const fetchBookingItems = (payload) => ({
-  type: constants.BOOKINGS_FETCH,
-  payload: {
-    offering_type: constants.OFFERING_TYPE_BOOKING,
-    offering_uuid: payload.offering_uuid,
-  },
-});
-
-export const setBookingItems = (offeringId, items) => ({
-  type: constants.BOOKINGS_SET,
-  payload: {
-    offeringId,
-    items,
-  },
-});
-
 export const acceptBookingItem = (payload) => ({
   type: constants.BOOKING_ACCEPT,
-  payload: {
-    offering_type: constants.OFFERING_TYPE_BOOKING,
-    offering_uuid: payload.offering_uuid,
-    uuid: payload.uuid,
-    filterState: payload.filterState,
-    offeringUuid: payload.offeringUuid,
-    providerUuid: payload.providerUuid,
-  },
+  payload,
 });
 
 export const rejectBookingItem = (payload) => ({
   type: constants.BOOKING_REJECT,
-  payload: {
-    offering_type: constants.OFFERING_TYPE_BOOKING,
-    offering_uuid: payload.offering_uuid,
-    uuid: payload.uuid,
-    filterState: payload.filterState,
-    offeringUuid: payload.offeringUuid,
-    providerUuid: payload.providerUuid,
-  },
+  payload,
 });
 
 export const addBooking = (payload: BookingProps) => ({
@@ -78,16 +48,9 @@ export const updateBooking = (payload: {
   },
 });
 
-export const setSettings = (payload) => ({
-  type: constants.SET_CONFIG,
+export const setBookingConfig = (payload) => ({
+  type: constants.SET_BOOKING_CONFIG,
   payload: {
     config: payload,
-  },
-});
-
-export const setBookings = (bookings) => ({
-  type: constants.SET_BOOKINGS,
-  payload: {
-    bookings,
   },
 });
