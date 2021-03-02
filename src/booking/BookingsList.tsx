@@ -62,7 +62,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     columns.push({
       title: translate('Actions'),
       render: ({ row }) => (
-        <BookingActions row={row} onRefresh={() => props.fetch()} />
+        <BookingActions resource={row} reInitResource={() => props.fetch()} />
       ),
     });
   }

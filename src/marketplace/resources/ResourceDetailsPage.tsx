@@ -1,8 +1,10 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useAsync } from 'react-use';
+import { useAsyncFn, useEffectOnce } from 'react-use';
 
+import { BookingActions } from '@waldur/booking/BookingActions';
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
@@ -48,7 +50,13 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
     params: { resource_uuid },
   } = useCurrentStateAndParams();
 
-  const state = useAsync(() => getResource(resource_uuid), [resource_uuid]);
+  const [state, reInitResource] = useAsyncFn(() => getResource(resource_uuid), [
+    resource_uuid,
+  ]);
+
+  useEffectOnce(() => {
+    reInitResource();
+  });
 
   useTitle(state.value ? state.value.name : translate('Resource details'));
 
@@ -69,9 +77,23 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
     return <LoadingSpinner />;
   }
 
+  if (!state.value) {
+    return null;
+  }
+
   const resource = state.value;
   return (
     <>
+      {resource.offering_type === OFFERING_TYPE_BOOKING && (
+        <Row className="m-b-md pull-right">
+          <Col lg={12}>
+            <BookingActions
+              resource={resource}
+              reInitResource={reInitResource}
+            />
+          </Col>
+        </Row>
+      )}
       <Row className="m-b-md">
         <Col sm={12}>
           <ResourceSummary resource={resource} />

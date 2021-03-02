@@ -1,37 +1,23 @@
-import { ButtonGroup } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useBoolean } from 'react-use';
 
-import * as constants from '@waldur/booking/constants';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
-import {
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
 
-import { acceptBookingItem, rejectBookingItem } from './store/actions';
+import { AcceptAction } from './AcceptAction';
+import { CancelAction } from './CancelAction';
+import { RejectAction } from './RejectAction';
 
-export const BookingActions = ({ row, onRefresh }) => {
-  const dispatch = useDispatch();
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const isServiceManager = useSelector(isServiceManagerSelector);
-  if (
-    row.state === constants.BOOKING_CREATING &&
-    (isOwnerOrStaff || isServiceManager)
-  ) {
-    return (
-      <ButtonGroup>
-        <ActionButton
-          title={translate('Accept')}
-          action={() => dispatch(acceptBookingItem({ row, onRefresh }))}
-        />
-        <ActionButton
-          title={translate('Reject')}
-          action={() => dispatch(rejectBookingItem({ row, onRefresh }))}
-        />
-      </ButtonGroup>
-    );
-  } else {
-    return null;
-  }
+const ActionsList = [AcceptAction, RejectAction, CancelAction];
+
+export const BookingActions = ({ resource, reInitResource }) => {
+  const [open, onToggle] = useBoolean(false);
+
+  return (
+    <ResourceActionComponent
+      open={open}
+      onToggle={onToggle}
+      actions={ActionsList}
+      resource={resource}
+      reInitResource={reInitResource}
+    />
+  );
 };

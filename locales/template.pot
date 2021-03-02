@@ -58,8 +58,12 @@ msgstr ""
 msgid "Abbreviation"
 msgstr ""
 
-#: src/booking/BookingActions.tsx
+#: src/booking/AcceptAction.tsx
 msgid "Accept"
+msgstr ""
+
+#: src/booking/AcceptAction.tsx
+msgid "Accept booking"
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
@@ -605,6 +609,14 @@ msgstr ""
 msgid "Archived plans"
 msgstr ""
 
+#: src/booking/AcceptAction.tsx
+msgid "Are you sure you want to accept a {name}?"
+msgstr ""
+
+#: src/booking/CancelAction.tsx
+msgid "Are you sure you want to cancel a {name}?"
+msgstr ""
+
 #: src/rancher/cluster/create/TenantGroup.tsx
 msgid "Are you sure you want to cluster template? Note this will reset the node plan."
 msgstr ""
@@ -631,6 +643,10 @@ msgstr ""
 
 #: src/rancher/cluster/ResourceDeleteButton.tsx
 msgid "Are you sure you want to delete this {resourceType}?"
+msgstr ""
+
+#: src/booking/RejectAction.tsx
+msgid "Are you sure you want to reject a {name}?"
 msgstr ""
 
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
@@ -926,11 +942,15 @@ msgstr ""
 msgid "Booking description"
 msgstr ""
 
-#: src/booking/store/effects.ts
+#: src/booking/AcceptAction.tsx
 msgid "Booking has been accepted."
 msgstr ""
 
-#: src/booking/store/effects.ts
+#: src/booking/CancelAction.tsx
+msgid "Booking has been cancelled."
+msgstr ""
+
+#: src/booking/RejectAction.tsx
 msgid "Booking has been rejected."
 msgstr ""
 
@@ -1004,6 +1024,7 @@ msgstr ""
 msgid "Caller"
 msgstr ""
 
+#: src/booking/CancelAction.tsx
 #: src/booking/components/modal/CalendarEventModal.tsx
 #: src/form/ListDialog.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
@@ -1014,6 +1035,10 @@ msgstr ""
 #: src/user/keys/KeyCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
+msgstr ""
+
+#: src/booking/CancelAction.tsx
+msgid "Cancel booking"
 msgstr ""
 
 #: src/invitations/InvitationConfirmDialog.tsx
@@ -5850,10 +5875,14 @@ msgstr ""
 msgid "Regular user"
 msgstr ""
 
-#: src/booking/BookingActions.tsx
+#: src/booking/RejectAction.tsx
 #: src/marketplace/orders/RejectButton.tsx
 #: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
 msgid "Reject"
+msgstr ""
+
+#: src/booking/RejectAction.tsx
+msgid "Reject booking"
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
@@ -7976,7 +8005,7 @@ msgstr ""
 msgid "UUID"
 msgstr ""
 
-#: src/booking/store/effects.ts
+#: src/booking/AcceptAction.tsx
 msgid "Unable to accept booking."
 msgstr ""
 
@@ -8027,6 +8056,10 @@ msgstr ""
 
 #: src/LoadingScreen.tsx
 msgid "Unable to bootstrap application."
+msgstr ""
+
+#: src/booking/CancelAction.tsx
+msgid "Unable to cancel booking."
 msgstr ""
 
 #: src/invitations/actions/InvitationCancelButton.tsx
@@ -8546,7 +8579,7 @@ msgstr ""
 msgid "Unable to register service provider."
 msgstr ""
 
-#: src/booking/store/effects.ts
+#: src/booking/RejectAction.tsx
 msgid "Unable to reject booking."
 msgstr ""
 
