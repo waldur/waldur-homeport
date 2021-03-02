@@ -117,8 +117,6 @@ export interface Offering extends GeolocationPoint {
   datacite_doi?: string;
   citation_count?: number;
   referred_pids: ReferredPids[];
-  latitude: number;
-  longitude: number;
   google_calendar_is_public: boolean;
 }
 
