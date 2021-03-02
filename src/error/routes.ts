@@ -27,9 +27,6 @@ export const states: StateDeclaration[] = [
     name: 'errorPage',
     component: AnonymousLayout,
     abstract: true,
-    data: {
-      bodyClass: 'old',
-    },
   },
 
   {

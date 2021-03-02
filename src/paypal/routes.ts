@@ -24,7 +24,6 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: AnonymousLayout,
     data: {
-      bodyClass: 'old',
       auth: true,
     },
   },

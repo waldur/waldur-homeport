@@ -67,9 +67,6 @@ export const states: StateDeclaration[] = [
     name: 'user-email-change',
     url: '/user_email_change/:token/',
     component: UserEmailChangeCallback,
-    data: {
-      bodyClass: 'old',
-    },
   },
 
   {
