@@ -86,6 +86,11 @@ $navbar-bg-dark: darken($nav-bg, 3%);
   font-weight: normal;
 }
 
+.dropdown-menu-right {
+  right: 0;
+  left: auto !important;
+}
+
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:focus,
 .dropdown-menu > .active > a:hover {
