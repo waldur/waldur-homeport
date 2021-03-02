@@ -23,12 +23,6 @@ export const reducer = (
 ): BookingState => {
   const { type, payload } = action;
   switch (type) {
-    case constants.BOOKINGS_SET:
-      return {
-        ...state,
-        [payload.offeringId]: payload.items,
-      };
-
     case constants.BOOKING_ACCEPT:
       return {
         ...state,
@@ -62,18 +56,13 @@ export const reducer = (
         ),
       };
 
-    case constants.SET_CONFIG:
+    case constants.SET_BOOKING_CONFIG:
       return {
         ...state,
         config: {
           ...state.config,
           ...payload.config,
         },
-      };
-    case constants.SET_BOOKINGS:
-      return {
-        ...state,
-        bookings: payload.bookings,
       };
 
     default:

@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePrevious } from 'react-use';
 
-import { setSettings } from '@waldur/booking/store/actions';
+import { setBookingConfig } from '@waldur/booking/store/actions';
 import { getConfig } from '@waldur/booking/store/selectors';
 
 export const useCalendarSettings = () => {
@@ -23,7 +23,7 @@ export const useCalendarSettings = () => {
 
   useEffect(() => {
     dispatch(
-      setSettings({
+      setBookingConfig({
         weekends,
         slotDuration,
         businessHours: {

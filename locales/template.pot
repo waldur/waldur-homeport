@@ -8227,10 +8227,6 @@ msgstr ""
 msgid "Unable to fetch data."
 msgstr ""
 
-#: src/booking/store/effects.ts
-msgid "Unable to fetch offering bookings."
-msgstr ""
-
 #: src/issues/comments/utils.ts
 msgid "Unable to find:"
 msgstr ""
