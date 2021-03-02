@@ -1,7 +1,6 @@
 import formActionSaga from 'redux-form-saga';
 
 import authSaga from '@waldur/auth/store/effects';
-import bookingSaga from '@waldur/booking/store/effects';
 import downloadLinkSaga from '@waldur/core/DownloadLink/effects';
 import customerDetailsSaga from '@waldur/customer/details/store/effects';
 import organizationsSaga from '@waldur/customer/list/store/effects';
@@ -23,7 +22,6 @@ import userSaga from '@waldur/user/support/effects';
 
 export default [
   authSaga,
-  bookingSaga,
   downloadLinkSaga,
   formActionSaga,
   projectSaga,

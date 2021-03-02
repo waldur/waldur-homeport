@@ -23,16 +23,6 @@ export const reducer = (
 ): BookingState => {
   const { type, payload } = action;
   switch (type) {
-    case constants.BOOKING_ACCEPT:
-      return {
-        ...state,
-      };
-
-    case constants.BOOKING_REJECT:
-      return {
-        ...state,
-      };
-
     case constants.ADD_BOOKING:
       return {
         ...state,

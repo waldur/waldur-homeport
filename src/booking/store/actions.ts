@@ -1,16 +1,6 @@
 import * as constants from '../constants';
 import { BookingProps } from '../types';
 
-export const acceptBookingItem = (payload) => ({
-  type: constants.BOOKING_ACCEPT,
-  payload,
-});
-
-export const rejectBookingItem = (payload) => ({
-  type: constants.BOOKING_REJECT,
-  payload,
-});
-
 export const addBooking = (payload: BookingProps) => ({
   type: constants.ADD_BOOKING,
   payload: {
