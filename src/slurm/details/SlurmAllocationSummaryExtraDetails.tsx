@@ -1,20 +1,21 @@
 import { FunctionComponent } from 'react';
 
+import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
-import { CopyToClipboardButton } from '@waldur/slurm/CopyToClipboardButton';
 
 import './SlurmAllocationSummaryExtraDetails.scss';
 
 const formatSubmitDetails = (props) => {
   const value = `sbatch -A ${props.resource.backend_id}`;
   return (
-    <div className="pre-container">
-      <pre>
-        <div className="m-b-sm m-t-sm copyable-content">
+    <CopyToClipboardContainer
+      value={value}
+      label={
+        <>
           {value}
-          {props.resource.homepage && (
+          {props.resource.homepage ? (
             <a
               href={props.resource.homepage}
               target="_blank"
@@ -24,13 +25,10 @@ const formatSubmitDetails = (props) => {
               &nbsp;
               <i className="fa fa-info-circle" />
             </a>
-          )}
-        </div>
-        <span className="m-l-xs copy-to-clipboard-container">
-          <CopyToClipboardButton value={value} />
-        </span>
-      </pre>
-    </div>
+          ) : null}
+        </>
+      }
+    />
   );
 };
 
@@ -42,14 +40,7 @@ const formatLoginDetails = (props) => {
       label={translate('FreeIPA account needs to be set up.')}
     />
   ) : (
-    <div className="pre-container">
-      <pre>
-        <div className="m-b-sm m-t-sm copyable-content">{value}</div>
-        <span className="m-l-xs copy-to-clipboard-container">
-          <CopyToClipboardButton value={value} />
-        </span>
-      </pre>
-    </div>
+    <CopyToClipboardContainer value={value} />
   );
 };
 

@@ -81,6 +81,12 @@ interface ReferredPids {
 
 type OfferingState = 'Draft' | 'Active' | 'Paused' | 'Archived';
 
+interface OfferingGoogleCalendar {
+  backend_id: string;
+  http_link: string;
+  public: boolean;
+}
+
 export interface Offering extends GeolocationPoint {
   quotas?: Quota[];
   uuid?: string;
@@ -118,6 +124,7 @@ export interface Offering extends GeolocationPoint {
   citation_count?: number;
   referred_pids: ReferredPids[];
   google_calendar_is_public: boolean;
+  googlecalendar?: OfferingGoogleCalendar;
 }
 
 export interface Image {
