@@ -10,6 +10,7 @@ import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { eventsMapper } from '@waldur/booking/utils';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { stringToColor } from '@waldur/core/stringToColor';
 import { orderByFilter } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
@@ -17,11 +18,8 @@ export const getCalendarEvent = (bookingItem, event) => ({
   ...event,
   className: classNames({
     progress: bookingItem.state === 'Creating',
-    'event-terminated': bookingItem.state === 'Terminated',
   }),
-  color: classNames({
-    '#f8ac59': bookingItem.state === 'Terminated',
-  }),
+  color: stringToColor(bookingItem.offering_uuid),
   name: bookingItem.name,
   offering_name: bookingItem.offering_name,
   project_name: bookingItem.project_name,
