@@ -17,7 +17,7 @@ import {
   setStep,
   loadDataSuccess,
   loadDataError,
-  isAddingOfferingScreenshot,
+  isAddingOfferingImage,
 } from './actions';
 import * as constants from './constants';
 import {
@@ -176,15 +176,11 @@ function* loadOffering(action) {
   }
 }
 
-function* addOfferingScreenshot(action: Action<any>) {
+function* addOfferingImage(action: Action<any>) {
   const { formData, offering } = action.payload;
   try {
-    const response = yield call(
-      api.uploadOfferingScreenshot,
-      formData,
-      offering,
-    );
-    yield put(showSuccess(translate('Screenshot has been added.')));
+    const response = yield call(api.uploadOfferingImage, formData, offering);
+    yield put(showSuccess(translate('Image has been added.')));
     if (response.status === 201) {
       yield put(closeModalDialog());
       yield loadOffering({
@@ -194,19 +190,19 @@ function* addOfferingScreenshot(action: Action<any>) {
       });
     }
   } catch (error) {
-    const errorMessage = `${translate('Unable to add screenshot.')} ${format(
+    const errorMessage = `${translate('Unable to add image.')} ${format(
       error,
     )}`;
     yield put(showError(errorMessage));
   }
-  yield put(isAddingOfferingScreenshot(false));
+  yield put(isAddingOfferingImage(false));
 }
 
-function* removeOfferingScreenshot(action: Action<any>) {
-  const { offering, screenshot } = action.payload;
+function* removeOfferingImage(action: Action<any>) {
+  const { offering, image } = action.payload;
   try {
-    yield call(api.deleteOfferingScreenshot, screenshot.uuid);
-    yield put(showSuccess(translate('Screenshot has been removed.')));
+    yield call(api.deleteOfferingImage, image.uuid);
+    yield put(showSuccess(translate('Image has been removed.')));
     yield put(closeModalDialog());
     yield loadOffering({
       payload: {
@@ -214,7 +210,7 @@ function* removeOfferingScreenshot(action: Action<any>) {
       },
     });
   } catch (error) {
-    const errorMessage = `${translate('Unable to remove screenshot.')} ${format(
+    const errorMessage = `${translate('Unable to remove image.')} ${format(
       error,
     )}`;
     yield put(showError(errorMessage));
@@ -296,11 +292,8 @@ export default function* () {
   yield takeEvery(constants.createOffering.REQUEST, createOffering);
   yield takeEvery(constants.updateOffering.REQUEST, updateOffering);
   yield takeEvery(constants.UPDATE_OFFERING_STATE, updateOfferingState);
-  yield takeEvery(constants.ADD_OFFERING_SCREENSHOT, addOfferingScreenshot);
-  yield takeEvery(
-    constants.REMOVE_OFFERING_SCREENSHOT,
-    removeOfferingScreenshot,
-  );
+  yield takeEvery(constants.ADD_OFFERING_IMAGE, addOfferingImage);
+  yield takeEvery(constants.REMOVE_OFFERING_IMAGE, removeOfferingImage);
   yield takeEvery(constants.ADD_OFFERING_LOCATION, addOfferingLocation);
   yield takeEvery(constants.GOOGLE_CALENDAR_SYNC, googleCalendarSync);
   yield takeEvery(constants.GOOGLE_CALENDAR_PUBLISH, googleCalendarPublish);

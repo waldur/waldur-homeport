@@ -1,88 +1,23 @@
-import classNames from 'classnames';
-import { connect } from 'react-redux';
+import { useBoolean } from 'react-use';
 
-import * as constants from '@waldur/booking/constants';
-import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { ActionButton } from '@waldur/table/ActionButton';
-import {
-  getUser,
-  isOwner,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
 
-import { acceptBookingItem, rejectBookingItem } from './store/actions';
-import { bookingFormSelector } from './store/selectors';
-import { BookingResource } from './types';
+import { AcceptAction } from './AcceptAction';
+import { CancelAction } from './CancelAction';
+import { RejectAction } from './RejectAction';
 
-const mapStateToProps = (state: RootState) => ({
-  user: getUser(state),
-  isOwner: isOwner(state),
-  isServiceManager: isServiceManagerSelector(state),
-  filter: bookingFormSelector(state),
-});
+const ActionsList = [AcceptAction, RejectAction, CancelAction];
 
-const mapDispatchToProps = { acceptBookingItem, rejectBookingItem };
+export const BookingActions = ({ resource, reInitResource }) => {
+  const [open, onToggle] = useBoolean(false);
 
-type StateProps = ReturnType<typeof mapStateToProps>;
-
-type DispatchProps = typeof mapDispatchToProps;
-
-type OwnProps = {
-  row: BookingResource;
-  offeringUuid: string;
-  providerUuid: string;
+  return (
+    <ResourceActionComponent
+      open={open}
+      onToggle={onToggle}
+      actions={ActionsList}
+      resource={resource}
+      reInitResource={reInitResource}
+    />
+  );
 };
-
-const mergeProps = (
-  stateProps: StateProps,
-  dispatchProps: DispatchProps,
-  ownProps: OwnProps,
-) => ({
-  actions: [
-    {
-      label: translate('Accept'),
-      handler: () =>
-        dispatchProps.acceptBookingItem({
-          ...ownProps.row,
-          filterState: stateProps.filter.state,
-          offeringUuid: ownProps.offeringUuid,
-          providerUuid: ownProps.providerUuid,
-        }),
-      visible:
-        ownProps.row.state === constants.BOOKING_CREATED &&
-        (stateProps.user.is_staff ||
-          stateProps.isOwner ||
-          stateProps.isServiceManager),
-    },
-    {
-      label: translate('Reject'),
-      handler: () =>
-        dispatchProps.rejectBookingItem({
-          ...ownProps.row,
-          filterState: stateProps.filter.state,
-          offeringUuid: ownProps.offeringUuid,
-          providerUuid: ownProps.providerUuid,
-        }),
-      visible:
-        ownProps.row.state === constants.BOOKING_CREATED &&
-        (stateProps.user.is_staff ||
-          stateProps.isOwner ||
-          stateProps.isServiceManager),
-    },
-  ].filter((row) => row.visible),
-});
-
-const Actions = ({ actions }) => (
-  <div className={classNames('btn-group', { disabled: actions.length === 0 })}>
-    {actions.map((action, index) => (
-      <ActionButton key={index} title={action.label} action={action.handler} />
-    ))}
-  </div>
-);
-
-export const BookingActions = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps,
-)(Actions);

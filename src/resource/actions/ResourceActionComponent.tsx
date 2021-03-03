@@ -31,6 +31,7 @@ export const ResourceActionComponent: FunctionComponent<ResourceActionComponentP
     onToggle={props.onToggle}
     open={props.open}
     disabled={props.disabled}
+    pullRight
   >
     {props.open ? (
       props.loading ? (

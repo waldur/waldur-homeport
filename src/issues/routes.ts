@@ -170,7 +170,6 @@ export const states: StateDeclaration[] = [
     component: SupportFeedback,
     data: {
       feature: 'support',
-      bodyClass: 'old',
     },
   },
 

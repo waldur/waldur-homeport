@@ -16,7 +16,7 @@ const KubeconfigFilePanel = (props) => {
       <CopyToClipboard value={props.config} />
       <p>
         <a
-          href="http://kubernetes.io/docs/user-guide/prereqs/"
+          href="https://kubernetes.io/docs/tasks/tools/install-kubectl/"
           target="_blank"
           rel="noopener noreferrer"
         >

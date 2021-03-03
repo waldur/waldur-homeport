@@ -104,12 +104,12 @@ const OfferingsListContainer = lazyComponent(
     ),
   'OfferingsListContainer',
 );
-const ScreenshotsContainer = lazyComponent(
+const ImagesContainer = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "OfferingScreenshotsContainer" */ './offerings/screenshots/ScreenshotsContainer'
+      /* webpackChunkName: "OfferingImagesContainer" */ './offerings/images/ImagesContainer'
     ),
-  'ScreenshotsContainer',
+  'ImagesContainer',
 );
 const OfferingUpdateContainer = lazyComponent(
   () =>
@@ -362,9 +362,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-offering-screenshots',
-    url: 'marketplace-offering-screenshots/:offering_uuid/',
-    component: ScreenshotsContainer,
+    name: 'marketplace-offering-images',
+    url: 'marketplace-offering-images/:offering_uuid/',
+    component: ImagesContainer,
     parent: 'organization',
     data: {
       sidebarKey: 'marketplace-services',

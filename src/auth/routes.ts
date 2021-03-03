@@ -41,7 +41,6 @@ export const states: StateDeclaration[] = [
       toParams: {},
     },
     data: {
-      bodyClass: 'old',
       anonymous: true,
     },
   },
@@ -51,7 +50,6 @@ export const states: StateDeclaration[] = [
     url: '/register/',
     component: AuthLogin,
     data: {
-      bodyClass: 'old',
       anonymous: true,
     },
   },
@@ -62,7 +60,6 @@ export const states: StateDeclaration[] = [
     component: AuthActivation,
     data: {
       anonymous: true,
-      bodyClass: 'old',
     },
   },
 
@@ -73,7 +70,6 @@ export const states: StateDeclaration[] = [
     component: AuthInit,
     data: {
       auth: true,
-      bodyClass: 'old',
     },
   },
 ];

@@ -95,7 +95,7 @@ export interface Offering extends GeolocationPoint {
   category_title?: string;
   category_uuid?: string;
   vendor_details?: string;
-  screenshots?: Screenshot[];
+  screenshots?: Image[];
   description?: string;
   full_description: string;
   customer_uuid?: string;
@@ -117,12 +117,10 @@ export interface Offering extends GeolocationPoint {
   datacite_doi?: string;
   citation_count?: number;
   referred_pids: ReferredPids[];
-  latitude: number;
-  longitude: number;
   google_calendar_is_public: boolean;
 }
 
-export interface Screenshot {
+export interface Image {
   image: string;
   thumbnail: string;
   name: string;

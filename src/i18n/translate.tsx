@@ -23,7 +23,7 @@ export const formatJsxTemplate = (template, context) => {
 };
 
 export const formatJsx = (template, context) => {
-  const iterator = template.matchAll(/<([^>]+)>([^<]+)<\/([^>]+)>/g);
+  const iterator = template.matchAll(/<([^>]+)>([^<]*)<\/([^>]+)>/g);
   const children = [];
   let match,
     prevIndex = 0;

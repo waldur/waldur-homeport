@@ -8,8 +8,6 @@ interface DataDeclaration {
   feature: string;
   /** Related sidebar item is expanded if its key matches current state sidebarKey */
   sidebarKey: string;
-  /** Body class name is applied to body element automatically */
-  bodyClass: string;
   /** Authenticated view is protected from anonymous user.
    * When anonymous user tries to access protected state, he is redirected to login view.
    */

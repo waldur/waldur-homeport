@@ -48,7 +48,6 @@ export const states: StateDeclaration[] = [
     component: AuthLoginCompleted,
     data: {
       anonymous: true,
-      bodyClass: 'old',
     },
   },
 
@@ -58,7 +57,6 @@ export const states: StateDeclaration[] = [
     component: OauthLoginCompleted,
     data: {
       anonymous: true,
-      bodyClass: 'old',
     },
   },
 
@@ -68,7 +66,6 @@ export const states: StateDeclaration[] = [
     component: SAML2DiscoveryCompleted,
     data: {
       anonymous: true,
-      bodyClass: 'old',
     },
   },
 
@@ -77,7 +74,6 @@ export const states: StateDeclaration[] = [
     url: '/login_failed/',
     component: AuthLoginFailed,
     data: {
-      bodyClass: 'old',
       erred: true,
     },
   },
@@ -86,9 +82,6 @@ export const states: StateDeclaration[] = [
     name: 'home.logout_completed',
     url: '/logout_completed/',
     component: AuthLogoutCompleted,
-    data: {
-      bodyClass: 'old',
-    },
   },
 
   {
@@ -96,7 +89,6 @@ export const states: StateDeclaration[] = [
     url: '/logout_failed/',
     component: AuthLogoutFailed,
     data: {
-      bodyClass: 'old',
       erred: true,
     },
   },
