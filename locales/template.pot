@@ -328,7 +328,7 @@ msgstr ""
 msgid "Add offering"
 msgstr ""
 
-#: src/user/list/CustomerCreateButton.tsx
+#: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr ""
 
@@ -741,8 +741,8 @@ msgstr ""
 #: src/customer/workspace/utils.ts
 #: src/project/utils.ts
 #: src/user/constants.ts
-#: src/user/list/UserDashboard.tsx
-#: src/user/list/UserEventsWrapper.tsx
+#: src/user/dashboard/UserDashboard.tsx
+#: src/user/dashboard/UserEventsWrapper.tsx
 msgid "Audit logs"
 msgstr ""
 
@@ -798,7 +798,7 @@ msgstr ""
 msgid "Available quota usage: {usage}"
 msgstr ""
 
-#: src/user/list/UserDashboardChart.tsx
+#: src/user/dashboard/UserDashboardChart.tsx
 msgid "Average of all checklists"
 msgstr ""
 
@@ -1192,7 +1192,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace-checklist/ComplianceChecklists.tsx
 #: src/user/UserPopover.tsx
-#: src/user/list/UserDashboard.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Checklists"
 msgstr ""
 
@@ -3668,7 +3668,7 @@ msgstr ""
 msgid "Manage security groups"
 msgstr ""
 
-#: src/user/list/UserDashboard.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Managed projects"
 msgstr ""
 
@@ -3687,7 +3687,7 @@ msgstr ""
 #: src/marketplace/details/utils.ts
 #: src/marketplace/landing/LandingPageContainer.tsx
 #: src/marketplace/sidebar.ts
-#: src/user/list/UserDashboard.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Marketplace"
 msgstr ""
 
@@ -4670,7 +4670,7 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/SelectAffiliationDialog.tsx
-#: src/user/list/ProjectPermissions.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -4711,7 +4711,7 @@ msgstr ""
 msgid "Organization has signed a fixed price agreement"
 msgstr ""
 
-#: src/user/list/CustomerPermissions.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Organization name"
 msgstr ""
@@ -4823,13 +4823,13 @@ msgstr ""
 msgid "Overview of {project} project"
 msgstr ""
 
-#: src/user/list/UserDashboard.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Owned organizations"
 msgstr ""
 
 #: src/customer/team/CustomerUsersList.tsx
 #: src/issues/notifications/NotificationCreateDialog.tsx
-#: src/user/list/CustomerPermissions.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 msgid "Owner"
 msgstr ""
 
@@ -5504,7 +5504,7 @@ msgstr ""
 
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/project/ProjectNameField.tsx
-#: src/user/list/ProjectPermissions.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
 msgid "Project name"
 msgstr ""
 
@@ -6403,7 +6403,7 @@ msgstr ""
 #: src/invitations/actions/RoleGroup.tsx
 #: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
-#: src/user/list/ProjectPermissions.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
 msgstr ""
@@ -7693,7 +7693,7 @@ msgid "There are no available users."
 msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
-#: src/user/list/CategoriesList.tsx
+#: src/user/dashboard/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
@@ -8395,8 +8395,8 @@ msgstr ""
 #: src/resource/actions/AsyncActionDialog.tsx
 #: src/resource/actions/ResourceActionDialog.tsx
 #: src/support/SupportDetailsContainer.tsx
+#: src/user/dashboard/UserDashboard.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
-#: src/user/list/UserDashboard.tsx
 msgid "Unable to load data."
 msgstr ""
 
@@ -8439,8 +8439,8 @@ msgid "Unable to load locations."
 msgstr ""
 
 #: src/marketplace/landing/CategoriesList.tsx
-#: src/user/list/CategoriesList.tsx
-#: src/user/list/CategoryUserList.tsx
+#: src/user/dashboard/CategoriesList.tsx
+#: src/user/dashboard/CategoryUserList.tsx
 msgid "Unable to load marketplace categories."
 msgstr ""
 
@@ -8534,7 +8534,7 @@ msgstr ""
 msgid "Unable to load tenant."
 msgstr ""
 
-#: src/user/list/UserDashboardChart.tsx
+#: src/user/dashboard/UserDashboardChart.tsx
 msgid "Unable to load user monthly activity data."
 msgstr ""
 
@@ -9094,7 +9094,7 @@ msgid "User could not been updated"
 msgstr ""
 
 #: src/user/UserDetails.tsx
-#: src/user/list/UserDashboard.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "User dashboard"
 msgstr ""
 
@@ -9110,7 +9110,7 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-#: src/user/utils.ts
+#: src/user/dashboard/utils.ts
 msgid "User events this month"
 msgstr ""
 
@@ -9526,7 +9526,7 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerDashboard.tsx
 #: src/project/ProjectDashboard.tsx
-#: src/user/list/UserDashboard.tsx
+#: src/user/dashboard/UserDashboard.tsx
 msgid "Welcome, {user}!"
 msgstr ""
 
@@ -9949,7 +9949,7 @@ msgid "organization"
 msgstr ""
 
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/user/list/CustomerPermissions.tsx
+#: src/user/dashboard/CustomerPermissions.tsx
 msgid "organizations"
 msgstr ""
 
@@ -9990,7 +9990,7 @@ msgstr ""
 
 #: src/project/ProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/user/list/ProjectPermissions.tsx
+#: src/user/dashboard/ProjectPermissions.tsx
 msgid "projects"
 msgstr ""
 
@@ -10153,7 +10153,7 @@ msgstr ""
 msgid "{category} resources"
 msgstr ""
 
-#: src/user/utils.ts
+#: src/user/dashboard/utils.ts
 msgid "{count} user events in {date}"
 msgstr ""
 

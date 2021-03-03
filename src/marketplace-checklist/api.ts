@@ -62,3 +62,8 @@ export const countChecklists = () =>
     method: 'HEAD',
     url: ENV.apiEndpoint + 'api/marketplace-checklists/',
   }).then(parseResultCount);
+
+export const getUserChecklistScore = (userUuid: string) =>
+  get<{ score: number }>(
+    `/users/${userUuid}/marketplace-checklist-stats/`,
+  ).then((response) => response.data);

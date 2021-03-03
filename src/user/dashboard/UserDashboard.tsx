@@ -13,14 +13,14 @@ import * as actions from '@waldur/marketplace/landing/store/actions';
 import * as selectors from '@waldur/marketplace/landing/store/selectors';
 import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
-import { CategoriesList } from '@waldur/user/list/CategoriesList';
-import { CategoryUserList } from '@waldur/user/list/CategoryUserList';
-import { UserDashboardChart } from '@waldur/user/list/UserDashboardChart';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { CategoriesList } from './CategoriesList';
+import { CategoryUserList } from './CategoryUserList';
 import { CurrentUserEvents } from './CurrentUserEvents';
 import { CustomerPermissions } from './CustomerPermissions';
 import { ProjectPermissions } from './ProjectPermissions';
+import { UserDashboardChart } from './UserDashboardChart';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 

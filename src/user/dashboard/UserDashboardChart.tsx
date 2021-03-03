@@ -7,29 +7,14 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { DashboardCounter } from '@waldur/dashboard/DashboardCounter';
 import { translate } from '@waldur/i18n';
 import { PieChart } from '@waldur/marketplace-checklist/PieChart';
-import {
-  getUserChecklistScore,
-  getUserMonthlyActivity,
-} from '@waldur/user/api';
-import { UserActions } from '@waldur/user/list/UserActions';
-import { formatUserMonthlyActivityChart } from '@waldur/user/utils';
 import { User } from '@waldur/workspace/types';
+
+import { UserActions } from './UserActions';
+import { loadCharts } from './utils';
 
 interface UserDashboardChart {
   user: User;
   hasChecklists: boolean;
-}
-
-async function loadCharts(user: User, hasChecklists: boolean) {
-  const events = await getUserMonthlyActivity(user.url).then(
-    formatUserMonthlyActivityChart,
-  );
-  if (hasChecklists) {
-    const checklists = await getUserChecklistScore(user.uuid);
-    return { events, checklists };
-  } else {
-    return { events };
-  }
 }
 
 export const UserDashboardChart: FunctionComponent<UserDashboardChart> = ({
