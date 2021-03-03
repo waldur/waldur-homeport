@@ -6953,6 +6953,7 @@ msgid "Set allowed address pairs"
 msgstr ""
 
 #: src/marketplace/resources/SetBackendIdAction.tsx
+#: src/marketplace/resources/SetBackendIdButton.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
 msgid "Set backend ID"
 msgstr ""

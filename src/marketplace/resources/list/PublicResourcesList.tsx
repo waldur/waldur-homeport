@@ -16,7 +16,7 @@ import {
 } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
-import { ResourceUsageButton } from '../usage/ResourceUsageButton';
+import { PublicResourceActions } from '../usage/PublicResourceActions';
 
 import { TABLE_PUBLIC_RESOURCE } from './constants';
 import { PublicResourceLink } from './PublicResourceLink';
@@ -75,7 +75,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Actions'),
-      render: ResourceUsageButton,
+      render: PublicResourceActions,
     },
   ];
 

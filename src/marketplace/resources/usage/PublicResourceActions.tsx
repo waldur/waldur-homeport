@@ -5,10 +5,12 @@ import { useSelector } from 'react-redux';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { isSupportOnly } from '@waldur/workspace/selectors';
 
+import { SetBackendIdButton } from '../SetBackendIdButton';
+
 import { ResourceCreateUsageButton } from './ResourceCreateUsageButton';
 import { ResourceShowUsageButton } from './ResourceShowUsageButton';
 
-interface ResourceUsageButtonProps {
+interface PublicResourceActionsProps {
   row: Pick<
     Resource,
     | 'state'
@@ -23,7 +25,7 @@ interface ResourceUsageButtonProps {
   >;
 }
 
-export const ResourceUsageButton: FunctionComponent<ResourceUsageButtonProps> = ({
+export const PublicResourceActions: FunctionComponent<PublicResourceActionsProps> = ({
   row,
 }) => {
   const is_support_only = useSelector(isSupportOnly);
@@ -48,6 +50,7 @@ export const ResourceUsageButton: FunctionComponent<ResourceUsageButtonProps> = 
           disabled={disabled}
         />
       )}
+      <SetBackendIdButton resource={row} />
     </ButtonGroup>
   );
 };
