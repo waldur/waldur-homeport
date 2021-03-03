@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="2.8040" tests="1" failures="0">
-  <testsuite name="Root Suite" timestamp="2021-03-03T19:36:16" tests="0" file="cypress/integration/openstack/volume/detail-view.spec.ts" time="0.0000" failures="0">
-  </testsuite>
-  <testsuite name="OpenStack Volume detail view" timestamp="2021-03-03T19:36:16" tests="1" time="2.8040" failures="0">
-    <testcase name="OpenStack Volume detail view Attaches OpenStack Volume to Instance" time="2.8040" classname="Attaches OpenStack Volume to Instance">
-    </testcase>
-  </testsuite>
-</testsuites>

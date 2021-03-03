@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="12.2220" tests="1" failures="0">
-  <testsuite name="Root Suite" timestamp="2021-03-03T19:34:12" tests="0" file="cypress/integration/customer/create-dialog.ts" time="0.0000" failures="0">
-  </testsuite>
-  <testsuite name="Customer creation dialog" timestamp="2021-03-03T19:34:12" tests="1" time="12.2220" failures="0">
-    <testcase name="Customer creation dialog Validates required fields" time="12.2220" classname="Validates required fields">
-    </testcase>
-  </testsuite>
-</testsuites>
