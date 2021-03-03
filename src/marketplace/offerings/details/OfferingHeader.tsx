@@ -5,6 +5,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
+import { GoogleCalendarLinkField } from '@waldur/marketplace/offerings/details/GoogleCalendarLinkField';
 import { ReferralDetailsField } from '@waldur/marketplace/referral/ReferralDetailsField';
 import { Offering } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
@@ -68,5 +69,6 @@ export const OfferingHeader: React.FC<OfferingHeaderProps> = (props) => (
 
       <ReferralDetailsField offering={props.offering} />
     </ResourceDetailsTable>
+    <GoogleCalendarLinkField offering={props.offering} />
   </Col>
 );

@@ -1441,7 +1441,7 @@ msgid "Copy of"
 msgstr ""
 
 #: src/core/CopyToClipboard.tsx
-#: src/slurm/CopyToClipboardButton.tsx
+#: src/core/CopyToClipboardButton.tsx
 #: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
@@ -2802,6 +2802,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Google Calendar has been unpublished successfully."
+msgstr ""
+
+#: src/marketplace/offerings/details/GoogleCalendarLinkField.tsx
+msgid "Google Calendar link"
 msgstr ""
 
 #: src/navigation/cookies/CookiesConsent.tsx
@@ -7623,7 +7627,7 @@ msgstr ""
 msgid "Terms of service"
 msgstr ""
 
-#: src/slurm/CopyToClipboardButton.tsx
+#: src/core/CopyToClipboardButton.tsx
 msgid "Text has been copied"
 msgstr ""
 
