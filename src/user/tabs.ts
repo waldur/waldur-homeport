@@ -18,13 +18,14 @@ const KeysList = lazyComponent(
   'KeysList',
 );
 const UserDashboard = lazyComponent(
-  () => import(/* webpackChunkName: "UserDashboard" */ './list/UserDashboard'),
+  () =>
+    import(/* webpackChunkName: "UserDashboard" */ './dashboard/UserDashboard'),
   'UserDashboard',
 );
 const UserEventsWrapper = lazyComponent(
   () =>
     import(
-      /* webpackChunkName: "UserEventsWrapper" */ './list/UserEventsWrapper'
+      /* webpackChunkName: "UserEventsWrapper" */ './dashboard/UserEventsWrapper'
     ),
   'UserEventsWrapper',
 );

@@ -19,3 +19,9 @@ export interface Event {
   created: string;
   context: Record<string, string>;
 }
+
+export interface EventStat {
+  year: number;
+  month: number;
+  count: number;
+}

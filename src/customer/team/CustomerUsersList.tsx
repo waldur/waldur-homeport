@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
-import { CustomerRole } from '@waldur/user/list/CustomerRole';
+import { CustomerRole } from '@waldur/user/dashboard/CustomerRole';
 import {
   getProject,
   getUser,

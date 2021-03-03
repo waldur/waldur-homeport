@@ -5,7 +5,7 @@ import { compose } from 'redux';
 
 import { TranslateProps, withTranslation } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
-import { UserEvents } from '@waldur/user/list/UserEvents';
+import { UserEvents } from '@waldur/user/dashboard/UserEvents';
 import {
   isVisibleForSupportOrStaff,
   userManageIsVisible,
