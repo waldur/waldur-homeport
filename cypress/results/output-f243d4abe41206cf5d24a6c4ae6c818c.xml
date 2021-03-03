@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="9.7320" tests="5" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-03-03T19:37:34" tests="0" file="cypress/integration/workspace_selector.spec.ts" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Workspace selector" timestamp="2021-03-03T19:37:34" tests="5" time="9.7320" failures="0">
+    <testcase name="Workspace selector Lists all organizations by default" time="2.0870" classname="Lists all organizations by default">
+    </testcase>
+    <testcase name="Workspace selector Allows to filter organizations by name" time="1.8480" classname="Allows to filter organizations by name">
+    </testcase>
+    <testcase name="Workspace selector Allows to filter projects by name" time="1.6740" classname="Allows to filter projects by name">
+    </testcase>
+    <testcase name="Workspace selector Allows to go switch to organization workspace" time="1.6400" classname="Allows to go switch to organization workspace">
+    </testcase>
+    <testcase name="Workspace selector Allows to go switch to project workspace" time="2.4830" classname="Allows to go switch to project workspace">
+    </testcase>
+  </testsuite>
+</testsuites>

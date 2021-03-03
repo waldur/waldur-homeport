@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="4.5930" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-03-03T19:37:08" tests="0" file="cypress/integration/user/manage.spec.ts" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="User manage" timestamp="2021-03-03T19:37:08" tests="1" time="4.5930" failures="0">
+    <testcase name="User manage allows to update user details" time="4.5930" classname="allows to update user details">
+    </testcase>
+  </testsuite>
+</testsuites>

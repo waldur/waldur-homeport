@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="9.0830" tests="2" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-03-03T19:36:51" tests="0" file="cypress/integration/support/workspace.spec.ts" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Financial overview" timestamp="2021-03-03T19:36:51" tests="2" time="9.0830" failures="0">
+    <testcase name="Financial overview should render menu item for each checklist category" time="4.4780" classname="should render menu item for each checklist category">
+    </testcase>
+    <testcase name="Financial overview should browse menus in support workspace" time="4.6050" classname="should browse menus in support workspace">
+    </testcase>
+  </testsuite>
+</testsuites>

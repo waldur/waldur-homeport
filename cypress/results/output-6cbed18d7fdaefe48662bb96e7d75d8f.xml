@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="15.1400" tests="4" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-03-03T19:35:51" tests="0" file="cypress/integration/openstack/instance/create.spec.ts" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="OpenStackInstanceCreateForm" timestamp="2021-03-03T19:35:51" tests="4" time="15.1400" failures="0">
+    <testcase name="OpenStackInstanceCreateForm should create OpenStack virtual machine" time="3.8330" classname="should create OpenStack virtual machine">
+    </testcase>
+    <testcase name="OpenStackInstanceCreateForm should render order summary table if flavor is selected" time="5.1390" classname="should render order summary table if flavor is selected">
+    </testcase>
+    <testcase name="OpenStackInstanceCreateForm should initialize system volume size based on selected flavor" time="2.1190" classname="should initialize system volume size based on selected flavor">
+    </testcase>
+    <testcase name="OpenStackInstanceCreateForm should keep &quot;Add to cart&quot; button disabled if required fields are not selected" time="4.0490" classname="should keep &quot;Add to cart&quot; button disabled if required fields are not selected">
+    </testcase>
+  </testsuite>
+</testsuites>

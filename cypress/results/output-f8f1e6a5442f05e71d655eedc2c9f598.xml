@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="5.3580" tests="3" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-03-03T19:36:40" tests="0" file="cypress/integration/support/issues.spec.ts" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Issue details view" timestamp="2021-03-03T19:36:40" tests="3" time="5.3580" failures="0">
+    <testcase name="Issue details view renders attachments section" time="2.0030" classname="renders attachments section">
+    </testcase>
+    <testcase name="Issue details view renders list of comments" time="0.9710" classname="renders list of comments">
+    </testcase>
+    <testcase name="Issue details view submits new comment" time="2.3840" classname="submits new comment">
+    </testcase>
+  </testsuite>
+</testsuites>

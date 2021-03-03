@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="2.7980" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-03-03T19:36:24" tests="0" file="cypress/integration/project/create-dialog.ts" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Project creation dialog" timestamp="2021-03-03T19:36:24" tests="1" time="2.7980" failures="0">
+    <testcase name="Project creation dialog Validates required fields" time="2.7980" classname="Validates required fields">
+    </testcase>
+  </testsuite>
+</testsuites>
