@@ -10,9 +10,16 @@ import * as constants from '../constants';
 
 function* reportIncident(action) {
   try {
-    yield call(api.reportSecurityIncident, {
+    const response = yield call(api.reportSecurityIncident, {
       ...action.payload,
     });
+    if (action.payload.files) {
+      yield call(
+        api.uploadAttachments,
+        response.data.url,
+        action.payload.files,
+      );
+    }
     yield put(showSuccess('Security incident has been successfully reported.'));
     yield put(constants.REPORT_INCIDENT.success());
     yield put(closeModalDialog());
