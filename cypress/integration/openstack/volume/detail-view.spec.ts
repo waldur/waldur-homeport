@@ -14,6 +14,7 @@ describe('OpenStack Volume detail view', () => {
           fixture: 'openstack/openstacktenant-volume.json',
         },
       )
+      .as('getOpenstackTenantVolume')
       .intercept('GET', '/api/openstacktenant-instances/**', {
         fixture: 'openstack/openstacktenant-instances.json',
       })
@@ -44,6 +45,8 @@ describe('OpenStack Volume detail view', () => {
     cy.log('Open "Attach OpenStack Volume to Instance" dialog')
       .get('#actions-dropdown-btn')
       .click({ force: true })
+      .wait('@getOpenstackTenantVolume')
+      .wait(500)
       .get('ul.dropdown-menu a')
       .contains('Attach')
       .click({ force: true })
