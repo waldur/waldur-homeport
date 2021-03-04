@@ -80,7 +80,12 @@ export const LazyCalendarComponent: FC<CalendarComponentProps> = (props) => {
     return setModal({ isOpen: true, el, event });
   };
   const addBooking = (event: BookingProps) => {
-    dispatch(showSuccess('Time slot has been added.'));
+    const isEventInPast = moment(moment(event.start)).isBefore();
+    if (isEventInPast) {
+      dispatch(showError(translate('Past time slots are not allowed.')));
+      return;
+    }
+    dispatch(showSuccess(translate('Time slot has been added.')));
     return props.addEventCb(event);
   };
 
