@@ -83,11 +83,6 @@ export const useInvitationCreateDialog = (context) => {
     async (formData) => {
       try {
         const payload: Record<string, any> = {};
-        const path = router.stateService.href('invitation', {
-          uuid: 'TEMPLATE',
-        });
-        payload.link_template =
-          location.origin + path.replace('TEMPLATE', '{uuid}');
         payload.email = formData.email;
         payload.civil_number = formData.civil_number;
         payload.tax_number = formData.tax_number;

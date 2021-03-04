@@ -4,17 +4,10 @@ import { translate } from '@waldur/i18n';
 
 export const InvitationExpandableRow: React.FC<{
   row;
-}> = ({ row }) => (
-  <>
+}> = ({ row }) =>
+  row.civil_number ? (
     <p>
-      <b>{translate('Invitation link')}: </b>
-      {row.link_template.replace('{uuid}', row.uuid)}
+      <b>{translate('Civil number')}: </b>
+      {row.civil_number}
     </p>
-    {row.civil_number ? (
-      <p>
-        <b>{translate('Civil number')}: </b>
-        {row.civil_number}
-      </p>
-    ) : null}
-  </>
-);
+  ) : null;
