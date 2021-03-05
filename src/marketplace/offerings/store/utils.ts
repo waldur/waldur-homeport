@@ -140,9 +140,37 @@ export const formatSchedules = (schedules) =>
     pick(['start', 'end', 'title', 'allDay', 'extendedProps', 'id']),
   );
 
+const mergeComponents = (
+  c1: OfferingComponent[],
+  c2: OfferingComponent[],
+): OfferingComponent[] => {
+  const result = [...c1];
+  for (const component of c2) {
+    // Skip extra component if it is already is in the result
+    if (result.some((c) => c.type == component.type)) {
+      continue;
+    }
+    result.push(component);
+  }
+  return result;
+};
+
+const formatPlans = (
+  plans: PlanFormData[],
+  allComponents: OfferingComponent[],
+): PlanRequest[] => {
+  const fixedComponents = allComponents
+    .filter((c) => getBillingTypeValue(c.billing_type) === 'fixed')
+    .map((c) => c.type);
+  const validComponents = allComponents.map((c) => c.type);
+  return plans.map((plan) =>
+    formatPlan(plan, fixedComponents, validComponents),
+  );
+};
+
 export const formatOfferingRequest = (
   request: OfferingFormData,
-  components: OfferingComponent[],
+  builtinComponents: OfferingComponent[],
   customer?: Customer,
 ) => {
   const result: OfferingRequest = {
@@ -159,9 +187,10 @@ export const formatOfferingRequest = (
   if (request.attributes) {
     result.attributes = formatAttributes(request.category, request.attributes);
   }
-  if (request.components && components.length === 0) {
+  const customComponents = request.components;
+  if (customComponents && builtinComponents.length === 0) {
     // Serialize custom components only if there're no built-in components.
-    result.components = formatComponents(request.components);
+    result.components = formatComponents(customComponents);
   }
 
   if (request.schedules) {
@@ -175,16 +204,11 @@ export const formatOfferingRequest = (
   result.secret_options = request.secret_options;
 
   if (request.plans) {
-    const allComponents =
-      components.length > 0 ? components : request.components || [];
-    // Pick either built-in or custom fixed components.
-    const fixedComponents = allComponents
-      .filter((c) => getBillingTypeValue(c.billing_type) === 'fixed')
-      .map((c) => c.type);
-    const validComponents = allComponents.map((c) => c.type);
-    result.plans = request.plans.map((plan) =>
-      formatPlan(plan, fixedComponents, validComponents),
+    const allComponents = mergeComponents(
+      builtinComponents || [],
+      customComponents || [],
     );
+    result.plans = formatPlans(request.plans, allComponents);
   }
   if (request.options) {
     result.options = formatOptions(request.options);

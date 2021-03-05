@@ -35,8 +35,12 @@ const enhance = formValues(() => ({
 }));
 
 export const ComponentLimit = enhance((props: Values) => {
-  if (props.billingType?.value !== 'usage') {
+  if (!['usage', 'fixed'].includes(props.billingType?.value)) {
     return null;
+  }
+
+  if (props.billingType.value === 'fixed') {
+    return <ComponentDisableQuotaField />;
   }
 
   if (props.isBoolean) {
