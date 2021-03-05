@@ -204,7 +204,10 @@ export const formatOfferingRequest = (
   result.secret_options = request.secret_options;
 
   if (request.plans) {
-    const allComponents = mergeComponents(builtinComponents, customComponents);
+    const allComponents = mergeComponents(
+      builtinComponents || [],
+      customComponents || [],
+    );
     result.plans = formatPlans(request.plans, allComponents);
   }
   if (request.options) {
