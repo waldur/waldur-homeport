@@ -142,7 +142,7 @@ export const formatSchedules = (schedules) =>
 
 export const formatOfferingRequest = (
   request: OfferingFormData,
-  components: OfferingComponent[],
+  builtinComponents: OfferingComponent[],
   customer?: Customer,
 ) => {
   const result: OfferingRequest = {
@@ -159,9 +159,10 @@ export const formatOfferingRequest = (
   if (request.attributes) {
     result.attributes = formatAttributes(request.category, request.attributes);
   }
-  if (request.components && components.length > 0) {
+  const customComponents = request.components;
+  if (customComponents && builtinComponents.length === 0) {
     // Serialize custom components only if there're no built-in components.
-    result.components = formatComponents(request.components);
+    result.components = formatComponents(customComponents);
   }
 
   if (request.schedules) {
@@ -176,7 +177,7 @@ export const formatOfferingRequest = (
 
   if (request.plans) {
     const allComponents =
-      components.length > 0 ? components : request.components || [];
+      builtinComponents.length > 0 ? builtinComponents : customComponents || [];
     // Pick either built-in or custom fixed components.
     const fixedComponents = allComponents
       .filter((c) => getBillingTypeValue(c.billing_type) === 'fixed')

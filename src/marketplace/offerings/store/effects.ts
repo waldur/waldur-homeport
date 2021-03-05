@@ -20,12 +20,7 @@ import {
   isAddingOfferingImage,
 } from './actions';
 import * as constants from './constants';
-import {
-  getPlans,
-  getAttributes,
-  getOfferingComponents,
-  getComponents,
-} from './selectors';
+import { getPlans, getAttributes, getOfferingComponents } from './selectors';
 import { OfferingFormData, OfferingUpdateFormData } from './types';
 import {
   formatOfferingRequest,
@@ -117,7 +112,7 @@ function* createOffering(action: Action<OfferingFormData>) {
 
 function* updateOffering(action: Action<OfferingUpdateFormData>) {
   const { offeringUuid, thumbnail, ...rest } = action.payload;
-  const components = yield select(getComponents, rest.type.value);
+  const components = yield select(getOfferingComponents, rest.type.value);
   try {
     const offeringRequest = formatOfferingRequest(rest, components);
     yield call(api.updateOffering, offeringUuid, offeringRequest);
