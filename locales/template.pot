@@ -3244,10 +3244,6 @@ msgstr ""
 msgid "Invitation is not valid."
 msgstr ""
 
-#: src/invitations/InvitationExpandableRow.tsx
-msgid "Invitation link"
-msgstr ""
-
 #: src/invitations/InvitationReject.tsx
 msgid "Invitation rejection"
 msgstr ""
@@ -4869,6 +4865,10 @@ msgstr ""
 
 #: src/user/events.ts
 msgid "Password has been changed for user {affected_user_link}."
+msgstr ""
+
+#: src/booking/components/calendar/LazyCalendarComponent.tsx
+msgid "Past time slots are not allowed."
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingActions.tsx
@@ -7830,6 +7830,10 @@ msgstr ""
 
 #: src/booking/components/SlotDurationGroup.tsx
 msgid "Time slot"
+msgstr ""
+
+#: src/booking/components/calendar/LazyCalendarComponent.tsx
+msgid "Time slot has been added."
 msgstr ""
 
 #: src/booking/BookingsList.tsx
