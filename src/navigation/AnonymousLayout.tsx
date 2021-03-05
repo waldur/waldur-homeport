@@ -11,7 +11,7 @@ export const AnonymousLayout: FunctionComponent = () => {
     <>
       <CookiesConsent />
       <div className="app-wrap footer-indent">
-        {!state.data.hideHeader && <SiteHeader />}
+        {!state.data?.hideHeader && <SiteHeader />}
         <UIView className="app-content"></UIView>
       </div>
       <AppFooter />
