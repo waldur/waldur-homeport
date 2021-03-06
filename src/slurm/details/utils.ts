@@ -34,9 +34,6 @@ const eChartInitialOption = () => ({
     {
       type: 'value',
       name: translate('Usage'),
-      min: 0,
-      max: null,
-      interval: null,
       axisLabel: {
         formatter: '{value} h',
       },
@@ -44,9 +41,6 @@ const eChartInitialOption = () => ({
     {
       type: 'value',
       name: '',
-      min: 0,
-      max: null,
-      interval: null,
       axisLabel: {
         formatter: '{value} h',
       },
@@ -101,26 +95,6 @@ const convertMBToGB = (mb: number): number =>
 
 const convertMinuteToHour = (minutes: number): number =>
   parseFloat((minutes / 60).toFixed(2));
-
-const setMaxAndAverageUsages = (option, usages: Usage[], chart) => {
-  let maxUsage = Math.max(...usages.map((usage) => usage[chart.field]));
-  let averageUsage =
-    usages.reduce((total, next) => total + next[chart.field], 0) /
-    usages.length;
-
-  if (chart.field === 'ram_usage') {
-    maxUsage = convertMBToGB(maxUsage);
-    averageUsage = convertMBToGB(averageUsage);
-  }
-
-  maxUsage = convertMinuteToHour(maxUsage);
-  averageUsage = convertMinuteToHour(averageUsage);
-
-  option.yAxis[0].max = option.yAxis[1].max = Math.ceil(
-    maxUsage + averageUsage / 3,
-  );
-  option.yAxis[0].interval = option.yAxis[1].interval = averageUsage;
-};
 
 const setUnitForRamUsage = (option, chart) => {
   if (chart.field === 'ram_usage') {
@@ -216,7 +190,6 @@ export const getEChartOptions = (
   const periods = getPeriods(option.xAxis[0].data);
 
   usages = filterUsagesBySixMonthsPeriod(usages);
-  setMaxAndAverageUsages(option, usages, chart);
   setUnitForRamUsage(option, chart);
   fillUsages(option, periods, usages, chart);
   fillSeriesAndLegendWithDistinctUsers(option, userUsages);

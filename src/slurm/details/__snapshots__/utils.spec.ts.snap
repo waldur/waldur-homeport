@@ -112,9 +112,6 @@ Array [
           "axisLabel": Object {
             "formatter": "{value} h",
           },
-          "interval": 37.5,
-          "max": 80,
-          "min": 0,
           "name": "Usage",
           "type": "value",
         },
@@ -122,9 +119,6 @@ Array [
           "axisLabel": Object {
             "formatter": "{value} h",
           },
-          "interval": 37.5,
-          "max": 80,
-          "min": 0,
           "name": "",
           "type": "value",
         },
@@ -241,9 +235,6 @@ Array [
           "axisLabel": Object {
             "formatter": "{value} h",
           },
-          "interval": 37.5,
-          "max": 80,
-          "min": 0,
           "name": "Usage",
           "type": "value",
         },
@@ -251,9 +242,6 @@ Array [
           "axisLabel": Object {
             "formatter": "{value} h",
           },
-          "interval": 37.5,
-          "max": 80,
-          "min": 0,
           "name": "",
           "type": "value",
         },
@@ -370,9 +358,6 @@ Array [
           "axisLabel": Object {
             "formatter": "{value} GB-hours",
           },
-          "interval": 0.04,
-          "max": 1,
-          "min": 0,
           "name": "Usage",
           "type": "value",
         },
@@ -380,9 +365,6 @@ Array [
           "axisLabel": Object {
             "formatter": "{value} GB-hours",
           },
-          "interval": 0.04,
-          "max": 1,
-          "min": 0,
           "name": "",
           "type": "value",
         },
