@@ -9247,6 +9247,7 @@ msgstr ""
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/rancher/cluster/users/UserDetailsTable.tsx
 #: src/slurm/SlurmForm.tsx
+#: src/slurm/details/AllocationUsersTable.tsx
 #: src/slurm/marketplace.ts
 #: src/vmware/VMwareForm.tsx
 msgid "Username"
@@ -9268,6 +9269,7 @@ msgstr ""
 #: src/issues/workspace/IssueNavigationService.ts
 #: src/project/team/ProjectTeam.tsx
 #: src/rancher/cluster/tabs.ts
+#: src/slurm/tabs.ts
 #: src/user/support/UserListView.tsx
 msgid "Users"
 msgstr ""
@@ -9753,6 +9755,10 @@ msgstr ""
 
 #: src/resource/monitoring/ZabbixHostCreateDialog.tsx
 msgid "Zabbix provider"
+msgstr ""
+
+#: src/slurm/details/AllocationUsersTable.tsx
+msgid "allocation users"
 msgstr ""
 
 #: src/rancher/cluster/apps/ApplicationDeleteButton.tsx

@@ -11,6 +11,14 @@ const AllocationUsageTable = lazyComponent(
   'AllocationUsageTable',
 );
 
+const AllocationUsersTable = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "SlurmAllocationUsersTable" */ './details/AllocationUsersTable'
+    ),
+  'AllocationUsersTable',
+);
+
 ResourceTabsConfiguration.register('SLURM.Allocation', () => [
   {
     key: 'usage',
@@ -18,4 +26,9 @@ ResourceTabsConfiguration.register('SLURM.Allocation', () => [
     component: AllocationUsageTable,
   },
   ...getDefaultResourceTabs(),
+  {
+    key: 'users',
+    title: translate('Users'),
+    component: AllocationUsersTable,
+  },
 ]);
