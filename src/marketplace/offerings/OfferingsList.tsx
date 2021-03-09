@@ -23,8 +23,8 @@ import {
 
 import { Offering } from '../types';
 
-import { OfferingActions } from './actions/OfferingActions';
-import { OfferingCreateButton } from './actions/OfferingCreateButton';
+import { OfferingItemActions } from './actions/OfferingItemActions';
+import { OfferingListActions } from './actions/OfferingListActions';
 import { OfferingDetailsLink } from './details/OfferingDetailsLink';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 
@@ -66,7 +66,9 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => {
         return (
           <ButtonGroup>
-            {!props.isSupportOnly && <OfferingActions offering={row} />}
+            {!props.hideOfferingItemActions && (
+              <OfferingItemActions offering={row} />
+            )}
             <PreviewOfferingButton offering={row} />
           </ButtonGroup>
         );
@@ -80,7 +82,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       placeholderComponent={<OfferingsListTablePlaceholder />}
       columns={columns}
       verboseName={translate('Offerings')}
-      actions={props.showOfferingCreateButton && <OfferingCreateButton />}
+      actions={props.showOfferingListActions && <OfferingListActions />}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       expandableRow={OfferingsListExpandableRow}
@@ -125,7 +127,7 @@ export const TableOptions = {
   exportFields: ['Name', 'Created', 'Category', 'State', 'Type'],
 };
 
-const showOfferingCreateButton = createSelector(
+const showOfferingListActions = createSelector(
   isOwnerOrStaff,
   getCustomer,
   (ownerOrStaff, customer) =>
@@ -136,9 +138,9 @@ const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
   user: getUser(state),
   isServiceManager: isServiceManagerSelector(state),
-  isSupportOnly: isSupportOnly(state),
+  hideOfferingItemActions: isSupportOnly(state),
+  showOfferingListActions: showOfferingListActions(state),
   actionsDisabled: !isOwnerOrStaff(state),
-  showOfferingCreateButton: showOfferingCreateButton(state),
   filter: getFormValues('OfferingsFilter')(state) as FilterData,
 });
 
