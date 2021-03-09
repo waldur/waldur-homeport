@@ -28,19 +28,30 @@ export const OpenStackSecurityGroupsDialog = withTranslation(
           </thead>
           {props.resolve.securityGroups.map((securityGroup) => (
             <tbody key={securityGroup.uuid}>
-              {securityGroup.rules.map((rule, index) => (
-                <tr key={index}>
-                  {index === 0 && (
-                    <td rowSpan={securityGroup.rules.length}>
-                      <strong>{securityGroup.name.toUpperCase()}</strong>
-                      {securityGroup.description && (
-                        <div>{securityGroup.description}</div>
-                      )}
-                    </td>
-                  )}
-                  <SecurityGroupRuleCell rule={rule} />
+              {securityGroup.rules.length === 0 ? (
+                <tr>
+                  <td>
+                    <strong>{securityGroup.name.toUpperCase()}</strong>
+                    {securityGroup.description && (
+                      <div>{securityGroup.description}</div>
+                    )}
+                  </td>
                 </tr>
-              ))}
+              ) : (
+                securityGroup.rules.map((rule, index) => (
+                  <tr key={index}>
+                    {index === 0 && (
+                      <td rowSpan={securityGroup.rules.length}>
+                        <strong>{securityGroup.name.toUpperCase()}</strong>
+                        {securityGroup.description && (
+                          <div>{securityGroup.description}</div>
+                        )}
+                      </td>
+                    )}
+                    <SecurityGroupRuleCell rule={rule} />
+                  </tr>
+                ))
+              )}
             </tbody>
           ))}
         </Table>
