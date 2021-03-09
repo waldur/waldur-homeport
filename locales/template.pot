@@ -52,6 +52,7 @@ msgstr ""
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
+#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -1413,6 +1414,7 @@ msgstr ""
 
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/popover/CustomerSummary.tsx
+#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr ""
 
@@ -1420,6 +1422,7 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/popover/CustomerSummary.tsx
+#: src/marketplace/offerings/actions/SelectOrganizationTab.tsx
 msgid "Contact phone"
 msgstr ""
 
@@ -4440,6 +4443,10 @@ msgstr ""
 msgid "Offering has been created."
 msgstr ""
 
+#: src/marketplace/offerings/actions/OfferingImportDialog.tsx
+msgid "Offering has been imported."
+msgstr ""
+
 #: src/marketplace/offerings/actions/UpdateOfferingAttributesDialog.tsx
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering has been updated."
@@ -5939,6 +5946,10 @@ msgstr ""
 msgid "Remote Waldur API URL"
 msgstr ""
 
+#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
+msgid "Remote category"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 msgid "Remote security group"
@@ -7213,6 +7224,7 @@ msgstr ""
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
 #: src/marketplace/offerings/support/SupportOfferingsList.tsx
 #: src/marketplace/orders/Order.tsx
@@ -8007,6 +8019,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 #: src/marketplace/offerings/create/ManagementStep.tsx
 #: src/marketplace/offerings/create/ManagementSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -8323,6 +8336,10 @@ msgstr ""
 
 #: src/rancher/cluster/ImportYAMLDialog.tsx
 msgid "Unable to import YAML."
+msgstr ""
+
+#: src/marketplace/offerings/actions/OfferingImportDialog.tsx
+msgid "Unable to import remote offering."
 msgstr ""
 
 #: src/marketplace/cart/store/effects.ts
