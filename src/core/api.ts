@@ -60,8 +60,12 @@ export function deleteById<T = {}>(endpoint, id, options?: AxiosRequestConfig) {
   );
 }
 
-export function post<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
-  return Axios.post(fixURL(endpoint), data);
+export function post<T = {}>(
+  endpoint: string,
+  data?: any,
+  options?: AxiosRequestConfig,
+): AxiosPromise<T> {
+  return Axios.post(fixURL(endpoint), data, options);
 }
 
 export function patch<T = {}>(endpoint: string, data?: any): AxiosPromise<T> {
