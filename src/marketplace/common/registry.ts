@@ -174,7 +174,10 @@ export function getProviderType(offeringType: string) {
 }
 
 export function getLabel(offeringType: string) {
-  return REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].label;
+  return (
+    (REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].label) ||
+    offeringType
+  );
 }
 
 export function getAttributes(offeringType: string) {
