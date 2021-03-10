@@ -46,7 +46,7 @@ export const SelectOfferingTab = () => {
               label: translate('Name'),
             },
             {
-              name: 'type',
+              name: 'type_label',
               label: translate('Type'),
             },
             {
