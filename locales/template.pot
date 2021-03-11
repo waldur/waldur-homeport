@@ -2723,6 +2723,10 @@ msgstr ""
 msgid "FreeIPA account needs to be set up."
 msgstr ""
 
+#: src/freeipa/FreeIPAAccount.tsx
+msgid "FreeIPA extension is disabled."
+msgstr ""
+
 #: src/invoices/details/InvoiceDetails.tsx
 msgid "From"
 msgstr ""
@@ -2943,7 +2947,7 @@ msgid "How to obtain credentials for DigitalOcean provider"
 msgstr ""
 
 #: src/freeipa/TosGroup.tsx
-msgid "I accept the"
+msgid "I accept the <Link>Terms of Service</Link>."
 msgstr ""
 
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
@@ -7647,7 +7651,6 @@ msgstr ""
 msgid "Terminating"
 msgstr ""
 
-#: src/freeipa/TosGroup.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx

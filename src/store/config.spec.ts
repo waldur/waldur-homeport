@@ -2,14 +2,14 @@ import { initConfig, reducer, isVisible } from './config';
 import { RootState } from './reducers';
 
 describe('Configuration reducer', () => {
-  const disabledFeatures = { freeipa: true, support: true };
+  const disabledFeatures = { paypal: true, support: true };
   const enabledFeatures = { billing: true };
 
   it('should merge experimental and disabled features', () => {
     const actual = reducer(
       undefined,
       initConfig({
-        disabledFeatures: ['freeipa'],
+        disabledFeatures: ['paypal'],
         toBeFeatures: ['support'],
       }),
     );
@@ -30,7 +30,7 @@ describe('Configuration reducer', () => {
     const state = ({
       config: { disabledFeatures, enabledFeatures },
     } as unknown) as RootState;
-    expect(isVisible(state, 'freeipa')).toBe(false);
+    expect(isVisible(state, 'paypal')).toBe(false);
     expect(isVisible(state, 'support')).toBe(false);
   });
 

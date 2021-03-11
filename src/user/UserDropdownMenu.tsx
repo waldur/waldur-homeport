@@ -17,7 +17,7 @@ import { getUser } from '@waldur/workspace/selectors';
 import { getPrivateUserTabs } from './constants';
 
 const getSidebarItems = () =>
-  getPrivateUserTabs().filter((item) => isFeatureVisible(item.feature));
+  getPrivateUserTabs().filter((item) => item && isFeatureVisible(item.feature));
 
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useSelector(getUser);

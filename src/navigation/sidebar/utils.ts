@@ -37,7 +37,8 @@ const sortItems = (items: MenuItemType[]) => {
 };
 
 export const filterItems = (items: MenuItemType[]) => {
-  const predicate = (item: MenuItemType) => isFeatureVisible(item.feature);
+  const predicate = (item: MenuItemType) =>
+    item && isFeatureVisible(item.feature);
   return items.filter(predicate).map((item) => {
     if (!item.children) {
       return item;

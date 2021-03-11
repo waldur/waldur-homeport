@@ -1,9 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { router } from '@waldur/router';
+import { showError } from '@waldur/store/notify';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getProfile } from './api';
@@ -13,6 +16,12 @@ import { FreeIPAAccountEdit } from './FreeIPAAccountEdit';
 export const FreeIpaAccount = () => {
   useTitle(translate('FreeIPA account'));
   const user = useSelector(getUser);
+  const dispatch = useDispatch();
+
+  if (!ENV.plugins.WALDUR_FREEIPA.ENABLED) {
+    dispatch(showError(translate('FreeIPA extension is disabled.')));
+    router.stateService.go('errorPage.notFound');
+  }
 
   const [{ loading, error, value: profile }, refreshProfile] = useAsyncFn(
     () => getProfile(user.uuid),
