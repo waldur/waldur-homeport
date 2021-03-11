@@ -15,6 +15,7 @@ import { SigninForm } from './SigninForm';
 import { SignupButton } from './SignupButton';
 import { SignupForm } from './SignupForm';
 import { useAuthFeatures } from './useAuthFeatures';
+import './AuthLogin.scss';
 
 export const AuthLogin: FunctionComponent = () => {
   const features = useAuthFeatures();
