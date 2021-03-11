@@ -10,6 +10,12 @@ jest.mock('@waldur/core/Link', () => {
   };
 });
 
+jest.mock('@waldur/configs/default', () => ({
+  ENV: {
+    plugins: { WALDUR_FREEIPA: { ENABLED: true, USERNAME_PREFIX: 'waldur_' } },
+  },
+}));
+
 describe('SlurmAllocationSummary', () => {
   it('renders quota usage', () => {
     const wrapper = renderSummary({ resource });

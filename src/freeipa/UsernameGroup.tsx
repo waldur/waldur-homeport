@@ -35,7 +35,7 @@ const validateUsername = (username: string) => {
   }
   if (
     username.length >
-    MAXIMUM_USERNAME_LENGTH - ENV.FREEIPA_USERNAME_PREFIX.length
+    MAXIMUM_USERNAME_LENGTH - ENV.plugins.WALDUR_FREEIPA.USERNAME_PREFIX.length
   ) {
     return translate(
       'Maximum username length with mandatory username prefix is 32 characters.',
@@ -47,10 +47,10 @@ const UsernameField: FunctionComponent<WrappedFieldProps> = (props) => (
   <>
     <div
       className={classNames('m-b-sm', {
-        'input-group': ENV.FREEIPA_USERNAME_PREFIX,
+        'input-group': ENV.plugins.WALDUR_FREEIPA.USERNAME_PREFIX !== '',
       })}
     >
-      {ENV.FREEIPA_USERNAME_PREFIX && (
+      {ENV.plugins.WALDUR_FREEIPA.USERNAME_PREFIX && (
         <OverlayTrigger
           placement="top"
           overlay={
@@ -59,7 +59,9 @@ const UsernameField: FunctionComponent<WrappedFieldProps> = (props) => (
             </BootstrapTooltip>
           }
         >
-          <InputGroup.Addon>{ENV.FREEIPA_USERNAME_PREFIX}</InputGroup.Addon>
+          <InputGroup.Addon>
+            {ENV.plugins.WALDUR_FREEIPA.USERNAME_PREFIX}
+          </InputGroup.Addon>
         </OverlayTrigger>
       )}
       <InputField {...props} />

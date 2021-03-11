@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
+import { formatJsx, translate } from '@waldur/i18n';
 
 export const TosGroup: FunctionComponent = () => (
   <FormGroup>
@@ -17,11 +17,17 @@ export const TosGroup: FunctionComponent = () => (
           required={true}
           validate={required}
         />
-        {translate('I accept the')}{' '}
-        <Link state="tos.freeipa" target="_blank">
-          <i className="fa fa-external-link"></i>{' '}
-          {translate('Terms of Service')}
-        </Link>
+        {translate(
+          'I accept the <Link>Terms of Service</Link>.',
+          {
+            Link: (s) => (
+              <Link state="tos.freeipa" target="_blank">
+                <i className="fa fa-external-link"></i> {s}
+              </Link>
+            ),
+          },
+          formatJsx,
+        )}
       </label>
       <div className="help-block text-muted">
         {translate('You must agree with terms of service.')}

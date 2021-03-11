@@ -1,3 +1,4 @@
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 export const getPrivateUserTabs = () => [
@@ -33,13 +34,14 @@ export const getPrivateUserTabs = () => [
     state: 'profile.manage',
     key: 'manage',
   },
-  {
-    label: translate('FreeIPA account'),
-    icon: 'fa-user',
-    state: 'profile.freeipa',
-    key: 'freeipa',
-    feature: 'freeipa',
-  },
+  ENV.plugins.WALDUR_FREEIPA.ENABLED
+    ? {
+        label: translate('FreeIPA account'),
+        icon: 'fa-user',
+        state: 'profile.freeipa',
+        key: 'freeipa',
+      }
+    : undefined,
 ];
 
 export const getPublicUserTabs = (user) => [

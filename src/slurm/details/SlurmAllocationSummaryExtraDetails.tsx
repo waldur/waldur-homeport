@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -48,12 +49,14 @@ export const SlurmAllocationSummaryExtraDetails: FunctionComponent<any> = (
   props,
 ) => (
   <div className="slurm-allocation-summary-extra-details-container">
-    <div className={props.resource.username ? 'field-container' : ''}>
-      <Field
-        label={translate('Login with')}
-        value={formatLoginDetails(props)}
-      />
-    </div>
+    {ENV.plugins.WALDUR_FREEIPA.ENABLED && (
+      <div className={props.resource.username ? 'field-container' : ''}>
+        <Field
+          label={translate('Login with')}
+          value={formatLoginDetails(props)}
+        />
+      </div>
+    )}
     <div className="field-container">
       <Field
         label={translate('Submit with')}

@@ -79,6 +79,11 @@ interface VMWareConfiguration {
   BASIC_MODE: boolean;
 }
 
+interface FreeIPAConfiguration {
+  USERNAME_PREFIX: string;
+  ENABLED: boolean;
+}
+
 export interface PluginConfiguration {
   WALDUR_AUTH_SAML2: Partial<SAML2AuthConfiguration>;
   WALDUR_AUTH_SOCIAL: Partial<SocialAuthConfiguration>;
@@ -90,4 +95,5 @@ export interface PluginConfiguration {
   WALDUR_MARKETPLACE_OPENSTACK: Partial<MarketplaceOpenStackTenantConfiguration>;
   WALDUR_RANCHER: RancherConfiguration;
   WALDUR_VMWARE: Partial<VMWareConfiguration>;
+  WALDUR_FREEIPA: Partial<FreeIPAConfiguration>;
 }

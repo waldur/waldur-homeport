@@ -37,5 +37,9 @@
     "OWNER_CAN_REGISTER_SERVICE_PROVIDER": false,
     "ADMIN_CAN_APPROVE_ORDER": false,
     "OWNER_CAN_APPROVE_ORDER": true
+  },
+  "WALDUR_FREEIPA": {
+    "ENABLED": true,
+    "USERNAME_PREFIX": "waldur_"
   }
 }

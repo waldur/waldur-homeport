@@ -50,9 +50,6 @@ export const states: StateDeclaration[] = [
     name: 'tos.freeipa',
     url: 'freeipa-terms/',
     component: FreeipaPage,
-    data: {
-      feature: 'freeipa',
-    },
   },
 
   {

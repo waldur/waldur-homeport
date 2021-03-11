@@ -62,9 +62,6 @@ export const tabs = {
   freeipa: {
     url: 'freeipa-account/',
     component: FreeIpaAccount,
-    data: {
-      feature: 'freeipa',
-    },
   },
 };
 
