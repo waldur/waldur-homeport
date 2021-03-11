@@ -6860,6 +6860,10 @@ msgstr ""
 msgid "Select tenant..."
 msgstr ""
 
+#: src/support/OfferingConfigurationForm.tsx
+msgid "Select tenants..."
+msgstr ""
+
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 msgid "Select type..."
 msgstr ""
