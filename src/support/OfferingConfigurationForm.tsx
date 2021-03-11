@@ -166,7 +166,7 @@ export class PureOfferingConfigurationForm extends Component<OfferingConfigurati
                         props.customer.uuid,
                       ),
                     placeholder: translate('Select instance...'),
-                    multi: true,
+                    isMulti: true,
                   };
                   break;
               }
