@@ -909,7 +909,7 @@ msgstr ""
 msgid "Batch block storage size"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
+#: src/slurm/details/SubmitWithField.tsx
 msgid "Batch processing documentation"
 msgstr ""
 
@@ -7375,7 +7375,7 @@ msgstr ""
 msgid "Submit usage report"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummaryExtraDetails.tsx
+#: src/slurm/details/SubmitWithField.tsx
 msgid "Submit with"
 msgstr ""
 
@@ -9775,6 +9775,10 @@ msgstr ""
 
 #: src/freeipa/EnableProfile.tsx
 msgid "Your FreeIPA profile has been enabled."
+msgstr ""
+
+#: src/slurm/details/SubmitWithField.tsx
+msgid "Your account is not authorized to use this allocation"
 msgstr ""
 
 #: src/invitations/InvitationConfirmDialog.tsx
