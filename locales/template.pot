@@ -844,7 +844,6 @@ msgid "Back"
 msgstr ""
 
 #: src/auth/callbacks/AuthLoginFailed.tsx
-#: src/auth/callbacks/AuthLogoutFailed.tsx
 #: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Back to login"
 msgstr ""
@@ -5033,6 +5032,10 @@ msgstr ""
 
 #: src/marketplace/offerings/plan/constants.ts
 msgid "Per month"
+msgstr ""
+
+#: src/auth/callbacks/AuthLogoutFailed.tsx
+msgid "Perform local logout"
 msgstr ""
 
 #: src/customer/team/ReviewCloseButton.tsx
