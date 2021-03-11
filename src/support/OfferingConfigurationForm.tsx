@@ -142,6 +142,20 @@ export class PureOfferingConfigurationForm extends Component<OfferingConfigurati
                     placeholder: translate('Select tenant...'),
                   };
                   break;
+                case 'select_multiple_openstack_tenants':
+                  OptionField = AsyncSelectField;
+                  params = {
+                    loadOptions: (query, prevOptions, currentPage) =>
+                      fetchTenantOptions(
+                        query,
+                        prevOptions,
+                        currentPage,
+                        props.customer.uuid,
+                      ),
+                    placeholder: translate('Select tenants...'),
+                    isMulti: true,
+                  };
+                  break;
                 case 'select_openstack_instance':
                   OptionField = AsyncSelectField;
                   params = {
