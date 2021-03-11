@@ -5,33 +5,9 @@ import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer'
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
+import { SubmitWithField } from '@waldur/slurm/details/SubmitWithField';
 
 import './SlurmAllocationSummaryExtraDetails.scss';
-
-const formatSubmitDetails = (props) => {
-  const value = `sbatch -A ${props.resource.backend_id}`;
-  return (
-    <CopyToClipboardContainer
-      value={value}
-      label={
-        <>
-          {value}
-          {props.resource.homepage ? (
-            <a
-              href={props.resource.homepage}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={translate('Batch processing documentation')}
-            >
-              &nbsp;
-              <i className="fa fa-info-circle" />
-            </a>
-          ) : null}
-        </>
-      }
-    />
-  );
-};
 
 const formatLoginDetails = (props) => {
   const value = `ssh ${props.resource.username}@${props.resource.gateway}`;
@@ -57,11 +33,6 @@ export const SlurmAllocationSummaryExtraDetails: FunctionComponent<any> = (
         />
       </div>
     )}
-    <div className="field-container">
-      <Field
-        label={translate('Submit with')}
-        value={formatSubmitDetails(props)}
-      />
-    </div>
+    <SubmitWithField resource={props.resource} />
   </div>
 );

@@ -13,3 +13,9 @@ export interface UserUsage extends Usage {
   username: string;
   full_name: string;
 }
+
+export interface SlurmAssociation {
+  uuid: string;
+  username: string;
+  allocation: string;
+}
