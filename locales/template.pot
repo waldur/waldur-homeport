@@ -4785,6 +4785,7 @@ msgstr ""
 #: src/marketplace/offerings/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
 #: src/marketplace/resources/ResourceDetailsPage.tsx
+#: src/navigation/breadcrumbs/utils.ts
 #: src/navigation/workspace/WorkspaceLabel.tsx
 msgid "Organization workspace"
 msgstr ""
