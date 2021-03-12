@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
+import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
+import { getOrganizationWorkspaceBreadcrumb } from '@waldur/navigation/breadcrumbs/utils';
 import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
 import { RootState } from '@waldur/store/reducers';
@@ -26,6 +28,7 @@ const filterOptionsSelector = (state: RootState) =>
   state.marketplace.orders.tableFilter.stateOptions;
 
 export const MyOrderItemsContainer: React.FC<MyOrderItemsContainerProps> = () => {
+  useBreadcrumbsFn(getOrganizationWorkspaceBreadcrumb, []);
   useTitle(translate('My orders'));
   const dispatch = useDispatch();
   const filterOptions = useSelector(filterOptionsSelector);
