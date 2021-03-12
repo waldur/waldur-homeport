@@ -34,7 +34,7 @@ export const getPrivateUserTabs = () => [
     state: 'profile.manage',
     key: 'manage',
   },
-  ENV.plugins.WALDUR_FREEIPA.ENABLED
+  ENV.plugins.WALDUR_FREEIPA?.ENABLED
     ? {
         label: translate('FreeIPA account'),
         icon: 'fa-user',
