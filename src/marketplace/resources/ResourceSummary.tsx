@@ -43,7 +43,7 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
         )
       }
     />
-    {resource.resource_uuid ? (
+    {resource.resource_uuid && resource.resource_type ? (
       <Field
         label={translate('Resource')}
         value={
