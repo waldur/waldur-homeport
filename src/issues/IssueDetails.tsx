@@ -147,7 +147,7 @@ export const IssueDetails: FunctionComponent = () => {
                 <Field
                   label={translate('Created')}
                   value={translate('{relative} ago, {date}', {
-                    relate: formatRelative(issue.created),
+                    relative: formatRelative(issue.created),
                     date: formatDateTime(issue.created),
                   })}
                 />
