@@ -1,21 +1,12 @@
 import { FunctionComponent } from 'react';
 
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Link } from '@waldur/core/Link';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 import { IssueSubtitle } from './IssueSubtitle';
 import { Issue } from './types';
-
-export const CustomerPopover = lazyComponent(
-  () =>
-    import(
-      /* webpackChunkName: "CustomerPopover" */ '@waldur/customer/popover/CustomerPopover'
-    ),
-  'CustomerPopover',
-);
 
 interface IssueRowProps {
   item: Issue;

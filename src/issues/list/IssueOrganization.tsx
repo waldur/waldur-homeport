@@ -1,8 +1,15 @@
 import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { CustomerPopover } from './IssueRow';
+const CustomerPopover = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "CustomerPopover" */ '@waldur/customer/popover/CustomerPopover'
+    ),
+  'CustomerPopover',
+);
 
 export const IssueOrganization = ({ item }) => {
   const dispatch = useDispatch();
