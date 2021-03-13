@@ -4601,8 +4601,12 @@ msgstr ""
 msgid "OpenStack volume"
 msgstr ""
 
-#: src/issues/list/IssueRow.tsx
-msgid "Opened by"
+#: src/issues/list/IssueSubtitle.tsx
+msgid "Opened by {user} at {date}"
+msgstr ""
+
+#: src/issues/list/IssueSubtitle.tsx
+msgid "Opened by {user} from {organization} at {date}"
 msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
@@ -9928,10 +9932,6 @@ msgstr ""
 msgid "floating IPs"
 msgstr ""
 
-#: src/issues/list/IssueRow.tsx
-msgid "from"
-msgstr ""
-
 #: src/openstack/OpenStackPackageForm.tsx
 msgid "generate automatically"
 msgstr ""
@@ -10253,6 +10253,11 @@ msgstr ""
 
 #: src/resource/utils.tsx
 msgid "{number} days"
+msgstr ""
+
+#: src/invoices/events/InvoiceEventItem.tsx
+#: src/issues/list/IssueRow.tsx
+msgid "{relative} ago"
 msgstr ""
 
 #: src/issues/IssueDetails.tsx

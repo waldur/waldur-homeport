@@ -55,7 +55,9 @@ export const InvoiceEventItem: FunctionComponent<InvoiceEventItemProps> = ({
           {translate('More info')}
         </Button>
         <span className="vertical-date">
-          {formatRelative(event.date)} ago
+          {translate('{relative} ago', {
+            relative: formatRelative(event.date),
+          })}
           <br />
           <small>{formatDateTime(event.date)}</small>
         </span>
