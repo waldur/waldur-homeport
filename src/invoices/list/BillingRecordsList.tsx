@@ -61,6 +61,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
   customer: props.customer.url,
+  field: ['uuid', 'state', 'month', 'year', 'invoice_date', 'number', 'price'],
 });
 
 const TableOptions: TableOptionsType = {
