@@ -1,6 +1,7 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { BookingActions } from '@waldur/booking/BookingActions';
@@ -10,7 +11,12 @@ import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
-import { Customer } from '@waldur/workspace/types';
+import { getWorkspace } from '@waldur/workspace/selectors';
+import {
+  Customer,
+  PROJECT_WORKSPACE,
+  WorkspaceType,
+} from '@waldur/workspace/types';
 
 import { getResource } from '../common/api';
 
@@ -19,23 +25,34 @@ import { ResourceTabs } from './ResourceTabs';
 import { Resource } from './types';
 
 interface GetBreadcrumbsProps {
+  workspace: WorkspaceType;
   customer: Customer;
   resource: Resource;
 }
 
 const getBreadcrumbs = ({
+  workspace,
   customer,
   resource,
 }: GetBreadcrumbsProps): BreadcrumbItem[] => [
   {
-    label: translate('Organization workspace'),
-    state: 'organization.details',
+    label:
+      workspace === PROJECT_WORKSPACE
+        ? translate('Project workspace')
+        : translate('Organization workspace'),
+    state:
+      workspace === PROJECT_WORKSPACE
+        ? 'project.details'
+        : 'organization.details',
     params: {
       uuid: customer ? customer.uuid : resource.customer_uuid,
     },
   },
   {
-    label: translate('Public resources'),
+    label:
+      workspace === PROJECT_WORKSPACE
+        ? translate('Resources')
+        : translate('Public resources'),
   },
 ];
 
@@ -46,6 +63,7 @@ interface ResourceDetailsPageProps {
 export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = ({
   customer,
 }) => {
+  const workspace = useSelector(getWorkspace);
   const {
     params: { resource_uuid },
   } = useCurrentStateAndParams();
@@ -62,8 +80,10 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
 
   useBreadcrumbsFn(
     () =>
-      state.value ? getBreadcrumbs({ customer, resource: state.value }) : [],
-    [state.value, customer],
+      state.value
+        ? getBreadcrumbs({ workspace, customer, resource: state.value })
+        : [],
+    [workspace, state.value, customer],
   );
 
   const router = useRouter();

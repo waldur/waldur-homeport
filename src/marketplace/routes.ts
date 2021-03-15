@@ -25,6 +25,15 @@ const ResourceDetailsPageForServiceProvider = lazyComponent(
     ),
   'ResourceDetailsPageForServiceProvider',
 );
+const ResourceDetailsPageForProjectWorkspace = lazyComponent(
+  () =>
+    import(
+      /* webpackChunkName: "ResourceDetailsPageForProjectWorkspace" */
+
+      '@waldur/marketplace/resources/ResourceDetailsPageForProjectWorkspace'
+    ),
+  'ResourceDetailsPageForProjectWorkspace',
+);
 const AnonymousLayout = lazyComponent(
   () =>
     import(
@@ -459,6 +468,16 @@ export const states: StateDeclaration[] = [
     parent: 'organization',
     data: {
       sidebarKey: 'marketplace-services',
+    },
+  },
+
+  {
+    name: 'marketplace-project-resource-details',
+    url: 'marketplace-project-resource-details/:resource_uuid/',
+    component: ResourceDetailsPageForProjectWorkspace,
+    parent: 'project',
+    data: {
+      sidebarKey: 'marketplace-project-resources',
     },
   },
 

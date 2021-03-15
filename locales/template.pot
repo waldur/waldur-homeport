@@ -5567,6 +5567,7 @@ msgstr ""
 
 #: src/marketplace/details/utils.ts
 #: src/marketplace/orders/item/details/OrderItemDetailsContainer.tsx
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/navigation/workspace/WorkspaceLabel.tsx
 #: src/project/ProjectWorkspace.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -6332,6 +6333,7 @@ msgstr ""
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/issues/workspace/IssueNavigationService.ts
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/resources/ResourceDetailsPage.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx

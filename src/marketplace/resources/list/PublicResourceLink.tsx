@@ -1,8 +1,14 @@
 import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { Tooltip } from '@waldur/core/Tooltip';
-import { Customer } from '@waldur/workspace/types';
+import { getWorkspace } from '@waldur/workspace/selectors';
+import {
+  Customer,
+  PROJECT_WORKSPACE,
+  WorkspaceType,
+} from '@waldur/workspace/types';
 
 import { Resource } from '../types';
 
@@ -21,21 +27,37 @@ const BackendIdTooltip = ({ backendId }) =>
     </>
   );
 
+const getStateAndUuid = (
+  resource: Resource,
+  workspace: WorkspaceType,
+  customer: Customer,
+): { state: string; uuid: string } => {
+  let state,
+    uuid = '';
+  if (workspace === PROJECT_WORKSPACE) {
+    state = 'marketplace-project-resource-details';
+    uuid = resource.project_uuid;
+    return { state, uuid };
+  }
+  state = customer
+    ? 'marketplace-service-provider-public-resource-details'
+    : 'marketplace-public-resource-details';
+  uuid = customer ? customer.uuid : resource.customer_uuid;
+  return { state, uuid };
+};
+
 export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
   row,
   customer,
 }) => {
+  const workspace = useSelector(getWorkspace);
   const label = row.name || row.offering_name;
   return (
     <>
       <Link
-        state={
-          customer
-            ? 'marketplace-service-provider-public-resource-details'
-            : 'marketplace-public-resource-details'
-        }
+        state={getStateAndUuid(row, workspace, customer).state}
         params={{
-          uuid: customer ? customer.uuid : row.customer_uuid,
+          uuid: getStateAndUuid(row, workspace, customer).uuid,
           resource_uuid: row.uuid,
         }}
         label={label}
