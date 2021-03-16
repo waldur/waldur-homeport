@@ -133,14 +133,16 @@ const serializeAnswer = (question: Question, answers: object) => {
 export const serializeApplication = (
   formData: FormData,
   template: Template,
-  service_project_link: string,
+  service_settings: string,
+  project: string,
   visibleQuestions: Question[],
 ) => ({
   name: formData.name,
   description: formData.description,
   version: formData.version,
   template: template.url,
-  service_project_link,
+  service_settings,
+  project,
   rancher_project: formData.project.url,
   namespace_name: formData.useNewNamespace ? formData.newNamespace : undefined,
   namespace: formData.useNewNamespace ? undefined : formData.namespace.url,

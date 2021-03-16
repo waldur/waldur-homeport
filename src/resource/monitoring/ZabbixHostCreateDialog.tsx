@@ -20,7 +20,7 @@ const PureZabbixHostCreateDialog: FunctionComponent<any> = (props) => (
     error={props.error}
   >
     <SelectAsyncField
-      name="service_project_link"
+      name="link"
       label={props.translate('Zabbix provider')}
       required={true}
       isClearable={false}
@@ -75,7 +75,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 const enhance = compose(
   reduxForm({ form: 'monitoringCreate' }),
-  formValues({ link: 'service_project_link' }),
+  formValues({ link: 'link' }),
   connect(null, mapDispatchToProps),
   withTranslation,
 );
