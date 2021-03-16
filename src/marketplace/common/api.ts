@@ -132,6 +132,9 @@ export const uploadOfferingDocument = (
 export const getCartItems = (projectUrl: string) =>
   getAll('/marketplace-cart-items/', { params: { project: projectUrl } });
 
+export const getCartItem = (id: string) =>
+  getById<OrderItemResponse>('/marketplace-cart-items/', id);
+
 export const addCartItem = (data: object) =>
   post('/marketplace-cart-items/', data).then((response) => response.data);
 

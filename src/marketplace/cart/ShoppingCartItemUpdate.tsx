@@ -1,15 +1,14 @@
-import { FunctionComponent, Component } from 'react';
+import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { useAsync } from 'react-use';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartItemUpdateExtraComponent } from '@waldur/marketplace/cart/ShoppingCartItemUpdateExtraComponent';
 import { Plan, Offering } from '@waldur/marketplace/types';
-import { setTitle } from '@waldur/navigation/title';
+import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
-import { RootState } from '@waldur/store/reducers';
 
 import * as api from '../common/api';
 import '../details/OfferingDetails.scss';
@@ -17,7 +16,6 @@ import { OrderSummary } from '../details/OrderSummary';
 import { OrderItemResponse } from '../orders/types';
 
 import { ShoppingCartItemUpdateForm } from './ShoppingCartItemUpdateForm';
-import { getItemSelectorFactory } from './store/selectors';
 
 interface PureShoppingCartItemUpdateProps {
   offering: Offering;
@@ -60,72 +58,41 @@ const PureShoppingCartItemUpdate: FunctionComponent<PureShoppingCartItemUpdatePr
   </>
 );
 
-interface ShoppingCartItemUpdateProps {
-  shoppingCartItem: OrderItemResponse;
-  setTitle: typeof setTitle;
-}
-
-class ShoppingCartItemUpdateComponent extends Component<ShoppingCartItemUpdateProps> {
-  state = {
-    loading: false,
-    loaded: false,
-    plan: null,
-    offering: null,
-    limits: [],
-  };
-
-  async loadData() {
-    try {
-      this.setState({ loading: true });
-      const offering = await api.getOffering(
-        this.props.shoppingCartItem.offering_uuid,
-      );
-      const plugins = await api.getPlugins();
-      const limits = plugins.find(
-        (plugin) => plugin.offering_type === offering.type,
-      ).available_limits;
-      let plan = {};
-      if (offering && this.props.shoppingCartItem.plan_uuid) {
-        plan = offering.plans.find(
-          (offeringPlan) =>
-            offeringPlan.uuid === this.props.shoppingCartItem.plan_uuid,
-        );
-      }
-      this.setState({ loading: false, loaded: true, plan, offering, limits });
-    } catch (error) {
-      this.setState({ loading: false, loaded: false });
-    }
-  }
-
-  componentDidMount() {
-    this.loadData();
-    this.props.setTitle(translate('Shopping cart item update'));
-  }
-
-  render() {
-    if (this.state.loading) {
-      return <LoadingSpinner />;
-    }
-    if (!this.state.loaded) {
-      return translate('Unable to load offering.');
-    }
-    return (
-      <PureShoppingCartItemUpdate
-        plan={this.state.plan}
-        offering={this.state.offering}
-        shoppingCartItem={this.props.shoppingCartItem}
-        limits={this.state.limits}
-      />
+async function loadData(itemId) {
+  const cartItem = await api.getCartItem(itemId);
+  const offering = await api.getOffering(cartItem.offering_uuid);
+  const plugins = await api.getPlugins();
+  const limits = plugins.find(
+    (plugin) => plugin.offering_type === offering.type,
+  ).available_limits;
+  let plan = {} as Plan;
+  if (offering && cartItem.plan_uuid) {
+    plan = offering.plans.find(
+      (offeringPlan) => offeringPlan.uuid === cartItem.plan_uuid,
     );
   }
+  return { cartItem, offering, plan, limits };
 }
 
-const mapStateToProps = (state: RootState) => ({
-  shoppingCartItem: getItemSelectorFactory(
-    router.globals.params.order_item_uuid,
-  )(state),
-});
+export const ShoppingCartItemUpdate: FunctionComponent = () => {
+  const state = useAsync(
+    () => loadData(router.globals.params.order_item_uuid),
+    [router.globals.params.order_item_uuid],
+  );
+  useTitle(translate('Shopping cart item update'));
 
-export const ShoppingCartItemUpdate = connect(mapStateToProps, { setTitle })(
-  ShoppingCartItemUpdateComponent,
-);
+  if (state.loading) {
+    return <LoadingSpinner />;
+  }
+  if (state.error) {
+    return <>{translate('Unable to load offering.')}</>;
+  }
+  return (
+    <PureShoppingCartItemUpdate
+      plan={state.value.plan}
+      offering={state.value.offering}
+      shoppingCartItem={state.value.cartItem}
+      limits={state.value.limits}
+    />
+  );
+};
