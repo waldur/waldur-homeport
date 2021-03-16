@@ -36,6 +36,8 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
   const label = row.name || row.offering_name;
   let LinkComponent;
   if (row.resource_type && row.resource_uuid) {
+    // eslint-disable-next-line no-console
+    console.log('executing this one');
     LinkComponent = (
       <ResourceDetailsLink item={row}>{label}</ResourceDetailsLink>
     );

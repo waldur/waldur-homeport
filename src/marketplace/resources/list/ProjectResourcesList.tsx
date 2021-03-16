@@ -41,7 +41,7 @@ interface OwnProps {
 export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
-      title: translate('Name'),
+      title: translate('Name===='),
       render: ResourceNameField,
       orderField: 'name',
     },

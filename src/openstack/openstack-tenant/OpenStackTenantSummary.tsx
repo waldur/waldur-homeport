@@ -54,7 +54,7 @@ export const PureOpenStackTenantSummary: FunctionComponent<OpenStackTenantSummar
     <>
       <PureResourceSummaryBase {...props} />
       <Field
-        label={translate('Summary')}
+        label={translate('Summary===')}
         value={
           resource.marketplace_offering_name
             ? `${resource.marketplace_offering_name} (${formatFlavor(limits)})`

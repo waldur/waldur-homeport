@@ -452,7 +452,7 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-public-resource-details',
+    name: 'marketplace-public-resource-details', //
     url: 'marketplace-public-resource-details/:resource_uuid/',
     component: ResourceDetailsPageForCustomer,
     parent: 'organization',

@@ -50,6 +50,9 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
     [resource],
   );
 
+  // eslint-disable-next-line no-console
+  console.log('resource.name', resource?.name);
+
   useTitle(resource ? resource.name : translate('Resource details'));
 
   useEffect(() => {
@@ -74,6 +77,7 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
 
   return (
     <Layout sidebar={<ProjectSidebar />} pageClass="white-bg">
+      {/*layout should be present for hr*/}
       {resource ? (
         <ResourceDetails
           resource={resource}

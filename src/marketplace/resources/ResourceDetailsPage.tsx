@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
@@ -104,26 +104,30 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
   const resource = state.value;
   return (
     <>
-      {resource.offering_type === OFFERING_TYPE_BOOKING && (
-        <Row className="m-b-md pull-right">
-          <Col lg={12}>
-            <BookingActions
-              resource={resource}
-              reInitResource={reInitResource}
-            />
-          </Col>
-        </Row>
-      )}
-      <Row className="m-b-md">
-        <Col sm={12}>
-          <ResourceSummary resource={resource} />
-        </Col>
-      </Row>
-      <Row>
-        <Col sm={12}>
-          <ResourceTabs resource={resource} />
-        </Col>
-      </Row>
+      <div className="wrapper wrapper-content">
+        <div className="ibox-content">
+          {resource.offering_type === OFFERING_TYPE_BOOKING && (
+            <Row className="m-b-md pull-right">
+              <Col lg={12}>
+                <BookingActions
+                  resource={resource}
+                  reInitResource={reInitResource}
+                />
+              </Col>
+            </Row>
+          )}
+          <Row className="m-b-md">
+            <Col sm={12}>
+              <ResourceSummary resource={resource} />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12}>
+              <ResourceTabs resource={resource} />
+            </Col>
+          </Row>
+        </div>
+      </div>
     </>
   );
 };

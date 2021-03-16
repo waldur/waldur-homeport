@@ -14,9 +14,9 @@ const ResourceDetailsContainer = lazyComponent(
 
 export const states: StateDeclaration[] = [
   {
-    name: 'resource-details',
+    name: 'resource-details', // executing this one
     url: '/resources/:resource_type/:uuid/:tab',
-    component: ResourceDetailsContainer,
+    component: ResourceDetailsContainer, //
     params: {
       tab: {
         value: '',
