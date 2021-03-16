@@ -160,6 +160,16 @@ export class OpenstackInstanceCreateFormComponent extends Component<
             floatingIp,
           };
         });
+        let system_volume_type = defaultVolumeType;
+        let data_volume_type = defaultVolumeType;
+        if (isFeatureVisible('openstack.volume-types')) {
+          system_volume_type = volumeTypeChoices.find(
+            (volumeType) => volumeType.value === initial.system_volume_type,
+          );
+          data_volume_type = volumeTypeChoices.find(
+            (volumeType) => volumeType.value === initial.data_volume_type,
+          );
+        }
         const attributes = {
           ...initial,
           flavor,
@@ -167,8 +177,8 @@ export class OpenstackInstanceCreateFormComponent extends Component<
           security_groups,
           availability_zone,
           networks,
-          system_volume_type: defaultVolumeType,
-          data_volume_type: defaultVolumeType,
+          system_volume_type,
+          data_volume_type,
         };
         this.props.initialize({ attributes, project: this.props.project });
       } else {
