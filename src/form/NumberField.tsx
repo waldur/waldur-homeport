@@ -19,7 +19,7 @@ export const NumberField: FunctionComponent<NumberFieldProps> = (props) => {
   if (props.unit) {
     return (
       <div className="input-group" style={{ maxWidth: '15em', zIndex: 0 }}>
-        {control}
+        <div style={{ minWidth: '8em' }}>{control}</div>
         <span className="input-group-addon">{props.unit}</span>
       </div>
     );
