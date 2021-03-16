@@ -85,6 +85,20 @@ const TableOptions = {
     customer: getCustomer(state).uuid,
     o: 'name',
   }),
+  mapPropsToFilter: () => {
+    const filter: Record<string, string[]> = {};
+    // select required fields
+    filter.field = [
+      'uuid',
+      'name',
+      'description',
+      'created',
+      'billing_price_estimate',
+      'type_name',
+    ];
+
+    return filter;
+  },
   exportRow: (row) => [row.name, row.description, formatDateTime(row.created)],
   exportFields: ['Name', 'Description', 'Created'],
 };
