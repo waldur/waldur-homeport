@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Validator } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -17,55 +17,41 @@ interface MonacoFieldProps {
   options?: any;
 }
 
-export const MonacoField: React.FC<MonacoFieldProps> = (props) => {
-  const [loaded, setLoaded] = React.useState(false);
-  const [erred, setErred] = React.useState(false);
-  const EditorRef = React.useRef(null);
+const loader = () =>
+  import(/* webpackChunkName: "react-monaco-editor" */ 'react-monaco-editor');
 
-  React.useEffect(() => {
-    async function load() {
-      try {
-        EditorRef.current = await import(
-          /* webpackChunkName: "react-monaco-editor" */ 'react-monaco-editor'
-        );
-        setLoaded(true);
-      } catch {
-        setLoaded(false);
-        setErred(true);
-      }
-    }
-    load();
-  }, []);
+const ReactMonacoEditor = lazy(loader);
 
-  if (!loaded) {
-    return <LoadingSpinner />;
-  }
+const ReactMonacoDiff = lazy(() =>
+  loader().then((module) => ({ default: module.MonacoDiffEditor })),
+);
 
-  if (erred) {
-    return (
-      <input
-        className="form-control"
+export const MonacoField: React.FC<MonacoFieldProps> = (props) => (
+  <Suspense fallback={<LoadingSpinner />}>
+    {props.diff ? (
+      <ReactMonacoDiff
+        height={props.height}
+        language={props.mode}
         value={props.input.value}
         onChange={props.input.onChange}
+        original={props.original}
+        options={props.options}
       />
-    );
-  }
-  const Editor = props.diff
-    ? EditorRef.current.MonacoDiffEditor
-    : EditorRef.current.default;
-
-  return (
-    <Editor
-      height={props.height}
-      language={props.mode}
-      value={props.input.value}
-      onChange={props.input.onChange}
-      original={props.original}
-      options={props.options}
-    />
-  );
-};
+    ) : (
+      <ReactMonacoEditor
+        height={props.height}
+        language={props.mode}
+        value={props.input.value}
+        onChange={props.input.onChange}
+        options={props.options}
+      />
+    )}
+  </Suspense>
+);
 
 MonacoField.defaultProps = {
   height: 600,
+  options: {
+    automaticLayout: true,
+  },
 };
