@@ -68,7 +68,7 @@ const TableOptions = {
   fetchData: createFetcher('customers'),
   queryField: 'query',
   mapPropsToFilter: (props) => {
-    const filter: Record<string, string> = {};
+    const filter: Record<string, string | string[]> = {};
     if (props.filter) {
       if (props.filter.accounting_is_running) {
         filter.accounting_is_running = props.filter.accounting_is_running.value;
@@ -85,6 +85,31 @@ const TableOptions = {
         filter.division_uuid = props.filter.division.uuid;
       }
     }
+
+    // select required fields
+    filter.field = [
+      'uuid',
+      'name',
+      'abbreviation',
+      'email',
+      'agreement_number',
+      'created',
+      'contact_details',
+      'country',
+      'address',
+      'postal',
+      'phone_number',
+      'access_subnets',
+      'accounting_start_date',
+      'bank_account',
+      'bank_name',
+      'default_tax_percent',
+      'registration_code',
+      'vat_code',
+      'domain',
+      'is_service_provider',
+    ];
+
     return filter;
   },
 };
