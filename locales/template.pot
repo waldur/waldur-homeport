@@ -3999,7 +3999,6 @@ msgstr ""
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -4089,6 +4088,10 @@ msgstr ""
 
 #: src/project/ProjectNameField.tsx
 msgid "Name should contain at least 3 symbols."
+msgstr ""
+
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
+msgid "Name===="
 msgstr ""
 
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -7431,13 +7434,16 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
-#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 #: src/support/SupportTabs.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Summary"
+msgstr ""
+
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
+msgid "Summary==="
 msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx

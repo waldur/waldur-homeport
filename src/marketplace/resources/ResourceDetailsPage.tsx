@@ -8,6 +8,7 @@ import { BookingActions } from '@waldur/booking/BookingActions';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
@@ -102,32 +103,35 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
   }
 
   const resource = state.value;
+  // eslint-disable-next-line no-console
+  console.log('resource', resource);
   return (
-    <>
-      <div className="wrapper wrapper-content">
-        <div className="ibox-content">
-          {resource.offering_type === OFFERING_TYPE_BOOKING && (
-            <Row className="m-b-md pull-right">
-              <Col lg={12}>
-                <BookingActions
-                  resource={resource}
-                  reInitResource={reInitResource}
-                />
-              </Col>
-            </Row>
-          )}
-          <Row className="m-b-md">
-            <Col sm={12}>
-              <ResourceSummary resource={resource} />
+    <div className="wrapper wrapper-content">
+      <div className="ibox-content">
+        {resource.offering_type === OFFERING_TYPE_BOOKING && (
+          <Row className="m-b-md pull-right">
+            <Col lg={12}>
+              <BookingActions
+                resource={resource}
+                reInitResource={reInitResource}
+              />
+              {resource.offering_uuid && (
+                <OfferingDetailsButton offering={resource.offering_uuid} />
+              )}
             </Col>
           </Row>
-          <Row>
-            <Col sm={12}>
-              <ResourceTabs resource={resource} />
-            </Col>
-          </Row>
-        </div>
+        )}
+        <Row className="m-b-md">
+          <Col sm={12}>
+            <ResourceSummary resource={resource} />
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={12}>
+            <ResourceTabs resource={resource} />
+          </Col>
+        </Row>
       </div>
-    </>
+    </div>
   );
 };

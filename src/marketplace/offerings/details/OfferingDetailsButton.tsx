@@ -29,7 +29,7 @@ const PureOfferingDetailsButton: FunctionComponent<OfferingDetailsButton> = (
   props,
 ) => (
   <ActionButton
-    title={translate('Offering details')}
+    title={translate('Offering details===')}
     icon="fa fa-eye"
     action={props.openDialog}
   />
