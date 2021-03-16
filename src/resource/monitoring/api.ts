@@ -14,7 +14,8 @@ export const loadTemplates: ZabbixTemplateApi = (request) =>
 
 export const createHost = (request) =>
   post('/zabbix-hosts/', {
-    service_project_link: request.service_project_link.url,
+    service_settings: request.link.service_settings,
+    project: request.link.project,
     name: request.resource.name,
     scope: request.resource.url,
     templates: request.templates.map((template) => ({ url: template.url })),
