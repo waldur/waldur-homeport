@@ -74,7 +74,6 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
 
   return (
     <Layout sidebar={<ProjectSidebar />} pageClass="white-bg">
-      {/*layout should be present for hr*/}
       {resource ? (
         <ResourceDetails
           resource={resource}

@@ -3999,6 +3999,7 @@ msgstr ""
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/CustomerResourcesList.tsx
+#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupSnapshotsList.tsx
@@ -4088,10 +4089,6 @@ msgstr ""
 
 #: src/project/ProjectNameField.tsx
 msgid "Name should contain at least 3 symbols."
-msgstr ""
-
-#: src/marketplace/resources/list/ProjectResourcesList.tsx
-msgid "Name===="
 msgstr ""
 
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -4435,13 +4432,10 @@ msgstr ""
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/details/OverviewTab.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/details/OfferingDetailsButton.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 msgid "Offering details"
-msgstr ""
-
-#: src/marketplace/offerings/details/OfferingDetailsButton.tsx
-msgid "Offering details==="
 msgstr ""
 
 #: src/marketplace/offerings/images/ImagesListPlaceholder.tsx
@@ -7437,16 +7431,13 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
 #: src/marketplace/orders/item/details/OrderItemDetails.tsx
+#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
 #: src/support/SupportTabs.tsx
 #: src/vmware/VMwareVirtualMachineSummary.tsx
 msgid "Summary"
-msgstr ""
-
-#: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-msgid "Summary==="
 msgstr ""
 
 #: src/issues/notifications/NotificationCreateDialog.tsx
@@ -7496,11 +7487,8 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.tsx
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.tsx
-msgid "Synchronise"
-msgstr ""
-
 #: src/resource/actions/PullActionItem.tsx
-msgid "Synchronise===="
+msgid "Synchronise"
 msgstr ""
 
 #: src/resource/actions/PullActionItem.tsx
