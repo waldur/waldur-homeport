@@ -7,6 +7,7 @@ import { loadData } from './utils';
 interface ChangePlanDialogProps {
   resolve: {
     resource: {
+      uuid: string;
       marketplace_resource_uuid: string;
     };
   };
@@ -14,10 +15,11 @@ interface ChangePlanDialogProps {
 }
 
 export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = (props) => {
-  const asyncState = useAsync(
-    () => loadData(props.resolve.resource.marketplace_resource_uuid),
-    [props.resolve.resource.marketplace_resource_uuid],
-  );
+  const resourceUuid =
+    props.resolve.resource.marketplace_resource_uuid !== undefined
+      ? props.resolve.resource.marketplace_resource_uuid
+      : props.resolve.resource.uuid;
+  const asyncState = useAsync(() => loadData(resourceUuid), [resourceUuid]);
   return (
     <DialogBody
       asyncState={asyncState}
