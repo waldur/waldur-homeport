@@ -9,9 +9,11 @@ import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
+import { ShowReportButton } from '@waldur/marketplace/resources/report/ShowReportButton';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
+import { isOracleOffering } from '@waldur/support/utils';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import {
   Customer,
@@ -115,6 +117,10 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
                 resource={resource}
                 reInitResource={reInitResource}
               />
+              {!isOracleOffering(resource) &&
+                Array.isArray(resource.report) && (
+                  <ShowReportButton report={resource.report} />
+                )}
               {resource.offering_uuid && (
                 <OfferingDetailsButton offering={resource.offering_uuid} />
               )}

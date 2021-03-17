@@ -12,5 +12,6 @@ export default [
   PullTenantAction,
   ChangePlanAction,
   ChangeLimitsAction,
-  TerminateTenantAction,
+  TerminateTenantAction, //
 ];
+// the actions
