@@ -117,9 +117,7 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
               {Array.isArray(resource.report) && (
                 <ShowReportButton report={resource.report} />
               )}
-              {resource.offering_uuid && (
-                <OfferingDetailsButton offering={resource.offering_uuid} />
-              )}
+              <OfferingDetailsButton offering={resource.offering_uuid} />
             </Col>
           </Row>
         )}
