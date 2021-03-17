@@ -41,7 +41,6 @@ const formatPlan = (
     unit: plan.unit.value,
     unit_price: plan.unit_price,
     article_code: plan.article_code,
-    product_code: plan.product_code,
   };
   if (plan.prices) {
     // Skip prices for invalid components

@@ -15,7 +15,6 @@ export interface PlanFormData {
   quotas: { [key: string]: number };
   description?: string;
   article_code?: string;
-  product_code?: string;
   uuid?: string;
 }
 
@@ -71,7 +70,6 @@ export interface PlanRequest {
   prices?: { [key: string]: number };
   description?: string;
   article_code?: string;
-  product_code?: string;
   uuid?: string;
 }
 

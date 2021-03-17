@@ -9,7 +9,6 @@ import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { ArticleCodeField } from '../ArticleCodeField';
 import { FormGroup } from '../FormGroup';
-import { ProductCodeField } from '../ProductCodeField';
 
 import { PlanBillingPeriodField } from './PlanBillingPeriodField';
 import { PlanComponents } from './PlanComponents';
@@ -54,7 +53,6 @@ export const PlanForm = enhance((props: PlanFormProps) => (
       <PlanDescriptionField />
     </FormGroup>
     <ArticleCodeField />
-    <ProductCodeField />
     {props.components && props.components.length > 0 && (
       <PlanComponents
         components={props.components.filter((component) => component.type)}
