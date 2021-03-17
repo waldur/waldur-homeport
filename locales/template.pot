@@ -3259,6 +3259,10 @@ msgstr ""
 msgid "Invitation is not valid."
 msgstr ""
 
+#: src/invitations/InvitationExpandableRow.tsx
+msgid "Invitation link"
+msgstr ""
+
 #: src/invitations/InvitationReject.tsx
 msgid "Invitation rejection"
 msgstr ""
