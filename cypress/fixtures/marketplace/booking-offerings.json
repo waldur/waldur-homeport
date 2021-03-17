@@ -52,7 +52,6 @@
         "limit_amount": null,
         "disable_quotas": false,
         "use_limit_for_billing": false,
-        "product_code": "",
         "article_code": "",
         "max_value": null,
         "min_value": null,
@@ -75,7 +74,6 @@
         "name": "plan name",
         "description": "",
         "article_code": "",
-        "product_code": "",
         "prices": {
           "component_1": 0
         },
@@ -158,7 +156,6 @@
         "limit_amount": null,
         "disable_quotas": true,
         "use_limit_for_billing": false,
-        "product_code": "",
         "article_code": "",
         "max_value": null,
         "min_value": null,
@@ -176,7 +173,6 @@
         "limit_amount": null,
         "disable_quotas": true,
         "use_limit_for_billing": false,
-        "product_code": "",
         "article_code": "",
         "max_value": null,
         "min_value": null,
@@ -199,7 +195,6 @@
         "name": "plan name",
         "description": "",
         "article_code": "",
-        "product_code": "",
         "prices": {
           "IntName": 5,
           "some-component-2": 2

@@ -5188,10 +5188,6 @@ msgstr "Privaatpilved"
 msgid "Processing..."
 msgstr "Töötlen…"
 
-#: src/marketplace/offerings/ProductCodeField.tsx
-msgid "Product code"
-msgstr "Toote kood"
-
 #: src/marketplace/details/OfferingDetails.tsx
 msgid "Product configuration"
 msgstr "Toote seadistus"
@@ -7195,11 +7191,6 @@ msgstr "Meeskonna suurus"
 #: src/marketplace/offerings/ArticleCodeField.tsx
 msgid "Technical code used by accounting software."
 msgstr "Raamatupidamistarkvara kasutatav tehniline kood."
-
-#: src/marketplace/offerings/ProductCodeField.tsx
-msgid "Technical name intended for integration and automated reporting."
-msgstr ""
-"Integreerimiseks ja automatiseeritud aruandluseks mõeldud tehniline nimi."
 
 #: src/marketplace/offerings/InternalNameField.tsx
 msgid ""
