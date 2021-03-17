@@ -13,7 +13,6 @@ import { ShowReportButton } from '@waldur/marketplace/resources/report/ShowRepor
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
 import { useTitle } from '@waldur/navigation/title';
-import { isOracleOffering } from '@waldur/support/utils';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import {
   Customer,
@@ -115,10 +114,9 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
                 resource={resource}
                 reInitResource={reInitResource}
               />
-              {!isOracleOffering(resource) &&
-                Array.isArray(resource.report) && (
-                  <ShowReportButton report={resource.report} />
-                )}
+              {Array.isArray(resource.report) && (
+                <ShowReportButton report={resource.report} />
+              )}
               {resource.offering_uuid && (
                 <OfferingDetailsButton offering={resource.offering_uuid} />
               )}
