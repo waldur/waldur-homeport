@@ -5,6 +5,7 @@ import Select from 'react-select';
 import { Field, change } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { formatResourceShort } from '@waldur/marketplace/utils';
 
 import { refreshResources } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
@@ -40,8 +41,8 @@ export const ResourceGroup: FunctionComponent<{ disabled }> = ({
             isClearable={true}
             defaultOptions
             loadOptions={loadData}
-            getOptionValue={(option) => option.name}
-            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => formatResourceShort(option)}
+            getOptionLabel={(option) => formatResourceShort(option)}
             isDisabled={disabled}
             filterOption={filterOption}
           />
