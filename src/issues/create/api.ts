@@ -49,13 +49,14 @@ export const refreshResources = async (name: string, project?: Project) => {
     return;
   }
 
-  const params: Record<string, any> = {
+  const params: Record<string, string | string[]> = {
     project_uuid: project.uuid,
-    field: ['name', 'url'],
+    field: ['name', 'url', 'offering_name'],
+    o: ['name'],
   };
   if (name) {
     params.name = name;
   }
-  const resources = await getList('/resources/', params);
+  const resources = await getList('/marketplace-resources/', params);
   return { options: resources };
 };
