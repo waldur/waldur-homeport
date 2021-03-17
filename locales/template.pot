@@ -7496,8 +7496,11 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.tsx
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.tsx
-#: src/resource/actions/PullActionItem.tsx
 msgid "Synchronise"
+msgstr ""
+
+#: src/resource/actions/PullActionItem.tsx
+msgid "Synchronise===="
 msgstr ""
 
 #: src/resource/actions/PullActionItem.tsx
