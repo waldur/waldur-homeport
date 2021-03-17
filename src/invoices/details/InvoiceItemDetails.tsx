@@ -45,6 +45,13 @@ export const InvoiceItemDetails: FunctionComponent<InvoiceItemDetailsProps> = ({
       {translate('Start time')}: {item.start ? formatDateTime(item.start) : '-'}
       . {translate('End time')}: {item.end ? formatDateTime(item.end) : '-'}.
     </small>
+    {item.article_code && (
+      <div>
+        <small>
+          {translate('Article code')}: {item.article_code}
+        </small>
+      </div>
+    )}
     {item.details.service_provider_name && (
       <div>
         <small>

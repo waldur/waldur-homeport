@@ -1,6 +1,7 @@
 import { Customer } from '@waldur/workspace/types';
 
 export interface InvoiceItem {
+  article_code: string;
   tax: string;
   total: string;
   name: string;
