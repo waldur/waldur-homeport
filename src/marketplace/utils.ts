@@ -12,3 +12,12 @@ export const getCategoryLink = (projectId, categoryId) => ({
 
 export const formDataSelector = (state: RootState) =>
   (getFormValues('marketplaceOffering')(state) || {}) as any;
+
+export const formatResourceShort = (resource) => {
+  return (
+    (resource.name ? resource.name : resource.uuid) +
+    ' (' +
+    resource.offering_name +
+    ')'
+  );
+};
