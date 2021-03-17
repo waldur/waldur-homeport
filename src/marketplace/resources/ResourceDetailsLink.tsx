@@ -13,7 +13,7 @@ export const ResourceDetailsLink: FunctionComponent<ResourceDetailsLinkProps> = 
   props,
 ) => (
   <Link
-    state="resource-details" //
+    state="resource-details"
     params={{
       resource_type: props.item.resource_type,
       uuid: props.item.resource_uuid,

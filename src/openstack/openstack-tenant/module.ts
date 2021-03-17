@@ -11,4 +11,4 @@ const OpenStackTenantSummary = lazyComponent(
   'OpenStackTenantSummary',
 );
 
-ResourceSummary.register('OpenStack.Tenant', OpenStackTenantSummary); //
+ResourceSummary.register('OpenStack.Tenant', OpenStackTenantSummary);

@@ -50,9 +50,6 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
     [resource],
   );
 
-  // eslint-disable-next-line no-console
-  console.log('resource.name', resource?.name);
-
   useTitle(resource ? resource.name : translate('Resource details'));
 
   useEffect(() => {

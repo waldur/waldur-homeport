@@ -105,8 +105,6 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
   }
 
   const resource = state.value;
-  // eslint-disable-next-line no-console
-  console.log('resource', resource);
   return (
     <div className="wrapper wrapper-content">
       <div className="ibox-content">
