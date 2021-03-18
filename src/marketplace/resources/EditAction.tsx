@@ -1,8 +1,7 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { userCanModifyTenant } from '@waldur/marketplace/resources/utils';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-
-import { userCanModifyTenant } from './utils';
 
 const EditDialog = lazyComponent(
   () => import(/* webpackChunkName: "EditDialog" */ './EditDialog'),
