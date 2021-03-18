@@ -2185,6 +2185,7 @@ msgstr ""
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
+#: src/marketplace/resources/EditAction.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -2193,7 +2194,6 @@ msgstr ""
 #: src/openstack/openstack-snapshot-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-snapshot/EditAction.tsx
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
-#: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
@@ -4536,7 +4536,7 @@ msgstr ""
 msgid "Only staff and organization users are allowed to open console."
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/utils.ts
+#: src/marketplace/resources/utils.ts
 msgid "Only staff can manage OpenStack tenant."
 msgstr ""
 
@@ -4597,7 +4597,7 @@ msgstr ""
 msgid "OpenStack subnet"
 msgstr ""
 
-#: src/openstack/openstack-tenant/actions/EditDialog.tsx
+#: src/marketplace/resources/EditDialog.tsx
 msgid "OpenStack tenant"
 msgstr ""
 

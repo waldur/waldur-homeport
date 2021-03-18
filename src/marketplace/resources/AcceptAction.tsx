@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import { translate, formatJsxTemplate } from '@waldur/i18n';
+import { acceptBooking } from '@waldur/marketplace/resources/api';
+import { BOOKING_CREATING } from '@waldur/marketplace/resources/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -8,9 +10,6 @@ import {
   isOwnerOrStaff as isOwnerOrStaffSelector,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
-
-import { acceptBooking } from './api';
-import * as constants from './constants';
 
 export const AcceptAction = ({ resource, reInitResource }) => {
   const dispatch = useDispatch();
@@ -47,7 +46,7 @@ export const AcceptAction = ({ resource, reInitResource }) => {
       title={translate('Accept')}
       action={callback}
       disabled={
-        resource.state !== constants.BOOKING_CREATING ||
+        resource.state !== BOOKING_CREATING ||
         (!isOwnerOrStaff && !isServiceManager)
       }
     />
