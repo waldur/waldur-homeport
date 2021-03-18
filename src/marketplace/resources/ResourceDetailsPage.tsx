@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { BookingActions } from '@waldur/booking/BookingActions';
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
@@ -107,20 +106,18 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
   return (
     <div className="wrapper wrapper-content">
       <div className="ibox-content">
-        {resource.offering_type === OFFERING_TYPE_BOOKING && (
-          <Row className="m-b-md pull-right">
-            <Col lg={12}>
-              <BookingActions
-                resource={resource}
-                reInitResource={reInitResource}
-              />
-              {Array.isArray(resource.report) && (
-                <ShowReportButton report={resource.report} />
-              )}
-              <OfferingDetailsButton offering={resource.offering_uuid} />
-            </Col>
-          </Row>
-        )}
+        <Row className="m-b-md pull-right">
+          <Col lg={12}>
+            <BookingActions
+              resource={resource}
+              reInitResource={reInitResource}
+            />
+            {Array.isArray(resource.report) && (
+              <ShowReportButton report={resource.report} />
+            )}
+            <OfferingDetailsButton offering={resource.offering_uuid} />
+          </Col>
+        </Row>
         <Row className="m-b-md">
           <Col sm={12}>
             <ResourceSummary resource={resource} />
