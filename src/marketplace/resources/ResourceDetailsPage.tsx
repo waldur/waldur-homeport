@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
-import { BookingActions } from '@waldur/booking/BookingActions';
+import { MarketplaceResourceActions } from '@waldur/booking/MarketplaceResourceActions';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
@@ -108,7 +108,7 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
       <div className="ibox-content">
         <Row className="m-b-md pull-right">
           <Col lg={12}>
-            <BookingActions
+            <MarketplaceResourceActions
               resource={resource}
               reInitResource={reInitResource}
             />

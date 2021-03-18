@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { BookingActions } from '@waldur/booking/BookingActions';
 import { BookingsListExpandableRow } from '@waldur/booking/BookingsListExpandableRow';
 import { BookingStateField } from '@waldur/booking/BookingStateField';
 import { BookingTimeSlotsField } from '@waldur/booking/BookingTimeSlotsField';
@@ -11,6 +10,7 @@ import {
   OFFERING_TYPE_BOOKING,
 } from '@waldur/booking/constants';
 import { CreatedByField } from '@waldur/booking/CreatedByField';
+import { MarketplaceResourceActions } from '@waldur/booking/MarketplaceResourceActions';
 import { translate, withTranslation } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { RootState } from '@waldur/store/reducers';
@@ -62,7 +62,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
     columns.push({
       title: translate('Actions'),
       render: ({ row }) => (
-        <BookingActions resource={row} reInitResource={() => props.fetch()} />
+        <MarketplaceResourceActions
+          resource={row}
+          reInitResource={() => props.fetch()}
+        />
       ),
     });
   }

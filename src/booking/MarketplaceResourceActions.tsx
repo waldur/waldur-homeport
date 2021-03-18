@@ -20,7 +20,7 @@ const ActionsList = [
   TerminateTenantAction,
 ];
 
-export const BookingActions = ({ resource, reInitResource }) => {
+export const MarketplaceResourceActions = ({ resource, reInitResource }) => {
   const [open, onToggle] = useBoolean(false);
 
   return (
