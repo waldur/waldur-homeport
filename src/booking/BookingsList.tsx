@@ -10,9 +10,9 @@ import {
   OFFERING_TYPE_BOOKING,
 } from '@waldur/booking/constants';
 import { CreatedByField } from '@waldur/booking/CreatedByField';
-import { MarketplaceResourceActions } from '@waldur/booking/MarketplaceResourceActions';
 import { translate, withTranslation } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
+import { MarketplaceResourceActions } from '@waldur/marketplace/resources/MarketplaceResourceActions';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';

@@ -4,10 +4,10 @@ import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
-import { MarketplaceResourceActions } from '@waldur/booking/MarketplaceResourceActions';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/OfferingDetailsButton';
+import { MarketplaceResourceActions } from '@waldur/marketplace/resources/MarketplaceResourceActions';
 import { ShowReportButton } from '@waldur/marketplace/resources/report/ShowReportButton';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
 import { BreadcrumbItem } from '@waldur/navigation/breadcrumbs/types';
