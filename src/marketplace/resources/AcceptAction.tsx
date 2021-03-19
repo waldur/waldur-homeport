@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 
+import { acceptBooking } from '@waldur/booking/api';
+import * as constants from '@waldur/booking/constants';
 import { translate, formatJsxTemplate } from '@waldur/i18n';
-import { acceptBooking } from '@waldur/marketplace/resources/api';
-import { BOOKING_CREATING } from '@waldur/marketplace/resources/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -46,7 +46,7 @@ export const AcceptAction = ({ resource, reInitResource }) => {
       title={translate('Accept')}
       action={callback}
       disabled={
-        resource.state !== BOOKING_CREATING ||
+        resource.state !== constants.BOOKING_CREATING ||
         (!isOwnerOrStaff && !isServiceManager)
       }
     />

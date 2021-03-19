@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 
+import { rejectBooking } from '@waldur/booking/api';
+import * as constants from '@waldur/booking/constants';
 import { translate, formatJsxTemplate } from '@waldur/i18n';
-import { rejectBooking } from '@waldur/marketplace/resources/api';
-import { BOOKING_CREATING } from '@waldur/marketplace/resources/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -41,7 +41,7 @@ export const RejectAction = ({ resource, reInitResource }) => {
     <ActionItem
       title={translate('Reject')}
       action={callback}
-      disabled={resource.state !== BOOKING_CREATING}
+      disabled={resource.state !== constants.BOOKING_CREATING}
     />
   ) : null;
 };

@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import {
@@ -9,9 +10,19 @@ import {
   createSecurityGroup,
   CreateSecurityGroupRequestBody,
 } from '@waldur/openstack/api';
+import { ActionContext } from '@waldur/resource/actions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { OpenStackTenant } from '../types';
+
+export function userCanModifyTenant(ctx: ActionContext): string {
+  if (
+    ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES &&
+    !ctx.user.is_staff
+  ) {
+    return translate('Only staff can manage OpenStack tenant.');
+  }
+}
 
 type CreateSecurityGroupFormData = CreateSecurityGroupRequestBody;
 
