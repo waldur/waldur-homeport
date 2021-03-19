@@ -4536,7 +4536,7 @@ msgstr ""
 msgid "Only staff and organization users are allowed to open console."
 msgstr ""
 
-#: src/marketplace/resources/utils.ts
+#: src/openstack/openstack-tenant/actions/utils.ts
 msgid "Only staff can manage OpenStack tenant."
 msgstr ""
 
