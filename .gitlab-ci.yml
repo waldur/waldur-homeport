@@ -11,6 +11,8 @@ include:
     file: "/templates/validate/docker-compose-trigger.yml"
   - project: "waldur/waldur-pipelines"
     file: "/templates/test/lint-docker-image.yaml"
+  - project: "waldur/waldur-pipelines"
+    file: "/templates/test/lint-dockerfile.yaml"
 
 variables:
   COMPONENT_VERSION: "latest"
@@ -111,5 +113,10 @@ Lint docker image:
   extends: .Lint docker image template
   variables:
     IMAGE: opennode/waldur-homeport:latest
+  before_script: []
+
+Lint dockerfile:
+  extends: .Lint dockerfile template
+  variables:
     DOCKERFILE: Dockerfile
   before_script: []
