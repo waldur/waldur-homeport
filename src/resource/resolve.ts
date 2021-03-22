@@ -10,14 +10,14 @@ import {
 } from '@waldur/workspace/actions';
 import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
 
-import { ResourcesService } from './ResourcesService';
+import { getResource } from './api';
 
 export function loadResource(trans: Transition) {
   if (!trans.params().uuid) {
     return Promise.reject();
   }
 
-  return ResourcesService.get(trans.params().resource_type, trans.params().uuid)
+  return getResource(trans.params().resource_type, trans.params().uuid)
     .then((resource) => {
       return getProject(resource.project_uuid).then((project) => {
         return { project };

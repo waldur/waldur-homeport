@@ -11,9 +11,9 @@ import { Layout } from '@waldur/navigation/Layout';
 import { useTitle } from '@waldur/navigation/title';
 import { ProjectSidebar } from '@waldur/project/ProjectSidebar';
 
+import { getResource } from './api';
 import { ResourceBreadcrumbsRegistry } from './breadcrumbs/ResourceBreadcrumbsRegistry';
 import { ResourceDetails } from './ResourceDetails';
-import { ResourcesService } from './ResourcesService';
 import { BaseResource } from './types';
 
 export const ResourceDetailsContainer: FunctionComponent = () => {
@@ -21,7 +21,7 @@ export const ResourceDetailsContainer: FunctionComponent = () => {
   const router = useRouter();
 
   const [asyncResult, refreshResource] = useAsyncFn(
-    () => ResourcesService.get(params.resource_type, params.uuid),
+    () => getResource(params.resource_type, params.uuid),
     [params],
   );
 
