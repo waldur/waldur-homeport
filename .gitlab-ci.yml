@@ -119,4 +119,7 @@ Lint dockerfile:
   extends: .Lint dockerfile template
   variables:
     DOCKERFILE: Dockerfile
+    HADOLINT_CONFIG: |
+      ignored:
+        - DL3018
   before_script: []
