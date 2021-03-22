@@ -6,11 +6,11 @@ include:
   - project: "waldur/waldur-pipelines"
     file: "/templates/release/sync-to-github.yml"
   - project: "waldur/waldur-pipelines"
-    file: "/templates/release/dev-env-update.yml"
-  - project: "waldur/waldur-pipelines"
     file: "/templates/validate/docker-compose-trigger.yml"
   - project: "waldur/waldur-pipelines"
     file: "/templates/test/lint-docker-image.yaml"
+  - project: "waldur/waldur-pipelines"
+    file: "/templates/deploy/dev-env-update.yml"
 
 variables:
   COMPONENT_VERSION: "latest"
