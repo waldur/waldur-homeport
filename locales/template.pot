@@ -5445,10 +5445,6 @@ msgstr ""
 msgid "Private clouds"
 msgstr ""
 
-#: src/marketplace/offerings/ProductCodeField.tsx
-msgid "Product code"
-msgstr ""
-
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/components/utils.tsx
 #: src/customer/dashboard/CustomerResourcesList.tsx
@@ -7580,10 +7576,6 @@ msgstr ""
 
 #: src/marketplace/offerings/ArticleCodeField.tsx
 msgid "Technical code used by accounting software."
-msgstr ""
-
-#: src/marketplace/offerings/ProductCodeField.tsx
-msgid "Technical name intended for integration and automated reporting."
 msgstr ""
 
 #: src/marketplace/offerings/InternalNameField.tsx
