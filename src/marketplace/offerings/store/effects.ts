@@ -7,6 +7,7 @@ import { Action } from '@waldur/core/reducerActions';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
+import { handleMarketplaceErrorResponse } from '@waldur/marketplace/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
 import { showError, showSuccess } from '@waldur/store/notify';
@@ -98,6 +99,7 @@ function* createOffering(action: Action<OfferingFormData>) {
   } catch (error) {
     const errorMessage = `${translate('Unable to create offering.')} ${format(
       error,
+      handleMarketplaceErrorResponse,
     )}`;
     yield put(showError(errorMessage));
     yield put(constants.createOffering.failure());
@@ -122,6 +124,7 @@ function* updateOffering(action: Action<OfferingUpdateFormData>) {
   } catch (error) {
     const errorMessage = `${translate('Unable to update offering.')} ${format(
       error,
+      handleMarketplaceErrorResponse,
     )}`;
     yield put(showError(errorMessage));
     yield put(constants.updateOffering.failure());
