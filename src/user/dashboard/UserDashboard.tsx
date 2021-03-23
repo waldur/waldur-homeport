@@ -51,15 +51,13 @@ const UserDashboardContainer: React.FC<StateProps & DispatchProps> = (
       <UserDashboardChart user={user} hasChecklists={asyncState.value > 0} />
       <div className="wrapper wrapper-content">
         {asyncState.value > 0 && (
-          <>
-            <Panel title={translate('Checklists')}>
-              <CategoryUserList />
-            </Panel>
-            <Panel title={translate('Marketplace')}>
-              <CategoriesList {...props.categories} />
-            </Panel>
-          </>
+          <Panel title={translate('Checklists')}>
+            <CategoryUserList />
+          </Panel>
         )}
+        <Panel title={translate('Marketplace')}>
+          <CategoriesList {...props.categories} />
+        </Panel>
         {renderPrompt && (
           <div className="row">
             <div className="col-md-12">
