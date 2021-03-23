@@ -98,6 +98,11 @@ export const updateOffering = (offeringId, data) =>
 export const updateResource = (resourceId: string, data) =>
   put<Resource>(`/marketplace-resources/${resourceId}/`, data);
 
+export const getResourceDetails = (resourceId: string) =>
+  get<any>(`/marketplace-resources/${resourceId}/details/`).then(
+    (response) => response.data,
+  );
+
 export const getResourcePlanPeriods = (resourceId: string) =>
   getAll<ResourcePlanPeriod>(
     `/marketplace-resources/${resourceId}/plan_periods/`,
