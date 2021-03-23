@@ -10,6 +10,8 @@ include:
   - project: "waldur/waldur-pipelines"
     file: "/templates/test/lint-docker-image.yaml"
   - project: "waldur/waldur-pipelines"
+    file: "/templates/test/lint-dockerfile.yaml"
+  - project: "waldur/waldur-pipelines"
     file: "/templates/deploy/dev-env-update.yml"
 
 variables:
@@ -112,4 +114,13 @@ Lint docker image:
   variables:
     IMAGE: opennode/waldur-homeport:latest
     DOCKERFILE: Dockerfile
+  before_script: []
+
+Lint dockerfile:
+  extends: .Lint dockerfile template
+  variables:
+    DOCKERFILE: Dockerfile
+    HADOLINT_CONFIG: |
+      ignored:
+        - DL3018 # "versions for `apk add`" warning
   before_script: []
