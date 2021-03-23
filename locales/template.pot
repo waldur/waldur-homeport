@@ -2339,6 +2339,10 @@ msgstr ""
 msgid "English"
 msgstr ""
 
+#: src/marketplace/offerings/create/ComponentMeasuredUnitField.tsx
+msgid "Ensure this field has no more than 30 characters."
+msgstr ""
+
 #: src/openstack/utils.ts
 msgid "Enter IPv4 address."
 msgstr ""

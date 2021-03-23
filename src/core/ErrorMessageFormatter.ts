@@ -1,12 +1,12 @@
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
-const formatErrorObject = (error) =>
+export const formatErrorObject = (error) =>
   Object.keys(error)
     .map((key) => `${key}: ${error[key]}`)
     .join(', ');
 
-export const format = (response) => {
+export const format = (response, parseResponse?) => {
   /*
   Empty response or status code -1 denotes network error.
   Usually it is caused by one of the following reasons:
@@ -39,6 +39,9 @@ export const format = (response) => {
   let message = `${response.status}: ${response.statusText}.`;
 
   if (response.data) {
+    if (parseResponse) {
+      return parseResponse(response, message);
+    }
     if (response.data.non_field_errors) {
       message += ' ' + response.data.non_field_errors;
     } else if (response.data.detail) {
