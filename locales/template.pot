@@ -2370,6 +2370,10 @@ msgstr ""
 msgid "Error message"
 msgstr ""
 
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+msgid "Error traceback"
+msgstr ""
+
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Esimated price per month"
 msgstr ""

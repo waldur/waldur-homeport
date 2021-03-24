@@ -50,6 +50,11 @@ let OrderItemDetails = (
                   {props.orderItem.error_message}
                 </OrderItemDetailsField>
               )}
+              {props.orderItem.error_traceback && (
+                <OrderItemDetailsField label={translate('Error traceback')}>
+                  {props.orderItem.error_traceback}
+                </OrderItemDetailsField>
+              )}
               {props.orderItem.resource_uuid && (
                 <OrderItemDetailsField label={translate('Resource')}>
                   <ResourceDetailsLink
