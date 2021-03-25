@@ -33,6 +33,7 @@ import {
   resetAuthenticationMethod,
   setAuthenticationMethod,
 } from './AuthMethodStorage';
+import { getRedirect, resetRedirect, setRedirect } from './AuthRedirectStorage';
 import { getToken, removeToken, setToken } from './TokenStorage';
 
 function setAuthHeader(token) {
@@ -85,13 +86,22 @@ async function activate(user) {
   loginSuccess(response);
 }
 
-function redirectOnSuccess() {
+function storeRedirect() {
   if (router.globals.params?.toState) {
-    return router.stateService.go(
-      router.globals.params.toState,
-      router.globals.params.toParams,
-      { reload: true },
-    );
+    setRedirect({
+      toState: router.globals.params.toState,
+      toParams: router.globals.params.toParams,
+    });
+  }
+}
+
+function redirectOnSuccess() {
+  const redirect = getRedirect();
+  if (redirect) {
+    resetRedirect();
+    return router.stateService.go(redirect.toState, redirect.toParams, {
+      reload: true,
+    });
   } else {
     return router.stateService.go('profile.details', { reload: true });
   }
@@ -139,4 +149,5 @@ export const AuthService = {
   redirectOnSuccess,
   localLogout,
   logout,
+  storeRedirect,
 };
