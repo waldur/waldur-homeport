@@ -107,6 +107,11 @@ let OrderItemDetails = (
                   offering={props.offering}
                 />
               )}
+              {props.orderItem.output && (
+                <OrderItemDetailsField label={translate('Output')}>
+                  {props.orderItem.output}
+                </OrderItemDetailsField>
+              )}
             </Panel.Body>
           </Panel>
         </PanelGroup>

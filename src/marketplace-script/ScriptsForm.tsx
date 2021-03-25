@@ -12,7 +12,7 @@ import { EnvironmentVariablesList } from './EnvironmentVariablesList';
 
 const PROGRAMMING_LANGUAGE_CHOICES = [
   {
-    label: 'Python 3.7',
+    label: 'Python',
     value: 'python',
   },
   {
