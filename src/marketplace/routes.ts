@@ -532,9 +532,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-project-resources',
+    name: 'marketplace-project-resources', // name <=> state
     url: 'marketplace-resources/:category_uuid/',
-    component: ProjectResourcesContainer,
+    component: ProjectResourcesContainer, //
     parent: 'project',
   },
 

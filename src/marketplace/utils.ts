@@ -4,7 +4,7 @@ import { formatErrorObject } from '@waldur/core/ErrorMessageFormatter';
 import { RootState } from '@waldur/store/reducers';
 
 export const getCategoryLink = (projectId, categoryId) => ({
-  state: 'marketplace-project-resources',
+  state: 'marketplace-project-resources', // name <=> state
   params: {
     uuid: projectId,
     category_uuid: categoryId,

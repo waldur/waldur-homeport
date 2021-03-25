@@ -138,11 +138,12 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
       index: 220,
     },
     {
-      key: 'marketplace-project-resources',
-      label: translate('Resources'),
+      // key: 'marketplace-project-resources',
+      label: translate('Resources====='),
       icon: 'fa-files-o',
       index: 300,
       children: categories.map((category) => ({
+        key: 'resource-details',
         label: category.title,
         icon: 'fa-cloud',
         ...getCategoryLink(project.uuid, category.uuid),
