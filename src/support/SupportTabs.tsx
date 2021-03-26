@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Panel, Row, Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { withTranslation, TranslateProps } from '@waldur/i18n';
@@ -10,11 +10,8 @@ import { Resource } from '@waldur/marketplace/resources/types';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
-import { OracleReport } from './OracleReport';
-import { OracleSnapshots } from './OracleSnapshots';
 import { SupportEvents } from './SupportEvents';
 import { SupportSummaryTab } from './SupportSummaryTab';
-import { isOracleOffering } from './utils';
 
 interface OwnProps {
   resource: Resource;
@@ -29,30 +26,6 @@ interface StateProps {
 type SupportTabsProps = OwnProps & TranslateProps & StateProps;
 
 export const PureSupportTabs: React.FC<SupportTabsProps> = (props) => {
-  const showOracleReport =
-    isOracleOffering(props.resource) && props.resource.report;
-  const Summary = showOracleReport ? (
-    <Row>
-      <Col md={6}>
-        <div className="m-b-md">
-          <SupportSummaryTab issue={props.issue} summary={props.summary} />
-        </div>
-        <Panel>
-          <Panel.Heading>
-            <Panel.Title>{props.translate('Snapshots')}</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body>
-            <OracleSnapshots report={props.resource.report} />
-          </Panel.Body>
-        </Panel>
-      </Col>
-      <Col md={6}>
-        <OracleReport report={props.resource.report} />
-      </Col>
-    </Row>
-  ) : (
-    <SupportSummaryTab issue={props.issue} summary={props.summary} />
-  );
   return (
     <Tabs
       mountOnEnter
@@ -62,7 +35,9 @@ export const PureSupportTabs: React.FC<SupportTabsProps> = (props) => {
       animation={false}
     >
       <Tab title={props.translate('Summary')} eventKey="summary">
-        <div className="m-t-sm">{Summary}</div>
+        <div className="m-t-sm">
+          <SupportSummaryTab issue={props.issue} summary={props.summary} />
+        </div>
       </Tab>
       <Tab title={props.translate('Audit log')} eventKey="events">
         <div className="m-t-sm">

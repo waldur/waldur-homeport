@@ -1443,10 +1443,6 @@ msgstr ""
 msgid "Control plane"
 msgstr ""
 
-#: src/support/OracleSnapshots.tsx
-msgid "Copy of"
-msgstr ""
-
 #: src/core/CopyToClipboard.tsx
 #: src/core/CopyToClipboardButton.tsx
 #: src/table/TableExportButton.tsx
@@ -1678,10 +1674,6 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Creating snapshot schedule"
-msgstr ""
-
-#: src/support/OracleSnapshots.tsx
-msgid "Creation time"
 msgstr ""
 
 #: src/user/support/UserEditForm.tsx
@@ -4047,7 +4039,6 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/support/OfferingConfigurationForm.tsx
-#: src/support/OracleSnapshots.tsx
 #: src/support/SupportDetailsTable.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -4845,6 +4836,10 @@ msgstr ""
 
 #: src/invoices/growth/utils.ts
 msgid "Others"
+msgstr ""
+
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+msgid "Output"
 msgstr ""
 
 #: src/marketplace/offerings/create/OverviewSummary.tsx
@@ -7198,7 +7193,6 @@ msgstr ""
 
 #: src/openstack/openstack-snapshot-schedule/tabs.ts
 #: src/openstack/openstack-volume/tabs.ts
-#: src/support/SupportTabs.tsx
 msgid "Snapshots"
 msgstr ""
 

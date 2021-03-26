@@ -6,7 +6,6 @@ import { OfferingDetailsButton } from '@waldur/marketplace/offerings/details/Off
 import { ShowReportButton } from '@waldur/marketplace/resources/report/ShowReportButton';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { ResourceShowUsageButton } from '@waldur/marketplace/resources/usage/ResourceShowUsageButton';
-import { isOracleOffering } from '@waldur/support/utils';
 
 import { SupportActionsButton } from './SupportActionsButton';
 
@@ -23,7 +22,7 @@ export const SupportActions: FunctionComponent<SupportActionsProps> = ({
     <button className="btn btn-default btn-sm" onClick={reInitResource}>
       <i className="fa fa-refresh" /> {translate('Refresh')}
     </button>
-    {!isOracleOffering(resource) && Array.isArray(resource.report) && (
+    {Array.isArray(resource.report) && (
       <ShowReportButton report={resource.report} />
     )}
     <SupportActionsButton
