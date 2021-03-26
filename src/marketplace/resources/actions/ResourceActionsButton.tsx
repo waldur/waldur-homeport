@@ -18,12 +18,12 @@ const ActionsList = [
   TerminateAction,
 ];
 
-interface SupportActionsButtonProps {
+interface ResourceActionsButtonProps {
   resource: Resource;
   reInitResource?(): void;
 }
 
-export const SupportActionsButton: FunctionComponent<SupportActionsButtonProps> = (
+export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps> = (
   props,
 ) => {
   const [open, onToggle] = useBoolean(false);

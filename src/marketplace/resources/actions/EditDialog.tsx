@@ -15,7 +15,7 @@ export const EditDialog = ({ resolve: { resource, reInitResource } }) => (
       description: resource.description,
     }}
     updateResource={updateResource}
-    verboseName={translate('request-based item')}
+    verboseName={translate('resource')}
     reInitResource={reInitResource}
   />
 );
