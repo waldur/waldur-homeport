@@ -2177,6 +2177,7 @@ msgstr ""
 #: src/customer/team/UserEditButton.tsx
 #: src/marketplace/offerings/actions/OfferingItemActions.tsx
 #: src/marketplace/orders/item/details/OrderItem.tsx
+#: src/marketplace/resources/actions/EditAction.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -2190,7 +2191,6 @@ msgstr ""
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
-#: src/support/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
 msgid "Edit"
 msgstr ""
@@ -5843,8 +5843,8 @@ msgstr ""
 #: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
 #: src/marketplace/orders/OrderDetails.tsx
+#: src/marketplace/resources/actions/ResourceActions.tsx
 #: src/resource/ResourceRefreshButton.tsx
-#: src/support/SupportActions.tsx
 #: src/table/TableRefreshButton.tsx
 msgid "Refresh"
 msgstr ""
@@ -10085,8 +10085,8 @@ msgstr ""
 msgid "referrals"
 msgstr ""
 
-#: src/support/EditDialog.tsx
-msgid "request-based item"
+#: src/marketplace/resources/actions/EditDialog.tsx
+msgid "resource"
 msgstr ""
 
 #: src/resource/support/SharedProviderResources.tsx

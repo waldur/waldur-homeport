@@ -4,8 +4,6 @@ import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
-import { BookingActions } from '@waldur/booking/BookingActions';
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbsFn } from '@waldur/navigation/breadcrumbs/store';
@@ -20,6 +18,7 @@ import {
 
 import { getResource } from '../common/api';
 
+import { ResourceActions } from './actions/ResourceActions';
 import { ResourceSummary } from './ResourceSummary';
 import { ResourceTabs } from './ResourceTabs';
 import { Resource } from './types';
@@ -103,18 +102,16 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
 
   const resource = state.value;
   return (
-    <>
-      {resource.offering_type === OFFERING_TYPE_BOOKING && (
-        <Row className="m-b-md pull-right">
-          <Col lg={12}>
-            <BookingActions
-              resource={resource}
-              reInitResource={reInitResource}
-            />
-          </Col>
-        </Row>
-      )}
+    <div className="ibox-content">
       <Row className="m-b-md">
+        <Col sm={12}>
+          <ResourceActions
+            resource={resource}
+            reInitResource={reInitResource}
+          />
+        </Col>
+      </Row>
+      <Row>
         <Col sm={12}>
           <ResourceSummary resource={resource} />
         </Col>
@@ -124,6 +121,6 @@ export const ResourceDetailsPage: FunctionComponent<ResourceDetailsPageProps> = 
           <ResourceTabs resource={resource} />
         </Col>
       </Row>
-    </>
+    </div>
   );
 };

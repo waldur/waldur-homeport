@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
+import { ResourceActionsButton as BaseResourceActionsButton } from '@waldur/marketplace/resources/actions/ResourceActionsButton';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
-import { SupportActionsButton } from '@waldur/support/SupportActionsButton';
 
 import { Resource } from '../types';
 
@@ -14,7 +14,7 @@ export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps
   row,
 }) =>
   row.offering_type === SUPPORT_OFFERING_TYPE ? (
-    <SupportActionsButton
+    <BaseResourceActionsButton
       resource={
         {
           ...row,

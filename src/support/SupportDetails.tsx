@@ -2,9 +2,9 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { Issue } from '@waldur/issues/list/types';
+import { ResourceActions } from '@waldur/marketplace/resources/actions/ResourceActions';
 import { Resource } from '@waldur/marketplace/resources/types';
 
-import { SupportActions } from './SupportActions';
 import { SupportDetailsTable } from './SupportDetailsTable';
 import { SupportTabs } from './SupportTabs';
 
@@ -20,7 +20,7 @@ export const SupportDetails: React.FC<SupportSummaryProps> = (props) => (
     <div className="ibox-content">
       <Row className="m-b-md">
         <Col lg={12}>
-          <SupportActions
+          <ResourceActions
             resource={props.resource}
             reInitResource={props.reInitResource}
           />
