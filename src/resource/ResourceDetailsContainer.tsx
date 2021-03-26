@@ -17,6 +17,8 @@ import { ResourceDetails } from './ResourceDetails';
 import { BaseResource } from './types';
 
 export const ResourceDetailsContainer: FunctionComponent = () => {
+  // eslint-disable-next-line no-console
+  console.log('ResourceDetailsContainer');
   const { params } = useCurrentStateAndParams();
   const router = useRouter();
 

@@ -16,7 +16,9 @@ export const ResourceDetailsLink: FunctionComponent<ResourceDetailsLinkProps> = 
     state="resource-details"
     params={{
       resource_type: props.item.resource_type,
-      uuid: props.item.resource_uuid,
+      resource_uuid: props.item.resource_uuid,
+      uuid: 'fc2218677ea846868d22b3c272d76da7',
+      category_uuid: '6dfcdbe3c18241dc87526ef411bf6064',
     }}
     label={props.children}
   />

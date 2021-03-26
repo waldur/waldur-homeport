@@ -146,7 +146,7 @@ SidebarExtensionService.register(PROJECT_WORKSPACE, async () => {
         // key: 'resource-details',
         label: category.title,
         icon: 'fa-cloud',
-        ...getCategoryLink(project.uuid, category.uuid),
+        ...getCategoryLink(project.uuid, category.uuid), // resource category state
         countFieldKey: `marketplace_category_${category.uuid}`,
       })),
     },
