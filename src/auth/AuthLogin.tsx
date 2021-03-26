@@ -1,4 +1,4 @@
-import { useMemo, FunctionComponent } from 'react';
+import { useMemo, FunctionComponent, useEffect } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { LanguageList } from '@waldur/i18n/LanguageList';
@@ -9,6 +9,7 @@ import { CookiesConsent } from '@waldur/navigation/cookies/CookiesConsent';
 import { getAuthProviders } from './auth-providers';
 import { AuthButton } from './AuthButton';
 import { AuthHeader } from './AuthHeader';
+import { AuthService } from './AuthService';
 import { PoweredBy } from './PoweredBy';
 import { SigninButton } from './SigninButton';
 import { SigninForm } from './SigninForm';
@@ -21,6 +22,7 @@ export const AuthLogin: FunctionComponent = () => {
   const features = useAuthFeatures();
   const locale = LanguageUtilsService.getCurrentLanguage().code;
   const providers = useMemo(getAuthProviders, [locale]);
+  useEffect(() => AuthService.storeRedirect(), []);
   return (
     <>
       <CookiesConsent />
