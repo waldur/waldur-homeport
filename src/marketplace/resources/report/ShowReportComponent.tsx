@@ -12,7 +12,7 @@ export const ShowReportComponent: FunctionComponent<ShowReportComponentProps> = 
   props,
 ) =>
   Array.isArray(props.report) ? (
-    <PanelGroup accordion={true} defaultActiveKey={0} id="oracle-report">
+    <PanelGroup accordion={true} defaultActiveKey={0}>
       {props.report.map((section, index) => (
         <Panel eventKey={index} key={index}>
           <Panel.Heading>
