@@ -6347,7 +6347,6 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/SupportResourcesContainer.tsx
-#: src/marketplace/sidebar.ts
 #: src/project/ProjectDashboard.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/project/ProjectWorkspace.tsx
@@ -6371,6 +6370,10 @@ msgstr ""
 #: src/issues/workspace/IssueNavigationService.ts
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Resources usage"
+msgstr ""
+
+#: src/marketplace/sidebar.ts
+msgid "Resources====="
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/RestartAction.tsx
