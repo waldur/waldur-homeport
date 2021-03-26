@@ -4847,6 +4847,10 @@ msgstr ""
 msgid "Others"
 msgstr ""
 
+#: src/marketplace/orders/item/details/OrderItemDetails.tsx
+msgid "Output"
+msgstr ""
+
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 msgid "Overview"
 msgstr ""
