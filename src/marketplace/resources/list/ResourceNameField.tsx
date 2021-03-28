@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { BackendIdTooltip } from '@waldur/core/Tooltip';
 import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 import { Customer } from '@waldur/workspace/types';
 
@@ -15,20 +15,6 @@ interface ResourceNameFieldProps {
   customer?: Customer;
 }
 
-const TooltipWrapper = (component, tooltip) => (
-  <>
-    {component}
-    {tooltip && (
-      <>
-        {' '}
-        <Tooltip id="backend-id" label={tooltip}>
-          <i className="fa fa-question-circle" />
-        </Tooltip>
-      </>
-    )}
-  </>
-);
-
 export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
   row,
   customer,
@@ -41,17 +27,20 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
     );
   } else if (row.offering_type === SUPPORT_OFFERING_TYPE) {
     LinkComponent = (
-      <Link
-        state="project.support-details"
-        params={{
-          resource_uuid: row.uuid,
-          uuid: row.project_uuid,
-        }}
-        label={label}
-      />
+      <>
+        <Link
+          state="project.support-details"
+          params={{
+            resource_uuid: row.uuid,
+            uuid: row.project_uuid,
+          }}
+          label={label}
+        />
+        <BackendIdTooltip backendId={row.backend_id} />
+      </>
     );
   } else {
     LinkComponent = <PublicResourceLink row={row} customer={customer} />;
   }
-  return TooltipWrapper(LinkComponent, row.backend_id);
+  return LinkComponent;
 };
