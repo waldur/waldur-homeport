@@ -14,7 +14,7 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
   resource,
 }) => (
   <ResourceDetailsTable>
-    <Field label={translate('Offering type')} value={resource.offering_name} />
+    <Field label={translate('Offering name')} value={resource.offering_name} />
     <Field
       label={translate('Client organization')}
       value={resource.customer_name}
@@ -23,10 +23,6 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
     <Field label={translate('Category')} value={resource.category_title} />
     <Field label={translate('Plan')} value={resource.plan_name || 'N/A'} />
     <Field
-      label={translate('State')}
-      value={<MarketplaceResourceStateField resource={resource} />}
-    />
-    <Field
       label={translate('Created')}
       value={<CreatedField resource={resource} />}
     />
@@ -34,6 +30,13 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
       label={translate('UUID')}
       value={resource.uuid}
       valueClass="ellipsis"
+    />
+    {resource.backend_id ? (
+      <Field label={translate('Backend ID')} value={resource.backend_id} />
+    ) : null}
+    <Field
+      label={translate('State')}
+      value={<MarketplaceResourceStateField resource={resource} />}
     />
     <Field
       label={translate('Attributes')}

@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 
 import { ResourceActionsButton as BaseResourceActionsButton } from '@waldur/marketplace/resources/actions/ResourceActionsButton';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
-import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 
 import { Resource } from '../types';
 
@@ -13,7 +12,7 @@ interface ResourceActionsButtonProps {
 export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps> = ({
   row,
 }) =>
-  row.offering_type === SUPPORT_OFFERING_TYPE ? (
+  row.scope === null ? (
     <BaseResourceActionsButton
       resource={
         {
@@ -24,6 +23,6 @@ export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps
     />
   ) : (
     <>
-      <ActionButtonResource disabled={row.scope === null} url={row.scope} />
+      <ActionButtonResource url={row.scope} />
     </>
   );

@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
-import { Tooltip } from '@waldur/core/Tooltip';
+import { BackendIdTooltip } from '@waldur/core/Tooltip';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import {
   Customer,
@@ -16,16 +16,6 @@ interface PublicResourceLinkProps {
   row: Resource;
   customer?: Customer;
 }
-
-const BackendIdTooltip = ({ backendId }) =>
-  backendId && (
-    <>
-      {' '}
-      <Tooltip id="backend-id" label={backendId}>
-        <i className="fa fa-question-circle" />
-      </Tooltip>
-    </>
-  );
 
 const getStateAndUuid = (
   resource: Resource,

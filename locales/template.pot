@@ -868,6 +868,7 @@ msgstr ""
 msgid "Back to shopping"
 msgstr ""
 
+#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
@@ -4476,6 +4477,7 @@ msgid "Offering logo"
 msgstr ""
 
 #: src/invoices/list/InvoicesStatsList.tsx
+#: src/marketplace/resources/ResourceSummary.tsx
 msgid "Offering name"
 msgstr ""
 
@@ -4487,7 +4489,6 @@ msgstr ""
 msgid "Offering state has been updated."
 msgstr ""
 
-#: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Offering type"
