@@ -1,4 +1,6 @@
-import { post } from '@waldur/core/api';
+import { get, post } from '@waldur/core/api';
+
+import { Invitation } from './types';
 
 class InvitationServiceClass {
   createInvitation(payload) {
@@ -33,6 +35,10 @@ class InvitationServiceClass {
     return post(`/user-invitations/reject/`, {
       token,
     });
+  }
+
+  details(invitation_uuid) {
+    return get<Invitation>(`/user-invitations/${invitation_uuid}/details/`);
   }
 
   executeAction(invitation_uuid, action, data?) {
