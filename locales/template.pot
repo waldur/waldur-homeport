@@ -67,6 +67,10 @@ msgstr ""
 msgid "Accept booking"
 msgstr ""
 
+#: src/invitations/InvitationButtons.tsx
+msgid "Accept invitation"
+msgstr ""
+
 #: src/booking/BookingStateField.tsx
 #: src/booking/BookingStateFilter.tsx
 #: src/invitations/InvitationsFilter.tsx
@@ -1047,7 +1051,7 @@ msgstr ""
 msgid "Cancel booking"
 msgstr ""
 
-#: src/invitations/InvitationConfirmDialog.tsx
+#: src/invitations/InvitationButtons.tsx
 msgid "Cancel invitation"
 msgstr ""
 
@@ -2251,10 +2255,6 @@ msgstr ""
 msgid "Email has been updated."
 msgstr ""
 
-#: src/invitations/InvitationConfirmDialog.tsx
-msgid "Email update"
-msgstr ""
-
 #: src/user/support/useEmailChange.ts
 msgid "Email verification has been sent. Please check your inbox."
 msgstr ""
@@ -2804,6 +2804,10 @@ msgstr ""
 msgid "Go to my profile"
 msgstr ""
 
+#: src/invitations/InvitationErrorMessage.tsx
+msgid "Go to profile"
+msgstr ""
+
 #: src/marketplace/offerings/store/effects.ts
 msgid "Google Calendar has been published successfully."
 msgstr ""
@@ -3222,14 +3226,14 @@ msgid "Invitation approval"
 msgstr ""
 
 #: src/invitations/InvitationConfirmDialog.tsx
-msgid "Invitation check"
+msgid "Invitation confirmation"
 msgstr ""
 
 #: src/invitations/tryAcceptInvitation.ts
 msgid "Invitation could not be accepted"
 msgstr ""
 
-#: src/invitations/InvitationConfirmDialog.tsx
+#: src/invitations/InvitationMessage.tsx
 msgid "Invitation email is:"
 msgstr ""
 
@@ -3251,6 +3255,10 @@ msgstr ""
 
 #: src/invitations/utils.ts
 msgid "Invitation is not found."
+msgstr ""
+
+#: src/invitations/InvitationErrorMessage.tsx
+msgid "Invitation is not valid"
 msgstr ""
 
 #: src/invitations/utils.ts
@@ -4278,7 +4286,7 @@ msgstr ""
 msgid "No users"
 msgstr ""
 
-#: src/invitations/InvitationConfirmDialog.tsx
+#: src/invitations/InvitationButtons.tsx
 msgid "No, continue using current email"
 msgstr ""
 
@@ -9631,7 +9639,7 @@ msgstr ""
 msgid "Workloads"
 msgstr ""
 
-#: src/invitations/InvitationConfirmDialog.tsx
+#: src/invitations/InvitationMessage.tsx
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr ""
 
@@ -9662,7 +9670,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/invitations/InvitationConfirmDialog.tsx
+#: src/invitations/InvitationButtons.tsx
 msgid "Yes, use invitation email"
 msgstr ""
 
@@ -9768,6 +9776,7 @@ msgid "You will be redirected in a moment."
 msgstr ""
 
 #: src/error/InvalidObjectPage.tsx
+#: src/invitations/InvitationErrorMessage.tsx
 msgid "You've either entered invalid URL or don't have enough permissions to view this page."
 msgstr ""
 
@@ -9791,7 +9800,7 @@ msgstr ""
 msgid "Your account is not authorized to use this allocation"
 msgstr ""
 
-#: src/invitations/InvitationConfirmDialog.tsx
+#: src/invitations/InvitationMessage.tsx
 msgid "Your current email is:"
 msgstr ""
 
@@ -10028,6 +10037,7 @@ msgstr ""
 msgid "order items"
 msgstr ""
 
+#: src/invitations/InvitationMessage.tsx
 #: src/navigation/workspace/CreateOrganizationButton.tsx
 msgid "organization"
 msgstr ""
@@ -10070,6 +10080,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
 msgid "profile."
+msgstr ""
+
+#: src/invitations/InvitationMessage.tsx
+msgid "project"
 msgstr ""
 
 #: src/project/ProjectsList.tsx
@@ -10344,6 +10358,10 @@ msgstr ""
 
 #: src/invitations/RoleField.tsx
 msgid "{role} in {project}"
+msgstr ""
+
+#: src/invitations/InvitationMessage.tsx
+msgid "{sender} has invited you to join {name} {type} in {role} role."
 msgstr ""
 
 #: src/quotas/QuotasTable.tsx

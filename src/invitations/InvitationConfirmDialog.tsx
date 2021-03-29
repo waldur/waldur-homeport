@@ -1,6 +1,5 @@
-import { useCallback, useEffect, FunctionComponent } from 'react';
+import { useCallback, FunctionComponent } from 'react';
 import {
-  Button,
   ModalBody,
   ModalFooter,
   ModalHeader,
@@ -9,12 +8,14 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { InvitationButtons } from './InvitationButtons';
+import { InvitationErrorMessage } from './InvitationErrorMessage';
+import { InvitationMessage } from './InvitationMessage';
 import { InvitationService } from './InvitationService';
 
 export const InvitationConfirmDialog: FunctionComponent<{
@@ -40,91 +41,42 @@ export const InvitationConfirmDialog: FunctionComponent<{
   }, [close, deferred]);
 
   const user = useSelector(getUser);
-  const asyncResult = useAsync<{ email?: string }>(() =>
-    InvitationService.check(token).then((response) => response.data),
+  const asyncResult = useAsync(() =>
+    InvitationService.details(token).then((response) => response.data),
   );
   const invitation = asyncResult.value;
 
-  useEffect(() => {
-    if (asyncResult.error) {
-      dismiss();
-    }
-  }, [asyncResult.error, dismiss]);
-
-  useEffect(() => {
-    if (!user || !invitation) {
-      return;
-    }
-
-    if (!user.email || user.email === invitation.email) {
-      closeDecliningNewEmail();
-    }
-
-    const validateInvitationEmail =
-      ENV.plugins.WALDUR_CORE.VALIDATE_INVITATION_EMAIL;
-
-    if (
-      validateInvitationEmail &&
-      user.email &&
-      user.email !== invitation.email
-    ) {
-      dismiss();
-    }
-  }, [user, invitation, closeDecliningNewEmail, dismiss]);
-
-  const invitationChecked = invitation?.email;
   return (
     <>
       <ModalHeader>
-        <ModalTitle>
-          {invitationChecked
-            ? translate('Email update')
-            : translate('Invitation check')}
-        </ModalTitle>
+        <ModalTitle>{translate('Invitation confirmation')}</ModalTitle>
       </ModalHeader>
       <ModalBody>
-        {user && invitationChecked ? (
+        {asyncResult.loading ? (
           <>
-            <p>
-              {translate('Your current email is:')}{' '}
-              <strong>{user.email}</strong>
-            </p>
-            <p>
-              {translate('Invitation email is:')}{' '}
-              <strong>{invitation.email}</strong>
-            </p>
-            <p>
-              {translate(
-                'Would you like to update your current email with the one from the invitation?',
-              )}
-            </p>
-          </>
-        ) : (
-          <>
-            <p>
-              <LoadingSpinner />
-            </p>
+            <LoadingSpinner />
             <p className="text-center">
               {translate(
                 'Please give us a moment to validate your invitation.',
               )}
             </p>
           </>
-        )}
+        ) : asyncResult.error ? (
+          <InvitationErrorMessage dismiss={dismiss} />
+        ) : asyncResult.value ? (
+          <InvitationMessage invitation={invitation} user={user} />
+        ) : null}
       </ModalBody>
       <ModalFooter>
-        {invitationChecked ? (
-          <>
-            <Button bsStyle="primary" onClick={closeAcceptingNewEmail}>
-              {translate('Yes, use invitation email')}
-            </Button>
-            <Button onClick={closeDecliningNewEmail}>
-              {translate('No, continue using current email')}
-            </Button>
-          </>
-        ) : (
-          <Button onClick={dismiss}>{translate('Cancel invitation')}</Button>
-        )}
+        {asyncResult.value ? (
+          <InvitationButtons
+            user={user}
+            invitation={invitation}
+            dismiss={dismiss}
+            closeAcceptingNewEmail={closeAcceptingNewEmail}
+            closeDecliningNewEmail={closeDecliningNewEmail}
+          />
+        ) : null}
       </ModalFooter>
     </>
   );

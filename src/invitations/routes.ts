@@ -17,7 +17,7 @@ const InvitationReject = lazyComponent(
 
 export const states: StateDeclaration[] = [
   {
-    name: 'invitation',
+    name: 'invitation-accept',
     url: '/invitation/:uuid/',
     component: InvitationAccept,
   },
