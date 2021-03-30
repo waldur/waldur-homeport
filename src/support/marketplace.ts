@@ -34,11 +34,7 @@ const OfferingPluginSecretOptionsForm = lazyComponent(
   'OfferingPluginSecretOptionsForm',
 );
 
-registerOfferingType({
-  type: SUPPORT_OFFERING_TYPE,
-  get label() {
-    return translate('Request-based item');
-  },
+export const COMMON_OPTIONS = {
   component: OfferingConfigurationForm,
   detailsComponent: OfferingConfigurationDetails,
   pluginOptionsForm: OfferingPluginOptionsForm,
@@ -46,6 +42,14 @@ registerOfferingType({
   serializer,
   showOptions: true,
   showComponents: true,
+};
+
+registerOfferingType({
+  type: SUPPORT_OFFERING_TYPE,
+  get label() {
+    return translate('Request-based item');
+  },
+  ...COMMON_OPTIONS,
 });
 
 registerOfferingType({
@@ -53,11 +57,5 @@ registerOfferingType({
   get label() {
     return translate('Request-based item (without Service Desk)');
   },
-  component: OfferingConfigurationForm,
-  detailsComponent: OfferingConfigurationDetails,
-  pluginOptionsForm: OfferingPluginOptionsForm,
-  secretOptionsForm: OfferingPluginSecretOptionsForm,
-  serializer,
-  showOptions: true,
-  showComponents: true,
+  ...COMMON_OPTIONS,
 });
