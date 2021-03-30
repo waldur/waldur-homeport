@@ -21,6 +21,7 @@ import './azure/module';
 import './booking/marketplace';
 import './marketplace/sidebar';
 import './marketplace-script/marketplace';
+import './marketplace-remote/marketplace';
 import './marketplace-checklist/sidebar-extension';
 import './paypal/events';
 import './vmware/module';

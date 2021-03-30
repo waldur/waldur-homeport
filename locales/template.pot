@@ -5976,6 +5976,10 @@ msgstr ""
 msgid "Remote category"
 msgstr ""
 
+#: src/marketplace-remote/marketplace.ts
+msgid "Remote offering"
+msgstr ""
+
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
 #: src/openstack/openstack-security-groups/rule-editor/RulesHeader.tsx
 msgid "Remote security group"
