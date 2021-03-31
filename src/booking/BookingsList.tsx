@@ -15,7 +15,11 @@ import { translate, withTranslation } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
-import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  isOwnerOrStaff,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 import { bookingFormSelector } from './store/selectors';
 
@@ -104,7 +108,7 @@ const TableOptions = {
 
 const mapStateToProps = (state: RootState) => ({
   customer: getCustomer(state),
-  actionsDisabled: !isOwnerOrStaff(state),
+  actionsDisabled: !isOwnerOrStaff(state) && !isServiceManagerSelector(state),
   filter: bookingFormSelector(state),
 });
 
