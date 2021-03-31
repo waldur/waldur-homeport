@@ -18,6 +18,7 @@ interface WizardProps extends TranslateProps {
   isLastStep: boolean;
   tabs: { [key: string]: React.ComponentType<any> };
   submitLabel?: string;
+  mountOnEnter?: boolean;
 }
 
 export const Wizard = withTranslation((props: WizardProps) => (
@@ -32,6 +33,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
       steps={props.steps}
       currentStep={props.step}
       tabs={props.tabs}
+      mountOnEnter={props.mountOnEnter}
     />
     <div className="form-group">
       <Col smOffset={2} sm={8}>
