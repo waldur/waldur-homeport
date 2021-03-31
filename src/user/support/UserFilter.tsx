@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import { StringField, FormContainer, SelectField } from '@waldur/form';
+import { FormContainer, SelectField } from '@waldur/form';
+import { DebouncedStringField } from '@waldur/form/DebouncedStringField';
 import { withTranslation, TranslateProps, translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -22,29 +23,29 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = (props) => (
       controlClass="m-r-md"
       submitting={props.submitting}
     >
-      <StringField
+      <DebouncedStringField
         label={props.translate('Full name')}
         name="full_name"
         noUpdateOnBlur={true}
       />
       {props.nativeNameVisible && (
-        <StringField
+        <DebouncedStringField
           label={props.translate('Native name')}
           name="native_name"
           noUpdateOnBlur={true}
         />
       )}
-      <StringField
+      <DebouncedStringField
         label={props.translate('ID code')}
         name="civil_number"
         noUpdateOnBlur={true}
       />
-      <StringField
+      <DebouncedStringField
         label={props.translate('Organization')}
         name="organization"
         noUpdateOnBlur={true}
       />
-      <StringField
+      <DebouncedStringField
         label={props.translate('Email')}
         name="email"
         noUpdateOnBlur={true}
