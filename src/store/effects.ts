@@ -15,7 +15,6 @@ import { effects as titleEffects } from '@waldur/navigation/title';
 import projectSaga from '@waldur/project/effects';
 import providerSaga from '@waldur/providers/effects';
 import serviceUsageSaga from '@waldur/providers/support/effects';
-import monitoringSaga from '@waldur/resource/monitoring/effects';
 import resourceSummarySaga from '@waldur/resource/summary/effects';
 import tableSaga from '@waldur/table/effects';
 import userSaga from '@waldur/user/support/effects';
@@ -32,7 +31,6 @@ export default [
   issueCommentsSaga,
   securityIncidentSaga,
   tableSaga,
-  monitoringSaga,
   serviceUsageSaga,
   resourceSummarySaga,
   marketplaceSaga,

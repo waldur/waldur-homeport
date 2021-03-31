@@ -31,6 +31,4 @@ export const RESOURCE_ENDPOINTS = {
   'VMware.VirtualMachine': '/vmware-virtual-machine/',
   'VMware.Port': '/vmware-ports/',
   'VMware.Disk': '/vmware-disks/',
-  'Zabbix.Host': '/zabbix-hosts/',
-  'Zabbix.ITService': '/zabbix-itservices/',
 };

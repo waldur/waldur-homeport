@@ -1191,10 +1191,6 @@ msgstr ""
 msgid "Charset"
 msgstr ""
 
-#: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
-msgid "Charts"
-msgstr ""
-
 #: src/marketplace-checklist/utils.ts
 msgid "Checklist setup"
 msgstr ""
@@ -1507,10 +1503,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleDialog.tsx
 msgid "Create VM snapshot schedule for OpenStack instance"
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostCreateDialog.tsx
-msgid "Create Zabbix host"
 msgstr ""
 
 #: src/auth/AuthHeader.tsx
@@ -1858,10 +1850,6 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/resource/monitoring/ZabbixHostDeleteButton.tsx
-msgid "Delete Zabbix host"
-msgstr ""
-
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 msgid "Delete catalog"
 msgstr ""
@@ -1984,7 +1972,6 @@ msgstr ""
 #: src/project/team/UserDetailsButton.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
 #: src/rancher/cluster/users/UserDetailsButton.tsx
-#: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/slurm/DetailsAction.tsx
@@ -2068,10 +2055,6 @@ msgstr ""
 
 #: src/auth/SignupButton.tsx
 msgid "Do not have an account?"
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostDeleteButton.tsx
-msgid "Do you really want to delete Zabbix host?"
 msgstr ""
 
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
@@ -2905,24 +2888,8 @@ msgstr ""
 msgid "Horizontal pod autoscaler has been updated."
 msgstr ""
 
-#: src/resource/monitoring/ZabbixHostSummary.tsx
-msgid "Host IP address"
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostSummary.tsx
-msgid "Host group name"
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostSummary.tsx
-msgid "Host name"
-msgstr ""
-
 #: src/openstack/openstack-subnet/fields.tsx
 msgid "Host routes"
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostSummary.tsx
-msgid "Host status"
 msgstr ""
 
 #: src/slurm/SlurmForm.tsx
@@ -3057,10 +3024,6 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Importing resources"
-msgstr ""
-
-#: src/resource/monitoring/MonitoringGuide.tsx
-msgid "In order to enable monitoring you should install and configure Zabbix agent on monitored virtual machine."
 msgstr ""
 
 #: src/azure/provider/AzureForm.tsx
@@ -3886,30 +3849,6 @@ msgstr ""
 
 #: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Mobile phone number"
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostField.tsx
-msgid "Monitoring"
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
-msgid "Monitoring details"
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostStateButton.tsx
-msgid "Monitoring system has failed."
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostStateButton.tsx
-msgid "Monitoring system is being deleted."
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostStateButton.tsx
-msgid "Monitoring system is being provisioned."
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostStateButton.tsx
-msgid "Monitoring system is being updated."
 msgstr ""
 
 #: src/booking/components/calendar/defaultConfig.ts
@@ -6292,16 +6231,8 @@ msgstr ""
 msgid "Resource is in sync"
 msgstr ""
 
-#: src/resource/monitoring/ZabbixHostStateButton.tsx
-msgid "Resource is monitored using Zabbix."
-msgstr ""
-
 #: src/marketplace/orders/item/list/ResourceOrderItems.tsx
 msgid "Resource is not connected to the marketplace yet."
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostCreateButton.tsx
-msgid "Resource is not monitored yet."
 msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
@@ -7614,10 +7545,6 @@ msgstr ""
 msgid "Template files"
 msgstr ""
 
-#: src/resource/monitoring/ZabbixHostCreateDialog.tsx
-msgid "Templates"
-msgstr ""
-
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupSummary.tsx
@@ -8381,10 +8308,6 @@ msgstr ""
 
 #: src/customer/payments/store/effects.ts
 msgid "Unable to link invoice to the payment."
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostDetailsDialog.tsx
-msgid "Unable to load Zabbix host details."
 msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
@@ -9826,26 +9749,6 @@ msgstr ""
 
 #: src/auth/AuthHeader.tsx
 msgid "Your single pane of control for all cloud services. Login in to see it in action."
-msgstr ""
-
-#: src/resource/monitoring/effects.ts
-msgid "Zabbix host could not be created."
-msgstr ""
-
-#: src/resource/monitoring/effects.ts
-msgid "Zabbix host could not be deleted."
-msgstr ""
-
-#: src/resource/monitoring/effects.ts
-msgid "Zabbix host has been created."
-msgstr ""
-
-#: src/resource/monitoring/effects.ts
-msgid "Zabbix host has been deleted."
-msgstr ""
-
-#: src/resource/monitoring/ZabbixHostCreateDialog.tsx
-msgid "Zabbix provider"
 msgstr ""
 
 #: src/slurm/details/AllocationUsersTable.tsx
