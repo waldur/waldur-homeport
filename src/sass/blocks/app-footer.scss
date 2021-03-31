@@ -19,32 +19,20 @@
     color: white;
     text-decoration: none;
   }
-  // a
-  .copy {
-    float: left;
-    @include bp(xs) {
-      display: block;
-      float: none;
-      text-align: center;
-    }
-    // xs
-    @include bp(sm) {
-      display: block;
-    }
-    // sm
-  }
-  // copy
 }
-
-// app-footer
 
 .footer-nav {
   float: right;
-  @include clear-list-inline;
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline;
+    list-style: none;
+  }
   li + li {
     &:before {
-      @include inline-middle;
-      content: '|';
+      display: inline;
+      content: ' | ';
       opacity: 0.4;
     }
   }
@@ -60,5 +48,3 @@
   }
   // sm
 }
-
-// footer-nav
