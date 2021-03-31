@@ -77,6 +77,7 @@ export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
               tabs={TABS}
               {...rest}
               submitLabel={translate('Update')}
+              mountOnEnter={true}
             />
           </form>
         </Col>

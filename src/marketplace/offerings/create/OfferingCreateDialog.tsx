@@ -80,7 +80,7 @@ export const OfferingCreateDialog: React.FC<OfferingCreateDialogProps> = (
             onSubmit={handleSubmit(createOffering)}
             className="form-horizontal"
           >
-            <Wizard steps={STEPS} tabs={TABS} {...rest} />
+            <Wizard steps={STEPS} tabs={TABS} {...rest} mountOnEnter={true} />
           </form>
         </Col>
       </Row>
