@@ -5,6 +5,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import {
+  getCustomer,
   isOwnerOrStaff as isOwnerOrStaffSelector,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
@@ -16,6 +17,8 @@ export const AcceptAction = ({ resource, reInitResource }) => {
   const dispatch = useDispatch();
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const isServiceManager = useSelector(isServiceManagerSelector);
+  const customer = useSelector(getCustomer);
+  const isServiceProviderContext = resource.provider_uuid === customer.uuid;
 
   const callback = async () => {
     try {
@@ -42,7 +45,7 @@ export const AcceptAction = ({ resource, reInitResource }) => {
     }
   };
 
-  return (
+  return isServiceProviderContext ? (
     <ActionItem
       title={translate('Accept')}
       action={callback}
@@ -51,5 +54,5 @@ export const AcceptAction = ({ resource, reInitResource }) => {
         (!isOwnerOrStaff && !isServiceManager)
       }
     />
-  );
+  ) : null;
 };

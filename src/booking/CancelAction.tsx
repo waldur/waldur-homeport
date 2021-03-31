@@ -5,6 +5,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import {
+  getCustomer,
   isOwnerOrStaff as isOwnerOrStaffSelector,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
@@ -16,6 +17,8 @@ export const CancelAction = ({ resource, reInitResource }) => {
   const dispatch = useDispatch();
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const isServiceManager = useSelector(isServiceManagerSelector);
+  const customer = useSelector(getCustomer);
+  const isServiceProviderContext = resource.provider_uuid === customer.uuid;
 
   const callback = async () => {
     try {
@@ -42,13 +45,13 @@ export const CancelAction = ({ resource, reInitResource }) => {
     }
   };
 
-  return isServiceManager ? null : (
+  return isServiceManager || isOwnerOrStaff ? (
     <ActionItem
-      title={translate('Cancel')}
-      action={callback}
-      disabled={
-        resource.state !== constants.BOOKING_CREATING || !isOwnerOrStaff
+      title={
+        isServiceProviderContext ? translate('Reject') : translate('Cancel')
       }
+      action={callback}
+      disabled={resource.state !== constants.BOOKING_CREATING}
     />
-  );
+  ) : null;
 };

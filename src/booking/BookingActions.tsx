@@ -4,9 +4,8 @@ import { ResourceActionComponent } from '@waldur/resource/actions/ResourceAction
 
 import { AcceptAction } from './AcceptAction';
 import { CancelAction } from './CancelAction';
-import { RejectAction } from './RejectAction';
 
-const ActionsList = [AcceptAction, RejectAction, CancelAction];
+const ActionsList = [AcceptAction, CancelAction];
 
 export const BookingActions = ({ resource, reInitResource }) => {
   const [open, onToggle] = useBoolean(false);

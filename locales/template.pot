@@ -650,10 +650,6 @@ msgstr ""
 msgid "Are you sure you want to delete this {resourceType}?"
 msgstr ""
 
-#: src/booking/RejectAction.tsx
-msgid "Are you sure you want to reject a {name}?"
-msgstr ""
-
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
 msgid "Are you sure you want to revoke this permission?"
 msgstr ""
@@ -958,10 +954,6 @@ msgstr ""
 
 #: src/booking/CancelAction.tsx
 msgid "Booking has been cancelled."
-msgstr ""
-
-#: src/booking/RejectAction.tsx
-msgid "Booking has been rejected."
 msgstr ""
 
 #: src/booking/components/calendar/LazyCalendarComponent.tsx
@@ -5924,14 +5916,10 @@ msgstr ""
 msgid "Regular user"
 msgstr ""
 
-#: src/booking/RejectAction.tsx
+#: src/booking/CancelAction.tsx
 #: src/marketplace/orders/RejectButton.tsx
 #: src/marketplace/orders/item/list/OrderItemRejectButton.tsx
 msgid "Reject"
-msgstr ""
-
-#: src/booking/RejectAction.tsx
-msgid "Reject booking"
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
@@ -8672,10 +8660,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "Unable to register service provider."
-msgstr ""
-
-#: src/booking/RejectAction.tsx
-msgid "Unable to reject booking."
 msgstr ""
 
 #: src/invitations/InvitationReject.tsx
