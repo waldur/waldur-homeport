@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 
 export const bookingStateAliases = (state: string): string => {
   switch (state) {
@@ -20,11 +20,19 @@ export const bookingStateAliases = (state: string): string => {
   }
 };
 
-export const BookingStateField: FunctionComponent<{ row }> = ({ row }) => (
-  <ResourceStateField
-    row={{
-      ...row,
-      state: bookingStateAliases(row.state),
-    }}
-  />
-);
+export const BookingStateField: FunctionComponent<{ row }> = ({ row }) => {
+  const state = bookingStateAliases(row.state);
+  return (
+    <StateIndicator
+      label={state}
+      variant={
+        state === 'Rejected'
+          ? 'danger'
+          : state === 'Unconfirmed'
+          ? 'warning'
+          : 'primary'
+      }
+      active={state === 'Unconfirmed'}
+    />
+  );
+};
