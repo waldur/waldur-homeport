@@ -25,7 +25,7 @@ export const SlurmAllocationSummaryExtraDetails: FunctionComponent<any> = (
   props,
 ) => (
   <div className="slurm-allocation-summary-extra-details-container">
-    {ENV.plugins.WALDUR_FREEIPA.ENABLED && (
+    {ENV.plugins.WALDUR_FREEIPA?.ENABLED && (
       <div className={props.resource.username ? 'field-container' : ''}>
         <Field
           label={translate('Login with')}
