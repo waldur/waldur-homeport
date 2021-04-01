@@ -1012,7 +1012,7 @@ msgid "CPU"
 msgstr ""
 
 #: src/slurm/EditDialog.tsx
-msgid "CPU limit=="
+msgid "CPU limit (h)"
 msgstr ""
 
 #: src/slurm/details/constants.ts
@@ -2748,7 +2748,7 @@ msgid "GB"
 msgstr ""
 
 #: src/slurm/EditDialog.tsx
-msgid "GPU limit==="
+msgid "GPU limit (h)"
 msgstr ""
 
 #: src/slurm/details/constants.ts
@@ -5711,12 +5711,12 @@ msgstr ""
 msgid "RAM"
 msgstr ""
 
-#: src/openstack/openstack-instance/marketplace.ts
-msgid "RAM limit is exceeded"
+#: src/slurm/EditDialog.tsx
+msgid "RAM limit (GB-h)"
 msgstr ""
 
-#: src/slurm/EditDialog.tsx
-msgid "RAM limit==="
+#: src/openstack/openstack-instance/marketplace.ts
+msgid "RAM limit is exceeded"
 msgstr ""
 
 #: src/slurm/details/constants.ts
