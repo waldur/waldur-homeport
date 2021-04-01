@@ -69,6 +69,7 @@ const TableOptions: TableOptionsType = {
   fetchData: createFetcher('invoices'),
   mapPropsToFilter,
   queryField: 'number',
+  mapPropsToTableId: (props) => [props.customer.uuid],
 };
 
 const mapsStateToProps = (state: RootState) => ({
