@@ -11,6 +11,7 @@ export const formatFilesize = (
   fromUnit = 'MB',
   toUnit = 'B',
   customSuffix = '',
+  unitLabel = true,
 ) => {
   if (isNaN(parseFloat(input)) || !isFinite(input)) {
     return '?';
@@ -39,7 +40,8 @@ export const formatFilesize = (
   }
 
   return (
-    Math.floor(input * 10) / 10 + ' ' + FILESIZE_UNITS[startUnit] + customSuffix
+    Math.floor(input * 10) / 10 +
+    (unitLabel ? ' ' + FILESIZE_UNITS[startUnit] + customSuffix : '')
   );
 };
 

@@ -1,4 +1,4 @@
-import { minutesToHours } from '@waldur/core/utils';
+import { formatFilesize, minutesToHours } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import {
   createNameField,
@@ -43,7 +43,7 @@ export const EditDialog = ({ resolve: { resource } }) => {
         description: resource.description,
         cpu_limit: minutesToHours(resource.cpu_limit, false),
         gpu_limit: minutesToHours(resource.gpu_limit, false),
-        ram_limit: resource.ram_limit,
+        ram_limit: formatFilesize(resource.ram_limit, 'MB', 'GB', '', false),
       }}
       updateResource={updateAllocation}
       verboseName={translate('SLURM allocation')}
