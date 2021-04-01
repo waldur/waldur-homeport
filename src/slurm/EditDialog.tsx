@@ -32,8 +32,6 @@ const getFields = () => [
 ];
 
 export const EditDialog = ({ resolve: { resource } }) => {
-  // eslint-disable-next-line no-console
-  console.log('resource', resource);
   return (
     <UpdateResourceDialog
       fields={getFields()}

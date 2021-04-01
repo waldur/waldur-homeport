@@ -54,7 +54,7 @@ export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
           );
         }
       }}
-      dialogTitle={translate('Update {resourceType} {resourceName}==', {
+      dialogTitle={translate('Update {resourceType} {resourceName}', {
         resourceType: verboseName,
         resourceName: resource.name,
       })}

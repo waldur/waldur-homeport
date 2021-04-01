@@ -22,7 +22,7 @@ export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
       dispatch(showSuccess(translate('Synchronization has been scheduled.')));
     } catch (e) {
       dispatch(
-        showErrorResponse(e, translate('Unable to synchronize resource.')), // fixme
+        showErrorResponse(e, translate('Unable to synchronize resource.')),
       );
     }
   };

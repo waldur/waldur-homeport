@@ -29,7 +29,7 @@ export function createNameField<R>(): ActionField<R> {
 export function createDescriptionField(): ActionField {
   return {
     name: 'description',
-    label: translate('Description=='),
+    label: translate('Description'),
     maxlength: 2000,
     required: false,
     type: 'text',
