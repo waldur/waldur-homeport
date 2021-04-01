@@ -13,7 +13,7 @@ const validators = [validateState('OK')];
 export const EditAction = ({ resource }) => (
   <DialogActionItem
     validators={validators}
-    title={translate('Edit')}
+    title={translate('Edit0000000')}
     modalComponent={EditDialog}
     resource={resource}
   />

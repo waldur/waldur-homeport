@@ -36,17 +36,17 @@ const PureSlurmAllocationSummary = (props: ResourceSummaryProps) => {
       <ResourceDetailsTable>
         <PureResourceSummaryBase {...props} />
         <Field
-          label={translate('CPU')}
+          label={translate('CPU==')}
           value={formatCPU(props)}
           helpText={translate('Total CPU hours consumed this month')}
         />
         <Field
-          label={translate('GPU')}
+          label={translate('GPU==')}
           value={formatGPU(props)}
           helpText={translate('Total GPU hours consumed this month')}
         />
         <Field
-          label={translate('RAM')}
+          label={translate('RAM==')}
           value={formatRAM(props)}
           helpText={translate('Total RAM GB-hours consumed this month')}
         />

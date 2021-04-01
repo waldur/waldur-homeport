@@ -14,23 +14,25 @@ const getFields = () => [
     name: 'cpu_limit',
     type: 'integer',
     required: true,
-    label: translate('CPU limit'),
+    label: translate('CPU limit=='),
   },
   {
     name: 'gpu_limit',
     type: 'integer',
     required: true,
-    label: translate('GPU limit'),
+    label: translate('GPU limit==='),
   },
   {
     name: 'ram_limit',
     type: 'integer',
     required: true,
-    label: translate('RAM limit'),
+    label: translate('RAM limit==='),
   },
 ];
 
 export const EditDialog = ({ resolve: { resource } }) => {
+  // eslint-disable-next-line no-console
+  console.log('resource', resource);
   return (
     <UpdateResourceDialog
       fields={getFields()}
