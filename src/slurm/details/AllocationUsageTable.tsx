@@ -19,7 +19,7 @@ export const AllocationUsageTable: FunctionComponent<{ resource }> = ({
 
   return loading ? (
     <LoadingSpinner />
-  ) : error ? (
+  ) : error || !charts ? (
     <>{translate('Unable to load data')}</>
   ) : (
     <div className="tabs-container">

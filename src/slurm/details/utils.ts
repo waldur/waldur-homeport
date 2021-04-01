@@ -202,6 +202,9 @@ export const loadCharts = async (
   allocationUrl: string,
   resourceUuid: string,
 ) => {
+  if (!allocationUrl || !resourceUuid) {
+    return;
+  }
   const componentUsages = await getComponentUsages(resourceUuid);
   const periodUsages = {};
   componentUsages.forEach((component) => {
