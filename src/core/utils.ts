@@ -63,7 +63,7 @@ export const listToDict = (key, value) => (list) => {
 
 export const getUUID = (url) => url.split('/').splice(-2)[0];
 
-export const minutesToHours = (input) => {
+export const minutesToHours = (input, unitLabel = true) => {
   if (isNaN(parseInt(input, 10)) || !isFinite(input)) {
     return '?';
   }
@@ -73,7 +73,7 @@ export const minutesToHours = (input) => {
   }
 
   const hours = input / 60;
-  return hours.toFixed(2) + 'h';
+  return hours.toFixed(2) + (unitLabel ? 'h' : '');
 };
 
 export const pick = (fields) => (source) =>

@@ -1008,16 +1008,19 @@ msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
 #: src/rancher/node/RancherNodeSummary.tsx
-#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "CPU"
 msgstr ""
 
 #: src/slurm/EditDialog.tsx
-msgid "CPU limit"
+msgid "CPU limit=="
 msgstr ""
 
 #: src/slurm/details/constants.ts
 msgid "CPU usage"
+msgstr ""
+
+#: src/slurm/details/SlurmAllocationSummary.tsx
+msgid "CPU=="
 msgstr ""
 
 #: src/table/TableExportButton.tsx
@@ -1904,13 +1907,16 @@ msgstr ""
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
-#: src/resource/actions/base.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/support/OfferingConfigurationForm.tsx
 #: src/support/SupportSummaryTab.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/vmware/VMwareVirtualMachineForm.tsx
 msgid "Description"
+msgstr ""
+
+#: src/resource/actions/base.ts
+msgid "Description=="
 msgstr ""
 
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -2174,7 +2180,6 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/EditAction.tsx
 #: src/project/team/AddMemberButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
-#: src/slurm/EditAction.tsx
 #: src/vmware/actions/EditAction.tsx
 msgid "Edit"
 msgstr ""
@@ -2210,6 +2215,10 @@ msgstr ""
 
 #: src/customer/team/EditTeamMemberDialog.tsx
 msgid "Edit team member"
+msgstr ""
+
+#: src/slurm/EditAction.tsx
+msgid "Edit0000000"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/rule-editor/DirectionField.tsx
@@ -2738,16 +2747,16 @@ msgstr ""
 msgid "GB"
 msgstr ""
 
-#: src/slurm/details/SlurmAllocationSummary.tsx
-msgid "GPU"
-msgstr ""
-
 #: src/slurm/EditDialog.tsx
-msgid "GPU limit"
+msgid "GPU limit==="
 msgstr ""
 
 #: src/slurm/details/constants.ts
 msgid "GPU usage"
+msgstr ""
+
+#: src/slurm/details/SlurmAllocationSummary.tsx
+msgid "GPU=="
 msgstr ""
 
 #: src/slurm/SlurmForm.tsx
@@ -5699,20 +5708,23 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceCheckoutSummary.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 #: src/resource/utils.tsx
-#: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "RAM"
-msgstr ""
-
-#: src/slurm/EditDialog.tsx
-msgid "RAM limit"
 msgstr ""
 
 #: src/openstack/openstack-instance/marketplace.ts
 msgid "RAM limit is exceeded"
 msgstr ""
 
+#: src/slurm/EditDialog.tsx
+msgid "RAM limit==="
+msgstr ""
+
 #: src/slurm/details/constants.ts
 msgid "RAM usage"
+msgstr ""
+
+#: src/slurm/details/SlurmAllocationSummary.tsx
+msgid "RAM=="
 msgstr ""
 
 #: src/rancher/RancherProviderForm.tsx
@@ -8997,7 +9009,7 @@ msgid "Update your organization name, logo, accounting and contact details."
 msgstr ""
 
 #: src/resource/actions/UpdateResourceDialog.tsx
-msgid "Update {resourceType} {resourceName}"
+msgid "Update {resourceType} {resourceName}=="
 msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx

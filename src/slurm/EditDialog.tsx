@@ -1,3 +1,4 @@
+import { minutesToHours } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import {
   createNameField,
@@ -14,19 +15,19 @@ const getFields = () => [
     name: 'cpu_limit',
     type: 'integer',
     required: true,
-    label: translate('CPU limit=='),
+    label: translate('CPU limit (h)'),
   },
   {
     name: 'gpu_limit',
     type: 'integer',
     required: true,
-    label: translate('GPU limit==='),
+    label: translate('GPU limit (h)'),
   },
   {
     name: 'ram_limit',
     type: 'integer',
     required: true,
-    label: translate('RAM limit==='),
+    label: translate('RAM limit (GB-h)'),
   },
 ];
 
@@ -40,8 +41,8 @@ export const EditDialog = ({ resolve: { resource } }) => {
       initialValues={{
         name: resource.name,
         description: resource.description,
-        cpu_limit: resource.cpu_limit,
-        gpu_limit: resource.gpu_limit,
+        cpu_limit: minutesToHours(resource.cpu_limit, false),
+        gpu_limit: minutesToHours(resource.gpu_limit, false),
         ram_limit: resource.ram_limit,
       }}
       updateResource={updateAllocation}
