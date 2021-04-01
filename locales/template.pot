@@ -1012,6 +1012,10 @@ msgstr ""
 msgid "CPU"
 msgstr ""
 
+#: src/slurm/EditDialog.tsx
+msgid "CPU limit"
+msgstr ""
+
 #: src/slurm/details/constants.ts
 msgid "CPU usage"
 msgstr ""
@@ -2736,6 +2740,10 @@ msgstr ""
 
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "GPU"
+msgstr ""
+
+#: src/slurm/EditDialog.tsx
+msgid "GPU limit"
 msgstr ""
 
 #: src/slurm/details/constants.ts
@@ -5693,6 +5701,10 @@ msgstr ""
 #: src/resource/utils.tsx
 #: src/slurm/details/SlurmAllocationSummary.tsx
 msgid "RAM"
+msgstr ""
+
+#: src/slurm/EditDialog.tsx
+msgid "RAM limit"
 msgstr ""
 
 #: src/openstack/openstack-instance/marketplace.ts

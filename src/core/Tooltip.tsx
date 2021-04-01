@@ -28,11 +28,11 @@ export const Tooltip: React.FC<TooltipProps> = ({
 );
 
 export const BackendIdTooltip = ({ backendId }) =>
-  backendId && (
+  backendId ? (
     <>
       {' '}
       <Tooltip id="backend-id" label={backendId}>
         <i className="fa fa-question-circle" />
       </Tooltip>
     </>
-  );
+  ) : null;
