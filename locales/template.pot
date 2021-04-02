@@ -4717,10 +4717,6 @@ msgstr ""
 msgid "Organization roles"
 msgstr ""
 
-#: src/customer/create/WizardFormFirstPage.tsx
-msgid "Organization type"
-msgstr ""
-
 #: src/customer/list/OrganizationUpdateContainer.tsx
 msgid "Organization update"
 msgstr ""
@@ -7437,14 +7433,14 @@ msgstr ""
 msgid "Sync with Google Calendar"
 msgstr ""
 
+#: src/resource/actions/PullActionItem.tsx
+msgid "Synchronisation has been scheduled."
+msgstr ""
+
 #: src/openstack/openstack-tenant/actions/PullFloatingIpsAction.tsx
 #: src/openstack/openstack-tenant/actions/PullSecurityGroupsAction.tsx
 #: src/resource/actions/PullActionItem.tsx
 msgid "Synchronise"
-msgstr ""
-
-#: src/resource/actions/PullActionItem.tsx
-msgid "Synchronization has been scheduled."
 msgstr ""
 
 #: src/configs/default.ts
@@ -8732,7 +8728,7 @@ msgid "Unable to sync Google Calendar."
 msgstr ""
 
 #: src/resource/actions/PullActionItem.tsx
-msgid "Unable to synchronize resource."
+msgid "Unable to synchronise resource."
 msgstr ""
 
 #: src/rancher/node/actions/UnlinkAction.tsx
