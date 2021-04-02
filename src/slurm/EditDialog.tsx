@@ -1,4 +1,4 @@
-import { formatFilesize, minutesToHours } from '@waldur/core/utils';
+// import { formatFilesize, minutesToHours } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import {
   createNameField,
@@ -11,7 +11,7 @@ import { updateAllocation } from './api';
 const getFields = () => [
   createNameField(),
   createDescriptionField(),
-  {
+  /* {
     name: 'cpu_limit',
     type: 'integer',
     required: true,
@@ -28,7 +28,7 @@ const getFields = () => [
     type: 'integer',
     required: true,
     label: translate('RAM limit (GB-h)'),
-  },
+  },*/
 ];
 
 export const EditDialog = ({ resolve: { resource } }) => {
@@ -39,9 +39,9 @@ export const EditDialog = ({ resolve: { resource } }) => {
       initialValues={{
         name: resource.name,
         description: resource.description,
-        cpu_limit: minutesToHours(resource.cpu_limit, false),
+        /*  cpu_limit: minutesToHours(resource.cpu_limit, false),
         gpu_limit: minutesToHours(resource.gpu_limit, false),
-        ram_limit: formatFilesize(resource.ram_limit, 'MB', 'GB', '', false),
+        ram_limit: formatFilesize(resource.ram_limit, 'MB', 'GB', '', false),*/
       }}
       updateResource={updateAllocation}
       verboseName={translate('SLURM allocation')}

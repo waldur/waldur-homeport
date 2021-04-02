@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 
-import { validatePermissions } from './utils';
+import { validateStaffAction } from '../actions/utils';
 
 const SubmitReportDialog = lazyComponent(
   () =>
@@ -13,7 +13,7 @@ const SubmitReportDialog = lazyComponent(
   'SubmitReportDialog',
 );
 
-const validators = [validateState('OK', 'Erred'), validatePermissions];
+const validators = [validateState('OK', 'Erred'), validateStaffAction];
 
 export const SubmitReportAction: FC<any> = ({ resource, reInitResource }) => (
   <DialogActionItem
