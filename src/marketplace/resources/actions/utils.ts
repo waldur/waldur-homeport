@@ -1,7 +1,7 @@
 import { translate } from '@waldur/i18n/translate';
 import { ActionContext } from '@waldur/resource/actions/types';
 
-export const validatePermissions = (ctx: ActionContext) => {
+export const validateStaffAction = (ctx: ActionContext) => {
   if (ctx.user.is_staff) {
     return;
   }

@@ -1012,8 +1012,8 @@ msgstr ""
 msgid "CPU"
 msgstr ""
 
-#: src/slurm/EditDialog.tsx
-msgid "CPU limit"
+#: src/slurm/SetLimitsDialog.tsx
+msgid "CPU limit (hours)"
 msgstr ""
 
 #: src/slurm/details/constants.ts
@@ -2742,8 +2742,8 @@ msgstr ""
 msgid "GPU"
 msgstr ""
 
-#: src/slurm/EditDialog.tsx
-msgid "GPU limit"
+#: src/slurm/SetLimitsDialog.tsx
+msgid "GPU limit (hours)"
 msgstr ""
 
 #: src/slurm/details/constants.ts
@@ -4491,7 +4491,7 @@ msgstr ""
 msgid "Only staff can remove organization."
 msgstr ""
 
-#: src/marketplace/resources/report/utils.ts
+#: src/marketplace/resources/actions/utils.ts
 msgid "Only staff users are allowed to perform this action."
 msgstr ""
 
@@ -5703,8 +5703,8 @@ msgstr ""
 msgid "RAM"
 msgstr ""
 
-#: src/slurm/EditDialog.tsx
-msgid "RAM limit"
+#: src/slurm/SetLimitsDialog.tsx
+msgid "RAM limit (GB-hours)"
 msgstr ""
 
 #: src/openstack/openstack-instance/marketplace.ts
@@ -6444,6 +6444,7 @@ msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr ""
 
 #: src/slurm/EditDialog.tsx
+#: src/slurm/SetLimitsDialog.tsx
 #: src/slurm/marketplace.ts
 msgid "SLURM allocation"
 msgstr ""
@@ -6949,6 +6950,10 @@ msgstr ""
 #: src/marketplace/resources/SetBackendIdButton.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
 msgid "Set backend ID"
+msgstr ""
+
+#: src/slurm/SetLimitsAction.tsx
+msgid "Set limits"
 msgstr ""
 
 #: src/customer/list/SetLocationButton.tsx

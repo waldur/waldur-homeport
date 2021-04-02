@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { validatePermissions } from '@waldur/marketplace/resources/report/utils';
+import { validateStaffAction } from '@waldur/marketplace/resources/actions/utils';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
 
 const SetBackendIdDialog = lazyComponent(
@@ -11,7 +11,7 @@ const SetBackendIdDialog = lazyComponent(
   'SetBackendIdDialog',
 );
 
-const validators = [validatePermissions];
+const validators = [validateStaffAction];
 
 export const SetBackendIdButton: FC<any> = ({ resource, reInitResource }) => (
   <DialogActionButton
