@@ -28,7 +28,6 @@ const CUSTOMER_FIELDS = [
   'country',
   'address',
   'vat_code',
-  'type',
   'postal',
   'bank_name',
   'bank_account',

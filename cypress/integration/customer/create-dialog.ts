@@ -41,11 +41,7 @@ describe('Customer creation dialog', () => {
       // Enter organization name
       .get('input[name="name"]')
       .type('Alice Lebowski')
-
-      // Open dropdown for organization type selector
-      .openDropdownByLabel('Organization type')
-      .selectTheFirstOptionOfDropdown()
-
+        
       // Enter organization email
       .get('input[name="email"]')
       .type('contact@abc.com')
