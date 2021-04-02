@@ -19,10 +19,10 @@ export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
   const callback = async () => {
     try {
       await apiMethod(resource.uuid);
-      dispatch(showSuccess(translate('Synchronization has been scheduled.')));
+      dispatch(showSuccess(translate('Synchronisation has been scheduled.')));
     } catch (e) {
       dispatch(
-        showErrorResponse(e, translate('Unable to synchronize resource.')),
+        showErrorResponse(e, translate('Unable to synchronise resource.')),
       );
     }
   };
