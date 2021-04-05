@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tooltip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -69,6 +70,8 @@ export const OfferingHeader: React.FC<OfferingHeaderProps> = (props) => (
 
       <ReferralDetailsField offering={props.offering} />
     </ResourceDetailsTable>
-    <GoogleCalendarLinkField offering={props.offering} />
+    {props.offering.type === OFFERING_TYPE_BOOKING && (
+      <GoogleCalendarLinkField offering={props.offering} />
+    )}
   </Col>
 );
