@@ -5790,6 +5790,7 @@ msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx
 #: src/issues/workspace/IssuesActivityStream.tsx
+#: src/marketplace/offerings/details/OfferingDetails.tsx
 #: src/marketplace/orders/OrderDetails.tsx
 #: src/marketplace/resources/actions/ResourceActions.tsx
 #: src/resource/ResourceRefreshButton.tsx
