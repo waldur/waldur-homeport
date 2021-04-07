@@ -17,10 +17,6 @@ msgstr ""
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr ""
 
-#: src/marketplace-checklist/AnswerGroup.tsx
-msgid "?"
-msgstr ""
-
 #: src/rancher/cluster/create/LonghornWorkerWarning.tsx
 msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
 msgstr ""

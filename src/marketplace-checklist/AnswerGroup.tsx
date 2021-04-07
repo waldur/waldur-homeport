@@ -24,6 +24,6 @@ export const AnswerGroup: FunctionComponent<{
   >
     <ToggleButton value="true">{translate('Yes')}</ToggleButton>
     <ToggleButton value="false">{translate('No')}</ToggleButton>
-    <ToggleButton value="null">{translate('?')}</ToggleButton>
+    <ToggleButton value="null">{'?'}</ToggleButton>
   </ToggleButtonGroup>
 );
