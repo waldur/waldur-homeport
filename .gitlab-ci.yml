@@ -124,3 +124,41 @@ Lint dockerfile:
       ignored:
         - DL3018 # "versions for `apk add`" warning
   before_script: []
+
+Upload translatable strings:
+  stage: build
+  interruptible: true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+  image:
+    name: registry.hpc.ut.ee/mirror/localazy/cli:latest
+  script:
+    - sed 's/{\([^}]*\)\}/{__\1__}/g' locales/template.pot > template-for-localazy.pot
+    - localazy upload source -w $LOCALAZY_WRITE_KEY -r $LOCALAZY_READ_KEY
+  before_script: []
+
+Download translation:
+  stage: test
+  interruptible: true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop" && $CI_PIPELINE_SOURCE == "schedule"'
+  image:
+    name: registry.hpc.ut.ee/mirror/localazy/cli:latest
+  script:
+    - apt update && apt install -y git
+    - git config --global user.name "$GITLAB_USER_NAME"
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    - echo https://gitlab-ci-token:$GIT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git
+    - git remote set-url origin "https://gitlab-ci-token:$GITLAB_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
+    - git fetch
+    - localazy download -w $LOCALAZY_WRITE_KEY -r $LOCALAZY_READ_KEY
+    - find locales -type f -name '*.po' -exec sed -i 's/{__\([^}]*\)__\}/{\1}/g' {} \;
+    - git status
+    - git commit locales -m "Updates translations" || exit 0
+    - git status
+    - echo "Committing updated translations"
+    - git branch new-translations
+    - git push --set-upstream origin new-translations:develop
+  before_script: []
+
