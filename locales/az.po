@@ -189,7 +189,7 @@ msgid "Availability zone"
 msgstr "Əlçatanlıq zonası"
 
 msgid "Available quota usage: {usage}"
-msgstr "Mövcud kvota: {istifadə}"
+msgstr "Mövcud kvota: {usage}"
 
 msgid "Azure provider"
 msgstr "Azure provayderi"
@@ -1398,7 +1398,7 @@ msgid "Project has been removed successfully."
 msgstr "Layihə müvəffəqiyyətlə silindi."
 
 msgid "Project has been renamed from {project_previous_name} to {project_link}."
-msgstr "Layihə { project_previous_name}-dan {project_link} adına dəyişdirildi."
+msgstr "Layihə {project_previous_name}-dan {project_link} adına dəyişdirildi."
 
 msgid "Project has been updated."
 msgstr "Layihə yeniləndi."
@@ -1425,7 +1425,7 @@ msgid "Project {project_link} has been updated."
 msgstr "{project_link} layihəsi yeniləndi"
 
 msgid "Project {project_name} has been deleted."
-msgstr "{project_name} layihəsi silindi.\t"
+msgstr "{project_name} layihəsi silindi."
 
 msgid "Projects"
 msgstr "Layihələr"
@@ -1803,7 +1803,7 @@ msgid "Show shared"
 msgstr "Paylaşılanları göstərin"
 
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
-msgstr "{nəticə Sayı} girişlərindən {parçaBaşlanğıc}-dan {parçaSon}-a kimi göstərmək."
+msgstr "{sliceStart} girişlərindən {sliceEnd}-dan {resultCount}-a kimi göstərmək."
 
 msgid "Sign in"
 msgstr "Daxil ol"
@@ -2247,10 +2247,10 @@ msgid "User {user_link} has granted organization support role in {customer_link}
 msgstr "{user_link} istifadəçi təşkilatın dəstəyi vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
-msgstr "{user_link} istifadəçi layihə administratoru vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
+msgstr "{user_link} istifadəçi layihə administratoru vəzifəsini {project_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
-msgstr "{user_link} istifadəçi layihə meneceri vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
+msgstr "{user_link} istifadəçi layihə meneceri vəzifəsini {project_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "{user_link} istifadəçi vəzifəni {affected_user_link}-ə vermişdir."
@@ -2427,7 +2427,7 @@ msgid "current state on backend: {resourceState}."
 msgstr "Çıxış buferi üzrə mövcud vəziyyət: {resourceState}."
 
 msgid "error message: {errorMessage}"
-msgstr "Xəta mesajı: {xətaMesajı}"
+msgstr "Xəta mesajı: {errorMessage}"
 
 msgid "events"
 msgstr "hadisələr"
