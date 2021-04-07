@@ -8,6 +8,9 @@ msgstr ""
 "Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
+msgid "API URL"
+msgstr "API URL aadress"
+
 msgid "API secret code:"
 msgstr "API salajane kood"
 
@@ -26,11 +29,20 @@ msgstr "Lühend"
 msgid "Accept"
 msgstr "Kinnita"
 
+msgid "Accept booking"
+msgstr "Kinnita broneering"
+
+msgid "Accept invitation"
+msgstr "Võta kutse vastu"
+
 msgid "Accepted"
 msgstr "Kinnitatud"
 
 msgid "Access"
 msgstr "Ligipääs"
+
+msgid "Access token"
+msgstr "Juurdepääsu žetoon"
 
 msgid "Accessible to all customers."
 msgstr "Ligipääsetav kõigile klientidele"
@@ -92,11 +104,20 @@ msgstr "Lisa"
 msgid "Add SSH key"
 msgstr "Lisa SSH võti"
 
+msgid "Add address"
+msgstr "Lisage aadress"
+
 msgid "Add comment"
 msgstr "Lisa kommentaar"
 
 msgid "Add component"
 msgstr "Lisa komponent"
+
+msgid "Add data volume"
+msgstr "Andmeketta lisamine"
+
+msgid "Add image"
+msgstr "Lisa pilt"
 
 msgid "Add item"
 msgstr "Lisa element"
@@ -128,6 +149,9 @@ msgstr "Lisa pakkumine"
 msgid "Add organization"
 msgstr "Lisa organisatsioon"
 
+msgid "Add payment"
+msgstr "Lisa makse"
+
 msgid "Add plan"
 msgstr "Lisa plaan"
 
@@ -139,6 +163,9 @@ msgstr "Lisa projekti liige"
 
 msgid "Add resource"
 msgstr "Lisa resurss"
+
+msgid "Add route"
+msgstr "Lisa marsruut"
 
 msgid "Add rule"
 msgstr "Lisa reegel"
@@ -194,6 +221,9 @@ msgstr "Hoiatus"
 msgid "All"
 msgstr "Kõik"
 
+msgid "All day"
+msgstr "Terve päev"
+
 msgid "Allocation description"
 msgstr "Jaotise kirjeldus"
 
@@ -209,8 +239,20 @@ msgstr "Kas sul on juba konto?"
 msgid "Amount"
 msgstr "Kogus"
 
+msgid "An error has occurred."
+msgstr "Tekkis viga"
+
 msgid "An error occurred on project removal."
 msgstr "Projekti eemaldamisel tekkis viga."
+
+msgid "Annotations"
+msgstr "Märkused"
+
+msgid "Answer"
+msgstr "Vastus"
+
+msgid "Answers"
+msgstr "Vastused"
 
 msgid "Any"
 msgstr "Iga"
@@ -241,6 +283,9 @@ msgstr "Arhiiv"
 
 msgid "Archived"
 msgstr "Arhiveeritud"
+
+msgid "Are you sure you want to cancel a {name}?"
+msgstr "Kas olete kindel, et soovite tühistada {name}?"
 
 msgid "Are you sure you would like to delete project {projectName}?"
 msgstr "Oled sa kindel, et soovid kustutada projekti {projectName}?"

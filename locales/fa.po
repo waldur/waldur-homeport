@@ -11,9 +11,6 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "در واقع شخصیت است"
 
-msgid "?"
-msgstr "؟"
-
 msgid "API secret code:"
 msgstr "کد مخفی API:"
 

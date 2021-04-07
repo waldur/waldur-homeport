@@ -8,6 +8,123 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=((n%10==1) && (n%100!=11)) ? 0 : ((n%10>=2 && n%10<=4) && ((n%100<12 || n%100>14))) ? 1 : 2;\n"
 
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Умови надання послуг</Link> були прийняті <Date></Date>"
+
+msgid "API secret code:"
+msgstr "Секретний код API:"
+
+msgid "API token lifetime"
+msgstr "Час життя токенів API"
+
+msgid "A one-time fee applied on activation."
+msgstr "Одноразова плата за активацію."
+
+msgid "A profile has been created."
+msgstr "Профіль створено."
+
+msgid "Abbreviation"
+msgstr "Абревіатура"
+
+msgid "Accept"
+msgstr "Прийняти"
+
+msgid "Accept booking"
+msgstr "Прийняти запит"
+
+msgid "Accept invitation"
+msgstr "Прийняти запрошення"
+
+msgid "Accepted"
+msgstr "Прийнято"
+
+msgid "Access"
+msgstr "Доступ"
+
+msgid "Access token"
+msgstr "Токен доступу"
+
+msgid "Accessible to all customers."
+msgstr "Доступно для всіх клієнтів."
+
+msgid "Account activation"
+msgstr "Активація облікового запису"
+
+msgid "Account has been activated."
+msgstr "Обліковий запис було активовано."
+
+msgid "Account removal"
+msgstr "Видалення облікового запису"
+
+msgid "Accounting"
+msgstr "Бухгалтерія"
+
+msgid "Accounting period"
+msgstr "Обліковий період"
+
+msgid "Accounting running"
+msgstr "Облік запущений"
+
+msgid "Accounting start date"
+msgstr "Дата початку бухгалтерського обліку"
+
+msgid "Accounting type"
+msgstr "Тип бухгалтерського обліку"
+
+msgid "Action has been applied."
+msgstr "Дію було застосовано."
+
+msgid "Actions"
+msgstr "Дії"
+
+msgid "Activate"
+msgstr "Активувати"
+
+msgid "Activating"
+msgstr "Активація"
+
+msgid "Active"
+msgstr "Активний"
+
+msgid "Active plans"
+msgstr "Активні плани"
+
+msgid "Active user will be able to login into the portal."
+msgstr "Активний користувач зможе увійти на портал."
+
+msgid "Activity stream"
+msgstr "Стрічка активності"
+
+msgid "Add"
+msgstr "Додати"
+
+msgid "Add SSH key"
+msgstr "Додати SSH ключ"
+
+msgid "Add address"
+msgstr "Додати адресу"
+
+msgid "Add comment"
+msgstr "Додати коментар"
+
+msgid "Add component"
+msgstr "Додати компонент"
+
+msgid "Add item"
+msgstr "Додати позицію"
+
+msgid "Add key"
+msgstr "Додати ключ"
+
+msgid "Add member"
+msgstr "Додати учасника"
+
+msgid "Add new"
+msgstr "Створити організацію"
+
+msgid "Add new project"
+msgstr "Додати новий проект"
+
 msgid "Cancel"
 msgstr "Скасувати"
 

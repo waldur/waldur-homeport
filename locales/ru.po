@@ -32,6 +32,9 @@ msgstr "Профиль создан."
 msgid "Abbreviation"
 msgstr "Аббревиатура"
 
+msgid "Accept"
+msgstr "Принять"
+
 msgid "Accept booking"
 msgstr "Принять запрос на бронирование"
 
@@ -59,6 +62,9 @@ msgstr "Удаление аккаунта"
 msgid "Actions"
 msgstr "Действия"
 
+msgid "Activation price"
+msgstr "Цена активации"
+
 msgid "Activity stream"
 msgstr "Лента активности"
 
@@ -67,6 +73,9 @@ msgstr "Добавить"
 
 msgid "Add SSH key"
 msgstr "Добавить SSH ключ"
+
+msgid "Add environment variable"
+msgstr "Добавить переменную среды"
 
 msgid "Add key"
 msgstr "Добавить ключ"
@@ -89,20 +98,71 @@ msgstr "Добавить уведомление"
 msgid "Add organization"
 msgstr "Добавить организацию"
 
+msgid "Add payment profile"
+msgstr "Добавить платежный профиль"
+
+msgid "Add plan"
+msgstr "Добавить план"
+
 msgid "Add project"
 msgstr "Добавить проект"
 
 msgid "Add project member"
 msgstr "Добавить участника проекта"
 
+msgid "Add resource"
+msgstr "Добавить ресурс"
+
+msgid "Add route"
+msgstr "Добавить маршрут"
+
 msgid "Add rule"
 msgstr "Добавить правило"
+
+msgid "Add security group"
+msgstr "Добавить группу безопасности"
+
+msgid "Add team member"
+msgstr "Добавить участника команды"
+
+msgid "Add to a new namespace"
+msgstr "Добавить в новое пространство имен"
+
+msgid "Add to cart"
+msgstr "В корзину"
+
+msgid "Add to comparison"
+msgstr "Добавить к сравнению"
+
+msgid "Add user"
+msgstr "Добавить пользователя"
+
+msgid "Additional data that will be added to instance on provisioning."
+msgstr "Пользовательские данные, которые будут добавлены в виртуальную машину при её создании."
+
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr "Пользовательские данные, которые будут добавлены в виртуальную машину при её создании."
+
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "Кроме того, поставщик услуг может взимать плату за использование следующих компонентов"
 
 msgid "Address"
 msgstr "Адрес"
 
+msgid "Admin password"
+msgstr "Пароль администратора"
+
+msgid "Admin username"
+msgstr "Имя учётной записи администратора"
+
+msgid "Agree with ToS"
+msgstr "Подтвердить принятие условий обслуживания"
+
 msgid "Agreement number"
 msgstr "Номер договора"
+
+msgid "All day"
+msgstr "Весь день"
 
 msgid "Already have an account?"
 msgstr "У вас уже есть аккаунт?"
@@ -126,7 +186,7 @@ msgid "Billing"
 msgstr "Рассчёты"
 
 msgid "CPU usage"
-msgstr "CPU использование"
+msgstr "Использование CPU"
 
 msgid "Cancel"
 msgstr "Отменить"
@@ -318,13 +378,13 @@ msgid "IP protocol"
 msgstr "IP протокол"
 
 msgid "IP version"
-msgstr "IP версия"
+msgstr "Версия IP"
 
 msgid "Import"
 msgstr "Импорт ресурсов"
 
 msgid "Import resource"
-msgstr "Ресурс для импорта"
+msgstr "Импортировать ресурс"
 
 msgid "Incorrect organization details"
 msgstr "Неверные данные организации"
