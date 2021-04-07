@@ -8,17 +8,8 @@ msgstr ""
 "Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
-msgid "API URL"
-msgstr "API URL aadress"
-
-msgid "API secret code:"
-msgstr "API salajane kood"
-
 msgid "API token lifetime"
 msgstr "API token'i eluiga"
-
-msgid "A one-time fee applied on activation."
-msgstr "Aktiveerimise eest rakendatakse ühekordne tasu."
 
 msgid "A profile has been created."
 msgstr "Profiil on loodud."
@@ -29,12 +20,6 @@ msgstr "Lühend"
 msgid "Accept"
 msgstr "Kinnita"
 
-msgid "Accept booking"
-msgstr "Kinnita broneering"
-
-msgid "Accept invitation"
-msgstr "Võta kutse vastu"
-
 msgid "Accepted"
 msgstr "Kinnitatud"
 
@@ -43,9 +28,6 @@ msgstr "Ligipääs"
 
 msgid "Access token"
 msgstr "Juurdepääsu žetoon"
-
-msgid "Accessible to all customers."
-msgstr "Ligipääsetav kõigile klientidele"
 
 msgid "Account activation"
 msgstr "Konto aktiveerimine"
@@ -62,9 +44,6 @@ msgstr "Arveldus"
 msgid "Accounting period"
 msgstr "Arvelduse periood"
 
-msgid "Accounting plans"
-msgstr "Arvelduse plaanid"
-
 msgid "Accounting record"
 msgstr "Arvelduskirje"
 
@@ -74,26 +53,14 @@ msgstr "Arvelduskirjed"
 msgid "Accounting start date"
 msgstr "Arvelduse alguskuupäev"
 
-msgid "Accounting type"
-msgstr "Arvelduse tüüp"
-
 msgid "Actions"
 msgstr "Toimingud"
-
-msgid "Activate"
-msgstr "Aktiveeri"
 
 msgid "Activating"
 msgstr "Aktiveerin"
 
 msgid "Active"
 msgstr "Aktiivne"
-
-msgid "Active count"
-msgstr "Aktiivne konto"
-
-msgid "Active user will be able to login into the portal."
-msgstr "Aktiivne kasutaja on võimeline sisenema portaali"
 
 msgid "Activity stream"
 msgstr "Aktiivsuse voog"
@@ -104,20 +71,11 @@ msgstr "Lisa"
 msgid "Add SSH key"
 msgstr "Lisa SSH võti"
 
-msgid "Add address"
-msgstr "Lisage aadress"
-
 msgid "Add comment"
 msgstr "Lisa kommentaar"
 
-msgid "Add component"
-msgstr "Lisa komponent"
-
 msgid "Add data volume"
 msgstr "Andmeketta lisamine"
-
-msgid "Add image"
-msgstr "Lisa pilt"
 
 msgid "Add item"
 msgstr "Lisa element"
@@ -131,9 +89,6 @@ msgstr "Lisa liige"
 msgid "Add new"
 msgstr "Lisa uus"
 
-msgid "Add new offering"
-msgstr "Lisa uus pakkumine"
-
 msgid "Add new organization"
 msgstr "Lisa uus asutus"
 
@@ -143,17 +98,8 @@ msgstr "Lisa uus projekt"
 msgid "Add notification"
 msgstr "Lisa teavitus"
 
-msgid "Add offering"
-msgstr "Lisa pakkumine"
-
 msgid "Add organization"
 msgstr "Lisa organisatsioon"
-
-msgid "Add payment"
-msgstr "Lisa makse"
-
-msgid "Add plan"
-msgstr "Lisa plaan"
 
 msgid "Add project"
 msgstr "Lisa projekt"
@@ -161,29 +107,11 @@ msgstr "Lisa projekt"
 msgid "Add project member"
 msgstr "Lisa projekti liige"
 
-msgid "Add resource"
-msgstr "Lisa resurss"
-
-msgid "Add route"
-msgstr "Lisa marsruut"
-
 msgid "Add rule"
 msgstr "Lisa reegel"
 
-msgid "Add team member"
-msgstr "Lisa meeskonna liige"
-
-msgid "Add to cart"
-msgstr "Lisa ostukorvi"
-
-msgid "Add to comparison"
-msgstr "Lisa võrdlusse"
-
 msgid "Add user"
 msgstr "Lisa kasutaja"
-
-msgid "Add user input field"
-msgstr "Lisa kasutaja sisestusväli"
 
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Täiendavad andmed mida lisatakse üksuse eraldamisel."
@@ -191,41 +119,14 @@ msgstr "Täiendavad andmed mida lisatakse üksuse eraldamisel."
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr "Täiendavad andmed mida lisatakse virtuaalmasina eraldamisel."
 
-msgid "Additionally service provider can charge for usage of the following components"
-msgstr "Lisaks võib teenusepakkuja võtta tasu järgmiste komponentide kasutamise eest"
-
 msgid "Address"
 msgstr "Aadress"
-
-msgid "Admin password"
-msgstr "Administraatori parool"
-
-msgid "Admin username"
-msgstr "Administraatori kasutajanimi"
 
 msgid "Affected resource"
 msgstr "Mõjutatud ressurss"
 
-msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
-msgstr "Pärast salajase API-koodi taasloomist pole vana võtme kasutamine võimalik."
-
-msgid "Agree with ToS"
-msgstr "Nõustuge ToS-iga"
-
 msgid "Agreement number"
 msgstr "Lepingu number"
-
-msgid "Alert"
-msgstr "Hoiatus"
-
-msgid "All"
-msgstr "Kõik"
-
-msgid "All day"
-msgstr "Terve päev"
-
-msgid "Allocation description"
-msgstr "Jaotise kirjeldus"
 
 msgid "Allocation name"
 msgstr "Jaotuse nimi"
@@ -239,20 +140,8 @@ msgstr "Kas sul on juba konto?"
 msgid "Amount"
 msgstr "Kogus"
 
-msgid "An error has occurred."
-msgstr "Tekkis viga"
-
 msgid "An error occurred on project removal."
 msgstr "Projekti eemaldamisel tekkis viga."
-
-msgid "Annotations"
-msgstr "Märkused"
-
-msgid "Answer"
-msgstr "Vastus"
-
-msgid "Answers"
-msgstr "Vastused"
 
 msgid "Any"
 msgstr "Iga"
@@ -263,50 +152,11 @@ msgstr "Rakenduse detailid"
 msgid "Applications"
 msgstr "Rakendused"
 
-msgid "Apply"
-msgstr "Rakenda"
-
-msgid "Approve"
-msgstr "Kinnita"
-
 msgid "Approve payment"
 msgstr "Kinnita makse"
 
-msgid "Approved at"
-msgstr "Kinnitatud"
-
-msgid "Approved by"
-msgstr "Kinnitanud"
-
-msgid "Archive"
-msgstr "Arhiiv"
-
-msgid "Archived"
-msgstr "Arhiveeritud"
-
-msgid "Are you sure you want to cancel a {name}?"
-msgstr "Kas olete kindel, et soovite tühistada {name}?"
-
-msgid "Are you sure you would like to delete project {projectName}?"
-msgstr "Oled sa kindel, et soovid kustutada projekti {projectName}?"
-
-msgid "Are you sure you would like to delete the hook?"
-msgstr "Oled sa kindel, et soovid haagi kustutada?"
-
-msgid "Are you sure you would like to delete the key?"
-msgstr "Oled sa kinde, et soovid võtme kustutada?"
-
-msgid "Are you sure you would like to terminate resource {resourceName}?"
-msgstr "Oled kindel et soovid peatada teenuse {resourceName}?"
-
-msgid "Article code"
-msgstr "Artikli kood"
-
 msgid "Assigned to"
 msgstr "Määratud"
-
-msgid "Attach"
-msgstr "Lisatud"
 
 msgid "Attached to"
 msgstr "Lisatud"
@@ -316,9 +166,6 @@ msgstr "Lisan"
 
 msgid "Attachments"
 msgstr "Lisandid"
-
-msgid "Attributes filter"
-msgstr "Atribuutide filtrid"
 
 msgid "Audit log"
 msgstr "Auditi logi"
@@ -338,29 +185,8 @@ msgstr "Autentimine Mobile ID abil on katkestatud või siis aegunud. Detailid:"
 msgid "Auto-assign floating IP"
 msgstr "Lisa liikuv IP automaatselt"
 
-msgid "Auto-generated"
-msgstr "Automaatselt genereeritud"
-
-msgid "Availability"
-msgstr "Kättesaadavus"
-
 msgid "Availability zone"
 msgstr "Kättesaadavuse tsoon"
-
-msgid "Available quota usage: {usage}"
-msgstr "Kättesaadava kvoodi kasutamine: {usage}"
-
-msgid "Azerbaijani"
-msgstr "Aserbaidžaan"
-
-msgid "Azure Active Directory Application Secret"
-msgstr "Azure Active Directory rakenduse saladus"
-
-msgid "Azure PostgreSQL database server"
-msgstr "Azure PostgreSQL andmebaasi serveri"
-
-msgid "Azure Virtual Machine"
-msgstr "Azure virtuaalmasin"
 
 msgid "Azure provider"
 msgstr "Azure pakkuja"
@@ -379,12 +205,6 @@ msgstr "Tagasi kasutaja töölauale"
 
 msgid "Back to project"
 msgstr "Tagasi projekti juurde"
-
-msgid "Back to shopping"
-msgstr "Tagasi ostlema"
-
-msgid "Backend ID"
-msgstr "Tagatoa ID"
 
 msgid "Backing up"
 msgstr "Varundamine"
@@ -407,26 +227,11 @@ msgstr "Pakktöötluse dokumentatsioon"
 msgid "Batch vCPU"
 msgstr "Maks vCPU-de arv"
 
-msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
-msgstr "Saage meie portaali kliendiks. Pakkuge turuplatsilt IT-teenuseid ja hallake oma meeskonda ühest kohast."
-
 msgid "Billing"
 msgstr "Arved"
 
 msgid "Billing details"
 msgstr "Arve üksikasjad"
-
-msgid "Billing enabled"
-msgstr "Arved lubatud"
-
-msgid "Billing period"
-msgstr "Arvete periood"
-
-msgid "Booking"
-msgstr "Broneerimine"
-
-msgid "Bookings"
-msgstr "Broneerimised"
 
 msgid "Bootable"
 msgstr "Käivitatav"
@@ -434,14 +239,8 @@ msgstr "Käivitatav"
 msgid "Browse"
 msgstr "Sirvi"
 
-msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
-msgstr "Kui määrasite tähise eluea määramatuks, lubate kõigil, kellel on märk, imiteerida teie tegevust, kuni märk on muutunud."
-
 msgid "CPU usage"
 msgstr "CPU koormus"
-
-msgid "CSV"
-msgstr "CVS"
 
 msgid "Caller"
 msgstr "Pöörduja"
@@ -455,17 +254,14 @@ msgstr "Tühista kutse"
 msgid "Cancel payment"
 msgstr "Tühista makse"
 
+msgid "Cancel request"
+msgstr "Tühista taotlus"
+
 msgid "Canceled"
 msgstr "Tühistatud"
 
 msgid "Cancelled"
 msgstr "Tühistatud"
-
-msgid "Cannot create floating IP if tenant external network is not defined."
-msgstr "Liikuvat IP-d ei saa luua, kui väline võrk pole määratletud."
-
-msgid "Categories"
-msgstr "Kategooriad"
 
 msgid "Category"
 msgstr "Kategooria"
@@ -479,50 +275,17 @@ msgstr "Muutuse päring"
 msgid "Change flavor"
 msgstr "Muuda tüüpi"
 
-msgid "Change limits"
-msgstr "Muuda limiite"
-
-msgid "Change plan"
-msgstr "Muuda plaani"
-
-msgid "Change request - client’s request to perform a generic modification of data or service."
-msgstr "Muudatuse tellimus – kliendi soov teenuse osalise või täieliku funktsionaalsuse, ligipääsu või komponentide muutmiseks, lisamiseks, liigutamiseks või eemaldamiseks."
-
-msgid "Change resource limits"
-msgstr "Muuda ressursside limiite"
-
-msgid "Change resource plan"
-msgstr "Muuda ressursside plaani"
-
 msgid "Changing flavor"
 msgstr "Muuda tüüpi"
 
 msgid "Changing password"
 msgstr "Muuda parooli"
 
-msgid "Charge for usage-based component is based on user-requested limit."
-msgstr "Kasutuspõhise komponendi tasu põhineb kasutaja taotletud limiidil."
-
-msgid "Charset"
-msgstr "Märgistik"
-
-msgid "Choices as comma-separated list"
-msgstr "Valikud komadega eraldatud nimekirjana"
-
 msgid "Civil number"
 msgstr "ID kood"
 
 msgid "Client ID"
 msgstr "Kliendi ID"
-
-msgid "Client organization"
-msgstr "Kliendi organisatsioon"
-
-msgid "Client project"
-msgstr "Kliendi projekt"
-
-msgid "Client secret"
-msgstr "Kliendi saladus"
 
 msgid "Close"
 msgstr "Sulge"
@@ -536,35 +299,17 @@ msgstr "Pilve plokkseadme suurus"
 msgid "Cloud vCPU"
 msgstr "Pilve vCPU"
 
-msgid "Cluster"
-msgstr "Klaster"
-
-msgid "Collation"
-msgstr "Kõrvutamine"
-
 msgid "Comment"
 msgstr "Kommentaar"
 
 msgid "Comments"
 msgstr "Kommentaarid"
 
-msgid "Compare items"
-msgstr "Võrdle elemente"
-
 msgid "Competence"
 msgstr "Pädevus"
 
-msgid "Component #{index}"
-msgstr "Komponent #{index}"
-
-msgid "Component name"
-msgstr "Komponendi nimi"
-
 msgid "Components"
 msgstr "Komponendid"
-
-msgid "Compute generation"
-msgstr "Arvuta genereerimine"
 
 msgid "Configure"
 msgstr "Seadista"
@@ -580,9 +325,6 @@ msgstr "Ühenda"
 
 msgid "Connected subnets"
 msgstr "Ühendatud alamvõrgud"
-
-msgid "Connection details"
-msgstr "Ühenduse üksikasjad"
 
 msgid "Contact e-mail"
 msgstr "Kontakt e-post"
@@ -608,23 +350,11 @@ msgstr "Riik"
 msgid "Create"
 msgstr "Loo"
 
-msgid "Create Network adapter"
-msgstr "Loo võrguadapter"
-
-msgid "Create SQL database in PostgreSQL server"
-msgstr "Loo SQL andmebaas PostgreSQL serverisse"
-
 msgid "Create an account"
 msgstr "Loo konto"
 
 msgid "Create application"
 msgstr "Rakenduse loomine"
-
-msgid "Create disk"
-msgstr "Loo ketas"
-
-msgid "Create network for OpenStack tenant"
-msgstr "Loo tõmmis OpenStack tenantile"
 
 msgid "Create notification"
 msgstr "Teate loomine"
@@ -650,17 +380,8 @@ msgstr "Loo alamvõrk"
 msgid "Created"
 msgstr "Loodud"
 
-msgid "Created a new payment for {customer_link}."
-msgstr "Loo uus makse kliendile {customer_name}."
-
 msgid "Created at"
 msgstr "Loodud"
-
-msgid "Created by"
-msgstr "Loodud"
-
-msgid "Creating"
-msgstr "Loon"
 
 msgid "Creating a backup schedule"
 msgstr "Loon varunduse ajakava"
@@ -689,9 +410,6 @@ msgstr "Praegune maksumus"
 msgid "Current flavor"
 msgstr "Praegune tüüp"
 
-msgid "Current plan"
-msgstr "Praegune plaan"
-
 msgid "Current price per month"
 msgstr "Praegune hind kuu lõikes"
 
@@ -704,23 +422,11 @@ msgstr "Töölaud"
 msgid "Data volume size:"
 msgstr "Andmete salvestusüksuse suurus:"
 
-msgid "Databases"
-msgstr "Andmebaasid"
-
-msgid "Datastore"
-msgstr "Andmesalvesti"
-
 msgid "Date"
 msgstr "Kuupäev"
 
 msgid "Date joined"
 msgstr "Liitumise kuupäev"
-
-msgid "Date of reporting"
-msgstr "Vastamise aeg"
-
-msgid "Deactivate"
-msgstr "Deaktiveeri"
 
 msgid "Deactivating"
 msgstr "Deaktiveerin"
@@ -737,20 +443,11 @@ msgstr "Vaikekonto"
 msgid "Default availability zone for provisioned instances."
 msgstr "Vaikimisi kättesaadav tsoon loodud teenustele"
 
-msgid "Default cluster label"
-msgstr "Klastri vaikesilt"
-
-msgid "Default value"
-msgstr "Vaikeväärtus"
-
 msgid "Delete"
 msgstr "Kustuta"
 
 msgid "Delete volumes"
 msgstr "Kustuta salvestusüksed"
-
-msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
-msgstr "PostgreSQL serveri kustutamine kustutab kõik serveris loodud andmebaasid."
 
 msgid "Description"
 msgstr "Kirjeldus"
@@ -766,9 +463,6 @@ msgstr "Hävita"
 
 msgid "Destroying"
 msgstr "Hävitan"
-
-msgid "Detach"
-msgstr "Ühenda lahti"
 
 msgid "Detaching"
 msgstr "Ühendan lahti"
@@ -791,21 +485,6 @@ msgstr "Lülita salvestusüksus välja"
 msgid "Disable profile"
 msgstr "Lülita profiil välja"
 
-msgid "Disabled"
-msgstr "Keelatud"
-
-msgid "Disks"
-msgstr "Kettad"
-
-msgid "Display name"
-msgstr "Kuvatav nimi"
-
-msgid "Do not allow user to specify quotas when offering is provisioned."
-msgstr "Ära lase kasutajal määrata limiiti teenust tellides"
-
-msgid "Do not configure a gateway for this subnet"
-msgstr "Ära seadista sellele võrgule võrguväravat"
-
 msgid "Do not have an account?"
 msgstr "Konto puudub?"
 
@@ -815,23 +494,14 @@ msgstr "Kas sa soovid tõesti kommentaari kustutada?"
 msgid "Documentation"
 msgstr "Dokumentatsioon"
 
-msgid "Documents"
-msgstr "Dokumendid"
-
 msgid "Domain"
 msgstr "Domeen"
 
 msgid "Domain name. If not defined default domain will be used."
 msgstr "Domeeni nimi. Kui seda pole defineeritud kasutatakse vaikedomeeni"
 
-msgid "Done"
-msgstr "Valmis"
-
 msgid "Download invoice"
 msgstr "Lae arve alla"
-
-msgid "Download order PDF file"
-msgstr "Lae alla tellimuse PDF fail"
 
 msgid "Draft"
 msgstr "Mustand"
@@ -853,9 +523,6 @@ msgstr "E-posti aadress"
 
 msgid "EU VAT ID"
 msgstr "EL KMKR NR"
-
-msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
-msgstr "Iga kasutusaruanne peab olema ühendatud arveldusplaaniga, et tagada raamatupidamisandmete õige arvutamine."
 
 msgid "Edit"
 msgstr "Muuda"
@@ -887,9 +554,6 @@ msgstr "Lõppaeg"
 msgid "English"
 msgstr "Inglise keeles"
 
-msgid "Erred"
-msgstr "Viga"
-
 msgid "Error message"
 msgstr "Veateade"
 
@@ -898,12 +562,6 @@ msgstr "Hinnanguline kuutasu"
 
 msgid "Estimated cost"
 msgstr "Hinnangulised kulud"
-
-msgid "Estimated monthly cost"
-msgstr "Hinnanguline kuu kulu"
-
-msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
-msgstr "Eeldatav kuutasu muutub {old_estimate}-lt {new_estimate}-ni. Käibemaks ei sisaldu."
 
 msgid "Estonian"
 msgstr "Eesti"
@@ -929,41 +587,17 @@ msgstr "Iga päev kell"
 msgid "Every hour"
 msgstr "Iga tund"
 
-msgid "Every hour at {minuteValues} past the hour"
-msgstr "Iga tund {minuteValues} minutit peale täistundi"
-
 msgid "Every minute"
 msgstr "Iga minut"
 
 msgid "Every month"
 msgstr "Iga kuu"
 
-msgid "Every month on the {days} at {time}"
-msgstr "Iga kuu {days} päevadel kell {time}"
-
-msgid "Every month on the {days} of {months} at {time}"
-msgstr "Iga kuu {days} päevadel {months}  kuudel kell {time}"
-
-msgid "Every month service provider can report up to the amount requested by user."
-msgstr "Iga kuu raporteerib teenusepakkuja kasutaja poolt soovitud koguses."
-
 msgid "Every week"
 msgstr "Iga nädal"
 
-msgid "Every week on {day} at {time}"
-msgstr "Iga nädal {day} päeval kell {time}"
-
 msgid "Every year"
 msgstr "Igal aastal"
-
-msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
-msgstr "Näide: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
-
-msgid "Executing"
-msgstr "Käivitan"
-
-msgid "Existing quota usage: {usage}"
-msgstr "Hetke mahulimiidi kasutus: {usage}"
 
 msgid "Expiration time"
 msgstr "Aegumise tähtaeg"
@@ -974,14 +608,8 @@ msgstr "Aegunud"
 msgid "Expires at"
 msgstr "Aegub alates"
 
-msgid "Explore {deployment} Marketplace"
-msgstr "Avasta {deployment} turuplatsi"
-
 msgid "Export as"
 msgstr "Eksport kui"
-
-msgid "Extend"
-msgstr "Laienda"
 
 msgid "Extend OpenStack volume"
 msgstr "Laienda OpenStacki salvestusüksust"
@@ -992,20 +620,11 @@ msgstr "Laiendan"
 msgid "External IP"
 msgstr "Väline IP"
 
-msgid "External links"
-msgstr "Välised lingid"
-
 msgid "External network ID"
 msgstr "Välise võrgu mask (CIDR)"
 
 msgid "Failed to operate with backend."
 msgstr "Rakenduse tagapõhjaga pole võimalik tegutseda"
-
-msgid "Features"
-msgstr "Omadused"
-
-msgid "Fee applied each time this plan is activated."
-msgstr "Tasu, mida rakendatakse iga kord, kui see plaan aktiveeritakse."
 
 msgid "File"
 msgstr "Fail"
@@ -1015,9 +634,6 @@ msgstr "Faili allalaadimine on alanud"
 
 msgid "File has been downloaded."
 msgstr "Fail on allalaaditud"
-
-msgid "Filename"
-msgstr "Faili nimi"
 
 msgid "Files"
 msgstr "Failid"
@@ -1034,9 +650,6 @@ msgstr "Majanduslik ülevaade"
 msgid "Fingerprint"
 msgstr "Sõrmejälg"
 
-msgid "Fixed price"
-msgstr "Fikseeritud hind"
-
 msgid "Flavor"
 msgstr "Tüüp"
 
@@ -1045,15 +658,6 @@ msgstr "Tüübi välistamise regex"
 
 msgid "Flavor name"
 msgstr "Tüübi nimi"
-
-msgid "Flavor name: {flavor_name}"
-msgstr "Tüübi nimi: {flavor_name}"
-
-msgid "Flavors"
-msgstr "Tüübid"
-
-msgid "Flavors List"
-msgstr "Tüüpide nimekiri"
 
 msgid "Flavors matching this regex expression will not be pulled from the backend."
 msgstr "Sellele regexile vastavaid tüüpe ei tõmmata."
@@ -1073,9 +677,6 @@ msgstr "Liikuvad IPd"
 msgid "Flowmap"
 msgstr "Vooskeem"
 
-msgid "Folder"
-msgstr "Kaust"
-
 msgid "For"
 msgstr "Selleks"
 
@@ -1090,9 +691,6 @@ msgstr "Saatja"
 
 msgid "From port"
 msgstr "Pordist"
-
-msgid "Full description"
-msgstr "Täielik kirjeldus"
 
 msgid "Full name"
 msgstr "Täisnimi"
@@ -1109,17 +707,11 @@ msgstr "Võrgulüüs"
 msgid "Gateway IP"
 msgstr "Võrgulüüsi IP"
 
-msgid "Gateway IP of this subnet"
-msgstr "Võrgulüüsi IP antud alamvõrgule"
-
 msgid "General"
 msgstr "Üldine"
 
 msgid "General information"
 msgstr "Üldteave"
-
-msgid "Go to marketplace"
-msgstr "Mine turuplatsile"
 
 msgid "Go to my profile"
 msgstr "Mine minu profiilile"
@@ -1130,9 +722,6 @@ msgstr "Korras!"
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr "Garanteeritud tõmmise säilitamise aeg. Kui null - hoida igavesti."
 
-msgid "Guest OS"
-msgstr "Külalisoperatsioonisüsteem"
-
 msgid "Heatmap"
 msgstr "Kuumkaart"
 
@@ -1142,17 +731,8 @@ msgstr "Klienditeenindus"
 msgid "Helpdesk dashboard"
 msgstr "Klienditeeninduse töölaud"
 
-msgid "Home organization domain name"
-msgstr "Asutuse domeeni nimi"
-
 msgid "Homepage"
 msgstr "Avaleht"
-
-msgid "Hook has been removed."
-msgstr "Haak on eemaldatud"
-
-msgid "Hook removal"
-msgstr "Haagi eemaldamine"
 
 msgid "Hostname or IP address of gateway node"
 msgstr "Lüüsisõlme hostinimi või IP-aadress"
@@ -1184,14 +764,8 @@ msgstr "IP versioon"
 msgid "Image"
 msgstr "Pilt"
 
-msgid "Image here"
-msgstr "Pildi nimi"
-
 msgid "Image name"
 msgstr "Pildi nimi"
-
-msgid "Images"
-msgstr "Pilt"
 
 msgid "Import"
 msgstr "Impordi"
@@ -1204,9 +778,6 @@ msgstr "Impordin ressursse"
 
 msgid "In the format of GUID"
 msgstr "GUID-vormingus"
-
-msgid "Inactive user will not be able to login into the portal."
-msgstr "Mitteaktiivne kasutaja ei saa portaali logida"
 
 msgid "Incident"
 msgstr "Intsident"
@@ -1259,20 +830,11 @@ msgstr "Eksemplar peaks olema välja lülitatud ja OK või väljastanud veate. V
 msgid "Instances count"
 msgstr "Eksemplaride hulk"
 
-msgid "Internal"
-msgstr "Sisemine "
-
 msgid "Internal IP"
 msgstr "Sisemine IP"
 
 msgid "Internal IPs"
 msgstr "Sisemised IP-d"
-
-msgid "Internal name"
-msgstr "Sisemine nimi"
-
-msgid "Internal network ID"
-msgstr "Sisevõrk mask (CIDR)"
 
 msgid "Internal network allocation pool"
 msgstr "Sisemine võrgu jaotusvõrk"
@@ -1286,17 +848,11 @@ msgstr "Tekkis viga \"Internal server error\". Palun proovi uuesti või võta ü
 msgid "Invalid URL. Unable to parse payment details."
 msgstr "Vigane URL. Ei ole võimalik töödelda maksmise detaile"
 
-msgid "Invitation approval"
-msgstr "Kutse ei kehti."
-
 msgid "Invitation could not be accepted"
 msgstr "Kutset ei olnud võimalik vastu võtta"
 
 msgid "Invitation email is:"
 msgstr "Kutse email on:"
-
-msgid "Invitation has been approved."
-msgstr "Kutse on kinnitatud."
 
 msgid "Invitation has been canceled."
 msgstr "Kutse on katkestatud."
@@ -1313,17 +869,11 @@ msgstr "Kutse ei ole korrektne."
 msgid "Invitation is not valid anymore."
 msgstr "Kutse ei ole enam kehtiv."
 
-msgid "Invitation rejection"
-msgstr "Kutse tagasilükkamine"
-
 msgid "Invitation token is not found."
 msgstr "Kutse žetooni ei leitud."
 
 msgid "Invitations"
 msgstr "Kutsed"
-
-msgid "Invite team member"
-msgstr "Kutsu meeskonna liiget"
 
 msgid "Invite user"
 msgstr "Kutsu kasutaja"
@@ -1343,15 +893,6 @@ msgstr "Arve sündmused"
 msgid "Invoice events timeline"
 msgstr "Arve sündmuste ajakava"
 
-msgid "Invoice for organization {customer_link} for the period of {period} has been created."
-msgstr "Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on loodud."
-
-msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
-msgstr "Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on uuendatud."
-
-msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
-msgstr "Arve organisatsioonile {customer_name} perioodi {invoice_date} eest on kustutatud."
-
 msgid "Invoice has not been sent to PayPal yet"
 msgstr "Arvet pole veel PayPali saadetud."
 
@@ -1367,17 +908,11 @@ msgstr "Arvete nimekiri"
 msgid "Is active"
 msgstr "On aktiivne"
 
-msgid "Is external"
-msgstr "Väline"
-
 msgid "Is official"
 msgstr "On ametlik"
 
 msgid "Issue link"
 msgstr "Juhtumi link"
-
-msgid "Issue {issue_link} has been created by {caller_link}."
-msgstr "{Caller_full_name} on loonud juhtumi {issue_key}."
 
 msgid "Issues"
 msgstr "Juhtumid"
@@ -1388,23 +923,11 @@ msgstr "On kasutusel liikuva IP aadressi automaatseks virtuaalsele masinale lisa
 msgid "Item"
 msgstr "Objekt"
 
-msgid "Item has been added to shopping cart."
-msgstr "Objekt on lisatud ostukorvi"
-
-msgid "Item has been removed from shopping cart."
-msgstr "Objekt on ostukorvist eemaldatud"
-
 msgid "Item type"
 msgstr "Elemendi tüüp"
 
 msgid "Job position"
 msgstr "Tööpositsioon"
-
-msgid "Job title"
-msgstr "Ametinimetus"
-
-msgid "Keep forever"
-msgstr "Hoia igavesti"
 
 msgid "Keep until"
 msgstr "Hoia kuni"
@@ -1418,17 +941,11 @@ msgstr "Võti"
 msgid "Key name"
 msgstr "Võtme nimi"
 
-msgid "Key removal"
-msgstr "Võtme eemaldamine"
-
 msgid "Keys"
 msgstr "Võtmed"
 
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr "Keystone autentimine URL (e.g. http://keystone.example.com:5000/v3)"
-
-msgid "Label that is visible to users in Marketplace."
-msgstr "Silt, mis on turuplatsi kasutajatele nähtav"
 
 msgid "Latvian"
 msgstr "Läti"
@@ -1448,26 +965,8 @@ msgstr "Hakkame pihta."
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Töötamise aeg resetitakse vormi salvestamisel."
 
-msgid "Limit"
-msgstr "Limiit"
-
-msgid "Limit amount"
-msgstr "Limiteeri kogus"
-
-msgid "Limit period"
-msgstr "Limiidi periood"
-
-msgid "Limits"
-msgstr "Limiidid"
-
-msgid "Link"
-msgstr "Viide"
-
 msgid "Lithuanian"
 msgstr "Leedu"
-
-msgid "Loading"
-msgstr "Laadimine..."
 
 msgid "Loading actions"
 msgstr "Tegevuste laadimine"
@@ -1487,12 +986,6 @@ msgstr "Logi sisse"
 msgid "Login failed"
 msgstr "Tõrge sisselogimisel"
 
-msgid "Logo has been removed."
-msgstr "Logo on eemaldatud"
-
-msgid "Logo has been uploaded."
-msgstr "Logo on üles laetud."
-
 msgid "Logout failed"
 msgstr "Välja logimine nurjus"
 
@@ -1511,65 +1004,17 @@ msgstr "Halda organisatsiooni"
 msgid "Managed projects"
 msgstr "Hallatavad projektid"
 
-msgid "Management"
-msgstr "Haldus"
-
-msgid "Marketplace"
-msgstr "Turuplats"
-
-msgid "Marketplace checkout"
-msgstr "Turuplatsi kassa"
-
-msgid "Marketplace offering does not have any usage-based components."
-msgstr "Turuplatsi pakkumisel pole ühtegi kasutusel baseeruvat komponenti"
-
-msgid "Marketplace offerings"
-msgstr "Turuplatsi pakkumised"
-
-msgid "Marketplace service provider"
-msgstr "Tennusepakkujat ei õnnestunud salvestada."
-
 msgid "Max # of snapshots"
 msgstr "Maksimaalne tõmmiste arv"
 
 msgid "Maximal number of resources"
 msgstr "Maksimaalne ressursside arv"
 
-msgid "Maximal value"
-msgstr "Maksimaalne väärtus"
-
-msgid "Maximum RAM for each VM"
-msgstr "Maksimaalne RAM iga VM kohta"
-
-msgid "Maximum capacity for each disk"
-msgstr "Iga ketta maksimaalne suurus"
-
-msgid "Maximum monthly"
-msgstr "Maksimaalselt kuus"
-
-msgid "Maximum total"
-msgstr "Maksimaalselt kokku"
-
-msgid "Maximum total size of the disk space per VM"
-msgstr "Kettaruumi maksimaalne kogumaht VM-i kohta"
-
 msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr "Maksimaalne kasutajanime pikkus koos kohustusliku kasutajanime eesliitega on 32 tähemärki."
 
-msgid "Maximum vCPU for each VM"
-msgstr "Maksimaalne vCPU iga VM kohta"
-
-msgid "Measured unit"
-msgstr "Mõõdetud ühik"
-
 msgid "Member"
 msgstr "Liige"
-
-msgid "Memory per vCore"
-msgstr "Mälu ühe vCore kohta"
-
-msgid "Memory size in GiB"
-msgstr "Mälu suurus GiB"
 
 msgid "Message"
 msgstr "Teade"
@@ -1583,9 +1028,6 @@ msgstr "Mõõdik"
 msgid "Min storage"
 msgstr "Min. salvestusmaht"
 
-msgid "Minimal value"
-msgstr "Minimaalne lubatud väärtus"
-
 msgid "Mobile phone number"
 msgstr "Telefoninumber"
 
@@ -1598,21 +1040,6 @@ msgstr "Igakuine kulu"
 msgid "More info"
 msgstr "Lisainfo"
 
-msgid "Must start with a country prefix ie EE34501234215"
-msgstr "Peab algama riigi liitega näiteks EE34501234215"
-
-msgid "My offerings"
-msgstr "Minu pakkumised"
-
-msgid "My orders"
-msgstr "Minu tellimused"
-
-msgid "My resources"
-msgstr "MInu ressursid"
-
-msgid "My services"
-msgstr "Minu teenused"
-
 msgid "Name"
 msgstr "Nimi"
 
@@ -1622,14 +1049,8 @@ msgstr "Nimi juba eksisteerib. Vali uus"
 msgid "Name is required field."
 msgstr "Kasutajanimi on kohustuslik."
 
-msgid "Name is too short, names should be at least two alphanumeric characters."
-msgstr "Nimi on liiga lühike, nimi peab siseldama kahte tähestikust olevat tähte"
-
 msgid "Name of your organization."
 msgstr "Palun valige oma organisatsioon"
-
-msgid "Name should consist of latin symbols and numbers."
-msgstr "Nimi peaks koosnema ladina sümbolitest ja numbritest."
 
 msgid "Name should contain at least 3 symbols."
 msgstr "Nimi peab sisaldama vähemalt kolme sümbolit"
@@ -1640,17 +1061,11 @@ msgstr "Esialgne nimi"
 msgid "Network"
 msgstr "Võrk"
 
-msgid "Network adapters"
-msgstr "Võrguseadmed"
-
 msgid "Networks"
 msgstr "Võrgud"
 
 msgid "New flavor"
 msgstr "Muuda tüüpi"
-
-msgid "New limit"
-msgstr "Uus limiit"
 
 msgid "New plan"
 msgstr "Uus plaan"
@@ -1660,9 +1075,6 @@ msgstr "Uus suurus"
 
 msgid "Next"
 msgstr "Edasi"
-
-msgid "Next trigger at"
-msgstr "Järgmine päästik"
 
 msgid "No"
 msgstr "Ei"
@@ -1676,32 +1088,8 @@ msgstr "Juurdepääsi info puudub"
 msgid "No access info."
 msgstr "Juurdepääsi info puudub"
 
-msgid "No entries to show here"
-msgstr "Sissekanded mida näidata puuduvad"
-
-msgid "No results found"
-msgstr "Tulemusi ei leitud"
-
-msgid "Not a service provider."
-msgstr "Ei õnnestunud teenusepakkujat salvestada."
-
 msgid "Not assigned"
 msgstr "Pole määratud"
-
-msgid "Not running accounting"
-msgstr "Töötav arvepidamine puudub"
-
-msgid "Note that this virtual machine will not be charged separately for {organization}."
-msgstr "Pane tähele et seda virtuaalmasinat tasustatakse kui osa <strong>{serviceName}</strong> paketist."
-
-msgid "Note that this volume will not be charged separately for {organization}."
-msgstr "Pane tähele et seda volüümi tasustatakse kui osa <strong>{serviceName}</strong> paketist."
-
-msgid "Nothing to see here"
-msgstr "Siin pole midagi vaadata"
-
-msgid "Nothing to show here"
-msgstr "Siin pole midagi näidata"
 
 msgid "Notification has been created."
 msgstr "Teade on loodud."
@@ -1715,116 +1103,26 @@ msgstr "Teate edastamise viis"
 msgid "Notifications"
 msgstr "Teavitused"
 
-msgid "Number of CPU cores per socket"
-msgstr "CPU tuumade arv soklite kohta"
-
-msgid "Number of cores in a VM"
-msgstr "Tuumade arv virtuaalmasinas"
+msgid "OK"
+msgstr "Ok"
 
 msgid "Object is not found."
 msgstr "Objekti ei leitud"
 
-msgid "Offering"
-msgstr "Pakkumine"
-
-msgid "Offering details"
-msgstr "Pakkumise üksikasjad"
-
-msgid "Offering has been created."
-msgstr "Pakkumine on loodud"
-
-msgid "Offering has been updated."
-msgstr "Pakkumine on uuendatud"
-
-msgid "Offering is not configured yet."
-msgstr "Pakkumist poel veel seadistatud"
-
-msgid "Offering logo"
-msgstr "Pakun logo"
-
-msgid "Offering state has been updated."
-msgstr "Pakkumise staatust on uuendatud"
-
-msgid "Offering type"
-msgstr "Pakkumise tüüp"
-
-msgid "Offerings"
-msgstr "Pakkumised"
-
-msgid "One-time"
-msgstr "Üks kord"
-
-msgid "One-time on plan switch"
-msgstr "Ühekordne plaanivahetus"
-
 msgid "Only customer owner or staff can invite users."
 msgstr "Ainult kliendi omanik või töötaja saab kutsuda uusi kasutajaid."
-
-msgid "Only pending and expired invitations can be sent again."
-msgstr "Ainult ootel olevat või aegunud kutset saab uuesti saata."
 
 msgid "Only pending invitation can be canceled."
 msgstr "Ainult ootel olevat kutset saab katkestada."
 
-msgid "Only staff and organization users are allowed to open console."
-msgstr "Ainult personali hulka kuuluv kasutaja saab uuendada organisatsiooni poliitikat."
-
-msgid "Only staff can manage OpenStack tenant."
-msgstr "Ainult personali hulka kuuluv kasutaja saab muuta OpenStacki"
-
 msgid "Only staff can remove organization."
 msgstr "Ainult personali hulka kuuluv kasutaja saab eemaldada organisatsiooni."
-
-msgid "Only staff users are allowed to perform this action."
-msgstr "Ainult personali hulka kuuluvad kasutajad saavad seda toimingut teha."
 
 msgid "Open"
 msgstr "Ava"
 
-msgid "OpenStack Images"
-msgstr "Laienda OpenStack volüümi"
-
-msgid "OpenStack package"
-msgstr "OpenStacki pakett"
-
-msgid "Open console"
-msgstr "Ava konsool"
-
-msgid "Open support portal"
-msgstr "Ava abiportaal"
-
 msgid "Or use social login"
 msgstr "Või sisene sotsiaalmeedia kontoga"
-
-msgid "Order Summary"
-msgstr "Tellimuse kokkuvõte"
-
-msgid "Order details"
-msgstr "Tellimuse üksikasjad"
-
-msgid "Order has been approved."
-msgstr "Tellimus on kinnitatud"
-
-msgid "Order has been rejected."
-msgstr "Tellimus on tagas lükatud"
-
-msgid "Order has been submitted."
-msgstr "Tellimus on edastatud"
-
-msgid "Order item details"
-msgstr "Tellimuse objekti üksikasjad"
-
-msgid "Order item has cancel has been scheduled."
-msgstr "Tellimuse objekti  tühistamine on planeeritud."
-
-msgid "Order items"
-msgstr "Tellimused"
-
-msgid "Order summary"
-msgstr "Tellimuse kokkuvõte"
-
-msgid "Orders"
-msgstr "Tellimused"
 
 msgid "Organization"
 msgstr "Asutus"
@@ -1862,32 +1160,11 @@ msgstr "Organisatsiooni registreerimise kood"
 msgid "Organization removal"
 msgstr "Organisatsiooni kustutamine"
 
-msgid "Organization roles"
-msgstr "Organisatsiooni rollid"
-
 msgid "Organization workspace"
 msgstr "Organisatsiooni tööruum"
 
-msgid "Organization {customer_link} has been created."
-msgstr "Organisatsioon {customer_link} on loodud."
-
-msgid "Organization {customer_link} has been updated."
-msgstr "Organisatsioon {customer_link} on muudetud."
-
-msgid "Organization {customer_name} has been deleted."
-msgstr "Organisatsioon {customer_name} on kustutatud."
-
 msgid "Organizations"
 msgstr "Asutused"
-
-msgid "Overview"
-msgstr "Ülevaade"
-
-msgid "Overview of {organization} organization"
-msgstr "Organisatsiooni {organization} ülevaade"
-
-msgid "Overview of {project} project"
-msgstr "Projekti {project} ülevaade"
 
 msgid "Owned organizations"
 msgstr "Omanduses olevad organisatsioonid"
@@ -1907,29 +1184,11 @@ msgstr "Tasuline"
 msgid "Password"
 msgstr "Parool"
 
-msgid "Password has been changed for user {affected_user_link}."
-msgstr "Kasutaja {affected_user_full_name} parool on muudetud"
-
-msgid "Pause"
-msgstr "Peata ajutiselt"
-
-msgid "Pause offering"
-msgstr "Peata ajutiselt pakkumine"
-
-msgid "Paused"
-msgstr "Ajutiselt peatatud"
-
 msgid "Pay invoice"
 msgstr "Maksa arve"
 
 msgid "Payment events"
 msgstr "Makse sündmused"
-
-msgid "Payment for {customer_link} has been approved."
-msgstr "Maksed kliendile {customer_name} on kinnitatud."
-
-msgid "Payment for {customer_link} has been cancelled."
-msgstr "Maksed kliendile {customer_name} on katkestatud."
 
 msgid "Payment has been processed successfully."
 msgstr "Makse on edukalt töödeldud."
@@ -1942,30 +1201,6 @@ msgstr "Makse ootel"
 
 msgid "Pending"
 msgstr "Ootel"
-
-msgid "Pending approval for changing of"
-msgstr "Ootel kinnitus, et muuta"
-
-msgid "Pending approval for creation of"
-msgstr "Ootel kinnitus, et luua"
-
-msgid "Pending approval for removal of"
-msgstr "Ootel kinnitus, et eemaldada"
-
-msgid "Per day"
-msgstr "Igal päeval"
-
-msgid "Per half month"
-msgstr "Iga poole kuu kohta"
-
-msgid "Per hour"
-msgstr "Iga tund"
-
-msgid "Per month"
-msgstr "Iga kuu"
-
-msgid "Period"
-msgstr "Periood"
 
 msgid "Permanent"
 msgstr "Püsiv"
@@ -1982,56 +1217,8 @@ msgstr "Telefoninumber"
 msgid "Phone numbers"
 msgstr "Telefoninumbrid"
 
-msgid "Plan"
-msgstr "Plaan"
-
-msgid "Plan #{index}"
-msgstr "Plaani #{index}"
-
-msgid "Plan capacity"
-msgstr "Plaani mahutavus"
-
-msgid "Plan capacity is full."
-msgstr "Plaani mahutavus on täis"
-
-msgid "Plan component name"
-msgstr "Plaani komponendi nimi"
-
-msgid "Plan components"
-msgstr "Plaani komponendid"
-
-msgid "Plan description"
-msgstr "Plaani kirjeldus"
-
-msgid "Plan details"
-msgstr "Plaani üksikasjad"
-
-msgid "Plan does not have limit"
-msgstr "Plaanil pole limiiti"
-
-msgid "Plan name"
-msgstr "Plaani nimi"
-
-msgid "Plan price"
-msgstr "Plaani hind"
-
-msgid "Planned quota usage: {usage}"
-msgstr "Planeeritud kvoodi kasutamine: {usage}"
-
-msgid "Please create a new one:"
-msgstr "Palun looge uus:"
-
-msgid "Please create a new one picking the profile that best matches your organization:"
-msgstr "Palun looge uus, valides profiili, mis sobib kõige paremini teie organisatsiooniga:"
-
-msgid "Please enter desired values in the rows below:"
-msgstr "Palun sisestage soovitud kogused all olevatele ridadele"
-
 msgid "Please give us a moment to validate your invitation."
 msgstr "Palun anna meile hetk kutse kinnitamiseks."
-
-msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
-msgstr "Palun veenduge, et teate, mida teete, ja määrake 10 minutiks, kui te pole kindel."
 
 msgid "Please note that request should specify tenant and provide a reason."
 msgstr "Pange tähele, et taotluses tuleks näidata rentniku ja põhjendada."
@@ -2048,23 +1235,11 @@ msgstr "Palun esitage oma ettevõtte registreerimiskood."
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr "Esitage EL KMKR NR kui te olete registreeritud Euroopa Liidus."
 
-msgid "Please search for your organization"
-msgstr "Palun otsige oma organisatsiooni"
-
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr "Valige kasutajanimi, mida kasutate sisselogimiseks Linux süsteemidesse."
 
-msgid "Please select flavor to see price estimate."
-msgstr "Palun vali meeskond"
-
-msgid "Please select type in Management tab first."
-msgstr "Palun valige esmalt halduse alamjaotusest tüüp"
-
 msgid "Please select your language"
 msgstr "Palun valige keel"
-
-msgid "Please use Latin letters without spaces only."
-msgstr "Palun kasutage ainult tühikuteta ladina tähti."
 
 msgid "Port range"
 msgstr "Pordivahemik"
@@ -2084,41 +1259,14 @@ msgstr "Eelmine"
 msgid "Price"
 msgstr "Hind"
 
-msgid "Price for consumption"
-msgstr "Tarbimise hind"
-
 msgid "Price is estimated."
 msgstr "Hind on arvestuslik."
-
-msgid "Price per 30 days"
-msgstr "30 päeva hind"
-
-msgid "Price per 365 days"
-msgstr "365 päeva hind"
 
 msgid "Price per day"
 msgstr "Päeva hind"
 
-msgid "Price per half-month"
-msgstr "Poole kuu hind"
-
-msgid "Price per half month"
-msgstr "Poole kuu hind"
-
-msgid "Price per hour"
-msgstr "Tunnihind"
-
 msgid "Price per month"
 msgstr "Hind kuus"
-
-msgid "Price per unit"
-msgstr "Hind ühiku kohta"
-
-msgid "Price per year"
-msgstr "HInd aasta kohta"
-
-msgid "Pricing tier"
-msgstr "Hinnakujunduse määramistasand"
 
 msgid "Print invoice"
 msgstr "Prindi arve"
@@ -2159,14 +1307,8 @@ msgstr "Projekti on loodud."
 msgid "Project has been removed successfully."
 msgstr "Projekt on edukalt eemaldatud."
 
-msgid "Project has been renamed from {project_previous_name} to {project_link}."
-msgstr "Project {project_previous_name} on nimetatud ümber projektiks {project_link}."
-
 msgid "Project has been updated."
 msgstr "Projekti on uuendatud."
-
-msgid "Project is not selected."
-msgstr "Projekti pole valitud."
 
 msgid "Project manager"
 msgstr "Projektihaldur"
@@ -2177,32 +1319,14 @@ msgstr "Projektijuht ei saa muuta kasutajaid kes on samas rollis."
 msgid "Project name"
 msgstr "Projekti nimi"
 
-msgid "Project removal"
-msgstr "Projekti eemaldamine"
-
-msgid "Project roles"
-msgstr "Projekti rollid"
-
 msgid "Project type"
 msgstr "Projekti tüüp"
 
 msgid "Project workspace"
 msgstr "Projekti töölaud"
 
-msgid "Project {project_link} has been created."
-msgstr "Projekt {project_link} on loodud."
-
-msgid "Project {project_link} has been updated."
-msgstr "Projekt {project_link} on muudetud."
-
-msgid "Project {project_name} has been deleted."
-msgstr "Projekt {project_name} on kustutatud."
-
 msgid "Projects"
 msgstr "Projektid"
-
-msgid "Projects ({count})"
-msgstr "Projekte ({count})"
 
 msgid "Projects list"
 msgstr "Projektide nimekiri"
@@ -2219,29 +1343,11 @@ msgstr "Teenusepakkuja ei vasta projektile kehtestatud nõutele"
 msgid "Provider has been updated."
 msgstr "Teenusepakkuja on muudetud."
 
-msgid "Provider location"
-msgstr "Teenusepakkuja asukoht"
-
 msgid "Provider name"
 msgstr "Teenusepakkuja nimi"
 
-msgid "Provision new resource"
-msgstr "Tekita uus resurss"
-
 msgid "Public key"
 msgstr "Avalik võti"
-
-msgid "Public offerings"
-msgstr "Avalikud pakkumised"
-
-msgid "Public orders"
-msgstr "Avalikud tellimused"
-
-msgid "Public resources"
-msgstr "Avalikud ressursid"
-
-msgid "Public services"
-msgstr "Avalikud teenused"
 
 msgid "Pulling"
 msgstr "Tõmban"
@@ -2252,9 +1358,6 @@ msgstr "Tõmban kvoote"
 msgid "Purchase"
 msgstr "Ost"
 
-msgid "Purchase and usage is invoiced."
-msgstr "Ostu ja kasutamise eest esitatakse arve."
-
 msgid "Quantity"
 msgstr "Kogus"
 
@@ -2264,20 +1367,17 @@ msgstr "Limiit on täis."
 msgid "Quotas"
 msgstr "Kvoodid"
 
+msgid "RAM"
+msgstr "RAM"
+
 msgid "RAM usage"
 msgstr "RAMi kasutus"
-
-msgid "Rating"
-msgstr "Hinnang"
 
 msgid "Reason"
 msgstr "Põhjus"
 
 msgid "Reason unknown, please contact support."
 msgstr "Põhjus teadmata, võtke ühendust kasutajatoega."
-
-msgid "Recent additions"
-msgstr "Viimased täiendused"
 
 msgid "Record no."
 msgstr "Kande number"
@@ -2294,29 +1394,14 @@ msgstr "Kirje periood"
 msgid "Refresh"
 msgstr "Värskenda"
 
-msgid "Regenerate"
-msgstr "Genereeri uuesti"
-
-msgid "Region"
-msgstr "Piirkond"
-
 msgid "Region name"
 msgstr "Piirkonna nimi"
 
 msgid "Register"
 msgstr "Registeeru"
 
-msgid "Register as service provider"
-msgstr "Registreeri ennast teenusepakkujaks"
-
 msgid "Register to"
 msgstr "Registreeru"
-
-msgid "Register with {label}"
-msgstr "{label}"
-
-msgid "Registered at:"
-msgstr "Registreeritud"
 
 msgid "Registration code"
 msgstr "Registreeringu kood"
@@ -2330,35 +1415,14 @@ msgstr "Registrikood"
 msgid "Regular user"
 msgstr "Tavakasutaja"
 
-msgid "Reject"
-msgstr "Lükka tagasi"
-
-msgid "Rejected"
-msgstr "Tagasi lükatud"
-
 msgid "Release floating IPs"
 msgstr "Vabasta liikuvad IPd"
-
-msgid "Reload"
-msgstr "Taaslaadi"
 
 msgid "Reload issue data"
 msgstr "Laadige probleemi andmed uuesti"
 
-msgid "Remaining"
-msgstr "Allesjäänud"
-
-msgid "Remaining amount"
-msgstr "Allesjäänud maht"
-
 msgid "Remove"
 msgstr "Eemalda"
-
-msgid "Remove from comparison"
-msgstr "Eemalda võrdlusest"
-
-msgid "Remove logo"
-msgstr "Eemalda logo"
 
 msgid "Remove organization"
 msgstr "Eemalda organisatsioon"
@@ -2366,38 +1430,17 @@ msgstr "Eemalda organisatsioon"
 msgid "Remove profile"
 msgstr "Eemalda profiil"
 
-msgid "Report"
-msgstr "Raporteeri"
-
-msgid "Report an issue"
-msgstr "Raporteeri probleemist"
-
 msgid "Report details"
 msgstr "Raporteeri üksikasju"
 
 msgid "Report incorrect data"
 msgstr "Anna teada ebakorrektsetest andmetest"
 
-msgid "Report usage"
-msgstr "Raporteeri ressursi kasutusest"
-
 msgid "Reported by me"
 msgstr "Minu poolt raporteeritud"
 
 msgid "Reporter"
 msgstr "Raporteerija"
-
-msgid "Request-based item"
-msgstr "Taotluspõhine üksus"
-
-msgid "Request account removal for {userName}."
-msgstr "Nõua kasutajakonto  {userName} eemaldamist "
-
-msgid "Request an approval"
-msgstr "Nõua kinnitust"
-
-msgid "Request demo"
-msgstr "Päringu eemaldamine"
 
 msgid "Request description"
 msgstr "Päringu kirjeldus"
@@ -2414,12 +1457,6 @@ msgstr "Küsi otseligipääsu"
 msgid "Request direct access to OpenStack Tenant"
 msgstr "Küsi otseligipääsu OpenStack rentnikule"
 
-msgid "Request for a change"
-msgstr "Muutmistaotlus"
-
-msgid "Request for a termination"
-msgstr "Lõpetamise taotlus"
-
 msgid "Request removal"
 msgstr "Päringu eemaldamine"
 
@@ -2429,32 +1466,17 @@ msgstr "Päringu nimi"
 msgid "Request type"
 msgstr "Päringu liik"
 
-msgid "Request {requestId} has been created."
-msgstr "Päring {requestId} on loodud."
-
-msgid "Requested"
-msgstr "Taodeldud"
-
-msgid "Requested by"
-msgstr "Taodeldud "
-
-msgid "Required"
-msgstr "Nõutud"
-
 msgid "Resend"
 msgstr "Saada uuesti"
 
 msgid "Resize droplet"
 msgstr "Muuda dropletide suurust"
 
+msgid "Resolution"
+msgstr "Resolutsioon"
+
 msgid "Resource"
 msgstr "Ressurss"
-
-msgid "Resource UUID"
-msgstr "Ressursi UUID"
-
-msgid "Resource already has this plan."
-msgstr "Ressursil on see plaan juba olemas."
 
 msgid "Resource configuration"
 msgstr "Ressursside häälestamine"
@@ -2462,47 +1484,14 @@ msgstr "Ressursside häälestamine"
 msgid "Resource configuration is invalid. Please fix errors in form."
 msgstr "Ressurssi seadistus on vigane. Palun paranda vead vormis."
 
-msgid "Resource description"
-msgstr "Ressursi kirjeldus"
-
-msgid "Resource does not have any plan."
-msgstr "Ressursil pole mingit plaani."
-
-msgid "Resource does not have plan."
-msgstr "Ressursside arv "
-
 msgid "Resource events"
 msgstr "Ressurssi sündmused"
-
-msgid "Resource group"
-msgstr "Ressursi grupp"
 
 msgid "Resource is in sync"
 msgstr "Ressurss on sünkroniseeritud."
 
-msgid "Resource is not connected to the marketplace yet."
-msgstr "Reusurss ei ole veel turuplatsiga ühendatud"
-
-msgid "Resource limits change request has been submitted."
-msgstr "Ressursi importimist on alustatud"
-
-msgid "Resource link"
-msgstr "Ressursi viide"
-
-msgid "Resource name"
-msgstr "Ressursi nimi"
-
-msgid "Resource plan change request has been submitted."
-msgstr "Ressursi importimist on alustatud"
-
-msgid "Resource termination request has been submitted."
-msgstr "Ressursi importimist on alustatud"
-
 msgid "Resource usage"
 msgstr "Ressursi kasutus"
-
-msgid "Resource usage for {resource}"
-msgstr "Ressursi {resource} kasutus"
 
 msgid "Resources"
 msgstr "Ressursid"
@@ -2515,9 +1504,6 @@ msgstr "Taaskäivitamine"
 
 msgid "Restarting"
 msgstr "Taaskäivitamine"
-
-msgid "Restore"
-msgstr "Taasta"
 
 msgid "Restored volumes"
 msgstr "Taastatud salvestusüksused"
@@ -2537,9 +1523,6 @@ msgstr "Säilitamise aeg päevades, kui 0 hoitakse resurssi igavesti"
 msgid "Retry"
 msgstr "Proovige uuesti"
 
-msgid "Review"
-msgstr "Ülevaade"
-
 msgid "Role"
 msgstr "Roll"
 
@@ -2551,9 +1534,6 @@ msgstr "Roll projekti juures"
 
 msgid "Role management events"
 msgstr "Rollide halduse sündmused"
-
-msgid "Running accounting"
-msgstr "Jooksev raamatupidamine"
 
 msgid "Runtime state"
 msgstr "Käitusaegne staatus"
@@ -2570,29 +1550,11 @@ msgstr "SLURMi eraldamine"
 msgid "SLURM allocation usage"
 msgstr "SLURM-i jaotuse kasutamine"
 
-msgid "SQL server description"
-msgstr "SQL serveri kirjeldus"
-
-msgid "SQL server name"
-msgstr "SQL serveri nimi"
-
 msgid "SSH Keys"
 msgstr "SSH võtmed"
 
 msgid "SSH key"
 msgstr "SSH võti"
-
-msgid "SSH key has been removed."
-msgstr "SSH võti on eemaldatud"
-
-msgid "SSH key management events"
-msgstr "SSH võtmete halduse sündmused"
-
-msgid "SSH key {ssh_key_name} has been created for user {user_link}"
-msgstr "SSH võti {ssh_key_name} on loodud kasutajale {user_link}"
-
-msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
-msgstr "SSH võti {ssh_key_name} on kustutatud kasutajale {user_link}"
 
 msgid "SSH keys"
 msgstr "SSH võtmed"
@@ -2612,9 +1574,6 @@ msgstr "Ajagraafik"
 msgid "Search"
 msgstr "Otsing"
 
-msgid "Search for offerings..."
-msgstr "Otsi teenust"
-
 msgid "Security group does not contain any rule yet."
 msgstr "Turvagrupp ei sisalda veel ühtegi reeglit."
 
@@ -2627,23 +1586,11 @@ msgstr "Turvagruppide detailid"
 msgid "See all"
 msgstr "Vaata kõiki"
 
-msgid "Seems there's nothing here"
-msgstr "Paistab, et siin pole midagi"
-
-msgid "Seems you don't have any public resources yet"
-msgstr "Sul ei ole veel ressursse."
-
-msgid "Seems you don't have any resources yet"
-msgstr "Sul ei ole veel ressursse."
-
 msgid "Segmentation ID"
 msgstr "Segmentatsiooni ID"
 
 msgid "Select"
 msgstr "Vali"
-
-msgid "Select accounting period"
-msgstr "Vali arveldamise periood"
 
 msgid "Select affected resource..."
 msgstr "Valige seotud ressurss..."
@@ -2654,23 +1601,11 @@ msgstr "Kellele määratud..."
 msgid "Select caller..."
 msgstr "Valige pöörduja..."
 
-msgid "Select category..."
-msgstr "Valige kategooria"
-
 msgid "Select connected subnet"
 msgstr "Valige ühendatud alamvõrgud"
 
 msgid "Select country..."
 msgstr "Valige riik..."
-
-msgid "Select dates"
-msgstr "Valitud ajad"
-
-msgid "Select instance..."
-msgstr "Vali üksused..."
-
-msgid "Select offering..."
-msgstr "Vali pakkumine..."
 
 msgid "Select organization..."
 msgstr "Valige organisatsioon..."
@@ -2681,41 +1616,20 @@ msgstr "Vali projekt"
 msgid "Select project..."
 msgstr "Valige projekt..."
 
-msgid "Select provider..."
-msgstr "Vali teenusepakkuja"
-
 msgid "Select role"
 msgstr "Vali roll"
 
 msgid "Select security groups..."
 msgstr "Vali turvagrupid..."
 
-msgid "Select service provider"
-msgstr "Vali teenusepakkuja"
-
 msgid "Select size..."
 msgstr "Vali suurus..."
-
-msgid "Select some files"
-msgstr "Vali mõni fail"
-
-msgid "Select state..."
-msgstr "Vali olek..."
-
-msgid "Select status"
-msgstr "Vali staatus"
 
 msgid "Select subnet"
 msgstr "Valige alamvõrk"
 
 msgid "Select subnets to connect to..."
 msgstr "Valige alamvõrgud ühendamiseks..."
-
-msgid "Select tenant..."
-msgstr "Vali üürnik..."
-
-msgid "Select type..."
-msgstr "Vali tüüp..."
 
 msgid "Select user..."
 msgstr "Valige kasutaja..."
@@ -2732,32 +1646,11 @@ msgstr "Saada teade"
 msgid "Sent"
 msgstr "Saadetud"
 
-msgid "Service Provider"
-msgstr "Teenusepakkuja"
-
 msgid "Service Request"
 msgstr "Tellimus"
 
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr "Tellimus – kliendi soov teenuse osalise või täieliku funktsionaalsuse, ligipääsu või komponentide muutmiseks, lisamiseks, liigutamiseks või eemaldamiseks"
-
-msgid "Service provider"
-msgstr "Teenusepakkuja"
-
-msgid "Service provider API secret code has been generated."
-msgstr "Teenusepakkuja API salajane kood on loodud."
-
-msgid "Service provider can charge for usage of the following components"
-msgstr "Teenusepakkuja võib küsida tasu järgmiste komponentide kasutamise eest"
-
-msgid "Service provider can report up to the requested amount over the whole active state of resource."
-msgstr "Teenusepakkuja saab kogu aktiivse ressursi oleku ajal esitada taotletud summa."
-
-msgid "Service provider details"
-msgstr "Teenusepakkuja üksikasjad"
-
-msgid "Service provider has been registered."
-msgstr "Eksperdi pakkuja on registreeritud"
 
 msgid "Service provider type"
 msgstr "Vali teenusepakkuja liik..."
@@ -2774,35 +1667,8 @@ msgstr "Määra reeglid"
 msgid "Set to true to activate privilege escalation"
 msgstr "Seadistage väärtuseks true, et aktiveerida privileegide eskalatsioon"
 
-msgid "Shared"
-msgstr "Jagatud"
-
-msgid "Shared providers"
-msgstr "Jagatud teenusepakkujad"
-
-msgid "Shopping cart is empty. You should add items to cart first."
-msgstr "Ostukorv on tühi Esmalt peaksite sinna midagi."
-
-msgid "Shopping cart item has been updated."
-msgstr "Ostukorvis asuv objekt on uuendatud"
-
-msgid "Shopping cart item update"
-msgstr "Ostukorvis asuva objekti uuendus"
-
-msgid "Show"
-msgstr "Näita"
-
 msgid "Show all"
 msgstr "Näita kõiki"
-
-msgid "Show chart"
-msgstr "Näita ostukorvi"
-
-msgid "Show choices"
-msgstr "Näita valikuid"
-
-msgid "Show console log"
-msgstr "Näita konsooli logi"
 
 msgid "Show details"
 msgstr "Näita detaile"
@@ -2819,35 +1685,17 @@ msgstr "Näita privaatset"
 msgid "Show report"
 msgstr "Näita raportit"
 
-msgid "Show request"
-msgstr "Näita päringut"
-
 msgid "Show shared"
 msgstr "Näita jagatud"
 
-msgid "Show usage"
-msgstr "Näita kasutust"
-
-msgid "Show user details"
-msgstr "Kasutaja üksikasjad"
-
-msgid "Show with running accounting"
-msgstr "Näita ainult jooksva arveldusega"
-
 msgid "Sign in"
 msgstr "Logi sisse"
-
-msgid "Sign in with {label}"
-msgstr "{label}"
 
 msgid "Size"
 msgstr "Suurus"
 
 msgid "Size name"
 msgstr "Suuruse nimi"
-
-msgid "Skip connection to external network"
-msgstr "Jäta välise võrguga ühendumine vahele"
 
 msgid "Skip floating IP assignment"
 msgstr "Jäta vahele liikuva IP omistamine"
@@ -2882,9 +1730,6 @@ msgstr "Käivitan"
 msgid "State"
 msgstr "Olek"
 
-msgid "Status"
-msgstr "Staatus"
-
 msgid "Step 2. Select resources"
 msgstr "Samm 2. Vali ressursid"
 
@@ -2897,20 +1742,8 @@ msgstr "Peatan"
 msgid "Storage"
 msgstr "Andmehoidla"
 
-msgid "Storage size"
-msgstr "Andmehoidla suurus"
-
-msgid "Storage size in GiB"
-msgstr "Andmehoidla suurus GiB"
-
-msgid "Storage type"
-msgstr "Andmehoidla tüüp"
-
 msgid "Submit"
 msgstr "Saada"
-
-msgid "Submit usage report"
-msgstr "Sisesta kasutusraport"
 
 msgid "Submit with"
 msgstr "Sisesta koos"
@@ -2972,29 +1805,11 @@ msgstr "Maks. tõmmiste arv."
 msgid "Tax"
 msgstr "Maks"
 
-msgid "Tax number"
-msgstr "Maksu number"
-
 msgid "Team"
 msgstr "Meeskond"
 
 msgid "Team size"
 msgstr "Meeskonna suurus"
-
-msgid "Technical code used by accounting software."
-msgstr "Raamatupidamistarkvara kasutatav tehniline kood."
-
-msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
-msgstr "Integreerimiseks ja automatiseeritud aruandluseks mõeldud tehniline nimi. Palun kasutage ainult tühikuteta ladina tähti."
-
-msgid "Template"
-msgstr "Mall"
-
-msgid "Template files"
-msgstr "Malli failid"
-
-msgid "Tenant description"
-msgstr "Tenanti kirjeldus"
 
 msgid "Tenant name"
 msgstr "Tenanti nimi"
@@ -3005,41 +1820,11 @@ msgstr "Esialgne parool"
 msgid "Tenant user username"
 msgstr "Tenanti nimi"
 
-msgid "Terminate"
-msgstr "Peata"
-
-msgid "Terminate an existing resource"
-msgstr "Sellele ressursile puuduvad sündmused."
-
-msgid "Terminate resource {resourceName}"
-msgstr "Peata resurss {resourceName}"
-
-msgid "Terminated"
-msgstr "Peatatud"
-
-msgid "Terminating"
-msgstr "Peatan"
-
 msgid "Terms of Service"
 msgstr "Teenustingimused"
 
 msgid "Terms of service"
 msgstr "Teenustingimused"
-
-msgid "The key has been created."
-msgstr "Võti on loodud"
-
-msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
-msgstr "Nimi võib sisaldada ainult tähti, numbreid ja sidekriipsu. See peaks algama tähega ja lõppema tähe või numbriga"
-
-msgid "The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name."
-msgstr "Nimi võib koosneda ainult väiketähtedest, numbritest ja sidekriipsust. Sidekriips ei tohi nime viia ega jälgi ajada."
-
-msgid "The name must be shorter than 15 characters."
-msgstr "Nimi peab olema lühem kui 15 märki"
-
-msgid "The project will be changed for all items in cart."
-msgstr "Projekti muudetakse kõigi ostukorvi toodete osas."
 
 msgid "There are no actions."
 msgstr "Tegevusi ei ole."
@@ -3050,44 +1835,20 @@ msgstr "Ühtegi kättesaadavat projekti ei ole."
 msgid "There are no available users."
 msgstr "Kasutajaid ei ole."
 
-msgid "There are no categories in marketplace yet."
-msgstr "Turuplatsil puuduvad kategooriad"
-
-msgid "There are no charts yet."
-msgstr "Ostukorve pole veel"
-
 msgid "There are no comments yet."
 msgstr "Kommentaare veel ei ole."
 
 msgid "There are no events for this resource."
 msgstr "Sellele ressursile puuduvad sündmused."
 
-msgid "There are no offerings in marketplace yet."
-msgstr "Turuplatsil pole veel ühtegi pakkumist"
-
 msgid "There are no organizations matching filter."
 msgstr "Filtrile vastavaid organisatsioone ei ole."
-
-msgid "There are no other plans available."
-msgstr "Muid plaane pole saadaval."
 
 msgid "There are no projects yet for this organization."
 msgstr "Sellele organisatsioonil ei ole veel projekte."
 
 msgid "There are no requests yet."
 msgstr "Päringuid ei ole veel."
-
-msgid "There are no resources yet."
-msgstr "Ressursse veel ei ole"
-
-msgid "There are no sections for comparison yet."
-msgstr "Veel pole sektsioone mida võrrelda"
-
-msgid "There are no {verboseName} found matching the filter."
-msgstr "Filtrile vastavat {verboseName} ei leitud."
-
-msgid "There are no {verboseName} yet."
-msgstr "{verboseName} veel ei ole."
 
 msgid "There is no activity yet."
 msgstr "Tegevused veel puuduvad."
@@ -3125,14 +1886,8 @@ msgstr "Oma pilvede kontrolli alla saamiseks sisestage oma andmed."
 msgid "To port"
 msgstr "Porti"
 
-msgid "To remove account, please send a request to {support}."
-msgstr "Konto eemaldamiseks saada palun taotlus {support}"
-
 msgid "Total"
 msgstr "Kokku"
-
-msgid "Total: {total}"
-msgstr "Kokku: {total}"
 
 msgid "Total cost:"
 msgstr "Kulud kokku"
@@ -3155,41 +1910,17 @@ msgstr "Tüüp"
 msgid "Unable to activate account."
 msgstr "Ei ole võimalik kontot aktiveerida."
 
-msgid "Unable to activate user."
-msgstr "Kasutajat pole võimalik aktiveerida"
-
-msgid "Unable to add item to shopping cart."
-msgstr "Kaupa ei saa ostukorvi lisada."
-
-msgid "Unable to approve invitation."
-msgstr "Kutset ei saa kinnitada"
-
-msgid "Unable to approve order."
-msgstr "Tellimust pole võimalik kinnitada"
-
 msgid "Unable to authenticate using Mobile ID."
 msgstr "Mobiili IDga pole võimalik autentida"
 
 msgid "Unable to cancel invitation."
 msgstr "Kutset ei ole võimalik katkestada"
 
-msgid "Unable to cancel order item."
-msgstr "Tellimisüksust ei saa tühistada."
-
 msgid "Unable to create a FreeIPA profile."
 msgstr "Ei saa luua FreeIPA profiili."
 
 msgid "Unable to create application."
 msgstr "Rakendust ei saa luua"
-
-msgid "Unable to create key."
-msgstr "Võtit ei saa luua"
-
-msgid "Unable to create offering."
-msgstr "Pakkumist ei saa luua"
-
-msgid "Unable to deactivate user."
-msgstr "Kasutajat ei saa deaktiveerida"
 
 msgid "Unable to delete attachment."
 msgstr "Manust ei saa kustutada."
@@ -3212,35 +1943,8 @@ msgstr "Andmeid ei saa laadida"
 msgid "Unable to find:"
 msgstr "Ei saa linki luua."
 
-msgid "Unable to generate service provider API secret code."
-msgstr "Teenusepakkuja API salakoodi ei õnnestu luua."
-
-msgid "Unable to get form's data."
-msgstr "Vormide andmeid ei õnnestunud laadida"
-
-msgid "Unable to get order item."
-msgstr "Tellotid objekti ei õnnestunud hankida"
-
-msgid "Unable to get service provider API secret code."
-msgstr "Teenusepakkuja API salakoodi ei õnnestu hankida."
-
-msgid "Unable to initialize shopping cart."
-msgstr "Ostukorvi ei õnnestunud initsialiseerida"
-
-msgid "Unable to load actions"
-msgstr "Ei ole võimalik laadida kommentaare."
-
-msgid "Unable to load category sections."
-msgstr "Kategooria sektsioone ei õnnestunud laadida"
-
-msgid "Unable to load charts."
-msgstr "Ostukorve ei õnnestunud laadida"
-
 msgid "Unable to load comments."
 msgstr "Ei ole võimalik laadida kommentaare."
-
-msgid "Unable to load data."
-msgstr "Andmeid ei õnnestunud laadida"
 
 msgid "Unable to load events for this resource."
 msgstr "Selle ressursi sündmusi ei õnnestunud laadida"
@@ -3248,92 +1952,11 @@ msgstr "Selle ressursi sündmusi ei õnnestunud laadida"
 msgid "Unable to load file."
 msgstr "Faili pole võimalik laadida"
 
-msgid "Unable to load financial overview."
-msgstr "Finantsilist ülevaadet ei õnnestundu laadida"
-
-msgid "Unable to load form options."
-msgstr "Vormi seadistusi ei õnnestunud laadida"
-
-msgid "Unable to load locations."
-msgstr "Asukohti ei õnnestunud laadida"
-
-msgid "Unable to load marketplace categories."
-msgstr "Turuplatsi kategooriaid ei õnnestunud laadida"
-
-msgid "Unable to load marketplace category details"
-msgstr "Ei ole võimalik laadida turuplatsi kategooria detaile"
-
-msgid "Unable to load marketplace offering details."
-msgstr "Ei ole võimalik laadida turuplatsi pakkumise detaile"
-
-msgid "Unable to load marketplace offerings."
-msgstr "Ei ole võimalik laadida turuplatsi pakkumisi"
-
-msgid "Unable to load offering."
-msgstr "Ei ole võimalik laadida pakkumisi."
-
-msgid "Unable to load offering details."
-msgstr "Ei ole võimalik laadida pakkumise detaile."
-
-msgid "Unable to load order details."
-msgstr "Ei ole võimalik laadida tellimuse detaile."
-
-msgid "Unable to load organization resources."
-msgstr "Ei ole võimalik laadida organisatsiooni resursse."
-
-msgid "Unable to load pending orders."
-msgstr "Ei ole võimalik laadida ootel olevaid tellimusi."
-
-msgid "Unable to load plan details."
-msgstr "Ei ole võimalik laadida plaani detaile."
-
-msgid "Unable to load project resources."
-msgstr "Ei ole võimalik laadida projekti ressurse."
-
-msgid "Unable to load sections for comparison."
-msgstr "Valikuid ei saa võrdluseks laadida."
-
-msgid "Unable to load service provider."
-msgstr "Ei õnnestunud teenusepakkujat laadida."
-
-msgid "Unable to load service providers."
-msgstr "Ei õnnestunud teenusepakkujaid laadida."
-
 msgid "Unable to load user."
 msgstr "Ei saa kasutajat laadida"
 
-msgid "Unable to login via SAML2 protocol."
-msgstr "SAML2 protokollida ei õnnestunud logida"
-
-msgid "Unable to open console. Error message: {message}"
-msgstr "Konsooli pole võimalik avada. Veateade: {message}"
-
-msgid "Unable to open console log"
-msgstr "Ei ole võimalik laadida kommentaare."
-
 msgid "Unable to post comment."
 msgstr "Kommentaari pole võimalik postitada"
-
-msgid "Unable to register service provider."
-msgstr "Teenusepakkuajt ei õnnestunud registreerida"
-
-msgid "Unable to reject invitation."
-msgstr "Kutset pole võimalik tagasi lükata"
-
-msgid "Unable to reject order."
-msgstr "Tellimust pole võimalik tagasi lükata"
-
-msgid "Unable to remove SSH key."
-msgstr "SSH võtit pole võimalik eemaldada"
-
-msgid "Unable to remove hook."
-msgstr "Haaki pole võimalik eemaldada"
-
-msgid "Unable to remove item from shopping cart."
-msgstr "Ostukorvist pole objekti võimalik eemaldada"
-
-msgid "Unable to remove logo."
-msgstr "Logo pole võimalik eemaldada"
 
 msgid "Unable to resend invitation."
 msgstr "Kutset pole võimalik uuesti saata"
@@ -3347,38 +1970,11 @@ msgstr "Ei ole võimalik saata sissekande teadet."
 msgid "Unable to submit empty comment."
 msgstr "Tühja kommentaari pole võimalik lisada"
 
-msgid "Unable to submit limits change request."
-msgstr "Limiitide muutmise päringut ei saa esitada."
-
-msgid "Unable to submit order."
-msgstr "Tellimust pole võimalik esitada"
-
-msgid "Unable to submit plan change request."
-msgstr "Plaani muutmise päringut ei ole võimalik esitada"
-
-msgid "Unable to submit resource termination request."
-msgstr "Ressursi peatamise päringut ei ole võimalik esitada"
-
-msgid "Unable to submit usage report."
-msgstr "Kasutusraportit ei ole võimalik esitada"
-
-msgid "Unable to update offering."
-msgstr "Pakkumist pole võimalik uuendada"
-
-msgid "Unable to update offering state."
-msgstr "Pakkumiste olekut ei ole võimalik uuendada"
-
 msgid "Unable to update provider."
 msgstr "Teenusepakkujat pole võimalik uuendada"
 
-msgid "Unable to update shopping cart item."
-msgstr "Ostukorvi objekti ei ole võimalik uuendada"
-
 msgid "Unable to upload attachment."
 msgstr "Manust pole võimalik üles laadida"
-
-msgid "Unable to upload logo."
-msgstr "Logo ei saa üles laadida"
 
 msgid "Unable to validate invitation token."
 msgstr "Ei ole võimalik valideerida kutse žetooni."
@@ -3386,17 +1982,8 @@ msgstr "Ei ole võimalik valideerida kutse žetooni."
 msgid "Unexpected exception happened during login process."
 msgstr "Sisselogimise ajal juhtus ootamatu probleem."
 
-msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
-msgstr "Kahjuks ei õnnestunud serveriga ühendust luua. Kontrollige, kas saate brauseris {apiEndpoint} ühenduse luua ja tõrke jätkumisel pöörduge kasutajatoe poole."
-
-msgid "Unit"
-msgstr "Ühik"
-
 msgid "Unit price"
 msgstr "Ühiku hind"
-
-msgid "Units"
-msgstr "Ühikud"
 
 msgid "Unpaid"
 msgstr "Tasumata"
@@ -3440,32 +2027,11 @@ msgstr "Uuendan reegleid"
 msgid "Updating security groups"
 msgstr "Uuendan turvagruppe"
 
-msgid "Upload new"
-msgstr "Laadi üles uus"
-
 msgid "Uptime"
 msgstr "Töötatud aeg"
 
-msgid "Usage"
-msgstr "Kasutus"
-
-msgid "Usage-based"
-msgstr "Kasutuse baasil"
-
-msgid "Usage information is not available."
-msgstr "Kasutuse andmed pole saadaval."
-
 msgid "Usage overview"
 msgstr "Kasutuse ülevaade"
-
-msgid "Usage report has been submitted."
-msgstr "Ressursi importimist on alustatud"
-
-msgid "Usage reports"
-msgstr "Kasutuse aruanne"
-
-msgid "Usages"
-msgstr "Kasutused"
 
 msgid "Use sudo"
 msgstr "Kasuda sudo"
@@ -3488,20 +2054,11 @@ msgstr "Kasutajaandmed"
 msgid "User details"
 msgstr "Kasutaja üksikasjad"
 
-msgid "User has been activated."
-msgstr "Kasutaja on aktiveeritud."
-
-msgid "User has been deactivated."
-msgstr "Kasutaja on deaktiveeritud."
-
 msgid "User has been logged out. You will be redirected to the login page soon."
 msgstr "Kasutaja on välja logitud. Teid suunatakse varsti sisselogimislehele."
 
 msgid "User has been updated"
 msgstr "Võrku on uuendatud."
-
-msgid "User input field #{index}"
-msgstr "Kasutaja sisestusväli #{index}"
 
 msgid "User management events"
 msgstr "Kasutaja halduse sündmused"
@@ -3511,42 +2068,6 @@ msgstr "Kasutaja profiil"
 
 msgid "User status"
 msgstr "Kasutaja staatus"
-
-msgid "User {affected_user_link} has been activated."
-msgstr "Kasutaja {affected_user_link} on aktiveeritud."
-
-msgid "User {affected_user_link} has been created."
-msgstr "Kasutaja {affected_user_link} on loodud."
-
-msgid "User {affected_user_link} has been deactivated."
-msgstr "Kasutaja {affected_user_link} on deaktiveeritud."
-
-msgid "User {affected_user_link} has been updated."
-msgstr "Kasutaja {affected_user_link} on muudetud."
-
-msgid "User {affected_user_name} has been deleted."
-msgstr "Kasutaja {affected_user_name} on kustutatud."
-
-msgid "User {user_link} authenticated successfully with Facebook."
-msgstr "Kasutaja {user_link} edukalt autentinud ennast Facebook kaudu."
-
-msgid "User {user_link} authenticated successfully with Smart ID EE."
-msgstr "Kasutaja {user_link} on edukalt autentinud ennast Smart ID EE kaudu."
-
-msgid "User {user_link} authenticated successfully with username and password."
-msgstr "Kasutaja {user_link} on edukalt autentinud ennast kasutajanime ja parooliga."
-
-msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
-msgstr "Kasutajale {user_link} on omastatud organisatsiooni omaniku roll {customer_link} {affected_user_link}."
-
-msgid "User {user_link} has granted role to {affected_user_link}."
-msgstr "Kasutaja {user_link} on saanud endale rolli {affected_user_link}."
-
-msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
-msgstr "Kasutaja {affected_user_full_name} on nõudnud endale organisatsiooni {affected_organization}."
-
-msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
-msgstr "Kasutaja {affected_user_full_name} on nõudnud endale organisatsiooni {affected_organization}."
 
 msgid "Username"
 msgstr "Kasutajanimi"
@@ -3569,12 +2090,6 @@ msgstr "KM"
 msgid "VAT code"
 msgstr "KM kood"
 
-msgid "VAT is included"
-msgstr "Sisaldab käibemaksu."
-
-msgid "VAT is not included"
-msgstr "Käibemaksu ei sisalda."
-
 msgid "VAT is not included."
 msgstr "Käibemaksu ei sisalda."
 
@@ -3584,14 +2099,8 @@ msgstr "Käibemaksu määr (%)"
 msgid "VM name"
 msgstr "VMi nimi"
 
-msgid "VM type overview"
-msgstr "VMi tüübi ülevaade"
-
 msgid "VMs"
 msgstr "VMid"
-
-msgid "VMware Tools"
-msgstr "VMware töövahendid"
 
 msgid "VPC block storage size"
 msgstr "VPC andmeketta suurus"
@@ -3599,26 +2108,8 @@ msgstr "VPC andmeketta suurus"
 msgid "VPC floating IP count"
 msgstr "VPC liikuvate IP aadressite kogus"
 
-msgid "VPC instance count"
-msgstr "VPC Instantside hulk"
-
 msgid "VPC vCPU"
 msgstr "vCPU"
-
-msgid "Value"
-msgstr "Väärtus"
-
-msgid "Value should be positive integer"
-msgstr "Väärtus peaks olema positiivne täisarv"
-
-msgid "Value should not be greater than {limit}."
-msgstr "Väärtus ei tohiks olla suurem kui {limit}"
-
-msgid "Value should not be lesser than {limit}."
-msgstr "Väärtus ei tohiks olla väiksem kui {limit}"
-
-msgid "Value should not be negative."
-msgstr "Väärtus ei tphi olla negatiivne"
 
 msgid "Version"
 msgstr "Versioon"
@@ -3635,15 +2126,6 @@ msgstr "Volüüm"
 msgid "Volume name"
 msgstr "Volüümi nimi"
 
-msgid "Website URL"
-msgstr "Veebilehe URL"
-
-msgid "Welcome, {user}!"
-msgstr "Tere tulemast {user}!"
-
-msgid "Welcome to {pageTitle}!"
-msgstr "Tere tulemast {pageTitle}!"
-
 msgid "Why do you need to remove organization with existing projects?"
 msgstr "Miks sa peaksid eemaldama organisatsiooni olemasolevate projektidega?"
 
@@ -3653,32 +2135,20 @@ msgstr "Miks sa tahad ära minna? Aita meil paremaks saada palun!"
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr "Kas sa sooviksid uuendada oma emaili sellega mida kasutati selles kutses?"
 
-msgid "Write review"
-msgstr "Kirjuta ülevaade"
-
 msgid "Yes"
 msgstr "Jah"
 
 msgid "Yes, use invitation email"
 msgstr "Jah, kasuta kutse emaili"
 
-msgid "You can find offerings to order in the marketplace"
-msgstr "Sa leiad pakkumisi, mida tellida turuplatsilt"
-
 msgid "You can remove this organization by pressing the button"
 msgstr "Sa saad eemaldada selle organisatsiooni vajutades nuppu"
-
-msgid "You can start filling this table by creating your first offering."
-msgstr "Sa saad alustada tabeli täitmist luues esimese pakkumise"
 
 msgid "You cannot change your own role."
 msgstr "Sa ei saa muuta iseenda rolli."
 
 msgid "You cannot manage other organization owner."
 msgstr "Sa ei saa hallata teist ettevõtte omanikku."
-
-msgid "You do not currently have any organizations."
-msgstr "Sul ei ole veel ühtegi organisatsiooni."
 
 msgid "You don't have enough privileges to perform this operation."
 msgstr "Sul ei ole selle toimingu sooritamiseks vajalikke õigusi."
@@ -3695,17 +2165,8 @@ msgstr "Olete ületanud maksimaalse arvu kvoote."
 msgid "You have no quotas yet."
 msgstr "Sul ei ole veel kvoote."
 
-msgid "You have not added any SSH keys to your"
-msgstr "Sa ei ole veel lisanud ühtegi SSH võtit oma <a ui-sref=\"profile.keys\">profiilile</a>."
-
-msgid "You have the right to purchase service without additional approval."
-msgstr "Teil on õigus osta teenust ilma täiendava nõusolekuta."
-
 msgid "You must agree with terms of service."
 msgstr "Te peate nõustuma teenusetingimustega."
-
-msgid "You need approval to finish purchasing of services."
-msgstr "Teenuste ostmise lõpetamiseks on vaja luba."
 
 msgid "You will be redirected in a moment."
 msgstr "Teid suunatakse hetke pärast ümber."
@@ -3743,15 +2204,6 @@ msgstr "Sirvi"
 msgid "commented:"
 msgstr "kommenteeris"
 
-msgid "current state on backend: {resourceState}."
-msgstr "praegune staatus tagatoas: {resourceState}."
-
-msgid "entries"
-msgstr "Sissekanded"
-
-msgid "error message: {errorMessage}"
-msgstr "tõrketeade: {errorMessage}"
-
 msgid "events"
 msgstr "Sündmused"
 
@@ -3764,26 +2216,11 @@ msgstr "Tunnid"
 msgid "items"
 msgstr "Lisa element"
 
-msgid "offering"
-msgstr "toode"
-
-msgid "offerings"
-msgstr "toodet"
-
-msgid "order items"
-msgstr "tellimused"
-
 msgid "organization"
 msgstr "asutus"
 
 msgid "organizations"
 msgstr "asutus"
-
-msgid "plans"
-msgstr "Plaanid"
-
-msgid "profile."
-msgstr "Profiil"
 
 msgid "projects"
 msgstr "Projektid"
@@ -3794,101 +2231,8 @@ msgstr "ressursid"
 msgid "support"
 msgstr "Tugi"
 
-msgid "support requests"
-msgstr "Kasutajatoe päringud"
-
 msgid "users"
 msgstr "Kasutajad"
 
 msgid "vCPU count"
 msgstr "vCPU arv"
-
-msgid "vSphere Virtual Machine"
-msgstr "Virtuaalmasinad"
-
-msgid "{category} resources"
-msgstr "{category} ressursid"
-
-msgid "{number} days"
-msgstr "{number} päevi"
-
-msgid "{resourceType} has state {resourceState}"
-msgstr "{resourceType} on staatusega {resourceState}."
-
-msgid "{resource_link} creation has been scheduled by {user_link}."
-msgstr "{resource_link} loomine on ajastatud {user_link} poolt."
-
-msgid "{resource_link} creation has failed."
-msgstr "{resource_link} loomine nurjus."
-
-msgid "{resource_link} deletion has failed."
-msgstr "{resource_link} kustutamine nurjus."
-
-msgid "{resource_link} has been created."
-msgstr "{resource_link} on loodud."
-
-msgid "{resource_link} has been imported by {user_link}."
-msgstr "{resource_link} on kasutaja {user_link} poolt imporditud."
-
-msgid "{resource_link} has been restarted."
-msgstr "{resource_link} on taaskäivitatud."
-
-msgid "{resource_link} has been scheduled to deletion by {user_link}."
-msgstr "{resource_link} on määratud kustutamisele kasutaja {user_link} poolt."
-
-msgid "{resource_link} has been scheduled to restart by {user_link}."
-msgstr "{resource_link} on määratud restardiks kasutaja {user_link} poolt."
-
-msgid "{resource_link} has been scheduled to start by {user_link}."
-msgstr "{resource_link} on määratud käivitamisele kasutaja {user_link} poolt."
-
-msgid "{resource_link} has been scheduled to stop by {user_link}."
-msgstr "{resource_link} on määratud peatamiseks kasutaja {user_link} poolt."
-
-msgid "{resource_link} has been started."
-msgstr "{resource_link} on käivitatud."
-
-msgid "{resource_link} has been stopped."
-msgstr "{resource_link} on peatatud."
-
-msgid "{resource_link} has been updated by {user_link}."
-msgstr "{resource_link} on uuendatud kasutaja {user_link} poolt."
-
-msgid "{resource_link} restart has failed."
-msgstr "{resource_link} taaskäivitus on nurjunud."
-
-msgid "{resource_link} start has failed."
-msgstr "{resource_link} käivitamine ei õnnestunud."
-
-msgid "{resource_link} stop has failed."
-msgstr "{resource_link} peatamine on nurjunud."
-
-msgid "{resource_name} has been deleted."
-msgstr "{resource_name} on kustutatud."
-
-msgid "{usage} of {limit}"
-msgstr "{usage} limiidist {limit}"
-
-msgid "{usage} of {limit} used"
-msgstr "{usage} limiidist {limit} on kasutatud"
-
-msgid "{user} has approved it on {date} at {time}."
-msgstr "{user} on lubanud selle Iga nädal {day} päeval kell {time}"
-
-msgid "{user} has requested changing of plan from \"{old_plan}\" to \"{new_plan}\"."
-msgstr "{user} on tellinud plaanimuudatuse vanast plaanist \"{old_plan}\" uueks plaaniks \"{new_plan}\"."
-
-msgid "{user} has requested provisioning of \"{resource_name}\" with plan \"{plan_name}\"."
-msgstr "{user} on taotlenud teenuse \"{ressursi_nimi}\" eraldamist plaaniga \"{plaan_nimi}\"."
-
-msgid "{user} has requested termination of {resource_name} with active plan \"{plan_name}\"."
-msgstr "{user} taotles {ressursi_nimi} lõpetamist aktiivse paketiga \"{plaan_nimi}\"."
-
-msgid "{value} at {date}"
-msgstr "{value} kuupäeval {date}"
-
-msgid "{value} at {date}, estimated"
-msgstr "{value} kuupäeval {date}, hinnanguliselt"
-
-msgid "Сhoose the role please"
-msgstr "Vali palun roll"

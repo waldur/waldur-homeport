@@ -23,8 +23,5 @@ msgstr "موارد"
 msgid "Save"
 msgstr "حفظ"
 
-msgid "Services"
-msgstr "الخدمات"
-
 msgid "Users"
 msgstr "المستخدمين"

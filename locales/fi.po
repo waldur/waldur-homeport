@@ -23,8 +23,5 @@ msgstr "Resurssit"
 msgid "Save"
 msgstr "Tallenna"
 
-msgid "Services"
-msgstr "Palvelut"
-
 msgid "Users"
 msgstr "Käyttäjät"
