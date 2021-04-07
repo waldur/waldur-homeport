@@ -23,6 +23,9 @@ msgstr "Profiil on loodud."
 msgid "Abbreviation"
 msgstr "Lühend"
 
+msgid "Accept"
+msgstr "Kinnita"
+
 msgid "Accepted"
 msgstr "Kinnitatud"
 

@@ -8,17 +8,44 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=((n%10==1) && (n%100!=11)) ? 0 : ((n%10>=2 && n%10<=4) && ((n%100<12 || n%100>14))) ? 1 : 2;\n"
 
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "Доменное имя «{trimmed}» должно иметь не более {max_len} символов"
+
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Условия предоставления услуг</Link> были приняты <Date></Date>"
+
+msgid "API secret code:"
+msgstr "Секретный код API:"
+
+msgid "API token lifetime"
+msgstr "Время жизни токена API"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "Рабочий узел должен иметь не менее 4 виртуальных ЦП и 4 ГБ ОЗУ."
+
+msgid "A one-time fee applied on activation."
+msgstr "Единовременная плата за активацию."
+
 msgid "A profile has been created."
 msgstr "Профиль создан."
 
 msgid "Abbreviation"
 msgstr "Аббревиатура"
 
+msgid "Accept booking"
+msgstr "Принять запрос на бронирование"
+
+msgid "Accept invitation"
+msgstr "Принять приглашение"
+
 msgid "Accepted"
 msgstr "Принятый"
 
 msgid "Access"
 msgstr "Доступ"
+
+msgid "Access token"
+msgstr "Токен доступа"
 
 msgid "Account activation"
 msgstr "Активация аккаунта"
