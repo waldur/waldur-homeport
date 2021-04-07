@@ -1,978 +1,387 @@
 msgid ""
 msgstr ""
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"X-Generator: Poedit 2.0.3\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2);\n"
-"Language: lv_LV\n"
+"X-Generator: Localazy (https://localazy.com)\n"
+"Project-Id-Version: waldur-homeport\n"
+"Language: lv\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/premiumSupport/premium-support-contracts/contract-details-dialog.js:21
-msgid "\"{planName}\" details"
-msgstr "\"{planName}\" detaļas"
-
-#: src/billing/billing-record-details.html:72
-msgid "(VAT is not included)"
-msgstr "(PVN nav iekļauts)"
-
-#: src/events/constants.ts:22
-msgid ""
-"{quota_name} quota threshold has been reached for project {project_name}."
-msgstr "{quota_name} ir sasniegts projekta {project_name} kvotas slieksnis."
-
-#: src/directives/customer-balance.js:54
-msgid "{quotaUsage} out of {quotaLimit}."
-msgstr "{quotaUsage} no {quotaLimit}."
-
-#: src/events/constants.ts:25
-msgid "{resource_full_name} has been created."
-msgstr "{resource_full_name} tika izveidots."
-
-#: src/events/constants.ts:28
-msgid "{resource_full_name} has been deleted."
-msgstr "{resource_full_name} tika nodzēsts."
-
-#: src/quotas/quota-usage-bar-chart.js:19
-msgid "{usage} of {limit} used"
-msgstr "{usage} no {limit} ir izmantoti"
-
-#: src/providers/details/provider-project-link-quota.js:24
-msgid "{usage} used"
-msgstr "{usage} izmantots"
-
-#: src/openstack/openstack-tenant/openstack-template.js:27
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:25
-msgid "1 day"
-msgstr "1 diena"
-
-#: src/openstack/openstack-tenant/openstack-template.js:33
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:30
-msgid "30 days"
-msgstr "30 dienas"
-
-#: src/openstack/openstack-tenant/openstack-template.js:40
-#: src/openstack/openstack-tenant/openstack-tenant-prices.js:35
-msgid "365 days"
-msgstr "365 dienas"
-
-#: src/freeipa/freeipa-account-create.js:49
 msgid "A profile has been created."
 msgstr "Profils tika izveidots."
 
-#: src/customer/customer-manage.html:18
 msgid "Abbreviation"
 msgstr "Abreviatūra"
 
-#: src/experts/bids/expert-bid.html:4
-msgid "ACCEPT"
-msgstr "PIEŅEMT"
-
-#: src/invitations/invitations-list.js:84
 msgid "Accepted"
 msgstr "Pieņemts"
 
-#: src/openstack/openstack-tenant/openstack-tenant-config.js:51
-#: src/openstack/openstack-tenant/openstack-tenant-summary.html:15
-#: src/resource/summary/virtual-machine-summary.html:13
 msgid "Access"
 msgstr "Pieeja"
 
-#: src/customer/customer-manage.html:92
-msgid "Account"
-msgstr "Konts"
-
-#: src/auth/auth-activation.html:3
 msgid "Account activation"
 msgstr "Konta aktivizēšana"
 
-#: src/auth/auth-activation.js:19
 msgid "Account has been activated."
 msgstr "Konts tika aktivizēts."
 
-#: src/cost-planning/cost-plan-items.html:11
-#: src/cost-planning/cost-plan-optimizer.html:18
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html:15
-#: src/paypal/paypal-invoice-actions.html:3
-#: src/resource/actions/action-button-resource.html:3
-#: src/table/responsive-table.js:333
 msgid "Actions"
 msgstr "Darbības"
 
-#: src/issues/comments/issue-comments-form.html:17
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.html:53
-#: src/openstack/openstack-instance/openstack-instance-networks.html:39
-#: src/team/add-project-member.js:22
 msgid "Add"
 msgstr "Pievienot"
 
-#: src/intro/base-intro.js:105
-msgid "Add a new organization"
-msgstr "Pievienot jaunu uzņēmumu"
-
-#: app/views/directives/customer-balance.html:113
-#: app/views/directives/customer-balance.html:147
-msgid "Add credit"
-msgstr "Papildināt bilanci"
-
-#: src/user/keys/key-create.html:42
-msgid "Add key"
-msgstr "Pievienot atslēgu"
-
-#: src/team/project-users-list.js:76
-msgid "Add member"
-msgstr "Pievienot dalībnieku"
-
-#: src/navigation/select-workspace-dialog.html:35
-msgid "Add new"
-msgstr "Pievieno jaunu"
-
-#: src/navigation/select-workspace-dialog.html:23
-msgid "Add new organization"
-msgstr "Pievienot jaunu uzņēmumu"
-
-#: src/navigation/select-workspace-dialog.html:90
-msgid "Add new project"
-msgstr "Pievienot jaunu projektu"
-
-#: src/user/hooks/hook-list.js:62
-msgid "Add notification"
-msgstr "Pievienot paziņojumu"
-
-#: src/user/user-organizations.js:76
-msgid "Add organization"
-msgstr "Pievienot uzņēmumu"
-
-#: src/resource/list/resource-private-clouds-list.js:39
-msgid "Add private cloud"
-msgstr "Pievienot privāto mākoni"
-
-#: src/appstore/dialog/appstore-project-selector.html:16
-#: src/project/project-create.html:72
-#: src/project/projects-list.js:157
-msgid "Add project"
-msgstr "Pievienot projektu"
-
-#: src/team/add-project-member.js:23
-msgid "Add project member"
-msgstr "Pievienot projekta dalībnieku"
-
-#: src/providers/create.html:155
-#: src/providers/provider-list.js:186
-msgid "Add provider"
-msgstr "Pievienot pakalpojumu sniedzēju"
-
-#: src/experts/requests/expert-request-project-list.js:91
-msgid "Add request"
-msgstr "Pievienot pieprasījumu"
-
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html:70
-msgid "Add rule"
-msgstr "Pievienot noteikumu"
-
-#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:52
-msgid "Add SLA"
-msgstr "Pievienot SLA"
-
-#: src/openstack/openstack-snapshot/openstack-snapshots-list.js:82
-msgid "Add snapshots"
-msgstr "Pievienot snapshots"
-
-#: src/user/keys/key-list.js:62
-#: src/user/routes.js:91
 msgid "Add SSH key"
 msgstr "Pievienot  SSH atslēgu"
 
-#: src/resource/list/resource-vms-list.js:60
-msgid "Add virtual machine"
-msgstr "Pievienot virtuālo serveri"
+msgid "Add key"
+msgstr "Pievienot atslēgu"
 
-#: src/customer/customer-create-config.js:47
-#: src/customer/customer-manage.html:38
-#: src/customer/customer-manage.html:74
-#: src/openstack/openstack-floating-ips/openstack-floating-ip-summary.html:18
+msgid "Add member"
+msgstr "Pievienot dalībnieku"
+
+msgid "Add new"
+msgstr "Pievieno jaunu"
+
+msgid "Add new organization"
+msgstr "Pievienot jaunu uzņēmumu"
+
+msgid "Add new project"
+msgstr "Pievienot jaunu projektu"
+
+msgid "Add notification"
+msgstr "Pievienot paziņojumu"
+
+msgid "Add organization"
+msgstr "Pievienot uzņēmumu"
+
+msgid "Add project"
+msgstr "Pievienot projektu"
+
+msgid "Add project member"
+msgstr "Pievienot projekta dalībnieku"
+
+msgid "Add rule"
+msgstr "Pievienot noteikumu"
+
 msgid "Address"
 msgstr "Adrese"
 
-#: src/billing/billing-record-details.html:14
-#: src/customer/customer-manage.html:33
 msgid "Agreement number"
 msgstr "Līguma numurs"
 
-#: src/openstack/openstack-tenant/openstack-template.js:54
-msgid "All categories"
-msgstr "Visas kategorijas"
-
-#: src/navigation/site-header.html:12
 msgid "Back"
 msgstr "Atpakaļ"
 
-#: src/user/user-details.js:20
 msgid "Back to project"
 msgstr "Atpakaļ uz projektu"
 
-#: src/billing/billing-utils.js:3
 msgid "Billing"
 msgstr "Norēķini"
 
-#: src/ansible/ansible-job-create.html:37
-#: src/appstore/appstore-store.html:55
-#: src/appstore/dialog/appstore-selector-dialog.html:30
-#: src/auth/saml2/auth-saml2-dialog.html:37
-#: src/cost-planning/cost-plan-dialog.html:56
-#: src/digitalocean/droplet-resize.html:76
-#: src/events/event-details-dialog.html:133
-#: src/events/event-types-dialog.html:14
-#: src/experts/bids/expert-bid-create-dialog.html:93
-#: src/experts/requests/expert-request-create.html:22
-#: src/form/appstore-form-wizard.html:54
-#: src/invitations/actions/cancel.js:8
-#: src/invitations/actions/invitation-dialog.html:77
-#: src/issues/comments/issue-comments-form.html:22
-#: src/issues/issue-create-dialog.html:99
-#: src/navigation/select-workspace-dialog.html:137
-#: src/offering/appstore-offering.html:22
-#: src/openstack/openstack-tenant/openstack-tenant-assign-package-dialog.html:26
-#: src/openstack/openstack-tenant/openstack-tenant-change-package.html:54
-#: src/openstack/openstack-volume/snapshot-create.html:43
-#: src/openstack/openstack-volume/volume-extend.html:34
-#: src/plans/plans-list.html:38
-#: src/premiumSupport/premium-support-agreement.html:34
-#: src/project/project-create.html:75
-#: src/providers/create.html:160
-#: src/resource-import/resource-import-dialog.html:42
-#: src/resource/actions/dialog/action-dialog.html:36
-#: src/team/add-project-member.html:54
-#: src/team/add-team-member.html:86
-#: src/user/hooks/hook-details.html:81
-#: src/user/keys/key-create.html:45
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: src/payments/routes.js:26
 msgid "Cancel payment"
 msgstr "Atcelt maksājumu"
 
-#: src/experts/requests/expert-request-cancel.html:7
 msgid "Cancel request"
 msgstr "Atcelt pieprasījumu"
 
-#: src/billing/billing-utils.js:37
-#: src/invitations/invitations-list.js:76
 msgid "Canceled"
 msgstr "Atcelts"
 
-#: src/paypal/paypal-invoices-list.js:117
 msgid "Cancelled"
 msgstr "Atcelts"
 
-#: src/openstack/openstack-tenant/openstack-template.js:8
 msgid "Category"
 msgstr "Kategorija"
 
-#: src/auth/saml2/auth-saml2-dialog.html:16
-msgid "Choose an organization"
-msgstr "Izvēlēties uzņēmumu"
-
-#: src/plans/plans-list.html:6
-msgid "Choose new plan"
-msgstr "Izvēlēties jaunu plānu"
-
-#: src/billing/invoice-events-dialog.html:45
-#: src/customer/customer-report-error.html:10
-#: src/openstack/openstack-tenant/openstack-tenant-request-direct-access.html:11
 msgid "Close"
 msgstr "Aizvērt"
 
-#: src/alerts/alert-filter.html:4
-msgid "Closed"
-msgstr "Aizvērts"
-
-#: src/appstore/appstore-compare-list.js:62
-msgid "Code"
-msgstr "Kods"
-
-#: src/issues/comments/issue-comments-form.html:10
-#: src/issues/comments/issue-comments-form.html:6
 msgid "Comment"
 msgstr "Komentārs"
 
-#: src/issues/comments/issue-comments-form.js:18
-msgid "Comment has been added."
-msgstr "Komentārs tika pievienots"
-
-#: src/issues/comments/issue-comments-list.html:22
-msgid "commented"
-msgstr "komentēts"
-
-#: src/issues/comments/issue-comments-container.html:3
 msgid "Comments"
 msgstr "Komentāri"
 
-#: src/customer/customer-manage.html:71
-msgid "Company"
-msgstr "Uzņēmums"
-
-#: src/customer/customer-users-details-list.js:69
-#: src/user/user-popover-table.html:25
 msgid "Competence"
 msgstr "Kompetence"
 
-#: src/cost-planning/cost-plan-flavors.html:4
-msgid "Component"
-msgstr "Komponents"
-
-#: src/cost-planning/cost-plan-items.html:9
 msgid "Components"
 msgstr "Komponenti"
 
-#: src/cost-planning/cost-plan-dialog.html:9
-#: src/openstack/openstack-instance/actions.js:66
 msgid "Configure"
 msgstr "Konfigurēt"
 
-#: src/customer/customer-manage.js:117
 msgid "Confirm deletion?"
 msgstr "Vai apstiprināt dzēšanu?"
 
-#: src/auth/auth-login.js:204
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "Apstiprināšanas e-pasts tika nosūtīts. Lūdzu, pārbaudiet savu pastu!"
 
-#: src/customer/customer-create-config.js:17
-#: src/customer/customer-manage.html:43
 msgid "Contact e-mail"
 msgstr "E-pasta adrese"
 
-#: src/customer/customer-popover.html:28
 msgid "Contact email"
 msgstr "E-pasts"
 
-#: src/customer/customer-create-config.js:41
-#: src/customer/customer-manage.html:77
 msgid "Country"
 msgstr "Valsts"
 
-#: src/appstore/appstore-compare-list.js:76
-#: src/resource-import/import-virtual-machines-list.js:76
-msgid "CPU"
-msgstr "CPU"
-
-#: src/providers/details/provider-project-link-quotas.html:8
-#: src/slurm/slurm-allocation-list.js:37
-#: src/slurm/slurm-allocation-summary.html:5
-msgid "CPU limit"
-msgstr "CPU limits"
-
-#: src/slurm/actions.js:15
-msgid "CPU limit, minutes"
-msgstr "CPU limits, minūtes"
-
-#: src/ansible/ansible-job-create.html:34
-#: src/appstore/appstore-store.html:20
-#: src/appstore/appstore-store.html:51
-#: src/customer/customer-issues.js:31
-#: src/experts/bids/expert-bid-create-dialog.html:90
-#: src/experts/requests/expert-request-create.html:19
-#: src/freeipa/freeipa-account-create.html:67
-#: src/issues/issue-create-dialog.js:10
-#: src/offering/appstore-offering.html:19
-#: src/openstack/openstack-instance/actions.js:108
-#: src/openstack/openstack-instance/actions.js:51
-#: src/openstack/openstack-tenant/actions.js:25
-#: src/openstack/openstack-tenant/actions.js:60
-#: src/openstack/openstack-tenant/actions.js:80
-#: src/openstack/openstack-volume/module.js:60
-#: src/openstack/openstack-volume/module.js:74
-#: src/project/project-issues.js:31
-#: src/resource/list/resources-list.js:110
-#: src/resource/tabs/resource-issues.js:26
-#: src/user/hooks/hook-details.html:77
 msgid "Create"
 msgstr "Izveidot"
 
-#: src/auth/auth-login.html:111
-#: src/auth/auth-login.html:19
 msgid "Create an account"
 msgstr "Izveidot kontu"
 
-#: src/customer/routes.js:137
 msgid "Create project"
 msgstr "Izveidot projektu"
 
-#: src/customer/routes.js:145
-msgid "Create provider"
-msgstr "Izveidot pakalpojumu sniedzēju"
-
-#: src/issues/issue-create-dialog.js:4
-#: src/issues/issue-quick-create.html:116
-#: src/issues/issue-quick-create.html:3
-#: src/issues/issue-registration.html:216
 msgid "Create request"
 msgstr "Izveidot pieprasījumu"
 
-#: src/events/constants.ts:17
-msgid "Created a new payment for {customer_name}."
-msgstr "Izveidot jaunu maksājumu par {customer_name}."
-
-#: src/ansible/ansible-jobs-list.js:74
-#: src/experts/requests/expert-request-customer-list.js:89
-#: src/experts/requests/expert-request-project-list.js:79
-#: src/offering/offerings-list.js:55
-#: src/project/projects-list.js:98
-msgid "Creation date"
-msgstr "Izveides datums"
-
-#: src/payments/payment-list.js:43
-#: src/plans/plan-agreements-list.js:41
 msgid "Date"
 msgstr "Datums"
 
-#: src/cost-planning/cost-plan-items.html:46
-#: src/openstack/openstack-instance/openstack-instance-floating-ips.html:39
-#: src/openstack/openstack-instance/openstack-instance-networks.html:24
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html:58
 msgid "Delete"
 msgstr "Dzēst"
 
-#: src/appstore/appstore-providers.html:40
-#: src/cost-planning/cost-plans-list.js:54
-#: src/events/base-event-list.js:43
-#: src/issues/issue-registration.html:32
-#: src/issues/issue-registration.html:69
-#: src/openstack/openstack-instance/openstack-instance-security-groups-field.html:11
-#: src/premiumSupport/premium-support-contracts/premium-support-contracts.js:61
-#: src/project/project-details-button.html:4
-#: src/project/projects-list.js:175
-#: src/providers/details/dialog.html:10
-#: src/providers/provider-list.js:92
-#: src/team/customer-users-list.js:123
-#: src/team/project-users-list.js:87
-#: src/user/user-sidebar.html:12
 msgid "Details"
 msgstr "Detaļas"
 
-#: src/billing/invoice-details.html:21
-#: src/billing/invoices-list.js:74
-#: src/paypal/paypal-invoices-list.js:78
 msgid "Due date"
 msgstr "Termiņš"
 
-#: src/customer/customer-users-details-list.js:40
-#: src/invitations/actions/invitation-dialog.html:12
-#: src/team/customer-users-list.js:71
-#: src/team/project-users-list.js:56
-#: src/team/user-selector.html:12
-#: src/user/user-edit.html:29
-#: src/user/user-popover-table.html:17
 msgid "E-mail"
 msgstr "E-pasts"
 
-#: src/user/hooks/hook-details.html:45
 msgid "E-mail address"
 msgstr "E-pasta adrese"
 
-#: src/team/add-project-member.js:56
-msgid "Edit project member"
-msgstr "Izmainīt projekta dalībnieku"
-
-#: src/team/add-team-member.js:34
-msgid "Edit team member"
-msgstr "Izmainīt komandas dalībnieku"
-
-#: src/auth/auth-login.html:62
-#: src/customer/customer-manage.html:80
-#: src/invitations/invitations-list.js:97
-msgid "Email"
-msgstr "E-pasts"
-
-#: src/freeipa/freeipa-account-edit.html:50
-msgid "Enable profile"
-msgstr "Aktivizēt profilu"
-
-#: src/user/hooks/hook-details.html:37
-msgid "Enabled"
-msgstr "Ieslēgts"
-
-#: src/configs/base-config.js:203
-msgid "English"
-msgstr "Angļu valoda"
-
-#: src/events/event-details-dialog.html:51
-#: src/resource/summary/resource-summary-base.html:12
-msgid "Error message"
-msgstr "Kļūdas ziņojums"
-
-#: src/configs/base-config.js:207
-msgid "Estonian"
-msgstr "Igauņu valoda"
-
-#: src/customer/customer-create-config.js:53
 msgid "EU VAT ID"
 msgstr "ES PVN reģistrācijas numurs"
 
-#: src/dashboard/project-events-feed.js:12
-#: src/help/constants.ts:10
-#: src/user/hooks/hook-list.js:53
+msgid "Edit project member"
+msgstr "Izmainīt projekta dalībnieku"
+
+msgid "Edit team member"
+msgstr "Izmainīt komandas dalībnieku"
+
+msgid "Email"
+msgstr "E-pasts"
+
+msgid "Enable profile"
+msgstr "Aktivizēt profilu"
+
+msgid "Enabled"
+msgstr "Ieslēgts"
+
+msgid "English"
+msgstr "Angļu valoda"
+
+msgid "Error message"
+msgstr "Kļūdas ziņojums"
+
+msgid "Estonian"
+msgstr "Igauņu valoda"
+
 msgid "Events"
 msgstr "Notikumi"
 
-#: src/openstack/openstack-backup-schedule/filters.js:28
 msgid "Every day"
 msgstr "Katru dienu"
 
-#: src/openstack/openstack-backup-schedule/filters.js:26
 msgid "Every day at"
 msgstr "Katru dienu plkst."
 
-#: src/openstack/openstack-backup-schedule/filters.js:21
 msgid "Every hour"
 msgstr "Katru stundu"
 
-#: src/openstack/openstack-backup-schedule/filters.js:14
 msgid "Every minute"
 msgstr "Katru minūti"
 
-#: src/openstack/openstack-backup-schedule/filters.js:44
 msgid "Every month"
 msgstr "Katru mēnesi"
 
-#: src/openstack/openstack-backup-schedule/filters.js:36
 msgid "Every week"
 msgstr "Katru nedēļu"
 
-#: src/openstack/openstack-backup-schedule/filters.js:52
 msgid "Every year"
 msgstr "Katru gadu"
 
-#: src/experts/extensions/user-organizations.js:4
-msgid "Expert"
-msgstr "Eksperts"
-
-#: src/experts/constants.ts:1
-#: src/experts/expert-provider-details.html:2
-#: src/experts/extensions/sidebar.js:28
-#: src/experts/extensions/sidebar.js:8
-#: src/experts/requests/expert-request-header.html:15
-#: src/experts/routes.js:19
-#: src/experts/routes.js:28
-#: src/experts/routes.js:38
-msgid "Experts"
-msgstr "Eksperti"
-
-#: src/resource/list/resource-vms-list.js:43
-#: src/resource/summary/virtual-machine-summary.html:42
 msgid "External IP"
 msgstr "Ārējā IP adrese"
 
-#: src/issues/issue-registration.html:150
-#: src/issues/issue-registration.html:36
-#: src/issues/issue-registration.html:73
 msgid "Filter"
 msgstr "Filtrs"
 
-#: src/customer/customer-create-config.js:4
 msgid "General information"
 msgstr "Vispārējā informācija"
 
-#: src/resource/tabs/constants.ts:17
-msgid "Graphs"
-msgstr "Grafiki"
-
-#: src/help/routes.js:9
-#: src/navigation/app-footer.html:17
-msgid "Help"
-msgstr "Palīdzība"
-
-#: app/views/help/list.html:3
-msgid "Help topics"
-msgstr "Palīdzības tēmas"
-
-#: src/experts/expert-provider-details.html:17
-#: src/form/appstore-field-tos.html:8
-#: src/freeipa/freeipa-account-create.html:51
-#: src/user/user-edit.html:157
-msgid "I accept the"
-msgstr "Es pieņemu"
-
-#: src/issues/request-service-button.html:7
-msgid "I want another service"
-msgstr "Es gribu citu pakalpojumu"
-
-#: src/azure/azure-virtual-machine-config.js:26
-#: src/digitalocean/digitalocean-droplet-config.js:31
-#: src/openstack/openstack-instance/openstack-instance-checkout-summary.html:27
-#: src/openstack/openstack-instance/utils.js:24
-#: src/openstack/openstack-volume/openstack-volume-checkout-summary.html:22
-msgid "Image"
-msgstr "Attēls"
-
-#: src/azure/azure-virtual-machine-config.js:30
-#: src/digitalocean/digitalocean-droplet-config.js:35
-#: src/openstack/openstack-instance/utils.js:28
-msgid "Image name"
-msgstr "Attēla nosaukums"
-
-#: src/resource-import/resource-import-dialog.html:39
-#: src/resource-import/utils.js:46
-msgid "Import"
-msgstr "Imports"
-
-#: src/resource/list/resource-vms-list.js:33
-#: src/resource/summary/virtual-machine-summary.html:30
-msgid "Internal IP"
-msgstr "Iekšējā IP adrese"
-
-#: src/invitations/invitation-confirm-dialog.html:2
-msgid "Invitation check"
-msgstr "Uzaicinājuma pārbaude"
-
-#: src/invitations/utils.js:45
-msgid "Invitation could not be accepted"
-msgstr "Uzaicinājums nevar tikt pieņemts."
-
-#: src/invitations/invitation-confirm-dialog.html:20
-msgid "Invitation email is:"
-msgstr "Uzaicinājuma e-pasts ir:"
-
-#: src/invitations/actions/cancel.js:13
-msgid "Invitation has been canceled."
-msgstr "Uzaicinājums tika atcelts."
-
-#: src/invitations/actions/invitation-dialog-service.js:52
-msgid "Invitation has been created."
-msgstr "Uzaicinājums tika izveidots."
-
-#: src/invitations/actions/send.js:13
-msgid "Invitation has been sent again."
-msgstr "Uzaicinājums tika nosūtīts atkārtoti."
-
-#: src/invitations/utils.js:100
-msgid "Invitation is not found."
-msgstr "Uzaicinājums nav atrasts."
-
-#: src/invitations/utils.js:66
-msgid "Invitation is not valid anymore."
-msgstr "Uzaicinājums vairs nav derīgs."
-
-#: src/invitations/utils.js:103
-msgid "Invitation is not valid."
-msgstr "Uzaicinājums nav derīgs."
-
-#: src/customer/customer-team.html:10
-msgid "Invitations"
-msgstr "Uzaicinājumi"
-
-#: src/intro/expert-manager-intro.js:119
-msgid "Invite new users."
-msgstr "Uzaicināt jaunus lietotājus."
-
-#: src/invitations/actions/create.js:8
-#: src/invitations/actions/invitation-dialog.html:2
-#: src/invitations/actions/invitation-dialog.html:73
-msgid "Invite user"
-msgstr "Uzaicināt lietotāju"
-
-#: src/billing/invoice-header.html:3
-msgid "Invoice"
-msgstr "Rēķins"
-
-#: src/billing/invoice-details.html:19
-#: src/billing/invoices-list.js:69
-#: src/paypal/paypal-invoices-list.js:73
-msgid "Invoice date"
-msgstr "Rēķina datums"
-
-#: src/billing/invoice-details.html:14
-msgid "Invoice No."
-msgstr "Rēķins Nr."
-
-#: src/billing/invoices-list.js:41
-#: src/paypal/paypal-invoices-list.js:42
-msgid "Invoice number"
-msgstr "Rēķina numurs"
-
-#: src/billing/billing-tabs.html:16
-#: src/billing/billing-tabs.html:4
-msgid "Invoices"
-msgstr "Rēķini"
-
-#: src/billing/invoice-header.html:9
-msgid "Invoices list"
-msgstr "Rēķinu saraksts"
-
-#: src/events/event-details-dialog.html:27
 msgid "IP address"
 msgstr "IP adrese"
 
-#: src/openstack/openstack-security-groups/security-group-rule-editor.html:11
-#: src/openstack/openstack-security-groups/security-group-rules-list.html:5
-#: src/openstack/openstack-security-groups/security-groups-dialog.html:14
 msgid "IP protocol"
 msgstr "IP protokols"
 
-#: src/openstack/openstack-subnet/openstack-subnet-summary.html:60
 msgid "IP version"
 msgstr "IP versija"
 
-#: src/openstack/openstack-instance/openstack-instance-internal-ips-list.js:44
-msgid "IPv4 address"
-msgstr "IPv4 adrese"
+msgid "Image"
+msgstr "Attēls"
 
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedule-summary.html:25
-#: src/openstack/openstack-backup-schedule/openstack-backup-schedules-list.js:48
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedule-summary.html:25
-#: src/openstack/openstack-snapshot-schedule/openstack-snapshot-schedules-list.js:48
+msgid "Image name"
+msgstr "Attēla nosaukums"
+
+msgid "Import"
+msgstr "Imports"
+
+msgid "Internal IP"
+msgstr "Iekšējā IP adrese"
+
+msgid "Invitation could not be accepted"
+msgstr "Uzaicinājums nevar tikt pieņemts."
+
+msgid "Invitation email is:"
+msgstr "Uzaicinājuma e-pasts ir:"
+
+msgid "Invitation has been canceled."
+msgstr "Uzaicinājums tika atcelts."
+
+msgid "Invitation has been sent again."
+msgstr "Uzaicinājums tika nosūtīts atkārtoti."
+
+msgid "Invitation is not found."
+msgstr "Uzaicinājums nav atrasts."
+
+msgid "Invitation is not valid."
+msgstr "Uzaicinājums nav derīgs."
+
+msgid "Invitation is not valid anymore."
+msgstr "Uzaicinājums vairs nav derīgs."
+
+msgid "Invitations"
+msgstr "Uzaicinājumi"
+
+msgid "Invite user"
+msgstr "Uzaicināt lietotāju"
+
+msgid "Invoice"
+msgstr "Rēķins"
+
+msgid "Invoice No."
+msgstr "Rēķins Nr."
+
+msgid "Invoice date"
+msgstr "Rēķina datums"
+
+msgid "Invoice number"
+msgstr "Rēķina numurs"
+
+msgid "Invoices list"
+msgstr "Rēķinu saraksts"
+
 msgid "Is active"
 msgstr "Aktīvs"
 
-#: src/issues/issue-detail.html:70
 msgid "Link"
 msgstr "Saite"
 
-#: src/project/project-providers-service.js:80
-#: src/providers/details/provider-projects.js:92
-msgid "Link created"
-msgstr "Saite ir izveidota"
-
-#: src/project/project-providers-service.js:97
-#: src/providers/details/provider-projects.js:111
-msgid "Link removed"
-msgstr "Saite ir nodzēsta"
-
-#: src/configs/base-config.js:215
 msgid "Lithuanian"
 msgstr "Lietuviešu valoda"
 
-#: src/customer/customer-users-details-list.js:30
-#: src/team/customer-users-list.js:67
-#: src/team/project-users-list.js:52
 msgid "Member"
 msgstr "Dalībnieks"
 
-#: src/user/hooks/hook-list.js:37
 msgid "Method"
 msgstr "Metode"
 
-#: src/quotas/filters.js:12
 msgid "Monthly cost"
 msgstr "Mēneša maksa"
 
-#: src/billing/invoice-events-dialog.html:33
 msgid "More info"
 msgstr "Vairāk informācijas"
 
-#: src/openstack/openstack-subnet/openstack-subnet-summary.html:19
 msgid "Network"
 msgstr "Tīkls"
 
-#: src/openstack/openstack-backup/actions.js:41
-#: src/openstack/openstack-instance/utils.js:122
-#: src/openstack/openstack-network/breadcrumbs.js:22
-#: src/openstack/openstack-subnet/breadcrumbs.js:23
 msgid "Networks"
 msgstr "Tīkli"
 
-#: src/cost-planning/cost-plan-dialog.js:42
 msgid "New plan"
 msgstr "Jauns plāns"
 
-#: src/digitalocean/droplet-resize.html:20
-#: src/openstack/openstack-volume/volume-extend.html:10
 msgid "New size"
 msgstr "Jauns izmērs"
 
-#: src/form/appstore-form-wizard.html:68
-#: src/table/responsive-table.js:108
 msgid "Next"
 msgstr "Tālāk"
 
-#: src/openstack/openstack-tenant/openstack-tenant-summary.html:24
-#: src/resource/resource-utils-service.js:5
 msgid "No access info"
 msgstr "Nav pieejas datu"
 
-#: src/user/hooks/hook-list.js:22
-msgid "No notifications registered."
-msgstr "Nav reģistrēto paziņojumu."
-
-#: src/user/user-organizations.js:49
-msgid "No organizations yet"
-msgstr "Pagaidām nav uzņēmumu"
-
-#: src/resource-import/import-virtual-clouds-list.js:39
-msgid "No private clouds to import."
-msgstr "Nav privāto mākoņu importam"
-
-#: src/user/user-projects.js:40
-msgid "No projects yet"
-msgstr "Pagaidām nav projektu"
-
-#: src/providers/provider-list.js:44
-msgid "No providers yet."
-msgstr "Pagaidām nav pakapājumu sniedzēju."
-
-#: src/providers/details/provider-project-link-quota.html:3
-msgid "No quota set"
-msgstr "Kvota nav uzstādīta"
-
-#: src/openstack/openstack-snapshot/import/import-snapshots-list.js:37
-msgid "No snapshots to import."
-msgstr "Nav snapshotu importam."
-
-#: src/openstack/openstack-backup/backup-snapshots-list.js:28
-#: src/openstack/openstack-snapshot/openstack-snapshots-nested-list.js:26
-msgid "No snapshots yet."
-msgstr "Pagaidām nav snapshotu."
-
-#: src/user/keys/key-list.js:25
-msgid "No SSH keys yet."
-msgstr "Pagaidām nav SSH atslēgu."
-
-#: src/customer/customer-create-prompt.html:9
-msgid "No, I will do it later"
-msgstr "Nē, es izdarīšu to vēlāk"
-
-#: src/user/constants.ts:18
-#: src/user/routes.js:29
 msgid "Notifications"
 msgstr "Paziņojumi"
 
-#: src/alerts/alert-filter.html:1
-#: src/openstack/openstack-tenant/openstack-tenant-summary.html:22
-#: src/resource/resource-utils-service.js:12
 msgid "Open"
 msgstr "Atvērt"
 
-#: src/navigation/select-workspace-dialog.html:36
-msgid "organization"
-msgstr "uzņēmums"
-
-#: src/events/event-details-dialog.html:59
-#: src/experts/requests/expert-request-customer-list.js:66
-#: src/issues/constants.ts:94
-#: src/issues/issue-create-dialog.html:12
-#: src/issues/issue-create-dialog.html:22
-#: src/issues/issue-create-dialog.html:7
-#: src/issues/issue-detail.html:30
-#: src/issues/issue-quick-create.html:56
-#: src/issues/issue-registration.html:43
-#: src/issues/issues-list.js:93
-#: src/user/user-projects.js:53
 msgid "Organization"
 msgstr "Uzņēmums"
 
-#: src/alerts/constants.ts:4
-msgid "Organization {customer_name} does not have any projects."
-msgstr "Uzņēmumam {customer_name} nav neviena projekta."
-
-#: src/alerts/constants.ts:3
-msgid "Organization {customer_name} does not have any resources."
-msgstr "Uzņēmumam {customer_name} nav neviena resursa."
-
-#: src/events/constants.ts:9
-msgid "Organization {customer_name} has been created."
-msgstr "Uzņēmums {customer_name} tika izveidots."
-
-#: src/events/constants.ts:10
-msgid "Organization {customer_name} has been deleted."
-msgstr "Uzņēmums {customer_name} tika nodzēsts."
-
-#: src/events/constants.ts:11
-msgid "Organization {customer_name} has been updated."
-msgstr "Uzņēmums {customer_name} tika izmanīts."
-
-#: src/alerts/constants.ts:2
-msgid "Organization {customer_name} has no providers."
-msgstr "Uzņēmumam {customer_name} nav pakalpojumu sniedzējau."
-
-#: src/customer/customer-manage.html:7
 msgid "Organization details"
 msgstr "Uzņēmuma detaļas"
 
-#: src/customer/customer-create-dialog.js:26
 msgid "Organization has been created."
 msgstr "Uzņēmums tika izveidots."
 
-#: src/analytics/cost-analysis.html:69
-#: src/issues/constants.ts:47
-#: src/user/user-edit.html:71
-#: src/user/user-organizations.js:54
 msgid "Organization name"
 msgstr "Uzņēmuma nosaukums"
 
-#: src/configs/base-config.js:188
 msgid "Organization owner"
 msgstr "Uzņēmuma īpašnieks"
 
-#: src/navigation/select-workspace-dialog.html:39
+msgid "Organization {customer_name} has been deleted."
+msgstr "Uzņēmums {customer_name} tika nodzēsts."
+
 msgid "Organizations"
 msgstr "Uzņēmumi"
 
-#: src/team/customer-users-list.js:77
-#: src/user/user-organizations.js:62
 msgid "Owner"
 msgstr "Īpašnieks"
 
-#: src/error/routes.js:17
-msgid "Page not found"
-msgstr "Lapa nav atrasta"
-
-#: src/error/error-404.html:3
-msgid "Page Not Found :/"
-msgstr "Lapa Nav Atrasta :/"
-
-#: src/billing/invoices-list.js:91
-#: src/paypal/paypal-invoices-list.js:105
 msgid "Paid"
 msgstr "Apmaksāts"
 
-#: src/auth/auth-login.html:36
-#: src/auth/auth-login.html:67
-#: src/azure/password-details.js:11
-#: src/openstack/openstack-tenant/openstack-tenant-summary.html:41
 msgid "Password"
 msgstr "Parole"
 
-#: src/events/constants.ts:53
-msgid "Password has been changed for user {affected_user_full_name}."
-msgstr "Parole lietotājam {affected_user_full_name} tika nomainīta."
-
-#: src/paypal/paypal-invoice-actions.html:21
 msgid "Pay invoice"
 msgstr "Apmaksāt rēķinu"
 
-#: src/events/event-details-dialog.html:17
-#: src/team/add-project-member.html:10
-#: src/team/add-project-member.html:20
-#: src/team/add-team-member.html:11
-#: src/team/customer-permissions-log-list.js:23
-#: src/team/project-permissions-log-list.js:22
 msgid "User"
 msgstr "Lietotājs"
 
-#: src/team/customer-permissions-log-list.js:29
-#: src/team/project-permissions-log-list.js:27
-msgid "User email"
-msgstr "Lietotāja e-pasta adrese"
-
-#: src/user/user-sidebar.html:8
 msgid "User profile"
 msgstr "Lietotāja profils"
 
-#: src/user/user-edit.html:51
 msgid "User status"
 msgstr "Lietotāja statuss"
 
-#: src/invitations/invitation-confirm-dialog.html:16
 msgid "Your current email is:"
 msgstr "Jūsu esošā e-pasta adrese ir:"
 
-#: src/invitations/utils.js:77
 msgid "Your invitation was accepted."
 msgstr "Jūsu uzaicinājums tika pieņemts."
+
+msgid "(VAT is not included)"
+msgstr "(PVN nav iekļauts)"
+
+msgid "organization"
+msgstr "uzņēmums"
+
+msgid "{usage} of {limit} used"
+msgstr "{usage} no {limit} ir izmantoti"

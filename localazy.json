@@ -1,0 +1,37 @@
+{
+  "upload": {
+    "deprecateMissing": true,
+    "files": [
+      {
+        "type": "pot",
+        "group": "source",
+        "pattern": "template-for-localazy.pot",
+        "features": [
+          "use_key_for_content",
+          "filter_untranslated"
+        ],
+        "lang": "inherited"
+      },
+      {
+        "group": "existing",
+        "pattern": "locales/*.po",
+        "type": "po",
+        "excludes": [
+          "locales/templates.pot",
+          "locales/par.po",
+          "locales/iwm.po",
+          "locales/neic.po",
+          "locales/ita.po"
+        ],
+        "features": [
+          "filter_untranslated"
+        ],
+        "file": "template-for-localazy.pot",
+        "lang": "${autodetectLang}"
+      }
+    ]
+  },
+  "download": {
+    "files": "locales/${lang}.po"
+  }
+}
