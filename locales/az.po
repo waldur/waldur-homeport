@@ -51,7 +51,7 @@ msgid "Accounting records"
 msgstr "Uçot sənədləri"
 
 msgid "Accounting start date"
-msgstr "Uçotun başlama tarixi "
+msgstr "Uçotun başlama tarixi"
 
 msgid "Actions"
 msgstr "Əməliyyatlar"
@@ -939,7 +939,7 @@ msgid "Invoice for organization {customer_link} for the period of {period} has b
 msgstr "{period} dövrü üzrə {customer_link} təşkilatı üçün faktura yenilənmişdir."
 
 msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
-msgstr "{period} dövrü üzrə {customer_link} təşkilatı üçün faktura silindi."
+msgstr "{period} dövrü üzrə {customer_name} təşkilatı üçün faktura silindi."
 
 msgid "Invoice has not been sent to PayPal yet"
 msgstr "Faktura hələ PayPal-a göndərilməyib"
@@ -1065,7 +1065,7 @@ msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr "Zəruri istifadəçi adı prefiksi ilə maksimal istifadəçi adının uzunluğu 32 simvoldur."
 
 msgid "Member"
-msgstr "Üzv "
+msgstr "Üzv"
 
 msgid "Message"
 msgstr "Mesaj"
@@ -2256,16 +2256,16 @@ msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "{user_link} istifadəçi vəzifəni {affected_user_link}-ə vermişdir."
 
 msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
-msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın sahibini {müştəri_linki}-ndən ləğv etmşdir."
+msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın sahibini {customer_link}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
-msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın dəstəyini {müştəri_linki}-ndən ləğv etmşdir."
+msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın dəstəyini {customer_link}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
-msgstr "{user_link} istifadəçi {affected_user_link} layihə administratorunu {müştəri_linki}-ndən ləğv etmşdir."
+msgstr "{user_link} istifadəçi {affected_user_link} layihə administratorunu {project_link}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
-msgstr "{user_link} istifadəçi {affected_user_link} layihə menecerini {müştəri_linki}-ndən ləğv etmşdir."
+msgstr "{user_link} istifadəçi {affected_user_link} layihə menecerini {project_link}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "{user_link} istifadəçi {affected_user_link} ləğv etmşdir."
@@ -2424,7 +2424,7 @@ msgid "commented:"
 msgstr "şərh etdi:"
 
 msgid "current state on backend: {resourceState}."
-msgstr "Çıxış buferi üzrə mövcud vəziyyət: {resursVəziyyəti}."
+msgstr "Çıxış buferi üzrə mövcud vəziyyət: {resourceState}."
 
 msgid "error message: {errorMessage}"
 msgstr "Xəta mesajı: {xətaMesajı}"
@@ -2526,7 +2526,7 @@ msgid "{resource_link} stop has failed."
 msgstr "{resource_link} dayandırıla bilmədi."
 
 msgid "{resource_name} has been deleted."
-msgstr "{resurs_adı} silindi."
+msgstr "{resource_name} silindi."
 
 msgid "{usage} of {limit}"
 msgstr "{limit}-in {usage} istifadəsi"
