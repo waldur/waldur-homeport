@@ -1,0 +1,819 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Localazy (https://localazy.com)\n"
+"Project-Id-Version: waldur-homeport\n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
+
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "\"{trimmed}\" overskrider grænsen for {max_len} tegn i FQDN"
+
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Servicevilkår</Link> er blevet accepteret den <Date></Date>"
+
+msgid "API URL"
+msgstr "API URL"
+
+msgid "API secret code:"
+msgstr "API-hemmelig kode:"
+
+msgid "API token lifetime"
+msgstr "API-tokens levetid"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "En minimal forventet konfiguration af arbejdstager er 4 vCPU og 4 GB RAM."
+
+msgid "A one-time fee applied on activation."
+msgstr "Et engangsgebyr opkræves ved aktivering."
+
+msgid "A profile has been created."
+msgstr "Der er oprettet en profil."
+
+msgid "Abbreviation"
+msgstr "Forkortelse"
+
+msgid "Accept"
+msgstr "Acceptér"
+
+msgid "Accept booking"
+msgstr "Accepter booking"
+
+msgid "Access subnets"
+msgstr "Adgang til undernet"
+
+msgid "Access token"
+msgstr "Adgangstoken"
+
+msgid "Accessible to all customers."
+msgstr "Tilgængelig for alle kunder."
+
+msgid "Account activation"
+msgstr "Aktivering af konto"
+
+msgid "Account has been activated."
+msgstr "Kontoen er blevet aktiveret."
+
+msgid "Account removal"
+msgstr "Fjernelse af konto"
+
+msgid "Accounting period"
+msgstr "Regnskabsperiode"
+
+msgid "Accounting plans"
+msgstr "Regnskabsplaner"
+
+msgid "Accounting record"
+msgstr "Regnskabsoptegnelse"
+
+msgid "Accounting records"
+msgstr "Regnskabsoptegnelser"
+
+msgid "Accounting running"
+msgstr "Regnskab kører"
+
+msgid "Accounting start date"
+msgstr "Regnskabsstartdato"
+
+msgid "Accounting type"
+msgstr "Regnskabstype"
+
+msgid "Action has been applied."
+msgstr "Der er anvendt en handling."
+
+msgid "Activation price"
+msgstr "Aktiveringspris"
+
+msgid "Active count"
+msgstr "Aktiv Tælling"
+
+msgid "Active user will be able to login into the portal."
+msgstr "Aktiv bruger vil kunne logge ind på portalen."
+
+msgid "Add SSH key"
+msgstr "Tilføj SSH-nøgle"
+
+msgid "Add Waldur user SSH keys to the FreeIPA profile"
+msgstr "Tilføj Waldur bruger SSH nøgler til FreeIPA-profilen"
+
+msgid "Add component"
+msgstr "Tilføj komponent"
+
+msgid "Add data volume"
+msgstr "Tilføj datavolumen"
+
+msgid "Add environment variable"
+msgstr "Tilføj miljøvariabel"
+
+msgid "Add key"
+msgstr "Tilføj nøgle"
+
+msgid "Add new offering"
+msgstr "Tilføj nyt tilbud"
+
+msgid "Add new organization"
+msgstr "Tilføj ny organisation"
+
+msgid "Add new project"
+msgstr "Tilføj nyt projekt"
+
+msgid "Add offering"
+msgstr "Tilføj tilbud"
+
+msgid "Add pair"
+msgstr "Tilføj par"
+
+msgid "Add payment profile"
+msgstr "Tilføj betalingsprofil"
+
+msgid "Add project member"
+msgstr "Tilføj projektmedlem"
+
+msgid "Add resource"
+msgstr "Tilføj ressource"
+
+msgid "Add security group"
+msgstr "Tilføj sikkerhedsgruppe"
+
+msgid "Add team member"
+msgstr "Tilføj teammedlem"
+
+msgid "Add to a new namespace"
+msgstr "Føj til et nyt navneområde"
+
+msgid "Add to comparison"
+msgstr "Tilføj til sammenligning"
+
+msgid "Add user input field"
+msgstr "Tilføj bruger indtastningsfelt"
+
+msgid "Additional data that will be added to instance on provisioning."
+msgstr "Yderligere data, der vil blive tilføjet til instansen ved tilrådighedsstillelse."
+
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr "Yderligere data, der vil blive tilføjet til den virtuelle maskine ved tilrådighedsstillelse."
+
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr "Yderligere plads, der skal anvendes på lagringskvote, der skal bruges af snapshots."
+
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "Derudover kan tjenesteudbyderen opkræve betaling for brug af følgende komponenter"
+
+msgid "Admin username"
+msgstr "Admin brugernavn"
+
+msgid "Affected resource"
+msgstr "Berørt ressource"
+
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr "Når den hemmelige API-kode er blevet regenereret, vil det ikke være muligt at indsende brug med den gamle nøgle."
+
+msgid "Agree with ToS"
+msgstr "Enig med ToS"
+
+msgid "Agreement number"
+msgstr "Aftalens nummer"
+
+msgid "All resources have been imported."
+msgstr "Alle ressourcer er blevet importeret."
+
+msgid "Allocation description"
+msgstr "Beskrivelse af tildeling"
+
+msgid "Allocation name"
+msgstr "Navn på tildeling"
+
+msgid "Allocation pools"
+msgstr "Tildelingspuljer"
+
+msgid "Allow bookings to be scheduled at weekends"
+msgstr "Tillad, at bookinger kan planlægges i weekender"
+
+msgid "Allow to enable/disable component only"
+msgstr "Tillad kun at aktivere/deaktivere komponent"
+
+msgid "Allowed address pairs update was scheduled."
+msgstr "Opdatering af tilladte adressepar var planlagt."
+
+msgid "An error occurred on project removal."
+msgstr "Der opstod en fejl ved fjernelse af projektet."
+
+msgid "Answers have been submitted"
+msgstr "Svar er blevet indsendt"
+
+msgid "Application catalogues"
+msgstr "Ansøgningskataloger"
+
+msgid "Application configuration"
+msgstr "Applikationskonfiguration"
+
+msgid "Application details"
+msgstr "Oplysninger om ansøgning"
+
+msgid "Application has been created."
+msgstr "Ansøgning er blevet oprettet."
+
+msgid "Application templates"
+msgstr "Skabeloner til ansøgninger"
+
+msgid "Approve payment"
+msgstr "Godkend betaling"
+
+msgid "Approved at"
+msgstr "Godkendt på"
+
+msgid "Archived plans"
+msgstr "Arkiverede planer"
+
+msgid "Are you sure you want to accept a {name}?"
+msgstr "Er du sikker på at du vil acceptere en {name}?"
+
+msgid "Are you sure you want to cluster template? Note this will reset the node plan."
+msgstr "Er du sikker på, at du vil klynge skabelon? Bemærk, at dette vil nulstille nodeplanen."
+
+msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
+msgstr "Er du sikker på, at du vil slette en {name} {resourceType} i en forkert tilstand? Et oprydningsforsøg vil blive udført, hvis du vælger det."
+
+msgid "Are you sure you want to delete the payment?"
+msgstr "Er du sikker på, at du vil slette betalingen?"
+
+msgid "Are you sure you want to delete the payment profile?"
+msgstr "Er du sikker på, at du vil slette betalingsprofilen?"
+
+msgid "Are you sure you want to delete this {resourceType}?"
+msgstr "Er du sikker på, at du vil slette denne {resourceType}?"
+
+msgid "Are you sure you want to revoke this permission?"
+msgstr "Er du sikker på, at du vil tilbagekalde denne tilladelse?"
+
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
+msgstr "Er du sikker på, at du vil slette Rancher-kataloget {catalog}?"
+
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr "Er du sikker på, at du vil slette projektet {projectName}?"
+
+msgid "Are you sure you would like to delete the hook?"
+msgstr "Er du sikker på, at du gerne vil slette krogen?"
+
+msgid "Are you sure you would like to delete the key?"
+msgstr "Er du sikker på, at du vil slette nøglen?"
+
+msgid "Are you sure you would like to terminate resource {resourceName}?"
+msgstr "Er du sikker på, at du gerne vil afslutte ressourcen {resourceName}?"
+
+msgid "Article code"
+msgstr "Artikelkode"
+
+msgid "At least one plan must be entered"
+msgstr "Mindst én plan skal indtastes"
+
+msgid "Attach OpenStack Volume to Instance"
+msgstr "Vedhæft OpenStack-diskenhed til forekomst"
+
+msgid "Attach has been scheduled."
+msgstr "Der er blevet planlagt en vedhæftning."
+
+msgid "Attach volume"
+msgstr "Vedhæft volumen"
+
+msgid "Attached to"
+msgstr "Vedhæftet til"
+
+msgid "Attributes are invalid."
+msgstr "Attributter er ugyldige."
+
+msgid "Attributes filter"
+msgstr "Attributter filter"
+
+msgid "Authenticate using Mobile ID"
+msgstr "Godkend ved hjælp af Mobile ID"
+
+msgid "Authentication events"
+msgstr "Godkendelsesbegivenheder"
+
+msgid "Authentication token"
+msgstr "Godkendelsestoken"
+
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgstr "Godkendelse med mobil-id er blevet annulleret af brugeren eller er gået ud i tid. Detaljer:"
+
+msgid "Authorized personnel"
+msgstr "Autoriseret personale"
+
+msgid "Auto-assign floating IP"
+msgstr "Tildel automatisk flydende IP"
+
+msgid "Auto approve in service provider projects"
+msgstr "Godkend automatisk i tjenesteudbyderprojekter"
+
+msgid "Availability zone"
+msgstr "Tilgængelighedszone"
+
+msgid "Available quota usage: {usage}"
+msgstr "Tilgængelig kvoteforbrug: {usage}"
+
+msgid "Average of all checklists"
+msgstr "Gennemsnit af alle tjeklister"
+
+msgid "Average utilization"
+msgstr "Gennemsnitlig udnyttelse"
+
+msgid "Azure provider"
+msgstr "Azure-udbyder"
+
+msgid "Back to organization"
+msgstr "Tilbage til organisation"
+
+msgid "Back to personal dashboard"
+msgstr "Tilbage til det personlige instrumentbræt"
+
+msgid "Back to project"
+msgstr "Tilbage til projektet"
+
+msgid "Back to shopping"
+msgstr "Tilbage til shopping"
+
+msgid "Backend ID"
+msgstr "Backend-ID"
+
+msgid "Backend ID has been successfully set."
+msgstr "Backend-ID er blevet indstillet med succes."
+
+msgid "Base image name"
+msgstr "Navn på basisbillede"
+
+msgid "Batch RAM"
+msgstr "Batch RAM"
+
+msgid "Batch block storage size"
+msgstr "Lagerstørrelse på batchblok"
+
+msgid "Batch processing documentation"
+msgstr "Dokumentation om batchbehandling"
+
+msgid "Batch vCPU"
+msgstr "Batch vCPU"
+
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr "Bliv kunde på vores portal. Klargør IT-tjenester fra Marketplace, og administrer dit team fra ét sted."
+
+msgid "Billing enabled"
+msgstr "Fakturering aktiveret"
+
+msgid "Billing period"
+msgstr "Faktureringsperiode"
+
+msgid "Booking description"
+msgstr "Beskrivelse af booking"
+
+msgid "Booking has been accepted."
+msgstr "Booking er blevet accepteret."
+
+msgid "Booking has been cancelled."
+msgstr "Booking er blevet annulleret."
+
+msgid "Booking is not allowed to overlap other bookings."
+msgstr "Booking er ikke tilladt at overlappe andre bookinger."
+
+msgid "Bootable"
+msgstr "Bootbar"
+
+msgid "Browse image"
+msgstr "Gennemse billede"
+
+msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
+msgstr "Ved at indstille tokens levetid til ubestemt tillader du alle, der har tokenet, at udgive sig for at udføre dine handlinger, indtil tokenet er blevet ændret."
+
+msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
+msgstr "Ved at indsende formularen accepterer du <Link>Servicevilkår</Link>."
+
+msgid "CIDR"
+msgstr "CIDR"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "CPU limit (hours)"
+msgstr "CPU-grænse (timer)"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Caller"
+msgstr "Opkalder"
+
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr "Kan ikke oprette flydende IP, hvis eksternt netværk for lejere ikke er defineret."
+
+msgid "Catalog URL"
+msgstr "Katalog URL"
+
+msgid "Catalog has been created."
+msgstr "Katalog er blevet oprettet."
+
+msgid "Catalog has been deleted."
+msgstr "Kataloget er blevet slettet."
+
+msgid "Catalogues"
+msgstr "Kataloger"
+
+msgid "Category is invalid."
+msgstr "Kategori er ugyldig."
+
+msgid "Challenge code"
+msgstr "Udfordringskode"
+
+msgid "Change Request"
+msgstr "Anmodning om ændring"
+
+msgid "Change flavor"
+msgstr "Ændre smag"
+
+msgid "Change limits"
+msgstr "Ændre grænser"
+
+msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr "Ændringsanmodning - klientens anmodning om at udføre en generisk ændring af data eller tjeneste."
+
+msgid "Change resource limits"
+msgstr "Ændre ressourcegrænser"
+
+msgid "Change resource plan"
+msgstr "Ændring af ressourceplan"
+
+msgid "Change user email"
+msgstr "Ændre bruger-e-mail"
+
+msgid "Changing flavor"
+msgstr "Ændring af smag"
+
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr "Gebyr for brugsbaseret komponent er baseret på bruger-anmodet grænse."
+
+msgid "Charset"
+msgstr "Charset"
+
+msgid "Checklist setup"
+msgstr "Opsætning af tjekliste"
+
+msgid "Choices as comma-separated list"
+msgstr "Valg som kommasepareret liste"
+
+msgid "Civil number"
+msgstr "Civilt nummer"
+
+msgid "Client organization"
+msgstr "Kundeorganisation"
+
+msgid "Client project"
+msgstr "Kundeprojekt"
+
+msgid "Cloud RAM"
+msgstr "Cloud RAM"
+
+msgid "Cloud block storage size"
+msgstr "Cloud block lagerstørrelse"
+
+msgid "Cloud init template"
+msgstr "Cloud init-skabelon"
+
+msgid "Cloud vCPU"
+msgstr "Cloud vCPU"
+
+msgid "Cluster IP"
+msgstr "Klynge IP"
+
+msgid "Cluster description"
+msgstr "Beskrivelse af klyngen"
+
+msgid "Cluster name"
+msgstr "Klyngens navn"
+
+msgid "Cluster roles"
+msgstr "Klyngeroller"
+
+msgid "Code is too short."
+msgstr "Koden er for kort."
+
+msgid "Code should consist of latin symbols or numbers."
+msgstr "Koden skal bestå af latinske symboler eller tal."
+
+msgid "Collation"
+msgstr "Sortering"
+
+msgid "Company data"
+msgstr "Virksomhedsdata"
+
+msgid "Compare items"
+msgstr "Sammenlign varer"
+
+msgid "Competence"
+msgstr "Kompetence"
+
+msgid "Components are invalid."
+msgstr "Komponenterne er ugyldige."
+
+msgid "Compute generation"
+msgstr "Beregn generering"
+
+msgid "Configuration options"
+msgstr "Konfigurationsmuligheder"
+
+msgid "Confirmation mail has been sent. Please check your inbox!"
+msgstr "Bekræftelsesmail er blevet sendt. Tjek venligst din indbakke!"
+
+msgid "Confirmation notification template"
+msgstr "Skabelon til bekræftelsesmeddelelse"
+
+msgid "Confirming that data is correct"
+msgstr "Bekræftelse af, at dataene er korrekte"
+
+msgid "Connect subnet to a default virtual router"
+msgstr "Tilslut undernet til en virtuel standardrouter"
+
+msgid "Connected subnets"
+msgstr "Tilsluttede undernet"
+
+msgid "Connection details"
+msgstr "Oplysninger om forbindelsen"
+
+msgid "Contact phone"
+msgstr "Kontakt telefon"
+
+msgid "Contract sum"
+msgstr "Kontrakt sum"
+
+msgid "Contract sum is"
+msgstr "Kontrakt sum er"
+
+msgid "Control plane"
+msgstr "Kontrolplan"
+
+msgid "Could not create organization"
+msgstr "Kunne ikke oprette organisation"
+
+msgid "Create Network adapter"
+msgstr "Opret netværkskort"
+
+msgid "Create SQL database in PostgreSQL server"
+msgstr "Opret SQL-database i PostgreSQL-server"
+
+msgid "Create VM snapshot for OpenStack instance"
+msgstr "Opret VM-snapshot til OpenStack-forekomst"
+
+msgid "Create VM snapshot schedule for OpenStack instance"
+msgstr "Opret VM-snapshotplan for OpenStack-forekomst"
+
+msgid "Create an availability"
+msgstr "Opret en tilgængelighed"
+
+msgid "Create application"
+msgstr "Opret ansøgning"
+
+msgid "Create catalog"
+msgstr "Opret katalog"
+
+msgid "Create disk"
+msgstr "Opret disk"
+
+msgid "Create horizontal pod autoscaler"
+msgstr "Opret en vandret pod autoscaler"
+
+msgid "Create network for OpenStack tenant"
+msgstr "Opret netværk til OpenStack-lejer"
+
+msgid "Create node"
+msgstr "Opret node"
+
+msgid "Create organization"
+msgstr "Opret organisation"
+
+msgid "Create port"
+msgstr "Opret port"
+
+msgid "Create request"
+msgstr "Opret anmodning"
+
+msgid "Create security group for OpenStack tenant {name}"
+msgstr "Opret sikkerhedsgruppe til OpenStack-lejer {name}"
+
+msgid "Create snapshot for OpenStack volume"
+msgstr "Opret snapshot til OpenStack-volumen"
+
+msgid "Create snapshot schedule for OpenStack volume"
+msgstr "Opret snapshot-plan til OpenStack-volumen"
+
+msgid "Create subnet"
+msgstr "Opret undernet"
+
+msgid "Create your first project"
+msgstr "Opret dit første projekt"
+
+msgid "Created a new payment for {customer_link}."
+msgstr "Oprettet en ny betaling for {customer_link}."
+
+msgid "Created at"
+msgstr "Oprettet på"
+
+msgid "Creating a backup schedule"
+msgstr "Oprettelse af en sikkerhedskopieringsplan"
+
+msgid "Creating a floating IP"
+msgstr "Oprettelse af en flydende IP"
+
+msgid "Creating a new network"
+msgstr "Oprettelse af et nyt netværk"
+
+msgid "Creating a security group"
+msgstr "Oprettelse af en sikkerhedsgruppe"
+
+msgid "Creating a subnet"
+msgstr "Oprettelse af et undernet"
+
+msgid "Creating snapshot schedule"
+msgstr "Oprettelse af snapshotplan"
+
+msgid "Current API token"
+msgstr "Nuværende API-token"
+
+msgid "Current cost"
+msgstr "Nuværende omkostninger"
+
+msgid "Current flavor"
+msgstr "Nuværende smag"
+
+msgid "Current price per month"
+msgstr "Nuværende pris pr. måned"
+
+msgid "Current size"
+msgstr "Nuværende størrelse"
+
+msgid "Data volume size:"
+msgstr "Datavolumenstørrelse:"
+
+msgid "Default SLURM account for user"
+msgstr "Standard SLURM-konto for bruger"
+
+msgid "Default availability zone for provisioned instances."
+msgstr "Standard tilgængelighedszone for klargjorte forekomster."
+
+msgid "Delete volumes"
+msgstr "Slet diskenheder"
+
+msgid "Destination URL"
+msgstr "Destinations-URL"
+
+msgid "Destroying"
+msgstr "Ødelægge"
+
+msgid "Detaching"
+msgstr "Afmontering"
+
+msgid "DigitalOcean provider"
+msgstr "DigitalOcean-udbyder"
+
+msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgstr "Deaktiver en profil i FreeIPA. Deaktiverede profiler er ikke tilladt til login til Linux-systemerne"
+
+msgid "Disable data volume"
+msgstr "Deaktiver datamængde"
+
+msgid "Disable profile"
+msgstr "Deaktiver profil"
+
+msgid "Do not have an account?"
+msgstr "Har du ikke en konto?"
+
+msgid "Do you really want to delete comment?"
+msgstr "Vil du virkelig slette en kommentar?"
+
+msgid "Documentation"
+msgstr "Dokumentation"
+
+msgid "Domain name. If not defined default domain will be used."
+msgstr "Domænenavn. Hvis ikke defineret standard domæne vil blive brugt."
+
+msgid "Download invoice"
+msgstr "Download faktura"
+
+msgid "Drop files to attach, or"
+msgstr "Slip filer for at vedhæfte, eller"
+
+msgid "Drop files to attach them to the issue."
+msgstr "Slip filer for at vedhæfte dem til problemet."
+
+msgid "EU VAT ID"
+msgstr "EU VAT ID"
+
+msgid "Edit project member"
+msgstr "Rediger projektmedlem"
+
+msgid "Edit team member"
+msgstr "Rediger teammedlem"
+
+msgid "Enable DHCP"
+msgstr "Aktivér DHCP"
+
+msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
+msgstr "Aktivér en profil i FreeIPA. Kun aktiverede profiler er tilladt til login i Linux-systemerne"
+
+msgid "Enable profile"
+msgstr "Aktivér profil"
+
+msgid "Esimated price per month"
+msgstr "Esimeret pris pr. måned"
+
+msgid "Estimated cost"
+msgstr "Anslåede omkostninger"
+
+msgid "Event types"
+msgstr "Begivenhedstyper"
+
+msgid "Every day at"
+msgstr "Hver dag på"
+
+msgid "Excel"
+msgstr "Excel"
+
+msgid "Expires at"
+msgstr "Udløber kl."
+
+msgid "Extend OpenStack volume"
+msgstr "Udvid OpenStack-volumen"
+
+msgid "Extending"
+msgstr "Udvidelse"
+
+msgid "External IP"
+msgstr "Ekstern IP"
+
+msgid "External network ID"
+msgstr "Eksternt netværks-ID"
+
+msgid "File download has been started."
+msgstr "Download af filer er startet."
+
+msgid "File has been downloaded."
+msgstr "Filen er blevet downloadet."
+
+msgid "Filter organizations"
+msgstr "Filtrer organisationer"
+
+msgid "Filter projects"
+msgstr "Filtrer projekter"
+
+msgid "Financial overview"
+msgstr "Finansiel oversigt"
+
+msgid "Flavor"
+msgstr "Smag"
+
+msgid "Flavor exclude regex"
+msgstr "Smag udelukker regex"
+
+msgid "Flavor name"
+msgstr "Smagsnavn"
+
+msgid "Flavors matching this regex expression will not be pulled from the backend."
+msgstr "Smagsvarianter der matcher dette regex-udtryk vil ikke blive trukket fra backend'en."
+
+msgid "Flexible"
+msgstr "Fleksibel"
+
+msgid "Floating IP"
+msgstr "Flydende IP"
+
+msgid "Floating IP count"
+msgstr "Flydende IP-tælling"
+
+msgid "Floating IPs"
+msgstr "Flydende IP'er"
+
+msgid "Flowmap"
+msgstr "Flowmap"
+
+msgid "FreeIPA account"
+msgstr "FreeIPA-konto"
+
+msgid "FreeIPA account needs to be set up."
+msgstr "FreeIPA-konto skal oprettes."
+
+msgid "From port"
+msgstr "Fra havn"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "GPU usage"
+msgstr "GPU-brug"
+
+msgid "Gateway"
+msgstr "Gateway"
+
+msgid "Go to my profile"
+msgstr "Gå til min profil"
+
+msgid "(VAT is not included)"
+msgstr "(Moms er ikke inkluderet)"
