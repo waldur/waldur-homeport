@@ -8,8 +8,23 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=((n%10==1) && (n%100!=11)) ? 0 : ((n%10>=2 && n%10<=4) && ((n%100<12 || n%100>14))) ? 1 : 2;\n"
 
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "Доменное имя «{trimmed}» должно иметь не более {max_len} символов"
+
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Условия предоставления услуг</Link> были приняты <Date></Date>"
+
+msgid "API secret code:"
+msgstr "Секретный код API:"
+
 msgid "API token lifetime"
 msgstr "Время жизни токена API"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "Рабочий узел должен иметь не менее 4 виртуальных ЦП и 4 ГБ ОЗУ."
+
+msgid "A one-time fee applied on activation."
+msgstr "Единовременная плата за активацию."
 
 msgid "A profile has been created."
 msgstr "Профиль создан."
@@ -19,6 +34,12 @@ msgstr "Аббревиатура"
 
 msgid "Accept"
 msgstr "Принять"
+
+msgid "Accept booking"
+msgstr "Принять запрос на бронирование"
+
+msgid "Accept invitation"
+msgstr "Принять приглашение"
 
 msgid "Accepted"
 msgstr "Принятый"
@@ -41,6 +62,9 @@ msgstr "Удаление аккаунта"
 msgid "Actions"
 msgstr "Действия"
 
+msgid "Activation price"
+msgstr "Цена активации"
+
 msgid "Activity stream"
 msgstr "Лента активности"
 
@@ -49,6 +73,9 @@ msgstr "Добавить"
 
 msgid "Add SSH key"
 msgstr "Добавить SSH ключ"
+
+msgid "Add environment variable"
+msgstr "Добавить переменную среды"
 
 msgid "Add key"
 msgstr "Добавить ключ"
@@ -71,14 +98,41 @@ msgstr "Добавить уведомление"
 msgid "Add organization"
 msgstr "Добавить организацию"
 
+msgid "Add payment profile"
+msgstr "Добавить платежный профиль"
+
+msgid "Add plan"
+msgstr "Добавить план"
+
 msgid "Add project"
 msgstr "Добавить проект"
 
 msgid "Add project member"
 msgstr "Добавить участника проекта"
 
+msgid "Add resource"
+msgstr "Добавить ресурс"
+
+msgid "Add route"
+msgstr "Добавить маршрут"
+
 msgid "Add rule"
 msgstr "Добавить правило"
+
+msgid "Add security group"
+msgstr "Добавить группу безопасности"
+
+msgid "Add team member"
+msgstr "Добавить участника команды"
+
+msgid "Add to a new namespace"
+msgstr "Добавить в новое пространство имен"
+
+msgid "Add to cart"
+msgstr "В корзину"
+
+msgid "Add to comparison"
+msgstr "Добавить к сравнению"
 
 msgid "Add user"
 msgstr "Добавить пользователя"
@@ -89,11 +143,26 @@ msgstr "Пользовательские данные, которые будут
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr "Пользовательские данные, которые будут добавлены в виртуальную машину при её создании."
 
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "Кроме того, поставщик услуг может взимать плату за использование следующих компонентов"
+
 msgid "Address"
 msgstr "Адрес"
 
+msgid "Admin password"
+msgstr "Пароль администратора"
+
+msgid "Admin username"
+msgstr "Имя учётной записи администратора"
+
+msgid "Agree with ToS"
+msgstr "Подтвердить принятие условий обслуживания"
+
 msgid "Agreement number"
 msgstr "Номер договора"
+
+msgid "All day"
+msgstr "Весь день"
 
 msgid "Already have an account?"
 msgstr "У вас уже есть аккаунт?"
@@ -101,8 +170,17 @@ msgstr "У вас уже есть аккаунт?"
 msgid "An error occurred on project removal."
 msgstr "Произошла ошибка при удалении проекта."
 
+msgid "Answers"
+msgstr "Ответы"
+
+msgid "Answers have been submitted"
+msgstr "Ответы были представлены"
+
 msgid "Applications"
 msgstr "Приложения"
+
+msgid "Apply"
+msgstr "Применить"
 
 msgid "Back"
 msgstr "Назад"
@@ -278,11 +356,20 @@ msgstr "Каждую минуту"
 msgid "Every month"
 msgstr "Каждый месяц"
 
+msgid "Every month on the {days} at {time}"
+msgstr "Каждый месяц {days} в {time}"
+
 msgid "Every week"
 msgstr "Каждую неделю"
 
+msgid "Every week on {day} at {time}"
+msgstr "Каждую неделю {days} в {time}"
+
 msgid "Every year"
 msgstr "Каждый год"
+
+msgid "Existing quota usage: {usage}"
+msgstr "Использование текущей квоты:"
 
 msgid "Export as"
 msgstr "Экспортировать как"
@@ -386,6 +473,9 @@ msgstr "Оставьте пустым, если желаете, чтобы им�
 msgid "Legal address"
 msgstr "Юридический адрес"
 
+msgid "Link"
+msgstr "Ссылка"
+
 msgid "Lithuanian"
 msgstr "Литовский"
 
@@ -448,6 +538,9 @@ msgstr "Название организации"
 
 msgid "Organization owner"
 msgstr "Владелец организации"
+
+msgid "Organization {customer_name} has been deleted."
+msgstr "Организация {customer_name} удалена."
 
 msgid "Organizations"
 msgstr "Организации"
@@ -544,3 +637,9 @@ msgstr "(НДС не включен)"
 
 msgid "organization"
 msgstr "организация"
+
+msgid "{usage} of {limit} used"
+msgstr "{usage} из {limit} использовано"
+
+msgid "{value} at {date}"
+msgstr "{value} {date}"

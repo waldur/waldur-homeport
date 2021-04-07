@@ -188,6 +188,9 @@ msgstr "Avtomatik təyin olunan IP"
 msgid "Availability zone"
 msgstr "Əlçatanlıq zonası"
 
+msgid "Available quota usage: {usage}"
+msgstr "Mövcud kvota: {usage}"
+
 msgid "Azure provider"
 msgstr "Azure provayderi"
 
@@ -379,6 +382,9 @@ msgstr "Alt-şəbəkə yaratmaq "
 
 msgid "Created"
 msgstr "Yaradıldı"
+
+msgid "Created a new payment for {customer_link}."
+msgstr "{customer_link} üçün yeni ödəniş yaradıldı."
 
 msgid "Created at"
 msgstr "--də/da yaradıldı"
@@ -587,20 +593,35 @@ msgstr "Hər gün _----- də/da"
 msgid "Every hour"
 msgstr "Hər saat"
 
+msgid "Every hour at {minuteValues} past the hour"
+msgstr "Saatdan {minuteValues} keçmiş hər saatda "
+
 msgid "Every minute"
 msgstr "Hər dəqiqə "
 
 msgid "Every month"
 msgstr "Hər ay "
 
+msgid "Every month on the {days} at {time}"
+msgstr "Hər ay {days} günü saat {time}"
+
+msgid "Every month on the {days} of {months} at {time}"
+msgstr "Hər ayın {months}ayının {days} günü saat {time}"
+
 msgid "Every week"
 msgstr "Hər həftə"
+
+msgid "Every week on {day} at {time}"
+msgstr "Hər həftə {days} günü saat {time}"
 
 msgid "Every year"
 msgstr "Hər il "
 
 msgid "Excel"
 msgstr "Excel "
+
+msgid "Existing quota usage: {usage}"
+msgstr "Mövcud kvota istifadəsi: {usage}"
 
 msgid "Expiration time"
 msgstr "Bitmə vaxtı"
@@ -664,6 +685,9 @@ msgstr "Variantlar daimi ifadələri istisna edir "
 
 msgid "Flavor name"
 msgstr "Variantların adı "
+
+msgid "Flavor name: {flavor_name}"
+msgstr "Variantların adı: {flavor_name}"
 
 msgid "Flavors matching this regex expression will not be pulled from the backend."
 msgstr "Bu daimi ifadəyə uyğun gələn variantlar sever hissəsindən çıxarıla bilməz"
@@ -908,6 +932,15 @@ msgstr "Faktura tədbirləri"
 msgid "Invoice events timeline"
 msgstr "Faktura tədbirlərinin qrafiki"
 
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgstr "{period} dövrü üzrə {customer_link} təşkilatı üçün faktura yaradılmışdır."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "{period} dövrü üzrə {customer_link} təşkilatı üçün faktura yenilənmişdir."
+
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgstr "{period} dövrü üzrə {customer_link} təşkilatı üçün faktura silindi."
+
 msgid "Invoice has not been sent to PayPal yet"
 msgstr "Faktura hələ PayPal-a göndərilməyib"
 
@@ -928,6 +961,9 @@ msgstr "Rəsmidir"
 
 msgid "Issue link"
 msgstr "Məsələ linki"
+
+msgid "Issue {issue_link} has been created by {caller_link}."
+msgstr "{issue_link} məsələsi {caller_link} tərəfindən yaradılmışdır"
 
 msgid "Issues"
 msgstr "Məsələlər"
@@ -1187,6 +1223,15 @@ msgstr "Təşkilatın çıxarılması"
 msgid "Organization workspace"
 msgstr "Təşkilatın iş sahəsi"
 
+msgid "Organization {customer_link} has been created."
+msgstr "Təşkilat {customer_link} yaradıldı."
+
+msgid "Organization {customer_link} has been updated."
+msgstr "Təşkilat {customer_link} yeniləndi"
+
+msgid "Organization {customer_name} has been deleted."
+msgstr "Təşkilat {customer_name} silindi."
+
 msgid "Organizations"
 msgstr "Təşkilatlar"
 
@@ -1208,11 +1253,20 @@ msgstr "Ödənilib"
 msgid "Password"
 msgstr "Şifrə"
 
+msgid "Password has been changed for user {affected_user_link}."
+msgstr "Şifrə {affected_user_link} istifadəçisi üçün dəyişdirildi."
+
 msgid "Pay invoice"
 msgstr "Fakturanı ödəyin"
 
 msgid "Payment events"
 msgstr "Ödəmə hadisələri"
+
+msgid "Payment for {customer_link} has been approved."
+msgstr "{customer_link} üçün ödəniş təsdiq edilmişdir."
+
+msgid "Payment for {customer_link} has been cancelled."
+msgstr "{customer_link} üçün ödəniş ləğv edildi."
 
 msgid "Payment has been processed successfully."
 msgstr "Ödəmə uğurla həyata keçmişdir."
@@ -1240,6 +1294,9 @@ msgstr "Telefon nömrəsi"
 
 msgid "Phone numbers"
 msgstr "Telefon nömrələri"
+
+msgid "Planned quota usage: {usage}"
+msgstr "Planlaşdırılan kvota istifadəsi: {usage}"
 
 msgid "Please give us a moment to validate your invitation."
 msgstr "Dəvətinizi təsdiqləmək üçün bizə bir ani vaxt verin."
@@ -1340,6 +1397,9 @@ msgstr "Layihə yaradıldı."
 msgid "Project has been removed successfully."
 msgstr "Layihə müvəffəqiyyətlə silindi."
 
+msgid "Project has been renamed from {project_previous_name} to {project_link}."
+msgstr "Layihə { project_previous_name}-dan {project_link} adına dəyişdirildi."
+
 msgid "Project has been updated."
 msgstr "Layihə yeniləndi."
 
@@ -1357,6 +1417,15 @@ msgstr "Layihə növü"
 
 msgid "Project workspace"
 msgstr "Layihənin iş sahəsi"
+
+msgid "Project {project_link} has been created."
+msgstr "{project_link} layihəsi yaradıldı."
+
+msgid "Project {project_link} has been updated."
+msgstr "{project_link} layihəsi yeniləndi"
+
+msgid "Project {project_name} has been deleted."
+msgstr "{project_name} layihəsi silindi.\t"
 
 msgid "Projects"
 msgstr "Layihələr"
@@ -1436,6 +1505,9 @@ msgstr "Qeydiyyatdan keçin"
 msgid "Register to"
 msgstr "---- qeydiyyatdan keçin"
 
+msgid "Register with {label}"
+msgstr "ilə qeydiyyatdan keçin"
+
 msgid "Registration code"
 msgstr "Qeydiyyat kodu"
 
@@ -1478,6 +1550,9 @@ msgstr "Yanlış məlumatları bildirmək"
 msgid "Reporter"
 msgstr "Reportyor"
 
+msgid "Request account removal for {userName}."
+msgstr "{userName} üçün hesabın silinməsini tələb edin."
+
 msgid "Request description"
 msgstr "Təsvir üçün sorğu"
 
@@ -1501,6 +1576,9 @@ msgstr "Başlıq sorğusu"
 
 msgid "Request type"
 msgstr "Sorğu növü"
+
+msgid "Request {requestId} has been created."
+msgstr "Sorğu {requestId} yaradıldı."
 
 msgid "Resend"
 msgstr "Yenidən göndərmək"
@@ -1724,8 +1802,14 @@ msgstr "Hesabatı göstər"
 msgid "Show shared"
 msgstr "Paylaşılanları göstərin"
 
+msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
+msgstr "{nəticə Sayı} girişlərindən {parçaBaşlanğıc}-dan {parçaSon}-a kimi göstərmək."
+
 msgid "Sign in"
 msgstr "Daxil ol"
+
+msgid "Sign in with {label}"
+msgstr "{label} ilə daxil ol"
 
 msgid "Size"
 msgstr "Ölçü"
@@ -1892,6 +1976,12 @@ msgstr "Hələ bu təşkilat üçün bir layihə yoxdur."
 msgid "There are no requests yet."
 msgstr "Hələ heç bir sorğu yoxdur."
 
+msgid "There are no {verboseName} found matching the filter."
+msgstr "Filtrə uyğun heç bir {verboseName} tapılmadı."
+
+msgid "There are no {verboseName} yet."
+msgstr "Hələ heç bir {verboseName} yoxdur."
+
 msgid "There is no activity yet."
 msgstr "Hələlik heç bir fəaliyyət yoxdur."
 
@@ -1927,6 +2017,9 @@ msgstr "Buludlarınızı nəzarətə almaq üçün, məlumatlarınızı doldurun
 
 msgid "To port"
 msgstr "Porta "
+
+msgid "To remove account, please send a request to {support}."
+msgstr "Hesabı silmək üçün, {support} üçün sorğu göndərin."
 
 msgid "Total"
 msgstr "Ümumi"
@@ -2030,6 +2123,9 @@ msgstr "Dəvət işarəsini təsdiqləmək olmur."
 msgid "Unexpected exception happened during login process."
 msgstr "Giriş prosesində gözlənilməyən istisna baş verdi."
 
+msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
+msgstr "Təəssüf ki, serverə bağlantı baş tutmadı. Xahiş edirik brauzerinizdən {apiEndpoint} qoşulmanızı yoxlayın və xəta davam edərsə, dəstək xidməti ilə əlaqə qurun."
+
 msgid "Unit price"
 msgstr "Vahidin qiyməti"
 
@@ -2117,6 +2213,63 @@ msgstr "İstifadəçi profili"
 msgid "User status"
 msgstr "İstifadəçi statusu"
 
+msgid "User {affected_user_link} has been activated."
+msgstr "{affected_user_link} istifadəçi aktivləşdirildi."
+
+msgid "User {affected_user_link} has been created."
+msgstr "{affected_user_link}  istifadəçi yaradıldı."
+
+msgid "User {affected_user_link} has been deactivated."
+msgstr "{affected_user_link} istifadəçi  ləğv edildi."
+
+msgid "User {affected_user_link} has been updated."
+msgstr "{affected_user_link} istifadəçi yeniləndi."
+
+msgid "User {affected_user_name} has been deleted."
+msgstr "{affected_user_link} istifadəçi silindi."
+
+msgid "User {user_link} authenticated successfully with Facebook."
+msgstr "{user_link} istifadəçi Facebook ilə uğurla təsdiqləndi."
+
+msgid "User {user_link} authenticated successfully with SAML2."
+msgstr "{user_link} istifadəçi SAML2 (təhlükəsizlik təminatı sistemi üçün işarə dili) ilə uğurla təsdiqləndi."
+
+msgid "User {user_link} authenticated successfully with Smart ID EE."
+msgstr "{user_link} istifadəçi Smart ID EE ilə uğurla təsdiqləndi."
+
+msgid "User {user_link} authenticated successfully with username and password."
+msgstr "{user_link} istifadəçi istifadəçi adı və şifrə ilə uğurla təsdiqləndi."
+
+msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
+msgstr "{user_link} istifadəçi təşkilatın sahibi vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
+
+msgid "User {user_link} has granted organization support role in {customer_link} to {affected_user_link}."
+msgstr "{user_link} istifadəçi təşkilatın dəstəyi vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
+
+msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
+msgstr "{user_link} istifadəçi layihə administratoru vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
+
+msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
+msgstr "{user_link} istifadəçi layihə meneceri vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
+
+msgid "User {user_link} has granted role to {affected_user_link}."
+msgstr "{user_link} istifadəçi vəzifəni {affected_user_link}-ə vermişdir."
+
+msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
+msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın sahibini {müştəri_linki}-ndən ləğv etmşdir."
+
+msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
+msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın dəstəyini {müştəri_linki}-ndən ləğv etmşdir."
+
+msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
+msgstr "{user_link} istifadəçi {affected_user_link} layihə administratorunu {müştəri_linki}-ndən ləğv etmşdir."
+
+msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
+msgstr "{user_link} istifadəçi {affected_user_link} layihə menecerini {müştəri_linki}-ndən ləğv etmşdir."
+
+msgid "User {user_link} has revoked {affected_user_link}."
+msgstr "{user_link} istifadəçi {affected_user_link} ləğv etmşdir."
+
 msgid "Username"
 msgstr "İstifadəçi adı"
 
@@ -2185,6 +2338,9 @@ msgstr "Həcmlər"
 
 msgid "Volumes count"
 msgstr "Həcmlər sayı"
+
+msgid "Welcome to {pageTitle}!"
+msgstr "{pageTitle} səhifəsinə xoş gəlmisiniz!"
 
 msgid "Why do you need to remove organization with existing projects?"
 msgstr "Sizə təşkilatı mövcud layihələrlə nəyə görə silmək lazımdır?"
@@ -2267,6 +2423,12 @@ msgstr "tərəfindən"
 msgid "commented:"
 msgstr "şərh etdi:"
 
+msgid "current state on backend: {resourceState}."
+msgstr "Çıxış buferi üzrə mövcud vəziyyət: {resursVəziyyəti}."
+
+msgid "error message: {errorMessage}"
+msgstr "Xəta mesajı: {xətaMesajı}"
+
 msgid "events"
 msgstr "hadisələr"
 
@@ -2311,3 +2473,69 @@ msgstr "vCPU (virtual mərkəzi əməliyyat prosessoru)"
 
 msgid "vCPU count"
 msgstr "vCPU (virtual mərkəzi əməliyyat prosessoru) sayı"
+
+msgid "{resourceType} has state {resourceState}"
+msgstr "{resourceType} {resourceState} vəziyyətindədir"
+
+msgid "{resource_link} creation has been scheduled by {user_link}."
+msgstr "{resource_link} yaradılması {user_link} tərəfindən planlaşdırılıb."
+
+msgid "{resource_link} creation has failed."
+msgstr "{resource_link} yaradılması baş tutmadı."
+
+msgid "{resource_link} deletion has failed."
+msgstr "{resource_link} silinməsi baş tutmadı."
+
+msgid "{resource_link} has been created."
+msgstr "{resource_link} yaradıldı."
+
+msgid "{resource_link} has been imported by {user_link}."
+msgstr "{resource_link} {user_link} tərəfindən idxal edilib."
+
+msgid "{resource_link} has been restarted."
+msgstr "{resource_link} yenidən başlamışdır."
+
+msgid "{resource_link} has been scheduled to deletion by {user_link}."
+msgstr "{resource_link} {user_link} tərəfindən silinməsi planlaşdırılıb."
+
+msgid "{resource_link} has been scheduled to restart by {user_link}."
+msgstr "{resource_link} {user_link} tərəfindən yenidən başlanma üçün planlaşdırıldı."
+
+msgid "{resource_link} has been scheduled to start by {user_link}."
+msgstr "{resource_link} {user_link} tərəfindən başlanma üçün planlaşdırıldı."
+
+msgid "{resource_link} has been scheduled to stop by {user_link}."
+msgstr "{resource_link} {user_link} tərəfindən dayandırılma üçün planlaşdırıldı."
+
+msgid "{resource_link} has been started."
+msgstr "{resource_link} başlandı."
+
+msgid "{resource_link} has been stopped."
+msgstr "{resource_link} dayandırılıb."
+
+msgid "{resource_link} has been updated by {user_link}."
+msgstr "{resource_link} {user_link} tərəfindən yeniləndi."
+
+msgid "{resource_link} restart has failed."
+msgstr "{resource_link} yenidən başlamadı."
+
+msgid "{resource_link} start has failed."
+msgstr "{resource_link} başlamadı."
+
+msgid "{resource_link} stop has failed."
+msgstr "{resource_link} dayandırıla bilmədi."
+
+msgid "{resource_name} has been deleted."
+msgstr "{resurs_adı} silindi."
+
+msgid "{usage} of {limit}"
+msgstr "{limit}-in {usage} istifadəsi"
+
+msgid "{usage} of {limit} used"
+msgstr "istifadə edilmiş{limit}-in {usage} istifadəsi"
+
+msgid "{value} at {date}"
+msgstr "{date} tarixdə {value} dəyəri"
+
+msgid "{value} at {date}, estimated"
+msgstr "{date} tarixdə {value} dəyəri, təxmin edilən"

@@ -8,6 +8,12 @@ msgstr ""
 "Language: fa\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1) ? 0 : 1;\n"
 
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "در واقع شخصیت است"
+
+msgid "API secret code:"
+msgstr "کد مخفی API:"
+
 msgid "API token lifetime"
 msgstr "نشانه زمان زندگی API"
 
@@ -29,6 +35,9 @@ msgstr "دسترسی"
 msgid "Access token"
 msgstr "نشانه دسترسی"
 
+msgid "Accessible to all customers."
+msgstr "قابل دسترسی برای همه مشتریان."
+
 msgid "Account activation"
 msgstr "فعال سازی حساب"
 
@@ -44,6 +53,9 @@ msgstr "حسابداری"
 msgid "Accounting period"
 msgstr "دوره حسابداری"
 
+msgid "Accounting plans"
+msgstr "برنامه های حسابداری"
+
 msgid "Accounting record"
 msgstr "سابقه حسابداری"
 
@@ -53,14 +65,29 @@ msgstr "سوابق حسابداری"
 msgid "Accounting start date"
 msgstr "تاریخ شروع حسابداری"
 
+msgid "Accounting type"
+msgstr "نوع حسابداری"
+
 msgid "Actions"
 msgstr "عمل"
+
+msgid "Activate"
+msgstr "فعال کردن"
 
 msgid "Activating"
 msgstr "فعال کردن"
 
 msgid "Active"
 msgstr "فعال"
+
+msgid "Active count"
+msgstr "حساب فعال"
+
+msgid "Active plans"
+msgstr "برنامه های فعال"
+
+msgid "Active user will be able to login into the portal."
+msgstr "کاربر فعال قادر خواهد بود به پرتال وارد شود."
 
 msgid "Activity stream"
 msgstr "جریان فعالیت"
@@ -74,8 +101,14 @@ msgstr "اضافه کردن کلید SSH"
 msgid "Add comment"
 msgstr "اضافه کردن نظر"
 
+msgid "Add component"
+msgstr "افزودن اجزا"
+
 msgid "Add data volume"
 msgstr "افزودن حجم داده"
+
+msgid "Add environment variable"
+msgstr "متغیر محیط را اضافه کنید"
 
 msgid "Add item"
 msgstr "اضافه کردن مورد"
@@ -89,6 +122,9 @@ msgstr "اضافه کردن عضو"
 msgid "Add new"
 msgstr "جدید اضافه کنید"
 
+msgid "Add new offering"
+msgstr "پیشنهاد جدید اضافه کنید"
+
 msgid "Add new organization"
 msgstr "سازمان جدید ایجاد کنید"
 
@@ -98,8 +134,17 @@ msgstr "پروژه جدید ایجاد کنید"
 msgid "Add notification"
 msgstr "اعلان را اضافه کنید"
 
+msgid "Add offering"
+msgstr "پیشنهاد را اضافه کنید"
+
 msgid "Add organization"
 msgstr "سازمان را اضافه کنید"
+
+msgid "Add payment profile"
+msgstr "پروفایل پرداخت را اضافه کنید"
+
+msgid "Add plan"
+msgstr "اضافه کردن برنامه"
 
 msgid "Add project"
 msgstr "اضافه کردن پروژه"
@@ -107,8 +152,29 @@ msgstr "اضافه کردن پروژه"
 msgid "Add project member"
 msgstr "عضو پروژه را اضافه کنید"
 
+msgid "Add resource"
+msgstr "اضافه کردن منبع"
+
 msgid "Add rule"
 msgstr "اضافه کردن قانون"
+
+msgid "Add security group"
+msgstr "گروه امنیتی اضافه کنید"
+
+msgid "Add team member"
+msgstr "عضو گروه را اضافه کنید"
+
+msgid "Add to a new namespace"
+msgstr "یک فضای نام جدید اضافه کنید"
+
+msgid "Add to cart"
+msgstr "افزودن به کارت"
+
+msgid "Add to comparison"
+msgstr "به مقایسه اضافه کنید"
+
+msgid "Add user input field"
+msgstr "قسمت ورودی کاربر را اضافه کنید"
 
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "داده های اضافی که در صورت تهیه به عنوان instance اضافه میشوند."
@@ -116,20 +182,56 @@ msgstr "داده های اضافی که در صورت تهیه به عنوان i
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr "داده های اضافی که به ماشین مجازی در تامین اضافه میشوند."
 
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr "فضای اضافی برای اعمال به سهمیه ذخیره سازی به توسط عکس های فوری مورد استفاده قرار گیرد."
+
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "علاوه بر این ارائه دهنده خدمات می تواند برای استفاده از اجزای زیر شارژ"
+
 msgid "Address"
 msgstr "آدرس"
+
+msgid "Admin password"
+msgstr "گذرواژه مدیریت"
+
+msgid "Admin username"
+msgstr "نام کاربری ادمین"
 
 msgid "Affected resource"
 msgstr "منابع آسیب دیده"
 
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr "پس از کد API مخفی بازسازی شده است, آن امکان پذیر نخواهد بود برای ارسال استفاده با کلید های قدیمی."
+
+msgid "Agree with ToS"
+msgstr "موافق با ToS"
+
 msgid "Agreement number"
 msgstr "شماره توافق نامه"
+
+msgid "Alert"
+msgstr "هشدار"
+
+msgid "All"
+msgstr "همه"
+
+msgid "All day"
+msgstr "تمام روز"
+
+msgid "All resources have been imported."
+msgstr "تمام منابع وارد شده اند."
+
+msgid "Allocation description"
+msgstr "شرح تخصیص"
 
 msgid "Allocation name"
 msgstr "نام تخصیص"
 
 msgid "Allocation pools"
 msgstr "استخر های تخصیص"
+
+msgid "Allow bookings to be scheduled at weekends"
+msgstr "اجازه رزرو در تعطیلات آخر هفته برنامه ریزی شود"
 
 msgid "Already have an account?"
 msgstr "در حال حاضر حساب کاربری دارید؟"
@@ -140,20 +242,92 @@ msgstr "مقدار"
 msgid "An error occurred on project removal."
 msgstr "خطایی در حذف پروژه رخ داد."
 
+msgid "Annotations"
+msgstr "حاشیه نویسی"
+
+msgid "Answer"
+msgstr "پاسخ"
+
+msgid "Answers"
+msgstr "پاسخ ها"
+
+msgid "Answers have been submitted"
+msgstr "پاسخ ها را مشاهده کنید"
+
 msgid "Any"
 msgstr "هیچ"
+
+msgid "Application catalogues"
+msgstr "کاتالوگ برنامه ها"
+
+msgid "Application configuration"
+msgstr "پیکر بندی برنامه ها"
 
 msgid "Application details"
 msgstr "جزییات برنامه ها"
 
+msgid "Application has been created."
+msgstr "برنامه ها ایجاد شده اند."
+
+msgid "Application templates"
+msgstr "قالب های برنامه ها"
+
 msgid "Applications"
 msgstr "برنامه ها"
+
+msgid "Apply"
+msgstr "درخواست دادن"
+
+msgid "Approve"
+msgstr "تایید"
 
 msgid "Approve payment"
 msgstr "تایید هزینه"
 
+msgid "Approved at"
+msgstr "تایید شده در"
+
+msgid "Approved by"
+msgstr "تایید شده توسط"
+
+msgid "Archive"
+msgstr "بایگانی"
+
+msgid "Archived"
+msgstr "بایگانی شده"
+
+msgid "Archived plans"
+msgstr "برنامه های بایگانی شده"
+
+msgid "Are you sure you want to delete the payment profile?"
+msgstr "آیا مطمئن هستید که می خواهید نمایه پرداخت را حذف کنید ؟"
+
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
+msgstr "آیا مطمئن هستید که می خواهید کاتالوگ Rancherرا حذف کنید {کاتالوگ} ؟"
+
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr "آیا مطمئن هستید که می خواهید پروژه {projectName} را حذف کنید ؟"
+
+msgid "Are you sure you would like to delete the hook?"
+msgstr "آیا مطمئن هستید که می خواهید hook را حذف کنید ؟"
+
+msgid "Are you sure you would like to delete the key?"
+msgstr "آیا شما مطمئن هستید که میخواهید key را پاک کنید؟"
+
+msgid "Are you sure you would like to terminate resource {resourceName}?"
+msgstr "آیا مطمئن هستید که می خواهید منابع را خاتمه دهید؟"
+
+msgid "Article code"
+msgstr "کد مقاله"
+
 msgid "Assigned to"
 msgstr "اختصاص یافته به"
+
+msgid "At least one plan must be entered"
+msgstr "حداقل یک برنامه باید وارد شود"
+
+msgid "Attach"
+msgstr "پیوستن"
 
 msgid "Attached to"
 msgstr "پیوستن به"
@@ -163,6 +337,15 @@ msgstr "پیوستن"
 
 msgid "Attachments"
 msgstr "ضمیمه"
+
+msgid "Attributes"
+msgstr "ویژگی ها"
+
+msgid "Attributes are invalid."
+msgstr "صفات نا معتبر است."
+
+msgid "Attributes filter"
+msgstr "ویژگی های فیلتر"
 
 msgid "Audit log"
 msgstr "گزارش حسابرسی"
@@ -179,11 +362,35 @@ msgstr "رویدادهای تأیید اعتبار"
 msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
 msgstr "احراز هویت با شناسه تلفن همراه توسط کاربر لغو شده و یا به پایان رسیده است. جزئیات:"
 
+msgid "Authorized personnel"
+msgstr "پرسنل مجاز"
+
 msgid "Auto-assign floating IP"
 msgstr "اختصاص دادن خودکار IP شناور"
 
+msgid "Auto-generated"
+msgstr "تولید خودکار"
+
+msgid "Availability"
+msgstr "دسترسی"
+
 msgid "Availability zone"
 msgstr "دسترسی zone"
+
+msgid "Available quota usage: {usage}"
+msgstr "استفاده از سهم موجود"
+
+msgid "Azerbaijani"
+msgstr "آذربایجانی"
+
+msgid "Azure Active Directory Application Secret"
+msgstr "راز برنامه Azure Active Directory"
+
+msgid "Azure PostgreSQL database server"
+msgstr "سرور پایگاه داده Azure PostgreSQL"
+
+msgid "Azure Virtual Machine"
+msgstr "ماشین مجازی Azure"
 
 msgid "Azure provider"
 msgstr "ارائه دهنده Azure"
@@ -203,6 +410,9 @@ msgstr "بازگشت به داشبورد شخصی"
 msgid "Back to project"
 msgstr "بازگشت به پروژه"
 
+msgid "Back to shopping"
+msgstr "بازگشت به خرید"
+
 msgid "Backing up"
 msgstr "پشتیبان گیری"
 
@@ -211,6 +421,9 @@ msgstr "حساب بانکی"
 
 msgid "Bank name"
 msgstr "نام بانک"
+
+msgid "Base image name"
+msgstr "نام تصویر پایه"
 
 msgid "Batch RAM"
 msgstr "RAM دسته ای"
@@ -224,17 +437,41 @@ msgstr "اسناد پردازش دسته ای"
 msgid "Batch vCPU"
 msgstr "دسته vCPU"
 
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr "مشتری پرتال ما شوید.خدمات IT را از Marketplace ارائه دهید و تیم خود را از یک جا مدیریت کنید."
+
 msgid "Billing"
 msgstr "صورتحساب"
 
 msgid "Billing details"
 msgstr "جزئیات صورت حساب"
 
+msgid "Billing enabled"
+msgstr "صورتحساب فعال شد"
+
+msgid "Billing period"
+msgstr "دوره صورتحساب"
+
+msgid "Booking"
+msgstr "رزرو"
+
+msgid "Booking has been accepted."
+msgstr "رزرو تایید شده است."
+
+msgid "Bookings"
+msgstr "رزرو"
+
 msgid "Bootable"
 msgstr "بوت کردن"
 
+msgid "Branch"
+msgstr "شعبه"
+
 msgid "Browse"
 msgstr "مرور کردن"
+
+msgid "Business hours"
+msgstr "ساعات کاری"
 
 msgid "CPU usage"
 msgstr "استفاده CPU"
@@ -260,8 +497,32 @@ msgstr "لغو شده"
 msgid "Cancelled"
 msgstr "لغو شده"
 
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr "اگر شبکه خارجی tenant تعریف نشده باشد نمیتوانید IP شناور ایجاد کنید."
+
+msgid "Catalog"
+msgstr "کاتالوگ"
+
+msgid "Catalog URL"
+msgstr "کاتالوگ URL"
+
+msgid "Catalog has been created."
+msgstr "کاتالوگ ایجاد شده است."
+
+msgid "Catalog has been deleted."
+msgstr "کاتالوگ حذف شده است."
+
+msgid "Catalogues"
+msgstr "کاتالوگ ها"
+
+msgid "Categories"
+msgstr "دسته بندی ها"
+
 msgid "Category"
 msgstr "دسته بندی"
+
+msgid "Category is invalid."
+msgstr "دسته بندی نامعتبر است."
 
 msgid "Challenge code"
 msgstr "کد چالش"
@@ -269,8 +530,29 @@ msgstr "کد چالش"
 msgid "Change Request"
 msgstr "درخواست تغییر"
 
+msgid "Change email"
+msgstr "تغییر ایمیل"
+
 msgid "Change flavor"
 msgstr "تغییر flavor"
+
+msgid "Change limits"
+msgstr "محدودیت ها را تغییر دهید"
+
+msgid "Change plan"
+msgstr "تغییر برنامه"
+
+msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr "تغییر درخواست-درخواست client’s برای انجام اصلاح عمومی داده ها یا خدمات."
+
+msgid "Change resource limits"
+msgstr "منابع محدودیت ها را تغییر دهید"
+
+msgid "Change resource plan"
+msgstr "منابع برنامه ها را تغییر دهید"
+
+msgid "Change user email"
+msgstr "ایمیل کاربر را تغییر دهید"
 
 msgid "Changing flavor"
 msgstr "تغییر دادن flavor"
@@ -278,8 +560,20 @@ msgstr "تغییر دادن flavor"
 msgid "Changing password"
 msgstr "تغییر دادن رمز"
 
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr "هزینه برای استفاده component براساس محدودیت ایجاد شده توسط کاربر است."
+
+msgid "Choices as comma-separated list"
+msgstr "گزینه هایی به عنوان کاما -لیست جدا"
+
 msgid "Client ID"
 msgstr "شناسه Client"
+
+msgid "Client organization"
+msgstr "سازماندهی Client"
+
+msgid "Client project"
+msgstr "پروژه Client"
 
 msgid "Close"
 msgstr "بستن"
@@ -287,8 +581,29 @@ msgstr "بستن"
 msgid "Cloud RAM"
 msgstr "ابر RAM"
 
+msgid "Cloud init template"
+msgstr "قالب اولیه ابر"
+
 msgid "Cloud vCPU"
 msgstr "ابر vCPU"
+
+msgid "Cluster description"
+msgstr "توضیحات Cluster"
+
+msgid "Cluster name"
+msgstr "نام Cluster"
+
+msgid "Code is too short."
+msgstr "کد خیلی کوتاه است."
+
+msgid "Code should consist of latin symbols or numbers."
+msgstr "کد باید شامل علامت های لاتین و یا عدد باشد."
+
+msgid "Collapse"
+msgstr "فروپاشی"
+
+msgid "Collation"
+msgstr "جمع بندی"
 
 msgid "Comment"
 msgstr "یادداشت"
@@ -296,8 +611,35 @@ msgstr "یادداشت"
 msgid "Comments"
 msgstr "یادداشت ها"
 
+msgid "Company data"
+msgstr "اطلاعات شرکت"
+
+msgid "Compare items"
+msgstr "موارد را مقایسه کنید"
+
 msgid "Competence"
 msgstr "صلاحیت"
+
+msgid "Compliance"
+msgstr "انطباق"
+
+msgid "Component #{index}"
+msgstr "مولفه {فهرست}"
+
+msgid "Component name"
+msgstr "اسم مولفه"
+
+msgid "Components are invalid."
+msgstr "در دسترس نبودن Components"
+
+msgid "Compute generation"
+msgstr "محاسبه نسل"
+
+msgid "Configuration"
+msgstr "پیکربندی"
+
+msgid "Configuration options"
+msgstr "گزینه های پیکر بندی"
 
 msgid "Configure"
 msgstr "پیکر بندی کنید"
@@ -305,14 +647,23 @@ msgstr "پیکر بندی کنید"
 msgid "Confirm deletion?"
 msgstr "حذف را تایید میکنید؟"
 
+msgid "Confirmation"
+msgstr "تاییدیه"
+
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "ایمیل تاییدیه ارسال شده است.لطفا صندوق ورودی خودرا چک نمایید."
 
 msgid "Connect"
 msgstr "اتصال"
 
+msgid "Connect subnet to a default virtual router"
+msgstr "subnet را به یک router مجازی پیش فرض متصل کنید"
+
 msgid "Connected subnets"
 msgstr "subnet ها متصل شدند"
+
+msgid "Connection details"
+msgstr "جزئیات اتصال"
 
 msgid "Contact e-mail"
 msgstr "تماس با-ایمیل"
@@ -322,6 +673,9 @@ msgstr "تماس با ایمیل"
 
 msgid "Contact phone"
 msgstr "شماره تماس"
+
+msgid "Control plane"
+msgstr "کنترل برنامه"
 
 msgid "Copy to clipboard"
 msgstr "در clipboard کپی کنید"
@@ -338,11 +692,38 @@ msgstr "کشور"
 msgid "Create"
 msgstr "ایجاد کردن"
 
+msgid "Create Network adapter"
+msgstr "ایجاد کردن Network adapter"
+
+msgid "Create SQL database in PostgreSQL server"
+msgstr "ایجاد کردن پایگاه داده SQL در سرور PostgreSQL"
+
+msgid "Create VM snapshot for OpenStack instance"
+msgstr "ایجاد کردن تصویر VM برای OpenStack instance"
+
+msgid "Create VM snapshot schedule for OpenStack instance"
+msgstr "ایجاد کردن تصویر برنامه VM برای OpenStack instance"
+
 msgid "Create an account"
 msgstr "یک حساب ایجاد کنید."
 
+msgid "Create an availability"
+msgstr "یک دسترسی ایجاد کنید."
+
 msgid "Create application"
 msgstr "برنامه ایجاد کنید."
+
+msgid "Create catalog"
+msgstr "کاتالوگ ایجاد کنید."
+
+msgid "Create disk"
+msgstr "دیسک ایجاد کنید"
+
+msgid "Create network for OpenStack tenant"
+msgstr "برای OpenStack tenant، شبکه ایجاد کنید"
+
+msgid "Create node"
+msgstr "ایجاد node"
 
 msgid "Create notification"
 msgstr "ایجاد اعلان"
@@ -365,11 +746,23 @@ msgstr "برای OpenStack volume، عکس فوری ایجاد کنید"
 msgid "Create subnet"
 msgstr "ایجاد subnet"
 
+msgid "Create your first project"
+msgstr "اولین پروژه را ایجاد کنید"
+
 msgid "Created"
 msgstr "ایجاد شده"
 
+msgid "Created a new payment for {customer_link}."
+msgstr "ایجاد پرداخت جدید برای {customer_link}"
+
 msgid "Created at"
 msgstr "ایجاد شده در"
+
+msgid "Created by"
+msgstr "ایجاد شده به وسیله"
+
+msgid "Creating"
+msgstr "ایجاد کردن"
 
 msgid "Creating a backup schedule"
 msgstr "ایجاد کردن یک برنامه پشتیبان"
@@ -395,8 +788,17 @@ msgstr "نشانه API فعلی"
 msgid "Current cost"
 msgstr "هزینه فعلی"
 
+msgid "Current email"
+msgstr "ایمیل فعلی"
+
 msgid "Current flavor"
 msgstr "flavor فعلی"
+
+msgid "Current limit"
+msgstr "محدودیت فعلی"
+
+msgid "Current plan"
+msgstr "برنامه فعلی"
 
 msgid "Current price per month"
 msgstr "قیمت فعلی برای هر ماه"
@@ -404,17 +806,41 @@ msgstr "قیمت فعلی برای هر ماه"
 msgid "Current size"
 msgstr "اندازه فعلی"
 
+msgid "Daily available booking time range"
+msgstr "محدوده زمان رزرو روزانه موجود"
+
 msgid "Dashboard"
 msgstr "داشبورد"
 
+msgid "Data volume #{index}"
+msgstr "Data volume"
+
+msgid "Data volume should have at least {size} GB."
+msgstr "حجم داده باید حداقل{سایز}GB باشد."
+
 msgid "Data volume size:"
 msgstr "سایز Data volume:"
+
+msgid "Data volume type"
+msgstr "نوع Data volume"
+
+msgid "Databases"
+msgstr "پایگاه داده"
 
 msgid "Date"
 msgstr "تاریخ"
 
 msgid "Date joined"
 msgstr "تاریخ پیوستن"
+
+msgid "Date of reporting"
+msgstr "تاریخ گزارش"
+
+msgid "Day"
+msgstr "روز"
+
+msgid "Deactivate"
+msgstr "غیرفعال"
 
 msgid "Deactivating"
 msgstr "غیرفعال کردن"
@@ -431,11 +857,23 @@ msgstr "حساب پیش فرض"
 msgid "Default availability zone for provisioned instances."
 msgstr "منطقه دسترسی پیش فرض تهیه شده برای instance."
 
+msgid "Default cluster label"
+msgstr "لیبل cluster پیش فرض"
+
+msgid "Default value"
+msgstr "مقدار پیش فرض"
+
 msgid "Delete"
 msgstr "حذف"
 
+msgid "Delete catalog"
+msgstr "حذف کاتالوگ"
+
 msgid "Delete volumes"
 msgstr "حذف volumes"
+
+msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr "حذف کردن سرور PostgreSQLباعث خواهدشد تمام پایگاه داده ای که توسط سرور ایجاد شده است حذف شود."
 
 msgid "Description"
 msgstr "توضیحات"
@@ -452,6 +890,9 @@ msgstr "از بین رفتن"
 msgid "Destroying"
 msgstr "از بین میبرد"
 
+msgid "Detach"
+msgstr "جدا"
+
 msgid "Detaching"
 msgstr "جدا کردن"
 
@@ -461,14 +902,32 @@ msgstr "جزئیات"
 msgid "Device"
 msgstr "دستگاه"
 
+msgid "Devops-friendly offering"
+msgstr "پشنهاد دوستانه-Devops"
+
 msgid "DigitalOcean provider"
 msgstr "ارائه دهنده DigitalOcean"
 
 msgid "Disable data volume"
 msgstr "غیر فعال کردن data volume"
 
+msgid "Disable gateway IP advertising via DHCP"
+msgstr "غیر فعال کردن تبلیغات gateway IP از طریق DHCP"
+
 msgid "Disable profile"
 msgstr "غیرفعال کردن پروفایل"
+
+msgid "Disabled"
+msgstr "غیرفعال شده"
+
+msgid "Display name"
+msgstr "نمایش نام"
+
+msgid "Do not allow user to specify quotas when offering is provisioned."
+msgstr "به کاربر اجازه ندهید هنگامی که quotas مشخص شده است پیشنهادی ارائه دهد."
+
+msgid "Do not configure a gateway for this subnet"
+msgstr "gateway را برای این subnet پیکربندی نکنید"
 
 msgid "Do not have an account?"
 msgstr "حساب کاربری ندارید؟"
@@ -476,14 +935,32 @@ msgstr "حساب کاربری ندارید؟"
 msgid "Do you really want to delete comment?"
 msgstr "آیا واقعا میخواهید یادداشت ها را حذف کنید؟"
 
+msgid "Do you want to unlink instance {name}?"
+msgstr "آیا واقعا میخواهید{اسم} instance را جدا کنید؟"
+
+msgid "Docker version"
+msgstr "نسخه Docker"
+
 msgid "Documentation"
 msgstr "مستندات"
+
+msgid "Documents"
+msgstr "اسناد"
+
+msgid "Domain name"
+msgstr "نام Domain"
 
 msgid "Domain name. If not defined default domain will be used."
 msgstr "اگر نام Domain تعریف نشده باشد،از Domain پیش فرض استفاده میشود."
 
+msgid "Done"
+msgstr "انجام شده"
+
 msgid "Download invoice"
 msgstr "بارگیری فاکتور"
+
+msgid "Download order PDF file"
+msgstr "سفارش بارگیری فایل PDF"
 
 msgid "Draft"
 msgstr "پیش نویس"
@@ -493,6 +970,9 @@ msgstr "فایل ها را برای متصل شدن رها کنید، یا"
 
 msgid "Drop files to attach them to the issue."
 msgstr "فایل ها را رها کنید تا به موضوع متصل شوند."
+
+msgid "Droplet has been resized."
+msgstr "Droplet تغییر سایز داده است."
 
 msgid "Due date"
 msgstr "موعد مقرر"
@@ -506,8 +986,20 @@ msgstr "آدس ایمیل"
 msgid "EU VAT ID"
 msgstr "شناسه EU VAT"
 
+msgid "Each mount point should be used once at most."
+msgstr "هر mount point باید حداکثر یکبار استفاده شود."
+
+msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
+msgstr "برای اطمینان از محاسبه صحیح داده های حسابداری، هر گزارش باید به برنامه صورتحساب متصل باشد."
+
 msgid "Edit"
 msgstr "ویرایش"
+
+msgid "Edit an availability"
+msgstr "ویرایش دسترسی"
+
+msgid "Edit booking event"
+msgstr "ویرایش رویداد رزرو"
 
 msgid "Edit project member"
 msgstr "ویرایش اعضا پروژه"
@@ -517,6 +1009,18 @@ msgstr "ویرایش اعضا گروه"
 
 msgid "Email"
 msgstr "ایمیل"
+
+msgid "Email change request has been cancelled."
+msgstr "درخواست تغییر ایمیل لغو شده است."
+
+msgid "Email has been updated."
+msgstr "ایمیل بروز رسانی شده است."
+
+msgid "Email verification has been sent. Please check your inbox."
+msgstr "تایید ایمیل ارسال شده است.لطفا صندوق ورودی خودرا چک کنید."
+
+msgid "Enable"
+msgstr "فعال کردن"
 
 msgid "Enable DHCP"
 msgstr "فعال کردن DHCP"
@@ -530,11 +1034,35 @@ msgstr "فعال کردن پروفایل"
 msgid "Enabled"
 msgstr "فعال شده"
 
+msgid "Enabled default gateway"
+msgstr "فعال کردن پیش فرض gateway"
+
+msgid "Encountered an empty component"
+msgstr "مواجه شدن با یک component خالی"
+
+msgid "End"
+msgstr "پایان"
+
+msgid "End date"
+msgstr "تاریخ پایان"
+
+msgid "End date of the agreement is"
+msgstr "تاریخ پایان توافق نامه"
+
 msgid "End time"
 msgstr "زمان پایان"
 
 msgid "English"
 msgstr "انگلیسی"
+
+msgid "Enter private IPv4 CIDR."
+msgstr "IPv4 CID خصوصی وارد کنید."
+
+msgid "Environment variables"
+msgstr "متغیرهای محیطی"
+
+msgid "Erred"
+msgstr "خراب"
 
 msgid "Error message"
 msgstr "پیغام خطا"
@@ -544,6 +1072,15 @@ msgstr "قیمت تخمین زده شده برای هر ماه"
 
 msgid "Estimated cost"
 msgstr "هزینه تخمین زده شده"
+
+msgid "Estimated cost for the current month: {cost}"
+msgstr "هزینه تخمین زده شده برای این ماه:{هزینه}"
+
+msgid "Estimated monthly cost"
+msgstr "هزینه تخمین زده شده ماهانه"
+
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
+msgstr "هزینه تخمین زده شده ماهانه از {تخمینی قدیم} به {تخمینی جدید} تغییر خواهد کرد.مالیات بر ارزش افزوده را شامل نمیشود"
 
 msgid "Event details"
 msgstr "جزئیات رویداد"
@@ -566,20 +1103,47 @@ msgstr "هر روز در"
 msgid "Every hour"
 msgstr "هر ساعت"
 
+msgid "Every hour at {minuteValues} past the hour"
+msgstr "هرساعت در {minuteValues} ساعت را پشت سر میگذارید"
+
 msgid "Every minute"
 msgstr "هر دقیقه"
 
 msgid "Every month"
 msgstr "هرماه"
 
+msgid "Every month on the {days} at {time}"
+msgstr "هرماه در {روز} در {ساعت}"
+
+msgid "Every month on the {days} of {months} at {time}"
+msgstr "هر ماه در {روزها }از {ماه ها } در {ساعت }"
+
+msgid "Every month service provider can report up to the amount requested by user."
+msgstr "ارائه دهنده خدمات هرماه میتواند میزان درخواست شده توسط کاربر را گزارش کند."
+
 msgid "Every week"
 msgstr "هر هفته"
+
+msgid "Every week on {day} at {time}"
+msgstr "هر هفته در {روز} در{ساعت}"
 
 msgid "Every year"
 msgstr "هر سال"
 
+msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
+msgstr "مثال[{\"header\": \"Database instance info\", \"body\": \"data\"}]"
+
 msgid "Excel"
 msgstr "اکسل"
+
+msgid "Executing"
+msgstr "اجرای"
+
+msgid "Existing quota usage: {usage}"
+msgstr "استفاده از quota موجود{usage}"
+
+msgid "Expand"
+msgstr "توسعه دادن"
 
 msgid "Expiration time"
 msgstr "زمان انقضا"
@@ -593,6 +1157,9 @@ msgstr "منقضی میشود"
 msgid "Export as"
 msgstr "صادرات به عنوان"
 
+msgid "Extend"
+msgstr "گسترش"
+
 msgid "Extend OpenStack volume"
 msgstr "گسترش OpenStack volume"
 
@@ -602,11 +1169,20 @@ msgstr "درحال گسترش"
 msgid "External IP"
 msgstr "IP خارجی"
 
+msgid "External links"
+msgstr "لینک های خارجی"
+
 msgid "External network ID"
 msgstr "network ID خارجی"
 
 msgid "Failed to operate with backend."
 msgstr "عملکرد با backend انجام نشد."
+
+msgid "Features"
+msgstr "امکانات"
+
+msgid "Fee applied each time this plan is activated."
+msgstr "هر بار که این طرح فعال می شود هزینه اعمال می شود."
 
 msgid "File"
 msgstr "پرونده"
@@ -614,8 +1190,14 @@ msgstr "پرونده"
 msgid "File download has been started."
 msgstr "دانلود پرونده شروع شده است."
 
+msgid "File has been copied"
+msgstr "پرونده کپی شده است"
+
 msgid "File has been downloaded."
 msgstr "پرونده دانلود شده است."
+
+msgid "Filename"
+msgstr "نام پرونده"
 
 msgid "Files"
 msgstr "پرونده ها"
@@ -632,11 +1214,29 @@ msgstr "پروژه های Filter"
 msgid "Financial overview"
 msgstr "بازنگری مالی"
 
+msgid "Find solution"
+msgstr "پیدا کردن راه حل"
+
 msgid "Fingerprint"
 msgstr "اثر انگشت"
 
+msgid "Fixed-price contract"
+msgstr "ثابت-قرارداد قیمت"
+
+msgid "Fixed price"
+msgstr "قیمت ثابت"
+
+msgid "Fixed — use common storage quota"
+msgstr "ثابت- از حافظه مشترک quota استفاده کنید"
+
 msgid "Flavor name"
 msgstr "نام Flavor"
+
+msgid "Flavor name: {flavor_name}"
+msgstr "نام Flavor:"
+
+msgid "Flavors List"
+msgstr "لیست Flavors"
 
 msgid "Flexible"
 msgstr "منعطف"
@@ -650,8 +1250,14 @@ msgstr "تعداد IP شناور"
 msgid "Floating IPs"
 msgstr "IPs شناور"
 
+msgid "Folder"
+msgstr "پوشه"
+
 msgid "For"
 msgstr "برای"
+
+msgid "Force destroy"
+msgstr "نابود کردن"
 
 msgid "FreeIPA account"
 msgstr "حساب FreeIPA"
@@ -665,8 +1271,14 @@ msgstr "از"
 msgid "From port"
 msgstr "از پورت"
 
+msgid "Full description"
+msgstr "توضیحات کامل"
+
 msgid "Full name"
 msgstr "نام کامل"
+
+msgid "Gateway IP of this subnet"
+msgstr "Gateway IP برای این subnet"
 
 msgid "General"
 msgstr "عمومی"
@@ -674,17 +1286,35 @@ msgstr "عمومی"
 msgid "General information"
 msgstr "اطلاعات عمومی"
 
+msgid "Generate Kubeconfig file"
+msgstr "فایل Kubeconfig را تولید کنید"
+
+msgid "Generate password"
+msgstr "رمز تولید کنید"
+
+msgid "Go to marketplace"
+msgstr "به marketplace بروید"
+
 msgid "Go to my profile"
 msgstr "به پروفایل من بروید"
 
 msgid "Got it!"
 msgstr "فهمیدم!"
 
+msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
+msgstr "تضمین نگه داری زمان عکس فوری VM. اگر خالی باشد. برای همیشه نگه دارید."
+
 msgid "Guaranteed time of snapshot retention. If null - keep forever."
 msgstr "تضمین نگه داری زمان عکس فوری. اگر خالی باشد. برای همیشه نگه دارید."
 
 msgid "Helpdesk dashboard"
 msgstr "داشبورد Helpdesk"
+
+msgid "Hook has been removed."
+msgstr "Hook، حذف شده است."
+
+msgid "Hook removal"
+msgstr "حذف Hook."
 
 msgid "Hostname"
 msgstr "نام Host"
@@ -698,11 +1328,17 @@ msgstr "نحوه دریافت مدارک معتبر برای تهیه کننده
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr "نحوه دریافت مدارک معتبر برای تهیه کننده DigitalOcean"
 
+msgid "Icon"
+msgstr "آیکون"
+
 msgid "Image"
 msgstr "تصویر"
 
 msgid "Image name"
 msgstr "نام تصویر"
+
+msgid "Images"
+msgstr "تصویرها"
 
 msgid "Import"
 msgstr "وارد کردن"
@@ -716,11 +1352,17 @@ msgstr "وارد کردن منابع"
 msgid "In the format of GUID"
 msgstr "در قالب GUID"
 
+msgid "Inactive user will not be able to login into the portal."
+msgstr "کاربر غیرفعال قادر به ورود به پرتال نخواهد بود."
+
 msgid "Incident"
 msgstr "حادثه"
 
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr "حادثه-client issue بااستفاده از خدمات یادر دسترس بودن(وقفه، تخریب کیفیت )"
+
+msgid "Include weekends"
+msgstr "آخر هفته ها را شامل میشود"
 
 msgid "Incorrect organization details"
 msgstr "اطلاعات نادرست سازمان"
@@ -764,17 +1406,29 @@ msgstr "Instance قبلا متوقف شده است."
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
 msgstr "Instance هنوز به هیچ subnet داخلی وصل نشده است.لطفا ابتدا به یک subnet داخلی وصل شوید."
 
+msgid "Instance should be OK, or erred. Please contact support."
+msgstr "Instance یا باید درست باشد یا خطا بدهد.لطفا با پشتیبانی تماس بگیرید."
+
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr "Instance باید غیر فعال و درست باشد یا خطا بدهد.لطفا با پشتیبانی تماس بگیرید."
 
 msgid "Instances count"
 msgstr "شمردن Instance"
 
+msgid "Internal"
+msgstr "داخلی"
+
 msgid "Internal IP"
 msgstr "IP داخلی"
 
 msgid "Internal IPs"
 msgstr "IPs داخلی"
+
+msgid "Internal name"
+msgstr "نام داخلی"
+
+msgid "Internal network ID"
+msgstr "network ID داخلی"
 
 msgid "Internal network allocation pool"
 msgstr "اختصاص شبکه داخلی"
@@ -788,14 +1442,23 @@ msgstr "خطا سرور داخلی رخ داده است. لطفا با پشتی�
 msgid "Invalid URL. Unable to parse payment details."
 msgstr "URL نامعتبر.تجزیه و تحلیل جزیئات پرداخت امکان پذیر نیست."
 
+msgid "Invitation approval"
+msgstr "تایید دعوت"
+
 msgid "Invitation could not be accepted"
 msgstr "دعوت مورد تایید نیست"
 
 msgid "Invitation email is:"
 msgstr "ایمیل دعوت:"
 
+msgid "Invitation has been approved."
+msgstr "دعوت تایید شده است."
+
 msgid "Invitation has been canceled."
 msgstr "دعوت لغو شده است."
+
+msgid "Invitation has been rejected."
+msgstr "دعوت رد شده است."
 
 msgid "Invitation has been sent again."
 msgstr "دعوت مجدد ارسال شده است."
@@ -809,11 +1472,20 @@ msgstr "دعوت معتبر نیست."
 msgid "Invitation is not valid anymore."
 msgstr "دعوت دیگر معتبر نیست."
 
+msgid "Invitation link"
+msgstr "لینک دعوت"
+
+msgid "Invitation rejection"
+msgstr "رد دعوت"
+
 msgid "Invitation token is not found."
 msgstr "نشانه دعوت یافت نشد."
 
 msgid "Invitations"
 msgstr "دعوت ها"
+
+msgid "Invite team member"
+msgstr "از اعضای تیم دعوت کنید"
 
 msgid "Invite user"
 msgstr "کاربر را دعوت کنید"
@@ -833,6 +1505,15 @@ msgstr "رویدادهای فاکتور"
 msgid "Invoice events timeline"
 msgstr "جدول زمانی رویدادهای فاکتور"
 
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgstr "فاکتور برای سازمان { لینک مشتری} برای مدت{مدت}ایجاد شده است."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "فاکتور برای سازمان { لینک مشتری} برای مدت{مدت} بروز رسانی شده است."
+
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgstr "فاکتور برای سازمان { لینک مشتری} برای مدت{مدت}ا حذف شده است."
+
 msgid "Invoice has not been sent to PayPal yet"
 msgstr "فاکتور هنوز به PayPal ارسال نشده است"
 
@@ -848,6 +1529,9 @@ msgstr "لیست صورتحساب"
 msgid "Is active"
 msgstr "فعال است"
 
+msgid "Is external"
+msgstr "خارجی است"
+
 msgid "Is official"
 msgstr "رسمی است"
 
@@ -857,14 +1541,41 @@ msgstr "به صورت خودکار برای اختصاص به IPشناور در 
 msgid "Item"
 msgstr "مورد"
 
+msgid "Item has been added to shopping cart."
+msgstr "مورد به سبد خرید اضافه شده است."
+
+msgid "Item has been removed from shopping cart."
+msgstr "مورد از سبد خرید حذف شده است."
+
 msgid "Job position"
 msgstr "موقعیت شغلی"
+
+msgid "Job title"
+msgstr "عنوان شغلی"
+
+msgid "Keep forever"
+msgstr "برای همیشه نگه دارید"
 
 msgid "Keep until"
 msgstr "نگه دارید تا"
 
 msgid "Kept until"
 msgstr "نگه داشته شده تا"
+
+msgid "Kubeconfig file"
+msgstr "فایل Kubeconfig"
+
+msgid "Kubernetes version"
+msgstr "ورژن Kubernetes"
+
+msgid "Label that is visible to users in Marketplace."
+msgstr "برچسب قابل مشاهده برای کاربران در Marketplace."
+
+msgid "Labels"
+msgstr "برچسب ها"
+
+msgid "Learn more"
+msgstr "بیشتر بدانید"
 
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr "اگر میخواهید رمز مدیر به صورت خودکار تولید شود، خالی بگذارید."
@@ -880,6 +1591,30 @@ msgstr "بیا شروع کنیم"
 
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "پس از ذخیره فرم، طول عمر بروزرسانی و تنظیم مجدد میشود."
+
+msgid "Limit"
+msgstr "محدود"
+
+msgid "Limit amount"
+msgstr "مقدار محدود"
+
+msgid "Limit period"
+msgstr "دوره محدود"
+
+msgid "Limits"
+msgstr "محدودیت ها"
+
+msgid "Limits are invalid."
+msgstr "محدودیت نا معتبر است."
+
+msgid "Link"
+msgstr "لینک"
+
+msgid "Link OpenStack Instance"
+msgstr "لینک  OpenStack Instance"
+
+msgid "Loading"
+msgstr "بارگذاری"
 
 msgid "Loading actions"
 msgstr "اعمال بارگیری"
@@ -899,6 +1634,15 @@ msgstr "ورود"
 msgid "Login failed"
 msgstr "ورود ناموفق"
 
+msgid "Logo"
+msgstr "آرم"
+
+msgid "Logo has been removed."
+msgstr "آرم حذف شده است."
+
+msgid "Logo has been uploaded."
+msgstr "آرم بارگذاری شده است."
+
 msgid "Logout failed"
 msgstr "خروج نا موفق"
 
@@ -911,23 +1655,86 @@ msgstr "مدیریت کنید"
 msgid "Manage at"
 msgstr "مدیریت در"
 
+msgid "Manage networks"
+msgstr "مدیریت شبکه"
+
 msgid "Manage organization"
 msgstr "مدیریت سازمان"
+
+msgid "Manage security groups"
+msgstr "مدیریت security groups"
 
 msgid "Managed projects"
 msgstr "پروژه های مدیریت شده"
 
+msgid "Management"
+msgstr "مدیریت"
+
+msgid "Marketplace checkout"
+msgstr "وارسی Marketplace"
+
+msgid "Marketplace offering does not have any usage-based components."
+msgstr "پیشنهاد Marketplace هیچ استفاده ای ندارد-براساس components."
+
+msgid "Marketplace offerings"
+msgstr "پیشنهادMarketplace"
+
+msgid "Marketplace service provider"
+msgstr "ارائه دهنده سرویس Marketplace"
+
+msgid "Max # of VM snapshots"
+msgstr "حداکثر # از VM snapshots"
+
 msgid "Max # of snapshots"
 msgstr "حداکثر # از عکس فوری"
+
+msgid "Max amount"
+msgstr "حداکثر مقدار"
+
+msgid "Max number of VM snapshots"
+msgstr "حداکثر تعداد از VM snapshots"
 
 msgid "Maximal number of resources"
 msgstr "حداکثر تعداد از منابع"
 
+msgid "Maximal value"
+msgstr "حداکثر مقدار"
+
+msgid "Maximum RAM for each VM"
+msgstr "حداکثر RAM برای هر VM"
+
+msgid "Maximum allowed value"
+msgstr "حداکثر مقدار مجاز"
+
+msgid "Maximum capacity for each disk"
+msgstr "حداکثر ظرفیت برای هر disk"
+
+msgid "Maximum monthly"
+msgstr "حداکثر ماهانه"
+
+msgid "Maximum total"
+msgstr "حداکثر کل"
+
+msgid "Maximum total size of the disk space per VM"
+msgstr "حداکثر اندازه کل از فضای دیسک هر VM"
+
 msgid "Maximum username length with mandatory username prefix is 32 characters."
 msgstr "حداکثر طول نام کاربری با پیشوند نام کاربری prefix،باید 32 کاراکتر باشد."
 
+msgid "Maximum vCPU for each VM"
+msgstr "حداکثر vCPU برای هر"
+
+msgid "Measured unit"
+msgstr "واحد اندازه گیری"
+
 msgid "Member"
 msgstr "عضو"
+
+msgid "Memory per vCore"
+msgstr "حافظه برای هر vCore"
+
+msgid "Memory size in GiB"
+msgstr "اندازه حافظه در GiB"
 
 msgid "Message"
 msgstr "پیغام"
@@ -938,8 +1745,20 @@ msgstr "روش"
 msgid "Min RAM"
 msgstr "حداقل RAM"
 
+msgid "Min amount"
+msgstr "مقدار حداقل"
+
 msgid "Min storage"
 msgstr "حداقل storage"
+
+msgid "Minimal value"
+msgstr "حداقل مقدار"
+
+msgid "Minimum allowed value"
+msgstr "حداقل مقدار مجاز"
+
+msgid "Minimum booking time slot duration."
+msgstr "حداقل مدت زمان رزرو slot."
 
 msgid "Mobile phone number"
 msgstr "شماره تلفن همراه"
@@ -950,8 +1769,29 @@ msgstr "ماه"
 msgid "Monthly cost"
 msgstr "هزینه ماهانه"
 
+msgid "Monthly invoices"
+msgstr "صورتحساب ماهانه"
+
+msgid "More"
+msgstr "بیشتر"
+
 msgid "More info"
 msgstr "اطلاعات بیشتر"
+
+msgid "Must start with a country prefix ie EE34501234215"
+msgstr "باید با کشور prefix شروع شود مثل EE34501234215"
+
+msgid "My offerings"
+msgstr "پیشنهادات من"
+
+msgid "My orders"
+msgstr "دستورات من"
+
+msgid "My resources"
+msgstr "منابع من"
+
+msgid "My services"
+msgstr "سرویس های من"
 
 msgid "Name"
 msgstr "نام"
@@ -959,14 +1799,32 @@ msgstr "نام"
 msgid "Name is duplicated. Choose other name."
 msgstr "نام تکراری است .اسم دیگری انتخاب کنید."
 
+msgid "Name is not valid."
+msgstr "نام معتبر نیست."
+
+msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr "نام بسیار کوتاه است، اسم ها باید حداقل دو حرف الفبا داشته باشند."
+
 msgid "Name of your organization."
 msgstr "اسم سازمان شما."
+
+msgid "Name should consist of latin symbols and numbers."
+msgstr "نام باید شامل اعداد و نماد ها باشد."
 
 msgid "Name should contain at least 3 symbols."
 msgstr "نام باید حداقل شامل 3 نماد باشد."
 
+msgid "Namespace"
+msgstr "فضای نام"
+
+msgid "Namespace should be unique."
+msgstr "فضای نام باید منحصر به فرد باشد."
+
 msgid "Native name"
 msgstr "اسم بومی"
+
+msgid "Negative"
+msgstr "منفی"
 
 msgid "Network"
 msgstr "شبکه"
@@ -974,8 +1832,17 @@ msgstr "شبکه"
 msgid "Networks"
 msgstr "شبکه ها"
 
+msgid "New e-mail address"
+msgstr "آدرس ایمیل جدید"
+
+msgid "New email"
+msgstr "ایمیل جدید"
+
 msgid "New flavor"
 msgstr "flavor جدید"
+
+msgid "New limit"
+msgstr "محدودیت جدید"
 
 msgid "New plan"
 msgstr "برنامه جدید"
@@ -998,8 +1865,38 @@ msgstr "دسترسی اطلاعات ندارد"
 msgid "No access info."
 msgstr "دسترسی اطلاعات ندارد."
 
+msgid "No entries to show here"
+msgstr "اینجا هیچ ورودی جهت نمایش وجود ندارد"
+
+msgid "No results found"
+msgstr "نتیجه ای یافت نشد"
+
+msgid "Node has been created."
+msgstr "Node ایجاد شده است."
+
+msgid "Node plan"
+msgstr "برنامه Node"
+
+msgid "Not a service provider."
+msgstr "یک ارائه دهنده خدمات نیست."
+
 msgid "Not assigned"
 msgstr "اختصاص داده نشده"
+
+msgid "Not running accounting"
+msgstr "عدم اجرای حسابداری"
+
+msgid "Note that this virtual machine will not be charged separately for {organization}."
+msgstr "توجه داشته باشید که این  ماشین مجازی به صورت جداگانه برای{ سازمان} شارژ نخواهد شد."
+
+msgid "Note that this volume will not be charged separately for {organization}."
+msgstr "توجه داشته باشید این volume به صورت جداگانه برای { سازمان } شارژ نخواهد شد."
+
+msgid "Nothing to see here"
+msgstr "اینجا چیزی جهت مشاهده نیست"
+
+msgid "Nothing to show here"
+msgstr "اینجا چیزی جهت نمایش نیست"
 
 msgid "Notification has been created."
 msgstr "اعلان ایجاد شده است."
@@ -1013,23 +1910,122 @@ msgstr "روش اطلاع رسانی"
 msgid "Notifications"
 msgstr "اعلان ها"
 
+msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr "زمانی که رویداد مشخصی رخ دهد اعلان ها مجاز به اطلاع رسانی هستند."
+
+msgid "Number of CPU cores per socket"
+msgstr "تعدادی از هسته های CPU برای هر socket"
+
+msgid "Number of cores in a VM"
+msgstr "تعدادی از هسته ها در VM"
+
+msgid "Number of created instances"
+msgstr "تعدادی از instance های ایجاد شده"
+
+msgid "Number of running instances"
+msgstr "تعدادی از instance های دز حال اجرا"
+
 msgid "OK"
 msgstr "باشه"
 
 msgid "Object is not found."
 msgstr "شیء یافت نشد."
 
+msgid "Offering"
+msgstr "پیشنهاد"
+
+msgid "Offering components"
+msgstr "ارائه components"
+
+msgid "Offering details"
+msgstr "ارائه جزییات"
+
+msgid "Offering has been created."
+msgstr "پیشنهاد ایجاد شده است."
+
+msgid "Offering has been updated."
+msgstr "پیشنهاد بروز رسانی شده است."
+
+msgid "Offering is not configured yet."
+msgstr "پیشنهاد هنوز پیکر بندی نشده است."
+
+msgid "Offering logo"
+msgstr "آرم پیشنهادی"
+
+msgid "Offering state has been updated."
+msgstr "حالت پیشنهادی بروز رسانی شده است."
+
+msgid "Offering type"
+msgstr "نوع پیشنهاد"
+
+msgid "Offerings"
+msgstr "پیشنهادات"
+
+msgid "One-time"
+msgstr "یکبار"
+
+msgid "One-time on plan switch"
+msgstr "یکبار در  plan switch"
+
 msgid "Only customer owner or staff can invite users."
 msgstr "فقط صاحب مشتری یا کارمند میتواند کاربر دعوت کند."
 
+msgid "Only pending and expired invitations can be sent again."
+msgstr "فقط دعوت های تاریخ گذشته یا منتظر ارسال میتوانند مجدد ارسال شوند."
+
 msgid "Only pending invitation can be canceled."
 msgstr "فقط دعوت های منتظر ارسال را میتوان لغو کرد."
+
+msgid "Only staff and organization users are allowed to open console."
+msgstr "فقط کارمندان و کاربران سازمان، مجاز به باز کردن console هستند."
+
+msgid "Only staff can manage OpenStack tenant."
+msgstr "فقط کارمندان میتوانند OpenStack tenant را مدیریت کنند."
 
 msgid "Only staff can remove organization."
 msgstr "فقط کارمندان میتوانند سازمان را حذف کنند."
 
 msgid "Open"
 msgstr "باز"
+
+msgid "OpenStack Images"
+msgstr "تصویر های OpenStack"
+
+msgid "OpenStack package"
+msgstr "بسته OpenStack"
+
+msgid "Open console"
+msgstr "console را باز کنید"
+
+msgid "Open support portal"
+msgstr "پشیتبانی پرتال را بازکنید"
+
+msgid "Options are invalid."
+msgstr "گزینه ها نا معتبر است."
+
+msgid "Order Summary"
+msgstr "خلاصه سفارش"
+
+msgid "Order details"
+msgstr "جزییات سفارش"
+
+msgid "Order has been approved."
+msgstr "سفارش تایید شده است."
+
+msgid "Order has been rejected."
+msgstr "سفارش رد شده است."
+
+msgid "Order has been submitted."
+msgstr "سفارش ارسال شده است."
+
+msgid "Order items"
+msgstr "سفارش مورد"
+
+msgid "Order summary"
+msgstr "خلاصه سفارش"
+
+msgid "Orders"
+msgstr "سفارش ها"
 
 msgid "Organization"
 msgstr "سازمان"
@@ -1052,6 +2048,9 @@ msgstr "رویدادهای سازمان"
 msgid "Organization has been created."
 msgstr "سازمان ایجاد شده است."
 
+msgid "Organization has signed a fixed price agreement"
+msgstr "سازمان توافق نامه قیمت ثابت را امضا کرده است"
+
 msgid "Organization name"
 msgstr "نام سازمان"
 
@@ -1067,11 +2066,38 @@ msgstr "کد ثبت نام سازمان"
 msgid "Organization removal"
 msgstr "حذف سازمان"
 
+msgid "Organization roles"
+msgstr "نقش سازمان"
+
+msgid "Organization users list"
+msgstr "لیست کاربران سازمان"
+
 msgid "Organization workspace"
 msgstr "فضای کار سازمان"
 
+msgid "Organization {customer_link} has been created."
+msgstr "سازمان {customer_name} ایجاد شده است."
+
+msgid "Organization {customer_link} has been updated."
+msgstr "سازمان {customer_name} بروزرسانی شده است."
+
+msgid "Organization {customer_name} has been deleted."
+msgstr "سازمان {customer_name} حذف شده است."
+
 msgid "Organizations"
 msgstr "سازمان ها"
+
+msgid "Organizations ({count})"
+msgstr "سازمان ها(مقدار)"
+
+msgid "Overview"
+msgstr "بررسی اجمالی"
+
+msgid "Overview of {organization} organization"
+msgstr "بررسی اجمالی سازمان"
+
+msgid "Overview of {project} project"
+msgstr "بررسی اجمالی پروژه"
 
 msgid "Owned organizations"
 msgstr "سازمان های متعلق به"

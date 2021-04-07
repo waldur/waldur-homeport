@@ -26,11 +26,26 @@ msgstr "Department description"
 msgid "Project name"
 msgstr "Department name"
 
+msgid "Project removal"
+msgstr "Department removal"
+
+msgid "Project roles"
+msgstr "Department roles"
+
 msgid "Project type"
 msgstr "Department type"
 
 msgid "Project workspace"
 msgstr "Department workspace"
+
+msgid "Project {project_link} has been created."
+msgstr "Department {project_link} has been created."
+
+msgid "Project {project_link} has been updated."
+msgstr "Department {project_link} has been updated."
+
+msgid "Project {project_name} has been deleted."
+msgstr "Department {project_name} has been deleted."
 
 msgid "Projects"
 msgstr "Departments"

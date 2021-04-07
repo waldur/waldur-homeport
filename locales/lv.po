@@ -287,6 +287,9 @@ msgstr "Rēķinu saraksts"
 msgid "Is active"
 msgstr "Aktīvs"
 
+msgid "Link"
+msgstr "Saite"
+
 msgid "Lithuanian"
 msgstr "Lietuviešu valoda"
 
@@ -341,6 +344,9 @@ msgstr "Uzņēmuma nosaukums"
 msgid "Organization owner"
 msgstr "Uzņēmuma īpašnieks"
 
+msgid "Organization {customer_name} has been deleted."
+msgstr "Uzņēmums {customer_name} tika nodzēsts."
+
 msgid "Organizations"
 msgstr "Uzņēmumi"
 
@@ -376,3 +382,6 @@ msgstr "(PVN nav iekļauts)"
 
 msgid "organization"
 msgstr "uzņēmums"
+
+msgid "{usage} of {limit} used"
+msgstr "{usage} no {limit} ir izmantoti"
