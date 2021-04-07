@@ -10,7 +10,6 @@ import {
   BOOKING_RESOURCES_TABLE,
   OFFERING_TYPE_BOOKING,
 } from '@waldur/booking/constants';
-import { CreatedByField } from '@waldur/booking/CreatedByField';
 import { translate, withTranslation } from '@waldur/i18n';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { RootState } from '@waldur/store/reducers';
@@ -49,7 +48,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Created by'),
-      render: CreatedByField,
+      render: ({ row }) => row.created_by_full_name,
     },
     {
       title: translate('State'),
