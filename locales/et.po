@@ -198,7 +198,7 @@ msgid "Add rule"
 msgstr "Lisa reegel"
 
 msgid "Add security group"
-msgstr "Lisa turberühm"
+msgstr "Lisa tulemüürireeglite rühm"
 
 msgid "Add team member"
 msgstr "Lisa meeskonna liige"
@@ -361,6 +361,9 @@ msgstr "Lisan"
 
 msgid "Attachments"
 msgstr "Lisandid"
+
+msgid "Attributes"
+msgstr "Atribuudid"
 
 msgid "Attributes filter"
 msgstr "Atribuutide filtrid"

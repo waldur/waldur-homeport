@@ -8,6 +8,9 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
 
+msgid "Active"
+msgstr "Aktiv"
+
 msgid "Add project"
 msgstr "Add department"
 
