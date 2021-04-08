@@ -14,7 +14,6 @@ export const EditSubnetDialog = ({ resolve: { resource } }) => {
         description: resource.description,
         gateway_ip: resource.gateway_ip,
         disable_gateway: resource.disable_gateway,
-        enable_default_gateway: resource.enable_default_gateway,
         host_routes: resource.host_routes,
         dns_nameservers: resource.dns_nameservers,
       }}

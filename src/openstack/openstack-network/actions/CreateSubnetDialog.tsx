@@ -34,7 +34,6 @@ export const CreateSubnetDialog = ({ resolve: { resource } }) => {
         },
       ]}
       initialValues={{
-        enable_default_gateway: true,
         cidr: '192.168.42.0/24',
       }}
       submitForm={async (formData) => {

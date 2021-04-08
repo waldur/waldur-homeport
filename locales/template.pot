@@ -1382,8 +1382,8 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: src/openstack/openstack-subnet/fields.tsx
-msgid "Connect subnet to a default virtual router"
+#: src/openstack/openstack-subnet/ConnectSubnetAction.tsx
+msgid "Connect subnet"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsForm.tsx
@@ -2009,6 +2009,10 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Disabled"
+msgstr ""
+
+#: src/openstack/openstack-subnet/DisconnectSubnetAction.tsx
+msgid "Disconnect subnet"
 msgstr ""
 
 #: src/vmware/actions/ExtendDiskDialog.tsx
