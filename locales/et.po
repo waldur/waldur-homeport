@@ -47,6 +47,9 @@ msgstr "Kinnitatud"
 msgid "Access"
 msgstr "Ligipääs"
 
+msgid "Access subnets"
+msgstr "Juurdepääsu alamvõrgud"
+
 msgid "Access token"
 msgstr "Juurdepääsu žetoon"
 
@@ -661,6 +664,9 @@ msgstr "Ühendatud alamvõrgud"
 
 msgid "Connection details"
 msgstr "Ühenduse üksikasjad"
+
+msgid "Contact details"
+msgstr "Kontaktandmed"
 
 msgid "Contact e-mail"
 msgstr "Kontakt e-post"
@@ -1409,6 +1415,9 @@ msgstr "Kutse ei ole korrektne."
 msgid "Invitation is not valid anymore."
 msgstr "Kutse ei ole enam kehtiv."
 
+msgid "Invitation link"
+msgstr "Kutse link"
+
 msgid "Invitation rejection"
 msgstr "Kutse tagasilükkamine"
 
@@ -1523,6 +1532,9 @@ msgstr "Võtmed"
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr "Keystone autentimine URL (e.g. http://keystone.example.com:5000/v3)"
 
+msgid "Kubeconfig file"
+msgstr "Kubeconfig fail"
+
 msgid "Label that is visible to users in Marketplace."
 msgstr "Silt, mis on turuplatsi kasutajatele nähtav"
 
@@ -1583,6 +1595,9 @@ msgstr "Logi sisse"
 msgid "Login failed"
 msgstr "Tõrge sisselogimisel"
 
+msgid "Login with"
+msgstr "Logi sisse"
+
 msgid "Logo has been removed."
 msgstr "Logo on eemaldatud"
 
@@ -1600,6 +1615,9 @@ msgstr "Haldus"
 
 msgid "Manage at"
 msgstr "Halda"
+
+msgid "Manage networks"
+msgstr "Võrkude haldamine"
 
 msgid "Manage organization"
 msgstr "Halda organisatsiooni"
@@ -1777,6 +1795,9 @@ msgstr "Sissekanded mida näidata puuduvad"
 
 msgid "No results found"
 msgstr "Tulemusi ei leitud"
+
+msgid "None"
+msgstr "Puudub"
 
 msgid "Not a service provider."
 msgstr "Ei õnnestunud teenusepakkujat salvestada."
@@ -2477,8 +2498,14 @@ msgstr "Raporteeri probleemist"
 msgid "Report details"
 msgstr "Raporteeri üksikasju"
 
+msgid "Report has been submitted"
+msgstr "Aruanne on esitatud"
+
 msgid "Report incorrect data"
 msgstr "Anna teada ebakorrektsetest andmetest"
+
+msgid "Report security incident"
+msgstr "Teata turbejuhtumist"
 
 msgid "Report usage"
 msgstr "Raporteeri ressursi kasutusest"
@@ -2966,6 +2993,9 @@ msgstr "Tõmmised"
 msgid "Snapshots count"
 msgstr "Tõmmiste arv"
 
+msgid "Sponsor number"
+msgstr "Sponsori number"
+
 msgid "Staff"
 msgstr "Personal"
 
@@ -3131,6 +3161,9 @@ msgstr "Teenustingimused"
 msgid "Terms of service"
 msgstr "Teenustingimused"
 
+msgid "Text has been copied"
+msgstr "Tekst on kopeeritud"
+
 msgid "The key has been created."
 msgstr "Võti on loodud"
 
@@ -3232,6 +3265,9 @@ msgstr "Porti"
 
 msgid "To remove account, please send a request to {support}."
 msgstr "Konto eemaldamiseks saada palun taotlus {support}"
+
+msgid "To report an issue, please send an email to {supportEmail}."
+msgstr "Probleemi teatamiseks saatke palun e-kiri aadressile {supportEmail}."
 
 msgid "Total"
 msgstr "Kokku"

@@ -1349,5 +1349,473 @@ msgstr "Faktura-begivenheder"
 msgid "Invoice events timeline"
 msgstr "Tidslinje for faktura begivenheder"
 
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgstr "Faktura for organisation {customer_link} for perioden {period} er oprettet."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "Faktura for organisation {customer_link} for perioden {period} er blevet opdateret."
+
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgstr "Faktura for organisation {customer_name} for perioden {period} er blevet slettet."
+
+msgid "Invoice has been successfully linked to payment."
+msgstr "Fakturaen er blevet knyttet til betaling."
+
+msgid "Invoice has been successfully unlinked from payment."
+msgstr "Fakturaen er blevet fjernet fra forbindelsen til betalingen."
+
+msgid "Invoice has not been sent to PayPal yet"
+msgstr "Fakturaen er endnu ikke sendt til PayPal"
+
+msgid "Invoice statistics"
+msgstr "Fakturastatistik"
+
+msgid "Invoiced to"
+msgstr "Faktureret til"
+
+msgid "Invoices list"
+msgstr "Liste over fakturaer"
+
+msgid "Is external"
+msgstr "Er ekstern"
+
+msgid "Is official"
+msgstr "Er officiel"
+
+msgid "Is service provider"
+msgstr "Er tjenesteudbyder"
+
+msgid "Issue link"
+msgstr "Problem link"
+
+msgid "Issue {issue_link} has been created by {caller_link}."
+msgstr "Problemet {issue_link} er oprettet af {caller_link}."
+
+msgid "Issues are trackable requests to the operator."
+msgstr "Problemer er sporbare anmodninger til operatøren."
+
+msgid "It is used to automatically assign floating IP to your virtual machine."
+msgstr "Det bruges til automatisk at tildele flydende IP til din virtuelle maskine."
+
+msgid "Item has been added to shopping cart."
+msgstr "Varen er blevet tilføjet til indkøbskurven."
+
+msgid "Item has been removed from shopping cart."
+msgstr "Varen er blevet fjernet fra indkøbskurven."
+
+msgid "Keep forever"
+msgstr "Hold for evigt"
+
+msgid "Keep until"
+msgstr "Hold indtil"
+
+msgid "Kept until"
+msgstr "Opbevares indtil"
+
+msgid "Key name"
+msgstr "Nøgle navn"
+
+msgid "Key removal"
+msgstr "Fjernelse af nøgle"
+
+msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
+msgstr "Keystone auth URL (f.eks. http://keystone.example.com:5000/v3)"
+
+msgid "Kubeconfig file"
+msgstr "Kubeconfig- fil"
+
+msgid "Kubernetes node #{index}"
+msgstr "Kubernetes-node #{index}"
+
+msgid "Kubernetes nodes"
+msgstr "Kubernetes-noder"
+
+msgid "Kubernetes version"
+msgstr "Kubernetes-version"
+
+msgid "Label that is visible to users in Marketplace."
+msgstr "Etiket, der er synligt for brugere på Marketplace."
+
+msgid "Leave blank if you want admin password to be auto-generated."
+msgstr "Lad være tomt, hvis du ønsker, at administratoradgangskoden skal genereres automatisk."
+
+msgid "Leave blank if you want admin username to be auto-generated."
+msgstr "Lad det være tomt, hvis du ønsker, at administratorbrugernavnet skal genereres automatisk."
+
+msgid "Legal address"
+msgstr "Juridisk adresse"
+
+msgid "Lifetime will be updated and reset upon saving the form."
+msgstr "Levetiden opdateres og nulstilles, når formularen gemmes."
+
+msgid "Limit amount"
+msgstr "Grænsebeløb"
+
+msgid "Limit period"
+msgstr "Grænseperiode"
+
+msgid "Limits"
+msgstr "Grænser"
+
+msgid "Limits are invalid."
+msgstr "Grænserne er ugyldige."
+
+msgid "Link OpenStack Instance"
+msgstr "Link OpenStack-Instans"
+
+msgid "Link invoice"
+msgstr "Link faktura"
+
+msgid "Loading actions"
+msgstr "Indlæsning af handlinger"
+
+msgid "Loading assets, please wait."
+msgstr "Indlæser aktiver, vent venligst."
+
+msgid "Loading invoices"
+msgstr "Indlæsning af fakturaer"
+
+msgid "Location has been saved successfully."
+msgstr "Placering er blevet gemt korrekt."
+
+msgid "Logging user in"
+msgstr "Logger bruger ind"
+
+msgid "Login with"
+msgstr "Log ind med"
+
+msgid "Logo has been removed."
+msgstr "Logo er blevet fjernet."
+
+msgid "Logo has been uploaded."
+msgstr "Logo er blevet uploadet."
+
+msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
+msgstr "Longhorn er et letvægts, pålideligt og kraftfuldt distribueret blokopbevaringssystem til Kubernetes."
+
+msgid "MAC address (optional)"
+msgstr "MAC-adresse (valgfri)"
+
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Manage at"
+msgstr "Administrer på"
+
+msgid "Manage networks"
+msgstr "Administrer netværk"
+
+msgid "Manage organization"
+msgstr "Administrer organisation"
+
+msgid "Manage security groups"
+msgstr "Administrer sikkerhedsgrupper"
+
+msgid "Managed projects"
+msgstr "Administrerede projekter"
+
+msgid "Mark as paid"
+msgstr "Markér som betalt"
+
+msgid "Mark invoice as paid"
+msgstr "Marker fakturaen som betalt"
+
+msgid "Marketplace UUID"
+msgstr "Marketplace UUID"
+
+msgid "Marketplace checkout"
+msgstr "Marketplace-kassen"
+
+msgid "Marketplace offering does not have any usage-based components."
+msgstr "Marketplace tilbyder ikke nogen brugsbaserede komponenter."
+
+msgid "Marketplace offerings"
+msgstr "Marketplace-tilbud"
+
+msgid "Marketplace service provider"
+msgstr "Udbyder af Marketplace-tjenester"
+
+msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
+msgstr "Marketplace-tjenester kan kun leveres til en bestemt tilknytning. Du har i øjeblikket ingen organisationer eller projekter forbundet med din konto."
+
+msgid "Max # of VM snapshots"
+msgstr "Maksimalt # antal VM-snapshots"
+
+msgid "Max # of snapshots"
+msgstr "Maksimalt # antal snapshots"
+
+msgid "Max amount"
+msgstr "Maksimalt beløb"
+
+msgid "Max number of VM snapshots"
+msgstr "Maksimalt antal VM-snapshots"
+
+msgid "Max replicas"
+msgstr "Maks. replikaer"
+
+msgid "Maximal number of resources"
+msgstr "Maksimalt antal ressourcer"
+
+msgid "Maximal value"
+msgstr "Maksimal værdi"
+
+msgid "Maximum RAM for each VM"
+msgstr "Maksimal RAM for hver VM"
+
+msgid "Maximum allowed value"
+msgstr "Maksimal tilladt værdi"
+
+msgid "Maximum capacity for each disk"
+msgstr "Maksimal kapacitet for hver disk"
+
+msgid "Maximum monthly"
+msgstr "Maksimum månedligt"
+
+msgid "Maximum total"
+msgstr "Maksimalt total"
+
+msgid "Maximum total size of the disk space per VM"
+msgstr "Maksimal total størrelse på diskpladsen pr. VM"
+
+msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr "Maksimal brugernavn længde med obligatorisk brugernavn præfiks er 32 tegn."
+
+msgid "Maximum vCPU for each VM"
+msgstr "Maksimal vCPU for hver VM"
+
+msgid "Measured unit"
+msgstr "Målt enhed"
+
+msgid "Memory per vCore"
+msgstr "Hukommelse pr. vCore"
+
+msgid "Memory size in GiB"
+msgstr "Hukommelsesstørrelse i GiB"
+
+msgid "Metric name"
+msgstr "Metrisk navn"
+
+msgid "MiB"
+msgstr "MiB"
+
+msgid "Min RAM"
+msgstr "Min. RAM"
+
+msgid "Min amount"
+msgstr "Min. beløb"
+
+msgid "Min replicas"
+msgstr "Min. replikaer"
+
+msgid "Min storage"
+msgstr "Min. opbevaring"
+
+msgid "Minimal value"
+msgstr "Minimal værdi"
+
+msgid "Minimum allowed value"
+msgstr "Mindste tilladte værdi"
+
+msgid "Minimum booking time slot duration."
+msgstr "Minimum booking tid slot varighed."
+
+msgid "Minimum username length is 3 characters."
+msgstr "Mindste brugernavn længde er 3 tegn."
+
+msgid "Monthly cost"
+msgstr "Månedlige omkostninger"
+
+msgid "Monthly invoices"
+msgstr "Månedlige fakturaer"
+
+msgid "Mount point"
+msgstr "Monteringspunkt"
+
+msgid "Must be at least {min}"
+msgstr "Skal være mindst {min}"
+
+msgid "Must be at most {max}"
+msgstr "Må højst være {max}"
+
+msgid "Must start with a country prefix ie EE34501234215"
+msgstr "Skal starte med et landspræfiks, dvs. EE34501234215"
+
+msgid "My offerings"
+msgstr "Mine tilbud"
+
+msgid "My resources"
+msgstr "Mine ressourcer"
+
+msgid "My services"
+msgstr "Mine tjenester"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
+msgstr "Navnet \"{label}\" skal være 1-63 tegn langt, som hver kun kan være alfanumeriske eller bindestreg"
+
+msgid "Name \"{label}\" must not start or end with a hyphen"
+msgstr "Navnet \"{label}\" må ikke starte eller slutte med en bindestreg"
+
+msgid "Name is duplicated. Choose other name."
+msgstr "Navnet er duplikeret. Vælg et andet navn."
+
+msgid "Name is not valid."
+msgstr "Navnet er ikke gyldigt."
+
+msgid "Name is required field."
+msgstr "Navn er påkrævet felt."
+
+msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr "Navnet er for kort, navnene skal være mindst to alfanumeriske tegn."
+
+msgid "Name must consist of lower case alphanumeric characters."
+msgstr "Navnet skal bestå af alfanumeriske tegn med små bogstaver."
+
+msgid "Name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name', or '123-abc')"
+msgstr "Navnet skal bestå af alfanumeriske små bogstaver eller \"-\" og skal begynde og slutte med et alfanumerisk tegn (f.eks. \"mit-navn\" eller \"123-abc\")."
+
+msgid "Name of your organization."
+msgstr "Navnet på din organisation."
+
+msgid "Name should consist of latin symbols, numbers and dashes."
+msgstr "Navnet skal bestå af latinske symboler, tal og bindestreger."
+
+msgid "Name should consist of latin symbols and numbers."
+msgstr "Navnet skal bestå af latinske symboler og tal."
+
+msgid "Name should contain at least 3 symbols."
+msgstr "Navnet skal indeholde mindst 3 symboler."
+
+msgid "Namespace"
+msgstr "Navneområde"
+
+msgid "Namespace should be unique."
+msgstr "Navneområde skal være unikt."
+
+msgid "Native name"
+msgstr "Indfødt navn"
+
+msgid "Network MTU has been updated."
+msgstr "Netværk MTU er blevet opdateret."
+
+msgid "Network adapters"
+msgstr "Netværksadaptere"
+
+msgid "New flavor"
+msgstr "Ny smag"
+
+msgid "New limit"
+msgstr "Ny grænse"
+
+msgid "New plan"
+msgstr "Ny plan"
+
+msgid "New size"
+msgstr "Ny størrelse"
+
+msgid "Next hop (IP)"
+msgstr "Næste hop (IP)"
+
+msgid "Next trigger at"
+msgstr "Næste udløser på"
+
+msgid "No, continue using current email"
+msgstr "Nej, fortsæt med at bruge nuværende e-mail"
+
+msgid "No access info"
+msgstr "Ingen adgangsoplysninger"
+
+msgid "No countries"
+msgstr "Ingen lande"
+
+msgid "No division types"
+msgstr "Ingen opdelingstyper"
+
+msgid "No divisions"
+msgstr "Ingen opdelinger"
+
+msgid "No entries to show here"
+msgstr "Ingen poster at vise her"
+
+msgid "No invoice data available."
+msgstr "Ingen tilgængelige fakturadata."
+
+msgid "No offerings"
+msgstr "Ingen tilbud"
+
+msgid "No organizations"
+msgstr "Ingen organisationer"
+
+msgid "No projects"
+msgstr "Ingen projekter"
+
+msgid "No projects are assigned to this user."
+msgstr "Der er ikke tildelt nogen projekter til denne bruger."
+
+msgid "No providers"
+msgstr "Ingen udbydere"
+
+msgid "No service providers"
+msgstr "Ingen tjenesteudbydere"
+
+msgid "No users"
+msgstr "Ingen brugere"
+
+msgid "Node"
+msgstr "Node"
+
+msgid "Node has been created."
+msgstr "Node er blevet oprettet."
+
+msgid "Node plan"
+msgstr "Nodeplan"
+
+msgid "Nodes"
+msgstr "Noder"
+
+msgid "Not a service provider."
+msgstr "Ikke en tjenesteudbyder."
+
+msgid "Not running accounting"
+msgstr "Ikke kører regnskab"
+
+msgid "Note that this virtual machine will not be charged separately for {organization}."
+msgstr "Bemærk, at denne virtuelle maskine ikke vil blive opkrævet separat for {organization}."
+
+msgid "Note that this volume will not be charged separately for {organization}."
+msgstr "Bemærk, at denne diskenhed ikke opkræves separat for {organization}."
+
+msgid "Notification can be sent only for created invoice."
+msgstr "Meddelelsen kan kun sendes for oprettet faktura."
+
+msgid "Notification has been created."
+msgstr "Meddelelsen er oprettet."
+
+msgid "Notification has been updated."
+msgstr "Meddelelsen er blevet opdateret."
+
+msgid "Notification method"
+msgstr "Meddelelsesmetode"
+
+msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr "Meddelelser gør det muligt at blive informeret, når en bestemt hændelse har fundet sted."
+
+msgid "Notifications has been sent to {count} users."
+msgstr "Meddelelser er blevet sendt til {count} brugere."
+
+msgid "Number of CPU cores per socket"
+msgstr "Antal CPU-kerner pr. sokkel"
+
+msgid "Number of CPU cores should be multiple of cores per socket."
+msgstr "Antallet af CPU-kerner skal være flere kerner pr. sokkel."
+
+msgid "Number of control plane nodes"
+msgstr "Antal kontrolplanknuder"
+
+msgid "Number of cores in a VM"
+msgstr "Antal kerner i en VM"
+
 msgid "(VAT is not included)"
 msgstr "(Moms er ikke inkluderet)"

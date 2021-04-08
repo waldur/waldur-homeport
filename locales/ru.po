@@ -50,6 +50,9 @@ msgstr "Доступ"
 msgid "Access token"
 msgstr "Токен доступа"
 
+msgid "Accessible to all customers."
+msgstr "Доступно для всех организаций."
+
 msgid "Account activation"
 msgstr "Активация аккаунта"
 
@@ -490,6 +493,9 @@ msgstr "Вход не удался"
 
 msgid "Logout failed"
 msgstr "Выход не удался"
+
+msgid "Management"
+msgstr "Управление"
 
 msgid "Member"
 msgstr "Участник"

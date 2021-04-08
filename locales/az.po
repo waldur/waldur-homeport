@@ -1803,7 +1803,7 @@ msgid "Show shared"
 msgstr "Paylaşılanları göstərin"
 
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
-msgstr "{nəticə Sayı} girişlərindən {parçaBaşlanğıc}-dan {parçaSon}-a kimi göstərmək."
+msgstr "{sliceStart} girişlərindən {sliceEnd}-dan {resultCount}-a kimi göstərmək."
 
 msgid "Sign in"
 msgstr "Daxil ol"
@@ -2247,25 +2247,25 @@ msgid "User {user_link} has granted organization support role in {customer_link}
 msgstr "{user_link} istifadəçi təşkilatın dəstəyi vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
-msgstr "{user_link} istifadəçi layihə administratoru vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
+msgstr "{user_link} istifadəçi layihə administratoru vəzifəsini {project_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
-msgstr "{user_link} istifadəçi layihə meneceri vəzifəsini {customer_link} ünvanındakı {affected_user_link}-ə vermişdir."
+msgstr "{user_link} istifadəçi layihə meneceri vəzifəsini {project_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "{user_link} istifadəçi vəzifəni {affected_user_link}-ə vermişdir."
 
 msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
-msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın sahibini {müştəri_linki}-ndən ləğv etmşdir."
+msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın sahibini {customer_link}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
-msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın dəstəyini {müştəri_linki}-ndən ləğv etmşdir."
+msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın dəstəyini {customer_link}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
 msgstr "{user_link} istifadəçi {affected_user_link} layihə administratorunu {müştəri_linki}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
-msgstr "{user_link} istifadəçi {affected_user_link} layihə menecerini {müştəri_linki}-ndən ləğv etmşdir."
+msgstr "{user_link} istifadəçi {affected_user_link} layihə menecerini {project_link}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "{user_link} istifadəçi {affected_user_link} ləğv etmşdir."
@@ -2424,10 +2424,10 @@ msgid "commented:"
 msgstr "şərh etdi:"
 
 msgid "current state on backend: {resourceState}."
-msgstr "Çıxış buferi üzrə mövcud vəziyyət: {resursVəziyyəti}."
+msgstr "Çıxış buferi üzrə mövcud vəziyyət: {resourceState}."
 
 msgid "error message: {errorMessage}"
-msgstr "Xəta mesajı: {xətaMesajı}"
+msgstr "Xəta mesajı: {errorMessage}"
 
 msgid "events"
 msgstr "hadisələr"
@@ -2526,7 +2526,7 @@ msgid "{resource_link} stop has failed."
 msgstr "{resource_link} dayandırıla bilmədi."
 
 msgid "{resource_name} has been deleted."
-msgstr "{resurs_adı} silindi."
+msgstr "{resource_name} silindi."
 
 msgid "{usage} of {limit}"
 msgstr "{limit}-in {usage} istifadəsi"
