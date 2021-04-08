@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { ENV } from '@waldur/configs/default';
-import { translate, withTranslation } from '@waldur/i18n';
+import { formatJsxTemplate, translate, withTranslation } from '@waldur/i18n';
 import { getNativeNameVisible, getConfig } from '@waldur/store/config';
 import {
   fieldIsVisible,
@@ -37,15 +37,24 @@ const UserUpdateComponent: React.FC<UserUpdateComponentProps> = (props) => {
             <Gravatar email={props.user.email} size={100} />
           </div>
           <span className="manage-gravatar">
-            {translate('Manage at')}
-            <br />
-            <a
-              href="https://gravatar.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              gravatar.com
-            </a>
+            {translate(
+              'Manage avatar at {link}',
+              {
+                link: (
+                  <>
+                    <br />
+                    <a
+                      href="https://gravatar.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      gravatar.com
+                    </a>
+                  </>
+                ),
+              },
+              formatJsxTemplate,
+            )}
           </span>
         </div>
       </div>

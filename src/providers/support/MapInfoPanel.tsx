@@ -31,9 +31,11 @@ export const MapInfoPanel = withTranslation(
             <p>{data.description}</p>
           </div>
           <hr />
-          <h3>{translate('Used in the period')} -</h3>
-          <h4>{data.consumers[0].period}</h4>
-          <h3>{translate('by')}:</h3>
+          <h3>
+            {translate('Used in the period {period} by:', {
+              period: data.consumers[0].period,
+            })}
+          </h3>
         </div>
         {data.consumers.map((consumer, index) => {
           return (

@@ -6,7 +6,11 @@ import { compose } from 'redux';
 
 import { formatMediumDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { TranslateProps, withTranslation } from '@waldur/i18n';
+import {
+  formatJsxTemplate,
+  TranslateProps,
+  withTranslation,
+} from '@waldur/i18n';
 import { getAttachments } from '@waldur/issues/attachments/selectors';
 import { Attachment } from '@waldur/issues/attachments/types';
 import { openAttachmentModal } from '@waldur/issues/attachments/utils';
@@ -91,8 +95,11 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
       <div className="vertical-timeline-content">
         <div className="comment-item__header m-b-sm">
           <div className="comment-item__title">
-            <a onClick={openUserDialog}>{comment.author_name}</a>&#32;
-            <>{translate('commented:')}</>
+            {translate(
+              '{user} commented:',
+              { user: <a onClick={openUserDialog}>{comment.author_name}</a> },
+              formatJsxTemplate,
+            )}
           </div>
           <div className="comment-item__controls">
             {(user.is_staff || user.uuid === comment.author_uuid) && (

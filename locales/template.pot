@@ -3636,7 +3636,7 @@ msgid "Manage"
 msgstr ""
 
 #: src/user/support/UserEditContainer.tsx
-msgid "Manage at"
+msgid "Manage avatar at {link}"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenStackInstanceTenantButton.tsx
@@ -9079,7 +9079,7 @@ msgid "Use sudo"
 msgstr ""
 
 #: src/providers/support/MapInfoPanel.tsx
-msgid "Used in the period"
+msgid "Used in the period {period} by:"
 msgstr ""
 
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
@@ -9769,16 +9769,8 @@ msgstr ""
 msgid "browse"
 msgstr ""
 
-#: src/providers/support/MapInfoPanel.tsx
-msgid "by"
-msgstr ""
-
 #: src/rancher/catalog/ClusterCatalogList.tsx
 msgid "catalogues"
-msgstr ""
-
-#: src/issues/comments/IssueCommentItem.tsx
-msgid "commented:"
 msgstr ""
 
 #: src/rancher/node/NodeRoleField.tsx
@@ -10271,6 +10263,10 @@ msgstr ""
 
 #: src/issues/workspace/IssuesActivityStream.tsx
 msgid "{user} commented on {issue}"
+msgstr ""
+
+#: src/issues/comments/IssueCommentItem.tsx
+msgid "{user} commented:"
 msgstr ""
 
 #: src/marketplace/orders/item/details/OrderItemSummary.tsx
