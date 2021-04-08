@@ -1,0 +1,1554 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Localazy (https://localazy.com)\n"
+"Project-Id-Version: waldur-homeport\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n==1) ? 0 : 1;\n"
+
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "”{trimmed}” överskrider gränsen för {max_len} tecken FQDN"
+
+msgid "API URL"
+msgstr "API URL"
+
+msgid "API secret code:"
+msgstr "API-hemlig kod:"
+
+msgid "API token lifetime"
+msgstr "API-token livstid"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "En minimal förväntad konfiguration av arbetaren är 4 vCPU och 4 GB RAM."
+
+msgid "A one-time fee applied on activation."
+msgstr "En engångsavgift tillämpas vid aktivering."
+
+msgid "A profile has been created."
+msgstr "En profil har skapats."
+
+msgid "Accept booking"
+msgstr "Acceptera bokning"
+
+msgid "Access subnets"
+msgstr "Delnät för åtkomst"
+
+msgid "Accessible to all customers."
+msgstr "Tillgänglig för alla kunder."
+
+msgid "Account activation"
+msgstr "Aktivering av konto"
+
+msgid "Account has been activated."
+msgstr "Kontot har aktiverats."
+
+msgid "Account removal"
+msgstr "Kontoborttagning"
+
+msgid "Accounting period"
+msgstr "Redovisningsperiod"
+
+msgid "Accounting plans"
+msgstr "Redovisningsplaner"
+
+msgid "Accounting record"
+msgstr "Redovisning"
+
+msgid "Accounting records"
+msgstr "Redovisningsposter"
+
+msgid "Accounting running"
+msgstr "Redovisning körs"
+
+msgid "Accounting start date"
+msgstr "Startdatum för redovisning"
+
+msgid "Accounting type"
+msgstr "Typ av redovisning"
+
+msgid "Action has been applied."
+msgstr "Åtgärd har tillämpats."
+
+msgid "Activation price"
+msgstr "Aktiveringspris"
+
+msgid "Active count"
+msgstr "Aktivt antal"
+
+msgid "Active user will be able to login into the portal."
+msgstr "Aktiv användare kommer att kunna logga in på portalen."
+
+msgid "Add SSH key"
+msgstr "Lägg till SSH-nyckel"
+
+msgid "Add Waldur user SSH keys to the FreeIPA profile"
+msgstr "Lägg till Waldur-användarens SSH-nycklar i FreeIPA-profilen"
+
+msgid "Add component"
+msgstr "Lägg till komponent"
+
+msgid "Add data volume"
+msgstr "Lägg till datavolym"
+
+msgid "Add environment variable"
+msgstr "Lägg till miljövariabel"
+
+msgid "Add key"
+msgstr "Lägg till nyckel"
+
+msgid "Add new offering"
+msgstr "Lägg till nytt erbjudande"
+
+msgid "Add new organization"
+msgstr "Lägg till ny organisation"
+
+msgid "Add new project"
+msgstr "Lägg till nytt projekt"
+
+msgid "Add offering"
+msgstr "Lägg till erbjudande"
+
+msgid "Add pair"
+msgstr "Lägg till par"
+
+msgid "Add payment profile"
+msgstr "Lägg till betalningsprofil"
+
+msgid "Add plan"
+msgstr "Lägg till plan"
+
+msgid "Add project member"
+msgstr "Lägg till projektmedlem"
+
+msgid "Add resource"
+msgstr "Lägg till resurs"
+
+msgid "Add security group"
+msgstr "Lägg till säkerhetsgrupp"
+
+msgid "Add team member"
+msgstr "Lägg till teammedlem"
+
+msgid "Add to a new namespace"
+msgstr "Lägg till i ett nytt namnområde"
+
+msgid "Add to comparison"
+msgstr "Lägg till i jämförelse"
+
+msgid "Add user input field"
+msgstr "Lägg till användarinmatningsfält"
+
+msgid "Additional data that will be added to instance on provisioning."
+msgstr "Ytterligare data som kommer att läggas till instans vid etablering."
+
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr "Ytterligare data som kommer att läggas till virtuell maskin vid provisionering."
+
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr "Ytterligare utrymme att använda för lagringskvoten som ska användas av ögonblicksbilder."
+
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "Dessutom kan tjänsteleverantören debitera för användning av följande komponenter"
+
+msgid "Admin username"
+msgstr "Admin användarnamn"
+
+msgid "Affected resource"
+msgstr "Berörd resurs"
+
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr "När hemlig API-kod har genererats om kommer det inte att vara möjligt att skicka användning med den gamla nyckeln."
+
+msgid "Agree with ToS"
+msgstr "Håller med ToS"
+
+msgid "Agreement number"
+msgstr "Avtalsnummer"
+
+msgid "All resources have been imported."
+msgstr "Alla resurser har importerats."
+
+msgid "Allocation description"
+msgstr "Beskrivning av fördelningen"
+
+msgid "Allocation name"
+msgstr "Tilldelningsnamn"
+
+msgid "Allocation pools"
+msgstr "Tilldelningspooler"
+
+msgid "Allow bookings to be scheduled at weekends"
+msgstr "Tillåt att bokningar schemaläggs på helgerna"
+
+msgid "Allow to enable/disable component only"
+msgstr "Tillåt att endast aktivera/inaktivera komponent"
+
+msgid "Allowed address pairs update was scheduled."
+msgstr "Tillåtna uppdatering av adresspar planerades."
+
+msgid "An error occurred on project removal."
+msgstr "Ett fel uppstod vid borttagning av projekt."
+
+msgid "Answers have been submitted"
+msgstr "Svar har lämnats in"
+
+msgid "Application catalogues"
+msgstr "Applikationskataloger"
+
+msgid "Application configuration"
+msgstr "Programkonfiguration"
+
+msgid "Application details"
+msgstr "Ansökningsinformation"
+
+msgid "Application has been created."
+msgstr "Programmet har skapats."
+
+msgid "Application templates"
+msgstr "Programmallar"
+
+msgid "Approve payment"
+msgstr "Godkänn betalning"
+
+msgid "Approved at"
+msgstr "Godkänd på"
+
+msgid "Archived plans"
+msgstr "Arkiverade planer"
+
+msgid "Are you sure you want to accept a {name}?"
+msgstr "Är du säker på att du vill acceptera en {name}?"
+
+msgid "Are you sure you want to cluster template? Note this will reset the node plan."
+msgstr "Är du säker på att du vill klustermall? Observera att det här återställer nodplanen."
+
+msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
+msgstr "Är du säker på att du vill radera a {name} {resourceType} i ett Erred tillstånd? Ett rensningsförsök kommer att utföras om du väljer det."
+
+msgid "Are you sure you want to delete the payment?"
+msgstr "Är du säker på att du vill ta bort betalningen?"
+
+msgid "Are you sure you want to delete the payment profile?"
+msgstr "Är du säker på att du vill ta bort betalningsprofilen?"
+
+msgid "Are you sure you want to revoke this permission?"
+msgstr "Är du säker på att du vill återkalla den här behörigheten?"
+
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
+msgstr "Är du säker på att du vill ta bort Rancher-katalogen {catalog}?"
+
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr "Är du säker på att du vill ta bort projektet {projectName}?"
+
+msgid "Are you sure you would like to delete the hook?"
+msgstr "Är du säker på att du vill ta bort kroken?"
+
+msgid "Are you sure you would like to delete the key?"
+msgstr "Är du säker på att du vill ta bort nyckeln?"
+
+msgid "Are you sure you would like to terminate resource {resourceName}?"
+msgstr "Är du säker på att du vill avsluta resursen {resourceName}?"
+
+msgid "Article code"
+msgstr "Artikel kod"
+
+msgid "At least one plan must be entered"
+msgstr "Minst en plan måste anges"
+
+msgid "Attach OpenStack Volume to Instance"
+msgstr "Anslut OpenStack-volym till instans"
+
+msgid "Attach has been scheduled."
+msgstr "Bifoga har schemalagts."
+
+msgid "Attach volume"
+msgstr "Bifoga volym"
+
+msgid "Attached to"
+msgstr "Bifogat till"
+
+msgid "Attributes are invalid."
+msgstr "Attribut är ogiltiga."
+
+msgid "Attributes filter"
+msgstr "Filtrera attribut"
+
+msgid "Audit log"
+msgstr "Granskningslogg"
+
+msgid "Audit logs"
+msgstr "Granskningsloggar"
+
+msgid "Authenticate using Mobile ID"
+msgstr "Autentisera med mobil-ID"
+
+msgid "Authentication events"
+msgstr "Autentisering händelser"
+
+msgid "Authentication token"
+msgstr "Autentiseringstoken"
+
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgstr "Autentisering med mobil-ID har avbrutits av användaren eller tidsgräns. Detaljer:"
+
+msgid "Authorized personnel"
+msgstr "Behörig personal"
+
+msgid "Auto-assign floating IP"
+msgstr "Tilldela flytande IP automatiskt"
+
+msgid "Auto approve in service provider projects"
+msgstr "Godkänn automatiskt i tjänsteleverantörsprojekt"
+
+msgid "Availability zone"
+msgstr "Tillgänglighetszon"
+
+msgid "Available quota usage: {usage}"
+msgstr "Tillgänglig kvotanvändning: {usage}"
+
+msgid "Average of all checklists"
+msgstr "Genomsnitt av alla checklistor"
+
+msgid "Average utilization"
+msgstr "Genomsnittligt utnyttjande"
+
+msgid "Azure Active Directory Application Secret"
+msgstr "Azure Active Directory-programhemlighet"
+
+msgid "Azure PostgreSQL database server"
+msgstr "Azure PostgreSQL-databasserver"
+
+msgid "Azure Virtual Machine"
+msgstr "Azure Virtuell Maskin"
+
+msgid "Azure provider"
+msgstr "Azure-leverantör"
+
+msgid "Back to organization"
+msgstr "Tillbaka till organisationen"
+
+msgid "Back to personal dashboard"
+msgstr "Tillbaka till personlig instrumentpanel"
+
+msgid "Back to project"
+msgstr "Tillbaka till projektet"
+
+msgid "Back to shopping"
+msgstr "Tillbaka till shopping"
+
+msgid "Backend ID"
+msgstr "Bakdels-ID"
+
+msgid "Backend ID has been successfully set."
+msgstr "Backend-ID har ställts in."
+
+msgid "Base image name"
+msgstr "Basbildsnamn"
+
+msgid "Batch RAM"
+msgstr "Batch RAM"
+
+msgid "Batch block storage size"
+msgstr "Lagringsstorlek för batchblock"
+
+msgid "Batch processing documentation"
+msgstr "Dokumentation för batchbearbetning"
+
+msgid "Batch vCPU"
+msgstr "Batch vCPU"
+
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr "Bli kund hos vår portal. Etablera IT-tjänster från Marketplace och hantera ditt team från ett och samma ställe."
+
+msgid "Billing details"
+msgstr "Faktureringsuppgifter"
+
+msgid "Billing enabled"
+msgstr "Fakturering aktiverad"
+
+msgid "Billing period"
+msgstr "Faktureringsperiod"
+
+msgid "Booking description"
+msgstr "Bokningsbeskrivning"
+
+msgid "Booking has been accepted."
+msgstr "Bokning har accepterats."
+
+msgid "Booking has been cancelled."
+msgstr "Bokningen har annullerats."
+
+msgid "Booking is not allowed to overlap other bookings."
+msgstr "Bokning är inte tillåtet att överlappa andra bokningar."
+
+msgid "Booking management"
+msgstr "Bokningshantering"
+
+msgid "Bootable"
+msgstr "Startbar"
+
+msgid "Browse image"
+msgstr "Bläddra i bild"
+
+msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
+msgstr "Genom att ställa in token livstid på obestämd tid tillåter du alla som har token att personifiera dina handlingar tills token har ändrats."
+
+msgid "CIDR"
+msgstr "CIDR"
+
+msgid "CPU limit (hours)"
+msgstr "CPU-gräns (timmar)"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Caller"
+msgstr "Uppringare"
+
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr "Det går inte att skapa flytande IP om klientens externa nätverk inte är definierat."
+
+msgid "Catalog URL"
+msgstr "Katalog URL"
+
+msgid "Catalog has been created."
+msgstr "Katalogen har skapats."
+
+msgid "Catalog has been deleted."
+msgstr "Katalogen har tagits bort."
+
+msgid "Catalogues"
+msgstr "Kataloger"
+
+msgid "Category is invalid."
+msgstr "Kategori är ogiltig."
+
+msgid "Challenge code"
+msgstr "Utmaningskod"
+
+msgid "Change Request"
+msgstr "Ändringsbegäran"
+
+msgid "Change flavor"
+msgstr "Ändra smak"
+
+msgid "Change limits"
+msgstr "Ändra gränser"
+
+msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr "Ändringsbegäran - klientens begäran om att utföra en generisk ändring av data eller tjänst."
+
+msgid "Change resource limits"
+msgstr "Ändra resursgränser"
+
+msgid "Change resource plan"
+msgstr "Ändra resursplan"
+
+msgid "Change user email"
+msgstr "Ändra användares e-post"
+
+msgid "Changing flavor"
+msgstr "Ändra smak"
+
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr "Avgiften för användningsbaserad komponent baseras på användarbegärd gräns."
+
+msgid "Charset"
+msgstr "Charset"
+
+msgid "Checklist setup"
+msgstr "Inställning av checklista"
+
+msgid "Choices as comma-separated list"
+msgstr "Val som kommaseparerad lista"
+
+msgid "Civil number"
+msgstr "Civilt nummer"
+
+msgid "Client organization"
+msgstr "Kundorganisation"
+
+msgid "Client project"
+msgstr "Kundprojekt"
+
+msgid "Cloud RAM"
+msgstr "Cloud RAM"
+
+msgid "Cloud block storage size"
+msgstr "Lagringsstorlek för Cloud block"
+
+msgid "Cloud init template"
+msgstr "Cloud init-mall"
+
+msgid "Cloud vCPU"
+msgstr "Cloud vCPU"
+
+msgid "Cluster IP"
+msgstr "Kluster IP"
+
+msgid "Cluster description"
+msgstr "Klusterbeskrivning"
+
+msgid "Cluster name"
+msgstr "Klusternamn"
+
+msgid "Cluster roles"
+msgstr "Klusterroller"
+
+msgid "Code is too short."
+msgstr "Koden är för kort."
+
+msgid "Code should consist of latin symbols or numbers."
+msgstr "Koden ska bestå av latinska symboler eller siffror."
+
+msgid "Collation"
+msgstr "Sortering"
+
+msgid "Company data"
+msgstr "Företagsdata"
+
+msgid "Compare items"
+msgstr "Jämför objekt"
+
+msgid "Competence"
+msgstr "Kompetens"
+
+msgid "Component name"
+msgstr "Komponentnamn"
+
+msgid "Components are invalid."
+msgstr "Komponenterna är ogiltiga."
+
+msgid "Compute generation"
+msgstr "Beräkningsgenerering"
+
+msgid "Configuration options"
+msgstr "Konfigurationsalternativ"
+
+msgid "Confirmation mail has been sent. Please check your inbox!"
+msgstr "Bekräftelse e-post har skickats. Vänligen kolla din inkorg!"
+
+msgid "Confirmation notification template"
+msgstr "Mall för bekräftelsemeddelande"
+
+msgid "Confirming that data is correct"
+msgstr "Bekräfta att uppgifterna är korrekta"
+
+msgid "Connected subnets"
+msgstr "Anslutna undernät"
+
+msgid "Connection details"
+msgstr "Anslutningsdetaljer"
+
+msgid "Contact phone"
+msgstr "Kontakt telefon"
+
+msgid "Contract sum"
+msgstr "Kontraktssumma"
+
+msgid "Contract sum is"
+msgstr "Kontraktssumman är"
+
+msgid "Control plane"
+msgstr "Kontrollplan"
+
+msgid "Could not create organization"
+msgstr "Det gick inte att skapa organisation"
+
+msgid "Create Network adapter"
+msgstr "Skapa nätverkskort"
+
+msgid "Create SQL database in PostgreSQL server"
+msgstr "Skapa SQL-databas i PostgreSQL-servern"
+
+msgid "Create VM snapshot for OpenStack instance"
+msgstr "Skapa VM-snapshot för OpenStack-instans"
+
+msgid "Create VM snapshot schedule for OpenStack instance"
+msgstr "Skapa schema för VM-snapshot för OpenStack-instans"
+
+msgid "Create an availability"
+msgstr "Skapa en tillgänglighet"
+
+msgid "Create application"
+msgstr "Skapa program"
+
+msgid "Create catalog"
+msgstr "Skapa katalog"
+
+msgid "Create disk"
+msgstr "Skapa disk"
+
+msgid "Create horizontal pod autoscaler"
+msgstr "Skapa horisontell pod autoscaler"
+
+msgid "Create network for OpenStack tenant"
+msgstr "Skapa nätverk för OpenStack tenant"
+
+msgid "Create node"
+msgstr "Skapa nod"
+
+msgid "Create notification"
+msgstr "Skapa meddelande"
+
+msgid "Create organization"
+msgstr "Skapa organisation"
+
+msgid "Create port"
+msgstr "Skapa port"
+
+msgid "Create security group for OpenStack tenant {name}"
+msgstr "Skapa säkerhetsgrupp för OpenStack tenant {name}"
+
+msgid "Create snapshot for OpenStack volume"
+msgstr "Skapa snapshot för OpenStack-volym"
+
+msgid "Create snapshot schedule for OpenStack volume"
+msgstr "Skapa snapshot schema för OpenStack-volym"
+
+msgid "Create subnet"
+msgstr "Skapa undernät"
+
+msgid "Create your first project"
+msgstr "Skapa ditt första projekt"
+
+msgid "Created a new payment for {customer_link}."
+msgstr "Skapade en ny betalning för {customer_link}."
+
+msgid "Created at"
+msgstr "Skapad på"
+
+msgid "Creating a backup schedule"
+msgstr "Skapa ett schema för säkerhetskopiering"
+
+msgid "Creating a floating IP"
+msgstr "Skapa en flytande IP"
+
+msgid "Creating a new network"
+msgstr "Skapa ett nytt nätverk"
+
+msgid "Creating a security group"
+msgstr "Skapa en säkerhetsgrupp"
+
+msgid "Creating a subnet"
+msgstr "Skapa ett undernät"
+
+msgid "Creating snapshot schedule"
+msgstr "Skapa snapshot-schema"
+
+msgid "Current API token"
+msgstr "Aktuell API-token"
+
+msgid "Current cost"
+msgstr "Nuvarande kostnad"
+
+msgid "Current flavor"
+msgstr "Nuvarande smak"
+
+msgid "Current limit"
+msgstr "Nuvarande gräns"
+
+msgid "Current price per month"
+msgstr "Nuvarande pris per månad"
+
+msgid "Current replicas"
+msgstr "Aktuella repliker"
+
+msgid "Current size"
+msgstr "Aktuell storlek"
+
+msgid "Current type"
+msgstr "Nuvarande typ"
+
+msgid "Customer support satisfaction overall rating"
+msgstr "Övergripande bedömning av kundsupportnöjdhet"
+
+msgid "DNS name servers"
+msgstr "DNS-namnservrar"
+
+msgid "Daily available booking time range"
+msgstr "Dagligt tillgängligt tidsintervall för bokning"
+
+msgid "Data volume #{index}"
+msgstr "Datavolym #{index}"
+
+msgid "Data volume should have at least {size} GB."
+msgstr "Datavolymen bör ha minst {size} GB."
+
+msgid "Data volume size:"
+msgstr "Datavolymstorlek:"
+
+msgid "Data volume type"
+msgstr "Datavolymtyp"
+
+msgid "Datacite DOI"
+msgstr "Datacite DOI"
+
+msgid "Datastore"
+msgstr "Datalagring"
+
+msgid "Date and time of incident"
+msgstr "Datum och tidpunkt för incidenten"
+
+msgid "Date of reporting"
+msgstr "Datum för rapportering"
+
+msgid "Default SLURM account for user"
+msgstr "Standard SLURM-konto för användare"
+
+msgid "Default availability zone for provisioned instances."
+msgstr "Standardtillgänglighetszon för etablerade instanser."
+
+msgid "Default cluster label"
+msgstr "Standardklusteretikett"
+
+msgid "Default tax percent"
+msgstr "Standardskattprocent"
+
+msgid "Delete catalog"
+msgstr "Ta bort katalog"
+
+msgid "Delete volumes"
+msgstr "Ta bort volymer"
+
+msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr "Om du tar bort PostgreSQL-servern raderas alla databaser som skapats på servern."
+
+msgid "Deploy Longhorn block storage after cluster is deployed"
+msgstr "Distribuera Longhorn-blocklagring efter att klustret har distribuerats"
+
+msgid "Desired replicas"
+msgstr "Önskade repliker"
+
+msgid "Destination URL"
+msgstr "Destinations-URL"
+
+msgid "Destination (CIDR)"
+msgstr "Destination (CIDR)"
+
+msgid "Destroy resource"
+msgstr "Förstör resursen"
+
+msgid "Destroy {name} instance"
+msgstr "Förstör instansen {name}"
+
+msgid "Destroying"
+msgstr "Förstörande"
+
+msgid "Detach"
+msgstr "Lossa"
+
+msgid "Detaching"
+msgstr "Demontering"
+
+msgid "Devops-friendly offering"
+msgstr "Devops-vänligt erbjudande"
+
+msgid "DigitalOcean provider"
+msgstr "DigitalOcean leverantör"
+
+msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgstr "Inaktivera en profil i FreeIPA. Inaktiverade profiler är inte tillåtna för inloggning i Linux-systemen"
+
+msgid "Disable data volume"
+msgstr "Inaktivera datavolym"
+
+msgid "Disable gateway IP advertising via DHCP"
+msgstr "Inaktivera gateway IP-annonsering via DHCP"
+
+msgid "Disable profile"
+msgstr "Inaktivera profil"
+
+msgid "Disk extension has been scheduled."
+msgstr "Disktillägget har schemalagts."
+
+msgid "Disk has been created."
+msgstr "Disken har skapats."
+
+msgid "Disks"
+msgstr "Diskar"
+
+msgid "Division"
+msgstr "Divisionen"
+
+msgid "Division type"
+msgstr "Typ av division"
+
+msgid "Do not allow user to specify quotas when offering is provisioned."
+msgstr "Tillåt inte användaren att ange kvoter när erbjudandet etableras."
+
+msgid "Do not configure a gateway for this subnet"
+msgstr "Konfigurera inte en gateway för det här undernätet"
+
+msgid "Do not have an account?"
+msgstr "Har du inget konto?"
+
+msgid "Do you really want to delete comment?"
+msgstr "Vill du verkligen ta bort kommentar?"
+
+msgid "Do you want to unlink instance {name}?"
+msgstr "Vill du ta bort länken till instansen {name}?"
+
+msgid "Docker version"
+msgstr "Docker-version"
+
+msgid "Documentation"
+msgstr "Dokumentation"
+
+msgid "Domain name. If not defined default domain will be used."
+msgstr "Domännamn. Om inte definierad kommer standarddomänen att användas."
+
+msgid "Download invoice"
+msgstr "Ladda ner faktura"
+
+msgid "Download order PDF file"
+msgstr "Ladda ner PDF-fil för beställning"
+
+msgid "Drop files to attach, or"
+msgstr "Släpp filer att bifoga, eller"
+
+msgid "Drop files to attach them to the issue."
+msgstr "Släpp filer för att bifoga dem till problemet."
+
+msgid "Droplet has been resized."
+msgstr "Droplet har ändrats."
+
+msgid "Dynamic — use separate volume types for tracking pricing"
+msgstr "Dynamisk — använd separata volymtyper för att spåra prissättning"
+
+msgid "EU VAT ID"
+msgstr "EU VAT ID"
+
+msgid "Each mount point should be used once at most."
+msgstr "Varje monteringspunkt ska användas högst en gång."
+
+msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
+msgstr "Varje användningsrapport måste vara kopplad till en faktureringsplan för att säkerställa korrekt beräkning av redovisningsuppgifter."
+
+msgid "Edit YAML"
+msgstr "Redigera YAML"
+
+msgid "Edit an availability"
+msgstr "Redigera en tillgänglighet"
+
+msgid "Edit attributes"
+msgstr "Redigera attribut"
+
+msgid "Edit booking event"
+msgstr "Redigera bokningsevent"
+
+msgid "Edit offering"
+msgstr "Redigera erbjudande"
+
+msgid "Edit project member"
+msgstr "Redigera projektmedlem"
+
+msgid "Edit team member"
+msgstr "Redigera teammedlem"
+
+msgid "Egress"
+msgstr "Utgång"
+
+msgid "Email change request has been cancelled."
+msgstr "Begäran om ändring av e-post har avbrutits."
+
+msgid "Email has been updated."
+msgstr "E-postmeddelandet har uppdaterats."
+
+msgid "Email verification has been sent. Please check your inbox."
+msgstr "E-postverifiering har skickats. Vänligen kolla din inkorg."
+
+msgid "Enable DHCP"
+msgstr "Aktivera DHCP"
+
+msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
+msgstr "Aktivera en profil i FreeIPA. Endast aktiverade profiler tillåts för inloggning i Linux-systemen"
+
+msgid "Enable by default"
+msgstr "Aktivera som standard"
+
+msgid "Enable limit"
+msgstr "Aktivera gräns"
+
+msgid "Enable profile"
+msgstr "Aktivera profil"
+
+msgid "Enable profile after creation"
+msgstr "Aktivera profil efter att ha skapats"
+
+msgid "Enabled checklists have been updated."
+msgstr "Aktiverade checklistor har uppdaterats."
+
+msgid "Enabled default gateway"
+msgstr "Aktiverad standardgateway"
+
+msgid "Encountered an empty component"
+msgstr "En tom komponent har påträffats"
+
+msgid "End date must be after start date."
+msgstr "Slutdatum måste vara efter startdatum."
+
+msgid "End date of the agreement is"
+msgstr "Avtalets slutdatum är"
+
+msgid "Ensure this field has no more than 30 characters."
+msgstr "Se till att det här fältet inte har fler än 30 tecken."
+
+msgid "Enter IPv4 address."
+msgstr "Ange IPv4-adress."
+
+msgid "Enter private IPv4 CIDR."
+msgstr "Ange privat IPv4 CIDR."
+
+msgid "Environment variables"
+msgstr "Miljövariabler"
+
+msgid "Erred"
+msgstr "Fel"
+
+msgid "Error traceback"
+msgstr "Fel traceback"
+
+msgid "Esimated price per month"
+msgstr "Esimerat pris per månad"
+
+msgid "Estimated cost"
+msgstr "Beräknad kostnad"
+
+msgid "Estimated cost for the current month: {cost}"
+msgstr "Beräknad kostnad för innevarande månad: {cost}"
+
+msgid "Estimated monthly cost"
+msgstr "Beräknad månadskostnad"
+
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
+msgstr "Beräknad månadsavgift ändras från {old_estimate} till {new_estimate}. Moms ingår ej."
+
+msgid "Ethernet type"
+msgstr "Ethernet-typ"
+
+msgid "Evaluation"
+msgstr "Utvärdering"
+
+msgid "Event types"
+msgstr "Händelsetyper"
+
+msgid "Every day at"
+msgstr "Varje dag på"
+
+msgid "Every hour at {minuteValues} past the hour"
+msgstr "Varje timme vid {minuteValues} efter timmen"
+
+msgid "Every month on the {days} at {time}"
+msgstr "Varje månad på {days} vid {time}"
+
+msgid "Every month on the {days} of {months} at {time}"
+msgstr "Varje månad på {days} av {months} vid {time}"
+
+msgid "Every month service provider can report up to the amount requested by user."
+msgstr "Varje månad kan tjänsteleverantören rapportera upp till det belopp som användaren begär."
+
+msgid "Every week on {day} at {time}"
+msgstr "Varje vecka på {day} vid {time}"
+
+msgid "Excel"
+msgstr "Excel"
+
+msgid "Executing"
+msgstr "Exekverar"
+
+msgid "Existing quota usage: {usage}"
+msgstr "Befintlig kvotanvändning: {usage}"
+
+msgid "Explore {deployment} Marketplace"
+msgstr "Utforska {deployment} Marketplace"
+
+msgid "Extend OpenStack volume"
+msgstr "Utöka volymen OpenStack"
+
+msgid "Extend disk"
+msgstr "Utöka disk"
+
+msgid "Extending"
+msgstr "Utvidga"
+
+msgid "External IP"
+msgstr "Extern IP"
+
+msgid "External network ID"
+msgstr "Extern nätverks-ID"
+
+msgid "Failed to operate with backend."
+msgstr "Det gick inte att arbeta med backend."
+
+msgid "Fee applied each time this plan is activated."
+msgstr "Avgift tillämpas varje gång denna plan aktiveras."
+
+msgid "File download has been started."
+msgstr "Filhämtning har startats."
+
+msgid "File has been copied"
+msgstr "Filen har kopierats"
+
+msgid "File has been downloaded."
+msgstr "Filen har laddats ner."
+
+msgid "Filter organizations"
+msgstr "Filtrera organisationer"
+
+msgid "Filter projects"
+msgstr "Filtrera projekt"
+
+msgid "Financial overview"
+msgstr "Finansiell översikt"
+
+msgid "Find solution"
+msgstr "Hitta lösning"
+
+msgid "Fixed-price contract"
+msgstr "Avtal om fast pris"
+
+msgid "Fixed — use common storage quota"
+msgstr "Fast - använd gemensam lagringskvot"
+
+msgid "Flavor"
+msgstr "Smak"
+
+msgid "Flavor change has been scheduled."
+msgstr "Smakförändring har planerats."
+
+msgid "Flavor exclude regex"
+msgstr "Smak exkluderar regex"
+
+msgid "Flavor name"
+msgstr "Smaknamn"
+
+msgid "Flavor name: {flavor_name}"
+msgstr "Smak namn: {flavor_name}"
+
+msgid "Flavors"
+msgstr "Smaker"
+
+msgid "Flavors List"
+msgstr "Lista över smaker"
+
+msgid "Flavors matching this regex expression will not be pulled from the backend."
+msgstr "Smaker som matchar det här regex-uttrycket kommer inte att hämtas från gränssnittet."
+
+msgid "Flavors regex"
+msgstr "Smaker regex"
+
+msgid "Flexible"
+msgstr "Flexibel"
+
+msgid "Floating IP"
+msgstr "Flytande IP"
+
+msgid "Floating IP count"
+msgstr "Flytande IP-antal"
+
+msgid "Floating IPs"
+msgstr "Flytande IP-adresser"
+
+msgid "Floating IPs update has been scheduled."
+msgstr "Flytande IPS-uppdatering har schemalagts."
+
+msgid "Flowmap"
+msgstr "Flowmap"
+
+msgid "Force destroy"
+msgstr "Tvinga förstöra"
+
+msgid "Force destroy {name} instance"
+msgstr "Tvinga förstöra {name} instans"
+
+msgid "FreeIPA account"
+msgstr "FreeIPA-konto"
+
+msgid "FreeIPA account needs to be set up."
+msgstr "FreeIPA-konto måste ställas in."
+
+msgid "FreeIPA extension is disabled."
+msgstr "FreeIPA-tillägget är inaktiverat."
+
+msgid "From port"
+msgstr "Från hamn"
+
+msgid "GB"
+msgstr "GB"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "GPU limit (hours)"
+msgstr "GPU-gräns (timmar)"
+
+msgid "GPU usage"
+msgstr "GPU-användning"
+
+msgid "Gateway IP of this subnet"
+msgstr "Gateway-IP för detta undernät"
+
+msgid "Generate Kubeconfig file"
+msgstr "Generera Kubeconfig fil"
+
+msgid "Go to marketplace"
+msgstr "Gå till marknadsplatsen"
+
+msgid "Go to my profile"
+msgstr "Gå till min profil"
+
+msgid "Google Calendar has been published successfully."
+msgstr "Google Kalender har publicerats framgångsrikt."
+
+msgid "Google Calendar has been synced successfully."
+msgstr "Google Calendar har synkroniserats framgångsrikt."
+
+msgid "Google Calendar has been unpublished successfully."
+msgstr "Google Calendar har avpublicerats framgångsrikt."
+
+msgid "Google Calendar link"
+msgstr "Google Kalender-länk"
+
+msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
+msgstr "Garanterad tid för lagring av virtuella ögonblicksbilder. Om du är noll - behåll för alltid."
+
+msgid "Guaranteed time of snapshot retention. If null - keep forever."
+msgstr "Garanterad tid för kvarhållande av ögonblicksbild. Om du är noll - behåll för alltid."
+
+msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
+msgstr "Garanterad tid för kvarhållande av ögonblicksbild av volym. Om du är noll - behåll för alltid."
+
+msgid "Guest OS"
+msgstr "Gäst-OS"
+
+msgid "HPA"
+msgstr "HPA"
+
+msgid "Helpdesk"
+msgstr "Helpdesk"
+
+msgid "Helpdesk dashboard"
+msgstr "Helpdesk dashboard"
+
+msgid "Hide diff"
+msgstr "Dölj diff"
+
+msgid "Home organization domain name"
+msgstr "Hemorganisations domännamn"
+
+msgid "Hook has been removed."
+msgstr "Kroken har tagits bort."
+
+msgid "Hook removal"
+msgstr "Ta bort krok"
+
+msgid "Horizontal pod autoscaler has been created."
+msgstr "Horizontal pod autoscaler har skapats."
+
+msgid "Horizontal pod autoscaler has been updated."
+msgstr "Horisontell pod autoscaler har uppdaterats."
+
+msgid "Host routes"
+msgstr "Värdvägar"
+
+msgid "Hostname or IP address of gateway node"
+msgstr "Värdnamn eller IP-adress för gateway-noden"
+
+msgid "Hostname or IP address of master node"
+msgstr "Värdnamn eller IP-adress för huvudnoden"
+
+msgid "How to generate SSH key"
+msgstr "Hur man genererar SSH-nyckel"
+
+msgid "How to obtain credentials for Azure provider"
+msgstr "Hur du skaffar autentiseringsuppgifter för Azure provider"
+
+msgid "How to obtain credentials for DigitalOcean provider"
+msgstr "Hur du skaffar inloggningsuppgifter för DigitalOcean leverantör"
+
+msgid "ID code"
+msgstr "ID-kod"
+
+msgid "IP address is already used by router."
+msgstr "IP-adressen används redan av routern."
+
+msgid "IP protocol"
+msgstr "IP-protokoll"
+
+msgid "IP version"
+msgstr "IP-version"
+
+msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
+msgstr "Den angivna identiteten har valts via SAML2-upptäcktstjänsten. Du kommer snart att omdirigeras till inloggningssidan."
+
+msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
+msgstr "Om du vill att användaren ska ge ytterligare information vid beställning, vänligen konfigurera inmatningsformuläret för användaren nedan"
+
+msgid "Image has been added."
+msgstr "Bilden har lagts till."
+
+msgid "Image has been removed."
+msgstr "Bilden har tagits bort."
+
+msgid "Image here"
+msgstr "Bild här"
+
+msgid "Import YAML"
+msgstr "Importera YAML"
+
+msgid "Import offering"
+msgstr "Importera erbjudande"
+
+msgid "Import resource"
+msgstr "Importera resurs"
+
+msgid "Importing resources"
+msgstr "Importera resurser"
+
+msgid "In the format of GUID"
+msgstr "I formatet GUID"
+
+msgid "Inactive user will not be able to login into the portal."
+msgstr "Inaktiv användare kommer inte att kunna logga in på portalen."
+
+msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
+msgstr "Incident - klientproblem med tjänstanvändning eller tillgänglighet (avbrott, försämrad kvalitet)."
+
+msgid "Include weekends"
+msgstr "Inkludera helger"
+
+msgid "Incorrect organization details"
+msgstr "Felaktig organisationsinformation"
+
+msgid "Increase a droplet's RAM, CPU and SSD disk."
+msgstr "Öka en dropps RAM, CPU och SSD-disk."
+
+msgid "Increase a droplet's RAM and CPU only (not the storage)."
+msgstr "Öka endast RAM-minnet och processorn för en droppe (inte lagringsutrymmet)."
+
+msgid "Informational"
+msgstr "Informationsmässigt"
+
+msgid "Informational - client’s request to get or provide additional information related to a service."
+msgstr "Informativ - kundens begäran om att få eller tillhandahålla ytterligare information relaterad till en tjänst."
+
+msgid "Ingress"
+msgstr "Inträngning"
+
+msgid "Initial admin password"
+msgstr "Ursprungligt admin lösenord"
+
+msgid "Initial admin username"
+msgstr "Ursprungligt användarnamn för admin"
+
+msgid "Initial password"
+msgstr "Initialt lösenord"
+
+msgid "Initial username"
+msgstr "Ursprungligt användarnamn"
+
+msgid "Instance"
+msgstr "Instans"
+
+msgid "Instance deletion has been scheduled."
+msgstr "Instansen radering har schemalagts."
+
+msgid "Instance does not have any floating IPs yet."
+msgstr "Instansen har inte några flytande IP-adresser ännu."
+
+msgid "Instance does not have any security groups yet."
+msgstr "Instansen har ännu inga säkerhetsgrupper."
+
+msgid "Instance has been linked."
+msgstr "Instansen har länkats."
+
+msgid "Instance is already active."
+msgstr "Instansen är redan aktiv."
+
+msgid "Instance is already stopped."
+msgstr "Instansen är redan stoppad."
+
+msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr "Instansen är inte ansluten till några interna undernät ännu. Anslut den till det interna undernätet först."
+
+msgid "Instance should be OK, or erred. Please contact support."
+msgstr "Instansen ska vara OK eller felaktig. Vänligen kontakta supporten."
+
+msgid "Instance should be OK. Please contact support."
+msgstr "Instansen ska vara OK. Vänligen kontakta supporten."
+
+msgid "Instance should be shutoff and OK or erred. Please contact support."
+msgstr "Instansen ska stängas av och OK eller felaktigt. Kontakta support."
+
+msgid "Instances count"
+msgstr "Instanser räknas"
+
+msgid "Internal IPs"
+msgstr "Interna IPs"
+
+msgid "Internal name"
+msgstr "Internt namn"
+
+msgid "Internal network ID"
+msgstr "Internt nätverks-ID"
+
+msgid "Internal network allocation pool"
+msgstr "Intern nätverksallokeringspool"
+
+msgid "Internal network mask (CIDR)"
+msgstr "Intern nätverksmask (CIDR)"
+
+msgid "Internal server error occurred. Please try again or contact support."
+msgstr "Internt serverfel inträffade. Försök igen eller kontakta supporten."
+
+msgid "Invalid URL. Unable to parse payment details."
+msgstr "Ogiltig URL. Det gick inte att tolka betalningsinformation."
+
+msgid "Invitation approval"
+msgstr "Godkännande av inbjudan"
+
+msgid "Invitation confirmation"
+msgstr "Inbjudan bekräftelse"
+
+msgid "Invitation could not be accepted"
+msgstr "Inbjudan kunde inte accepteras"
+
+msgid "Invitation email is:"
+msgstr "Inbjudan e-post är:"
+
+msgid "Invitation has been approved."
+msgstr "Inbjudan har godkänts."
+
+msgid "Invitation has been canceled."
+msgstr "Inbjudan har avbrutits."
+
+msgid "Invitation has been rejected."
+msgstr "Inbjudan har avslagits."
+
+msgid "Invitation has been sent again."
+msgstr "Inbjudan har skickats igen."
+
+msgid "Invitation is not found."
+msgstr "Inbjudan hittades inte."
+
+msgid "Invitation is not valid"
+msgstr "Inbjudan är inte giltig"
+
+msgid "Invitation is not valid anymore."
+msgstr "Inbjudan är inte längre giltig."
+
+msgid "Invitation rejection"
+msgstr "Avslag på inbjudan"
+
+msgid "Invitation token is not found."
+msgstr "Inbjudningstoken hittades inte."
+
+msgid "Invite team member"
+msgstr "Bjud in teammedlem"
+
+msgid "Invite user"
+msgstr "Bjud in användare"
+
+msgid "Invoice No."
+msgstr "Faktura Nr."
+
+msgid "Invoice events"
+msgstr "Faktura händelser"
+
+msgid "Invoice events timeline"
+msgstr "Tidslinje för fakturahändelser"
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgstr "Faktura för organisationen {customer_link} för perioden {period} har skapats."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "Fakturan för organisationen {customer_link} för perioden {period} har uppdaterats."
+
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgstr "Faktura för organisationen {customer_name} för perioden {period} har tagits bort."
+
+msgid "Invoice has been successfully linked to payment."
+msgstr "Fakturan har kopplats till betalningen."
+
+msgid "Invoice has been successfully unlinked from payment."
+msgstr "Fakturan har kopplats bort från betalningen."
+
+msgid "Invoice has not been sent to PayPal yet"
+msgstr "Faktura har ännu inte skickats till PayPal"
+
+msgid "Invoice statistics"
+msgstr "Fakturastatistik"
+
+msgid "Invoiced to"
+msgstr "Faktureras till"
+
+msgid "Invoices list"
+msgstr "Fakturalista"
+
+msgid "Is external"
+msgstr "Är extern"
+
+msgid "Is official"
+msgstr "Är officiell"
+
+msgid "Is service provider"
+msgstr "Är tjänsteleverantör"
+
+msgid "Issue link"
+msgstr "Länk till problemet"
+
+msgid "Issue {issue_link} has been created by {caller_link}."
+msgstr "Problem {issue_link} har skapats av {caller_link}."
+
+msgid "Issues are trackable requests to the operator."
+msgstr "Frågor är spårbara förfrågningar till operatören."
+
+msgid "It is used to automatically assign floating IP to your virtual machine."
+msgstr "Den används för att automatiskt tilldela flytande IP till din virtuella dator."
+
+msgid "Item has been added to shopping cart."
+msgstr "Artikeln har lagts till i varukorgen."
+
+msgid "Item has been removed from shopping cart."
+msgstr "Artikeln har tagits bort från kundvagnen."
+
+msgid "Keep forever"
+msgstr "Håll för evigt"
+
+msgid "Keep until"
+msgstr "Behåll tills"
+
+msgid "Kept until"
+msgstr "Behålles till"
+
+msgid "Key name"
+msgstr "Nyckelnamn"
+
+msgid "Key removal"
+msgstr "Ta bort nycklar"
+
+msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
+msgstr "Keystone auth URL (t.ex. http://keystone.example.com:5000/v3)"
+
+msgid "Kubeconfig file"
+msgstr "Kubeconfig fil"
+
+msgid "Kubernetes node #{index}"
+msgstr "Kubernetes-nod #{index}"
+
+msgid "Kubernetes nodes"
+msgstr "Kubernetes noder"
+
+msgid "Kubernetes version"
+msgstr "Kubernetes version"
+
+msgid "Label that is visible to users in Marketplace."
+msgstr "Etikett som är synlig för användare på Marketplace."
+
+msgid "Leave blank if you want admin password to be auto-generated."
+msgstr "Lämna tomt om du vill att administratörslösenordet ska genereras automatiskt."
+
+msgid "Leave blank if you want admin username to be auto-generated."
+msgstr "Lämna tomt om du vill att administratörens användarnamn ska genereras automatiskt."
+
+msgid "Legal address"
+msgstr "Juridisk adress"
+
+msgid "Lifetime will be updated and reset upon saving the form."
+msgstr "Livstids uppdateras och återställs när formuläret sparas."
+
+msgid "Limit amount"
+msgstr "Begränsa belopp"
+
+msgid "Limit period"
+msgstr "Begränsningsperiod"
+
+msgid "Limits"
+msgstr "Gränser"
+
+msgid "Limits are invalid."
+msgstr "Gränserna är ogiltiga."
+
+msgid "Link OpenStack Instance"
+msgstr "Länka OpenStack-instans"
+
+msgid "Link invoice"
+msgstr "Länk faktura"
+
+msgid "Loading actions"
+msgstr "Laddning åtgärder"
+
+msgid "Loading assets, please wait."
+msgstr "Laddar tillgångar, vänta."
+
+msgid "Loading invoices"
+msgstr "Laddar fakturor"
+
+msgid "Location has been saved successfully."
+msgstr "Platsen har sparats."
+
+msgid "Location of {offeringName} offering"
+msgstr "Plats för {offeringName} erbjudande"
+
+msgid "Logging user in"
+msgstr "Logga in användare"
+
+msgid "Logo has been removed."
+msgstr "Logotypen har tagits bort."
+
+msgid "Logo has been uploaded."
+msgstr "Logotypen har laddats upp."
+
+msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
+msgstr "Longhorn är ett lätt, pålitligt och kraftfullt distribuerat blocklagringssystem för Kubernetes."
+
+msgid "MAC address (optional)"
+msgstr "MAC-adress (valfritt)"
+
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Manage networks"
+msgstr "Hantera nätverk"
+
+msgid "Manage organization"
+msgstr "Hantera organisation"
+
+msgid "Manage security groups"
+msgstr "Hantera säkerhetsgrupper"
+
+msgid "Managed projects"
+msgstr "Förvaltade projekt"
+
+msgid "Mark as paid"
+msgstr "Markera som betald"
+
+msgid "Mark invoice as paid"
+msgstr "Markera fakturan som betald"
+
+msgid "Marketplace UUID"
+msgstr "Marketplace UUID"
+
+msgid "Marketplace checkout"
+msgstr "Marketplace-utcheckning"
+
+msgid "Marketplace offering does not have any usage-based components."
+msgstr "Marketplace-erbjudandet har inga användningsbaserade komponenter."
+
+msgid "Marketplace offerings"
+msgstr "Marketplace-erbjudanden"
+
+msgid "Marketplace service provider"
+msgstr "Marketplace-tjänsteleverantör"
+
+msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
+msgstr "Marketplace-tjänster kan endast etableras för en viss anslutning. Du har för närvarande inga organisationer eller projekt kopplade till ditt konto."
+
+msgid "Max # of VM snapshots"
+msgstr "Max # av VM ögonblicksbilder"
+
+msgid "(VAT is not included)"
+msgstr "(Moms ingår inte)"

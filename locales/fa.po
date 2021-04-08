@@ -656,9 +656,6 @@ msgstr "ایمیل تاییدیه ارسال شده است.لطفا صندوق �
 msgid "Connect"
 msgstr "اتصال"
 
-msgid "Connect subnet to a default virtual router"
-msgstr "subnet را به یک router مجازی پیش فرض متصل کنید"
-
 msgid "Connected subnets"
 msgstr "subnet ها متصل شدند"
 
@@ -1651,9 +1648,6 @@ msgstr "آدرس MAC"
 
 msgid "Manage"
 msgstr "مدیریت کنید"
-
-msgid "Manage at"
-msgstr "مدیریت در"
 
 msgid "Manage networks"
 msgstr "مدیریت شبکه"

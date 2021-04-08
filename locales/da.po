@@ -530,9 +530,6 @@ msgstr "Skabelon til bekræftelsesmeddelelse"
 msgid "Confirming that data is correct"
 msgstr "Bekræftelse af, at dataene er korrekte"
 
-msgid "Connect subnet to a default virtual router"
-msgstr "Tilslut undernet til en virtuel standardrouter"
-
 msgid "Connected subnets"
 msgstr "Tilsluttede undernet"
 
@@ -1499,9 +1496,6 @@ msgstr "MAC-adresse (valgfri)"
 msgid "MTU"
 msgstr "MTU"
 
-msgid "Manage at"
-msgstr "Administrer på"
-
 msgid "Manage networks"
 msgstr "Administrer netværk"
 
@@ -1731,10 +1725,10 @@ msgid "No countries"
 msgstr "Ingen lande"
 
 msgid "No division types"
-msgstr "Ingen opdelingstyper"
+msgstr "Ingen divisionstyper"
 
 msgid "No divisions"
-msgstr "Ingen opdelinger"
+msgstr "Ingen divisioner"
 
 msgid "No entries to show here"
 msgstr "Ingen poster at vise her"
@@ -1816,6 +1810,309 @@ msgstr "Antal kontrolplanknuder"
 
 msgid "Number of cores in a VM"
 msgstr "Antal kerner i en VM"
+
+msgid "Number of created instances"
+msgstr "Antal oprettede instanser"
+
+msgid "Number of etcd nodes"
+msgstr "Antal etcd-noder"
+
+msgid "Number of running instances"
+msgstr "Antal kørende instanser"
+
+msgid "Number of worker nodes"
+msgstr "Antal arbejdernoder"
+
+msgid "Object is not found."
+msgstr "Objektet blev ikke fundet."
+
+msgid "Offering components"
+msgstr "Tilbyder komponenter"
+
+msgid "Offering configuration"
+msgstr "Tilbudskonfiguration"
+
+msgid "Offering details"
+msgstr "Oplysninger om tilbud"
+
+msgid "Offering doesn't have images."
+msgstr "Tilbud har ikke billeder."
+
+msgid "Offering has been created."
+msgstr "Tilbud er blevet oprettet."
+
+msgid "Offering has been imported."
+msgstr "Tilbud er blevet importeret."
+
+msgid "Offering has been updated."
+msgstr "Tilbuddet er blevet opdateret."
+
+msgid "Offering images"
+msgstr "Tilbyder billeder"
+
+msgid "Offering images ({name})"
+msgstr "Tilbyder billeder ({name})"
+
+msgid "Offering is not configured yet."
+msgstr "Tilbuddet er ikke konfigureret endnu."
+
+msgid "Offering logo"
+msgstr "Tilbyder logo"
+
+msgid "Offering name"
+msgstr "Tilbyder navn"
+
+msgid "Offering permissions"
+msgstr "Tilbyder tilladelser"
+
+msgid "Offering state has been updated."
+msgstr "Tilbudsstatus er blevet opdateret."
+
+msgid "Offering type"
+msgstr "Tilbudstype"
+
+msgid "Offerings images"
+msgstr "Tilbudsbilleder"
+
+msgid "One-time on plan switch"
+msgstr "Engangskontakt på planen"
+
+msgid "Only a created invoice can be marked as paid."
+msgstr "Kun en oprettet faktura kan markeres som betalt."
+
+msgid "Only customer owner or staff can invite users."
+msgstr "Kun kundeejer eller personale kan invitere brugere."
+
+msgid "Only pending and expired invitations can be sent again."
+msgstr "Kun ventende og udløbne invitationer kan sendes igen."
+
+msgid "Only pending invitation can be canceled."
+msgstr "Kun afventende invitation kan annulleres."
+
+msgid "Only staff and organization users are allowed to open console."
+msgstr "Kun medarbejder- og organisationsbrugere har tilladelse til at åbne konsollen."
+
+msgid "Only staff can manage OpenStack tenant."
+msgstr "Kun medarbejdere kan håndtere OpenStack-lejer."
+
+msgid "Only staff can remove organization."
+msgstr "Kun medarbejdere kan fjerne organisationen."
+
+msgid "Only staff users are allowed to perform this action."
+msgstr "Kun medarbejderbrugere har tilladelse til at udføre denne handling."
+
+msgid "OpenStack Images"
+msgstr "OpenStack-billeder"
+
+msgid "OpenStack Instance"
+msgstr "OpenStack-instans"
+
+msgid "OpenStack instance"
+msgstr "OpenStack-instans"
+
+msgid "OpenStack instance has been unlinked from Rancher node."
+msgstr "OpenStack-instansen er blevet fjernet fra Rancher-noden."
+
+msgid "OpenStack networks has been created."
+msgstr "OpenStack-netværk er blevet oprettet."
+
+msgid "OpenStack package"
+msgstr "OpenStack-pakke"
+
+msgid "OpenStack subnet"
+msgstr "OpenStack undernet"
+
+msgid "OpenStack tenant"
+msgstr "OpenStack-lejer"
+
+msgid "OpenStack volume"
+msgstr "OpenStack-volumen"
+
+msgid "Open console"
+msgstr "Åbn konsol"
+
+msgid "Open in Service Desk"
+msgstr "Åbn i Service Desk"
+
+msgid "Open support portal"
+msgstr "Åben supportportal"
+
+msgid "Opened by {user} at {date}"
+msgstr "Åbnet af {user} kl. {date}"
+
+msgid "Opened by {user} from {organization} at {date}"
+msgstr "Åbnet af {user} fra {organization} kl. {date}"
+
+msgid "Options are invalid."
+msgstr "Indstillingerne er ugyldige."
+
+msgid "Or use social login"
+msgstr "Eller brug socialt login"
+
+msgid "Order has been approved."
+msgstr "Ordren er blevet godkendt."
+
+msgid "Order has been rejected."
+msgstr "Ordren er blevet afvist."
+
+msgid "Order has been submitted."
+msgstr "Ordren er blevet indsendt."
+
+msgid "Order item details"
+msgstr "Oplysninger om ordrevare"
+
+msgid "Order item has been approved."
+msgstr "Ordrevare er blevet godkendt."
+
+msgid "Order item has been rejected."
+msgstr "Ordrevare er blevet afvist."
+
+msgid "Order item has cancel has been scheduled."
+msgstr "Ordrevaren har annulleret er planlagt."
+
+msgid "Organization actions"
+msgstr "Organisationens handlinger"
+
+msgid "Organization contains invoices. Please remove them first."
+msgstr "Organisationen indeholder fakturaer. Fjern dem venligst først."
+
+msgid "Organization contains projects. Please remove them first."
+msgstr "Organisationen indeholder projekter. Fjern dem venligst først."
+
+msgid "Organization events"
+msgstr "Organisationsbegivenheder"
+
+msgid "Organization has been created."
+msgstr "Organisationen er blevet oprettet."
+
+msgid "Organization has been updated successfully."
+msgstr "Organisationen er blevet opdateret."
+
+msgid "Organization has signed a fixed price agreement"
+msgstr "Organisationen har underskrevet en fast pris aftale"
+
+msgid "Organization owner"
+msgstr "Organisationens ejer"
+
+msgid "Organization owner role expires on"
+msgstr "Organisationsejerrollen udløber den"
+
+msgid "Organization registration code"
+msgstr "Organisationens registreringskode"
+
+msgid "Organization removal"
+msgstr "Fjernelse af organisation"
+
+msgid "Organization role"
+msgstr "Organisationsrolle"
+
+msgid "Organization roles"
+msgstr "Organisationsroller"
+
+msgid "Organization update"
+msgstr "Organisationsopdatering"
+
+msgid "Organization update ({name})"
+msgstr "Organisationsopdatering ({name})"
+
+msgid "Organization users list"
+msgstr "Liste over organisationsbrugere"
+
+msgid "Organization workspace"
+msgstr "Organisationens arbejdsområde"
+
+msgid "Organization {customer_link} has been updated."
+msgstr "Organisationen {customer_link} er blevet opdateret."
+
+msgid "Organization {customer_name} has been deleted."
+msgstr "Organisationen {customer_name} er blevet slettet."
+
+msgid "Organizations by divisions"
+msgstr "Organisationer efter divisioner"
+
+msgid "Organizations divisions"
+msgstr "Organisationer divisioner"
+
+msgid "Overview of {organization} organization"
+msgstr "Oversigt over {organization} organisation"
+
+msgid "Overview of {project} project"
+msgstr "Oversigt over {project} projekt"
+
+msgid "Owned organizations"
+msgstr "Ejede organisationer"
+
+msgid "PID"
+msgstr "PID"
+
+msgid "Page is not found."
+msgstr "Siden er ikke fundet."
+
+msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
+msgstr "Siden er ikke fundet. Du har enten indtastet ugyldig URL-adresse eller forsøgt at få adgang til deaktiveret funktion."
+
+msgid "Password has been changed for user {affected_user_link}."
+msgstr "Adgangskoden er blevet ændret for brugeren {affected_user_link}."
+
+msgid "Past time slots are not allowed."
+msgstr "Tidligere tidsintervaller er ikke tilladt."
+
+msgid "Pause offering"
+msgstr "Sæt tilbud på pause"
+
+msgid "Pay invoice"
+msgstr "Betal faktura"
+
+msgid "Payment events"
+msgstr "Betaling begivenheder"
+
+msgid "Payment for {customer_link} has been approved."
+msgstr "Betaling for {customer_link} er blevet godkendt."
+
+msgid "Payment for {customer_link} has been cancelled."
+msgstr "Betaling for {customer_link} er blevet annulleret."
+
+msgid "Payment gateways (monthly)"
+msgstr "Betalingsgateways (månedligt)"
+
+msgid "Payment has been created."
+msgstr "Betaling er blevet oprettet."
+
+msgid "Payment has been deleted."
+msgstr "Betalingen er blevet slettet."
+
+msgid "Payment has been processed successfully."
+msgstr "Betalingen er blevet behandlet med succes."
+
+msgid "Payment has been updated."
+msgstr "Betalingen er blevet opdateret."
+
+msgid "Payment is being processed, please wait."
+msgstr "Betalingen er ved at blive behandlet, vent venligst."
+
+msgid "Payment profile"
+msgstr "Betalingsprofil"
+
+msgid "Payment profile defines how invoices are processed."
+msgstr "Betalingsprofil definerer, hvordan fakturaer behandles."
+
+msgid "Payment profile has been created."
+msgstr "Betalingsprofil er blevet oprettet."
+
+msgid "Payment profile has been created and enabled."
+msgstr "Betalingsprofil er blevet oprettet og aktiveret."
+
+msgid "Payment profile has been enabled."
+msgstr "Betalingsprofil er blevet aktiveret."
+
+msgid "Payment profile has been removed."
+msgstr "Betalingsprofil er blevet fjernet."
+
+msgid "Payment profile has been updated."
+msgstr "Betalingsprofil er blevet opdateret."
+
+msgid "Payment profiles"
+msgstr "Betalingsprofiler"
 
 msgid "(VAT is not included)"
 msgstr "(Moms er ikke inkluderet)"

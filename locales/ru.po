@@ -197,8 +197,26 @@ msgstr "Назад к организации"
 msgid "Back to project"
 msgstr "Назад к проекту"
 
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr "Станьте клиентом нашего портала. Предоставляйте ИТ-услуги на маркетплейсе и управляйте своей командой."
+
 msgid "Billing"
 msgstr "Рассчёты"
+
+msgid "Billing period"
+msgstr "Расчетный период"
+
+msgid "Booking is not allowed to overlap other bookings."
+msgstr "Заявки на бронирование не должны перекрывать друг друга."
+
+msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
+msgstr "Отменяя время жизни токена, вы разрешаете любому его обладателю выдавать себя за вас до тех пор, пока токен не будет отозван."
+
+msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
+msgstr "Отправляя форму, вы соглашаетесь с <Link>условиями предоставления услуг</Link>."
+
+msgid "CPU limit (hours)"
+msgstr "Максимальное количество CPU-часов"
 
 msgid "CPU usage"
 msgstr "Использование CPU"
@@ -221,8 +239,26 @@ msgstr "Отменённый"
 msgid "Cancelled"
 msgstr "Отменённый"
 
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr "Невозможно создать плавающий IP-адрес, если внешняя сеть не определена."
+
+msgid "Capacity"
+msgstr "Планирование ресурсов"
+
+msgid "Catalog"
+msgstr "Каталог"
+
+msgid "Catalog has been deleted."
+msgstr "Каталог был удален."
+
+msgid "Categories"
+msgstr "Категории"
+
 msgid "Category"
 msgstr "Категория"
+
+msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr "Запрос на изменение - запрос клиента на изменение данных или услуг."
 
 msgid "Close"
 msgstr "Закрыть"

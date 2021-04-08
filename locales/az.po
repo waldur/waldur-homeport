@@ -939,7 +939,7 @@ msgid "Invoice for organization {customer_link} for the period of {period} has b
 msgstr "{period} dövrü üzrə {customer_link} təşkilatı üçün faktura yenilənmişdir."
 
 msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
-msgstr "{period} dövrü üzrə {customer_link} təşkilatı üçün faktura silindi."
+msgstr "{period} dövrü üzrə {customer_name} təşkilatı üçün faktura silindi."
 
 msgid "Invoice has not been sent to PayPal yet"
 msgstr "Faktura hələ PayPal-a göndərilməyib"
@@ -1045,9 +1045,6 @@ msgstr "MAC (vasitəyə giriş nəzarəti ünvanı) ünvanı"
 
 msgid "Manage"
 msgstr "İdarə et"
-
-msgid "Manage at"
-msgstr "___də/da idarə et"
 
 msgid "Manage organization"
 msgstr "Təşkilatı idarə et"
@@ -2180,9 +2177,6 @@ msgstr "İstifadənin ümumi baxışı"
 msgid "Use sudo"
 msgstr "“Sudo”  istifadə edin"
 
-msgid "Used in the period"
-msgstr "Dövrdə istifadə"
-
 msgid "User"
 msgstr "İstifadəçi"
 
@@ -2262,7 +2256,7 @@ msgid "User {user_link} has revoked organization support {affected_user_link} fr
 msgstr "{user_link} istifadəçi {affected_user_link} təşkilatın dəstəyini {customer_link}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
-msgstr "{user_link} istifadəçi {affected_user_link} layihə administratorunu {müştəri_linki}-ndən ləğv etmşdir."
+msgstr "{user_link} istifadəçi {affected_user_link} layihə administratorunu {project_link}-ndən ləğv etmşdir."
 
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
 msgstr "{user_link} istifadəçi {affected_user_link} layihə menecerini {project_link}-ndən ləğv etmşdir."
@@ -2416,12 +2410,6 @@ msgstr "Yükləyici "
 
 msgid "browse"
 msgstr "baxmaq "
-
-msgid "by"
-msgstr "tərəfindən"
-
-msgid "commented:"
-msgstr "şərh etdi:"
 
 msgid "current state on backend: {resourceState}."
 msgstr "Çıxış buferi üzrə mövcud vəziyyət: {resourceState}."
