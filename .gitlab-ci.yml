@@ -152,7 +152,7 @@ Download translation:
     - echo https://gitlab-ci-token:$GIT_ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git
     - git remote set-url origin "https://gitlab-ci-token:$GITLAB_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git"
     - git fetch
-    - git branch -D new-translations  # cleanup
+    - git branch -D new-translations  || echo "No translation branch" # cleanup
     - localazy download -w $LOCALAZY_WRITE_KEY -r $LOCALAZY_READ_KEY
     - find locales -type f -name '*.po' -exec sed -i 's/{__\([^}]*\)__\}/{\1}/g' {} \;
     - git status
