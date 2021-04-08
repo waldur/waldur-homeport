@@ -98,6 +98,12 @@ export const destroyFloatingIP = (id: string) =>
 export const pullSubnet = (id: string) =>
   post(`/openstack-subnets/${id}/pull/`);
 
+export const connectSubnet = (id: string) =>
+  post(`/openstack-subnets/${id}/connect/`);
+
+export const disconnectSubnet = (id: string) =>
+  post(`/openstack-subnets/${id}/disconnect/`);
+
 export const destroySubnet = (id: string) =>
   deleteById('/openstack-subnets/', id);
 

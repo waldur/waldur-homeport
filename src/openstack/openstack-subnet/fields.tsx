@@ -41,11 +41,6 @@ export const getFields = () => [
     label: translate('Disable gateway IP advertising via DHCP'),
   },
   {
-    name: 'enable_default_gateway',
-    type: 'boolean',
-    label: translate('Connect subnet to a default virtual router'),
-  },
-  {
     name: 'host_routes',
     component: HostRoutesField,
   },
