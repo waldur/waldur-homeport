@@ -182,6 +182,39 @@ msgstr "Скасувати"
 msgid "Dashboard"
 msgstr "Огляд"
 
+msgid "More info"
+msgstr "Додаткова інформація"
+
+msgid "Mount point"
+msgstr "Точка монтування"
+
+msgid "My offerings"
+msgstr "Мої пропозиції"
+
+msgid "My orders"
+msgstr "Мої замовлення"
+
+msgid "My resources"
+msgstr "Мої ресурси"
+
+msgid "My services"
+msgstr "Мої послуги"
+
+msgid "Name"
+msgstr "Назва"
+
+msgid "Name is duplicated. Choose other name."
+msgstr "Ця назва вже використовується. Будь ласка, оберіть іншу назву."
+
+msgid "Name is not valid."
+msgstr "Назва некоректна"
+
+msgid "Name is required field."
+msgstr "Назва — обов'язкове поле."
+
+msgid "Name of your organization."
+msgstr "Назва вашої організації."
+
 msgid "Projects"
 msgstr "Проекти"
 

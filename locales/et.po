@@ -3368,9 +3368,6 @@ msgstr "Peatan"
 msgid "Terms of Service"
 msgstr "Teenustingimused"
 
-msgid "Terms of service"
-msgstr "Teenustingimused"
-
 msgid "Text has been copied"
 msgstr "Tekst on kopeeritud"
 
@@ -3455,9 +3452,6 @@ msgstr "{verboseName} veel ei ole."
 msgid "There is no activity yet."
 msgstr "Tegevused veel puuduvad."
 
-msgid "This field is required"
-msgstr "See väli on kohustuslik"
-
 msgid "This field is required."
 msgstr "See väli on kohustuslik"
 
@@ -3472,9 +3466,6 @@ msgstr "Töös olemise aeg"
 
 msgid "Timestamp"
 msgstr "Ajatempel"
-
-msgid "Timezone"
-msgstr "Ajatsoon"
 
 msgid "Title"
 msgstr "Nimetus"
@@ -4136,9 +4127,6 @@ msgstr "Teil pole veel teateid!"
 msgid "You have no quotas yet."
 msgstr "Sul ei ole veel kvoote."
 
-msgid "You have not added any SSH keys to your"
-msgstr "Sa ei ole veel lisanud ühtegi SSH võtit oma <a ui-sref=\"profile.keys\">profiilile</a>."
-
 msgid "You have the right to purchase service without additional approval."
 msgstr "Teil on õigus osta teenust ilma täiendava nõusolekuta."
 
@@ -4238,9 +4226,6 @@ msgstr "õiguste ülevaade"
 msgid "plans"
 msgstr "Plaanid"
 
-msgid "profile."
-msgstr "Profiil"
-
 msgid "projects"
 msgstr "Projektid"
 
@@ -4338,7 +4323,7 @@ msgid "{user} has requested changing of plan from \"{old_plan}\" to \"{new_plan}
 msgstr "{user} on tellinud plaanimuudatuse vanast plaanist \"{old_plan}\" uueks plaaniks \"{new_plan}\"."
 
 msgid "{user} has requested provisioning of \"{resource_name}\" with plan \"{plan_name}\"."
-msgstr "{user} on taotlenud teenuse \"{ressursi_nimi}\" eraldamist plaaniga \"{plaan_nimi}\"."
+msgstr "{user} on taotlenud teenuse \"{resource_name}\" eraldamist plaaniga \"{plan_name}\"."
 
 msgid "{user} has requested termination of {resource_name} with active plan \"{plan_name}\"."
 msgstr "{user} taotles {ressursi_nimi} lõpetamist aktiivse paketiga \"{plaan_nimi}\"."

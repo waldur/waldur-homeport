@@ -1946,9 +1946,6 @@ msgstr "İcarədar istifadəçi adı"
 msgid "Terms of Service"
 msgstr "Xidmət Şərtləri"
 
-msgid "Terms of service"
-msgstr "Xidmət şərtləri"
-
 msgid "There are no actions."
 msgstr "Heç bir hərəkət yoxdur."
 
@@ -1982,9 +1979,6 @@ msgstr "Hələ heç bir {verboseName} yoxdur."
 msgid "There is no activity yet."
 msgstr "Hələlik heç bir fəaliyyət yoxdur."
 
-msgid "This field is required"
-msgstr "Bu xananın doldurulması məcburidir"
-
 msgid "This field is required."
 msgstr "Bu xananın doldurulması məcburidir."
 
@@ -1999,9 +1993,6 @@ msgstr "Vaxt gedir"
 
 msgid "Timestamp"
 msgstr "Zaman qeydi"
-
-msgid "Timezone"
-msgstr "Zaman zonası"
 
 msgid "Title"
 msgstr "Başlıq"
