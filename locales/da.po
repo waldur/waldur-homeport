@@ -2114,5 +2114,1481 @@ msgstr "Betalingsprofil er blevet opdateret."
 msgid "Payment profiles"
 msgstr "Betalingsprofiler"
 
+msgid "Payments connected with an active payment profile."
+msgstr "Betalinger, der er forbundet med en aktiv betalingsprofil."
+
+msgid "Payments list"
+msgstr "Liste over betalinger"
+
+msgid "Pemission has been revoked."
+msgstr "Pemmissionen er blevet tilbagekaldt."
+
+msgid "Pending approval for changing of"
+msgstr "Afventer godkendelse for ændring af"
+
+msgid "Pending approval for creation of"
+msgstr "Afventer godkendelse til oprettelse af"
+
+msgid "Pending approval for removal of"
+msgstr "Afventer godkendelse til fjernelse af"
+
+msgid "Per half month"
+msgstr "Pr. halv måned"
+
+msgid "Perform local logout"
+msgstr "Udfør lokal logout"
+
+msgid "Performed by"
+msgstr "Udført af"
+
+msgid "Periods"
+msgstr "Perioder"
+
+msgid "Permanent"
+msgstr "Permanent"
+
+msgid "Permissions log"
+msgstr "Tilladelseslog"
+
+msgid "Personal workspace"
+msgstr "Personligt arbejdsområde"
+
+msgid "Plan capacity"
+msgstr "Planlæg kapacitet"
+
+msgid "Plan capacity is full."
+msgstr "Planens kapacitet er fuld."
+
+msgid "Plan component name"
+msgstr "Plan komponentnavn"
+
+msgid "Plan components"
+msgstr "Planlæg komponenter"
+
+msgid "Plan description"
+msgstr "Beskrivelse af planen"
+
+msgid "Plan does not have limit"
+msgstr "Planen har ikke grænse"
+
+msgid "Plan name"
+msgstr "Planens navn"
+
+msgid "Plan price"
+msgstr "Plan pris"
+
+msgid "Planned quota usage: {usage}"
+msgstr "Planlagt kvoteforbrug: {usage}"
+
+msgid "Plans are invalid."
+msgstr "Planer er ugyldige."
+
+msgid "Please, create and enable a payment profile to be able to manage payments."
+msgstr "Opret og aktiver en betalingsprofil for at kunne administrere betalinger."
+
+msgid "Please add resource name before editing a schedule."
+msgstr "Tilføj venligst ressource navn, før du redigerer en tidsplan."
+
+msgid "Please create a new one:"
+msgstr "Opret venligst en ny:"
+
+msgid "Please create a new one picking the profile that best matches your organization:"
+msgstr "Opret en ny, der vælger den profil, der passer bedst til din organisation:"
+
+msgid "Please enter desired values in the rows below:"
+msgstr "Indtast venligst de ønskede værdier i nedenstående rækker:"
+
+msgid "Please enter reason why offering has been paused."
+msgstr "Angiv venligst grunden til, at tilbuddet er blevet sat på pause."
+
+msgid "Please enter username, password and email."
+msgstr "Indtast venligst brugernavn, adgangskode og e-mail."
+
+msgid "Please enter volume size to see price estimate."
+msgstr "Indtast volumenstørrelse for at se et prisoverslag."
+
+msgid "Please give us a moment to validate your invitation."
+msgstr "Giv os et øjeblik til at validere din invitation."
+
+msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
+msgstr "Sørg for, at du ved, hvad du laver, og sæt til 10 minutter, hvis du er usikker."
+
+msgid "Please note that request should specify tenant and provide a reason."
+msgstr "Bemærk venligst, at anmodningen skal angive lejer og give en grund."
+
+msgid "Please note that request should specify user name and provide a reason."
+msgstr "Bemærk venligst, at anmodningen skal angive brugernavn og give en grund."
+
+msgid "Please open offering {offeringName} ({offeringUuid}) for editing. \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}"
+msgstr "Åbn venligst tilbudet {offeringName} ({offeringUuid}) til redigering. \nRekvirent: {userName} / {userUuid}. \nTjenesteudbyder: {customerName} / {customerUuid}"
+
+msgid "Please provide a reason"
+msgstr "Angiv venligst en begrundelse"
+
+msgid "Please provide registration code of your company."
+msgstr "Angiv venligst registreringskode for din virksomhed."
+
+msgid "Please provide visual material describing the Offering"
+msgstr "Angiv venligst billedmateriale, der beskriver Udbuddet"
+
+msgid "Please provide your EU VAT ID if you are registered in the European Union."
+msgstr "Angiv venligst dit EU-moms-ID, hvis du er registreret i Den Europæiske Union."
+
+msgid "Please review and activate offering {offeringName} ({offeringUuid}). \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}"
+msgstr "Gennemgå og aktiver tilbudet {offeringName} ({offeringUuid}). \nRekvirent: {userName} / {userUuid}. \nTjenesteudbyder: {customerName} / {customerUuid}"
+
+msgid "Please review organization permissions"
+msgstr "Gennemgå venligst organisationens tilladelser"
+
+msgid "Please search for your organization"
+msgstr "Søg venligst efter din organisation"
+
+msgid "Please select a username that you will use for login into the Linux systems."
+msgstr "Vælg venligst et brugernavn, som du vil bruge til at logge ind på Linux-systemerne."
+
+msgid "Please select flavor to see price estimate."
+msgstr "Vælg venligst smag for at se prisoverslag."
+
+msgid "Please select type in Management tab first."
+msgstr "Vælg først typen under fanen Ledelse."
+
+msgid "Please select your language"
+msgstr "Vælg venligst dit sprog"
+
+msgid "Please start instance first."
+msgstr "Start venligst instans først."
+
+msgid "Please stop the instance before changing its flavor."
+msgstr "Stop venligst instansen, før du ændrer dens smag."
+
+msgid "Please stop the instance before its removal."
+msgstr "Stop venligst instansen, før den fjernes."
+
+msgid "Please use Latin letters without spaces only."
+msgstr "Brug kun latinske bogstaver uden mellemrum."
+
+msgid "Plugin options are invalid."
+msgstr "Pluginindstillinger er ugyldige."
+
+msgid "Pods"
+msgstr "Bælg"
+
+msgid "Port has been created."
+msgstr "Port er blevet oprettet."
+
+msgid "Port range"
+msgstr "Port-rækkevidde"
+
+msgid "Postal"
+msgstr "Postnummer"
+
+msgid "Price for consumption"
+msgstr "Pris for forbrug"
+
+msgid "Price is estimated."
+msgstr "Prisen er anslået."
+
+msgid "Price per 30 days"
+msgstr "Pris pr. 30 dage"
+
+msgid "Price per 365 days"
+msgstr "Pris pr. 365 dage"
+
+msgid "Price per day"
+msgstr "Pris per dag"
+
+msgid "Price per half-month"
+msgstr "Pris pr. halv måned"
+
+msgid "Price per half month"
+msgstr "Pris pr. halv måned"
+
+msgid "Price per hour"
+msgstr "Pris pr. time"
+
+msgid "Price per month"
+msgstr "Pris pr. måned"
+
+msgid "Price per unit"
+msgstr "Pris pr. enhed"
+
+msgid "Price per year"
+msgstr "Pris pr. år"
+
+msgid "Pricing tier"
+msgstr "Prisniveau"
+
+msgid "Print record"
+msgstr "Udskriv post"
+
+msgid "Private clouds"
+msgstr "Private skyer"
+
+msgid "Project aggregates and isolates teams and resources."
+msgstr "Projekt aggregerer og isolerer teams og ressourcer."
+
+msgid "Project could not be created."
+msgstr "Projektet kunne ikke oprettes."
+
+msgid "Project could not be updated."
+msgstr "Projektet kunne ikke opdateres."
+
+msgid "Project description"
+msgstr "Projektbeskrivelse"
+
+msgid "Project details"
+msgstr "Projektoplysninger"
+
+msgid "Project events"
+msgstr "Projektbegivenheder"
+
+msgid "Project has been created."
+msgstr "Projektet er blevet oprettet."
+
+msgid "Project has been removed successfully."
+msgstr "Projektet er blevet fjernet."
+
+msgid "Project has been renamed from {project_previous_name} to {project_link}."
+msgstr "Projektet er blevet omdøbt fra {project_previous_name} til {project_link}."
+
+msgid "Project has been updated."
+msgstr "Projektet er blevet opdateret."
+
+msgid "Project is not selected."
+msgstr "Projektet er ikke valgt."
+
+msgid "Project manager cannot edit users with same role."
+msgstr "Projektleder kan ikke redigere brugere med samme rolle."
+
+msgid "Project member"
+msgstr "Projektmedlem"
+
+msgid "Project removal"
+msgstr "Fjernelse af projekt"
+
+msgid "Project resources"
+msgstr "Projektressourcer"
+
+msgid "Project role"
+msgstr "Projektrolle"
+
+msgid "Project roles"
+msgstr "Projektroller"
+
+msgid "Project type"
+msgstr "Projekttype"
+
+msgid "Project workspace"
+msgstr "Projektets arbejdsområde"
+
+msgid "Project {project_name} has been deleted."
+msgstr "Projekt {project_name} er blevet slettet."
+
+msgid "Projects list"
+msgstr "Liste over projekter"
+
+msgid "Proof"
+msgstr "Bevis"
+
+msgid "Proof document"
+msgstr "Bevisdokument"
+
+msgid "Provider details"
+msgstr "Oplysninger om udbyderen"
+
+msgid "Provider does not comply with project policies"
+msgstr "Udbyderen overholder ikke projektpolitikkerne"
+
+msgid "Provider has been updated."
+msgstr "Udbyderen er blevet opdateret."
+
+msgid "Provider location"
+msgstr "Placering af udbyder"
+
+msgid "Public SSH keys will be injected into services that allow key-based access."
+msgstr "Offentlige SSH-nøgler vil blive indsprøjtet i tjenester, der tillader nøglebaseret adgang."
+
+msgid "Public offerings"
+msgstr "Offentlige tilbud"
+
+msgid "Public orders"
+msgstr "Offentlige ordrer"
+
+msgid "Public resources"
+msgstr "Offentlige ressourcer"
+
+msgid "Public services"
+msgstr "Offentlige tjenester"
+
+msgid "Publish as Google Calendar"
+msgstr "Udgiv som Google Kalender"
+
+msgid "Pulling"
+msgstr "Trække"
+
+msgid "Pulling quotas"
+msgstr "Trække kvoter"
+
+msgid "Purchase and usage is invoiced."
+msgstr "Køb og brug faktureres."
+
+msgid "Put this into ~/.kube/config:"
+msgstr "Sæt dette i ~/.kube/config:"
+
+msgid "Quota has been reached."
+msgstr "Kvoten er nået."
+
+msgid "Quota usage exceeds available limit."
+msgstr "Kvoteforbrug overstiger den tilgængelige grænse."
+
+msgid "Quotas"
+msgstr "Kvoter"
+
+msgid "RAM limit (GB-hours)"
+msgstr "RAM-grænse (GB-timer)"
+
+msgid "RAM limit is exceeded"
+msgstr "RAM-grænsen er overskredet"
+
+msgid "Rancher access key"
+msgstr "Rancher adgangsnøgle"
+
+msgid "Rancher cluster"
+msgstr "Rancher klynge"
+
+msgid "Rancher secret key"
+msgstr "Rancher hemmelig nøgle"
+
+msgid "Rancher server URL"
+msgstr "Rancher-serverens URL"
+
+msgid "Reason unknown, please contact support."
+msgstr "Årsag ukendt, kontakt venligst support."
+
+msgid "Recent additions"
+msgstr "Seneste tilføjelser"
+
+msgid "Record no."
+msgstr "Optag nr."
+
+msgid "Record notification has been sent to organization owners."
+msgstr "Registreringsmeddelelse er blevet sendt til organisationsejere."
+
+msgid "Record number"
+msgstr "Optag nummer"
+
+msgid "Record period"
+msgstr "Record periode"
+
+msgid "Redeploy"
+msgstr "Omplacering"
+
+msgid "Referral count"
+msgstr "Antal henvisninger"
+
+msgid "Referrals for {name}"
+msgstr "Henvisninger til {name}"
+
+msgid "Regenerate"
+msgstr "Regenerere"
+
+msgid "Region name"
+msgstr "Regionens navn"
+
+msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
+msgstr "Registrer dig som kunde på vores portal, og udbyd dine cloud-tjenester via Marketplace."
+
+msgid "Register as service provider"
+msgstr "Registrer dig som tjenesteudbyder"
+
+msgid "Register organization as service provider and remove organization."
+msgstr "Registrer organisation som tjenesteudbyder og fjern organisation."
+
+msgid "Register to"
+msgstr "Tilmeld dig"
+
+msgid "Registered at:"
+msgstr "Registreret på:"
+
+msgid "Registration code"
+msgstr "Registreringskode"
+
+msgid "Registration method"
+msgstr "Registreringsmetode"
+
+msgid "Registry code"
+msgstr "Registreringskode"
+
+msgid "Regular expression to limit flavors list"
+msgstr "Regelmæssigt udtryk til begrænsning af listen over smagsvarianter"
+
+msgid "Regular user"
+msgstr "Regelmæssig bruger"
+
+msgid "Release floating IPs"
+msgstr "Frigive flydende IP'er"
+
+msgid "Reload issue data"
+msgstr "Genindlæs problemdata"
+
+msgid "Remote CIDR"
+msgstr "Fjernbetjening CIDR"
+
+msgid "Remote Waldur API URL"
+msgstr "Fjernadresse til Waldur API"
+
+msgid "Remote category"
+msgstr "Fjernkategori"
+
+msgid "Remote offering"
+msgstr "Fjerntilbud"
+
+msgid "Remote security group"
+msgstr "Fjernsikkerhedsgruppe"
+
+msgid "Remove from comparison"
+msgstr "Fjern fra sammenligning"
+
+msgid "Remove organization"
+msgstr "Fjern organisation"
+
+msgid "Remove profile"
+msgstr "Fjern profil"
+
+msgid "Removed organizations cannot be restored!"
+msgstr "Fjernede organisationer kan ikke gendannes!"
+
+msgid "Removing organization {organizationName}"
+msgstr "Fjernelse af organisation {organizationName}"
+
+msgid "Removing the organization will delete all related resources."
+msgstr "Hvis du fjerner organisationen, slettes alle relaterede ressourcer."
+
+msgid "Report a security incident"
+msgstr "Rapporter en sikkerhedshændelse"
+
+msgid "Report details"
+msgstr "Rapportoplysninger"
+
+msgid "Report has been submitted"
+msgstr "Rapporten er blevet indsendt"
+
+msgid "Report incorrect data"
+msgstr "Rapportér forkerte data"
+
+msgid "Report is invalid."
+msgstr "Rapporten er ugyldig."
+
+msgid "Report usage"
+msgstr "Rapporter brug"
+
+msgid "Reported by me"
+msgstr "Rapporteret af mig"
+
+msgid "Reported value is reused every month until changed."
+msgstr "Den indberettede værdi genbruges hver måned, indtil den ændres."
+
+msgid "Reporter"
+msgstr "Reporter"
+
+msgid "Request-based item"
+msgstr "Anmodningsbaseret vare"
+
+msgid "Request-based item (without Service Desk)"
+msgstr "Anmodningsbaseret vare (uden Service Desk)"
+
+msgid "Request account removal for {userName}."
+msgstr "Anmod om fjernelse af konto for {userName}."
+
+msgid "Request demo"
+msgstr "Anmod om demo"
+
+msgid "Request description"
+msgstr "Anmodning om beskrivelse"
+
+msgid "Request detail"
+msgstr "Anmodning om oplysninger"
+
+msgid "Request direct access"
+msgstr "Anmodning om direkte adgang"
+
+msgid "Request direct access to OpenStack Tenant"
+msgstr "Anmodning om direkte adgang til OpenStack-lejer"
+
+msgid "Request direct access to {name}"
+msgstr "Anmodning om direkte adgang til {name}"
+
+msgid "Request editing"
+msgstr "Anmodning om redigering"
+
+msgid "Request for a change"
+msgstr "Anmodning om en ændring"
+
+msgid "Request for a termination"
+msgstr "Anmodning om opsigelse"
+
+msgid "Request publishing"
+msgstr "Anmodning om udgivelse"
+
+msgid "Request removal"
+msgstr "Anmodning om fjernelse"
+
+msgid "Request title"
+msgstr "Anmodning titel"
+
+msgid "Request type"
+msgstr "Anmodningstype"
+
+msgid "Request {mode} of Public Offering"
+msgstr "Anmodning om {mode} af offentligt udbud"
+
+msgid "Request {mode} of {name}"
+msgstr "Anmodning {mode} af {name}"
+
+msgid "Request {requestId} has been created."
+msgstr "Anmodning {requestId} er blevet oprettet."
+
+msgid "Requested e-mail"
+msgstr "Anmodet e-mail"
+
+msgid "Requested email"
+msgstr "Anmodet e-mail"
+
+msgid "Requesting of new resources has been temporarily paused"
+msgstr "Anmodning om nye ressourcer er midlertidigt sat på pause"
+
+msgid "Reserved slot"
+msgstr "Reserveret slot"
+
+msgid "Reserved slot by {name}"
+msgstr "Reserveret slot af {name}"
+
+msgid "Resize droplet"
+msgstr "Ændr størrelsen på dråbe"
+
+msgid "Resource UUID"
+msgstr "Ressource UUID"
+
+msgid "Resource already has this plan."
+msgstr "Ressourcen har allerede denne plan."
+
+msgid "Resource configuration"
+msgstr "Ressource konfiguration"
+
+msgid "Resource configuration is invalid. Please fix errors in form."
+msgstr "Ressource konfiguration er ugyldig. Ret venligst fejl i formularen."
+
+msgid "Resource deletion has been scheduled."
+msgstr "Ressourcesletning er blevet planlagt."
+
+msgid "Resource description"
+msgstr "Beskrivelse af ressource"
+
+msgid "Resource details"
+msgstr "Ressourceoplysninger"
+
+msgid "Resource does not have any plan."
+msgstr "Ressourcen har ingen plan."
+
+msgid "Resource does not have backend ID."
+msgstr "Ressourcen har ikke backend-ID."
+
+msgid "Resource does not have plan."
+msgstr "Ressourcen har ikke plan."
+
+msgid "Resource events"
+msgstr "Ressourcebegivenheder"
+
+msgid "Resource is in sync"
+msgstr "Ressourcen er synkroniseret"
+
+msgid "Resource is not connected to the marketplace yet."
+msgstr "Ressourcen er endnu ikke forbundet til markedspladsen."
+
+msgid "Resource limits change request has been submitted."
+msgstr "Der er indsendt en anmodning om ændring af ressourcegrænser."
+
+msgid "Resource link"
+msgstr "Ressource link"
+
+msgid "Resource name"
+msgstr "Ressource navn"
+
+msgid "Resource plan change request has been submitted."
+msgstr "Der er indgivet en anmodning om ændring af ressourceplanen."
+
+msgid "Resource schedule is already activated."
+msgstr "Ressourceplanen er allerede aktiveret."
+
+msgid "Resource schedule is already deactivated."
+msgstr "Ressourceplanen er allerede deaktiveret."
+
+msgid "Resource termination request has been submitted."
+msgstr "Der er indsendt en anmodning om opsigelse af en ressource."
+
+msgid "Resource usage"
+msgstr "Ressource brug"
+
+msgid "Resource usage for {resource}"
+msgstr "Ressourceforbrug for {resource}"
+
+msgid "Resources import has failed."
+msgstr "Import af ressourcer er mislykkedes."
+
+msgid "Resources represent the services you are using."
+msgstr "Ressourcer repræsenterer de tjenester, du bruger."
+
+msgid "Resources usage"
+msgstr "Ressourceforbrug"
+
+msgid "Restore virtual machine from backup {name}"
+msgstr "Gendan virtuel maskine fra sikkerhedskopi {name}"
+
+msgid "Restore volume snapshot"
+msgstr "Gendan volumen snapshot"
+
+msgid "Restored volumes"
+msgstr "Gendannede diskenheder"
+
+msgid "Restricted, because of type."
+msgstr "Begrænset, på grund af typen."
+
+msgid "Retention time"
+msgstr "Opbevaringstid"
+
+msgid "Retention time in days, if 0 - resource will be kept forever"
+msgstr "Opbevaringstid i dage, hvis 0 - ressourcen opbevares for evigt"
+
+msgid "Retype OpenStack Volume"
+msgstr "Skriv OpenStack-volumen igen"
+
+msgid "Review has been closed."
+msgstr "Gennemgangen er blevet lukket."
+
+msgid "Review has been performed."
+msgstr "Gennemgangen er blevet udført."
+
+msgid "Role expires on"
+msgstr "Rollen udløber den"
+
+msgid "Role in project"
+msgstr "Rolle i projektet"
+
+msgid "Role management events"
+msgstr "Begivenheder vedrørende rolleforvaltning"
+
+msgid "Routers"
+msgstr "Routere"
+
+msgid "Rule count"
+msgstr "Regel tæller"
+
+msgid "Running accounting"
+msgstr "Løbende regnskab"
+
+msgid "Runtime state"
+msgstr "Kørselstilstand"
+
+msgid "SAML2 single logout has been started. Please wait until it completes."
+msgstr "SAML2 enkelt logout er blevet startet. Vent venligst, indtil den er afsluttet."
+
+msgid "SLURM allocation"
+msgstr "SLURM-tildeling"
+
+msgid "SLURM allocation usage"
+msgstr "Brug af SLURM-tildeling"
+
+msgid "SQL database has been created."
+msgstr "SQL-database er blevet oprettet."
+
+msgid "SQL server description"
+msgstr "Beskrivelse af SQL-server"
+
+msgid "SQL server name"
+msgstr "SQL-servernavn"
+
+msgid "SSH Keys"
+msgstr "SSH-nøgler"
+
+msgid "SSH key"
+msgstr "SSH-nøgle"
+
+msgid "SSH key has been removed."
+msgstr "SSH-nøglen er blevet fjernet."
+
+msgid "SSH key management events"
+msgstr "SSH-nøglehåndteringsbegivenheder"
+
+msgid "SSH key {ssh_key_name} has been created for user {user_link}"
+msgstr "SSH-nøgle {ssh_key_name} er blevet oprettet for brugeren {user_link}"
+
+msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
+msgstr "SSH-nøgle {ssh_key_name} er blevet slettet for brugeren {user_link}"
+
+msgid "SSH public key"
+msgstr "Offentlig SSH-nøgle"
+
+msgid "Sankey diagram"
+msgstr "Sankey diagram"
+
+msgid "Schedules are invalid."
+msgstr "Tidsplaner er ugyldige."
+
+msgid "Script for creation of a resource"
+msgstr "Script til oprettelse af en ressource"
+
+msgid "Script for regular update of resource and its accounting"
+msgstr "Script til regelmæssig opdatering af ressource og dens regnskab"
+
+msgid "Script for termination of a resource"
+msgstr "Script til afslutning af en ressource"
+
+msgid "Script for updating a resource on plan change"
+msgstr "Script til opdatering af en ressource ved planændring"
+
+msgid "Script language"
+msgstr "Script sprog"
+
+msgid "Search for offerings..."
+msgstr "Søg efter tilbud ..."
+
+msgid "Security group creation has been scheduled."
+msgstr "Oprettelse af sikkerhedsgruppe er blevet planlagt."
+
+msgid "Security group does not contain any rule yet."
+msgstr "Sikkerhedsgruppen indeholder endnu ikke nogen regel."
+
+msgid "Security group rules update has been scheduled."
+msgstr "Opdatering af sikkerhedsgruppereglerne er planlagt."
+
+msgid "Security groups"
+msgstr "Sikkerhedsgrupper"
+
+msgid "Security groups details"
+msgstr "Oplysninger om sikkerhedsgrupper"
+
+msgid "Security incident date: {date}"
+msgstr "Dato for sikkerhedshændelse: {date}"
+
+msgid "Security incident type: {type}"
+msgstr "Sikkerhedshændelsestype: {type}"
+
+msgid "Seems there's nothing here"
+msgstr "Synes der ikke er noget her"
+
+msgid "Seems you don't have any resources yet"
+msgstr "Ser ud til at du ikke har nogen ressourcer endnu"
+
+msgid "Segmentation ID"
+msgstr "Segmenterings-ID"
+
+msgid "Select accounting period"
+msgstr "Vælg regnskabsperiode"
+
+msgid "Select affected resource..."
+msgstr "Vælg berørt ressource..."
+
+msgid "Select affiliation"
+msgstr "Vælg tilhørsforhold"
+
+msgid "Select assignee..."
+msgstr "Vælg modtager..."
+
+msgid "Select available weekdays"
+msgstr "Vælg tilgængelige hverdage"
+
+msgid "Select caller..."
+msgstr "Vælg opkalder..."
+
+msgid "Select connected subnet"
+msgstr "Vælg tilsluttet undernet"
+
+msgid "Select division..."
+msgstr "Vælg division..."
+
+msgid "Select division type..."
+msgstr "Vælg divisionstype..."
+
+msgid "Select evaluation..."
+msgstr "Vælg evaluering..."
+
+msgid "Select incident type"
+msgstr "Vælg hændelsestype"
+
+msgid "Select instance..."
+msgstr "Vælg instans"
+
+msgid "Select issue template..."
+msgstr "Vælg problemskabelon..."
+
+msgid "Select offering..."
+msgstr "Vælg tilbud..."
+
+msgid "Select offerings..."
+msgstr "Vælg tilbud..."
+
+msgid "Select organization roles"
+msgstr "Vælg organisationsroller"
+
+msgid "Select organizations..."
+msgstr "Vælg organisationer..."
+
+msgid "Select project roles"
+msgstr "Vælg projektroller"
+
+msgid "Select provider..."
+msgstr "Vælg udbyder..."
+
+msgid "Select request type..."
+msgstr "Vælg anmodningstype..."
+
+msgid "Select security groups..."
+msgstr "Vælg sikkerhedsgrupper..."
+
+msgid "Select service provider"
+msgstr "Vælg tjenesteudbyder"
+
+msgid "Select service provider..."
+msgstr "Vælg tjenesteudbyder..."
+
+msgid "Select some files"
+msgstr "Vælg nogle filer"
+
+msgid "Select subnet"
+msgstr "Vælg undernet"
+
+msgid "Select subnets to connect to..."
+msgstr "Vælg undernet til at oprette forbindelse til..."
+
+msgid "Select tenant..."
+msgstr "Vælg lejer..."
+
+msgid "Select tenants..."
+msgstr "Vælg lejere..."
+
+msgid "Select user..."
+msgstr "Vælg bruger..."
+
+msgid "Select workspace"
+msgstr "Vælg arbejdsområde"
+
+msgid "Service Request"
+msgstr "Serviceanmodning"
+
+msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
+msgstr "Serviceanmodning - kundens anmodning om at modificere, tilføje, ændre eller fjerne en bestemt service helt eller delvist."
+
+msgid "Service provider API secret code has been generated."
+msgstr "Tjenesteudbyderens API-hemmelige kode er blevet genereret."
+
+msgid "Service provider can charge for usage of the following components"
+msgstr "Tjenesteudbyderen kan opkræve betaling for brug af følgende komponenter"
+
+msgid "Service provider can report up to the requested amount over the whole active state of resource."
+msgstr "Tjenesteudbyderen kan rapportere op til det ønskede beløb over hele den aktive ressourcetilstand."
+
+msgid "Service provider details"
+msgstr "Oplysninger om tjenesteudbyderen"
+
+msgid "Service provider has been registered."
+msgstr "Tjenesteudbyderen er blevet registreret."
+
+msgid "Service provider type"
+msgstr "Type tjenesteudbyder"
+
+msgid "Service settings are invalid."
+msgstr "Serviceindstillingerne er ugyldige."
+
+msgid "Service settings of this resource are in state erred."
+msgstr "Serviceindstillingerne for denne ressource er i fejltilstand."
+
+msgid "Set MTU"
+msgstr "Indstil MTU"
+
+msgid "Set allowed address pairs"
+msgstr "Indstil tilladte adressepar"
+
+msgid "Set backend ID"
+msgstr "Indstil backend-ID"
+
+msgid "Set rules"
+msgstr "Indstil regler"
+
+msgid "Set rules in {name} security group"
+msgstr "Indstil regler i sikkerhedsgruppen {name}"
+
+msgid "Set static routes"
+msgstr "Indstil statiske ruter"
+
+msgid "Set to draft"
+msgstr "Indstil til udkast"
+
+msgid "Set to true to activate privilege escalation"
+msgstr "Indstil til sand for at aktivere eskalering af privilegier"
+
+msgid "Shared providers"
+msgstr "Delte udbydere"
+
+msgid "Shopping cart is empty. You should add items to cart first."
+msgstr "Indkøbskurven er tom. Du bør tilføje varer til indkøbsvognen først."
+
+msgid "Shopping cart item has been updated."
+msgstr "Indkøbskurv varen er blevet opdateret."
+
+msgid "Shopping cart item update"
+msgstr "Opdatering af varer i indkøbskurven"
+
+msgid "Show chart"
+msgstr "Vis diagram"
+
+msgid "Show choices"
+msgstr "Vis valg"
+
+msgid "Show console log"
+msgstr "Vis konsollog"
+
+msgid "Show diff"
+msgstr "Vis diff"
+
+msgid "Show events"
+msgstr "Vis begivenheder"
+
+msgid "Show private"
+msgstr "Vis privat"
+
+msgid "Show request"
+msgstr "Vis anmodning"
+
+msgid "Show shared"
+msgstr "Vis delt"
+
+msgid "Show usage"
+msgstr "Vis brug"
+
+msgid "Show user details"
+msgstr "Vis brugeroplysninger"
+
+msgid "Show with running accounting"
+msgstr "Vis med løbende regnskab"
+
+msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
+msgstr "Viser {sliceStart} til {sliceEnd} af {resultCount} poster."
+
+msgid "Size name"
+msgstr "Størrelse navn"
+
+msgid "Size should be between 1 and 10240 GB."
+msgstr "Størrelsen skal være mellem 1 og 10240 GB."
+
+msgid "Skip connection to external network"
+msgstr "Spring forbindelse til eksternt netværk over"
+
+msgid "Skip floating IP assignment"
+msgstr "Spring flydende IP-tildeling over"
+
+msgid "Snapshot schedule for volume has been created."
+msgstr "Snapshotplan for volumen er blevet oprettet."
+
+msgid "Snapshot schedules"
+msgstr "Snapshot-planer"
+
+msgid "Snapshot size limit"
+msgstr "Grænse for snapshotstørrelse"
+
+msgid "Snapshots"
+msgstr "Snapshots"
+
+msgid "Snapshots count"
+msgstr "Snapshots tæller"
+
+msgid "Sponsor number"
+msgstr "Sponsor nummer"
+
+msgid "Staff and Support user"
+msgstr "Personale og Støttebruger"
+
+msgid "Start day of accounting"
+msgstr "Start dag for regnskab"
+
+msgid "Static routes update was scheduled."
+msgstr "Opdatering af statiske ruter var planlagt."
+
+msgid "Step 1. Select offering"
+msgstr "Trin 1. Vælg tilbud"
+
+msgid "Step 2. Select resources"
+msgstr "Trin 2. Vælg ressourcer"
+
+msgid "Storage size"
+msgstr "Opbevaringsstørrelse"
+
+msgid "Storage size in GiB"
+msgstr "Opbevaringsstørrelse i GiB"
+
+msgid "Submit usage report"
+msgstr "Indsend brugsrapport"
+
+msgid "Submit with"
+msgstr "Indsend med"
+
+msgid "Subnet"
+msgstr "Undernet"
+
+msgid "Subnet CIDR"
+msgstr "Undernet CIDR"
+
+msgid "Subnet has been created."
+msgstr "Unternet er blevet oprettet."
+
+msgid "Subnet name"
+msgstr "Navn på undernet"
+
+msgid "Subnets"
+msgstr "Undernet"
+
+msgid "Subnets from where connection to self-service is allowed."
+msgstr "Undernet, hvorfra forbindelse til selvbetjening er tilladt."
+
+msgid "Support dashboard"
+msgstr "Support dashboard"
+
+msgid "Support request events"
+msgstr "Support anmodning begivenheder"
+
+msgid "Support user"
+msgstr "Supportbruger"
+
+msgid "Support workspace"
+msgstr "Support arbejdsområde"
+
+msgid "Sure? Form data would be lost"
+msgstr "Er du sikker? Formularoplysninger ville gå tabt"
+
+msgid "Sync profile"
+msgstr "Synkroniser profil"
+
+msgid "Sync with Google Calendar"
+msgstr "Synkroniser med Google Kalender"
+
+msgid "Synchronisation has been scheduled."
+msgstr "Synkroniseringen er blevet planlagt."
+
+msgid "System administrator"
+msgstr "Systemadministrator"
+
+msgid "System volume couldn't be detached."
+msgstr "Systemvolumen kunne ikke løsnes."
+
+msgid "System volume size"
+msgstr "Systemvolumenstørrelse"
+
+msgid "System volume type"
+msgstr "Typen af systemvolumen"
+
+msgid "TLD \"{tld}\" must not be all numeric"
+msgstr "TLD \"{tld}\" må ikke være helt numerisk"
+
+msgid "Taking a snapshot"
+msgstr "Tage et snapshot"
+
+msgid "Tax number"
+msgstr "Skat nummer"
+
+msgid "Tax percent"
+msgstr "Skat procent"
+
+msgid "Team member has been removed."
+msgstr "Teammedlem er blevet fjernet."
+
+msgid "Technical code used by accounting software."
+msgstr "Teknisk kode brugt af regnskabssoftware."
+
+msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
+msgstr "Teknisk navn beregnet til integration og automatiseret rapportering. Brug venligst kun latinske bogstaver uden mellemrum."
+
+msgid "Template files"
+msgstr "Skabelonfiler"
+
+msgid "Tenant"
+msgstr "Lejer"
+
+msgid "Tenant ID"
+msgstr "Lejer-ID"
+
+msgid "Tenant description"
+msgstr "Lejerbeskrivelse"
+
+msgid "Tenant name"
+msgstr "Lejers navn"
+
+msgid "Tenant user password"
+msgstr "Lejerbrugeradgangskode"
+
+msgid "Tenant user username"
+msgstr "Brugernavn for lejerbruger"
+
+msgid "Terminate an existing resource"
+msgstr "Afslut en eksisterende ressource"
+
+msgid "Terminate resource {resourceName}"
+msgstr "Afslut ressource {resourceName}"
+
+msgid "Terminated"
+msgstr "Afsluttet"
+
+msgid "Terminating"
+msgstr "Afslutning"
+
+msgid "Text has been copied"
+msgstr "Teksten er blevet kopieret"
+
+msgid "Thank you for your response!"
+msgstr "Tak for dit svar!"
+
+msgid "The invoice has been marked as paid."
+msgstr "Fakturaen er blevet markeret som betalt."
+
+msgid "The key has been created."
+msgstr "Nøglen er blevet oprettet."
+
+msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
+msgstr "Navnet kan kun indeholde bogstaver, tal og bindestreger. Det skal starte med et bogstav og skal slutte med et bogstav eller et tal"
+
+msgid "The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name."
+msgstr "Navnet kan kun bestå af små bogstaver, tal og bindestreg. Bindestregen må ikke føre eller spore i navnet."
+
+msgid "The name must be shorter than 15 characters."
+msgstr "Navnet skal være kortere end 15 tegn."
+
+msgid "The project will be changed for all items in cart."
+msgstr "Projektet vil blive ændret for alle varer i indkøbskurven."
+
+msgid "The value is not valid IP v4 CIDR"
+msgstr "Værdien er ikke gyldig IP v4 CIDR"
+
+msgid "The value is not valid IP v6 CIDR"
+msgstr "Værdien er ikke gyldig IP v6 CIDR"
+
+msgid "The worker node is expected to have at least 4 vCPU and 4 GB RAM to run Longhorn."
+msgstr "Arbejdernoden forventes at have mindst 4 vCPU og 4 GB RAM til at køre Longhorn."
+
+msgid "Then download (if needed) and run kubectl"
+msgstr "Download derefter (hvis nødvendigt) og kør kubectl"
+
+msgid "There are no SSH keys yet."
+msgstr "Der er ingen SSH-nøgler endnu."
+
+msgid "There are no actions."
+msgstr "Der er ingen handlinger."
+
+msgid "There are no available projects."
+msgstr "Der er ingen tilgængelige projekter."
+
+msgid "There are no available users."
+msgstr "Der er ingen tilgængelige brugere."
+
+msgid "There are no categories."
+msgstr "Der er ingen kategorier."
+
+msgid "There are no categories in marketplace yet."
+msgstr "Der er ingen kategorier i markedspladsen endnu."
+
+msgid "There are no categories yet."
+msgstr "Der er ingen kategorier endnu."
+
+msgid "There are no charts yet."
+msgstr "Der er ingen diagrammer endnu."
+
+msgid "There are no checklist yet."
+msgstr "Der er ingen tjekliste endnu."
+
+msgid "There are no checklists."
+msgstr "Der er ingen tjeklister."
+
+msgid "There are no comments yet."
+msgstr "Der er ingen kommentarer endnu."
+
+msgid "There are no events for this resource."
+msgstr "Der er ingen begivenheder for denne ressource."
+
+msgid "There are no invoices."
+msgstr "Der er ingen fakturaer."
+
+msgid "There are no matching checklists."
+msgstr "Der er ingen matchende tjeklister."
+
+msgid "There are no offerings available."
+msgstr "Der er ingen tilbud tilgængelige."
+
+msgid "There are no offerings in marketplace yet."
+msgstr "Der er ingen tilbud på markedet endnu."
+
+msgid "There are no offerings yet."
+msgstr "Der er ingen tilbud endnu."
+
+msgid "There are no organizations matching filter."
+msgstr "Der er ingen organisationer, der matcher filteret."
+
+msgid "There are no organizations yet."
+msgstr "Der er ingen organisationer endnu."
+
+msgid "There are no other plans available."
+msgstr "Der er ingen andre planer tilgængelige."
+
+msgid "There are no other volume types available."
+msgstr "Der er ingen andre volumentyper tilgængelige."
+
+msgid "There are no projects matching filter."
+msgstr "Der er ingen projekter, der matcher filteret."
+
+msgid "There are no projects yet for this organization."
+msgstr "Der er endnu ingen projekter for denne organisation."
+
+msgid "There are no requests yet."
+msgstr "Der er ingen anmodninger endnu."
+
+msgid "There are no resources available."
+msgstr "Der er ingen tilgængelige ressourcer."
+
+msgid "There are no resources yet."
+msgstr "Der er ingen ressourcer endnu."
+
+msgid "There are no sections for comparison yet."
+msgstr "Der er ingen sektioner til sammenligning endnu."
+
+msgid "There are no {verboseName} found matching the filter."
+msgstr "Der er ikke fundet nogen {verboseName}, der matcher til filteret."
+
+msgid "There are no {verboseName} yet."
+msgstr "Der er ingen {verboseName} endnu."
+
+msgid "There are not namespaces in this project yet."
+msgstr "Der er ikke navneområder i dette projekt endnu."
+
+msgid "There is no activity yet."
+msgstr "Der er ingen aktivitet endnu."
+
+msgid "This name will be visible in accounting data."
+msgstr "Dette navn vil være synligt i regnskabsdata."
+
+msgid "This value is invalid JSON."
+msgstr "Denne værdi er ugyldig JSON."
+
+msgid "This website uses cookies to ensure you get the best experience on our website."
+msgstr "Denne hjemmeside bruger cookies for at sikre, at du får den bedste oplevelse på vores hjemmeside."
+
+msgid "Time in progress"
+msgstr "Tid i gang"
+
+msgid "Time slot"
+msgstr "Tidsinterval"
+
+msgid "Time slot has been added."
+msgstr "Tidsinterval er blevet tilføjet."
+
+msgid "Time slots"
+msgstr "Tidsintervaller"
+
+msgid "To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!"
+msgstr "For at rette oplysninger om din organisation bedes du sende en e-mail til {supportEMail}, der fremhæver fejlene i de aktuelle detaljer. Tak!"
+
+msgid "To get access, please send a request to {supportEmail}."
+msgstr "For at få adgang bedes du sende en anmodning til {supportEmail}."
+
+msgid "To get your clouds under control, please fill in your data."
+msgstr "For at få dine skyer under kontrol, skal du udfylde dine data."
+
+msgid "To remove account, please send a request to {support}."
+msgstr "Hvis du vil fjerne en konto, skal du sende en anmodning til {support}."
+
+msgid "To remove your organization, please send an email to {supportEmail}. Thank you!"
+msgstr "Hvis du vil fjerne din organisation, skal du sende en e-mail til {supportEmail}. Tak!"
+
+msgid "To report a security incident, please send an email to {supportEmail}."
+msgstr "Hvis du vil rapportere en sikkerhedshændelse, skal du sende en e-mail til {supportEmail}."
+
+msgid "To report an issue, please send an email to {supportEmail}."
+msgstr "Hvis du vil rapportere et problem, skal du sende en e-mail til {supportEmail}."
+
+msgid "Total CPU"
+msgstr "Samlet CPU"
+
+msgid "Total CPU hours consumed this month"
+msgstr "Samlet forbrug af CPU-timer i denne måned"
+
+msgid "Total GPU hours consumed this month"
+msgstr "Samlet forbrug af GPU-timer i denne måned"
+
+msgid "Total RAM GB-hours consumed this month"
+msgstr "Samlet RAM GB-timer forbrugt i denne måned"
+
+msgid "Total number of nodes"
+msgstr "Samlet antal noder"
+
+msgid "Total storage limit is exceeded"
+msgstr "Den samlede lagergrænse er overskredet"
+
+msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
+msgstr "Spores ved hjælp af UTC-tidszone, vises med din browsers tidszone."
+
+msgid "Type is invalid."
+msgstr "Type er ugyldig."
+
+msgid "Type of incident"
+msgstr "Type hændelse"
+
+msgid "UUID"
+msgstr "UUID"
+
+msgid "Unable to accept booking."
+msgstr "Kan ikke acceptere booking."
+
+msgid "Unable to activate account."
+msgstr "Kan ikke aktivere konto."
+
+msgid "Unable to activate user."
+msgstr "Kan ikke aktivere brugeren."
+
+msgid "Unable to add image."
+msgstr "Kan ikke tilføje billede."
+
+msgid "Unable to add item to shopping cart."
+msgstr "Kunne ikke tilføje vare til indkøbskurven."
+
+msgid "Unable to apply action."
+msgstr "Kan ikke anvende handling."
+
+msgid "Unable to approve invitation."
+msgstr "Kan ikke godkende invitationen."
+
+msgid "Unable to approve order."
+msgstr "Kan ikke godkende ordren."
+
+msgid "Unable to approve order item."
+msgstr "Kan ikke godkende ordrevaren."
+
+msgid "Unable to attach volume."
+msgstr "Kan ikke vedhæfte volumen."
+
+msgid "Unable to attach volume to instance."
+msgstr "Kan ikke knytte volumen til instansen."
+
+msgid "Unable to authenticate using Mobile ID."
+msgstr "Kan ikke godkendes ved hjælp af Mobil-ID."
+
+msgid "Unable to bootstrap application."
+msgstr "Kan ikke bootstrap-programmet."
+
+msgid "Unable to cancel booking."
+msgstr "Kan ikke annullere booking."
+
+msgid "Unable to cancel invitation."
+msgstr "Kan ikke annullere invitationen."
+
+msgid "Unable to cancel order item."
+msgstr "Kan ikke annullere ordrevaren."
+
+msgid "Unable to cancel request."
+msgstr "Kan ikke annullere anmodningen."
+
+msgid "Unable to change email."
+msgstr "Kan ikke ændre e-mail."
+
+msgid "Unable to change flavor."
+msgstr "Kan ikke ændre smag."
+
+msgid "Unable to close review."
+msgstr "Kan ikke lukke anmeldelsen."
+
+msgid "Unable to confirm email."
+msgstr "Kan ikke bekræfte e-mailen."
+
+msgid "Unable to create OpenStack networks."
+msgstr "Kan ikke oprette OpenStack-netværk."
+
+msgid "Unable to create SQL database."
+msgstr "Kan ikke oprette en SQL-database."
+
+msgid "Unable to create VM snapshot."
+msgstr "Kan ikke oprette VM-snapshot."
+
+msgid "Unable to create VM snapshot schedule."
+msgstr "Kan ikke oprette en VM-snapshotplan."
+
+msgid "Unable to create a FreeIPA profile."
+msgstr "Kan ikke oprette en FreeIPA-profil."
+
+msgid "Unable to create application."
+msgstr "Kan ikke oprette applikation."
+
+msgid "Unable to create catalog."
+msgstr "Kan ikke oprette katalog."
+
+msgid "Unable to create disk."
+msgstr "Kan ikke oprette disk."
+
+msgid "Unable to create horizontal pod autoscaler."
+msgstr "Kan ikke oprette vandret pod autoskaler."
+
+msgid "Unable to create key."
+msgstr "Kan ikke oprette nøgle."
+
+msgid "Unable to create node."
+msgstr "Kan ikke oprette node."
+
+msgid "Unable to create notification."
+msgstr "Kan ikke oprette en meddelelse."
+
+msgid "Unable to create notifications."
+msgstr "Kan ikke oprette meddelelser."
+
+msgid "Unable to create offering."
+msgstr "Kan ikke oprette tilbud."
+
+msgid "Unable to create payment."
+msgstr "Kan ikke oprette betaling."
+
+msgid "Unable to create payment profile."
+msgstr "Kan ikke oprette betalingsprofil."
+
+msgid "Unable to create port."
+msgstr "Kan ikke oprette port."
+
+msgid "Unable to create request."
+msgstr "Kan ikke oprette en anmodning."
+
+msgid "Unable to create security group."
+msgstr "Kan ikke oprette en sikkerhedsgruppe."
+
+msgid "Unable to create snapshot schedule."
+msgstr "Kan ikke oprette en snapshotplan."
+
+msgid "Unable to create subnet."
+msgstr "Kan ikke oprette undernet."
+
+msgid "Unable to deactivate user."
+msgstr "Brugeren kan ikke deaktiveres."
+
+msgid "Unable to delete attachment."
+msgstr "Kan ikke slette vedhæftet fil."
+
+msgid "Unable to delete catalog."
+msgstr "Kan ikke slette kataloget."
+
+msgid "Unable to delete instance."
+msgstr "Kan ikke slette en instans."
+
+msgid "Unable to delete payment."
+msgstr "Kan ikke slette betaling."
+
+msgid "Unable to delete resource."
+msgstr "Kan ikke slette ressourcen."
+
+msgid "Unable to delete team member."
+msgstr "Kan ikke slette teammedlem."
+
+msgid "Unable to destroy instance."
+msgstr "Kan ikke ødelægge instans."
+
 msgid "(VAT is not included)"
 msgstr "(Moms er ikke inkluderet)"

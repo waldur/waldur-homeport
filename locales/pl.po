@@ -8,6 +8,81 @@ msgstr ""
 "Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : ((n%10>=2 && n%10<=4) && ((n%100<12 || n%100>14))) ? 1 : 2;\n"
 
+msgid "A profile has been created."
+msgstr "Konto zostało utworzone."
+
+msgid "Account activation"
+msgstr "Aktywacja konta"
+
+msgid "Account has been activated."
+msgstr "Konto zostało aktywowane."
+
+msgid "Account removal"
+msgstr "Usunięcie konta"
+
+msgid "Accounting"
+msgstr "Księgowość"
+
+msgid "Active"
+msgstr "Aktywny"
+
+msgid "Activity stream"
+msgstr "Strumień aktywności"
+
+msgid "Add key"
+msgstr "Dodaj klucz"
+
+msgid "Add new organization"
+msgstr "Dodaj nową organizację"
+
+msgid "Add new project"
+msgstr "Dodaj nowy projekt"
+
+msgid "Add notification"
+msgstr "Dodaj powiadomienie"
+
+msgid "Add organization"
+msgstr "Dodaj organizację"
+
+msgid "Add payment"
+msgstr "Dodaj płatność"
+
+msgid "Add security group"
+msgstr "Dodaj grupę zabezpieczeń"
+
+msgid "Add team member"
+msgstr "Dodaj członka zespołu"
+
+msgid "Add to comparison"
+msgstr "Dodaj do porównania"
+
+msgid "Add user"
+msgstr "Dodaj użytkownika"
+
+msgid "Address"
+msgstr "Adres"
+
+msgid "Admin password"
+msgstr "Hasło administratora"
+
+msgid "Admin username"
+msgstr "Nazwa użytkownika administratora"
+
+msgid "Allocation name"
+msgstr "Nazwa alokacji"
+
+msgid "Amount"
+msgstr "Kwota"
+
+msgid "Answer"
+msgstr "Odpowiedź"
+
+msgid "Answers"
+msgstr "Odpowiedzi"
+
+msgid "Application has been created."
+msgstr "Aplikacja została utworzona."
+
 msgid "Applications"
 msgstr "Aplikacje"
 

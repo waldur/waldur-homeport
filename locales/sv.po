@@ -29,6 +29,9 @@ msgstr "En engångsavgift tillämpas vid aktivering."
 msgid "A profile has been created."
 msgstr "En profil har skapats."
 
+msgid "Abbreviation"
+msgstr "Förkortning"
+
 msgid "Accept booking"
 msgstr "Acceptera bokning"
 
@@ -1549,6 +1552,618 @@ msgstr "Marketplace-tjänster kan endast etableras för en viss anslutning. Du h
 
 msgid "Max # of VM snapshots"
 msgstr "Max # av VM ögonblicksbilder"
+
+msgid "Max # of snapshots"
+msgstr "Max # antal ögonblicksbilder"
+
+msgid "Max number of VM snapshots"
+msgstr "Maximalt antal ögonblicksbilder av VM"
+
+msgid "Max replicas"
+msgstr "Max repliker"
+
+msgid "Maximal number of resources"
+msgstr "Maximalt antal resurser"
+
+msgid "Maximal value"
+msgstr "Maximalt värde"
+
+msgid "Maximum RAM for each VM"
+msgstr "Maximal RAM för varje VM"
+
+msgid "Maximum allowed value"
+msgstr "Maximalt tillåtet värde"
+
+msgid "Maximum capacity for each disk"
+msgstr "Maximal kapacitet för varje disk"
+
+msgid "Maximum monthly"
+msgstr "Högsta månatliga"
+
+msgid "Maximum total"
+msgstr "Maximal totalsumma"
+
+msgid "Maximum total size of the disk space per VM"
+msgstr "Maximal total storlek på diskutrymmet per VM"
+
+msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr "Maximal användarnamn längd med obligatoriskt användarnamn prefix är 32 tecken."
+
+msgid "Maximum vCPU for each VM"
+msgstr "Maximal vCPU för varje VM"
+
+msgid "Measured unit"
+msgstr "Uppmätt enhet"
+
+msgid "Memory per vCore"
+msgstr "Minne per vCore"
+
+msgid "Memory size in GiB"
+msgstr "Minnesstorlek i GiB"
+
+msgid "Metric name"
+msgstr "Metriskt namn"
+
+msgid "MiB"
+msgstr "MiB"
+
+msgid "Min RAM"
+msgstr "Min RAM"
+
+msgid "Min amount"
+msgstr "Min-belopp"
+
+msgid "Min replicas"
+msgstr "Min-repliker"
+
+msgid "Min storage"
+msgstr "Min. lagring"
+
+msgid "Minimal value"
+msgstr "Minimalt värde"
+
+msgid "Minimum allowed value"
+msgstr "Lägsta tillåtna värde"
+
+msgid "Minimum booking time slot duration."
+msgstr "Minsta bokningstid lucka varaktighet."
+
+msgid "Minimum username length is 3 characters."
+msgstr "Minsta användarnamn längd är 3 tecken."
+
+msgid "Monthly cost"
+msgstr "Månadskostnad"
+
+msgid "Monthly invoices"
+msgstr "Månadsfakturor"
+
+msgid "Mount point"
+msgstr "Monteringspunkt"
+
+msgid "Must be at least {min}"
+msgstr "Måste vara minst {min}"
+
+msgid "Must be at most {max}"
+msgstr "Måste vara som mest {max}"
+
+msgid "Must start with a country prefix ie EE34501234215"
+msgstr "Måste börja med ett landsprefix, dvs. EE34501234215"
+
+msgid "My offerings"
+msgstr "Mina erbjudanden"
+
+msgid "My resources"
+msgstr "Mina resurser"
+
+msgid "My services"
+msgstr "Mina tjänster"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
+msgstr "Namnet ”{label}” måste vara 1-63 tecken långt, som var och en endast kan vara alfanumeriskt eller bindestreck"
+
+msgid "Name \"{label}\" must not start or end with a hyphen"
+msgstr "Namn ”{label}” får inte börja eller sluta med ett bindestreck"
+
+msgid "Name is duplicated. Choose other name."
+msgstr "Namnet dupliceras. Välj ett annat namn."
+
+msgid "Name is not valid."
+msgstr "Namnet är inte giltigt."
+
+msgid "Name is required field."
+msgstr "Namnet är obligatoriskt fält."
+
+msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr "Namnet är för kort, namnen ska vara minst två alfanumeriska tecken."
+
+msgid "Name must consist of lower case alphanumeric characters."
+msgstr "Namnet måste bestå av gemener alfanumeriska tecken."
+
+msgid "Name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name', or '123-abc')"
+msgstr "Namnet måste bestå av alfanumeriska gemener eller \"-\", och måste börja och sluta med ett alfanumeriskt tecken (t.ex. \"mitt namn\" eller \"123-abc\")"
+
+msgid "Name of your organization."
+msgstr "Namn på din organisation."
+
+msgid "Name should consist of latin symbols, numbers and dashes."
+msgstr "Namnet ska bestå av latinska symboler, siffror och bindestreck."
+
+msgid "Name should consist of latin symbols and numbers."
+msgstr "Namnet ska bestå av latinska symboler och siffror."
+
+msgid "Name should contain at least 3 symbols."
+msgstr "Namnet ska innehålla minst 3 symboler."
+
+msgid "Namespace"
+msgstr "Namnområde"
+
+msgid "Namespace should be unique."
+msgstr "Namnområdet ska vara unikt."
+
+msgid "Native name"
+msgstr "Ursprungligt namn"
+
+msgid "Network MTU has been updated."
+msgstr "Nätverk MTU har uppdaterats."
+
+msgid "Network adapters"
+msgstr "Nätverkskort"
+
+msgid "New flavor"
+msgstr "Ny smak"
+
+msgid "New limit"
+msgstr "Ny gräns"
+
+msgid "New plan"
+msgstr "Ny plan"
+
+msgid "New size"
+msgstr "Ny storlek"
+
+msgid "Next hop (IP)"
+msgstr "Nästa hopp (IP)"
+
+msgid "Next trigger at"
+msgstr "Nästa utlösare på"
+
+msgid "No, continue using current email"
+msgstr "Nej, fortsätt att använda aktuell e-post"
+
+msgid "No access info"
+msgstr "Ingen åtkomstinformation"
+
+msgid "No access info."
+msgstr "Ingen åtkomstinformation."
+
+msgid "No countries"
+msgstr "Inga länder"
+
+msgid "No division types"
+msgstr "Inga divisionstyper"
+
+msgid "No divisions"
+msgstr "Inga divisioner"
+
+msgid "No entries to show here"
+msgstr "Inga poster att visa här"
+
+msgid "No invoice data available."
+msgstr "Inga fakturadata tillgängliga."
+
+msgid "No offerings"
+msgstr "Inga erbjudanden"
+
+msgid "No organizations"
+msgstr "Inga organisationer"
+
+msgid "No projects"
+msgstr "Inga projekt"
+
+msgid "No projects are assigned to this user."
+msgstr "Inga projekt tilldelas den här användaren."
+
+msgid "No providers"
+msgstr "Inga leverantörer"
+
+msgid "No service providers"
+msgstr "Inga tjänsteleverantörer"
+
+msgid "No users"
+msgstr "Inga användare"
+
+msgid "Node"
+msgstr "Nod"
+
+msgid "Node has been created."
+msgstr "Nod har skapats."
+
+msgid "Node plan"
+msgstr "Nodplan"
+
+msgid "Nodes"
+msgstr "Noder"
+
+msgid "Not a service provider."
+msgstr "Inte en tjänsteleverantör."
+
+msgid "Not running accounting"
+msgstr "Körs inte redovisning"
+
+msgid "Note that this virtual machine will not be charged separately for {organization}."
+msgstr "Observera att den här virtuella datorn inte debiteras separat för {organization}."
+
+msgid "Note that this volume will not be charged separately for {organization}."
+msgstr "Observera att denna volym inte debiteras separat för {organization}."
+
+msgid "Notification can be sent only for created invoice."
+msgstr "Meddelande kan endast skickas för en skapad faktura."
+
+msgid "Notification has been created."
+msgstr "Meddelandet har skapats."
+
+msgid "Notification has been updated."
+msgstr "Meddelandet har uppdaterats."
+
+msgid "Notification method"
+msgstr "Anmälningsmetod"
+
+msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr "Meddelanden gör det möjligt att informeras när en viss händelse har inträffat."
+
+msgid "Notifications has been sent to {count} users."
+msgstr "Meddelanden har skickats till {count} användare."
+
+msgid "Number of CPU cores per socket"
+msgstr "Antal CPU-kärnor per sockel"
+
+msgid "Number of CPU cores should be multiple of cores per socket."
+msgstr "Antal CPU-kärnor bör vara flera kärnor per socket."
+
+msgid "Number of control plane nodes"
+msgstr "Antal noder i kontrollplanet"
+
+msgid "Number of cores in a VM"
+msgstr "Antal kärnor i en VM"
+
+msgid "Number of created instances"
+msgstr "Antal skapade instanser"
+
+msgid "Number of etcd nodes"
+msgstr "Antal etcd-noder"
+
+msgid "Number of running instances"
+msgstr "Antal instanser som körs"
+
+msgid "Number of worker nodes"
+msgstr "Antal arbetsnoder"
+
+msgid "Object is not found."
+msgstr "Objektet hittades inte."
+
+msgid "Offering components"
+msgstr "Erbjudande komponenter"
+
+msgid "Offering configuration"
+msgstr "Erbjuder konfiguration"
+
+msgid "Offering details"
+msgstr "Information om erbjudandet"
+
+msgid "Offering doesn't have images."
+msgstr "Erbjudandet har inga bilder."
+
+msgid "Offering has been created."
+msgstr "Erbjudandet har skapats."
+
+msgid "Offering has been imported."
+msgstr "Erbjudandet har importerats."
+
+msgid "Offering has been updated."
+msgstr "Erbjudandet har uppdaterats."
+
+msgid "Offering images"
+msgstr "Erbjuder bilder"
+
+msgid "Offering images ({name})"
+msgstr "Erbjudande bilder ({name})"
+
+msgid "Offering is not configured yet."
+msgstr "Erbjudandet är inte konfigurerat ännu."
+
+msgid "Offering logo"
+msgstr "Erbjudande logotyp"
+
+msgid "Offering name"
+msgstr "Erbjuder namn"
+
+msgid "Offering permissions"
+msgstr "Erbjuder behörigheter"
+
+msgid "Offering state has been updated."
+msgstr "Erbjudande tillstånd har uppdaterats."
+
+msgid "Offering type"
+msgstr "Typ av erbjudande"
+
+msgid "Offerings images"
+msgstr "Erbjudanden bilder"
+
+msgid "One-time on plan switch"
+msgstr "Engångsförseande på planbrytare"
+
+msgid "Only a created invoice can be marked as paid."
+msgstr "Endast en skapad faktura kan markeras som betald."
+
+msgid "Only customer owner or staff can invite users."
+msgstr "Endast kundägare eller personal kan bjuda in användare."
+
+msgid "Only pending and expired invitations can be sent again."
+msgstr "Endast väntande och utgångna inbjudningar kan skickas igen."
+
+msgid "Only pending invitation can be canceled."
+msgstr "Endast väntande inbjudan kan avbrytas."
+
+msgid "Only staff and organization users are allowed to open console."
+msgstr "Endast användare av personal och organisation får öppna konsolen."
+
+msgid "Only staff can manage OpenStack tenant."
+msgstr "Endast personal kan hantera OpenStack-hyresgästen."
+
+msgid "Only staff can remove organization."
+msgstr "Endast personal kan ta bort organisationen."
+
+msgid "Only staff users are allowed to perform this action."
+msgstr "Endast personalanvändare får utföra den här åtgärden."
+
+msgid "OpenStack Images"
+msgstr "OpenStack-bilder"
+
+msgid "OpenStack Instance"
+msgstr "OpenStack-instans"
+
+msgid "OpenStack instance"
+msgstr "OpenStack-instans"
+
+msgid "OpenStack instance has been unlinked from Rancher node."
+msgstr "OpenStack-instansen har kopplats från Rancher-noden."
+
+msgid "OpenStack networks has been created."
+msgstr "OpenStack-nätverk har skapats."
+
+msgid "OpenStack package"
+msgstr "OpenStack-paket"
+
+msgid "OpenStack subnet"
+msgstr "OpenStack-undernät"
+
+msgid "OpenStack tenant"
+msgstr "OpenStack tenant"
+
+msgid "OpenStack volume"
+msgstr "OpenStack-volym"
+
+msgid "Open console"
+msgstr "Öppna konsol"
+
+msgid "Open in Service Desk"
+msgstr "Öppna i Service Desk"
+
+msgid "Open support portal"
+msgstr "Öppna supportportalen"
+
+msgid "Opened by {user} at {date}"
+msgstr "Öppnat av {user} på {date}"
+
+msgid "Opened by {user} from {organization} at {date}"
+msgstr "Öppnad av {user} från {organization} på {date}"
+
+msgid "Options are invalid."
+msgstr "Alternativ är ogiltiga."
+
+msgid "Or use social login"
+msgstr "Eller använd social inloggning"
+
+msgid "Order has been approved."
+msgstr "Beställningen har godkänts."
+
+msgid "Order has been rejected."
+msgstr "Beställningen har avvisats."
+
+msgid "Order has been submitted."
+msgstr "Beställning har skickats."
+
+msgid "Order item details"
+msgstr "Beställningsinformation"
+
+msgid "Order item has been approved."
+msgstr "Beställningsartikeln har godkänts."
+
+msgid "Order item has been rejected."
+msgstr "Orderartikeln har avvisats."
+
+msgid "Order item has cancel has been scheduled."
+msgstr "Orderartikeln har annullerat har schemalagts."
+
+msgid "Organization actions"
+msgstr "Organisationens åtgärder"
+
+msgid "Organization contains invoices. Please remove them first."
+msgstr "Organisationen innehåller fakturor. Ta bort dem först."
+
+msgid "Organization contains projects. Please remove them first."
+msgstr "Organisationen innehåller projekt. Ta bort dem först."
+
+msgid "Organization events"
+msgstr "Organisation evenemang"
+
+msgid "Organization has been created."
+msgstr "Organisation har skapats."
+
+msgid "Organization has been updated successfully."
+msgstr "Organisationen har uppdaterats."
+
+msgid "Organization has signed a fixed price agreement"
+msgstr "Organisationen har tecknat ett fast pris avtal"
+
+msgid "Organization owner"
+msgstr "Organisationens ägare"
+
+msgid "Organization owner role expires on"
+msgstr "Organisationens ägarroll upphör att gälla på"
+
+msgid "Organization registration code"
+msgstr "Organisationens registreringsnummer"
+
+msgid "Organization removal"
+msgstr "Organisationens borttagning"
+
+msgid "Organization role"
+msgstr "Organisationens roll"
+
+msgid "Organization roles"
+msgstr "Organisationens roller"
+
+msgid "Organization update"
+msgstr "Organisationsuppdatering"
+
+msgid "Organization users list"
+msgstr "Organisationens användarlista"
+
+msgid "Organization workspace"
+msgstr "Organisation arbetsyta"
+
+msgid "Organization {customer_link} has been updated."
+msgstr "Organisation {customer_link} har uppdaterats."
+
+msgid "Organization {customer_name} has been deleted."
+msgstr "Organisationen {customer_name} har tagits bort."
+
+msgid "Organizations by divisions"
+msgstr "Organisationer efter divisioner"
+
+msgid "Organizations divisions"
+msgstr "Organisationsavdelningar"
+
+msgid "Overview of {organization} organization"
+msgstr "Översikt över organisationen {organization}"
+
+msgid "Overview of {project} project"
+msgstr "Översikt över {project}-projektet"
+
+msgid "Owned organizations"
+msgstr "Ägda organisationer"
+
+msgid "PID"
+msgstr "PID"
+
+msgid "Page is not found."
+msgstr "Sidan hittades inte."
+
+msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
+msgstr "Sidan hittades inte. Du har antingen angett ogiltig URL eller försöker nå inaktiverad funktion."
+
+msgid "Password has been changed for user {affected_user_link}."
+msgstr "Lösenordet har ändrats för användaren {affected_user_link}."
+
+msgid "Past time slots are not allowed."
+msgstr "Tidigare tidsluckor är inte tillåtna."
+
+msgid "Pause offering"
+msgstr "Pausa erbjudandet"
+
+msgid "Pay invoice"
+msgstr "Betala faktura"
+
+msgid "Payment events"
+msgstr "Betalning händelser"
+
+msgid "Payment for {customer_link} has been approved."
+msgstr "Betalning för {customer_link} har godkänts."
+
+msgid "Payment for {customer_link} has been cancelled."
+msgstr "Betalningen för {customer_link} har annullerats."
+
+msgid "Payment gateways (monthly)"
+msgstr "Betalningsgateways (månadsvis)"
+
+msgid "Payment has been created."
+msgstr "Betalning har skapats."
+
+msgid "Payment has been deleted."
+msgstr "Betalningen har tagits bort."
+
+msgid "Payment has been processed successfully."
+msgstr "Betalningen har bearbetats framgångsrikt."
+
+msgid "Payment has been updated."
+msgstr "Betalningen har uppdaterats."
+
+msgid "Payment is being processed, please wait."
+msgstr "Betalningen behandlas, vänta."
+
+msgid "Payment profile"
+msgstr "Betalningsprofil"
+
+msgid "Payment profile defines how invoices are processed."
+msgstr "Betalningsprofil definierar hur fakturor bearbetas."
+
+msgid "Payment profile has been created."
+msgstr "Betalningsprofilen har skapats."
+
+msgid "Payment profile has been created and enabled."
+msgstr "Betalningsprofil har skapats och aktiverats."
+
+msgid "Payment profile has been enabled."
+msgstr "Betalningsprofilen har aktiverats."
+
+msgid "Payment profile has been removed."
+msgstr "Betalningsprofilen har tagits bort."
+
+msgid "Payment profile has been updated."
+msgstr "Betalningsprofilen har uppdaterats."
+
+msgid "Payment profiles"
+msgstr "Betalningsprofiler"
+
+msgid "Payments connected with an active payment profile."
+msgstr "Betalningar kopplade till en aktiv betalningsprofil."
+
+msgid "Payments list"
+msgstr "Betalningslista"
+
+msgid "Pemission has been revoked."
+msgstr "Pemission har återkallats."
+
+msgid "Pending approval for changing of"
+msgstr "Väntar på godkännande för ändring av"
+
+msgid "Pending approval for creation of"
+msgstr "Väntar på godkännande för skapande av"
+
+msgid "Pending approval for removal of"
+msgstr "Väntar på godkännande för avlägsnande av"
+
+msgid "Per half month"
+msgstr "Per halv månad"
+
+msgid "Perform local logout"
+msgstr "Utför lokal utloggning"
+
+msgid "Perform review"
+msgstr "Utför granskning"
+
+msgid "Performed by"
+msgstr "Utförd av"
+
+msgid "Periods"
+msgstr "Perioder"
+
+msgid "Permanent"
+msgstr "Permanent"
 
 msgid "(VAT is not included)"
 msgstr "(Moms ingår inte)"
