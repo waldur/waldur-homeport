@@ -12,6 +12,8 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { TABLE_MY_ORDERS } from './constants';
 import { OrderItemslistTablePlaceholder } from './OrderItemsListPlaceholder';
+import { OrderItemStateCell } from './OrderItemStateCell';
+import { OrderItemTypeCell } from './OrderItemTypeCell';
 import { ResourceNameField } from './ResourceNameField';
 import { RowNameField } from './RowNameField';
 import { ShowRequestButton } from './ShowRequestButton';
@@ -36,11 +38,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Type'),
-      render: ({ row }) => row.type,
+      render: OrderItemTypeCell,
     },
     {
       title: translate('State'),
-      render: ({ row }) => row.state,
+      render: OrderItemStateCell,
     },
     {
       title: translate('Plan'),
