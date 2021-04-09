@@ -3,6 +3,7 @@ import moment from 'moment-timezone';
 import { useRef, useState, useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { removeWeekends } from '@waldur/booking/components/calendar/utils';
 import { CURSOR_NOT_ALLOWED_CLASSNAME } from '@waldur/booking/constants';
 import { BookingProps } from '@waldur/booking/types';
 import {
@@ -86,7 +87,14 @@ export const LazyCalendarComponent: FC<CalendarComponentProps> = (props) => {
       return;
     }
     dispatch(showSuccess(translate('Time slot has been added.')));
-    return props.addEventCb(event);
+    if (!props.options.weekends) {
+      const splitEvents = removeWeekends(event);
+      splitEvents.forEach((splitEvent) => {
+        props.addEventCb(splitEvent);
+      });
+    } else {
+      props.addEventCb(event);
+    }
   };
 
   const updateEvent = (arg) => {
