@@ -9676,7 +9676,7 @@ msgid "You have no quotas yet."
 msgstr ""
 
 #: src/openstack/openstack-instance/PublicKeyGroup.tsx
-msgid "You have not added any SSH keys to your"
+msgid "You have not added any SSH keys to your <Link>profile</Link>."
 msgstr ""
 
 #: src/marketplace/cart/ForwardButton.tsx
@@ -9984,10 +9984,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
 #: src/vmware/PortsList.tsx
 msgid "ports"
-msgstr ""
-
-#: src/openstack/openstack-instance/PublicKeyGroup.tsx
-msgid "profile."
 msgstr ""
 
 #: src/invitations/InvitationMessage.tsx

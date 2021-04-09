@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import { Link } from '@waldur/core/Link';
 import { SelectDialogField } from '@waldur/form/SelectDialogField';
-import { translate } from '@waldur/i18n';
+import { formatJsx, translate } from '@waldur/i18n';
 
 import { CreateResourceFormGroup } from '../CreateResourceFormGroup';
 
@@ -26,12 +26,11 @@ export const PublicKeyGroup: FunctionComponent<any> = (props) => (
           choices={props.sshKeys}
           input={fieldProps.input}
           preSelectFirst={true}
-          emptyMessage={
-            <>
-              {translate(`You have not added any SSH keys to your`)}{' '}
-              <Link state="profile.keys">{translate('profile.')}</Link>
-            </>
-          }
+          emptyMessage={translate(
+            'You have not added any SSH keys to your <Link>profile</Link>.',
+            { Link: (s) => <Link state="profile.keys">{s}</Link> },
+            formatJsx,
+          )}
         />
       )}
     />
