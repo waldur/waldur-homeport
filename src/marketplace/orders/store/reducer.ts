@@ -1,5 +1,3 @@
-import { translate } from '@waldur/i18n';
-
 import { OrderItemDetailsType, StatusChange } from '../types';
 
 import * as constants from './constants';
@@ -9,22 +7,10 @@ const INITIAL_STATE = {
     approving: false,
     rejecting: false,
   },
-  tableFilter: {
-    stateOptions: [
-      { value: 'pending', label: translate('Pending') },
-      { value: 'executing', label: translate('Executing') },
-      { value: 'done', label: translate('Done') },
-      { value: 'erred', label: translate('Erred') },
-      { value: 'terminated', label: translate('Terminated') },
-    ],
-  },
   pendingOrders: [],
 };
 
 interface OrderState {
-  tableFilter: {
-    stateOptions: { value: string; label: string }[];
-  };
   stateChangeStatus: StatusChange;
   pendingOrders: OrderItemDetailsType[];
 }

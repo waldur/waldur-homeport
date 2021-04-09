@@ -2092,7 +2092,7 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
-#: src/marketplace/orders/store/reducer.ts
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Done"
 msgstr ""
 
@@ -2336,7 +2336,7 @@ msgstr ""
 msgid "Environment variables"
 msgstr ""
 
-#: src/marketplace/orders/store/reducer.ts
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
 msgstr ""
@@ -2464,7 +2464,7 @@ msgstr ""
 msgid "Excel"
 msgstr ""
 
-#: src/marketplace/orders/store/reducer.ts
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Executing"
 msgstr ""
 
@@ -4964,7 +4964,7 @@ msgstr ""
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
 #: src/invoices/list/InvoicesFilter.tsx
-#: src/marketplace/orders/store/reducer.ts
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Pending"
 msgstr ""
 
@@ -7594,7 +7594,7 @@ msgstr ""
 msgid "Terminate resource {resourceName}"
 msgstr ""
 
-#: src/marketplace/orders/store/reducer.ts
+#: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminated"
 msgstr ""
