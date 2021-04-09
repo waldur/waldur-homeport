@@ -444,6 +444,12 @@ msgstr ""
 msgid "Affected resource"
 msgstr ""
 
+#: src/customer/popover/CustomerUsersList.tsx
+#: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserEditForm.tsx
+msgid "Affiliations"
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
 msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
 msgstr ""

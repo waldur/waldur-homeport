@@ -137,6 +137,13 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
           value={props.user.job_title}
         />
       )}
+      {Array.isArray(props.user.affiliations) &&
+      props.user.affiliations.length > 0 ? (
+        <StaticField
+          label={props.translate('Affiliations')}
+          value={props.user.affiliations.join(', ')}
+        />
+      ) : null}
       {props.isVisibleForSupportOrStaff && (
         <StringField
           label={translate('Description')}
