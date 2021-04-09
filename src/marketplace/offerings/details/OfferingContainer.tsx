@@ -16,6 +16,7 @@ import { useTitle } from '@waldur/navigation/title';
 
 import { OfferingBookingTab } from './OfferingBookingTab';
 import { OfferingDetails } from './OfferingDetails';
+import { OfferingUsersTab } from './OfferingUsersTab';
 import { PlanUsageList } from './PlanUsageList';
 
 function getBreadcrumbs(offering: Offering): BreadcrumbItem[] {
@@ -65,6 +66,11 @@ async function loadData(offering_uuid: string) {
           <OfferingResourcesList offering={offering} />
         </>
       ),
+    },
+    {
+      visible: true,
+      title: translate('Users'),
+      component: () => <OfferingUsersTab offering_uuid={offering.uuid} />,
     },
   ].filter((tab) => tab.visible);
   return { offering, tabs };

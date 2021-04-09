@@ -1623,6 +1623,7 @@ msgstr ""
 #: src/invitations/InvitationsList.tsx
 #: src/issues/notifications/NotificationsList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
+#: src/marketplace/offerings/details/OfferingUsersTab.tsx
 #: src/marketplace/orders/OrdersList.tsx
 #: src/marketplace/orders/item/details/OrderItemDetailsHeader.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
@@ -3948,6 +3949,7 @@ msgstr ""
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
+#: src/marketplace/offerings/details/OfferingUsersTab.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
@@ -9275,6 +9277,7 @@ msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
 #: src/issues/workspace/IssueNavigationService.ts
+#: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/project/team/ProjectTeam.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/slurm/tabs.ts
@@ -9917,6 +9920,10 @@ msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx
 msgid "offering resources"
+msgstr ""
+
+#: src/marketplace/offerings/details/OfferingUsersTab.tsx
+msgid "offering users"
 msgstr ""
 
 #: src/marketplace/landing/CategoryCard.tsx
