@@ -13,12 +13,12 @@ const AnonymousLayout = lazyComponent(
 );
 
 const TosPage = () => {
-  useTitle('Terms of service');
+  useTitle('Terms of Service');
   return <TemplateComponent url="views/tos/index.html" />;
 };
 
 const FreeipaPage = () => {
-  useTitle('Terms of service');
+  useTitle('Terms of Service');
   return <TemplateComponent url="views/tos/freeipa.html" />;
 };
 

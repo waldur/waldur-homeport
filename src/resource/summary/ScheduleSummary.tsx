@@ -18,7 +18,7 @@ export const PureScheduleSummary: React.FC<ResourceSummaryProps<Schedule>> = (
     <>
       <PureResourceSummaryBase {...props} />
       <Field label={translate('Schedule')} value={formatSchedule(props)} />
-      <Field label={translate('Timezone')} value={resource.timezone} />
+      <Field label={translate('Time zone')} value={resource.timezone} />
       <Field
         label={translate('Is active')}
         value={resource.is_active ? translate('Yes') : translate('No')}

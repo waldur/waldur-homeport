@@ -31,7 +31,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     },
     {
       visible: !!props.offering.terms_of_service,
-      title: translate('Terms of service'),
+      title: translate('Terms of Service'),
       component: () => <FormattedHtml html={props.offering.terms_of_service} />,
     },
     {

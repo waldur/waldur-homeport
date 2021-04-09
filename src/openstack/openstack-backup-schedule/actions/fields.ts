@@ -21,7 +21,7 @@ export const getFields = () => [
   },
   {
     name: 'timezone',
-    label: translate('Timezone'),
+    label: translate('Time zone'),
     type: 'timezone',
   },
   {

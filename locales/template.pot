@@ -7616,16 +7616,13 @@ msgstr ""
 msgid "Terminating"
 msgstr ""
 
+#: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 #: src/navigation/AppFooter.tsx
 msgid "Terms of Service"
-msgstr ""
-
-#: src/marketplace/details/OfferingTabs.tsx
-msgid "Terms of service"
 msgstr ""
 
 #: src/core/CopyToClipboardButton.tsx
@@ -7803,12 +7800,9 @@ msgstr ""
 msgid "There is no activity yet."
 msgstr ""
 
+#: src/core/validators.ts
 #: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
 #: src/marketplace/details/OfferingConfigurator.tsx
-msgid "This field is required"
-msgstr ""
-
-#: src/core/validators.ts
 msgid "This field is required."
 msgstr ""
 
@@ -7854,17 +7848,14 @@ msgid "Time slots"
 msgstr ""
 
 #: src/booking/components/TimeZoneGroup.tsx
+#: src/openstack/openstack-backup-schedule/actions/fields.ts
+#: src/resource/summary/ScheduleSummary.tsx
 msgid "Time zone"
 msgstr ""
 
 #: src/events/BaseEventsList.tsx
 #: src/events/EventDetailsTable.tsx
 msgid "Timestamp"
-msgstr ""
-
-#: src/openstack/openstack-backup-schedule/actions/fields.ts
-#: src/resource/summary/ScheduleSummary.tsx
-msgid "Timezone"
 msgstr ""
 
 #: src/booking/components/modal/CalendarEventModal.tsx
