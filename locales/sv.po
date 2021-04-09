@@ -3875,5 +3875,512 @@ msgstr "Det gick inte att ta bort logotypen."
 msgid "Unable to remove payment profile."
 msgstr "Det gick inte att ta bort betalningsprofilen."
 
+msgid "Unable to report security incident."
+msgstr "Det gick inte att rapportera säkerhetsincidenter."
+
+msgid "Unable to resend invitation."
+msgstr "Det gick inte att skicka inbjudan igen."
+
+msgid "Unable to resize droplet."
+msgstr "Det gick inte att ändra storlek på droplet."
+
+msgid "Unable to restore VM snapshot."
+msgstr "Det går inte att återställa VM-snapshot."
+
+msgid "Unable to restore volume snapshot."
+msgstr "Det gick inte att återställa ögonblicksbilden för volymen."
+
+msgid "Unable to retype volume."
+msgstr "Det gick inte att skriva om volymen."
+
+msgid "Unable to save location."
+msgstr "Det gick inte att spara plats."
+
+msgid "Unable to save user."
+msgstr "Det går inte att spara användare."
+
+msgid "Unable to send feedback."
+msgstr "Det gick inte att skicka feedback."
+
+msgid "Unable to send record notification."
+msgstr "Det går inte att skicka postmeddelande."
+
+msgid "Unable to set backend ID."
+msgstr "Det går inte att ställa in backend-ID."
+
+msgid "Unable to show console log."
+msgstr "Det går inte att visa konsolloggen."
+
+msgid "Unable to submit answers."
+msgstr "Det går inte att skicka svar."
+
+msgid "Unable to submit empty comment."
+msgstr "Det gick inte att skicka tom kommentar."
+
+msgid "Unable to submit limits change request."
+msgstr "Det går inte att skicka begäran om ändring av gränser."
+
+msgid "Unable to submit order."
+msgstr "Det gick inte att skicka beställningen."
+
+msgid "Unable to submit plan change request."
+msgstr "Det gick inte att skicka begäran om planändring."
+
+msgid "Unable to submit report."
+msgstr "Det gick inte att skicka rapport."
+
+msgid "Unable to submit resource termination request."
+msgstr "Det gick inte att skicka resursavslutningsbegäran."
+
+msgid "Unable to submit usage report."
+msgstr "Det går inte att skicka användningsrapport."
+
+msgid "Unable to sync FreeIPA profile."
+msgstr "Det gick inte att synkronisera FreeIPA-profilen."
+
+msgid "Unable to sync Google Calendar."
+msgstr "Det gick inte att synkronisera Google Kalender."
+
+msgid "Unable to synchronise resource."
+msgstr "Det gick inte att synkronisera resursen."
+
+msgid "Unable to unlink instance from node."
+msgstr "Det går inte att ta bort länken till instansen från noden."
+
+msgid "Unable to unlink invoice from the payment."
+msgstr "Det går inte att koppla från fakturan från betalningen."
+
+msgid "Unable to unpublish Google Calendar."
+msgstr "Det gick inte att avpublicera Google Kalender."
+
+msgid "Unable to update YAML."
+msgstr "Det gick inte att uppdatera YAML."
+
+msgid "Unable to update allowed address pairs."
+msgstr "Det gick inte att uppdatera tillåtna adresspar."
+
+msgid "Unable to update enabled checklists."
+msgstr "Det gick inte att uppdatera aktiverade checklistor."
+
+msgid "Unable to update floating IPs."
+msgstr "Det gick inte att uppdatera flytande IPs."
+
+msgid "Unable to update horizontal pod autoscaler."
+msgstr "Det går inte att uppdatera horisontell pod autoscaler."
+
+msgid "Unable to update internal IPs of OpenStack instance."
+msgstr "Det gick inte att uppdatera interna IP-adresser för OpenStack-instansen."
+
+msgid "Unable to update network MTU."
+msgstr "Det går inte att uppdatera MTU-nätverket."
+
+msgid "Unable to update notification."
+msgstr "Det gick inte att uppdatera aviseringen."
+
+msgid "Unable to update offering"
+msgstr "Det gick inte att uppdatera erbjudandet"
+
+msgid "Unable to update offering state."
+msgstr "Det gick inte att uppdatera erbjudna tillstånd."
+
+msgid "Unable to update organization."
+msgstr "Det gick inte att uppdatera organisationen."
+
+msgid "Unable to update payment."
+msgstr "Det gick inte att uppdatera betalningen."
+
+msgid "Unable to update payment profile."
+msgstr "Det gick inte att uppdatera betalningsprofilen."
+
+msgid "Unable to update provider."
+msgstr "Det går inte att uppdatera leverantören."
+
+msgid "Unable to update security group rules."
+msgstr "Det gick inte att uppdatera säkerhetsgruppsregler."
+
+msgid "Unable to update security groups of OpenStack instance."
+msgstr "Det går inte att uppdatera säkerhetsgrupper för OpenStack-instans."
+
+msgid "Unable to update shopping cart item."
+msgstr "Det gick inte att uppdatera kundvagnsartikeln."
+
+msgid "Unable to update static routes."
+msgstr "Det gick inte att uppdatera statiska vägar."
+
+msgid "Unable to update user."
+msgstr "Det gick inte att uppdatera användaren."
+
+msgid "Unable to upload attachment."
+msgstr "Det gick inte att ladda upp bilagan."
+
+msgid "Unable to upload logo."
+msgstr "Det gick inte att ladda upp logotypen."
+
+msgid "Unable to validate invitation token."
+msgstr "Det gick inte att validera inbjudningstoken."
+
+msgid "Unexpected exception happened during login process."
+msgstr "Oväntat undantag hände under inloggningsprocessen."
+
+msgid "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues."
+msgstr "Tyvärr misslyckades anslutningen till servern. Kontrollera om du kan ansluta till {apiEndpoint} från din webbläsare och kontakta support om felet kvarstår."
+
+msgid "Unique ID of a resource created via Marketplace"
+msgstr "Unikt ID för en resurs som skapats via Marketplace"
+
+msgid "Unique ID of a resource in a backend system"
+msgstr "Unikt ID för en resurs i ett backend-system"
+
+msgid "Unique ID of a resource within management plugin"
+msgstr "Unikt ID för en resurs inom hanteringsplugin"
+
+msgid "Unlink instance"
+msgstr "Avlänka instans"
+
+msgid "Unlink invoice"
+msgstr "Ta bort länkningsfaktura"
+
+msgid "Unpause"
+msgstr "Avpausa"
+
+msgid "Unpublish as Google Calendar"
+msgstr "Avpublicera som Google Kalender"
+
+msgid "Update floating IPs"
+msgstr "Uppdatera flytande IPs"
+
+msgid "Update floating IPs in {name} virtual machine"
+msgstr "Uppdatera flytande IP-adresser i {name} virtuell maskin"
+
+msgid "Update horizontal pod autoscaler"
+msgstr "Uppdatera horisontell pod autoscaler"
+
+msgid "Update internal IPs for OpenStack instance {name}"
+msgstr "Uppdatera interna IPs för OpenStack-instansen {name}"
+
+msgid "Update limits for an existing resource"
+msgstr "Uppdateringsgränser för en befintlig resurs"
+
+msgid "Update notification"
+msgstr "Uppdatera meddelande"
+
+msgid "Update of OpenStack instance internal IPs has been scheduled."
+msgstr "Uppdatering av OpenStack-instansinterna IPs har schemalagts."
+
+msgid "Update of OpenStack instance security groups has been scheduled."
+msgstr "Uppdatering av säkerhetsgrupper för OpenStack-instanser har schemalagts."
+
+msgid "Update payment"
+msgstr "Uppdatera betalning"
+
+msgid "Update payment profile"
+msgstr "Uppdatera betalningsprofil"
+
+msgid "Update plan for an existing resource"
+msgstr "Uppdatera plan för en befintlig resurs"
+
+msgid "Update project details"
+msgstr "Uppdatera projektinformation"
+
+msgid "Update security groups"
+msgstr "Uppdatera säkerhetsgrupper"
+
+msgid "Update security groups for OpenStack instance {name}"
+msgstr "Uppdatera säkerhetsgrupper för OpenStack-instans {name}"
+
+msgid "Update service settings"
+msgstr "Uppdatera tjänstinställningar"
+
+msgid "Update static routes"
+msgstr "Uppdatera statiska vägar"
+
+msgid "Update your organization name, logo, accounting and contact details."
+msgstr "Uppdatera organisationens namn, logotyp, redovisning och kontaktuppgifter."
+
+msgid "Updating floating IPs"
+msgstr "Uppdatera flytande IPs"
+
+msgid "Updating internal IPs"
+msgstr "Uppdatera interna IPs"
+
+msgid "Updating offering {name}"
+msgstr "Uppdaterar erbjudandet {name}"
+
+msgid "Updating quotas"
+msgstr "Uppdaterar kvoter"
+
+msgid "Updating rules"
+msgstr "Uppdaterar regler"
+
+msgid "Updating security groups"
+msgstr "Uppdaterar säkerhetsgrupper"
+
+msgid "Upload new"
+msgstr "Ladda upp nytt"
+
+msgid "Usage-based"
+msgstr "Användningsbaserad"
+
+msgid "Usage information is not available."
+msgstr "Användningsinformation är inte tillgänglig."
+
+msgid "Usage overview"
+msgstr "Översikt över användning"
+
+msgid "Usage report has been submitted."
+msgstr "Användningsrapport har skickats."
+
+msgid "Usage reports"
+msgstr "Användningsrapporter"
+
+msgid "Usages"
+msgstr "Användningar"
+
+msgid "Use an existing namespace"
+msgstr "Använd ett befintligt namnområde"
+
+msgid "Use sudo"
+msgstr "Använd sudo"
+
+msgid "User could not been updated"
+msgstr "Användaren kunde inte uppdateras"
+
+msgid "User dashboard"
+msgstr "Instrumentpanel för användare"
+
+msgid "User events this month"
+msgstr "Användarhändelser den här månaden"
+
+msgid "User has been activated."
+msgstr "Användaren har aktiverats."
+
+msgid "User has been deactivated."
+msgstr "Användaren har avaktiverats."
+
+msgid "User has been logged out. You will be redirected to the login page soon."
+msgstr "Användaren har loggat ut. Du kommer snart att omdirigeras till inloggningssidan."
+
+msgid "User has been updated"
+msgstr "Användaren har uppdaterats"
+
+msgid "User has been updated."
+msgstr "Användaren har uppdaterats."
+
+msgid "User input field #{index}"
+msgstr "Indatafält för användare #{index}"
+
+msgid "User management events"
+msgstr "Händelser för användarhantering"
+
+msgid "User status"
+msgstr "Användarstatus"
+
+msgid "User {affected_user_link} has been created."
+msgstr "Användaren {affected_user_link} har skapats."
+
+msgid "User {affected_user_name} has been deleted."
+msgstr "Användaren {affected_user_name} har tagits bort."
+
+msgid "User {user_link} authenticated successfully with Facebook."
+msgstr "Användaren {user_link} autentiserades framgångsrikt med Facebook."
+
+msgid "User {user_link} authenticated successfully with SAML2."
+msgstr "Användaren {user_link} autentiserades framgångsrikt med SAML2."
+
+msgid "User {user_link} authenticated successfully with Smart ID EE."
+msgstr "Användaren {user_link} verifierades framgångsrikt med Smart ID EE."
+
+msgid "User {user_link} authenticated successfully with username and password."
+msgstr "Användaren {user_link} verifierades framgångsrikt med användarnamn och lösenord."
+
+msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
+msgstr "Användaren {user_link} har tilldelat organisationsägarrollen i {customer_link} till {affected_user_link}."
+
+msgid "User {user_link} has granted organization support role in {customer_link} to {affected_user_link}."
+msgstr "Användaren {user_link} har tilldelat organisationsstödrollen i {customer_link} till {affected_user_link}."
+
+msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
+msgstr "Användaren {user_link} har tilldelat projektadministratörens roll i projektet {project_link} till {affected_user_link}."
+
+msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
+msgstr "Användaren {user_link} har tilldelat projektledaren roll i projektet {project_link} till {affected_user_link}."
+
+msgid "User {user_link} has granted role to {affected_user_link}."
+msgstr "Användaren {user_link} har tilldelat {affected_user_link} roll."
+
+msgid "User {user_link} has revoked organization owner {affected_user_link} from {customer_link}."
+msgstr "Användaren {user_link} har återkallat organisationsägaren {affected_user_link} från {customer_link}."
+
+msgid "User {user_link} has revoked organization support {affected_user_link} from {customer_link}."
+msgstr "Användaren {user_link} har återkallat organisationsstödet {affected_user_link} från {customer_link}."
+
+msgid "User {user_link} has revoked project administrator {affected_user_link} from project {project_link}."
+msgstr "Användaren {user_link} har återkallat projektadministratören {affected_user_link} från projektet {project_link}."
+
+msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
+msgstr "Användaren {user_link} har återkallat projektledaren {affected_user_link} från projektet {project_link}."
+
+msgid "User {user_link} has revoked {affected_user_link}."
+msgstr "Användaren {user_link} har återkallat {affected_user_link}."
+
+msgid "User {user_link} logged out successfully with SAML2."
+msgstr "Användaren {user_link} loggade ut med SAML2."
+
+msgid "Username prefix"
+msgstr "Användarnamn prefix"
+
+msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
+msgstr "Användarnamn kan innehålla bokstäver (a-z), siffror (0-9), bindestreck (-), understreck (_) och punkter (.)."
+
+msgid "VAT code"
+msgstr "MOMS-kod"
+
+msgid "VAT is included"
+msgstr "Moms ingår"
+
+msgid "VM name"
+msgstr "VM-namn"
+
+msgid "VM snapshot"
+msgstr "VM-ögonblicksbild"
+
+msgid "VM snapshot has been created."
+msgstr "VM-ögonblicksbild har skapats."
+
+msgid "VM snapshot restoration has been scheduled."
+msgstr "Återställning av VM-snapshot har schemalagts."
+
+msgid "VM snapshot schedule"
+msgstr "VM-ögonblicksbild schema"
+
+msgid "VM snapshot schedule caveats"
+msgstr "VM-ögonblicksbild schema varningar"
+
+msgid "VM snapshot schedule has been created."
+msgstr "VM-ögonblicksbild schema har skapats."
+
+msgid "VM snapshot schedules"
+msgstr "VM-ögonblicksbildscheman"
+
+msgid "VM snapshots"
+msgstr "VM-ögonblicksbilder"
+
+msgid "VM type overview"
+msgstr "Översikt över VM-typ"
+
+msgid "VMs"
+msgstr "VMs"
+
+msgid "VMware Tools"
+msgstr "VMware-verktyg"
+
+msgid "VPC RAM"
+msgstr "VPC RAM"
+
+msgid "VPC block storage size"
+msgstr "Storlek för VPC-blocklagring"
+
+msgid "VPC floating IP count"
+msgstr "VPC-flytande IP-antal"
+
+msgid "VPC instance count"
+msgstr "Antal VPC-instanser"
+
+msgid "VPC vCPU"
+msgstr "VPC vCPU"
+
+msgid "Valid runtime states for operation: {validStates}."
+msgstr "Giltiga körtidstillstånd för drift: {validStates}."
+
+msgid "Valid states for operation: {validStates}."
+msgstr "Giltiga tillstånd för drift: {validStates}."
+
+msgid "Value should be positive integer"
+msgstr "Värde ska vara positivt heltal"
+
+msgid "Value should not be greater than {limit}."
+msgstr "Värde bör inte vara större än {limit}."
+
+msgid "Value should not be lesser than {limit}."
+msgstr "Värde bör inte vara lägre än {limit}."
+
+msgid "Value should not be negative."
+msgstr "Värde bör inte vara negativt."
+
+msgid "Verifying email change"
+msgstr "Verifiera ändring av e-post"
+
+msgid "Very negative"
+msgstr "Mycket negativ"
+
+msgid "Very positive"
+msgstr "Mycket positivt"
+
+msgid "View YAML"
+msgstr "Visa YAML"
+
+msgid "Viewing image"
+msgstr "Visa bild"
+
+msgid "Virtual machines"
+msgstr "Virtuella maskiner"
+
+msgid "Virtual machines count"
+msgstr "Virtuella maskiner räknas"
+
+msgid "Volume has been attached to instance."
+msgstr "Volymen har kopplats till instansen."
+
+msgid "Volume has been extended."
+msgstr "Volymen har utökats."
+
+msgid "Volume has been retyped."
+msgstr "Volymen har skrivits om."
+
+msgid "Volume name"
+msgstr "Volym namn"
+
+msgid "Volume should be in OK state."
+msgstr "Volymen ska vara i OK-läge."
+
+msgid "Volume size"
+msgstr "Volym storlek"
+
+msgid "Volume snapshot has been created."
+msgstr "Volymögonblicksbild har skapats."
+
+msgid "Volume snapshot has been restored."
+msgstr "Volymögonblicksbild har återställts."
+
+msgid "Volume snapshots"
+msgstr "Volymögonblicksbilder"
+
+msgid "Volume type"
+msgstr "Volymtyp"
+
+msgid "Volume type storage limit is exceeded"
+msgstr "Volymtyp lagringsgräns har överskridits"
+
+msgid "Volumes count"
+msgstr "Volymer räknas"
+
+msgid "Webhook"
+msgstr "Webhook"
+
+msgid "Website URL"
+msgstr "Webbplats URL"
+
+msgid "Why do you need to remove organization with existing projects?"
+msgstr "Varför behöver du ta bort organisationen med befintliga projekt?"
+
+msgid "Why would you want to go away? Help us become better please!"
+msgstr "Varför skulle du vilja åka bort? Hjälp oss att bli bättre tack!"
+
+msgid "Worker"
+msgstr "Arbetstagare"
+
+msgid "Workload"
+msgstr "Arbetsbelastning"
+
 msgid "(VAT is not included)"
 msgstr "(Moms ingår inte)"
