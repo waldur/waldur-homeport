@@ -1472,6 +1472,7 @@ msgstr ""
 #: src/issues/list/IssueCreateButton.tsx
 #: src/issues/notifications/NotificationCreateButton.tsx
 #: src/issues/notifications/NotificationCreateDialog.tsx
+#: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupAction.tsx
 #: src/openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx
@@ -2093,6 +2094,7 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Done"
 msgstr ""
@@ -2337,6 +2339,7 @@ msgstr ""
 msgid "Environment variables"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Erred"
@@ -2465,6 +2468,7 @@ msgstr ""
 msgid "Excel"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Executing"
 msgstr ""
@@ -4966,6 +4970,7 @@ msgstr ""
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
 #: src/invoices/list/InvoicesFilter.tsx
+#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 msgid "Pending"
 msgstr ""
@@ -7583,6 +7588,7 @@ msgstr ""
 msgid "Tenant user username"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/marketplace/resources/terminate/TerminateAction.tsx
 msgid "Terminate"
@@ -7596,6 +7602,7 @@ msgstr ""
 msgid "Terminate resource {resourceName}"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/orders/item/list/OrderStateFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminated"
@@ -8917,6 +8924,7 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/update/OfferingUpdateDialog.tsx
+#: src/marketplace/orders/item/list/OrderItemTypeCell.tsx
 #: src/marketplace/orders/item/list/OrderTypeFilter.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx

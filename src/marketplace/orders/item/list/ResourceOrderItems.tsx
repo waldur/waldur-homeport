@@ -6,6 +6,9 @@ import { OrderItemDetailsLink } from '@waldur/marketplace/orders/item/details/Or
 import { IssueLinkRenderer } from '@waldur/marketplace/orders/item/list/IssueLinkRenderer';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
+import { OrderItemStateCell } from './OrderItemStateCell';
+import { OrderItemTypeCell } from './OrderItemTypeCell';
+
 interface ResourceOrderItemsProps {
   resource_uuid: string;
 }
@@ -30,7 +33,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Type'),
-      render: ({ row }) => row.type,
+      render: OrderItemTypeCell,
     },
     {
       title: translate('Created at'),
@@ -38,7 +41,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('State'),
-      render: ({ row }) => row.state,
+      render: OrderItemStateCell,
     },
   ];
 
