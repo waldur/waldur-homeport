@@ -335,6 +335,9 @@ msgstr "Arhiveeritud"
 msgid "Are you sure you want to cancel a {name}?"
 msgstr "Kas olete kindel, et soovite tühistada {name}?"
 
+msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
+msgstr "Kas olete kindel, et soovite kustutada veateatega olekus {name} {resourceType}? Kui kinnitate valiku, tehakse eemaldamise katse."
+
 msgid "Are you sure you would like to delete project {projectName}?"
 msgstr "Oled sa kindel, et soovid kustutada projekti {projectName}?"
 
@@ -677,6 +680,9 @@ msgstr "Kontaktid epost"
 msgid "Contact phone"
 msgstr "Kontakttelefon"
 
+msgid "Continue"
+msgstr "Jätka"
+
 msgid "Copy to clipboard"
 msgstr "Kopeeri lõikelauale"
 
@@ -799,6 +805,9 @@ msgstr "Andmesalvesti"
 
 msgid "Date"
 msgstr "Kuupäev"
+
+msgid "Date and time of incident"
+msgstr "Vahejuhtumi kuupäev ja kellaaeg"
 
 msgid "Date joined"
 msgstr "Liitumise kuupäev"
@@ -956,6 +965,18 @@ msgstr "Iga kasutusaruanne peab olema ühendatud arveldusplaaniga, et tagada raa
 msgid "Edit"
 msgstr "Muuda"
 
+msgid "Edit an availability"
+msgstr "Redigeeri saadavust"
+
+msgid "Edit attributes"
+msgstr "Muuda atribuute"
+
+msgid "Edit offering"
+msgstr "Muuda pakkumist"
+
+msgid "Edit permissions"
+msgstr "Redigeeri õigusi"
+
 msgid "Edit project member"
 msgstr "Muuda projekti liiget"
 
@@ -964,6 +985,9 @@ msgstr "Muuda meeskonna liiget"
 
 msgid "Email"
 msgstr "E-post"
+
+msgid "Email change request has been cancelled."
+msgstr "E-posti muutmise taotlus on tühistatud."
 
 msgid "Email has been updated."
 msgstr "E-post on uuendatud."
@@ -1223,6 +1247,15 @@ msgstr "Mine turuplatsile"
 msgid "Go to my profile"
 msgstr "Mine minu profiilile"
 
+msgid "Google Calendar has been published successfully."
+msgstr "Google'i kalender on edukalt avaldatud."
+
+msgid "Google Calendar has been synced successfully."
+msgstr "Google'i kalender on edukalt sünkroonitud."
+
+msgid "Google Calendar has been unpublished successfully."
+msgstr "Google'i kalendri avaldamine on tühistatud. "
+
 msgid "Got it!"
 msgstr "Korras!"
 
@@ -1283,6 +1316,9 @@ msgstr "IP protokoll"
 msgid "IP version"
 msgstr "IP versioon"
 
+msgid "I accept the <Link>Terms of Service</Link>."
+msgstr "Nõustun <Link> Teenusetingimustega <Link>."
+
 msgid "Image"
 msgstr "Pilt"
 
@@ -1297,6 +1333,9 @@ msgstr "Pilt"
 
 msgid "Import"
 msgstr "Impordi"
+
+msgid "Import offering"
+msgstr "Impordi pakkumine"
 
 msgid "Import resource"
 msgstr "Impordi ressurssi"
@@ -1354,6 +1393,9 @@ msgstr "Eksemplar on uuendatud."
 
 msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
 msgstr "Eksemplari ei ole veel ühendatud ühegi sisemise alamvõrguga. Palun ühenda see kõigepealt sisemisse alamvõrku."
+
+msgid "Instance should be OK, or erred. Please contact support."
+msgstr "Instants peaks olema OK või vigane. Palun võtke ühendust teenuse toega."
 
 msgid "Instance should be shutoff and OK or erred. Please contact support."
 msgstr "Eksemplar peaks olema välja lülitatud ja OK või väljastanud veate. Võtke ühendust tugiteenusega."
@@ -1463,6 +1505,9 @@ msgstr "Arvet pole veel PayPali saadetud."
 msgid "Invoice number"
 msgstr "Arve number"
 
+msgid "Invoice statistics"
+msgstr "Arve statistika"
+
 msgid "Invoiced to"
 msgstr "Kellele"
 
@@ -1486,6 +1531,9 @@ msgstr "{Caller_full_name} on loonud juhtumi {issue_key}."
 
 msgid "Issues"
 msgstr "Juhtumid"
+
+msgid "Issues are trackable requests to the operator."
+msgstr "Juhtumid on jälgitavad päringud operaatorile."
 
 msgid "It is used to automatically assign floating IP to your virtual machine."
 msgstr "On kasutusel liikuva IP aadressi automaatseks virtuaalsele masinale lisamiseks"
@@ -1580,8 +1628,17 @@ msgstr "Laadimine..."
 msgid "Loading actions"
 msgstr "Tegevuste laadimine"
 
+msgid "Loading invoices"
+msgstr "Arvete laadimine"
+
 msgid "Location"
 msgstr "Asukoht"
+
+msgid "Location has been saved successfully."
+msgstr "Asukoht on edukalt salvestatud."
+
+msgid "Location of {offeringName} offering"
+msgstr "{offeringName} pakkumise asukoht"
 
 msgid "Log out"
 msgstr "Logi välja"
@@ -1624,6 +1681,9 @@ msgstr "Hallatavad projektid"
 
 msgid "Management"
 msgstr "Haldus"
+
+msgid "Mark invoice as paid"
+msgstr "Märgi arve tasuks"
 
 msgid "Marketplace"
 msgstr "Turuplats"
@@ -1705,6 +1765,9 @@ msgstr "Kuu"
 
 msgid "Monthly cost"
 msgstr "Igakuine kulu"
+
+msgid "Monthly invoices"
+msgstr "Kuu arved"
 
 msgid "More info"
 msgstr "Lisainfo"
@@ -1790,6 +1853,12 @@ msgstr "Juurdepääsi info puudub"
 msgid "No entries to show here"
 msgstr "Sissekanded mida näidata puuduvad"
 
+msgid "No invoice data available."
+msgstr "Arve andmed puuduvad."
+
+msgid "No offerings"
+msgstr "Pakkumisi pole"
+
 msgid "No results found"
 msgstr "Tulemusi ei leitud"
 
@@ -1829,6 +1898,9 @@ msgstr "Teate edastamise viis"
 msgid "Notifications"
 msgstr "Teavitused"
 
+msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr "Teatised võimaldavad teavitada, kui teatud sündmus on toimunud."
+
 msgid "Number of CPU cores per socket"
 msgstr "CPU tuumade arv soklite kohta"
 
@@ -1844,20 +1916,41 @@ msgstr "Objekti ei leitud"
 msgid "Offering"
 msgstr "Pakkumine"
 
+msgid "Offering components"
+msgstr "Pakkumine komponendid"
+
+msgid "Offering configuration"
+msgstr "Pakkumise konfiguratsioon"
+
 msgid "Offering details"
 msgstr "Pakkumise üksikasjad"
+
+msgid "Offering doesn't have images."
+msgstr "Pakkumisel pole pilte."
 
 msgid "Offering has been created."
 msgstr "Pakkumine on loodud"
 
+msgid "Offering has been imported."
+msgstr "Pakkumine on imporditud."
+
 msgid "Offering has been updated."
 msgstr "Pakkumine on uuendatud"
+
+msgid "Offering images"
+msgstr "Pakkumise pildid"
 
 msgid "Offering is not configured yet."
 msgstr "Pakkumist poel veel seadistatud"
 
 msgid "Offering logo"
 msgstr "Pakun logo"
+
+msgid "Offering name"
+msgstr "Pakkumise nimi"
+
+msgid "Offering permissions"
+msgstr "Pakkumise õigused"
 
 msgid "Offering state has been updated."
 msgstr "Pakkumise staatust on uuendatud"
@@ -1868,11 +1961,17 @@ msgstr "Pakkumise tüüp"
 msgid "Offerings"
 msgstr "Pakkumised"
 
+msgid "Offerings images"
+msgstr "Pakkumiste pildid"
+
 msgid "One-time"
 msgstr "Üks kord"
 
 msgid "One-time on plan switch"
 msgstr "Ühekordne plaanivahetus"
+
+msgid "Only a created invoice can be marked as paid."
+msgstr "Tasuks saab märkida ainult loodud arve."
 
 msgid "Only customer owner or staff can invite users."
 msgstr "Ainult kliendi omanik või töötaja saab kutsuda uusi kasutajaid."
@@ -2081,6 +2180,15 @@ msgstr "Iga tund"
 msgid "Per month"
 msgstr "Iga kuu"
 
+msgid "Perform review"
+msgstr "Sooritage ülevaade "
+
+msgid "Performed"
+msgstr "Avaldatud"
+
+msgid "Performed by"
+msgstr "Avaldaja"
+
 msgid "Period"
 msgstr "Periood"
 
@@ -2089,6 +2197,9 @@ msgstr "Püsiv"
 
 msgid "Permissions log"
 msgstr "Lubade logi"
+
+msgid "Personal workspace"
+msgstr "Isiklik töölaud"
 
 msgid "Phone"
 msgstr "Telefon"
@@ -2135,6 +2246,9 @@ msgstr "Plaani hind"
 msgid "Planned quota usage: {usage}"
 msgstr "Planeeritud kvoodi kasutamine: {usage}"
 
+msgid "Please add resource name before editing a schedule."
+msgstr "Lisage enne ajakava redigeerimist ressursi nimi."
+
 msgid "Please create a new one:"
 msgstr "Palun looge uus:"
 
@@ -2143,6 +2257,9 @@ msgstr "Palun looge uus, valides profiili, mis sobib kõige paremini teie organi
 
 msgid "Please enter desired values in the rows below:"
 msgstr "Palun sisestage soovitud kogused all olevatele ridadele"
+
+msgid "Please enter reason why offering has been paused."
+msgstr "Palun sisestage põhjus, miks pakkumine on peatatud."
 
 msgid "Please give us a moment to validate your invitation."
 msgstr "Palun anna meile hetk kutse kinnitamiseks."
@@ -2156,6 +2273,9 @@ msgstr "Pange tähele, et taotluses tuleks näidata rentniku ja põhjendada."
 msgid "Please note that request should specify user name and provide a reason."
 msgstr "Pange tähele, et taotluses tuleks näidata rentniku ja põhjendada."
 
+msgid "Please open offering {offeringName} ({offeringUuid}) for editing. \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}"
+msgstr "Palun avage pakkumine {offeringName} ({offeringUuid}) redigeerimiseks. \nTaotleja: {userName} / {userUuid}. \nTeenuse pakkuja: {customerName} / {customerUuid}"
+
 msgid "Please provide a reason"
 msgstr "Palun põhjendada"
 
@@ -2164,6 +2284,12 @@ msgstr "Palun esitage oma ettevõtte registreerimiskood."
 
 msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr "Esitage EL KMKR NR kui te olete registreeritud Euroopa Liidus."
+
+msgid "Please review and activate offering {offeringName} ({offeringUuid}). \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}"
+msgstr "Palun vaadake läbi ja aktiveerige pakkumine {offeringName} ({offeringUuid}). \nTaotleja: {userName} / {userUuid}. \nTeenuse pakkuja: {customerName} / {customerUuid}"
+
+msgid "Please review organization permissions"
+msgstr "Palun vaadake üle organisatsiooni õigused"
 
 msgid "Please search for your organization"
 msgstr "Palun otsige oma organisatsiooni"
@@ -2194,6 +2320,12 @@ msgstr "Hoiab töös"
 
 msgid "Preferred language"
 msgstr "Eelistatud keel"
+
+msgid "Preview"
+msgstr "Eelvaade"
+
+msgid "Preview offering"
+msgstr "Pakkumise eelvaade"
 
 msgid "Previous"
 msgstr "Eelmine"
@@ -2345,6 +2477,9 @@ msgstr "Teenusepakkuja nimi"
 msgid "Provision new resource"
 msgstr "Tekita uus resurss"
 
+msgid "Public SSH keys will be injected into services that allow key-based access."
+msgstr "Avalikud SSH võtmed lisatakse teenustesse, mis võimaldavad võtmepõhist juurdepääsu."
+
 msgid "Public key"
 msgstr "Avalik võti"
 
@@ -2359,6 +2494,15 @@ msgstr "Avalikud ressursid"
 
 msgid "Public services"
 msgstr "Avalikud teenused"
+
+msgid "Publish as Google Calendar"
+msgstr "Avalda Google'i kalendrina"
+
+msgid "Published"
+msgstr "Avaldatud"
+
+msgid "Publisher"
+msgstr "Avaldaja"
 
 msgid "Pulling"
 msgstr "Tõmban"
@@ -2489,6 +2633,9 @@ msgstr "Eemalda profiil"
 msgid "Report"
 msgstr "Raporteeri"
 
+msgid "Report a security incident"
+msgstr "Turvaintsidendist teatamine "
+
 msgid "Report an issue"
 msgstr "Raporteeri probleemist"
 
@@ -2509,6 +2656,9 @@ msgstr "Raporteeri ressursi kasutusest"
 
 msgid "Reported by me"
 msgstr "Minu poolt raporteeritud"
+
+msgid "Reported value is reused every month until changed."
+msgstr "Raporteeritud väärtust kasutatakse igal kuul, kuni selle muutmiseni."
 
 msgid "Reporter"
 msgstr "Raporteerija"
@@ -2540,11 +2690,17 @@ msgstr "Küsi otseligipääsu"
 msgid "Request direct access to OpenStack Tenant"
 msgstr "Küsi otseligipääsu OpenStack rentnikule"
 
+msgid "Request editing"
+msgstr "Taotle muutmist"
+
 msgid "Request for a change"
 msgstr "Muutmistaotlus"
 
 msgid "Request for a termination"
 msgstr "Lõpetamise taotlus"
+
+msgid "Request publishing"
+msgstr "Taotle avaldamist"
 
 msgid "Request removal"
 msgstr "Päringu eemaldamine"
@@ -2554,6 +2710,9 @@ msgstr "Päringu nimi"
 
 msgid "Request type"
 msgstr "Päringu liik"
+
+msgid "Request {mode} of Public Offering"
+msgstr "Avaliku pakkumise {mode} taotlus"
 
 msgid "Request {requestId} has been created."
 msgstr "Päring {requestId} on loodud."
@@ -2636,6 +2795,12 @@ msgstr "Ressursi {resource} kasutus"
 msgid "Resources"
 msgstr "Ressursid"
 
+msgid "Resources import has failed."
+msgstr "Ressursside import nurjus."
+
+msgid "Resources represent the services you are using."
+msgstr "Teenused mis on praegu kasutuses."
+
 msgid "Resources usage"
 msgstr "Ressursi kasutus"
 
@@ -2668,6 +2833,15 @@ msgstr "Proovige uuesti"
 
 msgid "Review"
 msgstr "Ülevaade"
+
+msgid "Review has been closed."
+msgstr "Ülevaade on suletud."
+
+msgid "Review has been performed."
+msgstr "Ülevaade on teostatud."
+
+msgid "Reviews"
+msgstr "Arvustused"
 
 msgid "Role"
 msgstr "Roll"
@@ -2753,6 +2927,12 @@ msgstr "Turvagrupid"
 msgid "Security groups details"
 msgstr "Turvagruppide detailid"
 
+msgid "Security incident date: {date}"
+msgstr "Turvalisuse intsidendi kuupäev: {date}"
+
+msgid "Security incident type: {type}"
+msgstr "Turvajuhtumi tüüp: {type}"
+
 msgid "See all"
 msgstr "Vaata kõiki"
 
@@ -2777,6 +2957,9 @@ msgstr "Vali arveldamise periood"
 msgid "Select affected resource..."
 msgstr "Valige seotud ressurss..."
 
+msgid "Select affiliation"
+msgstr "Vali kuuluvus"
+
 msgid "Select assignee..."
 msgstr "Kellele määratud..."
 
@@ -2795,11 +2978,17 @@ msgstr "Valige riik..."
 msgid "Select dates"
 msgstr "Valitud ajad"
 
+msgid "Select incident type"
+msgstr "Vali intsidendi tüüp"
+
 msgid "Select instance..."
 msgstr "Vali üksused..."
 
 msgid "Select offering..."
 msgstr "Vali pakkumine..."
+
+msgid "Select offerings..."
+msgstr "Vali pakkumised..."
 
 msgid "Select organization..."
 msgstr "Valige organisatsioon..."
@@ -2812,6 +3001,9 @@ msgstr "Valige projekt..."
 
 msgid "Select provider..."
 msgstr "Vali teenusepakkuja"
+
+msgid "Select request type..."
+msgstr "Vali päringu liik..."
 
 msgid "Select role"
 msgstr "Vali roll"
@@ -2897,6 +3089,12 @@ msgstr "Teenuse seaded sellel ressursil on veastaatuses."
 msgid "Service type"
 msgstr "Teenuse tüüp"
 
+msgid "Set backend ID"
+msgstr "Määra backend ID"
+
+msgid "Set location"
+msgstr "Määra asukoht"
+
 msgid "Set rules"
 msgstr "Määra reeglid"
 
@@ -2963,6 +3161,9 @@ msgstr "Kasutaja üksikasjad"
 msgid "Show with running accounting"
 msgstr "Näita ainult jooksva arveldusega"
 
+msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
+msgstr "Näitan {sliceStart} kuni {sliceEnd} kirjet {resultCount} kandest."
+
 msgid "Sign in"
 msgstr "Logi sisse"
 
@@ -3016,6 +3217,9 @@ msgstr "Olek"
 
 msgid "Status"
 msgstr "Staatus"
+
+msgid "Step 1. Select offering"
+msgstr "Samm 1. Vali pakkumine"
 
 msgid "Step 2. Select resources"
 msgstr "Samm 2. Vali ressursid"
@@ -3080,8 +3284,17 @@ msgstr "Kasutajatoe päring"
 msgid "Support user"
 msgstr "Kasutajatoe kasutaja"
 
+msgid "Support workspace"
+msgstr "Toe töölaud"
+
 msgid "Sync profile"
 msgstr "Sünkroniseeri profiil"
+
+msgid "Sync with Google Calendar"
+msgstr "Sünkroonimine Google'i kalendriga"
+
+msgid "Synchronisation has been scheduled."
+msgstr "Sünkroonimine on ajastatud."
 
 msgid "Synchronise"
 msgstr "Sünkroniseeri"
@@ -3161,6 +3374,9 @@ msgstr "Teenustingimused"
 msgid "Text has been copied"
 msgstr "Tekst on kopeeritud"
 
+msgid "The invoice has been marked as paid."
+msgstr "Arve on märgitud tasuks."
+
 msgid "The key has been created."
 msgstr "Võti on loodud"
 
@@ -3175,6 +3391,9 @@ msgstr "Nimi peab olema lühem kui 15 märki"
 
 msgid "The project will be changed for all items in cart."
 msgstr "Projekti muudetakse kõigi ostukorvi toodete osas."
+
+msgid "There are no SSH keys yet."
+msgstr "SSH võtmeid pole veel lisatud."
 
 msgid "There are no actions."
 msgstr "Tegevusi ei ole."
@@ -3197,8 +3416,17 @@ msgstr "Kommentaare veel ei ole."
 msgid "There are no events for this resource."
 msgstr "Sellele ressursile puuduvad sündmused."
 
+msgid "There are no invoices."
+msgstr "Arveid ei ole."
+
+msgid "There are no offerings available."
+msgstr "Pakkumisi ei ole saadaval."
+
 msgid "There are no offerings in marketplace yet."
 msgstr "Turuplatsil pole veel ühtegi pakkumist"
+
+msgid "There are no offerings yet."
+msgstr "Pakkumisi veel ei ole."
 
 msgid "There are no organizations matching filter."
 msgstr "Filtrile vastavaid organisatsioone ei ole."
@@ -3263,6 +3491,9 @@ msgstr "Porti"
 msgid "To remove account, please send a request to {support}."
 msgstr "Konto eemaldamiseks saada palun taotlus {support}"
 
+msgid "To report a security incident, please send an email to {supportEmail}."
+msgstr "Turvaintsidendist teatamiseks saatke palun e-kiri aadressile {supportEmail}."
+
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr "Probleemi teatamiseks saatke palun e-kiri aadressile {supportEmail}."
 
@@ -3290,6 +3521,9 @@ msgstr "Proovi uuesti"
 msgid "Type"
 msgstr "Tüüp"
 
+msgid "Type of incident"
+msgstr "Vahejuhtumi liik"
+
 msgid "Unable to activate account."
 msgstr "Ei ole võimalik kontot aktiveerida."
 
@@ -3313,6 +3547,12 @@ msgstr "Kutset ei ole võimalik katkestada"
 
 msgid "Unable to cancel order item."
 msgstr "Tellimisüksust ei saa tühistada."
+
+msgid "Unable to change email."
+msgstr "e-posti aadressi ei saa muuta. "
+
+msgid "Unable to close review."
+msgstr "Ülevaadet ei saa sulgeda."
 
 msgid "Unable to create a FreeIPA profile."
 msgstr "Ei saa luua FreeIPA profiili."
@@ -3380,6 +3620,9 @@ msgstr "Ei ole võimalik laadida kommentaare."
 msgid "Unable to load data."
 msgstr "Andmeid ei õnnestunud laadida"
 
+msgid "Unable to load editor"
+msgstr "Redaktorit ei saa laadida"
+
 msgid "Unable to load events for this resource."
 msgstr "Selle ressursi sündmusi ei õnnestunud laadida"
 
@@ -3391,6 +3634,9 @@ msgstr "Finantsilist ülevaadet ei õnnestundu laadida"
 
 msgid "Unable to load form options."
 msgstr "Vormi seadistusi ei õnnestunud laadida"
+
+msgid "Unable to load invoices"
+msgstr "Arveid ei saa laadida"
 
 msgid "Unable to load locations."
 msgstr "Asukohti ei õnnestunud laadida"
@@ -3410,8 +3656,14 @@ msgstr "Ei ole võimalik laadida turuplatsi pakkumisi"
 msgid "Unable to load offering."
 msgstr "Ei ole võimalik laadida pakkumisi."
 
+msgid "Unable to load offering cost chart."
+msgstr "Pakkumise kuludiagrammi ei saa laadida."
+
 msgid "Unable to load offering details."
 msgstr "Ei ole võimalik laadida pakkumise detaile."
+
+msgid "Unable to load offerings"
+msgstr "Pakkumisi ei saa laadida"
 
 msgid "Unable to load order details."
 msgstr "Ei ole võimalik laadida tellimuse detaile."
@@ -3443,14 +3695,23 @@ msgstr "Ei saa kasutajat laadida"
 msgid "Unable to login via SAML2 protocol."
 msgstr "SAML2 protokollida ei õnnestunud logida"
 
+msgid "Unable to mark the invoice as paid."
+msgstr "Arvet ei saa tasuks märkida."
+
 msgid "Unable to open console. Error message: {message}"
 msgstr "Konsooli pole võimalik avada. Veateade: {message}"
 
 msgid "Unable to open console log"
 msgstr "Ei ole võimalik laadida kommentaare."
 
+msgid "Unable to perform review."
+msgstr "Ülevaadet ei saa läbi viia."
+
 msgid "Unable to post comment."
 msgstr "Kommentaari pole võimalik postitada"
+
+msgid "Unable to publish Google Calendar."
+msgstr "Google kalendrit ei saa avaldada."
 
 msgid "Unable to register service provider."
 msgstr "Teenusepakkuajt ei õnnestunud registreerida"
@@ -3473,14 +3734,23 @@ msgstr "Ostukorvist pole objekti võimalik eemaldada"
 msgid "Unable to remove logo."
 msgstr "Logo pole võimalik eemaldada"
 
+msgid "Unable to report security incident."
+msgstr "Turbejuhtumist teatamine ebaõnnestus."
+
 msgid "Unable to resend invitation."
 msgstr "Kutset pole võimalik uuesti saata"
+
+msgid "Unable to save location."
+msgstr "Asukohta ei saa salvestada."
 
 msgid "Unable to save user."
 msgstr "Kasutajat ei ole võimalik salvestada"
 
 msgid "Unable to send record notification."
 msgstr "Ei ole võimalik saata sissekande teadet."
+
+msgid "Unable to set backend ID."
+msgstr "backend ID määramine ebaõnnestus"
 
 msgid "Unable to submit empty comment."
 msgstr "Tühja kommentaari pole võimalik lisada"
@@ -3499,6 +3769,18 @@ msgstr "Ressursi peatamise päringut ei ole võimalik esitada"
 
 msgid "Unable to submit usage report."
 msgstr "Kasutusraportit ei ole võimalik esitada"
+
+msgid "Unable to sync FreeIPA profile."
+msgstr "FreeIPa profiili ei saa sünkroonida."
+
+msgid "Unable to sync Google Calendar."
+msgstr "Google'i kalendrit ei saa sünkroonida. "
+
+msgid "Unable to synchronise resource."
+msgstr "Ressursi ei saa sünkroonida."
+
+msgid "Unable to unpublish Google Calendar."
+msgstr "Google'i kalendri avaldamist ei saa tühistada. "
 
 msgid "Unable to update offering."
 msgstr "Pakkumist pole võimalik uuendada"
@@ -3539,11 +3821,17 @@ msgstr "Ühikud"
 msgid "Unpaid"
 msgstr "Tasumata"
 
+msgid "Unpublish as Google Calendar"
+msgstr "Tühista avaldamine Google'i kalendrina "
+
 msgid "Update"
 msgstr "Uuenda"
 
 msgid "Update floating IPs"
 msgstr "Uuenda liikuvaid IP aadresse"
+
+msgid "Update location"
+msgstr "Värskenda asukohta"
 
 msgid "Update notification"
 msgstr "Uuenda teated"
@@ -3568,6 +3856,9 @@ msgstr "Uuendan liikuivad IP-sid"
 
 msgid "Updating internal IPs"
 msgstr "Uuendan sisemisi IP-sid"
+
+msgid "Updating offering {name}"
+msgstr "Uuendatakse pakkumist {name}"
 
 msgid "Updating quotas"
 msgstr "Uuendan kvoote"
@@ -3623,6 +3914,9 @@ msgstr "Kasutajaandmed"
 msgid "User details"
 msgstr "Kasutaja üksikasjad"
 
+msgid "User events this month"
+msgstr "Kasutaja sündmused sellel kuul"
+
 msgid "User has been activated."
 msgstr "Kasutaja on aktiveeritud."
 
@@ -3673,6 +3967,9 @@ msgstr "Kasutaja {user_link} on edukalt autentinud ennast kasutajanime ja parool
 
 msgid "User {user_link} has granted organization owner role in {customer_link} to {affected_user_link}."
 msgstr "Kasutajale {user_link} on omastatud organisatsiooni omaniku roll {customer_link} {affected_user_link}."
+
+msgid "User {user_link} has granted project administrator role in project {project_link} to {affected_user_link}."
+msgstr "Kasutaja {user_link} on andnud projekti administraatori rolli projektis {project_link} kasutajale {affected_user_link}."
 
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "Kasutaja {user_link} on saanud endale rolli {affected_user_link}."
@@ -3755,6 +4052,9 @@ msgstr "Väärtus ei tohiks olla väiksem kui {limit}"
 msgid "Value should not be negative."
 msgstr "Väärtus ei tphi olla negatiivne"
 
+msgid "Verifying email change"
+msgstr "e-posti aadressi muutmise kontrollimine "
+
 msgid "Version"
 msgstr "Versioon"
 
@@ -3815,6 +4115,9 @@ msgstr "Sa ei saa hallata teist ettevõtte omanikku."
 msgid "You do not currently have any organizations."
 msgstr "Sul ei ole veel ühtegi organisatsiooni."
 
+msgid "You do not have any resources yet."
+msgstr "Teil pole veel ressursse."
+
 msgid "You don't have enough privileges to perform this operation."
 msgstr "Sul ei ole selle toimingu sooritamiseks vajalikke õigusi."
 
@@ -3827,6 +4130,9 @@ msgstr "Sul ei ole piisavalt õigusi et seda kutset saata."
 msgid "You have exceeded maximum number of quotas."
 msgstr "Olete ületanud maksimaalse arvu kvoote."
 
+msgid "You have no notifications yet."
+msgstr "Teil pole veel teateid!"
+
 msgid "You have no quotas yet."
 msgstr "Sul ei ole veel kvoote."
 
@@ -3835,6 +4141,9 @@ msgstr "Sa ei ole veel lisanud ühtegi SSH võtit oma <a ui-sref=\"profile.keys\
 
 msgid "You have the right to purchase service without additional approval."
 msgstr "Teil on õigus osta teenust ilma täiendava nõusolekuta."
+
+msgid "You haven't created any issues yet."
+msgstr "Te pole veel juhtumitest teatanud."
 
 msgid "You must agree with terms of service."
 msgstr "Te peate nõustuma teenusetingimustega."
@@ -3854,6 +4163,9 @@ msgstr "Teie FreeIPA on edukalt sünkroonitud."
 msgid "Your FreeIPA profile has been disabled."
 msgstr "Sinu FreeIPA profiil on deaktiveeritud."
 
+msgid "Your account is not authorized to use this allocation"
+msgstr "Teie kontol ei ole lubatud seda jaotust kasutada"
+
 msgid "Your current email is:"
 msgstr "Sinu kehtiv eposti aadress on:"
 
@@ -3868,6 +4180,9 @@ msgstr "Sinu ühtne kontrollkeskus pilveteenuste haldamiseks. Logi sisse et näh
 
 msgid "(VAT is not included)"
 msgstr "(ei sisalda käibemaksu)"
+
+msgid "allocation users"
+msgstr "jaotuse kasutajad"
 
 msgid "bootable"
 msgstr "Käivitatav"
@@ -3899,6 +4214,12 @@ msgstr "Lisa element"
 msgid "offering"
 msgstr "toode"
 
+msgid "offering permissions"
+msgstr "pakkumise õigused"
+
+msgid "offering users"
+msgstr "pakkumise kasutajad"
+
 msgid "offerings"
 msgstr "toodet"
 
@@ -3911,6 +4232,9 @@ msgstr "asutus"
 msgid "organizations"
 msgstr "asutus"
 
+msgid "permission reviews"
+msgstr "õiguste ülevaade"
+
 msgid "plans"
 msgstr "Plaanid"
 
@@ -3922,6 +4246,9 @@ msgstr "Projektid"
 
 msgid "resources"
 msgstr "ressursid"
+
+msgid "reviews"
+msgstr "arvustused"
 
 msgid "support"
 msgstr "Tugi"

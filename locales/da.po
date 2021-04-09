@@ -3200,6 +3200,9 @@ msgstr "Skat procent"
 msgid "Team member has been removed."
 msgstr "Teammedlem er blevet fjernet."
 
+msgid "Team size"
+msgstr "Team Størrelse"
+
 msgid "Technical code used by accounting software."
 msgstr "Teknisk kode brugt af regnskabssoftware."
 
@@ -3589,6 +3592,57 @@ msgstr "Kan ikke slette teammedlem."
 
 msgid "Unable to destroy instance."
 msgstr "Kan ikke ødelægge instans."
+
+msgid "Unable to disable FreeIPA profile."
+msgstr "Kan ikke deaktivere FreeIPA-profilen."
+
+msgid "Unable to edit comment."
+msgstr "Kan ikke redigere kommentaren."
+
+msgid "Unable to enable FreeIPA profile."
+msgstr "Kan ikke aktivere FreeIPA-profilen."
+
+msgid "Unable to enable payment profile."
+msgstr "Kan ikke aktivere betalingsprofilen."
+
+msgid "Unable to extend disk."
+msgstr "Kan ikke udvide disken."
+
+msgid "Unable to extend volume."
+msgstr "Kan ikke udvide volumen."
+
+msgid "Unable to fetch attachment."
+msgstr "Kan ikke hente vedhæftet fil."
+
+msgid "Unable to fetch comments."
+msgstr "Kan ikke hente kommentarer."
+
+msgid "Unable to fetch current user."
+msgstr "Kan ikke hente den aktuelle bruger."
+
+msgid "Unable to fetch data."
+msgstr "Kunne ikke hente data."
+
+msgid "Unable to generate service provider API secret code."
+msgstr "Kan ikke generere tjenesteudbyderens API-hemmelig kode."
+
+msgid "Unable to get form's data."
+msgstr "Kan ikke hente formularens data."
+
+msgid "Unable to get order item."
+msgstr "Kunne ikke hente ordrevaren."
+
+msgid "Unable to get service provider API secret code."
+msgstr "Kan ikke hente tjenesteudbyderens API-hemmelig kode."
+
+msgid "Unable to grant permission."
+msgstr "Kan ikke give tilladelse."
+
+msgid "Unable to import YAML."
+msgstr "Kan ikke importere YAML."
+
+msgid "Unable to import remote offering."
+msgstr "Kan ikke importere fjernudbud."
 
 msgid "(VAT is not included)"
 msgstr "(Moms er ikke inkluderet)"
