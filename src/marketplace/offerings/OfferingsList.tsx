@@ -27,6 +27,7 @@ import { OfferingItemActions } from './actions/OfferingItemActions';
 import { OfferingListActions } from './actions/OfferingListActions';
 import { OfferingDetailsLink } from './details/OfferingDetailsLink';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
+import { OfferingStateCell } from './OfferingStateCell';
 
 const OfferingNameColumn = ({ row }) => (
   <OfferingDetailsLink offering_uuid={row.uuid}>{row.name}</OfferingDetailsLink>
@@ -52,7 +53,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('State'),
-      render: ({ row }) => row.state,
+      render: OfferingStateCell,
     },
     {
       title: translate('Type'),
