@@ -226,6 +226,7 @@ msgstr ""
 msgid "Activation price"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Active"
@@ -607,6 +608,7 @@ msgstr ""
 msgid "Archive"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 msgid "Archived"
 msgstr ""
@@ -2108,6 +2110,7 @@ msgstr ""
 msgid "Download order PDF file"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 msgid "Draft"
@@ -4869,6 +4872,7 @@ msgstr ""
 msgid "Pause offering"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingStateCell.tsx
 #: src/marketplace/offerings/OfferingStateFilter.tsx
 msgid "Paused"
 msgstr ""
