@@ -62,11 +62,32 @@ msgstr "Аккаунт был активирован."
 msgid "Account removal"
 msgstr "Удаление аккаунта"
 
+msgid "Accounting"
+msgstr "Бухгалтерия"
+
+msgid "Accounting period"
+msgstr "Учетный период"
+
+msgid "Accounting start date"
+msgstr "Дата начала учета"
+
+msgid "Accounting type"
+msgstr "Тип учета"
+
 msgid "Actions"
 msgstr "Действия"
 
+msgid "Activate"
+msgstr "Активировать"
+
+msgid "Activating"
+msgstr "Активируется"
+
 msgid "Activation price"
 msgstr "Цена активации"
+
+msgid "Active"
+msgstr "Активный"
 
 msgid "Activity stream"
 msgstr "Лента активности"
@@ -77,8 +98,14 @@ msgstr "Добавить"
 msgid "Add SSH key"
 msgstr "Добавить SSH ключ"
 
+msgid "Add component"
+msgstr "Добавить компонент"
+
 msgid "Add environment variable"
 msgstr "Добавить переменную среды"
+
+msgid "Add item"
+msgstr "Добавить элемент"
 
 msgid "Add key"
 msgstr "Добавить ключ"
@@ -89,6 +116,9 @@ msgstr "Добавить участника"
 msgid "Add new"
 msgstr "Добавить новый"
 
+msgid "Add new offering"
+msgstr "Добавить новое предложение"
+
 msgid "Add new organization"
 msgstr "Добавить новую организацию"
 
@@ -97,6 +127,9 @@ msgstr "Добавить новый проект"
 
 msgid "Add notification"
 msgstr "Добавить уведомление"
+
+msgid "Add offering"
+msgstr "Добавить предложение"
 
 msgid "Add organization"
 msgstr "Добавить организацию"
@@ -185,6 +218,30 @@ msgstr "Приложения"
 msgid "Apply"
 msgstr "Применить"
 
+msgid "Article code"
+msgstr "Код статьи"
+
+msgid "Audit logs"
+msgstr "Журналы аудита"
+
+msgid "Author"
+msgstr "Автор"
+
+msgid "Authorized personnel"
+msgstr "Уполномоченный персонал"
+
+msgid "Auto-generated"
+msgstr "Созданы автоматически"
+
+msgid "Availability"
+msgstr "Доступность"
+
+msgid "Availability zone"
+msgstr "Зона доступности"
+
+msgid "Average utilization"
+msgstr "Средний коэффициент использования"
+
 msgid "Back"
 msgstr "Назад"
 
@@ -197,6 +254,12 @@ msgstr "Назад к организации"
 msgid "Back to project"
 msgstr "Назад к проекту"
 
+msgid "Bank account"
+msgstr "Банковский счет"
+
+msgid "Bank name"
+msgstr "Название банка"
+
 msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
 msgstr "Станьте клиентом нашего портала. Предоставляйте ИТ-услуги на маркетплейсе и управляйте своей командой."
 
@@ -206,8 +269,26 @@ msgstr "Рассчёты"
 msgid "Billing period"
 msgstr "Расчетный период"
 
+msgid "Booking description"
+msgstr "Описание бронировки"
+
+msgid "Booking has been accepted."
+msgstr "Бронировка принята."
+
+msgid "Booking has been cancelled."
+msgstr "Бронировка отменена."
+
 msgid "Booking is not allowed to overlap other bookings."
 msgstr "Заявки на бронирование не должны перекрывать друг друга."
+
+msgid "Booking management"
+msgstr "Управление бронированием"
+
+msgid "Bookings"
+msgstr "Бронировки"
+
+msgid "Business hours"
+msgstr "Рабочие часы"
 
 msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
 msgstr "Отменяя время жизни токена, вы разрешаете любому его обладателю выдавать себя за вас до тех пор, пока токен не будет отозван."
@@ -215,14 +296,26 @@ msgstr "Отменяя время жизни токена, вы разрешае
 msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
 msgstr "Отправляя форму, вы соглашаетесь с <Link>условиями предоставления услуг</Link>."
 
+msgid "CIDR"
+msgstr "CIDR"
+
+msgid "CPU"
+msgstr "CPU"
+
 msgid "CPU limit (hours)"
 msgstr "Максимальное количество CPU-часов"
 
 msgid "CPU usage"
 msgstr "Использование CPU"
 
+msgid "CSV"
+msgstr "CSV"
+
 msgid "Cancel"
 msgstr "Отменить"
+
+msgid "Cancel booking"
+msgstr "Отменить бронировку"
 
 msgid "Cancel invitation"
 msgstr "Отменить приглашение"
@@ -251,17 +344,56 @@ msgstr "Каталог"
 msgid "Catalog has been deleted."
 msgstr "Каталог был удален."
 
+msgid "Catalogues"
+msgstr "Каталоги"
+
 msgid "Categories"
 msgstr "Категории"
 
 msgid "Category"
 msgstr "Категория"
 
+msgid "Category is invalid."
+msgstr "Недопустимая категория."
+
+msgid "Category name"
+msgstr "Название категории"
+
+msgid "Change"
+msgstr "Изменить"
+
+msgid "Change Request"
+msgstr "Запрос на изменение"
+
+msgid "Change email"
+msgstr "Изменить адрес эл. почты"
+
+msgid "Change limits"
+msgstr "Изменить лимиты"
+
+msgid "Change plan"
+msgstr "Сменить план"
+
 msgid "Change request - client’s request to perform a generic modification of data or service."
 msgstr "Запрос на изменение - запрос клиента на изменение данных или услуг."
 
+msgid "Change resource plan"
+msgstr "Изменить план ресурса"
+
+msgid "Civil number"
+msgstr "Гражданский номер"
+
 msgid "Close"
 msgstr "Закрыть"
+
+msgid "Cloud init template"
+msgstr "Шаблон инициализации в облаке"
+
+msgid "Cluster"
+msgstr "Кластер"
+
+msgid "Collapse"
+msgstr "Свернуть"
 
 msgid "Comment"
 msgstr "Комментарий"
