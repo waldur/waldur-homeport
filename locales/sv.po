@@ -11,6 +11,9 @@ msgstr ""
 msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
 msgstr "”{trimmed}” överskrider gränsen för {max_len} tecken FQDN"
 
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Användarvillkoren</Link> har godkänts på <Date></Date>"
+
 msgid "API URL"
 msgstr "API URL"
 
@@ -34,6 +37,9 @@ msgstr "Förkortning"
 
 msgid "Accept booking"
 msgstr "Acceptera bokning"
+
+msgid "Accept invitation"
+msgstr "Acceptera inbjudan"
 
 msgid "Access subnets"
 msgstr "Delnät för åtkomst"
