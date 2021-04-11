@@ -1,14 +1,399 @@
 msgid ""
 msgstr ""
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"X-Generator: Poedit 2.0.2\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Localazy (https://localazy.com)\n"
+"Project-Id-Version: waldur-homeport\n"
 "Language: lt\n"
+"Plural-Forms: nplurals=3; plural=((n%10==1) && ((n%100<11 || n%100>19))) ? 0 : ((n%10>=2 && n%10<=9) && ((n%100<11 || n%100>19))) ? 1 : 2;\n"
+
+msgid "\"{trimmed}\" exceeds the {max_len} character FQDN limit"
+msgstr "\"{trimmed}\" viršija {max_len} simbolių FQDN ribą"
+
+msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
+msgstr "<Link>Paslaugų teikimo sąlygos</Link> buvo priimti <Date></Date>"
+
+msgid "API URL"
+msgstr "API URL"
+
+msgid "API secret code:"
+msgstr "API slaptasis kodas:"
+
+msgid "API token lifetime"
+msgstr "API žetono tarnavimo laikas"
+
+msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
+msgstr "Minimali numatoma darbuotojo konfigūracija yra 4 vCPU ir 4 GB RAM."
+
+msgid "A one-time fee applied on activation."
+msgstr "Vienkartinis mokestis taikomas aktyvavimo metu."
+
+msgid "A profile has been created."
+msgstr "Sukurtas profilis."
+
+msgid "Accept booking"
+msgstr "Priimkite užsakymą"
+
+msgid "Access subnets"
+msgstr "Prieiga prie potinklių"
+
+msgid "Access token"
+msgstr "Prieigos atpažinimo ženklas"
+
+msgid "Accessible to all customers."
+msgstr "Prieinama visiems klientams."
+
+msgid "Account activation"
+msgstr "Paskyros aktyvavimas"
+
+msgid "Account has been activated."
+msgstr "Paskyra suaktyvinta."
+
+msgid "Account removal"
+msgstr "Paskyros pašalinimas"
+
+msgid "Accounting period"
+msgstr "Apskaitos laikotarpis"
+
+msgid "Accounting plans"
+msgstr "Apskaitos planai"
+
+msgid "Accounting record"
+msgstr "Apskaitos įrašas"
+
+msgid "Accounting records"
+msgstr "Apskaitos įrašai"
+
+msgid "Accounting running"
+msgstr "Vykdoma apskaita"
+
+msgid "Accounting start date"
+msgstr "Apskaitos pradžios data"
+
+msgid "Accounting type"
+msgstr "Apskaitos tipas"
+
+msgid "Action has been applied."
+msgstr "Veiksmas pritaikytas."
+
+msgid "Activation price"
+msgstr "Aktyvinimo kaina"
+
+msgid "Active count"
+msgstr "Aktyvus skaičius"
+
+msgid "Active plans"
+msgstr "Aktyvūs planai"
+
+msgid "Active user will be able to login into the portal."
+msgstr "Aktyvus vartotojas galės prisijungti prie portalo."
+
+msgid "Add SSH key"
+msgstr "Pridėti SSH raktą"
+
+msgid "Add Waldur user SSH keys to the FreeIPA profile"
+msgstr "Pridėti Waldur vartotojo SSH raktus į FreeIPA profilį"
+
+msgid "Add component"
+msgstr "Pridėti komponentą"
+
+msgid "Add data volume"
+msgstr "Pridėti duomenų kiekį"
+
+msgid "Add environment variable"
+msgstr "Pridėti aplinkos kintamąjį"
+
+msgid "Add key"
+msgstr "Pridėti raktą"
+
+msgid "Add new offering"
+msgstr "Pridėti naują pasiūlymą"
+
+msgid "Add new organization"
+msgstr "Pridėti naują organizaciją"
+
+msgid "Add new project"
+msgstr "Pridėti naują projektą"
+
+msgid "Add offering"
+msgstr "Pridėti pasiūlymą"
+
+msgid "Add pair"
+msgstr "Pridėti porą"
+
+msgid "Add payment profile"
+msgstr "Pridėti mokėjimo profilį"
+
+msgid "Add plan"
+msgstr "Pridėti planą"
+
+msgid "Add project member"
+msgstr "Pridėti projekto narį"
+
+msgid "Add resource"
+msgstr "Pridėti išteklių"
+
+msgid "Add security group"
+msgstr "Pridėti saugos grupę"
+
+msgid "Add team member"
+msgstr "Pridėti komandos narį"
+
+msgid "Add to a new namespace"
+msgstr "Pridėti prie naujos vardų srities"
+
+msgid "Add to comparison"
+msgstr "Pridėti prie palyginimo"
+
+msgid "Add user input field"
+msgstr "Pridėti vartotojo įvesties lauką"
+
+msgid "Additional data that will be added to instance on provisioning."
+msgstr "Papildomi duomenys, kurie bus pridėti prie egzemplioriaus, kai jis bus sukurtas."
+
+msgid "Additional data that will be added to virtual machine on provisioning."
+msgstr "Papildomi duomenys, kurie bus įtraukti į virtualią mašiną ją aprūpinant."
+
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr "Papildoma vieta, kurią reikia taikyti saugyklos kvotai, kurią turi naudoti momentinės kopijos."
+
+msgid "Additionally service provider can charge for usage of the following components"
+msgstr "Papildomai paslaugų teikėjas gali apmokestinti šių komponentų naudojimą"
+
+msgid "Admin username"
+msgstr "Administratoriaus vartotojo vardas"
+
+msgid "Affected resource"
+msgstr "Paveikti ištekliai"
+
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr "Iš naujo atkurus slaptą API kodą, nebus galima pateikti naudojimo su senuoju raktu."
+
+msgid "Agree with ToS"
+msgstr "Pritariu ToS"
+
+msgid "Agreement number"
+msgstr "Sutarties numeris"
+
+msgid "All resources have been imported."
+msgstr "Visi ištekliai buvo importuoti."
+
+msgid "Allocation description"
+msgstr "Paskirstymo aprašymas"
+
+msgid "Allocation name"
+msgstr "Paskirstymo pavadinimas"
+
+msgid "Allocation pools"
+msgstr "Paskirstymo telkiniai"
+
+msgid "Allow bookings to be scheduled at weekends"
+msgstr "Leisti planuoti užsakymus savaitgaliais"
+
+msgid "Allow to enable/disable component only"
+msgstr "Leisti įjungti/išjungti tik komponentą"
+
+msgid "Allowed address pairs update was scheduled."
+msgstr "Buvo suplanuotas leidžiamų adresų porų atnaujinimas."
+
+msgid "An error occurred on project removal."
+msgstr "Projekto pašalinimo metu įvyko klaida."
+
+msgid "Answers have been submitted"
+msgstr "Pateikti atsakymai"
+
+msgid "Application catalogues"
+msgstr "Paraiškų katalogai"
+
+msgid "Application configuration"
+msgstr "Programos konfigūracija"
+
+msgid "Application details"
+msgstr "Paraiškos informacija"
+
+msgid "Application has been created."
+msgstr "Paraiška sukurta."
+
+msgid "Application templates"
+msgstr "Paraiškų šablonai"
+
+msgid "Approve payment"
+msgstr "Patvirtinti mokėjimą"
+
+msgid "Approved at"
+msgstr "Patvirtinta"
+
+msgid "Archived plans"
+msgstr "Archyvuoti planai"
+
+msgid "Are you sure you want to accept a {name}?"
+msgstr "Ar tikrai norite priimti {name}?"
+
+msgid "Are you sure you want to cluster template? Note this will reset the node plan."
+msgstr "Ar tikrai norite naudoti klasterio šabloną? Atkreipkite dėmesį, kad bus iš naujo nustatytas mazgų planas."
+
+msgid "Are you sure you want to delete a {name} {resourceType} in an Erred state? A cleanup attempt will be performed if you choose so."
+msgstr "Ar tikrai norite ištrinti {name} {resourceType} klaidos būsenoje? Jei taip pasirinksite, bus atliktas bandymas išvalyti."
+
+msgid "Are you sure you want to delete the payment?"
+msgstr "Ar tikrai norite ištrinti mokėjimą?"
+
+msgid "Are you sure you want to delete the payment profile?"
+msgstr "Ar tikrai norite ištrinti mokėjimo profilį?"
+
+msgid "Are you sure you want to delete this {resourceType}?"
+msgstr "Ar tikrai norite ištrinti šį {resourceType}?"
+
+msgid "Are you sure you want to revoke this permission?"
+msgstr "Ar tikrai norite atšaukti šį leidimą?"
+
+msgid "Are you sure you would like to delete Rancher catalog {catalog}?"
+msgstr "Ar tikrai norite ištrinti \"Rancher\" katalogą {catalog}?"
+
+msgid "Are you sure you would like to delete project {projectName}?"
+msgstr "Ar tikrai norite ištrinti projektą {projectName}?"
+
+msgid "Are you sure you would like to delete the hook?"
+msgstr "Ar tikrai norite ištrinti kabliuką?"
+
+msgid "Are you sure you would like to delete the key?"
+msgstr "Ar tikrai norite ištrinti raktą?"
+
+msgid "Are you sure you would like to terminate resource {resourceName}?"
+msgstr "Ar tikrai norite nutraukti išteklių {resourceName}?"
+
+msgid "Article code"
+msgstr "Straipsnio kodas"
+
+msgid "At least one plan must be entered"
+msgstr "Turi būti įvestas bent vienas planas"
+
+msgid "Attach OpenStack Volume to Instance"
+msgstr "Pridėti OpenStack tomą prie egzemplioriaus"
+
+msgid "Attach has been scheduled."
+msgstr "Priedas buvo suplanuotas."
+
+msgid "Attach volume"
+msgstr "Pridėti tūrį"
+
+msgid "Attached to"
+msgstr "Pridėtas prie"
+
+msgid "Attributes are invalid."
+msgstr "Atributai neteisingi."
+
+msgid "Attributes filter"
+msgstr "Atributų filtras"
+
+msgid "Audit log"
+msgstr "Audito žurnalas"
+
+msgid "Audit logs"
+msgstr "Audito žurnalai"
+
+msgid "Authenticate using Mobile ID"
+msgstr "Autentiškumo nustatymas naudojant mobilųjį ID"
+
+msgid "Authentication events"
+msgstr "Autentifikavimo įvykiai"
+
+msgid "Authentication token"
+msgstr "Autentifikavimo atpažinimo ženklas"
+
+msgid "Authentication with Mobile ID has been canceled by user or timed out. Details:"
+msgstr "Autentifikavimas naudojant mobilųjį ID buvo atšauktas vartotojo arba skirtasis laikas. Išsami informacija:"
+
+msgid "Authorized personnel"
+msgstr "Įgalioti darbuotojai"
+
+msgid "Auto-assign floating IP"
+msgstr "Automatinis slankiojo IP priskyrimas"
+
+msgid "Auto approve in service provider projects"
+msgstr "Automatinis paslaugų teikėjo projektų patvirtinimas"
+
+msgid "Availability zone"
+msgstr "Prieinamumo zona"
+
+msgid "Available quota usage: {usage}"
+msgstr "Galimas kvotos naudojimas: {usage}"
+
+msgid "Average of all checklists"
+msgstr "Visų kontrolinių sąrašų vidurkis"
+
+msgid "Average utilization"
+msgstr "Vidutinis panaudojimas"
+
+msgid "Average value"
+msgstr "Vidutinė vertė"
+
+msgid "Azure Active Directory Application Secret"
+msgstr "Azure Active Directory programos paslaptis"
+
+msgid "Azure PostgreSQL database server"
+msgstr "Azure PostgreSQL duomenų bazės serveris"
+
+msgid "Azure Virtual Machine"
+msgstr "Azure virtualioji mašina"
+
+msgid "Azure provider"
+msgstr "Azure teikėjas"
+
+msgid "Back to organization"
+msgstr "Atgal į organizaciją"
+
+msgid "Back to personal dashboard"
+msgstr "Grįžti į asmeninę informacijos suvestinę"
+
+msgid "Back to project"
+msgstr "Atgal į projektą"
+
+msgid "Back to shopping"
+msgstr "Grįžti į apsipirkimą"
+
+msgid "Backend ID"
+msgstr "Backend ID"
+
+msgid "Backend ID has been successfully set."
+msgstr "Backend ID sėkmingai nustatytas."
+
+msgid "Base image name"
+msgstr "Bazinio vaizdo pavadinimas"
+
+msgid "Batch RAM"
+msgstr "Paketinė RAM"
+
+msgid "Batch block storage size"
+msgstr "Paketo bloko saugyklos dydis"
+
+msgid "Batch processing documentation"
+msgstr "Paketinio apdorojimo dokumentacija"
+
+msgid "Batch vCPU"
+msgstr "Paketas vCPU"
+
+msgid "Become a customer of our portal. Provision IT services from the Marketplace and manage your team from one place."
+msgstr "Tapkite mūsų portalo klientu. Teikite IT paslaugas iš Marketplace ir valdykite savo komandą iš vienos vietos."
+
+msgid "Billing details"
+msgstr "Atsiskaitymo informacija"
+
+msgid "Billing enabled"
+msgstr "Įgalintas atsiskaitymas"
+
+msgid "Billing period"
+msgstr "Atsiskaitymo laikotarpis"
+
+msgid "Booking description"
+msgstr "Užsakymo aprašymas"
+
+msgid "Booking has been accepted."
+msgstr "Užsakymas priimtas."
+
+msgid "Booking has been cancelled."
+msgstr "Užsakymas atšauktas."
+
+msgid "(VAT is not included)"
+msgstr "(PVM neįskaičiuotas)"
