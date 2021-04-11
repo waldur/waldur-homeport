@@ -66,13 +66,13 @@ msgid "Accounting"
 msgstr "Бухгалтерия"
 
 msgid "Accounting period"
-msgstr "Учетный период"
+msgstr "Учётный период"
 
 msgid "Accounting start date"
 msgstr "Дата начала учета"
 
 msgid "Accounting type"
-msgstr "Тип учета"
+msgstr "Тип бухгалтерского учёта"
 
 msgid "Actions"
 msgstr "Действия"
@@ -200,6 +200,9 @@ msgstr "Номер договора"
 msgid "All day"
 msgstr "Весь день"
 
+msgid "All resources have been imported."
+msgstr "Все ресурсы были импортированы."
+
 msgid "Already have an account?"
 msgstr "У вас уже есть аккаунт?"
 
@@ -219,7 +222,7 @@ msgid "Apply"
 msgstr "Применить"
 
 msgid "Article code"
-msgstr "Код статьи"
+msgstr "Номер товара"
 
 msgid "Audit logs"
 msgstr "Журналы аудита"
@@ -255,7 +258,7 @@ msgid "Back to project"
 msgstr "Назад к проекту"
 
 msgid "Bank account"
-msgstr "Банковский счет"
+msgstr "Банковский счёт"
 
 msgid "Bank name"
 msgstr "Название банка"
@@ -381,13 +384,13 @@ msgid "Change resource plan"
 msgstr "Изменить план ресурса"
 
 msgid "Civil number"
-msgstr "Гражданский номер"
+msgstr "Личный идентификационный номер"
 
 msgid "Close"
 msgstr "Закрыть"
 
 msgid "Cloud init template"
-msgstr "Шаблон инициализации в облаке"
+msgstr "Шаблон сloud-init"
 
 msgid "Cluster"
 msgstr "Кластер"
