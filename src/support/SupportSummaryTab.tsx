@@ -13,7 +13,7 @@ interface SupportSummaryTabProps extends TranslateProps {
 export const SupportSummaryTab = withTranslation(
   (props: SupportSummaryTabProps) => (
     <>
-      {props.summary && (
+      {props?.summary && (
         <p className="m-b-md">
           <FormattedHtml html={props.summary} />
         </p>

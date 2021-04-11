@@ -1,6 +1,6 @@
 ## Introduction
 
-Waldur HomePort is web-based client for the [Waldur MasterMind][1].
+Waldur HomePort is a web-based client for the [Waldur MasterMind][1].
 It uses yarn for dependency management and webpack as module bundler.
 
 ## System Requirements
