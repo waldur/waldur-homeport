@@ -884,6 +884,9 @@ msgstr "Devops-sõbralik pakkumine"
 msgid "DigitalOcean provider"
 msgstr "DigitalOceani pakkuja"
 
+msgid "Direction"
+msgstr "Suund"
+
 msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
 msgstr "Keelake profiil FreeIPA-s. Väljalülitatud profiiliga ei ole lubatud sisselogimise Linux süsteemidesse"
 
@@ -916,6 +919,9 @@ msgstr "Konto puudub?"
 
 msgid "Do you really want to delete comment?"
 msgstr "Kas sa soovid tõesti kommentaari kustutada?"
+
+msgid "Docker version"
+msgstr "Dockeri versioon"
 
 msgid "Documentation"
 msgstr "Dokumentatsioon"
@@ -1004,11 +1010,23 @@ msgstr "Luba profiil"
 msgid "Enabled"
 msgstr "Lubatud"
 
+msgid "End date"
+msgstr "Lõppkuupäev"
+
 msgid "End time"
 msgstr "Lõppaeg"
 
 msgid "English"
 msgstr "Inglise keeles"
+
+msgid "Ensure this field has no more than 30 characters."
+msgstr "Veenduge, et sellel väljal ei ole rohkem kui 30 märki."
+
+msgid "Enter IPv4 address."
+msgstr "Sisestage IPv4 aadress."
+
+msgid "Enter private IPv4 CIDR."
+msgstr "Sisestage privaatne IPv4 CIDR."
 
 msgid "Erred"
 msgstr "Viga"
@@ -1022,6 +1040,9 @@ msgstr "Hinnanguline kuutasu"
 msgid "Estimated cost"
 msgstr "Hinnangulised kulud"
 
+msgid "Estimated cost for the current month: {cost}"
+msgstr "Jooksva kuu hinnanguline maksumus: {cost}"
+
 msgid "Estimated monthly cost"
 msgstr "Hinnanguline kuu kulu"
 
@@ -1030,6 +1051,9 @@ msgstr "Eeldatav kuutasu muutub {old_estimate}-lt {new_estimate}-ni. Käibemaks 
 
 msgid "Estonian"
 msgstr "Eesti"
+
+msgid "Ethernet type"
+msgstr "Etherneti tüüp"
 
 msgid "Event details"
 msgstr "Sündmuse andmed"
@@ -1247,6 +1271,9 @@ msgstr "Mine turuplatsile"
 msgid "Go to my profile"
 msgstr "Mine minu profiilile"
 
+msgid "Go to profile"
+msgstr "Mine profiilile"
+
 msgid "Google Calendar has been published successfully."
 msgstr "Google'i kalender on edukalt avaldatud."
 
@@ -1286,6 +1313,9 @@ msgstr "Haak on eemaldatud"
 msgid "Hook removal"
 msgstr "Haagi eemaldamine"
 
+msgid "Hostname"
+msgstr "Hostname"
+
 msgid "Hostname or IP address of gateway node"
 msgstr "Lüüsisõlme hostinimi või IP-aadress"
 
@@ -1300,6 +1330,9 @@ msgstr "Kuidas omandada Azurele ligipääsuks vajalikud vahendid"
 
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr "Kuidas omandada DigitalOceani ligipääsuks vajalikud vahendid"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "ID code"
 msgstr "ID kood"
@@ -1319,6 +1352,9 @@ msgstr "IP versioon"
 msgid "I accept the <Link>Terms of Service</Link>."
 msgstr "Nõustun <Link> Teenusetingimustega <Link>."
 
+msgid "Icon"
+msgstr "Ikoon"
+
 msgid "Image"
 msgstr "Pilt"
 
@@ -1333,6 +1369,9 @@ msgstr "Pilt"
 
 msgid "Import"
 msgstr "Impordi"
+
+msgid "Import YAML"
+msgstr "Impordi YAML"
 
 msgid "Import offering"
 msgstr "Impordi pakkumine"
@@ -1583,6 +1622,15 @@ msgstr "Keystone autentimine URL (e.g. http://keystone.example.com:5000/v3)"
 msgid "Kubeconfig file"
 msgstr "Kubeconfig fail"
 
+msgid "Kubernetes node #{index}"
+msgstr "Kubernetese sõlm # {index}"
+
+msgid "Kubernetes nodes"
+msgstr "Kubernetese sõlmed"
+
+msgid "Kubernetes version"
+msgstr "Kubernetese versioon"
+
 msgid "Label that is visible to users in Marketplace."
 msgstr "Silt, mis on turuplatsi kasutajatele nähtav"
 
@@ -1628,6 +1676,9 @@ msgstr "Laadimine..."
 msgid "Loading actions"
 msgstr "Tegevuste laadimine"
 
+msgid "Loading assets, please wait."
+msgstr "Varade laadimine, palun oodake."
+
 msgid "Loading invoices"
 msgstr "Arvete laadimine"
 
@@ -1655,6 +1706,9 @@ msgstr "Tõrge sisselogimisel"
 msgid "Login with"
 msgstr "Logi sisse"
 
+msgid "Logo"
+msgstr "Logo"
+
 msgid "Logo has been removed."
 msgstr "Logo on eemaldatud"
 
@@ -1666,6 +1720,9 @@ msgstr "Välja logimine nurjus"
 
 msgid "MAC address"
 msgstr "MAC- aadress"
+
+msgid "MTU"
+msgstr "MTU"
 
 msgid "Manage"
 msgstr "Haldus"
@@ -1757,6 +1814,9 @@ msgstr "Min. salvestusmaht"
 msgid "Minimal value"
 msgstr "Minimaalne lubatud väärtus"
 
+msgid "Minimum username length is 3 characters."
+msgstr "Minimaalne kasutajanimi pikkus on 3 tähemärki."
+
 msgid "Mobile phone number"
 msgstr "Telefoninumber"
 
@@ -1768,6 +1828,9 @@ msgstr "Igakuine kulu"
 
 msgid "Monthly invoices"
 msgstr "Kuu arved"
+
+msgid "More"
+msgstr "Rohkem"
 
 msgid "More info"
 msgstr "Lisainfo"
@@ -1789,6 +1852,9 @@ msgstr "Minu teenused"
 
 msgid "Name"
 msgstr "Nimi"
+
+msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
+msgstr "Nimi \"{label}\" peab olema 1—63 tähemärki pikk, millest igaüks võib olla ainult tähtnumbriline või sidekriips"
 
 msgid "Name is duplicated. Choose other name."
 msgstr "Nimi juba eksisteerib. Vali uus"
@@ -2081,6 +2147,9 @@ msgstr "Organisatsiooni kustutamine"
 msgid "Organization roles"
 msgstr "Organisatsiooni rollid"
 
+msgid "Organization users list"
+msgstr "Asutuse kasutajate loend"
+
 msgid "Organization workspace"
 msgstr "Organisatsiooni tööruum"
 
@@ -2096,6 +2165,9 @@ msgstr "Organisatsioon {customer_name} on kustutatud."
 msgid "Organizations"
 msgstr "Asutused"
 
+msgid "Organizations ({count})"
+msgstr "Asutused ({count})"
+
 msgid "Overview"
 msgstr "Ülevaade"
 
@@ -2110,6 +2182,9 @@ msgstr "Omanduses olevad organisatsioonid"
 
 msgid "Owner"
 msgstr "Omanik"
+
+msgid "PID"
+msgstr "PID"
 
 msgid "Page is not found."
 msgstr "Lehte ei leitud"

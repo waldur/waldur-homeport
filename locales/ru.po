@@ -68,11 +68,17 @@ msgstr "Бухгалтерия"
 msgid "Accounting period"
 msgstr "Учётный период"
 
+msgid "Accounting plans"
+msgstr "Тарифы"
+
 msgid "Accounting start date"
 msgstr "Дата начала учета"
 
 msgid "Accounting type"
 msgstr "Тип бухгалтерского учёта"
+
+msgid "Action has been applied."
+msgstr "Действие было применено."
 
 msgid "Actions"
 msgstr "Действия"
@@ -89,6 +95,9 @@ msgstr "Цена активации"
 msgid "Active"
 msgstr "Активный"
 
+msgid "Active plans"
+msgstr "Действующие тарифы"
+
 msgid "Activity stream"
 msgstr "Лента активности"
 
@@ -97,6 +106,12 @@ msgstr "Добавить"
 
 msgid "Add SSH key"
 msgstr "Добавить SSH ключ"
+
+msgid "Add address"
+msgstr "Добавить адрес"
+
+msgid "Add comment"
+msgstr "Добавить комментарий"
 
 msgid "Add component"
 msgstr "Добавить компонент"
@@ -138,7 +153,7 @@ msgid "Add payment profile"
 msgstr "Добавить платежный профиль"
 
 msgid "Add plan"
-msgstr "Добавить план"
+msgstr "Добавить тариф"
 
 msgid "Add project"
 msgstr "Добавить проект"
@@ -209,6 +224,9 @@ msgstr "У вас уже есть аккаунт?"
 msgid "An error occurred on project removal."
 msgstr "Произошла ошибка при удалении проекта."
 
+msgid "Answer"
+msgstr "Ответ"
+
 msgid "Answers"
 msgstr "Ответы"
 
@@ -220,6 +238,9 @@ msgstr "Приложения"
 
 msgid "Apply"
 msgstr "Применить"
+
+msgid "Archived plans"
+msgstr "Старые тарифы"
 
 msgid "Article code"
 msgstr "Номер товара"
@@ -235,6 +256,9 @@ msgstr "Уполномоченный персонал"
 
 msgid "Auto-generated"
 msgstr "Созданы автоматически"
+
+msgid "Auto approve in service provider projects"
+msgstr "Автоматическое утверждение в проектах поставщиков услуг"
 
 msgid "Availability"
 msgstr "Доступность"
@@ -375,13 +399,13 @@ msgid "Change limits"
 msgstr "Изменить лимиты"
 
 msgid "Change plan"
-msgstr "Сменить план"
+msgstr "Сменить тариф"
 
 msgid "Change request - client’s request to perform a generic modification of data or service."
 msgstr "Запрос на изменение - запрос клиента на изменение данных или услуг."
 
 msgid "Change resource plan"
-msgstr "Изменить план ресурса"
+msgstr "Сменить тариф ресурса"
 
 msgid "Civil number"
 msgstr "Личный идентификационный номер"
@@ -407,14 +431,23 @@ msgstr "Комментарии"
 msgid "Competence"
 msgstr "Компетентность"
 
+msgid "Component name"
+msgstr "Название компонента"
+
 msgid "Components"
 msgstr "Компоненты"
+
+msgid "Components are invalid."
+msgstr "Недопустимые компоненты."
 
 msgid "Configure"
 msgstr "Настроить"
 
 msgid "Confirm deletion?"
 msgstr "Подтвердить удаление?"
+
+msgid "Confirmation"
+msgstr "Подтверждение"
 
 msgid "Confirmation mail has been sent. Please check your inbox!"
 msgstr "Подтверждающее письмо было отправлено. Пожалуйста, проверьте свою почту!"
@@ -427,6 +460,9 @@ msgstr "Контактный email"
 
 msgid "Contact phone"
 msgstr "Контактный телефон"
+
+msgid "Control plane"
+msgstr "Управляющий узел"
 
 msgid "Cost"
 msgstr "Стоимость"
@@ -455,14 +491,26 @@ msgstr "Создать запрос"
 msgid "Created at"
 msgstr "Создано"
 
+msgid "Current email"
+msgstr "Текущий адрес эл. почты"
+
+msgid "Current plan"
+msgstr "Текущий тариф"
+
 msgid "Current size"
 msgstr "Текущий размер"
+
+msgid "Customer support satisfaction overall rating"
+msgstr "Общий рейтинг удовлетворенности клиентов"
 
 msgid "Date"
 msgstr "Дата"
 
 msgid "Date joined"
 msgstr "Дата присоединения"
+
+msgid "Deactivate"
+msgstr "Отключить"
 
 msgid "Delete"
 msgstr "Удалить"
@@ -485,11 +533,17 @@ msgstr "Документация"
 msgid "Download invoice"
 msgstr "Скачать счёт"
 
+msgid "Download order PDF file"
+msgstr "Скачать файл заказа в формате PDF"
+
 msgid "Due date"
 msgstr "Срок"
 
 msgid "Edit"
 msgstr "Изменить"
+
+msgid "Edit YAML"
+msgstr "Редактировать YAML"
 
 msgid "Edit project member"
 msgstr "Изменить участника проекта"
@@ -505,6 +559,9 @@ msgstr "Время окончания"
 
 msgid "English"
 msgstr "Английский"
+
+msgid "Environment variables"
+msgstr "Переменные среды"
 
 msgid "Error message"
 msgstr "Сообщение об ошибке"
@@ -690,7 +747,7 @@ msgid "Networks"
 msgstr "Сети"
 
 msgid "New plan"
-msgstr "Новый план"
+msgstr "Новый тариф"
 
 msgid "New size"
 msgstr "Новый размер"
@@ -701,8 +758,14 @@ msgstr "Дальше"
 msgid "No access info"
 msgstr "Данных доступа нет"
 
+msgid "Node plan"
+msgstr "Тариф узла"
+
 msgid "Notifications"
 msgstr "Уведомления"
+
+msgid "Number of control plane nodes"
+msgstr "Количество управляющих узлов"
 
 msgid "Open"
 msgstr "Открыть"
@@ -745,6 +808,24 @@ msgstr "Номер телефона"
 
 msgid "Phone numbers"
 msgstr "Номера телефона"
+
+msgid "Plan"
+msgstr "Тариф"
+
+msgid "Plan #{index}"
+msgstr "Тариф №{index}"
+
+msgid "Plan description"
+msgstr "Описание тарифа"
+
+msgid "Plan details"
+msgstr "Сведения о тарифе"
+
+msgid "Plan name"
+msgstr "Название тарифа"
+
+msgid "Plan price"
+msgstr "Цена тарифа"
 
 msgid "Preferred language"
 msgstr "Предпочитаемый язык"
@@ -796,6 +877,9 @@ msgstr "Удалить организацию"
 
 msgid "Remove profile"
 msgstr "Удалить профиль"
+
+msgid "Select plan"
+msgstr "Выберите тариф"
 
 msgid "Support"
 msgstr "Поддержка"

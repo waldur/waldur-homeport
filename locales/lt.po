@@ -99,7 +99,7 @@ msgid "Add component"
 msgstr "Pridėti komponentą"
 
 msgid "Add data volume"
-msgstr "Pridėti duomenų kiekį"
+msgstr "Pridėti duomenų tomas"
 
 msgid "Add environment variable"
 msgstr "Pridėti aplinkos kintamąjį"
@@ -345,7 +345,7 @@ msgid "Back to organization"
 msgstr "Atgal į organizaciją"
 
 msgid "Back to personal dashboard"
-msgstr "Grįžti į asmeninę informacijos suvestinę"
+msgstr "Grįžti į asmeninį prietaisų skydelį"
 
 msgid "Back to project"
 msgstr "Atgal į projektą"
@@ -394,6 +394,849 @@ msgstr "Užsakymas priimtas."
 
 msgid "Booking has been cancelled."
 msgstr "Užsakymas atšauktas."
+
+msgid "Booking is not allowed to overlap other bookings."
+msgstr "Užsakymui neleidžiama persidengti su kitais užsakymais."
+
+msgid "Booking management"
+msgstr "Užsakymų valdymas"
+
+msgid "Bootable"
+msgstr "Įkraunamas"
+
+msgid "Browse image"
+msgstr "Naršyti vaizdą"
+
+msgid "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed."
+msgstr "Nustatydami žetono gyvavimo laiką neribotą, leidžiate bet kuriam žetoną turinčiam asmeniui apsimesti jūsų veiksmais, kol žetonas bus pakeistas."
+
+msgid "By submitting the form you are agreeing to the <Link>Terms of Service</Link>."
+msgstr "Pateikdami formą sutinkate su <Link>Paslaugų teikimo sąlygos</Link>."
+
+msgid "CIDR"
+msgstr "CIDR"
+
+msgid "CPU limit (hours)"
+msgstr "CPU limitas (valandomis)"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Caller"
+msgstr "Skambintojas"
+
+msgid "Cannot create floating IP if tenant external network is not defined."
+msgstr "Negalima sukurti slankiojo IP, jei neapibrėžtas nuomininko išorinis tinklas."
+
+msgid "Catalog URL"
+msgstr "Katalogo URL"
+
+msgid "Catalog has been created."
+msgstr "Katalogas sukurtas."
+
+msgid "Catalog has been deleted."
+msgstr "Katalogas ištrintas."
+
+msgid "Catalogues"
+msgstr "Katalogai"
+
+msgid "Category is invalid."
+msgstr "Kategorija neteisinga."
+
+msgid "Challenge code"
+msgstr "Iššūkio kodas"
+
+msgid "Change Request"
+msgstr "Keisti užklausą"
+
+msgid "Change flavor"
+msgstr "Keisti skonį"
+
+msgid "Change limits"
+msgstr "Keisti ribas"
+
+msgid "Change plan"
+msgstr "Keisti planą"
+
+msgid "Change request - client’s request to perform a generic modification of data or service."
+msgstr "Keitimo užklausa - kliento užklausa atlikti bendrą duomenų ar paslaugos modifikavimą."
+
+msgid "Change resource limits"
+msgstr "Keisti išteklių ribas"
+
+msgid "Change resource plan"
+msgstr "Keisti išteklių planą"
+
+msgid "Change user email"
+msgstr "Keisti vartotojo el. paštą"
+
+msgid "Changing flavor"
+msgstr "Skonio keitimas"
+
+msgid "Charge for usage-based component is based on user-requested limit."
+msgstr "Mokestis už naudojimu pagrįstą komponentą pagrįstas vartotojo pageidaujamu limitu."
+
+msgid "Charset"
+msgstr "Charset"
+
+msgid "Checklist setup"
+msgstr "Kontrolinio sąrašo sąranka"
+
+msgid "Checklists"
+msgstr "Kontroliniai sąrašai"
+
+msgid "Choices as comma-separated list"
+msgstr "Pasirinkimai kaip kableliais atskirtas sąrašas"
+
+msgid "Civil number"
+msgstr "Civilinis numeris"
+
+msgid "Client organization"
+msgstr "Kliento organizacija"
+
+msgid "Client project"
+msgstr "Kliento projektas"
+
+msgid "Client secret"
+msgstr "Kliento paslaptis"
+
+msgid "Cloud RAM"
+msgstr "Debesies RAM"
+
+msgid "Cloud block storage size"
+msgstr "Debesies blokų saugyklos dydis"
+
+msgid "Cloud init template"
+msgstr "Debesies init šablonas"
+
+msgid "Cloud vCPU"
+msgstr "Debesis vCPU"
+
+msgid "Cluster"
+msgstr "Klasteris"
+
+msgid "Cluster IP"
+msgstr "Klasterio IP"
+
+msgid "Cluster description"
+msgstr "Klasterio aprašymas"
+
+msgid "Cluster name"
+msgstr "Klasterio pavadinimas"
+
+msgid "Cluster roles"
+msgstr "Klasterio vaidmenys"
+
+msgid "Code is too short."
+msgstr "Kodas yra per trumpas."
+
+msgid "Code should consist of latin symbols or numbers."
+msgstr "Kodą turėtų sudaryti lotyniški simboliai arba skaičiai."
+
+msgid "Collation"
+msgstr "Sulyginimas"
+
+msgid "Company data"
+msgstr "Įmonės duomenys"
+
+msgid "Compare items"
+msgstr "Palyginti prekes"
+
+msgid "Competence"
+msgstr "Kompetencija"
+
+msgid "Compliance"
+msgstr "Laikymasis"
+
+msgid "Component name"
+msgstr "Komponento pavadinimas"
+
+msgid "Components are invalid."
+msgstr "Komponentai neteisingi."
+
+msgid "Compute generation"
+msgstr "Skaičiavimų generavimas"
+
+msgid "Configuration options"
+msgstr "Konfigūracijos parinktys"
+
+msgid "Confirmation mail has been sent. Please check your inbox!"
+msgstr "Išsiųstas patvirtinimo laiškas. Patikrinkite savo pašto dėžutę!"
+
+msgid "Confirmation notification template"
+msgstr "Patvirtinimo pranešimo šablonas"
+
+msgid "Confirming that data is correct"
+msgstr "Patvirtinimas, kad duomenys teisingi"
+
+msgid "Connected subnets"
+msgstr "Prijungti potinkliai"
+
+msgid "Connection details"
+msgstr "Ryšio informacija"
+
+msgid "Contact phone"
+msgstr "Kontaktinis telefonas"
+
+msgid "Contract sum"
+msgstr "Sutarties suma"
+
+msgid "Contract sum is"
+msgstr "Sutarties suma yra"
+
+msgid "Control plane"
+msgstr "Valdymo plokštuma"
+
+msgid "Could not create organization"
+msgstr "Nepavyko sukurti organizacijos"
+
+msgid "Create Network adapter"
+msgstr "Sukurkite tinklo adapterį"
+
+msgid "Create SQL database in PostgreSQL server"
+msgstr "Sukurkite SQL duomenų bazę PostgreSQL serveryje"
+
+msgid "Create VM snapshot for OpenStack instance"
+msgstr "Sukurkite VM momentinę kopiją OpenStack egzemplioriui"
+
+msgid "Create an availability"
+msgstr "Sukurkite prieinamumą"
+
+msgid "Create application"
+msgstr "Sukurti programą"
+
+msgid "Create catalog"
+msgstr "Sukurti katalogą"
+
+msgid "Create disk"
+msgstr "Sukurti diską"
+
+msgid "Create horizontal pod autoscaler"
+msgstr "Sukurti horizontalų pod automatinį skalerį"
+
+msgid "Create network for OpenStack tenant"
+msgstr "Sukurkite OpenStack nuomininko tinklą"
+
+msgid "Create node"
+msgstr "Sukurkite mazgą"
+
+msgid "Create notification"
+msgstr "Sukurti pranešimą"
+
+msgid "Create organization"
+msgstr "Sukurti organizaciją"
+
+msgid "Create port"
+msgstr "Sukurti prievadą"
+
+msgid "Create security group for OpenStack tenant {name}"
+msgstr "Sukurti OpenStack nuomotojo {name} saugos grupę"
+
+msgid "Create snapshot for OpenStack volume"
+msgstr "Sukurti OpenStack tomo momentinę nuotrauką"
+
+msgid "Create snapshot schedule for OpenStack volume"
+msgstr "Sukurti OpenStack tomo momentinių kopijų tvarkaraštį"
+
+msgid "Create subnet"
+msgstr "Sukurkite potinklį"
+
+msgid "Create your first project"
+msgstr "Sukurkite savo pirmąjį projektą"
+
+msgid "Created a new payment for {customer_link}."
+msgstr "Sukūrė naują mokėjimą už {customer_link}."
+
+msgid "Created at"
+msgstr "Sukurta"
+
+msgid "Creating a backup schedule"
+msgstr "Atsarginės kopijos tvarkaraščio kūrimas"
+
+msgid "Creating a floating IP"
+msgstr "Slankiojo IP kūrimas"
+
+msgid "Creating a new network"
+msgstr "Naujo tinklo kūrimas"
+
+msgid "Creating a security group"
+msgstr "Saugos grupės kūrimas"
+
+msgid "Creating a subnet"
+msgstr "Potinklio kūrimas"
+
+msgid "Creating snapshot schedule"
+msgstr "Momentinių nuotraukų tvarkaraščio kūrimas"
+
+msgid "Current API token"
+msgstr "Dabartinis API atpažinimo ženklas"
+
+msgid "Current cost"
+msgstr "Dabartinės išlaidos"
+
+msgid "Current email"
+msgstr "Dabartinis el. paštas"
+
+msgid "Current flavor"
+msgstr "Dabartinis skonis"
+
+msgid "Current limit"
+msgstr "Dabartinė riba"
+
+msgid "Current price per month"
+msgstr "Dabartinė kaina per mėnesį"
+
+msgid "Current replicas"
+msgstr "Dabartinės kopijos"
+
+msgid "Current size"
+msgstr "Dabartinis dydis"
+
+msgid "Current type"
+msgstr "Dabartinis tipas"
+
+msgid "Customer support satisfaction overall rating"
+msgstr "Klientų aptarnavimo pasitenkinimo bendras įvertinimas"
+
+msgid "DNS name servers"
+msgstr "DNS vardų serveriai"
+
+msgid "Daily available booking time range"
+msgstr "Dienos galimas užsakymo laiko intervalas"
+
+msgid "Data volume #{index}"
+msgstr "Duomenų tomas #{index}"
+
+msgid "Data volume should have at least {size} GB."
+msgstr "Duomenų tome turėtų būti bent {size} GB."
+
+msgid "Data volume size:"
+msgstr "Duomenų tomo dydis:"
+
+msgid "Data volume type"
+msgstr "Duomenų tomo tipas"
+
+msgid "Datacite DOI"
+msgstr "Datacite DOI"
+
+msgid "Datastore"
+msgstr "Duomenų saugykla"
+
+msgid "Date and time of incident"
+msgstr "Įvykio data ir laikas"
+
+msgid "Date joined"
+msgstr "Prisijungimo data"
+
+msgid "Date of reporting"
+msgstr "Ataskaitų teikimo data"
+
+msgid "Default SLURM account for user"
+msgstr "Numatytoji vartotojo SLURM paskyra"
+
+msgid "Default availability zone for provisioned instances."
+msgstr "Numatytoji parengtų egzempliorių prieinamumo zona."
+
+msgid "Default cluster label"
+msgstr "Numatytoji klasterio etiketė"
+
+msgid "Default tax percent"
+msgstr "Numatytasis mokesčių procentas"
+
+msgid "Delete catalog"
+msgstr "Ištrinti katalogą"
+
+msgid "Delete volumes"
+msgstr "Ištrinti tomus"
+
+msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
+msgstr "Ištrynus PostgreSQL serverį, bus ištrintos visos serveryje sukurtos duomenų bazės."
+
+msgid "Deploy Longhorn block storage after cluster is deployed"
+msgstr "Diegti Longhorn bloko saugyklą įdiegus klasterį"
+
+msgid "Desired replicas"
+msgstr "Norimos kopijos"
+
+msgid "Destination URL"
+msgstr "Paskirties URL"
+
+msgid "Destination (CIDR)"
+msgstr "Paskirties vieta (CIDR)"
+
+msgid "Destroy"
+msgstr "Sunaikink"
+
+msgid "Destroy resource"
+msgstr "Sunaikink išteklius"
+
+msgid "Destroy {name} instance"
+msgstr "Sunaikinti {name} egzempliorių"
+
+msgid "Destroying"
+msgstr "Naikinantis"
+
+msgid "Detach"
+msgstr "Atjungti"
+
+msgid "Detaching"
+msgstr "Atjungimas"
+
+msgid "Devops-friendly offering"
+msgstr "Devops draugiškas pasiūlymas"
+
+msgid "DigitalOcean provider"
+msgstr "DigitalOcean teikėjas"
+
+msgid "Disable a profile in FreeIPA. Disabled profiles are not allowed for login into the Linux systems"
+msgstr "Išjunkite profilį FreeIPA. Išjungti profiliai neleidžiami prisijungti prie Linux sistemų"
+
+msgid "Disable data volume"
+msgstr "Išjungti duomenų tomą"
+
+msgid "Disable gateway IP advertising via DHCP"
+msgstr "Išjunkite šliuzo IP reklamą per DHCP"
+
+msgid "Disable profile"
+msgstr "Išjungti profilį"
+
+msgid "Disk extension has been scheduled."
+msgstr "Disko plėtinys suplanuotas."
+
+msgid "Disk has been created."
+msgstr "Diskas sukurtas."
+
+msgid "Disks"
+msgstr "Diskai"
+
+msgid "Division type"
+msgstr "Padalinio tipas"
+
+msgid "Do not allow user to specify quotas when offering is provisioned."
+msgstr "Neleiskite vartotojui nurodyti kvotų, kai pasiūlymas yra parengimas."
+
+msgid "Do not configure a gateway for this subnet"
+msgstr "Nekonfigūruokite šio potinklio šliuzo"
+
+msgid "Do not have an account?"
+msgstr "Neturite paskyros?"
+
+msgid "Do you really want to delete comment?"
+msgstr "Ar tikrai norite ištrinti komentarą?"
+
+msgid "Do you want to unlink instance {name}?"
+msgstr "Ar norite atsieti egzempliorių {name}?"
+
+msgid "Docker version"
+msgstr "Docker versija"
+
+msgid "Domain name. If not defined default domain will be used."
+msgstr "Domeno pavadinimas. Jei nenustatytas, bus naudojamas numatytasis domenas."
+
+msgid "Download invoice"
+msgstr "Atsisiųsti sąskaitą faktūrą"
+
+msgid "Download order PDF file"
+msgstr "Atsisiųsti užsakymo PDF failą"
+
+msgid "Drop files to attach, or"
+msgstr "Nuvilkite failus, kuriuos norite pridėti, arba"
+
+msgid "Drop files to attach them to the issue."
+msgstr "Nuvilkite failus, kad pridėtumėte juos prie problemos."
+
+msgid "Droplet has been resized."
+msgstr "Pakeistas lašelio dydis."
+
+msgid "Dynamic — use separate volume types for tracking pricing"
+msgstr "Dinaminis - stebėdami kainas, naudokite atskirus tomų tipus"
+
+msgid "EU VAT ID"
+msgstr "ES PVM mokėtojo kodas"
+
+msgid "Each mount point should be used once at most."
+msgstr "Kiekvienas montavimo taškas turėtų būti naudojamas ne daugiau kaip vieną kartą."
+
+msgid "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
+msgstr "Kiekviena naudojimo ataskaita turi būti susieta su atsiskaitymo planu, kad būtų užtikrintas teisingas apskaitos duomenų apskaičiavimas."
+
+msgid "Edit YAML"
+msgstr "Redaguoti YAML"
+
+msgid "Edit an availability"
+msgstr "Redaguoti prieinamumą"
+
+msgid "Edit attributes"
+msgstr "Redaguoti atributus"
+
+msgid "Edit booking event"
+msgstr "Redaguoti užsakymo įvykį"
+
+msgid "Edit offering"
+msgstr "Redaguoti pasiūlymą"
+
+msgid "Edit project member"
+msgstr "Redaguoti projekto narį"
+
+msgid "Edit team member"
+msgstr "Redaguoti komandos narį"
+
+msgid "Egress"
+msgstr "Išėjimas"
+
+msgid "Email change request has been cancelled."
+msgstr "El. pašto pakeitimo užklausa atšaukta."
+
+msgid "Email has been updated."
+msgstr "El. paštas buvo atnaujintas."
+
+msgid "Email verification has been sent. Please check your inbox."
+msgstr "Išsiųstas el. pašto patvirtinimas. Patikrinkite savo pašto dėžutę."
+
+msgid "Enable DHCP"
+msgstr "Įgalinti DHCP"
+
+msgid "Enable a profile in FreeIPA. Only enabled profiles are allowed for login into the Linux systems"
+msgstr "Įgalinti profilį „FreeIPA“. Tik įgalintus profilius leidžiama prisijungti prie Linux sistemų"
+
+msgid "Enable by default"
+msgstr "Įgalinti pagal numatytuosius nustatymus"
+
+msgid "Enable limit"
+msgstr "Įjungti ribą"
+
+msgid "Enable profile"
+msgstr "Įgalinti profilį"
+
+msgid "Enable profile after creation"
+msgstr "Įgalinti profilį po sukūrimo"
+
+msgid "Enabled checklists have been updated."
+msgstr "Įgalinti kontroliniai sąrašai atnaujinti."
+
+msgid "Enabled default gateway"
+msgstr "Įgalintas numatytasis šliuzas"
+
+msgid "Encountered an empty component"
+msgstr "Aptiko tuščią komponentą"
+
+msgid "End date must be after start date."
+msgstr "Pabaigos data turi būti vėlesnė už pradžios datą."
+
+msgid "End date of the agreement is"
+msgstr "Sutarties pabaigos data yra"
+
+msgid "Ensure this field has no more than 30 characters."
+msgstr "Įsitikinkite, kad šiame lauke yra ne daugiau kaip 30 simbolių."
+
+msgid "Enter IPv4 address."
+msgstr "Įveskite IPv4 adresą."
+
+msgid "Enter private IPv4 CIDR."
+msgstr "Įveskite privatų IPv4 CIDR."
+
+msgid "Environment variables"
+msgstr "Aplinkos kintamieji"
+
+msgid "Erred"
+msgstr "Klaida"
+
+msgid "Error traceback"
+msgstr "Klaida atsekant"
+
+msgid "Estimated cost"
+msgstr "Įvertintos išlaidos"
+
+msgid "Estimated cost for the current month: {cost}"
+msgstr "Numatomos einamojo mėnesio išlaidos: {cost}"
+
+msgid "Estimated monthly cost"
+msgstr "Numatomos mėnesio išlaidos"
+
+msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
+msgstr "Numatomas mėnesinis mokestis pasikeis iš {old_estimate} į {new_estimate}. PVM neįtrauktas."
+
+msgid "Ethernet type"
+msgstr "Ethernet tipas"
+
+msgid "Evaluation"
+msgstr "Vertinimas"
+
+msgid "Event types"
+msgstr "Įvykių tipai"
+
+msgid "Every day at"
+msgstr "Kiekvieną dieną"
+
+msgid "Every hour at {minuteValues} past the hour"
+msgstr "Kas valandą {minuteValues} praėjus valandai"
+
+msgid "Every month on the {days} at {time}"
+msgstr "Kiekvieną mėnesį {days}, {time}"
+
+msgid "Every month on the {days} of {months} at {time}"
+msgstr "Kiekvieną mėnesį {months} {days} {time}"
+
+msgid "Every month service provider can report up to the amount requested by user."
+msgstr "Kiekvieną mėnesį paslaugų teikėjas gali pranešti iki vartotojo prašomos sumos."
+
+msgid "Every week on {day} at {time}"
+msgstr "Kiekvieną savaitę {day}, {time}"
+
+msgid "Excel"
+msgstr "Excel"
+
+msgid "Existing quota usage: {usage}"
+msgstr "Esamas kvotos naudojimas: {usage}"
+
+msgid "Expiration time"
+msgstr "Galiojimo laikas"
+
+msgid "Expires at"
+msgstr "Galioja iki"
+
+msgid "Export as"
+msgstr "Eksportuoti kaip"
+
+msgid "Extend OpenStack volume"
+msgstr "Išplėsti OpenStack tomą"
+
+msgid "Extend disk"
+msgstr "Išplėsti diską"
+
+msgid "Extending"
+msgstr "Išplėtimas"
+
+msgid "External IP"
+msgstr "Išorinis IP"
+
+msgid "External network ID"
+msgstr "Išorinio tinklo ID"
+
+msgid "Fee applied each time this plan is activated."
+msgstr "Mokestis taikomas kiekvieną kartą, kai suaktyvinamas šis planas."
+
+msgid "File download has been started."
+msgstr "Failų atsisiuntimas buvo pradėtas."
+
+msgid "File has been copied"
+msgstr "Failas nukopijuotas"
+
+msgid "File has been downloaded."
+msgstr "Failas atsisiųstas."
+
+msgid "Filter organizations"
+msgstr "Filtruoti organizacijas"
+
+msgid "Filter projects"
+msgstr "Filtruoti projektus"
+
+msgid "Financial overview"
+msgstr "Finansinė apžvalga"
+
+msgid "Find solution"
+msgstr "Rasti sprendimą"
+
+msgid "Fixed-price contract"
+msgstr "Fiksuotos kainos sutartis"
+
+msgid "Fixed — use common storage quota"
+msgstr "Fiksuota – naudoti bendrąją saugyklos kvotą"
+
+msgid "Flavor"
+msgstr "Skonis"
+
+msgid "Flavor change has been scheduled."
+msgstr "Suplanuotas skonio pakeitimas."
+
+msgid "Flavor exclude regex"
+msgstr "Skonis neįtraukti regex"
+
+msgid "Flavor name"
+msgstr "Skonio pavadinimas"
+
+msgid "Flavor name: {flavor_name}"
+msgstr "Skonio pavadinimas: {flavor_name}"
+
+msgid "Flavors"
+msgstr "Skoniai"
+
+msgid "Flavors List"
+msgstr "Skonių sąrašas"
+
+msgid "Flavors matching this regex expression will not be pulled from the backend."
+msgstr "Skoniai, atitinkantys šią regex išraišką, nebus ištraukti iš užpakalinės dalies."
+
+msgid "Flavors regex"
+msgstr "Skoniai regex"
+
+msgid "Flexible"
+msgstr "Lankstus"
+
+msgid "Floating IP"
+msgstr "Slankusis IP"
+
+msgid "Floating IP count"
+msgstr "Slankusis IP skaičius"
+
+msgid "Floating IPs"
+msgstr "Slankieji IP"
+
+msgid "Floating IPs update has been scheduled."
+msgstr "Suplanuotas slankiojo IP naujinimas."
+
+msgid "Flowmap"
+msgstr "Srauto žemėlapis"
+
+msgid "Force destroy"
+msgstr "Jėga sunaikinti"
+
+msgid "Force destroy {name} instance"
+msgstr "Priversti sunaikinti {name} egzempliorių"
+
+msgid "FreeIPA account"
+msgstr "FreeIPA paskyra"
+
+msgid "FreeIPA account needs to be set up."
+msgstr "Reikia sukurti FreeIPA paskyrą."
+
+msgid "FreeIPA extension is disabled."
+msgstr "FreeIPA plėtinys yra išjungtas."
+
+msgid "From port"
+msgstr "Iš prievado"
+
+msgid "GB"
+msgstr "GB"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "GPU limit (hours)"
+msgstr "GPU limitas (valandomis)"
+
+msgid "GPU usage"
+msgstr "GPU naudojimas"
+
+msgid "Gateway IP of this subnet"
+msgstr "Šio potinklio IP šliuzas"
+
+msgid "Generate Kubeconfig file"
+msgstr "Generuoti Kubeconfig failą"
+
+msgid "Go to my profile"
+msgstr "Eiti į mano profilį"
+
+msgid "Google Calendar has been published successfully."
+msgstr "Google kalendorius sėkmingai paskelbtas."
+
+msgid "Google Calendar has been synced successfully."
+msgstr "Google kalendorius sėkmingai sinchronizuotas."
+
+msgid "Google Calendar has been unpublished successfully."
+msgstr "Google kalendoriaus paskelbimas sėkmingai atšauktas."
+
+msgid "Google Calendar link"
+msgstr "Google kalendoriaus nuoroda"
+
+msgid "Growth"
+msgstr "Augimas"
+
+msgid "Guest OS"
+msgstr "Svečio OS"
+
+msgid "HPA"
+msgstr "HPA"
+
+msgid "Heatmap"
+msgstr "Šilumos žemėlapis"
+
+msgid "Helpdesk"
+msgstr "Pagalbos tarnyba"
+
+msgid "Helpdesk dashboard"
+msgstr "Pagalbos tarnybos prietaisų skydelis"
+
+msgid "Hide diff"
+msgstr "Slėpti diff"
+
+msgid "Home organization domain name"
+msgstr "Namų organizacijos domeno pavadinimas"
+
+msgid "Hook has been removed."
+msgstr "Kablys pašalintas."
+
+msgid "Hook removal"
+msgstr "Kablio pašalinimas"
+
+msgid "Hostname"
+msgstr "Pagrindinio kompiuterio vardas"
+
+msgid "Hostname or IP address of gateway node"
+msgstr "Šliuzo mazgo pagrindinio kompiuterio vardas arba IP adresas"
+
+msgid "How to generate SSH key"
+msgstr "Kaip generuoti SSH raktą"
+
+msgid "How to obtain credentials for Azure provider"
+msgstr "Kaip gauti Azure teikėjo kredencialus"
+
+msgid "How to obtain credentials for DigitalOcean provider"
+msgstr "Kaip gauti DigitalOcean teikėjo kredencialus"
+
+msgid "ID code"
+msgstr "ID kodas"
+
+msgid "IP address is already used by router."
+msgstr "IP adresas jau naudojamas maršrutizatoriuje."
+
+msgid "IP protocol"
+msgstr "IP protokolas"
+
+msgid "IP version"
+msgstr "IP versija"
+
+msgid "I accept the <Link>Terms of Service</Link>."
+msgstr "Aš sutinku su <Link>Paslaugų teikimo sąlygos</Link>."
+
+msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
+msgstr "Suteikta tapatybė pasirinkta naudojant SAML2 paieškos paslaugą. Netrukus būsite nukreipti į prisijungimo puslapį."
+
+msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
+msgstr "Jei norite, kad užsakydamas naudotojas pateiktų papildomos informacijos, žemiau sukonfigūruokite vartotojo įvesties formą"
+
+msgid "Image has been added."
+msgstr "Vaizdas pridėtas."
+
+msgid "Image has been removed."
+msgstr "Vaizdas pašalintas."
+
+msgid "Image here"
+msgstr "Vaizdas čia"
+
+msgid "Import YAML"
+msgstr "Importuoti YAML"
+
+msgid "Import offering"
+msgstr "Importuoti pasiūlymą"
+
+msgid "Import resource"
+msgstr "Importuoti išteklius"
+
+msgid "Importing resources"
+msgstr "Išteklių importavimas"
+
+msgid "In the format of GUID"
+msgstr "GUID formatu"
+
+msgid "Inactive user will not be able to login into the portal."
+msgstr "Neaktyvus vartotojas negalės prisijungti prie portalo."
+
+msgid "Incident"
+msgstr "Incidentas"
+
+msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
+msgstr "Incidentas - kliento problema, susijusi su paslaugos naudojimu ar prieinamumu (pertraukimai, kokybės pablogėjimas)."
 
 msgid "(VAT is not included)"
 msgstr "(PVM neįskaičiuotas)"
