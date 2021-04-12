@@ -32,8 +32,23 @@ msgstr "Vienkartinis mokestis taikomas aktyvavimo metu."
 msgid "A profile has been created."
 msgstr "Sukurtas profilis."
 
+msgid "Abbreviation"
+msgstr "Santrumpa"
+
+msgid "Accept"
+msgstr "Sutikti"
+
 msgid "Accept booking"
 msgstr "Priimkite užsakymą"
+
+msgid "Accept invitation"
+msgstr "Priimti pakvietimą"
+
+msgid "Accepted"
+msgstr "Priimta"
+
+msgid "Access"
+msgstr "Prieiga"
 
 msgid "Access subnets"
 msgstr "Prieiga prie potinklių"
@@ -52,6 +67,9 @@ msgstr "Paskyra suaktyvinta."
 
 msgid "Account removal"
 msgstr "Paskyros pašalinimas"
+
+msgid "Accounting"
+msgstr "Apskaita"
 
 msgid "Accounting period"
 msgstr "Apskaitos laikotarpis"
@@ -76,6 +94,9 @@ msgstr "Apskaitos tipas"
 
 msgid "Action has been applied."
 msgstr "Veiksmas pritaikytas."
+
+msgid "Actions"
+msgstr "Veiksmai"
 
 msgid "Activation price"
 msgstr "Aktyvinimo kaina"
@@ -599,6 +620,9 @@ msgstr "Sukurkite SQL duomenų bazę PostgreSQL serveryje"
 msgid "Create VM snapshot for OpenStack instance"
 msgstr "Sukurkite VM momentinę kopiją OpenStack egzemplioriui"
 
+msgid "Create VM snapshot schedule for OpenStack instance"
+msgstr "Sukurkite „OpenStack“ egzemplioriaus VM momentinių nuotraukų tvarkaraštį"
+
 msgid "Create an availability"
 msgstr "Sukurkite prieinamumą"
 
@@ -944,6 +968,9 @@ msgstr "Klaida"
 msgid "Error traceback"
 msgstr "Klaida atsekant"
 
+msgid "Esimated price per month"
+msgstr "Pirmoji kaina per mėnesį"
+
 msgid "Estimated cost"
 msgstr "Įvertintos išlaidos"
 
@@ -995,6 +1022,9 @@ msgstr "Galiojimo laikas"
 msgid "Expires at"
 msgstr "Galioja iki"
 
+msgid "Explore {deployment} Marketplace"
+msgstr "Susipažinkite su {deployment} Marketplace"
+
 msgid "Export as"
 msgstr "Eksportuoti kaip"
 
@@ -1012,6 +1042,9 @@ msgstr "Išorinis IP"
 
 msgid "External network ID"
 msgstr "Išorinio tinklo ID"
+
+msgid "Failed to operate with backend."
+msgstr "Nepavyko operuoti su backend."
 
 msgid "Fee applied each time this plan is activated."
 msgstr "Mokestis taikomas kiekvieną kartą, kai suaktyvinamas šis planas."
@@ -1124,6 +1157,9 @@ msgstr "Šio potinklio IP šliuzas"
 msgid "Generate Kubeconfig file"
 msgstr "Generuoti Kubeconfig failą"
 
+msgid "Go to marketplace"
+msgstr "Eikite į marketplace"
+
 msgid "Go to my profile"
 msgstr "Eiti į mano profilį"
 
@@ -1141,6 +1177,15 @@ msgstr "Google kalendoriaus nuoroda"
 
 msgid "Growth"
 msgstr "Augimas"
+
+msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
+msgstr "Garantuotas VM momentinės nuotraukos išlaikymo laikas. Jei niekinis - laikykis amžinai."
+
+msgid "Guaranteed time of snapshot retention. If null - keep forever."
+msgstr "Garantuotas momentinių nuotraukų išlaikymo laikas. Jei niekinis - laikykis amžinai."
+
+msgid "Guaranteed time of volume snapshot retention. If null - keep forever."
+msgstr "Garantuotas tomo momentinės nuotraukos išlaikymo laikas. Jei niekinis - laikykis amžinai."
 
 msgid "Guest OS"
 msgstr "Svečio OS"
@@ -1169,11 +1214,23 @@ msgstr "Kablys pašalintas."
 msgid "Hook removal"
 msgstr "Kablio pašalinimas"
 
+msgid "Horizontal pod autoscaler has been created."
+msgstr "Sukurta horizontali pod automatinė skalė."
+
+msgid "Horizontal pod autoscaler has been updated."
+msgstr "Horizontali pod automatinė skalė atnaujinta."
+
+msgid "Host routes"
+msgstr "Pagrindiniai maršrutai"
+
 msgid "Hostname"
 msgstr "Pagrindinio kompiuterio vardas"
 
 msgid "Hostname or IP address of gateway node"
 msgstr "Šliuzo mazgo pagrindinio kompiuterio vardas arba IP adresas"
+
+msgid "Hostname or IP address of master node"
+msgstr "Pagrindinio mazgo kompiuterio vardas arba IP adresas"
 
 msgid "How to generate SSH key"
 msgstr "Kaip generuoti SSH raktą"
@@ -1237,6 +1294,2313 @@ msgstr "Incidentas"
 
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr "Incidentas - kliento problema, susijusi su paslaugos naudojimu ar prieinamumu (pertraukimai, kokybės pablogėjimas)."
+
+msgid "Include weekends"
+msgstr "Įtraukti savaitgalius"
+
+msgid "Incorrect organization details"
+msgstr "Neteisinga išsami organizacijos informacija"
+
+msgid "Increase a droplet's RAM, CPU and SSD disk."
+msgstr "Padidinkite lašelio RAM, CPU ir SSD diską."
+
+msgid "Increase a droplet's RAM and CPU only (not the storage)."
+msgstr "Padidinkite tik lašelio RAM ir CPU (ne saugyklą)."
+
+msgid "Informational"
+msgstr "Informacinis"
+
+msgid "Informational - client’s request to get or provide additional information related to a service."
+msgstr "Informacinis - kliento prašymas gauti ar pateikti papildomos informacijos, susijusios su paslauga."
+
+msgid "Ingress"
+msgstr "Įėjimas"
+
+msgid "Initial admin password"
+msgstr "Pradinis administratoriaus slaptažodis"
+
+msgid "Initial admin username"
+msgstr "Pradinis administratoriaus vartotojo vardas"
+
+msgid "Initial password"
+msgstr "Pradinis slaptažodis"
+
+msgid "Initial username"
+msgstr "Pradinis vartotojo vardas"
+
+msgid "Instance"
+msgstr "Egzempliorių"
+
+msgid "Instance deletion has been scheduled."
+msgstr "Suplanuotas egzempliorių ištrynimas."
+
+msgid "Instance does not have any floating IPs yet."
+msgstr "Egzempliorius dar neturi slankiojo IP."
+
+msgid "Instance does not have any security groups yet."
+msgstr "Egzempliorius dar neturi jokių saugos grupių."
+
+msgid "Instance has been linked."
+msgstr "Egzempliorius buvo susietas."
+
+msgid "Instance is already active."
+msgstr "Egzempliorius jau yra aktyvus."
+
+msgid "Instance is already stopped."
+msgstr "Egzempliorius jau sustabdytas."
+
+msgid "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first."
+msgstr "Egzempliorius dar neprijungtas prie jokių vidinių potinklių. Pirmiausia prijunkite jį prie vidinio potinklio."
+
+msgid "Instance should be OK, or erred. Please contact support."
+msgstr "Egzempliorius turi būti gerai arba klaidingas. Susisiekite su palaikymo tarnyba."
+
+msgid "Instance should be OK. Please contact support."
+msgstr "Egzempliorius turėtų būti gerai. Susisiekite su palaikymo tarnyba."
+
+msgid "Instance should be shutoff and OK or erred. Please contact support."
+msgstr "Egzempliorius turėtų būti uždarytas ir gerai ar klaidingas. Susisiekite su palaikymo tarnyba."
+
+msgid "Instances count"
+msgstr "Egzempliorių skaičius"
+
+msgid "Internal IPs"
+msgstr "Vidiniai IP"
+
+msgid "Internal name"
+msgstr "Vidinis pavadinimas"
+
+msgid "Internal network ID"
+msgstr "Vidinio tinklo ID"
+
+msgid "Internal network allocation pool"
+msgstr "Vidinio tinklo paskirstymo telkinys"
+
+msgid "Internal network mask (CIDR)"
+msgstr "Vidinio tinklo kaukė (CIDR)"
+
+msgid "Internal server error occurred. Please try again or contact support."
+msgstr "Įvyko vidinė serverio klaida. Bandykite dar kartą arba susisiekite su palaikymo tarnyba."
+
+msgid "Invalid URL. Unable to parse payment details."
+msgstr "Neteisingas URL. Nepavyko išanalizuoti mokėjimo informacijos."
+
+msgid "Invitation approval"
+msgstr "Kvietimo patvirtinimas"
+
+msgid "Invitation confirmation"
+msgstr "Kvietimo patvirtinimas"
+
+msgid "Invitation could not be accepted"
+msgstr "Kvietimo priimti nepavyko"
+
+msgid "Invitation email is:"
+msgstr "Kvietimo el. paštas yra:"
+
+msgid "Invitation has been approved."
+msgstr "Kvietimas patvirtintas."
+
+msgid "Invitation has been canceled."
+msgstr "Kvietimas atšauktas."
+
+msgid "Invitation has been rejected."
+msgstr "Kvietimas buvo atmestas."
+
+msgid "Invitation has been sent again."
+msgstr "Kvietimas buvo išsiųstas dar kartą."
+
+msgid "Invitation is not found."
+msgstr "Kvietimas nerastas."
+
+msgid "Invitation is not valid"
+msgstr "Kvietimas negalioja"
+
+msgid "Invitation is not valid anymore."
+msgstr "Kvietimas nebegalioja."
+
+msgid "Invitation rejection"
+msgstr "Kvietimo atmetimas"
+
+msgid "Invitation token is not found."
+msgstr "Kvietimo atpažinimo ženklas nerastas."
+
+msgid "Invite team member"
+msgstr "Pakvieskite komandos narį"
+
+msgid "Invite user"
+msgstr "Pakvieskite vartotoją"
+
+msgid "Invoice No."
+msgstr "Sąskaitos faktūros Nr."
+
+msgid "Invoice date"
+msgstr "Sąskaitos faktūros data"
+
+msgid "Invoice events"
+msgstr "Sąskaitos faktūros įvykiai"
+
+msgid "Invoice events timeline"
+msgstr "Sąskaitos faktūros įvykių laiko juosta"
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been created."
+msgstr "Sukurta sąskaita faktūra organizacijai {customer_link} už laikotarpį {period}."
+
+msgid "Invoice for organization {customer_link} for the period of {period} has been updated."
+msgstr "Atnaujinta organizacijos {customer_link} sąskaita už {period} laikotarpį."
+
+msgid "Invoice for organization {customer_name} for the period of {period} has been deleted."
+msgstr "Organizacijos {customer_name} sąskaita už laikotarpį {period} buvo ištrinta."
+
+msgid "Invoice has been successfully linked to payment."
+msgstr "Sąskaita faktūra sėkmingai susieta su mokėjimu."
+
+msgid "Invoice has been successfully unlinked from payment."
+msgstr "Sąskaita faktūra buvo sėkmingai atsieta nuo mokėjimo."
+
+msgid "Invoice has not been sent to PayPal yet"
+msgstr "Sąskaita faktūra dar neišsiųsta į PayPal"
+
+msgid "Invoice statistics"
+msgstr "Sąskaitų faktūrų statistika"
+
+msgid "Invoiced to"
+msgstr "Sąskaita faktūra į"
+
+msgid "Invoices list"
+msgstr "Sąskaitų faktūrų sąrašas"
+
+msgid "Is active"
+msgstr "Yra aktyvus"
+
+msgid "Is external"
+msgstr "Ar išorinis"
+
+msgid "Is official"
+msgstr "Yra oficialus"
+
+msgid "Is service provider"
+msgstr "Ar paslaugų teikėjas"
+
+msgid "Issue link"
+msgstr "Problemos nuoroda"
+
+msgid "Issue {issue_link} has been created by {caller_link}."
+msgstr "Problemą {issue_link} sukūrė {caller_link}."
+
+msgid "Issues are trackable requests to the operator."
+msgstr "Problemos yra atsekamos užklausos operatoriui."
+
+msgid "It is used to automatically assign floating IP to your virtual machine."
+msgstr "Jis naudojamas automatiškai priskirti slankiojo IP į savo virtualiąją mašiną."
+
+msgid "Item has been added to shopping cart."
+msgstr "Prekė buvo įtraukta į pirkinių krepšelį."
+
+msgid "Item has been removed from shopping cart."
+msgstr "Prekė pašalinta iš pirkinių krepšelio."
+
+msgid "Item type"
+msgstr "Prekės tipas"
+
+msgid "Job position"
+msgstr "Darbo vieta"
+
+msgid "Keep forever"
+msgstr "Laikyti amžinai"
+
+msgid "Keep until"
+msgstr "Laikyti iki"
+
+msgid "Kept until"
+msgstr "Laikoma iki"
+
+msgid "Key name"
+msgstr "Rakto pavadinimas"
+
+msgid "Key removal"
+msgstr "Rakto pašalinimas"
+
+msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
+msgstr "Keystone autentifikavimo URL (pvz., http://keystone.example.com:5000/v3)"
+
+msgid "Kubeconfig file"
+msgstr "Kubeconfig failas"
+
+msgid "Kubernetes node #{index}"
+msgstr "Kubernetes mazgas #{index}"
+
+msgid "Kubernetes nodes"
+msgstr "Kubernetes mazgai"
+
+msgid "Kubernetes version"
+msgstr "Kubernetes versija"
+
+msgid "Label that is visible to users in Marketplace."
+msgstr "Etiketė, matoma vartotojams Marketplace."
+
+msgid "Leave blank if you want admin password to be auto-generated."
+msgstr "Palikite tuščią, jei norite, kad administratoriaus slaptažodis būtų automatiškai sugeneruotas."
+
+msgid "Leave blank if you want admin username to be auto-generated."
+msgstr "Palikite tuščią, jei norite, kad administratoriaus vartotojo vardas būtų sugeneruotas automatiškai."
+
+msgid "Legal address"
+msgstr "Juridinis adresas"
+
+msgid "Lifetime will be updated and reset upon saving the form."
+msgstr "Visą laiką bus atnaujinta ir iš naujo nustatyta išsaugant formą."
+
+msgid "Limit amount"
+msgstr "Ribinė suma"
+
+msgid "Limit period"
+msgstr "Ribinis laikotarpis"
+
+msgid "Limits"
+msgstr "Ribos"
+
+msgid "Limits are invalid."
+msgstr "Ribos yra neteisingos."
+
+msgid "Link OpenStack Instance"
+msgstr "Nuoroda OpenStack egzempliorių"
+
+msgid "Link invoice"
+msgstr "Susieti sąskaitą faktūrą"
+
+msgid "Loading actions"
+msgstr "Įkeliami veiksmai"
+
+msgid "Loading assets, please wait."
+msgstr "Įkeliamas turtas, palaukite."
+
+msgid "Loading invoices"
+msgstr "Įkeliamos sąskaitos faktūros"
+
+msgid "Location has been saved successfully."
+msgstr "Vieta sėkmingai išsaugota."
+
+msgid "Location of {offeringName} offering"
+msgstr "Pasiūlymo {offeringName} vieta"
+
+msgid "Logging user in"
+msgstr "Vartotojo prisijungimas"
+
+msgid "Login with"
+msgstr "Prisijunkite su"
+
+msgid "Logo has been removed."
+msgstr "Logotipas pašalintas."
+
+msgid "Logo has been uploaded."
+msgstr "Logotipas įkeltas."
+
+msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
+msgstr "Longhorn yra lengva, patikima ir galinga Kubernetes paskirstyta blokų saugojimo sistema."
+
+msgid "MAC address (optional)"
+msgstr "MAC adresas (pasirinktinai)"
+
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Manage networks"
+msgstr "Tinklų valdymas"
+
+msgid "Manage organization"
+msgstr "Organizacijos valdymas"
+
+msgid "Manage security groups"
+msgstr "Tvarkykite saugos grupes"
+
+msgid "Managed projects"
+msgstr "Valdomi projektai"
+
+msgid "Mark as paid"
+msgstr "Pažymėti kaip apmokėtą"
+
+msgid "Mark invoice as paid"
+msgstr "Pažymėti sąskaitą faktūrą kaip apmokėtą"
+
+msgid "Marketplace UUID"
+msgstr "Marketplace UUID"
+
+msgid "Marketplace checkout"
+msgstr "Marketplace kasa"
+
+msgid "Marketplace offering does not have any usage-based components."
+msgstr "Marketplace pasiūlyme nėra jokių naudojimu pagrįstų komponentų."
+
+msgid "Marketplace offerings"
+msgstr "Marketplace pasiūlymai"
+
+msgid "Marketplace service provider"
+msgstr "Prekyvietės paslaugų teikėjas"
+
+msgid "Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account."
+msgstr "Marketplace paslaugos gali būti teikiamos tik tam tikram priklausymui. Šiuo metu neturite su savo paskyra susietų organizacijų ar projektų."
+
+msgid "Max # of VM snapshots"
+msgstr "Maks. # iš VM momentinių nuotraukų"
+
+msgid "Max # of snapshots"
+msgstr "Maksimalus # momentinių nuotraukų skaičius"
+
+msgid "Max amount"
+msgstr "Maksimali suma"
+
+msgid "Max number of VM snapshots"
+msgstr "Maksimalus VM momentinių kopijų skaičius"
+
+msgid "Max replicas"
+msgstr "Maks. kopijos"
+
+msgid "Maximal number of resources"
+msgstr "Maksimalus išteklių skaičius"
+
+msgid "Maximal value"
+msgstr "Maksimali vertė"
+
+msgid "Maximum RAM for each VM"
+msgstr "Maksimalus RAM kiekvienam VM"
+
+msgid "Maximum allowed value"
+msgstr "Maksimali leistina vertė"
+
+msgid "Maximum capacity for each disk"
+msgstr "Maksimali kiekvieno disko talpa"
+
+msgid "Maximum monthly"
+msgstr "Maksimalus mėnesinis"
+
+msgid "Maximum total"
+msgstr "Maksimali bendra suma"
+
+msgid "Maximum total size of the disk space per VM"
+msgstr "Maksimalus bendras disko vietos dydis VM"
+
+msgid "Maximum username length with mandatory username prefix is 32 characters."
+msgstr "Maksimalus vartotojo vardo ilgis su privalomu vartotojo vardo prefiksu yra 32 simboliai."
+
+msgid "Maximum vCPU for each VM"
+msgstr "Maksimalus vCPU kiekvienam VM"
+
+msgid "Measured unit"
+msgstr "Išmatuotas vienetas"
+
+msgid "Memory per vCore"
+msgstr "Atmintis per vCore"
+
+msgid "Memory size in GiB"
+msgstr "Atminties dydis GiB"
+
+msgid "Metric name"
+msgstr "Metrikos pavadinimas"
+
+msgid "MiB"
+msgstr "MiB"
+
+msgid "Min RAM"
+msgstr "Min. RAM"
+
+msgid "Min amount"
+msgstr "Min. Suma"
+
+msgid "Min replicas"
+msgstr "Min replikos"
+
+msgid "Min storage"
+msgstr "Min. saugykla"
+
+msgid "Minimal value"
+msgstr "Minimali vertė"
+
+msgid "Minimum allowed value"
+msgstr "Minimali leistina vertė"
+
+msgid "Minimum booking time slot duration."
+msgstr "Minimali užsakymo laiko tarpsnio trukmė."
+
+msgid "Minimum username length is 3 characters."
+msgstr "Minimalus vartotojo vardo ilgis yra 3 simboliai."
+
+msgid "Monthly invoices"
+msgstr "Mėnesinės sąskaitos faktūros"
+
+msgid "Mount point"
+msgstr "Montavimo taškas"
+
+msgid "Must be at least {min}"
+msgstr "Turi būti bent {min}"
+
+msgid "Must be at most {max}"
+msgstr "Turi būti ne daugiau kaip {max}"
+
+msgid "Must start with a country prefix ie EE34501234215"
+msgstr "Turi prasidėti šalies priešdėlis, ty EE34501234215"
+
+msgid "My offerings"
+msgstr "Mano aukos"
+
+msgid "My resources"
+msgstr "Mano ištekliai"
+
+msgid "My services"
+msgstr "Mano paslaugos"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
+msgstr "Pavadinimas „{label}“ turi būti 1–63 simbolių ilgio, kiekvienas iš jų gali būti tik raidinis ir skaitinis arba brūkšnys"
+
+msgid "Name \"{label}\" must not start or end with a hyphen"
+msgstr "Pavadinimas \"{label}\" negali prasidėti arba baigtis brūkšneliu"
+
+msgid "Name is duplicated. Choose other name."
+msgstr "Pavadinimas dubliuojasi. Pasirinkite kitą pavadinimą."
+
+msgid "Name is not valid."
+msgstr "Pavadinimas neleistinas."
+
+msgid "Name is required field."
+msgstr "Pavadinimas yra būtinas laukas."
+
+msgid "Name is too short, names should be at least two alphanumeric characters."
+msgstr "Pavadinimas yra per trumpas, vardus turi sudaryti bent du raidiniai ir skaitiniai simboliai."
+
+msgid "Name must consist of lower case alphanumeric characters."
+msgstr "Pavadinimą turi sudaryti mažosios raidės ir skaitmenys."
+
+msgid "Name must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name', or '123-abc')"
+msgstr "Pavadinimas turi būti sudarytas iš mažųjų raidinių-skaitinių simbolių arba '-', ir turi prasidėti ir baigtis raidiniu-skaitiniu simboliu (pvz., 'mano vardas' arba '123-abc')"
+
+msgid "Name of your organization."
+msgstr "Jūsų organizacijos pavadinimas."
+
+msgid "Name should consist of latin symbols, numbers and dashes."
+msgstr "Pavadinimas turėtų būti sudarytas iš lotyniškų simbolių, skaičių ir brūkšnių."
+
+msgid "Name should consist of latin symbols and numbers."
+msgstr "Pavadinimą turėtų sudaryti lotyniški simboliai ir skaičiai."
+
+msgid "Name should contain at least 3 symbols."
+msgstr "Pavadinime turi būti bent 3 simboliai."
+
+msgid "Namespace"
+msgstr "Vardų sritis"
+
+msgid "Namespace should be unique."
+msgstr "Vardų sritis turėtų būti unikali."
+
+msgid "Native name"
+msgstr "Gimtasis pavadinimas"
+
+msgid "Network MTU has been updated."
+msgstr "Tinklo MTU buvo atnaujintas."
+
+msgid "Network adapters"
+msgstr "Tinklo adapteriai"
+
+msgid "New flavor"
+msgstr "Naujas skonis"
+
+msgid "New limit"
+msgstr "Nauja riba"
+
+msgid "New plan"
+msgstr "Naujas planas"
+
+msgid "New size"
+msgstr "Naujas dydis"
+
+msgid "Next hop (IP)"
+msgstr "Kitas hop (IP)"
+
+msgid "Next trigger at"
+msgstr "Kitas suveikimas"
+
+msgid "No, continue using current email"
+msgstr "Ne, toliau naudoti dabartinį el. paštą"
+
+msgid "No access info"
+msgstr "Nėra prieigos informacijos"
+
+msgid "No access info."
+msgstr "Nėra prieigos informacijos."
+
+msgid "No countries"
+msgstr "Nėra šalių"
+
+msgid "No division types"
+msgstr "Nėra skirstymo tipų"
+
+msgid "No divisions"
+msgstr "Nėra padalinių"
+
+msgid "No entries to show here"
+msgstr "Nėra čia rodomų įrašų"
+
+msgid "No invoice data available."
+msgstr "Nėra sąskaitos faktūros duomenų."
+
+msgid "No offerings"
+msgstr "Jokių pasiūlymų"
+
+msgid "No organizations"
+msgstr "Nėra organizacijų"
+
+msgid "No projects"
+msgstr "Nėra projektų"
+
+msgid "No projects are assigned to this user."
+msgstr "Šiam vartotojui nepriskirti jokie projektai."
+
+msgid "No providers"
+msgstr "Nėra teikėjų"
+
+msgid "No service providers"
+msgstr "Nėra paslaugų teikėjų"
+
+msgid "No users"
+msgstr "Nėra vartotojų"
+
+msgid "Node"
+msgstr "Mazgas"
+
+msgid "Node has been created."
+msgstr "Mazgas sukurtas."
+
+msgid "Node plan"
+msgstr "Mazgo planas"
+
+msgid "Nodes"
+msgstr "Mazgai"
+
+msgid "Not a service provider."
+msgstr "Ne paslaugų teikėjas."
+
+msgid "Not running accounting"
+msgstr "Nevykdo apskaitos"
+
+msgid "Note that this virtual machine will not be charged separately for {organization}."
+msgstr "Atminkite, kad ši virtualioji mašina nebus apmokestinama atskirai {organization}."
+
+msgid "Note that this volume will not be charged separately for {organization}."
+msgstr "Atminkite, kad šis tomas nebus apmokestinamas atskirai {organization}."
+
+msgid "Notification can be sent only for created invoice."
+msgstr "Pranešimą galima siųsti tik apie sukurtą sąskaitą faktūrą."
+
+msgid "Notification has been created."
+msgstr "Pranešimas sukurtas."
+
+msgid "Notification has been updated."
+msgstr "Pranešimas atnaujintas."
+
+msgid "Notification method"
+msgstr "Pranešimo metodas"
+
+msgid "Notifications allow to be informed when a certain event has occurred."
+msgstr "Pranešimai leidžia būti informuotiems, kai įvyko tam tikras įvykis."
+
+msgid "Notifications has been sent to {count} users."
+msgstr "Pranešimai išsiųsti {count} vartotojams."
+
+msgid "Number of CPU cores per socket"
+msgstr "Procesoriaus branduolių skaičius viename lizde"
+
+msgid "Number of CPU cores should be multiple of cores per socket."
+msgstr "Procesoriaus branduolių skaičius turėtų būti daugybė branduolių viename lizde."
+
+msgid "Number of control plane nodes"
+msgstr "Valdymo plokštumos mazgų skaičius"
+
+msgid "Number of cores in a VM"
+msgstr "Šerdžių skaičius VM"
+
+msgid "Number of created instances"
+msgstr "Sukurtų egzempliorių skaičius"
+
+msgid "Number of etcd nodes"
+msgstr "Etcd mazgų skaičius"
+
+msgid "Number of running instances"
+msgstr "Veikiančių egzempliorių skaičius"
+
+msgid "Number of worker nodes"
+msgstr "Darbuotojų mazgų skaičius"
+
+msgid "Object is not found."
+msgstr "Objektas nerastas."
+
+msgid "Offering components"
+msgstr "Siūlomi komponentai"
+
+msgid "Offering configuration"
+msgstr "Siūloma konfigūracija"
+
+msgid "Offering details"
+msgstr "Siūloma išsami informacija"
+
+msgid "Offering doesn't have images."
+msgstr "Pasiūlyme nėra vaizdų."
+
+msgid "Offering has been created."
+msgstr "Pasiūlymas buvo sukurtas."
+
+msgid "Offering has been imported."
+msgstr "Pasiūlymas buvo importuotas."
+
+msgid "Offering has been updated."
+msgstr "Siūlymas atnaujintas."
+
+msgid "Offering images"
+msgstr "Siūlo vaizdus"
+
+msgid "Offering images ({name})"
+msgstr "Siūlomi vaizdai ({name})"
+
+msgid "Offering is not configured yet."
+msgstr "Siūlymas dar nesukonfigūruotas."
+
+msgid "Offering logo"
+msgstr "Siūlomas logotipas"
+
+msgid "Offering name"
+msgstr "Siūlomas vardas"
+
+msgid "Offering permissions"
+msgstr "Siūlomi leidimai"
+
+msgid "Offering state has been updated."
+msgstr "Pasiūlymo būsena atnaujinta."
+
+msgid "Offering type"
+msgstr "Pasiūlymo tipas"
+
+msgid "Offerings"
+msgstr "Aukos"
+
+msgid "Offerings images"
+msgstr "Siūlo vaizdus"
+
+msgid "One-time"
+msgstr "Vienkartinis"
+
+msgid "One-time on plan switch"
+msgstr "Vienkartinis plano perjungimas"
+
+msgid "Only a created invoice can be marked as paid."
+msgstr "Tik sukurtą sąskaitą faktūrą galima pažymėti kaip apmokėtą."
+
+msgid "Only customer owner or staff can invite users."
+msgstr "Tik kliento savininkas arba darbuotojai gali kviesti vartotojus."
+
+msgid "Only pending and expired invitations can be sent again."
+msgstr "Vėl galima siųsti tik laukiančius ir nebegaliojančius kvietimus."
+
+msgid "Only pending invitation can be canceled."
+msgstr "Atšaukti galima tik laukiantį kvietimą."
+
+msgid "Only staff and organization users are allowed to open console."
+msgstr "Konsolei atidaryti leidžiama tik darbuotojams ir organizacijos vartotojams."
+
+msgid "Only staff can manage OpenStack tenant."
+msgstr "Tik „OpenStack“ nuomininką gali valdyti personalas."
+
+msgid "Only staff can remove organization."
+msgstr "Tik darbuotojai gali pašalinti organizaciją."
+
+msgid "Only staff users are allowed to perform this action."
+msgstr "Tik personalo vartotojams leidžiama atlikti šį veiksmą."
+
+msgid "OpenStack Images"
+msgstr "OpenStack vaizdai"
+
+msgid "OpenStack Instance"
+msgstr "OpenStack egzempliorius"
+
+msgid "OpenStack instance"
+msgstr "OpenStack egzempliorius"
+
+msgid "OpenStack instance has been unlinked from Rancher node."
+msgstr "OpenStack egzempliorius buvo atsietas nuo Rancher mazgo."
+
+msgid "OpenStack networks has been created."
+msgstr "OpenStack tinklai sukurti."
+
+msgid "OpenStack package"
+msgstr "OpenStack paketas"
+
+msgid "OpenStack subnet"
+msgstr "OpenStack potinklis"
+
+msgid "OpenStack tenant"
+msgstr "OpenStack nuomininkas"
+
+msgid "OpenStack volume"
+msgstr "OpenStack tomas"
+
+msgid "Open console"
+msgstr "Atidarykite konsolę"
+
+msgid "Open in Service Desk"
+msgstr "Atidarykite „Service Desk“"
+
+msgid "Open support portal"
+msgstr "Atidarykite palaikymo portalą"
+
+msgid "Opened by {user} at {date}"
+msgstr "Atidarė {user} {date}"
+
+msgid "Opened by {user} from {organization} at {date}"
+msgstr "Atidarė {user} iš {organization} {date}"
+
+msgid "Options are invalid."
+msgstr "Parinktys neteisingos."
+
+msgid "Or use social login"
+msgstr "Arba naudokitės socialiniu prisijungimu"
+
+msgid "Order has been approved."
+msgstr "Užsakymas patvirtintas."
+
+msgid "Order has been rejected."
+msgstr "Užsakymas atmestas."
+
+msgid "Order has been submitted."
+msgstr "Užsakymas pateiktas."
+
+msgid "Order item details"
+msgstr "Užsakymo prekės informacija"
+
+msgid "Order item has been approved."
+msgstr "Užsakymo prekė patvirtinta."
+
+msgid "Order item has been rejected."
+msgstr "Užsakymo prekė atmesta."
+
+msgid "Order item has cancel has been scheduled."
+msgstr "Užsakymo prekės atšaukimas suplanuotas."
+
+msgid "Organization actions"
+msgstr "Organizacijos veiksmai"
+
+msgid "Organization contains invoices. Please remove them first."
+msgstr "Organizacijoje yra sąskaitos faktūros. Pirmiausia pašalinkite juos."
+
+msgid "Organization contains projects. Please remove them first."
+msgstr "Organizacijoje yra projektų. Pirmiausia juos pašalinkite."
+
+msgid "Organization details"
+msgstr "Išsami organizacijos informacija"
+
+msgid "Organization events"
+msgstr "Organizavimo renginiai"
+
+msgid "Organization has been created."
+msgstr "Organizacija sukurta."
+
+msgid "Organization has been updated successfully."
+msgstr "Organizacija sėkmingai atnaujinta."
+
+msgid "Organization has signed a fixed price agreement"
+msgstr "Organizacija pasirašė fiksuotos kainos sutartį"
+
+msgid "Organization name"
+msgstr "Organizacijos pavadinimas"
+
+msgid "Organization owner"
+msgstr "Organizacijos savininkas"
+
+msgid "Organization owner role expires on"
+msgstr "Organizacijos savininko vaidmens galiojimo laikas baigiasi"
+
+msgid "Organization registration code"
+msgstr "Organizacijos registracijos kodas"
+
+msgid "Organization removal"
+msgstr "Organizacijos pašalinimas"
+
+msgid "Organization role"
+msgstr "Organizacijos vaidmuo"
+
+msgid "Organization roles"
+msgstr "Organizacijos vaidmenys"
+
+msgid "Organization update"
+msgstr "Organizacijos atnaujinimas"
+
+msgid "Organization update ({name})"
+msgstr "Organizacijos naujinys ({name})"
+
+msgid "Organization users list"
+msgstr "Organizacijos vartotojų sąrašas"
+
+msgid "Organization workspace"
+msgstr "Organizacijos darbo sritis"
+
+msgid "Organization {customer_link} has been updated."
+msgstr "Organizacija {customer_link} atnaujinta."
+
+msgid "Organization {customer_name} has been deleted."
+msgstr "Organizacija {customer_name} ištrinta."
+
+msgid "Organizations by divisions"
+msgstr "Organizacijos pagal padalinius"
+
+msgid "Organizations divisions"
+msgstr "Organizacijų padaliniai"
+
+msgid "Overview of {organization} organization"
+msgstr "Organizacijos {organization} apžvalga"
+
+msgid "Overview of {project} project"
+msgstr "Projekto {project} peržiūra"
+
+msgid "Owned organizations"
+msgstr "Priklausančios organizacijos"
+
+msgid "PDF"
+msgstr "PDF"
+
+msgid "PID"
+msgstr "PID"
+
+msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
+msgstr "Puslapis nerastas. Įvedėte neteisingą URL arba bandėte pasiekti išjungtą funkciją."
+
+msgid "Password has been changed for user {affected_user_link}."
+msgstr "Pakeistas vartotojo {affected_user_link} slaptažodis."
+
+msgid "Past time slots are not allowed."
+msgstr "Ankstesni laiko tarpsniai neleidžiami."
+
+msgid "Pause offering"
+msgstr "Pristabdyti siūlymą"
+
+msgid "Pay invoice"
+msgstr "Apmokėti sąskaitą faktūrą"
+
+msgid "Payment events"
+msgstr "Mokėjimo įvykiai"
+
+msgid "Payment for {customer_link} has been approved."
+msgstr "Mokėjimas už {customer_link} patvirtintas."
+
+msgid "Payment for {customer_link} has been cancelled."
+msgstr "Mokėjimas už {customer_link} atšauktas."
+
+msgid "Payment gateways (monthly)"
+msgstr "Mokėjimo šliuzai (kas mėnesį)"
+
+msgid "Payment has been created."
+msgstr "Mokėjimas sukurtas."
+
+msgid "Payment has been deleted."
+msgstr "Mokėjimas ištrintas."
+
+msgid "Payment has been processed successfully."
+msgstr "Mokėjimas sėkmingai apdorotas."
+
+msgid "Payment has been updated."
+msgstr "Mokėjimas atnaujintas."
+
+msgid "Payment is being processed, please wait."
+msgstr "Mokėjimas apdorojamas, palaukite."
+
+msgid "Payment profile"
+msgstr "Mokėjimo profilis"
+
+msgid "Payment profile defines how invoices are processed."
+msgstr "Mokėjimo profilis apibrėžia, kaip tvarkomos sąskaitos faktūros."
+
+msgid "Payment profile has been created."
+msgstr "Mokėjimo profilis sukurtas."
+
+msgid "Payment profile has been created and enabled."
+msgstr "Mokėjimo profilis buvo sukurtas ir įgalintas."
+
+msgid "Payment profile has been enabled."
+msgstr "Mokėjimo profilis įgalintas."
+
+msgid "Payment profile has been removed."
+msgstr "Mokėjimo profilis pašalintas."
+
+msgid "Payment profile has been updated."
+msgstr "Mokėjimo profilis atnaujintas."
+
+msgid "Payment profiles"
+msgstr "Mokėjimų profiliai"
+
+msgid "Payment type {type}"
+msgstr "Mokėjimo tipas {type}"
+
+msgid "Payments connected with an active payment profile."
+msgstr "Mokėjimai, susieti su aktyviu mokėjimo profiliu."
+
+msgid "Payments list"
+msgstr "Mokėjimų sąrašas"
+
+msgid "Pending approval for changing of"
+msgstr "Laukiama patvirtinimo pakeisti"
+
+msgid "Pending approval for creation of"
+msgstr "Laukiama patvirtinimo kurti"
+
+msgid "Pending approval for removal of"
+msgstr "Laukiama patvirtinimo pašalinti"
+
+msgid "Per half month"
+msgstr "Per pusę mėnesio"
+
+msgid "Perform local logout"
+msgstr "Atlikite vietinį atsijungimą"
+
+msgid "Perform review"
+msgstr "Atlikite peržiūrą"
+
+msgid "Performed"
+msgstr "Atlikta"
+
+msgid "Performed by"
+msgstr "Atlieka"
+
+msgid "Periods"
+msgstr "Laikotarpiai"
+
+msgid "Permissions log"
+msgstr "Leidimų žurnalas"
+
+msgid "Personal workspace"
+msgstr "Asmeninė darbo sritis"
+
+msgid "Plan capacity"
+msgstr "Planuoti pajėgumus"
+
+msgid "Plan capacity is full."
+msgstr "Plano pajėgumas pilnas."
+
+msgid "Plan component name"
+msgstr "Plano komponento pavadinimas"
+
+msgid "Plan components"
+msgstr "Planuokite komponentus"
+
+msgid "Plan description"
+msgstr "Plano aprašymas"
+
+msgid "Plan details"
+msgstr "Išsami plano informacija"
+
+msgid "Plan does not have limit"
+msgstr "Planas neturi apribojimų"
+
+msgid "Plan name"
+msgstr "Plano pavadinimas"
+
+msgid "Plan price"
+msgstr "Plano kaina"
+
+msgid "Planned quota usage: {usage}"
+msgstr "Planuojamas kvotos naudojimas: {usage}"
+
+msgid "Plans are invalid."
+msgstr "Planai neteisingi."
+
+msgid "Please, create and enable a payment profile to be able to manage payments."
+msgstr "Sukurkite ir įgalinkite mokėjimo profilį, kad galėtumėte valdyti mokėjimus."
+
+msgid "Please add resource name before editing a schedule."
+msgstr "Prieš redaguodami tvarkaraštį, pridėkite šaltinio pavadinimą."
+
+msgid "Please create a new one:"
+msgstr "Sukurkite naują:"
+
+msgid "Please create a new one picking the profile that best matches your organization:"
+msgstr "Sukurkite naują, pasirinkdami profilį, kuris geriausiai atitinka jūsų organizaciją:"
+
+msgid "Please enter desired values in the rows below:"
+msgstr "Įveskite norimas reikšmes žemiau esančiose eilutėse:"
+
+msgid "Please enter reason why offering has been paused."
+msgstr "Įveskite priežastį, kodėl siūlymas buvo pristabdytas."
+
+msgid "Please enter username, password and email."
+msgstr "Įveskite vartotojo vardą, slaptažodį ir el. pašto adresą."
+
+msgid "Please enter username and password."
+msgstr "Įveskite vartotojo vardą ir slaptažodį."
+
+msgid "Please enter volume size to see price estimate."
+msgstr "Įveskite apimties dydį, kad pamatytumėte kainos įvertinimą."
+
+msgid "Please give us a moment to validate your invitation."
+msgstr "Prašome suteikti mums šiek tiek laiko patvirtinti savo kvietimą."
+
+msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
+msgstr "Įsitikinkite, kad žinote, ką darote, ir nustatykite 10 minučių, jei nesate tikri."
+
+msgid "Please note that request should specify offering and provide a reason."
+msgstr "Atkreipkite dėmesį, kad prašyme turėtų būti nurodytas pasiūlymas ir nurodyta priežastis."
+
+msgid "Please note that request should specify tenant and provide a reason."
+msgstr "Atkreipkite dėmesį, kad prašyme turėtų būti nurodytas nuomininkas ir nurodoma priežastis."
+
+msgid "Please note that request should specify user name and provide a reason."
+msgstr "Atkreipkite dėmesį, kad prašyme turėtų būti nurodytas vartotojo vardas ir priežastis."
+
+msgid "Please open offering {offeringName} ({offeringUuid}) for editing. \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}"
+msgstr "Atidarykite pasiūlymą {offeringName} ({offeringUuid}) redaguoti. \nPrašytojas: {userName} / {userUuid}. \nPaslaugų teikėjas: {customerName} / {customerUuid}"
+
+msgid "Please provide a reason"
+msgstr "Nurodykite priežastį"
+
+msgid "Please provide registration code of your company."
+msgstr "Pateikite savo įmonės registracijos kodą."
+
+msgid "Please provide visual material describing the Offering"
+msgstr "Pateikite vaizdinę medžiagą, apibūdinančią Pasiūlymą"
+
+msgid "Please provide your EU VAT ID if you are registered in the European Union."
+msgstr "Jei esate registruotas Europos Sąjungoje, pateikite savo ES PVM mokėtojo kodą."
+
+msgid "Please review and activate offering {offeringName} ({offeringUuid}). \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}"
+msgstr "Peržiūrėkite ir suaktyvinkite pasiūlymą {offeringName} ({offeringUuid}). \nPrašytojas: {userName} / {userUuid}. \nPaslaugų teikėjas: {customerName} / {customerUuid}"
+
+msgid "Please review organization permissions"
+msgstr "Peržiūrėkite organizacijos leidimus"
+
+msgid "Please search for your organization"
+msgstr "Ieškokite savo organizacijos"
+
+msgid "Please select a username that you will use for login into the Linux systems."
+msgstr "Pasirinkite vartotojo vardą, kurį naudosite prisijungdami prie „Linux“ sistemų."
+
+msgid "Please select flavor to see price estimate."
+msgstr "Norėdami pamatyti kainos įvertinimą, pasirinkite skonį."
+
+msgid "Please select type in Management tab first."
+msgstr "Pirmiausia skirtuke Valdymas pasirinkite tipą."
+
+msgid "Please select your language"
+msgstr "Pasirinkite savo kalbą"
+
+msgid "Please start instance first."
+msgstr "Pirmiausia pradėkite egzempliorių."
+
+msgid "Please stop the instance before changing its flavor."
+msgstr "Prieš pakeisdami jo skonį, sustabdykite egzempliorių."
+
+msgid "Please stop the instance before its removal."
+msgstr "Prieš pašalindami, sustabdykite egzempliorių."
+
+msgid "Please use Latin letters without spaces only."
+msgstr "Prašome naudoti tik lotyniškas raides be tarpų."
+
+msgid "Plugin options are invalid."
+msgstr "Netinkamos papildinio parinktys."
+
+msgid "Pods"
+msgstr "Ankštys"
+
+msgid "Port has been created."
+msgstr "Uostas sukurtas."
+
+msgid "Port range"
+msgstr "Prievadų diapazonas"
+
+msgid "Positive"
+msgstr "Teigiamas"
+
+msgid "Postal"
+msgstr "Pašto"
+
+msgid "Preview offering"
+msgstr "Peržiūrėti pasiūlymą"
+
+msgid "Price for consumption"
+msgstr "Vartojimo kaina"
+
+msgid "Price is estimated."
+msgstr "Kaina apskaičiuota."
+
+msgid "Price per 30 days"
+msgstr "Kaina per 30 dienų"
+
+msgid "Price per 365 days"
+msgstr "Kaina už 365 dienas"
+
+msgid "Price per day"
+msgstr "Kaina per dieną"
+
+msgid "Price per half-month"
+msgstr "Pusmečio kaina"
+
+msgid "Price per half month"
+msgstr "Pusmečio kaina"
+
+msgid "Price per hour"
+msgstr "Valandos kaina"
+
+msgid "Price per month"
+msgstr "Kaina per mėnesį"
+
+msgid "Price per unit"
+msgstr "Vieneto kaina"
+
+msgid "Price per year"
+msgstr "Kaina per metus"
+
+msgid "Pricing tier"
+msgstr "Kainodaros pakopa"
+
+msgid "Print invoice"
+msgstr "Spausdinti sąskaitą faktūrą"
+
+msgid "Print record"
+msgstr "Spausdinti įrašą"
+
+msgid "Private clouds"
+msgstr "Privatūs debesys"
+
+msgid "Project aggregates and isolates teams and resources."
+msgstr "Projektas sujungia ir izoliuoja komandas ir išteklius."
+
+msgid "Project could not be created."
+msgstr "Nepavyko sukurti projekto."
+
+msgid "Project could not be updated."
+msgstr "Nepavyko atnaujinti projekto."
+
+msgid "Project description"
+msgstr "Projekto aprašymas"
+
+msgid "Project details"
+msgstr "Informacija apie projektą"
+
+msgid "Project events"
+msgstr "Projekto renginiai"
+
+msgid "Project has been created."
+msgstr "Projektas sukurtas."
+
+msgid "Project has been removed successfully."
+msgstr "Projektas sėkmingai pašalintas."
+
+msgid "Project has been renamed from {project_previous_name} to {project_link}."
+msgstr "Projektas pervardytas iš {project_previous_name} į {project_link}."
+
+msgid "Project has been updated."
+msgstr "Projektas atnaujintas."
+
+msgid "Project is not selected."
+msgstr "Projektas nepasirinktas."
+
+msgid "Project manager"
+msgstr "Projekto vadovas"
+
+msgid "Project manager cannot edit users with same role."
+msgstr "Projekto vadovas negali redaguoti vartotojų su tuo pačiu vaidmeniu."
+
+msgid "Project member"
+msgstr "Projekto narys"
+
+msgid "Project removal"
+msgstr "Projekto pašalinimas"
+
+msgid "Project resources"
+msgstr "Projekto ištekliai"
+
+msgid "Project role"
+msgstr "Projekto vaidmuo"
+
+msgid "Project roles"
+msgstr "Projekto vaidmenys"
+
+msgid "Project type"
+msgstr "Projekto tipas"
+
+msgid "Project workspace"
+msgstr "Projekto darbo sritis"
+
+msgid "Project {project_name} has been deleted."
+msgstr "Projektas {project_name} ištrintas."
+
+msgid "Projects list"
+msgstr "Projektų sąrašas"
+
+msgid "Proof"
+msgstr "Įrodymas"
+
+msgid "Proof document"
+msgstr "Įrodomasis dokumentas"
+
+msgid "Provider details"
+msgstr "Informacija apie teikėją"
+
+msgid "Provider does not comply with project policies"
+msgstr "Teikėjas nesilaiko projekto politikos"
+
+msgid "Provider has been updated."
+msgstr "Teikėjas atnaujintas."
+
+msgid "Provider location"
+msgstr "Teikėjo vieta"
+
+msgid "Provision new resource"
+msgstr "Pateikite naujus išteklius"
+
+msgid "Public SSH keys will be injected into services that allow key-based access."
+msgstr "Viešieji SSH raktai bus švirkščiami į paslaugas, leidžiančias naudotis raktais."
+
+msgid "Public offerings"
+msgstr "Vieši akcijų siūlymai"
+
+msgid "Public orders"
+msgstr "Viešieji užsakymai"
+
+msgid "Public resources"
+msgstr "Viešieji ištekliai"
+
+msgid "Public services"
+msgstr "Viešosios paslaugos"
+
+msgid "Publish as Google Calendar"
+msgstr "Publikuoti kaip Google Kalendorių"
+
+msgid "Pulling"
+msgstr "Traukimas"
+
+msgid "Pulling quotas"
+msgstr "Kvotų traukimas"
+
+msgid "Purchase and usage is invoiced."
+msgstr "Už pirkimą ir naudojimą išrašoma sąskaita faktūra."
+
+msgid "Put this into ~/.kube/config:"
+msgstr "Įdėkite tai į ~/.kube/config:"
+
+msgid "Quota has been reached."
+msgstr "Kvota pasiekta."
+
+msgid "Quota usage exceeds available limit."
+msgstr "Kvotos naudojimas viršija galimą ribą."
+
+msgid "Quotas"
+msgstr "Kvotos"
+
+msgid "RAM limit (GB-hours)"
+msgstr "RAM limitas (GB valandos)"
+
+msgid "RAM limit is exceeded"
+msgstr "Viršyta RAM riba"
+
+msgid "RAM usage"
+msgstr "RAM naudojimas"
+
+msgid "Rancher access key"
+msgstr "Rancher prieigos raktas"
+
+msgid "Rancher cluster"
+msgstr "Rancher klasteris"
+
+msgid "Rancher secret key"
+msgstr "Rancher slaptas raktas"
+
+msgid "Rancher server URL"
+msgstr "Rancher serverio URL"
+
+msgid "Reason unknown, please contact support."
+msgstr "Priežastis nežinoma, kreipkitės į palaikymo tarnybą."
+
+msgid "Recent additions"
+msgstr "Naujausi papildymai"
+
+msgid "Record no."
+msgstr "Įrašo Nr."
+
+msgid "Record notification has been sent to organization owners."
+msgstr "Organizacijos savininkams išsiųstas pranešimas apie įrašą."
+
+msgid "Record number"
+msgstr "Įrašo numeris"
+
+msgid "Record period"
+msgstr "Įrašo laikotarpis"
+
+msgid "Redeploy"
+msgstr "Perdislokavimas"
+
+msgid "Referral count"
+msgstr "Persiuntimų skaičius"
+
+msgid "Referrals for {name}"
+msgstr "Rekomendacijos dėl {name}"
+
+msgid "Regenerate"
+msgstr "Atsinaujinti"
+
+msgid "Region name"
+msgstr "Regiono pavadinimas"
+
+msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
+msgstr "Užsiregistruokite kaip mūsų portalo klientas ir teiraukite savo debesies paslaugas per Marketplace."
+
+msgid "Register as service provider"
+msgstr "Registruokitės kaip paslaugų teikėjas"
+
+msgid "Register organization as service provider and remove organization."
+msgstr "Užregistruokite organizaciją kaip paslaugų teikėją ir pašalinkite organizaciją."
+
+msgid "Register to"
+msgstr "Registruotis į"
+
+msgid "Register with {label}"
+msgstr "Registruotis naudojant {label}"
+
+msgid "Registered at:"
+msgstr "Registruota:"
+
+msgid "Registration code"
+msgstr "Registracijos kodas"
+
+msgid "Registration method"
+msgstr "Registracijos būdas"
+
+msgid "Registry code"
+msgstr "Registro kodas"
+
+msgid "Regular expression to limit flavors list"
+msgstr "Reguliarioji išraiška norint apriboti skonių sąrašą"
+
+msgid "Regular user"
+msgstr "Nuolatinis vartotojas"
+
+msgid "Release floating IPs"
+msgstr "Atleiskite plaukiojančius IP"
+
+msgid "Reload issue data"
+msgstr "Perkraukite išleidimo duomenis"
+
+msgid "Remaining amount"
+msgstr "Likusi suma"
+
+msgid "Remote CIDR"
+msgstr "Nuotolinis CIDR"
+
+msgid "Remote Waldur API URL"
+msgstr "Nuotolinis Waldur API URL"
+
+msgid "Remote category"
+msgstr "Nuotolinė kategorija"
+
+msgid "Remote offering"
+msgstr "Nuotolinis siūlymas"
+
+msgid "Remote security group"
+msgstr "Nuotolinė saugos grupė"
+
+msgid "Remove from comparison"
+msgstr "Pašalinti iš palyginimo"
+
+msgid "Remove logo"
+msgstr "Pašalinti logotipą"
+
+msgid "Remove organization"
+msgstr "Pašalinti organizaciją"
+
+msgid "Remove profile"
+msgstr "Pašalinti profilį"
+
+msgid "Removed organizations cannot be restored!"
+msgstr "Pašalintų organizacijų atkurti negalima!"
+
+msgid "Removing organization {organizationName}"
+msgstr "Pašalinama organizacija {organizationName}"
+
+msgid "Removing the organization will delete all related resources."
+msgstr "Pašalinus organizaciją, bus ištrinti visi susiję ištekliai."
+
+msgid "Report a security incident"
+msgstr "Pranešti apie saugumo incidentą"
+
+msgid "Report details"
+msgstr "Ataskaitos informacija"
+
+msgid "Report has been submitted"
+msgstr "Ataskaita pateikta"
+
+msgid "Report incorrect data"
+msgstr "Pranešti apie neteisingus duomenis"
+
+msgid "Report is invalid."
+msgstr "Ataskaita neteisinga."
+
+msgid "Report usage"
+msgstr "Pranešti apie naudojimą"
+
+msgid "Reported by me"
+msgstr "Pranešė aš"
+
+msgid "Reported value is reused every month until changed."
+msgstr "Pateikta vertė pakartotinai naudojama kiekvieną mėnesį, kol pasikeis."
+
+msgid "Reporter"
+msgstr "Reporteris"
+
+msgid "Request-based item"
+msgstr "Užklausa pagrįstas elementas"
+
+msgid "Request-based item (without Service Desk)"
+msgstr "Užklausa pagrįstas elementas (be Service Desk)"
+
+msgid "Request account removal for {userName}."
+msgstr "Pateikite užklausą pašalinti {userName} paskyrą."
+
+msgid "Request an approval"
+msgstr "Prašyti patvirtinimo"
+
+msgid "Request demo"
+msgstr "Prašyti demonstracinės versijos"
+
+msgid "Request description"
+msgstr "Užklausos aprašas"
+
+msgid "Request detail"
+msgstr "Prašyti išsamios informacijos"
+
+msgid "Request details"
+msgstr "Prašyti informacijos"
+
+msgid "Request direct access"
+msgstr "Prašyti tiesioginės prieigos"
+
+msgid "Request direct access to OpenStack Tenant"
+msgstr "Pateikite tiesioginės prieigos prie OpenStack nuomininko užklausą"
+
+msgid "Request direct access to {name}"
+msgstr "Prašyti tiesioginės prieigos prie {name}"
+
+msgid "Request editing"
+msgstr "Prašyti redagavimo"
+
+msgid "Request for a change"
+msgstr "Prašymas atlikti pakeitimą"
+
+msgid "Request for a termination"
+msgstr "Prašymas nutraukti sutartį"
+
+msgid "Request publishing"
+msgstr "Prašyti publikavimo"
+
+msgid "Request removal"
+msgstr "Prašyti pašalinti"
+
+msgid "Request title"
+msgstr "Prašyti pavadinimo"
+
+msgid "Request type"
+msgstr "Užklausos tipas"
+
+msgid "Request {mode} of Public Offering"
+msgstr "Prašymas {mode} apie viešą siūlymą"
+
+msgid "Request {mode} of {name}"
+msgstr "Prašymas {mode} iš {name}"
+
+msgid "Request {requestId} has been created."
+msgstr "Užklausa {requestId} buvo sukurta."
+
+msgid "Requested e-mail"
+msgstr "Prašoma el. pašto"
+
+msgid "Requesting of new resources has been temporarily paused"
+msgstr "Naujų išteklių prašymas laikinai sustabdytas"
+
+msgid "Reserved slot"
+msgstr "Rezervuotas lizdas"
+
+msgid "Reserved slot by {name}"
+msgstr "Rezervuotas lizdas pagal {name}"
+
+msgid "Resize droplet"
+msgstr "Pakeiskite lašelio dydį"
+
+msgid "Resource"
+msgstr "Ištekliai"
+
+msgid "Resource UUID"
+msgstr "Išteklių UUID"
+
+msgid "Resource already has this plan."
+msgstr "Išteklius jau turi šį planą."
+
+msgid "Resource configuration"
+msgstr "Išteklių konfigūracija"
+
+msgid "Resource configuration is invalid. Please fix errors in form."
+msgstr "Išteklių konfigūracija neleistina. Ištaisykite formos klaidas."
+
+msgid "Resource deletion has been scheduled."
+msgstr "Suplanuotas išteklių ištrynimas."
+
+msgid "Resource description"
+msgstr "Išteklių aprašymas"
+
+msgid "Resource details"
+msgstr "Išteklių informacija"
+
+msgid "Resource does not have any plan."
+msgstr "Ištekliai neturi jokio plano."
+
+msgid "Resource does not have backend ID."
+msgstr "Ištekliai neturi backend ID."
+
+msgid "Resource does not have plan."
+msgstr "Ištekliai neturi plano."
+
+msgid "Resource events"
+msgstr "Išteklių įvykiai"
+
+msgid "Resource group"
+msgstr "Išteklių grupė"
+
+msgid "Resource is in sync"
+msgstr "Ištekliai sinchronizuojami"
+
+msgid "Resource is not connected to the marketplace yet."
+msgstr "Ištekliai dar nėra prisijungę prie rinkos."
+
+msgid "Resource limits change request has been submitted."
+msgstr "Pateikta išteklių apribojimų pakeitimo užklausa."
+
+msgid "Resource link"
+msgstr "Išteklių nuoroda"
+
+msgid "Resource name"
+msgstr "Ištekliaus pavadinimas"
+
+msgid "Resource plan change request has been submitted."
+msgstr "Pateikta išteklių plano pakeitimo užklausa."
+
+msgid "Resource schedule is already activated."
+msgstr "Išteklių tvarkaraštis jau suaktyvintas."
+
+msgid "Resource schedule is already deactivated."
+msgstr "Išteklių tvarkaraštis jau išjungtas."
+
+msgid "Resource termination request has been submitted."
+msgstr "Pateikta išteklių nutraukimo užklausa."
+
+msgid "Resource usage"
+msgstr "Išteklių naudojimas"
+
+msgid "Resource usage for {resource}"
+msgstr "Išteklių naudojimas {resource}"
+
+msgid "Resources import has failed."
+msgstr "Išteklių importuoti nepavyko."
+
+msgid "Resources represent the services you are using."
+msgstr "Ištekliai atspindi jūsų naudojamas paslaugas."
+
+msgid "Resources usage"
+msgstr "Išteklių naudojimas"
+
+msgid "Restore virtual machine from backup {name}"
+msgstr "Atkurkite virtualią mašiną iš atsarginės {name}"
+
+msgid "Restore volume snapshot"
+msgstr "Atkurti tomo momentinę kopiją"
+
+msgid "Restored volumes"
+msgstr "Atkurti tomai"
+
+msgid "Restricted, because of type."
+msgstr "Apribota dėl tipo."
+
+msgid "Restroing"
+msgstr "Atgaivinantis"
+
+msgid "Retention time"
+msgstr "Laikymo laikas"
+
+msgid "Retention time in days, if 0 - resource will be kept forever"
+msgstr "Saugojimo laikas dienomis, jei 0 - ištekliai bus laikomi amžinai"
+
+msgid "Retype OpenStack Volume"
+msgstr "Pakartotinai įveskite OpenStack tomą"
+
+msgid "Review has been closed."
+msgstr "Peržiūra baigta."
+
+msgid "Review has been performed."
+msgstr "Atlikta peržiūra."
+
+msgid "Role expires on"
+msgstr "Vaidmens galiojimo laikas baigiasi"
+
+msgid "Role in project"
+msgstr "Vaidmuo projekte"
+
+msgid "Role management events"
+msgstr "Vaidmenų valdymo įvykiai"
+
+msgid "Roles"
+msgstr "Vaidmenys"
+
+msgid "Routers"
+msgstr "Maršrutizatoriai"
+
+msgid "Rule count"
+msgstr "Taisyklių skaičius"
+
+msgid "Running accounting"
+msgstr "Vykdoma apskaita"
+
+msgid "Runtime state"
+msgstr "Veikimo būsena"
+
+msgid "SAML2 single logout has been started. Please wait until it completes."
+msgstr "SAML2 vienkartinis atsijungimas paleistas. Palaukite, kol jis bus baigtas."
+
+msgid "SLURM allocation"
+msgstr "SLURM paskirstymas"
+
+msgid "SLURM allocation usage"
+msgstr "SLURM paskirstymo naudojimas"
+
+msgid "SQL database has been created."
+msgstr "Sukurta SQL duomenų bazė."
+
+msgid "SQL server description"
+msgstr "SQL serverio aprašymas"
+
+msgid "SQL server name"
+msgstr "SQL serverio pavadinimas"
+
+msgid "SSH Keys"
+msgstr "SSH raktai"
+
+msgid "SSH key"
+msgstr "SSH raktas"
+
+msgid "SSH key has been removed."
+msgstr "SSH raktas pašalintas."
+
+msgid "SSH key management events"
+msgstr "SSH raktų valdymo įvykiai"
+
+msgid "SSH key {ssh_key_name} has been created for user {user_link}"
+msgstr "SSH raktas {ssh_key_name} sukurtas vartotojui {user_link}"
+
+msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
+msgstr "SSH raktas {ssh_key_name} ištrintas naudotojui {user_link}"
+
+msgid "SSH public key"
+msgstr "SSH viešasis raktas"
+
+msgid "Sankey diagram"
+msgstr "Sankey diagrama"
+
+msgid "Schedules are invalid."
+msgstr "Tvarkaraščiai neteisingi."
+
+msgid "Script for creation of a resource"
+msgstr "Ištekliaus sukūrimo scenarijus"
+
+msgid "Script for regular update of resource and its accounting"
+msgstr "Reguliaraus išteklių ir jų apskaitos atnaujinimo scenarijus"
+
+msgid "Script for termination of a resource"
+msgstr "Ištekliaus nutraukimo scenarijus"
+
+msgid "Script for updating a resource on plan change"
+msgstr "Scenarijus, skirtas atnaujinti plano pakeitimo šaltinį"
+
+msgid "Script language"
+msgstr "Scenarijaus kalba"
+
+msgid "Search for offerings..."
+msgstr "Ieškoti pasiūlymų..."
+
+msgid "Security group creation has been scheduled."
+msgstr "Suplanuota saugumo grupės kūrimas."
+
+msgid "Security group does not contain any rule yet."
+msgstr "Apsaugos grupėje dar nėra jokių taisyklių."
+
+msgid "Security group rules update has been scheduled."
+msgstr "Suplanuotas saugos grupės taisyklių naujinimas."
+
+msgid "Security groups"
+msgstr "Apsaugos grupės"
+
+msgid "Security groups details"
+msgstr "Išsami informacija apie saugos grupes"
+
+msgid "Security incident date: {date}"
+msgstr "Apsaugos incidento data: {date}"
+
+msgid "Security incident type: {type}"
+msgstr "Apsaugos incidento tipas: {type}"
+
+msgid "Seems there's nothing here"
+msgstr "Atrodo, kad čia nieko nėra"
+
+msgid "Seems you don't have any public resources yet"
+msgstr "Atrodo, kad dar neturite jokių viešųjų išteklių"
+
+msgid "Seems you don't have any resources yet"
+msgstr "Panašu, kad dar neturite jokių išteklių"
+
+msgid "Segmentation ID"
+msgstr "Segmentavimo ID"
+
+msgid "Select accounting period"
+msgstr "Pasirinkite apskaitos laikotarpį"
+
+msgid "Select affected resource..."
+msgstr "Pasirinkti paveiktą išteklių..."
+
+msgid "Select affiliation"
+msgstr "Pasirinkite priklausomybę"
+
+msgid "Select assignee..."
+msgstr "Pasirinkti perėmėį..."
+
+msgid "Select available weekdays"
+msgstr "Pasirinkite galimas darbo dienas"
+
+msgid "Select caller..."
+msgstr "Pasirinkti skambintojo..."
+
+msgid "Select connected subnet"
+msgstr "Pasirinkti prijungtą potinklį"
+
+msgid "Select division..."
+msgstr "Pasirinkti padalinį..."
+
+msgid "Select division type..."
+msgstr "Pasirinkti padalinio tipą..."
+
+msgid "Select evaluation..."
+msgstr "Pasirinkti įvertinimą..."
+
+msgid "Select incident type"
+msgstr "Pasirinkti incidento tipą"
+
+msgid "Select instance..."
+msgstr "Pasirinkti egzempliorių..."
+
+msgid "Select issue template..."
+msgstr "Pasirinkti problemos šabloną..."
+
+msgid "Select offering..."
+msgstr "Pasirinkti pasiūlymą..."
+
+msgid "Select offerings..."
+msgstr "Pasirinkti pasiūlymus..."
+
+msgid "Select organization roles"
+msgstr "Pasirinkite organizacijos vaidmenis"
+
+msgid "Select organizations..."
+msgstr "Pasirinkti organizacijas..."
+
+msgid "Select priority..."
+msgstr "Pasirinkti prioritetą..."
+
+msgid "Select project roles"
+msgstr "Pasirinkite projekto vaidmenis"
+
+msgid "Select provider..."
+msgstr "Pasirinkti teikėją..."
+
+msgid "Select request type..."
+msgstr "Pasirinkti užklausos tipą..."
+
+msgid "Select role"
+msgstr "Pasirinkite vaidmenį"
+
+msgid "Select security groups..."
+msgstr "Pasirinkti saugos grupes..."
+
+msgid "Select service provider"
+msgstr "Pasirinkite paslaugų teikėją"
+
+msgid "Select service provider..."
+msgstr "Pasirinkite paslaugų teikėją ..."
+
+msgid "Select some files"
+msgstr "Pasirinkite kai kuriuos failus"
+
+msgid "Select status"
+msgstr "Pasirinkite būseną"
+
+msgid "Select subnet"
+msgstr "Pasirinkite potinklį"
+
+msgid "Select subnets to connect to..."
+msgstr "Pasirinkite potinklius, prie kurių norite prisijungti..."
+
+msgid "Select tenant..."
+msgstr "Pasirinkite nuomininką ..."
+
+msgid "Select tenants..."
+msgstr "Pasirinkti nuomininkai..."
+
+msgid "Select user..."
+msgstr "Pasirinkite vartotoją ..."
+
+msgid "Select workspace"
+msgstr "Pasirinkite darbo sritį"
+
+msgid "Service Request"
+msgstr "Paslaugos užklausa"
+
+msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
+msgstr "Service Request - kliento prašymas modifikuoti, pridėti, pakeisti ar pašalinti tam tikrą paslaugą iš dalies arba visiškai."
+
+msgid "Service provider API secret code has been generated."
+msgstr "Paslaugos teikėjo API slaptas kodas sugeneruotas."
+
+msgid "Service provider can charge for usage of the following components"
+msgstr "Paslaugų teikėjas gali imti mokestį už šių komponentų naudojimą"
+
+msgid "Service provider can report up to the requested amount over the whole active state of resource."
+msgstr "Paslaugų teikėjas gali pranešti iki pageidaujamos sumos per visą aktyvią ištekliaus būseną."
+
+msgid "Service provider details"
+msgstr "Išsami paslaugų teikėjo informacija"
+
+msgid "Service provider has been registered."
+msgstr "Paslaugų teikėjas buvo užregistruotas."
+
+msgid "Service provider type"
+msgstr "Paslaugų teikėjo tipas"
+
+msgid "Service settings are invalid."
+msgstr "Paslaugos nustatymai neteisingi."
+
+msgid "Service settings of this resource are in state erred."
+msgstr "Šio ištekliaus paslaugų parametrai yra klaidingi."
+
+msgid "Service type"
+msgstr "Paslaugos tipas"
+
+msgid "Set MTU"
+msgstr "Nustatyti MTU"
+
+msgid "Set allowed address pairs"
+msgstr "Nustatykite leistinas adresų poras"
+
+msgid "Set backend ID"
+msgstr "Nustatyti backend ID"
+
+msgid "Set location"
+msgstr "Nustatyti vietą"
+
+msgid "Set rules"
+msgstr "Nustatykite taisykles"
+
+msgid "Set rules in {name} security group"
+msgstr "Saugos grupės {name} taisyklių nustatymas"
+
+msgid "Set static routes"
+msgstr "Nustatykite statinius maršrutus"
+
+msgid "Set to draft"
+msgstr "Nustatyti juodraštį"
+
+msgid "Set to true to activate privilege escalation"
+msgstr "Nustatyti kaip teisingą, kad suaktyvintumėte teisių perskyrimą"
+
+msgid "Shared providers"
+msgstr "Bendri teikėjai"
+
+msgid "Shopping cart is empty. You should add items to cart first."
+msgstr "Prekių krepšelis tuščias. Pirmiausia turėtumėte pridėti elementų į krepšelį."
+
+msgid "Shopping cart item has been updated."
+msgstr "Prekių krepšelio prekė atnaujinta."
+
+msgid "Shopping cart item update"
+msgstr "Prekių krepšelio prekės atnaujinimas"
+
+msgid "Show chart"
+msgstr "Rodyti diagramą"
+
+msgid "Show choices"
+msgstr "Rodyti pasirinkimus"
+
+msgid "Show console log"
+msgstr "Rodyti konsolės žurnalą"
+
+msgid "Show diff"
+msgstr "Rodyti diff"
+
+msgid "Show events"
+msgstr "Rodyti įvykius"
+
+msgid "Show private"
+msgstr "Rodyti privatų"
+
+msgid "Show request"
+msgstr "Rodyti užklausą"
+
+msgid "Show shared"
+msgstr "Rodyti bendrinamą"
+
+msgid "Show usage"
+msgstr "Rodyti naudojimą"
+
+msgid "Show user details"
+msgstr "Rodyti išsamią vartotojo informaciją"
+
+msgid "Show with running accounting"
+msgstr "Rodyti su buhalterine apskaita"
+
+msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
+msgstr "Rodomi {sliceStart} į {sliceEnd} įrašus iš {resultCount}."
+
+msgid "Shutdown"
+msgstr "Išjungimo"
+
+msgid "Size name"
+msgstr "Dydžio pavadinimas"
+
+msgid "Size should be between 1 and 10240 GB."
+msgstr "Dydis turėtų būti nuo 1 iki 10240 GB."
+
+msgid "Skip connection to external network"
+msgstr "Praleisti ryšį su išoriniu tinklu"
+
+msgid "Skip floating IP assignment"
+msgstr "Praleiskite slankiojo IP priskyrimą"
+
+msgid "Snapshot schedule for volume has been created."
+msgstr "Sukurtas tomo momentinių vaizdų tvarkaraštis."
+
+msgid "Snapshot schedules"
+msgstr "Momentinių nuotraukų tvarkaraščiai"
+
+msgid "Snapshot size limit"
+msgstr "Momentinės kopijos dydžio limitas"
+
+msgid "Snapshots"
+msgstr "Momentinės nuotraukos"
+
+msgid "Snapshots count"
+msgstr "Momentinių nuotraukų skaičius"
+
+msgid "Sponsor number"
+msgstr "Rėmėjo numeris"
+
+msgid "Staff and Support user"
+msgstr "Personalo ir palaikymo vartotojas"
+
+msgid "Start day of accounting"
+msgstr "Apskaitos pradžios diena"
+
+msgid "Static routes update was scheduled."
+msgstr "Buvo suplanuotas statinių maršrutų atnaujinimas."
+
+msgid "Step 1. Select offering"
+msgstr "1 žingsnis. Pasirinkite pasiūlymą"
+
+msgid "Step 2. Select resources"
+msgstr "2 žingsnis. Pasirinkite išteklius"
+
+msgid "Storage mode"
+msgstr "Saugojimo režimas"
+
+msgid "Storage size"
+msgstr "Saugyklos dydis"
+
+msgid "Storage size in GiB"
+msgstr "Saugyklos dydis GiB"
+
+msgid "Submit usage report"
+msgstr "Pateikti naudojimo ataskaitą"
+
+msgid "Submit with"
+msgstr "Pateikti su"
+
+msgid "Subnet"
+msgstr "Potinklis"
+
+msgid "Subnet CIDR"
+msgstr "Potinklis CIDR"
+
+msgid "Subnet has been created."
+msgstr "Sukurtas potinklis."
+
+msgid "Subnet name"
+msgstr "Potinklio pavadinimas"
+
+msgid "Subnets"
+msgstr "Potinkliai"
+
+msgid "Subnets from where connection to self-service is allowed."
+msgstr "Potinkliai, iš kurių leidžiama prisijungti prie savitarnos."
+
+msgid "Subscription ID"
+msgstr "Prenumeratos ID"
+
+msgid "Support dashboard"
+msgstr "Palaikykite prietaisų skydelį"
+
+msgid "Support request events"
+msgstr "Palaikymo užklausos įvykiai"
+
+msgid "Support requests"
+msgstr "Palaikymo užklausos"
+
+msgid "Support user"
+msgstr "Palaikykite vartotoją"
+
+msgid "Support workspace"
+msgstr "Palaikykite darbo sritį"
+
+msgid "Sure? Form data would be lost"
+msgstr "Tikrai? Formos duomenys bus prarasti"
+
+msgid "Sync profile"
+msgstr "Sinchronizuoti profilį"
+
+msgid "Sync with Google Calendar"
+msgstr "Sinchronizavimas su Google Kalendoriumi"
+
+msgid "Synchronisation has been scheduled."
+msgstr "Sinchronizavimas suplanuotas."
+
+msgid "Synchronise"
+msgstr "Sinchronizuoti"
+
+msgid "System administrator"
+msgstr "Sistemos administratorius"
+
+msgid "System volume couldn't be detached."
+msgstr "Sistemos tomo atsieti nepavyko."
+
+msgid "System volume size"
+msgstr "Sistemos tūrio dydis"
+
+msgid "System volume type"
+msgstr "Sistemos tūrio tipas"
+
+msgid "TLD \"{tld}\" must not be all numeric"
+msgstr "TLD „{tld}“ negali būti visas skaitmeninis"
+
+msgid "Taking a snapshot"
+msgstr "Momentinės kopijos darymas"
+
+msgid "Tax number"
+msgstr "Mokesčio numeris"
+
+msgid "Tax percent"
+msgstr "Mokesčių procentas"
+
+msgid "Team member has been removed."
+msgstr "Komandos narys pašalintas."
+
+msgid "Technical code used by accounting software."
+msgstr "Techninis kodas, kurį naudoja apskaitos programinė įranga."
+
+msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
+msgstr "Techninis pavadinimas, skirtas integravimui ir automatinėms ataskaitoms teikti. Prašome naudoti tik lotyniškas raides be tarpų."
+
+msgid "Template files"
+msgstr "Šablonų failai"
+
+msgid "Tenant"
+msgstr "Nuomininkas"
+
+msgid "Tenant ID"
+msgstr "Nuomininko ID"
+
+msgid "Tenant description"
+msgstr "Nuomininko aprašymas"
+
+msgid "Tenant name"
+msgstr "Nuomininko vardas"
+
+msgid "Tenant user password"
+msgstr "Nuomininko vartotojo slaptažodis"
+
+msgid "Tenant user username"
+msgstr "Nuomininko vartotojo vardas"
+
+msgid "Terminate an existing resource"
+msgstr "Nutraukti esamą išteklių"
+
+msgid "Terminate resource {resourceName}"
+msgstr "Nutraukti šaltinį {resourceName}"
+
+msgid "Terminated"
+msgstr "Nutraukta"
+
+msgid "Terminating"
+msgstr "Nutraukiama"
+
+msgid "Text has been copied"
+msgstr "Tekstas nukopijuotas"
+
+msgid "Thank you for your response!"
+msgstr "Dėkojame už atsakymą!"
+
+msgid "The invoice has been marked as paid."
+msgstr "Sąskaita faktūra pažymėta kaip apmokėta."
+
+msgid "The key has been created."
+msgstr "Sukurtas raktas."
+
+msgid "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number"
+msgstr "Pavadinime gali būti tik raidės, skaičiai ir brūkšneliai. Jis turėtų prasidėti raide ir baigtis raide ar skaičiumi"
+
+msgid "The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name."
+msgstr "Pavadinimą galima sudaryti tik iš mažųjų raidžių, skaičių ir brūkšnelio. Brūkšnelis pavadinime negali sukelti arba sekti."
+
+msgid "The name must be shorter than 15 characters."
+msgstr "Pavadinimas turi būti trumpesnis nei 15 simbolių."
+
+msgid "The project will be changed for all items in cart."
+msgstr "Projektas bus pakeistas visoms krepšelyje esančioms prekėms."
+
+msgid "The value is not valid IP v4 CIDR"
+msgstr "Vertė neteisinga IP v4 CIDR"
+
+msgid "The value is not valid IP v6 CIDR"
+msgstr "Vertė neteisinga IP v6 CIDR"
+
+msgid "The worker node is expected to have at least 4 vCPU and 4 GB RAM to run Longhorn."
+msgstr "Tikimasi, kad darbinis mazgas turės bent 4 vCPU ir 4 GB RAM, kad galėtų paleisti „Longhorn“."
+
+msgid "Then download (if needed) and run kubectl"
+msgstr "Tada atsisiųskite (jei reikia) ir paleiskite kubectl"
+
+msgid "There are no SSH keys yet."
+msgstr "SSH raktų dar nėra."
+
+msgid "There are no actions."
+msgstr "Nėra jokių veiksmų."
+
+msgid "There are no available projects."
+msgstr "Galimų projektų nėra."
+
+msgid "There are no available users."
+msgstr "Nėra galimų vartotojų."
+
+msgid "There are no categories."
+msgstr "Kategorijų nėra."
+
+msgid "There are no categories in marketplace yet."
+msgstr "Rinkos aikštelėje dar nėra kategorijų."
+
+msgid "There are no categories yet."
+msgstr "Dar nėra kategorijų."
+
+msgid "There are no charts yet."
+msgstr "Diagramų dar nėra."
+
+msgid "There are no checklist yet."
+msgstr "Dar nėra kontrolinio sąrašo."
+
+msgid "There are no checklists."
+msgstr "Kontrolinių sąrašų nėra."
+
+msgid "There are no comments yet."
+msgstr "Komentarų kol kas nėra."
+
+msgid "There are no events for this resource."
+msgstr "Šiam ištekliui nėra jokių įvykių."
+
+msgid "There are no invoices."
+msgstr "Sąskaitų faktūrų nėra."
+
+msgid "There are no matching checklists."
+msgstr "Nėra sutampančių kontrolinių sąrašų."
+
+msgid "There are no offerings available."
+msgstr "Pasiūlymų nėra."
+
+msgid "There are no offerings in marketplace yet."
+msgstr "Rinkoje dar nėra pasiūlymų."
+
+msgid "There are no offerings yet."
+msgstr "Pasiūlymų dar nėra."
+
+msgid "There are no organizations matching filter."
+msgstr "Nėra organizacijų, atitinkančių filtrą."
+
+msgid "There are no organizations yet."
+msgstr "Organizacijų dar nėra."
+
+msgid "There are no other plans available."
+msgstr "Kitų planų nėra."
+
+msgid "There are no other volume types available."
+msgstr "Nėra kitų galimų tomų tipų."
+
+msgid "There are no projects matching filter."
+msgstr "Nėra projektų, atitinkančių filtrą."
+
+msgid "There are no projects yet for this organization."
+msgstr "Dar nėra šios organizacijos projektų."
+
+msgid "There are no requests yet."
+msgstr "Dar nėra užklausų."
+
+msgid "There are no resources available."
+msgstr "Nėra jokių išteklių."
+
+msgid "There are no resources yet."
+msgstr "Kol kas nėra jokių išteklių."
+
+msgid "There are no sections for comparison yet."
+msgstr "Kol kas nėra skyrių, kuriuos būtų galima palyginti."
+
+msgid "There are no {verboseName} found matching the filter."
+msgstr "Nerasta, kad {verboseName} atitiktų filtrą."
+
+msgid "There are no {verboseName} yet."
+msgstr "Kol kas nėra „{verboseName}“."
+
+msgid "There are not namespaces in this project yet."
+msgstr "Šiame projekte dar nėra vardų srities."
+
+msgid "There is no activity yet."
+msgstr "Kol kas nėra jokios veiklos."
+
+msgid "This name will be visible in accounting data."
+msgstr "Šis vardas bus matomas apskaitos duomenyse."
+
+msgid "This value is invalid JSON."
+msgstr "Ši vertė yra neteisinga JSON."
+
+msgid "This website uses cookies to ensure you get the best experience on our website."
+msgstr "Šioje svetainėje naudojami slapukai, kad užtikrintume, kad jūs gaunate geriausią patirtį mūsų svetainėje."
+
+msgid "Time in progress"
+msgstr "Vykdomas laikas"
+
+msgid "Time slot"
+msgstr "Laiko tarpas"
+
+msgid "Time slot has been added."
+msgstr "Pridėtas laiko tarpas."
+
+msgid "Time slots"
+msgstr "Laiko intervalai"
+
+msgid "To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!"
+msgstr "Norėdami ištaisyti išsamią informaciją apie savo organizaciją, siųskite el. Laišką adresu {supportEmail}, pabrėždami dabartinės informacijos klaidas. Ačiū!"
+
+msgid "To get access, please send a request to {supportEmail}."
+msgstr "Norėdami gauti prieigą, siųskite užklausą adresu {supportEmail}."
 
 msgid "(VAT is not included)"
 msgstr "(PVM neįskaičiuotas)"
