@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { PanelBody, Tab, Tabs } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -14,17 +13,6 @@ export const ProjectDetailsDialog: FunctionComponent<{
     title={translate('Project details')}
     footer={<CloseDialogButton />}
   >
-    <Tabs
-      id="project-details"
-      unmountOnExit
-      mountOnEnter
-      defaultActiveKey="general"
-    >
-      <Tab title={translate('General')} eventKey="general">
-        <PanelBody>
-          <ProjectUpdateContainer project={project} />
-        </PanelBody>
-      </Tab>
-    </Tabs>
+    <ProjectUpdateContainer project={project} />
   </ModalDialog>
 );

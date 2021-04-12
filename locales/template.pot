@@ -2777,10 +2777,6 @@ msgstr ""
 msgid "Gateway IP of this subnet"
 msgstr ""
 
-#: src/project/ProjectDetailsDialog.tsx
-msgid "General"
-msgstr ""
-
 #: src/customer/create/CustomerCreateForm.tsx
 msgid "General information"
 msgstr ""
