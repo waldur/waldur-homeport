@@ -42,6 +42,12 @@ export const getPrivateUserTabs = () => [
         key: 'freeipa',
       }
     : undefined,
+  {
+    label: translate('Remote accounts'),
+    icon: 'fa-file',
+    state: 'profile.remote-accounts',
+    key: 'remote-accounts',
+  },
 ];
 
 export const getPublicUserTabs = (user) => [

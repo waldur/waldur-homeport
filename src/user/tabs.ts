@@ -33,6 +33,10 @@ const UserManage = lazyComponent(
   () => import(/* webpackChunkName: "UserManage" */ './UserManage'),
   'UserManage',
 );
+const UserOfferingList = lazyComponent(
+  () => import(/* webpackChunkName: "UserOfferingList" */ './UserOfferingList'),
+  'UserOfferingList',
+);
 
 export const tabs = {
   dashboard: {
@@ -62,6 +66,10 @@ export const tabs = {
   freeipa: {
     url: 'freeipa-account/',
     component: FreeIpaAccount,
+  },
+  offerings: {
+    url: 'remote-accounts/',
+    component: UserOfferingList,
   },
 };
 

@@ -38,6 +38,7 @@ export const states: StateDeclaration[] = [
   { name: 'profile.notifications', ...tabs.notifications },
   { name: 'profile.manage', ...tabs.manage },
   { name: 'profile.freeipa', ...tabs.freeipa },
+  { name: 'profile.offerings', ...tabs.offerings },
 
   {
     name: 'users',
