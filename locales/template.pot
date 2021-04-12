@@ -1637,6 +1637,7 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/resource/support/SharedProviderResources.tsx
+#: src/user/UserOfferingList.tsx
 msgid "Created at"
 msgstr ""
 
@@ -4384,6 +4385,7 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 #: src/project/ProjectResourcesList.tsx
 #: src/support/SupportDetailsTable.tsx
+#: src/user/UserOfferingList.tsx
 msgid "Offering"
 msgstr ""
 
@@ -5922,6 +5924,11 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/CredentialsTab.tsx
 msgid "Remote Waldur API URL"
+msgstr ""
+
+#: src/user/UserOfferingList.tsx
+#: src/user/constants.ts
+msgid "Remote accounts"
 msgstr ""
 
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
@@ -9262,6 +9269,7 @@ msgstr ""
 #: src/slurm/SlurmForm.tsx
 #: src/slurm/details/AllocationUsersTable.tsx
 #: src/slurm/marketplace.ts
+#: src/user/UserOfferingList.tsx
 #: src/vmware/VMwareForm.tsx
 msgid "Username"
 msgstr ""
@@ -10002,6 +10010,10 @@ msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
 msgid "referrals"
+msgstr ""
+
+#: src/user/UserOfferingList.tsx
+msgid "remote accounts"
 msgstr ""
 
 #: src/marketplace/resources/actions/EditDialog.tsx
