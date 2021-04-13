@@ -1,11 +1,19 @@
 import { translate } from '@waldur/i18n';
 
 export const ISSUE_IDS = {
-  INCIDENT: translate('Incident'),
-  CHANGE_REQUEST: translate('Change Request'),
-  SERVICE_REQUEST: translate('Service Request'),
-  INFORMATIONAL: translate('Informational'),
+  INCIDENT: 'Incident',
+  CHANGE_REQUEST: 'Change Request',
+  SERVICE_REQUEST: 'Service Request',
+  INFORMATIONAL: 'Informational',
 };
+
+export const getIssueTypeLabel = (issueType) =>
+  ({
+    INCIDENT: translate('Incident'),
+    CHANGE_REQUEST: translate('Change Request'),
+    SERVICE_REQUEST: translate('Service Request'),
+    INFORMATIONAL: translate('Informational'),
+  }[issueType]);
 
 export const ISSUE_CLASSES = {
   INCIDENT: 'label-danger',
@@ -46,12 +54,11 @@ const getIssueDescription = (issueType) =>
 
 export const ISSUE_STATUSES = ['Resolved', 'Unresolved', "Won't fix"];
 
-export const ISSUE_TYPE_CHOICES = Object.keys(ISSUE_IDS).map((item) => {
-  return {
+export const getIssueTypeChoices = () =>
+  Object.keys(ISSUE_IDS).map((item) => ({
     iconClass: ISSUE_ICONS[item],
     textClass: ISSUE_TEXT_CLASSES[item],
-    label: ISSUE_IDS[item],
+    label: getIssueTypeLabel(item),
     description: getIssueDescription(item),
     id: ISSUE_IDS[item],
-  };
-});
+  }));
