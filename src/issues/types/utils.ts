@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { ISSUE_IDS, ISSUE_TYPE_CHOICES } from '@waldur/issues/types/constants';
+import { ISSUE_IDS, getIssueTypeChoices } from '@waldur/issues/types/constants';
 import { User } from '@waldur/workspace/types';
 
 export function getShowAllTypes(user: User) {
@@ -8,6 +8,6 @@ export function getShowAllTypes(user: User) {
 
 export function getIssueTypes(showAllTypes: boolean) {
   return showAllTypes
-    ? ISSUE_TYPE_CHOICES
-    : ISSUE_TYPE_CHOICES.filter((x) => x.id !== ISSUE_IDS.CHANGE_REQUEST);
+    ? getIssueTypeChoices()
+    : getIssueTypeChoices().filter((x) => x.id !== ISSUE_IDS.CHANGE_REQUEST);
 }
