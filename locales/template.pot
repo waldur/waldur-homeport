@@ -4965,10 +4965,6 @@ msgstr ""
 msgid "Payments list"
 msgstr ""
 
-#: src/customer/team/OfferingPermissionRemoveButton.tsx
-msgid "Pemission has been revoked."
-msgstr ""
-
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
 #: src/invoices/list/InvoicesFilter.tsx
@@ -5032,6 +5028,10 @@ msgstr ""
 
 #: src/digitalocean/DropletResizeDialog.tsx
 msgid "Permanent"
+msgstr ""
+
+#: src/customer/team/OfferingPermissionRemoveButton.tsx
+msgid "Permission has been revoked."
 msgstr ""
 
 #: src/customer/team/CustomerTeam.tsx
@@ -8668,7 +8668,7 @@ msgid "Unable to retype volume."
 msgstr ""
 
 #: src/customer/team/OfferingPermissionRemoveButton.tsx
-msgid "Unable to revoke pemission."
+msgid "Unable to revoke permission."
 msgstr ""
 
 #: src/customer/list/store/effects.ts

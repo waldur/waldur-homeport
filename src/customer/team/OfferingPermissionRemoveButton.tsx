@@ -32,14 +32,14 @@ export const OfferingPermissionRemoveButton: React.FC<OfferingPermissionRemoveBu
     }
     try {
       await Axios.delete(permission.url);
-      dispatch(showSuccess(translate('Pemission has been revoked.')));
+      dispatch(showSuccess(translate('Permission has been revoked.')));
       dispatch(
         fetchListStart(OFFERING_PERMISSIONS_LIST_ID, {
           customer_uuid: customer.uuid,
         }),
       );
     } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to revoke pemission.')));
+      dispatch(showErrorResponse(e, translate('Unable to revoke permission.')));
     }
   };
   return (
