@@ -1277,9 +1277,6 @@ msgstr "نام کامل"
 msgid "Gateway IP of this subnet"
 msgstr "Gateway IP برای این subnet"
 
-msgid "General"
-msgstr "عمومی"
-
 msgid "General information"
 msgstr "اطلاعات عمومی"
 

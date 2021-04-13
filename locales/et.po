@@ -1259,9 +1259,6 @@ msgstr "Võrgulüüsi IP"
 msgid "Gateway IP of this subnet"
 msgstr "Võrgulüüsi IP antud alamvõrgule"
 
-msgid "General"
-msgstr "Üldine"
-
 msgid "General information"
 msgstr "Üldteave"
 

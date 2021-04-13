@@ -246,7 +246,7 @@ msgid "Article code"
 msgstr "Номер товара"
 
 msgid "Audit logs"
-msgstr "Журналы аудита"
+msgstr "Журнал аудита"
 
 msgid "Author"
 msgstr "Автор"

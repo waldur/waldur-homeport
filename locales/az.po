@@ -737,9 +737,6 @@ msgstr "Giriş "
 msgid "Gateway IP"
 msgstr "Giriş IP-si "
 
-msgid "General"
-msgstr "Ümumi "
-
 msgid "General information"
 msgstr "Ümumi informasiya "
 
