@@ -3674,6 +3674,9 @@ msgstr "Fjärr-URL för Waldur API"
 msgid "Remote accounts"
 msgstr "Fjärrkonton"
 
+msgid "Remote accounts are used for accessing external services you have access to."
+msgstr "Fjärrkonton används för åtkomst till externa tjänster som du har åtkomst till."
+
 msgid "Remote category"
 msgstr "Fjärrkontroll kategori"
 
@@ -4819,6 +4822,9 @@ msgstr "Det finns inga projekt matchande filter."
 
 msgid "There are no projects yet for this organization."
 msgstr "Det finns ännu inga projekt för den här organisationen."
+
+msgid "There are no remote accounts yet."
+msgstr "Det finns inga fjärrkonton ännu."
 
 msgid "There are no requests yet."
 msgstr "Det finns inga förfrågningar ännu."

@@ -14,6 +14,9 @@ msgstr "Доменное имя «{trimmed}» должно иметь не бо�
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr "<Link>Условия предоставления услуг</Link> были приняты <Date></Date>"
 
+msgid "API URL"
+msgstr "API URL"
+
 msgid "API secret code:"
 msgstr "Секретный код API:"
 
@@ -71,6 +74,15 @@ msgstr "Учётный период"
 msgid "Accounting plans"
 msgstr "Тарифы"
 
+msgid "Accounting record"
+msgstr "Бухгалтерская запись"
+
+msgid "Accounting records"
+msgstr "Бухгалтерские записи"
+
+msgid "Accounting running"
+msgstr "Бухгалтерский учёт запущен"
+
 msgid "Accounting start date"
 msgstr "Дата начала учета"
 
@@ -98,6 +110,9 @@ msgstr "Активный"
 msgid "Active plans"
 msgstr "Действующие тарифы"
 
+msgid "Active user will be able to login into the portal."
+msgstr "Активный пользователь сможет войти на портал."
+
 msgid "Activity stream"
 msgstr "Лента активности"
 
@@ -106,6 +121,9 @@ msgstr "Добавить"
 
 msgid "Add SSH key"
 msgstr "Добавить SSH ключ"
+
+msgid "Add Waldur user SSH keys to the FreeIPA profile"
+msgstr "Добавление SSH ключей пользователя Waldur в профиль FreeIPA"
 
 msgid "Add address"
 msgstr "Добавить адрес"
@@ -116,8 +134,14 @@ msgstr "Добавить комментарий"
 msgid "Add component"
 msgstr "Добавить компонент"
 
+msgid "Add data volume"
+msgstr "Добавить том данных"
+
 msgid "Add environment variable"
 msgstr "Добавить переменную среды"
+
+msgid "Add image"
+msgstr "Добавить образ"
 
 msgid "Add item"
 msgstr "Добавить элемент"
@@ -148,6 +172,12 @@ msgstr "Добавить предложение"
 
 msgid "Add organization"
 msgstr "Добавить организацию"
+
+msgid "Add pair"
+msgstr "Добавить пару"
+
+msgid "Add payment"
+msgstr "Добавить платёж"
 
 msgid "Add payment profile"
 msgstr "Добавить платежный профиль"
@@ -188,11 +218,17 @@ msgstr "Добавить к сравнению"
 msgid "Add user"
 msgstr "Добавить пользователя"
 
+msgid "Add user input field"
+msgstr "Добавить пользовательское поле ввода"
+
 msgid "Additional data that will be added to instance on provisioning."
 msgstr "Пользовательские данные, которые будут добавлены в виртуальную машину при её создании."
 
 msgid "Additional data that will be added to virtual machine on provisioning."
 msgstr "Пользовательские данные, которые будут добавлены в виртуальную машину при её создании."
+
+msgid "Additional space to apply to storage quota to be used by snapshots."
+msgstr "Дополнительная квота хранилища для хранения снимков."
 
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr "Кроме того, поставщик услуг может взимать плату за использование следующих компонентов"
@@ -206,11 +242,26 @@ msgstr "Пароль администратора"
 msgid "Admin username"
 msgstr "Имя учётной записи администратора"
 
+msgid "Affected resource"
+msgstr "Затронутый ресурс"
+
+msgid "Affiliations"
+msgstr "Роли пользователя в организации"
+
+msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr "После смены старый API токен нельзя будет использовать для отправки отчётов об использовании ресурсов."
+
 msgid "Agree with ToS"
 msgstr "Подтвердить принятие условий обслуживания"
 
 msgid "Agreement number"
 msgstr "Номер договора"
+
+msgid "Alert"
+msgstr "Оповещение"
+
+msgid "All"
+msgstr "Всё"
 
 msgid "All day"
 msgstr "Весь день"
@@ -218,8 +269,20 @@ msgstr "Весь день"
 msgid "All resources have been imported."
 msgstr "Все ресурсы были импортированы."
 
+msgid "Allocation description"
+msgstr "Описание аллокации"
+
+msgid "Allocation name"
+msgstr "Название аллокации"
+
+msgid "Allocation pools"
+msgstr "Пулы распределения IP адресов"
+
 msgid "Already have an account?"
 msgstr "У вас уже есть аккаунт?"
+
+msgid "An error has occurred."
+msgstr "Произошла ошибка"
 
 msgid "An error occurred on project removal."
 msgstr "Произошла ошибка при удалении проекта."
@@ -232,6 +295,12 @@ msgstr "Ответы"
 
 msgid "Answers have been submitted"
 msgstr "Ответы были представлены"
+
+msgid "Any"
+msgstr "Любой"
+
+msgid "Application templates"
+msgstr "Шаблоны приложений"
 
 msgid "Applications"
 msgstr "Приложения"

@@ -3674,6 +3674,9 @@ msgstr "Nuotolinis Waldur API URL"
 msgid "Remote accounts"
 msgstr "Nuotolinės paskyros"
 
+msgid "Remote accounts are used for accessing external services you have access to."
+msgstr "Nuotolinės paskyros naudojamos prieigai prie išorinių paslaugų, prie kurių turite prieigą."
+
 msgid "Remote category"
 msgstr "Nuotolinė kategorija"
 
@@ -4819,6 +4822,9 @@ msgstr "Nėra projektų, atitinkančių filtrą."
 
 msgid "There are no projects yet for this organization."
 msgstr "Dar nėra šios organizacijos projektų."
+
+msgid "There are no remote accounts yet."
+msgstr "Kol kas nėra nuotolinių paskyrų."
 
 msgid "There are no requests yet."
 msgstr "Dar nėra užklausų."

@@ -500,6 +500,9 @@ msgstr "Gennemsnitlig værdi"
 msgid "Azerbaijani"
 msgstr "Aserbajdsjansk"
 
+msgid "Azure Active Directory Application Secret"
+msgstr "Azure Active Directory-applikationshemmelighed"
+
 msgid "Azure PostgreSQL database server"
 msgstr "Azure PostgreSQL-databaseserver"
 
@@ -703,6 +706,9 @@ msgstr "Ændre smag"
 
 msgid "Change limits"
 msgstr "Ændre grænser"
+
+msgid "Change plan"
+msgstr "Ændringsplan"
 
 msgid "Change request - client’s request to perform a generic modification of data or service."
 msgstr "Ændringsanmodning - klientens anmodning om at udføre en generisk ændring af data eller tjeneste."
@@ -1487,11 +1493,23 @@ msgstr "Eksisterende kvoteforbrug: {usage}"
 msgid "Expand"
 msgstr "Udvid"
 
+msgid "Expiration time"
+msgstr "Udløbstid"
+
+msgid "Expired"
+msgstr "Udløbet"
+
 msgid "Expires at"
 msgstr "Udløber kl."
 
 msgid "Explore {deployment} Marketplace"
 msgstr "Udforsk {deployment} Marketplace"
+
+msgid "Export as"
+msgstr "Eksporter som"
+
+msgid "Extend"
+msgstr "Udvid"
 
 msgid "Extend OpenStack volume"
 msgstr "Udvid OpenStack-volumen"
@@ -1505,14 +1523,26 @@ msgstr "Udvidelse"
 msgid "External IP"
 msgstr "Ekstern IP"
 
+msgid "External links"
+msgstr "Eksterne links"
+
 msgid "External network ID"
 msgstr "Eksternt netværks-ID"
 
 msgid "Failed to operate with backend."
 msgstr "Det lykkedes ikke at operere med backend."
 
+msgid "Features"
+msgstr "Funktioner"
+
 msgid "Fee applied each time this plan is activated."
 msgstr "Gebyr anvendes hver gang denne plan aktiveres."
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "File"
+msgstr "Fil"
 
 msgid "File download has been started."
 msgstr "Download af filer er startet."
@@ -1523,11 +1553,23 @@ msgstr "Filen er blevet kopieret"
 msgid "File has been downloaded."
 msgstr "Filen er blevet downloadet."
 
+msgid "Filename"
+msgstr "Filnavn"
+
+msgid "Files"
+msgstr "Filer"
+
+msgid "Filter"
+msgstr "Filtrer"
+
 msgid "Filter organizations"
 msgstr "Filtrer organisationer"
 
 msgid "Filter projects"
 msgstr "Filtrer projekter"
+
+msgid "Financial"
+msgstr "Finansiel"
 
 msgid "Financial overview"
 msgstr "Finansiel oversigt"
@@ -1535,8 +1577,14 @@ msgstr "Finansiel oversigt"
 msgid "Find solution"
 msgstr "Find løsning"
 
+msgid "Fingerprint"
+msgstr "Fingeraftryk"
+
 msgid "Fixed-price contract"
 msgstr "Kontrakt om fast pris"
+
+msgid "Fixed price"
+msgstr "Fast pris"
 
 msgid "Fixed — use common storage quota"
 msgstr "Fast — brug fælles lagerkvote"
@@ -1552,6 +1600,9 @@ msgstr "Smag udelukker regex"
 
 msgid "Flavor name"
 msgstr "Smagsnavn"
+
+msgid "Flavor name: {flavor_name}"
+msgstr "Smagsnavn: {flavor_name}"
 
 msgid "Flavors"
 msgstr "Smagsstoffer"
@@ -1583,6 +1634,12 @@ msgstr "Flydende IPS-opdatering er planlagt."
 msgid "Flowmap"
 msgstr "Flowmap"
 
+msgid "Folder"
+msgstr "Mappe"
+
+msgid "For"
+msgstr "Til"
+
 msgid "Force destroy"
 msgstr "Tving ødelægge"
 
@@ -1598,8 +1655,17 @@ msgstr "FreeIPA-konto skal oprettes."
 msgid "FreeIPA extension is disabled."
 msgstr "FreeIPA-udvidelsen er deaktiveret."
 
+msgid "From"
+msgstr "Fra"
+
 msgid "From port"
 msgstr "Fra port"
+
+msgid "Full description"
+msgstr "Fuld beskrivelse"
+
+msgid "Full name"
+msgstr "Fulde navn"
 
 msgid "GB"
 msgstr "GB"
@@ -1616,17 +1682,29 @@ msgstr "GPU-brug"
 msgid "Gateway"
 msgstr "Gateway"
 
+msgid "Gateway IP"
+msgstr "Gateway IP"
+
 msgid "Gateway IP of this subnet"
 msgstr "Gateway IP for dette undernet"
 
+msgid "General information"
+msgstr "Generelle oplysninger"
+
 msgid "Generate Kubeconfig file"
 msgstr "Generer Kubeconfig- fil"
+
+msgid "Generate password"
+msgstr "Generer adgangskode"
 
 msgid "Go to marketplace"
 msgstr "Gå til Marketplace"
 
 msgid "Go to my profile"
 msgstr "Gå til min profil"
+
+msgid "Go to profile"
+msgstr "Gå til profil"
 
 msgid "Google Calendar has been published successfully."
 msgstr "Google Kalender er blevet udgivet med succes."
@@ -1639,6 +1717,15 @@ msgstr "Google Kalender er blevet afpubliceret med succes."
 
 msgid "Google Calendar link"
 msgstr "Google Kalender link"
+
+msgid "Got it!"
+msgstr "Har det!"
+
+msgid "Grant permission"
+msgstr "Giv tilladelse"
+
+msgid "Growth"
+msgstr "vækst"
 
 msgid "Guaranteed time of VM snapshot retention. If null - keep forever."
 msgstr "Garanteret tid for opbevaring af VM snapshot. Hvis null - hold for evigt."
@@ -1655,17 +1742,26 @@ msgstr "Gæst OS"
 msgid "HPA"
 msgstr "HPA"
 
+msgid "Heatmap"
+msgstr "Heatmap"
+
 msgid "Helpdesk"
 msgstr "Helpdesk"
 
 msgid "Helpdesk dashboard"
 msgstr "Helpdesk instrumentbræt"
 
+msgid "Hide controls"
+msgstr "Skjul kontrolelementer"
+
 msgid "Hide diff"
 msgstr "Skjul diff"
 
 msgid "Home organization domain name"
 msgstr "Domænenavn for hjemmeorganisation"
+
+msgid "Homepage"
+msgstr "Hjemmeside"
 
 msgid "Hook has been removed."
 msgstr "Krogen er blevet fjernet."
@@ -1682,6 +1778,9 @@ msgstr "Vandret pod autoscaler er blevet opdateret."
 msgid "Host routes"
 msgstr "Værtsruter"
 
+msgid "Hostname"
+msgstr "Værtsnavn"
+
 msgid "Hostname or IP address of gateway node"
 msgstr "Værtsnavn eller IP-adresse på gateway-node"
 
@@ -1697,8 +1796,14 @@ msgstr "Sådan får du legitimationsoplysninger til Azure-udbyder"
 msgid "How to obtain credentials for DigitalOcean provider"
 msgstr "Sådan får du legitimationsoplysninger til DigitalOcean-udbyder"
 
+msgid "ID"
+msgstr "ID"
+
 msgid "ID code"
 msgstr "ID-kode"
+
+msgid "IP address"
+msgstr "IP-adresse"
 
 msgid "IP address is already used by router."
 msgstr "IP-adressen er allerede brugt af routeren."
@@ -1712,11 +1817,20 @@ msgstr "IP-version"
 msgid "I accept the <Link>Terms of Service</Link>."
 msgstr "Jeg accepterer <Link>Servicevilkår</Link>."
 
+msgid "Icon"
+msgstr "Ikon"
+
 msgid "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon."
 msgstr "Identiteten er blevet valgt via SAML2-discovery-tjenesten. Du vil snart blive omdirigeret til loginsiden."
 
 msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
 msgstr "Hvis du vil have brugeren til at give yderligere oplysninger, når du bestiller, skal du konfigurere inputformularen til brugeren nedenfor"
+
+msgid "Image"
+msgstr "Billede"
+
+msgid "Image:"
+msgstr "Billede:"
 
 msgid "Image has been added."
 msgstr "Billedet er blevet tilføjet."
@@ -1726,6 +1840,15 @@ msgstr "Billedet er blevet fjernet."
 
 msgid "Image here"
 msgstr "Billede her"
+
+msgid "Image name"
+msgstr "Navn på billede"
+
+msgid "Images"
+msgstr "Billeder"
+
+msgid "Import"
+msgstr "Importer"
 
 msgid "Import YAML"
 msgstr "Importer YAML"
@@ -1744,6 +1867,9 @@ msgstr "I formatet GUID"
 
 msgid "Inactive user will not be able to login into the portal."
 msgstr "Inaktiv bruger vil ikke kunne logge ind på portalen."
+
+msgid "Incident"
+msgstr "Hændelse"
 
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr "Hændelse - kundeproblem med brug eller tilgængelighed af tjenesten (afbrydelser, kvalitetsforringelse)."
@@ -1817,6 +1943,12 @@ msgstr "Instansen skal lukkes og OK eller fejle. Kontakt venligst support."
 msgid "Instances count"
 msgstr "Antal instanser"
 
+msgid "Internal"
+msgstr "Intern"
+
+msgid "Internal IP"
+msgstr "Intern IP"
+
 msgid "Internal IPs"
 msgstr "Interne IP'er"
 
@@ -1868,8 +2000,14 @@ msgstr "Indbydelsen er ikke fundet."
 msgid "Invitation is not valid"
 msgstr "Indbydelsen er ikke gyldig"
 
+msgid "Invitation is not valid."
+msgstr "Invitationen er ikke gyldig."
+
 msgid "Invitation is not valid anymore."
 msgstr "Indbydelsen er ikke længere gyldig."
+
+msgid "Invitation link"
+msgstr "Invitationslink"
 
 msgid "Invitation rejection"
 msgstr "Afvisning af indbydelse"
@@ -1877,14 +2015,23 @@ msgstr "Afvisning af indbydelse"
 msgid "Invitation token is not found."
 msgstr "Indbydelsens token er ikke fundet."
 
+msgid "Invitations"
+msgstr "Invitationer"
+
 msgid "Invite team member"
 msgstr "Inviter teammedlem"
 
 msgid "Invite user"
 msgstr "Inviter bruger"
 
+msgid "Invoice"
+msgstr "Faktura"
+
 msgid "Invoice No."
 msgstr "Faktura nr."
+
+msgid "Invoice date"
+msgstr "Fakturadato"
 
 msgid "Invoice events"
 msgstr "Faktura-begivenheder"
@@ -1910,6 +2057,9 @@ msgstr "Fakturaen er blevet fjernet fra forbindelsen til betalingen."
 msgid "Invoice has not been sent to PayPal yet"
 msgstr "Fakturaen er endnu ikke sendt til PayPal"
 
+msgid "Invoice number"
+msgstr "Faktura nummer"
+
 msgid "Invoice statistics"
 msgstr "Fakturastatistik"
 
@@ -1918,6 +2068,9 @@ msgstr "Faktureret til"
 
 msgid "Invoices list"
 msgstr "Liste over fakturaer"
+
+msgid "Is active"
+msgstr "Er aktiv"
 
 msgid "Is external"
 msgstr "Er ekstern"
@@ -1928,11 +2081,17 @@ msgstr "Er officiel"
 msgid "Is service provider"
 msgstr "Er tjenesteudbyder"
 
+msgid "Issue"
+msgstr "Problem"
+
 msgid "Issue link"
 msgstr "Problem link"
 
 msgid "Issue {issue_link} has been created by {caller_link}."
 msgstr "Problemet {issue_link} er oprettet af {caller_link}."
+
+msgid "Issues"
+msgstr "Problemer"
 
 msgid "Issues are trackable requests to the operator."
 msgstr "Problemer er sporbare anmodninger til operatøren."
@@ -1940,11 +2099,23 @@ msgstr "Problemer er sporbare anmodninger til operatøren."
 msgid "It is used to automatically assign floating IP to your virtual machine."
 msgstr "Det bruges til automatisk at tildele flydende IP til din virtuelle maskine."
 
+msgid "Item"
+msgstr "Vare"
+
 msgid "Item has been added to shopping cart."
 msgstr "Varen er blevet tilføjet til indkøbskurven."
 
 msgid "Item has been removed from shopping cart."
 msgstr "Varen er blevet fjernet fra indkøbskurven."
+
+msgid "Item type"
+msgstr "Varetype"
+
+msgid "Job position"
+msgstr "Job stilling"
+
+msgid "Job title"
+msgstr "Job titel"
 
 msgid "Keep forever"
 msgstr "Hold for evigt"
@@ -1955,11 +2126,17 @@ msgstr "Hold indtil"
 msgid "Kept until"
 msgstr "Opbevares indtil"
 
+msgid "Key"
+msgstr "Nøgle"
+
 msgid "Key name"
 msgstr "Nøgle navn"
 
 msgid "Key removal"
 msgstr "Fjernelse af nøgle"
+
+msgid "Keys"
+msgstr "Nøgler"
 
 msgid "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
 msgstr "Keystone auth URL (f.eks. http://keystone.example.com:5000/v3)"
@@ -1979,6 +2156,15 @@ msgstr "Kubernetes-version"
 msgid "Label that is visible to users in Marketplace."
 msgstr "Etiket, der er synligt for brugere på Marketplace."
 
+msgid "Labels"
+msgstr "Etiketter"
+
+msgid "Latvian"
+msgstr "Lettisk"
+
+msgid "Learn more"
+msgstr "Lær mere"
+
 msgid "Leave blank if you want admin password to be auto-generated."
 msgstr "Lad være tomt, hvis du ønsker, at administratoradgangskoden skal genereres automatisk."
 
@@ -1988,8 +2174,14 @@ msgstr "Lad det være tomt, hvis du ønsker, at administratorbrugernavnet skal g
 msgid "Legal address"
 msgstr "Juridisk adresse"
 
+msgid "Let’s get started"
+msgstr "Lad os komme i gang"
+
 msgid "Lifetime will be updated and reset upon saving the form."
 msgstr "Levetiden opdateres og nulstilles, når formularen gemmes."
+
+msgid "Limit"
+msgstr "Grænse"
 
 msgid "Limit amount"
 msgstr "Grænsebeløb"
@@ -2003,11 +2195,20 @@ msgstr "Grænser"
 msgid "Limits are invalid."
 msgstr "Grænserne er ugyldige."
 
+msgid "Link"
+msgstr "Link"
+
 msgid "Link OpenStack Instance"
 msgstr "Link OpenStack-Instans"
 
 msgid "Link invoice"
 msgstr "Link faktura"
+
+msgid "Lithuanian"
+msgstr "Litauisk"
+
+msgid "Loading"
+msgstr "Indlæser"
 
 msgid "Loading actions"
 msgstr "Indlæsning af handlinger"
@@ -2018,17 +2219,32 @@ msgstr "Indlæser aktiver, vent venligst."
 msgid "Loading invoices"
 msgstr "Indlæsning af fakturaer"
 
+msgid "Location"
+msgstr "Placering"
+
 msgid "Location has been saved successfully."
 msgstr "Placering er blevet gemt korrekt."
 
 msgid "Location of {offeringName} offering"
 msgstr "Placering af {offeringName} tilbud"
 
+msgid "Log out"
+msgstr "Log af"
+
 msgid "Logging user in"
 msgstr "Logger bruger ind"
 
+msgid "Login"
+msgstr "Log ind"
+
+msgid "Login failed"
+msgstr "Login mislykkedes"
+
 msgid "Login with"
 msgstr "Log ind med"
+
+msgid "Logo"
+msgstr "Logo"
 
 msgid "Logo has been removed."
 msgstr "Logo er blevet fjernet."
@@ -2036,14 +2252,23 @@ msgstr "Logo er blevet fjernet."
 msgid "Logo has been uploaded."
 msgstr "Logo er blevet uploadet."
 
+msgid "Logout failed"
+msgstr "Logout mislykkedes"
+
 msgid "Longhorn is a lightweight, reliable, and powerful distributed block storage system for Kubernetes."
 msgstr "Longhorn er et letvægts, pålideligt og kraftfuldt distribueret blokopbevaringssystem til Kubernetes."
+
+msgid "MAC address"
+msgstr "MAC-adresse"
 
 msgid "MAC address (optional)"
 msgstr "MAC-adresse (valgfri)"
 
 msgid "MTU"
 msgstr "MTU"
+
+msgid "Manage"
+msgstr "Administrer"
 
 msgid "Manage avatar at {link}"
 msgstr "Administrer avatar på {link}"
@@ -2060,11 +2285,17 @@ msgstr "Administrer sikkerhedsgrupper"
 msgid "Managed projects"
 msgstr "Administrerede projekter"
 
+msgid "Management"
+msgstr "Ledelse"
+
 msgid "Mark as paid"
 msgstr "Markér som betalt"
 
 msgid "Mark invoice as paid"
 msgstr "Marker fakturaen som betalt"
+
+msgid "Marketplace"
+msgstr "Markedsplads"
 
 msgid "Marketplace UUID"
 msgstr "Marketplace UUID"
@@ -2132,11 +2363,26 @@ msgstr "Maksimal vCPU for hver VM"
 msgid "Measured unit"
 msgstr "Målt enhed"
 
+msgid "Member"
+msgstr "Medlem"
+
+msgid "Memory"
+msgstr "Hukommelse"
+
 msgid "Memory per vCore"
 msgstr "Hukommelse pr. vCore"
 
 msgid "Memory size in GiB"
 msgstr "Hukommelsesstørrelse i GiB"
+
+msgid "Message"
+msgstr "Meddelelse"
+
+msgid "Method"
+msgstr "Metode"
+
+msgid "Metric"
+msgstr "Metrisk"
 
 msgid "Metric name"
 msgstr "Metrisk navn"
@@ -2168,11 +2414,23 @@ msgstr "Minimum booking tid slot varighed."
 msgid "Minimum username length is 3 characters."
 msgstr "Mindste brugernavn længde er 3 tegn."
 
+msgid "Mobile phone number"
+msgstr "Mobiltelefonnummer"
+
+msgid "Month"
+msgstr "Måned"
+
 msgid "Monthly cost"
 msgstr "Månedlige omkostninger"
 
 msgid "Monthly invoices"
 msgstr "Månedlige fakturaer"
+
+msgid "More"
+msgstr "Mere"
+
+msgid "More info"
+msgstr "Mere oplysninger"
 
 msgid "Mount point"
 msgstr "Monteringspunkt"
@@ -2189,6 +2447,9 @@ msgstr "Skal starte med et landspræfiks, dvs. EE34501234215"
 msgid "My offerings"
 msgstr "Mine tilbud"
 
+msgid "My orders"
+msgstr "Mine ordrer"
+
 msgid "My resources"
 msgstr "Mine ressourcer"
 
@@ -2197,6 +2458,9 @@ msgstr "Mine tjenester"
 
 msgid "N/A"
 msgstr "N/A"
+
+msgid "Name"
+msgstr "Navn"
 
 msgid "Name \"{label}\" must be 1-63 characters long, each of which can only be alphanumeric or a hyphen"
 msgstr "Navnet \"{label}\" skal være 1-63 tegn langt, som hver kun kan være alfanumeriske eller bindestreg"
@@ -2243,11 +2507,32 @@ msgstr "Navneområde skal være unikt."
 msgid "Native name"
 msgstr "Indfødt navn"
 
+msgid "Negative"
+msgstr "Negativ"
+
+msgid "Network"
+msgstr "Netværk"
+
 msgid "Network MTU has been updated."
 msgstr "Netværk MTU er blevet opdateret."
 
 msgid "Network adapters"
 msgstr "Netværksadaptere"
+
+msgid "Network name"
+msgstr "Netværksnavn"
+
+msgid "Networks"
+msgstr "Netværk"
+
+msgid "Neutral"
+msgstr "Neutral"
+
+msgid "New e-mail address"
+msgstr "Ny e-mail-adresse"
+
+msgid "New email"
+msgstr "Ny e-mail"
 
 msgid "New flavor"
 msgstr "Ny smag"
@@ -2261,17 +2546,29 @@ msgstr "Ny plan"
 msgid "New size"
 msgstr "Ny størrelse"
 
+msgid "Next"
+msgstr "Næste"
+
 msgid "Next hop (IP)"
 msgstr "Næste hop (IP)"
 
 msgid "Next trigger at"
 msgstr "Næste udløser på"
 
+msgid "No"
+msgstr "Nej"
+
 msgid "No, continue using current email"
 msgstr "Nej, fortsæt med at bruge nuværende e-mail"
 
 msgid "No access info"
 msgstr "Ingen adgangsoplysninger"
+
+msgid "No access info."
+msgstr "Ingen adgangsoplysninger."
+
+msgid "No categories"
+msgstr "Ingen kategorier"
 
 msgid "No countries"
 msgstr "Ingen lande"
@@ -2303,6 +2600,9 @@ msgstr "Der er ikke tildelt nogen projekter til denne bruger."
 msgid "No providers"
 msgstr "Ingen udbydere"
 
+msgid "No results found"
+msgstr "Ingen resultater fundet"
+
 msgid "No service providers"
 msgstr "Ingen tjenesteudbydere"
 
@@ -2321,8 +2621,14 @@ msgstr "Nodeplan"
 msgid "Nodes"
 msgstr "Noder"
 
+msgid "None"
+msgstr "Ingen"
+
 msgid "Not a service provider."
 msgstr "Ikke en tjenesteudbyder."
+
+msgid "Not assigned"
+msgstr "Ikke tildelt"
 
 msgid "Not running accounting"
 msgstr "Ikke kører regnskab"
@@ -2332,6 +2638,12 @@ msgstr "Bemærk, at denne virtuelle maskine ikke vil blive opkrævet separat for
 
 msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Bemærk, at denne diskenhed ikke opkræves separat for {organization}."
+
+msgid "Nothing to see here"
+msgstr "Intet at se her"
+
+msgid "Nothing to show here"
+msgstr "Intet at vise her"
 
 msgid "Notification can be sent only for created invoice."
 msgstr "Meddelelsen kan kun sendes for oprettet faktura."
@@ -2344,6 +2656,9 @@ msgstr "Meddelelsen er blevet opdateret."
 
 msgid "Notification method"
 msgstr "Meddelelsesmetode"
+
+msgid "Notifications"
+msgstr "Meddelelser"
 
 msgid "Notifications allow to be informed when a certain event has occurred."
 msgstr "Meddelelser gør det muligt at blive informeret, når en bestemt hændelse har fundet sted."
@@ -2375,8 +2690,14 @@ msgstr "Antal kørende instanser"
 msgid "Number of worker nodes"
 msgstr "Antal arbejdernoder"
 
+msgid "OK"
+msgstr "OK"
+
 msgid "Object is not found."
 msgstr "Objektet blev ikke fundet."
+
+msgid "Offering"
+msgstr "Tilbud"
 
 msgid "Offering components"
 msgstr "Tilbyder komponenter"
@@ -2423,8 +2744,14 @@ msgstr "Tilbudsstatus er blevet opdateret."
 msgid "Offering type"
 msgstr "Tilbudstype"
 
+msgid "Offerings"
+msgstr "Tilbud"
+
 msgid "Offerings images"
 msgstr "Tilbudsbilleder"
+
+msgid "One-time"
+msgstr "Engang"
 
 msgid "One-time on plan switch"
 msgstr "Engangskontakt på planen"
@@ -2452,6 +2779,9 @@ msgstr "Kun medarbejdere kan fjerne organisationen."
 
 msgid "Only staff users are allowed to perform this action."
 msgstr "Kun medarbejderbrugere har tilladelse til at udføre denne handling."
+
+msgid "Open"
+msgstr "Åben"
 
 msgid "OpenStack Images"
 msgstr "OpenStack-billeder"
@@ -2501,6 +2831,12 @@ msgstr "Indstillingerne er ugyldige."
 msgid "Or use social login"
 msgstr "Eller brug socialt login"
 
+msgid "Order Summary"
+msgstr "Oversigt over ordre"
+
+msgid "Order details"
+msgstr "Ordreoplysninger"
+
 msgid "Order has been approved."
 msgstr "Ordren er blevet godkendt."
 
@@ -2522,6 +2858,21 @@ msgstr "Ordrevare er blevet afvist."
 msgid "Order item has cancel has been scheduled."
 msgstr "Ordrevaren har annulleret er planlagt."
 
+msgid "Order items"
+msgstr "Bestil varer"
+
+msgid "Order summary"
+msgstr "Oversigt over ordre"
+
+msgid "Ordering"
+msgstr "Bestilling"
+
+msgid "Orders"
+msgstr "Ordrer"
+
+msgid "Organization"
+msgstr "Organisation"
+
 msgid "Organization actions"
 msgstr "Organisationens handlinger"
 
@@ -2530,6 +2881,9 @@ msgstr "Organisationen indeholder fakturaer. Fjern dem venligst først."
 
 msgid "Organization contains projects. Please remove them first."
 msgstr "Organisationen indeholder projekter. Fjern dem venligst først."
+
+msgid "Organization details"
+msgstr "Organisationsoplysninger"
 
 msgid "Organization events"
 msgstr "Organisationsbegivenheder"
@@ -2542,6 +2896,9 @@ msgstr "Organisationen er blevet opdateret."
 
 msgid "Organization has signed a fixed price agreement"
 msgstr "Organisationen har underskrevet en fast pris aftale"
+
+msgid "Organization name"
+msgstr "Organisationsnavn"
 
 msgid "Organization owner"
 msgstr "Organisationens ejer"
@@ -2573,17 +2930,35 @@ msgstr "Liste over organisationsbrugere"
 msgid "Organization workspace"
 msgstr "Organisationens arbejdsområde"
 
+msgid "Organization {customer_link} has been created."
+msgstr "Organisation {customer_link} er blevet oprettet."
+
 msgid "Organization {customer_link} has been updated."
 msgstr "Organisationen {customer_link} er blevet opdateret."
 
 msgid "Organization {customer_name} has been deleted."
 msgstr "Organisationen {customer_name} er blevet slettet."
 
+msgid "Organizations"
+msgstr "Organisationer"
+
+msgid "Organizations ({count})"
+msgstr "Organisationer ({count})"
+
 msgid "Organizations by divisions"
 msgstr "Organisationer efter divisioner"
 
 msgid "Organizations divisions"
 msgstr "Organisationer divisioner"
+
+msgid "Others"
+msgstr "Andre"
+
+msgid "Output"
+msgstr "Udgang"
+
+msgid "Overview"
+msgstr "Oversigt"
 
 msgid "Overview of {organization} organization"
 msgstr "Oversigt over {organization} organisation"
@@ -2594,6 +2969,12 @@ msgstr "Oversigt over {project} projekt"
 msgid "Owned organizations"
 msgstr "Ejede organisationer"
 
+msgid "Owner"
+msgstr "Ejer"
+
+msgid "PDF"
+msgstr "PDF"
+
 msgid "PID"
 msgstr "PID"
 
@@ -2603,14 +2984,26 @@ msgstr "Siden er ikke fundet."
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr "Siden er ikke fundet. Du har enten indtastet ugyldig URL-adresse eller forsøgt at få adgang til deaktiveret funktion."
 
+msgid "Paid"
+msgstr "Betalt"
+
+msgid "Password"
+msgstr "Adgangskode"
+
 msgid "Password has been changed for user {affected_user_link}."
 msgstr "Adgangskoden er blevet ændret for brugeren {affected_user_link}."
 
 msgid "Past time slots are not allowed."
 msgstr "Tidligere tidsintervaller er ikke tilladt."
 
+msgid "Pause"
+msgstr "Pause"
+
 msgid "Pause offering"
 msgstr "Sæt tilbud på pause"
+
+msgid "Paused"
+msgstr "Pauset"
 
 msgid "Pay invoice"
 msgstr "Betal faktura"
@@ -2642,6 +3035,9 @@ msgstr "Betalingen er blevet opdateret."
 msgid "Payment is being processed, please wait."
 msgstr "Betalingen er ved at blive behandlet, vent venligst."
 
+msgid "Payment pending"
+msgstr "Betaling afventer"
+
 msgid "Payment profile"
 msgstr "Betalingsprofil"
 
@@ -2666,11 +3062,17 @@ msgstr "Betalingsprofil er blevet opdateret."
 msgid "Payment profiles"
 msgstr "Betalingsprofiler"
 
+msgid "Payment type {type}"
+msgstr "Betalingstype {type}"
+
 msgid "Payments connected with an active payment profile."
 msgstr "Betalinger, der er forbundet med en aktiv betalingsprofil."
 
 msgid "Payments list"
 msgstr "Liste over betalinger"
+
+msgid "Pending"
+msgstr "Afventer"
 
 msgid "Pending approval for changing of"
 msgstr "Afventer godkendelse for ændring af"
@@ -2681,8 +3083,17 @@ msgstr "Afventer godkendelse til oprettelse af"
 msgid "Pending approval for removal of"
 msgstr "Afventer godkendelse til fjernelse af"
 
+msgid "Per day"
+msgstr "Pr. dag"
+
 msgid "Per half month"
 msgstr "Pr. halv måned"
+
+msgid "Per hour"
+msgstr "Pr. time"
+
+msgid "Per month"
+msgstr "Pr. måned"
 
 msgid "Perform local logout"
 msgstr "Udfør lokal logout"
@@ -2690,8 +3101,14 @@ msgstr "Udfør lokal logout"
 msgid "Perform review"
 msgstr "Udfør gennemgang"
 
+msgid "Performed"
+msgstr "Udført"
+
 msgid "Performed by"
 msgstr "Udført af"
+
+msgid "Period"
+msgstr "Periode"
 
 msgid "Periods"
 msgstr "Perioder"
@@ -2708,6 +3125,21 @@ msgstr "Tilladelseslog"
 msgid "Personal workspace"
 msgstr "Personligt arbejdsområde"
 
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+msgid "Phone numbers"
+msgstr "Telefonnumre"
+
+msgid "Plan"
+msgstr "Plan"
+
+msgid "Plan #{index}"
+msgstr "Plan #{index}"
+
 msgid "Plan capacity"
 msgstr "Planlæg kapacitet"
 
@@ -2722,6 +3154,9 @@ msgstr "Planlæg komponenter"
 
 msgid "Plan description"
 msgstr "Beskrivelse af planen"
+
+msgid "Plan details"
+msgstr "Planoplysninger"
 
 msgid "Plan does not have limit"
 msgstr "Planen har ikke grænse"
@@ -2741,6 +3176,9 @@ msgstr "Planer er ugyldige."
 msgid "Please, create and enable a payment profile to be able to manage payments."
 msgstr "Opret og aktiver en betalingsprofil for at kunne administrere betalinger."
 
+msgid "Please, select a date."
+msgstr "Vælg venligst en dato."
+
 msgid "Please add resource name before editing a schedule."
 msgstr "Tilføj venligst ressource navn, før du redigerer en tidsplan."
 
@@ -2758,6 +3196,9 @@ msgstr "Angiv venligst grunden til, at tilbuddet er blevet sat på pause."
 
 msgid "Please enter username, password and email."
 msgstr "Indtast venligst brugernavn, adgangskode og e-mail."
+
+msgid "Please enter username and password."
+msgstr "Indtast venligst brugernavn og adgangskode."
 
 msgid "Please enter volume size to see price estimate."
 msgstr "Indtast volumenstørrelse for at se et prisoverslag."
@@ -2781,7 +3222,7 @@ msgid "Please open offering {offeringName} ({offeringUuid}) for editing. \nReque
 msgstr "Åbn venligst tilbudet {offeringName} ({offeringUuid}) til redigering. \nRekvirent: {userName} / {userUuid}. \nTjenesteudbyder: {customerName} / {customerUuid}"
 
 msgid "Please provide a reason"
-msgstr "Angiv venligst en begrundelse"
+msgstr "Angiv venligst en grund"
 
 msgid "Please provide registration code of your company."
 msgstr "Angiv venligst registreringskode for din virksomhed."
@@ -2831,17 +3272,44 @@ msgstr "Pluginindstillinger er ugyldige."
 msgid "Pods"
 msgstr "Bælg"
 
+msgid "Port"
+msgstr "Port"
+
 msgid "Port has been created."
 msgstr "Port er blevet oprettet."
 
 msgid "Port range"
 msgstr "Port-rækkevidde"
 
+msgid "Ports"
+msgstr "Porte"
+
+msgid "Positive"
+msgstr "Positiv"
+
 msgid "Postal"
 msgstr "Postnummer"
 
+msgid "Postal code"
+msgstr "Postnummer"
+
+msgid "Powered by"
+msgstr "Drevet af"
+
+msgid "Preferred language"
+msgstr "Foretrukne sprog"
+
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
 msgid "Preview offering"
 msgstr "Forhåndsvisning af tilbud"
+
+msgid "Previous"
+msgstr "Forrige"
+
+msgid "Price"
+msgstr "Pris"
 
 msgid "Price for consumption"
 msgstr "Pris for forbrug"
@@ -2879,11 +3347,23 @@ msgstr "Pris pr. år"
 msgid "Pricing tier"
 msgstr "Prisniveau"
 
+msgid "Print invoice"
+msgstr "Udskriv faktura"
+
 msgid "Print record"
 msgstr "Udskriv post"
 
+msgid "Priority"
+msgstr "Prioritet"
+
+msgid "Privacy policy"
+msgstr "Fortrolighedspolitik"
+
 msgid "Private clouds"
 msgstr "Private skyer"
+
+msgid "Project"
+msgstr "Projekt"
 
 msgid "Project aggregates and isolates teams and resources."
 msgstr "Projekt aggregerer og isolerer teams og ressourcer."
@@ -2918,11 +3398,17 @@ msgstr "Projektet er blevet opdateret."
 msgid "Project is not selected."
 msgstr "Projektet er ikke valgt."
 
+msgid "Project manager"
+msgstr "Projektleder"
+
 msgid "Project manager cannot edit users with same role."
 msgstr "Projektleder kan ikke redigere brugere med samme rolle."
 
 msgid "Project member"
 msgstr "Projektmedlem"
+
+msgid "Project name"
+msgstr "Projektnavn"
 
 msgid "Project removal"
 msgstr "Fjernelse af projekt"
@@ -2942,8 +3428,20 @@ msgstr "Projekttype"
 msgid "Project workspace"
 msgstr "Projektets arbejdsområde"
 
+msgid "Project {project_link} has been created."
+msgstr "Projekt {project_link} er blevet oprettet."
+
+msgid "Project {project_link} has been updated."
+msgstr "Projekt {project_link} er blevet opdateret."
+
 msgid "Project {project_name} has been deleted."
 msgstr "Projekt {project_name} er blevet slettet."
+
+msgid "Projects"
+msgstr "Projekter"
+
+msgid "Projects ({count})"
+msgstr "Projekter ({count})"
 
 msgid "Projects list"
 msgstr "Liste over projekter"
@@ -2953,6 +3451,12 @@ msgstr "Bevis"
 
 msgid "Proof document"
 msgstr "Bevisdokument"
+
+msgid "Provided by {provider}"
+msgstr "Leveret af {provider}"
+
+msgid "Provider"
+msgstr "Udbyder"
 
 msgid "Provider details"
 msgstr "Oplysninger om udbyderen"
@@ -2966,11 +3470,17 @@ msgstr "Udbyderen er blevet opdateret."
 msgid "Provider location"
 msgstr "Placering af udbyder"
 
+msgid "Provider name"
+msgstr "Udbydernavn"
+
 msgid "Provision new resource"
 msgstr "Tilvejebringelse af ny ressource"
 
 msgid "Public SSH keys will be injected into services that allow key-based access."
 msgstr "Offentlige SSH-nøgler vil blive indsprøjtet i tjenester, der tillader nøglebaseret adgang."
+
+msgid "Public key"
+msgstr "Offentlig nøgle"
 
 msgid "Public offerings"
 msgstr "Offentlige tilbud"
@@ -2987,17 +3497,32 @@ msgstr "Offentlige tjenester"
 msgid "Publish as Google Calendar"
 msgstr "Udgiv som Google Kalender"
 
+msgid "Published"
+msgstr "Udgivet"
+
+msgid "Publisher"
+msgstr "Udgiver"
+
 msgid "Pulling"
 msgstr "Trække"
 
 msgid "Pulling quotas"
 msgstr "Trække kvoter"
 
+msgid "Purchase"
+msgstr "Køb"
+
 msgid "Purchase and usage is invoiced."
 msgstr "Køb og brug faktureres."
 
 msgid "Put this into ~/.kube/config:"
 msgstr "Sæt dette i ~/.kube/config:"
+
+msgid "Quantity"
+msgstr "Mængde"
+
+msgid "Question"
+msgstr "Spørgsmål"
 
 msgid "Quota has been reached."
 msgstr "Kvoten er nået."
@@ -3008,11 +3533,17 @@ msgstr "Kvoteforbrug overstiger den tilgængelige grænse."
 msgid "Quotas"
 msgstr "Kvoter"
 
+msgid "RAM"
+msgstr "RAM"
+
 msgid "RAM limit (GB-hours)"
 msgstr "RAM-grænse (GB-timer)"
 
 msgid "RAM limit is exceeded"
 msgstr "RAM-grænsen er overskredet"
+
+msgid "RAM usage"
+msgstr "RAM-brug"
 
 msgid "Rancher access key"
 msgstr "Rancher adgangsnøgle"
@@ -3026,11 +3557,23 @@ msgstr "Rancher hemmelig nøgle"
 msgid "Rancher server URL"
 msgstr "Rancher-serverens URL"
 
+msgid "Rating"
+msgstr "Bedømmelse"
+
+msgid "Reason"
+msgstr "Grund"
+
 msgid "Reason unknown, please contact support."
 msgstr "Årsag ukendt, kontakt venligst support."
 
+msgid "Reboot"
+msgstr "Genstart"
+
 msgid "Recent additions"
 msgstr "Seneste tilføjelser"
+
+msgid "Recipients"
+msgstr "Modtagere"
 
 msgid "Record no."
 msgstr "Optag nr."
@@ -3053,11 +3596,20 @@ msgstr "Antal henvisninger"
 msgid "Referrals for {name}"
 msgstr "Henvisninger til {name}"
 
+msgid "Refresh"
+msgstr "Opdater"
+
 msgid "Regenerate"
 msgstr "Regenerere"
 
+msgid "Region"
+msgstr "Område"
+
 msgid "Region name"
 msgstr "Regionens navn"
+
+msgid "Register"
+msgstr "Registrer"
 
 msgid "Register as a customer of our portal and provider your cloud services through the Marketplace."
 msgstr "Registrer dig som kunde på vores portal, og udbyd dine cloud-tjenester via Marketplace."
@@ -3070,6 +3622,9 @@ msgstr "Registrer organisation som tjenesteudbyder og fjern organisation."
 
 msgid "Register to"
 msgstr "Tilmeld dig"
+
+msgid "Register with {label}"
+msgstr "Registrer med {label}"
 
 msgid "Registered at:"
 msgstr "Registreret på:"
@@ -3089,11 +3644,26 @@ msgstr "Regelmæssigt udtryk til begrænsning af listen over smagsvarianter"
 msgid "Regular user"
 msgstr "Regelmæssig bruger"
 
+msgid "Reject"
+msgstr "Afvis"
+
+msgid "Rejected"
+msgstr "Afvist"
+
 msgid "Release floating IPs"
 msgstr "Frigive flydende IP'er"
 
+msgid "Reload"
+msgstr "Genindlæs"
+
 msgid "Reload issue data"
 msgstr "Genindlæs problemdata"
+
+msgid "Remaining"
+msgstr "Resterende"
+
+msgid "Remaining amount"
+msgstr "Resterende beløb"
 
 msgid "Remote CIDR"
 msgstr "Fjernbetjening CIDR"
@@ -3104,6 +3674,9 @@ msgstr "Fjernadresse til Waldur API"
 msgid "Remote accounts"
 msgstr "Fjernkonti"
 
+msgid "Remote accounts are used for accessing external services you have access to."
+msgstr "Fjernkonti bruges til at få adgang til eksterne tjenester, du har adgang til."
+
 msgid "Remote category"
 msgstr "Fjernkategori"
 
@@ -3113,8 +3686,14 @@ msgstr "Fjerntilbud"
 msgid "Remote security group"
 msgstr "Fjernsikkerhedsgruppe"
 
+msgid "Remove"
+msgstr "Fjern"
+
 msgid "Remove from comparison"
 msgstr "Fjern fra sammenligning"
+
+msgid "Remove logo"
+msgstr "Fjern logo"
 
 msgid "Remove organization"
 msgstr "Fjern organisation"
@@ -3131,8 +3710,14 @@ msgstr "Fjernelse af organisation {organizationName}"
 msgid "Removing the organization will delete all related resources."
 msgstr "Hvis du fjerner organisationen, slettes alle relaterede ressourcer."
 
+msgid "Report"
+msgstr "Rapport"
+
 msgid "Report a security incident"
 msgstr "Rapporter en sikkerhedshændelse"
+
+msgid "Report an issue"
+msgstr "Rapportér et problem"
 
 msgid "Report details"
 msgstr "Rapportoplysninger"
@@ -3146,6 +3731,9 @@ msgstr "Rapportér forkerte data"
 msgid "Report is invalid."
 msgstr "Rapporten er ugyldig."
 
+msgid "Report security incident"
+msgstr "Rapporter sikkerhedshændelse"
+
 msgid "Report usage"
 msgstr "Rapporter brug"
 
@@ -3158,6 +3746,9 @@ msgstr "Den indberettede værdi genbruges hver måned, indtil den ændres."
 msgid "Reporter"
 msgstr "Reporter"
 
+msgid "Reporting"
+msgstr "Rapporterer"
+
 msgid "Request-based item"
 msgstr "Anmodningsbaseret vare"
 
@@ -3167,6 +3758,9 @@ msgstr "Anmodningsbaseret vare (uden Service Desk)"
 msgid "Request account removal for {userName}."
 msgstr "Anmod om fjernelse af konto for {userName}."
 
+msgid "Request an approval"
+msgstr "Anmod om godkendelse"
+
 msgid "Request demo"
 msgstr "Anmod om demo"
 
@@ -3175,6 +3769,9 @@ msgstr "Anmodning om beskrivelse"
 
 msgid "Request detail"
 msgstr "Anmodning om oplysninger"
+
+msgid "Request details"
+msgstr "Anmod om oplysninger"
 
 msgid "Request direct access"
 msgstr "Anmodning om direkte adgang"
@@ -3215,6 +3812,12 @@ msgstr "Anmodning {mode} af {name}"
 msgid "Request {requestId} has been created."
 msgstr "Anmodning {requestId} er blevet oprettet."
 
+msgid "Requested"
+msgstr "Anmodet"
+
+msgid "Requested by"
+msgstr "Anmodet af"
+
 msgid "Requested e-mail"
 msgstr "Anmodet e-mail"
 
@@ -3224,14 +3827,29 @@ msgstr "Anmodet e-mail"
 msgid "Requesting of new resources has been temporarily paused"
 msgstr "Anmodning om nye ressourcer er midlertidigt sat på pause"
 
+msgid "Required"
+msgstr "Påkrævet"
+
+msgid "Resend"
+msgstr "Send igen"
+
 msgid "Reserved slot"
 msgstr "Reserveret slot"
 
 msgid "Reserved slot by {name}"
 msgstr "Reserveret slot af {name}"
 
+msgid "Reset"
+msgstr "Nulstil"
+
 msgid "Resize droplet"
 msgstr "Ændr størrelsen på dråbe"
+
+msgid "Resolution"
+msgstr "Opløsning"
+
+msgid "Resource"
+msgstr "Ressource"
 
 msgid "Resource UUID"
 msgstr "Ressource UUID"
@@ -3266,6 +3884,9 @@ msgstr "Ressourcen har ikke plan."
 msgid "Resource events"
 msgstr "Ressourcebegivenheder"
 
+msgid "Resource group"
+msgstr "Ressourcegruppe"
+
 msgid "Resource is in sync"
 msgstr "Ressourcen er synkroniseret"
 
@@ -3299,6 +3920,9 @@ msgstr "Ressource brug"
 msgid "Resource usage for {resource}"
 msgstr "Ressourceforbrug for {resource}"
 
+msgid "Resources"
+msgstr "Ressourcer"
+
 msgid "Resources import has failed."
 msgstr "Import af ressourcer er mislykkedes."
 
@@ -3307,6 +3931,15 @@ msgstr "Ressourcer repræsenterer de tjenester, du bruger."
 
 msgid "Resources usage"
 msgstr "Ressourceforbrug"
+
+msgid "Restart"
+msgstr "Genstart"
+
+msgid "Restarting"
+msgstr "Genstarter"
+
+msgid "Restore"
+msgstr "Gendan"
 
 msgid "Restore virtual machine from backup {name}"
 msgstr "Gendan virtuel maskine fra sikkerhedskopi {name}"
@@ -3329,14 +3962,32 @@ msgstr "Opbevaringstid"
 msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr "Opbevaringstid i dage, hvis 0 - ressourcen opbevares for evigt"
 
+msgid "Retry"
+msgstr "Prøv igen"
+
+msgid "Retype"
+msgstr "Skriv igen"
+
 msgid "Retype OpenStack Volume"
 msgstr "Skriv OpenStack-volumen igen"
+
+msgid "Review"
+msgstr "Anmeldelse"
 
 msgid "Review has been closed."
 msgstr "Gennemgangen er blevet lukket."
 
 msgid "Review has been performed."
 msgstr "Gennemgangen er blevet udført."
+
+msgid "Reviews"
+msgstr "Anmeldelser"
+
+msgid "Revoke"
+msgstr "Tilbagekald"
+
+msgid "Role"
+msgstr "Rolle"
 
 msgid "Role expires on"
 msgstr "Rollen udløber den"
@@ -3347,17 +3998,26 @@ msgstr "Rolle i projektet"
 msgid "Role management events"
 msgstr "Begivenheder vedrørende rolleforvaltning"
 
+msgid "Roles"
+msgstr "Roller"
+
 msgid "Routers"
 msgstr "Routere"
 
 msgid "Rule count"
 msgstr "Regel tæller"
 
+msgid "Rules"
+msgstr "Regler"
+
 msgid "Running accounting"
 msgstr "Løbende regnskab"
 
 msgid "Runtime state"
 msgstr "Kørselstilstand"
+
+msgid "Russian"
+msgstr "Russisk"
 
 msgid "SAML2 single logout has been started. Please wait until it completes."
 msgstr "SAML2 enkelt logout er blevet startet. Vent venligst, indtil den er afsluttet."
@@ -3395,14 +4055,32 @@ msgstr "SSH-nøgle {ssh_key_name} er blevet oprettet for brugeren {user_link}"
 msgid "SSH key {ssh_key_name} has been deleted for user {user_link}"
 msgstr "SSH-nøgle {ssh_key_name} er blevet slettet for brugeren {user_link}"
 
+msgid "SSH keys"
+msgstr "SSH-nøgler"
+
 msgid "SSH public key"
 msgstr "Offentlig SSH-nøgle"
 
 msgid "Sankey diagram"
 msgstr "Sankey diagram"
 
+msgid "Save"
+msgstr "Gem"
+
+msgid "Scale"
+msgstr "Skala"
+
+msgid "Schedule"
+msgstr "Tidsplan"
+
+msgid "Schedules"
+msgstr "Tidsplaner"
+
 msgid "Schedules are invalid."
 msgstr "Tidsplaner er ugyldige."
+
+msgid "Score"
+msgstr "Score"
 
 msgid "Script for creation of a resource"
 msgstr "Script til oprettelse af en ressource"
@@ -3418,6 +4096,9 @@ msgstr "Script til opdatering af en ressource ved planændring"
 
 msgid "Script language"
 msgstr "Script sprog"
+
+msgid "Search"
+msgstr "Søg"
 
 msgid "Search for offerings..."
 msgstr "Søg efter tilbud ..."
@@ -3443,6 +4124,9 @@ msgstr "Dato for sikkerhedshændelse: {date}"
 msgid "Security incident type: {type}"
 msgstr "Sikkerhedshændelsestype: {type}"
 
+msgid "See all"
+msgstr "Se alle"
+
 msgid "Seems there's nothing here"
 msgstr "Synes der ikke er noget her"
 
@@ -3455,6 +4139,9 @@ msgstr "Ser ud til at du ikke har nogen ressourcer endnu"
 msgid "Segmentation ID"
 msgstr "Segmenterings-ID"
 
+msgid "Select"
+msgstr "Vælg"
+
 msgid "Select accounting period"
 msgstr "Vælg regnskabsperiode"
 
@@ -3463,6 +4150,9 @@ msgstr "Vælg berørt ressource..."
 
 msgid "Select affiliation"
 msgstr "Vælg tilhørsforhold"
+
+msgid "Select an option..."
+msgstr "Vælg en indstilling..."
 
 msgid "Select assignee..."
 msgstr "Vælg modtager..."
@@ -3473,8 +4163,17 @@ msgstr "Vælg tilgængelige hverdage"
 msgid "Select caller..."
 msgstr "Vælg opkalder..."
 
+msgid "Select category..."
+msgstr "Vælg kategori..."
+
 msgid "Select connected subnet"
 msgstr "Vælg tilsluttet undernet"
+
+msgid "Select country..."
+msgstr "Vælg land..."
+
+msgid "Select dates"
+msgstr "Vælg datoer"
 
 msgid "Select division..."
 msgstr "Vælg division..."
@@ -3500,20 +4199,44 @@ msgstr "Vælg tilbud..."
 msgid "Select offerings..."
 msgstr "Vælg tilbud..."
 
+msgid "Select organization..."
+msgstr "Vælg organisation..."
+
 msgid "Select organization roles"
 msgstr "Vælg organisationsroller"
 
 msgid "Select organizations..."
 msgstr "Vælg organisationer..."
 
+msgid "Select period..."
+msgstr "Vælg periode..."
+
+msgid "Select plan"
+msgstr "Vælg plan"
+
+msgid "Select priority..."
+msgstr "Vælg prioritet..."
+
+msgid "Select project"
+msgstr "Vælg projekt"
+
+msgid "Select project..."
+msgstr "Vælg projekt..."
+
 msgid "Select project roles"
 msgstr "Vælg projektroller"
+
+msgid "Select projects..."
+msgstr "Vælg projekter..."
 
 msgid "Select provider..."
 msgstr "Vælg udbyder..."
 
 msgid "Select request type..."
 msgstr "Vælg anmodningstype..."
+
+msgid "Select role"
+msgstr "Vælg rolle"
 
 msgid "Select security groups..."
 msgstr "Vælg sikkerhedsgrupper..."
@@ -3524,8 +4247,17 @@ msgstr "Vælg tjenesteudbyder"
 msgid "Select service provider..."
 msgstr "Vælg tjenesteudbyder..."
 
+msgid "Select size..."
+msgstr "Vælg størrelse..."
+
 msgid "Select some files"
 msgstr "Vælg nogle filer"
+
+msgid "Select state..."
+msgstr "Vælg tilstand..."
+
+msgid "Select status"
+msgstr "Vælg status"
 
 msgid "Select subnet"
 msgstr "Vælg undernet"
@@ -3539,17 +4271,44 @@ msgstr "Vælg lejer..."
 msgid "Select tenants..."
 msgstr "Vælg lejere..."
 
+msgid "Select type..."
+msgstr "Vælg type..."
+
 msgid "Select user..."
 msgstr "Vælg bruger..."
 
 msgid "Select workspace"
 msgstr "Vælg arbejdsområde"
 
+msgid "Selected"
+msgstr "Valgte"
+
+msgid "Selector"
+msgstr "Vælger"
+
+msgid "Send notification"
+msgstr "Send meddelelse"
+
+msgid "Sent"
+msgstr "Sendt"
+
+msgid "Server"
+msgstr "Server"
+
+msgid "Service Provider"
+msgstr "Tjenesteudbyder"
+
 msgid "Service Request"
 msgstr "Serviceanmodning"
 
 msgid "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
 msgstr "Serviceanmodning - kundens anmodning om at modificere, tilføje, ændre eller fjerne en bestemt service helt eller delvist."
+
+msgid "Service provider"
+msgstr "Tjenesteudbyder"
+
+msgid "Service provider:"
+msgstr "Tjenesteudbyder:"
 
 msgid "Service provider API secret code has been generated."
 msgstr "Tjenesteudbyderens API-hemmelige kode er blevet genereret."
@@ -3575,6 +4334,12 @@ msgstr "Serviceindstillingerne er ugyldige."
 msgid "Service settings of this resource are in state erred."
 msgstr "Serviceindstillingerne for denne ressource er i fejltilstand."
 
+msgid "Service type"
+msgstr "Tjenestetype"
+
+msgid "Services"
+msgstr "Tjenester"
+
 msgid "Set MTU"
 msgstr "Indstil MTU"
 
@@ -3583,6 +4348,12 @@ msgstr "Indstil tilladte adressepar"
 
 msgid "Set backend ID"
 msgstr "Indstil backend-ID"
+
+msgid "Set limits"
+msgstr "Sæt grænser"
+
+msgid "Set location"
+msgstr "Indstil placering"
 
 msgid "Set rules"
 msgstr "Indstil regler"
@@ -3599,6 +4370,9 @@ msgstr "Indstil til udkast"
 msgid "Set to true to activate privilege escalation"
 msgstr "Indstil til sand for at aktivere eskalering af privilegier"
 
+msgid "Shared"
+msgstr "Delt"
+
 msgid "Shared providers"
 msgstr "Delte udbydere"
 
@@ -3611,6 +4385,12 @@ msgstr "Indkøbskurv varen er blevet opdateret."
 msgid "Shopping cart item update"
 msgstr "Opdatering af varer i indkøbskurven"
 
+msgid "Show"
+msgstr "Vis"
+
+msgid "Show all"
+msgstr "Vis alle"
+
 msgid "Show chart"
 msgstr "Vis diagram"
 
@@ -3620,14 +4400,26 @@ msgstr "Vis valg"
 msgid "Show console log"
 msgstr "Vis konsollog"
 
+msgid "Show controls"
+msgstr "Vis kontrolelementer"
+
+msgid "Show details"
+msgstr "Vis oplysninger"
+
 msgid "Show diff"
 msgstr "Vis diff"
 
 msgid "Show events"
 msgstr "Vis begivenheder"
 
+msgid "Show password"
+msgstr "Vis adgangskode"
+
 msgid "Show private"
 msgstr "Vis privat"
+
+msgid "Show report"
+msgstr "Vis rapport"
 
 msgid "Show request"
 msgstr "Vis anmodning"
@@ -3646,6 +4438,18 @@ msgstr "Vis med løbende regnskab"
 
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr "Viser {sliceStart} til {sliceEnd} af {resultCount} poster."
+
+msgid "Shutdown"
+msgstr "Lukke ned"
+
+msgid "Sign in"
+msgstr "Log ind"
+
+msgid "Sign in with {label}"
+msgstr "Log ind med {label}"
+
+msgid "Size"
+msgstr "Størrelse"
 
 msgid "Size name"
 msgstr "Størrelse navn"
@@ -3677,14 +4481,32 @@ msgstr "Snapshots tæller"
 msgid "Sponsor number"
 msgstr "Sponsor nummer"
 
+msgid "Staff"
+msgstr "Personale"
+
 msgid "Staff and Support user"
-msgstr "Personale og Støttebruger"
+msgstr "Personale og Supportbruger"
+
+msgid "Start"
+msgstr "Start"
 
 msgid "Start day of accounting"
 msgstr "Start dag for regnskab"
 
+msgid "Start time"
+msgstr "Starttidspunkt"
+
+msgid "Starting"
+msgstr "Starter"
+
+msgid "State"
+msgstr "Tilstand"
+
 msgid "Static routes update was scheduled."
 msgstr "Opdatering af statiske ruter var planlagt."
+
+msgid "Status"
+msgstr "Status"
 
 msgid "Step 1. Select offering"
 msgstr "Trin 1. Vælg tilbud"
@@ -3692,11 +4514,35 @@ msgstr "Trin 1. Vælg tilbud"
 msgid "Step 2. Select resources"
 msgstr "Trin 2. Vælg ressourcer"
 
+msgid "Stop"
+msgstr "Stop"
+
+msgid "Stopping"
+msgstr "Stopper"
+
+msgid "Storage"
+msgstr "Opbevaring"
+
+msgid "Storage mode"
+msgstr "Opbevaringstilstand"
+
 msgid "Storage size"
 msgstr "Opbevaringsstørrelse"
 
 msgid "Storage size in GiB"
 msgstr "Opbevaringsstørrelse i GiB"
+
+msgid "Storage type"
+msgstr "Opbevaringstype"
+
+msgid "Subject"
+msgstr "Emne"
+
+msgid "Submit"
+msgstr "Indsend"
+
+msgid "Submit report"
+msgstr "Indsend rapport"
 
 msgid "Submit usage report"
 msgstr "Indsend brugsrapport"
@@ -3722,11 +4568,29 @@ msgstr "Undernet"
 msgid "Subnets from where connection to self-service is allowed."
 msgstr "Undernet, hvorfra forbindelse til selvbetjening er tilladt."
 
+msgid "Subscription ID"
+msgstr "Abonnements-ID"
+
+msgid "Subtotal"
+msgstr "Subtotal"
+
+msgid "Sum"
+msgstr "Sum"
+
+msgid "Summary"
+msgstr "Oversigt"
+
+msgid "Support"
+msgstr "Support"
+
 msgid "Support dashboard"
 msgstr "Support instrumentbræt"
 
 msgid "Support request events"
 msgstr "Support anmodning begivenheder"
+
+msgid "Support requests"
+msgstr "Support anmodninger"
 
 msgid "Support user"
 msgstr "Supportbruger"
@@ -3737,6 +4601,9 @@ msgstr "Support arbejdsområde"
 msgid "Sure? Form data would be lost"
 msgstr "Er du sikker? Formularoplysninger ville gå tabt"
 
+msgid "Suspend"
+msgstr "Suspendere"
+
 msgid "Sync profile"
 msgstr "Synkroniser profil"
 
@@ -3745,6 +4612,9 @@ msgstr "Synkroniser med Google Kalender"
 
 msgid "Synchronisation has been scheduled."
 msgstr "Synkroniseringen er blevet planlagt."
+
+msgid "Synchronise"
+msgstr "Synkroniser"
 
 msgid "System administrator"
 msgstr "Systemadministrator"
@@ -3758,17 +4628,38 @@ msgstr "Systemvolumenstørrelse"
 msgid "System volume type"
 msgstr "Typen af systemvolumen"
 
+msgid "TAX"
+msgstr "SKAT"
+
 msgid "TLD \"{tld}\" must not be all numeric"
 msgstr "TLD \"{tld}\" må ikke være helt numerisk"
 
+msgid "TOTAL"
+msgstr "I ALT"
+
 msgid "Taking a snapshot"
 msgstr "Tage et snapshot"
+
+msgid "Target"
+msgstr "Mål"
+
+msgid "Target type"
+msgstr "Måltype"
+
+msgid "Targets"
+msgstr "Mål"
+
+msgid "Tax"
+msgstr "Skat"
 
 msgid "Tax number"
 msgstr "Skat nummer"
 
 msgid "Tax percent"
 msgstr "Skat procent"
+
+msgid "Team"
+msgstr "Team"
 
 msgid "Team member has been removed."
 msgstr "Teammedlem er blevet fjernet."
@@ -3781,6 +4672,12 @@ msgstr "Teknisk kode brugt af regnskabssoftware."
 
 msgid "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
 msgstr "Teknisk navn beregnet til integration og automatiseret rapportering. Brug venligst kun latinske bogstaver uden mellemrum."
+
+msgid "Template"
+msgstr "Skabelon"
+
+msgid "Template details"
+msgstr "Skabelon oplysninger"
 
 msgid "Template files"
 msgstr "Skabelonfiler"
@@ -3803,6 +4700,9 @@ msgstr "Lejerbrugeradgangskode"
 msgid "Tenant user username"
 msgstr "Brugernavn for lejerbruger"
 
+msgid "Terminate"
+msgstr "Afslut"
+
 msgid "Terminate an existing resource"
 msgstr "Afslut en eksisterende ressource"
 
@@ -3814,6 +4714,9 @@ msgstr "Afsluttet"
 
 msgid "Terminating"
 msgstr "Afslutning"
+
+msgid "Terms of Service"
+msgstr "Servicevilkår"
 
 msgid "Text has been copied"
 msgstr "Teksten er blevet kopieret"
@@ -3920,6 +4823,9 @@ msgstr "Der er ingen projekter, der matcher filteret."
 msgid "There are no projects yet for this organization."
 msgstr "Der er endnu ingen projekter for denne organisation."
 
+msgid "There are no remote accounts yet."
+msgstr "Der er ingen fjernkonti endnu."
+
 msgid "There are no requests yet."
 msgstr "Der er ingen anmodninger endnu."
 
@@ -3944,6 +4850,9 @@ msgstr "Der er ikke navneområder i dette projekt endnu."
 msgid "There is no activity yet."
 msgstr "Der er ingen aktivitet endnu."
 
+msgid "This field is required."
+msgstr "Dette felt er påkrævet."
+
 msgid "This name will be visible in accounting data."
 msgstr "Dette navn vil være synligt i regnskabsdata."
 
@@ -3952,6 +4861,9 @@ msgstr "Denne værdi er ugyldig JSON."
 
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr "Denne hjemmeside bruger cookies for at sikre, at du får den bedste oplevelse på vores hjemmeside."
+
+msgid "Thumbnail"
+msgstr "Miniature"
 
 msgid "Time in progress"
 msgstr "Tid i gang"
@@ -3964,6 +4876,18 @@ msgstr "Tidsinterval er blevet tilføjet."
 
 msgid "Time slots"
 msgstr "Tidsintervaller"
+
+msgid "Time zone"
+msgstr "Tidszone"
+
+msgid "Timestamp"
+msgstr "Tidsstempel"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "To"
+msgstr "Til"
 
 msgid "To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!"
 msgstr "For at rette oplysninger om din organisation bedes du sende en e-mail til {supportEMail}, der fremhæver fejlene i de aktuelle detaljer. Tak!"
@@ -3989,6 +4913,15 @@ msgstr "Hvis du vil rapportere en sikkerhedshændelse, skal du sende en e-mail t
 msgid "To report an issue, please send an email to {supportEmail}."
 msgstr "Hvis du vil rapportere et problem, skal du sende en e-mail til {supportEmail}."
 
+msgid "Today"
+msgstr "I dag"
+
+msgid "Total"
+msgstr "I alt"
+
+msgid "Total: {total}"
+msgstr "I alt: {total}"
+
 msgid "Total CPU"
 msgstr "Samlet CPU"
 
@@ -4001,8 +4934,23 @@ msgstr "Samlet forbrug af GPU-timer i denne måned"
 msgid "Total RAM GB-hours consumed this month"
 msgstr "Samlet RAM GB-timer forbrugt i denne måned"
 
+msgid "Total cost:"
+msgstr "Samlede omkostninger:"
+
+msgid "Total memory"
+msgstr "Samlet hukommelse"
+
 msgid "Total number of nodes"
 msgstr "Samlet antal noder"
+
+msgid "Total paid"
+msgstr "I alt betalt"
+
+msgid "Total price"
+msgstr "Samlet pris"
+
+msgid "Total storage"
+msgstr "Samlet opbevaring"
 
 msgid "Total storage limit is exceeded"
 msgstr "Den samlede lagergrænse er overskredet"
@@ -4010,11 +4958,20 @@ msgstr "Den samlede lagergrænse er overskredet"
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr "Spores ved hjælp af UTC-tidszone, vises med din browsers tidszone."
 
+msgid "Try again"
+msgstr "Prøv igen"
+
+msgid "Type"
+msgstr "Type"
+
 msgid "Type is invalid."
 msgstr "Type er ugyldig."
 
 msgid "Type of incident"
 msgstr "Type hændelse"
+
+msgid "URL"
+msgstr "URL"
 
 msgid "UUID"
 msgstr "UUID"
@@ -4157,6 +5114,9 @@ msgstr "Kan ikke slette vedhæftet fil."
 msgid "Unable to delete catalog."
 msgstr "Kan ikke slette kataloget."
 
+msgid "Unable to delete comment."
+msgstr "Kan ikke slette kommentaren."
+
 msgid "Unable to delete instance."
 msgstr "Kan ikke slette en instans."
 
@@ -4168,6 +5128,9 @@ msgstr "Kan ikke slette ressourcen."
 
 msgid "Unable to delete team member."
 msgstr "Kan ikke slette teammedlem."
+
+msgid "Unable to delete {resourceType}."
+msgstr "Kan ikke slette {resourceType}."
 
 msgid "Unable to destroy instance."
 msgstr "Kan ikke ødelægge instans."
@@ -4201,6 +5164,9 @@ msgstr "Kan ikke hente den aktuelle bruger."
 
 msgid "Unable to fetch data."
 msgstr "Kunne ikke hente data."
+
+msgid "Unable to find:"
+msgstr "Kan ikke finde:"
 
 msgid "Unable to generate service provider API secret code."
 msgstr "Kan ikke generere tjenesteudbyderens API-hemmelig kode."
@@ -4244,6 +5210,12 @@ msgstr "Kan ikke indlæse reserverede varer."
 msgid "Unable to load booking offerings."
 msgstr "Kan ikke indlæse bookingtilbud."
 
+msgid "Unable to load categories"
+msgstr "Kan ikke indlæse kategorier"
+
+msgid "Unable to load categories."
+msgstr "Kan ikke indlæse kategorier."
+
 msgid "Unable to load category sections."
 msgstr "Kan ikke indlæse kategorisektioner."
 
@@ -4253,6 +5225,9 @@ msgstr "Kan ikke indlæse diagrammer."
 msgid "Unable to load checklists."
 msgstr "Kan ikke indlæse tjeklister."
 
+msgid "Unable to load comments."
+msgstr "Kan ikke indlæse kommentarer."
+
 msgid "Unable to load compliance overview."
 msgstr "Kan ikke indlæse oversigt over overholdelse."
 
@@ -4261,6 +5236,12 @@ msgstr "Kan ikke indlæse kunde."
 
 msgid "Unable to load customer support satisfaction overall rating."
 msgstr "Kan ikke indlæse den samlede vurdering af kundesupporttilfredshed."
+
+msgid "Unable to load data"
+msgstr "Kan ikke indlæse data"
+
+msgid "Unable to load data."
+msgstr "Kan ikke indlæse data."
 
 msgid "Unable to load detail."
 msgstr "Kan ikke indlæse detaljer."
@@ -4321,6 +5302,9 @@ msgstr "Kan ikke indlæse organisationsressourcer."
 
 msgid "Unable to load organizations"
 msgstr "Kan ikke indlæse organisationer"
+
+msgid "Unable to load page"
+msgstr "Kan ikke indlæse siden"
 
 msgid "Unable to load pending orders."
 msgstr "Kan ikke indlæse afventende ordrer."
@@ -4529,6 +5513,9 @@ msgstr "Kan ikke opdatere meddelelsen."
 msgid "Unable to update offering"
 msgstr "Kan ikke opdatere tilbuddet"
 
+msgid "Unable to update offering."
+msgstr "Kan ikke opdatere tilbuddet."
+
 msgid "Unable to update offering state."
 msgstr "Kan ikke opdatere tilbudsstatus."
 
@@ -4559,6 +5546,9 @@ msgstr "Kan ikke opdatere statiske ruter."
 msgid "Unable to update user."
 msgstr "Kan ikke opdatere bruger."
 
+msgid "Unable to update {verboseName}."
+msgstr "Kan ikke opdatere {verboseName}."
+
 msgid "Unable to upload attachment."
 msgstr "Kan ikke uploade vedhæftet fil."
 
@@ -4567,6 +5557,9 @@ msgstr "Kan ikke uploade logo."
 
 msgid "Unable to validate invitation token."
 msgstr "Kan ikke validere invitationstoken."
+
+msgid "Unconfirmed"
+msgstr "Ubekræftet"
 
 msgid "Unexpected exception happened during login process."
 msgstr "Uventet undtagelse skete under login-processen."
@@ -4583,17 +5576,35 @@ msgstr "Unikt id for en ressource i et backend-system"
 msgid "Unique ID of a resource within management plugin"
 msgstr "Unikt id for en ressource i administrationsplugin"
 
+msgid "Unit"
+msgstr "Enhed"
+
+msgid "Unit price"
+msgstr "Enhedspris"
+
+msgid "Units"
+msgstr "Enheder"
+
+msgid "Unknown"
+msgstr "Ukendt"
+
 msgid "Unlink instance"
 msgstr "Fjern tilknytning til instansen"
 
 msgid "Unlink invoice"
 msgstr "Fjern tilknytning af faktura"
 
+msgid "Unpaid"
+msgstr "Ubetalt"
+
 msgid "Unpause"
 msgstr "Afbryd pause"
 
 msgid "Unpublish as Google Calendar"
 msgstr "Afpublicere som Google Kalender"
+
+msgid "Update"
+msgstr "Opdater"
 
 msgid "Update floating IPs"
 msgstr "Opdater flydende IP'er"
@@ -4610,6 +5621,12 @@ msgstr "Opdater interne IP'er for OpenStack-instans {name}"
 msgid "Update limits for an existing resource"
 msgstr "Opdater grænser for en eksisterende ressource"
 
+msgid "Update location"
+msgstr "Opdater placering"
+
+msgid "Update notification"
+msgstr "Opdater meddelelse"
+
 msgid "Update of OpenStack instance internal IPs has been scheduled."
 msgstr "Opdatering af interne IP'er for OpenStack-instans er blevet planlagt."
 
@@ -4624,6 +5641,9 @@ msgstr "Opdater betalingsprofil"
 
 msgid "Update plan for an existing resource"
 msgstr "Opdater plan for en eksisterende ressource"
+
+msgid "Update profile"
+msgstr "Opdater profil"
 
 msgid "Update project details"
 msgstr "Opdater projektoplysninger"
@@ -4642,6 +5662,15 @@ msgstr "Opdater statiske ruter"
 
 msgid "Update your organization name, logo, accounting and contact details."
 msgstr "Opdater dit organisations navn, logo, regnskab og kontaktoplysninger."
+
+msgid "Update {resourceType} {resourceName}"
+msgstr "Opdater {resourceType} {resourceName}"
+
+msgid "Updated"
+msgstr "Opdateret"
+
+msgid "Updating"
+msgstr "Opdaterer"
 
 msgid "Updating floating IPs"
 msgstr "Opdatering af flydende IP'er"
@@ -4663,6 +5692,12 @@ msgstr "Opdatering af sikkerhedsgrupper"
 
 msgid "Upload new"
 msgstr "Upload nyt"
+
+msgid "Uptime"
+msgstr "Oppetid"
+
+msgid "Usage"
+msgstr "Forbrug"
 
 msgid "Usage-based"
 msgstr "Brugsbaseret"
@@ -4691,11 +5726,17 @@ msgstr "Brug sudo"
 msgid "Used in the period {period} by:"
 msgstr "Brugt i perioden {period} af:"
 
+msgid "User"
+msgstr "Bruger"
+
 msgid "User could not been updated"
 msgstr "Brugeren kunne ikke blive opdateret"
 
 msgid "User dashboard"
 msgstr "Brugerens instrumentbræt"
+
+msgid "User data"
+msgstr "Brugerdata"
 
 msgid "User details"
 msgstr "Brugeroplysninger"
@@ -4724,11 +5765,23 @@ msgstr "Bruger indtastningsfelt #{index}"
 msgid "User management events"
 msgstr "Brugerstyring begivenheder"
 
+msgid "User profile"
+msgstr "Brugerprofil"
+
 msgid "User status"
 msgstr "Brugerstatus"
 
+msgid "User {affected_user_link} has been activated."
+msgstr "Bruger {affected_user_link} er blevet aktiveret."
+
 msgid "User {affected_user_link} has been created."
 msgstr "Bruger {affected_user_link} er blevet oprettet."
+
+msgid "User {affected_user_link} has been deactivated."
+msgstr "Bruger {affected_user_link} er blevet deaktiveret."
+
+msgid "User {affected_user_link} has been updated."
+msgstr "Bruger {affected_user_link} er blevet opdateret."
 
 msgid "User {affected_user_name} has been deleted."
 msgstr "Bruger {affected_user_name} er blevet slettet."
@@ -4778,17 +5831,38 @@ msgstr "Bruger {user_link} har tilbagekaldt {affected_user_link}."
 msgid "User {user_link} logged out successfully with SAML2."
 msgstr "Bruger {user_link} loggede ud med SAML2."
 
+msgid "Username"
+msgstr "Brugernavn"
+
+msgid "Username is required."
+msgstr "Brugernavn er påkrævet."
+
 msgid "Username prefix"
 msgstr "Brugernavn præfiks"
 
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr "Brugernavne kan indeholde bogstaver (az), tal (0-9), bindestreger (-), understregninger (_) og punktum (.)."
 
+msgid "Users"
+msgstr "Brugere"
+
+msgid "VAT"
+msgstr "MOMS"
+
 msgid "VAT code"
 msgstr "Moms kode"
 
 msgid "VAT is included"
 msgstr "Moms er inkluderet"
+
+msgid "VAT is not included"
+msgstr "Moms er ikke inkluderet"
+
+msgid "VAT is not included."
+msgstr "Moms er ikke inkluderet."
+
+msgid "VAT rate"
+msgstr "Momssats"
 
 msgid "VM name"
 msgstr "VM-navn"
@@ -4847,6 +5921,9 @@ msgstr "Gyldige kørselstilstande for drift: {validStates}."
 msgid "Valid states for operation: {validStates}."
 msgstr "Gyldige tilstande for drift: {validStates}."
 
+msgid "Value"
+msgstr "Værdi"
+
 msgid "Value should be positive integer"
 msgstr "Værdien skal være positivt heltal"
 
@@ -4859,8 +5936,17 @@ msgstr "Værdien bør ikke være mindre end {limit}."
 msgid "Value should not be negative."
 msgstr "Værdien bør ikke være negativ."
 
+msgid "Variable #{index}"
+msgstr "Variabel #{index}"
+
+msgid "Verify e-mail"
+msgstr "Bekræft e-mail"
+
 msgid "Verifying email change"
 msgstr "Bekræftelse af ændring af e-mail"
+
+msgid "Version"
+msgstr "Version"
 
 msgid "Very negative"
 msgstr "Meget negativ"
@@ -4879,6 +5965,9 @@ msgstr "Virtuelle maskiner"
 
 msgid "Virtual machines count"
 msgstr "Antal virtuelle maskiner"
+
+msgid "Volume"
+msgstr "Volumen"
 
 msgid "Volume has been attached to instance."
 msgstr "Volumen er blevet vedhæftet til instans."
@@ -4913,6 +6002,9 @@ msgstr "Volumentype"
 msgid "Volume type storage limit is exceeded"
 msgstr "Grænsen for lagring af volumetype er overskredet"
 
+msgid "Volumes"
+msgstr "Volumener"
+
 msgid "Volumes count"
 msgstr "Antal volumener"
 
@@ -4921,6 +6013,15 @@ msgstr "Webhook"
 
 msgid "Website URL"
 msgstr "Hjemmeside URL"
+
+msgid "Week"
+msgstr "Uge"
+
+msgid "Welcome, {user}!"
+msgstr "Velkommen, {user}!"
+
+msgid "Welcome to {pageTitle}!"
+msgstr "Velkommen til {pageTitle}!"
 
 msgid "Why do you need to remove organization with existing projects?"
 msgstr "Hvorfor skal du fjerne organisationen med eksisterende projekter?"
@@ -4940,11 +6041,17 @@ msgstr "Arbejdsbyrder"
 msgid "Would you like to update your current email with the one from the invitation?"
 msgstr "Vil du opdatere din nuværende e-mail med den fra invitationen?"
 
+msgid "Write review"
+msgstr "Skriv en anmeldelse"
+
 msgid "YAML has been imported."
 msgstr "YAML er blevet importeret."
 
 msgid "YAML has been updated."
 msgstr "YAML er blevet opdateret."
+
+msgid "Yes"
+msgstr "Ja"
 
 msgid "Yes, use invitation email"
 msgstr "Ja, brug invitationsmail"
@@ -4997,6 +6104,9 @@ msgstr "Du har indtastet data i formularen. Når dialogboksen lukkes, går formu
 msgid "You have exceeded maximum number of quotas."
 msgstr "Du har overskredet det maksimale antal kvoter."
 
+msgid "You have no notifications yet."
+msgstr "Du har ingen meddelelser endnu."
+
 msgid "You have no quotas yet."
 msgstr "Du har ingen kvoter endnu."
 
@@ -5039,6 +6149,9 @@ msgstr "Din FreeIPA-profil er blevet aktiveret."
 msgid "Your account is not authorized to use this allocation"
 msgstr "Din konto er ikke autoriseret til at bruge denne tildeling"
 
+msgid "Your current email is:"
+msgstr "Din nuværende e-mail er:"
+
 msgid "Your invitation is being processed."
 msgstr "Din invitation bliver behandlet."
 
@@ -5060,14 +6173,68 @@ msgstr "(Moms er ikke inkluderet)"
 msgid "allocation users"
 msgstr "tildelingsbrugere"
 
+msgid "application"
+msgstr "ansøgning"
+
+msgid "application templates"
+msgstr "Skabeloner til ansøgninger"
+
+msgid "applications"
+msgstr "ansøgninger"
+
+msgid "at"
+msgstr "på"
+
+msgid "bootable"
+msgstr "bootbar"
+
+msgid "browse"
+msgstr "gennemse"
+
+msgid "catalogues"
+msgstr "kataloger"
+
+msgid "control plane"
+msgstr "kontrolplan"
+
 msgid "current state on backend: {resourceState}."
 msgstr "nuværende tilstand på backend: {resourceState}."
+
+msgid "databases"
+msgstr "databaser"
+
+msgid "day"
+msgstr "dag"
+
+msgid "disks"
+msgstr "disker"
 
 msgid "e.g. MyApp"
 msgstr "f.eks. MyApp"
 
+msgid "entries"
+msgstr "indgange"
+
+msgid "error message: {errorMessage}"
+msgstr "fejlmeddelelse: {errorMessage}"
+
+msgid "estimated"
+msgstr "anslået"
+
 msgid "etcd"
 msgstr "osv"
+
+msgid "events"
+msgstr "begivenheder"
+
+msgid "failed"
+msgstr "mislykkedes"
+
+msgid "fetching"
+msgstr "henter"
+
+msgid "floating IPs"
+msgstr "flydende IP'er"
 
 msgid "generate automatically"
 msgstr "generere automatisk"
@@ -5078,11 +6245,50 @@ msgstr "vandret pod autoscaler"
 msgid "horizontal pod autoscalers"
 msgstr "vandrette pod autoskalere"
 
+msgid "hour"
+msgstr "time"
+
+msgid "hours"
+msgstr "timer"
+
 msgid "ingresses"
 msgstr "indtrænger"
 
+msgid "internal IPs"
+msgstr "interne IP'er"
+
+msgid "invoices"
+msgstr "fakturaer"
+
+msgid "items"
+msgstr "varer"
+
 msgid "milli CPUs"
 msgstr "milli CPU'er"
+
+msgid "minute"
+msgstr "minut"
+
+msgid "month"
+msgstr "måned"
+
+msgid "network"
+msgstr "netværk"
+
+msgid "networks"
+msgstr "netværk"
+
+msgid "notifications"
+msgstr "meddelelser"
+
+msgid "of"
+msgstr "af"
+
+msgid "offering"
+msgstr "tilbud"
+
+msgid "offering permissions"
+msgstr "tilbyder tilladelser"
 
 msgid "offering resources"
 msgstr "tilbyde ressourcer"
@@ -5090,32 +6296,122 @@ msgstr "tilbyde ressourcer"
 msgid "offering users"
 msgstr "tilbyder brugere"
 
+msgid "offerings"
+msgstr "tilbud"
+
+msgid "on"
+msgstr "på"
+
 msgid "on the"
 msgstr "på den"
+
+msgid "order items"
+msgstr "bestil varer"
+
+msgid "organization"
+msgstr "organisation"
+
+msgid "organizations"
+msgstr "organisationer"
+
+msgid "owner"
+msgstr "ejer"
+
+msgid "past the hour"
+msgstr "forbi timen"
+
+msgid "payment profiles"
+msgstr "betalingsprofiler"
+
+msgid "payments"
+msgstr "betalinger"
 
 msgid "permission reviews"
 msgstr "tilladelse anmeldelser"
 
+msgid "plans"
+msgstr "planer"
+
+msgid "ports"
+msgstr "porte"
+
+msgid "project"
+msgstr "projekt"
+
+msgid "projects"
+msgstr "projekter"
+
+msgid "records"
+msgstr "optegnelser"
+
+msgid "referrals"
+msgstr "henvisninger"
+
 msgid "remote accounts"
 msgstr "Fjernkonti"
+
+msgid "resource"
+msgstr "ressource"
+
+msgid "resources"
+msgstr "ressourcer"
+
+msgid "restored volumes"
+msgstr "gendannede volumener"
+
+msgid "reviews"
+msgstr "anmeldelser"
+
+msgid "routers"
+msgstr "routere"
 
 msgid "security group"
 msgstr "sikkerhedsgruppe"
 
+msgid "security groups"
+msgstr "sikkerhedsgrupper"
+
+msgid "services"
+msgstr "tjenester"
+
+msgid "snapshot schedules"
+msgstr "snapshot-planer"
+
 msgid "snapshots"
 msgstr "snapshots"
+
+msgid "storage"
+msgstr "opbevaring"
+
+msgid "subnets"
+msgstr "undernet"
+
+msgid "support"
+msgstr "support"
 
 msgid "support feedback"
 msgstr "support feedback"
 
+msgid "support requests"
+msgstr "support anmodninger"
+
 msgid "team invitations"
 msgstr "teaminvitationer"
+
+msgid "team members"
+msgstr "teammedlemmer"
 
 msgid "till"
 msgstr "til"
 
+msgid "today"
+msgstr "i dag"
+
 msgid "token will not timeout"
 msgstr "token vil ikke timeout"
+
+msgid "users"
+msgstr "brugere"
 
 msgid "vCPU"
 msgstr "vCPU"
@@ -5141,11 +6437,50 @@ msgstr "volumen snapshot"
 msgid "volume snapshot schedule"
 msgstr "volumen snapshotplan"
 
+msgid "volume snapshots"
+msgstr "volumen snapshots"
+
+msgid "volumes"
+msgstr "volumener"
+
+msgid "week"
+msgstr "uge"
+
+msgid "worker"
+msgstr "arbejdstager"
+
+msgid "workloads"
+msgstr "arbejdsbyrder"
+
+msgid "year"
+msgstr "år"
+
+msgid "{category} resources"
+msgstr "{category} ressourcer"
+
 msgid "{count} user events in {date}"
 msgstr "{count} brugerbegivenheder i {date}"
 
+msgid "{label} in:"
+msgstr "{label} i:"
+
+msgid "{name} ({questions_count} questions)"
+msgstr "{name} ({questions_count} spørgsmål)"
+
 msgid "{name} ({size})"
 msgstr "{name} ({size})"
+
+msgid "{number} days"
+msgstr "{number} dage"
+
+msgid "{relative} ago"
+msgstr "{relative} siden"
+
+msgid "{relative} ago, {date}"
+msgstr "{relative} siden, {date}"
+
+msgid "{resourceType} has been deleted."
+msgstr "{resourceType} er blevet slettet."
 
 msgid "{resourceType} has state {resourceState}"
 msgstr "{resourceType} har status {resourceState}"
@@ -5198,8 +6533,26 @@ msgstr "{resource_link} start mislykkedes."
 msgid "{resource_link} stop has failed."
 msgstr "{resource_link} stop mislykkedes."
 
+msgid "{resource_name} has been deleted."
+msgstr "{resource_name} er blevet slettet."
+
+msgid "{role} in {project}"
+msgstr "{role} i {project}"
+
 msgid "{sender} has invited you to join {name} {type} in {role} role."
 msgstr "{sender} har inviteret dig til at deltage i {name} {type} i {role} rolle."
+
+msgid "{usage} of {limit}"
+msgstr "{usage} af {limit}"
+
+msgid "{usage} of {limit} used"
+msgstr "{usage} af {limit} brugt"
+
+msgid "{user} commented:"
+msgstr "{user} kommenterede:"
+
+msgid "{user} commented on {issue}"
+msgstr "{user} kommenterede {issue}"
 
 msgid "{user} has approved it on {date} at {time}."
 msgstr "{user} har godkendt det den {date} kl. {time}."
@@ -5215,6 +6568,9 @@ msgstr "{user} har anmodet om tilrådighedsstillelse af \"{resource_name}\" med 
 
 msgid "{user} has requested termination of {resource_name} with active plan \"{plan_name}\"."
 msgstr "{user} har anmodet om opsigelse af {resource_name} med aktiv plan \"{plan_name}\"."
+
+msgid "{value} at {date}"
+msgstr "{value} kl. {date}"
 
 msgid "{value} at {date}, estimated"
 msgstr "{value} kl. {date}, anslået"

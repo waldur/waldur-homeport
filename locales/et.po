@@ -302,6 +302,9 @@ msgstr "Vastus"
 msgid "Answers"
 msgstr "Vastused"
 
+msgid "Answers have been submitted"
+msgstr "Vastused on esitatud"
+
 msgid "Any"
 msgstr "Iga"
 
