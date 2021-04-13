@@ -39,7 +39,7 @@ msgid "Accept"
 msgstr "Sutikti"
 
 msgid "Accept booking"
-msgstr "Priimkite užsakymą"
+msgstr "Priimti užsakymą"
 
 msgid "Accept invitation"
 msgstr "Priimti pakvietimą"
@@ -3071,9 +3071,6 @@ msgstr "Mokėjimai, susieti su aktyviu mokėjimo profiliu."
 msgid "Payments list"
 msgstr "Mokėjimų sąrašas"
 
-msgid "Pemission has been revoked."
-msgstr "Leidimas buvo atšauktas."
-
 msgid "Pending"
 msgstr "Laukiama"
 
@@ -3118,6 +3115,9 @@ msgstr "Laikotarpiai"
 
 msgid "Permanent"
 msgstr "Nuolatinis"
+
+msgid "Permission has been revoked."
+msgstr "Leidimas buvo atšauktas."
 
 msgid "Permissions log"
 msgstr "Leidimų žurnalas"
@@ -5417,8 +5417,8 @@ msgstr "Neįmanoma atkurti tomo momentinės nuotraukos."
 msgid "Unable to retype volume."
 msgstr "Neįmanoma iš naujo įvesti tomo."
 
-msgid "Unable to revoke pemission."
-msgstr "Neįmanoma atšaukti pemisijos."
+msgid "Unable to revoke permission."
+msgstr "Nepavyko anuliuoti leidimo."
 
 msgid "Unable to save location."
 msgstr "Neįmanoma išsaugoti vietos."
