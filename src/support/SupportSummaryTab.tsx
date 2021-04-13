@@ -23,7 +23,7 @@ export const SupportSummaryTab = withTranslation(
           <Panel.Title>{props.translate('Description')}</Panel.Title>
         </Panel.Heading>
         <Panel.Body>
-          <FormattedJira text={props?.issue?.description} />
+          <FormattedJira text={props.issue?.description} />
         </Panel.Body>
       </Panel>
     </>

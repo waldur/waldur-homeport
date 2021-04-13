@@ -89,7 +89,7 @@ const getColumnLetter = (col) => {
 
 function addToZip(zip, path, content) {
   const parts = path.split('/');
-  const file = parts.pop('/');
+  const file = parts.pop();
   const folder = parts.reduce((dest, part) => dest.folder(part), zip);
   folder.file(file, content);
 }
