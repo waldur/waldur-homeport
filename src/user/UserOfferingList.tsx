@@ -8,6 +8,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
+import { UserOfferingListPlaceholder } from '@waldur/user/UserOfferingListPlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
@@ -32,6 +33,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       {...props}
       columns={columns}
       verboseName={translate('remote accounts')}
+      placeholderComponent={<UserOfferingListPlaceholder />}
       showPageSizeSelector={true}
     />
   );

@@ -5927,6 +5927,10 @@ msgstr ""
 msgid "Remote accounts"
 msgstr ""
 
+#: src/user/UserOfferingListPlaceholder.tsx
+msgid "Remote accounts are used for accessing external services you have access to."
+msgstr ""
+
 #: src/marketplace/offerings/actions/SelectOfferingTab.tsx
 msgid "Remote category"
 msgstr ""
@@ -7615,6 +7619,7 @@ msgstr ""
 msgid "Terminated"
 msgstr ""
 
+#: src/marketplace/orders/item/list/OrderItemStateCell.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 msgid "Terminating"
 msgstr ""
@@ -7769,6 +7774,10 @@ msgstr ""
 
 #: src/navigation/workspace/ProjectsPanel.tsx
 msgid "There are no projects yet for this organization."
+msgstr ""
+
+#: src/user/UserOfferingListPlaceholder.tsx
+msgid "There are no remote accounts yet."
 msgstr ""
 
 #: src/issues/list/IssuesShortList.tsx

@@ -6,5 +6,6 @@ export const OrderItemStateCell = ({ row }) =>
     executing: translate('Executing'),
     done: translate('Done'),
     erred: translate('Erred'),
+    terminating: translate('Terminating'),
     terminated: translate('Terminated'),
-  }[row.state]);
+  }[row.state] || row.state);
