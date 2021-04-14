@@ -3,7 +3,12 @@ import { compose } from 'redux';
 
 import { withTranslation } from '@waldur/i18n';
 import { getConfig } from '@waldur/store/config';
-import { getCustomer, isOwnerOrStaff } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  isOwner,
+  isOwnerOrStaff,
+  isStaff,
+} from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
 import { ProjectDetails } from './ProjectDetails';
@@ -26,9 +31,12 @@ const mapStateToProps = (state, ownProps) => ({
   initialValues: {
     name: ownProps.project.name,
     description: ownProps.project.description,
+    end_date: ownProps.project.end_date,
   },
   project_type: ownProps.project.type_name,
   canManage: isOwnerOrStaff(state),
+  isStaff: isStaff(state),
+  isOwner: isOwner(state),
   enforceLatinName: getConfig(state).enforceLatinName,
 });
 

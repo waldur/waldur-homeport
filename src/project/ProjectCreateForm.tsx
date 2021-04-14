@@ -7,6 +7,8 @@ import {
   FieldError,
   SubmitButton,
 } from '@waldur/form';
+import { DateField } from '@waldur/form/DateField';
+import { translate } from '@waldur/i18n';
 
 import { ProjectNameField } from './ProjectNameField';
 
@@ -35,6 +37,13 @@ export const ProjectCreateForm: FunctionComponent<any> = (props) => (
           isClearable={true}
         />
       )}
+      <DateField
+        name="end_date"
+        label={translate('End date')}
+        description={translate(
+          'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
+        )}
+      />
     </FormContainer>
     <div className="form-group">
       <div className="col-sm-offset-3 col-sm-5">
