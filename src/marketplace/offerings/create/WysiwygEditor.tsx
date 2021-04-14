@@ -11,6 +11,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
 
 import './WysiwygEditor.scss';
 
@@ -95,6 +96,9 @@ export const WysiwygEditor: FunctionComponent<any> = (props) => {
         wrapperClassName="demo-wrapper"
         editorClassName="demo-editor"
         onEditorStateChange={onEditorStateChange}
+        localization={{
+          locale: LanguageUtilsService.getCurrentLanguage().code,
+        }}
       />
     );
   }
