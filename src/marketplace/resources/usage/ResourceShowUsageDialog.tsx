@@ -1,24 +1,26 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { Resource } from '@waldur/marketplace/resources/types';
 import { ResourceUsageTabsContainer } from '@waldur/marketplace/resources/usage/ResourceUsageTabsContainer';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 interface ResourceUsageDialogProps {
-  resolve: { offeringUuid: string; resourceUuid: string };
+  resolve: {
+    resource: Resource;
+  };
 }
 
-export const ResourceShowUsageDialog: FunctionComponent<ResourceUsageDialogProps> = (
-  props,
-) => (
+export const ResourceShowUsageDialog: FunctionComponent<ResourceUsageDialogProps> = ({
+  resolve,
+}) => (
   <ModalDialog
-    title={translate('Resource usage')}
+    title={translate('Resource usage for {resourceName}', {
+      resourceName: resolve.resource.name,
+    })}
     footer={<CloseDialogButton />}
   >
-    <ResourceUsageTabsContainer
-      offeringUuid={props.resolve.offeringUuid}
-      resourceUuid={props.resolve.resourceUuid}
-    />
+    <ResourceUsageTabsContainer resource={resolve.resource} />
   </ModalDialog>
 );

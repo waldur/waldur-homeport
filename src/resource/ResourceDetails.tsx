@@ -38,10 +38,7 @@ let ResourceDetails: FunctionComponent<{ resource; refreshResource }> = ({
                 />
               )}
               {resource.is_usage_based && (
-                <ResourceShowUsageButton
-                  offeringUuid={resource.marketplace_offering_uuid}
-                  resourceUuid={resource.marketplace_resource_uuid}
-                />
+                <ResourceShowUsageButton resource={resource} />
               )}
               {resource.marketplace_plan_uuid && (
                 <PlanDetailsButton

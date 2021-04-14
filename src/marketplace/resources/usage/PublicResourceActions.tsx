@@ -35,10 +35,7 @@ export const PublicResourceActions: FunctionComponent<PublicResourceActionsProps
   const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
   return (
     <ButtonGroup>
-      <ResourceShowUsageButton
-        offeringUuid={row.offering_uuid}
-        resourceUuid={row.uuid}
-      />
+      <ResourceShowUsageButton resource={row} />
       {!is_support_only && (
         <ResourceCreateUsageButton
           offering_uuid={row.offering_uuid}

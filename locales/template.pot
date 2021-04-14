@@ -875,6 +875,7 @@ msgstr ""
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/SetBackendIdDialog.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
+#: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/support/SupportDetailsTable.tsx
@@ -1223,12 +1224,14 @@ msgstr ""
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
 #: src/marketplace/resources/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client organization"
 msgstr ""
 
 #: src/marketplace/resources/ResourceSummary.tsx
+#: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 msgid "Client project"
@@ -6290,9 +6293,12 @@ msgstr ""
 msgid "Resource termination request has been submitted."
 msgstr ""
 
-#: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 #: src/resource/support/ResourcesTreemap.tsx
 msgid "Resource usage"
+msgstr ""
+
+#: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
+msgid "Resource usage for {resourceName}"
 msgstr ""
 
 #: src/marketplace/resources/usage/ResourceCreateUsageDialog.tsx

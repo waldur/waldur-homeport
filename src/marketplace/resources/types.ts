@@ -49,4 +49,6 @@ export interface Resource extends ResourceReference {
   plan_name?: string;
   report?: Report;
   provider_name: string;
+  marketplace_offering_uuid?: string;
+  marketplace_resource_uuid?: string;
 }

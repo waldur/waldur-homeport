@@ -41,12 +41,7 @@ export const ResourceActions: FunctionComponent<ResourceActionsProps> = ({
       />
     )}
     <OfferingDetailsButton offering={resource.offering_uuid} />
-    {resource.is_usage_based && (
-      <ResourceShowUsageButton
-        offeringUuid={resource.offering_uuid}
-        resourceUuid={resource.uuid}
-      />
-    )}
+    {resource.is_usage_based && <ResourceShowUsageButton resource={resource} />}
     {resource.plan_uuid && <PlanDetailsButton resource={resource.uuid} />}
   </div>
 );

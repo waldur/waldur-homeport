@@ -40,8 +40,12 @@ export const ResourceTabs: FC<{ resource: Resource }> = ({ resource }) => (
     {resource.is_usage_based && (
       <Tab eventKey="usage" title={translate('Usage')}>
         <ResourceUsageTabsContainer
-          offeringUuid={resource.offering_uuid}
-          resourceUuid={resource.uuid}
+          resource={{
+            ...resource,
+            offering_uuid:
+              resource.offering_uuid || resource.marketplace_offering_uuid,
+            resource_uuid: resource.uuid || resource.marketplace_resource_uuid,
+          }}
         />
       </Tab>
     )}
