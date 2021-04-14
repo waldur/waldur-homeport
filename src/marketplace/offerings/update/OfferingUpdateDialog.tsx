@@ -7,7 +7,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
-import { TABS } from '../create/OfferingCreateDialog';
+import { getTabLabel, TABS } from '../create/OfferingCreateDialog';
 import { Wizard } from '../create/Wizard';
 import { STEPS, OfferingStep } from '../types';
 import { getBreadcrumbs } from '../utils';
@@ -78,6 +78,7 @@ export const OfferingUpdateDialog: React.FC<OfferingUpdateDialogProps> = (
               {...rest}
               submitLabel={translate('Update')}
               mountOnEnter={true}
+              getTabLabel={getTabLabel}
             />
           </form>
         </Col>

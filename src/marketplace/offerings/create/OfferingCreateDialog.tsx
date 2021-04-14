@@ -26,6 +26,15 @@ export const TABS = {
   Review: ReviewStep,
 };
 
+export const getTabLabel = (tab: string) =>
+  ({
+    Overview: translate('Overview'),
+    Description: translate('Description'),
+    Management: translate('Management'),
+    Accounting: translate('Accounting'),
+    Review: translate('Review'),
+  }[tab] || tab);
+
 interface OfferingCreateDialogProps extends InjectedFormProps {
   step: OfferingStep;
   createOffering(): void;
@@ -80,7 +89,13 @@ export const OfferingCreateDialog: React.FC<OfferingCreateDialogProps> = (
             onSubmit={handleSubmit(createOffering)}
             className="form-horizontal"
           >
-            <Wizard steps={STEPS} tabs={TABS} {...rest} mountOnEnter={true} />
+            <Wizard
+              steps={STEPS}
+              tabs={TABS}
+              {...rest}
+              mountOnEnter={true}
+              getTabLabel={getTabLabel}
+            />
           </form>
         </Col>
       </Row>

@@ -9,6 +9,7 @@ interface StepsListProps {
   value: string;
   onClick?(step: string): void;
   disabled?: boolean;
+  getTabLabel?(tab: string): string;
 }
 
 export const StepsList: FunctionComponent<StepsListProps> = (props) => {
@@ -21,15 +22,19 @@ export const StepsList: FunctionComponent<StepsListProps> = (props) => {
         'shopping-cart-steps',
       )}
     >
-      {props.choices.map((title, index) => (
+      {props.choices.map((stepId, index) => (
         <Step
           key={index}
-          title={`${index + 1}. ${title}`}
+          title={`${index + 1}. ${props.getTabLabel(stepId)}`}
           complete={stepIndex > index}
           active={stepIndex === index}
-          onClick={() => props.onClick && props.onClick(title)}
+          onClick={() => props.onClick && props.onClick(stepId)}
         />
       ))}
     </div>
   );
+};
+
+StepsList.defaultProps = {
+  getTabLabel: (s) => s,
 };

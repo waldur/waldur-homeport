@@ -107,6 +107,7 @@ msgstr ""
 
 #: src/invoices/utils.ts
 #: src/marketplace/offerings/create/AccountingSummary.tsx
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 msgid "Accounting"
 msgstr ""
 
@@ -587,6 +588,7 @@ msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/marketplace/orders/ApproveButton.tsx
+#: src/marketplace/orders/OrderSteps.tsx
 #: src/marketplace/orders/item/list/OrderItemApproveButton.tsx
 msgid "Approve"
 msgstr ""
@@ -1107,6 +1109,7 @@ msgstr ""
 #: src/customer/dashboard/CustomerResourcesList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/OfferingsList.tsx
+#: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/create/DescriptionStep.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
 #: src/marketplace/offerings/details/OfferingHeader.tsx
@@ -1355,6 +1358,7 @@ msgid "Configuration options"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/marketplace/orders/OrderSteps.tsx
 #: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsSetAction.tsx
 msgid "Configure"
 msgstr ""
@@ -1674,6 +1678,10 @@ msgstr ""
 msgid "Creating snapshot schedule"
 msgstr ""
 
+#: src/marketplace/offerings/actions/tabs.ts
+msgid "Credentials"
+msgstr ""
+
 #: src/user/support/UserEditForm.tsx
 msgid "Current API token"
 msgstr ""
@@ -1876,6 +1884,7 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDetails.tsx
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
 #: src/marketplace/offerings/create/DescriptionSummary.tsx
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/create/OverviewStep.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
@@ -3666,6 +3675,7 @@ msgid "Managed projects"
 msgstr ""
 
 #: src/marketplace/offerings/create/ManagementSummary.tsx
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 msgid "Management"
 msgstr ""
 
@@ -4360,6 +4370,7 @@ msgstr ""
 #: src/customer/team/OfferingPermissionCreateDialog.tsx
 #: src/customer/team/OfferingPermissionsList.tsx
 #: src/marketplace/details/OrderSummary.tsx
+#: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/orders/item/list/MyOrderItemsList.tsx
 #: src/marketplace/orders/item/list/OrderItemsList.tsx
@@ -4642,6 +4653,7 @@ msgstr ""
 #: src/issues/create/OrganizationGroup.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace/offerings/actions/tabs.ts
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -4788,6 +4800,7 @@ msgstr ""
 msgid "Output"
 msgstr ""
 
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/create/OverviewSummary.tsx
 msgid "Overview"
 msgstr ""
@@ -6374,6 +6387,8 @@ msgid "Retype OpenStack Volume"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/marketplace/offerings/create/OfferingCreateDialog.tsx
+#: src/marketplace/orders/OrderSteps.tsx
 msgid "Review"
 msgstr ""
 

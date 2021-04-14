@@ -19,6 +19,7 @@ interface WizardProps extends TranslateProps {
   tabs: { [key: string]: React.ComponentType<any> };
   submitLabel?: string;
   mountOnEnter?: boolean;
+  getTabLabel(tab: string): string;
 }
 
 export const Wizard = withTranslation((props: WizardProps) => (
@@ -28,6 +29,7 @@ export const Wizard = withTranslation((props: WizardProps) => (
       value={props.step}
       onClick={props.setStep}
       disabled={props.submitting}
+      getTabLabel={props.getTabLabel}
     />
     <WizardTabs
       steps={props.steps}
