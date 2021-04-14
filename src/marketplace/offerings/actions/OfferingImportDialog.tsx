@@ -14,7 +14,11 @@ import { WizardTabs } from '../create/WizardTabs';
 
 import { importOffering } from './api';
 import { OFFERING_IMPORT_FORM_ID } from './constants';
-import { OFFERING_IMPORT_STEPS, OFFERING_IMPORT_TABS } from './tabs';
+import {
+  OFFERING_IMPORT_STEPS,
+  OFFERING_IMPORT_TABS,
+  getTabLabel,
+} from './tabs';
 import { OfferingImportFormData } from './types';
 import { useWizard } from './useWizard';
 
@@ -57,6 +61,7 @@ export const OfferingImportDialog = reduxForm<OfferingImportFormData, any>({
           value={step}
           onClick={setStep}
           disabled={submitting}
+          getTabLabel={getTabLabel}
         />
         <WizardTabs
           steps={OFFERING_IMPORT_STEPS}
